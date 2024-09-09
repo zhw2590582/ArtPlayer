@@ -1,19 +1,19 @@
-# Layer
+# 业务层
 
-## Configuration
+## 配置
 
-| Property  | Type                  | Description                  |
-| --------- | --------------------- | ---------------------------- |
-| `disable` | `Boolean`             | Whether to disable the component |
-| `name`    | `String`              | Unique name of the component, used for marking class name |
-| `index`   | `Number`              | Component index, used for display priority |
-| `html`    | `String`, `Element`   | The DOM element of the component |
-| `style`   | `Object`              | Style object for the component |
-| `click`   | `Function`            | Click event for the component |
-| `mounted` | `Function`            | Triggered after the component is mounted |
-| `tooltip` | `String` | Tooltip text for the component |
+| 属性      | 类型                | 描述                       |
+| --------- | ------------------- | -------------------------- |
+| `disable` | `Boolean`           | 是否禁用组件               |
+| `name`    | `String`            | 组件唯一名称，用于标记类名 |
+| `index`   | `Number`            | 组件索引，用于显示的优先级 |
+| `html`    | `String`, `Element` | 组件的 DOM 元素            |
+| `style`   | `Object`            | 组件样式对象               |
+| `click`   | `Function`          | 组件点击事件               |
+| `mounted` | `Function`          | 组件挂载后触发             |
+| `tooltip` | `String`            | 组件的提示文本             |
 
-## Creation
+## 创建
 
 <div className="run-code">▶ Run Code</div>
 
@@ -24,9 +24,9 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     layers: [
         {
-            name: 'poster',
+            name: 'potser',
             html: `<img style="width: 100px" src="${img}">`,
-            tooltip: 'Poster Tip',
+            tooltip: 'Potser Tip',
             style: {
                 position: 'absolute',
                 top: '50px',
@@ -43,9 +43,10 @@ var art = new Artplayer({
 });
 
 // Get the Element of layer by name
-console.info(art.layers['poster']);
+console.info(art.layers['potser']);
 ```
-## Add
+
+## 添加
 
 <div className="run-code">▶ Run Code</div>
 
@@ -57,9 +58,9 @@ var art = new Artplayer({
 });
 
 art.layers.add({
-    name: 'poster',
+    name: 'potser',
     html: `<img style="width: 100px" src="${img}">`,
-    tooltip: 'Poster Tip',
+    tooltip: 'Potser Tip',
     style: {
         position: 'absolute',
         top: '50px',
@@ -74,9 +75,10 @@ art.layers.add({
 });
 
 // Get the Element of layer by name
-console.info(art.layers['poster']);
+console.info(art.layers['potser']);
 ```
-## Delete
+
+## 删除
 
 <div className="run-code">▶ Run Code</div>
 
@@ -87,7 +89,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     layers: [
         {
-            name: 'poster',
+            name: 'potser',
             html: `<img style="width: 100px" src="${img}">`,
             style: {
                 position: 'absolute',
@@ -101,11 +103,12 @@ var art = new Artplayer({
 art.on('ready', () => {
     setTimeout(() => {
         // Delete the layer by name
-        art.layers.remove('poster');
+        art.layers.remove('potser');
     }, 3000);
 });
 ```
-## Update
+
+## 更新
 
 <div className="run-code">▶ Run Code</div>
 
@@ -116,7 +119,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     layers: [
         {
-            name: 'poster',
+            name: 'potser',
             html: `<img style="width: 100px" src="${img}">`,
             style: {
                 position: 'absolute',
@@ -131,7 +134,7 @@ art.on('ready', () => {
     setTimeout(() => {
         // Update the layer by name
         art.layers.update({
-            name: 'poster',
+            name: 'potser',
             html: `<img style="width: 200px" src="${img}">`,
             style: {
                 position: 'absolute',

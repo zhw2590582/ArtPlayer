@@ -1,8 +1,8 @@
-# Example Events
+# 实例事件
 
-Player events are divided into two types, one is the video's `native events` (prefix `video:`), the other is `custom events`
+播放器的事件分为两种，一种视频的 `原生事件` (前缀 `video:`)，另外一种是 `自定义事件`
 
-Listening to events:
+监听事件：
 
 <div className="run-code">▶ Run Code</div>
 
@@ -17,7 +17,7 @@ art.on('video:canplay', () => {
 });
 ```
 
-Listen to an event only once:
+只监听一次事件：
 
 <div className="run-code">▶ Run Code</div>
 
@@ -32,7 +32,7 @@ art.once('video:canplay', () => {
 });
 ```
 
-Manually trigger an event:
+手动触发事件：
 
 <div className="run-code">▶ Run Code</div>
 
@@ -45,7 +45,7 @@ var art = new Artplayer({
 art.emit('focus');
 ```
 
-Remove an event:
+移除事件：
 
 <div className="run-code">▶ Run Code</div>
 
@@ -63,14 +63,15 @@ const onReady = () => {
 art.on('ready', onReady);
 ```
 
-:::warning For a full list of events, please refer to the following address:
+:::warning 全部事件请参考以下地址：
 
 [artplayer/types/events.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/events.d.ts)
 
 :::
+
 ## `ready`
 
-Triggered when the player is able to play for the first time
+当播放器首次可以播放器时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -87,7 +88,7 @@ art.on('ready', () => {
 
 ## `restart`
 
-Triggered when the player switches the address and is able to play
+当播放器切换地址后并可以播放时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -105,9 +106,10 @@ art.on('restart', (url) => {
     console.info('restart', url);
 });
 ```
+
 ## `pause`
 
-Triggered when the player is paused
+当播放器暂停时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -124,7 +126,7 @@ art.on('pause', () => {
 
 ## `play`
 
-Triggered when the player starts playing
+当播放器播放时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -141,7 +143,7 @@ art.on('play', () => {
 
 ## `hotkey`
 
-Triggered when a hotkey on the player is pressed
+当播放器热键被按下时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -158,7 +160,7 @@ art.on('hotkey', (event) => {
 
 ## `destroy`
 
-Triggered when the player is destroyed
+当播放器销毁时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -179,7 +181,7 @@ art.on('destroy', () => {
 
 ## `focus`
 
-Triggered when the player gains focus
+当播放器获得焦点时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -196,7 +198,7 @@ art.on('focus', (event) => {
 
 ## `blur`
 
-Triggered when the player loses focus
+当播放器失去焦点时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -213,7 +215,7 @@ art.on('blur', (event) => {
 
 ## `dblclick`
 
-Triggered when the player is double-clicked
+当播放器被双击时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -227,9 +229,10 @@ art.on('dblclick', (event) => {
     console.info('dblclick', event);
 });
 ```
+
 ## `click`
 
-Triggered when the player is clicked
+当播放器被单击时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -246,7 +249,7 @@ art.on('click', (event) => {
 
 ## `error`
 
-Triggered when an error occurs while the player is loading the video
+当播放器加载视频发生错误时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -260,9 +263,10 @@ art.on('error', (error, reconnectTime) => {
     console.info(error, reconnectTime);
 });
 ```
+
 ## `hover`
 
-Triggered when the player is hovered or unhovered by the mouse
+当播放器被鼠标移出或者移入时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -279,7 +283,7 @@ art.on('hover', (state, event) => {
 
 ## `mousemove`
 
-Triggered when the mouse moves over the player
+当播放器被鼠标经过时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -293,9 +297,10 @@ art.on('mousemove', (event) => {
     console.info('mousemove', event);
 });
 ```
+
 ## `resize`
 
-Triggered when the player size changes
+当播放器尺寸变化时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -312,7 +317,7 @@ art.on('resize', () => {
 
 ## `view`
 
-Triggered when the player appears in the viewport
+当播放器出现在视口时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -329,7 +334,7 @@ art.on('view', (state) => {
 
 ## `lock`
 
-On mobile, triggered when the locked state changes
+在移动端，当锁定的状态发生变化时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -347,7 +352,7 @@ art.on('lock', (state) => {
 
 ## `aspectRatio`
 
-Triggered when the aspect ratio of the player changes
+当播放器长宽比变化时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -366,7 +371,7 @@ art.on('aspectRatio', (aspectRatio) => {
 
 ## `autoHeight`
 
-Triggered when the player automatically sets the height
+当播放器自动设置高度时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -387,7 +392,7 @@ art.on('autoHeight', (height) => {
 
 ## `autoSize`
 
-Triggered when the player automatically sets the size
+当播放器自动设置尺寸时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -402,9 +407,10 @@ art.on('autoSize', () => {
     console.info('autoSize');
 });
 ```
+
 ## `flip`
 
-Triggered when the player flips
+当播放器发生翻转时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -423,7 +429,7 @@ art.on('flip', (flip) => {
 
 ## `fullscreen`
 
-Triggered when the player goes into full screen
+当播放器发生窗口全屏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -441,7 +447,7 @@ art.on('fullscreen', (state) => {
 
 ## `fullscreenError`
 
-Triggered when the player goes into full screen error
+当播放器发生窗口全屏错误时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -462,7 +468,7 @@ art.on('fullscreenError', (event) => {
 
 ## `fullscreenWeb`
 
-Triggered when the player enters web fullscreen
+当播放器发生网页全屏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -480,7 +486,7 @@ art.on('fullscreenWeb', (state) => {
 
 ## `mini`
 
-Triggered when the player enters mini mode
+当播放器进入迷你模式时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -498,9 +504,10 @@ art.on('mini', (state) => {
     console.info('mini', state);
 });
 ```
+
 ## `pip`
 
-Triggered when the player enters Picture-in-Picture mode
+当播放器进入画中画时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -518,7 +525,7 @@ art.on('pip', (state) => {
 
 ## `screenshot`
 
-Triggered when the player takes a screenshot
+当播放器被截图时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -533,9 +540,10 @@ art.on('screenshot', (dataUri) => {
     console.info('screenshot', dataUri);
 });
 ```
+
 ## `seek`
 
-Triggered when the player jumps in time
+当播放器发生时间跳转时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -552,7 +560,7 @@ art.on('seek', (currentTime) => {
 
 ## `subtitleOffset`
 
-Triggered when the subtitle offset occurs in the player
+当播放器发生字幕偏移时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -571,9 +579,10 @@ art.on('subtitleOffset', (offset) => {
     console.info('subtitleOffset', offset);
 });
 ```
+
 ## `subtitleUpdate`
 
-Triggered when the subtitle updates
+当字幕更新时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -593,7 +602,7 @@ art.on('subtitleUpdate', (text) => {
 
 ## `subtitleLoad`
 
-Triggered when the subtitle loads
+当字幕加载时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -610,9 +619,10 @@ art.on('subtitleLoad', (url) => {
     console.info('subtitleLoad', url);
 });
 ```
+
 ## `subtitleSwitch`
 
-Triggered when subtitles switch
+当字幕切换时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -636,7 +646,7 @@ art.on('subtitleSwitch', (url) => {
 
 ## `info`
 
-Triggered when the information panel is shown or hidden
+当信息面板显示或隐藏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -650,9 +660,10 @@ art.on('info', (state) => {
     console.log(state);
 });
 ```
+
 ## `layer`
 
-Triggered when a custom layer is shown or hidden
+当自定义层显示或隐藏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -669,7 +680,7 @@ art.on('layer', (state) => {
 
 ## `loading`
 
-Triggered when a loader is shown or hidden
+当加载器显示或隐藏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -686,7 +697,7 @@ art.on('loading', (state) => {
 
 ## `mask`
 
-Triggered when a mask layer is shown or hidden
+当遮罩层显示或隐藏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -703,7 +714,7 @@ art.on('mask', (state) => {
 
 ## `subtitle`
 
-Triggered when the subtitle layer is shown or hidden
+当字幕层显示或隐藏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -720,7 +731,7 @@ art.on('subtitle', (state) => {
 
 ## `contextmenu`
 
-Triggered when the right-click menu is shown or hidden
+当右键菜单显示或隐藏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -737,7 +748,7 @@ art.on('contextmenu', (state) => {
 
 ## `control`
 
-Triggered when the controller is shown or hidden
+当控制器显示或隐藏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -754,7 +765,7 @@ art.on('control', (state) => {
 
 ## `setting`
 
-Triggered when the settings panel is shown or hidden
+当设置面板显示或隐藏时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -772,7 +783,7 @@ art.on('setting', (state) => {
 
 ## `muted`
 
-Triggered when the muted state changes
+当静音的状态变化时触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -789,83 +800,85 @@ art.on('muted', (state) => {
 
 ## `video:canplay`
 
-The browser can play the media file, but estimates there is not enough data to play through to the end without having to stop for further buffering
+浏览器可以播放媒体文件了，但估计没有足够的数据来支撑播放到结束，不必停下来进一步缓冲内容
 
 ## `video:canplaythrough`
 
-The browser estimates it can play the media through to the end without stopping for content buffering
+浏览器估计它可以在不停止内容缓冲的情况下播放媒体直到结束
 
 ## `video:complete`
 
-OfflineAudioContext rendering is complete
+OfflineAudioContext 渲染完成
 
 ## `video:durationchange`
 
-Triggered when the value of the duration property changes
+duration 属性的值改变时触发
 
 ## `video:emptied`
 
-The media content becomes empty; for example, when this media has been completely loaded (or partially loaded), this event is sent and the load() method is called to reload it
+媒体内容变为空；例如，当这个 media 已经加载完成（或者部分加载完成），则发送此事件，并调用 load() 方法重新加载它
 
 ## `video:ended`
 
-The video has stopped because the media reached the end point
+视频停止播放，因为 media 已经到达结束点
 
 ## `video:error`
 
-An error occurred while fetching media data, or the resource type is not a supported media format
+获取媒体数据时出错，或者资源类型不是受支持的媒体格式
 
 ## `video:loadeddata`
 
-The first frame of the media has finished loading
+media 中的首帧已经完成加载
 
 ## `video:loadedmetadata`
 
-Metadata has been loaded
+已加载元数据
 
 ## `video:pause`
 
-Playback has been paused
+播放已暂停
 
 ## `video:play`
 
-Playback has started
+播放已开始
 
 ## `video:playing`
 
-Playback is ready to start following a pause or delay due to lack of data
+由于缺乏数据而暂停或延迟后，播放准备开始
 
 ## `video:progress`
 
-Periodically triggered while the browser is loading resources
+在浏览器加载资源时周期性触发
 
 ## `video:ratechange`
 
-The playback rate has changed
+播放速率发生变化
 
 ## `video:seeked`
 
-A seek (frame skipping) operation has completed
+跳帧（seek）操作完成
 
 ## `video:seeking`
 
-A seek (frame skipping) operation has started
+跳帧（seek）操作开始
 
 ## `video:stalled`
 
-The user agent is trying to fetch media data, but the data unexpectedly has not appeared
+用户代理（user agent）正在尝试获取媒体数据，但数据意外未出现
 
 ## `video:suspend`
 
-Media data loading has been suspended
+媒体数据加载已暂停
 
 ## `video:timeupdate`
 
-The time specified by the currentTime attribute has changed
+currentTime 属性指定的时间发生变化
+
 ## `video:volumechange`
 
-Volume changed
+音量发生变化
 
 ## `video:waiting`
 
-Playback has stopped due to temporarily missing data
+由于暂时缺少数据，播放已停止
+

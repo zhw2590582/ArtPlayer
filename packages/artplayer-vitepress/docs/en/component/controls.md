@@ -1,22 +1,22 @@
-# Controller
+# 控制器
 
-## Configuration
+## 配置
 
-| Property   | Type                | Description                               |
+| 属性       | 类型                | 描述                                       |
 | ---------- | ------------------- | ------------------------------------------ |
-| `disable`  | `Boolean`           | Whether to disable the component          |
-| `name`     | `String`            | The unique name of the component for class identification |
-| `index`    | `Number`            | The index of the component, used for display priority |
-| `html`     | `String`, `Element` | The component's DOM element               |
-| `style`    | `Object`            | The style object for the component        |
-| `click`    | `Function`          | Component click event                        |
-| `mounted`  | `Function`          | Triggered after the component is mounted    |
-| `tooltip`  | `String`            | Tooltip text for the component              |
-| `position` | `String`            | `left` and `right` control the position of the controller |
-| `selector` | `Array`             | An array of objects for the selection list  |
-| `onSelect` | `Function`          | Function triggered when an item from the selection list is clicked |
+| `disable`  | `Boolean`           | 是否禁用组件                               |
+| `name`     | `String`            | 组件唯一名称，用于标记类名                 |
+| `index`    | `Number`            | 组件索引，用于显示的优先级                 |
+| `html`     | `String`, `Element` | 组件的 DOM 元素                            |
+| `style`    | `Object`            | 组件样式对象                               |
+| `click`    | `Function`          | 组件点击事件                               |
+| `mounted`  | `Function`          | 组件挂载后触发                             |
+| `tooltip`  | `String`            | 组件的提示文本                             |
+| `position` | `String`            | `left` 和 `right` 控制控制器出现的左右位置 |
+| `selector` | `Array`             | 选择列表的对象数组                         |
+| `onSelect` | `Function`          | 选择列表的元素被点击时触发的函数           |
 
-## Creation
+## 创建
 
 <div className="run-code">▶ Run Code</div>
 
@@ -66,7 +66,8 @@ var art = new Artplayer({
 console.info(art.controls['your-button']);
 console.info(art.controls['subtitle']);
 ```
-## Adding
+
+## 添加
 
 <div className="run-code">▶ Run Code</div>
 
@@ -96,7 +97,8 @@ art.controls.add({
 // Get the Element of control by name
 console.info(art.controls['button1']);
 ```
-## Delete
+
+## 删除
 
 <div className="run-code">▶ Run Code</div>
 
@@ -125,7 +127,8 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
-## Update
+
+## 更新
 
 <div className="run-code">▶ Run Code</div>
 

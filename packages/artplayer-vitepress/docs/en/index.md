@@ -1,6 +1,6 @@
-# Installation and Usage
+# 安装使用
 
-## Installation
+## 安装
 
 ::: code-group
 
@@ -36,7 +36,7 @@ https://unpkg.com/artplayer/dist/artplayer.js
 
 :::
 
-## Usage
+## 使用
 
 ::: code-group
 
@@ -65,14 +65,15 @@ https://unpkg.com/artplayer/dist/artplayer.js
 </html>
 ```
 
+::: 
+
+::: warning 提示
+
+播放器的尺寸依赖于容器 `container` 的尺寸，所以你的容器 `container` 必须是有尺寸的
+
 :::
-::: warning Warning
 
-The player's size depends on the size of the container `container`, so your container `container` must have a size.
-
-:::
-
-::: tip You can see more examples of use at the following link
+::: tip 以下链接可以看到更多的使用例子
 
 [/packages/artplayer-template](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template)
 
@@ -155,9 +156,10 @@ export default {
 ```
 
 :::
-::: warning Artplayer Not Responsive：
 
-Modifying `option` directly in `Vue.js` will not change the player
+::: warning Artplayer 非响应式：
+
+在 `Vue.js` 里直接修改 `option` 是不会改变播放器的
 
 :::
 
@@ -219,15 +221,16 @@ export default App;
 ```
 
 :::
-::: warning Non-responsive Artplayer:
 
-In `React.js`, directly modifying the `option` will not change the player
+::: warning Artplayer 非响应式：
+
+在 `React.js` 里直接修改 `option` 是不会改变播放器的
 
 :::
 
 ## TypeScript
 
-Importing `Artplayer` will automatically import `artplayer.d.ts`
+导入 `Artplayer` 时会自动导入的 `artplayer.d.ts`
 
 ### Vue.js
 
@@ -249,7 +252,7 @@ art.current = new Artplayer();
 
 ### Option
 
-You can also use the option type
+你也可以使用选项的类型
 
 ```ts{3}
 import Artplayer from 'artplayer';
@@ -264,16 +267,17 @@ option.volume = 0.5;
 const art = new Artplayer(option);
 ```
 
-::: tip Complete TypeScript Definitions
+::: tip 全部 TypeScript 定义
 
 [packages/artplayer/types](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer/types)
 
 :::
+
 ## JavaScript
 
-Sometimes your `js` file may lose the `TypeScript` type hints, in this case, you can manually import the types
+有时你的 `js` 文件会丢失 `TypeScript` 的类型提示，这时候你可以手动导入类型 
 
-Variables:
+变量：
 
 ```js{1-3}
 /**
@@ -282,7 +286,7 @@ Variables:
 let art = null;
 ```
 
-Parameters:
+参数：
 
 ```js{1-3}
 /**
@@ -293,7 +297,7 @@ function getInstance(art) {
 }
 ```
 
-Properties:
+属性：
 
 ```js{4-6}
 export default {
@@ -308,7 +312,7 @@ export default {
 }
 ```
 
-Options:
+选项：
 
 ```js{1-3}
 /**
@@ -324,11 +328,12 @@ option.volume = 0.5;
 
 const art8 = new Artplayer(option);
 ```
-## Ancient Browsers
 
-The production build of `artplayer.js` is only compatible with the latest major version of `Chrome`: `last 1 Chrome version`
+## 古老的浏览器
 
-For ancient browsers, you can use the `artplayer.legacy.js` file, which is compatible up to: `IE 11`
+生产构建的 `artplayer.js` 只兼容最新一个主版本的 `Chrome`：`last 1 Chrome version`
+
+对于古老的浏览器，可以使用 `artplayer.legacy.js` 文件，可以兼容到：`IE 11`
 
 ```js
 import Artplayer from 'artplayer/dist/artplayer.legacy.js';
@@ -346,10 +351,11 @@ https://unpkg.com/artplayer/dist/artplayer.legacy.js
 
 :::
 
-::: tip If you need to support even older browsers, please modify the following configuration and then build it yourself:
+::: tip 假如你要兼容更古老的浏览器时，请修改以下配置然后自行构建：
 
-Build configuration: [scripts/build.js](https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js#L29)
+构建配置：[scripts/build.js](https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js#L29)
 
-Refer to documentation: [browserslist](https://github.com/browserslist/browserslist#full-list)
+参考文档：[browserslist](https://github.com/browserslist/browserslist#full-list)
 
 :::
+
