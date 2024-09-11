@@ -216,17 +216,7 @@ function artplayerProxyCanvas(callback) {
             } catch (error) {
                 console.error("Error drawing video frame:", error);
             }
-        };
-        // 使用 requestVideoFrameCallback 进行精确同步
-        let videoFrameCallback;
-        if ("requestVideoFrameCallback" in HTMLVideoElement.prototype) videoFrameCallback = ()=>{
-            drawFrame();
-            video.requestVideoFrameCallback(videoFrameCallback);
-        };
-        else // 降级方案：使用 requestAnimationFrame
-        videoFrameCallback = ()=>{
-            drawFrame();
-            animationFrame = requestAnimationFrame(videoFrameCallback);
+            animationFrame = requestAnimationFrame(drawFrame);
         };
         const resize = ()=>{
             try {
@@ -266,19 +256,15 @@ function artplayerProxyCanvas(callback) {
             drawFrame();
         });
         art.on("video:play", ()=>{
-            if ("requestVideoFrameCallback" in HTMLVideoElement.prototype) video.requestVideoFrameCallback(videoFrameCallback);
-            else {
-                cancelAnimationFrame(animationFrame);
-                animationFrame = requestAnimationFrame(videoFrameCallback);
-            }
+            cancelAnimationFrame(animationFrame);
+            animationFrame = requestAnimationFrame(drawFrame);
         });
         art.on("video:pause", ()=>{
-            if (!("requestVideoFrameCallback" in HTMLVideoElement.prototype)) cancelAnimationFrame(animationFrame);
+            cancelAnimationFrame(animationFrame);
         });
         art.on("resize", resize);
         const destroy = ()=>{
-            if ("requestVideoFrameCallback" in HTMLVideoElement.prototype) video.cancelVideoFrameCallback(videoFrameCallback);
-            else cancelAnimationFrame(animationFrame);
+            cancelAnimationFrame(animationFrame);
         // 清理其他可能的资源...
         };
         art.on("destroy", destroy);
