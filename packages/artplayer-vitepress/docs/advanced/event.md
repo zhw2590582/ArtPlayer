@@ -580,9 +580,9 @@ art.on('subtitleOffset', (offset) => {
 });
 ```
 
-## `subtitleUpdate`
+## `subtitleBeforeUpdate`
 
-当字幕更新时触发
+当字幕更新前触发
 
 <div className="run-code">▶ Run Code</div>
 
@@ -595,8 +595,28 @@ var art = new Artplayer({
     },
 });
 
-art.on('subtitleUpdate', (text) => {
-    console.info('subtitleUpdate', text);
+art.on('subtitleBeforeUpdate', (cue) => {
+    console.info('subtitleBeforeUpdate', cue);
+});
+```
+
+## `subtitleAfterUpdate`
+
+当字幕更新后触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{9}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+    },
+});
+
+art.on('subtitleAfterUpdate', (cue) => {
+    console.info('subtitleAfterUpdate', cue);
 });
 ```
 
@@ -615,32 +635,8 @@ var art = new Artplayer({
     },
 });
 
-art.on('subtitleLoad', (url) => {
-    console.info('subtitleLoad', url);
-});
-```
-
-## `subtitleSwitch`
-
-当字幕切换时触发
-
-<div className="run-code">▶ Run Code</div>
-
-```js{13}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    subtitle: {
-        url: '/assets/sample/subtitle.srt',
-    },
-});
-
-art.on('ready', () => {
-    art.subtitle.url = '/assets/sample/subtitle.ass';
-});
-
-art.on('subtitleSwitch', (url) => {
-    console.info('subtitleSwitch', url);
+art.on('subtitleLoad', (option, cues) => {
+    console.info('subtitleLoad', option, cues);
 });
 ```
 

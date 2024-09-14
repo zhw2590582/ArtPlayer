@@ -18,6 +18,7 @@ export default class Subtitle extends Component {
     constructor(art) {
         super(art);
         this.name = 'subtitle';
+        this.option = null;
         this.eventDestroy = () => null;
         this.init(art.option.subtitle);
 
@@ -100,13 +101,13 @@ export default class Subtitle extends Component {
         $newTrack.src = url;
         $newTrack.label = option.subtitle.name || 'Artplayer';
         $newTrack.track.mode = 'hidden';
-        $newTrack.onload = (event) => {
-            this.art.emit('subtitleTrackLoad', $newTrack, event);
+        $newTrack.onload = () => {
+            this.art.emit('subtitleLoad', this.option, this.cues);
         };
 
         this.eventDestroy();
+        $track.onload = null;
         remove($track);
-
         append($video, $newTrack);
         template.$track = $newTrack;
         this.eventDestroy = proxy(this.textTrack, 'cuechange', () => this.update());
@@ -121,6 +122,7 @@ export default class Subtitle extends Component {
         if (!this.textTrack) return null;
         validator(subtitleOption, scheme.subtitle);
         if (!subtitleOption.url) return;
+        this.option = subtitleOption;
         this.style(subtitleOption.style);
 
         return fetch(subtitleOption.url)
@@ -128,7 +130,6 @@ export default class Subtitle extends Component {
             .then((buffer) => {
                 const decoder = new TextDecoder(subtitleOption.encoding);
                 const text = decoder.decode(buffer);
-                this.art.emit('subtitleLoad', subtitleOption.url);
                 switch (subtitleOption.type || getExt(subtitleOption.url)) {
                     case 'srt': {
                         const vtt = srtToVtt(text);
@@ -153,7 +154,6 @@ export default class Subtitle extends Component {
                 if (this.url === subUrl) return subUrl;
                 URL.revokeObjectURL(this.url);
                 this.createTrack('metadata', subUrl);
-                this.art.emit('subtitleSwitch', subUrl, subtitleOption.url);
                 return subUrl;
             })
             .catch((err) => {

@@ -3805,6 +3805,7 @@ class Subtitle extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
         this.name = "subtitle";
+        this.option = null;
         this.eventDestroy = ()=>null;
         this.init(art.option.subtitle);
         let lastState = false;
@@ -3870,10 +3871,11 @@ class Subtitle extends (0, _componentDefault.default) {
         $newTrack.src = url;
         $newTrack.label = option.subtitle.name || "Artplayer";
         $newTrack.track.mode = "hidden";
-        $newTrack.onload = (event)=>{
-            this.art.emit("subtitleTrackLoad", $newTrack, event);
+        $newTrack.onload = ()=>{
+            this.art.emit("subtitleLoad", this.option, this.cues);
         };
         this.eventDestroy();
+        $track.onload = null;
         (0, _utils.remove)($track);
         (0, _utils.append)($video, $newTrack);
         template.$track = $newTrack;
@@ -3884,11 +3886,11 @@ class Subtitle extends (0, _componentDefault.default) {
         if (!this.textTrack) return null;
         (0, _optionValidatorDefault.default)(subtitleOption, (0, _schemeDefault.default).subtitle);
         if (!subtitleOption.url) return;
+        this.option = subtitleOption;
         this.style(subtitleOption.style);
         return fetch(subtitleOption.url).then((response)=>response.arrayBuffer()).then((buffer)=>{
             const decoder = new TextDecoder(subtitleOption.encoding);
             const text = decoder.decode(buffer);
-            this.art.emit("subtitleLoad", subtitleOption.url);
             switch(subtitleOption.type || (0, _utils.getExt)(subtitleOption.url)){
                 case "srt":
                     {
@@ -3915,7 +3917,6 @@ class Subtitle extends (0, _componentDefault.default) {
             if (this.url === subUrl) return subUrl;
             URL.revokeObjectURL(this.url);
             this.createTrack("metadata", subUrl);
-            this.art.emit("subtitleSwitch", subUrl, subtitleOption.url);
             return subUrl;
         }).catch((err)=>{
             $subtitle.innerHTML = "";
