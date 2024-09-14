@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-09-01 12:11:43";
+        return "2024-09-14 15:48:22";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2547,7 +2547,7 @@ function subtitleOffsetMix(art) {
     const { notice, template, i18n } = art;
     let offsetCache = 0;
     let cuesCache = [];
-    art.on("subtitle:switch", ()=>{
+    art.on("subtitleSwitch", ()=>{
         cuesCache = [];
     });
     (0, _utils.def)(art, "subtitleOffset", {
@@ -3833,10 +3833,15 @@ class Subtitle extends (0, _componentDefault.default) {
         this.switch(url);
     }
     get textTrack() {
-        return this.art.template.$video.textTracks[0];
+        return this.art.template.$video?.textTracks?.[0];
     }
     get activeCue() {
+        if (!this.textTrack) return null;
         return this.textTrack.activeCues[0];
+    }
+    get cues() {
+        if (!this.textTrack) return [];
+        return Array.from(this.textTrack.cues);
     }
     style(key, value) {
         const { $subtitle } = this.art.template;
@@ -3847,9 +3852,10 @@ class Subtitle extends (0, _componentDefault.default) {
         const { $subtitle } = this.art.template;
         $subtitle.innerHTML = "";
         if (this.activeCue) {
+            this.art.emit("subtitleBeforeUpdate", this.activeCue);
             if (this.art.option.subtitle.escape) $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map((item)=>`<div class="art-subtitle-line">${(0, _utils.escape)(item)}</div>`).join("");
             else $subtitle.innerHTML = this.activeCue.text;
-            this.art.emit("subtitleUpdate", this.activeCue.text);
+            this.art.emit("subtitleAfterUpdate", this.activeCue);
         }
     }
     async switch(url, newOption = {}) {
@@ -3872,6 +3878,9 @@ class Subtitle extends (0, _componentDefault.default) {
         $newTrack.src = url;
         $newTrack.label = option.subtitle.name || "Artplayer";
         $newTrack.track.mode = "hidden";
+        $newTrack.onload = (event)=>{
+            this.art.emit("subtitleTrackLoad", $newTrack, event);
+        };
         this.eventDestroy();
         (0, _utils.remove)($track);
         (0, _utils.append)($video, $newTrack);
@@ -3880,6 +3889,7 @@ class Subtitle extends (0, _componentDefault.default) {
     }
     async init(subtitleOption) {
         const { notice, template: { $subtitle } } = this.art;
+        if (!this.textTrack) return null;
         (0, _optionValidatorDefault.default)(subtitleOption, (0, _schemeDefault.default).subtitle);
         if (!subtitleOption.url) return;
         this.style(subtitleOption.style);

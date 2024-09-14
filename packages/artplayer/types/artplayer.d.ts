@@ -152,6 +152,9 @@ declare class Artplayer extends Player {
     readonly subtitle: {
         get url(): string;
         set url(url: string);
+        get textTrack(): TextTrack;
+        get activeCue(): VTTCue;
+        get cues(): TextTrackCueList;
         style(name: string | Partial<CSSStyleDeclaration>, value?: string): void;
         switch(url: string, option?: Subtitle): Promise<string>;
     } & Component;

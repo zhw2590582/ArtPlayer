@@ -4,6 +4,7 @@
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
+    poster: '/assets/sample/poster.jpg',
     volume: 0.5,
     autoplay: false,
     autoSize: false,

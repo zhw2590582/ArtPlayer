@@ -36,9 +36,11 @@ export type Events = {
     setting: [state: boolean];
     hotkey: [event: Event];
     destroy: [];
-    subtitleUpdate: [text: string];
+    subtitleBeforeUpdate: [cue: VTTCue];
+    subtitleAfterUpdate: [cue: VTTCue];
     subtitleLoad: [url: string];
     subtitleSwitch: [url: string];
+    subtitleTrackLoad: [track: HTMLTrackElement, event: Event];
     focus: [event: Event];
     blur: [event: Event];
     dblclick: [event: Event];

@@ -50,6 +50,11 @@ export default class Subtitle extends Component {
         return this.textTrack.activeCues[0];
     }
 
+    get cues() {
+        if (!this.textTrack) return [];
+        return Array.from(this.textTrack.cues);
+    }
+
     style(key, value) {
         const { $subtitle } = this.art.template;
         if (typeof key === 'object') {
@@ -62,6 +67,7 @@ export default class Subtitle extends Component {
         const { $subtitle } = this.art.template;
         $subtitle.innerHTML = '';
         if (this.activeCue) {
+            this.art.emit('subtitleBeforeUpdate', this.activeCue);
             if (this.art.option.subtitle.escape) {
                 $subtitle.innerHTML = this.activeCue.text
                     .split(/\r?\n/)
@@ -70,7 +76,7 @@ export default class Subtitle extends Component {
             } else {
                 $subtitle.innerHTML = this.activeCue.text;
             }
-            this.art.emit('subtitleUpdate', this.activeCue.text);
+            this.art.emit('subtitleAfterUpdate', this.activeCue);
         }
     }
 
@@ -94,6 +100,9 @@ export default class Subtitle extends Component {
         $newTrack.src = url;
         $newTrack.label = option.subtitle.name || 'Artplayer';
         $newTrack.track.mode = 'hidden';
+        $newTrack.onload = (event) => {
+            this.art.emit('subtitleTrackLoad', $newTrack, event);
+        };
 
         this.eventDestroy();
         remove($track);

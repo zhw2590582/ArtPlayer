@@ -6,7 +6,7 @@ export default function subtitleOffsetMix(art) {
 
     let offsetCache = 0;
     let cuesCache = [];
-    art.on('subtitle:switch', () => {
+    art.on('subtitleSwitch', () => {
         cuesCache = [];
     });
 

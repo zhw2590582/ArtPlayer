@@ -15,7 +15,6 @@ export default function artplayerProxyCanvas(callback) {
         const { propertys, methods, prototypes, events } = constructor.config;
         const keys = [...propertys, ...methods, ...prototypes];
 
-        // 存储 canvas 的原始属性
         const originalCanvasProperties = {};
         ['width', 'height'].forEach((prop) => {
             originalCanvasProperties[prop] = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, prop);
@@ -61,8 +60,6 @@ export default function artplayerProxyCanvas(callback) {
             }
             try {
                 if (video.readyState >= 2) {
-                    // HAVE_CURRENT_DATA or higher
-                    // 使用 createImageBitmap 进行预处理
                     const bitmap = await createImageBitmap(video);
                     ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
                     bitmap.close();
@@ -94,11 +91,9 @@ export default function artplayerProxyCanvas(callback) {
                     canvasHeight = canvasWidth / aspectRatio;
                 }
 
-                // 设置 canvas 大小为实际显示大小
                 canvas.width = canvasWidth;
                 canvas.height = canvasHeight;
 
-                // 居中 canvas
                 const paddingLeft = (containerWidth - canvasWidth) / 2;
                 const paddingTop = (containerHeight - canvasHeight) / 2;
 
@@ -110,13 +105,10 @@ export default function artplayerProxyCanvas(callback) {
             }
         };
 
-        // 在视频元数据加载完成后设置 canvas 尺寸并绘制第一帧
         art.on('video:loadedmetadata', async () => {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
-            await sleep(300);
             resize();
-            drawFrame();
         });
 
         art.on('video:play', () => {
@@ -132,7 +124,6 @@ export default function artplayerProxyCanvas(callback) {
 
         const destroy = () => {
             cancelAnimationFrame(animationFrame);
-            // 清理其他可能的资源...
         };
 
         art.on('destroy', destroy);
