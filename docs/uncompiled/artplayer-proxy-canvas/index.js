@@ -200,10 +200,8 @@ function artplayerProxyCanvas(callback) {
                 });
             }
         });
-        const draw = async ()=>{
-            const bitmap = await createImageBitmap(video);
-            ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-            bitmap.close();
+        const draw = ()=>{
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             art.emit("artplayerProxyCanvas:draw", ctx);
         };
         const animation = async ()=>{
