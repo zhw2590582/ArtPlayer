@@ -6,6 +6,7 @@ import gestureInit from './gestureInit';
 import viewInit from './viewInit';
 import documentInit from './documentInit';
 import updateInit from './updateInit';
+import restoreInit from './restoreInit';
 
 export default class Events {
     constructor(art) {
@@ -21,6 +22,7 @@ export default class Events {
         viewInit(art, this);
         documentInit(art, this);
         updateInit(art, this);
+        restoreInit(art, this);
     }
 
     proxy(target, name, callback, option = {}) {

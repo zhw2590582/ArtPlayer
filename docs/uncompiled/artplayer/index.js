@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-09-14 15:48:22";
+        return "2024-09-14 16:20:00";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2544,33 +2544,29 @@ parcelHelpers.export(exports, "default", ()=>subtitleOffsetMix);
 var _utils = require("../utils");
 function subtitleOffsetMix(art) {
     const { clamp } = art.constructor.utils;
-    const { notice, template, i18n } = art;
-    let offsetCache = 0;
-    let cuesCache = [];
-    art.on("subtitleSwitch", ()=>{
-        cuesCache = [];
+    const { notice, i18n } = art;
+    let subtitleOffset = 0;
+    art.on("subtitleTrackLoad", ()=>{
+        subtitleOffset = 0;
+        art.emit("subtitleOffset", 0);
     });
     (0, _utils.def)(art, "subtitleOffset", {
         get () {
-            return offsetCache;
+            return subtitleOffset;
         },
         set (value) {
-            if (template.$track && template.$track.track) {
-                const cues = Array.from(template.$track.track.cues);
-                offsetCache = clamp(value, -5, 5);
-                for(let index = 0; index < cues.length; index++){
-                    const cue = cues[index];
-                    if (!cuesCache[index]) cuesCache[index] = {
-                        startTime: cue.startTime,
-                        endTime: cue.endTime
-                    };
-                    cue.startTime = clamp(cuesCache[index].startTime + offsetCache, 0, art.duration);
-                    cue.endTime = clamp(cuesCache[index].endTime + offsetCache, 0, art.duration);
-                }
-                art.subtitle.update();
-                notice.show = `${i18n.get("Subtitle Offset")}: ${value}s`;
-                art.emit("subtitleOffset", value);
-            } else art.emit("subtitleOffset", 0);
+            const { cues } = art.subtitle;
+            subtitleOffset = clamp(value, -5, 5);
+            for(let index = 0; index < cues.length; index++){
+                const cue = cues[index];
+                cue.originalStartTime = cue.originalStartTime ?? cue.startTime;
+                cue.originalEndTime = cue.originalEndTime ?? cue.endTime;
+                cue.startTime = clamp(cue.originalStartTime + subtitleOffset, 0, art.duration);
+                cue.endTime = clamp(cue.originalEndTime + subtitleOffset, 0, art.duration);
+            }
+            art.subtitle.update();
+            notice.show = `${i18n.get("Subtitle Offset")}: ${value}s`;
+            art.emit("subtitleOffset", value);
         }
     });
 }
@@ -3937,7 +3933,6 @@ exports.default = Subtitle;
 },{"./utils":"euhMG","./utils/component":"1UWqI","option-validator":"1vNkK","./scheme":"jVxq1","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"akAUN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _error = require("../utils/error");
 var _clickInit = require("./clickInit");
 var _clickInitDefault = parcelHelpers.interopDefault(_clickInit);
 var _hoverInit = require("./hoverInit");
@@ -3954,12 +3949,13 @@ var _documentInit = require("./documentInit");
 var _documentInitDefault = parcelHelpers.interopDefault(_documentInit);
 var _updateInit = require("./updateInit");
 var _updateInitDefault = parcelHelpers.interopDefault(_updateInit);
+var _restoreInit = require("./restoreInit");
+var _restoreInitDefault = parcelHelpers.interopDefault(_restoreInit);
 class Events {
     constructor(art){
         this.destroyEvents = [];
         this.proxy = this.proxy.bind(this);
         this.hover = this.hover.bind(this);
-        this.loadImg = this.loadImg.bind(this);
         (0, _clickInitDefault.default)(art, this);
         (0, _hoverInitDefault.default)(art, this);
         (0, _moveInitDefault.default)(art, this);
@@ -3968,6 +3964,7 @@ class Events {
         (0, _viewInitDefault.default)(art, this);
         (0, _documentInitDefault.default)(art, this);
         (0, _updateInitDefault.default)(art, this);
+        (0, _restoreInitDefault.default)(art, this);
     }
     proxy(target, name, callback, option = {}) {
         if (Array.isArray(name)) return name.map((item)=>this.proxy(target, item, callback, option));
@@ -3979,19 +3976,6 @@ class Events {
     hover(target, mouseenter, mouseleave) {
         if (mouseenter) this.proxy(target, "mouseenter", mouseenter);
         if (mouseleave) this.proxy(target, "mouseleave", mouseleave);
-    }
-    loadImg(img) {
-        return new Promise((resolve, reject)=>{
-            let image;
-            if (img instanceof HTMLImageElement) image = img;
-            else if (typeof img === "string") {
-                image = new Image();
-                image.src = img;
-            } else return reject(new (0, _error.ArtPlayerError)("Unable to get Image"));
-            if (image.complete) return resolve(image);
-            this.proxy(image, "load", ()=>resolve(image));
-            this.proxy(image, "error", ()=>reject(new (0, _error.ArtPlayerError)(`Failed to load Image: ${image.src}`)));
-        });
     }
     remove(destroyEvent) {
         const index = this.destroyEvents.indexOf(destroyEvent);
@@ -4006,7 +3990,7 @@ class Events {
 }
 exports.default = Events;
 
-},{"../utils/error":"kCmly","./clickInit":"4xN0W","./hoverInit":"bO8Cy","./moveInit":"l5Ock","./resizeInit":"1e06H","./gestureInit":"1Cim3","./viewInit":"xZUxN","./documentInit":"jKzGQ","./updateInit":"ONlxE","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4xN0W":[function(require,module,exports) {
+},{"./clickInit":"4xN0W","./hoverInit":"bO8Cy","./moveInit":"l5Ock","./resizeInit":"1e06H","./gestureInit":"1Cim3","./viewInit":"xZUxN","./documentInit":"jKzGQ","./updateInit":"ONlxE","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN","./restoreInit":"878Jp"}],"4xN0W":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>clickInit);
@@ -4233,6 +4217,14 @@ function updateInit(art) {
             cancelAnimationFrame(timer);
         });
     }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"878Jp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>restoreInit);
+function restoreInit(art, events) {
+//
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"f1oWx":[function(require,module,exports) {
