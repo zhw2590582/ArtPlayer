@@ -53,21 +53,22 @@ export default function artplayerProxyCanvas(callback) {
             }
         });
 
-        const render = async () => {
+        const draw = async () => {
             const bitmap = await createImageBitmap(video);
             ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
             bitmap.close();
+            art.emit('artplayerProxyCanvas:draw', ctx);
         };
 
-        const drawFrame = async () => {
+        const animation = async () => {
             try {
                 console.log('1');
-                await render();
+                await draw();
                 console.log('2');
             } catch (error) {
                 console.error('Error drawing video frame:', error);
             }
-            animationFrame = requestAnimationFrame(drawFrame);
+            animationFrame = requestAnimationFrame(animation);
         };
 
         const resize = () => {
@@ -111,7 +112,7 @@ export default function artplayerProxyCanvas(callback) {
         art.on('video:play', () => {
             console.log('video:play');
             cancelAnimationFrame(animationFrame);
-            animationFrame = requestAnimationFrame(drawFrame);
+            animationFrame = requestAnimationFrame(animation);
         });
 
         art.on('video:pause', () => {
@@ -121,7 +122,7 @@ export default function artplayerProxyCanvas(callback) {
 
         art.on('resize', () => {
             resize();
-            render();
+            draw();
         });
 
         art.on('destroy', () => {
