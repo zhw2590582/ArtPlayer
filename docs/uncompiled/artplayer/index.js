@@ -2543,26 +2543,22 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>subtitleOffsetMix);
 var _utils = require("../utils");
 function subtitleOffsetMix(art) {
-    const { clamp } = art.constructor.utils;
-    const { notice, i18n } = art;
-    let subtitleOffset = 0;
-    art.on("subtitleTrackLoad", ()=>{
-        subtitleOffset = 0;
-        art.emit("subtitleOffset", 0);
-    });
+    const { notice, i18n, template } = art;
     (0, _utils.def)(art, "subtitleOffset", {
         get () {
-            return subtitleOffset;
+            return template.$track?.offset || 0;
         },
         set (value) {
             const { cues } = art.subtitle;
-            subtitleOffset = clamp(value, -5, 5);
+            if (!template.$track || cues.length === 0) return;
+            const offset = (0, _utils.clamp)(value, -5, 5);
+            template.$track.offset = offset;
             for(let index = 0; index < cues.length; index++){
                 const cue = cues[index];
                 cue.originalStartTime = cue.originalStartTime ?? cue.startTime;
                 cue.originalEndTime = cue.originalEndTime ?? cue.endTime;
-                cue.startTime = clamp(cue.originalStartTime + subtitleOffset, 0, art.duration);
-                cue.endTime = clamp(cue.originalEndTime + subtitleOffset, 0, art.duration);
+                cue.startTime = (0, _utils.clamp)(cue.originalStartTime + offset, 0, art.duration);
+                cue.endTime = (0, _utils.clamp)(cue.originalEndTime + offset, 0, art.duration);
             }
             art.subtitle.update();
             notice.show = `${i18n.get("Subtitle Offset")}: ${value}s`;
@@ -3919,7 +3915,7 @@ class Subtitle extends (0, _componentDefault.default) {
             if (this.url === subUrl) return subUrl;
             URL.revokeObjectURL(this.url);
             this.createTrack("metadata", subUrl);
-            this.art.emit("subtitleSwitch", subUrl);
+            this.art.emit("subtitleSwitch", subUrl, subtitleOption.url);
             return subUrl;
         }).catch((err)=>{
             $subtitle.innerHTML = "";

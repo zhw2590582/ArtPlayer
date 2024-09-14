@@ -153,7 +153,7 @@ export default class Subtitle extends Component {
                 if (this.url === subUrl) return subUrl;
                 URL.revokeObjectURL(this.url);
                 this.createTrack('metadata', subUrl);
-                this.art.emit('subtitleSwitch', subUrl);
+                this.art.emit('subtitleSwitch', subUrl, subtitleOption.url);
                 return subUrl;
             })
             .catch((err) => {
