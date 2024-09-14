@@ -2551,7 +2551,7 @@ function subtitleOffsetMix(art) {
         set (value) {
             const { cues } = art.subtitle;
             if (!template.$track || cues.length === 0) return;
-            const offset = (0, _utils.clamp)(value, -5, 5);
+            const offset = (0, _utils.clamp)(value, -10, 10);
             template.$track.offset = offset;
             for(let index = 0; index < cues.length; index++){
                 const cue = cues[index];

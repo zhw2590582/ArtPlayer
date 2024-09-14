@@ -23,7 +23,6 @@ var art = new Artplayer({
 | Property   | Type                | Description   |
 | ---------- | ------------------- | ------------  |
 | `html`     | `String`, `Element` | Element's DOM |
-
 | `icon`     | `String`, `Element` | 元素的图标   |
 | `selector` | `Array`             | 元素列表     |
 | `onSelect` | `Function`          | 元素点击事件 |
