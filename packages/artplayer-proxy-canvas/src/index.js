@@ -53,19 +53,17 @@ export default function artplayerProxyCanvas(callback) {
             }
         });
 
+        const render = async () => {
+            const bitmap = await createImageBitmap(video);
+            ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+            bitmap.close();
+        };
+
         const drawFrame = async () => {
-            if (!video.videoWidth || !video.videoHeight) {
-                console.log('Video dimensions not ready yet');
-                return;
-            }
             try {
-                if (video.readyState >= 2) {
-                    const bitmap = await createImageBitmap(video);
-                    ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-                    bitmap.close();
-                } else {
-                    console.log('Video not ready for frame extraction');
-                }
+                console.log('1');
+                await render();
+                console.log('2');
             } catch (error) {
                 console.error('Error drawing video frame:', error);
             }
@@ -108,25 +106,27 @@ export default function artplayerProxyCanvas(callback) {
         art.on('video:loadedmetadata', async () => {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
-            resize();
         });
 
         art.on('video:play', () => {
+            console.log('video:play');
             cancelAnimationFrame(animationFrame);
             animationFrame = requestAnimationFrame(drawFrame);
         });
 
         art.on('video:pause', () => {
+            console.log('video:pause');
             cancelAnimationFrame(animationFrame);
         });
 
-        art.on('resize', resize);
+        art.on('resize', () => {
+            resize();
+            render();
+        });
 
-        const destroy = () => {
+        art.on('destroy', () => {
             cancelAnimationFrame(animationFrame);
-        };
-
-        art.on('destroy', destroy);
+        });
 
         if (typeof callback === 'function') {
             callback.call(art, video, option.url, art);
