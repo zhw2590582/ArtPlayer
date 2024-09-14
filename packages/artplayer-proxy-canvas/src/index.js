@@ -8,6 +8,7 @@ export default function artplayerProxyCanvas(callback) {
 
         const video = createElement('video');
         video.playsInline = true;
+        window.video = video;
 
         const track = createElement('track');
         track.default = true;
@@ -57,16 +58,13 @@ export default function artplayerProxyCanvas(callback) {
         });
 
         const draw = () => {
+            console.log(video.currentTime);
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             art.emit('artplayerProxyCanvas:draw', ctx);
         };
 
-        const animation = async () => {
-            try {
-                await draw();
-            } catch (error) {
-                console.error('Error drawing video frame:', error);
-            }
+        const animation = () => {
+            draw();
             animationFrame = requestAnimationFrame(animation);
         };
 
