@@ -149,10 +149,11 @@ parcelHelpers.export(exports, "default", ()=>artplayerProxyCanvas);
 function artplayerProxyCanvas(callback) {
     return (art)=>{
         const { option, constructor } = art;
-        const { createElement, def, append, sleep } = constructor.utils;
+        const { createElement, def, append } = constructor.utils;
         const canvas = createElement("canvas");
         const ctx = canvas.getContext("2d");
         const video = createElement("video");
+        video.playsInline = true;
         const track = createElement("track");
         track.default = true;
         track.kind = "metadata";
@@ -207,40 +208,34 @@ function artplayerProxyCanvas(callback) {
         };
         const animation = async ()=>{
             try {
-                console.log("1");
                 await draw();
-                console.log("2");
             } catch (error) {
                 console.error("Error drawing video frame:", error);
             }
             animationFrame = requestAnimationFrame(animation);
         };
         const resize = ()=>{
-            try {
-                const player = art.template?.$player;
-                if (!player || option.autoSize) return;
-                const aspectRatio = video.videoWidth / video.videoHeight;
-                const containerWidth = player.clientWidth;
-                const containerHeight = player.clientHeight;
-                const containerRatio = containerWidth / containerHeight;
-                let canvasWidth, canvasHeight;
-                if (containerRatio > aspectRatio) {
-                    canvasHeight = containerHeight;
-                    canvasWidth = canvasHeight * aspectRatio;
-                } else {
-                    canvasWidth = containerWidth;
-                    canvasHeight = canvasWidth / aspectRatio;
-                }
-                canvas.width = canvasWidth;
-                canvas.height = canvasHeight;
-                const paddingLeft = (containerWidth - canvasWidth) / 2;
-                const paddingTop = (containerHeight - canvasHeight) / 2;
-                Object.assign(canvas.style, {
-                    padding: `${paddingTop}px ${paddingLeft}px`
-                });
-            } catch (error) {
-                console.error("Error in resize function:", error);
+            const player = art.template?.$player;
+            if (!player || option.autoSize) return;
+            const aspectRatio = video.videoWidth / video.videoHeight;
+            const containerWidth = player.clientWidth;
+            const containerHeight = player.clientHeight;
+            const containerRatio = containerWidth / containerHeight;
+            let canvasWidth, canvasHeight;
+            if (containerRatio > aspectRatio) {
+                canvasHeight = containerHeight;
+                canvasWidth = canvasHeight * aspectRatio;
+            } else {
+                canvasWidth = containerWidth;
+                canvasHeight = canvasWidth / aspectRatio;
             }
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+            const paddingLeft = (containerWidth - canvasWidth) / 2;
+            const paddingTop = (containerHeight - canvasHeight) / 2;
+            Object.assign(canvas.style, {
+                padding: `${paddingTop}px ${paddingLeft}px`
+            });
         };
         art.on("video:loadedmetadata", async ()=>{
             canvas.width = video.videoWidth;
@@ -252,7 +247,6 @@ function artplayerProxyCanvas(callback) {
             animationFrame = requestAnimationFrame(animation);
         });
         art.on("video:pause", ()=>{
-            console.log("video:pause");
             cancelAnimationFrame(animationFrame);
         });
         art.on("resize", ()=>{
