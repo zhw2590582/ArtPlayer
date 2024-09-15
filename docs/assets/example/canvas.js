@@ -24,23 +24,5 @@ var art = new Artplayer({
         column: 10,
         scale: 0.85,
     },
-    controls: [
-        {
-            position: 'right',
-            html: 'play',
-            index: 1,
-            click: function () {
-                window.video.play();
-            },
-        },
-        {
-            position: 'right',
-            html: 'pause',
-            index: 2,
-            click: function () {
-                window.video.pause();
-            },
-        },
-    ],
     proxy: artplayerProxyCanvas(),
 });
