@@ -63,9 +63,13 @@ export default function artplayerProxyCanvas() {
 
         async function draw() {
             try {
-                const bitmap = await createImageBitmap(video);
-                ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-                bitmap.close();
+                if (typeof createImageBitmap !== 'undefined') {
+                    const bitmap = await createImageBitmap(video);
+                    ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+                    bitmap.close();
+                } else {
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                }
                 art.emit('artplayerProxyCanvas:draw', ctx);
             } catch (error) {
                 art.emit('artplayerProxyCanvas:error', error);
