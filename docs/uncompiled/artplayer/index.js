@@ -206,7 +206,6 @@ class Artplayer extends (0, _emitterDefault.default) {
         this.isRotate = false;
         this.isDestroy = false;
         this.isFastForwarding = false;
-        this.localDate = new Date;
         // 上次滑动的时间(音量/进度)
         this.lastSwipeTime = 0;
         this.template = new (0, _templateDefault.default)(this);
@@ -4167,7 +4166,7 @@ function gestureInit(art, events) {
 
                 // 更新滑动时间
                 // 以便于长按倍速功能的激活判定
-                art.lastSwipeTime = art.localDate.getTime();
+                art.lastSwipeTime = Date.now();
             }
         };
         const onTouchEnd = ()=>{
@@ -5307,7 +5306,7 @@ function fastForward(art) {
     const onStart = (event)=>{
         if (event.touches.length === 1 && art.playing && !art.isLock) timer = setTimeout(()=>{
             // 上次滑动时间
-            let curTime = art.localDate.getTime();
+            let curTime = Date.now();
             let timeDiff = curTime - art.lastSwipeTime;
             if (timeDiff < constructor.FAST_FORWARD_TIME) {
                 return
