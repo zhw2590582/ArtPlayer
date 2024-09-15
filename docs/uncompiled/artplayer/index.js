@@ -380,6 +380,7 @@ Artplayer.INFO_LOOP_TIME = 1000;
 Artplayer.FAST_FORWARD_VALUE = 3;
 Artplayer.FAST_FORWARD_TIME = 1000;
 Artplayer.TOUCH_MOVE_RATIO = 0.5;
+Artplayer.TOUCH_MOVE_VOLUME_RATIO = 1.2;
 Artplayer.VOLUME_STEP = 0.1;
 Artplayer.SEEK_STEP = 5;
 Artplayer.PLAYBACK_RATE = [
@@ -4113,6 +4114,7 @@ function gestureInit(art, events) {
         let startX = 0;
         let startY = 0;
         let startTime = 0;
+        let startVolume = 0;
         const onTouchStart = (event)=>{
             if (event.touches.length === 1 && !art.isLock && !art.isFastForwarding) {
                 if (touchTarget === $progress) (0, _progress.setCurrentTime)(art, event);
@@ -4121,6 +4123,7 @@ function gestureInit(art, events) {
                 startX = pageX;
                 startY = pageY;
                 startTime = art.currentTime;
+                startVolume = art.volume;
             }
         };
         const onTouchMove = (event)=>{
@@ -4136,15 +4139,27 @@ function gestureInit(art, events) {
                     2
                 ].includes(direction);
                 const isLegal = isHorizontal && !art.isRotate || isVertical && art.isRotate;
-                if (isLegal) {
+                // 禁用未旋转时的触摸音量调节, 以防止误触
+                const isLegalVolumeAction = /*isHorizontal && art.isRotate ||*/ isVertical && !art.isRotate;
+                if (isLegal || isLegalVolumeAction) {
                     const ratioX = (0, _utils.clamp)((pageX - startX) / art.width, -1, 1);
                     const ratioY = (0, _utils.clamp)((pageY - startY) / art.height, -1, 1);
-                    const ratio = art.isRotate ? ratioY : ratioX;
-                    const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
-                    const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
-                    art.seek = currentTime;
-                    art.emit("setBar", "played", (0, _utils.clamp)(currentTime / art.duration, 0, 1), event);
-                    art.notice.show = `${(0, _utils.secondToTime)(currentTime)} / ${(0, _utils.secondToTime)(art.duration)}`;
+
+                    if (isLegal) {
+                        const ratio = art.isRotate ? ratioY : ratioX;
+                        const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
+                        const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
+                        art.seek = currentTime;
+                        art.emit("setBar", "played", (0, _utils.clamp)(currentTime / art.duration, 0, 1), event);
+                        art.notice.show = `${(0, _utils.secondToTime)(currentTime)} / ${(0, _utils.secondToTime)(art.duration)}`;
+                    } else {    // 音量
+                        const ratio = art.isRotate ? ratioX : ratioY;
+                        // 直接使用ratio会导致音量调节过慢
+                        const currentVolume = (0, _utils.clamp)(startVolume - 1 * ratio * TOUCH_MOVE_VOLUME_RATIO, 0, 1);
+                        art.volume = currentVolume;
+                        // 位运算以取整
+                        art.notice.show = `音量: ${(currentVolume * 100) >> 0}%`;
+                    }
                 }
             }
         };
