@@ -205,6 +205,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         this.isInput = false;
         this.isRotate = false;
         this.isDestroy = false;
+        this.isFastForwarding = false;
         this.template = new (0, _templateDefault.default)(this);
         this.events = new (0, _eventsDefault.default)(this);
         this.storage = new (0, _storageDefault.default)(this);
@@ -4113,7 +4114,7 @@ function gestureInit(art, events) {
         let startY = 0;
         let startTime = 0;
         const onTouchStart = (event)=>{
-            if (event.touches.length === 1 && !art.isLock) {
+            if (event.touches.length === 1 && !art.isLock && !art.isFastForwarding) {
                 if (touchTarget === $progress) (0, _progress.setCurrentTime)(art, event);
                 isDroging = true;
                 const { pageX, pageY } = event.touches[0];
@@ -4123,7 +4124,7 @@ function gestureInit(art, events) {
             }
         };
         const onTouchMove = (event)=>{
-            if (event.touches.length === 1 && isDroging && art.duration) {
+            if (event.touches.length === 1 && isDroging && art.duration && !art.isFastForwarding) {
                 const { pageX, pageY } = event.touches[0];
                 const direction = GetSlideDirection(startX, startY, pageX, pageY);
                 const isHorizontal = [
@@ -4148,7 +4149,7 @@ function gestureInit(art, events) {
             }
         };
         const onTouchEnd = ()=>{
-            if (isDroging) {
+            if (isDroging && !art.isFastForwarding) {
                 startX = 0;
                 startY = 0;
                 startTime = 0;
@@ -5286,6 +5287,7 @@ function fastForward(art) {
             isPress = true;
             lastPlaybackRate = art.playbackRate;
             art.playbackRate = constructor.FAST_FORWARD_VALUE;
+            art.isFastForwarding = true;
             (0, _utils.addClass)($player, "art-fast-forward");
         }, constructor.FAST_FORWARD_TIME);
     };
@@ -5294,11 +5296,13 @@ function fastForward(art) {
         if (isPress) {
             isPress = false;
             art.playbackRate = lastPlaybackRate;
+            art.isFastForwarding = false;
             (0, _utils.removeClass)($player, "art-fast-forward");
         }
     };
     proxy($video, "touchstart", onStart);
-    proxy(document, "touchmove", onStop);
+    // 只要手指没离开屏幕, 就一直倍速
+    // proxy(document, "touchmove", onStop);
     proxy(document, "touchend", onStop);
     return {
         name: "fastForward",
