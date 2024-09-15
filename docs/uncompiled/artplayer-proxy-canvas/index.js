@@ -215,7 +215,6 @@ function artplayerProxyCanvas() {
                 art.emit("artplayerProxyCanvas:draw", ctx);
             } catch (error) {
                 art.emit("artplayerProxyCanvas:error", error);
-                throw error;
             }
         }
         async function animation() {
