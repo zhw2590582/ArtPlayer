@@ -10,6 +10,7 @@ type I18nKeys =
     | 'id'
     | 'ru'
     | 'tr'
+    | 'ar'
     | (string & Record<never, never>);
 
 type I18nValue = {
