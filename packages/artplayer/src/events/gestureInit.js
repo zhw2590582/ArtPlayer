@@ -37,6 +37,7 @@ export default function gestureInit(art, events) {
         let startX = 0;
         let startY = 0;
         let startTime = 0;
+        let startVolume = 0;
 
         const onTouchStart = (event) => {
             if (event.touches.length === 1 && !art.isLock) {
@@ -49,6 +50,7 @@ export default function gestureInit(art, events) {
                 startX = pageX;
                 startY = pageY;
                 startTime = art.currentTime;
+                startVolume = art.volume;
             }
         };
 
@@ -59,15 +61,25 @@ export default function gestureInit(art, events) {
                 const isHorizontal = [3, 4].includes(direction);
                 const isVertical = [1, 2].includes(direction);
                 const isLegal = (isHorizontal && !art.isRotate) || (isVertical && art.isRotate);
-                if (isLegal) {
-                    const ratioX = clamp((pageX - startX) / art.width, -1, 1);
-                    const ratioY = clamp((pageY - startY) / art.height, -1, 1);
-                    const ratio = art.isRotate ? ratioY : ratioX;
-                    const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
-                    const currentTime = clamp(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
-                    art.seek = currentTime;
-                    art.emit('setBar', 'played', clamp(currentTime / art.duration, 0, 1), event);
-                    art.notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
+                const isLegalVolumeAction = /*isHorizontal && art.isRotate ||*/ isVertical && !art.isRotate;
+                if (isLegal || isLegalVolumeAction) {
+                    const ratioX = (0, _utils.clamp)((pageX - startX) / art.width, -1, 1);
+                    const ratioY = (0, _utils.clamp)((pageY - startY) / art.height, -1, 1);
+
+                    if (isLegal) {
+                        const ratio = art.isRotate ? ratioY : ratioX;
+                        const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
+                        const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
+                        art.seek = currentTime;
+                        art.emit("setBar", "played", (0, _utils.clamp)(currentTime / art.duration, 0, 1), event);
+                        art.notice.show = `${(0, _utils.secondToTime)(currentTime)} / ${(0, _utils.secondToTime)(art.duration)}`;
+                    } else {
+                        const ratio = art.isRotate ? ratioX : ratioY;
+                        const compensationRatio = 1.2;
+                        const currentVolume = (0, _utils.clamp)(startVolume - 1 * ratio * compensationRatio, 0, 1);
+                        art.volume = currentVolume;
+                        art.notice.show = `音量: ${(currentVolume * 100) >> 0}%`;
+                    }
                 }
             }
         };
