@@ -40,7 +40,7 @@ export default function gestureInit(art, events) {
         let startVolume = 0;
 
         const onTouchStart = (event) => {
-            if (event.touches.length === 1 && !art.isLock) {
+            if (event.touches.length === 1 && !art.isLock && !art.isFastForwarding) {
                 if (touchTarget === $progress) {
                     setCurrentTime(art, event);
                 }
@@ -55,7 +55,7 @@ export default function gestureInit(art, events) {
         };
 
         const onTouchMove = (event) => {
-            if (event.touches.length === 1 && isDroging && art.duration) {
+            if (event.touches.length === 1 && isDroging && art.duration && !art.isFastForwarding) {
                 const { pageX, pageY } = event.touches[0];
                 const direction = GetSlideDirection(startX, startY, pageX, pageY);
                 const isHorizontal = [3, 4].includes(direction);

@@ -17,6 +17,7 @@ export default function fastForward(art) {
                 isPress = true;
                 lastPlaybackRate = art.playbackRate;
                 art.playbackRate = constructor.FAST_FORWARD_VALUE;
+                art.isFastForwarding = true;
                 addClass($player, 'art-fast-forward');
             }, constructor.FAST_FORWARD_TIME);
         }
@@ -27,12 +28,13 @@ export default function fastForward(art) {
         if (isPress) {
             isPress = false;
             art.playbackRate = lastPlaybackRate;
+            art.isFastForwarding = false;
             removeClass($player, 'art-fast-forward');
         }
     };
 
     proxy($video, 'touchstart', onStart);
-    proxy(document, 'touchmove', onStop);
+    // proxy(document, 'touchmove', onStop);
     proxy(document, 'touchend', onStop);
 
     return {
