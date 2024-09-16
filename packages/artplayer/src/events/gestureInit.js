@@ -80,6 +80,8 @@ export default function gestureInit(art, events) {
                         art.volume = currentVolume;
                         art.notice.show = `音量: ${(currentVolume * 100) >> 0}%`;
                     }
+
+                    art.lastSwipeTime = Date.now();
                 }
             }
         };

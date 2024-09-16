@@ -14,6 +14,12 @@ export default function fastForward(art) {
     const onStart = (event) => {
         if (event.touches.length === 1 && art.playing && !art.isLock) {
             timer = setTimeout(() => {
+                let curTime = Date.now();
+                let timeDiff = curTime - art.lastSwipeTime;
+                if (timeDiff < constructor.FAST_FORWARD_TIME) {
+                    return
+                }
+
                 isPress = true;
                 lastPlaybackRate = art.playbackRate;
                 art.playbackRate = constructor.FAST_FORWARD_VALUE;
