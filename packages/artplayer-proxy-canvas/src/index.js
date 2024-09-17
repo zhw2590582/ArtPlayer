@@ -66,7 +66,7 @@ export default function artplayerProxyCanvas() {
                 } else {
                     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                 }
-                art.emit('artplayerProxyCanvas:draw', ctx);
+                art.emit('artplayerProxyCanvas:draw', ctx, video);
             } catch (error) {
                 art.emit('artplayerProxyCanvas:error', error);
             }
