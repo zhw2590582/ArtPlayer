@@ -146,7 +146,7 @@
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerProxyCanvas);
-function artplayerProxyCanvas() {
+function artplayerProxyCanvas(callback) {
     return (art)=>{
         const { constructor } = art;
         const { createElement } = constructor.utils;
@@ -191,6 +191,7 @@ function artplayerProxyCanvas() {
                     ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
                     bitmap.close();
                 } else ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                callback && callback(ctx, video);
                 art.emit("artplayerProxyCanvas:draw", ctx, video);
             } catch (error) {
                 art.emit("artplayerProxyCanvas:error", error);

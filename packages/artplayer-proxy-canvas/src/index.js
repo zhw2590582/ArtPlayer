@@ -1,4 +1,4 @@
-export default function artplayerProxyCanvas() {
+export default function artplayerProxyCanvas(callback) {
     return (art) => {
         const { constructor } = art;
         const { createElement } = constructor.utils;
@@ -66,6 +66,7 @@ export default function artplayerProxyCanvas() {
                 } else {
                     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                 }
+                callback && callback(ctx, video);
                 art.emit('artplayerProxyCanvas:draw', ctx, video);
             } catch (error) {
                 art.emit('artplayerProxyCanvas:error', error);
