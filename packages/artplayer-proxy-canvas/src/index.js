@@ -1,57 +1,53 @@
 export default function artplayerProxyCanvas() {
     return (art) => {
-        const { option, constructor } = art;
-        const { createElement, def } = constructor.utils;
+        const { constructor } = art;
+        const { createElement } = constructor.utils;
+
+        const canvas = createElement('canvas');
+        const video = createElement('video');
+        const ctx = canvas.getContext('2d');
 
         let animationId = null;
-        const canvas = createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const video = createElement('video');
 
-        const canvasProperties = {};
-        const canvasKeys = ['width', 'height'];
-        const { propertys, methods, prototypes, events } = constructor.config;
-        const videoKeys = [...propertys, ...methods, ...prototypes];
+        const originalCanvasMethods = {};
+        for (const prop in canvas) {
+            if (typeof canvas[prop] === 'function') {
+                originalCanvasMethods[prop] = canvas[prop].bind(canvas);
+            }
+        }
 
-        initCanvasProperties();
-        proxyVideoToCanvas();
+        for (const prop in video) {
+            if (!(prop in canvas)) {
+                Object.defineProperty(canvas, prop, {
+                    get() {
+                        const value = video[prop];
+                        return typeof value === 'function' ? value.bind(video) : value;
+                    },
+                    set(value) {
+                        video[prop] = value;
+                    },
+                    configurable: true,
+                    enumerable: true,
+                });
+            }
+        }
+
+        for (const prop in originalCanvasMethods) {
+            canvas[prop] = function (...args) {
+                if (prop in originalCanvasMethods) {
+                    return originalCanvasMethods[prop](...args);
+                }
+                return video[prop].apply(video, args);
+            };
+        }
+
         setupEventListeners();
         setupArtPlayerEvents();
 
         return canvas;
 
-        function initCanvasProperties() {
-            canvasKeys.forEach((prop) => {
-                canvasProperties[prop] = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, prop);
-            });
-        }
-
-        function proxyVideoToCanvas() {
-            videoKeys.forEach((key) => {
-                if (canvasKeys.includes(key)) {
-                    def(canvas, key, {
-                        get() {
-                            return canvasProperties[key].get.call(this);
-                        },
-                        set(value) {
-                            canvasProperties[key].set.call(this, value);
-                        },
-                    });
-                } else {
-                    def(canvas, key, {
-                        get() {
-                            const value = video[key];
-                            return typeof value === 'function' ? value.bind(video) : value;
-                        },
-                        set(value) {
-                            video[key] = value;
-                        },
-                    });
-                }
-            });
-        }
-
         function setupEventListeners() {
+            const { events } = constructor.config;
             setTimeout(() => {
                 events.forEach((event) => {
                     art.proxy(video, event, (event) => {
@@ -83,7 +79,7 @@ export default function artplayerProxyCanvas() {
 
         function resize() {
             const player = art.template?.$player;
-            if (!player || option.autoSize) return;
+            if (!player || art.option.autoSize) return;
 
             const aspectRatio = video.videoWidth / video.videoHeight;
             const containerWidth = player.clientWidth;
@@ -111,14 +107,14 @@ export default function artplayerProxyCanvas() {
         }
 
         function setupArtPlayerEvents() {
-            art.on('video:loadedmetadata', async () => {
+            art.on('video:loadedmetadata', () => {
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
             });
 
             art.on('video:play', () => {
                 cancelAnimationFrame(animationId);
-                animationId = requestAnimationFrame(animation);
+                animation();
             });
 
             art.on('video:pause', () => {
