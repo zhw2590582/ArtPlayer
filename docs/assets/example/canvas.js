@@ -14,6 +14,7 @@ var art = new Artplayer({
     flip: true,
     playbackRate: true,
     aspectRatio: true,
+    fullscreen: true,
     fullscreenWeb: true,
     miniProgressBar: true,
     autoPlayback: true,
