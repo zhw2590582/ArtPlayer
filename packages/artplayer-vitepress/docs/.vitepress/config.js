@@ -89,6 +89,13 @@ const config = {
             { text: 'webtorrent.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent' },
           ]
         },
+        {
+          text: '代理',
+          collapsible: true,
+          items: [
+            { text: 'Canvas', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas' },
+          ]
+        },
       ],
       '/en/': [
         {
@@ -147,6 +154,13 @@ const config = {
             { text: 'dash.js', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash' },
             { text: 'mpegts.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts' },
             { text: 'webtorrent.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent' },
+          ]
+        },
+        {
+          text: 'Proxy',
+          collapsible: true,
+          items: [
+            { text: 'Canvas', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas' },
           ]
         },
       ],
