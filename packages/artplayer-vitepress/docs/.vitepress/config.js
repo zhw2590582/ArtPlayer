@@ -157,7 +157,7 @@ const config = {
           ]
         },
         {
-          text: 'Proxy',
+          text: 'Proxys',
           collapsible: true,
           items: [
             { text: 'Canvas', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas' },
