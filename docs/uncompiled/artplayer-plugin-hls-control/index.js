@@ -150,6 +150,14 @@ var _qualitySvg = require("bundle-text:./quality.svg");
 var _qualitySvgDefault = parcelHelpers.interopDefault(_qualitySvg);
 var _audioSvg = require("bundle-text:./audio.svg");
 var _audioSvgDefault = parcelHelpers.interopDefault(_audioSvg);
+function uniqBy(array, property) {
+    const seen = new Map();
+    return array.filter((item)=>{
+        const key = item[property];
+        if (key === undefined) return true;
+        return !seen.has(key) && seen.set(key, 1);
+    });
+}
 function artplayerPluginHlsControl(option = {}) {
     return (art)=>{
         const { $video } = art.template;
@@ -159,16 +167,16 @@ function artplayerPluginHlsControl(option = {}) {
             const config = option.quality || {};
             const auto = config.auto || "Auto";
             const title = config.title || "Quality";
-            const getName = config.getName || ((level)=>(level.height || "Unknown ") + "P");
+            const getName = config.getName || ((level)=>level.name || level.height + "P");
             const defaultLevel = hls.levels[hls.currentLevel];
             const defaultHtml = defaultLevel ? getName(defaultLevel) : auto;
-            const selector = hls.levels.map((item, index)=>{
+            const selector = uniqBy(hls.levels.map((item, index)=>{
                 return {
                     html: getName(item, index),
                     value: index,
                     default: hls.currentLevel === index
                 };
-            }).sort((a, b)=>b.value - a.value);
+            }), "html").sort((a, b)=>b.value - a.value);
             selector.push({
                 html: auto,
                 value: -1,
@@ -205,16 +213,16 @@ function artplayerPluginHlsControl(option = {}) {
             const config = option.audio || {};
             const auto = config.auto || "Auto";
             const title = config.title || "Audio";
-            const getName = config.getName || ((track, index)=>track.name || `Track ${index + 1}`);
+            const getName = config.getName || ((track)=>track.name || track.lang || track.language);
             const defaultTrack = hls.audioTracks[hls.audioTrack];
             const defaultHtml = defaultTrack ? getName(defaultTrack) : auto;
-            const selector = hls.audioTracks.map((item, index)=>{
+            const selector = uniqBy(hls.audioTracks.map((item, index)=>{
                 return {
                     html: getName(item, index),
-                    value: index,
-                    default: hls.audioTrack === index
+                    value: item.id,
+                    default: hls.audioTrack === item.id
                 };
-            });
+            }), "html");
             const onSelect = (item)=>{
                 hls.audioTrack = item.value;
                 art.loading.show = true;

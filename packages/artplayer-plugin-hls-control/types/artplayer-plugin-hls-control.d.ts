@@ -9,7 +9,6 @@ type Config = {
     title?: string;
     auto?: string;
     getName?(level: object): String;
-    filter?(levels: object[]): object[];
 };
 
 declare const artplayerPluginHlsControl: (option: { quality?: Config; audio?: Config }) => (art: Artplayer) => {
