@@ -68,7 +68,7 @@ const config = {
             { text: '🎉 弹幕库', link: '/plugin/danmuku' },
             { text: '视频广告', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads' },
             { text: 'Iframe 控制', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe' },
-            { text: 'Hls 画质', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-quality/index.js&example=hls.quality' },
+            { text: 'Hls 控制', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control' },
             { text: 'Dash 画质', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-quality/index.js&example=dash.quality' },
             { text: 'Vtt 缩略图', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail'},
             { text: '多重字幕', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles'},
@@ -135,7 +135,7 @@ const config = {
           items: [
             { text: 'Advertise', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads' },
             { text: 'Iframe Control', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe' },
-            { text: 'Hls Quality', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-quality/index.js&example=hls.quality' },
+            { text: 'Hls Control', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control' },
             { text: 'Dash Quality', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-quality/index.js&example=dash.quality' },
             { text: 'Vtt Thumbnail', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail'},
             { text: 'Multiple Subtitles', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles'},
