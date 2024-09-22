@@ -40,7 +40,7 @@ export type Events = {
     subtitleOffset: [offset: number];
     subtitleBeforeUpdate: [cue: VTTCue];
     subtitleAfterUpdate: [cue: VTTCue];
-    subtitleLoad: [option: Subtitle, cues: TextTrackCueList];
+    subtitleLoad: [cues: VTTCue[], option: Subtitle];
     focus: [event: Event];
     blur: [event: Event];
     dblclick: [event: Event];

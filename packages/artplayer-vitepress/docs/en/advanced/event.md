@@ -587,8 +587,8 @@ var art = new Artplayer({
     },
 });
 
-art.on('subtitleBeforeUpdate', (cue) => {
-    console.info('subtitleBeforeUpdate', cue);
+art.on('subtitleBeforeUpdate', (cues) => {
+    console.info('subtitleBeforeUpdate', cues);
 });
 ```
 
@@ -607,8 +607,8 @@ var art = new Artplayer({
     },
 });
 
-art.on('subtitleAfterUpdate', (cue) => {
-    console.info('subtitleAfterUpdate', cue);
+art.on('subtitleAfterUpdate', (cues) => {
+    console.info('subtitleAfterUpdate', cues);
 });
 ```
 
@@ -628,7 +628,7 @@ var art = new Artplayer({
 });
 
 art.on('subtitleLoad', (option, cues) => {
-    console.info('subtitleLoad', option, cues);
+    console.info('subtitleLoad', cues, option);
 });
 ```
 

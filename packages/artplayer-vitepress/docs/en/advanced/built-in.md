@@ -312,6 +312,9 @@ Manage the subtitle features of the player
 - `url` property sets and returns the current subtitle address
 - `style` method sets the style of the current subtitle
 - `switch` method sets the current subtitle address and options
+- `textTrack` Get the current subtitle track
+- `activeCues` Get the currently active subtitle list
+- `cues` Get the the subtitle list
 
 <div className="run-code">▶ Run Code</div>
 

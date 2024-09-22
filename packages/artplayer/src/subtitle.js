@@ -111,7 +111,7 @@ export default class Subtitle extends Component {
         $newTrack.label = option.subtitle.name || 'Artplayer';
         $newTrack.track.mode = 'hidden';
         $newTrack.onload = () => {
-            this.art.emit('subtitleLoad', this.option, this.cues);
+            this.art.emit('subtitleLoad', this.cues, this.option);
         };
 
         this.eventDestroy();

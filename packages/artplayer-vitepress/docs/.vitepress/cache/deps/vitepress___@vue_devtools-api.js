@@ -1,9 +1,3 @@
-import {
-  isReactive,
-  isRef,
-  toRaw
-} from "./chunk-N7G4WCHV.js";
-
 // ../../node_modules/@vue/devtools-shared/dist/index.js
 var __create = Object.create;
 var __defProp = Object.defineProperty;
@@ -34,12 +28,12 @@ var __toESM = (mod, isNodeMode, target2) => (target2 = mod != null ? __create(__
   mod
 ));
 var init_esm_shims = __esm({
-  "../../node_modules/.pnpm/tsup@8.0.2_@microsoft+api-extractor@7.43.0_@types+node@20.12.12__postcss@8.4.38_typescript@5.4.5/node_modules/tsup/assets/esm_shims.js"() {
+  "../../node_modules/.pnpm/tsup@8.2.4_@microsoft+api-extractor@7.43.0_@types+node@20.16.5__@swc+core@1.5.29_jiti@1.21.6__hrrjfaj2jdrhlrlzgjkczhq5ey/node_modules/tsup/assets/esm_shims.js"() {
     "use strict";
   }
 });
 var require_rfdc = __commonJS({
-  "../../node_modules/.pnpm/rfdc@1.3.1/node_modules/rfdc/index.js"(exports, module) {
+  "../../node_modules/.pnpm/rfdc@1.4.1/node_modules/rfdc/index.js"(exports, module) {
     "use strict";
     init_esm_shims();
     module.exports = rfdc2;
@@ -51,19 +45,28 @@ var require_rfdc = __commonJS({
     }
     function rfdc2(opts) {
       opts = opts || {};
-      if (opts.circles)
-        return rfdcCircles(opts);
+      if (opts.circles) return rfdcCircles(opts);
+      const constructorHandlers = /* @__PURE__ */ new Map();
+      constructorHandlers.set(Date, (o) => new Date(o));
+      constructorHandlers.set(Map, (o, fn) => new Map(cloneArray(Array.from(o), fn)));
+      constructorHandlers.set(Set, (o, fn) => new Set(cloneArray(Array.from(o), fn)));
+      if (opts.constructorHandlers) {
+        for (const handler2 of opts.constructorHandlers) {
+          constructorHandlers.set(handler2[0], handler2[1]);
+        }
+      }
+      let handler = null;
       return opts.proto ? cloneProto : clone;
       function cloneArray(a, fn) {
-        var keys = Object.keys(a);
-        var a2 = new Array(keys.length);
-        for (var i = 0; i < keys.length; i++) {
-          var k = keys[i];
-          var cur = a[k];
+        const keys = Object.keys(a);
+        const a2 = new Array(keys.length);
+        for (let i = 0; i < keys.length; i++) {
+          const k = keys[i];
+          const cur = a[k];
           if (typeof cur !== "object" || cur === null) {
             a2[k] = cur;
-          } else if (cur instanceof Date) {
-            a2[k] = new Date(cur);
+          } else if (cur.constructor !== Object && (handler = constructorHandlers.get(cur.constructor))) {
+            a2[k] = handler(cur, fn);
           } else if (ArrayBuffer.isView(cur)) {
             a2[k] = copyBuffer(cur);
           } else {
@@ -73,29 +76,19 @@ var require_rfdc = __commonJS({
         return a2;
       }
       function clone(o) {
-        if (typeof o !== "object" || o === null)
-          return o;
-        if (o instanceof Date)
-          return new Date(o);
-        if (Array.isArray(o))
-          return cloneArray(o, clone);
-        if (o instanceof Map)
-          return new Map(cloneArray(Array.from(o), clone));
-        if (o instanceof Set)
-          return new Set(cloneArray(Array.from(o), clone));
-        var o2 = {};
-        for (var k in o) {
-          if (Object.hasOwnProperty.call(o, k) === false)
-            continue;
-          var cur = o[k];
+        if (typeof o !== "object" || o === null) return o;
+        if (Array.isArray(o)) return cloneArray(o, clone);
+        if (o.constructor !== Object && (handler = constructorHandlers.get(o.constructor))) {
+          return handler(o, clone);
+        }
+        const o2 = {};
+        for (const k in o) {
+          if (Object.hasOwnProperty.call(o, k) === false) continue;
+          const cur = o[k];
           if (typeof cur !== "object" || cur === null) {
             o2[k] = cur;
-          } else if (cur instanceof Date) {
-            o2[k] = new Date(cur);
-          } else if (cur instanceof Map) {
-            o2[k] = new Map(cloneArray(Array.from(cur), clone));
-          } else if (cur instanceof Set) {
-            o2[k] = new Set(cloneArray(Array.from(cur), clone));
+          } else if (cur.constructor !== Object && (handler = constructorHandlers.get(cur.constructor))) {
+            o2[k] = handler(cur, clone);
           } else if (ArrayBuffer.isView(cur)) {
             o2[k] = copyBuffer(cur);
           } else {
@@ -105,27 +98,18 @@ var require_rfdc = __commonJS({
         return o2;
       }
       function cloneProto(o) {
-        if (typeof o !== "object" || o === null)
-          return o;
-        if (o instanceof Date)
-          return new Date(o);
-        if (Array.isArray(o))
-          return cloneArray(o, cloneProto);
-        if (o instanceof Map)
-          return new Map(cloneArray(Array.from(o), cloneProto));
-        if (o instanceof Set)
-          return new Set(cloneArray(Array.from(o), cloneProto));
-        var o2 = {};
-        for (var k in o) {
-          var cur = o[k];
+        if (typeof o !== "object" || o === null) return o;
+        if (Array.isArray(o)) return cloneArray(o, cloneProto);
+        if (o.constructor !== Object && (handler = constructorHandlers.get(o.constructor))) {
+          return handler(o, cloneProto);
+        }
+        const o2 = {};
+        for (const k in o) {
+          const cur = o[k];
           if (typeof cur !== "object" || cur === null) {
             o2[k] = cur;
-          } else if (cur instanceof Date) {
-            o2[k] = new Date(cur);
-          } else if (cur instanceof Map) {
-            o2[k] = new Map(cloneArray(Array.from(cur), cloneProto));
-          } else if (cur instanceof Set) {
-            o2[k] = new Set(cloneArray(Array.from(cur), cloneProto));
+          } else if (cur.constructor !== Object && (handler = constructorHandlers.get(cur.constructor))) {
+            o2[k] = handler(cur, cloneProto);
           } else if (ArrayBuffer.isView(cur)) {
             o2[k] = copyBuffer(cur);
           } else {
@@ -136,23 +120,33 @@ var require_rfdc = __commonJS({
       }
     }
     function rfdcCircles(opts) {
-      var refs = [];
-      var refsNew = [];
+      const refs = [];
+      const refsNew = [];
+      const constructorHandlers = /* @__PURE__ */ new Map();
+      constructorHandlers.set(Date, (o) => new Date(o));
+      constructorHandlers.set(Map, (o, fn) => new Map(cloneArray(Array.from(o), fn)));
+      constructorHandlers.set(Set, (o, fn) => new Set(cloneArray(Array.from(o), fn)));
+      if (opts.constructorHandlers) {
+        for (const handler2 of opts.constructorHandlers) {
+          constructorHandlers.set(handler2[0], handler2[1]);
+        }
+      }
+      let handler = null;
       return opts.proto ? cloneProto : clone;
       function cloneArray(a, fn) {
-        var keys = Object.keys(a);
-        var a2 = new Array(keys.length);
-        for (var i = 0; i < keys.length; i++) {
-          var k = keys[i];
-          var cur = a[k];
+        const keys = Object.keys(a);
+        const a2 = new Array(keys.length);
+        for (let i = 0; i < keys.length; i++) {
+          const k = keys[i];
+          const cur = a[k];
           if (typeof cur !== "object" || cur === null) {
             a2[k] = cur;
-          } else if (cur instanceof Date) {
-            a2[k] = new Date(cur);
+          } else if (cur.constructor !== Object && (handler = constructorHandlers.get(cur.constructor))) {
+            a2[k] = handler(cur, fn);
           } else if (ArrayBuffer.isView(cur)) {
             a2[k] = copyBuffer(cur);
           } else {
-            var index = refs.indexOf(cur);
+            const index = refs.indexOf(cur);
             if (index !== -1) {
               a2[k] = refsNew[index];
             } else {
@@ -163,35 +157,25 @@ var require_rfdc = __commonJS({
         return a2;
       }
       function clone(o) {
-        if (typeof o !== "object" || o === null)
-          return o;
-        if (o instanceof Date)
-          return new Date(o);
-        if (Array.isArray(o))
-          return cloneArray(o, clone);
-        if (o instanceof Map)
-          return new Map(cloneArray(Array.from(o), clone));
-        if (o instanceof Set)
-          return new Set(cloneArray(Array.from(o), clone));
-        var o2 = {};
+        if (typeof o !== "object" || o === null) return o;
+        if (Array.isArray(o)) return cloneArray(o, clone);
+        if (o.constructor !== Object && (handler = constructorHandlers.get(o.constructor))) {
+          return handler(o, clone);
+        }
+        const o2 = {};
         refs.push(o);
         refsNew.push(o2);
-        for (var k in o) {
-          if (Object.hasOwnProperty.call(o, k) === false)
-            continue;
-          var cur = o[k];
+        for (const k in o) {
+          if (Object.hasOwnProperty.call(o, k) === false) continue;
+          const cur = o[k];
           if (typeof cur !== "object" || cur === null) {
             o2[k] = cur;
-          } else if (cur instanceof Date) {
-            o2[k] = new Date(cur);
-          } else if (cur instanceof Map) {
-            o2[k] = new Map(cloneArray(Array.from(cur), clone));
-          } else if (cur instanceof Set) {
-            o2[k] = new Set(cloneArray(Array.from(cur), clone));
+          } else if (cur.constructor !== Object && (handler = constructorHandlers.get(cur.constructor))) {
+            o2[k] = handler(cur, clone);
           } else if (ArrayBuffer.isView(cur)) {
             o2[k] = copyBuffer(cur);
           } else {
-            var i = refs.indexOf(cur);
+            const i = refs.indexOf(cur);
             if (i !== -1) {
               o2[k] = refsNew[i];
             } else {
@@ -204,33 +188,24 @@ var require_rfdc = __commonJS({
         return o2;
       }
       function cloneProto(o) {
-        if (typeof o !== "object" || o === null)
-          return o;
-        if (o instanceof Date)
-          return new Date(o);
-        if (Array.isArray(o))
-          return cloneArray(o, cloneProto);
-        if (o instanceof Map)
-          return new Map(cloneArray(Array.from(o), cloneProto));
-        if (o instanceof Set)
-          return new Set(cloneArray(Array.from(o), cloneProto));
-        var o2 = {};
+        if (typeof o !== "object" || o === null) return o;
+        if (Array.isArray(o)) return cloneArray(o, cloneProto);
+        if (o.constructor !== Object && (handler = constructorHandlers.get(o.constructor))) {
+          return handler(o, cloneProto);
+        }
+        const o2 = {};
         refs.push(o);
         refsNew.push(o2);
-        for (var k in o) {
-          var cur = o[k];
+        for (const k in o) {
+          const cur = o[k];
           if (typeof cur !== "object" || cur === null) {
             o2[k] = cur;
-          } else if (cur instanceof Date) {
-            o2[k] = new Date(cur);
-          } else if (cur instanceof Map) {
-            o2[k] = new Map(cloneArray(Array.from(cur), cloneProto));
-          } else if (cur instanceof Set) {
-            o2[k] = new Set(cloneArray(Array.from(cur), cloneProto));
+          } else if (cur.constructor !== Object && (handler = constructorHandlers.get(cur.constructor))) {
+            o2[k] = handler(cur, cloneProto);
           } else if (ArrayBuffer.isView(cur)) {
             o2[k] = copyBuffer(cur);
           } else {
-            var i = refs.indexOf(cur);
+            const i = refs.indexOf(cur);
             if (i !== -1) {
               o2[k] = refsNew[i];
             } else {
@@ -247,45 +222,123 @@ var require_rfdc = __commonJS({
 });
 init_esm_shims();
 init_esm_shims();
+init_esm_shims();
 var isBrowser = typeof navigator !== "undefined";
-var target = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {};
+var target = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : typeof global !== "undefined" ? global : {};
 var isInChromePanel = typeof target.chrome !== "undefined" && !!target.chrome.devtools;
 var isInIframe = isBrowser && target.self !== target.top;
 var isInElectron = typeof navigator !== "undefined" && navigator.userAgent.toLowerCase().includes("electron");
 var isNuxtApp = typeof window !== "undefined" && !!window.__NUXT__;
 init_esm_shims();
 var import_rfdc = __toESM(require_rfdc(), 1);
+var classifyRE = /(?:^|[-_/])(\w)/g;
+function toUpper(_, c) {
+  return c ? c.toUpperCase() : "";
+}
+function classify(str) {
+  return str && `${str}`.replace(classifyRE, toUpper);
+}
+function basename(filename, ext) {
+  const normalizedFilename = filename.replace(/^[a-z]:/i, "").replace(/\\/g, "/");
+  const lastSlashIndex = normalizedFilename.lastIndexOf("/");
+  const baseNameWithExt = normalizedFilename.substring(lastSlashIndex + 1);
+  if (ext) {
+    const extIndex = baseNameWithExt.lastIndexOf(ext);
+    return baseNameWithExt.substring(0, extIndex);
+  }
+  return "";
+}
+var HTTP_URL_RE = /^https?:\/\//;
+function isUrlString(str) {
+  return str.startsWith("/") || HTTP_URL_RE.test(str);
+}
 var deepClone = (0, import_rfdc.default)({ circles: true });
-init_esm_shims();
+
+// ../../node_modules/perfect-debounce/dist/index.mjs
+var DEBOUNCE_DEFAULTS = {
+  trailing: true
+};
+function debounce(fn, wait = 25, options = {}) {
+  options = { ...DEBOUNCE_DEFAULTS, ...options };
+  if (!Number.isFinite(wait)) {
+    throw new TypeError("Expected `wait` to be a finite number");
+  }
+  let leadingValue;
+  let timeout;
+  let resolveList = [];
+  let currentPromise;
+  let trailingArgs;
+  const applyFn = (_this, args) => {
+    currentPromise = _applyPromised(fn, _this, args);
+    currentPromise.finally(() => {
+      currentPromise = null;
+      if (options.trailing && trailingArgs && !timeout) {
+        const promise = applyFn(_this, trailingArgs);
+        trailingArgs = null;
+        return promise;
+      }
+    });
+    return currentPromise;
+  };
+  return function(...args) {
+    if (currentPromise) {
+      if (options.trailing) {
+        trailingArgs = args;
+      }
+      return currentPromise;
+    }
+    return new Promise((resolve) => {
+      const shouldCallNow = !timeout && options.leading;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        timeout = null;
+        const promise = options.leading ? leadingValue : applyFn(this, args);
+        for (const _resolve of resolveList) {
+          _resolve(promise);
+        }
+        resolveList = [];
+      }, wait);
+      if (shouldCallNow) {
+        leadingValue = applyFn(this, args);
+        resolve(leadingValue);
+      } else {
+        resolveList.push(resolve);
+      }
+    });
+  };
+}
+async function _applyPromised(fn, _this, args) {
+  return await fn.apply(_this, args);
+}
 
 // ../../node_modules/hookable/dist/index.mjs
-function flatHooks(configHooks, hooks = {}, parentName) {
+function flatHooks(configHooks, hooks2 = {}, parentName) {
   for (const key in configHooks) {
     const subHook = configHooks[key];
     const name = parentName ? `${parentName}:${key}` : key;
     if (typeof subHook === "object" && subHook !== null) {
-      flatHooks(subHook, hooks, name);
+      flatHooks(subHook, hooks2, name);
     } else if (typeof subHook === "function") {
-      hooks[name] = subHook;
+      hooks2[name] = subHook;
     }
   }
-  return hooks;
+  return hooks2;
 }
 var defaultTask = { run: (function_) => function_() };
 var _createTask = () => defaultTask;
 var createTask = typeof console.createTask !== "undefined" ? console.createTask : _createTask;
-function serialTaskCaller(hooks, args) {
+function serialTaskCaller(hooks2, args) {
   const name = args.shift();
   const task = createTask(name);
-  return hooks.reduce(
+  return hooks2.reduce(
     (promise, hookFunction) => promise.then(() => task.run(() => hookFunction(...args))),
     Promise.resolve()
   );
 }
-function parallelTaskCaller(hooks, args) {
+function parallelTaskCaller(hooks2, args) {
   const name = args.shift();
   const task = createTask(name);
-  return Promise.all(hooks.map((hook2) => task.run(() => hook2(...args))));
+  return Promise.all(hooks2.map((hook2) => task.run(() => hook2(...args))));
 }
 function callEachWith(callbacks, arg0) {
   for (const callback of [...callbacks]) {
@@ -384,9 +437,9 @@ var Hookable = class {
     }
   }
   addHooks(configHooks) {
-    const hooks = flatHooks(configHooks);
-    const removeFns = Object.keys(hooks).map(
-      (key) => this.hook(key, hooks[key])
+    const hooks2 = flatHooks(configHooks);
+    const removeFns = Object.keys(hooks2).map(
+      (key) => this.hook(key, hooks2[key])
     );
     return () => {
       for (const unreg of removeFns.splice(0, removeFns.length)) {
@@ -395,9 +448,9 @@ var Hookable = class {
     };
   }
   removeHooks(configHooks) {
-    const hooks = flatHooks(configHooks);
-    for (const key in hooks) {
-      this.removeHook(key, hooks[key]);
+    const hooks2 = flatHooks(configHooks);
+    for (const key in hooks2) {
+      this.removeHook(key, hooks2[key]);
     }
   }
   removeAllHooks() {
@@ -463,62 +516,9 @@ function createHooks() {
   return new Hookable();
 }
 
-// ../../node_modules/perfect-debounce/dist/index.mjs
-var DEBOUNCE_DEFAULTS = {
-  trailing: true
-};
-function debounce(fn, wait = 25, options = {}) {
-  options = { ...DEBOUNCE_DEFAULTS, ...options };
-  if (!Number.isFinite(wait)) {
-    throw new TypeError("Expected `wait` to be a finite number");
-  }
-  let leadingValue;
-  let timeout;
-  let resolveList = [];
-  let currentPromise;
-  let trailingArgs;
-  const applyFn = (_this, args) => {
-    currentPromise = _applyPromised(fn, _this, args);
-    currentPromise.finally(() => {
-      currentPromise = null;
-      if (options.trailing && trailingArgs && !timeout) {
-        const promise = applyFn(_this, trailingArgs);
-        trailingArgs = null;
-        return promise;
-      }
-    });
-    return currentPromise;
-  };
-  return function(...args) {
-    if (currentPromise) {
-      if (options.trailing) {
-        trailingArgs = args;
-      }
-      return currentPromise;
-    }
-    return new Promise((resolve) => {
-      const shouldCallNow = !timeout && options.leading;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        timeout = null;
-        const promise = options.leading ? leadingValue : applyFn(this, args);
-        for (const _resolve of resolveList) {
-          _resolve(promise);
-        }
-        resolveList = [];
-      }, wait);
-      if (shouldCallNow) {
-        leadingValue = applyFn(this, args);
-        resolve(leadingValue);
-      } else {
-        resolveList.push(resolve);
-      }
-    });
-  };
-}
-async function _applyPromised(fn, _this, args) {
-  return await fn.apply(_this, args);
-}
+// ../../node_modules/birpc/dist/index.mjs
+var { clearTimeout: clearTimeout2, setTimeout: setTimeout2 } = globalThis;
+var random = Math.random.bind(Math);
 
 // ../../node_modules/@vue/devtools-kit/dist/index.js
 var __create2 = Object.create;
@@ -541,16 +541,16 @@ var __copyProps2 = (to, from, except, desc) => {
   }
   return to;
 };
-var __toESM2 = (mod, isNodeMode, target10) => (target10 = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(
+var __toESM2 = (mod, isNodeMode, target22) => (target22 = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(
   // If the importer is in node compatibility mode or this is not an ESM
   // file that has been converted to a CommonJS file using a Babel-
   // compatible transform (i.e. "__esModule" has not been set), then set
   // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp2(target10, "default", { value: mod, enumerable: true }) : target10,
+  isNodeMode || !mod || !mod.__esModule ? __defProp2(target22, "default", { value: mod, enumerable: true }) : target22,
   mod
 ));
 var init_esm_shims2 = __esm2({
-  "../../node_modules/.pnpm/tsup@8.0.2_@microsoft+api-extractor@7.43.0_@types+node@20.12.12__postcss@8.4.38_typescript@5.4.5/node_modules/tsup/assets/esm_shims.js"() {
+  "../../node_modules/.pnpm/tsup@8.2.4_@microsoft+api-extractor@7.43.0_@types+node@20.16.5__@swc+core@1.5.29_jiti@1.21.6__hrrjfaj2jdrhlrlzgjkczhq5ey/node_modules/tsup/assets/esm_shims.js"() {
     "use strict";
   }
 });
@@ -2095,123 +2095,97 @@ init_esm_shims2();
 init_esm_shims2();
 init_esm_shims2();
 init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-var _a;
-var _b;
-var devtoolsHooks = (_b = (_a = target).__VUE_DEVTOOLS_HOOK) != null ? _b : _a.__VUE_DEVTOOLS_HOOK = createHooks();
-var on = {
-  vueAppInit(fn) {
-    devtoolsHooks.hook("app:init", fn);
-  },
-  vueAppUnmount(fn) {
-    devtoolsHooks.hook("app:unmount", fn);
-  },
-  vueAppConnected(fn) {
-    devtoolsHooks.hook("app:connected", fn);
-  },
-  componentAdded(fn) {
-    return devtoolsHooks.hook("component:added", fn);
-  },
-  componentUpdated(fn) {
-    return devtoolsHooks.hook("component:updated", fn);
-  },
-  componentRemoved(fn) {
-    return devtoolsHooks.hook("component:removed", fn);
-  },
-  setupDevtoolsPlugin(fn) {
-    devtoolsHooks.hook("devtools-plugin:setup", fn);
+function isReadonly(value) {
+  return !!(value && value[
+    "__v_isReadonly"
+    /* IS_READONLY */
+  ]);
+}
+function isReactive(value) {
+  if (isReadonly(value)) {
+    return isReactive(value[
+      "__v_raw"
+      /* RAW */
+    ]);
   }
-};
-var hook = {
-  on,
-  setupDevToolsPlugin(pluginDescriptor, setupFn) {
-    return devtoolsHooks.callHook("devtools-plugin:setup", pluginDescriptor, setupFn);
+  return !!(value && value[
+    "__v_isReactive"
+    /* IS_REACTIVE */
+  ]);
+}
+function isRef(r) {
+  return !!(r && r.__v_isRef === true);
+}
+function toRaw(observed) {
+  const raw = observed && observed[
+    "__v_raw"
+    /* RAW */
+  ];
+  return raw ? toRaw(raw) : observed;
+}
+var Fragment = Symbol.for("v-fgt");
+init_esm_shims2();
+function getComponentTypeName(options) {
+  return options.name || options._componentTag || options.__VUE_DEVTOOLS_COMPONENT_GUSSED_NAME__ || options.__name;
+}
+function getComponentFileName(options) {
+  const file = options.__file;
+  if (file)
+    return classify(basename(file, ".vue"));
+}
+function saveComponentGussedName(instance, name) {
+  instance.type.__VUE_DEVTOOLS_COMPONENT_GUSSED_NAME__ = name;
+  return name;
+}
+function getAppRecord(instance) {
+  if (instance.__VUE_DEVTOOLS_NEXT_APP_RECORD__)
+    return instance.__VUE_DEVTOOLS_NEXT_APP_RECORD__;
+  else if (instance.root)
+    return instance.appContext.app.__VUE_DEVTOOLS_NEXT_APP_RECORD__;
+}
+async function getComponentId(options) {
+  const { app, uid, instance } = options;
+  try {
+    if (instance.__VUE_DEVTOOLS_NEXT_UID__)
+      return instance.__VUE_DEVTOOLS_NEXT_UID__;
+    const appRecord = await getAppRecord(app);
+    if (!appRecord)
+      return null;
+    const isRoot = appRecord.rootInstance === instance;
+    return `${appRecord.id}:${isRoot ? "root" : uid}`;
+  } catch (e) {
   }
-};
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-var import_speakingurl = __toESM2(require_speakingurl2(), 1);
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-var _a2;
-var _b2;
-var apiHooks = (_b2 = (_a2 = target).__VUE_DEVTOOLS_API_HOOK) != null ? _b2 : _a2.__VUE_DEVTOOLS_API_HOOK = createHooks();
-function getRoutes(router) {
-  const routesMap = /* @__PURE__ */ new Map();
-  return ((router == null ? void 0 : router.getRoutes()) || []).filter((i) => !routesMap.has(i.path) && routesMap.set(i.path, 1));
 }
-function filterRoutes(routes) {
-  return routes.map((item) => {
-    let { path, name, children } = item;
-    if (children == null ? void 0 : children.length)
-      children = filterRoutes(children);
-    return {
-      path,
-      name,
-      children
-    };
-  });
+function isFragment(instance) {
+  var _a25;
+  const subTreeType = (_a25 = instance.subTree) == null ? void 0 : _a25.type;
+  return subTreeType === Fragment;
 }
-function filterCurrentRoute(route) {
-  if (route) {
-    const { fullPath, hash, href, path, name, matched, params, query } = route;
-    return {
-      fullPath,
-      hash,
-      href,
-      path,
-      name,
-      params,
-      query,
-      matched: filterRoutes(matched)
-    };
+function getInstanceName(instance) {
+  var _a25, _b25, _c;
+  const name = getComponentTypeName((instance == null ? void 0 : instance.type) || {});
+  if (name)
+    return name;
+  if ((instance == null ? void 0 : instance.root) === instance)
+    return "Root";
+  for (const key in (_b25 = (_a25 = instance.parent) == null ? void 0 : _a25.type) == null ? void 0 : _b25.components) {
+    if (instance.parent.type.components[key] === (instance == null ? void 0 : instance.type))
+      return saveComponentGussedName(instance, key);
   }
-  return route;
-}
-function normalizeRouterInfo(appRecord, state) {
-  function init() {
-    var _a10;
-    const router = (_a10 = appRecord.app) == null ? void 0 : _a10.config.globalProperties.$router;
-    const currentRoute = filterCurrentRoute(router == null ? void 0 : router.currentRoute.value);
-    const routes = filterRoutes(getRoutes(router));
-    const c = console.warn;
-    console.warn = () => {
-    };
-    target[ROUTER_INFO_KEY] = {
-      currentRoute: currentRoute ? deepClone(currentRoute) : {},
-      routes: deepClone(routes)
-    };
-    target[ROUTER_KEY] = router;
-    console.warn = c;
+  for (const key in (_c = instance.appContext) == null ? void 0 : _c.components) {
+    if (instance.appContext.components[key] === (instance == null ? void 0 : instance.type))
+      return saveComponentGussedName(instance, key);
   }
-  init();
-  hook.on.componentUpdated(debounce(() => {
-    var _a10;
-    if (((_a10 = state.activeAppRecord) == null ? void 0 : _a10.app) !== appRecord.app)
-      return;
-    init();
-    apiHooks.callHook("router-info:updated", target[ROUTER_INFO_KEY]);
-  }, 200));
+  const fileName = getComponentFileName((instance == null ? void 0 : instance.type) || {});
+  if (fileName)
+    return fileName;
+  return "Anonymous Component";
 }
-function setupDevToolsPlugin(pluginDescriptor, setupFn) {
-  return hook.setupDevToolsPlugin(pluginDescriptor, setupFn);
+function getComponentInstance(appRecord, instanceId) {
+  instanceId = instanceId || `${appRecord.id}:root`;
+  const instance = appRecord.instanceMap.get(instanceId);
+  return instance || appRecord.instanceMap.get(":root");
 }
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
 var StateEditor = class {
   constructor() {
     this.refEditor = new RefStateEditor();
@@ -2225,8 +2199,7 @@ var StateEditor = class {
         object = object.get(section);
       if (object instanceof Set)
         object = Array.from(object.values())[section];
-      else
-        object = object[section];
+      else object = object[section];
       if (this.refEditor.isRef(object))
         object = this.refEditor.get(object);
     }
@@ -2279,13 +2252,12 @@ var StateEditor = class {
           object.delete(field);
         else if (toRaw(object) instanceof Set)
           object.delete(Array.from(object.values())[field]);
-        else
-          Reflect.deleteProperty(object, field);
+        else Reflect.deleteProperty(object, field);
       }
       if (!state.remove) {
-        const target10 = object[state.newKey || field];
-        if (this.refEditor.isRef(target10))
-          this.refEditor.set(target10, value);
+        const target22 = object[state.newKey || field];
+        if (this.refEditor.isRef(target22))
+          this.refEditor.set(target22, value);
         else if (toRaw(object) instanceof Map)
           object.set(state.newKey || field, value);
         else if (toRaw(object) instanceof Set)
@@ -2333,6 +2305,971 @@ var RefStateEditor = class {
 };
 var stateEditor = new StateEditor();
 init_esm_shims2();
+function getRootElementsFromComponentInstance(instance) {
+  if (isFragment(instance))
+    return getFragmentRootElements(instance.subTree);
+  if (!instance.subTree)
+    return [];
+  return [instance.subTree.el];
+}
+function getFragmentRootElements(vnode) {
+  if (!vnode.children)
+    return [];
+  const list = [];
+  vnode.children.forEach((childVnode) => {
+    if (childVnode.component)
+      list.push(...getRootElementsFromComponentInstance(childVnode.component));
+    else if (childVnode == null ? void 0 : childVnode.el)
+      list.push(childVnode.el);
+  });
+  return list;
+}
+init_esm_shims2();
+init_esm_shims2();
+function createRect() {
+  const rect = {
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    get width() {
+      return rect.right - rect.left;
+    },
+    get height() {
+      return rect.bottom - rect.top;
+    }
+  };
+  return rect;
+}
+var range;
+function getTextRect(node) {
+  if (!range)
+    range = document.createRange();
+  range.selectNode(node);
+  return range.getBoundingClientRect();
+}
+function getFragmentRect(vnode) {
+  const rect = createRect();
+  if (!vnode.children)
+    return rect;
+  for (let i = 0, l = vnode.children.length; i < l; i++) {
+    const childVnode = vnode.children[i];
+    let childRect;
+    if (childVnode.component) {
+      childRect = getComponentBoundingRect(childVnode.component);
+    } else if (childVnode.el) {
+      const el = childVnode.el;
+      if (el.nodeType === 1 || el.getBoundingClientRect)
+        childRect = el.getBoundingClientRect();
+      else if (el.nodeType === 3 && el.data.trim())
+        childRect = getTextRect(el);
+    }
+    if (childRect)
+      mergeRects(rect, childRect);
+  }
+  return rect;
+}
+function mergeRects(a, b) {
+  if (!a.top || b.top < a.top)
+    a.top = b.top;
+  if (!a.bottom || b.bottom > a.bottom)
+    a.bottom = b.bottom;
+  if (!a.left || b.left < a.left)
+    a.left = b.left;
+  if (!a.right || b.right > a.right)
+    a.right = b.right;
+  return a;
+}
+var DEFAULT_RECT = {
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  width: 0,
+  height: 0
+};
+function getComponentBoundingRect(instance) {
+  const el = instance.subTree.el;
+  if (typeof window === "undefined") {
+    return DEFAULT_RECT;
+  }
+  if (isFragment(instance))
+    return getFragmentRect(instance.subTree);
+  else if ((el == null ? void 0 : el.nodeType) === 1)
+    return el == null ? void 0 : el.getBoundingClientRect();
+  else if (instance.subTree.component)
+    return getComponentBoundingRect(instance.subTree.component);
+  else
+    return DEFAULT_RECT;
+}
+var CONTAINER_ELEMENT_ID = "__vue-devtools-component-inspector__";
+var CARD_ELEMENT_ID = "__vue-devtools-component-inspector__card__";
+var COMPONENT_NAME_ELEMENT_ID = "__vue-devtools-component-inspector__name__";
+var INDICATOR_ELEMENT_ID = "__vue-devtools-component-inspector__indicator__";
+var containerStyles = {
+  display: "block",
+  zIndex: 2147483640,
+  position: "fixed",
+  backgroundColor: "#42b88325",
+  border: "1px solid #42b88350",
+  borderRadius: "5px",
+  transition: "all 0.1s ease-in",
+  pointerEvents: "none"
+};
+var cardStyles = {
+  fontFamily: "Arial, Helvetica, sans-serif",
+  padding: "5px 8px",
+  borderRadius: "4px",
+  textAlign: "left",
+  position: "absolute",
+  left: 0,
+  color: "#e9e9e9",
+  fontSize: "14px",
+  fontWeight: 600,
+  lineHeight: "24px",
+  backgroundColor: "#42b883",
+  boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)"
+};
+var indicatorStyles = {
+  display: "inline-block",
+  fontWeight: 400,
+  fontStyle: "normal",
+  fontSize: "12px",
+  opacity: 0.7
+};
+function getContainerElement() {
+  return document.getElementById(CONTAINER_ELEMENT_ID);
+}
+function getCardElement() {
+  return document.getElementById(CARD_ELEMENT_ID);
+}
+function getIndicatorElement() {
+  return document.getElementById(INDICATOR_ELEMENT_ID);
+}
+function getNameElement() {
+  return document.getElementById(COMPONENT_NAME_ELEMENT_ID);
+}
+function getStyles(bounds) {
+  return {
+    left: `${Math.round(bounds.left * 100) / 100}px`,
+    top: `${Math.round(bounds.top * 100) / 100}px`,
+    width: `${Math.round(bounds.width * 100) / 100}px`,
+    height: `${Math.round(bounds.height * 100) / 100}px`
+  };
+}
+function create(options) {
+  var _a25;
+  const containerEl = document.createElement("div");
+  containerEl.id = (_a25 = options.elementId) != null ? _a25 : CONTAINER_ELEMENT_ID;
+  Object.assign(containerEl.style, {
+    ...containerStyles,
+    ...getStyles(options.bounds),
+    ...options.style
+  });
+  const cardEl = document.createElement("span");
+  cardEl.id = CARD_ELEMENT_ID;
+  Object.assign(cardEl.style, {
+    ...cardStyles,
+    top: options.bounds.top < 35 ? 0 : "-35px"
+  });
+  const nameEl = document.createElement("span");
+  nameEl.id = COMPONENT_NAME_ELEMENT_ID;
+  nameEl.innerHTML = `&lt;${options.name}&gt;&nbsp;&nbsp;`;
+  const indicatorEl = document.createElement("i");
+  indicatorEl.id = INDICATOR_ELEMENT_ID;
+  indicatorEl.innerHTML = `${Math.round(options.bounds.width * 100) / 100} x ${Math.round(options.bounds.height * 100) / 100}`;
+  Object.assign(indicatorEl.style, indicatorStyles);
+  cardEl.appendChild(nameEl);
+  cardEl.appendChild(indicatorEl);
+  containerEl.appendChild(cardEl);
+  document.body.appendChild(containerEl);
+  return containerEl;
+}
+function update(options) {
+  const containerEl = getContainerElement();
+  const cardEl = getCardElement();
+  const nameEl = getNameElement();
+  const indicatorEl = getIndicatorElement();
+  if (containerEl) {
+    Object.assign(containerEl.style, {
+      ...containerStyles,
+      ...getStyles(options.bounds)
+    });
+    Object.assign(cardEl.style, {
+      top: options.bounds.top < 35 ? 0 : "-35px"
+    });
+    nameEl.innerHTML = `&lt;${options.name}&gt;&nbsp;&nbsp;`;
+    indicatorEl.innerHTML = `${Math.round(options.bounds.width * 100) / 100} x ${Math.round(options.bounds.height * 100) / 100}`;
+  }
+}
+function highlight(instance) {
+  const bounds = getComponentBoundingRect(instance);
+  const name = getInstanceName(instance);
+  const container = getContainerElement();
+  container ? update({ bounds, name }) : create({ bounds, name });
+}
+function unhighlight() {
+  const el = getContainerElement();
+  if (el)
+    el.style.display = "none";
+}
+var inspectInstance = null;
+function inspectFn(e) {
+  const target22 = e.target;
+  if (target22) {
+    const instance = target22.__vueParentComponent;
+    if (instance) {
+      inspectInstance = instance;
+      const el = instance.vnode.el;
+      if (el) {
+        const bounds = getComponentBoundingRect(instance);
+        const name = getInstanceName(instance);
+        const container = getContainerElement();
+        container ? update({ bounds, name }) : create({ bounds, name });
+      }
+    }
+  }
+}
+function selectComponentFn(e, cb) {
+  var _a25;
+  e.preventDefault();
+  e.stopPropagation();
+  if (inspectInstance) {
+    const app = (_a25 = activeAppRecord.value) == null ? void 0 : _a25.app;
+    getComponentId({
+      app,
+      uid: app.uid,
+      instance: inspectInstance
+    }).then((id) => {
+      cb(id);
+    });
+  }
+}
+var inspectComponentHighLighterSelectFn = null;
+function cancelInspectComponentHighLighter() {
+  unhighlight();
+  window.removeEventListener("mouseover", inspectFn);
+  window.removeEventListener("click", inspectComponentHighLighterSelectFn, true);
+  inspectComponentHighLighterSelectFn = null;
+}
+function inspectComponentHighLighter() {
+  window.addEventListener("mouseover", inspectFn);
+  return new Promise((resolve) => {
+    function onSelect(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      selectComponentFn(e, (id) => {
+        window.removeEventListener("click", onSelect, true);
+        inspectComponentHighLighterSelectFn = null;
+        window.removeEventListener("mouseover", inspectFn);
+        const el = getContainerElement();
+        if (el)
+          el.style.display = "none";
+        resolve(JSON.stringify({ id }));
+      });
+    }
+    inspectComponentHighLighterSelectFn = onSelect;
+    window.addEventListener("click", onSelect, true);
+  });
+}
+function scrollToComponent(options) {
+  const instance = getComponentInstance(activeAppRecord.value, options.id);
+  if (instance) {
+    const [el] = getRootElementsFromComponentInstance(instance);
+    if (typeof el.scrollIntoView === "function") {
+      el.scrollIntoView({
+        behavior: "smooth"
+      });
+    } else {
+      const bounds = getComponentBoundingRect(instance);
+      const scrollTarget = document.createElement("div");
+      const styles = {
+        ...getStyles(bounds),
+        position: "absolute"
+      };
+      Object.assign(scrollTarget.style, styles);
+      document.body.appendChild(scrollTarget);
+      scrollTarget.scrollIntoView({
+        behavior: "smooth"
+      });
+      setTimeout(() => {
+        document.body.removeChild(scrollTarget);
+      }, 2e3);
+    }
+    setTimeout(() => {
+      const bounds = getComponentBoundingRect(instance);
+      if (bounds.width || bounds.height) {
+        const name = getInstanceName(instance);
+        const el2 = getContainerElement();
+        el2 ? update({ ...options, name, bounds }) : create({ ...options, name, bounds });
+        setTimeout(() => {
+          if (el2)
+            el2.style.display = "none";
+        }, 1500);
+      }
+    }, 1200);
+  }
+}
+init_esm_shims2();
+var _a;
+var _b;
+(_b = (_a = target).__VUE_DEVTOOLS_COMPONENT_INSPECTOR_ENABLED__) != null ? _b : _a.__VUE_DEVTOOLS_COMPONENT_INSPECTOR_ENABLED__ = true;
+function waitForInspectorInit(cb) {
+  let total = 0;
+  const timer = setInterval(() => {
+    if (target.__VUE_INSPECTOR__) {
+      clearInterval(timer);
+      total += 30;
+      cb();
+    }
+    if (total >= /* 5s */
+    5e3)
+      clearInterval(timer);
+  }, 30);
+}
+function setupInspector() {
+  const inspector = target.__VUE_INSPECTOR__;
+  const _openInEditor = inspector.openInEditor;
+  inspector.openInEditor = async (...params) => {
+    inspector.disable();
+    _openInEditor(...params);
+  };
+}
+function getComponentInspector() {
+  return new Promise((resolve) => {
+    function setup() {
+      setupInspector();
+      resolve(target.__VUE_INSPECTOR__);
+    }
+    if (!target.__VUE_INSPECTOR__) {
+      waitForInspectorInit(() => {
+        setup();
+      });
+    } else {
+      setup();
+    }
+  });
+}
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+var _a2;
+var _b2;
+(_b2 = (_a2 = target).__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS) != null ? _b2 : _a2.__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS = [];
+var devtoolsTimelineLayers = new Proxy(target.__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS, {
+  get(target22, prop, receiver) {
+    return Reflect.get(target22, prop, receiver);
+  }
+});
+function addTimelineLayer(options, descriptor) {
+  devtoolsTimelineLayers.push({
+    ...options,
+    descriptorId: descriptor.id,
+    appRecord: getAppRecord(descriptor.app)
+  });
+}
+var _a3;
+var _b3;
+(_b3 = (_a3 = target).__VUE_DEVTOOLS_KIT_INSPECTOR__) != null ? _b3 : _a3.__VUE_DEVTOOLS_KIT_INSPECTOR__ = [];
+var devtoolsInspector = new Proxy(target.__VUE_DEVTOOLS_KIT_INSPECTOR__, {
+  get(target22, prop, receiver) {
+    return Reflect.get(target22, prop, receiver);
+  }
+});
+var callInspectorUpdatedHook = debounce(() => {
+  devtoolsContext.hooks.callHook("sendInspectorToClient", getActiveInspectors());
+});
+function addInspector(inspector, descriptor) {
+  devtoolsInspector.push({
+    options: inspector,
+    descriptor,
+    treeFilter: "",
+    selectedNodeId: "",
+    appRecord: getAppRecord(descriptor.app)
+  });
+  callInspectorUpdatedHook();
+}
+function getActiveInspectors() {
+  return devtoolsInspector.filter((inspector) => inspector.descriptor.app === activeAppRecord.value.app).filter((inspector) => inspector.descriptor.id !== "components").map((inspector) => {
+    var _a25;
+    const descriptor = inspector.descriptor;
+    const options = inspector.options;
+    return {
+      id: options.id,
+      label: options.label,
+      logo: descriptor.logo,
+      icon: `custom-ic-baseline-${(_a25 = options == null ? void 0 : options.icon) == null ? void 0 : _a25.replace(/_/g, "-")}`,
+      packageName: descriptor.packageName,
+      homepage: descriptor.homepage
+    };
+  });
+}
+function getInspector(id, app) {
+  return devtoolsInspector.find((inspector) => inspector.options.id === id && (app ? inspector.descriptor.app === app : true));
+}
+var DevToolsV6PluginAPIHookKeys = ((DevToolsV6PluginAPIHookKeys2) => {
+  DevToolsV6PluginAPIHookKeys2["VISIT_COMPONENT_TREE"] = "visitComponentTree";
+  DevToolsV6PluginAPIHookKeys2["INSPECT_COMPONENT"] = "inspectComponent";
+  DevToolsV6PluginAPIHookKeys2["EDIT_COMPONENT_STATE"] = "editComponentState";
+  DevToolsV6PluginAPIHookKeys2["GET_INSPECTOR_TREE"] = "getInspectorTree";
+  DevToolsV6PluginAPIHookKeys2["GET_INSPECTOR_STATE"] = "getInspectorState";
+  DevToolsV6PluginAPIHookKeys2["EDIT_INSPECTOR_STATE"] = "editInspectorState";
+  DevToolsV6PluginAPIHookKeys2["INSPECT_TIMELINE_EVENT"] = "inspectTimelineEvent";
+  DevToolsV6PluginAPIHookKeys2["TIMELINE_CLEARED"] = "timelineCleared";
+  DevToolsV6PluginAPIHookKeys2["SET_PLUGIN_SETTINGS"] = "setPluginSettings";
+  return DevToolsV6PluginAPIHookKeys2;
+})(DevToolsV6PluginAPIHookKeys || {});
+var DevToolsContextHookKeys = ((DevToolsContextHookKeys2) => {
+  DevToolsContextHookKeys2["ADD_INSPECTOR"] = "addInspector";
+  DevToolsContextHookKeys2["SEND_INSPECTOR_TREE"] = "sendInspectorTree";
+  DevToolsContextHookKeys2["SEND_INSPECTOR_STATE"] = "sendInspectorState";
+  DevToolsContextHookKeys2["CUSTOM_INSPECTOR_SELECT_NODE"] = "customInspectorSelectNode";
+  DevToolsContextHookKeys2["TIMELINE_LAYER_ADDED"] = "timelineLayerAdded";
+  DevToolsContextHookKeys2["TIMELINE_EVENT_ADDED"] = "timelineEventAdded";
+  DevToolsContextHookKeys2["GET_COMPONENT_INSTANCES"] = "getComponentInstances";
+  DevToolsContextHookKeys2["GET_COMPONENT_BOUNDS"] = "getComponentBounds";
+  DevToolsContextHookKeys2["GET_COMPONENT_NAME"] = "getComponentName";
+  DevToolsContextHookKeys2["COMPONENT_HIGHLIGHT"] = "componentHighlight";
+  DevToolsContextHookKeys2["COMPONENT_UNHIGHLIGHT"] = "componentUnhighlight";
+  return DevToolsContextHookKeys2;
+})(DevToolsContextHookKeys || {});
+var DevToolsMessagingHookKeys = ((DevToolsMessagingHookKeys2) => {
+  DevToolsMessagingHookKeys2["SEND_INSPECTOR_TREE_TO_CLIENT"] = "sendInspectorTreeToClient";
+  DevToolsMessagingHookKeys2["SEND_INSPECTOR_STATE_TO_CLIENT"] = "sendInspectorStateToClient";
+  DevToolsMessagingHookKeys2["SEND_TIMELINE_EVENT_TO_CLIENT"] = "sendTimelineEventToClient";
+  DevToolsMessagingHookKeys2["SEND_INSPECTOR_TO_CLIENT"] = "sendInspectorToClient";
+  DevToolsMessagingHookKeys2["SEND_ACTIVE_APP_UNMOUNTED_TO_CLIENT"] = "sendActiveAppUpdatedToClient";
+  DevToolsMessagingHookKeys2["DEVTOOLS_STATE_UPDATED"] = "devtoolsStateUpdated";
+  DevToolsMessagingHookKeys2["DEVTOOLS_CONNECTED_UPDATED"] = "devtoolsConnectedUpdated";
+  DevToolsMessagingHookKeys2["ROUTER_INFO_UPDATED"] = "routerInfoUpdated";
+  return DevToolsMessagingHookKeys2;
+})(DevToolsMessagingHookKeys || {});
+function createDevToolsCtxHooks() {
+  const hooks2 = createHooks();
+  hooks2.hook("addInspector", ({ inspector, plugin }) => {
+    addInspector(inspector, plugin.descriptor);
+  });
+  hooks2.hook("sendInspectorTree", async ({ inspectorId, plugin }) => {
+    var _a25;
+    if (!inspectorId || !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null ? void 0 : _a25.app))
+      return;
+    const inspector = getInspector(inspectorId, plugin.descriptor.app);
+    const _payload = {
+      app: plugin.descriptor.app,
+      inspectorId,
+      filter: (inspector == null ? void 0 : inspector.treeFilter) || "",
+      rootNodes: []
+    };
+    await new Promise((resolve) => {
+      hooks2.callHookWith(
+        async (callbacks) => {
+          await Promise.all(callbacks.map((cb) => cb(_payload)));
+          resolve();
+        },
+        "getInspectorTree"
+        /* GET_INSPECTOR_TREE */
+      );
+    });
+    hooks2.callHookWith(
+      async (callbacks) => {
+        await Promise.all(callbacks.map((cb) => cb({
+          inspectorId,
+          rootNodes: _payload.rootNodes
+        })));
+      },
+      "sendInspectorTreeToClient"
+      /* SEND_INSPECTOR_TREE_TO_CLIENT */
+    );
+  });
+  hooks2.hook("sendInspectorState", async ({ inspectorId, plugin }) => {
+    var _a25;
+    if (!inspectorId || !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null ? void 0 : _a25.app))
+      return;
+    const inspector = getInspector(inspectorId, plugin.descriptor.app);
+    const _payload = {
+      app: plugin.descriptor.app,
+      inspectorId,
+      nodeId: (inspector == null ? void 0 : inspector.selectedNodeId) || "",
+      state: null
+    };
+    const ctx = {
+      currentTab: `custom-inspector:${inspectorId}`
+    };
+    if (_payload.nodeId) {
+      await new Promise((resolve) => {
+        hooks2.callHookWith(
+          async (callbacks) => {
+            await Promise.all(callbacks.map((cb) => cb(_payload, ctx)));
+            resolve();
+          },
+          "getInspectorState"
+          /* GET_INSPECTOR_STATE */
+        );
+      });
+    }
+    hooks2.callHookWith(
+      async (callbacks) => {
+        await Promise.all(callbacks.map((cb) => cb({
+          inspectorId,
+          nodeId: _payload.nodeId,
+          state: _payload.state
+        })));
+      },
+      "sendInspectorStateToClient"
+      /* SEND_INSPECTOR_STATE_TO_CLIENT */
+    );
+  });
+  hooks2.hook("customInspectorSelectNode", ({ inspectorId, nodeId, plugin }) => {
+    const inspector = getInspector(inspectorId, plugin.descriptor.app);
+    if (!inspector)
+      return;
+    inspector.selectedNodeId = nodeId;
+  });
+  hooks2.hook("timelineLayerAdded", ({ options, plugin }) => {
+    addTimelineLayer(options, plugin.descriptor);
+  });
+  hooks2.hook("timelineEventAdded", ({ options, plugin }) => {
+    hooks2.callHookWith(
+      async (callbacks) => {
+        await Promise.all(callbacks.map((cb) => cb(options)));
+      },
+      "sendTimelineEventToClient"
+      /* SEND_TIMELINE_EVENT_TO_CLIENT */
+    );
+  });
+  hooks2.hook("getComponentInstances", async ({ app }) => {
+    const appRecord = app.__VUE_DEVTOOLS_NEXT_APP_RECORD__;
+    if (!appRecord)
+      return null;
+    const appId = appRecord.id.toString();
+    const instances = [...appRecord.instanceMap].filter(([key]) => key.split(":")[0] === appId).map(([, instance]) => instance);
+    return instances;
+  });
+  hooks2.hook("getComponentBounds", async ({ instance }) => {
+    const bounds = getComponentBoundingRect(instance);
+    return bounds;
+  });
+  hooks2.hook("getComponentName", ({ instance }) => {
+    const name = getInstanceName(instance);
+    return name;
+  });
+  hooks2.hook("componentHighlight", ({ uid }) => {
+    const instance = activeAppRecord.value.instanceMap.get(uid);
+    if (instance) {
+      highlight(instance);
+    }
+  });
+  hooks2.hook("componentUnhighlight", () => {
+    unhighlight();
+  });
+  return hooks2;
+}
+var _a4;
+var _b4;
+(_b4 = (_a4 = target).__VUE_DEVTOOLS_KIT_APP_RECORDS__) != null ? _b4 : _a4.__VUE_DEVTOOLS_KIT_APP_RECORDS__ = [];
+var _a5;
+var _b5;
+(_b5 = (_a5 = target).__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__) != null ? _b5 : _a5.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__ = {};
+var _a6;
+var _b6;
+(_b6 = (_a6 = target).__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD_ID__) != null ? _b6 : _a6.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD_ID__ = "";
+var _a7;
+var _b7;
+(_b7 = (_a7 = target).__VUE_DEVTOOLS_KIT_CUSTOM_TABS__) != null ? _b7 : _a7.__VUE_DEVTOOLS_KIT_CUSTOM_TABS__ = [];
+var _a8;
+var _b8;
+(_b8 = (_a8 = target).__VUE_DEVTOOLS_KIT_CUSTOM_COMMANDS__) != null ? _b8 : _a8.__VUE_DEVTOOLS_KIT_CUSTOM_COMMANDS__ = [];
+var STATE_KEY = "__VUE_DEVTOOLS_KIT_GLOBAL_STATE__";
+function initStateFactory() {
+  return {
+    connected: false,
+    clientConnected: false,
+    vitePluginDetected: true,
+    appRecords: [],
+    activeAppRecordId: "",
+    tabs: [],
+    commands: [],
+    highPerfModeEnabled: true,
+    devtoolsClientDetected: {}
+  };
+}
+var _a9;
+var _b9;
+(_b9 = (_a9 = target)[STATE_KEY]) != null ? _b9 : _a9[STATE_KEY] = initStateFactory();
+var callStateUpdatedHook = debounce((state) => {
+  devtoolsContext.hooks.callHook("devtoolsStateUpdated", { state });
+});
+var callConnectedUpdatedHook = debounce((state, oldState) => {
+  devtoolsContext.hooks.callHook("devtoolsConnectedUpdated", { state, oldState });
+});
+var devtoolsAppRecords = new Proxy(target.__VUE_DEVTOOLS_KIT_APP_RECORDS__, {
+  get(_target, prop, receiver) {
+    if (prop === "value")
+      return target.__VUE_DEVTOOLS_KIT_APP_RECORDS__;
+    return target.__VUE_DEVTOOLS_KIT_APP_RECORDS__[prop];
+  }
+});
+var activeAppRecord = new Proxy(target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__, {
+  get(_target, prop, receiver) {
+    if (prop === "value")
+      return target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__;
+    else if (prop === "id")
+      return target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD_ID__;
+    return target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__[prop];
+  }
+});
+function updateAllStates() {
+  callStateUpdatedHook({
+    ...target[STATE_KEY],
+    appRecords: devtoolsAppRecords.value,
+    activeAppRecordId: activeAppRecord.id,
+    tabs: target.__VUE_DEVTOOLS_KIT_CUSTOM_TABS__,
+    commands: target.__VUE_DEVTOOLS_KIT_CUSTOM_COMMANDS__
+  });
+}
+function setActiveAppRecord(app) {
+  target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__ = app;
+  updateAllStates();
+}
+function setActiveAppRecordId(id) {
+  target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD_ID__ = id;
+  updateAllStates();
+}
+var devtoolsState = new Proxy(target[STATE_KEY], {
+  get(target22, property) {
+    if (property === "appRecords") {
+      return devtoolsAppRecords;
+    } else if (property === "activeAppRecordId") {
+      return activeAppRecord.id;
+    } else if (property === "tabs") {
+      return target.__VUE_DEVTOOLS_KIT_CUSTOM_TABS__;
+    } else if (property === "commands") {
+      return target.__VUE_DEVTOOLS_KIT_CUSTOM_COMMANDS__;
+    }
+    return target[STATE_KEY][property];
+  },
+  deleteProperty(target22, property) {
+    delete target22[property];
+    return true;
+  },
+  set(target22, property, value) {
+    const oldState = { ...target[STATE_KEY] };
+    target22[property] = value;
+    target[STATE_KEY][property] = value;
+    return true;
+  }
+});
+function onDevToolsConnected(fn) {
+  return new Promise((resolve) => {
+    if (devtoolsState.connected) {
+      fn();
+      resolve();
+    }
+    devtoolsContext.hooks.hook("devtoolsConnectedUpdated", ({ state }) => {
+      if (state.connected) {
+        fn();
+        resolve();
+      }
+    });
+  });
+}
+var resolveIcon = (icon) => {
+  if (!icon)
+    return;
+  if (icon.startsWith("baseline-")) {
+    return `custom-ic-${icon}`;
+  }
+  if (icon.startsWith("i-") || isUrlString(icon))
+    return icon;
+  return `custom-ic-baseline-${icon}`;
+};
+function addCustomTab(tab) {
+  const tabs = target.__VUE_DEVTOOLS_KIT_CUSTOM_TABS__;
+  if (tabs.some((t) => t.name === tab.name))
+    return;
+  tabs.push({
+    ...tab,
+    icon: resolveIcon(tab.icon)
+  });
+  updateAllStates();
+}
+function addCustomCommand(action) {
+  const commands = target.__VUE_DEVTOOLS_KIT_CUSTOM_COMMANDS__;
+  if (commands.some((t) => t.id === action.id))
+    return;
+  commands.push({
+    ...action,
+    icon: resolveIcon(action.icon),
+    children: action.children ? action.children.map((child) => ({
+      ...child,
+      icon: resolveIcon(child.icon)
+    })) : void 0
+  });
+  updateAllStates();
+}
+function removeCustomCommand(actionId) {
+  const commands = target.__VUE_DEVTOOLS_KIT_CUSTOM_COMMANDS__;
+  const index = commands.findIndex((t) => t.id === actionId);
+  if (index === -1)
+    return;
+  commands.splice(index, 1);
+  updateAllStates();
+}
+function openInEditor(options = {}) {
+  var _a25, _b25, _c;
+  const { file, host, baseUrl = window.location.origin, line = 0, column = 0 } = options;
+  if (file) {
+    if (host === "chrome-extension") {
+      const fileName = file.replace(/\\/g, "\\\\");
+      const _baseUrl = (_b25 = (_a25 = window.VUE_DEVTOOLS_CONFIG) == null ? void 0 : _a25.openInEditorHost) != null ? _b25 : "/";
+      fetch(`${_baseUrl}__open-in-editor?file=${encodeURI(file)}`).then((response) => {
+        if (!response.ok) {
+          const msg = `Opening component ${fileName} failed`;
+          console.log(`%c${msg}`, "color:red");
+        }
+      });
+    } else if (devtoolsState.vitePluginDetected) {
+      const _baseUrl = (_c = target.__VUE_DEVTOOLS_OPEN_IN_EDITOR_BASE_URL__) != null ? _c : baseUrl;
+      target.__VUE_INSPECTOR__.openInEditor(_baseUrl, file, line, column);
+    }
+  }
+}
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+var _a10;
+var _b10;
+(_b10 = (_a10 = target).__VUE_DEVTOOLS_KIT_PLUGIN_BUFFER__) != null ? _b10 : _a10.__VUE_DEVTOOLS_KIT_PLUGIN_BUFFER__ = [];
+var devtoolsPluginBuffer = new Proxy(target.__VUE_DEVTOOLS_KIT_PLUGIN_BUFFER__, {
+  get(target22, prop, receiver) {
+    return Reflect.get(target22, prop, receiver);
+  }
+});
+function _getSettings(settings) {
+  const _settings = {};
+  Object.keys(settings).forEach((key) => {
+    _settings[key] = settings[key].defaultValue;
+  });
+  return _settings;
+}
+function getPluginLocalKey(pluginId) {
+  return `__VUE_DEVTOOLS_NEXT_PLUGIN_SETTINGS__${pluginId}__`;
+}
+function getPluginSettingsOptions(pluginId) {
+  var _a25, _b25, _c, _d;
+  const descriptor = (_a25 = getInspector(pluginId)) == null ? void 0 : _a25.descriptor;
+  const item = (_c = (_b25 = devtoolsPluginBuffer.find((item2) => item2[0].id === (descriptor == null ? void 0 : descriptor.id))) == null ? void 0 : _b25[0]) != null ? _c : null;
+  return (_d = item == null ? void 0 : item.settings) != null ? _d : null;
+}
+function getPluginSettings(pluginId, fallbackValue) {
+  var _a25, _b25, _c;
+  const localKey = getPluginLocalKey(pluginId);
+  if (localKey) {
+    const localSettings = localStorage.getItem(localKey);
+    if (localSettings) {
+      return JSON.parse(localSettings);
+    }
+  }
+  if (pluginId) {
+    const item = (_b25 = (_a25 = devtoolsPluginBuffer.find((item2) => item2[0].id === pluginId)) == null ? void 0 : _a25[0]) != null ? _b25 : null;
+    return _getSettings((_c = item == null ? void 0 : item.settings) != null ? _c : {});
+  }
+  return _getSettings(fallbackValue);
+}
+function initPluginSettings(pluginId, settings) {
+  const localKey = getPluginLocalKey(pluginId);
+  const localSettings = localStorage.getItem(localKey);
+  if (!localSettings) {
+    localStorage.setItem(localKey, JSON.stringify(_getSettings(settings)));
+  }
+}
+function setPluginSettings(pluginId, key, value) {
+  const localKey = getPluginLocalKey(pluginId);
+  const localSettings = localStorage.getItem(localKey);
+  const parsedLocalSettings = JSON.parse(localSettings || "{}");
+  const updated = {
+    ...parsedLocalSettings,
+    [key]: value
+  };
+  localStorage.setItem(localKey, JSON.stringify(updated));
+  devtoolsContext.hooks.callHookWith(
+    (callbacks) => {
+      callbacks.forEach((cb) => cb({
+        pluginId,
+        key,
+        oldValue: parsedLocalSettings[key],
+        newValue: value,
+        settings: updated
+      }));
+    },
+    "setPluginSettings"
+    /* SET_PLUGIN_SETTINGS */
+  );
+}
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+var _a11;
+var _b11;
+var devtoolsHooks = (_b11 = (_a11 = target).__VUE_DEVTOOLS_HOOK) != null ? _b11 : _a11.__VUE_DEVTOOLS_HOOK = createHooks();
+var on = {
+  vueAppInit(fn) {
+    devtoolsHooks.hook("app:init", fn);
+  },
+  vueAppUnmount(fn) {
+    devtoolsHooks.hook("app:unmount", fn);
+  },
+  vueAppConnected(fn) {
+    devtoolsHooks.hook("app:connected", fn);
+  },
+  componentAdded(fn) {
+    return devtoolsHooks.hook("component:added", fn);
+  },
+  componentUpdated(fn) {
+    return devtoolsHooks.hook("component:updated", fn);
+  },
+  componentRemoved(fn) {
+    return devtoolsHooks.hook("component:removed", fn);
+  },
+  setupDevtoolsPlugin(fn) {
+    devtoolsHooks.hook("devtools-plugin:setup", fn);
+  }
+};
+var hook = {
+  on,
+  setupDevToolsPlugin(pluginDescriptor, setupFn) {
+    return devtoolsHooks.callHook("devtools-plugin:setup", pluginDescriptor, setupFn);
+  }
+};
+var DevToolsV6PluginAPI = class {
+  constructor({ plugin, ctx }) {
+    this.hooks = ctx.hooks;
+    this.plugin = plugin;
+  }
+  get on() {
+    return {
+      // component inspector
+      visitComponentTree: (handler) => {
+        this.hooks.hook("visitComponentTree", handler);
+      },
+      inspectComponent: (handler) => {
+        this.hooks.hook("inspectComponent", handler);
+      },
+      editComponentState: (handler) => {
+        this.hooks.hook("editComponentState", handler);
+      },
+      // custom inspector
+      getInspectorTree: (handler) => {
+        this.hooks.hook("getInspectorTree", handler);
+      },
+      getInspectorState: (handler) => {
+        this.hooks.hook("getInspectorState", handler);
+      },
+      editInspectorState: (handler) => {
+        this.hooks.hook("editInspectorState", handler);
+      },
+      // timeline
+      inspectTimelineEvent: (handler) => {
+        this.hooks.hook("inspectTimelineEvent", handler);
+      },
+      timelineCleared: (handler) => {
+        this.hooks.hook("timelineCleared", handler);
+      },
+      // settings
+      setPluginSettings: (handler) => {
+        this.hooks.hook("setPluginSettings", handler);
+      }
+    };
+  }
+  // component inspector
+  notifyComponentUpdate(instance) {
+    var _a25;
+    const inspector = getActiveInspectors().find((i) => i.packageName === this.plugin.descriptor.packageName);
+    if (inspector == null ? void 0 : inspector.id) {
+      if (instance) {
+        const args = [
+          instance.appContext.app,
+          instance.uid,
+          (_a25 = instance.parent) == null ? void 0 : _a25.uid,
+          instance
+        ];
+        devtoolsHooks.callHook("component:updated", ...args);
+      } else {
+        devtoolsHooks.callHook(
+          "component:updated"
+          /* COMPONENT_UPDATED */
+        );
+      }
+      this.hooks.callHook("sendInspectorState", { inspectorId: inspector.id, plugin: this.plugin });
+    }
+  }
+  // custom inspector
+  addInspector(options) {
+    this.hooks.callHook("addInspector", { inspector: options, plugin: this.plugin });
+    if (this.plugin.descriptor.settings) {
+      initPluginSettings(options.id, this.plugin.descriptor.settings);
+    }
+  }
+  sendInspectorTree(inspectorId) {
+    this.hooks.callHook("sendInspectorTree", { inspectorId, plugin: this.plugin });
+  }
+  sendInspectorState(inspectorId) {
+    this.hooks.callHook("sendInspectorState", { inspectorId, plugin: this.plugin });
+  }
+  selectInspectorNode(inspectorId, nodeId) {
+    this.hooks.callHook("customInspectorSelectNode", { inspectorId, nodeId, plugin: this.plugin });
+  }
+  // timeline
+  now() {
+    return Date.now();
+  }
+  addTimelineLayer(options) {
+    this.hooks.callHook("timelineLayerAdded", { options, plugin: this.plugin });
+  }
+  addTimelineEvent(options) {
+    this.hooks.callHook("timelineEventAdded", { options, plugin: this.plugin });
+  }
+  // settings
+  getSettings(pluginId) {
+    const inspector = getActiveInspectors().find((i) => i.packageName === this.plugin.descriptor.packageName);
+    return getPluginSettings(pluginId != null ? pluginId : inspector == null ? void 0 : inspector.id, this.plugin.descriptor.settings);
+  }
+  // utilities
+  getComponentInstances(app) {
+    return this.hooks.callHook("getComponentInstances", { app });
+  }
+  getComponentBounds(instance) {
+    return this.hooks.callHook("getComponentBounds", { instance });
+  }
+  getComponentName(instance) {
+    return this.hooks.callHook("getComponentName", { instance });
+  }
+  highlightElement(instance) {
+    const uid = instance.__VUE_DEVTOOLS_NEXT_UID__;
+    return this.hooks.callHook("componentHighlight", { uid });
+  }
+  unhighlightElement() {
+    return this.hooks.callHook(
+      "componentUnhighlight"
+      /* COMPONENT_UNHIGHLIGHT */
+    );
+  }
+};
+var DevToolsPluginAPI = DevToolsV6PluginAPI;
+init_esm_shims2();
+init_esm_shims2();
 init_esm_shims2();
 init_esm_shims2();
 var UNDEFINED = "__vue_devtool_undefined__";
@@ -2354,212 +3291,281 @@ var reversedTokenMap = Object.entries(tokenMap).reduce((acc, [key, value]) => {
 init_esm_shims2();
 init_esm_shims2();
 init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-var MAX_SERIALIZED_SIZE = 512 * 1024;
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-function addCustomTab(tab) {
-  if (devtoolsState.tabs.some((t) => t.name === tab.name))
+var _a12;
+var _b12;
+(_b12 = (_a12 = target).__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__) != null ? _b12 : _a12.__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__ = /* @__PURE__ */ new Set();
+function setupDevToolsPlugin(pluginDescriptor, setupFn) {
+  return hook.setupDevToolsPlugin(pluginDescriptor, setupFn);
+}
+function callDevToolsPluginSetupFn(plugin, app) {
+  const [pluginDescriptor, setupFn] = plugin;
+  if (pluginDescriptor.app !== app)
     return;
-  devtoolsState.tabs.push(tab);
-}
-init_esm_shims2();
-function addCustomCommand(action) {
-  if (devtoolsState.commands.some((t) => t.id === action.id))
-    return;
-  devtoolsState.commands.push(action);
-}
-function removeCustomCommand(actionId) {
-  const index = devtoolsState.commands.findIndex((t) => t.id === actionId);
-  if (index === -1)
-    return;
-  devtoolsState.commands.splice(index, 1);
-}
-init_esm_shims2();
-var _a3;
-var _b3;
-(_b3 = (_a3 = target).__VUE_DEVTOOLS_COMPONENT_INSPECTOR_ENABLED__) != null ? _b3 : _a3.__VUE_DEVTOOLS_COMPONENT_INSPECTOR_ENABLED__ = true;
-init_esm_shims2();
-init_esm_shims2();
-init_esm_shims2();
-var STATE_KEY = "__VUE_DEVTOOLS_GLOBAL_STATE__";
-function initStateFactory() {
-  return {
-    connected: false,
-    clientConnected: false,
-    appRecords: [],
-    activeAppRecord: null,
-    selectedComponentId: null,
-    pluginBuffer: [],
-    tabs: [],
-    commands: [],
-    vitePluginDetected: false,
-    activeAppRecordId: null,
-    highPerfModeEnabled: false
-  };
-}
-var _a4;
-var _b4;
-(_b4 = (_a4 = target)[STATE_KEY]) != null ? _b4 : _a4[STATE_KEY] = initStateFactory();
-var callStateUpdatedHook = debounce((state, oldState) => {
-  apiHooks.callHook("devtools:state-updated", state, oldState);
-}, 80);
-var callConnectedUpdatedHook = debounce((state, oldState) => {
-  apiHooks.callHook("devtools:connected-updated", state, oldState);
-}, 80);
-var devtoolsState = new Proxy(target[STATE_KEY], {
-  get(target10, property) {
-    return target[STATE_KEY][property];
-  },
-  deleteProperty(target10, property) {
-    delete target10[property];
-    return true;
-  },
-  set(target10, property, value) {
-    const oldState = { ...target[STATE_KEY] };
-    target10[property] = value;
-    target[STATE_KEY][property] = value;
-    callStateUpdatedHook(target[STATE_KEY], oldState);
-    if (["connected", "clientConnected"].includes(property.toString()) && oldState[property] !== value)
-      callConnectedUpdatedHook(target[STATE_KEY], oldState);
-    return true;
-  }
-});
-Object.defineProperty(devtoolsState.tabs, "push", {
-  configurable: true,
-  value(...items) {
-    const result = Array.prototype.push.apply(this, items);
-    devtoolsState.tabs = this;
-    apiHooks.callHook("custom-tabs:updated", this);
-    return result;
-  }
-});
-["push", "splice"].forEach((method) => {
-  Object.defineProperty(devtoolsState.commands, method, {
-    configurable: true,
-    value(...args) {
-      const result = Array.prototype[method].apply(this, args);
-      devtoolsState.commands = this;
-      apiHooks.callHook("custom-commands:updated", this);
-      return result;
-    }
+  const api = new DevToolsPluginAPI({
+    plugin: {
+      setupFn,
+      descriptor: pluginDescriptor
+    },
+    ctx: devtoolsContext
   });
-});
+  if (pluginDescriptor.packageName === "vuex") {
+    api.on.editInspectorState((payload) => {
+      api.sendInspectorState(payload.inspectorId);
+    });
+  }
+  setupFn(api);
+  if (pluginDescriptor.settings) {
+    const inspector = devtoolsInspector.find((inspector2) => inspector2.descriptor.id === pluginDescriptor.id);
+    if (inspector) {
+      inspector.descriptor.settings = pluginDescriptor.settings;
+      initPluginSettings(inspector.options.id, pluginDescriptor.settings);
+    }
+  }
+}
+function registerDevToolsPlugin(app) {
+  if (target.__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__.has(app))
+    return;
+  target.__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__.add(app);
+  devtoolsPluginBuffer.forEach((plugin) => {
+    callDevToolsPluginSetupFn(plugin, app);
+  });
+}
 init_esm_shims2();
 init_esm_shims2();
 var ROUTER_KEY = "__VUE_DEVTOOLS_ROUTER__";
 var ROUTER_INFO_KEY = "__VUE_DEVTOOLS_ROUTER_INFO__";
-var _a5;
-var _b5;
-(_b5 = (_a5 = target)[ROUTER_INFO_KEY]) != null ? _b5 : _a5[ROUTER_INFO_KEY] = {
+var _a13;
+var _b13;
+(_b13 = (_a13 = target)[ROUTER_INFO_KEY]) != null ? _b13 : _a13[ROUTER_INFO_KEY] = {
   currentRoute: null,
   routes: []
 };
-var _a6;
-var _b6;
-(_b6 = (_a6 = target)[ROUTER_KEY]) != null ? _b6 : _a6[ROUTER_KEY] = null;
+var _a14;
+var _b14;
+(_b14 = (_a14 = target)[ROUTER_KEY]) != null ? _b14 : _a14[ROUTER_KEY] = {};
 var devtoolsRouterInfo = new Proxy(target[ROUTER_INFO_KEY], {
-  get(target10, property) {
+  get(target22, property) {
     return target[ROUTER_INFO_KEY][property];
   }
 });
-init_esm_shims2();
-var CONTEXT_KEY = "__VUE_DEVTOOLS_CONTEXT__";
-function initContextFactory() {
+var devtoolsRouter = new Proxy(target[ROUTER_KEY], {
+  get(target22, property) {
+    if (property === "value") {
+      return target[ROUTER_KEY];
+    }
+  }
+});
+function getRoutes(router) {
+  const routesMap = /* @__PURE__ */ new Map();
+  return ((router == null ? void 0 : router.getRoutes()) || []).filter((i) => !routesMap.has(i.path) && routesMap.set(i.path, 1));
+}
+function filterRoutes(routes) {
+  return routes.map((item) => {
+    let { path, name, children, meta } = item;
+    if (children == null ? void 0 : children.length)
+      children = filterRoutes(children);
+    return {
+      path,
+      name,
+      children,
+      meta
+    };
+  });
+}
+function filterCurrentRoute(route) {
+  if (route) {
+    const { fullPath, hash, href, path, name, matched, params, query } = route;
+    return {
+      fullPath,
+      hash,
+      href,
+      path,
+      name,
+      params,
+      query,
+      matched: filterRoutes(matched)
+    };
+  }
+  return route;
+}
+function normalizeRouterInfo(appRecord, activeAppRecord2) {
+  function init() {
+    var _a25;
+    const router = (_a25 = appRecord.app) == null ? void 0 : _a25.config.globalProperties.$router;
+    const currentRoute = filterCurrentRoute(router == null ? void 0 : router.currentRoute.value);
+    const routes = filterRoutes(getRoutes(router));
+    const c = console.warn;
+    console.warn = () => {
+    };
+    target[ROUTER_INFO_KEY] = {
+      currentRoute: currentRoute ? deepClone(currentRoute) : {},
+      routes: deepClone(routes)
+    };
+    target[ROUTER_KEY] = router;
+    console.warn = c;
+  }
+  init();
+  hook.on.componentUpdated(debounce(() => {
+    var _a25;
+    if (((_a25 = activeAppRecord2.value) == null ? void 0 : _a25.app) !== appRecord.app)
+      return;
+    init();
+    devtoolsContext.hooks.callHook("routerInfoUpdated", { state: target[ROUTER_INFO_KEY] });
+  }, 200));
+}
+function createDevToolsApi(hooks2) {
   return {
-    appRecord: null,
-    api: null,
-    inspector: [],
-    timelineLayer: [],
-    routerInfo: {},
-    router: null,
-    activeInspectorTreeId: "",
-    componentPluginHookBuffer: []
+    // get inspector tree
+    async getInspectorTree(payload) {
+      const _payload = {
+        ...payload,
+        app: activeAppRecord.value.app,
+        rootNodes: []
+      };
+      await new Promise((resolve) => {
+        hooks2.callHookWith(
+          async (callbacks) => {
+            await Promise.all(callbacks.map((cb) => cb(_payload)));
+            resolve();
+          },
+          "getInspectorTree"
+          /* GET_INSPECTOR_TREE */
+        );
+      });
+      return _payload.rootNodes;
+    },
+    // get inspector state
+    async getInspectorState(payload) {
+      const _payload = {
+        ...payload,
+        app: activeAppRecord.value.app,
+        state: null
+      };
+      const ctx = {
+        currentTab: `custom-inspector:${payload.inspectorId}`
+      };
+      await new Promise((resolve) => {
+        hooks2.callHookWith(
+          async (callbacks) => {
+            await Promise.all(callbacks.map((cb) => cb(_payload, ctx)));
+            resolve();
+          },
+          "getInspectorState"
+          /* GET_INSPECTOR_STATE */
+        );
+      });
+      return _payload.state;
+    },
+    // edit inspector state
+    editInspectorState(payload) {
+      const stateEditor2 = new StateEditor();
+      const _payload = {
+        ...payload,
+        app: activeAppRecord.value.app,
+        set: (obj, path = payload.path, value = payload.state.value, cb) => {
+          stateEditor2.set(obj, path, value, cb || stateEditor2.createDefaultSetCallback(payload.state));
+        }
+      };
+      hooks2.callHookWith(
+        (callbacks) => {
+          callbacks.forEach((cb) => cb(_payload));
+        },
+        "editInspectorState"
+        /* EDIT_INSPECTOR_STATE */
+      );
+    },
+    // send inspector state
+    sendInspectorState(inspectorId) {
+      const inspector = getInspector(inspectorId);
+      hooks2.callHook("sendInspectorState", { inspectorId, plugin: {
+        descriptor: inspector.descriptor,
+        setupFn: () => ({})
+      } });
+    },
+    // inspect component inspector
+    inspectComponentInspector() {
+      return inspectComponentHighLighter();
+    },
+    // cancel inspect component inspector
+    cancelInspectComponentInspector() {
+      return cancelInspectComponentHighLighter();
+    },
+    // get component render code
+    getComponentRenderCode(id) {
+      const instance = getComponentInstance(activeAppRecord.value, id);
+      if (instance)
+        return !((instance == null ? void 0 : instance.type) instanceof Function) ? instance.render.toString() : instance.type.toString();
+    },
+    // scroll to component
+    scrollToComponent(id) {
+      return scrollToComponent({ id });
+    },
+    // open in editor
+    openInEditor,
+    // get vue inspector
+    getVueInspector: getComponentInspector,
+    // toggle app
+    toggleApp(id) {
+      const appRecord = devtoolsAppRecords.value.find((record) => record.id === id);
+      if (appRecord) {
+        setActiveAppRecordId(id);
+        setActiveAppRecord(appRecord);
+        normalizeRouterInfo(appRecord, activeAppRecord);
+        callInspectorUpdatedHook();
+        registerDevToolsPlugin(appRecord.app);
+      }
+    },
+    // inspect dom
+    inspectDOM(instanceId) {
+      const instance = getComponentInstance(activeAppRecord.value, instanceId);
+      if (instance) {
+        const [el] = getRootElementsFromComponentInstance(instance);
+        if (el) {
+          target.__VUE_DEVTOOLS_INSPECT_DOM_TARGET__ = el;
+        }
+      }
+    },
+    updatePluginSettings(pluginId, key, value) {
+      setPluginSettings(pluginId, key, value);
+    },
+    getPluginSettings(pluginId) {
+      return {
+        options: getPluginSettingsOptions(pluginId),
+        values: getPluginSettings(pluginId)
+      };
+    }
   };
 }
-var _a7;
-var _b7;
-(_b7 = (_a7 = target)[CONTEXT_KEY]) != null ? _b7 : _a7[CONTEXT_KEY] = initContextFactory();
-function resetDevToolsContext() {
-  target[CONTEXT_KEY] = initContextFactory();
-}
-var devtoolsContext = new Proxy(target[CONTEXT_KEY], {
-  get(target10, property) {
-    if (property === "router")
-      return target[ROUTER_KEY];
-    else if (property === "clear")
-      return resetDevToolsContext;
-    return target[CONTEXT_KEY][property];
+init_esm_shims2();
+var _a15;
+var _b15;
+(_b15 = (_a15 = target).__VUE_DEVTOOLS_ENV__) != null ? _b15 : _a15.__VUE_DEVTOOLS_ENV__ = {
+  vitePluginDetected: false
+};
+var hooks = createDevToolsCtxHooks();
+var _a16;
+var _b16;
+(_b16 = (_a16 = target).__VUE_DEVTOOLS_KIT_CONTEXT__) != null ? _b16 : _a16.__VUE_DEVTOOLS_KIT_CONTEXT__ = {
+  hooks,
+  get state() {
+    return {
+      ...devtoolsState,
+      activeAppRecordId: activeAppRecord.id,
+      activeAppRecord: activeAppRecord.value,
+      appRecords: devtoolsAppRecords.value
+    };
   },
-  set(target10, property, value) {
-    target[CONTEXT_KEY][property] = value;
-    return true;
-  }
-});
-var devtoolsAppRecords = new Proxy(devtoolsState.appRecords, {
-  get(_, property) {
-    if (property === "value")
-      return devtoolsState.appRecords;
-    else if (property === "active")
-      return devtoolsState.activeAppRecord;
-    else if (property === "activeId")
-      return devtoolsState.activeAppRecordId;
-  },
-  set(target10, property, value) {
-    var _a10;
-    const oldState = { ...devtoolsState };
-    if (property === "value") {
-      devtoolsState.appRecords = value;
-    } else if (property === "active") {
-      const _value = value;
-      devtoolsState.activeAppRecord = _value;
-      devtoolsContext.appRecord = _value;
-      devtoolsContext.api = _value.api;
-      devtoolsContext.inspector = (_a10 = _value.inspector) != null ? _a10 : [];
-      normalizeRouterInfo(value, devtoolsState);
-      devtoolsContext.routerInfo = devtoolsRouterInfo;
-    } else if (property === "activeId") {
-      devtoolsState.activeAppRecordId = value;
-    }
-    callStateUpdatedHook(devtoolsState, oldState);
-    if (["connected", "clientConnected"].includes(property.toString()) && oldState[property] !== value)
-      callConnectedUpdatedHook(devtoolsState, oldState);
-    return true;
-  }
-});
-var _a8;
-var _b8;
-var appRecordInfo = (_b8 = (_a8 = target).__VUE_DEVTOOLS_NEXT_APP_RECORD_INFO__) != null ? _b8 : _a8.__VUE_DEVTOOLS_NEXT_APP_RECORD_INFO__ = {
+  api: createDevToolsApi(hooks)
+};
+var devtoolsContext = target.__VUE_DEVTOOLS_KIT_CONTEXT__;
+init_esm_shims2();
+var import_speakingurl = __toESM2(require_speakingurl2(), 1);
+var _a17;
+var _b17;
+var appRecordInfo = (_b17 = (_a17 = target).__VUE_DEVTOOLS_NEXT_APP_RECORD_INFO__) != null ? _b17 : _a17.__VUE_DEVTOOLS_NEXT_APP_RECORD_INFO__ = {
   id: 0,
   appIds: /* @__PURE__ */ new Set()
 };
-init_esm_shims2();
-var _a9;
-var _b9;
-(_b9 = (_a9 = target).__VUE_DEVTOOLS_ENV__) != null ? _b9 : _a9.__VUE_DEVTOOLS_ENV__ = {
-  vitePluginDetected: false
-};
-init_esm_shims2();
-function onDevToolsConnected(fn) {
-  return new Promise((resolve) => {
-    if (devtoolsState.connected) {
-      fn();
-      resolve();
-      return;
-    }
-    apiHooks.hook("devtools:connected-updated", (state) => {
-      if (state.connected) {
-        fn();
-        resolve();
-      }
-    });
-  });
-}
 function onDevToolsClientConnected(fn) {
   return new Promise((resolve) => {
     if (devtoolsState.connected && devtoolsState.clientConnected) {
@@ -2567,7 +3573,7 @@ function onDevToolsClientConnected(fn) {
       resolve();
       return;
     }
-    apiHooks.hook("devtools:connected-updated", (state) => {
+    devtoolsContext.hooks.hook("devtoolsConnectedUpdated", ({ state }) => {
       if (state.connected && state.clientConnected) {
         fn();
         resolve();
@@ -2576,6 +3582,845 @@ function onDevToolsClientConnected(fn) {
   });
 }
 init_esm_shims2();
+function toggleHighPerfMode(state) {
+  devtoolsState.highPerfModeEnabled = state != null ? state : !devtoolsState.highPerfModeEnabled;
+}
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+function updateDevToolsClientDetected(params) {
+  devtoolsState.devtoolsClientDetected = {
+    ...devtoolsState.devtoolsClientDetected,
+    ...params
+  };
+  const devtoolsClientVisible = Object.values(devtoolsState.devtoolsClientDetected).some(Boolean);
+  toggleHighPerfMode(!devtoolsClientVisible);
+}
+var _a18;
+var _b18;
+(_b18 = (_a18 = target).__VUE_DEVTOOLS_UPDATE_CLIENT_DETECTED__) != null ? _b18 : _a18.__VUE_DEVTOOLS_UPDATE_CLIENT_DETECTED__ = updateDevToolsClientDetected;
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+var DoubleIndexedKV = class {
+  constructor() {
+    this.keyToValue = /* @__PURE__ */ new Map();
+    this.valueToKey = /* @__PURE__ */ new Map();
+  }
+  set(key, value) {
+    this.keyToValue.set(key, value);
+    this.valueToKey.set(value, key);
+  }
+  getByKey(key) {
+    return this.keyToValue.get(key);
+  }
+  getByValue(value) {
+    return this.valueToKey.get(value);
+  }
+  clear() {
+    this.keyToValue.clear();
+    this.valueToKey.clear();
+  }
+};
+var Registry = class {
+  constructor(generateIdentifier) {
+    this.generateIdentifier = generateIdentifier;
+    this.kv = new DoubleIndexedKV();
+  }
+  register(value, identifier) {
+    if (this.kv.getByValue(value)) {
+      return;
+    }
+    if (!identifier) {
+      identifier = this.generateIdentifier(value);
+    }
+    this.kv.set(identifier, value);
+  }
+  clear() {
+    this.kv.clear();
+  }
+  getIdentifier(value) {
+    return this.kv.getByValue(value);
+  }
+  getValue(identifier) {
+    return this.kv.getByKey(identifier);
+  }
+};
+var ClassRegistry = class extends Registry {
+  constructor() {
+    super((c) => c.name);
+    this.classToAllowedProps = /* @__PURE__ */ new Map();
+  }
+  register(value, options) {
+    if (typeof options === "object") {
+      if (options.allowProps) {
+        this.classToAllowedProps.set(value, options.allowProps);
+      }
+      super.register(value, options.identifier);
+    } else {
+      super.register(value, options);
+    }
+  }
+  getAllowedProps(value) {
+    return this.classToAllowedProps.get(value);
+  }
+};
+init_esm_shims2();
+init_esm_shims2();
+function valuesOfObj(record) {
+  if ("values" in Object) {
+    return Object.values(record);
+  }
+  const values = [];
+  for (const key in record) {
+    if (record.hasOwnProperty(key)) {
+      values.push(record[key]);
+    }
+  }
+  return values;
+}
+function find(record, predicate) {
+  const values = valuesOfObj(record);
+  if ("find" in values) {
+    return values.find(predicate);
+  }
+  const valuesNotNever = values;
+  for (let i = 0; i < valuesNotNever.length; i++) {
+    const value = valuesNotNever[i];
+    if (predicate(value)) {
+      return value;
+    }
+  }
+  return void 0;
+}
+function forEach(record, run) {
+  Object.entries(record).forEach(([key, value]) => run(value, key));
+}
+function includes(arr, value) {
+  return arr.indexOf(value) !== -1;
+}
+function findArr(record, predicate) {
+  for (let i = 0; i < record.length; i++) {
+    const value = record[i];
+    if (predicate(value)) {
+      return value;
+    }
+  }
+  return void 0;
+}
+var CustomTransformerRegistry = class {
+  constructor() {
+    this.transfomers = {};
+  }
+  register(transformer) {
+    this.transfomers[transformer.name] = transformer;
+  }
+  findApplicable(v) {
+    return find(this.transfomers, (transformer) => transformer.isApplicable(v));
+  }
+  findByName(name) {
+    return this.transfomers[name];
+  }
+};
+init_esm_shims2();
+init_esm_shims2();
+var getType = (payload) => Object.prototype.toString.call(payload).slice(8, -1);
+var isUndefined = (payload) => typeof payload === "undefined";
+var isNull = (payload) => payload === null;
+var isPlainObject2 = (payload) => {
+  if (typeof payload !== "object" || payload === null)
+    return false;
+  if (payload === Object.prototype)
+    return false;
+  if (Object.getPrototypeOf(payload) === null)
+    return true;
+  return Object.getPrototypeOf(payload) === Object.prototype;
+};
+var isEmptyObject = (payload) => isPlainObject2(payload) && Object.keys(payload).length === 0;
+var isArray = (payload) => Array.isArray(payload);
+var isString = (payload) => typeof payload === "string";
+var isNumber = (payload) => typeof payload === "number" && !isNaN(payload);
+var isBoolean = (payload) => typeof payload === "boolean";
+var isRegExp = (payload) => payload instanceof RegExp;
+var isMap = (payload) => payload instanceof Map;
+var isSet = (payload) => payload instanceof Set;
+var isSymbol = (payload) => getType(payload) === "Symbol";
+var isDate = (payload) => payload instanceof Date && !isNaN(payload.valueOf());
+var isError = (payload) => payload instanceof Error;
+var isNaNValue = (payload) => typeof payload === "number" && isNaN(payload);
+var isPrimitive2 = (payload) => isBoolean(payload) || isNull(payload) || isUndefined(payload) || isNumber(payload) || isString(payload) || isSymbol(payload);
+var isBigint = (payload) => typeof payload === "bigint";
+var isInfinite = (payload) => payload === Infinity || payload === -Infinity;
+var isTypedArray = (payload) => ArrayBuffer.isView(payload) && !(payload instanceof DataView);
+var isURL = (payload) => payload instanceof URL;
+init_esm_shims2();
+var escapeKey = (key) => key.replace(/\./g, "\\.");
+var stringifyPath = (path) => path.map(String).map(escapeKey).join(".");
+var parsePath = (string) => {
+  const result = [];
+  let segment = "";
+  for (let i = 0; i < string.length; i++) {
+    let char = string.charAt(i);
+    const isEscapedDot = char === "\\" && string.charAt(i + 1) === ".";
+    if (isEscapedDot) {
+      segment += ".";
+      i++;
+      continue;
+    }
+    const isEndOfSegment = char === ".";
+    if (isEndOfSegment) {
+      result.push(segment);
+      segment = "";
+      continue;
+    }
+    segment += char;
+  }
+  const lastSegment = segment;
+  result.push(lastSegment);
+  return result;
+};
+init_esm_shims2();
+function simpleTransformation(isApplicable, annotation, transform, untransform) {
+  return {
+    isApplicable,
+    annotation,
+    transform,
+    untransform
+  };
+}
+var simpleRules = [
+  simpleTransformation(isUndefined, "undefined", () => null, () => void 0),
+  simpleTransformation(isBigint, "bigint", (v) => v.toString(), (v) => {
+    if (typeof BigInt !== "undefined") {
+      return BigInt(v);
+    }
+    console.error("Please add a BigInt polyfill.");
+    return v;
+  }),
+  simpleTransformation(isDate, "Date", (v) => v.toISOString(), (v) => new Date(v)),
+  simpleTransformation(isError, "Error", (v, superJson) => {
+    const baseError = {
+      name: v.name,
+      message: v.message
+    };
+    superJson.allowedErrorProps.forEach((prop) => {
+      baseError[prop] = v[prop];
+    });
+    return baseError;
+  }, (v, superJson) => {
+    const e = new Error(v.message);
+    e.name = v.name;
+    e.stack = v.stack;
+    superJson.allowedErrorProps.forEach((prop) => {
+      e[prop] = v[prop];
+    });
+    return e;
+  }),
+  simpleTransformation(isRegExp, "regexp", (v) => "" + v, (regex) => {
+    const body = regex.slice(1, regex.lastIndexOf("/"));
+    const flags = regex.slice(regex.lastIndexOf("/") + 1);
+    return new RegExp(body, flags);
+  }),
+  simpleTransformation(
+    isSet,
+    "set",
+    // (sets only exist in es6+)
+    // eslint-disable-next-line es5/no-es6-methods
+    (v) => [...v.values()],
+    (v) => new Set(v)
+  ),
+  simpleTransformation(isMap, "map", (v) => [...v.entries()], (v) => new Map(v)),
+  simpleTransformation((v) => isNaNValue(v) || isInfinite(v), "number", (v) => {
+    if (isNaNValue(v)) {
+      return "NaN";
+    }
+    if (v > 0) {
+      return "Infinity";
+    } else {
+      return "-Infinity";
+    }
+  }, Number),
+  simpleTransformation((v) => v === 0 && 1 / v === -Infinity, "number", () => {
+    return "-0";
+  }, Number),
+  simpleTransformation(isURL, "URL", (v) => v.toString(), (v) => new URL(v))
+];
+function compositeTransformation(isApplicable, annotation, transform, untransform) {
+  return {
+    isApplicable,
+    annotation,
+    transform,
+    untransform
+  };
+}
+var symbolRule = compositeTransformation((s, superJson) => {
+  if (isSymbol(s)) {
+    const isRegistered = !!superJson.symbolRegistry.getIdentifier(s);
+    return isRegistered;
+  }
+  return false;
+}, (s, superJson) => {
+  const identifier = superJson.symbolRegistry.getIdentifier(s);
+  return ["symbol", identifier];
+}, (v) => v.description, (_, a, superJson) => {
+  const value = superJson.symbolRegistry.getValue(a[1]);
+  if (!value) {
+    throw new Error("Trying to deserialize unknown symbol");
+  }
+  return value;
+});
+var constructorToName = [
+  Int8Array,
+  Uint8Array,
+  Int16Array,
+  Uint16Array,
+  Int32Array,
+  Uint32Array,
+  Float32Array,
+  Float64Array,
+  Uint8ClampedArray
+].reduce((obj, ctor) => {
+  obj[ctor.name] = ctor;
+  return obj;
+}, {});
+var typedArrayRule = compositeTransformation(isTypedArray, (v) => ["typed-array", v.constructor.name], (v) => [...v], (v, a) => {
+  const ctor = constructorToName[a[1]];
+  if (!ctor) {
+    throw new Error("Trying to deserialize unknown typed array");
+  }
+  return new ctor(v);
+});
+function isInstanceOfRegisteredClass(potentialClass, superJson) {
+  if (potentialClass == null ? void 0 : potentialClass.constructor) {
+    const isRegistered = !!superJson.classRegistry.getIdentifier(potentialClass.constructor);
+    return isRegistered;
+  }
+  return false;
+}
+var classRule = compositeTransformation(isInstanceOfRegisteredClass, (clazz, superJson) => {
+  const identifier = superJson.classRegistry.getIdentifier(clazz.constructor);
+  return ["class", identifier];
+}, (clazz, superJson) => {
+  const allowedProps = superJson.classRegistry.getAllowedProps(clazz.constructor);
+  if (!allowedProps) {
+    return { ...clazz };
+  }
+  const result = {};
+  allowedProps.forEach((prop) => {
+    result[prop] = clazz[prop];
+  });
+  return result;
+}, (v, a, superJson) => {
+  const clazz = superJson.classRegistry.getValue(a[1]);
+  if (!clazz) {
+    throw new Error("Trying to deserialize unknown class - check https://github.com/blitz-js/superjson/issues/116#issuecomment-773996564");
+  }
+  return Object.assign(Object.create(clazz.prototype), v);
+});
+var customRule = compositeTransformation((value, superJson) => {
+  return !!superJson.customTransformerRegistry.findApplicable(value);
+}, (value, superJson) => {
+  const transformer = superJson.customTransformerRegistry.findApplicable(value);
+  return ["custom", transformer.name];
+}, (value, superJson) => {
+  const transformer = superJson.customTransformerRegistry.findApplicable(value);
+  return transformer.serialize(value);
+}, (v, a, superJson) => {
+  const transformer = superJson.customTransformerRegistry.findByName(a[1]);
+  if (!transformer) {
+    throw new Error("Trying to deserialize unknown custom value");
+  }
+  return transformer.deserialize(v);
+});
+var compositeRules = [classRule, symbolRule, customRule, typedArrayRule];
+var transformValue = (value, superJson) => {
+  const applicableCompositeRule = findArr(compositeRules, (rule) => rule.isApplicable(value, superJson));
+  if (applicableCompositeRule) {
+    return {
+      value: applicableCompositeRule.transform(value, superJson),
+      type: applicableCompositeRule.annotation(value, superJson)
+    };
+  }
+  const applicableSimpleRule = findArr(simpleRules, (rule) => rule.isApplicable(value, superJson));
+  if (applicableSimpleRule) {
+    return {
+      value: applicableSimpleRule.transform(value, superJson),
+      type: applicableSimpleRule.annotation
+    };
+  }
+  return void 0;
+};
+var simpleRulesByAnnotation = {};
+simpleRules.forEach((rule) => {
+  simpleRulesByAnnotation[rule.annotation] = rule;
+});
+var untransformValue = (json, type, superJson) => {
+  if (isArray(type)) {
+    switch (type[0]) {
+      case "symbol":
+        return symbolRule.untransform(json, type, superJson);
+      case "class":
+        return classRule.untransform(json, type, superJson);
+      case "custom":
+        return customRule.untransform(json, type, superJson);
+      case "typed-array":
+        return typedArrayRule.untransform(json, type, superJson);
+      default:
+        throw new Error("Unknown transformation: " + type);
+    }
+  } else {
+    const transformation = simpleRulesByAnnotation[type];
+    if (!transformation) {
+      throw new Error("Unknown transformation: " + type);
+    }
+    return transformation.untransform(json, superJson);
+  }
+};
+init_esm_shims2();
+var getNthKey = (value, n) => {
+  const keys = value.keys();
+  while (n > 0) {
+    keys.next();
+    n--;
+  }
+  return keys.next().value;
+};
+function validatePath(path) {
+  if (includes(path, "__proto__")) {
+    throw new Error("__proto__ is not allowed as a property");
+  }
+  if (includes(path, "prototype")) {
+    throw new Error("prototype is not allowed as a property");
+  }
+  if (includes(path, "constructor")) {
+    throw new Error("constructor is not allowed as a property");
+  }
+}
+var getDeep = (object, path) => {
+  validatePath(path);
+  for (let i = 0; i < path.length; i++) {
+    const key = path[i];
+    if (isSet(object)) {
+      object = getNthKey(object, +key);
+    } else if (isMap(object)) {
+      const row = +key;
+      const type = +path[++i] === 0 ? "key" : "value";
+      const keyOfRow = getNthKey(object, row);
+      switch (type) {
+        case "key":
+          object = keyOfRow;
+          break;
+        case "value":
+          object = object.get(keyOfRow);
+          break;
+      }
+    } else {
+      object = object[key];
+    }
+  }
+  return object;
+};
+var setDeep = (object, path, mapper) => {
+  validatePath(path);
+  if (path.length === 0) {
+    return mapper(object);
+  }
+  let parent = object;
+  for (let i = 0; i < path.length - 1; i++) {
+    const key = path[i];
+    if (isArray(parent)) {
+      const index = +key;
+      parent = parent[index];
+    } else if (isPlainObject2(parent)) {
+      parent = parent[key];
+    } else if (isSet(parent)) {
+      const row = +key;
+      parent = getNthKey(parent, row);
+    } else if (isMap(parent)) {
+      const isEnd = i === path.length - 2;
+      if (isEnd) {
+        break;
+      }
+      const row = +key;
+      const type = +path[++i] === 0 ? "key" : "value";
+      const keyOfRow = getNthKey(parent, row);
+      switch (type) {
+        case "key":
+          parent = keyOfRow;
+          break;
+        case "value":
+          parent = parent.get(keyOfRow);
+          break;
+      }
+    }
+  }
+  const lastKey = path[path.length - 1];
+  if (isArray(parent)) {
+    parent[+lastKey] = mapper(parent[+lastKey]);
+  } else if (isPlainObject2(parent)) {
+    parent[lastKey] = mapper(parent[lastKey]);
+  }
+  if (isSet(parent)) {
+    const oldValue = getNthKey(parent, +lastKey);
+    const newValue = mapper(oldValue);
+    if (oldValue !== newValue) {
+      parent.delete(oldValue);
+      parent.add(newValue);
+    }
+  }
+  if (isMap(parent)) {
+    const row = +path[path.length - 2];
+    const keyToRow = getNthKey(parent, row);
+    const type = +lastKey === 0 ? "key" : "value";
+    switch (type) {
+      case "key": {
+        const newKey = mapper(keyToRow);
+        parent.set(newKey, parent.get(keyToRow));
+        if (newKey !== keyToRow) {
+          parent.delete(keyToRow);
+        }
+        break;
+      }
+      case "value": {
+        parent.set(keyToRow, mapper(parent.get(keyToRow)));
+        break;
+      }
+    }
+  }
+  return object;
+};
+function traverse(tree, walker2, origin = []) {
+  if (!tree) {
+    return;
+  }
+  if (!isArray(tree)) {
+    forEach(tree, (subtree, key) => traverse(subtree, walker2, [...origin, ...parsePath(key)]));
+    return;
+  }
+  const [nodeValue, children] = tree;
+  if (children) {
+    forEach(children, (child, key) => {
+      traverse(child, walker2, [...origin, ...parsePath(key)]);
+    });
+  }
+  walker2(nodeValue, origin);
+}
+function applyValueAnnotations(plain, annotations, superJson) {
+  traverse(annotations, (type, path) => {
+    plain = setDeep(plain, path, (v) => untransformValue(v, type, superJson));
+  });
+  return plain;
+}
+function applyReferentialEqualityAnnotations(plain, annotations) {
+  function apply(identicalPaths, path) {
+    const object = getDeep(plain, parsePath(path));
+    identicalPaths.map(parsePath).forEach((identicalObjectPath) => {
+      plain = setDeep(plain, identicalObjectPath, () => object);
+    });
+  }
+  if (isArray(annotations)) {
+    const [root, other] = annotations;
+    root.forEach((identicalPath) => {
+      plain = setDeep(plain, parsePath(identicalPath), () => plain);
+    });
+    if (other) {
+      forEach(other, apply);
+    }
+  } else {
+    forEach(annotations, apply);
+  }
+  return plain;
+}
+var isDeep = (object, superJson) => isPlainObject2(object) || isArray(object) || isMap(object) || isSet(object) || isInstanceOfRegisteredClass(object, superJson);
+function addIdentity(object, path, identities) {
+  const existingSet = identities.get(object);
+  if (existingSet) {
+    existingSet.push(path);
+  } else {
+    identities.set(object, [path]);
+  }
+}
+function generateReferentialEqualityAnnotations(identitites, dedupe) {
+  const result = {};
+  let rootEqualityPaths = void 0;
+  identitites.forEach((paths) => {
+    if (paths.length <= 1) {
+      return;
+    }
+    if (!dedupe) {
+      paths = paths.map((path) => path.map(String)).sort((a, b) => a.length - b.length);
+    }
+    const [representativePath, ...identicalPaths] = paths;
+    if (representativePath.length === 0) {
+      rootEqualityPaths = identicalPaths.map(stringifyPath);
+    } else {
+      result[stringifyPath(representativePath)] = identicalPaths.map(stringifyPath);
+    }
+  });
+  if (rootEqualityPaths) {
+    if (isEmptyObject(result)) {
+      return [rootEqualityPaths];
+    } else {
+      return [rootEqualityPaths, result];
+    }
+  } else {
+    return isEmptyObject(result) ? void 0 : result;
+  }
+}
+var walker = (object, identities, superJson, dedupe, path = [], objectsInThisPath = [], seenObjects = /* @__PURE__ */ new Map()) => {
+  var _a25;
+  const primitive = isPrimitive2(object);
+  if (!primitive) {
+    addIdentity(object, path, identities);
+    const seen = seenObjects.get(object);
+    if (seen) {
+      return dedupe ? {
+        transformedValue: null
+      } : seen;
+    }
+  }
+  if (!isDeep(object, superJson)) {
+    const transformed2 = transformValue(object, superJson);
+    const result2 = transformed2 ? {
+      transformedValue: transformed2.value,
+      annotations: [transformed2.type]
+    } : {
+      transformedValue: object
+    };
+    if (!primitive) {
+      seenObjects.set(object, result2);
+    }
+    return result2;
+  }
+  if (includes(objectsInThisPath, object)) {
+    return {
+      transformedValue: null
+    };
+  }
+  const transformationResult = transformValue(object, superJson);
+  const transformed = (_a25 = transformationResult == null ? void 0 : transformationResult.value) != null ? _a25 : object;
+  const transformedValue = isArray(transformed) ? [] : {};
+  const innerAnnotations = {};
+  forEach(transformed, (value, index) => {
+    if (index === "__proto__" || index === "constructor" || index === "prototype") {
+      throw new Error(`Detected property ${index}. This is a prototype pollution risk, please remove it from your object.`);
+    }
+    const recursiveResult = walker(value, identities, superJson, dedupe, [...path, index], [...objectsInThisPath, object], seenObjects);
+    transformedValue[index] = recursiveResult.transformedValue;
+    if (isArray(recursiveResult.annotations)) {
+      innerAnnotations[index] = recursiveResult.annotations;
+    } else if (isPlainObject2(recursiveResult.annotations)) {
+      forEach(recursiveResult.annotations, (tree, key) => {
+        innerAnnotations[escapeKey(index) + "." + key] = tree;
+      });
+    }
+  });
+  const result = isEmptyObject(innerAnnotations) ? {
+    transformedValue,
+    annotations: !!transformationResult ? [transformationResult.type] : void 0
+  } : {
+    transformedValue,
+    annotations: !!transformationResult ? [transformationResult.type, innerAnnotations] : innerAnnotations
+  };
+  if (!primitive) {
+    seenObjects.set(object, result);
+  }
+  return result;
+};
+init_esm_shims2();
+init_esm_shims2();
+function getType2(payload) {
+  return Object.prototype.toString.call(payload).slice(8, -1);
+}
+function isArray2(payload) {
+  return getType2(payload) === "Array";
+}
+function isPlainObject3(payload) {
+  if (getType2(payload) !== "Object")
+    return false;
+  const prototype = Object.getPrototypeOf(payload);
+  return !!prototype && prototype.constructor === Object && prototype === Object.prototype;
+}
+function isNull2(payload) {
+  return getType2(payload) === "Null";
+}
+function isOneOf(a, b, c, d, e) {
+  return (value) => a(value) || b(value) || !!c && c(value) || !!d && d(value) || !!e && e(value);
+}
+function isUndefined2(payload) {
+  return getType2(payload) === "Undefined";
+}
+var isNullOrUndefined = isOneOf(isNull2, isUndefined2);
+function assignProp(carry, key, newVal, originalObject, includeNonenumerable) {
+  const propType = {}.propertyIsEnumerable.call(originalObject, key) ? "enumerable" : "nonenumerable";
+  if (propType === "enumerable")
+    carry[key] = newVal;
+  if (includeNonenumerable && propType === "nonenumerable") {
+    Object.defineProperty(carry, key, {
+      value: newVal,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    });
+  }
+}
+function copy(target22, options = {}) {
+  if (isArray2(target22)) {
+    return target22.map((item) => copy(item, options));
+  }
+  if (!isPlainObject3(target22)) {
+    return target22;
+  }
+  const props = Object.getOwnPropertyNames(target22);
+  const symbols = Object.getOwnPropertySymbols(target22);
+  return [...props, ...symbols].reduce((carry, key) => {
+    if (isArray2(options.props) && !options.props.includes(key)) {
+      return carry;
+    }
+    const val = target22[key];
+    const newVal = copy(val, options);
+    assignProp(carry, key, newVal, target22, options.nonenumerable);
+    return carry;
+  }, {});
+}
+var SuperJSON = class {
+  /**
+   * @param dedupeReferentialEqualities  If true, SuperJSON will make sure only one instance of referentially equal objects are serialized and the rest are replaced with `null`.
+   */
+  constructor({ dedupe = false } = {}) {
+    this.classRegistry = new ClassRegistry();
+    this.symbolRegistry = new Registry((s) => {
+      var _a25;
+      return (_a25 = s.description) != null ? _a25 : "";
+    });
+    this.customTransformerRegistry = new CustomTransformerRegistry();
+    this.allowedErrorProps = [];
+    this.dedupe = dedupe;
+  }
+  serialize(object) {
+    const identities = /* @__PURE__ */ new Map();
+    const output = walker(object, identities, this, this.dedupe);
+    const res = {
+      json: output.transformedValue
+    };
+    if (output.annotations) {
+      res.meta = {
+        ...res.meta,
+        values: output.annotations
+      };
+    }
+    const equalityAnnotations = generateReferentialEqualityAnnotations(identities, this.dedupe);
+    if (equalityAnnotations) {
+      res.meta = {
+        ...res.meta,
+        referentialEqualities: equalityAnnotations
+      };
+    }
+    return res;
+  }
+  deserialize(payload) {
+    const { json, meta } = payload;
+    let result = copy(json);
+    if (meta == null ? void 0 : meta.values) {
+      result = applyValueAnnotations(result, meta.values, this);
+    }
+    if (meta == null ? void 0 : meta.referentialEqualities) {
+      result = applyReferentialEqualityAnnotations(result, meta.referentialEqualities);
+    }
+    return result;
+  }
+  stringify(object) {
+    return JSON.stringify(this.serialize(object));
+  }
+  parse(string) {
+    return this.deserialize(JSON.parse(string));
+  }
+  registerClass(v, options) {
+    this.classRegistry.register(v, options);
+  }
+  registerSymbol(v, identifier) {
+    this.symbolRegistry.register(v, identifier);
+  }
+  registerCustom(transformer, name) {
+    this.customTransformerRegistry.register({
+      name,
+      ...transformer
+    });
+  }
+  allowErrorProps(...props) {
+    this.allowedErrorProps.push(...props);
+  }
+};
+SuperJSON.defaultInstance = new SuperJSON();
+SuperJSON.serialize = SuperJSON.defaultInstance.serialize.bind(SuperJSON.defaultInstance);
+SuperJSON.deserialize = SuperJSON.defaultInstance.deserialize.bind(SuperJSON.defaultInstance);
+SuperJSON.stringify = SuperJSON.defaultInstance.stringify.bind(SuperJSON.defaultInstance);
+SuperJSON.parse = SuperJSON.defaultInstance.parse.bind(SuperJSON.defaultInstance);
+SuperJSON.registerClass = SuperJSON.defaultInstance.registerClass.bind(SuperJSON.defaultInstance);
+SuperJSON.registerSymbol = SuperJSON.defaultInstance.registerSymbol.bind(SuperJSON.defaultInstance);
+SuperJSON.registerCustom = SuperJSON.defaultInstance.registerCustom.bind(SuperJSON.defaultInstance);
+SuperJSON.allowErrorProps = SuperJSON.defaultInstance.allowErrorProps.bind(SuperJSON.defaultInstance);
+var serialize = SuperJSON.serialize;
+var deserialize = SuperJSON.deserialize;
+var stringify = SuperJSON.stringify;
+var parse = SuperJSON.parse;
+var registerClass = SuperJSON.registerClass;
+var registerCustom = SuperJSON.registerCustom;
+var registerSymbol = SuperJSON.registerSymbol;
+var allowErrorProps = SuperJSON.allowErrorProps;
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+var _a19;
+var _b19;
+(_b19 = (_a19 = target).__VUE_DEVTOOLS_KIT_MESSAGE_CHANNELS__) != null ? _b19 : _a19.__VUE_DEVTOOLS_KIT_MESSAGE_CHANNELS__ = [];
+var _a20;
+var _b20;
+(_b20 = (_a20 = target).__VUE_DEVTOOLS_KIT_RPC_CLIENT__) != null ? _b20 : _a20.__VUE_DEVTOOLS_KIT_RPC_CLIENT__ = null;
+var _a21;
+var _b21;
+(_b21 = (_a21 = target).__VUE_DEVTOOLS_KIT_RPC_SERVER__) != null ? _b21 : _a21.__VUE_DEVTOOLS_KIT_RPC_SERVER__ = null;
+var _a22;
+var _b22;
+(_b22 = (_a22 = target).__VUE_DEVTOOLS_KIT_VITE_RPC_CLIENT__) != null ? _b22 : _a22.__VUE_DEVTOOLS_KIT_VITE_RPC_CLIENT__ = null;
+var _a23;
+var _b23;
+(_b23 = (_a23 = target).__VUE_DEVTOOLS_KIT_VITE_RPC_SERVER__) != null ? _b23 : _a23.__VUE_DEVTOOLS_KIT_VITE_RPC_SERVER__ = null;
+var _a24;
+var _b24;
+(_b24 = (_a24 = target).__VUE_DEVTOOLS_KIT_BROADCAST_RPC_SERVER__) != null ? _b24 : _a24.__VUE_DEVTOOLS_KIT_BROADCAST_RPC_SERVER__ = null;
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+init_esm_shims2();
+var MAX_SERIALIZED_SIZE = 2 * 1024 * 1024;
 export {
   addCustomCommand,
   addCustomTab,

@@ -11,7 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   新增 `artplayer-proxy-webav` 代理，来自 [bilibili/WebAV](https://github.com/bilibili/WebAV)
 -   新增 `option.thumbnails.scale`, 用于预览图缩放
 -   修复 `art.url` 更改不能触发 `autoPlayBack` 的 `bug`: [#797](https://github.com/zhw2590582/ArtPlayer/issues/797)
--   新增 `art.subtitle.cues` 属性, 可用于手动调整字幕对象列表
+-   新增 `art.subtitle.cues` 属性, 获取整体的字幕列表
+-   新增 `art.subtitle.activeCues` 属性, 获取活跃的字幕列表
 -   新增 `subtitleBeforeUpdate` 事件, 在字幕元素渲染前触发
 -   修改 `subtitleUpdate` 事件为 `subtitleAfterUpdate`, 在字幕元素渲染后触发
 -   优化 `subtitleLoad` 事件的触发时机和回调参数

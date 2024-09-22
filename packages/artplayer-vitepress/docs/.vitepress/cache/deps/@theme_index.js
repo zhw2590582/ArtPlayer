@@ -1,12 +1,12 @@
 import {
   useMediaQuery
-} from "./chunk-MJSXNWNB.js";
+} from "./chunk-YTNZGMMR.js";
 import {
   computed,
   ref,
   shallowRef,
   watch
-} from "./chunk-N7G4WCHV.js";
+} from "./chunk-QWTIQNIZ.js";
 
 // ../../node_modules/vitepress/dist/client/theme-default/index.js
 import "/Users/zhaohaiwei/Desktop/github/ArtPlayer/node_modules/vitepress/dist/client/theme-default/styles/fonts.css";
@@ -194,23 +194,22 @@ function resolveHeaders(headers, range) {
     resolvedHeaders.push({ element, link });
   }
   const ret = [];
-  outer:
-    for (let i = 0; i < headers.length; i++) {
-      const cur = headers[i];
-      if (i === 0) {
-        ret.push(cur);
-      } else {
-        for (let j = i - 1; j >= 0; j--) {
-          const prev = headers[j];
-          if (prev.level < cur.level) {
-            ;
-            (prev.children || (prev.children = [])).push(cur);
-            continue outer;
-          }
+  outer: for (let i = 0; i < headers.length; i++) {
+    const cur = headers[i];
+    if (i === 0) {
+      ret.push(cur);
+    } else {
+      for (let j = i - 1; j >= 0; j--) {
+        const prev = headers[j];
+        if (prev.level < cur.level) {
+          ;
+          (prev.children || (prev.children = [])).push(cur);
+          continue outer;
         }
-        ret.push(cur);
       }
+      ret.push(cur);
     }
+  }
   return ret;
 }
 
