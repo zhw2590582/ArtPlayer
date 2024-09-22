@@ -145,20 +145,37 @@
 })({"hMiLQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _imageSvg = require("bundle-text:./image.svg");
-var _imageSvgDefault = parcelHelpers.interopDefault(_imageSvg);
+parcelHelpers.export(exports, "default", ()=>artplayerPluginHlsQuality);
+var _qualitySvg = require("bundle-text:./quality.svg");
+var _qualitySvgDefault = parcelHelpers.interopDefault(_qualitySvg);
 function artplayerPluginHlsQuality(option) {
     return (art)=>{
-        const { $video  } = art.template;
-        const { errorHandle  } = art.constructor.utils;
-        function update() {
-            const hls = art.hls || window.hls;
-            errorHandle(hls && hls.media === $video, 'Cannot find instance of HLS from "art.hls" or "window.hls"');
+        const { $video } = art.template;
+        const { errorHandle } = art.constructor.utils;
+        function updateQuality(hls) {
             const auto = option.auto || "Auto";
             const title = option.title || "Quality";
             const getResolution = option.getResolution || ((level)=>(level.height || "Unknown ") + "P");
             const defaultLevel = hls.levels[hls.currentLevel];
             const defaultHtml = defaultLevel ? getResolution(defaultLevel) : auto;
+            const selector = hls.levels.map((item, index)=>{
+                return {
+                    html: getResolution(item),
+                    level: item.level || index,
+                    default: defaultLevel === item
+                };
+            }).sort((a, b)=>b.level - a.level);
+            selector.push({
+                html: auto,
+                level: -1,
+                default: defaultLevel === -1
+            });
+            const onSelect = (item)=>{
+                hls.currentLevel = item.level;
+                art.loading.show = true;
+                art.notice.show = `${title}: ${item.html}`;
+                return item.html;
+            };
             if (option.control) art.controls.update({
                 name: "hls-quality",
                 position: "right",
@@ -166,56 +183,39 @@ function artplayerPluginHlsQuality(option) {
                 style: {
                     padding: "0 10px"
                 },
-                selector: hls.levels.map((item, index)=>{
-                    return {
-                        html: getResolution(item),
-                        level: item.level || index,
-                        default: defaultLevel === item
-                    };
-                }),
-                onSelect (item) {
-                    hls.currentLevel = item.level;
-                    art.loading.show = true;
-                    return item.html;
-                }
+                selector: selector,
+                onSelect: onSelect
             });
             if (option.setting) art.setting.update({
                 name: "hls-quality",
                 tooltip: defaultHtml,
                 html: title,
-                icon: (0, _imageSvgDefault.default),
+                icon: (0, _qualitySvgDefault.default),
                 width: 200,
-                selector: hls.levels.map((item, index)=>{
-                    return {
-                        html: getResolution(item),
-                        level: item.level || index,
-                        default: defaultLevel === item
-                    };
-                }),
-                onSelect: function(item) {
-                    hls.currentLevel = item.level;
-                    art.loading.show = true;
-                    return item.html;
-                }
+                selector: selector,
+                onSelect: onSelect
             });
+        }
+        function updateAudio(hls) {
+        //
+        }
+        function update() {
+            const hls = art.hls || window.hls;
+            errorHandle(hls && hls.media === $video, 'Cannot find instance of HLS from "art.hls" or "window.hls"');
+            updateQuality(hls);
+            updateAudio(hls);
         }
         art.on("ready", update);
         art.on("restart", update);
         return {
-            name: "artplayerPluginHlsQuality"
+            name: "artplayerPluginHlsQuality",
+            update
         };
     };
 }
-exports.default = artplayerPluginHlsQuality;
-artplayerPluginHlsQuality.env = "development";
-artplayerPluginHlsQuality.version = "1.0.2";
-artplayerPluginHlsQuality.build = "2023-04-23 09:44:07";
 if (typeof window !== "undefined") window["artplayerPluginHlsQuality"] = artplayerPluginHlsQuality;
 
-},{"bundle-text:./image.svg":"1HFaU","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1HFaU":[function(require,module,exports) {
-module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1666857514489\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"2580\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"24\" height=\"24\"><path d=\"M870.4 176 153.6 176C104.128 176 64 216.128 64 265.6l0 492.736c0 49.472 40.128 89.6 89.6 89.6L870.4 847.936c49.472 0 89.6-40.128 89.6-89.6L960 265.6C960 216.128 919.872 176 870.4 176zM870.4 668.8 825.6 668.8c0 0-29.696-65.792-89.6-89.6s-134.4 89.6-134.4 89.6S535.04 596.992 467.2 444.8C399.36 292.608 153.6 624 153.6 624l0-358.4L870.4 265.6 870.4 668.8zM668.8 489.6c37.056 0 67.2-30.144 67.2-67.264 0-37.056-30.144-67.2-67.2-67.2C631.68 355.2 601.6 385.344 601.6 422.4 601.6 459.52 631.68 489.6 668.8 489.6z\" p-id=\"2581\" fill=\"#ffffff\"></path>\n</svg>";
-
-},{}],"5dUr6":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./quality.svg":"b53kH"}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -228,7 +228,7 @@ exports.defineInteropFlag = function(a) {
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -244,6 +244,9 @@ exports.export = function(dest, destName, get) {
         get: get
     });
 };
+
+},{}],"b53kH":[function(require,module,exports) {
+module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1666857514489\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"2580\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"24\" height=\"24\"><path d=\"M870.4 176 153.6 176C104.128 176 64 216.128 64 265.6l0 492.736c0 49.472 40.128 89.6 89.6 89.6L870.4 847.936c49.472 0 89.6-40.128 89.6-89.6L960 265.6C960 216.128 919.872 176 870.4 176zM870.4 668.8 825.6 668.8c0 0-29.696-65.792-89.6-89.6s-134.4 89.6-134.4 89.6S535.04 596.992 467.2 444.8C399.36 292.608 153.6 624 153.6 624l0-358.4L870.4 265.6 870.4 668.8zM668.8 489.6c37.056 0 67.2-30.144 67.2-67.264 0-37.056-30.144-67.2-67.2-67.2C631.68 355.2 601.6 385.344 601.6 422.4 601.6 459.52 631.68 489.6 668.8 489.6z\" p-id=\"2581\" fill=\"#ffffff\"></path>\n</svg>";
 
 },{}]},["hMiLQ"], "hMiLQ", "parcelRequire4dc0")
 

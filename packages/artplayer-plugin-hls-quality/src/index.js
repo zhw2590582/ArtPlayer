@@ -1,34 +1,40 @@
-import image from 'bundle-text:./image.svg';
-
-function checkVersion(art) {
-    const {
-        version,
-        utils: { errorHandle },
-    } = art.constructor;
-    const arr = version.split('.').map(Number);
-    const major = arr[0];
-    const minor = arr[1] / 100;
-    errorHandle(
-        major + minor >= 5,
-        `Artplayer.js@${version} is not compatible the artplayerPluginHlsQuality@${artplayerPluginHlsQuality.version}. Please update it to version Artplayer.js@5.x.x`,
-    );
-}
+import $quality from 'bundle-text:./quality.svg';
 
 export default function artplayerPluginHlsQuality(option) {
     return (art) => {
-        checkVersion(art);
-
         const { $video } = art.template;
         const { errorHandle } = art.constructor.utils;
 
-        function update() {
-            const hls = art.hls || window.hls;
-            errorHandle(hls && hls.media === $video, 'Cannot find instance of HLS from "art.hls" or "window.hls"');
+        function updateQuality(hls) {
             const auto = option.auto || 'Auto';
             const title = option.title || 'Quality';
+
             const getResolution = option.getResolution || ((level) => (level.height || 'Unknown ') + 'P');
             const defaultLevel = hls.levels[hls.currentLevel];
             const defaultHtml = defaultLevel ? getResolution(defaultLevel) : auto;
+
+            const selector = hls.levels
+                .map((item, index) => {
+                    return {
+                        html: getResolution(item),
+                        level: item.level || index,
+                        default: defaultLevel === item,
+                    };
+                })
+                .sort((a, b) => b.level - a.level);
+
+            selector.push({
+                html: auto,
+                level: -1,
+                default: defaultLevel === -1,
+            });
+
+            const onSelect = (item) => {
+                hls.currentLevel = item.level;
+                art.loading.show = true;
+                art.notice.show = `${title}: ${item.html}`;
+                return item.html;
+            };
 
             if (option.control) {
                 art.controls.update({
@@ -36,18 +42,8 @@ export default function artplayerPluginHlsQuality(option) {
                     position: 'right',
                     html: defaultHtml,
                     style: { padding: '0 10px' },
-                    selector: hls.levels.map((item, index) => {
-                        return {
-                            html: getResolution(item),
-                            level: item.level || index,
-                            default: defaultLevel === item,
-                        };
-                    }),
-                    onSelect(item) {
-                        hls.currentLevel = item.level;
-                        art.loading.show = true;
-                        return item.html;
-                    },
+                    selector: selector,
+                    onSelect: onSelect,
                 });
             }
 
@@ -56,22 +52,23 @@ export default function artplayerPluginHlsQuality(option) {
                     name: 'hls-quality',
                     tooltip: defaultHtml,
                     html: title,
-                    icon: image,
+                    icon: $quality,
                     width: 200,
-                    selector: hls.levels.map((item, index) => {
-                        return {
-                            html: getResolution(item),
-                            level: item.level || index,
-                            default: defaultLevel === item,
-                        };
-                    }),
-                    onSelect: function (item) {
-                        hls.currentLevel = item.level;
-                        art.loading.show = true;
-                        return item.html;
-                    },
+                    selector: selector,
+                    onSelect: onSelect,
                 });
             }
+        }
+
+        function updateAudio(hls) {
+            //
+        }
+
+        function update() {
+            const hls = art.hls || window.hls;
+            errorHandle(hls && hls.media === $video, 'Cannot find instance of HLS from "art.hls" or "window.hls"');
+            updateQuality(hls);
+            updateAudio(hls);
         }
 
         art.on('ready', update);
@@ -79,6 +76,7 @@ export default function artplayerPluginHlsQuality(option) {
 
         return {
             name: 'artplayerPluginHlsQuality',
+            update,
         };
     };
 }
