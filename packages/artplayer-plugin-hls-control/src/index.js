@@ -1,4 +1,5 @@
 import $quality from 'bundle-text:./quality.svg';
+import $audio from 'bundle-text:./audio.svg';
 
 export default function artplayerPluginHlsControl(option = {}) {
     return (art) => {
@@ -6,6 +7,8 @@ export default function artplayerPluginHlsControl(option = {}) {
         const { errorHandle } = art.constructor.utils;
 
         function updateQuality(hls) {
+            if (!hls.levels.length) return;
+
             const config = option.quality || {};
             const auto = config.auto || 'Auto';
             const title = config.title || 'Quality';
@@ -17,20 +20,20 @@ export default function artplayerPluginHlsControl(option = {}) {
                 .map((item, index) => {
                     return {
                         html: getName(item, index),
-                        level: item.level || index,
+                        value: index,
                         default: hls.currentLevel === index,
                     };
                 })
-                .sort((a, b) => b.level - a.level);
+                .sort((a, b) => b.value - a.value);
 
             selector.push({
                 html: auto,
-                level: -1,
+                value: -1,
                 default: hls.currentLevel === -1,
             });
 
             const onSelect = (item) => {
-                hls.currentLevel = item.level;
+                hls.currentLevel = item.value;
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 return item.html;
@@ -61,7 +64,52 @@ export default function artplayerPluginHlsControl(option = {}) {
         }
 
         function updateAudio(hls) {
-            //
+            if (!hls.audioTracks.length) return;
+
+            const config = option.audio || {};
+            const auto = config.auto || 'Auto';
+            const title = config.title || 'Audio';
+            const getName = config.getName || ((track, index) => track.name || `Track ${index + 1}`);
+            const defaultTrack = hls.audioTracks[hls.audioTrack];
+            const defaultHtml = defaultTrack ? getName(defaultTrack) : auto;
+
+            const selector = hls.audioTracks.map((item, index) => {
+                return {
+                    html: getName(item, index),
+                    value: index,
+                    default: hls.audioTrack === index,
+                };
+            });
+
+            const onSelect = (item) => {
+                hls.audioTrack = item.value;
+                art.loading.show = true;
+                art.notice.show = `${title}: ${item.html}`;
+                return item.html;
+            };
+
+            if (config.control) {
+                art.controls.update({
+                    name: 'hls-audio',
+                    position: 'right',
+                    html: defaultHtml,
+                    style: { padding: '0 10px' },
+                    selector: selector,
+                    onSelect: onSelect,
+                });
+            }
+
+            if (config.setting) {
+                art.setting.update({
+                    name: 'hls-audio',
+                    tooltip: defaultHtml,
+                    html: title,
+                    icon: $audio,
+                    width: 200,
+                    selector: selector,
+                    onSelect: onSelect,
+                });
+            }
         }
 
         function update() {
