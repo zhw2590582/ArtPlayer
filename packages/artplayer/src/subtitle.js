@@ -78,10 +78,11 @@ export default class Subtitle extends Component {
             .map((cue, index) =>
                 cue.text
                     .split(/\r?\n/)
+                    .filter((line) => line.trim())
                     .map(
-                        (item) =>
+                        (line) =>
                             `<div class="art-subtitle-line" data-group="${index}">
-                                ${subtitle.escape ? escape(item) : item}
+                                ${subtitle.escape ? escape(line) : line}
                             </div>`,
                     )
                     .join(''),
