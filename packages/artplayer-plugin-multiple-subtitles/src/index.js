@@ -38,15 +38,7 @@ function mergeTrees(trees) {
             }
         }
 
-        if (result.cues.length === 0) {
-            result.cues = [...tree.cues];
-        } else {
-            for (let l = 0; l < result.cues.length; l++) {
-                const a = result.cues[l].tree.children;
-                const b = tree.cues[l]?.tree?.children;
-                result.cues[l] = { ...result.cues[l], tree: { children: [...a, ...b] } };
-            }
-        }
+        result.cues.push(...tree.cues);
     }
 
     return result;

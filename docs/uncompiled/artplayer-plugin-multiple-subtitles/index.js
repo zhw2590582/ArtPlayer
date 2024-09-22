@@ -178,22 +178,7 @@ function mergeTrees(trees) {
                 }
             }
         }
-        if (result.cues.length === 0) result.cues = [
-            ...tree.cues
-        ];
-        else for(let l = 0; l < result.cues.length; l++){
-            const a = result.cues[l].tree.children;
-            const b = tree.cues[l]?.tree?.children;
-            result.cues[l] = {
-                ...result.cues[l],
-                tree: {
-                    children: [
-                        ...a,
-                        ...b
-                    ]
-                }
-            };
-        }
+        result.cues.push(...tree.cues);
     }
     return result;
 }
@@ -246,9 +231,6 @@ function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
         };
     };
 }
-artplayerPluginMultipleSubtitles.env = "development";
-artplayerPluginMultipleSubtitles.version = "1.0.0";
-artplayerPluginMultipleSubtitles.build = "2023-11-24 09:22:00";
 if (typeof window !== "undefined") window["artplayerPluginMultipleSubtitles"] = artplayerPluginMultipleSubtitles;
 
 },{"./parser":"eko7u","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eko7u":[function(require,module,exports) {
@@ -978,7 +960,7 @@ exports.defineInteropFlag = function(a) {
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
