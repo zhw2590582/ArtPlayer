@@ -1,24 +1,24 @@
 import $quality from 'bundle-text:./quality.svg';
 
-export default function artplayerPluginHlsQuality(option) {
+export default function artplayerPluginHlsControl(option = {}) {
     return (art) => {
         const { $video } = art.template;
         const { errorHandle } = art.constructor.utils;
 
         function updateQuality(hls) {
-            const auto = option.auto || 'Auto';
-            const title = option.title || 'Quality';
-
-            const getResolution = option.getResolution || ((level) => (level.height || 'Unknown ') + 'P');
+            const config = option.quality || {};
+            const auto = config.auto || 'Auto';
+            const title = config.title || 'Quality';
+            const getName = config.getName || ((level) => (level.height || 'Unknown ') + 'P');
             const defaultLevel = hls.levels[hls.currentLevel];
-            const defaultHtml = defaultLevel ? getResolution(defaultLevel) : auto;
+            const defaultHtml = defaultLevel ? getName(defaultLevel) : auto;
 
             const selector = hls.levels
                 .map((item, index) => {
                     return {
-                        html: getResolution(item),
+                        html: getName(item, index),
                         level: item.level || index,
-                        default: defaultLevel === item,
+                        default: hls.currentLevel === index,
                     };
                 })
                 .sort((a, b) => b.level - a.level);
@@ -26,7 +26,7 @@ export default function artplayerPluginHlsQuality(option) {
             selector.push({
                 html: auto,
                 level: -1,
-                default: defaultLevel === -1,
+                default: hls.currentLevel === -1,
             });
 
             const onSelect = (item) => {
@@ -36,7 +36,7 @@ export default function artplayerPluginHlsQuality(option) {
                 return item.html;
             };
 
-            if (option.control) {
+            if (config.control) {
                 art.controls.update({
                     name: 'hls-quality',
                     position: 'right',
@@ -47,7 +47,7 @@ export default function artplayerPluginHlsQuality(option) {
                 });
             }
 
-            if (option.setting) {
+            if (config.setting) {
                 art.setting.update({
                     name: 'hls-quality',
                     tooltip: defaultHtml,
@@ -75,12 +75,12 @@ export default function artplayerPluginHlsQuality(option) {
         art.on('restart', update);
 
         return {
-            name: 'artplayerPluginHlsQuality',
+            name: 'artplayerPluginHlsControl',
             update,
         };
     };
 }
 
 if (typeof window !== 'undefined') {
-    window['artplayerPluginHlsQuality'] = artplayerPluginHlsQuality;
+    window['artplayerPluginHlsControl'] = artplayerPluginHlsControl;
 }
