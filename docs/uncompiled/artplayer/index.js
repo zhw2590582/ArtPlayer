@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-09-14 16:20:00";
+        return "2024-09-22 16:47:48";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3828,9 +3828,9 @@ class Subtitle extends (0, _componentDefault.default) {
     get textTrack() {
         return this.art.template.$video?.textTracks?.[0];
     }
-    get activeCue() {
-        if (!this.textTrack) return null;
-        return this.textTrack.activeCues[0];
+    get activeCues() {
+        if (!this.textTrack) return [];
+        return Array.from(this.textTrack.activeCues);
     }
     get cues() {
         if (!this.textTrack) return [];
@@ -3842,14 +3842,14 @@ class Subtitle extends (0, _componentDefault.default) {
         return (0, _utils.setStyle)($subtitle, key, value);
     }
     update() {
-        const { $subtitle } = this.art.template;
+        const { option: { subtitle }, template: { $subtitle } } = this.art;
         $subtitle.innerHTML = "";
-        if (this.activeCue) {
-            this.art.emit("subtitleBeforeUpdate", this.activeCue);
-            if (this.art.option.subtitle.escape) $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map((item)=>`<div class="art-subtitle-line">${(0, _utils.escape)(item)}</div>`).join("");
-            else $subtitle.innerHTML = this.activeCue.text;
-            this.art.emit("subtitleAfterUpdate", this.activeCue);
-        }
+        if (!this.activeCues.length) return;
+        this.art.emit("subtitleBeforeUpdate", this.activeCues);
+        $subtitle.innerHTML = this.activeCues.map((cue, index)=>cue.text.split(/\r?\n/).map((item)=>`<div class="art-subtitle-line" data-group="${index}">
+                                ${subtitle.escape ? (0, _utils.escape)(item) : item}
+                            </div>`).join("")).join("");
+        this.art.emit("subtitleAfterUpdate", this.activeCues);
     }
     async switch(url, newOption = {}) {
         const { i18n, notice, option } = this.art;

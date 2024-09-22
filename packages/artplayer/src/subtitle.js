@@ -46,9 +46,9 @@ export default class Subtitle extends Component {
         return this.art.template.$video?.textTracks?.[0];
     }
 
-    get activeCue() {
-        if (!this.textTrack) return null;
-        return this.textTrack.activeCues[0];
+    get activeCues() {
+        if (!this.textTrack) return [];
+        return Array.from(this.textTrack.activeCues);
     }
 
     get cues() {
@@ -65,20 +65,29 @@ export default class Subtitle extends Component {
     }
 
     update() {
-        const { $subtitle } = this.art.template;
+        const {
+            option: { subtitle },
+            template: { $subtitle },
+        } = this.art;
+
         $subtitle.innerHTML = '';
-        if (this.activeCue) {
-            this.art.emit('subtitleBeforeUpdate', this.activeCue);
-            if (this.art.option.subtitle.escape) {
-                $subtitle.innerHTML = this.activeCue.text
+        if (!this.activeCues.length) return;
+
+        this.art.emit('subtitleBeforeUpdate', this.activeCues);
+        $subtitle.innerHTML = this.activeCues
+            .map((cue, index) =>
+                cue.text
                     .split(/\r?\n/)
-                    .map((item) => `<div class="art-subtitle-line">${escape(item)}</div>`)
-                    .join('');
-            } else {
-                $subtitle.innerHTML = this.activeCue.text;
-            }
-            this.art.emit('subtitleAfterUpdate', this.activeCue);
-        }
+                    .map(
+                        (item) =>
+                            `<div class="art-subtitle-line" data-group="${index}">
+                                ${subtitle.escape ? escape(item) : item}
+                            </div>`,
+                    )
+                    .join(''),
+            )
+            .join('');
+        this.art.emit('subtitleAfterUpdate', this.activeCues);
     }
 
     async switch(url, newOption = {}) {
