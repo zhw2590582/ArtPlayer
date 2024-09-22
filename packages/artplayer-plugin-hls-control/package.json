@@ -1,6 +1,6 @@
 {
     "license": "MIT",
-    "version": "3.0.0",
+    "version": "1.0.0",
     "name": "artplayer-plugin-hls-control",
     "types": "types/artplayer-plugin-hls-control.d.ts",
     "description": "Iframe plugin for ArtPlayer",
