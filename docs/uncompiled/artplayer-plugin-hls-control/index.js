@@ -250,10 +250,9 @@ function artplayerPluginHlsControl(option = {}) {
             });
         }
         function update() {
-            const hls = art.hls || window.hls;
-            errorHandle(hls && hls.media === $video, 'Cannot find instance of HLS from "art.hls" or "window.hls"');
-            updateQuality(hls);
-            updateAudio(hls);
+            errorHandle(art.hls?.media === $video, 'Cannot find instance of HLS from "art.hls"');
+            updateQuality(art.hls);
+            updateAudio(art.hls);
         }
         art.on("ready", update);
         art.on("restart", update);
