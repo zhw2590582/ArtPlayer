@@ -1,6 +1,6 @@
 {
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "artplayer-plugin-chromecast",
     "types": "types/artplayer-plugin-chromecast.d.ts",
     "description": "Chromecast plugin for ArtPlayer",
