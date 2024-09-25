@@ -1,6 +1,7 @@
 {
     "license": "MIT",
-    "version": "2.0.0",
+    "version": "2.0.1",
+    "deprecated": "This package is no longer maintained. Please use artplayer-plugin-hls-control instead.",
     "name": "artplayer-plugin-hls-quality",
     "types": "types/artplayer-plugin-hls-quality.d.ts",
     "description": "Iframe plugin for ArtPlayer",
