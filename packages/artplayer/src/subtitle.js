@@ -82,7 +82,7 @@ export default class Subtitle extends Component {
                     .map(
                         (line) =>
                             `<div class="art-subtitle-line" data-group="${index}">
-                                ${subtitle.escape ? escape(line) : line}
+                                ${subtitle.escape ? escape(line).replace(/<\/?[^>]+(>|$)/g, "") : line.replace(/<\/?[^>]+(>|$)/g, "")}
                             </div>`,
                     )
                     .join(''),
