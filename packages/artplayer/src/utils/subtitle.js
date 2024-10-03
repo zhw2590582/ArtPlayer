@@ -26,7 +26,7 @@ export function srtToVtt(srtText) {
 
 export function vttToBlob(vttText) {
     return URL.createObjectURL(
-        new Blob([vttText.replace(/<\/?[^>]+(>|$)/g, "")], {
+        new Blob([vttText], {
             type: 'text/vtt',
         }),
     );
