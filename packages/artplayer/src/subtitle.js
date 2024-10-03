@@ -135,7 +135,7 @@ export default class Subtitle extends Component {
         this.option = subtitleOption;
         this.style(subtitleOption.style);
 
-        return fetch(subtitleOption.url, { method: "cors" })
+        return fetch(subtitleOption.url, { mode: "cors" })
             .then((response) => response.arrayBuffer())
             .then((buffer) => {
                 const decoder = new TextDecoder(subtitleOption.encoding);
