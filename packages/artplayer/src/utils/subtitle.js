@@ -24,14 +24,9 @@ export function srtToVtt(srtText) {
     );
 }
 
-function stripHtml(html) {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent || "";
-}
-
 export function vttToBlob(vttText) {
     return URL.createObjectURL(
-        new Blob([stripHtml(vttText)], {
+        new Blob([vttText.replace(/<\/?[^>]+(>|$)/g, "")], {
             type: 'text/vtt',
         }),
     );
