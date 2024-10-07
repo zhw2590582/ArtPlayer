@@ -20,5 +20,12 @@
         "html5",
         "video",
         "player"
-    ]
+    ],
+    "dependencies": {
+        "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+        "@tensorflow-models/body-segmentation": "^1.0.2",
+        "@tensorflow/tfjs-backend-webgl": "^4.21.0",
+        "@tensorflow/tfjs-converter": "^4.21.0",
+        "@tensorflow/tfjs-core": "^4.21.0"
+    }
 }
