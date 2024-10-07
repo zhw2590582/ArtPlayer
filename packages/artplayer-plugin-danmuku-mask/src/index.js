@@ -39,6 +39,17 @@ export default function artplayerPluginDanmukuMask(option = {}) {
             $player.appendChild(canvas);
         }
 
+        function makeWhiteTransparent(canvas) {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                if (data[i] > 250 && data[i + 1] > 250 && data[i + 2] > 250) {
+                    data[i + 3] = 0;
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+        }
+
         async function segmentBody() {
             if ($video.paused || $video.ended) {
                 animationFrameId = requestAnimationFrame(segmentBody);
@@ -46,8 +57,8 @@ export default function artplayerPluginDanmukuMask(option = {}) {
             }
 
             try {
-                canvas.width = $video.videoWidth;
-                canvas.height = $video.videoHeight;
+                canvas.width = art.width;
+                canvas.height = art.height;
 
                 const segmentation = await segmenter.segmentPeople($video);
 
@@ -56,8 +67,8 @@ export default function artplayerPluginDanmukuMask(option = {}) {
                     return;
                 }
 
-                const foregroundColor = { r: 0, g: 0, b: 0, a: 255 };
-                const backgroundColor = { r: 255, g: 255, b: 255, a: 255 };
+                const foregroundColor = { r: 255, g: 255, b: 255, a: 255 };
+                const backgroundColor = { r: 0, g: 0, b: 0, a: 255 };
                 const drawContour = false;
                 const foregroundThreshold = 0.6;
 
@@ -73,6 +84,7 @@ export default function artplayerPluginDanmukuMask(option = {}) {
                 const maskBlurAmount = 1;
                 await bodySegmentation.drawMask(canvas, $video, mask, opacity, maskBlurAmount);
 
+                makeWhiteTransparent(canvas);
                 $danmuku.style.webkitMaskImage = `url(${canvas.toDataURL()})`;
                 $danmuku.style.maskImage = `url(${canvas.toDataURL()})`;
             } catch (error) {
