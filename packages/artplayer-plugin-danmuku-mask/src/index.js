@@ -35,6 +35,7 @@ export default function artplayerPluginDanmukuMask(option = {}) {
             canvas.style.width = '100%';
             canvas.style.height = '100%';
             canvas.style.pointerEvents = 'none';
+            canvas.style.opacity = '0';
             $player.appendChild(canvas);
         }
 
@@ -55,8 +56,8 @@ export default function artplayerPluginDanmukuMask(option = {}) {
                     return;
                 }
 
-                const foregroundColor = { r: 0, g: 0, b: 0, a: 0 };
-                const backgroundColor = { r: 0, g: 0, b: 0, a: 255 };
+                const foregroundColor = { r: 0, g: 0, b: 0, a: 255 };
+                const backgroundColor = { r: 255, g: 255, b: 255, a: 255 };
                 const drawContour = false;
                 const foregroundThreshold = 0.6;
 
@@ -69,7 +70,7 @@ export default function artplayerPluginDanmukuMask(option = {}) {
                 );
 
                 const opacity = 1;
-                const maskBlurAmount = 3;
+                const maskBlurAmount = 1;
                 await bodySegmentation.drawMask(canvas, $video, mask, opacity, maskBlurAmount);
 
                 $danmuku.style.webkitMaskImage = `url(${canvas.toDataURL()})`;
@@ -89,15 +90,6 @@ export default function artplayerPluginDanmukuMask(option = {}) {
             if (!canvas) {
                 createCanvas();
             }
-
-            // Wait for the video element to be ready
-            await new Promise((resolve) => {
-                if ($video.readyState >= 2) {
-                    resolve();
-                } else {
-                    $video.onloadeddata = resolve;
-                }
-            });
 
             segmentBody();
         }
