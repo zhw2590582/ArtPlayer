@@ -31,8 +31,7 @@ export default function artplayerPluginDanmukuMask(option = {}) {
         async function initTensorFlow() {
             try {
                 await tf.setBackend('webgl');
-                console.log('Using WebGL backend');
-            } catch (e) {
+            } catch (error) {
                 console.warn('WebGL backend not available, falling back to CPU');
                 await tf.setBackend('cpu');
             }
@@ -56,7 +55,6 @@ export default function artplayerPluginDanmukuMask(option = {}) {
             try {
                 segmenter = await bodySegmentation.createSegmenter(model, segmenterConfig);
                 isInitialized = true;
-                console.log('Segmenter initialized successfully');
             } catch (error) {
                 console.error('Error initializing segmenter:', error);
                 isInitialized = false;
