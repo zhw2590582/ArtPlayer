@@ -148,6 +148,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginDanmukuMask);
 var _tfjsCore = require("@tensorflow/tfjs-core");
 var _tfjsBackendWebgl = require("@tensorflow/tfjs-backend-webgl");
+var _tfjsBackendCpu = require("@tensorflow/tfjs-backend-cpu");
 var _bodySegmentation = require("@tensorflow-models/body-segmentation");
 function artplayerPluginDanmukuMask(option = {}) {
     return (art)=>{
@@ -156,67 +157,84 @@ function artplayerPluginDanmukuMask(option = {}) {
         let canvas = null;
         let ctx = null;
         let animationFrameId = null;
+        let isInitialized = false;
+        async function initTensorFlow() {
+            try {
+                await _tfjsCore.setBackend("webgl");
+            } catch (e) {
+                console.warn("WebGL backend not available, falling back to CPU");
+                await _tfjsCore.setBackend("cpu");
+            }
+        }
         async function initSegmenter() {
-            await _tfjsCore.setBackend("webgl");
+            await initTensorFlow();
             const model = _bodySegmentation.SupportedModels.MediaPipeSelfieSegmentation;
             const segmenterConfig = {
                 runtime: "mediapipe",
-                solutionPath: "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation",
-                modelType: "general"
+                modelType: "general",
+                solutionPath: option.solutionPath || "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation",
+                modelSelection: option.modelSelection || 1,
+                smoothSegmentation: option.smoothSegmentation !== undefined ? option.smoothSegmentation : true,
+                minDetectionConfidence: option.minDetectionConfidence || 0.5,
+                minTrackingConfidence: option.minTrackingConfidence || 0.5,
+                selfieMode: option.selfieMode || false
             };
-            segmenter = await _bodySegmentation.createSegmenter(model, segmenterConfig);
+            try {
+                segmenter = await _bodySegmentation.createSegmenter(model, segmenterConfig);
+                $danmuku.style.maskMode = "alpha";
+                isInitialized = true;
+            } catch (error) {
+                console.error("Error initializing segmenter:", error);
+                isInitialized = false;
+            }
         }
         function createCanvas() {
             canvas = document.createElement("canvas");
             ctx = canvas.getContext("2d");
-            canvas.style.position = "absolute";
-            canvas.style.top = "0";
-            canvas.style.left = "0";
-            canvas.style.width = "100%";
-            canvas.style.height = "100%";
-            canvas.style.pointerEvents = "none";
-            canvas.style.opacity = "0";
+            Object.assign(canvas.style, {
+                position: "absolute",
+                top: "0",
+                left: "0",
+                width: "100%",
+                height: "100%",
+                pointerEvents: "none",
+                opacity: "0"
+            });
             $player.appendChild(canvas);
         }
-        function makeWhiteTransparent(canvas) {
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        function makeWhiteTransparent(imageData) {
             const data = imageData.data;
             for(let i = 0; i < data.length; i += 4)if (data[i] > 250 && data[i + 1] > 250 && data[i + 2] > 250) data[i + 3] = 0;
-            ctx.putImageData(imageData, 0, 0);
+            return imageData;
         }
         async function segmentBody() {
-            if ($video.paused || $video.ended) {
+            if (!isInitialized || $video.paused || $video.ended) {
                 animationFrameId = requestAnimationFrame(segmentBody);
                 return;
             }
             try {
-                canvas.width = art.width;
-                canvas.height = art.height;
+                canvas.width = $video.videoWidth;
+                canvas.height = $video.videoHeight;
                 const segmentation = await segmenter.segmentPeople($video);
-                if (!segmentation) {
+                if (!segmentation || segmentation.length === 0) {
                     animationFrameId = requestAnimationFrame(segmentBody);
                     return;
                 }
-                const foregroundColor = {
+                const foregroundThreshold = option.foregroundThreshold || 0.6;
+                const mask = await _bodySegmentation.toBinaryMask(segmentation, {
                     r: 255,
                     g: 255,
                     b: 255,
                     a: 255
-                };
-                const backgroundColor = {
+                }, {
                     r: 0,
                     g: 0,
                     b: 0,
                     a: 255
-                };
-                const drawContour = false;
-                const foregroundThreshold = 0.6;
-                const mask = await _bodySegmentation.toBinaryMask(segmentation, foregroundColor, backgroundColor, drawContour, foregroundThreshold);
-                const opacity = 1;
-                const maskBlurAmount = 1;
-                await _bodySegmentation.drawMask(canvas, $video, mask, opacity, maskBlurAmount);
-                makeWhiteTransparent(canvas);
-                $danmuku.style.webkitMaskImage = `url(${canvas.toDataURL()})`;
+                }, false, foregroundThreshold);
+                await _bodySegmentation.drawMask(canvas, $video, mask, 1, 1);
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                ctx.putImageData(makeWhiteTransparent(imageData), 0, 0);
                 $danmuku.style.maskImage = `url(${canvas.toDataURL()})`;
             } catch (error) {
                 console.error("Error in segmentBody:", error);
@@ -224,7 +242,7 @@ function artplayerPluginDanmukuMask(option = {}) {
             animationFrameId = requestAnimationFrame(segmentBody);
         }
         async function startSegmentation() {
-            if (!segmenter) await initSegmenter();
+            if (!isInitialized) await initSegmenter();
             if (!canvas) createCanvas();
             segmentBody();
         }
@@ -245,7 +263,7 @@ function artplayerPluginDanmukuMask(option = {}) {
 }
 if (typeof window !== "undefined") window["artplayerPluginDanmukuMask"] = artplayerPluginDanmukuMask;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","@tensorflow/tfjs-core":"21Ftl","@tensorflow/tfjs-backend-webgl":"bXLEs","@tensorflow-models/body-segmentation":"5k877"}],"5dUr6":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","@tensorflow/tfjs-core":"21Ftl","@tensorflow/tfjs-backend-webgl":"bXLEs","@tensorflow-models/body-segmentation":"5k877","@tensorflow/tfjs-backend-cpu":"bzQr6"}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -78524,6 +78542,9580 @@ var global = arguments[3];
     Aa("VERSION", "0.1.1675465747");
 }).call(this);
 
-},{}]},["8uLJa"], "8uLJa", "parcelRequire4dc0")
+},{}],"bzQr6":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ // All exports from this package should be in base.
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _base = require("./base");
+parcelHelpers.exportAll(_base, exports);
+var _registerAllKernels = require("./register_all_kernels");
+
+},{"./base":"eS7ei","./register_all_kernels":"89NZo","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eS7ei":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ /*
+ * base.ts contains all the exports from tfjs-backend-cpu
+ * without auto-kernel registration
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MathBackendCPU", ()=>(0, _backendCpu.MathBackendCPU));
+parcelHelpers.export(exports, "version_cpu", ()=>(0, _version.version));
+parcelHelpers.export(exports, "shared", ()=>_shared);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _backendCpu = require("./backend_cpu");
+var _shared = require("./shared");
+var _version = require("./version");
+// Side effects for default initialization of MathBackendCPU
+(0, _tfjsCore.registerBackend)("cpu", ()=>new (0, _backendCpu.MathBackendCPU)(), 1 /* priority */ );
+
+},{"@tensorflow/tfjs-core":"21Ftl","./backend_cpu":"argpD","./shared":"YbUp7","./version":"fow87","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"argpD":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MathBackendCPU", ()=>MathBackendCPU);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("./cpu_util");
+const whereImpl = (0, _tfjsCore.kernel_impls).whereImpl;
+class MathBackendCPU extends (0, _tfjsCore.KernelBackend) {
+    nextDataId() {
+        return MathBackendCPU.nextDataId++;
+    }
+    constructor(){
+        super();
+        this.blockSize = 48;
+        this.firstUse = true;
+        this.data = new (0, _tfjsCore.DataStorage)(this, (0, _tfjsCore.engine)());
+    }
+    write(values, shape, dtype) {
+        if (this.firstUse) {
+            this.firstUse = false;
+            if ((0, _tfjsCore.env)().get("IS_NODE")) (0, _tfjsCore.backend_util).warn("\n============================\nHi, looks like you are running TensorFlow.js in Node.js. To speed things up dramatically, install our node backend, visit https://github.com/tensorflow/tfjs-node for more details. \n============================");
+        }
+        const dataId = {
+            id: this.nextDataId()
+        };
+        this.data.set(dataId, {
+            values,
+            dtype,
+            refCount: 1
+        });
+        return dataId;
+    }
+    /**
+     * Create a data bucket in cpu backend.
+     * @param shape Shape of the `TensorInfo`.
+     * @param dtype DType of the `TensorInfo`.
+     * @param values The value of the `TensorInfo` stored as a flattened array.
+     */ makeTensorInfo(shape, dtype, values) {
+        let outId;
+        if (dtype === "string" && values != null && values.length > 0 && (0, _tfjsCore.util).isString(values[0])) {
+            const encodedValues = values.map((d)=>(0, _tfjsCore.util).encodeString(d));
+            outId = this.write(encodedValues, shape, dtype);
+        } else outId = this.write(values, shape, dtype);
+        return {
+            dataId: outId,
+            shape,
+            dtype
+        };
+    }
+    /** Return refCount of a `TensorData`. */ refCount(dataId) {
+        if (this.data.has(dataId)) {
+            const tensorData = this.data.get(dataId);
+            return tensorData.refCount;
+        }
+        return 0;
+    }
+    /** Increase refCount of a `TensorData`. */ incRef(dataId) {
+        const tensorData = this.data.get(dataId);
+        tensorData.refCount++;
+    }
+    /** Decrease refCount of a `TensorData`. */ decRef(dataId) {
+        if (this.data.has(dataId)) {
+            const tensorData = this.data.get(dataId);
+            tensorData.refCount--;
+        }
+    }
+    move(dataId, values, shape, dtype, refCount) {
+        this.data.set(dataId, {
+            values,
+            dtype,
+            refCount
+        });
+    }
+    numDataIds() {
+        return this.data.numDataIds();
+    }
+    async read(dataId) {
+        return this.readSync(dataId);
+    }
+    readSync(dataId) {
+        const { dtype, complexTensorInfos } = this.data.get(dataId);
+        if (dtype === "complex64") {
+            const realValues = this.readSync(complexTensorInfos.real.dataId);
+            const imagValues = this.readSync(complexTensorInfos.imag.dataId);
+            return (0, _tfjsCore.backend_util).mergeRealAndImagArrays(realValues, imagValues);
+        }
+        return (0, _tfjsCore.util).convertBackendValuesAndArrayBuffer(this.data.get(dataId).values, dtype);
+    }
+    bufferSync(t) {
+        const data = this.readSync(t.dataId);
+        if (t.dtype === "string") try {
+            // Decode the bytes into string.
+            const strings = data.map((d)=>(0, _tfjsCore.util).decodeString(d));
+            return (0, _tfjsCore.buffer)(t.shape, t.dtype, strings);
+        } catch (_a) {
+            throw new Error("Failed to decode encoded string bytes into utf-8");
+        }
+        return (0, _tfjsCore.buffer)(t.shape, t.dtype, data);
+    }
+    makeOutput(values, shape, dtype) {
+        return (0, _tfjsCore.engine)().makeTensorFromTensorInfo(this.makeTensorInfo(shape, dtype, values), this);
+    }
+    /**
+     * Dispose the memory if the dataId has 0 refCount. Return true if the memory
+     * is released or memory is not managed in this backend, false if memory is
+     * not cleared.
+     * @param dataId
+     * @oaram force Optional, remove the data regardless of refCount
+     */ disposeData(dataId, force = false) {
+        if (this.data.has(dataId)) {
+            this.data.get(dataId).refCount--;
+            if (!force && this.data.get(dataId).refCount > 0) return false;
+            const { complexTensorInfos } = this.data.get(dataId);
+            if (complexTensorInfos != null) {
+                this.disposeData(complexTensorInfos.real.dataId, true);
+                this.disposeData(complexTensorInfos.imag.dataId, true);
+            }
+            this.data.delete(dataId);
+        }
+        return true;
+    }
+    disposeIntermediateTensorInfo(tensorInfo) {
+        this.disposeData(tensorInfo.dataId);
+    }
+    async time(f) {
+        const start = (0, _tfjsCore.util).now();
+        f();
+        const kernelMs = (0, _tfjsCore.util).now() - start;
+        return {
+            kernelMs
+        };
+    }
+    memory() {
+        return {
+            // Unreliable due to automatic gc. The numbers above are cumulative.
+            unreliable: true,
+            reasons: [
+                "The reported memory is an upper bound. Due to automatic garbage collection, the true allocated memory may be less."
+            ]
+        };
+    }
+    where(condition) {
+        (0, _cpuUtil.assertNotComplex)([
+            condition
+        ], "where");
+        const condVals = this.readSync(condition.dataId);
+        return whereImpl(condition.shape, condVals);
+    }
+    dispose() {}
+    floatPrecision() {
+        return 32;
+    }
+    /** Returns the smallest representable number.  */ epsilon() {
+        return super.epsilon();
+    }
+}
+MathBackendCPU.nextDataId = 0;
+
+},{"@tensorflow/tfjs-core":"21Ftl","./cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fow87":[function(require,module,exports) {
+/** @license See the LICENSE file. */ // This code is auto-generated, do not modify this file!
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "version", ()=>version);
+const version = "4.21.0";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"89NZo":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ // We explicitly import the modular kernels so they get registered in the
+// global registry when we compile the library. A modular build would replace
+// the contents of this file and import only the kernels that are needed.
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _fusedMatMul = require("./kernels/_FusedMatMul");
+var _abs = require("./kernels/Abs");
+var _acos = require("./kernels/Acos");
+var _acosh = require("./kernels/Acosh");
+var _add = require("./kernels/Add");
+var _addN = require("./kernels/AddN");
+var _all = require("./kernels/All");
+var _any = require("./kernels/Any");
+var _argMax = require("./kernels/ArgMax");
+var _argMin = require("./kernels/ArgMin");
+var _asin = require("./kernels/Asin");
+var _asinh = require("./kernels/Asinh");
+var _atan = require("./kernels/Atan");
+var _atan2 = require("./kernels/Atan2");
+var _atanh = require("./kernels/Atanh");
+var _avgPool = require("./kernels/AvgPool");
+var _avgPool3D = require("./kernels/AvgPool3D");
+var _avgPool3DGrad = require("./kernels/AvgPool3DGrad");
+var _avgPoolGrad = require("./kernels/AvgPoolGrad");
+var _batchMatMul = require("./kernels/BatchMatMul");
+var _batchNorm = require("./kernels/BatchNorm");
+var _batchToSpaceND = require("./kernels/BatchToSpaceND");
+var _bincount = require("./kernels/Bincount");
+var _bitwiseAnd = require("./kernels/BitwiseAnd");
+var _broadcastArgs = require("./kernels/BroadcastArgs");
+var _cast = require("./kernels/Cast");
+var _ceil = require("./kernels/Ceil");
+var _clipByValue = require("./kernels/ClipByValue");
+var _complex = require("./kernels/Complex");
+var _complexAbs = require("./kernels/ComplexAbs");
+var _concat = require("./kernels/Concat");
+var _conv2D = require("./kernels/Conv2D");
+var _conv2DBackpropFilter = require("./kernels/Conv2DBackpropFilter");
+var _conv2DBackpropInput = require("./kernels/Conv2DBackpropInput");
+var _conv3D = require("./kernels/Conv3D");
+var _conv3DBackpropFilterV2 = require("./kernels/Conv3DBackpropFilterV2");
+var _conv3DBackpropInputV2 = require("./kernels/Conv3DBackpropInputV2");
+var _cos = require("./kernels/Cos");
+var _cosh = require("./kernels/Cosh");
+var _cropAndResize = require("./kernels/CropAndResize");
+var _cumprod = require("./kernels/Cumprod");
+var _cumsum = require("./kernels/Cumsum");
+var _denseBincount = require("./kernels/DenseBincount");
+var _depthToSpace = require("./kernels/DepthToSpace");
+var _depthwiseConv2DNative = require("./kernels/DepthwiseConv2dNative");
+var _depthwiseConv2DNativeBackpropFilter = require("./kernels/DepthwiseConv2dNativeBackpropFilter");
+var _depthwiseConv2DNativeBackpropInput = require("./kernels/DepthwiseConv2dNativeBackpropInput");
+var _diag = require("./kernels/Diag");
+var _dilation2D = require("./kernels/Dilation2D");
+var _dilation2DBackpropFilter = require("./kernels/Dilation2DBackpropFilter");
+var _dilation2DBackpropInput = require("./kernels/Dilation2DBackpropInput");
+var _draw = require("./kernels/Draw");
+var _einsum = require("./kernels/Einsum");
+var _elu = require("./kernels/Elu");
+var _eluGrad = require("./kernels/EluGrad");
+var _equal = require("./kernels/Equal");
+var _erf = require("./kernels/Erf");
+var _exp = require("./kernels/Exp");
+var _expandDims = require("./kernels/ExpandDims");
+var _expm1 = require("./kernels/Expm1");
+var _fft = require("./kernels/FFT");
+var _fill = require("./kernels/Fill");
+var _flipLeftRight = require("./kernels/FlipLeftRight");
+var _floor = require("./kernels/Floor");
+var _floorDiv = require("./kernels/FloorDiv");
+var _fusedConv2D = require("./kernels/FusedConv2D");
+var _fusedDepthwiseConv2D = require("./kernels/FusedDepthwiseConv2D");
+var _gatherNd = require("./kernels/GatherNd");
+var _gatherV2 = require("./kernels/GatherV2");
+var _greater = require("./kernels/Greater");
+var _greaterEqual = require("./kernels/GreaterEqual");
+var _identity = require("./kernels/Identity");
+var _ifft = require("./kernels/IFFT");
+var _imag = require("./kernels/Imag");
+var _isFinite = require("./kernels/IsFinite");
+var _isInf = require("./kernels/IsInf");
+var _isNaN = require("./kernels/IsNaN");
+var _leakyRelu = require("./kernels/LeakyRelu");
+var _less = require("./kernels/Less");
+var _lessEqual = require("./kernels/LessEqual");
+var _linSpace = require("./kernels/LinSpace");
+var _log = require("./kernels/Log");
+var _log1P = require("./kernels/Log1p");
+var _logicalAnd = require("./kernels/LogicalAnd");
+var _logicalNot = require("./kernels/LogicalNot");
+var _logicalOr = require("./kernels/LogicalOr");
+var _lrn = require("./kernels/LRN");
+var _lrngrad = require("./kernels/LRNGrad");
+var _max = require("./kernels/Max");
+var _maximum = require("./kernels/Maximum");
+var _maxPool = require("./kernels/MaxPool");
+var _maxPool3D = require("./kernels/MaxPool3D");
+var _maxPool3DGrad = require("./kernels/MaxPool3DGrad");
+var _maxPoolGrad = require("./kernels/MaxPoolGrad");
+var _maxPoolWithArgmax = require("./kernels/MaxPoolWithArgmax");
+var _mean = require("./kernels/Mean");
+var _min = require("./kernels/Min");
+var _minimum = require("./kernels/Minimum");
+var _mirrorPad = require("./kernels/MirrorPad");
+var _mod = require("./kernels/Mod");
+var _multinomial = require("./kernels/Multinomial");
+var _multiply = require("./kernels/Multiply");
+var _neg = require("./kernels/Neg");
+var _nonMaxSuppressionV3 = require("./kernels/NonMaxSuppressionV3");
+var _nonMaxSuppressionV4 = require("./kernels/NonMaxSuppressionV4");
+var _nonMaxSuppressionV5 = require("./kernels/NonMaxSuppressionV5");
+var _notEqual = require("./kernels/NotEqual");
+var _oneHot = require("./kernels/OneHot");
+var _onesLike = require("./kernels/OnesLike");
+var _pack = require("./kernels/Pack");
+var _padV2 = require("./kernels/PadV2");
+var _pow = require("./kernels/Pow");
+var _prelu = require("./kernels/Prelu");
+var _prod = require("./kernels/Prod");
+var _raggedGather = require("./kernels/RaggedGather");
+var _raggedRange = require("./kernels/RaggedRange");
+var _raggedTensorToTensor = require("./kernels/RaggedTensorToTensor");
+var _range = require("./kernels/Range");
+var _real = require("./kernels/Real");
+var _realDiv = require("./kernels/RealDiv");
+var _reciprocal = require("./kernels/Reciprocal");
+var _relu = require("./kernels/Relu");
+var _relu6 = require("./kernels/Relu6");
+var _reshape = require("./kernels/Reshape");
+var _resizeBilinear = require("./kernels/ResizeBilinear");
+var _resizeBilinearGrad = require("./kernels/ResizeBilinearGrad");
+var _resizeNearestNeighbor = require("./kernels/ResizeNearestNeighbor");
+var _resizeNearestNeighborGrad = require("./kernels/ResizeNearestNeighborGrad");
+var _reverse = require("./kernels/Reverse");
+var _rotateWithOffset = require("./kernels/RotateWithOffset");
+var _round = require("./kernels/Round");
+var _rsqrt = require("./kernels/Rsqrt");
+var _scatterNd = require("./kernels/ScatterNd");
+var _searchSorted = require("./kernels/SearchSorted");
+var _select = require("./kernels/Select");
+var _selu = require("./kernels/Selu");
+var _sigmoid = require("./kernels/Sigmoid");
+var _sign = require("./kernels/Sign");
+var _sin = require("./kernels/Sin");
+var _sinh = require("./kernels/Sinh");
+var _slice = require("./kernels/Slice");
+var _softmax = require("./kernels/Softmax");
+var _softplus = require("./kernels/Softplus");
+var _spaceToBatchND = require("./kernels/SpaceToBatchND");
+var _sparseFillEmptyRows = require("./kernels/SparseFillEmptyRows");
+var _sparseReshape = require("./kernels/SparseReshape");
+var _sparseSegmentMean = require("./kernels/SparseSegmentMean");
+var _sparseSegmentSum = require("./kernels/SparseSegmentSum");
+var _sparseToDense = require("./kernels/SparseToDense");
+var _splitV = require("./kernels/SplitV");
+var _sqrt = require("./kernels/Sqrt");
+var _square = require("./kernels/Square");
+var _squaredDifference = require("./kernels/SquaredDifference");
+var _staticRegexReplace = require("./kernels/StaticRegexReplace");
+var _step = require("./kernels/Step");
+var _stridedSlice = require("./kernels/StridedSlice");
+var _stringNGrams = require("./kernels/StringNGrams");
+var _stringSplit = require("./kernels/StringSplit");
+var _stringToHashBucketFast = require("./kernels/StringToHashBucketFast");
+var _sub = require("./kernels/Sub");
+var _sum = require("./kernels/Sum");
+var _tan = require("./kernels/Tan");
+var _tanh = require("./kernels/Tanh");
+var _tensorScatterUpdate = require("./kernels/TensorScatterUpdate");
+var _tile = require("./kernels/Tile");
+var _topK = require("./kernels/TopK");
+var _transform = require("./kernels/Transform");
+var _transpose = require("./kernels/Transpose");
+var _unique = require("./kernels/Unique");
+var _unpack = require("./kernels/Unpack");
+var _unsortedSegmentSum = require("./kernels/UnsortedSegmentSum");
+var _zerosLike = require("./kernels/ZerosLike");
+// List all kernel configs here
+const kernelConfigs = [
+    (0, _fusedMatMul._fusedMatMulConfig),
+    (0, _abs.absConfig),
+    (0, _acos.acosConfig),
+    (0, _acosh.acoshConfig),
+    (0, _add.addConfig),
+    (0, _addN.addNConfig),
+    (0, _all.allConfig),
+    (0, _any.anyConfig),
+    (0, _argMax.argMaxConfig),
+    (0, _argMin.argMinConfig),
+    (0, _asin.asinConfig),
+    (0, _asinh.asinhConfig),
+    (0, _atan.atanConfig),
+    (0, _atan2.atan2Config),
+    (0, _atanh.atanhConfig),
+    (0, _avgPool.avgPoolConfig),
+    (0, _avgPool3D.avgPool3DConfig),
+    (0, _avgPool3DGrad.avgPool3DGradConfig),
+    (0, _avgPoolGrad.avgPoolGradConfig),
+    (0, _batchMatMul.batchMatMulConfig),
+    (0, _batchNorm.batchNormConfig),
+    (0, _batchToSpaceND.batchToSpaceNDConfig),
+    (0, _bincount.bincountConfig),
+    (0, _bitwiseAnd.bitwiseAndConfig),
+    (0, _broadcastArgs.broadcastArgsConfig),
+    (0, _cast.castConfig),
+    (0, _ceil.ceilConfig),
+    (0, _clipByValue.clipByValueConfig),
+    (0, _complex.complexConfig),
+    (0, _complexAbs.complexAbsConfig),
+    (0, _concat.concatConfig),
+    (0, _conv2D.conv2DConfig),
+    (0, _conv2DBackpropFilter.conv2DBackpropFilterConfig),
+    (0, _conv2DBackpropInput.conv2DBackpropInputConfig),
+    (0, _conv3D.conv3DConfig),
+    (0, _conv3DBackpropFilterV2.conv3DBackpropFilterV2Config),
+    (0, _conv3DBackpropInputV2.conv3DBackpropInputV2Config),
+    (0, _cos.cosConfig),
+    (0, _cosh.coshConfig),
+    (0, _cropAndResize.cropAndResizeConfig),
+    (0, _cumprod.cumprodConfig),
+    (0, _cumsum.cumsumConfig),
+    (0, _denseBincount.denseBincountConfig),
+    (0, _depthToSpace.depthToSpaceConfig),
+    (0, _depthwiseConv2DNative.depthwiseConv2dNativeConfig),
+    (0, _depthwiseConv2DNativeBackpropFilter.depthwiseConv2dNativeBackpropFilterConfig),
+    (0, _depthwiseConv2DNativeBackpropInput.depthwiseConv2dNativeBackpropInputConfig),
+    (0, _diag.diagConfig),
+    (0, _dilation2D.dilation2DConfig),
+    (0, _dilation2DBackpropFilter.dilation2DBackpropFilterConfig),
+    (0, _dilation2DBackpropInput.dilation2DBackpropInputConfig),
+    (0, _draw.drawConfig),
+    (0, _einsum.einsumConfig),
+    (0, _elu.eluConfig),
+    (0, _eluGrad.eluGradConfig),
+    (0, _equal.equalConfig),
+    (0, _erf.erfConfig),
+    (0, _exp.expConfig),
+    (0, _expandDims.expandDimsConfig),
+    (0, _expm1.expm1Config),
+    (0, _fft.fftConfig),
+    (0, _fill.fillConfig),
+    (0, _flipLeftRight.flipLeftRightConfig),
+    (0, _floor.floorConfig),
+    (0, _floorDiv.floorDivConfig),
+    (0, _fusedConv2D.fusedConv2DConfig),
+    (0, _fusedDepthwiseConv2D.fusedDepthwiseConv2DConfig),
+    (0, _gatherNd.gatherNdConfig),
+    (0, _gatherV2.gatherV2Config),
+    (0, _greater.greaterConfig),
+    (0, _greaterEqual.greaterEqualConfig),
+    (0, _identity.identityConfig),
+    (0, _ifft.ifftConfig),
+    (0, _imag.imagConfig),
+    (0, _isFinite.isFiniteConfig),
+    (0, _isInf.isInfConfig),
+    (0, _isNaN.isNaNConfig),
+    (0, _leakyRelu.leakyReluConfig),
+    (0, _less.lessConfig),
+    (0, _lessEqual.lessEqualConfig),
+    (0, _linSpace.linSpaceConfig),
+    (0, _log.logConfig),
+    (0, _log1P.log1pConfig),
+    (0, _logicalAnd.logicalAndConfig),
+    (0, _logicalNot.logicalNotConfig),
+    (0, _logicalOr.logicalOrConfig),
+    (0, _lrn.LRNConfig),
+    (0, _lrngrad.LRNGradConfig),
+    (0, _max.maxConfig),
+    (0, _maximum.maximumConfig),
+    (0, _maxPool.maxPoolConfig),
+    (0, _maxPool3D.maxPool3DConfig),
+    (0, _maxPool3DGrad.maxPool3DGradConfig),
+    (0, _maxPoolGrad.maxPoolGradConfig),
+    (0, _maxPoolWithArgmax.maxPoolWithArgmaxConfig),
+    (0, _mean.meanConfig),
+    (0, _min.minConfig),
+    (0, _minimum.minimumConfig),
+    (0, _mirrorPad.mirrorPadConfig),
+    (0, _mod.modConfig),
+    (0, _multinomial.multinomialConfig),
+    (0, _multiply.multiplyConfig),
+    (0, _neg.negConfig),
+    (0, _nonMaxSuppressionV3.nonMaxSuppressionV3Config),
+    (0, _nonMaxSuppressionV4.nonMaxSuppressionV4Config),
+    (0, _nonMaxSuppressionV5.nonMaxSuppressionV5Config),
+    (0, _notEqual.notEqualConfig),
+    (0, _oneHot.oneHotConfig),
+    (0, _onesLike.onesLikeConfig),
+    (0, _pack.packConfig),
+    (0, _padV2.padV2Config),
+    (0, _pow.powConfig),
+    (0, _prelu.preluConfig),
+    (0, _prod.prodConfig),
+    (0, _raggedGather.raggedGatherConfig),
+    (0, _raggedRange.raggedRangeConfig),
+    (0, _raggedTensorToTensor.raggedTensorToTensorConfig),
+    (0, _range.rangeConfig),
+    (0, _real.realConfig),
+    (0, _realDiv.realDivConfig),
+    (0, _reciprocal.reciprocalConfig),
+    (0, _relu.reluConfig),
+    (0, _relu6.relu6Config),
+    (0, _reshape.reshapeConfig),
+    (0, _resizeBilinear.resizeBilinearConfig),
+    (0, _resizeBilinearGrad.resizeBilinearGradConfig),
+    (0, _resizeNearestNeighbor.resizeNearestNeighborConfig),
+    (0, _resizeNearestNeighborGrad.resizeNearestNeighborGradConfig),
+    (0, _reverse.reverseConfig),
+    (0, _rotateWithOffset.rotateWithOffsetConfig),
+    (0, _round.roundConfig),
+    (0, _rsqrt.rsqrtConfig),
+    (0, _scatterNd.scatterNdConfig),
+    (0, _searchSorted.searchSortedConfig),
+    (0, _select.selectConfig),
+    (0, _selu.seluConfig),
+    (0, _sigmoid.sigmoidConfig),
+    (0, _sign.signConfig),
+    (0, _sin.sinConfig),
+    (0, _sinh.sinhConfig),
+    (0, _slice.sliceConfig),
+    (0, _softmax.softmaxConfig),
+    (0, _softplus.softplusConfig),
+    (0, _spaceToBatchND.spaceToBatchNDConfig),
+    (0, _sparseFillEmptyRows.sparseFillEmptyRowsConfig),
+    (0, _sparseReshape.sparseReshapeConfig),
+    (0, _sparseSegmentMean.sparseSegmentMeanConfig),
+    (0, _sparseSegmentSum.sparseSegmentSumConfig),
+    (0, _sparseToDense.sparseToDenseConfig),
+    (0, _splitV.splitVConfig),
+    (0, _sqrt.sqrtConfig),
+    (0, _square.squareConfig),
+    (0, _squaredDifference.squaredDifferenceConfig),
+    (0, _staticRegexReplace.staticRegexReplaceConfig),
+    (0, _step.stepConfig),
+    (0, _stridedSlice.stridedSliceConfig),
+    (0, _stringNGrams.stringNGramsConfig),
+    (0, _stringSplit.stringSplitConfig),
+    (0, _stringToHashBucketFast.stringToHashBucketFastConfig),
+    (0, _sub.subConfig),
+    (0, _sum.sumConfig),
+    (0, _tan.tanConfig),
+    (0, _tanh.tanhConfig),
+    (0, _tensorScatterUpdate.tensorScatterUpdateConfig),
+    (0, _tile.tileConfig),
+    (0, _topK.topKConfig),
+    (0, _transform.transformConfig),
+    (0, _transpose.transposeConfig),
+    (0, _unique.uniqueConfig),
+    (0, _unpack.unpackConfig),
+    (0, _unsortedSegmentSum.unsortedSegmentSumConfig),
+    (0, _zerosLike.zerosLikeConfig)
+];
+for (const kernelConfig of kernelConfigs)(0, _tfjsCore.registerKernel)(kernelConfig);
+
+},{"@tensorflow/tfjs-core":"21Ftl","./kernels/_FusedMatMul":"2uXSk","./kernels/Abs":"2vVaE","./kernels/Acos":"2M2i0","./kernels/Acosh":"bYe62","./kernels/Add":"dippY","./kernels/AddN":"dmcG0","./kernels/All":"6pIZf","./kernels/Any":"5AV1Z","./kernels/ArgMax":"6P1xW","./kernels/ArgMin":"1cyKX","./kernels/Asin":"kRHNu","./kernels/Asinh":"bYcdN","./kernels/Atan":"a4d7R","./kernels/Atan2":"gUrSR","./kernels/Atanh":"dsEHm","./kernels/AvgPool":"8IIie","./kernels/AvgPool3D":"eu5qc","./kernels/AvgPool3DGrad":"iGPNS","./kernels/AvgPoolGrad":"kCJ3l","./kernels/BatchMatMul":"i8QFX","./kernels/BatchNorm":"a3KQN","./kernels/BatchToSpaceND":"7Jug2","./kernels/Bincount":"hE7iz","./kernels/BitwiseAnd":"lFHUr","./kernels/BroadcastArgs":"4GYx6","./kernels/Cast":"fAtIw","./kernels/Ceil":"dPS5d","./kernels/ClipByValue":"ck0lb","./kernels/Complex":"3DPmh","./kernels/ComplexAbs":"kThBM","./kernels/Concat":"iYEAT","./kernels/Conv2D":"4bj3X","./kernels/Conv2DBackpropFilter":"jHKF1","./kernels/Conv2DBackpropInput":"fBpei","./kernels/Conv3D":"iJ4dh","./kernels/Conv3DBackpropFilterV2":"g7cYG","./kernels/Conv3DBackpropInputV2":"l6kPr","./kernels/Cos":"hkcOn","./kernels/Cosh":"eg9u0","./kernels/CropAndResize":"8K1SK","./kernels/Cumprod":"bN0pp","./kernels/Cumsum":"8YA18","./kernels/DenseBincount":"cpFc0","./kernels/DepthToSpace":"l4MfW","./kernels/DepthwiseConv2dNative":"2iRpa","./kernels/DepthwiseConv2dNativeBackpropFilter":"j6FA2","./kernels/DepthwiseConv2dNativeBackpropInput":"4Kyp1","./kernels/Diag":"c5zdj","./kernels/Dilation2D":"8CglA","./kernels/Dilation2DBackpropFilter":"5GOEE","./kernels/Dilation2DBackpropInput":"fnjGq","./kernels/Draw":"9ZCFV","./kernels/Einsum":"lXbVv","./kernels/Elu":"7XTZG","./kernels/EluGrad":"cZudI","./kernels/Equal":"jK2O7","./kernels/Erf":"g7iiK","./kernels/Exp":"6eexr","./kernels/ExpandDims":"4z77l","./kernels/Expm1":"pXtet","./kernels/FFT":"7gqPz","./kernels/Fill":"4BMgR","./kernels/FlipLeftRight":"8d8ZF","./kernels/Floor":"ftFzk","./kernels/FloorDiv":"kMZnS","./kernels/FusedConv2D":"1OWT7","./kernels/FusedDepthwiseConv2D":"5SkmJ","./kernels/GatherNd":"6Owm3","./kernels/GatherV2":"dUokB","./kernels/Greater":"94zPb","./kernels/GreaterEqual":"a9aqR","./kernels/Identity":"btREJ","./kernels/IFFT":"hHvJu","./kernels/Imag":"af3Tx","./kernels/IsFinite":"a8CWT","./kernels/IsInf":"342Gs","./kernels/IsNaN":"gKXUy","./kernels/LeakyRelu":"hDqHI","./kernels/Less":"anwWy","./kernels/LessEqual":"nFlBF","./kernels/LinSpace":"3aMpD","./kernels/Log":"dNlq0","./kernels/Log1p":"bNfse","./kernels/LogicalAnd":"9q52j","./kernels/LogicalNot":"929wA","./kernels/LogicalOr":"4bpjj","./kernels/LRN":"1ZDWc","./kernels/LRNGrad":"01nUa","./kernels/Max":"ceCEC","./kernels/Maximum":"73P1X","./kernels/MaxPool":"2HK6O","./kernels/MaxPool3D":"guFsS","./kernels/MaxPool3DGrad":"bsOhi","./kernels/MaxPoolGrad":"esvnZ","./kernels/MaxPoolWithArgmax":"aBn34","./kernels/Mean":"hu1l4","./kernels/Min":"h3WES","./kernels/Minimum":"2gO4x","./kernels/MirrorPad":"1HbpJ","./kernels/Mod":"iD4b6","./kernels/Multinomial":"dy4Sw","./kernels/Multiply":"FrRi2","./kernels/Neg":"4sfM4","./kernels/NonMaxSuppressionV3":"cU4dv","./kernels/NonMaxSuppressionV4":"chYiL","./kernels/NonMaxSuppressionV5":"bVnt1","./kernels/NotEqual":"i62sj","./kernels/OneHot":"9Evwj","./kernels/OnesLike":"kWIOw","./kernels/Pack":"3NDYm","./kernels/PadV2":"dssNb","./kernels/Pow":"jx4g8","./kernels/Prelu":"c057T","./kernels/Prod":"8NwGT","./kernels/RaggedGather":"4jEHO","./kernels/RaggedRange":"kFVpX","./kernels/RaggedTensorToTensor":"bJlTR","./kernels/Range":"1Dov9","./kernels/Real":"eZ7aJ","./kernels/RealDiv":"9Ly75","./kernels/Reciprocal":"3BhEV","./kernels/Relu":"iWdDO","./kernels/Relu6":"C9OA6","./kernels/Reshape":"9350i","./kernels/ResizeBilinear":"kU0RB","./kernels/ResizeBilinearGrad":"76Mq3","./kernels/ResizeNearestNeighbor":"5c1lG","./kernels/ResizeNearestNeighborGrad":"4hhu6","./kernels/Reverse":"ff3xk","./kernels/RotateWithOffset":"d9nWG","./kernels/Round":"gnp2v","./kernels/Rsqrt":"gcVCI","./kernels/ScatterNd":"bb9Cv","./kernels/SearchSorted":"f7WfM","./kernels/Select":"lDXuK","./kernels/Selu":"cJWbo","./kernels/Sigmoid":"1a9v3","./kernels/Sign":"erXNP","./kernels/Sin":"c9it7","./kernels/Sinh":"9tr3d","./kernels/Slice":"9L9GN","./kernels/Softmax":"1UnfO","./kernels/Softplus":"bojBS","./kernels/SpaceToBatchND":"cO9CD","./kernels/SparseFillEmptyRows":"cLZdR","./kernels/SparseReshape":"bVjgS","./kernels/SparseSegmentMean":"7zRqG","./kernels/SparseSegmentSum":"dMeLQ","./kernels/SparseToDense":"kfHsN","./kernels/SplitV":"j2Sbu","./kernels/Sqrt":"cnnoj","./kernels/Square":"jjLIw","./kernels/SquaredDifference":"77Ql7","./kernels/StaticRegexReplace":"9G2f2","./kernels/Step":"2cqHx","./kernels/StridedSlice":"l76iO","./kernels/StringNGrams":"7Beq9","./kernels/StringSplit":"6TsmC","./kernels/StringToHashBucketFast":"irRRx","./kernels/Sub":"4DByI","./kernels/Sum":"6gbbV","./kernels/Tan":"aMIl2","./kernels/Tanh":"fdqiG","./kernels/TensorScatterUpdate":"jFIwa","./kernels/Tile":"cYsKW","./kernels/TopK":"9RDRk","./kernels/Transform":"hKZ0R","./kernels/Transpose":"61ywv","./kernels/Unique":"9nca3","./kernels/Unpack":"iIwqM","./kernels/UnsortedSegmentSum":"eWcTc","./kernels/ZerosLike":"hfVJr"}],"2uXSk":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_fusedMatMul", ()=>_fusedMatMul);
+parcelHelpers.export(exports, "_fusedMatMulConfig", ()=>_fusedMatMulConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _fusedUtils = require("../utils/fused_utils");
+var _add = require("./Add");
+var _batchMatMul = require("./BatchMatMul");
+function _fusedMatMul(args) {
+    const { inputs, backend, attrs } = args;
+    const { a, b, bias, preluActivationWeights } = inputs;
+    const { transposeA, transposeB, activation, leakyreluAlpha } = attrs;
+    let current;
+    let addRes;
+    let activationRes;
+    const intermediates = [];
+    const matMulRes = (0, _batchMatMul.batchMatMul)({
+        inputs: {
+            a,
+            b
+        },
+        attrs: {
+            transposeA,
+            transposeB
+        },
+        backend
+    });
+    current = matMulRes;
+    if (bias) {
+        addRes = (0, _add.add)({
+            inputs: {
+                a: current,
+                b: bias
+            },
+            backend
+        });
+        intermediates.push(current);
+        current = addRes;
+    }
+    if (activation) {
+        activationRes = (0, _fusedUtils.applyActivation)(backend, current, activation, preluActivationWeights, leakyreluAlpha);
+        intermediates.push(current);
+        current = activationRes;
+    }
+    for (const i of intermediates)backend.disposeIntermediateTensorInfo(i);
+    return current;
+}
+const _fusedMatMulConfig = {
+    kernelName: (0, _tfjsCore._FusedMatMul),
+    backendName: "cpu",
+    kernelFunc: _fusedMatMul
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/fused_utils":"6DUEF","./Add":"dippY","./BatchMatMul":"i8QFX","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6DUEF":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "applyActivation", ()=>applyActivation);
+var _elu = require("../kernels/Elu");
+var _identity = require("../kernels/Identity");
+var _leakyRelu = require("../kernels/LeakyRelu");
+var _prelu = require("../kernels/Prelu");
+var _relu = require("../kernels/Relu");
+var _relu6 = require("../kernels/Relu6");
+var _sigmoid = require("../kernels/Sigmoid");
+function applyActivation(backend, x, activation, preluActivationWeights, leakyreluAlpha) {
+    if (activation === "linear") return (0, _identity.identity)({
+        inputs: {
+            x
+        },
+        backend
+    });
+    else if (activation === "relu") return (0, _relu.relu)({
+        inputs: {
+            x
+        },
+        backend
+    });
+    else if (activation === "elu") return (0, _elu.elu)({
+        inputs: {
+            x
+        },
+        backend
+    });
+    else if (activation === "relu6") return (0, _relu6.relu6)({
+        inputs: {
+            x
+        },
+        backend
+    });
+    else if (activation === "prelu") return (0, _prelu.prelu)({
+        inputs: {
+            x,
+            alpha: preluActivationWeights
+        },
+        backend
+    });
+    else if (activation === "leakyrelu") return (0, _leakyRelu.leakyRelu)({
+        inputs: {
+            x
+        },
+        backend,
+        attrs: {
+            alpha: leakyreluAlpha
+        }
+    });
+    else if (activation === "sigmoid") return (0, _sigmoid.sigmoid)({
+        inputs: {
+            x
+        },
+        backend
+    });
+    throw new Error(`Activation ${activation} has not been implemented for the CPU backend.`);
+}
+
+},{"../kernels/Elu":"7XTZG","../kernels/Identity":"btREJ","../kernels/LeakyRelu":"hDqHI","../kernels/Prelu":"c057T","../kernels/Relu":"iWdDO","../kernels/Relu6":"C9OA6","../kernels/Sigmoid":"1a9v3","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7XTZG":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "elu", ()=>elu);
+parcelHelpers.export(exports, "eluConfig", ()=>eluConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const elu = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Elu), (xi)=>xi >= 0 ? xi : Math.exp(xi) - 1);
+const eluConfig = {
+    kernelName: (0, _tfjsCore.Elu),
+    backendName: "cpu",
+    kernelFunc: elu
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hDqHI":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "leakyRelu", ()=>leakyRelu);
+parcelHelpers.export(exports, "leakyReluConfig", ()=>leakyReluConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function leakyRelu(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { alpha } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x
+    ], "leakyRelu");
+    const xSize = (0, _tfjsCore.util).sizeFromShape(x.shape);
+    const xVals = backend.data.get(x.dataId).values;
+    const outVals = (0, _tfjsCore.util).getTypedArrayFromDType("float32", xSize);
+    for(let i = 0; i < xVals.length; i++)outVals[i] = xVals[i] < 0 ? alpha * xVals[i] : xVals[i];
+    return backend.makeTensorInfo(x.shape, "float32", outVals);
+}
+const leakyReluConfig = {
+    kernelName: (0, _tfjsCore.LeakyRelu),
+    backendName: "cpu",
+    kernelFunc: leakyRelu
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"c057T":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "prelu", ()=>prelu);
+parcelHelpers.export(exports, "preluConfig", ()=>preluConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _binaryImpl = require("../utils/binary_impl");
+const preluImpl = (0, _binaryImpl.createSimpleBinaryKernelImpl)((xValue, aValue)=>xValue < 0 ? aValue * xValue : xValue);
+function prelu(args) {
+    const { inputs, backend } = args;
+    const { x, alpha } = inputs;
+    (0, _cpuUtil.assertNotComplex)([
+        x,
+        alpha
+    ], "prelu");
+    const aVals = backend.data.get(x.dataId).values;
+    const bVals = backend.data.get(alpha.dataId).values;
+    const [resultData, resultShape] = preluImpl(x.shape, alpha.shape, aVals, bVals, "float32");
+    return backend.makeTensorInfo(resultShape, "float32", resultData);
+}
+const preluConfig = {
+    kernelName: (0, _tfjsCore.Prelu),
+    backendName: "cpu",
+    kernelFunc: prelu
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","../utils/binary_impl":"7WPlP","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iWdDO":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "relu", ()=>relu);
+parcelHelpers.export(exports, "reluConfig", ()=>reluConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const relu = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Relu), (xi)=>Math.max(0, xi));
+const reluConfig = {
+    kernelName: (0, _tfjsCore.Relu),
+    backendName: "cpu",
+    kernelFunc: relu
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"C9OA6":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "relu6", ()=>relu6);
+parcelHelpers.export(exports, "relu6Config", ()=>relu6Config);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const relu6 = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Relu6), (xi)=>Math.min(Math.max(0, xi), 6));
+const relu6Config = {
+    kernelName: (0, _tfjsCore.Relu6),
+    backendName: "cpu",
+    kernelFunc: relu6
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"i8QFX":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "batchMatMul", ()=>batchMatMul);
+parcelHelpers.export(exports, "batchMatMulConfig", ()=>batchMatMulConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _reshape = require("./Reshape");
+function batchMatMul(args) {
+    const { inputs, backend, attrs } = args;
+    const { a, b } = inputs;
+    const { transposeA, transposeB } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        a,
+        b
+    ], "matMul");
+    const aRank = a.shape.length;
+    const bRank = b.shape.length;
+    const innerShapeA = transposeA ? a.shape[aRank - 2] : a.shape[aRank - 1];
+    const innerShapeB = transposeB ? b.shape[bRank - 1] : b.shape[bRank - 2];
+    const outerShapeA = transposeA ? a.shape[aRank - 1] : a.shape[aRank - 2];
+    const outerShapeB = transposeB ? b.shape[bRank - 2] : b.shape[bRank - 1];
+    const outerDimsA = a.shape.slice(0, -2);
+    const outerDimsB = b.shape.slice(0, -2);
+    const batchDimA = (0, _tfjsCore.util).sizeFromShape(outerDimsA);
+    const batchDimB = (0, _tfjsCore.util).sizeFromShape(outerDimsB);
+    const outShapeOuterDims = (0, _tfjsCore.broadcast_util).assertAndGetBroadcastShape(a.shape.slice(0, -2), b.shape.slice(0, -2));
+    const outShape = outShapeOuterDims.concat([
+        outerShapeA,
+        outerShapeB
+    ]);
+    (0, _tfjsCore.util).assert(innerShapeA === innerShapeB, ()=>`Error in matMul: inner shapes (${innerShapeA}) and (` + `${innerShapeB}) of Tensors with shapes ${a.shape} and ` + `${b.shape} and transposeA=${transposeA}` + ` and transposeB=${transposeB} must match.`);
+    const a3dShape = transposeA ? [
+        batchDimA,
+        innerShapeA,
+        outerShapeA
+    ] : [
+        batchDimA,
+        outerShapeA,
+        innerShapeA
+    ];
+    const b3dShape = transposeB ? [
+        batchDimB,
+        outerShapeB,
+        innerShapeB
+    ] : [
+        batchDimB,
+        innerShapeB,
+        outerShapeB
+    ];
+    // The rest of the implementation is designed to operate on rank-3 tensors
+    const a3d = (0, _reshape.reshape)({
+        inputs: {
+            x: a
+        },
+        backend,
+        attrs: {
+            shape: a3dShape
+        }
+    });
+    const b3d = (0, _reshape.reshape)({
+        inputs: {
+            x: b
+        },
+        backend,
+        attrs: {
+            shape: b3dShape
+        }
+    });
+    const sharedDim = transposeA ? a3d.shape[1] : a3d.shape[2];
+    const leftDim = transposeA ? a3d.shape[2] : a3d.shape[1];
+    const rightDim = transposeB ? b3d.shape[1] : b3d.shape[2];
+    const batchDim = Math.max(batchDimA, batchDimB);
+    const a3dValues = backend.data.get(a3d.dataId).values;
+    const b3dValues = backend.data.get(b3d.dataId).values;
+    const a3dStrides = (0, _tfjsCore.util).computeStrides(a3d.shape);
+    const b3dStrides = (0, _tfjsCore.util).computeStrides(b3d.shape);
+    const [aBatch, aOuterStep, aInnerStep] = transposeA ? [
+        a3dStrides[0],
+        1,
+        a3dStrides[1]
+    ] : [
+        a3dStrides[0],
+        a3dStrides[1],
+        1
+    ];
+    const [bInnerStep, bOuterStep, bBatch] = transposeB ? [
+        1,
+        b3dStrides[1],
+        b3dStrides[0]
+    ] : [
+        b3dStrides[1],
+        1,
+        b3dStrides[0]
+    ];
+    const size = leftDim * rightDim;
+    const result = (0, _tfjsCore.buffer)([
+        batchDim,
+        leftDim,
+        rightDim
+    ], a3d.dtype);
+    const resVals = result.values;
+    const blockSize = backend.blockSize;
+    for(let bi = 0; bi < batchDim; bi++){
+        const batchIndexA = bi % batchDimA;
+        const batchIndexB = bi % batchDimB;
+        for(let i0 = 0; i0 < leftDim; i0 += blockSize){
+            // for when blockSize doesn't evenly divide the input
+            const iBlock = Math.min(i0 + blockSize, leftDim);
+            for(let j0 = 0; j0 < rightDim; j0 += blockSize){
+                const jBlock = Math.min(j0 + blockSize, rightDim);
+                for(let k0 = 0; k0 < sharedDim; k0 += blockSize){
+                    const kBlock = Math.min(k0 + blockSize, sharedDim);
+                    for(let i = i0; i < iBlock; i++)for(let j = j0; j < jBlock; j++){
+                        let sum = 0.0;
+                        for(let k = k0; k < kBlock; k++){
+                            const aVal = // tslint:disable-next-line: max-line-length
+                            a3dValues[batchIndexA * aBatch + i * aOuterStep + k * aInnerStep];
+                            const bVal = // tslint:disable-next-line: max-line-length
+                            b3dValues[k * bInnerStep + j * bOuterStep + batchIndexB * bBatch];
+                            sum += aVal * bVal;
+                        }
+                        resVals[bi * size + (i * rightDim + j)] += sum;
+                    }
+                }
+            }
+        }
+    }
+    backend.disposeIntermediateTensorInfo(a3d);
+    backend.disposeIntermediateTensorInfo(b3d);
+    // set correct shape on output.
+    return backend.makeTensorInfo(outShape, result.dtype, result.values);
+}
+const batchMatMulConfig = {
+    kernelName: (0, _tfjsCore.BatchMatMul),
+    backendName: "cpu",
+    kernelFunc: batchMatMul
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Reshape":"9350i","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9350i":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "reshape", ()=>reshape);
+parcelHelpers.export(exports, "reshapeConfig", ()=>reshapeConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function reshape(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { shape } = attrs;
+    const xSize = (0, _tfjsCore.util).sizeFromShape(x.shape);
+    const $shape = (0, _tfjsCore.util).inferFromImplicitShape(shape, xSize);
+    const $xSize = (0, _tfjsCore.util).sizeFromShape($shape);
+    (0, _tfjsCore.util).assert(xSize === $xSize, ()=>`The new shape (${$shape}) has ${$xSize} elements and the old ` + `shape (${x.shape}) has ${xSize} elements. The new shape and old ` + `shape must have the same number of elements.`);
+    backend.incRef(x.dataId);
+    const xData = backend.data.get(x.dataId);
+    if (xData.complexTensorInfos != null) {
+        const real = xData.complexTensorInfos.real;
+        const imag = xData.complexTensorInfos.imag;
+        real.shape = $shape;
+        imag.shape = $shape;
+    }
+    return {
+        dataId: x.dataId,
+        shape: $shape,
+        dtype: x.dtype
+    };
+}
+const reshapeConfig = {
+    kernelName: (0, _tfjsCore.Reshape),
+    backendName: "cpu",
+    kernelFunc: reshape
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2M2i0":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "acos", ()=>acos);
+parcelHelpers.export(exports, "acosConfig", ()=>acosConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const acos = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Acos), (xi)=>Math.acos(xi));
+const acosConfig = {
+    kernelName: (0, _tfjsCore.Acos),
+    backendName: "cpu",
+    kernelFunc: acos
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bYe62":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "acosh", ()=>acosh);
+parcelHelpers.export(exports, "acoshConfig", ()=>acoshConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const acosh = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Acosh), (xi)=>Math.acosh(xi));
+const acoshConfig = {
+    kernelName: (0, _tfjsCore.Acosh),
+    backendName: "cpu",
+    kernelFunc: acosh
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dmcG0":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "addN", ()=>addN);
+parcelHelpers.export(exports, "addNConfig", ()=>addNConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function addN(args) {
+    const { inputs, backend } = args;
+    const tensors = inputs;
+    (0, _cpuUtil.assertNotComplex)(inputs, "addN");
+    const vals = tensors.map((t)=>backend.data.get(t.dataId).values);
+    const outBuf = (0, _tfjsCore.buffer)(tensors[0].shape, tensors[0].dtype);
+    const outVals = outBuf.values;
+    for(let i = 0; i < tensors.length; i++){
+        const currVals = vals[i];
+        for(let j = 0; j < outVals.length; j++)outVals[j] += currVals[j];
+    }
+    return backend.makeTensorInfo(outBuf.shape, outBuf.dtype, outBuf.values);
+}
+const addNConfig = {
+    kernelName: (0, _tfjsCore.AddN),
+    backendName: "cpu",
+    kernelFunc: addN
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6pIZf":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "all", ()=>all);
+parcelHelpers.export(exports, "allConfig", ()=>allConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _reshape = require("./Reshape");
+var _transpose = require("./Transpose");
+function all(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { axis, keepDims } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "all");
+    const origAxes = (0, _tfjsCore.util).parseAxisParam(axis, x.shape);
+    let axes = origAxes;
+    const permutedAxes = (0, _tfjsCore.backend_util).getAxesPermutation(axes, x.shape.length);
+    let $x = x;
+    if (permutedAxes != null) {
+        $x = (0, _transpose.transpose)({
+            inputs: {
+                x
+            },
+            backend,
+            attrs: {
+                perm: permutedAxes
+            }
+        });
+        axes = (0, _tfjsCore.backend_util).getInnerMostAxes(axes.length, x.shape.length);
+    }
+    (0, _tfjsCore.backend_util).assertAxesAreInnerMostDims("all", axes, $x.shape.length);
+    const [outShape, reduceShape] = (0, _tfjsCore.backend_util).computeOutAndReduceShapes($x.shape, axes);
+    const reduceSize = (0, _tfjsCore.util).sizeFromShape(reduceShape);
+    const vals = (0, _tfjsCore.util).makeZerosTypedArray((0, _tfjsCore.util).sizeFromShape(outShape), $x.dtype);
+    const aVals = backend.data.get($x.dataId).values;
+    for(let i = 0; i < vals.length; ++i){
+        const offset = i * reduceSize;
+        let all = aVals[offset];
+        for(let j = 0; j < reduceSize; ++j){
+            const value = aVals[offset + j];
+            all = all && value;
+        }
+        vals[i] = all;
+    }
+    if (permutedAxes != null) backend.disposeIntermediateTensorInfo($x);
+    const result = backend.makeTensorInfo(outShape, $x.dtype, vals);
+    if (keepDims) {
+        const expandedShape = (0, _tfjsCore.backend_util).expandShapeToKeepDim(outShape, origAxes);
+        const reshapedResult = (0, _reshape.reshape)({
+            inputs: {
+                x: result
+            },
+            backend,
+            attrs: {
+                shape: expandedShape
+            }
+        });
+        backend.disposeIntermediateTensorInfo(result);
+        return reshapedResult;
+    }
+    return result;
+}
+const allConfig = {
+    kernelName: (0, _tfjsCore.All),
+    backendName: "cpu",
+    kernelFunc: all
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Reshape":"9350i","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5AV1Z":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "any", ()=>any);
+parcelHelpers.export(exports, "anyConfig", ()=>anyConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _reshape = require("./Reshape");
+var _transpose = require("./Transpose");
+function any(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { axis, keepDims } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "any");
+    const origAxes = (0, _tfjsCore.util).parseAxisParam(axis, x.shape);
+    let axes = origAxes;
+    const permutedAxes = (0, _tfjsCore.backend_util).getAxesPermutation(axes, x.shape.length);
+    let $x = x;
+    if (permutedAxes != null) {
+        $x = (0, _transpose.transpose)({
+            inputs: {
+                x
+            },
+            backend,
+            attrs: {
+                perm: permutedAxes
+            }
+        });
+        axes = (0, _tfjsCore.backend_util).getInnerMostAxes(axes.length, x.shape.length);
+    }
+    (0, _tfjsCore.backend_util).assertAxesAreInnerMostDims("any", axes, $x.shape.length);
+    const [outShape, reduceShape] = (0, _tfjsCore.backend_util).computeOutAndReduceShapes($x.shape, axes);
+    const reduceSize = (0, _tfjsCore.util).sizeFromShape(reduceShape);
+    const vals = (0, _tfjsCore.util).makeZerosTypedArray((0, _tfjsCore.util).sizeFromShape(outShape), $x.dtype);
+    const aVals = backend.data.get($x.dataId).values;
+    for(let i = 0; i < vals.length; ++i){
+        const offset = i * reduceSize;
+        let anyVal = aVals[offset];
+        for(let j = 0; j < reduceSize; ++j){
+            const value = aVals[offset + j];
+            anyVal = anyVal || value;
+        }
+        vals[i] = anyVal;
+    }
+    if (permutedAxes != null) backend.disposeIntermediateTensorInfo($x);
+    const result = backend.makeTensorInfo(outShape, $x.dtype, vals);
+    if (keepDims) {
+        const expandedShape = (0, _tfjsCore.backend_util).expandShapeToKeepDim(outShape, origAxes);
+        const reshapedResult = (0, _reshape.reshape)({
+            inputs: {
+                x: result
+            },
+            backend,
+            attrs: {
+                shape: expandedShape
+            }
+        });
+        backend.disposeIntermediateTensorInfo(result);
+        return reshapedResult;
+    }
+    return result;
+}
+const anyConfig = {
+    kernelName: (0, _tfjsCore.Any),
+    backendName: "cpu",
+    kernelFunc: any
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Reshape":"9350i","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6P1xW":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "argMax", ()=>argMax);
+parcelHelpers.export(exports, "argMaxConfig", ()=>argMaxConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _transpose = require("./Transpose");
+function argMax(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { axis } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "argMax");
+    let axes = (0, _tfjsCore.util).parseAxisParam(axis, x.shape);
+    const permutedAxes = (0, _tfjsCore.backend_util).getAxesPermutation(axes, x.shape.length);
+    let $x = x;
+    const intermediateTensorInfos = [];
+    if (permutedAxes != null) {
+        $x = (0, _transpose.transpose)({
+            inputs: {
+                x
+            },
+            backend,
+            attrs: {
+                perm: permutedAxes
+            }
+        });
+        intermediateTensorInfos.push($x);
+        axes = (0, _tfjsCore.backend_util).getInnerMostAxes(axes.length, $x.shape.length);
+    }
+    axes = [
+        axes[0]
+    ];
+    (0, _tfjsCore.backend_util).assertAxesAreInnerMostDims("argMax", axes, $x.shape.length);
+    const [outShape, reduceShape] = (0, _tfjsCore.backend_util).computeOutAndReduceShapes($x.shape, axes);
+    const outSize = (0, _tfjsCore.util).sizeFromShape(outShape);
+    const vals = (0, _tfjsCore.util).makeZerosTypedArray(outSize, "int32");
+    const reduceSize = (0, _tfjsCore.util).sizeFromShape(reduceShape);
+    const aVals = backend.data.get($x.dataId).values;
+    for(let i = 0; i < vals.length; ++i){
+        const offset = i * reduceSize;
+        let max = aVals[offset];
+        let maxIndex = 0;
+        for(let j = 0; j < reduceSize; ++j){
+            const value = aVals[offset + j];
+            if (value > max) {
+                max = value;
+                maxIndex = j;
+            }
+        }
+        vals[i] = maxIndex;
+    }
+    intermediateTensorInfos.forEach((t)=>backend.disposeIntermediateTensorInfo(t));
+    return backend.makeTensorInfo(outShape, "int32", vals);
+}
+const argMaxConfig = {
+    kernelName: (0, _tfjsCore.ArgMax),
+    backendName: "cpu",
+    kernelFunc: argMax
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1cyKX":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "argMin", ()=>argMin);
+parcelHelpers.export(exports, "argMinConfig", ()=>argMinConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _transpose = require("./Transpose");
+function argMin(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { axis } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "argMin");
+    let axes = (0, _tfjsCore.util).parseAxisParam(axis, x.shape);
+    const permutedAxes = (0, _tfjsCore.backend_util).getAxesPermutation(axes, x.shape.length);
+    let $x = x;
+    const intermediateTensorInfos = [];
+    if (permutedAxes != null) {
+        $x = (0, _transpose.transpose)({
+            inputs: {
+                x
+            },
+            backend,
+            attrs: {
+                perm: permutedAxes
+            }
+        });
+        intermediateTensorInfos.push($x);
+        axes = (0, _tfjsCore.backend_util).getInnerMostAxes(axes.length, $x.shape.length);
+    }
+    axes = [
+        axes[0]
+    ];
+    (0, _tfjsCore.backend_util).assertAxesAreInnerMostDims("argMin", axes, $x.shape.length);
+    const [outShape, reduceShape] = (0, _tfjsCore.backend_util).computeOutAndReduceShapes($x.shape, axes);
+    const outSize = (0, _tfjsCore.util).sizeFromShape(outShape);
+    const vals = (0, _tfjsCore.util).makeZerosTypedArray(outSize, "int32");
+    const reduceSize = (0, _tfjsCore.util).sizeFromShape(reduceShape);
+    const aVals = backend.data.get($x.dataId).values;
+    for(let i = 0; i < vals.length; ++i){
+        const offset = i * reduceSize;
+        let min = aVals[offset];
+        let minIndex = 0;
+        for(let j = 0; j < reduceSize; ++j){
+            const value = aVals[offset + j];
+            if (value < min) {
+                min = value;
+                minIndex = j;
+            }
+        }
+        vals[i] = minIndex;
+    }
+    intermediateTensorInfos.forEach((t)=>backend.disposeIntermediateTensorInfo(t));
+    return backend.makeTensorInfo(outShape, "int32", vals);
+}
+const argMinConfig = {
+    kernelName: (0, _tfjsCore.ArgMin),
+    backendName: "cpu",
+    kernelFunc: argMin
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kRHNu":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "asin", ()=>asin);
+parcelHelpers.export(exports, "asinConfig", ()=>asinConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const asin = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Asin), (xi)=>Math.asin(xi));
+const asinConfig = {
+    kernelName: (0, _tfjsCore.Asin),
+    backendName: "cpu",
+    kernelFunc: asin
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bYcdN":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "asinh", ()=>asinh);
+parcelHelpers.export(exports, "asinhConfig", ()=>asinhConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const asinh = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Asinh), (xi)=>Math.asinh(xi));
+const asinhConfig = {
+    kernelName: (0, _tfjsCore.Asinh),
+    backendName: "cpu",
+    kernelFunc: asinh
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"a4d7R":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "atan", ()=>atan);
+parcelHelpers.export(exports, "atanConfig", ()=>atanConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const atan = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Atan), (xi)=>Math.atan(xi));
+const atanConfig = {
+    kernelName: (0, _tfjsCore.Atan),
+    backendName: "cpu",
+    kernelFunc: atan
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gUrSR":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "atan2Impl", ()=>atan2Impl);
+parcelHelpers.export(exports, "atan2", ()=>atan2);
+parcelHelpers.export(exports, "atan2Config", ()=>atan2Config);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _binaryImpl = require("../utils/binary_impl");
+var _binaryUtils = require("../utils/binary_utils");
+const atan2Impl = (0, _binaryImpl.createSimpleBinaryKernelImpl)((aValue, bValue)=>Math.atan2(aValue, bValue));
+const atan2 = (0, _binaryUtils.binaryKernelFunc)((0, _tfjsCore.Atan2), atan2Impl);
+const atan2Config = {
+    kernelName: (0, _tfjsCore.Atan2),
+    backendName: "cpu",
+    kernelFunc: atan2
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/binary_impl":"7WPlP","../utils/binary_utils":"dUQGx","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dsEHm":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "atanh", ()=>atanh);
+parcelHelpers.export(exports, "atanhConfig", ()=>atanhConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const atanh = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Atanh), (xi)=>Math.atanh(xi));
+const atanhConfig = {
+    kernelName: (0, _tfjsCore.Atanh),
+    backendName: "cpu",
+    kernelFunc: atanh
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8IIie":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "avgPool", ()=>avgPool);
+parcelHelpers.export(exports, "avgPoolConfig", ()=>avgPoolConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _poolUtils = require("../utils/pool_utils");
+var _identity = require("./Identity");
+function avgPool(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    (0, _cpuUtil.assertNotComplex)(x, "avgPool");
+    const { filterSize, strides, pad, dimRoundingMode } = attrs;
+    const dilations = 1;
+    (0, _tfjsCore.util).assert((0, _tfjsCore.backend_util).eitherStridesOrDilationsAreOne(strides, dilations), ()=>"Error in avgPool: Either strides or dilations must be 1. " + `Got strides ${strides} and dilations '${dilations}'`);
+    const convInfo = (0, _tfjsCore.backend_util).computePool2DInfo(x.shape, filterSize, strides, dilations, pad, dimRoundingMode);
+    let res;
+    if (convInfo.filterWidth === 1 && convInfo.filterHeight === 1 && (0, _tfjsCore.util).arraysEqual(convInfo.inShape, convInfo.outShape)) res = (0, _identity.identity)({
+        inputs: {
+            x
+        },
+        backend
+    });
+    else {
+        const xValues = backend.data.get(x.dataId).values;
+        const strides = (0, _tfjsCore.util).computeStrides(x.shape);
+        const buffer = (0, _poolUtils.pool)(xValues, x.shape, x.dtype, strides, convInfo, "avg");
+        res = backend.makeTensorInfo(convInfo.outShape, x.dtype, buffer.values);
+    }
+    return res;
+}
+const avgPoolConfig = {
+    kernelName: (0, _tfjsCore.AvgPool),
+    backendName: "cpu",
+    kernelFunc: avgPool
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","../utils/pool_utils":"fzyhw","./Identity":"btREJ","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fzyhw":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "pool", ()=>pool);
+parcelHelpers.export(exports, "maxPoolPositions", ()=>maxPoolPositions);
+parcelHelpers.export(exports, "pool3d", ()=>pool3d);
+parcelHelpers.export(exports, "maxPool3dPositions", ()=>maxPool3dPositions);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function pool(xValues, xShape, dtype, strides, convInfo, poolType) {
+    const strideHeight = convInfo.strideHeight;
+    const strideWidth = convInfo.strideWidth;
+    const dilationHeight = convInfo.dilationHeight;
+    const dilationWidth = convInfo.dilationWidth;
+    const effectiveFilterHeight = convInfo.effectiveFilterHeight;
+    const effectiveFilterWidth = convInfo.effectiveFilterWidth;
+    const padTop = convInfo.padInfo.top;
+    const padLeft = convInfo.padInfo.left;
+    const initialValue = poolType === "max" ? Number.NEGATIVE_INFINITY : Number.POSITIVE_INFINITY;
+    const output = (0, _tfjsCore.buffer)(convInfo.outShape, dtype);
+    const outputVals = output.values;
+    const outputBatchStrides = convInfo.outShape[1] * convInfo.outShape[2] * convInfo.outShape[3];
+    const outputRowStrides = convInfo.outShape[2] * convInfo.outShape[3];
+    const outputColStrides = convInfo.outShape[3];
+    for(let b = 0; b < convInfo.batchSize; ++b){
+        const outputBatchOffset = b * outputBatchStrides;
+        const inputBatchOffset = b * strides[0];
+        for(let d = 0; d < convInfo.inChannels; ++d)for(let yR = 0; yR < convInfo.outHeight; ++yR){
+            const xRCorner = yR * strideHeight - padTop;
+            const xRMin = Math.max(0, xRCorner);
+            const xRMax = Math.min(convInfo.inHeight, effectiveFilterHeight + xRCorner);
+            const outputRowOffset = outputBatchOffset + yR * outputRowStrides;
+            for(let yC = 0; yC < convInfo.outWidth; ++yC){
+                const xCCorner = yC * strideWidth - padLeft;
+                const xCMin = Math.max(0, xCCorner);
+                const xCMax = Math.min(convInfo.inWidth, effectiveFilterWidth + xCCorner);
+                let minMaxValue = initialValue;
+                let avgValue = 0;
+                let count = 0;
+                for(let xR = xRMin; xR < xRMax; xR += dilationHeight){
+                    const xROffset = inputBatchOffset + xR * strides[1];
+                    for(let xC = xCMin; xC < xCMax; xC += dilationWidth){
+                        const xCOffset = xROffset + xC * strides[2];
+                        const pixel = xValues[xCOffset + d];
+                        if (poolType === "max" && pixel > minMaxValue) minMaxValue = pixel;
+                        else if (poolType === "avg") {
+                            avgValue += pixel;
+                            count++;
+                        }
+                    }
+                    if (isNaN(minMaxValue)) break;
+                }
+                const outputOffset = outputRowOffset + yC * outputColStrides + d;
+                outputVals[outputOffset] = poolType === "avg" ? avgValue / count : minMaxValue;
+            }
+        }
+    }
+    return output;
+}
+function maxPoolPositions(xValues, xShape, dtype, convInfo, flattenPositions = false, includeBatchInIndex = false) {
+    const maxPositions = (0, _tfjsCore.buffer)(convInfo.outShape, "int32");
+    const strideHeight = convInfo.strideHeight;
+    const strideWidth = convInfo.strideWidth;
+    const dilationHeight = convInfo.dilationHeight;
+    const dilationWidth = convInfo.dilationWidth;
+    const effectiveFilterHeight = convInfo.effectiveFilterHeight;
+    const effectiveFilterWidth = convInfo.effectiveFilterWidth;
+    const padTop = convInfo.padInfo.top;
+    const padLeft = convInfo.padInfo.left;
+    const xBuf = (0, _tfjsCore.buffer)(xShape, dtype, xValues);
+    for(let b = 0; b < convInfo.batchSize; ++b){
+        for(let d = 0; d < convInfo.inChannels; ++d)for(let yR = 0; yR < convInfo.outHeight; ++yR){
+            const xRCorner = yR * strideHeight - padTop;
+            let xRMin = xRCorner;
+            while(xRMin < 0)xRMin += dilationHeight;
+            // const xRMin = Math.max(0, xRCorner);
+            const xRMax = Math.min(convInfo.inHeight, effectiveFilterHeight + xRCorner);
+            for(let yC = 0; yC < convInfo.outWidth; ++yC){
+                const xCCorner = yC * strideWidth - padLeft;
+                let xCMin = xCCorner;
+                while(xCMin < 0)xCMin += dilationWidth;
+                const xCMax = Math.min(convInfo.inWidth, effectiveFilterWidth + xCCorner);
+                let maxValue = Number.NEGATIVE_INFINITY;
+                let maxPosition = -1;
+                for(let xR = xRMin; xR < xRMax; xR += dilationHeight){
+                    const wR = xR - xRCorner;
+                    for(let xC = xCMin; xC < xCMax; xC += dilationWidth){
+                        const wC = xC - xCCorner;
+                        // For some reason, disable-next-line is not working
+                        // TODO(mattsoulanille): Remove this when switching to TS5.
+                        /* tslint:disable: no-unnecessary-type-assertion */ const pixel = xBuf.get(b, xR, xC, d);
+                        if (pixel > maxValue) {
+                            maxValue = pixel;
+                            if (flattenPositions) maxPosition = includeBatchInIndex ? ((b * convInfo.inHeight + xR) * convInfo.inWidth + xC) * convInfo.inChannels + d : (xR * convInfo.inWidth + xC) * convInfo.inChannels + d;
+                            else maxPosition = wR * effectiveFilterWidth + wC;
+                        }
+                    }
+                }
+                maxPositions.set(maxPosition, b, yR, yC, d);
+            }
+        }
+    }
+    return maxPositions;
+}
+function pool3d(xValues, xShape, dtype, strides, convInfo, poolType) {
+    const strideDepth = convInfo.strideDepth;
+    const strideHeight = convInfo.strideHeight;
+    const strideWidth = convInfo.strideWidth;
+    const dilationDepth = convInfo.dilationDepth;
+    const dilationHeight = convInfo.dilationHeight;
+    const dilationWidth = convInfo.dilationWidth;
+    const effectiveFilterDepth = convInfo.effectiveFilterDepth;
+    const effectiveFilterHeight = convInfo.effectiveFilterHeight;
+    const effectiveFilterWidth = convInfo.effectiveFilterWidth;
+    const padFront = convInfo.padInfo.front;
+    const padTop = convInfo.padInfo.top;
+    const padLeft = convInfo.padInfo.left;
+    const initialValue = poolType === "max" ? Number.NEGATIVE_INFINITY : Number.POSITIVE_INFINITY;
+    const output = (0, _tfjsCore.buffer)(convInfo.outShape, dtype);
+    const outputVals = output.values;
+    const outputBatchStrides = convInfo.outShape[1] * convInfo.outShape[2] * convInfo.outShape[3] * convInfo.outShape[4];
+    const outputDepthStrides = convInfo.outShape[2] * convInfo.outShape[3] * convInfo.outShape[4];
+    const outputRowStrides = convInfo.outShape[3] * convInfo.outShape[4];
+    const outputColStrides = convInfo.outShape[4];
+    for(let batch = 0; batch < convInfo.batchSize; ++batch){
+        const outputBatchOffset = batch * outputBatchStrides;
+        const inputBatchOffset = batch * strides[0];
+        for(let channel = 0; channel < convInfo.inChannels; ++channel)for(let yDepth = 0; yDepth < convInfo.outDepth; ++yDepth){
+            const xDepthCorner = yDepth * strideDepth - padFront;
+            let xDepthMin = xDepthCorner;
+            while(xDepthMin < 0)xDepthMin += dilationDepth;
+            const xDepthMax = Math.min(convInfo.inDepth, effectiveFilterDepth + xDepthCorner);
+            const outputDepthOffset = outputBatchOffset + yDepth * outputDepthStrides;
+            for(let yRow = 0; yRow < convInfo.outHeight; ++yRow){
+                const xRowCorner = yRow * strideHeight - padTop;
+                let xRowMin = xRowCorner;
+                while(xRowMin < 0)xRowMin += dilationHeight;
+                const xRowMax = Math.min(convInfo.inHeight, effectiveFilterHeight + xRowCorner);
+                const outputRowOffset = outputDepthOffset + yRow * outputRowStrides;
+                for(let yCol = 0; yCol < convInfo.outWidth; ++yCol){
+                    const xColCorner = yCol * strideWidth - padLeft;
+                    let xColMin = xColCorner;
+                    while(xColMin < 0)xColMin += dilationWidth;
+                    const xColMax = Math.min(convInfo.inWidth, effectiveFilterWidth + xColCorner);
+                    // Shader code begins
+                    const outputColOffset = outputRowOffset + yCol * outputColStrides;
+                    let minMaxValue = initialValue;
+                    let avgValue = 0;
+                    let count = 0;
+                    for(let xDepth = xDepthMin; xDepth < xDepthMax; xDepth += dilationDepth){
+                        const xDepthOffset = inputBatchOffset + xDepth * strides[1];
+                        for(let xRow = xRowMin; xRow < xRowMax; xRow += dilationHeight){
+                            const xRowOffset = xDepthOffset + xRow * strides[2];
+                            for(let xCol = xColMin; xCol < xColMax; xCol += dilationWidth){
+                                const xColOffset = xRowOffset + xCol * strides[3];
+                                const pixel = xValues[xColOffset + channel];
+                                if (poolType === "max" && pixel > minMaxValue) minMaxValue = pixel;
+                                else if (poolType === "avg") {
+                                    avgValue += pixel;
+                                    count++;
+                                }
+                                if (isNaN(minMaxValue)) break;
+                            }
+                            if (isNaN(minMaxValue)) break;
+                        }
+                        if (isNaN(minMaxValue)) break;
+                    }
+                    const outputOffset = outputColOffset + channel;
+                    outputVals[outputOffset] = poolType === "avg" ? avgValue / Math.max(count, 1) : minMaxValue;
+                }
+            }
+        }
+    }
+    return output;
+}
+function maxPool3dPositions(xBuf, convInfo) {
+    const maxPositions = (0, _tfjsCore.buffer)(convInfo.outShape, "int32");
+    const strideDepth = convInfo.strideDepth;
+    const strideHeight = convInfo.strideHeight;
+    const strideWidth = convInfo.strideWidth;
+    const dilationDepth = convInfo.dilationDepth;
+    const dilationHeight = convInfo.dilationHeight;
+    const dilationWidth = convInfo.dilationWidth;
+    const effectiveFilterDepth = convInfo.effectiveFilterDepth;
+    const effectiveFilterHeight = convInfo.effectiveFilterHeight;
+    const effectiveFilterWidth = convInfo.effectiveFilterWidth;
+    const padFront = convInfo.padInfo.front;
+    const padTop = convInfo.padInfo.top;
+    const padLeft = convInfo.padInfo.left;
+    for(let batch = 0; batch < convInfo.batchSize; ++batch){
+        for(let channel = 0; channel < convInfo.inChannels; ++channel)for(let yDepth = 0; yDepth < convInfo.outDepth; ++yDepth){
+            const xDepthCorner = yDepth * strideDepth - padFront;
+            let xDepthMin = xDepthCorner;
+            while(xDepthMin < 0)xDepthMin += dilationDepth;
+            const xDepthMax = Math.min(convInfo.inDepth, effectiveFilterDepth + xDepthCorner);
+            for(let yRow = 0; yRow < convInfo.outHeight; ++yRow){
+                const xRowCorner = yRow * strideHeight - padTop;
+                let xRowMin = xRowCorner;
+                while(xRowMin < 0)xRowMin += dilationHeight;
+                const xRowMax = Math.min(convInfo.inHeight, effectiveFilterHeight + xRowCorner);
+                for(let yCol = 0; yCol < convInfo.outWidth; ++yCol){
+                    const xColCorner = yCol * strideWidth - padLeft;
+                    let xColMin = xColCorner;
+                    while(xColMin < 0)xColMin += dilationWidth;
+                    const xColMax = Math.min(convInfo.inWidth, effectiveFilterWidth + xColCorner);
+                    // Shader code begins
+                    let maxValue = Number.NEGATIVE_INFINITY;
+                    let maxPosition = -1;
+                    for(let xDepth = xDepthMin; xDepth < xDepthMax; xDepth += dilationDepth){
+                        const wDepth = xDepth - xDepthCorner;
+                        for(let xRow = xRowMin; xRow < xRowMax; xRow += dilationHeight){
+                            const wRow = xRow - xRowCorner;
+                            for(let xCol = xColMin; xCol < xColMax; xCol += dilationWidth){
+                                const wCol = xCol - xColCorner;
+                                const pixel = xBuf.get(batch, xDepth, xRow, xCol, channel);
+                                if (pixel >= maxValue) {
+                                    maxValue = pixel;
+                                    maxPosition = wDepth * effectiveFilterHeight * effectiveFilterWidth + wRow * effectiveFilterHeight + wCol;
+                                }
+                            }
+                        }
+                    }
+                    maxPositions.set(maxPosition, batch, yDepth, yRow, yCol, channel);
+                }
+            }
+        }
+    }
+    return maxPositions;
+}
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eu5qc":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "avgPool3D", ()=>avgPool3D);
+parcelHelpers.export(exports, "avgPool3DConfig", ()=>avgPool3DConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _poolUtils = require("../utils/pool_utils");
+function avgPool3D(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { filterSize, strides, pad, dimRoundingMode, dataFormat } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "avgPool3d");
+    const convInfo = (0, _tfjsCore.backend_util).computePool3DInfo(x.shape, filterSize, strides, 1 /* dilations */ , pad, dimRoundingMode, dataFormat);
+    const xValues = backend.data.get(x.dataId).values;
+    const outBuf = (0, _poolUtils.pool3d)(xValues, x.shape, x.dtype, (0, _tfjsCore.util).computeStrides(x.shape), convInfo, "avg");
+    return backend.makeTensorInfo(outBuf.shape, "float32", outBuf.values);
+}
+const avgPool3DConfig = {
+    kernelName: (0, _tfjsCore.AvgPool3D),
+    backendName: "cpu",
+    kernelFunc: avgPool3D
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","../utils/pool_utils":"fzyhw","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iGPNS":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "avgPool3DGrad", ()=>avgPool3DGrad);
+parcelHelpers.export(exports, "avgPool3DGradConfig", ()=>avgPool3DGradConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function avgPool3DGrad(args) {
+    const { inputs, backend, attrs } = args;
+    const { dy, input } = inputs;
+    const { filterSize, strides, pad, dimRoundingMode } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        dy,
+        input
+    ], "avgPool3DGrad");
+    const convInfo = (0, _tfjsCore.backend_util).computePool3DInfo(input.shape, filterSize, strides, 1 /* dilations */ , pad, dimRoundingMode);
+    const strideDepth = convInfo.strideDepth;
+    const strideHeight = convInfo.strideHeight;
+    const strideWidth = convInfo.strideWidth;
+    const filterDepth = convInfo.filterDepth;
+    const filterHeight = convInfo.filterHeight;
+    const filterWidth = convInfo.filterWidth;
+    const dilationDepth = convInfo.dilationDepth;
+    const dilationHeight = convInfo.dilationHeight;
+    const dilationWidth = convInfo.dilationWidth;
+    const effectiveFilterDepth = convInfo.effectiveFilterDepth;
+    const effectiveFilterHeight = convInfo.effectiveFilterHeight;
+    const effectiveFilterWidth = convInfo.effectiveFilterWidth;
+    const padFront = effectiveFilterDepth - 1 - convInfo.padInfo.front;
+    const padLeft = effectiveFilterWidth - 1 - convInfo.padInfo.left;
+    const padTop = effectiveFilterHeight - 1 - convInfo.padInfo.top;
+    const dx = (0, _tfjsCore.buffer)(input.shape, "float32");
+    const avgMultiplier = 1 / (filterDepth * filterHeight * filterWidth);
+    const dyBuf = backend.bufferSync(dy);
+    for(let batch = 0; batch < convInfo.batchSize; ++batch){
+        for(let channel = 0; channel < convInfo.inChannels; ++channel)for(let dxDepth = 0; dxDepth < convInfo.inDepth; ++dxDepth){
+            for(let dxRow = 0; dxRow < convInfo.inHeight; ++dxRow)for(let dxCol = 0; dxCol < convInfo.inWidth; ++dxCol){
+                // Shader code begins.
+                const dyDepthCorner = dxDepth - padFront;
+                const dyRowCorner = dxRow - padTop;
+                const dyColCorner = dxCol - padLeft;
+                let dotProd = 0;
+                for(let wDepth = 0; wDepth < effectiveFilterDepth; wDepth += dilationDepth){
+                    const dyDepth = (dyDepthCorner + wDepth) / strideDepth;
+                    if (dyDepth < 0 || dyDepth >= convInfo.outDepth || Math.floor(dyDepth) !== dyDepth) continue;
+                    for(let wRow = 0; wRow < effectiveFilterHeight; wRow += dilationHeight){
+                        const dyRow = (dyRowCorner + wRow) / strideHeight;
+                        if (dyRow < 0 || dyRow >= convInfo.outHeight || Math.floor(dyRow) !== dyRow) continue;
+                        for(let wCol = 0; wCol < effectiveFilterWidth; wCol += dilationWidth){
+                            const dyCol = (dyColCorner + wCol) / strideWidth;
+                            if (dyCol < 0 || dyCol >= convInfo.outWidth || Math.floor(dyCol) !== dyCol) continue;
+                            const pixel = dyBuf.get(batch, dyDepth, dyRow, dyCol, channel);
+                            dotProd += pixel;
+                        }
+                    }
+                }
+                dx.set(dotProd * avgMultiplier, batch, dxDepth, dxRow, dxCol, channel);
+            }
+        }
+    }
+    return backend.makeTensorInfo(dx.shape, dx.dtype, dx.values);
+}
+const avgPool3DGradConfig = {
+    kernelName: (0, _tfjsCore.AvgPool3DGrad),
+    backendName: "cpu",
+    kernelFunc: avgPool3DGrad
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kCJ3l":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "avgPoolGrad", ()=>avgPoolGrad);
+parcelHelpers.export(exports, "avgPoolGradConfig", ()=>avgPoolGradConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function avgPoolGrad(args) {
+    const { inputs, backend, attrs } = args;
+    const { dy, input } = inputs;
+    const x = input;
+    (0, _cpuUtil.assertNotComplex)([
+        dy,
+        input
+    ], "avgPoolGrad");
+    const { filterSize, strides, pad } = attrs;
+    const convInfo = (0, _tfjsCore.backend_util).computePool2DInfo(x.shape, filterSize, strides, 1 /* dilations */ , pad);
+    const strideHeight = convInfo.strideHeight;
+    const strideWidth = convInfo.strideWidth;
+    const filterHeight = convInfo.filterHeight;
+    const filterWidth = convInfo.filterWidth;
+    const dilationHeight = convInfo.dilationHeight;
+    const dilationWidth = convInfo.dilationWidth;
+    const effectiveFilterHeight = convInfo.effectiveFilterHeight;
+    const effectiveFilterWidth = convInfo.effectiveFilterWidth;
+    const padLeft = effectiveFilterWidth - 1 - convInfo.padInfo.left;
+    const padTop = effectiveFilterHeight - 1 - convInfo.padInfo.top;
+    const dx = (0, _tfjsCore.buffer)(x.shape, "float32");
+    const avgMultiplier = 1 / (filterHeight * filterWidth);
+    const dyData = backend.data.get(dy.dataId).values;
+    const dyBuf = (0, _tfjsCore.buffer)(dy.shape, "float32", dyData);
+    for(let b = 0; b < convInfo.batchSize; ++b)for(let d = 0; d < convInfo.inChannels; ++d){
+        for(let dxR = 0; dxR < convInfo.inHeight; ++dxR)for(let dxC = 0; dxC < convInfo.inWidth; ++dxC){
+            // Shader code begins.
+            const dyRCorner = dxR - padTop;
+            const dyCCorner = dxC - padLeft;
+            let dotProd = 0;
+            for(let wR = 0; wR < effectiveFilterHeight; wR += dilationHeight){
+                const dyR = (dyRCorner + wR) / strideHeight;
+                if (dyR < 0 || dyR >= convInfo.outHeight || Math.floor(dyR) !== dyR) continue;
+                for(let wC = 0; wC < effectiveFilterWidth; wC += dilationWidth){
+                    const dyC = (dyCCorner + wC) / strideWidth;
+                    if (dyC < 0 || dyC >= convInfo.outWidth || Math.floor(dyC) !== dyC) continue;
+                    const pixel = dyBuf.get(b, dyR, dyC, d);
+                    dotProd += pixel;
+                }
+            }
+            dx.set(dotProd * avgMultiplier, b, dxR, dxC, d);
+        }
+    }
+    return backend.makeTensorInfo(dx.shape, dx.dtype, dx.values);
+}
+const avgPoolGradConfig = {
+    kernelName: (0, _tfjsCore.AvgPoolGrad),
+    backendName: "cpu",
+    kernelFunc: avgPoolGrad
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"a3KQN":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "batchNorm", ()=>batchNorm);
+parcelHelpers.export(exports, "batchNormConfig", ()=>batchNormConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function batchNorm(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, scale, offset, mean, variance } = inputs;
+    (0, _tfjsCore.util).assert(mean.shape.length === variance.shape.length, ()=>"Batch normalization gradient requires mean and variance to have equal ranks.");
+    (0, _tfjsCore.util).assert(offset == null || mean.shape.length === offset.shape.length, ()=>"Batch normalization gradient requires mean and offset to have equal ranks.");
+    (0, _tfjsCore.util).assert(scale == null || mean.shape.length === scale.shape.length, ()=>"Batch normalization gradient requires mean and scale to have equal ranks.");
+    (0, _cpuUtil.assertNotComplex)([
+        x,
+        mean,
+        variance,
+        scale,
+        offset
+    ], "batchNorm");
+    let { varianceEpsilon } = attrs;
+    if (varianceEpsilon == null) varianceEpsilon = 0.001;
+    const xVals = backend.data.get(x.dataId).values;
+    const mVals = backend.data.get(mean.dataId).values;
+    const varVals = backend.data.get(variance.dataId).values;
+    const sVals = scale ? backend.data.get(scale.dataId).values : new Float32Array([
+        1
+    ]);
+    const offVals = offset ? backend.data.get(offset.dataId).values : new Float32Array([
+        0
+    ]);
+    const outVals = new Float32Array(xVals.length);
+    const offValsLength = offVals.length;
+    const sValsLength = sVals.length;
+    const varValsLength = varVals.length;
+    const mValsLength = mVals.length;
+    let offi = 0;
+    let mi = 0;
+    let si = 0;
+    let vi = 0;
+    for(let i = 0; i < xVals.length; ++i){
+        outVals[i] = offVals[offi++] + (xVals[i] - mVals[mi++]) * sVals[si++] / Math.sqrt(varVals[vi++] + varianceEpsilon);
+        if (offi >= offValsLength) offi = 0;
+        if (mi >= mValsLength) mi = 0;
+        if (si >= sValsLength) si = 0;
+        if (vi >= varValsLength) vi = 0;
+    }
+    return backend.makeTensorInfo(x.shape, x.dtype, outVals);
+}
+const batchNormConfig = {
+    kernelName: (0, _tfjsCore.FusedBatchNorm),
+    backendName: "cpu",
+    kernelFunc: batchNorm
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7Jug2":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "batchToSpaceND", ()=>batchToSpaceND);
+parcelHelpers.export(exports, "batchToSpaceNDConfig", ()=>batchToSpaceNDConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _reshape = require("./Reshape");
+var _slice = require("./Slice");
+var _transpose = require("./Transpose");
+function batchToSpaceND(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { blockShape, crops } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x
+    ], "batchToSpaceND");
+    const prod = blockShape.reduce((a, b)=>a * b);
+    const reshaped = (0, _tfjsCore.backend_util).getReshaped(x.shape, blockShape, prod);
+    const permuted = (0, _tfjsCore.backend_util).getPermuted(reshaped.length, blockShape.length);
+    const reshapedPermuted = (0, _tfjsCore.backend_util).getReshapedPermuted(x.shape, blockShape, prod);
+    const sliceBeginCoords = (0, _tfjsCore.backend_util).getSliceBeginCoords(crops, blockShape.length);
+    const sliceSize = (0, _tfjsCore.backend_util).getSliceSize(reshapedPermuted, crops, blockShape.length);
+    const xReshaped = (0, _reshape.reshape)({
+        inputs: {
+            x
+        },
+        backend,
+        attrs: {
+            shape: reshaped
+        }
+    });
+    const xTransposed = (0, _transpose.transpose)({
+        inputs: {
+            x: xReshaped
+        },
+        backend,
+        attrs: {
+            perm: permuted
+        }
+    });
+    const xTransposedReshaped = (0, _reshape.reshape)({
+        inputs: {
+            x: xTransposed
+        },
+        backend,
+        attrs: {
+            shape: reshapedPermuted
+        }
+    });
+    const result = (0, _slice.slice)({
+        inputs: {
+            x: xTransposedReshaped
+        },
+        backend,
+        attrs: {
+            begin: sliceBeginCoords,
+            size: sliceSize
+        }
+    });
+    backend.disposeIntermediateTensorInfo(xReshaped);
+    backend.disposeIntermediateTensorInfo(xTransposed);
+    backend.disposeIntermediateTensorInfo(xTransposedReshaped);
+    return result;
+}
+const batchToSpaceNDConfig = {
+    kernelName: (0, _tfjsCore.BatchToSpaceND),
+    backendName: "cpu",
+    kernelFunc: batchToSpaceND
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Reshape":"9350i","./Slice":"9L9GN","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hE7iz":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bincount", ()=>bincount);
+parcelHelpers.export(exports, "bincountConfig", ()=>bincountConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _bincountImpl = require("./Bincount_impl");
+function bincount(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, weights } = inputs;
+    const { size } = attrs;
+    const xVals = backend.data.get(x.dataId).values;
+    const weightsVals = backend.data.get(weights.dataId).values;
+    const outVals = (0, _bincountImpl.bincountImpl)(xVals, weightsVals, weights.dtype, weights.shape, size);
+    return backend.makeTensorInfo([
+        size
+    ], weights.dtype, outVals);
+}
+const bincountConfig = {
+    kernelName: (0, _tfjsCore.Bincount),
+    backendName: "cpu",
+    kernelFunc: bincount
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Bincount_impl":"4EF2S","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4GYx6":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "broadcastArgs", ()=>broadcastArgs);
+parcelHelpers.export(exports, "broadcastArgsConfig", ()=>broadcastArgsConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function broadcastArgs(args) {
+    const { inputs, backend } = args;
+    const { s0, s1 } = inputs;
+    const s0Vals = backend.data.get(s0.dataId).values;
+    const s1Vals = backend.data.get(s1.dataId).values;
+    const broadcastShape = (0, _tfjsCore.backend_util).assertAndGetBroadcastShape(Array.from(s0Vals), Array.from(s1Vals));
+    return backend.makeTensorInfo([
+        broadcastShape.length
+    ], "int32", Int32Array.from(broadcastShape));
+}
+const broadcastArgsConfig = {
+    kernelName: (0, _tfjsCore.BroadcastArgs),
+    backendName: "cpu",
+    kernelFunc: broadcastArgs
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"ck0lb":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "clipByValue", ()=>clipByValue);
+parcelHelpers.export(exports, "clipByValueConfig", ()=>clipByValueConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const clipByValue = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.ClipByValue), (xi, attrs)=>{
+    const clipAttrs = attrs;
+    if (xi > clipAttrs.clipValueMax) return clipAttrs.clipValueMax;
+    return xi < clipAttrs.clipValueMin ? clipAttrs.clipValueMin : xi;
+});
+const clipByValueConfig = {
+    kernelName: (0, _tfjsCore.ClipByValue),
+    backendName: "cpu",
+    kernelFunc: clipByValue
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kThBM":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "complexAbs", ()=>complexAbs);
+parcelHelpers.export(exports, "complexAbsConfig", ()=>complexAbsConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+const complexAbs = (args)=>{
+    const { x } = args.inputs;
+    const cpuBackend = args.backend;
+    const resultValues = new Float32Array((0, _tfjsCore.util).sizeFromShape(x.shape));
+    const complexVals = cpuBackend.data.get(x.dataId);
+    const real = complexVals.complexTensorInfos.real;
+    const imag = complexVals.complexTensorInfos.imag;
+    const realVals = cpuBackend.data.get(real.dataId).values;
+    const imagVals = cpuBackend.data.get(imag.dataId).values;
+    for(let i = 0; i < realVals.length; i++){
+        const real = realVals[i];
+        const imag = imagVals[i];
+        resultValues[i] = Math.hypot(real, imag);
+    }
+    return cpuBackend.makeOutput(resultValues, x.shape, "float32");
+};
+const complexAbsConfig = {
+    kernelName: (0, _tfjsCore.ComplexAbs),
+    backendName: "cpu",
+    kernelFunc: complexAbs
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iYEAT":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "concat", ()=>concat);
+parcelHelpers.export(exports, "concatConfig", ()=>concatConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _complex = require("./Complex");
+var _concatImpl = require("./Concat_impl");
+var _identity = require("./Identity");
+var _imag = require("./Imag");
+var _real = require("./Real");
+var _reshape = require("./Reshape");
+function concat(args) {
+    const { inputs, backend, attrs } = args;
+    const { axis } = attrs;
+    const $axis = (0, _tfjsCore.util).parseAxisParam(axis, inputs[0].shape)[0];
+    const shapes = inputs.map((t)=>t.shape);
+    (0, _tfjsCore.backend_util).assertParamsConsistent(shapes, $axis);
+    let outShape = (0, _tfjsCore.backend_util).computeOutShape(inputs.map((t)=>t.shape), $axis);
+    if ((0, _tfjsCore.util).sizeFromShape(outShape) === 0) return backend.makeTensorInfo(outShape, inputs[0].dtype, []);
+    // Keep only non-empty tensors (ignore tensors with 0 in their shape).
+    const $inputs = inputs.filter((t)=>(0, _tfjsCore.util).sizeFromShape(t.shape) > 0);
+    if ($inputs.length === 1) return (0, _identity.identity)({
+        inputs: {
+            x: $inputs[0]
+        },
+        backend
+    });
+    if ($inputs[0].dtype === "complex64") {
+        const reals = $inputs.map((t)=>(0, _real.real)({
+                inputs: {
+                    input: t
+                },
+                backend
+            }));
+        const imags = $inputs.map((t)=>(0, _imag.imag)({
+                inputs: {
+                    input: t
+                },
+                backend
+            }));
+        const realConcated = concat({
+            inputs: reals,
+            backend,
+            attrs: {
+                axis: $axis
+            }
+        });
+        const imagConcated = concat({
+            inputs: imags,
+            backend,
+            attrs: {
+                axis: $axis
+            }
+        });
+        const result = (0, _complex.complex)({
+            inputs: {
+                real: realConcated,
+                imag: imagConcated
+            },
+            backend
+        });
+        reals.forEach((r)=>backend.disposeIntermediateTensorInfo(r));
+        imags.forEach((i)=>backend.disposeIntermediateTensorInfo(i));
+        backend.disposeIntermediateTensorInfo(realConcated);
+        backend.disposeIntermediateTensorInfo(imagConcated);
+        return result;
+    }
+    // Any concat of n-dimensional tensors across any axis can be reduced to
+    // a concatenation of two-dimensional tensors across the axis 1 by first
+    // partitioning the axes of the original tensors into those less than the
+    // axis to be concatenated and the rest. Then reshape the tensors
+    // into a two-dimensional tensor by collapsing these two sets of axes and
+    // concatenate the resulting matrices across the axis 1, finally reshaping
+    // the result to have the proper shape.
+    const inputs2D = $inputs.map((t)=>{
+        const innerSize = (0, _tfjsCore.util).sizeFromShape(t.shape.slice($axis));
+        const shape = [
+            -1,
+            innerSize
+        ];
+        return (0, _reshape.reshape)({
+            inputs: {
+                x: t
+            },
+            backend,
+            attrs: {
+                shape
+            }
+        });
+    });
+    const inputsValShapes = inputs2D.map((t)=>{
+        return {
+            vals: backend.data.get(t.dataId).values,
+            shape: t.shape
+        };
+    });
+    // Concats 2d tensors along axis=1.
+    outShape = (0, _tfjsCore.backend_util).computeOutShape(inputs2D.map((t)=>t.shape), 1 /* axis */ );
+    const simplyConcat = inputs2D[0].shape[0] === 1;
+    const outVals = (0, _concatImpl.concatImpl)(inputsValShapes, outShape, inputs[0].dtype, simplyConcat);
+    const finalOutShape = (0, _tfjsCore.backend_util).computeOutShape($inputs.map((t)=>t.shape), $axis);
+    const outInfo = backend.makeTensorInfo(finalOutShape, inputs[0].dtype, outVals);
+    inputs2D.forEach((t)=>backend.disposeIntermediateTensorInfo(t));
+    return outInfo;
+}
+const concatConfig = {
+    kernelName: (0, _tfjsCore.Concat),
+    backendName: "cpu",
+    kernelFunc: concat
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Complex":"3DPmh","./Concat_impl":"50NO7","./Identity":"btREJ","./Imag":"af3Tx","./Real":"eZ7aJ","./Reshape":"9350i","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"af3Tx":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "imag", ()=>imag);
+parcelHelpers.export(exports, "imagConfig", ()=>imagConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function imag(args) {
+    const { inputs, backend } = args;
+    const { input } = inputs;
+    const imag = backend.data.get(input.dataId).complexTensorInfos.imag;
+    const imagVal = backend.data.get(imag.dataId).values;
+    // When complex tensor is disposed, its underlying parts will be disposed too.
+    // Make new tensor out of the imag value of the complex. This makes sure the
+    // value is still accessible even if complex tensor is disposed.
+    return backend.makeTensorInfo(imag.shape, imag.dtype, imagVal);
+}
+const imagConfig = {
+    kernelName: (0, _tfjsCore.Imag),
+    backendName: "cpu",
+    kernelFunc: imag
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4bj3X":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "conv2D", ()=>conv2D);
+parcelHelpers.export(exports, "conv2DConfig", ()=>conv2DConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function conv2D(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, filter } = inputs;
+    const { strides, pad, dataFormat, dilations, dimRoundingMode } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x,
+        filter
+    ], "conv2d");
+    const $dataFormat = (0, _tfjsCore.backend_util).convertConv2DDataFormat(dataFormat);
+    const convInfo = (0, _tfjsCore.backend_util).computeConv2DInfo(x.shape, filter.shape, strides, dilations, pad, dimRoundingMode, false, $dataFormat);
+    const filterHeight = convInfo.filterHeight;
+    const filterWidth = convInfo.filterWidth;
+    const dilationHeight = convInfo.dilationHeight;
+    const dilationWidth = convInfo.dilationWidth;
+    const padLeft = convInfo.padInfo.left;
+    const padTop = convInfo.padInfo.top;
+    const isChannelsLast = convInfo.dataFormat === "channelsLast";
+    const y = new (0, _tfjsCore.TensorBuffer)(convInfo.outShape, x.dtype);
+    const xStrides = (0, _tfjsCore.util).computeStrides(x.shape);
+    const filterStrides = (0, _tfjsCore.util).computeStrides(filter.shape);
+    const xBatchStride = xStrides[0];
+    const xRowStride = isChannelsLast ? xStrides[1] : xStrides[2];
+    const xColStride = isChannelsLast ? xStrides[2] : 1;
+    const xChannelStride = isChannelsLast ? 1 : xStrides[1];
+    const yBatchStride = y.strides[0];
+    const yRowStride = isChannelsLast ? y.strides[1] : y.strides[2];
+    const yColStride = isChannelsLast ? y.strides[2] : 1;
+    const yChannelStride = isChannelsLast ? 1 : y.strides[1];
+    const xVals = backend.data.get(x.dataId).values;
+    const wVals = backend.data.get(filter.dataId).values;
+    const yVals = y.values;
+    for(let b = 0; b < convInfo.batchSize; ++b){
+        const xOffset1 = b * xBatchStride;
+        const yOffset1 = b * yBatchStride;
+        for(let yR = 0; yR < convInfo.outHeight; ++yR){
+            const yOffset2 = yOffset1 + yR * yRowStride;
+            const xRCorner = yR * convInfo.strideHeight - padTop;
+            for(let wR = 0; wR < filterHeight; ++wR){
+                const xR = xRCorner + wR * dilationHeight;
+                if (xR < 0 || xR >= convInfo.inHeight) continue;
+                const wOffset1 = wR * filterStrides[0];
+                const xOffset2 = xOffset1 + xR * xRowStride;
+                for(let yC = 0; yC < convInfo.outWidth; ++yC){
+                    const yOffset3 = yOffset2 + yC * yColStride;
+                    const xCCorner = yC * convInfo.strideWidth - padLeft;
+                    for(let wC = 0; wC < filterWidth; ++wC){
+                        const xC = xCCorner + wC * dilationWidth;
+                        if (xC < 0 || xC >= convInfo.inWidth) continue;
+                        const wOffset2 = wOffset1 + wC * filterStrides[1];
+                        const xOffset3 = xOffset2 + xC * xColStride;
+                        let wOffset3 = wOffset2;
+                        for(let d1 = 0; d1 < convInfo.inChannels; ++d1){
+                            const xVal = xVals[xOffset3 + d1 * xChannelStride];
+                            for(let d2 = 0; d2 < convInfo.outChannels; ++d2)yVals[yOffset3 + d2 * yChannelStride] += xVal * wVals[wOffset3 + d2];
+                            wOffset3 += convInfo.outChannels;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return backend.makeTensorInfo(y.shape, y.dtype, yVals);
+}
+const conv2DConfig = {
+    kernelName: (0, _tfjsCore.Conv2D),
+    backendName: "cpu",
+    kernelFunc: conv2D
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jHKF1":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "conv2DBackpropFilter", ()=>conv2DBackpropFilter);
+parcelHelpers.export(exports, "conv2DBackpropFilterConfig", ()=>conv2DBackpropFilterConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function conv2DBackpropFilter(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, dy } = inputs;
+    const { strides, pad, dataFormat, dimRoundingMode, filterShape } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x,
+        dy
+    ], "conv2dBackpropFilter");
+    const $dataFormat = (0, _tfjsCore.backend_util).convertConv2DDataFormat(dataFormat);
+    const convInfo = (0, _tfjsCore.backend_util).computeConv2DInfo(x.shape, filterShape, strides, 1 /* dilations */ , pad, dimRoundingMode, false, $dataFormat);
+    const { strideHeight, strideWidth, filterHeight, filterWidth } = convInfo;
+    const isChannelsLast = convInfo.dataFormat === "channelsLast";
+    const dW = new (0, _tfjsCore.TensorBuffer)(convInfo.filterShape, "float32");
+    const leftPad = convInfo.padInfo.left;
+    const topPad = convInfo.padInfo.top;
+    const xVals = backend.data.get(x.dataId).values;
+    const dyVals = backend.data.get(dy.dataId).values;
+    const xBuf = new (0, _tfjsCore.TensorBuffer)(x.shape, x.dtype, xVals);
+    const dyBuf = new (0, _tfjsCore.TensorBuffer)(dy.shape, dy.dtype, dyVals);
+    for(let wR = 0; wR < filterHeight; ++wR){
+        const yRMin = Math.max(0, Math.ceil((topPad - wR) / strideHeight));
+        const yRMax = Math.min(convInfo.outHeight, (convInfo.inHeight + topPad - wR) / strideHeight);
+        for(let wC = 0; wC < filterWidth; ++wC){
+            const yCMin = Math.max(0, Math.ceil((leftPad - wC) / strideWidth));
+            const yCMax = Math.min(convInfo.outWidth, (convInfo.inWidth + leftPad - wC) / strideWidth);
+            for(let d1 = 0; d1 < convInfo.inChannels; ++d1)for(let d2 = 0; d2 < convInfo.outChannels; ++d2){
+                let dotProd = 0;
+                for(let b = 0; b < convInfo.batchSize; ++b)for(let yR = yRMin; yR < yRMax; ++yR){
+                    const xR = wR + yR * strideHeight - topPad;
+                    for(let yC = yCMin; yC < yCMax; ++yC){
+                        const xC = wC + yC * strideWidth - leftPad;
+                        if (isChannelsLast) dotProd += xBuf.get(b, xR, xC, d1) * dyBuf.get(b, yR, yC, d2);
+                        else dotProd += xBuf.get(b, d1, xR, xC) * dyBuf.get(b, d2, yR, yC);
+                    }
+                }
+                dW.set(dotProd, wR, wC, d1, d2);
+            }
+        }
+    }
+    return backend.makeTensorInfo(dW.shape, dW.dtype, dW.values);
+}
+const conv2DBackpropFilterConfig = {
+    kernelName: (0, _tfjsCore.Conv2DBackpropFilter),
+    backendName: "cpu",
+    kernelFunc: conv2DBackpropFilter
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fBpei":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "conv2DBackpropInput", ()=>conv2DBackpropInput);
+parcelHelpers.export(exports, "conv2DBackpropInputConfig", ()=>conv2DBackpropInputConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function conv2DBackpropInput(args) {
+    const { inputs, backend, attrs } = args;
+    const { dy, filter } = inputs;
+    const { inputShape, strides, pad, dataFormat, dimRoundingMode } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        dy,
+        filter
+    ], "conv2dBackpropInput");
+    const filterStrides = (0, _tfjsCore.util).computeStrides(filter.shape);
+    const dyStrides = (0, _tfjsCore.util).computeStrides(dy.shape);
+    let $dataFormat = (0, _tfjsCore.backend_util).convertConv2DDataFormat(dataFormat);
+    const convInfo = (0, _tfjsCore.backend_util).computeConv2DInfo(inputShape, filter.shape, strides, 1 /* dilations */ , pad, dimRoundingMode, false, $dataFormat);
+    const dx = new (0, _tfjsCore.TensorBuffer)(convInfo.inShape, "float32");
+    const dxValues = dx.values;
+    const dyValues = backend.data.get(dy.dataId).values;
+    const fltValues = backend.data.get(filter.dataId).values;
+    const [fltS0, fltS1, fltS2] = filterStrides;
+    const { batchSize, filterHeight, filterWidth, inChannels, inHeight, inWidth, outChannels, outHeight, outWidth, strideHeight, strideWidth } = convInfo;
+    $dataFormat = convInfo.dataFormat;
+    const topPad = filterHeight - 1 - convInfo.padInfo.top;
+    const leftPad = filterWidth - 1 - convInfo.padInfo.left;
+    const isChannelsLast = $dataFormat === "channelsLast";
+    const xBatchStride = dx.strides[0];
+    const xRowStride = isChannelsLast ? dx.strides[1] : dx.strides[2];
+    const xColStride = isChannelsLast ? dx.strides[2] : 1;
+    const xChannelStride = isChannelsLast ? 1 : dx.strides[1];
+    const yBatchStride = dyStrides[0];
+    const yRowStride = isChannelsLast ? dyStrides[1] : dyStrides[2];
+    const yColStride = isChannelsLast ? dyStrides[2] : 1;
+    const yChannelStride = isChannelsLast ? 1 : dyStrides[1];
+    for(let b = 0; b < batchSize; ++b){
+        for(let d1 = 0; d1 < inChannels; ++d1)for(let xR = 0; xR < inHeight; ++xR){
+            const xRCorner = xR - topPad;
+            const xRMin = Math.max(0, Math.ceil(xRCorner / strideHeight));
+            const yRMax = Math.min(outHeight, (filterHeight + xRCorner) / strideHeight);
+            for(let xC = 0; xC < inWidth; ++xC){
+                const xCCorner = xC - leftPad;
+                const xCMin = Math.max(0, Math.ceil(xCCorner / strideWidth));
+                const yCMax = Math.min(outWidth, (filterWidth + xCCorner) / strideWidth);
+                let dotProd = 0;
+                for(let yR = xRMin; yR < yRMax; ++yR){
+                    const wR = yR * strideHeight - xRCorner;
+                    for(let yC = xCMin; yC < yCMax; ++yC){
+                        const wC = yC * strideWidth - xCCorner;
+                        const dyOffset = yBatchStride * b + yRowStride * yR + yColStride * yC;
+                        const fltOffset = fltS0 * (filterHeight - 1 - wR) + fltS1 * (filterWidth - 1 - wC) + fltS2 * d1;
+                        for(let d2 = 0; d2 < outChannels; ++d2){
+                            const pixel = dyValues[dyOffset + yChannelStride * d2];
+                            const weight = fltValues[fltOffset + d2];
+                            dotProd += pixel * weight;
+                        }
+                    }
+                }
+                const dxOffset = xBatchStride * b + xRowStride * xR + xColStride * xC + xChannelStride * d1;
+                dxValues[dxOffset] = dotProd;
+            }
+        }
+    }
+    return backend.makeTensorInfo(dx.shape, dx.dtype, dx.values);
+}
+const conv2DBackpropInputConfig = {
+    kernelName: (0, _tfjsCore.Conv2DBackpropInput),
+    backendName: "cpu",
+    kernelFunc: conv2DBackpropInput
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iJ4dh":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "conv3D", ()=>conv3D);
+parcelHelpers.export(exports, "conv3DConfig", ()=>conv3DConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function conv3D(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, filter } = inputs;
+    const { strides, pad, dilations } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x,
+        filter
+    ], "conv3d");
+    const convInfo = (0, _tfjsCore.backend_util).computeConv3DInfo(x.shape, filter.shape, strides, dilations, pad);
+    const { filterDepth, filterHeight, filterWidth, dilationDepth, dilationHeight, dilationWidth, padInfo } = convInfo;
+    const padFront = padInfo.front;
+    const padLeft = padInfo.left;
+    const padTop = padInfo.top;
+    const y = new (0, _tfjsCore.TensorBuffer)(convInfo.outShape, x.dtype);
+    const xVals = backend.data.get(x.dataId).values;
+    const wVals = backend.data.get(filter.dataId).values;
+    const yVals = y.values;
+    const xStrides = (0, _tfjsCore.util).computeStrides(x.shape);
+    const filterStrides = (0, _tfjsCore.util).computeStrides(filter.shape);
+    for(let b = 0; b < convInfo.batchSize; ++b){
+        const xOffset1 = b * xStrides[0];
+        const yOffset1 = b * y.strides[0];
+        for(let yF = 0; yF < convInfo.outDepth; ++yF){
+            const yOffset2 = yOffset1 + yF * y.strides[1];
+            const xFCorner = yF * convInfo.strideDepth - padFront;
+            for(let wF = 0; wF < filterDepth; ++wF){
+                const xF = xFCorner + wF * dilationDepth;
+                if (xF < 0 || xF >= convInfo.inDepth) continue;
+                const wOffset1 = wF * filterStrides[0];
+                const xOffset2 = xOffset1 + xF * xStrides[1];
+                for(let yR = 0; yR < convInfo.outHeight; ++yR){
+                    const yOffset3 = yOffset2 + yR * y.strides[2];
+                    const xRCorner = yR * convInfo.strideHeight - padTop;
+                    for(let wR = 0; wR < filterHeight; ++wR){
+                        const xR = xRCorner + wR * dilationHeight;
+                        if (xR < 0 || xR >= convInfo.inHeight) continue;
+                        const wOffset2 = wOffset1 + wR * filterStrides[1];
+                        const xOffset3 = xOffset2 + xR * xStrides[2];
+                        for(let yC = 0; yC < convInfo.outWidth; ++yC){
+                            const yOffset4 = yOffset3 + yC * convInfo.outChannels;
+                            const xCCorner = yC * convInfo.strideWidth - padLeft;
+                            for(let wC = 0; wC < filterWidth; ++wC){
+                                const xC = xCCorner + wC * dilationWidth;
+                                if (xC < 0 || xC >= convInfo.inWidth) continue;
+                                const wOffset3 = wOffset2 + wC * filterStrides[2];
+                                const xOffset4 = xOffset3 + xC * convInfo.inChannels;
+                                let wOffset4 = wOffset3;
+                                for(let d1 = 0; d1 < convInfo.inChannels; ++d1){
+                                    const xVal = xVals[xOffset4 + d1];
+                                    for(let d2 = 0; d2 < convInfo.outChannels; ++d2)yVals[yOffset4 + d2] += xVal * wVals[wOffset4 + d2];
+                                    wOffset4 += convInfo.outChannels;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return backend.makeTensorInfo(y.shape, y.dtype, y.values);
+}
+const conv3DConfig = {
+    kernelName: (0, _tfjsCore.Conv3D),
+    backendName: "cpu",
+    kernelFunc: conv3D
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"g7cYG":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "conv3DBackpropFilterV2", ()=>conv3DBackpropFilterV2);
+parcelHelpers.export(exports, "conv3DBackpropFilterV2Config", ()=>conv3DBackpropFilterV2Config);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function conv3DBackpropFilterV2(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, dy } = inputs;
+    const { strides, pad, filterShape } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x,
+        dy
+    ], "conv3dBackpropFilterV2");
+    const xStrides = (0, _tfjsCore.util).computeStrides(x.shape);
+    const dyStrides = (0, _tfjsCore.util).computeStrides(dy.shape);
+    const convInfo = (0, _tfjsCore.backend_util).computeConv3DInfo(x.shape, filterShape, strides, 1 /* dilations */ , pad);
+    const strideDepth = convInfo.strideDepth;
+    const strideHeight = convInfo.strideHeight;
+    const strideWidth = convInfo.strideWidth;
+    const filterDepth = convInfo.filterDepth;
+    const filterHeight = convInfo.filterHeight;
+    const filterWidth = convInfo.filterWidth;
+    const dw = new (0, _tfjsCore.TensorBuffer)(convInfo.filterShape, "float32");
+    const dwValues = dw.values;
+    const [dwS0, dwS1, dwS2, dwS3] = dw.strides;
+    const dyValues = backend.data.get(dy.dataId).values;
+    const [dyS0, dyS1, dyS2, dyS3] = dyStrides;
+    const xValues = backend.data.get(x.dataId).values;
+    const [xS0, xS1, xS2, xS3] = xStrides;
+    const frontPad = convInfo.padInfo.front;
+    const leftPad = convInfo.padInfo.left;
+    const topPad = convInfo.padInfo.top;
+    for(let wF = 0; wF < filterDepth; ++wF){
+        const yFMin = Math.max(0, Math.ceil((frontPad - wF) / strideDepth));
+        const yFMax = Math.min(convInfo.outDepth, (convInfo.inDepth + frontPad - wF) / strideDepth);
+        const wOffset1 = wF * dwS0;
+        for(let wR = 0; wR < filterHeight; ++wR){
+            const yRMin = Math.max(0, Math.ceil((topPad - wR) / strideHeight));
+            const yRMax = Math.min(convInfo.outHeight, (convInfo.inHeight + topPad - wR) / strideHeight);
+            const wOffset2 = wR * dwS1 + wOffset1;
+            for(let wC = 0; wC < filterWidth; ++wC){
+                const yCMin = Math.max(0, Math.ceil((leftPad - wC) / strideWidth));
+                const yCMax = Math.min(convInfo.outWidth, (convInfo.inWidth + leftPad - wC) / strideWidth);
+                const wOffset3 = wC * dwS2 + wOffset2;
+                for(let d1 = 0; d1 < convInfo.inChannels; ++d1){
+                    const wOffset4 = d1 * dwS3 + wOffset3;
+                    for(let d2 = 0; d2 < convInfo.outChannels; ++d2){
+                        let dotProd = 0;
+                        for(let b = 0; b < convInfo.batchSize; ++b){
+                            const xOffset1 = b * xS0;
+                            const yOffset1 = b * dyS0;
+                            for(let yF = yFMin; yF < yFMax; ++yF){
+                                const xF = wF + yF * strideDepth - frontPad;
+                                const xOffset2 = xF * xS1 + xOffset1;
+                                const yOffset2 = yF * dyS1 + yOffset1;
+                                for(let yR = yRMin; yR < yRMax; ++yR){
+                                    const xR = wR + yR * strideHeight - topPad;
+                                    const xOffset3 = xR * xS2 + xOffset2;
+                                    const yOffset3 = yR * dyS2 + yOffset2;
+                                    for(let yC = yCMin; yC < yCMax; ++yC){
+                                        const xC = wC + yC * strideWidth - leftPad;
+                                        const xOffset4 = xC * xS3 + xOffset3;
+                                        const yOffset4 = yC * dyS3 + yOffset3;
+                                        dotProd += xValues[xOffset4 + d1] * dyValues[yOffset4 + d2];
+                                    }
+                                }
+                            }
+                        }
+                        dwValues[wOffset4 + d2] = dotProd;
+                    }
+                }
+            }
+        }
+    }
+    return backend.makeTensorInfo(dw.shape, dw.dtype, dw.values);
+}
+const conv3DBackpropFilterV2Config = {
+    kernelName: (0, _tfjsCore.Conv3DBackpropFilterV2),
+    backendName: "cpu",
+    kernelFunc: conv3DBackpropFilterV2
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"l6kPr":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "conv3DBackpropInputV2", ()=>conv3DBackpropInputV2);
+parcelHelpers.export(exports, "conv3DBackpropInputV2Config", ()=>conv3DBackpropInputV2Config);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function conv3DBackpropInputV2(args) {
+    const { inputs, backend, attrs } = args;
+    const { dy, filter } = inputs;
+    const { pad, strides, inputShape } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        dy
+    ], "conv3dBackpropInputV2");
+    const dyStrides = (0, _tfjsCore.util).computeStrides(dy.shape);
+    const filterStrides = (0, _tfjsCore.util).computeStrides(filter.shape);
+    const convInfo = (0, _tfjsCore.backend_util).computeConv3DInfo(inputShape, filter.shape, strides, 1 /* dilations */ , pad);
+    const dx = new (0, _tfjsCore.TensorBuffer)(convInfo.inShape, "float32");
+    const dxValues = dx.values;
+    const [dxS0, dxS1, dxS2, dxS3] = dx.strides;
+    const dyValues = backend.data.get(dy.dataId).values;
+    const [dyS0, dyS1, dyS2, dyS3] = dyStrides;
+    const fltValues = backend.data.get(filter.dataId).values;
+    const [fltS0, fltS1, fltS2, fltS3] = filterStrides;
+    const { batchSize, filterDepth, filterHeight, filterWidth, inChannels, inDepth, inHeight, inWidth, outChannels, outDepth, outHeight, outWidth, strideDepth, strideHeight, strideWidth } = convInfo;
+    const frontPad = filterDepth - 1 - convInfo.padInfo.front;
+    const topPad = filterHeight - 1 - convInfo.padInfo.top;
+    const leftPad = filterWidth - 1 - convInfo.padInfo.left;
+    for(let b = 0; b < batchSize; ++b){
+        for(let d1 = 0; d1 < inChannels; ++d1)// Frames of depth
+        for(let xF = 0; xF < inDepth; ++xF){
+            const xFCorner = xF - frontPad;
+            const xFMin = Math.max(0, Math.ceil(xFCorner / strideDepth));
+            const yFMax = Math.min(outDepth, (filterDepth + xFCorner) / strideDepth);
+            // Rows as per standard 2d matrix notation
+            for(let xR = 0; xR < inHeight; ++xR){
+                const xRCorner = xR - topPad;
+                const xRMin = Math.max(0, Math.ceil(xRCorner / strideHeight));
+                const yRMax = Math.min(outHeight, (filterHeight + xRCorner) / strideHeight);
+                // Columns as per standard 2d matrix notation
+                for(let xC = 0; xC < inWidth; ++xC){
+                    const xCCorner = xC - leftPad;
+                    const xCMin = Math.max(0, Math.ceil(xCCorner / strideWidth));
+                    const yCMax = Math.min(outWidth, (filterWidth + xCCorner) / strideWidth);
+                    let dotProd = 0;
+                    for(let yF = xFMin; yF < yFMax; ++yF){
+                        const wF = yF * strideDepth - xFCorner;
+                        for(let yR = xRMin; yR < yRMax; ++yR){
+                            const wR = yR * strideHeight - xRCorner;
+                            for(let yC = xCMin; yC < yCMax; ++yC){
+                                const wC = yC * strideWidth - xCCorner;
+                                const dyOffset = dyS0 * b + dyS1 * yF + dyS2 * yR + dyS3 * yC;
+                                const fltOffset = fltS0 * (filterDepth - 1 - wF) + fltS1 * (filterHeight - 1 - wR) + fltS2 * (filterWidth - 1 - wC) + fltS3 * d1;
+                                for(let d2 = 0; d2 < outChannels; ++d2){
+                                    const pixel = dyValues[dyOffset + d2];
+                                    const weight = fltValues[fltOffset + d2];
+                                    dotProd += pixel * weight;
+                                }
+                            }
+                        }
+                    }
+                    dxValues[dxS0 * b + dxS1 * xF + dxS2 * xR + dxS3 * xC + d1] = dotProd;
+                }
+            }
+        }
+    }
+    return backend.makeTensorInfo(dx.shape, dx.dtype, dx.values);
+}
+const conv3DBackpropInputV2Config = {
+    kernelName: (0, _tfjsCore.Conv3DBackpropInputV2),
+    backendName: "cpu",
+    kernelFunc: conv3DBackpropInputV2
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hkcOn":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "cos", ()=>cos);
+parcelHelpers.export(exports, "cosConfig", ()=>cosConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const cos = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Cos), (xi)=>Math.cos(xi));
+const cosConfig = {
+    kernelName: (0, _tfjsCore.Cos),
+    backendName: "cpu",
+    kernelFunc: cos
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eg9u0":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "cosh", ()=>cosh);
+parcelHelpers.export(exports, "coshConfig", ()=>coshConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const cosh = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Cosh), (xi)=>Math.cosh(xi));
+const coshConfig = {
+    kernelName: (0, _tfjsCore.Cosh),
+    backendName: "cpu",
+    kernelFunc: cosh
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8K1SK":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "cropAndResize", ()=>cropAndResize);
+parcelHelpers.export(exports, "cropAndResizeConfig", ()=>cropAndResizeConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function cropAndResize(args) {
+    const { inputs, backend, attrs } = args;
+    const { image, boxes, boxInd } = inputs;
+    const { cropSize, method, extrapolationValue } = attrs;
+    const [batch, imageHeight, imageWidth, numChannels] = image.shape;
+    const numBoxes = boxes.shape[0];
+    const [cropHeight, cropWidth] = cropSize;
+    const output = (0, _tfjsCore.buffer)([
+        numBoxes,
+        cropHeight,
+        cropWidth,
+        numChannels
+    ], "float32");
+    const boxVals = backend.data.get(boxes.dataId).values;
+    const boxIndVals = backend.data.get(boxInd.dataId).values;
+    const imageVals = backend.data.get(image.dataId).values;
+    const inStride = (0, _tfjsCore.util).computeStrides(image.shape); // to calculate flat indexes into image
+    const outStride = (0, _tfjsCore.util).computeStrides(output.shape); // to calculate flat indexes into output
+    // Reference implementation
+    // tslint:disable-next-line:max-line-length
+    // https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/kernels/crop_and_resize_op.cc
+    for(let b = 0; b < numBoxes; b++){
+        const startInd = b * 4;
+        const y1 = boxVals[startInd];
+        const x1 = boxVals[startInd + 1];
+        const y2 = boxVals[startInd + 2];
+        const x2 = boxVals[startInd + 3];
+        const bInd = boxIndVals[b];
+        if (bInd >= batch) continue;
+        const heightScale = cropHeight > 1 ? (y2 - y1) * (imageHeight - 1) / (cropHeight - 1) : 0;
+        const widthScale = cropWidth > 1 ? (x2 - x1) * (imageWidth - 1) / (cropWidth - 1) : 0;
+        for(let y = 0; y < cropHeight; y++){
+            const yInd = cropHeight > 1 ? y1 * (imageHeight - 1) + y * heightScale : 0.5 * (y1 + y2) * (imageHeight - 1);
+            if (yInd < 0 || yInd > imageHeight - 1) {
+                for(let x = 0; x < cropWidth; x++)for(let c = 0; c < numChannels; c++){
+                    const ind = c + x * outStride[2] + y * outStride[1] + b * outStride[0];
+                    output.values[ind] = extrapolationValue;
+                }
+                continue;
+            }
+            if (method === "bilinear") {
+                const topInd = Math.floor(yInd);
+                const bottomInd = Math.ceil(yInd);
+                const yLerp = yInd - topInd;
+                for(let x = 0; x < cropWidth; x++){
+                    const xInd = cropWidth > 1 ? x1 * (imageWidth - 1) + x * widthScale : 0.5 * (x1 + x2) * (imageWidth - 1);
+                    if (xInd < 0 || xInd > imageWidth - 1) {
+                        for(let c = 0; c < numChannels; c++){
+                            const ind = c + x * outStride[2] + y * outStride[1] + b * outStride[0];
+                            output.values[ind] = extrapolationValue;
+                        }
+                        continue;
+                    }
+                    const leftInd = Math.floor(xInd);
+                    const rightInd = Math.ceil(xInd);
+                    const xLerp = xInd - leftInd;
+                    for(let c = 0; c < numChannels; c++){
+                        let ind = c + leftInd * inStride[2] + topInd * inStride[1] + bInd * inStride[0];
+                        const topLeft = imageVals[ind];
+                        ind = c + rightInd * inStride[2] + topInd * inStride[1] + bInd * inStride[0];
+                        const topRight = imageVals[ind];
+                        ind = c + leftInd * inStride[2] + bottomInd * inStride[1] + bInd * inStride[0];
+                        const bottomLeft = imageVals[ind];
+                        ind = c + rightInd * inStride[2] + bottomInd * inStride[1] + bInd * inStride[0];
+                        const bottomRight = imageVals[ind];
+                        const top = topLeft + (topRight - topLeft) * xLerp;
+                        const bottom = bottomLeft + (bottomRight - bottomLeft) * xLerp;
+                        ind = c + x * outStride[2] + y * outStride[1] + b * outStride[0];
+                        output.values[ind] = top + (bottom - top) * yLerp;
+                    }
+                }
+            } else for(let x = 0; x < cropWidth; ++x){
+                const xInd = cropWidth > 1 ? x1 * (imageWidth - 1) + x * widthScale : 0.5 * (x1 + x2) * (imageWidth - 1);
+                if (xInd < 0 || xInd > imageWidth - 1) {
+                    for(let c = 0; c < numChannels; c++){
+                        const ind = c + x * outStride[2] + y * outStride[1] + b * outStride[0];
+                        output.values[ind] = extrapolationValue;
+                    }
+                    continue;
+                }
+                const closestX = Math.round(xInd);
+                const closestY = Math.round(yInd);
+                for(let c = 0; c < numChannels; c++){
+                    const inInd = c + closestX * inStride[2] + closestY * inStride[1] + bInd * inStride[0];
+                    const outInd = c + x * outStride[2] + y * outStride[1] + b * outStride[0];
+                    output.values[outInd] = imageVals[inInd];
+                }
+            }
+        }
+    }
+    return backend.makeTensorInfo(output.shape, output.dtype, output.values);
+}
+const cropAndResizeConfig = {
+    kernelName: (0, _tfjsCore.CropAndResize),
+    backendName: "cpu",
+    kernelFunc: cropAndResize
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bN0pp":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2022 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "cumprod", ()=>cumprod);
+parcelHelpers.export(exports, "cumprodConfig", ()=>cumprodConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _transpose = require("./Transpose");
+function cumprod(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { axis, exclusive, reverse } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "cumprod");
+    const permutation = (0, _tfjsCore.backend_util).getAxesPermutation([
+        axis
+    ], x.shape.length);
+    let $x = x;
+    if (permutation != null) $x = (0, _transpose.transpose)({
+        inputs: {
+            x
+        },
+        backend,
+        attrs: {
+            perm: permutation
+        }
+    });
+    const permutedAxis = (0, _tfjsCore.backend_util).getInnerMostAxes(1, x.shape.length)[0];
+    if (permutedAxis !== $x.shape.length - 1) throw new Error(`backend.cumprod in CPU expects an inner-most ` + `axis=${$x.shape.length - 1} but got axis=${permutedAxis}`);
+    const resultDtype = (0, _tfjsCore.upcastType)($x.dtype, "int32");
+    const vals = (0, _tfjsCore.util).makeOnesTypedArray((0, _tfjsCore.util).sizeFromShape($x.shape), resultDtype);
+    const aVals = backend.data.get($x.dataId).values;
+    const finalDim = $x.shape[$x.shape.length - 1];
+    const indexAdjuster = reverse ? (i, j)=>i + finalDim - j - 1 : (i, j)=>i + j;
+    for(let i = 0; i < aVals.length; i += finalDim)for(let j = 0; j < finalDim; j++){
+        const idx = indexAdjuster(i, j);
+        if (j === 0) vals[idx] = exclusive ? 1 : aVals[idx];
+        else {
+            const prevIdx = indexAdjuster(i, j - 1);
+            vals[idx] = exclusive ? aVals[prevIdx] * vals[prevIdx] : aVals[idx] * vals[prevIdx];
+        }
+    }
+    const result = backend.makeTensorInfo($x.shape, resultDtype, vals);
+    if (permutation != null) {
+        const reversePermutation = (0, _tfjsCore.backend_util).getUndoAxesPermutation(permutation);
+        const reverseTransposedResult = (0, _transpose.transpose)({
+            inputs: {
+                x: result
+            },
+            backend,
+            attrs: {
+                perm: reversePermutation
+            }
+        });
+        backend.disposeIntermediateTensorInfo(result);
+        backend.disposeIntermediateTensorInfo($x);
+        return reverseTransposedResult;
+    }
+    return result;
+}
+const cumprodConfig = {
+    kernelName: (0, _tfjsCore.Cumprod),
+    backendName: "cpu",
+    kernelFunc: cumprod
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8YA18":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "cumsum", ()=>cumsum);
+parcelHelpers.export(exports, "cumsumConfig", ()=>cumsumConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _transpose = require("./Transpose");
+function cumsum(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { axis, exclusive, reverse } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "cumsum");
+    const permutation = (0, _tfjsCore.backend_util).getAxesPermutation([
+        axis
+    ], x.shape.length);
+    let $x = x;
+    if (permutation != null) $x = (0, _transpose.transpose)({
+        inputs: {
+            x
+        },
+        backend,
+        attrs: {
+            perm: permutation
+        }
+    });
+    const permutedAxis = (0, _tfjsCore.backend_util).getInnerMostAxes(1, x.shape.length)[0];
+    if (permutedAxis !== $x.shape.length - 1) throw new Error(`backend.cumsum in CPU expects an inner-most ` + `axis=${$x.shape.length - 1} but got axis=${permutedAxis}`);
+    const resultDtype = (0, _tfjsCore.upcastType)($x.dtype, "int32");
+    const vals = (0, _tfjsCore.util).makeZerosTypedArray((0, _tfjsCore.util).sizeFromShape($x.shape), resultDtype);
+    const aVals = backend.data.get($x.dataId).values;
+    const finalDim = $x.shape[$x.shape.length - 1];
+    const indexAdjuster = reverse ? (i, j)=>i + finalDim - j - 1 : (i, j)=>i + j;
+    for(let i = 0; i < aVals.length; i += finalDim)for(let j = 0; j < finalDim; j++){
+        const idx = indexAdjuster(i, j);
+        if (j === 0) vals[idx] = exclusive ? 0 : aVals[idx];
+        else {
+            const prevIdx = indexAdjuster(i, j - 1);
+            vals[idx] = exclusive ? aVals[prevIdx] + vals[prevIdx] : aVals[idx] + vals[prevIdx];
+        }
+    }
+    const result = backend.makeTensorInfo($x.shape, resultDtype, vals);
+    if (permutation != null) {
+        const reversePermutation = (0, _tfjsCore.backend_util).getUndoAxesPermutation(permutation);
+        const reverseTransposedResult = (0, _transpose.transpose)({
+            inputs: {
+                x: result
+            },
+            backend,
+            attrs: {
+                perm: reversePermutation
+            }
+        });
+        backend.disposeIntermediateTensorInfo(result);
+        backend.disposeIntermediateTensorInfo($x);
+        return reverseTransposedResult;
+    }
+    return result;
+}
+const cumsumConfig = {
+    kernelName: (0, _tfjsCore.Cumsum),
+    backendName: "cpu",
+    kernelFunc: cumsum
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cpFc0":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "denseBincount", ()=>denseBincount);
+parcelHelpers.export(exports, "denseBincountConfig", ()=>denseBincountConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _bincountImpl = require("./Bincount_impl");
+function denseBincount(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, weights } = inputs;
+    const { size, binaryOutput } = attrs;
+    if (x.shape.length === 1) {
+        const xVals = backend.data.get(x.dataId).values;
+        const weightsVals = backend.data.get(weights.dataId).values;
+        const outVals = (0, _bincountImpl.bincountImpl)(xVals, weightsVals, weights.dtype, weights.shape, size);
+        return backend.makeTensorInfo([
+            size
+        ], weights.dtype, outVals);
+    } else if (x.shape.length === 2) {
+        const xBuf = backend.bufferSync(x);
+        const weightsBuf = backend.bufferSync(weights);
+        const outBuf = (0, _bincountImpl.bincountReduceImpl)(xBuf, weightsBuf, size, binaryOutput);
+        return backend.makeTensorInfo(outBuf.shape, weights.dtype, outBuf.values);
+    }
+    throw new Error(`Error in denseBincount: input must be at most rank 2, but got rank` + `${x.shape.length}.`);
+}
+const denseBincountConfig = {
+    kernelName: (0, _tfjsCore.DenseBincount),
+    backendName: "cpu",
+    kernelFunc: denseBincount
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Bincount_impl":"4EF2S","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"l4MfW":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "depthToSpace", ()=>depthToSpace);
+parcelHelpers.export(exports, "depthToSpaceConfig", ()=>depthToSpaceConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function depthToSpace(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { blockSize, dataFormat } = attrs;
+    (0, _tfjsCore.util).assert(dataFormat === "NHWC", ()=>`Only NHWC dataFormat supported on CPU for depthToSpace. Got ${dataFormat}`);
+    const batchSize = x.shape[0];
+    const inputHeight = x.shape[1];
+    const inputWidth = x.shape[2];
+    const inputDepth = x.shape[3];
+    const outputHeight = inputHeight * blockSize;
+    const outputWidth = inputWidth * blockSize;
+    const outputDepth = inputDepth / (blockSize * blockSize);
+    const xValues = backend.data.get(x.dataId).values;
+    const result = new Float32Array(batchSize * outputHeight * outputWidth * outputDepth);
+    let outputIdx = 0;
+    for(let b = 0; b < batchSize; ++b)for(let h = 0; h < outputHeight; ++h){
+        const inH = Math.floor(h / blockSize);
+        const offsetH = h % blockSize;
+        for(let w = 0; w < outputWidth; ++w){
+            const inW = Math.floor(w / blockSize);
+            const offsetW = w % blockSize;
+            const offsetD = (offsetH * blockSize + offsetW) * outputDepth;
+            for(let d = 0; d < outputDepth; ++d){
+                const inD = d + offsetD;
+                const inputIdx = inD + inputDepth * (inW + inputWidth * (inH + inputHeight * b));
+                result[outputIdx++] = xValues[inputIdx];
+            }
+        }
+    }
+    return backend.makeTensorInfo([
+        batchSize,
+        outputHeight,
+        outputWidth,
+        outputDepth
+    ], x.dtype, result);
+}
+const depthToSpaceConfig = {
+    kernelName: (0, _tfjsCore.DepthToSpace),
+    backendName: "cpu",
+    kernelFunc: depthToSpace
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2iRpa":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "depthwiseConv2dNative", ()=>depthwiseConv2dNative);
+parcelHelpers.export(exports, "depthwiseConv2dNativeConfig", ()=>depthwiseConv2dNativeConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function depthwiseConv2dNative(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, filter } = inputs;
+    const { strides, pad, dilations, dimRoundingMode } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x,
+        filter
+    ], "depthwiseConv2DNative");
+    const xStrides = (0, _tfjsCore.util).computeStrides(x.shape);
+    const filterStrides = (0, _tfjsCore.util).computeStrides(filter.shape);
+    let $dilations = dilations;
+    if ($dilations == null) $dilations = [
+        1,
+        1
+    ];
+    (0, _tfjsCore.util).assert((0, _tfjsCore.backend_util).eitherStridesOrDilationsAreOne(strides, $dilations), ()=>"Error in depthwiseConv2d: Either strides or dilations must be " + `1. Got strides ${strides} and dilations '${$dilations}'`);
+    const convInfo = (0, _tfjsCore.backend_util).computeConv2DInfo(x.shape, filter.shape, strides, $dilations, pad, dimRoundingMode, true);
+    const { filterHeight, filterWidth, dilationHeight, dilationWidth, padInfo } = convInfo;
+    const padLeft = padInfo.left;
+    const padTop = padInfo.top;
+    const chMul = convInfo.outChannels / convInfo.inChannels;
+    const y = new (0, _tfjsCore.TensorBuffer)(convInfo.outShape, x.dtype);
+    const xVals = backend.data.get(x.dataId).values;
+    const wVals = backend.data.get(filter.dataId).values;
+    const yVals = y.values;
+    for(let b = 0; b < convInfo.batchSize; ++b){
+        const xOffset1 = b * xStrides[0];
+        const yOffset1 = b * y.strides[0];
+        for(let yR = 0; yR < convInfo.outHeight; ++yR){
+            const yOffset2 = yOffset1 + yR * y.strides[1];
+            const xRCorner = yR * convInfo.strideHeight - padTop;
+            for(let wR = 0; wR < filterHeight; ++wR){
+                const xR = xRCorner + wR * dilationHeight;
+                if (xR < 0 || xR >= convInfo.inHeight) continue;
+                const wOffset1 = wR * filterStrides[0];
+                const xOffset2 = xOffset1 + xR * xStrides[1];
+                for(let yC = 0; yC < convInfo.outWidth; ++yC){
+                    const yOffset3 = yOffset2 + yC * y.strides[2];
+                    const xCCorner = yC * convInfo.strideWidth - padLeft;
+                    for(let wC = 0; wC < filterWidth; ++wC){
+                        const xC = xCCorner + wC * dilationWidth;
+                        if (xC < 0 || xC >= convInfo.inWidth) continue;
+                        const wOffset2 = wOffset1 + wC * filterStrides[1];
+                        const xOffset3 = xOffset2 + xC * convInfo.inChannels;
+                        let yOffset4 = yOffset3;
+                        let wOffset3 = wOffset2;
+                        for(let d1 = 0; d1 < convInfo.inChannels; ++d1){
+                            const xVal = xVals[xOffset3 + d1];
+                            for(let q = 0; q < chMul; ++q)yVals[yOffset4 + q] += xVal * wVals[wOffset3 + q];
+                            yOffset4 += chMul;
+                            wOffset3 += chMul;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return backend.makeTensorInfo(y.shape, y.dtype, y.values);
+}
+const depthwiseConv2dNativeConfig = {
+    kernelName: (0, _tfjsCore.DepthwiseConv2dNative),
+    backendName: "cpu",
+    kernelFunc: depthwiseConv2dNative
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"j6FA2":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "depthwiseConv2dNativeBackpropFilter", ()=>depthwiseConv2dNativeBackpropFilter);
+parcelHelpers.export(exports, "depthwiseConv2dNativeBackpropFilterConfig", ()=>depthwiseConv2dNativeBackpropFilterConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function depthwiseConv2dNativeBackpropFilter(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, dy } = inputs;
+    const { strides, dilations, pad, dimRoundingMode, filterShape } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x,
+        dy
+    ], "depthwiseConv2dNativeBackpropFilter");
+    const convInfo = (0, _tfjsCore.backend_util).computeConv2DInfo(x.shape, filterShape, strides, dilations, pad, dimRoundingMode, true);
+    const { strideHeight, strideWidth, filterHeight, filterWidth } = convInfo;
+    const dW = new (0, _tfjsCore.TensorBuffer)(convInfo.filterShape, "float32");
+    const leftPad = convInfo.padInfo.left;
+    const topPad = convInfo.padInfo.top;
+    const chMul = convInfo.outChannels / convInfo.inChannels;
+    const xVals = backend.data.get(x.dataId).values;
+    const xBuf = new (0, _tfjsCore.TensorBuffer)(x.shape, x.dtype, xVals);
+    const dyVals = backend.data.get(dy.dataId).values;
+    const dyBuf = new (0, _tfjsCore.TensorBuffer)(dy.shape, dy.dtype, dyVals);
+    for(let wR = 0; wR < filterHeight; ++wR){
+        const yRMin = Math.max(0, Math.ceil((topPad - wR) / strideHeight));
+        const yRMax = Math.min(convInfo.outHeight, (convInfo.inHeight + topPad - wR) / strideHeight);
+        for(let wC = 0; wC < filterWidth; ++wC){
+            const yCMin = Math.max(0, Math.ceil((leftPad - wC) / strideWidth));
+            const yCMax = Math.min(convInfo.outWidth, (convInfo.inWidth + leftPad - wC) / strideWidth);
+            for(let d2 = 0; d2 < convInfo.outChannels; ++d2){
+                const d1 = Math.trunc(d2 / chMul);
+                const dm = d2 % chMul;
+                let dotProd = 0;
+                for(let b = 0; b < convInfo.batchSize; ++b)for(let yR = yRMin; yR < yRMax; ++yR){
+                    const xR = wR + yR * strideHeight - topPad;
+                    for(let yC = yCMin; yC < yCMax; ++yC){
+                        const xC = wC + yC * strideWidth - leftPad;
+                        dotProd += xBuf.get(b, xR, xC, d1) * dyBuf.get(b, yR, yC, d2);
+                    }
+                }
+                dW.set(dotProd, wR, wC, d1, dm);
+            }
+        }
+    }
+    return backend.makeTensorInfo(dW.shape, dW.dtype, dW.values);
+}
+const depthwiseConv2dNativeBackpropFilterConfig = {
+    kernelName: (0, _tfjsCore.DepthwiseConv2dNativeBackpropFilter),
+    backendName: "cpu",
+    kernelFunc: depthwiseConv2dNativeBackpropFilter
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4Kyp1":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "depthwiseConv2dNativeBackpropInput", ()=>depthwiseConv2dNativeBackpropInput);
+parcelHelpers.export(exports, "depthwiseConv2dNativeBackpropInputConfig", ()=>depthwiseConv2dNativeBackpropInputConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function depthwiseConv2dNativeBackpropInput(args) {
+    const { inputs, backend, attrs } = args;
+    const { dy, filter } = inputs;
+    const { strides, dilations, pad, dimRoundingMode, inputShape } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        dy,
+        filter
+    ], "depthwiseConv2DNativeBackpropInput");
+    const dyStrides = (0, _tfjsCore.util).computeStrides(dy.shape);
+    const filterStrides = (0, _tfjsCore.util).computeStrides(filter.shape);
+    const convInfo = (0, _tfjsCore.backend_util).computeConv2DInfo(inputShape, filter.shape, strides, dilations, pad, dimRoundingMode, true);
+    const dx = new (0, _tfjsCore.TensorBuffer)(convInfo.inShape, "float32");
+    const dxValues = dx.values;
+    const [dxS0, dxS1, dxS2] = dx.strides;
+    const dyValues = backend.data.get(dy.dataId).values;
+    const [dyS0, dyS1, dyS2] = dyStrides;
+    const fltValues = backend.data.get(filter.dataId).values;
+    const [fltS0, fltS1, fltS2] = filterStrides;
+    const { batchSize, filterHeight, filterWidth, inChannels, inHeight, inWidth, outChannels, outHeight, outWidth, strideHeight, strideWidth } = convInfo;
+    const topPad = filterHeight - 1 - convInfo.padInfo.top;
+    const leftPad = filterWidth - 1 - convInfo.padInfo.left;
+    const chMul = outChannels / inChannels;
+    for(let b = 0; b < batchSize; ++b){
+        for(let d1 = 0; d1 < inChannels; ++d1)for(let xR = 0; xR < inHeight; ++xR){
+            const xRCorner = xR - topPad;
+            const xRMin = Math.max(0, Math.ceil(xRCorner / strideHeight));
+            const yRMax = Math.min(outHeight, (filterHeight + xRCorner) / strideHeight);
+            for(let xC = 0; xC < inWidth; ++xC){
+                const xCCorner = xC - leftPad;
+                const xCMin = Math.max(0, Math.ceil(xCCorner / strideWidth));
+                const yCMax = Math.min(outWidth, (filterWidth + xCCorner) / strideWidth);
+                let dotProd = 0;
+                for(let yR = xRMin; yR < yRMax; ++yR){
+                    const wR = yR * strideHeight - xRCorner;
+                    for(let yC = xCMin; yC < yCMax; ++yC){
+                        const wC = yC * strideWidth - xCCorner;
+                        const dyOffset = dyS0 * b + dyS1 * yR + dyS2 * yC;
+                        const fltOffset = fltS0 * (filterHeight - 1 - wR) + fltS1 * (filterWidth - 1 - wC) + fltS2 * d1;
+                        for(let dm = 0; dm < chMul; ++dm){
+                            const d2 = d1 * chMul + dm;
+                            const pixel = dyValues[dyOffset + d2];
+                            const weight = fltValues[fltOffset + dm];
+                            dotProd += pixel * weight;
+                        }
+                    }
+                }
+                dxValues[dxS0 * b + dxS1 * xR + dxS2 * xC + d1] = dotProd;
+            }
+        }
+    }
+    return backend.makeTensorInfo(dx.shape, dx.dtype, dx.values);
+}
+const depthwiseConv2dNativeBackpropInputConfig = {
+    kernelName: (0, _tfjsCore.DepthwiseConv2dNativeBackpropInput),
+    backendName: "cpu",
+    kernelFunc: depthwiseConv2dNativeBackpropInput
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"c5zdj":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "diag", ()=>diag);
+parcelHelpers.export(exports, "diagConfig", ()=>diagConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function diag(args) {
+    const { inputs, backend } = args;
+    const { x } = inputs;
+    const xSize = (0, _tfjsCore.util).sizeFromShape(x.shape);
+    const xVals = backend.data.get(x.dataId).values;
+    const outBuf = (0, _tfjsCore.buffer)([
+        xSize,
+        xSize
+    ], x.dtype);
+    const vals = outBuf.values;
+    for(let i = 0; i < xVals.length; i++)vals[i * xSize + i] = xVals[i];
+    const outShape = [
+        ...x.shape,
+        ...x.shape
+    ];
+    return backend.makeTensorInfo(outShape, outBuf.dtype, outBuf.values);
+}
+const diagConfig = {
+    kernelName: (0, _tfjsCore.Diag),
+    backendName: "cpu",
+    kernelFunc: diag
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8CglA":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "dilation2DConfig", ()=>dilation2DConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+const dilation2DConfig = {
+    kernelName: (0, _tfjsCore.Dilation2D),
+    backendName: "cpu",
+    kernelFunc: ({ inputs, backend, attrs })=>{
+        const { x, filter } = inputs;
+        const { strides, pad, dilations } = attrs;
+        const cpuBackend = backend;
+        const xVals = cpuBackend.data.get(x.dataId).values;
+        const xRank = x.shape.length;
+        const filterVals = cpuBackend.data.get(filter.dataId).values;
+        const filterRank = filter.shape.length;
+        const { batchSize, inHeight, inWidth, inChannels, outHeight, outWidth, padInfo, strideHeight, strideWidth, filterHeight, filterWidth, dilationHeight, dilationWidth, outShape } = (0, _tfjsCore.backend_util).computeDilation2DInfo(x.shape, filter.shape, strides, pad, "NHWC" /* dataFormat */ , dilations);
+        const outSize = (0, _tfjsCore.util).sizeFromShape(outShape);
+        const outRank = outShape.length;
+        const outputVals = (0, _tfjsCore.util).getArrayFromDType(x.dtype, outSize);
+        // Upsampling the input by fill in `dilation size - 1` values between each
+        // input value.
+        // This implementation follows the TF c++ implementation:
+        // https://github.com/tensorflow/tensorflow/blob/d9a3a849edc198e90172bc58eb293de457f9d986/tensorflow/core/kernels/dilation_ops.cc
+        for(let b = 0; b < batchSize; ++b)for(let hOut = 0; hOut < outHeight; ++hOut){
+            const hBeg = hOut * strideHeight - padInfo.top;
+            for(let wOut = 0; wOut < outWidth; ++wOut){
+                const wBeg = wOut * strideWidth - padInfo.left;
+                for(let d = 0; d < inChannels; ++d){
+                    let curVal = Number.MIN_SAFE_INTEGER;
+                    for(let h = 0; h < filterHeight; ++h){
+                        const hIn = hBeg + h * dilationHeight;
+                        if (hIn >= 0 && hIn < inHeight) for(let w = 0; w < filterWidth; ++w){
+                            const wIn = wBeg + w * dilationWidth;
+                            if (wIn >= 0 && wIn < inWidth) {
+                                const xIndex = (0, _tfjsCore.util).locToIndex([
+                                    b,
+                                    hIn,
+                                    wIn,
+                                    d
+                                ], xRank, (0, _tfjsCore.util).computeStrides(x.shape));
+                                const filterIndex = (0, _tfjsCore.util).locToIndex([
+                                    h,
+                                    w,
+                                    d
+                                ], filterRank, (0, _tfjsCore.util).computeStrides(filter.shape));
+                                const val = xVals[xIndex] + filterVals[filterIndex];
+                                if (val > curVal) curVal = val;
+                            }
+                        }
+                    }
+                    const outputIndex = (0, _tfjsCore.util).locToIndex([
+                        b,
+                        hOut,
+                        wOut,
+                        d
+                    ], outRank, (0, _tfjsCore.util).computeStrides(outShape));
+                    outputVals[outputIndex] = curVal;
+                }
+            }
+        }
+        const dataId = cpuBackend.write((0, _tfjsCore.util).toTypedArray(outputVals, x.dtype), outShape, x.dtype);
+        return {
+            dataId,
+            shape: outShape,
+            dtype: x.dtype
+        };
+    }
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5GOEE":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "dilation2DBackpropFilterConfig", ()=>dilation2DBackpropFilterConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+const dilation2DBackpropFilterConfig = {
+    kernelName: (0, _tfjsCore.Dilation2DBackpropFilter),
+    backendName: "cpu",
+    kernelFunc: ({ inputs, backend, attrs })=>{
+        const { x, filter, dy } = inputs;
+        const { strides, pad, dilations } = attrs;
+        const cpuBackend = backend;
+        const $x = (0, _tfjsCore.util).toNestedArray(x.shape, cpuBackend.data.get(x.dataId).values);
+        const $filter = (0, _tfjsCore.util).toNestedArray(filter.shape, cpuBackend.data.get(filter.dataId).values);
+        const { batchSize, inHeight, inWidth, inChannels, outHeight, outWidth, padInfo, strideHeight, strideWidth, filterHeight, filterWidth, dilationHeight, dilationWidth, outShape } = (0, _tfjsCore.backend_util).computeDilation2DInfo(x.shape, filter.shape, strides, pad, "NHWC" /* dataFormat */ , dilations);
+        (0, _tfjsCore.util).assert(dy.rank === outShape.length, ()=>`Error in ${0, _tfjsCore.Dilation2DBackpropFilter}, dy ` + `must have the same rank as output ${outShape.length}, but got ` + `${dy.rank}`);
+        const $dy = (0, _tfjsCore.util).toNestedArray(outShape, cpuBackend.data.get(dy.dataId).values);
+        // The computed filter gradients has the same dimensions as the filter:
+        // [filterHeight, filterWidth, depth]
+        const gradients = (0, _tfjsCore.util).makeZerosNestedTypedArray(filter.shape, filter.dtype);
+        // In the case of multiple argmax branches, we only back-propagate along the
+        // last branch, i.e., the one with largest value of `h * filter_cols + w`,
+        // similarly to the max-pooling backward routines.
+        // This implementation follows the TF c++ implementation:
+        // https://github.com/tensorflow/tensorflow/blob/d9a3a849edc198e90172bc58eb293de457f9d986/tensorflow/core/kernels/dilation_ops.cc
+        for(let b = 0; b < batchSize; ++b)for(let hOut = 0; hOut < outHeight; ++hOut){
+            const hBeg = hOut * strideHeight - padInfo.top;
+            for(let wOut = 0; wOut < outWidth; ++wOut){
+                const wBeg = wOut * strideWidth - padInfo.left;
+                for(let d = 0; d < inChannels; ++d){
+                    let curVal = Number.MIN_SAFE_INTEGER;
+                    let hMax = 0;
+                    let wMax = 0;
+                    for(let h = 0; h < filterHeight; ++h){
+                        const hIn = hBeg + h * dilationHeight;
+                        if (hIn >= 0 && hIn < inHeight) for(let w = 0; w < filterWidth; ++w){
+                            const wIn = wBeg + w * dilationWidth;
+                            if (wIn >= 0 && wIn < inWidth) {
+                                const val = $x[b][hIn][wIn][d] + $filter[h][w][d];
+                                if (val > curVal) {
+                                    curVal = val;
+                                    hMax = h;
+                                    wMax = w;
+                                }
+                            }
+                        }
+                    }
+                    gradients[hMax][wMax][d] += $dy[b][hOut][wOut][d];
+                }
+            }
+        }
+        const dataId = cpuBackend.write((0, _tfjsCore.util).toTypedArray(gradients, x.dtype), filter.shape, filter.dtype);
+        return {
+            dataId,
+            shape: filter.shape,
+            dtype: filter.dtype
+        };
+    }
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fnjGq":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "dilation2DBackpropInputConfig", ()=>dilation2DBackpropInputConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+const dilation2DBackpropInputConfig = {
+    kernelName: (0, _tfjsCore.Dilation2DBackpropInput),
+    backendName: "cpu",
+    kernelFunc: ({ inputs, backend, attrs })=>{
+        const { x, filter, dy } = inputs;
+        const { strides, pad, dilations } = attrs;
+        const cpuBackend = backend;
+        const $x = (0, _tfjsCore.util).toNestedArray(x.shape, cpuBackend.data.get(x.dataId).values);
+        const $filter = (0, _tfjsCore.util).toNestedArray(filter.shape, cpuBackend.data.get(filter.dataId).values);
+        const { batchSize, inHeight, inWidth, inChannels, outHeight, outWidth, padInfo, strideHeight, strideWidth, filterHeight, filterWidth, dilationHeight, dilationWidth, outShape } = (0, _tfjsCore.backend_util).computeDilation2DInfo(x.shape, filter.shape, strides, pad, "NHWC" /* dataFormat */ , dilations);
+        (0, _tfjsCore.util).assert(dy.rank === outShape.length, ()=>`Error in ${0, _tfjsCore.Dilation2DBackpropInput}, dy ` + `must have the same rank as output ${outShape.length}, but got ` + `${dy.rank}`);
+        const $dy = (0, _tfjsCore.util).toNestedArray(outShape, cpuBackend.data.get(dy.dataId).values);
+        // The computed gradients has the same dimensions as the input:
+        // [batch, inputHeight, inputCols, inChannel]
+        const gradients = (0, _tfjsCore.util).makeZerosNestedTypedArray(x.shape, x.dtype);
+        // In the case of multiple argmax branches, we only back-propagate along the
+        // last branch, i.e., the one with largest value of `h * filter_cols + w`,
+        // similarly to the max-pooling backward routines.
+        // This implementation follows the TF c++ implementation:
+        // https://github.com/tensorflow/tensorflow/blob/d9a3a849edc198e90172bc58eb293de457f9d986/tensorflow/core/kernels/dilation_ops.cc
+        for(let b = 0; b < batchSize; ++b)for(let hOut = 0; hOut < outHeight; ++hOut){
+            const hBeg = hOut * strideHeight - padInfo.top;
+            for(let wOut = 0; wOut < outWidth; ++wOut){
+                const wBeg = wOut * strideWidth - padInfo.left;
+                for(let d = 0; d < inChannels; ++d){
+                    let curVal = Number.MIN_SAFE_INTEGER;
+                    let hInMax = hBeg < 0 ? 0 : hBeg;
+                    let wInMax = wBeg < 0 ? 0 : wBeg;
+                    for(let h = 0; h < filterHeight; ++h){
+                        const hIn = hBeg + h * dilationHeight;
+                        if (hIn >= 0 && hIn < inHeight) for(let w = 0; w < filterWidth; ++w){
+                            const wIn = wBeg + w * dilationWidth;
+                            if (wIn >= 0 && wIn < inWidth) {
+                                const val = $x[b][hIn][wIn][d] + $filter[h][w][d];
+                                if (val > curVal) {
+                                    curVal = val;
+                                    hInMax = hIn;
+                                    wInMax = wIn;
+                                }
+                            }
+                        }
+                    }
+                    gradients[b][hInMax][wInMax][d] += $dy[b][hOut][wOut][d];
+                }
+            }
+        }
+        const dataId = cpuBackend.write((0, _tfjsCore.util).toTypedArray(gradients, x.dtype), x.shape, x.dtype);
+        return {
+            dataId,
+            shape: x.shape,
+            dtype: x.dtype
+        };
+    }
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9ZCFV":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2023 Google LLC.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "draw", ()=>draw);
+parcelHelpers.export(exports, "drawConfig", ()=>drawConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function draw(args) {
+    const { inputs, backend, attrs } = args;
+    const { image } = inputs;
+    const { canvas, options } = attrs;
+    const { contextOptions, imageOptions } = options || {};
+    const alpha = (imageOptions === null || imageOptions === void 0 ? void 0 : imageOptions.alpha) || 1;
+    const contextType = (contextOptions === null || contextOptions === void 0 ? void 0 : contextOptions.contextType) || "2d";
+    if (contextType !== "2d") throw new Error(`Context type ${contextOptions.contextType} is not supported by the CPU backend.`);
+    const ctx = canvas.getContext(contextType, (contextOptions === null || contextOptions === void 0 ? void 0 : contextOptions.contextAttributes) || {});
+    if (ctx == null) throw new Error(`Could not get the context with ${contextType} type.`);
+    const [height, width] = image.shape.slice(0, 2);
+    const depth = image.shape.length === 2 ? 1 : image.shape[2];
+    const data = backend.data.get(image.dataId).values;
+    const multiplier = image.dtype === "float32" ? 255 : 1;
+    const bytes = new Uint8ClampedArray(width * height * 4);
+    for(let i = 0; i < height * width; ++i){
+        const rgba = [
+            0,
+            0,
+            0,
+            255 * alpha
+        ];
+        for(let d = 0; d < depth; d++){
+            const value = data[i * depth + d];
+            if (image.dtype === "float32") {
+                if (value < 0 || value > 1) throw new Error(`Tensor values for a float32 Tensor must be in the ` + `range [0 - 1] but encountered ${value}.`);
+            } else if (image.dtype === "int32") {
+                if (value < 0 || value > 255) throw new Error(`Tensor values for a int32 Tensor must be in the ` + `range [0 - 255] but encountered ${value}.`);
+            }
+            if (depth === 1) {
+                rgba[0] = value * multiplier;
+                rgba[1] = value * multiplier;
+                rgba[2] = value * multiplier;
+            } else rgba[d] = value * multiplier;
+        }
+        const j = i * 4;
+        bytes[j + 0] = Math.round(rgba[0]);
+        bytes[j + 1] = Math.round(rgba[1]);
+        bytes[j + 2] = Math.round(rgba[2]);
+        bytes[j + 3] = Math.round(rgba[3]);
+    }
+    canvas.width = width;
+    canvas.height = height;
+    const imageData = new ImageData(bytes, width, height);
+    ctx.putImageData(imageData, 0, 0);
+    return image;
+}
+const drawConfig = {
+    kernelName: (0, _tfjsCore.Draw),
+    backendName: "cpu",
+    kernelFunc: draw
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"lXbVv":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "einsum", ()=>einsum);
+parcelHelpers.export(exports, "einsumConfig", ()=>einsumConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _multiply = require("./Multiply");
+var _reshape = require("./Reshape");
+var _sum = require("./Sum");
+var _transpose = require("./Transpose");
+function einsum(args) {
+    const { inputs, backend, attrs } = args;
+    const { equation } = attrs;
+    const tensors = inputs;
+    const { allDims, summedDims, idDims } = (0, _tfjsCore.backend_util).decodeEinsumEquation(equation, tensors.length);
+    (0, _tfjsCore.backend_util).checkEinsumDimSizes(allDims.length, idDims, tensors);
+    const { path, steps } = (0, _tfjsCore.backend_util).getEinsumComputePath(summedDims, idDims);
+    const nSteps = steps.length;
+    let out = null;
+    let numDimsRemaining = allDims.length;
+    const tensorsToDispose = [];
+    for(let i = 0; i < nSteps; ++i){
+        for (const idTerm of steps[i]){
+            const { permutationIndices: perm, expandDims: dimsToExpand } = (0, _tfjsCore.backend_util).getEinsumPermutation(numDimsRemaining, idDims[idTerm]);
+            let x;
+            if ((0, _tfjsCore.backend_util).isIdentityPermutation(perm)) x = tensors[idTerm];
+            else {
+                x = (0, _transpose.transpose)({
+                    inputs: {
+                        x: tensors[idTerm]
+                    },
+                    backend,
+                    attrs: {
+                        perm
+                    }
+                });
+                tensorsToDispose.push(x);
+            }
+            const targetShape = x.shape.slice();
+            for(let k = 0; k < dimsToExpand.length; ++k)targetShape.splice(dimsToExpand[k], 0, 1);
+            if (!(0, _tfjsCore.util).arraysEqual(x.shape, targetShape)) {
+                x = (0, _reshape.reshape)({
+                    inputs: {
+                        x
+                    },
+                    backend,
+                    attrs: {
+                        shape: targetShape
+                    }
+                });
+                tensorsToDispose.push(x);
+            }
+            if (out === null) out = x;
+            else {
+                // tslint:disable-next-line: no-unnecessary-type-assertion
+                out = (0, _multiply.multiply)({
+                    inputs: {
+                        a: x,
+                        b: out
+                    },
+                    backend
+                });
+                tensorsToDispose.push(out);
+            }
+        }
+        if (i < nSteps - 1) {
+            if (path[i] >= 0) {
+                out = (0, _sum.sum)({
+                    inputs: {
+                        x: out
+                    },
+                    backend,
+                    attrs: {
+                        axis: path[i] - (allDims.length - numDimsRemaining),
+                        keepDims: false
+                    }
+                });
+                tensorsToDispose.push(out);
+            }
+            numDimsRemaining--;
+        }
+    }
+    // Clean up intermediate tensors.
+    for (const tensorInfo of tensorsToDispose){
+        if (tensorInfo === out) continue;
+        backend.disposeIntermediateTensorInfo(tensorInfo);
+    }
+    return out;
+}
+const einsumConfig = {
+    kernelName: (0, _tfjsCore.Einsum),
+    backendName: "cpu",
+    kernelFunc: einsum
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Multiply":"FrRi2","./Reshape":"9350i","./Sum":"6gbbV","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6gbbV":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sum", ()=>sum);
+parcelHelpers.export(exports, "sumConfig", ()=>sumConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _zerosImpl = require("../utils/zeros_impl");
+var _cast = require("./Cast");
+var _identity = require("./Identity");
+var _reshape = require("./Reshape");
+var _transpose = require("./Transpose");
+function sum(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { axis, keepDims } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "sum");
+    let $x;
+    if (x.dtype === "bool") $x = (0, _cast.cast)({
+        inputs: {
+            x
+        },
+        backend,
+        attrs: {
+            dtype: "int32"
+        }
+    });
+    else $x = (0, _identity.identity)({
+        inputs: {
+            x
+        },
+        backend
+    });
+    const xRank = $x.shape.length;
+    const axes = (0, _tfjsCore.util).parseAxisParam(axis, $x.shape);
+    const permutation = (0, _tfjsCore.backend_util).getAxesPermutation(axes, xRank);
+    let reductionAxes = axes;
+    let permutedX = $x;
+    if (permutation != null) {
+        permutedX = (0, _transpose.transpose)({
+            inputs: {
+                x: $x
+            },
+            backend,
+            attrs: {
+                perm: permutation
+            }
+        });
+        reductionAxes = (0, _tfjsCore.backend_util).getInnerMostAxes(reductionAxes.length, xRank);
+    }
+    (0, _tfjsCore.backend_util).assertAxesAreInnerMostDims("sum", reductionAxes, permutedX.shape.length);
+    const [outShape, reduceShape] = (0, _tfjsCore.backend_util).computeOutAndReduceShapes(permutedX.shape, reductionAxes);
+    const resultDtype = (0, _tfjsCore.backend_util).upcastType(permutedX.dtype, "int32");
+    let result = (0, _zerosImpl.zeros)(backend, outShape, resultDtype);
+    const reduceSize = (0, _tfjsCore.util).sizeFromShape(reduceShape);
+    const vals = backend.data.get(result.dataId).values;
+    const aVals = backend.data.get(permutedX.dataId).values;
+    for(let i = 0; i < vals.length; ++i){
+        const offset = i * reduceSize;
+        let sum = 0;
+        for(let j = 0; j < reduceSize; ++j)sum += aVals[offset + j];
+        vals[i] = sum;
+    }
+    if (keepDims) {
+        const newShape = (0, _tfjsCore.backend_util).expandShapeToKeepDim(result.shape, axes);
+        const oldResult = result;
+        result = (0, _reshape.reshape)({
+            inputs: {
+                x: result
+            },
+            backend,
+            attrs: {
+                shape: newShape
+            }
+        });
+        backend.disposeIntermediateTensorInfo(oldResult);
+    }
+    backend.disposeIntermediateTensorInfo($x);
+    if (permutation != null) backend.disposeIntermediateTensorInfo(permutedX);
+    return result;
+}
+const sumConfig = {
+    kernelName: (0, _tfjsCore.Sum),
+    backendName: "cpu",
+    kernelFunc: sum
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","../utils/zeros_impl":"6us7T","./Cast":"fAtIw","./Identity":"btREJ","./Reshape":"9350i","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cZudI":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "eluGrad", ()=>eluGrad);
+parcelHelpers.export(exports, "eluGradConfig", ()=>eluGradConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function eluGrad(args) {
+    const { inputs, backend } = args;
+    const { dy, y } = inputs;
+    (0, _cpuUtil.assertNotComplex)([
+        dy,
+        y
+    ], "eluGrad");
+    const resultValues = new Float32Array((0, _tfjsCore.util).sizeFromShape(y.shape));
+    const values = backend.data.get(y.dataId).values;
+    const dyValues = backend.data.get(dy.dataId).values;
+    for(let i = 0; i < values.length; ++i){
+        const v = values[i];
+        if (v >= 0) resultValues[i] = dyValues[i];
+        else resultValues[i] = dyValues[i] * (v + 1);
+    }
+    return backend.makeTensorInfo(y.shape, "float32", resultValues);
+}
+const eluGradConfig = {
+    kernelName: (0, _tfjsCore.EluGrad),
+    backendName: "cpu",
+    kernelFunc: eluGrad
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"g7iiK":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "erf", ()=>erf);
+parcelHelpers.export(exports, "erfConfig", ()=>erfConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const p = (0, _tfjsCore.backend_util).ERF_P;
+const a1 = (0, _tfjsCore.backend_util).ERF_A1;
+const a2 = (0, _tfjsCore.backend_util).ERF_A2;
+const a3 = (0, _tfjsCore.backend_util).ERF_A3;
+const a4 = (0, _tfjsCore.backend_util).ERF_A4;
+const a5 = (0, _tfjsCore.backend_util).ERF_A5;
+const erf = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Erf), (xi)=>{
+    const sign = Math.sign(xi);
+    const v = Math.abs(xi);
+    const t = 1.0 / (1.0 + p * v);
+    return sign * (1.0 - ((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t * Math.exp(-v * v));
+});
+const erfConfig = {
+    kernelName: (0, _tfjsCore.Erf),
+    backendName: "cpu",
+    kernelFunc: erf
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4z77l":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "expandDims", ()=>expandDims);
+parcelHelpers.export(exports, "expandDimsConfig", ()=>expandDimsConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _reshape = require("./Reshape");
+function expandDims(args) {
+    const { inputs, backend, attrs } = args;
+    const { input } = inputs;
+    const { dim } = attrs;
+    const inputRank = input.shape.length;
+    const newShape = input.shape.slice();
+    let $dim = dim;
+    if (dim < 0) {
+        // Negative value is counted from the tail of rank.
+        (0, _tfjsCore.util).assert(-(inputRank + 1) <= dim, ()=>`Axis must be in the interval [${-(inputRank + 1)}, ${inputRank}]`);
+        $dim = inputRank + dim + 1;
+    }
+    newShape.splice($dim, 0, 1);
+    return (0, _reshape.reshape)({
+        inputs: {
+            x: input
+        },
+        backend,
+        attrs: {
+            shape: newShape
+        }
+    });
+}
+const expandDimsConfig = {
+    kernelName: (0, _tfjsCore.ExpandDims),
+    backendName: "cpu",
+    kernelFunc: expandDims
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Reshape":"9350i","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7gqPz":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "fft", ()=>fft);
+parcelHelpers.export(exports, "fftConfig", ()=>fftConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _fftUtils = require("../utils/fft_utils");
+var _reshape = require("./Reshape");
+function fft(args) {
+    const { inputs, backend } = args;
+    const { input } = inputs;
+    const inputSize = (0, _tfjsCore.util).sizeFromShape(input.shape);
+    // Collapse all outer dimensions to a single batch dimension.
+    const innerDimensionSize = input.shape[input.shape.length - 1];
+    const batch = inputSize / innerDimensionSize;
+    const input2D = (0, _reshape.reshape)({
+        inputs: {
+            x: input
+        },
+        backend,
+        attrs: {
+            shape: [
+                batch,
+                innerDimensionSize
+            ]
+        }
+    });
+    const result = (0, _fftUtils.fftBatch)(input2D, false, backend);
+    const resultReshaped = (0, _reshape.reshape)({
+        inputs: {
+            x: result
+        },
+        backend,
+        attrs: {
+            shape: input.shape
+        }
+    });
+    backend.disposeIntermediateTensorInfo(input2D);
+    backend.disposeIntermediateTensorInfo(result);
+    return resultReshaped;
+}
+const fftConfig = {
+    kernelName: (0, _tfjsCore.FFT),
+    backendName: "cpu",
+    kernelFunc: fft
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/fft_utils":"8ziy5","./Reshape":"9350i","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8ziy5":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Calculate FFT of inner most elements of batch tensor.
+ */ parcelHelpers.export(exports, "fftBatch", ()=>fftBatch);
+parcelHelpers.export(exports, "fftImpl", ()=>fftImpl);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _add = require("../kernels/Add");
+var _complex = require("../kernels/Complex");
+var _concat = require("../kernels/Concat");
+var _identity = require("../kernels/Identity");
+var _imag = require("../kernels/Imag");
+var _multiply = require("../kernels/Multiply");
+var _real = require("../kernels/Real");
+var _realDiv = require("../kernels/RealDiv");
+var _slice = require("../kernels/Slice");
+var _sub = require("../kernels/Sub");
+function fftBatch(input, inverse, cpuBackend) {
+    const inputShape = input.shape;
+    const batch = inputShape[0];
+    const innerDim = inputShape[1];
+    const inputVals = cpuBackend.data.get(input.dataId);
+    const real2D = inputVals.complexTensorInfos.real;
+    const imag2D = inputVals.complexTensorInfos.imag;
+    // Collects real and imaginary values separately.
+    const resultShape = [
+        batch,
+        innerDim
+    ];
+    const resultSize = (0, _tfjsCore.util).sizeFromShape(resultShape);
+    const resultReal = (0, _tfjsCore.util).getTypedArrayFromDType("float32", resultSize);
+    const resultImag = (0, _tfjsCore.util).getTypedArrayFromDType("float32", resultSize);
+    for(let b = 0; b < batch; b++){
+        // TODO: Support slice ops for complex type.
+        const r = (0, _slice.slice)({
+            inputs: {
+                x: real2D
+            },
+            backend: cpuBackend,
+            attrs: {
+                begin: [
+                    b,
+                    0
+                ],
+                size: [
+                    1,
+                    innerDim
+                ]
+            }
+        });
+        const i = (0, _slice.slice)({
+            inputs: {
+                x: imag2D
+            },
+            backend: cpuBackend,
+            attrs: {
+                begin: [
+                    b,
+                    0
+                ],
+                size: [
+                    1,
+                    innerDim
+                ]
+            }
+        });
+        const input = (0, _complex.complex)({
+            inputs: {
+                real: r,
+                imag: i
+            },
+            backend: cpuBackend
+        });
+        // Run FFT by batch element.
+        const { real, imag } = fftImpl(input, inverse, cpuBackend);
+        const res = (0, _tfjsCore.backend_util).mergeRealAndImagArrays(real, imag);
+        for(let d = 0; d < innerDim; d++){
+            const c = (0, _tfjsCore.backend_util).getComplexWithIndex(res, d);
+            resultReal[b * innerDim + d] = c.real;
+            resultImag[b * innerDim + d] = c.imag;
+        }
+        cpuBackend.disposeIntermediateTensorInfo(r);
+        cpuBackend.disposeIntermediateTensorInfo(i);
+        cpuBackend.disposeIntermediateTensorInfo(input);
+    }
+    const $realInfo = cpuBackend.makeTensorInfo(resultShape, "float32", resultReal);
+    const $imagInfo = cpuBackend.makeTensorInfo(resultShape, "float32", resultImag);
+    const result = (0, _complex.complex)({
+        inputs: {
+            real: $realInfo,
+            imag: $imagInfo
+        },
+        backend: cpuBackend
+    });
+    cpuBackend.disposeIntermediateTensorInfo($realInfo);
+    cpuBackend.disposeIntermediateTensorInfo($imagInfo);
+    return result;
+}
+function fftImpl(input, inverse, cpuBackend) {
+    const inputSize = (0, _tfjsCore.util).sizeFromShape(input.shape);
+    const inputVals = cpuBackend.data.get(input.dataId);
+    const realVals = cpuBackend.data.get(inputVals.complexTensorInfos.real.dataId).values;
+    const imagVals = cpuBackend.data.get(inputVals.complexTensorInfos.imag.dataId).values;
+    if (isExponentOf2(inputSize)) {
+        const result = fftRadix2(realVals, imagVals, inputSize, inverse, cpuBackend);
+        const resultShape = [
+            input.shape[0],
+            input.shape[1]
+        ];
+        if (inverse) {
+            const realInfo = cpuBackend.makeTensorInfo(resultShape, "float32", result.real);
+            const imagInfo = cpuBackend.makeTensorInfo(resultShape, "float32", result.imag);
+            const sizeInfo = cpuBackend.makeTensorInfo([], "float32", (0, _tfjsCore.util).createScalarValue(inputSize, "float32"));
+            const sizeInfoCopy = (0, _identity.identity)({
+                inputs: {
+                    x: sizeInfo
+                },
+                backend: cpuBackend
+            });
+            const divRealInfo = (0, _realDiv.realDivConfig).kernelFunc({
+                inputs: {
+                    a: realInfo,
+                    b: sizeInfo
+                },
+                backend: cpuBackend
+            });
+            const divImagInfo = (0, _realDiv.realDivConfig).kernelFunc({
+                inputs: {
+                    a: imagInfo,
+                    b: sizeInfoCopy
+                },
+                backend: cpuBackend
+            });
+            const divRealVals = cpuBackend.data.get(divRealInfo.dataId).values;
+            const divImagVals = cpuBackend.data.get(divImagInfo.dataId).values;
+            cpuBackend.disposeIntermediateTensorInfo(realInfo);
+            cpuBackend.disposeIntermediateTensorInfo(imagInfo);
+            cpuBackend.disposeIntermediateTensorInfo(sizeInfo);
+            cpuBackend.disposeIntermediateTensorInfo(sizeInfoCopy);
+            cpuBackend.disposeIntermediateTensorInfo(divRealInfo);
+            cpuBackend.disposeIntermediateTensorInfo(divImagInfo);
+            return {
+                real: divRealVals,
+                imag: divImagVals
+            };
+        }
+        return result;
+    } else {
+        const data = (0, _tfjsCore.backend_util).mergeRealAndImagArrays(realVals, imagVals);
+        const rawOutput = fourierTransformByMatmul(data, inputSize, inverse);
+        return (0, _tfjsCore.backend_util).splitRealAndImagArrays(rawOutput);
+    }
+}
+function isExponentOf2(size) {
+    return (size & size - 1) === 0;
+}
+// FFT using Cooley-Tukey algorithm on radix 2 dimensional input.
+function fftRadix2(realVals, imagVals, size, inverse, cpuBackend) {
+    if (size === 1) return {
+        real: realVals,
+        imag: imagVals
+    };
+    const data = (0, _tfjsCore.backend_util).mergeRealAndImagArrays(realVals, imagVals);
+    const half = size / 2;
+    const evenComplex = (0, _tfjsCore.backend_util).complexWithEvenIndex(data);
+    const evenRealVals = evenComplex.real;
+    const evenImagVals = evenComplex.imag;
+    const evenShape = [
+        evenRealVals.length
+    ];
+    const evenRealInfo = cpuBackend.makeTensorInfo(evenShape, "float32", evenRealVals);
+    const evenImagInfo = cpuBackend.makeTensorInfo(evenShape, "float32", evenImagVals);
+    const evenTensorInfo = (0, _complex.complex)({
+        inputs: {
+            real: evenRealInfo,
+            imag: evenImagInfo
+        },
+        backend: cpuBackend
+    });
+    const oddComplex = (0, _tfjsCore.backend_util).complexWithOddIndex(data);
+    const oddRealVals = oddComplex.real;
+    const oddImagVals = oddComplex.imag;
+    const oddShape = [
+        oddRealVals.length
+    ];
+    const oddRealInfo = cpuBackend.makeTensorInfo(oddShape, "float32", oddRealVals);
+    const oddImagInfo = cpuBackend.makeTensorInfo(oddShape, "float32", oddImagVals);
+    const oddTensorInfo = (0, _complex.complex)({
+        inputs: {
+            real: oddRealInfo,
+            imag: oddImagInfo
+        },
+        backend: cpuBackend
+    });
+    // Recursive call for half part of original input.
+    const $evenComplex = fftRadix2(evenRealVals, evenImagVals, half, inverse, cpuBackend);
+    const $evenRealVals = $evenComplex.real;
+    const $evenImagVals = $evenComplex.imag;
+    const $evenShape = [
+        $evenRealVals.length
+    ];
+    const $evenRealInfo = cpuBackend.makeTensorInfo($evenShape, "float32", $evenRealVals);
+    const $evenImagInfo = cpuBackend.makeTensorInfo($evenShape, "float32", $evenImagVals);
+    const $evenTensorInfo = (0, _complex.complex)({
+        inputs: {
+            real: $evenRealInfo,
+            imag: $evenImagInfo
+        },
+        backend: cpuBackend
+    });
+    const $oddComplex = fftRadix2(oddRealVals, oddImagVals, half, inverse, cpuBackend);
+    const $oddRealVals = $oddComplex.real;
+    const $oddImagVals = $oddComplex.imag;
+    const $oddShape = [
+        $oddRealVals.length
+    ];
+    const $oddRealInfo = cpuBackend.makeTensorInfo($oddShape, "float32", $oddRealVals);
+    const $oddImagInfo = cpuBackend.makeTensorInfo($oddShape, "float32", $oddImagVals);
+    const $oddTensorInfo = (0, _complex.complex)({
+        inputs: {
+            real: $oddRealInfo,
+            imag: $oddImagInfo
+        },
+        backend: cpuBackend
+    });
+    const e = (0, _tfjsCore.backend_util).exponents(size, inverse);
+    const eShape = [
+        e.real.length
+    ];
+    const eRealInfo = cpuBackend.makeTensorInfo(eShape, "float32", e.real);
+    const eImagInfo = cpuBackend.makeTensorInfo(eShape, "float32", e.imag);
+    const complexInfo = (0, _complex.complex)({
+        inputs: {
+            real: eRealInfo,
+            imag: eImagInfo
+        },
+        backend: cpuBackend
+    });
+    const exponentInfo = (0, _multiply.multiply)({
+        inputs: {
+            a: complexInfo,
+            b: $oddTensorInfo
+        },
+        backend: cpuBackend
+    });
+    const addPart = (0, _add.add)({
+        inputs: {
+            a: $evenTensorInfo,
+            b: exponentInfo
+        },
+        backend: cpuBackend
+    });
+    const subPart = (0, _sub.sub)({
+        inputs: {
+            a: $evenTensorInfo,
+            b: exponentInfo
+        },
+        backend: cpuBackend
+    });
+    const addPartReal = (0, _real.real)({
+        inputs: {
+            input: addPart
+        },
+        backend: cpuBackend
+    });
+    const subPartReal = (0, _real.real)({
+        inputs: {
+            input: subPart
+        },
+        backend: cpuBackend
+    });
+    const addPartImag = (0, _imag.imag)({
+        inputs: {
+            input: addPart
+        },
+        backend: cpuBackend
+    });
+    const subPartImag = (0, _imag.imag)({
+        inputs: {
+            input: subPart
+        },
+        backend: cpuBackend
+    });
+    const $real = (0, _concat.concat)({
+        inputs: [
+            addPartReal,
+            subPartReal
+        ],
+        backend: cpuBackend,
+        attrs: {
+            axis: 0
+        }
+    });
+    const $imag = (0, _concat.concat)({
+        inputs: [
+            addPartImag,
+            subPartImag
+        ],
+        backend: cpuBackend,
+        attrs: {
+            axis: 0
+        }
+    });
+    const $realVals = cpuBackend.data.get($real.dataId).values;
+    const $imagVals = cpuBackend.data.get($imag.dataId).values;
+    cpuBackend.disposeIntermediateTensorInfo(evenRealInfo);
+    cpuBackend.disposeIntermediateTensorInfo(evenImagInfo);
+    cpuBackend.disposeIntermediateTensorInfo(evenTensorInfo);
+    cpuBackend.disposeIntermediateTensorInfo(oddRealInfo);
+    cpuBackend.disposeIntermediateTensorInfo(oddImagInfo);
+    cpuBackend.disposeIntermediateTensorInfo(oddTensorInfo);
+    cpuBackend.disposeIntermediateTensorInfo($evenRealInfo);
+    cpuBackend.disposeIntermediateTensorInfo($evenImagInfo);
+    cpuBackend.disposeIntermediateTensorInfo($evenTensorInfo);
+    cpuBackend.disposeIntermediateTensorInfo($oddRealInfo);
+    cpuBackend.disposeIntermediateTensorInfo($oddImagInfo);
+    cpuBackend.disposeIntermediateTensorInfo($oddTensorInfo);
+    cpuBackend.disposeIntermediateTensorInfo(eRealInfo);
+    cpuBackend.disposeIntermediateTensorInfo(eImagInfo);
+    cpuBackend.disposeIntermediateTensorInfo(complexInfo);
+    cpuBackend.disposeIntermediateTensorInfo(exponentInfo);
+    cpuBackend.disposeIntermediateTensorInfo(addPart);
+    cpuBackend.disposeIntermediateTensorInfo(subPart);
+    cpuBackend.disposeIntermediateTensorInfo(addPartReal);
+    cpuBackend.disposeIntermediateTensorInfo(addPartImag);
+    cpuBackend.disposeIntermediateTensorInfo(subPartReal);
+    cpuBackend.disposeIntermediateTensorInfo(subPartImag);
+    cpuBackend.disposeIntermediateTensorInfo($real);
+    cpuBackend.disposeIntermediateTensorInfo($imag);
+    return {
+        real: $realVals,
+        imag: $imagVals
+    };
+}
+// Calculate fourier transform by multplying sinusoid matrix.
+function fourierTransformByMatmul(data, size, inverse) {
+    const ret = new Float32Array(size * 2);
+    // TODO: Use matmul instead once it supports complex64 type.
+    for(let r = 0; r < size; r++){
+        let real = 0.0;
+        let imag = 0.0;
+        for(let c = 0; c < size; c++){
+            const e = (0, _tfjsCore.backend_util).exponent(r * c, size, inverse);
+            const term = (0, _tfjsCore.backend_util).getComplexWithIndex(data, c);
+            real += term.real * e.real - term.imag * e.imag;
+            imag += term.real * e.imag + term.imag * e.real;
+        }
+        if (inverse) {
+            real /= size;
+            imag /= size;
+        }
+        (0, _tfjsCore.backend_util).assignToTypedArray(ret, real, imag, r);
+    }
+    return ret;
+}
+
+},{"@tensorflow/tfjs-core":"21Ftl","../kernels/Add":"dippY","../kernels/Complex":"3DPmh","../kernels/Concat":"iYEAT","../kernels/Identity":"btREJ","../kernels/Imag":"af3Tx","../kernels/Multiply":"FrRi2","../kernels/Real":"eZ7aJ","../kernels/RealDiv":"9Ly75","../kernels/Slice":"9L9GN","../kernels/Sub":"4DByI","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9Ly75":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "realDivImpl", ()=>realDivImpl);
+parcelHelpers.export(exports, "div", ()=>div);
+parcelHelpers.export(exports, "realDivConfig", ()=>realDivConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _binaryImpl = require("../utils/binary_impl");
+var _binaryUtils = require("../utils/binary_utils");
+const realDivImpl = (0, _binaryImpl.createSimpleBinaryKernelImpl)((a, b)=>a / b);
+const div = (0, _binaryUtils.binaryKernelFunc)((0, _tfjsCore.RealDiv), realDivImpl);
+const realDivConfig = {
+    kernelName: (0, _tfjsCore.RealDiv),
+    backendName: "cpu",
+    kernelFunc: div
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/binary_impl":"7WPlP","../utils/binary_utils":"dUQGx","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4BMgR":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "fill", ()=>fill);
+parcelHelpers.export(exports, "fillConfig", ()=>fillConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function fill(args) {
+    const { backend, attrs } = args;
+    const { shape, value, dtype } = attrs;
+    const $dtype = dtype || (0, _tfjsCore.util).inferDtype(value);
+    const values = (0, _tfjsCore.util).getArrayFromDType($dtype, (0, _tfjsCore.util).sizeFromShape(shape));
+    fillValues(values, value, $dtype);
+    return backend.makeTensorInfo(shape, $dtype, values);
+}
+const fillConfig = {
+    kernelName: (0, _tfjsCore.Fill),
+    backendName: "cpu",
+    kernelFunc: fill
+};
+function fillValues(values, value, dtype) {
+    if (dtype === "string") values.fill(value);
+    else values.fill(value);
+}
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8d8ZF":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "flipLeftRightConfig", ()=>flipLeftRightConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+const flipLeftRightConfig = {
+    kernelName: (0, _tfjsCore.FlipLeftRight),
+    backendName: "cpu",
+    kernelFunc: ({ inputs, attrs, backend })=>{
+        const { image } = inputs;
+        const cpuBackend = backend;
+        const output = (0, _tfjsCore.util).getTypedArrayFromDType(image.dtype, (0, _tfjsCore.util).sizeFromShape(image.shape));
+        const [batch, imageHeight, imageWidth, numChannels] = image.shape;
+        const imageVals = cpuBackend.data.get(image.dataId).values;
+        for(let batchIdx = 0; batchIdx < batch; batchIdx++){
+            const batchOffset = batchIdx * imageWidth * imageHeight * numChannels;
+            for(let row = 0; row < imageHeight; row++){
+                const rowOffset = row * (imageWidth * numChannels);
+                for(let col = 0; col < imageWidth; col++){
+                    const colOffset = col * numChannels;
+                    for(let channel = 0; channel < numChannels; channel++){
+                        const coordX = Math.round(imageWidth - col - 1);
+                        const outIdx = batchOffset + rowOffset + colOffset + channel;
+                        let outputValue = imageVals[outIdx];
+                        // If the coordinate position falls within the image boundaries...
+                        if (coordX >= 0 && coordX < imageWidth) {
+                            // set the output to the image value at the coordinate position.
+                            const rotatedColOffset = coordX * numChannels;
+                            const imageIdx = batchOffset + rowOffset + rotatedColOffset + channel;
+                            outputValue = imageVals[imageIdx];
+                        }
+                        output[outIdx] = outputValue;
+                    }
+                }
+            }
+        }
+        const dataId = cpuBackend.write(output, image.shape, image.dtype);
+        return {
+            dataId,
+            shape: image.shape,
+            dtype: image.dtype
+        };
+    }
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1OWT7":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "fusedConv2D", ()=>fusedConv2D);
+parcelHelpers.export(exports, "fusedConv2DConfig", ()=>fusedConv2DConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _fusedUtils = require("../utils/fused_utils");
+var _add = require("./Add");
+var _conv2D = require("./Conv2D");
+var _reshape = require("./Reshape");
+function fusedConv2D(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, filter, bias, preluActivationWeights } = inputs;
+    const { strides, pad, dataFormat, dilations, dimRoundingMode, activation, leakyreluAlpha } = attrs;
+    let result = (0, _conv2D.conv2D)({
+        inputs: {
+            x,
+            filter
+        },
+        backend,
+        attrs: {
+            strides,
+            pad,
+            dataFormat,
+            dilations,
+            dimRoundingMode
+        }
+    });
+    if (bias) {
+        const resultOld = result;
+        // For NCHW format, if bias is a 1-D tensor, it is supposed to be aligned
+        // to the channel of the conv2d's result; if the bias is a scalar, the
+        // bias_add is computed as if the bias was broadcasted to the shape of the
+        // conv2d's result.
+        if (dataFormat === "NCHW" && bias.shape.length === 1 && bias.shape[0] !== 1) {
+            const reshapedBias = (0, _reshape.reshape)({
+                inputs: {
+                    x: bias
+                },
+                backend,
+                attrs: {
+                    shape: [
+                        bias.shape[0],
+                        1,
+                        1
+                    ]
+                }
+            });
+            result = (0, _add.add)({
+                inputs: {
+                    a: result,
+                    b: reshapedBias
+                },
+                backend
+            });
+            backend.disposeIntermediateTensorInfo(reshapedBias);
+        } else // This condition handles NHWC and NCHW (scalar case). The only other case
+        // for NCHW (1D case) is handled above.
+        result = (0, _add.add)({
+            inputs: {
+                a: result,
+                b: bias
+            },
+            backend
+        });
+        backend.disposeIntermediateTensorInfo(resultOld);
+    }
+    if (activation) {
+        const resultOld = result;
+        // For NCHW format, if PReLu activation weights is a 1-D tensor, it is
+        // supposed to be aligned with the channel of the conv2d's result. For other
+        // cases, whether NCHW or NHWC data format, the conv2d result is
+        // already aligned with the activation weights.
+        if (dataFormat === "NCHW" && activation === "prelu" && preluActivationWeights.shape.length === 1 && preluActivationWeights.shape[0] !== 1) {
+            const reshapedAlpha = (0, _reshape.reshape)({
+                inputs: {
+                    x: preluActivationWeights
+                },
+                backend,
+                attrs: {
+                    shape: [
+                        preluActivationWeights.shape[0],
+                        1,
+                        1
+                    ]
+                }
+            });
+            result = (0, _fusedUtils.applyActivation)(backend, result, activation, reshapedAlpha, leakyreluAlpha);
+            backend.disposeIntermediateTensorInfo(reshapedAlpha);
+        } else result = (0, _fusedUtils.applyActivation)(backend, result, activation, preluActivationWeights, leakyreluAlpha);
+        backend.disposeIntermediateTensorInfo(resultOld);
+    }
+    return result;
+}
+const fusedConv2DConfig = {
+    kernelName: (0, _tfjsCore.FusedConv2D),
+    backendName: "cpu",
+    kernelFunc: fusedConv2D
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/fused_utils":"6DUEF","./Add":"dippY","./Conv2D":"4bj3X","./Reshape":"9350i","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5SkmJ":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "fusedDepthwiseConv2D", ()=>fusedDepthwiseConv2D);
+parcelHelpers.export(exports, "fusedDepthwiseConv2DConfig", ()=>fusedDepthwiseConv2DConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _fusedUtils = require("../utils/fused_utils");
+var _add = require("./Add");
+var _depthwiseConv2DNative = require("./DepthwiseConv2dNative");
+function fusedDepthwiseConv2D(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, filter, bias, preluActivationWeights } = inputs;
+    const { strides, pad, dataFormat, dilations, dimRoundingMode, activation, leakyreluAlpha } = attrs;
+    let result = (0, _depthwiseConv2DNative.depthwiseConv2dNative)({
+        inputs: {
+            x,
+            filter
+        },
+        backend,
+        attrs: {
+            strides,
+            pad,
+            dataFormat,
+            dilations,
+            dimRoundingMode
+        }
+    });
+    if (bias) {
+        const oldResult = result;
+        result = (0, _add.add)({
+            inputs: {
+                a: result,
+                b: bias
+            },
+            backend
+        });
+        backend.disposeIntermediateTensorInfo(oldResult);
+    }
+    if (activation) {
+        const oldResult = result;
+        result = (0, _fusedUtils.applyActivation)(backend, result, activation, preluActivationWeights, leakyreluAlpha);
+        backend.disposeIntermediateTensorInfo(oldResult);
+    }
+    return result;
+}
+const fusedDepthwiseConv2DConfig = {
+    kernelName: (0, _tfjsCore.FusedDepthwiseConv2D),
+    backendName: "cpu",
+    kernelFunc: fusedDepthwiseConv2D
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/fused_utils":"6DUEF","./Add":"dippY","./DepthwiseConv2dNative":"2iRpa","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6Owm3":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "gatherNd", ()=>gatherNd);
+parcelHelpers.export(exports, "gatherNdConfig", ()=>gatherNdConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _gatherNdImpl = require("./GatherNd_Impl");
+function gatherNd(args) {
+    const { inputs, backend } = args;
+    const { params, indices } = inputs;
+    const paramsSize = (0, _tfjsCore.util).sizeFromShape(params.shape);
+    const indicesShape = indices.shape;
+    const sliceRank = indicesShape[indicesShape.length - 1];
+    const [resultShape, numSlices, sliceSize, strides] = (0, _tfjsCore.backend_util).prepareAndValidate(params, indices);
+    if (numSlices === 0) return backend.makeTensorInfo(resultShape, params.dtype, []);
+    const indicesData = backend.data.get(indices.dataId).values;
+    const paramsBuf = backend.bufferSync(params);
+    const outBuf = (0, _gatherNdImpl.gatherNdImpl)(indicesData, paramsBuf, params.dtype, numSlices, sliceRank, sliceSize, strides, params.shape, paramsSize);
+    return backend.makeTensorInfo(resultShape, params.dtype, outBuf.values);
+}
+const gatherNdConfig = {
+    kernelName: (0, _tfjsCore.GatherNd),
+    backendName: "cpu",
+    kernelFunc: gatherNd
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./GatherNd_Impl":"klZow","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dUokB":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "gatherV2", ()=>gatherV2);
+parcelHelpers.export(exports, "gatherV2Config", ()=>gatherV2Config);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _gatherV2Impl = require("./GatherV2_impl");
+var _reshape = require("./Reshape");
+function gatherV2(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, indices } = inputs;
+    const { axis, batchDims } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x,
+        indices
+    ], "gatherV2");
+    // Throw error when any index is out of bound.
+    const parsedAxis = (0, _tfjsCore.util).parseAxisParam(axis, x.shape)[0];
+    const indicesVals = backend.data.get(indices.dataId).values;
+    const axisDim = x.shape[parsedAxis];
+    for(let i = 0; i < indicesVals.length; ++i){
+        const index = indicesVals[i];
+        (0, _tfjsCore.util).assert(index <= axisDim - 1 && index >= 0, ()=>`GatherV2: the index value ${index} is not in [0, ${axisDim - 1}]`);
+    }
+    let $batchDims = batchDims;
+    if (batchDims == null) $batchDims = 0;
+    const indicesSize = (0, _tfjsCore.util).sizeFromShape(indices.shape);
+    const shapeInfo = (0, _tfjsCore.backend_util).segment_util.collectGatherOpShapeInfo(x, indices, parsedAxis, $batchDims);
+    const flattenX = (0, _reshape.reshape)({
+        inputs: {
+            x
+        },
+        backend,
+        attrs: {
+            shape: [
+                shapeInfo.batchSize,
+                shapeInfo.outerSize,
+                shapeInfo.dimSize,
+                shapeInfo.sliceSize
+            ]
+        }
+    });
+    const flattenIndex = (0, _reshape.reshape)({
+        inputs: {
+            x: indices
+        },
+        backend,
+        attrs: {
+            shape: [
+                shapeInfo.batchSize,
+                indicesSize / shapeInfo.batchSize
+            ]
+        }
+    });
+    const flattenOutputShape = [
+        shapeInfo.batchSize,
+        shapeInfo.outerSize,
+        indicesSize / shapeInfo.batchSize,
+        shapeInfo.sliceSize
+    ];
+    const indicesBuf = backend.bufferSync(flattenIndex);
+    const xBuf = backend.bufferSync(flattenX);
+    const outBuf = (0, _gatherV2Impl.gatherV2Impl)(xBuf, indicesBuf, flattenOutputShape);
+    backend.disposeIntermediateTensorInfo(flattenX);
+    backend.disposeIntermediateTensorInfo(flattenIndex);
+    return backend.makeTensorInfo(shapeInfo.outputShape, outBuf.dtype, outBuf.values);
+}
+const gatherV2Config = {
+    kernelName: (0, _tfjsCore.GatherV2),
+    backendName: "cpu",
+    kernelFunc: gatherV2
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./GatherV2_impl":"5y26k","./Reshape":"9350i","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hHvJu":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ifft", ()=>ifft);
+parcelHelpers.export(exports, "ifftConfig", ()=>ifftConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _fftUtils = require("../utils/fft_utils");
+var _reshape = require("./Reshape");
+function ifft(args) {
+    const { inputs, backend } = args;
+    const { input } = inputs;
+    const inputSize = (0, _tfjsCore.util).sizeFromShape(input.shape);
+    // Collapse all outer dimensions to a single batch dimension.
+    const innerDimensionSize = input.shape[input.shape.length - 1];
+    const batch = inputSize / innerDimensionSize;
+    const input2D = (0, _reshape.reshape)({
+        inputs: {
+            x: input
+        },
+        backend,
+        attrs: {
+            shape: [
+                batch,
+                innerDimensionSize
+            ]
+        }
+    });
+    const result = (0, _fftUtils.fftBatch)(input2D, true, backend);
+    const resultReshaped = (0, _reshape.reshape)({
+        inputs: {
+            x: result
+        },
+        backend,
+        attrs: {
+            shape: input.shape
+        }
+    });
+    backend.disposeIntermediateTensorInfo(input2D);
+    backend.disposeIntermediateTensorInfo(result);
+    return resultReshaped;
+}
+const ifftConfig = {
+    kernelName: (0, _tfjsCore.IFFT),
+    backendName: "cpu",
+    kernelFunc: ifft
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/fft_utils":"8ziy5","./Reshape":"9350i","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"a8CWT":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isFinite", ()=>isFinite);
+parcelHelpers.export(exports, "isFiniteConfig", ()=>isFiniteConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const isFinite = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.IsFinite), (xi)=>Number.isFinite(xi) ? 1 : 0, "bool");
+const isFiniteConfig = {
+    kernelName: (0, _tfjsCore.IsFinite),
+    backendName: "cpu",
+    kernelFunc: isFinite
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"342Gs":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isInf", ()=>isInf);
+parcelHelpers.export(exports, "isInfConfig", ()=>isInfConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const isInf = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.IsInf), (xi)=>Math.abs(xi) === Infinity ? 1 : 0, "bool");
+const isInfConfig = {
+    kernelName: (0, _tfjsCore.IsInf),
+    backendName: "cpu",
+    kernelFunc: isInf
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gKXUy":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isNaN", ()=>isNaN);
+parcelHelpers.export(exports, "isNaNConfig", ()=>isNaNConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const isNaN = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.IsNan), (xi)=>Number.isNaN(xi) ? 1 : 0, "bool");
+const isNaNConfig = {
+    kernelName: (0, _tfjsCore.IsNan),
+    backendName: "cpu",
+    kernelFunc: isNaN
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3aMpD":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "linSpace", ()=>linSpace);
+parcelHelpers.export(exports, "linSpaceConfig", ()=>linSpaceConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _linSpaceImpl = require("./LinSpace_impl");
+function linSpace(args) {
+    const { backend, attrs } = args;
+    const { start, stop, num } = attrs;
+    const outVals = (0, _linSpaceImpl.linSpaceImpl)(start, stop, num);
+    return backend.makeTensorInfo([
+        outVals.length
+    ], "float32", outVals);
+}
+const linSpaceConfig = {
+    kernelName: (0, _tfjsCore.LinSpace),
+    backendName: "cpu",
+    kernelFunc: linSpace
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./LinSpace_impl":"4tRcP","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bNfse":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "log1p", ()=>log1p);
+parcelHelpers.export(exports, "log1pConfig", ()=>log1pConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const log1p = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Log1p), (xi)=>Math.log1p(xi));
+const log1pConfig = {
+    kernelName: (0, _tfjsCore.Log1p),
+    backendName: "cpu",
+    kernelFunc: log1p
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9q52j":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "logicalAndImpl", ()=>logicalAndImpl);
+parcelHelpers.export(exports, "logicalAnd", ()=>logicalAnd);
+parcelHelpers.export(exports, "logicalAndConfig", ()=>logicalAndConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _binaryImpl = require("../utils/binary_impl");
+var _binaryUtils = require("../utils/binary_utils");
+const logicalAndImpl = (0, _binaryImpl.createSimpleBinaryKernelImpl)((a, b)=>a && b);
+const logicalAnd = (0, _binaryUtils.binaryKernelFunc)((0, _tfjsCore.LogicalAnd), logicalAndImpl, null, "bool");
+const logicalAndConfig = {
+    kernelName: (0, _tfjsCore.LogicalAnd),
+    backendName: "cpu",
+    kernelFunc: logicalAnd
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/binary_impl":"7WPlP","../utils/binary_utils":"dUQGx","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"929wA":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "logicalNot", ()=>logicalNot);
+parcelHelpers.export(exports, "logicalNotConfig", ()=>logicalNotConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const logicalNot = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.LogicalNot), (xi)=>xi ? 0 : 1, "bool");
+const logicalNotConfig = {
+    kernelName: (0, _tfjsCore.LogicalNot),
+    backendName: "cpu",
+    kernelFunc: logicalNot
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4bpjj":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "logicalOrImpl", ()=>logicalOrImpl);
+parcelHelpers.export(exports, "logicalOr", ()=>logicalOr);
+parcelHelpers.export(exports, "logicalOrConfig", ()=>logicalOrConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _binaryImpl = require("../utils/binary_impl");
+var _binaryUtils = require("../utils/binary_utils");
+const logicalOrImpl = (0, _binaryImpl.createSimpleBinaryKernelImpl)((a, b)=>a || b);
+const logicalOr = (0, _binaryUtils.binaryKernelFunc)((0, _tfjsCore.LogicalOr), logicalOrImpl, null, "bool");
+const logicalOrConfig = {
+    kernelName: (0, _tfjsCore.LogicalOr),
+    backendName: "cpu",
+    kernelFunc: logicalOr
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/binary_impl":"7WPlP","../utils/binary_utils":"dUQGx","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1ZDWc":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "lRN", ()=>lRN);
+parcelHelpers.export(exports, "LRNConfig", ()=>LRNConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function lRN(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { depthRadius, bias, alpha, beta } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "LRN");
+    const channels = x.shape[3];
+    const maxD = channels - 1;
+    const xValues = backend.data.get(x.dataId).values;
+    const size = (0, _tfjsCore.util).sizeFromShape(x.shape);
+    const result = new Float32Array(size);
+    function sumAcrossChannels(offset) {
+        const currentChannel = offset % channels;
+        let beginSumOffset = offset - currentChannel + Math.max(0, currentChannel - depthRadius);
+        const endSumOffset = offset - currentChannel + Math.min(currentChannel + depthRadius, maxD);
+        let sum = 0.0;
+        for(; beginSumOffset <= endSumOffset; beginSumOffset++){
+            const z = xValues[beginSumOffset];
+            sum += z * z;
+        }
+        return sum;
+    }
+    for(let offset = 0; offset < size; offset++){
+        const sum = sumAcrossChannels(offset);
+        const val = xValues[offset] * Math.pow(bias + alpha * sum, -beta);
+        result[offset] = val;
+    }
+    return backend.makeTensorInfo(x.shape, x.dtype, result);
+}
+const LRNConfig = {
+    kernelName: (0, _tfjsCore.LRN),
+    backendName: "cpu",
+    kernelFunc: lRN
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"01nUa":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "lRNGrad", ()=>lRNGrad);
+parcelHelpers.export(exports, "LRNGradConfig", ()=>LRNGradConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function lRNGrad(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, y, dy } = inputs;
+    const { depthRadius, bias, alpha, beta } = attrs;
+    (0, _cpuUtil.assertNotComplex)(dy, "LRNGrad");
+    const dySize = (0, _tfjsCore.util).sizeFromShape(dy.shape);
+    const channels = dy.shape[3];
+    const dyValues = backend.data.get(dy.dataId).values;
+    const xValues = backend.data.get(x.dataId).values;
+    const yValues = backend.data.get(y.dataId).values;
+    const result = new Float32Array(dySize);
+    const size = dySize;
+    for(let offset = 0; offset < size; offset++){
+        const currentChannel = offset % channels;
+        const depthBegin = offset - currentChannel + Math.max(0, currentChannel - depthRadius);
+        const depthEnd = offset - currentChannel + Math.min(channels, currentChannel + depthRadius + 1);
+        let norm = 0;
+        for(let k = depthBegin; k < depthEnd; k++)norm += Math.pow(xValues[k], 2);
+        norm = alpha * norm + bias;
+        for(let k = depthBegin; k < depthEnd; k++){
+            let dyi = -2 * alpha * beta * xValues[k] * yValues[offset] / norm;
+            if (offset === k) dyi += Math.pow(norm, -beta);
+            dyi *= dyValues[offset];
+            result[k] += dyi;
+        }
+    }
+    return backend.makeTensorInfo(dy.shape, x.dtype, result);
+}
+const LRNGradConfig = {
+    kernelName: (0, _tfjsCore.LRNGrad),
+    backendName: "cpu",
+    kernelFunc: lRNGrad
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"ceCEC":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "max", ()=>max);
+parcelHelpers.export(exports, "maxConfig", ()=>maxConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _maxImpl = require("./Max_impl");
+var _transposeImpl = require("./Transpose_impl");
+function max(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { reductionIndices, keepDims } = attrs;
+    const cpuBackend = backend;
+    let xShape = x.shape;
+    const xRank = xShape.length;
+    const origAxes = (0, _tfjsCore.util).parseAxisParam(reductionIndices, xShape);
+    let axes = origAxes;
+    const permutedAxes = (0, _tfjsCore.backend_util).getAxesPermutation(axes, xRank);
+    let xVals = cpuBackend.data.get(x.dataId).values;
+    if (permutedAxes != null) {
+        const newShape = new Array(xRank);
+        for(let i = 0; i < newShape.length; i++)newShape[i] = xShape[permutedAxes[i]];
+        xVals = (0, _transposeImpl.transposeImpl)(xVals, xShape, x.dtype, permutedAxes, newShape);
+        axes = (0, _tfjsCore.backend_util).getInnerMostAxes(axes.length, xRank);
+        xShape = newShape;
+    }
+    (0, _cpuUtil.assertNotComplex)(x, "max");
+    (0, _tfjsCore.backend_util).assertAxesAreInnerMostDims("max", axes, xRank);
+    const [maxOutShape, reduceShape] = (0, _tfjsCore.backend_util).computeOutAndReduceShapes(xShape, axes);
+    const reduceSize = (0, _tfjsCore.util).sizeFromShape(reduceShape);
+    const result = (0, _maxImpl.maxImpl)(xVals, reduceSize, maxOutShape, x.dtype);
+    const dataId = cpuBackend.write(result, maxOutShape, x.dtype);
+    let outShape = maxOutShape;
+    if (keepDims) {
+        // reshape
+        const newShape = (0, _tfjsCore.backend_util).expandShapeToKeepDim(maxOutShape, origAxes);
+        outShape = newShape;
+    }
+    return {
+        dataId,
+        shape: outShape,
+        dtype: x.dtype
+    };
+}
+const maxConfig = {
+    kernelName: (0, _tfjsCore.Max),
+    backendName: "cpu",
+    kernelFunc: max
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Max_impl":"6BNe1","./Transpose_impl":"2fFZe","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2HK6O":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "maxPool", ()=>maxPool);
+parcelHelpers.export(exports, "maxPoolConfig", ()=>maxPoolConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _poolUtils = require("../utils/pool_utils");
+var _identity = require("./Identity");
+function maxPool(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    (0, _cpuUtil.assertNotComplex)(x, "maxPool");
+    const { filterSize, strides, pad, dimRoundingMode } = attrs;
+    const dilations = 1;
+    (0, _tfjsCore.util).assert((0, _tfjsCore.backend_util).eitherStridesOrDilationsAreOne(strides, dilations), ()=>"Error in maxPool: Either strides or dilations must be 1. " + `Got strides ${strides} and dilations '${dilations}'`);
+    const convInfo = (0, _tfjsCore.backend_util).computePool2DInfo(x.shape, filterSize, strides, dilations, pad, dimRoundingMode);
+    let res;
+    if (convInfo.filterWidth === 1 && convInfo.filterHeight === 1 && (0, _tfjsCore.util).arraysEqual(convInfo.inShape, convInfo.outShape)) res = (0, _identity.identity)({
+        inputs: {
+            x
+        },
+        backend
+    });
+    else {
+        const xValues = backend.data.get(x.dataId).values;
+        const strides = (0, _tfjsCore.util).computeStrides(x.shape);
+        const buffer = (0, _poolUtils.pool)(xValues, x.shape, x.dtype, strides, convInfo, "max");
+        res = backend.makeTensorInfo(convInfo.outShape, x.dtype, buffer.values);
+    }
+    return res;
+}
+const maxPoolConfig = {
+    kernelName: (0, _tfjsCore.MaxPool),
+    backendName: "cpu",
+    kernelFunc: maxPool
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","../utils/pool_utils":"fzyhw","./Identity":"btREJ","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"guFsS":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "maxPool3D", ()=>maxPool3D);
+parcelHelpers.export(exports, "maxPool3DConfig", ()=>maxPool3DConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _poolUtils = require("../utils/pool_utils");
+function maxPool3D(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { filterSize, strides, pad, dimRoundingMode, dataFormat } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "maxPool3d");
+    const convInfo = (0, _tfjsCore.backend_util).computePool3DInfo(x.shape, filterSize, strides, 1 /* dilations */ , pad, dimRoundingMode, dataFormat);
+    const xValues = backend.data.get(x.dataId).values;
+    const outBuf = (0, _poolUtils.pool3d)(xValues, x.shape, x.dtype, (0, _tfjsCore.util).computeStrides(x.shape), convInfo, "max");
+    return backend.makeTensorInfo(outBuf.shape, "float32", outBuf.values);
+}
+const maxPool3DConfig = {
+    kernelName: (0, _tfjsCore.MaxPool3D),
+    backendName: "cpu",
+    kernelFunc: maxPool3D
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","../utils/pool_utils":"fzyhw","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bsOhi":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "maxPool3DGrad", ()=>maxPool3DGrad);
+parcelHelpers.export(exports, "maxPool3DGradConfig", ()=>maxPool3DGradConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _poolUtils = require("../utils/pool_utils");
+function maxPool3DGrad(args) {
+    const { inputs, backend, attrs } = args;
+    const { dy, input } = inputs;
+    const { filterSize, strides, pad, dimRoundingMode } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        dy,
+        input
+    ], "maxPool3DGrad");
+    const convInfo = (0, _tfjsCore.backend_util).computePool3DInfo(input.shape, filterSize, strides, 1 /* dilations */ , pad, dimRoundingMode);
+    const inputBuf = backend.bufferSync(input);
+    const maxPosBuf = (0, _poolUtils.maxPool3dPositions)(inputBuf, convInfo);
+    const strideDepth = convInfo.strideDepth;
+    const strideHeight = convInfo.strideHeight;
+    const strideWidth = convInfo.strideWidth;
+    const dilationDepth = convInfo.dilationDepth;
+    const dilationHeight = convInfo.dilationHeight;
+    const dilationWidth = convInfo.dilationWidth;
+    const effectiveFilterDepth = convInfo.effectiveFilterDepth;
+    const effectiveFilterHeight = convInfo.effectiveFilterHeight;
+    const effectiveFilterWidth = convInfo.effectiveFilterWidth;
+    const padFront = effectiveFilterDepth - 1 - convInfo.padInfo.front;
+    const padLeft = effectiveFilterWidth - 1 - convInfo.padInfo.left;
+    const padTop = effectiveFilterHeight - 1 - convInfo.padInfo.top;
+    const dx = (0, _tfjsCore.buffer)(input.shape, "float32");
+    const dyBuf = backend.bufferSync(dy);
+    for(let batch = 0; batch < convInfo.batchSize; ++batch){
+        for(let channel = 0; channel < convInfo.inChannels; ++channel)for(let dxDepth = 0; dxDepth < convInfo.inDepth; ++dxDepth){
+            for(let dxRow = 0; dxRow < convInfo.inHeight; ++dxRow)for(let dxCol = 0; dxCol < convInfo.inWidth; ++dxCol){
+                // Shader code begins
+                const dyDepthCorner = dxDepth - padFront;
+                const dyRowCorner = dxRow - padTop;
+                const dyColCorner = dxCol - padLeft;
+                let dotProd = 0;
+                for(let wDepth = 0; wDepth < effectiveFilterDepth; wDepth += dilationDepth){
+                    const dyDepth = (dyDepthCorner + wDepth) / strideDepth;
+                    if (dyDepth < 0 || dyDepth >= convInfo.outDepth || Math.floor(dyDepth) !== dyDepth) continue;
+                    for(let wRow = 0; wRow < effectiveFilterHeight; wRow += dilationHeight){
+                        const dyRow = (dyRowCorner + wRow) / strideHeight;
+                        if (dyRow < 0 || dyRow >= convInfo.outHeight || Math.floor(dyRow) !== dyRow) continue;
+                        for(let wCol = 0; wCol < effectiveFilterWidth; wCol += dilationWidth){
+                            const dyCol = (dyColCorner + wCol) / strideWidth;
+                            if (dyCol < 0 || dyCol >= convInfo.outWidth || Math.floor(dyCol) !== dyCol) continue;
+                            const maxPos = effectiveFilterDepth * effectiveFilterHeight * effectiveFilterWidth - 1 - maxPosBuf.get(batch, dyDepth, dyRow, dyCol, channel);
+                            const curPos = wDepth * effectiveFilterHeight * effectiveFilterWidth + wRow * effectiveFilterWidth + wCol;
+                            const mask = maxPos === curPos ? 1 : 0;
+                            if (mask === 0) continue;
+                            const pixel = dyBuf.get(batch, dyDepth, dyRow, dyCol, channel);
+                            dotProd += pixel * mask;
+                        }
+                    }
+                }
+                dx.set(dotProd, batch, dxDepth, dxRow, dxCol, channel);
+            }
+        }
+    }
+    return backend.makeTensorInfo(dx.shape, dx.dtype, dx.values);
+}
+const maxPool3DGradConfig = {
+    kernelName: (0, _tfjsCore.MaxPool3DGrad),
+    backendName: "cpu",
+    kernelFunc: maxPool3DGrad
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","../utils/pool_utils":"fzyhw","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"esvnZ":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "maxPoolGrad", ()=>maxPoolGrad);
+parcelHelpers.export(exports, "maxPoolGradConfig", ()=>maxPoolGradConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _poolUtils = require("../utils/pool_utils");
+function maxPoolGrad(args) {
+    const { inputs, backend, attrs } = args;
+    const { dy, input, output } = inputs;
+    const x = input;
+    (0, _cpuUtil.assertNotComplex)([
+        input,
+        output
+    ], "maxPoolGrad");
+    const { filterSize, strides, pad, dimRoundingMode } = attrs;
+    const convInfo = (0, _tfjsCore.backend_util).computePool2DInfo(x.shape, filterSize, strides, 1 /* dilations */ , pad, dimRoundingMode);
+    const xValues = backend.data.get(x.dataId).values;
+    const maxPosBuf = (0, _tfjsCore.buffer)(convInfo.outShape, x.dtype, (0, _poolUtils.maxPoolPositions)(xValues, x.shape, x.dtype, convInfo).values);
+    const strideHeight = convInfo.strideHeight;
+    const strideWidth = convInfo.strideWidth;
+    const dilationHeight = convInfo.dilationHeight;
+    const dilationWidth = convInfo.dilationWidth;
+    const effectiveFilterHeight = convInfo.effectiveFilterHeight;
+    const effectiveFilterWidth = convInfo.effectiveFilterWidth;
+    const padLeft = effectiveFilterWidth - 1 - convInfo.padInfo.left;
+    const padTop = effectiveFilterHeight - 1 - convInfo.padInfo.top;
+    const dx = (0, _tfjsCore.buffer)(x.shape, "float32");
+    const dyData = backend.data.get(dy.dataId).values;
+    const dyBuf = (0, _tfjsCore.buffer)(dy.shape, "float32", dyData);
+    for(let b = 0; b < convInfo.batchSize; ++b)for(let d = 0; d < convInfo.inChannels; ++d){
+        for(let dxR = 0; dxR < convInfo.inHeight; ++dxR)for(let dxC = 0; dxC < convInfo.inWidth; ++dxC){
+            // Shader code begins.
+            const dyRCorner = dxR - padTop;
+            const dyCCorner = dxC - padLeft;
+            let dotProd = 0;
+            for(let wR = 0; wR < effectiveFilterHeight; wR += dilationHeight){
+                const dyR = (dyRCorner + wR) / strideHeight;
+                if (dyR < 0 || dyR >= convInfo.outHeight || Math.floor(dyR) !== dyR) continue;
+                for(let wC = 0; wC < effectiveFilterWidth; wC += dilationWidth){
+                    const dyC = (dyCCorner + wC) / strideWidth;
+                    if (dyC < 0 || dyC >= convInfo.outWidth || Math.floor(dyC) !== dyC) continue;
+                    const maxPos = effectiveFilterHeight * effectiveFilterWidth - 1 - maxPosBuf.get(b, dyR, dyC, d);
+                    const curPos = wR * effectiveFilterWidth + wC;
+                    const mask = maxPos === curPos ? 1 : 0;
+                    if (mask === 0) continue;
+                    const pixel = dyBuf.get(b, dyR, dyC, d);
+                    dotProd += pixel * mask;
+                }
+            }
+            dx.set(dotProd, b, dxR, dxC, d);
+        }
+    }
+    return backend.makeTensorInfo(dx.shape, dx.dtype, dx.values);
+}
+const maxPoolGradConfig = {
+    kernelName: (0, _tfjsCore.MaxPoolGrad),
+    backendName: "cpu",
+    kernelFunc: maxPoolGrad
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","../utils/pool_utils":"fzyhw","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aBn34":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "maxPoolWithArgmaxConfig", ()=>maxPoolWithArgmaxConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _maxPoolWithArgmaxImpl = require("./MaxPoolWithArgmax_impl");
+const maxPoolWithArgmaxConfig = {
+    kernelName: (0, _tfjsCore.MaxPoolWithArgmax),
+    backendName: "cpu",
+    kernelFunc: ({ inputs, attrs, backend })=>{
+        const { x } = inputs;
+        const { filterSize, strides, pad, includeBatchInIndex } = attrs;
+        const cpuBackend = backend;
+        (0, _cpuUtil.assertNotComplex)(x, "MaxPoolWithArgmax");
+        const values = cpuBackend.data.get(x.dataId).values;
+        const convInfo = (0, _tfjsCore.backend_util).computePool2DInfo(x.shape, filterSize, strides, [
+            1,
+            1
+        ], pad);
+        const [pooled, indexes] = (0, _maxPoolWithArgmaxImpl.maxPoolWithArgmaxImpl)(values, x.shape, x.dtype, includeBatchInIndex, convInfo);
+        const pooledDataId = cpuBackend.write(pooled, convInfo.outShape, x.dtype);
+        const indexesDataId = cpuBackend.write(indexes, convInfo.outShape, x.dtype);
+        return [
+            {
+                dataId: pooledDataId,
+                shape: convInfo.outShape,
+                dtype: x.dtype
+            },
+            {
+                dataId: indexesDataId,
+                shape: convInfo.outShape,
+                dtype: "int32"
+            }
+        ];
+    }
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./MaxPoolWithArgmax_impl":"7OAHL","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7OAHL":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "maxPoolWithArgmaxImpl", ()=>maxPoolWithArgmaxImpl);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _poolUtils = require("../utils/pool_utils");
+function maxPoolWithArgmaxImpl(xValues, xShape, dtype, includeBatchInIndex, convInfo) {
+    const strides = (0, _tfjsCore.util).computeStrides(xShape);
+    const maxPools = (0, _poolUtils.pool)(xValues, xShape, dtype, strides, convInfo, "max");
+    const maxPositions = (0, _poolUtils.maxPoolPositions)(xValues, xShape, dtype, convInfo, true, includeBatchInIndex);
+    return [
+        maxPools.values,
+        maxPositions.values
+    ];
+}
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/pool_utils":"fzyhw","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hu1l4":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "mean", ()=>mean);
+parcelHelpers.export(exports, "meanConfig", ()=>meanConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cast = require("./Cast");
+var _realDiv = require("./RealDiv");
+var _sum = require("./Sum");
+function mean(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { axis, keepDims } = attrs;
+    const axes = (0, _tfjsCore.util).parseAxisParam(axis, x.shape);
+    const shapes = (0, _tfjsCore.backend_util).computeOutAndReduceShapes(x.shape, axes);
+    const reduceShape = shapes[1];
+    const reduceSize = (0, _tfjsCore.util).sizeFromShape(reduceShape);
+    const toDispose = [];
+    const reduceSizeScalar = backend.makeTensorInfo([], "float32", new Float32Array([
+        reduceSize
+    ]));
+    toDispose.push(reduceSizeScalar);
+    const $x = (0, _cast.cast)({
+        inputs: {
+            x
+        },
+        backend,
+        attrs: {
+            dtype: "float32"
+        }
+    });
+    toDispose.push($x);
+    const res = (0, _realDiv.div)({
+        inputs: {
+            a: $x,
+            b: reduceSizeScalar
+        },
+        backend
+    });
+    toDispose.push(res);
+    const result = (0, _sum.sum)({
+        inputs: {
+            x: res
+        },
+        backend,
+        attrs: {
+            axis,
+            keepDims
+        }
+    });
+    toDispose.forEach((t)=>backend.disposeIntermediateTensorInfo(t));
+    return result;
+}
+const meanConfig = {
+    kernelName: (0, _tfjsCore.Mean),
+    backendName: "cpu",
+    kernelFunc: mean
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Cast":"fAtIw","./RealDiv":"9Ly75","./Sum":"6gbbV","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"h3WES":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "min", ()=>min);
+parcelHelpers.export(exports, "minConfig", ()=>minConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _reshape = require("./Reshape");
+var _transpose = require("./Transpose");
+function min(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { axis, keepDims } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "min");
+    const origAxes = (0, _tfjsCore.util).parseAxisParam(axis, x.shape);
+    let axes = origAxes;
+    const permutedAxes = (0, _tfjsCore.backend_util).getAxesPermutation(axes, x.shape.length);
+    let $x = x;
+    if (permutedAxes != null) {
+        $x = (0, _transpose.transpose)({
+            inputs: {
+                x
+            },
+            backend,
+            attrs: {
+                perm: permutedAxes
+            }
+        });
+        axes = (0, _tfjsCore.backend_util).getInnerMostAxes(axes.length, x.shape.length);
+    }
+    (0, _tfjsCore.backend_util).assertAxesAreInnerMostDims("min", axes, $x.shape.length);
+    const [outShape, reduceShape] = (0, _tfjsCore.backend_util).computeOutAndReduceShapes($x.shape, axes);
+    const reduceSize = (0, _tfjsCore.util).sizeFromShape(reduceShape);
+    const vals = (0, _tfjsCore.util).makeZerosTypedArray((0, _tfjsCore.util).sizeFromShape(outShape), $x.dtype);
+    const aVals = backend.data.get($x.dataId).values;
+    for(let i = 0; i < vals.length; ++i){
+        const offset = i * reduceSize;
+        let min = aVals[offset];
+        for(let j = 0; j < reduceSize; ++j){
+            const value = aVals[offset + j];
+            if (Number.isNaN(value) || value < min) min = value;
+        }
+        vals[i] = min;
+    }
+    if (permutedAxes != null) backend.disposeIntermediateTensorInfo($x);
+    const result = backend.makeTensorInfo(outShape, $x.dtype, vals);
+    if (keepDims) {
+        const expandedShape = (0, _tfjsCore.backend_util).expandShapeToKeepDim(outShape, origAxes);
+        const reshapedResult = (0, _reshape.reshape)({
+            inputs: {
+                x: result
+            },
+            backend,
+            attrs: {
+                shape: expandedShape
+            }
+        });
+        backend.disposeIntermediateTensorInfo(result);
+        return reshapedResult;
+    }
+    return result;
+}
+const minConfig = {
+    kernelName: (0, _tfjsCore.Min),
+    backendName: "cpu",
+    kernelFunc: min
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Reshape":"9350i","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1HbpJ":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "mirrorPad", ()=>mirrorPad);
+parcelHelpers.export(exports, "mirrorPadConfig", ()=>mirrorPadConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function mirrorPad(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { paddings, mode } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "mirrorPad");
+    const outShape = paddings.map((p, i)=>p[0] + x.shape[i] + p[1]);
+    const start = paddings.map((p)=>p[0]);
+    const end = paddings.map((p, i)=>p[0] + x.shape[i]);
+    const offset = mode === "reflect" ? 0 : 1;
+    const xVals = backend.data.get(x.dataId).values;
+    const xRank = x.shape.length;
+    const xStrides = (0, _tfjsCore.util).computeStrides(x.shape);
+    const resultSize = (0, _tfjsCore.util).sizeFromShape(outShape);
+    const resultRank = outShape.length;
+    const resultStrides = (0, _tfjsCore.util).computeStrides(outShape);
+    const resVals = (0, _tfjsCore.util).getTypedArrayFromDType(x.dtype, resultSize);
+    for(let i = 0; i < resultSize; i++){
+        let coords = (0, _tfjsCore.util).indexToLoc(i, resultRank, resultStrides);
+        for(let i = 0; i < resultRank; i++){
+            if (coords[i] < start[i]) coords[i] = start[i] * 2 - coords[i] - offset;
+            else if (coords[i] >= end[i]) coords[i] = (end[i] - 1) * 2 - coords[i] + offset;
+        }
+        coords = coords.map((c, i)=>c - start[i]);
+        const inIndex = (0, _tfjsCore.util).locToIndex(coords, xRank, xStrides);
+        resVals[i] = xVals[inIndex];
+    }
+    const outId = backend.write(resVals, outShape, x.dtype);
+    return {
+        dataId: outId,
+        shape: outShape,
+        dtype: x.dtype
+    };
+}
+const mirrorPadConfig = {
+    kernelName: (0, _tfjsCore.MirrorPad),
+    backendName: "cpu",
+    kernelFunc: mirrorPad
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iD4b6":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "modImpl", ()=>modImpl);
+parcelHelpers.export(exports, "mod", ()=>mod);
+parcelHelpers.export(exports, "modConfig", ()=>modConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _binaryImpl = require("../utils/binary_impl");
+var _binaryUtils = require("../utils/binary_utils");
+const modImpl = (0, _binaryImpl.createSimpleBinaryKernelImpl)((aValue, bValue)=>{
+    const rem = aValue % bValue;
+    if (aValue < 0 && bValue < 0 || aValue >= 0 && bValue >= 0) return rem;
+    else return (rem + bValue) % bValue;
+});
+const mod = (0, _binaryUtils.binaryKernelFunc)((0, _tfjsCore.Mod), modImpl);
+const modConfig = {
+    kernelName: (0, _tfjsCore.Mod),
+    backendName: "cpu",
+    kernelFunc: mod
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/binary_impl":"7WPlP","../utils/binary_utils":"dUQGx","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dy4Sw":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "multinomial", ()=>multinomial);
+parcelHelpers.export(exports, "multinomialConfig", ()=>multinomialConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _seedrandom = require("seedrandom");
+var _cpuUtil = require("../cpu_util");
+var _softmax = require("./Softmax");
+function multinomial(args) {
+    const { inputs, backend, attrs } = args;
+    const { logits } = inputs;
+    const { numSamples, seed, normalized } = attrs;
+    (0, _cpuUtil.assertNotComplex)(logits, "multinomial");
+    const probabilities = normalized ? logits : (0, _softmax.softmax)({
+        inputs: {
+            logits
+        },
+        backend,
+        attrs: {
+            dim: -1
+        }
+    });
+    const batchSize = probabilities.shape[0];
+    const numEvents = probabilities.shape[1];
+    const probVals = backend.data.get(probabilities.dataId).values;
+    const resShape = [
+        batchSize,
+        numSamples
+    ];
+    const resVals = (0, _tfjsCore.util).makeZerosTypedArray((0, _tfjsCore.util).sizeFromShape(resShape), "int32");
+    for(let b = 0; b < batchSize; ++b){
+        const offset = b * numEvents;
+        // The cdf won't include the last event. It will be implicit if no other
+        // event happened.
+        const cdf = new Float32Array(numEvents - 1);
+        cdf[0] = probVals[offset];
+        for(let event = 1; event < cdf.length; ++event)cdf[event] = cdf[event - 1] + probVals[offset + event];
+        const random = _seedrandom.alea(seed.toString());
+        const outOffset = b * numSamples;
+        for(let sampleId = 0; sampleId < numSamples; ++sampleId){
+            const r = random();
+            // Assume last event happened by default.
+            resVals[outOffset + sampleId] = cdf.length;
+            for(let event = 0; event < cdf.length; event++)if (r < cdf[event]) {
+                resVals[outOffset + sampleId] = event;
+                break;
+            }
+        }
+    }
+    if (!normalized) backend.disposeIntermediateTensorInfo(probabilities);
+    return backend.makeTensorInfo(resShape, "int32", resVals);
+}
+const multinomialConfig = {
+    kernelName: (0, _tfjsCore.Multinomial),
+    backendName: "cpu",
+    kernelFunc: multinomial
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","seedrandom":"9SiBG","../cpu_util":"1l037","./Softmax":"1UnfO","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1UnfO":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "softmax", ()=>softmax);
+parcelHelpers.export(exports, "softmaxConfig", ()=>softmaxConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _exp = require("./Exp");
+var _max = require("./Max");
+var _realDiv = require("./RealDiv");
+var _reshape = require("./Reshape");
+var _sub = require("./Sub");
+var _sum = require("./Sum");
+function softmax(args) {
+    const { inputs, backend, attrs } = args;
+    const { logits } = inputs;
+    const { dim } = attrs;
+    const logitsRank = logits.shape.length;
+    let $dim = dim;
+    if ($dim === -1) $dim = logitsRank - 1;
+    if ($dim !== logitsRank - 1) throw Error("Softmax along a non-last dimension is not yet supported. " + `Logits was rank ${logitsRank} and dim was ${$dim}`);
+    const axes = (0, _tfjsCore.util).parseAxisParam([
+        $dim
+    ], logits.shape);
+    const maxLogit = (0, _max.max)({
+        inputs: {
+            x: logits
+        },
+        backend,
+        attrs: {
+            reductionIndices: axes,
+            keepDims: false
+        }
+    });
+    const expandedShape = (0, _tfjsCore.backend_util).expandShapeToKeepDim(maxLogit.shape, axes);
+    const maxLogitReshaped = (0, _reshape.reshape)({
+        inputs: {
+            x: maxLogit
+        },
+        backend,
+        attrs: {
+            shape: expandedShape
+        }
+    });
+    const a = (0, _sub.sub)({
+        inputs: {
+            a: logits,
+            b: maxLogitReshaped
+        },
+        backend
+    });
+    const b = (0, _exp.exp)({
+        inputs: {
+            x: a
+        },
+        backend
+    });
+    const sumExp = (0, _sum.sum)({
+        inputs: {
+            x: b
+        },
+        backend,
+        attrs: {
+            axis: axes,
+            keepDims: false
+        }
+    });
+    const sumReshaped = (0, _reshape.reshape)({
+        inputs: {
+            x: sumExp
+        },
+        backend,
+        attrs: {
+            shape: expandedShape
+        }
+    });
+    const result = (0, _realDiv.div)({
+        inputs: {
+            a: b,
+            b: sumReshaped
+        },
+        backend
+    });
+    backend.disposeIntermediateTensorInfo(maxLogit);
+    backend.disposeIntermediateTensorInfo(maxLogitReshaped);
+    backend.disposeIntermediateTensorInfo(a);
+    backend.disposeIntermediateTensorInfo(b);
+    backend.disposeIntermediateTensorInfo(sumExp);
+    backend.disposeIntermediateTensorInfo(sumReshaped);
+    return result;
+}
+const softmaxConfig = {
+    kernelName: (0, _tfjsCore.Softmax),
+    backendName: "cpu",
+    kernelFunc: softmax
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Exp":"6eexr","./Max":"ceCEC","./RealDiv":"9Ly75","./Reshape":"9350i","./Sub":"4DByI","./Sum":"6gbbV","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cU4dv":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "nonMaxSuppressionV3", ()=>nonMaxSuppressionV3);
+parcelHelpers.export(exports, "nonMaxSuppressionV3Config", ()=>nonMaxSuppressionV3Config);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+const nonMaxSuppressionV3Impl = (0, _tfjsCore.kernel_impls).nonMaxSuppressionV3Impl;
+function nonMaxSuppressionV3(args) {
+    const { inputs, backend, attrs } = args;
+    const { boxes, scores } = inputs;
+    const { maxOutputSize, iouThreshold, scoreThreshold } = attrs;
+    (0, _cpuUtil.assertNotComplex)(boxes, "NonMaxSuppression");
+    const boxesVals = backend.data.get(boxes.dataId).values;
+    const scoresVals = backend.data.get(scores.dataId).values;
+    const { selectedIndices } = nonMaxSuppressionV3Impl(boxesVals, scoresVals, maxOutputSize, iouThreshold, scoreThreshold);
+    return backend.makeTensorInfo([
+        selectedIndices.length
+    ], "int32", new Int32Array(selectedIndices));
+}
+const nonMaxSuppressionV3Config = {
+    kernelName: (0, _tfjsCore.NonMaxSuppressionV3),
+    backendName: "cpu",
+    kernelFunc: nonMaxSuppressionV3
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"chYiL":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "nonMaxSuppressionV4", ()=>nonMaxSuppressionV4);
+parcelHelpers.export(exports, "nonMaxSuppressionV4Config", ()=>nonMaxSuppressionV4Config);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+const nonMaxSuppressionV4Impl = (0, _tfjsCore.kernel_impls).nonMaxSuppressionV4Impl;
+function nonMaxSuppressionV4(args) {
+    const { inputs, backend, attrs } = args;
+    const { boxes, scores } = inputs;
+    const { maxOutputSize, iouThreshold, scoreThreshold, padToMaxOutputSize } = attrs;
+    (0, _cpuUtil.assertNotComplex)(boxes, "NonMaxSuppressionPadded");
+    const boxesVals = backend.data.get(boxes.dataId).values;
+    const scoresVals = backend.data.get(scores.dataId).values;
+    const { selectedIndices, validOutputs } = nonMaxSuppressionV4Impl(boxesVals, scoresVals, maxOutputSize, iouThreshold, scoreThreshold, padToMaxOutputSize);
+    return [
+        backend.makeTensorInfo([
+            selectedIndices.length
+        ], "int32", new Int32Array(selectedIndices)),
+        backend.makeTensorInfo([], "int32", new Int32Array([
+            validOutputs
+        ]))
+    ];
+}
+const nonMaxSuppressionV4Config = {
+    kernelName: (0, _tfjsCore.NonMaxSuppressionV4),
+    backendName: "cpu",
+    kernelFunc: nonMaxSuppressionV4
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bVnt1":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "nonMaxSuppressionV5", ()=>nonMaxSuppressionV5);
+parcelHelpers.export(exports, "nonMaxSuppressionV5Config", ()=>nonMaxSuppressionV5Config);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+const nonMaxSuppressionV5Impl = (0, _tfjsCore.kernel_impls).nonMaxSuppressionV5Impl;
+function nonMaxSuppressionV5(args) {
+    const { inputs, backend, attrs } = args;
+    const { boxes, scores } = inputs;
+    const { maxOutputSize, iouThreshold, scoreThreshold, softNmsSigma } = attrs;
+    (0, _cpuUtil.assertNotComplex)(boxes, "NonMaxSuppressionWithScore");
+    const boxesVals = backend.data.get(boxes.dataId).values;
+    const scoresVals = backend.data.get(scores.dataId).values;
+    const maxOutputSizeVal = maxOutputSize;
+    const iouThresholdVal = iouThreshold;
+    const scoreThresholdVal = scoreThreshold;
+    const softNmsSigmaVal = softNmsSigma;
+    const { selectedIndices, selectedScores } = nonMaxSuppressionV5Impl(boxesVals, scoresVals, maxOutputSizeVal, iouThresholdVal, scoreThresholdVal, softNmsSigmaVal);
+    return [
+        backend.makeTensorInfo([
+            selectedIndices.length
+        ], "int32", new Int32Array(selectedIndices)),
+        backend.makeTensorInfo([
+            selectedScores.length
+        ], "float32", new Float32Array(selectedScores))
+    ];
+}
+const nonMaxSuppressionV5Config = {
+    kernelName: (0, _tfjsCore.NonMaxSuppressionV5),
+    backendName: "cpu",
+    kernelFunc: nonMaxSuppressionV5
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9Evwj":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "oneHot", ()=>oneHot);
+parcelHelpers.export(exports, "oneHotConfig", ()=>oneHotConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function oneHot(args) {
+    const { inputs, backend, attrs } = args;
+    const { indices } = inputs;
+    const { dtype, depth, onValue, offValue } = attrs;
+    (0, _cpuUtil.assertNotComplex)(indices, "oneHot");
+    const indicesSize = (0, _tfjsCore.util).sizeFromShape(indices.shape);
+    const res = new Float32Array(indicesSize * depth);
+    res.fill(offValue);
+    const indicesVal = backend.data.get(indices.dataId).values;
+    for(let event = 0; event < indicesSize; ++event)if (indicesVal[event] >= 0 && indicesVal[event] < depth) res[event * depth + indicesVal[event]] = onValue;
+    return backend.makeTensorInfo([
+        ...indices.shape,
+        depth
+    ], dtype, res);
+}
+const oneHotConfig = {
+    kernelName: (0, _tfjsCore.OneHot),
+    backendName: "cpu",
+    kernelFunc: oneHot
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kWIOw":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "onesLike", ()=>onesLike);
+parcelHelpers.export(exports, "onesLikeConfig", ()=>onesLikeConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _complex = require("./Complex");
+var _fill = require("./Fill");
+var _imag = require("./Imag");
+var _real = require("./Real");
+var _zerosLike = require("./ZerosLike");
+function onesLike(args) {
+    const { inputs, backend } = args;
+    const { x } = inputs;
+    if (x.dtype === "string") throw new Error("onesLike is not supported for string tensors");
+    else if (x.dtype === "complex64") {
+        const realPart = (0, _real.real)({
+            inputs: {
+                input: x
+            },
+            backend
+        });
+        const r = onesLike({
+            inputs: {
+                x: realPart
+            },
+            backend
+        });
+        const imagPart = (0, _imag.imag)({
+            inputs: {
+                input: x
+            },
+            backend
+        });
+        const i = (0, _zerosLike.zerosLike)({
+            inputs: {
+                x: imagPart
+            },
+            backend
+        });
+        const result = (0, _complex.complex)({
+            inputs: {
+                real: r,
+                imag: i
+            },
+            backend
+        });
+        backend.disposeIntermediateTensorInfo(realPart);
+        backend.disposeIntermediateTensorInfo(r);
+        backend.disposeIntermediateTensorInfo(imagPart);
+        backend.disposeIntermediateTensorInfo(i);
+        return result;
+    } else return (0, _fill.fill)({
+        backend,
+        attrs: {
+            shape: x.shape,
+            value: 1,
+            dtype: x.dtype
+        }
+    });
+}
+const onesLikeConfig = {
+    kernelName: (0, _tfjsCore.OnesLike),
+    backendName: "cpu",
+    kernelFunc: onesLike
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Complex":"3DPmh","./Fill":"4BMgR","./Imag":"af3Tx","./Real":"eZ7aJ","./ZerosLike":"hfVJr","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hfVJr":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "zerosLike", ()=>zerosLike);
+parcelHelpers.export(exports, "zerosLikeConfig", ()=>zerosLikeConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _complex = require("./Complex");
+var _fill = require("./Fill");
+var _imag = require("./Imag");
+var _real = require("./Real");
+function zerosLike(args) {
+    const { inputs, backend } = args;
+    const { x } = inputs;
+    if (x.dtype === "string") throw new Error("zerosLike is not supported for string tensors");
+    else if (x.dtype === "complex64") {
+        const realPart = (0, _real.real)({
+            inputs: {
+                input: x
+            },
+            backend
+        });
+        const r = zerosLike({
+            inputs: {
+                x: realPart
+            },
+            backend
+        });
+        const imagPart = (0, _imag.imag)({
+            inputs: {
+                input: x
+            },
+            backend
+        });
+        const i = zerosLike({
+            inputs: {
+                x: imagPart
+            },
+            backend
+        });
+        const result = (0, _complex.complex)({
+            inputs: {
+                real: r,
+                imag: i
+            },
+            backend
+        });
+        backend.disposeIntermediateTensorInfo(realPart);
+        backend.disposeIntermediateTensorInfo(r);
+        backend.disposeIntermediateTensorInfo(imagPart);
+        backend.disposeIntermediateTensorInfo(i);
+        return result;
+    } else return (0, _fill.fill)({
+        backend,
+        attrs: {
+            shape: x.shape,
+            value: 0,
+            dtype: x.dtype
+        }
+    });
+}
+const zerosLikeConfig = {
+    kernelName: (0, _tfjsCore.ZerosLike),
+    backendName: "cpu",
+    kernelFunc: zerosLike
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Complex":"3DPmh","./Fill":"4BMgR","./Imag":"af3Tx","./Real":"eZ7aJ","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3NDYm":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "pack", ()=>pack);
+parcelHelpers.export(exports, "packConfig", ()=>packConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _concat = require("./Concat");
+var _expandDims = require("./ExpandDims");
+function pack(args) {
+    const { inputs, backend, attrs } = args;
+    const { axis } = attrs;
+    if (inputs.length === 1) return (0, _expandDims.expandDims)({
+        inputs: {
+            input: inputs[0]
+        },
+        backend,
+        attrs: {
+            dim: axis
+        }
+    });
+    const shape = inputs[0].shape;
+    const dtype = inputs[0].dtype;
+    inputs.forEach((t)=>{
+        (0, _tfjsCore.util).assertShapesMatch(shape, t.shape, "All tensors passed to stack must have matching shapes");
+        (0, _tfjsCore.util).assert(dtype === t.dtype, ()=>"All tensors passed to stack must have matching dtypes");
+    });
+    const intermediateTensorInfos = [];
+    const expandedTensors = inputs.map((t)=>{
+        const expandedT = (0, _expandDims.expandDims)({
+            inputs: {
+                input: t
+            },
+            backend,
+            attrs: {
+                dim: axis
+            }
+        });
+        intermediateTensorInfos.push(expandedT);
+        return expandedT;
+    });
+    const result = (0, _concat.concat)({
+        inputs: expandedTensors,
+        backend,
+        attrs: {
+            axis
+        }
+    });
+    intermediateTensorInfos.forEach((t)=>backend.disposeIntermediateTensorInfo(t));
+    return result;
+}
+const packConfig = {
+    kernelName: (0, _tfjsCore.Pack),
+    backendName: "cpu",
+    kernelFunc: pack
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Concat":"iYEAT","./ExpandDims":"4z77l","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dssNb":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "padV2", ()=>padV2);
+parcelHelpers.export(exports, "padV2Config", ()=>padV2Config);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function padV2(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { paddings, constantValue } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "pad");
+    const outShape = paddings.map((p, i)=>p[0] + x.shape[i] + p[1]);
+    const start = paddings.map((p)=>p[0]);
+    const xVals = backend.data.get(x.dataId).values;
+    const xSize = (0, _tfjsCore.util).sizeFromShape(x.shape);
+    const xRank = x.shape.length;
+    const xStrides = (0, _tfjsCore.util).computeStrides(x.shape);
+    const resultSize = (0, _tfjsCore.util).sizeFromShape(outShape);
+    const resultRank = outShape.length;
+    const resultStrides = (0, _tfjsCore.util).computeStrides(outShape);
+    const resVals = (0, _tfjsCore.util).getTypedArrayFromDType(x.dtype, resultSize);
+    if (constantValue !== 0) resVals.fill(constantValue);
+    for(let i = 0; i < xSize; i++){
+        const coords = (0, _tfjsCore.util).indexToLoc(i, xRank, xStrides);
+        const outCoords = coords.map((c, i)=>c + start[i]);
+        const outIndex = (0, _tfjsCore.util).locToIndex(outCoords, resultRank, resultStrides);
+        resVals[outIndex] = xVals[i];
+    }
+    const outId = backend.write(resVals, outShape, x.dtype);
+    return {
+        dataId: outId,
+        shape: outShape,
+        dtype: x.dtype
+    };
+}
+const padV2Config = {
+    kernelName: (0, _tfjsCore.PadV2),
+    backendName: "cpu",
+    kernelFunc: padV2
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jx4g8":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "powImpl", ()=>powImpl);
+parcelHelpers.export(exports, "pow", ()=>pow);
+parcelHelpers.export(exports, "powConfig", ()=>powConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _binaryImpl = require("../utils/binary_impl");
+var _binaryUtils = require("../utils/binary_utils");
+const powImpl = (0, _binaryImpl.createSimpleBinaryKernelImpl)((a, b)=>Math.pow(a, b));
+const pow = (0, _binaryUtils.binaryKernelFunc)((0, _tfjsCore.Pow), powImpl);
+const powConfig = {
+    kernelName: (0, _tfjsCore.Pow),
+    backendName: "cpu",
+    kernelFunc: pow
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/binary_impl":"7WPlP","../utils/binary_utils":"dUQGx","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4jEHO":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2022 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "raggedGather", ()=>raggedGather);
+parcelHelpers.export(exports, "raggedGatherConfig", ()=>raggedGatherConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _raggedGatherImpl = require("./RaggedGather_impl");
+function raggedGather(args) {
+    const { inputs, backend, attrs } = args;
+    const { paramsNestedSplits, paramsDenseValues, indices } = inputs;
+    const { outputRaggedRank } = attrs;
+    const $paramsNestedSplits = paramsNestedSplits.map((t)=>backend.data.get(t.dataId).values);
+    const $paramsNestedSplitsShapes = paramsNestedSplits.map((t)=>t.shape);
+    const $paramsDenseValues = backend.data.get(paramsDenseValues.dataId).values;
+    const $indices = backend.data.get(indices.dataId).values;
+    const [outputNestedSplits, outputDenseValues, outputDenseValuesShape] = (0, _raggedGatherImpl.raggedGatherImpl)($paramsNestedSplits, $paramsNestedSplitsShapes, $paramsDenseValues, paramsDenseValues.shape, paramsDenseValues.dtype, $indices, indices.shape, outputRaggedRank);
+    const outputNestedSplitsTensors = outputNestedSplits.map((splits)=>backend.makeTensorInfo([
+            splits.length
+        ], "int32", splits));
+    const outputDenseValuesTensor = backend.makeTensorInfo(outputDenseValuesShape, paramsDenseValues.dtype, outputDenseValues);
+    return outputNestedSplitsTensors.concat([
+        outputDenseValuesTensor
+    ]);
+}
+const raggedGatherConfig = {
+    kernelName: (0, _tfjsCore.RaggedGather),
+    backendName: "cpu",
+    kernelFunc: raggedGather
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./RaggedGather_impl":"59HGn","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kFVpX":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2022 Google LLC.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "raggedRange", ()=>raggedRange);
+parcelHelpers.export(exports, "raggedRangeConfig", ()=>raggedRangeConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _raggedRangeImpl = require("./RaggedRange_impl");
+function raggedRange(args) {
+    const { inputs, backend } = args;
+    const { starts, limits, deltas } = inputs;
+    const $starts = backend.data.get(starts.dataId).values;
+    const $limits = backend.data.get(limits.dataId).values;
+    const $deltas = backend.data.get(deltas.dataId).values;
+    const [rtNestedSplitsData, rtDenseValuesData] = (0, _raggedRangeImpl.raggedRangeImpl)($starts, starts.shape, starts.dtype, $limits, limits.shape, $deltas, deltas.shape);
+    const rtNestedSplits = backend.makeTensorInfo([
+        rtNestedSplitsData.length
+    ], "int32", rtNestedSplitsData);
+    const rtDenseValues = backend.makeTensorInfo([
+        rtDenseValuesData.length
+    ], starts.dtype, rtDenseValuesData);
+    return [
+        rtNestedSplits,
+        rtDenseValues
+    ];
+}
+const raggedRangeConfig = {
+    kernelName: (0, _tfjsCore.RaggedRange),
+    backendName: "cpu",
+    kernelFunc: raggedRange
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./RaggedRange_impl":"l2R3s","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bJlTR":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2022 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "raggedTensorToTensor", ()=>raggedTensorToTensor);
+parcelHelpers.export(exports, "raggedTensorToTensorConfig", ()=>raggedTensorToTensorConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _raggedTensorToTensorImpl = require("./RaggedTensorToTensor_impl");
+function raggedTensorToTensor(args) {
+    const { inputs, backend, attrs } = args;
+    const { shape, values, defaultValue, rowPartitionTensors } = inputs;
+    const { rowPartitionTypes } = attrs;
+    const $shape = backend.data.get(shape.dataId).values;
+    const $values = backend.data.get(values.dataId).values;
+    const $defaultValue = backend.data.get(defaultValue.dataId).values;
+    const $rowPartitionValues = rowPartitionTensors.map((t)=>backend.data.get(t.dataId).values);
+    const rowPartitionValuesShapes = rowPartitionTensors.map((t)=>t.shape);
+    const [outputShape, output] = (0, _raggedTensorToTensorImpl.raggedTensorToTensorImpl)($shape, shape.shape, $values, values.shape, values.dtype, $defaultValue, defaultValue.shape, $rowPartitionValues, rowPartitionValuesShapes, rowPartitionTypes);
+    return backend.makeTensorInfo(outputShape, values.dtype, output);
+}
+const raggedTensorToTensorConfig = {
+    kernelName: (0, _tfjsCore.RaggedTensorToTensor),
+    backendName: "cpu",
+    kernelFunc: raggedTensorToTensor
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./RaggedTensorToTensor_impl":"jDwSG","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1Dov9":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "range", ()=>range);
+parcelHelpers.export(exports, "rangeConfig", ()=>rangeConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _rangeImpl = require("./Range_impl");
+function range(args) {
+    const { backend, attrs } = args;
+    const { start, stop, dtype, step } = attrs;
+    const values = (0, _rangeImpl.rangeImpl)(start, stop, step, dtype);
+    return backend.makeTensorInfo([
+        values.length
+    ], dtype, values);
+}
+const rangeConfig = {
+    kernelName: (0, _tfjsCore.Range),
+    backendName: "cpu",
+    kernelFunc: range
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Range_impl":"gJNJp","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3BhEV":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "reciprocal", ()=>reciprocal);
+parcelHelpers.export(exports, "reciprocalConfig", ()=>reciprocalConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const reciprocal = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Reciprocal), (xi)=>1 / xi);
+const reciprocalConfig = {
+    kernelName: (0, _tfjsCore.Reciprocal),
+    backendName: "cpu",
+    kernelFunc: reciprocal
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kU0RB":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "resizeBilinear", ()=>resizeBilinear);
+parcelHelpers.export(exports, "resizeBilinearConfig", ()=>resizeBilinearConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function resizeBilinear(args) {
+    const { inputs, backend, attrs } = args;
+    const { images } = inputs;
+    const { alignCorners, halfPixelCenters, size } = attrs;
+    (0, _cpuUtil.assertNotComplex)(images, "resizeBilinear");
+    const imagesStrides = (0, _tfjsCore.util).computeStrides(images.shape);
+    const [newHeight, newWidth] = size;
+    const [batch, oldHeight, oldWidth, numChannels] = images.shape;
+    const xValues = backend.data.get(images.dataId).values;
+    const result = new Float32Array((0, _tfjsCore.util).sizeFromShape([
+        batch,
+        newHeight,
+        newWidth,
+        numChannels
+    ]));
+    const effectiveInputSize = [
+        alignCorners && newHeight > 1 ? oldHeight - 1 : oldHeight,
+        alignCorners && newWidth > 1 ? oldWidth - 1 : oldWidth
+    ];
+    const effectiveOutputSize = [
+        alignCorners && newHeight > 1 ? newHeight - 1 : newHeight,
+        alignCorners && newWidth > 1 ? newWidth - 1 : newWidth
+    ];
+    let outputIdx = 0;
+    const effectiveRowSizeRatio = effectiveInputSize[0] / effectiveOutputSize[0];
+    const effectiveColSizeRatio = effectiveInputSize[1] / effectiveOutputSize[1];
+    for(let b = 0; b < batch; b++)for(let r = 0; r < newHeight; r++){
+        let sourceFracRow;
+        if (halfPixelCenters) sourceFracRow = effectiveRowSizeRatio * (r + 0.5) - 0.5;
+        else sourceFracRow = effectiveRowSizeRatio * r;
+        const sourceRowFloor = Math.max(0, Math.floor(sourceFracRow));
+        const rowFrac = sourceFracRow - sourceRowFloor;
+        const sourceRowCeil = Math.min(oldHeight - 1, Math.ceil(sourceFracRow));
+        const topRowOffset = b * imagesStrides[0] + sourceRowFloor * imagesStrides[1];
+        const botRowOffset = b * imagesStrides[0] + sourceRowCeil * imagesStrides[1];
+        for(let c = 0; c < newWidth; c++){
+            let sourceFracCol;
+            if (halfPixelCenters) sourceFracCol = effectiveColSizeRatio * (c + 0.5) - 0.5;
+            else sourceFracCol = effectiveColSizeRatio * c;
+            const sourceColFloor = Math.max(0, Math.floor(sourceFracCol));
+            const colFrac = sourceFracCol - sourceColFloor;
+            const sourceColCeil = Math.min(oldWidth - 1, Math.ceil(sourceFracCol));
+            const topLeftOffest = topRowOffset + sourceColFloor * imagesStrides[2];
+            const botLeftOffset = botRowOffset + sourceColFloor * imagesStrides[2];
+            const topRightOffset = topRowOffset + sourceColCeil * imagesStrides[2];
+            const botRightOffest = botRowOffset + sourceColCeil * imagesStrides[2];
+            for(let d = 0; d < numChannels; d++){
+                // Begin shader.
+                // Compute the fractional index of the source.
+                const topLeft = xValues[topLeftOffest + d];
+                const bottomLeft = xValues[botLeftOffset + d];
+                const topRight = xValues[topRightOffset + d];
+                const bottomRight = xValues[botRightOffest + d];
+                const top = topLeft + (topRight - topLeft) * colFrac;
+                const bottom = bottomLeft + (bottomRight - bottomLeft) * colFrac;
+                const newValue = top + (bottom - top) * rowFrac;
+                result[outputIdx++] = newValue;
+            }
+        }
+    }
+    return backend.makeTensorInfo([
+        batch,
+        newHeight,
+        newWidth,
+        numChannels
+    ], "float32", result);
+}
+const resizeBilinearConfig = {
+    kernelName: (0, _tfjsCore.ResizeBilinear),
+    backendName: "cpu",
+    kernelFunc: resizeBilinear
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"76Mq3":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "resizeBilinearGrad", ()=>resizeBilinearGrad);
+parcelHelpers.export(exports, "resizeBilinearGradConfig", ()=>resizeBilinearGradConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function resizeBilinearGrad(args) {
+    const { inputs, backend, attrs } = args;
+    const { images, dy } = inputs;
+    const { alignCorners } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        dy,
+        images
+    ], "resizeBilinearGrad");
+    const imagesStrides = (0, _tfjsCore.util).computeStrides(images.shape);
+    const [batch, xHeight, xWidth, depth] = images.shape;
+    const [, yHeight, yWidth] = dy.shape;
+    const output = new Float32Array(batch * xHeight * xWidth * depth);
+    // In the backwards pass, we want to find the pixels that were generated
+    // for each pixel in the input image the forward pass and add the
+    // corresponding coefficient from dy to the gradient (with some
+    // interpolation).
+    const effectiveXSize = [
+        alignCorners && yHeight > 1 ? xHeight - 1 : xHeight,
+        alignCorners && yWidth > 1 ? xWidth - 1 : xWidth
+    ];
+    const effectiveYSize = [
+        alignCorners && yHeight > 1 ? yHeight - 1 : yHeight,
+        alignCorners && yWidth > 1 ? yWidth - 1 : yWidth
+    ];
+    const heightScale = effectiveXSize[0] / effectiveYSize[0];
+    const widthScale = effectiveXSize[1] / effectiveYSize[1];
+    // Reference implementation
+    // tslint:disable-next-line:max-line-length
+    // https://github.com/tensorflow/tensorflow/blob/3039375c86a5bbc9610c7725dcaa95d635f87ba2/tensorflow/core/kernels/resize_bilinear_op.cc#L275
+    const dyValues = backend.data.get(dy.dataId).values;
+    let offset = 0;
+    for(let b = 0; b < batch; b++){
+        const bOffset = b * imagesStrides[0];
+        for(let r = 0; r < yHeight; r++){
+            const dxR = r * heightScale;
+            const topDxRIndex = Math.floor(dxR);
+            const bottomDxRIndex = Math.min(Math.ceil(dxR), xHeight - 1);
+            const topDxROffset = bOffset + topDxRIndex * imagesStrides[1];
+            const bottomDxROffset = bOffset + bottomDxRIndex * imagesStrides[1];
+            const dxRLerp = dxR - topDxRIndex;
+            const inverseDxRLerp = 1.0 - dxRLerp;
+            for(let c = 0; c < yWidth; c++){
+                const dxC = c * widthScale;
+                const leftDxCIndex = Math.floor(dxC);
+                const rightDxCIndex = Math.min(Math.ceil(dxC), xWidth - 1);
+                const dxCLerp = dxC - leftDxCIndex;
+                const inverseDxCLerp = 1.0 - dxCLerp;
+                const topLeftRCOffset = topDxROffset + leftDxCIndex * imagesStrides[2];
+                const topRightRCOffset = topDxROffset + rightDxCIndex * imagesStrides[2];
+                const bottomLeftRCOffset = bottomDxROffset + leftDxCIndex * imagesStrides[2];
+                const bottomRightRCOffset = bottomDxROffset + rightDxCIndex * imagesStrides[2];
+                const inverseDxRLerpTimesInverseDxCLerp = inverseDxRLerp * inverseDxCLerp;
+                const inverseDxRLerpTimesDxCLerp = inverseDxRLerp * dxCLerp;
+                const dxRLerpTimesInverseDxCLerp = dxRLerp * inverseDxCLerp;
+                const dxRLerpTimesDxCLerp = dxRLerp * dxCLerp;
+                for(let d = 0; d < depth; d++){
+                    const dyVal = dyValues[offset++];
+                    output[topLeftRCOffset + d] += dyVal * inverseDxRLerpTimesInverseDxCLerp;
+                    output[topRightRCOffset + d] += dyVal * inverseDxRLerpTimesDxCLerp;
+                    output[bottomLeftRCOffset + d] += dyVal * dxRLerpTimesInverseDxCLerp;
+                    output[bottomRightRCOffset + d] += dyVal * dxRLerpTimesDxCLerp;
+                }
+            }
+        }
+    }
+    return backend.makeTensorInfo([
+        batch,
+        xWidth,
+        xHeight,
+        depth
+    ], "float32", output);
+}
+const resizeBilinearGradConfig = {
+    kernelName: (0, _tfjsCore.ResizeBilinearGrad),
+    backendName: "cpu",
+    kernelFunc: resizeBilinearGrad
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5c1lG":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "resizeNearestNeighbor", ()=>resizeNearestNeighbor);
+parcelHelpers.export(exports, "resizeNearestNeighborConfig", ()=>resizeNearestNeighborConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function resizeNearestNeighbor(args) {
+    const { inputs, backend, attrs } = args;
+    const { images } = inputs;
+    const { alignCorners, halfPixelCenters, size } = attrs;
+    (0, _cpuUtil.assertNotComplex)(images, "resizeNearestNeighbor");
+    const imagesStrides = (0, _tfjsCore.util).computeStrides(images.shape);
+    const [newHeight, newWidth] = size;
+    const [batch, oldHeight, oldWidth, numChannels] = images.shape;
+    const xValues = backend.data.get(images.dataId).values;
+    const output = new Float32Array(batch * newHeight * newWidth * numChannels);
+    const effectiveInputSize = [
+        alignCorners && newHeight > 1 ? oldHeight - 1 : oldHeight,
+        alignCorners && newWidth > 1 ? oldWidth - 1 : oldWidth
+    ];
+    const effectiveOutputSize = [
+        alignCorners && newHeight > 1 ? newHeight - 1 : newHeight,
+        alignCorners && newWidth > 1 ? newWidth - 1 : newWidth
+    ];
+    const effectiveRowSizeRatio = effectiveInputSize[0] / effectiveOutputSize[0];
+    const effectiveColSizeRatio = effectiveInputSize[1] / effectiveOutputSize[1];
+    let outputOffset = 0;
+    for(let b = 0; b < batch; b++){
+        const batchOffset = b * imagesStrides[0];
+        for(let r = 0; r < newHeight; r++){
+            const sourceFracRow = halfPixelCenters ? effectiveRowSizeRatio * (r + 0.5) : effectiveRowSizeRatio * r;
+            let sourceNearestRow = Math.min(oldHeight - 1, alignCorners ? Math.round(sourceFracRow) : Math.floor(sourceFracRow));
+            if (halfPixelCenters) sourceNearestRow = Math.max(0, sourceNearestRow);
+            const rowOffset = batchOffset + sourceNearestRow * imagesStrides[1];
+            for(let c = 0; c < newWidth; c++){
+                const sourceFracCol = halfPixelCenters ? effectiveColSizeRatio * (c + 0.5) : effectiveColSizeRatio * c;
+                let sourceNearestCol = Math.min(oldWidth - 1, alignCorners ? Math.round(sourceFracCol) : Math.floor(sourceFracCol));
+                if (halfPixelCenters) sourceNearestCol = Math.max(0, sourceNearestCol);
+                const colOffset = rowOffset + sourceNearestCol * imagesStrides[2];
+                for(let d = 0; d < numChannels; d++){
+                    // Begin shader.
+                    // Compute the fractional index of the source.
+                    const newVal = xValues[colOffset + d];
+                    output[outputOffset++] = newVal;
+                }
+            }
+        }
+    }
+    return backend.makeTensorInfo([
+        batch,
+        newHeight,
+        newWidth,
+        numChannels
+    ], images.dtype, output);
+}
+const resizeNearestNeighborConfig = {
+    kernelName: (0, _tfjsCore.ResizeNearestNeighbor),
+    backendName: "cpu",
+    kernelFunc: resizeNearestNeighbor
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4hhu6":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "resizeNearestNeighborGrad", ()=>resizeNearestNeighborGrad);
+parcelHelpers.export(exports, "resizeNearestNeighborGradConfig", ()=>resizeNearestNeighborGradConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function resizeNearestNeighborGrad(args) {
+    const { inputs, backend, attrs } = args;
+    const { images, dy } = inputs;
+    const { alignCorners } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        dy,
+        images
+    ], "resizeNearestNeighborGrad");
+    const imagesStrides = (0, _tfjsCore.util).computeStrides(images.shape);
+    const dyStrides = (0, _tfjsCore.util).computeStrides(dy.shape);
+    const [batch, xHeight, xWidth, depth] = images.shape;
+    const [, yHeight, yWidth] = dy.shape;
+    const output = new Float32Array(batch * xHeight * xWidth * depth);
+    const dyValues = backend.data.get(dy.dataId).values;
+    // In the backwards pass, we want to find the pixels that were generated
+    // for each pixel in the input image the forward pass
+    const effectiveXSize = [
+        alignCorners && yHeight > 1 ? xHeight - 1 : xHeight,
+        alignCorners && yWidth > 1 ? xWidth - 1 : xWidth
+    ];
+    const effectiveYSize = [
+        alignCorners && yHeight > 1 ? yHeight - 1 : yHeight,
+        alignCorners && yWidth > 1 ? yWidth - 1 : yWidth
+    ];
+    const heightScale = effectiveXSize[0] / effectiveYSize[0];
+    const widthScale = effectiveXSize[1] / effectiveYSize[1];
+    const invHeightScale = 1 / heightScale;
+    const invWidthScale = 1 / widthScale;
+    // This defines the size of the window of values around a particular
+    // index in dy that we want to search for contributions to dx.
+    const winHeight = Math.ceil(invHeightScale) * 2 + 2;
+    const winWidth = Math.ceil(invWidthScale) * 2 + 2;
+    // Loop over the output space.
+    for(let b = 0; b < batch; b++){
+        const batchOffset = b * imagesStrides[0];
+        for(let r = 0; r < xHeight; r++){
+            const rowOffset = batchOffset + r * imagesStrides[1];
+            // Compute bounds for where in dy we will look
+            const startRLerp = Math.floor(r * invHeightScale);
+            const startDyR = Math.floor(startRLerp - winHeight / 2);
+            for(let c = 0; c < xWidth; c++){
+                const colOffset = rowOffset + c * imagesStrides[2];
+                // Compute bounds for where in dy we will look
+                const startCLerp = Math.floor(c * invWidthScale);
+                const startDyC = Math.floor(startCLerp - winWidth / 2);
+                for(let d = 0; d < depth; d++){
+                    let accum = 0;
+                    // loop over dy
+                    for(let dyRIndex = 0; dyRIndex < winHeight; dyRIndex++){
+                        const dyR = dyRIndex + startDyR;
+                        // Guard against the window exceeding the bounds of dy
+                        if (dyR < 0 || dyR >= yHeight) continue;
+                        const dyROffset = batchOffset + dyR * dyStrides[1];
+                        const sourceFracRow = dyR * heightScale;
+                        const sourceNearestRow = Math.min(xHeight - 1, alignCorners ? Math.round(sourceFracRow) : Math.floor(sourceFracRow));
+                        if (r !== sourceNearestRow) continue;
+                        for(let dyCIndex = 0; dyCIndex < winWidth; dyCIndex++){
+                            const dyC = dyCIndex + startDyC;
+                            // Guard against the window exceeding the bounds of dy
+                            if (dyC < 0 || dyC >= yWidth) continue;
+                            const dyCOffset = dyROffset + dyC * dyStrides[2];
+                            const sourceFracCol = dyC * widthScale;
+                            const sourceNearestCol = Math.min(xWidth - 1, alignCorners ? Math.round(sourceFracCol) : Math.floor(sourceFracCol));
+                            if (c === sourceNearestCol) accum += dyValues[dyCOffset + d];
+                        }
+                    }
+                    output[colOffset + d] = accum;
+                }
+            }
+        }
+    }
+    return backend.makeTensorInfo(images.shape, images.dtype, output);
+}
+const resizeNearestNeighborGradConfig = {
+    kernelName: (0, _tfjsCore.ResizeNearestNeighborGrad),
+    backendName: "cpu",
+    kernelFunc: resizeNearestNeighborGrad
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"ff3xk":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "reverse", ()=>reverse);
+parcelHelpers.export(exports, "reverseConfig", ()=>reverseConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _identity = require("./Identity");
+function reverse(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { dims } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "reverse");
+    const xRank = x.shape.length;
+    const $dims = (0, _tfjsCore.util).parseAxisParam(dims, x.shape);
+    if (xRank === 0) return (0, _identity.identity)({
+        inputs: {
+            x
+        },
+        backend
+    });
+    const outBuf = new (0, _tfjsCore.TensorBuffer)(x.shape, x.dtype);
+    const xBuf = backend.bufferSync(x);
+    for(let i = 0; i < outBuf.size; i++){
+        const outLoc = outBuf.indexToLoc(i);
+        const inLoc = outLoc.slice();
+        $dims.forEach((d)=>inLoc[d] = x.shape[d] - 1 - inLoc[d]);
+        outBuf.set(xBuf.get(...inLoc), ...outLoc);
+    }
+    return backend.makeTensorInfo(outBuf.shape, outBuf.dtype, outBuf.values);
+}
+const reverseConfig = {
+    kernelName: (0, _tfjsCore.Reverse),
+    backendName: "cpu",
+    kernelFunc: reverse
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Identity":"btREJ","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"d9nWG":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "rotateWithOffsetConfig", ()=>rotateWithOffsetConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+const rotateWithOffsetConfig = {
+    kernelName: (0, _tfjsCore.RotateWithOffset),
+    backendName: "cpu",
+    kernelFunc: ({ inputs, attrs, backend })=>{
+        const { image } = inputs;
+        const { radians, fillValue, center } = attrs;
+        const cpuBackend = backend;
+        const output = (0, _tfjsCore.util).getTypedArrayFromDType(image.dtype, (0, _tfjsCore.util).sizeFromShape(image.shape));
+        const [batch, imageHeight, imageWidth, numChannels] = image.shape;
+        const [centerX, centerY] = (0, _tfjsCore.backend_util).getImageCenter(center, imageHeight, imageWidth);
+        const fullOpacityValue = 255;
+        const sinFactor = Math.sin(radians);
+        const cosFactor = Math.cos(radians);
+        const imageVals = cpuBackend.data.get(image.dataId).values;
+        for(let batchIdx = 0; batchIdx < batch; batchIdx++){
+            const batchOffset = batchIdx * imageWidth * imageHeight * numChannels;
+            for(let row = 0; row < imageHeight; row++){
+                const rowOffset = row * (imageWidth * numChannels);
+                for(let col = 0; col < imageWidth; col++){
+                    const colOffset = col * numChannels;
+                    for(let channel = 0; channel < numChannels; channel++){
+                        const coords = [
+                            batch,
+                            row,
+                            col,
+                            channel
+                        ];
+                        const x = coords[2];
+                        const y = coords[1];
+                        // coordX/coordY are the result of rotating and translating x/y.
+                        let coordX = (x - centerX) * cosFactor - (y - centerY) * sinFactor;
+                        let coordY = (x - centerX) * sinFactor + (y - centerY) * cosFactor;
+                        coordX = Math.round(coordX + centerX);
+                        coordY = Math.round(coordY + centerY);
+                        let outputValue = fillValue;
+                        if (typeof fillValue !== "number") {
+                            if (channel === 3) outputValue = fullOpacityValue;
+                            else outputValue = fillValue[channel];
+                        }
+                        // If the coordinate position falls within the image boundaries...
+                        if (coordX >= 0 && coordX < imageWidth && coordY >= 0 && coordY < imageHeight) {
+                            // set the output to the image value at the coordinate position.
+                            const rotatedRowOffset = coordY * (imageWidth * numChannels);
+                            const rotatedColOffset = coordX * numChannels;
+                            const imageIdx = batchOffset + rotatedRowOffset + rotatedColOffset + channel;
+                            outputValue = imageVals[imageIdx];
+                        }
+                        const outIdx = batchOffset + rowOffset + colOffset + channel;
+                        output[outIdx] = outputValue;
+                    }
+                }
+            }
+        }
+        const dataId = cpuBackend.write(output, image.shape, image.dtype);
+        return {
+            dataId,
+            shape: image.shape,
+            dtype: image.dtype
+        };
+    }
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gnp2v":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "round", ()=>round);
+parcelHelpers.export(exports, "roundConfig", ()=>roundConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const round = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Round), (xi)=>{
+    // The algorithm is based on banker's rounding.
+    const base = Math.floor(xi);
+    if (xi - base < 0.5) return Math.floor(xi);
+    else if (xi - base > 0.5) return Math.ceil(xi);
+    else {
+        if (base % 2.0 === 0.0) return base;
+        else return base + 1.0;
+    }
+});
+const roundConfig = {
+    kernelName: (0, _tfjsCore.Round),
+    backendName: "cpu",
+    kernelFunc: round
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bb9Cv":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "scatterNd", ()=>scatterNd);
+parcelHelpers.export(exports, "scatterNdConfig", ()=>scatterNdConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _scatterImpl = require("./Scatter_impl");
+function scatterNd(args) {
+    const { inputs, backend, attrs } = args;
+    const { indices, updates } = inputs;
+    const { shape } = attrs;
+    const { sliceRank, numUpdates, sliceSize, strides, outputSize } = (0, _tfjsCore.backend_util).calculateShapes(updates, indices, shape);
+    const sumDupeIndices = true;
+    const indicesBuf = backend.bufferSync(indices);
+    const updatesBuf = backend.bufferSync(updates);
+    const outBuf = (0, _scatterImpl.scatterImpl)(indicesBuf, updatesBuf, shape, outputSize, sliceSize, numUpdates, sliceRank, strides, 0 /* defaultValue */ , sumDupeIndices);
+    return backend.makeTensorInfo(shape, outBuf.dtype, outBuf.values);
+}
+const scatterNdConfig = {
+    kernelName: (0, _tfjsCore.ScatterNd),
+    backendName: "cpu",
+    kernelFunc: scatterNd
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Scatter_impl":"kMt6f","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"f7WfM":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2022 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "searchSorted", ()=>searchSorted);
+parcelHelpers.export(exports, "searchSortedConfig", ()=>searchSortedConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _searchSortedImpl = require("./SearchSorted_impl");
+function searchSorted(args) {
+    const { inputs, backend, attrs } = args;
+    const { sortedSequence, values } = inputs;
+    const { side } = attrs;
+    const $sortedSequence = backend.data.get(sortedSequence.dataId).values;
+    const $values = backend.data.get(values.dataId).values;
+    const output = (0, _searchSortedImpl.searchSortedImpl)($sortedSequence, $values, sortedSequence.shape[0], sortedSequence.shape[1], values.shape[1], side);
+    return backend.makeTensorInfo(values.shape, "int32", output);
+}
+const searchSortedConfig = {
+    kernelName: (0, _tfjsCore.SearchSorted),
+    backendName: "cpu",
+    kernelFunc: searchSorted
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./SearchSorted_impl":"2K7QF","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2K7QF":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2022 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "searchSortedImpl", ()=>searchSortedImpl);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function lowerBound(array, value) {
+    let left = 0;
+    let right = array.length;
+    let mid = 0;
+    while(left < right){
+        mid = Math.floor((left + right) / 2);
+        if (array[mid] < value) left = mid + 1;
+        else right = mid;
+    }
+    return right;
+}
+function upperBound(array, value) {
+    let left = 0;
+    let right = array.length;
+    let mid = 0;
+    while(left < right){
+        mid = Math.floor((left + right) / 2);
+        if (array[mid] <= value) left = mid + 1;
+        else right = mid;
+    }
+    return right;
+}
+function searchSortedImpl(sortedInputs, values, batchSize, numInputs, numValues, side) {
+    const output = (0, _tfjsCore.util).getArrayFromDType("int32", batchSize * numValues);
+    for(let b = 0; b < batchSize; ++b){
+        const sortedInputsSlice = sortedInputs.slice(b * numInputs, (b + 1) * numInputs);
+        const outputOffset = b * numValues;
+        for(let i = 0; i < numValues; ++i)output[outputOffset + i] = side === "left" ? lowerBound(sortedInputsSlice, values[i + outputOffset]) : upperBound(sortedInputsSlice, values[i + outputOffset]);
+    }
+    return output;
+}
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"lDXuK":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "select", ()=>select);
+parcelHelpers.export(exports, "selectConfig", ()=>selectConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+function select(args) {
+    const { inputs, backend } = args;
+    const { condition, t, e } = inputs;
+    (0, _cpuUtil.assertNotComplex)([
+        condition,
+        t,
+        e
+    ], "select");
+    const conditionRank = condition.shape.length;
+    const values = backend.data.get(condition.dataId).values;
+    const tValues = backend.data.get(t.dataId).values;
+    const eValues = backend.data.get(e.dataId).values;
+    const resultDtype = (0, _tfjsCore.upcastType)(t.dtype, e.dtype);
+    const newValues = (0, _tfjsCore.util).makeZerosTypedArray((0, _tfjsCore.util).sizeFromShape(t.shape), resultDtype);
+    let index = 0;
+    const offset = conditionRank === 0 || conditionRank > 1 || t.shape.length === 1 ? 1 : (0, _tfjsCore.util).sizeFromShape(t.shape.slice(1));
+    for(let i = 0; i < values.length; i++){
+        for(let j = 0; j < offset; j++)if (values[i] === 1) newValues[index++] = tValues[i];
+        else newValues[index++] = eValues[i];
+    }
+    return backend.makeTensorInfo(t.shape, resultDtype, newValues);
+}
+const selectConfig = {
+    kernelName: (0, _tfjsCore.Select),
+    backendName: "cpu",
+    kernelFunc: select
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cJWbo":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "selu", ()=>selu);
+parcelHelpers.export(exports, "seluConfig", ()=>seluConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const scaleAlpha = (0, _tfjsCore.backend_util).SELU_SCALEALPHA;
+const scale = (0, _tfjsCore.backend_util).SELU_SCALE;
+const selu = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Selu), (xi)=>{
+    if (xi >= 0) return scale * xi;
+    else return scaleAlpha * (Math.exp(xi) - 1);
+});
+const seluConfig = {
+    kernelName: (0, _tfjsCore.Selu),
+    backendName: "cpu",
+    kernelFunc: selu
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"erXNP":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sign", ()=>sign);
+parcelHelpers.export(exports, "signConfig", ()=>signConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const sign = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Sign), (xi)=>{
+    if (xi < 0) return -1;
+    else if (xi > 0) return 1;
+    else return 0;
+});
+const signConfig = {
+    kernelName: (0, _tfjsCore.Sign),
+    backendName: "cpu",
+    kernelFunc: sign
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"c9it7":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sin", ()=>sin);
+parcelHelpers.export(exports, "sinConfig", ()=>sinConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const sin = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Sin), (xi)=>Math.sin(xi));
+const sinConfig = {
+    kernelName: (0, _tfjsCore.Sin),
+    backendName: "cpu",
+    kernelFunc: sin
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9tr3d":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sinh", ()=>sinh);
+parcelHelpers.export(exports, "sinhConfig", ()=>sinhConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const sinh = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Sinh), (xi)=>Math.sinh(xi));
+const sinhConfig = {
+    kernelName: (0, _tfjsCore.Sinh),
+    backendName: "cpu",
+    kernelFunc: sinh
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bojBS":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "softplus", ()=>softplus);
+parcelHelpers.export(exports, "softplusConfig", ()=>softplusConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+// mirrors the implementation of tf.nn.softplus: https://goo.gl/vkcvwX
+// epsilon is the difference between 1.0 and the next representable float.
+// For a single precision 32 bit float this should be 2^-23, see:
+// https://math.byu.edu/~schow/work/IEEEFloatingPoint.htm
+const epsilon = 1.1920928955078125e-7;
+const threshold = Math.log(epsilon) + 2.0;
+const softplus = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Softplus), (xi)=>{
+    // Value above which exp(x) may overflow, but softplus(x) == x
+    // is within machine epsilon.
+    const tooLarge = xi > -threshold;
+    // Value below which exp(x) may underflow, but softplus(x) == exp(x)
+    // is within machine epsilon.
+    const tooSmall = xi < threshold;
+    const expX = Math.exp(xi);
+    let result;
+    if (tooSmall) result = expX;
+    else if (tooLarge) result = xi;
+    else result = Math.log(1.0 + expX);
+    return result;
+});
+const softplusConfig = {
+    kernelName: (0, _tfjsCore.Softplus),
+    backendName: "cpu",
+    kernelFunc: softplus
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cO9CD":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "spaceToBatchND", ()=>spaceToBatchND);
+parcelHelpers.export(exports, "spaceToBatchNDConfig", ()=>spaceToBatchNDConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _padV2 = require("./PadV2");
+var _reshape = require("./Reshape");
+var _transpose = require("./Transpose");
+function spaceToBatchND(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { blockShape, paddings } = attrs;
+    (0, _cpuUtil.assertNotComplex)([
+        x
+    ], "spaceToBatchND");
+    const prod = (0, _tfjsCore.util).sizeFromShape(blockShape);
+    const completePaddings = [
+        [
+            0,
+            0
+        ]
+    ];
+    completePaddings.push(...paddings);
+    for(let i = 1 + blockShape.length; i < x.shape.length; ++i)completePaddings.push([
+        0,
+        0
+    ]);
+    const paddedX = (0, _padV2.padV2Config).kernelFunc({
+        inputs: {
+            x
+        },
+        backend,
+        attrs: {
+            paddings: completePaddings,
+            constantValue: 0
+        }
+    });
+    const reshapedPaddedShape = (0, _tfjsCore.backend_util).getReshaped(paddedX.shape, blockShape, prod, false);
+    const permutedReshapedPaddedPermutation = (0, _tfjsCore.backend_util).getPermuted(reshapedPaddedShape.length, blockShape.length, false);
+    const flattenShape = (0, _tfjsCore.backend_util).getReshapedPermuted(paddedX.shape, blockShape, prod, false);
+    const reshapeInputs = {
+        x: paddedX
+    };
+    const reshapeAttrs = {
+        shape: reshapedPaddedShape
+    };
+    const paddedXReshaped = (0, _reshape.reshape)({
+        inputs: reshapeInputs,
+        backend,
+        attrs: reshapeAttrs
+    });
+    const transposeInputs = {
+        x: paddedXReshaped
+    };
+    const transposeAttrs = {
+        perm: permutedReshapedPaddedPermutation
+    };
+    const paddedXT = (0, _transpose.transpose)({
+        inputs: transposeInputs,
+        backend,
+        attrs: transposeAttrs
+    });
+    const resultReshapeInputs = {
+        x: paddedXT
+    };
+    const resultReshapeAttrs = {
+        shape: flattenShape
+    };
+    const result = (0, _reshape.reshape)({
+        inputs: resultReshapeInputs,
+        backend,
+        attrs: resultReshapeAttrs
+    });
+    backend.disposeIntermediateTensorInfo(paddedX);
+    backend.disposeIntermediateTensorInfo(paddedXReshaped);
+    backend.disposeIntermediateTensorInfo(paddedXT);
+    return result;
+}
+const spaceToBatchNDConfig = {
+    kernelName: (0, _tfjsCore.SpaceToBatchND),
+    backendName: "cpu",
+    kernelFunc: spaceToBatchND
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./PadV2":"dssNb","./Reshape":"9350i","./Transpose":"61ywv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cLZdR":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sparseFillEmptyRows", ()=>sparseFillEmptyRows);
+parcelHelpers.export(exports, "sparseFillEmptyRowsConfig", ()=>sparseFillEmptyRowsConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _sparseFillEmptyRowsImpl = require("./SparseFillEmptyRows_impl");
+function sparseFillEmptyRows(args) {
+    const { inputs, backend } = args;
+    const { indices, values, denseShape, defaultValue } = inputs;
+    if (denseShape.shape.length !== 1) throw new Error(`Dense shape must be a vector, saw:
+        ${denseShape.shape}`);
+    if (indices.shape.length !== 2) throw new Error(`Indices must be a matrix, saw:
+        ${indices.shape}`);
+    if (values.shape.length !== 1) throw new Error(`Values must be a vector, saw:
+        ${values.shape}`);
+    if (defaultValue.shape.length !== 0) throw new Error(`Default value must be a scalar, saw:
+        ${defaultValue.shape}`);
+    const $indices = backend.data.get(indices.dataId).values;
+    const $values = backend.data.get(values.dataId).values;
+    const $denseShape = backend.data.get(denseShape.dataId).values;
+    const $defaultValue = backend.data.get(defaultValue.dataId).values[0];
+    const [outputIndices, outputIndicesShape, outputValues, emptyRowIndicator, reverseIndexMap] = (0, _sparseFillEmptyRowsImpl.sparseFillEmptyRowsImpl)($indices, indices.shape, indices.dtype, $values, values.dtype, $denseShape, $defaultValue);
+    return [
+        backend.makeTensorInfo(outputIndicesShape, indices.dtype, outputIndices),
+        backend.makeTensorInfo([
+            outputIndicesShape[0]
+        ], values.dtype, outputValues),
+        backend.makeTensorInfo([
+            emptyRowIndicator.length
+        ], "bool", new Uint8Array(emptyRowIndicator.map((value)=>Number(value)))),
+        backend.makeTensorInfo([
+            reverseIndexMap.length
+        ], indices.dtype, new Int32Array(reverseIndexMap))
+    ];
+}
+const sparseFillEmptyRowsConfig = {
+    kernelName: (0, _tfjsCore.SparseFillEmptyRows),
+    backendName: "cpu",
+    kernelFunc: sparseFillEmptyRows
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./SparseFillEmptyRows_impl":"72f9e","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bVjgS":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sparseReshape", ()=>sparseReshape);
+parcelHelpers.export(exports, "sparseReshapeConfig", ()=>sparseReshapeConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _sparseReshapeImpl = require("./SparseReshape_impl");
+function sparseReshape(args) {
+    const { inputs, backend } = args;
+    const { inputIndices, inputShape, newShape } = inputs;
+    if (inputIndices.shape.length !== 2) throw new Error(`Input indices should be a matrix but received shape
+        ${inputIndices.shape}`);
+    if (inputShape.shape.length !== 1) throw new Error(`Input shape should be a vector but received shape
+        ${inputShape.shape}`);
+    if (newShape.shape.length !== 1) throw new Error(`Target shape should be a vector but received shape ${newShape.shape}`);
+    const $inputShape = Array.from(backend.data.get(inputShape.dataId).values);
+    const $inputIndices = backend.data.get(inputIndices.dataId).values;
+    const targetShape = Array.from(backend.data.get(newShape.dataId).values);
+    const [newIndices, indicesShape, outputShape] = (0, _sparseReshapeImpl.sparseReshapeImpl)($inputIndices, inputIndices.shape, inputIndices.dtype, $inputShape, targetShape);
+    return [
+        backend.makeTensorInfo(indicesShape, inputIndices.dtype, newIndices),
+        backend.makeTensorInfo([
+            outputShape.length
+        ], newShape.dtype, new Int32Array(outputShape))
+    ];
+}
+const sparseReshapeConfig = {
+    kernelName: (0, _tfjsCore.SparseReshape),
+    backendName: "cpu",
+    kernelFunc: sparseReshape
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./SparseReshape_impl":"ecdf6","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7zRqG":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sparseSegmentMean", ()=>sparseSegmentMean);
+parcelHelpers.export(exports, "sparseSegmentMeanConfig", ()=>sparseSegmentMeanConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _sparseSegmentReductionImpl = require("./SparseSegmentReduction_impl");
+function sparseSegmentMean(args) {
+    const { inputs, backend } = args;
+    const { data, indices, segmentIds } = inputs;
+    if (data.shape.length < 1) throw new Error(`Data should be at least 1 dimensional but received scalar`);
+    if (indices.shape.length !== 1) throw new Error(`Indices should be a vector but received shape
+          ${indices.shape}`);
+    if (segmentIds.shape.length !== 1) throw new Error(`Segment ids should be a vector but received shape
+          ${segmentIds.shape}`);
+    if (indices.shape[0] !== segmentIds.shape[0]) throw new Error(`segmentIds and indices should have same size.`);
+    const $data = backend.data.get(data.dataId).values;
+    const $indices = backend.data.get(indices.dataId).values;
+    const $segmentIds = backend.data.get(segmentIds.dataId).values;
+    const [outputData, outputDataShape] = (0, _sparseSegmentReductionImpl.sparseSegmentReductionImpl)($data, data.shape, data.dtype, $indices, $segmentIds, true);
+    return backend.makeTensorInfo(outputDataShape, data.dtype, outputData);
+}
+const sparseSegmentMeanConfig = {
+    kernelName: (0, _tfjsCore.SparseSegmentMean),
+    backendName: "cpu",
+    kernelFunc: sparseSegmentMean
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./SparseSegmentReduction_impl":"ie2pQ","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dMeLQ":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sparseSegmentSum", ()=>sparseSegmentSum);
+parcelHelpers.export(exports, "sparseSegmentSumConfig", ()=>sparseSegmentSumConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _sparseSegmentReductionImpl = require("./SparseSegmentReduction_impl");
+function sparseSegmentSum(args) {
+    const { inputs, backend } = args;
+    const { data, indices, segmentIds } = inputs;
+    if (data.shape.length < 1) throw new Error(`Data should be at least 1 dimensional but received scalar`);
+    if (indices.shape.length !== 1) throw new Error(`Indices should be a vector but received shape
+         ${indices.shape}`);
+    if (segmentIds.shape.length !== 1) throw new Error(`Segment ids should be a vector but received shape
+         ${segmentIds.shape}`);
+    if (indices.shape[0] !== segmentIds.shape[0]) throw new Error(`segmentIds and indices should have same size.`);
+    const $data = backend.data.get(data.dataId).values;
+    const $indices = backend.data.get(indices.dataId).values;
+    const $segmentIds = backend.data.get(segmentIds.dataId).values;
+    const [outputData, outputDataShape] = (0, _sparseSegmentReductionImpl.sparseSegmentReductionImpl)($data, data.shape, data.dtype, $indices, $segmentIds);
+    return backend.makeTensorInfo(outputDataShape, data.dtype, outputData);
+}
+const sparseSegmentSumConfig = {
+    kernelName: (0, _tfjsCore.SparseSegmentSum),
+    backendName: "cpu",
+    kernelFunc: sparseSegmentSum
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./SparseSegmentReduction_impl":"ie2pQ","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kfHsN":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sparseToDense", ()=>sparseToDense);
+parcelHelpers.export(exports, "sparseToDenseConfig", ()=>sparseToDenseConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _scatterImpl = require("./Scatter_impl");
+function sparseToDense(args) {
+    const { inputs, backend, attrs } = args;
+    const { sparseIndices, sparseValues, defaultValue } = inputs;
+    const { outputShape } = attrs;
+    const { sliceRank, numUpdates, sliceSize, strides, outputSize } = (0, _tfjsCore.backend_util).calculateShapes(sparseValues, sparseIndices, outputShape);
+    const sumDupeIndices = false;
+    const indicesBuf = backend.bufferSync(sparseIndices);
+    let outBuf;
+    switch(sparseValues.dtype){
+        case "bool":
+            {
+                const updatesBuf = backend.bufferSync(sparseValues);
+                const $defaultValue = Boolean(backend.data.get(defaultValue.dataId).values[0]);
+                outBuf = (0, _scatterImpl.scatterImpl)(indicesBuf, updatesBuf, outputShape, outputSize, sliceSize, numUpdates, sliceRank, strides, $defaultValue, sumDupeIndices);
+                break;
+            }
+        case "float32":
+            {
+                const updatesBuf = backend.bufferSync(sparseValues);
+                const $defaultValue = backend.data.get(defaultValue.dataId).values[0];
+                outBuf = (0, _scatterImpl.scatterImpl)(indicesBuf, updatesBuf, outputShape, outputSize, sliceSize, numUpdates, sliceRank, strides, $defaultValue, sumDupeIndices);
+                break;
+            }
+        case "int32":
+            {
+                const updatesBuf = backend.bufferSync(sparseValues);
+                const $defaultValue = backend.data.get(defaultValue.dataId).values[0];
+                outBuf = (0, _scatterImpl.scatterImpl)(indicesBuf, updatesBuf, outputShape, outputSize, sliceSize, numUpdates, sliceRank, strides, $defaultValue, sumDupeIndices);
+                break;
+            }
+        case "string":
+            {
+                const updatesBuf = backend.bufferSync(sparseValues);
+                const $defaultValue = (0, _tfjsCore.util).decodeString(backend.data.get(defaultValue.dataId).values[0]);
+                outBuf = (0, _scatterImpl.scatterImpl)(indicesBuf, updatesBuf, outputShape, outputSize, sliceSize, numUpdates, sliceRank, strides, $defaultValue, sumDupeIndices);
+                break;
+            }
+        default:
+            throw new Error(`Unsupported type ${sparseValues.dtype}`);
+    }
+    return backend.makeTensorInfo(outputShape, outBuf.dtype, outBuf.values);
+}
+const sparseToDenseConfig = {
+    kernelName: (0, _tfjsCore.SparseToDense),
+    backendName: "cpu",
+    kernelFunc: sparseToDense
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Scatter_impl":"kMt6f","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"j2Sbu":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "splitV", ()=>splitV);
+parcelHelpers.export(exports, "splitVConfig", ()=>splitVConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _slice = require("./Slice");
+function splitV(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { numOrSizeSplits, axis } = attrs;
+    const $axis = (0, _tfjsCore.util).parseAxisParam(axis, x.shape)[0];
+    const splitSizes = (0, _tfjsCore.backend_util).prepareSplitSize(x, numOrSizeSplits, $axis);
+    const begin = new Array(x.shape.length).fill(0);
+    const size = x.shape.slice();
+    return splitSizes.map((s)=>{
+        const sliceSize = [
+            ...size
+        ];
+        sliceSize[$axis] = s;
+        const sliceT = (0, _slice.slice)({
+            inputs: {
+                x
+            },
+            backend,
+            attrs: {
+                begin,
+                size: sliceSize
+            }
+        });
+        begin[$axis] += s;
+        return sliceT;
+    });
+}
+const splitVConfig = {
+    kernelName: (0, _tfjsCore.SplitV),
+    backendName: "cpu",
+    kernelFunc: splitV
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Slice":"9L9GN","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jjLIw":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "squareConfig", ()=>squareConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+const squareConfig = {
+    kernelName: (0, _tfjsCore.Square),
+    backendName: "cpu",
+    kernelFunc: ({ inputs, backend })=>{
+        const { x } = inputs;
+        const cpuBackend = backend;
+        (0, _cpuUtil.assertNotComplex)(x, "square");
+        const values = cpuBackend.data.get(x.dataId).values;
+        const newValues = new Float32Array(values.length);
+        for(let i = 0; i < values.length; ++i){
+            const value = values[i];
+            newValues[i] = value * value;
+        }
+        const dataId = cpuBackend.write(newValues, x.shape, x.dtype);
+        return {
+            dataId,
+            shape: x.shape,
+            dtype: x.dtype
+        };
+    }
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2cqHx":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "step", ()=>step);
+parcelHelpers.export(exports, "stepConfig", ()=>stepConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const step = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Step), (xi, attrs)=>{
+    const stepAttrs = attrs;
+    if (isNaN(xi)) return NaN;
+    else return xi > 0 ? 1 : stepAttrs.alpha;
+});
+const stepConfig = {
+    kernelName: (0, _tfjsCore.Step),
+    backendName: "cpu",
+    kernelFunc: step
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"l76iO":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "stridedSlice", ()=>stridedSlice);
+parcelHelpers.export(exports, "stridedSliceConfig", ()=>stridedSliceConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _reshape = require("./Reshape");
+var _slice = require("./Slice");
+var _stridedSliceImpl = require("./StridedSlice_impl");
+function stridedSlice(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { begin, end, strides, beginMask, endMask, ellipsisMask, newAxisMask, shrinkAxisMask } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "stridedSlice");
+    const { finalShapeSparse, finalShape, isIdentity, sliceDim0, isSimpleSlice, begin: $begin, end: $end, strides: $strides } = (0, _tfjsCore.slice_util).sliceInfo(x.shape, begin, end, strides, beginMask, endMask, ellipsisMask, newAxisMask, shrinkAxisMask);
+    let result;
+    // ref:
+    // https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/kernels/strided_slice_op.cc
+    if (isIdentity) // Optimization #1, slice is a no-op plus reshape
+    result = (0, _reshape.reshape)({
+        inputs: {
+            x
+        },
+        backend,
+        attrs: {
+            shape: finalShape
+        }
+    });
+    else if (sliceDim0 || isSimpleSlice) {
+        // Optimization #2, slice is memory contiguous (only occurs in dim 0)
+        (0, _tfjsCore.util).assert(x.shape.length >= 1, ()=>`Input must have rank at least 1, got: ${x.shape.length}`);
+        const size = (0, _tfjsCore.slice_util).computeOutShape($begin, $end, $strides);
+        // To tolerate begin[0] > end[0] (a 0-output slice), we min(begin, end).
+        const sliced = (0, _slice.slice)({
+            inputs: {
+                x
+            },
+            backend,
+            attrs: {
+                begin: $begin,
+                size
+            }
+        });
+        result = (0, _reshape.reshape)({
+            inputs: {
+                x: sliced
+            },
+            backend,
+            attrs: {
+                shape: finalShape
+            }
+        });
+        backend.disposeIntermediateTensorInfo(sliced);
+    } else {
+        const xBuf = backend.bufferSync(x);
+        const outBuf = (0, _stridedSliceImpl.stridedSliceImpl)(finalShapeSparse, xBuf, $strides, $begin);
+        result = backend.makeTensorInfo(finalShape, outBuf.dtype, outBuf.values);
+    }
+    return result;
+}
+const stridedSliceConfig = {
+    kernelName: (0, _tfjsCore.StridedSlice),
+    backendName: "cpu",
+    kernelFunc: stridedSlice
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Reshape":"9350i","./Slice":"9L9GN","./StridedSlice_impl":"kCJo9","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7Beq9":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "stringNGrams", ()=>stringNGrams);
+parcelHelpers.export(exports, "stringNGramsConfig", ()=>stringNGramsConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _stringNGramsImpl = require("./StringNGrams_impl");
+function stringNGrams(args) {
+    const { inputs, backend, attrs } = args;
+    const { separator, nGramWidths, leftPad, rightPad, padWidth, preserveShortSequences } = attrs;
+    const { data, dataSplits } = inputs;
+    const $data = backend.data.get(data.dataId).values;
+    const $dataSplits = backend.data.get(dataSplits.dataId).values;
+    const [nGrams, nGramsSplits] = (0, _stringNGramsImpl.stringNGramsImpl)($data, $dataSplits, separator, nGramWidths, leftPad, rightPad, padWidth, preserveShortSequences);
+    return [
+        backend.makeTensorInfo([
+            nGrams.length
+        ], "string", nGrams),
+        backend.makeTensorInfo(dataSplits.shape, "int32", nGramsSplits)
+    ];
+}
+const stringNGramsConfig = {
+    kernelName: (0, _tfjsCore.StringNGrams),
+    backendName: "cpu",
+    kernelFunc: stringNGrams
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./StringNGrams_impl":"3rAXp","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6TsmC":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "stringSplit", ()=>stringSplit);
+parcelHelpers.export(exports, "stringSplitConfig", ()=>stringSplitConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _stringSplitImpl = require("./StringSplit_impl");
+function stringSplit(args) {
+    const { inputs, backend, attrs } = args;
+    const { skipEmpty } = attrs;
+    const { input, delimiter } = inputs;
+    if (input.dtype !== "string") throw new Error("Input must be of datatype string");
+    if (input.shape.length !== 1) throw new Error(`Input must be a vector, got shape: ${input.shape}`);
+    if (delimiter.shape.length !== 0) throw new Error(`Delimiter must be a scalar, got shape: ${delimiter.shape}`);
+    const $input = backend.data.get(input.dataId).values;
+    const $delimiter = backend.data.get(delimiter.dataId).values[0];
+    const [indices, values, shape] = (0, _stringSplitImpl.stringSplitImpl)($input, $delimiter, skipEmpty);
+    const outputSize = values.length;
+    return [
+        backend.makeTensorInfo([
+            outputSize,
+            2
+        ], "int32", indices),
+        backend.makeTensorInfo([
+            outputSize
+        ], "string", values),
+        backend.makeTensorInfo([
+            2
+        ], "int32", new Int32Array(shape))
+    ];
+}
+const stringSplitConfig = {
+    kernelName: (0, _tfjsCore.StringSplit),
+    backendName: "cpu",
+    kernelFunc: stringSplit
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./StringSplit_impl":"8xmpZ","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"irRRx":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "stringToHashBucketFast", ()=>stringToHashBucketFast);
+parcelHelpers.export(exports, "stringToHashBucketFastConfig", ()=>stringToHashBucketFastConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _stringToHashBucketFastImpl = require("./StringToHashBucketFast_impl");
+function stringToHashBucketFast(args) {
+    const { inputs, backend, attrs } = args;
+    const { numBuckets } = attrs;
+    const { input } = inputs;
+    if (input.dtype !== "string") throw new Error("Input must be of datatype string");
+    if (numBuckets <= 0) throw new Error(`Number of buckets must be at least 1`);
+    const $input = backend.data.get(input.dataId).values;
+    const output = (0, _stringToHashBucketFastImpl.stringToHashBucketFastImpl)($input, numBuckets);
+    return backend.makeTensorInfo(input.shape, "int32", output);
+}
+const stringToHashBucketFastConfig = {
+    kernelName: (0, _tfjsCore.StringToHashBucketFast),
+    backendName: "cpu",
+    kernelFunc: stringToHashBucketFast
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./StringToHashBucketFast_impl":"6jwLv","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aMIl2":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "tan", ()=>tan);
+parcelHelpers.export(exports, "tanConfig", ()=>tanConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const tan = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Tan), (xi)=>Math.tan(xi));
+const tanConfig = {
+    kernelName: (0, _tfjsCore.Tan),
+    backendName: "cpu",
+    kernelFunc: tan
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fdqiG":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "tanh", ()=>tanh);
+parcelHelpers.export(exports, "tanhConfig", ()=>tanhConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _unaryUtils = require("../utils/unary_utils");
+const tanh = (0, _unaryUtils.unaryKernelFunc)((0, _tfjsCore.Tanh), (xi)=>Math.tanh(xi));
+const tanhConfig = {
+    kernelName: (0, _tfjsCore.Tanh),
+    backendName: "cpu",
+    kernelFunc: tanh
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../utils/unary_utils":"5johK","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jFIwa":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2022 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "tensorScatterUpdate", ()=>tensorScatterUpdate);
+parcelHelpers.export(exports, "tensorScatterUpdateConfig", ()=>tensorScatterUpdateConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _scatterImpl = require("./Scatter_impl");
+function tensorScatterUpdate(args) {
+    const { inputs, backend } = args;
+    const { tensor, indices, updates } = inputs;
+    const { sliceRank, numUpdates, sliceSize, strides, outputSize } = (0, _tfjsCore.backend_util).calculateShapes(updates, indices, tensor.shape);
+    const sumDupeIndices = false;
+    const indicesBuf = backend.bufferSync(indices);
+    const updatesBuf = backend.bufferSync(updates);
+    const tensorBuf = backend.bufferSync(tensor);
+    const outBuf = (0, _scatterImpl.scatterImpl)(indicesBuf, updatesBuf, tensor.shape, outputSize, sliceSize, numUpdates, sliceRank, strides, tensorBuf, sumDupeIndices);
+    return backend.makeTensorInfo(tensor.shape, outBuf.dtype, outBuf.values);
+}
+const tensorScatterUpdateConfig = {
+    kernelName: (0, _tfjsCore.TensorScatterUpdate),
+    backendName: "cpu",
+    kernelFunc: tensorScatterUpdate
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Scatter_impl":"kMt6f","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cYsKW":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "tile", ()=>tile);
+parcelHelpers.export(exports, "tileConfig", ()=>tileConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _tileImpl = require("./Tile_impl");
+function tile(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { reps } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "tile");
+    const outBuf = (0, _tileImpl.tileImpl)(backend.bufferSync(x), reps);
+    return backend.makeTensorInfo(outBuf.shape, outBuf.dtype, outBuf.values);
+}
+const tileConfig = {
+    kernelName: (0, _tfjsCore.Tile),
+    backendName: "cpu",
+    kernelFunc: tile
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Tile_impl":"7g2re","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9RDRk":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "topK", ()=>topK);
+parcelHelpers.export(exports, "topKConfig", ()=>topKConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _topKImpl = require("./TopK_impl");
+function topK(args) {
+    const { inputs, backend, attrs } = args;
+    const { x } = inputs;
+    const { k, sorted } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "topk");
+    const xVals = backend.data.get(x.dataId).values;
+    const [allTopKVals, allTopKIndices] = (0, _topKImpl.topKImpl)(xVals, x.shape, x.dtype, k, sorted);
+    return [
+        backend.makeTensorInfo(allTopKVals.shape, allTopKVals.dtype, allTopKVals.values),
+        backend.makeTensorInfo(allTopKIndices.shape, allTopKIndices.dtype, allTopKIndices.values)
+    ];
+}
+const topKConfig = {
+    kernelName: (0, _tfjsCore.TopK),
+    backendName: "cpu",
+    kernelFunc: topK
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./TopK_impl":"dl1sf","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hKZ0R":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "transform", ()=>transform);
+parcelHelpers.export(exports, "transformConfig", ()=>transformConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+function transform(args) {
+    const { inputs, attrs, backend } = args;
+    const { image, transforms } = inputs;
+    const { interpolation, fillMode, fillValue, outputShape } = attrs;
+    const [batch, imageHeight, imageWidth, numChannels] = image.shape;
+    const [outHeight, outWidth] = outputShape != null ? outputShape : [
+        imageHeight,
+        imageWidth
+    ];
+    const outShape = [
+        batch,
+        outHeight,
+        outWidth,
+        numChannels
+    ];
+    const inStrides = (0, _tfjsCore.util).computeStrides(image.shape);
+    const batchInStride = inStrides[0];
+    const rowInStride = inStrides[1];
+    const colInStride = inStrides[2];
+    const outStrides = (0, _tfjsCore.util).computeStrides(outShape);
+    const batchOutStride = outStrides[0];
+    const rowOutStride = outStrides[1];
+    const colOutStride = outStrides[2];
+    const outVals = (0, _tfjsCore.util).getTypedArrayFromDType(image.dtype, (0, _tfjsCore.util).sizeFromShape(outShape));
+    outVals.fill(fillValue);
+    const imageVals = backend.data.get(image.dataId).values;
+    const transformVals = backend.data.get(transforms.dataId).values;
+    // Ref TF implementation:
+    // https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/kernels/image/image_ops.h
+    for(let b = 0; b < batch; ++b){
+        const transform = transforms.shape[0] === 1 ? transformVals : transformVals.subarray(b * 8, b * 8 + 8);
+        for(let outY = 0; outY < outHeight; ++outY){
+            for(let outX = 0; outX < outWidth; ++outX)for(let channel = 0; channel < numChannels; ++channel){
+                let val;
+                const projection = transform[6] * outX + transform[7] * outY + 1;
+                if (projection === 0) continue;
+                const inX = (transform[0] * outX + transform[1] * outY + transform[2]) / projection;
+                const inY = (transform[3] * outX + transform[4] * outY + transform[5]) / projection;
+                const x = mapCoord(inX, imageWidth, fillMode);
+                const y = mapCoord(inY, imageHeight, fillMode);
+                switch(interpolation){
+                    case "nearest":
+                        val = nearestInterpolation(imageVals, imageHeight, imageWidth, batchInStride, rowInStride, colInStride, b, y, x, channel, fillValue);
+                        break;
+                    case "bilinear":
+                        val = bilinearInterpolation(imageVals, imageHeight, imageWidth, batchInStride, rowInStride, colInStride, b, y, x, channel, fillValue);
+                        break;
+                    default:
+                        throw new Error(`Error in Transform: Expect 'nearest' or ` + `'bilinear', but got ${interpolation}`);
+                }
+                const ind = b * batchOutStride + outY * rowOutStride + outX * colOutStride + channel;
+                outVals[ind] = val;
+            }
+        }
+        return backend.makeTensorInfo(outShape, image.dtype, outVals);
+    }
+    const dataId = backend.write(outVals, outShape, image.dtype);
+    return {
+        dataId,
+        shape: image.shape,
+        dtype: image.dtype
+    };
+}
+const transformConfig = {
+    kernelName: (0, _tfjsCore.Transform),
+    backendName: "cpu",
+    kernelFunc: transform
+};
+function mapCoord(outCoord, len, mode) {
+    switch(mode){
+        case "reflect":
+            return mapCoordReflect(outCoord, len);
+        case "wrap":
+            return mapCoordWrap(outCoord, len);
+        case "nearest":
+            return mapCoordNearest(outCoord, len);
+        case "constant":
+        default:
+            return mapCoordConstant(outCoord, len);
+    }
+}
+function mapCoordReflect(outCoord, len) {
+    // Reflect [abcd] to [dcba|abcd|dcba].
+    let inCoord = outCoord;
+    if (inCoord < 0) {
+        if (len <= 1) inCoord = 0;
+        else {
+            const sz2 = 2 * len;
+            if (inCoord < sz2) inCoord = sz2 * Math.trunc(-inCoord / sz2) + inCoord;
+            inCoord = inCoord < -len ? inCoord + sz2 : -inCoord - 1;
+        }
+    } else if (inCoord > len - 1) {
+        if (len <= 1) inCoord = 0;
+        else {
+            const sz2 = 2 * len;
+            inCoord -= sz2 * Math.trunc(inCoord / sz2);
+            if (inCoord >= len) inCoord = sz2 - inCoord - 1;
+        }
+    }
+    // clamp is necessary because when outCoord = 3.5 and len = 4,
+    // inCoord = 3.5 and will be rounded to 4 in nearest interpolation.
+    return (0, _tfjsCore.util).clamp(0, inCoord, len - 1);
+}
+function mapCoordWrap(outCoord, len) {
+    // Wrap [abcd] to [abcd|abcd|abcd].
+    let inCoord = outCoord;
+    if (inCoord < 0) {
+        if (len <= 1) inCoord = 0;
+        else {
+            const sz = len - 1;
+            inCoord += len * (Math.trunc(-inCoord / sz) + 1);
+        }
+    } else if (inCoord > len - 1) {
+        if (len <= 1) inCoord = 0;
+        else {
+            const sz = len - 1;
+            inCoord -= len * Math.trunc(inCoord / sz);
+        }
+    }
+    // clamp is necessary because when outCoord = -0.5 and len = 4,
+    // inCoord = 3.5 and will be rounded to 4 in nearest interpolation.
+    return (0, _tfjsCore.util).clamp(0, inCoord, len - 1);
+}
+function mapCoordConstant(outCoord, len) {
+    return outCoord;
+}
+function mapCoordNearest(outCoord, len) {
+    return (0, _tfjsCore.util).clamp(0, outCoord, len - 1);
+}
+function readWithFillValue(imageVals, imageHeight, imageWidth, batchStride, rowStride, colStride, batch, y, x, channel, fillValue) {
+    const ind = batch * batchStride + y * rowStride + x * colStride + channel;
+    if (0 <= y && y < imageHeight && 0 <= x && x < imageWidth) return imageVals[ind];
+    else return fillValue;
+}
+function nearestInterpolation(imageVals, imageHeight, imageWidth, batchStride, rowStride, colStride, batch, y, x, channel, fillValue) {
+    const $y = Math.round(y);
+    const $x = Math.round(x);
+    return readWithFillValue(imageVals, imageHeight, imageWidth, batchStride, rowStride, colStride, batch, $y, $x, channel, fillValue);
+}
+function bilinearInterpolation(imageVals, imageHeight, imageWidth, batchStride, rowStride, colStride, batch, y, x, channel, fillValue) {
+    const yFloor = Math.floor(y);
+    const xFloor = Math.floor(x);
+    const yCeil = yFloor + 1;
+    const xCeil = xFloor + 1;
+    // f(x, yFloor) = (xCeil - x) / (xCeil - xFloor) * f(xFloor, yFloor)
+    //               + (x - xFloor) / (xCeil - xFloor) * f(xCeil, yFloor)
+    const valueYFloor = (xCeil - x) * readWithFillValue(imageVals, imageHeight, imageWidth, batchStride, rowStride, colStride, batch, yFloor, xFloor, channel, fillValue) + (x - xFloor) * readWithFillValue(imageVals, imageHeight, imageWidth, batchStride, rowStride, colStride, batch, yFloor, xCeil, channel, fillValue);
+    // f(x, yCeil) = (xCeil - x) / (xCeil - xFloor) * f(xFloor, yCeil)
+    //             + (x - xFloor) / (xCeil - xFloor) * f(xCeil, yCeil)
+    const valueYCeil = (xCeil - x) * readWithFillValue(imageVals, imageHeight, imageWidth, batchStride, rowStride, colStride, batch, yCeil, xFloor, channel, fillValue) + (x - xFloor) * readWithFillValue(imageVals, imageHeight, imageWidth, batchStride, rowStride, colStride, batch, yCeil, xCeil, channel, fillValue);
+    // f(x, y) = (yCeil - y) / (yCeil - yFloor) * f(x, yFloor)
+    //         + (y - yFloor) / (yCeil - yFloor) * f(x, yCeil)
+    return (yCeil - y) * valueYFloor + (y - yFloor) * valueYCeil;
+}
+
+},{"@tensorflow/tfjs-core":"21Ftl","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9nca3":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "unique", ()=>unique);
+parcelHelpers.export(exports, "uniqueConfig", ()=>uniqueConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _uniqueImpl = require("./Unique_impl");
+function unique(args) {
+    const { inputs, attrs, backend } = args;
+    const { axis } = attrs;
+    const { x } = inputs;
+    (0, _cpuUtil.assertNotComplex)(x, "unique");
+    const values = backend.data.get(x.dataId).values;
+    const { outputValues, outputShape, indices } = (0, _uniqueImpl.uniqueImpl)(values, axis, x.shape, x.dtype);
+    return [
+        backend.makeTensorInfo(outputShape, x.dtype, outputValues),
+        backend.makeTensorInfo([
+            indices.length
+        ], "int32", indices)
+    ];
+}
+const uniqueConfig = {
+    kernelName: (0, _tfjsCore.Unique),
+    backendName: "cpu",
+    kernelFunc: unique
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Unique_impl":"gLexL","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iIwqM":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "unpack", ()=>unpack);
+parcelHelpers.export(exports, "unpackConfig", ()=>unpackConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _reshape = require("./Reshape");
+var _slice = require("./Slice");
+function unpack(args) {
+    const { inputs, backend, attrs } = args;
+    const { value } = inputs;
+    let { axis } = attrs;
+    if (axis < 0) axis += value.shape.length;
+    const valueRank = value.shape.length;
+    const num = value.shape[axis];
+    const outShape = new Array(valueRank - 1);
+    let outIndex = 0;
+    for(let i = 0; i < valueRank; i++)if (i !== axis) outShape[outIndex++] = value.shape[i];
+    const begin = new Array(valueRank).fill(0);
+    const size = value.shape.slice();
+    size[axis] = 1;
+    const res = new Array(num);
+    for(let i = 0; i < res.length; i++){
+        begin[axis] = i;
+        const tempRes = (0, _slice.slice)({
+            inputs: {
+                x: value
+            },
+            backend,
+            attrs: {
+                begin,
+                size
+            }
+        });
+        res[i] = (0, _reshape.reshape)({
+            inputs: {
+                x: tempRes
+            },
+            backend,
+            attrs: {
+                shape: outShape
+            }
+        });
+        backend.disposeIntermediateTensorInfo(tempRes);
+    }
+    return res;
+}
+const unpackConfig = {
+    kernelName: (0, _tfjsCore.Unpack),
+    backendName: "cpu",
+    kernelFunc: unpack
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","./Reshape":"9350i","./Slice":"9L9GN","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eWcTc":[function(require,module,exports) {
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "unsortedSegmentSum", ()=>unsortedSegmentSum);
+parcelHelpers.export(exports, "unsortedSegmentSumConfig", ()=>unsortedSegmentSumConfig);
+var _tfjsCore = require("@tensorflow/tfjs-core");
+var _cpuUtil = require("../cpu_util");
+var _cast = require("./Cast");
+var _equal = require("./Equal");
+var _expandDims = require("./ExpandDims");
+var _multiply = require("./Multiply");
+var _pack = require("./Pack");
+var _sum = require("./Sum");
+function unsortedSegmentSum(args) {
+    const { inputs, backend, attrs } = args;
+    const { x, segmentIds } = inputs;
+    const { numSegments } = attrs;
+    (0, _cpuUtil.assertNotComplex)(x, "unsortedSegmentSum");
+    const xRank = x.shape.length;
+    const segmentIdsRank = segmentIds.shape.length;
+    const res = [];
+    const intermediates = [];
+    // Reshape the segment id's so that they can be broadcast with
+    // x. The new shape should be [segmentIds.shape, 1, ..., 1]
+    const numIters = xRank - segmentIdsRank;
+    let $segmentIds = segmentIds;
+    for(let i = 0; i < numIters; ++i){
+        const expanded = (0, _expandDims.expandDims)({
+            inputs: {
+                input: $segmentIds
+            },
+            backend,
+            attrs: {
+                dim: i + 1
+            }
+        });
+        $segmentIds = expanded;
+        intermediates.push(expanded);
+    }
+    for(let i = 0; i < numSegments; ++i){
+        const scalarValue = (0, _tfjsCore.util).createScalarValue(i, "int32");
+        const segmentId = backend.makeTensorInfo([], "int32", scalarValue);
+        const mask = (0, _equal.equal)({
+            inputs: {
+                a: segmentId,
+                b: $segmentIds
+            },
+            backend
+        });
+        const maskCasted = (0, _cast.cast)({
+            inputs: {
+                x: mask
+            },
+            backend,
+            attrs: {
+                dtype: "float32"
+            }
+        });
+        const mul = (0, _multiply.multiply)({
+            inputs: {
+                a: maskCasted,
+                b: x
+            },
+            backend
+        });
+        const sumTensorInfo = (0, _sum.sum)({
+            inputs: {
+                x: mul
+            },
+            backend,
+            attrs: {
+                axis: 0,
+                keepDims: false
+            }
+        });
+        res.push(sumTensorInfo);
+        intermediates.push(segmentId);
+        intermediates.push(mask);
+        intermediates.push(maskCasted);
+        intermediates.push(mul);
+        intermediates.push(sumTensorInfo);
+    }
+    const result = (0, _pack.pack)({
+        inputs: res,
+        backend,
+        attrs: {
+            axis: 0
+        }
+    });
+    intermediates.forEach((t)=>backend.disposeIntermediateTensorInfo(t));
+    return result;
+}
+const unsortedSegmentSumConfig = {
+    kernelName: (0, _tfjsCore.UnsortedSegmentSum),
+    backendName: "cpu",
+    kernelFunc: unsortedSegmentSum
+};
+
+},{"@tensorflow/tfjs-core":"21Ftl","../cpu_util":"1l037","./Cast":"fAtIw","./Equal":"jK2O7","./ExpandDims":"4z77l","./Multiply":"FrRi2","./Pack":"3NDYm","./Sum":"6gbbV","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["8uLJa"], "8uLJa", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map

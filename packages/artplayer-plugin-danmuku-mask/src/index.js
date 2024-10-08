@@ -1,5 +1,6 @@
 import * as tf from '@tensorflow/tfjs-core';
 import '@tensorflow/tfjs-backend-webgl';
+import '@tensorflow/tfjs-backend-cpu';
 import * as bodySegmentation from '@tensorflow-models/body-segmentation';
 
 export default function artplayerPluginDanmukuMask(option = {}) {
@@ -12,80 +13,98 @@ export default function artplayerPluginDanmukuMask(option = {}) {
         let canvas = null;
         let ctx = null;
         let animationFrameId = null;
+        let isInitialized = false;
+
+        async function initTensorFlow() {
+            try {
+                await tf.setBackend('webgl');
+            } catch (e) {
+                console.warn('WebGL backend not available, falling back to CPU');
+                await tf.setBackend('cpu');
+            }
+        }
 
         async function initSegmenter() {
-            await tf.setBackend('webgl');
+            await initTensorFlow();
             const model = bodySegmentation.SupportedModels.MediaPipeSelfieSegmentation;
 
             const segmenterConfig = {
-                runtime: 'mediapipe', // or 'tfjs'
-                solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation',
+                runtime: 'mediapipe',
                 modelType: 'general',
+                solutionPath: option.solutionPath || 'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation',
+                modelSelection: option.modelSelection || 1,
+                smoothSegmentation: option.smoothSegmentation !== undefined ? option.smoothSegmentation : true,
+                minDetectionConfidence: option.minDetectionConfidence || 0.5,
+                minTrackingConfidence: option.minTrackingConfidence || 0.5,
+                selfieMode: option.selfieMode || false,
             };
 
-            segmenter = await bodySegmentation.createSegmenter(model, segmenterConfig);
+            try {
+                segmenter = await bodySegmentation.createSegmenter(model, segmenterConfig);
+                $danmuku.style.maskMode = 'alpha';
+                isInitialized = true;
+            } catch (error) {
+                console.error('Error initializing segmenter:', error);
+                isInitialized = false;
+            }
         }
 
         function createCanvas() {
             canvas = document.createElement('canvas');
             ctx = canvas.getContext('2d');
-            canvas.style.position = 'absolute';
-            canvas.style.top = '0';
-            canvas.style.left = '0';
-            canvas.style.width = '100%';
-            canvas.style.height = '100%';
-            canvas.style.pointerEvents = 'none';
-            canvas.style.opacity = '0';
+            Object.assign(canvas.style, {
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                pointerEvents: 'none',
+                opacity: '0',
+            });
             $player.appendChild(canvas);
         }
 
-        function makeWhiteTransparent(canvas) {
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        function makeWhiteTransparent(imageData) {
             const data = imageData.data;
             for (let i = 0; i < data.length; i += 4) {
                 if (data[i] > 250 && data[i + 1] > 250 && data[i + 2] > 250) {
                     data[i + 3] = 0;
                 }
             }
-            ctx.putImageData(imageData, 0, 0);
+            return imageData;
         }
 
         async function segmentBody() {
-            if ($video.paused || $video.ended) {
+            if (!isInitialized || $video.paused || $video.ended) {
                 animationFrameId = requestAnimationFrame(segmentBody);
                 return;
             }
 
             try {
-                canvas.width = art.width;
-                canvas.height = art.height;
+                canvas.width = $video.videoWidth;
+                canvas.height = $video.videoHeight;
 
                 const segmentation = await segmenter.segmentPeople($video);
 
-                if (!segmentation) {
+                if (!segmentation || segmentation.length === 0) {
                     animationFrameId = requestAnimationFrame(segmentBody);
                     return;
                 }
 
-                const foregroundColor = { r: 255, g: 255, b: 255, a: 255 };
-                const backgroundColor = { r: 0, g: 0, b: 0, a: 255 };
-                const drawContour = false;
-                const foregroundThreshold = 0.6;
+                const foregroundThreshold = option.foregroundThreshold || 0.6;
 
                 const mask = await bodySegmentation.toBinaryMask(
                     segmentation,
-                    foregroundColor,
-                    backgroundColor,
-                    drawContour,
+                    { r: 255, g: 255, b: 255, a: 255 },
+                    { r: 0, g: 0, b: 0, a: 255 },
+                    false,
                     foregroundThreshold,
                 );
 
-                const opacity = 1;
-                const maskBlurAmount = 1;
-                await bodySegmentation.drawMask(canvas, $video, mask, opacity, maskBlurAmount);
+                await bodySegmentation.drawMask(canvas, $video, mask, 1, 1);
 
-                makeWhiteTransparent(canvas);
-                $danmuku.style.webkitMaskImage = `url(${canvas.toDataURL()})`;
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                ctx.putImageData(makeWhiteTransparent(imageData), 0, 0);
                 $danmuku.style.maskImage = `url(${canvas.toDataURL()})`;
             } catch (error) {
                 console.error('Error in segmentBody:', error);
@@ -95,14 +114,12 @@ export default function artplayerPluginDanmukuMask(option = {}) {
         }
 
         async function startSegmentation() {
-            if (!segmenter) {
+            if (!isInitialized) {
                 await initSegmenter();
             }
-
             if (!canvas) {
                 createCanvas();
             }
-
             segmentBody();
         }
 
