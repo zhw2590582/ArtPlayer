@@ -66,6 +66,7 @@ const config = {
           collapsible: true,
           items: [
             { text: '🎉 弹幕库', link: '/plugin/danmuku' },
+            { text: '弹幕遮罩', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask' },
             { text: '视频广告', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads' },
             { text: 'Iframe 控制', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe' },
             { text: 'Hls 控制', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control' },

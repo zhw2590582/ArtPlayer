@@ -96,7 +96,7 @@ var art = new Artplayer({
 ## Plugins
 
 -   [artplayer-plugin-danmuku](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku)
--   [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask)
+-   [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) (WIP)
 -   [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) (WIP)
 -   [artplayer-plugin-iframe](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe)
 -   [artplayer-plugin-hls-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control)
