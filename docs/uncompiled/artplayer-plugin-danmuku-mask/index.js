@@ -247,6 +247,7 @@ function artplayerPluginDanmukuMask(option = {}) {
             segmentBody();
         }
         function stopSegmentation() {
+            $danmuku.style.maskImage = "none";
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = null;
