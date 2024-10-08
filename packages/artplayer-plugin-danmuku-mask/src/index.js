@@ -6,7 +6,7 @@ import * as bodySegmentation from '@tensorflow-models/body-segmentation';
 export default function artplayerPluginDanmukuMask(option = {}) {
     return (art) => {
         const {
-            template: { $player, $video, $danmuku },
+            template: { $video, $danmuku },
         } = art;
 
         let segmenter = null;
@@ -54,6 +54,7 @@ export default function artplayerPluginDanmukuMask(option = {}) {
 
             try {
                 segmenter = await bodySegmentation.createSegmenter(model, segmenterConfig);
+                console.log('Segmenter initialized:', segmenter);
                 isInitialized = true;
             } catch (error) {
                 console.error('Error initializing segmenter:', error);
@@ -74,16 +75,6 @@ export default function artplayerPluginDanmukuMask(option = {}) {
         function createCanvas() {
             canvas = document.createElement('canvas');
             ctx = canvas.getContext('2d');
-            Object.assign(canvas.style, {
-                position: 'absolute',
-                top: '0',
-                left: '0',
-                width: '100%',
-                height: '100%',
-                pointerEvents: 'none',
-                opacity: '0',
-            });
-            $player.appendChild(canvas);
         }
 
         function makeWhiteTransparent(imageData) {

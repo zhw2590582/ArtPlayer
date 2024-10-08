@@ -152,7 +152,7 @@ var _tfjsBackendCpu = require("@tensorflow/tfjs-backend-cpu");
 var _bodySegmentation = require("@tensorflow-models/body-segmentation");
 function artplayerPluginDanmukuMask(option = {}) {
     return (art)=>{
-        const { template: { $player, $video, $danmuku } } = art;
+        const { template: { $video, $danmuku } } = art;
         let segmenter = null;
         let canvas = null;
         let ctx = null;
@@ -173,8 +173,7 @@ function artplayerPluginDanmukuMask(option = {}) {
         async function initTensorFlow() {
             try {
                 await _tfjsCore.setBackend("webgl");
-                console.log("Using WebGL backend");
-            } catch (e) {
+            } catch (error) {
                 console.warn("WebGL backend not available, falling back to CPU");
                 await _tfjsCore.setBackend("cpu");
             }
@@ -194,8 +193,8 @@ function artplayerPluginDanmukuMask(option = {}) {
             };
             try {
                 segmenter = await _bodySegmentation.createSegmenter(model, segmenterConfig);
+                console.log("Segmenter initialized:", segmenter);
                 isInitialized = true;
-                console.log("Segmenter initialized successfully");
             } catch (error) {
                 console.error("Error initializing segmenter:", error);
                 isInitialized = false;
@@ -213,16 +212,6 @@ function artplayerPluginDanmukuMask(option = {}) {
         function createCanvas() {
             canvas = document.createElement("canvas");
             ctx = canvas.getContext("2d");
-            Object.assign(canvas.style, {
-                position: "absolute",
-                top: "0",
-                left: "0",
-                width: "100%",
-                height: "100%",
-                pointerEvents: "none",
-                opacity: "0"
-            });
-            $player.appendChild(canvas);
         }
         function makeWhiteTransparent(imageData) {
             const data = imageData.data;
