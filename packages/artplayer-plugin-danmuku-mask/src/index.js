@@ -15,9 +15,23 @@ export default function artplayerPluginDanmukuMask(option = {}) {
         let animationFrameId = null;
         let isInitialized = false;
 
+        const config = {
+            solutionPath: option.solutionPath || 'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation',
+            modelSelection: option.modelSelection || 1,
+            smoothSegmentation: option.smoothSegmentation !== undefined ? option.smoothSegmentation : true,
+            minDetectionConfidence: option.minDetectionConfidence || 0.5,
+            minTrackingConfidence: option.minTrackingConfidence || 0.5,
+            selfieMode: option.selfieMode || false,
+            drawContour: option.drawContour || false,
+            foregroundThreshold: option.foregroundThreshold || 0.5,
+            opacity: option.opacity || 1,
+            maskBlurAmount: option.maskBlurAmount || 3,
+        };
+
         async function initTensorFlow() {
             try {
                 await tf.setBackend('webgl');
+                console.log('Using WebGL backend');
             } catch (e) {
                 console.warn('WebGL backend not available, falling back to CPU');
                 await tf.setBackend('cpu');
@@ -31,22 +45,32 @@ export default function artplayerPluginDanmukuMask(option = {}) {
             const segmenterConfig = {
                 runtime: 'mediapipe',
                 modelType: 'general',
-                solutionPath: option.solutionPath || 'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation',
-                modelSelection: option.modelSelection || 1,
-                smoothSegmentation: option.smoothSegmentation !== undefined ? option.smoothSegmentation : true,
-                minDetectionConfidence: option.minDetectionConfidence || 0.5,
-                minTrackingConfidence: option.minTrackingConfidence || 0.5,
-                selfieMode: option.selfieMode || false,
+                solutionPath: config.solutionPath,
+                modelSelection: config.modelSelection,
+                smoothSegmentation: config.smoothSegmentation,
+                minDetectionConfidence: config.minDetectionConfidence,
+                minTrackingConfidence: config.minTrackingConfidence,
+                selfieMode: config.selfieMode,
             };
 
             try {
                 segmenter = await bodySegmentation.createSegmenter(model, segmenterConfig);
-                $danmuku.style.maskMode = 'alpha';
                 isInitialized = true;
+                console.log('Segmenter initialized successfully');
             } catch (error) {
                 console.error('Error initializing segmenter:', error);
                 isInitialized = false;
             }
+        }
+
+        function setupDanmukuStyle() {
+            Object.assign($danmuku.style, {
+                maskMode: 'alpha',
+                maskSize: 'contain',
+                maskRepeat: 'no-repeat',
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+            });
         }
 
         function createCanvas() {
@@ -91,17 +115,17 @@ export default function artplayerPluginDanmukuMask(option = {}) {
                     return;
                 }
 
-                const foregroundThreshold = option.foregroundThreshold || 0.6;
-
+                const foregroundColor = { r: 255, g: 255, b: 255, a: 255 };
+                const backgroundColor = { r: 0, g: 0, b: 0, a: 255 };
                 const mask = await bodySegmentation.toBinaryMask(
                     segmentation,
-                    { r: 255, g: 255, b: 255, a: 255 },
-                    { r: 0, g: 0, b: 0, a: 255 },
-                    false,
-                    foregroundThreshold,
+                    foregroundColor,
+                    backgroundColor,
+                    config.drawContour,
+                    config.foregroundThreshold,
                 );
 
-                await bodySegmentation.drawMask(canvas, $video, mask, 1, 1);
+                await bodySegmentation.drawMask(canvas, $video, mask, config.opacity, config.maskBlurAmount);
 
                 const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 ctx.putImageData(makeWhiteTransparent(imageData), 0, 0);
@@ -120,6 +144,7 @@ export default function artplayerPluginDanmukuMask(option = {}) {
             if (!canvas) {
                 createCanvas();
             }
+            setupDanmukuStyle();
             segmentBody();
         }
 
