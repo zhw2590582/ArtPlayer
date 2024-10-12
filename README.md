@@ -105,7 +105,7 @@ var art = new Artplayer({
 -   [artplayer-plugin-multiple-subtitles](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles)
 -   [artplayer-plugin-libass](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass)
 -   [artplayer-plugin-chromecast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast)
--   [artplayer-plugin-vast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast) (WIP)
+-   [artplayer-plugin-vast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast)
 -   [artplayer-plugin-chapter](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter)
 -   [artplayer-plugin-auto-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail)
 

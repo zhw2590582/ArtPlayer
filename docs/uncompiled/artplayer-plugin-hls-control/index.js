@@ -264,8 +264,11 @@ function artplayerPluginHlsControl(option = {}) {
 }
 if (typeof window !== "undefined") window["artplayerPluginHlsControl"] = artplayerPluginHlsControl;
 
-},{"bundle-text:./quality.svg":"dwrS3","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./audio.svg":"fK6Qz"}],"dwrS3":[function(require,module,exports) {
+},{"bundle-text:./quality.svg":"dwrS3","bundle-text:./audio.svg":"fK6Qz","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dwrS3":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" height=\"18\"><path fill=\"#fff\" d=\"M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z\"></path></svg>";
+
+},{}],"fK6Qz":[function(require,module,exports) {
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" height=\"18\"><path fill=\"#fff\" d=\"M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z\"></path></svg>";
 
 },{}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -296,9 +299,6 @@ exports.export = function(dest, destName, get) {
         get: get
     });
 };
-
-},{}],"fK6Qz":[function(require,module,exports) {
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" height=\"18\"><path fill=\"#fff\" d=\"M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z\"></path></svg>";
 
 },{}]},["4ve9y"], "4ve9y", "parcelRequire4dc0")
 
