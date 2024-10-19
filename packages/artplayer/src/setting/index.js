@@ -6,6 +6,7 @@ import Component from '../utils/Component';
 import {
     def,
     has,
+    remove,
     append,
     getRect,
     addClass,
@@ -31,8 +32,10 @@ export default class Setting extends Component {
         this.name = 'setting';
         this.$parent = $setting;
 
+        this.id = 0;
         this.events = [];
         this.cache = new Map();
+        this.symbol = Symbol('setting');
         this.option = [...this.builtin, ...option.settings];
         this.active = this.option;
 
@@ -61,25 +64,6 @@ export default class Setting extends Component {
         }
     }
 
-    static format(option, parent, parents, names = []) {
-        for (let index = 0; index < option.length; index++) {
-            const item = option[index];
-
-            if (item?.name) {
-                errorHandle(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
-                names.push(item.name);
-            }
-
-            item.$parent = parent;
-            item.$parents = parents;
-            item.$option = option;
-            item.$events = item.$events || [];
-            Setting.format(item.selector || [], item, option, names);
-        }
-
-        this.option = option;
-    }
-
     get builtin() {
         const result = [];
         const { option } = this.art;
@@ -103,19 +87,30 @@ export default class Setting extends Component {
         return result;
     }
 
-    reset() {
-        Setting.format(this.option);
-        this.destroy();
-        this.render(this.option);
+    format(option, parent, parents, names = []) {
+        for (let index = 0; index < option.length; index++) {
+            const item = option[index];
+
+            if (item?.name) {
+                errorHandle(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
+                names.push(item.name);
+            } else {
+                item.name = `setting-${this.id++}`;
+            }
+
+            item.$parent = parent;
+            item.$parents = parents;
+            item.$option = option;
+            item.$events = item.$events || [];
+            this.format(item.selector || [], item, option, names);
+        }
+
+        this.option = option;
     }
 
-    destroy() {
-        for (let index = 0; index < this.events.length; index++) {
-            this.art.events.remove(this.events[index]);
-        }
-        this.$parent.innerHTML = '';
-        this.events = [];
-        this.cache = new Map();
+    reset() {
+        this.format(this.option);
+        this.render(this.option);
     }
 
     find(name = '', option = this.option) {
@@ -131,10 +126,14 @@ export default class Setting extends Component {
     }
 
     remove(name) {
-        const item = this.find(name);
-        errorHandle(item, `Can't find [${name}] in the [setting]`);
-        const index = item.$option.indexOf(item);
-        item.$option.splice(index, 1);
+        const target = this.find(name);
+        errorHandle(target, `Can't find [${name}] in the [setting]`);
+        const index = target.$option.indexOf(target);
+        target.$option.splice(index, 1);
+        for (let index = 0; index < target.$events.length; index++) {
+            target.$events[index]();
+        }
+        remove(target.$item);
         this.reset();
     }
 
@@ -444,11 +443,20 @@ export default class Setting extends Component {
             for (let index = 0; index < option.length; index++) {
                 const item = option[index];
                 if (has(item, 'switch')) {
-                    append($panel, this.creatItem('switch', item));
+                    const $item = this.creatItem('switch', item);
+                    $item[this.symbol] = item;
+                    item.$item = $item;
+                    append($panel, $item);
                 } else if (has(item, 'range')) {
-                    append($panel, this.creatItem('range', item));
+                    const $item = this.creatItem('range', item);
+                    $item[this.symbol] = item;
+                    item.$item = $item;
+                    append($panel, $item);
                 } else {
-                    append($panel, this.creatItem('selector', item));
+                    const $item = this.creatItem('selector', item);
+                    $item[this.symbol] = item;
+                    item.$item = $item;
+                    append($panel, $item);
                 }
             }
 

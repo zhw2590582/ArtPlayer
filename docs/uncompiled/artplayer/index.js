@@ -4574,8 +4574,10 @@ class Setting extends (0, _componentDefault.default) {
         const { option, controls, template: { $setting } } = art;
         this.name = "setting";
         this.$parent = $setting;
+        this.id = 0;
         this.events = [];
         this.cache = new Map();
+        this.symbol = Symbol("setting");
         this.option = [
             ...this.builtin,
             ...option.settings
@@ -4602,21 +4604,6 @@ class Setting extends (0, _componentDefault.default) {
             });
         }
     }
-    static format(option, parent, parents, names = []) {
-        for(let index = 0; index < option.length; index++){
-            const item = option[index];
-            if (item?.name) {
-                (0, _utils.errorHandle)(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
-                names.push(item.name);
-            }
-            item.$parent = parent;
-            item.$parents = parents;
-            item.$option = option;
-            item.$events = item.$events || [];
-            Setting.format(item.selector || [], item, option, names);
-        }
-        this.option = option;
-    }
     get builtin() {
         const result = [];
         const { option } = this.art;
@@ -4626,16 +4613,24 @@ class Setting extends (0, _componentDefault.default) {
         if (option.subtitleOffset) result.push((0, _subtitleOffsetDefault.default)(this.art));
         return result;
     }
-    reset() {
-        Setting.format(this.option);
-        this.destroy();
-        this.render(this.option);
+    format(option, parent, parents, names = []) {
+        for(let index = 0; index < option.length; index++){
+            const item = option[index];
+            if (item?.name) {
+                (0, _utils.errorHandle)(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
+                names.push(item.name);
+            } else item.name = `setting-${this.id++}`;
+            item.$parent = parent;
+            item.$parents = parents;
+            item.$option = option;
+            item.$events = item.$events || [];
+            this.format(item.selector || [], item, option, names);
+        }
+        this.option = option;
     }
-    destroy() {
-        for(let index = 0; index < this.events.length; index++)this.art.events.remove(this.events[index]);
-        this.$parent.innerHTML = "";
-        this.events = [];
-        this.cache = new Map();
+    reset() {
+        this.format(this.option);
+        this.render(this.option);
     }
     find(name = "", option = this.option) {
         for(let index = 0; index < option.length; index++){
@@ -4648,10 +4643,12 @@ class Setting extends (0, _componentDefault.default) {
         }
     }
     remove(name) {
-        const item = this.find(name);
-        (0, _utils.errorHandle)(item, `Can't find [${name}] in the [setting]`);
-        const index = item.$option.indexOf(item);
-        item.$option.splice(index, 1);
+        const target = this.find(name);
+        (0, _utils.errorHandle)(target, `Can't find [${name}] in the [setting]`);
+        const index = target.$option.indexOf(target);
+        target.$option.splice(index, 1);
+        for(let index = 0; index < target.$events.length; index++)target.$events[index]();
+        (0, _utils.remove)(target.$item);
         this.reset();
     }
     update(setting) {
@@ -4886,9 +4883,22 @@ class Setting extends (0, _componentDefault.default) {
             if (option[0]?.$parent) (0, _utils.append)($panel, this.creatHeader(option[0]));
             for(let index = 0; index < option.length; index++){
                 const item = option[index];
-                if ((0, _utils.has)(item, "switch")) (0, _utils.append)($panel, this.creatItem("switch", item));
-                else if ((0, _utils.has)(item, "range")) (0, _utils.append)($panel, this.creatItem("range", item));
-                else (0, _utils.append)($panel, this.creatItem("selector", item));
+                if ((0, _utils.has)(item, "switch")) {
+                    const $item = this.creatItem("switch", item);
+                    $item[this.symbol] = item;
+                    item.$item = $item;
+                    (0, _utils.append)($panel, $item);
+                } else if ((0, _utils.has)(item, "range")) {
+                    const $item = this.creatItem("range", item);
+                    $item[this.symbol] = item;
+                    item.$item = $item;
+                    (0, _utils.append)($panel, $item);
+                } else {
+                    const $item = this.creatItem("selector", item);
+                    $item[this.symbol] = item;
+                    item.$item = $item;
+                    (0, _utils.append)($panel, $item);
+                }
             }
             (0, _utils.append)(this.$parent, $panel);
             this.cache.set(option, $panel);
