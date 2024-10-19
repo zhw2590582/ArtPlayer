@@ -4583,11 +4583,12 @@ class Setting extends (0, _componentDefault.default) {
             ...option.settings
         ];
         if (option.setting) {
-            this.reset();
+            this.format();
+            this.render();
             art.on("blur", ()=>{
                 if (this.show) {
                     this.show = false;
-                    this.render(this.option);
+                    this.render();
                 }
             });
             art.on("focus", (event)=>{
@@ -4595,7 +4596,7 @@ class Setting extends (0, _componentDefault.default) {
                 const isSetting = (0, _utils.includeFromEvent)(event, this.$parent);
                 if (this.show && !isControl && !isSetting) {
                     this.show = false;
-                    this.render(this.option);
+                    this.render();
                 }
             });
             art.on("resize", ()=>{
@@ -4612,10 +4613,10 @@ class Setting extends (0, _componentDefault.default) {
         if (option.subtitleOffset) result.push((0, _subtitleOffsetDefault.default)(this.art));
         return result;
     }
-    format(option, parent, parents, names = []) {
+    format(option = this.option, parent, parents, names = []) {
         for(let index = 0; index < option.length; index++){
             const item = option[index];
-            if (!item.formatted) {
+            if (!item.$formatted) {
                 if (item?.name) {
                     (0, _utils.errorHandle)(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
                     names.push(item.name);
@@ -4624,15 +4625,11 @@ class Setting extends (0, _componentDefault.default) {
                 item.$parents = parents;
                 item.$option = option;
                 item.$events = item.$events || [];
-                item.formatted = true;
+                item.$formatted = true;
             }
             this.format(item.selector || [], item, option, names);
         }
         this.option = option;
-    }
-    reset() {
-        this.format(this.option);
-        this.render(this.option);
     }
     find(name = "", option = this.option) {
         for(let index = 0; index < option.length; index++){
@@ -4644,14 +4641,33 @@ class Setting extends (0, _componentDefault.default) {
             }
         }
     }
+    resize() {
+        const { controls, constructor: { SETTING_WIDTH, SETTING_ITEM_HEIGHT }, template: { $player, $setting } } = this.art;
+        if (controls.setting && this.show && !(0, _utils.isMobile)) {
+            const settingWidth = this.active[0]?.$parent?.width || SETTING_WIDTH;
+            const { left: controlLeft, width: controlWidth } = (0, _utils.getRect)(controls.setting);
+            const { left: playerLeft, width: playerWidth } = (0, _utils.getRect)($player);
+            const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
+            const settingHeight = this.active === this.option ? this.active.length * SETTING_ITEM_HEIGHT : (this.active.length + 1) * SETTING_ITEM_HEIGHT;
+            (0, _utils.setStyle)($setting, "height", `${settingHeight}px`);
+            (0, _utils.setStyle)($setting, "width", `${settingWidth}px`);
+            if (settingLeft + settingWidth > playerWidth) {
+                (0, _utils.setStyle)($setting, "left", null);
+                (0, _utils.setStyle)($setting, "right", null);
+            } else {
+                (0, _utils.setStyle)($setting, "left", `${settingLeft}px`);
+                (0, _utils.setStyle)($setting, "right", "auto");
+            }
+        }
+    }
     remove(name) {
         const target = this.find(name);
         (0, _utils.errorHandle)(target, `Can't find [${name}] in the [setting]`);
         const index = target.$option.indexOf(target);
         target.$option.splice(index, 1);
         for(let index = 0; index < target.$events.length; index++)target.$events[index]();
-        (0, _utils.remove)(target.$item);
-        this.reset();
+        if (target.$item) (0, _utils.remove)(target.$item);
+        this.render();
     }
     update(setting) {
         const target = this.find(setting.name);
@@ -4662,7 +4678,8 @@ class Setting extends (0, _componentDefault.default) {
     }
     add(setting) {
         this.option.push(setting);
-        this.reset();
+        this.format();
+        this.render();
     }
     creatHeader(item) {
         const { proxy, icons: { arrowLeft }, constructor: { SETTING_ITEM_HEIGHT } } = this.art;
@@ -4853,28 +4870,11 @@ class Setting extends (0, _componentDefault.default) {
             default:
                 break;
         }
+        $item[this.symbol] = item;
+        item.$item = $item;
         return $item;
     }
-    resize() {
-        const { controls, constructor: { SETTING_WIDTH, SETTING_ITEM_HEIGHT }, template: { $player, $setting } } = this.art;
-        if (controls.setting && this.show && !(0, _utils.isMobile)) {
-            const settingWidth = this.active[0]?.$parent?.width || SETTING_WIDTH;
-            const { left: controlLeft, width: controlWidth } = (0, _utils.getRect)(controls.setting);
-            const { left: playerLeft, width: playerWidth } = (0, _utils.getRect)($player);
-            const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
-            const settingHeight = this.active === this.option ? this.active.length * SETTING_ITEM_HEIGHT : (this.active.length + 1) * SETTING_ITEM_HEIGHT;
-            (0, _utils.setStyle)($setting, "height", `${settingHeight}px`);
-            (0, _utils.setStyle)($setting, "width", `${settingWidth}px`);
-            if (settingLeft + settingWidth > playerWidth) {
-                (0, _utils.setStyle)($setting, "left", null);
-                (0, _utils.setStyle)($setting, "right", null);
-            } else {
-                (0, _utils.setStyle)($setting, "left", `${settingLeft}px`);
-                (0, _utils.setStyle)($setting, "right", "auto");
-            }
-        }
-    }
-    render(option) {
+    render(option = this.option) {
         this.active = option;
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
@@ -4885,22 +4885,9 @@ class Setting extends (0, _componentDefault.default) {
             if (option[0]?.$parent) (0, _utils.append)($panel, this.creatHeader(option[0]));
             for(let index = 0; index < option.length; index++){
                 const item = option[index];
-                if ((0, _utils.has)(item, "switch")) {
-                    const $item = this.creatItem("switch", item);
-                    $item[this.symbol] = item;
-                    item.$item = $item;
-                    (0, _utils.append)($panel, $item);
-                } else if ((0, _utils.has)(item, "range")) {
-                    const $item = this.creatItem("range", item);
-                    $item[this.symbol] = item;
-                    item.$item = $item;
-                    (0, _utils.append)($panel, $item);
-                } else {
-                    const $item = this.creatItem("selector", item);
-                    $item[this.symbol] = item;
-                    item.$item = $item;
-                    (0, _utils.append)($panel, $item);
-                }
+                if ((0, _utils.has)(item, "switch")) (0, _utils.append)($panel, this.creatItem("switch", item));
+                else if ((0, _utils.has)(item, "range")) (0, _utils.append)($panel, this.creatItem("range", item));
+                else (0, _utils.append)($panel, this.creatItem("selector", item));
             }
             (0, _utils.append)(this.$parent, $panel);
             this.cache.set(option, $panel);

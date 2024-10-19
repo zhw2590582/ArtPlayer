@@ -39,12 +39,13 @@ export default class Setting extends Component {
         this.option = [...this.builtin, ...option.settings];
 
         if (option.setting) {
-            this.reset();
+            this.format();
+            this.render();
 
             art.on('blur', () => {
                 if (this.show) {
                     this.show = false;
-                    this.render(this.option);
+                    this.render();
                 }
             });
 
@@ -53,7 +54,7 @@ export default class Setting extends Component {
                 const isSetting = includeFromEvent(event, this.$parent);
                 if (this.show && !isControl && !isSetting) {
                     this.show = false;
-                    this.render(this.option);
+                    this.render();
                 }
             });
 
@@ -86,10 +87,10 @@ export default class Setting extends Component {
         return result;
     }
 
-    format(option, parent, parents, names = []) {
+    format(option = this.option, parent, parents, names = []) {
         for (let index = 0; index < option.length; index++) {
             const item = option[index];
-            if (!item.formatted) {
+            if (!item.$formatted) {
                 if (item?.name) {
                     errorHandle(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
                     names.push(item.name);
@@ -100,16 +101,11 @@ export default class Setting extends Component {
                 item.$parents = parents;
                 item.$option = option;
                 item.$events = item.$events || [];
-                item.formatted = true;
+                item.$formatted = true;
             }
             this.format(item.selector || [], item, option, names);
         }
         this.option = option;
-    }
-
-    reset() {
-        this.format(this.option);
-        this.render(this.option);
     }
 
     find(name = '', option = this.option) {
@@ -124,6 +120,36 @@ export default class Setting extends Component {
         }
     }
 
+    resize() {
+        const {
+            controls,
+            constructor: { SETTING_WIDTH, SETTING_ITEM_HEIGHT },
+            template: { $player, $setting },
+        } = this.art;
+
+        if (controls.setting && this.show && !isMobile) {
+            const settingWidth = this.active[0]?.$parent?.width || SETTING_WIDTH;
+            const { left: controlLeft, width: controlWidth } = getRect(controls.setting);
+            const { left: playerLeft, width: playerWidth } = getRect($player);
+            const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
+
+            const settingHeight =
+                this.active === this.option
+                    ? this.active.length * SETTING_ITEM_HEIGHT
+                    : (this.active.length + 1) * SETTING_ITEM_HEIGHT;
+
+            setStyle($setting, 'height', `${settingHeight}px`);
+            setStyle($setting, 'width', `${settingWidth}px`);
+            if (settingLeft + settingWidth > playerWidth) {
+                setStyle($setting, 'left', null);
+                setStyle($setting, 'right', null);
+            } else {
+                setStyle($setting, 'left', `${settingLeft}px`);
+                setStyle($setting, 'right', 'auto');
+            }
+        }
+    }
+
     remove(name) {
         const target = this.find(name);
         errorHandle(target, `Can't find [${name}] in the [setting]`);
@@ -132,8 +158,10 @@ export default class Setting extends Component {
         for (let index = 0; index < target.$events.length; index++) {
             target.$events[index]();
         }
-        remove(target.$item);
-        this.reset();
+        if (target.$item) {
+            remove(target.$item);
+        }
+        this.render();
     }
 
     update(setting) {
@@ -148,7 +176,8 @@ export default class Setting extends Component {
 
     add(setting) {
         this.option.push(setting);
-        this.reset();
+        this.format();
+        this.render();
     }
 
     creatHeader(item) {
@@ -392,40 +421,13 @@ export default class Setting extends Component {
                 break;
         }
 
+        $item[this.symbol] = item;
+        item.$item = $item;
+
         return $item;
     }
 
-    resize() {
-        const {
-            controls,
-            constructor: { SETTING_WIDTH, SETTING_ITEM_HEIGHT },
-            template: { $player, $setting },
-        } = this.art;
-
-        if (controls.setting && this.show && !isMobile) {
-            const settingWidth = this.active[0]?.$parent?.width || SETTING_WIDTH;
-            const { left: controlLeft, width: controlWidth } = getRect(controls.setting);
-            const { left: playerLeft, width: playerWidth } = getRect($player);
-            const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
-
-            const settingHeight =
-                this.active === this.option
-                    ? this.active.length * SETTING_ITEM_HEIGHT
-                    : (this.active.length + 1) * SETTING_ITEM_HEIGHT;
-
-            setStyle($setting, 'height', `${settingHeight}px`);
-            setStyle($setting, 'width', `${settingWidth}px`);
-            if (settingLeft + settingWidth > playerWidth) {
-                setStyle($setting, 'left', null);
-                setStyle($setting, 'right', null);
-            } else {
-                setStyle($setting, 'left', `${settingLeft}px`);
-                setStyle($setting, 'right', 'auto');
-            }
-        }
-    }
-
-    render(option) {
+    render(option = this.option) {
         this.active = option;
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
@@ -441,20 +443,11 @@ export default class Setting extends Component {
             for (let index = 0; index < option.length; index++) {
                 const item = option[index];
                 if (has(item, 'switch')) {
-                    const $item = this.creatItem('switch', item);
-                    $item[this.symbol] = item;
-                    item.$item = $item;
-                    append($panel, $item);
+                    append($panel, this.creatItem('switch', item));
                 } else if (has(item, 'range')) {
-                    const $item = this.creatItem('range', item);
-                    $item[this.symbol] = item;
-                    item.$item = $item;
-                    append($panel, $item);
+                    append($panel, this.creatItem('range', item));
                 } else {
-                    const $item = this.creatItem('selector', item);
-                    $item[this.symbol] = item;
-                    item.$item = $item;
-                    append($panel, $item);
+                    append($panel, this.creatItem('selector', item));
                 }
             }
 
