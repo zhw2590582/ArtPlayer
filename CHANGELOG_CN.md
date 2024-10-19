@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   优化 `subtitleLoad` 事件的触发时机和回调参数
 -   删除 `subtitleSwitch` 事件，请使用 `subtitleLoad` 代替
 -   升级 `artplayer-plugin-hls-quality` 为 `artplayer-plugin-hls-control`
+-   新增 `artplayer-plugin-ambilight` 插件
 
 ## [5.1.7] - 2024-8-15
 
