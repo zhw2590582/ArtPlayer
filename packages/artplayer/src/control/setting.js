@@ -11,7 +11,7 @@ export default function setting(option) {
 
             proxy($control, 'click', () => {
                 art.setting.toggle();
-                art.setting.updateStyle();
+                art.setting.resize();
             });
 
             art.on('setting', (value) => {

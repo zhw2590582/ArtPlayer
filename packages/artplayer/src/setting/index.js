@@ -34,6 +34,7 @@ export default class Setting extends Component {
         this.events = [];
         this.cache = new Map();
         this.option = [...this.builtin, ...option.settings];
+        this.active = this.option;
 
         if (option.setting) {
             this.reset();
@@ -53,6 +54,10 @@ export default class Setting extends Component {
                     this.render(this.option);
                 }
             });
+
+            art.on('resize', () => {
+                this.resize();
+            });
         }
     }
 
@@ -65,21 +70,10 @@ export default class Setting extends Component {
                 names.push(item.name);
             }
 
-            def(item, '$parent', {
-                configurable: true,
-                get: () => parent,
-            });
-
-            def(item, '$parents', {
-                configurable: true,
-                get: () => parents,
-            });
-
-            def(item, '$option', {
-                configurable: true,
-                get: () => option,
-            });
-
+            item.$parent = parent;
+            item.$parents = parents;
+            item.$option = option;
+            item.$events = item.$events || [];
             Setting.format(item.selector || [], item, option, names);
         }
 
@@ -160,19 +154,23 @@ export default class Setting extends Component {
     }
 
     creatHeader(item) {
-        const { icons, proxy, constructor } = this.art;
+        const {
+            proxy,
+            icons: { arrowLeft },
+            constructor: { SETTING_ITEM_HEIGHT },
+        } = this.art;
         const $item = createElement('div');
-        setStyle($item, 'height', `${constructor.SETTING_ITEM_HEIGHT}px`);
+        setStyle($item, 'height', `${SETTING_ITEM_HEIGHT}px`);
         addClass($item, 'art-setting-item');
         addClass($item, 'art-setting-item-back');
         const $left = append($item, '<div class="art-setting-item-left"></div>');
         const $icon = createElement('div');
         addClass($icon, 'art-setting-item-left-icon');
-        append($icon, icons.arrowLeft);
+        append($icon, arrowLeft);
         append($left, $icon);
         append($left, item.$parent.html);
         const event = proxy($item, 'click', () => this.render(item.$parents));
-        this.events.push(event);
+        item.$parent.$events.push(event);
         return $item;
     }
 
@@ -400,18 +398,26 @@ export default class Setting extends Component {
         return $item;
     }
 
-    updateStyle(width) {
+    resize() {
         const {
             controls,
-            constructor,
+            constructor: { SETTING_WIDTH, SETTING_ITEM_HEIGHT },
             template: { $player, $setting },
         } = this.art;
 
-        if (controls.setting && !isMobile) {
-            const settingWidth = width || constructor.SETTING_WIDTH;
+        if (controls.setting && this.show && !isMobile) {
+            const settingWidth = this.active[0]?.$parent?.width || SETTING_WIDTH;
             const { left: controlLeft, width: controlWidth } = getRect(controls.setting);
             const { left: playerLeft, width: playerWidth } = getRect($player);
             const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
+
+            const settingHeight =
+                this.active === this.option
+                    ? this.active.length * SETTING_ITEM_HEIGHT
+                    : (this.active.length + 1) * SETTING_ITEM_HEIGHT;
+
+            setStyle($setting, 'height', `${settingHeight}px`);
+            setStyle($setting, 'width', `${settingWidth}px`);
             if (settingLeft + settingWidth > playerWidth) {
                 setStyle($setting, 'left', null);
                 setStyle($setting, 'right', null);
@@ -423,6 +429,7 @@ export default class Setting extends Component {
     }
 
     render(option) {
+        this.active = option;
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
             inverseClass($panel, 'art-current');
@@ -449,10 +456,13 @@ export default class Setting extends Component {
             this.cache.set(option, $panel);
             inverseClass($panel, 'art-current');
 
-            if (option[0]?.$parent?.mounted) {
-                option[0].$parent.mounted.call(this.art, $panel, option[0].$parent);
+            for (let index = 0; index < option.length; index++) {
+                const item = option[index];
+                if (item.mounted) {
+                    item.mounted.call(this.art, $panel, item);
+                }
             }
         }
-        this.updateStyle();
+        this.resize();
     }
 }
