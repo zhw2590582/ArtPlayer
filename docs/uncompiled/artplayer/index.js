@@ -4678,6 +4678,8 @@ class Setting extends (0, _componentDefault.default) {
     add(setting) {
         this.option.push(setting);
         this.format();
+        const { $panel } = this.option;
+        this.append($panel, setting);
         this.render();
     }
     creatHeader(item) {
@@ -4873,6 +4875,12 @@ class Setting extends (0, _componentDefault.default) {
         item.$item = $item;
         return $item;
     }
+    append($panel, item) {
+        if (!$panel) return;
+        if ((0, _utils.has)(item, "switch")) (0, _utils.append)($panel, this.creatItem("switch", item));
+        else if ((0, _utils.has)(item, "range")) (0, _utils.append)($panel, this.creatItem("range", item));
+        else (0, _utils.append)($panel, this.creatItem("selector", item));
+    }
     render(option = this.option) {
         this.active = option;
         if (this.cache.has(option)) {
@@ -4881,13 +4889,9 @@ class Setting extends (0, _componentDefault.default) {
         } else {
             const $panel = (0, _utils.createElement)("div");
             (0, _utils.addClass)($panel, "art-setting-panel");
+            option.$panel = $panel;
             if (option[0]?.$parent) (0, _utils.append)($panel, this.creatHeader(option[0]));
-            for(let index = 0; index < option.length; index++){
-                const item = option[index];
-                if ((0, _utils.has)(item, "switch")) (0, _utils.append)($panel, this.creatItem("switch", item));
-                else if ((0, _utils.has)(item, "range")) (0, _utils.append)($panel, this.creatItem("range", item));
-                else (0, _utils.append)($panel, this.creatItem("selector", item));
-            }
+            for(let index = 0; index < option.length; index++)this.append($panel, option[index]);
             (0, _utils.append)(this.$parent, $panel);
             this.cache.set(option, $panel);
             (0, _utils.inverseClass)($panel, "art-current");

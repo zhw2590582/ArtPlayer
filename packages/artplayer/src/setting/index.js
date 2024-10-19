@@ -176,6 +176,8 @@ export default class Setting extends Component {
     add(setting) {
         this.option.push(setting);
         this.format();
+        const { $panel } = this.option;
+        this.append($panel, setting);
         this.render();
     }
 
@@ -426,6 +428,17 @@ export default class Setting extends Component {
         return $item;
     }
 
+    append($panel, item) {
+        if (!$panel) return;
+        if (has(item, 'switch')) {
+            append($panel, this.creatItem('switch', item));
+        } else if (has(item, 'range')) {
+            append($panel, this.creatItem('range', item));
+        } else {
+            append($panel, this.creatItem('selector', item));
+        }
+    }
+
     render(option = this.option) {
         this.active = option;
         if (this.cache.has(option)) {
@@ -434,20 +447,14 @@ export default class Setting extends Component {
         } else {
             const $panel = createElement('div');
             addClass($panel, 'art-setting-panel');
+            option.$panel = $panel;
 
             if (option[0]?.$parent) {
                 append($panel, this.creatHeader(option[0]));
             }
 
             for (let index = 0; index < option.length; index++) {
-                const item = option[index];
-                if (has(item, 'switch')) {
-                    append($panel, this.creatItem('switch', item));
-                } else if (has(item, 'range')) {
-                    append($panel, this.creatItem('range', item));
-                } else {
-                    append($panel, this.creatItem('selector', item));
-                }
+                this.append($panel, option[index]);
             }
 
             append(this.$parent, $panel);
