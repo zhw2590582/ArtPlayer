@@ -58,9 +58,7 @@ export default class Setting extends Component {
                 }
             });
 
-            art.on('resize', () => {
-                this.resize();
-            });
+            art.on('resize', () => this.resize());
         }
     }
 
@@ -168,7 +166,8 @@ export default class Setting extends Component {
         const target = this.find(setting.name);
         if (target) {
             Object.assign(target, setting);
-            this.reset();
+            this.format();
+            this.render();
         } else {
             this.add(setting);
         }

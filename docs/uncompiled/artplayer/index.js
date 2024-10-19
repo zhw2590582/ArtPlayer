@@ -4599,9 +4599,7 @@ class Setting extends (0, _componentDefault.default) {
                     this.render();
                 }
             });
-            art.on("resize", ()=>{
-                this.resize();
-            });
+            art.on("resize", ()=>this.resize());
         }
     }
     get builtin() {
@@ -4673,7 +4671,8 @@ class Setting extends (0, _componentDefault.default) {
         const target = this.find(setting.name);
         if (target) {
             Object.assign(target, setting);
-            this.reset();
+            this.format();
+            this.render();
         } else this.add(setting);
     }
     add(setting) {
