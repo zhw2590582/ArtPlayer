@@ -236,13 +236,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "5.1.7";
+        return "5.2.0";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2024-10-18 22:56:44";
+        return "2024-10-19 16:59:48";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1295,7 +1295,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"5.1.7"}</div>
+                  <div class="art-info-content">${"5.2.0"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3751,7 +3751,7 @@ parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.7"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.2.0"}</a>`
     };
 }
 
@@ -4565,9 +4565,8 @@ var _playbackRate = require("./playbackRate");
 var _playbackRateDefault = parcelHelpers.interopDefault(_playbackRate);
 var _subtitleOffset = require("./subtitleOffset");
 var _subtitleOffsetDefault = parcelHelpers.interopDefault(_subtitleOffset);
-var _component = require("../utils/component");
+var _component = require("../utils/Component");
 var _componentDefault = parcelHelpers.interopDefault(_component);
-var _error = require("../utils/error");
 var _utils = require("../utils");
 class Setting extends (0, _componentDefault.default) {
     constructor(art){
@@ -4575,11 +4574,14 @@ class Setting extends (0, _componentDefault.default) {
         const { option, controls, template: { $setting } } = art;
         this.name = "setting";
         this.$parent = $setting;
-        this.option = [];
         this.events = [];
         this.cache = new Map();
+        this.option = [
+            ...this.builtin,
+            ...option.settings
+        ];
         if (option.setting) {
-            this.init();
+            this.reset();
             art.on("blur", ()=>{
                 if (this.show) {
                     this.show = false;
@@ -4587,25 +4589,39 @@ class Setting extends (0, _componentDefault.default) {
                 }
             });
             art.on("focus", (event)=>{
-                const isSetting = (0, _utils.includeFromEvent)(event, controls.setting);
-                const isParent = (0, _utils.includeFromEvent)(event, this.$parent);
-                if (this.show && !isSetting && !isParent) {
+                const isControl = (0, _utils.includeFromEvent)(event, controls.setting);
+                const isSetting = (0, _utils.includeFromEvent)(event, this.$parent);
+                if (this.show && !isControl && !isSetting) {
                     this.show = false;
                     this.render(this.option);
                 }
             });
         }
     }
-    static makeRecursion(option, parentItem, parentList) {
+    static format(option, parent, parents, names = []) {
         for(let index = 0; index < option.length; index++){
             const item = option[index];
-            item.$parentItem = parentItem;
-            item.$parentList = parentList;
-            Setting.makeRecursion(item.selector || [], item, option);
+            if (item?.name) {
+                (0, _utils.errorHandle)(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
+                names.push(item.name);
+            }
+            (0, _utils.def)(item, "$parent", {
+                configurable: true,
+                get: ()=>parent
+            });
+            (0, _utils.def)(item, "$parents", {
+                configurable: true,
+                get: ()=>parents
+            });
+            (0, _utils.def)(item, "$option", {
+                configurable: true,
+                get: ()=>option
+            });
+            Setting.format(item.selector || [], item, option, names);
         }
-        return option;
+        this.option = option;
     }
-    get defaultSettings() {
+    get builtin() {
         const result = [];
         const { option } = this.art;
         if (option.playbackRate) result.push((0, _playbackRateDefault.default)(this.art));
@@ -4614,13 +4630,8 @@ class Setting extends (0, _componentDefault.default) {
         if (option.subtitleOffset) result.push((0, _subtitleOffsetDefault.default)(this.art));
         return result;
     }
-    init() {
-        const { option } = this.art;
-        const mergeSettings = [
-            ...this.defaultSettings,
-            ...option.settings
-        ];
-        this.option = Setting.makeRecursion(mergeSettings);
+    reset() {
+        Setting.format(this.option);
         this.destroy();
         this.render(this.option);
     }
@@ -4642,30 +4653,21 @@ class Setting extends (0, _componentDefault.default) {
     }
     remove(name) {
         const item = this.find(name);
-        (0, _error.errorHandle)(item, `Can't find [${name}] from the [setting]`);
-        const parent = item.$parentItem ? item.$parentItem.selector : this.option;
-        parent.splice(parent.indexOf(item), 1);
-        this.option = Setting.makeRecursion(this.option);
-        this.destroy();
-        this.render(this.option);
-        return this.option;
+        (0, _utils.errorHandle)(item, `Can't find [${name}] in the [setting]`);
+        const index = item.$option.indexOf(item);
+        item.$option.splice(index, 1);
+        this.reset();
     }
     update(setting) {
-        const item = this.find(setting.name);
-        if (item) {
-            Object.assign(item, setting);
-            this.option = Setting.makeRecursion(this.option);
-            this.destroy();
-            this.render(this.option);
+        const target = this.find(setting.name);
+        if (target) {
+            Object.assign(target, setting);
+            this.reset();
         } else this.add(setting);
-        return this.option;
     }
     add(setting) {
         this.option.push(setting);
-        this.option = Setting.makeRecursion(this.option);
-        this.destroy();
-        this.render(this.option);
-        return this.option;
+        this.reset();
     }
     creatHeader(item) {
         const { icons, proxy, constructor } = this.art;
@@ -4678,8 +4680,8 @@ class Setting extends (0, _componentDefault.default) {
         (0, _utils.addClass)($icon, "art-setting-item-left-icon");
         (0, _utils.append)($icon, icons.arrowLeft);
         (0, _utils.append)($left, $icon);
-        (0, _utils.append)($left, item.$parentItem.html);
-        const event = proxy($item, "click", ()=>this.render(item.$parentList));
+        (0, _utils.append)($left, item.$parent.html);
+        const event = proxy($item, "click", ()=>this.render(item.$parents));
         this.events.push(event);
         return $item;
     }
@@ -4838,14 +4840,14 @@ class Setting extends (0, _componentDefault.default) {
                         if (item.selector && item.selector.length) this.render(item.selector, item.width);
                         else {
                             (0, _utils.inverseClass)($item, "art-current");
-                            for(let index = 0; index < item.$parentItem.selector.length; index++){
-                                const element = item.$parentItem.selector[index];
+                            for(let index = 0; index < item.$parent.selector.length; index++){
+                                const element = item.$parent.selector[index];
                                 element.default = element === item;
                             }
-                            if (item.$parentList) this.render(item.$parentList);
-                            if (item.$parentItem && item.$parentItem.onSelect) {
-                                const result = await item.$parentItem.onSelect.call(this.art, item, $item, event);
-                                if (item.$parentItem.$tooltip && (0, _utils.isStringOrNumber)(result)) item.$parentItem.$tooltip.innerHTML = result;
+                            if (item.$parents) this.render(item.$parents);
+                            if (item.$parent && item.$parent.onSelect) {
+                                const result = await item.$parent.onSelect.call(this.art, item, $item, event);
+                                if (item.$parent.$tooltip && (0, _utils.isStringOrNumber)(result)) item.$parent.$tooltip.innerHTML = result;
                             }
                         }
                     });
@@ -4874,23 +4876,14 @@ class Setting extends (0, _componentDefault.default) {
             }
         }
     }
-    render(option, width) {
-        const { constructor } = this.art;
+    render(option) {
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
             (0, _utils.inverseClass)($panel, "art-current");
-            (0, _utils.setStyle)(this.$parent, "width", `${$panel.dataset.width}px`);
-            (0, _utils.setStyle)(this.$parent, "height", `${$panel.dataset.height}px`);
-            this.updateStyle(Number($panel.dataset.width));
         } else {
             const $panel = (0, _utils.createElement)("div");
             (0, _utils.addClass)($panel, "art-setting-panel");
-            $panel.dataset.width = width || constructor.SETTING_WIDTH;
-            $panel.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;
-            if (option[0] && option[0].$parentItem) {
-                (0, _utils.append)($panel, this.creatHeader(option[0]));
-                $panel.dataset.height = Number($panel.dataset.height) + constructor.SETTING_ITEM_HEIGHT;
-            }
+            if (option[0]?.$parent) (0, _utils.append)($panel, this.creatHeader(option[0]));
             for(let index = 0; index < option.length; index++){
                 const item = option[index];
                 if ((0, _utils.has)(item, "switch")) (0, _utils.append)($panel, this.creatItem("switch", item));
@@ -4900,16 +4893,14 @@ class Setting extends (0, _componentDefault.default) {
             (0, _utils.append)(this.$parent, $panel);
             this.cache.set(option, $panel);
             (0, _utils.inverseClass)($panel, "art-current");
-            (0, _utils.setStyle)(this.$parent, "width", `${$panel.dataset.width}px`);
-            (0, _utils.setStyle)(this.$parent, "height", `${$panel.dataset.height}px`);
-            this.updateStyle(Number($panel.dataset.width));
-            if (option[0] && option[0].$parentItem && option[0].$parentItem.mounted) option[0].$parentItem.mounted.call(this.art, $panel, option[0].$parentItem);
+            if (option[0]?.$parent?.mounted) option[0].$parent.mounted.call(this.art, $panel, option[0].$parent);
         }
+        this.updateStyle();
     }
 }
 exports.default = Setting;
 
-},{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils/component":"bgug2","../utils/error":"622b3","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7rVpZ":[function(require,module,exports) {
+},{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","../utils/Component":"81l4Q"}],"7rVpZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>flip);
@@ -5057,7 +5048,135 @@ function subtitleOffset(art) {
     };
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"feFxw":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"81l4Q":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _dom = require("./dom");
+var _format = require("./format");
+var _error = require("./error");
+var _optionValidator = require("option-validator");
+var _optionValidatorDefault = parcelHelpers.interopDefault(_optionValidator);
+var _scheme = require("../scheme");
+class Component {
+    constructor(art){
+        this.id = 0;
+        this.art = art;
+        this.cache = new Map();
+        this.add = this.add.bind(this);
+        this.remove = this.remove.bind(this);
+        this.update = this.update.bind(this);
+    }
+    get show() {
+        return (0, _dom.hasClass)(this.art.template.$player, `art-${this.name}-show`);
+    }
+    set show(value) {
+        const { $player } = this.art.template;
+        const className = `art-${this.name}-show`;
+        if (value) (0, _dom.addClass)($player, className);
+        else (0, _dom.removeClass)($player, className);
+        this.art.emit(this.name, value);
+    }
+    toggle() {
+        this.show = !this.show;
+    }
+    add(getOption) {
+        const option = typeof getOption === "function" ? getOption(this.art) : getOption;
+        option.html = option.html || "";
+        (0, _optionValidatorDefault.default)(option, (0, _scheme.ComponentOption));
+        if (!this.$parent || !this.name || option.disable) return;
+        const name = option.name || `${this.name}${this.id}`;
+        const item = this.cache.get(name);
+        (0, _error.errorHandle)(!item, `Can't add an existing [${name}] to the [${this.name}]`);
+        this.id += 1;
+        const $ref = (0, _dom.createElement)("div");
+        (0, _dom.addClass)($ref, `art-${this.name}`);
+        (0, _dom.addClass)($ref, `art-${this.name}-${name}`);
+        const childs = Array.from(this.$parent.children);
+        $ref.dataset.index = option.index || this.id;
+        const nextChild = childs.find((item)=>Number(item.dataset.index) >= Number($ref.dataset.index));
+        if (nextChild) nextChild.insertAdjacentElement("beforebegin", $ref);
+        else (0, _dom.append)(this.$parent, $ref);
+        if (option.html) (0, _dom.append)($ref, option.html);
+        if (option.style) (0, _dom.setStyles)($ref, option.style);
+        if (option.tooltip) (0, _dom.tooltip)($ref, option.tooltip);
+        const events = [];
+        if (option.click) {
+            const destroyEvent = this.art.events.proxy($ref, "click", (event)=>{
+                event.preventDefault();
+                option.click.call(this.art, this, event);
+            });
+            events.push(destroyEvent);
+        }
+        if (option.selector && [
+            "left",
+            "right"
+        ].includes(option.position)) this.addSelector(option, $ref, events);
+        this[name] = $ref;
+        this.cache.set(name, {
+            $ref,
+            events,
+            option
+        });
+        if (option.mounted) option.mounted.call(this.art, $ref);
+        return $ref;
+    }
+    addSelector(option, $ref, events) {
+        const { hover, proxy } = this.art.events;
+        (0, _dom.addClass)($ref, "art-control-selector");
+        const $value = (0, _dom.createElement)("div");
+        (0, _dom.addClass)($value, "art-selector-value");
+        (0, _dom.append)($value, option.html);
+        $ref.innerText = "";
+        (0, _dom.append)($ref, $value);
+        const list = option.selector.map((item, index)=>`<div class="art-selector-item ${item.default ? "art-current" : ""}" data-index="${index}">${item.html}</div>`).join("");
+        const $list = (0, _dom.createElement)("div");
+        (0, _dom.addClass)($list, "art-selector-list");
+        (0, _dom.append)($list, list);
+        (0, _dom.append)($ref, $list);
+        const setLeft = ()=>{
+            const refWidth = (0, _dom.getStyle)($ref, "width");
+            const listWidth = (0, _dom.getStyle)($list, "width");
+            const left = refWidth / 2 - listWidth / 2;
+            $list.style.left = `${left}px`;
+        };
+        hover($ref, setLeft);
+        const destroyEvent = proxy($list, "click", async (event)=>{
+            const path = event.composedPath() || [];
+            const $item = path.find((item)=>(0, _dom.hasClass)(item, "art-selector-item"));
+            if (!$item) return;
+            (0, _dom.inverseClass)($item, "art-current");
+            const index = Number($item.dataset.index);
+            const find = option.selector[index] || {};
+            $value.innerText = $item.innerText;
+            if (option.onSelect) {
+                const result = await option.onSelect.call(this.art, find, $item, event);
+                if ((0, _format.isStringOrNumber)(result)) $value.innerHTML = result;
+            }
+            setLeft();
+        });
+        events.push(destroyEvent);
+    }
+    remove(name) {
+        const item = this.cache.get(name);
+        (0, _error.errorHandle)(item, `Can't find [${name}] from the [${this.name}]`);
+        if (item.option.beforeUnmount) item.option.beforeUnmount.call(this.art, item.$ref);
+        for(let index = 0; index < item.events.length; index++)this.art.events.remove(item.events[index]);
+        this.cache.delete(name);
+        delete this[name];
+        (0, _dom.remove)(item.$ref);
+    }
+    update(option) {
+        const item = this.cache.get(option.name);
+        if (item) {
+            option = Object.assign(item.option, option);
+            this.remove(option.name);
+        }
+        return this.add(option);
+    }
+}
+exports.default = Component;
+
+},{"./dom":"dNynC","./format":"eWip5","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"feFxw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Storage {

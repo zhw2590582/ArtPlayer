@@ -2,8 +2,7 @@ import flip from './flip';
 import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
-import Component from '../utils/component';
-import { errorHandle } from '../utils/error';
+import Component from '../utils/Component';
 import {
     def,
     has,
@@ -12,6 +11,7 @@ import {
     addClass,
     setStyle,
     isMobile,
+    errorHandle,
     inverseClass,
     createElement,
     includeFromEvent,
@@ -31,12 +31,12 @@ export default class Setting extends Component {
         this.name = 'setting';
         this.$parent = $setting;
 
-        this.option = [];
         this.events = [];
         this.cache = new Map();
+        this.option = [...this.builtin, ...option.settings];
 
         if (option.setting) {
-            this.init();
+            this.reset();
 
             art.on('blur', () => {
                 if (this.show) {
@@ -46,9 +46,9 @@ export default class Setting extends Component {
             });
 
             art.on('focus', (event) => {
-                const isSetting = includeFromEvent(event, controls.setting);
-                const isParent = includeFromEvent(event, this.$parent);
-                if (this.show && !isSetting && !isParent) {
+                const isControl = includeFromEvent(event, controls.setting);
+                const isSetting = includeFromEvent(event, this.$parent);
+                if (this.show && !isControl && !isSetting) {
                     this.show = false;
                     this.render(this.option);
                 }
@@ -56,17 +56,37 @@ export default class Setting extends Component {
         }
     }
 
-    static makeRecursion(option, parentItem, parentList) {
+    static format(option, parent, parents, names = []) {
         for (let index = 0; index < option.length; index++) {
             const item = option[index];
-            item.$parentItem = parentItem;
-            item.$parentList = parentList;
-            Setting.makeRecursion(item.selector || [], item, option);
+
+            if (item?.name) {
+                errorHandle(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
+                names.push(item.name);
+            }
+
+            def(item, '$parent', {
+                configurable: true,
+                get: () => parent,
+            });
+
+            def(item, '$parents', {
+                configurable: true,
+                get: () => parents,
+            });
+
+            def(item, '$option', {
+                configurable: true,
+                get: () => option,
+            });
+
+            Setting.format(item.selector || [], item, option, names);
         }
-        return option;
+
+        this.option = option;
     }
 
-    get defaultSettings() {
+    get builtin() {
         const result = [];
         const { option } = this.art;
 
@@ -89,10 +109,8 @@ export default class Setting extends Component {
         return result;
     }
 
-    init() {
-        const { option } = this.art;
-        const mergeSettings = [...this.defaultSettings, ...option.settings];
-        this.option = Setting.makeRecursion(mergeSettings);
+    reset() {
+        Setting.format(this.option);
         this.destroy();
         this.render(this.option);
     }
@@ -120,34 +138,25 @@ export default class Setting extends Component {
 
     remove(name) {
         const item = this.find(name);
-        errorHandle(item, `Can't find [${name}] from the [setting]`);
-        const parent = item.$parentItem ? item.$parentItem.selector : this.option;
-        parent.splice(parent.indexOf(item), 1);
-        this.option = Setting.makeRecursion(this.option);
-        this.destroy();
-        this.render(this.option);
-        return this.option;
+        errorHandle(item, `Can't find [${name}] in the [setting]`);
+        const index = item.$option.indexOf(item);
+        item.$option.splice(index, 1);
+        this.reset();
     }
 
     update(setting) {
-        const item = this.find(setting.name);
-        if (item) {
-            Object.assign(item, setting);
-            this.option = Setting.makeRecursion(this.option);
-            this.destroy();
-            this.render(this.option);
+        const target = this.find(setting.name);
+        if (target) {
+            Object.assign(target, setting);
+            this.reset();
         } else {
             this.add(setting);
         }
-        return this.option;
     }
 
     add(setting) {
         this.option.push(setting);
-        this.option = Setting.makeRecursion(this.option);
-        this.destroy();
-        this.render(this.option);
-        return this.option;
+        this.reset();
     }
 
     creatHeader(item) {
@@ -161,8 +170,8 @@ export default class Setting extends Component {
         addClass($icon, 'art-setting-item-left-icon');
         append($icon, icons.arrowLeft);
         append($left, $icon);
-        append($left, item.$parentItem.html);
-        const event = proxy($item, 'click', () => this.render(item.$parentList));
+        append($left, item.$parent.html);
+        const event = proxy($item, 'click', () => this.render(item.$parents));
         this.events.push(event);
         return $item;
     }
@@ -359,19 +368,19 @@ export default class Setting extends Component {
                         } else {
                             inverseClass($item, 'art-current');
 
-                            for (let index = 0; index < item.$parentItem.selector.length; index++) {
-                                const element = item.$parentItem.selector[index];
+                            for (let index = 0; index < item.$parent.selector.length; index++) {
+                                const element = item.$parent.selector[index];
                                 element.default = element === item;
                             }
 
-                            if (item.$parentList) {
-                                this.render(item.$parentList);
+                            if (item.$parents) {
+                                this.render(item.$parents);
                             }
 
-                            if (item.$parentItem && item.$parentItem.onSelect) {
-                                const result = await item.$parentItem.onSelect.call(this.art, item, $item, event);
-                                if (item.$parentItem.$tooltip && isStringOrNumber(result)) {
-                                    item.$parentItem.$tooltip.innerHTML = result;
+                            if (item.$parent && item.$parent.onSelect) {
+                                const result = await item.$parent.onSelect.call(this.art, item, $item, event);
+                                if (item.$parent.$tooltip && isStringOrNumber(result)) {
+                                    item.$parent.$tooltip.innerHTML = result;
                                 }
                             }
                         }
@@ -413,24 +422,16 @@ export default class Setting extends Component {
         }
     }
 
-    render(option, width) {
-        const { constructor } = this.art;
-
+    render(option) {
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
             inverseClass($panel, 'art-current');
-            setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
-            setStyle(this.$parent, 'height', `${$panel.dataset.height}px`);
-            this.updateStyle(Number($panel.dataset.width));
         } else {
             const $panel = createElement('div');
             addClass($panel, 'art-setting-panel');
-            $panel.dataset.width = width || constructor.SETTING_WIDTH;
-            $panel.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;
 
-            if (option[0] && option[0].$parentItem) {
+            if (option[0]?.$parent) {
                 append($panel, this.creatHeader(option[0]));
-                $panel.dataset.height = Number($panel.dataset.height) + constructor.SETTING_ITEM_HEIGHT;
             }
 
             for (let index = 0; index < option.length; index++) {
@@ -447,13 +448,11 @@ export default class Setting extends Component {
             append(this.$parent, $panel);
             this.cache.set(option, $panel);
             inverseClass($panel, 'art-current');
-            setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
-            setStyle(this.$parent, 'height', `${$panel.dataset.height}px`);
-            this.updateStyle(Number($panel.dataset.width));
 
-            if (option[0] && option[0].$parentItem && option[0].$parentItem.mounted) {
-                option[0].$parentItem.mounted.call(this.art, $panel, option[0].$parentItem);
+            if (option[0]?.$parent?.mounted) {
+                option[0].$parent.mounted.call(this.art, $panel, option[0].$parent);
             }
         }
+        this.updateStyle();
     }
 }
