@@ -33,11 +33,10 @@ export default class Setting extends Component {
         this.$parent = $setting;
 
         this.id = 0;
-        this.events = [];
+        this.active = null;
         this.cache = new Map();
         this.symbol = Symbol('setting');
         this.option = [...this.builtin, ...option.settings];
-        this.active = this.option;
 
         if (option.setting) {
             this.reset();
@@ -90,21 +89,21 @@ export default class Setting extends Component {
     format(option, parent, parents, names = []) {
         for (let index = 0; index < option.length; index++) {
             const item = option[index];
-
-            if (item?.name) {
-                errorHandle(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
-                names.push(item.name);
-            } else {
-                item.name = `setting-${this.id++}`;
+            if (!item.formatted) {
+                if (item?.name) {
+                    errorHandle(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
+                    names.push(item.name);
+                } else {
+                    item.name = `setting-${this.id++}`;
+                }
+                item.$parent = parent;
+                item.$parents = parents;
+                item.$option = option;
+                item.$events = item.$events || [];
+                item.formatted = true;
             }
-
-            item.$parent = parent;
-            item.$parents = parents;
-            item.$option = option;
-            item.$events = item.$events || [];
             this.format(item.selector || [], item, option, names);
         }
-
         this.option = option;
     }
 
@@ -334,8 +333,7 @@ export default class Setting extends Component {
                     const event = proxy($item, 'click', async (event) => {
                         item.switch = await item.onSwitch.call(this.art, item, $item, event);
                     });
-
-                    this.events.push(event);
+                    item.$events.push(event);
                 }
                 break;
             }
@@ -345,14 +343,14 @@ export default class Setting extends Component {
                         const event = proxy(item.$range, 'change', async (event) => {
                             item.tooltip = await item.onRange.call(this.art, item, $item, event);
                         });
-                        this.events.push(event);
+                        item.$events.push(event);
                     }
 
                     if (item.onChange) {
                         const event = proxy(item.$range, 'input', async (event) => {
                             item.tooltip = await item.onChange.call(this.art, item, $item, event);
                         });
-                        this.events.push(event);
+                        item.$events.push(event);
                     }
                 }
                 break;
@@ -361,7 +359,7 @@ export default class Setting extends Component {
                 {
                     const event = proxy($item, 'click', async (event) => {
                         if (item.selector && item.selector.length) {
-                            this.render(item.selector, item.width);
+                            this.render(item.selector);
                         } else {
                             inverseClass($item, 'art-current');
 
@@ -383,7 +381,7 @@ export default class Setting extends Component {
                         }
                     });
 
-                    this.events.push(event);
+                    item.$events.push(event);
 
                     if (item.default) {
                         addClass($item, 'art-current');
