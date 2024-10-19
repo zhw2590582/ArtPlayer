@@ -4619,11 +4619,22 @@ class Setting extends (0, _componentDefault.default) {
                     (0, _utils.errorHandle)(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
                     names.push(item.name);
                 } else item.name = `setting-${this.id++}`;
-                item.$parent = parent;
-                item.$parents = parents;
-                item.$option = option;
-                item.$events = item.$events || [];
-                item.$formatted = true;
+                (0, _utils.def)(item, "$parent", {
+                    get: ()=>parent
+                });
+                (0, _utils.def)(item, "$parents", {
+                    get: ()=>parents
+                });
+                (0, _utils.def)(item, "$option", {
+                    get: ()=>option
+                });
+                const $events = [];
+                (0, _utils.def)(item, "$events", {
+                    get: ()=>$events
+                });
+                (0, _utils.def)(item, "$formatted", {
+                    get: ()=>true
+                });
             }
             this.format(item.selector || [], item, option, names);
         }
@@ -4659,12 +4670,12 @@ class Setting extends (0, _componentDefault.default) {
         }
     }
     remove(name) {
-        const target = this.find(name);
-        (0, _utils.errorHandle)(target, `Can't find [${name}] in the [setting]`);
-        const index = target.$option.indexOf(target);
-        target.$option.splice(index, 1);
-        for(let index = 0; index < target.$events.length; index++)target.$events[index]();
-        if (target.$item) (0, _utils.remove)(target.$item);
+        const item = this.find(name);
+        (0, _utils.errorHandle)(item, `Can't find [${name}] in the [setting]`);
+        const index = item.$option.indexOf(item);
+        item.$option.splice(index, 1);
+        for(let index = 0; index < item.$events.length; index++)item.$events[index]();
+        if (item.$item) (0, _utils.remove)(item.$item);
         this.render();
     }
     update(item) {
@@ -4721,7 +4732,9 @@ class Setting extends (0, _componentDefault.default) {
                 break;
         }
         (0, _utils.append)($left, $icon);
-        item.$icon = $icon;
+        (0, _utils.def)(item, "$icon", {
+            get: ()=>$icon
+        });
         (0, _utils.def)(item, "icon", {
             configurable: true,
             get () {
@@ -4735,7 +4748,9 @@ class Setting extends (0, _componentDefault.default) {
         (0, _utils.addClass)($html, "art-setting-item-left-text");
         (0, _utils.append)($html, item.html || "");
         (0, _utils.append)($left, $html);
-        item.$html = $html;
+        (0, _utils.def)(item, "$html", {
+            get: ()=>$html
+        });
         (0, _utils.def)(item, "html", {
             configurable: true,
             get () {
@@ -4749,7 +4764,9 @@ class Setting extends (0, _componentDefault.default) {
         (0, _utils.addClass)($tooltip, "art-setting-item-right-tooltip");
         (0, _utils.append)($tooltip, item.tooltip || "");
         (0, _utils.append)($right, $tooltip);
-        item.$tooltip = $tooltip;
+        (0, _utils.def)(item, "$tooltip", {
+            get: ()=>$tooltip
+        });
         (0, _utils.def)(item, "tooltip", {
             configurable: true,
             get () {
@@ -4798,7 +4815,9 @@ class Setting extends (0, _componentDefault.default) {
                     $range.step = item.range[3] || 1;
                     (0, _utils.addClass)($range, "art-setting-range");
                     (0, _utils.append)($right, $state);
-                    item.$range = $range;
+                    (0, _utils.def)(item, "$range", {
+                        get: ()=>$range
+                    });
                     (0, _utils.def)(item, "range", {
                         configurable: true,
                         get () {
@@ -4870,8 +4889,12 @@ class Setting extends (0, _componentDefault.default) {
             default:
                 break;
         }
-        $item[this.symbol] = item;
-        item.$item = $item;
+        (0, _utils.def)($item, this.symbol, {
+            get: ()=>item
+        });
+        (0, _utils.def)(item, "$item", {
+            get: ()=>$item
+        });
         return $item;
     }
     append(option, item) {
@@ -4888,7 +4911,9 @@ class Setting extends (0, _componentDefault.default) {
         } else {
             const $panel = (0, _utils.createElement)("div");
             (0, _utils.addClass)($panel, "art-setting-panel");
-            option.$panel = $panel;
+            (0, _utils.def)(option, "$panel", {
+                get: ()=>$panel
+            });
             if (option[0]?.$parent) (0, _utils.append)($panel, this.creatHeader(option[0]));
             for(let index = 0; index < option.length; index++)this.append(option, option[index]);
             (0, _utils.append)(this.$parent, $panel);

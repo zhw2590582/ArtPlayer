@@ -95,11 +95,27 @@ export default class Setting extends Component {
                 } else {
                     item.name = `setting-${this.id++}`;
                 }
-                item.$parent = parent;
-                item.$parents = parents;
-                item.$option = option;
-                item.$events = item.$events || [];
-                item.$formatted = true;
+
+                def(item, '$parent', {
+                    get: () => parent,
+                });
+
+                def(item, '$parents', {
+                    get: () => parents,
+                });
+
+                def(item, '$option', {
+                    get: () => option,
+                });
+
+                const $events = [];
+                def(item, '$events', {
+                    get: () => $events,
+                });
+
+                def(item, '$formatted', {
+                    get: () => true,
+                });
             }
             this.format(item.selector || [], item, option, names);
         }
@@ -149,15 +165,15 @@ export default class Setting extends Component {
     }
 
     remove(name) {
-        const target = this.find(name);
-        errorHandle(target, `Can't find [${name}] in the [setting]`);
-        const index = target.$option.indexOf(target);
-        target.$option.splice(index, 1);
-        for (let index = 0; index < target.$events.length; index++) {
-            target.$events[index]();
+        const item = this.find(name);
+        errorHandle(item, `Can't find [${name}] in the [setting]`);
+        const index = item.$option.indexOf(item);
+        item.$option.splice(index, 1);
+        for (let index = 0; index < item.$events.length; index++) {
+            item.$events[index]();
         }
-        if (target.$item) {
-            remove(target.$item);
+        if (item.$item) {
+            remove(item.$item);
         }
         this.render();
     }
@@ -242,7 +258,10 @@ export default class Setting extends Component {
         }
 
         append($left, $icon);
-        item.$icon = $icon;
+
+        def(item, '$icon', {
+            get: () => $icon,
+        });
 
         def(item, 'icon', {
             configurable: true,
@@ -260,7 +279,10 @@ export default class Setting extends Component {
         addClass($html, 'art-setting-item-left-text');
         append($html, item.html || '');
         append($left, $html);
-        item.$html = $html;
+
+        def(item, '$html', {
+            get: () => $html,
+        });
 
         def(item, 'html', {
             configurable: true,
@@ -278,7 +300,10 @@ export default class Setting extends Component {
         addClass($tooltip, 'art-setting-item-right-tooltip');
         append($tooltip, item.tooltip || '');
         append($right, $tooltip);
-        item.$tooltip = $tooltip;
+
+        def(item, '$tooltip', {
+            get: () => $tooltip,
+        });
 
         def(item, 'tooltip', {
             configurable: true,
@@ -331,7 +356,10 @@ export default class Setting extends Component {
                     $range.step = item.range[3] || 1;
                     addClass($range, 'art-setting-range');
                     append($right, $state);
-                    item.$range = $range;
+
+                    def(item, '$range', {
+                        get: () => $range,
+                    });
 
                     def(item, 'range', {
                         configurable: true,
@@ -421,8 +449,13 @@ export default class Setting extends Component {
                 break;
         }
 
-        $item[this.symbol] = item;
-        item.$item = $item;
+        def($item, this.symbol, {
+            get: () => item,
+        });
+
+        def(item, '$item', {
+            get: () => $item,
+        });
 
         return $item;
     }
@@ -446,7 +479,10 @@ export default class Setting extends Component {
         } else {
             const $panel = createElement('div');
             addClass($panel, 'art-setting-panel');
-            option.$panel = $panel;
+
+            def(option, '$panel', {
+                get: () => $panel,
+            });
 
             if (option[0]?.$parent) {
                 append($panel, this.creatHeader(option[0]));
