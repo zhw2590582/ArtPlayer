@@ -162,22 +162,21 @@ export default class Setting extends Component {
         this.render();
     }
 
-    update(setting) {
-        const target = this.find(setting.name);
+    update(item) {
+        const target = this.find(item.name);
         if (target) {
-            Object.assign(target, setting);
+            Object.assign(target, item);
             this.format();
             this.render();
         } else {
-            this.add(setting);
+            this.add(item);
         }
     }
 
-    add(setting) {
-        this.option.push(setting);
+    add(item, option = this.option) {
+        option.push(item);
         this.format();
-        const { $panel } = this.option;
-        this.append($panel, setting);
+        this.append(option, item);
         this.render();
     }
 
@@ -428,14 +427,14 @@ export default class Setting extends Component {
         return $item;
     }
 
-    append($panel, item) {
-        if (!$panel) return;
+    append(option, item) {
+        if (!option.$panel) return;
         if (has(item, 'switch')) {
-            append($panel, this.creatItem('switch', item));
+            append(option.$panel, this.creatItem('switch', item));
         } else if (has(item, 'range')) {
-            append($panel, this.creatItem('range', item));
+            append(option.$panel, this.creatItem('range', item));
         } else {
-            append($panel, this.creatItem('selector', item));
+            append(option.$panel, this.creatItem('selector', item));
         }
     }
 
@@ -454,7 +453,7 @@ export default class Setting extends Component {
             }
 
             for (let index = 0; index < option.length; index++) {
-                this.append($panel, option[index]);
+                this.append(option, option[index]);
             }
 
             append(this.$parent, $panel);
