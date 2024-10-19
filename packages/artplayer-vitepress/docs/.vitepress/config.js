@@ -77,6 +77,7 @@ const config = {
             { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast'},
             { text: 'Vast 广告', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},        
             { text: '视频章节', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter'},        
+            { text: '视频背光', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight'},        
           ]
         },
         {
@@ -144,6 +145,7 @@ const config = {
             { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast'},
             { text: 'Vast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},
             { text: 'Video Chapters', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter'},
+            { text: 'Video Ambilight', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight'},        
           ]
         },
         {
