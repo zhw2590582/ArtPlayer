@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.2.0] - 2024-10-19
+
 -   新增 `option.proxy` 选项，用于代理第三方的 `video` 和 `canvas`
 -   新增 `artplayer-proxy-canvas` 代理，可以使用 `canvas` 播放视频
 -   新增 `artplayer-proxy-webav` 代理，来自 [bilibili/WebAV](https://github.com/bilibili/WebAV)
@@ -19,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   删除 `subtitleSwitch` 事件，请使用 `subtitleLoad` 代替
 -   升级 `artplayer-plugin-hls-quality` 为 `artplayer-plugin-hls-control`
 -   新增 `artplayer-plugin-ambilight` 插件
+-   修复 `thumbnails` 显示 bug
 
 ## [5.1.7] - 2024-8-15
 
