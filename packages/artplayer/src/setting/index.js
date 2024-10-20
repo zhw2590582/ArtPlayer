@@ -2,7 +2,7 @@ import flip from './flip';
 import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
-import Component from '../utils/Component';
+import Component from '../utils/component';
 import {
     def,
     has,
@@ -177,12 +177,15 @@ export default class Setting extends Component {
         errorHandle(item, `Can't find [${name}] in the [setting]`);
         const index = item.$option.indexOf(item);
         item.$option.splice(index, 1);
+
         for (let index = 0; index < item.$events.length; index++) {
-            item.$events[index]();
+            this.art.events.remove(item.$events[index]);
         }
+
         if (item.$item) {
             remove(item.$item);
         }
+
         item.$events.length = 0;
         this.render();
     }

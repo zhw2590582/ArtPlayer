@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-10-20 22:28:19";
+        return "2024-10-20 23:51:17";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3818,7 +3818,7 @@ class Subtitle extends (0, _componentDefault.default) {
         super(art);
         this.name = "subtitle";
         this.option = null;
-        this.eventDestroy = ()=>null;
+        this.destroyEvent = ()=>null;
         this.init(art.option.subtitle);
         let lastState = false;
         art.on("video:timeupdate", ()=>{
@@ -3886,12 +3886,12 @@ class Subtitle extends (0, _componentDefault.default) {
         $newTrack.onload = ()=>{
             this.art.emit("subtitleLoad", this.cues, this.option);
         };
-        this.eventDestroy();
+        this.art.events.remove(this.destroyEvent);
         $track.onload = null;
         (0, _utils.remove)($track);
         (0, _utils.append)($video, $newTrack);
         template.$track = $newTrack;
-        this.eventDestroy = proxy(this.textTrack, "cuechange", ()=>this.update());
+        this.destroyEvent = proxy(this.textTrack, "cuechange", ()=>this.update());
     }
     async init(subtitleOption) {
         const { notice, template: { $subtitle } } = this.art;
@@ -4566,7 +4566,7 @@ var _playbackRate = require("./playbackRate");
 var _playbackRateDefault = parcelHelpers.interopDefault(_playbackRate);
 var _subtitleOffset = require("./subtitleOffset");
 var _subtitleOffsetDefault = parcelHelpers.interopDefault(_subtitleOffset);
-var _component = require("../utils/Component");
+var _component = require("../utils/component");
 var _componentDefault = parcelHelpers.interopDefault(_component);
 var _utils = require("../utils");
 class Setting extends (0, _componentDefault.default) {
@@ -4679,7 +4679,7 @@ class Setting extends (0, _componentDefault.default) {
         (0, _utils.errorHandle)(item, `Can't find [${name}] in the [setting]`);
         const index = item.$option.indexOf(item);
         item.$option.splice(index, 1);
-        for(let index = 0; index < item.$events.length; index++)item.$events[index]();
+        for(let index = 0; index < item.$events.length; index++)this.art.events.remove(item.$events[index]);
         if (item.$item) (0, _utils.remove)(item.$item);
         item.$events.length = 0;
         this.render();
@@ -4949,7 +4949,7 @@ class Setting extends (0, _componentDefault.default) {
 }
 exports.default = Setting;
 
-},{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils/Component":"81l4Q","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7rVpZ":[function(require,module,exports) {
+},{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","../utils/component":"bgug2"}],"7rVpZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>flip);
@@ -5107,137 +5107,7 @@ function subtitleOffset(art) {
     };
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"81l4Q":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _dom = require("./dom");
-var _error = require("./error");
-var _optionValidator = require("option-validator");
-var _optionValidatorDefault = parcelHelpers.interopDefault(_optionValidator);
-var _scheme = require("../scheme");
-class Component {
-    constructor(art){
-        this.id = 0;
-        this.art = art;
-        this.cache = new Map();
-        this.add = this.add.bind(this);
-        this.remove = this.remove.bind(this);
-        this.update = this.update.bind(this);
-    }
-    get show() {
-        return (0, _dom.hasClass)(this.art.template.$player, `art-${this.name}-show`);
-    }
-    set show(value) {
-        const { $player } = this.art.template;
-        const className = `art-${this.name}-show`;
-        if (value) (0, _dom.addClass)($player, className);
-        else (0, _dom.removeClass)($player, className);
-        this.art.emit(this.name, value);
-    }
-    toggle() {
-        this.show = !this.show;
-    }
-    add(getOption) {
-        const option = typeof getOption === "function" ? getOption(this.art) : getOption;
-        option.html = option.html || "";
-        (0, _optionValidatorDefault.default)(option, (0, _scheme.ComponentOption));
-        if (!this.$parent || !this.name || option.disable) return;
-        const name = option.name || `${this.name}${this.id}`;
-        const item = this.cache.get(name);
-        (0, _error.errorHandle)(!item, `Can't add an existing [${name}] to the [${this.name}]`);
-        this.id += 1;
-        const $ref = (0, _dom.createElement)("div");
-        (0, _dom.addClass)($ref, `art-${this.name}`);
-        (0, _dom.addClass)($ref, `art-${this.name}-${name}`);
-        const childs = Array.from(this.$parent.children);
-        $ref.dataset.index = option.index || this.id;
-        const nextChild = childs.find((item)=>Number(item.dataset.index) >= Number($ref.dataset.index));
-        if (nextChild) nextChild.insertAdjacentElement("beforebegin", $ref);
-        else (0, _dom.append)(this.$parent, $ref);
-        if (option.html) (0, _dom.append)($ref, option.html);
-        if (option.style) (0, _dom.setStyles)($ref, option.style);
-        if (option.tooltip) (0, _dom.tooltip)($ref, option.tooltip);
-        const events = [];
-        if (option.click) {
-            const destroyEvent = this.art.events.proxy($ref, "click", (event)=>{
-                event.preventDefault();
-                option.click.call(this.art, this, event);
-            });
-            events.push(destroyEvent);
-        }
-        if (option.selector && [
-            "left",
-            "right"
-        ].includes(option.position)) this.addSelector(option, $ref, events);
-        this[name] = $ref;
-        this.cache.set(name, {
-            $ref,
-            events,
-            option
-        });
-        if (option.mounted) option.mounted.call(this.art, $ref);
-        return $ref;
-    }
-    addSelector(option, $ref, events) {
-        const { hover, proxy } = this.art.events;
-        (0, _dom.addClass)($ref, "art-control-selector");
-        const $value = (0, _dom.createElement)("div");
-        (0, _dom.addClass)($value, "art-selector-value");
-        (0, _dom.append)($value, option.html);
-        $ref.innerText = "";
-        (0, _dom.append)($ref, $value);
-        const list = option.selector.map((item, index)=>`<div 
-                        class="art-selector-item ${item.default ? "art-current" : ""}"
-                        data-index="${index}"
-                        data-value="${item.value}"
-                    >
-                        ${item.html}
-                    </div>`).join("");
-        const $list = (0, _dom.createElement)("div");
-        (0, _dom.addClass)($list, "art-selector-list");
-        (0, _dom.append)($list, list);
-        (0, _dom.append)($ref, $list);
-        const setLeft = ()=>{
-            const refWidth = (0, _dom.getStyle)($ref, "width");
-            const listWidth = (0, _dom.getStyle)($list, "width");
-            const left = refWidth / 2 - listWidth / 2;
-            $list.style.left = `${left}px`;
-        };
-        hover($ref, setLeft);
-        const destroyEvent = proxy($list, "click", async (event)=>{
-            const path = event.composedPath() || [];
-            const $item = path.find((item)=>(0, _dom.hasClass)(item, "art-selector-item"));
-            if (!$item) return;
-            (0, _dom.inverseClass)($item, "art-current");
-            const index = Number($item.dataset.index);
-            const find = option.selector[index] || {};
-            $value.innerText = $item.innerText;
-            if (option.onSelect) $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
-            setLeft();
-        });
-        events.push(destroyEvent);
-    }
-    remove(name) {
-        const item = this.cache.get(name);
-        (0, _error.errorHandle)(item, `Can't find [${name}] from the [${this.name}]`);
-        if (item.option.beforeUnmount) item.option.beforeUnmount.call(this.art, item.$ref);
-        for(let index = 0; index < item.events.length; index++)this.art.events.remove(item.events[index]);
-        this.cache.delete(name);
-        delete this[name];
-        (0, _dom.remove)(item.$ref);
-    }
-    update(option) {
-        const item = this.cache.get(option.name);
-        if (item) {
-            option = Object.assign(item.option, option);
-            this.remove(option.name);
-        }
-        return this.add(option);
-    }
-}
-exports.default = Component;
-
-},{"./dom":"dNynC","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"feFxw":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"feFxw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Storage {

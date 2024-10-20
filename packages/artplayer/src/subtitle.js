@@ -19,7 +19,7 @@ export default class Subtitle extends Component {
         super(art);
         this.name = 'subtitle';
         this.option = null;
-        this.eventDestroy = () => null;
+        this.destroyEvent = () => null;
         this.init(art.option.subtitle);
 
         let lastState = false;
@@ -115,12 +115,12 @@ export default class Subtitle extends Component {
             this.art.emit('subtitleLoad', this.cues, this.option);
         };
 
-        this.eventDestroy();
+        this.art.events.remove(this.destroyEvent);
         $track.onload = null;
         remove($track);
         append($video, $newTrack);
         template.$track = $newTrack;
-        this.eventDestroy = proxy(this.textTrack, 'cuechange', () => this.update());
+        this.destroyEvent = proxy(this.textTrack, 'cuechange', () => this.update());
     }
 
     async init(subtitleOption) {
