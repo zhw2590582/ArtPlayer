@@ -11,9 +11,9 @@ export default function playbackRate(art) {
         return value === 1.0 ? i18n.get('Normal') : value.toFixed(1);
     }
 
-    function update($panel, $tooltip, value) {
+    function update($item, $tooltip, value) {
         if ($tooltip) $tooltip.innerText = getI18n(value);
-        const $current = queryAll('.art-setting-item', $panel).find((item) => Number(item.dataset.value) === value);
+        const $current = queryAll('.art-setting-item', $item).find((item) => Number(item.dataset.value) === value);
         if ($current) inverseClass($current, 'art-current');
     }
 
@@ -35,10 +35,10 @@ export default function playbackRate(art) {
             art.playbackRate = item.value;
             return item.html;
         },
-        mounted: ($panel, item) => {
-            update($panel, item.$tooltip, art.playbackRate);
+        mounted: ($item, item) => {
+            update($item, item.$tooltip, art.playbackRate);
             art.on('video:ratechange', () => {
-                update($panel, item.$tooltip, art.playbackRate);
+                update($item, item.$tooltip, art.playbackRate);
             });
         },
     };

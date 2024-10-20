@@ -4577,7 +4577,6 @@ class Setting extends (0, _componentDefault.default) {
         this.id = 0;
         this.active = null;
         this.cache = new Map();
-        this.symbol = Symbol("setting");
         this.option = [
             ...this.builtin,
             ...option.settings
@@ -4614,11 +4613,11 @@ class Setting extends (0, _componentDefault.default) {
     format(option = this.option, parent, parents, names = []) {
         for(let index = 0; index < option.length; index++){
             const item = option[index];
+            if (item?.name) {
+                (0, _utils.errorHandle)(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
+                names.push(item.name);
+            } else item.name = `setting-${this.id++}`;
             if (!item.$formatted) {
-                if (item?.name) {
-                    (0, _utils.errorHandle)(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
-                    names.push(item.name);
-                } else item.name = `setting-${this.id++}`;
                 (0, _utils.def)(item, "$parent", {
                     get: ()=>parent
                 });
@@ -4676,6 +4675,7 @@ class Setting extends (0, _componentDefault.default) {
         item.$option.splice(index, 1);
         for(let index = 0; index < item.$events.length; index++)item.$events[index]();
         if (item.$item) (0, _utils.remove)(item.$item);
+        item.$events.length = 0;
         this.render();
     }
     update(target) {
@@ -4685,7 +4685,7 @@ class Setting extends (0, _componentDefault.default) {
             this.format();
             this.creatItem(item, true);
             this.render();
-        } else this.add(item);
+        } else this.add(target);
     }
     add(item, option = this.option) {
         option.push(item);
@@ -4722,8 +4722,8 @@ class Setting extends (0, _componentDefault.default) {
         const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
         (0, _utils.setStyle)($item, "height", `${constructor.SETTING_ITEM_HEIGHT}px`);
-        if ((0, _utils.isStringOrNumber)(item.name)) $item.dataset.name = item.name;
-        if ((0, _utils.isStringOrNumber)(item.value)) $item.dataset.value = item.value;
+        $item.dataset.name = item.name || "";
+        $item.dataset.value = item.value || "";
         const $left = (0, _utils.append)($item, '<div class="art-setting-item-left"></div>');
         const $right = (0, _utils.append)($item, '<div class="art-setting-item-right"></div>');
         const $icon = (0, _utils.createElement)("div");
@@ -4731,10 +4731,10 @@ class Setting extends (0, _componentDefault.default) {
         switch(type){
             case "switch":
             case "range":
-                (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
+                (0, _utils.append)($icon, item.icon ?? icons.config);
                 break;
             case "selector":
-                if (item.selector && item.selector.length) (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
+                if (item.selector && item.selector.length) (0, _utils.append)($icon, item.icon ?? icons.config);
                 else (0, _utils.append)($icon, icons.check);
                 break;
             default:
@@ -4742,6 +4742,7 @@ class Setting extends (0, _componentDefault.default) {
         }
         (0, _utils.append)($left, $icon);
         (0, _utils.def)(item, "$icon", {
+            configurable: true,
             get: ()=>$icon
         });
         (0, _utils.def)(item, "icon", {
@@ -4750,7 +4751,8 @@ class Setting extends (0, _componentDefault.default) {
                 return $icon.innerHTML;
             },
             set (value) {
-                if ((0, _utils.isStringOrNumber)(value)) $icon.innerHTML = value;
+                $icon.innerHTML = "";
+                (0, _utils.append)($icon, value);
             }
         });
         const $html = (0, _utils.createElement)("div");
@@ -4758,6 +4760,7 @@ class Setting extends (0, _componentDefault.default) {
         (0, _utils.append)($html, item.html || "");
         (0, _utils.append)($left, $html);
         (0, _utils.def)(item, "$html", {
+            configurable: true,
             get: ()=>$html
         });
         (0, _utils.def)(item, "html", {
@@ -4766,7 +4769,8 @@ class Setting extends (0, _componentDefault.default) {
                 return $html.innerHTML;
             },
             set (value) {
-                if ((0, _utils.isStringOrNumber)(value)) $html.innerHTML = value;
+                $html.innerHTML = "";
+                (0, _utils.append)($html, value);
             }
         });
         const $tooltip = (0, _utils.createElement)("div");
@@ -4774,6 +4778,7 @@ class Setting extends (0, _componentDefault.default) {
         (0, _utils.append)($tooltip, item.tooltip || "");
         (0, _utils.append)($right, $tooltip);
         (0, _utils.def)(item, "$tooltip", {
+            configurable: true,
             get: ()=>$tooltip
         });
         (0, _utils.def)(item, "tooltip", {
@@ -4782,7 +4787,8 @@ class Setting extends (0, _componentDefault.default) {
                 return $tooltip.innerHTML;
             },
             set (value) {
-                if ((0, _utils.isStringOrNumber)(value)) $tooltip.innerHTML = value;
+                $tooltip.innerHTML = "";
+                (0, _utils.append)($tooltip, value);
             }
         });
         switch(type){
@@ -4818,23 +4824,15 @@ class Setting extends (0, _componentDefault.default) {
                     const $state = (0, _utils.createElement)("div");
                     (0, _utils.addClass)($state, "art-setting-item-right-icon");
                     const $range = (0, _utils.append)($state, '<input type="range">');
-                    $range.value = item.range[0] || 0;
-                    $range.min = item.range[1] || 0;
-                    $range.max = item.range[2] || 10;
-                    $range.step = item.range[3] || 1;
+                    $range.min = item.range[1];
+                    $range.max = item.range[2];
+                    $range.step = item.range[3];
+                    $range.value = item.range[0];
                     (0, _utils.addClass)($range, "art-setting-range");
                     (0, _utils.append)($right, $state);
                     (0, _utils.def)(item, "$range", {
-                        get: ()=>$range
-                    });
-                    (0, _utils.def)(item, "range", {
                         configurable: true,
-                        get () {
-                            return $range.valueAsNumber;
-                        },
-                        set (value) {
-                            $range.value = Number(value);
-                        }
+                        get: ()=>$range
                     });
                 }
                 break;
@@ -4898,10 +4896,8 @@ class Setting extends (0, _componentDefault.default) {
             default:
                 break;
         }
-        (0, _utils.def)($item, this.symbol, {
-            get: ()=>item
-        });
         (0, _utils.def)(item, "$item", {
+            configurable: true,
             get: ()=>$item
         });
         if (isUpdate) (0, _utils.replaceElement)($item, oldItem);
@@ -4922,7 +4918,7 @@ class Setting extends (0, _componentDefault.default) {
             (0, _utils.inverseClass)($panel, "art-current");
             for(let index = 0; index < option.length; index++){
                 const item = option[index];
-                if (item.mounted) item.mounted.call(this.art, $panel, item);
+                if (item.mounted) item.mounted.call(this.art, item.$item, item);
             }
         }
         this.resize();
@@ -4937,9 +4933,9 @@ parcelHelpers.export(exports, "default", ()=>flip);
 var _utils = require("../utils");
 function flip(art) {
     const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, FLIP } } = art;
-    function update($panel, $tooltip, value) {
+    function update($item, $tooltip, value) {
         if ($tooltip) $tooltip.innerText = i18n.get((0, _utils.capitalize)(value));
-        const $current = (0, _utils.queryAll)(".art-setting-item", $panel).find((item)=>item.dataset.value === value);
+        const $current = (0, _utils.queryAll)(".art-setting-item", $item).find((item)=>item.dataset.value === value);
         if ($current) (0, _utils.inverseClass)($current, "art-current");
     }
     return {
@@ -4960,10 +4956,10 @@ function flip(art) {
             art.flip = item.value;
             return item.html;
         },
-        mounted: ($panel, item)=>{
-            update($panel, item.$tooltip, art.flip);
+        mounted: ($item, item)=>{
+            update($item, item.$tooltip, art.flip);
             art.on("flip", ()=>{
-                update($panel, item.$tooltip, art.flip);
+                update($item, item.$tooltip, art.flip);
             });
         }
     };
@@ -4979,9 +4975,9 @@ function aspectRatio(art) {
     function getI18n(value) {
         return value === "default" ? i18n.get("Default") : value;
     }
-    function update($panel, $tooltip, value) {
+    function update($item, $tooltip, value) {
         if ($tooltip) $tooltip.innerText = getI18n(value);
-        const $current = (0, _utils.queryAll)(".art-setting-item", $panel).find((item)=>item.dataset.value === value);
+        const $current = (0, _utils.queryAll)(".art-setting-item", $item).find((item)=>item.dataset.value === value);
         if ($current) (0, _utils.inverseClass)($current, "art-current");
     }
     return {
@@ -5002,10 +4998,10 @@ function aspectRatio(art) {
             art.aspectRatio = item.value;
             return item.html;
         },
-        mounted: ($panel, item)=>{
-            update($panel, item.$tooltip, art.aspectRatio);
+        mounted: ($item, item)=>{
+            update($item, item.$tooltip, art.aspectRatio);
             art.on("aspectRatio", ()=>{
-                update($panel, item.$tooltip, art.aspectRatio);
+                update($item, item.$tooltip, art.aspectRatio);
             });
         }
     };
@@ -5021,9 +5017,9 @@ function playbackRate(art) {
     function getI18n(value) {
         return value === 1.0 ? i18n.get("Normal") : value.toFixed(1);
     }
-    function update($panel, $tooltip, value) {
+    function update($item, $tooltip, value) {
         if ($tooltip) $tooltip.innerText = getI18n(value);
-        const $current = (0, _utils.queryAll)(".art-setting-item", $panel).find((item)=>Number(item.dataset.value) === value);
+        const $current = (0, _utils.queryAll)(".art-setting-item", $item).find((item)=>Number(item.dataset.value) === value);
         if ($current) (0, _utils.inverseClass)($current, "art-current");
     }
     return {
@@ -5044,10 +5040,10 @@ function playbackRate(art) {
             art.playbackRate = item.value;
             return item.html;
         },
-        mounted: ($panel, item)=>{
-            update($panel, item.$tooltip, art.playbackRate);
+        mounted: ($item, item)=>{
+            update($item, item.$tooltip, art.playbackRate);
             art.on("video:ratechange", ()=>{
-                update($panel, item.$tooltip, art.playbackRate);
+                update($item, item.$tooltip, art.playbackRate);
             });
         }
     };
@@ -5072,8 +5068,8 @@ function subtitleOffset(art) {
             0.1
         ],
         onChange (item) {
-            art.subtitleOffset = item.range;
-            return item.range + "s";
+            art.subtitleOffset = item.$range.valueAsNumber;
+            return item.$range.valueAsNumber + "s";
         }
     };
 }

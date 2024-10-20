@@ -36,7 +36,6 @@ export default class Setting extends Component {
         this.id = 0;
         this.active = null;
         this.cache = new Map();
-        this.symbol = Symbol('setting');
         this.option = [...this.builtin, ...option.settings];
 
         if (option.setting) {
@@ -89,14 +88,15 @@ export default class Setting extends Component {
     format(option = this.option, parent, parents, names = []) {
         for (let index = 0; index < option.length; index++) {
             const item = option[index];
-            if (!item.$formatted) {
-                if (item?.name) {
-                    errorHandle(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
-                    names.push(item.name);
-                } else {
-                    item.name = `setting-${this.id++}`;
-                }
 
+            if (item?.name) {
+                errorHandle(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
+                names.push(item.name);
+            } else {
+                item.name = `setting-${this.id++}`;
+            }
+
+            if (!item.$formatted) {
                 def(item, '$parent', {
                     get: () => parent,
                 });
@@ -176,6 +176,7 @@ export default class Setting extends Component {
         if (item.$item) {
             remove(item.$item);
         }
+        item.$events.length = 0;
         this.render();
     }
 
@@ -187,7 +188,7 @@ export default class Setting extends Component {
             this.creatItem(item, true);
             this.render();
         } else {
-            this.add(item);
+            this.add(target);
         }
     }
 
@@ -244,13 +245,8 @@ export default class Setting extends Component {
         addClass($item, 'art-setting-item');
         setStyle($item, 'height', `${constructor.SETTING_ITEM_HEIGHT}px`);
 
-        if (isStringOrNumber(item.name)) {
-            $item.dataset.name = item.name;
-        }
-
-        if (isStringOrNumber(item.value)) {
-            $item.dataset.value = item.value;
-        }
+        $item.dataset.name = item.name || '';
+        $item.dataset.value = item.value || '';
 
         const $left = append($item, '<div class="art-setting-item-left"></div>');
         const $right = append($item, '<div class="art-setting-item-right"></div>');
@@ -261,14 +257,11 @@ export default class Setting extends Component {
         switch (type) {
             case 'switch':
             case 'range':
-                append($icon, isStringOrNumber(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
+                append($icon, item.icon ?? icons.config);
                 break;
             case 'selector':
                 if (item.selector && item.selector.length) {
-                    append(
-                        $icon,
-                        isStringOrNumber(item.icon) || item.icon instanceof Element ? item.icon : icons.config,
-                    );
+                    append($icon, item.icon ?? icons.config);
                 } else {
                     append($icon, icons.check);
                 }
@@ -280,6 +273,7 @@ export default class Setting extends Component {
         append($left, $icon);
 
         def(item, '$icon', {
+            configurable: true,
             get: () => $icon,
         });
 
@@ -289,9 +283,8 @@ export default class Setting extends Component {
                 return $icon.innerHTML;
             },
             set(value) {
-                if (isStringOrNumber(value)) {
-                    $icon.innerHTML = value;
-                }
+                $icon.innerHTML = '';
+                append($icon, value);
             },
         });
 
@@ -301,6 +294,7 @@ export default class Setting extends Component {
         append($left, $html);
 
         def(item, '$html', {
+            configurable: true,
             get: () => $html,
         });
 
@@ -310,9 +304,8 @@ export default class Setting extends Component {
                 return $html.innerHTML;
             },
             set(value) {
-                if (isStringOrNumber(value)) {
-                    $html.innerHTML = value;
-                }
+                $html.innerHTML = '';
+                append($html, value);
             },
         });
 
@@ -322,6 +315,7 @@ export default class Setting extends Component {
         append($right, $tooltip);
 
         def(item, '$tooltip', {
+            configurable: true,
             get: () => $tooltip,
         });
 
@@ -331,9 +325,8 @@ export default class Setting extends Component {
                 return $tooltip.innerHTML;
             },
             set(value) {
-                if (isStringOrNumber(value)) {
-                    $tooltip.innerHTML = value;
-                }
+                $tooltip.innerHTML = '';
+                append($tooltip, value);
             },
         });
 
@@ -345,8 +338,8 @@ export default class Setting extends Component {
                 const $switchOff = append($state, icons.switchOff);
                 setStyle(item.switch ? $switchOff : $switchOn, 'display', 'none');
                 append($right, $state);
-                item.$switch = item.switch;
 
+                item.$switch = item.switch;
                 def(item, 'switch', {
                     configurable: true,
                     get() {
@@ -370,25 +363,16 @@ export default class Setting extends Component {
                     const $state = createElement('div');
                     addClass($state, 'art-setting-item-right-icon');
                     const $range = append($state, '<input type="range">');
-                    $range.value = item.range[0] || 0;
-                    $range.min = item.range[1] || 0;
-                    $range.max = item.range[2] || 10;
-                    $range.step = item.range[3] || 1;
+                    $range.min = item.range[1];
+                    $range.max = item.range[2];
+                    $range.step = item.range[3];
+                    $range.value = item.range[0];
                     addClass($range, 'art-setting-range');
                     append($right, $state);
 
                     def(item, '$range', {
-                        get: () => $range,
-                    });
-
-                    def(item, 'range', {
                         configurable: true,
-                        get() {
-                            return $range.valueAsNumber;
-                        },
-                        set(value) {
-                            $range.value = Number(value);
-                        },
+                        get: () => $range,
                     });
                 }
                 break;
@@ -469,11 +453,8 @@ export default class Setting extends Component {
                 break;
         }
 
-        def($item, this.symbol, {
-            get: () => item,
-        });
-
         def(item, '$item', {
+            configurable: true,
             get: () => $item,
         });
 
@@ -508,7 +489,7 @@ export default class Setting extends Component {
             for (let index = 0; index < option.length; index++) {
                 const item = option[index];
                 if (item.mounted) {
-                    item.mounted.call(this.art, $panel, item);
+                    item.mounted.call(this.art, item.$item, item);
                 }
             }
         }

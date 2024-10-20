@@ -7,9 +7,9 @@ export default function flip(art) {
         constructor: { SETTING_ITEM_WIDTH, FLIP },
     } = art;
 
-    function update($panel, $tooltip, value) {
+    function update($item, $tooltip, value) {
         if ($tooltip) $tooltip.innerText = i18n.get(capitalize(value));
-        const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
+        const $current = queryAll('.art-setting-item', $item).find((item) => item.dataset.value === value);
         if ($current) inverseClass($current, 'art-current');
     }
 
@@ -31,10 +31,10 @@ export default function flip(art) {
             art.flip = item.value;
             return item.html;
         },
-        mounted: ($panel, item) => {
-            update($panel, item.$tooltip, art.flip);
+        mounted: ($item, item) => {
+            update($item, item.$tooltip, art.flip);
             art.on('flip', () => {
-                update($panel, item.$tooltip, art.flip);
+                update($item, item.$tooltip, art.flip);
             });
         },
     };
