@@ -12,7 +12,6 @@ import {
     isGetter,
     addClass,
     setStyle,
-    isMobile,
     errorHandle,
     inverseClass,
     createElement,
