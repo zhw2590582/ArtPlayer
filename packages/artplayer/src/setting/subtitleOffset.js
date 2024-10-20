@@ -12,5 +12,11 @@ export default function subtitleOffset(art) {
             art.subtitleOffset = item.range[0];
             return item.range[0] + 's';
         },
+        mounted: (_, item) => {
+            art.on('subtitleOffset', (value) => {
+                item.$range.value = value;
+                item.tooltip = value + 's';
+            });
+        },
     };
 }
