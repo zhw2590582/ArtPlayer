@@ -15,6 +15,7 @@ import {
     errorHandle,
     inverseClass,
     createElement,
+    replaceElement,
     includeFromEvent,
     isStringOrNumber,
 } from '../utils';
@@ -178,11 +179,12 @@ export default class Setting extends Component {
         this.render();
     }
 
-    update(item) {
-        const target = this.find(item.name);
-        if (target) {
-            Object.assign(target, item);
+    update(target) {
+        const item = this.find(target.name);
+        if (item) {
+            Object.assign(item, target);
             this.format();
+            this.creatItem(item, true);
             this.render();
         } else {
             this.add(item);
@@ -192,16 +194,20 @@ export default class Setting extends Component {
     add(item, option = this.option) {
         option.push(item);
         this.format();
-        this.append(option, item);
+        this.creatItem(item);
         this.render();
     }
 
     creatHeader(item) {
+        if (!this.cache.has(item.$option)) return;
+        const $panel = this.cache.get(item.$option);
+
         const {
             proxy,
             icons: { arrowLeft },
             constructor: { SETTING_ITEM_HEIGHT },
         } = this.art;
+
         const $item = createElement('div');
         setStyle($item, 'height', `${SETTING_ITEM_HEIGHT}px`);
         addClass($item, 'art-setting-item');
@@ -214,10 +220,24 @@ export default class Setting extends Component {
         append($left, item.$parent.html);
         const event = proxy($item, 'click', () => this.render(item.$parents));
         item.$parent.$events.push(event);
-        return $item;
+        append($panel, $item);
     }
 
-    creatItem(type, item) {
+    creatItem(item, isUpdate = false) {
+        if (!this.cache.has(item.$option)) return;
+        const $panel = this.cache.get(item.$option);
+        const oldItem = item.$item;
+
+        let type = 'selector';
+
+        if (has(item, 'switch')) {
+            type = 'switch';
+        }
+
+        if (has(item, 'range')) {
+            type = 'range';
+        }
+
         const { icons, proxy, constructor } = this.art;
 
         const $item = createElement('div');
@@ -457,17 +477,10 @@ export default class Setting extends Component {
             get: () => $item,
         });
 
-        return $item;
-    }
-
-    append(option, item) {
-        if (!option.$panel) return;
-        if (has(item, 'switch')) {
-            append(option.$panel, this.creatItem('switch', item));
-        } else if (has(item, 'range')) {
-            append(option.$panel, this.creatItem('range', item));
+        if (isUpdate) {
+            replaceElement($item, oldItem);
         } else {
-            append(option.$panel, this.creatItem('selector', item));
+            append($panel, $item);
         }
     }
 
@@ -479,21 +492,17 @@ export default class Setting extends Component {
         } else {
             const $panel = createElement('div');
             addClass($panel, 'art-setting-panel');
-
-            def(option, '$panel', {
-                get: () => $panel,
-            });
+            this.cache.set(option, $panel);
 
             if (option[0]?.$parent) {
-                append($panel, this.creatHeader(option[0]));
+                this.creatHeader(option[0]);
             }
 
             for (let index = 0; index < option.length; index++) {
-                this.append(option, option[index]);
+                this.creatItem(option[index]);
             }
 
             append(this.$parent, $panel);
-            this.cache.set(option, $panel);
             inverseClass($panel, 'art-current');
 
             for (let index = 0; index < option.length; index++) {
