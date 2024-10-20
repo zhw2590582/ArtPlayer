@@ -10,6 +10,7 @@ var art = new Artplayer({
         {
             width: 200,
             html: 'Subtitle',
+            name: 'subtitle',
             tooltip: 'Bilingual',
             icon: '<img width="22" heigth="22" src="/assets/img/subtitle.svg">',
             selector: [
@@ -83,6 +84,7 @@ var art = new Artplayer({
     await sleep(1000);
     art.setting.resize();
     await sleep(1000);
+    art.setting.inactivate(art.setting.find('subtitle'));
     art.setting.remove('aspect-ratio');
     try {
         art.setting.remove('aspect-ratio2');

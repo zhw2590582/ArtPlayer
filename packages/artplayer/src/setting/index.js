@@ -172,33 +172,35 @@ export default class Setting extends Component {
         }
     }
 
+    inactivate(item) {
+        for (let index = 0; index < item.$events.length; index++) {
+            this.art.events.remove(item.$events[index]);
+        }
+        item.$events.length = 0;
+    }
+
     remove(name) {
         const item = this.find(name);
         errorHandle(item, `Can't find [${name}] in the [setting]`);
         const index = item.$option.indexOf(item);
         item.$option.splice(index, 1);
-
-        for (let index = 0; index < item.$events.length; index++) {
-            this.art.events.remove(item.$events[index]);
-        }
-
-        if (item.$item) {
-            remove(item.$item);
-        }
-
-        item.$events.length = 0;
+        this.inactivate(item);
+        if (item.$item) remove(item.$item);
         this.render();
     }
 
     update(target) {
         const item = this.find(target.name);
+
         if (item) {
+            this.inactivate(item);
             Object.assign(item, target);
             this.format();
             this.creatItem(item, true);
             this.render();
+            return item;
         } else {
-            this.add(target);
+            return this.add(target);
         }
     }
 
@@ -207,6 +209,7 @@ export default class Setting extends Component {
         this.format();
         this.creatItem(item);
         this.render();
+        return item;
     }
 
     creatHeader(item) {

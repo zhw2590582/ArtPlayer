@@ -4674,30 +4674,36 @@ class Setting extends (0, _componentDefault.default) {
             }
         }
     }
+    inactivate(item) {
+        for(let index = 0; index < item.$events.length; index++)this.art.events.remove(item.$events[index]);
+        item.$events.length = 0;
+    }
     remove(name) {
         const item = this.find(name);
         (0, _utils.errorHandle)(item, `Can't find [${name}] in the [setting]`);
         const index = item.$option.indexOf(item);
         item.$option.splice(index, 1);
-        for(let index = 0; index < item.$events.length; index++)this.art.events.remove(item.$events[index]);
+        this.inactivate(item);
         if (item.$item) (0, _utils.remove)(item.$item);
-        item.$events.length = 0;
         this.render();
     }
     update(target) {
         const item = this.find(target.name);
         if (item) {
+            this.inactivate(item);
             Object.assign(item, target);
             this.format();
             this.creatItem(item, true);
             this.render();
-        } else this.add(target);
+            return item;
+        } else return this.add(target);
     }
     add(item, option = this.option) {
         option.push(item);
         this.format();
         this.creatItem(item);
         this.render();
+        return item;
     }
     creatHeader(item) {
         if (!this.cache.has(item.$option)) return;
