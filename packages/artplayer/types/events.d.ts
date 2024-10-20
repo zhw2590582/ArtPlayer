@@ -68,4 +68,5 @@ export type Events = {
     restart: [url: string];
     muted: [state: boolean];
     setBar: [type: Bar, percentage: number, event?: Event];
+    keydown: [event: KeyboardEvent];
 };

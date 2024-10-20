@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   类型是 `range` 的 `Setting`，现在回调函数返回的 `range` 是数字的数组，不再是单一数字 
 -   删除 `isStringOrNumber` 工具函数
 -   修复 `artplayer-plugin-hls-control` 状态不统一的问题
+-   使用 `code` 替代已废弃的`keyCode` 监听键盘事件 
+-   新增 `keydown` 事件，监听来自 `document` 的 `keydown` 事件
 
 ## [5.2.0] - 2024-10-19
 

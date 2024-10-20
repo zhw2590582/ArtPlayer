@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-10-20 15:04:08";
+        return "2024-10-20 16:00:55";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -4243,30 +4243,30 @@ class Hotkey {
     }
     init() {
         const { proxy, constructor } = this.art;
-        this.add(27, ()=>{
+        this.add("Escape", ()=>{
             if (this.art.fullscreenWeb) this.art.fullscreenWeb = false;
         });
-        this.add(32, ()=>{
+        this.add("Space", ()=>{
             this.art.toggle();
         });
-        this.add(37, ()=>{
+        this.add("ArrowLeft", ()=>{
             this.art.backward = constructor.SEEK_STEP;
         });
-        this.add(38, ()=>{
+        this.add("ArrowUp", ()=>{
             this.art.volume += constructor.VOLUME_STEP;
         });
-        this.add(39, ()=>{
+        this.add("ArrowRight", ()=>{
             this.art.forward = constructor.SEEK_STEP;
         });
-        this.add(40, ()=>{
+        this.add("ArrowDown", ()=>{
             this.art.volume -= constructor.VOLUME_STEP;
         });
-        proxy(window, "keydown", (event)=>{
+        proxy(document, "keydown", (event)=>{
             if (this.art.isFocus) {
                 const tag = document.activeElement.tagName.toUpperCase();
                 const editable = document.activeElement.getAttribute("contenteditable");
                 if (tag !== "INPUT" && tag !== "TEXTAREA" && editable !== "" && editable !== "true" && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
-                    const events = this.keys[event.keyCode];
+                    const events = this.keys[event.code];
                     if (events) {
                         event.preventDefault();
                         for(let index = 0; index < events.length; index++)events[index].call(this.art, event);
@@ -4274,6 +4274,7 @@ class Hotkey {
                     }
                 }
             }
+            this.art.emit("keydown", event);
         });
     }
     add(key, event) {
@@ -5165,7 +5166,13 @@ class Component {
         (0, _dom.append)($value, option.html);
         $ref.innerText = "";
         (0, _dom.append)($ref, $value);
-        const list = option.selector.map((item, index)=>`<div class="art-selector-item ${item.default ? "art-current" : ""}" data-index="${index}">${item.html}</div>`).join("");
+        const list = option.selector.map((item, index)=>`<div 
+                        class="art-selector-item ${item.default ? "art-current" : ""}"
+                        data-index="${index}"
+                        data-value="${item.value}"
+                    >
+                        ${item.html}
+                    </div>`).join("");
         const $list = (0, _dom.createElement)("div");
         (0, _dom.addClass)($list, "art-selector-list");
         (0, _dom.append)($list, list);

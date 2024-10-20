@@ -21,13 +21,13 @@ var art = new Artplayer({
 ## Create - Selection List
 
 | Property   | Type                | Description   |
-| ---------- | ------------------- | ------------  |
-| `html`     | `String`, `Element` | Element's DOM |
-| `icon`     | `String`, `Element` | 元素的图标   |
-| `selector` | `Array`             | 元素列表     |
-| `onSelect` | `Function`          | 元素点击事件 |
-| `width`    | `Number`            | 列表宽度     |
-| `tooltip`  | `String`            | 提示文本     |
+| ---------- | ------------------- | ------------- |
+| `html`     | `String`, `Element` | Item DOM      |
+| `icon`     | `String`, `Element` | Item Icon     |
+| `selector` | `Array`             | Item selector |
+| `onSelect` | `Function`          | Click event   |
+| `width`    | `Number`            | List Width    |
+| `tooltip`  | `String`            | Tooltip text  |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -139,13 +139,13 @@ var art = new Artplayer({
 ```
 ## Create - Toggle Button
 
-| Property   | Type                | Description       |
-| ---------- | ------------------- | ----------------- |
-| `html`     | `String`, `Element` | Element's DOM element |
-| `icon`     | `String`, `Element` | Element's icon    |
+| Property   | Type                | Description            |
+| ---------- | ------------------- | ---------------------- |
+| `html`     | `String`, `Element` | Element's DOM element  |
+| `icon`     | `String`, `Element` | Element's icon         |
 | `switch`   | `Boolean`           | Button's default state |
-| `onSwitch` | `Function`          | Button toggle event |
-| `tooltip`  | `String`            | Tooltip text      |
+| `onSwitch` | `Function`          | Button toggle event    |
+| `tooltip`  | `String`            | Tooltip text           |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -173,14 +173,14 @@ var art = new Artplayer({
 ```
 ## Create - Range Slider
 
-| Attribute  | Type                | Description                 |
-| ---------- | ------------------- | --------------------------- |
-| `html`     | `String`, `Element` | The element's DOM element   |
-| `icon`     | `String`, `Element` | The element's icon          |
-| `range`    | `Array`             | Default state array         |
+| Attribute  | Type                | Description                     |
+| ---------- | ------------------- | ------------------------------- |
+| `html`     | `String`, `Element` | The element's DOM element       |
+| `icon`     | `String`, `Element` | The element's icon              |
+| `range`    | `Array`             | Default state array             |
 | `onRange`  | `Function`          | Event triggered upon completion |
-| `onChange` | `Function`          | Event triggered on change   |
-| `tooltip`  | `String`            | Tooltip text                |
+| `onChange` | `Function`          | Event triggered on change       |
+| `tooltip`  | `String`            | Tooltip text                    |
 
 ```js
 const range = [5, 1, 10, 1];
@@ -204,7 +204,7 @@ var art = new Artplayer({
             range: [5, 1, 10, 1],
             onChange: function (item, $dom, event) {
                 console.info(item, $dom, event);
-                return item.range + 'x';
+                return item.range[0] + 'x';
             },
         },
     ],

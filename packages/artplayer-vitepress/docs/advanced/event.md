@@ -794,6 +794,23 @@ art.on('muted', (state) => {
 });
 ```
 
+## `keydown`
+
+监听来自 `document` 的 `keydown` 事件
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('keydown', (event) => {
+    console.log(event.code);
+});
+```
+
 ## `video:canplay`
 
 浏览器可以播放媒体文件了，但估计没有足够的数据来支撑播放到结束，不必停下来进一步缓冲内容

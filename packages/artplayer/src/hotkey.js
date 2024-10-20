@@ -13,33 +13,33 @@ export default class Hotkey {
     init() {
         const { proxy, constructor } = this.art;
 
-        this.add(27, () => {
+        this.add('Escape', () => {
             if (this.art.fullscreenWeb) {
                 this.art.fullscreenWeb = false;
             }
         });
 
-        this.add(32, () => {
+        this.add('Space', () => {
             this.art.toggle();
         });
 
-        this.add(37, () => {
+        this.add('ArrowLeft', () => {
             this.art.backward = constructor.SEEK_STEP;
         });
 
-        this.add(38, () => {
+        this.add('ArrowUp', () => {
             this.art.volume += constructor.VOLUME_STEP;
         });
 
-        this.add(39, () => {
+        this.add('ArrowRight', () => {
             this.art.forward = constructor.SEEK_STEP;
         });
 
-        this.add(40, () => {
+        this.add('ArrowDown', () => {
             this.art.volume -= constructor.VOLUME_STEP;
         });
 
-        proxy(window, 'keydown', (event) => {
+        proxy(document, 'keydown', (event) => {
             if (this.art.isFocus) {
                 const tag = document.activeElement.tagName.toUpperCase();
                 const editable = document.activeElement.getAttribute('contenteditable');
@@ -53,7 +53,7 @@ export default class Hotkey {
                     !event.metaKey &&
                     !event.shiftKey
                 ) {
-                    const events = this.keys[event.keyCode];
+                    const events = this.keys[event.code];
                     if (events) {
                         event.preventDefault();
                         for (let index = 0; index < events.length; index++) {
@@ -63,6 +63,7 @@ export default class Hotkey {
                     }
                 }
             }
+            this.art.emit('keydown', event);
         });
     }
 

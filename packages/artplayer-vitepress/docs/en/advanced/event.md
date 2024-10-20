@@ -785,6 +785,23 @@ art.on('muted', (state) => {
 });
 ```
 
+## `keydown`
+
+监听来自 `document` 的 `keydown` 事件
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('keydown', (event) => {
+    console.log(event.code);
+});
+```
+
 ## `video:canplay`
 
 The browser can play the media file, but estimates there is not enough data to play through to the end without having to stop for further buffering
