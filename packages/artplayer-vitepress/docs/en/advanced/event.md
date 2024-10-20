@@ -787,7 +787,7 @@ art.on('muted', (state) => {
 
 ## `keydown`
 
-监听来自 `document` 的 `keydown` 事件
+Listen to the `keydown` event from `document`
 
 <div className="run-code">▶ Run Code</div>
 
