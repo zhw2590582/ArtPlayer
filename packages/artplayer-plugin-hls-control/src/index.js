@@ -49,6 +49,9 @@ export default function artplayerPluginHlsControl(option = {}) {
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 art.emit('artplayerPluginHlsControl:quality', item);
+                for (let index = 0; index < selector.length; index++) {
+                    selector[index].default = selector[index] === item;
+                }
                 return item.html;
             };
 
@@ -124,6 +127,9 @@ export default function artplayerPluginHlsControl(option = {}) {
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 art.emit('artplayerPluginHlsControl:audio', item);
+                for (let index = 0; index < selector.length; index++) {
+                    selector[index].default = selector[index] === item;
+                }
                 return item.html;
             };
 
@@ -159,9 +165,11 @@ export default function artplayerPluginHlsControl(option = {}) {
                     mounted: (_, setting) => {
                         art.on('artplayerPluginHlsControl:audio', (item) => {
                             setting.tooltip = item.html;
+
                             const element = setting.selector.find(
                                 (element) => Number(element.$item?.dataset?.value) === item.value,
                             );
+
                             if (element?.$item) {
                                 inverseClass(element.$item, 'art-current');
                             }

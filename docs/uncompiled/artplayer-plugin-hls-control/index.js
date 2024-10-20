@@ -187,6 +187,7 @@ function artplayerPluginHlsControl(option = {}) {
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 art.emit("artplayerPluginHlsControl:quality", item);
+                for(let index = 0; index < selector.length; index++)selector[index].default = selector[index] === item;
                 return item.html;
             };
             if (config.control) art.controls.update({
@@ -245,6 +246,7 @@ function artplayerPluginHlsControl(option = {}) {
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 art.emit("artplayerPluginHlsControl:audio", item);
+                for(let index = 0; index < selector.length; index++)selector[index].default = selector[index] === item;
                 return item.html;
             };
             if (config.control) art.controls.update({
