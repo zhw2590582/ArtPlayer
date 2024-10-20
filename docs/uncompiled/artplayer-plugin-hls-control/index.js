@@ -161,7 +161,7 @@ function uniqBy(array, property) {
 function artplayerPluginHlsControl(option = {}) {
     return (art)=>{
         const { $video } = art.template;
-        const { errorHandle } = art.constructor.utils;
+        const { errorHandle, query } = art.constructor.utils;
         function updateQuality(hls) {
             if (!hls.levels.length) return;
             const config = option.quality || {};
@@ -186,6 +186,7 @@ function artplayerPluginHlsControl(option = {}) {
                 hls.currentLevel = item.value;
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
+                art.emit("artplayerPluginHlsControl:quality", item);
                 return item.html;
             };
             if (config.control) art.controls.update({
@@ -196,7 +197,13 @@ function artplayerPluginHlsControl(option = {}) {
                     padding: "0 10px"
                 },
                 selector: selector,
-                onSelect: onSelect
+                onSelect: onSelect,
+                mounted: ($control)=>{
+                    const $value = query(".art-selector-value", $control);
+                    art.on("artplayerPluginHlsControl:quality", (item)=>{
+                        $value.innerHTML = item.html;
+                    });
+                }
             });
             if (config.setting) art.setting.update({
                 name: "hls-quality",
@@ -205,7 +212,12 @@ function artplayerPluginHlsControl(option = {}) {
                 icon: (0, _qualitySvgDefault.default),
                 width: 200,
                 selector: selector,
-                onSelect: onSelect
+                onSelect: onSelect,
+                mounted: (_, setting)=>{
+                    art.on("artplayerPluginHlsControl:quality", (item)=>{
+                        setting.tooltip = item.html;
+                    });
+                }
             });
         }
         function updateAudio(hls) {
@@ -227,6 +239,7 @@ function artplayerPluginHlsControl(option = {}) {
                 hls.audioTrack = item.value;
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
+                art.emit("artplayerPluginHlsControl:audio", item);
                 return item.html;
             };
             if (config.control) art.controls.update({
@@ -237,7 +250,13 @@ function artplayerPluginHlsControl(option = {}) {
                     padding: "0 10px"
                 },
                 selector: selector,
-                onSelect: onSelect
+                onSelect: onSelect,
+                mounted: ($control)=>{
+                    const $value = query(".art-selector-value", $control);
+                    art.on("artplayerPluginHlsControl:audio", (item)=>{
+                        $value.innerHTML = item.html;
+                    });
+                }
             });
             if (config.setting) art.setting.update({
                 name: "hls-audio",
@@ -246,7 +265,12 @@ function artplayerPluginHlsControl(option = {}) {
                 icon: (0, _audioSvgDefault.default),
                 width: 200,
                 selector: selector,
-                onSelect: onSelect
+                onSelect: onSelect,
+                mounted: (_, setting)=>{
+                    art.on("artplayerPluginHlsControl:audio", (item)=>{
+                        setting.tooltip = item.html;
+                    });
+                }
             });
         }
         function update() {

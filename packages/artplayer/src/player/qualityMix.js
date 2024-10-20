@@ -12,7 +12,7 @@ export default function qualityMix(art) {
                 style: {
                     marginRight: '10px',
                 },
-                html: qualityDefault ? qualityDefault.html : '',
+                html: qualityDefault?.html || '',
                 selector: quality,
                 async onSelect(item) {
                     await art.switchQuality(item.url);

@@ -482,6 +482,10 @@ export default class Setting extends Component {
         } else {
             append($panel, $item);
         }
+
+        if (item.mounted) {
+            item.mounted.call(this.art, item.$item, item);
+        }
     }
 
     render(option = this.option) {
@@ -491,8 +495,10 @@ export default class Setting extends Component {
             inverseClass($panel, 'art-current');
         } else {
             const $panel = createElement('div');
-            addClass($panel, 'art-setting-panel');
             this.cache.set(option, $panel);
+            addClass($panel, 'art-setting-panel');
+            append(this.$parent, $panel);
+            inverseClass($panel, 'art-current');
 
             if (option[0]?.$parent) {
                 this.creatHeader(option[0]);
@@ -500,16 +506,6 @@ export default class Setting extends Component {
 
             for (let index = 0; index < option.length; index++) {
                 this.creatItem(option[index]);
-            }
-
-            append(this.$parent, $panel);
-            inverseClass($panel, 'art-current');
-
-            for (let index = 0; index < option.length; index++) {
-                const item = option[index];
-                if (item.mounted) {
-                    item.mounted.call(this.art, item.$item, item);
-                }
             }
         }
         this.resize();

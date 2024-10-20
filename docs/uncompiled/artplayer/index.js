@@ -236,13 +236,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "5.2.0";
+        return "5.2.1";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2024-10-20 13:51:32";
+        return "2024-10-20 14:03:56";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1288,7 +1288,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"5.2.0"}</div>
+                  <div class="art-info-content">${"5.2.1"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3740,7 +3740,7 @@ parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.2.0"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.2.1"}</a>`
     };
 }
 
@@ -4911,6 +4911,7 @@ class Setting extends (0, _componentDefault.default) {
         });
         if (isUpdate) (0, _utils.replaceElement)($item, oldItem);
         else (0, _utils.append)($panel, $item);
+        if (item.mounted) item.mounted.call(this.art, item.$item, item);
     }
     render(option = this.option) {
         this.active = option;
@@ -4919,16 +4920,12 @@ class Setting extends (0, _componentDefault.default) {
             (0, _utils.inverseClass)($panel, "art-current");
         } else {
             const $panel = (0, _utils.createElement)("div");
-            (0, _utils.addClass)($panel, "art-setting-panel");
             this.cache.set(option, $panel);
-            if (option[0]?.$parent) this.creatHeader(option[0]);
-            for(let index = 0; index < option.length; index++)this.creatItem(option[index]);
+            (0, _utils.addClass)($panel, "art-setting-panel");
             (0, _utils.append)(this.$parent, $panel);
             (0, _utils.inverseClass)($panel, "art-current");
-            for(let index = 0; index < option.length; index++){
-                const item = option[index];
-                if (item.mounted) item.mounted.call(this.art, item.$item, item);
-            }
+            if (option[0]?.$parent) this.creatHeader(option[0]);
+            for(let index = 0; index < option.length; index++)this.creatItem(option[index]);
         }
         this.resize();
     }
