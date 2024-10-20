@@ -5090,8 +5090,8 @@ function subtitleOffset(art) {
         tooltip: "0s",
         range: [
             0,
-            -5,
-            5,
+            -10,
+            10,
             0.1
         ],
         onChange (item) {
