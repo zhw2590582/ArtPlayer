@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-10-20 14:03:56";
+        return "2024-10-20 14:45:09";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2612,7 +2612,7 @@ function qualityMix(art) {
                 style: {
                     marginRight: "10px"
                 },
-                html: qualityDefault ? qualityDefault.html : "",
+                html: qualityDefault?.html || "",
                 selector: quality,
                 async onSelect (item) {
                     await art.switchQuality(item.url);
@@ -3060,7 +3060,13 @@ class Component {
         (0, _dom.append)($value, option.html);
         $ref.innerText = "";
         (0, _dom.append)($ref, $value);
-        const list = option.selector.map((item, index)=>`<div class="art-selector-item ${item.default ? "art-current" : ""}" data-index="${index}">${item.html}</div>`).join("");
+        const list = option.selector.map((item, index)=>`<div 
+                        class="art-selector-item ${item.default ? "art-current" : ""}"
+                        data-index="${index}"
+                        data-value="${item.value}"
+                    >
+                        ${item.html}
+                    </div>`).join("");
         const $list = (0, _dom.createElement)("div");
         (0, _dom.addClass)($list, "art-selector-list");
         (0, _dom.append)($list, list);
@@ -4887,8 +4893,8 @@ class Setting extends (0, _componentDefault.default) {
                         if (item.selector && item.selector.length) this.render(item.selector);
                         else {
                             (0, _utils.inverseClass)($item, "art-current");
-                            for(let index = 0; index < item.$parent.selector.length; index++){
-                                const element = item.$parent.selector[index];
+                            for(let index = 0; index < item.$option.length; index++){
+                                const element = item.$option[index];
                                 element.default = element === item;
                             }
                             if (item.$parents) this.render(item.$parents);

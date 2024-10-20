@@ -161,7 +161,7 @@ function uniqBy(array, property) {
 function artplayerPluginHlsControl(option = {}) {
     return (art)=>{
         const { $video } = art.template;
-        const { errorHandle, query } = art.constructor.utils;
+        const { errorHandle, query, queryAll, inverseClass } = art.constructor.utils;
         function updateQuality(hls) {
             if (!hls.levels.length) return;
             const config = option.quality || {};
@@ -199,9 +199,12 @@ function artplayerPluginHlsControl(option = {}) {
                 selector: selector,
                 onSelect: onSelect,
                 mounted: ($control)=>{
-                    const $value = query(".art-selector-value", $control);
                     art.on("artplayerPluginHlsControl:quality", (item)=>{
+                        const $value = query(".art-selector-value", $control);
+                        const $items = queryAll(".art-selector-item", $control);
                         $value.innerHTML = item.html;
+                        const $item = $items.find((element)=>Number(element.dataset.value) === item.value);
+                        inverseClass($item, "art-current");
                     });
                 }
             });
@@ -216,6 +219,8 @@ function artplayerPluginHlsControl(option = {}) {
                 mounted: (_, setting)=>{
                     art.on("artplayerPluginHlsControl:quality", (item)=>{
                         setting.tooltip = item.html;
+                        const element = setting.selector.find((element)=>Number(element.$item?.dataset?.value) === item.value);
+                        if (element?.$item) inverseClass(element.$item, "art-current");
                     });
                 }
             });
@@ -252,9 +257,12 @@ function artplayerPluginHlsControl(option = {}) {
                 selector: selector,
                 onSelect: onSelect,
                 mounted: ($control)=>{
-                    const $value = query(".art-selector-value", $control);
                     art.on("artplayerPluginHlsControl:audio", (item)=>{
+                        const $value = query(".art-selector-value", $control);
+                        const $items = queryAll(".art-selector-item", $control);
                         $value.innerHTML = item.html;
+                        const $item = $items.find((element)=>Number(element.dataset.value) === item.value);
+                        inverseClass($item, "art-current");
                     });
                 }
             });
@@ -269,6 +277,8 @@ function artplayerPluginHlsControl(option = {}) {
                 mounted: (_, setting)=>{
                     art.on("artplayerPluginHlsControl:audio", (item)=>{
                         setting.tooltip = item.html;
+                        const element = setting.selector.find((element)=>Number(element.$item?.dataset?.value) === item.value);
+                        if (element?.$item) inverseClass(element.$item, "art-current");
                     });
                 }
             });

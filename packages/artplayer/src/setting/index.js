@@ -443,8 +443,8 @@ export default class Setting extends Component {
                         } else {
                             inverseClass($item, 'art-current');
 
-                            for (let index = 0; index < item.$parent.selector.length; index++) {
-                                const element = item.$parent.selector[index];
+                            for (let index = 0; index < item.$option.length; index++) {
+                                const element = item.$option[index];
                                 element.default = element === item;
                             }
 

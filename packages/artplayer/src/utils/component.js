@@ -114,9 +114,13 @@ export default class Component {
         const list = option.selector
             .map(
                 (item, index) =>
-                    `<div class="art-selector-item ${item.default ? 'art-current' : ''}" data-index="${index}">${
-                        item.html
-                    }</div>`,
+                    `<div 
+                        class="art-selector-item ${item.default ? 'art-current' : ''}"
+                        data-index="${index}"
+                        data-value="${item.value}"
+                    >
+                        ${item.html}
+                    </div>`,
             )
             .join('');
         const $list = createElement('div');
