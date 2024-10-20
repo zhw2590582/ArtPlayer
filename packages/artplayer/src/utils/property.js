@@ -9,6 +9,11 @@ export function get(obj, name) {
     return Object.getOwnPropertyDescriptor(obj, name);
 }
 
+export function isGetter(obj, prop) {
+    const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+    return descriptor !== undefined && typeof descriptor.get === 'function';
+}
+
 export function mergeDeep(...objects) {
     const isObject = (item) => item && typeof item === 'object' && !Array.isArray(item);
     return objects.reduce((prev, obj) => {

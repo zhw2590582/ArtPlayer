@@ -1,4 +1,4 @@
-import { inverseClass, queryAll } from '../utils';
+import Setting from './';
 
 export default function aspectRatio(art) {
     const {
@@ -11,10 +11,9 @@ export default function aspectRatio(art) {
         return value === 'default' ? i18n.get('Default') : value;
     }
 
-    function update($item, $tooltip, value) {
-        if ($tooltip) $tooltip.innerText = getI18n(value);
-        const $current = queryAll('.art-setting-item', $item).find((item) => item.dataset.value === value);
-        if ($current) inverseClass($current, 'art-current');
+    function update(item) {
+        const tooltip = getI18n(art.aspectRatio);
+        Setting.select(item, art.aspectRatio, tooltip);
     }
 
     return {
@@ -27,7 +26,9 @@ export default function aspectRatio(art) {
             return {
                 value: item,
                 name: `aspect-ratio-${item}`,
-                default: item === art.aspectRatio,
+                get default() {
+                    return item === art.aspectRatio;
+                },
                 html: getI18n(item),
             };
         }),
@@ -35,11 +36,9 @@ export default function aspectRatio(art) {
             art.aspectRatio = item.value;
             return item.html;
         },
-        mounted: ($item, item) => {
-            update($item, item.$tooltip, art.aspectRatio);
-            art.on('aspectRatio', () => {
-                update($item, item.$tooltip, art.aspectRatio);
-            });
+        mounted: (_, item) => {
+            update(item);
+            art.on('aspectRatio', () => update(item));
         },
     };
 }

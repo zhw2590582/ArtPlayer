@@ -9,6 +9,7 @@ import {
     remove,
     append,
     getRect,
+    isGetter,
     addClass,
     setStyle,
     isMobile,
@@ -82,6 +83,12 @@ export default class Setting extends Component {
         }
 
         return result;
+    }
+
+    static select(item, value, tooltip) {
+        if (item.$tooltip && tooltip) item.$tooltip.innerText = tooltip;
+        const element = item.selector.find((element) => element.$item?.dataset?.value === value);
+        if (element?.$item) inverseClass(element.$item, 'art-current');
     }
 
     format(option = this.option, parent, parents, names = []) {
@@ -445,7 +452,9 @@ export default class Setting extends Component {
 
                             for (let index = 0; index < item.$option.length; index++) {
                                 const element = item.$option[index];
-                                element.default = element === item;
+                                if (!isGetter(element, 'default')) {
+                                    element.default = element === item;
+                                }
                             }
 
                             if (item.$parents) {

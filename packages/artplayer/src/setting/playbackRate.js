@@ -1,4 +1,4 @@
-import { inverseClass, queryAll } from '../utils';
+import Setting from './';
 
 export default function playbackRate(art) {
     const {
@@ -11,10 +11,9 @@ export default function playbackRate(art) {
         return value === 1.0 ? i18n.get('Normal') : value.toFixed(1);
     }
 
-    function update($item, $tooltip, value) {
-        if ($tooltip) $tooltip.innerText = getI18n(value);
-        const $current = queryAll('.art-setting-item', $item).find((item) => Number(item.dataset.value) === value);
-        if ($current) inverseClass($current, 'art-current');
+    function update(item) {
+        const tooltip = getI18n(art.playbackRate);
+        Setting.select(item, art.playbackRate, tooltip);
     }
 
     return {
@@ -27,7 +26,9 @@ export default function playbackRate(art) {
             return {
                 value: item,
                 name: `aspect-ratio-${item}`,
-                default: item === art.playbackRate,
+                get default() {
+                    return item === art.playbackRate;
+                },
                 html: getI18n(item),
             };
         }),
@@ -35,11 +36,9 @@ export default function playbackRate(art) {
             art.playbackRate = item.value;
             return item.html;
         },
-        mounted: ($item, item) => {
-            update($item, item.$tooltip, art.playbackRate);
-            art.on('video:ratechange', () => {
-                update($item, item.$tooltip, art.playbackRate);
-            });
+        mounted: (_, item) => {
+            update(item);
+            art.on('video:ratechange', () => update(item));
         },
     };
 }

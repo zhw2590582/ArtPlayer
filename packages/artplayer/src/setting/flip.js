@@ -1,4 +1,5 @@
-import { inverseClass, queryAll, capitalize } from '../utils';
+import Setting from './';
+import { capitalize } from '../utils';
 
 export default function flip(art) {
     const {
@@ -7,10 +8,13 @@ export default function flip(art) {
         constructor: { SETTING_ITEM_WIDTH, FLIP },
     } = art;
 
-    function update($item, $tooltip, value) {
-        if ($tooltip) $tooltip.innerText = i18n.get(capitalize(value));
-        const $current = queryAll('.art-setting-item', $item).find((item) => item.dataset.value === value);
-        if ($current) inverseClass($current, 'art-current');
+    function getI18n(value) {
+        return i18n.get(capitalize(value));
+    }
+
+    function update(item) {
+        const tooltip = getI18n(art.flip);
+        Setting.select(item, art.flip, tooltip);
     }
 
     return {
@@ -23,7 +27,9 @@ export default function flip(art) {
             return {
                 value: item,
                 name: `aspect-ratio-${item}`,
-                default: item === art.flip,
+                get default() {
+                    return item === art.flip;
+                },
                 html: i18n.get(capitalize(item)),
             };
         }),
@@ -31,11 +37,9 @@ export default function flip(art) {
             art.flip = item.value;
             return item.html;
         },
-        mounted: ($item, item) => {
-            update($item, item.$tooltip, art.flip);
-            art.on('flip', () => {
-                update($item, item.$tooltip, art.flip);
-            });
+        mounted: (_, item) => {
+            update(item);
+            art.on('flip', () => update(item));
         },
     };
 }

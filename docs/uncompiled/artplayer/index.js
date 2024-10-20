@@ -910,6 +910,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "def", ()=>def);
 parcelHelpers.export(exports, "has", ()=>has);
 parcelHelpers.export(exports, "get", ()=>get);
+parcelHelpers.export(exports, "isGetter", ()=>isGetter);
 parcelHelpers.export(exports, "mergeDeep", ()=>mergeDeep);
 const def = Object.defineProperty;
 const { hasOwnProperty } = Object.prototype;
@@ -918,6 +919,10 @@ function has(obj, name) {
 }
 function get(obj, name) {
     return Object.getOwnPropertyDescriptor(obj, name);
+}
+function isGetter(obj, prop) {
+    const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+    return descriptor !== undefined && typeof descriptor.get === "function";
 }
 function mergeDeep(...objects) {
     const isObject = (item)=>item && typeof item === "object" && !Array.isArray(item);
@@ -4606,6 +4611,11 @@ class Setting extends (0, _componentDefault.default) {
         if (option.subtitleOffset) result.push((0, _subtitleOffsetDefault.default)(this.art));
         return result;
     }
+    static select(item, value, tooltip) {
+        if (item.$tooltip && tooltip) item.$tooltip.innerText = tooltip;
+        const element = item.selector.find((element)=>element.$item?.dataset?.value === value);
+        if (element?.$item) (0, _utils.inverseClass)(element.$item, "art-current");
+    }
     format(option = this.option, parent, parents, names = []) {
         for(let index = 0; index < option.length; index++){
             const item = option[index];
@@ -4896,7 +4906,7 @@ class Setting extends (0, _componentDefault.default) {
                             (0, _utils.inverseClass)($item, "art-current");
                             for(let index = 0; index < item.$option.length; index++){
                                 const element = item.$option[index];
-                                element.default = element === item;
+                                if (!(0, _utils.isGetter)(element, "default")) element.default = element === item;
                             }
                             if (item.$parents) this.render(item.$parents);
                             if (item.$parent && item.$parent.onSelect) {
@@ -4943,13 +4953,17 @@ exports.default = Setting;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>flip);
+var _ = require("./");
+var _Default = parcelHelpers.interopDefault(_);
 var _utils = require("../utils");
 function flip(art) {
     const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, FLIP } } = art;
-    function update($item, $tooltip, value) {
-        if ($tooltip) $tooltip.innerText = i18n.get((0, _utils.capitalize)(value));
-        const $current = (0, _utils.queryAll)(".art-setting-item", $item).find((item)=>item.dataset.value === value);
-        if ($current) (0, _utils.inverseClass)($current, "art-current");
+    function getI18n(value) {
+        return i18n.get((0, _utils.capitalize)(value));
+    }
+    function update(item) {
+        const tooltip = getI18n(art.flip);
+        (0, _Default.default).select(item, art.flip, tooltip);
     }
     return {
         width: SETTING_ITEM_WIDTH,
@@ -4961,7 +4975,9 @@ function flip(art) {
             return {
                 value: item,
                 name: `aspect-ratio-${item}`,
-                default: item === art.flip,
+                get default () {
+                    return item === art.flip;
+                },
                 html: i18n.get((0, _utils.capitalize)(item))
             };
         }),
@@ -4969,29 +4985,27 @@ function flip(art) {
             art.flip = item.value;
             return item.html;
         },
-        mounted: ($item, item)=>{
-            update($item, item.$tooltip, art.flip);
-            art.on("flip", ()=>{
-                update($item, item.$tooltip, art.flip);
-            });
+        mounted: (_, item)=>{
+            update(item);
+            art.on("flip", ()=>update(item));
         }
     };
 }
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9hfUt":[function(require,module,exports) {
+},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./":"e5Aaq"}],"9hfUt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>aspectRatio);
-var _utils = require("../utils");
+var _ = require("./");
+var _Default = parcelHelpers.interopDefault(_);
 function aspectRatio(art) {
     const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, ASPECT_RATIO } } = art;
     function getI18n(value) {
         return value === "default" ? i18n.get("Default") : value;
     }
-    function update($item, $tooltip, value) {
-        if ($tooltip) $tooltip.innerText = getI18n(value);
-        const $current = (0, _utils.queryAll)(".art-setting-item", $item).find((item)=>item.dataset.value === value);
-        if ($current) (0, _utils.inverseClass)($current, "art-current");
+    function update(item) {
+        const tooltip = getI18n(art.aspectRatio);
+        (0, _Default.default).select(item, art.aspectRatio, tooltip);
     }
     return {
         width: SETTING_ITEM_WIDTH,
@@ -5003,7 +5017,9 @@ function aspectRatio(art) {
             return {
                 value: item,
                 name: `aspect-ratio-${item}`,
-                default: item === art.aspectRatio,
+                get default () {
+                    return item === art.aspectRatio;
+                },
                 html: getI18n(item)
             };
         }),
@@ -5011,29 +5027,27 @@ function aspectRatio(art) {
             art.aspectRatio = item.value;
             return item.html;
         },
-        mounted: ($item, item)=>{
-            update($item, item.$tooltip, art.aspectRatio);
-            art.on("aspectRatio", ()=>{
-                update($item, item.$tooltip, art.aspectRatio);
-            });
+        mounted: (_, item)=>{
+            update(item);
+            art.on("aspectRatio", ()=>update(item));
         }
     };
 }
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8RIYy":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./":"e5Aaq"}],"8RIYy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>playbackRate);
-var _utils = require("../utils");
+var _ = require("./");
+var _Default = parcelHelpers.interopDefault(_);
 function playbackRate(art) {
     const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, PLAYBACK_RATE } } = art;
     function getI18n(value) {
         return value === 1.0 ? i18n.get("Normal") : value.toFixed(1);
     }
-    function update($item, $tooltip, value) {
-        if ($tooltip) $tooltip.innerText = getI18n(value);
-        const $current = (0, _utils.queryAll)(".art-setting-item", $item).find((item)=>Number(item.dataset.value) === value);
-        if ($current) (0, _utils.inverseClass)($current, "art-current");
+    function update(item) {
+        const tooltip = getI18n(art.playbackRate);
+        (0, _Default.default).select(item, art.playbackRate, tooltip);
     }
     return {
         width: SETTING_ITEM_WIDTH,
@@ -5045,7 +5059,9 @@ function playbackRate(art) {
             return {
                 value: item,
                 name: `aspect-ratio-${item}`,
-                default: item === art.playbackRate,
+                get default () {
+                    return item === art.playbackRate;
+                },
                 html: getI18n(item)
             };
         }),
@@ -5053,16 +5069,14 @@ function playbackRate(art) {
             art.playbackRate = item.value;
             return item.html;
         },
-        mounted: ($item, item)=>{
-            update($item, item.$tooltip, art.playbackRate);
-            art.on("video:ratechange", ()=>{
-                update($item, item.$tooltip, art.playbackRate);
-            });
+        mounted: (_, item)=>{
+            update(item);
+            art.on("video:ratechange", ()=>update(item));
         }
     };
 }
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aVPfi":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./":"e5Aaq"}],"aVPfi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>subtitleOffset);
