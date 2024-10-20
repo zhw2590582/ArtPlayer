@@ -4,13 +4,17 @@ type Props<T> = {
     html: string;
     icon: string;
     tooltip: string;
+    $item: HTMLDivElement;
     $icon: HTMLDivElement;
     $html: HTMLDivElement;
     $tooltip: HTMLDivElement;
-    $switch: boolean;
+    $switch: HTMLDivElement;
     $range: HTMLInputElement;
-    $parentItem: Setting;
-    $parentList: Setting[];
+    $parent: Setting;
+    $parents: Setting[];
+    $option: Setting[];
+    $events: Function[];
+    $formatted: boolean;
 } & Omit<T, 'html' | 'icon' | 'tooltip'>;
 
 export type SettingOption = Props<Setting>;

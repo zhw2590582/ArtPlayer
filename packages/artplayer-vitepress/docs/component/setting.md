@@ -208,7 +208,7 @@ var art = new Artplayer({
             range: [5, 1, 10, 1],
             onChange: function (item, $dom, event) {
                 console.info(item, $dom, event);
-                return item.range + 'x';
+                return item.range[0] + 'x';
             },
         },
     ],

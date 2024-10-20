@@ -6,10 +6,6 @@ export function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export function isStringOrNumber(val) {
-    return ['string', 'number'].includes(typeof val);
-}
-
 export function secondToTime(second) {
     if (!second) return '00:00';
     const add0 = (num) => (num < 10 ? `0${num}` : String(num));

@@ -49,7 +49,6 @@ export type Utils = {
     secondToTime(second: number): string;
     escape(str: string): string;
     capitalize(str: string): string;
-    isStringOrNumber(val: any): boolean;
     getIcon(key: string, html: string | HTMLElement): HTMLElement;
     supportsFlex(): boolean;
     setStyleText(element: HTMLElement, text: string): void;

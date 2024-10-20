@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-10-19 16:59:48";
+        return "2024-10-20 13:51:32";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -971,7 +971,6 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "clamp", ()=>clamp);
 parcelHelpers.export(exports, "capitalize", ()=>capitalize);
-parcelHelpers.export(exports, "isStringOrNumber", ()=>isStringOrNumber);
 parcelHelpers.export(exports, "secondToTime", ()=>secondToTime);
 parcelHelpers.export(exports, "escape", ()=>escape);
 parcelHelpers.export(exports, "unescape", ()=>unescape);
@@ -980,12 +979,6 @@ function clamp(num, a, b) {
 }
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
-}
-function isStringOrNumber(val) {
-    return [
-        "string",
-        "number"
-    ].includes(typeof val);
 }
 function secondToTime(second) {
     if (!second) return "00:00";
@@ -2992,7 +2985,6 @@ exports.default = Control;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _dom = require("./dom");
-var _format = require("./format");
 var _error = require("./error");
 var _optionValidator = require("option-validator");
 var _optionValidatorDefault = parcelHelpers.interopDefault(_optionValidator);
@@ -3088,10 +3080,7 @@ class Component {
             const index = Number($item.dataset.index);
             const find = option.selector[index] || {};
             $value.innerText = $item.innerText;
-            if (option.onSelect) {
-                const result = await option.onSelect.call(this.art, find, $item, event);
-                if ((0, _format.isStringOrNumber)(result)) $value.innerHTML = result;
-            }
+            if (option.onSelect) $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
             setLeft();
         });
         events.push(destroyEvent);
@@ -3116,7 +3105,7 @@ class Component {
 }
 exports.default = Component;
 
-},{"./dom":"dNynC","./format":"eWip5","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
+},{"./dom":"dNynC","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>fullscreen);
@@ -3999,7 +3988,7 @@ class Events {
 }
 exports.default = Events;
 
-},{"./clickInit":"3fsfH","./hoverInit":"jr1ic","./moveInit":"jnUlq","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","./updateInit":"4Xp2q","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./restoreInit":"9tEoR"}],"3fsfH":[function(require,module,exports) {
+},{"./clickInit":"3fsfH","./hoverInit":"jr1ic","./moveInit":"jnUlq","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","./updateInit":"4Xp2q","./restoreInit":"9tEoR","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3fsfH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>clickInit);
@@ -4905,7 +4894,7 @@ class Setting extends (0, _componentDefault.default) {
                             if (item.$parents) this.render(item.$parents);
                             if (item.$parent && item.$parent.onSelect) {
                                 const result = await item.$parent.onSelect.call(this.art, item, $item, event);
-                                if (item.$parent.$tooltip && (0, _utils.isStringOrNumber)(result)) item.$parent.$tooltip.innerHTML = result;
+                                if (item.$parent.$tooltip) item.$parent.$tooltip.innerHTML = result;
                             }
                         }
                     });
@@ -4946,7 +4935,7 @@ class Setting extends (0, _componentDefault.default) {
 }
 exports.default = Setting;
 
-},{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","../utils/Component":"81l4Q"}],"7rVpZ":[function(require,module,exports) {
+},{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils/Component":"81l4Q","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7rVpZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>flip);
@@ -5098,7 +5087,6 @@ function subtitleOffset(art) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _dom = require("./dom");
-var _format = require("./format");
 var _error = require("./error");
 var _optionValidator = require("option-validator");
 var _optionValidatorDefault = parcelHelpers.interopDefault(_optionValidator);
@@ -5194,10 +5182,7 @@ class Component {
             const index = Number($item.dataset.index);
             const find = option.selector[index] || {};
             $value.innerText = $item.innerText;
-            if (option.onSelect) {
-                const result = await option.onSelect.call(this.art, find, $item, event);
-                if ((0, _format.isStringOrNumber)(result)) $value.innerHTML = result;
-            }
+            if (option.onSelect) $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
             setLeft();
         });
         events.push(destroyEvent);
@@ -5222,7 +5207,7 @@ class Component {
 }
 exports.default = Component;
 
-},{"./dom":"dNynC","./format":"eWip5","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"feFxw":[function(require,module,exports) {
+},{"./dom":"dNynC","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"feFxw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Storage {

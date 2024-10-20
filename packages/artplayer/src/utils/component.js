@@ -10,7 +10,6 @@ import {
     inverseClass,
     createElement,
 } from './dom';
-import { isStringOrNumber } from './format';
 import { errorHandle } from './error';
 import validator from 'option-validator';
 import { ComponentOption } from '../scheme';
@@ -143,10 +142,7 @@ export default class Component {
             const find = option.selector[index] || {};
             $value.innerText = $item.innerText;
             if (option.onSelect) {
-                const result = await option.onSelect.call(this.art, find, $item, event);
-                if (isStringOrNumber(result)) {
-                    $value.innerHTML = result;
-                }
+                $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
             }
             setLeft();
         });

@@ -17,7 +17,6 @@ import {
     createElement,
     replaceElement,
     includeFromEvent,
-    isStringOrNumber,
 } from '../utils';
 
 export default class Setting extends Component {
@@ -455,7 +454,7 @@ export default class Setting extends Component {
 
                             if (item.$parent && item.$parent.onSelect) {
                                 const result = await item.$parent.onSelect.call(this.art, item, $item, event);
-                                if (item.$parent.$tooltip && isStringOrNumber(result)) {
+                                if (item.$parent.$tooltip) {
                                     item.$parent.$tooltip.innerHTML = result;
                                 }
                             }

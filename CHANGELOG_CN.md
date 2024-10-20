@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+-   重构 `Setting` 组件，修复状态丢失的问题
+-   类型是 `range` 的 `Setting`，现在回调函数返回的 `range` 是数字的数组，不再是单一数字 
+-   删除 `isStringOrNumber` 工具函数
 
 ## [5.2.0] - 2024-10-19
 
