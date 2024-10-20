@@ -9,8 +9,8 @@ export default function subtitleOffset(art) {
         tooltip: '0s',
         range: [0, -5, 5, 0.1],
         onChange(item) {
-            art.subtitleOffset = item.$range.valueAsNumber;
-            return item.$range.valueAsNumber + 's';
+            art.subtitleOffset = item.range[0];
+            return item.range[0] + 's';
         },
     };
 }

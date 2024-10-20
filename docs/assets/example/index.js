@@ -84,7 +84,7 @@ var art = new Artplayer({
             tooltip: '5x',
             range: [5, 1, 10, 0.1],
             onRange: function (item) {
-                return item.range + 'x';
+                return item.range[0] + 'x';
             },
         },
     ],

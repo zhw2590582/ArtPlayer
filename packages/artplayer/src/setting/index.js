@@ -118,8 +118,10 @@ export default class Setting extends Component {
                     get: () => true,
                 });
             }
+
             this.format(item.selector || [], item, option, names);
         }
+
         this.option = option;
     }
 
@@ -257,11 +259,11 @@ export default class Setting extends Component {
         switch (type) {
             case 'switch':
             case 'range':
-                append($icon, item.icon ?? icons.config);
+                append($icon, item.icon || icons.config);
                 break;
             case 'selector':
                 if (item.selector && item.selector.length) {
-                    append($icon, item.icon ?? icons.config);
+                    append($icon, item.icon || icons.config);
                 } else {
                     append($icon, icons.check);
                 }
@@ -332,21 +334,24 @@ export default class Setting extends Component {
 
         switch (type) {
             case 'switch': {
-                const $state = createElement('div');
-                addClass($state, 'art-setting-item-right-icon');
-                const $switchOn = append($state, icons.switchOn);
-                const $switchOff = append($state, icons.switchOff);
+                const $switch = createElement('div');
+                addClass($switch, 'art-setting-item-right-icon');
+                const $switchOn = append($switch, icons.switchOn);
+                const $switchOff = append($switch, icons.switchOff);
                 setStyle(item.switch ? $switchOff : $switchOn, 'display', 'none');
-                append($right, $state);
+                append($right, $switch);
 
-                item.$switch = item.switch;
+                def(item, '$switch', {
+                    configurable: true,
+                    get: () => $switch,
+                });
+
+                let $switchValue = item.switch;
                 def(item, 'switch', {
                     configurable: true,
-                    get() {
-                        return item.$switch;
-                    },
+                    get: () => $switchValue,
                     set(value) {
-                        item.$switch = value;
+                        $switchValue = value;
                         if (value) {
                             setStyle($switchOff, 'display', 'none');
                             setStyle($switchOn, 'display', null);
@@ -363,16 +368,29 @@ export default class Setting extends Component {
                     const $state = createElement('div');
                     addClass($state, 'art-setting-item-right-icon');
                     const $range = append($state, '<input type="range">');
+                    $range.value = item.range[0];
                     $range.min = item.range[1];
                     $range.max = item.range[2];
                     $range.step = item.range[3];
-                    $range.value = item.range[0];
                     addClass($range, 'art-setting-range');
                     append($right, $state);
 
                     def(item, '$range', {
                         configurable: true,
                         get: () => $range,
+                    });
+
+                    let $rangeValue = [...item.range];
+                    def(item, 'range', {
+                        configurable: true,
+                        get: () => $rangeValue,
+                        set(value) {
+                            $rangeValue = [...value];
+                            $range.value = value[0];
+                            $range.min = value[1];
+                            $range.max = value[2];
+                            $range.step = value[3];
+                        },
                     });
                 }
                 break;
@@ -402,6 +420,7 @@ export default class Setting extends Component {
                 if (item.$range) {
                     if (item.onRange) {
                         const event = proxy(item.$range, 'change', async (event) => {
+                            item.range[0] = item.$range.valueAsNumber;
                             item.tooltip = await item.onRange.call(this.art, item, $item, event);
                         });
                         item.$events.push(event);
@@ -409,6 +428,7 @@ export default class Setting extends Component {
 
                     if (item.onChange) {
                         const event = proxy(item.$range, 'input', async (event) => {
+                            item.range[0] = item.$range.valueAsNumber;
                             item.tooltip = await item.onChange.call(this.art, item, $item, event);
                         });
                         item.$events.push(event);

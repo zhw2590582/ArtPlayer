@@ -4731,10 +4731,10 @@ class Setting extends (0, _componentDefault.default) {
         switch(type){
             case "switch":
             case "range":
-                (0, _utils.append)($icon, item.icon ?? icons.config);
+                (0, _utils.append)($icon, item.icon || icons.config);
                 break;
             case "selector":
-                if (item.selector && item.selector.length) (0, _utils.append)($icon, item.icon ?? icons.config);
+                if (item.selector && item.selector.length) (0, _utils.append)($icon, item.icon || icons.config);
                 else (0, _utils.append)($icon, icons.check);
                 break;
             default:
@@ -4794,20 +4794,22 @@ class Setting extends (0, _componentDefault.default) {
         switch(type){
             case "switch":
                 {
-                    const $state = (0, _utils.createElement)("div");
-                    (0, _utils.addClass)($state, "art-setting-item-right-icon");
-                    const $switchOn = (0, _utils.append)($state, icons.switchOn);
-                    const $switchOff = (0, _utils.append)($state, icons.switchOff);
+                    const $switch = (0, _utils.createElement)("div");
+                    (0, _utils.addClass)($switch, "art-setting-item-right-icon");
+                    const $switchOn = (0, _utils.append)($switch, icons.switchOn);
+                    const $switchOff = (0, _utils.append)($switch, icons.switchOff);
                     (0, _utils.setStyle)(item.switch ? $switchOff : $switchOn, "display", "none");
-                    (0, _utils.append)($right, $state);
-                    item.$switch = item.switch;
+                    (0, _utils.append)($right, $switch);
+                    (0, _utils.def)(item, "$switch", {
+                        configurable: true,
+                        get: ()=>$switch
+                    });
+                    let $switchValue = item.switch;
                     (0, _utils.def)(item, "switch", {
                         configurable: true,
-                        get () {
-                            return item.$switch;
-                        },
+                        get: ()=>$switchValue,
                         set (value) {
-                            item.$switch = value;
+                            $switchValue = value;
                             if (value) {
                                 (0, _utils.setStyle)($switchOff, "display", "none");
                                 (0, _utils.setStyle)($switchOn, "display", null);
@@ -4824,15 +4826,31 @@ class Setting extends (0, _componentDefault.default) {
                     const $state = (0, _utils.createElement)("div");
                     (0, _utils.addClass)($state, "art-setting-item-right-icon");
                     const $range = (0, _utils.append)($state, '<input type="range">');
+                    $range.value = item.range[0];
                     $range.min = item.range[1];
                     $range.max = item.range[2];
                     $range.step = item.range[3];
-                    $range.value = item.range[0];
                     (0, _utils.addClass)($range, "art-setting-range");
                     (0, _utils.append)($right, $state);
                     (0, _utils.def)(item, "$range", {
                         configurable: true,
                         get: ()=>$range
+                    });
+                    let $rangeValue = [
+                        ...item.range
+                    ];
+                    (0, _utils.def)(item, "range", {
+                        configurable: true,
+                        get: ()=>$rangeValue,
+                        set (value) {
+                            $rangeValue = [
+                                ...value
+                            ];
+                            $range.value = value[0];
+                            $range.min = value[1];
+                            $range.max = value[2];
+                            $range.step = value[3];
+                        }
                     });
                 }
                 break;
@@ -4860,12 +4878,14 @@ class Setting extends (0, _componentDefault.default) {
                 if (item.$range) {
                     if (item.onRange) {
                         const event = proxy(item.$range, "change", async (event)=>{
+                            item.range[0] = item.$range.valueAsNumber;
                             item.tooltip = await item.onRange.call(this.art, item, $item, event);
                         });
                         item.$events.push(event);
                     }
                     if (item.onChange) {
                         const event = proxy(item.$range, "input", async (event)=>{
+                            item.range[0] = item.$range.valueAsNumber;
                             item.tooltip = await item.onChange.call(this.art, item, $item, event);
                         });
                         item.$events.push(event);
@@ -5068,8 +5088,8 @@ function subtitleOffset(art) {
             0.1
         ],
         onChange (item) {
-            art.subtitleOffset = item.$range.valueAsNumber;
-            return item.$range.valueAsNumber + "s";
+            art.subtitleOffset = item.range[0];
+            return item.range[0] + "s";
         }
     };
 }

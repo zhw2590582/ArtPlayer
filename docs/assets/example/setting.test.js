@@ -67,7 +67,7 @@ var art = new Artplayer({
             tooltip: '5x',
             range: [5, 1, 10, 0.1],
             onRange: function (item) {
-                return item.range + 'x';
+                return item.range[0] + 'x';
             },
             mounted: function (...args) {
                 console.info(args);
@@ -77,11 +77,11 @@ var art = new Artplayer({
 }, async () => {
     const { sleep } = Artplayer.utils;
     art.setting.show = true;
-    await sleep(100);
-    art.setting.resize();
     console.log(art.setting.builtin);
     console.log(art.setting.find('aspect-ratio'));
     console.log(art.setting.find('aspect-ratio2'));
+    await sleep(1000);
+    art.setting.resize();
     await sleep(1000);
     art.setting.remove('aspect-ratio');
     try {
@@ -96,7 +96,16 @@ var art = new Artplayer({
         range: [5, -11, 11, 1],
     });
     await sleep(1000);
-    art.setting.find('subtitle-offset').$range.value = -11;
+    art.setting.find('subtitle-offset').range = [0, -0, 10, 1];
+    await sleep(1000);
+    art.setting.update({
+        name: 'subtitle-offset2',
+        html: 'new offset 2',
+        range: [5, -11, 11, 1],
+        onChange(item) {
+            return item.range[0] + 's';
+        },
+    });
     await sleep(1000);
     art.setting.update({
         name: 'flip',
@@ -104,6 +113,8 @@ var art = new Artplayer({
         tooltip: 'OFF',
         switch: false,
     });
+    await sleep(1000);
+    art.setting.find('flip').switch = true;
     await sleep(1000);
     art.setting.update({
         name: 'flip2',
