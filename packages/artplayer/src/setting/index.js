@@ -150,7 +150,7 @@ export default class Setting extends Component {
             template: { $player, $setting },
         } = this.art;
 
-        if (controls.setting && this.show && !isMobile) {
+        if (controls.setting && this.show) {
             const settingWidth = this.active[0]?.$parent?.width || SETTING_WIDTH;
             const { left: controlLeft, width: controlWidth } = getRect(controls.setting);
             const { left: playerLeft, width: playerWidth } = getRect($player);
