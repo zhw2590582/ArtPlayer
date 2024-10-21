@@ -161,7 +161,7 @@ function uniqBy(array, property) {
 function artplayerPluginHlsControl(option = {}) {
     return (art)=>{
         const { $video } = art.template;
-        const { errorHandle, query, queryAll, inverseClass } = art.constructor.utils;
+        const { errorHandle } = art.constructor.utils;
         function updateQuality(hls) {
             if (!hls.levels.length) return;
             const config = option.quality || {};
@@ -197,13 +197,9 @@ function artplayerPluginHlsControl(option = {}) {
                 },
                 selector: selector,
                 onSelect: onSelect,
-                mounted: ($control)=>{
+                mounted: ()=>{
                     art.on("artplayerPluginHlsControl:quality", (item)=>{
-                        const $value = query(".art-selector-value", $control);
-                        const $items = queryAll(".art-selector-item", $control);
-                        $value.innerHTML = item.html;
-                        const $item = $items.find((element)=>Number(element.dataset.value) === item.value);
-                        inverseClass($item, "art-current");
+                        art.controls.check(item);
                     });
                 }
             });
@@ -217,7 +213,7 @@ function artplayerPluginHlsControl(option = {}) {
                 onSelect: onSelect,
                 mounted: ()=>{
                     art.on("artplayerPluginHlsControl:quality", (item)=>{
-                        art.setting.check(item, item.html);
+                        art.setting.check(item);
                     });
                 }
             });
@@ -253,13 +249,9 @@ function artplayerPluginHlsControl(option = {}) {
                 },
                 selector: selector,
                 onSelect: onSelect,
-                mounted: ($control)=>{
+                mounted: ()=>{
                     art.on("artplayerPluginHlsControl:audio", (item)=>{
-                        const $value = query(".art-selector-value", $control);
-                        const $items = queryAll(".art-selector-item", $control);
-                        $value.innerHTML = item.html;
-                        const $item = $items.find((element)=>Number(element.dataset.value) === item.value);
-                        inverseClass($item, "art-current");
+                        art.controls.check(item);
                     });
                 }
             });
@@ -273,7 +265,7 @@ function artplayerPluginHlsControl(option = {}) {
                 onSelect: onSelect,
                 mounted: ()=>{
                     art.on("artplayerPluginHlsControl:audio", (item)=>{
-                        art.setting.check(item, item.html);
+                        art.setting.check(item);
                     });
                 }
             });

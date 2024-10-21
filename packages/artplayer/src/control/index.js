@@ -218,8 +218,15 @@ export default class Control extends Component {
         super.add(option);
     }
 
-    check(item) {
-        //
+    check(target) {
+        target.$value.innerHTML = target.html;
+        for (let index = 0; index < target.$option.length; index++) {
+            const item = target.$option[index];
+            item.default = item === target;
+            if (item.default) {
+                inverseClass(item.$ref, 'art-current');
+            }
+        }
     }
 
     selector(option, $ref, events) {
@@ -246,7 +253,14 @@ export default class Control extends Component {
             $item.innerHTML = item.html;
             append($list, $item);
 
-            def(item, '$item', {
+            def(item, '$option', {
+                configurable: true,
+                get() {
+                    return option.selector;
+                },
+            });
+
+            def(item, '$ref', {
                 configurable: true,
                 get() {
                     return $item;
@@ -257,13 +271,6 @@ export default class Control extends Component {
                 configurable: true,
                 get() {
                     return $value;
-                },
-            });
-
-            def(item, '$list', {
-                configurable: true,
-                get() {
-                    return $list;
                 },
             });
         }
@@ -281,10 +288,8 @@ export default class Control extends Component {
             const path = event.composedPath() || [];
             const $item = path.find((item) => hasClass(item, 'art-selector-item'));
             if (!$item) return;
-            inverseClass($item, 'art-current');
-            const index = Number($item.dataset.index);
-            const find = option.selector[index] || {};
-            $value.innerText = $item.innerText;
+            const find = option.selector[$item.dataset.index];
+            this.check(find);
             if (option.onSelect) {
                 $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
             }

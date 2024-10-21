@@ -116,11 +116,11 @@ var art = new Artplayer({
         {
             default: true,
             html: 'SD 480P',
-            url: '/assets/sample/video.mp4',
+            url: '/assets/sample/video.mp4?q=480',
         },
         {
             html: 'HD 720P',
-            url: '/assets/sample/video.mp4',
+            url: '/assets/sample/video.mp4?q=720',
         },
     ],
     thumbnails: {

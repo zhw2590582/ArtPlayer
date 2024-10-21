@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-10-21 10:25:12";
+        return "2024-10-21 11:44:49";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2979,8 +2979,13 @@ class Control extends (0, _componentDefault.default) {
         }
         super.add(option);
     }
-    check(item) {
-    //
+    check(target) {
+        target.$value.innerHTML = target.html;
+        for(let index = 0; index < target.$option.length; index++){
+            const item = target.$option[index];
+            item.default = item === target;
+            if (item.default) (0, _utils.inverseClass)(item.$ref, "art-current");
+        }
     }
     selector(option, $ref, events) {
         const { hover, proxy } = this.art.events;
@@ -3002,7 +3007,13 @@ class Control extends (0, _componentDefault.default) {
             $item.dataset.value = item.value;
             $item.innerHTML = item.html;
             (0, _utils.append)($list, $item);
-            (0, _utils.def)(item, "$item", {
+            (0, _utils.def)(item, "$option", {
+                configurable: true,
+                get () {
+                    return option.selector;
+                }
+            });
+            (0, _utils.def)(item, "$ref", {
                 configurable: true,
                 get () {
                     return $item;
@@ -3012,12 +3023,6 @@ class Control extends (0, _componentDefault.default) {
                 configurable: true,
                 get () {
                     return $value;
-                }
-            });
-            (0, _utils.def)(item, "$list", {
-                configurable: true,
-                get () {
-                    return $list;
                 }
             });
         }
@@ -3032,10 +3037,8 @@ class Control extends (0, _componentDefault.default) {
             const path = event.composedPath() || [];
             const $item = path.find((item)=>(0, _utils.hasClass)(item, "art-selector-item"));
             if (!$item) return;
-            (0, _utils.inverseClass)($item, "art-current");
-            const index = Number($item.dataset.index);
-            const find = option.selector[index] || {};
-            $value.innerText = $item.innerText;
+            const find = option.selector[$item.dataset.index];
+            this.check(find);
             if (option.onSelect) $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
             setLeft();
         });
