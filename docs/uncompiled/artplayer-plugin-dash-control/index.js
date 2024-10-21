@@ -249,7 +249,6 @@ function artplayerPluginDashControl(option = {}) {
             }), "html");
             const onSelect = (item)=>{
                 dash.setCurrentTrack(item.value);
-                art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 if (config.control) art.controls.check(item);
                 if (config.setting) art.setting.check(item);

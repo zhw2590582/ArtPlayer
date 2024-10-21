@@ -99,7 +99,6 @@ export default function artplayerPluginHlsControl(option = {}) {
 
             const onSelect = (item) => {
                 hls.audioTrack = item.value;
-                art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 if (config.control) art.controls.check(item);
                 if (config.setting) art.setting.check(item);
