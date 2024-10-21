@@ -15,8 +15,6 @@ import {
     append,
     addClass,
     isMobile,
-    getStyle,
-    hasClass,
     removeClass,
     errorHandle,
     inverseClass,
@@ -230,7 +228,7 @@ export default class Control extends Component {
     }
 
     selector(option, $ref, events) {
-        const { hover, proxy } = this.art.events;
+        const { proxy } = this.art.events;
 
         addClass($ref, 'art-control-selector');
         const $value = createElement('div');
@@ -266,25 +264,15 @@ export default class Control extends Component {
             });
         }
 
-        const resize = () => {
-            const refWidth = getStyle($ref, 'width');
-            const listWidth = getStyle($list, 'width');
-            const left = refWidth / 2 - listWidth / 2;
-            $list.style.left = `${left}px`;
-        };
-
-        hover($ref, resize);
-
         const event = proxy($list, 'click', async (event) => {
             const path = event.composedPath() || [];
-            const $item = path.find((item) => hasClass(item, 'art-selector-item'));
-            if (!$item) return;
-            const find = option.selector[$item.dataset.index];
-            this.check(find);
+            const item = option.selector.find(
+                (item) => item.$control_item === path.find(($item) => item.$control_item === $item),
+            );
+            this.check(item);
             if (option.onSelect) {
-                $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
+                $value.innerHTML = await option.onSelect.call(this.art, item, item.$control_item, event);
             }
-            resize();
         });
 
         events.push(event);
