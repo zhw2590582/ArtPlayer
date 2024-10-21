@@ -207,7 +207,8 @@ function artplayerPluginDashControl(option = {}) {
                     dash.setQualityFor("video", item.value);
                 }
                 art.notice.show = `${title}: ${item.html}`;
-                art.emit("artplayerPluginDashControl:quality", item);
+                if (config.control) art.controls.check(item);
+                if (config.setting) art.setting.check(item);
                 return item.html;
             };
             if (config.control) art.controls.update({
@@ -218,12 +219,7 @@ function artplayerPluginDashControl(option = {}) {
                     padding: "0 10px"
                 },
                 selector: selector,
-                onSelect: onSelect,
-                mounted: ()=>{
-                    art.on("artplayerPluginDashControl:quality", (item)=>{
-                        art.controls.check(item);
-                    });
-                }
+                onSelect: onSelect
             });
             if (config.setting) art.setting.update({
                 name: "dash-quality",
@@ -232,12 +228,7 @@ function artplayerPluginDashControl(option = {}) {
                 icon: (0, _qualitySvgDefault.default),
                 width: 200,
                 selector: selector,
-                onSelect: onSelect,
-                mounted: ()=>{
-                    art.on("artplayerPluginDashControl:quality", (item)=>{
-                        art.setting.check(item);
-                    });
-                }
+                onSelect: onSelect
             });
         }
         function updateAudio(dash) {
@@ -260,7 +251,8 @@ function artplayerPluginDashControl(option = {}) {
                 dash.setCurrentTrack(item.value);
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
-                art.emit("artplayerPluginDashControl:audio", item);
+                if (config.control) art.controls.check(item);
+                if (config.setting) art.setting.check(item);
                 return item.html;
             };
             if (config.control) art.controls.update({
@@ -271,12 +263,7 @@ function artplayerPluginDashControl(option = {}) {
                     padding: "0 10px"
                 },
                 selector: selector,
-                onSelect: onSelect,
-                mounted: ()=>{
-                    art.on("artplayerPluginDashControl:audio", (item)=>{
-                        art.controls.check(item);
-                    });
-                }
+                onSelect: onSelect
             });
             if (config.setting) art.setting.update({
                 name: "dash-audio",
@@ -285,12 +272,7 @@ function artplayerPluginDashControl(option = {}) {
                 icon: (0, _audioSvgDefault.default),
                 width: 200,
                 selector: selector,
-                onSelect: onSelect,
-                mounted: ()=>{
-                    art.on("artplayerPluginDashControl:audio", (item)=>{
-                        art.setting.check(item);
-                    });
-                }
+                onSelect: onSelect
             });
         }
         function update() {

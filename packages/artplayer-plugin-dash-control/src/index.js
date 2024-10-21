@@ -70,7 +70,8 @@ export default function artplayerPluginDashControl(option = {}) {
                     dash.setQualityFor('video', item.value);
                 }
                 art.notice.show = `${title}: ${item.html}`;
-                art.emit('artplayerPluginDashControl:quality', item);
+                if (config.control) art.controls.check(item);
+                if (config.setting) art.setting.check(item);
                 return item.html;
             };
 
@@ -82,11 +83,6 @@ export default function artplayerPluginDashControl(option = {}) {
                     style: { padding: '0 10px' },
                     selector: selector,
                     onSelect: onSelect,
-                    mounted: () => {
-                        art.on('artplayerPluginDashControl:quality', (item) => {
-                            art.controls.check(item);
-                        });
-                    },
                 });
             }
 
@@ -99,11 +95,6 @@ export default function artplayerPluginDashControl(option = {}) {
                     width: 200,
                     selector: selector,
                     onSelect: onSelect,
-                    mounted: () => {
-                        art.on('artplayerPluginDashControl:quality', (item) => {
-                            art.setting.check(item);
-                        });
-                    },
                 });
             }
         }
@@ -134,7 +125,8 @@ export default function artplayerPluginDashControl(option = {}) {
                 dash.setCurrentTrack(item.value);
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
-                art.emit('artplayerPluginDashControl:audio', item);
+                if (config.control) art.controls.check(item);
+                if (config.setting) art.setting.check(item);
                 return item.html;
             };
 
@@ -146,11 +138,6 @@ export default function artplayerPluginDashControl(option = {}) {
                     style: { padding: '0 10px' },
                     selector: selector,
                     onSelect: onSelect,
-                    mounted: () => {
-                        art.on('artplayerPluginDashControl:audio', (item) => {
-                            art.controls.check(item);
-                        });
-                    },
                 });
             }
 
@@ -163,11 +150,6 @@ export default function artplayerPluginDashControl(option = {}) {
                     width: 200,
                     selector: selector,
                     onSelect: onSelect,
-                    mounted: () => {
-                        art.on('artplayerPluginDashControl:audio', (item) => {
-                            art.setting.check(item);
-                        });
-                    },
                 });
             }
         }
