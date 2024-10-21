@@ -266,14 +266,14 @@ export default class Control extends Component {
             });
         }
 
-        const setLeft = () => {
+        const resize = () => {
             const refWidth = getStyle($ref, 'width');
             const listWidth = getStyle($list, 'width');
             const left = refWidth / 2 - listWidth / 2;
             $list.style.left = `${left}px`;
         };
 
-        hover($ref, setLeft);
+        hover($ref, resize);
 
         const event = proxy($list, 'click', async (event) => {
             const path = event.composedPath() || [];
@@ -284,7 +284,7 @@ export default class Control extends Component {
             if (option.onSelect) {
                 $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
             }
-            setLeft();
+            resize();
         });
 
         events.push(event);

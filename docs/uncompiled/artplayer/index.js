@@ -3017,13 +3017,13 @@ class Control extends (0, _componentDefault.default) {
                 get: ()=>$value
             });
         }
-        const setLeft = ()=>{
+        const resize = ()=>{
             const refWidth = (0, _utils.getStyle)($ref, "width");
             const listWidth = (0, _utils.getStyle)($list, "width");
             const left = refWidth / 2 - listWidth / 2;
             $list.style.left = `${left}px`;
         };
-        hover($ref, setLeft);
+        hover($ref, resize);
         const event = proxy($list, "click", async (event)=>{
             const path = event.composedPath() || [];
             const $item = path.find((item)=>(0, _utils.hasClass)(item, "art-selector-item"));
@@ -3031,7 +3031,7 @@ class Control extends (0, _componentDefault.default) {
             const find = option.selector[$item.dataset.index];
             this.check(find);
             if (option.onSelect) $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
-            setLeft();
+            resize();
         });
         events.push(event);
     }
