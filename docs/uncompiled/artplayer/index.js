@@ -3008,22 +3008,13 @@ class Control extends (0, _componentDefault.default) {
             $item.innerHTML = item.html;
             (0, _utils.append)($list, $item);
             (0, _utils.def)(item, "$option", {
-                configurable: true,
-                get () {
-                    return option.selector;
-                }
+                get: ()=>option.selector
             });
             (0, _utils.def)(item, "$ref", {
-                configurable: true,
-                get () {
-                    return $item;
-                }
+                get: ()=>$item
             });
             (0, _utils.def)(item, "$value", {
-                configurable: true,
-                get () {
-                    return $value;
-                }
+                get: ()=>$value
             });
         }
         const setLeft = ()=>{

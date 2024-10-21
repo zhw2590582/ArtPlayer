@@ -254,24 +254,15 @@ export default class Control extends Component {
             append($list, $item);
 
             def(item, '$option', {
-                configurable: true,
-                get() {
-                    return option.selector;
-                },
+                get: () => option.selector,
             });
 
             def(item, '$ref', {
-                configurable: true,
-                get() {
-                    return $item;
-                },
+                get: () => $item,
             });
 
             def(item, '$value', {
-                configurable: true,
-                get() {
-                    return $value;
-                },
+                get: () => $value,
             });
         }
 
