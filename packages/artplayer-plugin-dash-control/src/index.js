@@ -17,15 +17,15 @@ export default function artplayerPluginDashControl(option = {}) {
         const { $video } = art.template;
         const { errorHandle } = art.constructor.utils;
 
-        function updateQuality(dashPlayer) {
-            const qualities = dashPlayer.getBitrateInfoListFor('video');
+        function updateQuality(dash) {
+            const qualities = dash.getBitrateInfoListFor('video');
             if (!qualities.length) return;
 
             const config = option.quality || {};
             const auto = config.auto || 'Auto';
             const title = config.title || 'Quality';
             const getName = config.getName || ((level) => `${level.height}p`);
-            const currentQuality = dashPlayer.getQualityFor('video');
+            const currentQuality = dash.getQualityFor('video');
             const defaultLevel = qualities[currentQuality];
             const defaultHtml = defaultLevel ? getName(defaultLevel) : auto;
 
@@ -43,12 +43,12 @@ export default function artplayerPluginDashControl(option = {}) {
             selector.push({
                 html: auto,
                 value: 'auto',
-                default: dashPlayer.getSettings().streaming.abr.autoSwitchBitrate['video'],
+                default: dash.getSettings().streaming.abr.autoSwitchBitrate['video'],
             });
 
             const onSelect = (item) => {
                 if (item.value === 'auto') {
-                    dashPlayer.updateSettings({
+                    dash.updateSettings({
                         streaming: {
                             abr: {
                                 autoSwitchBitrate: {
@@ -58,7 +58,7 @@ export default function artplayerPluginDashControl(option = {}) {
                         },
                     });
                 } else {
-                    dashPlayer.updateSettings({
+                    dash.updateSettings({
                         streaming: {
                             abr: {
                                 autoSwitchBitrate: {
@@ -67,7 +67,7 @@ export default function artplayerPluginDashControl(option = {}) {
                             },
                         },
                     });
-                    dashPlayer.setQualityFor('video', item.value);
+                    dash.setQualityFor('video', item.value);
                 }
                 art.notice.show = `${title}: ${item.html}`;
                 art.emit('artplayerPluginDashControl:quality', item);
@@ -108,29 +108,34 @@ export default function artplayerPluginDashControl(option = {}) {
             }
         }
 
-        function updateAudio(dashPlayer) {
-            const audioTracks = dashPlayer.getTracksFor('audio');
+        function updateAudio(dash) {
+            const audioTracks = dash.getTracksFor('audio');
             if (!audioTracks.length) return;
 
+            console.log('audioTracks', audioTracks);
+
             const config = option.audio || {};
+            const auto = config.auto || 'Auto';
             const title = config.title || 'Audio';
             const getName = config.getName || ((track) => track.lang || track.id);
-            const currentTrack = dashPlayer.getCurrentTrackFor('audio');
-            const defaultHtml = currentTrack ? getName(currentTrack) : 'Default';
+            const currentTrack = dash.getCurrentTrackFor('audio');
+            console.log('currentTrack', currentTrack);
+
+            const defaultHtml = currentTrack ? getName(currentTrack) : auto;
 
             const selector = uniqBy(
                 audioTracks.map((item) => {
                     return {
                         html: getName(item),
                         value: item.id,
-                        default: currentTrack && currentTrack.id === item.id,
+                        default: currentTrack === item,
                     };
                 }),
                 'html',
             );
 
             const onSelect = (item) => {
-                dashPlayer.setCurrentTrack(audioTracks.find((track) => track.id === item.value));
+                dash.setCurrentTrack(audioTracks.find((track) => track.id === item.value));
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 art.emit('artplayerPluginDashControl:audio', item);

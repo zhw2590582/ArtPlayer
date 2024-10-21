@@ -6,7 +6,7 @@
 
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
+    url: 'https://media.axprod.net/TestVectors/v7-Clear/Manifest_1080p.mpd',
     setting: true,
     plugins: [
         artplayerPluginDashControl({
@@ -27,7 +27,7 @@ var art = new Artplayer({
                 // Show audios in setting
                 setting: true,
                 // Get the audio name from track
-                getName: (track) => track.name,
+                getName: (track) => track.lang,
                 // I18n
                 title: 'Audio',
                 auto: 'Auto',
