@@ -219,12 +219,12 @@ export default class Control extends Component {
     }
 
     check(target) {
-        target.$value.innerHTML = target.html;
-        for (let index = 0; index < target.$selector.length; index++) {
-            const item = target.$selector[index];
+        target.$control_value.innerHTML = target.html;
+        for (let index = 0; index < target.$control_option.length; index++) {
+            const item = target.$control_option[index];
             item.default = item === target;
             if (item.default) {
-                inverseClass(item.$ref, 'art-current');
+                inverseClass(item.$control_item, 'art-current');
             }
         }
     }
@@ -253,15 +253,15 @@ export default class Control extends Component {
             $item.innerHTML = item.html;
             append($list, $item);
 
-            def(item, '$selector', {
+            def(item, '$control_option', {
                 get: () => option.selector,
             });
 
-            def(item, '$ref', {
+            def(item, '$control_item', {
                 get: () => $item,
             });
 
-            def(item, '$value', {
+            def(item, '$control_value', {
                 get: () => $value,
             });
         }

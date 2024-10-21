@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-10-21 11:44:49";
+        return "2024-10-21 14:10:16";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2980,11 +2980,11 @@ class Control extends (0, _componentDefault.default) {
         super.add(option);
     }
     check(target) {
-        target.$value.innerHTML = target.html;
-        for(let index = 0; index < target.$option.length; index++){
-            const item = target.$option[index];
+        target.$control_value.innerHTML = target.html;
+        for(let index = 0; index < target.$control_option.length; index++){
+            const item = target.$control_option[index];
             item.default = item === target;
-            if (item.default) (0, _utils.inverseClass)(item.$ref, "art-current");
+            if (item.default) (0, _utils.inverseClass)(item.$control_item, "art-current");
         }
     }
     selector(option, $ref, events) {
@@ -3007,13 +3007,13 @@ class Control extends (0, _componentDefault.default) {
             $item.dataset.value = item.value;
             $item.innerHTML = item.html;
             (0, _utils.append)($list, $item);
-            (0, _utils.def)(item, "$option", {
+            (0, _utils.def)(item, "$control_option", {
                 get: ()=>option.selector
             });
-            (0, _utils.def)(item, "$ref", {
+            (0, _utils.def)(item, "$control_item", {
                 get: ()=>$item
             });
-            (0, _utils.def)(item, "$value", {
+            (0, _utils.def)(item, "$control_value", {
                 get: ()=>$value
             });
         }
