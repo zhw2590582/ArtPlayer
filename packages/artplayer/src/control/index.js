@@ -220,8 +220,8 @@ export default class Control extends Component {
 
     check(target) {
         target.$value.innerHTML = target.html;
-        for (let index = 0; index < target.$option.length; index++) {
-            const item = target.$option[index];
+        for (let index = 0; index < target.$selector.length; index++) {
+            const item = target.$selector[index];
             item.default = item === target;
             if (item.default) {
                 inverseClass(item.$ref, 'art-current');
@@ -253,7 +253,7 @@ export default class Control extends Component {
             $item.innerHTML = item.html;
             append($list, $item);
 
-            def(item, '$option', {
+            def(item, '$selector', {
                 get: () => option.selector,
             });
 
