@@ -1,5 +1,3 @@
-import Setting from './';
-
 export default function playbackRate(art) {
     const {
         i18n,
@@ -11,9 +9,9 @@ export default function playbackRate(art) {
         return value === 1.0 ? i18n.get('Normal') : value.toFixed(1);
     }
 
-    function update(item) {
-        const tooltip = getI18n(art.playbackRate);
-        Setting.select(item, art.playbackRate, tooltip);
+    function update() {
+        const target = art.setting.find(`playback-rate-${art.playbackRate}`);
+        art.setting.check(target);
     }
 
     return {
@@ -25,10 +23,8 @@ export default function playbackRate(art) {
         selector: PLAYBACK_RATE.map((item) => {
             return {
                 value: item,
-                name: `aspect-ratio-${item}`,
-                get default() {
-                    return item === art.playbackRate;
-                },
+                name: `playback-rate-${item}`,
+                default: item === art.playbackRate,
                 html: getI18n(item),
             };
         }),
@@ -36,9 +32,9 @@ export default function playbackRate(art) {
             art.playbackRate = item.value;
             return item.html;
         },
-        mounted: (_, item) => {
-            update(item);
-            art.on('video:ratechange', () => update(item));
+        mounted: () => {
+            update();
+            art.on('video:ratechange', () => update());
         },
     };
 }

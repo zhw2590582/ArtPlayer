@@ -184,10 +184,8 @@ function artplayerPluginHlsControl(option = {}) {
             });
             const onSelect = (item)=>{
                 hls.currentLevel = item.value;
-                art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 art.emit("artplayerPluginHlsControl:quality", item);
-                for(let index = 0; index < selector.length; index++)selector[index].default = selector[index] === item;
                 return item.html;
             };
             if (config.control) art.controls.update({
@@ -217,11 +215,9 @@ function artplayerPluginHlsControl(option = {}) {
                 width: 200,
                 selector: selector,
                 onSelect: onSelect,
-                mounted: (_, setting)=>{
+                mounted: ()=>{
                     art.on("artplayerPluginHlsControl:quality", (item)=>{
-                        setting.tooltip = item.html;
-                        const element = setting.selector.find((element)=>Number(element.$item?.dataset?.value) === item.value);
-                        if (element?.$item) inverseClass(element.$item, "art-current");
+                        art.setting.check(item, item.html);
                     });
                 }
             });
@@ -246,7 +242,6 @@ function artplayerPluginHlsControl(option = {}) {
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 art.emit("artplayerPluginHlsControl:audio", item);
-                for(let index = 0; index < selector.length; index++)selector[index].default = selector[index] === item;
                 return item.html;
             };
             if (config.control) art.controls.update({
@@ -276,11 +271,9 @@ function artplayerPluginHlsControl(option = {}) {
                 width: 200,
                 selector: selector,
                 onSelect: onSelect,
-                mounted: (_, setting)=>{
+                mounted: ()=>{
                     art.on("artplayerPluginHlsControl:audio", (item)=>{
-                        setting.tooltip = item.html;
-                        const element = setting.selector.find((element)=>Number(element.$item?.dataset?.value) === item.value);
-                        if (element?.$item) inverseClass(element.$item, "art-current");
+                        art.setting.check(item, item.html);
                     });
                 }
             });

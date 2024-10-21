@@ -9,7 +9,6 @@ import {
     remove,
     append,
     getRect,
-    isGetter,
     addClass,
     setStyle,
     errorHandle,
@@ -84,10 +83,25 @@ export default class Setting extends Component {
         return result;
     }
 
-    static select(item, value, tooltip) {
-        if (item.$tooltip && tooltip) item.$tooltip.innerText = tooltip;
-        const element = item.selector.find((element) => element.$item?.dataset?.value === value);
-        if (element?.$item) inverseClass(element.$item, 'art-current');
+    traverse(callback, option = this.option) {
+        for (let index = 0; index < option.length; index++) {
+            const item = option[index];
+            callback(item);
+            if (item.selector?.length) {
+                this.traverse.call(this, callback, item.selector);
+            }
+        }
+    }
+
+    check(target) {
+        target.$parent.tooltip = target.html;
+        this.traverse((item) => {
+            item.default = item === target;
+            if (item.default && item.$item) {
+                inverseClass(item.$item, 'art-current');
+            }
+        }, target.$option);
+        this.render(target.$parents);
     }
 
     format(option = this.option, parent, parents, names = []) {
@@ -130,16 +144,14 @@ export default class Setting extends Component {
         this.option = option;
     }
 
-    find(name = '', option = this.option) {
-        for (let index = 0; index < option.length; index++) {
-            const item = option[index];
+    find(name = '') {
+        let result = null;
+        this.traverse((item) => {
             if (item.name === name) {
-                return item;
-            } else {
-                const result = this.find(name, item.selector || []);
-                if (result) return result;
+                result = item;
             }
-        }
+        });
+        return result;
     }
 
     resize() {
@@ -273,7 +285,7 @@ export default class Setting extends Component {
                 append($icon, item.icon || icons.config);
                 break;
             case 'selector':
-                if (item.selector && item.selector.length) {
+                if (item.selector?.length) {
                     append($icon, item.icon || icons.config);
                 } else {
                     append($icon, icons.check);
@@ -406,7 +418,7 @@ export default class Setting extends Component {
                 }
                 break;
             case 'selector':
-                if (item.selector && item.selector.length) {
+                if (item.selector?.length) {
                     const $state = createElement('div');
                     addClass($state, 'art-setting-item-right-icon');
                     append($state, icons.arrowRight);
@@ -450,27 +462,12 @@ export default class Setting extends Component {
             case 'selector':
                 {
                     const event = proxy($item, 'click', async (event) => {
-                        if (item.selector && item.selector.length) {
+                        if (item.selector?.length) {
                             this.render(item.selector);
                         } else {
-                            inverseClass($item, 'art-current');
-
-                            for (let index = 0; index < item.$option.length; index++) {
-                                const element = item.$option[index];
-                                if (!isGetter(element, 'default')) {
-                                    element.default = element === item;
-                                }
-                            }
-
-                            if (item.$parents) {
-                                this.render(item.$parents);
-                            }
-
-                            if (item.$parent && item.$parent.onSelect) {
-                                const result = await item.$parent.onSelect.call(this.art, item, $item, event);
-                                if (item.$parent.$tooltip) {
-                                    item.$parent.$tooltip.innerHTML = result;
-                                }
+                            this.check(item);
+                            if (item.$parent.onSelect) {
+                                item.$parent.tooltip = await item.$parent.onSelect.call(this.art, item, $item, event);
                             }
                         }
                     });
@@ -498,7 +495,7 @@ export default class Setting extends Component {
         }
 
         if (item.mounted) {
-            item.mounted.call(this.art, item.$item, item);
+            setTimeout(() => item.mounted.call(this.art, item.$item, item), 0);
         }
     }
 

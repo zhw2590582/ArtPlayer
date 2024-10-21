@@ -1,5 +1,3 @@
-import Setting from './';
-
 export default function aspectRatio(art) {
     const {
         i18n,
@@ -11,9 +9,9 @@ export default function aspectRatio(art) {
         return value === 'default' ? i18n.get('Default') : value;
     }
 
-    function update(item) {
-        const tooltip = getI18n(art.aspectRatio);
-        Setting.select(item, art.aspectRatio, tooltip);
+    function update() {
+        const target = art.setting.find(`aspect-ratio-${art.aspectRatio}`);
+        art.setting.check(target);
     }
 
     return {
@@ -26,9 +24,7 @@ export default function aspectRatio(art) {
             return {
                 value: item,
                 name: `aspect-ratio-${item}`,
-                get default() {
-                    return item === art.aspectRatio;
-                },
+                default: item === art.aspectRatio,
                 html: getI18n(item),
             };
         }),
@@ -36,9 +32,9 @@ export default function aspectRatio(art) {
             art.aspectRatio = item.value;
             return item.html;
         },
-        mounted: (_, item) => {
-            update(item);
-            art.on('aspectRatio', () => update(item));
+        mounted: () => {
+            update();
+            art.on('aspectRatio', () => update());
         },
     };
 }
