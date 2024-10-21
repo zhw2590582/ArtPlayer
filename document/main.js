@@ -8,7 +8,8 @@
             if (codeElement) {
                 const libs = event.target.dataset.libs || '';
                 const code = encodeURIComponent(codeElement.innerText);
-                const env = 'https://artplayer.org';
+                const isDev = location.hostname === 'localhost';
+                const env = isDev ? 'http://localhost:8082' : 'https://artplayer.org';
                 const url = env + '/?libs=' + libs + '&code=' + code;
                 window.open(url);
             }
