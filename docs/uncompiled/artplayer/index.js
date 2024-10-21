@@ -2617,6 +2617,7 @@ function qualityMix(art) {
                 async onSelect (item) {
                     await art.switchQuality(item.url);
                     notice.show = `${i18n.get("Switch Video")}: ${item.html}`;
+                    return item.html;
                 }
             });
         }
@@ -2841,7 +2842,6 @@ function eventInit(art) {
 },{"../config":"2ZnKD","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"faO0X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _utils = require("../utils");
 var _component = require("../utils/component");
 var _componentDefault = parcelHelpers.interopDefault(_component);
 var _fullscreen = require("./fullscreen");
@@ -2864,6 +2864,7 @@ var _screenshot = require("./screenshot");
 var _screenshotDefault = parcelHelpers.interopDefault(_screenshot);
 var _airplay = require("./airplay");
 var _airplayDefault = parcelHelpers.interopDefault(_airplay);
+var _utils = require("../utils");
 class Control extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
@@ -2978,6 +2979,68 @@ class Control extends (0, _componentDefault.default) {
         }
         super.add(option);
     }
+    check(item) {
+    //
+    }
+    selector(option, $ref, events) {
+        const { hover, proxy } = this.art.events;
+        (0, _utils.addClass)($ref, "art-control-selector");
+        const $value = (0, _utils.createElement)("div");
+        (0, _utils.addClass)($value, "art-selector-value");
+        (0, _utils.append)($value, option.html);
+        $ref.innerText = "";
+        (0, _utils.append)($ref, $value);
+        const $list = (0, _utils.createElement)("div");
+        (0, _utils.addClass)($list, "art-selector-list");
+        (0, _utils.append)($ref, $list);
+        for(let index = 0; index < option.selector.length; index++){
+            const item = option.selector[index];
+            const $item = (0, _utils.createElement)("div");
+            (0, _utils.addClass)($item, "art-selector-item");
+            if (item.default) (0, _utils.addClass)($item, "art-current");
+            $item.dataset.index = index;
+            $item.dataset.value = item.value;
+            $item.innerHTML = item.html;
+            (0, _utils.append)($list, $item);
+            (0, _utils.def)(item, "$item", {
+                configurable: true,
+                get () {
+                    return $item;
+                }
+            });
+            (0, _utils.def)(item, "$value", {
+                configurable: true,
+                get () {
+                    return $value;
+                }
+            });
+            (0, _utils.def)(item, "$list", {
+                configurable: true,
+                get () {
+                    return $list;
+                }
+            });
+        }
+        const setLeft = ()=>{
+            const refWidth = (0, _utils.getStyle)($ref, "width");
+            const listWidth = (0, _utils.getStyle)($list, "width");
+            const left = refWidth / 2 - listWidth / 2;
+            $list.style.left = `${left}px`;
+        };
+        hover($ref, setLeft);
+        const event = proxy($list, "click", async (event)=>{
+            const path = event.composedPath() || [];
+            const $item = path.find((item)=>(0, _utils.hasClass)(item, "art-selector-item"));
+            if (!$item) return;
+            (0, _utils.inverseClass)($item, "art-current");
+            const index = Number($item.dataset.index);
+            const find = option.selector[index] || {};
+            $value.innerText = $item.innerText;
+            if (option.onSelect) $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
+            setLeft();
+        });
+        events.push(event);
+    }
 }
 exports.default = Control;
 
@@ -3042,7 +3105,7 @@ class Component {
         if (option.selector && [
             "left",
             "right"
-        ].includes(option.position)) this.addSelector(option, $ref, events);
+        ].includes(option.position)) this.selector(option, $ref, events);
         this[name] = $ref;
         this.cache.set(name, {
             $ref,
@@ -3051,45 +3114,6 @@ class Component {
         });
         if (option.mounted) option.mounted.call(this.art, $ref);
         return $ref;
-    }
-    addSelector(option, $ref, events) {
-        const { hover, proxy } = this.art.events;
-        (0, _dom.addClass)($ref, "art-control-selector");
-        const $value = (0, _dom.createElement)("div");
-        (0, _dom.addClass)($value, "art-selector-value");
-        (0, _dom.append)($value, option.html);
-        $ref.innerText = "";
-        (0, _dom.append)($ref, $value);
-        const list = option.selector.map((item, index)=>`<div 
-                        class="art-selector-item ${item.default ? "art-current" : ""}"
-                        data-index="${index}"
-                        data-value="${item.value}"
-                    >
-                        ${item.html}
-                    </div>`).join("");
-        const $list = (0, _dom.createElement)("div");
-        (0, _dom.addClass)($list, "art-selector-list");
-        (0, _dom.append)($list, list);
-        (0, _dom.append)($ref, $list);
-        const setLeft = ()=>{
-            const refWidth = (0, _dom.getStyle)($ref, "width");
-            const listWidth = (0, _dom.getStyle)($list, "width");
-            const left = refWidth / 2 - listWidth / 2;
-            $list.style.left = `${left}px`;
-        };
-        hover($ref, setLeft);
-        const destroyEvent = proxy($list, "click", async (event)=>{
-            const path = event.composedPath() || [];
-            const $item = path.find((item)=>(0, _dom.hasClass)(item, "art-selector-item"));
-            if (!$item) return;
-            (0, _dom.inverseClass)($item, "art-current");
-            const index = Number($item.dataset.index);
-            const find = option.selector[index] || {};
-            $value.innerText = $item.innerText;
-            if (option.onSelect) $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
-            setLeft();
-        });
-        events.push(destroyEvent);
     }
     remove(name) {
         const item = this.cache.get(name);

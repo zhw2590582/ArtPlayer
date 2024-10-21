@@ -17,6 +17,7 @@ export default function qualityMix(art) {
                 async onSelect(item) {
                     await art.switchQuality(item.url);
                     notice.show = `${i18n.get('Switch Video')}: ${item.html}`;
+                    return item.html;
                 },
             });
         },

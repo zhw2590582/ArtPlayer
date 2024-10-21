@@ -1,4 +1,3 @@
-import { errorHandle, addClass, removeClass, isMobile, sleep, includeFromEvent } from '../utils';
 import Component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -10,6 +9,20 @@ import volume from './volume';
 import setting from './setting';
 import screenshot from './screenshot';
 import airplay from './airplay';
+import {
+    def,
+    sleep,
+    append,
+    addClass,
+    isMobile,
+    getStyle,
+    hasClass,
+    removeClass,
+    errorHandle,
+    inverseClass,
+    createElement,
+    includeFromEvent,
+} from '../utils';
 
 export default class Control extends Component {
     constructor(art) {
@@ -203,5 +216,81 @@ export default class Control extends Component {
         }
 
         super.add(option);
+    }
+
+    check(item) {
+        //
+    }
+
+    selector(option, $ref, events) {
+        const { hover, proxy } = this.art.events;
+
+        addClass($ref, 'art-control-selector');
+        const $value = createElement('div');
+        addClass($value, 'art-selector-value');
+        append($value, option.html);
+        $ref.innerText = '';
+        append($ref, $value);
+
+        const $list = createElement('div');
+        addClass($list, 'art-selector-list');
+        append($ref, $list);
+
+        for (let index = 0; index < option.selector.length; index++) {
+            const item = option.selector[index];
+            const $item = createElement('div');
+            addClass($item, 'art-selector-item');
+            if (item.default) addClass($item, 'art-current');
+            $item.dataset.index = index;
+            $item.dataset.value = item.value;
+            $item.innerHTML = item.html;
+            append($list, $item);
+
+            def(item, '$item', {
+                configurable: true,
+                get() {
+                    return $item;
+                },
+            });
+
+            def(item, '$value', {
+                configurable: true,
+                get() {
+                    return $value;
+                },
+            });
+
+            def(item, '$list', {
+                configurable: true,
+                get() {
+                    return $list;
+                },
+            });
+        }
+
+        const setLeft = () => {
+            const refWidth = getStyle($ref, 'width');
+            const listWidth = getStyle($list, 'width');
+            const left = refWidth / 2 - listWidth / 2;
+            $list.style.left = `${left}px`;
+        };
+
+        hover($ref, setLeft);
+
+        const event = proxy($list, 'click', async (event) => {
+            const path = event.composedPath() || [];
+            const $item = path.find((item) => hasClass(item, 'art-selector-item'));
+            if (!$item) return;
+            inverseClass($item, 'art-current');
+            const index = Number($item.dataset.index);
+            const find = option.selector[index] || {};
+            $value.innerText = $item.innerText;
+            if (option.onSelect) {
+                $value.innerHTML = await option.onSelect.call(this.art, find, $item, event);
+            }
+            setLeft();
+        });
+
+        events.push(event);
     }
 }
