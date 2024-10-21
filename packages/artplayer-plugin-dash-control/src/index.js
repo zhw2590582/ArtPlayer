@@ -19,22 +19,22 @@ export default function artplayerPluginDashControl(option = {}) {
 
         function updateQuality(dash) {
             const qualities = dash.getBitrateInfoListFor('video');
-            if (!qualities.length) return;
+            if (!qualities || !qualities.length) return;
 
             const config = option.quality || {};
             const auto = config.auto || 'Auto';
             const title = config.title || 'Quality';
             const getName = config.getName || ((level) => `${level.height}p`);
             const currentQuality = dash.getQualityFor('video');
-            const defaultLevel = qualities[currentQuality];
-            const defaultHtml = defaultLevel ? getName(defaultLevel) : auto;
+            const currentAuto = dash.getSettings().streaming.abr.autoSwitchBitrate['video'];
+            const defaultHtml = currentAuto ? auto : getName(qualities[currentQuality]);
 
             const selector = uniqBy(
-                qualities.map((item, index) => {
+                qualities.map((item) => {
                     return {
-                        html: getName(item, index),
-                        value: index,
-                        default: currentQuality === index,
+                        html: getName(item),
+                        value: item.qualityIndex,
+                        default: currentQuality === item.qualityIndex && !currentAuto,
                     };
                 }),
                 'html',
@@ -43,7 +43,7 @@ export default function artplayerPluginDashControl(option = {}) {
             selector.push({
                 html: auto,
                 value: 'auto',
-                default: dash.getSettings().streaming.abr.autoSwitchBitrate['video'],
+                default: currentAuto,
             });
 
             const onSelect = (item) => {
@@ -110,24 +110,20 @@ export default function artplayerPluginDashControl(option = {}) {
 
         function updateAudio(dash) {
             const audioTracks = dash.getTracksFor('audio');
-            if (!audioTracks.length) return;
-
-            console.log('audioTracks', audioTracks);
+            if (!audioTracks || !audioTracks.length) return;
 
             const config = option.audio || {};
             const auto = config.auto || 'Auto';
             const title = config.title || 'Audio';
             const getName = config.getName || ((track) => track.lang || track.id);
-            const currentTrack = dash.getCurrentTrackFor('audio');
-            console.log('currentTrack', currentTrack);
-
+            const currentTrack = dash.getCurrentTrackFor('audio') || audioTracks[0];
             const defaultHtml = currentTrack ? getName(currentTrack) : auto;
 
             const selector = uniqBy(
                 audioTracks.map((item) => {
                     return {
                         html: getName(item),
-                        value: item.id,
+                        value: item,
                         default: currentTrack === item,
                     };
                 }),
@@ -135,7 +131,7 @@ export default function artplayerPluginDashControl(option = {}) {
             );
 
             const onSelect = (item) => {
-                dash.setCurrentTrack(audioTracks.find((track) => track.id === item.value));
+                dash.setCurrentTrack(item.value);
                 art.loading.show = true;
                 art.notice.show = `${title}: ${item.html}`;
                 art.emit('artplayerPluginDashControl:audio', item);
@@ -177,7 +173,7 @@ export default function artplayerPluginDashControl(option = {}) {
         }
 
         function update() {
-            errorHandle(art.dash?.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"');
+            errorHandle(art.dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"');
             updateQuality(art.dash);
             updateAudio(art.dash);
         }

@@ -27,7 +27,7 @@ var art = new Artplayer({
                 // Show audios in setting
                 setting: true,
                 // Get the audio name from track
-                getName: (track) => track.lang,
+                getName: (track) => track.lang.toUpperCase(),
                 // I18n
                 title: 'Audio',
                 auto: 'Auto',
