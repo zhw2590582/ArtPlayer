@@ -142,10 +142,10 @@
       this[globalName] = mainExports;
     }
   }
-})({"4ve9y":[function(require,module,exports) {
+})({"hK3r6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>artplayerPluginHlsControl);
+parcelHelpers.export(exports, "default", ()=>artplayerPluginDashControl);
 var _qualitySvg = require("bundle-text:./quality.svg");
 var _qualitySvgDefault = parcelHelpers.interopDefault(_qualitySvg);
 var _audioSvg = require("bundle-text:./audio.svg");
@@ -158,39 +158,61 @@ function uniqBy(array, property) {
         return !seen.has(key) && seen.set(key, 1);
     });
 }
-function artplayerPluginHlsControl(option = {}) {
+function artplayerPluginDashControl(option = {}) {
     return (art)=>{
         const { $video } = art.template;
         const { errorHandle } = art.constructor.utils;
-        function updateQuality(hls) {
-            if (!hls.levels.length) return;
+        function updateQuality(dash) {
+            const qualities = dash.getBitrateInfoListFor("video");
+            if (!qualities || !qualities.length) return;
             const config = option.quality || {};
             const auto = config.auto || "Auto";
             const title = config.title || "Quality";
-            const getName = config.getName || ((level)=>level.name || level.height + "P");
-            const defaultLevel = hls.levels[hls.currentLevel];
-            const defaultHtml = defaultLevel ? getName(defaultLevel) : auto;
-            const selector = uniqBy(hls.levels.map((item, index)=>{
+            const getName = config.getName || ((level)=>`${level.height}p`);
+            const currentQuality = dash.getQualityFor("video");
+            const currentAuto = dash.getSettings().streaming.abr.autoSwitchBitrate["video"];
+            const defaultHtml = currentAuto ? auto : getName(qualities[currentQuality]);
+            const selector = uniqBy(qualities.map((item)=>{
                 return {
-                    html: getName(item, index),
-                    value: index,
-                    default: hls.currentLevel === index
+                    html: getName(item),
+                    value: item.qualityIndex,
+                    default: currentQuality === item.qualityIndex && !currentAuto
                 };
             }), "html").sort((a, b)=>b.value - a.value);
             selector.push({
                 html: auto,
-                value: -1,
-                default: hls.currentLevel === -1
+                value: "auto",
+                default: currentAuto
             });
             const onSelect = (item)=>{
-                hls.currentLevel = item.value;
+                if (item.value === "auto") dash.updateSettings({
+                    streaming: {
+                        abr: {
+                            autoSwitchBitrate: {
+                                video: true
+                            }
+                        }
+                    }
+                });
+                else {
+                    dash.updateSettings({
+                        streaming: {
+                            abr: {
+                                autoSwitchBitrate: {
+                                    video: false
+                                }
+                            }
+                        }
+                    });
+                    dash.setQualityFor("video", item.value);
+                }
                 art.notice.show = `${title}: ${item.html}`;
                 if (config.control) art.controls.check(item);
                 if (config.setting) art.setting.check(item);
                 return item.html;
             };
             if (config.control) art.controls.update({
-                name: "hls-quality",
+                name: "dash-quality",
                 position: "right",
                 html: defaultHtml,
                 style: {
@@ -200,7 +222,7 @@ function artplayerPluginHlsControl(option = {}) {
                 onSelect: onSelect
             });
             if (config.setting) art.setting.update({
-                name: "hls-quality",
+                name: "dash-quality",
                 tooltip: defaultHtml,
                 html: title,
                 icon: (0, _qualitySvgDefault.default),
@@ -209,30 +231,31 @@ function artplayerPluginHlsControl(option = {}) {
                 onSelect: onSelect
             });
         }
-        function updateAudio(hls) {
-            if (!hls.audioTracks.length) return;
+        function updateAudio(dash) {
+            const audioTracks = dash.getTracksFor("audio");
+            if (!audioTracks || !audioTracks.length) return;
             const config = option.audio || {};
             const auto = config.auto || "Auto";
             const title = config.title || "Audio";
-            const getName = config.getName || ((track)=>track.name || track.lang || track.language);
-            const defaultTrack = hls.audioTracks[hls.audioTrack];
-            const defaultHtml = defaultTrack ? getName(defaultTrack) : auto;
-            const selector = uniqBy(hls.audioTracks.map((item, index)=>{
+            const getName = config.getName || ((track)=>track.lang || track.id);
+            const currentTrack = dash.getCurrentTrackFor("audio") || audioTracks[0];
+            const defaultHtml = currentTrack ? getName(currentTrack) : auto;
+            const selector = uniqBy(audioTracks.map((item)=>{
                 return {
-                    html: getName(item, index),
-                    value: item.id,
-                    default: hls.audioTrack === item.id
+                    html: getName(item),
+                    value: item,
+                    default: currentTrack === item
                 };
             }), "html");
             const onSelect = (item)=>{
-                hls.audioTrack = item.value;
+                dash.setCurrentTrack(item.value);
                 art.notice.show = `${title}: ${item.html}`;
                 if (config.control) art.controls.check(item);
                 if (config.setting) art.setting.check(item);
                 return item.html;
             };
             if (config.control) art.controls.update({
-                name: "hls-audio",
+                name: "dash-audio",
                 position: "right",
                 html: defaultHtml,
                 style: {
@@ -242,7 +265,7 @@ function artplayerPluginHlsControl(option = {}) {
                 onSelect: onSelect
             });
             if (config.setting) art.setting.update({
-                name: "hls-audio",
+                name: "dash-audio",
                 tooltip: defaultHtml,
                 html: title,
                 icon: (0, _audioSvgDefault.default),
@@ -252,24 +275,24 @@ function artplayerPluginHlsControl(option = {}) {
             });
         }
         function update() {
-            errorHandle(art.hls?.media === $video, 'Cannot find instance of HLS from "art.hls"');
-            updateQuality(art.hls);
-            updateAudio(art.hls);
+            errorHandle(art.dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"');
+            updateQuality(art.dash);
+            updateAudio(art.dash);
         }
         art.on("ready", update);
         art.on("restart", update);
         return {
-            name: "artplayerPluginHlsControl",
+            name: "artplayerPluginDashControl",
             update
         };
     };
 }
-if (typeof window !== "undefined") window["artplayerPluginHlsControl"] = artplayerPluginHlsControl;
+if (typeof window !== "undefined") window["artplayerPluginDashControl"] = artplayerPluginDashControl;
 
-},{"bundle-text:./quality.svg":"dwrS3","bundle-text:./audio.svg":"fK6Qz","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dwrS3":[function(require,module,exports) {
+},{"bundle-text:./quality.svg":"kKfho","bundle-text:./audio.svg":"9cTEO","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kKfho":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" height=\"18\"><path fill=\"#fff\" d=\"M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z\"></path></svg>";
 
-},{}],"fK6Qz":[function(require,module,exports) {
+},{}],"9cTEO":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" height=\"18\"><path fill=\"#fff\" d=\"M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z\"></path></svg>";
 
 },{}],"5dUr6":[function(require,module,exports) {
@@ -302,6 +325,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["4ve9y"], "4ve9y", "parcelRequire4dc0")
+},{}]},["hK3r6"], "hK3r6", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map

@@ -12,27 +12,29 @@ function uniqBy(array, property) {
     });
 }
 
-export default function artplayerPluginHlsControl(option = {}) {
+export default function artplayerPluginDashControl(option = {}) {
     return (art) => {
         const { $video } = art.template;
         const { errorHandle } = art.constructor.utils;
 
-        function updateQuality(hls) {
-            if (!hls.levels.length) return;
+        function updateQuality(dash) {
+            const qualities = dash.getBitrateInfoListFor('video');
+            if (!qualities || !qualities.length) return;
 
             const config = option.quality || {};
             const auto = config.auto || 'Auto';
             const title = config.title || 'Quality';
-            const getName = config.getName || ((level) => level.name || level.height + 'P');
-            const defaultLevel = hls.levels[hls.currentLevel];
-            const defaultHtml = defaultLevel ? getName(defaultLevel) : auto;
+            const getName = config.getName || ((level) => `${level.height}p`);
+            const currentQuality = dash.getQualityFor('video');
+            const currentAuto = dash.getSettings().streaming.abr.autoSwitchBitrate['video'];
+            const defaultHtml = currentAuto ? auto : getName(qualities[currentQuality]);
 
             const selector = uniqBy(
-                hls.levels.map((item, index) => {
+                qualities.map((item) => {
                     return {
-                        html: getName(item, index),
-                        value: index,
-                        default: hls.currentLevel === index,
+                        html: getName(item),
+                        value: item.qualityIndex,
+                        default: currentQuality === item.qualityIndex && !currentAuto,
                     };
                 }),
                 'html',
@@ -40,12 +42,33 @@ export default function artplayerPluginHlsControl(option = {}) {
 
             selector.push({
                 html: auto,
-                value: -1,
-                default: hls.currentLevel === -1,
+                value: 'auto',
+                default: currentAuto,
             });
 
             const onSelect = (item) => {
-                hls.currentLevel = item.value;
+                if (item.value === 'auto') {
+                    dash.updateSettings({
+                        streaming: {
+                            abr: {
+                                autoSwitchBitrate: {
+                                    video: true,
+                                },
+                            },
+                        },
+                    });
+                } else {
+                    dash.updateSettings({
+                        streaming: {
+                            abr: {
+                                autoSwitchBitrate: {
+                                    video: false,
+                                },
+                            },
+                        },
+                    });
+                    dash.setQualityFor('video', item.value);
+                }
                 art.notice.show = `${title}: ${item.html}`;
                 if (config.control) art.controls.check(item);
                 if (config.setting) art.setting.check(item);
@@ -54,7 +77,7 @@ export default function artplayerPluginHlsControl(option = {}) {
 
             if (config.control) {
                 art.controls.update({
-                    name: 'hls-quality',
+                    name: 'dash-quality',
                     position: 'right',
                     html: defaultHtml,
                     style: { padding: '0 10px' },
@@ -65,7 +88,7 @@ export default function artplayerPluginHlsControl(option = {}) {
 
             if (config.setting) {
                 art.setting.update({
-                    name: 'hls-quality',
+                    name: 'dash-quality',
                     tooltip: defaultHtml,
                     html: title,
                     icon: $quality,
@@ -76,29 +99,30 @@ export default function artplayerPluginHlsControl(option = {}) {
             }
         }
 
-        function updateAudio(hls) {
-            if (!hls.audioTracks.length) return;
+        function updateAudio(dash) {
+            const audioTracks = dash.getTracksFor('audio');
+            if (!audioTracks || !audioTracks.length) return;
 
             const config = option.audio || {};
             const auto = config.auto || 'Auto';
             const title = config.title || 'Audio';
-            const getName = config.getName || ((track) => track.name || track.lang || track.language);
-            const defaultTrack = hls.audioTracks[hls.audioTrack];
-            const defaultHtml = defaultTrack ? getName(defaultTrack) : auto;
+            const getName = config.getName || ((track) => track.lang || track.id);
+            const currentTrack = dash.getCurrentTrackFor('audio') || audioTracks[0];
+            const defaultHtml = currentTrack ? getName(currentTrack) : auto;
 
             const selector = uniqBy(
-                hls.audioTracks.map((item, index) => {
+                audioTracks.map((item) => {
                     return {
-                        html: getName(item, index),
-                        value: item.id,
-                        default: hls.audioTrack === item.id,
+                        html: getName(item),
+                        value: item,
+                        default: currentTrack === item,
                     };
                 }),
                 'html',
             );
 
             const onSelect = (item) => {
-                hls.audioTrack = item.value;
+                dash.setCurrentTrack(item.value);
                 art.notice.show = `${title}: ${item.html}`;
                 if (config.control) art.controls.check(item);
                 if (config.setting) art.setting.check(item);
@@ -107,7 +131,7 @@ export default function artplayerPluginHlsControl(option = {}) {
 
             if (config.control) {
                 art.controls.update({
-                    name: 'hls-audio',
+                    name: 'dash-audio',
                     position: 'right',
                     html: defaultHtml,
                     style: { padding: '0 10px' },
@@ -118,7 +142,7 @@ export default function artplayerPluginHlsControl(option = {}) {
 
             if (config.setting) {
                 art.setting.update({
-                    name: 'hls-audio',
+                    name: 'dash-audio',
                     tooltip: defaultHtml,
                     html: title,
                     icon: $audio,
@@ -130,21 +154,21 @@ export default function artplayerPluginHlsControl(option = {}) {
         }
 
         function update() {
-            errorHandle(art.hls?.media === $video, 'Cannot find instance of HLS from "art.hls"');
-            updateQuality(art.hls);
-            updateAudio(art.hls);
+            errorHandle(art.dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"');
+            updateQuality(art.dash);
+            updateAudio(art.dash);
         }
 
         art.on('ready', update);
         art.on('restart', update);
 
         return {
-            name: 'artplayerPluginHlsControl',
+            name: 'artplayerPluginDashControl',
             update,
         };
     };
 }
 
 if (typeof window !== 'undefined') {
-    window['artplayerPluginHlsControl'] = artplayerPluginHlsControl;
+    window['artplayerPluginDashControl'] = artplayerPluginDashControl;
 }

@@ -3,7 +3,7 @@
     "version": "1.0.1",
     "name": "artplayer-plugin-hls-control",
     "types": "types/artplayer-plugin-hls-control.d.ts",
-    "description": "Iframe plugin for ArtPlayer",
+    "description": "Hls control plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-hls-control.js",
     "legacy": "dist/artplayer-plugin-hls-control.legacy.js",
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
