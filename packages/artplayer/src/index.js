@@ -189,7 +189,7 @@ export default class Artplayer extends Emitter {
             icons: {},
             cssVar: {},
             customType: {},
-            lang: navigator.language.toLowerCase(),
+            lang: navigator?.language.toLowerCase(),
         };
     }
 
