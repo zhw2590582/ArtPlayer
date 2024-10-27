@@ -1182,3 +1182,20 @@ var art = new Artplayer({
 [artplayer/types/cssVar.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts)
 
 :::
+
+## `proxy`
+
+-   Type: `function`
+-   Default: `undefined`
+
+The function can return a third-party `HTMLCanvasElement` or `HTMLVideoElement`, for example, it can proxy an existing `video` DOM element
+
+<div className="run-code">▶ Run Code</div>
+
+```js{4}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    proxy: () => document.createElement('video')
+});
+```
