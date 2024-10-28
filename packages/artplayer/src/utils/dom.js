@@ -121,7 +121,6 @@ export function getRect(el) {
 export function loadImg(url, scale) {
     return new Promise((resolve, reject) => {
         const img = new Image();
-        img.crossOrigin = 'Anonymous';
 
         img.onload = function () {
             if (!scale || scale === 1) {
