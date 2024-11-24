@@ -99,7 +99,7 @@ var art = new Artplayer({
 -   [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) (WIP)
 -   [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) (WIP)
 -   [artplayer-plugin-iframe](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe)
--   [artplayer-plugin-hls-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control)
+-   [artplayer-plugin-hls-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control)
 -   [artplayer-plugin-dash-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control)
 -   [artplayer-plugin-vtt-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail)
 -   [artplayer-plugin-multiple-subtitles](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles)
@@ -112,7 +112,7 @@ var art = new Artplayer({
 
 ## Libraries
 
--   [hls.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js&example=hls)
+-   [hls.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js&example=hls)
 -   [dash.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash)
 -   [flv.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv)
 -   [mpegts.js](https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts)
