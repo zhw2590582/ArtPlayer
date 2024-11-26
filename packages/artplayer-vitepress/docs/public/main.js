@@ -17,4 +17,11 @@
     });
 })();
 
-
+(function () {
+   const language =  window.navigator?.language || '';
+   const isDev = location.hostname === 'localhost';
+   if (!language.startsWith('zh') && !localStorage.getItem('lang-init') && !isDev) {
+        localStorage.setItem('lang-init', 'true');
+        window.location.href = 'https://artplayer.org/document/en/';
+   }
+})();
