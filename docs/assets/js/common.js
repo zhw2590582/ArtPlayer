@@ -78,6 +78,7 @@
 
         editor = monaco.editor.create($codeMirror, {
             theme: 'vs-dark',
+            folding: true,
             automaticLayout: true,
             quickSuggestions: {
                 other: true,
