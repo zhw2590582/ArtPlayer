@@ -47,17 +47,21 @@
         });
 
         var libUris = [
-            './assets/ts/artplayer.d.ts',
             './assets/ts/artplayer-plugin-ads.d.ts',
-            './assets/ts/artplayer-plugin-control.d.ts',
-            './assets/ts/artplayer-plugin-danmuku.d.ts',
-            './assets/ts/artplayer-plugin-dash-quality.d.ts',
-            './assets/ts/artplayer-plugin-hls-quality.d.ts',
-            './assets/ts/artplayer-plugin-iframe.d.ts',
+            './assets/ts/artplayer-plugin-ambilight.d.ts',
+            './assets/ts/artplayer-plugin-auto-thumbnail.d.ts',
+            './assets/ts/artplayer-plugin-chapter.d.ts',
             './assets/ts/artplayer-plugin-chromecast.d.ts',
+            './assets/ts/artplayer-plugin-danmuku-mask.d.ts',
+            './assets/ts/artplayer-plugin-danmuku.d.ts',
+            './assets/ts/artplayer-plugin-dash-control.d.ts',
+            './assets/ts/artplayer-plugin-hls-control.d.ts',
+            './assets/ts/artplayer-plugin-iframe.d.ts',
             './assets/ts/artplayer-plugin-libass.d.ts',
             './assets/ts/artplayer-plugin-multiple-subtitles.d.ts',
+            './assets/ts/artplayer-plugin-vast.d.ts',
             './assets/ts/artplayer-plugin-vtt-thumbnail.d.ts',
+            './assets/ts/artplayer.d.ts',
         ];
         
         for (let index = 0; index < libUris.length; index++) {
