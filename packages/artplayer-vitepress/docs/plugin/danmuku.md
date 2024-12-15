@@ -519,10 +519,6 @@ art.on('artplayerPluginDanmuku:visible', (danmu) => {
     console.info('显示弹幕', danmu);
 });
 
-art.on('artplayerPluginDanmuku:emit', (danmu) => {
-    console.info('新增弹幕', danmu);
-});
-
 art.on('artplayerPluginDanmuku:loaded', (danmus) => {
     console.info('加载弹幕', danmus.length);
 });
