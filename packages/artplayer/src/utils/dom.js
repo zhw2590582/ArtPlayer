@@ -97,15 +97,19 @@ export function getIcon(key = '', html = '') {
 }
 
 export function setStyleText(id, style) {
-    const $style = document.getElementById(id);
-    if ($style) {
-        $style.textContent = style;
-    } else {
-        const $style = createElement('style');
+    let $style = document.getElementById(id);
+    if (!$style) {
+        $style = document.createElement('style');
         $style.id = id;
-        $style.textContent = style;
-        document.head.appendChild($style);
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                document.head.appendChild($style);
+            });
+        } else {
+            (document.head || document.documentElement).appendChild($style);
+        }
     }
+    $style.textContent = style;
 }
 
 export function supportsFlex() {
