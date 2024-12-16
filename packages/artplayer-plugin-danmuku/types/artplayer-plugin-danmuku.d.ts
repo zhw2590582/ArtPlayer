@@ -7,9 +7,9 @@ type Mode = 0 | 1 | 2;
 type Danmuku = Danmu[] | string | (() => Promise<Danmu[]>) | Promise<Danmu[]>;
 
 type Slider = {
-    min: number;
-    max: number;
-    steps: {
+    min?: number;
+    max?: number;
+    steps?: {
         name?: string;
         value?: any;
         show?: boolean;
