@@ -11,6 +11,7 @@ import {
     getRect,
     addClass,
     setStyle,
+    isMobile,
     errorHandle,
     inverseClass,
     createElement,
@@ -174,6 +175,9 @@ export default class Setting extends Component {
 
             setStyle($setting, 'height', `${settingHeight}px`);
             setStyle($setting, 'width', `${settingWidth}px`);
+
+            if (this.art.isRotate || isMobile) return;
+
             if (settingLeft + settingWidth > playerWidth) {
                 setStyle($setting, 'left', null);
                 setStyle($setting, 'right', null);

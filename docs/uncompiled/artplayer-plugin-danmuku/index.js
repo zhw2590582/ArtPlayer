@@ -1389,7 +1389,8 @@ class Setting {
         });
     }
     createSlider({ min, max, container, findIndex, onChange, steps = [] }) {
-        const { query, clamp } = this.utils;
+        const { query, clamp, setStyle } = this.utils;
+        setStyle(container, "touch-action", "none");
         container.innerHTML = `
             <div class="apd-slider-line">
                 <div class="apd-slider-points">
@@ -1413,24 +1414,30 @@ class Setting {
             onChange(index);
         }
         function updateLeft(event) {
-            const { left, width } = container.getBoundingClientRect();
-            const value = clamp(event.clientX - left, 0, width);
-            const index = Math.round(value / width * (max - min) + min);
-            reset(index);
+            const { top, height, left, width } = container.getBoundingClientRect();
+            if (this.art.isRotate) {
+                const value = clamp(event.clientY - top, 0, height);
+                const index = Math.round(value / height * (max - min) + min);
+                reset(index);
+            } else {
+                const value = clamp(event.clientX - left, 0, width);
+                const index = Math.round(value / width * (max - min) + min);
+                reset(index);
+            }
         }
         this.art.proxy(container, "click", (event)=>{
-            updateLeft(event);
+            updateLeft.call(this, event);
         });
-        this.art.proxy(container, "mousedown", (event)=>{
+        this.art.proxy(container, "pointerdown", (event)=>{
             isDroging = event.button === 0;
         });
-        this.art.on("document:mousemove", (event)=>{
-            if (isDroging) updateLeft(event);
+        this.art.proxy(document, "pointermove", (event)=>{
+            if (isDroging) updateLeft.call(this, event);
         });
-        this.art.on("document:mouseup", (event)=>{
+        this.art.proxy(document, "pointerup", (event)=>{
             if (isDroging) {
                 isDroging = false;
-                updateLeft(event);
+                updateLeft.call(this, event);
             }
         });
         return {
