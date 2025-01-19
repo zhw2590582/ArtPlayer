@@ -1,6 +1,6 @@
 {
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "artplayer-plugin-chapter",
     "types": "types/artplayer-plugin-chapter.d.ts",
     "description": "chapter plugin for ArtPlayer",
