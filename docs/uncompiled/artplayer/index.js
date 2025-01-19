@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2025-01-18 16:18:00";
+        return "2025-01-19 17:21:07";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1901,6 +1901,11 @@ function fullscreenMix(art) {
     const nativeScreenfull = (art)=>{
         (0, _screenfullDefault.default).on("change", ()=>{
             art.emit("fullscreen", (0, _screenfullDefault.default).isFullscreen);
+            if ((0, _screenfullDefault.default).isFullscreen) {
+                art.state = "fullscreen";
+                (0, _utils.addClass)($player, "art-fullscreen");
+            } else (0, _utils.removeClass)($player, "art-fullscreen");
+            art.emit("resize");
         });
         (0, _screenfullDefault.default).on("error", (event)=>{
             art.emit("fullscreenError", event);
@@ -1910,15 +1915,8 @@ function fullscreenMix(art) {
                 return (0, _screenfullDefault.default).isFullscreen;
             },
             async set (value) {
-                if (value) {
-                    art.state = "fullscreen";
-                    await (0, _screenfullDefault.default).request($player);
-                    (0, _utils.addClass)($player, "art-fullscreen");
-                } else {
-                    await (0, _screenfullDefault.default).exit();
-                    (0, _utils.removeClass)($player, "art-fullscreen");
-                }
-                art.emit("resize");
+                if (value) await (0, _screenfullDefault.default).request($player);
+                else await (0, _screenfullDefault.default).exit();
             }
         });
     };
