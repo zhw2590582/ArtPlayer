@@ -41,6 +41,8 @@ export default class Artplayer extends Emitter {
         this.isInput = false;
         this.isRotate = false;
         this.isDestroy = false;
+        this.isFastForwarding = false;
+        this.lastSwipeTime = 0;
 
         this.template = new Template(this);
         this.events = new Events(this);
