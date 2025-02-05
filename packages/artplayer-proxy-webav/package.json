@@ -22,6 +22,6 @@
     "player"
   ],
   "dependencies": {
-    "@webav/av-cliper": "^0.16.4"
+    "@webav/av-cliper": "^1.0.15"
   }
 }
