@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vast.xsd" version="3.0">
+  <Ad>
+    <InLine>
+      <AdSystem><![CDATA[TEST-AD-SYSTEM]]]></AdSystem>
+      <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+      <Impression><![CDATA[https://impression-pixel]]></Impression>
+      <Creatives>
+        <Creative>
+          <Linear>
+            <Duration><![CDATA[00:00:04]]></Duration>
+            <VideoClicks>
+              <ClickThrough><![CDATA[https://artplayer.org/assets/vast/]]></ClickThrough>
+            </VideoClicks>
+            <MediaFiles>
+              <MediaFile delivery="progressive" bitrate="400" width="0" height="0" type="video/mp4">
+                <![CDATA[https://artplayer.org/assets/vast/linear-video.mp4]]>
+              </MediaFile>
+            </MediaFiles>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </InLine>
+  </Ad>
+</VAST>

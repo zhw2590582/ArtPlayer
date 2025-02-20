@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vast.xsd" version="3.0">
+  <Ad>
+    <InLine>
+      <AdSystem><![CDATA[TEST-AD-SYSTEM]]]></AdSystem>
+      <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+      <Impression><![CDATA[https://impression-pixel]]></Impression>
+      <Creatives>
+        <Creative>
+          <NonLinearAds>
+            <NonLinear width="728" height="90" minSuggestedDuration="00:00:05" scalable="true" maintainAspectRatio="true">
+              <StaticResource creativeType="image/png"><![CDATA[https://artplayer.org/assets/vast/nonlinear-728x90.png]]></StaticResource>
+              <NonLinearClickTracking><![CDATA[https://clickTracking]]></NonLinearClickTracking>
+              <NonLinearClickThrough><![CDATA[https://artplayer.org/assets/vast/]]></NonLinearClickThrough>
+            </NonLinear>
+            <NonLinear width="480" height="70" minSuggestedDuration="00:00:05" scalable="true" maintainAspectRatio="true">
+              <StaticResource creativeType="image/png"><![CDATA[https://artplayer.org/assets/vast/nonlinear-480x70.png]]></StaticResource>
+              <NonLinearClickTracking><![CDATA[https://clickTracking]]></NonLinearClickTracking>
+              <NonLinearClickThrough><![CDATA[https://artplayer.org/assets/vast/]]></NonLinearClickThrough>
+            </NonLinear>
+            <NonLinear width="320" height="50" minSuggestedDuration="00:00:05" scalable="true" maintainAspectRatio="true">
+              <StaticResource creativeType="image/png"><![CDATA[https://artplayer.org/assets/vast/nonlinear-320x50.png]]></StaticResource>
+              <NonLinearClickTracking><![CDATA[https://clickTracking]]></NonLinearClickTracking>
+              <NonLinearClickThrough><![CDATA[https://artplayer.org/assets/vast/]]></NonLinearClickThrough>
+            </NonLinear>
+          </NonLinearAds>
+        </Creative>
+      </Creatives>
+    </InLine>
+  </Ad>
+</VAST>
