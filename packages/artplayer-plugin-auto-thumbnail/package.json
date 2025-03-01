@@ -1,6 +1,6 @@
 {
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "artplayer-plugin-auto-thumbnail",
     "types": "types/artplayer-plugin-auto-thumbnail.d.ts",
     "description": "auto-thumbnail plugin for ArtPlayer",
