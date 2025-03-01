@@ -1389,7 +1389,8 @@ class Setting {
         });
     }
     createSlider({ min, max, container, findIndex, onChange, steps = [] }) {
-        const { query, clamp } = this.utils;
+        const { query, clamp, setStyle } = this.utils;
+        setStyle(container, "touch-action", "none");
         container.innerHTML = `
             <div class="apd-slider-line">
                 <div class="apd-slider-points">
@@ -1413,24 +1414,30 @@ class Setting {
             onChange(index);
         }
         function updateLeft(event) {
-            const { left, width } = container.getBoundingClientRect();
-            const value = clamp(event.clientX - left, 0, width);
-            const index = Math.round(value / width * (max - min) + min);
-            reset(index);
+            const { top, height, left, width } = container.getBoundingClientRect();
+            if (this.art.isRotate) {
+                const value = clamp(event.clientY - top, 0, height);
+                const index = Math.round(value / height * (max - min) + min);
+                reset(index);
+            } else {
+                const value = clamp(event.clientX - left, 0, width);
+                const index = Math.round(value / width * (max - min) + min);
+                reset(index);
+            }
         }
         this.art.proxy(container, "click", (event)=>{
-            updateLeft(event);
+            updateLeft.call(this, event);
         });
-        this.art.proxy(container, "mousedown", (event)=>{
+        this.art.proxy(container, "pointerdown", (event)=>{
             isDroging = event.button === 0;
         });
-        this.art.on("document:mousemove", (event)=>{
-            if (isDroging) updateLeft(event);
+        this.art.proxy(document, "pointermove", (event)=>{
+            if (isDroging) updateLeft.call(this, event);
         });
-        this.art.on("document:mouseup", (event)=>{
+        this.art.proxy(document, "pointerup", (event)=>{
             if (isDroging) {
                 isDroging = false;
-                updateLeft(event);
+                updateLeft.call(this, event);
             }
         });
         return {
@@ -1554,14 +1561,16 @@ class Setting {
 exports.default = Setting;
 if (typeof document !== "undefined") {
     const id = "artplayer-plugin-danmuku";
-    const $style = document.getElementById(id);
-    if ($style) $style.textContent = (0, _styleLessDefault.default);
-    else {
-        const $style = document.createElement("style");
+    let $style = document.getElementById(id);
+    if (!$style) {
+        $style = document.createElement("style");
         $style.id = id;
-        $style.textContent = (0, _styleLessDefault.default);
-        document.head.appendChild($style);
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ()=>{
+            document.head.appendChild($style);
+        });
+        else (document.head || document.documentElement).appendChild($style);
     }
+    $style.textContent = (0, _styleLessDefault.default);
 }
 
 },{"bundle-text:./style.less":"uaCsY","bundle-text:./img/on.svg":"a9r0e","bundle-text:./img/off.svg":"luia6","bundle-text:./img/config.svg":"lo6sV","bundle-text:./img/style.svg":"1Aemm","bundle-text:./img/mode_0_off.svg":"jKvDJ","bundle-text:./img/mode_0_on.svg":"7eesQ","bundle-text:./img/mode_1_off.svg":"DalV6","bundle-text:./img/mode_1_on.svg":"i0F2W","bundle-text:./img/mode_2_off.svg":"1phDW","bundle-text:./img/mode_2_on.svg":"iHUBM","bundle-text:./img/check_on.svg":"fQ6fo","bundle-text:./img/check_off.svg":"dz3tU","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"uaCsY":[function(require,module,exports) {

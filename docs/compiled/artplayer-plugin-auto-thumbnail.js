@@ -1,6 +1,10 @@
 
 /*!
+<<<<<<< HEAD
  * artplayer-plugin-auto-thumbnail.js v1.0.1
+=======
+ * artplayer-plugin-auto-thumbnail.js v1.0.0
+>>>>>>> 518bc45af0601648528b336ca1351b4e8570ee7b
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2025 Harvey Zack
  * Released under the MIT License.

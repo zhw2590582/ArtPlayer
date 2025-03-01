@@ -1,6 +1,6 @@
 {
     "license": "MIT",
-    "version": "5.1.4",
+    "version": "5.1.6",
     "name": "artplayer-plugin-danmuku",
     "types": "types/artplayer-plugin-danmuku.d.ts",
     "description": "Danmuku plugin for ArtPlayer",

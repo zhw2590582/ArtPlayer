@@ -4,11 +4,11 @@ export = artplayerPluginAmbilight;
 export as namespace artplayerPluginAmbilight;
 
 type Option = {
-    blur: string;
-    opacity: number;
-    frequency: number;
-    zIndex: number;
-    duration: number;
+    blur?: string;
+    opacity?: number;
+    frequency?: number;
+    zIndex?: number;
+    duration?: number;
 };
 
 type Result = {

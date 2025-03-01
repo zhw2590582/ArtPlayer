@@ -275,20 +275,22 @@ function artplayerPluginChapter(option = {}) {
         art.once("video:loadedmetadata", ()=>update(option.chapters));
         return {
             name: "artplayerPluginChapter",
-            update: (chapters)=>update(chapters)
+            update: ({ chapters })=>update(chapters)
         };
     };
 }
 if (typeof document !== "undefined") {
     const id = "artplayer-plugin-chapter";
-    const $style = document.getElementById(id);
-    if ($style) $style.textContent = (0, _styleLessDefault.default);
-    else {
-        const $style = document.createElement("style");
+    let $style = document.getElementById(id);
+    if (!$style) {
+        $style = document.createElement("style");
         $style.id = id;
-        $style.textContent = (0, _styleLessDefault.default);
-        document.head.appendChild($style);
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ()=>{
+            document.head.appendChild($style);
+        });
+        else (document.head || document.documentElement).appendChild($style);
     }
+    $style.textContent = (0, _styleLessDefault.default);
 }
 if (typeof window !== "undefined") window["artplayerPluginChapter"] = artplayerPluginChapter;
 

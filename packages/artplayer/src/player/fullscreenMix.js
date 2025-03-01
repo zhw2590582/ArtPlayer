@@ -11,6 +11,15 @@ export default function fullscreenMix(art) {
     const nativeScreenfull = (art) => {
         screenfull.on('change', () => {
             art.emit('fullscreen', screenfull.isFullscreen);
+
+            if (screenfull.isFullscreen) {
+                art.state = 'fullscreen';
+                addClass($player, 'art-fullscreen');
+            } else {
+                removeClass($player, 'art-fullscreen');
+            }
+
+            art.emit('resize');
         });
 
         screenfull.on('error', (event) => {
@@ -23,14 +32,10 @@ export default function fullscreenMix(art) {
             },
             async set(value) {
                 if (value) {
-                    art.state = 'fullscreen';
                     await screenfull.request($player);
-                    addClass($player, 'art-fullscreen');
                 } else {
                     await screenfull.exit();
-                    removeClass($player, 'art-fullscreen');
                 }
-                art.emit('resize');
             },
         });
     };

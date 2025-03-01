@@ -8,7 +8,8 @@
             if (codeElement) {
                 const libs = event.target.dataset.libs || '';
                 const code = encodeURIComponent(codeElement.innerText);
-                const env = 'https://artplayer.org';
+                const isDev = location.hostname === 'localhost';
+                const env = isDev ? 'http://localhost:8082' : 'https://artplayer.org';
                 const url = env + '/?libs=' + libs + '&code=' + code;
                 window.open(url);
             }
@@ -16,4 +17,11 @@
     });
 })();
 
-
+(function () {
+   const language =  window.navigator?.language || '';
+   const isDev = location.hostname === 'localhost';
+   if (!language.startsWith('zh') && !localStorage.getItem('lang-init') && !isDev) {
+        localStorage.setItem('lang-init', 'true');
+        window.location.href = 'https://artplayer.org/document/en/';
+   }
+})();

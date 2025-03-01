@@ -176,6 +176,7 @@ function artplayerPluginChromecast(option) {
     const DEFAULT_SDK = "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1";
     let isCastInitialized = false;
     let castSession = null;
+    let castState = null;
     const initializeCastApi = ()=>{
         return new Promise((resolve, reject)=>{
             window["__onGCastApiAvailable"] = (isAvailable)=>{
@@ -185,9 +186,49 @@ function artplayerPluginChromecast(option) {
                         receiverApplicationId: window.chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
                         autoJoinPolicy: window.chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
                     });
+                    // Listen for session state changes
                     context.addEventListener(window.cast.framework.CastContextEventType.SESSION_STATE_CHANGED, (event)=>{
+                        const SessionState = window.cast.framework.SessionState;
+                        castState = event.sessionState;
                         castSession = event.session;
-                        updateCastButton();
+                        switch(event.sessionState){
+                            case SessionState.NO_SESSION:
+                                option.onStateChange?.("disconnected");
+                                updateCastButton("disconnected");
+                                break;
+                            case SessionState.SESSION_STARTING:
+                                option.onStateChange?.("connecting");
+                                updateCastButton("connecting");
+                                break;
+                            case SessionState.SESSION_STARTED:
+                                option.onStateChange?.("connected");
+                                updateCastButton("connected");
+                                break;
+                            case SessionState.SESSION_ENDING:
+                                option.onStateChange?.("disconnecting");
+                                updateCastButton("disconnecting");
+                                break;
+                            case SessionState.SESSION_RESUMED:
+                                option.onStateChange?.("connected");
+                                updateCastButton("connected");
+                                break;
+                        }
+                    });
+                    // Listen for cast state changes
+                    context.addEventListener(window.cast.framework.CastContextEventType.CAST_STATE_CHANGED, (event)=>{
+                        const CastState = window.cast.framework.CastState;
+                        switch(event.castState){
+                            case CastState.NO_DEVICES_AVAILABLE:
+                                option.onCastAvailable?.(false);
+                                break;
+                            case CastState.NOT_CONNECTED:
+                                option.onCastAvailable?.(true);
+                                break;
+                            case CastState.CONNECTING:
+                            case CastState.CONNECTED:
+                                option.onCastAvailable?.(true);
+                                break;
+                        }
                     });
                     isCastInitialized = true;
                     resolve();
@@ -200,14 +241,30 @@ function artplayerPluginChromecast(option) {
         const url = option.url || art.option.url;
         const mediaInfo = new window.chrome.cast.media.MediaInfo(url, option.mimeType || getMimeType(url));
         const request = new window.chrome.cast.media.LoadRequest(mediaInfo);
-        session.loadMedia(request).then(()=>art.notice.show = "Casting started").catch((error)=>{
+        session.loadMedia(request).then(()=>{
+            art.notice.show = "Casting started";
+            option.onCastStart?.();
+        }).catch((error)=>{
             art.notice.show = "Error casting media";
+            option.onError?.(error);
             throw error;
         });
     };
-    const updateCastButton = ()=>{
+    const updateCastButton = (state)=>{
         const button = document.querySelector(".art-icon-cast");
-        if (button) button.style.color = castSession ? "red" : "white";
+        if (button) switch(state){
+            case "connected":
+                button.style.color = "red";
+                break;
+            case "connecting":
+            case "disconnecting":
+                button.style.color = "orange";
+                break;
+            case "disconnected":
+            default:
+                button.style.color = "white";
+                break;
+        }
     };
     return async (art)=>{
         art.controls.add({
@@ -220,6 +277,7 @@ function artplayerPluginChromecast(option) {
                     await initializeCastApi();
                 } catch (error) {
                     art.notice.show = "Failed to initialize Cast API";
+                    option.onError?.(error);
                     throw error;
                 }
                 const context = window.cast.framework.CastContext.getInstance();
@@ -229,12 +287,15 @@ function artplayerPluginChromecast(option) {
                     castVideo(art, session);
                 } catch (error) {
                     art.notice.show = "Error connecting to cast session";
+                    option.onError?.(error);
                     throw error;
                 }
             }
         });
         return {
-            name: "artplayerPluginChromecast"
+            name: "artplayerPluginChromecast",
+            getCastState: ()=>castState,
+            isCasting: ()=>castSession !== null
         };
     };
 }

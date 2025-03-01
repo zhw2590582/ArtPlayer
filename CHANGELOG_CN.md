@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+-   修复当网页没有head时,弹幕插件和章节插件引起的样式加载失败问题
+
+## [5.2.2] - 2025-01-19
+
+-   修复缩略图跨越问题
+-   修复当网页没有head时引起的样式加载失败问题
+-   新增字幕插件的设置面板的滑块支持移动端拖动
+-   修复设置面板在旋屏时的定位错误
+-   修复全屏状态变化时类名切换错误问题
 
 ## [5.2.1] - 2024-10-26
 

@@ -502,7 +502,9 @@ export default class Setting {
     }
 
     createSlider({ min, max, container, findIndex, onChange, steps = [] }) {
-        const { query, clamp } = this.utils;
+        const { query, clamp, setStyle } = this.utils;
+
+        setStyle(container, 'touch-action', 'none');
 
         container.innerHTML = `
             <div class="apd-slider-line">
@@ -533,30 +535,36 @@ export default class Setting {
         }
 
         function updateLeft(event) {
-            const { left, width } = container.getBoundingClientRect();
-            const value = clamp(event.clientX - left, 0, width);
-            const index = Math.round((value / width) * (max - min) + min);
-            reset(index);
+            const { top, height, left, width } = container.getBoundingClientRect();
+            if (this.art.isRotate) {
+                const value = clamp(event.clientY - top, 0, height);
+                const index = Math.round((value / height) * (max - min) + min);
+                reset(index);
+            } else {
+                const value = clamp(event.clientX - left, 0, width);
+                const index = Math.round((value / width) * (max - min) + min);
+                reset(index);
+            }
         }
 
         this.art.proxy(container, 'click', (event) => {
-            updateLeft(event);
+            updateLeft.call(this, event);
         });
 
-        this.art.proxy(container, 'mousedown', (event) => {
+        this.art.proxy(container, 'pointerdown', (event) => {
             isDroging = event.button === 0;
         });
 
-        this.art.on('document:mousemove', (event) => {
+        this.art.proxy(document, 'pointermove', (event) => {
             if (isDroging) {
-                updateLeft(event);
+                updateLeft.call(this, event);
             }
         });
 
-        this.art.on('document:mouseup', (event) => {
+        this.art.proxy(document, 'pointerup', (event) => {
             if (isDroging) {
                 isDroging = false;
-                updateLeft(event);
+                updateLeft.call(this, event);
             }
         });
 
@@ -716,13 +724,17 @@ export default class Setting {
 
 if (typeof document !== 'undefined') {
     const id = 'artplayer-plugin-danmuku';
-    const $style = document.getElementById(id);
-    if ($style) {
-        $style.textContent = style;
-    } else {
-        const $style = document.createElement('style');
+    let $style = document.getElementById(id);
+    if (!$style) {
+        $style = document.createElement('style');
         $style.id = id;
-        $style.textContent = style;
-        document.head.appendChild($style);
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                document.head.appendChild($style);
+            });
+        } else {
+            (document.head || document.documentElement).appendChild($style);
+        }
     }
+    $style.textContent = style;
 }
