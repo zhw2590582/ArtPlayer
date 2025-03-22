@@ -86,13 +86,15 @@ export default function gestureInit(art, events) {
             touchTarget = $progress;
             onTouchStart(event);
         });
-
-        events.proxy($video, 'touchstart', (event) => {
-            touchTarget = $video;
-            onTouchStart(event);
-        });
-
-        events.proxy($video, 'touchmove', onTouchMove);
+        
+        if(art.option.gesture){
+            events.proxy($video, 'touchstart', (event) => {
+                touchTarget = $video;
+                onTouchStart(event);
+            });
+            events.proxy($video, 'touchmove', onTouchMove);
+        }
+        
         events.proxy($progress, 'touchmove', onTouchMove);
         events.proxy(document, 'touchend', onTouchEnd);
     }
