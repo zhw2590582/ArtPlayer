@@ -1098,6 +1098,23 @@ var art = new Artplayer({
 });
 ```
 
+## `gesture`
+
+-   Type: `Boolean`
+-   Default: `true`
+
+是否在移动端启用视频元素上的手势事件
+
+<div className="run-code">▶ Run Code</div>
+
+```js{4}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    gesture: false,
+});
+```
+
 ## `fastForward`
 
 -   Type: `Boolean`

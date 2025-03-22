@@ -64,6 +64,7 @@ export default {
     useSSR: b,
     playsInline: b,
     lock: b,
+    gesture: b,
     fastForward: b,
     autoPlayback: b,
     autoOrientation: b,

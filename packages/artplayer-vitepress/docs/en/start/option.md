@@ -1082,6 +1082,23 @@ var art = new Artplayer({
 });
 ```
 
+## `gesture`
+
+-   Type: `Boolean`
+-   Default: `true`
+
+Whether to enable gesture events on video elements on mobile devices
+
+<div className="run-code">▶ Run Code</div>
+
+```js{4}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    gesture: false,
+});
+```
+
 ## `fastForward`
 
 - Type: `Boolean`

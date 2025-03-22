@@ -505,6 +505,11 @@ export type Option = {
     lock?: boolean;
 
     /**
+     * Whether use gesture in mobile
+     */
+    gesture?: boolean;
+
+    /**
      * Whether use fast forward in mobile
      */
     fastForward?: boolean;
