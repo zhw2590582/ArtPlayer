@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Mocha Tests</title>
+    <link href="../assets/css/normalize.css" rel="stylesheet" />
+    <link href="./mocha.css" rel="stylesheet" />
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: #000;
+        }
+
+        .artplayer-app {
+            width: 600px;
+            height: 400px;
+            border: 1px solid #cccccc50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="artplayer-app"></div>
+    </div>
+    <div id="mocha"></div>
+    <script src="./chai.js"></script>
+    <script src="./mocha.js"></script>
+    <script>
+        window.mocha.setup('bdd');
+        window.expect = window.chai.expect;
+    </script>
+    <script src="../compiled/artplayer.js"></script>
+    <script src="../compiled/artplayer-plugin-ads.js"></script>
+    <script src="../compiled/artplayer-plugin-control.js"></script>
+    <script src="../compiled/artplayer-plugin-danmuku.js"></script>
+    <script src="../compiled/artplayer-plugin-dash-quality.js"></script>
+    <script src="../compiled/artplayer-plugin-hls-quality.js"></script>
+    <script src="../compiled/artplayer-plugin-iframe.js"></script>
+    <script src="../compiled/artplayer-plugin-vtt-thumbnail.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js"></script>
+    <script src="./test.js"></script>
+    <script>mocha.run();</script>
+</body>
+
+</html>
