@@ -6,7 +6,7 @@ export as namespace artplayerPluginAutoThumbnail;
 type Option = {
     url?: string;
     width?: number;
-    height?: number;
+    number?: number;
     scale?: number;
 };
 
