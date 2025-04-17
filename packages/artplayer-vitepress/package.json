@@ -7,7 +7,7 @@
         "preview": "vitepress preview docs"
     },
     "devDependencies": {
-        "flexsearch": "0.7.43",
+        "flexsearch": "0.8.158",
         "markdown-it": "14.1.0",
         "vitepress": "1.6.3",
         "vitepress-plugin-search": "1.0.4-alpha.22",
