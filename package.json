@@ -10,7 +10,6 @@
     "scripts": {
         "build:all": "npm run build all && npm run build:i18n && npm run build:sw && npm run build:ts && npm run build:docs",
         "lint": "npx eslint packages/*/src --fix",
-        "build:sw": "node ./scripts/build-sw.js",
         "build:ts": "node ./scripts/build-ts.js",
         "build:docs": "node ./scripts/build-docs.js",
         "build:i18n": "node ./scripts/build-i18n.js",
@@ -56,7 +55,7 @@
         "prettier": "^3.3.2",
         "prompts": "^2.4.2",
         "servor": "^4.0.2",
-        "workbox-build": "^7.1.1"
+        "svgo": "^3.3.2"
     },
     "resolutions": {
         "string-width": "4.2.3"

@@ -87,6 +87,14 @@ var art = new Artplayer({
                 return item.range[0] + 'x';
             },
         },
+        {
+            html: 'Button',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            tooltip: 'tooltip',
+            onClick() {
+                return 'Button clicked';
+            }
+        },
     ],
     contextmenu: [
         {

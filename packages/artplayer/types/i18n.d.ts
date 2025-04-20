@@ -11,6 +11,7 @@ type I18nKeys =
     | 'ru'
     | 'tr'
     | 'ar'
+    | 'vi'
     | (string & Record<never, never>);
 
 type I18nValue = {
@@ -52,4 +53,4 @@ type I18nValue = {
     'AirPlay Not Available': string;
 };
 
-export type I18n = Record<I18nKeys, Partial<I18nValue>>;
+export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>;

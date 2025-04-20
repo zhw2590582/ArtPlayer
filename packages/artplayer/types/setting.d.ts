@@ -85,5 +85,10 @@ export type Setting = {
      */
     onChange?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
 
+    /**
+     * When range item change in real time
+     */
+    onClick?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
+
     [key: string]: any;
 };

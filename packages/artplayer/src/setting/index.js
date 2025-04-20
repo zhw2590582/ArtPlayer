@@ -268,6 +268,10 @@ export default class Setting extends Component {
             type = 'range';
         }
 
+        if (has(item, 'onClick')) {
+            type = 'button';
+        }
+
         const { icons, proxy, constructor } = this.art;
 
         const $item = createElement('div');
@@ -284,6 +288,7 @@ export default class Setting extends Component {
         addClass($icon, 'art-setting-item-left-icon');
 
         switch (type) {
+            case 'button':
             case 'switch':
             case 'range':
                 append($icon, item.icon || icons.config);
@@ -480,6 +485,16 @@ export default class Setting extends Component {
 
                     if (item.default) {
                         addClass($item, 'art-current');
+                    }
+                }
+                break;
+            case 'button':
+                {
+                    if (item.onClick) {
+                        const event = proxy($item, 'click', async (event) => {
+                            item.tooltip = await item.onClick.call(this.art, item, $item, event);
+                        });
+                        item.$events.push(event);
                     }
                 }
                 break;

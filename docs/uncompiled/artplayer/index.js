@@ -236,13 +236,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "5.2.2";
+        return "5.2.3";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2025-03-22 11:51:58";
+        return "2025-04-20 09:51:38";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -747,14 +747,16 @@ function getIcon(key = "", html = "") {
     return icon;
 }
 function setStyleText(id, style) {
-    const $style = document.getElementById(id);
-    if ($style) $style.textContent = style;
-    else {
-        const $style = createElement("style");
+    let $style = document.getElementById(id);
+    if (!$style) {
+        $style = document.createElement("style");
         $style.id = id;
-        $style.textContent = style;
-        document.head.appendChild($style);
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ()=>{
+            document.head.appendChild($style);
+        });
+        else (document.head || document.documentElement).appendChild($style);
     }
+    $style.textContent = style;
 }
 function supportsFlex() {
     const div = document.createElement("div");
@@ -1079,6 +1081,7 @@ exports.default = {
     useSSR: b,
     playsInline: b,
     lock: b,
+    gesture: b,
     fastForward: b,
     autoPlayback: b,
     autoOrientation: b,
@@ -1288,7 +1291,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"5.2.2"}</div>
+                  <div class="art-info-content">${"5.2.3"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -1359,6 +1362,7 @@ class Template {
         if (0, _utils.isMobile) (0, _utils.addClass)(this.$player, "art-mobile");
     }
     destroy(removeHtml) {
+        this.$video.src = "";
         if (removeHtml) this.$container.innerHTML = "";
         else (0, _utils.addClass)(this.$player, "art-destroy");
     }
@@ -1667,8 +1671,8 @@ function seekMix(art) {
     (0, _utils.def)(art, "seek", {
         set (time) {
             art.currentTime = time;
-            art.emit("seek", art.currentTime);
             if (art.duration) notice.show = `${(0, _utils.secondToTime)(art.currentTime)} / ${(0, _utils.secondToTime)(art.duration)}`;
+            art.emit("seek", art.currentTime);
         }
     });
     (0, _utils.def)(art, "forward", {
@@ -1900,6 +1904,11 @@ function fullscreenMix(art) {
     const nativeScreenfull = (art)=>{
         (0, _screenfullDefault.default).on("change", ()=>{
             art.emit("fullscreen", (0, _screenfullDefault.default).isFullscreen);
+            if ((0, _screenfullDefault.default).isFullscreen) {
+                art.state = "fullscreen";
+                (0, _utils.addClass)($player, "art-fullscreen");
+            } else (0, _utils.removeClass)($player, "art-fullscreen");
+            art.emit("resize");
         });
         (0, _screenfullDefault.default).on("error", (event)=>{
             art.emit("fullscreenError", event);
@@ -1909,15 +1918,8 @@ function fullscreenMix(art) {
                 return (0, _screenfullDefault.default).isFullscreen;
             },
             async set (value) {
-                if (value) {
-                    art.state = "fullscreen";
-                    await (0, _screenfullDefault.default).request($player);
-                    (0, _utils.addClass)($player, "art-fullscreen");
-                } else {
-                    await (0, _screenfullDefault.default).exit();
-                    (0, _utils.removeClass)($player, "art-fullscreen");
-                }
-                art.emit("resize");
+                if (value) await (0, _screenfullDefault.default).request($player);
+                else await (0, _screenfullDefault.default).exit();
             }
         });
     };
@@ -3754,7 +3756,7 @@ parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.2.2"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.2.3"}</a>`
     };
 }
 
@@ -4677,6 +4679,7 @@ class Setting extends (0, _componentDefault.default) {
             const settingHeight = this.active === this.option ? this.active.length * SETTING_ITEM_HEIGHT : (this.active.length + 1) * SETTING_ITEM_HEIGHT;
             (0, _utils.setStyle)($setting, "height", `${settingHeight}px`);
             (0, _utils.setStyle)($setting, "width", `${settingWidth}px`);
+            if (this.art.isRotate || (0, _utils.isMobile)) return;
             if (settingLeft + settingWidth > playerWidth) {
                 (0, _utils.setStyle)($setting, "left", null);
                 (0, _utils.setStyle)($setting, "right", null);
@@ -4742,6 +4745,7 @@ class Setting extends (0, _componentDefault.default) {
         let type = "selector";
         if ((0, _utils.has)(item, "switch")) type = "switch";
         if ((0, _utils.has)(item, "range")) type = "range";
+        if ((0, _utils.has)(item, "onClick")) type = "button";
         const { icons, proxy, constructor } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
@@ -4753,6 +4757,7 @@ class Setting extends (0, _componentDefault.default) {
         const $icon = (0, _utils.createElement)("div");
         (0, _utils.addClass)($icon, "art-setting-item-left-icon");
         switch(type){
+            case "button":
             case "switch":
             case "range":
                 (0, _utils.append)($icon, item.icon || icons.config);
@@ -4927,6 +4932,14 @@ class Setting extends (0, _componentDefault.default) {
                     });
                     item.$events.push(event);
                     if (item.default) (0, _utils.addClass)($item, "art-current");
+                }
+                break;
+            case "button":
+                if (item.onClick) {
+                    const event = proxy($item, "click", async (event)=>{
+                        item.tooltip = await item.onClick.call(this.art, item, $item, event);
+                    });
+                    item.$events.push(event);
                 }
                 break;
             default:

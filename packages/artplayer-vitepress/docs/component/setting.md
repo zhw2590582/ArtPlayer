@@ -18,6 +18,36 @@ var art = new Artplayer({
 });
 ```
 
+## 创建 - 按钮
+
+| 属性       | 类型                | 描述         |
+| ---------- | ------------------- | ------------ |
+| `html`     | `String`, `Element` | 元素的 DOM   |
+| `icon`     | `String`, `Element` | 元素的图标   |
+| `onClick` | `Function`          | 元素点击事件 |
+| `width`    | `Number`            | 列表宽度     |
+| `tooltip`  | `String`            | 提示文本     |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    settings: [
+        {
+            html: 'Button',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            tooltip: 'tooltip',
+			onClick(item, $dom, event) {
+                console.info(item, $dom, event);
+				return 'new tooltip'
+			}
+        },
+    ],
+});
+```
 
 ## 创建 - 选择列表
 

@@ -208,6 +208,11 @@ export type Setting = {
      */
     onChange?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
 
+    /**
+     * When range item change in real time
+     */
+    onClick?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
+
     [key: string]: any;
 };
 
@@ -667,6 +672,7 @@ type I18nKeys =
     | 'ru'
     | 'tr'
     | 'ar'
+    | 'vi'
     | (string & Record<never, never>);
 
 type I18nValue = {
@@ -708,7 +714,7 @@ type I18nValue = {
     'AirPlay Not Available': string;
 };
 
-export type I18n = Record<I18nKeys, Partial<I18nValue>>;
+export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>;
 
 
 

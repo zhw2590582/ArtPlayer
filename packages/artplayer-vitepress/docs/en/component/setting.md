@@ -18,6 +18,37 @@ var art = new Artplayer({
 });
 ```
 
+## Create - Button
+
+| Property   | Type                | Description   |
+| ---------- | ------------------- | ------------- |
+| `html`     | `String`, `Element` | Item DOM      |
+| `icon`     | `String`, `Element` | Item Icon     |
+| `onClick` | `Function`          | Click event   |
+| `width`    | `Number`            | List Width    |
+| `tooltip`  | `String`            | Tooltip text  |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    settings: [
+        {
+            html: 'Button',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            tooltip: 'tooltip',
+			onClick(item, $dom, event) {
+                console.info(item, $dom, event);
+				return 'new tooltip'
+			}
+        },
+    ],
+});
+```
+
 ## Create - Selection List
 
 | Property   | Type                | Description   |
