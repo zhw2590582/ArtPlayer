@@ -1,6 +1,6 @@
 {
     "name": "artplayer-packages",
-    "version": "5.1.1",
+    "version": "5.2.0",
     "type": "module",
     "private": true,
     "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
@@ -8,7 +8,7 @@
         "packages/*"
     ],
     "scripts": {
-        "build:all": "npm run build all && npm run build:i18n && npm run build:sw && npm run build:ts && npm run build:docs",
+        "build:all": "npm run build all && npm run build:i18n && npm run build:ts && npm run build:docs",
         "lint": "npx eslint packages/*/src --fix",
         "build:ts": "node ./scripts/build-ts.js",
         "build:docs": "node ./scripts/build-docs.js",
@@ -37,28 +37,24 @@
     "homepage": "https://artplayer.org",
     "browserslist": "last 1 Chrome version",
     "dependencies": {
-        "@parcel/config-default": "^2.12.0",
-        "@parcel/core": "^2.12.0",
-        "@parcel/optimizer-data-url": "^2.12.0",
-        "@parcel/reporter-cli": "^2.12.0",
-        "@parcel/transformer-inline-string": "^2.12.0",
-        "@parcel/transformer-less": "^2.12.0",
-        "axios": "^1.7.2",
-        "cpy": "^11.0.1",
+        "@parcel/config-default": "^2.14.4",
+        "@parcel/core": "^2.14.4",
+        "@parcel/optimizer-data-url": "^2.14.4",
+        "@parcel/reporter-cli": "^2.14.4",
+        "@parcel/transformer-inline-string": "^2.14.4",
+        "@parcel/transformer-less": "^2.14.4",
+        "cpy": "^11.1.0",
         "cross-env": "^7.0.3",
-        "cross-spawn": "^7.0.3",
-        "dotenv": "^16.4.5",
-        "eslint": "^9.6.0",
-        "glob": "^11.0.0",
-        "globals": "^15.8.0",
-        "lerna": "^8.1.5",
-        "prettier": "^3.3.2",
+        "cross-spawn": "^7.0.6",
+        "dotenv": "^16.5.0",
+        "eslint": "^9.25.0",
+        "glob": "^11.0.1",
+        "globals": "^16.0.0",
+        "lerna": "^8.2.2",
+        "prettier": "^3.5.3",
         "prompts": "^2.4.2",
         "servor": "^4.0.2",
         "svgo": "^3.3.2"
-    },
-    "resolutions": {
-        "string-width": "4.2.3"
     },
     "engines": {
         "node": ">= 20.0.0"
