@@ -82,15 +82,11 @@ export default class Artplayer extends Emitter {
     }
 
     static get version() {
-        return process.env.APP_VER;
+        return '"5.2.3"';
     }
 
     static get env() {
-        return process.env.NODE_ENV;
-    }
-
-    static get build() {
-        return process.env.BUILD_DATE;
+        return '"development"';
     }
 
     static get config() {

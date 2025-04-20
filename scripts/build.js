@@ -3,7 +3,7 @@ import cpy from 'cpy';
 import path from 'path';
 import prompts from 'prompts';
 import { Parcel } from '@parcel/core';
-import { formatDate, getProjects } from './utils.js';
+import { getProjects, injectPlaceholders } from './utils.js';
 
 const projects = getProjects();
 const compiledPath = path.resolve('docs/compiled');
@@ -28,6 +28,7 @@ async function build(name, targetName) {
             distDir: path.join(projects[name], 'dist'),
             sourceMap: false,
             outputFormat: 'global',
+            isLibrary: true,
             engines: {
                 browsers: 'last 1 Chrome version',
             },
@@ -37,8 +38,19 @@ async function build(name, targetName) {
             distDir: path.join(projects[name], 'dist'),
             sourceMap: false,
             outputFormat: 'global',
+            isLibrary: true,
             engines: {
                 browsers: 'IE 11',
+            },
+        },
+        esm: {
+            context: 'browser',
+            distDir: path.join(projects[name], 'dist'),
+            sourceMap: true,
+            outputFormat: 'esmodule',
+            isLibrary: true,
+            engines: {
+                browsers: 'last 1 Chrome version',
             },
         },
     };
@@ -46,10 +58,17 @@ async function build(name, targetName) {
     const names = {
         main: name,
         legacy: `${name}.legacy`,
+        esm: `${name}.esm`,
     };
 
+    const entryFile = path.join(projects[name], 'src/index.js');
+    const restorePlaceholders = injectPlaceholders(entryFile, {
+        __APP_VERSION__: `"${version}"`,
+        __NODE_ENV__: `"production"`,
+    });
+
     const bundler = new Parcel({
-        entries: path.join(projects[name], 'src/index.js'),
+        entries: entryFile,
         defaultConfig: '@parcel/config-default',
         mode: 'production',
         targets: {
@@ -57,8 +76,6 @@ async function build(name, targetName) {
         },
         env: {
             NODE_ENV: 'production',
-            APP_VER: version,
-            BUILD_DATE: formatDate(Date.now()),
         },
     });
 
@@ -78,7 +95,13 @@ async function build(name, targetName) {
         const filePath = path.join(projects[name], 'dist/index.js');
         const newFilePath = path.join(projects[name], `dist/${names[targetName]}.js`);
         const code = fs.readFileSync(filePath, 'utf-8');
-        fs.writeFileSync(filePath, banner + compressString(code));
+
+        if (targetName === 'esm') {
+            fs.writeFileSync(filePath, banner + '\n' + code);
+        } else {
+            fs.writeFileSync(filePath, banner + compressString(code));
+        }
+
         fs.renameSync(filePath, newFilePath);
         await cpy(newFilePath, compiledPath);
         const size = fs.statSync(newFilePath).size / 1024;
@@ -90,7 +113,9 @@ async function build(name, targetName) {
             `Size@${size.toFixed(2)}kb`,
         );
     } catch (error) {
-        console.error(`Failed to build ${name}:`, error);
+        console.error(`❌ Failed to build ${name}:`, error);
+    } finally {
+        restorePlaceholders();
     }
 }
 
@@ -99,10 +124,11 @@ async function runBuild() {
         const bundles = Object.keys(projects).map((name) => async () => {
             await build(name, 'main');
             await build(name, 'legacy');
+            await build(name, 'esm');
         });
 
         await runPromisesInSeries(bundles);
-        console.log('✨ Finished building all packages!');
+        console.log('✅ Finished building all packages!');
     } else {
         const response = await prompts({
             type: 'select',
@@ -118,6 +144,7 @@ async function runBuild() {
         if (response.value) {
             await build(response.value, 'main');
             await build(response.value, 'legacy');
+            await build(response.value, 'esm');
         }
     }
 }
@@ -127,5 +154,5 @@ function runPromisesInSeries(ps) {
 }
 
 runBuild().catch((error) => {
-    console.error('Build script encountered an error:', error);
+    console.error('❌ Build script encountered an error:', error);
 });

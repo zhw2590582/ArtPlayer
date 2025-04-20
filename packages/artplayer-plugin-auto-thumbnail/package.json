@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "1.0.1",
     "name": "artplayer-plugin-auto-thumbnail",
-    "types": "types/artplayer-plugin-auto-thumbnail.d.ts",
     "description": "auto-thumbnail plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-auto-thumbnail.js",
     "legacy": "dist/artplayer-plugin-auto-thumbnail.legacy.js",
+    "module": "dist/artplayer-plugin-auto-thumbnail.esm.js",
+    "types": "types/artplayer-plugin-auto-thumbnail.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-auto-thumbnail.esm.js",
+        "require": "./dist/artplayer-plugin-auto-thumbnail.js",
+        "default": "./dist/artplayer-plugin-auto-thumbnail.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

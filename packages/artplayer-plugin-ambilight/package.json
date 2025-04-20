@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "1.0.0",
     "name": "artplayer-plugin-ambilight",
-    "types": "types/artplayer-plugin-ambilight.d.ts",
     "description": "ambilight plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-ambilight.js",
     "legacy": "dist/artplayer-plugin-ambilight.legacy.js",
+    "module": "dist/artplayer-plugin-ambilight.esm.js",
+    "types": "types/artplayer-plugin-ambilight.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-ambilight.esm.js",
+        "require": "./dist/artplayer-plugin-ambilight.js",
+        "default": "./dist/artplayer-plugin-ambilight.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

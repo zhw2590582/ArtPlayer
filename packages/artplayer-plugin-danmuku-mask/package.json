@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "1.0.0",
     "name": "artplayer-plugin-danmuku-mask",
-    "types": "types/artplayer-plugin-danmuku-mask.d.ts",
     "description": "Danmuku mask plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-danmuku-mask.js",
     "legacy": "dist/artplayer-plugin-danmuku-mask.legacy.js",
+    "module": "dist/artplayer-plugin-danmuku-mask.esm.js",
+    "types": "types/artplayer-plugin-danmuku-mask.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-danmuku-mask.esm.js",
+        "require": "./dist/artplayer-plugin-danmuku-mask.js",
+        "default": "./dist/artplayer-plugin-danmuku-mask.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

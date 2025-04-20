@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "2.0.0",
     "name": "artplayer-plugin-ads",
-    "types": "types/artplayer-plugin-ads.d.ts",
     "description": "Ads plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-ads.js",
     "legacy": "dist/artplayer-plugin-ads.legacy.js",
+    "module": "dist/artplayer-plugin-ads.esm.js",
+    "types": "types/artplayer-plugin-ads.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-ads.esm.js",
+        "require": "./dist/artplayer-plugin-ads.js",
+        "default": "./dist/artplayer-plugin-ads.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

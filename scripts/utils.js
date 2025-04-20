@@ -2,17 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
 
-export function formatDate(date) {
-    var date = new Date(Number(date));
-    var YY = date.getFullYear() + '-';
-    var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-    var DD = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-    var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-    var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
-    var ss = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-    return YY + MM + DD + ' ' + hh + mm + ss;
-}
-
 export function getProjects() {
     return glob
         .sync('packages/*')
@@ -38,4 +27,17 @@ export function removeDir(dir) {
         });
         fs.rmdirSync(dir);
     }
+}
+
+export function injectPlaceholders(filePath, placeholders) {
+    const original = fs.readFileSync(filePath, 'utf-8');
+    let modified = original;
+
+    for (const [key, value] of Object.entries(placeholders)) {
+        const pattern = new RegExp(key, 'g');
+        modified = modified.replace(pattern, value);
+    }
+
+    fs.writeFileSync(filePath, modified);
+    return () => fs.writeFileSync(filePath, original); // 构建完还原
 }

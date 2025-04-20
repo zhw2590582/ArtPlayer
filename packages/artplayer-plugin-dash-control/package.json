@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "1.0.0",
     "name": "artplayer-plugin-dash-control",
-    "types": "types/artplayer-plugin-dash-control.d.ts",
     "description": "Dash control plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-dash-control.js",
     "legacy": "dist/artplayer-plugin-dash-control.legacy.js",
+    "module": "dist/artplayer-plugin-dash-control.esm.js",
+    "types": "types/artplayer-plugin-dash-control.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-dash-control.esm.js",
+        "require": "./dist/artplayer-plugin-dash-control.js",
+        "default": "./dist/artplayer-plugin-dash-control.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

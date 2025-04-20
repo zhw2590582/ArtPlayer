@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "1.0.0",
     "name": "artplayer-proxy-canvas",
-    "types": "types/artplayer-proxy-canvas.d.ts",
     "description": "canvas proxy for ArtPlayer",
     "main": "dist/artplayer-proxy-canvas.js",
     "legacy": "dist/artplayer-proxy-canvas.legacy.js",
+    "module": "dist/artplayer-proxy-canvas.esm.js",
+    "types": "types/artplayer-proxy-canvas.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-proxy-canvas.esm.js",
+        "require": "./dist/artplayer-proxy-canvas.js",
+        "default": "./dist/artplayer-proxy-canvas.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "1.0.0",
     "name": "artplayer-plugin-iframe",
-    "types": "types/artplayer-plugin-iframe.d.ts",
     "description": "Iframe plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-iframe.js",
     "legacy": "dist/artplayer-plugin-iframe.legacy.js",
+    "module": "dist/artplayer-plugin-iframe.esm.js",
+    "types": "types/artplayer-plugin-iframe.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-iframe.esm.js",
+        "require": "./dist/artplayer-plugin-iframe.js",
+        "default": "./dist/artplayer-plugin-iframe.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "1.0.1",
     "name": "artplayer-plugin-hls-control",
-    "types": "types/artplayer-plugin-hls-control.d.ts",
     "description": "Hls control plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-hls-control.js",
     "legacy": "dist/artplayer-plugin-hls-control.legacy.js",
+    "module": "dist/artplayer-plugin-hls-control.esm.js",
+    "types": "types/artplayer-plugin-hls-control.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-hls-control.esm.js",
+        "require": "./dist/artplayer-plugin-hls-control.js",
+        "default": "./dist/artplayer-plugin-hls-control.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

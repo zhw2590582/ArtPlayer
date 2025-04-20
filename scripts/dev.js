@@ -2,39 +2,51 @@ import fs from 'fs';
 import path from 'path';
 import servor from 'servor';
 import prompts from 'prompts';
-import { fileURLToPath } from 'url';
 import { Parcel } from '@parcel/core';
-import { formatDate, getProjects } from './utils.js';
+import { fileURLToPath } from 'url';
+import { getProjects, injectPlaceholders } from './utils.js';
 import openBrowser from 'servor/utils/openBrowser.js';
 
 const projects = getProjects();
 
 async function develop(name) {
-    let isOpenBrowser = false;
+    const projectPath = projects[name];
     const uncompiledPath = path.resolve(`docs/uncompiled/${name}`);
-
-    const projectPackageJson = path.join(projects[name], 'package.json');
+    const entryFile = path.join(projectPath, 'src/index.js');
+    const projectPackageJson = path.join(projectPath, 'package.json');
     const { version } = JSON.parse(fs.readFileSync(projectPackageJson, 'utf-8'));
 
-    const serverConfig = {
-        root: 'docs',
-        fallback: 'index.html',
-        reload: true,
-        port: 8082,
-    };
+    const restore = injectPlaceholders(entryFile, {
+        __APP_VERSION__: `"${version}"`,
+        __NODE_ENV__: `"development"`,
+    });
+
+    process.on('SIGINT', () => {
+        restore();
+        process.exit();
+    });
+
+    let isOpenBrowser = false;
 
     try {
-        const { url } = await servor(serverConfig);
-        process.chdir(projects[name]);
+        const { url } = await servor({
+            root: 'docs',
+            fallback: 'index.html',
+            reload: true,
+            port: 8082,
+        });
 
-        const bundlerConfig = {
-            entries: `${projects[name]}/src/index.js`,
+        process.chdir(projectPath);
+
+        const bundler = new Parcel({
+            entries: entryFile,
             defaultConfig: '@parcel/config-default',
             mode: 'development',
             targets: {
                 main: {
                     distDir: uncompiledPath,
                     outputFormat: 'global',
+                    isLibrary: true,
                     engines: {
                         browsers: ['last 1 Chrome version'],
                     },
@@ -42,8 +54,6 @@ async function develop(name) {
             },
             env: {
                 NODE_ENV: 'development',
-                APP_VER: version,
-                BUILD_DATE: formatDate(Date.now()),
             },
             additionalReporters: [
                 {
@@ -51,28 +61,30 @@ async function develop(name) {
                     resolveFrom: fileURLToPath(import.meta.url),
                 },
             ],
-        };
-
-        const bundler = new Parcel(bundlerConfig);
+        });
 
         bundler.watch((error, event) => {
             if (error) {
-                console.error(`Build error: ${error}`);
+                console.error(`[${name}] ❌ Build error:`, error);
                 return;
             }
+
             if (event.type === 'buildSuccess') {
                 const bundles = event.bundleGraph.getBundles();
-                console.log(`[${name}] ✨ Built ${bundles.length} bundles in ${event.buildTime}ms!`);
+                console.log(`[${name}] ✅ Built ${bundles.length} bundles in ${event.buildTime}ms`);
                 if (!isOpenBrowser) {
                     isOpenBrowser = true;
                     openBrowser(url);
                 }
-            } else if (event.type === 'buildFailure') {
-                console.error(`[${name}] Build failure:`, event.diagnostics);
+            }
+
+            if (event.type === 'buildFailure') {
+                console.error(`[${name}] ❌ Build failure:`, event.diagnostics);
             }
         });
     } catch (error) {
-        console.error(`Failed to start development server for ${name}: ${error.message}`);
+        console.error(`❌ Failed to start dev server for ${name}: ${error.message}`);
+        restore();
     }
 }
 
@@ -90,9 +102,9 @@ async function develop(name) {
         });
 
         if (response.value) {
-            develop(response.value);
+            await develop(response.value);
         }
     } catch (error) {
-        console.error(`Prompt error: ${error.message}`);
+        console.error(`❌ Prompt error: ${error.message}`);
     }
 })();

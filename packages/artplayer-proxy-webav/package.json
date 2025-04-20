@@ -2,10 +2,15 @@
     "license": "MIT",
     "version": "1.0.0",
     "name": "artplayer-proxy-webav",
-    "types": "types/artplayer-proxy-webav.d.ts",
     "description": "webav proxy for ArtPlayer",
-    "main": "dist/artplayer-proxy-webav.js",
     "legacy": "dist/artplayer-proxy-webav.legacy.js",
+    "module": "dist/artplayer-proxy-webav.esm.js",
+    "types": "types/artplayer-proxy-webav.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-proxy-webav.esm.js",
+        "require": "./dist/artplayer-proxy-webav.js",
+        "default": "./dist/artplayer-proxy-webav.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

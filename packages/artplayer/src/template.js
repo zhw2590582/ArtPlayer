@@ -57,7 +57,7 @@ export default class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${process.env.APP_VER}</div>
+                  <div class="art-info-content">${'__APP_VERSION__'}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>

@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "1.0.1",
     "name": "artplayer-plugin-chromecast",
-    "types": "types/artplayer-plugin-chromecast.d.ts",
     "description": "Chromecast plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-chromecast.js",
     "legacy": "dist/artplayer-plugin-chromecast.legacy.js",
+    "module": "dist/artplayer-plugin-chromecast.esm.js",
+    "types": "types/artplayer-plugin-chromecast.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-chromecast.esm.js",
+        "require": "./dist/artplayer-plugin-chromecast.js",
+        "default": "./dist/artplayer-plugin-chromecast.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

@@ -3,8 +3,14 @@
     "version": "4.3.12",
     "name": "artplayer-tool-thumbnail",
     "description": "Thumbnail tool for ArtPlayer",
-    "main": "dist/artplayer-tool-thumbnail.js",
     "legacy": "dist/artplayer-tool-thumbnail.legacy.js",
+    "module": "dist/artplayer-tool-thumbnail.esm.js",
+    "types": "types/artplayer-tool-thumbnail.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-tool-thumbnail.esm.js",
+        "require": "./dist/artplayer-tool-thumbnail.js",
+        "default": "./dist/artplayer-tool-thumbnail.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",

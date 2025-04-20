@@ -2,10 +2,16 @@
     "license": "MIT",
     "version": "1.0.3",
     "name": "artplayer-plugin-vtt-thumbnail",
-    "types": "types/artplayer-plugin-vtt-thumbnail.d.ts",
     "description": "vtt thumbnail plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-vtt-thumbnail.js",
     "legacy": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+    "module": "dist/artplayer-plugin-vtt-thumbnail.esm.js",
+    "types": "types/artplayer-plugin-vtt-thumbnail.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-vtt-thumbnail.esm.js",
+        "require": "./dist/artplayer-plugin-vtt-thumbnail.js",
+        "default": "./dist/artplayer-plugin-vtt-thumbnail.js"
+    },
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",
