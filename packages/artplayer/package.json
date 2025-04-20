@@ -1,7 +1,7 @@
 {
     "license": "MIT",
     "name": "artplayer",
-    "version": "5.2.3",
+    "version": "5.2.4",
     "main": "dist/artplayer.js",
     "legacy": "dist/artplayer.legacy.js",
     "module": "dist/artplayer.esm.js",

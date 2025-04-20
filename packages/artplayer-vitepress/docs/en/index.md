@@ -353,3 +353,49 @@ Build configuration: [scripts/build.js](https://github.com/zhw2590582/ArtPlayer/
 Refer to documentation: [browserslist](https://github.com/browserslist/browserslist#full-list)
 
 :::
+
+## ECMAScript Module
+
+Starting from `5.2.4`, `artplayer` and all plugins will also provide an `ESM` version of `js`, such as:
+
+- `artplayer/dist/artplayer.esm.js`
+- `artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.esm.js`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ArtPlayer ESM with Import Map</title>
+    <style>
+        #player {
+            width: 640px;
+            height: 360px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "artplayer": "https://unpkg.com/artplayer/dist/artplayer.esm.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="player"></div>
+    <script type="module">
+        import Artplayer from 'artplayer';
+
+        const art = new Artplayer({
+            container: '#player',
+            url: '/assets/sample/video.mp4',
+        });
+    </script>
+</body>
+
+</html>
+```

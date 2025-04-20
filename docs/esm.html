@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Test ArtPlayer ESM with Import Map</title>
+    <title>ArtPlayer ESM with Import Map</title>
     <style>
         #player {
             width: 640px;
@@ -15,7 +15,7 @@
     <script type="importmap">
     {
         "imports": {
-            "artplayer": "/packages/artplayer/dist/artplayer.esm.js"
+            "artplayer": "/compiled/artplayer.esm.js"
         }
     }
     </script>
@@ -28,7 +28,7 @@
 
         const art = new Artplayer({
             container: '#player',
-            url: '../docs/assets/sample/video.mp4',
+            url: '/assets/sample/video.mp4',
         });
     </script>
 </body>

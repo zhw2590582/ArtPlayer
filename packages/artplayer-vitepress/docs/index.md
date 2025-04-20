@@ -359,3 +359,48 @@ https://unpkg.com/artplayer/dist/artplayer.legacy.js
 
 :::
 
+## ECMAScript Module
+
+从 `5.2.4` 开始，`artplayer`和所有插件还会提供一个`ESM`版本的`js`，如：
+
+- `artplayer/dist/artplayer.esm.js`
+- `artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.esm.js`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ArtPlayer ESM with Import Map</title>
+    <style>
+        #player {
+            width: 640px;
+            height: 360px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "artplayer": "https://unpkg.com/artplayer/dist/artplayer.esm.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="player"></div>
+    <script type="module">
+        import Artplayer from 'artplayer';
+
+        const art = new Artplayer({
+            container: '#player',
+            url: '/assets/sample/video.mp4',
+        });
+    </script>
+</body>
+
+</html>
+```
