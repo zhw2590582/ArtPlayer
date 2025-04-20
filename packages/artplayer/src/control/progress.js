@@ -125,23 +125,24 @@ export default function progress(options) {
                 art.on('setBar', setBar);
                 art.on('video:loadedmetadata', updateHighlight);
 
-                art.on('video:progress', () => {
-                    art.emit('setBar', 'loaded', art.loaded);
-                });
-
                 if (art.constructor.USE_RAF) {
                     art.on('raf', () => {
                         art.emit('setBar', 'played', art.played);
+                        art.emit('setBar', 'loaded', art.loaded);
                     });
                 } else {
                     art.on('video:timeupdate', () => {
                         art.emit('setBar', 'played', art.played);
                     });
-                }
 
-                art.on('video:ended', () => {
-                    art.emit('setBar', 'played', 1);
-                });
+                    art.on('video:progress', () => {
+                        art.emit('setBar', 'loaded', art.loaded);
+                    });
+
+                    art.on('video:ended', () => {
+                        art.emit('setBar', 'played', 1);
+                    });
+                }
 
                 art.emit('setBar', 'loaded', art.loaded || 0);
 
