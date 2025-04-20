@@ -8,12 +8,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // 配置常量
-const MAX_CHARS_PER_REQUEST = 512;
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; // 1秒
+const MAX_CHARS_PER_REQUEST = 128000;
 const BASE_PATH = 'packages/artplayer-vitepress/docs';
 const EN_PATH = 'packages/artplayer-vitepress/docs/en';
-const COPY_DIRS = ['advanced', 'component', 'library', 'plugin', 'start'];
+const COPY_DIRS = ['advanced', 'component', 'plugin', 'start'];
 
 function splitMarkdown(text, maxChars) {
     const parts = [];
@@ -80,19 +80,25 @@ async function fetchWithRetry(url, options, retries = MAX_RETRIES) {
 
 const translateContent = async (content, targetLanguage) => {
     try {
-        const TRANSLATE_URL = process.env.TRANSLATE_URL;
-        if (!TRANSLATE_URL) {
-            throw new Error('TRANSLATE_URL is not defined in environment variables');
-        }
-
+        const TRANSLATE_URL = 'https://api.deepseek.com/chat/completions';
         const response = await fetchWithRetry(TRANSLATE_URL, {
+            headers: {
+                Authorization: `Bearer ${process.env.DEEPL_API_KEY}`,
+            },
             method: 'POST',
             body: JSON.stringify({
-                content: `The following text is written in VitePress's extended Markdown syntax, Please translate it into ${targetLanguage}, and keep the Markdown format and don't add your explanation:\n\n${content}`,
+                stream: false,
+                model: 'deepseek-chat',
+                messages: [
+                    {
+                        role: 'user',
+                        content: `The following text is written in VitePress's extended Markdown syntax, Please translate it into ${targetLanguage}, and keep the Markdown format and don't add your explanation:\n\n${content}`,
+                    },
+                ],
             }),
         });
 
-        return response.data;
+        return response.choices[0].message.content;
     } catch (error) {
         console.error(`Translation failed: ${error.message}`);
         return content; // 返回原文作为回退
