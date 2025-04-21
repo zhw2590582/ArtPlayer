@@ -46,7 +46,7 @@ async function build(name, targetName) {
         esm: {
             context: 'browser',
             distDir: path.join(projects[name], 'dist'),
-            sourceMap: false,
+            sourceMap: true,
             outputFormat: 'esmodule',
             isLibrary: true,
             engines: {
@@ -98,8 +98,26 @@ async function build(name, targetName) {
 
         fs.writeFileSync(filePath, banner + compressString(code));
         fs.renameSync(filePath, newFilePath);
-        await cpy(newFilePath, compiledPath);
         const size = fs.statSync(newFilePath).size / 1024;
+        await cpy(newFilePath, compiledPath);
+
+        if (targetName === 'esm') {
+            const jsFile = path.join(projects[name], `dist/${names.esm}.js`);
+            const oldMapName = 'index.js.map';
+            const newMapName = `${names.esm}.js.map`;
+
+            const oldMapPath = path.join(projects[name], 'dist', oldMapName);
+            const newMapPath = path.join(projects[name], 'dist', newMapName);
+            if (fs.existsSync(oldMapPath)) {
+                fs.renameSync(oldMapPath, newMapPath);
+            }
+
+            let jsContent = fs.readFileSync(jsFile, 'utf8');
+            jsContent = jsContent.replace(/\/\/# sourceMappingURL=.*\.js\.map/, `\n//# sourceMappingURL=${newMapName}`);
+            fs.writeFileSync(jsFile, jsContent);
+            await cpy(newMapPath, compiledPath);
+            await cpy(newFilePath, compiledPath);
+        }
 
         console.log(
             `✨ Built@${targetName} ${name}@${version}`,
