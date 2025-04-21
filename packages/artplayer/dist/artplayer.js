@@ -1,6 +1,6 @@
 
 /*!
- * artplayer.js v5.2.3
+ * artplayer.js v5.2.4
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2025 Harvey Zack
  * Released under the MIT License.

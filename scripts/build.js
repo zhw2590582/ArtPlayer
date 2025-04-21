@@ -46,7 +46,7 @@ async function build(name, targetName) {
         esm: {
             context: 'browser',
             distDir: path.join(projects[name], 'dist'),
-            sourceMap: true,
+            sourceMap: false,
             outputFormat: 'esmodule',
             isLibrary: true,
             engines: {
@@ -96,12 +96,7 @@ async function build(name, targetName) {
         const newFilePath = path.join(projects[name], `dist/${names[targetName]}.js`);
         const code = fs.readFileSync(filePath, 'utf-8');
 
-        if (targetName === 'esm') {
-            fs.writeFileSync(filePath, banner + '\n' + code);
-        } else {
-            fs.writeFileSync(filePath, banner + compressString(code));
-        }
-
+        fs.writeFileSync(filePath, banner + compressString(code));
         fs.renameSync(filePath, newFilePath);
         await cpy(newFilePath, compiledPath);
         const size = fs.statSync(newFilePath).size / 1024;
