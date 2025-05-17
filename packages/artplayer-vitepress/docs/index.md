@@ -361,6 +361,12 @@ https://unpkg.com/artplayer/dist/artplayer.legacy.js
 
 ## ECMAScript Module
 
+::: tip ESM Demo:
+
+[https://artplayer.org/esm.html](https://artplayer.org/esm.html)
+
+:::
+
 从 `5.2.4` 开始，`artplayer`和所有插件还会提供一个`ESM`版本的`js`，如：
 
 - `artplayer/dist/artplayer.esm.js`

@@ -15,7 +15,8 @@
     <script type="importmap">
     {
         "imports": {
-            "artplayer": "/compiled/artplayer.esm.js"
+            "artplayer": "/compiled/artplayer.esm.js",
+            "artplayer-plugin-danmuku": "/compiled/artplayer-plugin-danmuku.esm.js"
         }
     }
     </script>
@@ -25,10 +26,16 @@
     <div id="player"></div>
     <script type="module">
         import Artplayer from 'artplayer';
+        import ArtplayerPluginDanmuku from 'artplayer-plugin-danmuku';
 
         const art = new Artplayer({
             container: '#player',
             url: '/assets/sample/video.mp4',
+            plugins: [
+                artplayerPluginDanmuku({
+                    danmuku: '/assets/sample/danmuku.xml',
+                })
+            ]
         });
     </script>
 </body>

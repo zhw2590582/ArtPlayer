@@ -356,6 +356,12 @@ Refer to documentation: [browserslist](https://github.com/browserslist/browsersl
 
 ## ECMAScript Module
 
+::: tip ESM Demo:
+
+[https://artplayer.org/esm.html](https://artplayer.org/esm.html)
+
+:::
+
 Starting from `5.2.4`, `artplayer` and all plugins will also provide an `ESM` version of `js`, such as:
 
 - `artplayer/dist/artplayer.esm.js`

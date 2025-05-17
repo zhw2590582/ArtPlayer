@@ -825,7 +825,7 @@ parcelHelpers.export(exports, "isIOS", ()=>isIOS);
 parcelHelpers.export(exports, "isIOS13", ()=>isIOS13);
 parcelHelpers.export(exports, "isMobile", ()=>isMobile);
 parcelHelpers.export(exports, "isBrowser", ()=>isBrowser);
-const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+const userAgent = globalThis?.CUSTOM_USER_AGENT ?? (typeof navigator !== 'undefined' ? navigator.userAgent : '');
 const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
 const isWechat = /MicroMessenger/i.test(userAgent);
 const isIE = /MSIE|Trident/i.test(userAgent);

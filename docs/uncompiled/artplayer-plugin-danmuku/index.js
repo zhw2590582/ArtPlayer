@@ -6,7 +6,16 @@
 // anything defined in a previous bundle is accessed via the
 // orig method which is the require for previous bundles
 
-(function (modules, entry, mainEntry, parcelRequireName, globalName) {
+(function (
+  modules,
+  entry,
+  mainEntry,
+  parcelRequireName,
+  externals,
+  distDir,
+  publicUrl,
+  devServer
+) {
   /* eslint-disable no-undef */
   var globalObject =
     typeof globalThis !== 'undefined'
@@ -25,6 +34,7 @@
     typeof globalObject[parcelRequireName] === 'function' &&
     globalObject[parcelRequireName];
 
+  var importMap = previousRequire.i || {};
   var cache = previousRequire.cache || {};
   // Do not use `require` to prevent Webpack from trying to bundle this call
   var nodeRequire =
@@ -35,6 +45,9 @@
   function newRequire(name, jumped) {
     if (!cache[name]) {
       if (!modules[name]) {
+        if (externals[name]) {
+          return externals[name];
+        }
         // if we cannot find the module within our internal map or
         // cache jump to the current global require ie. the last bundle
         // that was added to the page.
@@ -73,7 +86,7 @@
         localRequire,
         module,
         module.exports,
-        this
+        globalObject
       );
     }
 
@@ -93,6 +106,7 @@
   function Module(moduleName) {
     this.id = moduleName;
     this.bundle = newRequire;
+    this.require = nodeRequire;
     this.exports = {};
   }
 
@@ -101,6 +115,10 @@
   newRequire.modules = modules;
   newRequire.cache = cache;
   newRequire.parent = previousRequire;
+  newRequire.distDir = distDir;
+  newRequire.publicUrl = publicUrl;
+  newRequire.devServer = devServer;
+  newRequire.i = importMap;
   newRequire.register = function (id, exports) {
     modules[id] = [
       function (require, module) {
@@ -109,6 +127,10 @@
       {},
     ];
   };
+
+  // Only insert newRequire.load when it is actually used.
+  // The code in this file is linted against ES5, so dynamic import is not allowed.
+  // INSERT_LOAD_HERE
 
   Object.defineProperty(newRequire, 'root', {
     get: function () {
@@ -136,13 +158,9 @@
       define(function () {
         return mainExports;
       });
-
-      // <script>
-    } else if (globalName) {
-      this[globalName] = mainExports;
     }
   }
-})({"lIf7X":[function(require,module,exports) {
+})({"hfC30":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginDanmuku);
@@ -158,7 +176,7 @@ function artplayerPluginDanmuku(option) {
         const setting = new (0, _settingDefault.default)(art, danmuku);
         if (danmuku.option.heatmap) (0, _heatmapDefault.default)(art, danmuku, danmuku.option.heatmap);
         return {
-            name: "artplayerPluginDanmuku",
+            name: 'artplayerPluginDanmuku',
             emit: danmuku.emit.bind(danmuku),
             load: danmuku.load.bind(danmuku),
             config: danmuku.config.bind(danmuku),
@@ -179,9 +197,9 @@ function artplayerPluginDanmuku(option) {
     };
 }
 artplayerPluginDanmuku.icons = (0, _settingDefault.default).icons;
-if (typeof window !== "undefined") window["artplayerPluginDanmuku"] = artplayerPluginDanmuku;
+if (typeof window !== 'undefined') window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 
-},{"./danmuku":"cv7fe","./setting":"cI0ih","./heatmap":"bZziT","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
+},{"./danmuku":"gAOAX","./setting":"3B2wj","./heatmap":"2G7iS","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"gAOAX":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _bilibili = require("./bilibili");
@@ -213,10 +231,11 @@ class Danmuku {
         // 初始化配置
         this.config(option);
         // 创建 Web Worker, 用于计算弹幕的 top 值
+        const workerText2 = (0, _workerDefault.default).replace('export{e as default};', '');
         const blob = new Blob([
-            (0, _workerDefault.default)
+            workerText2
         ], {
-            type: "application/javascript"
+            type: 'application/javascript'
         });
         this.worker = new Worker(URL.createObjectURL(blob));
         // 绑定公用事件
@@ -226,12 +245,12 @@ class Danmuku {
         this.resize = this.resize.bind(this);
         this.destroy = this.destroy.bind(this);
         // 监听事件
-        art.on("video:play", this.start);
-        art.on("video:playing", this.start);
-        art.on("video:pause", this.stop);
-        art.on("video:waiting", this.stop);
-        art.on("destroy", this.destroy);
-        art.on("resize", this.resize);
+        art.on('video:play', this.start);
+        art.on('video:playing', this.start);
+        art.on('video:pause', this.stop);
+        art.on('video:waiting', this.stop);
+        art.on('destroy', this.destroy);
+        art.on('resize', this.resize);
         // 开始加载弹幕
         this.load();
     }
@@ -242,10 +261,10 @@ class Danmuku {
             speed: 5,
             margin: [
                 10,
-                "25%"
+                '25%'
             ],
             opacity: 1,
-            color: "#FFFFFF",
+            color: '#FFFFFF',
             mode: 0,
             modes: [
                 0,
@@ -266,7 +285,7 @@ class Danmuku {
             emitter: true,
             maxLength: 200,
             lockTime: 5,
-            theme: "dark",
+            theme: 'dark',
             OPACITY: {},
             FONT_SIZE: {},
             MARGIN: {},
@@ -277,33 +296,33 @@ class Danmuku {
     // 配置校验
     static get scheme() {
         return {
-            danmuku: "array|function|string",
-            speed: "number",
-            margin: "array",
-            opacity: "number",
-            color: "string",
-            mode: "number",
-            modes: "array",
-            fontSize: "number|string",
-            antiOverlap: "boolean",
-            synchronousPlayback: "boolean",
-            mount: "?htmldivelement|string",
-            heatmap: "object|boolean",
-            width: "number",
-            points: "array",
-            filter: "function",
-            beforeEmit: "function",
-            beforeVisible: "function",
-            visible: "boolean",
-            emitter: "boolean",
-            maxLength: "number",
-            lockTime: "number",
-            theme: "string",
-            OPACITY: "object",
-            FONT_SIZE: "object",
-            MARGIN: "object",
-            SPEED: "object",
-            COLOR: "array"
+            danmuku: 'array|function|string',
+            speed: 'number',
+            margin: 'array',
+            opacity: 'number',
+            color: 'string',
+            mode: 'number',
+            modes: 'array',
+            fontSize: 'number|string',
+            antiOverlap: 'boolean',
+            synchronousPlayback: 'boolean',
+            mount: '?htmldivelement|string',
+            heatmap: 'object|boolean',
+            width: 'number',
+            points: 'array',
+            filter: 'function',
+            beforeEmit: 'function',
+            beforeVisible: 'function',
+            visible: 'boolean',
+            emitter: 'boolean',
+            maxLength: 'number',
+            lockTime: 'number',
+            theme: 'string',
+            OPACITY: 'object',
+            FONT_SIZE: 'object',
+            MARGIN: 'object',
+            SPEED: 'object',
+            COLOR: 'array'
         };
     }
     // 初始弹幕样式
@@ -332,8 +351,8 @@ class Danmuku {
         const { clamp } = this.utils;
         const value = this.option.margin[0];
         const { clientHeight } = this.$player;
-        if (typeof value === "number") return clamp(value, 0, clientHeight);
-        if (typeof value === "string" && value.endsWith("%")) {
+        if (typeof value === 'number') return clamp(value, 0, clientHeight);
+        if (typeof value === 'string' && value.endsWith('%')) {
             const ratio = parseFloat(value) / 100;
             return clamp(clientHeight * ratio, 0, clientHeight);
         }
@@ -344,8 +363,8 @@ class Danmuku {
         const { clamp } = this.utils;
         const value = this.option.margin[1];
         const { clientHeight } = this.$player;
-        if (typeof value === "number") return clamp(value, 0, clientHeight);
-        if (typeof value === "string" && value.endsWith("%")) {
+        if (typeof value === 'number') return clamp(value, 0, clientHeight);
+        if (typeof value === 'string' && value.endsWith('%')) {
             const ratio = parseFloat(value) / 100;
             return clamp(clientHeight * ratio, 0, clientHeight);
         }
@@ -356,8 +375,8 @@ class Danmuku {
         const { clamp } = this.utils;
         const { clientHeight } = this.$player;
         const fontSize = this.option.fontSize;
-        if (typeof fontSize === "number") return Math.round(clamp(fontSize, 12, clientHeight));
-        if (typeof fontSize === "string" && fontSize.endsWith("%")) {
+        if (typeof fontSize === 'number') return Math.round(clamp(fontSize, 12, clientHeight));
+        if (typeof fontSize === 'string' && fontSize.endsWith('%')) {
             const ratio = parseFloat(fontSize) / 100;
             return Math.round(clamp(clientHeight * ratio, 12, clientHeight));
         }
@@ -365,10 +384,10 @@ class Danmuku {
     }
     // 获取弹幕DOM节点
     get $ref() {
-        const $ref = this.$refs.pop() || document.createElement("div");
+        const $ref = this.$refs.pop() || document.createElement('div');
         $ref.style.cssText = Danmuku.cssText;
-        $ref.dataset.mode = "";
-        $ref.className = "";
+        $ref.dataset.mode = '';
+        $ref.className = '';
         return $ref;
     }
     // 获取准备好发送的弹幕
@@ -376,9 +395,9 @@ class Danmuku {
         const { currentTime } = this.art;
         const result = [];
         // 有的是ready状态：之前因为弹幕太多而暂停发送的弹幕
-        this.filter("ready", (danmu)=>result.push(danmu));
+        this.filter('ready', (danmu)=>result.push(danmu));
         // 有的是wait状态：符合时间范围的弹幕
-        this.filter("wait", (danmu)=>{
+        this.filter('wait', (danmu)=>{
             if (currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1) result.push(danmu);
         });
         return result;
@@ -388,7 +407,7 @@ class Danmuku {
         const result = [];
         const { clientWidth } = this.$player;
         const clientLeft = this.getLeft(this.$player);
-        this.filter("emit", (danmu)=>{
+        this.filter('emit', (danmu)=>{
             const top = danmu.$ref.offsetTop;
             const left = this.getLeft(danmu.$ref) - clientLeft;
             const height = danmu.$ref.clientHeight;
@@ -420,11 +439,11 @@ class Danmuku {
         let danmus = [];
         const target = danmuku || this.option.danmuku;
         try {
-            if (typeof target === "function") danmus = await target(); // 异步函数获取
+            if (typeof target === 'function') danmus = await target(); // 异步函数获取
             else if (target instanceof Promise) danmus = await target; // 从 Promise 对象获取
-            else if (typeof target === "string") danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(target); // 从B站xml链接解析
+            else if (typeof target === 'string') danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(target); // 从B站xml链接解析
             else if (Array.isArray(target)) danmus = target; // 直接传入数组
-            errorHandle(Array.isArray(danmus), "Danmuku need return an array as result");
+            errorHandle(Array.isArray(danmus), 'Danmuku need return an array as result');
             // 假如没有传入弹幕参数，则清空弹幕，否则追加弹幕
             if (danmuku === undefined) {
                 this.reset(); // 重置弹幕
@@ -436,16 +455,16 @@ class Danmuku {
                     stop: []
                 }; // 清空弹幕状态池
                 this.$refs = []; // 清空弹幕DOM节点池
-                this.$danmuku.innerText = ""; // 清空弹幕层
+                this.$danmuku.innerText = ''; // 清空弹幕层
             }
             // 逐个验证原始弹幕并转换到弹幕队列
             for(let index = 0; index < danmus.length; index++){
                 const danmu = danmus[index];
                 await this.emit(danmu);
             }
-            this.art.emit("artplayerPluginDanmuku:loaded", this.queue);
+            this.art.emit('artplayerPluginDanmuku:loaded', this.queue);
         } catch (error) {
-            this.art.emit("artplayerPluginDanmuku:error", error);
+            this.art.emit('artplayerPluginDanmuku:error', error);
             throw error;
         }
         return this;
@@ -454,12 +473,12 @@ class Danmuku {
     async emit(danmu) {
         const { clamp } = this.utils;
         this.validator(danmu, {
-            text: "string",
-            mode: "?number",
-            color: "?string",
-            time: "?number",
-            border: "?boolean",
-            style: "?object"
+            text: 'string',
+            mode: '?number',
+            color: '?string',
+            time: '?number',
+            border: '?boolean',
+            style: '?object'
         });
         // 弹幕文本为空则直接忽略
         if (!danmu.text.trim()) return this;
@@ -483,14 +502,14 @@ class Danmuku {
         // 添加自定义属性
         const item = {
             ...danmu,
-            $state: "wait",
+            $state: 'wait',
             $id: this.index++,
             $ref: null,
             $restTime: 0,
             $lastStartTime: 0
         };
         // 转换为wait状态
-        this.setState(item, "wait");
+        this.setState(item, 'wait');
         // 添加到实际弹幕队列
         this.queue.push(item);
         // 弹幕有四个状态：
@@ -522,7 +541,7 @@ class Danmuku {
         // 通过配置项控制弹幕的显示和隐藏
         if (this.option.visible) this.show();
         else this.hide();
-        this.art.emit("artplayerPluginDanmuku:config", this.option);
+        this.art.emit('artplayerPluginDanmuku:config', this.option);
         return this;
     }
     // 计算DOM的left值，受到旋屏影响
@@ -561,13 +580,13 @@ class Danmuku {
     }
     // 重置弹幕到wait状态，回收弹幕DOM节点
     makeWait(danmu) {
-        this.setState(danmu, "wait");
+        this.setState(danmu, 'wait');
         if (danmu.$ref) {
             danmu.$ref.style.cssText = Danmuku.cssText;
-            danmu.$ref.style.visibility = "hidden";
-            danmu.$ref.style.marginLeft = "0px";
-            danmu.$ref.style.transform = "translateX(0px)";
-            danmu.$ref.style.transition = "transform 0s linear 0s";
+            danmu.$ref.style.visibility = 'hidden';
+            danmu.$ref.style.marginLeft = '0px';
+            danmu.$ref.style.transform = 'translateX(0px)';
+            danmu.$ref.style.transition = 'transform 0s linear 0s';
             this.$refs.push(danmu.$ref);
             danmu.$ref = null;
         }
@@ -578,7 +597,7 @@ class Danmuku {
         this.timer = window.requestAnimationFrame(async ()=>{
             if (this.art.playing && !this.isHide) {
                 // 实时计算弹幕的剩余显示时间
-                this.filter("emit", (danmu)=>{
+                this.filter('emit', (danmu)=>{
                     const emitTime = (Date.now() - danmu.$lastStartTime) / 1000;
                     danmu.$restTime -= emitTime;
                     danmu.$lastStartTime = Date.now();
@@ -602,7 +621,7 @@ class Danmuku {
                         danmu.$ref.style.fontSize = `${this.fontSize}px`;
                         danmu.$ref.style.color = danmu.color;
                         danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
-                        danmu.$ref.style.backgroundColor = danmu.border ? "rgb(0 0 0 / 50%)" : null;
+                        danmu.$ref.style.backgroundColor = danmu.border ? 'rgb(0 0 0 / 50%)' : null;
                         // 设置单独弹幕样式
                         setStyles(danmu.$ref, danmu.style);
                         // 记录弹幕时间戳
@@ -613,7 +632,7 @@ class Danmuku {
                         const distance = clientWidth + danmu.$ref.clientWidth;
                         // 计算弹幕的top值
                         const { result: top } = await this.postMessage({
-                            type: "getDanmuTop",
+                            type: 'getDanmuTop',
                             target: {
                                 mode: danmu.mode,
                                 height: danmu.$ref.clientHeight,
@@ -628,31 +647,31 @@ class Danmuku {
                         });
                         if (danmu.$ref) {
                             if (!this.isStop && top !== undefined) {
-                                this.setState(danmu, "emit"); // 转换为emit状态
+                                this.setState(danmu, 'emit'); // 转换为emit状态
                                 danmu.$ref.style.top = `${top}px`;
-                                danmu.$ref.style.visibility = "visible";
+                                danmu.$ref.style.visibility = 'visible';
                                 danmu.$ref.dataset.mode = danmu.mode; // CSS控制模式的显示和隐藏
                                 switch(danmu.mode){
                                     // 滚动的弹幕
                                     case 0:
                                         danmu.$ref.style.left = `${clientWidth}px`;
-                                        danmu.$ref.style.marginLeft = "0px";
+                                        danmu.$ref.style.marginLeft = '0px';
                                         danmu.$ref.style.transform = `translateX(${-distance}px)`;
                                         danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                         break;
                                     case 1:
                                     // falls through
                                     case 2:
-                                        danmu.$ref.style.left = "50%";
+                                        danmu.$ref.style.left = '50%';
                                         danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
                                         break;
                                     default:
                                         break;
                                 }
-                                this.art.emit("artplayerPluginDanmuku:visible", danmu);
+                                this.art.emit('artplayerPluginDanmuku:visible', danmu);
                             } else {
                                 // 假如弹幕已经停止或者没有 top 值，则重置弹幕为ready状态，回收弹幕DOM节点，等待下次发送
-                                this.setState(danmu, "ready");
+                                this.setState(danmu, 'ready');
                                 this.$refs.push(danmu.$ref);
                                 danmu.$ref = null;
                             }
@@ -668,7 +687,7 @@ class Danmuku {
     // 重置正在显示的弹幕: stop/emit 状态的弹幕
     resize() {
         const { clientWidth } = this.$player;
-        this.filter("stop", (danmu)=>{
+        this.filter('stop', (danmu)=>{
             switch(danmu.mode){
                 // 滚动的弹幕
                 case 0:
@@ -678,7 +697,7 @@ class Danmuku {
                     break;
             }
         });
-        this.filter("emit", (danmu)=>{
+        this.filter('emit', (danmu)=>{
             danmu.$lastStartTime = Date.now();
             switch(danmu.mode){
                 // 滚动的弹幕
@@ -698,8 +717,8 @@ class Danmuku {
     // 继续弹幕
     continue() {
         const { clientWidth } = this.$player;
-        this.filter("stop", (danmu)=>{
-            this.setState(danmu, "emit"); // 转换为emit状态
+        this.filter('stop', (danmu)=>{
+            this.setState(danmu, 'emit'); // 转换为emit状态
             danmu.$lastStartTime = Date.now();
             switch(danmu.mode){
                 // 继续滚动的弹幕
@@ -719,15 +738,15 @@ class Danmuku {
     // 暂停弹幕
     suspend() {
         const { clientWidth } = this.$player;
-        this.filter("emit", (danmu)=>{
-            this.setState(danmu, "stop"); // 转换为stop状态
+        this.filter('emit', (danmu)=>{
+            this.setState(danmu, 'stop'); // 转换为stop状态
             switch(danmu.mode){
                 // 停止滚动的弹幕
                 case 0:
                     {
                         const translateX = clientWidth - (this.getLeft(danmu.$ref) - this.getLeft(this.$player));
                         danmu.$ref.style.transform = `translateX(${-translateX}px)`;
-                        danmu.$ref.style.transition = "transform 0s linear 0s";
+                        danmu.$ref.style.transition = 'transform 0s linear 0s';
                         break;
                     }
                 default:
@@ -740,50 +759,50 @@ class Danmuku {
         this.isStop = true;
         this.suspend();
         window.cancelAnimationFrame(this.timer);
-        this.art.emit("artplayerPluginDanmuku:stop");
+        this.art.emit('artplayerPluginDanmuku:stop');
         return this;
     }
     start() {
         this.isStop = false;
         this.continue();
         this.update();
-        this.art.emit("artplayerPluginDanmuku:start");
+        this.art.emit('artplayerPluginDanmuku:start');
         return this;
     }
     reset() {
         this.queue.forEach((danmu)=>this.makeWait(danmu));
-        this.art.emit("artplayerPluginDanmuku:reset");
+        this.art.emit('artplayerPluginDanmuku:reset');
         return this;
     }
     show() {
         this.isHide = false;
         this.$danmuku.style.opacity = 1;
         this.option.visible = true;
-        this.art.emit("artplayerPluginDanmuku:show");
+        this.art.emit('artplayerPluginDanmuku:show');
         return this;
     }
     hide() {
         this.isHide = true;
         this.$danmuku.style.opacity = 0;
         this.option.visible = false;
-        this.art.emit("artplayerPluginDanmuku:hide");
+        this.art.emit('artplayerPluginDanmuku:hide');
         return this;
     }
     destroy() {
         this.stop();
         this.worker.terminate();
-        this.art.off("video:play", this.start);
-        this.art.off("video:playing", this.start);
-        this.art.off("video:pause", this.stop);
-        this.art.off("video:waiting", this.stop);
-        this.art.off("resize", this.reset);
-        this.art.off("destroy", this.destroy);
-        this.art.emit("artplayerPluginDanmuku:destroy");
+        this.art.off('video:play', this.start);
+        this.art.off('video:playing', this.start);
+        this.art.off('video:pause', this.stop);
+        this.art.off('video:waiting', this.stop);
+        this.art.off('resize', this.reset);
+        this.art.off('destroy', this.destroy);
+        this.art.emit('artplayerPluginDanmuku:destroy');
     }
 }
 exports.default = Danmuku;
 
-},{"./bilibili":"95SuC","bundle-text:./worker":"el0Wt","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"95SuC":[function(require,module,exports) {
+},{"./bilibili":"aIvhn","bundle-text:./worker":"2Spvp","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"aIvhn":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "bilibiliDanmuParseFromUrl", ()=>bilibiliDanmuParseFromUrl);
@@ -802,13 +821,13 @@ function getMode(key) {
     }
 }
 function bilibiliDanmuParseFromXml(xmlString) {
-    if (typeof xmlString !== "string") return [];
+    if (typeof xmlString !== 'string') return [];
     const reg = new RegExp(/<d (?:.*? )??p="(?<p>.+?)"(?: .*?)?>(?<text>.+?)<\/d>/gs);
     const matches = xmlString.matchAll(reg);
     return Array.from(matches).map((match)=>{
-        const attr = match.groups.p.split(",");
+        const attr = match.groups.p.split(',');
         if (attr.length >= 8) {
-            const text = match.groups.text.trim().replaceAll("&quot;", '"').replaceAll("&apos;", "'").replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
+            const text = match.groups.text.trim().replaceAll('&quot;', '"').replaceAll('&apos;', "'").replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;', '&');
             return {
                 text,
                 time: Number(attr[0]),
@@ -841,7 +860,7 @@ function createWorker() {
     const blob = new Blob([
         workerText
     ], {
-        type: "application/javascript"
+        type: 'application/javascript'
     });
     return new Worker(URL.createObjectURL(blob));
 }
@@ -870,20 +889,20 @@ function bilibiliDanmuParseFromUrl(url) {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
     };
 };
 exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
+    Object.defineProperty(a, '__esModule', {
         value: true
     });
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -900,10 +919,10 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"el0Wt":[function(require,module,exports) {
-module.exports = "// modules are defined as an array\n// [ module function, map of requires ]\n//\n// map of requires is short require name -> numeric require\n//\n// anything defined in a previous bundle is accessed via the\n// orig method which is the require for previous bundles\n\n(function (modules, entry, mainEntry, parcelRequireName, globalName) {\n  /* eslint-disable no-undef */\n  var globalObject =\n    typeof globalThis !== 'undefined'\n      ? globalThis\n      : typeof self !== 'undefined'\n      ? self\n      : typeof window !== 'undefined'\n      ? window\n      : typeof global !== 'undefined'\n      ? global\n      : {};\n  /* eslint-enable no-undef */\n\n  // Save the require from previous bundle to this closure if any\n  var previousRequire =\n    typeof globalObject[parcelRequireName] === 'function' &&\n    globalObject[parcelRequireName];\n\n  var cache = previousRequire.cache || {};\n  // Do not use `require` to prevent Webpack from trying to bundle this call\n  var nodeRequire =\n    typeof module !== 'undefined' &&\n    typeof module.require === 'function' &&\n    module.require.bind(module);\n\n  function newRequire(name, jumped) {\n    if (!cache[name]) {\n      if (!modules[name]) {\n        // if we cannot find the module within our internal map or\n        // cache jump to the current global require ie. the last bundle\n        // that was added to the page.\n        var currentRequire =\n          typeof globalObject[parcelRequireName] === 'function' &&\n          globalObject[parcelRequireName];\n        if (!jumped && currentRequire) {\n          return currentRequire(name, true);\n        }\n\n        // If there are other bundles on this page the require from the\n        // previous one is saved to 'previousRequire'. Repeat this as\n        // many times as there are bundles until the module is found or\n        // we exhaust the require chain.\n        if (previousRequire) {\n          return previousRequire(name, true);\n        }\n\n        // Try the node require function if it exists.\n        if (nodeRequire && typeof name === 'string') {\n          return nodeRequire(name);\n        }\n\n        var err = new Error(\"Cannot find module '\" + name + \"'\");\n        err.code = 'MODULE_NOT_FOUND';\n        throw err;\n      }\n\n      localRequire.resolve = resolve;\n      localRequire.cache = {};\n\n      var module = (cache[name] = new newRequire.Module(name));\n\n      modules[name][0].call(\n        module.exports,\n        localRequire,\n        module,\n        module.exports,\n        this\n      );\n    }\n\n    return cache[name].exports;\n\n    function localRequire(x) {\n      var res = localRequire.resolve(x);\n      return res === false ? {} : newRequire(res);\n    }\n\n    function resolve(x) {\n      var id = modules[name][1][x];\n      return id != null ? id : x;\n    }\n  }\n\n  function Module(moduleName) {\n    this.id = moduleName;\n    this.bundle = newRequire;\n    this.exports = {};\n  }\n\n  newRequire.isParcelRequire = true;\n  newRequire.Module = Module;\n  newRequire.modules = modules;\n  newRequire.cache = cache;\n  newRequire.parent = previousRequire;\n  newRequire.register = function (id, exports) {\n    modules[id] = [\n      function (require, module) {\n        module.exports = exports;\n      },\n      {},\n    ];\n  };\n\n  Object.defineProperty(newRequire, 'root', {\n    get: function () {\n      return globalObject[parcelRequireName];\n    },\n  });\n\n  globalObject[parcelRequireName] = newRequire;\n\n  for (var i = 0; i < entry.length; i++) {\n    newRequire(entry[i]);\n  }\n\n  if (mainEntry) {\n    // Expose entry point to Node, AMD or browser globals\n    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js\n    var mainExports = newRequire(mainEntry);\n\n    // CommonJS\n    if (typeof exports === 'object' && typeof module !== 'undefined') {\n      module.exports = mainExports;\n\n      // RequireJS\n    } else if (typeof define === 'function' && define.amd) {\n      define(function () {\n        return mainExports;\n      });\n\n      // <script>\n    } else if (globalName) {\n      this[globalName] = mainExports;\n    }\n  }\n})({\"fHwfs\":[function(require,module,exports) {\nfunction getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n    // 弹幕最大高度\n    const maxTop = clientHeight - marginBottom;\n    // 过滤同模式的弹幕，即每种模式各不影响\n    const danmus = visibles.filter((item)=>item.mode === target.mode && item.top <= maxTop).sort((prev, next)=>prev.top - next.top);\n    // 如果没有同模式的弹幕，直接返回\n    if (danmus.length === 0) {\n        if (target.mode === 2) return maxTop - target.height;\n        else return marginTop;\n    }\n    // 上下各加一个虚拟弹幕，方便计算\n    danmus.unshift({\n        type: \"top\",\n        top: 0,\n        left: 0,\n        right: 0,\n        height: marginTop,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    danmus.push({\n        type: \"bottom\",\n        top: maxTop,\n        left: 0,\n        right: 0,\n        height: marginBottom,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    // 查找是否有多余的缝隙足以容纳当前弹幕\n    if (target.mode === 2) // 倒序查找\n    for(let index = danmus.length - 2; index >= 0; index -= 1){\n        const item = danmus[index];\n        const prev = danmus[index + 1];\n        const itemBottom = item.top + item.height;\n        const diff = prev.top - itemBottom;\n        if (diff >= target.height) return prev.top - target.height;\n    }\n    else // 顺序查找\n    for(let index = 1; index < danmus.length; index += 1){\n        const item = danmus[index];\n        const prev = danmus[index - 1];\n        const prevBottom = prev.top + prev.height;\n        const diff = item.top - prevBottom;\n        if (diff >= target.height) return prevBottom;\n    }\n    const topMap = [];\n    for(let index = 1; index < danmus.length - 1; index += 1){\n        const item = danmus[index];\n        if (topMap.length) {\n            const last = topMap[topMap.length - 1];\n            if (last[0].top === item.top) last.push(item);\n            else topMap.push([\n                item\n            ]);\n        } else topMap.push([\n            item\n        ]);\n    }\n    if (antiOverlap) switch(target.mode){\n        case 0:\n            {\n                const result = topMap.find((list)=>{\n                    return list.every((danmu)=>{\n                        if (clientWidth < danmu.distance) return false;\n                        if (target.speed < danmu.speed) return true;\n                        const overlapTime = danmu.right / (target.speed - danmu.speed);\n                        if (overlapTime > danmu.time) return true;\n                        return false;\n                    });\n                });\n                return result && result[0] ? result[0].top : undefined;\n            }\n        // 静止弹幕没有重叠问题\n        case 1:\n        case 2:\n            return undefined;\n        default:\n            break;\n    }\n    else {\n        switch(target.mode){\n            case 0:\n                topMap.sort((prev, next)=>{\n                    const nextMinRight = Math.min(...next.map((item)=>item.right));\n                    const prevMinRight = Math.min(...prev.map((item)=>item.right));\n                    return nextMinRight * next.length - prevMinRight * prev.length;\n                });\n                break;\n            case 1:\n            case 2:\n                topMap.sort((prev, next)=>{\n                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));\n                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));\n                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n                });\n                break;\n            default:\n                break;\n        }\n        return topMap[0][0].top;\n    }\n}\nonmessage = (event)=>{\n    const { data } = event;\n    if (!data.id || !data.type) return;\n    const fns = {\n        getDanmuTop\n    };\n    const fn = fns[data.type];\n    const result = fn(data);\n    self.postMessage({\n        result,\n        id: data.id\n    });\n};\n\n},{}]},[\"fHwfs\"], \"fHwfs\", \"parcelRequire4dc0\")\n\n";
+},{}],"2Spvp":[function(require,module,exports,__globalThis) {
+module.exports = "// modules are defined as an array\n// [ module function, map of requires ]\n//\n// map of requires is short require name -> numeric require\n//\n// anything defined in a previous bundle is accessed via the\n// orig method which is the require for previous bundles\n\n(function (\n  modules,\n  entry,\n  mainEntry,\n  parcelRequireName,\n  externals,\n  distDir,\n  publicUrl,\n  devServer\n) {\n  /* eslint-disable no-undef */\n  var globalObject =\n    typeof globalThis !== 'undefined'\n      ? globalThis\n      : typeof self !== 'undefined'\n      ? self\n      : typeof window !== 'undefined'\n      ? window\n      : typeof global !== 'undefined'\n      ? global\n      : {};\n  /* eslint-enable no-undef */\n\n  // Save the require from previous bundle to this closure if any\n  var previousRequire =\n    typeof globalObject[parcelRequireName] === 'function' &&\n    globalObject[parcelRequireName];\n\n  var importMap = previousRequire.i || {};\n  var cache = previousRequire.cache || {};\n  // Do not use `require` to prevent Webpack from trying to bundle this call\n  var nodeRequire =\n    typeof module !== 'undefined' &&\n    typeof module.require === 'function' &&\n    module.require.bind(module);\n\n  function newRequire(name, jumped) {\n    if (!cache[name]) {\n      if (!modules[name]) {\n        if (externals[name]) {\n          return externals[name];\n        }\n        // if we cannot find the module within our internal map or\n        // cache jump to the current global require ie. the last bundle\n        // that was added to the page.\n        var currentRequire =\n          typeof globalObject[parcelRequireName] === 'function' &&\n          globalObject[parcelRequireName];\n        if (!jumped && currentRequire) {\n          return currentRequire(name, true);\n        }\n\n        // If there are other bundles on this page the require from the\n        // previous one is saved to 'previousRequire'. Repeat this as\n        // many times as there are bundles until the module is found or\n        // we exhaust the require chain.\n        if (previousRequire) {\n          return previousRequire(name, true);\n        }\n\n        // Try the node require function if it exists.\n        if (nodeRequire && typeof name === 'string') {\n          return nodeRequire(name);\n        }\n\n        var err = new Error(\"Cannot find module '\" + name + \"'\");\n        err.code = 'MODULE_NOT_FOUND';\n        throw err;\n      }\n\n      localRequire.resolve = resolve;\n      localRequire.cache = {};\n\n      var module = (cache[name] = new newRequire.Module(name));\n\n      modules[name][0].call(\n        module.exports,\n        localRequire,\n        module,\n        module.exports,\n        globalObject\n      );\n    }\n\n    return cache[name].exports;\n\n    function localRequire(x) {\n      var res = localRequire.resolve(x);\n      return res === false ? {} : newRequire(res);\n    }\n\n    function resolve(x) {\n      var id = modules[name][1][x];\n      return id != null ? id : x;\n    }\n  }\n\n  function Module(moduleName) {\n    this.id = moduleName;\n    this.bundle = newRequire;\n    this.require = nodeRequire;\n    this.exports = {};\n  }\n\n  newRequire.isParcelRequire = true;\n  newRequire.Module = Module;\n  newRequire.modules = modules;\n  newRequire.cache = cache;\n  newRequire.parent = previousRequire;\n  newRequire.distDir = distDir;\n  newRequire.publicUrl = publicUrl;\n  newRequire.devServer = devServer;\n  newRequire.i = importMap;\n  newRequire.register = function (id, exports) {\n    modules[id] = [\n      function (require, module) {\n        module.exports = exports;\n      },\n      {},\n    ];\n  };\n\n  // Only insert newRequire.load when it is actually used.\n  // The code in this file is linted against ES5, so dynamic import is not allowed.\n  // INSERT_LOAD_HERE\n\n  Object.defineProperty(newRequire, 'root', {\n    get: function () {\n      return globalObject[parcelRequireName];\n    },\n  });\n\n  globalObject[parcelRequireName] = newRequire;\n\n  for (var i = 0; i < entry.length; i++) {\n    newRequire(entry[i]);\n  }\n\n  if (mainEntry) {\n    // Expose entry point to Node, AMD or browser globals\n    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js\n    var mainExports = newRequire(mainEntry);\n\n    // CommonJS\n    if (typeof exports === 'object' && typeof module !== 'undefined') {\n      module.exports = mainExports;\n\n      // RequireJS\n    } else if (typeof define === 'function' && define.amd) {\n      define(function () {\n        return mainExports;\n      });\n    }\n  }\n})({\"02up6\":[function(require,module,exports,__globalThis) {\nfunction getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n    // 弹幕最大高度\n    const maxTop = clientHeight - marginBottom;\n    // 过滤同模式的弹幕，即每种模式各不影响\n    const danmus = visibles.filter((item)=>item.mode === target.mode && item.top <= maxTop).sort((prev, next)=>prev.top - next.top);\n    // 如果没有同模式的弹幕，直接返回\n    if (danmus.length === 0) {\n        if (target.mode === 2) return maxTop - target.height;\n        else return marginTop;\n    }\n    // 上下各加一个虚拟弹幕，方便计算\n    danmus.unshift({\n        type: 'top',\n        top: 0,\n        left: 0,\n        right: 0,\n        height: marginTop,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    danmus.push({\n        type: 'bottom',\n        top: maxTop,\n        left: 0,\n        right: 0,\n        height: marginBottom,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    // 查找是否有多余的缝隙足以容纳当前弹幕\n    if (target.mode === 2) // 倒序查找\n    for(let index = danmus.length - 2; index >= 0; index -= 1){\n        const item = danmus[index];\n        const prev = danmus[index + 1];\n        const itemBottom = item.top + item.height;\n        const diff = prev.top - itemBottom;\n        if (diff >= target.height) return prev.top - target.height;\n    }\n    else // 顺序查找\n    for(let index = 1; index < danmus.length; index += 1){\n        const item = danmus[index];\n        const prev = danmus[index - 1];\n        const prevBottom = prev.top + prev.height;\n        const diff = item.top - prevBottom;\n        if (diff >= target.height) return prevBottom;\n    }\n    const topMap = [];\n    for(let index = 1; index < danmus.length - 1; index += 1){\n        const item = danmus[index];\n        if (topMap.length) {\n            const last = topMap[topMap.length - 1];\n            if (last[0].top === item.top) last.push(item);\n            else topMap.push([\n                item\n            ]);\n        } else topMap.push([\n            item\n        ]);\n    }\n    if (antiOverlap) switch(target.mode){\n        case 0:\n            {\n                const result = topMap.find((list)=>{\n                    return list.every((danmu)=>{\n                        if (clientWidth < danmu.distance) return false;\n                        if (target.speed < danmu.speed) return true;\n                        const overlapTime = danmu.right / (target.speed - danmu.speed);\n                        if (overlapTime > danmu.time) return true;\n                        return false;\n                    });\n                });\n                return result && result[0] ? result[0].top : undefined;\n            }\n        // 静止弹幕没有重叠问题\n        case 1:\n        case 2:\n            return undefined;\n        default:\n            break;\n    }\n    else {\n        switch(target.mode){\n            case 0:\n                topMap.sort((prev, next)=>{\n                    const nextMinRight = Math.min(...next.map((item)=>item.right));\n                    const prevMinRight = Math.min(...prev.map((item)=>item.right));\n                    return nextMinRight * next.length - prevMinRight * prev.length;\n                });\n                break;\n            case 1:\n            case 2:\n                topMap.sort((prev, next)=>{\n                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));\n                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));\n                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n                });\n                break;\n            default:\n                break;\n        }\n        return topMap[0][0].top;\n    }\n}\nonmessage = (event)=>{\n    const { data } = event;\n    if (!data.id || !data.type) return;\n    const fns = {\n        getDanmuTop\n    };\n    const fn = fns[data.type];\n    const result = fn(data);\n    self.postMessage({\n        result,\n        id: data.id\n    });\n};\n\n},{}]},[\"02up6\"], \"02up6\", \"parcelRequire4dc0\", {})\n\n";
 
-},{}],"cI0ih":[function(require,module,exports) {
+},{}],"3B2wj":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _styleLess = require("bundle-text:./style.less");
@@ -939,7 +958,7 @@ class Setting {
         this.utils = art.constructor.utils;
         const { setStyle } = this.utils;
         const { $controlsCenter } = art.template;
-        setStyle($controlsCenter, "display", "flex");
+        setStyle($controlsCenter, 'display', 'flex');
         this.template = {
             $controlsCenter,
             $mount: $controlsCenter,
@@ -976,16 +995,16 @@ class Setting {
         this.createSliders();
         this.createEvents();
         this.mount(this.option.mount);
-        art.on("resize", ()=>this.resize());
-        art.on("fullscreen", (state)=>this.onFullscreen(state));
-        art.on("fullscreenWeb", (state)=>this.onFullscreen(state));
-        art.proxy(this.template.$config, "mouseenter", ()=>{
+        art.on('resize', ()=>this.resize());
+        art.on('fullscreen', (state)=>this.onFullscreen(state));
+        art.on('fullscreenWeb', (state)=>this.onFullscreen(state));
+        art.proxy(this.template.$config, 'mouseenter', ()=>{
             this.onMouseEnter({
                 $control: this.template.$config,
                 $panel: this.template.$configPanel
             });
         });
-        art.proxy(this.template.$style, "mouseenter", ()=>{
+        art.proxy(this.template.$style, 'mouseenter', ()=>{
             this.onMouseEnter({
                 $control: this.template.$style,
                 $panel: this.template.$stylePanel
@@ -1099,7 +1118,7 @@ class Setting {
                             <div class="apd-style-color">
                                 \u{989C}\u{8272}
                                 <div class="apd-colors">
-                                    ${this.COLOR.map((color)=>`<div data-color="${color}" class="apd-color" style="background-color: ${color}"></div>`).join("")}
+                                    ${this.COLOR.map((color)=>`<div data-color="${color}" class="apd-color" style="background-color: ${color}"></div>`).join('')}
                                 </div>
                             </div>
                         </div>
@@ -1132,24 +1151,24 @@ class Setting {
             max: 3,
             steps: [
                 {
-                    name: "1/4",
+                    name: '1/4',
                     value: [
                         10,
-                        "75%"
+                        '75%'
                     ]
                 },
                 {
                     name: "\u534A\u5C4F",
                     value: [
                         10,
-                        "50%"
+                        '50%'
                     ]
                 },
                 {
-                    name: "3/4",
+                    name: '3/4',
                     value: [
                         10,
-                        "25%"
+                        '25%'
                     ]
                 },
                 {
@@ -1196,20 +1215,20 @@ class Setting {
     }
     get COLOR() {
         return this.option.COLOR.length ? this.option.COLOR : [
-            "#FE0302",
-            "#FF7204",
-            "#FFAA02",
-            "#FFD302",
-            "#FFFF00",
-            "#A0EE00",
-            "#00CD00",
-            "#019899",
-            "#4266BE",
-            "#89D5FF",
-            "#CC0273",
-            "#222222",
-            "#9B9B9B",
-            "#FFFFFF"
+            '#FE0302',
+            '#FF7204',
+            '#FFAA02',
+            '#FFD302',
+            '#FFFF00',
+            '#A0EE00',
+            '#00CD00',
+            '#019899',
+            '#4266BE',
+            '#89D5FF',
+            '#CC0273',
+            '#222222',
+            '#9B9B9B',
+            '#FFFFFF'
         ];
     }
     query(selector) {
@@ -1233,48 +1252,48 @@ class Setting {
     }
     createTemplate() {
         const { createElement, tooltip } = this.utils;
-        const $danmuku = createElement("div");
-        $danmuku.className = "artplayer-plugin-danmuku";
+        const $danmuku = createElement('div');
+        $danmuku.className = 'artplayer-plugin-danmuku';
         $danmuku.innerHTML = this.TEMPLATE;
         this.template.$danmuku = $danmuku;
-        this.template.$toggle = this.query(".apd-toggle");
-        this.template.$config = this.query(".apd-config");
-        this.template.$configPanel = this.query(".apd-config-panel");
-        this.template.$configModes = this.query(".apd-config-mode .apd-modes");
-        this.template.$style = this.query(".apd-style");
-        this.template.$stylePanel = this.query(".apd-style-panel");
-        this.template.$styleModes = this.query(".apd-style-mode .apd-modes");
-        this.template.$colors = this.query(".apd-colors");
-        this.template.$antiOverlap = this.query(".apd-anti-overlap");
-        this.template.$syncVideo = this.query(".apd-sync-video");
-        this.template.$opacitySlider = this.query(".apd-config-opacity .apd-slider");
-        this.template.$opacityValue = this.query(".apd-config-opacity .apd-value");
-        this.template.$marginSlider = this.query(".apd-config-margin .apd-slider");
-        this.template.$marginValue = this.query(".apd-config-margin .apd-value");
-        this.template.$fontSizeSlider = this.query(".apd-config-fontSize .apd-slider");
-        this.template.$fontSizeValue = this.query(".apd-config-fontSize .apd-value");
-        this.template.$speedSlider = this.query(".apd-config-speed .apd-slider");
-        this.template.$speedValue = this.query(".apd-config-speed .apd-value");
-        this.template.$input = this.query(".apd-input");
-        this.template.$send = this.query(".apd-send");
+        this.template.$toggle = this.query('.apd-toggle');
+        this.template.$config = this.query('.apd-config');
+        this.template.$configPanel = this.query('.apd-config-panel');
+        this.template.$configModes = this.query('.apd-config-mode .apd-modes');
+        this.template.$style = this.query('.apd-style');
+        this.template.$stylePanel = this.query('.apd-style-panel');
+        this.template.$styleModes = this.query('.apd-style-mode .apd-modes');
+        this.template.$colors = this.query('.apd-colors');
+        this.template.$antiOverlap = this.query('.apd-anti-overlap');
+        this.template.$syncVideo = this.query('.apd-sync-video');
+        this.template.$opacitySlider = this.query('.apd-config-opacity .apd-slider');
+        this.template.$opacityValue = this.query('.apd-config-opacity .apd-value');
+        this.template.$marginSlider = this.query('.apd-config-margin .apd-slider');
+        this.template.$marginValue = this.query('.apd-config-margin .apd-value');
+        this.template.$fontSizeSlider = this.query('.apd-config-fontSize .apd-slider');
+        this.template.$fontSizeValue = this.query('.apd-config-fontSize .apd-value');
+        this.template.$speedSlider = this.query('.apd-config-speed .apd-slider');
+        this.template.$speedValue = this.query('.apd-config-speed .apd-value');
+        this.template.$input = this.query('.apd-input');
+        this.template.$send = this.query('.apd-send');
         const { $toggle } = this.template;
-        this.art.on("artplayerPluginDanmuku:show", ()=>{
+        this.art.on('artplayerPluginDanmuku:show', ()=>{
             tooltip($toggle, "\u5173\u95ED\u5F39\u5E55");
         });
-        this.art.on("artplayerPluginDanmuku:hide", ()=>{
+        this.art.on('artplayerPluginDanmuku:hide', ()=>{
             tooltip($toggle, "\u6253\u5F00\u5F39\u5E55");
         });
     }
     createEvents() {
         const { $toggle, $configModes, $styleModes, $colors, $antiOverlap, $syncVideo, $send, $input } = this.template;
-        this.art.proxy($toggle, "click", ()=>{
+        this.art.proxy($toggle, 'click', ()=>{
             this.danmuku.config({
                 visible: !this.option.visible
             });
             this.reset();
         });
-        this.art.proxy($configModes, "click", (event)=>{
-            const $mode = event.target.closest(".apd-mode");
+        this.art.proxy($configModes, 'click', (event)=>{
+            const $mode = event.target.closest('.apd-mode');
             if (!$mode) return;
             const mode = Number($mode.dataset.mode);
             if (this.option.modes.includes(mode)) this.danmuku.config({
@@ -1288,20 +1307,20 @@ class Setting {
             });
             this.reset();
         });
-        this.art.proxy($antiOverlap, "click", ()=>{
+        this.art.proxy($antiOverlap, 'click', ()=>{
             this.danmuku.config({
                 antiOverlap: !this.option.antiOverlap
             });
             this.reset();
         });
-        this.art.proxy($syncVideo, "click", ()=>{
+        this.art.proxy($syncVideo, 'click', ()=>{
             this.danmuku.config({
                 synchronousPlayback: !this.option.synchronousPlayback
             });
             this.reset();
         });
-        this.art.proxy($styleModes, "click", (event)=>{
-            const $mode = event.target.closest(".apd-mode");
+        this.art.proxy($styleModes, 'click', (event)=>{
+            const $mode = event.target.closest('.apd-mode');
             if (!$mode) return;
             const mode = Number($mode.dataset.mode);
             this.danmuku.config({
@@ -1309,17 +1328,17 @@ class Setting {
             });
             this.reset();
         });
-        this.art.proxy($colors, "click", (event)=>{
-            const $color = event.target.closest(".apd-color");
+        this.art.proxy($colors, 'click', (event)=>{
+            const $color = event.target.closest('.apd-color');
             if (!$color) return;
             this.danmuku.config({
                 color: $color.dataset.color
             });
             this.reset();
         });
-        this.art.proxy($send, "click", ()=>this.emit());
-        this.art.proxy($input, "keypress", (event)=>{
-            if (event.key === "Enter") {
+        this.art.proxy($send, 'click', ()=>this.emit());
+        this.art.proxy($input, 'keypress', (event)=>{
+            if (event.key === 'Enter') {
                 event.preventDefault();
                 this.emit();
             }
@@ -1390,21 +1409,21 @@ class Setting {
     }
     createSlider({ min, max, container, findIndex, onChange, steps = [] }) {
         const { query, clamp, setStyle } = this.utils;
-        setStyle(container, "touch-action", "none");
+        setStyle(container, 'touch-action', 'none');
         container.innerHTML = `
             <div class="apd-slider-line">
                 <div class="apd-slider-points">
-                    ${steps.map(()=>`<div class="apd-slider-point"></div>`).join("")}
+                    ${steps.map(()=>`<div class="apd-slider-point"></div>`).join('')}
                 </div>
                 <div class="apd-slider-progress"></div>
             </div>
             <div class="apd-slider-dot"></div>
             <div class="apd-slider-steps">
-                ${steps.map((step)=>step.hide ? "" : `<div class="apd-slider-step">${step.name}</div>`).join("")}
+                ${steps.map((step)=>step.hide ? '' : `<div class="apd-slider-step">${step.name}</div>`).join('')}
             </div>
         `;
-        const $dot = query(".apd-slider-dot", container);
-        const $progress = query(".apd-slider-progress", container);
+        const $dot = query('.apd-slider-dot', container);
+        const $progress = query('.apd-slider-progress', container);
         let isDroging = false;
         function reset(index = findIndex()) {
             if (index < min || index > max) return;
@@ -1425,16 +1444,16 @@ class Setting {
                 reset(index);
             }
         }
-        this.art.proxy(container, "click", (event)=>{
+        this.art.proxy(container, 'click', (event)=>{
             updateLeft.call(this, event);
         });
-        this.art.proxy(container, "pointerdown", (event)=>{
+        this.art.proxy(container, 'pointerdown', (event)=>{
             isDroging = event.button === 0;
         });
-        this.art.proxy(document, "pointermove", (event)=>{
+        this.art.proxy(document, 'pointermove', (event)=>{
             if (isDroging) updateLeft.call(this, event);
         });
-        this.art.proxy(document, "pointerup", (event)=>{
+        this.art.proxy(document, 'pointerup', (event)=>{
             if (isDroging) {
                 isDroging = false;
                 updateLeft.call(this, event);
@@ -1483,7 +1502,7 @@ class Setting {
             danmu.border = true;
             delete danmu.time;
             this.danmuku.emit(danmu);
-            $input.value = "";
+            $input.value = '';
             this.lock();
         // eslint-disable-next-line no-unused-vars
         } catch (error) {
@@ -1496,7 +1515,7 @@ class Setting {
         this.isLock = true;
         let time = this.option.lockTime;
         $send.innerText = time;
-        addClass($send, "apd-lock");
+        addClass($send, 'apd-lock');
         const loop = ()=>{
             this.timer = setTimeout(()=>{
                 if (time === 0) this.unlock();
@@ -1515,7 +1534,7 @@ class Setting {
         clearTimeout(this.timer);
         this.isLock = false;
         $send.innerText = "\u53D1\u9001";
-        removeClass($send, "apd-lock");
+        removeClass($send, 'apd-lock');
     }
     resize() {
         if (this.outside) return;
@@ -1533,25 +1552,25 @@ class Setting {
         this.slider.margin.reset();
         this.slider.fontSize.reset();
         this.slider.speed.reset();
-        this.setData("danmukuVisible", this.option.visible);
-        this.setData("danmukuMode", this.option.mode);
-        this.setData("danmukuColor", this.option.color);
-        this.setData("danmukuMode0", this.option.modes.includes(0));
-        this.setData("danmukuMode1", this.option.modes.includes(1));
-        this.setData("danmukuMode2", this.option.modes.includes(2));
-        this.setData("danmukuAntiOverlap", this.option.antiOverlap);
-        this.setData("danmukuSyncVideo", this.option.synchronousPlayback);
-        this.setData("danmukuTheme", this.option.theme);
-        this.setData("danmukuEmitter", this.option.emitter);
+        this.setData('danmukuVisible', this.option.visible);
+        this.setData('danmukuMode', this.option.mode);
+        this.setData('danmukuColor', this.option.color);
+        this.setData('danmukuMode0', this.option.modes.includes(0));
+        this.setData('danmukuMode1', this.option.modes.includes(1));
+        this.setData('danmukuMode2', this.option.modes.includes(2));
+        this.setData('danmukuAntiOverlap', this.option.antiOverlap);
+        this.setData('danmukuSyncVideo', this.option.synchronousPlayback);
+        this.setData('danmukuTheme', this.option.theme);
+        this.setData('danmukuEmitter', this.option.emitter);
         const colors = $colors.children;
         const $color = Array.from(colors).find((item)=>item.dataset.color === this.option.color.toUpperCase());
-        $color && inverseClass($color, "apd-active");
+        $color && inverseClass($color, 'apd-active');
         tooltip($toggle, this.option.visible ? "\u5173\u95ED\u5F39\u5E55" : "\u6253\u5F00\u5F39\u5E55");
         this.resize();
     }
     mount(target) {
         const { errorHandle } = this.utils;
-        const $el = typeof target === "string" ? document.querySelector(target) : target;
+        const $el = typeof target === 'string' ? document.querySelector(target) : target;
         errorHandle($el, `Can not find the mount point: ${target}`);
         this.append($el, this.template.$danmuku);
         this.template.$mount = $el;
@@ -1559,13 +1578,13 @@ class Setting {
     }
 }
 exports.default = Setting;
-if (typeof document !== "undefined") {
-    const id = "artplayer-plugin-danmuku";
+if (typeof document !== 'undefined') {
+    const id = 'artplayer-plugin-danmuku';
     let $style = document.getElementById(id);
     if (!$style) {
-        $style = document.createElement("style");
+        $style = document.createElement('style');
         $style.id = id;
-        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ()=>{
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ()=>{
             document.head.appendChild($style);
         });
         else (document.head || document.documentElement).appendChild($style);
@@ -1573,46 +1592,46 @@ if (typeof document !== "undefined") {
     $style.textContent = (0, _styleLessDefault.default);
 }
 
-},{"bundle-text:./style.less":"uaCsY","bundle-text:./img/on.svg":"a9r0e","bundle-text:./img/off.svg":"luia6","bundle-text:./img/config.svg":"lo6sV","bundle-text:./img/style.svg":"1Aemm","bundle-text:./img/mode_0_off.svg":"jKvDJ","bundle-text:./img/mode_0_on.svg":"7eesQ","bundle-text:./img/mode_1_off.svg":"DalV6","bundle-text:./img/mode_1_on.svg":"i0F2W","bundle-text:./img/mode_2_off.svg":"1phDW","bundle-text:./img/mode_2_on.svg":"iHUBM","bundle-text:./img/check_on.svg":"fQ6fo","bundle-text:./img/check_off.svg":"dz3tU","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"uaCsY":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-danmuku {\n  z-index: 99;\n  color: #fff;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  height: 32px;\n  font-size: 12px;\n  font-weight: 300;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-icon {\n  cursor: pointer;\n  opacity: .75;\n  fill: #fff;\n  transition: all .2s;\n}\n\n.artplayer-plugin-danmuku .apd-icon:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  opacity: 0;\n  pointer-events: none;\n  width: 320px;\n  padding: 10px;\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  opacity: 100;\n  pointer-events: all;\n}\n\n.artplayer-plugin-danmuku .apd-config-mode, .artplayer-plugin-danmuku .apd-config-slider, .artplayer-plugin-danmuku .apd-config-other, .artplayer-plugin-danmuku .apd-style-mode {\n  margin-bottom: 15px;\n}\n\n.artplayer-plugin-danmuku .apd-modes {\n  align-items: center;\n  gap: 20px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode {\n  cursor: pointer;\n  text-align: center;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode:hover {\n  color: #00a1d6;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider {\n  align-items: center;\n  gap: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider .apd-value {\n  text-align: right;\n  width: 32px;\n}\n\n.artplayer-plugin-danmuku .apd-slider {\n  cursor: pointer;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-line {\n  background-color: #ffffff40;\n  border-radius: 3px;\n  width: 100%;\n  height: 2px;\n  position: relative;\n  overflow: hidden;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points {\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point {\n  background-color: #ffffff80;\n  border-radius: 50%;\n  width: 2px;\n  height: 2px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-progress {\n  background-color: #00a1d6;\n  width: 0%;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-dot {\n  background-color: #00a1d6;\n  border-radius: 50%;\n  width: 12px;\n  height: 12px;\n  position: absolute;\n  left: 0%;\n  transform: translateX(-6px);\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps {\n  color: #777;\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% + 32px);\n  display: flex;\n  position: absolute;\n  bottom: -12px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step {\n  text-align: center;\n  flex-shrink: 0;\n  width: 36px;\n  scale: .95;\n}\n\n.artplayer-plugin-danmuku .apd-config-other {\n  align-items: center;\n  gap: 20px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-check-off, .artplayer-plugin-danmuku .apd-config-other .apd-check-on {\n  width: 16px;\n  height: 16px;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other {\n  cursor: pointer;\n  align-items: center;\n  gap: 2px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other:hover {\n  color: #00a1d6;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  background-color: #ffffff40;\n  border-radius: 5px;\n  flex: 1;\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  opacity: 0;\n  pointer-events: none;\n  width: 200px;\n  padding: 10px;\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  opacity: 100;\n  pointer-events: all;\n}\n\n.artplayer-plugin-danmuku .apd-colors {\n  flex-wrap: wrap;\n  gap: 8px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-colors .apd-color {\n  cursor: pointer;\n  border-radius: 2px;\n  width: 16px;\n  height: 16px;\n}\n\n.artplayer-plugin-danmuku .apd-colors .apd-color.apd-active {\n  border: 1px solid #000;\n  box-shadow: 0 0 0 1px #fff;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  color: #fff;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  flex: 1;\n  width: auto;\n  min-width: 0;\n  height: 100%;\n  line-height: 1;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  cursor: pointer;\n  text-shadow: none;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  width: 60px;\n  height: 100%;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-send.apd-lock {\n  cursor: not-allowed;\n  color: #666;\n  background-color: #e7e7e7;\n}\n\n.art-controls-center .apd-emitter {\n  flex: none;\n  width: 260px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  gap: 16px;\n  height: 38px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-config-icon, .art-fullscreen-web .artplayer-plugin-danmuku .apd-config-icon, .art-fullscreen .artplayer-plugin-danmuku .apd-toggle-off, .art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-off, .art-fullscreen .artplayer-plugin-danmuku .apd-toggle-on, .art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-on {\n  width: 28px;\n  height: 28px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-emitter, .art-fullscreen-web .artplayer-plugin-danmuku .apd-emitter {\n  flex: none;\n  width: 400px;\n}\n\n.art-video-player > .artplayer-plugin-danmuku {\n  padding: 0 10px;\n  position: absolute;\n  bottom: -40px;\n  left: 0;\n  right: 0;\n}\n\n.art-video-player:has( > .artplayer-plugin-danmuku) {\n  margin-bottom: 40px;\n}\n\n[data-danmuku-emitter=\"false\"] .apd-emitter {\n  display: none !important;\n}\n\n[data-danmuku-emitter=\"false\"] .art-controls-center .artplayer-plugin-danmuku {\n  justify-content: flex-end;\n  gap: 18px;\n}\n\n[data-danmuku-emitter=\"false\"].art-fullscreen .art-controls-center .artplayer-plugin-danmuku, [data-danmuku-emitter=\"false\"].art-fullscreen-web .art-controls-center .artplayer-plugin-danmuku {\n  gap: 24px;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-icon {\n  fill: #333;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-emitter {\n  background-color: #f1f2f3;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-input {\n  color: #000;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #0000004d;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-off {\n  display: block;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-on, [data-danmuku-visible=\"true\"] .apd-toggle-off {\n  display: none;\n}\n\n[data-danmuku-visible=\"true\"] .apd-toggle-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-off, [data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-off, [data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-off, [data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-config-mode .apd-mode-0-off {\n  display: block;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-config-mode .apd-mode-0-on {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .art-danmuku [data-mode=\"0\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-config-mode .apd-mode-0-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-config-mode .apd-mode-0-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"0\"] .apd-style-mode [data-mode=\"0\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"0\"] .apd-style-mode [data-mode=\"0\"] path {\n  fill: #00a1d6;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-config-mode .apd-mode-1-off {\n  display: block;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-config-mode .apd-mode-1-on {\n  display: none;\n}\n\n[data-danmuku-mode1=\"false\"] .art-danmuku [data-mode=\"1\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-config-mode .apd-mode-1-off {\n  display: none;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-config-mode .apd-mode-1-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"1\"] .apd-style-mode [data-mode=\"1\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"1\"] .apd-style-mode [data-mode=\"1\"] path {\n  fill: #00a1d6;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-config-mode .apd-mode-2-off {\n  display: block;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-config-mode .apd-mode-2-on {\n  display: none;\n}\n\n[data-danmuku-mode2=\"false\"] .art-danmuku [data-mode=\"2\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-config-mode .apd-mode-2-off {\n  display: none;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-config-mode .apd-mode-2-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"2\"] .apd-style-mode [data-mode=\"2\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"2\"] .apd-style-mode [data-mode=\"2\"] path {\n  fill: #00a1d6;\n}\n";
+},{"bundle-text:./style.less":"bh9OX","bundle-text:./img/on.svg":"8mY0A","bundle-text:./img/off.svg":"iqU8K","bundle-text:./img/config.svg":"Zd1dH","bundle-text:./img/style.svg":"jPuJr","bundle-text:./img/mode_0_off.svg":"clMb3","bundle-text:./img/mode_0_on.svg":"6jPwG","bundle-text:./img/mode_1_off.svg":"gAeHz","bundle-text:./img/mode_1_on.svg":"fK0pY","bundle-text:./img/mode_2_off.svg":"67tbB","bundle-text:./img/mode_2_on.svg":"9zaZq","bundle-text:./img/check_on.svg":"dHpvg","bundle-text:./img/check_off.svg":"iZKOG","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"bh9OX":[function(require,module,exports,__globalThis) {
+module.exports = ".artplayer-plugin-danmuku {\n  z-index: 99;\n  color: #fff;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  height: 32px;\n  font-size: 12px;\n  font-weight: 300;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-icon {\n  cursor: pointer;\n  opacity: .75;\n  fill: #fff;\n  transition: all .2s;\n}\n\n.artplayer-plugin-danmuku .apd-icon:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  opacity: 0;\n  pointer-events: none;\n  width: 320px;\n  padding: 10px;\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  opacity: 100;\n  pointer-events: all;\n}\n\n.artplayer-plugin-danmuku .apd-config-mode, .artplayer-plugin-danmuku .apd-config-slider, .artplayer-plugin-danmuku .apd-config-other, .artplayer-plugin-danmuku .apd-style-mode {\n  margin-bottom: 15px;\n}\n\n.artplayer-plugin-danmuku .apd-modes {\n  align-items: center;\n  gap: 20px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode {\n  cursor: pointer;\n  text-align: center;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode:hover {\n  color: #00a1d6;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider {\n  align-items: center;\n  gap: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider .apd-value {\n  text-align: right;\n  width: 32px;\n}\n\n.artplayer-plugin-danmuku .apd-slider {\n  cursor: pointer;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-line {\n  background-color: #ffffff40;\n  border-radius: 3px;\n  width: 100%;\n  height: 2px;\n  position: relative;\n  overflow: hidden;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points {\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point {\n  background-color: #ffffff80;\n  border-radius: 50%;\n  width: 2px;\n  height: 2px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-progress {\n  background-color: #00a1d6;\n  width: 0%;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-dot {\n  background-color: #00a1d6;\n  border-radius: 50%;\n  width: 12px;\n  height: 12px;\n  position: absolute;\n  left: 0%;\n  transform: translateX(-6px);\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps {\n  color: #777;\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% + 32px);\n  display: flex;\n  position: absolute;\n  bottom: -12px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step {\n  text-align: center;\n  flex-shrink: 0;\n  width: 36px;\n  scale: .95;\n}\n\n.artplayer-plugin-danmuku .apd-config-other {\n  align-items: center;\n  gap: 20px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-check-off, .artplayer-plugin-danmuku .apd-config-other .apd-check-on {\n  width: 16px;\n  height: 16px;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other {\n  cursor: pointer;\n  align-items: center;\n  gap: 2px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other:hover {\n  color: #00a1d6;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  background-color: #ffffff40;\n  border-radius: 5px;\n  flex: 1;\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  opacity: 0;\n  pointer-events: none;\n  width: 200px;\n  padding: 10px;\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  opacity: 100;\n  pointer-events: all;\n}\n\n.artplayer-plugin-danmuku .apd-colors {\n  flex-wrap: wrap;\n  gap: 8px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-colors .apd-color {\n  cursor: pointer;\n  border-radius: 2px;\n  width: 16px;\n  height: 16px;\n}\n\n.artplayer-plugin-danmuku .apd-colors .apd-color.apd-active {\n  border: 1px solid #000;\n  box-shadow: 0 0 0 1px #fff;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  color: #fff;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  flex: 1;\n  width: auto;\n  min-width: 0;\n  height: 100%;\n  line-height: 1;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  cursor: pointer;\n  width: 60px;\n  height: 100%;\n  text-shadow: none;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-send.apd-lock {\n  cursor: not-allowed;\n  color: #666;\n  background-color: #e7e7e7;\n}\n\n.art-controls-center .apd-emitter {\n  flex: none;\n  width: 260px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  gap: 16px;\n  height: 38px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-config-icon, .art-fullscreen-web .artplayer-plugin-danmuku .apd-config-icon, .art-fullscreen .artplayer-plugin-danmuku .apd-toggle-off, .art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-off, .art-fullscreen .artplayer-plugin-danmuku .apd-toggle-on, .art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-on {\n  width: 28px;\n  height: 28px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-emitter, .art-fullscreen-web .artplayer-plugin-danmuku .apd-emitter {\n  flex: none;\n  width: 400px;\n}\n\n.art-video-player > .artplayer-plugin-danmuku {\n  padding: 0 10px;\n  position: absolute;\n  bottom: -40px;\n  left: 0;\n  right: 0;\n}\n\n.art-video-player:has( > .artplayer-plugin-danmuku) {\n  margin-bottom: 40px;\n}\n\n[data-danmuku-emitter=\"false\"] .apd-emitter {\n  display: none !important;\n}\n\n[data-danmuku-emitter=\"false\"] .art-controls-center .artplayer-plugin-danmuku {\n  justify-content: flex-end;\n  gap: 18px;\n}\n\n[data-danmuku-emitter=\"false\"].art-fullscreen .art-controls-center .artplayer-plugin-danmuku, [data-danmuku-emitter=\"false\"].art-fullscreen-web .art-controls-center .artplayer-plugin-danmuku {\n  gap: 24px;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-icon {\n  fill: #333;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-emitter {\n  background-color: #f1f2f3;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-input {\n  color: #000;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #0000004d;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-off {\n  display: block;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-on, [data-danmuku-visible=\"true\"] .apd-toggle-off {\n  display: none;\n}\n\n[data-danmuku-visible=\"true\"] .apd-toggle-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-off, [data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-off, [data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-off, [data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-config-mode .apd-mode-0-off {\n  display: block;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-config-mode .apd-mode-0-on {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .art-danmuku [data-mode=\"0\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-config-mode .apd-mode-0-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-config-mode .apd-mode-0-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"0\"] .apd-style-mode [data-mode=\"0\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"0\"] .apd-style-mode [data-mode=\"0\"] path {\n  fill: #00a1d6;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-config-mode .apd-mode-1-off {\n  display: block;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-config-mode .apd-mode-1-on {\n  display: none;\n}\n\n[data-danmuku-mode1=\"false\"] .art-danmuku [data-mode=\"1\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-config-mode .apd-mode-1-off {\n  display: none;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-config-mode .apd-mode-1-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"1\"] .apd-style-mode [data-mode=\"1\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"1\"] .apd-style-mode [data-mode=\"1\"] path {\n  fill: #00a1d6;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-config-mode .apd-mode-2-off {\n  display: block;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-config-mode .apd-mode-2-on {\n  display: none;\n}\n\n[data-danmuku-mode2=\"false\"] .art-danmuku [data-mode=\"2\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-config-mode .apd-mode-2-off {\n  display: none;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-config-mode .apd-mode-2-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"2\"] .apd-style-mode [data-mode=\"2\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"2\"] .apd-style-mode [data-mode=\"2\"] path {\n  fill: #00a1d6;\n}\n";
 
-},{}],"a9r0e":[function(require,module,exports) {
+},{}],"8mY0A":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-toggle-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z\" clip-rule=\"evenodd\"></path><path fill=\"#00AEEC\" fill-rule=\"evenodd\" d=\"M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z\" clip-rule=\"evenodd\"></path></svg>";
 
-},{}],"luia6":[function(require,module,exports) {
+},{}],"iqU8K":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-toggle-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"m8.085 4.891-.999-1.499a1.008 1.008 0 0 1 1.679-1.118l1.709 2.566c.54-.008 1.045-.012 1.515-.012h.13c.345 0 .707.003 1.088.007l1.862-2.59a1.008 1.008 0 0 1 1.637 1.177l-1.049 1.46c.788.02 1.631.046 2.53.078 1.958.069 3.468 1.6 3.74 3.507.088.613.13 2.158.16 3.276l.001.027c.01.333.017.63.025.856a.987.987 0 0 1-1.974.069c-.008-.23-.016-.539-.025-.881v-.002c-.028-1.103-.066-2.541-.142-3.065-.143-1.004-.895-1.78-1.854-1.813-2.444-.087-4.466-.13-6.064-.131-1.598 0-3.619.044-6.063.13a2.037 2.037 0 0 0-1.945 1.748c-.15 1.04-.225 2.341-.225 3.904 0 1.874.11 3.474.325 4.798.154.949.95 1.66 1.91 1.708a97.58 97.58 0 0 0 5.416.139.988.988 0 0 1 0 1.975c-2.196 0-3.61-.047-5.513-.141A4.012 4.012 0 0 1 2.197 17.7c-.236-1.446-.351-3.151-.351-5.116 0-1.64.08-3.035.245-4.184A4.013 4.013 0 0 1 5.92 4.96c.761-.027 1.483-.05 2.164-.069Zm4.436 4.707h-1.32v4.63h2.222v.848h-2.618v1.078h2.431a5.01 5.01 0 0 1 3.575-3.115V9.598h-1.276a8.59 8.59 0 0 0 .748-1.42l-1.089-.384a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.289h-3.2v.979h2.067v1.43H7.483l-.308 3.454h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.004c.285.02.551.04.818.04 1.001-.066 1.562-.418 1.694-1.056.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858H15.8Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902H15.8v.902h-1.254Zm3.517 10.594a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-.002-1.502a2.5 2.5 0 0 1-2.217-3.657l3.326 3.398a2.49 2.49 0 0 1-1.109.259Zm2.5-2.5c0 .42-.103.815-.286 1.162l-3.328-3.401a2.5 2.5 0 0 1 3.614 2.239Z\" clip-rule=\"evenodd\"></path></svg>";
 
-},{}],"lo6sV":[function(require,module,exports) {
+},{}],"Zd1dH":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-config-icon\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"m15.645 4.881 1.06-1.473a.998.998 0 1 0-1.622-1.166L13.22 4.835a110.67 110.67 0 0 0-1.1-.007h-.131c-.47 0-.975.004-1.515.012L8.783 2.3A.998.998 0 0 0 7.12 3.408l.988 1.484c-.688.019-1.418.042-2.188.069a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363c1.903.094 3.317.141 5.513.141a.988.988 0 0 0 0-1.975 97.58 97.58 0 0 1-5.416-.139 2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.005.183.01.07.014-.038.004-.096.008-.189.011-.081a.987.987 0 1 0 1.974-.069c-.004-.105-.007-.009-.011.09-.002.056-.004.112-.007.135l-.002.01a.574.574 0 0 1-.005-.091v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.905-.032-1.752-.058-2.543-.079Zm-3.113 4.703h-1.307v4.643h2.2v.04l.651-1.234c.113-.215.281-.389.482-.509v-.11h.235c.137-.049.283-.074.433-.074h1.553V9.584h-1.264a8.5 8.5 0 0 0 .741-1.405l-1.078-.381c-.24.631-.501 1.23-.806 1.786h-1.503l.686-.305c-.228-.501-.5-.959-.806-1.394l-1.034.348c.294.392.566.839.817 1.35Zm-1.7 5.502h2.16l-.564 1.068h-1.595v-1.068Zm-2.498-1.863.152-1.561h1.96V8.289H7.277v.969h2.048v1.435h-1.84l-.306 3.51h2.254c0 1.155-.043 1.906-.12 2.255-.076.348-.38.523-.925.523-.305 0-.61-.022-.893-.055l.294 1.056.061.005c.282.02.546.039.81.039.991-.065 1.547-.414 1.677-1.046.11-.631.175-1.883.175-3.757H8.334Zm5.09-.8v.85h-1.188v-.85h1.187Zm-1.188-.955h1.187v-.893h-1.187v.893Zm2.322.007v-.893h1.241v.893h-1.241Zm.528 2.757a1.26 1.26 0 0 1 1.087-.627l4.003-.009a1.26 1.26 0 0 1 1.094.63l1.721 2.982c.226.39.225.872-.001 1.263l-1.743 3a1.26 1.26 0 0 1-1.086.628l-4.003.009a1.26 1.26 0 0 1-1.094-.63l-1.722-2.982a1.26 1.26 0 0 1 .002-1.263l1.742-3Zm1.967.858a1.26 1.26 0 0 0-1.08.614l-.903 1.513a1.26 1.26 0 0 0-.002 1.289l.885 1.492c.227.384.64.62 1.086.618l2.192-.005a1.26 1.26 0 0 0 1.08-.615l.904-1.518a1.26 1.26 0 0 0 .001-1.288l-.884-1.489a1.26 1.26 0 0 0-1.086-.616l-2.193.005Zm2.517 2.76a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0Z\" clip-rule=\"evenodd\"></path></svg>";
 
-},{}],"1Aemm":[function(require,module,exports) {
+},{}],"jPuJr":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-style-icon\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 22 22\" viewBox=\"0 0 22 22\" width=\"36\" height=\"24\"><path d=\"M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98 12.87 11H9.13L11 5.98z\"></path></svg>";
 
-},{}],"jKvDJ":[function(require,module,exports) {
+},{}],"clMb3":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-mode-0-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm2-1a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1z\" fill=\"#00AEEC\"></path><path d=\"M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z\" fill=\"#00AEEC\"></path></svg>";
 
-},{}],"7eesQ":[function(require,module,exports) {
+},{}],"6jPwG":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-mode-0-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2z\" fill=\"#FFFFFF\"></path></svg>";
 
-},{}],"DalV6":[function(require,module,exports) {
+},{}],"gAeHz":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-mode-1-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zm-4-8h2v2h-2V7zM9 9H7V7h2v2zm4 0h-2V7h2v2zm2-2h2v2h-2V7z\" fill=\"#00AEEC\"></path><path d=\"M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z\" fill=\"#00AEEC\"></path></svg>";
 
-},{}],"i0F2W":[function(require,module,exports) {
+},{}],"fK0pY":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-mode-1-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 9H7V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2z\" fill=\"#FFFFFF\"></path></svg>";
 
-},{}],"1phDW":[function(require,module,exports) {
+},{}],"67tbB":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-mode-2-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM9 21H7v-2h2v2zm4 0h-2v-2h2v2z\" fill=\"#00AEEC\"></path><path d=\"M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z\" fill=\"#00AEEC\"></path></svg>";
 
-},{}],"iHUBM":[function(require,module,exports) {
+},{}],"9zaZq":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-mode-2-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 21H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z\" fill=\"#FFFFFF\"></path></svg>";
 
-},{}],"fQ6fo":[function(require,module,exports) {
+},{}],"dHpvg":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-check-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\"><path d=\"m13 18.25-1.8-1.8c-.6-.6-1.65-.6-2.25 0s-.6 1.5 0 2.25l2.85 2.85c.318.318.762.468 1.2.448.438.02.882-.13 1.2-.448l8.85-8.85c.6-.6.6-1.65 0-2.25s-1.65-.6-2.25 0l-7.8 7.8zM8 4h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z\" fill=\"#00AEEC\"></path></svg>";
 
-},{}],"dz3tU":[function(require,module,exports) {
+},{}],"iZKOG":[function(require,module,exports,__globalThis) {
 module.exports = "<svg class=\"apd-icon apd-check-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\"><path d=\"M8 6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H8zm0-2h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z\" fill=\"#FFFFFF\"></path></svg>";
 
-},{}],"bZziT":[function(require,module,exports) {
+},{}],"2G7iS":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>heatmap);
@@ -1640,17 +1659,17 @@ const line = (pointA, pointB)=>{
 function heatmap(art, danmuku, option) {
     const { query } = art.constructor.utils;
     art.controls.add({
-        name: "heatmap",
-        position: "top",
-        html: "",
+        name: 'heatmap',
+        position: 'top',
+        html: '',
         style: {
-            position: "absolute",
-            top: "-100px",
-            left: "0px",
-            right: "0px",
-            height: "100px",
-            width: "100%",
-            pointerEvents: "none"
+            position: 'absolute',
+            top: '-100px',
+            left: '0px',
+            right: '0px',
+            height: '100px',
+            width: '100%',
+            pointerEvents: 'none'
         },
         mounted ($heatmap) {
             let $start = null;
@@ -1658,7 +1677,7 @@ function heatmap(art, danmuku, option) {
             function update(arg = []) {
                 $start = null;
                 $stop = null;
-                $heatmap.innerHTML = "";
+                $heatmap.innerHTML = '';
                 if (!art.duration || art.option.isLive) return;
                 const svg = {
                     w: $heatmap.offsetWidth,
@@ -1676,7 +1695,7 @@ function heatmap(art, danmuku, option) {
                     smoothing: 0.2,
                     flattening: 0.2
                 };
-                if (typeof option === "object") Object.assign(options, option);
+                if (typeof option === 'object') Object.assign(options, option);
                 let points = [];
                 if (Array.isArray(arg) && arg.length) points = [
                     ...arg
@@ -1725,7 +1744,7 @@ function heatmap(art, danmuku, option) {
                 const bezierCommand = (point, i, a)=>{
                     const cps = controlPoint(a[i - 1], a[i - 2], point);
                     const cpe = controlPoint(point, a[i - 1], a[i + 1], true);
-                    const close = i === a.length - 1 ? " z" : "";
+                    const close = i === a.length - 1 ? ' z' : '';
                     return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point[0]},${point[1]}${close}`;
                 };
                 const pointsPositions = points.map((e)=>{
@@ -1736,7 +1755,7 @@ function heatmap(art, danmuku, option) {
                         y
                     ];
                 });
-                const pathD = pointsPositions.reduce((acc, e, i, a)=>i === 0 ? `M ${a[a.length - 1][0]},${svg.h} L ${e[0]},${svg.h} L ${e[0]},${e[1]}` : `${acc} ${bezierCommand(e, i, a)}`, "");
+                const pathD = pointsPositions.reduce((acc, e, i, a)=>i === 0 ? `M ${a[a.length - 1][0]},${svg.h} L ${e[0]},${svg.h} L ${e[0]},${e[1]}` : `${acc} ${bezierCommand(e, i, a)}`, '');
                 $heatmap.innerHTML = `
                     <svg viewBox="0 0 ${svg.w} ${svg.h}">
                         <defs>
@@ -1750,31 +1769,31 @@ function heatmap(art, danmuku, option) {
                         <path fill="url(#heatmap-solids)" d="${pathD}"></path>
                     </svg>
                 `;
-                $start = query("#heatmap-start", $heatmap);
-                $stop = query("#heatmap-stop", $heatmap);
-                $start.setAttribute("offset", `${art.played * 100}%`);
-                $stop.setAttribute("offset", `${art.played * 100}%`);
+                $start = query('#heatmap-start', $heatmap);
+                $stop = query('#heatmap-stop', $heatmap);
+                $start.setAttribute('offset', `${art.played * 100}%`);
+                $stop.setAttribute('offset', `${art.played * 100}%`);
             }
-            art.on("video:timeupdate", ()=>{
+            art.on('video:timeupdate', ()=>{
                 if ($start && $stop) {
-                    $start.setAttribute("offset", `${art.played * 100}%`);
-                    $stop.setAttribute("offset", `${art.played * 100}%`);
+                    $start.setAttribute('offset', `${art.played * 100}%`);
+                    $stop.setAttribute('offset', `${art.played * 100}%`);
                 }
             });
-            art.on("setBar", (type, percentage)=>{
-                if ($start && $stop && type === "played") {
-                    $start.setAttribute("offset", `${percentage * 100}%`);
-                    $stop.setAttribute("offset", `${percentage * 100}%`);
+            art.on('setBar', (type, percentage)=>{
+                if ($start && $stop && type === 'played') {
+                    $start.setAttribute('offset', `${percentage * 100}%`);
+                    $stop.setAttribute('offset', `${percentage * 100}%`);
                 }
             });
-            art.on("ready", ()=>update());
-            art.on("resize", ()=>update());
-            art.on("artplayerPluginDanmuku:loaded", ()=>update());
-            art.on("artplayerPluginDanmuku:points", (points)=>update(points));
+            art.on('ready', ()=>update());
+            art.on('resize', ()=>update());
+            art.on('artplayerPluginDanmuku:loaded', ()=>update());
+            art.on('artplayerPluginDanmuku:points', (points)=>update(points));
         }
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["lIf7X"], "lIf7X", "parcelRequire4dc0")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}]},["hfC30"], "hfC30", "parcelRequire4dc0", {})
 
 //# sourceMappingURL=index.js.map

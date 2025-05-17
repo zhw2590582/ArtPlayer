@@ -1,4 +1,4 @@
-export const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+export const userAgent = globalThis?.CUSTOM_USER_AGENT ?? (typeof navigator !== 'undefined' ? navigator.userAgent : '');
 export const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
 export const isWechat = /MicroMessenger/i.test(userAgent);
 export const isIE = /MSIE|Trident/i.test(userAgent);
