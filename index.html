@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Artplayer.js</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google-adsense-account" content="ca-pub-8579453810848662">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta name="keywords" content="artplayer, player, js, html5, video" />
+    <meta name="description" content="ArtPlayer.js is a modern and full featured HTML5 video player" />
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/css/normalize.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="header">
+        <a href="./" class="logo">
+            <img src="./assets/img/logo.png" height="20" alt="">
+            Artplayer.js
+        </a>
+        <div class="menus">
+            <div class="item has-sub-menu">
+                Ecosystem
+                <div class="sub-menu">
+                    <ul>
+                        <li class="title">Libraries</li>
+                        <li style="display: inline-block;margin-right: 10px;">
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js&example=hls">hls.js</a>
+                        </li>
+                        <li style="display: inline-block;margin-right: 10px;">
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash">dash.js</a>
+                        </li>
+                        <li style="display: inline-block;margin-right: 10px;">
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv">flv.js</a>
+                        </li>
+                        <li style="display: inline-block;margin-right: 10px;">
+                            <a
+                                href="/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts">mpegts.js</a>
+                        </li>
+                        <li style="display: inline-block;margin-right: 10px;">
+                            <a
+                                href="/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent">webtorrent.js</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="title">Plugins</li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku">artplayer-plugin-danmuku</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask">artplayer-plugin-danmuku-mask</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads">artplayer-plugin-ads</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe">artplayer-plugin-iframe</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control">artplayer-plugin-hls-control</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control">artplayer-plugin-dash-control</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail">artplayer-plugin-vtt-thumbnail</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles">artplayer-plugin-multiple-subtitles</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass">artplayer-plugin-libass</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast">artplayer-plugin-chromecast</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast">artplayer-plugin-vast</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter">artplayer-plugin-chapter</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail">artplayer-plugin-auto-thumbnail</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight">artplayer-plugin-ambilight</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="title">Proxys</li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas">artplayer-proxy-canvas</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-proxy-webav/index.js&example=webav">artplayer-proxy-webav</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="title">Tools</li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-tool-thumbnail/index.js&example=thumbnail">artplayer-tool-thumbnail</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <a class="item" href="./document/">Document</a>
+            <a class="item" href="https://github.com/zhw2590582/ArtPlayer">Github</a>
+            <a class="item" href="./sponsor.html">☕ 捐助/Sponsor</a>
+            <span class="item" href="#">Q群: 320881312</span>
+        </div>
+        <div class="tool">
+            <div class="checkbox">
+                <input type="checkbox" id="ts">
+                <label for="ts">TS</label>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" id="prod">
+                <label for="prod">Prod</label>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" id="code">
+                <label for="code">
+                    <del>Code</del>
+                </label>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" id="log">
+                <label for="log">
+                    <del>Log</del>
+                </label>
+            </div>
+            <div class="run">▶ Run Code</div>
+        </div>
+    </header>
+    <div class="main">
+        <div id="editor" class="part-left">
+            <div class="libs">
+                <div class="upload">
+                    Upload Files
+                    <input type="file" id="file" multiple />
+                </div>
+                <textarea class="libsInput"
+                    placeholder="Other dependencies, support for js and css, multiple line breaks"
+                    spellcheck="false"></textarea>
+            </div>
+            <div class="code">
+                <div class="codeMirrorWrap"></div>
+            </div>
+        </div>
+        <div class="part-right">
+            <div class="video-wrap">
+                <div class="artplayer-app"></div>
+            </div>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="popups">
+        <div class="popinner"></div>
+    </div>
+    <script src="./assets/js/console.js"></script>
+    <script src="./assets/js/vs/loader.js"></script>
+    <script>
+        var artplayer = document.createElement('script');
+        var common = document.createElement('script');
+
+        artplayer.onload = function () {
+            common.src = "./assets/js/common.js";
+            document.body.appendChild(common);
+        }
+
+        if (localStorage.getItem('prod') === 'true') {
+            artplayer.src = "./compiled/artplayer.js"
+        } else {
+            artplayer.src = "./uncompiled/artplayer/index.js"
+        }
+
+        document.body.appendChild(artplayer);
+    </script>
+    <script>
+        var isLocalhost = Boolean(
+            window.location.hostname === 'localhost' ||
+            window.location.hostname === '[::1]' ||
+            window.location.hostname.match(
+                /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+            )
+        );
+    </script>
+    <script>
+        if (!isLocalhost) {
+            var _hmt = _hmt || [];
+            var hm = document.createElement('script');
+            hm.src = "https://hm.baidu.com/hm.js?879b2890d8d025c751785170763ca82b";
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        }
+    </script>
+    <script>
+        if (!isLocalhost && 'serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                // navigator.serviceWorker.register(`./sw.js?t=${Artplayer.build}`);
+            });
+        }
+    </script>
+</body>
+
+</html>
