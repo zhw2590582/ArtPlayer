@@ -1,0 +1,31 @@
+.art-video-player {
+    .art-layer-asr {
+        pointer-events: none !important;
+        position: absolute;
+        z-index: 150;
+        inset: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        padding: 0 2%;
+        font-size: 1rem;
+        gap: var(--art-subtitle-gap);
+        padding-bottom: var(--art-subtitle-bottom);
+        transition: padding-bottom var(--art-transition-duration) ease;
+        text-shadow:
+            var(--art-subtitle-border) 1px 0 1px,
+            var(--art-subtitle-border) 0 1px 1px,
+            var(--art-subtitle-border) -1px 0 1px,
+            var(--art-subtitle-border) 0 -1px 1px,
+            var(--art-subtitle-border) 1px 1px 1px,
+            var(--art-subtitle-border) -1px -1px 1px,
+            var(--art-subtitle-border) 1px -1px 1px,
+            var(--art-subtitle-border) -1px 1px 1px;
+    }
+
+    &.art-control-show {
+        .art-layer-asr {
+            padding-bottom: calc(var(--art-control-height) + var(--art-subtitle-bottom));
+        }
+    }
+}

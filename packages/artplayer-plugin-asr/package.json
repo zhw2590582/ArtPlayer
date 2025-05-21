@@ -1,0 +1,30 @@
+{
+    "license": "MIT",
+    "version": "2.0.0",
+    "name": "artplayer-plugin-asr",
+    "description": "Asr plugin for ArtPlayer",
+    "main": "dist/artplayer-plugin-asr.js",
+    "legacy": "dist/artplayer-plugin-asr.legacy.js",
+    "module": "dist/artplayer-plugin-asr.esm.js",
+    "types": "types/artplayer-plugin-asr.d.ts",
+    "exports": {
+        "import": "./dist/artplayer-plugin-asr.esm.js",
+        "require": "./dist/artplayer-plugin-asr.js",
+        "default": "./dist/artplayer-plugin-asr.js"
+    },
+    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+    "browserslist": "last 1 Chrome version",
+    "homepage": "https://artplayer.org",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+    },
+    "keywords": [
+        "html5",
+        "video",
+        "player"
+    ]
+}
