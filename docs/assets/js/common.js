@@ -48,6 +48,7 @@
 
         var libUris = [
             './assets/ts/artplayer-plugin-ads.d.ts',
+            './assets/ts/artplayer-plugin-asr.d.ts',
             './assets/ts/artplayer-plugin-ambilight.d.ts',
             './assets/ts/artplayer-plugin-auto-thumbnail.d.ts',
             './assets/ts/artplayer-plugin-chapter.d.ts',
