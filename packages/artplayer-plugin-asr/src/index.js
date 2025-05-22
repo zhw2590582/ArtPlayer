@@ -10,6 +10,14 @@ export default function artplayerPluginAsr(option = {}) {
         let timer = null;
         let workletLoaded = false;
 
+        function append(text) {
+            if (typeof text !== 'string') return;
+        }
+
+        function clear() {
+            //
+        }
+
         const recorderProcessorCode = `
             class RecorderProcessor extends AudioWorkletProcessor {
                 process(inputs) {
@@ -122,8 +130,9 @@ export default function artplayerPluginAsr(option = {}) {
                 if (bufferChunks.length === 0) return;
                 const wav = encodeWavPCM(bufferChunks, audioCtx.sampleRate);
                 const buffer = await wav.arrayBuffer();
-                await onAudioChunk(buffer);
+                const text = await onAudioChunk(buffer);
                 bufferChunks = [];
+                append(text);
             }, interval);
         }
 
@@ -152,7 +161,8 @@ export default function artplayerPluginAsr(option = {}) {
 
         return {
             name: 'artplayerPluginAsr',
-            destroy: stopCapture,
+            clear,
+            append,
         };
     };
 }
