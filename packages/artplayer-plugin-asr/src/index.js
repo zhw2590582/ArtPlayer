@@ -1,5 +1,7 @@
+import style from 'bundle-text:./style.less';
+
 export default function artplayerPluginAsr(option = {}) {
-    const { hideTimeout = 3000, interval = 100, sampleRate = 16000, onAudioChunk = () => null } = option;
+    const { hideTimeout = 10000, length = 3, interval = 100, sampleRate = 16000, onAudioChunk = () => null } = option;
 
     return (art) => {
         let started = false;
@@ -11,14 +13,31 @@ export default function artplayerPluginAsr(option = {}) {
         let workletLoaded = false;
         let hideTimer = null;
 
+        const $asr = art.layers.add({
+            name: 'asr',
+            html: '',
+        });
+
+        function splitByPunctuation(text) {
+            return text
+                .split(/(?<=[、。！？!?\.])\s*/u)
+                .map((s) => s.trim())
+                .filter(Boolean)
+                .slice(-length);
+        }
+
         function hide() {
-            //
+            $asr.style.display = 'none';
         }
 
         function append(subtitle) {
             if (typeof subtitle !== 'string') return;
             clearTimeout(hideTimer);
             hideTimer = setTimeout(hide, hideTimeout);
+            $asr.style.display = '';
+            $asr.innerHTML = splitByPunctuation(subtitle)
+                .map((line) => `<div class="art-asr-line">${line}</div>`)
+                .join('');
         }
 
         const recorderProcessorCode = `
@@ -130,10 +149,20 @@ export default function artplayerPluginAsr(option = {}) {
 
         return {
             name: 'artplayerPluginAsr',
+            stop: stopCapture,
             hide,
             append,
         };
     };
+}
+
+if (typeof document !== 'undefined') {
+    if (!document.getElementById('artplayer-plugin-asr')) {
+        const $style = document.createElement('style');
+        $style.id = 'artplayer-plugin-asr';
+        $style.textContent = style;
+        document.head.appendChild($style);
+    }
 }
 
 if (typeof window !== 'undefined') {

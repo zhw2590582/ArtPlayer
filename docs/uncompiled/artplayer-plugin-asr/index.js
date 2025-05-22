@@ -164,8 +164,10 @@
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginAsr);
+var _styleLess = require("bundle-text:./style.less");
+var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginAsr(option = {}) {
-    const { hideTimeout = 3000, interval = 100, sampleRate = 16000, onAudioChunk = ()=>null } = option;
+    const { hideTimeout = 10000, length = 3, interval = 100, sampleRate = 16000, onAudioChunk = ()=>null } = option;
     return (art)=>{
         let started = false;
         let audioCtx = null;
@@ -175,13 +177,22 @@ function artplayerPluginAsr(option = {}) {
         let timer = null;
         let workletLoaded = false;
         let hideTimer = null;
+        const $asr = art.layers.add({
+            name: 'asr',
+            html: ''
+        });
+        function splitByPunctuation(text) {
+            return text.split(/(?<=[、。！？!?\.])\s*/u).map((s)=>s.trim()).filter(Boolean).slice(-length);
+        }
         function hide() {
-        //
+            $asr.style.display = 'none';
         }
         function append(subtitle) {
             if (typeof subtitle !== 'string') return;
             clearTimeout(hideTimer);
             hideTimer = setTimeout(hide, hideTimeout);
+            $asr.style.display = '';
+            $asr.innerHTML = splitByPunctuation(subtitle).map((line)=>`<div class="art-asr-line">${line}</div>`).join('');
         }
         const recorderProcessorCode = `
             class RecorderProcessor extends AudioWorkletProcessor {
@@ -279,14 +290,23 @@ function artplayerPluginAsr(option = {}) {
         art.on('destroy', stopCapture);
         return {
             name: 'artplayerPluginAsr',
+            stop: stopCapture,
             hide,
             append
         };
     };
 }
+if (typeof document !== 'undefined') {
+    if (!document.getElementById('artplayer-plugin-asr')) {
+        const $style = document.createElement('style');
+        $style.id = 'artplayer-plugin-asr';
+        $style.textContent = (0, _styleLessDefault.default);
+        document.head.appendChild($style);
+    }
+}
 if (typeof window !== 'undefined') window['artplayerPluginAsr'] = artplayerPluginAsr;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"8oCsH":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH","bundle-text:./style.less":"enAJa"}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -315,6 +335,9 @@ exports.export = function(dest, destName, get) {
         get: get
     });
 };
+
+},{}],"enAJa":[function(require,module,exports,__globalThis) {
+module.exports = ".art-video-player .art-layer-asr {\n  z-index: 150;\n  justify-content: end;\n  gap: var(--art-subtitle-gap);\n  padding: 0 2%;\n  padding-bottom: var(--art-subtitle-bottom);\n  transition: padding-bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n  flex-direction: column;\n  font-size: 1rem;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  pointer-events: none !important;\n}\n\n.art-video-player.art-control-show .art-layer-asr {\n  padding-bottom: calc(var(--art-control-height)  + var(--art-subtitle-bottom));\n}\n";
 
 },{}]},["eiaCd"], "eiaCd", "parcelRequire4dc0", {})
 

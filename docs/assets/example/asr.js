@@ -1,11 +1,15 @@
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
+    autoSize: true,
+    fullscreen: true,
+    fullscreenWeb: true,
     plugins: [
         artplayerPluginAsr({
+            length: 3,
             interval: 40,
             sampleRate: 16000,
-            hideTimeout: 3000,
+            hideTimeout: 10000,
             // Use your AI tool to convert buffer into subtitles
             onAudioChunk: (buffer) => tencentASR(buffer),
         }),
@@ -19,17 +23,21 @@ async function tencentASR(buffer) {
 
     if (!ws) {
         loading = true;
-        // This service may not be accessible outside of China
         const api = 'https://api.aimu.app/asr/tencent?engine_model_type=16k_ja';
         const { url } = await (await fetch(api)).json();
         ws = new WebSocket(url);
         ws.binaryType = 'arraybuffer';
         ws.onmessage = (event) => {
-            const json = JSON.parse(event.data);
-            const subtitle = json.result?.voice_text_str;
-            console.info('Subtitle', subtitle);
-            // Append the subtitle on the player
-            art.plugins.artplayerPluginAsr.append(subtitle);
+            const { code, result } = JSON.parse(event.data);
+            if (code === 0) {
+                const subtitle = result?.voice_text_str;
+                art.plugins.artplayerPluginAsr.append(subtitle);
+            } else {
+                ws.send(JSON.stringify({ type: 'end' }));
+                ws.close();
+                ws = null;
+            }
+
         };
         loading = false;
     }

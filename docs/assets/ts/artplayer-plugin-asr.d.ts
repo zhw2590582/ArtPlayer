@@ -4,6 +4,7 @@ export = artplayerPluginAsr;
 export as namespace artplayerPluginAsr;
 
 interface AsrPluginOption {
+    length?: number;
     interval?: number;
     sampleRate?: number;
     hideTimeout?: number;
