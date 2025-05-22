@@ -1,3 +1,21 @@
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    plugins: [
+        artplayerPluginAsr({
+            interval: 2000,
+            sampleRate: 16000,
+            autoClearTimeout: 3000,
+            onAudioChunk: async ({ buffer }) => {
+                // Use your AI tool to convert buffer into subtitles
+                const subtitle = await tencentASR(buffer);
+                console.log('Received subtitle:', subtitle);
+                return subtitle;
+            },
+        }),
+    ]
+});
+
 var ws = null;
 async function tencentASR(buffer) {
     return new Promise(async (resolve) => {
@@ -15,20 +33,3 @@ async function tencentASR(buffer) {
         }
     })
 }
-
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    plugins: [
-        artplayerPluginAsr({
-            interval: 2000,
-            sampleRate: 16000,
-            autoClearTimeout: 3000,
-            onAudioChunk: async ({ buffer }) => {
-                const subtitle = await tencentASR(buffer);
-                console.log('Received subtitle:', subtitle);
-                return subtitle;
-            },
-        }),
-    ]
-});
