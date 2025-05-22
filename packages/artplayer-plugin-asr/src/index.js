@@ -1,5 +1,5 @@
 export default function artplayerPluginAsr(option = {}) {
-    const { autoClearTimeout = 3000, interval = 1000, sampleRate = 16000, onAudioChunk = () => null } = option;
+    const { cleanupTimeout = 3000, interval = 1000, sampleRate = 16000, onAudioChunk = () => null } = option;
 
     return (art) => {
         let started = false;
@@ -18,7 +18,7 @@ export default function artplayerPluginAsr(option = {}) {
         function append(subtitle) {
             if (typeof subtitle !== 'string') return;
             clearTimeout(autoClearTimer);
-            autoClearTimer = setTimeout(clear, autoClearTimeout);
+            autoClearTimer = setTimeout(clear, cleanupTimeout);
         }
 
         const recorderProcessorCode = `

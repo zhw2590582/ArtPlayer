@@ -5,7 +5,7 @@ var art = new Artplayer({
         artplayerPluginAsr({
             interval: 2000,
             sampleRate: 16000,
-            autoClearTimeout: 3000,
+            cleanupTimeout: 3000,
             onAudioChunk: async ({ buffer }) => {
                 // Use your AI tool to convert buffer into subtitles
                 const subtitle = await tencentASR(buffer);
