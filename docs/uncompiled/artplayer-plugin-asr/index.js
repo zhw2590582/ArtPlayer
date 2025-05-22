@@ -174,14 +174,14 @@ function artplayerPluginAsr(option = {}) {
         let bufferChunks = [];
         let timer = null;
         let workletLoaded = false;
-        let autoClearTimer = null;
+        let hideTimer = null;
         function hide() {
         //
         }
         function append(subtitle) {
             if (typeof subtitle !== 'string') return;
-            clearTimeout(autoClearTimer);
-            autoClearTimer = setTimeout(hide, hideTimeout);
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(hide, hideTimeout);
         }
         const recorderProcessorCode = `
             class RecorderProcessor extends AudioWorkletProcessor {
