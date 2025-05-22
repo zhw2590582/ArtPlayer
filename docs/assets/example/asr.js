@@ -1,4 +1,20 @@
 var ws = null;
+async function tencentASR(buffer) {
+    return new Promise(async (resolve) => {
+        if (!ws) {
+            const api = 'https://api.aimu.app/asr/tencent?engine_model_type=16k_ja&voice_format=1';
+            const { url } = await (await fetch(api)).json();
+            ws = new WebSocket(url);
+            ws.binaryType = 'arraybuffer';
+            ws.onmessage = (event) => resolve(event.data);
+        }
+        if (ws.readyState === WebSocket.OPEN) {
+            ws.send(buffer);
+        } else {
+            console.warn('WebSocket is not open');
+        }
+    })
+}
 
 var art = new Artplayer({
     container: '.artplayer-app',
@@ -7,41 +23,12 @@ var art = new Artplayer({
         artplayerPluginAsr({
             interval: 2000,
             sampleRate: 16000,
-            onAudioChunk: (buffer) => {
-                return new Promise(async (resolve) => {
-                    if (!ws) {
-                        const {url} = await (await fetch('https://api.aimu.app/asr/tencent')).json();
-                        ws = new WebSocket(url);
-                        ws.binaryType = 'arraybuffer';
-                        ws.onopen = () => {
-                            console.log('WebSocket connection opened');
-                        };
-                        ws.onclose = () => {
-                            console.log('WebSocket connection closed');
-                            ws = null;
-                        };
-                        ws.onerror = (error) => {
-                            console.error('WebSocket error:', error);
-                        };
-                        ws.onmessage = (event) => {
-                            resolve(event.data);
-                        };
-                    }
-                    if (ws.readyState === WebSocket.OPEN) {
-                        ws.send(buffer);
-                    } else {
-                        console.error('WebSocket is not open. Ready state:', ws.readyState);
-                    }
-                });
-  
+            autoClearTimeout: 3000,
+            onAudioChunk: async ({ buffer }) => {
+                const subtitle = await tencentASR(buffer);
+                console.log('Received subtitle:', subtitle);
+                return subtitle;
             },
         }),
     ]
-});
-
-art.on('destroy', () => {
-    if (ws) {
-        ws.close();
-        ws = null;
-    }
 });

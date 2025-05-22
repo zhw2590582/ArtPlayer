@@ -1,5 +1,5 @@
 export default function artplayerPluginAsr(option = {}) {
-    const { autoClearTimeout = 5000, interval = 1000, sampleRate = 16000, onAudioChunk = () => null } = option;
+    const { autoClearTimeout = 3000, interval = 1000, sampleRate = 16000, onAudioChunk = () => null } = option;
 
     return (art) => {
         let started = false;
@@ -15,8 +15,8 @@ export default function artplayerPluginAsr(option = {}) {
             //
         }
 
-        function append(text) {
-            if (typeof text !== 'string') return;
+        function append(subtitle) {
+            if (typeof subtitle !== 'string') return;
             clearTimeout(autoClearTimer);
             autoClearTimer = setTimeout(clear, autoClearTimeout);
         }
@@ -133,9 +133,9 @@ export default function artplayerPluginAsr(option = {}) {
                 if (bufferChunks.length === 0) return;
                 const wav = encodeWavPCM(bufferChunks, audioCtx.sampleRate);
                 const buffer = await wav.arrayBuffer();
-                const text = await onAudioChunk(buffer);
+                const subtitle = await onAudioChunk({ buffer });
                 bufferChunks = [];
-                append(text);
+                append(subtitle);
             }, interval);
         }
 
