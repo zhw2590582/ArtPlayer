@@ -1,5 +1,5 @@
 export default function artplayerPluginAsr(option = {}) {
-    const { cleanupTimeout = 3000, interval = 100, sampleRate = 16000, onAudioChunk = () => null } = option;
+    const { hideTimeout = 3000, interval = 100, sampleRate = 16000, onAudioChunk = () => null } = option;
 
     return (art) => {
         let started = false;
@@ -11,14 +11,14 @@ export default function artplayerPluginAsr(option = {}) {
         let workletLoaded = false;
         let autoClearTimer = null;
 
-        function clear() {
+        function hide() {
             //
         }
 
         function append(subtitle) {
             if (typeof subtitle !== 'string') return;
             clearTimeout(autoClearTimer);
-            autoClearTimer = setTimeout(clear, cleanupTimeout);
+            autoClearTimer = setTimeout(hide, hideTimeout);
         }
 
         const recorderProcessorCode = `
@@ -130,7 +130,7 @@ export default function artplayerPluginAsr(option = {}) {
 
         return {
             name: 'artplayerPluginAsr',
-            clear,
+            hide,
             append,
         };
     };

@@ -165,7 +165,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginAsr);
 function artplayerPluginAsr(option = {}) {
-    const { cleanupTimeout = 3000, interval = 100, sampleRate = 16000, onAudioChunk = ()=>null } = option;
+    const { hideTimeout = 3000, interval = 100, sampleRate = 16000, onAudioChunk = ()=>null } = option;
     return (art)=>{
         let started = false;
         let audioCtx = null;
@@ -175,13 +175,13 @@ function artplayerPluginAsr(option = {}) {
         let timer = null;
         let workletLoaded = false;
         let autoClearTimer = null;
-        function clear() {
+        function hide() {
         //
         }
         function append(subtitle) {
             if (typeof subtitle !== 'string') return;
             clearTimeout(autoClearTimer);
-            autoClearTimer = setTimeout(clear, cleanupTimeout);
+            autoClearTimer = setTimeout(hide, hideTimeout);
         }
         const recorderProcessorCode = `
             class RecorderProcessor extends AudioWorkletProcessor {
@@ -279,7 +279,7 @@ function artplayerPluginAsr(option = {}) {
         art.on('destroy', stopCapture);
         return {
             name: 'artplayerPluginAsr',
-            clear,
+            hide,
             append
         };
     };
