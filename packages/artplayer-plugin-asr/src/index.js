@@ -8,10 +8,13 @@ export default function artplayerPluginAsr(option = {}) {
         let audioCtx = null;
         let sourceNode = null;
         let recorderNode = null;
+        let gainNode = null;
         let bufferChunks = [];
         let timer = null;
         let workletLoaded = false;
         let hideTimer = null;
+        let mediaStream = null;
+        let mediaStreamSource = null;
 
         const $asr = art.layers.add({
             name: 'asr',
@@ -69,87 +72,163 @@ export default function artplayerPluginAsr(option = {}) {
             return buffer;
         }
 
-        async function startCapture() {
-            if (started) return;
-            started = true;
-
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate });
-                if (audioCtx.state === 'suspended') {
-                    await audioCtx.resume();
-                }
-            }
-
-            if (!sourceNode) {
-                try {
-                    sourceNode = audioCtx.createMediaElementSource(art.video);
-                    sourceNode.connect(audioCtx.destination);
-                } catch (err) {
-                    console.warn('[artplayerPluginAsr] Failed to access audio stream:', err);
-                    return;
-                }
-            }
-
-            if (!workletLoaded) {
-                const blobUrl = createWorkletBlobUrl();
-                await audioCtx.audioWorklet.addModule(blobUrl);
-                URL.revokeObjectURL(blobUrl);
-                workletLoaded = true;
-            }
-
-            recorderNode = new AudioWorkletNode(audioCtx, 'recorder-processor');
-            recorderNode.port.onmessage = (event) => {
-                bufferChunks.push(new Float32Array(event.data));
-            };
-
-            sourceNode.connect(recorderNode);
-            recorderNode.connect(audioCtx.destination);
-
-            const CHUNK_SAMPLES = sampleRate * (interval / 1000);
-            timer = setInterval(async () => {
-                if (bufferChunks.length === 0) return;
-                let accumulated = new Float32Array(0);
-                while (accumulated.length < CHUNK_SAMPLES && bufferChunks.length) {
-                    const next = bufferChunks.shift();
-                    const tmp = new Float32Array(accumulated.length + next.length);
-                    tmp.set(accumulated, 0);
-                    tmp.set(next, accumulated.length);
-                    accumulated = tmp;
-                }
-                if (accumulated.length < CHUNK_SAMPLES) return;
-                const chunkToSend = accumulated.slice(0, CHUNK_SAMPLES);
-                const pcm = floatTo16BitPCM(chunkToSend);
-                const subtitle = await onAudioChunk(pcm);
-                append(subtitle);
-            }, interval);
+        async function setupAudioContext() {
+            if (audioCtx) return audioCtx;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate });
+            if (audioCtx.state === 'suspended') await audioCtx.resume();
+            return audioCtx;
         }
 
-        function stopCapture() {
+        async function setupAudioSource() {
+            if (!sourceNode && art.video) {
+                try {
+                    sourceNode = audioCtx.createMediaElementSource(art.video);
+                    return sourceNode;
+                } catch (err) {
+                    console.warn('[artplayerPluginAsr] Direct connection failed, trying fallback...', err);
+                }
+            }
+
+            try {
+                if (!mediaStream) {
+                    mediaStream = await captureAudioFromVideo(art.video);
+                }
+                if (mediaStream) {
+                    mediaStreamSource = audioCtx.createMediaStreamSource(mediaStream);
+                    return mediaStreamSource;
+                }
+            } catch (err) {
+                console.warn('[artplayerPluginAsr] MediaStream fallback failed:', err);
+            }
+
+            return null;
+        }
+
+        async function captureAudioFromVideo(videoElement) {
+            try {
+                if (videoElement.captureStream) return videoElement.captureStream();
+                if (videoElement.mozCaptureStream) return videoElement.mozCaptureStream();
+                console.warn('[artplayerPluginAsr] captureStream not supported');
+                return null;
+            } catch (err) {
+                console.warn('[artplayerPluginAsr] Error capturing stream:', err);
+                return null;
+            }
+        }
+
+        async function startCapture() {
+            if (started) return;
+
+            try {
+                await setupAudioContext();
+                const audioSource = await setupAudioSource();
+                if (!audioSource) throw new Error('Could not establish audio source');
+
+                if (!workletLoaded) {
+                    const blobUrl = createWorkletBlobUrl();
+                    await audioCtx.audioWorklet.addModule(blobUrl);
+                    URL.revokeObjectURL(blobUrl);
+                    workletLoaded = true;
+                }
+
+                // 创建输出音频的 GainNode（正常播放）
+                gainNode = audioCtx.createGain();
+                gainNode.gain.value = 1;
+
+                recorderNode = new AudioWorkletNode(audioCtx, 'recorder-processor');
+                recorderNode.port.onmessage = (event) => {
+                    bufferChunks.push(new Float32Array(event.data));
+                };
+
+                // 分流：识别和播放
+                audioSource.connect(recorderNode);
+                audioSource.connect(gainNode);
+
+                gainNode.connect(audioCtx.destination); // 正常声音输出
+                // recorderNode 不连接 destination，避免输出干扰
+
+                const CHUNK_SAMPLES = sampleRate * (interval / 1000);
+                timer = setInterval(async () => {
+                    if (bufferChunks.length === 0) return;
+
+                    let accumulated = new Float32Array(0);
+                    while (accumulated.length < CHUNK_SAMPLES && bufferChunks.length) {
+                        const next = bufferChunks.shift();
+                        const tmp = new Float32Array(accumulated.length + next.length);
+                        tmp.set(accumulated, 0);
+                        tmp.set(next, accumulated.length);
+                        accumulated = tmp;
+                    }
+
+                    if (accumulated.length < CHUNK_SAMPLES) return;
+
+                    const chunkToSend = accumulated.slice(0, CHUNK_SAMPLES);
+                    const pcm = floatTo16BitPCM(chunkToSend);
+                    const subtitle = await onAudioChunk(pcm);
+                    append(subtitle);
+                }, interval);
+
+                started = true;
+            } catch (err) {
+                console.error('[artplayerPluginAsr] Initialization failed:', err);
+                await stopCapture();
+            }
+        }
+
+        async function stopCapture() {
             if (!started) return;
             started = false;
 
-            if (timer) {
-                clearInterval(timer);
-                timer = null;
-            }
+            clearInterval(timer);
+            timer = null;
 
             if (recorderNode) {
-                try {
-                    recorderNode.disconnect();
-                } catch {}
+                recorderNode.disconnect();
+                recorderNode.port.onmessage = null;
                 recorderNode = null;
+            }
+
+            if (gainNode) {
+                gainNode.disconnect();
+                gainNode = null;
             }
 
             bufferChunks = [];
         }
 
+        async function destroy() {
+            await stopCapture();
+
+            if (mediaStreamSource) {
+                mediaStreamSource.disconnect();
+                mediaStreamSource = null;
+            }
+
+            if (sourceNode) {
+                sourceNode.disconnect();
+                sourceNode = null;
+            }
+
+            if (mediaStream) {
+                mediaStream.getTracks().forEach((track) => track.stop());
+                mediaStream = null;
+            }
+
+            if (audioCtx) {
+                await audioCtx.close();
+                audioCtx = null;
+            }
+
+            workletLoaded = false;
+        }
+
         art.on('play', startCapture);
         art.on('pause', stopCapture);
-        art.on('destroy', stopCapture);
+        art.on('destroy', destroy);
 
         return {
             name: 'artplayerPluginAsr',
-            stop: stopCapture,
+            stop: destroy,
             hide,
             append,
         };

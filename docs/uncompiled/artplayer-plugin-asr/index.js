@@ -173,10 +173,13 @@ function artplayerPluginAsr(option = {}) {
         let audioCtx = null;
         let sourceNode = null;
         let recorderNode = null;
+        let gainNode = null;
         let bufferChunks = [];
         let timer = null;
         let workletLoaded = false;
         let hideTimer = null;
+        let mediaStream = null;
+        let mediaStreamSource = null;
         const $asr = art.layers.add({
             name: 'asr',
             html: ''
@@ -224,73 +227,132 @@ function artplayerPluginAsr(option = {}) {
             }
             return buffer;
         }
+        async function setupAudioContext() {
+            if (audioCtx) return audioCtx;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)({
+                sampleRate
+            });
+            if (audioCtx.state === 'suspended') await audioCtx.resume();
+            return audioCtx;
+        }
+        async function setupAudioSource() {
+            if (!sourceNode && art.video) try {
+                sourceNode = audioCtx.createMediaElementSource(art.video);
+                return sourceNode;
+            } catch (err) {
+                console.warn('[artplayerPluginAsr] Direct connection failed, trying fallback...', err);
+            }
+            try {
+                if (!mediaStream) mediaStream = await captureAudioFromVideo(art.video);
+                if (mediaStream) {
+                    mediaStreamSource = audioCtx.createMediaStreamSource(mediaStream);
+                    return mediaStreamSource;
+                }
+            } catch (err) {
+                console.warn('[artplayerPluginAsr] MediaStream fallback failed:', err);
+            }
+            return null;
+        }
+        async function captureAudioFromVideo(videoElement) {
+            try {
+                if (videoElement.captureStream) return videoElement.captureStream();
+                if (videoElement.mozCaptureStream) return videoElement.mozCaptureStream();
+                console.warn('[artplayerPluginAsr] captureStream not supported');
+                return null;
+            } catch (err) {
+                console.warn('[artplayerPluginAsr] Error capturing stream:', err);
+                return null;
+            }
+        }
         async function startCapture() {
             if (started) return;
-            started = true;
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)({
-                    sampleRate
-                });
-                if (audioCtx.state === 'suspended') await audioCtx.resume();
-            }
-            if (!sourceNode) try {
-                sourceNode = audioCtx.createMediaElementSource(art.video);
-                sourceNode.connect(audioCtx.destination);
-            } catch (err) {
-                console.warn('[artplayerPluginAsr] Failed to access audio stream:', err);
-                return;
-            }
-            if (!workletLoaded) {
-                const blobUrl = createWorkletBlobUrl();
-                await audioCtx.audioWorklet.addModule(blobUrl);
-                URL.revokeObjectURL(blobUrl);
-                workletLoaded = true;
-            }
-            recorderNode = new AudioWorkletNode(audioCtx, 'recorder-processor');
-            recorderNode.port.onmessage = (event)=>{
-                bufferChunks.push(new Float32Array(event.data));
-            };
-            sourceNode.connect(recorderNode);
-            recorderNode.connect(audioCtx.destination);
-            const CHUNK_SAMPLES = sampleRate * (interval / 1000);
-            timer = setInterval(async ()=>{
-                if (bufferChunks.length === 0) return;
-                let accumulated = new Float32Array(0);
-                while(accumulated.length < CHUNK_SAMPLES && bufferChunks.length){
-                    const next = bufferChunks.shift();
-                    const tmp = new Float32Array(accumulated.length + next.length);
-                    tmp.set(accumulated, 0);
-                    tmp.set(next, accumulated.length);
-                    accumulated = tmp;
+            try {
+                await setupAudioContext();
+                const audioSource = await setupAudioSource();
+                if (!audioSource) throw new Error('Could not establish audio source');
+                if (!workletLoaded) {
+                    const blobUrl = createWorkletBlobUrl();
+                    await audioCtx.audioWorklet.addModule(blobUrl);
+                    URL.revokeObjectURL(blobUrl);
+                    workletLoaded = true;
                 }
-                if (accumulated.length < CHUNK_SAMPLES) return;
-                const chunkToSend = accumulated.slice(0, CHUNK_SAMPLES);
-                const pcm = floatTo16BitPCM(chunkToSend);
-                const subtitle = await onAudioChunk(pcm);
-                append(subtitle);
-            }, interval);
+                // 创建输出音频的 GainNode（正常播放）
+                gainNode = audioCtx.createGain();
+                gainNode.gain.value = 1;
+                recorderNode = new AudioWorkletNode(audioCtx, 'recorder-processor');
+                recorderNode.port.onmessage = (event)=>{
+                    bufferChunks.push(new Float32Array(event.data));
+                };
+                // 分流：识别和播放
+                audioSource.connect(recorderNode);
+                audioSource.connect(gainNode);
+                gainNode.connect(audioCtx.destination); // 正常声音输出
+                // recorderNode 不连接 destination，避免输出干扰
+                const CHUNK_SAMPLES = sampleRate * (interval / 1000);
+                timer = setInterval(async ()=>{
+                    if (bufferChunks.length === 0) return;
+                    let accumulated = new Float32Array(0);
+                    while(accumulated.length < CHUNK_SAMPLES && bufferChunks.length){
+                        const next = bufferChunks.shift();
+                        const tmp = new Float32Array(accumulated.length + next.length);
+                        tmp.set(accumulated, 0);
+                        tmp.set(next, accumulated.length);
+                        accumulated = tmp;
+                    }
+                    if (accumulated.length < CHUNK_SAMPLES) return;
+                    const chunkToSend = accumulated.slice(0, CHUNK_SAMPLES);
+                    const pcm = floatTo16BitPCM(chunkToSend);
+                    const subtitle = await onAudioChunk(pcm);
+                    append(subtitle);
+                }, interval);
+                started = true;
+            } catch (err) {
+                console.error('[artplayerPluginAsr] Initialization failed:', err);
+                await stopCapture();
+            }
         }
-        function stopCapture() {
+        async function stopCapture() {
             if (!started) return;
             started = false;
-            if (timer) {
-                clearInterval(timer);
-                timer = null;
-            }
+            clearInterval(timer);
+            timer = null;
             if (recorderNode) {
-                try {
-                    recorderNode.disconnect();
-                } catch  {}
+                recorderNode.disconnect();
+                recorderNode.port.onmessage = null;
                 recorderNode = null;
+            }
+            if (gainNode) {
+                gainNode.disconnect();
+                gainNode = null;
             }
             bufferChunks = [];
         }
+        async function destroy() {
+            await stopCapture();
+            if (mediaStreamSource) {
+                mediaStreamSource.disconnect();
+                mediaStreamSource = null;
+            }
+            if (sourceNode) {
+                sourceNode.disconnect();
+                sourceNode = null;
+            }
+            if (mediaStream) {
+                mediaStream.getTracks().forEach((track)=>track.stop());
+                mediaStream = null;
+            }
+            if (audioCtx) {
+                await audioCtx.close();
+                audioCtx = null;
+            }
+            workletLoaded = false;
+        }
         art.on('play', startCapture);
         art.on('pause', stopCapture);
-        art.on('destroy', stopCapture);
+        art.on('destroy', destroy);
         return {
             name: 'artplayerPluginAsr',
-            stop: stopCapture,
+            stop: destroy,
             hide,
             append
         };
@@ -306,7 +368,10 @@ if (typeof document !== 'undefined') {
 }
 if (typeof window !== 'undefined') window['artplayerPluginAsr'] = artplayerPluginAsr;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH","bundle-text:./style.less":"enAJa"}],"8oCsH":[function(require,module,exports,__globalThis) {
+},{"bundle-text:./style.less":"enAJa","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"enAJa":[function(require,module,exports,__globalThis) {
+module.exports = ".art-video-player .art-layer-asr {\n  z-index: 150;\n  justify-content: end;\n  gap: var(--art-subtitle-gap);\n  padding: 0 2%;\n  padding-bottom: var(--art-subtitle-bottom);\n  transition: padding-bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n  flex-direction: column;\n  font-size: 1rem;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  pointer-events: none !important;\n}\n\n.art-video-player.art-control-show .art-layer-asr {\n  padding-bottom: calc(var(--art-control-height)  + var(--art-subtitle-bottom));\n}\n";
+
+},{}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -335,9 +400,6 @@ exports.export = function(dest, destName, get) {
         get: get
     });
 };
-
-},{}],"enAJa":[function(require,module,exports,__globalThis) {
-module.exports = ".art-video-player .art-layer-asr {\n  z-index: 150;\n  justify-content: end;\n  gap: var(--art-subtitle-gap);\n  padding: 0 2%;\n  padding-bottom: var(--art-subtitle-bottom);\n  transition: padding-bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n  flex-direction: column;\n  font-size: 1rem;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  pointer-events: none !important;\n}\n\n.art-video-player.art-control-show .art-layer-asr {\n  padding-bottom: calc(var(--art-control-height)  + var(--art-subtitle-bottom));\n}\n";
 
 },{}]},["eiaCd"], "eiaCd", "parcelRequire4dc0", {})
 

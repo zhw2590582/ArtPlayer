@@ -33,7 +33,6 @@ async function tencentASR(buffer) {
                 const subtitle = result?.voice_text_str;
                 art.plugins.artplayerPluginAsr.append(subtitle);
             } else {
-                ws.send(JSON.stringify({ type: 'end' }));
                 ws.close();
                 ws = null;
             }
