@@ -165,7 +165,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginAsr);
 function artplayerPluginAsr(option = {}) {
-    const { interval = 1000, sampleRate = 16000, onAudioChunk = ()=>null } = option;
+    const { cleanupTimeout = 3000, interval = 100, sampleRate = 16000, onAudioChunk = ()=>null } = option;
     return (art)=>{
         let started = false;
         let audioCtx = null;
@@ -174,6 +174,15 @@ function artplayerPluginAsr(option = {}) {
         let bufferChunks = [];
         let timer = null;
         let workletLoaded = false;
+        let autoClearTimer = null;
+        function clear() {
+        //
+        }
+        function append(subtitle) {
+            if (typeof subtitle !== 'string') return;
+            clearTimeout(autoClearTimer);
+            autoClearTimer = setTimeout(clear, cleanupTimeout);
+        }
         const recorderProcessorCode = `
             class RecorderProcessor extends AudioWorkletProcessor {
                 process(inputs) {
@@ -204,45 +213,6 @@ function artplayerPluginAsr(option = {}) {
             }
             return buffer;
         }
-        function mergeFloat32Array(chunks) {
-            const length = chunks.reduce((acc, cur)=>acc + cur.length, 0);
-            const result = new Float32Array(length);
-            let offset = 0;
-            chunks.forEach((chunk)=>{
-                result.set(chunk, offset);
-                offset += chunk.length;
-            });
-            return result;
-        }
-        function encodeWavPCM(buffers, sampleRate) {
-            const samples = mergeFloat32Array(buffers);
-            const dataLength = samples.length * 2;
-            const buffer = new ArrayBuffer(44 + dataLength);
-            const view = new DataView(buffer);
-            function writeStr(offset, str) {
-                for(let i = 0; i < str.length; i++)view.setUint8(offset + i, str.charCodeAt(i));
-            }
-            writeStr(0, 'RIFF');
-            view.setUint32(4, 36 + dataLength, true);
-            writeStr(8, 'WAVE');
-            writeStr(12, 'fmt ');
-            view.setUint32(16, 16, true);
-            view.setUint16(20, 1, true);
-            view.setUint16(22, 1, true);
-            view.setUint32(24, sampleRate, true);
-            view.setUint32(28, sampleRate * 2, true);
-            view.setUint16(32, 2, true);
-            view.setUint16(34, 16, true);
-            writeStr(36, 'data');
-            view.setUint32(40, dataLength, true);
-            const pcm = floatTo16BitPCM(samples);
-            new Uint8Array(buffer).set(new Uint8Array(pcm), 44);
-            return new Blob([
-                view
-            ], {
-                type: 'audio/wav'
-            });
-        }
         async function startCapture() {
             if (started) return;
             started = true;
@@ -271,12 +241,22 @@ function artplayerPluginAsr(option = {}) {
             };
             sourceNode.connect(recorderNode);
             recorderNode.connect(audioCtx.destination);
+            const CHUNK_SAMPLES = sampleRate * (interval / 1000);
             timer = setInterval(async ()=>{
                 if (bufferChunks.length === 0) return;
-                const wav = encodeWavPCM(bufferChunks, audioCtx.sampleRate);
-                const buffer = await wav.arrayBuffer();
-                await onAudioChunk(buffer);
-                bufferChunks = [];
+                let accumulated = new Float32Array(0);
+                while(accumulated.length < CHUNK_SAMPLES && bufferChunks.length){
+                    const next = bufferChunks.shift();
+                    const tmp = new Float32Array(accumulated.length + next.length);
+                    tmp.set(accumulated, 0);
+                    tmp.set(next, accumulated.length);
+                    accumulated = tmp;
+                }
+                if (accumulated.length < CHUNK_SAMPLES) return;
+                const chunkToSend = accumulated.slice(0, CHUNK_SAMPLES);
+                const pcm = floatTo16BitPCM(chunkToSend);
+                const subtitle = await onAudioChunk(pcm);
+                append(subtitle);
             }, interval);
         }
         function stopCapture() {
@@ -299,7 +279,8 @@ function artplayerPluginAsr(option = {}) {
         art.on('destroy', stopCapture);
         return {
             name: 'artplayerPluginAsr',
-            destroy: stopCapture
+            clear,
+            append
         };
     };
 }
