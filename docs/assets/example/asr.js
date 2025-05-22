@@ -28,6 +28,7 @@ async function tencentASR(buffer) {
             const json = JSON.parse(event.data);
             const subtitle = json.result?.voice_text_str;
             console.info('Subtitle', subtitle);
+            // Append the subtitle on the player
             art.plugins.artplayerPluginAsr.append(subtitle);
         };
         loading = false;
