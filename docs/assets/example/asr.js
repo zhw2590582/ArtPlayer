@@ -10,7 +10,7 @@ var art = new Artplayer({
             onAudioChunk: (buffer) => {
                 return new Promise(async (resolve) => {
                     if (!ws) {
-                        const {url} = await (await fetch('http://localhost:9001/asr')).json();
+                        const {url} = await (await fetch('https://api.aimu.app/asr/tencent')).json();
                         ws = new WebSocket(url);
                         ws.binaryType = 'arraybuffer';
                         ws.onopen = () => {
