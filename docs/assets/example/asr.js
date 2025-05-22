@@ -20,6 +20,7 @@ var ws = null;
 async function tencentASR(buffer) {
     return new Promise(async (resolve) => {
         if (!ws) {
+            // This service may not be accessible outside of China
             const api = 'https://api.aimu.app/asr/tencent?engine_model_type=16k_ja&voice_format=1';
             const { url } = await (await fetch(api)).json();
             ws = new WebSocket(url);
