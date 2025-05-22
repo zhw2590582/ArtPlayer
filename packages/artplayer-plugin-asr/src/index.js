@@ -1,5 +1,5 @@
 export default function artplayerPluginAsr(option = {}) {
-    const { interval = 1000, sampleRate = 16000, onAudioChunk = () => null } = option;
+    const { autoClearTimeout = 5000, interval = 1000, sampleRate = 16000, onAudioChunk = () => null } = option;
 
     return (art) => {
         let started = false;
@@ -9,13 +9,16 @@ export default function artplayerPluginAsr(option = {}) {
         let bufferChunks = [];
         let timer = null;
         let workletLoaded = false;
-
-        function append(text) {
-            if (typeof text !== 'string') return;
-        }
+        let autoClearTimer = null;
 
         function clear() {
             //
+        }
+
+        function append(text) {
+            if (typeof text !== 'string') return;
+            clearTimeout(autoClearTimer);
+            autoClearTimer = setTimeout(clear, autoClearTimeout);
         }
 
         const recorderProcessorCode = `
