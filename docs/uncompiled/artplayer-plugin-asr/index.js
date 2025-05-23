@@ -167,7 +167,7 @@ parcelHelpers.export(exports, "default", ()=>artplayerPluginAsr);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginAsr(option = {}) {
-    const { hideTimeout = 10000, length = 3, interval = 100, sampleRate = 16000, onAudioChunk = ()=>null } = option;
+    const { length = 3, interval = 100, sampleRate = 16000, autoHideTimeout = 10000, onAudioChunk = ()=>null } = option;
     return (art)=>{
         let started = false;
         let audioCtx = null;
@@ -194,7 +194,7 @@ function artplayerPluginAsr(option = {}) {
         function append(subtitle) {
             if (typeof subtitle !== 'string') return;
             clearTimeout(hideTimer);
-            hideTimer = setTimeout(hide, hideTimeout);
+            hideTimer = setTimeout(hide, autoHideTimeout);
             $asr.style.display = '';
             $asr.innerHTML = splitByPunctuation(subtitle).map((line)=>`<div class="art-asr-line">${line}</div>`).join('');
         }
@@ -277,18 +277,15 @@ function artplayerPluginAsr(option = {}) {
                     URL.revokeObjectURL(blobUrl);
                     workletLoaded = true;
                 }
-                // 创建输出音频的 GainNode（正常播放）
                 gainNode = audioCtx.createGain();
                 gainNode.gain.value = 1;
                 recorderNode = new AudioWorkletNode(audioCtx, 'recorder-processor');
                 recorderNode.port.onmessage = (event)=>{
                     bufferChunks.push(new Float32Array(event.data));
                 };
-                // 分流：识别和播放
                 audioSource.connect(recorderNode);
                 audioSource.connect(gainNode);
-                gainNode.connect(audioCtx.destination); // 正常声音输出
-                // recorderNode 不连接 destination，避免输出干扰
+                gainNode.connect(audioCtx.destination);
                 const CHUNK_SAMPLES = sampleRate * (interval / 1000);
                 timer = setInterval(async ()=>{
                     if (bufferChunks.length === 0) return;
@@ -302,8 +299,8 @@ function artplayerPluginAsr(option = {}) {
                     }
                     if (accumulated.length < CHUNK_SAMPLES) return;
                     const chunkToSend = accumulated.slice(0, CHUNK_SAMPLES);
-                    const pcm = floatTo16BitPCM(chunkToSend);
-                    const subtitle = await onAudioChunk(pcm);
+                    const buffer = floatTo16BitPCM(chunkToSend);
+                    const subtitle = await onAudioChunk(buffer);
                     append(subtitle);
                 }, interval);
                 started = true;
