@@ -7,7 +7,7 @@ interface AsrPluginOption {
     length?: number;
     interval?: number;
     sampleRate?: number;
-    hideTimeout?: number;
+    autoHideTimeout?: number;
     onAudioChunk?: (buffer: ArrayBuffer) => void | Promise<void>;
 }
 

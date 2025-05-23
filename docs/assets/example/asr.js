@@ -1,15 +1,15 @@
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
+    url: '/assets/sample/steve-jobs.mp4',
     autoSize: true,
     fullscreen: true,
     fullscreenWeb: true,
     plugins: [
         artplayerPluginAsr({
-            length: 3,
+            length: 2,
             interval: 40,
             sampleRate: 16000,
-            hideTimeout: 10000,
+            autoHideTimeout: 10000,
             // Use your AI tool to convert buffer into subtitles
             onAudioChunk: (buffer) => tencentASR(buffer),
         }),
@@ -23,7 +23,7 @@ async function tencentASR(buffer) {
 
     if (!ws) {
         loading = true;
-        const api = 'https://api.aimu.app/asr/tencent?engine_model_type=16k_ja';
+        const api = 'https://api.aimu.app/asr/tencent?engine_model_type=16k_en';
         const { url } = await (await fetch(api)).json();
         ws = new WebSocket(url);
         ws.binaryType = 'arraybuffer';
@@ -43,8 +43,6 @@ async function tencentASR(buffer) {
 
     if (ws.readyState === WebSocket.OPEN) {
         ws.send(buffer);
-    } else {
-        console.warn('WebSocket is not open');
     }
 }
 

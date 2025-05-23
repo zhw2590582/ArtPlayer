@@ -185,7 +185,8 @@ function artplayerPluginAsr(option = {}) {
             html: ''
         });
         function splitByPunctuation(text) {
-            return text.split(/(?<=[、。！？!?\.])\s*/u).map((s)=>s.trim()).filter(Boolean).slice(-length);
+            return text// eslint-disable-next-line no-useless-escape
+            .split(/(?<=[、。！？!?\.])\s*/u).map((s)=>s.trim()).filter(Boolean).slice(-length);
         }
         function hide() {
             $asr.style.display = 'none';
