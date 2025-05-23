@@ -4,6 +4,9 @@ var art = new Artplayer({
     autoSize: true,
     fullscreen: true,
     fullscreenWeb: true,
+    moreVideoAttr: {
+        crossOrigin: 'anonymous',
+    },
     plugins: [
         artplayerPluginAsr({
             length: 2,
