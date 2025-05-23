@@ -13,6 +13,7 @@ interface AsrPluginOption {
 
 interface AsrPluginInstance {
     name: 'artplayerPluginAsr';
+    stop: () => void;
     hide: () => void;
     append: () => void;
 }
