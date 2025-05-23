@@ -228,6 +228,29 @@ function artplayerPluginAsr(option = {}) {
             }
             return buffer;
         }
+        function pcmToWav(pcmBuffer, sampleRate) {
+            const pcmLength = pcmBuffer.byteLength;
+            const wavBuffer = new ArrayBuffer(44 + pcmLength);
+            const view = new DataView(wavBuffer);
+            const writeString = (offset, str)=>{
+                for(let i = 0; i < str.length; i++)view.setUint8(offset + i, str.charCodeAt(i));
+            };
+            writeString(0, 'RIFF');
+            view.setUint32(4, 36 + pcmLength, true);
+            writeString(8, 'WAVE');
+            writeString(12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, 1, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true);
+            view.setUint16(32, 2, true);
+            view.setUint16(34, 16, true);
+            writeString(36, 'data');
+            view.setUint32(40, pcmLength, true);
+            new Uint8Array(wavBuffer).set(new Uint8Array(pcmBuffer), 44);
+            return wavBuffer;
+        }
         async function setupAudioContext() {
             if (audioCtx) return audioCtx;
             audioCtx = new (window.AudioContext || window.webkitAudioContext)({
@@ -241,7 +264,7 @@ function artplayerPluginAsr(option = {}) {
                 sourceNode = audioCtx.createMediaElementSource(art.video);
                 return sourceNode;
             } catch (err) {
-                console.warn('[artplayerPluginAsr] Direct connection failed, trying fallback...', err);
+                console.warn('[artplayerPluginAsr] Direct connection failed:', err);
             }
             try {
                 if (!mediaStream) mediaStream = await captureAudioFromVideo(art.video);
@@ -299,8 +322,12 @@ function artplayerPluginAsr(option = {}) {
                     }
                     if (accumulated.length < CHUNK_SAMPLES) return;
                     const chunkToSend = accumulated.slice(0, CHUNK_SAMPLES);
-                    const buffer = floatTo16BitPCM(chunkToSend);
-                    const subtitle = await onAudioChunk(buffer);
+                    const pcm = floatTo16BitPCM(chunkToSend);
+                    const wav = pcmToWav(pcm, sampleRate);
+                    const subtitle = await onAudioChunk({
+                        pcm,
+                        wav
+                    });
                     append(subtitle);
                 }, interval);
                 started = true;

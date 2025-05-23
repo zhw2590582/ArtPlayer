@@ -3,19 +3,24 @@ import type Artplayer from 'artplayer';
 export = artplayerPluginAsr;
 export as namespace artplayerPluginAsr;
 
+interface AudioChunk {
+    pcm: ArrayBuffer;
+    wav: ArrayBuffer;
+}
+
 interface AsrPluginOption {
     length?: number;
     interval?: number;
     sampleRate?: number;
     autoHideTimeout?: number;
-    onAudioChunk?: (buffer: ArrayBuffer) => void | Promise<void>;
+    onAudioChunk?: (chunk: AudioChunk) => void | Promise<void>;
 }
 
 interface AsrPluginInstance {
     name: 'artplayerPluginAsr';
     stop: () => void;
     hide: () => void;
-    append: () => void;
+    append: (subtitle: string) => void;
 }
 
 declare function artplayerPluginAsr(option?: AsrPluginOption): (art: Artplayer) => AsrPluginInstance;
