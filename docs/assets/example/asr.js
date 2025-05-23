@@ -39,7 +39,7 @@ async function startAsr(buffer) {
         ws.onmessage = (event) => {
             const { code, result } = JSON.parse(event.data);
             if (code === 0) {
-                art.plugins.artplayerPluginAsr.append(result.voice_text_str);
+                art.plugins.artplayerPluginAsr.append(result?.voice_text_str);
             } else {
                 stopAsr();
             }
