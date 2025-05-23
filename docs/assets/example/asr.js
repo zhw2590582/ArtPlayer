@@ -40,10 +40,11 @@ async function startAsr(buffer) {
         ws = new WebSocket(url);
         ws.binaryType = 'arraybuffer';
         ws.onmessage = (event) => {
-            const { code, result } = JSON.parse(event.data);
+            const { code, result, message } = JSON.parse(event.data);
             if (code === 0) {
                 art.plugins.artplayerPluginAsr.append(result?.voice_text_str);
             } else {
+                console.error(code, message);
                 stopAsr();
             }
         };
