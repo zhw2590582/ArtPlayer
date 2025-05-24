@@ -13,8 +13,8 @@ var art = new Artplayer({
             interval: 40,
             sampleRate: 16000,
             autoHideTimeout: 10000,
-            // Use your AI tool to convert pcm/wav into subtitles
-            onAudioChunk: ({ pcm, wav }) => startAsr(pcm),
+            // Use your AI tool to convert pcm into subtitles
+            onAudioChunk: ({ pcm }) => startAsr(pcm),
         }),
     ]
 });
