@@ -372,6 +372,9 @@ function artplayerPluginAsr(option = {}) {
             }
             workletLoaded = false;
         }
+        art.on('video:volumechange', ()=>{
+            if (gainNode) gainNode.gain.value = art.volume;
+        });
         art.on('play', startCapture);
         art.on('pause', stopCapture);
         art.on('destroy', destroy);
