@@ -1,8 +1,8 @@
 {
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "artplayer-plugin-vast",
-    "description": "vast plugin for ArtPlayer",
+    "description": "VAST plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-vast.js",
     "legacy": "dist/artplayer-plugin-vast.legacy.js",
     "module": "dist/artplayer-plugin-vast.esm.js",
