@@ -122,7 +122,6 @@ var art = new Artplayer({
 ## Proxys
 
 - [Canvas](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas)
-- [WebAV](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-webav/index.js&example=webav) (WIP)
 
 ## Changelog
 
