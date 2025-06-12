@@ -25,7 +25,7 @@ export type Utils = {
         key: K,
         numberType?: T,
     ): T extends true ? number : string;
-    sublings(target: HTMLElement): HTMLElement[];
+    siblings(target: HTMLElement): HTMLElement[];
     inverseClass(target: HTMLElement, className: string): void;
     tooltip(target: HTMLElement, msg: string, pos?: string): void;
     isInViewport(target: HTMLElement, offset?: number): boolean;
