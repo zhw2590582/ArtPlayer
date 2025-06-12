@@ -41,7 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 新增 `option.proxy` 选项，用于代理第三方的 `video` 和 `canvas`
 - 新增 `artplayer-proxy-canvas` 代理，可以使用 `canvas` 播放视频
 - 新增 `option.thumbnails.scale`, 用于预览图缩放
-- 修复 `art.url` 更改不能触发 `autoPlayBack` 的 `bug`: [#797](https://github.com/zhw2590582/ArtPlayer/issues/797)
+- 修复 `art.url` 更改不能触发 `autoPlayback` 的 `bug`: [#797](https://github.com/zhw2590582/ArtPlayer/issues/797)
 - 新增 `art.subtitle.cues` 属性, 获取整体的字幕列表
 - 新增 `art.subtitle.activeCues` 属性, 获取活跃的字幕列表
 - 新增 `subtitleBeforeUpdate` 事件, 在字幕元素渲染前触发
