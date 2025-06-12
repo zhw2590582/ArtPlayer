@@ -50,12 +50,12 @@ export function getStyle(element, key, numberType = true) {
     return numberType ? parseFloat(value) : value;
 }
 
-export function sublings(target) {
+export function siblings(target) {
     return Array.from(target.parentElement.children).filter((item) => item !== target);
 }
 
 export function inverseClass(target, className) {
-    sublings(target).forEach((item) => removeClass(item, className));
+    siblings(target).forEach((item) => removeClass(item, className));
     addClass(target, className);
 }
 
