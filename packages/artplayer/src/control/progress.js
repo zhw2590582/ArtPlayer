@@ -42,7 +42,7 @@ export default function progress(options) {
             `,
             mounted: ($control) => {
                 let tipTimer = null;
-                let isDroging = false;
+                let isDragging = false;
 
                 const $hover = query('.art-progress-hover', $control);
                 const $loaded = query('.art-progress-loaded', $control);
@@ -95,7 +95,7 @@ export default function progress(options) {
                 }
 
                 function setBar(type, percentage, event) {
-                    const isMobileDroging = type === 'played' && event && isMobile;
+                    const isMobileDragging = type === 'played' && event && isMobile;
 
                     if (type === 'loaded') {
                         setStyle($loaded, 'width', `${percentage * 100}%`);
@@ -110,7 +110,7 @@ export default function progress(options) {
                         setStyle($indicator, 'left', `${percentage * 100}%`);
                     }
 
-                    if (isMobileDroging) {
+                    if (isMobileDragging) {
                         setStyle($tip, 'display', 'flex');
                         const width = $control.clientWidth * percentage;
                         const time = secondToTime(percentage * art.duration);
@@ -170,11 +170,11 @@ export default function progress(options) {
                     });
 
                     proxy($control, 'mousedown', (event) => {
-                        isDroging = event.button === 0;
+                        isDragging = event.button === 0;
                     });
 
                     art.on('document:mousemove', (event) => {
-                        if (isDroging) {
+                        if (isDragging) {
                             const { second, percentage } = getPosFromEvent(art, event);
                             art.emit('setBar', 'played', percentage, event);
                             art.seek = second;
@@ -182,8 +182,8 @@ export default function progress(options) {
                     });
 
                     art.on('document:mouseup', () => {
-                        if (isDroging) {
-                            isDroging = false;
+                        if (isDragging) {
+                            isDragging = false;
                         }
                     });
                 }

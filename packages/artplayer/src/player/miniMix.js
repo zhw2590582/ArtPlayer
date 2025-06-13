@@ -8,7 +8,7 @@ export default function miniMix(art) {
         template: { $player, $video },
     } = art;
 
-    let isDroging = false;
+    let isDragging = false;
     let lastPageX = 0;
     let lastPageY = 0;
 
@@ -59,14 +59,14 @@ export default function miniMix(art) {
             art.on('video:timeupdate', () => initState($play, $pause));
 
             proxy($mini, 'mousedown', (event) => {
-                isDroging = event.button === 0;
+                isDragging = event.button === 0;
                 lastPageX = event.pageX;
                 lastPageY = event.pageY;
             });
 
             art.on('document:mousemove', (event) => {
-                if (isDroging) {
-                    addClass($mini, 'art-mini-droging');
+                if (isDragging) {
+                    addClass($mini, 'art-mini-dragging');
                     const x = event.pageX - lastPageX;
                     const y = event.pageY - lastPageY;
                     setStyle($mini, 'transform', `translate(${x}px, ${y}px)`);
@@ -74,9 +74,9 @@ export default function miniMix(art) {
             });
 
             art.on('document:mouseup', () => {
-                if (isDroging) {
-                    isDroging = false;
-                    removeClass($mini, 'art-mini-droging');
+                if (isDragging) {
+                    isDragging = false;
+                    removeClass($mini, 'art-mini-dragging');
                     const rect = getRect($mini);
                     storage.set('left', rect.left);
                     storage.set('top', rect.top);
