@@ -51,7 +51,7 @@ export type Setting = {
     selector?: Setting[];
 
     /**
-     * Wnen the setting was mounted
+     * When the setting was mounted
      */
     mounted?(this: Artplayer, panel: HTMLDivElement, item: Setting): void;
 

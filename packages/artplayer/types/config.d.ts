@@ -1,5 +1,8 @@
 export type Config = {
-    propertys: [
+    /**
+     * Supported video properties
+     */
+    properties: [
         'audioTracks',
         'autoplay',
         'buffered',

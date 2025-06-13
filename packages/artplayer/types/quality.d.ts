@@ -1,4 +1,4 @@
-export type quality = {
+export type Quality = {
     /**
      * Whether the default is selected
      */
