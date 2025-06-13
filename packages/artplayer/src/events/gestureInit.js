@@ -33,7 +33,7 @@ export default function gestureInit(art, events) {
         const { $video, $progress } = art.template;
 
         let touchTarget = null;
-        let isDroging = false;
+        let isDragging = false;
         let startX = 0;
         let startY = 0;
         let startTime = 0;
@@ -44,7 +44,7 @@ export default function gestureInit(art, events) {
                     setCurrentTime(art, event);
                 }
 
-                isDroging = true;
+                isDragging = true;
                 const { pageX, pageY } = event.touches[0];
                 startX = pageX;
                 startY = pageY;
@@ -53,7 +53,7 @@ export default function gestureInit(art, events) {
         };
 
         const onTouchMove = (event) => {
-            if (event.touches.length === 1 && isDroging && art.duration) {
+            if (event.touches.length === 1 && isDragging && art.duration) {
                 const { pageX, pageY } = event.touches[0];
                 const direction = GetSlideDirection(startX, startY, pageX, pageY);
                 const isHorizontal = [3, 4].includes(direction);
@@ -73,11 +73,11 @@ export default function gestureInit(art, events) {
         };
 
         const onTouchEnd = () => {
-            if (isDroging) {
+            if (isDragging) {
                 startX = 0;
                 startY = 0;
                 startTime = 0;
-                isDroging = false;
+                isDragging = false;
                 touchTarget = null;
             }
         };

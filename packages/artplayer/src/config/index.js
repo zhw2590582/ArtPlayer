@@ -1,5 +1,5 @@
 export default {
-    propertys: [
+    properties: [
         'audioTracks',
         'autoplay',
         'buffered',

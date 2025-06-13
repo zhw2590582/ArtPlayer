@@ -52,23 +52,23 @@ export default function volume(option) {
             if (isMobile) {
                 setStyle($panel, 'display', 'none');
             } else {
-                let isDroging = false;
+                let isDragging = false;
 
                 proxy($slider, 'mousedown', (event) => {
-                    isDroging = event.button === 0;
+                    isDragging = event.button === 0;
                     art.volume = getVolumeFromEvent(event);
                 });
 
                 art.on('document:mousemove', (event) => {
-                    if (isDroging) {
+                    if (isDragging) {
                         art.muted = false;
                         art.volume = getVolumeFromEvent(event);
                     }
                 });
 
                 art.on('document:mouseup', () => {
-                    if (isDroging) {
-                        isDroging = false;
+                    if (isDragging) {
+                        isDragging = false;
                     }
                 });
             }

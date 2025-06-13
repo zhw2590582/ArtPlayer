@@ -1,6 +1,6 @@
 import { clamp, setStyle } from '../utils';
 
-export default function attrInit(art) {
+export default function optionInit(art) {
     const {
         option,
         storage,

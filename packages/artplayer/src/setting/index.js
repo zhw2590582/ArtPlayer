@@ -212,7 +212,7 @@ export default class Setting extends Component {
             this.inactivate(item);
             Object.assign(item, target);
             this.format();
-            this.creatItem(item, true);
+            this.createItem(item, true);
             this.render();
             return item;
         } else {
@@ -223,12 +223,12 @@ export default class Setting extends Component {
     add(item, option = this.option) {
         option.push(item);
         this.format();
-        this.creatItem(item);
+        this.createItem(item);
         this.render();
         return item;
     }
 
-    creatHeader(item) {
+    createHeader(item) {
         if (!this.cache.has(item.$option)) return;
         const $panel = this.cache.get(item.$option);
 
@@ -253,7 +253,7 @@ export default class Setting extends Component {
         append($panel, $item);
     }
 
-    creatItem(item, isUpdate = false) {
+    createItem(item, isUpdate = false) {
         if (!this.cache.has(item.$option)) return;
         const $panel = this.cache.get(item.$option);
         const oldItem = item.$item;
@@ -531,11 +531,11 @@ export default class Setting extends Component {
             inverseClass($panel, 'art-current');
 
             if (option[0]?.$parent) {
-                this.creatHeader(option[0]);
+                this.createHeader(option[0]);
             }
 
             for (let index = 0; index < option.length; index++) {
-                this.creatItem(option[index]);
+                this.createItem(option[index]);
             }
         }
         this.resize();
