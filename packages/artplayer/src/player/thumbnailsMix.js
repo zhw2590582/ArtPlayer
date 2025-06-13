@@ -60,9 +60,9 @@ export default function thumbnailsMix(art) {
         const { url, scale } = option.thumbnails;
         if (!$thumbnails || !url) return;
 
-        const isMobileDroging = type === 'played' && event && isMobile;
+        const isMobileDragging = type === 'played' && event && isMobile;
 
-        if (type === 'hover' || isMobileDroging) {
+        if (type === 'hover' || isMobileDragging) {
             if (!loading) {
                 loading = true;
                 image = await loadImg(url, scale);
@@ -82,7 +82,7 @@ export default function thumbnailsMix(art) {
                 }
             }
 
-            if (isMobileDroging) {
+            if (isMobileDragging) {
                 clearTimeout(timer);
                 timer = setTimeout(() => {
                     setStyle($thumbnails, 'display', 'none');

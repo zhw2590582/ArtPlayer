@@ -1,6 +1,6 @@
 import { setStyle, def, getRect } from '../utils';
 
-export default function resizeMix(art) {
+export default function autoSizeMix(art) {
     const { $container, $player, $video } = art.template;
 
     def(art, 'autoSize', {

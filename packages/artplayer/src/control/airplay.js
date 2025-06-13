@@ -1,6 +1,6 @@
 import { append } from '../utils';
 
-export default function pip(option) {
+export default function airplay(option) {
     return (art) => ({
         ...option,
         tooltip: art.i18n.get('AirPlay'),

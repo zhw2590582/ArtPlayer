@@ -1,6 +1,6 @@
 import { def } from '../utils';
 
-export default function seekMix(art) {
+export default function loadedMix(art) {
     const { $video } = art.template;
 
     def(art, 'loaded', {
