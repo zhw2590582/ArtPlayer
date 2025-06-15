@@ -25,7 +25,7 @@ export default class Danmuku {
         this.states = { wait: [], ready: [], emit: [], stop: [] };
 
         // 初始化配置
-        this.config(option);
+        this.config(option, true);
 
         // 创建 Web Worker, 用于计算弹幕的 top 值
         const workerText2 = workerText.replace('export{e as default};', '');
@@ -376,7 +376,7 @@ export default class Danmuku {
     }
 
     // 动态配置
-    config(option) {
+    config(option, isInit = false) {
         const { clamp } = this.utils;
         const { $controlsCenter } = this.art.template;
 
@@ -386,7 +386,7 @@ export default class Danmuku {
         );
 
         // 没有变化则直接返回
-        if (!changed) return this;
+        if (!changed && !isInit) return this;
 
         // 更新配置项
         this.option = Object.assign({}, Danmuku.option, this.option, option);
