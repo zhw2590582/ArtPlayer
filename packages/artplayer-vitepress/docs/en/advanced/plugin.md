@@ -2,7 +2,7 @@
 
 Once you know the player's `properties`, `methods`, and `events`, writing plugins is very simple.
 
-You can load the plugin functions when instantiated.
+You can load plugin functions during instantiation.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -28,9 +28,7 @@ art.on('ready', () => {
     console.info(art.plugins.myPlugin);
 });
 ```
-Here's the translation of the provided text into English while preserving the Markdown formatting:
-
-A function that allows loading plugins after instantiation
+You can also load plugins after instantiation:
 
 <div className="run-code">▶ Run Code</div>
 

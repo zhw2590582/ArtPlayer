@@ -314,7 +314,7 @@ Manage the subtitle features of the player
 - `switch` method sets the current subtitle address and options
 - `textTrack` Get the current subtitle track
 - `activeCues` Get the currently active subtitle list
-- `cues` Get the the subtitle list
+- `cues` Get the subtitle list
 
 <div className="run-code">▶ Run Code</div>
 
