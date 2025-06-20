@@ -3770,14 +3770,13 @@ function info(option) {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"k5zHu"}],"jD66X":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>version);
+parcelHelpers.export(exports, "default", ()=>function(option) {
+        return {
+            ...option,
+            html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${0, _packageJson.version}</a>`
+        };
+    });
 var _packageJson = require("../../package.json");
-function version(option) {
-    return {
-        ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${0, _packageJson.version}</a>`
-    };
-}
 
 },{"../../package.json":"6idAI","@parcel/transformer-js/src/esmodule-helpers.js":"k5zHu"}],"lHt6g":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
