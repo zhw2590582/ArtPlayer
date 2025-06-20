@@ -3,7 +3,7 @@ import cpy from 'cpy';
 import path from 'path';
 import prompts from 'prompts';
 import { Parcel } from '@parcel/core';
-import { getProjects, injectPlaceholders } from './utils.js';
+import { getProjects } from './utils.js';
 
 const projects = getProjects();
 const compiledPath = path.resolve('docs/compiled');
@@ -62,10 +62,6 @@ async function build(name, targetName) {
     };
 
     const entryFile = path.join(projects[name], 'src/index.js');
-    const restorePlaceholders = injectPlaceholders(entryFile, {
-        __APP_VERSION__: `"${version}"`,
-        __NODE_ENV__: `"production"`,
-    });
 
     const bundler = new Parcel({
         entries: entryFile,
@@ -88,48 +84,42 @@ async function build(name, targetName) {
  */
 `;
 
-    try {
-        const { bundleGraph, buildTime } = await bundler.run();
-        const bundles = bundleGraph.getBundles();
+    const { bundleGraph, buildTime } = await bundler.run();
+    const bundles = bundleGraph.getBundles();
 
-        const filePath = path.join(projects[name], 'dist/index.js');
-        const newFilePath = path.join(projects[name], `dist/${names[targetName]}.js`);
-        const code = fs.readFileSync(filePath, 'utf-8');
+    const filePath = path.join(projects[name], 'dist/index.js');
+    const newFilePath = path.join(projects[name], `dist/${names[targetName]}.js`);
+    const code = fs.readFileSync(filePath, 'utf-8');
 
-        fs.writeFileSync(filePath, banner + compressString(code));
-        fs.renameSync(filePath, newFilePath);
-        const size = fs.statSync(newFilePath).size / 1024;
-        await cpy(newFilePath, compiledPath);
+    fs.writeFileSync(filePath, banner + compressString(code));
+    fs.renameSync(filePath, newFilePath);
+    const size = fs.statSync(newFilePath).size / 1024;
+    await cpy(newFilePath, compiledPath);
 
-        if (targetName === 'esm') {
-            const jsFile = path.join(projects[name], `dist/${names.esm}.js`);
-            const oldMapName = 'index.js.map';
-            const newMapName = `${names.esm}.js.map`;
+    if (targetName === 'esm') {
+        const jsFile = path.join(projects[name], `dist/${names.esm}.js`);
+        const oldMapName = 'index.js.map';
+        const newMapName = `${names.esm}.js.map`;
 
-            const oldMapPath = path.join(projects[name], 'dist', oldMapName);
-            const newMapPath = path.join(projects[name], 'dist', newMapName);
-            if (fs.existsSync(oldMapPath)) {
-                fs.renameSync(oldMapPath, newMapPath);
-            }
-
-            let jsContent = fs.readFileSync(jsFile, 'utf8');
-            jsContent = jsContent.replace(/\/\/# sourceMappingURL=.*\.js\.map/, `\n//# sourceMappingURL=${newMapName}`);
-            fs.writeFileSync(jsFile, jsContent);
-            await cpy(newMapPath, compiledPath);
-            await cpy(newFilePath, compiledPath);
+        const oldMapPath = path.join(projects[name], 'dist', oldMapName);
+        const newMapPath = path.join(projects[name], 'dist', newMapName);
+        if (fs.existsSync(oldMapPath)) {
+            fs.renameSync(oldMapPath, newMapPath);
         }
 
-        console.log(
-            `✨ Built@${targetName} ${name}@${version}`,
-            `Bundles@${bundles.length}`,
-            `Time@${buildTime}ms`,
-            `Size@${size.toFixed(2)}kb`,
-        );
-    } catch (error) {
-        console.error(`❌ Failed to build ${name}:`, error);
-    } finally {
-        restorePlaceholders();
+        let jsContent = fs.readFileSync(jsFile, 'utf8');
+        jsContent = jsContent.replace(/\/\/# sourceMappingURL=.*\.js\.map/, `\n//# sourceMappingURL=${newMapName}`);
+        fs.writeFileSync(jsFile, jsContent);
+        await cpy(newMapPath, compiledPath);
+        await cpy(newFilePath, compiledPath);
     }
+
+    console.log(
+        `✨ Built@${targetName} ${name}@${version}`,
+        `Bundles@${bundles.length}`,
+        `Time@${buildTime}ms`,
+        `Size@${size.toFixed(2)}kb`,
+    );
 }
 
 async function runBuild() {

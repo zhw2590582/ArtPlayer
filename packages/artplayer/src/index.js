@@ -1,3 +1,4 @@
+import { version } from '../package.json';
 import style from 'bundle-text:./style/index.less';
 import validator from 'option-validator';
 import Emitter from './utils/emitter';
@@ -67,7 +68,6 @@ export default class Artplayer extends Emitter {
         if (Artplayer.DEBUG) {
             const log = (msg) => console.log(`[ART.${this.id}] -> ${msg}`);
             log('Version@' + Artplayer.version);
-            log('Env@' + Artplayer.env);
             for (let index = 0; index < config.events.length; index++) {
                 this.on('video:' + config.events[index], (event) => log('Event@' + event.type));
             }
@@ -81,11 +81,7 @@ export default class Artplayer extends Emitter {
     }
 
     static get version() {
-        return '"5.2.4"'.replace(/"/g, '');
-    }
-
-    static get env() {
-        return '"development"'.replace(/"/g, '');
+        return version;
     }
 
     static get config() {

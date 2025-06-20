@@ -1,3 +1,4 @@
+import { version } from '../package.json';
 import { supportsFlex, errorHandle, query, addClass, isMobile, replaceElement } from './utils';
 
 export default class Template {
@@ -57,7 +58,7 @@ export default class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${'__APP_VERSION__'}</div>
+                  <div class="art-info-content">${version}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
