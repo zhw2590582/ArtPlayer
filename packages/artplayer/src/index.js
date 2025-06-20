@@ -82,7 +82,7 @@ export default class Artplayer extends Emitter {
     }
 
     static get version() {
-        return '"5.2.3"';
+        return '"5.2.4"';
     }
 
     static get env() {
