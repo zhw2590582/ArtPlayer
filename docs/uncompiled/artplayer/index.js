@@ -2431,7 +2431,7 @@ function miniMix(art) {
                 const $mini = createMini();
                 const top = storage.get('top');
                 const left = storage.get('left');
-                if (top && left) {
+                if (typeof top === 'number' && typeof left === 'number') {
                     (0, _utils.setStyle)($mini, 'top', `${top}px`);
                     (0, _utils.setStyle)($mini, 'left', `${left}px`);
                     if (!(0, _utils.isInViewport)($mini)) initMini();
@@ -4661,7 +4661,7 @@ class Setting extends (0, _componentDefault.default) {
         for(let index = 0; index < option.length; index++){
             const item = option[index];
             if (item?.name) {
-                (0, _utils.errorHandle)(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
+                (0, _utils.errorHandle)(!names.includes(item.name), `The [${item.name}] already exists in [setting]`);
                 names.push(item.name);
             } else item.name = `setting-${this.id++}`;
             if (!item.$formatted) {
