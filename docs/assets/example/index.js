@@ -34,7 +34,7 @@ var art = new Artplayer({
             width: 200,
             html: 'Subtitle',
             tooltip: 'Bilingual',
-            icon: '<img width="22" heigth="22" src="/assets/img/subtitle.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/subtitle.svg">',
             selector: [
                 {
                     html: 'Display',
@@ -69,7 +69,7 @@ var art = new Artplayer({
         },
         {
             html: 'Switcher',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             tooltip: 'OFF',
             switch: false,
             onSwitch: function (item) {
@@ -80,7 +80,7 @@ var art = new Artplayer({
         },
         {
             html: 'Slider',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             tooltip: '5x',
             range: [5, 1, 10, 0.1],
             onRange: function (item) {
@@ -89,7 +89,7 @@ var art = new Artplayer({
         },
         {
             html: 'Button',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             tooltip: 'tooltip',
             onClick() {
                 return 'Button clicked';
@@ -184,7 +184,7 @@ var art = new Artplayer({
     ],
     icons: {
         loading: '<img src="/assets/img/ploading.gif">',
-        state: '<img width="150" heigth="150" src="/assets/img/state.svg">',
-        indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
+        state: '<img width="150" height="150" src="/assets/img/state.svg">',
+        indicator: '<img width="16" height="16" src="/assets/img/indicator.svg">',
     },
 });

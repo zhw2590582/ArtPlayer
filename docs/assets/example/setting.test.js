@@ -12,7 +12,7 @@ var art = new Artplayer({
             html: 'Subtitle',
             name: 'subtitle',
             tooltip: 'Bilingual',
-            icon: '<img width="22" heigth="22" src="/assets/img/subtitle.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/subtitle.svg">',
             selector: [
                 {
                     html: 'Display',
@@ -50,7 +50,7 @@ var art = new Artplayer({
         },
         {
             html: 'Switcher',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             tooltip: 'OFF',
             switch: false,
             onSwitch: function (item) {
@@ -64,7 +64,7 @@ var art = new Artplayer({
         },
         {
             html: 'Slider',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             tooltip: '5x',
             range: [5, 1, 10, 0.1],
             onRange: function (item) {

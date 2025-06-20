@@ -38,7 +38,7 @@ var art = new Artplayer({
     settings: [
         {
             html: 'Button',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             tooltip: 'tooltip',
 			onClick(item, $dom, event) {
                 console.info(item, $dom, event);
@@ -190,7 +190,7 @@ var art = new Artplayer({
         {
             html: 'PIP Mode',
             tooltip: 'Close',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             switch: false,
             onSwitch: function (item, $dom, event) {
                 console.info(item, $dom, event);
@@ -234,7 +234,7 @@ var art = new Artplayer({
         {
             html: 'Slider',
             tooltip: '5x',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             range: [5, 1, 10, 1],
             onChange: function (item, $dom, event) {
                 console.info(item, $dom, event);
@@ -261,7 +261,7 @@ art.setting.show = true;
 art.setting.add({
     html: 'Slider',
     tooltip: '5x',
-    icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+    icon: '<img width="22" height="22" src="/assets/img/state.svg">',
     range: [5, 1, 10, 1],
 });
 ```
@@ -281,7 +281,7 @@ var art = new Artplayer({
             name: 'slider',
             html: 'Slider',
             tooltip: '5x',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             range: [5, 1, 10, 1],
         },
     ],
@@ -311,7 +311,7 @@ var art = new Artplayer({
             name: 'slider',
             html: 'Slider',
             tooltip: '5x',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             range: [5, 1, 10, 1],
         },
     ],
@@ -326,7 +326,7 @@ art.on('ready', () => {
             name: 'slider',
             html: 'PIP Mode',
             tooltip: 'Close',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/state.svg">',
             switch: false,
         });
     }, 3000);

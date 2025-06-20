@@ -53,15 +53,15 @@ var art = new Artplayer({
     ],
     icons: {
         loading: '<img src="/assets/img/ploading.gif">',
-        state: '<img width="150" heigth="150" src="/assets/img/state.svg">',
-        indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
+        state: '<img width="150" height="150" src="/assets/img/state.svg">',
+        indicator: '<img width="16" height="16" src="/assets/img/indicator.svg">',
     },
     settings: [
         {
             width: 200,
             html: '切换字幕',
             tooltip: '双语',
-            icon: '<img width="22" heigth="22" src="/assets/img/subtitle.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/subtitle.svg">',
             selector: [
                 {
                     html: '开关',

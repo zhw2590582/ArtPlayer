@@ -24,7 +24,7 @@ var art = new Artplayer({
             width: 200,
             html: 'Subtitle',
             tooltip: 'Double',
-            icon: '<img width="22" heigth="22" src="/assets/img/subtitle.svg">',
+            icon: '<img width="22" height="22" src="/assets/img/subtitle.svg">',
             selector: [
                 {
                     html: 'Display',
