@@ -245,7 +245,6 @@ class Artplayer extends (0, _emitterDefault.default) {
             const log = (msg)=>console.log(`[ART.${this.id}] -> ${msg}`);
             log('Version@' + Artplayer.version);
             log('Env@' + Artplayer.env);
-            log('Build@' + Artplayer.build);
             for(let index = 0; index < (0, _configDefault.default).events.length; index++)this.on('video:' + (0, _configDefault.default).events[index], (event)=>log('Event@' + event.type));
         }
         instances.push(this);
@@ -254,10 +253,10 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return '"5.2.4"';
+        return '"5.2.4"'.replace(/"/g, '');
     }
     static get env() {
-        return '"development"';
+        return '"development"'.replace(/"/g, '');
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3774,7 +3773,14 @@ parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${'__APP_VERSION__'}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer</a>`,
+        mounted (el) {
+            const link = el.querySelector('a');
+            const version = this.constructor.version;
+            const ref = encodeURIComponent(location.href);
+            link.textContent += ` ${version}`;
+            link.href += `?ref=${ref}`;
+        }
     };
 }
 

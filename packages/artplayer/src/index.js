@@ -68,7 +68,6 @@ export default class Artplayer extends Emitter {
             const log = (msg) => console.log(`[ART.${this.id}] -> ${msg}`);
             log('Version@' + Artplayer.version);
             log('Env@' + Artplayer.env);
-            log('Build@' + Artplayer.build);
             for (let index = 0; index < config.events.length; index++) {
                 this.on('video:' + config.events[index], (event) => log('Event@' + event.type));
             }
@@ -82,11 +81,11 @@ export default class Artplayer extends Emitter {
     }
 
     static get version() {
-        return '"5.2.4"';
+        return '"5.2.4"'.replace(/"/g, '');
     }
 
     static get env() {
-        return '"development"';
+        return '"development"'.replace(/"/g, '');
     }
 
     static get config() {
