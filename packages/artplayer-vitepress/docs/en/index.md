@@ -72,7 +72,7 @@ The player's size depends on the size of the container `container`, so your cont
 
 :::
 
-::: tip You can see more examples of use at the following link
+::: tip You can find more usage examples at the link below
 
 [/packages/artplayer-template](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template)
 
@@ -219,7 +219,7 @@ export default App;
 ```
 
 :::
-::: warning Non-responsive Artplayer:
+::: warning Non-responsive Artplayer
 
 In `React.js`, directly modifying the `option` will not change the player
 
