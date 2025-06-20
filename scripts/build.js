@@ -3,7 +3,7 @@ import cpy from 'cpy';
 import path from 'path';
 import prompts from 'prompts';
 import { Parcel } from '@parcel/core';
-import { getProjects, injectPlaceholders } from './utils.js';
+import { getProjects } from './utils.js';
 
 const projects = getProjects();
 const compiledPath = path.resolve('docs/compiled');
@@ -62,10 +62,6 @@ async function build(name, targetName) {
     };
 
     const entryFile = path.join(projects[name], 'src/index.js');
-    const restorePlaceholders = injectPlaceholders(entryFile, {
-        __APP_VERSION__: `"${version}"`,
-        __NODE_ENV__: `"production"`,
-    });
 
     const bundler = new Parcel({
         entries: entryFile,
@@ -76,6 +72,7 @@ async function build(name, targetName) {
         },
         env: {
             NODE_ENV: 'production',
+            APP_VERSION: version,
         },
     });
 

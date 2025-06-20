@@ -28,16 +28,3 @@ export function removeDir(dir) {
         fs.rmdirSync(dir);
     }
 }
-
-export function injectPlaceholders(filePath, placeholders) {
-    const original = fs.readFileSync(filePath, 'utf-8');
-    let modified = original;
-
-    for (const [key, value] of Object.entries(placeholders)) {
-        const pattern = new RegExp(key, 'g');
-        modified = modified.replace(pattern, value);
-    }
-
-    fs.writeFileSync(filePath, modified);
-    return () => fs.writeFileSync(filePath, original); // 构建完还原
-}

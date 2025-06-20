@@ -4,7 +4,7 @@ import servor from 'servor';
 import prompts from 'prompts';
 import { Parcel } from '@parcel/core';
 import { fileURLToPath } from 'url';
-import { getProjects, injectPlaceholders } from './utils.js';
+import { getProjects } from './utils.js';
 import openBrowser from 'servor/utils/openBrowser.js';
 
 const projects = getProjects();
@@ -15,11 +15,6 @@ async function develop(name) {
     const entryFile = path.join(projectPath, 'src/index.js');
     const projectPackageJson = path.join(projectPath, 'package.json');
     const { version } = JSON.parse(fs.readFileSync(projectPackageJson, 'utf-8'));
-
-    const restore = injectPlaceholders(entryFile, {
-        __APP_VERSION__: `"${version}"`,
-        __NODE_ENV__: `"development"`,
-    });
 
     process.on('SIGINT', () => {
         restore();
@@ -54,6 +49,7 @@ async function develop(name) {
             },
             env: {
                 NODE_ENV: 'development',
+                APP_VERSION: version,
             },
             additionalReporters: [
                 {

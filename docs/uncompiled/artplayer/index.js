@@ -253,10 +253,10 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return '"5.2.4"'.replace(/"/g, '');
+        return process.env.APP_VERSION;
     }
     static get env() {
-        return '"development"'.replace(/"/g, '');
+        return process.env.NODE_ENV;
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1305,7 +1305,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${'__APP_VERSION__'}</div>
+                  <div class="art-info-content">${process.env.APP_VERSION}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3773,14 +3773,7 @@ parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer</a>`,
-        mounted (el) {
-            const link = el.querySelector('a');
-            const version = this.constructor.version;
-            const ref = encodeURIComponent(location.href);
-            link.textContent += ` ${version}`;
-            link.href += `?ref=${ref}`;
-        }
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${process.env.APP_VERSION}</a>`
     };
 }
 
