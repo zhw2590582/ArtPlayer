@@ -112,7 +112,7 @@ export default function miniMix(art) {
                 const $mini = createMini();
                 const top = storage.get('top');
                 const left = storage.get('left');
-                if (top && left) {
+                if (typeof top === 'number' && typeof left === 'number') {
                     setStyle($mini, 'top', `${top}px`);
                     setStyle($mini, 'left', `${left}px`);
                     if (!isInViewport($mini)) {
