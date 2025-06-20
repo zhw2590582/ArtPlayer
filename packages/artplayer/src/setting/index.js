@@ -110,7 +110,7 @@ export default class Setting extends Component {
             const item = option[index];
 
             if (item?.name) {
-                errorHandle(!names.includes(item.name), `The [${item.name}] is already exist in [setting]`);
+                errorHandle(!names.includes(item.name), `The [${item.name}] already exists in [setting]`);
                 names.push(item.name);
             } else {
                 item.name = `setting-${this.id++}`;
