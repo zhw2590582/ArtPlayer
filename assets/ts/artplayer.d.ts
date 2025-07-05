@@ -25,7 +25,7 @@ export type Utils = {
         key: K,
         numberType?: T,
     ): T extends true ? number : string;
-    sublings(target: HTMLElement): HTMLElement[];
+    siblings(target: HTMLElement): HTMLElement[];
     inverseClass(target: HTMLElement, className: string): void;
     tooltip(target: HTMLElement, msg: string, pos?: string): void;
     isInViewport(target: HTMLElement, offset?: number): boolean;
@@ -173,7 +173,7 @@ export type Setting = {
     selector?: Setting[];
 
     /**
-     * Wnen the setting was mounted
+     * When the setting was mounted
      */
     mounted?(this: Artplayer, panel: HTMLDivElement, item: Setting): void;
 
@@ -215,7 +215,7 @@ export type Setting = {
     [key: string]: any;
 };
 
-export type quality = {
+export type Quality = {
     /**
      * Whether the default is selected
      */
@@ -296,7 +296,7 @@ export declare class Player {
     get subtitleOffset(): number;
     set subtitleOffset(time: number);
     set switch(url: string);
-    set quality(quality: quality[]);
+    set quality(quality: Quality[]);
     get thumbnails(): Thumbnails;
     set thumbnails(thumbnails: Thumbnails);
     pause(): void;
@@ -566,7 +566,7 @@ export type Option = {
     /**
      * Custom video quality list
      */
-    quality?: quality[];
+    quality?: Quality[];
 
     /**
      * Custom highlight list
@@ -834,7 +834,10 @@ export type CssVar = {
 };
 
 export type Config = {
-    propertys: [
+    /**
+     * Supported video properties
+     */
+    properties: [
         'audioTracks',
         'autoplay',
         'buffered',
