@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ArtPlayer ESM with Import Map</title>
+    <style>
+        #player {
+            width: 640px;
+            height: 360px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "artplayer": "/compiled/artplayer.esm.js",
+            "artplayer-plugin-danmuku": "/compiled/artplayer-plugin-danmuku.esm.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="player"></div>
+    <script type="module">
+        import Artplayer from 'artplayer';
+        import ArtplayerPluginDanmuku from 'artplayer-plugin-danmuku';
+
+        const art = new Artplayer({
+            container: '#player',
+            url: '/assets/sample/video.mp4',
+            plugins: [
+                artplayerPluginDanmuku({
+                    danmuku: '/assets/sample/danmuku.xml',
+                })
+            ]
+        });
+    </script>
+</body>
+
+</html>
