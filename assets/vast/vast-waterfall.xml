@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vast.xsd" version="3.0">
+  <Ad>
+    <Wrapper fallbackOnNoAd="true">
+      <AdSystem></AdSystem>
+      <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+      <VASTAdTagURI>
+        <![CDATA[]]>
+      </VASTAdTagURI>
+      <Extensions>
+        <Extension type="waterfall" fallback_index="0"/>
+      </Extensions>
+    </Wrapper>
+  </Ad>
+  <Ad>
+    <Wrapper fallbackOnNoAd="true">
+      <AdSystem></AdSystem>
+      <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+      <VASTAdTagURI>
+        <![CDATA[does-not-exist]]>
+      </VASTAdTagURI>
+      <Extensions>
+        <Extension type="waterfall" fallback_index="1"/>
+      </Extensions>
+    </Wrapper>
+  </Ad>
+  <Ad>
+    <Wrapper>
+      <AdSystem></AdSystem>
+      <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+      <VASTAdTagURI>
+        <![CDATA[https://artplayer.org/assets/vast/linear-ad.xml]]>
+      </VASTAdTagURI>
+      <Extensions>
+        <Extension type="waterfall" fallback_index="2"/>
+      </Extensions>
+    </Wrapper>
+  </Ad>
+  </VAST>
