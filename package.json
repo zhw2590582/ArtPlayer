@@ -44,7 +44,7 @@
         "@parcel/transformer-inline-string": "^2.14.4",
         "@parcel/transformer-less": "^2.14.4",
         "cpy": "^11.1.0",
-        "cross-env": "^7.0.3",
+        "cross-env": "^10.0.0",
         "cross-spawn": "^7.0.6",
         "dotenv": "^16.5.0",
         "eslint": "^9.25.0",
