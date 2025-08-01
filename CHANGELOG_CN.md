@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [5.2.4] - 2025-08-01
+## [5.2.5] - 2025-08-01
 
 - 为所有包添加 `ESM` 版本如 `artplayer/dist/artplayer.esm.js`
 - 识别 `globalThis.CUSTOM_USER_AGENT` 全局变量，用于自定义 `navigator.userAgent`
