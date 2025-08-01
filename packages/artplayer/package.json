@@ -1,16 +1,10 @@
 {
     "license": "MIT",
     "name": "artplayer",
-    "version": "5.2.4",
+    "version": "5.2.5",
     "main": "dist/artplayer.js",
     "legacy": "dist/artplayer.legacy.js",
-    "module": "dist/artplayer.esm.js",
     "types": "types/artplayer.d.ts",
-    "exports": {
-        "import": "./dist/artplayer.esm.js",
-        "require": "./dist/artplayer.js",
-        "default": "./dist/artplayer.js"
-    },
     "homepage": "https://artplayer.org",
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "last 1 Chrome version",
