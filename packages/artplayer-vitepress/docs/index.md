@@ -410,3 +410,39 @@ https://unpkg.com/artplayer/dist/artplayer.legacy.js
 
 </html>
 ```
+
+## 自定义 userAgent
+
+目前对于是否移动设备的判断并不准确，有时候希望通过改变 `userAgent` 来调整播放器的UI, 所以在 `5.2.4` 开始新增了一个 `globalThis.CUSTOM_USER_AGENT` 全局变量。
+
+```html
+<html>
+    <head>
+        <title>ArtPlayer Demo</title>
+        <meta charset="UTF-8" />
+        <style>
+            .artplayer-app {
+                width: 400px;
+                height: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="artplayer-app"></div>
+        <script>globalThis.CUSTOM_USER_AGENT = 'iphone'</script>
+        <script src="path/to/artplayer.js"></script>
+        <script>
+          const art = new Artplayer({
+              container: '.artplayer-app',
+              url: 'path/to/video.mp4',
+          });
+        </script>
+    </body>
+</html>
+```
+
+::: warning 提示
+
+你需要在引入 `Artplayer` 依赖前来修改它才会生效
+
+:::

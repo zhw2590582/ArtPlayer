@@ -405,3 +405,39 @@ Starting from `5.2.4`, `artplayer` and all plugins will also provide an `ESM` ve
 
 </html>
 ```
+
+## Custom userAgent
+
+Currently, the determination of mobile devices is not accurate. Sometimes, you may want to adjust the player UI by changing the `userAgent`. Therefore, starting in version `5.2.4`, we added a new `globalThis.CUSTOM_USER_AGENT` global variable.
+
+```html
+<html>
+    <head>
+        <title>ArtPlayer Demo</title>
+        <meta charset="UTF-8" />
+        <style>
+            .artplayer-app {
+                width: 400px;
+                height: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="artplayer-app"></div>
+        <script>globalThis.CUSTOM_USER_AGENT = 'iphone'</script>
+        <script src="path/to/artplayer.js"></script>
+        <script>
+          const art = new Artplayer({
+              container: '.artplayer-app',
+              url: 'path/to/video.mp4',
+          });
+        </script>
+    </body>
+</html>
+```
+
+::: warning Warning
+
+You need to modify it before import the `Artplayer` for it to take effect
+
+:::
