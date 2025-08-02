@@ -12,6 +12,7 @@
   <img src="https://img.shields.io/npm/dm/artplayer.svg?sanitize=true" alt="Downloads">
   <img src="https://img.shields.io/npm/v/artplayer.svg?sanitize=true" alt="Version">
   <img src="https://img.shields.io/npm/l/artplayer.svg?sanitize=true" alt="License">
+  <img src="https://data.jsdelivr.com/v1/package/npm/artplayer/badge?style=rounded" alt="jsdelivr">
 </p>
 
 <p align="center">
