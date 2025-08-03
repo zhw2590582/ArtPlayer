@@ -1054,6 +1054,8 @@ export interface ComponentOption {
 
 
 
+export type { Config, Events, I18n, Icons, Option, Player, Setting, SettingOption, Subtitle, Template, Utils }
+
 export default class Artplayer extends Player {
   constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
 
