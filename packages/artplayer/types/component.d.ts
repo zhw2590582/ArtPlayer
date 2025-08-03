@@ -1,4 +1,4 @@
-import Artplayer = require('./artplayer')
+import type Artplayer from './artplayer'
 
 export interface Selector {
   /**

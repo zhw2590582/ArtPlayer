@@ -1,8 +1,5 @@
 import type Artplayer from 'artplayer'
 
-export = artplayerPluginChapter
-export as namespace artplayerPluginChapter;
-
 type Chapters = {
   start: number
   end: number
@@ -19,3 +16,5 @@ interface Result {
 }
 
 declare const artplayerPluginChapter: (option: Option) => (art: Artplayer) => Result
+
+export default artplayerPluginChapter

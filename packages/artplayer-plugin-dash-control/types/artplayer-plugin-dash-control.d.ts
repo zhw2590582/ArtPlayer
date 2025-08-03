@@ -1,8 +1,5 @@
 import type Artplayer from 'artplayer'
 
-export = artplayerPluginDashControl
-export as namespace artplayerPluginDashControl;
-
 interface Config {
   control?: boolean
   setting?: boolean
@@ -15,3 +12,5 @@ declare const artplayerPluginDashControl: (option: { quality?: Config, audio?: C
   name: 'artplayerPluginDashControl'
   update: () => void
 }
+
+export default artplayerPluginDashControl

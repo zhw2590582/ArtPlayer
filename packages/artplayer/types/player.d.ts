@@ -25,10 +25,8 @@ export declare class Player {
   set flip(state: Flip)
   get fullscreen(): boolean
   set fullscreen(state: boolean)
-  set fullscreenToggle(state: boolean)
   get fullscreenWeb(): boolean
   set fullscreenWeb(state: boolean)
-  set fullscreenWebToggle(state: boolean)
   get loaded(): number
   get loadedTime(): number
   get mini(): boolean
@@ -47,8 +45,11 @@ export declare class Player {
   get x(): number
   get y(): number
   set seek(time: number)
+  get seek(): number
   set forward(time: number)
+  get forward(): number
   set backward(time: number)
+  get backward(): number
   get url(): string
   set url(url: string)
   get volume(): number
@@ -62,7 +63,9 @@ export declare class Player {
   get subtitleOffset(): number
   set subtitleOffset(time: number)
   set switch(url: string)
+  get switch(): string
   set quality(quality: Quality[])
+  get quality(): Quality[]
   get thumbnails(): Thumbnails
   set thumbnails(thumbnails: Thumbnails)
   pause(): void

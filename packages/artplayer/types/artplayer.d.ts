@@ -4,16 +4,13 @@ import type { Events } from './events'
 import type { I18n } from './i18n'
 import type { Icons } from './icons'
 import type { Option } from './option'
+import type { Player } from './player'
 import type { Setting, SettingOption } from './setting'
 import type { Subtitle } from './subtitle'
 import type { Template } from './template'
 import type { Utils } from './utils'
-import { Player } from './player'
 
-export = Artplayer
-export as namespace Artplayer;
-
-declare class Artplayer extends Player {
+export default class Artplayer extends Player {
   constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
 
   get Config(): Config
@@ -36,7 +33,7 @@ declare class Artplayer extends Player {
   static readonly config: Config
   static readonly utils: Utils
   static readonly scheme: Record<keyof Option, any>
-  static readonly Emitter: Function
+  static readonly Emitter: (...args: any[]) => any
   static readonly validator: <T extends object>(option: T, scheme: object) => T
   static readonly kindOf: (item: any) => string
   static readonly html: Artplayer['template']['html']
@@ -95,13 +92,13 @@ declare class Artplayer extends Player {
   on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown
   once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown
   emit<T extends keyof Events>(name: T, ...args: unknown[]): unknown
-  off<T extends keyof Events>(name: T, callback?: Function): unknown
+  off<T extends keyof Events>(name: T, callback?: ((...args: Events[T]) => unknown)): unknown
 
   query: Artplayer['template']['query']
   proxy: Artplayer['events']['proxy']
   video: Artplayer['template']['$video']
 
-  e: Record<keyof Events, { fn: Function, ctx: unknown }[]>
+  e: Record<keyof Events, { fn: (...args: any[]) => any, ctx: unknown }[]>
 
   destroy(removeHtml?: boolean): void
 
@@ -166,7 +163,7 @@ declare class Artplayer extends Player {
   readonly hotkey: {
     keys: Record<string, ((event: Event) => any)[]>
     add: (key: string, callback: (this: Artplayer, event: Event) => any) => Artplayer['hotkey']
-    remove: (key: string, callback: Function) => Artplayer['hotkey']
+    remove: (key: string, callback: (event: Event) => any) => Artplayer['hotkey']
   }
 
   readonly mask: Component

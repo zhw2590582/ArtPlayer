@@ -1,8 +1,5 @@
 import type Artplayer from 'artplayer'
 
-export = artplayerPluginAds
-export as namespace artplayerPluginAds;
-
 interface Option {
   /**
    * 广告源文本，支持视频链接、图片链接、HTML文本
@@ -50,3 +47,5 @@ interface Ads {
 }
 
 declare const artplayerPluginAds: (option: Option) => (art: Artplayer) => Ads
+
+export default artplayerPluginAds

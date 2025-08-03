@@ -2,9 +2,6 @@ import type SubtitlesOctopus from '@hrgui/libass-wasm-ts'
 import type Artplayer from 'artplayer'
 import type { Options } from 'libass-wasm'
 
-export = artplayerPluginAss
-export as namespace artplayerPluginAss;
-
 declare const artplayerPluginAss: (options: Options) => (art: Artplayer) => {
   name: 'artplayerPluginLibass'
   libass: SubtitlesOctopus
@@ -15,3 +12,5 @@ declare const artplayerPluginAss: (options: Options) => (art: Artplayer) => {
   hide: () => void
   destroy: () => void
 }
+
+export default artplayerPluginAss

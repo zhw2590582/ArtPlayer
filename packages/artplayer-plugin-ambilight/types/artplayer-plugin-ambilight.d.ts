@@ -1,8 +1,5 @@
 import type Artplayer from 'artplayer'
 
-export = artplayerPluginAmbilight
-export as namespace artplayerPluginAmbilight;
-
 interface Option {
   blur?: string
   opacity?: number
@@ -18,3 +15,5 @@ interface Result {
 }
 
 declare const artplayerPluginAmbilight: (option: Option) => (art: Artplayer) => Result
+
+export default artplayerPluginAmbilight

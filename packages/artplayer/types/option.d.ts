@@ -1,3 +1,4 @@
+import type Artplayer from './artplayer'
 import type { ComponentOption } from './component'
 import type { CssVar } from './cssVar'
 import type { I18n } from './i18n'
@@ -5,7 +6,6 @@ import type { Icons } from './icons'
 import type { Quality } from './quality'
 import type { Setting } from './setting'
 import type { Subtitle } from './subtitle'
-import Artplayer = require('./artplayer')
 
 export type CustomType = 'flv' | 'm3u8' | 'hls' | 'ts' | 'mpd' | 'torrent' | (string & Record<never, never>)
 
@@ -281,7 +281,7 @@ export interface Option {
    * Other video attribute
    */
   moreVideoAttr?: Partial<{
-    [key in keyof HTMLVideoElement as HTMLVideoElement[key] extends Function ? never : key]: HTMLVideoElement[key];
+    [key in keyof HTMLVideoElement as HTMLVideoElement[key] extends (...args: any[]) => any ? never : key]: HTMLVideoElement[key];
   }>
 
   /**

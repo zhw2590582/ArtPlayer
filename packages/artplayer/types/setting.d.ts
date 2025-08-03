@@ -1,4 +1,4 @@
-import Artplayer = require('./artplayer')
+import type Artplayer from './artplayer'
 
 type Props<T> = {
   html: string
@@ -13,7 +13,7 @@ type Props<T> = {
   $parent: Setting
   $parents: Setting[]
   $option: Setting[]
-  $events: Function[]
+  $events: Array<(...args: any[]) => any>
   $formatted: boolean
 } & Omit<T, 'html' | 'icon' | 'tooltip'>
 

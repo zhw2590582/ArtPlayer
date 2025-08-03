@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build:all": "npm run build all && npm run build:i18n && npm run build:ts && npm run build:docs",
-    "lint": "npx eslint packages/*/src --fix",
+    "lint": "npx eslint packages/*/{src,types,package.json} --fix",
     "build:ts": "node ./scripts/build-ts.js",
     "build:docs": "node ./scripts/build-docs.js",
     "build:i18n": "node ./scripts/build-i18n.js",
