@@ -12,7 +12,6 @@ function create({ url, width, number }, callback) {
         canvas.width = width * 10;
         canvas.height = height * Math.ceil(number / 10);
 
-        let loadedCount = 0;
         let blobUrl = null;
 
         function seekAndDraw(index) {
@@ -31,7 +30,6 @@ function create({ url, width, number }, callback) {
 
             video.onseeked = () => {
                 ctx.drawImage(video, (index % 10) * width, Math.floor(index / 10) * height, width, height);
-                loadedCount++;
                 seekAndDraw(index + 1);
             };
         }

@@ -32,7 +32,7 @@ export default function artplayerPluginDanmukuMask(option = {}) {
             try {
                 await tf.setBackend('webgl');
             } catch (error) {
-                console.warn('WebGL backend not available, falling back to CPU');
+                console.warn('WebGL backend not available, falling back to CPU', error.message);
                 await tf.setBackend('cpu');
             }
         }
