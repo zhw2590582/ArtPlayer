@@ -76,7 +76,7 @@ export function isInViewport(el, offset = 0) {
 }
 
 export function includeFromEvent(event, target) {
-    return event.composedPath && event.composedPath().indexOf(target) > -1;
+    return getComposedPath(event).indexOf(target) > -1;
 }
 
 export function replaceElement(newChild, oldChild) {
@@ -160,4 +160,18 @@ export function loadImg(url, scale) {
 
         img.src = url;
     });
+}
+
+export function getComposedPath(event) {
+    if (event.composedPath) return event.composedPath();
+    const path = [];
+    let node = event.target;
+    while (node) {
+        path.push(node);
+        node = node.parentNode;
+    }
+    if (path.indexOf(window) === -1 && window !== undefined) {
+        path.push(window);
+    }
+    return path;
 }

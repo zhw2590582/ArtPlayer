@@ -20,6 +20,7 @@ import {
     inverseClass,
     createElement,
     includeFromEvent,
+    getComposedPath,
 } from '../utils';
 
 export default class Control extends Component {
@@ -265,7 +266,7 @@ export default class Control extends Component {
         }
 
         const event = proxy($list, 'click', async (event) => {
-            const path = event.composedPath() || [];
+            const path = getComposedPath(event);
             const item = option.selector.find(
                 (item) => item.$control_item === path.find(($item) => item.$control_item === $item),
             );
