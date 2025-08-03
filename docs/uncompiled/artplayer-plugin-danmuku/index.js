@@ -397,6 +397,7 @@ class Danmuku {
         const $ref = this.$refs.pop() || document.createElement('div');
         $ref.style.cssText = Danmuku.cssText;
         $ref.dataset.mode = '';
+        $ref.dataset.id = '';
         $ref.className = '';
         return $ref;
     }
@@ -492,6 +493,7 @@ class Danmuku {
     async emit(danmu) {
         const { clamp } = this.utils;
         this.validator(danmu, {
+            id: '?string',
             text: 'string',
             mode: '?number',
             color: '?string',
@@ -522,7 +524,7 @@ class Danmuku {
         const item = {
             ...danmu,
             $state: 'wait',
-            $id: this.index++,
+            $index: this.index++,
             $ref: null,
             $restTime: 0,
             $lastStartTime: 0
@@ -674,6 +676,8 @@ class Danmuku {
                                 danmu.$ref.style.top = `${top}px`;
                                 danmu.$ref.style.visibility = 'visible';
                                 danmu.$ref.dataset.mode = danmu.mode // CSS控制模式的显示和隐藏
+                                ;
+                                danmu.$ref.dataset.id = danmu.id || '' // 用于悬停的唯一标识
                                 ;
                                 switch(danmu.mode){
                                     // 滚动的弹幕

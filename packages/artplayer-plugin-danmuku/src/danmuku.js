@@ -200,6 +200,7 @@ export default class Danmuku {
     const $ref = this.$refs.pop() || document.createElement('div')
     $ref.style.cssText = Danmuku.cssText
     $ref.dataset.mode = ''
+    $ref.dataset.id = ''
     $ref.className = ''
     return $ref
   }
@@ -315,6 +316,7 @@ export default class Danmuku {
     const { clamp } = this.utils
 
     this.validator(danmu, {
+      id: '?string', // 弹幕唯一标识
       text: 'string', // 弹幕文本
       mode: '?number', // 弹幕模式: 0: 滚动，1: 顶部，2: 底部
       color: '?string', // 弹幕颜色
@@ -362,7 +364,7 @@ export default class Danmuku {
     const item = {
       ...danmu,
       $state: 'wait', // 弹幕初始状态
-      $id: this.index++, // 弹幕唯一标识
+      $index: this.index++, // 弹幕索引
       $ref: null, // 弹幕 DOM 节点
       $restTime: 0, // 弹幕剩余时间
       $lastStartTime: 0, // 弹幕上次开始时间
@@ -562,6 +564,7 @@ export default class Danmuku {
                 danmu.$ref.style.top = `${top}px`
                 danmu.$ref.style.visibility = 'visible'
                 danmu.$ref.dataset.mode = danmu.mode // CSS控制模式的显示和隐藏
+                danmu.$ref.dataset.id = danmu.id || '' // 用于悬停的唯一标识
 
                 switch (danmu.mode) {
                   // 滚动的弹幕
