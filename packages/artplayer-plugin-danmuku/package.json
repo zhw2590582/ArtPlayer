@@ -1,24 +1,24 @@
 {
-    "license": "MIT",
-    "version": "5.1.8",
-    "name": "artplayer-plugin-danmuku",
-    "types": "types/artplayer-plugin-danmuku.d.ts",
-    "description": "Danmuku plugin for ArtPlayer",
-    "main": "dist/artplayer-plugin-danmuku.js",
-    "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "browserslist": "last 1 Chrome version",
-    "homepage": "https://artplayer.org",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "keywords": [
-        "html5",
-        "video",
-        "player"
-    ]
+  "name": "artplayer-plugin-danmuku",
+  "version": "5.1.8",
+  "description": "Danmuku plugin for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "main": "dist/artplayer-plugin-danmuku.js",
+  "types": "types/artplayer-plugin-danmuku.d.ts",
+  "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+  "browserslist": "last 1 Chrome version"
 }

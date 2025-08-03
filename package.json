@@ -1,62 +1,61 @@
 {
-    "name": "artplayer-packages",
-    "version": "5.2.0",
-    "type": "module",
-    "private": true,
-    "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
-    "workspaces": [
-        "packages/*"
-    ],
-    "scripts": {
-        "build:all": "npm run build all && npm run build:i18n && npm run build:ts && npm run build:docs",
-        "lint": "npx eslint packages/*/src --fix",
-        "build:ts": "node ./scripts/build-ts.js",
-        "build:docs": "node ./scripts/build-docs.js",
-        "build:i18n": "node ./scripts/build-i18n.js",
-        "trans:docs": "node ./scripts/trans-docs.js",
-        "create:plugin": "node ./scripts/plugin/create.js",
-        "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
-        "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
-        "prettier": "npx prettier --write .",
-        "postinstall": "npx lerna run prepare",
-        "bootstrap": "npx lerna link"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "keywords": [
-        "video",
-        "player"
-    ],
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "homepage": "https://artplayer.org",
-    "browserslist": "last 1 Chrome version",
-    "dependencies": {
-        "@parcel/config-default": "^2.14.4",
-        "@parcel/core": "^2.14.4",
-        "@parcel/optimizer-data-url": "^2.14.4",
-        "@parcel/reporter-cli": "^2.14.4",
-        "@parcel/transformer-inline-string": "^2.14.4",
-        "@parcel/transformer-less": "^2.14.4",
-        "cpy": "^11.1.0",
-        "cross-env": "^7.0.3",
-        "cross-spawn": "^7.0.6",
-        "dotenv": "^16.5.0",
-        "eslint": "^9.25.0",
-        "glob": "^11.0.1",
-        "globals": "^16.0.0",
-        "lerna": "^8.2.2",
-        "prettier": "^3.5.3",
-        "prompts": "^2.4.2",
-        "servor": "^4.0.2",
-        "svgo": "^4.0.0"
-    },
-    "engines": {
-        "node": ">= 20.0.0"
-    }
+  "name": "artplayer-packages",
+  "type": "module",
+  "version": "5.2.0",
+  "private": true,
+  "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "video",
+    "player"
+  ],
+  "engines": {
+    "node": ">= 20.0.0"
+  },
+  "scripts": {
+    "build:all": "npm run build all && npm run build:i18n && npm run build:ts && npm run build:docs",
+    "lint": "npx eslint packages/*/src --fix",
+    "build:ts": "node ./scripts/build-ts.js",
+    "build:docs": "node ./scripts/build-docs.js",
+    "build:i18n": "node ./scripts/build-i18n.js",
+    "trans:docs": "node ./scripts/trans-docs.js",
+    "create:plugin": "node ./scripts/plugin/create.js",
+    "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
+    "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
+    "postinstall": "npx lerna run prepare",
+    "bootstrap": "npx lerna link"
+  },
+  "browserslist": "last 1 Chrome version",
+  "dependencies": {
+    "@antfu/eslint-config": "^5.1.0",
+    "@parcel/config-default": "^2.15.4",
+    "@parcel/core": "^2.15.4",
+    "@parcel/optimizer-data-url": "^2.15.4",
+    "@parcel/reporter-cli": "^2.15.4",
+    "@parcel/transformer-inline-string": "^2.15.4",
+    "@parcel/transformer-less": "^2.15.4",
+    "cpy": "^11.1.0",
+    "cross-env": "^10.0.0",
+    "cross-spawn": "^7.0.6",
+    "dotenv": "^17.2.1",
+    "eslint": "^9.32.0",
+    "glob": "^11.0.3",
+    "globals": "^16.3.0",
+    "lerna": "^8.2.3",
+    "prompts": "^2.4.2",
+    "servor": "^4.0.2",
+    "svgo": "^4.0.0"
+  }
 }

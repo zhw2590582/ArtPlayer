@@ -1,16 +1,16 @@
-export type Quality = {
-    /**
-     * Whether the default is selected
-     */
-    default?: boolean;
+export interface Quality {
+  /**
+   * Whether the default is selected
+   */
+  default?: boolean
 
-    /**
-     * Html string of quality
-     */
-    html: string | HTMLElement;
+  /**
+   * Html string of quality
+   */
+  html: string | HTMLElement
 
-    /**
-     * Video quality url
-     */
-    url: string;
-};
+  /**
+   * Video quality url
+   */
+  url: string
+}

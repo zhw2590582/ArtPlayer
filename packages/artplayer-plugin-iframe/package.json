@@ -1,30 +1,30 @@
 {
-    "license": "MIT",
-    "version": "1.0.0",
-    "name": "artplayer-plugin-iframe",
-    "description": "Iframe plugin for ArtPlayer",
-    "main": "dist/artplayer-plugin-iframe.js",
-    "legacy": "dist/artplayer-plugin-iframe.legacy.js",
-    "module": "dist/artplayer-plugin-iframe.esm.js",
-    "types": "types/artplayer-plugin-iframe.d.ts",
-    "exports": {
-        "import": "./dist/artplayer-plugin-iframe.esm.js",
-        "require": "./dist/artplayer-plugin-iframe.js",
-        "default": "./dist/artplayer-plugin-iframe.js"
-    },
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "browserslist": "last 1 Chrome version",
-    "homepage": "https://artplayer.org",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "keywords": [
-        "html5",
-        "video",
-        "player"
-    ]
+  "name": "artplayer-plugin-iframe",
+  "version": "1.0.0",
+  "description": "Iframe plugin for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    "import": "./dist/artplayer-plugin-iframe.esm.js",
+    "require": "./dist/artplayer-plugin-iframe.js",
+    "default": "./dist/artplayer-plugin-iframe.js"
+  },
+  "main": "dist/artplayer-plugin-iframe.js",
+  "legacy": "dist/artplayer-plugin-iframe.legacy.js",
+  "module": "dist/artplayer-plugin-iframe.esm.js",
+  "types": "types/artplayer-plugin-iframe.d.ts",
+  "browserslist": "last 1 Chrome version"
 }

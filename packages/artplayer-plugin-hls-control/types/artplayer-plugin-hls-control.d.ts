@@ -1,17 +1,17 @@
-import type Artplayer from 'artplayer';
+import type Artplayer from 'artplayer'
 
-export = artplayerPluginHlsControl;
+export = artplayerPluginHlsControl
 export as namespace artplayerPluginHlsControl;
 
-type Config = {
-    control?: boolean;
-    setting?: boolean;
-    title?: string;
-    auto?: string;
-    getName?(level: object): String;
-};
+interface Config {
+  control?: boolean
+  setting?: boolean
+  title?: string
+  auto?: string
+  getName?: (level: object) => string
+}
 
-declare const artplayerPluginHlsControl: (option: { quality?: Config; audio?: Config }) => (art: Artplayer) => {
-    name: 'artplayerPluginHlsControl';
-    update: () => void;
-};
+declare const artplayerPluginHlsControl: (option: { quality?: Config, audio?: Config }) => (art: Artplayer) => {
+  name: 'artplayerPluginHlsControl'
+  update: () => void
+}

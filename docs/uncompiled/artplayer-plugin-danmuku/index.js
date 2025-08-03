@@ -166,10 +166,10 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginDanmuku);
 var _danmuku = require("./danmuku");
 var _danmukuDefault = parcelHelpers.interopDefault(_danmuku);
-var _setting = require("./setting");
-var _settingDefault = parcelHelpers.interopDefault(_setting);
 var _heatmap = require("./heatmap");
 var _heatmapDefault = parcelHelpers.interopDefault(_heatmap);
+var _setting = require("./setting");
+var _settingDefault = parcelHelpers.interopDefault(_setting);
 function artplayerPluginDanmuku(option) {
     return (art)=>{
         const danmuku = new (0, _danmukuDefault.default)(art, option);
@@ -197,28 +197,38 @@ function artplayerPluginDanmuku(option) {
     };
 }
 artplayerPluginDanmuku.icons = (0, _settingDefault.default).icons;
-if (typeof window !== 'undefined') window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
+if (typeof window !== 'undefined') window.artplayerPluginDanmuku = artplayerPluginDanmuku;
 
-},{"./danmuku":"gAOAX","./setting":"3B2wj","./heatmap":"2G7iS","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"gAOAX":[function(require,module,exports,__globalThis) {
+},{"./danmuku":"gAOAX","./heatmap":"2G7iS","./setting":"3B2wj","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"gAOAX":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _bilibili = require("./bilibili");
 var _worker = require("bundle-text:./worker");
 var _workerDefault = parcelHelpers.interopDefault(_worker);
+var _bilibili = require("./bilibili");
 class Danmuku {
     constructor(art, option){
         const { constructor, template } = art;
-        this.utils = constructor.utils; // 工具库
-        this.validator = constructor.validator; // 配置校验器
-        this.$danmuku = template.$danmuku; // 弹幕层容器
-        this.$player = template.$player; // 播放器容器
+        this.utils = constructor.utils // 工具库
+        ;
+        this.validator = constructor.validator // 配置校验器
+        ;
+        this.$danmuku = template.$danmuku // 弹幕层容器
+        ;
+        this.$player = template.$player // 播放器容器
+        ;
         this.art = art;
-        this.queue = []; // 实际弹幕队列
-        this.$refs = []; // 弹幕DOM节点池
-        this.isStop = false; // 是否停止
-        this.isHide = false; // 是否隐藏
-        this.timer = null; // 定时器
-        this.index = 0; // 弹幕索引
+        this.queue = [] // 实际弹幕队列
+        ;
+        this.$refs = [] // 弹幕DOM节点池
+        ;
+        this.isStop = false // 是否停止
+        ;
+        this.isHide = false // 是否隐藏
+        ;
+        this.timer = null // 定时器
+        ;
+        this.index = 0 // 弹幕索引
+        ;
         // 格式化后的配置项
         this.option = Danmuku.option;
         // 弹幕状态池
@@ -353,7 +363,7 @@ class Danmuku {
         const { clientHeight } = this.$player;
         if (typeof value === 'number') return clamp(value, 0, clientHeight);
         if (typeof value === 'string' && value.endsWith('%')) {
-            const ratio = parseFloat(value) / 100;
+            const ratio = Number.parseFloat(value) / 100;
             return clamp(clientHeight * ratio, 0, clientHeight);
         }
         return Danmuku.option.margin[0];
@@ -365,7 +375,7 @@ class Danmuku {
         const { clientHeight } = this.$player;
         if (typeof value === 'number') return clamp(value, 0, clientHeight);
         if (typeof value === 'string' && value.endsWith('%')) {
-            const ratio = parseFloat(value) / 100;
+            const ratio = Number.parseFloat(value) / 100;
             return clamp(clientHeight * ratio, 0, clientHeight);
         }
         return Danmuku.option.margin[1];
@@ -377,7 +387,7 @@ class Danmuku {
         const fontSize = this.option.fontSize;
         if (typeof fontSize === 'number') return Math.round(clamp(fontSize, 12, clientHeight));
         if (typeof fontSize === 'string' && fontSize.endsWith('%')) {
-            const ratio = parseFloat(fontSize) / 100;
+            const ratio = Number.parseFloat(fontSize) / 100;
             return Math.round(clamp(clientHeight * ratio, 12, clientHeight));
         }
         return Danmuku.option.fontSize;
@@ -439,23 +449,32 @@ class Danmuku {
         let danmus = [];
         const target = danmuku || this.option.danmuku;
         try {
-            if (typeof target === 'function') danmus = await target(); // 异步函数获取
-            else if (target instanceof Promise) danmus = await target; // 从 Promise 对象获取
-            else if (typeof target === 'string') danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(target); // 从B站xml链接解析
-            else if (Array.isArray(target)) danmus = target; // 直接传入数组
+            if (typeof target === 'function') danmus = await target() // 异步函数获取
+            ;
+            else if (target instanceof Promise) danmus = await target // 从 Promise 对象获取
+            ;
+            else if (typeof target === 'string') danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(target) // 从B站xml链接解析
+            ;
+            else if (Array.isArray(target)) danmus = target // 直接传入数组
+            ;
             errorHandle(Array.isArray(danmus), 'Danmuku need return an array as result');
             // 假如没有传入弹幕参数，则清空弹幕，否则追加弹幕
             if (danmuku === undefined) {
-                this.reset(); // 重置弹幕
-                this.queue = []; // 清空弹幕队列
+                this.reset() // 重置弹幕
+                ;
+                this.queue = [] // 清空弹幕队列
+                ;
                 this.states = {
                     wait: [],
                     ready: [],
                     emit: [],
                     stop: []
-                }; // 清空弹幕状态池
-                this.$refs = []; // 清空弹幕DOM节点池
-                this.$danmuku.innerText = ''; // 清空弹幕层
+                } // 清空弹幕状态池
+                ;
+                this.$refs = [] // 清空弹幕DOM节点池
+                ;
+                this.$danmuku.textContent = '' // 清空弹幕层
+                ;
             }
             // 逐个验证原始弹幕并转换到弹幕队列
             for(let index = 0; index < danmus.length; index++){
@@ -552,7 +571,8 @@ class Danmuku {
     // 复杂运算交给 Web Worker 处理
     postMessage(message = {}) {
         return new Promise((resolve)=>{
-            message.id = Date.now(); // 生成唯一标识
+            message.id = Date.now() // 生成唯一标识
+            ;
             this.worker.postMessage(message);
             this.worker.onmessage = (event)=>{
                 const { data } = event;
@@ -612,8 +632,10 @@ class Danmuku {
                     const state = await this.option.beforeVisible(danmu);
                     if (state) {
                         const { clientWidth, clientHeight } = this.$player;
-                        danmu.$ref = this.$ref; // 获取弹幕DOM节点
-                        danmu.$ref.innerText = danmu.text; // 设置弹幕文本
+                        danmu.$ref = this.$ref // 获取弹幕DOM节点
+                        ;
+                        danmu.$ref.textContent = danmu.text // 设置弹幕文本
+                        ;
                         // 提前添加到弹幕层中，用于计算top值
                         this.$danmuku.appendChild(danmu.$ref);
                         // 设置初始弹幕样式
@@ -640,17 +662,19 @@ class Danmuku {
                             },
                             visibles: this.visibles,
                             antiOverlap: this.option.antiOverlap,
-                            clientWidth: clientWidth,
-                            clientHeight: clientHeight,
+                            clientWidth,
+                            clientHeight,
                             marginBottom: this.marginBottom,
                             marginTop: this.marginTop
                         });
                         if (danmu.$ref) {
                             if (!this.isStop && top !== undefined) {
-                                this.setState(danmu, 'emit'); // 转换为emit状态
+                                this.setState(danmu, 'emit') // 转换为emit状态
+                                ;
                                 danmu.$ref.style.top = `${top}px`;
                                 danmu.$ref.style.visibility = 'visible';
-                                danmu.$ref.dataset.mode = danmu.mode; // CSS控制模式的显示和隐藏
+                                danmu.$ref.dataset.mode = danmu.mode // CSS控制模式的显示和隐藏
+                                ;
                                 switch(danmu.mode){
                                     // 滚动的弹幕
                                     case 0:
@@ -718,7 +742,8 @@ class Danmuku {
     continue() {
         const { clientWidth } = this.$player;
         this.filter('stop', (danmu)=>{
-            this.setState(danmu, 'emit'); // 转换为emit状态
+            this.setState(danmu, 'emit') // 转换为emit状态
+            ;
             danmu.$lastStartTime = Date.now();
             switch(danmu.mode){
                 // 继续滚动的弹幕
@@ -739,7 +764,8 @@ class Danmuku {
     suspend() {
         const { clientWidth } = this.$player;
         this.filter('emit', (danmu)=>{
-            this.setState(danmu, 'stop'); // 转换为stop状态
+            this.setState(danmu, 'stop') // 转换为stop状态
+            ;
             switch(danmu.mode){
                 // 停止滚动的弹幕
                 case 0:
@@ -802,7 +828,10 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./bilibili":"aIvhn","bundle-text:./worker":"2Spvp","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"aIvhn":[function(require,module,exports,__globalThis) {
+},{"bundle-text:./worker":"2Spvp","./bilibili":"aIvhn","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"2Spvp":[function(require,module,exports,__globalThis) {
+module.exports = "// modules are defined as an array\n// [ module function, map of requires ]\n//\n// map of requires is short require name -> numeric require\n//\n// anything defined in a previous bundle is accessed via the\n// orig method which is the require for previous bundles\n\n(function (\n  modules,\n  entry,\n  mainEntry,\n  parcelRequireName,\n  externals,\n  distDir,\n  publicUrl,\n  devServer\n) {\n  /* eslint-disable no-undef */\n  var globalObject =\n    typeof globalThis !== 'undefined'\n      ? globalThis\n      : typeof self !== 'undefined'\n      ? self\n      : typeof window !== 'undefined'\n      ? window\n      : typeof global !== 'undefined'\n      ? global\n      : {};\n  /* eslint-enable no-undef */\n\n  // Save the require from previous bundle to this closure if any\n  var previousRequire =\n    typeof globalObject[parcelRequireName] === 'function' &&\n    globalObject[parcelRequireName];\n\n  var importMap = previousRequire.i || {};\n  var cache = previousRequire.cache || {};\n  // Do not use `require` to prevent Webpack from trying to bundle this call\n  var nodeRequire =\n    typeof module !== 'undefined' &&\n    typeof module.require === 'function' &&\n    module.require.bind(module);\n\n  function newRequire(name, jumped) {\n    if (!cache[name]) {\n      if (!modules[name]) {\n        if (externals[name]) {\n          return externals[name];\n        }\n        // if we cannot find the module within our internal map or\n        // cache jump to the current global require ie. the last bundle\n        // that was added to the page.\n        var currentRequire =\n          typeof globalObject[parcelRequireName] === 'function' &&\n          globalObject[parcelRequireName];\n        if (!jumped && currentRequire) {\n          return currentRequire(name, true);\n        }\n\n        // If there are other bundles on this page the require from the\n        // previous one is saved to 'previousRequire'. Repeat this as\n        // many times as there are bundles until the module is found or\n        // we exhaust the require chain.\n        if (previousRequire) {\n          return previousRequire(name, true);\n        }\n\n        // Try the node require function if it exists.\n        if (nodeRequire && typeof name === 'string') {\n          return nodeRequire(name);\n        }\n\n        var err = new Error(\"Cannot find module '\" + name + \"'\");\n        err.code = 'MODULE_NOT_FOUND';\n        throw err;\n      }\n\n      localRequire.resolve = resolve;\n      localRequire.cache = {};\n\n      var module = (cache[name] = new newRequire.Module(name));\n\n      modules[name][0].call(\n        module.exports,\n        localRequire,\n        module,\n        module.exports,\n        globalObject\n      );\n    }\n\n    return cache[name].exports;\n\n    function localRequire(x) {\n      var res = localRequire.resolve(x);\n      return res === false ? {} : newRequire(res);\n    }\n\n    function resolve(x) {\n      var id = modules[name][1][x];\n      return id != null ? id : x;\n    }\n  }\n\n  function Module(moduleName) {\n    this.id = moduleName;\n    this.bundle = newRequire;\n    this.require = nodeRequire;\n    this.exports = {};\n  }\n\n  newRequire.isParcelRequire = true;\n  newRequire.Module = Module;\n  newRequire.modules = modules;\n  newRequire.cache = cache;\n  newRequire.parent = previousRequire;\n  newRequire.distDir = distDir;\n  newRequire.publicUrl = publicUrl;\n  newRequire.devServer = devServer;\n  newRequire.i = importMap;\n  newRequire.register = function (id, exports) {\n    modules[id] = [\n      function (require, module) {\n        module.exports = exports;\n      },\n      {},\n    ];\n  };\n\n  // Only insert newRequire.load when it is actually used.\n  // The code in this file is linted against ES5, so dynamic import is not allowed.\n  // INSERT_LOAD_HERE\n\n  Object.defineProperty(newRequire, 'root', {\n    get: function () {\n      return globalObject[parcelRequireName];\n    },\n  });\n\n  globalObject[parcelRequireName] = newRequire;\n\n  for (var i = 0; i < entry.length; i++) {\n    newRequire(entry[i]);\n  }\n\n  if (mainEntry) {\n    // Expose entry point to Node, AMD or browser globals\n    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js\n    var mainExports = newRequire(mainEntry);\n\n    // CommonJS\n    if (typeof exports === 'object' && typeof module !== 'undefined') {\n      module.exports = mainExports;\n\n      // RequireJS\n    } else if (typeof define === 'function' && define.amd) {\n      define(function () {\n        return mainExports;\n      });\n    }\n  }\n})({\"02up6\":[function(require,module,exports,__globalThis) {\nfunction getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n    // 弹幕最大高度\n    const maxTop = clientHeight - marginBottom;\n    // 过滤同模式的弹幕，即每种模式各不影响\n    const danmus = visibles.filter((item)=>item.mode === target.mode && item.top <= maxTop).sort((prev, next)=>prev.top - next.top);\n    // 如果没有同模式的弹幕，直接返回\n    if (danmus.length === 0) {\n        if (target.mode === 2) return maxTop - target.height;\n        else return marginTop;\n    }\n    // 上下各加一个虚拟弹幕，方便计算\n    danmus.unshift({\n        type: 'top',\n        top: 0,\n        left: 0,\n        right: 0,\n        height: marginTop,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    danmus.push({\n        type: 'bottom',\n        top: maxTop,\n        left: 0,\n        right: 0,\n        height: marginBottom,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    // 查找是否有多余的缝隙足以容纳当前弹幕\n    if (target.mode === 2) // 倒序查找\n    for(let index = danmus.length - 2; index >= 0; index -= 1){\n        const item = danmus[index];\n        const prev = danmus[index + 1];\n        const itemBottom = item.top + item.height;\n        const diff = prev.top - itemBottom;\n        if (diff >= target.height) return prev.top - target.height;\n    }\n    else // 顺序查找\n    for(let index = 1; index < danmus.length; index += 1){\n        const item = danmus[index];\n        const prev = danmus[index - 1];\n        const prevBottom = prev.top + prev.height;\n        const diff = item.top - prevBottom;\n        if (diff >= target.height) return prevBottom;\n    }\n    const topMap = [];\n    for(let index = 1; index < danmus.length - 1; index += 1){\n        const item = danmus[index];\n        if (topMap.length) {\n            const last = topMap[topMap.length - 1];\n            if (last[0].top === item.top) last.push(item);\n            else topMap.push([\n                item\n            ]);\n        } else topMap.push([\n            item\n        ]);\n    }\n    if (antiOverlap) switch(target.mode){\n        case 0:\n            {\n                const result = topMap.find((list)=>{\n                    return list.every((danmu)=>{\n                        if (clientWidth < danmu.distance) return false;\n                        if (target.speed < danmu.speed) return true;\n                        const overlapTime = danmu.right / (target.speed - danmu.speed);\n                        if (overlapTime > danmu.time) return true;\n                        return false;\n                    });\n                });\n                return result && result[0] ? result[0].top : undefined;\n            }\n        // 静止弹幕没有重叠问题\n        case 1:\n        case 2:\n            return undefined;\n        default:\n            break;\n    }\n    else {\n        switch(target.mode){\n            case 0:\n                topMap.sort((prev, next)=>{\n                    const nextMinRight = Math.min(...next.map((item)=>item.right));\n                    const prevMinRight = Math.min(...prev.map((item)=>item.right));\n                    return nextMinRight * next.length - prevMinRight * prev.length;\n                });\n                break;\n            case 1:\n            case 2:\n                topMap.sort((prev, next)=>{\n                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));\n                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));\n                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n                });\n                break;\n            default:\n                break;\n        }\n        return topMap[0][0].top;\n    }\n}\nonmessage = (event)=>{\n    const { data } = event;\n    if (!data.id || !data.type) return;\n    const fns = {\n        getDanmuTop\n    };\n    const fn = fns[data.type];\n    const result = fn(data);\n    globalThis.postMessage({\n        result,\n        id: data.id\n    });\n};\n\n},{}]},[\"02up6\"], \"02up6\", \"parcelRequire4dc0\", {})\n\n";
+
+},{}],"aIvhn":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "bilibiliDanmuParseFromUrl", ()=>bilibiliDanmuParseFromUrl);
@@ -822,12 +851,12 @@ function getMode(key) {
 }
 function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
-    const reg = new RegExp(/<d (?:.*? )??p="(?<p>.+?)"(?: .*?)?>(?<text>.+?)<\/d>/gs);
+    const reg = /<d[^>]*?p="(?<p>[^"]+)"[^>]*>(?<text>.*?)<\/d>/gs;
     const matches = xmlString.matchAll(reg);
     return Array.from(matches).map((match)=>{
         const attr = match.groups.p.split(',');
         if (attr.length >= 8) {
-            const text = match.groups.text.trim().replaceAll('&quot;', '"').replaceAll('&apos;', "'").replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;', '&');
+            const text = match.groups.text.trim().replaceAll('&quot;', '"').replaceAll('&apos;', '\'').replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;', '&');
             return {
                 text,
                 time: Number(attr[0]),
@@ -846,7 +875,7 @@ function onmessage({ data }) {
     const { xml, id } = data;
     if (!id || !xml) return;
     const danmus = bilibiliDanmuParseFromXml(xml);
-    self.postMessage({
+    globalThis.postMessage({
         danmus,
         id
     });
@@ -881,8 +910,8 @@ function bilibiliDanmuParseFromUrl(url) {
                 xml,
                 id: Date.now()
             });
-        // eslint-disable-next-line no-unused-vars
         } catch (error) {
+            console.error('Error parsing Bilibili Danmu:', error);
             const danmus = bilibiliDanmuParseFromXml(xml);
             resolve(danmus);
         }
@@ -919,22 +948,178 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"2Spvp":[function(require,module,exports,__globalThis) {
-module.exports = "// modules are defined as an array\n// [ module function, map of requires ]\n//\n// map of requires is short require name -> numeric require\n//\n// anything defined in a previous bundle is accessed via the\n// orig method which is the require for previous bundles\n\n(function (\n  modules,\n  entry,\n  mainEntry,\n  parcelRequireName,\n  externals,\n  distDir,\n  publicUrl,\n  devServer\n) {\n  /* eslint-disable no-undef */\n  var globalObject =\n    typeof globalThis !== 'undefined'\n      ? globalThis\n      : typeof self !== 'undefined'\n      ? self\n      : typeof window !== 'undefined'\n      ? window\n      : typeof global !== 'undefined'\n      ? global\n      : {};\n  /* eslint-enable no-undef */\n\n  // Save the require from previous bundle to this closure if any\n  var previousRequire =\n    typeof globalObject[parcelRequireName] === 'function' &&\n    globalObject[parcelRequireName];\n\n  var importMap = previousRequire.i || {};\n  var cache = previousRequire.cache || {};\n  // Do not use `require` to prevent Webpack from trying to bundle this call\n  var nodeRequire =\n    typeof module !== 'undefined' &&\n    typeof module.require === 'function' &&\n    module.require.bind(module);\n\n  function newRequire(name, jumped) {\n    if (!cache[name]) {\n      if (!modules[name]) {\n        if (externals[name]) {\n          return externals[name];\n        }\n        // if we cannot find the module within our internal map or\n        // cache jump to the current global require ie. the last bundle\n        // that was added to the page.\n        var currentRequire =\n          typeof globalObject[parcelRequireName] === 'function' &&\n          globalObject[parcelRequireName];\n        if (!jumped && currentRequire) {\n          return currentRequire(name, true);\n        }\n\n        // If there are other bundles on this page the require from the\n        // previous one is saved to 'previousRequire'. Repeat this as\n        // many times as there are bundles until the module is found or\n        // we exhaust the require chain.\n        if (previousRequire) {\n          return previousRequire(name, true);\n        }\n\n        // Try the node require function if it exists.\n        if (nodeRequire && typeof name === 'string') {\n          return nodeRequire(name);\n        }\n\n        var err = new Error(\"Cannot find module '\" + name + \"'\");\n        err.code = 'MODULE_NOT_FOUND';\n        throw err;\n      }\n\n      localRequire.resolve = resolve;\n      localRequire.cache = {};\n\n      var module = (cache[name] = new newRequire.Module(name));\n\n      modules[name][0].call(\n        module.exports,\n        localRequire,\n        module,\n        module.exports,\n        globalObject\n      );\n    }\n\n    return cache[name].exports;\n\n    function localRequire(x) {\n      var res = localRequire.resolve(x);\n      return res === false ? {} : newRequire(res);\n    }\n\n    function resolve(x) {\n      var id = modules[name][1][x];\n      return id != null ? id : x;\n    }\n  }\n\n  function Module(moduleName) {\n    this.id = moduleName;\n    this.bundle = newRequire;\n    this.require = nodeRequire;\n    this.exports = {};\n  }\n\n  newRequire.isParcelRequire = true;\n  newRequire.Module = Module;\n  newRequire.modules = modules;\n  newRequire.cache = cache;\n  newRequire.parent = previousRequire;\n  newRequire.distDir = distDir;\n  newRequire.publicUrl = publicUrl;\n  newRequire.devServer = devServer;\n  newRequire.i = importMap;\n  newRequire.register = function (id, exports) {\n    modules[id] = [\n      function (require, module) {\n        module.exports = exports;\n      },\n      {},\n    ];\n  };\n\n  // Only insert newRequire.load when it is actually used.\n  // The code in this file is linted against ES5, so dynamic import is not allowed.\n  // INSERT_LOAD_HERE\n\n  Object.defineProperty(newRequire, 'root', {\n    get: function () {\n      return globalObject[parcelRequireName];\n    },\n  });\n\n  globalObject[parcelRequireName] = newRequire;\n\n  for (var i = 0; i < entry.length; i++) {\n    newRequire(entry[i]);\n  }\n\n  if (mainEntry) {\n    // Expose entry point to Node, AMD or browser globals\n    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js\n    var mainExports = newRequire(mainEntry);\n\n    // CommonJS\n    if (typeof exports === 'object' && typeof module !== 'undefined') {\n      module.exports = mainExports;\n\n      // RequireJS\n    } else if (typeof define === 'function' && define.amd) {\n      define(function () {\n        return mainExports;\n      });\n    }\n  }\n})({\"02up6\":[function(require,module,exports,__globalThis) {\nfunction getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n    // 弹幕最大高度\n    const maxTop = clientHeight - marginBottom;\n    // 过滤同模式的弹幕，即每种模式各不影响\n    const danmus = visibles.filter((item)=>item.mode === target.mode && item.top <= maxTop).sort((prev, next)=>prev.top - next.top);\n    // 如果没有同模式的弹幕，直接返回\n    if (danmus.length === 0) {\n        if (target.mode === 2) return maxTop - target.height;\n        else return marginTop;\n    }\n    // 上下各加一个虚拟弹幕，方便计算\n    danmus.unshift({\n        type: 'top',\n        top: 0,\n        left: 0,\n        right: 0,\n        height: marginTop,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    danmus.push({\n        type: 'bottom',\n        top: maxTop,\n        left: 0,\n        right: 0,\n        height: marginBottom,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    // 查找是否有多余的缝隙足以容纳当前弹幕\n    if (target.mode === 2) // 倒序查找\n    for(let index = danmus.length - 2; index >= 0; index -= 1){\n        const item = danmus[index];\n        const prev = danmus[index + 1];\n        const itemBottom = item.top + item.height;\n        const diff = prev.top - itemBottom;\n        if (diff >= target.height) return prev.top - target.height;\n    }\n    else // 顺序查找\n    for(let index = 1; index < danmus.length; index += 1){\n        const item = danmus[index];\n        const prev = danmus[index - 1];\n        const prevBottom = prev.top + prev.height;\n        const diff = item.top - prevBottom;\n        if (diff >= target.height) return prevBottom;\n    }\n    const topMap = [];\n    for(let index = 1; index < danmus.length - 1; index += 1){\n        const item = danmus[index];\n        if (topMap.length) {\n            const last = topMap[topMap.length - 1];\n            if (last[0].top === item.top) last.push(item);\n            else topMap.push([\n                item\n            ]);\n        } else topMap.push([\n            item\n        ]);\n    }\n    if (antiOverlap) switch(target.mode){\n        case 0:\n            {\n                const result = topMap.find((list)=>{\n                    return list.every((danmu)=>{\n                        if (clientWidth < danmu.distance) return false;\n                        if (target.speed < danmu.speed) return true;\n                        const overlapTime = danmu.right / (target.speed - danmu.speed);\n                        if (overlapTime > danmu.time) return true;\n                        return false;\n                    });\n                });\n                return result && result[0] ? result[0].top : undefined;\n            }\n        // 静止弹幕没有重叠问题\n        case 1:\n        case 2:\n            return undefined;\n        default:\n            break;\n    }\n    else {\n        switch(target.mode){\n            case 0:\n                topMap.sort((prev, next)=>{\n                    const nextMinRight = Math.min(...next.map((item)=>item.right));\n                    const prevMinRight = Math.min(...prev.map((item)=>item.right));\n                    return nextMinRight * next.length - prevMinRight * prev.length;\n                });\n                break;\n            case 1:\n            case 2:\n                topMap.sort((prev, next)=>{\n                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));\n                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));\n                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n                });\n                break;\n            default:\n                break;\n        }\n        return topMap[0][0].top;\n    }\n}\nonmessage = (event)=>{\n    const { data } = event;\n    if (!data.id || !data.type) return;\n    const fns = {\n        getDanmuTop\n    };\n    const fn = fns[data.type];\n    const result = fn(data);\n    self.postMessage({\n        result,\n        id: data.id\n    });\n};\n\n},{}]},[\"02up6\"], \"02up6\", \"parcelRequire4dc0\", {})\n\n";
-
-},{}],"3B2wj":[function(require,module,exports,__globalThis) {
+},{}],"2G7iS":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _styleLess = require("bundle-text:./style.less");
-var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
-var _onSvg = require("bundle-text:./img/on.svg");
-var _onSvgDefault = parcelHelpers.interopDefault(_onSvg);
-var _offSvg = require("bundle-text:./img/off.svg");
-var _offSvgDefault = parcelHelpers.interopDefault(_offSvg);
+parcelHelpers.export(exports, "default", ()=>heatmap);
+const lib = {
+    map (value, inMin, inMax, outMin, outMax) {
+        return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    },
+    range (start, end, tick) {
+        const s = Math.round(start / tick) * tick;
+        return Array.from({
+            length: Math.floor((end - start) / tick)
+        }, (v, k)=>{
+            return k * tick + s;
+        });
+    }
+};
+function line(pointA, pointB) {
+    const lengthX = pointB[0] - pointA[0];
+    const lengthY = pointB[1] - pointA[1];
+    return {
+        length: Math.sqrt(lengthX ** 2 + lengthY ** 2),
+        angle: Math.atan2(lengthY, lengthX)
+    };
+}
+function heatmap(art, danmuku, option) {
+    const { query } = art.constructor.utils;
+    art.controls.add({
+        name: 'heatmap',
+        position: 'top',
+        html: '',
+        style: {
+            position: 'absolute',
+            top: '-100px',
+            left: '0px',
+            right: '0px',
+            height: '100px',
+            width: '100%',
+            pointerEvents: 'none'
+        },
+        mounted ($heatmap) {
+            let $start = null;
+            let $stop = null;
+            function update(arg = []) {
+                $start = null;
+                $stop = null;
+                $heatmap.innerHTML = '';
+                if (!art.duration || art.option.isLive) return;
+                const svg = {
+                    w: $heatmap.offsetWidth,
+                    h: $heatmap.offsetHeight
+                };
+                const options = {
+                    xMin: 0,
+                    xMax: svg.w,
+                    yMin: 0,
+                    yMax: 128,
+                    scale: 0.25,
+                    opacity: 0.2,
+                    minHeight: Math.floor(svg.h * 0.05),
+                    sampling: Math.floor(svg.w / 100),
+                    smoothing: 0.2,
+                    flattening: 0.2
+                };
+                if (typeof option === 'object') Object.assign(options, option);
+                let points = [];
+                if (Array.isArray(arg) && arg.length) points = [
+                    ...arg
+                ];
+                else {
+                    const gap = art.duration / svg.w;
+                    for(let x = 0; x <= svg.w; x += options.sampling){
+                        const y = danmuku.queue.filter(({ time })=>time > x * gap && time <= (x + options.sampling) * gap).length;
+                        points.push([
+                            x,
+                            y
+                        ]);
+                    }
+                }
+                if (points.length === 0) return;
+                const lastPoint = points[points.length - 1];
+                const lastX = lastPoint[0];
+                const lastY = lastPoint[1];
+                if (lastX !== svg.w) points.push([
+                    svg.w,
+                    lastY
+                ]);
+                const yPoints = points.map((point)=>point[1]);
+                const yMin = Math.min(...yPoints);
+                const yMax = Math.max(...yPoints);
+                const yMid = (yMin + yMax) / 2;
+                for(let i = 0; i < points.length; i++){
+                    const point = points[i];
+                    const y = point[1];
+                    point[1] = y * (y > yMid ? 1 + options.scale : 1 - options.scale) + options.minHeight;
+                }
+                const controlPoint = (current, previous, next, reverse)=>{
+                    const p = previous || current;
+                    const n = next || current;
+                    const o = line(p, n);
+                    const flat = lib.map(Math.cos(o.angle) * options.flattening, 0, 1, 1, 0);
+                    const angle = o.angle * flat + (reverse ? Math.PI : 0);
+                    const length = o.length * options.smoothing;
+                    const x = current[0] + Math.cos(angle) * length;
+                    const y = current[1] + Math.sin(angle) * length;
+                    return [
+                        x,
+                        y
+                    ];
+                };
+                const bezierCommand = (point, i, a)=>{
+                    const cps = controlPoint(a[i - 1], a[i - 2], point);
+                    const cpe = controlPoint(point, a[i - 1], a[i + 1], true);
+                    const close = i === a.length - 1 ? ' z' : '';
+                    return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point[0]},${point[1]}${close}`;
+                };
+                const pointsPositions = points.map((e)=>{
+                    const x = lib.map(e[0], options.xMin, options.xMax, 0, svg.w);
+                    const y = lib.map(e[1], options.yMin, options.yMax, svg.h, 0);
+                    return [
+                        x,
+                        y
+                    ];
+                });
+                const pathD = pointsPositions.reduce((acc, e, i, a)=>i === 0 ? `M ${a[a.length - 1][0]},${svg.h} L ${e[0]},${svg.h} L ${e[0]},${e[1]}` : `${acc} ${bezierCommand(e, i, a)}`, '');
+                $heatmap.innerHTML = `
+                    <svg viewBox="0 0 ${svg.w} ${svg.h}">
+                        <defs>
+                            <linearGradient id="heatmap-solids" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" />
+                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" id="heatmap-start" />
+                                <stop offset="0%" style="stop-color:var(--art-progress-color);stop-opacity:1" id="heatmap-stop" />
+                                <stop offset="100%" style="stop-color:var(--art-progress-color);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#heatmap-solids)" d="${pathD}"></path>
+                    </svg>
+                `;
+                $start = query('#heatmap-start', $heatmap);
+                $stop = query('#heatmap-stop', $heatmap);
+                $start.setAttribute('offset', `${art.played * 100}%`);
+                $stop.setAttribute('offset', `${art.played * 100}%`);
+            }
+            art.on('video:timeupdate', ()=>{
+                if ($start && $stop) {
+                    $start.setAttribute('offset', `${art.played * 100}%`);
+                    $stop.setAttribute('offset', `${art.played * 100}%`);
+                }
+            });
+            art.on('setBar', (type, percentage)=>{
+                if ($start && $stop && type === 'played') {
+                    $start.setAttribute('offset', `${percentage * 100}%`);
+                    $stop.setAttribute('offset', `${percentage * 100}%`);
+                }
+            });
+            art.on('ready', ()=>update());
+            art.on('resize', ()=>update());
+            art.on('artplayerPluginDanmuku:loaded', ()=>update());
+            art.on('artplayerPluginDanmuku:points', (points)=>update(points));
+        }
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"3B2wj":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _checkOffSvg = require("bundle-text:./img/check_off.svg");
+var _checkOffSvgDefault = parcelHelpers.interopDefault(_checkOffSvg);
+var _checkOnSvg = require("bundle-text:./img/check_on.svg");
+var _checkOnSvgDefault = parcelHelpers.interopDefault(_checkOnSvg);
 var _configSvg = require("bundle-text:./img/config.svg");
 var _configSvgDefault = parcelHelpers.interopDefault(_configSvg);
-var _styleSvg = require("bundle-text:./img/style.svg");
-var _styleSvgDefault = parcelHelpers.interopDefault(_styleSvg);
 var _mode0OffSvg = require("bundle-text:./img/mode_0_off.svg");
 var _mode0OffSvgDefault = parcelHelpers.interopDefault(_mode0OffSvg);
 var _mode0OnSvg = require("bundle-text:./img/mode_0_on.svg");
@@ -947,10 +1132,14 @@ var _mode2OffSvg = require("bundle-text:./img/mode_2_off.svg");
 var _mode2OffSvgDefault = parcelHelpers.interopDefault(_mode2OffSvg);
 var _mode2OnSvg = require("bundle-text:./img/mode_2_on.svg");
 var _mode2OnSvgDefault = parcelHelpers.interopDefault(_mode2OnSvg);
-var _checkOnSvg = require("bundle-text:./img/check_on.svg");
-var _checkOnSvgDefault = parcelHelpers.interopDefault(_checkOnSvg);
-var _checkOffSvg = require("bundle-text:./img/check_off.svg");
-var _checkOffSvgDefault = parcelHelpers.interopDefault(_checkOffSvg);
+var _offSvg = require("bundle-text:./img/off.svg");
+var _offSvgDefault = parcelHelpers.interopDefault(_offSvg);
+var _onSvg = require("bundle-text:./img/on.svg");
+var _onSvgDefault = parcelHelpers.interopDefault(_onSvg);
+var _styleSvg = require("bundle-text:./img/style.svg");
+var _styleSvgDefault = parcelHelpers.interopDefault(_styleSvg);
+var _styleLess = require("bundle-text:./style.less");
+var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 class Setting {
     constructor(art, danmuku){
         this.art = art;
@@ -1241,7 +1430,7 @@ class Setting {
         const children = [
             ...el.children
         ];
-        if (children.some((item)=>item === target)) return;
+        if (children.includes(target)) return;
         append(el, target);
     }
     setData(key, value) {
@@ -1324,7 +1513,7 @@ class Setting {
             if (!$mode) return;
             const mode = Number($mode.dataset.mode);
             this.danmuku.config({
-                mode: mode
+                mode
             });
             this.reset();
         });
@@ -1489,7 +1678,7 @@ class Setting {
         if (this.isLock) return;
         if (this.emitting) return;
         const danmu = {
-            text: text,
+            text,
             mode: this.option.mode,
             color: this.option.color,
             time: this.art.currentTime
@@ -1504,8 +1693,8 @@ class Setting {
             this.danmuku.emit(danmu);
             $input.value = '';
             this.lock();
-        // eslint-disable-next-line no-unused-vars
         } catch (error) {
+            console.error('Error emitting danmuku:', error);
             this.emitting = false;
         }
     }
@@ -1514,14 +1703,14 @@ class Setting {
         const { $send } = this.template;
         this.isLock = true;
         let time = this.option.lockTime;
-        $send.innerText = time;
+        $send.textContent = time;
         addClass($send, 'apd-lock');
         const loop = ()=>{
             this.timer = setTimeout(()=>{
                 if (time === 0) this.unlock();
                 else {
                     time -= 1;
-                    $send.innerText = time;
+                    $send.textContent = time;
                     loop();
                 }
             }, 1000);
@@ -1533,7 +1722,7 @@ class Setting {
         const { $send } = this.template;
         clearTimeout(this.timer);
         this.isLock = false;
-        $send.innerText = "\u53D1\u9001";
+        $send.textContent = "\u53D1\u9001";
         removeClass($send, 'apd-lock');
     }
     resize() {
@@ -1592,208 +1781,45 @@ if (typeof document !== 'undefined') {
     $style.textContent = (0, _styleLessDefault.default);
 }
 
-},{"bundle-text:./style.less":"bh9OX","bundle-text:./img/on.svg":"8mY0A","bundle-text:./img/off.svg":"iqU8K","bundle-text:./img/config.svg":"Zd1dH","bundle-text:./img/style.svg":"jPuJr","bundle-text:./img/mode_0_off.svg":"clMb3","bundle-text:./img/mode_0_on.svg":"6jPwG","bundle-text:./img/mode_1_off.svg":"gAeHz","bundle-text:./img/mode_1_on.svg":"fK0pY","bundle-text:./img/mode_2_off.svg":"67tbB","bundle-text:./img/mode_2_on.svg":"9zaZq","bundle-text:./img/check_on.svg":"dHpvg","bundle-text:./img/check_off.svg":"iZKOG","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"bh9OX":[function(require,module,exports,__globalThis) {
-module.exports = ".artplayer-plugin-danmuku {\n  z-index: 99;\n  color: #fff;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  height: 32px;\n  font-size: 12px;\n  font-weight: 300;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-icon {\n  cursor: pointer;\n  opacity: .75;\n  fill: #fff;\n  transition: all .2s;\n}\n\n.artplayer-plugin-danmuku .apd-icon:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  opacity: 0;\n  pointer-events: none;\n  width: 320px;\n  padding: 10px;\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  opacity: 100;\n  pointer-events: all;\n}\n\n.artplayer-plugin-danmuku .apd-config-mode, .artplayer-plugin-danmuku .apd-config-slider, .artplayer-plugin-danmuku .apd-config-other, .artplayer-plugin-danmuku .apd-style-mode {\n  margin-bottom: 15px;\n}\n\n.artplayer-plugin-danmuku .apd-modes {\n  align-items: center;\n  gap: 20px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode {\n  cursor: pointer;\n  text-align: center;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode:hover {\n  color: #00a1d6;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider {\n  align-items: center;\n  gap: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider .apd-value {\n  text-align: right;\n  width: 32px;\n}\n\n.artplayer-plugin-danmuku .apd-slider {\n  cursor: pointer;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-line {\n  background-color: #ffffff40;\n  border-radius: 3px;\n  width: 100%;\n  height: 2px;\n  position: relative;\n  overflow: hidden;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points {\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point {\n  background-color: #ffffff80;\n  border-radius: 50%;\n  width: 2px;\n  height: 2px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-progress {\n  background-color: #00a1d6;\n  width: 0%;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-dot {\n  background-color: #00a1d6;\n  border-radius: 50%;\n  width: 12px;\n  height: 12px;\n  position: absolute;\n  left: 0%;\n  transform: translateX(-6px);\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps {\n  color: #777;\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% + 32px);\n  display: flex;\n  position: absolute;\n  bottom: -12px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step {\n  text-align: center;\n  flex-shrink: 0;\n  width: 36px;\n  scale: .95;\n}\n\n.artplayer-plugin-danmuku .apd-config-other {\n  align-items: center;\n  gap: 20px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-check-off, .artplayer-plugin-danmuku .apd-config-other .apd-check-on {\n  width: 16px;\n  height: 16px;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other {\n  cursor: pointer;\n  align-items: center;\n  gap: 2px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other:hover {\n  color: #00a1d6;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  background-color: #ffffff40;\n  border-radius: 5px;\n  flex: 1;\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  opacity: 0;\n  pointer-events: none;\n  width: 200px;\n  padding: 10px;\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  opacity: 100;\n  pointer-events: all;\n}\n\n.artplayer-plugin-danmuku .apd-colors {\n  flex-wrap: wrap;\n  gap: 8px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-colors .apd-color {\n  cursor: pointer;\n  border-radius: 2px;\n  width: 16px;\n  height: 16px;\n}\n\n.artplayer-plugin-danmuku .apd-colors .apd-color.apd-active {\n  border: 1px solid #000;\n  box-shadow: 0 0 0 1px #fff;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  color: #fff;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  flex: 1;\n  width: auto;\n  min-width: 0;\n  height: 100%;\n  line-height: 1;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  cursor: pointer;\n  width: 60px;\n  height: 100%;\n  text-shadow: none;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-send.apd-lock {\n  cursor: not-allowed;\n  color: #666;\n  background-color: #e7e7e7;\n}\n\n.art-controls-center .apd-emitter {\n  flex: none;\n  width: 260px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  gap: 16px;\n  height: 38px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-config-icon, .art-fullscreen-web .artplayer-plugin-danmuku .apd-config-icon, .art-fullscreen .artplayer-plugin-danmuku .apd-toggle-off, .art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-off, .art-fullscreen .artplayer-plugin-danmuku .apd-toggle-on, .art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-on {\n  width: 28px;\n  height: 28px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-emitter, .art-fullscreen-web .artplayer-plugin-danmuku .apd-emitter {\n  flex: none;\n  width: 400px;\n}\n\n.art-video-player > .artplayer-plugin-danmuku {\n  padding: 0 10px;\n  position: absolute;\n  bottom: -40px;\n  left: 0;\n  right: 0;\n}\n\n.art-video-player:has( > .artplayer-plugin-danmuku) {\n  margin-bottom: 40px;\n}\n\n[data-danmuku-emitter=\"false\"] .apd-emitter {\n  display: none !important;\n}\n\n[data-danmuku-emitter=\"false\"] .art-controls-center .artplayer-plugin-danmuku {\n  justify-content: flex-end;\n  gap: 18px;\n}\n\n[data-danmuku-emitter=\"false\"].art-fullscreen .art-controls-center .artplayer-plugin-danmuku, [data-danmuku-emitter=\"false\"].art-fullscreen-web .art-controls-center .artplayer-plugin-danmuku {\n  gap: 24px;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-icon {\n  fill: #333;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-emitter {\n  background-color: #f1f2f3;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-input {\n  color: #000;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #0000004d;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-off {\n  display: block;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-on, [data-danmuku-visible=\"true\"] .apd-toggle-off {\n  display: none;\n}\n\n[data-danmuku-visible=\"true\"] .apd-toggle-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-off, [data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-off, [data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-off, [data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-config-mode .apd-mode-0-off {\n  display: block;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-config-mode .apd-mode-0-on {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .art-danmuku [data-mode=\"0\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-config-mode .apd-mode-0-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-config-mode .apd-mode-0-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"0\"] .apd-style-mode [data-mode=\"0\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"0\"] .apd-style-mode [data-mode=\"0\"] path {\n  fill: #00a1d6;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-config-mode .apd-mode-1-off {\n  display: block;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-config-mode .apd-mode-1-on {\n  display: none;\n}\n\n[data-danmuku-mode1=\"false\"] .art-danmuku [data-mode=\"1\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-config-mode .apd-mode-1-off {\n  display: none;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-config-mode .apd-mode-1-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"1\"] .apd-style-mode [data-mode=\"1\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"1\"] .apd-style-mode [data-mode=\"1\"] path {\n  fill: #00a1d6;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-config-mode .apd-mode-2-off {\n  display: block;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-config-mode .apd-mode-2-on {\n  display: none;\n}\n\n[data-danmuku-mode2=\"false\"] .art-danmuku [data-mode=\"2\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-config-mode .apd-mode-2-off {\n  display: none;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-config-mode .apd-mode-2-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"2\"] .apd-style-mode [data-mode=\"2\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"2\"] .apd-style-mode [data-mode=\"2\"] path {\n  fill: #00a1d6;\n}\n";
-
-},{}],"8mY0A":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-toggle-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z\" clip-rule=\"evenodd\"></path><path fill=\"#00AEEC\" fill-rule=\"evenodd\" d=\"M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z\" clip-rule=\"evenodd\"></path></svg>";
-
-},{}],"iqU8K":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-toggle-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"m8.085 4.891-.999-1.499a1.008 1.008 0 0 1 1.679-1.118l1.709 2.566c.54-.008 1.045-.012 1.515-.012h.13c.345 0 .707.003 1.088.007l1.862-2.59a1.008 1.008 0 0 1 1.637 1.177l-1.049 1.46c.788.02 1.631.046 2.53.078 1.958.069 3.468 1.6 3.74 3.507.088.613.13 2.158.16 3.276l.001.027c.01.333.017.63.025.856a.987.987 0 0 1-1.974.069c-.008-.23-.016-.539-.025-.881v-.002c-.028-1.103-.066-2.541-.142-3.065-.143-1.004-.895-1.78-1.854-1.813-2.444-.087-4.466-.13-6.064-.131-1.598 0-3.619.044-6.063.13a2.037 2.037 0 0 0-1.945 1.748c-.15 1.04-.225 2.341-.225 3.904 0 1.874.11 3.474.325 4.798.154.949.95 1.66 1.91 1.708a97.58 97.58 0 0 0 5.416.139.988.988 0 0 1 0 1.975c-2.196 0-3.61-.047-5.513-.141A4.012 4.012 0 0 1 2.197 17.7c-.236-1.446-.351-3.151-.351-5.116 0-1.64.08-3.035.245-4.184A4.013 4.013 0 0 1 5.92 4.96c.761-.027 1.483-.05 2.164-.069Zm4.436 4.707h-1.32v4.63h2.222v.848h-2.618v1.078h2.431a5.01 5.01 0 0 1 3.575-3.115V9.598h-1.276a8.59 8.59 0 0 0 .748-1.42l-1.089-.384a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.289h-3.2v.979h2.067v1.43H7.483l-.308 3.454h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.004c.285.02.551.04.818.04 1.001-.066 1.562-.418 1.694-1.056.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858H15.8Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902H15.8v.902h-1.254Zm3.517 10.594a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-.002-1.502a2.5 2.5 0 0 1-2.217-3.657l3.326 3.398a2.49 2.49 0 0 1-1.109.259Zm2.5-2.5c0 .42-.103.815-.286 1.162l-3.328-3.401a2.5 2.5 0 0 1 3.614 2.239Z\" clip-rule=\"evenodd\"></path></svg>";
-
-},{}],"Zd1dH":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-config-icon\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"m15.645 4.881 1.06-1.473a.998.998 0 1 0-1.622-1.166L13.22 4.835a110.67 110.67 0 0 0-1.1-.007h-.131c-.47 0-.975.004-1.515.012L8.783 2.3A.998.998 0 0 0 7.12 3.408l.988 1.484c-.688.019-1.418.042-2.188.069a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363c1.903.094 3.317.141 5.513.141a.988.988 0 0 0 0-1.975 97.58 97.58 0 0 1-5.416-.139 2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.005.183.01.07.014-.038.004-.096.008-.189.011-.081a.987.987 0 1 0 1.974-.069c-.004-.105-.007-.009-.011.09-.002.056-.004.112-.007.135l-.002.01a.574.574 0 0 1-.005-.091v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.905-.032-1.752-.058-2.543-.079Zm-3.113 4.703h-1.307v4.643h2.2v.04l.651-1.234c.113-.215.281-.389.482-.509v-.11h.235c.137-.049.283-.074.433-.074h1.553V9.584h-1.264a8.5 8.5 0 0 0 .741-1.405l-1.078-.381c-.24.631-.501 1.23-.806 1.786h-1.503l.686-.305c-.228-.501-.5-.959-.806-1.394l-1.034.348c.294.392.566.839.817 1.35Zm-1.7 5.502h2.16l-.564 1.068h-1.595v-1.068Zm-2.498-1.863.152-1.561h1.96V8.289H7.277v.969h2.048v1.435h-1.84l-.306 3.51h2.254c0 1.155-.043 1.906-.12 2.255-.076.348-.38.523-.925.523-.305 0-.61-.022-.893-.055l.294 1.056.061.005c.282.02.546.039.81.039.991-.065 1.547-.414 1.677-1.046.11-.631.175-1.883.175-3.757H8.334Zm5.09-.8v.85h-1.188v-.85h1.187Zm-1.188-.955h1.187v-.893h-1.187v.893Zm2.322.007v-.893h1.241v.893h-1.241Zm.528 2.757a1.26 1.26 0 0 1 1.087-.627l4.003-.009a1.26 1.26 0 0 1 1.094.63l1.721 2.982c.226.39.225.872-.001 1.263l-1.743 3a1.26 1.26 0 0 1-1.086.628l-4.003.009a1.26 1.26 0 0 1-1.094-.63l-1.722-2.982a1.26 1.26 0 0 1 .002-1.263l1.742-3Zm1.967.858a1.26 1.26 0 0 0-1.08.614l-.903 1.513a1.26 1.26 0 0 0-.002 1.289l.885 1.492c.227.384.64.62 1.086.618l2.192-.005a1.26 1.26 0 0 0 1.08-.615l.904-1.518a1.26 1.26 0 0 0 .001-1.288l-.884-1.489a1.26 1.26 0 0 0-1.086-.616l-2.193.005Zm2.517 2.76a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0Z\" clip-rule=\"evenodd\"></path></svg>";
-
-},{}],"jPuJr":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-style-icon\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 22 22\" viewBox=\"0 0 22 22\" width=\"36\" height=\"24\"><path d=\"M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98 12.87 11H9.13L11 5.98z\"></path></svg>";
-
-},{}],"clMb3":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-mode-0-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm2-1a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1z\" fill=\"#00AEEC\"></path><path d=\"M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z\" fill=\"#00AEEC\"></path></svg>";
-
-},{}],"6jPwG":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-mode-0-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2z\" fill=\"#FFFFFF\"></path></svg>";
-
-},{}],"gAeHz":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-mode-1-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zm-4-8h2v2h-2V7zM9 9H7V7h2v2zm4 0h-2V7h2v2zm2-2h2v2h-2V7z\" fill=\"#00AEEC\"></path><path d=\"M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z\" fill=\"#00AEEC\"></path></svg>";
-
-},{}],"fK0pY":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-mode-1-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 9H7V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2z\" fill=\"#FFFFFF\"></path></svg>";
-
-},{}],"67tbB":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-mode-2-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM9 21H7v-2h2v2zm4 0h-2v-2h2v2z\" fill=\"#00AEEC\"></path><path d=\"M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z\" fill=\"#00AEEC\"></path></svg>";
-
-},{}],"9zaZq":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-mode-2-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 21H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z\" fill=\"#FFFFFF\"></path></svg>";
+},{"bundle-text:./img/check_off.svg":"iZKOG","bundle-text:./img/check_on.svg":"dHpvg","bundle-text:./img/config.svg":"Zd1dH","bundle-text:./img/mode_0_off.svg":"clMb3","bundle-text:./img/mode_0_on.svg":"6jPwG","bundle-text:./img/mode_1_off.svg":"gAeHz","bundle-text:./img/mode_1_on.svg":"fK0pY","bundle-text:./img/mode_2_off.svg":"67tbB","bundle-text:./img/mode_2_on.svg":"9zaZq","bundle-text:./img/off.svg":"iqU8K","bundle-text:./img/on.svg":"8mY0A","bundle-text:./img/style.svg":"jPuJr","bundle-text:./style.less":"bh9OX","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"iZKOG":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-check-off\" data-pointer=\"none\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\"><path d=\"M8 6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H8zm0-2h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z\" fill=\"#FFFFFF\"/></svg>";
 
 },{}],"dHpvg":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-check-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\"><path d=\"m13 18.25-1.8-1.8c-.6-.6-1.65-.6-2.25 0s-.6 1.5 0 2.25l2.85 2.85c.318.318.762.468 1.2.448.438.02.882-.13 1.2-.448l8.85-8.85c.6-.6.6-1.65 0-2.25s-1.65-.6-2.25 0l-7.8 7.8zM8 4h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z\" fill=\"#00AEEC\"></path></svg>";
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-check-on\" data-pointer=\"none\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\"><path d=\"m13 18.25-1.8-1.8c-.6-.6-1.65-.6-2.25 0s-.6 1.5 0 2.25l2.85 2.85c.318.318.762.468 1.2.448.438.02.882-.13 1.2-.448l8.85-8.85c.6-.6.6-1.65 0-2.25s-1.65-.6-2.25 0l-7.8 7.8zM8 4h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z\" fill=\"#00AEEC\"/></svg>";
 
-},{}],"iZKOG":[function(require,module,exports,__globalThis) {
-module.exports = "<svg class=\"apd-icon apd-check-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\"><path d=\"M8 6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H8zm0-2h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z\" fill=\"#FFFFFF\"></path></svg>";
+},{}],"Zd1dH":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-config-icon\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"m15.645 4.881 1.06-1.473a.998.998 0 1 0-1.622-1.166L13.22 4.835a110.67 110.67 0 0 0-1.1-.007h-.131c-.47 0-.975.004-1.515.012L8.783 2.3A.998.998 0 0 0 7.12 3.408l.988 1.484c-.688.019-1.418.042-2.188.069a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363c1.903.094 3.317.141 5.513.141a.988.988 0 0 0 0-1.975 97.58 97.58 0 0 1-5.416-.139 2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.005.183.01.07.014-.038.004-.096.008-.189.011-.081a.987.987 0 1 0 1.974-.069c-.004-.105-.007-.009-.011.09-.002.056-.004.112-.007.135l-.002.01a.574.574 0 0 1-.005-.091v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.905-.032-1.752-.058-2.543-.079Zm-3.113 4.703h-1.307v4.643h2.2v.04l.651-1.234c.113-.215.281-.389.482-.509v-.11h.235c.137-.049.283-.074.433-.074h1.553V9.584h-1.264a8.5 8.5 0 0 0 .741-1.405l-1.078-.381c-.24.631-.501 1.23-.806 1.786h-1.503l.686-.305c-.228-.501-.5-.959-.806-1.394l-1.034.348c.294.392.566.839.817 1.35Zm-1.7 5.502h2.16l-.564 1.068h-1.595v-1.068Zm-2.498-1.863.152-1.561h1.96V8.289H7.277v.969h2.048v1.435h-1.84l-.306 3.51h2.254c0 1.155-.043 1.906-.12 2.255-.076.348-.38.523-.925.523-.305 0-.61-.022-.893-.055l.294 1.056.061.005c.282.02.546.039.81.039.991-.065 1.547-.414 1.677-1.046.11-.631.175-1.883.175-3.757H8.334Zm5.09-.8v.85h-1.188v-.85h1.187Zm-1.188-.955h1.187v-.893h-1.187v.893Zm2.322.007v-.893h1.241v.893h-1.241Zm.528 2.757a1.26 1.26 0 0 1 1.087-.627l4.003-.009a1.26 1.26 0 0 1 1.094.63l1.721 2.982c.226.39.225.872-.001 1.263l-1.743 3a1.26 1.26 0 0 1-1.086.628l-4.003.009a1.26 1.26 0 0 1-1.094-.63l-1.722-2.982a1.26 1.26 0 0 1 .002-1.263l1.742-3Zm1.967.858a1.26 1.26 0 0 0-1.08.614l-.903 1.513a1.26 1.26 0 0 0-.002 1.289l.885 1.492c.227.384.64.62 1.086.618l2.192-.005a1.26 1.26 0 0 0 1.08-.615l.904-1.518a1.26 1.26 0 0 0 .001-1.288l-.884-1.489a1.26 1.26 0 0 0-1.086-.616l-2.193.005Zm2.517 2.76a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0Z\" clip-rule=\"evenodd\"/></svg>";
 
-},{}],"2G7iS":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>heatmap);
-const lib = {
-    map (value, inMin, inMax, outMin, outMax) {
-        return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-    },
-    range (start, end, tick) {
-        const s = Math.round(start / tick) * tick;
-        return Array.from({
-            length: Math.floor((end - start) / tick)
-        }, (v, k)=>{
-            return k * tick + s;
-        });
-    }
-};
-const line = (pointA, pointB)=>{
-    const lengthX = pointB[0] - pointA[0];
-    const lengthY = pointB[1] - pointA[1];
-    return {
-        length: Math.sqrt(Math.pow(lengthX, 2) + Math.pow(lengthY, 2)),
-        angle: Math.atan2(lengthY, lengthX)
-    };
-};
-function heatmap(art, danmuku, option) {
-    const { query } = art.constructor.utils;
-    art.controls.add({
-        name: 'heatmap',
-        position: 'top',
-        html: '',
-        style: {
-            position: 'absolute',
-            top: '-100px',
-            left: '0px',
-            right: '0px',
-            height: '100px',
-            width: '100%',
-            pointerEvents: 'none'
-        },
-        mounted ($heatmap) {
-            let $start = null;
-            let $stop = null;
-            function update(arg = []) {
-                $start = null;
-                $stop = null;
-                $heatmap.innerHTML = '';
-                if (!art.duration || art.option.isLive) return;
-                const svg = {
-                    w: $heatmap.offsetWidth,
-                    h: $heatmap.offsetHeight
-                };
-                const options = {
-                    xMin: 0,
-                    xMax: svg.w,
-                    yMin: 0,
-                    yMax: 128,
-                    scale: 0.25,
-                    opacity: 0.2,
-                    minHeight: Math.floor(svg.h * 0.05),
-                    sampling: Math.floor(svg.w / 100),
-                    smoothing: 0.2,
-                    flattening: 0.2
-                };
-                if (typeof option === 'object') Object.assign(options, option);
-                let points = [];
-                if (Array.isArray(arg) && arg.length) points = [
-                    ...arg
-                ];
-                else {
-                    const gap = art.duration / svg.w;
-                    for(let x = 0; x <= svg.w; x += options.sampling){
-                        const y = danmuku.queue.filter(({ time })=>time > x * gap && time <= (x + options.sampling) * gap).length;
-                        points.push([
-                            x,
-                            y
-                        ]);
-                    }
-                }
-                if (points.length === 0) return;
-                const lastPoint = points[points.length - 1];
-                const lastX = lastPoint[0];
-                const lastY = lastPoint[1];
-                if (lastX !== svg.w) points.push([
-                    svg.w,
-                    lastY
-                ]);
-                const yPoints = points.map((point)=>point[1]);
-                const yMin = Math.min(...yPoints);
-                const yMax = Math.max(...yPoints);
-                const yMid = (yMin + yMax) / 2;
-                for(let i = 0; i < points.length; i++){
-                    const point = points[i];
-                    const y = point[1];
-                    point[1] = y * (y > yMid ? 1 + options.scale : 1 - options.scale) + options.minHeight;
-                }
-                const controlPoint = (current, previous, next, reverse)=>{
-                    const p = previous || current;
-                    const n = next || current;
-                    const o = line(p, n);
-                    const flat = lib.map(Math.cos(o.angle) * options.flattening, 0, 1, 1, 0);
-                    const angle = o.angle * flat + (reverse ? Math.PI : 0);
-                    const length = o.length * options.smoothing;
-                    const x = current[0] + Math.cos(angle) * length;
-                    const y = current[1] + Math.sin(angle) * length;
-                    return [
-                        x,
-                        y
-                    ];
-                };
-                const bezierCommand = (point, i, a)=>{
-                    const cps = controlPoint(a[i - 1], a[i - 2], point);
-                    const cpe = controlPoint(point, a[i - 1], a[i + 1], true);
-                    const close = i === a.length - 1 ? ' z' : '';
-                    return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point[0]},${point[1]}${close}`;
-                };
-                const pointsPositions = points.map((e)=>{
-                    const x = lib.map(e[0], options.xMin, options.xMax, 0, svg.w);
-                    const y = lib.map(e[1], options.yMin, options.yMax, svg.h, 0);
-                    return [
-                        x,
-                        y
-                    ];
-                });
-                const pathD = pointsPositions.reduce((acc, e, i, a)=>i === 0 ? `M ${a[a.length - 1][0]},${svg.h} L ${e[0]},${svg.h} L ${e[0]},${e[1]}` : `${acc} ${bezierCommand(e, i, a)}`, '');
-                $heatmap.innerHTML = `
-                    <svg viewBox="0 0 ${svg.w} ${svg.h}">
-                        <defs>
-                            <linearGradient id="heatmap-solids" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" />
-                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" id="heatmap-start" />
-                                <stop offset="0%" style="stop-color:var(--art-progress-color);stop-opacity:1" id="heatmap-stop" />
-                                <stop offset="100%" style="stop-color:var(--art-progress-color);stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <path fill="url(#heatmap-solids)" d="${pathD}"></path>
-                    </svg>
-                `;
-                $start = query('#heatmap-start', $heatmap);
-                $stop = query('#heatmap-stop', $heatmap);
-                $start.setAttribute('offset', `${art.played * 100}%`);
-                $stop.setAttribute('offset', `${art.played * 100}%`);
-            }
-            art.on('video:timeupdate', ()=>{
-                if ($start && $stop) {
-                    $start.setAttribute('offset', `${art.played * 100}%`);
-                    $stop.setAttribute('offset', `${art.played * 100}%`);
-                }
-            });
-            art.on('setBar', (type, percentage)=>{
-                if ($start && $stop && type === 'played') {
-                    $start.setAttribute('offset', `${percentage * 100}%`);
-                    $stop.setAttribute('offset', `${percentage * 100}%`);
-                }
-            });
-            art.on('ready', ()=>update());
-            art.on('resize', ()=>update());
-            art.on('artplayerPluginDanmuku:loaded', ()=>update());
-            art.on('artplayerPluginDanmuku:points', (points)=>update(points));
-        }
-    });
-}
+},{}],"clMb3":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-mode-0-off\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm2-1a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1z\" fill=\"#00AEEC\"/><path d=\"M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z\" fill=\"#00AEEC\"/></svg>";
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}]},["hfC30"], "hfC30", "parcelRequire4dc0", {})
+},{}],"6jPwG":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-mode-0-on\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2z\" fill=\"#FFFFFF\"/></svg>";
+
+},{}],"gAeHz":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-mode-1-off\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zm-4-8h2v2h-2V7zM9 9H7V7h2v2zm4 0h-2V7h2v2zm2-2h2v2h-2V7z\" fill=\"#00AEEC\"/><path d=\"M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z\" fill=\"#00AEEC\"/></svg>";
+
+},{}],"fK0pY":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-mode-1-on\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 9H7V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2z\" fill=\"#FFFFFF\"/></svg>";
+
+},{}],"67tbB":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-mode-2-off\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM9 21H7v-2h2v2zm4 0h-2v-2h2v2z\" fill=\"#00AEEC\"/><path d=\"M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z\" fill=\"#00AEEC\"/></svg>";
+
+},{}],"9zaZq":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-mode-2-on\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 21H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z\" fill=\"#FFFFFF\"/></svg>";
+
+},{}],"iqU8K":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-toggle-off\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"m8.085 4.891-.999-1.499a1.008 1.008 0 0 1 1.679-1.118l1.709 2.566c.54-.008 1.045-.012 1.515-.012h.13c.345 0 .707.003 1.088.007l1.862-2.59a1.008 1.008 0 0 1 1.637 1.177l-1.049 1.46c.788.02 1.631.046 2.53.078 1.958.069 3.468 1.6 3.74 3.507.088.613.13 2.158.16 3.276l.001.027c.01.333.017.63.025.856a.987.987 0 0 1-1.974.069c-.008-.23-.016-.539-.025-.881v-.002c-.028-1.103-.066-2.541-.142-3.065-.143-1.004-.895-1.78-1.854-1.813-2.444-.087-4.466-.13-6.064-.131-1.598 0-3.619.044-6.063.13a2.037 2.037 0 0 0-1.945 1.748c-.15 1.04-.225 2.341-.225 3.904 0 1.874.11 3.474.325 4.798.154.949.95 1.66 1.91 1.708a97.58 97.58 0 0 0 5.416.139.988.988 0 0 1 0 1.975c-2.196 0-3.61-.047-5.513-.141A4.012 4.012 0 0 1 2.197 17.7c-.236-1.446-.351-3.151-.351-5.116 0-1.64.08-3.035.245-4.184A4.013 4.013 0 0 1 5.92 4.96c.761-.027 1.483-.05 2.164-.069Zm4.436 4.707h-1.32v4.63h2.222v.848h-2.618v1.078h2.431a5.01 5.01 0 0 1 3.575-3.115V9.598h-1.276a8.59 8.59 0 0 0 .748-1.42l-1.089-.384a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.289h-3.2v.979h2.067v1.43H7.483l-.308 3.454h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.004c.285.02.551.04.818.04 1.001-.066 1.562-.418 1.694-1.056.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858H15.8Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902H15.8v.902h-1.254Zm3.517 10.594a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-.002-1.502a2.5 2.5 0 0 1-2.217-3.657l3.326 3.398a2.49 2.49 0 0 1-1.109.259Zm2.5-2.5c0 .42-.103.815-.286 1.162l-3.328-3.401a2.5 2.5 0 0 1 3.614 2.239Z\" clip-rule=\"evenodd\"/></svg>";
+
+},{}],"8mY0A":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-toggle-on\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z\" clip-rule=\"evenodd\"/><path fill=\"#00AEEC\" fill-rule=\"evenodd\" d=\"M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z\" clip-rule=\"evenodd\"/></svg>";
+
+},{}],"jPuJr":[function(require,module,exports,__globalThis) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" class=\"apd-icon apd-style-icon\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 22 22\" viewBox=\"0 0 22 22\" width=\"36\" height=\"24\"><path d=\"M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98 12.87 11H9.13L11 5.98z\"/></svg>";
+
+},{}],"bh9OX":[function(require,module,exports,__globalThis) {
+module.exports = ".artplayer-plugin-danmuku {\n  z-index: 99;\n  color: #fff;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  height: 32px;\n  font-size: 12px;\n  font-weight: 300;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-icon {\n  cursor: pointer;\n  opacity: .75;\n  fill: #fff;\n  transition: all .2s;\n}\n\n.artplayer-plugin-danmuku .apd-icon:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  opacity: 0;\n  pointer-events: none;\n  width: 320px;\n  padding: 10px;\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  opacity: 100;\n  pointer-events: all;\n}\n\n.artplayer-plugin-danmuku .apd-config-mode, .artplayer-plugin-danmuku .apd-config-slider, .artplayer-plugin-danmuku .apd-config-other, .artplayer-plugin-danmuku .apd-style-mode {\n  margin-bottom: 15px;\n}\n\n.artplayer-plugin-danmuku .apd-modes {\n  align-items: center;\n  gap: 20px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode {\n  cursor: pointer;\n  text-align: center;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode:hover {\n  color: #00a1d6;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider {\n  align-items: center;\n  gap: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider .apd-value {\n  text-align: right;\n  width: 32px;\n}\n\n.artplayer-plugin-danmuku .apd-slider {\n  cursor: pointer;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-line {\n  background-color: #ffffff40;\n  border-radius: 3px;\n  width: 100%;\n  height: 2px;\n  position: relative;\n  overflow: hidden;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points {\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point {\n  background-color: #ffffff80;\n  border-radius: 50%;\n  width: 2px;\n  height: 2px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-progress {\n  background-color: #00a1d6;\n  width: 0%;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-dot {\n  background-color: #00a1d6;\n  border-radius: 50%;\n  width: 12px;\n  height: 12px;\n  position: absolute;\n  left: 0%;\n  transform: translateX(-6px);\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps {\n  color: #777;\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% + 32px);\n  display: flex;\n  position: absolute;\n  bottom: -12px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step {\n  text-align: center;\n  flex-shrink: 0;\n  width: 36px;\n  scale: .95;\n}\n\n.artplayer-plugin-danmuku .apd-config-other {\n  align-items: center;\n  gap: 20px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-check-off, .artplayer-plugin-danmuku .apd-config-other .apd-check-on {\n  width: 16px;\n  height: 16px;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other {\n  cursor: pointer;\n  align-items: center;\n  gap: 2px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other:hover {\n  color: #00a1d6;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  background-color: #ffffff40;\n  border-radius: 5px;\n  flex: 1;\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  opacity: 0;\n  pointer-events: none;\n  width: 200px;\n  padding: 10px;\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  opacity: 100;\n  pointer-events: all;\n}\n\n.artplayer-plugin-danmuku .apd-colors {\n  flex-wrap: wrap;\n  gap: 8px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-colors .apd-color {\n  cursor: pointer;\n  border-radius: 2px;\n  width: 16px;\n  height: 16px;\n}\n\n.artplayer-plugin-danmuku .apd-colors .apd-color.apd-active {\n  border: 1px solid #000;\n  box-shadow: 0 0 0 1px #fff;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  color: #fff;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  flex: 1;\n  width: auto;\n  min-width: 0;\n  height: 100%;\n  line-height: 1;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  cursor: pointer;\n  width: 60px;\n  height: 100%;\n  text-shadow: none;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-send.apd-lock {\n  cursor: not-allowed;\n  color: #666;\n  background-color: #e7e7e7;\n}\n\n.art-controls-center .apd-emitter {\n  flex: none;\n  width: 260px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  gap: 16px;\n  height: 38px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-config-icon, .art-fullscreen-web .artplayer-plugin-danmuku .apd-config-icon, .art-fullscreen .artplayer-plugin-danmuku .apd-toggle-off, .art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-off, .art-fullscreen .artplayer-plugin-danmuku .apd-toggle-on, .art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-on {\n  width: 28px;\n  height: 28px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-emitter, .art-fullscreen-web .artplayer-plugin-danmuku .apd-emitter {\n  flex: none;\n  width: 400px;\n}\n\n.art-video-player > .artplayer-plugin-danmuku {\n  padding: 0 10px;\n  position: absolute;\n  bottom: -40px;\n  left: 0;\n  right: 0;\n}\n\n.art-video-player:has( > .artplayer-plugin-danmuku) {\n  margin-bottom: 40px;\n}\n\n[data-danmuku-emitter=\"false\"] .apd-emitter {\n  display: none !important;\n}\n\n[data-danmuku-emitter=\"false\"] .art-controls-center .artplayer-plugin-danmuku {\n  justify-content: flex-end;\n  gap: 18px;\n}\n\n[data-danmuku-emitter=\"false\"].art-fullscreen .art-controls-center .artplayer-plugin-danmuku, [data-danmuku-emitter=\"false\"].art-fullscreen-web .art-controls-center .artplayer-plugin-danmuku {\n  gap: 24px;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-icon {\n  fill: #333;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-emitter {\n  background-color: #f1f2f3;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-input {\n  color: #000;\n}\n\n[data-danmuku-theme=\"light\"] > .artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #0000004d;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-off {\n  display: block;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-on, [data-danmuku-visible=\"true\"] .apd-toggle-off {\n  display: none;\n}\n\n[data-danmuku-visible=\"true\"] .apd-toggle-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-off, [data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-off, [data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-off, [data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-config-mode .apd-mode-0-off {\n  display: block;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-config-mode .apd-mode-0-on {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .art-danmuku [data-mode=\"0\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-config-mode .apd-mode-0-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-config-mode .apd-mode-0-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"0\"] .apd-style-mode [data-mode=\"0\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"0\"] .apd-style-mode [data-mode=\"0\"] path {\n  fill: #00a1d6;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-config-mode .apd-mode-1-off {\n  display: block;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-config-mode .apd-mode-1-on {\n  display: none;\n}\n\n[data-danmuku-mode1=\"false\"] .art-danmuku [data-mode=\"1\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-config-mode .apd-mode-1-off {\n  display: none;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-config-mode .apd-mode-1-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"1\"] .apd-style-mode [data-mode=\"1\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"1\"] .apd-style-mode [data-mode=\"1\"] path {\n  fill: #00a1d6;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-config-mode .apd-mode-2-off {\n  display: block;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-config-mode .apd-mode-2-on {\n  display: none;\n}\n\n[data-danmuku-mode2=\"false\"] .art-danmuku [data-mode=\"2\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-config-mode .apd-mode-2-off {\n  display: none;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-config-mode .apd-mode-2-on {\n  display: block;\n}\n\n[data-danmuku-mode=\"2\"] .apd-style-mode [data-mode=\"2\"] {\n  color: #00a1d6;\n}\n\n[data-danmuku-mode=\"2\"] .apd-style-mode [data-mode=\"2\"] path {\n  fill: #00a1d6;\n}\n";
+
+},{}]},["hfC30"], "hfC30", "parcelRequire4dc0", {})
 
 //# sourceMappingURL=index.js.map

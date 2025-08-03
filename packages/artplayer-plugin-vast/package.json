@@ -1,33 +1,33 @@
 {
-    "license": "MIT",
-    "version": "1.0.1",
-    "name": "artplayer-plugin-vast",
-    "description": "VAST plugin for ArtPlayer",
-    "main": "dist/artplayer-plugin-vast.js",
-    "legacy": "dist/artplayer-plugin-vast.legacy.js",
-    "module": "dist/artplayer-plugin-vast.esm.js",
-    "types": "types/artplayer-plugin-vast.d.ts",
-    "exports": {
-        "import": "./dist/artplayer-plugin-vast.esm.js",
-        "require": "./dist/artplayer-plugin-vast.js",
-        "default": "./dist/artplayer-plugin-vast.js"
-    },
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "browserslist": "last 1 Chrome version",
-    "homepage": "https://artplayer.org",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "keywords": [
-        "html5",
-        "video",
-        "player"
-    ],
-    "dependencies": {
-        "@glomex/vast-ima-player": "^1.21.0"
-    }
+  "name": "artplayer-plugin-vast",
+  "version": "1.0.1",
+  "description": "VAST plugin for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    "import": "./dist/artplayer-plugin-vast.esm.js",
+    "require": "./dist/artplayer-plugin-vast.js",
+    "default": "./dist/artplayer-plugin-vast.js"
+  },
+  "main": "dist/artplayer-plugin-vast.js",
+  "legacy": "dist/artplayer-plugin-vast.legacy.js",
+  "module": "dist/artplayer-plugin-vast.esm.js",
+  "types": "types/artplayer-plugin-vast.d.ts",
+  "browserslist": "last 1 Chrome version",
+  "dependencies": {
+    "@glomex/vast-ima-player": "^1.21.0"
+  }
 }

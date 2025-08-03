@@ -1,30 +1,30 @@
 {
-    "license": "MIT",
-    "version": "1.0.1",
-    "name": "artplayer-plugin-auto-thumbnail",
-    "description": "auto-thumbnail plugin for ArtPlayer",
-    "main": "dist/artplayer-plugin-auto-thumbnail.js",
-    "legacy": "dist/artplayer-plugin-auto-thumbnail.legacy.js",
-    "module": "dist/artplayer-plugin-auto-thumbnail.esm.js",
-    "types": "types/artplayer-plugin-auto-thumbnail.d.ts",
-    "exports": {
-        "import": "./dist/artplayer-plugin-auto-thumbnail.esm.js",
-        "require": "./dist/artplayer-plugin-auto-thumbnail.js",
-        "default": "./dist/artplayer-plugin-auto-thumbnail.js"
-    },
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "browserslist": "last 1 Chrome version",
-    "homepage": "https://artplayer.org",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "keywords": [
-        "html5",
-        "video",
-        "player"
-    ]
+  "name": "artplayer-plugin-auto-thumbnail",
+  "version": "1.0.1",
+  "description": "auto-thumbnail plugin for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    "import": "./dist/artplayer-plugin-auto-thumbnail.esm.js",
+    "require": "./dist/artplayer-plugin-auto-thumbnail.js",
+    "default": "./dist/artplayer-plugin-auto-thumbnail.js"
+  },
+  "main": "dist/artplayer-plugin-auto-thumbnail.js",
+  "legacy": "dist/artplayer-plugin-auto-thumbnail.legacy.js",
+  "module": "dist/artplayer-plugin-auto-thumbnail.esm.js",
+  "types": "types/artplayer-plugin-auto-thumbnail.d.ts",
+  "browserslist": "last 1 Chrome version"
 }

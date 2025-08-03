@@ -1,26 +1,26 @@
-import type Artplayer from 'artplayer';
+import type Artplayer from 'artplayer'
 
-export = artplayerPluginAsr;
+export = artplayerPluginAsr
 export as namespace artplayerPluginAsr;
 
 interface AudioChunk {
-    pcm: ArrayBuffer;
-    wav: ArrayBuffer;
+  pcm: ArrayBuffer
+  wav: ArrayBuffer
 }
 
 interface AsrPluginOption {
-    length?: number;
-    interval?: number;
-    sampleRate?: number;
-    autoHideTimeout?: number;
-    onAudioChunk?: (chunk: AudioChunk) => void | Promise<void>;
+  length?: number
+  interval?: number
+  sampleRate?: number
+  autoHideTimeout?: number
+  onAudioChunk?: (chunk: AudioChunk) => void | Promise<void>
 }
 
 interface AsrPluginInstance {
-    name: 'artplayerPluginAsr';
-    stop: () => void;
-    hide: () => void;
-    append: (subtitle: string) => void;
+  name: 'artplayerPluginAsr'
+  stop: () => void
+  hide: () => void
+  append: (subtitle: string) => void
 }
 
-declare function artplayerPluginAsr(option?: AsrPluginOption): (art: Artplayer) => AsrPluginInstance;
+declare function artplayerPluginAsr(option?: AsrPluginOption): (art: Artplayer) => AsrPluginInstance

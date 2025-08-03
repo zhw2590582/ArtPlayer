@@ -1,49 +1,50 @@
-import { def } from '../utils';
+import { def } from '../utils'
 
 export default function switchMix(art) {
-    function switchUrl(url, currentTime) {
-        return new Promise((resolve, reject) => {
-            if (url === art.url) return;
-            const { playing, aspectRatio, playbackRate } = art;
+  function switchUrl(url, currentTime) {
+    return new Promise((resolve, reject) => {
+      if (url === art.url)
+        return
+      const { playing, aspectRatio, playbackRate } = art
 
-            art.pause();
-            art.url = url;
-            art.notice.show = '';
+      art.pause()
+      art.url = url
+      art.notice.show = ''
 
-            art.once('video:error', reject);
+      art.once('video:error', reject)
 
-            art.once('video:loadedmetadata', () => {
-                art.currentTime = currentTime;
-            });
+      art.once('video:loadedmetadata', () => {
+        art.currentTime = currentTime
+      })
 
-            art.once('video:canplay', async () => {
-                art.playbackRate = playbackRate;
-                art.aspectRatio = aspectRatio;
+      art.once('video:canplay', async () => {
+        art.playbackRate = playbackRate
+        art.aspectRatio = aspectRatio
 
-                if (playing) {
-                    await art.play();
-                }
+        if (playing) {
+          await art.play()
+        }
 
-                art.notice.show = '';
+        art.notice.show = ''
 
-                resolve();
-            });
-        });
-    }
+        resolve()
+      })
+    })
+  }
 
-    def(art, 'switchQuality', {
-        value: (url) => {
-            return switchUrl(url, art.currentTime);
-        },
-    });
+  def(art, 'switchQuality', {
+    value: (url) => {
+      return switchUrl(url, art.currentTime)
+    },
+  })
 
-    def(art, 'switchUrl', {
-        value: (url) => {
-            return switchUrl(url, 0);
-        },
-    });
+  def(art, 'switchUrl', {
+    value: (url) => {
+      return switchUrl(url, 0)
+    },
+  })
 
-    def(art, 'switch', {
-        set: art.switchUrl,
-    });
+  def(art, 'switch', {
+    set: art.switchUrl,
+  })
 }

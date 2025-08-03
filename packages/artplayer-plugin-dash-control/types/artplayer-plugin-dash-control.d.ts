@@ -1,17 +1,17 @@
-import type Artplayer from 'artplayer';
+import type Artplayer from 'artplayer'
 
-export = artplayerPluginDashControl;
+export = artplayerPluginDashControl
 export as namespace artplayerPluginDashControl;
 
-type Config = {
-    control?: boolean;
-    setting?: boolean;
-    title?: string;
-    auto?: string;
-    getName?(level: object): String;
-};
+interface Config {
+  control?: boolean
+  setting?: boolean
+  title?: string
+  auto?: string
+  getName?: (level: object) => string
+}
 
-declare const artplayerPluginDashControl: (option: { quality?: Config; audio?: Config }) => (art: Artplayer) => {
-    name: 'artplayerPluginDashControl';
-    update: () => void;
-};
+declare const artplayerPluginDashControl: (option: { quality?: Config, audio?: Config }) => (art: Artplayer) => {
+  name: 'artplayerPluginDashControl'
+  update: () => void
+}

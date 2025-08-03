@@ -15,27 +15,27 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: install, lint, build, and test
-      run: |
-        yarn
-        yarn lint
-        yarn build:all
-      env:
-        CI: true
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install, lint, build, and test
+        run: |
+          yarn
+          yarn lint
+          yarn build:all
+        env:
+          CI: true
 
-    - name: Deploy to GitHub Pages
-      if: success()
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add -f docs
-        git commit -m 'Deploy to GitHub Pages'
-        git subtree split --prefix docs master -b gh-pages-temp
-        git push origin gh-pages-temp:refs/heads/gh-pages --force
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to GitHub Pages
+        if: success()
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -f docs
+          git commit -m 'Deploy to GitHub Pages'
+          git subtree split --prefix docs master -b gh-pages-temp
+          git push origin gh-pages-temp:refs/heads/gh-pages --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

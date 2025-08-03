@@ -1,29 +1,29 @@
 {
-    "license": "MIT",
-    "version": "4.3.12",
-    "name": "artplayer-tool-thumbnail",
-    "description": "Thumbnail tool for ArtPlayer",
-    "legacy": "dist/artplayer-tool-thumbnail.legacy.js",
-    "module": "dist/artplayer-tool-thumbnail.esm.js",
-    "types": "types/artplayer-tool-thumbnail.d.ts",
-    "exports": {
-        "import": "./dist/artplayer-tool-thumbnail.esm.js",
-        "require": "./dist/artplayer-tool-thumbnail.js",
-        "default": "./dist/artplayer-tool-thumbnail.js"
-    },
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "browserslist": "last 1 Chrome version",
-    "homepage": "https://artplayer.org",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "keywords": [
-        "html5",
-        "video",
-        "player"
-    ]
+  "name": "artplayer-tool-thumbnail",
+  "version": "4.3.12",
+  "description": "Thumbnail tool for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "legacy": "dist/artplayer-tool-thumbnail.legacy.js",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    "import": "./dist/artplayer-tool-thumbnail.esm.js",
+    "require": "./dist/artplayer-tool-thumbnail.js",
+    "default": "./dist/artplayer-tool-thumbnail.js"
+  },
+  "module": "dist/artplayer-tool-thumbnail.esm.js",
+  "types": "types/artplayer-tool-thumbnail.d.ts",
+  "browserslist": "last 1 Chrome version"
 }

@@ -1,35 +1,36 @@
-import { version } from '../package.json';
-import { supportsFlex, errorHandle, query, addClass, isMobile, replaceElement } from './utils';
+import { version } from '../package.json'
+import { addClass, errorHandle, isMobile, query, replaceElement, supportsFlex } from './utils'
 
 export default class Template {
-    constructor(art) {
-        this.art = art;
-        const { option, constructor } = art;
+  constructor(art) {
+    this.art = art
+    const { option, constructor } = art
 
-        if (option.container instanceof Element) {
-            this.$container = option.container;
-        } else {
-            this.$container = query(option.container);
-            errorHandle(this.$container, `No container element found by ${option.container}`);
-        }
-
-        errorHandle(supportsFlex(), 'The current browser does not support flex layout');
-
-        const type = this.$container.tagName.toLowerCase();
-        errorHandle(type === 'div', `Unsupported container element type, only support 'div' but got '${type}'`);
-
-        errorHandle(
-            constructor.instances.every((ins) => ins.template.$container !== this.$container),
-            'Cannot mount multiple instances on the same dom element',
-        );
-
-        this.query = this.query.bind(this);
-        this.$container.dataset.artId = art.id;
-        this.init();
+    if (option.container instanceof Element) {
+      this.$container = option.container
+    }
+    else {
+      this.$container = query(option.container)
+      errorHandle(this.$container, `No container element found by ${option.container}`)
     }
 
-    static get html() {
-        return `
+    errorHandle(supportsFlex(), 'The current browser does not support flex layout')
+
+    const type = this.$container.tagName.toLowerCase()
+    errorHandle(type === 'div', `Unsupported container element type, only support 'div' but got '${type}'`)
+
+    errorHandle(
+      constructor.instances.every(ins => ins.template.$container !== this.$container),
+      'Cannot mount multiple instances on the same dom element',
+    )
+
+    this.query = this.query.bind(this)
+    this.$container.dataset.artId = art.id
+    this.init()
+  }
+
+  static get html() {
+    return `
           <div class="art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show">
             <video class="art-video">
               <track default kind="metadata" src=""></track>
@@ -87,70 +88,71 @@ export default class Template {
             </div>
             <div class="art-contextmenus"></div>
           </div>
-        `;
+        `
+  }
+
+  query(className) {
+    return query(className, this.$container)
+  }
+
+  init() {
+    const { option } = this.art
+
+    if (!option.useSSR) {
+      this.$container.innerHTML = Template.html
     }
 
-    query(className) {
-        return query(className, this.$container);
+    this.$player = this.query('.art-video-player')
+    this.$video = this.query('.art-video')
+    this.$track = this.query('track')
+    this.$poster = this.query('.art-poster')
+    this.$subtitle = this.query('.art-subtitle')
+    this.$danmuku = this.query('.art-danmuku')
+    this.$bottom = this.query('.art-bottom')
+    this.$progress = this.query('.art-progress')
+    this.$controls = this.query('.art-controls')
+    this.$controlsLeft = this.query('.art-controls-left')
+    this.$controlsCenter = this.query('.art-controls-center')
+    this.$controlsRight = this.query('.art-controls-right')
+    this.$layer = this.query('.art-layers')
+    this.$loading = this.query('.art-loading')
+    this.$notice = this.query('.art-notice')
+    this.$noticeInner = this.query('.art-notice-inner')
+    this.$mask = this.query('.art-mask')
+    this.$state = this.query('.art-state')
+    this.$setting = this.query('.art-settings')
+    this.$info = this.query('.art-info')
+    this.$infoPanel = this.query('.art-info-panel')
+    this.$infoClose = this.query('.art-info-close')
+    this.$contextmenu = this.query('.art-contextmenus')
+
+    if (option.proxy) {
+      const video = option.proxy.call(this.art, this.art)
+      errorHandle(
+        video instanceof HTMLVideoElement || video instanceof HTMLCanvasElement,
+        `Function 'option.proxy' needs to return 'HTMLVideoElement' or 'HTMLCanvasElement'`,
+      )
+      replaceElement(video, this.$video)
+      video.className = 'art-video'
+      this.$video = video
     }
 
-    init() {
-        const { option } = this.art;
-
-        if (!option.useSSR) {
-            this.$container.innerHTML = Template.html;
-        }
-
-        this.$player = this.query('.art-video-player');
-        this.$video = this.query('.art-video');
-        this.$track = this.query('track');
-        this.$poster = this.query('.art-poster');
-        this.$subtitle = this.query('.art-subtitle');
-        this.$danmuku = this.query('.art-danmuku');
-        this.$bottom = this.query('.art-bottom');
-        this.$progress = this.query('.art-progress');
-        this.$controls = this.query('.art-controls');
-        this.$controlsLeft = this.query('.art-controls-left');
-        this.$controlsCenter = this.query('.art-controls-center');
-        this.$controlsRight = this.query('.art-controls-right');
-        this.$layer = this.query('.art-layers');
-        this.$loading = this.query('.art-loading');
-        this.$notice = this.query('.art-notice');
-        this.$noticeInner = this.query('.art-notice-inner');
-        this.$mask = this.query('.art-mask');
-        this.$state = this.query('.art-state');
-        this.$setting = this.query('.art-settings');
-        this.$info = this.query('.art-info');
-        this.$infoPanel = this.query('.art-info-panel');
-        this.$infoClose = this.query('.art-info-close');
-        this.$contextmenu = this.query('.art-contextmenus');
-
-        if (option.proxy) {
-            const video = option.proxy.call(this.art, this.art);
-            errorHandle(
-                video instanceof HTMLVideoElement || video instanceof HTMLCanvasElement,
-                `Function 'option.proxy' needs to return 'HTMLVideoElement' or 'HTMLCanvasElement'`,
-            );
-            replaceElement(video, this.$video);
-            video.className = 'art-video';
-            this.$video = video;
-        }
-
-        if (option.backdrop) {
-            addClass(this.$player, 'art-backdrop');
-        }
-
-        if (isMobile) {
-            addClass(this.$player, 'art-mobile');
-        }
+    if (option.backdrop) {
+      addClass(this.$player, 'art-backdrop')
     }
 
-    destroy(removeHtml) {
-        this.$video.src = '';
-        if (removeHtml) {
-            this.$container.innerHTML = '';
-        } else {
-            addClass(this.$player, 'art-destroy');
-        }
+    if (isMobile) {
+      addClass(this.$player, 'art-mobile')
     }
+  }
+
+  destroy(removeHtml) {
+    this.$video.src = ''
+    if (removeHtml) {
+      this.$container.innerHTML = ''
+    }
+    else {
+      addClass(this.$player, 'art-destroy')
+    }
+  }
 }

@@ -1,30 +1,30 @@
 {
-    "license": "MIT",
-    "version": "1.0.1",
-    "name": "artplayer-plugin-chapter",
-    "description": "chapter plugin for ArtPlayer",
-    "main": "dist/artplayer-plugin-chapter.js",
-    "legacy": "dist/artplayer-plugin-chapter.legacy.js",
-    "module": "dist/artplayer-plugin-chapter.esm.js",
-    "types": "types/artplayer-plugin-chapter.d.ts",
-    "exports": {
-        "import": "./dist/artplayer-plugin-chapter.esm.js",
-        "require": "./dist/artplayer-plugin-chapter.js",
-        "default": "./dist/artplayer-plugin-chapter.js"
-    },
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "browserslist": "last 1 Chrome version",
-    "homepage": "https://artplayer.org",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "keywords": [
-        "html5",
-        "video",
-        "player"
-    ]
+  "name": "artplayer-plugin-chapter",
+  "version": "1.0.1",
+  "description": "chapter plugin for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    "import": "./dist/artplayer-plugin-chapter.esm.js",
+    "require": "./dist/artplayer-plugin-chapter.js",
+    "default": "./dist/artplayer-plugin-chapter.js"
+  },
+  "main": "dist/artplayer-plugin-chapter.js",
+  "legacy": "dist/artplayer-plugin-chapter.legacy.js",
+  "module": "dist/artplayer-plugin-chapter.esm.js",
+  "types": "types/artplayer-plugin-chapter.d.ts",
+  "browserslist": "last 1 Chrome version"
 }

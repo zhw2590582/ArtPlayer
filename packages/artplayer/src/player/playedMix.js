@@ -1,7 +1,7 @@
-import { def } from '../utils';
+import { def } from '../utils'
 
 export default function playedMix(art) {
-    def(art, 'played', {
-        get: () => art.currentTime / art.duration,
-    });
+  def(art, 'played', {
+    get: () => art.currentTime / art.duration,
+  })
 }

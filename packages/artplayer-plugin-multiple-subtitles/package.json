@@ -1,30 +1,30 @@
 {
-    "license": "MIT",
-    "version": "1.1.0",
-    "name": "artplayer-plugin-multiple-subtitles",
-    "description": "multiple subtitles plugin for ArtPlayer",
-    "main": "dist/artplayer-plugin-multiple-subtitles.js",
-    "legacy": "dist/artplayer-plugin-multiple-subtitles.legacy.js",
-    "module": "dist/artplayer-plugin-multiple-subtitles.esm.js",
-    "types": "types/artplayer-plugin-multiple-subtitles.d.ts",
-    "exports": {
-        "import": "./dist/artplayer-plugin-multiple-subtitles.esm.js",
-        "require": "./dist/artplayer-plugin-multiple-subtitles.js",
-        "default": "./dist/artplayer-plugin-multiple-subtitles.js"
-    },
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "browserslist": "last 1 Chrome version",
-    "homepage": "https://artplayer.org",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "keywords": [
-        "html5",
-        "video",
-        "player"
-    ]
+  "name": "artplayer-plugin-multiple-subtitles",
+  "version": "1.1.0",
+  "description": "multiple subtitles plugin for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    "import": "./dist/artplayer-plugin-multiple-subtitles.esm.js",
+    "require": "./dist/artplayer-plugin-multiple-subtitles.js",
+    "default": "./dist/artplayer-plugin-multiple-subtitles.js"
+  },
+  "main": "dist/artplayer-plugin-multiple-subtitles.js",
+  "legacy": "dist/artplayer-plugin-multiple-subtitles.legacy.js",
+  "module": "dist/artplayer-plugin-multiple-subtitles.esm.js",
+  "types": "types/artplayer-plugin-multiple-subtitles.d.ts",
+  "browserslist": "last 1 Chrome version"
 }

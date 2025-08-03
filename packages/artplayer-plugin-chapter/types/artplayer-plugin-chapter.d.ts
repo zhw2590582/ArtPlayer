@@ -1,21 +1,21 @@
-import type Artplayer from 'artplayer';
+import type Artplayer from 'artplayer'
 
-export = artplayerPluginChapter;
+export = artplayerPluginChapter
 export as namespace artplayerPluginChapter;
 
 type Chapters = {
-    start: number;
-    end: number;
-    title: string;
-}[];
+  start: number
+  end: number
+  title: string
+}[]
 
-type Option = {
-    chapters?: Chapters;
-};
+interface Option {
+  chapters?: Chapters
+}
 
-type Result = {
-    name: 'artplayerPluginChapter';
-    update: (option: Option) => void;
-};
+interface Result {
+  name: 'artplayerPluginChapter'
+  update: (option: Option) => void
+}
 
-declare const artplayerPluginChapter: (option: Option) => (art: Artplayer) => Result;
+declare const artplayerPluginChapter: (option: Option) => (art: Artplayer) => Result

@@ -1,30 +1,30 @@
 {
-    "license": "MIT",
-    "version": "1.0.0",
-    "name": "artplayer-plugin-dash-control",
-    "description": "Dash control plugin for ArtPlayer",
-    "main": "dist/artplayer-plugin-dash-control.js",
-    "legacy": "dist/artplayer-plugin-dash-control.legacy.js",
-    "module": "dist/artplayer-plugin-dash-control.esm.js",
-    "types": "types/artplayer-plugin-dash-control.d.ts",
-    "exports": {
-        "import": "./dist/artplayer-plugin-dash-control.esm.js",
-        "require": "./dist/artplayer-plugin-dash-control.js",
-        "default": "./dist/artplayer-plugin-dash-control.js"
-    },
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "browserslist": "last 1 Chrome version",
-    "homepage": "https://artplayer.org",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "keywords": [
-        "html5",
-        "video",
-        "player"
-    ]
+  "name": "artplayer-plugin-dash-control",
+  "version": "1.0.0",
+  "description": "Dash control plugin for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    "import": "./dist/artplayer-plugin-dash-control.esm.js",
+    "require": "./dist/artplayer-plugin-dash-control.js",
+    "default": "./dist/artplayer-plugin-dash-control.js"
+  },
+  "main": "dist/artplayer-plugin-dash-control.js",
+  "legacy": "dist/artplayer-plugin-dash-control.legacy.js",
+  "module": "dist/artplayer-plugin-dash-control.esm.js",
+  "types": "types/artplayer-plugin-dash-control.d.ts",
+  "browserslist": "last 1 Chrome version"
 }
