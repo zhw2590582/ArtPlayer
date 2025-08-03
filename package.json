@@ -1,7 +1,7 @@
 {
   "name": "artplayer-packages",
   "type": "module",
-  "version": "5.2.0",
+  "version": "6.0.0",
   "private": true,
   "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
   "workspaces": [
@@ -25,17 +25,17 @@
     "node": ">= 20.0.0"
   },
   "scripts": {
-    "build:all": "npm run build all && npm run build:i18n && npm run build:ts && npm run build:docs",
-    "lint": "npx eslint packages/*/{src,types,package.json} --fix",
+    "bootstrap": "npx lerna link",
+    "postinstall": "npx lerna run prepare",
     "build:ts": "node ./scripts/build-ts.js",
     "build:docs": "node ./scripts/build-docs.js",
     "build:i18n": "node ./scripts/build-i18n.js",
     "trans:docs": "node ./scripts/trans-docs.js",
     "create:plugin": "node ./scripts/plugin/create.js",
+    "lint": "npx eslint packages/*/{src,types,package.json} --fix",
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
-    "postinstall": "npx lerna run prepare",
-    "bootstrap": "npx lerna link"
+    "build:all": "npm run build all && npm run build:i18n && npm run build:ts && npm run build:docs"
   },
   "browserslist": "last 1 Chrome version",
   "dependencies": {
@@ -52,7 +52,6 @@
     "dotenv": "^17.2.1",
     "eslint": "^9.32.0",
     "glob": "^11.0.3",
-    "globals": "^16.3.0",
     "lerna": "^8.2.3",
     "prompts": "^2.4.2",
     "servor": "^4.0.2",
