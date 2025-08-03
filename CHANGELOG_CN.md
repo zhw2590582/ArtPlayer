@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-  移除 `svg` 默认的 `fill` 颜色值
+-  优化 `artplayer.d.ts`, 现在可以直接导入 `Option`
+
+```ts
+import type { Option } from 'artplayer'
+
+const option: Option = {
+  container: '.artplayer-app',
+  url: './assets/sample/video.mp4',
+}
+```
+
 ## [5.2.5] - 2025-08-01
 
 - 为所有包添加 `ESM` 版本如 `artplayer/dist/artplayer.esm.js`
