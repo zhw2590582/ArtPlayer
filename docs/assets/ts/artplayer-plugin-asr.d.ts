@@ -1,6 +1,3 @@
-export = artplayerPluginAsr
-export as namespace artplayerPluginAsr;
-
 interface AudioChunk {
   pcm: ArrayBuffer
   wav: ArrayBuffer
@@ -22,6 +19,8 @@ interface AsrPluginInstance {
 }
 
 declare function artplayerPluginAsr(option?: AsrPluginOption): (art: Artplayer) => AsrPluginInstance
+
+export default artplayerPluginAsr
 
 export = artplayerPluginAsr;
 export as namespace artplayerPluginAsr;
