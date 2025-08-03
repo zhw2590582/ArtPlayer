@@ -1,9 +1,6 @@
 import type { Player } from '@glomex/vast-ima-player'
 import type Artplayer from 'artplayer'
 
-export = artplayerPluginVast
-export as namespace artplayerPluginVast;
-
 declare global {
   interface Window {
     artplayerPluginVast?: typeof artplayerPluginVast
@@ -15,7 +12,7 @@ type PlayResFn = (res: string) => void
 
 interface VastPluginContext {
   art: Artplayer
-  ima: typeof google.ima
+  ima: any // Replace 'any' with a more specific type if available, or declare google.ima type above
   imaPlayer: Player
   playUrl: PlayUrlFn
   playRes: PlayResFn
@@ -32,3 +29,5 @@ export interface ArtplayerPluginVastInstance {
 declare function artplayerPluginVast(
   option: ArtplayerPluginVastOption,
 ): (art: Artplayer) => ArtplayerPluginVastInstance
+
+export default artplayerPluginVast
