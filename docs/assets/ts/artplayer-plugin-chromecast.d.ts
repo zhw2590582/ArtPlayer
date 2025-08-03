@@ -1,8 +1,3 @@
-import type Artplayer from 'artplayer'
-
-export = artplayerPluginChromecast
-export as namespace artplayerPluginChromecast;
-
 interface Option {
   url?: string
   sdk?: string
@@ -15,3 +10,8 @@ interface Chromecast {
 }
 
 declare const artplayerPluginChromecast: (option: Option) => (art: Artplayer) => Chromecast
+
+export default artplayerPluginChromecast
+
+export = artplayerPluginChromecast;
+export as namespace artplayerPluginChromecast;

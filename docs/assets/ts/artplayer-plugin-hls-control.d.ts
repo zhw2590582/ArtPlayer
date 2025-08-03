@@ -1,8 +1,3 @@
-import type Artplayer from 'artplayer'
-
-export = artplayerPluginHlsControl
-export as namespace artplayerPluginHlsControl;
-
 interface Config {
   control?: boolean
   setting?: boolean
@@ -15,3 +10,8 @@ declare const artplayerPluginHlsControl: (option: { quality?: Config, audio?: Co
   name: 'artplayerPluginHlsControl'
   update: () => void
 }
+
+export default artplayerPluginHlsControl
+
+export = artplayerPluginHlsControl;
+export as namespace artplayerPluginHlsControl;

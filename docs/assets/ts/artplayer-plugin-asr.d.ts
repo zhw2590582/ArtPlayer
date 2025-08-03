@@ -1,5 +1,3 @@
-import type Artplayer from 'artplayer'
-
 export = artplayerPluginAsr
 export as namespace artplayerPluginAsr;
 
@@ -24,3 +22,6 @@ interface AsrPluginInstance {
 }
 
 declare function artplayerPluginAsr(option?: AsrPluginOption): (art: Artplayer) => AsrPluginInstance
+
+export = artplayerPluginAsr;
+export as namespace artplayerPluginAsr;

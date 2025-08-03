@@ -120,7 +120,7 @@ export interface Subtitle {
   onVttLoad?: (vtt: string) => string
 }
 
-import Artplayer = require('./artplayer')
+
 
 type Props<T> = {
   html: string
@@ -135,7 +135,7 @@ type Props<T> = {
   $parent: Setting
   $parents: Setting[]
   $option: Setting[]
-  $events: Function[]
+  $events: Array<(...args: any[]) => any>
   $formatted: boolean
 } & Omit<T, 'html' | 'icon' | 'tooltip'>
 
@@ -232,9 +232,9 @@ export interface Quality {
   url: string
 }
 
-import type { CssVar } from './cssVar'
-import type { CustomType, Thumbnails } from './option'
-import type { Quality } from './quality'
+
+
+
 
 export type AspectRatio = 'default' | '4:3' | '16:9' | (`${number}:${number}` & Record<never, never>)
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>)
@@ -259,10 +259,8 @@ export declare class Player {
   set flip(state: Flip)
   get fullscreen(): boolean
   set fullscreen(state: boolean)
-  set fullscreenToggle(state: boolean)
   get fullscreenWeb(): boolean
   set fullscreenWeb(state: boolean)
-  set fullscreenWebToggle(state: boolean)
   get loaded(): number
   get loadedTime(): number
   get mini(): boolean
@@ -281,8 +279,11 @@ export declare class Player {
   get x(): number
   get y(): number
   set seek(time: number)
+  get seek(): number
   set forward(time: number)
+  get forward(): number
   set backward(time: number)
+  get backward(): number
   get url(): string
   set url(url: string)
   get volume(): number
@@ -296,7 +297,9 @@ export declare class Player {
   get subtitleOffset(): number
   set subtitleOffset(time: number)
   set switch(url: string)
+  get switch(): string
   set quality(quality: Quality[])
+  get quality(): Quality[]
   get thumbnails(): Thumbnails
   set thumbnails(thumbnails: Thumbnails)
   pause(): void
@@ -314,14 +317,14 @@ export declare class Player {
   autoHeight(): void
 }
 
-import type { ComponentOption } from './component'
-import type { CssVar } from './cssVar'
-import type { I18n } from './i18n'
-import type { Icons } from './icons'
-import type { Quality } from './quality'
-import type { Setting } from './setting'
-import type { Subtitle } from './subtitle'
-import Artplayer = require('./artplayer')
+
+
+
+
+
+
+
+
 
 export type CustomType = 'flv' | 'm3u8' | 'hls' | 'ts' | 'mpd' | 'torrent' | (string & Record<never, never>)
 
@@ -597,7 +600,7 @@ export interface Option {
    * Other video attribute
    */
   moreVideoAttr?: Partial<{
-    [key in keyof HTMLVideoElement as HTMLVideoElement[key] extends Function ? never : key]: HTMLVideoElement[key];
+    [key in keyof HTMLVideoElement as HTMLVideoElement[key] extends (...args: any[]) => any ? never : key]: HTMLVideoElement[key];
   }>
 
   /**
@@ -624,8 +627,6 @@ export interface Option {
         Record<CustomType, (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => any>
     >
 }
-
-export default Option
 
 export interface Icons {
   readonly loading: HTMLDivElement
@@ -715,8 +716,8 @@ interface I18nValue {
 
 export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>
 
-import type { AspectRatio, Flip } from './player'
-import type { Subtitle } from './subtitle'
+
+
 
 export type Bar = 'loaded' | 'played' | 'hover'
 
@@ -918,7 +919,7 @@ export interface Config {
   ]
 }
 
-import Artplayer = require('./artplayer')
+
 
 export interface Selector {
   /**
@@ -1041,22 +1042,19 @@ export interface ComponentOption {
   onSelect?: (this: Artplayer, selector: Selector, element: HTMLElement, event: Event) => void
 }
 
-import type { Component } from './component'
-import type { Config } from './config'
-import type { Events } from './events'
-import type { I18n } from './i18n'
-import type { Icons } from './icons'
-import type { Option } from './option'
-import type { Setting, SettingOption } from './setting'
-import type { Subtitle } from './subtitle'
-import type { Template } from './template'
-import type { Utils } from './utils'
-import { Player } from './player'
 
-export = Artplayer
-export as namespace Artplayer;
 
-declare class Artplayer extends Player {
+
+
+
+
+
+
+
+
+
+
+export default class Artplayer extends Player {
   constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
 
   get Config(): Config
@@ -1079,7 +1077,7 @@ declare class Artplayer extends Player {
   static readonly config: Config
   static readonly utils: Utils
   static readonly scheme: Record<keyof Option, any>
-  static readonly Emitter: Function
+  static readonly Emitter: (...args: any[]) => any
   static readonly validator: <T extends object>(option: T, scheme: object) => T
   static readonly kindOf: (item: any) => string
   static readonly html: Artplayer['template']['html']
@@ -1138,13 +1136,13 @@ declare class Artplayer extends Player {
   on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown
   once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown
   emit<T extends keyof Events>(name: T, ...args: unknown[]): unknown
-  off<T extends keyof Events>(name: T, callback?: Function): unknown
+  off<T extends keyof Events>(name: T, callback?: ((...args: Events[T]) => unknown)): unknown
 
   query: Artplayer['template']['query']
   proxy: Artplayer['events']['proxy']
   video: Artplayer['template']['$video']
 
-  e: Record<keyof Events, { fn: Function, ctx: unknown }[]>
+  e: Record<keyof Events, { fn: (...args: any[]) => any, ctx: unknown }[]>
 
   destroy(removeHtml?: boolean): void
 
@@ -1209,7 +1207,7 @@ declare class Artplayer extends Player {
   readonly hotkey: {
     keys: Record<string, ((event: Event) => any)[]>
     add: (key: string, callback: (this: Artplayer, event: Event) => any) => Artplayer['hotkey']
-    remove: (key: string, callback: Function) => Artplayer['hotkey']
+    remove: (key: string, callback: (event: Event) => any) => Artplayer['hotkey']
   }
 
   readonly mask: Component
@@ -1230,3 +1228,6 @@ declare class Artplayer extends Player {
     [pluginName: string]: any
   }
 }
+
+export = Artplayer;
+export as namespace Artplayer;

@@ -1,6 +1,3 @@
-export = ArtplayerPluginIframe
-export as namespace ArtplayerPluginIframe;
-
 interface Message {
   type: string
   data: any
@@ -15,7 +12,7 @@ declare class ArtplayerPluginIframe {
   static onMessage(event: MessageEvent & { data: Message }): void
   static inject(): void
 
-  readonly promises: Record<number, { resove: Function, reject: Function }>
+  readonly promises: Record<number, { resove: (...args: any[]) => any, reject: (...args: any[]) => any }>
   readonly injected: boolean
   readonly destroyed: boolean
   readonly $iframe: HTMLIFrameElement
@@ -28,3 +25,8 @@ declare class ArtplayerPluginIframe {
   message(callback: (...args: any[]) => any): void
   destroy(): void
 }
+
+export default ArtplayerPluginIframe
+
+export = artplayerPluginIframe;
+export as namespace artplayerPluginIframe;

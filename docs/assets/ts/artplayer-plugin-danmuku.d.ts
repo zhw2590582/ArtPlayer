@@ -1,8 +1,3 @@
-import type Artplayer from 'artplayer'
-
-export = artplayerPluginDanmuku
-export as namespace artplayerPluginDanmuku;
-
 type Mode = 0 | 1 | 2
 type Danmuku = Danmu[] | string | (() => Promise<Danmu[]>) | Promise<Danmu[]>
 
@@ -253,3 +248,8 @@ interface Result {
 }
 
 declare const artplayerPluginDanmuku: (option: Option) => (art: Artplayer) => Result
+
+export default artplayerPluginDanmuku
+
+export = artplayerPluginDanmuku;
+export as namespace artplayerPluginDanmuku;

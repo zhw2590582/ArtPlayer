@@ -308,5 +308,3 @@ export interface Option {
         Record<CustomType, (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => any>
     >
 }
-
-export default Option

@@ -571,7 +571,7 @@ module.exports = ".art-video-player {\n  --art-theme: red;\n  --art-font-color: 
 });
 
 },{}],"3r4tp":[function(require,module,exports,__globalThis) {
-module.exports = JSON.parse("{\"license\":\"MIT\",\"name\":\"artplayer\",\"version\":\"5.2.5\",\"main\":\"dist/artplayer.js\",\"legacy\":\"dist/artplayer.legacy.js\",\"types\":\"types/artplayer.d.ts\",\"homepage\":\"https://artplayer.org\",\"author\":\"Harvey Zack <laozhaochaguan@gmail.com>\",\"browserslist\":\"last 1 Chrome version\",\"description\":\"ArtPlayer.js is a modern and full featured HTML5 video player\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/zhw2590582/ArtPlayer.git\"},\"bugs\":{\"url\":\"https://github.com/zhw2590582/ArtPlayer/issues\"},\"keywords\":[\"html5\",\"video\",\"player\"],\"dependencies\":{\"option-validator\":\"^2.0.6\"}}");
+module.exports = JSON.parse("{\"name\":\"artplayer\",\"version\":\"5.2.5\",\"description\":\"ArtPlayer.js is a modern and full featured HTML5 video player\",\"author\":\"Harvey Zack <laozhaochaguan@gmail.com>\",\"license\":\"MIT\",\"homepage\":\"https://artplayer.org\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/zhw2590582/ArtPlayer.git\"},\"bugs\":{\"url\":\"https://github.com/zhw2590582/ArtPlayer/issues\"},\"keywords\":[\"html5\",\"video\",\"player\"],\"main\":\"dist/artplayer.js\",\"legacy\":\"dist/artplayer.legacy.js\",\"types\":\"types/artplayer.d.ts\",\"browserslist\":\"last 1 Chrome version\",\"dependencies\":{\"option-validator\":\"^2.0.6\"}}");
 
 },{}],"1dlGA":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

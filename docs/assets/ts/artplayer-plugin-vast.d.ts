@@ -1,6 +1,3 @@
-import type { Player } from '@glomex/vast-ima-player'
-import type Artplayer from 'artplayer'
-
 export = artplayerPluginVast
 export as namespace artplayerPluginVast;
 
@@ -32,3 +29,6 @@ export interface ArtplayerPluginVastInstance {
 declare function artplayerPluginVast(
   option: ArtplayerPluginVastOption,
 ): (art: Artplayer) => ArtplayerPluginVastInstance
+
+export = artplayerPluginVast;
+export as namespace artplayerPluginVast;

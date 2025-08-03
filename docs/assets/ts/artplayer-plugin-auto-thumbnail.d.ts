@@ -1,8 +1,3 @@
-import type Artplayer from 'artplayer'
-
-export = artplayerPluginAutoThumbnail
-export as namespace artplayerPluginAutoThumbnail;
-
 interface Option {
   url?: string
   width?: number
@@ -15,3 +10,8 @@ interface Result {
 }
 
 declare const artplayerPluginAutoThumbnail: (option: Option) => (art: Artplayer) => Result
+
+export default artplayerPluginAutoThumbnail
+
+export = artplayerPluginAutoThumbnail;
+export as namespace artplayerPluginAutoThumbnail;

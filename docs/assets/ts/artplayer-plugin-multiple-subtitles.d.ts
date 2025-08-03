@@ -1,8 +1,3 @@
-import type Artplayer from 'artplayer'
-
-export = artplayerPluginMultipleSubtitles
-export as namespace artplayerPluginMultipleSubtitles;
-
 declare const artplayerPluginMultipleSubtitles: (option: {
   subtitles: {
     url?: string
@@ -14,3 +9,8 @@ declare const artplayerPluginMultipleSubtitles: (option: {
 }) => (art: Artplayer) => {
   name: 'multipleSubtitles'
 }
+
+export default artplayerPluginMultipleSubtitles
+
+export = artplayerPluginMultipleSubtitles;
+export as namespace artplayerPluginMultipleSubtitles;

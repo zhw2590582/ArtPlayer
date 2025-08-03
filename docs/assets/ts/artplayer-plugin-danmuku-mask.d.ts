@@ -1,8 +1,3 @@
-import type Artplayer from 'artplayer'
-
-export = artplayerPluginDanmukuMask
-export as namespace artplayerPluginDanmukuMask;
-
 interface Option {
   solutionPath?: string
   modelSelection?: number
@@ -23,3 +18,8 @@ interface Result {
 }
 
 declare const artplayerPluginDanmukuMask: (option?: Option) => (art: Artplayer) => Result
+
+export default artplayerPluginDanmukuMask
+
+export = artplayerPluginDanmukuMask;
+export as namespace artplayerPluginDanmukuMask;
