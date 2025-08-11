@@ -4327,47 +4327,73 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>autoOrientation);
 var _utils = require("../utils");
 function autoOrientation(art) {
-    const { constructor, template: { $player, $video } } = art;
+    const { notice, constructor, template: { $player, $video } } = art;
+    const WEB_CLASS = 'art-auto-orientation';
+    const FS_CLASS = 'art-auto-orientation-fullscreen';
+    let fsLocked = false;
+    function applyWebRotate() {
+        const viewWidth = document.documentElement.clientWidth;
+        const viewHeight = document.documentElement.clientHeight;
+        (0, _utils.setStyle)($player, 'width', `${viewHeight}px`);
+        (0, _utils.setStyle)($player, 'height', `${viewWidth}px`);
+        (0, _utils.setStyle)($player, 'transform-origin', '0 0');
+        (0, _utils.setStyle)($player, 'transform', `rotate(90deg) translate(0, -${viewWidth}px)`);
+        (0, _utils.addClass)($player, WEB_CLASS);
+        art.isRotate = true;
+        art.emit('resize');
+    }
+    function clearWebRotate() {
+        (0, _utils.setStyle)($player, 'width', '');
+        (0, _utils.setStyle)($player, 'height', '');
+        (0, _utils.setStyle)($player, 'transform-origin', '');
+        (0, _utils.setStyle)($player, 'transform', '');
+        (0, _utils.removeClass)($player, WEB_CLASS);
+        art.isRotate = false;
+        art.emit('resize');
+    }
+    function needRotate() {
+        const { videoWidth, videoHeight } = $video;
+        const vw = document.documentElement.clientWidth;
+        const vh = document.documentElement.clientHeight;
+        return videoWidth > videoHeight && vw < vh || videoWidth < videoHeight && vw > vh;
+    }
     art.on('fullscreenWeb', (state)=>{
         if (state) {
-            const { videoWidth, videoHeight } = $video;
-            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
-            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
-            setTimeout(()=>{
-                (0, _utils.setStyle)($player, 'width', `${viewHeight}px`);
-                (0, _utils.setStyle)($player, 'height', `${viewWidth}px`);
-                (0, _utils.setStyle)($player, 'transform-origin', '0 0');
-                (0, _utils.setStyle)($player, 'transform', `rotate(90deg) translate(0, -${viewWidth}px)`);
-                (0, _utils.addClass)($player, 'art-auto-orientation');
-                art.isRotate = true;
-                art.emit('resize');
-            }, constructor.AUTO_ORIENTATION_TIME);
-        } else if ((0, _utils.hasClass)($player, 'art-auto-orientation')) {
-            (0, _utils.removeClass)($player, 'art-auto-orientation');
-            art.isRotate = false;
-            art.emit('resize');
-        }
+            if (needRotate()) {
+                const delay = Number(constructor.AUTO_ORIENTATION_TIME ?? 0);
+                setTimeout(()=>{
+                    if (art.fullscreenWeb && !(0, _utils.hasClass)($player, WEB_CLASS)) applyWebRotate();
+                }, delay);
+            }
+        } else if ((0, _utils.hasClass)($player, WEB_CLASS)) clearWebRotate();
     });
     art.on('fullscreen', async (state)=>{
-        if (!screen?.orientation?.lock) return;
-        const lastOrientation = screen.orientation.type;
+        const canLock = !!screen?.orientation?.lock;
         if (state) {
-            const { videoWidth, videoHeight } = $video;
-            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
-            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
-                const oppositeOrientation = lastOrientation.startsWith('portrait') ? 'landscape' : 'portrait';
-                await screen.orientation.lock(oppositeOrientation);
-                (0, _utils.addClass)($player, 'art-auto-orientation-fullscreen');
+            if (canLock && needRotate()) try {
+                const last = screen.orientation.type;
+                const opposite = last.startsWith('portrait') ? 'landscape' : 'portrait';
+                await screen.orientation.lock(opposite);
+                fsLocked = true;
+                (0, _utils.addClass)($player, FS_CLASS);
+            } catch (err) {
+                fsLocked = false;
+                notice.show = err;
             }
-        } else if ((0, _utils.hasClass)($player, 'art-auto-orientation-fullscreen')) {
-            await screen.orientation.lock(lastOrientation);
-            (0, _utils.removeClass)($player, 'art-auto-orientation-fullscreen');
+        } else {
+            if ((0, _utils.hasClass)($player, FS_CLASS)) (0, _utils.removeClass)($player, FS_CLASS);
+            if (canLock && fsLocked) {
+                try {
+                    screen.orientation.unlock();
+                } catch  {}
+                fsLocked = false;
+            }
         }
     });
     return {
         name: 'autoOrientation',
         get state () {
-            return (0, _utils.hasClass)($player, 'art-auto-orientation');
+            return (0, _utils.hasClass)($player, WEB_CLASS);
         }
     };
 }
