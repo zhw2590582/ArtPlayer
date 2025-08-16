@@ -260,7 +260,7 @@ export default function artplayerPluginAds(option) {
         setStyle($loading, 'display', 'none')
       }
 
-      art.proxy(document, 'visibilitychange', () => {
+      art.on('document:visibilitychange', () => {
         if (document.hidden) {
           pause()
         }

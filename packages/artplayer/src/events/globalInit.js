@@ -6,7 +6,10 @@ export default function globalInit(art, events) {
     'touchend',
     'touchmove',
     'mousemove',
+    'pointerup',
     'contextmenu',
+    'pointermove',
+    'visibilitychange',
     'webkitfullscreenchange',
   ]
 
