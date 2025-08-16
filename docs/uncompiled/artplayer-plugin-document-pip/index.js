@@ -173,7 +173,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
         ...userOptions
     };
     return (art)=>{
-        const dpipOK = 'documentPictureInPicture' in window && typeof window.documentPictureInPicture?.requestWindow === 'function';
+        const isSupported = 'documentPictureInPicture' in window && typeof window.documentPictureInPicture?.requestWindow === 'function';
         const { proxy, icons, i18n, template: { $container }, constructor: { utils: { append, tooltip, addClass, removeClass } } } = art;
         const state = {
             win: null,
@@ -216,7 +216,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
             } catch  {}
         }
         async function open() {
-            if (!dpipOK && options.fallbackToVideoPiP) {
+            if (!isSupported && options.fallbackToVideoPiP) {
                 art.pip = true;
                 console.warn('[artplayer-plugin-document-pip] Document Picture-in-Picture is not supported, falling back to Video Picture-in-Picture');
                 return;
@@ -270,10 +270,6 @@ function artplayerPluginDocumentPip(userOptions = {}) {
             state.currentDoc = backDoc;
         }
         function close() {
-            if (!dpipOK && options.fallbackToVideoPiP) {
-                art.pip = false;
-                return;
-            }
             if (!state.win) return;
             try {
                 state.cleanup?.();
@@ -307,7 +303,12 @@ function artplayerPluginDocumentPip(userOptions = {}) {
         art.on('destroy', close);
         return {
             name: 'artplayerPluginDocumentPip',
-            state,
+            get isSupported () {
+                return isSupported;
+            },
+            get isActive () {
+                return !!state.win;
+            },
             open,
             close,
             toggle

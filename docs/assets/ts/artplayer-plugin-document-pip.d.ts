@@ -7,16 +7,11 @@ interface Option {
 
 interface Result {
   name: 'artplayerPluginDocumentPip'
+  isSupported: boolean
+  isActive: boolean
   open: () => void
   close: () => void
   toggle: () => void
-  state: {
-    win: Window | null
-    originalParent: Element | null
-    originalNext: Element | null
-    currentDoc: Document | null
-    placeholder: Element | null
-  }
 }
 
 declare const artplayerPluginDocumentPip: (option: Option) => (art: Artplayer) => Result
