@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/bundlephobia/minzip/artplayer" alt="Size">
+  <!-- <img src="https://img.shields.io/bundlephobia/minzip/artplayer" alt="Size"> -->
   <img src="https://img.shields.io/npm/dm/artplayer.svg?sanitize=true" alt="Downloads">
   <img src="https://img.shields.io/npm/v/artplayer.svg?sanitize=true" alt="Version">
   <img src="https://img.shields.io/npm/l/artplayer.svg?sanitize=true" alt="License">
@@ -60,7 +60,7 @@ $ yarn add artplayer
 ```
 
 ```js
-import Artplayer from 'artplayer';
+import Artplayer from 'artplayer'
 ```
 
 Or umd build also available:
@@ -88,10 +88,10 @@ Will expose the global variable to `window.Artplayer`.
 ```
 
 ```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: 'path/to/video.mp4',
-});
+let art = new Artplayer({
+  container: '.artplayer-app',
+  url: 'path/to/video.mp4',
+})
 ```
 
 ## Plugins
@@ -111,7 +111,7 @@ var art = new Artplayer({
 - [artplayer-plugin-auto-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail)
 - [artplayer-plugin-ambilight](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight)
 - [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) (WIP)
-
+- [artplayer-plugin-document-pip](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip)
 ## Libraries
 
 - [hls.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js&example=hls)

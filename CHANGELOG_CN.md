@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -  移除 `svg` 默认的 `fill` 颜色值
 -  优化 `artplayer.d.ts`, 现在可以直接导入 `Option`
 -  优化 `autoOrientation` 逻辑
+-  添加 `artplayer-plugin-document-pip` 插件
 
 ```ts
 import type { Option } from 'artplayer'

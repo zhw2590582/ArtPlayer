@@ -1,5 +1,5 @@
 {
-  "name": "artplayer-plugin-pip",
+  "name": "artplayer-plugin-document-pip",
   "version": "1.0.0",
   "description": "pip plugin for ArtPlayer",
   "author": "Harvey Zack <laozhaochaguan@gmail.com>",
@@ -17,8 +17,8 @@
     "video",
     "player"
   ],
-  "main": "dist/artplayer-plugin-pip.js",
-  "types": "types/artplayer-plugin-pip.d.ts",
-  "legacy": "dist/artplayer-plugin-pip.legacy.js",
+  "main": "dist/artplayer-plugin-document-pip.js",
+  "types": "types/artplayer-plugin-document-pip.d.ts",
+  "legacy": "dist/artplayer-plugin-document-pip.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

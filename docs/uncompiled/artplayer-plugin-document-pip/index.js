@@ -160,7 +160,7 @@
       });
     }
   }
-})({"55Mmu":[function(require,module,exports,__globalThis) {
+})({"4zgII":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginDocumentPip);
@@ -174,7 +174,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
     };
     return (art)=>{
         const dpipOK = 'documentPictureInPicture' in window && typeof window.documentPictureInPicture?.requestWindow === 'function';
-        const { proxy, icons, i18n, template: { $container }, constructor: { utils: { append, tooltip } } } = art;
+        const { proxy, icons, i18n, template: { $container }, constructor: { utils: { append, tooltip, addClass, removeClass } } } = art;
         const state = {
             win: null,
             originalParent: null,
@@ -253,6 +253,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
                     pipWin.removeEventListener('pagehide', onClose);
                     pipWin.removeEventListener('unload', onClose);
                 };
+                addClass($container, 'artplayer-document-pip');
                 art.emit('document-pip', true);
             } catch (err) {
                 art.notice.show = 'Document Picture-in-Picture open failed';
@@ -279,6 +280,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
                 restoreToOriginalDocument();
                 state.win.close();
                 state.win = null;
+                removeClass($container, 'artplayer-document-pip');
                 art.emit('document-pip', false);
             } catch (err) {
                 art.notice.show = 'Document Picture-in-Picture close failed';
@@ -305,6 +307,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
         art.on('destroy', close);
         return {
             name: 'artplayerPluginDocumentPip',
+            state,
             open,
             close,
             toggle
@@ -343,6 +346,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["55Mmu"], "55Mmu", "parcelRequire4dc0", {})
+},{}]},["4zgII"], "4zgII", "parcelRequire4dc0", {})
 
 //# sourceMappingURL=index.js.map

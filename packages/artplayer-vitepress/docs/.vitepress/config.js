@@ -22,8 +22,8 @@ const config = {
           { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG_CN.md' },
           { text: 'Donation', link: 'https://github.com/zhw2590582/ArtPlayer#donations' },
           { text: 'Q群: 320881312', link: 'https://github.com/zhw2590582/ArtPlayer#qq-group' },
-        ]
-      }
+        ],
+      },
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/zhw2590582/ArtPlayer' },
@@ -37,7 +37,7 @@ const config = {
             { text: '安装使用', link: '/' },
             { text: '基础选项', link: '/start/option' },
             { text: '语言设置', link: '/start/i18n' },
-          ]
+          ],
         },
         {
           text: '组件',
@@ -47,7 +47,7 @@ const config = {
             { text: '控制器', link: '/component/controls' },
             { text: '右键菜单', link: '/component/contextmenu' },
             { text: '设置面板', link: '/component/setting' },
-          ]
+          ],
         },
         {
           text: '高级',
@@ -59,7 +59,7 @@ const config = {
             { text: '全局属性', link: '/advanced/global' },
             { text: '实例事件', link: '/advanced/event' },
             { text: '编写插件', link: '/advanced/plugin' },
-          ]
+          ],
         },
         {
           text: '插件',
@@ -71,14 +71,15 @@ const config = {
             { text: 'Iframe 控制', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe' },
             { text: 'Hls 控制', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control' },
             { text: 'Dash 控制', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control' },
-            { text: 'Vtt 缩略图', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail'},
-            { text: '多重字幕', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles'},
-            { text: 'Ass 字幕', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass'},
-            { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast'},
-            { text: 'Vast 广告', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},        
-            { text: '视频章节', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter'},        
-            { text: '视频背光', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight'},        
-          ]
+            { text: 'Vtt 缩略图', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail' },
+            { text: '多重字幕', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles' },
+            { text: 'Ass 字幕', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass' },
+            { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast' },
+            { text: 'Vast 广告', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast' },
+            { text: '视频章节', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter' },
+            { text: '视频背光', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight' },
+            { text: '文档画中画', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip' },
+          ],
         },
         {
           text: '第三方库',
@@ -89,14 +90,14 @@ const config = {
             { text: 'dash.js', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash' },
             { text: 'mpegts.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts' },
             { text: 'webtorrent.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent' },
-          ]
+          ],
         },
         {
           text: '代理',
           collapsible: true,
           items: [
             { text: 'Canvas', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas' },
-          ]
+          ],
         },
       ],
       '/en/': [
@@ -107,7 +108,7 @@ const config = {
             { text: 'Install', link: '/en/' },
             { text: 'Option', link: '/en/start/option' },
             { text: 'Language', link: '/en/start/i18n' },
-          ]
+          ],
         },
         {
           text: 'Component',
@@ -117,7 +118,7 @@ const config = {
             { text: 'Controls', link: '/en/component/controls' },
             { text: 'Contextmenu', link: '/en/component/contextmenu' },
             { text: 'Setting', link: '/en/component/setting' },
-          ]
+          ],
         },
         {
           text: 'Advanced',
@@ -129,7 +130,7 @@ const config = {
             { text: 'Global Property', link: '/en/advanced/global' },
             { text: 'Instance Event', link: '/en/advanced/event' },
             { text: 'Writing Plugin', link: '/en/advanced/plugin' },
-          ]
+          ],
         },
         {
           text: 'Plugins',
@@ -139,14 +140,15 @@ const config = {
             { text: 'Iframe Control', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe' },
             { text: 'Hls Control', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control' },
             { text: 'Dash Control', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control' },
-            { text: 'Vtt Thumbnail', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail'},
-            { text: 'Multiple Subtitles', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles'},
-            { text: 'Ass Subtitle', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass'},
-            { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast'},
-            { text: 'Vast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},
-            { text: 'Video Chapters', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter'},
-            { text: 'Video Ambilight', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight'},        
-          ]
+            { text: 'Vtt Thumbnail', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail' },
+            { text: 'Multiple Subtitles', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles' },
+            { text: 'Ass Subtitle', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass' },
+            { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast' },
+            { text: 'Vast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast' },
+            { text: 'Video Chapters', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter' },
+            { text: 'Video Ambilight', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight' },
+            { text: 'Document PIP', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip' },
+          ],
         },
         {
           text: 'Libraries',
@@ -157,47 +159,47 @@ const config = {
             { text: 'dash.js', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash' },
             { text: 'mpegts.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts' },
             { text: 'webtorrent.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent' },
-          ]
+          ],
         },
         {
           text: 'Proxys',
           collapsible: true,
           items: [
             { text: 'Canvas', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas' },
-          ]
+          ],
         },
       ],
     },
     editLink: {
       pattern: 'https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/:path',
-      text: 'Edit this page on GitHub'
+      text: 'Edit this page on GitHub',
     },
   },
   markdown: {
-    lineNumbers: true
+    lineNumbers: true,
   },
   head: [
     [
       'script',
-      { src: "/document/main.js" }
+      { src: '/document/main.js' },
     ],
     [
       'link',
-      { rel: "stylesheet", href: "/document/style.css" }
+      { rel: 'stylesheet', href: '/document/style.css' },
     ],
     [
       'link',
-      { rel: "shortcut icon", href: "/document/favicon.ico" }
+      { rel: 'shortcut icon', href: '/document/favicon.ico' },
     ],
     [
       'meta',
-      { name: 'google-adsense-account', content: 'ca-pub-8579453810848662' }
+      { name: 'google-adsense-account', content: 'ca-pub-8579453810848662' },
     ],
     [
       'script',
-      { async: true, src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662", crossorigin: "anonymous" }
-    ]
-  ]
+      { async: true, src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662', crossorigin: 'anonymous' },
+    ],
+  ],
 }
 
 export default config

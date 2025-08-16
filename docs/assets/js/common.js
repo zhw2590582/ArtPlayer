@@ -62,7 +62,7 @@
       './assets/ts/artplayer-plugin-multiple-subtitles.d.ts',
       './assets/ts/artplayer-plugin-vast.d.ts',
       './assets/ts/artplayer-plugin-vtt-thumbnail.d.ts',
-      './assets/ts/artplayer-plugin-pip.d.ts',
+      './assets/ts/artplayer-plugin-document-pip.d.ts',
       './assets/ts/artplayer.d.ts',
     ]
 

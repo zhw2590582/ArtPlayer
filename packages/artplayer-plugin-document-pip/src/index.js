@@ -1,18 +1,17 @@
-export default function artplayerPluginPip(userOptions = {}) {
+export default function artplayerPluginDocumentPip(userOptions = {}) {
   const options = {
     width: 480,
     height: 270,
+    fallbackToVideoPiP: true,
     placeholder: `Playing in Document Picture-in-Picture`,
     ...userOptions,
   }
 
   return (art) => {
-    if (!('documentPictureInPicture' in window)) {
-      art.notice.show = 'Document Picture-in-Picture is not supported'
-      return
-    }
+    const dpipOK = 'documentPictureInPicture' in window
+      && typeof window.documentPictureInPicture?.requestWindow === 'function'
 
-    const { proxy, icons, i18n, template: { $container }, constructor: { utils: { append, tooltip } } } = art
+    const { proxy, icons, i18n, template: { $container }, constructor: { utils: { append, tooltip, addClass, removeClass } } } = art
 
     const state = {
       win: null,
@@ -23,24 +22,53 @@ export default function artplayerPluginPip(userOptions = {}) {
     }
 
     function copyStylesTo(targetDoc) {
-      const baseStyle = `
-            html, body { margin:0; padding:0; width:100%; height:100%; background:#000; overflow:hidden; }
-            #__art_dpip_root { position:absolute; inset:0; display:flex; }
-            #__art_dpip_root > * { width:100% !important; height:100% !important; }
-        `
+      const base = targetDoc.createElement('style')
+      base.textContent = `
+        html, body { margin:0; padding:0; width:100%; height:100%; background:#000; overflow:hidden; }
+        #__art_dpip_root { position:absolute; inset:0; display:flex; }
+        #__art_dpip_root > * { width:100% !important; height:100% !important; }
+      `
+      targetDoc.head.appendChild(base)
+      if (!targetDoc.querySelector('meta[name="viewport"]')) {
+        const meta = targetDoc.createElement('meta')
+        meta.name = 'viewport'
+        meta.content = 'width=device-width,initial-scale=1'
+        targetDoc.head.appendChild(meta)
+      }
 
-      const $style = document.querySelector('#artplayer-style')
-      const clone = targetDoc.createElement('style')
-      clone.textContent = baseStyle + $style.textContent
-      targetDoc.head.appendChild(clone)
+      try {
+        document.querySelectorAll('link[rel="stylesheet"]').forEach((link) => {
+          const clone = targetDoc.createElement('link')
+          clone.rel = 'stylesheet'
+          clone.href = link.href
+          if (link.media)
+            clone.media = link.media
+          if (link.crossOrigin)
+            clone.crossOrigin = link.crossOrigin
+          if (link.referrerPolicy)
+            clone.referrerPolicy = link.referrerPolicy
+          targetDoc.head.appendChild(clone)
+        })
+      }
+      catch { }
 
-      const meta = targetDoc.createElement('meta')
-      meta.name = 'viewport'
-      meta.content = 'width=device-width,initial-scale=1'
-      targetDoc.head.appendChild(meta)
+      try {
+        document.querySelectorAll('style').forEach((style) => {
+          const clone = targetDoc.createElement('style')
+          clone.textContent = style.textContent
+          targetDoc.head.appendChild(clone)
+        })
+      }
+      catch { }
     }
 
     async function open() {
+      if (!dpipOK && options.fallbackToVideoPiP) {
+        art.pip = true
+        console.warn('[artplayer-plugin-document-pip] Document Picture-in-Picture is not supported, falling back to Video Picture-in-Picture')
+        return
+      }
+
       if (state.win)
         return
 
@@ -72,21 +100,24 @@ export default function artplayerPluginPip(userOptions = {}) {
         state.currentDoc = pipWin.document
 
         const onResize = () => art.resize?.()
-        const onPageHide = () => close()
+        const onClose = () => close()
 
         pipWin.addEventListener('resize', onResize)
-        pipWin.addEventListener('pagehide', onPageHide)
+        pipWin.addEventListener('pagehide', onClose)
+        pipWin.addEventListener('unload', onClose)
 
         state.cleanup = () => {
           pipWin.removeEventListener('resize', onResize)
-          pipWin.removeEventListener('pagehide', onPageHide)
+          pipWin.removeEventListener('pagehide', onClose)
+          pipWin.removeEventListener('unload', onClose)
         }
 
+        addClass($container, 'artplayer-document-pip')
         art.emit('document-pip', true)
       }
       catch (err) {
         art.notice.show = 'Document Picture-in-Picture open failed'
-        console.warn('[artplayer-plugin-pip] open failed:', err)
+        console.warn('[artplayer-plugin-document-pip] open failed:', err)
       }
     }
 
@@ -102,6 +133,11 @@ export default function artplayerPluginPip(userOptions = {}) {
     }
 
     function close() {
+      if (!dpipOK && options.fallbackToVideoPiP) {
+        art.pip = false
+        return
+      }
+
       if (!state.win)
         return
       try {
@@ -109,11 +145,12 @@ export default function artplayerPluginPip(userOptions = {}) {
         restoreToOriginalDocument()
         state.win.close()
         state.win = null
+        removeClass($container, 'artplayer-document-pip')
         art.emit('document-pip', false)
       }
       catch (err) {
         art.notice.show = 'Document Picture-in-Picture close failed'
-        console.warn('[artplayer-plugin-pip] close failed:', err)
+        console.warn('[artplayer-plugin-document-pip] close failed:', err)
       }
     }
 
@@ -143,7 +180,8 @@ export default function artplayerPluginPip(userOptions = {}) {
     art.on('destroy', close)
 
     return {
-      name: 'artplayerPluginPip',
+      name: 'artplayerPluginDocumentPip',
+      state,
       open,
       close,
       toggle,
@@ -152,5 +190,5 @@ export default function artplayerPluginPip(userOptions = {}) {
 }
 
 if (typeof window !== 'undefined') {
-  window.artplayerPluginPip = artplayerPluginPip
+  window.artplayerPluginDocumentPip = artplayerPluginDocumentPip
 }
