@@ -29,6 +29,10 @@ export default class Artplayer extends Emitter {
   constructor(option, readyCallback) {
     super()
 
+    if (!utils.isBrowser) {
+      throw new Error('Artplayer can only be used in the browser environment')
+    }
+
     this.id = ++id
 
     const mergeOption = utils.mergeDeep(Artplayer.option, option)

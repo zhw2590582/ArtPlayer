@@ -2,9 +2,6 @@ export interface Utils {
   userAgent: string
   isMobile: boolean
   isSafari: boolean
-  isWechat: boolean
-  isIE: boolean
-  isAndroid: boolean
   isIOS: boolean
   isIOS13: boolean
   query: (selector: string, parent?: HTMLElement) => HTMLElement
