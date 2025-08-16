@@ -214,6 +214,7 @@ const instances = [];
 class Artplayer extends (0, _emitterDefault.default) {
     constructor(option, readyCallback){
         super();
+        if (!_utils.isBrowser) throw new Error('Artplayer can only be used in the browser environment');
         this.id = ++id;
         const mergeOption = _utils.mergeDeep(Artplayer.option, option);
         mergeOption.container = option.container;
@@ -571,7 +572,7 @@ module.exports = ".art-video-player {\n  --art-theme: red;\n  --art-font-color: 
 });
 
 },{}],"3r4tp":[function(require,module,exports,__globalThis) {
-module.exports = JSON.parse("{\"name\":\"artplayer\",\"version\":\"5.2.5\",\"description\":\"ArtPlayer.js is a modern and full featured HTML5 video player\",\"author\":\"Harvey Zack <laozhaochaguan@gmail.com>\",\"license\":\"MIT\",\"homepage\":\"https://artplayer.org\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/zhw2590582/ArtPlayer.git\"},\"bugs\":{\"url\":\"https://github.com/zhw2590582/ArtPlayer/issues\"},\"keywords\":[\"html5\",\"video\",\"player\"],\"main\":\"dist/artplayer.js\",\"legacy\":\"dist/artplayer.legacy.js\",\"types\":\"types/artplayer.d.ts\",\"browserslist\":\"last 1 Chrome version\",\"dependencies\":{\"option-validator\":\"^2.0.6\"}}");
+module.exports = JSON.parse("{\"name\":\"artplayer\",\"version\":\"5.2.6\",\"description\":\"ArtPlayer.js is a modern and full featured HTML5 video player\",\"author\":\"Harvey Zack <laozhaochaguan@gmail.com>\",\"license\":\"MIT\",\"homepage\":\"https://artplayer.org\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/zhw2590582/ArtPlayer.git\"},\"bugs\":{\"url\":\"https://github.com/zhw2590582/ArtPlayer/issues\"},\"keywords\":[\"html5\",\"video\",\"player\"],\"main\":\"dist/artplayer.js\",\"legacy\":\"dist/artplayer.legacy.js\",\"types\":\"types/artplayer.d.ts\",\"browserslist\":\"last 1 Chrome version\",\"dependencies\":{\"option-validator\":\"^2.0.6\"}}");
 
 },{}],"1dlGA":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -798,22 +799,16 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "userAgent", ()=>userAgent);
 parcelHelpers.export(exports, "isSafari", ()=>isSafari);
-parcelHelpers.export(exports, "isWechat", ()=>isWechat);
-parcelHelpers.export(exports, "isIE", ()=>isIE);
-parcelHelpers.export(exports, "isAndroid", ()=>isAndroid);
 parcelHelpers.export(exports, "isIOS", ()=>isIOS);
 parcelHelpers.export(exports, "isIOS13", ()=>isIOS13);
 parcelHelpers.export(exports, "isMobile", ()=>isMobile);
 parcelHelpers.export(exports, "isBrowser", ()=>isBrowser);
 const userAgent = globalThis?.CUSTOM_USER_AGENT ?? (typeof navigator !== 'undefined' ? navigator.userAgent : '');
 const isSafari = /^(?:(?!chrome|android).)*safari/i.test(userAgent);
-const isWechat = /MicroMessenger/i.test(userAgent);
-const isIE = /MSIE|Trident/i.test(userAgent);
-const isAndroid = /android/i.test(userAgent);
 const isIOS = /iPad|iPhone|iPod/i.test(userAgent) && !window.MSStream;
 const isIOS13 = isIOS || userAgent.includes('Macintosh') && navigator.maxTouchPoints >= 1;
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || isIOS13;
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"1aVnA":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -2369,7 +2364,10 @@ function globalInit(art, events) {
         'touchend',
         'touchmove',
         'mousemove',
+        'pointerup',
         'contextmenu',
+        'pointermove',
+        'visibilitychange',
         'webkitfullscreenchange'
     ];
     const windowEvents = [
@@ -2390,7 +2388,7 @@ function globalInit(art, events) {
             destroyEvents.push(destroy);
         });
         windowEvents.forEach((name)=>{
-            const win = source.window || $player.ownerDocument.defaultView || window;
+            const win = source.window || $player.ownerDocument?.defaultView || window;
             const destroy = events.proxy(win, name, (event)=>{
                 art.emit(`window:${name}`, event);
             });

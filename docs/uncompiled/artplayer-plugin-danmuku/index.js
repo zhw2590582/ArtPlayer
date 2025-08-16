@@ -1643,10 +1643,10 @@ class Setting {
         this.art.proxy(container, 'pointerdown', (event)=>{
             isDroging = event.button === 0;
         });
-        this.art.proxy(document, 'pointermove', (event)=>{
+        this.art.on('document:pointermove', (event)=>{
             if (isDroging) updateLeft.call(this, event);
         });
-        this.art.proxy(document, 'pointerup', (event)=>{
+        this.art.on('document:pointerup', (event)=>{
             if (isDroging) {
                 isDroging = false;
                 updateLeft.call(this, event);
