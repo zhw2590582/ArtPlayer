@@ -232,7 +232,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
                 state.win = pipWin;
                 state.currentDoc = pipWin.document;
                 state.placeholder = document.createElement('div');
-                state.placeholder.className = 'artplayer-pip-placeholder';
+                state.placeholder.className = 'artplayer-document-pip-placeholder';
                 state.placeholder.style.cssText = `display:flex;justify-content:center;align-items:center;width:100%;height:100%;`;
                 state.placeholder.textContent = options.placeholder;
                 state.originalParent = $container.parentNode;
@@ -333,7 +333,7 @@ if (typeof document !== 'undefined') {
 }
 
 },{"bundle-text:./style.less":"dS6Bp","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"dS6Bp":[function(require,module,exports,__globalThis) {
-module.exports = ".art-video-player {\n  width: 100% !important;\n  height: 100% !important;\n}\n";
+module.exports = ".artplayer-document-pip .art-video-player {\n  width: 100% !important;\n  height: 100% !important;\n}\n";
 
 },{}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {

@@ -84,7 +84,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
         state.currentDoc = pipWin.document
 
         state.placeholder = document.createElement('div')
-        state.placeholder.className = 'artplayer-pip-placeholder'
+        state.placeholder.className = 'artplayer-document-pip-placeholder'
         state.placeholder.style.cssText = `display:flex;justify-content:center;align-items:center;width:100%;height:100%;`
         state.placeholder.textContent = options.placeholder
         state.originalParent = $container.parentNode
