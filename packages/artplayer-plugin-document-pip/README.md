@@ -1,6 +1,6 @@
 # artplayer-plugin-document-pip
 
-pip plugin for ArtPlayer
+Document PIP plugin for ArtPlayer
 
 ## Demo
 
