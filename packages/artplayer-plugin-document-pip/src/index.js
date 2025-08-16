@@ -13,7 +13,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
     const isSupported = 'documentPictureInPicture' in window
       && typeof window.documentPictureInPicture?.requestWindow === 'function'
 
-    const { proxy, icons, i18n, template: { $container }, constructor: { utils: { append, tooltip, addClass, removeClass } } } = art
+    const { proxy, icons, i18n, template: { $player }, constructor: { utils: { append, tooltip, addClass, removeClass } } } = art
 
     const state = {
       win: null,
@@ -87,8 +87,8 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
         state.placeholder.className = 'artplayer-document-pip-placeholder'
         state.placeholder.style.cssText = `display:flex;justify-content:center;align-items:center;width:100%;height:100%;`
         state.placeholder.textContent = options.placeholder
-        state.originalParent = $container.parentNode
-        state.originalNext = $container.nextSibling
+        state.originalParent = $player.parentNode
+        state.originalNext = $player.nextSibling
         state.originalParent.insertBefore(state.placeholder, state.originalNext)
 
         const root = pipWin.document.createElement('div')
@@ -97,7 +97,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
 
         copyStylesTo(pipWin.document)
 
-        const adopted = pipWin.document.adoptNode($container)
+        const adopted = pipWin.document.adoptNode($player)
         root.appendChild(adopted)
         state.currentDoc = pipWin.document
 
@@ -114,7 +114,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
           pipWin.removeEventListener('unload', onClose)
         }
 
-        addClass($container, 'artplayer-document-pip')
+        addClass($player, 'artplayer-document-pip')
         art.emit('document-pip', true)
       }
       catch (err) {
@@ -127,7 +127,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
       if (!state.placeholder)
         return
       const backDoc = state.placeholder.ownerDocument || document
-      const adoptedBack = backDoc.adoptNode($container)
+      const adoptedBack = backDoc.adoptNode($player)
       state.originalParent.insertBefore(adoptedBack, state.placeholder)
       state.placeholder.remove()
       state.placeholder = null
@@ -142,7 +142,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
         restoreToOriginalDocument()
         state.win.close()
         state.win = null
-        removeClass($container, 'artplayer-document-pip')
+        removeClass($player, 'artplayer-document-pip')
         art.emit('document-pip', false)
       }
       catch (err) {

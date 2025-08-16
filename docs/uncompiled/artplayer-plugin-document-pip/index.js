@@ -176,7 +176,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
     };
     return (art)=>{
         const isSupported = 'documentPictureInPicture' in window && typeof window.documentPictureInPicture?.requestWindow === 'function';
-        const { proxy, icons, i18n, template: { $container }, constructor: { utils: { append, tooltip, addClass, removeClass } } } = art;
+        const { proxy, icons, i18n, template: { $player }, constructor: { utils: { append, tooltip, addClass, removeClass } } } = art;
         const state = {
             win: null,
             originalParent: null,
@@ -235,14 +235,14 @@ function artplayerPluginDocumentPip(userOptions = {}) {
                 state.placeholder.className = 'artplayer-document-pip-placeholder';
                 state.placeholder.style.cssText = `display:flex;justify-content:center;align-items:center;width:100%;height:100%;`;
                 state.placeholder.textContent = options.placeholder;
-                state.originalParent = $container.parentNode;
-                state.originalNext = $container.nextSibling;
+                state.originalParent = $player.parentNode;
+                state.originalNext = $player.nextSibling;
                 state.originalParent.insertBefore(state.placeholder, state.originalNext);
                 const root = pipWin.document.createElement('div');
                 root.id = '__art_dpip_root';
                 pipWin.document.body.appendChild(root);
                 copyStylesTo(pipWin.document);
-                const adopted = pipWin.document.adoptNode($container);
+                const adopted = pipWin.document.adoptNode($player);
                 root.appendChild(adopted);
                 state.currentDoc = pipWin.document;
                 const onResize = ()=>art.resize?.();
@@ -255,7 +255,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
                     pipWin.removeEventListener('pagehide', onClose);
                     pipWin.removeEventListener('unload', onClose);
                 };
-                addClass($container, 'artplayer-document-pip');
+                addClass($player, 'artplayer-document-pip');
                 art.emit('document-pip', true);
             } catch (err) {
                 art.notice.show = 'Document Picture-in-Picture open failed';
@@ -265,7 +265,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
         function restoreToOriginalDocument() {
             if (!state.placeholder) return;
             const backDoc = state.placeholder.ownerDocument || document;
-            const adoptedBack = backDoc.adoptNode($container);
+            const adoptedBack = backDoc.adoptNode($player);
             state.originalParent.insertBefore(adoptedBack, state.placeholder);
             state.placeholder.remove();
             state.placeholder = null;
@@ -278,7 +278,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
                 restoreToOriginalDocument();
                 state.win.close();
                 state.win = null;
-                removeClass($container, 'artplayer-document-pip');
+                removeClass($player, 'artplayer-document-pip');
                 art.emit('document-pip', false);
             } catch (err) {
                 art.notice.show = 'Document Picture-in-Picture close failed';
@@ -333,7 +333,7 @@ if (typeof document !== 'undefined') {
 }
 
 },{"bundle-text:./style.less":"dS6Bp","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"dS6Bp":[function(require,module,exports,__globalThis) {
-module.exports = ".artplayer-document-pip .art-video-player {\n  width: 100% !important;\n  height: 100% !important;\n}\n";
+module.exports = ".artplayer-document-pip.art-video-player {\n  width: 100% !important;\n  height: 100% !important;\n}\n";
 
 },{}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
