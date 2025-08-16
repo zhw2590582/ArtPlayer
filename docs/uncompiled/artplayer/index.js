@@ -2169,10 +2169,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _clickInit = require("./clickInit");
 var _clickInitDefault = parcelHelpers.interopDefault(_clickInit);
-var _documentInit = require("./documentInit");
-var _documentInitDefault = parcelHelpers.interopDefault(_documentInit);
 var _gestureInit = require("./gestureInit");
 var _gestureInitDefault = parcelHelpers.interopDefault(_gestureInit);
+var _globalInit = require("./globalInit");
+var _globalInitDefault = parcelHelpers.interopDefault(_globalInit);
 var _hoverInit = require("./hoverInit");
 var _hoverInitDefault = parcelHelpers.interopDefault(_hoverInit);
 var _moveInit = require("./moveInit");
@@ -2194,7 +2194,7 @@ class Events {
         (0, _resizeInitDefault.default)(art, this);
         (0, _gestureInitDefault.default)(art, this);
         (0, _viewInitDefault.default)(art, this);
-        (0, _documentInitDefault.default)(art, this);
+        (0, _globalInitDefault.default)(art, this);
         (0, _updateInitDefault.default)(art, this);
     }
     proxy(target, name, callback, option = {}) {
@@ -2221,17 +2221,14 @@ class Events {
 }
 exports.default = Events;
 
-},{"./clickInit":"jci0Q","./documentInit":"2w8KX","./gestureInit":"55SCY","./hoverInit":"hY9ON","./moveInit":"cJ7iV","./resizeInit":"15qnS","./updateInit":"2iqzD","./viewInit":"lGG7W","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"jci0Q":[function(require,module,exports,__globalThis) {
+},{"./clickInit":"jci0Q","./gestureInit":"55SCY","./globalInit":"5R6Zc","./hoverInit":"hY9ON","./moveInit":"cJ7iV","./resizeInit":"15qnS","./updateInit":"2iqzD","./viewInit":"lGG7W","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"jci0Q":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>clickInit);
 var _utils = require("../utils");
 function clickInit(art, events) {
     const { constructor, template: { $player, $video } } = art;
-    events.proxy(document, [
-        'click',
-        'contextmenu'
-    ], (event)=>{
+    function onDocumentClick(event) {
         if ((0, _utils.includeFromEvent)(event, $player)) {
             art.isInput = event.target.tagName === 'INPUT';
             art.isFocus = true;
@@ -2241,7 +2238,9 @@ function clickInit(art, events) {
             art.isFocus = false;
             art.emit('blur', event);
         }
-    });
+    }
+    art.on('document:click', onDocumentClick);
+    art.on('document:contextmenu', onDocumentClick);
     let clickTimes = [];
     events.proxy($video, 'click', (event)=>{
         const now = Date.now();
@@ -2269,20 +2268,7 @@ function clickInit(art, events) {
     });
 }
 
-},{"../utils":"gGxPm","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"2w8KX":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>documentInit);
-function documentInit(art, events) {
-    events.proxy(document, 'mousemove', (event)=>{
-        art.emit('document:mousemove', event);
-    });
-    events.proxy(document, 'mouseup', (event)=>{
-        art.emit('document:mouseup', event);
-    });
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"55SCY":[function(require,module,exports,__globalThis) {
+},{"../utils":"gGxPm","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"55SCY":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>gestureInit);
@@ -2367,11 +2353,55 @@ function gestureInit(art, events) {
             onTouchStart(event);
         });
         events.proxy($progress, 'touchmove', onTouchMove);
-        events.proxy(document, 'touchend', onTouchEnd);
+        art.on('document:touchend', onTouchEnd);
     }
 }
 
-},{"../control/progress":"7uH4F","../utils":"gGxPm","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"hY9ON":[function(require,module,exports,__globalThis) {
+},{"../control/progress":"7uH4F","../utils":"gGxPm","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"5R6Zc":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>globalInit);
+function globalInit(art, events) {
+    const documentEvents = [
+        'click',
+        'mouseup',
+        'keydown',
+        'touchend',
+        'touchmove',
+        'mousemove',
+        'contextmenu',
+        'webkitfullscreenchange'
+    ];
+    const windowEvents = [
+        'resize',
+        'scroll',
+        'orientationchange'
+    ];
+    const destroyEvents = [];
+    function bindGlobalEvents(source = {}) {
+        for(let index = 0; index < destroyEvents.length; index++)events.remove(destroyEvents[index]);
+        destroyEvents.length = 0;
+        const { $player } = art.template;
+        documentEvents.forEach((name)=>{
+            const doc = source.document || $player.ownerDocument || document;
+            const destroy = events.proxy(doc, name, (event)=>{
+                art.emit(`document:${name}`, event);
+            });
+            destroyEvents.push(destroy);
+        });
+        windowEvents.forEach((name)=>{
+            const win = source.window || $player.ownerDocument.defaultView || window;
+            const destroy = events.proxy(win, name, (event)=>{
+                art.emit(`window:${name}`, event);
+            });
+            destroyEvents.push(destroy);
+        });
+    }
+    bindGlobalEvents();
+    events.bindGlobalEvents = bindGlobalEvents;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"hY9ON":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>hoverInit);
@@ -2412,10 +2442,8 @@ function resizeInit(art, events) {
         notice.show = '';
     });
     const resizeFn = (0, _utils.debounce)(()=>art.emit('resize'), constructor.RESIZE_TIME);
-    events.proxy(window, [
-        'orientationchange',
-        'resize'
-    ], ()=>resizeFn());
+    art.on('window:orientationchange', ()=>resizeFn());
+    art.on('window:resize', ()=>resizeFn());
     if (screen && screen.orientation && screen.orientation.onchange) events.proxy(screen.orientation, 'change', ()=>resizeFn());
 }
 
@@ -2441,12 +2469,12 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>viewInit);
 var _utils = require("../utils");
-function viewInit(art, events) {
+function viewInit(art) {
     const { option, constructor, template: { $container } } = art;
     const scrollFn = (0, _utils.throttle)(()=>{
         art.emit('view', (0, _utils.isInViewport)($container, constructor.SCROLL_GAP));
     }, constructor.SCROLL_TIME);
-    events.proxy(window, 'scroll', ()=>scrollFn());
+    art.on('window:scroll', ()=>scrollFn());
     art.on('view', (state)=>{
         if (option.autoMini) art.mini = !state;
     });
@@ -2463,7 +2491,7 @@ class Hotkey {
         if (art.option.hotkey && !(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { proxy, constructor } = this.art;
+        const { constructor } = this.art;
         this.add('Escape', ()=>{
             if (this.art.fullscreenWeb) this.art.fullscreenWeb = false;
         });
@@ -2482,7 +2510,7 @@ class Hotkey {
         this.add('ArrowDown', ()=>{
             this.art.volume -= constructor.VOLUME_STEP;
         });
-        proxy(document, 'keydown', (event)=>{
+        this.art.on('document:keydown', (event)=>{
             if (this.art.isFocus) {
                 const tag = document.activeElement.tagName.toUpperCase();
                 const editable = document.activeElement.getAttribute('contenteditable');
@@ -3341,7 +3369,7 @@ function fullscreenMix(art) {
         });
     };
     const webkitScreenfull = (art)=>{
-        art.proxy(document, 'webkitfullscreenchange', ()=>{
+        art.on('document:webkitfullscreenchange', ()=>{
             art.emit('fullscreen', art.fullscreen);
             art.emit('resize');
         });
@@ -4498,8 +4526,8 @@ function fastForward(art) {
         }
     };
     proxy($video, 'touchstart', onStart);
-    proxy(document, 'touchmove', onStop);
-    proxy(document, 'touchend', onStop);
+    art.on('document:touchmove', onStop);
+    art.on('document:touchend', onStop);
     return {
         name: 'fastForward',
         get state () {

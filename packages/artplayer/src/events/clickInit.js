@@ -6,7 +6,7 @@ export default function clickInit(art, events) {
     template: { $player, $video },
   } = art
 
-  events.proxy(document, ['click', 'contextmenu'], (event) => {
+  function onDocumentClick(event) {
     if (includeFromEvent(event, $player)) {
       art.isInput = event.target.tagName === 'INPUT'
       art.isFocus = true
@@ -17,7 +17,10 @@ export default function clickInit(art, events) {
       art.isFocus = false
       art.emit('blur', event)
     }
-  })
+  }
+
+  art.on('document:click', onDocumentClick)
+  art.on('document:contextmenu', onDocumentClick)
 
   let clickTimes = []
   events.proxy($video, 'click', (event) => {

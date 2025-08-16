@@ -11,7 +11,7 @@ export default class Hotkey {
   }
 
   init() {
-    const { proxy, constructor } = this.art
+    const { constructor } = this.art
 
     this.add('Escape', () => {
       if (this.art.fullscreenWeb) {
@@ -39,7 +39,7 @@ export default class Hotkey {
       this.art.volume -= constructor.VOLUME_STEP
     })
 
-    proxy(document, 'keydown', (event) => {
+    this.art.on('document:keydown', (event) => {
       if (this.art.isFocus) {
         const tag = document.activeElement.tagName.toUpperCase()
         const editable = document.activeElement.getAttribute('contenteditable')

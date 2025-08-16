@@ -1,6 +1,6 @@
 import { isInViewport, throttle } from '../utils'
 
-export default function viewInit(art, events) {
+export default function viewInit(art) {
   const {
     option,
     constructor,
@@ -11,7 +11,7 @@ export default function viewInit(art, events) {
     art.emit('view', isInViewport($container, constructor.SCROLL_GAP))
   }, constructor.SCROLL_TIME)
 
-  events.proxy(window, 'scroll', () => scrollFn())
+  art.on('window:scroll', () => scrollFn())
 
   art.on('view', (state) => {
     if (option.autoMini) {

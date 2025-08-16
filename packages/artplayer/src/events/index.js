@@ -1,6 +1,6 @@
 import clickInit from './clickInit'
-import documentInit from './documentInit'
 import gestureInit from './gestureInit'
+import globalInit from './globalInit'
 import hoverInit from './hoverInit'
 import moveInit from './moveInit'
 import resizeInit from './resizeInit'
@@ -19,7 +19,7 @@ export default class Events {
     resizeInit(art, this)
     gestureInit(art, this)
     viewInit(art, this)
-    documentInit(art, this)
+    globalInit(art, this)
     updateInit(art, this)
   }
 

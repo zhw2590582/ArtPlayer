@@ -256,6 +256,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
                     pipWin.removeEventListener('unload', onClose);
                 };
                 addClass($player, 'artplayer-document-pip');
+                art.events.bindGlobalEvents?.();
                 art.emit('document-pip', true);
             } catch (err) {
                 art.notice.show = 'Document Picture-in-Picture open failed';
@@ -279,6 +280,7 @@ function artplayerPluginDocumentPip(userOptions = {}) {
                 state.win.close();
                 state.win = null;
                 removeClass($player, 'artplayer-document-pip');
+                art.events.bindGlobalEvents?.();
                 art.emit('document-pip', false);
             } catch (err) {
                 art.notice.show = 'Document Picture-in-Picture close failed';

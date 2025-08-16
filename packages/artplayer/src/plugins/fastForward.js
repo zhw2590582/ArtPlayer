@@ -32,8 +32,8 @@ export default function fastForward(art) {
   }
 
   proxy($video, 'touchstart', onStart)
-  proxy(document, 'touchmove', onStop)
-  proxy(document, 'touchend', onStop)
+  art.on('document:touchmove', onStop)
+  art.on('document:touchend', onStop)
 
   return {
     name: 'fastForward',

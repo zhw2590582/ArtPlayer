@@ -43,7 +43,7 @@ export default function fullscreenMix(art) {
   }
 
   const webkitScreenfull = (art) => {
-    art.proxy(document, 'webkitfullscreenchange', () => {
+    art.on('document:webkitfullscreenchange', () => {
       art.emit('fullscreen', art.fullscreen)
       art.emit('resize')
     })

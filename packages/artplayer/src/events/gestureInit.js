@@ -99,6 +99,6 @@ export default function gestureInit(art, events) {
     })
 
     events.proxy($progress, 'touchmove', onTouchMove)
-    events.proxy(document, 'touchend', onTouchEnd)
+    art.on('document:touchend', onTouchEnd)
   }
 }
