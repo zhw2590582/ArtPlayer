@@ -164,6 +164,8 @@
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginDocumentPip);
+var _styleLess = require("bundle-text:./style.less");
+var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginDocumentPip(userOptions = {}) {
     const options = {
         width: 480,
@@ -316,8 +318,24 @@ function artplayerPluginDocumentPip(userOptions = {}) {
     };
 }
 if (typeof window !== 'undefined') window.artplayerPluginDocumentPip = artplayerPluginDocumentPip;
+if (typeof document !== 'undefined') {
+    const id = 'artplayer-plugin-document-pip';
+    let $style = document.getElementById(id);
+    if (!$style) {
+        $style = document.createElement('style');
+        $style.id = id;
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ()=>{
+            document.head.appendChild($style);
+        });
+        else (document.head || document.documentElement).appendChild($style);
+    }
+    $style.textContent = (0, _styleLessDefault.default);
+}
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"8oCsH":[function(require,module,exports,__globalThis) {
+},{"bundle-text:./style.less":"dS6Bp","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"dS6Bp":[function(require,module,exports,__globalThis) {
+module.exports = ".art-video-player {\n  width: 100% !important;\n  height: 100% !important;\n}\n";
+
+},{}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
