@@ -1162,6 +1162,7 @@ export default class Artplayer extends Player {
     ) => () => void
     hover: (element: HTMLElement, mouseenter?: (event: Event) => any, mouseleave?: (event: Event) => any) => void
     remove: (event: Event) => void
+    bindGlobalEvents: (source?: { window?: Window, document?: Document }) => void
   }
 
   readonly storage: {
