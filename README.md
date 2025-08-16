@@ -29,7 +29,7 @@
 
 <p align="center">
     <a href="https://artplayer.org">
-        <img src="./images/screenshot.png" alt="screenshot">
+        <img src="./images/screenshot.png" alt="screenshot" width="720">
     </a>
 </p>
 
