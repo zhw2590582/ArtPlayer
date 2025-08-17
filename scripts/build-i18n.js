@@ -1,26 +1,31 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 import { Parcel } from '@parcel/core'
 import { glob } from 'glob'
 
 const basePath = 'packages/artplayer'
+const i18nSrcDir = path.join(basePath, 'src/i18n')
+const distDir = path.join(basePath, 'dist/i18n')
 
-const entries = glob.sync(path.join(basePath, 'src/i18n/*.js'), {
-  ignore: [path.join(basePath, 'src/i18n/index.js'), path.join(basePath, 'src/i18n/zh-cn.js')],
-})
-
-const packagePath = path.join(basePath, 'package.json')
-const backupPackagePath = path.join(basePath, 'package_backup.json');
+const entries = glob.sync('*.js', {
+  cwd: i18nSrcDir,
+  ignore: ['index.js', 'zh-cn.js'],
+}).map(f => path.join(i18nSrcDir, f));
 
 (async function build() {
-  fs.renameSync(packagePath, backupPackagePath)
+  if (fs.existsSync(distDir)) {
+    fs.rmSync(distDir, { recursive: true, force: true })
+  }
+
+  fs.mkdirSync(distDir, { recursive: true })
 
   const bundler = new Parcel({
     entries,
     defaultConfig: '@parcel/config-default',
     mode: 'production',
     defaultTargetOptions: {
-      distDir: 'packages/artplayer/dist/i18n',
+      distDir,
       outputFormat: 'global',
       sourceMaps: false,
       isLibrary: true,
@@ -37,10 +42,16 @@ const backupPackagePath = path.join(basePath, 'package_backup.json');
     const { bundleGraph, buildTime } = await bundler.run()
     const bundles = bundleGraph.getBundles()
     console.log(`✨ Built [i18n] ${bundles.length} bundles in ${buildTime}ms`)
-    fs.renameSync(backupPackagePath, packagePath)
+    bundles.forEach(b => console.log('📦 Output:', b.filePath))
   }
   catch (err) {
-    console.log(err.diagnostics)
-    fs.renameSync(backupPackagePath, packagePath)
+    console.error('❌ Build i18n failed.')
+    if (err?.diagnostics) {
+      console.error(err.diagnostics)
+    }
+    else {
+      console.error(err)
+    }
+    process.exitCode = 1
   }
 })()
