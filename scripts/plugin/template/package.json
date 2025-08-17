@@ -17,7 +17,14 @@
     "video",
     "player"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/artplayer-plugin-{{name}}.mjs",
+      "require": "./dist/artplayer-plugin-{{name}}.js"
+    }
+  },
   "main": "dist/artplayer-plugin-{{name}}.js",
+  "module": "./dist/artplayer-plugin-{{name}}.mjs",
   "types": "types/artplayer-plugin-{{name}}.d.ts",
   "legacy": "dist/artplayer-plugin-{{name}}.legacy.js",
   "browserslist": "last 1 Chrome version"
