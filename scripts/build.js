@@ -55,7 +55,7 @@ async function build(name, targetName, clean = false) {
     esm: {
       context: 'browser',
       distDir,
-      sourceMap: true,
+      sourceMap: false,
       outputFormat: 'esmodule',
       isLibrary: true,
       engines: {
@@ -104,27 +104,6 @@ async function build(name, targetName, clean = false) {
   fs.renameSync(filePath, newFilePath)
   const size = fs.statSync(newFilePath).size / 1024
   await cpy(newFilePath, compiledPath)
-
-  if (targetName === 'esm') {
-    const jsFile = newFilePath
-    const oldMapName = 'index.js.map'
-    const newMapName = `${names.esm}.map`
-
-    const oldMapPath = path.join(distDir, oldMapName)
-    const newMapPath = path.join(distDir, newMapName)
-    if (fs.existsSync(oldMapPath)) {
-      fs.renameSync(oldMapPath, newMapPath)
-    }
-
-    let jsContent = fs.readFileSync(jsFile, 'utf8')
-    jsContent = jsContent.replace(
-      /\/\/# sourceMappingURL=.*\.js\.map/,
-      `\n//# sourceMappingURL=${path.basename(newMapName)}`,
-    )
-    fs.writeFileSync(jsFile, jsContent)
-    await cpy(newMapPath, compiledPath)
-    await cpy(jsFile, compiledPath)
-  }
 
   console.log(
     `✨ Built@${targetName} ${name}@${version}`,
