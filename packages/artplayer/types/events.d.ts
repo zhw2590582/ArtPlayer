@@ -4,13 +4,29 @@ import type { Subtitle } from './subtitle'
 export type Bar = 'loaded' | 'played' | 'hover'
 
 export interface Events {
+  'document:click': [event: Event]
+  'document:mouseup': [event: Event]
+  'document:keydown': [event: Event]
+  'document:touchend': [event: Event]
+  'document:touchmove': [event: Event]
+  'document:mousemove': [event: Event]
+  'document:pointerup': [event: Event]
+  'document:contextmenu': [event: Event]
+  'document:pointermove': [event: Event]
+  'document:visibilitychange': [event: Event]
+  'document:webkitfullscreenchange': [event: Event]
+
+  'window:resize': [event: Event]
+  'window:scroll': [event: Event]
+  'window:orientationchange': [event: Event]
+
   'video:canplay': [event: Event]
   'video:canplaythrough': [event: Event]
   'video:complete': [event: Event]
   'video:durationchange': [event: Event]
   'video:emptied': [event: Event]
   'video:ended': [event: Event]
-  'video:error': [event: Error]
+  'video:error': [error: Error]
   'video:loadeddata': [event: Event]
   'video:loadedmetadata': [event: Event]
   'video:pause': [event: Event]
@@ -25,8 +41,7 @@ export interface Events {
   'video:timeupdate': [event: Event]
   'video:volumechange': [event: Event]
   'video:waiting': [event: Event]
-  'document:mousemove': [event: Event]
-  'document:mouseup': [event: Event]
+
   'info': [state: boolean]
   'layer': [state: boolean]
   'loading': [state: boolean]
@@ -36,17 +51,21 @@ export interface Events {
   'control': [state: boolean]
   'setting': [state: boolean]
   'hotkey': [event: Event]
+
   'destroy': []
+
   'subtitleOffset': [offset: number]
   'subtitleBeforeUpdate': [cue: VTTCue]
   'subtitleAfterUpdate': [cue: VTTCue]
   'subtitleLoad': [cues: VTTCue[], option: Subtitle]
+
   'focus': [event: Event]
   'blur': [event: Event]
   'dblclick': [event: Event]
   'click': [event: Event]
   'hover': [state: boolean, event: Event]
   'mousemove': [event: Event]
+
   'resize': []
   'view': [state: boolean]
   'lock': [state: boolean]
@@ -54,6 +73,7 @@ export interface Events {
   'autoHeight': [height: number]
   'autoSize': []
   'ready': []
+
   'error': [error: Error, reconnectTime: number]
   'flip': [flip: Flip]
   'fullscreen': [state: boolean]
@@ -67,6 +87,6 @@ export interface Events {
   'seek': [currentTime: number]
   'restart': [url: string]
   'muted': [state: boolean]
-  'setBar': [type: Bar, percentage: number, event?: Event]
+  'setBar': [type: Bar, percentage: number, event?: Event | undefined]
   'keydown': [event: KeyboardEvent]
 }

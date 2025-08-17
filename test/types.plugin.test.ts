@@ -18,3 +18,7 @@ art.plugins.add(
     margin: [0, '10%'],
   }),
 )
+
+art.on('artplayerPluginDanmuku:load', () => {
+  //
+})

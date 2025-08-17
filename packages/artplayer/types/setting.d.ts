@@ -13,7 +13,7 @@ type Props<T> = {
   $parent: Setting
   $parents: Setting[]
   $option: Setting[]
-  $events: Array<(...args: any[]) => any>
+  $events: Array<(...args: unknown[]) => unknown>
   $formatted: boolean
 } & Omit<T, 'html' | 'icon' | 'tooltip'>
 
@@ -90,5 +90,5 @@ export interface Setting {
    */
   onClick?: (this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event) => void
 
-  [key: string]: any
+  [key: string]: unknown
 }

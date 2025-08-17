@@ -21,12 +21,12 @@ export interface Component {
   /**
    * Component parent name
    */
-  readonly name: string | void
+  readonly name: string | undefined
 
   /**
    * Component parent element
    */
-  readonly $parent: HTMLElement | void
+  readonly $parent: HTMLElement | undefined
 
   /**
    * Whether to show component parent

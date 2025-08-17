@@ -10,7 +10,19 @@ import type { Subtitle } from './subtitle'
 import type { Template } from './template'
 import type { Utils } from './utils'
 
-export type { Config, Events, I18n, Icons, Option, Player, Setting, SettingOption, Subtitle, Template, Utils }
+export type {
+  Config,
+  Events,
+  I18n,
+  Icons,
+  Option,
+  Player,
+  Setting,
+  SettingOption,
+  Subtitle,
+  Template,
+  Utils,
+}
 
 export default class Artplayer extends Player {
   constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
@@ -35,9 +47,9 @@ export default class Artplayer extends Player {
   static readonly config: Config
   static readonly utils: Utils
   static readonly scheme: Record<keyof Option, any>
-  static readonly Emitter: (...args: any[]) => any
+  static readonly Emitter: new (...args: any[]) => any
   static readonly validator: <T extends object>(option: T, scheme: object) => T
-  static readonly kindOf: (item: any) => string
+  static readonly kindOf: (item: unknown) => string
   static readonly html: Artplayer['template']['html']
   static readonly option: Option
 
@@ -84,23 +96,32 @@ export default class Artplayer extends Player {
   readonly isRotate: boolean
   readonly isDestroy: boolean
 
-  flv: any
-  m3u8: any
-  hls: any
-  ts: any
-  mpd: any
-  torrent: any
+  flv?: unknown
+  m3u8?: unknown
+  hls?: unknown
+  ts?: unknown
+  mpd?: unknown
+  torrent?: unknown
 
-  on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown
-  once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown
-  emit<T extends keyof Events>(name: T, ...args: unknown[]): unknown
-  off<T extends keyof Events>(name: T, callback?: ((...args: Events[T]) => unknown)): unknown
+  on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
+  on(name: string, fn: (...args: any[]) => unknown, ctx?: object): this
+
+  once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
+  once(name: string, fn: (...args: any[]) => unknown, ctx?: object): this
+
+  emit<T extends keyof Events>(name: T, ...args: Events[T]): this
+  emit(name: string, ...args: any[]): this
+
+  off<T extends keyof Events>(name: T, callback?: (...args: Events[T]) => unknown): this
+  off(name: string, callback?: (...args: any[]) => unknown): this
 
   query: Artplayer['template']['query']
   proxy: Artplayer['events']['proxy']
   video: Artplayer['template']['$video']
 
-  e: Record<keyof Events, { fn: (...args: any[]) => any, ctx: unknown }[]>
+  e: {
+    [K in keyof Events]?: { fn: (...args: Events[K]) => any, ctx: unknown }[]
+  }
 
   destroy(removeHtml?: boolean): void
 
@@ -123,9 +144,9 @@ export default class Artplayer extends Player {
 
   readonly storage: {
     name: string
-    settings: Record<string, any>
-    get: (key: string) => any
-    set: (key: string, value: any) => void
+    settings: Record<string, unknown>
+    get: (key: string) => unknown
+    set: (key: string, value: unknown) => void
     del: (key: string) => boolean
     clear: () => void
   }
@@ -144,9 +165,7 @@ export default class Artplayer extends Player {
   }
 
   readonly layers: Record<string, HTMLElement> & Component
-
   readonly controls: Record<string, HTMLElement> & Component
-
   readonly contextmenu: Record<string, HTMLElement> & Component
 
   readonly subtitle: {
@@ -160,7 +179,6 @@ export default class Artplayer extends Player {
   } & Component
 
   readonly info: Component
-
   readonly loading: Component
 
   readonly hotkey: {

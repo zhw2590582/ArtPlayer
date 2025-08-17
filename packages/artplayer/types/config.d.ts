@@ -1,7 +1,4 @@
 export interface Config {
-  /**
-   * Supported video properties
-   */
   properties: [
     'audioTracks',
     'autoplay',

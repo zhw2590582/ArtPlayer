@@ -7,7 +7,14 @@ import type { Quality } from './quality'
 import type { Setting } from './setting'
 import type { Subtitle } from './subtitle'
 
-export type CustomType = 'flv' | 'm3u8' | 'hls' | 'ts' | 'mpd' | 'torrent' | (string & Record<never, never>)
+export type CustomType
+  = | 'flv'
+    | 'm3u8'
+    | 'hls'
+    | 'ts'
+    | 'mpd'
+    | 'torrent'
+    | (string & Record<never, never>)
 
 export interface Thumbnails {
   /**
@@ -281,7 +288,9 @@ export interface Option {
    * Other video attribute
    */
   moreVideoAttr?: Partial<{
-    [key in keyof HTMLVideoElement as HTMLVideoElement[key] extends (...args: any[]) => any ? never : key]: HTMLVideoElement[key];
+    [key in keyof HTMLVideoElement as HTMLVideoElement[key] extends (...args: unknown[]) => unknown
+      ? never
+      : key]: HTMLVideoElement[key]
   }>
 
   /**
@@ -293,7 +302,7 @@ export interface Option {
    * Custom default icons
    */
   icons?: {
-    [key in keyof Icons]?: HTMLElement | string;
+    [key in keyof Icons]?: HTMLElement | string
   }
 
   /**
@@ -305,6 +314,9 @@ export interface Option {
    * Custom video type function
    */
   customType?: Partial<
-        Record<CustomType, (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => any>
+    Record<
+      CustomType,
+      (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => unknown
     >
+  >
 }
