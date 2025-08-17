@@ -2,11 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { Parcel } from '@parcel/core'
+import cpy from 'cpy'
 import { glob } from 'glob'
 
 const basePath = 'packages/artplayer'
 const i18nSrcDir = path.join(basePath, 'src/i18n')
 const distDir = path.join(basePath, 'dist/i18n')
+const compiledPath = path.resolve('docs/compiled/i18n')
 
 const entries = glob.sync('*.js', {
   cwd: i18nSrcDir,
@@ -42,7 +44,7 @@ const entries = glob.sync('*.js', {
     const { bundleGraph, buildTime } = await bundler.run()
     const bundles = bundleGraph.getBundles()
     console.log(`✨ Built [i18n] ${bundles.length} bundles in ${buildTime}ms`)
-    bundles.forEach(b => console.log('📦 Output:', b.filePath))
+    await cpy(distDir, compiledPath)
   }
   catch (err) {
     console.error('❌ Build i18n failed.')
