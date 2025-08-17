@@ -1,14 +1,13 @@
 import type Artplayer from 'artplayer';
 
-export = {{export}};
-export as namespace {{export}};
-
-type Option = {
+interface Option {
     //
 };
 
-type Result = {
+interface Result {
     name: '{{export}}';
 };
 
 declare const {{export}}: (option: Option) => (art: Artplayer) => Result;
+
+export default {{export}}
