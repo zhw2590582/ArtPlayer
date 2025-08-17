@@ -27,5 +27,5 @@ if (typeof document !== 'undefined') {
 }
 
 if (typeof window !== 'undefined') {
-    window['{{export}}'] = {{export}};
+    window.{{export}} = {{export}};
 }
