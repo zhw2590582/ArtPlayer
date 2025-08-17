@@ -6,8 +6,8 @@
     <title>ArtPlayer ESM with Import Map</title>
     <style>
         #player {
-            width: 640px;
-            height: 360px;
+            max-width: 720px;
+            aspect-ratio: 16 / 9;
             margin: 50px auto;
             border: 1px solid #ccc;
         }
@@ -16,7 +16,8 @@
     {
         "imports": {
             "artplayer": "/compiled/artplayer.mjs",
-            "artplayer-plugin-danmuku": "/compiled/artplayer-plugin-danmuku.mjs"
+            "artplayer-plugin-danmuku": "/compiled/artplayer-plugin-danmuku.mjs",
+            "artplayer-plugin-document-pip": "/compiled/artplayer-plugin-document-pip.mjs"
         }
     }
     </script>
@@ -27,11 +28,13 @@
     <script type="module">
         import Artplayer from 'artplayer';
         import ArtplayerPluginDanmuku from 'artplayer-plugin-danmuku';
+        import ArtplayerPluginDocumentPip from 'artplayer-plugin-document-pip';
 
         const art = new Artplayer({
             container: '#player',
             url: '/assets/sample/video.mp4',
             plugins: [
+                ArtplayerPluginDocumentPip(),
                 artplayerPluginDanmuku({
                     danmuku: '/assets/sample/danmuku.xml',
                 })
