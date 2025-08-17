@@ -13,7 +13,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
     const isSupported = 'documentPictureInPicture' in window
       && typeof window.documentPictureInPicture?.requestWindow === 'function'
 
-    const { proxy, icons, i18n, template: { $player }, constructor: { utils: { append, tooltip, addClass, removeClass } } } = art
+    const { proxy, icons, i18n, template: { $player }, constructor: { utils: { append, tooltip, addClass, removeClass, sleep } } } = art
 
     const state = {
       win: null,
@@ -116,8 +116,9 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
 
         addClass($player, 'artplayer-document-pip')
         art.events.bindGlobalEvents?.()
-        art.emit('resize')
         art.emit('document-pip', true)
+        await sleep(100)
+        art.emit('resize')
       }
       catch (err) {
         art.notice.show = 'Document Picture-in-Picture open failed'
@@ -136,7 +137,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
       state.currentDoc = backDoc
     }
 
-    function close() {
+    async function close() {
       if (!state.win)
         return
       try {
@@ -146,8 +147,9 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
         state.win = null
         removeClass($player, 'artplayer-document-pip')
         art.events.bindGlobalEvents?.()
-        art.emit('resize')
         art.emit('document-pip', false)
+        await sleep(100)
+        art.emit('resize')
       }
       catch (err) {
         art.notice.show = 'Document Picture-in-Picture close failed'
