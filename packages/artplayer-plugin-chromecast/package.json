@@ -18,13 +18,14 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-chromecast.esm.js",
-    "require": "./dist/artplayer-plugin-chromecast.js",
-    "default": "./dist/artplayer-plugin-chromecast.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-chromecast.mjs",
+      "require": "./dist/artplayer-plugin-chromecast.js"
+    }
   },
-  "main": "dist/artplayer-plugin-chromecast.js",
-  "legacy": "dist/artplayer-plugin-chromecast.legacy.js",
-  "module": "dist/artplayer-plugin-chromecast.esm.js",
-  "types": "types/artplayer-plugin-chromecast.d.ts",
+  "main": "./dist/artplayer-plugin-chromecast.js",
+  "module": "./dist/artplayer-plugin-chromecast.mjs",
+  "types": "./types/artplayer-plugin-chromecast.d.ts",
+  "legacy": "./dist/artplayer-plugin-chromecast.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

@@ -18,13 +18,14 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-ambilight.esm.js",
-    "require": "./dist/artplayer-plugin-ambilight.js",
-    "default": "./dist/artplayer-plugin-ambilight.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-ambilight.mjs",
+      "require": "./dist/artplayer-plugin-ambilight.js"
+    }
   },
-  "main": "dist/artplayer-plugin-ambilight.js",
-  "legacy": "dist/artplayer-plugin-ambilight.legacy.js",
-  "module": "dist/artplayer-plugin-ambilight.esm.js",
-  "types": "types/artplayer-plugin-ambilight.d.ts",
+  "main": "./dist/artplayer-plugin-ambilight.js",
+  "module": "./dist/artplayer-plugin-ambilight.mjs",
+  "types": "./types/artplayer-plugin-ambilight.d.ts",
+  "legacy": "./dist/artplayer-plugin-ambilight.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-  重命名 `.esm.js` 到 `.mjs`
 -  移除 `svg` 默认的 `fill` 颜色值
 -  优化 `autoOrientation` 逻辑
 -  添加 `artplayer-plugin-document-pip` 插件

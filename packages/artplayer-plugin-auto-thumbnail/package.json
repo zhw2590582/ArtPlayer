@@ -18,13 +18,14 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-auto-thumbnail.esm.js",
-    "require": "./dist/artplayer-plugin-auto-thumbnail.js",
-    "default": "./dist/artplayer-plugin-auto-thumbnail.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+      "require": "./dist/artplayer-plugin-auto-thumbnail.js"
+    }
   },
-  "main": "dist/artplayer-plugin-auto-thumbnail.js",
-  "legacy": "dist/artplayer-plugin-auto-thumbnail.legacy.js",
-  "module": "dist/artplayer-plugin-auto-thumbnail.esm.js",
-  "types": "types/artplayer-plugin-auto-thumbnail.d.ts",
+  "main": "./dist/artplayer-plugin-auto-thumbnail.js",
+  "module": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+  "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+  "legacy": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

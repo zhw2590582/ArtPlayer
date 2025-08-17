@@ -18,14 +18,15 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-danmuku-mask.esm.js",
-    "require": "./dist/artplayer-plugin-danmuku-mask.js",
-    "default": "./dist/artplayer-plugin-danmuku-mask.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-danmuku-mask.mjs",
+      "require": "./dist/artplayer-plugin-danmuku-mask.js"
+    }
   },
-  "main": "dist/artplayer-plugin-danmuku-mask.js",
-  "legacy": "dist/artplayer-plugin-danmuku-mask.legacy.js",
-  "module": "dist/artplayer-plugin-danmuku-mask.esm.js",
-  "types": "types/artplayer-plugin-danmuku-mask.d.ts",
+  "main": "./dist/artplayer-plugin-danmuku-mask.js",
+  "module": "./dist/artplayer-plugin-danmuku-mask.mjs",
+  "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+  "legacy": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
   "browserslist": "last 1 Chrome version",
   "dependencies": {
     "@mediapipe/selfie_segmentation": "^0.1.1675465747",

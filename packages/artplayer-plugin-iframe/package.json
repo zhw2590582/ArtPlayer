@@ -18,13 +18,14 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-iframe.esm.js",
-    "require": "./dist/artplayer-plugin-iframe.js",
-    "default": "./dist/artplayer-plugin-iframe.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-iframe.mjs",
+      "require": "./dist/artplayer-plugin-iframe.js"
+    }
   },
-  "main": "dist/artplayer-plugin-iframe.js",
-  "legacy": "dist/artplayer-plugin-iframe.legacy.js",
-  "module": "dist/artplayer-plugin-iframe.esm.js",
-  "types": "types/artplayer-plugin-iframe.d.ts",
+  "main": "./dist/artplayer-plugin-iframe.js",
+  "module": "./dist/artplayer-plugin-iframe.mjs",
+  "types": "./types/artplayer-plugin-iframe.d.ts",
+  "legacy": "./dist/artplayer-plugin-iframe.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

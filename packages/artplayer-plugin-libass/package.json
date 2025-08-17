@@ -18,14 +18,15 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-libass.esm.js",
-    "require": "./dist/artplayer-plugin-libass.js",
-    "default": "./dist/artplayer-plugin-libass.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-libass.mjs",
+      "require": "./dist/artplayer-plugin-libass.js"
+    }
   },
-  "main": "dist/artplayer-plugin-libass.js",
-  "legacy": "dist/artplayer-plugin-libass.legacy.js",
-  "module": "dist/artplayer-plugin-libass.esm.js",
-  "types": "types/artplayer-plugin-libass.d.ts",
+  "main": "./dist/artplayer-plugin-libass.js",
+  "module": "./dist/artplayer-plugin-libass.mjs",
+  "types": "./types/artplayer-plugin-libass.d.ts",
+  "legacy": "./dist/artplayer-plugin-libass.legacy.js",
   "browserslist": "last 1 Chrome version",
   "dependencies": {
     "libass-wasm": "^4.1.0"

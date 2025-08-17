@@ -65,7 +65,7 @@ https://unpkg.com/artplayer/dist/artplayer.js
 </html>
 ```
 
-::: 
+:::
 
 ::: warning 提示
 
@@ -84,75 +84,75 @@ https://unpkg.com/artplayer/dist/artplayer.js
 ::: code-group
 
 ```vue [Artplayer.vue]
-<template>
-  <div ref="artRef"></div>
-</template>
-
 <script>
-import Artplayer from "artplayer";
+import Artplayer from 'artplayer'
 
 export default {
-  data() {
-    return {
-      instance: null,
-    };
-  },
   props: {
     option: {
       type: Object,
       required: true,
     },
   },
+  data() {
+    return {
+      instance: null,
+    }
+  },
   mounted() {
     this.instance = new Artplayer({
       ...this.option,
       container: this.$refs.artRef,
-    });
+    })
 
     this.$nextTick(() => {
-      this.$emit("get-instance", this.instance);
-    });
+      this.$emit('get-instance', this.instance)
+    })
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.instance && this.instance.destroy) {
-      this.instance.destroy(false);
+      this.instance.destroy(false)
     }
   },
-};
+}
 </script>
+
+<template>
+  <div ref="artRef" />
+</template>
 ```
 
 ```vue [app.vue]
-<template>
-  <Artplayer @get-instance="getInstance" :option="option" :style="style" />
-</template>
-
 <script>
-import Artplayer from "./Artplayer.vue";
+import Artplayer from './Artplayer.vue'
 
 export default {
-  data() {
-    return {
-      option: {
-        url: "path/to/video.mp4",
-      },
-      style: {
-        width: "600px",
-        height: "400px",
-        margin: "60px auto 0",
-      },
-    };
-  },
   components: {
     Artplayer,
   },
+  data() {
+    return {
+      option: {
+        url: 'path/to/video.mp4',
+      },
+      style: {
+        width: '600px',
+        height: '400px',
+        margin: '60px auto 0',
+      },
+    }
+  },
   methods: {
     getInstance(art) {
-      console.info(art);
+      console.info(art)
     },
   },
-};
+}
 </script>
+
+<template>
+  <Artplayer :option="option" :style="style" @get-instance="getInstance" />
+</template>
 ```
 
 :::
@@ -168,56 +168,56 @@ export default {
 ::: code-group
 
 ```jsx [Artplayer.jsx]
-import { useEffect, useRef } from 'react';
-import Artplayer from 'artplayer';
+import Artplayer from 'artplayer'
+import { useEffect, useRef } from 'react'
 
 export default function Player({ option, getInstance, ...rest }) {
-    const artRef = useRef();
+  const artRef = useRef()
 
-    useEffect(() => {
-        const art = new Artplayer({
-            ...option,
-            container: artRef.current,
-        });
+  useEffect(() => {
+    const art = new Artplayer({
+      ...option,
+      container: artRef.current,
+    })
 
-        if (getInstance && typeof getInstance === 'function') {
-            getInstance(art);
-        }
+    if (getInstance && typeof getInstance === 'function') {
+      getInstance(art)
+    }
 
-        return () => {
-            if (art && art.destroy) {
-                art.destroy(false);
-            }
-        };
-    }, []);
+    return () => {
+      if (art && art.destroy) {
+        art.destroy(false)
+      }
+    }
+  }, [])
 
-    return <div ref={artRef} {...rest}></div>;
+  return <div ref={artRef} {...rest}></div>
 }
 ```
 
 ```jsx [app.jsx]
-import React from 'react';
-import Artplayer from './ArtPlayer.jsx';
+import React from 'react'
+import Artplayer from './ArtPlayer.jsx'
 
 function App() {
-    return (
-        <div>
-            <Artplayer
-                option={{
-                    url: 'https://artplayer.org/assets/sample/video.mp4',
-                }}
-                style={{
-                    width: '600px',
-                    height: '400px',
-                    margin: '60px auto 0',
-                }}
-                getInstance={(art) => console.info(art)}
-            />
-        </div>
-    );
+  return (
+    <div>
+      <Artplayer
+        option={{
+          url: 'https://artplayer.org/assets/sample/video.mp4',
+        }}
+        style={{
+          width: '600px',
+          height: '400px',
+          margin: '60px auto 0',
+        }}
+        getInstance={art => console.info(art)}
+      />
+    </div>
+  )
 }
 
-export default App;
+export default App
 ```
 
 :::
@@ -275,7 +275,7 @@ const art = new Artplayer(option);
 
 ## JavaScript
 
-有时你的 `js` 文件会丢失 `TypeScript` 的类型提示，这时候你可以手动导入类型 
+有时你的 `js` 文件会丢失 `TypeScript` 的类型提示，这时候你可以手动导入类型
 
 变量：
 
@@ -336,7 +336,7 @@ const art8 = new Artplayer(option);
 对于古老的浏览器，可以使用 `artplayer.legacy.js` 文件，可以兼容到：`IE 11`
 
 ```js
-import Artplayer from 'artplayer/dist/artplayer.legacy.js';
+import Artplayer from 'artplayer/dist/artplayer.legacy.js'
 ```
 
 ::: code-group
@@ -367,10 +367,10 @@ https://unpkg.com/artplayer/dist/artplayer.legacy.js
 
 :::
 
-从 `5.2.4` 开始，`artplayer`和所有插件还会提供一个`ESM`版本的`js`，如：
+从 `5.2.6` 开始，`artplayer` 和所有插件还会提供一个 `ESM` 版本的 `mjs`，如：
 
-- `artplayer/dist/artplayer.esm.js`
-- `artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.esm.js`
+- `artplayer/dist/artplayer.mjs`
+- `artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs`
 
 ```html
 <!DOCTYPE html>

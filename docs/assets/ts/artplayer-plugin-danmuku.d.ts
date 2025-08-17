@@ -1,17 +1,21 @@
-type Mode = 0 | 1 | 2
-type Danmuku = Danmu[] | string | (() => Promise<Danmu[]>) | Promise<Danmu[]>
+export type Mode = 0 | 1 | 2
+export type Danmuku
+  = | Danmu[]
+    | string // URL
+    | (() => Promise<Danmu[]>)
+    | Promise<Danmu[]>
 
-interface Slider {
+export interface Slider {
   min?: number
   max?: number
   steps?: {
     name?: string
-    value?: any
+    value?: number | string
     show?: boolean
   }[]
 }
 
-interface Danmu {
+export interface Danmu {
   /**
    * 弹幕文本
    */
@@ -43,7 +47,7 @@ interface Danmu {
   style?: Partial<CSSStyleDeclaration>
 }
 
-interface Option {
+export interface Option {
   /**
    * 弹幕数据: 函数，数组，Promise，URL
    */
@@ -125,7 +129,7 @@ interface Option {
   /**
    * 热力图数据
    */
-  points?: any[]
+  points?: { time: number, value: number }[]
 
   /**
    * 弹幕载入前的过滤器，只支持返回布尔值
@@ -193,7 +197,7 @@ interface Option {
   COLOR?: string[]
 }
 
-interface Result {
+export interface Result {
   name: 'artplayerPluginDanmuku'
 
   /**

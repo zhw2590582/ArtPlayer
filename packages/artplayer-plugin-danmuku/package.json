@@ -17,8 +17,15 @@
     "video",
     "player"
   ],
-  "main": "dist/artplayer-plugin-danmuku.js",
-  "types": "types/artplayer-plugin-danmuku.d.ts",
-  "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+  "exports": {
+    ".": {
+      "import": "./dist/artplayer-plugin-danmuku.mjs",
+      "require": "./dist/artplayer-plugin-danmuku.js"
+    }
+  },
+  "main": "./dist/artplayer-plugin-danmuku.js",
+  "module": "./dist/artplayer-plugin-danmuku.mjs",
+  "types": "./types/artplayer-plugin-danmuku.d.ts",
+  "legacy": "./dist/artplayer-plugin-danmuku.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

@@ -17,16 +17,24 @@ function compressString(input) {
     .trim()
 }
 
-async function build(name, targetName) {
+async function build(name, targetName, clean = false) {
   const projectPackageJson = path.join(projects[name], 'package.json')
   const { version } = JSON.parse(fs.readFileSync(projectPackageJson, 'utf-8'))
 
   process.chdir(projects[name])
 
+  const distDir = path.join(projects[name], 'dist')
+
+  // 👇 构建前清空 dist，只执行一次
+  if (clean && fs.existsSync(distDir)) {
+    fs.rmSync(distDir, { recursive: true, force: true })
+    console.log(`🗑️  Cleaned ${distDir}`)
+  }
+
   const targets = {
     main: {
       context: 'browser',
-      distDir: path.join(projects[name], 'dist'),
+      distDir,
       sourceMap: false,
       outputFormat: 'global',
       isLibrary: true,
@@ -36,7 +44,7 @@ async function build(name, targetName) {
     },
     legacy: {
       context: 'browser',
-      distDir: path.join(projects[name], 'dist'),
+      distDir,
       sourceMap: false,
       outputFormat: 'global',
       isLibrary: true,
@@ -46,7 +54,7 @@ async function build(name, targetName) {
     },
     esm: {
       context: 'browser',
-      distDir: path.join(projects[name], 'dist'),
+      distDir,
       sourceMap: true,
       outputFormat: 'esmodule',
       isLibrary: true,
@@ -57,9 +65,9 @@ async function build(name, targetName) {
   }
 
   const names = {
-    main: name,
-    legacy: `${name}.legacy`,
-    esm: `${name}.esm`,
+    main: `${name}.js`, // ✅ 保留 .js 后缀
+    legacy: `${name}.legacy.js`, // ✅ 保留 .js 后缀
+    esm: `${name}.mjs`, // ✅ ESM 用 .mjs
   }
 
   const entryFile = path.join(projects[name], 'src/index.js')
@@ -88,8 +96,8 @@ async function build(name, targetName) {
   const { bundleGraph, buildTime } = await bundler.run()
   const bundles = bundleGraph.getBundles()
 
-  const filePath = path.join(projects[name], 'dist/index.js')
-  const newFilePath = path.join(projects[name], `dist/${names[targetName]}.js`)
+  const filePath = path.join(distDir, 'index.js')
+  const newFilePath = path.join(distDir, names[targetName])
   const code = fs.readFileSync(filePath, 'utf-8')
 
   fs.writeFileSync(filePath, banner + compressString(code))
@@ -98,21 +106,24 @@ async function build(name, targetName) {
   await cpy(newFilePath, compiledPath)
 
   if (targetName === 'esm') {
-    const jsFile = path.join(projects[name], `dist/${names.esm}.js`)
+    const jsFile = newFilePath
     const oldMapName = 'index.js.map'
-    const newMapName = `${names.esm}.js.map`
+    const newMapName = `${names.esm}.map`
 
-    const oldMapPath = path.join(projects[name], 'dist', oldMapName)
-    const newMapPath = path.join(projects[name], 'dist', newMapName)
+    const oldMapPath = path.join(distDir, oldMapName)
+    const newMapPath = path.join(distDir, newMapName)
     if (fs.existsSync(oldMapPath)) {
       fs.renameSync(oldMapPath, newMapPath)
     }
 
     let jsContent = fs.readFileSync(jsFile, 'utf8')
-    jsContent = jsContent.replace(/\/\/# sourceMappingURL=.*\.js\.map/, `\n//# sourceMappingURL=${newMapName}`)
+    jsContent = jsContent.replace(
+      /\/\/# sourceMappingURL=.*\.js\.map/,
+      `\n//# sourceMappingURL=${path.basename(newMapName)}`,
+    )
     fs.writeFileSync(jsFile, jsContent)
     await cpy(newMapPath, compiledPath)
-    await cpy(newFilePath, compiledPath)
+    await cpy(jsFile, compiledPath)
   }
 
   console.log(
@@ -126,7 +137,7 @@ async function build(name, targetName) {
 async function runBuild() {
   if (process.argv.pop() === 'all') {
     const bundles = Object.keys(projects).map(name => async () => {
-      await build(name, 'main')
+      await build(name, 'main', true) // 👈 第一次清理
       await build(name, 'legacy')
       await build(name, 'esm')
     })
@@ -147,7 +158,7 @@ async function runBuild() {
     })
 
     if (response.value) {
-      await build(response.value, 'main')
+      await build(response.value, 'main', true) // 👈 只清一次
       await build(response.value, 'legacy')
       await build(response.value, 'esm')
     }

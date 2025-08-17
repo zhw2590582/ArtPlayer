@@ -18,14 +18,15 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-vast.esm.js",
-    "require": "./dist/artplayer-plugin-vast.js",
-    "default": "./dist/artplayer-plugin-vast.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-vast.mjs",
+      "require": "./dist/artplayer-plugin-vast.js"
+    }
   },
-  "main": "dist/artplayer-plugin-vast.js",
-  "legacy": "dist/artplayer-plugin-vast.legacy.js",
-  "module": "dist/artplayer-plugin-vast.esm.js",
-  "types": "types/artplayer-plugin-vast.d.ts",
+  "main": "./dist/artplayer-plugin-vast.js",
+  "module": "./dist/artplayer-plugin-vast.mjs",
+  "types": "./types/artplayer-plugin-vast.d.ts",
+  "legacy": "./dist/artplayer-plugin-vast.legacy.js",
   "browserslist": "last 1 Chrome version",
   "dependencies": {
     "@glomex/vast-ima-player": "^1.21.0"

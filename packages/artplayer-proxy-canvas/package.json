@@ -18,13 +18,14 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-proxy-canvas.esm.js",
-    "require": "./dist/artplayer-proxy-canvas.js",
-    "default": "./dist/artplayer-proxy-canvas.js"
+    ".": {
+      "import": "./dist/artplayer-proxy-canvas.mjs",
+      "require": "./dist/artplayer-proxy-canvas.js"
+    }
   },
-  "main": "dist/artplayer-proxy-canvas.js",
-  "legacy": "dist/artplayer-proxy-canvas.legacy.js",
-  "module": "dist/artplayer-proxy-canvas.esm.js",
-  "types": "types/artplayer-proxy-canvas.d.ts",
+  "main": "./dist/artplayer-proxy-canvas.js",
+  "module": "./dist/artplayer-proxy-canvas.mjs",
+  "types": "./types/artplayer-proxy-canvas.d.ts",
+  "legacy": "./dist/artplayer-proxy-canvas.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

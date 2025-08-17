@@ -18,13 +18,14 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-multiple-subtitles.esm.js",
-    "require": "./dist/artplayer-plugin-multiple-subtitles.js",
-    "default": "./dist/artplayer-plugin-multiple-subtitles.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+      "require": "./dist/artplayer-plugin-multiple-subtitles.js"
+    }
   },
-  "main": "dist/artplayer-plugin-multiple-subtitles.js",
-  "legacy": "dist/artplayer-plugin-multiple-subtitles.legacy.js",
-  "module": "dist/artplayer-plugin-multiple-subtitles.esm.js",
-  "types": "types/artplayer-plugin-multiple-subtitles.d.ts",
+  "main": "./dist/artplayer-plugin-multiple-subtitles.js",
+  "module": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+  "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+  "legacy": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

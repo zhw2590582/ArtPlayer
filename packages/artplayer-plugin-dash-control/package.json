@@ -18,13 +18,14 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-dash-control.esm.js",
-    "require": "./dist/artplayer-plugin-dash-control.js",
-    "default": "./dist/artplayer-plugin-dash-control.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-dash-control.mjs",
+      "require": "./dist/artplayer-plugin-dash-control.js"
+    }
   },
-  "main": "dist/artplayer-plugin-dash-control.js",
-  "legacy": "dist/artplayer-plugin-dash-control.legacy.js",
-  "module": "dist/artplayer-plugin-dash-control.esm.js",
-  "types": "types/artplayer-plugin-dash-control.d.ts",
+  "main": "./dist/artplayer-plugin-dash-control.js",
+  "module": "./dist/artplayer-plugin-dash-control.mjs",
+  "types": "./types/artplayer-plugin-dash-control.d.ts",
+  "legacy": "./dist/artplayer-plugin-dash-control.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

@@ -18,13 +18,14 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-plugin-ads.esm.js",
-    "require": "./dist/artplayer-plugin-ads.js",
-    "default": "./dist/artplayer-plugin-ads.js"
+    ".": {
+      "import": "./dist/artplayer-plugin-ads.mjs",
+      "require": "./dist/artplayer-plugin-ads.js"
+    }
   },
-  "main": "dist/artplayer-plugin-ads.js",
-  "legacy": "dist/artplayer-plugin-ads.legacy.js",
-  "module": "dist/artplayer-plugin-ads.esm.js",
-  "types": "types/artplayer-plugin-ads.d.ts",
+  "main": "./dist/artplayer-plugin-ads.js",
+  "module": "./dist/artplayer-plugin-ads.mjs",
+  "types": "./types/artplayer-plugin-ads.d.ts",
+  "legacy": "./dist/artplayer-plugin-ads.legacy.js",
   "browserslist": "last 1 Chrome version"
 }

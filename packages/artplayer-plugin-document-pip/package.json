@@ -17,8 +17,15 @@
     "video",
     "player"
   ],
-  "main": "dist/artplayer-plugin-document-pip.js",
-  "types": "types/artplayer-plugin-document-pip.d.ts",
-  "legacy": "dist/artplayer-plugin-document-pip.legacy.js",
+  "exports": {
+    ".": {
+      "import": "./dist/artplayer-plugin-document-pip.mjs",
+      "require": "./dist/artplayer-plugin-document-pip.js"
+    }
+  },
+  "main": "./dist/artplayer-plugin-document-pip.js",
+  "module": "./dist/artplayer-plugin-document-pip.mjs",
+  "types": "./types/artplayer-plugin-document-pip.d.ts",
+  "legacy": "./dist/artplayer-plugin-document-pip.legacy.js",
   "browserslist": "last 1 Chrome version"
 }
