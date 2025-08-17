@@ -3,8 +3,3 @@ node_modules
 .parcel-cache
 yarn.lock
 package-lock.json
-test
-coverage
-.nyc_output
-.cache
-docs
