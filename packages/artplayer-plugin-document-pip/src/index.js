@@ -116,6 +116,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
 
         addClass($player, 'artplayer-document-pip')
         art.events.bindGlobalEvents?.()
+        art.emit('resize')
         art.emit('document-pip', true)
       }
       catch (err) {
@@ -145,6 +146,7 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
         state.win = null
         removeClass($player, 'artplayer-document-pip')
         art.events.bindGlobalEvents?.()
+        art.emit('resize')
         art.emit('document-pip', false)
       }
       catch (err) {
