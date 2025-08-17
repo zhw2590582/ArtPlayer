@@ -25,7 +25,6 @@ async function build(name, targetName, clean = false) {
 
   const distDir = path.join(projects[name], 'dist')
 
-  // 👇 构建前清空 dist，只执行一次
   if (clean && fs.existsSync(distDir)) {
     fs.rmSync(distDir, { recursive: true, force: true })
     console.log(`🗑️  Cleaned ${distDir}`)
@@ -65,9 +64,9 @@ async function build(name, targetName, clean = false) {
   }
 
   const names = {
-    main: `${name}.js`, // ✅ 保留 .js 后缀
-    legacy: `${name}.legacy.js`, // ✅ 保留 .js 后缀
-    esm: `${name}.mjs`, // ✅ ESM 用 .mjs
+    main: `${name}.js`,
+    legacy: `${name}.legacy.js`,
+    esm: `${name}.mjs`,
   }
 
   const entryFile = path.join(projects[name], 'src/index.js')
@@ -116,7 +115,7 @@ async function build(name, targetName, clean = false) {
 async function runBuild() {
   if (process.argv.pop() === 'all') {
     const bundles = Object.keys(projects).map(name => async () => {
-      await build(name, 'main', true) // 👈 第一次清理
+      await build(name, 'main', true)
       await build(name, 'legacy')
       await build(name, 'esm')
     })
@@ -137,7 +136,7 @@ async function runBuild() {
     })
 
     if (response.value) {
-      await build(response.value, 'main', true) // 👈 只清一次
+      await build(response.value, 'main', true)
       await build(response.value, 'legacy')
       await build(response.value, 'esm')
     }

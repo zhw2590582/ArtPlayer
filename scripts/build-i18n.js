@@ -21,7 +21,6 @@ async function buildI18n() {
   }
   fs.mkdirSync(distDir, { recursive: true })
 
-  // --- 1. 构建 global(.js) 到临时目录 ---
   const distJs = path.join(distDir, 'cjs')
   const bundlerJs = new Parcel({
     entries,
@@ -39,7 +38,6 @@ async function buildI18n() {
   await bundlerJs.run()
   console.log('✅ Built i18n global (.js)')
 
-  // --- 2. 构建 esmodule(.mjs) 到临时目录 ---
   const distMjs = path.join(distDir, 'esm')
   const bundlerMjs = new Parcel({
     entries,
@@ -66,7 +64,6 @@ async function buildI18n() {
   }
   console.log('✅ Built i18n esm (.mjs)')
 
-  // --- 3. 合并两个目录到 dist/i18n ---
   for (const f of fs.readdirSync(distJs)) {
     fs.renameSync(path.join(distJs, f), path.join(distDir, f))
   }
