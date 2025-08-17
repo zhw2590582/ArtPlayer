@@ -3,3 +3,4 @@ node_modules
 .parcel-cache
 yarn.lock
 package-lock.json
+src
