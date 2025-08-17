@@ -287,11 +287,11 @@ export interface Option {
   /**
    * Other video attribute
    */
-  moreVideoAttr?: Partial<{
-    [key in keyof HTMLVideoElement as HTMLVideoElement[key] extends (...args: unknown[]) => unknown
+  moreVideoAttr?: Partial<Readonly<{
+    [K in keyof HTMLVideoElement as HTMLVideoElement[K] extends (...args: unknown[]) => unknown
       ? never
-      : key]: HTMLVideoElement[key]
-  }>
+      : K]: HTMLVideoElement[K]
+  }>>
 
   /**
    * Custom i18n

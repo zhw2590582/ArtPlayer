@@ -46,8 +46,8 @@ export default class Artplayer extends Player {
   static readonly build: string
   static readonly config: Config
   static readonly utils: Utils
-  static readonly scheme: Record<keyof Option, any>
-  static readonly Emitter: new (...args: any[]) => any
+  static readonly scheme: Record<keyof Option, unknown>
+  static readonly Emitter: new (...args: unknown[]) => unknown
   static readonly validator: <T extends object>(option: T, scheme: object) => T
   static readonly kindOf: (item: unknown) => string
   static readonly html: Artplayer['template']['html']
@@ -104,24 +104,22 @@ export default class Artplayer extends Player {
   torrent?: unknown
 
   on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
-  on(name: string, fn: (...args: any[]) => unknown, ctx?: object): this
+  on(name: string, fn: (...args: unknown[]) => unknown, ctx?: object): this
 
   once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
-  once(name: string, fn: (...args: any[]) => unknown, ctx?: object): this
+  once(name: string, fn: (...args: unknown[]) => unknown, ctx?: object): this
 
   emit<T extends keyof Events>(name: T, ...args: Events[T]): this
-  emit(name: string, ...args: any[]): this
+  emit(name: string, ...args: unknown[]): this
 
   off<T extends keyof Events>(name: T, callback?: (...args: Events[T]) => unknown): this
-  off(name: string, callback?: (...args: any[]) => unknown): this
+  off(name: string, callback?: (...args: unknown[]) => unknown): this
 
   query: Artplayer['template']['query']
   proxy: Artplayer['events']['proxy']
   video: Artplayer['template']['$video']
 
-  e: {
-    [K in keyof Events]?: { fn: (...args: Events[K]) => any, ctx: unknown }[]
-  }
+  e: { [K in keyof Events]?: { fn: (...args: Events[K]) => unknown, ctx: unknown }[] }
 
   destroy(removeHtml?: boolean): void
 
@@ -200,8 +198,7 @@ export default class Artplayer extends Player {
 
   readonly plugins: {
     add: (
-      plugin: (this: Artplayer, art: Artplayer) => any | Promise<any>,
+      plugin: (this: Artplayer, art: Artplayer) => unknown | Promise<unknown>,
     ) => Promise<Artplayer['plugins']> | Artplayer['plugins']
-    [pluginName: string]: any
-  }
+  } & Record<string, unknown>
 }
