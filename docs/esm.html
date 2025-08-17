@@ -17,7 +17,8 @@
         "imports": {
             "artplayer": "/compiled/artplayer.mjs",
             "artplayer-plugin-danmuku": "/compiled/artplayer-plugin-danmuku.mjs",
-            "artplayer-plugin-document-pip": "/compiled/artplayer-plugin-document-pip.mjs"
+            "artplayer-plugin-document-pip": "/compiled/artplayer-plugin-document-pip.mjs",
+            "id": "/compiled/i18n/id.mjs"
         }
     }
     </script>
@@ -29,10 +30,13 @@
         import Artplayer from 'artplayer';
         import ArtplayerPluginDanmuku from 'artplayer-plugin-danmuku';
         import ArtplayerPluginDocumentPip from 'artplayer-plugin-document-pip';
+        import id from 'id';
 
         const art = new Artplayer({
             container: '#player',
             url: '/assets/sample/video.mp4',
+            i18n: { id },
+            lang: 'id',
             plugins: [
                 ArtplayerPluginDocumentPip(),
                 artplayerPluginDanmuku({

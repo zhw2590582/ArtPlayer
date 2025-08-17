@@ -2,11 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { Parcel } from '@parcel/core'
+import cpy from 'cpy'
 import { glob } from 'glob'
 
 const basePath = 'packages/artplayer'
 const i18nSrcDir = path.join(basePath, 'src/i18n')
 const distDir = path.join(basePath, 'dist/i18n')
+const compiledPath = path.resolve('docs/compiled/i18n')
 
 const entries = glob.sync('*.js', {
   cwd: i18nSrcDir,
@@ -44,6 +46,7 @@ async function buildI18n() {
     defaultConfig: '@parcel/config-default',
     mode: 'production',
     defaultTargetOptions: {
+      context: 'browser',
       distDir: distMjs,
       outputFormat: 'esmodule',
       sourceMaps: false,
@@ -73,6 +76,7 @@ async function buildI18n() {
   fs.rmSync(distJs, { recursive: true, force: true })
   fs.rmSync(distMjs, { recursive: true, force: true })
 
+  await cpy(distDir, compiledPath)
   console.log('✨ Finished building i18n with both .js and .mjs')
 }
 

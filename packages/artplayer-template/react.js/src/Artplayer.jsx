@@ -31,7 +31,7 @@ export default function Player({ option, getInstance, ...rest }) {
     }
 
     return () => art.destroy(false)
-  }, [option, getInstance])
+  }, [])
 
   return <div ref={$container} {...rest}></div>
 }

@@ -5,7 +5,7 @@ import Artplayer from 'artplayer'
 import fr from 'artplayer/i18n/fr'
 import id from 'artplayer/i18n/id'
 
-import { nextTick, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
+import { onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
 
 // test plugins
 import artplayerPluginDanmuku from '../../../artplayer-plugin-danmuku'
@@ -36,9 +36,7 @@ onMounted(() => {
       }),
     ],
   })
-  nextTick(() => {
-    emit('getInstance', art.value)
-  })
+  emit('getInstance', art.value)
 })
 
 onBeforeUnmount(() => {
