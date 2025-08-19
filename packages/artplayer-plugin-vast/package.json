@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-vast",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "VAST plugin for ArtPlayer",
   "author": "Harvey Zack <laozhaochaguan@gmail.com>",
   "license": "MIT",

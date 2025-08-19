@@ -37,35 +37,38 @@ export default function artplayerPluginVast(callback) {
     }
 
     function initPlayer() {
+      if (imaPlayer)
+        return imaPlayer
+
       $container = createContainer()
       $player.appendChild($container)
+
       imaPlayer = new Player(ima, $video, $container, adsRenderingSettings, playerOptions)
 
-      // ✅ 事件绑定
-      imaPlayer.onAdStarted = () => {
+      imaPlayer.addEventListener('AdStarted', () => {
         isAdPlaying = true
         $container.style.display = 'block'
-        art.pause()
-      }
+      })
 
-      imaPlayer.onAdEnd = () => {
+      imaPlayer.addEventListener('AdComplete', () => {
         isAdPlaying = false
         $container.style.display = 'none'
-        art.play()
-      }
+      })
 
-      imaPlayer.onAdError = (error) => {
-        console.error('VAST Ad Error:', error)
+      imaPlayer.addEventListener('AdError', (event) => {
+        console.error('VAST Ad Error:', event.detail)
         isAdPlaying = false
         $container.style.display = 'none'
-        art.play()
-      }
+      })
+
+      return imaPlayer
     }
 
     function destroyPlayer() {
-      if ($container && $container.parentNode) {
+      if (imaPlayer?.destroy)
+        imaPlayer.destroy()
+      if ($container?.parentNode)
         $container.parentNode.removeChild($container)
-      }
       $container = null
       imaPlayer = null
     }
