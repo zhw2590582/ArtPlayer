@@ -6,6 +6,7 @@ import type { I18n } from './i18n'
 import type { Icons } from './icons'
 import type { Option } from './option'
 import type { Player } from './player'
+import type { HotkeyConfig, MediaFormatPlugins, PluginManager } from './plugins'
 import type { Setting, SettingOption } from './setting'
 import type { Subtitle } from './subtitle'
 import type { Template } from './template'
@@ -13,12 +14,16 @@ import type { Utils } from './utils'
 
 export type {
   ArtplayerConstants,
+  Component,
   Config,
   Events,
+  HotkeyConfig,
   I18n,
   Icons,
+  MediaFormatPlugins,
   Option,
   Player,
+  PluginManager,
   Setting,
   SettingOption,
   Subtitle,
@@ -108,12 +113,13 @@ export default class Artplayer extends Player {
   readonly isRotate: boolean
   readonly isDestroy: boolean
 
-  flv?: unknown
-  m3u8?: unknown
-  hls?: unknown
-  ts?: unknown
-  mpd?: unknown
-  torrent?: unknown
+  // Media format plugin instances
+  flv?: MediaFormatPlugins['flv']
+  m3u8?: MediaFormatPlugins['m3u8']
+  hls?: MediaFormatPlugins['hls']
+  ts?: MediaFormatPlugins['ts']
+  mpd?: MediaFormatPlugins['mpd']
+  torrent?: MediaFormatPlugins['torrent']
 
   on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
   on(name: string, fn: (...args: unknown[]) => unknown, ctx?: object): this
@@ -191,11 +197,7 @@ export default class Artplayer extends Player {
   readonly info: Component
   readonly loading: Component
 
-  readonly hotkey: {
-    keys: Record<string, ((event: Event) => any)[]>
-    add: (key: string, callback: (this: Artplayer, event: Event) => any) => Artplayer['hotkey']
-    remove: (key: string, callback: (event: Event) => any) => Artplayer['hotkey']
-  }
+  readonly hotkey: HotkeyConfig
 
   readonly mask: Component
 
@@ -208,9 +210,5 @@ export default class Artplayer extends Player {
     remove: (name: string) => SettingOption[]
   } & Component
 
-  readonly plugins: {
-    add: (
-      plugin: (this: Artplayer, art: Artplayer) => unknown | Promise<unknown>,
-    ) => Promise<Artplayer['plugins']> | Artplayer['plugins']
-  } & Record<string, unknown>
+  readonly plugins: PluginManager
 }
