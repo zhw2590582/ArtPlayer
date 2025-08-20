@@ -60,6 +60,432 @@ export interface Utils {
   supportsFlex: () => boolean
 }
 
+export type Bar = 'loaded' | 'played' | 'hover'
+
+export interface Events {
+  'document:click': [event: Event]
+  'document:mouseup': [event: Event]
+  'document:keydown': [event: Event]
+  'document:touchend': [event: Event]
+  'document:touchmove': [event: Event]
+  'document:mousemove': [event: Event]
+  'document:pointerup': [event: Event]
+  'document:contextmenu': [event: Event]
+  'document:pointermove': [event: Event]
+  'document:visibilitychange': [event: Event]
+  'document:webkitfullscreenchange': [event: Event]
+
+  'window:resize': [event: Event]
+  'window:scroll': [event: Event]
+  'window:orientationchange': [event: Event]
+
+  'video:canplay': [event: Event]
+  'video:canplaythrough': [event: Event]
+  'video:complete': [event: Event]
+  'video:durationchange': [event: Event]
+  'video:emptied': [event: Event]
+  'video:ended': [event: Event]
+  'video:error': [error: Error]
+  'video:loadeddata': [event: Event]
+  'video:loadedmetadata': [event: Event]
+  'video:pause': [event: Event]
+  'video:play': [event: Event]
+  'video:playing': [event: Event]
+  'video:progress': [event: Event]
+  'video:ratechange': [event: Event]
+  'video:seeked': [event: Event]
+  'video:seeking': [event: Event]
+  'video:stalled': [event: Event]
+  'video:suspend': [event: Event]
+  'video:timeupdate': [event: Event]
+  'video:volumechange': [event: Event]
+  'video:waiting': [event: Event]
+
+  'info': [state: boolean]
+  'layer': [state: boolean]
+  'loading': [state: boolean]
+  'mask': [state: boolean]
+  'subtitle': [state: boolean]
+  'contextmenu': [state: boolean]
+  'control': [state: boolean]
+  'setting': [state: boolean]
+  'hotkey': [event: Event]
+
+  'destroy': []
+
+  'subtitleOffset': [offset: number]
+  'subtitleBeforeUpdate': [cue: VTTCue]
+  'subtitleAfterUpdate': [cue: VTTCue]
+  'subtitleLoad': [cues: VTTCue[], option: Subtitle]
+
+  'focus': [event: Event]
+  'blur': [event: Event]
+  'dblclick': [event: Event]
+  'click': [event: Event]
+  'hover': [state: boolean, event: Event]
+  'mousemove': [event: Event]
+
+  'resize': []
+  'view': [state: boolean]
+  'lock': [state: boolean]
+  'aspectRatio': [aspectRatio: AspectRatio]
+  'autoHeight': [height: number]
+  'autoSize': []
+  'ready': []
+
+  'error': [error: Error, reconnectTime: number]
+  'flip': [flip: Flip]
+  'fullscreen': [state: boolean]
+  'fullscreenError': [event: Event]
+  'fullscreenWeb': [state: boolean]
+  'mini': [state: boolean]
+  'pause': []
+  'pip': [state: boolean]
+  'play': []
+  'screenshot': [dataUri: string]
+  'seek': [currentTime: number]
+  'restart': [url: string]
+  'muted': [state: boolean]
+  'setBar': [type: Bar, percentage: number, event?: Event | undefined]
+  'keydown': [event: KeyboardEvent]
+}
+
+export interface Icons {
+  readonly loading: HTMLDivElement
+  readonly state: HTMLDivElement
+  readonly play: HTMLDivElement
+  readonly pause: HTMLDivElement
+  readonly check: HTMLDivElement
+  readonly volume: HTMLDivElement
+  readonly volumeClose: HTMLDivElement
+  readonly screenshot: HTMLDivElement
+  readonly setting: HTMLDivElement
+  readonly pip: HTMLDivElement
+  readonly arrowLeft: HTMLDivElement
+  readonly arrowRight: HTMLDivElement
+  readonly playbackRate: HTMLDivElement
+  readonly aspectRatio: HTMLDivElement
+  readonly config: HTMLDivElement
+  readonly lock: HTMLDivElement
+  readonly flip: HTMLDivElement
+  readonly unlock: HTMLDivElement
+  readonly fullscreenOff: HTMLDivElement
+  readonly fullscreenOn: HTMLDivElement
+  readonly fullscreenWebOff: HTMLDivElement
+  readonly fullscreenWebOn: HTMLDivElement
+  readonly switchOn: HTMLDivElement
+  readonly switchOff: HTMLDivElement
+  readonly error: HTMLDivElement
+  readonly close: HTMLDivElement
+  readonly airplay: HTMLDivElement
+  readonly [key: string]: HTMLDivElement
+}
+
+type I18nKeys
+    = | 'en'
+      | 'zh-cn'
+      | 'zh-tw'
+      | 'pl'
+      | 'cs'
+      | 'es'
+      | 'fa'
+      | 'fr'
+      | 'id'
+      | 'ru'
+      | 'tr'
+      | 'ar'
+      | 'vi'
+      | (string & Record<never, never>)
+
+interface I18nValue {
+  'Video Info': string
+  'Close': string
+  'Video Load Failed': string
+  'Volume': string
+  'Play': string
+  'Pause': string
+  'Rate': string
+  'Mute': string
+  'Video Flip': string
+  'Horizontal': string
+  'Vertical': string
+  'Reconnect': string
+  'Show Setting': string
+  'Hide Setting': string
+  'Screenshot': string
+  'Play Speed': string
+  'Aspect Ratio': string
+  'Default': string
+  'Normal': string
+  'Open': string
+  'Switch Video': string
+  'Switch Subtitle': string
+  'Fullscreen': string
+  'Exit Fullscreen': string
+  'Web Fullscreen': string
+  'Exit Web Fullscreen': string
+  'Mini Player': string
+  'PIP Mode': string
+  'Exit PIP Mode': string
+  'PIP Not Supported': string
+  'Fullscreen Not Supported': string
+  'Subtitle Offset': string
+  'Last Seen': string
+  'Jump Play': string
+  'AirPlay': string
+  'AirPlay Not Available': string
+}
+
+export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>
+
+export interface Config {
+  properties: [
+    'audioTracks',
+    'autoplay',
+    'buffered',
+    'controller',
+    'controls',
+    'crossOrigin',
+    'currentSrc',
+    'currentTime',
+    'defaultMuted',
+    'defaultPlaybackRate',
+    'duration',
+    'ended',
+    'error',
+    'loop',
+    'mediaGroup',
+    'muted',
+    'networkState',
+    'paused',
+    'playbackRate',
+    'played',
+    'preload',
+    'readyState',
+    'seekable',
+    'seeking',
+    'src',
+    'startDate',
+    'textTracks',
+    'videoTracks',
+    'volume',
+  ]
+  methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause']
+  events: [
+    'abort',
+    'canplay',
+    'canplaythrough',
+    'durationchange',
+    'emptied',
+    'ended',
+    'error',
+    'loadeddata',
+    'loadedmetadata',
+    'loadstart',
+    'pause',
+    'play',
+    'playing',
+    'progress',
+    'ratechange',
+    'seeked',
+    'seeking',
+    'stalled',
+    'suspend',
+    'timeupdate',
+    'volumechange',
+    'waiting',
+  ]
+  prototypes: [
+    'width',
+    'height',
+    'videoWidth',
+    'videoHeight',
+    'poster',
+    'webkitDecodedFrameCount',
+    'webkitDroppedFrameCount',
+    'playsInline',
+    'webkitSupportsFullscreen',
+    'webkitDisplayingFullscreen',
+    'onenterpictureinpicture',
+    'onleavepictureinpicture',
+    'disablePictureInPicture',
+    'cancelVideoFrameCallback',
+    'requestVideoFrameCallback',
+    'getVideoPlaybackQuality',
+    'requestPictureInPicture',
+    'webkitEnterFullScreen',
+    'webkitEnterFullscreen',
+    'webkitExitFullScreen',
+    'webkitExitFullscreen',
+  ]
+}
+
+export interface CssVar {
+  '--art-theme': string
+  '--art-font-color': string
+  '--art-background-color': string
+  '--art-text-shadow-color': string
+  '--art-transition-duration': string
+  '--art-padding': string
+  '--art-border-radius': string
+  '--art-progress-height': string
+  '--art-progress-color': string
+  '--art-hover-color': string
+  '--art-loaded-color': string
+  '--art-state-size': string
+  '--art-state-opacity': number
+  '--art-bottom-height': string
+  '--art-bottom-offset': string
+  '--art-bottom-gap': string
+  '--art-highlight-width': string
+  '--art-highlight-color': string
+  '--art-control-height': string
+  '--art-control-opacity': number
+  '--art-control-icon-size': string
+  '--art-control-icon-scale': number
+  '--art-volume-height': string
+  '--art-volume-handle-size': string
+  '--art-lock-size': string
+  '--art-indicator-scale': number
+  '--art-indicator-size': string
+  '--art-fullscreen-web-index': 9999
+  '--art-settings-icon-size': string
+  '--art-settings-max-height': string
+  '--art-selector-max-height': string
+  '--art-contextmenus-min-width': string
+  '--art-subtitle-font-size': string
+  '--art-subtitle-gap': string
+  '--art-subtitle-bottom': string
+  '--art-subtitle-border': string
+  '--art-widget-background': string
+  '--art-tip-background': string
+  '--art-scrollbar-size': string
+  '--art-scrollbar-background': string
+  '--art-scrollbar-background-hover': string
+  '--art-mini-progress-height': string
+}
+
+export interface Selector {
+  /**
+   * Whether the default is selected
+   */
+  default?: boolean
+
+  /**
+   * Html string of selector
+   */
+  html: string | HTMLElement
+}
+
+export interface Component {
+  /**
+   * Component self-increasing id
+   */
+  readonly id: number
+
+  /**
+   * Component parent name
+   */
+  readonly name: string | undefined
+
+  /**
+   * Component parent element
+   */
+  readonly $parent: HTMLElement | undefined
+
+  /**
+   * Whether to show component parent
+   */
+  get show(): boolean
+
+  /**
+   * Whether to show component parent
+   */
+  set show(state: boolean)
+
+  /**
+   * Toggle the component parent
+   */
+  toggle: () => void
+
+  /**
+   * Dynamic add a component
+   */
+  add: (option: ComponentOption) => HTMLElement
+
+  /**
+   * Dynamic remove a component by name
+   */
+  remove: (name: string) => void
+
+  /**
+   * Dynamic update a component
+   */
+  update: (option: ComponentOption) => HTMLElement
+}
+
+export interface ComponentOption {
+  /**
+   * Html string or html element of component
+   */
+  html?: string | HTMLElement
+
+  /**
+   * Whether to disable component
+   */
+  disable?: boolean
+
+  /**
+   * Unique name for component
+   */
+  name?: string
+
+  /**
+   * Component sort index
+   */
+  index?: number
+
+  /**
+   * Component style object
+   */
+  style?: Partial<CSSStyleDeclaration>
+
+  /**
+   * Component click event
+   */
+  click?: (this: Artplayer, component: Component, event: Event) => void
+
+  /**
+   * When the component was mounted
+   */
+  mounted?: (this: Artplayer, element: HTMLElement) => void
+
+  /**
+   * When the component was before unmount
+   */
+  beforeUnmount?: (this: Artplayer, element: HTMLElement) => void
+
+  /**
+   * Component tooltip, use in controls
+   */
+  tooltip?: string
+
+  /**
+   * Component position, use in controls
+   */
+  position?: 'top' | 'left' | 'right' | (string & Record<never, never>)
+
+  /**
+   * Custom selector list, use in controls
+   */
+  selector?: Selector[]
+
+  /**
+   * When selector item click, use in controls
+   */
+  onSelect?: (this: Artplayer, selector: Selector, element: HTMLElement, event: Event) => void
+}
+
 export interface Template {
   readonly $container: HTMLDivElement
   readonly $player: HTMLDivElement
@@ -123,8 +549,6 @@ export interface Subtitle {
    */
   onVttLoad?: (vtt: string) => string
 }
-
-
 
 type Props<T> = {
   html: string
@@ -236,10 +660,6 @@ export interface Quality {
   url: string
 }
 
-
-
-
-
 export type AspectRatio = 'default' | '4:3' | '16:9' | (`${number}:${number}` & Record<never, never>)
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>)
 export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never, never>)
@@ -350,15 +770,6 @@ export declare class Player {
   autoSize(): void
   autoHeight(): void
 }
-
-
-
-
-
-
-
-
-
 
 export type CustomType
   = | 'flv'
@@ -674,450 +1085,108 @@ export interface Option {
   >
 }
 
-export interface Icons {
-  readonly loading: HTMLDivElement
-  readonly state: HTMLDivElement
-  readonly play: HTMLDivElement
-  readonly pause: HTMLDivElement
-  readonly check: HTMLDivElement
-  readonly volume: HTMLDivElement
-  readonly volumeClose: HTMLDivElement
-  readonly screenshot: HTMLDivElement
-  readonly setting: HTMLDivElement
-  readonly pip: HTMLDivElement
-  readonly arrowLeft: HTMLDivElement
-  readonly arrowRight: HTMLDivElement
-  readonly playbackRate: HTMLDivElement
-  readonly aspectRatio: HTMLDivElement
-  readonly config: HTMLDivElement
-  readonly lock: HTMLDivElement
-  readonly flip: HTMLDivElement
-  readonly unlock: HTMLDivElement
-  readonly fullscreenOff: HTMLDivElement
-  readonly fullscreenOn: HTMLDivElement
-  readonly fullscreenWebOff: HTMLDivElement
-  readonly fullscreenWebOn: HTMLDivElement
-  readonly switchOn: HTMLDivElement
-  readonly switchOff: HTMLDivElement
-  readonly error: HTMLDivElement
-  readonly close: HTMLDivElement
-  readonly airplay: HTMLDivElement
-  readonly [key: string]: HTMLDivElement
+/**
+ * Time-related constants for various operations
+ */
+export interface TimeConstants {
+  /** Notice display time in milliseconds */
+  NOTICE_TIME: number
+  /** Resize operation timeout in milliseconds */
+  RESIZE_TIME: number
+  /** Scroll operation timeout in milliseconds */
+  SCROLL_TIME: number
+  /** Auto playback timeout in milliseconds */
+  AUTO_PLAYBACK_TIMEOUT: number
+  /** Reconnect sleep time in milliseconds */
+  RECONNECT_SLEEP_TIME: number
+  /** Control hide timeout in milliseconds */
+  CONTROL_HIDE_TIME: number
+  /** Double click detection time in milliseconds */
+  DBCLICK_TIME: number
+  /** Auto orientation timeout in milliseconds */
+  AUTO_ORIENTATION_TIME: number
+  /** Info loop update time in milliseconds */
+  INFO_LOOP_TIME: number
+  /** Fast forward operation time in milliseconds */
+  FAST_FORWARD_TIME: number
 }
 
-type I18nKeys
-    = | 'en'
-      | 'zh-cn'
-      | 'zh-tw'
-      | 'pl'
-      | 'cs'
-      | 'es'
-      | 'fa'
-      | 'fr'
-      | 'id'
-      | 'ru'
-      | 'tr'
-      | 'ar'
-      | 'vi'
-      | (string & Record<never, never>)
-
-interface I18nValue {
-  'Video Info': string
-  'Close': string
-  'Video Load Failed': string
-  'Volume': string
-  'Play': string
-  'Pause': string
-  'Rate': string
-  'Mute': string
-  'Video Flip': string
-  'Horizontal': string
-  'Vertical': string
-  'Reconnect': string
-  'Show Setting': string
-  'Hide Setting': string
-  'Screenshot': string
-  'Play Speed': string
-  'Aspect Ratio': string
-  'Default': string
-  'Normal': string
-  'Open': string
-  'Switch Video': string
-  'Switch Subtitle': string
-  'Fullscreen': string
-  'Exit Fullscreen': string
-  'Web Fullscreen': string
-  'Exit Web Fullscreen': string
-  'Mini Player': string
-  'PIP Mode': string
-  'Exit PIP Mode': string
-  'PIP Not Supported': string
-  'Fullscreen Not Supported': string
-  'Subtitle Offset': string
-  'Last Seen': string
-  'Jump Play': string
-  'AirPlay': string
-  'AirPlay Not Available': string
+/**
+ * UI dimensions and layout constants
+ */
+export interface UIConstants {
+  /** Setting panel width in pixels */
+  SETTING_WIDTH: number
+  /** Setting item width in pixels */
+  SETTING_ITEM_WIDTH: number
+  /** Setting item height in pixels */
+  SETTING_ITEM_HEIGHT: number
+  /** Scroll gap for navigation in pixels */
+  SCROLL_GAP: number
 }
 
-export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>
-
-
-
-
-export type Bar = 'loaded' | 'played' | 'hover'
-
-export interface Events {
-  'document:click': [event: Event]
-  'document:mouseup': [event: Event]
-  'document:keydown': [event: Event]
-  'document:touchend': [event: Event]
-  'document:touchmove': [event: Event]
-  'document:mousemove': [event: Event]
-  'document:pointerup': [event: Event]
-  'document:contextmenu': [event: Event]
-  'document:pointermove': [event: Event]
-  'document:visibilitychange': [event: Event]
-  'document:webkitfullscreenchange': [event: Event]
-
-  'window:resize': [event: Event]
-  'window:scroll': [event: Event]
-  'window:orientationchange': [event: Event]
-
-  'video:canplay': [event: Event]
-  'video:canplaythrough': [event: Event]
-  'video:complete': [event: Event]
-  'video:durationchange': [event: Event]
-  'video:emptied': [event: Event]
-  'video:ended': [event: Event]
-  'video:error': [error: Error]
-  'video:loadeddata': [event: Event]
-  'video:loadedmetadata': [event: Event]
-  'video:pause': [event: Event]
-  'video:play': [event: Event]
-  'video:playing': [event: Event]
-  'video:progress': [event: Event]
-  'video:ratechange': [event: Event]
-  'video:seeked': [event: Event]
-  'video:seeking': [event: Event]
-  'video:stalled': [event: Event]
-  'video:suspend': [event: Event]
-  'video:timeupdate': [event: Event]
-  'video:volumechange': [event: Event]
-  'video:waiting': [event: Event]
-
-  'info': [state: boolean]
-  'layer': [state: boolean]
-  'loading': [state: boolean]
-  'mask': [state: boolean]
-  'subtitle': [state: boolean]
-  'contextmenu': [state: boolean]
-  'control': [state: boolean]
-  'setting': [state: boolean]
-  'hotkey': [event: Event]
-
-  'destroy': []
-
-  'subtitleOffset': [offset: number]
-  'subtitleBeforeUpdate': [cue: VTTCue]
-  'subtitleAfterUpdate': [cue: VTTCue]
-  'subtitleLoad': [cues: VTTCue[], option: Subtitle]
-
-  'focus': [event: Event]
-  'blur': [event: Event]
-  'dblclick': [event: Event]
-  'click': [event: Event]
-  'hover': [state: boolean, event: Event]
-  'mousemove': [event: Event]
-
-  'resize': []
-  'view': [state: boolean]
-  'lock': [state: boolean]
-  'aspectRatio': [aspectRatio: AspectRatio]
-  'autoHeight': [height: number]
-  'autoSize': []
-  'ready': []
-
-  'error': [error: Error, reconnectTime: number]
-  'flip': [flip: Flip]
-  'fullscreen': [state: boolean]
-  'fullscreenError': [event: Event]
-  'fullscreenWeb': [state: boolean]
-  'mini': [state: boolean]
-  'pause': []
-  'pip': [state: boolean]
-  'play': []
-  'screenshot': [dataUri: string]
-  'seek': [currentTime: number]
-  'restart': [url: string]
-  'muted': [state: boolean]
-  'setBar': [type: Bar, percentage: number, event?: Event | undefined]
-  'keydown': [event: KeyboardEvent]
+/**
+ * Playback and media control constants
+ */
+export interface PlaybackConstants {
+  /** Maximum auto playback duration */
+  AUTO_PLAYBACK_MAX: number
+  /** Minimum auto playback duration */
+  AUTO_PLAYBACK_MIN: number
+  /** Maximum reconnection attempts */
+  RECONNECT_TIME_MAX: number
+  /** Fast forward speed multiplier */
+  FAST_FORWARD_VALUE: number
+  /** Touch move ratio for gesture controls */
+  TOUCH_MOVE_RATIO: number
+  /** Volume adjustment step */
+  VOLUME_STEP: number
+  /** Seek step in seconds */
+  SEEK_STEP: number
+  /** Available playback rates */
+  PLAYBACK_RATE: number[]
+  /** Available aspect ratios */
+  ASPECT_RATIO: string[]
+  /** Available flip options */
+  FLIP: string[]
 }
 
-export interface CssVar {
-  '--art-theme': string
-  '--art-font-color': string
-  '--art-background-color': string
-  '--art-text-shadow-color': string
-  '--art-transition-duration': string
-  '--art-padding': string
-  '--art-border-radius': string
-  '--art-progress-height': string
-  '--art-progress-color': string
-  '--art-hover-color': string
-  '--art-loaded-color': string
-  '--art-state-size': string
-  '--art-state-opacity': number
-  '--art-bottom-height': string
-  '--art-bottom-offset': string
-  '--art-bottom-gap': string
-  '--art-highlight-width': string
-  '--art-highlight-color': string
-  '--art-control-height': string
-  '--art-control-opacity': number
-  '--art-control-icon-size': string
-  '--art-control-icon-scale': number
-  '--art-volume-height': string
-  '--art-volume-handle-size': string
-  '--art-lock-size': string
-  '--art-indicator-scale': number
-  '--art-indicator-size': string
-  '--art-fullscreen-web-index': 9999
-  '--art-settings-icon-size': string
-  '--art-settings-max-height': string
-  '--art-selector-max-height': string
-  '--art-contextmenus-min-width': string
-  '--art-subtitle-font-size': string
-  '--art-subtitle-gap': string
-  '--art-subtitle-bottom': string
-  '--art-subtitle-border': string
-  '--art-widget-background': string
-  '--art-tip-background': string
-  '--art-scrollbar-size': string
-  '--art-scrollbar-background': string
-  '--art-scrollbar-background-hover': string
-  '--art-mini-progress-height': string
+/**
+ * Feature flags and behavior controls
+ */
+export interface FeatureFlags {
+  /** Enable debug mode */
+  DEBUG: boolean
+  /** Enable context menu */
+  CONTEXTMENU: boolean
+  /** Enable double click fullscreen */
+  DBCLICK_FULLSCREEN: boolean
+  /** Enable mobile double click play */
+  MOBILE_DBCLICK_PLAY: boolean
+  /** Enable mobile click play */
+  MOBILE_CLICK_PLAY: boolean
+  /** Use fullscreen web in body */
+  FULLSCREEN_WEB_IN_BODY: boolean
+  /** Show version in console */
+  LOG_VERSION: boolean
+  /** Use requestAnimationFrame */
+  USE_RAF: boolean
 }
 
-export interface Config {
-  properties: [
-    'audioTracks',
-    'autoplay',
-    'buffered',
-    'controller',
-    'controls',
-    'crossOrigin',
-    'currentSrc',
-    'currentTime',
-    'defaultMuted',
-    'defaultPlaybackRate',
-    'duration',
-    'ended',
-    'error',
-    'loop',
-    'mediaGroup',
-    'muted',
-    'networkState',
-    'paused',
-    'playbackRate',
-    'played',
-    'preload',
-    'readyState',
-    'seekable',
-    'seeking',
-    'src',
-    'startDate',
-    'textTracks',
-    'videoTracks',
-    'volume',
-  ]
-  methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause']
-  events: [
-    'abort',
-    'canplay',
-    'canplaythrough',
-    'durationchange',
-    'emptied',
-    'ended',
-    'error',
-    'loadeddata',
-    'loadedmetadata',
-    'loadstart',
-    'pause',
-    'play',
-    'playing',
-    'progress',
-    'ratechange',
-    'seeked',
-    'seeking',
-    'stalled',
-    'suspend',
-    'timeupdate',
-    'volumechange',
-    'waiting',
-  ]
-  prototypes: [
-    'width',
-    'height',
-    'videoWidth',
-    'videoHeight',
-    'poster',
-    'webkitDecodedFrameCount',
-    'webkitDroppedFrameCount',
-    'playsInline',
-    'webkitSupportsFullscreen',
-    'webkitDisplayingFullscreen',
-    'onenterpictureinpicture',
-    'onleavepictureinpicture',
-    'disablePictureInPicture',
-    'cancelVideoFrameCallback',
-    'requestVideoFrameCallback',
-    'getVideoPlaybackQuality',
-    'requestPictureInPicture',
-    'webkitEnterFullScreen',
-    'webkitEnterFullscreen',
-    'webkitExitFullScreen',
-    'webkitExitFullscreen',
-  ]
+/**
+ * Combined constants interface
+ */
+export interface ArtplayerConstants
+  extends TimeConstants,
+  UIConstants,
+  PlaybackConstants,
+  FeatureFlags {
+  /** Player style CSS */
+  STYLE: string
 }
-
-
-
-export interface Selector {
-  /**
-   * Whether the default is selected
-   */
-  default?: boolean
-
-  /**
-   * Html string of selector
-   */
-  html: string | HTMLElement
-}
-
-export interface Component {
-  /**
-   * Component self-increasing id
-   */
-  readonly id: number
-
-  /**
-   * Component parent name
-   */
-  readonly name: string | undefined
-
-  /**
-   * Component parent element
-   */
-  readonly $parent: HTMLElement | undefined
-
-  /**
-   * Whether to show component parent
-   */
-  get show(): boolean
-
-  /**
-   * Whether to show component parent
-   */
-  set show(state: boolean)
-
-  /**
-   * Toggle the component parent
-   */
-  toggle: () => void
-
-  /**
-   * Dynamic add a component
-   */
-  add: (option: ComponentOption) => HTMLElement
-
-  /**
-   * Dynamic remove a component by name
-   */
-  remove: (name: string) => void
-
-  /**
-   * Dynamic update a component
-   */
-  update: (option: ComponentOption) => HTMLElement
-}
-
-export interface ComponentOption {
-  /**
-   * Html string or html element of component
-   */
-  html?: string | HTMLElement
-
-  /**
-   * Whether to disable component
-   */
-  disable?: boolean
-
-  /**
-   * Unique name for component
-   */
-  name?: string
-
-  /**
-   * Component sort index
-   */
-  index?: number
-
-  /**
-   * Component style object
-   */
-  style?: Partial<CSSStyleDeclaration>
-
-  /**
-   * Component click event
-   */
-  click?: (this: Artplayer, component: Component, event: Event) => void
-
-  /**
-   * When the component was mounted
-   */
-  mounted?: (this: Artplayer, element: HTMLElement) => void
-
-  /**
-   * When the component was before unmount
-   */
-  beforeUnmount?: (this: Artplayer, element: HTMLElement) => void
-
-  /**
-   * Component tooltip, use in controls
-   */
-  tooltip?: string
-
-  /**
-   * Component position, use in controls
-   */
-  position?: 'top' | 'left' | 'right' | (string & Record<never, never>)
-
-  /**
-   * Custom selector list, use in controls
-   */
-  selector?: Selector[]
-
-  /**
-   * When selector item click, use in controls
-   */
-  onSelect?: (this: Artplayer, selector: Selector, element: HTMLElement, event: Event) => void
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 export type {
+  ArtplayerConstants,
   Config,
   Events,
   I18n,
@@ -1147,6 +1216,7 @@ export default class Artplayer extends Player {
   get SettingOption(): SettingOption
   get Component(): Component
 
+  // Readonly static properties
   static readonly instances: Artplayer[]
   static readonly version: string
   static readonly env: string
@@ -1160,39 +1230,48 @@ export default class Artplayer extends Player {
   static readonly html: Artplayer['template']['html']
   static readonly option: Option
 
-  static STYLE: string
-  static DEBUG: boolean
-  static CONTEXTMENU: boolean
-  static NOTICE_TIME: number
-  static SETTING_WIDTH: number
-  static SETTING_ITEM_WIDTH: number
-  static SETTING_ITEM_HEIGHT: number
-  static RESIZE_TIME: number
-  static SCROLL_TIME: number
-  static SCROLL_GAP: number
-  static AUTO_PLAYBACK_MAX: number
-  static AUTO_PLAYBACK_MIN: number
-  static AUTO_PLAYBACK_TIMEOUT: number
-  static RECONNECT_TIME_MAX: number
-  static RECONNECT_SLEEP_TIME: number
-  static CONTROL_HIDE_TIME: number
-  static DBCLICK_TIME: number
-  static DBCLICK_FULLSCREEN: boolean
-  static MOBILE_DBCLICK_PLAY: boolean
-  static MOBILE_CLICK_PLAY: boolean
-  static AUTO_ORIENTATION_TIME: number
-  static INFO_LOOP_TIME: number
-  static FAST_FORWARD_VALUE: number
-  static FAST_FORWARD_TIME: number
-  static TOUCH_MOVE_RATIO: number
-  static VOLUME_STEP: number
-  static SEEK_STEP: number
-  static PLAYBACK_RATE: number[]
-  static ASPECT_RATIO: string[]
-  static FLIP: string[]
-  static FULLSCREEN_WEB_IN_BODY: boolean
-  static LOG_VERSION: boolean
-  static USE_RAF: boolean
+  // Static constants - grouped by category for better organization
+  static STYLE: ArtplayerConstants['STYLE']
+  static DEBUG: ArtplayerConstants['DEBUG']
+  static CONTEXTMENU: ArtplayerConstants['CONTEXTMENU']
+
+  // Time constants
+  static NOTICE_TIME: ArtplayerConstants['NOTICE_TIME']
+  static RESIZE_TIME: ArtplayerConstants['RESIZE_TIME']
+  static SCROLL_TIME: ArtplayerConstants['SCROLL_TIME']
+  static AUTO_PLAYBACK_TIMEOUT: ArtplayerConstants['AUTO_PLAYBACK_TIMEOUT']
+  static RECONNECT_SLEEP_TIME: ArtplayerConstants['RECONNECT_SLEEP_TIME']
+  static CONTROL_HIDE_TIME: ArtplayerConstants['CONTROL_HIDE_TIME']
+  static DBCLICK_TIME: ArtplayerConstants['DBCLICK_TIME']
+  static AUTO_ORIENTATION_TIME: ArtplayerConstants['AUTO_ORIENTATION_TIME']
+  static INFO_LOOP_TIME: ArtplayerConstants['INFO_LOOP_TIME']
+  static FAST_FORWARD_TIME: ArtplayerConstants['FAST_FORWARD_TIME']
+
+  // UI constants
+  static SETTING_WIDTH: ArtplayerConstants['SETTING_WIDTH']
+  static SETTING_ITEM_WIDTH: ArtplayerConstants['SETTING_ITEM_WIDTH']
+  static SETTING_ITEM_HEIGHT: ArtplayerConstants['SETTING_ITEM_HEIGHT']
+  static SCROLL_GAP: ArtplayerConstants['SCROLL_GAP']
+
+  // Playback constants
+  static AUTO_PLAYBACK_MAX: ArtplayerConstants['AUTO_PLAYBACK_MAX']
+  static AUTO_PLAYBACK_MIN: ArtplayerConstants['AUTO_PLAYBACK_MIN']
+  static RECONNECT_TIME_MAX: ArtplayerConstants['RECONNECT_TIME_MAX']
+  static FAST_FORWARD_VALUE: ArtplayerConstants['FAST_FORWARD_VALUE']
+  static TOUCH_MOVE_RATIO: ArtplayerConstants['TOUCH_MOVE_RATIO']
+  static VOLUME_STEP: ArtplayerConstants['VOLUME_STEP']
+  static SEEK_STEP: ArtplayerConstants['SEEK_STEP']
+  static PLAYBACK_RATE: ArtplayerConstants['PLAYBACK_RATE']
+  static ASPECT_RATIO: ArtplayerConstants['ASPECT_RATIO']
+  static FLIP: ArtplayerConstants['FLIP']
+
+  // Feature flags
+  static DBCLICK_FULLSCREEN: ArtplayerConstants['DBCLICK_FULLSCREEN']
+  static MOBILE_DBCLICK_PLAY: ArtplayerConstants['MOBILE_DBCLICK_PLAY']
+  static MOBILE_CLICK_PLAY: ArtplayerConstants['MOBILE_CLICK_PLAY']
+  static FULLSCREEN_WEB_IN_BODY: ArtplayerConstants['FULLSCREEN_WEB_IN_BODY']
+  static LOG_VERSION: ArtplayerConstants['LOG_VERSION']
+  static USE_RAF: ArtplayerConstants['USE_RAF']
 
   readonly id: number
   readonly option: Option

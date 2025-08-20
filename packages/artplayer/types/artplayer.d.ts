@@ -1,5 +1,6 @@
 import type { Component } from './component'
 import type { Config } from './config'
+import type { ArtplayerConstants } from './constants'
 import type { Events } from './events'
 import type { I18n } from './i18n'
 import type { Icons } from './icons'
@@ -11,6 +12,7 @@ import type { Template } from './template'
 import type { Utils } from './utils'
 
 export type {
+  ArtplayerConstants,
   Config,
   Events,
   I18n,
@@ -40,6 +42,7 @@ export default class Artplayer extends Player {
   get SettingOption(): SettingOption
   get Component(): Component
 
+  // Readonly static properties
   static readonly instances: Artplayer[]
   static readonly version: string
   static readonly env: string
@@ -53,39 +56,48 @@ export default class Artplayer extends Player {
   static readonly html: Artplayer['template']['html']
   static readonly option: Option
 
-  static STYLE: string
-  static DEBUG: boolean
-  static CONTEXTMENU: boolean
-  static NOTICE_TIME: number
-  static SETTING_WIDTH: number
-  static SETTING_ITEM_WIDTH: number
-  static SETTING_ITEM_HEIGHT: number
-  static RESIZE_TIME: number
-  static SCROLL_TIME: number
-  static SCROLL_GAP: number
-  static AUTO_PLAYBACK_MAX: number
-  static AUTO_PLAYBACK_MIN: number
-  static AUTO_PLAYBACK_TIMEOUT: number
-  static RECONNECT_TIME_MAX: number
-  static RECONNECT_SLEEP_TIME: number
-  static CONTROL_HIDE_TIME: number
-  static DBCLICK_TIME: number
-  static DBCLICK_FULLSCREEN: boolean
-  static MOBILE_DBCLICK_PLAY: boolean
-  static MOBILE_CLICK_PLAY: boolean
-  static AUTO_ORIENTATION_TIME: number
-  static INFO_LOOP_TIME: number
-  static FAST_FORWARD_VALUE: number
-  static FAST_FORWARD_TIME: number
-  static TOUCH_MOVE_RATIO: number
-  static VOLUME_STEP: number
-  static SEEK_STEP: number
-  static PLAYBACK_RATE: number[]
-  static ASPECT_RATIO: string[]
-  static FLIP: string[]
-  static FULLSCREEN_WEB_IN_BODY: boolean
-  static LOG_VERSION: boolean
-  static USE_RAF: boolean
+  // Static constants - grouped by category for better organization
+  static STYLE: ArtplayerConstants['STYLE']
+  static DEBUG: ArtplayerConstants['DEBUG']
+  static CONTEXTMENU: ArtplayerConstants['CONTEXTMENU']
+
+  // Time constants
+  static NOTICE_TIME: ArtplayerConstants['NOTICE_TIME']
+  static RESIZE_TIME: ArtplayerConstants['RESIZE_TIME']
+  static SCROLL_TIME: ArtplayerConstants['SCROLL_TIME']
+  static AUTO_PLAYBACK_TIMEOUT: ArtplayerConstants['AUTO_PLAYBACK_TIMEOUT']
+  static RECONNECT_SLEEP_TIME: ArtplayerConstants['RECONNECT_SLEEP_TIME']
+  static CONTROL_HIDE_TIME: ArtplayerConstants['CONTROL_HIDE_TIME']
+  static DBCLICK_TIME: ArtplayerConstants['DBCLICK_TIME']
+  static AUTO_ORIENTATION_TIME: ArtplayerConstants['AUTO_ORIENTATION_TIME']
+  static INFO_LOOP_TIME: ArtplayerConstants['INFO_LOOP_TIME']
+  static FAST_FORWARD_TIME: ArtplayerConstants['FAST_FORWARD_TIME']
+
+  // UI constants
+  static SETTING_WIDTH: ArtplayerConstants['SETTING_WIDTH']
+  static SETTING_ITEM_WIDTH: ArtplayerConstants['SETTING_ITEM_WIDTH']
+  static SETTING_ITEM_HEIGHT: ArtplayerConstants['SETTING_ITEM_HEIGHT']
+  static SCROLL_GAP: ArtplayerConstants['SCROLL_GAP']
+
+  // Playback constants
+  static AUTO_PLAYBACK_MAX: ArtplayerConstants['AUTO_PLAYBACK_MAX']
+  static AUTO_PLAYBACK_MIN: ArtplayerConstants['AUTO_PLAYBACK_MIN']
+  static RECONNECT_TIME_MAX: ArtplayerConstants['RECONNECT_TIME_MAX']
+  static FAST_FORWARD_VALUE: ArtplayerConstants['FAST_FORWARD_VALUE']
+  static TOUCH_MOVE_RATIO: ArtplayerConstants['TOUCH_MOVE_RATIO']
+  static VOLUME_STEP: ArtplayerConstants['VOLUME_STEP']
+  static SEEK_STEP: ArtplayerConstants['SEEK_STEP']
+  static PLAYBACK_RATE: ArtplayerConstants['PLAYBACK_RATE']
+  static ASPECT_RATIO: ArtplayerConstants['ASPECT_RATIO']
+  static FLIP: ArtplayerConstants['FLIP']
+
+  // Feature flags
+  static DBCLICK_FULLSCREEN: ArtplayerConstants['DBCLICK_FULLSCREEN']
+  static MOBILE_DBCLICK_PLAY: ArtplayerConstants['MOBILE_DBCLICK_PLAY']
+  static MOBILE_CLICK_PLAY: ArtplayerConstants['MOBILE_CLICK_PLAY']
+  static FULLSCREEN_WEB_IN_BODY: ArtplayerConstants['FULLSCREEN_WEB_IN_BODY']
+  static LOG_VERSION: ArtplayerConstants['LOG_VERSION']
+  static USE_RAF: ArtplayerConstants['USE_RAF']
 
   readonly id: number
   readonly option: Option
