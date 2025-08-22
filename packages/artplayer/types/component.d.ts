@@ -10,6 +10,11 @@ export interface Selector {
    * Html string of selector
    */
   html: string | HTMLElement
+
+  /**
+   * Allow custom properties
+   */
+  [key: string]: any
 }
 
 export interface Component {
