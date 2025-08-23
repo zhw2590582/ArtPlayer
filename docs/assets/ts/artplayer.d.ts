@@ -216,7 +216,10 @@ export interface Setting {
    */
   onClick?: (this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event) => void
 
-  [key: string]: unknown
+  /**
+   * Allow custom properties
+   */
+  [key: string]: any
 }
 
 export interface Quality {
@@ -994,6 +997,11 @@ export interface Selector {
    * Html string of selector
    */
   html: string | HTMLElement
+
+  /**
+   * Allow custom properties
+   */
+  [key: string]: any
 }
 
 export interface Component {
