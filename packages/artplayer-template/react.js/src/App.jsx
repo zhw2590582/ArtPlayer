@@ -1,4 +1,4 @@
-import Artplayer from './ArtPlayer.jsx'
+import Artplayer from './Artplayer.jsx'
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
           height: '400px',
           margin: '60px auto 0',
         }}
-        getInstance={art => console.info(art)}
+        getInstance={art => console.log(art)}
       />
     </div>
   )

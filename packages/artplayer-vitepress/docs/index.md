@@ -84,75 +84,63 @@ https://unpkg.com/artplayer/dist/artplayer.js
 ::: code-group
 
 ```vue [Artplayer.vue]
+<template>
+  <div ref="$container" />
+</template>
+
 <script>
 import Artplayer from 'artplayer'
+import { onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
 
-export default {
-  props: {
-    option: {
-      type: Object,
-      required: true,
-    },
+const props = defineProps({
+  option: {
+    type: Object,
+    required: true,
   },
-  data() {
-    return {
-      instance: null,
-    }
-  },
-  mounted() {
-    this.instance = new Artplayer({
-      ...this.option,
-      container: this.$refs.artRef,
-    })
+})
 
-    this.$nextTick(() => {
-      this.$emit('get-instance', this.instance)
-    })
-  },
-  beforeUnmount() {
-    if (this.instance && this.instance.destroy) {
-      this.instance.destroy(false)
-    }
-  },
-}
+const emit = defineEmits(['getInstance'])
+
+const art = shallowRef(null)
+const $container = ref(null)
+
+onMounted(() => {
+  art.value = new Artplayer({
+    ...props.option,
+    container: $container.value,
+  })
+  emit('getInstance', art.value)
+})
+
+onBeforeUnmount(() => {
+  art.value.destroy(false)
+})
 </script>
-
-<template>
-  <div ref="artRef" />
-</template>
 ```
 
 ```vue [app.vue]
-<script>
-import Artplayer from './Artplayer.vue'
-
-export default {
-  components: {
-    Artplayer,
-  },
-  data() {
-    return {
-      option: {
-        url: 'path/to/video.mp4',
-      },
-      style: {
-        width: '600px',
-        height: '400px',
-        margin: '60px auto 0',
-      },
-    }
-  },
-  methods: {
-    getInstance(art) {
-      console.info(art)
-    },
-  },
-}
-</script>
-
 <template>
   <Artplayer :option="option" :style="style" @get-instance="getInstance" />
 </template>
+
+<script setup>
+import { reactive } from 'vue'
+import Artplayer from './Artplayer.vue'
+
+const option = reactive({
+  url: 'path/to/video.mp4',
+})
+
+const style = reactive({
+  width: '600px',
+  height: '400px',
+  margin: '60px auto 0',
+})
+
+function getInstance(art) {
+  console.log(art)
+}
+</script>
 ```
 
 :::
@@ -172,46 +160,41 @@ import Artplayer from 'artplayer'
 import { useEffect, useRef } from 'react'
 
 export default function Player({ option, getInstance, ...rest }) {
-  const artRef = useRef()
+  const $container = useRef()
 
   useEffect(() => {
     const art = new Artplayer({
       ...option,
-      container: artRef.current,
+      container: $container.current,
     })
 
-    if (getInstance && typeof getInstance === 'function') {
+    if (typeof getInstance === 'function') {
       getInstance(art)
     }
 
-    return () => {
-      if (art && art.destroy) {
-        art.destroy(false)
-      }
-    }
+    return () => art.destroy(false)
   }, [])
 
-  return <div ref={artRef} {...rest}></div>
+  return <div ref={$container} {...rest}></div>
 }
 ```
 
 ```jsx [app.jsx]
-import React from 'react'
-import Artplayer from './ArtPlayer.jsx'
+import Artplayer from './Artplayer.jsx'
 
 function App() {
   return (
     <div>
       <Artplayer
         option={{
-          url: 'https://artplayer.org/assets/sample/video.mp4',
+          url: 'path/to/video.mp4',
         }}
         style={{
           width: '600px',
           height: '400px',
           margin: '60px auto 0',
         }}
-        getInstance={art => console.info(art)}
+        getInstance={art => console.log(art)}
       />
     </div>
   )
