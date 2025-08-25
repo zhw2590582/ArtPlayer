@@ -87,7 +87,7 @@ The player's size depends on the size of the container `container`, so your cont
   <div ref="$container" />
 </template>
 
-<script>
+<script setup>
 import Artplayer from 'artplayer'
 import { onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
 
@@ -220,7 +220,7 @@ Importing `Artplayer` will automatically import `artplayer.d.ts`
 ```vue{3}
 <script setup>
 import Artplayer from 'artplayer';
-const art = ref<Artplayer>(null);
+const art = shallowRef<Artplayer>(null);
 art.value = new Artplayer();
 </script>
 ```

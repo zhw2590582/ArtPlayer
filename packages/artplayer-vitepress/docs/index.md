@@ -88,7 +88,7 @@ https://unpkg.com/artplayer/dist/artplayer.js
   <div ref="$container" />
 </template>
 
-<script>
+<script setup>
 import Artplayer from 'artplayer'
 import { onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
 
@@ -220,7 +220,7 @@ export default App
 ```vue{3}
 <script setup>
 import Artplayer from 'artplayer';
-const art = ref<Artplayer>(null);
+const art = shallowRef<Artplayer>(null);
 art.value = new Artplayer();
 </script>
 ```
