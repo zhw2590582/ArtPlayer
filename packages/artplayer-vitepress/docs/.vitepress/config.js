@@ -15,13 +15,11 @@ const config = {
       { text: '中文版', link: '/' },
       { text: 'English Docs', link: '/en/', activeMatch: '/en/' },
       { text: 'Online Editor', link: 'https://artplayer.org' },
-      { text: '🎉 弹幕库', link: '/plugin/danmuku' },
       {
-        text: '5.1.x',
+        text: '5.2.x',
         items: [
           { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG.md' },
           { text: 'Donation', link: 'https://github.com/zhw2590582/ArtPlayer#donations' },
-          { text: 'Q群: 320881312', link: 'https://github.com/zhw2590582/ArtPlayer#qq-group' },
         ],
       },
     ],
