@@ -19,7 +19,7 @@ const config = {
       {
         text: '5.1.x',
         items: [
-          { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG_CN.md' },
+          { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG.md' },
           { text: 'Donation', link: 'https://github.com/zhw2590582/ArtPlayer#donations' },
           { text: 'Q群: 320881312', link: 'https://github.com/zhw2590582/ArtPlayer#qq-group' },
         ],

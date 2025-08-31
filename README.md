@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <!-- <img src="https://img.shields.io/bundlephobia/minzip/artplayer" alt="Size"> -->
+  <img src="https://img.shields.io/bundlephobia/minzip/artplayer" alt="Size">
   <img src="https://img.shields.io/npm/dm/artplayer.svg?sanitize=true" alt="Downloads">
   <img src="https://img.shields.io/npm/v/artplayer.svg?sanitize=true" alt="Version">
   <img src="https://img.shields.io/npm/l/artplayer.svg?sanitize=true" alt="License">
@@ -21,9 +21,9 @@
   <span>・</span>
   <a href="https://artplayer.org/document">API Document</a>
   <span>・</span>
-  <a href="https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku">弹幕演示</a>
+  <a href="https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku">Danmuku</a>
   <span>・</span>
-  <a href="./CHANGELOG_CN.md">更新记录</a>
+  <a href="./CHANGELOG.md">Changelog</a>
   <span>・</span>
 </p>
 
@@ -126,7 +126,7 @@ let art = new Artplayer({
 
 ## Changelog
 
-[CHANGELOG_CN.md](./CHANGELOG_CN.md)
+[CHANGELOG.md](./CHANGELOG.md)
 
 ## Contributing
 
