@@ -1201,6 +1201,7 @@ export default class Artplayer extends Player {
   static FULLSCREEN_WEB_IN_BODY: boolean
   static LOG_VERSION: boolean
   static USE_RAF: boolean
+  static REMOVE_SRC_WHEN_DESTROY: boolean
 
   readonly id: number
   readonly option: Option
