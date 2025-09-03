@@ -360,6 +360,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return this.template.$video;
     }
     destroy(removeHtml = true) {
+        if (Artplayer.REMOVE_SRC_WHEN_DESTROY) this.video.removeAttribute('src');
         this.events.destroy();
         this.template.destroy(removeHtml);
         instances.splice(instances.indexOf(this), 1);
@@ -416,6 +417,7 @@ Artplayer.FLIP = [
 Artplayer.FULLSCREEN_WEB_IN_BODY = false;
 Artplayer.LOG_VERSION = true;
 Artplayer.USE_RAF = false;
+Artplayer.REMOVE_SRC_WHEN_DESTROY = true;
 if (_utils.isBrowser) {
     window.Artplayer = Artplayer;
     _utils.setStyleText('artplayer-style', (0, _indexLessDefault.default));
@@ -5462,7 +5464,6 @@ class Template {
         if (0, _utils.isMobile) (0, _utils.addClass)(this.$player, 'art-mobile');
     }
     destroy(removeHtml) {
-        this.$video.src = '';
         if (removeHtml) this.$container.innerHTML = '';
         else (0, _utils.addClass)(this.$player, 'art-destroy');
     }

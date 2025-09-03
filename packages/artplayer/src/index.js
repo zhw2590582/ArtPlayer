@@ -203,6 +203,9 @@ export default class Artplayer extends Emitter {
   }
 
   destroy(removeHtml = true) {
+    if (Artplayer.REMOVE_SRC_WHEN_DESTROY) {
+      this.video.removeAttribute('src')
+    }
     this.events.destroy()
     this.template.destroy(removeHtml)
     instances.splice(instances.indexOf(this), 1)
@@ -244,6 +247,7 @@ Artplayer.FLIP = ['normal', 'horizontal', 'vertical']
 Artplayer.FULLSCREEN_WEB_IN_BODY = false
 Artplayer.LOG_VERSION = true
 Artplayer.USE_RAF = false
+Artplayer.REMOVE_SRC_WHEN_DESTROY = true
 
 if (utils.isBrowser) {
   window.Artplayer = Artplayer

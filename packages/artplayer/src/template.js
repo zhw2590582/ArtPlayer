@@ -147,7 +147,6 @@ export default class Template {
   }
 
   destroy(removeHtml) {
-    this.$video.src = ''
     if (removeHtml) {
       this.$container.innerHTML = ''
     }

@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Add `artplayer-plugin-document-pip` plugin
 - Add `art.events.bindGlobalEvents` method for rebinding global methods
 - Optimize `artplayer.d.ts`, now you can directly import `Option`
+- Add `Artplayer.REMOVE_SRC_WHEN_DESTROY`
 
 ```ts
 import type { Option } from 'artplayer'
