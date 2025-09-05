@@ -203,3 +203,13 @@ export default class Artplayer extends Player {
     ) => Promise<Artplayer['plugins']> | Artplayer['plugins']
   } & Record<string, unknown>
 }
+
+declare module "artplayer/i18n/*" {
+  const lang: Partial<I18n>;
+  export default lang;
+}
+
+declare module "artplayer/dist/i18n/*" {
+  const lang: Partial<I18n>;
+  export default lang;
+}
