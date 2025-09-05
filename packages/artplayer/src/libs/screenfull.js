@@ -146,8 +146,4 @@ Object.defineProperties(screenfull, {
   },
 })
 
-if (!nativeAPI) {
-  screenfull.isEnabled = false
-}
-
 export default screenfull
