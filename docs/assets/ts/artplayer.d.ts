@@ -1319,5 +1319,14 @@ export default class Artplayer extends Player {
   } & Record<string, unknown>
 }
 
+declare module "artplayer/i18n/*" {
+  const lang: Partial<I18n>;
+  export default lang;
+}
+
+declare module "artplayer/dist/i18n/*" {
+  const lang: Partial<I18n>;
+  export default lang;
+}
 export = Artplayer;
 export as namespace Artplayer;
