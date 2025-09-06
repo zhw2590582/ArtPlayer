@@ -22,9 +22,23 @@
       "import": "./dist/artplayer.mjs",
       "require": "./dist/artplayer.js"
     },
+    "./legacy": {
+      "import": "./dist/artplayer.legacy.js",
+      "require": "./dist/artplayer.legacy.js"
+    },
     "./i18n/*": {
       "import": "./dist/i18n/*.mjs",
       "require": "./dist/i18n/*.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "i18n/*": [
+        "types/i18n.d.ts"
+      ],
+      "legacy": [
+        "types/artplayer.d.ts"
+      ]
     }
   },
   "main": "./dist/artplayer.js",
