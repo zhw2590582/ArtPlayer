@@ -25,10 +25,6 @@
     "./i18n/*": {
       "import": "./dist/i18n/*.mjs",
       "require": "./dist/i18n/*.js"
-    },
-    "./dist/i18n/*": {
-      "import": "./dist/i18n/*.mjs",
-      "require": "./dist/i18n/*.js"
     }
   },
   "main": "./dist/artplayer.js",
