@@ -15,14 +15,14 @@ import artplayerPluginDanmuku from 'artplayer-plugin-danmuku'
 const props = defineProps<{ option: Partial<Option> }>()
 const emit = defineEmits(['getInstance'])
 
-const art = shallowRef<Artplayer>(null)
-const $container = ref(null)
+const art = shallowRef<Artplayer | null>(null)
+const $container = ref<HTMLDivElement | null>(null)
 
 onMounted(() => {
   art.value = new Artplayer({
     ...props.option,
-    url: props.option.url,
-    container: $container.value,
+    url: props.option.url as string,
+    container: $container.value as HTMLDivElement,
     i18n: { id, fr },
     lang: 'fr',
     plugins: [

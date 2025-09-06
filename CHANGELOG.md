@@ -6,8 +6,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [5.3.0-beta.0] - 2025-09-03
-
 - Rename `.esm.js` to `.mjs`
 - Remove the default `fill` color value of `svg`
 - Optimize the `autoOrientation` logic
@@ -22,6 +20,20 @@ import type { Option } from 'artplayer'
 const option: Option = {
   container: '.artplayer-app',
   url: './assets/sample/video.mp4',
+}
+```
+
+- Simplify `i18n` import
+
+```ts
+import fr from 'artplayer/i18n/fr'
+import id from 'artplayer/i18n/id'
+
+const option = {
+  container: '.artplayer-app',
+  url: './assets/sample/video.mp4',
+  i18n: { id, fr },
+  lang: 'fr',
 }
 ```
 
