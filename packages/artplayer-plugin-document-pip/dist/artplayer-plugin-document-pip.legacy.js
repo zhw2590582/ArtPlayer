@@ -1,6 +1,6 @@
 
 /*!
- * artplayer-plugin-document-pip.js v1.0.1
+ * artplayer-plugin-document-pip.js v1.0.2
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2025 Harvey Zack
  * Released under the MIT License.
