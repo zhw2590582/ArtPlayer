@@ -709,20 +709,20 @@ export interface Icons {
 }
 
 type I18nKeys
-    = | 'en'
-      | 'zh-cn'
-      | 'zh-tw'
-      | 'pl'
-      | 'cs'
-      | 'es'
-      | 'fa'
-      | 'fr'
-      | 'id'
-      | 'ru'
-      | 'tr'
-      | 'ar'
-      | 'vi'
-      | (string & Record<never, never>)
+  = | 'en'
+  | 'zh-cn'
+  | 'zh-tw'
+  | 'pl'
+  | 'cs'
+  | 'es'
+  | 'fa'
+  | 'fr'
+  | 'id'
+  | 'ru'
+  | 'tr'
+  | 'ar'
+  | 'vi'
+  | (string & Record<never, never>)
 
 interface I18nValue {
   'Video Info': string
@@ -765,6 +765,10 @@ interface I18nValue {
 
 export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>
 
+declare module "artplayer/i18n/*" {
+  const lang: Partial<I18nValue>
+  export default lang
+}
 
 
 
@@ -1142,19 +1146,6 @@ export type {
 export default class Artplayer extends Player {
   constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
 
-  get Config(): Config
-  get Events(): Events
-  get Utils(): Utils
-  get Player(): Player
-  get Option(): Option
-  get Subtitle(): Subtitle
-  get Icons(): Icons
-  get Template(): Template
-  get I18n(): I18n
-  get Setting(): Setting
-  get SettingOption(): SettingOption
-  get Component(): Component
-
   static readonly instances: Artplayer[]
   static readonly version: string
   static readonly env: string
@@ -1317,16 +1308,6 @@ export default class Artplayer extends Player {
       plugin: (this: Artplayer, art: Artplayer) => unknown | Promise<unknown>,
     ) => Promise<Artplayer['plugins']> | Artplayer['plugins']
   } & Record<string, unknown>
-}
-
-declare module "artplayer/i18n/*" {
-  const lang: Partial<I18n>;
-  export default lang;
-}
-
-declare module "artplayer/dist/i18n/*" {
-  const lang: Partial<I18n>;
-  export default lang;
 }
 export = Artplayer;
 export as namespace Artplayer;

@@ -21,6 +21,7 @@ const $container = ref(null)
 onMounted(() => {
   art.value = new Artplayer({
     ...props.option,
+    url: props.option.url,
     container: $container.value,
     i18n: { id, fr },
     lang: 'fr',
