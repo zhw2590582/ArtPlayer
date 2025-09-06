@@ -1,26 +1,21 @@
-<script setup>
-import Artplayer from 'artplayer'
+<script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
 
-// test i18n
+// Test type
+import Artplayer, { type Option } from 'artplayer'
+
+// Test i18n
 import fr from 'artplayer/i18n/fr'
 import id from 'artplayer/i18n/id'
 
-import { onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
+// Test plugins
+import artplayerPluginDocumentPip from 'artplayer-plugin-document-pip'
+import artplayerPluginDanmuku from 'artplayer-plugin-danmuku'
 
-// test plugins
-import artplayerPluginDanmuku from '../../../artplayer-plugin-danmuku'
-import artplayerPluginDocumentPip from '../../../artplayer-plugin-document-pip'
-
-const props = defineProps({
-  option: {
-    type: Object,
-    required: true,
-  },
-})
-
+const props = defineProps<{ option: Partial<Option> }>()
 const emit = defineEmits(['getInstance'])
 
-const art = shallowRef(null)
+const art = shallowRef<Artplayer>(null)
 const $container = ref(null)
 
 onMounted(() => {
@@ -30,7 +25,9 @@ onMounted(() => {
     i18n: { id, fr },
     lang: 'fr',
     plugins: [
-      artplayerPluginDocumentPip(),
+      artplayerPluginDocumentPip({
+        //
+      }),
       artplayerPluginDanmuku({
         danmuku: 'https://artplayer.org/assets/sample/danmuku.xml',
       }),
@@ -40,9 +37,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  if (art.value) {
-    art.value.destroy(false)
-  }
+  art.value?.destroy(false)
 })
 </script>
 

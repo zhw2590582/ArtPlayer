@@ -1,24 +1,24 @@
-<script setup>
+<script setup lang="ts">
 import { reactive } from 'vue'
-import Artplayer from './Artplayer.vue'
+import Artplayer, { type Option } from 'artplayer'
+import Player from './Player.vue'
 
-const option = reactive({
+const option = reactive<Partial<Option>>({
   url: 'https://artplayer.org/assets/sample/video.mp4',
   autoSize: true,
 })
 
 const style = reactive({
-  width: '600px',
-  height: '400px',
+  width: '800px',
+  height: '600px',
   margin: '60px auto 0',
 })
 
-function getInstance(art) {
-  // eslint-disable-next-line no-console
-  console.log(art)
+function getInstance(art: Artplayer) {
+  console.log('Artplayer instance:', art)
 }
 </script>
 
 <template>
-  <Artplayer :option="option" :style="style" @get-instance="getInstance" />
+  <Player :option="option" :style="style" @get-instance="getInstance" />
 </template>
