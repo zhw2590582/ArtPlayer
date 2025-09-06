@@ -1,8 +1,3 @@
-import Artplayer from '../packages/artplayer/dist/artplayer.js'
+import Artplayer from 'artplayer'
 
-console.log(Artplayer.default.html)
-
-const art = new Artplayer.default({
-  container: '.artplayer-app',
-  url: './assets/sample/video.mp4',
-})
+console.log(Artplayer.html)

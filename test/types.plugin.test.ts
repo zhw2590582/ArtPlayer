@@ -1,5 +1,5 @@
-import Artplayer from '../packages/artplayer'
-import artplayerPluginDanmuku from '../packages/artplayer-plugin-danmuku'
+import Artplayer from 'artplayer'
+import artplayerPluginDanmuku from 'artplayer-plugin-danmuku'
 
 const art = new Artplayer({
   container: '.artplayer-app',

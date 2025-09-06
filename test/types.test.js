@@ -64,7 +64,7 @@ function getInstance(art7) {
 // ======================== @option ==========================
 
 /**
- * @type {import("artplayer/types/option").Option}
+ * @type {import("../packages/artplayer/types/option").Option}
  */
 
 const option = {

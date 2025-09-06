@@ -1,3 +1,3 @@
-import id from 'artplayer/dist/i18n/id.js'
+import id from 'artplayer/i18n/id';
 
 console.log(id)
