@@ -16,7 +16,7 @@ const config = {
       { text: 'English Docs', link: '/en/', activeMatch: '/en/' },
       { text: 'Online Editor', link: 'https://artplayer.org' },
       {
-        text: '5.2.x',
+        text: '5.3.x',
         items: [
           { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG.md' },
           { text: 'Donation', link: 'https://github.com/zhw2590582/ArtPlayer#donations' },

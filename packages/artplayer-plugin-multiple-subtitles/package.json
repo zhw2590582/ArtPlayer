@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
       "import": "./dist/artplayer-plugin-multiple-subtitles.mjs",
-      "require": "./dist/artplayer-plugin-multiple-subtitles.js",
-      "types": "./types/artplayer-plugin-multiple-subtitles.d.ts"
+      "require": "./dist/artplayer-plugin-multiple-subtitles.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+      "import": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+      "require": "./dist/artplayer-plugin-multiple-subtitles.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-multiple-subtitles.js",

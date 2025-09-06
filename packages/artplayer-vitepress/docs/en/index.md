@@ -238,9 +238,9 @@ art.current = new Artplayer();
 You can also use the option type
 
 ```ts{3}
-import Artplayer from 'artplayer';
+import Artplayer, { type Option } from 'artplayer';
 
-const option: Artplayer['Option'] = {
+const option: Option = {
     container: '.artplayer-app',
     url: './assets/sample/video.mp4',
 };
@@ -317,7 +317,7 @@ The production build of `artplayer.js` is only compatible with the latest major 
 For ancient browsers, you can use the `artplayer.legacy.js` file, which is compatible up to: `IE 11`
 
 ```js
-import Artplayer from 'artplayer/dist/artplayer.legacy.js'
+import Artplayer from 'artplayer/legacy'
 ```
 
 ::: code-group

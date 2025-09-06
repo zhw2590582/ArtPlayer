@@ -20,7 +20,13 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-{{name}}.mjs",
-      "require": "./dist/artplayer-plugin-{{name}}.js"
+      "require": "./dist/artplayer-plugin-{{name}}.js",
+      "types": "./types/artplayer-plugin-{{name}}.d.ts"
+    },
+    "./legacy": {
+      "import": "./dist/artplayer-plugin-{{name}}.legacy.js",
+      "require": "./dist/artplayer-plugin-{{name}}.legacy.js",
+      "types": "./types/artplayer-plugin-{{name}}.d.ts"
     }
   },
   "main": "dist/artplayer-plugin-{{name}}.js",

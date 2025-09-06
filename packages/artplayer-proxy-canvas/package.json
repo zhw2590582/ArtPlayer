@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-proxy-canvas.d.ts",
       "import": "./dist/artplayer-proxy-canvas.mjs",
-      "require": "./dist/artplayer-proxy-canvas.js",
-      "types": "./types/artplayer-proxy-canvas.d.ts"
+      "require": "./dist/artplayer-proxy-canvas.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-proxy-canvas.d.ts",
+      "import": "./dist/artplayer-proxy-canvas.legacy.js",
+      "require": "./dist/artplayer-proxy-canvas.legacy.js"
     }
   },
   "main": "./dist/artplayer-proxy-canvas.js",

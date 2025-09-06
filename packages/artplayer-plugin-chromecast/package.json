@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-chromecast.d.ts",
       "import": "./dist/artplayer-plugin-chromecast.mjs",
-      "require": "./dist/artplayer-plugin-chromecast.js",
-      "types": "./types/artplayer-plugin-chromecast.d.ts"
+      "require": "./dist/artplayer-plugin-chromecast.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-chromecast.d.ts",
+      "import": "./dist/artplayer-plugin-chromecast.legacy.js",
+      "require": "./dist/artplayer-plugin-chromecast.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-chromecast.js",

@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-dash-control.d.ts",
       "import": "./dist/artplayer-plugin-dash-control.mjs",
-      "require": "./dist/artplayer-plugin-dash-control.js",
-      "types": "./types/artplayer-plugin-dash-control.d.ts"
+      "require": "./dist/artplayer-plugin-dash-control.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-dash-control.d.ts",
+      "import": "./dist/artplayer-plugin-dash-control.legacy.js",
+      "require": "./dist/artplayer-plugin-dash-control.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-dash-control.js",

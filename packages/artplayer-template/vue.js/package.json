@@ -12,8 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "artplayer": "^5.3.0-beta.3",
-    "artplayer-plugin-danmuku": "^5.1.8",
+    "artplayer": "^5.3.0-beta.4",
+    "artplayer-plugin-danmuku": "^5.2.0",
     "artplayer-plugin-document-pip": "^1.0.2",
     "vue": "^3.5.21"
   },

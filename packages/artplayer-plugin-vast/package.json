@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-vast.d.ts",
       "import": "./dist/artplayer-plugin-vast.mjs",
-      "require": "./dist/artplayer-plugin-vast.js",
-      "types": "./types/artplayer-plugin-vast.d.ts"
+      "require": "./dist/artplayer-plugin-vast.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-vast.d.ts",
+      "import": "./dist/artplayer-plugin-vast.legacy.js",
+      "require": "./dist/artplayer-plugin-vast.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-vast.js",

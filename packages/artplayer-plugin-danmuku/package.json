@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-danmuku",
-  "version": "5.1.9",
+  "version": "5.2.0",
   "description": "Danmuku plugin for ArtPlayer",
   "author": "Harvey Zack <laozhaochaguan@gmail.com>",
   "license": "MIT",
@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-danmuku.d.ts",
       "import": "./dist/artplayer-plugin-danmuku.mjs",
-      "require": "./dist/artplayer-plugin-danmuku.js",
-      "types": "./types/artplayer-plugin-danmuku.d.ts"
+      "require": "./dist/artplayer-plugin-danmuku.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-danmuku.d.ts",
+      "import": "./dist/artplayer-plugin-danmuku.legacy.js",
+      "require": "./dist/artplayer-plugin-danmuku.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-danmuku.js",

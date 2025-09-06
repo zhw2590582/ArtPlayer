@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-libass.d.ts",
       "import": "./dist/artplayer-plugin-libass.mjs",
-      "require": "./dist/artplayer-plugin-libass.js",
-      "types": "./types/artplayer-plugin-libass.d.ts"
+      "require": "./dist/artplayer-plugin-libass.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-libass.d.ts",
+      "import": "./dist/artplayer-plugin-libass.legacy.js",
+      "require": "./dist/artplayer-plugin-libass.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-libass.js",

@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-ads.d.ts",
       "import": "./dist/artplayer-plugin-ads.mjs",
-      "require": "./dist/artplayer-plugin-ads.js",
-      "types": "./types/artplayer-plugin-ads.d.ts"
+      "require": "./dist/artplayer-plugin-ads.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-ads.d.ts",
+      "import": "./dist/artplayer-plugin-ads.legacy.js",
+      "require": "./dist/artplayer-plugin-ads.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-ads.js",

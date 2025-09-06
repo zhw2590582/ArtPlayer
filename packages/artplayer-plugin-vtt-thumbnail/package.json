@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
       "import": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
-      "require": "./dist/artplayer-plugin-vtt-thumbnail.js",
-      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts"
+      "require": "./dist/artplayer-plugin-vtt-thumbnail.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+      "import": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+      "require": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-vtt-thumbnail.js",

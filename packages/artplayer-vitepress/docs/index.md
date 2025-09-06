@@ -238,9 +238,9 @@ art.current = new Artplayer();
 你也可以使用选项的类型
 
 ```ts{3}
-import Artplayer from 'artplayer';
+import Artplayer, { type Option } from 'artplayer';
 
-const option: Artplayer['Option'] = {
+const option: Option = {
     container: '.artplayer-app',
     url: './assets/sample/video.mp4',
 };
@@ -319,7 +319,7 @@ const art8 = new Artplayer(option);
 对于古老的浏览器，可以使用 `artplayer.legacy.js` 文件，可以兼容到：`IE 11`
 
 ```js
-import Artplayer from 'artplayer/dist/artplayer.legacy.js'
+import Artplayer from 'artplayer/legacy'
 ```
 
 ::: code-group

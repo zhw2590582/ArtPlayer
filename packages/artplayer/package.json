@@ -1,6 +1,6 @@
 {
   "name": "artplayer",
-  "version": "5.3.0-beta.3",
+  "version": "5.3.0-beta.5",
   "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
   "author": "Harvey Zack <laozhaochaguan@gmail.com>",
   "license": "MIT",
@@ -19,21 +19,24 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer.d.ts",
       "import": "./dist/artplayer.mjs",
-      "require": "./dist/artplayer.js",
-      "types": "./types/artplayer.d.ts"
+      "require": "./dist/artplayer.js"
     },
     "./legacy": {
+      "types": "./types/artplayer.d.ts",
       "import": "./dist/artplayer.legacy.js",
-      "require": "./dist/artplayer.legacy.js",
-      "types": "./types/artplayer.d.ts"
+      "require": "./dist/artplayer.legacy.js"
     },
     "./i18n/*": {
+      "types": "./types/i18n.d.ts",
       "import": "./dist/i18n/*.mjs",
-      "require": "./dist/i18n/*.js",
-      "types": "./types/i18n.d.ts"
+      "require": "./dist/i18n/*.js"
     }
   },
+  "main": "./dist/artplayer.js",
+  "module": "./dist/artplayer.mjs",
+  "types": "./types/artplayer.d.ts",
   "typesVersions": {
     "*": {
       "i18n/*": [
@@ -44,9 +47,6 @@
       ]
     }
   },
-  "main": "./dist/artplayer.js",
-  "module": "./dist/artplayer.mjs",
-  "types": "./types/artplayer.d.ts",
   "legacy": "./dist/artplayer.legacy.js",
   "browserslist": "last 1 Chrome version",
   "dependencies": {

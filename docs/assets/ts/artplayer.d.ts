@@ -710,19 +710,19 @@ export interface Icons {
 
 type I18nKeys
   = | 'en'
-  | 'zh-cn'
-  | 'zh-tw'
-  | 'pl'
-  | 'cs'
-  | 'es'
-  | 'fa'
-  | 'fr'
-  | 'id'
-  | 'ru'
-  | 'tr'
-  | 'ar'
-  | 'vi'
-  | (string & Record<never, never>)
+    | 'zh-cn'
+    | 'zh-tw'
+    | 'pl'
+    | 'cs'
+    | 'es'
+    | 'fa'
+    | 'fr'
+    | 'id'
+    | 'ru'
+    | 'tr'
+    | 'ar'
+    | 'vi'
+    | (string & Record<never, never>)
 
 interface I18nValue {
   'Video Info': string
@@ -765,11 +765,12 @@ interface I18nValue {
 
 export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>
 
-declare module "artplayer/i18n/*" {
+declare module 'artplayer/i18n/*' {
   const lang: Partial<I18nValue>
-  // @ts-ignore
+  // @ts-expect-error TS2666
   export default lang
 }
+
 
 
 
@@ -1310,5 +1311,6 @@ export default class Artplayer extends Player {
     ) => Promise<Artplayer['plugins']> | Artplayer['plugins']
   } & Record<string, unknown>
 }
+
 export = Artplayer;
 export as namespace Artplayer;

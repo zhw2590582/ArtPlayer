@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-ambilight.d.ts",
       "import": "./dist/artplayer-plugin-ambilight.mjs",
-      "require": "./dist/artplayer-plugin-ambilight.js",
-      "types": "./types/artplayer-plugin-ambilight.d.ts"
+      "require": "./dist/artplayer-plugin-ambilight.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-ambilight.d.ts",
+      "import": "./dist/artplayer-plugin-ambilight.legacy.js",
+      "require": "./dist/artplayer-plugin-ambilight.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-ambilight.js",

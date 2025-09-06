@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
       "import": "./dist/artplayer-plugin-auto-thumbnail.mjs",
-      "require": "./dist/artplayer-plugin-auto-thumbnail.js",
-      "types": "./types/artplayer-plugin-auto-thumbnail.d.ts"
+      "require": "./dist/artplayer-plugin-auto-thumbnail.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+      "import": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "require": "./dist/artplayer-plugin-auto-thumbnail.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-auto-thumbnail.js",

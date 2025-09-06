@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-hls-control.d.ts",
       "import": "./dist/artplayer-plugin-hls-control.mjs",
-      "require": "./dist/artplayer-plugin-hls-control.js",
-      "types": "./types/artplayer-plugin-hls-control.d.ts"
+      "require": "./dist/artplayer-plugin-hls-control.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-hls-control.d.ts",
+      "import": "./dist/artplayer-plugin-hls-control.legacy.js",
+      "require": "./dist/artplayer-plugin-hls-control.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-hls-control.js",

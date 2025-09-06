@@ -19,9 +19,14 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-iframe.d.ts",
       "import": "./dist/artplayer-plugin-iframe.mjs",
-      "require": "./dist/artplayer-plugin-iframe.js",
-      "types": "./types/artplayer-plugin-iframe.d.ts"
+      "require": "./dist/artplayer-plugin-iframe.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-iframe.d.ts",
+      "import": "./dist/artplayer-plugin-iframe.legacy.js",
+      "require": "./dist/artplayer-plugin-iframe.legacy.js"
     }
   },
   "main": "./dist/artplayer-plugin-iframe.js",
