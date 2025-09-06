@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
-      "require": "./dist/artplayer-plugin-vtt-thumbnail.js"
+      "require": "./dist/artplayer-plugin-vtt-thumbnail.js",
+      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-vtt-thumbnail.js",

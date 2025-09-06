@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-dash-control.mjs",
-      "require": "./dist/artplayer-plugin-dash-control.js"
+      "require": "./dist/artplayer-plugin-dash-control.js",
+      "types": "./types/artplayer-plugin-dash-control.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-dash-control.js",

@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-ambilight.mjs",
-      "require": "./dist/artplayer-plugin-ambilight.js"
+      "require": "./dist/artplayer-plugin-ambilight.js",
+      "types": "./types/artplayer-plugin-ambilight.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-ambilight.js",

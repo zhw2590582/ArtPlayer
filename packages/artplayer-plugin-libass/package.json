@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-libass.mjs",
-      "require": "./dist/artplayer-plugin-libass.js"
+      "require": "./dist/artplayer-plugin-libass.js",
+      "types": "./types/artplayer-plugin-libass.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-libass.js",

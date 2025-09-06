@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-ads.mjs",
-      "require": "./dist/artplayer-plugin-ads.js"
+      "require": "./dist/artplayer-plugin-ads.js",
+      "types": "./types/artplayer-plugin-ads.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-ads.js",

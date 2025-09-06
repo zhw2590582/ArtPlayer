@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-iframe.mjs",
-      "require": "./dist/artplayer-plugin-iframe.js"
+      "require": "./dist/artplayer-plugin-iframe.js",
+      "types": "./types/artplayer-plugin-iframe.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-iframe.js",

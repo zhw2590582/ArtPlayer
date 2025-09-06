@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-hls-control.mjs",
-      "require": "./dist/artplayer-plugin-hls-control.js"
+      "require": "./dist/artplayer-plugin-hls-control.js",
+      "types": "./types/artplayer-plugin-hls-control.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-hls-control.js",

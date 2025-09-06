@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-danmuku.mjs",
-      "require": "./dist/artplayer-plugin-danmuku.js"
+      "require": "./dist/artplayer-plugin-danmuku.js",
+      "types": "./types/artplayer-plugin-danmuku.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-danmuku.js",

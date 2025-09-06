@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-multiple-subtitles.mjs",
-      "require": "./dist/artplayer-plugin-multiple-subtitles.js"
+      "require": "./dist/artplayer-plugin-multiple-subtitles.js",
+      "types": "./types/artplayer-plugin-multiple-subtitles.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-multiple-subtitles.js",

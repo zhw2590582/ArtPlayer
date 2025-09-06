@@ -1,6 +1,6 @@
 {
   "name": "artplayer",
-  "version": "5.3.0-beta.2",
+  "version": "5.3.0-beta.3",
   "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
   "author": "Harvey Zack <laozhaochaguan@gmail.com>",
   "license": "MIT",
@@ -20,15 +20,18 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer.mjs",
-      "require": "./dist/artplayer.js"
+      "require": "./dist/artplayer.js",
+      "types": "./types/artplayer.d.ts"
     },
     "./legacy": {
       "import": "./dist/artplayer.legacy.js",
-      "require": "./dist/artplayer.legacy.js"
+      "require": "./dist/artplayer.legacy.js",
+      "types": "./types/artplayer.d.ts"
     },
     "./i18n/*": {
       "import": "./dist/i18n/*.mjs",
-      "require": "./dist/i18n/*.js"
+      "require": "./dist/i18n/*.js",
+      "types": "./types/i18n.d.ts"
     }
   },
   "typesVersions": {

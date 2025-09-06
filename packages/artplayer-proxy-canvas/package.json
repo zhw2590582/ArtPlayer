@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-proxy-canvas.mjs",
-      "require": "./dist/artplayer-proxy-canvas.js"
+      "require": "./dist/artplayer-proxy-canvas.js",
+      "types": "./types/artplayer-proxy-canvas.d.ts"
     }
   },
   "main": "./dist/artplayer-proxy-canvas.js",

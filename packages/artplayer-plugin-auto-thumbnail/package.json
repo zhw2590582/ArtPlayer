@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-auto-thumbnail.mjs",
-      "require": "./dist/artplayer-plugin-auto-thumbnail.js"
+      "require": "./dist/artplayer-plugin-auto-thumbnail.js",
+      "types": "./types/artplayer-plugin-auto-thumbnail.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-auto-thumbnail.js",

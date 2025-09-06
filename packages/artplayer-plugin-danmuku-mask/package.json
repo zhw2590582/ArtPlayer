@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-danmuku-mask.mjs",
-      "require": "./dist/artplayer-plugin-danmuku-mask.js"
+      "require": "./dist/artplayer-plugin-danmuku-mask.js",
+      "types": "./types/artplayer-plugin-danmuku-mask.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-danmuku-mask.js",

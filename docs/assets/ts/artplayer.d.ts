@@ -767,6 +767,7 @@ export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>
 
 declare module "artplayer/i18n/*" {
   const lang: Partial<I18nValue>
+  // @ts-ignore
   export default lang
 }
 

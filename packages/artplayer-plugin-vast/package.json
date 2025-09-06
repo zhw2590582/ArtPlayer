@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-vast.mjs",
-      "require": "./dist/artplayer-plugin-vast.js"
+      "require": "./dist/artplayer-plugin-vast.js",
+      "types": "./types/artplayer-plugin-vast.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-vast.js",

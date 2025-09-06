@@ -20,7 +20,8 @@
   "exports": {
     ".": {
       "import": "./dist/artplayer-plugin-chromecast.mjs",
-      "require": "./dist/artplayer-plugin-chromecast.js"
+      "require": "./dist/artplayer-plugin-chromecast.js",
+      "types": "./types/artplayer-plugin-chromecast.d.ts"
     }
   },
   "main": "./dist/artplayer-plugin-chromecast.js",
