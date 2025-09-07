@@ -1523,7 +1523,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>function(option) {
         return {
             ...option,
-            html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${0, _packageJson.version}</a>`
+            html: `<a href="https://artplayer.org" target="_blank" style="width:100%;">ArtPlayer ${0, _packageJson.version}</a>`
         };
     });
 var _packageJson = require("../../package.json");
