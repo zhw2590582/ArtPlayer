@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+- Change `Artplayer.FULLSCREEN_WEB_IN_BODY` defaults to `true`
+- Fix [#1014](https://github.com/zhw2590582/ArtPlayer/issues/1014)
+
 ## [5.3.0] - 2025-09-06
 
 - Rename `.esm.js` to `.mjs`

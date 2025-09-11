@@ -513,12 +513,12 @@ art.setting.show = true;
 
 ## FULLSCREEN_WEB_IN_BODY
 
-When in web fullscreen, whether to mount the player under the `body` element, defaults to `false`
+When in web fullscreen, whether to mount the player under the `body` element, defaults to `true`
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
-Artplayer.FULLSCREEN_WEB_IN_BODY = true;
+Artplayer.FULLSCREEN_WEB_IN_BODY = false;
 
 var art = new Artplayer({
     container: '.artplayer-app',

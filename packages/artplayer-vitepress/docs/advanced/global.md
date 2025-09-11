@@ -503,12 +503,12 @@ art.setting.show = true;
 
 ## FULLSCREEN_WEB_IN_BODY
 
-网页全屏时，是否把播放器挂在在 `body` 元素下，默认为 `false`
+网页全屏时，是否把播放器挂在在 `body` 元素下，默认为 `true`
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
-Artplayer.FULLSCREEN_WEB_IN_BODY = true;
+Artplayer.FULLSCREEN_WEB_IN_BODY = false;
 
 var art = new Artplayer({
     container: '.artplayer-app',
