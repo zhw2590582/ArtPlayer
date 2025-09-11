@@ -8,11 +8,13 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/bundlephobia/minzip/artplayer" alt="Size">
-  <img src="https://img.shields.io/npm/dm/artplayer.svg?sanitize=true" alt="Downloads">
-  <img src="https://img.shields.io/npm/v/artplayer.svg?sanitize=true" alt="Version">
-  <img src="https://img.shields.io/npm/l/artplayer.svg?sanitize=true" alt="License">
-  <img src="https://data.jsdelivr.com/v1/package/npm/artplayer/badge?style=rounded" alt="jsdelivr">
+  <a href="https://www.npmjs.com/package/artplayer">
+    <img src="https://img.shields.io/bundlephobia/minzip/artplayer" alt="Size">
+    <img src="https://img.shields.io/npm/dm/artplayer.svg?sanitize=true" alt="Downloads">
+    <img src="https://img.shields.io/npm/v/artplayer.svg?sanitize=true" alt="Version">
+    <img src="https://img.shields.io/npm/l/artplayer.svg?sanitize=true" alt="License">
+    <img src="https://data.jsdelivr.com/v1/package/npm/artplayer/badge?style=rounded" alt="jsdelivr">
+  </a>
 </p>
 
 <p align="center">
@@ -96,22 +98,22 @@ let art = new Artplayer({
 
 ## Plugins
 
-- [artplayer-plugin-danmuku](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku)
+- [artplayer-plugin-danmuku](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku) <img src="https://img.shields.io/npm/dm/artplayer-plugin-danmuku.svg?sanitize=true">
+- [artplayer-plugin-iframe](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe) <img src="https://img.shields.io/npm/dm/artplayer-plugin-iframe.svg?sanitize=true">
+- [artplayer-plugin-hls-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control) <img src="https://img.shields.io/npm/dm/artplayer-plugin-hls-control.svg?sanitize=true">
+- [artplayer-plugin-dash-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control) <img src="https://img.shields.io/npm/dm/artplayer-plugin-dash-control.svg?sanitize=true">
+- [artplayer-plugin-vtt-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail) <img src="https://img.shields.io/npm/dm/artplayer-plugin-vtt-thumbnail.svg?sanitize=true">
+- [artplayer-plugin-multiple-subtitles](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles) <img src="https://img.shields.io/npm/dm/artplayer-plugin-multiple-subtitles.svg?sanitize=true">
+- [artplayer-plugin-libass](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass) <img src="https://img.shields.io/npm/dm/artplayer-plugin-libass.svg?sanitize=true">
+- [artplayer-plugin-chromecast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast) <img src="https://img.shields.io/npm/dm/artplayer-plugin-chromecast.svg?sanitize=true">
+- [artplayer-plugin-vast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast) <img src="https://img.shields.io/npm/dm/artplayer-plugin-vast.svg?sanitize=true">
+- [artplayer-plugin-chapter](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter) <img src="https://img.shields.io/npm/dm/artplayer-plugin-chapter.svg?sanitize=true">
+- [artplayer-plugin-auto-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail) <img src="https://img.shields.io/npm/dm/artplayer-plugin-auto-thumbnail.svg?sanitize=true">
+- [artplayer-plugin-ambilight](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight) <img src="https://img.shields.io/npm/dm/artplayer-plugin-ambilight.svg?sanitize=true">
+- [artplayer-plugin-document-pip](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip) <img src="https://img.shields.io/npm/dm/artplayer-plugin-document-pip.svg?sanitize=true">
 - [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) (WIP)
 - [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) (WIP)
-- [artplayer-plugin-iframe](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe)
-- [artplayer-plugin-hls-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control)
-- [artplayer-plugin-dash-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control)
-- [artplayer-plugin-vtt-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail)
-- [artplayer-plugin-multiple-subtitles](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles)
-- [artplayer-plugin-libass](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass)
-- [artplayer-plugin-chromecast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast)
-- [artplayer-plugin-vast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast)
-- [artplayer-plugin-chapter](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter)
-- [artplayer-plugin-auto-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail)
-- [artplayer-plugin-ambilight](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight)
 - [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) (WIP)
-- [artplayer-plugin-document-pip](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip)
 ## Libraries
 
 - [hls.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js&example=hls)
@@ -122,7 +124,7 @@ let art = new Artplayer({
 
 ## Proxys
 
-- [Canvas](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas)
+- [Canvas](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas)  <img src="https://img.shields.io/npm/dm/artplayer-proxy-canvas.svg?sanitize=true">
 
 ## Changelog
 
