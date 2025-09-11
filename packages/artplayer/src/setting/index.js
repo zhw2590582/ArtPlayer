@@ -95,6 +95,9 @@ export default class Setting extends Component {
   }
 
   check(target) {
+    if (!target) {
+      return
+    }
     target.$parent.tooltip = target.html
     this.traverse((item) => {
       item.default = item === target

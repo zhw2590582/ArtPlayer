@@ -220,6 +220,9 @@ export default class Control extends Component {
   }
 
   check(target) {
+    if (!target) {
+      return
+    }
     target.$control_value.innerHTML = target.html
     for (let index = 0; index < target.$control_option.length; index++) {
       const item = target.$control_option[index]

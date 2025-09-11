@@ -414,7 +414,7 @@ Artplayer.FLIP = [
     'horizontal',
     'vertical'
 ];
-Artplayer.FULLSCREEN_WEB_IN_BODY = false;
+Artplayer.FULLSCREEN_WEB_IN_BODY = true;
 Artplayer.LOG_VERSION = true;
 Artplayer.USE_RAF = false;
 Artplayer.REMOVE_SRC_WHEN_DESTROY = true;
@@ -1669,6 +1669,7 @@ class Control extends (0, _componentDefault.default) {
         super.add(option);
     }
     check(target) {
+        if (!target) return;
         target.$control_value.innerHTML = target.html;
         for(let index = 0; index < target.$control_option.length; index++){
             const item = target.$control_option[index];
@@ -4667,6 +4668,7 @@ class Setting extends (0, _componentDefault.default) {
         }
     }
     check(target) {
+        if (!target) return;
         target.$parent.tooltip = target.html;
         this.traverse((item)=>{
             item.default = item === target;
