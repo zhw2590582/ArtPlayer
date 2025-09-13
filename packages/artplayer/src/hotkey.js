@@ -5,7 +5,7 @@ export default class Hotkey {
     this.art = art
     this.keys = {}
 
-    if (art.option.hotkey && !isMobile) {
+    if (!isMobile) {
       this.init()
     }
   }
@@ -13,31 +13,33 @@ export default class Hotkey {
   init() {
     const { constructor } = this.art
 
-    this.add('Escape', () => {
-      if (this.art.fullscreenWeb) {
-        this.art.fullscreenWeb = false
-      }
-    })
+    if (this.art.option.hotkey) {
+      this.add('Escape', () => {
+        if (this.art.fullscreenWeb) {
+          this.art.fullscreenWeb = false
+        }
+      })
 
-    this.add('Space', () => {
-      this.art.toggle()
-    })
+      this.add('Space', () => {
+        this.art.toggle()
+      })
 
-    this.add('ArrowLeft', () => {
-      this.art.backward = constructor.SEEK_STEP
-    })
+      this.add('ArrowLeft', () => {
+        this.art.backward = constructor.SEEK_STEP
+      })
 
-    this.add('ArrowUp', () => {
-      this.art.volume += constructor.VOLUME_STEP
-    })
+      this.add('ArrowUp', () => {
+        this.art.volume += constructor.VOLUME_STEP
+      })
 
-    this.add('ArrowRight', () => {
-      this.art.forward = constructor.SEEK_STEP
-    })
+      this.add('ArrowRight', () => {
+        this.art.forward = constructor.SEEK_STEP
+      })
 
-    this.add('ArrowDown', () => {
-      this.art.volume -= constructor.VOLUME_STEP
-    })
+      this.add('ArrowDown', () => {
+        this.art.volume -= constructor.VOLUME_STEP
+      })
+    }
 
     this.art.on('document:keydown', (event) => {
       if (this.art.isFocus) {
