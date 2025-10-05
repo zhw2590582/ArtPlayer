@@ -874,6 +874,7 @@ export interface CssVar {
   '--art-border-radius': string
   '--art-progress-height': string
   '--art-progress-color': string
+  '--art-progress-top-gap': string
   '--art-hover-color': string
   '--art-loaded-color': string
   '--art-state-size': string
