@@ -15,6 +15,7 @@ const config = {
       { text: '中文版', link: '/' },
       { text: 'English Docs', link: '/en/', activeMatch: '/en/' },
       { text: 'Online Editor', link: 'https://artplayer.org' },
+      { text: '🤖LLMs', link: 'https://artplayer.org/llms.txt' },
       {
         text: '5.3.x',
         items: [
