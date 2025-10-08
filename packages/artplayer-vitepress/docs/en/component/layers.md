@@ -1,17 +1,17 @@
-# Layer
+# Business Layer
 
 ## Configuration
 
-| Property  | Type                  | Description                  |
-| --------- | --------------------- | ---------------------------- |
-| `disable` | `Boolean`             | Whether to disable the component |
-| `name`    | `String`              | Unique name of the component, used for marking class name |
-| `index`   | `Number`              | Component index, used for display priority |
-| `html`    | `String`, `Element`   | The DOM element of the component |
-| `style`   | `Object`              | Style object for the component |
-| `click`   | `Function`            | Click event for the component |
-| `mounted` | `Function`            | Triggered after the component is mounted |
-| `tooltip` | `String` | Tooltip text for the component |
+| Property  | Type                | Description                          |
+| --------- | ------------------- | ------------------------------------ |
+| `disable` | `Boolean`           | Whether to disable the component     |
+| `name`    | `String`            | Unique component name for class marking |
+| `index`   | `Number`            | Component index for display priority |
+| `html`    | `String`, `Element` | Component DOM element                |
+| `style`   | `Object`            | Component style object               |
+| `click`   | `Function`          | Component click event                |
+| `mounted` | `Function`          | Triggered after component mounting   |
+| `tooltip` | `String`            | Component tooltip text               |
 
 ## Creation
 
@@ -24,9 +24,9 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     layers: [
         {
-            name: 'poster',
+            name: 'potser',
             html: `<img style="width: 100px" src="${img}">`,
-            tooltip: 'Poster Tip',
+            tooltip: 'Potser Tip',
             style: {
                 position: 'absolute',
                 top: '50px',
@@ -43,9 +43,10 @@ var art = new Artplayer({
 });
 
 // Get the Element of layer by name
-console.info(art.layers['poster']);
+console.info(art.layers['potser']);
 ```
-## Add
+
+## Addition
 
 <div className="run-code">▶ Run Code</div>
 
@@ -57,9 +58,9 @@ var art = new Artplayer({
 });
 
 art.layers.add({
-    name: 'poster',
+    name: 'potser',
     html: `<img style="width: 100px" src="${img}">`,
-    tooltip: 'Poster Tip',
+    tooltip: 'Potser Tip',
     style: {
         position: 'absolute',
         top: '50px',
@@ -74,9 +75,10 @@ art.layers.add({
 });
 
 // Get the Element of layer by name
-console.info(art.layers['poster']);
+console.info(art.layers['potser']);
 ```
-## Delete
+
+## Removal
 
 <div className="run-code">▶ Run Code</div>
 
@@ -87,7 +89,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     layers: [
         {
-            name: 'poster',
+            name: 'potser',
             html: `<img style="width: 100px" src="${img}">`,
             style: {
                 position: 'absolute',
@@ -101,10 +103,11 @@ var art = new Artplayer({
 art.on('ready', () => {
     setTimeout(() => {
         // Delete the layer by name
-        art.layers.remove('poster');
+        art.layers.remove('potser');
     }, 3000);
 });
 ```
+
 ## Update
 
 <div className="run-code">▶ Run Code</div>
@@ -116,7 +119,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     layers: [
         {
-            name: 'poster',
+            name: 'potser',
             html: `<img style="width: 100px" src="${img}">`,
             style: {
                 position: 'absolute',
@@ -131,7 +134,7 @@ art.on('ready', () => {
     setTimeout(() => {
         // Update the layer by name
         art.layers.update({
-            name: 'poster',
+            name: 'potser',
             html: `<img style="width: 200px" src="${img}">`,
             style: {
                 position: 'absolute',
@@ -141,4 +144,3 @@ art.on('ready', () => {
         });
     }, 3000);
 });
-```

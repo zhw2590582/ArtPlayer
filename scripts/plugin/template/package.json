@@ -27,7 +27,7 @@
       "types": "./types/artplayer-plugin-{{name}}.d.ts",
       "import": "./dist/artplayer-plugin-{{name}}.legacy.js",
       "require": "./dist/artplayer-plugin-{{name}}.legacy.js"
-      
+
     }
   },
   "main": "dist/artplayer-plugin-{{name}}.js",

@@ -1,8 +1,8 @@
-# Example Events
+# Instance Events
 
-Player events are divided into two types, one is the video's `native events` (prefix `video:`), the other is `custom events`
+Player events are divided into two types: `native events` from the video (prefixed with `video:`) and `custom events`.
 
-Listening to events:
+Listen for events:
 
 <div className="run-code">▶ Run Code</div>
 
@@ -17,7 +17,7 @@ art.on('video:canplay', () => {
 });
 ```
 
-Listen to an event only once:
+Listen for an event only once:
 
 <div className="run-code">▶ Run Code</div>
 
@@ -63,14 +63,15 @@ const onReady = () => {
 art.on('ready', onReady);
 ```
 
-:::warning For a full list of events, please refer to the following address:
+:::warning For all events, please refer to the following address:
 
 [artplayer/types/events.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/events.d.ts)
 
 :::
+
 ## `ready`
 
-Triggered when the player is able to play for the first time
+Triggered when the player is ready for the first time
 
 <div className="run-code">▶ Run Code</div>
 
@@ -87,7 +88,7 @@ art.on('ready', () => {
 
 ## `restart`
 
-Triggered when the player switches the address and is able to play
+Triggered when the player switches URL and is ready to play
 
 <div className="run-code">▶ Run Code</div>
 
@@ -105,6 +106,7 @@ art.on('restart', (url) => {
     console.info('restart', url);
 });
 ```
+
 ## `pause`
 
 Triggered when the player is paused
@@ -141,7 +143,7 @@ art.on('play', () => {
 
 ## `hotkey`
 
-Triggered when a hotkey on the player is pressed
+Triggered when a player hotkey is pressed
 
 <div className="run-code">▶ Run Code</div>
 
@@ -227,6 +229,7 @@ art.on('dblclick', (event) => {
     console.info('dblclick', event);
 });
 ```
+
 ## `click`
 
 Triggered when the player is clicked
@@ -242,11 +245,10 @@ var art = new Artplayer({
 art.on('click', (event) => {
     console.info('click', event);
 });
-```
 
 ## `error`
 
-Triggered when an error occurs while the player is loading the video
+Triggered when an error occurs while the player is loading a video
 
 <div className="run-code">▶ Run Code</div>
 
@@ -260,9 +262,10 @@ art.on('error', (error, reconnectTime) => {
     console.info(error, reconnectTime);
 });
 ```
+
 ## `hover`
 
-Triggered when the player is hovered or unhovered by the mouse
+Triggered when the mouse pointer enters or leaves the player
 
 <div className="run-code">▶ Run Code</div>
 
@@ -279,7 +282,7 @@ art.on('hover', (state, event) => {
 
 ## `mousemove`
 
-Triggered when the mouse moves over the player
+Triggered when the mouse pointer moves over the player
 
 <div className="run-code">▶ Run Code</div>
 
@@ -293,9 +296,10 @@ art.on('mousemove', (event) => {
     console.info('mousemove', event);
 });
 ```
+
 ## `resize`
 
-Triggered when the player size changes
+Triggered when the player's dimensions change
 
 <div className="run-code">▶ Run Code</div>
 
@@ -312,7 +316,7 @@ art.on('resize', () => {
 
 ## `view`
 
-Triggered when the player appears in the viewport
+Triggered when the player enters or leaves the viewport
 
 <div className="run-code">▶ Run Code</div>
 
@@ -329,7 +333,7 @@ art.on('view', (state) => {
 
 ## `lock`
 
-On mobile, triggered when the locked state changes
+Triggered when the lock state changes on mobile devices
 
 <div className="run-code">▶ Run Code</div>
 
@@ -347,7 +351,7 @@ art.on('lock', (state) => {
 
 ## `aspectRatio`
 
-Triggered when the aspect ratio of the player changes
+Triggered when the player's aspect ratio changes
 
 <div className="run-code">▶ Run Code</div>
 
@@ -366,7 +370,7 @@ art.on('aspectRatio', (aspectRatio) => {
 
 ## `autoHeight`
 
-Triggered when the player automatically sets the height
+Triggered when the player automatically sets its height
 
 <div className="run-code">▶ Run Code</div>
 
@@ -387,7 +391,7 @@ art.on('autoHeight', (height) => {
 
 ## `autoSize`
 
-Triggered when the player automatically sets the size
+Triggered when the player automatically adjusts its size
 
 <div className="run-code">▶ Run Code</div>
 
@@ -402,9 +406,10 @@ art.on('autoSize', () => {
     console.info('autoSize');
 });
 ```
+
 ## `flip`
 
-Triggered when the player flips
+Triggered when the player's video is flipped
 
 <div className="run-code">▶ Run Code</div>
 
@@ -423,7 +428,7 @@ art.on('flip', (flip) => {
 
 ## `fullscreen`
 
-Triggered when the player goes into full screen
+Triggered when the player enters or exits fullscreen mode
 
 <div className="run-code">▶ Run Code</div>
 
@@ -441,7 +446,7 @@ art.on('fullscreen', (state) => {
 
 ## `fullscreenError`
 
-Triggered when the player goes into full screen error
+Triggered when an error occurs during fullscreen mode transition
 
 <div className="run-code">▶ Run Code</div>
 
@@ -462,7 +467,7 @@ art.on('fullscreenError', (event) => {
 
 ## `fullscreenWeb`
 
-Triggered when the player enters web fullscreen
+Triggered when the player enters or exits web page fullscreen mode
 
 <div className="run-code">▶ Run Code</div>
 
@@ -480,7 +485,7 @@ art.on('fullscreenWeb', (state) => {
 
 ## `mini`
 
-Triggered when the player enters mini mode
+Triggered when the player enters or exits mini mode
 
 <div className="run-code">▶ Run Code</div>
 
@@ -498,9 +503,10 @@ art.on('mini', (state) => {
     console.info('mini', state);
 });
 ```
+
 ## `pip`
 
-Triggered when the player enters Picture-in-Picture mode
+Triggered when the player enters or exits picture-in-picture mode
 
 <div className="run-code">▶ Run Code</div>
 
@@ -518,7 +524,7 @@ art.on('pip', (state) => {
 
 ## `screenshot`
 
-Triggered when the player takes a screenshot
+Triggered when the player captures a screenshot
 
 <div className="run-code">▶ Run Code</div>
 
@@ -533,9 +539,10 @@ art.on('screenshot', (dataUri) => {
     console.info('screenshot', dataUri);
 });
 ```
+
 ## `seek`
 
-Triggered when the player jumps in time
+Triggered when the player performs a time jump
 
 <div className="run-code">▶ Run Code</div>
 
@@ -552,7 +559,7 @@ art.on('seek', (currentTime) => {
 
 ## `subtitleOffset`
 
-Triggered when the subtitle offset occurs in the player
+Triggered when subtitle offset changes
 
 <div className="run-code">▶ Run Code</div>
 
@@ -594,7 +601,7 @@ art.on('subtitleBeforeUpdate', (cues) => {
 
 ## `subtitleAfterUpdate`
 
-Triggered when the subtitles are updated
+Triggered after subtitles are updated
 
 <div className="run-code">▶ Run Code</div>
 
@@ -614,7 +621,7 @@ art.on('subtitleAfterUpdate', (cues) => {
 
 ## `subtitleLoad`
 
-Triggered when the subtitle loads
+Triggered when subtitles are loaded
 
 <div className="run-code">▶ Run Code</div>
 
@@ -634,7 +641,7 @@ art.on('subtitleLoad', (option, cues) => {
 
 ## `info`
 
-Triggered when the information panel is shown or hidden
+Triggered when the info panel is shown or hidden
 
 <div className="run-code">▶ Run Code</div>
 
@@ -648,9 +655,10 @@ art.on('info', (state) => {
     console.log(state);
 });
 ```
+
 ## `layer`
 
-Triggered when a custom layer is shown or hidden
+Triggered when custom layers are shown or hidden
 
 <div className="run-code">▶ Run Code</div>
 
@@ -667,7 +675,7 @@ art.on('layer', (state) => {
 
 ## `loading`
 
-Triggered when a loader is shown or hidden
+Triggered when the loading indicator is shown or hidden
 
 <div className="run-code">▶ Run Code</div>
 
@@ -684,7 +692,7 @@ art.on('loading', (state) => {
 
 ## `mask`
 
-Triggered when a mask layer is shown or hidden
+Triggered when the mask layer is shown or hidden
 
 <div className="run-code">▶ Run Code</div>
 
@@ -714,11 +722,10 @@ var art = new Artplayer({
 art.on('subtitle', (state) => {
     console.log(state);
 });
-```
 
 ## `contextmenu`
 
-Triggered when the right-click menu is shown or hidden
+Triggered when the context menu is shown or hidden
 
 <div className="run-code">▶ Run Code</div>
 
@@ -735,7 +742,7 @@ art.on('contextmenu', (state) => {
 
 ## `control`
 
-Triggered when the controller is shown or hidden
+Triggered when the controls are shown or hidden
 
 <div className="run-code">▶ Run Code</div>
 
@@ -787,7 +794,7 @@ art.on('muted', (state) => {
 
 ## `keydown`
 
-Listen to the `keydown` event from `document`
+Listens for the `keydown` event from `document`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -804,11 +811,11 @@ art.on('keydown', (event) => {
 
 ## `video:canplay`
 
-The browser can play the media file, but estimates there is not enough data to play through to the end without having to stop for further buffering
+The browser can start playing the media, but estimates that there isn't enough data to play through to the end without having to stop for further buffering
 
 ## `video:canplaythrough`
 
-The browser estimates it can play the media through to the end without stopping for content buffering
+The browser estimates it can play the media through to the end without having to stop for buffering
 
 ## `video:complete`
 
@@ -820,15 +827,15 @@ Triggered when the value of the duration property changes
 
 ## `video:emptied`
 
-The media content becomes empty; for example, when this media has been completely loaded (or partially loaded), this event is sent and the load() method is called to reload it
+The media has become empty; for example, this event is sent when the media has already been loaded (or partially loaded), and the load() method is called to reload it
 
 ## `video:ended`
 
-The video has stopped because the media reached the end point
+Playback has stopped because the media has reached its end point
 
 ## `video:error`
 
-An error occurred while fetching media data, or the resource type is not a supported media format
+An error occurred while fetching the media data, or the resource type is not a supported media format
 
 ## `video:loadeddata`
 
@@ -844,15 +851,15 @@ Playback has been paused
 
 ## `video:play`
 
-Playback has started
+Playback has begun
 
 ## `video:playing`
 
-Playback is ready to start following a pause or delay due to lack of data
+Playback is ready to start after having been paused or delayed due to lack of data
 
 ## `video:progress`
 
-Periodically triggered while the browser is loading resources
+Fired periodically as the browser loads the resource
 
 ## `video:ratechange`
 
@@ -860,15 +867,15 @@ The playback rate has changed
 
 ## `video:seeked`
 
-A seek (frame skipping) operation has completed
+A seek operation has completed
 
 ## `video:seeking`
 
-A seek (frame skipping) operation has started
+A seek operation has begun
 
 ## `video:stalled`
 
-The user agent is trying to fetch media data, but the data unexpectedly has not appeared
+The user agent is trying to fetch media data, but data is unexpectedly not forthcoming
 
 ## `video:suspend`
 
@@ -876,11 +883,12 @@ Media data loading has been suspended
 
 ## `video:timeupdate`
 
-The time specified by the currentTime attribute has changed
+The time indicated by the currentTime attribute has been updated
+
 ## `video:volumechange`
 
-Volume changed
+The volume has changed
 
 ## `video:waiting`
 
-Playback has stopped due to temporarily missing data
+Playback has stopped because of a temporary lack of data

@@ -1,17 +1,16 @@
 # Instance Properties
 
-Here, `instance properties` refer to the `primary properties` mounted on the `instance`, which are quite commonly used.
+Here, `instance properties` refer to the `top-level properties` mounted on the `instance`, which are commonly used.
 
 ## `play`
 
 -   Type: `Function`
 
-Play video
+Play the video.
 
 <div className="run-code">▶ Run Code</div>
 
 ```js{8}
-
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -27,7 +26,7 @@ art.on('ready', () => {
 
 -   Type: `Function`
 
-Pause video
+Pause the video.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -46,11 +45,12 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
 ## `toggle`
 
 -   Type: `Function`
 
-Toggle the play and pause state of the video
+Toggle between playing and pausing the video.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -75,7 +75,7 @@ art.on('ready', () => {
 -   Type: `Function`
 -   Parameter: `Boolean`
 
-Destroy the player. Accepts a parameter indicating whether to remove the player's `html` after destruction, which defaults to `true`
+Destroy the player. Accepts a parameter indicating whether to also remove the player's `html` after destruction. Defaults to `true`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -89,12 +89,13 @@ art.on('ready', () => {
     art.destroy();
 });
 ```
+
 ## `seek`
 
 -   Type: `Setter`
 -   Parameter: `Number`
 
-Jump to a specific time in the video, in seconds.
+Seek to a specific time in the video, in seconds.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -114,7 +115,7 @@ art.on('ready', () => {
 -   Type: `Setter`
 -   Parameter: `Number`
 
-Fast forward the video time, in seconds.
+Fast forward the video by a specified number of seconds.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -128,12 +129,13 @@ art.on('ready', () => {
     art.forward = 5;
 });
 ```
+
 ## `backward`
 
 -   Type: `Setter`
 -   Parameter: `Number`
 
-Video rewind time in seconds
+Rewind the video by a specified number of seconds.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -157,7 +159,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Number`
 
-Sets and gets the video volume, which ranges from `[0, 1]`
+Set or get the video volume. Range: `[0, 1]`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -173,12 +175,13 @@ art.on('ready', () => {
     console.info(art.volume);
 });
 ```
+
 ## `url`
 
-- Type: `Setter/Getter`
-- Parameter: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
-Set and retrieve the video address
+Set or get the video URL.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -195,10 +198,10 @@ art.on('ready', () => {
 
 ## `switch`
 
-- Type: `Setter`
-- Parameter: `String`
+-   Type: `Setter`
+-   Parameter: `String`
 
-Set the video address, which is similar to `art.url`, but performs some optimization operations
+Set the video URL. Similar to `art.url` when setting, but performs some optimization operations.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -215,12 +218,13 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
 ## `switchUrl`
 
-- Type: `Function`
-- Parameter: `String`
+-   Type: `Function`
+-   Parameter: `String`
 
-Set the video address, similar to setting `art.url`, but some optimization operations will be executed.
+Set the video URL. Similar to `art.url` when setting, but performs some optimization operations.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -238,17 +242,18 @@ art.on('ready', () => {
 });
 ```
 
-:::warning Warning
+:::warning Note
 
-`art.switch` and `art.switchUrl` have the same functionality. However, the `art.switchUrl` method will return a `Promise`. When it resolves, it indicates that the new address can be played; when it rejects, it indicates there was an error loading the new address.
+`art.switch` and `art.switchUrl` have the same functionality, but `art.switchUrl` returns a `Promise`. It `resolves` when the new URL is playable and `rejects` when the new URL fails to load.
 
 :::
+
 ## `switchQuality`
 
-- Type: `Function`
-- Parameter: `String`
+-   Type: `Function`
+-   Parameter: `String`
 
-Set video quality address, similar to `art.switchUrl`, but it will carry over the previous playback progress.
+Sets the video quality URL. Similar to `art.switchUrl`, but preserves the previous playback progress.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -268,10 +273,10 @@ art.on('ready', () => {
 
 ## `muted`
 
-- Type: `Setter/Getter`
-- Parameter: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-Set and get whether the video is muted.
+Sets and gets whether the video is muted.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -293,7 +298,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Number`
 
-Set and get the current time of the video. Setting the time is similar to `seek`, but it does not trigger additional events.
+Sets and gets the current playback time of the video. Setting the time is similar to `seek`, but it does not trigger additional events.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -309,11 +314,12 @@ art.on('ready', () => {
     console.info(art.currentTime);
 });
 ```
+
 ## `duration`
 
 -   Type: `Getter`
 
-Get the video duration
+Gets the duration of the video.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -330,7 +336,7 @@ art.on('ready', () => {
 
 :::warning Note
 
-Some videos do not have a duration, such as videos that are being live streamed or videos that have not been fully decoded, in which case the obtained duration will be `0`
+Some videos may not have a duration, such as live streams or videos that haven't finished decoding. In these cases, the obtained duration will be `0`.
 
 :::
 
@@ -338,7 +344,7 @@ Some videos do not have a duration, such as videos that are being live streamed 
 
 -   Type: `Function`
 
-Download a screenshot of the current video frame, optional parameter is the screenshot name
+Downloads a screenshot of the current video frame. An optional parameter specifies the screenshot filename.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -355,9 +361,9 @@ art.on('ready', () => {
 
 ## `getDataURL`
 
-- Type: `Function`
+-   Type: `Function`
 
-Gets the `base64` address of the screenshot of the current video frame, which returns a `Promise`.
+Gets the `base64` URL of the screenshot for the current video frame. Returns a `Promise`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -375,9 +381,9 @@ art.on('ready', async () => {
 
 ## `getBlobUrl`
 
-- Type: `Function`
+-   Type: `Function`
 
-Gets the `blob` address of the screenshot of the current video frame, which returns a `Promise`.
+Gets the `blob` URL of the screenshot for the current video frame. Returns a `Promise`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -392,12 +398,13 @@ art.on('ready', async () => {
     console.info(url);
 });
 ```
+
 ## `fullscreen`
 
 -   Type: `Setter/Getter`
 -   Parameter: `Boolean`
 
-Set and get the player window fullscreen
+Sets and gets the fullscreen state of the player window.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -419,15 +426,16 @@ var art = new Artplayer({
 
 :::warning Note
 
-Due to browser security mechanisms, before triggering the window to fullscreen, the page must have had an interaction (e.g. user clicked on the page).
+Due to browser security mechanisms, the page must have prior interaction (e.g., the user has clicked on the page) before triggering window fullscreen.
 
 :::
+
 ## `fullscreenWeb`
 
-- Type: `Setter/Getter`
-- Parameter: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-Set and get the player web page full screen
+Sets and gets the web fullscreen state of the player.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -449,10 +457,10 @@ art.on('ready', () => {
 
 ## `pip`
 
-- Type: `Setter/Getter`
-- Parameter: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-Set and get the player picture-in-picture mode
+Sets and gets the Picture-in-Picture mode of the player.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -470,11 +478,10 @@ var art = new Artplayer({
         },
     ],
 });
-```
 
-:::warning Warning
+:::warning Note
 
-Due to browser security mechanisms, user interaction (e.g., a user click on the page) must occur before triggering picture-in-picture.
+Due to browser security mechanisms, the page must have prior user interaction (e.g., a user click) before Picture-in-Picture can be triggered.
 
 :::
 
@@ -483,7 +490,7 @@ Due to browser security mechanisms, user interaction (e.g., a user click on the 
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Set and get the video poster, the poster effect is visible only before the video starts playing.
+Sets and gets the video poster. The poster is only visible before video playback starts.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -500,12 +507,13 @@ art.on('ready', () => {
     console.info(art.poster);
 });
 ```
+
 ## `mini`
 
-- Type: `Setter/Getter`
-- Parameter: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-Set and get the player's mini mode
+Sets and gets the player's mini mode.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -522,10 +530,10 @@ art.on('ready', () => {
 
 ## `playing`
 
-- Type: `Getter`
-- Parameter: `Boolean`
+-   Type: `Getter`
+-   Parameter: `Boolean`
 
-Get whether the video is currently playing
+Gets whether the video is currently playing.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -540,11 +548,12 @@ art.on('ready', () => {
     console.info(art.playing);
 });
 ```
+
 ## `autoSize`
 
 -   Type: `Function`
 
-Sets whether the video should auto adjust its size
+Sets whether the video should automatically adjust its size.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -563,7 +572,7 @@ art.on('ready', () => {
 
 -   Type: `Getter`
 
-Gets the size and position information of the player
+Gets the player's dimensions and coordinate information.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -577,9 +586,10 @@ art.on('ready', () => {
     console.info(JSON.stringify(art.rect));
 });
 ```
-:::warning Warning
 
-The size and coordinates are obtained via `getBoundingClientRect`
+:::warning Note
+
+The dimension and coordinate information is obtained via `getBoundingClientRect`.
 
 :::
 
@@ -588,7 +598,7 @@ The size and coordinates are obtained via `getBoundingClientRect`
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Set and get the player flip, supports `normal`, `horizontal`, `vertical`
+Sets and gets the player flip mode. Supports `normal`, `horizontal`, `vertical`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -609,7 +619,8 @@ art.on('ready', () => {
 
 -   Type: `Setter/Getter`
 -   Parameter: `Number`
-Set and get the playback speed of the player
+
+Sets and gets the player's playback speed.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -631,7 +642,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Set and get the aspect ratio of the player
+Sets and gets the player's aspect ratio.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -647,11 +658,12 @@ art.on('ready', () => {
     console.info(art.aspectRatio);
 });
 ```
+
 ## `autoHeight`
 
 -   Type: `Function`
 
-When the container has only width, this attribute can automatically calculate and set the height of the video
+When the container only has a defined width, this property can automatically calculate and set the video's height.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -670,9 +682,9 @@ art.on('resize', () => {
 });
 ```
 
-:::warning Warning
+:::warning Note
 
-When your container has only width but you do not know the exact height, this property is very useful as it can automatically calculate the video's height, but you need to make sure when to set this property.
+This property is useful when your container has a defined width but an unknown height, as it automatically calculates the video's height. However, you need to determine the appropriate timing to set this property.
 
 :::
 
@@ -681,7 +693,7 @@ When your container has only width but you do not know the exact height, this pr
 -   Type: `Function`
 -   Parameter: `String`
 
-Dynamically get and set the attributes of the video element
+Dynamically gets and sets attributes of the video element.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -700,10 +712,10 @@ art.on('ready', () => {
 
 ## `type`
 
-- Type: `Setter/Getter`
-- Parameter: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
-Dynamically get and set the video type
+Dynamically gets and sets the video type.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -718,13 +730,13 @@ art.on('ready', () => {
     art.type = 'm3u8';
     console.info(art.type);
 });
-```
+
 ## `theme`
 
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Dynamically get and set the player's theme color
+Dynamically gets and sets the player's theme color.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -745,7 +757,7 @@ art.on('ready', () => {
 
 -   Type: `Function`
 
-Activate airplay
+Initiates AirPlay.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -764,11 +776,12 @@ var art = new Artplayer({
     ],
 });
 ```
+
 ## `loaded`
 
-- Type: `Getter`
+-   Type: `Getter`
 
-The proportion of the video that is cached, ranging from `[0, 1]`, commonly used with the `video:timeupdate` event.
+The proportion of the video that has been buffered, ranging from `[0, 1]`. Often used with the `video:timeupdate` event.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -785,9 +798,9 @@ art.on('video:timeupdate', () => {
 
 ## `played`
 
-- Type: `Getter`
+-   Type: `Getter`
 
-The proportion of the video that has been played, ranging from `[0, 1]`, commonly used with the `video:timeupdate` event.
+The proportion of the video that has been played, ranging from `[0, 1]`. Often used with the `video:timeupdate` event.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -801,11 +814,12 @@ art.on('video:timeupdate', () => {
     console.info(art.played);
 });
 ```
+
 ## `proxy`
 
-- Type: `Function`
+-   Type: `Function`
 
-A proxy function for `DOM` events, which essentially proxies `addEventListener` and `removeEventListener`. When using `proxy` to handle events, the event will automatically be destroyed when the player is destroyed.
+A proxy function for DOM events, essentially proxying `addEventListener` and `removeEventListener`. When using `proxy` to handle events, the event will be automatically removed when the player is destroyed.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -822,9 +836,9 @@ art.proxy(container, 'click', event => {
 });
 ```
 
-:::warning Tip
+:::warning Note
 
-If you need some `DOM` events to exist only during the lifespan of the player, it is highly recommended to use this function to avoid causing memory leaks.
+If you need certain DOM events to exist only for the duration of the player's lifecycle, it is strongly recommended to use this function to avoid memory leaks.
 
 :::
 
@@ -832,7 +846,7 @@ If you need some `DOM` events to exist only during the lifespan of the player, i
 
 -   Type: `Function`
 
-DOM query function, similar to `document.querySelector`, but the object being queried is limited within the current player, which can prevent errors due to having the same class name.
+A DOM query function, similar to `document.querySelector`, but the search is scoped to within the current player, preventing errors from duplicate class names.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -849,7 +863,7 @@ console.info(art.query('.art-video'));
 
 -   Type: `Element`
 
-A shortcut to return the `video` element of the player.
+Quickly returns the player's `video` element.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -866,7 +880,7 @@ console.info(art.video);
 
 -   Type: `Function`
 
-Dynamically getting or setting `css` variables
+Dynamically gets or sets CSS variables.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -888,7 +902,7 @@ art.on('ready', () => {
 -   Type: `Setter`
 -   Parameter: `Array`
 
-Dynamically setting the list of qualities
+Dynamically sets the list of available quality levels.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -931,7 +945,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Object`
 
-Dynamically set thumbnails
+Dynamically sets the thumbnails.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -971,4 +985,3 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.subtitleOffset = 1;
 });
-```

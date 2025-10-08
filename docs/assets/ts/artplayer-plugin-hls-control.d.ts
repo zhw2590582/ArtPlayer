@@ -13,5 +13,5 @@ declare const artplayerPluginHlsControl: (option: { quality?: Config, audio?: Co
 
 export default artplayerPluginHlsControl
 
-export = artplayerPluginHlsControl;
+export = artplayerPluginHlsControl
 export as namespace artplayerPluginHlsControl;

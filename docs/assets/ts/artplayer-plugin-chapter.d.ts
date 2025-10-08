@@ -17,5 +17,5 @@ declare const artplayerPluginChapter: (option: Option) => (art: Artplayer) => Re
 
 export default artplayerPluginChapter
 
-export = artplayerPluginChapter;
+export = artplayerPluginChapter
 export as namespace artplayerPluginChapter;

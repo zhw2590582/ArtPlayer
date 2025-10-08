@@ -1,4 +1,4 @@
-# Installation and Usage
+# Installation & Usage
 
 ## Installation
 
@@ -22,7 +22,7 @@ pnpm add artplayer
 
 :::
 
-## `CDN`
+## CDN
 
 ::: code-group
 
@@ -66,19 +66,20 @@ https://unpkg.com/artplayer/dist/artplayer.js
 ```
 
 :::
-::: warning Warning
 
-The player's size depends on the size of the container `container`, so your container `container` must have a size.
+::: warning Note
+
+The player's dimensions depend on the size of its `container`, so your container must have defined dimensions
 
 :::
 
-::: tip You can find more usage examples at the link below
+::: tip See more usage examples at the following link
 
 [/packages/artplayer-template](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template)
 
 :::
 
-## `Vue.js`
+## Vue.js
 
 ::: code-group
 
@@ -144,14 +145,13 @@ function getInstance(art) {
 
 :::
 
+::: warning Artplayer is not reactive:
 
-::: warning Artplayer Not Responsive：
-
-Modifying `option` directly in `Vue.js` will not change the player
+Directly modifying `option` in `Vue.js` will not update the player
 
 :::
 
-## `React.js`
+## React.js
 
 ::: code-group
 
@@ -205,15 +205,15 @@ export default App
 
 :::
 
-::: warning Non-responsive Artplayer
+::: warning Artplayer is not reactive:
 
-In `React.js`, directly modifying the `option` will not change the player
+Directly modifying `option` in `React.js` will not update the player
 
 :::
 
 ## TypeScript
 
-Importing `Artplayer` will automatically import `artplayer.d.ts`
+The `artplayer.d.ts` file is automatically imported when importing `Artplayer`
 
 ### Vue.js
 
@@ -250,16 +250,17 @@ option.volume = 0.5;
 const art = new Artplayer(option);
 ```
 
-::: tip Complete TypeScript Definitions
+::: tip All TypeScript Definitions
 
 [packages/artplayer/types](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer/types)
 
 :::
+
 ## JavaScript
 
-Sometimes your `js` file may lose the `TypeScript` type hints, in this case, you can manually import the types
+Sometimes your `js` files may lose `TypeScript` type hints. In such cases, you can manually import the types.
 
-Variables:
+Variable:
 
 ```js{1-3}
 /**
@@ -268,7 +269,7 @@ Variables:
 let art = null;
 ```
 
-Parameters:
+Parameter:
 
 ```js{1-3}
 /**
@@ -279,7 +280,7 @@ function getInstance(art) {
 }
 ```
 
-Properties:
+Property:
 
 ```js{4-6}
 export default {
@@ -294,7 +295,7 @@ export default {
 }
 ```
 
-Options:
+Option:
 
 ```js{1-3}
 /**
@@ -310,11 +311,12 @@ option.volume = 0.5;
 
 const art8 = new Artplayer(option);
 ```
-## Ancient Browsers
 
-The production build of `artplayer.js` is only compatible with the latest major version of `Chrome`: `last 1 Chrome version`
+## Legacy Browsers
 
-For ancient browsers, you can use the `artplayer.legacy.js` file, which is compatible up to: `IE 11`
+The production build `artplayer.js` only supports the latest major version of `Chrome`: `last 1 Chrome version`.
+
+For legacy browsers, you can use the `artplayer.legacy.js` file, which supports compatibility down to: `IE 11`.
 
 ```js
 import Artplayer from 'artplayer/legacy'
@@ -332,11 +334,11 @@ https://unpkg.com/artplayer/dist/artplayer.legacy.js
 
 :::
 
-::: tip If you need to support even older browsers, please modify the following configuration and then build it yourself:
+::: tip If you need to support even older browsers, modify the following configuration and build it yourself:
 
-Build configuration: [scripts/build.js](https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js#L29)
+Build Configuration: [scripts/build.js](https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js#L29)
 
-Refer to documentation: [browserslist](https://github.com/browserslist/browserslist#full-list)
+Reference Documentation: [browserslist](https://github.com/browserslist/browserslist#full-list)
 
 :::
 
@@ -348,7 +350,7 @@ Refer to documentation: [browserslist](https://github.com/browserslist/browsersl
 
 :::
 
-Starting from `5.2.6`, `artplayer` and all plugins will also provide an `ESM` version of `mjs`, such as:
+Starting from `5.2.6`, `artplayer` and all plugins also provide an `ESM` version `mjs`, such as:
 
 - `artplayer/dist/artplayer.mjs`
 - `artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs`
@@ -371,7 +373,7 @@ Starting from `5.2.6`, `artplayer` and all plugins will also provide an `ESM` ve
     <script type="importmap">
     {
         "imports": {
-            "artplayer": "https://unpkg.com/artplayer/dist/artplayer.mjs"
+            "artplayer": "https://unpkg.com/artplayer/dist/artplayer.esm.js"
         }
     }
     </script>
@@ -394,7 +396,7 @@ Starting from `5.2.6`, `artplayer` and all plugins will also provide an `ESM` ve
 
 ## Custom userAgent
 
-Currently, the determination of mobile devices is not accurate. Sometimes, you may want to adjust the player UI by changing the `userAgent`. Therefore, starting in version `5.2.4`, we added a new `globalThis.CUSTOM_USER_AGENT` global variable.
+Currently, the detection for whether a device is mobile is not entirely accurate. Sometimes you may want to adjust the player's UI by changing the `userAgent`. Therefore, starting from `5.2.4`, a `globalThis.CUSTOM_USER_AGENT` global variable has been added.
 
 ```html
 <html>
@@ -422,8 +424,8 @@ Currently, the determination of mobile devices is not accurate. Sometimes, you m
 </html>
 ```
 
-::: warning Warning
+::: warning Note
 
-You need to modify it before import the `Artplayer` for it to take effect
+You need to modify it before importing the `Artplayer` dependency for it to take effect.
 
 :::

@@ -1,10 +1,10 @@
 # Advanced Properties
 
-The `advanced properties` here refer to the `secondary attributes` mounted on the `instance`, which are less commonly used
+The `Advanced Properties` here refer to the `secondary properties` attached to the `instance`, which are less commonly used.
 
 ## `option`
 
-Options for the player
+The player's options.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -17,7 +17,7 @@ var art = new Artplayer({
 console.info(art.option);
 ```
 
-:::warning Reminder
+:::warning Note
 
 If you directly modify this `option` object, the player will not respond immediately.
 
@@ -25,7 +25,7 @@ If you directly modify this `option` object, the player will not respond immedia
 
 ## `template`
 
-Manages all of the `DOM` elements of the player
+Manages all `DOM` elements of the player.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -38,20 +38,21 @@ var art = new Artplayer({
 console.info(art.template);
 console.info(art.template.$video);
 ```
-:::warning Warning
 
-To easily distinguish between `DOM` elements and plain objects, all `DOM` elements in the player are named starting with a `$`
+:::warning Note
 
-Here is the definition of all `DOM` elements: [artplayer/types/template.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/template.d.ts)
+To easily distinguish between `DOM` elements and regular objects, all `DOM` elements within the player are prefixed with `$`.
+
+This is the definition of all `DOM` elements: [artplayer/types/template.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/template.d.ts)
 
 :::
 
 ## `events`
 
-Manages all `DOM` events in the player, which is essentially a proxy for `addEventListener` and `removeEventListener`. When using the following methods to handle events, the event will also be automatically destroyed when the player is destroyed.
+Manages all `DOM` events for the player. It essentially proxies `addEventListener` and `removeEventListener`. When using the following methods to handle events, the event will be automatically destroyed when the player is destroyed.
 
-- The `proxy` method is used to proxy `DOM` events
-- The `hover` method is used to proxy custom `hover` events
+- The `proxy` method is used to proxy `DOM` events.
+- The `hover` method is used to proxy custom `hover` events.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -64,7 +65,7 @@ var art = new Artplayer({
 });
 
 art.events.proxy(container, 'click', event => {
-    console.info('click', event);
+	console.info('click', event);
 });
 
 art.events.hover(container, (event) => {
@@ -73,21 +74,22 @@ art.events.hover(container, (event) => {
     console.info('mouseleave', event);
 });
 ```
-:::warning Warning
 
-If you need some `DOM` events to only exist during the lifecycle of the player, it is strongly recommended to use these functions to avoid causing memory leaks
+:::warning Note
+
+If you need `DOM` events that only exist for the duration of the player's lifecycle, it is highly recommended to use these functions to avoid memory leaks.
 
 :::
 
 ## `storage`
 
-Manages the local storage of the player
+Manages the player's local storage.
 
-- The `name` attribute is used to set the cache `key`
-- The `set` method is used to set the cache
-- The `get` method is used to get the cache
-- The `del` method is used to delete the cache
-- The `clear` method is used to clear the cache
+- The `name` property is used to set the cache `key`.
+- The `set` method is used to set the cache.
+- The `get` method is used to get the cache.
+- The `del` method is used to delete the cache.
+- The `clear` method is used to clear the cache.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -104,11 +106,11 @@ art.storage.del('test');
 art.storage.clear();
 ```
 
-:::warning Warning
+:::warning Note
 
-By default, all player instances share the same `localStorage`, and the default `key` is `artplayer_settings`
+By default, all player instances share the same `localStorage`, and the default `key` is `artplayer_settings`.
 
-If you want different players to use different `localStorage`, you can modify `art.storage.name` accordingly
+If you want different players to use different `localStorage`, you can modify `art.storage.name`.
 
 :::
 
@@ -126,7 +128,7 @@ art.storage.set('test', { foo: 'bar' });
 
 ## `icons`
 
-Manage all the `svg` icons of the player
+Manages all `svg` icons for the player.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -147,10 +149,10 @@ console.info(art.icons.loading);
 
 ## `i18n`
 
-Manage the player's `i18n`
+Manages the player's `i18n`.
 
-- The `get` method is used to retrieve the value of `i18n`
-- The `update` method is used to update the `i18n` object
+- The `get` method is used to get the `i18n` value.
+- The `update` method is used to update the `i18n` object.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -171,14 +173,13 @@ art.i18n.update({
 
 :::warning
 
-Using `art.i18n.update` can only update `i18n` after instantiation. If you want to update `i18n` before instantiation, please use the `i18n` from the basic options for the update.
+Using `art.i18n.update` can only update the `i18n` after instantiation. If you want to update `i18n` before instantiation, please use the basic option `i18n` to update.
 
 :::
 
-
 ## `notice`
 
-Manage the player's notices, there's only one `show` property used to display notices.
+Manages the player's notifications. It only has a `show` property for displaying notifications.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -195,19 +196,19 @@ art.on('ready', () => {
 
 :::warning
 
-To immediately hide the display of `notice`: `art.notice.show = '';`
+If you want to hide the `notice` immediately: `art.notice.show = '';`
 
 :::
 
 ## `layers`
 
-Manage the layers of the player
+Manages the player's layers.
 
-- The `add` method is used for dynamically adding layers
-- The `remove` method is used for dynamically removing layers
-- The `update` method is used for dynamically updating layers
-- The `show` property is used to set whether to display all layers or not
-- The `toggle` method is used to toggle the display of all layers
+- The `add` method is used to dynamically add a layer.
+- The `remove` method is used to dynamically remove a layer.
+- The `update` method is used to dynamically update a layer.
+- The `show` property is used to set whether all layers are visible.
+- The `toggle` method is used to toggle the visibility of all layers.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -226,8 +227,8 @@ art.on('ready', () => {
 		art.layers.show = false;
 	}, 1000);
 });
-```
-:::warning `Component configuration` Please refer to the following address:
+
+:::warning For `Component Configuration`, please refer to:
 
 [/component/layers.html](/component/layers.html)
 
@@ -235,13 +236,13 @@ art.on('ready', () => {
 
 ## `controls`
 
-Manage the player's controllers
+Manages the player's controls
 
-- `add` method is used to dynamically add controllers
-- `remove` method is used to dynamically remove controllers
-- `update` method is used to dynamically update controllers
-- `show` property is used to set whether to display all controllers
-- `toggle` method is used to toggle the display of all controllers
+- The `add` method dynamically adds controls
+- The `remove` method dynamically removes controls
+- The `update` method dynamically updates controls
+- The `show` property sets whether to display all controls
+- The `toggle` method toggles the visibility of all controls
 
 <div className="run-code">▶ Run Code</div>
 
@@ -263,7 +264,7 @@ art.on('ready', () => {
 });
 ```
 
-:::warning `Component Configuration` Please refer to the following address:
+:::warning For `Component Configuration`, please refer to:
 
 [/component/controls.html](/component/controls.html)
 
@@ -271,13 +272,13 @@ art.on('ready', () => {
 
 ## `contextmenu`
 
-Manage the right-click context menu of the player
+Manages the player's context menu
 
-- The `add` method is used to dynamically add menu items
-- The `remove` method is used to dynamically remove menu items
-- The `update` method is used to dynamically update menu items
-- The `show` attribute is used to set whether to show all menu items
-- The `toggle` method is used to switch the visibility of all menu items
+- The `add` method dynamically adds menu items
+- The `remove` method dynamically removes menu items
+- The `update` method dynamically updates menu items
+- The `show` property sets whether to display all menu items
+- The `toggle` method toggles the visibility of all menu items
 
 <div className="run-code">▶ Run Code</div>
 
@@ -293,13 +294,13 @@ art.on('ready', () => {
     });
 
     art.contextmenu.show = true;
-    setTimeout(() => {
-        art.contextmenu.show = false;
-    }, 1000);
+	setTimeout(() => {
+		art.contextmenu.show = false;
+	}, 1000);
 });
 ```
 
-:::warning `Component Configuration` Please refer to the following address:
+:::warning For `Component Configuration`, please refer to:
 
 [/component/contextmenu.html](/component/contextmenu.html)
 
@@ -307,14 +308,14 @@ art.on('ready', () => {
 
 ## `subtitle`
 
-Manage the subtitle features of the player
+Manages the player's subtitle functionality
 
-- `url` property sets and returns the current subtitle address
-- `style` method sets the style of the current subtitle
-- `switch` method sets the current subtitle address and options
-- `textTrack` Get the current subtitle track
-- `activeCues` Get the currently active subtitle list
-- `cues` Get the subtitle list
+- The `url` property sets and returns the current subtitle URL
+- The `style` method sets the current subtitle's style
+- The `switch` method sets the current subtitle URL and options
+- `textTrack` gets the current text track
+- `activeCues` gets the list of currently active cues
+- `cues` gets the complete list of cues
 
 <div className="run-code">▶ Run Code</div>
 
@@ -334,10 +335,10 @@ art.on('ready', () => {
 
 ## `loading`
 
-Manage the loading layer of the player
+Manages the player's loading layer
 
-- `show` property is used to set whether to display the loading layer
-- The `toggle` attribute is used to toggle the display of the loading layer
+- The `show` property sets whether to display the loading layer
+- The `toggle` property toggles the visibility of the loading layer
 
 <div className="run-code">▶ Run Code</div>
 
@@ -357,10 +358,10 @@ art.on('ready', () => {
 
 ## `hotkey`
 
-Manage the hotkey functionality of the player
+Manages the player's hotkey functionality
 
-- The `add` method is used to add a hotkey
-- The `remove` method is used to remove a hotkey
+- The `add` method adds hotkeys
+- The `remove` method removes hotkeys
 
 <div className="run-code">▶ Run Code</div>
 
@@ -381,18 +382,19 @@ art.on('ready', () => {
 	}, 5000);
 });
 ```
-:::warning Warning
 
-Shortcut keys will only work after the player has gained focus (e.g., after clicking on the player).
+:::warning Note
+
+These hotkeys only take effect when the player has focus (e.g., after clicking on the player)
 
 :::
 
 ## `mask`
 
-Manage the player's mask layer
+Manages the player's mask layer
 
-- `show` property is used to set whether to display the mask layer
-- `toggle` property is used to toggle the display of the mask layer
+- The `show` property sets whether to display the mask layer
+- The `toggle` property toggles the visibility of the mask layer
 
 <div className="run-code">▶ Run Code</div>
 
@@ -404,22 +406,21 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.mask.show = false;
-    setTimeout(() => {
-        art.mask.show = true;
-    }, 1000);
+	setTimeout(() => {
+		art.mask.show = true;
+	}, 1000);
 });
 ```
 
 ## `setting`
 
-Manage the player's settings panel
+Manages the player's settings panel
 
-- `add` method is used to dynamically add a setting item
-- `remove` method is used to dynamically remove a setting item
-- `update` method is used to dynamically update a setting item
-- `show` property is used to set whether to display all the setting items
-- `toggle` method is used to toggle whether to display all the setting items
-
+- The `add` method dynamically adds settings items
+- The `remove` method dynamically removes settings items
+- The `update` method dynamically updates settings items
+- The `show` property sets whether to display all settings items
+- The `toggle` method toggles the visibility of all settings items
 
 <div className="run-code">▶ Run Code</div>
 
@@ -442,7 +443,7 @@ art.on('ready', () => {
 });
 ```
 
-:::warning `Settings Panel` Please refer to the following link
+:::warning For `Settings Panel`, please refer to:
 
 [/component/setting.html](/component/setting.html)
 
@@ -450,7 +451,7 @@ art.on('ready', () => {
 
 ## `plugins`
 
-Manage the player's plugin features, with only one method `add` to dynamically add plugins
+Manages the player's plugin functionality, with only one method `add` for dynamically adding plugins
 
 <div className="run-code">▶ Run Code</div>
 
@@ -474,4 +475,3 @@ function myPlugin(art) {
 art.on('ready', () => {
     art.plugins.add(myPlugin);
 });
-```

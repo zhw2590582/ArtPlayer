@@ -27,6 +27,8 @@
   <span>・</span>
   <a href="./CHANGELOG.md">Changelog</a>
   <span>・</span>
+  <a href="https://artplayer.org/llms.txt">🤖LLMs</a>
+  <span>・</span>
 </p>
 
 <p align="center">

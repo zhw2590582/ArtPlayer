@@ -2,7 +2,7 @@
 
 ## Built-in
 
-First, open the settings panel, and then it comes with four built-in items: `flip`, `playbackRate`, `aspectRatio`, `subtitleOffset`
+First, you need to open the settings panel. It comes with four built-in items: `flip`, `playbackRate`, `aspectRatio`, `subtitleOffset`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -10,7 +10,7 @@ First, open the settings panel, and then it comes with four built-in items: `fli
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    setting: true,
+	setting: true,
     flip: true,
     playbackRate: true,
     aspectRatio: true,
@@ -20,13 +20,13 @@ var art = new Artplayer({
 
 ## Create - Button
 
-| Property   | Type                | Description   |
-| ---------- | ------------------- | ------------- |
-| `html`     | `String`, `Element` | Item DOM      |
-| `icon`     | `String`, `Element` | Item Icon     |
-| `onClick` | `Function`          | Click event   |
-| `width`    | `Number`            | List Width    |
-| `tooltip`  | `String`            | Tooltip text  |
+| Property   | Type                | Description          |
+| ---------- | ------------------- | -------------------- |
+| `html`     | `String`, `Element` | Element DOM          |
+| `icon`     | `String`, `Element` | Element icon         |
+| `onClick` | `Function`          | Element click event  |
+| `width`    | `Number`            | List width           |
+| `tooltip`  | `String`            | Tooltip text         |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -49,16 +49,16 @@ var art = new Artplayer({
 });
 ```
 
-## Create - Selection List
+## Create - Selector List
 
-| Property   | Type                | Description   |
-| ---------- | ------------------- | ------------- |
-| `html`     | `String`, `Element` | Item DOM      |
-| `icon`     | `String`, `Element` | Item Icon     |
-| `selector` | `Array`             | Item selector |
-| `onSelect` | `Function`          | Click event   |
-| `width`    | `Number`            | List Width    |
-| `tooltip`  | `String`            | Tooltip text  |
+| Property   | Type                | Description          |
+| ---------- | ------------------- | -------------------- |
+| `html`     | `String`, `Element` | Element DOM          |
+| `icon`     | `String`, `Element` | Element icon         |
+| `selector` | `Array`             | Element list         |
+| `onSelect` | `Function`          | Element click event  |
+| `width`    | `Number`            | List width           |
+| `tooltip`  | `String`            | Tooltip text         |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -118,7 +118,7 @@ var art = new Artplayer({
 });
 ```
 
-## Creating - Nested Lists
+## Create - Nested List
 
 <div className="run-code">▶ Run Code</div>
 
@@ -167,16 +167,16 @@ var art = new Artplayer({
         },
     ],
 });
-```
+
 ## Create - Toggle Button
 
-| Property   | Type                | Description            |
-| ---------- | ------------------- | ---------------------- |
-| `html`     | `String`, `Element` | Element's DOM element  |
-| `icon`     | `String`, `Element` | Element's icon         |
-| `switch`   | `Boolean`           | Button's default state |
-| `onSwitch` | `Function`          | Button toggle event    |
-| `tooltip`  | `String`            | Tooltip text           |
+| Property   | Type                | Description               |
+| ---------- | ------------------- | ------------------------- |
+| `html`     | `String`, `Element` | DOM element of the item   |
+| `icon`     | `String`, `Element` | Icon of the item          |
+| `switch`   | `Boolean`           | Default state of the button |
+| `onSwitch` | `Function`          | Button toggle event       |
+| `tooltip`  | `String`            | Tooltip text              |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -202,16 +202,17 @@ var art = new Artplayer({
     ],
 });
 ```
+
 ## Create - Range Slider
 
-| Attribute  | Type                | Description                     |
-| ---------- | ------------------- | ------------------------------- |
-| `html`     | `String`, `Element` | The element's DOM element       |
-| `icon`     | `String`, `Element` | The element's icon              |
-| `range`    | `Array`             | Default state array             |
-| `onRange`  | `Function`          | Event triggered upon completion |
-| `onChange` | `Function`          | Event triggered on change       |
-| `tooltip`  | `String`            | Tooltip text                    |
+| Property   | Type                | Description               |
+| ---------- | ------------------- | ------------------------- |
+| `html`     | `String`, `Element` | DOM element of the item   |
+| `icon`     | `String`, `Element` | Icon of the item          |
+| `range`    | `Array`             | Default state array       |
+| `onRange`  | `Function`          | Event triggered on completion |
+| `onChange` | `Function`          | Event triggered on change |
+| `tooltip`  | `String`            | Tooltip text              |
 
 ```js
 const range = [5, 1, 10, 1];
@@ -220,6 +221,7 @@ const min = range[1];
 const max = range[2];
 const step = range[3];
 ```
+
 <div className="run-code">▶ Run Code</div>
 
 ```js
@@ -241,6 +243,7 @@ var art = new Artplayer({
     ],
 });
 ```
+
 ## Add
 
 <div className="run-code">▶ Run Code</div>
@@ -262,7 +265,7 @@ art.setting.add({
 });
 ```
 
-## Delete
+## Remove
 
 <div className="run-code">▶ Run Code</div>
 
@@ -292,7 +295,8 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
-## Updates
+
+## Update
 
 <div className="run-code">▶ Run Code</div>
 
@@ -326,4 +330,3 @@ art.on('ready', () => {
         });
     }, 3000);
 });
-```

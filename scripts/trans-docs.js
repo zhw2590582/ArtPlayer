@@ -1,175 +1,148 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import cpy from 'cpy'
+import { fileURLToPath } from 'node:url'
 import dotenv from 'dotenv'
 import { glob } from 'glob'
-import { removeDir } from './utils.js'
 
 dotenv.config()
 
-// 配置常量
-const MAX_RETRIES = 3
-const RETRY_DELAY = 1000 // 1秒
-const MAX_CHARS_PER_REQUEST = 128000
-const BASE_PATH = 'packages/artplayer-vitepress/docs'
-const EN_PATH = 'packages/artplayer-vitepress/docs/en'
-const COPY_DIRS = ['advanced', 'component', 'plugin', 'start']
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const rootDir = path.resolve(__dirname, '../packages/artplayer-vitepress')
+const srcDirs = ['docs/advanced', 'docs/component', 'docs/start']
+const indexFile = 'docs/index.md'
+const outputRoot = path.join(rootDir, 'docs/en')
+const API_URL = 'https://api.deepseek.com/v1/chat/completions'
+const API_KEY = process.env.DEEPL_API_KEY
 
-function splitMarkdown(text, maxChars) {
-  const parts = []
-  let currentPart = ''
-  let inCodeBlock = false
-  let inSpecialBlock = false
-
-  const lines = text.split('\n')
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]
-
-    // 检测代码块
-    if (line.trim().startsWith('```')) {
-      inCodeBlock = !inCodeBlock
-    }
-
-    // 检测特殊块
-    if (line.trim().startsWith(':::')) {
-      inSpecialBlock = !inSpecialBlock
-    }
-
-    // 添加当前行到当前部分
-    currentPart += `${line}\n`
-
-    // 检测是否达到字符限制
-    if (!inCodeBlock && !inSpecialBlock && currentPart.length > maxChars && i < lines.length - 1) {
-      parts.push(currentPart)
-      currentPart = ''
-    }
-  }
-
-  // 添加最后一部分
-  if (currentPart !== '') {
-    parts.push(currentPart)
-  }
-
-  return parts
+if (!API_KEY) {
+  console.error('❌ Missing DEEPL_API_KEY in .env file')
+  process.exit(1)
 }
 
-async function fetchWithRetry(url, options, retries = MAX_RETRIES) {
-  try {
-    const response = await fetch(url, {
-      ...options,
+function splitMarkdown(text, maxLen = 4000) {
+  const lines = text.split('\n')
+  const chunks = []
+  let buffer = ''
+  let insideCodeBlock = false
+
+  for (const line of lines) {
+    if (line.trim().startsWith('```'))
+      insideCodeBlock = !insideCodeBlock
+    if ((`${buffer}\n${line}`).length > maxLen && !insideCodeBlock) {
+      chunks.push(buffer)
+      buffer = ''
+    }
+    buffer += `\n${line}`
+  }
+
+  if (buffer.trim())
+    chunks.push(buffer)
+  return chunks
+}
+
+function cleanTranslation(text) {
+  return text
+    .replace(/^```(markdown|md)?/gi, '')
+    .replace(/```$/g, '')
+    .replace(/^(Here('|’)s|Below is|Translation|The English version|Here is)[:：]?\s*/gi, '')
+    .replace(/(Translation completed\.?|End of translation\.?)$/gi, '')
+    .trim()
+}
+
+async function translateText(text) {
+  const chunks = splitMarkdown(text, 4000)
+  let result = ''
+
+  for (let i = 0; i < chunks.length; i++) {
+    console.log(`🔹 Translating chunk ${i + 1}/${chunks.length}`)
+    const prompt = `
+You are a professional English technical translator for documentation.
+Translate the following Markdown content from Simplified Chinese to fluent English.
+Keep all Markdown structure, code blocks, and formatting intact.
+Return ONLY the translated Markdown content — do NOT add any explanations, prefixes, or summaries.
+
+Text to translate:
+${chunks[i]}
+        `.trim()
+
+    const res = await fetch(API_URL, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...options.headers,
+        'Authorization': `Bearer ${API_KEY}`,
       },
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    return await response.json()
-  }
-  catch (error) {
-    if (retries > 0) {
-      console.log(`Retrying... (${MAX_RETRIES - retries + 1}/${MAX_RETRIES})`)
-      await new Promise(resolve => setTimeout(resolve, RETRY_DELAY))
-      return fetchWithRetry(url, options, retries - 1)
-    }
-    throw error
-  }
-}
-
-async function translateContent(content, targetLanguage) {
-  try {
-    const TRANSLATE_URL = 'https://api.deepseek.com/chat/completions'
-    const response = await fetchWithRetry(TRANSLATE_URL, {
-      headers: {
-        Authorization: `Bearer ${process.env.DEEPL_API_KEY}`,
-      },
-      method: 'POST',
       body: JSON.stringify({
-        stream: false,
         model: 'deepseek-chat',
-        messages: [
-          {
-            role: 'user',
-            content: `The following text is written in VitePress's extended Markdown syntax, Please translate it into ${targetLanguage}, and keep the Markdown format and don't add your explanation:\n\n${content}`,
-          },
-        ],
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.2,
       }),
     })
 
-    return response.choices[0].message.content
-  }
-  catch (error) {
-    console.error(`Translation failed: ${error.message}`)
-    return content // 返回原文作为回退
-  }
-}
-
-class ProgressTracker {
-  constructor(totalParts) {
-    this.totalParts = totalParts
-    this.translatedPartsCount = 0
-  }
-
-  update() {
-    this.translatedPartsCount++
-    const progressPercentage = ((this.translatedPartsCount / this.totalParts) * 100).toFixed(2)
-    console.log(`Overall progress: ${progressPercentage}% (${this.translatedPartsCount}/${this.totalParts})`)
-  }
-}
-
-async function translateMarkdownFiles(filePaths, targetLanguage, maxCharsPerRequest) {
-  // 先计算总共有多少部分需要翻译
-  let totalParts = 0
-  for (const filePath of filePaths) {
-    const content = fs.readFileSync(filePath, 'utf-8')
-    totalParts += splitMarkdown(content, maxCharsPerRequest).length
-  }
-
-  console.log(`Starting translation of ${filePaths.length} files, total ${totalParts} parts.`)
-  const progressTracker = new ProgressTracker(totalParts)
-
-  for (const filePath of filePaths) {
-    console.log(`Translating: ${path.relative(EN_PATH, filePath)}`)
-
-    const content = fs.readFileSync(filePath, 'utf-8')
-    const parts = splitMarkdown(content, maxCharsPerRequest)
-    const translatedParts = []
-
-    for (const part of parts) {
-      const translatedPart = await translateContent(part, targetLanguage)
-      translatedParts.push(translatedPart)
-      progressTracker.update()
+    if (!res.ok) {
+      const error = await res.text()
+      console.error('API Error:', error)
+      throw new Error(`DeepSeek API error: ${res.status}`)
     }
 
-    const translatedContent = translatedParts.join('\n')
-    fs.writeFileSync(filePath, translatedContent)
+    const data = await res.json()
+    const raw = data.choices?.[0]?.message?.content?.trim() || ''
+    const translated = cleanTranslation(raw)
+    result += `\n\n${translated}`
   }
+
+  return result.trim()
 }
 
-async function setupDirectoryStructure() {
-  // 清理并创建目录结构
-  removeDir(EN_PATH)
-  await cpy(path.resolve(BASE_PATH, 'index.md'), path.resolve(EN_PATH))
-
-  // 并行复制所有目录
-  await Promise.all(
-    COPY_DIRS.map(dir => cpy(path.resolve(BASE_PATH, dir), path.resolve(EN_PATH, dir), { flat: true })),
-  )
+async function processFile(inputPath, outputPath) {
+  const content = fs.readFileSync(inputPath, 'utf8')
+  console.log(`🌍 Translating: ${inputPath}`)
+  const translated = await translateText(content)
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true })
+  fs.writeFileSync(outputPath, translated, 'utf8')
+  console.log(`✅ Saved: ${outputPath}`)
 }
 
-(async () => {
-  try {
-    await setupDirectoryStructure()
-    const mdsPaths = glob.sync(path.resolve(EN_PATH, '**/*.md'))
-    await translateMarkdownFiles(mdsPaths, 'English', MAX_CHARS_PER_REQUEST)
-    console.log('Translation completed successfully!')
+async function runWithConcurrency(tasks, limit = 5) {
+  const results = []
+  const executing = new Set()
+  for (const task of tasks) {
+    const p = task().finally(() => executing.delete(p))
+    results.push(p)
+    executing.add(p)
+    if (executing.size >= limit) {
+      await Promise.race(executing)
+    }
   }
-  catch (error) {
-    console.error('Translation failed:', error)
-    process.exit(1)
+  return Promise.all(results)
+}
+
+async function main() {
+  console.log('🚀 Starting translation...')
+  fs.rmSync(outputRoot, { recursive: true, force: true })
+  fs.mkdirSync(outputRoot, { recursive: true })
+
+  const indexPath = path.join(rootDir, indexFile)
+  const indexOut = path.join(outputRoot, 'index.md')
+  await processFile(indexPath, indexOut)
+
+  const tasks = []
+  for (const dir of srcDirs) {
+    const fullDir = path.join(rootDir, dir)
+    const files = await glob(`${fullDir}/**/*.md`)
+    for (const file of files) {
+      const relative = path.relative(rootDir, file)
+      const outputFile = path.join(outputRoot, relative.replace(/^docs[\\/]/, ''))
+      tasks.push(() => processFile(file, outputFile))
+    }
   }
-})()
+
+  console.log(`🧠 Total files: ${tasks.length}, concurrency: 5`)
+  await runWithConcurrency(tasks, 5)
+  console.log('🎉 Translation complete!')
+}
+
+main().catch((err) => {
+  console.error('❌ Translation failed:', err)
+  process.exit(1)
+})

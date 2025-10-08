@@ -1,7 +1,7 @@
 // npm i artplayer-plugin-document-pip
 // import artplayerPluginDocumentPip from 'artplayer-plugin-document-pip';
 
-let art = new Artplayer({
+const art = new Artplayer({
   container: '.artplayer-app',
   url: '/assets/sample/video.mp4',
   plugins: [

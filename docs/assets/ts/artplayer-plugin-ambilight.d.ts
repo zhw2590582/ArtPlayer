@@ -16,5 +16,5 @@ declare const artplayerPluginAmbilight: (option: Option) => (art: Artplayer) => 
 
 export default artplayerPluginAmbilight
 
-export = artplayerPluginAmbilight;
+export = artplayerPluginAmbilight
 export as namespace artplayerPluginAmbilight;

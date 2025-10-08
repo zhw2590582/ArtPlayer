@@ -1,3 +1,3 @@
-import id from 'artplayer/i18n/id';
+import id from 'artplayer/i18n/id'
 
-console.log(id)
+console.warn(id)

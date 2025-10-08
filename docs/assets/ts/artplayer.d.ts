@@ -124,8 +124,6 @@ export interface Subtitle {
   onVttLoad?: (vtt: string) => string
 }
 
-
-
 type Props<T> = {
   html: string
   icon: string
@@ -239,10 +237,6 @@ export interface Quality {
   url: string
 }
 
-
-
-
-
 export type AspectRatio = 'default' | '4:3' | '16:9' | (`${number}:${number}` & Record<never, never>)
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>)
 export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never, never>)
@@ -353,15 +347,6 @@ export declare class Player {
   autoSize(): void
   autoHeight(): void
 }
-
-
-
-
-
-
-
-
-
 
 export type CustomType
   = | 'flv'
@@ -771,9 +756,6 @@ declare module 'artplayer/i18n/*' {
   export default lang
 }
 
-
-
-
 export type Bar = 'loaded' | 'played' | 'hover'
 
 export interface Events {
@@ -992,8 +974,6 @@ export interface Config {
   ]
 }
 
-
-
 export interface Selector {
   /**
    * Whether the default is selected
@@ -1119,18 +1099,6 @@ export interface ComponentOption {
    */
   onSelect?: (this: Artplayer, selector: Selector, element: HTMLElement, event: Event) => void
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 export type {
   Config,
@@ -1313,5 +1281,5 @@ export default class Artplayer extends Player {
   } & Record<string, unknown>
 }
 
-export = Artplayer;
+export = Artplayer
 export as namespace Artplayer;

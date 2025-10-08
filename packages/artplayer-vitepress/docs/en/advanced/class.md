@@ -1,10 +1,10 @@
 # Static Properties
 
-Here, `Static Properties` refer to the `first-level properties` mounted on the `constructor`, which are very rarely used.
+Static properties here refer to first-level properties mounted on the constructor, which are rarely used.
 
 ## `instances`
 
-Returns an array of all player instances. You can use this property when you want to manage multiple players at the same time.
+Returns an array of all player instances. This property can be useful when you need to manage multiple player instances simultaneously.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -41,7 +41,7 @@ console.info(Artplayer.env);
 
 ## `build`
 
-Returns the build time of the player
+Returns the build timestamp of the player.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -51,7 +51,7 @@ console.info(Artplayer.build);
 
 ## `config`
 
-Returns the default configuration of the video
+Returns the default configuration for videos.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -61,7 +61,7 @@ console.info(Artplayer.config);
 
 ## `utils`
 
-Returns a collection of utility functions for the player
+Returns the collection of utility functions for the player.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -69,7 +69,7 @@ Returns a collection of utility functions for the player
 console.info(Artplayer.utils);
 ```
 
-:::warning For the full list of utility functions, please refer to the following address:
+:::warning For all utility functions, please refer to:
 
 [artplayer/types/utils.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/utils.d.ts)
 
@@ -77,7 +77,7 @@ console.info(Artplayer.utils);
 
 ## `scheme`
 
-Returns the validation scheme for the player options
+Returns the validation schema for player options.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -87,7 +87,7 @@ console.info(Artplayer.scheme);
 
 ## `Emitter`
 
-Returns the constructor for the event dispatcher
+Returns the constructor for the event emitter.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -97,7 +97,7 @@ console.info(Artplayer.Emitter);
 
 ## `validator`
 
-Returns the validation function for options
+Returns the validation function for options.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -107,7 +107,7 @@ console.info(Artplayer.validator);
 
 ## `kindOf`
 
-Returns the function tool for type checking
+Returns the type detection utility function.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -117,7 +117,7 @@ console.info(Artplayer.kindOf);
 
 ## `html`
 
-Returns the `html` string required for the player
+Returns the HTML string required by the player.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -127,10 +127,9 @@ console.info(Artplayer.html);
 
 ## `option`
 
-Returns the player's default options
+Returns the default options for the player.
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
 console.info(Artplayer.option);
-```

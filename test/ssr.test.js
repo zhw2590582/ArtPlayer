@@ -1,3 +1,3 @@
 import Artplayer from 'artplayer'
 
-console.log(Artplayer.html)
+console.warn(Artplayer.html)
