@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Artplayer.js</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="google-adsense-account" content="ca-pub-8579453810848662">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="artplayer, player, js, html5, video" />
+    <meta name="description" content="ArtPlayer.js is a modern and full featured HTML5 video player" />
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+        crossorigin="anonymous"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .artplayer-app {
+            aspect-ratio: 16 / 9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="artplayer-app"></div>
+    </div>
+    <script src="./assets/js/vconsole.min.js"></script>
+    <script>var vConsole = new VConsole();</script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/artplayer@5.1.1/dist/artplayer.js"></script> -->
+    <script src="./uncompiled/artplayer/index.js"></script>
+    <!-- <script src="./compiled/artplayer.js"></script> -->
+    <script src="./assets/js/mobile.js"></script>
+</body>
+
+</html>
