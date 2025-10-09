@@ -235,6 +235,7 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/404.mp4',
 });
+```
 
 ## RECONNECT_SLEEP_TIME
 
@@ -478,6 +479,7 @@ var art = new Artplayer({
 
 art.contextmenu.show = true;
 art.setting.show = true;
+```
 
 ## FLIP
 

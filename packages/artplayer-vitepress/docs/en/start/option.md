@@ -494,6 +494,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     fullscreenWeb: true,
 });
+```
 
 ## `subtitleOffset`
 
@@ -885,7 +886,6 @@ Set video subtitles, supported subtitle formats: `vtt`, `srt`, `ass`
 | `name`     | `String` | Subtitle name                              |
 | `url`      | `String` | Subtitle URL                               |
 | `type`     | `String` | Subtitle type, options: `vtt`, `srt`, `ass` |
-
 | `style`     | `Object`   | Subtitle style                            |
 | `encoding`  | `String`   | Subtitle encoding, defaults to `utf-8`              |
 | `escape`    | `Boolean`  | Whether to escape `html` tags, defaults to `true` |

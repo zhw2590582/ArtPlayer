@@ -245,6 +245,7 @@ var art = new Artplayer({
 art.on('click', (event) => {
     console.info('click', event);
 });
+```
 
 ## `error`
 
@@ -722,6 +723,7 @@ var art = new Artplayer({
 art.on('subtitle', (state) => {
     console.log(state);
 });
+```
 
 ## `contextmenu`
 

@@ -478,6 +478,7 @@ var art = new Artplayer({
         },
     ],
 });
+```
 
 :::warning Note
 

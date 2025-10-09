@@ -227,6 +227,7 @@ art.on('ready', () => {
 		art.layers.show = false;
 	}, 1000);
 });
+```
 
 :::warning For `Component Configuration`, please refer to:
 
