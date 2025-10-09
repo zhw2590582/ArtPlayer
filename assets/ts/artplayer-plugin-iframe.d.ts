@@ -28,5 +28,5 @@ declare class ArtplayerPluginIframe {
 
 export default ArtplayerPluginIframe
 
-export = artplayerPluginIframe
+export = artplayerPluginIframe;
 export as namespace artplayerPluginIframe;
