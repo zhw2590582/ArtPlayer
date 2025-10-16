@@ -205,6 +205,7 @@ export default class Artplayer extends Emitter {
   destroy(removeHtml = true) {
     if (Artplayer.REMOVE_SRC_WHEN_DESTROY) {
       this.video.removeAttribute('src')
+      this.video.load()
     }
     this.events.destroy()
     this.template.destroy(removeHtml)
