@@ -9,7 +9,7 @@ export default function seekMix(art) {
       if (art.duration) {
         notice.show = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`
       }
-      art.emit('seek', art.currentTime)
+      art.emit('seek', art.currentTime, time)
     },
   })
 
