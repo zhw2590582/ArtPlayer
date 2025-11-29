@@ -463,6 +463,23 @@ var art = new Artplayer({
 });
 ```
 
+## `backdrop`
+
+-   Type: `Boolean`
+-   Default: `true`
+
+是否开启播放器 UI 的背景虚化效果。开启后，设置面板、右键菜单、音量条等浮层会应用 `backdrop-filter` 毛玻璃效果，看起来更通透，但在部分低性能设备或老旧浏览器上可能会有性能或兼容性问题。
+
+<div className="run-code">▶ Run Code</div>
+
+```js{4}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    backdrop: false, // 关闭毛玻璃效果
+});
+```
+
 ## `fullscreen`
 
 -   Type: `Boolean`
@@ -696,7 +713,7 @@ var art = new Artplayer({
 
 :::warning `组件配置` 请参考以下地址：
 
-[/component/contextmenu.html](/component/contextmenu.html)-   Type:
+[/component/contextmenu.html](/component/contextmenu.html)
 
 :::
 
@@ -914,7 +931,7 @@ var art = new Artplayer({
 ## `moreVideoAttr`
 
 -   Type: `Object`
--   Default: `{'controls': false,'preload': 'metadata'}`
+-   Default: `{'controls': false, 'preload': 'metadata'}`（Safari 中会自动调整为 `preload: 'auto'` 以提升加载体验）
 
 更多视频属性，这些属性将直接写入视频元素里
 
@@ -1213,7 +1230,7 @@ var art = new Artplayer({
 
 :::warning cssVar 写法参考
 
-[artplayer/types/cssVar.d.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts)
+[artplayer/types/cssVar.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts)
 
 :::
 

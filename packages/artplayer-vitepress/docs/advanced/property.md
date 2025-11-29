@@ -90,6 +90,28 @@ art.on('ready', () => {
 });
 ```
 
+## `reset`
+
+-   Type: `Function`
+
+重置播放器的视频元素：会移除当前 `src` 并调用一次 `load()`，常用于在单页应用中手动释放媒体资源或重新初始化视频标签。
+
+> 注意：全局配置 `Artplayer.REMOVE_SRC_WHEN_DESTROY` 也会在调用 `destroy()` 时自动执行类似逻辑。
+
+<div className="run-code">▶ Run Code</div>
+
+```js{9}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    // 仅重置 video，不移除界面
+    art.reset();
+});
+```
+
 ## `seek`
 
 -   Type: `Setter`
@@ -550,6 +572,27 @@ art.on('ready', () => {
 });
 ```
 
+## `state`
+
+-   Type: `Setter/Getter`
+-   Parameter: `String`
+
+获取或设置播放器当前状态，支持：`standard`（正常）、`mini`（迷你窗）、`pip`（画中画）、`fullscreen`（窗口全屏）、`fullscreenWeb`（网页全屏）。
+
+<div className="run-code">▶ Run Code</div>
+
+```js{8}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.state); // 默认 standard
+    art.state = 'mini';
+});
+```
+
 ## `autoSize`
 
 -   Type: `Function`
@@ -593,6 +636,28 @@ art.on('ready', () => {
 尺寸和坐标信息是通过 `getBoundingClientRect` 获取的
 
 :::
+
+## `bottom` / `top` / `left` / `right` / `x` / `y` / `width` / `height`
+
+-   Type: `Getter`
+
+这些属性是对 `rect` 的快捷访问：
+
+- `bottom`, `top`, `left`, `right`, `x`, `y`：对应 `DOMRect` 的同名字段
+- `width`, `height`：播放器当前可见宽高
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.width, art.height, art.left, art.top);
+});
+```
 
 ## `flip`
 
@@ -795,6 +860,25 @@ var art = new Artplayer({
 
 art.on('video:timeupdate', () => {
     console.info(art.loaded);
+});
+```
+
+## `loadedTime`
+
+-   Type: `Getter`
+
+已缓存的媒体时长，单位为秒。通常与 `loaded` 一起使用，用于展示缓冲进度细节。
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('video:timeupdate', () => {
+    console.info(art.loadedTime);
 });
 ```
 

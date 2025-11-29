@@ -547,3 +547,23 @@ var art = new Artplayer({
     miniProgressBar: true,
 });
 ```
+
+## REMOVE_SRC_WHEN_DESTROY
+
+在销毁播放器时，是否同时移除视频的 `src` 属性并调用 `load()` 以主动释放媒体资源，默认为 `true`。
+
+开启后可以在单页应用或频繁创建/销毁播放器的场景下，减少视频资源占用；如果你希望保留 video 元素的状态，仅移除界面，可将其设置为 `false`。
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+Artplayer.REMOVE_SRC_WHEN_DESTROY = false;
+
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+// 只销毁界面，不主动清空 src
+art.destroy();
+```

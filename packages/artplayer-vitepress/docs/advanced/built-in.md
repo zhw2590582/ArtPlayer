@@ -335,6 +335,30 @@ art.on('ready', () => {
 });
 ```
 
+## `info`
+
+管理播放器的信息面板，常用于查看当前播放器和视频的运行状态，例如版本号、分辨率、时长等。
+
+- 通过 `art.info.show` 控制面板的显示与隐藏
+- 触发的事件名为 `info`（详见事件文档）
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.info.show = true;
+
+    setTimeout(() => {
+        art.info.show = false;
+    }, 3000);
+});
+```
+
 ## `loading`
 
 管理播放器的加载层
