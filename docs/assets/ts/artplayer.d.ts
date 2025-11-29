@@ -1,17 +1,18 @@
 export interface Utils {
+  isBrowser: boolean
   userAgent: string
   isMobile: boolean
   isSafari: boolean
   isIOS: boolean
   isIOS13: boolean
 
-  query: (selector: string, parent?: HTMLElement) => HTMLElement
-  queryAll: (selector: string, parent?: HTMLElement) => HTMLElement[]
+  query: <T extends Element = Element>(selector: string, parent?: Document | HTMLElement) => T | null
+  queryAll: <T extends Element = Element>(selector: string, parent?: Document | HTMLElement) => T[]
   addClass: (target: HTMLElement, className: string) => void
   removeClass: (target: HTMLElement, className: string) => void
   hasClass: (target: HTMLElement, className: string) => boolean
-  append: (target: HTMLElement, child: HTMLElement) => HTMLElement
-  remove: (target: HTMLElement) => void
+  append: (target: HTMLElement, child: HTMLElement | string) => Element | ChildNode
+  remove: (target: HTMLElement) => HTMLElement
   replaceElement: (newChild: HTMLElement, oldChild: HTMLElement) => HTMLElement
   siblings: (target: HTMLElement) => HTMLElement[]
   inverseClass: (target: HTMLElement, className: string) => void
@@ -19,15 +20,14 @@ export interface Utils {
   setStyle: <T extends keyof CSSStyleDeclaration>(
     element: HTMLElement,
     key: T,
-    value: CSSStyleDeclaration[T],
+    value: string | CSSStyleDeclaration[T],
   ) => HTMLElement
   setStyles: (element: HTMLElement, styles: Partial<CSSStyleDeclaration>) => HTMLElement
-  getStyle: <K extends keyof CSSStyleDeclaration>(
-    element: HTMLElement,
-    key: K,
-    numberType?: boolean,
-  ) => boolean extends true ? number : string
-  setStyleText: (element: HTMLElement, text: string) => void
+  getStyle: {
+    (element: HTMLElement, key: keyof CSSStyleDeclaration, numberType?: true): number
+    (element: HTMLElement, key: keyof CSSStyleDeclaration, numberType: false): string
+  }
+  setStyleText: (id: string, cssText: string) => void
   getRect: (el: HTMLElement) => { top: number, left: number, width: number, height: number }
   tooltip: (target: HTMLElement, msg: string, pos?: string) => void
   isInViewport: (target: HTMLElement, offset?: number) => boolean
@@ -56,11 +56,13 @@ export interface Utils {
   escape: (str: string) => string
   capitalize: (str: string) => string
 
-  getIcon: (key: string, html: string | HTMLElement) => HTMLElement
+  getIcon: (key?: string, html?: string | HTMLElement) => HTMLElement
+  getComposedPath: (event: Event) => EventTarget[]
   supportsFlex: () => boolean
 }
 
 export interface Template {
+  readonly html: string
   readonly $container: HTMLDivElement
   readonly $player: HTMLDivElement
   readonly $video: HTMLVideoElement
@@ -72,6 +74,7 @@ export interface Template {
   readonly $progress: HTMLDivElement
   readonly $controls: HTMLDivElement
   readonly $controlsLeft: HTMLDivElement
+  readonly $controlsCenter: HTMLDivElement
   readonly $controlsRight: HTMLDivElement
   readonly $layer: HTMLDivElement
   readonly $loading: HTMLDivElement
@@ -84,7 +87,6 @@ export interface Template {
   readonly $infoPanel: HTMLDivElement
   readonly $infoClose: HTMLDivElement
   readonly $contextmenu: HTMLDivElement
-  readonly $mini: HTMLDivElement
 }
 
 export interface Subtitle {
@@ -124,24 +126,22 @@ export interface Subtitle {
   onVttLoad?: (vtt: string) => string
 }
 
-type Props<T> = {
+export interface SettingOption extends Omit<Setting, 'html' | 'icon' | 'tooltip'> {
   html: string
-  icon: string
-  tooltip: string
+  icon: string | undefined
+  tooltip: string | undefined
   $item: HTMLDivElement
-  $icon: HTMLDivElement
+  $icon: HTMLDivElement | undefined
   $html: HTMLDivElement
-  $tooltip: HTMLDivElement
-  $switch: HTMLDivElement
-  $range: HTMLInputElement
-  $parent: Setting
-  $parents: Setting[]
-  $option: Setting[]
-  $events: Array<(...args: unknown[]) => unknown>
+  $tooltip: HTMLDivElement | undefined
+  $switch: HTMLDivElement | undefined
+  $range: HTMLInputElement | undefined
+  $parent: SettingOption | undefined
+  $parents: SettingOption[]
+  $option: SettingOption[]
+  $events: Array<() => void>
   $formatted: boolean
-} & Omit<T, 'html' | 'icon' | 'tooltip'>
-
-export type SettingOption = Props<Setting>
+}
 
 export interface Setting {
   /**
@@ -311,9 +311,6 @@ export declare class Player {
   get muted(): boolean
   set muted(state: boolean)
 
-  get title(): string
-  set title(title: string)
-
   get theme(): string
   set theme(theme: string)
 
@@ -346,6 +343,7 @@ export declare class Player {
   airplay(): void
   autoSize(): void
   autoHeight(): void
+  reset(): void
 }
 
 export type CustomType
@@ -568,12 +566,12 @@ export interface Option {
   /**
    * Custom video proxy
    */
-  proxy?: (this: Artplayer, art: Artplayer) => HTMLCanvasElement | HTMLVideoElement
+  proxy?: (this: Artplayer, art: Artplayer) => HTMLCanvasElement | HTMLVideoElement | undefined
 
   /**
    * Custom plugin list
    */
-  plugins?: ((this: Artplayer, art: Artplayer) => unknown)[]
+  plugins?: ((this: Artplayer, art: Artplayer) => unknown | Promise<unknown>)[]
 
   /**
    * Custom layer list
@@ -657,7 +655,7 @@ export interface Option {
   customType?: Partial<
     Record<
       CustomType,
-      (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => unknown
+      (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => unknown | Promise<unknown>
     >
   >
 }
@@ -775,15 +773,18 @@ export interface Events {
   'window:scroll': [event: Event]
   'window:orientationchange': [event: Event]
 
+  'video:abort': [event: Event]
   'video:canplay': [event: Event]
   'video:canplaythrough': [event: Event]
   'video:complete': [event: Event]
   'video:durationchange': [event: Event]
   'video:emptied': [event: Event]
+  'video:encrypted': [event: Event]
   'video:ended': [event: Event]
   'video:error': [error: Error]
   'video:loadeddata': [event: Event]
   'video:loadedmetadata': [event: Event]
+  'video:loadstart': [event: Event]
   'video:pause': [event: Event]
   'video:play': [event: Event]
   'video:playing': [event: Event]
@@ -805,7 +806,7 @@ export interface Events {
   'contextmenu': [state: boolean]
   'control': [state: boolean]
   'setting': [state: boolean]
-  'hotkey': [event: Event]
+  'hotkey': [event: KeyboardEvent]
 
   'destroy': []
 
@@ -826,8 +827,10 @@ export interface Events {
   'lock': [state: boolean]
   'aspectRatio': [aspectRatio: AspectRatio]
   'autoHeight': [height: number]
-  'autoSize': []
+  'autoSize': [size: { width: number, height: number }]
   'ready': []
+  'airplay': []
+  'raf': []
 
   'error': [error: Error, reconnectTime: number]
   'flip': [flip: Flip]
@@ -839,7 +842,7 @@ export interface Events {
   'pip': [state: boolean]
   'play': []
   'screenshot': [dataUri: string]
-  'seek': [currentTime: number]
+  'seek': [currentTime: number, time: number]
   'restart': [url: string]
   'muted': [state: boolean]
   'setBar': [type: Bar, percentage: number, event?: Event | undefined]
@@ -893,7 +896,7 @@ export interface CssVar {
 }
 
 export interface Config {
-  properties: [
+  readonly properties: readonly [
     'audioTracks',
     'autoplay',
     'buffered',
@@ -924,8 +927,8 @@ export interface Config {
     'videoTracks',
     'volume',
   ]
-  methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause']
-  events: [
+  readonly methods: readonly ['addTextTrack', 'canPlayType', 'load', 'play', 'pause']
+  readonly events: readonly [
     'abort',
     'canplay',
     'canplaythrough',
@@ -949,7 +952,7 @@ export interface Config {
     'volumechange',
     'waiting',
   ]
-  prototypes: [
+  readonly prototypes: readonly [
     'width',
     'height',
     'videoWidth',
@@ -984,6 +987,11 @@ export interface Selector {
    * Html string of selector
    */
   html: string | HTMLElement
+
+  /**
+   * Value of selector item
+   */
+  value?: string | number
 
   /**
    * Allow custom properties
@@ -1025,7 +1033,7 @@ export interface Component {
   /**
    * Dynamic add a component
    */
-  add: (option: ComponentOption) => HTMLElement
+  add: (option: ComponentOption | ((art: Artplayer) => ComponentOption)) => HTMLElement | undefined
 
   /**
    * Dynamic remove a component by name
@@ -1035,7 +1043,7 @@ export interface Component {
   /**
    * Dynamic update a component
    */
-  update: (option: ComponentOption) => HTMLElement
+  update: (option: ComponentOption) => HTMLElement | undefined
 }
 
 export interface ComponentOption {
@@ -1119,7 +1127,7 @@ export default class Artplayer extends Player {
 
   static readonly instances: Artplayer[]
   static readonly version: string
-  static readonly env: string
+  static readonly env: 'development' | 'production'
   static readonly build: string
   static readonly config: Config
   static readonly utils: Utils
@@ -1200,67 +1208,75 @@ export default class Artplayer extends Player {
   e: { [K in keyof Events]?: { fn: (...args: Events[K]) => unknown, ctx: unknown }[] }
 
   destroy(removeHtml?: boolean): void
+  reset(): void
 
   readonly template: {
     get html(): string
-    query: (str: string) => HTMLElement
+    query: <T extends Element = Element>(selector: string) => T | null
   } & Template
 
   readonly events: {
-    proxy: <KW extends keyof WindowEventMap, KH extends keyof HTMLElementEventMap>(
-      element: HTMLDivElement | Document | Window,
-      eventName: KW | KH,
-      handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
-      options?: boolean | AddEventListenerOptions,
-    ) => () => void
+    proxy: {
+      (target: EventTarget, eventName: string, handler: (event: Event) => void, options?: boolean | AddEventListenerOptions): () => void
+      (target: EventTarget, eventName: string[], handler: (event: Event) => void, options?: boolean | AddEventListenerOptions): Array<() => void>
+    }
     hover: (element: HTMLElement, mouseenter?: (event: Event) => any, mouseleave?: (event: Event) => any) => void
-    remove: (event: Event) => void
+    remove: (destroyEvent: () => void) => void
+    destroy: () => void
     bindGlobalEvents: (source?: { window?: Window, document?: Document }) => void
   }
 
   readonly storage: {
     name: string
     settings: Record<string, unknown>
-    get: (key: string) => unknown
+    get: {
+      (key: string): unknown
+      (): Record<string, unknown>
+    }
     set: (key: string, value: unknown) => void
-    del: (key: string) => boolean
+    del: (key: string) => void
     clear: () => void
   }
 
   readonly icons: Icons
 
   readonly i18n: {
-    readonly languages: I18n
+    languages: I18n
+    language: Partial<Record<string, string>>
+    init: () => void
     get: (key: string) => string
     update: (language: Partial<I18n>) => void
   }
 
   readonly notice: {
-    timer: number
-    set show(msg: string)
+    timer: number | null
+    get show(): boolean
+    set show(msg: string | Error | false | '')
+    destroy: () => void
   }
 
-  readonly layers: Record<string, HTMLElement> & Component
-  readonly controls: Record<string, HTMLElement> & Component
-  readonly contextmenu: Record<string, HTMLElement> & Component
+  readonly layers: Record<string, HTMLElement | undefined> & Component
+  readonly controls: Record<string, HTMLElement | undefined> & Component
+  readonly contextmenu: Record<string, HTMLElement | undefined> & Component
 
   readonly subtitle: {
     get url(): string
     set url(url: string)
-    get textTrack(): TextTrack
+    get textTrack(): TextTrack | undefined
     get activeCues(): VTTCue[]
     get cues(): VTTCue[]
     style: (name: string | Partial<CSSStyleDeclaration>, value?: string) => void
     switch: (url: string, option?: Subtitle) => Promise<string>
+    init: (subtitle: Subtitle) => Promise<string | null | undefined>
   } & Component
 
   readonly info: Component
   readonly loading: Component
 
   readonly hotkey: {
-    keys: Record<string, ((event: Event) => any)[]>
-    add: (key: string, callback: (this: Artplayer, event: Event) => any) => Artplayer['hotkey']
-    remove: (key: string, callback: (event: Event) => any) => Artplayer['hotkey']
+    keys: Record<string, ((event: KeyboardEvent) => any)[]>
+    add: (key: string, callback: (this: Artplayer, event: KeyboardEvent) => any) => Artplayer['hotkey']
+    remove: (key: string, callback: (event: KeyboardEvent) => any) => Artplayer['hotkey']
   }
 
   readonly mask: Component
@@ -1268,16 +1284,16 @@ export default class Artplayer extends Player {
   readonly setting: {
     option: SettingOption[]
     updateStyle: (width?: number) => void
-    find: (name: string) => SettingOption
-    add: (setting: Setting) => SettingOption[]
-    update: (settings: Setting) => SettingOption[]
-    remove: (name: string) => SettingOption[]
+    find: (name: string) => SettingOption | undefined
+    add: (setting: Setting) => Artplayer['setting']
+    update: (settings: Setting) => Artplayer['setting']
+    remove: (name: string) => Artplayer['setting']
   } & Component
 
   readonly plugins: {
     add: (
       plugin: (this: Artplayer, art: Artplayer) => unknown | Promise<unknown>,
-    ) => Promise<Artplayer['plugins']> | Artplayer['plugins']
+    ) => Promise<Artplayer['plugins']>
   } & Record<string, unknown>
 }
 
