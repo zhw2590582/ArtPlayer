@@ -359,8 +359,12 @@ class Artplayer extends (0, _emitterDefault.default) {
     get video() {
         return this.template.$video;
     }
+    reset() {
+        this.video.removeAttribute('src');
+        this.video.load();
+    }
     destroy(removeHtml = true) {
-        if (Artplayer.REMOVE_SRC_WHEN_DESTROY) this.video.removeAttribute('src');
+        if (Artplayer.REMOVE_SRC_WHEN_DESTROY) this.reset();
         this.events.destroy();
         this.template.destroy(removeHtml);
         instances.splice(instances.indexOf(this), 1);
@@ -574,7 +578,7 @@ module.exports = ".art-video-player {\n  --art-theme: red;\n  --art-font-color: 
 });
 
 },{}],"3r4tp":[function(require,module,exports,__globalThis) {
-module.exports = JSON.parse("{\"name\":\"artplayer\",\"version\":\"5.3.0\",\"description\":\"ArtPlayer.js is a modern and full featured HTML5 video player\",\"author\":\"Harvey Zack <laozhaochaguan@gmail.com>\",\"license\":\"MIT\",\"homepage\":\"https://artplayer.org\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/zhw2590582/ArtPlayer.git\"},\"bugs\":{\"url\":\"https://github.com/zhw2590582/ArtPlayer/issues\"},\"keywords\":[\"html5\",\"video\",\"player\"],\"exports\":{\".\":{\"types\":\"./types/artplayer.d.ts\",\"import\":\"./dist/artplayer.mjs\",\"require\":\"./dist/artplayer.js\"},\"./legacy\":{\"types\":\"./types/artplayer.d.ts\",\"import\":\"./dist/artplayer.legacy.js\",\"require\":\"./dist/artplayer.legacy.js\"},\"./i18n/*\":{\"types\":\"./types/i18n.d.ts\",\"import\":\"./dist/i18n/*.mjs\",\"require\":\"./dist/i18n/*.js\"}},\"main\":\"./dist/artplayer.js\",\"module\":\"./dist/artplayer.mjs\",\"types\":\"./types/artplayer.d.ts\",\"typesVersions\":{\"*\":{\"i18n/*\":[\"types/i18n.d.ts\"],\"legacy\":[\"types/artplayer.d.ts\"]}},\"legacy\":\"./dist/artplayer.legacy.js\",\"browserslist\":\"last 1 Chrome version\",\"dependencies\":{\"option-validator\":\"^2.0.6\"}}");
+module.exports = JSON.parse("{\"name\":\"artplayer\",\"version\":\"5.3.1-beta.1\",\"description\":\"ArtPlayer.js is a modern and full featured HTML5 video player\",\"author\":\"Harvey Zack <laozhaochaguan@gmail.com>\",\"license\":\"MIT\",\"homepage\":\"https://artplayer.org\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/zhw2590582/ArtPlayer.git\"},\"bugs\":{\"url\":\"https://github.com/zhw2590582/ArtPlayer/issues\"},\"keywords\":[\"html5\",\"video\",\"player\"],\"exports\":{\".\":{\"types\":\"./types/artplayer.d.ts\",\"import\":\"./dist/artplayer.mjs\",\"require\":\"./dist/artplayer.js\"},\"./legacy\":{\"types\":\"./types/artplayer.d.ts\",\"import\":\"./dist/artplayer.legacy.js\",\"require\":\"./dist/artplayer.legacy.js\"},\"./i18n/*\":{\"types\":\"./types/i18n.d.ts\",\"import\":\"./dist/i18n/*.mjs\",\"require\":\"./dist/i18n/*.js\"}},\"main\":\"./dist/artplayer.js\",\"module\":\"./dist/artplayer.mjs\",\"types\":\"./types/artplayer.d.ts\",\"typesVersions\":{\"*\":{\"i18n/*\":[\"types/i18n.d.ts\"],\"legacy\":[\"types/artplayer.d.ts\"]}},\"legacy\":\"./dist/artplayer.legacy.js\",\"browserslist\":\"last 1 Chrome version\",\"dependencies\":{\"option-validator\":\"^2.0.6\"}}");
 
 },{}],"1dlGA":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4012,7 +4016,7 @@ function seekMix(art) {
         set (time) {
             art.currentTime = time;
             if (art.duration) notice.show = `${(0, _utils.secondToTime)(art.currentTime)} / ${(0, _utils.secondToTime)(art.duration)}`;
-            art.emit('seek', art.currentTime);
+            art.emit('seek', art.currentTime, time);
         }
     });
     (0, _utils.def)(art, 'forward', {

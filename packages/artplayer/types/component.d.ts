@@ -12,6 +12,11 @@ export interface Selector {
   html: string | HTMLElement
 
   /**
+   * Value of selector item
+   */
+  value?: string | number
+
+  /**
    * Allow custom properties
    */
   [key: string]: any
@@ -51,7 +56,7 @@ export interface Component {
   /**
    * Dynamic add a component
    */
-  add: (option: ComponentOption) => HTMLElement
+  add: (option: ComponentOption | ((art: Artplayer) => ComponentOption)) => HTMLElement | undefined
 
   /**
    * Dynamic remove a component by name
@@ -61,7 +66,7 @@ export interface Component {
   /**
    * Dynamic update a component
    */
-  update: (option: ComponentOption) => HTMLElement
+  update: (option: ComponentOption) => HTMLElement | undefined
 }
 
 export interface ComponentOption {

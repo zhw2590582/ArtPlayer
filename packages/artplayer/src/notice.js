@@ -4,6 +4,15 @@ export default class Notice {
   constructor(art) {
     this.art = art
     this.timer = null
+
+    art.on('destroy', () => this.destroy())
+  }
+
+  destroy() {
+    if (this.timer) {
+      clearTimeout(this.timer)
+      this.timer = null
+    }
   }
 
   set show(msg) {

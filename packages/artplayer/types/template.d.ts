@@ -1,4 +1,5 @@
 export interface Template {
+  readonly html: string
   readonly $container: HTMLDivElement
   readonly $player: HTMLDivElement
   readonly $video: HTMLVideoElement
@@ -10,6 +11,7 @@ export interface Template {
   readonly $progress: HTMLDivElement
   readonly $controls: HTMLDivElement
   readonly $controlsLeft: HTMLDivElement
+  readonly $controlsCenter: HTMLDivElement
   readonly $controlsRight: HTMLDivElement
   readonly $layer: HTMLDivElement
   readonly $loading: HTMLDivElement
@@ -22,5 +24,4 @@ export interface Template {
   readonly $infoPanel: HTMLDivElement
   readonly $infoClose: HTMLDivElement
   readonly $contextmenu: HTMLDivElement
-  readonly $mini: HTMLDivElement
 }

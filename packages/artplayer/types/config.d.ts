@@ -1,5 +1,5 @@
 export interface Config {
-  properties: [
+  readonly properties: readonly [
     'audioTracks',
     'autoplay',
     'buffered',
@@ -30,8 +30,8 @@ export interface Config {
     'videoTracks',
     'volume',
   ]
-  methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause']
-  events: [
+  readonly methods: readonly ['addTextTrack', 'canPlayType', 'load', 'play', 'pause']
+  readonly events: readonly [
     'abort',
     'canplay',
     'canplaythrough',
@@ -55,7 +55,7 @@ export interface Config {
     'volumechange',
     'waiting',
   ]
-  prototypes: [
+  readonly prototypes: readonly [
     'width',
     'height',
     'videoWidth',

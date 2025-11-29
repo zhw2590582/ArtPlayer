@@ -227,12 +227,12 @@ export interface Option {
   /**
    * Custom video proxy
    */
-  proxy?: (this: Artplayer, art: Artplayer) => HTMLCanvasElement | HTMLVideoElement
+  proxy?: (this: Artplayer, art: Artplayer) => HTMLCanvasElement | HTMLVideoElement | undefined
 
   /**
    * Custom plugin list
    */
-  plugins?: ((this: Artplayer, art: Artplayer) => unknown)[]
+  plugins?: ((this: Artplayer, art: Artplayer) => unknown | Promise<unknown>)[]
 
   /**
    * Custom layer list
@@ -316,7 +316,7 @@ export interface Option {
   customType?: Partial<
     Record<
       CustomType,
-      (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => unknown
+      (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => unknown | Promise<unknown>
     >
   >
 }

@@ -9,7 +9,7 @@ import viewInit from './viewInit'
 
 export default class Events {
   constructor(art) {
-    this.destroyEvents = []
+    this.destroyEvents = new Set()
     this.proxy = this.proxy.bind(this)
     this.hover = this.hover.bind(this)
 
@@ -30,7 +30,7 @@ export default class Events {
 
     target.addEventListener(name, callback, option)
     const destroy = () => target.removeEventListener(name, callback, option)
-    this.destroyEvents.push(destroy)
+    this.destroyEvents.add(destroy)
     return destroy
   }
 
@@ -44,16 +44,28 @@ export default class Events {
   }
 
   remove(destroyEvent) {
-    const index = this.destroyEvents.indexOf(destroyEvent)
-    if (index > -1) {
-      destroyEvent()
-      this.destroyEvents.splice(index, 1)
+    if (this.destroyEvents.has(destroyEvent)) {
+      try {
+        destroyEvent()
+      }
+      catch (error) {
+        console.warn('Failed to remove event listener:', error)
+      }
+      finally {
+        this.destroyEvents.delete(destroyEvent)
+      }
     }
   }
 
   destroy() {
-    for (let index = 0; index < this.destroyEvents.length; index++) {
-      this.destroyEvents[index]()
+    for (const destroyEvent of this.destroyEvents) {
+      try {
+        destroyEvent()
+      }
+      catch (error) {
+        console.warn('Failed to destroy event listener:', error)
+      }
     }
+    this.destroyEvents.clear()
   }
 }

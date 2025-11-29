@@ -40,8 +40,7 @@ export default class Component {
     if (!this.$parent || !this.name || option.disable)
       return
     const name = option.name || `${this.name}${this.id}`
-    const item = this.cache.get(name)
-    errorHandle(!item, `Can't add an existing [${name}] to the [${this.name}]`)
+    errorHandle(!this.cache.has(name), `Can't add an existing [${name}] to the [${this.name}]`)
 
     this.id += 1
     const $ref = createElement('div')
@@ -94,15 +93,15 @@ export default class Component {
   }
 
   remove(name) {
+    errorHandle(this.cache.has(name), `Can't find [${name}] from the [${this.name}]`)
     const item = this.cache.get(name)
-    errorHandle(item, `Can't find [${name}] from the [${this.name}]`)
 
     if (item.option.beforeUnmount) {
       item.option.beforeUnmount.call(this.art, item.$ref)
     }
 
-    for (let index = 0; index < item.events.length; index++) {
-      this.art.events.remove(item.events[index])
+    for (const event of item.events) {
+      this.art.events.remove(event)
     }
 
     this.cache.delete(name)
@@ -111,8 +110,8 @@ export default class Component {
   }
 
   update(option) {
-    const item = this.cache.get(option.name)
-    if (item) {
+    if (this.cache.has(option.name)) {
+      const item = this.cache.get(option.name)
       option = Object.assign(item.option, option)
       this.remove(option.name)
     }

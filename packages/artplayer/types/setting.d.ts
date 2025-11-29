@@ -1,23 +1,21 @@
 import type Artplayer from './artplayer'
 
-type Props<T> = {
+export interface SettingOption extends Omit<Setting, 'html' | 'icon' | 'tooltip'> {
   html: string
-  icon: string
-  tooltip: string
+  icon: string | undefined
+  tooltip: string | undefined
   $item: HTMLDivElement
-  $icon: HTMLDivElement
+  $icon: HTMLDivElement | undefined
   $html: HTMLDivElement
-  $tooltip: HTMLDivElement
-  $switch: HTMLDivElement
-  $range: HTMLInputElement
-  $parent: Setting
-  $parents: Setting[]
-  $option: Setting[]
-  $events: Array<(...args: unknown[]) => unknown>
+  $tooltip: HTMLDivElement | undefined
+  $switch: HTMLDivElement | undefined
+  $range: HTMLInputElement | undefined
+  $parent: SettingOption | undefined
+  $parents: SettingOption[]
+  $option: SettingOption[]
+  $events: Array<() => void>
   $formatted: boolean
-} & Omit<T, 'html' | 'icon' | 'tooltip'>
-
-export type SettingOption = Props<Setting>
+}
 
 export interface Setting {
   /**

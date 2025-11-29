@@ -1,17 +1,18 @@
 export interface Utils {
+  isBrowser: boolean
   userAgent: string
   isMobile: boolean
   isSafari: boolean
   isIOS: boolean
   isIOS13: boolean
 
-  query: (selector: string, parent?: HTMLElement) => HTMLElement
-  queryAll: (selector: string, parent?: HTMLElement) => HTMLElement[]
+  query: <T extends Element = Element>(selector: string, parent?: Document | HTMLElement) => T | null
+  queryAll: <T extends Element = Element>(selector: string, parent?: Document | HTMLElement) => T[]
   addClass: (target: HTMLElement, className: string) => void
   removeClass: (target: HTMLElement, className: string) => void
   hasClass: (target: HTMLElement, className: string) => boolean
-  append: (target: HTMLElement, child: HTMLElement) => HTMLElement
-  remove: (target: HTMLElement) => void
+  append: (target: HTMLElement, child: HTMLElement | string) => Element | ChildNode
+  remove: (target: HTMLElement) => HTMLElement
   replaceElement: (newChild: HTMLElement, oldChild: HTMLElement) => HTMLElement
   siblings: (target: HTMLElement) => HTMLElement[]
   inverseClass: (target: HTMLElement, className: string) => void
@@ -19,15 +20,14 @@ export interface Utils {
   setStyle: <T extends keyof CSSStyleDeclaration>(
     element: HTMLElement,
     key: T,
-    value: CSSStyleDeclaration[T],
+    value: string | CSSStyleDeclaration[T],
   ) => HTMLElement
   setStyles: (element: HTMLElement, styles: Partial<CSSStyleDeclaration>) => HTMLElement
-  getStyle: <K extends keyof CSSStyleDeclaration>(
-    element: HTMLElement,
-    key: K,
-    numberType?: boolean,
-  ) => boolean extends true ? number : string
-  setStyleText: (element: HTMLElement, text: string) => void
+  getStyle: {
+    (element: HTMLElement, key: keyof CSSStyleDeclaration, numberType?: true): number
+    (element: HTMLElement, key: keyof CSSStyleDeclaration, numberType: false): string
+  }
+  setStyleText: (id: string, cssText: string) => void
   getRect: (el: HTMLElement) => { top: number, left: number, width: number, height: number }
   tooltip: (target: HTMLElement, msg: string, pos?: string) => void
   isInViewport: (target: HTMLElement, offset?: number) => boolean
@@ -56,6 +56,7 @@ export interface Utils {
   escape: (str: string) => string
   capitalize: (str: string) => string
 
-  getIcon: (key: string, html: string | HTMLElement) => HTMLElement
+  getIcon: (key?: string, html?: string | HTMLElement) => HTMLElement
+  getComposedPath: (event: Event) => EventTarget[]
   supportsFlex: () => boolean
 }

@@ -76,9 +76,6 @@ export declare class Player {
   get muted(): boolean
   set muted(state: boolean)
 
-  get title(): string
-  set title(title: string)
-
   get theme(): string
   set theme(theme: string)
 
@@ -111,4 +108,5 @@ export declare class Player {
   airplay(): void
   autoSize(): void
   autoHeight(): void
+  reset(): void
 }

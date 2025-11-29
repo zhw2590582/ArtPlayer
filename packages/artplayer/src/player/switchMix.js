@@ -3,21 +3,30 @@ import { def } from '../utils'
 export default function switchMix(art) {
   function switchUrl(url, currentTime) {
     return new Promise((resolve, reject) => {
-      if (url === art.url)
+      if (url === art.url) {
+        resolve()
         return
+      }
       const { playing, aspectRatio, playbackRate } = art
 
       art.pause()
       art.url = url
       art.notice.show = ''
 
-      art.once('video:error', reject)
+      const handlers = {}
 
-      art.once('video:loadedmetadata', () => {
+      handlers.error = (error) => {
+        art.off('video:canplay', handlers.canplay)
+        art.off('video:loadedmetadata', handlers.metadata)
+        reject(error)
+      }
+
+      handlers.metadata = () => {
         art.currentTime = currentTime
-      })
+      }
 
-      art.once('video:canplay', async () => {
+      handlers.canplay = async () => {
+        art.off('video:error', handlers.error)
         art.playbackRate = playbackRate
         art.aspectRatio = aspectRatio
 
@@ -28,7 +37,11 @@ export default function switchMix(art) {
         art.notice.show = ''
 
         resolve()
-      })
+      }
+
+      art.once('video:error', handlers.error)
+      art.once('video:loadedmetadata', handlers.metadata)
+      art.once('video:canplay', handlers.canplay)
     })
   }
 

@@ -71,7 +71,9 @@ export default class Hotkey {
 
   add(key, event) {
     if (this.keys[key]) {
-      this.keys[key].push(event)
+      if (!this.keys[key].includes(event)) {
+        this.keys[key].push(event)
+      }
     }
     else {
       this.keys[key] = [event]
@@ -84,6 +86,9 @@ export default class Hotkey {
       const index = this.keys[key].indexOf(event)
       if (index !== -1) {
         this.keys[key].splice(index, 1)
+      }
+      if (this.keys[key].length === 0) {
+        delete this.keys[key]
       }
     }
     return this
