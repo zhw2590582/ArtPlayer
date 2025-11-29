@@ -1,6 +1,6 @@
 # Writing Plugins
 
-Once you're familiar with the player's `properties`, `methods`, and `events`, writing plugins becomes very straightforward.
+Once you are familiar with the player's `properties`, `methods`, and `events`, writing plugins becomes very straightforward.
 
 You can load plugin functions during instantiation:
 

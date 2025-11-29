@@ -18,15 +18,15 @@ var art = new Artplayer({
 });
 ```
 
-## Create - Button
+## Creating - Buttons
 
-| Property   | Type                | Description          |
-| ---------- | ------------------- | -------------------- |
-| `html`     | `String`, `Element` | Element DOM          |
-| `icon`     | `String`, `Element` | Element icon         |
+| Property  | Type                | Description          |
+| --------- | ------------------- | -------------------- |
+| `html`    | `String`, `Element` | Element DOM          |
+| `icon`    | `String`, `Element` | Element icon         |
 | `onClick` | `Function`          | Element click event  |
-| `width`    | `Number`            | List width           |
-| `tooltip`  | `String`            | Tooltip text         |
+| `width`   | `Number`            | List width           |
+| `tooltip` | `String`            | Tooltip text         |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -49,16 +49,16 @@ var art = new Artplayer({
 });
 ```
 
-## Create - Selector List
+## Creating - Selection Lists
 
-| Property   | Type                | Description          |
-| ---------- | ------------------- | -------------------- |
-| `html`     | `String`, `Element` | Element DOM          |
-| `icon`     | `String`, `Element` | Element icon         |
-| `selector` | `Array`             | Element list         |
-| `onSelect` | `Function`          | Element click event  |
-| `width`    | `Number`            | List width           |
-| `tooltip`  | `String`            | Tooltip text         |
+| Property  | Type                | Description          |
+| --------- | ------------------- | -------------------- |
+| `html`    | `String`, `Element` | Element DOM          |
+| `icon`    | `String`, `Element` | Element icon         |
+| `selector`| `Array`             | Element list         |
+| `onSelect`| `Function`          | Element click event  |
+| `width`   | `Number`            | List width           |
+| `tooltip` | `String`            | Tooltip text         |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -118,7 +118,7 @@ var art = new Artplayer({
 });
 ```
 
-## Create - Nested List
+## Creating - Nested Lists
 
 <div className="run-code">▶ Run Code</div>
 

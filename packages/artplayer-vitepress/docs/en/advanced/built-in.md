@@ -41,7 +41,7 @@ console.info(art.template.$video);
 
 :::warning Note
 
-To easily distinguish between `DOM` elements and regular objects, all `DOM` elements within the player are prefixed with `$`.
+To easily distinguish between `DOM` elements and regular objects, all `DOM` elements within the player are named with a `$` prefix.
 
 This is the definition of all `DOM` elements: [artplayer/types/template.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/template.d.ts)
 
@@ -77,7 +77,7 @@ art.events.hover(container, (event) => {
 
 :::warning Note
 
-If you need `DOM` events that only exist for the duration of the player's lifecycle, it is highly recommended to use these functions to avoid memory leaks.
+If you need `DOM` events that only exist during the player's lifecycle, it is strongly recommended to use these functions to avoid memory leaks.
 
 :::
 
@@ -86,10 +86,10 @@ If you need `DOM` events that only exist for the duration of the player's lifecy
 Manages the player's local storage.
 
 - The `name` property is used to set the cache `key`.
-- The `set` method is used to set the cache.
-- The `get` method is used to get the cache.
-- The `del` method is used to delete the cache.
-- The `clear` method is used to clear the cache.
+- The `set` method is used to set a cache value.
+- The `get` method is used to get a cache value.
+- The `del` method is used to delete a cache value.
+- The `clear` method is used to clear all cache.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -151,7 +151,7 @@ console.info(art.icons.loading);
 
 Manages the player's `i18n`.
 
-- The `get` method is used to get the `i18n` value.
+- The `get` method is used to get an `i18n` value.
 - The `update` method is used to update the `i18n` object.
 
 <div className="run-code">▶ Run Code</div>
@@ -173,7 +173,7 @@ art.i18n.update({
 
 :::warning
 
-Using `art.i18n.update` can only update the `i18n` after instantiation. If you want to update `i18n` before instantiation, please use the basic option `i18n` to update.
+Using `art.i18n.update` can only update the `i18n` after instantiation. If you want to update the `i18n` before instantiation, please use the `i18n` option in the basic options.
 
 :::
 
@@ -229,7 +229,7 @@ art.on('ready', () => {
 });
 ```
 
-:::warning For `Component Configuration`, please refer to:
+:::warning Refer to the following address for `Component Configuration`:
 
 [/component/layers.html](/component/layers.html)
 
@@ -237,13 +237,14 @@ art.on('ready', () => {
 
 ## `controls`
 
-Manages the player's controls
+Manages the player's controls.
 
-- The `add` method dynamically adds controls
-- The `remove` method dynamically removes controls
-- The `update` method dynamically updates controls
-- The `show` property sets whether to display all controls
-- The `toggle` method toggles the visibility of all controls
+- The `add` method is used to dynamically add a control.
+- The `remove` method is used to dynamically remove a control.
+
+- The `update` method is used to dynamically update controls
+- The `show` property is used to set whether to display all controls
+- The `toggle` method is used to toggle the display of all controls
 
 <div className="run-code">▶ Run Code</div>
 
@@ -275,11 +276,11 @@ art.on('ready', () => {
 
 Manages the player's context menu
 
-- The `add` method dynamically adds menu items
-- The `remove` method dynamically removes menu items
-- The `update` method dynamically updates menu items
-- The `show` property sets whether to display all menu items
-- The `toggle` method toggles the visibility of all menu items
+- The `add` method is used to dynamically add menu items
+- The `remove` method is used to dynamically remove menu items
+- The `update` method is used to dynamically update menu items
+- The `show` property is used to set whether to display all menu items
+- The `toggle` method is used to toggle the display of all menu items
 
 <div className="run-code">▶ Run Code</div>
 
@@ -312,11 +313,11 @@ art.on('ready', () => {
 Manages the player's subtitle functionality
 
 - The `url` property sets and returns the current subtitle URL
-- The `style` method sets the current subtitle's style
+- The `style` method sets the style of the current subtitle
 - The `switch` method sets the current subtitle URL and options
 - `textTrack` gets the current text track
 - `activeCues` gets the list of currently active cues
-- `cues` gets the complete list of cues
+- `cues` gets the overall list of cues
 
 <div className="run-code">▶ Run Code</div>
 
@@ -334,12 +335,36 @@ art.on('ready', () => {
 });
 ```
 
+## `info`
+
+Manages the player's information panel, commonly used to view the current status of the player and video, such as version number, resolution, duration, etc.
+
+- Control the panel's visibility via `art.info.show`
+- The triggered event is named `info` (see the event documentation for details)
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.info.show = true;
+
+    setTimeout(() => {
+        art.info.show = false;
+    }, 3000);
+});
+```
+
 ## `loading`
 
 Manages the player's loading layer
 
-- The `show` property sets whether to display the loading layer
-- The `toggle` property toggles the visibility of the loading layer
+- The `show` property is used to set whether to display the loading layer
+- The `toggle` property is used to toggle the display of the loading layer
 
 <div className="run-code">▶ Run Code</div>
 
@@ -361,8 +386,8 @@ art.on('ready', () => {
 
 Manages the player's hotkey functionality
 
-- The `add` method adds hotkeys
-- The `remove` method removes hotkeys
+- The `add` method is used to add hotkeys
+- The `remove` method is used to remove hotkeys
 
 <div className="run-code">▶ Run Code</div>
 
@@ -386,7 +411,7 @@ art.on('ready', () => {
 
 :::warning Note
 
-These hotkeys only take effect when the player has focus (e.g., after clicking on the player)
+These hotkeys only take effect after the player gains focus (e.g., after clicking on the player)
 
 :::
 
@@ -394,8 +419,8 @@ These hotkeys only take effect when the player has focus (e.g., after clicking o
 
 Manages the player's mask layer
 
-- The `show` property sets whether to display the mask layer
-- The `toggle` property toggles the visibility of the mask layer
+- The `show` property is used to set whether to display the mask layer
+- The `toggle` property is used to toggle the display of the mask layer
 
 <div className="run-code">▶ Run Code</div>
 
@@ -417,11 +442,11 @@ art.on('ready', () => {
 
 Manages the player's settings panel
 
-- The `add` method dynamically adds settings items
-- The `remove` method dynamically removes settings items
-- The `update` method dynamically updates settings items
-- The `show` property sets whether to display all settings items
-- The `toggle` method toggles the visibility of all settings items
+- The `add` method is used to dynamically add settings items
+- The `remove` method is used to dynamically remove settings items
+- The `update` method is used to dynamically update settings items
+- The `show` property is used to set whether to display all settings items
+- The `toggle` method is used to toggle the display of all settings items
 
 <div className="run-code">▶ Run Code</div>
 
@@ -444,7 +469,7 @@ art.on('ready', () => {
 });
 ```
 
-:::warning For `Settings Panel`, please refer to:
+:::warning For the `Settings Panel`, please refer to:
 
 [/component/setting.html](/component/setting.html)
 
@@ -452,7 +477,7 @@ art.on('ready', () => {
 
 ## `plugins`
 
-Manages the player's plugin functionality, with only one method `add` for dynamically adding plugins
+Manages the player's plugin functionality, with only the `add` method for dynamically adding plugins
 
 <div className="run-code">▶ Run Code</div>
 

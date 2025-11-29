@@ -1,16 +1,16 @@
-# Business Layer
+# Layer
 
 ## Configuration
 
 | Property  | Type                | Description                          |
 | --------- | ------------------- | ------------------------------------ |
 | `disable` | `Boolean`           | Whether to disable the component     |
-| `name`    | `String`            | Unique component name for class marking |
+| `name`    | `String`            | Unique component name for CSS class  |
 | `index`   | `Number`            | Component index for display priority |
 | `html`    | `String`, `Element` | Component DOM element                |
 | `style`   | `Object`            | Component style object               |
 | `click`   | `Function`          | Component click event                |
-| `mounted` | `Function`          | Triggered after component mounting   |
+| `mounted` | `Function`          | Triggered after component mount      |
 | `tooltip` | `String`            | Component tooltip text               |
 
 ## Creation

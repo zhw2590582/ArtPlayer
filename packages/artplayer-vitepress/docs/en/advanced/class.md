@@ -1,6 +1,6 @@
 # Static Properties
 
-Static properties here refer to first-level properties mounted on the constructor, which are rarely used.
+Here, `Static Properties` refer to the `top-level properties` mounted on the `constructor function`, which are very rarely used.
 
 ## `instances`
 
@@ -41,7 +41,7 @@ console.info(Artplayer.env);
 
 ## `build`
 
-Returns the build timestamp of the player.
+Returns the build time of the player.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -69,7 +69,7 @@ Returns the collection of utility functions for the player.
 console.info(Artplayer.utils);
 ```
 
-:::warning For all utility functions, please refer to:
+:::warning For all utility functions, please refer to the following address:
 
 [artplayer/types/utils.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/utils.d.ts)
 
@@ -87,7 +87,7 @@ console.info(Artplayer.scheme);
 
 ## `Emitter`
 
-Returns the constructor for the event emitter.
+Returns the constructor function for the event emitter.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -107,7 +107,7 @@ console.info(Artplayer.validator);
 
 ## `kindOf`
 
-Returns the type detection utility function.
+Returns the utility function for type detection.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -117,7 +117,7 @@ console.info(Artplayer.kindOf);
 
 ## `html`
 
-Returns the HTML string required by the player.
+Returns the `html` string required by the player.
 
 <div className="run-code">▶ Run Code</div>
 

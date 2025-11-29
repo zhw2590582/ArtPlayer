@@ -1,10 +1,10 @@
 # Global Properties
 
-These `global properties` refer to the top-level properties mounted on the `constructor`. All property names are in uppercase. These are subject to change in the future and are generally not used.
+These `global properties` refer to the `top-level properties` mounted on the `constructor`. The property names are all in uppercase. They are subject to change in the future and are generally not used.
 
 ## DEBUG
 
-Whether to enable `debug` mode, which can print all built-in video events. Default is off.
+Whether to enable `debug` mode, which can print all built-in events of the video. Default is off.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -19,7 +19,7 @@ var art = new Artplayer({
 
 ## STYLE
 
-Returns the player's style text.
+Returns the player style text.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -119,7 +119,7 @@ var art = new Artplayer({
 
 ## RESIZE_TIME
 
-The throttle time for `resize` events, in milliseconds. Default is `200`.
+The throttle time for the `resize` event, in milliseconds. Default is `200`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -138,7 +138,7 @@ art.on('resize', () => {
 
 ## SCROLL_TIME
 
-The throttle time for `scroll` events, in milliseconds. Default is `200`.
+The throttle time for the `scroll` event, in milliseconds. Default is `200`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -157,7 +157,7 @@ art.on('scroll', () => {
 
 ## SCROLL_GAP
 
-The boundary tolerance distance for `view` events, in pixels. Default is `50`.
+The boundary tolerance distance for the `view` event, in pixels. Default is `50`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -176,7 +176,7 @@ art.on('scroll', () => {
 
 ## AUTO_PLAYBACK_MAX
 
-The maximum number of records for the auto-playback feature. Default is `10`.
+The maximum record count for the auto-playback feature. Default is `10`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -239,7 +239,7 @@ var art = new Artplayer({
 
 ## RECONNECT_SLEEP_TIME
 
-The delay time for automatic reconnection when a connection error occurs, in milliseconds. Default is `1000`
+The delay time for automatic reconnection when a connection error occurs, in milliseconds. Default is `1000`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -250,11 +250,10 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/404.mp4',
 });
-```
 
 ## CONTROL_HIDE_TIME
 
-The delay time for auto-hiding the bottom control bar, in milliseconds. Default is `3000`
+The delay time in milliseconds for auto-hiding the bottom control bar. Default is `3000`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -269,7 +268,7 @@ var art = new Artplayer({
 
 ## DBCLICK_TIME
 
-The delay time for double-click events, in milliseconds. Default is `300`
+The delay time in milliseconds for double-click events. Default is `300`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -288,7 +287,7 @@ art.on('dblclick', () => {
 
 ## DBCLICK_FULLSCREEN
 
-On desktop, whether to toggle fullscreen on double-click. Default is `true`
+On desktop, whether double-click toggles fullscreen mode. Default is `true`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -303,7 +302,7 @@ var art = new Artplayer({
 
 ## MOBILE_DBCLICK_PLAY
 
-On mobile, whether to toggle play/pause on double-click. Default is `true`
+On mobile devices, whether double-click toggles play/pause. Default is `true`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -318,7 +317,7 @@ var art = new Artplayer({
 
 ## MOBILE_CLICK_PLAY
 
-On mobile, whether to toggle play/pause on single click. Default is `false`
+On mobile devices, whether single-click toggles play/pause. Default is `false`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -333,7 +332,7 @@ var art = new Artplayer({
 
 ## AUTO_ORIENTATION_TIME
 
-On mobile, the delay time for automatic screen rotation, in milliseconds. Default is `200`
+On mobile devices, the delay time in milliseconds for automatic screen rotation. Default is `200`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -349,7 +348,7 @@ var art = new Artplayer({
 
 ## INFO_LOOP_TIME
 
-The refresh interval for the information panel, in milliseconds. Default is `1000`
+The refresh interval in milliseconds for the information panel. Default is `1000`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -366,7 +365,7 @@ art.info.show = true;
 
 ## FAST_FORWARD_VALUE
 
-On mobile, the speed multiplier for fast-forward during long press. Default is `3`
+On mobile devices, the speed multiplier for fast-forward during long-press. Default is `3`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -382,7 +381,7 @@ var art = new Artplayer({
 
 ## FAST_FORWARD_TIME
 
-On mobile, the delay time for fast-forward during long press, in milliseconds. Default is `1000`
+On mobile devices, the delay time in milliseconds for activating fast-forward during long-press. Default is `1000`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -398,7 +397,7 @@ var art = new Artplayer({
 
 ## TOUCH_MOVE_RATIO
 
-On mobile, the speed multiplier for progress seeking during left/right swipe. Default is `0.5`
+On mobile devices, the speed multiplier for seeking when swiping left/right. Default is `0.5`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -413,7 +412,7 @@ var art = new Artplayer({
 
 ## VOLUME_STEP
 
-The volume adjustment step for keyboard shortcuts. Default is `0.1`
+The volume adjustment step for keyboard shortcuts. Default is `0.1`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -428,7 +427,7 @@ var art = new Artplayer({
 
 ## SEEK_STEP
 
-The seek adjustment step for keyboard shortcuts, in seconds. Default is `5`
+The seeking step in seconds for keyboard shortcuts. Default is `5`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -443,7 +442,7 @@ var art = new Artplayer({
 
 ## PLAYBACK_RATE
 
-The built-in playback rate options list. Default is `[0.5, 0.75, 1, 1.25, 1.5, 2]`
+The built-in list of playback rates. Default is `[0.5, 0.75, 1, 1.25, 1.5, 2]`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -463,7 +462,7 @@ art.setting.show = true;
 
 ## ASPECT_RATIO
 
-The built-in video aspect ratio options list. Default is `['default', '4:3', '16:9']`
+The built-in list of video aspect ratios. Default is `['default', '4:3', '16:9']`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -483,7 +482,7 @@ art.setting.show = true;
 
 ## FLIP
 
-List of built-in video flip options, defaults to `['normal', 'horizontal', 'vertical']`
+The built-in list of video flip modes. Default is `['normal', 'horizontal', 'vertical']`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -499,11 +498,10 @@ var art = new Artplayer({
 
 art.contextmenu.show = true;
 art.setting.show = true;
-```
 
 ## FULLSCREEN_WEB_IN_BODY
 
-Whether to mount the player under the `body` element during web fullscreen mode, defaults to `true`
+Determines whether to mount the player under the `body` element during web fullscreen mode. Defaults to `true`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -519,7 +517,7 @@ var art = new Artplayer({
 
 ## LOG_VERSION
 
-Sets whether to print the player version, defaults to `true`
+Sets whether to print the player version. Defaults to `true`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -534,7 +532,7 @@ var art = new Artplayer({
 
 ## USE_RAF
 
-Sets whether to use `requestAnimationFrame`, defaults to `false`. Currently mainly used for smooth progress bar effects
+Sets whether to use `requestAnimationFrame`. Defaults to `false`. Currently mainly used for smooth progress bar effects.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -546,3 +544,23 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     miniProgressBar: true,
 });
+```
+
+## REMOVE_SRC_WHEN_DESTROY
+
+Determines whether to remove the video's `src` attribute and call `load()` to actively release media resources when destroying the player. Defaults to `true`.
+
+When enabled, this can reduce video resource usage in single-page applications or scenarios where players are frequently created/destroyed. If you wish to preserve the video element's state and only remove the UI, set this to `false`.
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+Artplayer.REMOVE_SRC_WHEN_DESTROY = false;
+
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+// Only destroys the UI, does not actively clear src
+art.destroy();

@@ -1,18 +1,18 @@
-# Controllers
+# Controls
 
 ## Configuration
 
 | Property    | Type                | Description                                      |
 | ----------- | ------------------- | ------------------------------------------------ |
-| `disable`   | `Boolean`           | Whether to disable the component                 |
-| `name`      | `String`            | Unique component name for CSS class identification |
-| `index`     | `Number`            | Component index for display priority             |
-| `html`      | `String`, `Element` | Component DOM element                            |
-| `style`     | `Object`            | Component style object                           |
-| `click`     | `Function`          | Component click event                            |
-| `mounted`   | `Function`          | Triggered after component mounting               |
-| `tooltip`   | `String`            | Component tooltip text                           |
-| `position`  | `String`            | `left` and `right` control controller placement  |
+| `disable`   | `Boolean`           | Whether to disable the control                   |
+| `name`      | `String`            | Unique control name for CSS class identification |
+| `index`     | `Number`            | Control index for display priority               |
+| `html`      | `String`, `Element` | Control's DOM element                            |
+| `style`     | `Object`            | Control style object                             |
+| `click`     | `Function`          | Control click event handler                      |
+| `mounted`   | `Function`          | Triggered after control is mounted               |
+| `tooltip`   | `String`            | Control tooltip text                             |
+| `position`  | `String`            | `left` or `right` - controls display position    |
 | `selector`  | `Array`             | Array of selector list objects                   |
 | `onSelect`  | `Function`          | Function triggered when selector item is clicked |
 
@@ -67,7 +67,7 @@ console.info(art.controls['your-button']);
 console.info(art.controls['subtitle']);
 ```
 
-## Addition
+## Adding
 
 <div className="run-code">▶ Run Code</div>
 
@@ -128,7 +128,7 @@ art.on('ready', () => {
 });
 ```
 
-## Update
+## Updating
 
 <div className="run-code">▶ Run Code</div>
 
