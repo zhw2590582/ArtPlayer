@@ -255,5 +255,5 @@ declare const artplayerPluginDanmuku: (option: Option) => (art: Artplayer) => Re
 
 export default artplayerPluginDanmuku
 
-export = artplayerPluginDanmuku
+export = artplayerPluginDanmuku;
 export as namespace artplayerPluginDanmuku;
