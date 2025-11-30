@@ -63,7 +63,7 @@ export default class Template {
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
-                  <div class="art-info-content" data-video="src"></div>
+                  <div class="art-info-content" data-video="currentSrc"></div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video volume:</div>
