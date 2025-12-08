@@ -1,0 +1,17 @@
+.artplayer-plugin-liquid-glass.art-control-show {
+    .art-bottom {
+        background-image: none !important;
+        padding-bottom: var(--art-padding);
+
+        .art-liquid-glass {
+            padding: var(--art-padding) var(--art-padding) 5px;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+    }
+
+    .art-layer-auto-playback {
+        bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-padding) * 4 + 10px);
+    }
+}
