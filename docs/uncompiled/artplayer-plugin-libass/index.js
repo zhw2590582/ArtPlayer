@@ -6,7 +6,16 @@
 // anything defined in a previous bundle is accessed via the
 // orig method which is the require for previous bundles
 
-(function (modules, entry, mainEntry, parcelRequireName, globalName) {
+(function (
+  modules,
+  entry,
+  mainEntry,
+  parcelRequireName,
+  externals,
+  distDir,
+  publicUrl,
+  devServer
+) {
   /* eslint-disable no-undef */
   var globalObject =
     typeof globalThis !== 'undefined'
@@ -25,6 +34,7 @@
     typeof globalObject[parcelRequireName] === 'function' &&
     globalObject[parcelRequireName];
 
+  var importMap = previousRequire.i || {};
   var cache = previousRequire.cache || {};
   // Do not use `require` to prevent Webpack from trying to bundle this call
   var nodeRequire =
@@ -35,6 +45,9 @@
   function newRequire(name, jumped) {
     if (!cache[name]) {
       if (!modules[name]) {
+        if (externals[name]) {
+          return externals[name];
+        }
         // if we cannot find the module within our internal map or
         // cache jump to the current global require ie. the last bundle
         // that was added to the page.
@@ -73,7 +86,7 @@
         localRequire,
         module,
         module.exports,
-        this
+        globalObject
       );
     }
 
@@ -93,6 +106,7 @@
   function Module(moduleName) {
     this.id = moduleName;
     this.bundle = newRequire;
+    this.require = nodeRequire;
     this.exports = {};
   }
 
@@ -101,6 +115,10 @@
   newRequire.modules = modules;
   newRequire.cache = cache;
   newRequire.parent = previousRequire;
+  newRequire.distDir = distDir;
+  newRequire.publicUrl = publicUrl;
+  newRequire.devServer = devServer;
+  newRequire.i = importMap;
   newRequire.register = function (id, exports) {
     modules[id] = [
       function (require, module) {
@@ -109,6 +127,10 @@
       {},
     ];
   };
+
+  // Only insert newRequire.load when it is actually used.
+  // The code in this file is linted against ES5, so dynamic import is not allowed.
+  // INSERT_LOAD_HERE
 
   Object.defineProperty(newRequire, 'root', {
     get: function () {
@@ -136,22 +158,19 @@
       define(function () {
         return mainExports;
       });
-
-      // <script>
-    } else if (globalName) {
-      this[globalName] = mainExports;
     }
   }
-})({"gEVO5":[function(require,module,exports) {
+})({"hVOIc":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>artplayerPluginLibass);
 var _adapter = require("./adapter");
 var _adapterDefault = parcelHelpers.interopDefault(_adapter);
 function artplayerPluginLibass(option) {
     return (art)=>{
         const adapter = new (0, _adapterDefault.default)(art, option);
         return {
-            name: "artplayerPluginLibass",
+            name: 'artplayerPluginLibass',
             libass: adapter.libass,
             visible: adapter.visible,
             init: adapter.init.bind(adapter),
@@ -162,10 +181,9 @@ function artplayerPluginLibass(option) {
         };
     };
 }
-exports.default = artplayerPluginLibass;
-if (typeof window !== "undefined") window["artplayerPluginLibass"] = artplayerPluginLibass;
+if (typeof window !== 'undefined') window.artplayerPluginLibass = artplayerPluginLibass;
 
-},{"./adapter":"k93pI","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"k93pI":[function(require,module,exports) {
+},{"./adapter":"h5Lfw","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"h5Lfw":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _libassWasm = require("libass-wasm");
@@ -173,32 +191,32 @@ var _libassWasmDefault = parcelHelpers.interopDefault(_libassWasm);
 const defaultAssSubtitle = `[Script Info]\nScriptType: v4.00+`;
 class LibassAdapter {
     constructor(art, option){
-        const { constructor , template  } = art;
+        const { constructor, template } = art;
         this.art = art;
         this.$video = template.$video;
         this.$webvtt = template.$subtitle;
         this.utils = constructor.utils;
         this.libass = null;
-        art.once("ready", this.init.bind(this, option));
+        art.once('ready', this.init.bind(this, option));
     }
     async init(option) {
         this.#checkWebAssemblySupport();
         await this.#createLibass(option);
         this.#addEventListeners();
-        this.art.emit("artplayerPluginLibass:init", this);
+        this.art.emit('artplayerPluginLibass:init', this);
         // set initial subtitle
         const initialSubtitle = this.art?.option?.subtitle?.url;
-        if (initialSubtitle && this.utils.getExt(initialSubtitle) === "ass") this.switch(initialSubtitle);
+        if (initialSubtitle && this.utils.getExt(initialSubtitle) === 'ass') this.switch(initialSubtitle);
     }
     switch(url) {
-        this.art.emit("artplayerPluginLibass:switch", url);
-        if (url && this.utils.getExt(url) === "ass") {
-            this.currentType = "ass";
+        this.art.emit('artplayerPluginLibass:switch', url);
+        if (url && this.utils.getExt(url) === 'ass') {
+            this.currentType = 'ass';
             this.libass.freeTrack();
             this.libass.setTrackByUrl(this.#toAbsoluteUrl(url));
             this.visible = this.art.subtitle.show;
         } else {
-            this.currentType = "webvtt";
+            this.currentType = 'webvtt';
             this.hide();
             this.libass.freeTrack();
         }
@@ -210,17 +228,17 @@ class LibassAdapter {
         this.timeOffset = offset;
     }
     get active() {
-        return this.currentType === "ass";
+        return this.currentType === 'ass';
     }
     get visible() {
         if (!this.libass) return false;
-        return this.libass.canvasParent.style.display !== "none";
+        return this.libass.canvasParent.style.display !== 'none';
     }
     set visible(visible) {
-        this.art.emit("artplayerPluginLibass:visible", visible);
+        this.art.emit('artplayerPluginLibass:visible', visible);
         this.#setVttVisible(!this.active);
         if (this.libass.canvasParent) {
-            this.libass.canvasParent.style.display = visible ? "block" : "none";
+            this.libass.canvasParent.style.display = visible ? 'block' : 'none';
             if (visible) this.libass.resize();
         }
     }
@@ -228,7 +246,7 @@ class LibassAdapter {
         return this.libass.timeOffset;
     }
     set timeOffset(offset) {
-        this.art.emit("artplayerPluginLibass:timeOffset", offset);
+        this.art.emit('artplayerPluginLibass:timeOffset', offset);
         this.libass.timeOffset = offset;
     }
     show() {
@@ -238,15 +256,15 @@ class LibassAdapter {
         this.visible = false;
     }
     destroy() {
-        this.art.emit("artplayerPluginLibass:destroy");
+        this.art.emit('artplayerPluginLibass:destroy');
         this.#removeEventListeners();
         this.libass.dispose();
         URL.revokeObjectURL(this.workerScriptUrl);
         this.libass = null;
     }
     async #createLibass(option = {}) {
-        if (!option.fallbackFont) return this.utils.errorHandle(option.fallbackFont, "artplayerPluginLibass: fallbackFont is required");
-        if (!option.workerUrl) option.workerUrl = "https://cdnjs.cloudflare.com/ajax/libs/libass-wasm/4.1.0/js/subtitles-octopus-worker.js";
+        if (!option.fallbackFont) return this.utils.errorHandle(option.fallbackFont, 'artplayerPluginLibass: fallbackFont is required');
+        if (!option.workerUrl) option.workerUrl = 'https://cdnjs.cloudflare.com/ajax/libs/libass-wasm/4.1.0/js/subtitles-octopus-worker.js';
         if (option.availableFonts) option.availableFonts = Object.entries(option.availableFonts).reduce((acc, [key, value])=>{
             acc[key] = this.#toAbsoluteUrl(value);
             return acc;
@@ -259,7 +277,7 @@ class LibassAdapter {
             fallbackFont: this.#toAbsoluteUrl(option.fallbackFont),
             fonts: option.fonts?.map((font)=>this.#toAbsoluteUrl(font))
         });
-        this.libass.canvasParent.className = "artplayer-plugin-libass";
+        this.libass.canvasParent.className = 'artplayer-plugin-libass';
         this.libass.canvasParent.style.cssText = `
             position: absolute;
             top: 0;
@@ -274,28 +292,28 @@ class LibassAdapter {
         this.switchHandler = this.switch.bind(this);
         this.visibleHandler = this.setVisibility.bind(this);
         this.offsetHandler = this.setOffset.bind(this);
-        this.art.on("subtitle", this.visibleHandler);
-        this.art.on("subtitleLoad", this.switchHandler);
-        this.art.on("subtitleOffset", this.offsetHandler);
-        this.art.once("destroy", this.destroy.bind(this));
+        this.art.on('subtitle', this.visibleHandler);
+        this.art.on('subtitleLoad', this.switchHandler);
+        this.art.on('subtitleOffset', this.offsetHandler);
+        this.art.once('destroy', this.destroy.bind(this));
     }
     #removeEventListeners() {
-        this.art.off("subtitle", this.visibleHandler);
-        this.art.off("subtitleLoad", this.switchHandler);
-        this.art.off("subtitleOffset", this.offsetHandler);
+        this.art.off('subtitle', this.visibleHandler);
+        this.art.off('subtitleLoad', this.switchHandler);
+        this.art.off('subtitleOffset', this.offsetHandler);
     }
     #setVttVisible(visible) {
-        this.$webvtt.style.visibility = visible ? "visible" : "hidden";
+        this.$webvtt.style.visibility = visible ? 'visible' : 'hidden';
     }
     #toAbsoluteUrl(url) {
         if (this.#isAbsoluteUrl(url)) return url;
         // handle absolute URL when the `Worker` of `BLOB` type loading network resources
         return new URL(url, document.baseURI).toString();
     }
-    #isAbsoluteUrl(url1) {
-        return /^https?:\/\//.test(url1);
+    #isAbsoluteUrl(url) {
+        return /^https?:\/\//.test(url);
     }
-    #loadWorker({ workerUrl , wasmUrl  }) {
+    #loadWorker({ workerUrl, wasmUrl }) {
         return new Promise((resolve)=>{
             fetch(workerUrl).then((res)=>res.text()).then((text)=>{
                 let workerScriptContent = text;
@@ -307,7 +325,7 @@ class LibassAdapter {
                 const workerBlob = new Blob([
                     workerScriptContent
                 ], {
-                    type: "text/javascript"
+                    type: 'text/javascript'
                 });
                 resolve(URL.createObjectURL(workerBlob));
             });
@@ -316,19 +334,20 @@ class LibassAdapter {
     #checkWebAssemblySupport() {
         let supportsWebAssembly = false;
         try {
-            if (typeof WebAssembly === "object" && typeof WebAssembly.instantiate === "function") {
-                const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+            if (typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'function') {
+                const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6D, 0x01, 0x00, 0x00, 0x00));
                 if (module instanceof WebAssembly.Module) supportsWebAssembly = new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
             }
-        } catch (e) {
-        //
+        } catch (error) {
+            console.error('WebAssembly is not supported in this browser.', error);
+            supportsWebAssembly = false;
         }
-        this.utils.errorHandle(supportsWebAssembly, "Browser does not support WebAssembly");
+        this.utils.errorHandle(supportsWebAssembly, 'Browser does not support WebAssembly');
     }
 }
 exports.default = LibassAdapter;
 
-},{"libass-wasm":"5YbrE","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5YbrE":[function(require,module,exports) {
+},{"libass-wasm":"h8iej","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"h8iej":[function(require,module,exports,__globalThis) {
 // # The following lists all copyright notices and licenses for the
 // # work contained in JavascriptSubtitlesOctopus per project.
 // 
@@ -1305,7 +1324,7 @@ var SubtitlesOctopus = function(options) {
     console.log("WebAssembly support detected: " + (supportsWebAssembly ? "yes" : "no"));
     var self = this;
     self.canvas = options.canvas; // HTML canvas element (optional if video specified)
-    self.renderMode = options.renderMode || (options.lossyRender ? "lossy" : "wasm-blend");
+    self.renderMode = options.renderMode || (options.lossyRender ? 'lossy' : 'wasm-blend');
     self.libassMemoryLimit = options.libassMemoryLimit || 0;
     self.libassGlyphLimit = options.libassGlyphLimit || 0;
     self.targetFps = options.targetFps || 24;
@@ -1318,11 +1337,11 @@ var SubtitlesOctopus = function(options) {
     self.canvasParent = null; // (internal) HTML canvas parent element
     self.fonts = options.fonts || []; // Array with links to fonts used in sub (optional)
     self.availableFonts = options.availableFonts || []; // Object with all available fonts (optional). Key is font name in lower case, value is link: {"arial": "/font1.ttf"}
-    self.fallbackFont = options.fallbackFont || "default.woff2"; // URL to override fallback font, for example, with a CJK one. Default fallback font is Liberation Sans (Optional)
+    self.fallbackFont = options.fallbackFont || 'default.woff2'; // URL to override fallback font, for example, with a CJK one. Default fallback font is Liberation Sans (Optional)
     self.lazyFileLoading = options.lazyFileLoading || false; // Load fonts in a lazy way. Requires Access-Control-Expose-Headers for Accept-Ranges, Content-Length, and Content-Encoding. If Content-Encoding is compressed, file will be fully fetched instead of just a HEAD request.
     self.onReadyEvent = options.onReady; // Function called when SubtitlesOctopus is ready (optional)
-    if (supportsWebAssembly) self.workerUrl = options.workerUrl || "subtitles-octopus-worker.js"; // Link to WebAssembly worker
-    else self.workerUrl = options.legacyWorkerUrl || "subtitles-octopus-worker-legacy.js"; // Link to legacy worker
+    if (supportsWebAssembly) self.workerUrl = options.workerUrl || 'subtitles-octopus-worker.js'; // Link to WebAssembly worker
+    else self.workerUrl = options.legacyWorkerUrl || 'subtitles-octopus-worker-legacy.js'; // Link to legacy worker
     self.subUrl = options.subUrl; // Link to sub file (optional if subContent specified)
     self.subContent = options.subContent || null; // Sub content (optional if subUrl specified)
     self.onErrorEvent = options.onError; // Function called in case of critical error meaning sub wouldn't be shown and you should use alternative method (for instance it occurs if browser doesn't support web workers).
@@ -1332,7 +1351,7 @@ var SubtitlesOctopus = function(options) {
     self.timeOffset = options.timeOffset || 0; // Time offset would be applied to currentTime from video (option)
     self.hasAlphaBug = false;
     (function() {
-        if (typeof ImageData.prototype.constructor === "function") try {
+        if (typeof ImageData.prototype.constructor === 'function') try {
             // try actually calling ImageData, as on some browsers it's reported
             // as existing but calling it errors out as "TypeError: Illegal constructor"
             new window.ImageData(new Uint8ClampedArray([
@@ -1345,8 +1364,8 @@ var SubtitlesOctopus = function(options) {
         } catch (e) {
             console.log("detected that ImageData is not constructable despite browser saying so");
         }
-        var canvas = document.createElement("canvas");
-        var ctx = canvas.getContext("2d");
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
         window.ImageData = function() {
             var i = 0;
             if (arguments[0] instanceof Uint8ClampedArray) var data = arguments[i++];
@@ -1358,31 +1377,31 @@ var SubtitlesOctopus = function(options) {
         };
     })();
     self.workerError = function(error) {
-        console.error("Worker error: ", error);
+        console.error('Worker error: ', error);
         if (self.onErrorEvent) self.onErrorEvent(error);
         if (!self.debug) {
             self.dispose();
-            throw new Error("Worker error: " + error);
+            throw new Error('Worker error: ' + error);
         }
     };
     // Not tested for repeated usage yet
     self.init = function() {
         if (!window.Worker) {
-            self.workerError("worker not supported");
+            self.workerError('worker not supported');
             return;
         }
         // Worker
         if (!self.worker) {
             self.worker = new Worker(self.workerUrl);
-            self.worker.addEventListener("message", self.onWorkerMessage);
-            self.worker.addEventListener("error", self.workerError);
+            self.worker.addEventListener('message', self.onWorkerMessage);
+            self.worker.addEventListener('error', self.workerError);
         }
         self.workerActive = false;
         self.createCanvas();
         self.setVideo(options.video);
         self.setSubUrl(options.subUrl);
         self.worker.postMessage({
-            target: "worker-init",
+            target: 'worker-init',
             width: self.canvas.width,
             height: self.canvas.height,
             URL: document.URL,
@@ -1406,19 +1425,19 @@ var SubtitlesOctopus = function(options) {
         if (!self.canvas) {
             if (self.video) {
                 self.isOurCanvas = true;
-                self.canvas = document.createElement("canvas");
-                self.canvas.className = "libassjs-canvas";
-                self.canvas.style.display = "none";
-                self.canvasParent = document.createElement("div");
-                self.canvasParent.className = "libassjs-canvas-parent";
+                self.canvas = document.createElement('canvas');
+                self.canvas.className = 'libassjs-canvas';
+                self.canvas.style.display = 'none';
+                self.canvasParent = document.createElement('div');
+                self.canvasParent.className = 'libassjs-canvas-parent';
                 self.canvasParent.appendChild(self.canvas);
                 if (self.video.nextSibling) self.video.parentNode.insertBefore(self.canvasParent, self.video.nextSibling);
                 else self.video.parentNode.appendChild(self.canvasParent);
-            } else if (!self.canvas) self.workerError("Don't know where to render: you should give video or canvas in options.");
+            } else if (!self.canvas) self.workerError('Don\'t know where to render: you should give video or canvas in options.');
         }
-        self.ctx = self.canvas.getContext("2d");
-        self.bufferCanvas = document.createElement("canvas");
-        self.bufferCanvasCtx = self.bufferCanvas.getContext("2d");
+        self.ctx = self.canvas.getContext('2d');
+        self.bufferCanvas = document.createElement('canvas');
+        self.bufferCanvasCtx = self.bufferCanvas.getContext('2d');
         // test for alpha bug, where e.g. WebKit can render a transparent pixel
         // (with alpha == 0) as non-black which then leads to visual artifacts
         self.bufferCanvas.width = 1;
@@ -1449,10 +1468,10 @@ var SubtitlesOctopus = function(options) {
         self.setIsPaused(true, self.video.currentTime + self.timeOffset);
     }
     function onSeeking() {
-        self.video.removeEventListener("timeupdate", onTimeUpdate, false);
+        self.video.removeEventListener('timeupdate', onTimeUpdate, false);
     }
     function onSeeked() {
-        self.video.addEventListener("timeupdate", onTimeUpdate, false);
+        self.video.addEventListener('timeupdate', onTimeUpdate, false);
         var currentTime = self.video.currentTime + self.timeOffset;
         self.setCurrentTime(currentTime);
     }
@@ -1469,13 +1488,13 @@ var SubtitlesOctopus = function(options) {
     self.setVideo = function(video) {
         self.video = video;
         if (self.video) {
-            self.video.addEventListener("timeupdate", onTimeUpdate, false);
-            self.video.addEventListener("playing", onPlaying, false);
-            self.video.addEventListener("pause", onPause, false);
-            self.video.addEventListener("seeking", onSeeking, false);
-            self.video.addEventListener("seeked", onSeeked, false);
-            self.video.addEventListener("ratechange", onRateChange, false);
-            self.video.addEventListener("waiting", onWaiting, false);
+            self.video.addEventListener('timeupdate', onTimeUpdate, false);
+            self.video.addEventListener('playing', onPlaying, false);
+            self.video.addEventListener('pause', onPause, false);
+            self.video.addEventListener('seeking', onSeeking, false);
+            self.video.addEventListener('seeked', onSeeked, false);
+            self.video.addEventListener('ratechange', onRateChange, false);
+            self.video.addEventListener('waiting', onWaiting, false);
             document.addEventListener("fullscreenchange", self.resizeWithTimeout, false);
             document.addEventListener("mozfullscreenchange", self.resizeWithTimeout, false);
             document.addEventListener("webkitfullscreenchange", self.resizeWithTimeout, false);
@@ -1487,7 +1506,7 @@ var SubtitlesOctopus = function(options) {
                 self.ro.observe(self.video);
             }
             if (self.video.videoWidth > 0) self.resize();
-            else self.video.addEventListener("loadedmetadata", onLoadedMetadata, false);
+            else self.video.addEventListener('loadedmetadata', onLoadedMetadata, false);
         }
     };
     self.getVideoPosition = function() {
@@ -1527,8 +1546,8 @@ var SubtitlesOctopus = function(options) {
         if (self.debug) {
             var drawTime = Math.round(performance.now() - beforeDrawTime);
             var blendTime = data.blendTime;
-            if (typeof blendTime !== "undefined") console.log("render: " + Math.round(data.spentTime - blendTime) + " ms, blend: " + Math.round(blendTime) + " ms, draw: " + drawTime + " ms; TOTAL=" + Math.round(data.spentTime + drawTime) + " ms");
-            else console.log(Math.round(data.spentTime) + " ms (+ " + drawTime + " ms draw)");
+            if (typeof blendTime !== 'undefined') console.log('render: ' + Math.round(data.spentTime - blendTime) + ' ms, blend: ' + Math.round(blendTime) + ' ms, draw: ' + drawTime + ' ms; TOTAL=' + Math.round(data.spentTime + drawTime) + ' ms');
+            else console.log(Math.round(data.spentTime) + ' ms (+ ' + drawTime + ' ms draw)');
             self.renderStart = performance.now();
         }
     }
@@ -1545,7 +1564,7 @@ var SubtitlesOctopus = function(options) {
         }
         if (self.debug) {
             var drawTime = Math.round(performance.now() - beforeDrawTime);
-            console.log(data.bitmaps.length + " bitmaps, libass: " + Math.round(data.libassTime) + "ms, decode: " + Math.round(data.decodeTime) + "ms, draw: " + drawTime + "ms");
+            console.log(data.bitmaps.length + ' bitmaps, libass: ' + Math.round(data.libassTime) + 'ms, decode: ' + Math.round(data.decodeTime) + 'ms, draw: ' + drawTime + 'ms');
             self.renderStart = performance.now();
         }
     }
@@ -1559,83 +1578,83 @@ var SubtitlesOctopus = function(options) {
         }
         var data = event.data;
         switch(data.target){
-            case "stdout":
+            case 'stdout':
                 console.log(data.content);
                 break;
-            case "console-log":
+            case 'console-log':
                 console.log.apply(console, JSON.parse(data.content));
                 break;
-            case "console-debug":
+            case 'console-debug':
                 console.debug.apply(console, JSON.parse(data.content));
                 break;
-            case "console-info":
+            case 'console-info':
                 console.info.apply(console, JSON.parse(data.content));
                 break;
-            case "console-warn":
+            case 'console-warn':
                 console.warn.apply(console, JSON.parse(data.content));
                 break;
-            case "console-error":
+            case 'console-error':
                 console.error.apply(console, JSON.parse(data.content));
                 break;
-            case "stderr":
+            case 'stderr':
                 console.error(data.content);
                 break;
-            case "window":
+            case 'window':
                 window[data.method]();
                 break;
-            case "canvas":
+            case 'canvas':
                 switch(data.op){
-                    case "getContext":
+                    case 'getContext':
                         self.ctx = self.canvas.getContext(data.type, data.attributes);
                         break;
-                    case "resize":
+                    case 'resize':
                         self.resize(data.width, data.height);
                         break;
-                    case "renderCanvas":
+                    case 'renderCanvas':
                         if (self.lastRenderTime < data.time) {
                             self.lastRenderTime = data.time;
                             self.renderFramesData = data;
                             window.requestAnimationFrame(renderFrames);
                         }
                         break;
-                    case "renderFastCanvas":
+                    case 'renderFastCanvas':
                         if (self.lastRenderTime < data.time) {
                             self.lastRenderTime = data.time;
                             self.renderFramesData = data;
                             window.requestAnimationFrame(renderFastFrames);
                         }
                         break;
-                    case "setObjectProperty":
+                    case 'setObjectProperty':
                         self.canvas[data.object][data.property] = data.value;
                         break;
                     default:
-                        throw "eh?";
+                        throw 'eh?';
                 }
                 break;
-            case "tick":
+            case 'tick':
                 self.frameId = data.id;
                 self.worker.postMessage({
-                    target: "tock",
+                    target: 'tock',
                     id: self.frameId
                 });
                 break;
-            case "custom":
-                if (self["onCustomMessage"]) self["onCustomMessage"](event);
-                else throw "Custom message received but client onCustomMessage not implemented.";
+            case 'custom':
+                if (self['onCustomMessage']) self['onCustomMessage'](event);
+                else throw 'Custom message received but client onCustomMessage not implemented.';
                 break;
-            case "setimmediate":
+            case 'setimmediate':
                 self.worker.postMessage({
-                    target: "setimmediate"
+                    target: 'setimmediate'
                 });
                 break;
-            case "get-events":
+            case 'get-events':
                 break;
-            case "get-styles":
+            case 'get-styles':
                 break;
-            case "ready":
+            case 'ready':
                 break;
             default:
-                throw "what? " + data.target;
+                throw 'what? ' + data.target;
         }
     };
     function _computeCanvasSize(width, height) {
@@ -1653,8 +1672,8 @@ var SubtitlesOctopus = function(options) {
             height = newH;
         }
         return {
-            "width": width,
-            "height": height
+            'width': width,
+            'height': height
         };
     }
     self.resize = function(width, height, top, left) {
@@ -1671,24 +1690,24 @@ var SubtitlesOctopus = function(options) {
             left = videoSize.x;
         }
         if (!width || !height) {
-            if (!self.video) console.error("width or height is 0. You should specify width & height for resize.");
+            if (!self.video) console.error('width or height is 0. You should specify width & height for resize.');
             return;
         }
         if (self.canvas.width != width || self.canvas.height != height || self.canvas.style.top != top || self.canvas.style.left != left) {
             self.canvas.width = width;
             self.canvas.height = height;
             if (videoSize != null) {
-                self.canvasParent.style.position = "relative";
-                self.canvas.style.display = "block";
-                self.canvas.style.position = "absolute";
-                self.canvas.style.width = videoSize.width + "px";
-                self.canvas.style.height = videoSize.height + "px";
-                self.canvas.style.top = top + "px";
-                self.canvas.style.left = left + "px";
-                self.canvas.style.pointerEvents = "none";
+                self.canvasParent.style.position = 'relative';
+                self.canvas.style.display = 'block';
+                self.canvas.style.position = 'absolute';
+                self.canvas.style.width = videoSize.width + 'px';
+                self.canvas.style.height = videoSize.height + 'px';
+                self.canvas.style.top = top + 'px';
+                self.canvas.style.left = left + 'px';
+                self.canvas.style.pointerEvents = 'none';
             }
             self.worker.postMessage({
-                target: "canvas",
+                target: 'canvas',
                 width: self.canvas.width,
                 height: self.canvas.height
             });
@@ -1700,78 +1719,78 @@ var SubtitlesOctopus = function(options) {
     };
     self.runBenchmark = function() {
         self.worker.postMessage({
-            target: "runBenchmark"
+            target: 'runBenchmark'
         });
     };
     self.customMessage = function(data, options) {
         options = options || {};
         self.worker.postMessage({
-            target: "custom",
+            target: 'custom',
             userData: data,
             preMain: options.preMain
         });
     };
     self.setCurrentTime = function(currentTime) {
         self.worker.postMessage({
-            target: "video",
+            target: 'video',
             currentTime: currentTime
         });
     };
     self.setTrackByUrl = function(url) {
         self.worker.postMessage({
-            target: "set-track-by-url",
+            target: 'set-track-by-url',
             url: url
         });
     };
     self.setTrack = function(content) {
         self.worker.postMessage({
-            target: "set-track",
+            target: 'set-track',
             content: content
         });
     };
     self.freeTrack = function(content) {
         self.worker.postMessage({
-            target: "free-track"
+            target: 'free-track'
         });
     };
     self.render = self.setCurrentTime;
     self.setIsPaused = function(isPaused, currentTime) {
         self.worker.postMessage({
-            target: "video",
+            target: 'video',
             isPaused: isPaused,
             currentTime: currentTime
         });
     };
     self.setRate = function(rate) {
         self.worker.postMessage({
-            target: "video",
+            target: 'video',
             rate: rate
         });
     };
     self.dispose = function() {
         self.worker.postMessage({
-            target: "destroy"
+            target: 'destroy'
         });
         self.worker.terminate();
-        self.worker.removeEventListener("message", self.onWorkerMessage);
-        self.worker.removeEventListener("error", self.workerError);
+        self.worker.removeEventListener('message', self.onWorkerMessage);
+        self.worker.removeEventListener('error', self.workerError);
         self.workerActive = false;
         self.worker = null;
         // Remove the canvas element to remove residual subtitles rendered on player
         if (self.video) {
-            self.video.removeEventListener("timeupdate", onTimeUpdate, false);
-            self.video.removeEventListener("playing", onPlaying, false);
-            self.video.removeEventListener("pause", onPause, false);
-            self.video.removeEventListener("seeking", onSeeking, false);
-            self.video.removeEventListener("seeked", onSeeked, false);
-            self.video.removeEventListener("ratechange", onRateChange, false);
-            self.video.removeEventListener("waiting", onWaiting, false);
-            self.video.removeEventListener("loadedmetadata", onLoadedMetadata, false);
-            document.removeEventListener("fullscreenchange", self.resizeWithTimeout, false);
-            document.removeEventListener("mozfullscreenchange", self.resizeWithTimeout, false);
-            document.removeEventListener("webkitfullscreenchange", self.resizeWithTimeout, false);
-            document.removeEventListener("msfullscreenchange", self.resizeWithTimeout, false);
-            window.removeEventListener("resize", self.resizeWithTimeout, false);
+            self.video.removeEventListener('timeupdate', onTimeUpdate, false);
+            self.video.removeEventListener('playing', onPlaying, false);
+            self.video.removeEventListener('pause', onPause, false);
+            self.video.removeEventListener('seeking', onSeeking, false);
+            self.video.removeEventListener('seeked', onSeeked, false);
+            self.video.removeEventListener('ratechange', onRateChange, false);
+            self.video.removeEventListener('waiting', onWaiting, false);
+            self.video.removeEventListener('loadedmetadata', onLoadedMetadata, false);
+            document.removeEventListener('fullscreenchange', self.resizeWithTimeout, false);
+            document.removeEventListener('mozfullscreenchange', self.resizeWithTimeout, false);
+            document.removeEventListener('webkitfullscreenchange', self.resizeWithTimeout, false);
+            document.removeEventListener('msfullscreenchange', self.resizeWithTimeout, false);
+            window.removeEventListener('resize', self.resizeWithTimeout, false);
             self.video.parentNode.removeChild(self.canvasParent);
             self.video = null;
         }
@@ -1785,26 +1804,26 @@ var SubtitlesOctopus = function(options) {
     };
     self.fetchFromWorker = function(workerOptions, onSuccess, onError) {
         try {
-            var target = workerOptions["target"];
+            var target = workerOptions['target'];
             var timeout = setTimeout(function() {
-                reject(Error("Error: Timeout while try to fetch " + target));
+                reject(Error('Error: Timeout while try to fetch ' + target));
             }, 5000);
             var resolve = function(event) {
                 if (event.data.target == target) {
                     onSuccess(event.data);
-                    self.worker.removeEventListener("message", resolve);
-                    self.worker.removeEventListener("error", reject);
+                    self.worker.removeEventListener('message', resolve);
+                    self.worker.removeEventListener('error', reject);
                     clearTimeout(timeout);
                 }
             };
             var reject = function(event) {
                 onError(event);
-                self.worker.removeEventListener("message", resolve);
-                self.worker.removeEventListener("error", reject);
+                self.worker.removeEventListener('message', resolve);
+                self.worker.removeEventListener('error', reject);
                 clearTimeout(timeout);
             };
-            self.worker.addEventListener("message", resolve);
-            self.worker.addEventListener("error", reject);
+            self.worker.addEventListener('message', resolve);
+            self.worker.addEventListener('error', reject);
             self.worker.postMessage(workerOptions);
         } catch (error) {
             onError(error);
@@ -1812,75 +1831,75 @@ var SubtitlesOctopus = function(options) {
     };
     self.createEvent = function(event) {
         self.worker.postMessage({
-            target: "create-event",
+            target: 'create-event',
             event: event
         });
     };
     self.getEvents = function(onSuccess, onError) {
         self.fetchFromWorker({
-            target: "get-events"
+            target: 'get-events'
         }, function(data) {
             onSuccess(data.events);
         }, onError);
     };
     self.setEvent = function(event, index) {
         self.worker.postMessage({
-            target: "set-event",
+            target: 'set-event',
             event: event,
             index: index
         });
     };
     self.removeEvent = function(index) {
         self.worker.postMessage({
-            target: "remove-event",
+            target: 'remove-event',
             index: index
         });
     };
     self.createStyle = function(style) {
         self.worker.postMessage({
-            target: "create-style",
+            target: 'create-style',
             style: style
         });
     };
     self.getStyles = function(onSuccess, onError) {
         self.fetchFromWorker({
-            target: "get-styles"
+            target: 'get-styles'
         }, function(data) {
             onSuccess(data.styles);
         }, onError);
     };
     self.setStyle = function(style, index) {
         self.worker.postMessage({
-            target: "set-style",
+            target: 'set-style',
             style: style,
             index: index
         });
     };
     self.removeStyle = function(index) {
         self.worker.postMessage({
-            target: "remove-style",
+            target: 'remove-style',
             index: index
         });
     };
     self.init();
 };
-if (typeof SubtitlesOctopusOnLoad == "function") SubtitlesOctopusOnLoad();
-if (0, module.exports) exports = module.exports = SubtitlesOctopus;
+if (typeof SubtitlesOctopusOnLoad == 'function') SubtitlesOctopusOnLoad();
+if (module.exports) exports = module.exports = SubtitlesOctopus;
 
-},{}],"6SDkN":[function(require,module,exports) {
+},{}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
     };
 };
 exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
+    Object.defineProperty(a, '__esModule', {
         value: true
     });
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -1897,6 +1916,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["gEVO5"], "gEVO5", "parcelRequire03dd")
+},{}]},["hVOIc"], "hVOIc", "parcelRequire4dc0", {})
 
 //# sourceMappingURL=index.js.map

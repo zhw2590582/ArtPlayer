@@ -198,7 +198,7 @@ if (typeof document !== 'undefined') {
 if (typeof window !== 'undefined') window.artplayerPluginLiquidGlass = artplayerPluginLiquidGlass;
 
 },{"bundle-text:./style.less":"aTKsv","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"aTKsv":[function(require,module,exports,__globalThis) {
-module.exports = ".artplayer-plugin-liquid-glass.art-control-show .art-bottom {\n  padding-bottom: var(--art-padding);\n  background-image: none !important;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom .art-liquid-glass {\n  padding: var(--art-padding) var(--art-padding) 5px;\n  backdrop-filter: blur(10px);\n  background-color: #ffffff1a;\n  border-radius: 5px;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-layer-auto-playback {\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-padding) * 4 + 10px);\n}\n";
+module.exports = ".artplayer-plugin-liquid-glass.art-control-show .art-bottom {\n  padding-bottom: var(--art-padding);\n  background-image: none;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom .art-liquid-glass {\n  backdrop-filter: blur(12px);\n  padding: var(--art-padding) var(--art-padding) 5px;\n  background-color: #0003;\n  border-radius: 5px;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-layer-auto-playback {\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-padding) * 4 + 10px);\n}\n";
 
 },{}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
