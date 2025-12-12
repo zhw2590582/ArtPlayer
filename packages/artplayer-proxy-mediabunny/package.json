@@ -1,0 +1,40 @@
+{
+  "name": "artplayer-proxy-mediabunny",
+  "version": "1.0.0",
+  "description": "mediabunny proxy for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/artplayer-proxy-mediabunny.d.ts",
+      "import": "./dist/artplayer-proxy-mediabunny.mjs",
+      "require": "./dist/artplayer-proxy-mediabunny.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-proxy-mediabunny.d.ts",
+      "import": "./dist/artplayer-proxy-mediabunny.legacy.js",
+      "require": "./dist/artplayer-proxy-mediabunny.legacy.js"
+    }
+  },
+  "main": "./dist/artplayer-proxy-mediabunny.js",
+  "module": "./dist/artplayer-proxy-mediabunny.mjs",
+  "types": "./types/artplayer-proxy-mediabunny.d.ts",
+  "legacy": "./dist/artplayer-proxy-mediabunny.legacy.js",
+  "browserslist": "last 1 Chrome version",
+  "dependencies": {
+    "mediabunny": "^1.26.0"
+  }
+}

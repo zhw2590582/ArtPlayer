@@ -32,7 +32,7 @@ fs.writeFileSync(artplayerTSoutput, code.trim())
 console.log(`✨ Built ${artplayerTSoutput}`);
 
 (async function () {
-  const pluginsTS = glob.sync('packages/artplayer-plugin-*/types/*.d.ts')
+  const pluginsTS = glob.sync('packages/artplayer-*-*/types/*.d.ts')
   for (let index = 0; index < pluginsTS.length; index++) {
     const type = pluginsTS[index]
     const { name, file } = parsePluginInfo(type)

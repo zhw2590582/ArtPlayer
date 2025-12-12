@@ -11,5 +11,5 @@ declare const artplayerPluginAss: (options: Options) => (art: Artplayer) => {
 
 export default artplayerPluginAss
 
-export = artplayerPluginLibass
+export = artplayerPluginLibass;
 export as namespace artplayerPluginLibass;
