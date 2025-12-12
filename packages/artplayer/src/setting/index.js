@@ -173,9 +173,9 @@ export default class Setting extends Component {
       const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2
 
       const settingHeight
-                = this.active === this.option
-                  ? this.active.length * SETTING_ITEM_HEIGHT
-                  : (this.active.length + 1) * SETTING_ITEM_HEIGHT
+        = this.active === this.option
+          ? this.active.length * SETTING_ITEM_HEIGHT
+          : (this.active.length + 1) * SETTING_ITEM_HEIGHT
 
       setStyle($setting, 'height', `${settingHeight}px`)
       setStyle($setting, 'width', `${settingWidth}px`)

@@ -127,6 +127,7 @@ let art = new Artplayer({
 ## Proxys
 
 - [Canvas](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas)  <img src="https://img.shields.io/npm/dm/artplayer-proxy-canvas.svg?sanitize=true">
+- [Mediabunny](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-mediabunny/index.js&example=mediabunny) (WIP)
 
 ## Changelog
 

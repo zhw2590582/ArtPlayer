@@ -115,7 +115,7 @@ export default class LibassAdapter {
 
     if (!option.workerUrl) {
       option.workerUrl
-                = 'https://cdnjs.cloudflare.com/ajax/libs/libass-wasm/4.1.0/js/subtitles-octopus-worker.js'
+        = 'https://cdnjs.cloudflare.com/ajax/libs/libass-wasm/4.1.0/js/subtitles-octopus-worker.js'
     }
 
     if (option.availableFonts) {

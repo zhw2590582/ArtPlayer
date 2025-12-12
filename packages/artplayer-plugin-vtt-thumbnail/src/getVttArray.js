@@ -36,7 +36,7 @@ export default async function getVttArray(vttUrl = '') {
       continue
 
     const timeReg
-            = /((?:\d{2}:)?(?:\d{2}:)?\d{2}(?:.\d{3})?) ?--> ?((?:\d{2}:)?(?:\d{2}:)?\d{2}(?:.\d{3})?)/
+      = /((?:\d{2}:)?(?:\d{2}:)?\d{2}(?:.\d{3})?) ?--> ?((?:\d{2}:)?(?:\d{2}:)?\d{2}(?:.\d{3})?)/
     const timeMatch = time.match(timeReg)
 
     const textReg = /(.*)#(\w{4})=(.*)/
