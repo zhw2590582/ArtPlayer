@@ -1,4 +1,4 @@
-import { append, clamp, getRect, includeFromEvent, isMobile, query, secondToTime, setStyle } from '../utils'
+import { addClass, append, clamp, getRect, includeFromEvent, isMobile, query, removeClass, secondToTime, setStyle } from '../utils'
 
 export function getPosFromEvent(art, event) {
   const { $progress } = art.template
@@ -28,6 +28,7 @@ export function setCurrentTime(art, event) {
 export default function progress(options) {
   return (art) => {
     const { icons, option, proxy } = art
+    const { $player } = art.template
 
     return {
       ...options,
@@ -38,7 +39,7 @@ export default function progress(options) {
                     <div class="art-progress-played"></div>
                     <div class="art-progress-highlight"></div>
                     <div class="art-progress-indicator"></div>
-                    <div class="art-progress-tip"></div>
+                    <div class="art-progress-tip">00:00</div>
                 </div>
             `,
       mounted: ($control) => {
@@ -77,7 +78,7 @@ export default function progress(options) {
 
         function showTime(event, touch) {
           const { width, time } = touch || getPosFromEvent(art, event)
-          $tip.textContent = time
+          $tip.textContent = time || '00:00'
           const tipWidth = $tip.clientWidth
           if (width <= tipWidth / 2) {
             setStyle($tip, 'left', 0)
@@ -109,6 +110,20 @@ export default function progress(options) {
 
           if (type === 'hover') {
             setStyle($hover, 'width', `${percentage * 100}%`)
+
+            if (includeFromEvent(event, $highlight)) {
+              showHighlight(event)
+            }
+            else {
+              showTime(event)
+            }
+
+            if (percentage === 0) {
+              removeClass($player, 'art-progress-hover')
+            }
+            else {
+              addClass($player, 'art-progress-hover')
+            }
           }
 
           if (type === 'played') {
@@ -117,13 +132,13 @@ export default function progress(options) {
           }
 
           if (isMobileDragging) {
-            setStyle($tip, 'display', 'flex')
+            addClass($player, 'art-progress-hover')
             const width = $control.clientWidth * percentage
             const time = secondToTime(percentage * art.duration)
             showTime(event, { width, time })
             clearTimeout(tipTimer)
             tipTimer = setTimeout(() => {
-              setStyle($tip, 'display', 'none')
+              removeClass($player, 'art-progress-hover')
             }, 500)
           }
         }
@@ -163,17 +178,9 @@ export default function progress(options) {
           proxy($control, 'mousemove', (event) => {
             const { percentage } = getPosFromEvent(art, event)
             art.emit('setBar', 'hover', percentage, event)
-            setStyle($tip, 'display', 'flex')
-            if (includeFromEvent(event, $highlight)) {
-              showHighlight(event)
-            }
-            else {
-              showTime(event)
-            }
           })
 
           proxy($control, 'mouseleave', (event) => {
-            setStyle($tip, 'display', 'none')
             art.emit('setBar', 'hover', 0, event)
           })
 
