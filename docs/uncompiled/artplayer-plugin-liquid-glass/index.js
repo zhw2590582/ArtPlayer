@@ -225,8 +225,15 @@ function artplayerPluginLiquidGlass(option = {}) {
         append($liquidGlass, $progress);
         append($liquidGlass, $controls);
         art.on('control', (state)=>{
-            if (state) $liquidGlass.style.width = option.width || '500px';
-            else $liquidGlass.style.width = '';
+            if (state) {
+                $liquidGlass.style.width = option.width;
+                $liquidGlass.style['max-width'] = option['max-width'];
+                $liquidGlass.style['min-width'] = option['min-width'];
+            } else {
+                $liquidGlass.style.width = '';
+                $liquidGlass.style['max-width'] = '';
+                $liquidGlass.style['min-width'] = '';
+            }
         });
         return {
             name: 'artplayerPluginLiquidGlass'
@@ -249,7 +256,7 @@ if (typeof document !== 'undefined') {
 if (typeof window !== 'undefined') window.artplayerPluginLiquidGlass = artplayerPluginLiquidGlass;
 
 },{"bundle-text:./style.less":"aTKsv","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"aTKsv":[function(require,module,exports,__globalThis) {
-module.exports = ".artplayer-plugin-liquid-glass.art-control-show {\n  --art-control-height: 42px !important;\n  --art-control-icon-size: 24px !important;\n  --art-control-icon-scale: 1.1 !important;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom {\n  padding-bottom: var(--art-padding);\n  background-image: none;\n  align-items: center;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom .art-liquid-glass {\n  backdrop-filter: blur(12px);\n  padding: var(--art-padding) calc(var(--art-padding) * 1.5) 5px;\n  background-color: #00000040;\n  border-radius: 8px;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom .art-control-progress-inner {\n  border-radius: 5px;\n  overflow: hidden;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-settings {\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-padding));\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-layer-auto-playback {\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-padding) * 4 + 10px);\n}\n";
+module.exports = ".artplayer-plugin-liquid-glass.art-control-show {\n  --art-control-height: 42px;\n  --art-control-icon-size: 24px;\n  --art-control-icon-scale: 1.1;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom {\n  padding-bottom: var(--art-padding);\n  background-image: none;\n  align-items: center;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom .art-liquid-glass {\n  backdrop-filter: blur(12px);\n  padding: var(--art-padding) calc(var(--art-padding) * 1.5) 5px;\n  background-color: #00000040;\n  border-radius: 8px;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom .art-control-progress-inner {\n  border-radius: 5px;\n  overflow: hidden;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-settings {\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-padding));\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-layer-auto-playback {\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-padding) * 4 + 10px);\n}\n";
 
 },{}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {

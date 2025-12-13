@@ -10,7 +10,6 @@ let art = new Artplayer({
   fullscreen: true,
   fullscreenWeb: true,
   miniProgressBar: true,
-  autoPlayback: true,
   flip: true,
   playbackRate: true,
   aspectRatio: true,
@@ -22,7 +21,9 @@ let art = new Artplayer({
   },
   plugins: [
     artplayerPluginLiquidGlass({
-      width: '500px',
+      width: '75%',
+      'max-width': '640px',
+      'min-width': '320px',
     }),
   ],
 })
