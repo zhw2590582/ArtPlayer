@@ -15,5 +15,11 @@ const art = new Artplayer({
     miniProgressBar: true,
     autoPlayback: true,
     autoOrientation: true,
+    thumbnails: {
+        url: '/assets/sample/frag_bunny.png',
+        number: 60,
+        column: 10,
+        scale: 0.85,
+    },
     proxy: artplayerProxyMediabunny(),
 })
