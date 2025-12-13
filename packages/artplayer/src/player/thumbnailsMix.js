@@ -7,16 +7,14 @@ export default function thumbnailsMix(art) {
   } = art
 
   let timer = null
+  let loding = false
   let image = null
-  let loading = false
-  let isLoad = false
 
   function reset() {
     clearTimeout(timer)
     timer = null
+    loding = false
     image = null
-    loading = false
-    isLoad = false
   }
 
   function showThumbnails(posWidth) {
@@ -55,13 +53,13 @@ export default function thumbnailsMix(art) {
     const isMobileDragging = type === 'played' && event && isMobile
 
     if (type === 'hover' || isMobileDragging) {
-      if (!loading) {
-        loading = true
+      if (!image && !loding) {
+        loding = true
         image = await loadImg(url, scale)
-        isLoad = true
+        loding = false
       }
 
-      if (!isLoad)
+      if (!image)
         return
 
       const width = $progress.clientWidth * percentage

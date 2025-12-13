@@ -4226,15 +4226,13 @@ var _utils = require("../utils");
 function thumbnailsMix(art) {
     const { option, template: { $progress, $video } } = art;
     let timer = null;
+    let loding = false;
     let image = null;
-    let loading = false;
-    let isLoad = false;
     function reset() {
         clearTimeout(timer);
         timer = null;
+        loding = false;
         image = null;
-        loading = false;
-        isLoad = false;
     }
     function showThumbnails(posWidth) {
         const $thumbnails = art.controls?.thumbnails;
@@ -4260,12 +4258,12 @@ function thumbnailsMix(art) {
         if (!$thumbnails || !url) return;
         const isMobileDragging = type === 'played' && event && (0, _utils.isMobile);
         if (type === 'hover' || isMobileDragging) {
-            if (!loading) {
-                loading = true;
+            if (!image && !loding) {
+                loding = true;
                 image = await (0, _utils.loadImg)(url, scale);
-                isLoad = true;
+                loding = false;
             }
-            if (!isLoad) return;
+            if (!image) return;
             const width = $progress.clientWidth * percentage;
             if (width > 0 && width < $progress.clientWidth) showThumbnails(width);
         }
