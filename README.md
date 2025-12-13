@@ -116,6 +116,7 @@ let art = new Artplayer({
 - [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) (WIP)
 - [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) (WIP)
 - [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) (WIP)
+- [artplayer-plugin-liquid-glass](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-liquid-glass/index.js&example=liquid.glass) (WIP)
 ## Libraries
 
 - [hls.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js&example=hls)
