@@ -21,5 +21,5 @@ declare const artplayerPluginDanmukuMask: (option?: Option) => (art: Artplayer) 
 
 export default artplayerPluginDanmukuMask
 
-export = artplayerPluginDanmukuMask
+export = artplayerPluginDanmukuMask;
 export as namespace artplayerPluginDanmukuMask;

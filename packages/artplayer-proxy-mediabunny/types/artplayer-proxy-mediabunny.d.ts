@@ -1,6 +1,6 @@
 import type Artplayer from 'artplayer'
 
-interface Option {
+type Option = {
   eventDelay?: number
   loadTimeout?: number
   timeupdateInterval?: number
