@@ -616,7 +616,10 @@ function createMediabunnyEngine({ canvas, ctx, events, option = {} }) {
     }
     async function play() {
         if (!_paused) return;
-        _ended = false;
+        if (_ended) {
+            _ended = false;
+            await seek(0);
+        }
         _paused = false;
         await audio.play();
         video.start(audio);
@@ -16554,7 +16557,10 @@ function createVideoEngine({ canvas, ctx, events, timeupdateInterval = 250, avSy
         }
         if (Number.isFinite(_duration) && t >= _duration) {
             stop();
+            stalled = false;
             events.emit('ended');
+            events.emit('pause');
+            events.emit('canplay');
             return;
         }
         if (nextFrame && nextFrame.timestamp <= t) {

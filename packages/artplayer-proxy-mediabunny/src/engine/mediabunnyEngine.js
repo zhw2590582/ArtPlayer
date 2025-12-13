@@ -134,7 +134,10 @@ export default function createMediabunnyEngine({
   async function play() {
     if (!_paused)
       return
-    _ended = false
+    if (_ended) {
+      _ended = false
+      await seek(0)
+    }
     _paused = false
     await audio.play()
     video.start(audio)

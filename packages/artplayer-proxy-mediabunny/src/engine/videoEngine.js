@@ -231,7 +231,10 @@ export default function createVideoEngine({
 
     if (Number.isFinite(_duration) && t >= _duration) {
       stop()
+      stalled = false
       events.emit('ended')
+      events.emit('pause')
+      events.emit('canplay')
       return
     }
 
