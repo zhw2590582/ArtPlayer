@@ -81,6 +81,9 @@
                 }
 
                 .art-progress-tip {
+                    transform-origin: bottom center;
+                    transform: scale(0.5);
+                    opacity: 0;
                     position: absolute;
                     z-index: 50;
                     top: -25px;
@@ -91,6 +94,7 @@
                     border-radius: var(--art-border-radius);
                     white-space: nowrap;
                     background-color: var(--art-tip-background);
+                    transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;
                 }
             }
 
@@ -102,13 +106,16 @@
         }
 
         .art-control-thumbnails {
-            display: none;
+            transform-origin: bottom center;
+            transform: scale(0.5);
+            opacity: 0;
             position: absolute;
             bottom: calc(var(--art-bottom-gap) + 10px);
             left: 0;
             border-radius: var(--art-border-radius);
             pointer-events: none;
             background-color: var(--art-widget-background);
+            transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;
             box-shadow:
                 0 1px 3px 0 rgb(0 0 0 / 0.2),
                 0 1px 2px -1px rgb(0 0 0 / 0.2);
@@ -118,6 +125,15 @@
     &:hover {
         .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {
             transform: scale(1);
+        }
+    }
+}
+
+.art-progress-hover {
+    .art-bottom .art-progress {
+        .art-control-progress .art-control-progress-inner .art-progress-tip, .art-control-thumbnails {
+            transform: scale(1);
+            opacity: 1;
         }
     }
 }

@@ -2,7 +2,6 @@ import { def, isMobile, loadImg, setStyle } from '../utils'
 
 export default function thumbnailsMix(art) {
   const {
-    events,
     option,
     template: { $progress, $video },
   } = art
@@ -11,7 +10,6 @@ export default function thumbnailsMix(art) {
   let image = null
   let loading = false
   let isLoad = false
-  let isHover = false
 
   function reset() {
     clearTimeout(timer)
@@ -48,16 +46,6 @@ export default function thumbnailsMix(art) {
     }
   }
 
-  events.hover(
-    $progress,
-    () => {
-      isHover = true
-    },
-    () => {
-      isHover = false
-    },
-  )
-
   art.on('setBar', async (type, percentage, event) => {
     const $thumbnails = art.controls?.thumbnails
     const { url, scale } = option.thumbnails
@@ -73,26 +61,13 @@ export default function thumbnailsMix(art) {
         isLoad = true
       }
 
-      if (!isLoad || !isHover)
+      if (!isLoad)
         return
 
       const width = $progress.clientWidth * percentage
-      setStyle($thumbnails, 'display', 'flex')
 
       if (width > 0 && width < $progress.clientWidth) {
         showThumbnails(width)
-      }
-      else {
-        if (!isMobile) {
-          setStyle($thumbnails, 'display', 'none')
-        }
-      }
-
-      if (isMobileDragging) {
-        clearTimeout(timer)
-        timer = setTimeout(() => {
-          setStyle($thumbnails, 'display', 'none')
-        }, 500)
       }
     }
   })
