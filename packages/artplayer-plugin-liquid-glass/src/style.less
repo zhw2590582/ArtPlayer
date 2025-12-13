@@ -1,17 +1,33 @@
-.artplayer-plugin-liquid-glass.art-control-show {
-    .art-bottom {
-        background-image: none;
-        padding-bottom: var(--art-padding);
+.artplayer-plugin-liquid-glass {
+    &.art-control-show {
+        --art-control-height: 42px !important;
+        --art-control-icon-size: 24px !important;
+        --art-control-icon-scale: 1.1 !important;
 
-        .art-liquid-glass {
-            border-radius: 5px;
-            backdrop-filter: blur(12px);
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: var(--art-padding) var(--art-padding) 5px;
+        .art-bottom {
+            align-items: center;
+            background-image: none;
+            padding-bottom: var(--art-padding);
+
+            .art-liquid-glass {
+                border-radius: 8px;
+                backdrop-filter: blur(12px);
+                background-color: rgba(0, 0, 0, 0.25);
+                padding: var(--art-padding) calc(var(--art-padding) * 1.5) 5px;
+            }
+
+            .art-control-progress-inner {
+                border-radius: 5px;
+                overflow: hidden;
+            }
         }
-    }
 
-    .art-layer-auto-playback {
-        bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-padding) * 4 + 10px);
+        .art-settings {
+            bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-padding));
+        }
+
+        .art-layer-auto-playback {
+            bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-padding) * 4 + 10px);
+        }
     }
 }

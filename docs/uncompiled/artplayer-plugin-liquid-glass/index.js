@@ -94,7 +94,54 @@
 
     function localRequire(x) {
       var res = localRequire.resolve(x);
-      return res === false ? {} : newRequire(res);
+      if (res === false) {
+        return {};
+      }
+      // Synthesize a module to follow re-exports.
+      if (Array.isArray(res)) {
+        var m = {__esModule: true};
+        res.forEach(function (v) {
+          var key = v[0];
+          var id = v[1];
+          var exp = v[2] || v[0];
+          var x = newRequire(id);
+          if (key === '*') {
+            Object.keys(x).forEach(function (key) {
+              if (
+                key === 'default' ||
+                key === '__esModule' ||
+                Object.prototype.hasOwnProperty.call(m, key)
+              ) {
+                return;
+              }
+
+              Object.defineProperty(m, key, {
+                enumerable: true,
+                get: function () {
+                  return x[key];
+                },
+              });
+            });
+          } else if (exp === '*') {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              value: x,
+            });
+          } else {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              get: function () {
+                if (exp === 'default') {
+                  return x.__esModule ? x.default : x;
+                }
+                return x[exp];
+              },
+            });
+          }
+        });
+        return m;
+      }
+      return newRequire(res);
     }
 
     function resolve(x) {
@@ -166,7 +213,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginLiquidGlass);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
-function artplayerPluginLiquidGlass(option) {
+function artplayerPluginLiquidGlass(option = {}) {
     return (art)=>{
         const { constructor } = art;
         const { addClass, append, createElement } = constructor.utils;
@@ -177,6 +224,10 @@ function artplayerPluginLiquidGlass(option) {
         append($bottom, $liquidGlass);
         append($liquidGlass, $progress);
         append($liquidGlass, $controls);
+        art.on('control', (state)=>{
+            if (state) $liquidGlass.style.width = option.width || '500px';
+            else $liquidGlass.style.width = '';
+        });
         return {
             name: 'artplayerPluginLiquidGlass'
         };
@@ -198,7 +249,7 @@ if (typeof document !== 'undefined') {
 if (typeof window !== 'undefined') window.artplayerPluginLiquidGlass = artplayerPluginLiquidGlass;
 
 },{"bundle-text:./style.less":"aTKsv","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"aTKsv":[function(require,module,exports,__globalThis) {
-module.exports = ".artplayer-plugin-liquid-glass.art-control-show .art-bottom {\n  padding-bottom: var(--art-padding);\n  background-image: none;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom .art-liquid-glass {\n  backdrop-filter: blur(12px);\n  padding: var(--art-padding) var(--art-padding) 5px;\n  background-color: #0003;\n  border-radius: 5px;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-layer-auto-playback {\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-padding) * 4 + 10px);\n}\n";
+module.exports = ".artplayer-plugin-liquid-glass.art-control-show {\n  --art-control-height: 42px !important;\n  --art-control-icon-size: 24px !important;\n  --art-control-icon-scale: 1.1 !important;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom {\n  padding-bottom: var(--art-padding);\n  background-image: none;\n  align-items: center;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom .art-liquid-glass {\n  backdrop-filter: blur(12px);\n  padding: var(--art-padding) calc(var(--art-padding) * 1.5) 5px;\n  background-color: #00000040;\n  border-radius: 8px;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-bottom .art-control-progress-inner {\n  border-radius: 5px;\n  overflow: hidden;\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-settings {\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-padding));\n}\n\n.artplayer-plugin-liquid-glass.art-control-show .art-layer-auto-playback {\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-padding) * 4 + 10px);\n}\n";
 
 },{}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {

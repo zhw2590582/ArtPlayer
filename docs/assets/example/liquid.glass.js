@@ -22,7 +22,7 @@ let art = new Artplayer({
   },
   plugins: [
     artplayerPluginLiquidGlass({
-      //
+      width: '500px',
     }),
   ],
 })

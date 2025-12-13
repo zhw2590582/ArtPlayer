@@ -1,6 +1,6 @@
 import style from 'bundle-text:./style.less'
 
-export default function artplayerPluginLiquidGlass(option) {
+export default function artplayerPluginLiquidGlass(option = {}) {
   return (art) => {
     const { constructor } = art
     const { addClass, append, createElement } = constructor.utils
@@ -12,6 +12,14 @@ export default function artplayerPluginLiquidGlass(option) {
     append($bottom, $liquidGlass)
     append($liquidGlass, $progress)
     append($liquidGlass, $controls)
+
+    art.on('control', (state) => {
+      if (state) {
+        $liquidGlass.style.width = option.width || '500px'
+      } else {
+        $liquidGlass.style.width = '';
+      }
+    })
 
     return {
       name: 'artplayerPluginLiquidGlass',
