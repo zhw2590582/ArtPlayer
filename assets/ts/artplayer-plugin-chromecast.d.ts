@@ -13,5 +13,5 @@ declare const artplayerPluginChromecast: (option: Option) => (art: Artplayer) =>
 
 export default artplayerPluginChromecast
 
-export = artplayerPluginChromecast
+export = artplayerPluginChromecast;
 export as namespace artplayerPluginChromecast;

@@ -15,5 +15,5 @@ declare const artplayerProxyMediabunny: (option?: Option) => (art: Artplayer) =>
 
 export default artplayerProxyMediabunny
 
-export = artplayerProxyMediabunny
+export = artplayerProxyMediabunny;
 export as namespace artplayerProxyMediabunny;
