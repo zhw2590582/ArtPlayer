@@ -50,7 +50,7 @@ export default function createAudioEngine(events) {
       return
 
     const AudioContext
-            = window.AudioContext || window.webkitAudioContext
+      = window.AudioContext || window.webkitAudioContext
 
     try {
       audioContext = new AudioContext({ sampleRate })
@@ -195,8 +195,8 @@ export default function createAudioEngine(events) {
       node.playbackRate.value = _playbackRate
 
       const startAt
-                = audioContextStartTime
-                  + (timestamp - playbackTimeAtStart) / _playbackRate
+        = audioContextStartTime
+          + (timestamp - playbackTimeAtStart) / _playbackRate
 
       const duration = buffer.duration
       const endAt = startAt + duration / _playbackRate

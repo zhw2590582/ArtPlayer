@@ -48,5 +48,5 @@ declare const artplayerPluginAds: (option: Option) => (art: Artplayer) => Ads
 
 export default artplayerPluginAds
 
-export = artplayerPluginAds;
+export = artplayerPluginAds
 export as namespace artplayerPluginAds;

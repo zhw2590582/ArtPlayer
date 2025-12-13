@@ -16,16 +16,16 @@ export default function createMediabunnyEngine({
   }
 
   const audio = createAudioEngine(events)
-    const video = createVideoEngine({
-      canvas,
-      ctx,
-      events,
-      timeupdateInterval: option.timeupdateInterval ?? defaults.timeupdateInterval,
-      avSyncTolerance: option.avSyncTolerance ?? defaults.avSyncTolerance,
-      dropLateFrames: option.dropLateFrames ?? defaults.dropLateFrames,
-      poster: option.poster ?? defaults.poster,
-      preflightRange: option.preflightRange ?? false,
-    })
+  const video = createVideoEngine({
+    canvas,
+    ctx,
+    events,
+    timeupdateInterval: option.timeupdateInterval ?? defaults.timeupdateInterval,
+    avSyncTolerance: option.avSyncTolerance ?? defaults.avSyncTolerance,
+    dropLateFrames: option.dropLateFrames ?? defaults.dropLateFrames,
+    poster: option.poster ?? defaults.poster,
+    preflightRange: option.preflightRange ?? false,
+  })
 
   let _paused = true
   let _ended = false
@@ -56,11 +56,11 @@ export default function createMediabunnyEngine({
 
     let timer = null
     const timeoutPromise
-            = loadTimeout > 0
-              ? new Promise((_, reject) => {
-                  timer = setTimeout(() => reject(new Error('Load timeout')), loadTimeout)
-                })
-              : null
+      = loadTimeout > 0
+        ? new Promise((_, reject) => {
+            timer = setTimeout(() => reject(new Error('Load timeout')), loadTimeout)
+          })
+        : null
 
     const loadTask = (async () => {
       try {

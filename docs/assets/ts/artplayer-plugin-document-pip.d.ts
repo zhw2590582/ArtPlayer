@@ -18,5 +18,5 @@ declare const artplayerPluginDocumentPip: (option: Option) => (art: Artplayer) =
 
 export default artplayerPluginDocumentPip
 
-export = artplayerPluginDocumentPip;
+export = artplayerPluginDocumentPip
 export as namespace artplayerPluginDocumentPip;

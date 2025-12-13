@@ -29,5 +29,5 @@ declare function artplayerPluginVast(
 
 export default artplayerPluginVast
 
-export = artplayerPluginVast;
+export = artplayerPluginVast
 export as namespace artplayerPluginVast;
