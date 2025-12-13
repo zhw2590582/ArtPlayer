@@ -6,7 +6,16 @@
 // anything defined in a previous bundle is accessed via the
 // orig method which is the require for previous bundles
 
-(function (modules, entry, mainEntry, parcelRequireName, globalName) {
+(function (
+  modules,
+  entry,
+  mainEntry,
+  parcelRequireName,
+  externals,
+  distDir,
+  publicUrl,
+  devServer
+) {
   /* eslint-disable no-undef */
   var globalObject =
     typeof globalThis !== 'undefined'
@@ -25,6 +34,7 @@
     typeof globalObject[parcelRequireName] === 'function' &&
     globalObject[parcelRequireName];
 
+  var importMap = previousRequire.i || {};
   var cache = previousRequire.cache || {};
   // Do not use `require` to prevent Webpack from trying to bundle this call
   var nodeRequire =
@@ -35,6 +45,9 @@
   function newRequire(name, jumped) {
     if (!cache[name]) {
       if (!modules[name]) {
+        if (externals[name]) {
+          return externals[name];
+        }
         // if we cannot find the module within our internal map or
         // cache jump to the current global require ie. the last bundle
         // that was added to the page.
@@ -73,7 +86,7 @@
         localRequire,
         module,
         module.exports,
-        this
+        globalObject
       );
     }
 
@@ -81,7 +94,54 @@
 
     function localRequire(x) {
       var res = localRequire.resolve(x);
-      return res === false ? {} : newRequire(res);
+      if (res === false) {
+        return {};
+      }
+      // Synthesize a module to follow re-exports.
+      if (Array.isArray(res)) {
+        var m = {__esModule: true};
+        res.forEach(function (v) {
+          var key = v[0];
+          var id = v[1];
+          var exp = v[2] || v[0];
+          var x = newRequire(id);
+          if (key === '*') {
+            Object.keys(x).forEach(function (key) {
+              if (
+                key === 'default' ||
+                key === '__esModule' ||
+                Object.prototype.hasOwnProperty.call(m, key)
+              ) {
+                return;
+              }
+
+              Object.defineProperty(m, key, {
+                enumerable: true,
+                get: function () {
+                  return x[key];
+                },
+              });
+            });
+          } else if (exp === '*') {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              value: x,
+            });
+          } else {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              get: function () {
+                if (exp === 'default') {
+                  return x.__esModule ? x.default : x;
+                }
+                return x[exp];
+              },
+            });
+          }
+        });
+        return m;
+      }
+      return newRequire(res);
     }
 
     function resolve(x) {
@@ -93,6 +153,7 @@
   function Module(moduleName) {
     this.id = moduleName;
     this.bundle = newRequire;
+    this.require = nodeRequire;
     this.exports = {};
   }
 
@@ -101,6 +162,10 @@
   newRequire.modules = modules;
   newRequire.cache = cache;
   newRequire.parent = previousRequire;
+  newRequire.distDir = distDir;
+  newRequire.publicUrl = publicUrl;
+  newRequire.devServer = devServer;
+  newRequire.i = importMap;
   newRequire.register = function (id, exports) {
     modules[id] = [
       function (require, module) {
@@ -109,6 +174,10 @@
       {},
     ];
   };
+
+  // Only insert newRequire.load when it is actually used.
+  // The code in this file is linted against ES5, so dynamic import is not allowed.
+  // INSERT_LOAD_HERE
 
   Object.defineProperty(newRequire, 'root', {
     get: function () {
@@ -136,13 +205,9 @@
       define(function () {
         return mainExports;
       });
-
-      // <script>
-    } else if (globalName) {
-      this[globalName] = mainExports;
     }
   }
-})({"1uFaH":[function(require,module,exports) {
+})({"e0Gq7":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _emitter = require("./emitter");
@@ -158,9 +223,9 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
         this.duration = 0;
         this.inputChange = this.inputChange.bind(this);
         this.ondrop = this.ondrop.bind(this);
-        this.option.fileInput.addEventListener("change", this.inputChange);
-        this.option.fileInput.addEventListener("dragover", ArtplayerToolThumbnail.ondragover);
-        this.option.fileInput.addEventListener("drop", ArtplayerToolThumbnail.ondrop);
+        this.option.fileInput.addEventListener('change', this.inputChange);
+        this.option.fileInput.addEventListener('dragover', ArtplayerToolThumbnail.ondragover);
+        this.option.fileInput.addEventListener('drop', ArtplayerToolThumbnail.ondrop);
     }
     static get DEFAULTS() {
         return {
@@ -169,7 +234,7 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
             height: 90,
             column: 10,
             begin: 0,
-            end: NaN
+            end: Number.NaN
         };
     }
     static ondragover(event) {
@@ -183,30 +248,30 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
     setup(option = {}) {
         this.option = Object.assign({}, this.option, option);
         const { fileInput, number, width, column } = this.option;
-        this.errorHandle(fileInput instanceof Element, "The 'fileInput' is not a Element");
-        if (!(fileInput.tagName === "INPUT" && fileInput.type === "file")) {
-            fileInput.style.position = "relative";
-            const newFileInput = document.createElement("input");
-            newFileInput.type = "file";
-            newFileInput.style.position = "absolute";
-            newFileInput.style.width = "100%";
-            newFileInput.style.height = "100%";
-            newFileInput.style.left = "0";
-            newFileInput.style.top = "0";
-            newFileInput.style.right = "0";
-            newFileInput.style.bottom = "0";
-            newFileInput.style.opacity = "0";
+        this.errorHandle(fileInput instanceof Element, 'The \'fileInput\' is not a Element');
+        if (!(fileInput.tagName === 'INPUT' && fileInput.type === 'file')) {
+            fileInput.style.position = 'relative';
+            const newFileInput = document.createElement('input');
+            newFileInput.type = 'file';
+            newFileInput.style.position = 'absolute';
+            newFileInput.style.width = '100%';
+            newFileInput.style.height = '100%';
+            newFileInput.style.left = '0';
+            newFileInput.style.top = '0';
+            newFileInput.style.right = '0';
+            newFileInput.style.bottom = '0';
+            newFileInput.style.opacity = '0';
             fileInput.appendChild(newFileInput);
             this.option.fileInput = newFileInput;
         }
         [
-            "number",
-            "width",
-            "column",
-            "begin",
-            "end"
+            'number',
+            'width',
+            'column',
+            'begin',
+            'end'
         ].forEach((item)=>{
-            this.errorHandle(typeof this.option[item] === "number", `The '${item}' is not a number`);
+            this.errorHandle(typeof this.option[item] === 'number', `The '${item}' is not a number`);
         });
         this.option.number = (0, _utils.clamp)(number, 10, 1000);
         this.option.width = (0, _utils.clamp)(width, 10, 1000);
@@ -214,10 +279,10 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
         return this;
     }
     static creatVideo() {
-        const video = document.createElement("video");
-        video.style.position = "absolute";
-        video.style.top = "-9999px";
-        video.style.left = "-9999px";
+        const video = document.createElement('video');
+        video.style.position = 'absolute';
+        video.style.top = '-9999px';
+        video.style.left = '-9999px';
         video.muted = true;
         video.controls = true;
         document.body.appendChild(video);
@@ -226,18 +291,18 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
     inputChange(event) {
         const file = this.option.fileInput.files[0];
         this.loadVideo(file);
-        event.target.value = "";
+        event.target.value = '';
     }
     loadVideo(file) {
         if (file) {
             const canPlayType = this.video.canPlayType(file.type);
-            this.errorHandle(canPlayType === "maybe" || canPlayType === "probably", `Playback of this file format is not supported: ${file.type}`);
+            this.errorHandle(canPlayType === 'maybe' || canPlayType === 'probably', `Playback of this file format is not supported: ${file.type}`);
             const videoUrl = URL.createObjectURL(file);
             this.videoUrl = videoUrl;
             this.file = file;
-            this.emit("file", this.file);
+            this.emit('file', this.file);
             this.video.src = videoUrl;
-            this.emit("video", this.video);
+            this.emit('video', this.video);
         }
     }
     start() {
@@ -250,13 +315,13 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
         this.errorHandle(this.option.end > this.option.begin, `End time must be greater than the start time`);
         this.duration = this.option.end - this.option.begin;
         this.density = number / this.duration;
-        this.errorHandle(this.file && this.video, "Please select the video file first");
-        this.errorHandle(!this.processing, "There is currently a task in progress, please wait a moment...");
+        this.errorHandle(this.file && this.video, 'Please select the video file first');
+        this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
         this.errorHandle(this.density <= 1, `The preview density cannot be greater than 1, but got ${this.density}`);
         const screenshotDate = this.creatScreenshotDate();
         const canvas = this.creatCanvas();
-        const context2D = canvas.getContext("2d");
-        this.emit("canvas", canvas);
+        const context2D = canvas.getContext('2d');
+        this.emit('canvas', canvas);
         const promiseList = screenshotDate.map((item, index)=>()=>{
                 return new Promise((resolve)=>{
                     this.video.oncanplay = ()=>{
@@ -264,7 +329,7 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
                         canvas.toBlob((blob)=>{
                             if (this.thumbnailUrl) URL.revokeObjectURL(this.thumbnailUrl);
                             this.thumbnailUrl = URL.createObjectURL(blob);
-                            this.emit("update", this.thumbnailUrl, (index + 1) / number);
+                            this.emit('update', this.thumbnailUrl, (index + 1) / number);
                             this.video.oncanplay = null;
                             resolve();
                         });
@@ -275,10 +340,10 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
         this.processing = true;
         return (0, _utils.runPromisesInSeries)(promiseList).then(()=>{
             this.processing = false;
-            this.emit("done");
+            this.emit('done');
         }).catch((err)=>{
             this.processing = false;
-            this.emit("error", err.message);
+            this.emit('error', err.message);
             throw err;
         });
     }
@@ -300,50 +365,50 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
     }
     creatCanvas() {
         const { number, width, height, column } = this.option;
-        const canvas = document.createElement("canvas");
-        const context2D = canvas.getContext("2d");
+        const canvas = document.createElement('canvas');
+        const context2D = canvas.getContext('2d');
         canvas.width = width * column;
         canvas.height = Math.ceil(number / column) * height + 30;
-        context2D.fillStyle = "black";
+        context2D.fillStyle = 'black';
         context2D.fillRect(0, 0, canvas.width, canvas.height);
-        context2D.font = "14px Georgia";
-        context2D.fillStyle = "#fff";
+        context2D.font = '14px Georgia';
+        context2D.fillStyle = '#fff';
         context2D.fillText(`From: https://artplayer.org/, Number: ${number}, Width: ${width}, Height: ${height}, Column: ${column}`, 10, canvas.height - 11);
         return canvas;
     }
     download() {
-        this.errorHandle(this.file && this.thumbnailUrl, "Download does not seem to be ready, please create preview first");
-        this.errorHandle(!this.processing, "There is currently a task in progress, please wait a moment...");
-        const elink = document.createElement("a");
+        this.errorHandle(this.file && this.thumbnailUrl, 'Download does not seem to be ready, please create preview first');
+        this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
+        const elink = document.createElement('a');
         const name = `${(0, _utils.getFileName)(this.file.name)}.png`;
         elink.download = name;
         elink.href = this.thumbnailUrl;
         document.body.appendChild(elink);
         elink.click();
         document.body.removeChild(elink);
-        this.emit("download", name);
+        this.emit('download', name);
         return this;
     }
     errorHandle(condition, msg) {
         if (!condition) {
-            this.emit("error", msg);
+            this.emit('error', msg);
             throw new Error(msg);
         }
     }
     destroy() {
-        this.option.fileInput.removeEventListener("change", this.inputChange);
-        this.option.fileInput.removeEventListener("dragover", ArtplayerToolThumbnail.ondragover);
-        this.option.fileInput.removeEventListener("drop", ArtplayerToolThumbnail.ondrop);
+        this.option.fileInput.removeEventListener('change', this.inputChange);
+        this.option.fileInput.removeEventListener('dragover', ArtplayerToolThumbnail.ondragover);
+        this.option.fileInput.removeEventListener('drop', ArtplayerToolThumbnail.ondrop);
         document.body.removeChild(this.video);
         if (this.videoUrl) URL.revokeObjectURL(this.videoUrl);
         if (this.thumbnailUrl) URL.revokeObjectURL(this.thumbnailUrl);
-        this.emit("destroy");
+        this.emit('destroy');
     }
 }
 exports.default = ArtplayerToolThumbnail;
-window["ArtplayerToolThumbnail"] = ArtplayerToolThumbnail;
+window.ArtplayerToolThumbnail = ArtplayerToolThumbnail;
 
-},{"./emitter":"lQHUa","./utils":"kMfwO","@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}],"lQHUa":[function(require,module,exports) {
+},{"./emitter":"7Kk4W","./utils":"kMCcV","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"7Kk4W":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Emitter {
@@ -383,20 +448,20 @@ class Emitter {
 }
 exports.default = Emitter;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}],"kBreb":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
     };
 };
 exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
+    Object.defineProperty(a, '__esModule', {
         value: true
     });
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -413,7 +478,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"kMfwO":[function(require,module,exports) {
+},{}],"kMCcV":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "sleep", ()=>sleep);
@@ -427,14 +492,14 @@ function runPromisesInSeries(ps) {
     return ps.reduce((p, next)=>p.then(next), Promise.resolve());
 }
 function getFileName(name) {
-    const nameArray = name.split(".");
+    const nameArray = name.split('.');
     nameArray.pop();
-    return nameArray.join(".");
+    return nameArray.join('.');
 }
 function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}]},["1uFaH"], "1uFaH", "parcelRequire94c2")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}]},["e0Gq7"], "e0Gq7", "parcelRequire4dc0", {})
 
 //# sourceMappingURL=index.js.map
