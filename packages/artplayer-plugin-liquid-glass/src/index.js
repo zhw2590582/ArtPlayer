@@ -15,13 +15,14 @@ export default function artplayerPluginLiquidGlass(option = {}) {
 
     art.on('control', (state) => {
       if (state) {
-        $liquidGlass.style.width = option.width;
-        $liquidGlass.style['max-width'] = option['max-width'];
-        $liquidGlass.style['min-width'] = option['min-width'];        
-      } else {
-        $liquidGlass.style.width = '';
-        $liquidGlass.style['max-width'] = '';
-        $liquidGlass.style['min-width'] = '';
+        $liquidGlass.style.width = option.width
+        $liquidGlass.style['max-width'] = option['max-width']
+        $liquidGlass.style['min-width'] = option['min-width']
+      }
+      else {
+        $liquidGlass.style.width = ''
+        $liquidGlass.style['max-width'] = ''
+        $liquidGlass.style['min-width'] = ''
       }
     })
 
