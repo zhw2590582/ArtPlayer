@@ -6,7 +6,7 @@
 
 const art = new Artplayer({
   container: '.artplayer-app',
-  url: '/assets/sample/video.mp4',
+  url: '/assets/sample/steve-jobs.mp4',
   autoSize: true,
   fullscreen: true,
   fullscreenWeb: true,
