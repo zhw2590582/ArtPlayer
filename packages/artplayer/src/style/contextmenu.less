@@ -4,17 +4,14 @@
         flex-direction: column;
         position: absolute;
         z-index: 120;
-        padding: 5px 0;
-        border-radius: var(--art-border-radius);
-        font-size: 12px;
-        background-color: var(--art-widget-background);
+        padding: var(--art-space-xxs) 0;
+        font-size: var(--art-font-size-sm);
         min-width: var(--art-contextmenus-min-width);
+        .art-panel-surface();
 
         .art-contextmenu {
-            cursor: pointer;
-            display: flex;
-            padding: 10px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            .art-menu-item-base(var(--art-space-xs), var(--art-contextmenu-padding-x), false);
+            border-bottom: 1px solid var(--art-surface-border-color);
 
             span {
                 padding: 0 8px;
@@ -26,7 +23,7 @@
             }
 
             &:hover {
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: var(--art-surface-hover-color);
             }
 
             &:last-child {

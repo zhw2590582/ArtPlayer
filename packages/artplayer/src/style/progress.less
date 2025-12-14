@@ -18,7 +18,7 @@
                 position: relative;
                 height: 50%;
                 width: 100%;
-                transition: height var(--art-transition-duration) ease;
+                transition: height var(--art-transition-duration) var(--art-ease-standard);
                 background-color: var(--art-progress-color);
 
                 .art-progress-hover {
@@ -63,7 +63,7 @@
                     height: var(--art-indicator-size);
                     transform: scale(var(--art-indicator-scale));
                     margin-left: calc(var(--art-indicator-size) / -2);
-                    transition: transform var(--art-transition-duration) ease;
+                    transition: transform var(--art-transition-duration) var(--art-ease-standard);
 
                     .art-icon {
                         width: 100%;
@@ -86,15 +86,16 @@
                     opacity: 0;
                     position: absolute;
                     z-index: 50;
-                    top: -25px;
+                    top: var(--art-tip-offset);
                     left: 0;
-                    padding: 3px 5px;
+                    padding: var(--art-tip-padding);
                     line-height: 1;
-                    font-size: 12px;
+                    font-size: var(--art-font-size-sm);
                     border-radius: var(--art-border-radius);
                     white-space: nowrap;
                     background-color: var(--art-tip-background);
-                    transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;
+                    transition: transform var(--art-transition-duration) var(--art-ease-standard),
+                        opacity var(--art-transition-duration) var(--art-ease-standard);
                 }
             }
 
@@ -112,13 +113,11 @@
             position: absolute;
             bottom: calc(var(--art-bottom-gap) + 10px);
             left: 0;
-            border-radius: var(--art-border-radius);
             pointer-events: none;
-            background-color: var(--art-widget-background);
-            transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;
-            box-shadow:
-                0 1px 3px 0 rgb(0 0 0 / 0.2),
-                0 1px 2px -1px rgb(0 0 0 / 0.2);
+            .art-panel-surface();
+            transition: transform var(--art-transition-duration) var(--art-ease-standard),
+                opacity var(--art-transition-duration) var(--art-ease-standard);
+            .art-elevation(medium);
         }
     }
 
@@ -131,7 +130,9 @@
 
 .art-progress-hover {
     .art-bottom .art-progress {
-        .art-control-progress .art-control-progress-inner .art-progress-tip, .art-control-thumbnails {
+
+        .art-control-progress .art-control-progress-inner .art-progress-tip,
+        .art-control-thumbnails {
             transform: scale(1);
             opacity: 1;
         }

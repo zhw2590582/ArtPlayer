@@ -7,12 +7,11 @@
         left: auto;
         overflow-y: auto;
         overflow-x: hidden;
-        border-radius: var(--art-border-radius);
         max-height: var(--art-settings-max-height);
         right: var(--art-padding);
         bottom: var(--art-control-height);
-        transition: all var(--art-transition-duration) ease;
-        background-color: var(--art-widget-background);
+        transition: all var(--art-transition-duration) var(--art-ease-standard);
+        .art-panel-surface();
 
         .art-setting-panel {
             display: none;
@@ -23,17 +22,10 @@
             }
 
             .art-setting-item {
-                display: flex;
+                .art-menu-item-base(0, var(--art-space-xxs));
                 justify-content: space-between;
                 align-items: center;
-                padding: 0 5px;
-                cursor: pointer;
                 overflow: hidden;
-                transition: background-color var(--art-transition-duration) ease;
-
-                &:hover {
-                    background-color: rgba(255, 255, 255, 0.1);
-                }
 
                 &.art-current {
                     color: var(--art-theme);
@@ -41,7 +33,7 @@
 
                 .art-icon-check {
                     visibility: hidden;
-                    height: 15px;
+                    height: var(--art-icon-small-size);
                 }
 
                 &.art-current .art-icon-check {
@@ -51,7 +43,7 @@
                 .art-setting-item-left {
                     .art-center();
                     flex-shrink: 0;
-                    gap: 5px;
+                    gap: var(--art-space-xxs);
 
                     .art-setting-item-left-icon {
                         .art-center();
@@ -62,12 +54,12 @@
 
                 .art-setting-item-right {
                     .art-center();
-                    gap: 5px;
-                    font-size: 12px;
+                    gap: var(--art-space-xxs);
+                    font-size: var(--art-font-size-sm);
 
                     .art-setting-item-right-tooltip {
                         white-space: nowrap;
-                        color: rgba(255, 255, 255, 0.5);
+                        color: var(--art-surface-muted-color);
                     }
 
                     .art-setting-item-right-icon {
@@ -81,13 +73,13 @@
                         width: 80px;
                         outline: none;
                         appearance: none;
-                        background-color: rgba(255, 255, 255, 0.2);
+                        background-color: var(--art-surface-range-color);
                     }
                 }
             }
 
             .art-setting-item-back {
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                border-bottom: 1px solid var(--art-surface-border-color);
             }
         }
     }
