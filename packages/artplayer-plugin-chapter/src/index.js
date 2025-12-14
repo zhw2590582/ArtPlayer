@@ -3,7 +3,7 @@ import style from 'bundle-text:./style.less'
 export default function artplayerPluginChapter(option = {}) {
   return (art) => {
     const { $player } = art.template
-    const { setStyle, append, clamp, query, isMobile, addClass, removeClass } = art.constructor.utils
+    const { setStyle, append, clamp, query, addClass, removeClass } = art.constructor.utils
 
     const html = `
                 <div class="art-chapter">
@@ -15,10 +15,8 @@ export default function artplayerPluginChapter(option = {}) {
                 </div>
         `
 
-    let titleTimer = null
     let $chapters = []
 
-    const $progress = art.query('.art-control-progress')
     const $inner = art.query('.art-control-progress-inner')
     const $control = append($inner, '<div class="art-chapters"></div>')
     const $title = append($inner, '<div class="art-chapter-title"></div>')
@@ -26,7 +24,6 @@ export default function artplayerPluginChapter(option = {}) {
     function showTitle({ $chapter, width }) {
       const title = $chapter.dataset.title.trim()
       if (title) {
-        setStyle($title, 'display', 'flex')
         $title.textContent = title
         const titleWidth = $title.clientWidth
         if (width <= titleWidth / 2) {
@@ -38,9 +35,6 @@ export default function artplayerPluginChapter(option = {}) {
         else {
           setStyle($title, 'left', `${width - titleWidth / 2}px`)
         }
-      }
-      else {
-        setStyle($title, 'display', 'none')
       }
     }
 
@@ -125,7 +119,7 @@ export default function artplayerPluginChapter(option = {}) {
       art.emit('setBar', 'loaded', art.loaded || 0)
     }
 
-    art.on('setBar', (type, percentage, event) => {
+    art.on('setBar', (type, percentage) => {
       if (!$chapters.length)
         return
 
@@ -159,31 +153,12 @@ export default function artplayerPluginChapter(option = {}) {
           const percentage = (currentTime - start) / duration
           setStyle($target, 'width', `${percentage * 100}%`)
 
-          if (isMobile) {
-            if (type === 'played' && event) {
-              showTitle({ $chapter, width })
-              clearTimeout(titleTimer)
-              titleTimer = setTimeout(() => {
-                setStyle($title, 'display', 'none')
-              }, 500)
-            }
-          }
-          else {
-            if (type === 'hover') {
-              showTitle({ $chapter, width })
-            }
+          if (type === 'hover' && width > 0) {
+            showTitle({ $chapter, width })
           }
         }
       }
     })
-
-    if (!isMobile) {
-      art.proxy($progress, 'mouseleave', () => {
-        if (!$chapters.length)
-          return
-        setStyle($title, 'display', 'none')
-      })
-    }
 
     art.once('video:loadedmetadata', () => update(option.chapters))
 

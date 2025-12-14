@@ -3,9 +3,9 @@
         height: 100% !important;
         background-color: transparent !important;
 
-        & > .art-progress-hover,
-        & > .art-progress-loaded,
-        & > .art-progress-played {
+        &>.art-progress-hover,
+        &>.art-progress-loaded,
+        &>.art-progress-played {
             display: none !important;
         }
     }
@@ -47,7 +47,9 @@
     }
 
     .art-chapter-title {
-        display: none;
+        transform-origin: bottom center;
+        transform: scale(0.5);
+        opacity: 0;
         position: absolute;
         z-index: 70;
         top: -50px;
@@ -58,5 +60,13 @@
         border-radius: var(--art-border-radius);
         white-space: nowrap;
         background-color: var(--art-tip-background);
+        transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;
+    }
+
+    &.art-progress-hover {
+        .art-chapter-title {
+            transform: scale(1);
+            opacity: 1;
+        }
     }
 }
