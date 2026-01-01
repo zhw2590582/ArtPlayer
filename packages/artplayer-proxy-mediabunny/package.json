@@ -35,6 +35,6 @@
   "legacy": "./dist/artplayer-proxy-mediabunny.legacy.js",
   "browserslist": "last 1 Chrome version",
   "dependencies": {
-    "mediabunny": "^1.26.0"
+    "mediabunny": "^1.27.3"
   }
 }
