@@ -633,11 +633,11 @@ class MediaBunnyEngine {
         ;
         setTimeout(()=>this.events.emit('waiting'), 0);
         setTimeout(()=>this.events.emit('loadstart'), 0);
-        const loadTimeout = Number.isFinite(this.option.loadTimeout) ? this.option.loadTimeout : 12000;
+        const loadTimeout = Number.isFinite(this.option.loadTimeout) ? this.option.loadTimeout : 0;
         try {
             await Promise.race([
                 this.performLoad(src, id),
-                loadTimeout > 0 ? this.createTimeout(loadTimeout) : Promise.resolve()
+                loadTimeout > 0 ? this.createTimeout(loadTimeout) : new Promise(()=>{})
             ]);
         } catch (err) {
             if (id !== this.loadSeq) return;

@@ -44,7 +44,7 @@ const art = new Artplayer({
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `loadTimeout` | `number` | `12000` | Timeout for loading media (ms) |
+| `loadTimeout` | `number` | `0` | Timeout for loading media (ms) |
 | `timeupdateInterval` | `number` | `250` | Interval for timeupdate events (ms) |
 | `avSyncTolerance` | `number` | `0.12` | Audio-video sync tolerance (seconds) |
 | `dropLateFrames` | `boolean` | `false` | Drop late video frames |

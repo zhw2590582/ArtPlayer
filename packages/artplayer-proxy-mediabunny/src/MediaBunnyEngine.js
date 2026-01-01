@@ -53,12 +53,12 @@ export default class MediaBunnyEngine {
 
     const loadTimeout = Number.isFinite(this.option.loadTimeout)
       ? this.option.loadTimeout
-      : 12000
+      : 0
 
     try {
       await Promise.race([
         this.performLoad(src, id),
-        loadTimeout > 0 ? this.createTimeout(loadTimeout) : Promise.resolve(),
+        loadTimeout > 0 ? this.createTimeout(loadTimeout) : new Promise(() => {}),
       ])
     }
     catch (err) {

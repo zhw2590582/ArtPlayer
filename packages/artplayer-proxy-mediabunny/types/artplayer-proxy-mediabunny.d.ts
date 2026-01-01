@@ -3,7 +3,7 @@ import type Artplayer from 'artplayer'
 interface Option {
   /**
    * Timeout for loading media in milliseconds
-   * @default 12000
+   * @default 0
    */
   loadTimeout?: number
 
