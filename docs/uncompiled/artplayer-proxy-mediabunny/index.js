@@ -523,7 +523,66 @@ class VideoShim {
 }
 exports.default = VideoShim;
 
-},{"./MediaBunnyEngine.js":"j1QXy","./EventTarget.js":"7Odz0","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"j1QXy":[function(require,module,exports,__globalThis) {
+},{"./EventTarget.js":"7Odz0","./MediaBunnyEngine.js":"j1QXy","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"7Odz0":[function(require,module,exports,__globalThis) {
+/**
+ * Event Target Implementation
+ * Simple event system for video events
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class EventTarget {
+    constructor(){
+        this.listeners = new Map();
+    }
+    addEventListener(type, fn) {
+        if (!this.listeners.has(type)) this.listeners.set(type, []);
+        this.listeners.get(type).push(fn);
+    }
+    removeEventListener(type, fn) {
+        const list = this.listeners.get(type);
+        if (!list) return;
+        const index = list.indexOf(fn);
+        if (index >= 0) list.splice(index, 1);
+    }
+    emit(type, detail) {
+        const evt = new Event(type);
+        evt.detail = detail;
+        const list = this.listeners.get(type);
+        if (list) list.forEach((fn)=>fn(evt));
+    }
+}
+exports.default = EventTarget;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"8oCsH":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"j1QXy":[function(require,module,exports,__globalThis) {
 /**
  * Main MediaBunny Engine
  * Coordinates audio and video playback
@@ -2668,37 +2727,7 @@ const isNumber = (x)=>{
     return typeof x === 'number' && !Number.isNaN(x);
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"8oCsH":[function(require,module,exports,__globalThis) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"99VTc":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"99VTc":[function(require,module,exports,__globalThis) {
 /*!
  * Copyright (c) 2025-present, Vanilagy and contributors
  *
@@ -16433,6 +16462,7 @@ class VideoEngine {
         this.stalled = false;
         this.playbackRate = 1;
         this.posterDrawn = false;
+        this.isFetching = false;
     }
     normalizeSource(src) {
         if (typeof src === 'string') return new (0, _mediabunny.UrlSource)(src);
@@ -16539,24 +16569,29 @@ class VideoEngine {
         } else this.drawPoster();
     }
     async updateNextFrame(localId) {
-        if (!this.videoIterator) return;
-        while(true){
-            const frame = (await this.videoIterator.next()).value ?? null;
-            if (!frame || localId !== this.asyncId) return;
-            const t = this.audioClock.currentTime;
-            const tolerance = this.dropLateFrames ? Math.max(0.06, this.avSyncTolerance / Math.max(1, this.playbackRate)) : 0;
-            if (this.dropLateFrames && frame.timestamp < t - tolerance) continue;
-            if (frame.timestamp <= t + tolerance) {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                this.ctx.drawImage(frame.canvas, 0, 0);
-                if (!this.dropLateFrames && frame.timestamp > t) {
-                    this.nextFrame = null;
+        if (!this.videoIterator || this.isFetching) return;
+        this.isFetching = true;
+        try {
+            while(true){
+                const frame = (await this.videoIterator.next()).value ?? null;
+                if (!frame || localId !== this.asyncId) return;
+                const t = this.audioClock.currentTime;
+                const tolerance = this.dropLateFrames ? Math.max(0.06, this.avSyncTolerance / Math.max(1, this.playbackRate)) : 0;
+                if (this.dropLateFrames && frame.timestamp < t - tolerance) continue;
+                if (frame.timestamp <= t + tolerance) {
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    this.ctx.drawImage(frame.canvas, 0, 0);
+                    if (!this.dropLateFrames && frame.timestamp > t) {
+                        this.nextFrame = null;
+                        return;
+                    }
+                } else {
+                    this.nextFrame = frame;
                     return;
                 }
-            } else {
-                this.nextFrame = frame;
-                return;
             }
+        } finally{
+            this.isFetching = false;
         }
     }
     render() {
@@ -16625,35 +16660,6 @@ class VideoEngine {
 }
 exports.default = VideoEngine;
 
-},{"mediabunny":"6p2EH","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"7Odz0":[function(require,module,exports,__globalThis) {
-/**
- * Event Target Implementation
- * Simple event system for video events
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-class EventTarget {
-    constructor(){
-        this.listeners = new Map();
-    }
-    addEventListener(type, fn) {
-        if (!this.listeners.has(type)) this.listeners.set(type, []);
-        this.listeners.get(type).push(fn);
-    }
-    removeEventListener(type, fn) {
-        const list = this.listeners.get(type);
-        if (!list) return;
-        const index = list.indexOf(fn);
-        if (index >= 0) list.splice(index, 1);
-    }
-    emit(type, detail) {
-        const evt = new Event(type);
-        evt.detail = detail;
-        const list = this.listeners.get(type);
-        if (list) list.forEach((fn)=>fn(evt));
-    }
-}
-exports.default = EventTarget;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}]},["gqawh"], "gqawh", "parcelRequire4dc0", {})
+},{"mediabunny":"6p2EH","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}]},["gqawh"], "gqawh", "parcelRequire4dc0", {})
 
 //# sourceMappingURL=index.js.map

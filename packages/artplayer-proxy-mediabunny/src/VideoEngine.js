@@ -52,6 +52,7 @@ export default class VideoEngine {
     this.stalled = false
     this.playbackRate = 1
     this.posterDrawn = false
+    this.isFetching = false
   }
 
   normalizeSource(src) {
@@ -197,37 +198,43 @@ export default class VideoEngine {
   }
 
   async updateNextFrame(localId) {
-    if (!this.videoIterator)
+    if (!this.videoIterator || this.isFetching)
       return
 
-    while (true) {
-      const frame = (await this.videoIterator.next()).value ?? null
-      if (!frame || localId !== this.asyncId)
-        return
+    this.isFetching = true
+    try {
+      while (true) {
+        const frame = (await this.videoIterator.next()).value ?? null
+        if (!frame || localId !== this.asyncId)
+          return
 
-      const t = this.audioClock.currentTime
-      const tolerance = this.dropLateFrames
-        ? Math.max(0.06, this.avSyncTolerance / Math.max(1, this.playbackRate))
-        : 0
+        const t = this.audioClock.currentTime
+        const tolerance = this.dropLateFrames
+          ? Math.max(0.06, this.avSyncTolerance / Math.max(1, this.playbackRate))
+          : 0
 
-      if (this.dropLateFrames && frame.timestamp < t - tolerance) {
-        // Skip late frame
-        continue
-      }
+        if (this.dropLateFrames && frame.timestamp < t - tolerance) {
+          // Skip late frame
+          continue
+        }
 
-      if (frame.timestamp <= t + tolerance) {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-        this.ctx.drawImage(frame.canvas, 0, 0)
+        if (frame.timestamp <= t + tolerance) {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+          this.ctx.drawImage(frame.canvas, 0, 0)
 
-        if (!this.dropLateFrames && frame.timestamp > t) {
-          this.nextFrame = null
+          if (!this.dropLateFrames && frame.timestamp > t) {
+            this.nextFrame = null
+            return
+          }
+        }
+        else {
+          this.nextFrame = frame
           return
         }
       }
-      else {
-        this.nextFrame = frame
-        return
-      }
+    }
+    finally {
+      this.isFetching = false
     }
   }
 
