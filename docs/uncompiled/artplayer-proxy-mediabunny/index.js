@@ -208,700 +208,702 @@
     }
   }
 })({"gqawh":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+/**
+ * ArtPlayer MediaBunny Proxy
+ * Main entry point
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerProxyMediabunny);
-var _canvasProxyJs = require("./proxy/canvasProxy.js");
-var _canvasProxyJsDefault = parcelHelpers.interopDefault(_canvasProxyJs);
+var _videoShimJs = require("./VideoShim.js");
+var _videoShimJsDefault = parcelHelpers.interopDefault(_videoShimJs);
 function artplayerProxyMediabunny(option = {}) {
     return (art)=>{
-        return (0, _canvasProxyJsDefault.default)(art, option);
+        const { constructor } = art;
+        const { createElement } = constructor.utils;
+        // Create canvas element
+        const canvas = createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        // Create video shim
+        const shim = new (0, _videoShimJsDefault.default)({
+            art,
+            canvas,
+            ctx,
+            option
+        });
+        // Proxy canvas methods to shim
+        const originalCanvasMethods = {};
+        for(const prop in canvas)if (typeof canvas[prop] === 'function') originalCanvasMethods[prop] = canvas[prop].bind(canvas);
+        // Get all properties from shim instance and prototype
+        const propertyNames = new Set([
+            ...Object.getOwnPropertyNames(shim),
+            ...Object.getOwnPropertyNames(Object.getPrototypeOf(shim))
+        ]);
+        // Add shim properties to canvas
+        for (const prop of propertyNames){
+            if (prop === 'constructor') continue;
+            if (!(prop in canvas)) Object.defineProperty(canvas, prop, {
+                get () {
+                    const value = shim[prop];
+                    return typeof value === 'function' ? value.bind(shim) : value;
+                },
+                set (v) {
+                    shim[prop] = v;
+                },
+                configurable: true,
+                enumerable: true
+            });
+        }
+        // Restore original canvas methods
+        for(const prop in originalCanvasMethods)canvas[prop] = (...args)=>originalCanvasMethods[prop](...args);
+        // Handle resize
+        function resize() {
+            const player = art.template?.$player;
+            if (!player || art.option.autoSize) return;
+            Object.assign(canvas.style, {
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain'
+            });
+        }
+        art.on('resize', resize);
+        art.on('video:loadedmetadata', resize);
+        // Cleanup on destroy
+        art.on('destroy', ()=>{
+            shim.destroy();
+        });
+        return canvas;
     };
 }
 if (typeof window !== 'undefined') window.artplayerProxyMediabunny = artplayerProxyMediabunny;
 
-},{"./proxy/canvasProxy.js":"gycKW","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"gycKW":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+},{"./VideoShim.js":"l1ksT","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"l1ksT":[function(require,module,exports,__globalThis) {
+/**
+ * Video Element Shim
+ * Simulates HTMLVideoElement interface for MediaBunny
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>createCanvasProxy);
-var _mediabunnyVideoShimJs = require("../shim/mediabunnyVideoShim.js");
-var _mediabunnyVideoShimJsDefault = parcelHelpers.interopDefault(_mediabunnyVideoShimJs);
-function createCanvasProxy(art, option) {
-    const { constructor } = art;
-    const { createElement } = constructor.utils;
-    const canvas = createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const shim = (0, _mediabunnyVideoShimJsDefault.default)({
-        art,
-        canvas,
-        ctx,
-        option
-    });
-    const originalCanvasMethods = {};
-    for(const prop in canvas)if (typeof canvas[prop] === 'function') originalCanvasMethods[prop] = canvas[prop].bind(canvas);
-    for(const prop in shim)if (!(prop in canvas)) Object.defineProperty(canvas, prop, {
-        get () {
-            const value = shim[prop];
-            return typeof value === 'function' ? value.bind(shim) : value;
-        },
-        set (v) {
-            shim[prop] = v;
-        },
-        configurable: true,
-        enumerable: true
-    });
-    for(const prop in originalCanvasMethods)canvas[prop] = (...args)=>originalCanvasMethods[prop](...args);
-    art.on('destroy', ()=>{
-        shim.destroy();
-    });
-    function resize() {
-        const player = art.template?.$player;
-        if (!player || art.option.autoSize) return;
-        Object.assign(canvas.style, {
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain'
+var _mediaBunnyEngineJs = require("./MediaBunnyEngine.js");
+var _mediaBunnyEngineJsDefault = parcelHelpers.interopDefault(_mediaBunnyEngineJs);
+var _eventTargetJs = require("./EventTarget.js");
+var _eventTargetJsDefault = parcelHelpers.interopDefault(_eventTargetJs);
+function clamp(v, min, max) {
+    return Math.max(min, Math.min(max, Number(v) || 0));
+}
+class VideoShim {
+    constructor({ art, canvas, ctx, option }){
+        this.art = art;
+        this.canvas = canvas;
+        this.option = option;
+        // Event system
+        this.events = new (0, _eventTargetJsDefault.default)();
+        // MediaBunny engine
+        this.engine = new (0, _mediaBunnyEngineJsDefault.default)({
+            canvas,
+            ctx,
+            events: this.events,
+            option
+        });
+        // Internal state
+        this._src = null;
+        this._volume = option.volume ?? 0.7;
+        this._muted = !!option.muted;
+        this._playbackRate = 1;
+        // Apply initial volume
+        this.engine.setVolume(this._volume, this._muted);
+        // Forward events to ArtPlayer
+        this.setupEventForwarding();
+        // Auto-load source
+        if (option.source) this.src = option.source;
+        else if (art.option?.url) this.src = art.option.url;
+    }
+    setupEventForwarding() {
+        const { events: artEvents } = this.art.constructor.config;
+        artEvents.forEach((name)=>{
+            this.events.addEventListener(name, (e)=>{
+                this.art.emit(`video:${e.type}`, e);
+            });
         });
     }
-    art.on('resize', resize);
-    art.on('video:loadedmetadata', resize);
-    return canvas;
-}
-
-},{"../shim/mediabunnyVideoShim.js":"bWh4b","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"bWh4b":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>createMediabunnyVideoShim);
-var _mediabunnyEngineJs = require("../engine/mediabunnyEngine.js");
-var _mediabunnyEngineJsDefault = parcelHelpers.interopDefault(_mediabunnyEngineJs);
-var _clampJs = require("../utils/clamp.js");
-var _clampJsDefault = parcelHelpers.interopDefault(_clampJs);
-var _videoEventsJs = require("./videoEvents.js");
-function createMediabunnyVideoShim({ art, canvas, ctx, option }) {
-    const events = (0, _videoEventsJs.createVideoEventTarget)();
-    const engine = (0, _mediabunnyEngineJsDefault.default)({
-        canvas,
-        ctx,
-        events,
-        option
-    });
-    let _src = null;
-    let _volume = option.volume ?? 0.7;
-    let _muted = !!option.muted;
-    let _playbackRate = 1;
-    engine.setVolume(_volume, _muted);
-    const { events: artEvents } = art.constructor.config;
-    artEvents.forEach((name)=>{
-        events.addEventListener(name, (e)=>{
-            art.emit(`video:${e.type}`, e);
-        });
-    });
-    const shim = {
-        addEventListener: events.addEventListener,
-        removeEventListener: events.removeEventListener,
-        get src () {
-            return _src;
-        },
-        set src (v){
-            _src = v;
-            if (v) engine.load(v);
-        },
-        get currentTime () {
-            return engine.currentTime;
-        },
-        set currentTime (t){
-            engine.seek(Number(t) || 0);
-        },
-        get duration () {
-            return engine.duration;
-        },
-        get buffered () {
-            const duration = engine.duration;
-            if (!duration || Number.isNaN(duration)) return {
-                length: 0,
-                start: ()=>0,
-                end: ()=>0
-            };
-            return {
-                length: 1,
-                start: ()=>0,
-                end: ()=>duration
-            };
-        },
-        get played () {
-            const duration = engine.duration;
-            const currentTime = engine.currentTime;
-            if (!duration || Number.isNaN(duration) || currentTime <= 0) return {
-                length: 0,
-                start: ()=>0,
-                end: ()=>0
-            };
-            return {
-                length: 1,
-                start: ()=>0,
-                end: ()=>currentTime
-            };
-        },
-        get paused () {
-            return engine.paused;
-        },
-        get playing () {
-            return !engine.paused && !engine.ended;
-        },
-        get ended () {
-            return engine.ended;
-        },
-        get readyState () {
-            return engine.readyState;
-        },
-        get networkState () {
-            return engine.networkState;
-        },
-        get error () {
-            return engine.error;
-        },
-        get seeking () {
-            return engine.seeking;
-        },
-        get seekable () {
-            const duration = engine.duration;
-            if (!duration || Number.isNaN(duration)) return {
-                length: 0,
-                start: ()=>0,
-                end: ()=>0
-            };
-            return {
-                length: 1,
-                start: ()=>0,
-                end: ()=>duration
-            };
-        },
-        get playbackRate () {
-            return _playbackRate;
-        },
-        set playbackRate (v){
-            const rate = Number(v);
-            if (Number.isNaN(rate) || rate <= 0) return;
-            _playbackRate = rate;
-            engine.setPlaybackRate(rate);
-            events.emit('ratechange');
-        },
-        get volume () {
-            return _volume;
-        },
-        set volume (v){
-            _volume = (0, _clampJsDefault.default)(v, 0, 1);
-            _muted = false;
-            engine.setVolume(_volume, _muted);
-            events.emit('volumechange');
-        },
-        get muted () {
-            return _muted;
-        },
-        set muted (v){
-            _muted = !!v;
-            engine.setVolume(_volume, _muted);
-            events.emit('volumechange');
-        },
-        play () {
-            return engine.play();
-        },
-        pause () {
-            engine.pause();
-        },
-        load () {
-            if (_src) engine.load(_src);
-        },
-        destroy () {
-            engine.destroy();
-        },
-        get videoWidth () {
-            return engine.videoWidth;
-        },
-        get videoHeight () {
-            return engine.videoHeight;
-        },
-        get playsInline () {
-            return true;
-        },
-        set playsInline (v){},
-        get autoplay () {
-            return option.autoplay || false;
-        },
-        set autoplay (v){},
-        get loop () {
-            return option.loop || false;
-        },
-        set loop (v){},
-        get controls () {
-            return false;
-        },
-        set controls (v){},
-        get crossOrigin () {
-            return option.crossOrigin || '';
-        },
-        set crossOrigin (v){},
-        get currentSrc () {
-            return _src;
-        },
-        get poster () {
-            return option.poster || '';
-        },
-        set poster (v){
-            option.poster = v;
-        },
-        get preload () {
-            return 'auto';
-        },
-        set preload (v){},
-        get defaultMuted () {
-            return false;
-        },
-        set defaultMuted (v){},
-        get defaultPlaybackRate () {
-            return 1;
-        },
-        set defaultPlaybackRate (v){},
-        canPlayType (_type) {
-            return 'maybe';
-        },
-        getBoundingClientRect () {
-            return canvas.getBoundingClientRect();
-        },
-        requestVideoFrameCallback (callback) {
-            const id = requestAnimationFrame((time)=>{
-                callback(time, {
-                    presentationTime: engine.currentTime,
-                    expectedDisplayTime: time + 16.6,
-                    width: engine.videoWidth,
-                    height: engine.videoHeight,
-                    mediaTime: engine.currentTime,
-                    presentedFrames: 0,
-                    processingDuration: 0,
-                    captureTime: time,
-                    receiveTime: time,
-                    rtpTimestamp: 0
-                });
+    // Event methods
+    addEventListener(type, fn) {
+        this.events.addEventListener(type, fn);
+    }
+    removeEventListener(type, fn) {
+        this.events.removeEventListener(type, fn);
+    }
+    // Source
+    get src() {
+        return this._src;
+    }
+    set src(v) {
+        this._src = v;
+        if (v) this.engine.load(v);
+    }
+    get currentSrc() {
+        return this._src;
+    }
+    // Time
+    get currentTime() {
+        return this.engine.currentTime;
+    }
+    set currentTime(t) {
+        this.engine.seek(Number(t) || 0);
+    }
+    get duration() {
+        return this.engine.duration;
+    }
+    // Buffered/Played/Seekable
+    get buffered() {
+        return this.createTimeRanges(0, this.engine.duration);
+    }
+    get played() {
+        return this.createTimeRanges(0, this.engine.currentTime);
+    }
+    get seekable() {
+        return this.createTimeRanges(0, this.engine.duration);
+    }
+    createTimeRanges(start, end) {
+        const duration = this.engine.duration;
+        if (!duration || Number.isNaN(duration) || end <= 0) return {
+            length: 0,
+            start: ()=>0,
+            end: ()=>0
+        };
+        return {
+            length: 1,
+            start: ()=>start,
+            end: ()=>end
+        };
+    }
+    // Playback state
+    get paused() {
+        return this.engine.paused;
+    }
+    get playing() {
+        return !this.engine.paused && !this.engine.ended;
+    }
+    get ended() {
+        return this.engine.ended;
+    }
+    get seeking() {
+        return this.engine.seeking;
+    }
+    // Ready state
+    get readyState() {
+        return this.engine.readyState;
+    }
+    get networkState() {
+        return this.engine.networkState;
+    }
+    get error() {
+        return this.engine.error;
+    }
+    // Playback rate
+    get playbackRate() {
+        return this._playbackRate;
+    }
+    set playbackRate(v) {
+        const rate = Number(v);
+        if (Number.isNaN(rate) || rate <= 0) return;
+        this._playbackRate = rate;
+        this.engine.setPlaybackRate(rate);
+        this.events.emit('ratechange');
+    }
+    // Volume
+    get volume() {
+        return this._volume;
+    }
+    set volume(v) {
+        this._volume = clamp(v, 0, 1);
+        this._muted = false;
+        this.engine.setVolume(this._volume, this._muted);
+        this.events.emit('volumechange');
+    }
+    get muted() {
+        return this._muted;
+    }
+    set muted(v) {
+        this._muted = !!v;
+        this.engine.setVolume(this._volume, this._muted);
+        this.events.emit('volumechange');
+    }
+    // Playback methods
+    play() {
+        return this.engine.play();
+    }
+    pause() {
+        this.engine.pause();
+    }
+    load() {
+        if (this._src) this.engine.load(this._src);
+    }
+    // Video dimensions
+    get videoWidth() {
+        return this.engine.videoWidth;
+    }
+    get videoHeight() {
+        return this.engine.videoHeight;
+    }
+    // Other properties
+    get poster() {
+        return this.option.poster || '';
+    }
+    set poster(v) {
+        this.option.poster = v;
+    }
+    get autoplay() {
+        return this.option.autoplay || false;
+    }
+    set autoplay(v) {}
+    get loop() {
+        return this.option.loop || false;
+    }
+    set loop(v) {}
+    get controls() {
+        return false;
+    }
+    set controls(v) {}
+    get playsInline() {
+        return true;
+    }
+    set playsInline(v) {}
+    get crossOrigin() {
+        return this.option.crossOrigin || '';
+    }
+    set crossOrigin(v) {}
+    get preload() {
+        return 'auto';
+    }
+    set preload(v) {}
+    get defaultMuted() {
+        return false;
+    }
+    set defaultMuted(v) {}
+    get defaultPlaybackRate() {
+        return 1;
+    }
+    set defaultPlaybackRate(v) {}
+    // Methods
+    canPlayType(_type) {
+        return 'maybe';
+    }
+    getBoundingClientRect() {
+        return this.canvas.getBoundingClientRect();
+    }
+    requestVideoFrameCallback(callback) {
+        const id = requestAnimationFrame((time)=>{
+            callback(time, {
+                presentationTime: this.engine.currentTime,
+                expectedDisplayTime: time + 16.6,
+                width: this.engine.videoWidth,
+                height: this.engine.videoHeight,
+                mediaTime: this.engine.currentTime,
+                presentedFrames: 0,
+                processingDuration: 0,
+                captureTime: time,
+                receiveTime: time,
+                rtpTimestamp: 0
             });
-            return id;
-        },
-        cancelVideoFrameCallback (id) {
-            cancelAnimationFrame(id);
-        },
-        setAttribute (name, value) {
-            if (name === 'src') this.src = value;
-            else if (name === 'autoplay') this.autoplay = value;
-            else if (name === 'loop') this.loop = value;
-            else if (name === 'muted') this.muted = true;
-            else canvas.setAttribute(name, value);
-        }
-    };
-    if (option.source) shim.src = option.source;
-    else if (art.option?.url) shim.src = art.option.url;
-    return shim;
+        });
+        return id;
+    }
+    cancelVideoFrameCallback(id) {
+        cancelAnimationFrame(id);
+    }
+    setAttribute(name, value) {
+        if (name === 'src') this.src = value;
+        else if (name === 'autoplay') this.autoplay = value;
+        else if (name === 'loop') this.loop = value;
+        else if (name === 'muted') this.muted = true;
+        else this.canvas.setAttribute(name, value);
+    }
+    destroy() {
+        this.engine.destroy();
+    }
 }
+exports.default = VideoShim;
 
-},{"../engine/mediabunnyEngine.js":"18g6U","../utils/clamp.js":"78ov3","./videoEvents.js":"9BYHB","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"18g6U":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+},{"./MediaBunnyEngine.js":"j1QXy","./EventTarget.js":"7Odz0","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"j1QXy":[function(require,module,exports,__globalThis) {
+/**
+ * Main MediaBunny Engine
+ * Coordinates audio and video playback
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>createMediabunnyEngine);
-var _audioEngineJs = require("./audioEngine.js");
+var _audioEngineJs = require("./AudioEngine.js");
 var _audioEngineJsDefault = parcelHelpers.interopDefault(_audioEngineJs);
-var _videoEngineJs = require("./videoEngine.js");
+var _videoEngineJs = require("./VideoEngine.js");
 var _videoEngineJsDefault = parcelHelpers.interopDefault(_videoEngineJs);
-function createMediabunnyEngine({ canvas, ctx, events, option = {} }) {
-    const defaults = {
-        timeupdateInterval: 250,
-        avSyncTolerance: 0.12,
-        loadTimeout: 12000,
-        dropLateFrames: false,
-        poster: ''
-    };
-    const audio = (0, _audioEngineJsDefault.default)(events);
-    const video = (0, _videoEngineJsDefault.default)({
-        canvas,
-        ctx,
-        events,
-        timeupdateInterval: option.timeupdateInterval ?? defaults.timeupdateInterval,
-        avSyncTolerance: option.avSyncTolerance ?? defaults.avSyncTolerance,
-        dropLateFrames: option.dropLateFrames ?? defaults.dropLateFrames,
-        poster: option.poster ?? defaults.poster,
-        preflightRange: option.preflightRange ?? false
-    });
-    let _paused = true;
-    let _ended = false;
-    let _readyState = 0;
-    let _networkState = 0;
-    let _error = null;
-    let _seeking = false;
-    let loadSeq = 0;
-    events.addEventListener?.('ended', ()=>{
-        _ended = true;
-        _paused = true;
-    });
-    async function load(src) {
-        const id = ++loadSeq;
-        pause();
-        _ended = false;
-        _error = null;
-        _networkState = 2;
-        _readyState = 0;
-        setTimeout(()=>events.emit('waiting'), 0);
-        setTimeout(()=>events.emit('loadstart'), 0);
-        const loadTimeout = Number.isFinite(option.loadTimeout) ? option.loadTimeout : defaults.loadTimeout;
-        let timer = null;
-        const timeoutPromise = loadTimeout > 0 ? new Promise((_, reject)=>{
-            timer = setTimeout(()=>reject(new Error('Load timeout')), loadTimeout);
-        }) : null;
-        const loadTask = (async ()=>{
-            try {
-                let videoMetadataLoaded = false;
-                let audioMetadataLoaded = false;
-                const checkMetadata = ()=>{
-                    if (videoMetadataLoaded && audioMetadataLoaded) {
-                        _readyState = 1;
-                        events.emit('loadedmetadata');
-                        events.emit('durationchange');
-                    }
-                };
-                const p1 = video.load(src, ()=>{
-                    if (id !== loadSeq) return;
-                    videoMetadataLoaded = true;
-                    checkMetadata();
-                });
-                const p2 = audio.load(src, ()=>{
-                    if (id !== loadSeq) return;
-                    audioMetadataLoaded = true;
-                    checkMetadata();
-                });
-                await Promise.all([
-                    p1,
-                    p2
-                ]);
-                if (id !== loadSeq) return;
-                _readyState = 4;
-                _networkState = 1;
-                events.emit('loadeddata');
-                events.emit('canplay');
-                events.emit('canplaythrough');
-            } catch (err) {
-                if (id !== loadSeq) return;
-                _error = {
-                    code: 4,
-                    message: err.message
-                };
-                _networkState = 3;
-                events.emit('error');
-                console.error(err);
-            } finally{
-                if (timer) clearTimeout(timer);
-            }
-        })();
-        if (timeoutPromise) try {
+class MediaBunnyEngine {
+    constructor({ canvas, ctx, events, option = {} }){
+        this.events = events;
+        this.option = option;
+        // Create audio and video engines
+        this.audio = new (0, _audioEngineJsDefault.default)(events);
+        this.video = new (0, _videoEngineJsDefault.default)({
+            canvas,
+            ctx,
+            events,
+            timeupdateInterval: option.timeupdateInterval ?? 250,
+            avSyncTolerance: option.avSyncTolerance ?? 0.12,
+            dropLateFrames: option.dropLateFrames ?? false,
+            poster: option.poster ?? '',
+            preflightRange: option.preflightRange ?? false
+        });
+        // Playback state
+        this.paused = true;
+        this.ended = false;
+        this.readyState = 0;
+        this.networkState = 0;
+        this.error = null;
+        this.seeking = false;
+        this.loadSeq = 0;
+        // Listen to ended event
+        events.addEventListener?.('ended', ()=>{
+            this.ended = true;
+            this.paused = true;
+        });
+    }
+    async load(src) {
+        const id = ++this.loadSeq;
+        this.pause();
+        this.ended = false;
+        this.error = null;
+        this.networkState = 2 // NETWORK_LOADING
+        ;
+        this.readyState = 0 // HAVE_NOTHING
+        ;
+        setTimeout(()=>this.events.emit('waiting'), 0);
+        setTimeout(()=>this.events.emit('loadstart'), 0);
+        const loadTimeout = Number.isFinite(this.option.loadTimeout) ? this.option.loadTimeout : 12000;
+        try {
             await Promise.race([
-                loadTask,
-                timeoutPromise
+                this.performLoad(src, id),
+                loadTimeout > 0 ? this.createTimeout(loadTimeout) : Promise.resolve()
             ]);
         } catch (err) {
-            if (id !== loadSeq) return;
-            loadSeq++;
-            _error = {
+            if (id !== this.loadSeq) return;
+            this.loadSeq++;
+            this.error = {
                 code: 4,
                 message: err.message
             };
-            _networkState = 3;
-            events.emit('error');
+            this.networkState = 3 // NETWORK_NO_SOURCE
+            ;
+            this.events.emit('error');
         }
-        else await loadTask;
     }
-    async function play() {
-        if (!_paused) return;
-        if (_ended) {
-            _ended = false;
-            await seek(0);
-        }
-        _paused = false;
-        await audio.play();
-        video.start(audio);
-        events.emit('play');
-        events.emit('playing');
-    }
-    function pause() {
-        if (_paused) return;
-        _paused = true;
-        audio.pause();
-        video.stop();
-        events.emit('pause');
-    }
-    async function seek(time) {
-        const shouldResume = !_paused;
-        _ended = false;
-        _seeking = true;
-        events.emit('seeking');
-        events.emit('waiting');
-        pause();
-        await audio.seek(time);
-        await video.seek(time);
-        _seeking = false;
-        events.emit('seeked');
-        if (shouldResume && !_ended) await play();
-    }
-    function destroy() {
-        pause();
-        audio.destroy();
-        video.destroy();
-    }
-    return {
-        load,
-        play,
-        pause,
-        seek,
-        destroy,
-        setVolume: audio.setVolume,
-        setPlaybackRate (rate) {
-            audio.setPlaybackRate(rate);
-            video.setPlaybackRate(rate);
-        },
-        get currentTime () {
-            return audio.currentTime;
-        },
-        get duration () {
-            return audio.duration || video.duration;
-        },
-        get paused () {
-            return _paused;
-        },
-        get seeking () {
-            return _seeking;
-        },
-        get ended () {
-            return _ended;
-        },
-        get readyState () {
-            return _readyState;
-        },
-        get networkState () {
-            return _networkState;
-        },
-        get error () {
-            return _error;
-        },
-        get videoWidth () {
-            return video.width;
-        },
-        get videoHeight () {
-            return video.height;
-        }
-    };
-}
-
-},{"./audioEngine.js":"5E7zo","./videoEngine.js":"iSVKr","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"5E7zo":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>createAudioEngine);
-var _mediabunny = require("mediabunny");
-function createAudioEngine(events) {
-    let input = null;
-    let audioSink = null;
-    let audioContext = null;
-    let gainNode = null;
-    let audioIterator = null;
-    let audioContextStartTime = 0;
-    let playbackTimeAtStart = 0;
-    let latestScheduledEndTime = 0;
-    let _duration = Number.NaN;
-    let _paused = true;
-    let _volume = 0.7;
-    let _muted = false;
-    let _playbackRate = 1;
-    let asyncId = 0;
-    const queuedNodes = new Set();
-    function getCurrentTime() {
-        if (_paused) return playbackTimeAtStart;
-        return (audioContext.currentTime - audioContextStartTime) * _playbackRate + playbackTimeAtStart;
-    }
-    function updateGain() {
-        if (!gainNode) return;
-        const v = _muted ? 0 : _volume;
-        gainNode.gain.value = v * v;
-    }
-    function ensureAudioContext(sampleRate) {
-        if (audioContext) return;
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
+    async performLoad(src, id) {
+        let videoMetadataLoaded = false;
+        let audioMetadataLoaded = false;
+        const checkMetadata = ()=>{
+            if (videoMetadataLoaded && audioMetadataLoaded) {
+                this.readyState = 1 // HAVE_METADATA
+                ;
+                this.events.emit('loadedmetadata');
+                this.events.emit('durationchange');
+            }
+        };
         try {
-            audioContext = new AudioContext({
-                sampleRate
-            });
-        } catch  {
-            audioContext = new AudioContext();
+            await Promise.all([
+                this.video.load(src, ()=>{
+                    if (id !== this.loadSeq) return;
+                    videoMetadataLoaded = true;
+                    checkMetadata();
+                }),
+                this.audio.load(src, ()=>{
+                    if (id !== this.loadSeq) return;
+                    audioMetadataLoaded = true;
+                    checkMetadata();
+                })
+            ]);
+            if (id !== this.loadSeq) return;
+            this.readyState = 4 // HAVE_ENOUGH_DATA
+            ;
+            this.networkState = 1 // NETWORK_IDLE
+            ;
+            this.events.emit('loadeddata');
+            this.events.emit('canplay');
+            this.events.emit('canplaythrough');
+        } catch (err) {
+            if (id !== this.loadSeq) return;
+            this.error = {
+                code: 4,
+                message: err.message
+            };
+            this.networkState = 3;
+            this.events.emit('error');
+            console.error('MediaBunny load error:', err);
         }
-        gainNode = audioContext.createGain();
-        gainNode.connect(audioContext.destination);
-        updateGain();
     }
-    function stopQueuedNodes() {
-        for (const node of queuedNodes)node.stop();
-        queuedNodes.clear();
+    createTimeout(ms) {
+        return new Promise((_, reject)=>{
+            setTimeout(()=>reject(new Error('Load timeout')), ms);
+        });
     }
-    async function stopIterator() {
-        await audioIterator?.return();
-        audioIterator = null;
+    async play() {
+        if (!this.paused) return;
+        if (this.ended) {
+            this.ended = false;
+            await this.seek(0);
+        }
+        this.paused = false;
+        await this.audio.play();
+        this.video.start(this.audio);
+        this.events.emit('play');
+        this.events.emit('playing');
     }
-    function normalizeSource(src) {
+    pause() {
+        if (this.paused) return;
+        this.paused = true;
+        this.audio.pause();
+        this.video.stop();
+        this.events.emit('pause');
+    }
+    async seek(time) {
+        const shouldResume = !this.paused;
+        this.ended = false;
+        this.seeking = true;
+        this.events.emit('seeking');
+        this.events.emit('waiting');
+        this.pause();
+        await Promise.all([
+            this.audio.seek(time),
+            this.video.seek(time)
+        ]);
+        this.seeking = false;
+        this.events.emit('seeked');
+        if (shouldResume && !this.ended) await this.play();
+    }
+    setVolume(volume, muted) {
+        this.audio.setVolume(volume, muted);
+    }
+    setPlaybackRate(rate) {
+        this.audio.setPlaybackRate(rate);
+        this.video.setPlaybackRate(rate);
+    }
+    destroy() {
+        this.pause();
+        this.audio.destroy();
+        this.video.destroy();
+    }
+    // Getters
+    get currentTime() {
+        return this.audio.currentTime;
+    }
+    get duration() {
+        return this.audio.duration || this.video.duration;
+    }
+    get videoWidth() {
+        return this.video.width;
+    }
+    get videoHeight() {
+        return this.video.height;
+    }
+}
+exports.default = MediaBunnyEngine;
+
+},{"./AudioEngine.js":"fhVqP","./VideoEngine.js":"aylqP","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"fhVqP":[function(require,module,exports,__globalThis) {
+/**
+ * Audio Engine for MediaBunny
+ * Handles audio playback using Web Audio API
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _mediabunny = require("mediabunny");
+class AudioEngine {
+    constructor(events){
+        this.events = events;
+        // MediaBunny instances
+        this.input = null;
+        this.audioSink = null;
+        this.audioIterator = null;
+        // Web Audio API
+        this.audioContext = null;
+        this.gainNode = null;
+        // Playback state
+        this.audioContextStartTime = 0;
+        this.playbackTimeAtStart = 0;
+        this.latestScheduledEndTime = 0;
+        this.duration = Number.NaN;
+        this.paused = true;
+        // Audio settings
+        this.volume = 0.7;
+        this.muted = false;
+        this.playbackRate = 1;
+        // Async control
+        this.asyncId = 0;
+        this.queuedNodes = new Set();
+    }
+    get currentTime() {
+        if (this.paused) return this.playbackTimeAtStart;
+        return (this.audioContext.currentTime - this.audioContextStartTime) * this.playbackRate + this.playbackTimeAtStart;
+    }
+    normalizeSource(src) {
         if (typeof src === 'string') return new (0, _mediabunny.UrlSource)(src);
         if (src instanceof Blob) return new (0, _mediabunny.BlobSource)(src);
         if (typeof ReadableStream !== 'undefined' && src instanceof ReadableStream) return new (0, _mediabunny.ReadableStreamSource)(src);
         return src;
     }
-    async function load(src, onMetadata) {
-        asyncId++;
-        const id = asyncId;
-        await stopIterator();
-        stopQueuedNodes();
-        _paused = true;
-        playbackTimeAtStart = 0;
-        audioContextStartTime = 0;
-        const source = normalizeSource(src);
+    ensureAudioContext(sampleRate) {
+        if (this.audioContext) return;
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        try {
+            this.audioContext = new AudioContext({
+                sampleRate
+            });
+        } catch  {
+            this.audioContext = new AudioContext();
+        }
+        this.gainNode = this.audioContext.createGain();
+        this.gainNode.connect(this.audioContext.destination);
+        this.updateGain();
+    }
+    updateGain() {
+        if (!this.gainNode) return;
+        const v = this.muted ? 0 : this.volume;
+        this.gainNode.gain.value = v * v;
+    }
+    stopQueuedNodes() {
+        this.queuedNodes.forEach((node)=>node.stop());
+        this.queuedNodes.clear();
+    }
+    async stopIterator() {
+        await this.audioIterator?.return();
+        this.audioIterator = null;
+    }
+    async load(src, onMetadata) {
+        const id = ++this.asyncId;
+        await this.stopIterator();
+        this.stopQueuedNodes();
+        this.paused = true;
+        this.playbackTimeAtStart = 0;
+        this.audioContextStartTime = 0;
+        const source = this.normalizeSource(src);
         if (!source) return;
-        input = new (0, _mediabunny.Input)({
+        this.input = new (0, _mediabunny.Input)({
             source,
             formats: (0, _mediabunny.ALL_FORMATS)
         });
-        _duration = await input.computeDuration();
-        if (id !== asyncId) return;
-        const audioTrack = await input.getPrimaryAudioTrack();
+        this.duration = await this.input.computeDuration();
+        if (id !== this.asyncId) return;
+        const audioTrack = await this.input.getPrimaryAudioTrack();
         if (!audioTrack) {
-            audioSink = null;
-            ensureAudioContext();
-            if (onMetadata) onMetadata();
+            this.audioSink = null;
+            this.ensureAudioContext();
+            onMetadata?.();
             return;
         }
         if (audioTrack.codec === null || !await audioTrack.canDecode()) {
-            audioSink = null;
-            ensureAudioContext();
-            if (onMetadata) onMetadata();
+            this.audioSink = null;
+            this.ensureAudioContext();
+            onMetadata?.();
             return;
         }
-        ensureAudioContext(audioTrack.sampleRate);
-        audioSink = new (0, _mediabunny.AudioBufferSink)(audioTrack);
-        if (onMetadata) onMetadata();
+        this.ensureAudioContext(audioTrack.sampleRate);
+        this.audioSink = new (0, _mediabunny.AudioBufferSink)(audioTrack);
+        onMetadata?.();
     }
-    async function runIterator(localId) {
-        if (!audioSink) return;
-        await stopIterator();
-        audioIterator = audioSink.buffers(getCurrentTime());
+    async runIterator(localId) {
+        if (!this.audioSink) return;
+        await this.stopIterator();
+        this.audioIterator = this.audioSink.buffers(this.currentTime);
         while(true){
-            if (localId !== asyncId) return;
-            if (_paused) return;
-            const nextPromise = audioIterator.next();
+            if (localId !== this.asyncId || this.paused) return;
+            const nextPromise = this.audioIterator.next();
+            // Monitor for buffer starvation
             const checkStarvation = setInterval(()=>{
-                if (localId !== asyncId || _paused) {
+                if (localId !== this.asyncId || this.paused) {
                     clearInterval(checkStarvation);
                     return;
                 }
-                if (audioContext.state === 'running' && audioContext.currentTime >= latestScheduledEndTime - 0.2) {
-                    audioContext.suspend();
-                    events.emit('waiting');
+                if (this.audioContext.state === 'running' && this.audioContext.currentTime >= this.latestScheduledEndTime - 0.2) {
+                    this.audioContext.suspend();
+                    this.events.emit('waiting');
                 }
             }, 50);
             let result;
             try {
                 result = await nextPromise;
             } catch (e) {
-                console.error(e);
+                console.error('Audio iterator error:', e);
                 break;
             } finally{
                 clearInterval(checkStarvation);
             }
-            if (localId !== asyncId) return;
-            if (_paused) return;
-            if (audioContext.state === 'suspended') {
-                await audioContext.resume();
-                events.emit('canplay');
-                events.emit('playing');
+            if (localId !== this.asyncId || this.paused) return;
+            // Resume if was suspended
+            if (this.audioContext.state === 'suspended') {
+                await this.audioContext.resume();
+                this.events.emit('canplay');
+                this.events.emit('playing');
             }
             if (result.done) break;
             const { buffer, timestamp } = result.value;
-            const node = audioContext.createBufferSource();
+            // Schedule audio buffer
+            const node = this.audioContext.createBufferSource();
             node.buffer = buffer;
-            node.connect(gainNode);
-            node.playbackRate.value = _playbackRate;
-            const startAt = audioContextStartTime + (timestamp - playbackTimeAtStart) / _playbackRate;
+            node.connect(this.gainNode);
+            node.playbackRate.value = this.playbackRate;
+            const startAt = this.audioContextStartTime + (timestamp - this.playbackTimeAtStart) / this.playbackRate;
             const duration = buffer.duration;
-            const endAt = startAt + duration / _playbackRate;
-            if (endAt > latestScheduledEndTime) latestScheduledEndTime = endAt;
-            if (startAt >= audioContext.currentTime) node.start(startAt);
-            else node.start(audioContext.currentTime, (audioContext.currentTime - startAt) * _playbackRate);
-            queuedNodes.add(node);
-            node.onended = ()=>queuedNodes.delete(node);
+            const endAt = startAt + duration / this.playbackRate;
+            if (endAt > this.latestScheduledEndTime) this.latestScheduledEndTime = endAt;
+            if (startAt >= this.audioContext.currentTime) node.start(startAt);
+            else node.start(this.audioContext.currentTime, (this.audioContext.currentTime - startAt) * this.playbackRate);
+            this.queuedNodes.add(node);
+            node.onended = ()=>this.queuedNodes.delete(node);
         }
     }
-    async function play() {
-        if (!_paused) return;
-        if (!audioContext) ensureAudioContext();
-        if (audioContext.state === 'suspended') await audioContext.resume();
-        audioContextStartTime = audioContext.currentTime;
-        latestScheduledEndTime = audioContextStartTime;
-        _paused = false;
-        asyncId++;
-        runIterator(asyncId);
+    async play() {
+        if (!this.paused) return;
+        if (!this.audioContext) this.ensureAudioContext();
+        if (this.audioContext.state === 'suspended') await this.audioContext.resume();
+        this.audioContextStartTime = this.audioContext.currentTime;
+        this.latestScheduledEndTime = this.audioContextStartTime;
+        this.paused = false;
+        const id = ++this.asyncId;
+        this.runIterator(id);
     }
-    function pause() {
-        if (_paused) return;
-        playbackTimeAtStart = getCurrentTime();
-        _paused = true;
-        stopIterator();
-        stopQueuedNodes();
+    pause() {
+        if (this.paused) return;
+        this.playbackTimeAtStart = this.currentTime;
+        this.paused = true;
+        this.stopIterator();
+        this.stopQueuedNodes();
     }
-    async function seek(time) {
-        playbackTimeAtStart = Math.max(0, time);
-        audioContextStartTime = audioContext.currentTime;
-        latestScheduledEndTime = audioContextStartTime;
-        asyncId++;
-        if (!_paused) runIterator(asyncId);
+    async seek(time) {
+        this.playbackTimeAtStart = Math.max(0, time);
+        this.audioContextStartTime = this.audioContext.currentTime;
+        this.latestScheduledEndTime = this.audioContextStartTime;
+        const id = ++this.asyncId;
+        if (!this.paused) this.runIterator(id);
     }
-    function destroy() {
-        asyncId++;
-        pause();
-        audioContext?.close();
-        audioContext = null;
-        input = null;
-        audioSink = null;
+    setVolume(volume, muted) {
+        this.volume = volume;
+        this.muted = muted;
+        this.updateGain();
     }
-    return {
-        load,
-        play,
-        pause,
-        seek,
-        destroy,
-        setVolume (v, muted) {
-            _volume = v;
-            _muted = muted;
-            updateGain();
-        },
-        setPlaybackRate (rate) {
-            if (rate === _playbackRate) return;
-            if (!_paused) {
-                playbackTimeAtStart = getCurrentTime();
-                audioContextStartTime = audioContext.currentTime;
-            }
-            _playbackRate = rate;
-            if (!_paused) {
-                asyncId++;
-                runIterator(asyncId);
-            }
-        },
-        get currentTime () {
-            return getCurrentTime();
-        },
-        get duration () {
-            return _duration;
-        },
-        get paused () {
-            return _paused;
+    setPlaybackRate(rate) {
+        if (rate === this.playbackRate) return;
+        if (!this.paused) {
+            this.playbackTimeAtStart = this.currentTime;
+            this.audioContextStartTime = this.audioContext.currentTime;
         }
-    };
+        this.playbackRate = rate;
+        if (!this.paused) {
+            const id = ++this.asyncId;
+            this.runIterator(id);
+        }
+    }
+    destroy() {
+        this.asyncId++;
+        this.pause();
+        this.audioContext?.close();
+        this.audioContext = null;
+        this.input = null;
+        this.audioSink = null;
+    }
 }
+exports.default = AudioEngine;
 
 },{"mediabunny":"6p2EH","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"6p2EH":[function(require,module,exports,__globalThis) {
 /*!
@@ -16394,274 +16396,261 @@ const calculateCrc8 = (data)=>{
     return crc;
 };
 
-},{"../misc.js":"kkhLS","../reader.js":"fr2Ka","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"iSVKr":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+},{"../misc.js":"kkhLS","../reader.js":"fr2Ka","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"aylqP":[function(require,module,exports,__globalThis) {
+/**
+ * Video Engine for MediaBunny
+ * Handles video frame rendering and synchronization
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>createVideoEngine);
 var _mediabunny = require("mediabunny");
-function createVideoEngine({ canvas, ctx, events, timeupdateInterval = 250, avSyncTolerance = 0.12, dropLateFrames = false, poster = '', preflightRange = false }) {
-    let input = null;
-    let videoSink = null;
-    let videoIterator = null;
-    let nextFrame = null;
-    let rafId = 0;
-    let asyncId = 0;
-    let _width = 0;
-    let _height = 0;
-    let _duration = Number.NaN;
-    let audioClock = null;
-    let lastTimeUpdate = 0;
-    let stalled = false;
-    let playbackRate = 1;
-    let posterDrawn = false;
-    function normalizeSource(src) {
+class VideoEngine {
+    constructor({ canvas, ctx, events, timeupdateInterval = 250, avSyncTolerance = 0.12, dropLateFrames = false, poster = '', preflightRange = false }){
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.events = events;
+        this.timeupdateInterval = timeupdateInterval;
+        this.avSyncTolerance = avSyncTolerance;
+        this.dropLateFrames = dropLateFrames;
+        this.poster = poster;
+        this.preflightRange = preflightRange;
+        // MediaBunny instances
+        this.input = null;
+        this.videoSink = null;
+        this.videoIterator = null;
+        // Frame rendering
+        this.nextFrame = null;
+        this.rafId = 0;
+        this.asyncId = 0;
+        // Video properties
+        this.width = 0;
+        this.height = 0;
+        this.duration = Number.NaN;
+        // Playback state
+        this.audioClock = null;
+        this.lastTimeUpdate = 0;
+        this.stalled = false;
+        this.playbackRate = 1;
+        this.posterDrawn = false;
+    }
+    normalizeSource(src) {
         if (typeof src === 'string') return new (0, _mediabunny.UrlSource)(src);
         if (src instanceof Blob) return new (0, _mediabunny.BlobSource)(src);
         if (typeof ReadableStream !== 'undefined' && src instanceof ReadableStream) return new (0, _mediabunny.ReadableStreamSource)(src);
         return src;
     }
-    async function preflight(url) {
-        if (!preflightRange || typeof url !== 'string') return true;
+    async preflight(url) {
+        if (!this.preflightRange || typeof url !== 'string') return true;
         try {
             const res = await fetch(url, {
                 method: 'HEAD'
             });
             const acceptRanges = res.headers.get('accept-ranges');
             if (!acceptRanges || acceptRanges === 'none') {
-                events.emit('error', new Event('RangeNotSupported'));
+                this.events.emit('error', new Event('RangeNotSupported'));
                 return false;
             }
             return true;
         } catch (e) {
-            console.warn('preflight failed', e);
+            console.warn('Preflight check failed:', e);
             return true;
         }
     }
-    function drawPoster() {
-        if (!poster || posterDrawn) return;
+    drawPoster() {
+        if (!this.poster || this.posterDrawn) return;
         const img = new Image();
         img.onload = ()=>{
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            canvas.width = img.naturalWidth || canvas.width;
-            canvas.height = img.naturalHeight || canvas.height;
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            posterDrawn = true;
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.canvas.width = img.naturalWidth || this.canvas.width;
+            this.canvas.height = img.naturalHeight || this.canvas.height;
+            this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+            this.posterDrawn = true;
         };
-        img.src = poster;
+        img.src = this.poster;
     }
-    async function stopIterator() {
-        await videoIterator?.return();
-        videoIterator = null;
+    async stopIterator() {
+        await this.videoIterator?.return();
+        this.videoIterator = null;
     }
-    function clear() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    clear() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
-    async function load(src, onMetadata) {
-        asyncId++;
-        const id = asyncId;
-        await stopIterator();
-        clear();
-        posterDrawn = false;
-        if (!await preflight(src)) return;
-        const source = normalizeSource(src);
+    async load(src, onMetadata) {
+        const id = ++this.asyncId;
+        await this.stopIterator();
+        this.clear();
+        this.posterDrawn = false;
+        if (!await this.preflight(src)) return;
+        const source = this.normalizeSource(src);
         if (!source) {
-            drawPoster();
+            this.drawPoster();
             return;
         }
-        input = new (0, _mediabunny.Input)({
+        this.input = new (0, _mediabunny.Input)({
             source,
             formats: (0, _mediabunny.ALL_FORMATS)
         });
-        _duration = await input.computeDuration();
-        if (id !== asyncId) return;
-        const videoTrack = await input.getPrimaryVideoTrack();
+        this.duration = await this.input.computeDuration();
+        if (id !== this.asyncId) return;
+        const videoTrack = await this.input.getPrimaryVideoTrack();
         if (!videoTrack) {
-            videoSink = null;
-            _width = 0;
-            _height = 0;
-            canvas.width = 0;
-            canvas.height = 0;
-            drawPoster();
-            if (onMetadata) onMetadata();
+            this.handleNoVideoTrack();
+            onMetadata?.();
             return;
         }
         if (videoTrack.codec === null || !await videoTrack.canDecode()) {
-            videoSink = null;
-            _width = 0;
-            _height = 0;
-            canvas.width = 0;
-            canvas.height = 0;
-            clear();
-            drawPoster();
-            if (onMetadata) onMetadata();
+            this.handleNoVideoTrack();
+            onMetadata?.();
             return;
         }
         const transparent = await videoTrack.canBeTransparent();
-        videoSink = new (0, _mediabunny.CanvasSink)(videoTrack, {
+        this.videoSink = new (0, _mediabunny.CanvasSink)(videoTrack, {
             poolSize: 2,
             fit: 'contain',
             alpha: transparent
         });
-        _width = videoTrack.displayWidth;
-        _height = videoTrack.displayHeight;
-        canvas.width = _width;
-        canvas.height = _height;
-        if (onMetadata) onMetadata();
-        await resetIterator(0);
+        this.width = videoTrack.displayWidth;
+        this.height = videoTrack.displayHeight;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+        onMetadata?.();
+        await this.resetIterator(0);
     }
-    async function resetIterator(time) {
-        await stopIterator();
-        if (!videoSink) return;
-        videoIterator = videoSink.canvases(time);
-        const first = (await videoIterator.next()).value ?? null;
-        const second = (await videoIterator.next()).value ?? null;
-        nextFrame = second;
+    handleNoVideoTrack() {
+        this.videoSink = null;
+        this.width = 0;
+        this.height = 0;
+        this.canvas.width = 0;
+        this.canvas.height = 0;
+        this.clear();
+        this.drawPoster();
+    }
+    async resetIterator(time) {
+        await this.stopIterator();
+        if (!this.videoSink) return;
+        this.videoIterator = this.videoSink.canvases(time);
+        const first = (await this.videoIterator.next()).value ?? null;
+        const second = (await this.videoIterator.next()).value ?? null;
+        this.nextFrame = second;
         if (first) {
-            ctx.drawImage(first.canvas, 0, 0);
-            events.emit('loadeddata');
-        } else drawPoster();
+            this.ctx.drawImage(first.canvas, 0, 0);
+            this.events.emit('loadeddata');
+        } else this.drawPoster();
     }
-    async function updateNextFrame(localId) {
-        if (!videoIterator) return;
+    async updateNextFrame(localId) {
+        if (!this.videoIterator) return;
         while(true){
-            const frame = (await videoIterator.next()).value ?? null;
-            if (!frame) return;
-            if (localId !== asyncId) return;
-            const t = audioClock.currentTime;
-            if (dropLateFrames) {
-                const tolerance = Math.max(0.06, avSyncTolerance / Math.max(1, playbackRate));
-                if (frame.timestamp < t - tolerance) continue;
-                if (frame.timestamp <= t + tolerance) {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(frame.canvas, 0, 0);
-                } else {
-                    nextFrame = frame;
+            const frame = (await this.videoIterator.next()).value ?? null;
+            if (!frame || localId !== this.asyncId) return;
+            const t = this.audioClock.currentTime;
+            const tolerance = this.dropLateFrames ? Math.max(0.06, this.avSyncTolerance / Math.max(1, this.playbackRate)) : 0;
+            if (this.dropLateFrames && frame.timestamp < t - tolerance) continue;
+            if (frame.timestamp <= t + tolerance) {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.ctx.drawImage(frame.canvas, 0, 0);
+                if (!this.dropLateFrames && frame.timestamp > t) {
+                    this.nextFrame = null;
                     return;
                 }
-            } else if (frame.timestamp <= t) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(frame.canvas, 0, 0);
             } else {
-                nextFrame = frame;
+                this.nextFrame = frame;
                 return;
             }
         }
     }
-    function render() {
-        if (!audioClock) return;
-        const t = audioClock.currentTime;
+    render() {
+        if (!this.audioClock) return;
+        const t = this.audioClock.currentTime;
         const now = Date.now();
-        if (now - lastTimeUpdate >= timeupdateInterval) {
-            events.emit('timeupdate');
-            lastTimeUpdate = now;
+        // Emit timeupdate event
+        if (now - this.lastTimeUpdate >= this.timeupdateInterval) {
+            this.events.emit('timeupdate');
+            this.lastTimeUpdate = now;
         }
-        if (Number.isFinite(_duration) && t >= _duration) {
-            stop();
-            stalled = false;
-            events.emit('ended');
-            events.emit('pause');
-            events.emit('canplay');
+        // Check if reached end
+        if (Number.isFinite(this.duration) && t >= this.duration) {
+            this.stop();
+            this.stalled = false;
+            this.events.emit('ended');
+            this.events.emit('pause');
+            this.events.emit('canplay');
             return;
         }
-        if (nextFrame && nextFrame.timestamp <= t) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(nextFrame.canvas, 0, 0);
-            nextFrame = null;
-            updateNextFrame(asyncId);
-            if (stalled) {
-                events.emit('canplay');
-                events.emit('playing');
-                stalled = false;
+        // Render next frame if ready
+        if (this.nextFrame && this.nextFrame.timestamp <= t) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.drawImage(this.nextFrame.canvas, 0, 0);
+            this.nextFrame = null;
+            this.updateNextFrame(this.asyncId);
+            if (this.stalled) {
+                this.events.emit('canplay');
+                this.events.emit('playing');
+                this.stalled = false;
             }
-        } else if (!nextFrame) {
-            updateNextFrame(asyncId);
-            if (!nextFrame && Number.isFinite(_duration) && t < _duration && !stalled) {
-                stalled = true;
-                events.emit('waiting');
+        } else if (!this.nextFrame) {
+            this.updateNextFrame(this.asyncId);
+            if (!this.nextFrame && Number.isFinite(this.duration) && t < this.duration && !this.stalled) {
+                this.stalled = true;
+                this.events.emit('waiting');
             }
         }
-        rafId = requestAnimationFrame(render);
+        this.rafId = requestAnimationFrame(()=>this.render());
     }
-    function start(audioEngine) {
-        audioClock = audioEngine;
-        asyncId++;
-        stalled = false;
-        updateNextFrame(asyncId);
-        rafId = requestAnimationFrame(render);
+    start(audioEngine) {
+        this.audioClock = audioEngine;
+        this.asyncId++;
+        this.stalled = false;
+        this.updateNextFrame(this.asyncId);
+        this.rafId = requestAnimationFrame(()=>this.render());
     }
-    function stop() {
-        cancelAnimationFrame(rafId);
+    stop() {
+        cancelAnimationFrame(this.rafId);
     }
-    async function seek(time) {
-        asyncId++;
-        await resetIterator(time);
+    async seek(time) {
+        this.asyncId++;
+        await this.resetIterator(time);
     }
-    function setPlaybackRate(rate) {
-        playbackRate = Math.max(0.1, Number(rate) || 1);
+    setPlaybackRate(rate) {
+        this.playbackRate = Math.max(0.1, Number(rate) || 1);
     }
-    function destroy() {
-        asyncId++;
-        stop();
-        stopIterator();
-        posterDrawn = false;
-        input = null;
-        videoSink = null;
+    destroy() {
+        this.asyncId++;
+        this.stop();
+        this.stopIterator();
+        this.posterDrawn = false;
+        this.input = null;
+        this.videoSink = null;
     }
-    return {
-        load,
-        start,
-        stop,
-        seek,
-        setPlaybackRate,
-        destroy,
-        get width () {
-            return _width;
-        },
-        get height () {
-            return _height;
-        },
-        get duration () {
-            return _duration;
-        }
-    };
 }
+exports.default = VideoEngine;
 
-},{"mediabunny":"6p2EH","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"78ov3":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+},{"mediabunny":"6p2EH","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"7Odz0":[function(require,module,exports,__globalThis) {
+/**
+ * Event Target Implementation
+ * Simple event system for video events
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>clamp);
-function clamp(v, min, max) {
-    return Math.max(min, Math.min(max, Number(v) || 0));
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"9BYHB":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "createVideoEventTarget", ()=>createVideoEventTarget);
-function createVideoEventTarget() {
-    const listeners = new Map();
-    function addEventListener(type, fn) {
-        if (!listeners.has(type)) listeners.set(type, []);
-        listeners.get(type).push(fn);
+class EventTarget {
+    constructor(){
+        this.listeners = new Map();
     }
-    function removeEventListener(type, fn) {
-        const list = listeners.get(type);
+    addEventListener(type, fn) {
+        if (!this.listeners.has(type)) this.listeners.set(type, []);
+        this.listeners.get(type).push(fn);
+    }
+    removeEventListener(type, fn) {
+        const list = this.listeners.get(type);
         if (!list) return;
-        const i = list.indexOf(fn);
-        if (i >= 0) list.splice(i, 1);
+        const index = list.indexOf(fn);
+        if (index >= 0) list.splice(index, 1);
     }
-    function emit(type, detail) {
+    emit(type, detail) {
         const evt = new Event(type);
         evt.detail = detail;
-        const list = listeners.get(type);
+        const list = this.listeners.get(type);
         if (list) list.forEach((fn)=>fn(evt));
     }
-    return {
-        addEventListener,
-        removeEventListener,
-        emit
-    };
 }
+exports.default = EventTarget;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}]},["gqawh"], "gqawh", "parcelRequire4dc0", {})
 

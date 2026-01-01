@@ -3,7 +3,7 @@
 
 const art = new Artplayer({
     container: '.artplayer-app',
-    url: '/assets/sample/frag_bunny.mp4',
+    url: 'https://artplayer.org/assets/sample/frag_bunny.mp4',
     autoSize: false,
     screenshot: true,
     setting: true,
