@@ -9,7 +9,7 @@ export default class MediaBunnyEngine {
   constructor({ canvas, ctx, events, option = {} }) {
     this.events = events
     this.option = option
-    
+
     // Create audio and video engines
     this.audio = new AudioEngine(events)
     this.video = new VideoEngine({
@@ -41,13 +41,13 @@ export default class MediaBunnyEngine {
 
   async load(src) {
     const id = ++this.loadSeq
-    
+
     this.pause()
     this.ended = false
     this.error = null
     this.networkState = 2 // NETWORK_LOADING
     this.readyState = 0 // HAVE_NOTHING
-    
+
     setTimeout(() => this.events.emit('waiting'), 0)
     setTimeout(() => this.events.emit('loadstart'), 0)
 
@@ -60,9 +60,11 @@ export default class MediaBunnyEngine {
         this.performLoad(src, id),
         loadTimeout > 0 ? this.createTimeout(loadTimeout) : Promise.resolve(),
       ])
-    } catch (err) {
-      if (id !== this.loadSeq) return
-      
+    }
+    catch (err) {
+      if (id !== this.loadSeq)
+        return
+
       this.loadSeq++
       this.error = { code: 4, message: err.message }
       this.networkState = 3 // NETWORK_NO_SOURCE
@@ -79,33 +81,40 @@ export default class MediaBunnyEngine {
         this.readyState = 1 // HAVE_METADATA
         this.events.emit('loadedmetadata')
         this.events.emit('durationchange')
+        this.events.emit('progress')
       }
     }
 
     try {
       await Promise.all([
         this.video.load(src, () => {
-          if (id !== this.loadSeq) return
+          if (id !== this.loadSeq)
+            return
           videoMetadataLoaded = true
           checkMetadata()
         }),
         this.audio.load(src, () => {
-          if (id !== this.loadSeq) return
+          if (id !== this.loadSeq)
+            return
           audioMetadataLoaded = true
           checkMetadata()
         }),
       ])
 
-      if (id !== this.loadSeq) return
+      if (id !== this.loadSeq)
+        return
 
       this.readyState = 4 // HAVE_ENOUGH_DATA
       this.networkState = 1 // NETWORK_IDLE
       this.events.emit('loadeddata')
       this.events.emit('canplay')
       this.events.emit('canplaythrough')
-    } catch (err) {
-      if (id !== this.loadSeq) return
-      
+      this.events.emit('progress')
+    }
+    catch (err) {
+      if (id !== this.loadSeq)
+        return
+
       this.error = { code: 4, message: err.message }
       this.networkState = 3
       this.events.emit('error')
@@ -120,7 +129,8 @@ export default class MediaBunnyEngine {
   }
 
   async play() {
-    if (!this.paused) return
+    if (!this.paused)
+      return
 
     if (this.ended) {
       this.ended = false
@@ -128,44 +138,45 @@ export default class MediaBunnyEngine {
     }
 
     this.paused = false
-    
+
     await this.audio.play()
     this.video.start(this.audio)
-    
+
     this.events.emit('play')
     this.events.emit('playing')
   }
 
   pause() {
-    if (this.paused) return
+    if (this.paused)
+      return
 
     this.paused = true
-    
+
     this.audio.pause()
     this.video.stop()
-    
+
     this.events.emit('pause')
   }
 
   async seek(time) {
     const shouldResume = !this.paused
-    
+
     this.ended = false
     this.seeking = true
-    
+
     this.events.emit('seeking')
     this.events.emit('waiting')
-    
+
     this.pause()
-    
+
     await Promise.all([
       this.audio.seek(time),
       this.video.seek(time),
     ])
-    
+
     this.seeking = false
     this.events.emit('seeked')
-    
+
     if (shouldResume && !this.ended) {
       await this.play()
     }

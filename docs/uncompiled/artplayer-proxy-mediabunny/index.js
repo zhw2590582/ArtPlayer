@@ -277,15 +277,15 @@ function artplayerProxyMediabunny(option = {}) {
 if (typeof window !== 'undefined') window.artplayerProxyMediabunny = artplayerProxyMediabunny;
 
 },{"./VideoShim.js":"l1ksT","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"l1ksT":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _eventTargetJs = require("./EventTarget.js");
+var _eventTargetJsDefault = parcelHelpers.interopDefault(_eventTargetJs);
 /**
  * Video Element Shim
  * Simulates HTMLVideoElement interface for MediaBunny
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _mediaBunnyEngineJs = require("./MediaBunnyEngine.js");
+ */ var _mediaBunnyEngineJs = require("./MediaBunnyEngine.js");
 var _mediaBunnyEngineJsDefault = parcelHelpers.interopDefault(_mediaBunnyEngineJs);
-var _eventTargetJs = require("./EventTarget.js");
-var _eventTargetJsDefault = parcelHelpers.interopDefault(_eventTargetJs);
 function clamp(v, min, max) {
     return Math.max(min, Math.min(max, Number(v) || 0));
 }
@@ -601,6 +601,7 @@ class MediaBunnyEngine {
                 ;
                 this.events.emit('loadedmetadata');
                 this.events.emit('durationchange');
+                this.events.emit('progress');
             }
         };
         try {
@@ -624,6 +625,7 @@ class MediaBunnyEngine {
             this.events.emit('loadeddata');
             this.events.emit('canplay');
             this.events.emit('canplaythrough');
+            this.events.emit('progress');
         } catch (err) {
             if (id !== this.loadSeq) return;
             this.error = {

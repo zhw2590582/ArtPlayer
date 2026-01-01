@@ -16,8 +16,9 @@ export default class EventTarget {
 
   removeEventListener(type, fn) {
     const list = this.listeners.get(type)
-    if (!list) return
-    
+    if (!list)
+      return
+
     const index = list.indexOf(fn)
     if (index >= 0) {
       list.splice(index, 1)
@@ -27,7 +28,7 @@ export default class EventTarget {
   emit(type, detail) {
     const evt = new Event(type)
     evt.detail = detail
-    
+
     const list = this.listeners.get(type)
     if (list) {
       list.forEach(fn => fn(evt))

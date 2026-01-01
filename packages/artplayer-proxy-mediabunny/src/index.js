@@ -37,7 +37,8 @@ export default function artplayerProxyMediabunny(option = {}) {
 
     // Add shim properties to canvas
     for (const prop of propertyNames) {
-      if (prop === 'constructor') continue
+      if (prop === 'constructor')
+        continue
       if (!(prop in canvas)) {
         Object.defineProperty(canvas, prop, {
           get() {
@@ -61,7 +62,8 @@ export default function artplayerProxyMediabunny(option = {}) {
     // Handle resize
     function resize() {
       const player = art.template?.$player
-      if (!player || art.option.autoSize) return
+      if (!player || art.option.autoSize)
+        return
 
       Object.assign(canvas.style, {
         width: '100%',

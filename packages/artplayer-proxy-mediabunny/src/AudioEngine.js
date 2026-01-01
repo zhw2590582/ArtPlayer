@@ -14,36 +14,37 @@ import {
 export default class AudioEngine {
   constructor(events) {
     this.events = events
-    
+
     // MediaBunny instances
     this.input = null
     this.audioSink = null
     this.audioIterator = null
-    
+
     // Web Audio API
     this.audioContext = null
     this.gainNode = null
-    
+
     // Playback state
     this.audioContextStartTime = 0
     this.playbackTimeAtStart = 0
     this.latestScheduledEndTime = 0
     this.duration = Number.NaN
     this.paused = true
-    
+
     // Audio settings
     this.volume = 0.7
     this.muted = false
     this.playbackRate = 1
-    
+
     // Async control
     this.asyncId = 0
     this.queuedNodes = new Set()
   }
 
   get currentTime() {
-    if (this.paused) return this.playbackTimeAtStart
-    
+    if (this.paused)
+      return this.playbackTimeAtStart
+
     return (
       (this.audioContext.currentTime - this.audioContextStartTime) * this.playbackRate
       + this.playbackTimeAtStart
@@ -51,8 +52,10 @@ export default class AudioEngine {
   }
 
   normalizeSource(src) {
-    if (typeof src === 'string') return new UrlSource(src)
-    if (src instanceof Blob) return new BlobSource(src)
+    if (typeof src === 'string')
+      return new UrlSource(src)
+    if (src instanceof Blob)
+      return new BlobSource(src)
     if (typeof ReadableStream !== 'undefined' && src instanceof ReadableStream) {
       return new ReadableStreamSource(src)
     }
@@ -60,13 +63,15 @@ export default class AudioEngine {
   }
 
   ensureAudioContext(sampleRate) {
-    if (this.audioContext) return
+    if (this.audioContext)
+      return
 
     const AudioContext = window.AudioContext || window.webkitAudioContext
-    
+
     try {
       this.audioContext = new AudioContext({ sampleRate })
-    } catch {
+    }
+    catch {
       this.audioContext = new AudioContext()
     }
 
@@ -76,7 +81,8 @@ export default class AudioEngine {
   }
 
   updateGain() {
-    if (!this.gainNode) return
+    if (!this.gainNode)
+      return
     const v = this.muted ? 0 : this.volume
     this.gainNode.gain.value = v * v
   }
@@ -102,7 +108,8 @@ export default class AudioEngine {
     this.audioContextStartTime = 0
 
     const source = this.normalizeSource(src)
-    if (!source) return
+    if (!source)
+      return
 
     this.input = new Input({
       source,
@@ -110,7 +117,8 @@ export default class AudioEngine {
     })
 
     this.duration = await this.input.computeDuration()
-    if (id !== this.asyncId) return
+    if (id !== this.asyncId)
+      return
 
     const audioTrack = await this.input.getPrimaryAudioTrack()
     if (!audioTrack) {
@@ -134,13 +142,15 @@ export default class AudioEngine {
   }
 
   async runIterator(localId) {
-    if (!this.audioSink) return
+    if (!this.audioSink)
+      return
 
     await this.stopIterator()
     this.audioIterator = this.audioSink.buffers(this.currentTime)
 
     while (true) {
-      if (localId !== this.asyncId || this.paused) return
+      if (localId !== this.asyncId || this.paused)
+        return
 
       const nextPromise = this.audioIterator.next()
 
@@ -150,10 +160,10 @@ export default class AudioEngine {
           clearInterval(checkStarvation)
           return
         }
-        
+
         if (
-          this.audioContext.state === 'running' &&
-          this.audioContext.currentTime >= this.latestScheduledEndTime - 0.2
+          this.audioContext.state === 'running'
+          && this.audioContext.currentTime >= this.latestScheduledEndTime - 0.2
         ) {
           this.audioContext.suspend()
           this.events.emit('waiting')
@@ -163,14 +173,17 @@ export default class AudioEngine {
       let result
       try {
         result = await nextPromise
-      } catch (e) {
+      }
+      catch (e) {
         console.error('Audio iterator error:', e)
         break
-      } finally {
+      }
+      finally {
         clearInterval(checkStarvation)
       }
 
-      if (localId !== this.asyncId || this.paused) return
+      if (localId !== this.asyncId || this.paused)
+        return
 
       // Resume if was suspended
       if (this.audioContext.state === 'suspended') {
@@ -179,7 +192,8 @@ export default class AudioEngine {
         this.events.emit('playing')
       }
 
-      if (result.done) break
+      if (result.done)
+        break
 
       const { buffer, timestamp } = result.value
 
@@ -189,9 +203,9 @@ export default class AudioEngine {
       node.connect(this.gainNode)
       node.playbackRate.value = this.playbackRate
 
-      const startAt =
-        this.audioContextStartTime +
-        (timestamp - this.playbackTimeAtStart) / this.playbackRate
+      const startAt
+        = this.audioContextStartTime
+          + (timestamp - this.playbackTimeAtStart) / this.playbackRate
 
       const duration = buffer.duration
       const endAt = startAt + duration / this.playbackRate
@@ -202,10 +216,11 @@ export default class AudioEngine {
 
       if (startAt >= this.audioContext.currentTime) {
         node.start(startAt)
-      } else {
+      }
+      else {
         node.start(
           this.audioContext.currentTime,
-          (this.audioContext.currentTime - startAt) * this.playbackRate
+          (this.audioContext.currentTime - startAt) * this.playbackRate,
         )
       }
 
@@ -215,7 +230,8 @@ export default class AudioEngine {
   }
 
   async play() {
-    if (!this.paused) return
+    if (!this.paused)
+      return
 
     if (!this.audioContext) {
       this.ensureAudioContext()
@@ -234,7 +250,8 @@ export default class AudioEngine {
   }
 
   pause() {
-    if (this.paused) return
+    if (this.paused)
+      return
 
     this.playbackTimeAtStart = this.currentTime
     this.paused = true
@@ -261,7 +278,8 @@ export default class AudioEngine {
   }
 
   setPlaybackRate(rate) {
-    if (rate === this.playbackRate) return
+    if (rate === this.playbackRate)
+      return
 
     if (!this.paused) {
       this.playbackTimeAtStart = this.currentTime

@@ -55,8 +55,10 @@ export default class VideoEngine {
   }
 
   normalizeSource(src) {
-    if (typeof src === 'string') return new UrlSource(src)
-    if (src instanceof Blob) return new BlobSource(src)
+    if (typeof src === 'string')
+      return new UrlSource(src)
+    if (src instanceof Blob)
+      return new BlobSource(src)
     if (typeof ReadableStream !== 'undefined' && src instanceof ReadableStream) {
       return new ReadableStreamSource(src)
     }
@@ -64,8 +66,9 @@ export default class VideoEngine {
   }
 
   async preflight(url) {
-    if (!this.preflightRange || typeof url !== 'string') return true
-    
+    if (!this.preflightRange || typeof url !== 'string')
+      return true
+
     try {
       const res = await fetch(url, { method: 'HEAD' })
       const acceptRanges = res.headers.get('accept-ranges')
@@ -74,15 +77,17 @@ export default class VideoEngine {
         return false
       }
       return true
-    } catch (e) {
+    }
+    catch (e) {
       console.warn('Preflight check failed:', e)
       return true
     }
   }
 
   drawPoster() {
-    if (!this.poster || this.posterDrawn) return
-    
+    if (!this.poster || this.posterDrawn)
+      return
+
     const img = new Image()
     img.onload = () => {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -110,7 +115,8 @@ export default class VideoEngine {
     this.clear()
     this.posterDrawn = false
 
-    if (!(await this.preflight(src))) return
+    if (!(await this.preflight(src)))
+      return
 
     const source = this.normalizeSource(src)
     if (!source) {
@@ -124,7 +130,8 @@ export default class VideoEngine {
     })
 
     this.duration = await this.input.computeDuration()
-    if (id !== this.asyncId) return
+    if (id !== this.asyncId)
+      return
 
     const videoTrack = await this.input.getPrimaryVideoTrack()
     if (!videoTrack) {
@@ -170,7 +177,8 @@ export default class VideoEngine {
   async resetIterator(time) {
     await this.stopIterator()
 
-    if (!this.videoSink) return
+    if (!this.videoSink)
+      return
 
     this.videoIterator = this.videoSink.canvases(time)
 
@@ -182,17 +190,20 @@ export default class VideoEngine {
     if (first) {
       this.ctx.drawImage(first.canvas, 0, 0)
       this.events.emit('loadeddata')
-    } else {
+    }
+    else {
       this.drawPoster()
     }
   }
 
   async updateNextFrame(localId) {
-    if (!this.videoIterator) return
+    if (!this.videoIterator)
+      return
 
     while (true) {
       const frame = (await this.videoIterator.next()).value ?? null
-      if (!frame || localId !== this.asyncId) return
+      if (!frame || localId !== this.asyncId)
+        return
 
       const t = this.audioClock.currentTime
       const tolerance = this.dropLateFrames
@@ -207,12 +218,13 @@ export default class VideoEngine {
       if (frame.timestamp <= t + tolerance) {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.ctx.drawImage(frame.canvas, 0, 0)
-        
+
         if (!this.dropLateFrames && frame.timestamp > t) {
           this.nextFrame = null
           return
         }
-      } else {
+      }
+      else {
         this.nextFrame = frame
         return
       }
@@ -220,7 +232,8 @@ export default class VideoEngine {
   }
 
   render() {
-    if (!this.audioClock) return
+    if (!this.audioClock)
+      return
 
     const t = this.audioClock.currentTime
     const now = Date.now()
@@ -247,15 +260,16 @@ export default class VideoEngine {
       this.ctx.drawImage(this.nextFrame.canvas, 0, 0)
       this.nextFrame = null
       this.updateNextFrame(this.asyncId)
-      
+
       if (this.stalled) {
         this.events.emit('canplay')
         this.events.emit('playing')
         this.stalled = false
       }
-    } else if (!this.nextFrame) {
+    }
+    else if (!this.nextFrame) {
       this.updateNextFrame(this.asyncId)
-      
+
       if (!this.nextFrame && Number.isFinite(this.duration) && t < this.duration && !this.stalled) {
         this.stalled = true
         this.events.emit('waiting')

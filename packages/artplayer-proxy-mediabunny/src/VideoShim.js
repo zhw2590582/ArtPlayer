@@ -1,9 +1,9 @@
+import EventTarget from './EventTarget.js'
 /**
  * Video Element Shim
  * Simulates HTMLVideoElement interface for MediaBunny
  */
 import MediaBunnyEngine from './MediaBunnyEngine.js'
-import EventTarget from './EventTarget.js'
 
 function clamp(v, min, max) {
   return Math.max(min, Math.min(max, Number(v) || 0))
@@ -17,7 +17,7 @@ export default class VideoShim {
 
     // Event system
     this.events = new EventTarget()
-    
+
     // MediaBunny engine
     this.engine = new MediaBunnyEngine({ canvas, ctx, events: this.events, option })
 
@@ -36,7 +36,8 @@ export default class VideoShim {
     // Auto-load source
     if (option.source) {
       this.src = option.source
-    } else if (art.option?.url) {
+    }
+    else if (art.option?.url) {
       this.src = art.option.url
     }
   }
@@ -66,7 +67,8 @@ export default class VideoShim {
 
   set src(v) {
     this._src = v
-    if (v) this.engine.load(v)
+    if (v)
+      this.engine.load(v)
   }
 
   get currentSrc() {
@@ -148,8 +150,9 @@ export default class VideoShim {
 
   set playbackRate(v) {
     const rate = Number(v)
-    if (Number.isNaN(rate) || rate <= 0) return
-    
+    if (Number.isNaN(rate) || rate <= 0)
+      return
+
     this._playbackRate = rate
     this.engine.setPlaybackRate(rate)
     this.events.emit('ratechange')
@@ -187,7 +190,8 @@ export default class VideoShim {
   }
 
   load() {
-    if (this._src) this.engine.load(this._src)
+    if (this._src)
+      this.engine.load(this._src)
   }
 
   // Video dimensions
@@ -290,13 +294,17 @@ export default class VideoShim {
   setAttribute(name, value) {
     if (name === 'src') {
       this.src = value
-    } else if (name === 'autoplay') {
+    }
+    else if (name === 'autoplay') {
       this.autoplay = value
-    } else if (name === 'loop') {
+    }
+    else if (name === 'loop') {
       this.loop = value
-    } else if (name === 'muted') {
+    }
+    else if (name === 'muted') {
       this.muted = true
-    } else {
+    }
+    else {
       this.canvas.setAttribute(name, value)
     }
   }
