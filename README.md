@@ -113,6 +113,7 @@ let art = new Artplayer({
 - [artplayer-plugin-auto-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail) <img src="https://img.shields.io/npm/dm/artplayer-plugin-auto-thumbnail.svg?sanitize=true">
 - [artplayer-plugin-ambilight](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight) <img src="https://img.shields.io/npm/dm/artplayer-plugin-ambilight.svg?sanitize=true">
 - [artplayer-plugin-document-pip](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip) <img src="https://img.shields.io/npm/dm/artplayer-plugin-document-pip.svg?sanitize=true">
+- [artplayer-plugin-jassub](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-jassub/index.js&example=jassub) <img src="https://img.shields.io/npm/dm/artplayer-plugin-jassub.svg?sanitize=true">
 - [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) (WIP)
 - [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) (WIP)
 - [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) (WIP)
