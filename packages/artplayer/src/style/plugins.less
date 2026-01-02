@@ -16,19 +16,20 @@
         gap: 10px;
         align-items: center;
         position: absolute;
-        padding: var(--art-space-xs);
+        border-radius: var(--art-border-radius);
+        padding: 10px;
         line-height: 1;
         left: var(--art-padding);
         bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + 10px);
-        .art-panel-surface();
+        background-color: var(--art-widget-background);
 
         .art-auto-playback-close {
             .art-center();
             cursor: pointer;
 
             svg {
-                width: var(--art-icon-small-size);
-                height: var(--art-icon-small-size);
+                width: 15px;
+                height: 15px;
                 fill: var(--art-theme);
             }
         }
@@ -54,7 +55,9 @@
 
             .art-controls,
             .art-progress {
-                transform: translateY(calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4));
+                transform: translateY(
+                    calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4)
+                );
             }
 
             .art-progress-indicator {

@@ -8,8 +8,8 @@
     cursor: move;
     user-select: none;
     overflow: hidden;
-    transition: opacity var(--art-transition-duration) var(--art-ease-standard);
-    box-shadow: 0 0 5px var(--art-overlay-strong);
+    transition: opacity 0.2s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 
     svg {
         fill: #fff;
@@ -26,7 +26,7 @@
         top: 10px;
         cursor: pointer;
         opacity: 0;
-        transition: opacity var(--art-transition-duration) var(--art-ease-standard);
+        transition: opacity 0.2s ease;
     }
 
     .art-mini-state {
@@ -34,15 +34,15 @@
         .art-center();
         pointer-events: none;
         opacity: 0;
-        transition: opacity var(--art-transition-duration) var(--art-ease-standard);
-        background-color: var(--art-overlay-dim);
+        transition: opacity 0.2s ease;
+        background-color: rgba(0, 0, 0, 0.25);
 
         .art-icon {
             opacity: 0.75;
             cursor: pointer;
             transform: scale(3);
             pointer-events: auto;
-            transition: transform var(--art-transition-duration) var(--art-ease-standard);
+            transition: transform 0.2s ease;
 
             &:active {
                 transform: scale(2.5);
@@ -55,7 +55,6 @@
     }
 
     &:hover {
-
         .art-mini-close,
         .art-mini-state {
             opacity: 1;
