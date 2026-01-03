@@ -6,5 +6,5 @@ declare const artplayerProxyCanvas: (option?: Option) => (art: Artplayer) => Res
 
 export default artplayerProxyCanvas
 
-export = artplayerProxyCanvas;
+export = artplayerProxyCanvas
 export as namespace artplayerProxyCanvas;

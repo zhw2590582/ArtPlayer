@@ -27,6 +27,11 @@ interface Result {
    * The audio element
    */
   audio: HTMLAudioElement
+
+  /**
+   * Update option
+   */
+  update: (option: Option) => void
 }
 
 declare const artplayerPluginAudioTrack: (option: Option) => (art: Artplayer) => Result

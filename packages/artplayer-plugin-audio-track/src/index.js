@@ -1,19 +1,15 @@
 export default function artplayerPluginAudioTrack(option) {
   return (art) => {
-    const { url, offset = 0, sync = 0.3 } = option
-
-    if (!url) {
-      return {
-        name: 'artplayerPluginAudioTrack',
-      }
-    }
+    let { url, offset = 0, sync = 0.3 } = option
 
     const audio = new Audio()
-    audio.src = url
     audio.preload = 'auto'
+    if (url) {
+      audio.src = url
+    }
 
     function syncAudio() {
-      if (!art.video)
+      if (!art.video || !url)
         return
 
       const videoTime = art.currentTime
@@ -25,6 +21,8 @@ export default function artplayerPluginAudioTrack(option) {
     }
 
     art.on('play', () => {
+      if (!url)
+        return
       syncAudio()
       audio.play().catch((err) => {
         console.warn(err)
@@ -60,6 +58,24 @@ export default function artplayerPluginAudioTrack(option) {
       audio.load()
     })
 
+    function update(newOption) {
+      if (newOption.url && newOption.url !== url) {
+        url = newOption.url
+        audio.src = url
+        if (art.playing) {
+          audio.play().catch(err => console.warn(err))
+        }
+      }
+
+      if (newOption.offset !== undefined) {
+        offset = newOption.offset
+      }
+
+      if (newOption.sync !== undefined) {
+        sync = newOption.sync
+      }
+    }
+
     audio.volume = art.volume
     audio.muted = art.muted
     audio.playbackRate = art.video?.playbackRate || 1
@@ -67,6 +83,7 @@ export default function artplayerPluginAudioTrack(option) {
     return {
       name: 'artplayerPluginAudioTrack',
       audio,
+      update,
     }
   }
 }

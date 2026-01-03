@@ -31,5 +31,5 @@ declare const artplayerPluginAudioTrack: (option: Option) => (art: Artplayer) =>
 
 export default artplayerPluginAudioTrack
 
-export = artplayerPluginAudioTrack;
+export = artplayerPluginAudioTrack
 export as namespace artplayerPluginAudioTrack;

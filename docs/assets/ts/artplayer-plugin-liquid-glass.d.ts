@@ -12,5 +12,5 @@ declare const artplayerPluginLiquidGlass: (option?: Option) => (art: Artplayer) 
 
 export default artplayerPluginLiquidGlass
 
-export = artplayerPluginLiquidGlass;
+export = artplayerPluginLiquidGlass
 export as namespace artplayerPluginLiquidGlass;
