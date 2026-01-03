@@ -7,7 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 - Change `Artplayer.FULLSCREEN_WEB_IN_BODY` defaults to `true`
+- The `reset` method is used to reset video request
 - Fix [#1014](https://github.com/zhw2590582/ArtPlayer/issues/1014)
+- Fix [#1023](https://github.com/zhw2590582/ArtPlayer/issues/1023)
+- Add `artplayer-proxy-mediabunny` plugin
+- Add `artplayer-plugin-audio-track` plugin
 
 ## [5.3.0] - 2025-09-06
 
