@@ -1,31 +1,25 @@
-import style from 'bundle-text:./style.less';
+import JASSUB from './jassub.es.js'
 
 export default function artplayerPluginJassub(option) {
-    return (art) => {
-        return {
-            name: 'artplayerPluginJassub',
-        };
-    };
-}
+  return (art) => {
+    const instance = new JASSUB({
+      video: art.video,
+      ...option,
+    })
 
-if (typeof document !== 'undefined') {
-  const id = 'artplayer-plugin-jassub';
-  let $style = document.getElementById(id)
-  if (!$style) {
-    $style = document.createElement('style')
-    $style.id = id
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        document.head.appendChild($style)
-      })
-    }
-    else {
-      (document.head || document.documentElement).appendChild($style)
+    instance._canvasParent.style.zIndex = 20
+
+    art.on('destroy', () => {
+      instance.destroy()
+    })
+
+    return {
+      name: 'artplayerPluginJassub',
+      instance,
     }
   }
-  $style.textContent = style
 }
 
 if (typeof window !== 'undefined') {
-    window.artplayerPluginJassub = artplayerPluginJassub;
+  window.artplayerPluginJassub = artplayerPluginJassub
 }

@@ -853,28 +853,15 @@ export interface CssVar {
   '--art-theme': string
   '--art-font-color': string
   '--art-background-color': string
-  '--art-font-size-sm': string
   '--art-text-shadow-color': string
   '--art-transition-duration': string
-  '--art-ease-standard': string
   '--art-padding': string
   '--art-border-radius': string
-  '--art-mobile-padding': string
-  '--art-mobile-radius': string
-  '--art-radius-sm': string
-  '--art-space-xxs': string
-  '--art-space-xs': string
-  '--art-surface-hover-color': string
-  '--art-surface-border-color': string
-  '--art-surface-muted-color': string
-  '--art-surface-range-color': string
   '--art-progress-height': string
   '--art-progress-color': string
   '--art-progress-top-gap': string
   '--art-hover-color': string
   '--art-loaded-color': string
-  '--art-tip-padding': string
-  '--art-tip-offset': string
   '--art-state-size': string
   '--art-state-opacity': number
   '--art-bottom-height': string
@@ -886,7 +873,6 @@ export interface CssVar {
   '--art-control-opacity': number
   '--art-control-icon-size': string
   '--art-control-icon-scale': number
-  '--art-touch-hit-size': string
   '--art-volume-height': string
   '--art-volume-handle-size': string
   '--art-lock-size': string
@@ -897,7 +883,6 @@ export interface CssVar {
   '--art-settings-max-height': string
   '--art-selector-max-height': string
   '--art-contextmenus-min-width': string
-  '--art-contextmenu-padding-x': string
   '--art-subtitle-font-size': string
   '--art-subtitle-gap': string
   '--art-subtitle-bottom': string
@@ -908,13 +893,6 @@ export interface CssVar {
   '--art-scrollbar-background': string
   '--art-scrollbar-background-hover': string
   '--art-mini-progress-height': string
-  '--art-shadow-low': string
-  '--art-shadow-medium': string
-  '--art-shadow-high': string
-  '--art-shadow-elevated': string
-  '--art-icon-small-size': string
-  '--art-overlay-dim': string
-  '--art-overlay-strong': string
 }
 
 export interface Config {
