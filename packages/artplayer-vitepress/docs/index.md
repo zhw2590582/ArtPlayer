@@ -75,7 +75,7 @@ https://unpkg.com/artplayer/dist/artplayer.js
 
 ::: tip 以下链接可以看到更多的使用例子
 
-[/packages/artplayer-template](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template)
+[/example](https://github.com/zhw2590582/ArtPlayer/tree/master/example)
 
 :::
 

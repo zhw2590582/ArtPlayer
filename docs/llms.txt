@@ -3185,7 +3185,7 @@ Basic HTML implementation example:
 Important note: The player's dimensions depend on the size of its container, so your container must have defined dimensions.
 
 For more usage examples, visit:
-/packages/artplayer-template
+/example
 
 Vue.js Integration
 

@@ -75,7 +75,7 @@ The player's dimensions depend on the size of its container `container`, so your
 
 ::: tip See more usage examples at the following link:
 
-[/packages/artplayer-template](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template)
+[/example](https://github.com/zhw2590582/ArtPlayer/tree/master/example)
 
 :::
 
