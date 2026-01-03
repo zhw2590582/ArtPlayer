@@ -1,0 +1,38 @@
+{
+  "name": "artplayer-plugin-audio-track",
+  "version": "1.0.0",
+  "description": "audio-track plugin for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/artplayer-plugin-audio-track.d.ts",
+      "import": "./dist/artplayer-plugin-audio-track.mjs",
+      "require": "./dist/artplayer-plugin-audio-track.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-audio-track.d.ts",
+      "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+      "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+
+    }
+  },
+  "main": "dist/artplayer-plugin-audio-track.js",
+  "module": "./dist/artplayer-plugin-audio-track.mjs",
+  "types": "types/artplayer-plugin-audio-track.d.ts",
+  "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+  "browserslist": "last 1 Chrome version"
+}

@@ -66,6 +66,7 @@
       './assets/ts/artplayer-plugin-liquid-glass.d.ts',
       './assets/ts/artplayer-proxy-canvas.d.ts',
       './assets/ts/artplayer-proxy-mediabunny.d.ts',
+      './assets/ts/artplayer-plugin-audio-track.d.ts',
       './assets/ts/artplayer.d.ts',
     ]
 
