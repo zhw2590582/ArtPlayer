@@ -4,7 +4,7 @@
 
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: '/assets/jassub/FateGrandOrderBabylonia-OP1v2-NCBD1080.webm',
+    url: '/assets/jassub/FGOBD.mp4',
     autoSize: true,
     fullscreen: true,
     fullscreenWeb: true,
