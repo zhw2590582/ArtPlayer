@@ -98,6 +98,69 @@ let art = new Artplayer({
 })
 ```
 
+## React
+
+```jsx
+import Artplayer from 'artplayer'
+import { useEffect, useRef } from 'react'
+
+export default function Player({ option, getInstance, ...rest }) {
+  const $container = useRef()
+
+  useEffect(() => {
+    const art = new Artplayer({
+      ...option,
+      container: $container.current,
+    })
+
+    if (typeof getInstance === 'function') {
+      getInstance(art)
+    }
+
+    return () => art.destroy(false)
+  }, [])
+
+  return <div ref={$container} {...rest}></div>
+}
+```
+
+## Vue
+
+```vue
+<template>
+  <div ref="$container" />
+</template>
+
+<script setup>
+import Artplayer from 'artplayer'
+import { onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
+
+const props = defineProps({
+  option: {
+    type: Object,
+    required: true,
+  },
+})
+
+const emit = defineEmits(['getInstance'])
+
+const art = shallowRef(null)
+const $container = ref(null)
+
+onMounted(() => {
+  art.value = new Artplayer({
+    ...props.option,
+    container: $container.value,
+  })
+  emit('getInstance', art.value)
+})
+
+onBeforeUnmount(() => {
+  art.value.destroy(false)
+})
+</script>
+```
+
 ## Plugins
 
 | Name | Describe | State |
@@ -158,8 +221,6 @@ We accept donations through these channels:
 ## QQ Group
 
 ![QQ Group](./images/qqgroup.png)
-
-[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com 'Powered by DartNode - Free VPS for Open Source')
 
 ## License
 
