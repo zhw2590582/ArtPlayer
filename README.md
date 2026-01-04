@@ -117,8 +117,8 @@ let art = new Artplayer({
 | [artplayer-plugin-audio-track](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track) | Audio track selection | <img src="https://img.shields.io/npm/dm/artplayer-plugin-audio-track.svg?sanitize=true"> |
 | [artplayer-plugin-jassub](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-jassub/index.js&example=jassub) | ASS/SSA subtitle support | <img src="https://img.shields.io/npm/dm/artplayer-plugin-jassub.svg?sanitize=true"> |
 | [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) | Danmuku masking (smart blocking) | <img src="https://img.shields.io/npm/dm/artplayer-plugin-danmuku-mask.svg?sanitize=true"> |
+| [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) | Automatic Speech Recognition | <img src="https://img.shields.io/npm/dm/artplayer-plugin-asr.svg?sanitize=true"> |
 | [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) | Video advertising plugin | WIP |
-| [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) | Automatic Speech Recognition | WIP |
 
 ## Libraries
 
