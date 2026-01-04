@@ -45,14 +45,19 @@ export default function artplayerPluginVast(callback) {
 
       imaPlayer = new Player(ima, $video, $container, adsRenderingSettings, playerOptions)
 
-      imaPlayer.addEventListener('AdStarted', () => {
+      imaPlayer.addEventListener('AdContentPauseRequested', () => {
         isAdPlaying = true
         $container.style.display = 'block'
       })
 
-      imaPlayer.addEventListener('AdComplete', () => {
+      imaPlayer.addEventListener('AdContentResumeRequested', () => {
         isAdPlaying = false
         $container.style.display = 'none'
+      })
+
+      imaPlayer.addEventListener('AdStarted', () => {
+        isAdPlaying = true
+        $container.style.display = 'block'
       })
 
       imaPlayer.addEventListener('AdError', (event) => {
@@ -73,23 +78,29 @@ export default function artplayerPluginVast(callback) {
       imaPlayer = null
     }
 
-    function playUrl(url) {
+    function playUrl(url, config = {}) {
       if (isAdPlaying)
         return
       if (!imaPlayer)
         initPlayer()
       const request = new ima.AdsRequest()
       request.adTagUrl = url
+      for (const key in config) {
+        request[key] = config[key]
+      }
       imaPlayer.playAds(request)
     }
 
-    function playRes(res) {
+    function playRes(res, config = {}) {
       if (isAdPlaying)
         return
       if (!imaPlayer)
         initPlayer()
       const request = new ima.AdsRequest()
       request.adsResponse = res
+      for (const key in config) {
+        request[key] = config[key]
+      }
       imaPlayer.playAds(request)
     }
 
@@ -98,8 +109,13 @@ export default function artplayerPluginVast(callback) {
         art,
         playUrl,
         playRes,
+        init: initPlayer,
         ima,
-        imaPlayer,
+        adsRenderingSettings,
+        playerOptions,
+        get imaPlayer() {
+          return imaPlayer
+        },
         get container() {
           return $container
         },
