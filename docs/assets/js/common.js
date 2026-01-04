@@ -58,7 +58,6 @@
       './assets/ts/artplayer-plugin-dash-control.d.ts',
       './assets/ts/artplayer-plugin-hls-control.d.ts',
       './assets/ts/artplayer-plugin-iframe.d.ts',
-      './assets/ts/artplayer-plugin-libass.d.ts',
       './assets/ts/artplayer-plugin-multiple-subtitles.d.ts',
       './assets/ts/artplayer-plugin-vast.d.ts',
       './assets/ts/artplayer-plugin-vtt-thumbnail.d.ts',

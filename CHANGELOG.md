@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Add `artplayer-plugin-jassub` plugin
 - Add `artplayer-proxy-mediabunny` plugin
 - Add `artplayer-plugin-audio-track` plugin
+- Deprecate `artplayer-plugin-libass` plugin
 
 ## [5.3.0] - 2025-09-06
 

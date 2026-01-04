@@ -5421,24 +5421,6 @@ export default ArtplayerPluginIframe
 export = artplayerPluginIframe
 export as namespace artplayerPluginIframe;
 
-===== artplayer-plugin-libass.d.ts =====
-
-// ASS subtitle rendering plugin using libass
-declare const artplayerPluginAss: (options: Options) => (art: Artplayer) => {
-  name: 'artplayerPluginLibass'
-  libass: SubtitlesOctopus    // Underlying libass instance
-  visible: boolean            // Subtitle visibility state
-  init: () => void            // Initialize subtitle renderer
-  switch: (url: string) => void  // Switch to different subtitle file
-  show: () => void            // Show subtitles
-  hide: () => void            // Hide subtitles
-  destroy: () => void         // Cleanup resources
-}
-
-export default artplayerPluginAss
-export = artplayerPluginLibass
-export as namespace artplayerPluginLibass;
-
 ===== artplayer-plugin-multiple-subtitles.d.ts =====
 
 // Plugin for managing multiple subtitle tracks
@@ -7754,55 +7736,6 @@ var art = new Artplayer({
 })
 
 // This example demonstrates a comprehensive ArtPlayer configuration with multiple features including custom settings, context menu, layers, quality switching, thumbnails, subtitles, highlights, and custom controls.
-
-===== libass.js =====
-
-// npm i artplayer-plugin-libass
-// import artplayerPluginLibass from 'artplayer-plugin-libass';
-
-const art = new Artplayer({
-  container: '.artplayer-app',
-  url: '/assets/sample/video.mp4',
-  fullscreenWeb: true,
-  subtitle: {
-    url: '/assets/sample/style-test.ass',
-  },
-  plugins: [
-    artplayerPluginLibass({
-      // debug: true,
-      workerUrl: 'https://unpkg.com/libass-wasm@4.1.0/dist/js/subtitles-octopus-worker.js',
-      // wasmUrl: 'https://unpkg.com/libass-wasm@4.1.0/dist/js/subtitles-octopus-worker.wasm',
-      fallbackFont: '/assets/misc/SourceHanSansCN-Bold.woff2',
-    }),
-  ],
-})
-
-// init
-art.on('artplayerPluginLibass:init', (adapter) => {
-  console.info('artplayerPluginLibass:init', adapter)
-})
-
-// subtitle switch
-art.on('artplayerPluginLibass:switch', (url) => {
-  console.info('artplayerPluginLibass:switch', url)
-})
-
-// subtitle visible
-art.on('artplayerPluginLibass:visible', (visible) => {
-  console.info('artplayerPluginLibass:visible', visible)
-})
-
-// subtitle timeOffset
-art.on('artplayerPluginLibass:timeOffset', (timeOffset) => {
-  console.info('artplayerPluginLibass:timeOffset', timeOffset)
-})
-
-// destroy
-art.on('artplayerPluginLibass:destroy', () => {
-  console.info('artplayerPluginLibass:destroy')
-})
-
-// This example shows how to integrate the libass plugin for advanced ASS subtitle support with WebAssembly rendering and event handling for subtitle operations.
 
 ===== mobile.js =====
 
