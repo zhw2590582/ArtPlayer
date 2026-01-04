@@ -246,6 +246,14 @@ function artplayerPluginAudioTrack(option) {
             audio.volume = art.volume;
             audio.muted = art.muted;
         });
+        art.on('video:waiting', ()=>{
+            audio.pause();
+        });
+        art.on('video:playing', ()=>{
+            if (url && art.playing) audio.play().catch((err)=>{
+                console.warn(err);
+            });
+        });
         art.on('destroy', ()=>{
             audio.pause();
             audio.src = '';
