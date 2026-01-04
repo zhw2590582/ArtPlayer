@@ -100,36 +100,43 @@ let art = new Artplayer({
 
 ## Plugins
 
-- [artplayer-plugin-danmuku](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku) <img src="https://img.shields.io/npm/dm/artplayer-plugin-danmuku.svg?sanitize=true">
-- [artplayer-plugin-iframe](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe) <img src="https://img.shields.io/npm/dm/artplayer-plugin-iframe.svg?sanitize=true">
-- [artplayer-plugin-hls-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control) <img src="https://img.shields.io/npm/dm/artplayer-plugin-hls-control.svg?sanitize=true">
-- [artplayer-plugin-dash-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control) <img src="https://img.shields.io/npm/dm/artplayer-plugin-dash-control.svg?sanitize=true">
-- [artplayer-plugin-vtt-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail) <img src="https://img.shields.io/npm/dm/artplayer-plugin-vtt-thumbnail.svg?sanitize=true">
-- [artplayer-plugin-multiple-subtitles](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles) <img src="https://img.shields.io/npm/dm/artplayer-plugin-multiple-subtitles.svg?sanitize=true">
-- [artplayer-plugin-chromecast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast) <img src="https://img.shields.io/npm/dm/artplayer-plugin-chromecast.svg?sanitize=true">
-- [artplayer-plugin-vast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast) <img src="https://img.shields.io/npm/dm/artplayer-plugin-vast.svg?sanitize=true">
-- [artplayer-plugin-chapter](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter) <img src="https://img.shields.io/npm/dm/artplayer-plugin-chapter.svg?sanitize=true">
-- [artplayer-plugin-auto-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail) <img src="https://img.shields.io/npm/dm/artplayer-plugin-auto-thumbnail.svg?sanitize=true">
-- [artplayer-plugin-ambilight](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight) <img src="https://img.shields.io/npm/dm/artplayer-plugin-ambilight.svg?sanitize=true">
-- [artplayer-plugin-document-pip](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip) <img src="https://img.shields.io/npm/dm/artplayer-plugin-document-pip.svg?sanitize=true">
-- [artplayer-plugin-audio-track](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track) <img src="https://img.shields.io/npm/dm/artplayer-plugin-audio-track.svg?sanitize=true">
-- [artplayer-plugin-jassub](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-jassub/index.js&example=jassub) <img src="https://img.shields.io/npm/dm/artplayer-plugin-jassub.svg?sanitize=true">
-- [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) (WIP)
-- [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) (WIP)
-- [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) (WIP)
-- [artplayer-plugin-liquid-glass](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-liquid-glass/index.js&example=liquid.glass) (WIP)
+| Name | Describe | State |
+| :--- | :--- | :--- |
+| [artplayer-plugin-danmuku](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku) | Danmuku (bullet comment) system | <img src="https://img.shields.io/npm/dm/artplayer-plugin-danmuku.svg?sanitize=true"> |
+| [artplayer-plugin-iframe](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe) | Control player via iframe | <img src="https://img.shields.io/npm/dm/artplayer-plugin-iframe.svg?sanitize=true"> |
+| [artplayer-plugin-hls-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control) | HLS quality control | <img src="https://img.shields.io/npm/dm/artplayer-plugin-hls-control.svg?sanitize=true"> |
+| [artplayer-plugin-dash-control](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control) | DASH quality control | <img src="https://img.shields.io/npm/dm/artplayer-plugin-dash-control.svg?sanitize=true"> |
+| [artplayer-plugin-vtt-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail) | VTT thumbnail preview | <img src="https://img.shields.io/npm/dm/artplayer-plugin-vtt-thumbnail.svg?sanitize=true"> |
+| [artplayer-plugin-multiple-subtitles](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles) | Multiple subtitles support | <img src="https://img.shields.io/npm/dm/artplayer-plugin-multiple-subtitles.svg?sanitize=true"> |
+| [artplayer-plugin-chromecast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast) | Google Chromecast support | <img src="https://img.shields.io/npm/dm/artplayer-plugin-chromecast.svg?sanitize=true"> |
+| [artplayer-plugin-vast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast) | VAST/VPAID advertising | <img src="https://img.shields.io/npm/dm/artplayer-plugin-vast.svg?sanitize=true"> |
+| [artplayer-plugin-chapter](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter) | Video chapters support | <img src="https://img.shields.io/npm/dm/artplayer-plugin-chapter.svg?sanitize=true"> |
+| [artplayer-plugin-auto-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail) | Auto-generated thumbnails | <img src="https://img.shields.io/npm/dm/artplayer-plugin-auto-thumbnail.svg?sanitize=true"> |
+| [artplayer-plugin-ambilight](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight) | Ambilight effect | <img src="https://img.shields.io/npm/dm/artplayer-plugin-ambilight.svg?sanitize=true"> |
+| [artplayer-plugin-document-pip](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip) | Document Picture-in-Picture | <img src="https://img.shields.io/npm/dm/artplayer-plugin-document-pip.svg?sanitize=true"> |
+| [artplayer-plugin-audio-track](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track) | Audio track selection | <img src="https://img.shields.io/npm/dm/artplayer-plugin-audio-track.svg?sanitize=true"> |
+| [artplayer-plugin-jassub](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-jassub/index.js&example=jassub) | ASS/SSA subtitle support | <img src="https://img.shields.io/npm/dm/artplayer-plugin-jassub.svg?sanitize=true"> |
+| [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) | Danmuku masking (smart blocking) | WIP |
+| [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) | Video advertising plugin | WIP |
+| [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) | Automatic Speech Recognition | WIP |
+| [artplayer-plugin-liquid-glass](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-liquid-glass/index.js&example=liquid.glass) | Liquid glass effect | WIP |
+
 ## Libraries
 
-- [hls.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js&example=hls)
-- [dash.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash)
-- [flv.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv)
-- [mpegts.js](https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts)
-- [webtorrent.js](https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent)
+| Name | Describe | State |
+| :--- | :--- | :--- |
+| [hls.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js&example=hls) | HLS client | <img src="https://img.shields.io/npm/dm/hls.js.svg?sanitize=true"> |
+| [dash.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash) | MPEG DASH player | <img src="https://img.shields.io/npm/dm/dashjs.svg?sanitize=true"> |
+| [flv.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv) | HTML5 FLV Player | <img src="https://img.shields.io/npm/dm/flv.js.svg?sanitize=true"> |
+| [mpegts.js](https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts) | MPEG-TS/FLV Player | <img src="https://img.shields.io/npm/dm/mpegts.js.svg?sanitize=true"> |
+| [webtorrent.js](https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent) | Streaming torrent client | <img src="https://img.shields.io/npm/dm/webtorrent.svg?sanitize=true"> |
 
 ## Proxys
 
-- [Canvas](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas)  <img src="https://img.shields.io/npm/dm/artplayer-proxy-canvas.svg?sanitize=true">
-- [Mediabunny](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-mediabunny/index.js&example=mediabunny)  <img src="https://img.shields.io/npm/dm/artplayer-proxy-mediabunny.svg?sanitize=true">
+| Name | Describe | State |
+| :--- | :--- | :--- |
+| [Canvas](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas) | Proxy video to canvas | <img src="https://img.shields.io/npm/dm/artplayer-proxy-canvas.svg?sanitize=true"> |
+| [Mediabunny](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-mediabunny/index.js&example=mediabunny) | Mediabunny proxy | <img src="https://img.shields.io/npm/dm/artplayer-proxy-mediabunny.svg?sanitize=true"> |
 
 ## Changelog
 
