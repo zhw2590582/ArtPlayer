@@ -19,10 +19,14 @@
 
   window.consoleLog($console)
 
-  $prod.checked = localStorage.getItem('prod') === 'true'
-  $ts.checked = localStorage.getItem('ts') === 'true'
-  $code.checked = localStorage.getItem('code') === 'true'
-  $log.checked = localStorage.getItem('log') === 'true'
+  // Helper functions for localStorage
+  const getStorageBoolean = (key) => localStorage.getItem(key) === 'true'
+  const setStorageBoolean = (key, value) => localStorage.setItem(key, value ? 'true' : 'false')
+
+  $prod.checked = getStorageBoolean('prod')
+  $ts.checked = getStorageBoolean('ts')
+  $code.checked = getStorageBoolean('code')
+  $log.checked = getStorageBoolean('log')
 
   if ($code.checked) {
     $editor.style.display = 'none'
@@ -48,24 +52,24 @@
 
     let libUris = [
       './assets/ts/artplayer-plugin-ads.d.ts',
-      './assets/ts/artplayer-plugin-asr.d.ts',
       './assets/ts/artplayer-plugin-ambilight.d.ts',
+      './assets/ts/artplayer-plugin-asr.d.ts',
+      './assets/ts/artplayer-plugin-audio-track.d.ts',
       './assets/ts/artplayer-plugin-auto-thumbnail.d.ts',
       './assets/ts/artplayer-plugin-chapter.d.ts',
       './assets/ts/artplayer-plugin-chromecast.d.ts',
       './assets/ts/artplayer-plugin-danmuku-mask.d.ts',
       './assets/ts/artplayer-plugin-danmuku.d.ts',
       './assets/ts/artplayer-plugin-dash-control.d.ts',
+      './assets/ts/artplayer-plugin-document-pip.d.ts',
       './assets/ts/artplayer-plugin-hls-control.d.ts',
       './assets/ts/artplayer-plugin-iframe.d.ts',
+      './assets/ts/artplayer-plugin-jassub.d.ts',
       './assets/ts/artplayer-plugin-multiple-subtitles.d.ts',
       './assets/ts/artplayer-plugin-vast.d.ts',
       './assets/ts/artplayer-plugin-vtt-thumbnail.d.ts',
-      './assets/ts/artplayer-plugin-document-pip.d.ts',
-      './assets/ts/artplayer-plugin-jassub.d.ts',
       './assets/ts/artplayer-proxy-canvas.d.ts',
       './assets/ts/artplayer-proxy-mediabunny.d.ts',
-      './assets/ts/artplayer-plugin-audio-track.d.ts',
       './assets/ts/artplayer.d.ts',
     ]
 
@@ -76,7 +80,7 @@
       monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri))
     }
 
-    var disposable = monaco.editor.onDidCreateEditor(() => {
+    const disposable = monaco.editor.onDidCreateEditor(() => {
       disposable.dispose()
       setTimeout(initApp, 1000)
     })
@@ -103,8 +107,10 @@
   })
 
   function getURLParameters(url) {
-    return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce((a, v) => {
-      return (a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1)), a
+    return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce((params, pair) => {
+      const index = pair.indexOf('=')
+      params[pair.slice(0, index)] = pair.slice(index + 1)
+      return params
     }, {})
   }
 
@@ -122,56 +128,52 @@
 
   function loadScript(url) {
     return new Promise((resolve, reject) => {
-      let define2 = window.define
+      const originalDefine = window.define
       window.define = undefined
-      let script = document.createElement('script')
+      const script = document.createElement('script')
       script.type = 'text/javascript'
       script.src = url
-      script.onload = function () {
-        window.define = define2
+      script.onload = () => {
+        window.define = originalDefine
         resolve(url)
       }
-      script.onerror = function () {
-        reject(new Error(`Loading script failed:${url}`))
+      script.onerror = () => {
+        window.define = originalDefine
+        reject(new Error(`Loading script failed: ${url}`))
       }
-      document.querySelector('head').appendChild(script)
+      document.head.appendChild(script)
     })
   }
 
   function loadStyle(url) {
     return new Promise((resolve, reject) => {
-      let link = document.createElement('link')
+      const link = document.createElement('link')
       link.rel = 'stylesheet'
       link.href = url
-      link.onload = function () {
-        resolve(url)
-      }
-      link.onerror = function () {
-        reject(new Error(`Loading style failed:${url}`))
-      }
-      document.querySelector('head').appendChild(link)
+      link.onload = () => resolve(url)
+      link.onerror = () => reject(new Error(`Loading style failed: ${url}`))
+      document.head.appendChild(link)
     })
   }
 
   function loadLib(libs) {
-    let libPromise = []
-    let libsDecode = decodeURIComponent(libs || '')
-    libsDecode
+    const libPromises = []
+    const libsDecoded = decodeURIComponent(libs || '')
+    const urls = libsDecoded
       .split(/\r?\n/)
-      .filter((url) => {
-        return !loadedLibs.includes(url)
-      })
-      .forEach((url) => {
-        let ext = getExt(url)
-        if (ext === 'js') {
-          libPromise.push(loadScript(url))
-        }
-        else if (ext === 'css') {
-          libPromise.push(loadStyle(url))
-        }
-      })
-    $lib.value = libsDecode
-    return Promise.all(libPromise)
+      .filter((url) => url.trim() && !loadedLibs.includes(url))
+    
+    urls.forEach((url) => {
+      const ext = getExt(url)
+      if (ext === 'js') {
+        libPromises.push(loadScript(url))
+      } else if (ext === 'css') {
+        libPromises.push(loadStyle(url))
+      }
+    })
+    
+    $lib.value = libsDecoded
+    return Promise.all(libPromises)
   }
 
   function runExample(name) {
@@ -202,34 +204,32 @@
   }
 
   function runCode() {
-    [...Artplayer.instances].forEach((art) => {
-      art.destroy(true)
-    })
+    // Destroy all existing instances
+    Artplayer.instances.forEach((art) => art.destroy(true))
+    
     const value = editor.getValue()
     eval(value)
     window.art = Artplayer.instances[0]
   }
 
   function initApp() {
-    let _getURLParameters = getURLParameters(window.location.href)
-    let code = _getURLParameters.code
-    let libs = _getURLParameters.libs
-    example = _getURLParameters.example
+    const urlParams = getURLParameters(window.location.href)
+    const { code, libs, example } = urlParams
 
     loadLib(libs)
       .then((result) => {
-        loadedLibs = loadedLibs.concat(result)
+        loadedLibs.push(...result)
         loadCode(code, example)
       })
       .catch((err) => {
-        console.error(err)
+        console.error('Failed to initialize app:', err)
       })
   }
 
   function restart() {
-    let libs = encodeURIComponent($lib.value)
-    let code = encodeURIComponent(editor.getValue())
-    let url = `${window.location.origin + window.location.pathname}?libs=${libs}&code=${code}`
+    const libs = encodeURIComponent($lib.value)
+    const code = encodeURIComponent(editor.getValue())
+    const url = `${window.location.origin}${window.location.pathname}?libs=${libs}&code=${code}`
     history.pushState(null, null, url)
     initApp()
   }
@@ -253,22 +253,22 @@
   })
 
   $prod.addEventListener('change', () => {
-    localStorage.setItem('prod', $prod.checked ? 'true' : 'false')
+    setStorageBoolean('prod', $prod.checked)
     window.location.reload()
   })
 
   $ts.addEventListener('change', () => {
-    localStorage.setItem('ts', $ts.checked ? 'true' : 'false')
+    setStorageBoolean('ts', $ts.checked)
     window.location.reload()
   })
 
   $code.addEventListener('change', () => {
-    localStorage.setItem('code', $code.checked ? 'true' : 'false')
+    setStorageBoolean('code', $code.checked)
     window.location.reload()
   })
 
   $log.addEventListener('change', () => {
-    localStorage.setItem('log', $log.checked ? 'true' : 'false')
+    setStorageBoolean('log', $log.checked)
     window.location.reload()
   })
 

@@ -33,6 +33,8 @@ console.log(`✨ Built ${artplayerTSoutput}`);
 
 (async function () {
   const pluginsTS = glob.sync('packages/artplayer-*-*/types/*.d.ts')
+  const pluginFiles = []
+
   for (let index = 0; index < pluginsTS.length; index++) {
     const type = pluginsTS[index]
     const { name, file } = parsePluginInfo(type)
@@ -40,5 +42,18 @@ console.log(`✨ Built ${artplayerTSoutput}`);
     const output = path.join('docs/assets/ts', file)
     fs.writeFileSync(output, code.trim())
     console.log(`✨ Built ${output}`)
+    pluginFiles.push(file)
   }
+
+  pluginFiles.sort()
+  const allFiles = [...pluginFiles, 'artplayer.d.ts']
+  const commonJsPath = path.join('docs/assets/js/common.js')
+  const commonJsContent = fs.readFileSync(commonJsPath, 'utf-8')
+  const newLibUris = allFiles.map(file => `'./assets/ts/${file}'`).join(',\n      ')
+  const newContent = commonJsContent.replace(
+    /let libUris = \[([\s\S]*?)\]/,
+    `let libUris = [\n      ${newLibUris},\n    ]`,
+  )
+  fs.writeFileSync(commonJsPath, newContent)
+  console.log(`✨ Updated libUris in ${commonJsPath}`)
 })()
