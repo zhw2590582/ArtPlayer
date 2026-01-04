@@ -119,7 +119,6 @@ let art = new Artplayer({
 | [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) | Danmuku masking (smart blocking) | <img src="https://img.shields.io/npm/dm/artplayer-plugin-danmuku-mask.svg?sanitize=true"> |
 | [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) | Video advertising plugin | WIP |
 | [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) | Automatic Speech Recognition | WIP |
-| [artplayer-plugin-liquid-glass](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-liquid-glass/index.js&example=liquid.glass) | Liquid glass effect | WIP |
 
 ## Libraries
 
