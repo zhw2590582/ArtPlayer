@@ -1,72 +1,113 @@
-import type Artplayer from 'artplayer';
+import type Artplayer from 'artplayer'
 
-export = artplayerPluginVast;
-export as namespace artplayerPluginVast;
+export = artplayerPluginVast
+export as namespace artplayerPluginVast
 
-declare function artplayerPluginVast(options?: artplayerPluginVast.Options): (art: Artplayer) => artplayerPluginVast.Result;
+declare function artplayerPluginVast(option: artplayerPluginVast.Option): (art: Artplayer) => artplayerPluginVast.VastPlugin
 
 declare namespace artplayerPluginVast {
-    interface Options {
-        [key: string]: any;
-    }
+  interface Option {
+    /**
+     * The URL of the IMA SDK to load.
+     * Default: '//imasdk.googleapis.com/js/sdkloader/ima3.js'
+     */
+    sdkUrl?: string
 
-    interface Result {
-        name: 'artplayerPluginVast';
-        
-        /**
-         * Request and play an ad from a VAST tag URL.
-         * @param url The VAST ad tag URL.
-         * @param config Optional AdsRequest configuration properties.
-         */
-        playAdTag(url: string, config?: Record<string, any>): void;
+    /**
+     * The VAST tag URL to request ads from.
+     */
+    url?: string
 
-        /**
-         * Request and play an ad from a raw VAST XML string.
-         * @param xml The VAST XML content.
-         * @param config Optional AdsRequest configuration properties.
-         */
-        playAdsResponse(xml: string, config?: Record<string, any>): void;
+    /**
+     * The VAST XML response to use for ads.
+     */
+    adsResponse?: string
 
-        /**
-         * Manually initialize the IMA SDK.
-         */
-        init(): Promise<any>;
+    /**
+     * The z-index of the ad container.
+     * Default: 150
+     */
+    zIndex?: number
 
-        /**
-         * Destroy the current ad session and clean up.
-         */
-        destroy(): void;
+    /**
+     * Whether to show the big play button when the ad is paused.
+     * Default: true
+     */
+    showBigPlayOnPause?: boolean
 
-        /**
-         * The Google IMA AdsLoader instance.
-         */
-        readonly adsLoader: any;
+    /**
+     * Whether to disable VPAID ads.
+     * Default: true
+     */
+    disableVpaid?: boolean
 
-        /**
-         * The Google IMA AdsManager instance.
-         */
-        readonly adsManager: any;
-    }
+    /**
+     * Whether to disable custom playback for iOS 10+.
+     * Default: true
+     */
+    disableCustomPlaybackForIOS10Plus?: boolean
 
-    interface Events {
-        'vast:adsManagerLoaded': any;
-        'vast:adLoaded': any;
-        'vast:adStarted': any;
-        'vast:adPaused': any;
-        'vast:adResumed': any;
-        'vast:adSkipped': any;
-        'vast:adComplete': any;
-        'vast:allAdsCompleted': void;
-        'vast:adError': any;
-        'vast:adClick': any;
-    }
-}
+    /**
+     * Whether to restore custom playback state on ad break complete.
+     * Default: true
+     */
+    restoreCustomPlaybackStateOnAdBreakComplete?: boolean
 
-declare global {
-    interface Window {
-        artplayerPluginVast: typeof artplayerPluginVast;
-        google: {
-            ima: any;
-        };
-    }
+    /**
+     * Whether to automatically initialize the ad manager on user interaction.
+     * Default: true
+     */
+    autoInit?: boolean
+
+    /**
+     * Whether to enable debug logging.
+     * Default: false
+     */
+    debug?: boolean
+
+    [key: string]: any
+  }
+
+  interface VastPlugin {
+    name: 'artplayerPluginVast'
+
+    /**
+     * Initialize the plugin manually.
+     * This should be called as a result of a user action (e.g. click).
+     */
+    init: () => Promise<any>
+
+    /**
+     * Request ads using an AdsRequest object.
+     * @param adsRequest The google.ima.AdsRequest object or compatible object.
+     */
+    requestAds: (adsRequest: any) => void
+
+    /**
+     * Play ads from a VAST tag URL.
+     * @param url The VAST tag URL.
+     */
+    playAdTag: (url: string) => void
+
+    /**
+     * Play ads from a VAST XML response.
+     * @param response The VAST XML response.
+     */
+    playAdsResponse: (response: string) => void
+
+    /**
+     * Destroy the plugin and clean up resources.
+     */
+    destroy: () => void
+
+    /**
+     * The google.ima.AdsLoader instance.
+     */
+    readonly adsLoader: any
+
+    /**
+     * The google.ima.AdsManager instance.
+     */
+    readonly adsManager: any
+  }
 }

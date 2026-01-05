@@ -208,24 +208,7 @@
     }
   }
 })({"chARl":[function(require,module,exports,__globalThis) {
-/**
- * ArtPlayer Plugin VAST (Google IMA SDK)
- *
- * Production-ready refactor:
- * - SDK singleton loader (deduped)
- * - Correct user-gesture init for AdDisplayContainer.initialize()
- * - Explicit state machine
- * - Safer content hijack/release (no blind art.play())
- * - Better lifecycle cleanup
- * - Public API: init(), requestAds(), playAdTag(), playAdsResponse(), destroy()
- * - Robust resize handling
- *
- * Notes / constraints (explicit, not hidden):
- * - This plugin is for VAST/IMA linear ads; VMAP/mid-roll scheduling is not implemented here.
- * - On mobile, you MUST call init() from a user gesture OR allow the plugin to auto-init on the first user interaction on the player.
- *
- * @license MIT
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginVast);
 const DEFAULT_SDK_URL = 'https://imasdk.googleapis.com/js/sdkloader/ima3.js';
@@ -259,7 +242,7 @@ const EVENTS = Object.freeze({
 const globalImaLoaderKey = '__ARTPLAYER_IMA_SDK_PROMISE__';
 function getGlobal() {
     // eslint-disable-next-line no-new-func
-    return Function('return this')();
+    return new Function('return this')();
 }
 function once(fn) {
     let called = false;
@@ -269,6 +252,14 @@ function once(fn) {
         called = true;
         result = fn.apply(this, args);
         return result;
+    };
+}
+// 优化工具：防抖函数
+function debounce(fn, ms = 200) {
+    let timer;
+    return (...args)=>{
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(()=>fn.apply(this, args), ms);
     };
 }
 function safeCall(fn) {
@@ -284,7 +275,7 @@ function clampZIndex(v) {
     return Math.max(1, Math.min(2147483647, Math.floor(n)));
 }
 /**
- * SDK loader (deduped globally across plugin instances)
+ * SDK loader (全局单例模式，防止多次加载)
  */ function loadImaSdk(sdkUrl) {
     const g = getGlobal();
     if (g.google && g.google.ima) return Promise.resolve(g.google.ima);
@@ -308,14 +299,14 @@ function artplayerPluginVast(userOption = {}) {
             sdkUrl: DEFAULT_SDK_URL,
             url: '',
             adsResponse: '',
-            // UI
+            // UI 配置
             zIndex: 150,
             showBigPlayOnPause: true,
-            // IMA settings
+            // IMA 设置
             disableVpaid: true,
             disableCustomPlaybackForIOS10Plus: true,
             restoreCustomPlaybackStateOnAdBreakComplete: true,
-            // behavior
+            // 行为配置
             autoInit: true,
             debug: false,
             ...userOption
@@ -329,10 +320,9 @@ function artplayerPluginVast(userOption = {}) {
         let bigPlayEl = null;
         let initializedByUserGesture = false;
         let destroyed = false;
-        // Track content state to restore safely
+        // 记录广告前的状态
         let contentWasPlayingBeforeAd = false;
-        let contentTimeBeforeAd = 0;
-        // ===== helpers =====
+        // ===== 辅助函数 =====
         function log(...args) {
             if (option.debug) console.log('[artplayer-plugin-vast]', ...args);
         }
@@ -353,6 +343,7 @@ function artplayerPluginVast(userOption = {}) {
         }
         function ensureUi() {
             if (adContainerEl) return;
+            // 广告容器
             adContainerEl = document.createElement('div');
             adContainerEl.className = 'artplayer-ima-ad-container';
             setStyles(adContainerEl, {
@@ -365,6 +356,7 @@ function artplayerPluginVast(userOption = {}) {
                 zIndex: String(clampZIndex(option.zIndex))
             });
             append($player, adContainerEl);
+            // 大播放按钮 (用于广告暂停或移动端手势触发)
             bigPlayEl = document.createElement('button');
             bigPlayEl.type = 'button';
             bigPlayEl.className = 'artplayer-ima-bigplay';
@@ -392,9 +384,9 @@ function artplayerPluginVast(userOption = {}) {
             append($player, bigPlayEl);
             bigPlayEl.addEventListener('click', ()=>{
                 if (destroyed) return;
-                // Resume ad if paused; also counts as user gesture for initialize()
+                // 点击按钮算作一次用户手势，尝试初始化 AdContainer
                 initializedByUserGesture = true;
-                if (!adDisplayContainer) safeCall(()=>init()); // best effort
+                if (!adDisplayContainer) safeCall(()=>init());
                 if (adsManager) safeCall(()=>adsManager.resume());
             });
         }
@@ -407,10 +399,8 @@ function artplayerPluginVast(userOption = {}) {
             setStyle(bigPlayEl, 'display', show ? 'block' : 'none');
         }
         function lockContentForAd() {
-            // do not blindly mutate art.option (runtime may not fully apply)
-            // Use operational safety: pause content and block click-to-toggle by overlaying ad layer.
+            // 记录当前播放状态
             contentWasPlayingBeforeAd = !art.paused;
-            contentTimeBeforeAd = $video.currentTime || 0;
             if (!art.paused) art.pause();
             showAdLayer(true);
             if (option.showBigPlayOnPause) showBigPlay(false);
@@ -418,11 +408,13 @@ function artplayerPluginVast(userOption = {}) {
         function releaseContentAfterAd() {
             showAdLayer(false);
             showBigPlay(false);
-            // restore to previous content behavior safely:
-            // - if user was watching (playing) before the ad, resume
-            // - if user was paused, stay paused
-            if (contentWasPlayingBeforeAd) // Some integrations prefer not to auto-resume after ad errors; we only resume if we paused for the ad.
-            art.play();
+            if (contentWasPlayingBeforeAd) {
+                // 优化点：捕获自动播放失败的错误
+                const playPromise = art.play();
+                if (playPromise && typeof playPromise.catch === 'function') playPromise.catch((e)=>{
+                    log('Resume content failed (likely autoplay policy):', e);
+                });
+            }
         }
         function cleanupAdsObjects() {
             if (adsManager) {
@@ -430,7 +422,6 @@ function artplayerPluginVast(userOption = {}) {
                 adsManager = null;
             }
             if (adsLoader) {
-                // AdsLoader has no destroy in some IMA builds; safe-call anyway
                 safeCall(()=>adsLoader.destroy && adsLoader.destroy());
                 adsLoader = null;
             }
@@ -439,14 +430,20 @@ function artplayerPluginVast(userOption = {}) {
                 adDisplayContainer = null;
             }
         }
-        // ===== IMA event handlers =====
+        // 优化点：音量同步逻辑
+        function syncVolume() {
+            if (!adsManager || destroyed) return;
+            // Artplayer volume 是 0-1，IMA 也是 0-1
+            const vol = art.muted ? 0 : art.volume;
+            safeCall(()=>adsManager.setVolume(vol));
+        }
+        // ===== IMA 事件处理 =====
         function onAdError(event) {
             const err = event && event.getError ? event.getError() : event;
             setState(STATES.ERROR);
             emit(EVENTS.AD_ERROR, err);
             log('Ad error:', err);
             cleanupAdsObjects();
-            // Only release to content; do not force seek.
             releaseContentAfterAd();
         }
         function onContentPauseRequested() {
@@ -455,7 +452,6 @@ function artplayerPluginVast(userOption = {}) {
         }
         function onContentResumeRequested() {
             emit(EVENTS.CONTENT_RESUME_REQUESTED);
-            // Do not auto-seek back; IMA handles it if restoreCustomPlaybackStateOnAdBreakComplete is true
             releaseContentAfterAd();
         }
         function onAdEvent(e) {
@@ -503,8 +499,8 @@ function artplayerPluginVast(userOption = {}) {
             const adsRenderingSettings = new ima.AdsRenderingSettings();
             adsRenderingSettings.restoreCustomPlaybackStateOnAdBreakComplete = !!option.restoreCustomPlaybackStateOnAdBreakComplete;
             if (adsManager) safeCall(()=>adsManager.destroy());
-            // Bind ads to the content video element
             adsManager = adsManagerLoadedEvent.getAdsManager($video, adsRenderingSettings);
+            // 绑定事件
             adsManager.addEventListener(ima.AdErrorEvent.Type.AD_ERROR, onAdError);
             adsManager.addEventListener(ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, onContentPauseRequested);
             adsManager.addEventListener(ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, onContentResumeRequested);
@@ -519,9 +515,12 @@ function artplayerPluginVast(userOption = {}) {
                 ima.AdEvent.Type.ALL_ADS_COMPLETED
             ];
             adEvents.forEach((type)=>adsManager.addEventListener(type, onAdEvent));
+            // 初始化 AdsManager
             try {
                 const { width, height } = getPlayerRect();
                 adsManager.init(width, height, ima.ViewMode.NORMAL);
+                // 优化点：初始化时立即同步音量
+                syncVolume();
                 adsManager.start();
             } catch (e) {
                 onAdError({
@@ -529,7 +528,7 @@ function artplayerPluginVast(userOption = {}) {
                 });
             }
         }
-        // ===== public core =====
+        // ===== 核心逻辑 =====
         const init = once(()=>{
             if (destroyed) return Promise.reject(new Error('Plugin destroyed'));
             ensureUi();
@@ -539,10 +538,9 @@ function artplayerPluginVast(userOption = {}) {
                 ima = loadedIma;
                 emit(EVENTS.SDK_LOADED);
                 log('IMA SDK loaded');
-                // Global IMA settings (optional)
+                // SDK 全局配置
                 if (option.disableVpaid && ima.ImaSdkSettings && ima.ImaSdkSettings.VpaidMode) safeCall(()=>ima.settings.setVpaidMode(ima.ImaSdkSettings.VpaidMode.DISABLED));
                 if (option.disableCustomPlaybackForIOS10Plus) safeCall(()=>ima.settings.setDisableCustomPlaybackForIOS10Plus(true));
-                // Create AdDisplayContainer / AdsLoader once
                 if (!adDisplayContainer) adDisplayContainer = new ima.AdDisplayContainer(adContainerEl, $video);
                 if (!adsLoader) {
                     adsLoader = new ima.AdsLoader(adDisplayContainer);
@@ -562,7 +560,7 @@ function artplayerPluginVast(userOption = {}) {
             if (!ima || !adDisplayContainer) return;
             if (initializedByUserGesture) return;
             initializedByUserGesture = true;
-            // MUST be called in a user gesture handler on mobile browsers.
+            // 移动端核心：必须在手势回调中同步调用 initialize()
             safeCall(()=>adDisplayContainer.initialize());
             log('AdDisplayContainer.initialize() called (user gesture)');
         }
@@ -572,9 +570,6 @@ function artplayerPluginVast(userOption = {}) {
                 if (destroyed) return;
                 setState(STATES.REQUESTING);
                 ensureUi();
-                // If not initialized via user gesture yet, we still request;
-                // On mobile, playback may fail until initialize() happens via gesture.
-                // We set up auto-init hooks to call it as soon as possible.
                 safeCall(()=>adsLoader.requestAds(adsRequest));
             });
         }
@@ -594,11 +589,12 @@ function artplayerPluginVast(userOption = {}) {
                 return requestAds(req);
             });
         }
-        function resize() {
+        // 优化点：使用 debounce 包裹 resize 逻辑
+        const resize = debounce(()=>{
             if (!adsManager || destroyed) return;
             const { width, height } = getPlayerRect();
             safeCall(()=>adsManager.resize(width, height, ima.ViewMode.NORMAL));
-        }
+        }, 100);
         function destroy() {
             if (destroyed) return;
             destroyed = true;
@@ -608,22 +604,18 @@ function artplayerPluginVast(userOption = {}) {
             if (bigPlayEl) remove(bigPlayEl);
             adContainerEl = null;
             bigPlayEl = null;
+            // 优化点：清理音量监听
+            art.off('video:volume', syncVolume);
+            art.off('video:muted', syncVolume);
         }
-        // ===== user gesture init hooks =====
-        const onUserGesture = (e)=>{
+        // ===== 自动初始化逻辑 (User Gesture) =====
+        const onUserGesture = ()=>{
             if (destroyed) return;
-            // Ensure core objects exist
-            // init() loads SDK & creates AdDisplayContainer; we need initialize() inside this handler.
-            init().then(()=>{
-                initializeAdDisplayContainerFromUserGesture();
-            }).catch(()=>{
-            // ignore
-            });
-            // Only need once; remove listeners
+            // 即使未播放广告，也尝试尽早初始化容器，以便后续播放无需手势
+            init().then(()=>initializeAdDisplayContainerFromUserGesture()).catch(()=>{});
             detachUserGestureHooks();
         };
         function attachUserGestureHooks() {
-            // Capture phase increases chance to run before other handlers stopPropagation
             $player.addEventListener('pointerdown', onUserGesture, {
                 capture: true,
                 passive: true
@@ -648,9 +640,11 @@ function artplayerPluginVast(userOption = {}) {
                 capture: true
             });
         }
-        // ===== ArtPlayer lifecycle =====
+        // ===== ArtPlayer 生命周期集成 =====
+        // 优化点：绑定音量变化
+        art.on('video:volume', syncVolume);
+        art.on('video:muted', syncVolume);
         art.on('resize', resize);
-        // Defensive: some layouts don't trigger art.resize reliably
         window.addEventListener('resize', resize, {
             passive: true
         });
@@ -659,24 +653,20 @@ function artplayerPluginVast(userOption = {}) {
             detachUserGestureHooks();
             destroy();
         });
-        // ===== auto behavior =====
+        // ===== 自动执行 =====
         ensureUi();
         if (option.autoInit) attachUserGestureHooks();
-        // Auto play initial ad if provided
-        if (option.url) // Do not force initialize(); request may succeed on desktop, and on mobile will wait for gesture.
-        playAdTag(option.url).catch((e)=>log('playAdTag failed:', e));
+        if (option.url) playAdTag(option.url).catch((e)=>log('playAdTag failed:', e));
         else if (option.adsResponse) playAdsResponse(option.adsResponse).catch((e)=>log('playAdsResponse failed:', e));
         // ===== Public API =====
         return {
             name: 'artplayerPluginVast',
-            // state
             get state () {
                 return state;
             },
             get isAdPlaying () {
                 return state === STATES.AD_PLAYING || state === STATES.AD_PAUSED;
             },
-            // raw IMA objects
             get ima () {
                 return ima;
             },
@@ -689,14 +679,12 @@ function artplayerPluginVast(userOption = {}) {
             get adDisplayContainer () {
                 return adDisplayContainer;
             },
-            // methods
             init,
             requestAds,
             playAdTag,
             playAdsResponse,
             resize,
             destroy,
-            // manually mark/perform user-gesture init (if you want explicit control)
             initializeFromUserGesture () {
                 init().then(()=>initializeAdDisplayContainerFromUserGesture()).catch(()=>{});
             },
