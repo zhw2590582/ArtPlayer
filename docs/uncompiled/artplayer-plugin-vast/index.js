@@ -300,11 +300,14 @@ const EVENTS = {
     constructor(art){
         this.art = art;
         this.$el = null;
+        this.$play = null;
+        this.onPlay = null;
     }
     mount() {
         if (this.$el) return this.$el;
         const { template, constructor } = this.art;
         const { createElement, setStyles } = constructor.utils;
+        // Main Ad Container
         this.$el = createElement('div');
         this.$el.id = `art-vast-${Date.now()}`;
         setStyles(this.$el, {
@@ -313,11 +316,34 @@ const EVENTS = {
             width: '100%',
             height: '100%',
             zIndex: '150',
-            backgroundColor: 'black',
             display: 'none',
             pointerEvents: 'auto'
         });
+        // Resume/Play Overlay
+        this.$play = createElement('div');
+        setStyles(this.$play, {
+            position: 'absolute',
+            zIndex: '160',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            cursor: 'pointer',
+            display: 'none',
+            width: '70px',
+            height: '70px'
+        });
+        this.$play.innerHTML = `
+        <svg viewBox="0 0 24 24" width="100%" height="100%" fill="rgba(255,255,255,0.9)">
+            <path d="M8 5v14l11-7z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+    `;
+        this.$play.addEventListener('click', (e)=>{
+            e.stopPropagation();
+            if (this.onPlay) this.onPlay();
+        });
         template.$player.appendChild(this.$el);
+        template.$player.appendChild(this.$play);
         return this.$el;
     }
     show() {
@@ -325,10 +351,20 @@ const EVENTS = {
     }
     hide() {
         if (this.$el) this.$el.style.display = 'none';
+        this.hidePlay();
+    }
+    showPlay() {
+        if (this.$play) this.$play.style.display = 'block';
+    }
+    hidePlay() {
+        if (this.$play) this.$play.style.display = 'none';
     }
     destroy() {
         if (this.$el && this.$el.parentNode) this.$el.parentNode.removeChild(this.$el);
+        if (this.$play && this.$play.parentNode) this.$play.parentNode.removeChild(this.$play);
         this.$el = null;
+        this.$play = null;
+        this.onPlay = null;
     }
 }
 /**
@@ -381,6 +417,10 @@ class VastController {
         this.stateMachine = new AdStateMachine();
         this.container = new AdContainer(art);
         this.bridge = new ArtPlayerBridge(art);
+        // Setup resume callback
+        this.container.onPlay = ()=>{
+            if (this.adsManager) this.adsManager.resume();
+        };
         this.adsLoader = null;
         this.adsManager = null;
         this.adDisplayContainer = null;
@@ -555,6 +595,7 @@ class VastController {
             case ima.AdEvent.Type.STARTED:
                 // Requirement 3: Transition to PLAYING only here
                 this.stateMachine.transition(STATES.PLAYING);
+                this.container.hidePlay();
                 this.art.emit(`vast:${EVENTS.AD_STARTED}`, adEvent);
                 break;
             case ima.AdEvent.Type.COMPLETE:
@@ -565,6 +606,16 @@ class VastController {
                 break;
             case ima.AdEvent.Type.CLICK:
                 this.art.emit(`vast:${EVENTS.AD_CLICK}`, adEvent);
+                break;
+            case ima.AdEvent.Type.PAUSED:
+                this.stateMachine.transition(STATES.PAUSED);
+                this.container.showPlay();
+                this.art.emit(`vast:${EVENTS.AD_PAUSED}`, adEvent);
+                break;
+            case ima.AdEvent.Type.RESUMED:
+                this.stateMachine.transition(STATES.PLAYING);
+                this.container.hidePlay();
+                this.art.emit(`vast:${EVENTS.AD_RESUMED}`, adEvent);
                 break;
         }
     }
