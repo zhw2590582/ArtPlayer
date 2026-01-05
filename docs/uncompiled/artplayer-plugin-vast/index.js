@@ -6,7 +6,16 @@
 // anything defined in a previous bundle is accessed via the
 // orig method which is the require for previous bundles
 
-(function (modules, entry, mainEntry, parcelRequireName, globalName) {
+(function (
+  modules,
+  entry,
+  mainEntry,
+  parcelRequireName,
+  externals,
+  distDir,
+  publicUrl,
+  devServer
+) {
   /* eslint-disable no-undef */
   var globalObject =
     typeof globalThis !== 'undefined'
@@ -25,6 +34,7 @@
     typeof globalObject[parcelRequireName] === 'function' &&
     globalObject[parcelRequireName];
 
+  var importMap = previousRequire.i || {};
   var cache = previousRequire.cache || {};
   // Do not use `require` to prevent Webpack from trying to bundle this call
   var nodeRequire =
@@ -35,6 +45,9 @@
   function newRequire(name, jumped) {
     if (!cache[name]) {
       if (!modules[name]) {
+        if (externals[name]) {
+          return externals[name];
+        }
         // if we cannot find the module within our internal map or
         // cache jump to the current global require ie. the last bundle
         // that was added to the page.
@@ -73,7 +86,7 @@
         localRequire,
         module,
         module.exports,
-        this
+        globalObject
       );
     }
 
@@ -81,7 +94,54 @@
 
     function localRequire(x) {
       var res = localRequire.resolve(x);
-      return res === false ? {} : newRequire(res);
+      if (res === false) {
+        return {};
+      }
+      // Synthesize a module to follow re-exports.
+      if (Array.isArray(res)) {
+        var m = {__esModule: true};
+        res.forEach(function (v) {
+          var key = v[0];
+          var id = v[1];
+          var exp = v[2] || v[0];
+          var x = newRequire(id);
+          if (key === '*') {
+            Object.keys(x).forEach(function (key) {
+              if (
+                key === 'default' ||
+                key === '__esModule' ||
+                Object.prototype.hasOwnProperty.call(m, key)
+              ) {
+                return;
+              }
+
+              Object.defineProperty(m, key, {
+                enumerable: true,
+                get: function () {
+                  return x[key];
+                },
+              });
+            });
+          } else if (exp === '*') {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              value: x,
+            });
+          } else {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              get: function () {
+                if (exp === 'default') {
+                  return x.__esModule ? x.default : x;
+                }
+                return x[exp];
+              },
+            });
+          }
+        });
+        return m;
+      }
+      return newRequire(res);
     }
 
     function resolve(x) {
@@ -93,6 +153,7 @@
   function Module(moduleName) {
     this.id = moduleName;
     this.bundle = newRequire;
+    this.require = nodeRequire;
     this.exports = {};
   }
 
@@ -101,6 +162,10 @@
   newRequire.modules = modules;
   newRequire.cache = cache;
   newRequire.parent = previousRequire;
+  newRequire.distDir = distDir;
+  newRequire.publicUrl = publicUrl;
+  newRequire.devServer = devServer;
+  newRequire.i = importMap;
   newRequire.register = function (id, exports) {
     modules[id] = [
       function (require, module) {
@@ -109,6 +174,10 @@
       {},
     ];
   };
+
+  // Only insert newRequire.load when it is actually used.
+  // The code in this file is linted against ES5, so dynamic import is not allowed.
+  // INSERT_LOAD_HERE
 
   Object.defineProperty(newRequire, 'root', {
     get: function () {
@@ -136,727 +205,455 @@
       define(function () {
         return mainExports;
       });
-
-      // <script>
-    } else if (globalName) {
-      this[globalName] = mainExports;
     }
   }
-})({"eSwxK":[function(require,module,exports) {
+})({"chARl":[function(require,module,exports,__globalThis) {
+/**
+ * ArtPlayer Plugin VAST
+ * Based on Google IMA SDK
+ * 
+ * @license MIT
+ * @author Harvey Zack
+ */ // ============================================================================
+// 1. Constants & Enums
+// ============================================================================
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginVast);
-var _vastImaPlayer = require("@glomex/vast-ima-player");
-function artplayerPluginVast(callback) {
-    return async (art)=>{
-        const { template, constructor } = art;
-        const { createElement, setStyles, append } = constructor.utils;
-        const { $video, $player } = template;
-        await (0, _vastImaPlayer.loadImaSdk)();
-        const google = window.google;
-        const ima = google.ima;
+const SDK_URL = '//imasdk.googleapis.com/js/sdkloader/ima3.js';
+const STATES = {
+    IDLE: 'idle',
+    LOADING: 'loading',
+    PLAYING: 'playing',
+    PAUSED: 'paused',
+    COMPLETED: 'completed',
+    ERROR: 'error'
+};
+const EVENTS = {
+    ADS_MANAGER_LOADED: 'adsManagerLoaded',
+    AD_LOADED: 'adLoaded',
+    AD_STARTED: 'adStarted',
+    AD_PAUSED: 'adPaused',
+    AD_RESUMED: 'adResumed',
+    AD_SKIPPED: 'adSkipped',
+    AD_COMPLETE: 'adComplete',
+    ALL_ADS_COMPLETED: 'allAdsCompleted',
+    AD_ERROR: 'adError',
+    AD_CLICK: 'adClick'
+};
+// ============================================================================
+// 2. Modules
+// ============================================================================
+/**
+ * Service to handle Google IMA SDK loading and initialization
+ */ class IMAService {
+    constructor(){
+        this.sdkLoaded = false;
+    }
+    async load() {
+        if (window.google && window.google.ima) {
+            this.sdkLoaded = true;
+            return window.google.ima;
+        }
+        return new Promise((resolve, reject)=>{
+            const script = document.createElement('script');
+            script.src = SDK_URL;
+            script.async = true;
+            script.onload = ()=>{
+                this.sdkLoaded = true;
+                resolve(window.google.ima);
+            };
+            script.onerror = (err)=>{
+                reject(new Error('Failed to load Google IMA SDK'));
+            };
+            document.body.appendChild(script);
+        });
+    }
+    configureSettings() {
+        if (!this.sdkLoaded) return;
+        const ima = window.google.ima;
+        // Explicitly disable VPAID as requested
+        if (ima.ImaSdkSettings && ima.ImaSdkSettings.VpaidMode) ima.settings.setVpaidMode(ima.ImaSdkSettings.VpaidMode.DISABLED);
+        // Disable Companion Ads (we don't handle them)
+        ima.settings.setDisableCustomPlaybackForIOS10Plus(true);
+    }
+}
+/**
+ * State Machine for Ad Lifecycle
+ */ class AdStateMachine {
+    constructor(){
+        this.current = STATES.IDLE;
+    }
+    transition(newState) {
+        this.current = newState;
+    }
+    is(state) {
+        return this.current === state;
+    }
+    reset() {
+        this.current = STATES.IDLE;
+    }
+}
+/**
+ * Manages the DOM container for Ads
+ */ class AdContainer {
+    constructor(art){
+        this.art = art;
+        this.$el = null;
+    }
+    mount() {
+        if (this.$el) return this.$el;
+        const { template, constructor } = this.art;
+        const { createElement, setStyles } = constructor.utils;
+        this.$el = createElement('div');
+        this.$el.id = `art-vast-${Date.now()}`;
+        setStyles(this.$el, {
+            position: 'absolute',
+            inset: '0',
+            width: '100%',
+            height: '100%',
+            zIndex: '150',
+            backgroundColor: 'black',
+            display: 'none',
+            pointerEvents: 'auto'
+        });
+        template.$player.appendChild(this.$el);
+        return this.$el;
+    }
+    show() {
+        if (this.$el) this.$el.style.display = 'block';
+    }
+    hide() {
+        if (this.$el) this.$el.style.display = 'none';
+    }
+    destroy() {
+        if (this.$el && this.$el.parentNode) this.$el.parentNode.removeChild(this.$el);
+        this.$el = null;
+    }
+}
+/**
+ * Bridge to control ArtPlayer behavior during Ads
+ */ class ArtPlayerBridge {
+    constructor(art){
+        this.art = art;
+        this.originalState = {};
+        this.isHijacked = false;
+    }
+    hijack() {
+        if (this.isHijacked) return;
+        const { art } = this;
+        // Save original states
+        this.originalState = {
+            hotkey: art.option.hotkey,
+            scrubbing: art.option.scrubbing,
+            controls: art.controls.show,
+            contextmenu: art.option.contextmenu,
+            lock: art.option.lock,
+            autoPlayback: art.option.autoPlayback
+        };
+        // Disable user interactions
+        art.option.hotkey = false;
+        art.option.scrubbing = false;
+        art.controls.show = false;
+        // Pause main video if it's playing
+        if (!art.paused) art.pause();
+        this.isHijacked = true;
+    }
+    release() {
+        if (!this.isHijacked) return;
+        const { art } = this;
+        const { originalState } = this;
+        // Restore states
+        art.option.hotkey = originalState.hotkey;
+        art.option.scrubbing = originalState.scrubbing;
+        art.controls.show = originalState.controls;
+        this.isHijacked = false;
+    }
+}
+// ============================================================================
+// 3. Main Controller
+// ============================================================================
+class VastController {
+    constructor(art, options){
+        this.art = art;
+        this.options = options || {};
+        this.imaService = new IMAService();
+        this.stateMachine = new AdStateMachine();
+        this.container = new AdContainer(art);
+        this.bridge = new ArtPlayerBridge(art);
+        this.adsLoader = null;
+        this.adsManager = null;
+        this.adDisplayContainer = null;
+        this.adDisplayContainerInitialized = false;
+        // Bind context
+        this.onResize = this.onResize.bind(this);
+        this.onContentPauseRequested = this.onContentPauseRequested.bind(this);
+        this.onContentResumeRequested = this.onContentResumeRequested.bind(this);
+        this.onAdError = this.onAdError.bind(this);
+        this.onAdEvent = this.onAdEvent.bind(this);
+        // Initialize
+        this.init();
+    }
+    async init() {
+        try {
+            const ima = await this.imaService.load();
+            this.imaService.configureSettings();
+            // Listen to ArtPlayer resize to resize AdsManager
+            this.art.on('resize', this.onResize);
+            this.art.on('fullscreen', this.onResize);
+            this.art.on('destroy', ()=>this.destroy());
+        } catch (error) {
+            console.error('[ArtPlayer VAST] Failed to load IMA SDK:', error);
+            this.stateMachine.transition(STATES.ERROR);
+        }
+    }
+    createAdsLoader() {
+        if (this.adsLoader) return;
+        const ima = window.google.ima;
+        const $container = this.container.mount();
+        const $video = this.art.template.$video;
+        this.adDisplayContainer = new ima.AdDisplayContainer($container, $video);
+        // NOTE: Do NOT call initialize() here. It must be called as the result of a user action.
+        this.adsLoader = new ima.AdsLoader(this.adDisplayContainer);
+        // Set up event listeners
+        this.adsLoader.addEventListener(ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, (e)=>this.onAdsManagerLoaded(e), false);
+        this.adsLoader.addEventListener(ima.AdErrorEvent.Type.AD_ERROR, this.onAdError, false);
+    }
+    requestAds(adsRequest) {
+        // Requirement 1: Prevent re-entry if not IDLE
+        if (!this.stateMachine.is(STATES.IDLE)) {
+            console.warn('[ArtPlayer VAST] Cannot request ads while state is not IDLE');
+            return;
+        }
+        if (!this.adsLoader) this.createAdsLoader();
+        // Requirement 2: Initialize AdDisplayContainer on first request (user interaction)
+        if (!this.adDisplayContainerInitialized && this.adDisplayContainer) {
+            this.adDisplayContainer.initialize();
+            this.adDisplayContainerInitialized = true;
+        }
+        // Reset state
+        this.stateMachine.transition(STATES.LOADING);
+        // Request ads
+        try {
+            this.adsLoader.requestAds(adsRequest);
+        } catch (e) {
+            this.onAdError({
+                getError: ()=>e
+            });
+        }
+    }
+    playAdTag(url, options = {}) {
+        if (!window.google || !window.google.ima) {
+            console.warn('[ArtPlayer VAST] SDK not loaded yet. Queueing request...');
+            this.imaService.load().then(()=>this.playAdTag(url, options));
+            return;
+        }
+        // Requirement 1: Check state before creating request
+        if (!this.stateMachine.is(STATES.IDLE)) {
+            console.warn('[ArtPlayer VAST] Cannot request ads while state is not IDLE');
+            return;
+        }
+        const ima = window.google.ima;
+        const adsRequest = new ima.AdsRequest();
+        adsRequest.adTagUrl = url;
+        // Apply options
+        Object.assign(adsRequest, options);
+        this.requestAds(adsRequest);
+    }
+    playAdsResponse(adsResponse, options = {}) {
+        if (!window.google || !window.google.ima) {
+            this.imaService.load().then(()=>this.playAdsResponse(adsResponse, options));
+            return;
+        }
+        // Requirement 1: Check state before creating request
+        if (!this.stateMachine.is(STATES.IDLE)) {
+            console.warn('[ArtPlayer VAST] Cannot request ads while state is not IDLE');
+            return;
+        }
+        const ima = window.google.ima;
+        const adsRequest = new ima.AdsRequest();
+        adsRequest.adsResponse = adsResponse;
+        Object.assign(adsRequest, options);
+        this.requestAds(adsRequest);
+    }
+    onAdsManagerLoaded(adsManagerLoadedEvent) {
+        const ima = window.google.ima;
+        // Requirement 4: Ensure single instance of AdsManager
+        if (this.adsManager) {
+            this.adsManager.destroy();
+            this.adsManager = null;
+        }
         const adsRenderingSettings = new ima.AdsRenderingSettings();
-        const playerOptions = new (0, _vastImaPlayer.PlayerOptions)();
-        const id = `art-${Date.now()}`;
-        const $container = createElement("div");
-        append($player, $container);
-        $container.id = id;
-        setStyles($container, {
-            position: "absolute",
-            inset: "0",
-            width: "100%",
-            height: "100%",
-            zIndex: "150",
-            display: "none"
+        adsRenderingSettings.restoreCustomPlaybackStateOnAdBreakComplete = true;
+        adsRenderingSettings.enablePreloading = true;
+        this.adsManager = adsManagerLoadedEvent.getAdsManager(this.art.template.$video, adsRenderingSettings);
+        this.adsManager.addEventListener(ima.AdErrorEvent.Type.AD_ERROR, this.onAdError);
+        // Lifecycle events
+        this.adsManager.addEventListener(ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED, this.onContentPauseRequested);
+        this.adsManager.addEventListener(ima.AdEvent.Type.CONTENT_RESUME_REQUESTED, this.onContentResumeRequested);
+        // Ad events
+        const events = [
+            ima.AdEvent.Type.ALL_ADS_COMPLETED,
+            ima.AdEvent.Type.LOADED,
+            ima.AdEvent.Type.STARTED,
+            ima.AdEvent.Type.COMPLETE,
+            ima.AdEvent.Type.SKIPPED,
+            ima.AdEvent.Type.CLICK,
+            ima.AdEvent.Type.PAUSED,
+            ima.AdEvent.Type.RESUMED
+        ];
+        events.forEach((eventType)=>{
+            this.adsManager.addEventListener(eventType, this.onAdEvent);
         });
-        const imaPlayer = new (0, _vastImaPlayer.Player)(ima, $video, $container, adsRenderingSettings, playerOptions);
-        function playUrl(url) {
-            const playAdsRequest = new ima.AdsRequest();
-            playAdsRequest.adTagUrl = url;
-            imaPlayer.playAds(playAdsRequest);
+        try {
+            const { width, height } = this.art.template.$player.getBoundingClientRect();
+            this.adsManager.init(width, height, ima.ViewMode.NORMAL);
+            this.adsManager.start();
+        } catch (adError) {
+            this.onAdError({
+                getError: ()=>adError
+            });
         }
-        function playRes(res) {
-            const playAdsRequest = new ima.AdsRequest();
-            playAdsRequest.adsResponse = res;
-            imaPlayer.playAds(playAdsRequest);
+    }
+    onContentPauseRequested() {
+        // Requirement 3: Semantics - Just hijack and show container, state is LOADING
+        this.stateMachine.transition(STATES.LOADING);
+        this.bridge.hijack();
+        this.container.show();
+        // Ensure video is paused
+        this.art.pause();
+    // NOTE: Do NOT emit adStarted here. Wait for actual AdEvent.STARTED.
+    }
+    onContentResumeRequested() {
+        // Requirement 6: Idempotent check
+        // If we are not in an active ad state (LOADING or PLAYING), ignore.
+        // This prevents double resume calls from VMAP or error handlers.
+        if (this.stateMachine.is(STATES.IDLE) || this.stateMachine.is(STATES.COMPLETED)) return;
+        // Requirement 4: Clean up AdsManager to prevent leaks in VMAP
+        if (this.adsManager) {
+            this.adsManager.destroy();
+            this.adsManager = null;
         }
-        if (typeof callback === "function") await callback({
-            art,
-            id,
-            ima,
-            imaPlayer,
-            $container,
-            playUrl,
-            playRes
-        });
+        this.stateMachine.transition(STATES.COMPLETED);
+        this.bridge.release();
+        this.container.hide();
+        // Resume video
+        this.art.play();
+        this.art.emit(`vast:${EVENTS.ALL_ADS_COMPLETED}`);
+        // Reset to IDLE for next ad request
+        this.stateMachine.reset();
+    }
+    onAdEvent(adEvent) {
+        const ima = window.google.ima;
+        const type = adEvent.type;
+        const ad = adEvent.getAd();
+        // Map IMA events to plugin events
+        switch(type){
+            case ima.AdEvent.Type.LOADED:
+                this.art.emit(`vast:${EVENTS.AD_LOADED}`, adEvent);
+                break;
+            case ima.AdEvent.Type.STARTED:
+                // Requirement 3: Transition to PLAYING only here
+                this.stateMachine.transition(STATES.PLAYING);
+                this.art.emit(`vast:${EVENTS.AD_STARTED}`, adEvent);
+                break;
+            case ima.AdEvent.Type.COMPLETE:
+                this.art.emit(`vast:${EVENTS.AD_COMPLETE}`, adEvent);
+                break;
+            case ima.AdEvent.Type.SKIPPED:
+                this.art.emit(`vast:${EVENTS.AD_SKIPPED}`, adEvent);
+                break;
+            case ima.AdEvent.Type.CLICK:
+                this.art.emit(`vast:${EVENTS.AD_CLICK}`, adEvent);
+                break;
+        }
+    }
+    onAdError(adErrorEvent) {
+        const error = adErrorEvent.getError();
+        console.error('[ArtPlayer VAST] Ad Error:', error);
+        // Requirement 4: Clean up AdsManager on error
+        if (this.adsManager) {
+            this.adsManager.destroy();
+            this.adsManager = null;
+        }
+        this.stateMachine.transition(STATES.ERROR);
+        this.art.emit(`vast:${EVENTS.AD_ERROR}`, error);
+        // Recovery
+        this.bridge.release();
+        this.container.hide();
+        this.art.play();
+        // Reset state
+        this.stateMachine.reset();
+    }
+    onResize() {
+        // Requirement 7: Null check for adsManager
+        if (this.adsManager && this.adDisplayContainer) {
+            const { width, height } = this.art.template.$player.getBoundingClientRect();
+            const ima = window.google.ima;
+            this.adsManager.resize(width, height, ima.ViewMode.NORMAL);
+        }
+    }
+    destroy() {
+        // Requirement 8: Strict destroy order
+        // 1. Reset state
+        this.stateMachine.reset();
+        // 2. Destroy adsManager
+        if (this.adsManager) {
+            this.adsManager.destroy();
+            this.adsManager = null;
+        }
+        // 3. Hide + destroy container
+        this.container.destroy();
+        // 4. Release ArtPlayerBridge
+        this.bridge.release();
+        // 5. Clean up adsLoader / adDisplayContainer
+        // Requirement 5: Do NOT call adsLoader.destroy()
+        this.adsLoader = null;
+        if (this.adDisplayContainer) {
+            this.adDisplayContainer.destroy();
+            this.adDisplayContainer = null;
+        }
+        // 6. Off events
+        this.art.off('resize', this.onResize);
+        this.art.off('fullscreen', this.onResize);
+    }
+}
+function artplayerPluginVast(options) {
+    return (art)=>{
+        const controller = new VastController(art, options);
         return {
-            name: "artplayerPluginVast"
+            name: 'artplayerPluginVast',
+            // Public API
+            playAdTag: (url, config)=>controller.playAdTag(url, config),
+            playAdsResponse: (res, config)=>controller.playAdsResponse(res, config),
+            init: ()=>controller.init(),
+            destroy: ()=>controller.destroy(),
+            // Getters for debugging/advanced usage
+            get adsLoader () {
+                return controller.adsLoader;
+            },
+            get adsManager () {
+                return controller.adsManager;
+            }
         };
     };
 }
-if (typeof window !== "undefined") window["artplayerPluginVast"] = artplayerPluginVast;
+if (typeof window !== 'undefined') window.artplayerPluginVast = artplayerPluginVast;
 
-},{"@glomex/vast-ima-player":"9NIGZ","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9NIGZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Player", ()=>nt);
-parcelHelpers.export(exports, "PlayerError", ()=>T);
-parcelHelpers.export(exports, "PlayerEvent", ()=>R);
-parcelHelpers.export(exports, "PlayerOptions", ()=>E);
-parcelHelpers.export(exports, "loadImaSdk", ()=>e);
-var t = null, i = function() {
-    t = null;
-}, e = function() {
-    var e = window;
-    return e.google && e.google.ima ? Promise.resolve(e.google.ima) : t || ((t = new Promise(function(t, i) {
-        var e = document.createElement("script");
-        e.async = !0, e.src = "https://imasdk.googleapis.com/js/sdkloader/ima3.js", e.onload = t, e.onerror = i, document.body.appendChild(e);
-    }).then(function() {
-        return e.google.ima;
-    })).then(i).catch(i), t);
-};
-function n(t, i) {
-    for(var e = 0; e < i.length; e++){
-        var n = i[e];
-        n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(t, n.key, n);
-    }
-}
-function s(t, i, e) {
-    return i && n(t.prototype, i), e && n(t, e), t;
-}
-function h() {
-    return h = Object.assign || function(t) {
-        for(var i = 1; i < arguments.length; i++){
-            var e = arguments[i];
-            for(var n in e)Object.prototype.hasOwnProperty.call(e, n) && (t[n] = e[n]);
-        }
-        return t;
-    }, h.apply(this, arguments);
-}
-function r(t, i) {
-    t.prototype = Object.create(i.prototype), t.prototype.constructor = t, a(t, i);
-}
-function o(t) {
-    return o = Object.setPrototypeOf ? Object.getPrototypeOf : function(t) {
-        return t.__proto__ || Object.getPrototypeOf(t);
-    }, o(t);
-}
-function a(t, i) {
-    return a = Object.setPrototypeOf || function(t, i) {
-        return t.__proto__ = i, t;
-    }, a(t, i);
-}
-function u() {
-    if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
-    if (Reflect.construct.sham) return !1;
-    if ("function" == typeof Proxy) return !0;
-    try {
-        return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {})), !0;
-    } catch (t) {
-        return !1;
-    }
-}
-function c(t, i, e) {
-    return c = u() ? Reflect.construct : function(t, i, e) {
-        var n = [
-            null
-        ];
-        n.push.apply(n, i);
-        var s = new (Function.bind.apply(t, n));
-        return e && a(s, e.prototype), s;
-    }, c.apply(null, arguments);
-}
-function d(t) {
-    var i = "function" == typeof Map ? new Map : void 0;
-    return d = function(t) {
-        if (null === t || -1 === Function.toString.call(t).indexOf("[native code]")) return t;
-        if ("function" != typeof t) throw new TypeError("Super expression must either be null or a function");
-        if (void 0 !== i) {
-            if (i.has(t)) return i.get(t);
-            i.set(t, e);
-        }
-        function e() {
-            return c(t, arguments, o(this).constructor);
-        }
-        return e.prototype = Object.create(t.prototype, {
-            constructor: {
-                value: e,
-                enumerable: !1,
-                writable: !0,
-                configurable: !0
-            }
-        }), a(e, t);
-    }, d(t);
-}
-function l(t) {
-    if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return t;
-}
-function f(t, i) {
-    (null == i || i > t.length) && (i = t.length);
-    for(var e = 0, n = new Array(i); e < i; e++)n[e] = t[e];
-    return n;
-}
-var v = 0;
-function b(t) {
-    return "__private_" + v++ + "_" + t;
-}
-function w(t, i) {
-    if (!Object.prototype.hasOwnProperty.call(t, i)) throw new TypeError("attempted to use private field on non-instance");
-    return t;
-}
-var m = {};
-m.CustomEvent = "function" == typeof CustomEvent ? CustomEvent : function(t) {
-    return i[t] = new i("").constructor[t], i;
-    function i(t, i) {
-        i || (i = {});
-        var e = document.createEvent("CustomEvent");
-        return e.initCustomEvent(t, !!i.bubbles, !!i.cancelable, i.detail), e;
-    }
-}("prototype");
-var p, y, O = m.CustomEvent, j = b("mediaElement"), g = b("currentTime"), A = b("enabled"), k = function() {
-    function t(t) {
-        Object.defineProperty(this, j, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(this, g, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(this, A, {
-            writable: !0,
-            value: void 0
-        }), this.seeking = void 0, w(this, j)[j] = t, w(this, g)[g] = 0, w(this, A)[A] = !1, this.seeking = !1, this.t = this.t.bind(this), this.i = this.i.bind(this), this.h = this.h.bind(this), this.enable();
-    }
-    var i = t.prototype;
-    return i.i = function() {
-        this.seeking = !0;
-    }, i.h = function() {
-        this.seeking = !1;
-    }, i.t = function() {
-        var t, i;
-        this.seeking || null != (t = w(this, j)[j]) && t.paused || (w(this, g)[g] = null == (i = w(this, j)[j]) ? void 0 : i.currentTime);
-    }, i.enable = function() {
-        var t, i, e;
-        w(this, A)[A] || (null == (t = w(this, j)[j]) || t.addEventListener("seeking", this.i), null == (i = w(this, j)[j]) || i.addEventListener("seeked", this.h), null == (e = w(this, j)[j]) || e.addEventListener("timeupdate", this.t), w(this, A)[A] = !0);
-    }, i.disable = function() {
-        var t, i, e;
-        w(this, A)[A] && (null == (t = w(this, j)[j]) || t.removeEventListener("seeking", this.i), null == (i = w(this, j)[j]) || i.removeEventListener("seeked", this.h), null == (e = w(this, j)[j]) || e.removeEventListener("timeupdate", this.t), w(this, A)[A] = !1);
-    }, i.play = function() {
-        var t = this;
-        return new Promise(function(i) {
-            var e;
-            i(null == (e = w(t, j)[j]) ? void 0 : e.play());
-        });
-    }, i.pause = function() {
-        var t;
-        null == (t = w(this, j)[j]) || t.pause();
-    }, i.reset = function() {
-        w(this, g)[g] = 0, w(this, A)[A] = !1, this.seeking = !1, this.enable();
-    }, i.destroy = function() {
-        w(this, g)[g] = 0, w(this, A)[A] = !1, this.seeking = !1, this.disable(), w(this, j)[j] = void 0;
-    }, s(t, [
-        {
-            key: "enabled",
-            get: function() {
-                return w(this, A)[A];
-            }
-        },
-        {
-            key: "currentTime",
-            get: function() {
-                return w(this, g)[g];
-            }
-        },
-        {
-            key: "duration",
-            get: function() {
-                var t;
-                return null == (t = w(this, j)[j]) ? void 0 : t.duration;
-            }
-        },
-        {
-            key: "muted",
-            get: function() {
-                var t;
-                return null == (t = w(this, j)[j]) ? void 0 : t.muted;
-            }
-        },
-        {
-            key: "volume",
-            get: function() {
-                var t;
-                return null == (t = w(this, j)[j]) ? void 0 : t.volume;
-            }
-        }
-    ]), t;
-}(), C = function() {
-    function t() {
-        this.delegate = document.createDocumentFragment();
-    }
-    var i = t.prototype;
-    return i.addEventListener = function() {
-        this.delegate.addEventListener.apply(this.delegate, [].slice.call(arguments));
-    }, i.dispatchEvent = function() {
-        return this.delegate.dispatchEvent.apply(this.delegate, [].slice.call(arguments));
-    }, i.removeEventListener = function() {
-        return this.delegate.removeEventListener.apply(this.delegate, [].slice.call(arguments));
-    }, t;
-}(), P = [
-    "abort",
-    "canplay",
-    "canplaythrough",
-    "durationchange",
-    "emptied",
-    "ended",
-    "error",
-    "loadeddata",
-    "loadedmetadata",
-    "loadstart",
-    "pause",
-    "play",
-    "playing",
-    "progress",
-    "ratechange",
-    "seeked",
-    "seeking",
-    "stalled",
-    "suspend",
-    "timeupdate",
-    "volumechange",
-    "waiting"
-];
-!function(t) {
-    t.MEDIA_START = "MediaStart", t.MEDIA_IMPRESSION = "MediaImpression", t.MEDIA_STOP = "MediaStop", t.MEDIA_CUE_POINTS_CHANGE = "MediaCuePointsChange", t.MEDIA_RESUMED = "MediaResumed";
-}(p || (p = {})), function(t) {
-    t.AD_ERROR = "AdError", t.AD_BUFFERING = "AdBuffering", t.LOADED = "AdLoaded", t.IMPRESSION = "AdImpression", t.STARTED = "AdStarted", t.FIRST_QUARTILE = "AdFirstQuartile", t.MIDPOINT = "AdMidpoint", t.THIRD_QUARTILE = "AdThirdQuartile", t.AD_PROGRESS = "AdProgress", t.COMPLETE = "AdComplete", t.CLICK = "AdClick", t.PAUSED = "AdPaused", t.RESUMED = "AdResumed", t.SKIPPED = "AdSkipped", t.SKIPPABLE_STATE_CHANGED = "AdSkippableStateChanged", t.VOLUME_CHANGED = "AdVolumeChanged", t.VOLUME_MUTED = "AdMuted", t.AD_METADATA = "AdMetadata", t.AD_BREAK_READY = "AdBreakReady", t.CONTENT_PAUSE_REQUESTED = "AdContentPauseRequested", t.CONTENT_RESUME_REQUESTED = "AdContentResumeRequested", t.ALL_ADS_COMPLETED = "AdAllAdsCompleted", t.DURATION_CHANGE = "AdDurationChange", t.INTERACTION = "AdInteraction", t.LINEAR_CHANGED = "AdLinearChanged", t.LOG = "AdLog", t.USER_CLOSE = "AdUserClose", t.AD_CAN_PLAY = "AdCanPlay", t.EXPANDED_CHANGED = "AdExpandedChanged", t.VIEWABLE_IMPRESSION = "AdViewableImpression";
-}(y || (y = {}));
-var R = h({}, y, p), E = function() {
-    this.disableCustomPlaybackForIOS10Plus = !1, this.autoResize = !0, this.clickTrackingElement = void 0;
-}, T = function(t) {
-    function i() {
-        var i;
-        return (i = t.call.apply(t, [
-            this
-        ].concat([].slice.call(arguments))) || this).errorCode = void 0, i.innerError = void 0, i.type = void 0, i.vastErrorCode = void 0, i;
-    }
-    return r(i, t), i;
-}(d(Error));
-T.ERROR_CODE_ADS_MANAGER_LOADED_TIMEOUT = 9e3, T.ERROR_CODE_REQUEST_ADS_TIMEOUT = 9001;
-var S = b("mediaElement"), M = b("adElement"), x = b("customPlayhead"), I = b("adsRenderingSettings"), B = b("ima"), L = b("adDisplayContainer"), D = b("adsManager"), W = b("width"), _ = b("height"), q = b("adsLoader"), F = b("playerOptions"), N = b("resizeObserver"), V = b("currentAd"), G = b("loadedAd"), Q = b("mediaStartTriggered"), U = b("mediaImpressionTriggered"), z = b("mediaInActivation"), Z = b("customPlaybackTimeAdjustedOnEnded"), $ = b("cuePoints"), H = b("adCurrentTime"), J = b("adDuration"), K = b("startAdCallback"), X = b("adsManagerLoadedTimeout"), Y = b("requestAdsTimeout"), tt = b("wasExternallyPaused"), it = b("lastNonZeroAdVolume"), et = b("activatePromise"), nt = function(t) {
-    function i(i, e, n, s, h) {
-        var r;
-        void 0 === s && (s = new i.AdsRenderingSettings), void 0 === h && (h = new E), r = t.call(this) || this, Object.defineProperty(l(r), S, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), M, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), x, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), I, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), B, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), L, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), D, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), W, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), _, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), q, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), F, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), N, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), V, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), G, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), Q, {
-            writable: !0,
-            value: !1
-        }), Object.defineProperty(l(r), U, {
-            writable: !0,
-            value: !1
-        }), Object.defineProperty(l(r), z, {
-            writable: !0,
-            value: !1
-        }), Object.defineProperty(l(r), Z, {
-            writable: !0,
-            value: !1
-        }), Object.defineProperty(l(r), $, {
-            writable: !0,
-            value: []
-        }), Object.defineProperty(l(r), H, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), J, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), K, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), X, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), Y, {
-            writable: !0,
-            value: void 0
-        }), Object.defineProperty(l(r), tt, {
-            writable: !0,
-            value: !1
-        }), Object.defineProperty(l(r), it, {
-            writable: !0,
-            value: 1
-        }), Object.defineProperty(l(r), et, {
-            writable: !0,
-            value: Promise.resolve()
-        }), w(l(r), S)[S] = e, w(l(r), M)[M] = n, w(l(r), B)[B] = i, w(l(r), F)[F] = h, w(l(r), I)[I] = s, w(l(r), I)[I].restoreCustomPlaybackStateOnAdBreakComplete = !0, h.disableCustomPlaybackForIOS10Plus && !w(l(r), S)[S].hasAttribute("playsinline") && w(l(r), S)[S].setAttribute("playsinline", ""), w(l(r), B)[B].settings.setDisableCustomPlaybackForIOS10Plus(h.disableCustomPlaybackForIOS10Plus), w(l(r), x)[x] = new k(w(l(r), S)[S]), r.o = r.o.bind(l(r)), P.forEach(function(t) {
-            w(l(r), S)[S].addEventListener(t, r.o);
-        }), r.u = r.u.bind(l(r)), r.l = r.l.bind(l(r));
-        var o = w(l(r), S)[S], a = o.offsetHeight, u = o.offsetWidth;
-        return w(l(r), W)[W] = u, w(l(r), _)[_] = a, h.autoResize && window.ResizeObserver && (w(l(r), N)[N] = new window.ResizeObserver(function(t) {
-            return r.v(t);
-        }), w(l(r), N)[N].observe(w(l(r), S)[S])), r;
-    }
-    r(i, t);
-    var e = i.prototype;
-    return e.activate = function() {
-        var t = this;
-        if (!w(this, Q)[Q] && !w(this, z)[z] && (w(this, z)[z] = !0, w(this, S)[S].paused)) {
-            var i = function() {
-                return w(t, S)[S].pause(), new Promise(function(i) {
-                    setTimeout(function() {
-                        w(t, z)[z] = !1, i();
-                    }, 1);
-                });
-            };
-            w(this, et)[et] = new Promise(function(i) {
-                return i(w(t, S)[S].play());
-            }).then(i).catch(i);
-        }
-    }, e.playAds = function(t) {
-        this.m(t);
-    }, e.loadAds = function(t, i) {
-        this.m(t, !1, i);
-    }, e.p = function() {
-        var t = this;
-        return w(this, et)[et].then(function() {
-            return new Promise(function(i) {
-                return i(w(t, S)[S].play());
-            });
-        });
-    }, e.m = function(t, i, e) {
-        var n = this;
-        void 0 === i && (i = !0), this.reset(), this.O(), w(this, B)[B].settings.setAutoPlayAdBreaks(i), w(this, S)[S].ended && (w(this, x)[x].reset(), w(this, S)[S].currentTime = 0), w(this, K)[K] = e, t.linearAdSlotWidth = w(this, W)[W], t.linearAdSlotHeight = w(this, _)[_], t.nonLinearAdSlotWidth = w(this, W)[W], t.nonLinearAdSlotHeight = w(this, _)[_], null == t.contentDuration && (t.contentDuration = -3), w(this, X)[X] = window.setTimeout(function() {
-            var t = new T("No adsManagerLoadedEvent within 5000ms.");
-            t.errorCode = T.ERROR_CODE_ADS_MANAGER_LOADED_TIMEOUT, n.j(t);
-        }, 5e3), w(this, Y)[Y] = window.setTimeout(function() {
-            var t = new T("No response for ads-request within 10000ms.");
-            t.errorCode = T.ERROR_CODE_REQUEST_ADS_TIMEOUT, n.j(t);
-        }, 1e4), w(this, q)[q].requestAds(t);
-    }, e.O = function() {
-        w(this, L)[L] = new (w(this, B))[B].AdDisplayContainer(w(this, M)[M], w(this, F)[F].disableCustomPlaybackForIOS10Plus ? void 0 : w(this, S)[S], w(this, F)[F].clickTrackingElement), w(this, q)[q] = new (w(this, B))[B].AdsLoader(w(this, L)[L]), w(this, q)[q].addEventListener(w(this, B)[B].AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, this.u, !1), w(this, q)[q].addEventListener(w(this, B)[B].AdErrorEvent.Type.AD_ERROR, this.l, !1);
-    }, e.skipAd = function() {
-        w(this, D)[D] && w(this, D)[D].skip();
-    }, e.discardAdBreak = function() {
-        w(this, D)[D] && w(this, D)[D].discardAdBreak();
-    }, e.play = function() {
-        var t = this;
-        w(this, tt)[tt] = !1, !w(this, x)[x].enabled && w(this, D)[D] ? w(this, D)[D].resume() : w(this, X)[X] || this.p().then(function() {}).catch(function() {
-            t.dispatchEvent(new O("pause"));
-        });
-    }, e.pause = function() {
-        w(this, tt)[tt] = !0, !w(this, x)[x].enabled && w(this, D)[D] ? w(this, D)[D].pause() : w(this, S)[S].pause();
-    }, e.g = function(t) {
-        w(this, $)[$] = [].concat(t), this.dispatchEvent(new O(R.MEDIA_CUE_POINTS_CHANGE, {
-            detail: {
-                cuePoints: [].concat(w(this, $)[$])
-            }
-        }));
-    }, e.A = function(t) {
-        var i = this.cuePoints.indexOf(t);
-        i > -1 && (w(this, $)[$].splice(i, 1), this.g(w(this, $)[$]));
-    }, e.resizeAd = function(t, i) {
-        w(this, W)[W] = t, w(this, _)[_] = i, w(this, D)[D] && w(this, D)[D].resize(t, i, this.k()), w(this, M)[M].style.width = t + "px", w(this, M)[M].style.height = i + "px";
-    }, e.reset = function(t) {
-        void 0 === t && (t = !1), t && (w(this, U)[U] = !1, w(this, Q)[Q] = !1, w(this, Z)[Z] = !1), this.C(), w(this, $)[$] = [], w(this, tt)[tt] = !1, w(this, K)[K] = void 0, w(this, D)[D] && w(this, D)[D].destroy(), w(this, D)[D] = void 0, w(this, B)[B].settings.setAutoPlayAdBreaks(!0), t && this.P(), w(this, M)[M].style.display = "none";
-    }, e.P = function() {
-        w(this, q)[q] && (w(this, q)[q].removeEventListener(w(this, B)[B].AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, this.u, !1), w(this, q)[q].removeEventListener(w(this, B)[B].AdErrorEvent.Type.AD_ERROR, this.l, !1), w(this, q)[q].destroy()), w(this, L)[L] && w(this, L)[L].destroy();
-    }, e.destroy = function() {
-        var t, i, e, n, s = this;
-        this.reset(!0), w(this, x)[x].destroy(), P.forEach(function(t) {
-            w(s, S)[S].removeEventListener(t, s.o);
-        }), null == (t = w(this, q)[q]) || t.removeEventListener(w(this, B)[B].AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, this.u, !1), null == (i = w(this, L)[L]) || i.destroy(), null == (e = w(this, q)[q]) || e.destroy(), w(this, U)[U] = !1, w(this, Z)[Z] = !1, w(this, Q)[Q] = !1, null == (n = w(this, N)[N]) || n.disconnect();
-    }, e.isCustomPlaybackUsed = function() {
-        return !1 === w(this, B)[B].settings.getDisableCustomPlaybackForIOS10Plus() && !w(this, M)[M].querySelector("video");
-    }, e.C = function() {
-        window.clearTimeout(w(this, X)[X]), window.clearTimeout(w(this, Y)[Y]), w(this, X)[X] = void 0, w(this, Y)[Y] = void 0, w(this, V)[V] = void 0, w(this, H)[H] = void 0, w(this, J)[J] = void 0, w(this, M)[M].style.display = "none", w(this, M)[M].classList.remove("nonlinear"), w(this, D)[D] && this.R();
-    }, e.o = function(t) {
-        var i = this;
-        if (w(this, x)[x].enabled || "volumechange" === t.type) {
-            if ("timeupdate" === t.type) {
-                if (w(this, S)[S].currentTime < .5) return;
-                if (w(this, D)[D]) {
-                    var e = w(this, D)[D].getCuePoints().filter(function(t) {
-                        return t >= 0 && t < w(i, x)[x].currentTime;
-                    }).pop();
-                    this.A(e);
-                }
-                !w(this, U)[U] && w(this, Q)[Q] && (this.dispatchEvent(new O(R.MEDIA_IMPRESSION)), w(this, U)[U] = !0);
-            }
-            if ("play" !== t.type || w(this, Q)[Q] || w(this, z)[z] || (this.dispatchEvent(new O(R.MEDIA_START)), w(this, Q)[Q] = !0), "ended" === t.type && (this.isCustomPlaybackUsed() && w(this, S)[S].currentTime === w(this, S)[S].duration && w(this, $)[$].indexOf(-1) > -1 && (w(this, S)[S].currentTime = w(this, S)[S].duration - 1e-5, w(this, Z)[Z] = !0), w(this, q)[q].contentComplete(), w(this, D)[D] || this.T()), !window.ResizeObserver && w(this, F)[F].autoResize && "loadedmetadata" === t.type) {
-                var n = w(this, S)[S], s = n.offsetHeight, h = n.offsetWidth;
-                w(this, W)[W] = h, w(this, _)[_] = s, this.R();
-            }
-            w(this, z)[z] && "volumechange" !== t.type || this.dispatchEvent(new O(t.type));
-        }
-    }, e.S = function(t) {
-        var i = this, e = w(this, B)[B].AdEvent;
-        switch(t.type){
-            case e.Type.LOADED:
-                var n = t.getAd();
-                w(this, K)[K] && 0 === w(this, $)[$].length ? w(this, K)[K]({
-                    ad: n,
-                    start: function() {
-                        i.M(), w(i, K)[K] = void 0;
-                    },
-                    startWithoutReset: function() {
-                        i.M();
-                    }
-                }) : w(this, G)[G] = n;
-                break;
-            case e.Type.AD_BREAK_READY:
-                this.C(), w(this, K)[K] ? (w(this, K)[K]({
-                    ad: w(this, G)[G],
-                    adBreakTime: t.getAdData().adBreakTime,
-                    start: function() {
-                        i.M(), w(i, K)[K] = void 0;
-                    },
-                    startWithoutReset: function() {
-                        i.M();
-                    }
-                }), w(this, G)[G] = void 0) : this.M();
-                break;
-            case e.Type.STARTED:
-                var s = w(this, V)[V] = t.getAd();
-                s.getAdPodInfo().getAdPosition() > 1 && w(this, D)[D].setVolume(w(this, D)[D].getVolume()), w(this, M)[M].classList.remove("nonlinear"), this.R(), s.isLinear() ? (w(this, x)[x].disable(), w(this, J)[J] = s.getDuration(), w(this, H)[H] = 0) : (w(this, M)[M].classList.add("nonlinear"), this.I()), w(this, M)[M].style.display = "", w(this, tt)[tt] && (w(this, tt)[tt] = !1, w(this, D)[D].pause());
-                break;
-            case e.Type.ALL_ADS_COMPLETED:
-                if (w(this, Z)[Z]) return;
-                this.isCustomPlaybackUsed() && Boolean(w(this, V)[V]) && -1 !== w(this, V)[V].getAdPodInfo().getTimeOffset() && this.I(), this.reset();
-                break;
-            case e.Type.CONTENT_PAUSE_REQUESTED:
-                this.C(), w(this, V)[V] = t.getAd(), w(this, M)[M].style.display = "", w(this, S)[S].pause(), this.R(), w(this, V)[V] && this.A(w(this, V)[V].getAdPodInfo().getTimeOffset()), w(this, D)[D].setVolume(w(this, S)[S].muted ? 0 : w(this, S)[S].volume), w(this, x)[x].disable(), w(this, J)[J] = w(this, V)[V].getDuration(), w(this, H)[H] = 0;
-                break;
-            case e.Type.CONTENT_RESUME_REQUESTED:
-                var h = Boolean(w(this, V)[V]);
-                if (h) {
-                    var r = w(this, D)[D].getVolume();
-                    w(this, S)[S].muted = 0 === r, w(this, S)[S].volume = w(this, it)[it];
-                }
-                w(this, Z)[Z] && (w(this, S)[S].currentTime = w(this, S)[S].duration + 1, w(this, Z)[Z] = !1), w(this, S)[S].ended ? (this.reset(), this.T()) : this.C(), h && (w(this, tt)[tt] = !1, this.I());
-                break;
-            case e.Type.AD_METADATA:
-                this.g(w(this, D)[D].getCuePoints()), -1 === w(this, $)[$].indexOf(0) && (w(this, K)[K] ? w(this, K)[K]({
-                    start: function() {
-                        i.I(), w(i, K)[K] = void 0;
-                    },
-                    startWithoutReset: function() {
-                        i.I();
-                    }
-                }) : this.I());
-                break;
-            case e.Type.AD_PROGRESS:
-                var o = t.getAdData();
-                w(this, H)[H] = o.currentTime, w(this, J)[J] = o.duration;
-                break;
-            case e.Type.LOG:
-                var a = t.getAdData();
-                w(this, K)[K] ? w(this, K)[K]({
-                    start: function() {
-                        i.I(), w(i, K)[K] = void 0;
-                    },
-                    startWithoutReset: function() {
-                        i.I();
-                    }
-                }) : a.adError && !w(this, V)[V] && this.I();
-                break;
-            case e.Type.VOLUME_CHANGED:
-                var u = w(this, D)[D].getVolume();
-                u > 0 && (w(this, it)[it] = u);
-        }
-    }, e.l = function(t) {
-        this.j(this.B(t));
-    }, e.u = function(t) {
-        var i = this, e = w(this, B)[B], n = e.AdEvent, s = e.AdErrorEvent.Type.AD_ERROR;
-        window.clearTimeout(w(this, X)[X]);
-        var h = w(this, D)[D] = t.getAdsManager(w(this, x)[x], w(this, I)[I]);
-        Object.keys(n.Type).forEach(function(t) {
-            h.addEventListener(n.Type[t], function(e) {
-                if (i.S(e), R[t]) {
-                    var n = [
-                        "LOG",
-                        "AD_PROGRESS"
-                    ].indexOf(t) > -1;
-                    i.dispatchEvent(new O(R[t], {
-                        detail: {
-                            ad: e.getAd() || w(i, V)[V],
-                            adData: n ? e.getAdData() : {}
-                        }
-                    }));
-                }
-            });
-        }), h.addEventListener(s, function(t) {
-            return i.j(i.B(t));
-        });
-        try {
-            var r;
-            h.init(w(this, W)[W], w(this, _)[_], this.k()), h.setVolume(w(this, S)[S].muted ? 0 : w(this, S)[S].volume), null == (r = w(this, L)[L]) || r.initialize(), w(this, K)[K] || this.M();
-        } catch (t) {
-            this.j(new T(t.message));
-        }
-    }, e.M = function() {
-        if (w(this, Q)[Q] || (this.dispatchEvent(new O(R.MEDIA_START)), w(this, Q)[Q] = !0), w(this, D)[D]) try {
-            w(this, D)[D].start();
-        } catch (t) {
-            this.j(new T(t.message));
-        }
-        else this.I();
-    }, e.T = function() {
-        var t = this;
-        setTimeout(function() {
-            w(t, U)[U] = !1, w(t, Q)[Q] = !1, w(t, Z)[Z] = !1, t.dispatchEvent(new O(R.MEDIA_STOP));
-        }, 1);
-    }, e.v = function(t) {
-        for(var i, e = function(t, i) {
-            var e = "undefined" != typeof Symbol && t[Symbol.iterator] || t["@@iterator"];
-            if (e) return (e = e.call(t)).next.bind(e);
-            if (Array.isArray(t) || (e = function(t, i) {
-                if (t) {
-                    if ("string" == typeof t) return f(t, i);
-                    var e = Object.prototype.toString.call(t).slice(8, -1);
-                    return "Object" === e && t.constructor && (e = t.constructor.name), "Map" === e || "Set" === e ? Array.from(t) : "Arguments" === e || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e) ? f(t, i) : void 0;
-                }
-            }(t))) {
-                e && (t = e);
-                var n = 0;
-                return function() {
-                    return n >= t.length ? {
-                        done: !0
-                    } : {
-                        done: !1,
-                        value: t[n++]
-                    };
-                };
-            }
-            throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-        }(t); !(i = e()).done;){
-            var n = i.value;
-            n.contentBoxSize && 1 === n.contentBoxSize.length ? (w(this, W)[W] = n.contentBoxSize[0].inlineSize, w(this, _)[_] = n.contentBoxSize[0].blockSize) : n.contentBoxSize && n.contentBoxSize.inlineSize ? (w(this, W)[W] = n.contentBoxSize.inlineSize, w(this, _)[_] = n.contentBoxSize.blockSize) : (w(this, W)[W] = n.contentRect.width, w(this, _)[_] = n.contentRect.height);
-        }
-        this.R();
-    }, e.R = function() {
-        if (w(this, F)[F].autoResize && w(this, D)[D]) {
-            var t = w(this, V)[V], i = this.k();
-            t && !t.isLinear() ? t && (t.getWidth() > w(this, W)[W] || t.getHeight() > w(this, _)[_] ? this.resizeAd(w(this, W)[W], w(this, _)[_]) : (w(this, D)[D].resize(t.getWidth(), t.getHeight() + 20, i), w(this, M)[M].style.width = t.getWidth() + "px", w(this, M)[M].style.height = t.getHeight() + 20 + "px")) : this.resizeAd(w(this, W)[W], w(this, _)[_]);
-        }
-    }, e.k = function() {
-        return document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || w(this, S)[S].webkitDisplayingFullscreen ? w(this, B)[B].ViewMode.FULLSCREEN : w(this, B)[B].ViewMode.NORMAL;
-    }, e.I = function() {
-        var t = this;
-        w(this, M)[M].style.display = "none", w(this, S)[S].ended || (w(this, x)[x].enable(), w(this, tt)[tt] ? (w(this, S)[S].pause(), this.dispatchEvent(new O("pause"))) : (this.p().then(function() {}).catch(function() {
-            t.dispatchEvent(new O("pause"));
-        }), this.dispatchEvent(new O("play")), this.dispatchEvent(new O(R.MEDIA_RESUMED))), w(this, tt)[tt] = !1);
-    }, e.B = function(t) {
-        var i = t.getError(), e = new T(i.getMessage());
-        return e.type = i.getType(), e.errorCode = i.getErrorCode(), e.vastErrorCode = i.getVastErrorCode && i.getVastErrorCode(), e.innerError = i.getInnerError(), e;
-    }, e.j = function(t) {
-        var i = this;
-        this.dispatchEvent(new O(R.AD_ERROR, {
-            detail: {
-                error: t
-            }
-        })), this.C(), w(this, K)[K] ? w(this, K)[K]({
-            start: function() {
-                i.I(), w(i, K)[K] = void 0;
-            },
-            startWithoutReset: function() {
-                i.I();
-            }
-        }) : this.I();
-    }, s(i, [
-        {
-            key: "volume",
-            get: function() {
-                return !w(this, x)[x].enabled && w(this, D)[D] ? w(this, D)[D].getVolume() : w(this, S)[S].volume;
-            },
-            set: function(t) {
-                !w(this, x)[x].enabled && w(this, D)[D] && w(this, D)[D].setVolume(t), w(this, S)[S].volume = t;
-            }
-        },
-        {
-            key: "muted",
-            get: function() {
-                return !w(this, x)[x].enabled && w(this, D)[D] ? 0 === w(this, D)[D].getVolume() : w(this, S)[S].muted;
-            },
-            set: function(t) {
-                !w(this, x)[x].enabled && w(this, D)[D] && w(this, D)[D].setVolume(t ? 0 : w(this, it)[it]), w(this, S)[S].muted = t;
-            }
-        },
-        {
-            key: "currentTime",
-            get: function() {
-                return void 0 !== w(this, H)[H] ? w(this, H)[H] : w(this, S)[S].currentTime;
-            },
-            set: function(t) {
-                w(this, x)[x].enabled && (w(this, S)[S].currentTime = t);
-            }
-        },
-        {
-            key: "duration",
-            get: function() {
-                return void 0 !== w(this, J)[J] ? w(this, J)[J] : w(this, S)[S].duration;
-            }
-        },
-        {
-            key: "cuePoints",
-            get: function() {
-                return [].concat(w(this, $)[$]);
-            }
-        }
-    ]), i;
-}(C);
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
     };
 };
 exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
+    Object.defineProperty(a, '__esModule', {
         value: true
     });
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -873,6 +670,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["eSwxK"], "eSwxK", "parcelRequire4dc0")
+},{}]},["chARl"], "chARl", "parcelRequire4dc0", {})
 
 //# sourceMappingURL=index.js.map

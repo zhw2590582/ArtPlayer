@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-vast",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "VAST plugin for ArtPlayer",
   "author": "Harvey Zack <laozhaochaguan@gmail.com>",
   "license": "MIT",
@@ -33,8 +33,5 @@
   "module": "./dist/artplayer-plugin-vast.mjs",
   "types": "./types/artplayer-plugin-vast.d.ts",
   "legacy": "./dist/artplayer-plugin-vast.legacy.js",
-  "browserslist": "last 1 Chrome version",
-  "dependencies": {
-    "@glomex/vast-ima-player": "^1.21.2"
-  }
+  "browserslist": "last 1 Chrome version"
 }
