@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Add `artplayer-plugin-asr` plugin
 - Add `artplayer-plugin-danmuku-mask` plugin
 - Deprecate `artplayer-plugin-libass` plugin
+- Prevent `Hint.css` from polluting global styles
 
 ## [5.3.0] - 2025-09-06
 
