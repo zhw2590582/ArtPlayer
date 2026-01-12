@@ -1,52 +1,55 @@
+.art-video-player {
 .art-controls {
-    position: relative;
-    z-index: 10;
-    pointer-events: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: var(--art-control-height);
-
-    .art-controls-left,
-    .art-controls-right {
+        position: relative;
+        z-index: 10;
+        pointer-events: auto;
         display: flex;
-        height: 100%;
-    }
+        align-items: center;
+        justify-content: space-between;
+        height: var(--art-control-height);
 
-    .art-controls-center {
-        .art-center(none);
-        flex: 1;
-        height: 100%;
-        padding: 0 10px;
-    }
-
-    .art-controls-right {
-        justify-content: flex-end;
-    }
-
-    .art-control {
-        .art-center();
-        flex-shrink: 0;
-        cursor: pointer;
-        white-space: nowrap;
-        opacity: var(--art-control-opacity);
-        min-height: var(--art-control-height);
-        min-width: var(--art-control-height);
-        transition: opacity var(--art-transition-duration) ease;
-
-        .art-icon {
-            height: var(--art-control-icon-size);
-            width: var(--art-control-icon-size);
-            transform: scale(var(--art-control-icon-scale));
-            transition: transform var(--art-transition-duration) ease;
-
-            &:active {
-                transform: scale(calc(var(--art-control-icon-scale) * 0.8));
-            }
+        .art-controls-left,
+        .art-controls-right {
+            display: flex;
+            height: 100%;
         }
 
-        &:hover {
-            opacity: 1;
+        .art-controls-center {
+            .art-center(none);
+            flex: 1;
+            height: 100%;
+            padding: 0 10px;
+        }
+
+        .art-controls-right {
+            justify-content: flex-end;
+        }
+
+        .art-control {
+            .art-center();
+            flex-shrink: 0;
+            cursor: pointer;
+            white-space: nowrap;
+            opacity: var(--art-control-opacity);
+            min-height: var(--art-control-height);
+            min-width: var(--art-control-height);
+            transition: opacity var(--art-transition-duration) ease;
+
+            .art-icon {
+                height: var(--art-control-icon-size);
+                width: var(--art-control-icon-size);
+                transform: scale(var(--art-control-icon-scale));
+                transition: transform var(--art-transition-duration) ease;
+
+                &:active {
+                    transform: scale(calc(var(--art-control-icon-scale) * 0.8));
+                }
+            }
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 }
+
