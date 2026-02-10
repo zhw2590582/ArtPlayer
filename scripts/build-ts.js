@@ -2,6 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { glob } from 'glob'
 
+function ensureDirExists(filePath) {
+  const dir = path.dirname(filePath)
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true })
+  }
+}
+
 function parsePluginInfo(path) {
   const file = path.split('/').pop() || ''
   const baseName = file.replace('.d.ts', '')
@@ -28,6 +35,7 @@ for (let index = 0; index < artplayerTS.length; index++) {
 
 code.replace('export default ', '')
 code += `export = Artplayer;\nexport as namespace Artplayer;\n`
+ensureDirExists(artplayerTSoutput)
 fs.writeFileSync(artplayerTSoutput, code.trim())
 console.log(`✨ Built ${artplayerTSoutput}`);
 
@@ -40,6 +48,7 @@ console.log(`✨ Built ${artplayerTSoutput}`);
     const { name, file } = parsePluginInfo(type)
     const code = `${String(fs.readFileSync(type)).replace(reg, '')}\nexport = ${name};\nexport as namespace ${name};\n`
     const output = path.join('docs/assets/ts', file)
+    ensureDirExists(output)
     fs.writeFileSync(output, code.trim())
     console.log(`✨ Built ${output}`)
     pluginFiles.push(file)
@@ -54,6 +63,7 @@ console.log(`✨ Built ${artplayerTSoutput}`);
     /let libUris = \[([\s\S]*?)\]/,
     `let libUris = [\n      ${newLibUris},\n    ]`,
   )
+  ensureDirExists(commonJsPath)
   fs.writeFileSync(commonJsPath, newContent)
   console.log(`✨ Updated libUris in ${commonJsPath}`)
 })()

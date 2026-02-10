@@ -119,6 +119,7 @@ let art = new Artplayer({
 | [artplayer-plugin-danmuku-mask](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask) | Danmuku masking (smart blocking) | <img src="https://img.shields.io/npm/v/artplayer-plugin-danmuku-mask.svg?sanitize=true"><br><img src="https://img.shields.io/npm/dm/artplayer-plugin-danmuku-mask.svg?sanitize=true"> |
 | [artplayer-plugin-asr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr) | Automatic Speech Recognition | <img src="https://img.shields.io/npm/v/artplayer-plugin-asr.svg?sanitize=true"><br><img src="https://img.shields.io/npm/dm/artplayer-plugin-asr.svg?sanitize=true"> |
 | [artplayer-plugin-ads](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) | Video advertising plugin | WIP |
+| [artplayer-plugin-websr](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-websr/index.js&example=websr) | AI video upscaling with WebGPU | <img src="https://img.shields.io/npm/v/artplayer-plugin-websr.svg?sanitize=true"><br><img src="https://img.shields.io/npm/dm/artplayer-plugin-websr.svg?sanitize=true"> |
 
 ## Libraries
 

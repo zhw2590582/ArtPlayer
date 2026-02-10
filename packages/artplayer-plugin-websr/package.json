@@ -1,0 +1,40 @@
+{
+  "name": "artplayer-plugin-websr",
+  "version": "1.0.0",
+  "description": "AI upscaling plugin for ArtPlayer using WebSR - real-time video super-resolution with WebGPU",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/artplayer-plugin-websr.d.ts",
+      "import": "./dist/artplayer-plugin-websr.mjs",
+      "require": "./dist/artplayer-plugin-websr.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-websr.d.ts",
+      "import": "./dist/artplayer-plugin-websr.legacy.js",
+      "require": "./dist/artplayer-plugin-websr.legacy.js"
+    }
+  },
+  "main": "dist/artplayer-plugin-websr.js",
+  "module": "./dist/artplayer-plugin-websr.mjs",
+  "types": "types/artplayer-plugin-websr.d.ts",
+  "legacy": "dist/artplayer-plugin-websr.legacy.js",
+  "browserslist": "last 1 Chrome version",
+  "dependencies": {
+    "@websr/websr": "^0.0.14"
+  }
+}
