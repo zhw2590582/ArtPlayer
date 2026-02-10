@@ -91,5 +91,5 @@ declare const artplayerPluginWebsr: (option?: Option) => (art: Artplayer) => Res
 
 export default artplayerPluginWebsr
 
-export = packages\artplayerPluginWebsr\types\artplayerPluginWebsr;
-export as namespace packages\artplayerPluginWebsr\types\artplayerPluginWebsr;
+export = artplayerPluginWebsr;
+export as namespace artplayerPluginWebsr;

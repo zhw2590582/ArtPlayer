@@ -9,8 +9,9 @@ function ensureDirExists(filePath) {
   }
 }
 
-function parsePluginInfo(path) {
-  const file = path.split('/').pop() || ''
+function parsePluginInfo(pluginPath) {
+  // Use path.basename to handle both Unix and Windows paths correctly
+  const file = path.basename(pluginPath)
   const baseName = file.replace('.d.ts', '')
 
   const name = baseName

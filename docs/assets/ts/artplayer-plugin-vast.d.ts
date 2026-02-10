@@ -4,15 +4,18 @@ declare global {
   }
 }
 
-type PlayUrlFn = (url: string) => void
-type PlayResFn = (res: string) => void
+type PlayUrlFn = (url: string, config?: any) => void
+type PlayResFn = (res: string, config?: any) => void
 
 interface VastPluginContext {
   art: Artplayer
-  ima: any // Replace 'any' with a more specific type if available, or declare google.ima type above
-  imaPlayer: Player
+  ima: any
+  imaPlayer: Player | null
   playUrl: PlayUrlFn
   playRes: PlayResFn
+  init: () => Player
+  adsRenderingSettings: any
+  playerOptions: PlayerOptions
   container: HTMLDivElement | null
 }
 
@@ -29,5 +32,5 @@ declare function artplayerPluginVast(
 
 export default artplayerPluginVast
 
-export = artplayerPluginVast
+export = artplayerPluginVast;
 export as namespace artplayerPluginVast;

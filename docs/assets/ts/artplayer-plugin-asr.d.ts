@@ -22,5 +22,5 @@ declare function artplayerPluginAsr(option?: AsrPluginOption): (art: Artplayer) 
 
 export default artplayerPluginAsr
 
-export = artplayerPluginAsr
+export = artplayerPluginAsr;
 export as namespace artplayerPluginAsr;
