@@ -217,7 +217,7 @@ function artplayerPluginWebsr(option = {
     networkSize: "medium",
     compare: false
 }) {
-    return (art)=>{
+    return async (art)=>{
         const { $video, $player } = art.template;
         const $canvas = document.createElement("canvas");
         $player.appendChild($canvas);
@@ -229,7 +229,7 @@ function artplayerPluginWebsr(option = {
         $canvas.style.transform = "translate(-50%, -50%)";
         const upscaler = new (0, _upscalerDefault.default)(option);
         upscaler.init();
-        upscaler.startRealtimeUpscale($video, $canvas);
+        await upscaler.startRealtimeUpscale($video, $canvas, option.networkSize);
         // 对比模式
         let comparePosition = 50;
         let isDragging = false;

@@ -6,7 +6,7 @@ export default function artplayerPluginWebsr(
         compare: false,
     },
 ) {
-    return (art) => {
+    return async (art) => {
         const { $video, $player } = art.template;
 
         const $canvas = document.createElement("canvas");
@@ -21,7 +21,11 @@ export default function artplayerPluginWebsr(
 
         const upscaler = new Upscaler(option);
         upscaler.init();
-        upscaler.startRealtimeUpscale($video, $canvas);
+        await upscaler.startRealtimeUpscale(
+            $video,
+            $canvas,
+            option.networkSize,
+        );
 
         // 对比模式
         let comparePosition = 50;
