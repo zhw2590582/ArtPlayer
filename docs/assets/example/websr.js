@@ -7,10 +7,10 @@ var art = new Artplayer({
     fullscreenWeb: true,
     plugins: [
         artplayerPluginWebsr({
-            scale: 2,
+            networkSize: 'medium',
+            weightsBaseUrl: '/assets/websr/weights',
+            workerUrl: '/assets/websr/worker/main.js',
             compare: true,
-            weights: "/assets/websr/cnn-2x-m-an.json",
-            networkName: "anime4k/cnn-2x-m",
         }),
     ],
 });

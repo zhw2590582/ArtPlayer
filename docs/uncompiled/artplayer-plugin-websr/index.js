@@ -211,115 +211,47 @@
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginWebsr);
-var _websr = require("@websr/websr");
-var _websrDefault = parcelHelpers.interopDefault(_websr);
-function artplayerPluginWebsr(option = {}) {
+var _upscaler = require("./Upscaler");
+var _upscalerDefault = parcelHelpers.interopDefault(_upscaler);
+function artplayerPluginWebsr(option = {
+    networkSize: "medium",
+    compare: false
+}) {
     return (art)=>{
-        const { template: { $player }, constructor: { validator, utils: { append, setStyles } } } = art;
-        // Default options
-        option = validator({
-            scale: 2,
-            networkName: '',
-            weights: null,
-            compare: false,
-            ...option
-        }, {
-            scale: 'number',
-            networkName: 'string',
-            weights: '?string|object',
-            compare: 'boolean'
-        });
-        // Validate required parameters
-        if (!option.networkName) console.error('WebSR: networkName is required');
-        if (!option.weights) console.error('WebSR: weights is required');
-        let websr = null;
-        let gpu = null;
-        let isInitialized = false;
-        let isEnabled = true; // Always enabled
-        let renderFrameId = null;
-        let comparePosition = 0.5; // Comparison split position (0-1)
-        let isCompareDragging = false;
-        // Create canvas for upscaled output
-        const $canvas = document.createElement('canvas');
-        $canvas.id = 'artplayer-websr-canvas';
-        setStyles($canvas, {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            display: 'block',
-            pointerEvents: 'none',
-            zIndex: '11',
-            imageRendering: 'crisp-edges'
-        });
-        append($player, $canvas);
-        // Create comparison divider
-        const $compareDivider = document.createElement('div');
-        $compareDivider.id = 'artplayer-websr-divider';
-        setStyles($compareDivider, {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '2px',
-            height: '100%',
-            backgroundColor: '#fff',
-            display: option.compare ? 'block' : 'none',
-            pointerEvents: 'auto',
-            cursor: 'col-resize',
-            zIndex: '12'
-        });
-        append($player, $compareDivider);
-        // Function to update divider position and canvas clip-path
-        function updateDividerPosition(pos) {
-            comparePosition = Math.max(0, Math.min(1, pos));
-            const offsetX = comparePosition * 100;
-            setStyles($compareDivider, {
-                left: offsetX + '%'
-            });
-            // Update canvas clip-path to show only right side (upscaled)
-            if (option.compare) {
-                const clipPercent = comparePosition * 100;
-                setStyles($canvas, {
-                    clipPath: `inset(0 0 0 ${clipPercent}%)`
-                });
-            }
+        const { $video, $player } = art.template;
+        const $canvas = document.createElement("canvas");
+        $player.appendChild($canvas);
+        $canvas.style.position = "absolute";
+        $canvas.style.zIndex = "11";
+        $canvas.style.pointerEvents = "none";
+        $canvas.style.top = "50%";
+        $canvas.style.left = "50%";
+        $canvas.style.transform = "translate(-50%, -50%)";
+        const upscaler = new (0, _upscalerDefault.default)(option);
+        upscaler.init();
+        upscaler.startRealtimeUpscale($video, $canvas);
+        // 对比模式
+        let comparePosition = 50;
+        let isDragging = false;
+        // 创建对比手柄
+        const $handler = document.createElement("div");
+        $handler.style.position = "absolute";
+        $handler.style.width = "3px";
+        $handler.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+        $handler.style.cursor = "ew-resize";
+        $handler.style.zIndex = "12";
+        $handler.style.pointerEvents = "auto";
+        $handler.style.display = option.compare ? "block" : "none";
+        $handler.style.boxShadow = "0 0 4px rgba(0, 0, 0, 0.1)";
+        if (option.compare) {
+            $player.appendChild($handler);
+            $handler.addEventListener("mousedown", handleMouseDown);
+            document.addEventListener("mousemove", handleMouseMove);
+            document.addEventListener("mouseup", handleMouseUp);
+            updateCompareMask();
         }
-        // Mouse events for comparison dragging
-        document.addEventListener('mousemove', (e)=>{
-            if (!isCompareDragging) return;
-            const rect = $player.getBoundingClientRect();
-            const pos = (e.clientX - rect.left) / rect.width;
-            updateDividerPosition(pos);
-        });
-        document.addEventListener('mouseup', ()=>{
-            isCompareDragging = false;
-        });
-        $compareDivider.addEventListener('mousedown', ()=>{
-            isCompareDragging = true;
-        });
-        // Touch events for mobile
-        document.addEventListener('touchmove', (e)=>{
-            if (!isCompareDragging) return;
-            const rect = $player.getBoundingClientRect();
-            const pos = (e.touches[0].clientX - rect.left) / rect.width;
-            updateDividerPosition(pos);
-        }, {
-            passive: true
-        });
-        document.addEventListener('touchend', ()=>{
-            isCompareDragging = false;
-        });
-        $compareDivider.addEventListener('touchstart', ()=>{
-            isCompareDragging = true;
-        });
-        // Function to calculate canvas size based on video aspect ratio
         function calcCanvasSize() {
             const videoElement = art.video;
-            if (!videoElement) return {
-                displayWidth: 640,
-                displayHeight: 360
-            };
             const containerWidth = $player.offsetWidth || 640;
             const containerHeight = $player.offsetHeight || 360;
             const videoWidth = videoElement.videoWidth || 640;
@@ -327,428 +259,524 @@ function artplayerPluginWebsr(option = {}) {
             const aspectRatio = videoWidth / videoHeight;
             let displayWidth = containerWidth;
             let displayHeight = containerHeight;
-            if (containerWidth / containerHeight > aspectRatio) // Container is wider than video
-            displayWidth = containerHeight * aspectRatio;
-            else // Container is taller than video
-            displayHeight = containerWidth / aspectRatio;
+            if (containerWidth / containerHeight > aspectRatio) displayWidth = containerHeight * aspectRatio;
+            else displayHeight = containerWidth / aspectRatio;
             return {
                 displayWidth,
                 displayHeight
             };
         }
-        // Initialize WebGPU and WebSR
-        async function initWebSR() {
-            try {
-                if (isInitialized) return true;
-                // Check WebGPU support
-                if (!navigator.gpu) {
-                    console.warn('WebGPU is not supported');
-                    return false;
-                }
-                // Initialize WebGPU
-                gpu = await (0, _websrDefault.default).initWebGPU();
-                if (!gpu) {
-                    console.warn('Failed to initialize WebGPU');
-                    return false;
-                }
-                // Load weights
-                let weights;
-                if (typeof option.weights === 'string') {
-                    // If weights is a URL, fetch it
-                    const weightResponse = await fetch(option.weights);
-                    if (!weightResponse.ok) {
-                        console.warn(`Failed to load weights from ${option.weights}`);
-                        return false;
-                    }
-                    weights = await weightResponse.json();
-                } else if (typeof option.weights === 'object') // If weights is an object, use it directly
-                weights = option.weights;
-                else {
-                    console.warn('Invalid weights format');
-                    return false;
-                }
-                // Create WebSR instance
-                const videoElement = art.video;
-                if (!videoElement) {
-                    console.warn('Video element not found');
-                    return false;
-                }
-                // Set canvas dimensions based on video aspect ratio
+        function updateCompareMask() {
+            if (option.compare) {
                 const { displayWidth, displayHeight } = calcCanvasSize();
-                $canvas.width = displayWidth * option.scale;
-                $canvas.height = displayHeight * option.scale;
-                setStyles($canvas, {
-                    width: displayWidth + 'px',
-                    height: displayHeight + 'px'
-                });
-                websr = new (0, _websrDefault.default)({
-                    source: videoElement,
-                    network_name: option.networkName,
-                    weights: weights,
-                    gpu: gpu,
-                    canvas: $canvas
-                });
-                isInitialized = true;
-                return true;
-            } catch (error) {
-                console.error('WebSR initialization error:', error);
-                return false;
+                const gradient = `linear-gradient(to right, transparent 0%, transparent ${comparePosition}%, black ${comparePosition}%, black 100%)`;
+                $canvas.style.maskImage = gradient;
+                const containerWidth = $player.offsetWidth || 640;
+                const containerHeight = $player.offsetHeight || 360;
+                const canvasLeft = (containerWidth - displayWidth) / 2;
+                const canvasTop = (containerHeight - displayHeight) / 2;
+                const handlerX = canvasLeft + displayWidth * comparePosition / 100;
+                $handler.style.top = canvasTop + "px";
+                $handler.style.left = handlerX + "px";
+                $handler.style.height = displayHeight + "px";
+                $handler.style.transform = "translateX(-50%)";
+            } else $canvas.style.maskImage = "none";
+        }
+        function handleMouseDown(e) {
+            if (option.compare) isDragging = true;
+        }
+        function handleMouseMove(e) {
+            if (option.compare && isDragging) {
+                const rect = $player.getBoundingClientRect();
+                const { displayWidth } = calcCanvasSize();
+                const containerWidth = $player.offsetWidth || 640;
+                const canvasLeft = (containerWidth - displayWidth) / 2;
+                const x = e.clientX - rect.left;
+                const relativeX = x - canvasLeft;
+                comparePosition = relativeX / displayWidth * 100;
+                comparePosition = Math.max(0, Math.min(100, comparePosition));
+                updateCompareMask();
             }
         }
-        // Render single frame
-        async function renderSingleFrame() {
-            if (!websr || !isEnabled || !art.video) return;
-            try {
-                await websr.render(art.video);
-            } catch (error) {
-                console.error('WebSR render error:', error);
-            }
+        function handleMouseUp(e) {
+            isDragging = false;
         }
-        // Render frame function
-        async function renderFrame() {
-            if (!websr || !isEnabled || !art.video || art.video.paused) {
-                renderFrameId = null;
-                return;
-            }
-            try {
-                await websr.render(art.video);
-            } catch (error) {
-                console.error('WebSR render error:', error);
-            }
-            // Continue rendering
-            if (isEnabled && !art.video.paused) renderFrameId = requestAnimationFrame(renderFrame);
-        }
-        // Enable WebSR
-        async function enable() {
-            if (isEnabled) return;
-            if (!isInitialized) {
-                const initialized = await initWebSR();
-                if (!initialized) {
-                    console.error('Failed to initialize WebSR');
-                    return;
-                }
-            }
-            isEnabled = true;
-            setStyle($canvas, 'display', 'block');
-            // Start rendering if video is playing
-            if (art.video && !art.video.paused) renderFrameId = requestAnimationFrame(renderFrame);
-            art.emit('artplayerPluginWebsr:enable');
-        }
-        // Disable WebSR
-        function disable() {
-            if (!isEnabled) return;
-            isEnabled = false;
-            setStyles($canvas, {
-                display: 'none'
-            });
-            // Cancel ongoing render
-            if (renderFrameId) {
-                cancelAnimationFrame(renderFrameId);
-                renderFrameId = null;
-            }
-            art.emit('artplayerPluginWebsr:disable');
-        }
-        // Toggle WebSR
-        async function toggle() {
-            if (isEnabled) disable();
-            else await enable();
-        }
-        // Listen to video events
-        art.on('play', ()=>{
-            renderSingleFrame(); // Render current frame immediately
-            if (isEnabled && isInitialized && !renderFrameId) renderFrameId = requestAnimationFrame(renderFrame);
+        art.on("destroy", ()=>{
+            upscaler.dispose();
+            $handler.removeEventListener("mousedown", handleMouseDown);
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
         });
-        art.on('pause', ()=>{
-            if (renderFrameId) {
-                cancelAnimationFrame(renderFrameId);
-                renderFrameId = null;
-            }
+        art.on("resize", ()=>{
+            const { displayWidth, displayHeight } = calcCanvasSize();
+            $canvas.style.width = displayWidth + "px";
+            $canvas.style.height = displayHeight + "px";
+            updateCompareMask();
         });
-        art.on('seek', ()=>{
-            if (isEnabled && isInitialized && !art.video.paused && !renderFrameId) renderFrameId = requestAnimationFrame(renderFrame);
-        });
-        art.on('resize', ()=>{
-            if (websr && $canvas.offsetParent) {
-                const { displayWidth, displayHeight } = calcCanvasSize();
-                $canvas.width = displayWidth * option.scale;
-                $canvas.height = displayHeight * option.scale;
-                setStyles($canvas, {
-                    width: displayWidth + 'px',
-                    height: displayHeight + 'px'
-                });
-            }
-        });
-        art.on('destroy', ()=>{
-            disable();
-            if (renderFrameId) {
-                cancelAnimationFrame(renderFrameId);
-                renderFrameId = null;
-            }
-            if ($canvas.parentNode) $canvas.parentNode.removeChild($canvas);
-        });
-        // Initialize if enabled by default
-        initWebSR().then(()=>{
-            // Render first frame after initialization
-            if (isEnabled && isInitialized && art.video) renderSingleFrame();
-        }).catch((err)=>console.error('Failed to init WebSR:', err));
-        // Return plugin API
         return {
-            name: 'artplayerPluginWebsr',
-            websr: ()=>websr,
-            gpu: ()=>gpu,
-            canvas: ()=>$canvas,
-            enable,
-            disable,
-            toggle,
-            isEnabled: ()=>isEnabled,
-            isInitialized: ()=>isInitialized,
-            // Comparison mode methods
-            enableCompare: ()=>{
-                option.compare = true;
-                setStyles($compareDivider, {
-                    display: 'block'
-                });
-                updateDividerPosition(comparePosition);
-            },
-            disableCompare: ()=>{
-                option.compare = false;
-                setStyles($compareDivider, {
-                    display: 'none'
-                });
-                setStyles($canvas, {
-                    clipPath: 'none'
-                });
-            },
-            toggleCompare: ()=>{
-                if (option.compare) {
-                    setStyles($compareDivider, {
-                        display: 'none'
-                    });
-                    setStyles($canvas, {
-                        clipPath: 'none'
-                    });
-                    option.compare = false;
-                } else {
-                    option.compare = true;
-                    setStyles($compareDivider, {
-                        display: 'block'
-                    });
-                    updateDividerPosition(comparePosition);
-                }
-            },
-            setComparePosition: (pos)=>{
-                updateDividerPosition(pos);
-            },
-            getComparePosition: ()=>comparePosition,
-            isComparing: ()=>option.compare,
-            update: async (newOption)=>{
-                // Update weights and networkName (requires re-initialization)
-                if (newOption.weights !== undefined && newOption.weights !== option.weights || newOption.networkName !== undefined && newOption.networkName !== option.networkName) {
-                    // Update option values
-                    if (newOption.weights !== undefined) option.weights = newOption.weights;
-                    if (newOption.networkName !== undefined) option.networkName = newOption.networkName;
-                    // Mark as uninitialized to reload with new config
-                    isInitialized = false;
-                    // Reinitialize if enabled
-                    if (isEnabled) await initWebSR();
-                }
-                // Update scale factor
-                if (newOption.scale !== undefined && newOption.scale !== option.scale) {
-                    option.scale = newOption.scale;
-                    if ($canvas) {
-                        const { displayWidth, displayHeight } = calcCanvasSize();
-                        $canvas.width = displayWidth * option.scale;
-                        $canvas.height = displayHeight * option.scale;
-                        setStyles($canvas, {
-                            width: displayWidth + 'px',
-                            height: displayHeight + 'px'
-                        });
-                    }
-                }
-            }
+            name: "artplayerPluginWebsr"
         };
     };
 }
-if (typeof window !== 'undefined') window.artplayerPluginWebsr = artplayerPluginWebsr;
+if (typeof window !== "undefined") window.artplayerPluginWebsr = artplayerPluginWebsr;
 
-},{"@websr/websr":"afAKC","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"afAKC":[function(require,module,exports,__globalThis) {
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */ (function webpackUniversalModuleDefinition(root, factory) {
-    module.exports = factory();
-})(self, ()=>{
-    return /******/ (()=>{
-        /******/ "use strict";
-        /******/ var __webpack_modules__ = {
-            /***/ "./src/context.ts": /*!************************!*\
-  !*** ./src/context.ts ***!
-  \************************/ /***/ function(__unused_webpack_module, exports) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nclass WebGPUContext {\n    constructor(device, resolution, canvas, scale, debug) {\n        this.device = device;\n        this.canvas = canvas;\n        this.resolution = resolution;\n        this.textures = {};\n        this.buffers = {};\n        this.destroyed = false;\n        this.scale = scale;\n        this.debug = debug;\n        let context = this.canvas.getContext('webgpu');\n        if (context instanceof GPUCanvasContext) {\n            this.context = context;\n        }\n        else {\n            throw new Error(\"Unable to load WebGPU context\");\n        }\n        this.context.configure({\n            device: this.device,\n            format: navigator.gpu.getPreferredCanvasFormat()\n        });\n        this.textureUsage = GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT;\n        this.bufferUsage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST;\n        if (this.debug) {\n            // Read output pixel value\n            this.textureUsage = this.textureUsage | GPUTextureUsage.COPY_SRC;\n            this.bufferUsage = this.bufferUsage | GPUBufferUsage.COPY_SRC;\n        }\n        this.textures['output'] = this.context.getCurrentTexture();\n    }\n    readBuffer(bufferName) {\n        return __awaiter(this, void 0, void 0, function* () {\n            if (!this.buffers[bufferName])\n                throw new Error(`No buffer with name ${bufferName}`);\n            const readEncoder = this.device.createCommandEncoder({\n                label: `Read ${bufferName} buffer encoder`,\n            });\n            const buffer = this.buffers[bufferName];\n            const resultBuffer = this.device.createBuffer({\n                label: 'result buffer',\n                size: buffer.size,\n                usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST\n            });\n            readEncoder.copyBufferToBuffer(buffer, 0, resultBuffer, 0, resultBuffer.size);\n            this.device.queue.submit([readEncoder.finish()]);\n            yield resultBuffer.mapAsync(GPUMapMode.READ);\n            let range = resultBuffer.getMappedRange();\n            return new Float32Array(range);\n        });\n    }\n    readTexture(textureName) {\n        return __awaiter(this, void 0, void 0, function* () {\n            if (!this.textures[textureName])\n                throw new Error(`No texture with name ${textureName}`);\n            const readEncoder = this.device.createCommandEncoder({\n                label: `Read ${textureName} texture encoder`,\n            });\n            const texture = this.textures[textureName];\n            let bitsPerPixel = 16;\n            if (texture.format === 'rgba8unorm')\n                bitsPerPixel = 4;\n            if (texture.format === 'r32float')\n                bitsPerPixel = 4;\n            const resultBuffer = this.device.createBuffer({\n                label: 'result buffer',\n                size: texture.width * texture.height * bitsPerPixel,\n                usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST\n            });\n            readEncoder.copyTextureToBuffer({\n                texture: this.textures[textureName],\n            }, {\n                buffer: resultBuffer,\n                bytesPerRow: texture.width * bitsPerPixel\n            }, {\n                width: texture.width,\n                height: texture.height,\n                depthOrArrayLayers: 1,\n            });\n            this.device.queue.submit([readEncoder.finish()]);\n            yield resultBuffer.mapAsync(GPUMapMode.READ);\n            if (texture.format === 'r32float')\n                return new Float32Array(resultBuffer.getMappedRange());\n            else if (texture.format === 'rgba32float')\n                return new Float32Array(resultBuffer.getMappedRange());\n            else if (texture.format === 'rgba8unorm')\n                return new Uint8ClampedArray(resultBuffer.getMappedRange());\n            return new Float32Array(0);\n        });\n    }\n    destroy() {\n        this.device.destroy();\n        this.destroyed = true;\n    }\n    buffer(key, options) {\n        if (!this.buffers[key]) {\n            options = options || {};\n            const width = options.width || this.resolution.width;\n            const height = options.height || this.resolution.height;\n            const channels = options.channels || 4;\n            const bitdepth = options.bitdepth || 4;\n            this.buffers[key] = this.device.createBuffer({\n                label: key,\n                size: width * height * channels * bitdepth,\n                usage: this.bufferUsage\n            });\n        }\n        return this.buffers[key];\n    }\n    texture(key, options) {\n        if (!this.textures[key]) {\n            options = options || {};\n            this.textures[key] = this.device.createTexture({\n                label: key,\n                size: [options.width || this.resolution.width, options.height || this.resolution.height],\n                format: options.format || 'rgba32float',\n                usage: this.textureUsage\n            });\n        }\n        return this.textures[key];\n    }\n}\nexports[\"default\"] = WebGPUContext;\n\n\n//# sourceURL=webpack://WebSR/./src/context.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/anime4k/conv2d-112x4.ts": /*!********************************************!*\
-  !*** ./src/layers/anime4k/conv2d-112x4.ts ***!
-  \********************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_compute_layer_1 = __webpack_require__(/*! ../base_compute_layer */ \"./src/layers/base_compute_layer.ts\");\nclass Anime4KConv112x4 extends base_compute_layer_1.default {\n    constructor(inputs, outputBuffer, weights, first) {\n        super(inputs, outputBuffer, weights);\n        this.label = \"Anime4KConv112x4\";\n        const kernels = weights.weights;\n        this.createUniform(\"kernels\", \"array<mat4x4f, 28>\");\n        let read_buffers = '';\n        for (let i = 0; i < 7; i++) {\n            if (first) {\n                read_buffers += `\n                let pixel_val${i} = inputBuffer${i}[buff_ind];\n                result += kernels[${4 * i}]*max(pixel_val${i}, vec4f(0.0));\n                result += kernels[${4 * i + 2}]*max(-1.0*pixel_val${i}, vec4f(0.0));\n            `;\n            }\n            else {\n                read_buffers += `\n                let pixel_val${i} = inputBuffer${i}[buff_ind];\n                result += kernels[${4 * i + 1}]*max(pixel_val${i}, vec4f(0.0));\n                result += kernels[${4 * i + 3}]*max(-1.0*pixel_val${i}, vec4f(0.0));`;\n            }\n        }\n        this.shader = this.createStandardShader(`\n        \n          @compute @workgroup_size(${this.num_work_groups}, ${this.num_work_groups}) fn main( @builtin(global_invocation_id) id: vec3<u32>) {\n          \n                let x = id.x;\n                let y = id.y;\n                \n                let i = id.y*${this.resolution.width} + x;\n                var result  = vec4f(0.0, 0.0, 0.0, 0.0);\n                \n                let coord = vec2<i32>( i32(x), i32(y));\n               \n                let buff_ind = coord.y*${this.resolution.width} + coord.x;\n                ${read_buffers}\n                \n                outputBuffer[i] = result;\n          }\n        `);\n        this.setUniform(\"kernels\", new Float32Array(kernels));\n        this.defaultSetup();\n    }\n    defaultPipelineConfig() {\n        return {\n            label: `${this.label}-pipeline`,\n            layout: 'auto',\n            compute: {\n                module: this.shader,\n                entryPoint: 'main',\n            },\n        };\n    }\n    defaultBindGroup() {\n        const entries = [];\n        this.inputs.forEach(function (input, i) {\n            if (input instanceof GPUExternalTexture) {\n                entries.push({ binding: i, resource: input });\n            }\n            else if (input instanceof GPUTexture) {\n                entries.push({ binding: i, resource: input.createView() });\n            }\n            else if (input instanceof GPUBuffer) {\n                entries.push({ binding: i, resource: { buffer: input } });\n            }\n        });\n        this.uniforms.forEach((uniform, i) => {\n            entries.push({\n                binding: i + this.inputs.length,\n                resource: {\n                    buffer: this.buffers[uniform.name]\n                }\n            });\n        });\n        if (this.output instanceof GPUBuffer) {\n            entries.push({\n                binding: this.inputs.length + this.uniforms.length,\n                resource: {\n                    buffer: this.output\n                }\n            });\n        }\n        if (entries.length === 0)\n            return null;\n        return this.device.createBindGroup({\n            layout: this.pipeline.getBindGroupLayout(0),\n            entries\n        });\n    }\n}\nexports[\"default\"] = Anime4KConv112x4;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/anime4k/conv2d-112x4.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/anime4k/conv2d-16x4.ts": /*!*******************************************!*\
-  !*** ./src/layers/anime4k/conv2d-16x4.ts ***!
-  \*******************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_compute_layer_1 = __webpack_require__(/*! ../base_compute_layer */ \"./src/layers/base_compute_layer.ts\");\nclass Anime4KConv16x4 extends base_compute_layer_1.default {\n    constructor(inputs, outputBuffer, weights) {\n        super(inputs, outputBuffer, weights);\n        this.label = \"Anime4KConv16x4\";\n        const kernels = weights.weights;\n        const bias = weights.bias;\n        this.createUniform(\"kernel_offsets\", \"array<vec4f, 9>\");\n        this.createUniform(\"kernels\", \"array<mat4x4f, 36>\");\n        this.createUniform(\"bias\", \"vec4f\");\n        this.shader = this.createStandardShader(`\n        \n          @compute @workgroup_size(${this.num_work_groups}, ${this.num_work_groups}) fn main( @builtin(global_invocation_id) id: vec3<u32>) {\n          \n                let x = id.x;\n                let y = id.y;\n                \n                let i = id.y*${this.resolution.width} + x;\n                var result  = vec4f(0.0, 0.0, 0.0, 0.0);\n                \n                let coord = vec2<i32>( i32(x), i32(y));\n                      \n                 for(var i = 0u; i < 9; i++){\n                   let pixel_loc = coord + vec2<i32>(kernel_offsets[i].xy);\n                   let buff_ind = pixel_loc.y*${this.resolution.width} + pixel_loc.x;\n                   \n                   let pix_val0 = inputBuffer0[buff_ind];\n                   let pix_val1 = inputBuffer1[buff_ind];\n                  \n                   result += kernels[i]*max(pix_val0, vec4f(0.0));\n                   result += kernels[i+9]*max(pix_val1, vec4f(0.0));\n                   result += kernels[i+18]*max(-1.0*pix_val0, vec4f(0.0));\n                   result += kernels[i+27]*max(-1.0*pix_val1, vec4f(0.0));\n                 } \n                 \n\n                    \n                result += bias;\n                \n                outputBuffer[i] = result;\n          }\n        `);\n        this.setUniform(\"kernel_offsets\", new Float32Array([\n            -1, -1, 0, 0,\n            -1, 0, 0, 0,\n            -1, 1, 0, 0,\n            0, -1, 0, 0,\n            0, 0, 0, 0,\n            0, 1, 0, 0,\n            1, -1, 0, 0,\n            1, 0, 0, 0,\n            1, 1, 0, 0,\n        ]));\n        this.setUniform(\"kernels\", new Float32Array(kernels));\n        this.setUniform(\"bias\", new Float32Array(bias));\n        this.defaultSetup();\n    }\n}\nexports[\"default\"] = Anime4KConv16x4;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/anime4k/conv2d-16x4.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/anime4k/conv2d-3x4.ts": /*!******************************************!*\
-  !*** ./src/layers/anime4k/conv2d-3x4.ts ***!
-  \******************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_compute_layer_1 = __webpack_require__(/*! ../base_compute_layer */ \"./src/layers/base_compute_layer.ts\");\nclass Anime4KConv3x4 extends base_compute_layer_1.default {\n    constructor(inputTextures, outputBuffer, weights) {\n        super(inputTextures, outputBuffer, weights);\n        this.label = \"Anime4KConv3x4\";\n        const kernels = weights.weights;\n        const bias = weights.bias;\n        this.createUniform(\"kernel_offsets\", \"array<vec4f, 9>\");\n        this.createUniform(\"kernels\", \"array<mat4x4f, 9>\");\n        this.createUniform(\"bias\", \"vec4f\");\n        // Set up pipeline in Lazy Load\n        this.setUniform(\"kernel_offsets\", new Float32Array([\n            -1, -1, 0, 0,\n            -1, 0, 0, 0,\n            -1, 1, 0, 0,\n            0, -1, 0, 0,\n            0, 0, 0, 0,\n            0, 1, 0, 0,\n            1, -1, 0, 0,\n            1, 0, 0, 0,\n            1, 1, 0, 0,\n        ]));\n        this.setUniform(\"kernels\", new Float32Array(kernels));\n        this.setUniform(\"bias\", new Float32Array(bias));\n    }\n    lazyLoadSetup() {\n        const externalTexture = this.inputs[0] instanceof GPUExternalTexture;\n        const textureLoad = externalTexture ? 'textureLoad(inputTexture0, coord + offset)' :\n            'textureLoad(inputTexture0, coord + offset, 0)';\n        this.shader = this.createStandardShader(`\n        \n          @compute @workgroup_size(${this.num_work_groups}, ${this.num_work_groups}) fn main( @builtin(global_invocation_id) id: vec3<u32>) {\n          \n                let x = id.x;\n                let y = id.y;\n                \n                let i = id.y*${this.resolution.width} + x;\n                var result  = vec4f(0.0, 0.0, 0.0, 0.0);\n                \n                let coord = vec2<i32>( i32(x), i32(y));\n                      \n                 for(var i = 0u; i < 9; i++){\n                   let offset = vec2<i32>(kernel_offsets[i].xy);\n                   result += kernels[i]*${textureLoad};\n                 } \n                    \n                result += bias;\n                \n                outputBuffer[i] = result;\n          }\n        `);\n        this.pipeline = this.device.createComputePipeline(this.defaultPipelineConfig());\n        this.bindGroup = this.defaultBindGroup();\n    }\n}\nexports[\"default\"] = Anime4KConv3x4;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/anime4k/conv2d-3x4.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/anime4k/conv2d-56x4.ts": /*!*******************************************!*\
-  !*** ./src/layers/anime4k/conv2d-56x4.ts ***!
-  \*******************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_compute_layer_1 = __webpack_require__(/*! ../base_compute_layer */ \"./src/layers/base_compute_layer.ts\");\nclass Anime4KConv56x4 extends base_compute_layer_1.default {\n    constructor(inputs, outputBuffer, weights) {\n        super(inputs, outputBuffer, weights);\n        this.label = \"Anime4KConv56x4\";\n        const kernels = weights.weights;\n        const bias = weights.bias;\n        this.createUniform(\"kernels\", \"array<mat4x4f, 14>\");\n        this.createUniform(\"bias\", \"vec4f\");\n        let read_buffers = '';\n        for (let i = 0; i < 7; i++) {\n            read_buffers += `\n            let pixel_val${i} = inputBuffer${i}[buff_ind];\n            result += kernels[${2 * i}]*max(pixel_val${i}, vec4f(0.0));\n            result += kernels[${2 * i + 1}]*max(-1.0*pixel_val${i}, vec4f(0.0));\n            `;\n        }\n        this.shader = this.createStandardShader(`\n        \n          @compute @workgroup_size(${this.num_work_groups}, ${this.num_work_groups}) fn main( @builtin(global_invocation_id) id: vec3<u32>) {\n          \n                let x = id.x;\n                let y = id.y;\n                \n                let i = id.y*${this.resolution.width} + x;\n                var result  = vec4f(0.0, 0.0, 0.0, 0.0);\n                \n                let coord = vec2<i32>( i32(x), i32(y));\n               \n                let buff_ind = coord.y*${this.resolution.width} + coord.x;\n                ${read_buffers}\n                      \n                result += bias;\n                \n                outputBuffer[buff_ind] = result;\n          }\n        `);\n        this.setUniform(\"kernels\", new Float32Array(kernels));\n        this.setUniform(\"bias\", new Float32Array(bias));\n        this.defaultSetup();\n    }\n    defaultPipelineConfig() {\n        return {\n            label: `${this.label}-pipeline`,\n            layout: 'auto',\n            compute: {\n                module: this.shader,\n                entryPoint: 'main',\n            },\n        };\n    }\n    defaultBindGroup() {\n        const entries = [];\n        this.inputs.forEach(function (input, i) {\n            if (input instanceof GPUExternalTexture) {\n                entries.push({ binding: i, resource: input });\n            }\n            else if (input instanceof GPUTexture) {\n                entries.push({ binding: i, resource: input.createView() });\n            }\n            else if (input instanceof GPUBuffer) {\n                entries.push({ binding: i, resource: { buffer: input } });\n            }\n        });\n        this.uniforms.forEach((uniform, i) => {\n            entries.push({\n                binding: i + this.inputs.length,\n                resource: {\n                    buffer: this.buffers[uniform.name]\n                }\n            });\n        });\n        if (this.output instanceof GPUBuffer) {\n            entries.push({\n                binding: this.inputs.length + this.uniforms.length,\n                resource: {\n                    buffer: this.output\n                }\n            });\n        }\n        if (entries.length === 0)\n            return null;\n        return this.device.createBindGroup({\n            layout: this.pipeline.getBindGroupLayout(0),\n            entries\n        });\n    }\n}\nexports[\"default\"] = Anime4KConv56x4;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/anime4k/conv2d-56x4.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/anime4k/conv2d-8x4.ts": /*!******************************************!*\
-  !*** ./src/layers/anime4k/conv2d-8x4.ts ***!
-  \******************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_compute_layer_1 = __webpack_require__(/*! ../base_compute_layer */ \"./src/layers/base_compute_layer.ts\");\nclass Anime4KConv8x4 extends base_compute_layer_1.default {\n    constructor(inputs, outputBuffer, weights) {\n        super(inputs, outputBuffer, weights);\n        this.label = \"Anime4KConv8x4\";\n        const kernels = weights.weights;\n        const bias = weights.bias;\n        this.createUniform(\"kernel_offsets\", \"array<vec4f, 9>\");\n        this.createUniform(\"kernels\", \"array<mat4x4f, 18>\");\n        this.createUniform(\"bias\", \"vec4f\");\n        this.shader = this.createStandardShader(`\n        \n          @compute @workgroup_size(${this.num_work_groups}, ${this.num_work_groups}) fn main( @builtin(global_invocation_id) id: vec3<u32>) {\n          \n                let x = id.x;\n                let y = id.y;\n                \n                let i = id.y*${this.resolution.width} + x;\n                var result  = vec4f(0.0, 0.0, 0.0, 0.0);\n                \n                let coord = vec2<i32>( i32(x), i32(y));\n                      \n                 for(var i = 0u; i < 9; i++){\n                   let pixel_loc = coord + vec2<i32>(kernel_offsets[i].xy);\n                   let buff_ind = pixel_loc.y*${this.resolution.width} + pixel_loc.x;\n                   \n                   let pix_val = inputBuffer0[buff_ind];\n                  \n                   result += kernels[i]*max(pix_val, vec4f(0.0));\n                   result += kernels[i+9]*max(-1.0*pix_val, vec4f(0.0));\n                 } \n                    \n                result += bias;\n                \n                outputBuffer[i] = result;\n          }\n        `);\n        this.setUniform(\"kernel_offsets\", new Float32Array([\n            -1, -1, 0, 0,\n            -1, 0, 0, 0,\n            -1, 1, 0, 0,\n            0, -1, 0, 0,\n            0, 0, 0, 0,\n            0, 1, 0, 0,\n            1, -1, 0, 0,\n            1, 0, 0, 0,\n            1, 1, 0, 0,\n        ]));\n        this.setUniform(\"kernels\", new Float32Array(kernels));\n        this.setUniform(\"bias\", new Float32Array(bias));\n        this.defaultSetup();\n    }\n}\nexports[\"default\"] = Anime4KConv8x4;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/anime4k/conv2d-8x4.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/anime4k/conv2d-concat2.ts": /*!**********************************************!*\
-  !*** ./src/layers/anime4k/conv2d-concat2.ts ***!
-  \**********************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_compute_layer_1 = __webpack_require__(/*! ../base_compute_layer */ \"./src/layers/base_compute_layer.ts\");\nclass Anime4KConcat2 extends base_compute_layer_1.default {\n    constructor(inputs, outputBuffer, weights) {\n        super(inputs, outputBuffer, weights);\n        this.label = \"Anime4KConcat2\";\n        this.createUniform(\"bias\", \"vec4f\");\n        const bias = weights.bias;\n        this.shader = this.createStandardShader(`\n        \n          @compute @workgroup_size(${this.num_work_groups}, ${this.num_work_groups}) fn main( @builtin(global_invocation_id) id: vec3<u32>) {\n          \n                let x = id.x;\n                let y = id.y;\n                \n                let i = id.y*${this.resolution.width} + x;\n                var result  = vec4f(0.0, 0.0, 0.0, 0.0);\n                \n                let coord = vec2<i32>( i32(x), i32(y));\n               \n                let buff_ind = coord.y*${this.resolution.width} + coord.x;\n               \n                outputBuffer[buff_ind] = inputBuffer0[buff_ind] + inputBuffer1[buff_ind] + bias;\n          }\n        `);\n        this.setUniform(\"bias\", new Float32Array(bias));\n        this.defaultSetup();\n    }\n}\nexports[\"default\"] = Anime4KConcat2;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/anime4k/conv2d-concat2.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/anime4k/display.ts": /*!***************************************!*\
-  !*** ./src/layers/anime4k/display.ts ***!
-  \***************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_render_layer_1 = __webpack_require__(/*! ../base_render_layer */ \"./src/layers/base_render_layer.ts\");\nclass DisplayLayer extends base_render_layer_1.default {\n    constructor(inputs, output) {\n        super(inputs, output);\n        this.label = \"DisplayLayer\";\n        this.vertexScale = {\n            width: 1,\n            height: 1\n        };\n        this.sampler = this.device.createSampler({\n            addressModeU: \"repeat\",\n            addressModeV: \"repeat\",\n            magFilter: \"linear\",\n            minFilter: \"linear\",\n            mipmapFilter: \"linear\",\n        });\n    }\n    lazyLoadSetup() {\n        const externalTexture = this.inputs[1] instanceof GPUExternalTexture;\n        const textureLoad = externalTexture ? 'textureSampleBaseClampToEdge(inputTexture, ourSampler, input.tex_coord)' :\n            'textureSample(inputTexture, ourSampler, input.tex_coord)';\n        this.shader = this.device.createShaderModule({\n            label: `${this.label}-shader`,\n            code: `\n                \n                   ${this.defaultVertexShader()}\n                   @group(0) @binding(0) var<storage, read_write> inputBuffer0: array<vec4f>;\n                   @group(0) @binding(1) var inputTexture: ${externalTexture ? 'texture_external' : 'texture_2d<f32>'};\n                   @group(0) @binding(2) var ourSampler: sampler;\n                  \n                   @fragment fn fragmentMain(input: VertexShaderOutput) -> @location(0) vec4f {\n                      \n                        let x = ${this.resolution.width}.0*(input.tex_coord.x);\n                        let y = ${this.resolution.height}.0*(input.tex_coord.y);\n                        \n                        let y2 = u32(floor(y));\n                        let x2 = u32(floor(x));\n                        \n                        let i = y2*${Math.floor(this.resolution.width)} +  x2;\n                       \n                        let x_floor  = u32(fract(x)*2.0);\n                        let y_floor  = u32(fract(y)*2.0);\n                        \n                        //I don t know, I think this is right? I found this by trial and error\n                        let c_index: u32 = x_floor + y_floor*2;  \n        \n                        let value = inputBuffer0[i][c_index];\n                        \n                        let bicubic = ${textureLoad};\n                        \n                        return bicubic + vec4f(value);\n                    \n                      }            \n            `\n        });\n        this.pipeline = this.device.createRenderPipeline(this.defaultPipelineConfig());\n        this.bindGroup = this.defaultBindGroup();\n        this.renderPassDescriptor = this.defaultRenderPassDescriptor();\n    }\n    defaultBindGroup() {\n        const entries = [];\n        this.inputs.forEach(function (input, i) {\n            if (input instanceof GPUExternalTexture) {\n                entries.push({ binding: i, resource: input });\n            }\n            else if (input instanceof GPUTexture) {\n                entries.push({ binding: i, resource: input.createView() });\n            }\n            else if (input instanceof GPUBuffer) {\n                entries.push({ binding: i, resource: { buffer: input } });\n            }\n        });\n        entries.push({ binding: this.inputs.length, resource: this.sampler });\n        return this.device.createBindGroup({\n            layout: this.pipeline.getBindGroupLayout(0),\n            entries\n        });\n    }\n}\nexports[\"default\"] = DisplayLayer;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/anime4k/display.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/anime4k/display_1x.ts": /*!******************************************!*\
-  !*** ./src/layers/anime4k/display_1x.ts ***!
-  \******************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_render_layer_1 = __webpack_require__(/*! ../base_render_layer */ \"./src/layers/base_render_layer.ts\");\nclass DisplayLayer extends base_render_layer_1.default {\n    constructor(inputs, output) {\n        super(inputs, output);\n        this.label = \"DisplayLayer\";\n        this.vertexScale = {\n            width: 1,\n            height: 1\n        };\n        this.sampler = this.device.createSampler({\n            addressModeU: \"repeat\",\n            addressModeV: \"repeat\",\n            magFilter: \"linear\",\n            minFilter: \"linear\",\n            mipmapFilter: \"linear\",\n        });\n    }\n    lazyLoadSetup() {\n        const externalTexture = this.inputs[1] instanceof GPUExternalTexture;\n        const textureLoad = externalTexture ? 'textureSampleBaseClampToEdge(inputTexture, ourSampler, input.tex_coord)' :\n            'textureSample(inputTexture, ourSampler, input.tex_coord)';\n        this.shader = this.device.createShaderModule({\n            label: `${this.label}-shader`,\n            code: `\n                \n                   ${this.defaultVertexShader()}\n                   @group(0) @binding(0) var<storage, read_write> inputBuffer0: array<vec4f>;\n                   @group(0) @binding(1) var inputTexture: ${externalTexture ? 'texture_external' : 'texture_2d<f32>'};\n                   @group(0) @binding(2) var ourSampler: sampler;\n                  \n                   @fragment fn fragmentMain(input: VertexShaderOutput) -> @location(0) vec4f {\n                      \n                        let x = ${this.resolution.width}.0*(input.tex_coord.x);\n                        let y = ${this.resolution.height}.0*(input.tex_coord.y);\n                        \n                        let y2 = u32(floor(y));\n                        let x2 = u32(floor(x));\n                        \n                        let i = y2*${Math.floor(this.resolution.width)} +  x2;\n      \n                        let bicubic = ${textureLoad};\n                        \n                        return bicubic + inputBuffer0[i];\n                    \n                      }            \n            `\n        });\n        this.pipeline = this.device.createRenderPipeline(this.defaultPipelineConfig());\n        this.bindGroup = this.defaultBindGroup();\n        this.renderPassDescriptor = this.defaultRenderPassDescriptor();\n    }\n    defaultBindGroup() {\n        const entries = [];\n        this.inputs.forEach(function (input, i) {\n            if (input instanceof GPUExternalTexture) {\n                entries.push({ binding: i, resource: input });\n            }\n            else if (input instanceof GPUTexture) {\n                entries.push({ binding: i, resource: input.createView() });\n            }\n            else if (input instanceof GPUBuffer) {\n                entries.push({ binding: i, resource: { buffer: input } });\n            }\n        });\n        entries.push({ binding: this.inputs.length, resource: this.sampler });\n        return this.device.createBindGroup({\n            layout: this.pipeline.getBindGroupLayout(0),\n            entries\n        });\n    }\n}\nexports[\"default\"] = DisplayLayer;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/anime4k/display_1x.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/anime4k/display_3c.ts": /*!******************************************!*\
-  !*** ./src/layers/anime4k/display_3c.ts ***!
-  \******************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_render_layer_1 = __webpack_require__(/*! ../base_render_layer */ \"./src/layers/base_render_layer.ts\");\nclass DisplayLayer3C extends base_render_layer_1.default {\n    constructor(inputs, output) {\n        super(inputs, output);\n        this.label = \"DisplayLayer3C\";\n        this.vertexScale = {\n            width: 1,\n            height: 1\n        };\n        this.sampler = this.device.createSampler({\n            addressModeU: \"repeat\",\n            addressModeV: \"repeat\",\n            magFilter: \"linear\",\n            minFilter: \"linear\",\n            mipmapFilter: \"linear\",\n        });\n    }\n    lazyLoadSetup() {\n        const externalTexture = this.inputs[3] instanceof GPUExternalTexture;\n        const textureLoad = externalTexture ? 'textureSampleBaseClampToEdge(inputTexture, ourSampler, input.tex_coord)' :\n            'textureSample(inputTexture, ourSampler, input.tex_coord)';\n        this.shader = this.device.createShaderModule({\n            label: `${this.label}-shader`,\n            code: `\n                \n                   ${this.defaultVertexShader()}\n                   @group(0) @binding(0) var<storage, read_write> inputBuffer0: array<vec4f>;\n                   @group(0) @binding(1) var<storage, read_write> inputBuffer1: array<vec4f>;\n                   @group(0) @binding(2) var<storage, read_write> inputBuffer2: array<vec4f>;\n                   @group(0) @binding(3) var inputTexture: ${externalTexture ? 'texture_external' : 'texture_2d<f32>'};\n                   @group(0) @binding(4) var ourSampler: sampler;\n                  \n                   @fragment fn fragmentMain(input: VertexShaderOutput) -> @location(0) vec4f {\n                      \n                        let x = ${this.resolution.width}.0*(input.tex_coord.x);\n                        let y = ${this.resolution.height}.0*(input.tex_coord.y);\n                        \n                        let y2 = u32(floor(y));\n                        let x2 = u32(floor(x));\n                        \n                        let i = y2*${Math.floor(this.resolution.width)} +  x2;\n                       \n                        let x_floor  = u32(fract(x)*2.0);\n                        let y_floor  = u32(fract(y)*2.0);\n                        \n                        //I don t know, I think this is right? I found this by trial and error\n                        let c_index: u32 = x_floor + y_floor*2;  \n        \n                        let value = inputBuffer0[i][c_index];\n                        let value1 = inputBuffer1[i][c_index];\n                        let value2 = inputBuffer2[i][c_index];\n                        \n                        let bicubic = ${textureLoad};\n                        \n                        return bicubic + vec4f(value, value1, value2, value2);\n                    \n                      }            \n            `\n        });\n        this.pipeline = this.device.createRenderPipeline(this.defaultPipelineConfig());\n        this.bindGroup = this.defaultBindGroup();\n        this.renderPassDescriptor = this.defaultRenderPassDescriptor();\n    }\n    defaultPipelineConfig() {\n        return {\n            label: `${this.label}-pipeline`,\n            layout: 'auto',\n            vertex: {\n                module: this.shader,\n                entryPoint: 'vertexMain',\n            },\n            fragment: {\n                module: this.shader,\n                entryPoint: 'fragmentMain',\n                targets: [{ format: this.output.format }],\n            },\n        };\n    }\n    defaultBindGroup() {\n        const entries = [];\n        this.inputs.forEach(function (input, i) {\n            if (input instanceof GPUExternalTexture) {\n                entries.push({ binding: i, resource: input });\n            }\n            else if (input instanceof GPUTexture) {\n                entries.push({ binding: i, resource: input.createView() });\n            }\n            else if (input instanceof GPUBuffer) {\n                entries.push({ binding: i, resource: { buffer: input } });\n            }\n        });\n        entries.push({ binding: this.inputs.length, resource: this.sampler });\n        return this.device.createBindGroup({\n            layout: this.pipeline.getBindGroupLayout(0),\n            entries\n        });\n    }\n}\nexports[\"default\"] = DisplayLayer3C;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/anime4k/display_3c.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/base_compute_layer.ts": /*!******************************************!*\
-  !*** ./src/layers/base_compute_layer.ts ***!
-  \******************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_layer_1 = __webpack_require__(/*! ./base_layer */ \"./src/layers/base_layer.ts\");\nclass ComputeLayer extends base_layer_1.default {\n    constructor(inputTextures, outputBuffer, weights) {\n        super(inputTextures, outputBuffer, weights);\n        this.num_work_groups = 8;\n    }\n    createStandardShader(computeShader) {\n        return this.device.createShaderModule({\n            label: `${this.label}-shader`,\n            code: `\n              \n              ${this.computeShaderInputs()}\n              \n              ${computeShader}\n        `\n        });\n    }\n    computeShaderInputs() {\n        const inputs = [];\n        for (let i = 0; i < this.inputs.length; i++) {\n            if (this.inputs[i] instanceof GPUTexture) {\n                inputs.push(`@group(0) @binding(${i}) var inputTexture${i}: texture_2d<f32>;`);\n            }\n            else if (this.inputs[i] instanceof GPUExternalTexture) {\n                inputs.push(`@group(0) @binding(${i}) var inputTexture${i}: texture_external;`);\n            }\n            else if (this.inputs[i] instanceof GPUBuffer) {\n                inputs.push(`@group(0) @binding(${i}) var<storage, read_write> inputBuffer${i}: array<vec4f>;`);\n            }\n            else {\n                console.log(this.inputs[i]);\n                throw new Error(\"Input is undefined or non of the correct input type\");\n            }\n        }\n        //  console.log(\"This layer\", this.label);\n        // console.log(this.inputs.length);\n        this.uniforms.forEach((uniform, i) => {\n            inputs.push(`@group(0) @binding(${i + this.inputs.length}) var <uniform> ${uniform.name}: ${uniform.type};`);\n        });\n        inputs.push(`@group(0) @binding(${this.inputs.length + this.uniforms.length}) var <storage, read_write> outputBuffer: array<vec4f>;`);\n        return inputs.join('\\n');\n    }\n    defaultPipelineConfig() {\n        return {\n            label: `${this.label}-pipeline`,\n            layout: 'auto',\n            compute: {\n                module: this.shader,\n                entryPoint: 'main',\n            },\n        };\n    }\n    defaultSetup() {\n        this.pipeline = this.device.createComputePipeline(this.defaultPipelineConfig());\n        this.bindGroup = this.defaultBindGroup();\n    }\n    lazyLoadSetup() {\n    }\n    run() {\n        const encoder = this.device.createCommandEncoder({ label: this.label });\n        if (!this.pipeline)\n            this.lazyLoadSetup();\n        const pass = encoder.beginComputePass({ label: this.label });\n        pass.setPipeline(this.pipeline);\n        if (this.hasExternalTexture()) {\n            this.bindGroup = this.defaultBindGroup();\n        }\n        if (this.bindGroup) {\n            pass.setBindGroup(0, this.bindGroup);\n        }\n        // Dividing into work groups speeds up inference. If width or height aren't cleandly divided by work groups, we round to the nearest multiple of work-groups\n        // Physically, this means shaving a few pixels (up to num_work_groups-1) off the bottom and right edges of the canvas but users shouldn't notice?\n        pass.dispatchWorkgroups(Math.floor(this.resolution.width / this.num_work_groups), Math.floor(this.resolution.height / this.num_work_groups));\n        pass.end();\n        this.device.queue.submit([encoder.finish()]);\n    }\n}\nexports[\"default\"] = ComputeLayer;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/base_compute_layer.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/base_layer.ts": /*!**********************************!*\
-  !*** ./src/layers/base_layer.ts ***!
-  \**********************************/ /***/ (__unused_webpack_module, exports)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nclass Layer {\n    constructor(inputs, output, weights) {\n        this.context = globalThis.context;\n        this.device = this.context.device;\n        this.resolution = this.context.resolution;\n        this.inputs = inputs;\n        this.output = output;\n        this.uniforms = [];\n        this.buffers = {};\n        this.weights = weights;\n    }\n    createUniform(name, type) {\n        this.uniforms.push({ name, type });\n    }\n    setUniform(name, value) {\n        const buffer = this.device.createBuffer({\n            label: `layer-${this.label}-buffer-${name}`,\n            size: value.byteLength,\n            usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,\n        });\n        this.device.queue.writeBuffer(buffer, /*bufferOffset=*/ 0, value);\n        this.buffers[name] = buffer;\n    }\n    defaultBindGroup() {\n        const entries = [];\n        this.inputs.forEach(function (input, i) {\n            if (input instanceof GPUExternalTexture) {\n                entries.push({ binding: i, resource: input });\n            }\n            else if (input instanceof GPUTexture) {\n                entries.push({ binding: i, resource: input.createView() });\n            }\n            else if (input instanceof GPUBuffer) {\n                entries.push({ binding: i, resource: { buffer: input } });\n            }\n        });\n        this.uniforms.forEach((uniform, i) => {\n            entries.push({\n                binding: i + this.inputs.length,\n                resource: {\n                    buffer: this.buffers[uniform.name]\n                }\n            });\n        });\n        if (this.output instanceof GPUBuffer) {\n            entries.push({\n                binding: this.inputs.length + this.uniforms.length,\n                resource: {\n                    buffer: this.output\n                }\n            });\n        }\n        if (entries.length === 0)\n            return null;\n        return this.device.createBindGroup({\n            layout: this.pipeline.getBindGroupLayout(0),\n            entries\n        });\n    }\n    hasExternalTexture() {\n        for (const input of this.inputs) {\n            if (input instanceof GPUExternalTexture)\n                return true;\n        }\n        return false;\n    }\n    lazyLoadSetup() { }\n    run() { }\n}\nexports[\"default\"] = Layer;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/base_layer.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/base_render_layer.ts": /*!*****************************************!*\
-  !*** ./src/layers/base_render_layer.ts ***!
-  \*****************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_layer_1 = __webpack_require__(/*! ./base_layer */ \"./src/layers/base_layer.ts\");\nclass RenderLayer extends base_layer_1.default {\n    constructor(inputs, output, weights) {\n        super(inputs, output, weights);\n        this.vertexScale = this.context.resolution;\n    }\n    defaultVertexShader() {\n        return `\n        \n             struct VertexShaderOutput {\n                @builtin(position) position: vec4f,\n                @location(0) tex_coord: vec2f,\n              };\n\n            @vertex\n            fn vertexMain( @builtin(vertex_index) vertexIndex : u32) ->  VertexShaderOutput{\n                let pos = array(\n                // 1st triangle\n                vec2f( -1.0,  -1.0),  // center\n                vec2f( 1.0,  -1.0),  // right, center\n                vec2f( -1.0,  1.0),  // center, top\n             \n                // 2st triangle\n                vec2f( -1.0,  1.0),  // center, top\n                vec2f( 1.0,  -1.0),  // right, center\n                vec2f( 1.0,  1.0),  // right, top\n              );\n             \n              var vsOutput: VertexShaderOutput;\n              let xy = pos[vertexIndex];\n              vsOutput.position = vec4f(xy, 0.0, 1.0);\n              vsOutput.tex_coord = xy*0.5 + 0.5;\n              vsOutput.tex_coord.y = - 1.0* vsOutput.tex_coord.y  + 1.0;\n               vsOutput.tex_coord.x =  vsOutput.tex_coord.x*${this.vertexScale.width};\n               vsOutput.tex_coord.y =  vsOutput.tex_coord.y*${this.vertexScale.height};\n              return vsOutput;\n            }\n        `;\n    }\n    defaultPipelineConfig() {\n        return {\n            label: `${this.label}-pipeline`,\n            layout: 'auto',\n            vertex: {\n                module: this.shader,\n                entryPoint: 'vertexMain',\n            },\n            fragment: {\n                module: this.shader,\n                entryPoint: 'fragmentMain',\n                targets: [{ format: this.output.format }],\n            },\n        };\n    }\n    defaultSetup() {\n        this.pipeline = this.device.createRenderPipeline(this.defaultPipelineConfig());\n        this.bindGroup = this.defaultBindGroup();\n        this.renderPassDescriptor = this.defaultRenderPassDescriptor();\n    }\n    defaultRenderPassDescriptor() {\n        return {\n            label: `${this.label}-render-pass`,\n            colorAttachments: [\n                {\n                    view: this.output.createView(),\n                    clearValue: [0, 0, 0, 1],\n                    loadOp: 'clear',\n                    storeOp: 'store',\n                },\n            ],\n        };\n    }\n    createStandardShader(fragmentShader) {\n        return this.device.createShaderModule({\n            label: `${this.label}-shader`,\n            code: `\n          \n              ${this.defaultVertexShader()}\n              \n              ${this.fragmentShaderInputs()}\n              \n              ${fragmentShader}\n        `\n        });\n    }\n    fragmentShaderInputs() {\n        const inputs = [];\n        for (let i = 0; i < this.inputs.length; i++) {\n            let type = (this.inputs[i] instanceof GPUTexture) ? 'texture_2d<f32>' : 'texture_external';\n            inputs.push(`@group(0) @binding(0) var inputTexture${i}: ${type};`);\n        }\n        this.uniforms.forEach((uniform, i) => {\n            inputs.push(`@group(0) @binding(${i + this.inputs.length}) var <uniform> ${uniform.name}: ${uniform.type};`);\n        });\n        return inputs.join('\\n');\n    }\n    run() {\n        const encoder = this.device.createCommandEncoder({ label: this.label });\n        if (!this.pipeline)\n            this.lazyLoadSetup();\n        const pass = encoder.beginRenderPass(this.renderPassDescriptor);\n        pass.setPipeline(this.pipeline);\n        if (this.hasExternalTexture()) {\n            this.bindGroup = this.defaultBindGroup();\n        }\n        if (this.bindGroup) {\n            pass.setBindGroup(0, this.bindGroup);\n        }\n        pass.draw(6); // call our vertex shader 6 times\n        pass.end();\n        this.device.queue.submit([encoder.finish()]);\n    }\n    setOutput(outputTexture) {\n        this.output = outputTexture;\n        this.renderPassDescriptor = this.defaultRenderPassDescriptor();\n    }\n}\nexports[\"default\"] = RenderLayer;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/base_render_layer.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/utils/gaussian.ts": /*!**************************************!*\
-  !*** ./src/layers/utils/gaussian.ts ***!
-  \**************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_render_layer_1 = __webpack_require__(/*! ../base_render_layer */ \"./src/layers/base_render_layer.ts\");\nclass GuassianLayer extends base_render_layer_1.default {\n    constructor(inputTextures, outputTexture) {\n        super(inputTextures, outputTexture);\n        this.label = \"Gaussian\";\n        this.createUniform(\"gaussian\", \"array<vec3f, 3>\");\n        this.createUniform(\"kernel_offsets\", \"array<vec4f, 9>\");\n        this.shader = this.createStandardShader(`\n        \n                  @fragment fn fragmentMain(input: VertexShaderOutput) -> @location(0) vec4f {\n                  \n                     var val  = 0.0;\n                      \n                     for(var i = 0u; i < 3; i++){\n                     \n                        let a = vec3f(\n                            textureLoad(inputTexture0, vec2<i32>(input.tex_coord + kernel_offsets[i*3].xy), 0).x,\n                            textureLoad(inputTexture0, vec2<i32>(input.tex_coord + kernel_offsets[i*3].xy), 0).x,\n                            textureLoad(inputTexture0, vec2<i32>(input.tex_coord + kernel_offsets[i*3].xy), 0).x\n                        );\n                        \n                        val += dot(a, gaussian[i]);\n                      \n                    } \n                  \n                    \n                    return vec4f(val, val, val, 1.0);\n                  }                 \n        `);\n        this.setUniform(\"gaussian\", new Float32Array([\n            0.0675, 0.125, 0.0675, 0.0,\n            0.125, 0.250, 0.1250, 0.0,\n            0.0675, 0.125, 0.0675, 0.0\n        ]));\n        this.setUniform(\"kernel_offsets\", new Float32Array([\n            -1, -1, 0, 0,\n            0, -1, 0, 0,\n            1, -1, 0, 0,\n            -1, 0, 0, 0,\n            0, 0, 0, 0,\n            1, 0, 0, 0,\n            -1, 1, 0, 0,\n            0, 1, 0, 0,\n            1, 1, 0, 0,\n        ]));\n        this.defaultSetup();\n    }\n}\nexports[\"default\"] = GuassianLayer;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/utils/gaussian.ts?\n}");
-            /***/ },
-            /***/ "./src/layers/utils/rgb_2_yuv.ts": /*!***************************************!*\
-  !*** ./src/layers/utils/rgb_2_yuv.ts ***!
-  \***************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_render_layer_1 = __webpack_require__(/*! ../base_render_layer */ \"./src/layers/base_render_layer.ts\");\nclass RGB2YUV extends base_render_layer_1.default {\n    constructor(inputTextures, outputTexture) {\n        super(inputTextures, outputTexture);\n        this.createUniform(\"rgb2yuv\", \"mat3x3f\");\n        this.shader = this.createStandardShader(`\n        \n               @fragment fn fragmentMain(input: VertexShaderOutput) -> @location(0) vec4f {\n              \n                    let color = textureLoad(inputTexture0, vec2<i32>(input.tex_coord), 0);       \n                    let yuv = rgb2yuv*color.xyz;\n          \n                return vec4f(yuv, 1.0);\n              }     \n        `);\n        this.setUniform(\"rgb2yuv\", new Float32Array([\n            0.299, -0.1473, 0.615, 1.0,\n            0.587, -.2886, -.51499, 1.0,\n            0.114, 0.436, -.1001, 1.0\n        ]));\n        this.defaultSetup();\n    }\n}\nexports[\"default\"] = RGB2YUV;\n\n\n//# sourceURL=webpack://WebSR/./src/layers/utils/rgb_2_yuv.ts?\n}");
-            /***/ },
-            /***/ "./src/main.ts": /*!*********************!*\
-  !*** ./src/main.ts ***!
-  \*********************/ /***/ function(__unused_webpack_module, exports, __webpack_require__) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst context_1 = __webpack_require__(/*! ./context */ \"./src/context.ts\");\nconst renderer_1 = __webpack_require__(/*! ./renderer */ \"./src/renderer.ts\");\nconst network_list_1 = __webpack_require__(/*! ./networks/network_list */ \"./src/networks/network_list.ts\");\nconst utils_1 = __webpack_require__(/*! ./utils */ \"./src/utils.ts\");\nclass WebSR {\n    constructor(params) {\n        if (!network_list_1.NetworkList[params.network_name])\n            throw Error(`Network ${params.network_name} is not defined or implemented`);\n        this.source = params.source;\n        const source = this.source;\n        this.resolution = params.resolution ? params.resolution : {\n            width: (0, utils_1.getSourceWidth)(source),\n            height: (0, utils_1.getSourceHeight)(source)\n        };\n        const scale = network_list_1.NetworkScales[params.network_name];\n        if (params.canvas)\n            this.canvas = params.canvas;\n        else {\n            this.canvas = new HTMLCanvasElement();\n            this.canvas.width = this.resolution.width * scale;\n            this.canvas.height = this.resolution.height * scale;\n        }\n        this.scale = scale;\n        this.context = new context_1.default(params.gpu, this.resolution, this.canvas, this.scale, this.debug);\n        globalThis.context = this.context;\n        this.network = new network_list_1.NetworkList[params.network_name](params.weights);\n        this.renderer = new renderer_1.default(this.network, this.source);\n    }\n    switchNetwork(network, weights) {\n        if (!network_list_1.NetworkList[network])\n            throw Error(`Network ${network} is not defined or implemented`);\n        this.network = new network_list_1.NetworkList[network](weights);\n        this.renderer.switchNetwork(this.network);\n    }\n    static initWebGPU() {\n        return __awaiter(this, void 0, void 0, function* () {\n            if (!navigator.gpu)\n                return false;\n            const adapter = yield navigator.gpu.requestAdapter();\n            if (!adapter)\n                return false;\n            const device = yield adapter.requestDevice();\n            if (!device)\n                return false;\n            return device;\n        });\n    }\n    start() {\n        return __awaiter(this, void 0, void 0, function* () {\n            yield this.renderer.start();\n        });\n    }\n    stop() {\n        return __awaiter(this, void 0, void 0, function* () {\n            yield this.renderer.stop();\n        });\n    }\n    render(source) {\n        return __awaiter(this, void 0, void 0, function* () {\n            yield this.renderer.render(source);\n        });\n    }\n    destroy() {\n        return __awaiter(this, void 0, void 0, function* () {\n            yield this.renderer.stop();\n            this.context.destroy();\n        });\n    }\n}\nexports[\"default\"] = WebSR;\n\n\n//# sourceURL=webpack://WebSR/./src/main.ts?\n}");
-            /***/ },
-            /***/ "./src/networks/anime4k/cnn-2x-l.ts": /*!******************************************!*\
-  !*** ./src/networks/anime4k/cnn-2x-l.ts ***!
-  \******************************************/ /***/ function(__unused_webpack_module, exports, __webpack_require__) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_network_1 = __webpack_require__(/*! ../base_network */ \"./src/networks/base_network.ts\");\nconst conv2d_3x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-3x4 */ \"./src/layers/anime4k/conv2d-3x4.ts\");\nconst display_3c_1 = __webpack_require__(/*! ../../layers/anime4k/display_3c */ \"./src/layers/anime4k/display_3c.ts\");\nconst conv2d_16x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-16x4 */ \"./src/layers/anime4k/conv2d-16x4.ts\");\nconst conv2d_112x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-112x4 */ \"./src/layers/anime4k/conv2d-112x4.ts\");\nconst conv2d_concat2_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-concat2 */ \"./src/layers/anime4k/conv2d-concat2.ts\");\nconst utils_1 = __webpack_require__(/*! ../../utils */ \"./src/utils.ts\");\nclass Anime4KCNN2XL extends base_network_1.default {\n    constructor(weights) {\n        super(weights);\n    }\n    model() {\n        const layers = [];\n        const weights = this.weights.layers;\n        const context = this.context;\n        layers.push(new conv2d_3x4_1.default([context.input], context.buffer('conv2d_tf'), weights['conv2d_tf']));\n        layers.push(new conv2d_3x4_1.default([context.input], context.buffer('conv2d_tf1'), weights['conv2d_tf1']));\n        for (let i = 1; i < 7; i++) {\n            let source = (i == 1) ? `conv2d_tf` : `conv2d_${i - 1}_tf`;\n            layers.push(new conv2d_16x4_1.default([context.buffer(source), context.buffer(source + \"1\")], context.buffer(`conv2d_${i}_tf`), weights[`conv2d_${i}_tf`]));\n            layers.push(new conv2d_16x4_1.default([context.buffer(source), context.buffer(source + \"1\")], context.buffer(`conv2d_${i}_tf1`), weights[`conv2d_${i}_tf1`]));\n        }\n        for (let c = 0; c < 3; c++) {\n            const sources_0 = [];\n            const sources_1 = [];\n            for (let i = 0; i < 7; i++) {\n                let source = (i == 0) ? `conv2d_tf` : `conv2d_${i}_tf`;\n                sources_0.push(context.buffer(source));\n                sources_1.push(context.buffer(source + \"1\"));\n            }\n            const dest = (c == 0) ? `conv2d_last_tf` : `conv2d_last_tf${c}`;\n            layers.push(new conv2d_112x4_1.default(sources_0, context.buffer(`conv2d_last_${c}_pt1`), weights[dest], true));\n            layers.push(new conv2d_112x4_1.default(sources_1, context.buffer(`conv2d_last_${c}_pt2`), weights[dest], false));\n            layers.push(new conv2d_concat2_1.default([context.buffer(`conv2d_last_${c}_pt1`), context.buffer(`conv2d_last_${c}_pt2`)], context.buffer(dest), weights[dest]));\n        }\n        const paint = new display_3c_1.default([context.buffer('conv2d_last_tf'), context.buffer('conv2d_last_tf1'), context.buffer('conv2d_last_tf2'), context.input], context.texture('output'));\n        layers.push(paint);\n        return layers;\n    }\n    feedForward(source) {\n        return __awaiter(this, void 0, void 0, function* () {\n            if ((0, utils_1.isHTMLVideoElement)(source) || (0, utils_1.isVideoFrame)(source)) {\n                this.context.input = this.context.device.importExternalTexture({ source });\n            }\n            else {\n                const bitmap = (0, utils_1.isImageBitmap)(source) ? source : yield createImageBitmap(source);\n                const width = (0, utils_1.getSourceWidth)(source);\n                const height = (0, utils_1.getSourceHeight)(source);\n                this.context.device.queue.copyExternalImageToTexture({ source: bitmap }, { texture: this.context.texture('input', { format: \"rgba8unorm\" }) }, [width, height]);\n                this.context.input = this.context.texture('input');\n            }\n            this.layers[0].inputs[0] = this.context.input;\n            this.layers[1].inputs[0] = this.context.input;\n            this.layers[this.layers.length - 1].inputs[3] = this.context.input;\n            this.layers[0].lazyLoadSetup();\n            this.layers[this.layers.length - 1].lazyLoadSetup();\n            this.layers.forEach(function (layer) {\n                layer.run();\n            });\n        });\n    }\n}\nexports[\"default\"] = Anime4KCNN2XL;\n\n\n//# sourceURL=webpack://WebSR/./src/networks/anime4k/cnn-2x-l.ts?\n}");
-            /***/ },
-            /***/ "./src/networks/anime4k/cnn-2x-m.ts": /*!******************************************!*\
-  !*** ./src/networks/anime4k/cnn-2x-m.ts ***!
-  \******************************************/ /***/ function(__unused_webpack_module, exports, __webpack_require__) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_network_1 = __webpack_require__(/*! ../base_network */ \"./src/networks/base_network.ts\");\nconst conv2d_3x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-3x4 */ \"./src/layers/anime4k/conv2d-3x4.ts\");\nconst conv2d_8x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-8x4 */ \"./src/layers/anime4k/conv2d-8x4.ts\");\nconst conv2d_56x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-56x4 */ \"./src/layers/anime4k/conv2d-56x4.ts\");\nconst display_3c_1 = __webpack_require__(/*! ../../layers/anime4k/display_3c */ \"./src/layers/anime4k/display_3c.ts\");\nconst utils_1 = __webpack_require__(/*! ../../utils */ \"./src/utils.ts\");\nclass Anime4KCNN2XM extends base_network_1.default {\n    constructor(weights) {\n        super(weights);\n    }\n    model() {\n        const layers = [];\n        const weights = this.weights.layers;\n        const context = this.context;\n        const conv2d_tf = new conv2d_3x4_1.default([context.input], context.buffer('conv2d_tf'), weights['conv2d_tf']);\n        const conv2d_1_tf = new conv2d_8x4_1.default([context.buffer('conv2d_tf')], context.buffer('conv2d_1_tf'), weights['conv2d_1_tf']);\n        const conv2d_2_tf = new conv2d_8x4_1.default([context.buffer('conv2d_1_tf')], context.buffer('conv2d_2_tf'), weights['conv2d_2_tf']);\n        const conv2d_3_tf = new conv2d_8x4_1.default([context.buffer('conv2d_2_tf')], context.buffer('conv2d_3_tf'), weights['conv2d_3_tf']);\n        const conv2d_4_tf = new conv2d_8x4_1.default([context.buffer('conv2d_3_tf')], context.buffer('conv2d_4_tf'), weights['conv2d_4_tf']);\n        const conv2d_5_tf = new conv2d_8x4_1.default([context.buffer('conv2d_4_tf')], context.buffer('conv2d_5_tf'), weights['conv2d_5_tf']);\n        const conv2d_6_tf = new conv2d_8x4_1.default([context.buffer('conv2d_5_tf')], context.buffer('conv2d_6_tf'), weights['conv2d_6_tf']);\n        const conv2d_7_tf = new conv2d_56x4_1.default([context.buffer('conv2d_tf'), context.buffer('conv2d_1_tf'), context.buffer('conv2d_2_tf'), context.buffer('conv2d_3_tf'), context.buffer('conv2d_4_tf'), context.buffer('conv2d_5_tf'), context.buffer('conv2d_6_tf')], context.buffer('conv2d_7_tf'), weights['conv2d_7_tf']);\n        const conv2d_7_tf1 = new conv2d_56x4_1.default([context.buffer('conv2d_tf'), context.buffer('conv2d_1_tf'), context.buffer('conv2d_2_tf'), context.buffer('conv2d_3_tf'), context.buffer('conv2d_4_tf'), context.buffer('conv2d_5_tf'), context.buffer('conv2d_6_tf')], context.buffer('conv2d_7_tf1'), weights['conv2d_7_tf1']);\n        const conv2d_7_tf2 = new conv2d_56x4_1.default([context.buffer('conv2d_tf'), context.buffer('conv2d_1_tf'), context.buffer('conv2d_2_tf'), context.buffer('conv2d_3_tf'), context.buffer('conv2d_4_tf'), context.buffer('conv2d_5_tf'), context.buffer('conv2d_6_tf')], context.buffer('conv2d_7_tf2'), weights['conv2d_7_tf2']);\n        const paint = new display_3c_1.default([context.buffer('conv2d_7_tf'), context.buffer('conv2d_7_tf1'), context.buffer('conv2d_7_tf2'), context.input], context.texture('output'));\n        layers.push(conv2d_tf, conv2d_1_tf, conv2d_2_tf, conv2d_3_tf, conv2d_4_tf, conv2d_5_tf, conv2d_6_tf, conv2d_7_tf, conv2d_7_tf1, conv2d_7_tf2, paint);\n        return layers;\n    }\n    feedForward(source) {\n        return __awaiter(this, void 0, void 0, function* () {\n            if ((0, utils_1.isHTMLVideoElement)(source) || (0, utils_1.isVideoFrame)(source)) {\n                this.context.input = this.context.device.importExternalTexture({ source });\n            }\n            else {\n                const bitmap = (0, utils_1.isImageBitmap)(source) ? source : yield createImageBitmap(source);\n                const width = (0, utils_1.getSourceWidth)(source);\n                const height = (0, utils_1.getSourceHeight)(source);\n                this.context.device.queue.copyExternalImageToTexture({ source: bitmap }, { texture: this.context.texture('input', { format: \"rgba8unorm\" }) }, [width, height]);\n                this.context.input = this.context.texture('input');\n            }\n            this.layers[0].inputs[0] = this.context.input;\n            this.layers[this.layers.length - 1].inputs[3] = this.context.input;\n            this.layers[0].lazyLoadSetup();\n            this.layers[this.layers.length - 1].lazyLoadSetup();\n            this.layers.forEach(function (layer) {\n                layer.run();\n            });\n        });\n    }\n}\nexports[\"default\"] = Anime4KCNN2XM;\n\n\n//# sourceURL=webpack://WebSR/./src/networks/anime4k/cnn-2x-m.ts?\n}");
-            /***/ },
-            /***/ "./src/networks/anime4k/cnn-2x-s.ts": /*!******************************************!*\
-  !*** ./src/networks/anime4k/cnn-2x-s.ts ***!
-  \******************************************/ /***/ function(__unused_webpack_module, exports, __webpack_require__) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_network_1 = __webpack_require__(/*! ../base_network */ \"./src/networks/base_network.ts\");\nconst conv2d_3x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-3x4 */ \"./src/layers/anime4k/conv2d-3x4.ts\");\nconst conv2d_8x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-8x4 */ \"./src/layers/anime4k/conv2d-8x4.ts\");\nconst display_1 = __webpack_require__(/*! ../../layers/anime4k/display */ \"./src/layers/anime4k/display.ts\");\nconst utils_1 = __webpack_require__(/*! ../../utils */ \"./src/utils.ts\");\nclass Anime4KCNN2XS extends base_network_1.default {\n    constructor(weights) {\n        super(weights);\n    }\n    model() {\n        const layers = [];\n        const weights = this.weights.layers;\n        const context = this.context;\n        const conv2d_tf = new conv2d_3x4_1.default([context.input], context.buffer('conv2d_tf'), weights['conv2d_tf']);\n        const conv2d_1_tf = new conv2d_8x4_1.default([context.buffer('conv2d_tf')], context.buffer('conv2d_1_tf'), weights['conv2d_1_tf']);\n        const conv2d_2_tf = new conv2d_8x4_1.default([context.buffer('conv2d_1_tf')], context.buffer('conv2d_2_tf'), weights['conv2d_2_tf']);\n        const conv2d_last_tf = new conv2d_8x4_1.default([context.buffer('conv2d_2_tf')], context.buffer('conv2d_last_tf'), weights['conv2d_last_tf']);\n        const paint = new display_1.default([context.buffer('conv2d_last_tf'), context.input], context.texture('output'));\n        layers.push(conv2d_tf, conv2d_1_tf, conv2d_2_tf, conv2d_last_tf, paint);\n        return layers;\n    }\n    feedForward(source) {\n        return __awaiter(this, void 0, void 0, function* () {\n            if ((0, utils_1.isHTMLVideoElement)(source) || (0, utils_1.isVideoFrame)(source)) {\n                this.context.input = this.context.device.importExternalTexture({ source });\n            }\n            else {\n                const bitmap = (0, utils_1.isImageBitmap)(source) ? source : yield createImageBitmap(source);\n                const width = (0, utils_1.getSourceWidth)(source);\n                const height = (0, utils_1.getSourceHeight)(source);\n                this.context.device.queue.copyExternalImageToTexture({ source: bitmap }, { texture: this.context.texture('input', { format: \"rgba8unorm\" }) }, [width, height]);\n                this.context.input = this.context.texture('input');\n            }\n            this.layers[0].inputs[0] = this.context.input;\n            this.layers[this.layers.length - 1].inputs[1] = this.context.input;\n            this.layers[0].lazyLoadSetup();\n            this.layers[this.layers.length - 1].lazyLoadSetup();\n            this.layers.forEach(function (layer) {\n                layer.run();\n            });\n        });\n    }\n}\nexports[\"default\"] = Anime4KCNN2XS;\n\n\n//# sourceURL=webpack://WebSR/./src/networks/anime4k/cnn-2x-s.ts?\n}");
-            /***/ },
-            /***/ "./src/networks/anime4k/cnn-restore-l.ts": /*!***********************************************!*\
-  !*** ./src/networks/anime4k/cnn-restore-l.ts ***!
-  \***********************************************/ /***/ function(__unused_webpack_module, exports, __webpack_require__) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_network_1 = __webpack_require__(/*! ../base_network */ \"./src/networks/base_network.ts\");\nconst conv2d_3x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-3x4 */ \"./src/layers/anime4k/conv2d-3x4.ts\");\nconst conv2d_16x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-16x4 */ \"./src/layers/anime4k/conv2d-16x4.ts\");\nconst display_1x_1 = __webpack_require__(/*! ../../layers/anime4k/display_1x */ \"./src/layers/anime4k/display_1x.ts\");\nconst utils_1 = __webpack_require__(/*! ../../utils */ \"./src/utils.ts\");\nclass Anime4KCNNRL extends base_network_1.default {\n    constructor(weights) {\n        super(weights);\n    }\n    model() {\n        const layers = [];\n        const weights = this.weights.layers;\n        const context = this.context;\n        layers.push(new conv2d_3x4_1.default([context.input], context.buffer('conv2d_tf'), weights['conv2d_tf']));\n        layers.push(new conv2d_3x4_1.default([context.input], context.buffer('conv2d_tf1'), weights['conv2d_tf1']));\n        for (let i = 1; i < 4; i++) {\n            let source = (i == 1) ? `conv2d_tf` : `conv2d_${i - 1}_tf`;\n            layers.push(new conv2d_16x4_1.default([context.buffer(source), context.buffer(source + \"1\")], context.buffer(`conv2d_${i}_tf`), weights[`conv2d_${i}_tf`]));\n            layers.push(new conv2d_16x4_1.default([context.buffer(source), context.buffer(source + \"1\")], context.buffer(`conv2d_${i}_tf1`), weights[`conv2d_${i}_tf1`]));\n        }\n        layers.push(new conv2d_16x4_1.default([context.buffer('conv2d_3_tf'), context.buffer('conv2d_3_tf1')], context.buffer(`conv2d_out_tf`), weights[`conv2d_out_tf`]));\n        const paint = new display_1x_1.default([context.buffer('conv2d_out_tf'), context.input], context.texture('output'));\n        layers.push(paint);\n        return layers;\n    }\n    feedForward(source) {\n        return __awaiter(this, void 0, void 0, function* () {\n            if ((0, utils_1.isHTMLVideoElement)(source) || (0, utils_1.isVideoFrame)(source)) {\n                this.context.input = this.context.device.importExternalTexture({ source });\n            }\n            else {\n                const bitmap = (0, utils_1.isImageBitmap)(source) ? source : yield createImageBitmap(source);\n                const width = (0, utils_1.getSourceWidth)(source);\n                const height = (0, utils_1.getSourceHeight)(source);\n                this.context.device.queue.copyExternalImageToTexture({ source: bitmap }, { texture: this.context.texture('input', { format: \"rgba8unorm\" }) }, [width, height]);\n                this.context.input = this.context.texture('input');\n            }\n            this.layers[0].inputs[0] = this.context.input;\n            this.layers[1].inputs[0] = this.context.input;\n            this.layers[this.layers.length - 1].inputs[1] = this.context.input;\n            this.layers.forEach(function (layer) {\n                layer.run();\n            });\n        });\n    }\n}\nexports[\"default\"] = Anime4KCNNRL;\n\n\n//# sourceURL=webpack://WebSR/./src/networks/anime4k/cnn-restore-l.ts?\n}");
-            /***/ },
-            /***/ "./src/networks/anime4k/cnn-restore-m.ts": /*!***********************************************!*\
-  !*** ./src/networks/anime4k/cnn-restore-m.ts ***!
-  \***********************************************/ /***/ function(__unused_webpack_module, exports, __webpack_require__) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_network_1 = __webpack_require__(/*! ../base_network */ \"./src/networks/base_network.ts\");\nconst conv2d_3x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-3x4 */ \"./src/layers/anime4k/conv2d-3x4.ts\");\nconst conv2d_8x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-8x4 */ \"./src/layers/anime4k/conv2d-8x4.ts\");\nconst conv2d_56x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-56x4 */ \"./src/layers/anime4k/conv2d-56x4.ts\");\nconst display_1x_1 = __webpack_require__(/*! ../../layers/anime4k/display_1x */ \"./src/layers/anime4k/display_1x.ts\");\nconst utils_1 = __webpack_require__(/*! ../../utils */ \"./src/utils.ts\");\nclass Anime4KCNNRM extends base_network_1.default {\n    constructor(weights) {\n        super(weights);\n    }\n    model() {\n        const layers = [];\n        const weights = this.weights.layers;\n        const context = this.context;\n        const conv2d_tf = new conv2d_3x4_1.default([context.input], context.buffer('conv2d_tf'), weights['conv2d_tf']);\n        const conv2d_1_tf = new conv2d_8x4_1.default([context.buffer('conv2d_tf')], context.buffer('conv2d_1_tf'), weights['conv2d_1_tf']);\n        const conv2d_2_tf = new conv2d_8x4_1.default([context.buffer('conv2d_1_tf')], context.buffer('conv2d_2_tf'), weights['conv2d_2_tf']);\n        const conv2d_3_tf = new conv2d_8x4_1.default([context.buffer('conv2d_2_tf')], context.buffer('conv2d_3_tf'), weights['conv2d_3_tf']);\n        const conv2d_4_tf = new conv2d_8x4_1.default([context.buffer('conv2d_3_tf')], context.buffer('conv2d_4_tf'), weights['conv2d_4_tf']);\n        const conv2d_5_tf = new conv2d_8x4_1.default([context.buffer('conv2d_4_tf')], context.buffer('conv2d_5_tf'), weights['conv2d_5_tf']);\n        const conv2d_6_tf = new conv2d_8x4_1.default([context.buffer('conv2d_5_tf')], context.buffer('conv2d_6_tf'), weights['conv2d_6_tf']);\n        const conv2d_out_tf = new conv2d_56x4_1.default([context.buffer('conv2d_tf'), context.buffer('conv2d_1_tf'), context.buffer('conv2d_2_tf'), context.buffer('conv2d_3_tf'), context.buffer('conv2d_4_tf'), context.buffer('conv2d_5_tf'), context.buffer('conv2d_6_tf')], context.buffer('conv2d_out_tf'), weights['conv2d_out_tf']);\n        const paint = new display_1x_1.default([context.buffer('conv2d_out_tf'), context.input], context.texture('output'));\n        layers.push(conv2d_tf, conv2d_1_tf, conv2d_2_tf, conv2d_3_tf, conv2d_4_tf, conv2d_5_tf, conv2d_6_tf, conv2d_out_tf, paint);\n        return layers;\n    }\n    feedForward(source) {\n        return __awaiter(this, void 0, void 0, function* () {\n            if ((0, utils_1.isHTMLVideoElement)(source) || (0, utils_1.isVideoFrame)(source)) {\n                this.context.input = this.context.device.importExternalTexture({ source });\n            }\n            else {\n                const bitmap = (0, utils_1.isImageBitmap)(source) ? source : yield createImageBitmap(source);\n                const width = (0, utils_1.getSourceWidth)(source);\n                const height = (0, utils_1.getSourceHeight)(source);\n                this.context.device.queue.copyExternalImageToTexture({ source: bitmap }, { texture: this.context.texture('input', { format: \"rgba8unorm\" }) }, [width, height]);\n                this.context.input = this.context.texture('input');\n            }\n            this.layers[0].inputs[0] = this.context.input;\n            this.layers[1].inputs[0] = this.context.input;\n            this.layers[this.layers.length - 1].inputs[1] = this.context.input;\n            this.layers.forEach(function (layer) {\n                layer.run();\n            });\n        });\n    }\n}\nexports[\"default\"] = Anime4KCNNRM;\n\n\n//# sourceURL=webpack://WebSR/./src/networks/anime4k/cnn-restore-m.ts?\n}");
-            /***/ },
-            /***/ "./src/networks/anime4k/cnn-restore-s.ts": /*!***********************************************!*\
-  !*** ./src/networks/anime4k/cnn-restore-s.ts ***!
-  \***********************************************/ /***/ function(__unused_webpack_module, exports, __webpack_require__) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_network_1 = __webpack_require__(/*! ../base_network */ \"./src/networks/base_network.ts\");\nconst conv2d_3x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-3x4 */ \"./src/layers/anime4k/conv2d-3x4.ts\");\nconst conv2d_8x4_1 = __webpack_require__(/*! ../../layers/anime4k/conv2d-8x4 */ \"./src/layers/anime4k/conv2d-8x4.ts\");\nconst display_1x_1 = __webpack_require__(/*! ../../layers/anime4k/display_1x */ \"./src/layers/anime4k/display_1x.ts\");\nconst utils_1 = __webpack_require__(/*! ../../utils */ \"./src/utils.ts\");\nclass Anime4KCNNRS extends base_network_1.default {\n    constructor(weights) {\n        super(weights);\n    }\n    model() {\n        const layers = [];\n        const weights = this.weights.layers;\n        const context = this.context;\n        const conv2d_tf = new conv2d_3x4_1.default([context.input], context.buffer('conv2d_tf'), weights['conv2d_tf']);\n        const conv2d_1_tf = new conv2d_8x4_1.default([context.buffer('conv2d_tf')], context.buffer('conv2d_1_tf'), weights['conv2d_1_tf']);\n        const conv2d_2_tf = new conv2d_8x4_1.default([context.buffer('conv2d_1_tf')], context.buffer('conv2d_2_tf'), weights['conv2d_2_tf']);\n        const conv2d_last_tf = new conv2d_8x4_1.default([context.buffer('conv2d_2_tf')], context.buffer('conv2d_out_tf'), weights['conv2d_out_tf']);\n        const paint = new display_1x_1.default([context.buffer('conv2d_out_tf'), context.input], context.texture('output'));\n        layers.push(conv2d_tf, conv2d_1_tf, conv2d_2_tf, conv2d_last_tf, paint);\n        return layers;\n    }\n    feedForward(source) {\n        return __awaiter(this, void 0, void 0, function* () {\n            if ((0, utils_1.isHTMLVideoElement)(source) || (0, utils_1.isVideoFrame)(source)) {\n                this.context.input = this.context.device.importExternalTexture({ source });\n            }\n            else {\n                const bitmap = (0, utils_1.isImageBitmap)(source) ? source : yield createImageBitmap(source);\n                const width = (0, utils_1.getSourceWidth)(source);\n                const height = (0, utils_1.getSourceHeight)(source);\n                this.context.device.queue.copyExternalImageToTexture({ source: bitmap }, { texture: this.context.texture('input', { format: \"rgba8unorm\" }) }, [width, height]);\n                this.context.input = this.context.texture('input');\n            }\n            this.layers[0].inputs[0] = this.context.input;\n            this.layers[this.layers.length - 1].inputs[1] = this.context.input;\n            this.layers.forEach(function (layer) {\n                layer.run();\n            });\n        });\n    }\n}\nexports[\"default\"] = Anime4KCNNRS;\n\n\n//# sourceURL=webpack://WebSR/./src/networks/anime4k/cnn-restore-s.ts?\n}");
-            /***/ },
-            /***/ "./src/networks/base_network.ts": /*!**************************************!*\
-  !*** ./src/networks/base_network.ts ***!
-  \**************************************/ /***/ function(__unused_webpack_module, exports) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nclass NeuralNetwork {\n    constructor(weights) {\n        this.weights = weights;\n        this.context = globalThis.context;\n        this.layers = this.model();\n    }\n    model() {\n        return [];\n    }\n    lastLayer() {\n        return this.layers[this.layers.length - 1];\n    }\n    feedForward(source) {\n        return __awaiter(this, void 0, void 0, function* () {\n            this.layers.forEach(layer => {\n                layer.run();\n            });\n        });\n    }\n}\nexports[\"default\"] = NeuralNetwork;\n\n\n//# sourceURL=webpack://WebSR/./src/networks/base_network.ts?\n}");
-            /***/ },
-            /***/ "./src/networks/network_list.ts": /*!**************************************!*\
-  !*** ./src/networks/network_list.ts ***!
-  \**************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.NetworkScales = exports.NetworkList = void 0;\nconst cnn_2x_s_1 = __webpack_require__(/*! ./anime4k/cnn-2x-s */ \"./src/networks/anime4k/cnn-2x-s.ts\");\nconst cnn_2x_m_1 = __webpack_require__(/*! ./anime4k/cnn-2x-m */ \"./src/networks/anime4k/cnn-2x-m.ts\");\nconst cnn_2x_l_1 = __webpack_require__(/*! ./anime4k/cnn-2x-l */ \"./src/networks/anime4k/cnn-2x-l.ts\");\nconst cnn_restore_l_1 = __webpack_require__(/*! ./anime4k/cnn-restore-l */ \"./src/networks/anime4k/cnn-restore-l.ts\");\nconst cnn_restore_m_1 = __webpack_require__(/*! ./anime4k/cnn-restore-m */ \"./src/networks/anime4k/cnn-restore-m.ts\");\nconst cnn_restore_s_1 = __webpack_require__(/*! ./anime4k/cnn-restore-s */ \"./src/networks/anime4k/cnn-restore-s.ts\");\nconst poc_network_1 = __webpack_require__(/*! ./poc_network */ \"./src/networks/poc_network.ts\");\nexports.NetworkList = {\n    \"anime4k/cnn-2x-s\": cnn_2x_s_1.default,\n    \"anime4k/cnn-2x-m\": cnn_2x_m_1.default,\n    \"anime4k/cnn-2x-l\": cnn_2x_l_1.default,\n    \"anime4k/cnn-restore-s\": cnn_restore_s_1.default,\n    \"anime4k/cnn-restore-m\": cnn_restore_m_1.default,\n    \"anime4k/cnn-restore-l\": cnn_restore_l_1.default,\n    \"sb2702/blur-poc\": poc_network_1.default\n};\nexports.NetworkScales = {\n    \"anime4k/cnn-2x-s\": 2,\n    \"anime4k/cnn-2x-m\": 2,\n    \"anime4k/cnn-2x-l\": 2,\n    \"anime4k/cnn-restore-s\": 1,\n    \"anime4k/cnn-restore-m\": 1,\n    \"anime4k/cnn-restore-l\": 1,\n    \"sb2702/blur-poc\": 1\n};\n\n\n//# sourceURL=webpack://WebSR/./src/networks/network_list.ts?\n}");
-            /***/ },
-            /***/ "./src/networks/poc_network.ts": /*!*************************************!*\
-  !*** ./src/networks/poc_network.ts ***!
-  \*************************************/ /***/ (__unused_webpack_module, exports, __webpack_require__)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst base_network_1 = __webpack_require__(/*! ./base_network */ \"./src/networks/base_network.ts\");\nconst rgb_2_yuv_1 = __webpack_require__(/*! ../layers/utils/rgb_2_yuv */ \"./src/layers/utils/rgb_2_yuv.ts\");\nconst gaussian_1 = __webpack_require__(/*! ../layers/utils/gaussian */ \"./src/layers/utils/gaussian.ts\");\nclass PoCNetwork extends base_network_1.default {\n    constructor() {\n        super();\n    }\n    model() {\n        const layers = [];\n        const context = this.context;\n        layers.push(new rgb_2_yuv_1.default([context.texture('input')], context.texture('yuv')));\n        layers.push(new gaussian_1.default([context.texture('yuv')], context.texture('output')));\n        return layers;\n    }\n}\nexports[\"default\"] = PoCNetwork;\n\n\n//# sourceURL=webpack://WebSR/./src/networks/poc_network.ts?\n}");
-            /***/ },
-            /***/ "./src/renderer.ts": /*!*************************!*\
-  !*** ./src/renderer.ts ***!
-  \*************************/ /***/ function(__unused_webpack_module, exports, __webpack_require__) {
-                eval("{\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst display_1 = __webpack_require__(/*! ./layers/anime4k/display */ \"./src/layers/anime4k/display.ts\");\nconst base_render_layer_1 = __webpack_require__(/*! ./layers/base_render_layer */ \"./src/layers/base_render_layer.ts\");\nconst utils_1 = __webpack_require__(/*! ./utils */ \"./src/utils.ts\");\nclass WebSRRenderer {\n    constructor(network, source) {\n        this.context = globalThis.context;\n        this.network = network;\n        this.source = source;\n        this.active = false;\n    }\n    switchNetwork(network) {\n        this.network = network;\n    }\n    start() {\n        return __awaiter(this, void 0, void 0, function* () {\n            if (this.context.destroyed) {\n                throw new Error(\"WebSR instance was destroyed\");\n            }\n            this.active = true;\n            yield this.renderStep();\n        });\n    }\n    stop() {\n        return __awaiter(this, void 0, void 0, function* () {\n            this.active = false;\n            if (this.vfc && this.source && (0, utils_1.isHTMLVideoElement)(this.source))\n                this.source.cancelVideoFrameCallback(this.vfc);\n        });\n    }\n    renderStep() {\n        return __awaiter(this, void 0, void 0, function* () {\n            const lastLayer = this.network.lastLayer();\n            if (lastLayer instanceof display_1.default)\n                lastLayer.setOutput(this.context.context.getCurrentTexture());\n            yield this.render();\n            if (this.active && this.source && (0, utils_1.isHTMLVideoElement)(this.source)) {\n                this.vfc = this.source.requestVideoFrameCallback(this.renderStep.bind(this));\n            }\n        });\n    }\n    render(source) {\n        return __awaiter(this, void 0, void 0, function* () {\n            const lastLayer = this.network.lastLayer();\n            if (lastLayer instanceof base_render_layer_1.default)\n                lastLayer.setOutput(this.context.context.getCurrentTexture());\n            yield this.network.feedForward(source ? source : this.source);\n        });\n    }\n}\nexports[\"default\"] = WebSRRenderer;\n\n\n//# sourceURL=webpack://WebSR/./src/renderer.ts?\n}");
-            /***/ },
-            /***/ "./src/utils.ts": /*!**********************!*\
-  !*** ./src/utils.ts ***!
-  \**********************/ /***/ (__unused_webpack_module, exports)=>{
-                eval("{\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.isMainThread = isMainThread;\nexports.isHTMLVideoElement = isHTMLVideoElement;\nexports.isHTMLImageElement = isHTMLImageElement;\nexports.isImageBitmap = isImageBitmap;\nexports.isVideoFrame = isVideoFrame;\nexports.isVideoSource = isVideoSource;\nexports.isImageSource = isImageSource;\nexports.getSourceWidth = getSourceWidth;\nexports.getSourceHeight = getSourceHeight;\n/**\n * Check if we're running on the main thread (not in a worker)\n */\nfunction isMainThread() {\n    return typeof HTMLVideoElement !== 'undefined';\n}\n/**\n * Check if a source is a video element (main thread only)\n */\nfunction isHTMLVideoElement(source) {\n    return typeof HTMLVideoElement !== 'undefined' && source instanceof HTMLVideoElement;\n}\n/**\n * Check if a source is an image element (main thread only)\n */\nfunction isHTMLImageElement(source) {\n    return typeof HTMLImageElement !== 'undefined' && source instanceof HTMLImageElement;\n}\n/**\n * Check if a source is an ImageBitmap (works in both contexts)\n */\nfunction isImageBitmap(source) {\n    return typeof ImageBitmap !== 'undefined' && source instanceof ImageBitmap;\n}\n/**\n * Check if a source is a VideoFrame (worker context)\n */\nfunction isVideoFrame(source) {\n    return typeof VideoFrame !== 'undefined' && source instanceof VideoFrame;\n}\n/**\n * Check if a source is any type of video source\n */\nfunction isVideoSource(source) {\n    return isHTMLVideoElement(source) || isVideoFrame(source);\n}\n/**\n * Check if a source is any type of image source\n */\nfunction isImageSource(source) {\n    return isHTMLImageElement(source) || isImageBitmap(source);\n}\n/**\n * Get the width of a media source\n */\nfunction getSourceWidth(source) {\n    if (isHTMLVideoElement(source))\n        return source.videoWidth;\n    if (isHTMLImageElement(source))\n        return source.naturalWidth;\n    if (isVideoFrame(source))\n        return source.displayWidth;\n    if (isImageBitmap(source))\n        return source.width;\n    return 0;\n}\n/**\n * Get the height of a media source\n */\nfunction getSourceHeight(source) {\n    if (isHTMLVideoElement(source))\n        return source.videoHeight;\n    if (isHTMLImageElement(source))\n        return source.naturalHeight;\n    if (isVideoFrame(source))\n        return source.displayHeight;\n    if (isImageBitmap(source))\n        return source.height;\n    return 0;\n}\n\n\n//# sourceURL=webpack://WebSR/./src/utils.ts?\n}");
-            /***/ }
+},{"./Upscaler":"d22Rz","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"d22Rz":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class Upscaler {
+    static DEFAULT_TIMEOUTS = {
+        IMAGE: 300000,
+        VIDEO: 3600000,
+        METADATA: 10000
+    };
+    static DEFAULT_DELAYS = {
+        INIT: 500,
+        NETWORK: 300
+    };
+    static isSupported() {
+        try {
+            const hasWorker = typeof Worker !== "undefined";
+            const hasOffscreen = typeof OffscreenCanvas !== "undefined" || typeof document !== "undefined" && !!document.createElement("canvas").transferControlToOffscreen;
+            const hasBlob = typeof Blob !== "undefined";
+            return hasWorker && hasOffscreen && hasBlob;
+        } catch  {
+            return false;
+        }
+    }
+    static isVideoSupported() {
+        try {
+            return typeof VideoEncoder !== "undefined" && typeof VideoDecoder !== "undefined";
+        } catch  {
+            return false;
+        }
+    }
+    constructor(options = {}){
+        const weightsBaseUrl = options.weightsBaseUrl || "/weights";
+        this.networks = options.networks || {
+            small: {
+                name: "anime4k/cnn-2x-l",
+                weightsUrl: `${weightsBaseUrl}/cnn-8.json`
+            },
+            medium: {
+                name: "anime4k/cnn-2x-16",
+                weightsUrl: `${weightsBaseUrl}/cnn-16.json`
+            },
+            large: {
+                name: "anime4k/cnn-2x-28",
+                weightsUrl: `${weightsBaseUrl}/cnn-28.json`
+            }
         };
-        /************************************************************************/ /******/ // The module cache
-        /******/ var __webpack_module_cache__ = {};
-        /******/ /******/ // The require function
-        /******/ function __webpack_require__(moduleId) {
-            /******/ // Check if module is in cache
-            /******/ var cachedModule = __webpack_module_cache__[moduleId];
-            /******/ if (cachedModule !== undefined) /******/ return cachedModule.exports;
-            /******/ // Create a new module (and put it into the cache)
-            /******/ var module1 = __webpack_module_cache__[moduleId] = {
-                /******/ // no module.id needed
-                /******/ // no module.loaded needed
-                /******/ exports: {}
+        this.networkSize = options.networkSize || "medium";
+        this.weightsBaseUrl = weightsBaseUrl;
+        this.workerUrl = options.workerUrl || "/worker/main.js";
+        this.timeouts = {
+            ...Upscaler.DEFAULT_TIMEOUTS,
+            ...options.timeouts || {}
+        };
+        this.delays = {
+            ...Upscaler.DEFAULT_DELAYS,
+            ...options.delays || {}
+        };
+        this.imageScale = typeof options.imageScale === "number" && options.imageScale > 0 ? options.imageScale : 2;
+        this.videoScale = typeof options.videoScale === "number" && options.videoScale > 0 ? options.videoScale : 2;
+        this.weightsCache = new Map();
+        this.workerInstance = null;
+        this.messageHandlers = {};
+        this.progressCallback = null;
+        this.processingType = null;
+        this.realtimeLoopId = null;
+        this.realtimeState = null;
+    }
+    init({ prewarm = true } = {}) {
+        if (!Upscaler.isSupported()) throw new Error("Upscaler is not supported in this environment");
+        if (prewarm) this.getWorker().postMessage({
+            cmd: "isSupported"
+        });
+        return this;
+    }
+    getWorker() {
+        if (!this.workerInstance) {
+            this.workerInstance = new Worker(this.workerUrl);
+            this.workerInstance.onmessage = (event)=>this.handleWorkerMessage(event);
+        }
+        return this.workerInstance;
+    }
+    static extractProgressValue(data) {
+        const value = data.data ?? data.progress ?? data.value ?? data.percentage;
+        return typeof value === "number" ? Math.min(100, Math.max(0, Math.round(value))) : null;
+    }
+    handleBlobResponse(data) {
+        const blobType = this.processingType === "video" ? "videoBlob" : "imageBlob";
+        const handler = this.messageHandlers[blobType];
+        if (data.data instanceof Blob && handler) handler({
+            [blobType]: data.data
+        });
+    }
+    requestBlob() {
+        const cmd = this.processingType === "video" ? "getVideoBlob" : "getImageBlob";
+        this.getWorker().postMessage({
+            cmd
+        });
+    }
+    handleWorkerMessage(event) {
+        const { data } = event;
+        if (!data.cmd) return;
+        const { cmd } = data;
+        if (cmd === "progress") {
+            const progress = Upscaler.extractProgressValue(data);
+            if (progress !== null && this.progressCallback) this.progressCallback(progress);
+            if (this.messageHandlers.progress) this.messageHandlers.progress(data);
+        } else if (cmd === "finished") {
+            if (data.data instanceof Blob) this.handleBlobResponse(data);
+            else this.requestBlob();
+        } else if (this.messageHandlers[cmd]) this.messageHandlers[cmd](data);
+    }
+    async loadWeights(networkSize) {
+        this.validateNetworkSize(networkSize);
+        if (this.weightsCache.has(networkSize)) return this.weightsCache.get(networkSize);
+        const network = this.networks[networkSize];
+        const response = await fetch(network.weightsUrl);
+        if (!response.ok) throw new Error(`Failed to fetch weights: ${response.statusText}`);
+        const weights = await response.json();
+        this.weightsCache.set(networkSize, weights);
+        return weights;
+    }
+    static loadImageMetadata(arrayBuffer, mimeType) {
+        return new Promise((resolve, reject)=>{
+            const blob = new Blob([
+                arrayBuffer
+            ], {
+                type: mimeType
+            });
+            const url = URL.createObjectURL(blob);
+            const img = new Image();
+            img.onload = ()=>{
+                URL.revokeObjectURL(url);
+                resolve({
+                    width: img.width,
+                    height: img.height
+                });
             };
-            /******/ /******/ // Execute the module function
-            /******/ __webpack_modules__[moduleId].call(module1.exports, module1, module1.exports, __webpack_require__);
-            /******/ /******/ // Return the exports of the module
-            /******/ return module1.exports;
-        /******/ }
-        /******/ /************************************************************************/ /******/ /******/ // startup
-        /******/ // Load entry module and return exports
-        /******/ // This entry module is referenced by other modules so it can't be inlined
-        /******/ var __webpack_exports__ = __webpack_require__("./src/main.ts");
-        /******/ __webpack_exports__ = __webpack_exports__["default"];
-        /******/ /******/ return __webpack_exports__;
-    /******/ })();
-});
+            img.onerror = ()=>{
+                URL.revokeObjectURL(url);
+                reject(new Error("Failed to load image"));
+            };
+            img.src = url;
+        });
+    }
+    static loadVideoMetadata(file, timeoutMs) {
+        return new Promise((resolve, reject)=>{
+            const url = URL.createObjectURL(file);
+            const video = document.createElement("video");
+            video.src = url;
+            const timeout = setTimeout(()=>reject(new Error("Timeout")), timeoutMs);
+            video.onloadedmetadata = ()=>{
+                clearTimeout(timeout);
+                URL.revokeObjectURL(url);
+                resolve({
+                    width: video.videoWidth,
+                    height: video.videoHeight,
+                    duration: video.duration
+                });
+            };
+            video.onerror = ()=>{
+                clearTimeout(timeout);
+                URL.revokeObjectURL(url);
+                reject(new Error("Failed to load video"));
+            };
+        });
+    }
+    createOffscreenCanvas(width, height, scale = 2) {
+        const factor = typeof scale === "number" && scale > 0 ? scale : 1;
+        const canvas = document.createElement("canvas");
+        canvas.width = width * factor;
+        canvas.height = height * factor;
+        if (typeof canvas.transferControlToOffscreen !== "function") throw new Error("OffscreenCanvas is not supported in this environment");
+        return canvas.transferControlToOffscreen();
+    }
+    createBlobPromise(blobType, timeout) {
+        return new Promise((resolve, reject)=>{
+            const timeoutId = setTimeout(()=>{
+                if (this.messageHandlers[blobType]) {
+                    delete this.messageHandlers[blobType];
+                    reject(new Error(`${blobType} processing timeout`));
+                }
+            }, timeout);
+            this.messageHandlers[blobType] = (msg)=>{
+                delete this.messageHandlers[blobType];
+                clearTimeout(timeoutId);
+                const blob = msg[blobType] || msg.data;
+                if (blob instanceof Blob) resolve(blob);
+                else reject(new Error(`Invalid ${blobType} format`));
+            };
+        });
+    }
+    validateNetworkSize(size) {
+        if (!this.networks[size]) throw new Error("Invalid networkSize: use one of " + Object.keys(this.networks).join(", "));
+    }
+    async upscaleImage(imageFile, networkSize, scaleOverride) {
+        if (!imageFile) throw new Error("Image file is required");
+        const size = networkSize || this.networkSize;
+        this.validateNetworkSize(size);
+        this.processingType = "image";
+        const arrayBuffer = await imageFile.arrayBuffer();
+        const mimeType = imageFile.type || "image/jpeg";
+        const { width, height } = await Upscaler.loadImageMetadata(arrayBuffer, mimeType);
+        const weights = await this.loadWeights(size);
+        const network = this.networks[size];
+        const scale = typeof scaleOverride === "number" && scaleOverride > 0 ? scaleOverride : this.imageScale;
+        const [canvasUp, canvasOrig] = [
+            this.createOffscreenCanvas(width, height, scale),
+            this.createOffscreenCanvas(width, height, 1)
+        ];
+        const blobPromise = this.createBlobPromise("imageBlob", this.timeouts.IMAGE);
+        this.getWorker().postMessage({
+            cmd: "init",
+            data: {
+                imageArrayBuffer: arrayBuffer,
+                imageMimeType: mimeType,
+                upscaled: canvasUp,
+                original: canvasOrig,
+                resolution: {
+                    width,
+                    height
+                },
+                network_name: network.name,
+                weights
+            }
+        }, [
+            canvasUp,
+            canvasOrig
+        ]);
+        setTimeout(()=>{
+            this.getWorker().postMessage({
+                cmd: "network",
+                data: {
+                    name: network.name,
+                    imageArrayBuffer: arrayBuffer,
+                    imageMimeType: mimeType,
+                    weights
+                }
+            });
+            setTimeout(()=>{
+                this.getWorker().postMessage({
+                    cmd: "getImageBlob",
+                    data: {
+                        imageArrayBuffer: arrayBuffer,
+                        imageMimeType: mimeType
+                    }
+                });
+            }, this.delays.NETWORK);
+        }, this.delays.INIT);
+        return blobPromise;
+    }
+    async upscaleVideo(videoFile, networkSize, scaleOverride) {
+        if (!videoFile) throw new Error("Video file is required");
+        const size = networkSize || this.networkSize;
+        this.validateNetworkSize(size);
+        if (!Upscaler.isVideoSupported()) throw new Error("WebCodecs API not supported. Requires Chrome 94+");
+        this.processingType = "video";
+        const { width, height, duration } = await Upscaler.loadVideoMetadata(videoFile, this.timeouts.METADATA);
+        const weights = await this.loadWeights(size);
+        const network = this.networks[size];
+        const scale = typeof scaleOverride === "number" && scaleOverride > 0 ? scaleOverride : this.videoScale;
+        const [canvasOut, canvasIn] = [
+            this.createOffscreenCanvas(width, height, scale),
+            this.createOffscreenCanvas(width, height, 1)
+        ];
+        const blobPromise = this.createBlobPromise("videoBlob", this.timeouts.VIDEO);
+        this.getWorker().postMessage({
+            cmd: "process",
+            file: videoFile,
+            fileSize: videoFile.size,
+            duration,
+            adjustedResolution: {
+                adjustedInputWidth: width,
+                adjustedInputHeight: height,
+                adjustedOutputWidth: width * scale,
+                adjustedOutputHeight: height * scale
+            },
+            upscaled: canvasOut,
+            original: canvasIn,
+            weights,
+            network_name: network.name,
+            skipDemuxProgress: true
+        }, [
+            canvasOut,
+            canvasIn
+        ]);
+        return blobPromise;
+    }
+    async startRealtimeUpscale(videoElement, canvasElement, networkSize, scaleOverride) {
+        if (!videoElement || !canvasElement) throw new Error("videoElement and canvasElement are required");
+        const size = networkSize || this.networkSize;
+        this.validateNetworkSize(size);
+        const network = this.networks[size];
+        const weights = await this.loadWeights(size);
+        const scale = typeof scaleOverride === "number" && scaleOverride > 0 ? scaleOverride : this.videoScale;
+        const ensureMetadata = ()=>{
+            return new Promise((resolve, reject)=>{
+                if (videoElement.readyState >= 1) {
+                    resolve();
+                    return;
+                }
+                const onLoaded = ()=>{
+                    cleanup();
+                    resolve();
+                };
+                const onError = ()=>{
+                    cleanup();
+                    reject(new Error("Failed to load video metadata"));
+                };
+                const cleanup = ()=>{
+                    videoElement.removeEventListener("loadedmetadata", onLoaded);
+                    videoElement.removeEventListener("error", onError);
+                };
+                videoElement.addEventListener("loadedmetadata", onLoaded);
+                videoElement.addEventListener("error", onError);
+            });
+        };
+        await ensureMetadata();
+        const width = videoElement.videoWidth;
+        const height = videoElement.videoHeight;
+        if (!width || !height) throw new Error("Invalid video dimensions");
+        canvasElement.width = width * scale;
+        canvasElement.height = height * scale;
+        if (typeof canvasElement.transferControlToOffscreen !== "function") throw new Error("OffscreenCanvas is not supported in this environment");
+        const offscreen = canvasElement.transferControlToOffscreen();
+        if (this.realtimeLoopId) {
+            cancelAnimationFrame(this.realtimeLoopId);
+            this.realtimeLoopId = null;
+        }
+        this.getWorker().postMessage({
+            cmd: "realtimeInit",
+            data: {
+                upscaled: offscreen,
+                resolution: {
+                    width,
+                    height,
+                    scale,
+                    outputWidth: width * scale,
+                    outputHeight: height * scale
+                },
+                network_name: network.name,
+                weights
+            }
+        }, [
+            offscreen
+        ]);
+        this.realtimeState = {
+            running: true,
+            video: videoElement,
+            canvas: canvasElement,
+            scale,
+            busy: false,
+            frameIndex: 0
+        };
+        const loop = async ()=>{
+            if (!this.realtimeState || !this.realtimeState.running) return;
+            const state = this.realtimeState;
+            const v = state.video;
+            if (!v.paused && !v.ended && !state.busy) {
+                state.busy = true;
+                try {
+                    const frame = await createImageBitmap(v);
+                    state.frameIndex += 1;
+                    this.getWorker().postMessage({
+                        cmd: "realtimeFrame",
+                        frame
+                    }, [
+                        frame
+                    ]);
+                } catch (e) {
+                    console.warn("realtimeFrame error", e);
+                } finally{
+                    if (this.realtimeState) this.realtimeState.busy = false;
+                }
+            }
+            this.realtimeLoopId = requestAnimationFrame(loop);
+        };
+        this.realtimeLoopId = requestAnimationFrame(loop);
+    }
+    stopRealtimeUpscale() {
+        if (this.realtimeLoopId) {
+            cancelAnimationFrame(this.realtimeLoopId);
+            this.realtimeLoopId = null;
+        }
+        if (this.realtimeState) {
+            this.realtimeState.running = false;
+            this.realtimeState = null;
+        }
+    }
+    async downloadUpscaled(file, networkSize, filename = null) {
+        const isVideo = file.type.startsWith("video");
+        const size = networkSize || this.networkSize;
+        const blob = isVideo ? await this.upscaleVideo(file, size) : await this.upscaleImage(file, size);
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename || `upscaled_${Date.now()}.${isVideo ? "mp4" : "png"}`;
+        link.click();
+        URL.revokeObjectURL(url);
+        return blob;
+    }
+    getSupportedNetworks() {
+        return Object.keys(this.networks);
+    }
+    static async getGPUCapability() {
+        try {
+            if (navigator.gpu) {
+                const adapter = await navigator.gpu.requestAdapter();
+                if (adapter) {
+                    const buffer = adapter.limits.maxStorageBufferBindingSize / 512;
+                    const texture = 67108864;
+                    return Math.min(buffer, texture);
+                }
+            }
+            const canvas = document.createElement("canvas");
+            const gl = canvas.getContext("webgl2");
+            if (gl) return gl.getParameter(gl.MAX_TEXTURE_SIZE) ** 2;
+            return 8388608;
+        } catch  {
+            return 8388608;
+        }
+    }
+    static getBackendType() {
+        try {
+            if (navigator.gpu) return "webgpu";
+            if (document.createElement("canvas").getContext("webgl2")) return "webgl";
+            return "unknown";
+        } catch  {
+            return "unknown";
+        }
+    }
+    getAppState() {
+        return {
+            backend: Upscaler.getBackendType(),
+            isProcessing: false,
+            progress: 0,
+            width: 0,
+            height: 0
+        };
+    }
+    onProgress(callback) {
+        if (typeof callback === "function") this.progressCallback = callback;
+    }
+    dispose() {
+        this.stopRealtimeUpscale();
+        if (this.workerInstance) {
+            this.workerInstance.terminate();
+            this.workerInstance = null;
+        }
+        this.messageHandlers = {};
+        this.progressCallback = null;
+        this.processingType = null;
+        this.weightsCache.clear();
+    }
+}
+exports.default = Upscaler;
 
-},{}],"8oCsH":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"8oCsH":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
