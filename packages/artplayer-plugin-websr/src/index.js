@@ -19,6 +19,23 @@ export default function artplayerPluginWebsr(
         $canvas.style.left = "50%";
         $canvas.style.transform = "translate(-50%, -50%)";
 
+        function calcCanvasSize() {
+            const videoElement = art.video;
+            const containerWidth = $player.offsetWidth || 640;
+            const containerHeight = $player.offsetHeight || 360;
+            const videoWidth = videoElement.videoWidth || 640;
+            const videoHeight = videoElement.videoHeight || 360;
+            const aspectRatio = videoWidth / videoHeight;
+            let displayWidth = containerWidth;
+            let displayHeight = containerHeight;
+            if (containerWidth / containerHeight > aspectRatio) {
+                displayWidth = containerHeight * aspectRatio;
+            } else {
+                displayHeight = containerWidth / aspectRatio;
+            }
+            return { displayWidth, displayHeight };
+        }
+
         const upscaler = new Upscaler(option);
         upscaler.init();
         await upscaler.startRealtimeUpscale(
@@ -26,6 +43,11 @@ export default function artplayerPluginWebsr(
             $canvas,
             option.networkSize,
         );
+
+        // 初始化 canvas 显示尺寸
+        const { displayWidth, displayHeight } = calcCanvasSize();
+        $canvas.style.width = displayWidth + "px";
+        $canvas.style.height = displayHeight + "px";
 
         // 对比模式
         let comparePosition = 50;
@@ -48,23 +70,6 @@ export default function artplayerPluginWebsr(
             document.addEventListener("mousemove", handleMouseMove);
             document.addEventListener("mouseup", handleMouseUp);
             updateCompareMask();
-        }
-
-        function calcCanvasSize() {
-            const videoElement = art.video;
-            const containerWidth = $player.offsetWidth || 640;
-            const containerHeight = $player.offsetHeight || 360;
-            const videoWidth = videoElement.videoWidth || 640;
-            const videoHeight = videoElement.videoHeight || 360;
-            const aspectRatio = videoWidth / videoHeight;
-            let displayWidth = containerWidth;
-            let displayHeight = containerHeight;
-            if (containerWidth / containerHeight > aspectRatio) {
-                displayWidth = containerHeight * aspectRatio;
-            } else {
-                displayHeight = containerWidth / aspectRatio;
-            }
-            return { displayWidth, displayHeight };
         }
 
         function updateCompareMask() {
