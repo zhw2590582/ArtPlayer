@@ -34,5 +34,5 @@ declare const artplayerPluginJassub: (option: JassubOption) => (art: Artplayer) 
 
 export default artplayerPluginJassub
 
-export = artplayerPluginJassub;
+export = artplayerPluginJassub
 export as namespace artplayerPluginJassub;

@@ -209,15 +209,16 @@
   }
 })({"fIfgU":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>artplayerPluginWebsr);
-var _upscaler = require("./Upscaler");
-var _upscalerDefault = parcelHelpers.interopDefault(_upscaler);
+var _upscalerJs = require("./Upscaler.js");
+var _upscalerJsDefault = parcelHelpers.interopDefault(_upscalerJs);
 function artplayerPluginWebsr(option = {
     networkSize: "medium",
-    compare: false
+    compare: false,
+    weightsBaseUrl: "/weights",
+    workerUrl: "/worker/main.js",
+    videoScale: 2
 }) {
-    return async (art)=>{
+    return (art)=>{
         const { $video, $player } = art.template;
         const $canvas = document.createElement("canvas");
         $player.appendChild($canvas);
@@ -227,6 +228,8 @@ function artplayerPluginWebsr(option = {
         $canvas.style.top = "50%";
         $canvas.style.left = "50%";
         $canvas.style.transform = "translate(-50%, -50%)";
+        $canvas.style.opacity = "0";
+        $canvas.style.transition = "opacity 0.2s ease";
         function calcCanvasSize() {
             const videoElement = art.video;
             const containerWidth = $player.offsetWidth || 640;
@@ -243,27 +246,65 @@ function artplayerPluginWebsr(option = {
                 displayHeight
             };
         }
-        const upscaler = new (0, _upscalerDefault.default)(option);
-        upscaler.init();
-        await upscaler.startRealtimeUpscale($video, $canvas, option.networkSize);
-        // 初始化 canvas 显示尺寸
+        if (!(0, _upscalerJsDefault.default) || !(0, _upscalerJsDefault.default).isSupported || !(0, _upscalerJsDefault.default).isSupported()) {
+            console.warn("Upscaler is not supported in this environment");
+            return;
+        }
+        const upscaler = new (0, _upscalerJsDefault.default)({
+            networkSize: option.networkSize || "medium",
+            weightsBaseUrl: option.weightsBaseUrl || "/weights",
+            workerUrl: option.workerUrl || "/worker/main.js",
+            videoScale: option.videoScale || 2
+        });
+        let realtimeStarted = false;
+        async function startRealtime() {
+            if (realtimeStarted) return;
+            realtimeStarted = true;
+            try {
+                await new Promise((resolve, reject)=>{
+                    if ($video.readyState >= 1) {
+                        resolve();
+                        return;
+                    }
+                    const onLoaded = ()=>{
+                        cleanup();
+                        resolve();
+                    };
+                    const onError = ()=>{
+                        cleanup();
+                        reject(new Error("Failed to load video metadata"));
+                    };
+                    const cleanup = ()=>{
+                        $video.removeEventListener("loadedmetadata", onLoaded);
+                        $video.removeEventListener("error", onError);
+                    };
+                    $video.addEventListener("loadedmetadata", onLoaded);
+                    $video.addEventListener("error", onError);
+                });
+                await upscaler.startRealtimeUpscale($video, $canvas, option.networkSize || upscaler.networkSize);
+                requestAnimationFrame(()=>{
+                    $canvas.style.opacity = "1";
+                });
+            } catch (e) {
+                console.error("artplayer-plugin-upscaler: failed to start realtime", e);
+            }
+        }
         const { displayWidth, displayHeight } = calcCanvasSize();
         $canvas.style.width = displayWidth + "px";
         $canvas.style.height = displayHeight + "px";
-        // 对比模式
         let comparePosition = 50;
         let isDragging = false;
-        // 创建对比手柄
+        let compareEnabled = !!option.compare;
         const $handler = document.createElement("div");
         $handler.style.position = "absolute";
         $handler.style.width = "3px";
-        $handler.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+        $handler.style.backgroundColor = "rgba(255, 255, 255, 0.75)";
         $handler.style.cursor = "ew-resize";
         $handler.style.zIndex = "12";
         $handler.style.pointerEvents = "auto";
-        $handler.style.display = option.compare ? "block" : "none";
-        $handler.style.boxShadow = "0 0 4px rgba(0, 0, 0, 0.1)";
-        if (option.compare) {
+        $handler.style.display = compareEnabled ? "block" : "none";
+        $handler.style.boxShadow = "0 0 2px rgba(0, 0, 0, 0.1)";
+        if (compareEnabled) {
             $player.appendChild($handler);
             $handler.addEventListener("mousedown", handleMouseDown);
             document.addEventListener("mousemove", handleMouseMove);
@@ -271,7 +312,7 @@ function artplayerPluginWebsr(option = {
             updateCompareMask();
         }
         function updateCompareMask() {
-            if (option.compare) {
+            if (compareEnabled) {
                 const { displayWidth, displayHeight } = calcCanvasSize();
                 const gradient = `linear-gradient(to right, transparent 0%, transparent ${comparePosition}%, black ${comparePosition}%, black 100%)`;
                 $canvas.style.maskImage = gradient;
@@ -287,10 +328,10 @@ function artplayerPluginWebsr(option = {
             } else $canvas.style.maskImage = "none";
         }
         function handleMouseDown(e) {
-            if (option.compare) isDragging = true;
+            if (compareEnabled) isDragging = true;
         }
         function handleMouseMove(e) {
-            if (option.compare && isDragging) {
+            if (compareEnabled && isDragging) {
                 const rect = $player.getBoundingClientRect();
                 const { displayWidth } = calcCanvasSize();
                 const containerWidth = $player.offsetWidth || 640;
@@ -306,7 +347,7 @@ function artplayerPluginWebsr(option = {
             isDragging = false;
         }
         art.on("destroy", ()=>{
-            upscaler.dispose();
+            if (upscaler && typeof upscaler.dispose === "function") upscaler.dispose();
             $handler.removeEventListener("mousedown", handleMouseDown);
             document.removeEventListener("mousemove", handleMouseMove);
             document.removeEventListener("mouseup", handleMouseUp);
@@ -317,14 +358,48 @@ function artplayerPluginWebsr(option = {
             $canvas.style.height = displayHeight + "px";
             updateCompareMask();
         });
+        art.on("play", ()=>{
+            startRealtime();
+        });
+        function update(newOption = {}) {
+            if (!newOption || typeof newOption !== "object") return;
+            if (Object.prototype.hasOwnProperty.call(newOption, "compare")) {
+                const nextCompare = !!newOption.compare;
+                option.compare = nextCompare;
+                compareEnabled = nextCompare;
+                if (compareEnabled) {
+                    if (!$handler.parentNode) $player.appendChild($handler);
+                    $handler.style.display = "block";
+                    $handler.addEventListener("mousedown", handleMouseDown);
+                    document.addEventListener("mousemove", handleMouseMove);
+                    document.addEventListener("mouseup", handleMouseUp);
+                    updateCompareMask();
+                } else {
+                    $canvas.style.maskImage = "none";
+                    $handler.style.display = "none";
+                    $handler.removeEventListener("mousedown", handleMouseDown);
+                    document.removeEventListener("mousemove", handleMouseMove);
+                    document.removeEventListener("mouseup", handleMouseUp);
+                }
+            }
+            if (newOption.networkSize) {
+                const nextSize = newOption.networkSize;
+                option.networkSize = nextSize;
+                if (upscaler && typeof upscaler.stopRealtimeUpscale === "function") upscaler.stopRealtimeUpscale();
+                realtimeStarted = false;
+                if (!art.paused) startRealtime();
+            }
+        }
         return {
-            name: "artplayerPluginWebsr"
+            name: "artplayerPluginWebsr",
+            upscaler,
+            update
         };
     };
 }
-if (typeof window !== "undefined") window.artplayerPluginWebsr = artplayerPluginWebsr;
+window.artplayerPluginWebsr = artplayerPluginWebsr;
 
-},{"./Upscaler":"d22Rz","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"d22Rz":[function(require,module,exports,__globalThis) {
+},{"./Upscaler.js":"d22Rz","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"d22Rz":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Upscaler {
@@ -370,8 +445,8 @@ class Upscaler {
                 weightsUrl: `${weightsBaseUrl}/cnn-28.json`
             }
         };
-        this.networkSize = options.networkSize || "medium";
         this.weightsBaseUrl = weightsBaseUrl;
+        this.networkSize = options.networkSize || "medium";
         this.workerUrl = options.workerUrl || "/worker/main.js";
         this.timeouts = {
             ...Upscaler.DEFAULT_TIMEOUTS,
@@ -390,6 +465,7 @@ class Upscaler {
         this.processingType = null;
         this.realtimeLoopId = null;
         this.realtimeState = null;
+        this.init();
     }
     init({ prewarm = true } = {}) {
         if (!Upscaler.isSupported()) throw new Error("Upscaler is not supported in this environment");
@@ -424,6 +500,7 @@ class Upscaler {
     }
     handleWorkerMessage(event) {
         const { data } = event;
+        console.debug("Worker message:", data);
         if (!data.cmd) return;
         const { cmd } = data;
         if (cmd === "progress") {
@@ -644,18 +721,27 @@ class Upscaler {
         const width = videoElement.videoWidth;
         const height = videoElement.videoHeight;
         if (!width || !height) throw new Error("Invalid video dimensions");
-        canvasElement.width = width * scale;
-        canvasElement.height = height * scale;
-        if (typeof canvasElement.transferControlToOffscreen !== "function") throw new Error("OffscreenCanvas is not supported in this environment");
-        const offscreen = canvasElement.transferControlToOffscreen();
+        const firstInit = !canvasElement._upscalerTransferred;
+        let offscreen = null;
+        if (firstInit) {
+            canvasElement.width = width * scale;
+            canvasElement.height = height * scale;
+            if (typeof canvasElement.transferControlToOffscreen !== "function") throw new Error("OffscreenCanvas is not supported in this environment");
+            offscreen = canvasElement.transferControlToOffscreen();
+            canvasElement._upscalerTransferred = true;
+        }
+        const captureCanvas = document.createElement("canvas");
+        captureCanvas.width = width;
+        captureCanvas.height = height;
+        const captureCtx = captureCanvas.getContext("2d");
         if (this.realtimeLoopId) {
             cancelAnimationFrame(this.realtimeLoopId);
             this.realtimeLoopId = null;
         }
-        this.getWorker().postMessage({
+        const initPayload = {
             cmd: "realtimeInit",
             data: {
-                upscaled: offscreen,
+                upscaled: firstInit ? offscreen : null,
                 resolution: {
                     width,
                     height,
@@ -666,25 +752,34 @@ class Upscaler {
                 network_name: network.name,
                 weights
             }
-        }, [
+        };
+        if (firstInit && offscreen) this.getWorker().postMessage(initPayload, [
             offscreen
         ]);
+        else this.getWorker().postMessage(initPayload);
         this.realtimeState = {
             running: true,
             video: videoElement,
             canvas: canvasElement,
             scale,
             busy: false,
-            frameIndex: 0
+            frameIndex: 0,
+            captureCanvas,
+            captureCtx
         };
         const loop = async ()=>{
             if (!this.realtimeState || !this.realtimeState.running) return;
             const state = this.realtimeState;
             const v = state.video;
-            if (!v.paused && !v.ended && !state.busy) {
+            const haveCurrentData = v.HAVE_CURRENT_DATA || 2;
+            if (!v.paused && !v.ended && !state.busy && v.readyState >= haveCurrentData && v.videoWidth > 0 && v.videoHeight > 0) {
                 state.busy = true;
                 try {
-                    const frame = await createImageBitmap(v);
+                    const captureCanvas = state.captureCanvas;
+                    const captureCtx = state.captureCtx;
+                    if (!captureCanvas || !captureCtx) throw new Error("Missing capture canvas");
+                    captureCtx.drawImage(v, 0, 0, captureCanvas.width, captureCanvas.height);
+                    const frame = await createImageBitmap(captureCanvas);
                     state.frameIndex += 1;
                     this.getWorker().postMessage({
                         cmd: "realtimeFrame",

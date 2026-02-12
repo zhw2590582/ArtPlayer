@@ -12,5 +12,5 @@ declare const artplayerPluginMultipleSubtitles: (option: {
 
 export default artplayerPluginMultipleSubtitles
 
-export = artplayerPluginMultipleSubtitles;
+export = artplayerPluginMultipleSubtitles
 export as namespace artplayerPluginMultipleSubtitles;

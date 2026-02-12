@@ -6,5 +6,5 @@ declare const artplayerPluginVttThumbnail: (option: { vtt?: string, style?: Part
 
 export default artplayerPluginVttThumbnail
 
-export = artplayerPluginVttThumbnail;
+export = artplayerPluginVttThumbnail
 export as namespace artplayerPluginVttThumbnail;

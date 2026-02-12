@@ -1,12 +1,15 @@
-import Upscaler from "./Upscaler";
+import Upscaler from "./Upscaler.js";
 
-export default function artplayerPluginWebsr(
+function artplayerPluginWebsr(
     option = {
         networkSize: "medium",
         compare: false,
+        weightsBaseUrl: "/weights",
+        workerUrl: "/worker/main.js",
+        videoScale: 2,
     },
 ) {
-    return async (art) => {
+    return (art) => {
         const { $video, $player } = art.template;
 
         const $canvas = document.createElement("canvas");
@@ -18,6 +21,8 @@ export default function artplayerPluginWebsr(
         $canvas.style.top = "50%";
         $canvas.style.left = "50%";
         $canvas.style.transform = "translate(-50%, -50%)";
+        $canvas.style.opacity = "0";
+        $canvas.style.transition = "opacity 0.2s ease";
 
         function calcCanvasSize() {
             const videoElement = art.video;
@@ -36,35 +41,82 @@ export default function artplayerPluginWebsr(
             return { displayWidth, displayHeight };
         }
 
-        const upscaler = new Upscaler(option);
-        upscaler.init();
-        await upscaler.startRealtimeUpscale(
-            $video,
-            $canvas,
-            option.networkSize,
-        );
+        if (!Upscaler || !Upscaler.isSupported || !Upscaler.isSupported()) {
+            console.warn("Upscaler is not supported in this environment");
+            return;
+        }
 
-        // 初始化 canvas 显示尺寸
+        const upscaler = new Upscaler({
+            networkSize: option.networkSize || "medium",
+            weightsBaseUrl: option.weightsBaseUrl || "/weights",
+            workerUrl: option.workerUrl || "/worker/main.js",
+            videoScale: option.videoScale || 2,
+        });
+
+        let realtimeStarted = false;
+
+        async function startRealtime() {
+            if (realtimeStarted) return;
+            realtimeStarted = true;
+
+            try {
+                await new Promise((resolve, reject) => {
+                    if ($video.readyState >= 1) {
+                        resolve();
+                        return;
+                    }
+                    const onLoaded = () => {
+                        cleanup();
+                        resolve();
+                    };
+                    const onError = () => {
+                        cleanup();
+                        reject(new Error("Failed to load video metadata"));
+                    };
+                    const cleanup = () => {
+                        $video.removeEventListener("loadedmetadata", onLoaded);
+                        $video.removeEventListener("error", onError);
+                    };
+                    $video.addEventListener("loadedmetadata", onLoaded);
+                    $video.addEventListener("error", onError);
+                });
+
+                await upscaler.startRealtimeUpscale(
+                    $video,
+                    $canvas,
+                    option.networkSize || upscaler.networkSize,
+                );
+
+                requestAnimationFrame(() => {
+                    $canvas.style.opacity = "1";
+                });
+            } catch (e) {
+                console.error(
+                    "artplayer-plugin-upscaler: failed to start realtime",
+                    e,
+                );
+            }
+        }
+
         const { displayWidth, displayHeight } = calcCanvasSize();
         $canvas.style.width = displayWidth + "px";
         $canvas.style.height = displayHeight + "px";
 
-        // 对比模式
         let comparePosition = 50;
         let isDragging = false;
+        let compareEnabled = !!option.compare;
 
-        // 创建对比手柄
         const $handler = document.createElement("div");
         $handler.style.position = "absolute";
         $handler.style.width = "3px";
-        $handler.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+        $handler.style.backgroundColor = "rgba(255, 255, 255, 0.75)";
         $handler.style.cursor = "ew-resize";
         $handler.style.zIndex = "12";
         $handler.style.pointerEvents = "auto";
-        $handler.style.display = option.compare ? "block" : "none";
-        $handler.style.boxShadow = "0 0 4px rgba(0, 0, 0, 0.1)";
+        $handler.style.display = compareEnabled ? "block" : "none";
+        $handler.style.boxShadow = "0 0 2px rgba(0, 0, 0, 0.1)";
 
-        if (option.compare) {
+        if (compareEnabled) {
             $player.appendChild($handler);
             $handler.addEventListener("mousedown", handleMouseDown);
             document.addEventListener("mousemove", handleMouseMove);
@@ -73,7 +125,7 @@ export default function artplayerPluginWebsr(
         }
 
         function updateCompareMask() {
-            if (option.compare) {
+            if (compareEnabled) {
                 const { displayWidth, displayHeight } = calcCanvasSize();
                 const gradient = `linear-gradient(to right, transparent 0%, transparent ${comparePosition}%, black ${comparePosition}%, black 100%)`;
                 $canvas.style.maskImage = gradient;
@@ -95,13 +147,13 @@ export default function artplayerPluginWebsr(
         }
 
         function handleMouseDown(e) {
-            if (option.compare) {
+            if (compareEnabled) {
                 isDragging = true;
             }
         }
 
         function handleMouseMove(e) {
-            if (option.compare && isDragging) {
+            if (compareEnabled && isDragging) {
                 const rect = $player.getBoundingClientRect();
                 const { displayWidth } = calcCanvasSize();
                 const containerWidth = $player.offsetWidth || 640;
@@ -119,7 +171,9 @@ export default function artplayerPluginWebsr(
         }
 
         art.on("destroy", () => {
-            upscaler.dispose();
+            if (upscaler && typeof upscaler.dispose === "function") {
+                upscaler.dispose();
+            }
             $handler.removeEventListener("mousedown", handleMouseDown);
             document.removeEventListener("mousemove", handleMouseMove);
             document.removeEventListener("mouseup", handleMouseUp);
@@ -132,12 +186,58 @@ export default function artplayerPluginWebsr(
             updateCompareMask();
         });
 
+        art.on("play", () => {
+            startRealtime();
+        });
+
+        function update(newOption = {}) {
+            if (!newOption || typeof newOption !== "object") return;
+
+            if (Object.prototype.hasOwnProperty.call(newOption, "compare")) {
+                const nextCompare = !!newOption.compare;
+                option.compare = nextCompare;
+                compareEnabled = nextCompare;
+
+                if (compareEnabled) {
+                    if (!$handler.parentNode) {
+                        $player.appendChild($handler);
+                    }
+                    $handler.style.display = "block";
+                    $handler.addEventListener("mousedown", handleMouseDown);
+                    document.addEventListener("mousemove", handleMouseMove);
+                    document.addEventListener("mouseup", handleMouseUp);
+                    updateCompareMask();
+                } else {
+                    $canvas.style.maskImage = "none";
+                    $handler.style.display = "none";
+                    $handler.removeEventListener("mousedown", handleMouseDown);
+                    document.removeEventListener("mousemove", handleMouseMove);
+                    document.removeEventListener("mouseup", handleMouseUp);
+                }
+            }
+
+            if (newOption.networkSize) {
+                const nextSize = newOption.networkSize;
+                option.networkSize = nextSize;
+                if (
+                    upscaler &&
+                    typeof upscaler.stopRealtimeUpscale === "function"
+                ) {
+                    upscaler.stopRealtimeUpscale();
+                }
+                realtimeStarted = false;
+                if (!art.paused) {
+                    startRealtime();
+                }
+            }
+        }
+
         return {
             name: "artplayerPluginWebsr",
+            upscaler,
+            update,
         };
     };
 }
 
-if (typeof window !== "undefined") {
-    window.artplayerPluginWebsr = artplayerPluginWebsr;
-}
+window.artplayerPluginWebsr = artplayerPluginWebsr;

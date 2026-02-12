@@ -45,8 +45,8 @@ export default class Upscaler {
       },
     };
 
-    this.networkSize = options.networkSize || "medium";
     this.weightsBaseUrl = weightsBaseUrl;
+    this.networkSize = options.networkSize || "medium";
     this.workerUrl = options.workerUrl || "/worker/main.js";
 
     this.timeouts = {
@@ -72,6 +72,8 @@ export default class Upscaler {
 
     this.realtimeLoopId = null;
     this.realtimeState = null;
+
+    this.init();
   }
 
   init({ prewarm = true } = {}) {
@@ -117,6 +119,7 @@ export default class Upscaler {
 
   handleWorkerMessage(event) {
     const { data } = event;
+    console.debug("Worker message:", data);
     if (!data.cmd) return;
 
     const { cmd } = data;
@@ -253,7 +256,6 @@ export default class Upscaler {
       mimeType,
     );
 
-
     const weights = await this.loadWeights(size);
     const network = this.networks[size];
     const scale =
@@ -322,7 +324,6 @@ export default class Upscaler {
       videoFile,
       this.timeouts.METADATA,
     );
-
 
     const weights = await this.loadWeights(size);
     const network = this.networks[size];
@@ -416,41 +417,52 @@ export default class Upscaler {
       throw new Error("Invalid video dimensions");
     }
 
+    const firstInit = !canvasElement._upscalerTransferred;
 
-    canvasElement.width = width * scale;
-    canvasElement.height = height * scale;
+    let offscreen = null;
+    if (firstInit) {
+      canvasElement.width = width * scale;
+      canvasElement.height = height * scale;
 
-    if (typeof canvasElement.transferControlToOffscreen !== "function") {
-      throw new Error("OffscreenCanvas is not supported in this environment");
+      if (typeof canvasElement.transferControlToOffscreen !== "function") {
+        throw new Error("OffscreenCanvas is not supported in this environment");
+      }
+
+      offscreen = canvasElement.transferControlToOffscreen();
+      canvasElement._upscalerTransferred = true;
     }
 
-    const offscreen = canvasElement.transferControlToOffscreen();
-
+    const captureCanvas = document.createElement("canvas");
+    captureCanvas.width = width;
+    captureCanvas.height = height;
+    const captureCtx = captureCanvas.getContext("2d");
 
     if (this.realtimeLoopId) {
       cancelAnimationFrame(this.realtimeLoopId);
       this.realtimeLoopId = null;
     }
 
-    this.getWorker().postMessage(
-      {
-        cmd: "realtimeInit",
-        data: {
-          upscaled: offscreen,
-          resolution: {
-            width,
-            height,
-            scale,
-            outputWidth: width * scale,
-            outputHeight: height * scale,
-          },
-          network_name: network.name,
-          weights,
+    const initPayload = {
+      cmd: "realtimeInit",
+      data: {
+        upscaled: firstInit ? offscreen : null,
+        resolution: {
+          width,
+          height,
+          scale,
+          outputWidth: width * scale,
+          outputHeight: height * scale,
         },
+        network_name: network.name,
+        weights,
       },
-      [offscreen],
-    );
+    };
 
+    if (firstInit && offscreen) {
+      this.getWorker().postMessage(initPayload, [offscreen]);
+    } else {
+      this.getWorker().postMessage(initPayload);
+    }
 
     this.realtimeState = {
       running: true,
@@ -459,6 +471,8 @@ export default class Upscaler {
       scale,
       busy: false,
       frameIndex: 0,
+      captureCanvas,
+      captureCtx,
     };
 
     const loop = async () => {
@@ -466,12 +480,27 @@ export default class Upscaler {
       const state = this.realtimeState;
       const v = state.video;
 
-      if (!v.paused && !v.ended && !state.busy) {
+      const haveCurrentData = v.HAVE_CURRENT_DATA || 2;
+
+      if (
+        !v.paused &&
+        !v.ended &&
+        !state.busy &&
+        v.readyState >= haveCurrentData &&
+        v.videoWidth > 0 &&
+        v.videoHeight > 0
+      ) {
         state.busy = true;
         try {
-          const frame = await createImageBitmap(v);
+          const captureCanvas = state.captureCanvas;
+          const captureCtx = state.captureCtx;
+          if (!captureCanvas || !captureCtx) {
+            throw new Error("Missing capture canvas");
+          }
+          captureCtx.drawImage(v, 0, 0, captureCanvas.width, captureCanvas.height);
+          const frame = await createImageBitmap(captureCanvas);
           state.frameIndex += 1;
-          
+
           this.getWorker().postMessage(
             {
               cmd: "realtimeFrame",
