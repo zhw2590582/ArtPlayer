@@ -1,0 +1,42 @@
+{
+  "name": "artplayer-plugin-anime4k",
+  "version": "1.0.0",
+  "description": "anime4k plugin for ArtPlayer",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/artplayer-plugin-anime4k.d.ts",
+      "import": "./dist/artplayer-plugin-anime4k.mjs",
+      "require": "./dist/artplayer-plugin-anime4k.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-anime4k.d.ts",
+      "import": "./dist/artplayer-plugin-anime4k.legacy.js",
+      "require": "./dist/artplayer-plugin-anime4k.legacy.js"
+
+    }
+  },
+  "main": "dist/artplayer-plugin-anime4k.js",
+  "module": "./dist/artplayer-plugin-anime4k.mjs",
+  "types": "types/artplayer-plugin-anime4k.d.ts",
+  "legacy": "dist/artplayer-plugin-anime4k.legacy.js",
+  "browserslist": "last 1 Chrome version"
+,
+  "dependencies": {
+    "anime4k-webgpu": "^1.0.0"
+  }
+}

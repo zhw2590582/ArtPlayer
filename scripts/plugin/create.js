@@ -17,7 +17,7 @@ if (!pluginName) {
 }
 
 // Validate plugin name
-const pluginNameRegex = /^[a-z-]+$/
+const pluginNameRegex = /^[a-z-0-9]+$/
 if (!pluginNameRegex.test(pluginName)) {
   console.error('Invalid plugin name. Only lowercase letters and hyphens are allowed.')
   process.exit(1)

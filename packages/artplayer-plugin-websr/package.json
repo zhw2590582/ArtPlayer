@@ -33,8 +33,5 @@
   "module": "./dist/artplayer-plugin-websr.mjs",
   "types": "types/artplayer-plugin-websr.d.ts",
   "legacy": "dist/artplayer-plugin-websr.legacy.js",
-  "browserslist": "last 1 Chrome version",
-  "dependencies": {
-    "@websr/websr": "^0.0.14"
-  }
+  "browserslist": "last 1 Chrome version"
 }
