@@ -8,4 +8,4 @@ Vtt thumbnail plugin for ArtPlayer
 
 ## License
 
-MIT © Harvey Zack
+MIT © Harvey Zhao

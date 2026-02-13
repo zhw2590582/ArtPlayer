@@ -7,7 +7,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",
   "homepage": "https://artplayer.org",
   "repository": {

@@ -12,4 +12,4 @@
 
 ## License
 
-MIT © Harvey Zack
+MIT © Harvey Zhao

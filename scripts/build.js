@@ -87,7 +87,7 @@ async function build(name, targetName, clean = false) {
 /*!
  * ${name}.js v${version}
  * Github: https://github.com/zhw2590582/ArtPlayer
- * (c) 2017-${new Date().getFullYear()} Harvey Zack
+ * (c) 2017-${new Date().getFullYear()} Harvey Zhao
  * Released under the MIT License.
  */
 `

@@ -161,4 +161,4 @@ We accept donations through these channels:
 
 ## License
 
-MIT © Harvey Zack
+MIT © Harvey Zhao

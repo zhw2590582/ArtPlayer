@@ -2,7 +2,7 @@
   "name": "artplayer-tool-thumbnail",
   "version": "4.3.12",
   "description": "Thumbnail tool for ArtPlayer",
-  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",
   "legacy": "dist/artplayer-tool-thumbnail.legacy.js",
   "homepage": "https://artplayer.org",
