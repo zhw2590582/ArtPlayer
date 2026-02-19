@@ -94,7 +94,54 @@
 
     function localRequire(x) {
       var res = localRequire.resolve(x);
-      return res === false ? {} : newRequire(res);
+      if (res === false) {
+        return {};
+      }
+      // Synthesize a module to follow re-exports.
+      if (Array.isArray(res)) {
+        var m = {__esModule: true};
+        res.forEach(function (v) {
+          var key = v[0];
+          var id = v[1];
+          var exp = v[2] || v[0];
+          var x = newRequire(id);
+          if (key === '*') {
+            Object.keys(x).forEach(function (key) {
+              if (
+                key === 'default' ||
+                key === '__esModule' ||
+                Object.prototype.hasOwnProperty.call(m, key)
+              ) {
+                return;
+              }
+
+              Object.defineProperty(m, key, {
+                enumerable: true,
+                get: function () {
+                  return x[key];
+                },
+              });
+            });
+          } else if (exp === '*') {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              value: x,
+            });
+          } else {
+            Object.defineProperty(m, key, {
+              enumerable: true,
+              get: function () {
+                if (exp === 'default') {
+                  return x.__esModule ? x.default : x;
+                }
+                return x[exp];
+              },
+            });
+          }
+        });
+        return m;
+      }
+      return newRequire(res);
     }
 
     function resolve(x) {
@@ -248,6 +295,17 @@ class Danmuku {
             type: 'application/javascript'
         });
         this.worker = new Worker(URL.createObjectURL(blob));
+        // Web Worker 回调池，避免频繁覆盖 onmessage 并支持并发请求
+        this.workerCallbacks = new Map();
+        this.worker.onmessage = (event)=>{
+            const { data } = event;
+            if (!data || !data.id) return;
+            const callback = this.workerCallbacks.get(data.id);
+            if (callback) {
+                this.workerCallbacks.delete(data.id);
+                callback(data);
+            }
+        };
         // 绑定公用事件
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
@@ -573,14 +631,11 @@ class Danmuku {
     // 复杂运算交给 Web Worker 处理
     postMessage(message = {}) {
         return new Promise((resolve)=>{
-            message.id = Date.now() // 生成唯一标识
+            const id = `${Date.now()}-${Math.random()}`;
+            message.id = id // 生成唯一标识
             ;
+            this.workerCallbacks.set(id, resolve);
             this.worker.postMessage(message);
-            this.worker.onmessage = (event)=>{
-                const { data } = event;
-                // 判断是否是当前的消息
-                if (data.id === message.id) resolve(data);
-            };
         });
     }
     // 根据状态获取弹幕
@@ -591,8 +646,13 @@ class Danmuku {
     }
     // 设置弹幕状态
     setState(danmu, state) {
-        // 从原状态池中删除
-        this.states[danmu.$state] = this.states[danmu.$state].filter((item)=>item !== danmu);
+        // 从原状态池中删除，使用原地删除避免创建新数组
+        const prevState = danmu.$state;
+        if (prevState && this.states[prevState]) {
+            const list = this.states[prevState];
+            const index = list.indexOf(danmu);
+            if (index !== -1) list.splice(index, 1);
+        }
         // 设置新状态
         danmu.$state = state;
         // 设置DOM节点状态
@@ -618,22 +678,52 @@ class Danmuku {
         const { setStyles } = this.utils;
         this.timer = window.requestAnimationFrame(async ()=>{
             if (this.art.playing && !this.isHide) {
-                // 实时计算弹幕的剩余显示时间
+                const now = Date.now();
+                const { clientWidth, clientHeight } = this.$player;
+                // 实时计算弹幕的剩余显示时间，并构建当前可见弹幕数据，避免重复 DOM 读写
+                const visibles = [];
+                const playerLeft = this.getLeft(this.$player);
                 this.filter('emit', (danmu)=>{
-                    const emitTime = (Date.now() - danmu.$lastStartTime) / 1000;
+                    const emitTime = (now - danmu.$lastStartTime) / 1000;
                     danmu.$restTime -= emitTime;
-                    danmu.$lastStartTime = Date.now();
+                    danmu.$lastStartTime = now;
                     // 超过时间即重置弹幕
-                    if (danmu.$restTime <= 0) this.makeWait(danmu);
+                    if (danmu.$restTime <= 0) {
+                        this.makeWait(danmu);
+                        return;
+                    }
+                    if (!danmu.$ref) return;
+                    const top = danmu.$ref.offsetTop;
+                    const left = this.getLeft(danmu.$ref) - playerLeft;
+                    const height = danmu.$ref.clientHeight;
+                    const width = danmu.$ref.clientWidth;
+                    const distance = left + width;
+                    const right = clientWidth - distance;
+                    const speed = distance / danmu.$restTime;
+                    visibles.push({
+                        top,
+                        left,
+                        height,
+                        width,
+                        right,
+                        speed,
+                        distance,
+                        time: danmu.$restTime,
+                        mode: danmu.mode
+                    });
                 });
                 // 获取准备好发送的弹幕，可能包含ready和wait状态的弹幕
                 const readys = this.readys;
-                for(let index = 0; index < readys.length; index++){
-                    const danmu = readys[index];
-                    // 弹幕发送前的过滤器
-                    const state = await this.option.beforeVisible(danmu);
-                    if (state) {
-                        const { clientWidth, clientHeight } = this.$player;
+                if (readys.length) {
+                    const topsTargets = [];
+                    const readyDanmus = [];
+                    // 先初始化 DOM、样式及 target 数据，统一批量计算 top
+                    for(let index = 0; index < readys.length; index++){
+                        const danmu = readys[index];
+                        // 弹幕发送前的过滤器（保持顺序执行，避免行为变化）
+                        // eslint-disable-next-line no-await-in-loop
+                        const state = await this.option.beforeVisible(danmu);
+                        if (!state) continue;
                         danmu.$ref = this.$ref // 获取弹幕DOM节点
                         ;
                         danmu.$ref.textContent = danmu.text // 设置弹幕文本
@@ -649,27 +739,37 @@ class Danmuku {
                         // 设置单独弹幕样式
                         setStyles(danmu.$ref, danmu.style);
                         // 记录弹幕时间戳
-                        danmu.$lastStartTime = Date.now();
+                        danmu.$lastStartTime = now;
                         // 计算弹幕剩余时间
                         danmu.$restTime = this.speed;
-                        // 计算弹幕滚动的距离
+                        const height = danmu.$ref.clientHeight;
                         const distance = clientWidth + danmu.$ref.clientWidth;
-                        // 计算弹幕的top值
-                        const { result: top } = await this.postMessage({
-                            type: 'getDanmuTop',
-                            target: {
-                                mode: danmu.mode,
-                                height: danmu.$ref.clientHeight,
-                                speed: distance / danmu.$restTime
-                            },
-                            visibles: this.visibles,
+                        const speed = distance / danmu.$restTime;
+                        topsTargets.push({
+                            mode: danmu.mode,
+                            height,
+                            speed
+                        });
+                        readyDanmus.push({
+                            danmu,
+                            distance
+                        });
+                    }
+                    if (topsTargets.length) {
+                        const { result: tops } = await this.postMessage({
+                            type: 'getDanmuTopBatch',
+                            targets: topsTargets,
+                            visibles,
                             antiOverlap: this.option.antiOverlap,
                             clientWidth,
                             clientHeight,
                             marginBottom: this.marginBottom,
                             marginTop: this.marginTop
                         });
-                        if (danmu.$ref) {
+                        for(let index = 0; index < readyDanmus.length; index++){
+                            const { danmu, distance } = readyDanmus[index];
+                            const top = Array.isArray(tops) ? tops[index] : undefined;
+                            if (!danmu.$ref) continue;
                             if (!this.isStop && top !== undefined) {
                                 this.setState(danmu, 'emit') // 转换为emit状态
                                 ;
@@ -820,6 +920,7 @@ class Danmuku {
     }
     destroy() {
         this.stop();
+        if (this.workerCallbacks) this.workerCallbacks.clear();
         this.worker.terminate();
         this.art.off('video:play', this.start);
         this.art.off('video:playing', this.start);
@@ -833,7 +934,7 @@ class Danmuku {
 exports.default = Danmuku;
 
 },{"bundle-text:./worker":"2Spvp","./bilibili":"aIvhn","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"2Spvp":[function(require,module,exports,__globalThis) {
-module.exports = "// modules are defined as an array\n// [ module function, map of requires ]\n//\n// map of requires is short require name -> numeric require\n//\n// anything defined in a previous bundle is accessed via the\n// orig method which is the require for previous bundles\n\n(function (\n  modules,\n  entry,\n  mainEntry,\n  parcelRequireName,\n  externals,\n  distDir,\n  publicUrl,\n  devServer\n) {\n  /* eslint-disable no-undef */\n  var globalObject =\n    typeof globalThis !== 'undefined'\n      ? globalThis\n      : typeof self !== 'undefined'\n      ? self\n      : typeof window !== 'undefined'\n      ? window\n      : typeof global !== 'undefined'\n      ? global\n      : {};\n  /* eslint-enable no-undef */\n\n  // Save the require from previous bundle to this closure if any\n  var previousRequire =\n    typeof globalObject[parcelRequireName] === 'function' &&\n    globalObject[parcelRequireName];\n\n  var importMap = previousRequire.i || {};\n  var cache = previousRequire.cache || {};\n  // Do not use `require` to prevent Webpack from trying to bundle this call\n  var nodeRequire =\n    typeof module !== 'undefined' &&\n    typeof module.require === 'function' &&\n    module.require.bind(module);\n\n  function newRequire(name, jumped) {\n    if (!cache[name]) {\n      if (!modules[name]) {\n        if (externals[name]) {\n          return externals[name];\n        }\n        // if we cannot find the module within our internal map or\n        // cache jump to the current global require ie. the last bundle\n        // that was added to the page.\n        var currentRequire =\n          typeof globalObject[parcelRequireName] === 'function' &&\n          globalObject[parcelRequireName];\n        if (!jumped && currentRequire) {\n          return currentRequire(name, true);\n        }\n\n        // If there are other bundles on this page the require from the\n        // previous one is saved to 'previousRequire'. Repeat this as\n        // many times as there are bundles until the module is found or\n        // we exhaust the require chain.\n        if (previousRequire) {\n          return previousRequire(name, true);\n        }\n\n        // Try the node require function if it exists.\n        if (nodeRequire && typeof name === 'string') {\n          return nodeRequire(name);\n        }\n\n        var err = new Error(\"Cannot find module '\" + name + \"'\");\n        err.code = 'MODULE_NOT_FOUND';\n        throw err;\n      }\n\n      localRequire.resolve = resolve;\n      localRequire.cache = {};\n\n      var module = (cache[name] = new newRequire.Module(name));\n\n      modules[name][0].call(\n        module.exports,\n        localRequire,\n        module,\n        module.exports,\n        globalObject\n      );\n    }\n\n    return cache[name].exports;\n\n    function localRequire(x) {\n      var res = localRequire.resolve(x);\n      return res === false ? {} : newRequire(res);\n    }\n\n    function resolve(x) {\n      var id = modules[name][1][x];\n      return id != null ? id : x;\n    }\n  }\n\n  function Module(moduleName) {\n    this.id = moduleName;\n    this.bundle = newRequire;\n    this.require = nodeRequire;\n    this.exports = {};\n  }\n\n  newRequire.isParcelRequire = true;\n  newRequire.Module = Module;\n  newRequire.modules = modules;\n  newRequire.cache = cache;\n  newRequire.parent = previousRequire;\n  newRequire.distDir = distDir;\n  newRequire.publicUrl = publicUrl;\n  newRequire.devServer = devServer;\n  newRequire.i = importMap;\n  newRequire.register = function (id, exports) {\n    modules[id] = [\n      function (require, module) {\n        module.exports = exports;\n      },\n      {},\n    ];\n  };\n\n  // Only insert newRequire.load when it is actually used.\n  // The code in this file is linted against ES5, so dynamic import is not allowed.\n  // INSERT_LOAD_HERE\n\n  Object.defineProperty(newRequire, 'root', {\n    get: function () {\n      return globalObject[parcelRequireName];\n    },\n  });\n\n  globalObject[parcelRequireName] = newRequire;\n\n  for (var i = 0; i < entry.length; i++) {\n    newRequire(entry[i]);\n  }\n\n  if (mainEntry) {\n    // Expose entry point to Node, AMD or browser globals\n    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js\n    var mainExports = newRequire(mainEntry);\n\n    // CommonJS\n    if (typeof exports === 'object' && typeof module !== 'undefined') {\n      module.exports = mainExports;\n\n      // RequireJS\n    } else if (typeof define === 'function' && define.amd) {\n      define(function () {\n        return mainExports;\n      });\n    }\n  }\n})({\"02up6\":[function(require,module,exports,__globalThis) {\nfunction getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n    // 弹幕最大高度\n    const maxTop = clientHeight - marginBottom;\n    // 过滤同模式的弹幕，即每种模式各不影响\n    const danmus = visibles.filter((item)=>item.mode === target.mode && item.top <= maxTop).sort((prev, next)=>prev.top - next.top);\n    // 如果没有同模式的弹幕，直接返回\n    if (danmus.length === 0) {\n        if (target.mode === 2) return maxTop - target.height;\n        else return marginTop;\n    }\n    // 上下各加一个虚拟弹幕，方便计算\n    danmus.unshift({\n        type: 'top',\n        top: 0,\n        left: 0,\n        right: 0,\n        height: marginTop,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    danmus.push({\n        type: 'bottom',\n        top: maxTop,\n        left: 0,\n        right: 0,\n        height: marginBottom,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    // 查找是否有多余的缝隙足以容纳当前弹幕\n    if (target.mode === 2) // 倒序查找\n    for(let index = danmus.length - 2; index >= 0; index -= 1){\n        const item = danmus[index];\n        const prev = danmus[index + 1];\n        const itemBottom = item.top + item.height;\n        const diff = prev.top - itemBottom;\n        if (diff >= target.height) return prev.top - target.height;\n    }\n    else // 顺序查找\n    for(let index = 1; index < danmus.length; index += 1){\n        const item = danmus[index];\n        const prev = danmus[index - 1];\n        const prevBottom = prev.top + prev.height;\n        const diff = item.top - prevBottom;\n        if (diff >= target.height) return prevBottom;\n    }\n    const topMap = [];\n    for(let index = 1; index < danmus.length - 1; index += 1){\n        const item = danmus[index];\n        if (topMap.length) {\n            const last = topMap[topMap.length - 1];\n            if (last[0].top === item.top) last.push(item);\n            else topMap.push([\n                item\n            ]);\n        } else topMap.push([\n            item\n        ]);\n    }\n    if (antiOverlap) switch(target.mode){\n        case 0:\n            {\n                const result = topMap.find((list)=>{\n                    return list.every((danmu)=>{\n                        if (clientWidth < danmu.distance) return false;\n                        if (target.speed < danmu.speed) return true;\n                        const overlapTime = danmu.right / (target.speed - danmu.speed);\n                        if (overlapTime > danmu.time) return true;\n                        return false;\n                    });\n                });\n                return result && result[0] ? result[0].top : undefined;\n            }\n        // 静止弹幕没有重叠问题\n        case 1:\n        case 2:\n            return undefined;\n        default:\n            break;\n    }\n    else {\n        switch(target.mode){\n            case 0:\n                topMap.sort((prev, next)=>{\n                    const nextMinRight = Math.min(...next.map((item)=>item.right));\n                    const prevMinRight = Math.min(...prev.map((item)=>item.right));\n                    return nextMinRight * next.length - prevMinRight * prev.length;\n                });\n                break;\n            case 1:\n            case 2:\n                topMap.sort((prev, next)=>{\n                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));\n                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));\n                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n                });\n                break;\n            default:\n                break;\n        }\n        return topMap[0][0].top;\n    }\n}\nonmessage = (event)=>{\n    const { data } = event;\n    if (!data.id || !data.type) return;\n    const fns = {\n        getDanmuTop\n    };\n    const fn = fns[data.type];\n    const result = fn(data);\n    globalThis.postMessage({\n        result,\n        id: data.id\n    });\n};\n\n},{}]},[\"02up6\"], \"02up6\", \"parcelRequire4dc0\", {})\n\n";
+module.exports = "// modules are defined as an array\n// [ module function, map of requires ]\n//\n// map of requires is short require name -> numeric require\n//\n// anything defined in a previous bundle is accessed via the\n// orig method which is the require for previous bundles\n\n(function (\n  modules,\n  entry,\n  mainEntry,\n  parcelRequireName,\n  externals,\n  distDir,\n  publicUrl,\n  devServer\n) {\n  /* eslint-disable no-undef */\n  var globalObject =\n    typeof globalThis !== 'undefined'\n      ? globalThis\n      : typeof self !== 'undefined'\n      ? self\n      : typeof window !== 'undefined'\n      ? window\n      : typeof global !== 'undefined'\n      ? global\n      : {};\n  /* eslint-enable no-undef */\n\n  // Save the require from previous bundle to this closure if any\n  var previousRequire =\n    typeof globalObject[parcelRequireName] === 'function' &&\n    globalObject[parcelRequireName];\n\n  var importMap = previousRequire.i || {};\n  var cache = previousRequire.cache || {};\n  // Do not use `require` to prevent Webpack from trying to bundle this call\n  var nodeRequire =\n    typeof module !== 'undefined' &&\n    typeof module.require === 'function' &&\n    module.require.bind(module);\n\n  function newRequire(name, jumped) {\n    if (!cache[name]) {\n      if (!modules[name]) {\n        if (externals[name]) {\n          return externals[name];\n        }\n        // if we cannot find the module within our internal map or\n        // cache jump to the current global require ie. the last bundle\n        // that was added to the page.\n        var currentRequire =\n          typeof globalObject[parcelRequireName] === 'function' &&\n          globalObject[parcelRequireName];\n        if (!jumped && currentRequire) {\n          return currentRequire(name, true);\n        }\n\n        // If there are other bundles on this page the require from the\n        // previous one is saved to 'previousRequire'. Repeat this as\n        // many times as there are bundles until the module is found or\n        // we exhaust the require chain.\n        if (previousRequire) {\n          return previousRequire(name, true);\n        }\n\n        // Try the node require function if it exists.\n        if (nodeRequire && typeof name === 'string') {\n          return nodeRequire(name);\n        }\n\n        var err = new Error(\"Cannot find module '\" + name + \"'\");\n        err.code = 'MODULE_NOT_FOUND';\n        throw err;\n      }\n\n      localRequire.resolve = resolve;\n      localRequire.cache = {};\n\n      var module = (cache[name] = new newRequire.Module(name));\n\n      modules[name][0].call(\n        module.exports,\n        localRequire,\n        module,\n        module.exports,\n        globalObject\n      );\n    }\n\n    return cache[name].exports;\n\n    function localRequire(x) {\n      var res = localRequire.resolve(x);\n      if (res === false) {\n        return {};\n      }\n      // Synthesize a module to follow re-exports.\n      if (Array.isArray(res)) {\n        var m = {__esModule: true};\n        res.forEach(function (v) {\n          var key = v[0];\n          var id = v[1];\n          var exp = v[2] || v[0];\n          var x = newRequire(id);\n          if (key === '*') {\n            Object.keys(x).forEach(function (key) {\n              if (\n                key === 'default' ||\n                key === '__esModule' ||\n                Object.prototype.hasOwnProperty.call(m, key)\n              ) {\n                return;\n              }\n\n              Object.defineProperty(m, key, {\n                enumerable: true,\n                get: function () {\n                  return x[key];\n                },\n              });\n            });\n          } else if (exp === '*') {\n            Object.defineProperty(m, key, {\n              enumerable: true,\n              value: x,\n            });\n          } else {\n            Object.defineProperty(m, key, {\n              enumerable: true,\n              get: function () {\n                if (exp === 'default') {\n                  return x.__esModule ? x.default : x;\n                }\n                return x[exp];\n              },\n            });\n          }\n        });\n        return m;\n      }\n      return newRequire(res);\n    }\n\n    function resolve(x) {\n      var id = modules[name][1][x];\n      return id != null ? id : x;\n    }\n  }\n\n  function Module(moduleName) {\n    this.id = moduleName;\n    this.bundle = newRequire;\n    this.require = nodeRequire;\n    this.exports = {};\n  }\n\n  newRequire.isParcelRequire = true;\n  newRequire.Module = Module;\n  newRequire.modules = modules;\n  newRequire.cache = cache;\n  newRequire.parent = previousRequire;\n  newRequire.distDir = distDir;\n  newRequire.publicUrl = publicUrl;\n  newRequire.devServer = devServer;\n  newRequire.i = importMap;\n  newRequire.register = function (id, exports) {\n    modules[id] = [\n      function (require, module) {\n        module.exports = exports;\n      },\n      {},\n    ];\n  };\n\n  // Only insert newRequire.load when it is actually used.\n  // The code in this file is linted against ES5, so dynamic import is not allowed.\n  // INSERT_LOAD_HERE\n\n  Object.defineProperty(newRequire, 'root', {\n    get: function () {\n      return globalObject[parcelRequireName];\n    },\n  });\n\n  globalObject[parcelRequireName] = newRequire;\n\n  for (var i = 0; i < entry.length; i++) {\n    newRequire(entry[i]);\n  }\n\n  if (mainEntry) {\n    // Expose entry point to Node, AMD or browser globals\n    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js\n    var mainExports = newRequire(mainEntry);\n\n    // CommonJS\n    if (typeof exports === 'object' && typeof module !== 'undefined') {\n      module.exports = mainExports;\n\n      // RequireJS\n    } else if (typeof define === 'function' && define.amd) {\n      define(function () {\n        return mainExports;\n      });\n    }\n  }\n})({\"02up6\":[function(require,module,exports,__globalThis) {\nfunction getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n    // 弹幕最大高度\n    const maxTop = clientHeight - marginBottom;\n    // 过滤同模式的弹幕，即每种模式各不影响\n    const danmus = visibles.filter((item)=>item.mode === target.mode && item.top <= maxTop).sort((prev, next)=>prev.top - next.top);\n    // 如果没有同模式的弹幕，直接返回\n    if (danmus.length === 0) {\n        if (target.mode === 2) return maxTop - target.height;\n        else return marginTop;\n    }\n    // 上下各加一个虚拟弹幕，方便计算\n    danmus.unshift({\n        type: 'top',\n        top: 0,\n        left: 0,\n        right: 0,\n        height: marginTop,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    danmus.push({\n        type: 'bottom',\n        top: maxTop,\n        left: 0,\n        right: 0,\n        height: marginBottom,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    // 查找是否有多余的缝隙足以容纳当前弹幕\n    if (target.mode === 2) // 倒序查找\n    for(let index = danmus.length - 2; index >= 0; index -= 1){\n        const item = danmus[index];\n        const prev = danmus[index + 1];\n        const itemBottom = item.top + item.height;\n        const diff = prev.top - itemBottom;\n        if (diff >= target.height) return prev.top - target.height;\n    }\n    else // 顺序查找\n    for(let index = 1; index < danmus.length; index += 1){\n        const item = danmus[index];\n        const prev = danmus[index - 1];\n        const prevBottom = prev.top + prev.height;\n        const diff = item.top - prevBottom;\n        if (diff >= target.height) return prevBottom;\n    }\n    const topMap = [];\n    for(let index = 1; index < danmus.length - 1; index += 1){\n        const item = danmus[index];\n        if (topMap.length) {\n            const last = topMap[topMap.length - 1];\n            if (last[0].top === item.top) last.push(item);\n            else topMap.push([\n                item\n            ]);\n        } else topMap.push([\n            item\n        ]);\n    }\n    if (antiOverlap) switch(target.mode){\n        case 0:\n            {\n                const result = topMap.find((list)=>{\n                    return list.every((danmu)=>{\n                        if (clientWidth < danmu.distance) return false;\n                        if (target.speed < danmu.speed) return true;\n                        const overlapTime = danmu.right / (target.speed - danmu.speed);\n                        if (overlapTime > danmu.time) return true;\n                        return false;\n                    });\n                });\n                return result && result[0] ? result[0].top : undefined;\n            }\n        // 静止弹幕没有重叠问题\n        case 1:\n        case 2:\n            return undefined;\n        default:\n            break;\n    }\n    else {\n        switch(target.mode){\n            case 0:\n                topMap.sort((prev, next)=>{\n                    const nextMinRight = Math.min(...next.map((item)=>item.right));\n                    const prevMinRight = Math.min(...prev.map((item)=>item.right));\n                    return nextMinRight * next.length - prevMinRight * prev.length;\n                });\n                break;\n            case 1:\n            case 2:\n                topMap.sort((prev, next)=>{\n                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));\n                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));\n                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n                });\n                break;\n            default:\n                break;\n        }\n        return topMap[0][0].top;\n    }\n}\nfunction getDanmuTopBatch({ targets, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n    if (!Array.isArray(targets) || targets.length === 0) return [];\n    return targets.map((target)=>{\n        return getDanmuTop({\n            target,\n            visibles,\n            clientWidth,\n            clientHeight,\n            marginBottom,\n            marginTop,\n            antiOverlap\n        });\n    });\n}\nonmessage = (event)=>{\n    const { data } = event;\n    if (!data.id || !data.type) return;\n    const fns = {\n        getDanmuTop,\n        getDanmuTopBatch\n    };\n    const fn = fns[data.type];\n    const result = fn(data);\n    globalThis.postMessage({\n        result,\n        id: data.id\n    });\n};\n\n},{}]},[\"02up6\"], \"02up6\", \"parcelRequire4dc0\", {})\n\n";
 
 },{}],"aIvhn":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

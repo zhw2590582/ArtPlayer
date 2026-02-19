@@ -135,12 +135,29 @@ function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom
   }
 }
 
+function getDanmuTopBatch({ targets, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {
+  if (!Array.isArray(targets) || targets.length === 0)
+    return []
+
+  return targets.map((target) => {
+    return getDanmuTop({
+      target,
+      visibles,
+      clientWidth,
+      clientHeight,
+      marginBottom,
+      marginTop,
+      antiOverlap,
+    })
+  })
+}
+
 onmessage = (event) => {
   const { data } = event
   if (!data.id || !data.type)
     return
 
-  const fns = { getDanmuTop }
+  const fns = { getDanmuTop, getDanmuTopBatch }
   const fn = fns[data.type]
   const result = fn(data)
 

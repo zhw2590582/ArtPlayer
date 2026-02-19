@@ -32,6 +32,21 @@ export default class Danmuku {
     const blob = new Blob([workerText2], { type: 'application/javascript' })
     this.worker = new Worker(URL.createObjectURL(blob))
 
+    // Web Worker 回调池，避免频繁覆盖 onmessage 并支持并发请求
+    this.workerCallbacks = new Map()
+
+    this.worker.onmessage = (event) => {
+      const { data } = event
+      if (!data || !data.id)
+        return
+
+      const callback = this.workerCallbacks.get(data.id)
+      if (callback) {
+        this.workerCallbacks.delete(data.id)
+        callback(data)
+      }
+    }
+
     // 绑定公用事件
     this.start = this.start.bind(this)
     this.stop = this.stop.bind(this)
@@ -437,15 +452,10 @@ export default class Danmuku {
   // 复杂运算交给 Web Worker 处理
   postMessage(message = {}) {
     return new Promise((resolve) => {
-      message.id = Date.now() // 生成唯一标识
+      const id = `${Date.now()}-${Math.random()}`
+      message.id = id // 生成唯一标识
+      this.workerCallbacks.set(id, resolve)
       this.worker.postMessage(message)
-      this.worker.onmessage = (event) => {
-        const { data } = event
-        // 判断是否是当前的消息
-        if (data.id === message.id) {
-          resolve(data)
-        }
-      }
     })
   }
 
@@ -460,8 +470,14 @@ export default class Danmuku {
 
   // 设置弹幕状态
   setState(danmu, state) {
-    // 从原状态池中删除
-    this.states[danmu.$state] = this.states[danmu.$state].filter(item => item !== danmu)
+    // 从原状态池中删除，使用原地删除避免创建新数组
+    const prevState = danmu.$state
+    if (prevState && this.states[prevState]) {
+      const list = this.states[prevState]
+      const index = list.indexOf(danmu)
+      if (index !== -1)
+        list.splice(index, 1)
+    }
 
     // 设置新状态
     danmu.$state = state
@@ -495,28 +511,65 @@ export default class Danmuku {
 
     this.timer = window.requestAnimationFrame(async () => {
       if (this.art.playing && !this.isHide) {
-        // 实时计算弹幕的剩余显示时间
+        const now = Date.now()
+        const { clientWidth, clientHeight } = this.$player
+
+        // 实时计算弹幕的剩余显示时间，并构建当前可见弹幕数据，避免重复 DOM 读写
+        const visibles = []
+        const playerLeft = this.getLeft(this.$player)
+
         this.filter('emit', (danmu) => {
-          const emitTime = (Date.now() - danmu.$lastStartTime) / 1000
+          const emitTime = (now - danmu.$lastStartTime) / 1000
           danmu.$restTime -= emitTime
-          danmu.$lastStartTime = Date.now()
+          danmu.$lastStartTime = now
+
           // 超过时间即重置弹幕
           if (danmu.$restTime <= 0) {
             this.makeWait(danmu)
+            return
           }
+
+          if (!danmu.$ref)
+            return
+
+          const top = danmu.$ref.offsetTop
+          const left = this.getLeft(danmu.$ref) - playerLeft
+          const height = danmu.$ref.clientHeight
+          const width = danmu.$ref.clientWidth
+          const distance = left + width
+          const right = clientWidth - distance
+          const speed = distance / danmu.$restTime
+
+          visibles.push({
+            top,
+            left,
+            height,
+            width,
+            right,
+            speed,
+            distance,
+            time: danmu.$restTime,
+            mode: danmu.mode,
+          })
         })
 
         // 获取准备好发送的弹幕，可能包含ready和wait状态的弹幕
         const readys = this.readys
 
-        for (let index = 0; index < readys.length; index++) {
-          const danmu = readys[index]
+        if (readys.length) {
+          const topsTargets = []
+          const readyDanmus = []
 
-          // 弹幕发送前的过滤器
-          const state = await this.option.beforeVisible(danmu)
+          // 先初始化 DOM、样式及 target 数据，统一批量计算 top
+          for (let index = 0; index < readys.length; index++) {
+            const danmu = readys[index]
 
-          if (state) {
-            const { clientWidth, clientHeight } = this.$player
+            // 弹幕发送前的过滤器（保持顺序执行，避免行为变化）
+            // eslint-disable-next-line no-await-in-loop
+            const state = await this.option.beforeVisible(danmu)
+            if (!state)
+              continue
+
             danmu.$ref = this.$ref // 获取弹幕DOM节点
             danmu.$ref.textContent = danmu.text // 设置弹幕文本
 
@@ -534,23 +587,29 @@ export default class Danmuku {
             setStyles(danmu.$ref, danmu.style)
 
             // 记录弹幕时间戳
-            danmu.$lastStartTime = Date.now()
+            danmu.$lastStartTime = now
 
             // 计算弹幕剩余时间
             danmu.$restTime = this.speed
 
-            // 计算弹幕滚动的距离
+            const height = danmu.$ref.clientHeight
             const distance = clientWidth + danmu.$ref.clientWidth
+            const speed = distance / danmu.$restTime
 
-            // 计算弹幕的top值
-            const { result: top } = await this.postMessage({
-              type: 'getDanmuTop',
-              target: {
-                mode: danmu.mode,
-                height: danmu.$ref.clientHeight,
-                speed: distance / danmu.$restTime,
-              }, // 当前弹幕信息
-              visibles: this.visibles, // 可见的弹幕的数据
+            topsTargets.push({
+              mode: danmu.mode,
+              height,
+              speed,
+            })
+
+            readyDanmus.push({ danmu, distance })
+          }
+
+          if (topsTargets.length) {
+            const { result: tops } = await this.postMessage({
+              type: 'getDanmuTopBatch',
+              targets: topsTargets,
+              visibles,
               antiOverlap: this.option.antiOverlap,
               clientWidth,
               clientHeight,
@@ -558,7 +617,13 @@ export default class Danmuku {
               marginTop: this.marginTop,
             })
 
-            if (danmu.$ref) {
+            for (let index = 0; index < readyDanmus.length; index++) {
+              const { danmu, distance } = readyDanmus[index]
+              const top = Array.isArray(tops) ? tops[index] : undefined
+
+              if (!danmu.$ref)
+                continue
+
               if (!this.isStop && top !== undefined) {
                 this.setState(danmu, 'emit') // 转换为emit状态
                 danmu.$ref.style.top = `${top}px`
@@ -721,6 +786,9 @@ export default class Danmuku {
 
   destroy() {
     this.stop()
+    if (this.workerCallbacks) {
+      this.workerCallbacks.clear()
+    }
     this.worker.terminate()
     this.art.off('video:play', this.start)
     this.art.off('video:playing', this.start)
