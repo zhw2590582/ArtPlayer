@@ -3,14 +3,47 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Artplayer.js</title>
+    <title>ArtPlayer.js - Modern HTML5 Video Player</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="google-adsense-account" content="ca-pub-8579453810848662">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-    <meta name="keywords" content="artplayer, player, js, html5, video" />
-    <meta name="description" content="ArtPlayer.js is a modern and full featured HTML5 video player" />
-    <meta name="twitter:image" content="https://artplayer.org/assets/img/screenshot.png" />
+    <meta name="keywords" content="artplayer, artplayer.js, html5 video player, javascript video player, hls, dash, flv, webtorrent" />
+    <meta name="description" content="ArtPlayer.js is a modern, full featured, open-source HTML5 video player for the web with plugin ecosystem, HLS/DASH support, danmaku and more." />
+    <link rel="canonical" href="https://artplayer.org/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ArtPlayer.js - Modern HTML5 Video Player" />
+    <meta property="og:description" content="ArtPlayer.js is a modern, full featured, open-source HTML5 video player for the web with plugin ecosystem, HLS/DASH support, danmaku and more." />
+    <meta property="og:url" content="https://artplayer.org/" />
+    <meta property="og:site_name" content="ArtPlayer.js" />
     <meta property="og:image" content="https://artplayer.org/assets/img/screenshot.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ArtPlayer.js - Modern HTML5 Video Player" />
+    <meta name="twitter:description" content="ArtPlayer.js is a modern, full featured, open-source HTML5 video player for the web with plugin ecosystem, HLS/DASH support, danmaku and more." />
+    <meta name="twitter:image" content="https://artplayer.org/assets/img/screenshot.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "ArtPlayer.js",
+            "applicationCategory": "Multimedia",
+            "operatingSystem": "Web",
+            "url": "https://artplayer.org/",
+            "image": "https://artplayer.org/assets/img/screenshot.png",
+            "description": "ArtPlayer.js is a modern, full featured, open-source HTML5 video player for the web with plugin ecosystem, HLS/DASH support, danmaku and more.",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            }
+        }
+    </script>
+
     <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./assets/css/normalize.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
@@ -21,7 +54,7 @@
 <body>
     <header class="header">
         <a href="./" class="logo">
-            <img src="./assets/img/logo.png" height="20" alt="">
+            <img src="./assets/img/logo.png" height="20" alt="ArtPlayer.js logo">
             Artplayer.js
         </a>
         <div class="menus">
@@ -173,7 +206,7 @@
             <div class="run">▶ Run Code</div>
         </div>
     </header>
-    <div class="main">
+    <main class="main">
         <div id="editor" class="part-left">
             <div class="libs">
                 <div class="upload">
@@ -194,7 +227,7 @@
             </div>
             <div class="console"></div>
         </div>
-    </div>
+    </main>
     <div class="popups">
         <div class="popinner"></div>
     </div>
