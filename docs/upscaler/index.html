@@ -1,587 +1,455 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Upscaler 测试</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
-            body {
-                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                min-height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-            }
-
-            .container {
-                background: white;
-                border-radius: 12px;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-                max-width: 600px;
-                width: 100%;
-                padding: 40px;
-            }
-
-            h1 {
-                color: #333;
-                margin-bottom: 30px;
-                text-align: center;
-                font-size: 2em;
-            }
-
-            .info-box {
-                background: #f0f4ff;
-                border-left: 4px solid #667eea;
-                padding: 15px;
-                margin-bottom: 20px;
-                border-radius: 4px;
-                font-size: 14px;
-                color: #555;
-            }
-
-            .form-group {
-                margin-bottom: 20px;
-            }
-
-            label {
-                display: block;
-                margin-bottom: 8px;
-                font-weight: 600;
-                color: #333;
-            }
-
-            input[type="file"],
-            select {
-                width: 100%;
-                padding: 12px;
-                border: 2px solid #ddd;
-                border-radius: 6px;
-                font-size: 14px;
-                transition: border-color 0.3s;
-            }
-
-            input[type="file"]:focus,
-            select:focus {
-                outline: none;
-                border-color: #667eea;
-            }
-
-            button {
-                width: 100%;
-                padding: 14px;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                border: none;
-                border-radius: 6px;
-                font-size: 16px;
-                font-weight: 600;
-                cursor: pointer;
-                transition:
-                    transform 0.2s,
-                    box-shadow 0.2s;
-                margin-top: 10px;
-            }
-
-            button:hover:not(:disabled) {
-                transform: translateY(-2px);
-                box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-            }
-
-            button:disabled {
-                opacity: 0.6;
-                cursor: not-allowed;
-            }
-
-            .progress-section {
-                margin-top: 30px;
-                display: none;
-            }
-
-            .progress-section.active {
-                display: block;
-            }
-
-            .progress-bar {
-                width: 100%;
-                height: 8px;
-                background: #eee;
-                border-radius: 4px;
-                overflow: hidden;
-                margin-bottom: 10px;
-            }
-
-            .progress-fill {
-                height: 100%;
-                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-                width: 0%;
-                transition: width 0.3s ease;
-            }
-
-            .progress-text {
-                text-align: center;
-                color: #666;
-                font-size: 14px;
-            }
-
-            .result-section {
-                margin-top: 30px;
-                display: none;
-                border-top: 2px solid #eee;
-                padding-top: 20px;
-            }
-
-            .result-section.active {
-                display: block;
-            }
-
-            .image-viewer {
-                display: none;
-            }
-
-            .image-viewer.active {
-                display: block;
-            }
-
-            .result-image {
-                max-width: 100%;
-                border-radius: 6px;
-                margin-bottom: 15px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            }
-
-            .comparison-container {
-                position: relative;
-                width: 100%;
-                aspect-ratio: auto;
-                max-width: 100%;
-                border-radius: 6px;
-                overflow: hidden;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                margin-bottom: 15px;
-                background: #f0f0f0;
-                user-select: none;
-            }
-
-            .comparison-inner {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }
-
-            .comparison-img {
-                display: block;
-                width: 100%;
-                height: auto;
-            }
-
-            .comparison-img.original {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                -webkit-mask-image: linear-gradient(
-                    to right,
-                    black 0%,
-                    black 50%,
-                    transparent 50%,
-                    transparent 100%
-                );
-                mask-image: linear-gradient(
-                    to right,
-                    black 0%,
-                    black 50%,
-                    transparent 50%,
-                    transparent 100%
-                );
-            }
-
-            .comparison-img.enhanced {
-                width: 100%;
-                height: auto;
-            }
-
-            .comparison-container video {
-                display: block;
-                width: 100%;
-                height: auto;
-                border-radius: 6px;
-                background: #000;
-            }
-
-            .comparison-container video.original {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                border-radius: 6px;
-            }
-
-            .comparison-handle {
-                position: absolute;
-                left: 50%;
-                top: 0;
-                transform: translateX(-50%);
-                width: 4px;
-                height: 100%;
-                background: white;
-                cursor: ew-resize;
-                z-index: 10;
-                box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-                transition: background-color 0.2s;
-            }
-
-            .comparison-handle:hover {
-                background: #667eea;
-                width: 6px;
-            }
-
-            .comparison-handle::before {
-                content: "";
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 40px;
-                height: 40px;
-                background: white;
-                border-radius: 50%;
-                box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .comparison-labels {
-                position: absolute;
-                top: 10px;
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                padding: 0 15px;
-                pointer-events: none;
-                z-index: 5;
-                font-size: 12px;
-                font-weight: 600;
-                color: white;
-                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            }
-
-            .comparison-label {
-                background: rgba(0, 0, 0, 0.3);
-                padding: 6px 12px;
-                border-radius: 4px;
-                backdrop-filter: blur(4px);
-            }
-
-            .result-info {
-                background: #f9f9f9;
-                padding: 15px;
-                border-radius: 6px;
-                font-size: 13px;
-                color: #666;
-                margin-bottom: 10px;
-            }
-
-            .download-btn {
-                background: #4caf50;
-                margin-top: 10px;
-            }
-
-            .download-btn:hover {
-                box-shadow: 0 10px 20px rgba(76, 175, 80, 0.4);
-            }
-
-            .status-badge {
-                display: inline-block;
-                padding: 6px 12px;
-                border-radius: 12px;
-                font-size: 12px;
-                font-weight: 600;
-                margin-top: 10px;
-            }
-
-            .status-badge.success {
-                background: #d4edda;
-                color: #155724;
-            }
-
-            .status-badge.error {
-                background: #f8d7da;
-                color: #721c24;
-            }
-
-            .status-badge.info {
-                background: #d1ecf1;
-                color: #0c5460;
-            }
-
-            .section-title {
-                color: #333;
-                font-size: 14px;
-                font-weight: 600;
-                margin-bottom: 15px;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-        </style>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+        <title>
+            Free AI Video Upscaler - Enhance Video Quality Online | ArtPlayer
+        </title>
+        <meta
+            name="description"
+            content="Free browser-based AI video upscaler. Enhance and upscale MP4/WebM videos using WebGPU/WebGL super resolution. No upload required - runs 100% locally in your browser."
+        />
+        <meta
+            name="keywords"
+            content="video upscaler, AI video enhancement, super resolution, WebGPU, WebGL, free video upscaler, online video enhancer, video quality improvement, 4K upscaling"
+        />
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="ArtPlayer" />
+        <link rel="canonical" href="https://artplayer.org/upscaler/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://artplayer.org/upscaler/" />
+        <meta
+            property="og:title"
+            content="Free AI Video Upscaler - Enhance Video Quality Online"
+        />
+        <meta
+            property="og:description"
+            content="Upscale videos with AI super resolution directly in your browser. Free, private, no upload needed."
+        />
+        <meta property="og:site_name" content="ArtPlayer" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Free AI Video Upscaler - Enhance Video Quality Online"
+        />
+        <meta
+            name="twitter:description"
+            content="Upscale videos with AI super resolution directly in your browser. Free, private, no upload needed."
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: [
+                                "-apple-system",
+                                "BlinkMacSystemFont",
+                                "Segoe UI",
+                                "Roboto",
+                                "sans-serif",
+                            ],
+                        },
+                    },
+                },
+            };
+        </script>
     </head>
-    <body>
-        <div class="container">
-            <h1>🚀 超分辨率处理</h1>
-
-            <div class="info-box">
-                ℹ️ 支持图像和视频处理。支持 WebGPU 和 WebGL 后端。
+    <body
+        class="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased font-sans"
+    >
+        <main
+            class="flex-1 max-w-2xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12"
+        >
+            <!-- Title Section -->
+            <div class="text-center mb-8">
+                <h1
+                    class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 tracking-tight"
+                >
+                    Video Upscaler
+                </h1>
+                <p
+                    class="text-slate-500 text-sm sm:text-base max-w-md mx-auto leading-relaxed"
+                >
+                    Enhance video quality with AI super resolution. Runs locally
+                    in your browser — no upload needed.
+                </p>
             </div>
 
-            <div class="form-group">
-                <label for="universalInput">📁 选择图像或视频</label>
-                <input
-                    type="file"
-                    id="universalInput"
-                    accept="image/*,video/*"
-                />
-            </div>
-
-            <div class="form-group">
-                <label for="networkSize">⚙️ 处理模式</label>
-                <select id="networkSize">
-                    <option value="small">小 (快速，质量较低)</option>
-                    <option value="medium" selected>中 (平衡)</option>
-                    <option value="large">大 (最佳质量，时间长)</option>
-                </select>
-            </div>
-
-            <button id="processBtn" onclick="handleProcess()">
-                ▶️ 开始处理
-            </button>
-
-            <div class="form-group" style="margin-top: 20px">
-                <label for="videoUrlInput">🌐 在线视频 URL 实时放大</label>
-                <input
-                    type="text"
-                    id="videoUrlInput"
-                    value="/video.mp4"
-                    placeholder="https://example.com/video.mp4"
-                    style="
-                        width: 100%;
-                        padding: 12px;
-                        border: 2px solid #ddd;
-                        border-radius: 6px;
-                        font-size: 14px;
-                    "
-                />
-            </div>
-
-            <button id="playUrlBtn" onclick="handlePlayUrl()">
-                ▶️ 播放并实时放大到下方 Canvas
-            </button>
-
-            <div class="progress-section" id="progressSection">
-                <div class="section-title">处理进度</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <div class="progress-text" id="progressText">准备中...</div>
-            </div>
-
-            <div class="result-section" id="resultSection">
-                <div class="section-title">处理完成</div>
-
-                <div class="image-viewer active" id="comparisonViewer">
-                    <div class="comparison-container" id="comparisonContainer">
-                        <img
-                            id="comparisonEnhanced"
-                            class="comparison-img enhanced"
-                            alt="增强图像"
+            <!-- Upload Card -->
+            <div
+                class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
+            >
+                <div class="p-5 sm:p-8">
+                    <!-- Upload Area -->
+                    <div class="mb-6">
+                        <input
+                            type="file"
+                            id="universalInput"
+                            accept="video/*"
+                            class="sr-only"
                         />
-                        <img
-                            id="comparisonOriginal"
-                            class="comparison-img original"
-                            alt="原始图像"
-                        />
+                        <label
+                            for="universalInput"
+                            class="group relative flex flex-col w-full aspect-video cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-slate-300 overflow-hidden bg-gradient-to-br from-slate-50 to-gray-100 transition-all duration-200 hover:from-blue-50 hover:to-blue-100 hover:border-blue-300"
+                            id="uploadLabel"
+                        >
+                            <!-- Upload Placeholder -->
+                            <div
+                                id="uploadPlaceholder"
+                                class="flex flex-col items-center"
+                            >
+                                <div
+                                    class="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mb-4"
+                                >
+                                    <svg
+                                        class="w-7 h-7 text-slate-400"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                        />
+                                    </svg>
+                                </div>
+                                <span
+                                    class="text-slate-700 font-medium text-base mb-1"
+                                    >Choose a video file</span
+                                >
+                                <span class="text-slate-400 text-sm"
+                                    >or drag and drop here</span
+                                >
+                            </div>
+                            <!-- Video Preview (shown after file selection) -->
+                            <div
+                                id="videoPreviewArea"
+                                class="absolute inset-0 hidden bg-slate-900"
+                            >
+                                <video
+                                    id="videoPreviewPlayer"
+                                    class="w-full h-full object-contain pointer-events-none"
+                                    muted
+                                    playsinline
+                                ></video>
+                                <!-- Video Info Overlay -->
+                                <div
+                                    class="absolute top-3 left-3 flex items-center gap-2"
+                                >
+                                    <span
+                                        class="inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-md"
+                                    >
+                                        <svg
+                                            class="w-3.5 h-3.5"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                            />
+                                        </svg>
+                                        <span id="videoMetaInfo"></span>
+                                    </span>
+                                </div>
+                                <!-- File Name Overlay -->
+                                <div
+                                    class="absolute bottom-3 left-3 right-3 flex items-center justify-between"
+                                >
+                                    <span
+                                        id="videoFileName"
+                                        class="text-white text-sm font-medium truncate max-w-[70%] drop-shadow-md"
+                                    ></span>
+                                    <span class="text-white/80 text-xs"
+                                        >Click to change</span
+                                    >
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Network Selection -->
+                    <div class="flex items-center justify-between gap-4 mb-6">
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-slate-700 mb-1"
+                            >
+                                Quality Model
+                            </label>
+                            <p class="text-xs text-slate-400">
+                                Higher = better quality, slower
+                            </p>
+                        </div>
                         <div
-                            class="comparison-handle"
-                            id="comparisonHandle"
-                        ></div>
-                        <div class="comparison-labels">
-                            <div class="comparison-label">原始图像</div>
-                            <div class="comparison-label">增强后</div>
+                            class="inline-flex items-center gap-1 rounded-lg bg-slate-100 p-1"
+                            id="networkToggle"
+                        >
+                            <button
+                                type="button"
+                                data-network="small"
+                                class="rounded-md px-3 py-1.5 text-sm font-medium text-slate-600 transition-all duration-150"
+                            >
+                                Fast
+                            </button>
+                            <button
+                                type="button"
+                                data-network="medium"
+                                class="rounded-md px-3 py-1.5 text-sm font-medium bg-slate-800 text-white shadow-sm transition-all duration-150"
+                            >
+                                Balanced
+                            </button>
+                            <button
+                                type="button"
+                                data-network="large"
+                                class="rounded-md px-3 py-1.5 text-sm font-medium text-slate-600 transition-all duration-150"
+                            >
+                                Quality
+                            </button>
                         </div>
                     </div>
+
+                    <!-- Process Button -->
+                    <button
+                        id="processBtn"
+                        onclick="handleProcess()"
+                        disabled
+                        class="relative w-full rounded-xl px-4 py-3.5 text-sm font-semibold text-white overflow-hidden bg-gradient-to-b from-slate-800 to-slate-900 transition-all duration-200 hover:from-slate-700 hover:to-slate-800 hover:shadow-lg disabled:bg-slate-200 disabled:from-slate-200 disabled:to-slate-200 disabled:text-slate-400 disabled:shadow-none"
+                    >
+                        <span
+                            class="progress-fill absolute inset-y-0 left-0 w-0 bg-emerald-600 transition-all duration-200 ease-out z-0"
+                            id="progressFill"
+                        ></span>
+                        <span id="progressText" class="relative z-10">
+                            Select a video to start
+                        </span>
+                    </button>
                 </div>
 
+                <!-- Result Section -->
                 <div
-                    id="videoResultSection"
-                    style="display: none; margin-top: 20px"
+                    class="border-t border-slate-100 bg-slate-50 p-5 sm:p-8 hidden"
+                    id="resultSection"
                 >
-                    <h3 style="margin-top: 0; color: #333">✓ 视频处理完成</h3>
-
-                    <div
-                        id="videoComparisonViewer"
-                        style="display: block; margin-bottom: 15px"
-                    >
-                        <div
-                            class="comparison-container"
-                            id="videoComparisonContainer"
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg
+                            class="w-5 h-5 text-emerald-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
                         >
-                            <video
-                                id="resultVideoEnhanced"
-                                class="comparison-img enhanced"
-                                style="
-                                    display: block;
-                                    width: 100%;
-                                    height: auto;
-                                    border-radius: 6px;
-                                    background: #000;
-                                "
-                                controls
-                                loop
-                                muted
-                                preload="auto"
-                            >
-                                <source
-                                    id="resultVideoSourceEnhanced"
-                                    type="video/mp4"
-                                />
-                                你的浏览器不支持 HTML5 video 标签
-                            </video>
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                        <span class="text-sm font-medium text-slate-700"
+                            >Upscaling Complete</span
+                        >
+                    </div>
 
-                            <video
-                                id="resultVideoOriginal"
-                                class="comparison-img original"
-                                style="
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    border-radius: 6px;
-                                    background: #000;
-                                "
-                                loop
-                                preload="auto"
-                            >
-                                <source
-                                    id="resultVideoSourceOriginal"
-                                    type="video/mp4"
-                                />
-                                你的浏览器不支持 HTML5 video 标签
-                            </video>
-
+                    <div id="videoResultSection" class="hidden">
+                        <div id="videoComparisonViewer" class="mb-5">
                             <div
-                                class="comparison-handle"
-                                id="videoComparisonHandle"
-                            ></div>
+                                class="comparison-container relative w-full max-w-full rounded-xl overflow-hidden bg-slate-900 shadow-md select-none"
+                                id="videoComparisonContainer"
+                            >
+                                <video
+                                    id="resultVideoEnhanced"
+                                    class="comparison-img enhanced block w-full h-auto bg-slate-900"
+                                    controls
+                                    loop
+                                    muted
+                                    preload="auto"
+                                >
+                                    <source
+                                        id="resultVideoSourceEnhanced"
+                                        type="video/mp4"
+                                    />
+                                    Your browser does not support the video tag.
+                                </video>
 
-                            <div class="comparison-labels">
-                                <div class="comparison-label">原始视频</div>
-                                <div class="comparison-label">处理后</div>
+                                <video
+                                    id="resultVideoOriginal"
+                                    class="comparison-img original absolute inset-0 w-full h-full bg-slate-900 object-contain"
+                                    loop
+                                    preload="auto"
+                                >
+                                    <source
+                                        id="resultVideoSourceOriginal"
+                                        type="video/mp4"
+                                    />
+                                    Your browser does not support the video tag.
+                                </video>
+
+                                <div
+                                    class="comparison-handle absolute left-1/2 top-0 h-full w-10 -translate-x-1/2 cursor-ew-resize z-10 flex items-center justify-center"
+                                    id="videoComparisonHandle"
+                                >
+                                    <div
+                                        class="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-white/90 shadow-[0_0_8px_rgba(0,0,0,0.4)]"
+                                    ></div>
+                                    <div
+                                        class="relative h-9 w-9 rounded-full bg-white shadow-lg border border-slate-200 flex items-center justify-center cursor-ew-resize"
+                                        id="videoComparisonKnob"
+                                    >
+                                        <svg
+                                            class="w-4 h-4 text-slate-400"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10 19l-7-7 7-7m4 14l7-7-7-7"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="comparison-labels absolute top-3 w-full flex justify-between px-3 pointer-events-none z-10"
+                                >
+                                    <div
+                                        class="bg-slate-900/70 px-2.5 py-1 rounded-md text-xs font-medium text-white backdrop-blur-sm"
+                                    >
+                                        Original
+                                    </div>
+                                    <div
+                                        class="bg-slate-900/70 px-2.5 py-1 rounded-md text-xs font-medium text-white backdrop-blur-sm"
+                                    >
+                                        Upscaled
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="result-info">
-                        <strong>文件信息:</strong><br />
-                        原始: <span id="originalVideoSize">-</span> | 处理后:
-                        <span id="resultVideoSize">-</span><br />
-                        后端: <span id="backendVideoInfo">-</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadResult()">
-                        ⬇️ 下载处理后的视频
-                    </button>
-                </div>
+                        <!-- File Info -->
+                        <div class="grid grid-cols-3 gap-3 mb-5 text-center">
+                            <div
+                                class="bg-white rounded-lg px-3 py-3 border border-slate-200"
+                            >
+                                <div class="text-xs text-slate-400 mb-1">
+                                    Original
+                                </div>
+                                <div
+                                    class="text-sm font-medium text-slate-700"
+                                    id="originalVideoSize"
+                                >
+                                    -
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white rounded-lg px-3 py-3 border border-slate-200"
+                            >
+                                <div class="text-xs text-slate-400 mb-1">
+                                    Upscaled
+                                </div>
+                                <div
+                                    class="text-sm font-medium text-slate-700"
+                                    id="resultVideoSize"
+                                >
+                                    -
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white rounded-lg px-3 py-3 border border-slate-200"
+                            >
+                                <div class="text-xs text-slate-400 mb-1">
+                                    Backend
+                                </div>
+                                <div
+                                    class="text-sm font-medium text-slate-700"
+                                    id="backendVideoInfo"
+                                >
+                                    -
+                                </div>
+                            </div>
+                        </div>
 
-                <div id="imageResultInfo" style="display: none">
-                    <div class="result-info">
-                        <strong>文件信息:</strong><br />
-                        原始: <span id="originalSize">-</span> | 处理后:
-                        <span id="resultSize">-</span><br />
-                        后端: <span id="backendInfo">-</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadResult()">
-                        ⬇️ 下载处理后的图像
-                    </button>
-                </div>
-            </div>
-
-            <div id="streamSection" style="margin-top: 30px; display: none">
-                <div class="section-title">实时播放 (URL)</div>
-                <div class="result-info">
-                    将上方输入框中的在线视频 URL 播放到左侧原始视频，并在右侧
-                    Canvas 上以放大分辨率实时绘制画面，通过中间滑块进行对比。<br />
-                    提示：跨域视频如果没有正确的 CORS 头，可能无法绘制到
-                    Canvas。
-                </div>
-                <div
-                    id="streamComparisonViewer"
-                    style="display: block; margin-bottom: 15px"
-                >
-                    <div
-                        class="comparison-container"
-                        id="streamComparisonContainer"
-                    >
-                        <canvas
-                            id="streamUpscaledCanvas"
-                            class="comparison-img enhanced"
-                            style="
-                                display: block;
-                                width: 100%;
-                                height: auto;
-                                border-radius: 6px;
-                                background: #000;
-                            "
-                        ></canvas>
-
-                        <video
-                            id="streamSourceVideo"
-                            class="comparison-img original"
-                            style="
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                border-radius: 6px;
-                                background: #000;
-                            "
-                            controls
-                            muted
-                            preload="auto"
-                        ></video>
-
-                        <div
-                            class="comparison-handle"
-                            id="streamComparisonHandle"
-                        ></div>
-
-                        <div class="comparison-labels">
-                            <div class="comparison-label">原始视频</div>
-                            <div class="comparison-label">实时放大</div>
+                        <!-- Action Buttons -->
+                        <div class="flex gap-3">
+                            <button
+                                class="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800 transition-colors"
+                                onclick="downloadResult()"
+                            >
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                    />
+                                </svg>
+                                Download
+                            </button>
+                            <button
+                                class="flex-1 inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+                                onclick="resetUpscalerUI()"
+                            >
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                                    />
+                                </svg>
+                                Start Over
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full border-t border-slate-200 bg-white">
+            <div
+                class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between text-sm text-slate-500"
+            >
+                <span>Powered by WebGPU / WebGL</span>
+                <span
+                    >Open source on
+                    <a
+                        href="https://github.com/zhw2590582/ArtPlayer"
+                        class="text-slate-700 hover:underline"
+                        >GitHub</a
+                    ></span
+                >
+            </div>
+        </footer>
 
         <script src="upscaler.js"></script>
         <script>
             let currentResultBlob = null;
             let currentOriginalUrl = null;
             let isComparisonDragging = false;
-            let currentMode = "image";
 
-            // 创建一个可配置的 Upscaler 实例
+            // Create a configurable Upscaler instance
             const upscaler = new Upscaler({
                 networkSize: "medium",
                 weightsBaseUrl: "/assets/websr/weights",
@@ -620,25 +488,29 @@
                     applyMaskToElement(originalElement, percentage);
                 }
 
-                handle.addEventListener("mousedown", () => {
+                function startDrag(e) {
+                    e.preventDefault();
                     isComparisonDragging = true;
-                    container.style.cursor = "grabbing";
+                    container.style.cursor = "ew-resize";
+                }
+
+                function stopDrag() {
+                    isComparisonDragging = false;
+                    container.style.cursor = "default";
+                }
+
+                handle.addEventListener("mousedown", startDrag);
+                handle.addEventListener("touchstart", startDrag, {
+                    passive: false,
                 });
 
                 document.addEventListener("mousemove", updatePosition);
-                document.addEventListener("mouseup", () => {
-                    isComparisonDragging = false;
-                    container.style.cursor = "default";
+                document.addEventListener("touchmove", updatePosition, {
+                    passive: false,
                 });
 
-                handle.addEventListener("touchstart", () => {
-                    isComparisonDragging = true;
-                });
-
-                document.addEventListener("touchmove", updatePosition);
-                document.addEventListener("touchend", () => {
-                    isComparisonDragging = false;
-                });
+                document.addEventListener("mouseup", stopDrag);
+                document.addEventListener("touchend", stopDrag);
 
                 container.addEventListener("click", (e) => {
                     const rect = container.getBoundingClientRect();
@@ -655,17 +527,6 @@
 
                 applyMaskToElement(originalElement, 50);
                 handle.style.left = container.offsetWidth / 2 + "px";
-            }
-
-            function initComparisonDrag() {
-                const container = document.getElementById(
-                    "comparisonContainer",
-                );
-                const handle = document.getElementById("comparisonHandle");
-                const originalImg =
-                    document.getElementById("comparisonOriginal");
-
-                setupComparisonDrag(container, handle, originalImg);
             }
 
             function initVideoComparisonDrag() {
@@ -706,292 +567,343 @@
                 enhancedVideo.play().catch(() => {});
             }
 
-            function initStreamComparisonDrag() {
-                const container = document.getElementById(
-                    "streamComparisonContainer",
-                );
-                const handle = document.getElementById(
-                    "streamComparisonHandle",
-                );
-                const originalVideo =
-                    document.getElementById("streamSourceVideo");
-
-                if (!container || !handle || !originalVideo) return;
-
-                setupComparisonDrag(container, handle, originalVideo);
+            function formatDuration(seconds) {
+                if (seconds < 60) return `${Math.floor(seconds)}s`;
+                const m = Math.floor(seconds / 60);
+                const s = Math.floor(seconds % 60);
+                return s > 0 ? `${m}m ${s}s` : `${m}m`;
             }
+
+            let previewVideoUrl = null;
+
+            function showVideoPreview(file) {
+                const placeholder =
+                    document.getElementById("uploadPlaceholder");
+                const previewArea = document.getElementById("videoPreviewArea");
+                const previewVideo =
+                    document.getElementById("videoPreviewPlayer");
+                const fileName = document.getElementById("videoFileName");
+                const metaInfo = document.getElementById("videoMetaInfo");
+                const uploadLabel = document.getElementById("uploadLabel");
+
+                if (!placeholder || !previewArea || !previewVideo) return;
+
+                // Revoke previous URL if exists
+                if (previewVideoUrl) {
+                    URL.revokeObjectURL(previewVideoUrl);
+                }
+
+                // Create new URL for the video
+                previewVideoUrl = URL.createObjectURL(file);
+                previewVideo.src = previewVideoUrl;
+
+                // Show preview area, hide placeholder
+                placeholder.classList.add("hidden");
+                previewArea.classList.remove("hidden");
+
+                // Hide border completely
+                uploadLabel.classList.remove(
+                    "border-dashed",
+                    "border-2",
+                    "border-slate-300",
+                );
+                uploadLabel.classList.add("border-0");
+
+                fileName.textContent = file.name;
+                metaInfo.textContent = "Loading...";
+
+                previewVideo.onloadedmetadata = () => {
+                    const width = previewVideo.videoWidth;
+                    const height = previewVideo.videoHeight;
+                    const duration = previewVideo.duration;
+                    metaInfo.textContent = `${width}×${height} · ${formatDuration(duration)}`;
+                };
+            }
+
+            function resetVideoPreview() {
+                const placeholder =
+                    document.getElementById("uploadPlaceholder");
+                const previewArea = document.getElementById("videoPreviewArea");
+                const previewVideo =
+                    document.getElementById("videoPreviewPlayer");
+                const uploadLabel = document.getElementById("uploadLabel");
+
+                if (placeholder) placeholder.classList.remove("hidden");
+                if (previewArea) previewArea.classList.add("hidden");
+                if (previewVideo) {
+                    previewVideo.pause();
+                    previewVideo.src = "";
+                }
+
+                // Restore dashed border
+                if (uploadLabel) {
+                    uploadLabel.classList.remove("border-0");
+                    uploadLabel.classList.add(
+                        "border-dashed",
+                        "border-2",
+                        "border-slate-300",
+                    );
+                }
+
+                if (previewVideoUrl) {
+                    URL.revokeObjectURL(previewVideoUrl);
+                    previewVideoUrl = null;
+                }
+            }
+
+            // Watch file input, only allow video and control button state
+            (function initFileInputWatcher() {
+                const fileInput = document.getElementById("universalInput");
+                const processBtn = document.getElementById("processBtn");
+                if (!fileInput || !processBtn) return;
+
+                processBtn.disabled = true;
+
+                fileInput.addEventListener("change", async () => {
+                    const file = fileInput.files[0];
+                    // If user cancelled selection, keep previous state
+                    if (!file) return;
+
+                    if (!file.type.startsWith("video/")) {
+                        alert(
+                            "Only video files are supported, please choose again.",
+                        );
+                        fileInput.value = "";
+                        return;
+                    }
+
+                    processBtn.disabled = false;
+                    const progressText =
+                        document.getElementById("progressText");
+                    if (progressText)
+                        progressText.textContent = "Start upscaling";
+
+                    // Show video preview
+                    showVideoPreview(file);
+                });
+            })();
+
+            // Network size toggle buttons (small / medium / large)
+            (function initNetworkToggle() {
+                const toggle = document.getElementById("networkToggle");
+                if (!toggle) return;
+
+                const activeClasses = [
+                    "bg-slate-800",
+                    "text-white",
+                    "shadow-sm",
+                ];
+                const inactiveClasses = ["text-slate-600"];
+
+                toggle.addEventListener("click", (event) => {
+                    const button = event.target.closest("button[data-network]");
+                    if (!button) return;
+
+                    const buttons = toggle.querySelectorAll(
+                        "button[data-network]",
+                    );
+                    buttons.forEach((btn) => {
+                        btn.classList.remove(...activeClasses);
+                        btn.classList.add(...inactiveClasses);
+                    });
+                    button.classList.remove(...inactiveClasses);
+                    button.classList.add(...activeClasses);
+                });
+            })();
+
+            // Drag and drop support
+            (function initDragDrop() {
+                const uploadLabel = document.getElementById("uploadLabel");
+                const fileInput = document.getElementById("universalInput");
+                if (!uploadLabel || !fileInput) return;
+
+                ["dragenter", "dragover", "dragleave", "drop"].forEach(
+                    (eventName) => {
+                        uploadLabel.addEventListener(eventName, (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        });
+                    },
+                );
+
+                ["dragenter", "dragover"].forEach((eventName) => {
+                    uploadLabel.addEventListener(eventName, () => {
+                        uploadLabel.classList.remove(
+                            "from-slate-50",
+                            "to-gray-100",
+                            "border-slate-300",
+                        );
+                        uploadLabel.classList.add(
+                            "from-blue-50",
+                            "to-blue-100",
+                            "border-blue-500",
+                        );
+                    });
+                });
+
+                ["dragleave", "drop"].forEach((eventName) => {
+                    uploadLabel.addEventListener(eventName, () => {
+                        uploadLabel.classList.remove(
+                            "from-blue-50",
+                            "to-blue-100",
+                            "border-blue-500",
+                        );
+                        uploadLabel.classList.add(
+                            "from-slate-50",
+                            "to-gray-100",
+                            "border-slate-300",
+                        );
+                    });
+                });
+
+                uploadLabel.addEventListener("drop", (e) => {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    if (files.length > 0) {
+                        fileInput.files = files;
+                        fileInput.dispatchEvent(new Event("change"));
+                    }
+                });
+            })();
 
             async function handleProcess() {
                 const file = document.getElementById("universalInput").files[0];
-                if (!file) {
-                    alert("请先选择图像或视频");
+                if (!file || !file.type.startsWith("video/")) {
+                    alert("Please choose a valid video file.");
                     return;
                 }
 
-                const isVideo = file.type.startsWith("video/");
-                const isImage = file.type.startsWith("image/");
+                const networkToggle = document.getElementById("networkToggle");
+                const activeBtn = networkToggle?.querySelector(
+                    "button.bg-slate-800[data-network]",
+                );
+                const networkSize = activeBtn?.dataset.network || "medium";
 
-                if (!isVideo && !isImage) {
-                    alert("不支持的文件类型，请选择图像或视频");
-                    return;
-                }
-
-                currentMode = isVideo ? "video" : "image";
-
-                const networkSize =
-                    document.getElementById("networkSize").value;
                 const processBtn = document.getElementById("processBtn");
-                const progressSection =
-                    document.getElementById("progressSection");
                 const resultSection = document.getElementById("resultSection");
                 const videoResultSection =
                     document.getElementById("videoResultSection");
 
                 processBtn.disabled = true;
-                progressSection.classList.add("active");
-                resultSection.classList.remove("active");
-                if (videoResultSection)
-                    videoResultSection.style.display = "none";
+                resultSection.classList.add("hidden");
+                videoResultSection?.classList.add("hidden");
                 document.getElementById("progressText").textContent =
-                    "初始化中...";
+                    "Initializing...";
                 document.getElementById("progressFill").style.width = "0%";
 
                 try {
+                    let lastSeekTime = 0;
+                    const previewVideo =
+                        document.getElementById("videoPreviewPlayer");
+                    const videoDuration = previewVideo?.duration || 0;
+
                     upscaler.onProgress((progress) => {
                         document.getElementById("progressFill").style.width =
                             progress + "%";
                         document.getElementById("progressText").textContent =
-                            `处理中... ${Math.round(progress)}%`;
+                            `Processing... ${Math.round(progress)}%`;
+
+                        // Sync preview video seek, once per second
+                        const now = Date.now();
+                        if (
+                            previewVideo &&
+                            videoDuration &&
+                            now - lastSeekTime >= 1000
+                        ) {
+                            lastSeekTime = now;
+                            const targetTime = (progress / 100) * videoDuration;
+                            previewVideo.currentTime = targetTime;
+                        }
                     });
 
-                    console.log("开始处理:", file.name, "模式:", networkSize);
+                    const resultBlob = await upscaler.upscaleVideo(
+                        file,
+                        networkSize,
+                    );
+                    currentResultBlob = resultBlob;
 
-                    if (currentMode === "video") {
-                        console.log("🎬 处理视频文件...");
-                        const resultBlob = await upscaler.upscaleVideo(
-                            file,
-                            networkSize,
-                        );
-                        currentResultBlob = resultBlob;
+                    const videoUrl = URL.createObjectURL(resultBlob);
+                    const originalVideoUrl =
+                        currentOriginalUrl || URL.createObjectURL(file);
+                    currentOriginalUrl = originalVideoUrl;
 
-                        const videoUrl = URL.createObjectURL(resultBlob);
-                        const originalVideoUrl = URL.createObjectURL(file);
-                        currentOriginalUrl = originalVideoUrl;
+                    const enhancedSource = document.getElementById(
+                        "resultVideoSourceEnhanced",
+                    );
+                    const originalSource = document.getElementById(
+                        "resultVideoSourceOriginal",
+                    );
+                    enhancedSource.src = videoUrl;
+                    enhancedSource.type = "video/mp4";
+                    document.getElementById("resultVideoEnhanced").load();
+                    originalSource.src = originalVideoUrl;
+                    originalSource.type = "video/mp4";
+                    document.getElementById("resultVideoOriginal").load();
 
-                        document.getElementById(
-                            "resultVideoSourceEnhanced",
-                        ).src = videoUrl;
-                        document.getElementById(
-                            "resultVideoSourceEnhanced",
-                        ).type = "video/mp4";
-                        document.getElementById("resultVideoEnhanced").load();
+                    document.getElementById("originalVideoSize").textContent =
+                        formatBytes(file.size);
+                    document.getElementById("resultVideoSize").textContent =
+                        formatBytes(resultBlob.size);
+                    document.getElementById("backendVideoInfo").textContent =
+                        Upscaler.getBackendType();
 
-                        document.getElementById(
-                            "resultVideoSourceOriginal",
-                        ).src = originalVideoUrl;
-                        document.getElementById(
-                            "resultVideoSourceOriginal",
-                        ).type = "video/mp4";
-                        document.getElementById("resultVideoOriginal").load();
-
-                        document.getElementById(
-                            "originalVideoSize",
-                        ).textContent = formatBytes(file.size);
-                        document.getElementById("resultVideoSize").textContent =
-                            formatBytes(resultBlob.size);
-                        document.getElementById(
-                            "backendVideoInfo",
-                        ).textContent = Upscaler.getBackendType();
-
-                        progressSection.classList.remove("active");
-                        resultSection.classList.add("active");
-                        if (videoResultSection) {
-                            videoResultSection.style.display = "block";
-                            setTimeout(() => {
-                                initVideoComparisonDrag();
-                                console.log("✓ 视频对比拖动已初始化");
-                            }, 500);
-                        }
-
-                        console.log("✓ 视频处理完成！");
-                    } else {
-                        console.log("📷 处理图像文件...");
-                        currentOriginalUrl = URL.createObjectURL(file);
-
-                        const resultBlob = await upscaler.upscaleImage(
-                            file,
-                            networkSize,
-                        );
-                        currentResultBlob = resultBlob;
-
-                        const previewUrl = URL.createObjectURL(resultBlob);
-
-                        const enhancedImg =
-                            document.getElementById("comparisonEnhanced");
-                        const originalImg =
-                            document.getElementById("comparisonOriginal");
-
-                        if (originalImg) {
-                            originalImg.onload = () => {
-                                console.log(
-                                    "[Image loaded] Initializing comparison drag",
-                                );
-                                initComparisonDrag();
-                            };
-                        }
-
-                        if (enhancedImg) enhancedImg.src = previewUrl;
-                        if (originalImg) originalImg.src = currentOriginalUrl;
-
-                        document.getElementById("originalSize").textContent =
-                            formatBytes(file.size);
-                        document.getElementById("resultSize").textContent =
-                            formatBytes(resultBlob.size);
-                        document.getElementById("backendInfo").textContent =
-                            Upscaler.getBackendType();
-
-                        progressSection.classList.remove("active");
-                        resultSection.classList.add("active");
-                        const imageResultInfo =
-                            document.getElementById("imageResultInfo");
-                        if (imageResultInfo)
-                            imageResultInfo.style.display = "block";
-                        console.log("✓ 图像处理完成！");
-                    }
+                    resultSection.classList.remove("hidden");
+                    videoResultSection?.classList.remove("hidden");
+                    setTimeout(initVideoComparisonDrag, 500);
                 } catch (error) {
-                    console.error("✗ 处理错误:", error);
-                    alert("处理失败:\n" + error.message);
-                    progressSection.classList.remove("active");
+                    console.error("Upscaling error:", error);
+                    alert("Upscaling failed:\n" + error.message);
                 } finally {
                     processBtn.disabled = false;
                 }
             }
 
             function downloadResult() {
-                if (!currentResultBlob) {
-                    alert("没有可下载的结果");
-                    return;
-                }
-
-                const url = URL.createObjectURL(currentResultBlob);
-                const link = document.createElement("a");
-                link.href = url;
-                link.download = `upscaled_${Date.now()}.${currentMode === "video" ? "mp4" : "png"}`;
-                link.click();
-                URL.revokeObjectURL(url);
+                if (!currentResultBlob) return alert("No result available.");
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(currentResultBlob);
+                a.download = `upscaled_${Date.now()}.mp4`;
+                a.click();
+                URL.revokeObjectURL(a.href);
             }
 
             function formatBytes(bytes) {
-                if (bytes === 0) return "0 Bytes";
-                const k = 1024;
-                const sizes = ["Bytes", "KB", "MB", "GB"];
+                if (!bytes) return "0 B";
+                const k = 1024,
+                    sizes = ["B", "KB", "MB", "GB"];
                 const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return (
-                    Math.round((bytes / Math.pow(k, i)) * 100) / 100 +
-                    " " +
-                    sizes[i]
-                );
+                return (bytes / Math.pow(k, i)).toFixed(1) + " " + sizes[i];
             }
 
-            async function handlePlayUrl() {
-                const urlInput = document.getElementById("videoUrlInput");
-                const url = urlInput.value.trim();
-                if (!url) {
-                    alert("请先输入视频 URL");
-                    return;
-                }
+            function resetUpscalerUI() {
+                document.getElementById("universalInput").value = "";
+                currentResultBlob = null;
+                if (currentOriginalUrl) URL.revokeObjectURL(currentOriginalUrl);
+                currentOriginalUrl = null;
 
-                console.log("[URL] play clicked", url);
+                document.getElementById("processBtn").disabled = true;
+                document.getElementById("progressFill").style.width = "0%";
+                document.getElementById("progressText").textContent =
+                    "Select a video to start";
+                document
+                    .getElementById("resultSection")
+                    .classList.add("hidden");
+                document
+                    .getElementById("videoResultSection")
+                    ?.classList.add("hidden");
 
-                if (!Upscaler.isSupported()) {
-                    alert(
-                        "当前环境不支持 Upscaler（需要 Worker + OffscreenCanvas）",
-                    );
-                    return;
-                }
-
-                const streamSection = document.getElementById("streamSection");
-                const videoEl = document.getElementById("streamSourceVideo");
-                const canvasEl = document.getElementById(
-                    "streamUpscaledCanvas",
-                );
-                const networkSize =
-                    document.getElementById("networkSize").value;
-
-                try {
-                    if (typeof upscaler.stopRealtimeUpscale === "function") {
-                        upscaler.stopRealtimeUpscale();
+                ["resultVideoEnhanced", "resultVideoOriginal"].forEach((id) => {
+                    const v = document.getElementById(id);
+                    if (v) {
+                        v.pause();
+                        v.removeAttribute("src");
+                        v.load();
                     }
-
-                    videoEl.pause();
-                    videoEl.removeAttribute("src");
-                    videoEl.load();
-
-                    // 不强制 crossOrigin，避免同源资源因缺少 CORS 头加载失败
-                    videoEl.src = url;
-
-                    streamSection.style.display = "block";
-
-                    await new Promise((resolve, reject) => {
-                        if (videoEl.readyState >= 1) {
-                            console.log("[URL] video metadata already ready", {
-                                width: videoEl.videoWidth,
-                                height: videoEl.videoHeight,
-                                readyState: videoEl.readyState,
-                            });
-                            resolve();
-                            return;
-                        }
-                        const onLoaded = () => {
-                            cleanup();
-                            console.log("[URL] loadedmetadata", {
-                                width: videoEl.videoWidth,
-                                height: videoEl.videoHeight,
-                                readyState: videoEl.readyState,
-                            });
-                            resolve();
-                        };
-                        const onError = () => {
-                            cleanup();
-                            console.error("[URL] video error event");
-                            reject(new Error("无法加载视频元数据"));
-                        };
-                        const cleanup = () => {
-                            videoEl.removeEventListener(
-                                "loadedmetadata",
-                                onLoaded,
-                            );
-                            videoEl.removeEventListener("error", onError);
-                        };
-                        videoEl.addEventListener("loadedmetadata", onLoaded);
-                        videoEl.addEventListener("error", onError);
-                    });
-
-                    initStreamComparisonDrag();
-
-                    await upscaler.startRealtimeUpscale(
-                        videoEl,
-                        canvasEl,
-                        networkSize,
-                    );
-
-                    console.log(
-                        "[URL] realtime upscaler started, try play video",
-                    );
-
-                    await videoEl.play().catch(() => {});
-                } catch (err) {
-                    console.error("URL 实时播放失败:", err);
-                    alert("无法播放或处理该视频：\n" + err.message);
-                }
+                });
+                resetVideoPreview();
             }
 
-            console.log("✓ Upscaler API 已就绪！");
-            console.log(
-                "支持的模式:",
-                upscaler.getSupportedNetworks().join(", "),
-            );
-            console.log("后端类型:", Upscaler.getBackendType());
+            console.log("Upscaler ready:", Upscaler.getBackendType());
         </script>
     </body>
 </html>
