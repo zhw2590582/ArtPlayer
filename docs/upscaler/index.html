@@ -977,6 +977,9 @@
                     alert("Upscaling failed:\n" + error.message);
                 } finally {
                     processBtn.disabled = false;
+                    document.getElementById("progressFill").style.width = "0%";
+                    document.getElementById("progressText").textContent =
+                        "Start upscaling";
                 }
             }
 
