@@ -41,6 +41,7 @@
             name="twitter:description"
             content="Upscale videos with AI super resolution directly in your browser. Free, private, no upload needed."
         />
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon" />
         <script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
@@ -290,6 +291,7 @@
                                     id="resultVideoOriginal"
                                     class="comparison-img original absolute inset-0 w-full h-full bg-slate-900 object-contain"
                                     loop
+                                    muted
                                     preload="auto"
                                 >
                                     <source
@@ -454,6 +456,7 @@
             let currentResultBlob = null;
             let currentOriginalUrl = null;
             let isComparisonDragging = false;
+            let comparisonCleanup = null;
 
             // Create a configurable Upscaler instance
             const upscaler = new Upscaler({
@@ -475,6 +478,10 @@
             }
 
             function setupComparisonDrag(container, handle, originalElement) {
+                // Return cleanup function to remove listeners
+                const abortController = new AbortController();
+                const { signal } = abortController;
+
                 function updatePosition(e) {
                     if (!isComparisonDragging) return;
 
@@ -505,18 +512,20 @@
                     container.style.cursor = "default";
                 }
 
-                handle.addEventListener("mousedown", startDrag);
+                handle.addEventListener("mousedown", startDrag, { signal });
                 handle.addEventListener("touchstart", startDrag, {
                     passive: false,
+                    signal,
                 });
 
-                document.addEventListener("mousemove", updatePosition);
+                document.addEventListener("mousemove", updatePosition, { signal });
                 document.addEventListener("touchmove", updatePosition, {
                     passive: false,
+                    signal,
                 });
 
-                document.addEventListener("mouseup", stopDrag);
-                document.addEventListener("touchend", stopDrag);
+                document.addEventListener("mouseup", stopDrag, { signal });
+                document.addEventListener("touchend", stopDrag, { signal });
 
                 container.addEventListener("click", (e) => {
                     const rect = container.getBoundingClientRect();
@@ -529,13 +538,21 @@
 
                     handle.style.left = x + "px";
                     applyMaskToElement(originalElement, percentage);
-                });
+                }, { signal });
 
                 applyMaskToElement(originalElement, 50);
                 handle.style.left = container.offsetWidth / 2 + "px";
+
+                return () => abortController.abort();
             }
 
             function initVideoComparisonDrag() {
+                // Cleanup previous listeners
+                if (comparisonCleanup) {
+                    comparisonCleanup();
+                    comparisonCleanup = null;
+                }
+
                 const container = document.getElementById(
                     "videoComparisonContainer",
                 );
@@ -567,7 +584,7 @@
                     originalVideo.currentTime = enhancedVideo.currentTime;
                 });
 
-                setupComparisonDrag(container, handle, originalVideo);
+                comparisonCleanup = setupComparisonDrag(container, handle, originalVideo);
 
                 enhancedVideo.autoplay = true;
                 enhancedVideo.play().catch(() => {});
@@ -855,7 +872,17 @@
 
                     resultSection.classList.remove("hidden");
                     videoResultSection?.classList.remove("hidden");
-                    setTimeout(initVideoComparisonDrag, 500);
+
+                    // Scroll to result section
+                    resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
+
+                    // Initialize comparison drag after video loads
+                    const enhancedVideo = document.getElementById("resultVideoEnhanced");
+                    if (enhancedVideo.readyState >= 2) {
+                        initVideoComparisonDrag();
+                    } else {
+                        enhancedVideo.addEventListener("loadeddata", initVideoComparisonDrag, { once: true });
+                    }
                 } catch (error) {
                     console.error("Upscaling error:", error);
                     alert("Upscaling failed:\n" + error.message);
@@ -882,6 +909,12 @@
             }
 
             function resetUpscalerUI() {
+                // Cleanup comparison listeners
+                if (comparisonCleanup) {
+                    comparisonCleanup();
+                    comparisonCleanup = null;
+                }
+
                 document.getElementById("universalInput").value = "";
                 currentResultBlob = null;
                 if (currentOriginalUrl) URL.revokeObjectURL(currentOriginalUrl);
