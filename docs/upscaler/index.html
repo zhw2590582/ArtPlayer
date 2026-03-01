@@ -494,6 +494,7 @@
             let currentOriginalUrl = null;
             let isComparisonDragging = false;
             let comparisonCleanup = null;
+            let currentVideoFile = null;
 
             // Create a configurable Upscaler instance
             const upscaler = new Upscaler({
@@ -789,6 +790,9 @@
                     if (progressText)
                         progressText.textContent = "Start upscaling";
 
+                    // Save file reference
+                    currentVideoFile = file;
+
                     // Show video preview
                     showVideoPreview(file);
                 });
@@ -878,7 +882,7 @@
             })();
 
             async function handleProcess() {
-                const file = document.getElementById("universalInput").files[0];
+                const file = currentVideoFile;
                 if (!file || !file.type.startsWith("video/")) {
                     alert("Please choose a valid video file.");
                     return;
@@ -1017,6 +1021,7 @@
 
                 document.getElementById("universalInput").value = "";
                 currentResultBlob = null;
+                currentVideoFile = null;
                 if (currentOriginalUrl) URL.revokeObjectURL(currentOriginalUrl);
                 currentOriginalUrl = null;
 
