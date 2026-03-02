@@ -1694,42 +1694,42 @@ self.onmessage = async (event) => {
           );
         }
         function j(e, t = {}) {
-          try {
-            if (!R)
-              return void console.warn(
-                "[Tracking] Not initialized - skipping event:",
-                e,
-              );
-            if ("error" === e && t.error_stage) {
-              const e = t.error_stage;
-              if (A.has(e))
-                return void console.log(
-                  "[Tracking] Skipping duplicate error for stage:",
-                  e,
-                );
-              A.add(e);
-            }
-            const n = {
-              ...S,
-              event_type: e,
-              timestamp: new Date().toISOString(),
-              ...t,
-            };
-            (fetch(
-              "https://axo75x5aol.execute-api.us-east-2.amazonaws.com/default/log",
-              {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(n),
-                keepalive: !0,
-              },
-            ).catch((t) => {
-              console.warn("[Tracking] Failed to send event:", e, t);
-            }),
-              console.log("[Tracking] Event logged:", e));
-          } catch (e) {
-            console.warn("[Tracking] Unexpected error in logEvent:", e);
-          }
+          // try {
+          //   if (!R)
+          //     return void console.warn(
+          //       "[Tracking] Not initialized - skipping event:",
+          //       e,
+          //     );
+          //   if ("error" === e && t.error_stage) {
+          //     const e = t.error_stage;
+          //     if (A.has(e))
+          //       return void console.log(
+          //         "[Tracking] Skipping duplicate error for stage:",
+          //         e,
+          //       );
+          //     A.add(e);
+          //   }
+          //   const n = {
+          //     ...S,
+          //     event_type: e,
+          //     timestamp: new Date().toISOString(),
+          //     ...t,
+          //   };
+          //   (fetch(
+          //     "https://axo75x5aol.execute-api.us-east-2.amazonaws.com/default/log",
+          //     {
+          //       method: "POST",
+          //       headers: { "Content-Type": "application/json" },
+          //       body: JSON.stringify(n),
+          //       keepalive: !0,
+          //     },
+          //   ).catch((t) => {
+          //     console.warn("[Tracking] Failed to send event:", e, t);
+          //   }),
+          //     console.log("[Tracking] Event logged:", e));
+          // } catch (e) {
+          //   console.warn("[Tracking] Unexpected error in logEvent:", e);
+          // }
         }
         const G = async function (e) {
             const {
