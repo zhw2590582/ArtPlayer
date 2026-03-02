@@ -1571,14 +1571,16 @@ function playbackRate(option) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>function(option) {
+        const url = (0, _compatibility.isBrowser) ? location.href : "";
         return {
             ...option,
-            html: `<a href="https://artplayer.org" target="_blank" style="width:100%;">ArtPlayer ${0, _packageJson.version}</a>`
+            html: `<a href="https://artplayer.org?ref=${encodeURIComponent(url)}" target="_blank" style="width:100%;">ArtPlayer ${0, _packageJson.version}</a>`
         };
     });
 var _packageJson = require("../../package.json");
+var _compatibility = require("../utils/compatibility");
 
-},{"../../package.json":"3r4tp","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"cNVpy":[function(require,module,exports,__globalThis) {
+},{"../../package.json":"3r4tp","../utils/compatibility":"gWwQj","@parcel/transformer-js/src/esmodule-helpers.js":"8oCsH"}],"cNVpy":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
