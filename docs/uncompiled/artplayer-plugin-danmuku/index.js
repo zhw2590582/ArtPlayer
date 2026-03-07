@@ -1,4 +1,4 @@
-var ArtplayerPluginDanmuku = (function() {
+var artplayerPluginDanmuku = (function() {
   "use strict";
   function getMode(key) {
     switch (key) {
@@ -1529,7 +1529,7 @@ var ArtplayerPluginDanmuku = (function() {
     }
     $style2.textContent = style;
   }
-  function artplayerPluginDanmuku(option) {
+  function artplayerPluginDanmuku2(option) {
     return (art) => {
       const danmuku = new Danmuku(art, option);
       const setting = new Setting(art, danmuku);
@@ -1557,9 +1557,6 @@ var ArtplayerPluginDanmuku = (function() {
       };
     };
   }
-  artplayerPluginDanmuku.icons = Setting.icons;
-  if (typeof window !== "undefined") {
-    window.artplayerPluginDanmuku = artplayerPluginDanmuku;
-  }
-  return artplayerPluginDanmuku;
+  artplayerPluginDanmuku2.icons = Setting.icons;
+  return artplayerPluginDanmuku2;
 })();
