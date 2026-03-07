@@ -48,66 +48,6 @@ const normalizeRotation = (rotation) => {
 const last = (arr) => {
   return arr && arr[arr.length - 1];
 };
-class Bitstream {
-  constructor(bytes) {
-    this.bytes = bytes;
-    this.pos = 0;
-  }
-  seekToByte(byteOffset) {
-    this.pos = 8 * byteOffset;
-  }
-  readBit() {
-    const byteIndex = Math.floor(this.pos / 8);
-    const byte = this.bytes[byteIndex] ?? 0;
-    const bitIndex = 7 - (this.pos & 7);
-    const bit = (byte & 1 << bitIndex) >> bitIndex;
-    this.pos++;
-    return bit;
-  }
-  readBits(n) {
-    if (n === 1) {
-      return this.readBit();
-    }
-    let result = 0;
-    for (let i = 0; i < n; i++) {
-      result <<= 1;
-      result |= this.readBit();
-    }
-    return result;
-  }
-  writeBits(n, value) {
-    const end = this.pos + n;
-    for (let i = this.pos; i < end; i++) {
-      const byteIndex = Math.floor(i / 8);
-      let byte = this.bytes[byteIndex];
-      const bitIndex = 7 - (i & 7);
-      byte &= ~(1 << bitIndex);
-      byte |= (value & 1 << end - i - 1) >> end - i - 1 << bitIndex;
-      this.bytes[byteIndex] = byte;
-    }
-    this.pos = end;
-  }
-  readAlignedByte() {
-    if (this.pos % 8 !== 0) {
-      throw new Error("Bitstream is not byte-aligned.");
-    }
-    const byteIndex = this.pos / 8;
-    const byte = this.bytes[byteIndex] ?? 0;
-    this.pos += 8;
-    return byte;
-  }
-  skipBits(n) {
-    this.pos += n;
-  }
-  getBitsLeft() {
-    return this.bytes.length * 8 - this.pos;
-  }
-  clone() {
-    const clone = new Bitstream(this.bytes);
-    clone.pos = this.pos;
-    return clone;
-  }
-}
 const readExpGolomb = (bitstream) => {
   let leadingZeroBits = 0;
   while (bitstream.readBits(1) === 0 && leadingZeroBits < 32) {
@@ -192,14 +132,24 @@ const isAllowSharedBufferSource = (x) => {
 class AsyncMutex {
   constructor() {
     this.currentPromise = Promise.resolve();
+    this.pending = 0;
   }
   async acquire() {
     let resolver;
     const nextPromise = new Promise((resolve) => {
-      resolver = resolve;
+      let resolved = false;
+      resolver = () => {
+        if (resolved) {
+          return;
+        }
+        resolve();
+        this.pending--;
+        resolved = true;
+      };
     });
     const currentPromiseAlias = this.currentPromise;
     this.currentPromise = nextPromise;
+    this.pending++;
     await currentPromiseAlias;
     return resolver;
   }
@@ -351,6 +301,9 @@ const roundIfAlmostInteger = (value) => {
 const roundToMultiple = (value, multiple) => {
   return Math.round(value / multiple) * multiple;
 };
+const floorToMultiple = (value, multiple) => {
+  return Math.floor(value / multiple) * multiple;
+};
 const ilog = (x) => {
   let ret = 0;
   while (x) {
@@ -488,6 +441,38 @@ const polyfillSymbolDispose = () => {
 const isNumber = (x) => {
   return typeof x === "number" && !Number.isNaN(x);
 };
+const simplifyRational = (rational) => {
+  assert(rational.den !== 0);
+  let a = Math.abs(rational.num);
+  let b = Math.abs(rational.den);
+  while (b !== 0) {
+    const t = a % b;
+    a = b;
+    b = t;
+  }
+  const gcd = a || 1;
+  return {
+    num: rational.num / gcd,
+    den: rational.den / gcd
+  };
+};
+const validateRectangle = (rect, propertyPath) => {
+  if (typeof rect !== "object" || !rect) {
+    throw new TypeError(`${propertyPath} must be an object.`);
+  }
+  if (!Number.isInteger(rect.left) || rect.left < 0) {
+    throw new TypeError(`${propertyPath}.left must be a non-negative integer.`);
+  }
+  if (!Number.isInteger(rect.top) || rect.top < 0) {
+    throw new TypeError(`${propertyPath}.top must be a non-negative integer.`);
+  }
+  if (!Number.isInteger(rect.width) || rect.width < 0) {
+    throw new TypeError(`${propertyPath}.width must be a non-negative integer.`);
+  }
+  if (!Number.isInteger(rect.height) || rect.height < 0) {
+    throw new TypeError(`${propertyPath}.height must be a non-negative integer.`);
+  }
+};
 class RichImageData {
   /** Creates a new {@link RichImageData}. */
   constructor(data, mimeType) {
@@ -530,6 +515,113 @@ const DEFAULT_TRACK_DISPOSITION = {
   hearingImpaired: false,
   visuallyImpaired: false
 };
+class Bitstream {
+  constructor(bytes) {
+    this.bytes = bytes;
+    this.pos = 0;
+  }
+  seekToByte(byteOffset) {
+    this.pos = 8 * byteOffset;
+  }
+  readBit() {
+    const byteIndex = Math.floor(this.pos / 8);
+    const byte = this.bytes[byteIndex] ?? 0;
+    const bitIndex = 7 - (this.pos & 7);
+    const bit = (byte & 1 << bitIndex) >> bitIndex;
+    this.pos++;
+    return bit;
+  }
+  readBits(n) {
+    if (n === 1) {
+      return this.readBit();
+    }
+    let result = 0;
+    for (let i = 0; i < n; i++) {
+      result <<= 1;
+      result |= this.readBit();
+    }
+    return result;
+  }
+  writeBits(n, value) {
+    const end = this.pos + n;
+    for (let i = this.pos; i < end; i++) {
+      const byteIndex = Math.floor(i / 8);
+      let byte = this.bytes[byteIndex];
+      const bitIndex = 7 - (i & 7);
+      byte &= ~(1 << bitIndex);
+      byte |= (value & 1 << end - i - 1) >> end - i - 1 << bitIndex;
+      this.bytes[byteIndex] = byte;
+    }
+    this.pos = end;
+  }
+  readAlignedByte() {
+    if (this.pos % 8 !== 0) {
+      throw new Error("Bitstream is not byte-aligned.");
+    }
+    const byteIndex = this.pos / 8;
+    const byte = this.bytes[byteIndex] ?? 0;
+    this.pos += 8;
+    return byte;
+  }
+  skipBits(n) {
+    this.pos += n;
+  }
+  getBitsLeft() {
+    return this.bytes.length * 8 - this.pos;
+  }
+  clone() {
+    const clone = new Bitstream(this.bytes);
+    clone.pos = this.pos;
+    return clone;
+  }
+}
+const aacFrequencyTable = [
+  96e3,
+  88200,
+  64e3,
+  48e3,
+  44100,
+  32e3,
+  24e3,
+  22050,
+  16e3,
+  12e3,
+  11025,
+  8e3,
+  7350
+];
+const aacChannelMap = [-1, 1, 2, 3, 4, 5, 6, 8];
+const parseAacAudioSpecificConfig = (bytes) => {
+  if (!bytes || bytes.byteLength < 2) {
+    throw new TypeError("AAC description must be at least 2 bytes long.");
+  }
+  const bitstream = new Bitstream(bytes);
+  let objectType = bitstream.readBits(5);
+  if (objectType === 31) {
+    objectType = 32 + bitstream.readBits(6);
+  }
+  const frequencyIndex = bitstream.readBits(4);
+  let sampleRate = null;
+  if (frequencyIndex === 15) {
+    sampleRate = bitstream.readBits(24);
+  } else {
+    if (frequencyIndex < aacFrequencyTable.length) {
+      sampleRate = aacFrequencyTable[frequencyIndex];
+    }
+  }
+  const channelConfiguration = bitstream.readBits(4);
+  let numberOfChannels = null;
+  if (channelConfiguration >= 1 && channelConfiguration <= 7) {
+    numberOfChannels = aacChannelMap[channelConfiguration];
+  }
+  return {
+    objectType,
+    frequencyIndex,
+    sampleRate,
+    channelConfiguration,
+    numberOfChannels
+  };
+};
 const PCM_AUDIO_CODECS = [
   "pcm-s16",
   // We don't prefix 'le' so we're compatible with the WebCodecs-registered PCM codec strings
@@ -546,6 +638,46 @@ const PCM_AUDIO_CODECS = [
   "pcm-s8",
   "ulaw",
   "alaw"
+];
+const AVC_LEVEL_TABLE = [
+  { maxMacroblocks: 99, maxBitrate: 64e3, maxDpbMbs: 396, level: 10 },
+  // Level 1
+  { maxMacroblocks: 396, maxBitrate: 192e3, maxDpbMbs: 900, level: 11 },
+  // Level 1.1
+  { maxMacroblocks: 396, maxBitrate: 384e3, maxDpbMbs: 2376, level: 12 },
+  // Level 1.2
+  { maxMacroblocks: 396, maxBitrate: 768e3, maxDpbMbs: 2376, level: 13 },
+  // Level 1.3
+  { maxMacroblocks: 396, maxBitrate: 2e6, maxDpbMbs: 2376, level: 20 },
+  // Level 2
+  { maxMacroblocks: 792, maxBitrate: 4e6, maxDpbMbs: 4752, level: 21 },
+  // Level 2.1
+  { maxMacroblocks: 1620, maxBitrate: 4e6, maxDpbMbs: 8100, level: 22 },
+  // Level 2.2
+  { maxMacroblocks: 1620, maxBitrate: 1e7, maxDpbMbs: 8100, level: 30 },
+  // Level 3
+  { maxMacroblocks: 3600, maxBitrate: 14e6, maxDpbMbs: 18e3, level: 31 },
+  // Level 3.1
+  { maxMacroblocks: 5120, maxBitrate: 2e7, maxDpbMbs: 20480, level: 32 },
+  // Level 3.2
+  { maxMacroblocks: 8192, maxBitrate: 2e7, maxDpbMbs: 32768, level: 40 },
+  // Level 4
+  { maxMacroblocks: 8192, maxBitrate: 5e7, maxDpbMbs: 32768, level: 41 },
+  // Level 4.1
+  { maxMacroblocks: 8704, maxBitrate: 5e7, maxDpbMbs: 34816, level: 42 },
+  // Level 4.2
+  { maxMacroblocks: 22080, maxBitrate: 135e6, maxDpbMbs: 110400, level: 50 },
+  // Level 5
+  { maxMacroblocks: 36864, maxBitrate: 24e7, maxDpbMbs: 184320, level: 51 },
+  // Level 5.1
+  { maxMacroblocks: 36864, maxBitrate: 24e7, maxDpbMbs: 184320, level: 52 },
+  // Level 5.2
+  { maxMacroblocks: 139264, maxBitrate: 24e7, maxDpbMbs: 696320, level: 60 },
+  // Level 6
+  { maxMacroblocks: 139264, maxBitrate: 48e7, maxDpbMbs: 696320, level: 61 },
+  // Level 6.1
+  { maxMacroblocks: 139264, maxBitrate: 8e8, maxDpbMbs: 696320, level: 62 }
+  // Level 6.2
 ];
 const VP9_LEVEL_TABLE = [
   { maxPictureSize: 36864, maxBitrate: 2e5, level: 10 },
@@ -712,8 +844,14 @@ const extractAudioCodecString = (trackInfo) => {
     if (aacCodecInfo.isMpeg2) {
       return "mp4a.67";
     } else {
-      const audioSpecificConfig = parseAacAudioSpecificConfig(codecDescription);
-      return `mp4a.40.${audioSpecificConfig.objectType}`;
+      let objectType;
+      if (aacCodecInfo.objectType !== null) {
+        objectType = aacCodecInfo.objectType;
+      } else {
+        const audioSpecificConfig = parseAacAudioSpecificConfig(codecDescription);
+        objectType = audioSpecificConfig.objectType;
+      }
+      return `mp4a.40.${objectType}`;
     }
   } else if (codec === "mp3") {
     return "mp3";
@@ -723,57 +861,14 @@ const extractAudioCodecString = (trackInfo) => {
     return "vorbis";
   } else if (codec === "flac") {
     return "flac";
+  } else if (codec === "ac3") {
+    return "ac-3";
+  } else if (codec === "eac3") {
+    return "ec-3";
   } else if (codec && PCM_AUDIO_CODECS.includes(codec)) {
     return codec;
   }
   throw new TypeError(`Unhandled codec '${codec}'.`);
-};
-const aacFrequencyTable = [
-  96e3,
-  88200,
-  64e3,
-  48e3,
-  44100,
-  32e3,
-  24e3,
-  22050,
-  16e3,
-  12e3,
-  11025,
-  8e3,
-  7350
-];
-const aacChannelMap = [-1, 1, 2, 3, 4, 5, 6, 8];
-const parseAacAudioSpecificConfig = (bytes) => {
-  if (!bytes || bytes.byteLength < 2) {
-    throw new TypeError("AAC description must be at least 2 bytes long.");
-  }
-  const bitstream = new Bitstream(bytes);
-  let objectType = bitstream.readBits(5);
-  if (objectType === 31) {
-    objectType = 32 + bitstream.readBits(6);
-  }
-  const frequencyIndex = bitstream.readBits(4);
-  let sampleRate = null;
-  if (frequencyIndex === 15) {
-    sampleRate = bitstream.readBits(24);
-  } else {
-    if (frequencyIndex < aacFrequencyTable.length) {
-      sampleRate = aacFrequencyTable[frequencyIndex];
-    }
-  }
-  const channelConfiguration = bitstream.readBits(4);
-  let numberOfChannels = null;
-  if (channelConfiguration >= 1 && channelConfiguration <= 7) {
-    numberOfChannels = aacChannelMap[channelConfiguration];
-  }
-  return {
-    objectType,
-    frequencyIndex,
-    sampleRate,
-    channelConfiguration,
-    numberOfChannels
-  };
 };
 const OPUS_SAMPLE_RATE = 48e3;
 const PCM_CODEC_REGEX = /^pcm-([usf])(\d+)+(be)?$/;
@@ -799,12 +894,262 @@ const parsePcmCodec = (codec) => {
   const silentValue = codec === "pcm-u8" ? 2 ** 7 : 0;
   return { dataType, sampleSize, littleEndian, silentValue };
 };
+const FRAME_HEADER_SIZE = 4;
+const SAMPLING_RATES = [44100, 48e3, 32e3];
+const KILOBIT_RATES = [
+  // lowSamplingFrequency === 0
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  // layer = 0
+  -1,
+  32,
+  40,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  160,
+  192,
+  224,
+  256,
+  320,
+  -1,
+  // layer 1
+  -1,
+  32,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  160,
+  192,
+  224,
+  256,
+  320,
+  384,
+  -1,
+  // layer = 2
+  -1,
+  32,
+  64,
+  96,
+  128,
+  160,
+  192,
+  224,
+  256,
+  288,
+  320,
+  352,
+  384,
+  416,
+  448,
+  -1,
+  // layer = 3
+  // lowSamplingFrequency === 1
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  // layer = 0
+  -1,
+  8,
+  16,
+  24,
+  32,
+  40,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  144,
+  160,
+  -1,
+  // layer = 1
+  -1,
+  8,
+  16,
+  24,
+  32,
+  40,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  144,
+  160,
+  -1,
+  // layer = 2
+  -1,
+  32,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  144,
+  160,
+  176,
+  192,
+  224,
+  256,
+  -1
+  // layer = 3
+];
+const XING = 1483304551;
+const INFO = 1231971951;
+const computeMp3FrameSize = (lowSamplingFrequency, layer, bitrate, sampleRate, padding) => {
+  if (layer === 0) {
+    return 0;
+  } else if (layer === 1) {
+    return Math.floor(144 * bitrate / (sampleRate << lowSamplingFrequency)) + padding;
+  } else if (layer === 2) {
+    return Math.floor(144 * bitrate / sampleRate) + padding;
+  } else {
+    return (Math.floor(12 * bitrate / sampleRate) + padding) * 4;
+  }
+};
+const getXingOffset = (mpegVersionId, channel) => {
+  return mpegVersionId === 3 ? channel === 3 ? 21 : 36 : channel === 3 ? 13 : 21;
+};
+const readMp3FrameHeader = (word, remainingBytes) => {
+  const firstByte = word >>> 24;
+  const secondByte = word >>> 16 & 255;
+  const thirdByte = word >>> 8 & 255;
+  const fourthByte = word & 255;
+  if (firstByte !== 255 && secondByte !== 255 && thirdByte !== 255 && fourthByte !== 255) {
+    return {
+      header: null,
+      bytesAdvanced: 4
+    };
+  }
+  if (firstByte !== 255) {
+    return { header: null, bytesAdvanced: 1 };
+  }
+  if ((secondByte & 224) !== 224) {
+    return { header: null, bytesAdvanced: 1 };
+  }
+  let lowSamplingFrequency = 0;
+  let mpeg25 = 0;
+  if (secondByte & 1 << 4) {
+    lowSamplingFrequency = secondByte & 1 << 3 ? 0 : 1;
+  } else {
+    lowSamplingFrequency = 1;
+    mpeg25 = 1;
+  }
+  const mpegVersionId = secondByte >> 3 & 3;
+  const layer = secondByte >> 1 & 3;
+  const bitrateIndex = thirdByte >> 4 & 15;
+  const frequencyIndex = (thirdByte >> 2 & 3) % 3;
+  const padding = thirdByte >> 1 & 1;
+  const channel = fourthByte >> 6 & 3;
+  const modeExtension = fourthByte >> 4 & 3;
+  const copyright = fourthByte >> 3 & 1;
+  const original = fourthByte >> 2 & 1;
+  const emphasis = fourthByte & 3;
+  const kilobitRate = KILOBIT_RATES[lowSamplingFrequency * 16 * 4 + layer * 16 + bitrateIndex];
+  if (kilobitRate === -1) {
+    return { header: null, bytesAdvanced: 1 };
+  }
+  const bitrate = kilobitRate * 1e3;
+  const sampleRate = SAMPLING_RATES[frequencyIndex] >> lowSamplingFrequency + mpeg25;
+  const frameLength = computeMp3FrameSize(lowSamplingFrequency, layer, bitrate, sampleRate, padding);
+  if (remainingBytes !== null && remainingBytes < frameLength) {
+    return { header: null, bytesAdvanced: 1 };
+  }
+  let audioSamplesInFrame;
+  if (mpegVersionId === 3) {
+    audioSamplesInFrame = layer === 3 ? 384 : 1152;
+  } else {
+    if (layer === 3) {
+      audioSamplesInFrame = 384;
+    } else if (layer === 2) {
+      audioSamplesInFrame = 1152;
+    } else {
+      audioSamplesInFrame = 576;
+    }
+  }
+  return {
+    header: {
+      totalSize: frameLength,
+      mpegVersionId,
+      layer,
+      bitrate,
+      frequencyIndex,
+      sampleRate,
+      channel,
+      modeExtension,
+      copyright,
+      original,
+      emphasis,
+      audioSamplesInFrame
+    },
+    bytesAdvanced: 1
+  };
+};
+const decodeSynchsafe = (synchsafed) => {
+  let mask = 2130706432;
+  let unsynchsafed = 0;
+  while (mask !== 0) {
+    unsynchsafed >>= 1;
+    unsynchsafed |= synchsafed & mask;
+    mask >>= 8;
+  }
+  return unsynchsafed;
+};
+const AC3_SAMPLE_RATES = [48e3, 44100, 32e3];
+const EAC3_REDUCED_SAMPLE_RATES = [24e3, 22050, 16e3];
 var AvcNalUnitType;
 (function(AvcNalUnitType2) {
+  AvcNalUnitType2[AvcNalUnitType2["NON_IDR_SLICE"] = 1] = "NON_IDR_SLICE";
+  AvcNalUnitType2[AvcNalUnitType2["SLICE_DPA"] = 2] = "SLICE_DPA";
+  AvcNalUnitType2[AvcNalUnitType2["SLICE_DPB"] = 3] = "SLICE_DPB";
+  AvcNalUnitType2[AvcNalUnitType2["SLICE_DPC"] = 4] = "SLICE_DPC";
   AvcNalUnitType2[AvcNalUnitType2["IDR"] = 5] = "IDR";
   AvcNalUnitType2[AvcNalUnitType2["SEI"] = 6] = "SEI";
   AvcNalUnitType2[AvcNalUnitType2["SPS"] = 7] = "SPS";
   AvcNalUnitType2[AvcNalUnitType2["PPS"] = 8] = "PPS";
+  AvcNalUnitType2[AvcNalUnitType2["AUD"] = 9] = "AUD";
   AvcNalUnitType2[AvcNalUnitType2["SPS_EXT"] = 13] = "SPS_EXT";
 })(AvcNalUnitType || (AvcNalUnitType = {}));
 var HevcNalUnitType;
@@ -816,48 +1161,46 @@ var HevcNalUnitType;
   HevcNalUnitType2[HevcNalUnitType2["VPS_NUT"] = 32] = "VPS_NUT";
   HevcNalUnitType2[HevcNalUnitType2["SPS_NUT"] = 33] = "SPS_NUT";
   HevcNalUnitType2[HevcNalUnitType2["PPS_NUT"] = 34] = "PPS_NUT";
+  HevcNalUnitType2[HevcNalUnitType2["AUD_NUT"] = 35] = "AUD_NUT";
   HevcNalUnitType2[HevcNalUnitType2["PREFIX_SEI_NUT"] = 39] = "PREFIX_SEI_NUT";
   HevcNalUnitType2[HevcNalUnitType2["SUFFIX_SEI_NUT"] = 40] = "SUFFIX_SEI_NUT";
 })(HevcNalUnitType || (HevcNalUnitType = {}));
-const findNalUnitsInAnnexB = (packetData) => {
-  const nalUnits = [];
+const iterateNalUnitsInAnnexB = function* (packetData) {
   let i = 0;
-  while (i < packetData.length) {
-    let startCodePos = -1;
-    let startCodeLength = 0;
-    for (let j = i; j < packetData.length - 3; j++) {
-      if (packetData[j] === 0 && packetData[j + 1] === 0 && packetData[j + 2] === 1) {
-        startCodePos = j;
-        startCodeLength = 3;
-        break;
-      }
-      if (j < packetData.length - 4 && packetData[j] === 0 && packetData[j + 1] === 0 && packetData[j + 2] === 0 && packetData[j + 3] === 1) {
-        startCodePos = j;
-        startCodeLength = 4;
-        break;
-      }
-    }
-    if (startCodePos === -1) {
+  let nalStart = -1;
+  while (i < packetData.length - 2) {
+    const zeroIndex = packetData.indexOf(0, i);
+    if (zeroIndex === -1 || zeroIndex >= packetData.length - 2) {
       break;
     }
-    if (i > 0 && startCodePos > i) {
-      const nalData = packetData.subarray(i, startCodePos);
-      if (nalData.length > 0) {
-        nalUnits.push(nalData);
-      }
+    i = zeroIndex;
+    let startCodeLength = 0;
+    if (i + 3 < packetData.length && packetData[i + 1] === 0 && packetData[i + 2] === 0 && packetData[i + 3] === 1) {
+      startCodeLength = 4;
+    } else if (packetData[i + 1] === 0 && packetData[i + 2] === 1) {
+      startCodeLength = 3;
     }
-    i = startCodePos + startCodeLength;
-  }
-  if (i < packetData.length) {
-    const nalData = packetData.subarray(i);
-    if (nalData.length > 0) {
-      nalUnits.push(nalData);
+    if (startCodeLength === 0) {
+      i++;
+      continue;
     }
+    if (nalStart !== -1 && i > nalStart) {
+      yield {
+        offset: nalStart,
+        length: i - nalStart
+      };
+    }
+    nalStart = i + startCodeLength;
+    i = nalStart;
   }
-  return nalUnits;
+  if (nalStart !== -1 && nalStart < packetData.length) {
+    yield {
+      offset: nalStart,
+      length: packetData.length - nalStart
+    };
+  }
 };
-const findNalUnitsInLengthPrefixed = (packetData, lengthSize) => {
-  const nalUnits = [];
+const iterateNalUnitsInLengthPrefixed = function* (packetData, lengthSize) {
   let offset = 0;
   const dataView = new DataView(packetData.buffer, packetData.byteOffset, packetData.byteLength);
   while (offset + lengthSize <= packetData.length) {
@@ -868,18 +1211,30 @@ const findNalUnitsInLengthPrefixed = (packetData, lengthSize) => {
       nalUnitLength = dataView.getUint16(offset, false);
     } else if (lengthSize === 3) {
       nalUnitLength = getUint24(dataView, offset, false);
-    } else if (lengthSize === 4) {
-      nalUnitLength = dataView.getUint32(offset, false);
     } else {
-      assertNever(lengthSize);
-      assert(false);
+      assert(lengthSize === 4);
+      nalUnitLength = dataView.getUint32(offset, false);
     }
     offset += lengthSize;
-    const nalUnit = packetData.subarray(offset, offset + nalUnitLength);
-    nalUnits.push(nalUnit);
+    yield {
+      offset,
+      length: nalUnitLength
+    };
     offset += nalUnitLength;
   }
-  return nalUnits;
+};
+const iterateAvcNalUnits = (packetData, decoderConfig) => {
+  if (decoderConfig.description) {
+    const bytes = toUint8Array(decoderConfig.description);
+    const lengthSizeMinusOne = bytes[4] & 3;
+    const lengthSize = lengthSizeMinusOne + 1;
+    return iterateNalUnitsInLengthPrefixed(packetData, lengthSize);
+  } else {
+    return iterateNalUnitsInAnnexB(packetData);
+  }
+};
+const extractNalUnitTypeForAvc = (byte) => {
+  return byte & 31;
 };
 const removeEmulationPreventionBytes = (data) => {
   const result = [];
@@ -933,16 +1288,6 @@ const concatNalUnitsInLengthPrefixed = (nalUnits, lengthSize) => {
   }
   return result;
 };
-const extractAvcNalUnits = (packetData, decoderConfig) => {
-  if (decoderConfig.description) {
-    const bytes = toUint8Array(decoderConfig.description);
-    const lengthSizeMinusOne = bytes[4] & 3;
-    const lengthSize = lengthSizeMinusOne + 1;
-    return findNalUnitsInLengthPrefixed(packetData, lengthSize);
-  } else {
-    return findNalUnitsInAnnexB(packetData);
-  }
-};
 const concatAvcNalUnits = (nalUnits, decoderConfig) => {
   if (decoderConfig.description) {
     const bytes = toUint8Array(decoderConfig.description);
@@ -953,15 +1298,22 @@ const concatAvcNalUnits = (nalUnits, decoderConfig) => {
     return concatNalUnitsInAnnexB(nalUnits);
   }
 };
-const extractNalUnitTypeForAvc = (data) => {
-  return data[0] & 31;
-};
 const extractAvcDecoderConfigurationRecord = (packetData) => {
   try {
-    const nalUnits = findNalUnitsInAnnexB(packetData);
-    const spsUnits = nalUnits.filter((unit) => extractNalUnitTypeForAvc(unit) === AvcNalUnitType.SPS);
-    const ppsUnits = nalUnits.filter((unit) => extractNalUnitTypeForAvc(unit) === AvcNalUnitType.PPS);
-    const spsExtUnits = nalUnits.filter((unit) => extractNalUnitTypeForAvc(unit) === AvcNalUnitType.SPS_EXT);
+    const spsUnits = [];
+    const ppsUnits = [];
+    const spsExtUnits = [];
+    for (const loc of iterateNalUnitsInAnnexB(packetData)) {
+      const nalUnit = packetData.subarray(loc.offset, loc.offset + loc.length);
+      const type = extractNalUnitTypeForAvc(nalUnit[0]);
+      if (type === AvcNalUnitType.SPS) {
+        spsUnits.push(nalUnit);
+      } else if (type === AvcNalUnitType.PPS) {
+        ppsUnits.push(nalUnit);
+      } else if (type === AvcNalUnitType.SPS_EXT) {
+        spsExtUnits.push(nalUnit);
+      }
+    }
     if (spsUnits.length === 0) {
       return null;
     }
@@ -1052,6 +1404,24 @@ const deserializeAvcDecoderConfigurationRecord = (data) => {
     return null;
   }
 };
+const AVC_HEVC_ASPECT_RATIO_IDC_TABLE = {
+  1: { num: 1, den: 1 },
+  2: { num: 12, den: 11 },
+  3: { num: 10, den: 11 },
+  4: { num: 16, den: 11 },
+  5: { num: 40, den: 33 },
+  6: { num: 24, den: 11 },
+  7: { num: 20, den: 11 },
+  8: { num: 32, den: 11 },
+  9: { num: 80, den: 33 },
+  10: { num: 18, den: 11 },
+  11: { num: 15, den: 11 },
+  12: { num: 64, den: 33 },
+  13: { num: 160, den: 99 },
+  14: { num: 4, den: 3 },
+  15: { num: 3, den: 2 },
+  16: { num: 2, den: 1 }
+};
 const parseAvcSps = (sps) => {
   try {
     const bitstream = new Bitstream(removeEmulationPreventionBytes(sps));
@@ -1065,13 +1435,14 @@ const parseAvcSps = (sps) => {
     const constraintFlags = bitstream.readAlignedByte();
     const levelIdc = bitstream.readAlignedByte();
     readExpGolomb(bitstream);
-    let chromaFormatIdc = null;
-    let bitDepthLumaMinus8 = null;
-    let bitDepthChromaMinus8 = null;
+    let chromaFormatIdc = 1;
+    let bitDepthLumaMinus8 = 0;
+    let bitDepthChromaMinus8 = 0;
+    let separateColourPlaneFlag = 0;
     if (profileIdc === 100 || profileIdc === 110 || profileIdc === 122 || profileIdc === 244 || profileIdc === 44 || profileIdc === 83 || profileIdc === 86 || profileIdc === 118 || profileIdc === 128) {
       chromaFormatIdc = readExpGolomb(bitstream);
       if (chromaFormatIdc === 3) {
-        bitstream.skipBits(1);
+        separateColourPlaneFlag = bitstream.readBits(1);
       }
       bitDepthLumaMinus8 = readExpGolomb(bitstream);
       bitDepthChromaMinus8 = readExpGolomb(bitstream);
@@ -1110,9 +1481,128 @@ const parseAvcSps = (sps) => {
     }
     readExpGolomb(bitstream);
     bitstream.skipBits(1);
-    readExpGolomb(bitstream);
-    readExpGolomb(bitstream);
+    const picWidthInMbsMinus1 = readExpGolomb(bitstream);
+    const picHeightInMapUnitsMinus1 = readExpGolomb(bitstream);
+    const codedWidth = 16 * (picWidthInMbsMinus1 + 1);
+    const codedHeight = 16 * (picHeightInMapUnitsMinus1 + 1);
+    let displayWidth = codedWidth;
+    let displayHeight = codedHeight;
     const frameMbsOnlyFlag = bitstream.readBits(1);
+    if (!frameMbsOnlyFlag) {
+      bitstream.skipBits(1);
+    }
+    bitstream.skipBits(1);
+    const frameCroppingFlag = bitstream.readBits(1);
+    if (frameCroppingFlag) {
+      const frameCropLeftOffset = readExpGolomb(bitstream);
+      const frameCropRightOffset = readExpGolomb(bitstream);
+      const frameCropTopOffset = readExpGolomb(bitstream);
+      const frameCropBottomOffset = readExpGolomb(bitstream);
+      let cropUnitX;
+      let cropUnitY;
+      const chromaArrayType = separateColourPlaneFlag === 0 ? chromaFormatIdc : 0;
+      if (chromaArrayType === 0) {
+        cropUnitX = 1;
+        cropUnitY = 2 - frameMbsOnlyFlag;
+      } else {
+        const subWidthC = chromaFormatIdc === 3 ? 1 : 2;
+        const subHeightC = chromaFormatIdc === 1 ? 2 : 1;
+        cropUnitX = subWidthC;
+        cropUnitY = subHeightC * (2 - frameMbsOnlyFlag);
+      }
+      displayWidth -= cropUnitX * (frameCropLeftOffset + frameCropRightOffset);
+      displayHeight -= cropUnitY * (frameCropTopOffset + frameCropBottomOffset);
+    }
+    let colourPrimaries = 2;
+    let transferCharacteristics = 2;
+    let matrixCoefficients = 2;
+    let fullRangeFlag = 0;
+    let pixelAspectRatio = { num: 1, den: 1 };
+    let numReorderFrames = null;
+    let maxDecFrameBuffering = null;
+    const vuiParametersPresentFlag = bitstream.readBits(1);
+    if (vuiParametersPresentFlag) {
+      const aspectRatioInfoPresentFlag = bitstream.readBits(1);
+      if (aspectRatioInfoPresentFlag) {
+        const aspectRatioIdc = bitstream.readBits(8);
+        if (aspectRatioIdc === 255) {
+          pixelAspectRatio = {
+            num: bitstream.readBits(16),
+            den: bitstream.readBits(16)
+          };
+        } else {
+          const aspectRatio = AVC_HEVC_ASPECT_RATIO_IDC_TABLE[aspectRatioIdc];
+          if (aspectRatio) {
+            pixelAspectRatio = aspectRatio;
+          }
+        }
+      }
+      const overscanInfoPresentFlag = bitstream.readBits(1);
+      if (overscanInfoPresentFlag) {
+        bitstream.skipBits(1);
+      }
+      const videoSignalTypePresentFlag = bitstream.readBits(1);
+      if (videoSignalTypePresentFlag) {
+        bitstream.skipBits(3);
+        fullRangeFlag = bitstream.readBits(1);
+        const colourDescriptionPresentFlag = bitstream.readBits(1);
+        if (colourDescriptionPresentFlag) {
+          colourPrimaries = bitstream.readBits(8);
+          transferCharacteristics = bitstream.readBits(8);
+          matrixCoefficients = bitstream.readBits(8);
+        }
+      }
+      const chromaLocInfoPresentFlag = bitstream.readBits(1);
+      if (chromaLocInfoPresentFlag) {
+        readExpGolomb(bitstream);
+        readExpGolomb(bitstream);
+      }
+      const timingInfoPresentFlag = bitstream.readBits(1);
+      if (timingInfoPresentFlag) {
+        bitstream.skipBits(32);
+        bitstream.skipBits(32);
+        bitstream.skipBits(1);
+      }
+      const nalHrdParametersPresentFlag = bitstream.readBits(1);
+      if (nalHrdParametersPresentFlag) {
+        skipAvcHrdParameters(bitstream);
+      }
+      const vclHrdParametersPresentFlag = bitstream.readBits(1);
+      if (vclHrdParametersPresentFlag) {
+        skipAvcHrdParameters(bitstream);
+      }
+      if (nalHrdParametersPresentFlag || vclHrdParametersPresentFlag) {
+        bitstream.skipBits(1);
+      }
+      bitstream.skipBits(1);
+      const bitstreamRestrictionFlag = bitstream.readBits(1);
+      if (bitstreamRestrictionFlag) {
+        bitstream.skipBits(1);
+        readExpGolomb(bitstream);
+        readExpGolomb(bitstream);
+        readExpGolomb(bitstream);
+        readExpGolomb(bitstream);
+        numReorderFrames = readExpGolomb(bitstream);
+        maxDecFrameBuffering = readExpGolomb(bitstream);
+      }
+    }
+    if (numReorderFrames === null) {
+      assert(maxDecFrameBuffering === null);
+      const constraintSet3Flag = constraintFlags & 16;
+      if ((profileIdc === 44 || profileIdc === 86 || profileIdc === 100 || profileIdc === 110 || profileIdc === 122 || profileIdc === 244) && constraintSet3Flag) {
+        numReorderFrames = 0;
+        maxDecFrameBuffering = 0;
+      } else {
+        const picWidthInMbs = picWidthInMbsMinus1 + 1;
+        const picHeightInMapUnits = picHeightInMapUnitsMinus1 + 1;
+        const frameHeightInMbs = (2 - frameMbsOnlyFlag) * picHeightInMapUnits;
+        const levelInfo = AVC_LEVEL_TABLE.find((x) => x.level >= levelIdc) ?? last(AVC_LEVEL_TABLE);
+        const maxDpbFrames = Math.min(Math.floor(levelInfo.maxDpbMbs / (picWidthInMbs * frameHeightInMbs)), 16);
+        numReorderFrames = maxDpbFrames;
+        maxDecFrameBuffering = maxDpbFrames;
+      }
+    }
+    assert(maxDecFrameBuffering !== null);
     return {
       profileIdc,
       constraintFlags,
@@ -1120,62 +1610,96 @@ const parseAvcSps = (sps) => {
       frameMbsOnlyFlag,
       chromaFormatIdc,
       bitDepthLumaMinus8,
-      bitDepthChromaMinus8
+      bitDepthChromaMinus8,
+      codedWidth,
+      codedHeight,
+      displayWidth,
+      displayHeight,
+      pixelAspectRatio,
+      colourPrimaries,
+      matrixCoefficients,
+      transferCharacteristics,
+      fullRangeFlag,
+      numReorderFrames,
+      maxDecFrameBuffering
     };
   } catch (error) {
     console.error("Error parsing AVC SPS:", error);
     return null;
   }
 };
-const extractHevcNalUnits = (packetData, decoderConfig) => {
+const skipAvcHrdParameters = (bitstream) => {
+  const cpb_cnt_minus1 = readExpGolomb(bitstream);
+  bitstream.skipBits(4);
+  bitstream.skipBits(4);
+  for (let i = 0; i <= cpb_cnt_minus1; i++) {
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    bitstream.skipBits(1);
+  }
+  bitstream.skipBits(5);
+  bitstream.skipBits(5);
+  bitstream.skipBits(5);
+  bitstream.skipBits(5);
+};
+const iterateHevcNalUnits = (packetData, decoderConfig) => {
   if (decoderConfig.description) {
     const bytes = toUint8Array(decoderConfig.description);
     const lengthSizeMinusOne = bytes[21] & 3;
     const lengthSize = lengthSizeMinusOne + 1;
-    return findNalUnitsInLengthPrefixed(packetData, lengthSize);
+    return iterateNalUnitsInLengthPrefixed(packetData, lengthSize);
   } else {
-    return findNalUnitsInAnnexB(packetData);
+    return iterateNalUnitsInAnnexB(packetData);
   }
 };
-const extractNalUnitTypeForHevc = (data) => {
-  return data[0] >> 1 & 63;
+const extractNalUnitTypeForHevc = (byte) => {
+  return byte >> 1 & 63;
 };
-const extractHevcDecoderConfigurationRecord = (packetData) => {
+const parseHevcSps = (sps) => {
   try {
-    const nalUnits = findNalUnitsInAnnexB(packetData);
-    const vpsUnits = nalUnits.filter((unit) => extractNalUnitTypeForHevc(unit) === HevcNalUnitType.VPS_NUT);
-    const spsUnits = nalUnits.filter((unit) => extractNalUnitTypeForHevc(unit) === HevcNalUnitType.SPS_NUT);
-    const ppsUnits = nalUnits.filter((unit) => extractNalUnitTypeForHevc(unit) === HevcNalUnitType.PPS_NUT);
-    const seiUnits = nalUnits.filter((unit) => extractNalUnitTypeForHevc(unit) === HevcNalUnitType.PREFIX_SEI_NUT || extractNalUnitTypeForHevc(unit) === HevcNalUnitType.SUFFIX_SEI_NUT);
-    if (spsUnits.length === 0 || ppsUnits.length === 0)
-      return null;
-    const sps = spsUnits[0];
     const bitstream = new Bitstream(removeEmulationPreventionBytes(sps));
     bitstream.skipBits(16);
     bitstream.readBits(4);
-    const sps_max_sub_layers_minus1 = bitstream.readBits(3);
-    const sps_temporal_id_nesting_flag = bitstream.readBits(1);
-    const { general_profile_space, general_tier_flag, general_profile_idc, general_profile_compatibility_flags, general_constraint_indicator_flags, general_level_idc } = parseProfileTierLevel(bitstream, sps_max_sub_layers_minus1);
+    const spsMaxSubLayersMinus1 = bitstream.readBits(3);
+    const spsTemporalIdNestingFlag = bitstream.readBits(1);
+    const { general_profile_space, general_tier_flag, general_profile_idc, general_profile_compatibility_flags, general_constraint_indicator_flags, general_level_idc } = parseProfileTierLevel(bitstream, spsMaxSubLayersMinus1);
     readExpGolomb(bitstream);
-    const chroma_format_idc = readExpGolomb(bitstream);
-    if (chroma_format_idc === 3)
-      bitstream.skipBits(1);
-    readExpGolomb(bitstream);
-    readExpGolomb(bitstream);
-    if (bitstream.readBits(1)) {
-      readExpGolomb(bitstream);
-      readExpGolomb(bitstream);
-      readExpGolomb(bitstream);
-      readExpGolomb(bitstream);
+    const chromaFormatIdc = readExpGolomb(bitstream);
+    let separateColourPlaneFlag = 0;
+    if (chromaFormatIdc === 3) {
+      separateColourPlaneFlag = bitstream.readBits(1);
     }
-    const bit_depth_luma_minus8 = readExpGolomb(bitstream);
-    const bit_depth_chroma_minus8 = readExpGolomb(bitstream);
+    const picWidthInLumaSamples = readExpGolomb(bitstream);
+    const picHeightInLumaSamples = readExpGolomb(bitstream);
+    let displayWidth = picWidthInLumaSamples;
+    let displayHeight = picHeightInLumaSamples;
+    if (bitstream.readBits(1)) {
+      const confWinLeftOffset = readExpGolomb(bitstream);
+      const confWinRightOffset = readExpGolomb(bitstream);
+      const confWinTopOffset = readExpGolomb(bitstream);
+      const confWinBottomOffset = readExpGolomb(bitstream);
+      let subWidthC = 1;
+      let subHeightC = 1;
+      const chromaArrayType = separateColourPlaneFlag === 0 ? chromaFormatIdc : 0;
+      if (chromaArrayType === 1) {
+        subWidthC = 2;
+        subHeightC = 2;
+      } else if (chromaArrayType === 2) {
+        subWidthC = 2;
+        subHeightC = 1;
+      }
+      displayWidth -= (confWinLeftOffset + confWinRightOffset) * subWidthC;
+      displayHeight -= (confWinTopOffset + confWinBottomOffset) * subHeightC;
+    }
+    const bitDepthLumaMinus8 = readExpGolomb(bitstream);
+    const bitDepthChromaMinus8 = readExpGolomb(bitstream);
     readExpGolomb(bitstream);
-    const sps_sub_layer_ordering_info_present_flag = bitstream.readBits(1);
-    const maxNum = sps_sub_layer_ordering_info_present_flag ? 0 : sps_max_sub_layers_minus1;
-    for (let i = maxNum; i <= sps_max_sub_layers_minus1; i++) {
+    const spsSubLayerOrderingInfoPresentFlag = bitstream.readBits(1);
+    const startI = spsSubLayerOrderingInfoPresentFlag ? 0 : spsMaxSubLayersMinus1;
+    let spsMaxNumReorderPics = 0;
+    for (let i = startI; i <= spsMaxSubLayersMinus1; i++) {
       readExpGolomb(bitstream);
-      readExpGolomb(bitstream);
+      spsMaxNumReorderPics = readExpGolomb(bitstream);
       readExpGolomb(bitstream);
     }
     readExpGolomb(bitstream);
@@ -1198,21 +1722,83 @@ const extractHevcDecoderConfigurationRecord = (packetData) => {
       readExpGolomb(bitstream);
       bitstream.skipBits(1);
     }
-    const num_short_term_ref_pic_sets = readExpGolomb(bitstream);
-    skipAllStRefPicSets(bitstream, num_short_term_ref_pic_sets);
+    const numShortTermRefPicSets = readExpGolomb(bitstream);
+    skipAllStRefPicSets(bitstream, numShortTermRefPicSets);
     if (bitstream.readBits(1)) {
-      const num_long_term_ref_pics_sps = readExpGolomb(bitstream);
-      for (let i = 0; i < num_long_term_ref_pics_sps; i++) {
+      const numLongTermRefPicsSps = readExpGolomb(bitstream);
+      for (let i = 0; i < numLongTermRefPicsSps; i++) {
         readExpGolomb(bitstream);
         bitstream.skipBits(1);
       }
     }
     bitstream.skipBits(1);
     bitstream.skipBits(1);
-    let min_spatial_segmentation_idc = 0;
+    let colourPrimaries = 2;
+    let transferCharacteristics = 2;
+    let matrixCoefficients = 2;
+    let fullRangeFlag = 0;
+    let minSpatialSegmentationIdc = 0;
+    let pixelAspectRatio = { num: 1, den: 1 };
     if (bitstream.readBits(1)) {
-      min_spatial_segmentation_idc = parseVuiForMinSpatialSegmentationIdc(bitstream, sps_max_sub_layers_minus1);
+      const vui = parseHevcVui(bitstream, spsMaxSubLayersMinus1);
+      pixelAspectRatio = vui.pixelAspectRatio;
+      colourPrimaries = vui.colourPrimaries;
+      transferCharacteristics = vui.transferCharacteristics;
+      matrixCoefficients = vui.matrixCoefficients;
+      fullRangeFlag = vui.fullRangeFlag;
+      minSpatialSegmentationIdc = vui.minSpatialSegmentationIdc;
     }
+    return {
+      displayWidth,
+      displayHeight,
+      pixelAspectRatio,
+      colourPrimaries,
+      transferCharacteristics,
+      matrixCoefficients,
+      fullRangeFlag,
+      maxDecFrameBuffering: spsMaxNumReorderPics + 1,
+      spsMaxSubLayersMinus1,
+      spsTemporalIdNestingFlag,
+      generalProfileSpace: general_profile_space,
+      generalTierFlag: general_tier_flag,
+      generalProfileIdc: general_profile_idc,
+      generalProfileCompatibilityFlags: general_profile_compatibility_flags,
+      generalConstraintIndicatorFlags: general_constraint_indicator_flags,
+      generalLevelIdc: general_level_idc,
+      chromaFormatIdc,
+      bitDepthLumaMinus8,
+      bitDepthChromaMinus8,
+      minSpatialSegmentationIdc
+    };
+  } catch (error) {
+    console.error("Error parsing HEVC SPS:", error);
+    return null;
+  }
+};
+const extractHevcDecoderConfigurationRecord = (packetData) => {
+  try {
+    const vpsUnits = [];
+    const spsUnits = [];
+    const ppsUnits = [];
+    const seiUnits = [];
+    for (const loc of iterateNalUnitsInAnnexB(packetData)) {
+      const nalUnit = packetData.subarray(loc.offset, loc.offset + loc.length);
+      const type = extractNalUnitTypeForHevc(nalUnit[0]);
+      if (type === HevcNalUnitType.VPS_NUT) {
+        vpsUnits.push(nalUnit);
+      } else if (type === HevcNalUnitType.SPS_NUT) {
+        spsUnits.push(nalUnit);
+      } else if (type === HevcNalUnitType.PPS_NUT) {
+        ppsUnits.push(nalUnit);
+      } else if (type === HevcNalUnitType.PREFIX_SEI_NUT || type === HevcNalUnitType.SUFFIX_SEI_NUT) {
+        seiUnits.push(nalUnit);
+      }
+    }
+    if (spsUnits.length === 0 || ppsUnits.length === 0)
+      return null;
+    const spsInfo = parseHevcSps(spsUnits[0]);
+    if (!spsInfo)
+      return null;
     let parallelismType = 0;
     if (ppsUnits.length > 0) {
       const pps = ppsUnits[0];
@@ -1275,28 +1861,28 @@ const extractHevcDecoderConfigurationRecord = (packetData) => {
       ...seiUnits.length ? [
         {
           arrayCompleteness: 1,
-          nalUnitType: extractNalUnitTypeForHevc(seiUnits[0]),
+          nalUnitType: extractNalUnitTypeForHevc(seiUnits[0][0]),
           nalUnits: seiUnits
         }
       ] : []
     ];
     const record = {
       configurationVersion: 1,
-      generalProfileSpace: general_profile_space,
-      generalTierFlag: general_tier_flag,
-      generalProfileIdc: general_profile_idc,
-      generalProfileCompatibilityFlags: general_profile_compatibility_flags,
-      generalConstraintIndicatorFlags: general_constraint_indicator_flags,
-      generalLevelIdc: general_level_idc,
-      minSpatialSegmentationIdc: min_spatial_segmentation_idc,
+      generalProfileSpace: spsInfo.generalProfileSpace,
+      generalTierFlag: spsInfo.generalTierFlag,
+      generalProfileIdc: spsInfo.generalProfileIdc,
+      generalProfileCompatibilityFlags: spsInfo.generalProfileCompatibilityFlags,
+      generalConstraintIndicatorFlags: spsInfo.generalConstraintIndicatorFlags,
+      generalLevelIdc: spsInfo.generalLevelIdc,
+      minSpatialSegmentationIdc: spsInfo.minSpatialSegmentationIdc,
       parallelismType,
-      chromaFormatIdc: chroma_format_idc,
-      bitDepthLumaMinus8: bit_depth_luma_minus8,
-      bitDepthChromaMinus8: bit_depth_chroma_minus8,
+      chromaFormatIdc: spsInfo.chromaFormatIdc,
+      bitDepthLumaMinus8: spsInfo.bitDepthLumaMinus8,
+      bitDepthChromaMinus8: spsInfo.bitDepthChromaMinus8,
       avgFrameRate: 0,
       constantFrameRate: 0,
-      numTemporalLayers: sps_max_sub_layers_minus1 + 1,
-      temporalIdNested: sps_temporal_id_nesting_flag,
+      numTemporalLayers: spsInfo.spsMaxSubLayersMinus1 + 1,
+      temporalIdNested: spsInfo.spsTemporalIdNestingFlag,
       lengthSizeMinusOne: 3,
       arrays
     };
@@ -1408,12 +1994,25 @@ const skipStRefPicSet = (bitstream, stRpsIdx, num_short_term_ref_pic_sets, NumDe
   }
   return NumDeltaPocsThis;
 };
-const parseVuiForMinSpatialSegmentationIdc = (bitstream, sps_max_sub_layers_minus1) => {
+const parseHevcVui = (bitstream, sps_max_sub_layers_minus1) => {
+  let colourPrimaries = 2;
+  let transferCharacteristics = 2;
+  let matrixCoefficients = 2;
+  let fullRangeFlag = 0;
+  let minSpatialSegmentationIdc = 0;
+  let pixelAspectRatio = { num: 1, den: 1 };
   if (bitstream.readBits(1)) {
     const aspect_ratio_idc = bitstream.readBits(8);
     if (aspect_ratio_idc === 255) {
-      bitstream.readBits(16);
-      bitstream.readBits(16);
+      pixelAspectRatio = {
+        num: bitstream.readBits(16),
+        den: bitstream.readBits(16)
+      };
+    } else {
+      const aspectRatio = AVC_HEVC_ASPECT_RATIO_IDC_TABLE[aspect_ratio_idc];
+      if (aspectRatio) {
+        pixelAspectRatio = aspectRatio;
+      }
     }
   }
   if (bitstream.readBits(1)) {
@@ -1421,11 +2020,11 @@ const parseVuiForMinSpatialSegmentationIdc = (bitstream, sps_max_sub_layers_minu
   }
   if (bitstream.readBits(1)) {
     bitstream.readBits(3);
-    bitstream.readBits(1);
+    fullRangeFlag = bitstream.readBits(1);
     if (bitstream.readBits(1)) {
-      bitstream.readBits(8);
-      bitstream.readBits(8);
-      bitstream.readBits(8);
+      colourPrimaries = bitstream.readBits(8);
+      transferCharacteristics = bitstream.readBits(8);
+      matrixCoefficients = bitstream.readBits(8);
     }
   }
   if (bitstream.readBits(1)) {
@@ -1448,23 +2047,29 @@ const parseVuiForMinSpatialSegmentationIdc = (bitstream, sps_max_sub_layers_minu
       readExpGolomb(bitstream);
     }
     if (bitstream.readBits(1)) {
-      skipHrdParameters(bitstream, true, sps_max_sub_layers_minus1);
+      skipHevcHrdParameters(bitstream, true, sps_max_sub_layers_minus1);
     }
   }
   if (bitstream.readBits(1)) {
     bitstream.readBits(1);
     bitstream.readBits(1);
     bitstream.readBits(1);
-    const min_spatial_segmentation_idc = readExpGolomb(bitstream);
+    minSpatialSegmentationIdc = readExpGolomb(bitstream);
     readExpGolomb(bitstream);
     readExpGolomb(bitstream);
     readExpGolomb(bitstream);
     readExpGolomb(bitstream);
-    return min_spatial_segmentation_idc;
   }
-  return 0;
+  return {
+    pixelAspectRatio,
+    colourPrimaries,
+    transferCharacteristics,
+    matrixCoefficients,
+    fullRangeFlag,
+    minSpatialSegmentationIdc
+  };
 };
-const skipHrdParameters = (bitstream, commonInfPresentFlag, maxNumSubLayersMinus1) => {
+const skipHevcHrdParameters = (bitstream, commonInfPresentFlag, maxNumSubLayersMinus1) => {
   let nal_hrd_parameters_present_flag = false;
   let vcl_hrd_parameters_present_flag = false;
   let sub_pic_hrd_params_present_flag = false;
@@ -1929,14 +2534,17 @@ const parseModesFromVorbisSetupPacket = (setupHeader) => {
 const determineVideoPacketType = (codec, decoderConfig, packetData) => {
   switch (codec) {
     case "avc": {
-      const nalUnits = extractAvcNalUnits(packetData, decoderConfig);
-      let isKeyframe = nalUnits.some((x) => extractNalUnitTypeForAvc(x) === AvcNalUnitType.IDR);
-      if (!isKeyframe && (!isChromium() || getChromiumVersion() >= 144)) {
-        for (const nalUnit of nalUnits) {
-          const type = extractNalUnitTypeForAvc(nalUnit);
-          if (type !== AvcNalUnitType.SEI) {
-            continue;
-          }
+      for (const loc of iterateAvcNalUnits(packetData, decoderConfig)) {
+        const nalTypeByte = packetData[loc.offset];
+        const type = extractNalUnitTypeForAvc(nalTypeByte);
+        if (type >= AvcNalUnitType.NON_IDR_SLICE && type <= AvcNalUnitType.SLICE_DPC) {
+          return "delta";
+        }
+        if (type === AvcNalUnitType.IDR) {
+          return "key";
+        }
+        if (type === AvcNalUnitType.SEI && (!isChromium() || getChromiumVersion() >= 144)) {
+          const nalUnit = packetData.subarray(loc.offset, loc.offset + loc.length);
           const bytes = removeEmulationPreventionBytes(nalUnit);
           let pos = 1;
           do {
@@ -1967,23 +2575,26 @@ const determineVideoPacketType = (codec, decoderConfig, packetData) => {
               const recoveryFrameCount = readExpGolomb(bitstream);
               const exactMatchFlag = bitstream.readBits(1);
               if (recoveryFrameCount === 0 && exactMatchFlag === 1) {
-                isKeyframe = true;
-                break;
+                return "key";
               }
             }
             pos += payloadSize;
           } while (pos < bytes.length - 1);
         }
       }
-      return isKeyframe ? "key" : "delta";
+      return "delta";
     }
     case "hevc": {
-      const nalUnits = extractHevcNalUnits(packetData, decoderConfig);
-      const isKeyframe = nalUnits.some((x) => {
-        const type = extractNalUnitTypeForHevc(x);
-        return HevcNalUnitType.BLA_W_LP <= type && type <= HevcNalUnitType.RSV_IRAP_VCL23;
-      });
-      return isKeyframe ? "key" : "delta";
+      for (const loc of iterateHevcNalUnits(packetData, decoderConfig)) {
+        const type = extractNalUnitTypeForHevc(packetData[loc.offset]);
+        if (type < HevcNalUnitType.BLA_W_LP) {
+          return "delta";
+        }
+        if (type <= HevcNalUnitType.RSV_IRAP_VCL23) {
+          return "key";
+        }
+      }
+      return "delta";
     }
     case "vp8": {
       const frameType = packetData[0] & 1;
@@ -2183,6 +2794,283 @@ const readVorbisComments = (bytes, metadataTags) => {
     }
   }
 };
+const AC3_ACMOD_CHANNEL_COUNTS = [2, 1, 2, 3, 3, 4, 4, 5];
+const parseAc3SyncFrame = (data) => {
+  if (data.length < 7) {
+    return null;
+  }
+  if (data[0] !== 11 || data[1] !== 119) {
+    return null;
+  }
+  const bitstream = new Bitstream(data);
+  bitstream.skipBits(16);
+  bitstream.skipBits(16);
+  const fscod = bitstream.readBits(2);
+  if (fscod === 3) {
+    return null;
+  }
+  const frmsizecod = bitstream.readBits(6);
+  const bsid = bitstream.readBits(5);
+  if (bsid > 8) {
+    return null;
+  }
+  const bsmod = bitstream.readBits(3);
+  const acmod = bitstream.readBits(3);
+  if ((acmod & 1) !== 0 && acmod !== 1) {
+    bitstream.skipBits(2);
+  }
+  if ((acmod & 4) !== 0) {
+    bitstream.skipBits(2);
+  }
+  if (acmod === 2) {
+    bitstream.skipBits(2);
+  }
+  const lfeon = bitstream.readBits(1);
+  const bitRateCode = Math.floor(frmsizecod / 2);
+  return { fscod, bsid, bsmod, acmod, lfeon, bitRateCode };
+};
+const AC3_FRAME_SIZES = [
+  // frmsizecod, [48kHz, 44.1kHz, 32kHz] in bytes
+  64 * 2,
+  69 * 2,
+  96 * 2,
+  64 * 2,
+  70 * 2,
+  96 * 2,
+  80 * 2,
+  87 * 2,
+  120 * 2,
+  80 * 2,
+  88 * 2,
+  120 * 2,
+  96 * 2,
+  104 * 2,
+  144 * 2,
+  96 * 2,
+  105 * 2,
+  144 * 2,
+  112 * 2,
+  121 * 2,
+  168 * 2,
+  112 * 2,
+  122 * 2,
+  168 * 2,
+  128 * 2,
+  139 * 2,
+  192 * 2,
+  128 * 2,
+  140 * 2,
+  192 * 2,
+  160 * 2,
+  174 * 2,
+  240 * 2,
+  160 * 2,
+  175 * 2,
+  240 * 2,
+  192 * 2,
+  208 * 2,
+  288 * 2,
+  192 * 2,
+  209 * 2,
+  288 * 2,
+  224 * 2,
+  243 * 2,
+  336 * 2,
+  224 * 2,
+  244 * 2,
+  336 * 2,
+  256 * 2,
+  278 * 2,
+  384 * 2,
+  256 * 2,
+  279 * 2,
+  384 * 2,
+  320 * 2,
+  348 * 2,
+  480 * 2,
+  320 * 2,
+  349 * 2,
+  480 * 2,
+  384 * 2,
+  417 * 2,
+  576 * 2,
+  384 * 2,
+  418 * 2,
+  576 * 2,
+  448 * 2,
+  487 * 2,
+  672 * 2,
+  448 * 2,
+  488 * 2,
+  672 * 2,
+  512 * 2,
+  557 * 2,
+  768 * 2,
+  512 * 2,
+  558 * 2,
+  768 * 2,
+  640 * 2,
+  696 * 2,
+  960 * 2,
+  640 * 2,
+  697 * 2,
+  960 * 2,
+  768 * 2,
+  835 * 2,
+  1152 * 2,
+  768 * 2,
+  836 * 2,
+  1152 * 2,
+  896 * 2,
+  975 * 2,
+  1344 * 2,
+  896 * 2,
+  976 * 2,
+  1344 * 2,
+  1024 * 2,
+  1114 * 2,
+  1536 * 2,
+  1024 * 2,
+  1115 * 2,
+  1536 * 2,
+  1152 * 2,
+  1253 * 2,
+  1728 * 2,
+  1152 * 2,
+  1254 * 2,
+  1728 * 2,
+  1280 * 2,
+  1393 * 2,
+  1920 * 2,
+  1280 * 2,
+  1394 * 2,
+  1920 * 2
+];
+const AC3_SAMPLES_PER_FRAME = 1536;
+const EAC3_NUMBLKS_TABLE = [1, 2, 3, 6];
+const parseEac3SyncFrame = (data) => {
+  if (data.length < 6) {
+    return null;
+  }
+  if (data[0] !== 11 || data[1] !== 119) {
+    return null;
+  }
+  const bitstream = new Bitstream(data);
+  bitstream.skipBits(16);
+  const strmtyp = bitstream.readBits(2);
+  bitstream.skipBits(3);
+  if (strmtyp !== 0 && strmtyp !== 2) {
+    return null;
+  }
+  const frmsiz = bitstream.readBits(11);
+  const fscod = bitstream.readBits(2);
+  let fscod2 = 0;
+  let numblkscod;
+  if (fscod === 3) {
+    fscod2 = bitstream.readBits(2);
+    numblkscod = 3;
+  } else {
+    numblkscod = bitstream.readBits(2);
+  }
+  const acmod = bitstream.readBits(3);
+  const lfeon = bitstream.readBits(1);
+  const bsid = bitstream.readBits(5);
+  if (bsid < 11 || bsid > 16) {
+    return null;
+  }
+  const numblks = EAC3_NUMBLKS_TABLE[numblkscod];
+  let fs;
+  if (fscod < 3) {
+    fs = AC3_SAMPLE_RATES[fscod] / 1e3;
+  } else {
+    fs = EAC3_REDUCED_SAMPLE_RATES[fscod2] / 1e3;
+  }
+  const dataRate = Math.round((frmsiz + 1) * fs / (numblks * 16));
+  const bsmod = 0;
+  const numDepSub = 0;
+  const chanLoc = 0;
+  const substream = {
+    fscod,
+    fscod2,
+    bsid,
+    bsmod,
+    acmod,
+    lfeon,
+    numDepSub,
+    chanLoc
+  };
+  return {
+    dataRate,
+    substreams: [substream]
+  };
+};
+const parseEac3Config = (data) => {
+  if (data.length < 2) {
+    return null;
+  }
+  const bitstream = new Bitstream(data);
+  const dataRate = bitstream.readBits(13);
+  const numIndSub = bitstream.readBits(3);
+  const substreams = [];
+  for (let i = 0; i <= numIndSub; i++) {
+    if (Math.ceil(bitstream.pos / 8) + 3 > data.length) {
+      break;
+    }
+    const fscod = bitstream.readBits(2);
+    const bsid = bitstream.readBits(5);
+    bitstream.skipBits(1);
+    bitstream.skipBits(1);
+    const bsmod = bitstream.readBits(3);
+    const acmod = bitstream.readBits(3);
+    const lfeon = bitstream.readBits(1);
+    bitstream.skipBits(3);
+    const numDepSub = bitstream.readBits(4);
+    let chanLoc = 0;
+    if (numDepSub > 0) {
+      chanLoc = bitstream.readBits(9);
+    } else {
+      bitstream.skipBits(1);
+    }
+    substreams.push({
+      fscod,
+      fscod2: null,
+      bsid,
+      bsmod,
+      acmod,
+      lfeon,
+      numDepSub,
+      chanLoc
+    });
+  }
+  if (substreams.length === 0) {
+    return null;
+  }
+  return { dataRate, substreams };
+};
+const getEac3SampleRate = (config) => {
+  const sub = config.substreams[0];
+  assert(sub);
+  if (sub.fscod < 3) {
+    return AC3_SAMPLE_RATES[sub.fscod];
+  } else if (sub.fscod2 !== null && sub.fscod2 < 3) {
+    return EAC3_REDUCED_SAMPLE_RATES[sub.fscod2];
+  }
+  return null;
+};
+const getEac3ChannelCount = (config) => {
+  const sub = config.substreams[0];
+  assert(sub);
+  let channels = AC3_ACMOD_CHANNEL_COUNTS[sub.acmod] + sub.lfeon;
+  if (sub.numDepSub > 0) {
+    const CHAN_LOC_COUNTS = [2, 2, 1, 1, 2, 2, 2, 1, 1];
+    for (let bit = 0; bit < 9; bit++) {
+      if (sub.chanLoc & 1 << 8 - bit) {
+        channels += CHAN_LOC_COUNTS[bit];
+      }
+    }
+  }
+  return channels;
+};
 class Demuxer {
   constructor(input) {
     this.input = input;
@@ -2323,10 +3211,16 @@ class EncodedPacket {
     chunk.copyTo(data);
     return new EncodedPacket(data, chunk.type, chunk.timestamp / 1e6, (chunk.duration ?? 0) / 1e6, void 0, void 0, sideData);
   }
-  /** Clones this packet while optionally updating timing information. */
+  /** Clones this packet while optionally modifying the new packet's data. */
   clone(options) {
     if (options !== void 0 && (typeof options !== "object" || options === null)) {
       throw new TypeError("options, when provided, must be an object.");
+    }
+    if (options?.data !== void 0 && !(options.data instanceof Uint8Array)) {
+      throw new TypeError("options.data, when provided, must be a Uint8Array.");
+    }
+    if (options?.type !== void 0 && options.type !== "key" && options.type !== "delta") {
+      throw new TypeError('options.type, when provided, must be either "key" or "delta".');
     }
     if (options?.timestamp !== void 0 && !Number.isFinite(options.timestamp)) {
       throw new TypeError("options.timestamp, when provided, must be a number.");
@@ -2334,7 +3228,13 @@ class EncodedPacket {
     if (options?.duration !== void 0 && !Number.isFinite(options.duration)) {
       throw new TypeError("options.duration, when provided, must be a number.");
     }
-    return new EncodedPacket(this.data, this.type, options?.timestamp ?? this.timestamp, options?.duration ?? this.duration, this.sequenceNumber, this.byteLength);
+    if (options?.sequenceNumber !== void 0 && !Number.isFinite(options.sequenceNumber)) {
+      throw new TypeError("options.sequenceNumber, when provided, must be a number.");
+    }
+    if (options?.sideData !== void 0 && (typeof options.sideData !== "object" || options.sideData === null)) {
+      throw new TypeError("options.sideData, when provided, must be an object.");
+    }
+    return new EncodedPacket(options?.data ?? this.data, options?.type ?? this.type, options?.timestamp ?? this.timestamp, options?.duration ?? this.duration, options?.sequenceNumber ?? this.sequenceNumber, this.byteLength, options?.sideData ?? this.sideData);
   }
 }
 const fromUlaw = (u8) => {
@@ -2431,13 +3331,21 @@ const VIDEO_SAMPLE_PIXEL_FORMATS = [
 ];
 const VIDEO_SAMPLE_PIXEL_FORMATS_SET = new Set(VIDEO_SAMPLE_PIXEL_FORMATS);
 class VideoSample {
-  /** The width of the frame in pixels after rotation. */
-  get displayWidth() {
-    return this.rotation % 180 === 0 ? this.codedWidth : this.codedHeight;
+  /** The width of the frame in pixels. */
+  get codedWidth() {
+    return this.visibleRect.width;
   }
-  /** The height of the frame in pixels after rotation. */
+  /** The height of the frame in pixels. */
+  get codedHeight() {
+    return this.visibleRect.height;
+  }
+  /** The display width of the frame in pixels, after aspect ratio adjustment and rotation. */
+  get displayWidth() {
+    return this.rotation % 180 === 0 ? this.squarePixelWidth : this.squarePixelHeight;
+  }
+  /** The display height of the frame in pixels, after aspect ratio adjustment and rotation. */
   get displayHeight() {
-    return this.rotation % 180 === 0 ? this.codedHeight : this.codedWidth;
+    return this.rotation % 180 === 0 ? this.squarePixelHeight : this.squarePixelWidth;
   }
   /** The presentation timestamp of the frame in microseconds. */
   get microsecondTimestamp() {
@@ -2478,15 +3386,54 @@ class VideoSample {
       if (init.duration !== void 0 && (!Number.isFinite(init.duration) || init.duration < 0)) {
         throw new TypeError("init.duration, when provided, must be a non-negative number.");
       }
+      if (init.layout !== void 0) {
+        if (!Array.isArray(init.layout)) {
+          throw new TypeError("init.layout, when provided, must be an array.");
+        }
+        for (const plane of init.layout) {
+          if (!plane || typeof plane !== "object" || Array.isArray(plane)) {
+            throw new TypeError("Each entry in init.layout must be an object.");
+          }
+          if (!Number.isInteger(plane.offset) || plane.offset < 0) {
+            throw new TypeError("plane.offset must be a non-negative integer.");
+          }
+          if (!Number.isInteger(plane.stride) || plane.stride < 0) {
+            throw new TypeError("plane.stride must be a non-negative integer.");
+          }
+        }
+      }
+      if (init.visibleRect !== void 0) {
+        validateRectangle(init.visibleRect, "init.visibleRect");
+      }
+      if (init.displayWidth !== void 0 && (!Number.isInteger(init.displayWidth) || init.displayWidth <= 0)) {
+        throw new TypeError("init.displayWidth, when provided, must be a positive integer.");
+      }
+      if (init.displayHeight !== void 0 && (!Number.isInteger(init.displayHeight) || init.displayHeight <= 0)) {
+        throw new TypeError("init.displayHeight, when provided, must be a positive integer.");
+      }
+      if (init.displayWidth !== void 0 !== (init.displayHeight !== void 0)) {
+        throw new TypeError("init.displayWidth and init.displayHeight must be either both provided or both omitted.");
+      }
       this._data = toUint8Array(data).slice();
       this._layout = init.layout ?? createDefaultPlaneLayout(init.format, init.codedWidth, init.codedHeight);
       this.format = init.format;
-      this.codedWidth = init.codedWidth;
-      this.codedHeight = init.codedHeight;
       this.rotation = init.rotation ?? 0;
       this.timestamp = init.timestamp;
       this.duration = init.duration ?? 0;
       this.colorSpace = new VideoSampleColorSpace(init.colorSpace);
+      this.visibleRect = {
+        left: init.visibleRect?.left ?? 0,
+        top: init.visibleRect?.top ?? 0,
+        width: init.visibleRect?.width ?? init.codedWidth,
+        height: init.visibleRect?.height ?? init.codedHeight
+      };
+      if (init.displayWidth !== void 0) {
+        this.squarePixelWidth = this.rotation % 180 === 0 ? init.displayWidth : init.displayHeight;
+        this.squarePixelHeight = this.rotation % 180 === 0 ? init.displayHeight : init.displayWidth;
+      } else {
+        this.squarePixelWidth = this.codedWidth;
+        this.squarePixelHeight = this.codedHeight;
+      }
     } else if (typeof VideoFrame !== "undefined" && data instanceof VideoFrame) {
       if (init?.rotation !== void 0 && ![0, 90, 180, 270].includes(init.rotation)) {
         throw new TypeError("init.rotation, when provided, must be 0, 90, 180, or 270.");
@@ -2497,12 +3444,21 @@ class VideoSample {
       if (init?.duration !== void 0 && (!Number.isFinite(init.duration) || init.duration < 0)) {
         throw new TypeError("init.duration, when provided, must be a non-negative number.");
       }
+      if (init?.visibleRect !== void 0) {
+        validateRectangle(init.visibleRect, "init.visibleRect");
+      }
       this._data = data;
       this._layout = null;
       this.format = data.format;
-      this.codedWidth = data.displayWidth;
-      this.codedHeight = data.displayHeight;
+      this.visibleRect = {
+        left: data.visibleRect?.x ?? 0,
+        top: data.visibleRect?.y ?? 0,
+        width: data.visibleRect?.width ?? data.codedWidth,
+        height: data.visibleRect?.height ?? data.codedHeight
+      };
       this.rotation = init?.rotation ?? 0;
+      this.squarePixelWidth = data.displayWidth;
+      this.squarePixelHeight = data.displayHeight;
       this.timestamp = init?.timestamp ?? data.timestamp / 1e6;
       this.duration = init?.duration ?? (data.duration ?? 0) / 1e6;
       this.colorSpace = new VideoSampleColorSpace(data.colorSpace);
@@ -2552,8 +3508,9 @@ class VideoSample {
       this._data = canvas;
       this._layout = null;
       this.format = "RGBX";
-      this.codedWidth = width;
-      this.codedHeight = height;
+      this.visibleRect = { left: 0, top: 0, width, height };
+      this.squarePixelWidth = width;
+      this.squarePixelHeight = height;
       this.rotation = init.rotation ?? 0;
       this.timestamp = init.timestamp;
       this.duration = init.duration ?? 0;
@@ -2566,6 +3523,10 @@ class VideoSample {
     } else {
       throw new TypeError("Invalid data type: Must be a BufferSource or CanvasImageSource.");
     }
+    this.pixelAspectRatio = simplifyRational({
+      num: this.squarePixelWidth * this.codedHeight,
+      den: this.squarePixelHeight * this.codedWidth
+    });
     finalizationRegistry?.register(this, { type: "video", data: this._data }, this);
   }
   /** Clones this video sample. */
@@ -2590,7 +3551,10 @@ class VideoSample {
         timestamp: this.timestamp,
         duration: this.duration,
         colorSpace: this.colorSpace,
-        rotation: this.rotation
+        rotation: this.rotation,
+        visibleRect: this.visibleRect,
+        displayWidth: this.displayWidth,
+        displayHeight: this.displayHeight
       });
     } else {
       return new VideoSample(this._data, {
@@ -2600,7 +3564,10 @@ class VideoSample {
         timestamp: this.timestamp,
         duration: this.duration,
         colorSpace: this.colorSpace,
-        rotation: this.rotation
+        rotation: this.rotation,
+        visibleRect: this.visibleRect,
+        displayWidth: this.displayWidth,
+        displayHeight: this.displayHeight
       });
     }
   }
@@ -2818,7 +3785,7 @@ class VideoSample {
     const canvasWidth = context.canvas.width;
     const canvasHeight = context.canvas.height;
     const rotation = options.rotation ?? this.rotation;
-    const [rotatedWidth, rotatedHeight] = rotation % 180 === 0 ? [this.codedWidth, this.codedHeight] : [this.codedHeight, this.codedWidth];
+    const [rotatedWidth, rotatedHeight] = rotation % 180 === 0 ? [this.squarePixelWidth, this.squarePixelHeight] : [this.squarePixelHeight, this.squarePixelWidth];
     if (options.crop) {
       clampCropRectangle(options.crop, rotatedWidth, rotatedHeight);
     }
@@ -2854,18 +3821,18 @@ class VideoSample {
     if (rotation === 90) {
       [sx, sy, sWidth, sHeight] = [
         sy,
-        this.codedHeight - sx - sWidth,
+        this.squarePixelHeight - sx - sWidth,
         sHeight,
         sWidth
       ];
     } else if (rotation === 180) {
       [sx, sy] = [
-        this.codedWidth - sx - sWidth,
-        this.codedHeight - sy - sHeight
+        this.squarePixelWidth - sx - sWidth,
+        this.squarePixelHeight - sy - sHeight
       ];
     } else if (rotation === 270) {
       [sx, sy, sWidth, sHeight] = [
-        this.codedWidth - sy - sHeight,
+        this.squarePixelWidth - sy - sHeight,
         sx,
         sHeight,
         sWidth
@@ -2922,6 +3889,26 @@ class VideoSample {
 class VideoSampleColorSpace {
   /** Creates a new VideoSampleColorSpace. */
   constructor(init) {
+    if (init !== void 0) {
+      if (!init || typeof init !== "object") {
+        throw new TypeError("init.colorSpace, when provided, must be an object.");
+      }
+      const primariesValues = Object.keys(COLOR_PRIMARIES_MAP);
+      if (init.primaries != null && !primariesValues.includes(init.primaries)) {
+        throw new TypeError(`init.colorSpace.primaries, when provided, must be one of ${primariesValues.join(", ")}.`);
+      }
+      const transferValues = Object.keys(TRANSFER_CHARACTERISTICS_MAP);
+      if (init.transfer != null && !transferValues.includes(init.transfer)) {
+        throw new TypeError(`init.colorSpace.transfer, when provided, must be one of ${transferValues.join(", ")}.`);
+      }
+      const matrixValues = Object.keys(MATRIX_COEFFICIENTS_MAP);
+      if (init.matrix != null && !matrixValues.includes(init.matrix)) {
+        throw new TypeError(`init.colorSpace.matrix, when provided, must be one of ${matrixValues.join(", ")}.`);
+      }
+      if (init.fullRange != null && typeof init.fullRange !== "boolean") {
+        throw new TypeError("init.colorSpace.fullRange, when provided, must be a boolean.");
+      }
+    }
     this.primaries = init?.primaries ?? null;
     this.transfer = init?.transfer ?? null;
     this.matrix = init?.matrix ?? null;
@@ -4252,11 +5239,13 @@ class VideoDecoderWrapper extends DecoderWrapper {
         insertSorted(this.inputTimestamps, packet.timestamp, (x) => x);
       }
       if (isChromium() && this.currentPacketIndex === 0 && this.codec === "avc") {
-        const nalUnits = extractAvcNalUnits(packet.data, this.decoderConfig);
-        const filteredNalUnits = nalUnits.filter((x) => {
-          const type = extractNalUnitTypeForAvc(x);
-          return !(type >= 20 && type <= 31);
-        });
+        const filteredNalUnits = [];
+        for (const loc of iterateAvcNalUnits(packet.data, this.decoderConfig)) {
+          const type = extractNalUnitTypeForAvc(packet.data[loc.offset]);
+          if (!(type >= 20 && type <= 31)) {
+            filteredNalUnits.push(packet.data.subarray(loc.offset, loc.offset + loc.length));
+          }
+        }
         const newData = concatAvcNalUnits(filteredNalUnits, this.decoderConfig);
         packet = new EncodedPacket(newData, packet.type, packet.timestamp, packet.duration);
       }
@@ -4351,11 +5340,13 @@ class VideoDecoderWrapper extends DecoderWrapper {
    * and causes bugs upstream. So, let's take the dropping into our own hands.
    */
   hasHevcRaslPicture(packetData) {
-    const nalUnits = extractHevcNalUnits(packetData, this.decoderConfig);
-    return nalUnits.some((x) => {
-      const type = extractNalUnitTypeForHevc(x);
-      return type === HevcNalUnitType.RASL_N || type === HevcNalUnitType.RASL_R;
-    });
+    for (const loc of iterateHevcNalUnits(packetData, this.decoderConfig)) {
+      const type = extractNalUnitTypeForHevc(packetData[loc.offset]);
+      if (type === HevcNalUnitType.RASL_N || type === HevcNalUnitType.RASL_R) {
+        return true;
+      }
+    }
+    return false;
   }
   /** Handler for the WebCodecs VideoDecoder for ironing out browser differences. */
   sampleHandler(sample) {
@@ -4662,7 +5653,7 @@ class CanvasSink {
       throw new TypeError("poolSize must be a non-negative integer.");
     }
     const rotation = options.rotation ?? videoTrack.rotation;
-    const [rotatedWidth, rotatedHeight] = rotation % 180 === 0 ? [videoTrack.codedWidth, videoTrack.codedHeight] : [videoTrack.codedHeight, videoTrack.codedWidth];
+    const [rotatedWidth, rotatedHeight] = rotation % 180 === 0 ? [videoTrack.squarePixelWidth, videoTrack.squarePixelHeight] : [videoTrack.squarePixelHeight, videoTrack.squarePixelWidth];
     const crop = options.crop;
     if (crop) {
       clampCropRectangle(crop, rotatedWidth, rotatedHeight);
@@ -5153,6 +6144,14 @@ class InputTrack {
     return this._backing.getId();
   }
   /**
+   * The 1-based index of this track among all tracks of the same type in the input file. For example, the first
+   * video track has number 1, the second video track has number 2, and so on. The index refers to the order in
+   * which the tracks are returned by {@link Input.getTracks}.
+   */
+  get number() {
+    return this._backing.getNumber();
+  }
+  /**
    * The identifier of the codec used internally by the container. It is not homogenized by Mediabunny
    * and depends entirely on the container format.
    *
@@ -5162,6 +6161,7 @@ class InputTrack {
    * - For Matroska files, this field returns the value of the `CodecID` element.
    * - For WAVE files, this field returns the value of the format tag in the `'fmt '` chunk.
    * - For ADTS files, this field contains the `MPEG-4 Audio Object Type`.
+   * - For MPEG-TS files, this field contains the `streamType` value from the Program Map Table.
    * - In all other cases, this field is `null`.
    */
   get internalCodecId() {
@@ -5235,6 +6235,10 @@ class InputVideoTrack extends InputTrack {
   constructor(input, backing) {
     super(input, backing);
     this._backing = backing;
+    this.pixelAspectRatio = simplifyRational({
+      num: this._backing.getSquarePixelWidth() * this._backing.getCodedHeight(),
+      den: this._backing.getSquarePixelHeight() * this._backing.getCodedWidth()
+    });
   }
   get type() {
     return "video";
@@ -5254,15 +6258,23 @@ class InputVideoTrack extends InputTrack {
   get rotation() {
     return this._backing.getRotation();
   }
-  /** The width in pixels of the track's frames after rotation. */
+  /** The width of the track's frames in square pixels, adjusted for pixel aspect ratio but before rotation. */
+  get squarePixelWidth() {
+    return this._backing.getSquarePixelWidth();
+  }
+  /** The height of the track's frames in square pixels, adjusted for pixel aspect ratio but before rotation. */
+  get squarePixelHeight() {
+    return this._backing.getSquarePixelHeight();
+  }
+  /** The display width of the track's frames in pixels, after aspect ratio adjustment and rotation. */
   get displayWidth() {
     const rotation = this._backing.getRotation();
-    return rotation % 180 === 0 ? this._backing.getCodedWidth() : this._backing.getCodedHeight();
+    return rotation % 180 === 0 ? this.squarePixelWidth : this.squarePixelHeight;
   }
-  /** The height in pixels of the track's frames after rotation. */
+  /** The display height of the track's frames in pixels, after aspect ratio adjustment and rotation. */
   get displayHeight() {
     const rotation = this._backing.getRotation();
-    return rotation % 180 === 0 ? this._backing.getCodedHeight() : this._backing.getCodedWidth();
+    return rotation % 180 === 0 ? this.squarePixelHeight : this.squarePixelWidth;
   }
   /** Returns the color space of the track's samples. */
   getColorSpace() {
@@ -5919,6 +6931,8 @@ class IsobmffDemuxer extends Demuxer {
               type: "video",
               width: -1,
               height: -1,
+              squarePixelWidth: -1,
+              squarePixelHeight: -1,
               codec: null,
               codecDescription: null,
               colorSpace: null,
@@ -5988,6 +7002,8 @@ class IsobmffDemuxer extends Demuxer {
               slice.skip(6 * 1 + 2 + 2 + 2 + 3 * 4);
               track.info.width = readU16Be(slice);
               track.info.height = readU16Be(slice);
+              track.info.squarePixelWidth = track.info.width;
+              track.info.squarePixelHeight = track.info.height;
               slice.skip(4 + 4 + 4 + 2 + 32 + 2 + 2);
               this.readContiguousBoxes(slice.slice(slice.filePos, sampleBoxStartPos + sampleBoxInfo.totalSize - slice.filePos));
             } else {
@@ -6001,6 +7017,10 @@ class IsobmffDemuxer extends Demuxer {
                 track.info.codec = "ulaw";
               } else if (lowercaseBoxName === "alaw") {
                 track.info.codec = "alaw";
+              } else if (lowercaseBoxName === "ac-3") {
+                track.info.codec = "ac3";
+              } else if (lowercaseBoxName === "ec-3") {
+                track.info.codec = "eac3";
               } else {
                 console.warn(`Unsupported audio codec (sample entry type '${sampleBoxInfo.name}').`);
               }
@@ -6205,6 +7225,22 @@ class IsobmffDemuxer extends Demuxer {
           };
         }
         break;
+      case "pasp":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "video");
+          const num = readU32Be(slice);
+          const den = readU32Be(slice);
+          if (num > den) {
+            track.info.squarePixelWidth = Math.round(track.info.width * num / den);
+          } else {
+            track.info.squarePixelHeight = Math.round(track.info.height * den / num);
+          }
+        }
+        break;
       case "wave":
         {
           this.readContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
@@ -6243,7 +7279,10 @@ class IsobmffDemuxer extends Demuxer {
           const objectTypeIndication = readU8(slice);
           if (objectTypeIndication === 64 || objectTypeIndication === 103) {
             track.info.codec = "aac";
-            track.info.aacCodecInfo = { isMpeg2: objectTypeIndication === 103 };
+            track.info.aacCodecInfo = {
+              isMpeg2: objectTypeIndication === 103,
+              objectType: null
+            };
           } else if (objectTypeIndication === 105 || objectTypeIndication === 107) {
             track.info.codec = "mp3";
           } else if (objectTypeIndication === 221) {
@@ -6421,6 +7460,45 @@ class IsobmffDemuxer extends Demuxer {
           view.setUint32(0, 1716281667, false);
           description.set(bytes, 4);
           track.info.codecDescription = description;
+        }
+        break;
+      case "dac3":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "audio");
+          const bytes = readBytes(slice, 3);
+          const bitstream = new Bitstream(bytes);
+          const fscod = bitstream.readBits(2);
+          bitstream.skipBits(5 + 3);
+          const acmod = bitstream.readBits(3);
+          const lfeon = bitstream.readBits(1);
+          if (fscod < 3) {
+            track.info.sampleRate = AC3_SAMPLE_RATES[fscod];
+          }
+          track.info.numberOfChannels = AC3_ACMOD_CHANNEL_COUNTS[acmod] + lfeon;
+        }
+        break;
+      case "dec3":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "audio");
+          const bytes = readBytes(slice, boxInfo.contentSize);
+          const config = parseEac3Config(bytes);
+          if (!config) {
+            console.warn("Invalid dec3 box contents, ignoring.");
+            break;
+          }
+          const sampleRate = getEac3SampleRate(config);
+          if (sampleRate !== null) {
+            track.info.sampleRate = sampleRate;
+          }
+          track.info.numberOfChannels = getEac3ChannelCount(config);
         }
         break;
       case "stts":
@@ -7194,6 +8272,21 @@ class IsobmffTrackBacking {
   getId() {
     return this.internalTrack.id;
   }
+  getNumber() {
+    const demuxer = this.internalTrack.demuxer;
+    const inputTrack = this.internalTrack.inputTrack;
+    const trackType = inputTrack.type;
+    let number = 0;
+    for (const track of demuxer.tracks) {
+      if (track.inputTrack.type === trackType) {
+        number++;
+      }
+      if (track === this.internalTrack) {
+        break;
+      }
+    }
+    return number;
+  }
   getCodec() {
     throw new Error("Not implemented on base class.");
   }
@@ -7512,6 +8605,12 @@ class IsobmffVideoTrackBacking extends IsobmffTrackBacking {
   getCodedHeight() {
     return this.internalTrack.info.height;
   }
+  getSquarePixelWidth() {
+    return this.internalTrack.info.squarePixelWidth;
+  }
+  getSquarePixelHeight() {
+    return this.internalTrack.info.squarePixelHeight;
+  }
   getRotation() {
     return this.internalTrack.rotation;
   }
@@ -7542,6 +8641,8 @@ class IsobmffVideoTrackBacking extends IsobmffTrackBacking {
         codec: extractVideoCodecString(this.internalTrack.info),
         codedWidth: this.internalTrack.info.width,
         codedHeight: this.internalTrack.info.height,
+        displayAspectWidth: this.internalTrack.info.squarePixelWidth,
+        displayAspectHeight: this.internalTrack.info.squarePixelHeight,
         description: this.internalTrack.info.codecDescription ?? void 0,
         colorSpace: this.internalTrack.info.colorSpace ?? void 0
       };
@@ -7744,6 +8845,9 @@ var EBMLId;
   EBMLId2[EBMLId2["Video"] = 224] = "Video";
   EBMLId2[EBMLId2["PixelWidth"] = 176] = "PixelWidth";
   EBMLId2[EBMLId2["PixelHeight"] = 186] = "PixelHeight";
+  EBMLId2[EBMLId2["DisplayWidth"] = 21680] = "DisplayWidth";
+  EBMLId2[EBMLId2["DisplayHeight"] = 21690] = "DisplayHeight";
+  EBMLId2[EBMLId2["DisplayUnit"] = 21682] = "DisplayUnit";
   EBMLId2[EBMLId2["AlphaMode"] = 21440] = "AlphaMode";
   EBMLId2[EBMLId2["Audio"] = 225] = "Audio";
   EBMLId2[EBMLId2["SamplingFrequency"] = 181] = "SamplingFrequency";
@@ -8012,7 +9116,9 @@ const CODEC_STRING_MAP = {
   "mp3": "A_MPEG/L3",
   "opus": "A_OPUS",
   "vorbis": "A_VORBIS",
-  "flac": "A_FLAC"
+  "flac": "A_FLAC",
+  "ac3": "A_AC3",
+  "eac3": "A_EAC3"
 };
 function assertDefinedSize(size) {
   if (size === void 0) {
@@ -8636,6 +9742,17 @@ class MatroskaDemuxer extends Demuxer {
             const slashIndex = this.currentTrack.codecId.indexOf("/");
             const codecIdWithoutSuffix = slashIndex === -1 ? this.currentTrack.codecId : this.currentTrack.codecId.slice(0, slashIndex);
             if (this.currentTrack.info.type === "video" && this.currentTrack.info.width !== -1 && this.currentTrack.info.height !== -1) {
+              this.currentTrack.info.squarePixelWidth = this.currentTrack.info.width;
+              this.currentTrack.info.squarePixelHeight = this.currentTrack.info.height;
+              if (this.currentTrack.info.displayWidth !== null && this.currentTrack.info.displayHeight !== null) {
+                const num = this.currentTrack.info.displayWidth * this.currentTrack.info.height;
+                const den = this.currentTrack.info.displayHeight * this.currentTrack.info.width;
+                if (num > den) {
+                  this.currentTrack.info.squarePixelWidth = Math.round(this.currentTrack.info.width * num / den);
+                } else {
+                  this.currentTrack.info.squarePixelHeight = Math.round(this.currentTrack.info.height * den / num);
+                }
+              }
               if (this.currentTrack.codecId === CODEC_STRING_MAP.avc) {
                 this.currentTrack.info.codec = "avc";
                 this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
@@ -8657,7 +9774,8 @@ class MatroskaDemuxer extends Demuxer {
               if (codecIdWithoutSuffix === CODEC_STRING_MAP.aac) {
                 this.currentTrack.info.codec = "aac";
                 this.currentTrack.info.aacCodecInfo = {
-                  isMpeg2: this.currentTrack.codecId.includes("MPEG2")
+                  isMpeg2: this.currentTrack.codecId.includes("MPEG2"),
+                  objectType: null
                 };
                 this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
               } else if (this.currentTrack.codecId === CODEC_STRING_MAP.mp3) {
@@ -8671,6 +9789,12 @@ class MatroskaDemuxer extends Demuxer {
                 this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
               } else if (codecIdWithoutSuffix === CODEC_STRING_MAP.flac) {
                 this.currentTrack.info.codec = "flac";
+                this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
+              } else if (codecIdWithoutSuffix === CODEC_STRING_MAP.ac3) {
+                this.currentTrack.info.codec = "ac3";
+                this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
+              } else if (codecIdWithoutSuffix === CODEC_STRING_MAP.eac3) {
+                this.currentTrack.info.codec = "eac3";
                 this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
               } else if (this.currentTrack.codecId === "A_PCM/INT/LIT") {
                 if (this.currentTrack.info.bitDepth === 8) {
@@ -8725,6 +9849,11 @@ class MatroskaDemuxer extends Demuxer {
               type: "video",
               width: -1,
               height: -1,
+              displayWidth: null,
+              displayHeight: null,
+              displayUnit: null,
+              squarePixelWidth: -1,
+              squarePixelHeight: -1,
               rotation: 0,
               codec: null,
               codecDescription: null,
@@ -8869,6 +9998,27 @@ class MatroskaDemuxer extends Demuxer {
           if (this.currentTrack?.info?.type !== "video")
             break;
           this.currentTrack.info.height = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.DisplayWidth:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          this.currentTrack.info.displayWidth = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.DisplayHeight:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          this.currentTrack.info.displayHeight = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.DisplayUnit:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          this.currentTrack.info.displayUnit = readUnsignedInt(slice, size);
         }
         break;
       case EBMLId.AlphaMode:
@@ -9464,6 +10614,23 @@ class MatroskaTrackBacking {
   getId() {
     return this.internalTrack.id;
   }
+  getNumber() {
+    const demuxer = this.internalTrack.demuxer;
+    const inputTrack = this.internalTrack.inputTrack;
+    const trackType = inputTrack.type;
+    let number = 0;
+    for (const segment of demuxer.segments) {
+      for (const track of segment.tracks) {
+        if (track.inputTrack.type === trackType) {
+          number++;
+        }
+        if (track === this.internalTrack) {
+          break;
+        }
+      }
+    }
+    return number;
+  }
   getCodec() {
     throw new Error("Not implemented on base class.");
   }
@@ -9759,6 +10926,12 @@ class MatroskaVideoTrackBacking extends MatroskaTrackBacking {
   getCodedHeight() {
     return this.internalTrack.info.height;
   }
+  getSquarePixelWidth() {
+    return this.internalTrack.info.squarePixelWidth;
+  }
+  getSquarePixelHeight() {
+    return this.internalTrack.info.squarePixelHeight;
+  }
   getRotation() {
     return this.internalTrack.info.rotation;
   }
@@ -9799,6 +10972,8 @@ class MatroskaVideoTrackBacking extends MatroskaTrackBacking {
         }),
         codedWidth: this.internalTrack.info.width,
         codedHeight: this.internalTrack.info.height,
+        displayAspectWidth: this.internalTrack.info.squarePixelWidth,
+        displayAspectHeight: this.internalTrack.info.squarePixelHeight,
         description: this.internalTrack.info.codecDescription ?? void 0,
         colorSpace: this.internalTrack.info.colorSpace ?? void 0
       };
@@ -9836,928 +11011,7 @@ class MatroskaAudioTrackBacking extends MatroskaTrackBacking {
     });
   }
 }
-const FRAME_HEADER_SIZE = 4;
-const SAMPLING_RATES = [44100, 48e3, 32e3];
-const KILOBIT_RATES = [
-  // lowSamplingFrequency === 0
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  // layer = 0
-  -1,
-  32,
-  40,
-  48,
-  56,
-  64,
-  80,
-  96,
-  112,
-  128,
-  160,
-  192,
-  224,
-  256,
-  320,
-  -1,
-  // layer 1
-  -1,
-  32,
-  48,
-  56,
-  64,
-  80,
-  96,
-  112,
-  128,
-  160,
-  192,
-  224,
-  256,
-  320,
-  384,
-  -1,
-  // layer = 2
-  -1,
-  32,
-  64,
-  96,
-  128,
-  160,
-  192,
-  224,
-  256,
-  288,
-  320,
-  352,
-  384,
-  416,
-  448,
-  -1,
-  // layer = 3
-  // lowSamplingFrequency === 1
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  -1,
-  // layer = 0
-  -1,
-  8,
-  16,
-  24,
-  32,
-  40,
-  48,
-  56,
-  64,
-  80,
-  96,
-  112,
-  128,
-  144,
-  160,
-  -1,
-  // layer = 1
-  -1,
-  8,
-  16,
-  24,
-  32,
-  40,
-  48,
-  56,
-  64,
-  80,
-  96,
-  112,
-  128,
-  144,
-  160,
-  -1,
-  // layer = 2
-  -1,
-  32,
-  48,
-  56,
-  64,
-  80,
-  96,
-  112,
-  128,
-  144,
-  160,
-  176,
-  192,
-  224,
-  256,
-  -1
-  // layer = 3
-];
-const XING = 1483304551;
-const INFO = 1231971951;
-const computeMp3FrameSize = (lowSamplingFrequency, layer, bitrate, sampleRate, padding) => {
-  if (layer === 0) {
-    return 0;
-  } else if (layer === 1) {
-    return Math.floor(144 * bitrate / (sampleRate << lowSamplingFrequency)) + padding;
-  } else if (layer === 2) {
-    return Math.floor(144 * bitrate / sampleRate) + padding;
-  } else {
-    return (Math.floor(12 * bitrate / sampleRate) + padding) * 4;
-  }
-};
-const getXingOffset = (mpegVersionId, channel) => {
-  return mpegVersionId === 3 ? channel === 3 ? 21 : 36 : channel === 3 ? 13 : 21;
-};
-const readFrameHeader$1 = (word, remainingBytes) => {
-  const firstByte = word >>> 24;
-  const secondByte = word >>> 16 & 255;
-  const thirdByte = word >>> 8 & 255;
-  const fourthByte = word & 255;
-  if (firstByte !== 255 && secondByte !== 255 && thirdByte !== 255 && fourthByte !== 255) {
-    return {
-      header: null,
-      bytesAdvanced: 4
-    };
-  }
-  if (firstByte !== 255) {
-    return { header: null, bytesAdvanced: 1 };
-  }
-  if ((secondByte & 224) !== 224) {
-    return { header: null, bytesAdvanced: 1 };
-  }
-  let lowSamplingFrequency = 0;
-  let mpeg25 = 0;
-  if (secondByte & 1 << 4) {
-    lowSamplingFrequency = secondByte & 1 << 3 ? 0 : 1;
-  } else {
-    lowSamplingFrequency = 1;
-    mpeg25 = 1;
-  }
-  const mpegVersionId = secondByte >> 3 & 3;
-  const layer = secondByte >> 1 & 3;
-  const bitrateIndex = thirdByte >> 4 & 15;
-  const frequencyIndex = (thirdByte >> 2 & 3) % 3;
-  const padding = thirdByte >> 1 & 1;
-  const channel = fourthByte >> 6 & 3;
-  const modeExtension = fourthByte >> 4 & 3;
-  const copyright = fourthByte >> 3 & 1;
-  const original = fourthByte >> 2 & 1;
-  const emphasis = fourthByte & 3;
-  const kilobitRate = KILOBIT_RATES[lowSamplingFrequency * 16 * 4 + layer * 16 + bitrateIndex];
-  if (kilobitRate === -1) {
-    return { header: null, bytesAdvanced: 1 };
-  }
-  const bitrate = kilobitRate * 1e3;
-  const sampleRate = SAMPLING_RATES[frequencyIndex] >> lowSamplingFrequency + mpeg25;
-  const frameLength = computeMp3FrameSize(lowSamplingFrequency, layer, bitrate, sampleRate, padding);
-  if (remainingBytes !== null && remainingBytes < frameLength) {
-    return { header: null, bytesAdvanced: 1 };
-  }
-  let audioSamplesInFrame;
-  if (mpegVersionId === 3) {
-    audioSamplesInFrame = layer === 3 ? 384 : 1152;
-  } else {
-    if (layer === 3) {
-      audioSamplesInFrame = 384;
-    } else if (layer === 2) {
-      audioSamplesInFrame = 1152;
-    } else {
-      audioSamplesInFrame = 576;
-    }
-  }
-  return {
-    header: {
-      totalSize: frameLength,
-      mpegVersionId,
-      layer,
-      bitrate,
-      frequencyIndex,
-      sampleRate,
-      channel,
-      modeExtension,
-      copyright,
-      original,
-      emphasis,
-      audioSamplesInFrame
-    },
-    bytesAdvanced: 1
-  };
-};
-const decodeSynchsafe = (synchsafed) => {
-  let mask = 2130706432;
-  let unsynchsafed = 0;
-  while (mask !== 0) {
-    unsynchsafed >>= 1;
-    unsynchsafed |= synchsafed & mask;
-    mask >>= 8;
-  }
-  return unsynchsafed;
-};
-var Id3V2HeaderFlags;
-(function(Id3V2HeaderFlags2) {
-  Id3V2HeaderFlags2[Id3V2HeaderFlags2["Unsynchronisation"] = 128] = "Unsynchronisation";
-  Id3V2HeaderFlags2[Id3V2HeaderFlags2["ExtendedHeader"] = 64] = "ExtendedHeader";
-  Id3V2HeaderFlags2[Id3V2HeaderFlags2["ExperimentalIndicator"] = 32] = "ExperimentalIndicator";
-  Id3V2HeaderFlags2[Id3V2HeaderFlags2["Footer"] = 16] = "Footer";
-})(Id3V2HeaderFlags || (Id3V2HeaderFlags = {}));
-var Id3V2TextEncoding;
-(function(Id3V2TextEncoding2) {
-  Id3V2TextEncoding2[Id3V2TextEncoding2["ISO_8859_1"] = 0] = "ISO_8859_1";
-  Id3V2TextEncoding2[Id3V2TextEncoding2["UTF_16_WITH_BOM"] = 1] = "UTF_16_WITH_BOM";
-  Id3V2TextEncoding2[Id3V2TextEncoding2["UTF_16_BE_NO_BOM"] = 2] = "UTF_16_BE_NO_BOM";
-  Id3V2TextEncoding2[Id3V2TextEncoding2["UTF_8"] = 3] = "UTF_8";
-})(Id3V2TextEncoding || (Id3V2TextEncoding = {}));
-const ID3_V1_TAG_SIZE = 128;
-const ID3_V2_HEADER_SIZE = 10;
-const ID3_V1_GENRES = [
-  "Blues",
-  "Classic rock",
-  "Country",
-  "Dance",
-  "Disco",
-  "Funk",
-  "Grunge",
-  "Hip-hop",
-  "Jazz",
-  "Metal",
-  "New age",
-  "Oldies",
-  "Other",
-  "Pop",
-  "Rhythm and blues",
-  "Rap",
-  "Reggae",
-  "Rock",
-  "Techno",
-  "Industrial",
-  "Alternative",
-  "Ska",
-  "Death metal",
-  "Pranks",
-  "Soundtrack",
-  "Euro-techno",
-  "Ambient",
-  "Trip-hop",
-  "Vocal",
-  "Jazz & funk",
-  "Fusion",
-  "Trance",
-  "Classical",
-  "Instrumental",
-  "Acid",
-  "House",
-  "Game",
-  "Sound clip",
-  "Gospel",
-  "Noise",
-  "Alternative rock",
-  "Bass",
-  "Soul",
-  "Punk",
-  "Space",
-  "Meditative",
-  "Instrumental pop",
-  "Instrumental rock",
-  "Ethnic",
-  "Gothic",
-  "Darkwave",
-  "Techno-industrial",
-  "Electronic",
-  "Pop-folk",
-  "Eurodance",
-  "Dream",
-  "Southern rock",
-  "Comedy",
-  "Cult",
-  "Gangsta",
-  "Top 40",
-  "Christian rap",
-  "Pop/funk",
-  "Jungle music",
-  "Native US",
-  "Cabaret",
-  "New wave",
-  "Psychedelic",
-  "Rave",
-  "Showtunes",
-  "Trailer",
-  "Lo-fi",
-  "Tribal",
-  "Acid punk",
-  "Acid jazz",
-  "Polka",
-  "Retro",
-  "Musical",
-  "Rock 'n' roll",
-  "Hard rock",
-  "Folk",
-  "Folk rock",
-  "National folk",
-  "Swing",
-  "Fast fusion",
-  "Bebop",
-  "Latin",
-  "Revival",
-  "Celtic",
-  "Bluegrass",
-  "Avantgarde",
-  "Gothic rock",
-  "Progressive rock",
-  "Psychedelic rock",
-  "Symphonic rock",
-  "Slow rock",
-  "Big band",
-  "Chorus",
-  "Easy listening",
-  "Acoustic",
-  "Humour",
-  "Speech",
-  "Chanson",
-  "Opera",
-  "Chamber music",
-  "Sonata",
-  "Symphony",
-  "Booty bass",
-  "Primus",
-  "Porn groove",
-  "Satire",
-  "Slow jam",
-  "Club",
-  "Tango",
-  "Samba",
-  "Folklore",
-  "Ballad",
-  "Power ballad",
-  "Rhythmic Soul",
-  "Freestyle",
-  "Duet",
-  "Punk rock",
-  "Drum solo",
-  "A cappella",
-  "Euro-house",
-  "Dance hall",
-  "Goa music",
-  "Drum & bass",
-  "Club-house",
-  "Hardcore techno",
-  "Terror",
-  "Indie",
-  "Britpop",
-  "Negerpunk",
-  "Polsk punk",
-  "Beat",
-  "Christian gangsta rap",
-  "Heavy metal",
-  "Black metal",
-  "Crossover",
-  "Contemporary Christian",
-  "Christian rock",
-  "Merengue",
-  "Salsa",
-  "Thrash metal",
-  "Anime",
-  "Jpop",
-  "Synthpop",
-  "Christmas",
-  "Art rock",
-  "Baroque",
-  "Bhangra",
-  "Big beat",
-  "Breakbeat",
-  "Chillout",
-  "Downtempo",
-  "Dub",
-  "EBM",
-  "Eclectic",
-  "Electro",
-  "Electroclash",
-  "Emo",
-  "Experimental",
-  "Garage",
-  "Global",
-  "IDM",
-  "Illbient",
-  "Industro-Goth",
-  "Jam Band",
-  "Krautrock",
-  "Leftfield",
-  "Lounge",
-  "Math rock",
-  "New romantic",
-  "Nu-breakz",
-  "Post-punk",
-  "Post-rock",
-  "Psytrance",
-  "Shoegaze",
-  "Space rock",
-  "Trop rock",
-  "World music",
-  "Neoclassical",
-  "Audiobook",
-  "Audio theatre",
-  "Neue Deutsche Welle",
-  "Podcast",
-  "Indie rock",
-  "G-Funk",
-  "Dubstep",
-  "Garage rock",
-  "Psybient"
-];
-const parseId3V1Tag = (slice, tags) => {
-  var _a;
-  const startPos = slice.filePos;
-  tags.raw ?? (tags.raw = {});
-  (_a = tags.raw)["TAG"] ?? (_a["TAG"] = readBytes(slice, ID3_V1_TAG_SIZE - 3));
-  slice.filePos = startPos;
-  const title = readId3V1String(slice, 30);
-  if (title)
-    tags.title ?? (tags.title = title);
-  const artist = readId3V1String(slice, 30);
-  if (artist)
-    tags.artist ?? (tags.artist = artist);
-  const album = readId3V1String(slice, 30);
-  if (album)
-    tags.album ?? (tags.album = album);
-  const yearText = readId3V1String(slice, 4);
-  const year = Number.parseInt(yearText, 10);
-  if (Number.isInteger(year) && year > 0) {
-    tags.date ?? (tags.date = new Date(year, 0, 1));
-  }
-  const commentBytes = readBytes(slice, 30);
-  let comment;
-  if (commentBytes[28] === 0 && commentBytes[29] !== 0) {
-    const trackNum = commentBytes[29];
-    if (trackNum > 0) {
-      tags.trackNumber ?? (tags.trackNumber = trackNum);
-    }
-    slice.skip(-30);
-    comment = readId3V1String(slice, 28);
-    slice.skip(2);
-  } else {
-    slice.skip(-30);
-    comment = readId3V1String(slice, 30);
-  }
-  if (comment)
-    tags.comment ?? (tags.comment = comment);
-  const genreIndex = readU8(slice);
-  if (genreIndex < ID3_V1_GENRES.length) {
-    tags.genre ?? (tags.genre = ID3_V1_GENRES[genreIndex]);
-  }
-};
-const readId3V1String = (slice, length) => {
-  const bytes = readBytes(slice, length);
-  const endIndex = coalesceIndex(bytes.indexOf(0), bytes.length);
-  const relevantBytes = bytes.subarray(0, endIndex);
-  let str = "";
-  for (let i = 0; i < relevantBytes.length; i++) {
-    str += String.fromCharCode(relevantBytes[i]);
-  }
-  return str.trimEnd();
-};
-const readId3V2Header = (slice) => {
-  const startPos = slice.filePos;
-  const tag = readAscii(slice, 3);
-  const majorVersion = readU8(slice);
-  const revision = readU8(slice);
-  const flags = readU8(slice);
-  const sizeRaw = readU32Be(slice);
-  if (tag !== "ID3" || majorVersion === 255 || revision === 255 || (sizeRaw & 2155905152) !== 0) {
-    slice.filePos = startPos;
-    return null;
-  }
-  const size = decodeSynchsafe(sizeRaw);
-  return { majorVersion, revision, flags, size };
-};
-const parseId3V2Tag = (slice, header, tags) => {
-  var _a, _b, _c, _d;
-  if (![2, 3, 4].includes(header.majorVersion)) {
-    console.warn(`Unsupported ID3v2 major version: ${header.majorVersion}`);
-    return;
-  }
-  const bytes = readBytes(slice, header.size);
-  const reader = new Id3V2Reader(header, bytes);
-  if (header.flags & Id3V2HeaderFlags.Footer) {
-    reader.removeFooter();
-  }
-  if (header.flags & Id3V2HeaderFlags.Unsynchronisation && header.majorVersion === 3) {
-    reader.ununsynchronizeAll();
-  }
-  if (header.flags & Id3V2HeaderFlags.ExtendedHeader) {
-    const extendedHeaderSize = reader.readU32();
-    if (header.majorVersion === 3) {
-      reader.pos += extendedHeaderSize;
-    } else {
-      reader.pos += extendedHeaderSize - 4;
-    }
-  }
-  while (reader.pos <= reader.bytes.length - reader.frameHeaderSize()) {
-    const frame = reader.readId3V2Frame();
-    if (!frame) {
-      break;
-    }
-    const frameStartPos = reader.pos;
-    const frameEndPos = reader.pos + frame.size;
-    let frameEncrypted = false;
-    let frameCompressed = false;
-    let frameUnsynchronized = false;
-    if (header.majorVersion === 3) {
-      frameEncrypted = !!(frame.flags & 1 << 6);
-      frameCompressed = !!(frame.flags & 1 << 7);
-    } else if (header.majorVersion === 4) {
-      frameEncrypted = !!(frame.flags & 1 << 2);
-      frameCompressed = !!(frame.flags & 1 << 3);
-      frameUnsynchronized = !!(frame.flags & 1 << 1) || !!(header.flags & Id3V2HeaderFlags.Unsynchronisation);
-    }
-    if (frameEncrypted) {
-      console.warn(`Skipping encrypted ID3v2 frame ${frame.id}`);
-      reader.pos = frameEndPos;
-      continue;
-    }
-    if (frameCompressed) {
-      console.warn(`Skipping compressed ID3v2 frame ${frame.id}`);
-      reader.pos = frameEndPos;
-      continue;
-    }
-    if (frameUnsynchronized) {
-      reader.ununsynchronizeRegion(reader.pos, frameEndPos);
-    }
-    tags.raw ?? (tags.raw = {});
-    if (frame.id[0] === "T") {
-      (_a = tags.raw)[_b = frame.id] ?? (_a[_b] = reader.readId3V2EncodingAndText(frameEndPos));
-    } else {
-      (_c = tags.raw)[_d = frame.id] ?? (_c[_d] = reader.readBytes(frame.size));
-    }
-    reader.pos = frameStartPos;
-    switch (frame.id) {
-      case "TIT2":
-      case "TT2":
-        {
-          tags.title ?? (tags.title = reader.readId3V2EncodingAndText(frameEndPos));
-        }
-        break;
-      case "TIT3":
-      case "TT3":
-        {
-          tags.description ?? (tags.description = reader.readId3V2EncodingAndText(frameEndPos));
-        }
-        break;
-      case "TPE1":
-      case "TP1":
-        {
-          tags.artist ?? (tags.artist = reader.readId3V2EncodingAndText(frameEndPos));
-        }
-        break;
-      case "TALB":
-      case "TAL":
-        {
-          tags.album ?? (tags.album = reader.readId3V2EncodingAndText(frameEndPos));
-        }
-        break;
-      case "TPE2":
-      case "TP2":
-        {
-          tags.albumArtist ?? (tags.albumArtist = reader.readId3V2EncodingAndText(frameEndPos));
-        }
-        break;
-      case "TRCK":
-      case "TRK":
-        {
-          const trackText = reader.readId3V2EncodingAndText(frameEndPos);
-          const parts = trackText.split("/");
-          const trackNum = Number.parseInt(parts[0], 10);
-          const tracksTotal = parts[1] && Number.parseInt(parts[1], 10);
-          if (Number.isInteger(trackNum) && trackNum > 0) {
-            tags.trackNumber ?? (tags.trackNumber = trackNum);
-          }
-          if (tracksTotal && Number.isInteger(tracksTotal) && tracksTotal > 0) {
-            tags.tracksTotal ?? (tags.tracksTotal = tracksTotal);
-          }
-        }
-        break;
-      case "TPOS":
-      case "TPA":
-        {
-          const discText = reader.readId3V2EncodingAndText(frameEndPos);
-          const parts = discText.split("/");
-          const discNum = Number.parseInt(parts[0], 10);
-          const discsTotal = parts[1] && Number.parseInt(parts[1], 10);
-          if (Number.isInteger(discNum) && discNum > 0) {
-            tags.discNumber ?? (tags.discNumber = discNum);
-          }
-          if (discsTotal && Number.isInteger(discsTotal) && discsTotal > 0) {
-            tags.discsTotal ?? (tags.discsTotal = discsTotal);
-          }
-        }
-        break;
-      case "TCON":
-      case "TCO":
-        {
-          const genreText = reader.readId3V2EncodingAndText(frameEndPos);
-          let match = /^\((\d+)\)/.exec(genreText);
-          if (match) {
-            const genreNumber = Number.parseInt(match[1]);
-            if (ID3_V1_GENRES[genreNumber] !== void 0) {
-              tags.genre ?? (tags.genre = ID3_V1_GENRES[genreNumber]);
-              break;
-            }
-          }
-          match = /^\d+$/.exec(genreText);
-          if (match) {
-            const genreNumber = Number.parseInt(match[0]);
-            if (ID3_V1_GENRES[genreNumber] !== void 0) {
-              tags.genre ?? (tags.genre = ID3_V1_GENRES[genreNumber]);
-              break;
-            }
-          }
-          tags.genre ?? (tags.genre = genreText);
-        }
-        break;
-      case "TDRC":
-      case "TDAT":
-        {
-          const dateText = reader.readId3V2EncodingAndText(frameEndPos);
-          const date = new Date(dateText);
-          if (!Number.isNaN(date.getTime())) {
-            tags.date ?? (tags.date = date);
-          }
-        }
-        break;
-      case "TYER":
-      case "TYE":
-        {
-          const yearText = reader.readId3V2EncodingAndText(frameEndPos);
-          const year = Number.parseInt(yearText, 10);
-          if (Number.isInteger(year)) {
-            tags.date ?? (tags.date = new Date(year, 0, 1));
-          }
-        }
-        break;
-      case "USLT":
-      case "ULT":
-        {
-          const encoding = reader.readU8();
-          reader.pos += 3;
-          reader.readId3V2Text(encoding, frameEndPos);
-          tags.lyrics ?? (tags.lyrics = reader.readId3V2Text(encoding, frameEndPos));
-        }
-        break;
-      case "COMM":
-      case "COM":
-        {
-          const encoding = reader.readU8();
-          reader.pos += 3;
-          reader.readId3V2Text(encoding, frameEndPos);
-          tags.comment ?? (tags.comment = reader.readId3V2Text(encoding, frameEndPos));
-        }
-        break;
-      case "APIC":
-      case "PIC":
-        {
-          const encoding = reader.readId3V2TextEncoding();
-          let mimeType;
-          if (header.majorVersion === 2) {
-            const imageFormat = reader.readAscii(3);
-            mimeType = imageFormat === "PNG" ? "image/png" : imageFormat === "JPG" ? "image/jpeg" : "image/*";
-          } else {
-            mimeType = reader.readId3V2Text(encoding, frameEndPos);
-          }
-          const pictureType = reader.readU8();
-          const description = reader.readId3V2Text(encoding, frameEndPos).trimEnd();
-          const imageDataSize = frameEndPos - reader.pos;
-          if (imageDataSize >= 0) {
-            const imageData = reader.readBytes(imageDataSize);
-            if (!tags.images)
-              tags.images = [];
-            tags.images.push({
-              data: imageData,
-              mimeType,
-              kind: pictureType === 3 ? "coverFront" : pictureType === 4 ? "coverBack" : "unknown",
-              description
-            });
-          }
-        }
-        break;
-      default:
-        {
-          reader.pos += frame.size;
-        }
-        break;
-    }
-    reader.pos = frameEndPos;
-  }
-};
-class Id3V2Reader {
-  constructor(header, bytes) {
-    this.header = header;
-    this.bytes = bytes;
-    this.pos = 0;
-    this.view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-  }
-  frameHeaderSize() {
-    return this.header.majorVersion === 2 ? 6 : 10;
-  }
-  ununsynchronizeAll() {
-    const newBytes = [];
-    for (let i = 0; i < this.bytes.length; i++) {
-      const value1 = this.bytes[i];
-      newBytes.push(value1);
-      if (value1 === 255 && i !== this.bytes.length - 1) {
-        const value2 = this.bytes[i];
-        if (value2 === 0) {
-          i++;
-        }
-      }
-    }
-    this.bytes = new Uint8Array(newBytes);
-    this.view = new DataView(this.bytes.buffer);
-  }
-  ununsynchronizeRegion(start, end) {
-    const newBytes = [];
-    for (let i = start; i < end; i++) {
-      const value1 = this.bytes[i];
-      newBytes.push(value1);
-      if (value1 === 255 && i !== end - 1) {
-        const value2 = this.bytes[i + 1];
-        if (value2 === 0) {
-          i++;
-        }
-      }
-    }
-    const before = this.bytes.subarray(0, start);
-    const after = this.bytes.subarray(end);
-    this.bytes = new Uint8Array(before.length + newBytes.length + after.length);
-    this.bytes.set(before, 0);
-    this.bytes.set(newBytes, before.length);
-    this.bytes.set(after, before.length + newBytes.length);
-    this.view = new DataView(this.bytes.buffer);
-  }
-  removeFooter() {
-    this.bytes = this.bytes.subarray(0, this.bytes.length - ID3_V2_HEADER_SIZE);
-    this.view = new DataView(this.bytes.buffer);
-  }
-  readBytes(length) {
-    const slice = this.bytes.subarray(this.pos, this.pos + length);
-    this.pos += length;
-    return slice;
-  }
-  readU8() {
-    const value = this.view.getUint8(this.pos);
-    this.pos += 1;
-    return value;
-  }
-  readU16() {
-    const value = this.view.getUint16(this.pos, false);
-    this.pos += 2;
-    return value;
-  }
-  readU24() {
-    const high = this.view.getUint16(this.pos, false);
-    const low = this.view.getUint8(this.pos + 1);
-    this.pos += 3;
-    return high * 256 + low;
-  }
-  readU32() {
-    const value = this.view.getUint32(this.pos, false);
-    this.pos += 4;
-    return value;
-  }
-  readAscii(length) {
-    let str = "";
-    for (let i = 0; i < length; i++) {
-      str += String.fromCharCode(this.view.getUint8(this.pos + i));
-    }
-    this.pos += length;
-    return str;
-  }
-  readId3V2Frame() {
-    if (this.header.majorVersion === 2) {
-      const id = this.readAscii(3);
-      if (id === "\0\0\0") {
-        return null;
-      }
-      const size = this.readU24();
-      return { id, size, flags: 0 };
-    } else {
-      const id = this.readAscii(4);
-      if (id === "\0\0\0\0") {
-        return null;
-      }
-      const sizeRaw = this.readU32();
-      let size = this.header.majorVersion === 4 ? decodeSynchsafe(sizeRaw) : sizeRaw;
-      const flags = this.readU16();
-      const headerEndPos = this.pos;
-      const isSizeValid = (size2) => {
-        const nextPos = this.pos + size2;
-        if (nextPos > this.bytes.length) {
-          return false;
-        }
-        if (nextPos <= this.bytes.length - this.frameHeaderSize()) {
-          this.pos += size2;
-          const nextId = this.readAscii(4);
-          if (nextId !== "\0\0\0\0" && !/[0-9A-Z]{4}/.test(nextId)) {
-            return false;
-          }
-        }
-        return true;
-      };
-      if (!isSizeValid(size)) {
-        const otherSize = this.header.majorVersion === 4 ? sizeRaw : decodeSynchsafe(sizeRaw);
-        if (isSizeValid(otherSize)) {
-          size = otherSize;
-        }
-      }
-      this.pos = headerEndPos;
-      return { id, size, flags };
-    }
-  }
-  readId3V2TextEncoding() {
-    const number = this.readU8();
-    if (number > 3) {
-      throw new Error(`Unsupported text encoding: ${number}`);
-    }
-    return number;
-  }
-  readId3V2Text(encoding, until) {
-    const startPos = this.pos;
-    const data = this.readBytes(until - this.pos);
-    switch (encoding) {
-      case Id3V2TextEncoding.ISO_8859_1: {
-        let str = "";
-        for (let i = 0; i < data.length; i++) {
-          const value = data[i];
-          if (value === 0) {
-            this.pos = startPos + i + 1;
-            break;
-          }
-          str += String.fromCharCode(value);
-        }
-        return str;
-      }
-      case Id3V2TextEncoding.UTF_16_WITH_BOM: {
-        if (data[0] === 255 && data[1] === 254) {
-          const decoder = new TextDecoder("utf-16le");
-          const endIndex = coalesceIndex(data.findIndex((x, i) => x === 0 && data[i + 1] === 0 && i % 2 === 0), data.length);
-          this.pos = startPos + Math.min(endIndex + 2, data.length);
-          return decoder.decode(data.subarray(2, endIndex));
-        } else if (data[0] === 254 && data[1] === 255) {
-          const decoder = new TextDecoder("utf-16be");
-          const endIndex = coalesceIndex(data.findIndex((x, i) => x === 0 && data[i + 1] === 0 && i % 2 === 0), data.length);
-          this.pos = startPos + Math.min(endIndex + 2, data.length);
-          return decoder.decode(data.subarray(2, endIndex));
-        } else {
-          const endIndex = coalesceIndex(data.findIndex((x) => x === 0), data.length);
-          this.pos = startPos + Math.min(endIndex + 1, data.length);
-          return textDecoder.decode(data.subarray(0, endIndex));
-        }
-      }
-      case Id3V2TextEncoding.UTF_16_BE_NO_BOM: {
-        const decoder = new TextDecoder("utf-16be");
-        const endIndex = coalesceIndex(data.findIndex((x, i) => x === 0 && data[i + 1] === 0 && i % 2 === 0), data.length);
-        this.pos = startPos + Math.min(endIndex + 2, data.length);
-        return decoder.decode(data.subarray(0, endIndex));
-      }
-      case Id3V2TextEncoding.UTF_8: {
-        const endIndex = coalesceIndex(data.findIndex((x) => x === 0), data.length);
-        this.pos = startPos + Math.min(endIndex + 1, data.length);
-        return textDecoder.decode(data.subarray(0, endIndex));
-      }
-    }
-  }
-  readId3V2EncodingAndText(until) {
-    if (this.pos >= until) {
-      return "";
-    }
-    const encoding = this.readId3V2TextEncoding();
-    return this.readId3V2Text(encoding, until);
-  }
-}
-const readNextFrameHeader = async (reader, startPos, until) => {
+const readNextMp3FrameHeader = async (reader, startPos, until) => {
   let currentPos = startPos;
   while (until === null || currentPos < until) {
     let slice = reader.requestSlice(currentPos, FRAME_HEADER_SIZE);
@@ -10766,7 +11020,7 @@ const readNextFrameHeader = async (reader, startPos, until) => {
     if (!slice)
       break;
     const word = readU32Be(slice);
-    const result = readFrameHeader$1(word, reader.fileSize !== null ? reader.fileSize - currentPos : null);
+    const result = readMp3FrameHeader(word, reader.fileSize !== null ? reader.fileSize - currentPos : null);
     if (result.header) {
       return { header: result.header, startPos: currentPos };
     }
@@ -10816,7 +11070,7 @@ class Mp3Demuxer extends Demuxer {
         this.lastLoadedPos = slice2.filePos + id3V2Header.size;
       }
     }
-    const result = await readNextFrameHeader(this.reader, this.lastLoadedPos, this.reader.fileSize);
+    const result = await readNextMp3FrameHeader(this.reader, this.lastLoadedPos, this.reader.fileSize);
     if (!result) {
       this.lastSampleLoaded = true;
       return;
@@ -10914,6 +11168,9 @@ class Mp3AudioTrackBacking {
     this.demuxer = demuxer;
   }
   getId() {
+    return 1;
+  }
+  getNumber() {
     return 1;
   }
   async getFirstTimestamp() {
@@ -11408,6 +11665,11 @@ class OggAudioTrackBacking {
   }
   getId() {
     return this.bitstream.serialNumber;
+  }
+  getNumber() {
+    const index = this.demuxer.tracks.findIndex((t) => t._backing.bitstream === this.bitstream);
+    assert(index !== -1);
+    return index + 1;
   }
   getNumberOfChannels() {
     return this.bitstream.numberOfChannels;
@@ -12033,8 +12295,12 @@ class WaveDemuxer extends Demuxer {
       return;
     const id3V2Header = readId3V2Header(slice);
     if (id3V2Header) {
-      const contentSlice = slice.slice(startPos + 10, id3V2Header.size);
-      parseId3V2Tag(contentSlice, id3V2Header, this.metadataTags);
+      const availableSize = size - ID3_V2_HEADER_SIZE;
+      id3V2Header.size = Math.min(id3V2Header.size, availableSize);
+      if (id3V2Header.size > 0) {
+        const contentSlice = slice.slice(startPos + ID3_V2_HEADER_SIZE, id3V2Header.size);
+        parseId3V2Tag(contentSlice, id3V2Header, this.metadataTags);
+      }
     }
   }
   getCodec() {
@@ -12089,6 +12355,9 @@ class WaveAudioTrackBacking {
   getId() {
     return 1;
   }
+  getNumber() {
+    return 1;
+  }
   getCodec() {
     return this.demuxer.getCodec();
   }
@@ -12139,6 +12408,7 @@ class WaveAudioTrackBacking {
     return 0;
   }
   async getPacketAtIndex(packetIndex, options) {
+    assert(packetIndex >= 0);
     assert(this.demuxer.audioInfo);
     const startOffset = packetIndex * PACKET_SIZE_IN_FRAMES * this.demuxer.audioInfo.blockSizeInBytes;
     if (startOffset >= this.demuxer.dataSize) {
@@ -12165,7 +12435,7 @@ class WaveAudioTrackBacking {
     }
     const timestamp = packetIndex * PACKET_SIZE_IN_FRAMES / this.demuxer.audioInfo.sampleRate;
     const duration = sizeInBytes / this.demuxer.audioInfo.blockSizeInBytes / this.demuxer.audioInfo.sampleRate;
-    this.demuxer.lastKnownPacketIndex = Math.max(packetIndex, timestamp);
+    this.demuxer.lastKnownPacketIndex = Math.max(packetIndex, this.demuxer.lastKnownPacketIndex);
     return new EncodedPacket(data, "key", timestamp, duration, packetIndex, sizeInBytes);
   }
   getFirstPacket(options) {
@@ -12174,6 +12444,9 @@ class WaveAudioTrackBacking {
   async getPacket(timestamp, options) {
     assert(this.demuxer.audioInfo);
     const packetIndex = Math.floor(Math.min(timestamp * this.demuxer.audioInfo.sampleRate / PACKET_SIZE_IN_FRAMES, (this.demuxer.dataSize - 1) / (PACKET_SIZE_IN_FRAMES * this.demuxer.audioInfo.blockSizeInBytes)));
+    if (packetIndex < 0) {
+      return null;
+    }
     const packet = await this.getPacketAtIndex(packetIndex, options);
     if (packet) {
       return packet;
@@ -12204,9 +12477,9 @@ class WaveAudioTrackBacking {
     return this.getNextPacket(packet, options);
   }
 }
-const MIN_FRAME_HEADER_SIZE = 7;
-const MAX_FRAME_HEADER_SIZE = 9;
-const readFrameHeader = (slice) => {
+const MIN_ADTS_FRAME_HEADER_SIZE = 7;
+const MAX_ADTS_FRAME_HEADER_SIZE = 9;
+const readAdtsFrameHeader = (slice) => {
   const startPos = slice.filePos;
   const bytes = readBytes(slice, 9);
   const bitstream = new Bitstream(bytes);
@@ -12263,6 +12536,7 @@ class AdtsDemuxer extends Demuxer {
     this.metadataPromise = null;
     this.firstFrameHeader = null;
     this.loadedSamples = [];
+    this.metadataTags = null;
     this.tracks = [];
     this.readingMutex = new AsyncMutex();
     this.lastSampleLoaded = false;
@@ -12280,14 +12554,30 @@ class AdtsDemuxer extends Demuxer {
     })());
   }
   async advanceReader() {
-    let slice = this.reader.requestSliceRange(this.lastLoadedPos, MIN_FRAME_HEADER_SIZE, MAX_FRAME_HEADER_SIZE);
+    if (this.lastLoadedPos === 0) {
+      while (true) {
+        let slice2 = this.reader.requestSlice(this.lastLoadedPos, ID3_V2_HEADER_SIZE);
+        if (slice2 instanceof Promise)
+          slice2 = await slice2;
+        if (!slice2) {
+          this.lastSampleLoaded = true;
+          return;
+        }
+        const id3V2Header = readId3V2Header(slice2);
+        if (!id3V2Header) {
+          break;
+        }
+        this.lastLoadedPos = slice2.filePos + id3V2Header.size;
+      }
+    }
+    let slice = this.reader.requestSliceRange(this.lastLoadedPos, MIN_ADTS_FRAME_HEADER_SIZE, MAX_ADTS_FRAME_HEADER_SIZE);
     if (slice instanceof Promise)
       slice = await slice;
     if (!slice) {
       this.lastSampleLoaded = true;
       return;
     }
-    const header = readFrameHeader(slice);
+    const header = readAdtsFrameHeader(slice);
     if (!header) {
       this.lastSampleLoaded = true;
       return;
@@ -12302,12 +12592,11 @@ class AdtsDemuxer extends Demuxer {
     const sampleRate = aacFrequencyTable[header.samplingFrequencyIndex];
     assert(sampleRate !== void 0);
     const sampleDuration = SAMPLES_PER_AAC_FRAME / sampleRate;
-    const headerSize = header.crcCheck ? MAX_FRAME_HEADER_SIZE : MIN_FRAME_HEADER_SIZE;
     const sample = {
       timestamp: this.nextTimestampInSamples / sampleRate,
       duration: sampleDuration,
-      dataStart: header.startPos + headerSize,
-      dataSize: header.frameLength - headerSize
+      dataStart: header.startPos,
+      dataSize: header.frameLength
     };
     this.loadedSamples.push(sample);
     this.nextTimestampInSamples += SAMPLES_PER_AAC_FRAME;
@@ -12327,7 +12616,36 @@ class AdtsDemuxer extends Demuxer {
     return track.computeDuration();
   }
   async getMetadataTags() {
-    return {};
+    const release = await this.readingMutex.acquire();
+    try {
+      await this.readMetadata();
+      if (this.metadataTags) {
+        return this.metadataTags;
+      }
+      this.metadataTags = {};
+      let currentPos = 0;
+      while (true) {
+        let headerSlice = this.reader.requestSlice(currentPos, ID3_V2_HEADER_SIZE);
+        if (headerSlice instanceof Promise)
+          headerSlice = await headerSlice;
+        if (!headerSlice)
+          break;
+        const id3V2Header = readId3V2Header(headerSlice);
+        if (!id3V2Header) {
+          break;
+        }
+        let contentSlice = this.reader.requestSlice(headerSlice.filePos, id3V2Header.size);
+        if (contentSlice instanceof Promise)
+          contentSlice = await contentSlice;
+        if (!contentSlice)
+          break;
+        parseId3V2Tag(contentSlice, id3V2Header, this.metadataTags);
+        currentPos = headerSlice.filePos + id3V2Header.size;
+      }
+      return this.metadataTags;
+    } finally {
+      release();
+    }
   }
 }
 class AdtsAudioTrackBacking {
@@ -12335,6 +12653,9 @@ class AdtsAudioTrackBacking {
     this.demuxer = demuxer;
   }
   getId() {
+    return 1;
+  }
+  getNumber() {
     return 1;
   }
   async getFirstTimestamp() {
@@ -12380,22 +12701,10 @@ class AdtsAudioTrackBacking {
   }
   async getDecoderConfig() {
     assert(this.demuxer.firstFrameHeader);
-    const bytes = new Uint8Array(3);
-    const bitstream = new Bitstream(bytes);
-    const { objectType, samplingFrequencyIndex, channelConfiguration } = this.demuxer.firstFrameHeader;
-    if (objectType > 31) {
-      bitstream.writeBits(5, 31);
-      bitstream.writeBits(6, objectType - 32);
-    } else {
-      bitstream.writeBits(5, objectType);
-    }
-    bitstream.writeBits(4, samplingFrequencyIndex);
-    bitstream.writeBits(4, channelConfiguration);
     return {
       codec: `mp4a.40.${this.demuxer.firstFrameHeader.objectType}`,
       numberOfChannels: this.getNumberOfChannels(),
-      sampleRate: this.getSampleRate(),
-      description: bytes.subarray(0, Math.ceil((bitstream.pos - 1) / 8))
+      sampleRate: this.getSampleRate()
     };
   }
   async getPacketAtIndex(sampleIndex, options) {
@@ -12881,6 +13190,9 @@ class FlacAudioTrackBacking {
   getId() {
     return 1;
   }
+  getNumber() {
+    return 1;
+  }
   getCodec() {
     return "flac";
   }
@@ -13003,6 +13315,1533 @@ class FlacAudioTrackBacking {
       await this.demuxer.advanceReader();
     }
     return this.getPacketAtIndex(0, options);
+  }
+}
+const TIMESCALE = 9e4;
+const TS_PACKET_SIZE = 188;
+const buildMpegTsMimeType = (codecStrings) => {
+  let string = "video/MP2T";
+  const uniqueCodecStrings = [...new Set(codecStrings.filter(Boolean))];
+  if (uniqueCodecStrings.length > 0) {
+    string += `; codecs="${uniqueCodecStrings.join(", ")}"`;
+  }
+  return string;
+};
+class MpegTsDemuxer extends Demuxer {
+  constructor(input) {
+    super(input);
+    this.metadataPromise = null;
+    this.elementaryStreams = [];
+    this.tracks = [];
+    this.packetOffset = 0;
+    this.packetStride = -1;
+    this.sectionEndPositions = [];
+    this.seekChunkSize = 5 * 1024 * 1024;
+    this.minReferencePointByteDistance = -1;
+    this.reader = input._reader;
+  }
+  async readMetadata() {
+    return this.metadataPromise ?? (this.metadataPromise = (async () => {
+      const lengthToCheck = TS_PACKET_SIZE + 16 + 1;
+      let startingSlice = this.reader.requestSlice(0, lengthToCheck);
+      if (startingSlice instanceof Promise)
+        startingSlice = await startingSlice;
+      assert(startingSlice);
+      const startingBytes = readBytes(startingSlice, lengthToCheck);
+      if (startingBytes[0] === 71 && startingBytes[TS_PACKET_SIZE] === 71) {
+        this.packetOffset = 0;
+        this.packetStride = TS_PACKET_SIZE;
+      } else if (startingBytes[0] === 71 && startingBytes[TS_PACKET_SIZE + 16] === 71) {
+        this.packetOffset = 0;
+        this.packetStride = TS_PACKET_SIZE + 16;
+      } else if (startingBytes[4] === 71 && startingBytes[4 + TS_PACKET_SIZE] === 71) {
+        this.packetOffset = 4;
+        this.packetStride = TS_PACKET_SIZE;
+      } else {
+        throw new Error("Unreachable.");
+      }
+      const MIN_REFERENCE_POINT_PACKET_DISTANCE = 256;
+      this.minReferencePointByteDistance = MIN_REFERENCE_POINT_PACKET_DISTANCE * this.packetStride;
+      let currentPos = this.packetOffset;
+      let programMapPid = null;
+      let hasProgramAssociationTable = false;
+      let hasProgramMap = false;
+      while (true) {
+        const packetHeader = await this.readPacketHeader(currentPos);
+        if (!packetHeader) {
+          break;
+        }
+        if (packetHeader.payloadUnitStartIndicator === 0) {
+          currentPos += this.packetStride;
+          continue;
+        }
+        const section = await this.readSection(currentPos, true, !hasProgramMap);
+        if (!section) {
+          break;
+        }
+        const BYTES_BEFORE_SECTION_LENGTH = 3;
+        const BITS_IN_CRC_32 = 32;
+        let isProbablyProgramMap = false;
+        if (!hasProgramMap && section.pid !== 0) {
+          const isPesPacket = section.payload[0] === 0 && section.payload[1] === 0 && section.payload[2] === 1;
+          if (!isPesPacket) {
+            const bitstream = new Bitstream(section.payload);
+            const pointerField = bitstream.readAlignedByte();
+            bitstream.skipBits(8 * pointerField);
+            const tableId = bitstream.readBits(8);
+            isProbablyProgramMap = tableId === 2;
+          }
+        }
+        if (section.pid === 0 && !hasProgramAssociationTable) {
+          const bitstream = new Bitstream(section.payload);
+          const pointerField = bitstream.readAlignedByte();
+          bitstream.skipBits(8 * pointerField);
+          bitstream.skipBits(14);
+          const sectionLength = bitstream.readBits(10);
+          bitstream.skipBits(40);
+          while (8 * (sectionLength + BYTES_BEFORE_SECTION_LENGTH) - bitstream.pos > BITS_IN_CRC_32) {
+            const programNumber = bitstream.readBits(16);
+            bitstream.skipBits(3);
+            if (programNumber !== 0) {
+              if (programMapPid !== null) {
+                throw new Error("Only files with a single program are supported.");
+              } else {
+                programMapPid = bitstream.readBits(13);
+              }
+            }
+          }
+          if (programMapPid === null) {
+            throw new Error("Program Association Table must link to a Program Map Table.");
+          }
+          hasProgramAssociationTable = true;
+        } else if ((section.pid === programMapPid || isProbablyProgramMap) && !hasProgramMap) {
+          const bitstream = new Bitstream(section.payload);
+          const pointerField = bitstream.readAlignedByte();
+          bitstream.skipBits(8 * pointerField);
+          bitstream.skipBits(12);
+          const sectionLength = bitstream.readBits(12);
+          bitstream.skipBits(43);
+          bitstream.readBits(13);
+          bitstream.skipBits(6);
+          const programInfoLength = bitstream.readBits(10);
+          bitstream.skipBits(8 * programInfoLength);
+          while (8 * (sectionLength + BYTES_BEFORE_SECTION_LENGTH) - bitstream.pos > BITS_IN_CRC_32) {
+            const streamType = bitstream.readBits(8);
+            bitstream.skipBits(3);
+            const elementaryPid = bitstream.readBits(13);
+            bitstream.skipBits(6);
+            const esInfoLength = bitstream.readBits(10);
+            const esInfoEndPos = bitstream.pos + 8 * esInfoLength;
+            let hasAc3Descriptor = false;
+            let hasEac3Descriptor = false;
+            while (bitstream.pos < esInfoEndPos) {
+              const descriptorTag = bitstream.readBits(8);
+              const descriptorLength = bitstream.readBits(8);
+              if (descriptorTag === 106) {
+                hasAc3Descriptor = true;
+              } else if (descriptorTag === 122 || descriptorTag === 204) {
+                hasEac3Descriptor = true;
+              }
+              bitstream.skipBits(8 * descriptorLength);
+            }
+            let info = null;
+            switch (streamType) {
+              case 3:
+              case 4:
+              case 15:
+                {
+                  const codec = streamType === 15 ? "aac" : "mp3";
+                  info = {
+                    type: "audio",
+                    codec,
+                    aacCodecInfo: null,
+                    numberOfChannels: -1,
+                    sampleRate: -1
+                  };
+                }
+                break;
+              case 27:
+              case 36:
+                {
+                  const codec = streamType === 27 ? "avc" : "hevc";
+                  info = {
+                    type: "video",
+                    codec,
+                    avcCodecInfo: null,
+                    hevcCodecInfo: null,
+                    colorSpace: {
+                      primaries: null,
+                      transfer: null,
+                      matrix: null,
+                      fullRange: null
+                    },
+                    width: -1,
+                    height: -1,
+                    squarePixelWidth: -1,
+                    squarePixelHeight: -1,
+                    reorderSize: -1
+                  };
+                }
+                break;
+              case 129:
+                {
+                  info = {
+                    type: "audio",
+                    codec: "ac3",
+                    aacCodecInfo: null,
+                    numberOfChannels: -1,
+                    sampleRate: -1
+                  };
+                }
+                break;
+              case 135:
+                {
+                  info = {
+                    type: "audio",
+                    codec: "eac3",
+                    aacCodecInfo: null,
+                    numberOfChannels: -1,
+                    sampleRate: -1
+                  };
+                }
+                break;
+              case 6:
+                {
+                  if (hasEac3Descriptor) {
+                    info = {
+                      type: "audio",
+                      codec: "eac3",
+                      aacCodecInfo: null,
+                      numberOfChannels: -1,
+                      sampleRate: -1
+                    };
+                  } else if (hasAc3Descriptor) {
+                    info = {
+                      type: "audio",
+                      codec: "ac3",
+                      aacCodecInfo: null,
+                      numberOfChannels: -1,
+                      sampleRate: -1
+                    };
+                  }
+                }
+                break;
+              default: {
+                console.warn(`Unsupported stream_type 0x${streamType.toString(16)}; ignoring stream.`);
+              }
+            }
+            if (info) {
+              this.elementaryStreams.push({
+                demuxer: this,
+                pid: elementaryPid,
+                streamType,
+                initialized: false,
+                firstSection: null,
+                info,
+                referencePesPackets: []
+              });
+            }
+          }
+          hasProgramMap = true;
+        } else {
+          const elementaryStream = this.elementaryStreams.find((x) => x.pid === section.pid);
+          if (elementaryStream && !elementaryStream.initialized) {
+            const pesPacket = readPesPacket(section);
+            if (!pesPacket) {
+              throw new Error(`Couldn't read first PES packet for Elementary Stream with PID ${elementaryStream.pid}`);
+            }
+            elementaryStream.firstSection = section;
+            if (elementaryStream.info.type === "video") {
+              if (elementaryStream.info.codec === "avc") {
+                elementaryStream.info.avcCodecInfo = extractAvcDecoderConfigurationRecord(pesPacket.data);
+                if (!elementaryStream.info.avcCodecInfo) {
+                  throw new Error("Invalid AVC video stream; could not extract AVCDecoderConfigurationRecord from first packet.");
+                }
+                const spsUnit = elementaryStream.info.avcCodecInfo.sequenceParameterSets[0];
+                assert(spsUnit);
+                const spsInfo = parseAvcSps(spsUnit);
+                elementaryStream.info.width = spsInfo.displayWidth;
+                elementaryStream.info.height = spsInfo.displayHeight;
+                if (spsInfo.pixelAspectRatio.num > spsInfo.pixelAspectRatio.den) {
+                  elementaryStream.info.squarePixelWidth = Math.round(elementaryStream.info.width * spsInfo.pixelAspectRatio.num / spsInfo.pixelAspectRatio.den);
+                  elementaryStream.info.squarePixelHeight = elementaryStream.info.height;
+                } else {
+                  elementaryStream.info.squarePixelWidth = elementaryStream.info.width;
+                  elementaryStream.info.squarePixelHeight = Math.round(elementaryStream.info.height * spsInfo.pixelAspectRatio.den / spsInfo.pixelAspectRatio.num);
+                }
+                elementaryStream.info.colorSpace = {
+                  primaries: COLOR_PRIMARIES_MAP_INVERSE[spsInfo.colourPrimaries],
+                  transfer: TRANSFER_CHARACTERISTICS_MAP_INVERSE[spsInfo.transferCharacteristics],
+                  matrix: MATRIX_COEFFICIENTS_MAP_INVERSE[spsInfo.matrixCoefficients],
+                  fullRange: !!spsInfo.fullRangeFlag
+                };
+                elementaryStream.info.reorderSize = spsInfo.maxDecFrameBuffering;
+                elementaryStream.initialized = true;
+              } else if (elementaryStream.info.codec === "hevc") {
+                elementaryStream.info.hevcCodecInfo = extractHevcDecoderConfigurationRecord(pesPacket.data);
+                if (!elementaryStream.info.hevcCodecInfo) {
+                  throw new Error("Invalid HEVC video stream; could not extract HVCDecoderConfigurationRecord from first packet.");
+                }
+                const spsArray = elementaryStream.info.hevcCodecInfo.arrays.find((a) => a.nalUnitType === HevcNalUnitType.SPS_NUT);
+                const spsUnit = spsArray.nalUnits[0];
+                assert(spsUnit);
+                const spsInfo = parseHevcSps(spsUnit);
+                elementaryStream.info.width = spsInfo.displayWidth;
+                elementaryStream.info.height = spsInfo.displayHeight;
+                if (spsInfo.pixelAspectRatio.num > spsInfo.pixelAspectRatio.den) {
+                  elementaryStream.info.squarePixelWidth = Math.round(elementaryStream.info.width * spsInfo.pixelAspectRatio.num / spsInfo.pixelAspectRatio.den);
+                  elementaryStream.info.squarePixelHeight = elementaryStream.info.height;
+                } else {
+                  elementaryStream.info.squarePixelWidth = elementaryStream.info.width;
+                  elementaryStream.info.squarePixelHeight = Math.round(elementaryStream.info.height * spsInfo.pixelAspectRatio.den / spsInfo.pixelAspectRatio.num);
+                }
+                elementaryStream.info.colorSpace = {
+                  primaries: COLOR_PRIMARIES_MAP_INVERSE[spsInfo.colourPrimaries],
+                  transfer: TRANSFER_CHARACTERISTICS_MAP_INVERSE[spsInfo.transferCharacteristics],
+                  matrix: MATRIX_COEFFICIENTS_MAP_INVERSE[spsInfo.matrixCoefficients],
+                  fullRange: !!spsInfo.fullRangeFlag
+                };
+                elementaryStream.info.reorderSize = spsInfo.maxDecFrameBuffering;
+                elementaryStream.initialized = true;
+              } else {
+                throw new Error("Unhandled.");
+              }
+            } else {
+              if (elementaryStream.info.codec === "aac") {
+                const slice = FileSlice.tempFromBytes(pesPacket.data);
+                const header = readAdtsFrameHeader(slice);
+                if (!header) {
+                  throw new Error("Invalid AAC audio stream; could not read ADTS frame header from first packet.");
+                }
+                elementaryStream.info.aacCodecInfo = {
+                  isMpeg2: false,
+                  objectType: header.objectType
+                };
+                elementaryStream.info.numberOfChannels = aacChannelMap[header.channelConfiguration];
+                elementaryStream.info.sampleRate = aacFrequencyTable[header.samplingFrequencyIndex];
+                elementaryStream.initialized = true;
+              } else if (elementaryStream.info.codec === "mp3") {
+                const word = readU32Be(FileSlice.tempFromBytes(pesPacket.data));
+                const result = readMp3FrameHeader(word, pesPacket.data.byteLength);
+                if (!result.header) {
+                  throw new Error("Invalid MP3 audio stream; could not read frame header from first packet.");
+                }
+                elementaryStream.info.numberOfChannels = result.header.channel === 3 ? 1 : 2;
+                elementaryStream.info.sampleRate = result.header.sampleRate;
+                elementaryStream.initialized = true;
+              } else if (elementaryStream.info.codec === "ac3") {
+                const frameInfo = parseAc3SyncFrame(pesPacket.data);
+                if (!frameInfo) {
+                  throw new Error("Invalid AC-3 audio stream; could not read sync frame from first packet.");
+                }
+                if (frameInfo.fscod === 3) {
+                  throw new Error("Invalid AC-3 audio stream; reserved sample rate code found in first packet.");
+                }
+                elementaryStream.info.numberOfChannels = AC3_ACMOD_CHANNEL_COUNTS[frameInfo.acmod] + frameInfo.lfeon;
+                elementaryStream.info.sampleRate = AC3_SAMPLE_RATES[frameInfo.fscod];
+                elementaryStream.initialized = true;
+              } else if (elementaryStream.info.codec === "eac3") {
+                const frameInfo = parseEac3SyncFrame(pesPacket.data);
+                if (!frameInfo) {
+                  throw new Error("Invalid E-AC-3 audio stream; could not read sync frame from first packet.");
+                }
+                const sampleRate = getEac3SampleRate(frameInfo);
+                if (sampleRate === null) {
+                  throw new Error("Invalid E-AC-3 audio stream; reserved sample rate code found in first packet.");
+                }
+                elementaryStream.info.numberOfChannels = getEac3ChannelCount(frameInfo);
+                elementaryStream.info.sampleRate = sampleRate;
+                elementaryStream.initialized = true;
+              } else {
+                throw new Error("Unhandled.");
+              }
+            }
+          }
+        }
+        const isDone = hasProgramMap && this.elementaryStreams.every((x) => x.initialized);
+        if (isDone) {
+          break;
+        }
+        currentPos += this.packetStride;
+      }
+      if (!hasProgramMap) {
+        if (!hasProgramAssociationTable) {
+          throw new Error("No Program Association Table found in the file.");
+        }
+        throw new Error("No Program Map Table found in the file.");
+      }
+      for (const stream of this.elementaryStreams) {
+        if (stream.info.type === "video") {
+          this.tracks.push(new InputVideoTrack(this.input, new MpegTsVideoTrackBacking(stream)));
+        } else {
+          this.tracks.push(new InputAudioTrack(this.input, new MpegTsAudioTrackBacking(stream)));
+        }
+      }
+    })());
+  }
+  async getTracks() {
+    await this.readMetadata();
+    return this.tracks;
+  }
+  async getMetadataTags() {
+    return {};
+  }
+  async computeDuration() {
+    const tracks = await this.getTracks();
+    const trackDurations = await Promise.all(tracks.map((x) => x.computeDuration()));
+    return Math.max(0, ...trackDurations);
+  }
+  async getMimeType() {
+    await this.readMetadata();
+    const tracks = await this.getTracks();
+    const codecStrings = await Promise.all(tracks.map((x) => x.getCodecParameterString()));
+    return buildMpegTsMimeType(codecStrings);
+  }
+  async readSection(startPos, full, contiguous = false) {
+    let endPos = startPos;
+    let currentPos = startPos;
+    const chunks = [];
+    let chunksByteLength = 0;
+    let firstPacket = null;
+    let mustAddSectionEnd = true;
+    let randomAccessIndicator = 0;
+    while (true) {
+      const packet = await this.readPacket(currentPos);
+      currentPos += this.packetStride;
+      if (!packet) {
+        break;
+      }
+      if (!firstPacket) {
+        if (packet.payloadUnitStartIndicator === 0) {
+          break;
+        }
+        firstPacket = packet;
+      } else {
+        if (packet.pid !== firstPacket.pid) {
+          if (contiguous) {
+            break;
+          } else {
+            continue;
+          }
+        }
+        if (packet.payloadUnitStartIndicator === 1) {
+          break;
+        }
+      }
+      const hasAdaptationField = !!(packet.adaptationFieldControl & 2);
+      const hasPayload = !!(packet.adaptationFieldControl & 1);
+      let adaptationFieldLength = 0;
+      if (hasAdaptationField) {
+        adaptationFieldLength = 1 + packet.body[0];
+        if (packet === firstPacket && adaptationFieldLength > 1) {
+          randomAccessIndicator = packet.body[1] >> 6 & 1;
+        }
+      }
+      if (hasPayload) {
+        if (adaptationFieldLength === 0) {
+          chunks.push(packet.body);
+          chunksByteLength += packet.body.byteLength;
+        } else {
+          chunks.push(packet.body.subarray(adaptationFieldLength));
+          chunksByteLength += packet.body.byteLength - adaptationFieldLength;
+        }
+      }
+      endPos = currentPos;
+      if (!full && chunksByteLength >= 64) {
+        mustAddSectionEnd = false;
+        break;
+      }
+      const isKnownSectionEnd = binarySearchExact(this.sectionEndPositions, endPos, (x) => x) !== -1;
+      if (isKnownSectionEnd) {
+        mustAddSectionEnd = false;
+        break;
+      }
+    }
+    if (mustAddSectionEnd) {
+      const index = binarySearchLessOrEqual(this.sectionEndPositions, endPos, (x) => x);
+      this.sectionEndPositions.splice(index + 1, 0, endPos);
+    }
+    if (!firstPacket) {
+      return null;
+    }
+    let merged;
+    if (chunks.length === 1) {
+      merged = chunks[0];
+    } else {
+      const totalLength = chunks.reduce((sum, chunk) => sum + chunk.length, 0);
+      merged = new Uint8Array(totalLength);
+      let offset = 0;
+      for (const chunk of chunks) {
+        merged.set(chunk, offset);
+        offset += chunk.length;
+      }
+    }
+    return {
+      startPos,
+      endPos: full ? endPos : null,
+      pid: firstPacket.pid,
+      payload: merged,
+      randomAccessIndicator
+    };
+  }
+  async readPacketHeader(pos) {
+    let slice = this.reader.requestSlice(pos, 4);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice) {
+      return null;
+    }
+    const syncByte = readU8(slice);
+    if (syncByte !== 71) {
+      throw new Error("Invalid TS packet sync byte. Likely an internal bug, please report this file.");
+    }
+    const nextTwoBytes = readU16Be(slice);
+    const payloadUnitStartIndicator = nextTwoBytes >> 14 & 1;
+    const pid = nextTwoBytes & 8191;
+    const nextByte = readU8(slice);
+    const adaptationFieldControl = nextByte >> 4 & 3;
+    return {
+      payloadUnitStartIndicator,
+      pid,
+      adaptationFieldControl
+    };
+  }
+  async readPacket(pos) {
+    let slice = this.reader.requestSlice(pos, TS_PACKET_SIZE);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice) {
+      return null;
+    }
+    const bytes = readBytes(slice, TS_PACKET_SIZE);
+    const syncByte = bytes[0];
+    if (syncByte !== 71) {
+      throw new Error("Invalid TS packet sync byte. Likely an internal bug, please report this file.");
+    }
+    const nextTwoBytes = (bytes[1] << 8) + bytes[2];
+    const payloadUnitStartIndicator = nextTwoBytes >> 14 & 1;
+    const pid = nextTwoBytes & 8191;
+    const nextByte = bytes[3];
+    const adaptationFieldControl = nextByte >> 4 & 3;
+    return {
+      payloadUnitStartIndicator,
+      pid,
+      adaptationFieldControl,
+      body: bytes.subarray(4)
+    };
+  }
+}
+const readPesPacketHeader = (section) => {
+  if (section.payload.byteLength < 3) {
+    return null;
+  }
+  const bitstream = new Bitstream(section.payload);
+  const startCodePrefix = bitstream.readBits(24);
+  if (startCodePrefix !== 1) {
+    return null;
+  }
+  const streamId = bitstream.readBits(8);
+  bitstream.skipBits(16);
+  if (streamId === 188 || streamId === 190 || streamId === 191 || streamId === 240 || streamId === 241 || streamId === 255 || streamId === 242 || streamId === 248) {
+    return null;
+  }
+  bitstream.skipBits(8);
+  const ptsDtsFlags = bitstream.readBits(2);
+  bitstream.skipBits(14);
+  let pts = 0;
+  if (ptsDtsFlags === 2 || ptsDtsFlags === 3) {
+    bitstream.skipBits(4);
+    pts += bitstream.readBits(3) * (1 << 30);
+    bitstream.skipBits(1);
+    pts += bitstream.readBits(15) * (1 << 15);
+    bitstream.skipBits(1);
+    pts += bitstream.readBits(15);
+  } else {
+    throw new Error("PES packets without PTS are not currently supported. If you think this file should be supported, please report it.");
+  }
+  return {
+    sectionStartPos: section.startPos,
+    sectionEndPos: section.endPos,
+    pts,
+    randomAccessIndicator: section.randomAccessIndicator
+  };
+};
+const readPesPacket = (section) => {
+  assert(section.endPos !== null);
+  const header = readPesPacketHeader(section);
+  if (!header) {
+    return null;
+  }
+  const bitstream = new Bitstream(section.payload);
+  bitstream.skipBits(32);
+  const pesPacketLength = bitstream.readBits(16);
+  const BYTES_UNTIL_END_OF_PES_PACKET_LENGTH = 6;
+  bitstream.skipBits(16);
+  const pesHeaderDataLength = bitstream.readBits(8);
+  const pesHeaderEndPos = bitstream.pos + 8 * pesHeaderDataLength;
+  bitstream.pos = pesHeaderEndPos;
+  const bytePos = pesHeaderEndPos / 8;
+  assert(Number.isInteger(bytePos));
+  const data = section.payload.subarray(
+    bytePos,
+    // "A value of 0 indicates that the PES packet length is neither specified nor bounded and is allowed only in
+    // PES packets whose payload consists of bytes from a video elementary stream contained in
+    // transport stream packets."
+    pesPacketLength > 0 ? BYTES_UNTIL_END_OF_PES_PACKET_LENGTH + pesPacketLength : section.payload.byteLength
+  );
+  return {
+    ...header,
+    data
+  };
+};
+class MpegTsTrackBacking {
+  constructor(elementaryStream) {
+    this.elementaryStream = elementaryStream;
+    this.packetBuffers = /* @__PURE__ */ new WeakMap();
+    this.packetSectionStarts = /* @__PURE__ */ new WeakMap();
+  }
+  getId() {
+    return this.elementaryStream.pid;
+  }
+  getNumber() {
+    const demuxer = this.elementaryStream.demuxer;
+    const trackType = this.elementaryStream.info.type;
+    let number = 0;
+    for (const track of demuxer.tracks) {
+      if (track.type === trackType) {
+        number++;
+      }
+      assert(track._backing instanceof MpegTsTrackBacking);
+      if (track._backing.elementaryStream === this.elementaryStream) {
+        break;
+      }
+    }
+    return number;
+  }
+  getCodec() {
+    throw new Error("Not implemented on base class.");
+  }
+  getInternalCodecId() {
+    return this.elementaryStream.streamType;
+  }
+  getName() {
+    return null;
+  }
+  getLanguageCode() {
+    return UNDETERMINED_LANGUAGE;
+  }
+  getDisposition() {
+    return DEFAULT_TRACK_DISPOSITION;
+  }
+  getTimeResolution() {
+    return TIMESCALE;
+  }
+  async computeDuration() {
+    const lastPacket = await this.getPacket(Infinity, { metadataOnly: true });
+    return (lastPacket?.timestamp ?? 0) + (lastPacket?.duration ?? 0);
+  }
+  async getFirstTimestamp() {
+    const firstPacket = await this.getFirstPacket({ metadataOnly: true });
+    return firstPacket?.timestamp ?? 0;
+  }
+  createEncodedPacket(suppliedPacket, duration, options) {
+    let packetType;
+    if (this.allPacketsAreKeyPackets()) {
+      packetType = "key";
+    } else {
+      packetType = suppliedPacket.randomAccessIndicator === 1 ? "key" : "delta";
+    }
+    return new EncodedPacket(options.metadataOnly ? PLACEHOLDER_DATA : suppliedPacket.data, packetType, suppliedPacket.pts / TIMESCALE, Math.max(duration / TIMESCALE, 0), suppliedPacket.sequenceNumber, suppliedPacket.data.byteLength);
+  }
+  async getFirstPacket(options) {
+    const section = this.elementaryStream.firstSection;
+    assert(section);
+    const pesPacket = readPesPacket(section);
+    assert(pesPacket);
+    const context = new PacketReadingContext(this.elementaryStream, pesPacket);
+    const buffer = new PacketBuffer(this, context);
+    const result = await buffer.readNext();
+    if (!result) {
+      return null;
+    }
+    const packet = this.createEncodedPacket(result.packet, result.duration, options);
+    this.packetBuffers.set(packet, buffer);
+    this.packetSectionStarts.set(packet, result.packet.sectionStartPos);
+    return packet;
+  }
+  async getNextPacket(packet, options) {
+    let buffer = this.packetBuffers.get(packet);
+    if (buffer) {
+      const result = await buffer.readNext();
+      if (!result) {
+        return null;
+      }
+      this.packetBuffers.delete(packet);
+      const newPacket = this.createEncodedPacket(result.packet, result.duration, options);
+      this.packetBuffers.set(newPacket, buffer);
+      this.packetSectionStarts.set(newPacket, result.packet.sectionStartPos);
+      return newPacket;
+    }
+    const sectionStartPos = this.packetSectionStarts.get(packet);
+    if (sectionStartPos === void 0) {
+      throw new Error("Packet was not created from this track.");
+    }
+    const demuxer = this.elementaryStream.demuxer;
+    const section = await demuxer.readSection(sectionStartPos, true);
+    assert(section);
+    const pesPacket = readPesPacket(section);
+    assert(pesPacket);
+    const context = new PacketReadingContext(this.elementaryStream, pesPacket);
+    buffer = new PacketBuffer(this, context);
+    const targetSequenceNumber = packet.sequenceNumber;
+    while (true) {
+      const result = await buffer.readNext();
+      if (!result) {
+        return null;
+      }
+      if (result.packet.sequenceNumber > targetSequenceNumber) {
+        const newPacket = this.createEncodedPacket(result.packet, result.duration, options);
+        this.packetBuffers.set(newPacket, buffer);
+        this.packetSectionStarts.set(newPacket, result.packet.sectionStartPos);
+        return newPacket;
+      }
+    }
+  }
+  async getNextKeyPacket(packet, options) {
+    let currentPacket = packet;
+    while (true) {
+      currentPacket = await this.getNextPacket(currentPacket, options);
+      if (!currentPacket) {
+        return null;
+      }
+      if (currentPacket.type === "key") {
+        return currentPacket;
+      }
+    }
+  }
+  getPacket(timestamp, options) {
+    return this.doPacketLookup(timestamp, false, options);
+  }
+  getKeyPacket(timestamp, options) {
+    return this.doPacketLookup(timestamp, true, options);
+  }
+  /**
+   * Searches for the packet with the largest timestamp not larger than `timestamp` in the file, using a combination
+   * of chunk-based binary search and linear refinement. The reason the coarse search is done in large chunks is to
+   * make it more performant for small files and over high-latency readers such as the network.
+   */
+  async doPacketLookup(timestamp, keyframesOnly, options) {
+    const searchPts = roundIfAlmostInteger(timestamp * TIMESCALE);
+    const demuxer = this.elementaryStream.demuxer;
+    const { reader, seekChunkSize } = demuxer;
+    const pid = this.elementaryStream.pid;
+    const findFirstPesPacketHeaderInChunk = async (startPos, endPos) => {
+      let currentPos = startPos;
+      while (currentPos < endPos) {
+        const packetHeader = await demuxer.readPacketHeader(currentPos);
+        if (!packetHeader) {
+          return null;
+        }
+        if (packetHeader.pid === pid && packetHeader.payloadUnitStartIndicator === 1) {
+          const section = await demuxer.readSection(currentPos, false);
+          if (!section) {
+            return null;
+          }
+          const pesPacketHeader = readPesPacketHeader(section);
+          if (pesPacketHeader) {
+            return pesPacketHeader;
+          }
+        }
+        currentPos += demuxer.packetStride;
+      }
+      return null;
+    };
+    const firstSection = this.elementaryStream.firstSection;
+    assert(firstSection);
+    const firstPesPacketHeader = readPesPacketHeader(firstSection);
+    assert(firstPesPacketHeader);
+    if (searchPts < firstPesPacketHeader.pts) {
+      return null;
+    }
+    let scanStartPos;
+    const referencePesPackets = this.elementaryStream.referencePesPackets;
+    const referencePointIndex = binarySearchLessOrEqual(referencePesPackets, searchPts, (x) => x.pts);
+    const referencePoint = referencePointIndex !== -1 ? referencePesPackets[referencePointIndex] : null;
+    if (referencePoint && searchPts - referencePoint.pts < TIMESCALE / 2) {
+      scanStartPos = referencePoint.sectionStartPos;
+    } else {
+      let startChunkIndex = 0;
+      if (reader.fileSize !== null) {
+        const numChunks = Math.ceil(reader.fileSize / seekChunkSize);
+        if (numChunks > 1) {
+          let low = 0;
+          let high = numChunks - 1;
+          startChunkIndex = low;
+          while (low <= high) {
+            const mid = Math.floor((low + high) / 2);
+            const chunkStartPos = floorToMultiple(mid * seekChunkSize, demuxer.packetStride) + firstPesPacketHeader.sectionStartPos;
+            const chunkEndPos = chunkStartPos + seekChunkSize;
+            const pesHeader = await findFirstPesPacketHeaderInChunk(chunkStartPos, chunkEndPos);
+            if (!pesHeader) {
+              high = mid - 1;
+              continue;
+            }
+            if (pesHeader.pts <= searchPts) {
+              startChunkIndex = mid;
+              low = mid + 1;
+            } else {
+              high = mid - 1;
+            }
+          }
+        }
+      }
+      scanStartPos = floorToMultiple(startChunkIndex * seekChunkSize, demuxer.packetStride) + firstPesPacketHeader.sectionStartPos;
+    }
+    let currentPesHeader = await findFirstPesPacketHeaderInChunk(scanStartPos, reader.fileSize ?? Infinity);
+    if (!currentPesHeader) {
+      currentPesHeader = firstPesPacketHeader;
+    }
+    const reorderSize = this.getReorderSize();
+    const retrieveEncodedPacket = async (sectionStartPos, predicate) => {
+      const section = await demuxer.readSection(sectionStartPos, true);
+      assert(section);
+      const pesPacket = readPesPacket(section);
+      assert(pesPacket);
+      const context = new PacketReadingContext(this.elementaryStream, pesPacket);
+      const buffer = new PacketBuffer(this, context);
+      while (true) {
+        const topPts = last(buffer.presentationOrderPackets)?.pts ?? -Infinity;
+        if (topPts >= searchPts) {
+          break;
+        }
+        const didRead = await buffer.readNextPacket();
+        if (!didRead) {
+          break;
+        }
+      }
+      const targetIndex = findLastIndex(buffer.presentationOrderPackets, predicate);
+      if (targetIndex === -1) {
+        return null;
+      }
+      const targetPacket = buffer.presentationOrderPackets[targetIndex];
+      const lastDuration = targetIndex === 0 ? 0 : targetPacket.pts - buffer.presentationOrderPackets[targetIndex - 1].pts;
+      while (buffer.decodeOrderPackets[0] !== targetPacket) {
+        buffer.decodeOrderPackets.shift();
+      }
+      buffer.lastDuration = lastDuration;
+      const result = await buffer.readNext();
+      assert(result);
+      const packet = this.createEncodedPacket(result.packet, result.duration, options);
+      this.packetBuffers.set(packet, buffer);
+      this.packetSectionStarts.set(packet, result.packet.sectionStartPos);
+      return packet;
+    };
+    if (!keyframesOnly || this.allPacketsAreKeyPackets()) {
+      outer: while (true) {
+        let currentPos = currentPesHeader.sectionStartPos + demuxer.packetStride;
+        while (true) {
+          const packetHeader = await demuxer.readPacketHeader(currentPos);
+          if (!packetHeader) {
+            break outer;
+          }
+          if (packetHeader.pid === pid && packetHeader.payloadUnitStartIndicator === 1) {
+            const section = await demuxer.readSection(currentPos, false);
+            if (section) {
+              const nextPesHeader = readPesPacketHeader(section);
+              if (nextPesHeader) {
+                if (nextPesHeader.pts > searchPts) {
+                  break outer;
+                }
+                currentPesHeader = nextPesHeader;
+                maybeInsertReferencePacket(this.elementaryStream, nextPesHeader);
+                break;
+              }
+            }
+          }
+          currentPos += demuxer.packetStride;
+        }
+      }
+      outer: for (let i = 0; i < reorderSize; i++) {
+        let pos = currentPesHeader.sectionStartPos - demuxer.packetStride;
+        while (pos >= demuxer.packetOffset) {
+          const packetHeader = await demuxer.readPacketHeader(pos);
+          if (!packetHeader) {
+            break outer;
+          }
+          if (packetHeader.pid === pid && packetHeader.payloadUnitStartIndicator === 1) {
+            const section = await demuxer.readSection(pos, false);
+            if (section) {
+              const header = readPesPacketHeader(section);
+              if (header) {
+                currentPesHeader = header;
+                break;
+              }
+            }
+          }
+          pos -= demuxer.packetStride;
+        }
+      }
+      return retrieveEncodedPacket(currentPesHeader.sectionStartPos, (p) => p.pts <= searchPts);
+    } else {
+      let currentChunkStartPos = scanStartPos;
+      let nextChunkStartPos = null;
+      while (true) {
+        let bestKeyPesHeader = null;
+        const isFirstChunk = currentChunkStartPos <= firstPesPacketHeader.sectionStartPos;
+        let pesHeader;
+        if (isFirstChunk) {
+          pesHeader = firstPesPacketHeader;
+          bestKeyPesHeader = firstPesPacketHeader;
+        } else {
+          pesHeader = await findFirstPesPacketHeaderInChunk(currentChunkStartPos, reader.fileSize ?? Infinity);
+        }
+        let passedSearchPts = false;
+        let lookaheadCount = 0;
+        outer: while (pesHeader) {
+          if (nextChunkStartPos !== null && pesHeader.sectionStartPos >= nextChunkStartPos) {
+            break;
+          }
+          const isKeyCandidate = pesHeader.randomAccessIndicator === 1;
+          if (isKeyCandidate && pesHeader.pts <= searchPts) {
+            bestKeyPesHeader = pesHeader;
+          }
+          if (pesHeader.pts > searchPts) {
+            passedSearchPts = true;
+          }
+          if (passedSearchPts) {
+            lookaheadCount++;
+            if (lookaheadCount >= reorderSize) {
+              break;
+            }
+          }
+          let currentPos = pesHeader.sectionStartPos + demuxer.packetStride;
+          while (true) {
+            const packetHeader = await demuxer.readPacketHeader(currentPos);
+            if (!packetHeader) {
+              break outer;
+            }
+            if (packetHeader.pid === pid && packetHeader.payloadUnitStartIndicator === 1) {
+              const section = await demuxer.readSection(currentPos, false);
+              if (section) {
+                pesHeader = readPesPacketHeader(section);
+                if (pesHeader) {
+                  maybeInsertReferencePacket(this.elementaryStream, pesHeader);
+                  break;
+                }
+              }
+            }
+            currentPos += demuxer.packetStride;
+          }
+        }
+        if (bestKeyPesHeader) {
+          let startPesHeader = bestKeyPesHeader;
+          if (lookaheadCount === 0) {
+            outer: for (let i = 0; i < reorderSize - 1; i++) {
+              let pos = startPesHeader.sectionStartPos - demuxer.packetStride;
+              while (pos >= demuxer.packetOffset) {
+                const packetHeader = await demuxer.readPacketHeader(pos);
+                if (!packetHeader) {
+                  break outer;
+                }
+                if (packetHeader.pid === pid && packetHeader.payloadUnitStartIndicator === 1) {
+                  const section = await demuxer.readSection(pos, false);
+                  if (section) {
+                    const header = readPesPacketHeader(section);
+                    if (header) {
+                      startPesHeader = header;
+                      break;
+                    }
+                  }
+                }
+                pos -= demuxer.packetStride;
+              }
+            }
+          }
+          const encodedPacket = await retrieveEncodedPacket(startPesHeader.sectionStartPos, (p) => p.pts <= searchPts && p.randomAccessIndicator === 1);
+          assert(encodedPacket);
+          return encodedPacket;
+        }
+        assert(!isFirstChunk);
+        nextChunkStartPos = currentChunkStartPos;
+        currentChunkStartPos = Math.max(floorToMultiple(currentChunkStartPos - firstPesPacketHeader.sectionStartPos - seekChunkSize, demuxer.packetStride) + firstPesPacketHeader.sectionStartPos, firstPesPacketHeader.sectionStartPos);
+      }
+    }
+  }
+}
+class MpegTsVideoTrackBacking extends MpegTsTrackBacking {
+  constructor(elementaryStream) {
+    super(elementaryStream);
+    this.elementaryStream = elementaryStream;
+    this.decoderConfig = {
+      codec: extractVideoCodecString({
+        width: this.elementaryStream.info.width,
+        height: this.elementaryStream.info.height,
+        codec: this.elementaryStream.info.codec,
+        codecDescription: null,
+        colorSpace: this.elementaryStream.info.colorSpace,
+        avcType: 1,
+        avcCodecInfo: this.elementaryStream.info.avcCodecInfo,
+        hevcCodecInfo: this.elementaryStream.info.hevcCodecInfo,
+        vp9CodecInfo: null,
+        av1CodecInfo: null
+      }),
+      codedWidth: this.elementaryStream.info.width,
+      codedHeight: this.elementaryStream.info.height,
+      displayAspectWidth: this.elementaryStream.info.squarePixelWidth,
+      displayAspectHeight: this.elementaryStream.info.squarePixelHeight,
+      colorSpace: this.elementaryStream.info.colorSpace
+    };
+  }
+  getCodec() {
+    return this.elementaryStream.info.codec;
+  }
+  getCodedWidth() {
+    return this.elementaryStream.info.width;
+  }
+  getCodedHeight() {
+    return this.elementaryStream.info.height;
+  }
+  getSquarePixelWidth() {
+    return this.elementaryStream.info.squarePixelWidth;
+  }
+  getSquarePixelHeight() {
+    return this.elementaryStream.info.squarePixelHeight;
+  }
+  getRotation() {
+    return 0;
+  }
+  async getColorSpace() {
+    return this.elementaryStream.info.colorSpace;
+  }
+  async canBeTransparent() {
+    return false;
+  }
+  async getDecoderConfig() {
+    return this.decoderConfig;
+  }
+  allPacketsAreKeyPackets() {
+    return false;
+  }
+  getReorderSize() {
+    return this.elementaryStream.info.reorderSize;
+  }
+}
+class MpegTsAudioTrackBacking extends MpegTsTrackBacking {
+  constructor(elementaryStream) {
+    super(elementaryStream);
+    this.elementaryStream = elementaryStream;
+  }
+  getCodec() {
+    return this.elementaryStream.info.codec;
+  }
+  getNumberOfChannels() {
+    return this.elementaryStream.info.numberOfChannels;
+  }
+  getSampleRate() {
+    return this.elementaryStream.info.sampleRate;
+  }
+  async getDecoderConfig() {
+    return {
+      codec: extractAudioCodecString({
+        codec: this.elementaryStream.info.codec,
+        codecDescription: null,
+        aacCodecInfo: this.elementaryStream.info.aacCodecInfo
+      }),
+      numberOfChannels: this.elementaryStream.info.numberOfChannels,
+      sampleRate: this.elementaryStream.info.sampleRate
+    };
+  }
+  allPacketsAreKeyPackets() {
+    return true;
+  }
+  getReorderSize() {
+    return 1;
+  }
+}
+const maybeInsertReferencePacket = (elementaryStream, pesPacketHeader) => {
+  const referencePesPackets = elementaryStream.referencePesPackets;
+  const index = binarySearchLessOrEqual(referencePesPackets, pesPacketHeader.sectionStartPos, (x) => x.sectionStartPos);
+  if (index >= 0) {
+    const entry = referencePesPackets[index];
+    if (pesPacketHeader.pts <= entry.pts) {
+      return false;
+    }
+    const minByteDistance = elementaryStream.demuxer.minReferencePointByteDistance;
+    if (pesPacketHeader.sectionStartPos - entry.sectionStartPos < minByteDistance) {
+      return false;
+    }
+    if (index < referencePesPackets.length - 1) {
+      const nextEntry = referencePesPackets[index + 1];
+      if (nextEntry.pts < pesPacketHeader.pts) {
+        return false;
+      }
+      if (nextEntry.sectionStartPos - pesPacketHeader.sectionStartPos < minByteDistance) {
+        return false;
+      }
+    }
+  }
+  referencePesPackets.splice(index + 1, 0, pesPacketHeader);
+  return true;
+};
+const markNextPacket = async (context) => {
+  assert(!context.suppliedPacket);
+  const elementaryStream = context.elementaryStream;
+  if (elementaryStream.info.type === "video") {
+    const codec = elementaryStream.info.codec;
+    const CHUNK_SIZE = 1024;
+    if (codec !== "avc" && codec !== "hevc") {
+      throw new Error("Unhandled.");
+    }
+    let packetStartPos = null;
+    while (true) {
+      let remaining = context.ensureBuffered(CHUNK_SIZE);
+      if (remaining instanceof Promise)
+        remaining = await remaining;
+      if (remaining === 0) {
+        break;
+      }
+      const chunkStartPos = context.currentPos;
+      const chunk = context.readBytes(remaining);
+      const length = chunk.byteLength;
+      let i = 0;
+      while (i < length) {
+        const zeroIndex = chunk.indexOf(0, i);
+        if (zeroIndex === -1 || zeroIndex >= length) {
+          break;
+        }
+        i = zeroIndex;
+        const posBeforeZero = chunkStartPos + i;
+        if (i + 4 >= length) {
+          context.seekTo(posBeforeZero);
+          break;
+        }
+        const b1 = chunk[i + 1];
+        const b2 = chunk[i + 2];
+        const b3 = chunk[i + 3];
+        let startCodeLength = 0;
+        let nalUnitTypeByte = null;
+        if (b1 === 0 && b2 === 0 && b3 === 1) {
+          startCodeLength = 4;
+          nalUnitTypeByte = chunk[i + 4];
+        } else if (b1 === 0 && b2 === 1) {
+          startCodeLength = 3;
+          nalUnitTypeByte = b3;
+        }
+        if (startCodeLength === 0) {
+          i++;
+          continue;
+        }
+        const startCodePos = posBeforeZero;
+        if (packetStartPos === null) {
+          packetStartPos = startCodePos;
+          i += startCodeLength;
+          continue;
+        }
+        if (nalUnitTypeByte !== null) {
+          const nalUnitType = codec === "avc" ? extractNalUnitTypeForAvc(nalUnitTypeByte) : extractNalUnitTypeForHevc(nalUnitTypeByte);
+          const isAud = codec === "avc" ? nalUnitType === AvcNalUnitType.AUD : nalUnitType === HevcNalUnitType.AUD_NUT;
+          if (isAud) {
+            const packetLength = startCodePos - packetStartPos;
+            context.seekTo(packetStartPos);
+            return context.supplyPacket(packetLength, 0);
+          }
+        }
+        i += startCodeLength;
+      }
+      if (remaining < CHUNK_SIZE) {
+        break;
+      }
+    }
+    if (packetStartPos !== null) {
+      const packetLength = context.endPos - packetStartPos;
+      context.seekTo(packetStartPos);
+      return context.supplyPacket(packetLength, 0);
+    }
+  } else {
+    const codec = elementaryStream.info.codec;
+    const CHUNK_SIZE = 128;
+    while (true) {
+      let remaining = context.ensureBuffered(CHUNK_SIZE);
+      if (remaining instanceof Promise)
+        remaining = await remaining;
+      const startPos = context.currentPos;
+      while (context.currentPos - startPos < remaining) {
+        const byte = context.readU8();
+        if (codec === "aac") {
+          if (byte !== 255) {
+            continue;
+          }
+          context.skip(-1);
+          const possibleHeaderStartPos = context.currentPos;
+          let remaining2 = context.ensureBuffered(MAX_ADTS_FRAME_HEADER_SIZE);
+          if (remaining2 instanceof Promise)
+            remaining2 = await remaining2;
+          if (remaining2 < MAX_ADTS_FRAME_HEADER_SIZE) {
+            return;
+          }
+          const headerBytes = context.readBytes(MAX_ADTS_FRAME_HEADER_SIZE);
+          const header = readAdtsFrameHeader(FileSlice.tempFromBytes(headerBytes));
+          if (header) {
+            context.seekTo(possibleHeaderStartPos);
+            let remaining3 = context.ensureBuffered(header.frameLength);
+            if (remaining3 instanceof Promise)
+              remaining3 = await remaining3;
+            return context.supplyPacket(remaining3, Math.round(SAMPLES_PER_AAC_FRAME * TIMESCALE / elementaryStream.info.sampleRate));
+          } else {
+            context.seekTo(possibleHeaderStartPos + 1);
+          }
+        } else if (codec === "mp3") {
+          if (byte !== 255) {
+            continue;
+          }
+          context.skip(-1);
+          const possibleHeaderStartPos = context.currentPos;
+          let remaining2 = context.ensureBuffered(FRAME_HEADER_SIZE);
+          if (remaining2 instanceof Promise)
+            remaining2 = await remaining2;
+          if (remaining2 < FRAME_HEADER_SIZE) {
+            return;
+          }
+          const headerBytes = context.readBytes(FRAME_HEADER_SIZE);
+          const word = toDataView(headerBytes).getUint32(0);
+          const result = readMp3FrameHeader(word, null);
+          if (result.header) {
+            context.seekTo(possibleHeaderStartPos);
+            let remaining3 = context.ensureBuffered(result.header.totalSize);
+            if (remaining3 instanceof Promise)
+              remaining3 = await remaining3;
+            const duration = result.header.audioSamplesInFrame * TIMESCALE / elementaryStream.info.sampleRate;
+            return context.supplyPacket(remaining3, Math.round(duration));
+          } else {
+            context.seekTo(possibleHeaderStartPos + 1);
+          }
+        } else if (codec === "ac3") {
+          if (byte !== 11) {
+            continue;
+          }
+          context.skip(-1);
+          const possibleSyncPos = context.currentPos;
+          let remaining2 = context.ensureBuffered(5);
+          if (remaining2 instanceof Promise)
+            remaining2 = await remaining2;
+          if (remaining2 < 5) {
+            return;
+          }
+          const headerBytes = context.readBytes(5);
+          if (headerBytes[0] !== 11 || headerBytes[1] !== 119) {
+            context.seekTo(possibleSyncPos + 1);
+            continue;
+          }
+          const fscod = headerBytes[4] >> 6;
+          const frmsizecod = headerBytes[4] & 63;
+          if (fscod === 3 || frmsizecod > 37) {
+            context.seekTo(possibleSyncPos + 1);
+            continue;
+          }
+          const frameSize = AC3_FRAME_SIZES[3 * frmsizecod + fscod];
+          assert(frameSize !== void 0);
+          context.seekTo(possibleSyncPos);
+          remaining2 = context.ensureBuffered(frameSize);
+          if (remaining2 instanceof Promise)
+            remaining2 = await remaining2;
+          const duration = Math.round(AC3_SAMPLES_PER_FRAME * TIMESCALE / elementaryStream.info.sampleRate);
+          return context.supplyPacket(remaining2, duration);
+        } else if (codec === "eac3") {
+          if (byte !== 11) {
+            continue;
+          }
+          context.skip(-1);
+          const possibleSyncPos = context.currentPos;
+          let remaining2 = context.ensureBuffered(5);
+          if (remaining2 instanceof Promise)
+            remaining2 = await remaining2;
+          if (remaining2 < 5) {
+            return;
+          }
+          const headerBytes = context.readBytes(5);
+          if (headerBytes[0] !== 11 || headerBytes[1] !== 119) {
+            context.seekTo(possibleSyncPos + 1);
+            continue;
+          }
+          const frmsiz = (headerBytes[2] & 7) << 8 | headerBytes[3];
+          const frameSize = (frmsiz + 1) * 2;
+          const fscod = headerBytes[4] >> 6;
+          const numblkscod = fscod === 3 ? 3 : headerBytes[4] >> 4 & 3;
+          const numblks = EAC3_NUMBLKS_TABLE[numblkscod];
+          context.seekTo(possibleSyncPos);
+          remaining2 = context.ensureBuffered(frameSize);
+          if (remaining2 instanceof Promise)
+            remaining2 = await remaining2;
+          const samplesPerFrame = numblks * 256;
+          const duration = Math.round(samplesPerFrame * TIMESCALE / elementaryStream.info.sampleRate);
+          return context.supplyPacket(remaining2, duration);
+        } else {
+          throw new Error("Unhandled.");
+        }
+      }
+      if (remaining < CHUNK_SIZE) {
+        break;
+      }
+    }
+  }
+};
+class PacketReadingContext {
+  constructor(elementaryStream, startingPesPacket) {
+    this.currentPos = 0;
+    this.pesPackets = [];
+    this.currentPesPacketIndex = 0;
+    this.currentPesPacketPos = 0;
+    this.endPos = 0;
+    this.nextPts = 0;
+    this.suppliedPacket = null;
+    this.elementaryStream = elementaryStream;
+    this.pid = elementaryStream.pid;
+    this.demuxer = elementaryStream.demuxer;
+    this.startingPesPacket = startingPesPacket;
+  }
+  clone() {
+    const clone = new PacketReadingContext(this.elementaryStream, this.startingPesPacket);
+    clone.currentPos = this.currentPos;
+    clone.pesPackets = [...this.pesPackets];
+    clone.currentPesPacketIndex = this.currentPesPacketIndex;
+    clone.currentPesPacketPos = this.currentPesPacketPos;
+    clone.endPos = this.endPos;
+    clone.nextPts = this.nextPts;
+    return clone;
+  }
+  ensureBuffered(length) {
+    const remaining = this.endPos - this.currentPos;
+    if (remaining >= length) {
+      return length;
+    }
+    return this.bufferData(length - remaining).then(() => Math.min(this.endPos - this.currentPos, length));
+  }
+  getCurrentPesPacket() {
+    const packet = this.pesPackets[this.currentPesPacketIndex];
+    assert(packet);
+    return packet;
+  }
+  async bufferData(length) {
+    const targetEndPos = this.endPos + length;
+    while (this.endPos < targetEndPos) {
+      let pesPacket;
+      if (this.pesPackets.length === 0) {
+        pesPacket = this.startingPesPacket;
+      } else {
+        let currentPos = last(this.pesPackets).sectionEndPos;
+        assert(currentPos !== null);
+        while (true) {
+          const packetHeader = await this.demuxer.readPacketHeader(currentPos);
+          if (!packetHeader) {
+            return;
+          }
+          if (packetHeader.pid === this.pid) {
+            const nextSection = await this.demuxer.readSection(currentPos, true);
+            if (!nextSection) {
+              return;
+            }
+            const nextPesPacket = readPesPacket(nextSection);
+            if (nextPesPacket) {
+              pesPacket = nextPesPacket;
+              break;
+            }
+          }
+          currentPos += this.demuxer.packetStride;
+        }
+      }
+      this.pesPackets.push(pesPacket);
+      this.endPos += pesPacket.data.byteLength;
+      if (this.pesPackets.length === 1) {
+        this.nextPts = pesPacket.pts;
+      }
+    }
+  }
+  readBytes(length) {
+    const currentPesPacket = this.getCurrentPesPacket();
+    const relativeStartOffset = this.currentPos - this.currentPesPacketPos;
+    const relativeEndOffset = relativeStartOffset + length;
+    this.currentPos += length;
+    if (relativeEndOffset <= currentPesPacket.data.byteLength) {
+      return currentPesPacket.data.subarray(relativeStartOffset, relativeEndOffset);
+    }
+    const result = new Uint8Array(length);
+    result.set(currentPesPacket.data.subarray(relativeStartOffset));
+    let offset = currentPesPacket.data.byteLength - relativeStartOffset;
+    while (true) {
+      this.advanceCurrentPacket();
+      const currentPesPacket2 = this.getCurrentPesPacket();
+      const relativeEndOffset2 = length - offset;
+      if (relativeEndOffset2 <= currentPesPacket2.data.byteLength) {
+        result.set(currentPesPacket2.data.subarray(0, relativeEndOffset2), offset);
+        break;
+      }
+      result.set(currentPesPacket2.data, offset);
+      offset += currentPesPacket2.data.byteLength;
+    }
+    return result;
+  }
+  readU8() {
+    let currentPesPacket = this.getCurrentPesPacket();
+    const relativeOffset = this.currentPos - this.currentPesPacketPos;
+    this.currentPos++;
+    if (relativeOffset < currentPesPacket.data.byteLength) {
+      return currentPesPacket.data[relativeOffset];
+    }
+    this.advanceCurrentPacket();
+    currentPesPacket = this.getCurrentPesPacket();
+    return currentPesPacket.data[0];
+  }
+  seekTo(pos) {
+    if (pos === this.currentPos) {
+      return;
+    }
+    if (pos < this.currentPos) {
+      while (pos < this.currentPesPacketPos) {
+        this.currentPesPacketIndex--;
+        const currentPacket = this.getCurrentPesPacket();
+        this.currentPesPacketPos -= currentPacket.data.byteLength;
+        this.nextPts = currentPacket.pts;
+      }
+    } else {
+      while (true) {
+        const currentPesPacket = this.getCurrentPesPacket();
+        const currentEndPos = this.currentPesPacketPos + currentPesPacket.data.byteLength;
+        if (pos < currentEndPos) {
+          break;
+        }
+        this.currentPesPacketPos += currentPesPacket.data.byteLength;
+        this.currentPesPacketIndex++;
+        this.nextPts = this.getCurrentPesPacket().pts;
+      }
+    }
+    this.currentPos = pos;
+  }
+  skip(n) {
+    this.seekTo(this.currentPos + n);
+  }
+  advanceCurrentPacket() {
+    this.currentPesPacketPos += this.getCurrentPesPacket().data.byteLength;
+    this.currentPesPacketIndex++;
+    this.nextPts = this.getCurrentPesPacket().pts;
+  }
+  /** Supplies the context with a new encoded packet, beginning at the current position. */
+  supplyPacket(packetLength, intrinsicDuration) {
+    const currentPesPacket = this.getCurrentPesPacket();
+    maybeInsertReferencePacket(this.elementaryStream, currentPesPacket);
+    const pts = this.nextPts;
+    this.nextPts += intrinsicDuration;
+    const sectionStartPos = currentPesPacket.sectionStartPos;
+    const sequenceNumber = sectionStartPos + (this.currentPos - this.currentPesPacketPos);
+    const data = this.readBytes(packetLength);
+    let randomAccessIndicator = currentPesPacket.randomAccessIndicator;
+    assert(this.elementaryStream.firstSection);
+    if (currentPesPacket.sectionStartPos === this.elementaryStream.firstSection.startPos) {
+      randomAccessIndicator = 1;
+    }
+    this.suppliedPacket = {
+      pts,
+      data,
+      sequenceNumber,
+      sectionStartPos,
+      randomAccessIndicator
+    };
+    this.pesPackets.splice(0, this.currentPesPacketIndex);
+    this.currentPesPacketIndex = 0;
+  }
+}
+class PacketBuffer {
+  constructor(backing, context) {
+    this.decodeOrderPackets = [];
+    this.reorderBuffer = [];
+    this.presentationOrderPackets = [];
+    this.reachedEnd = false;
+    this.lastDuration = 0;
+    this.backing = backing;
+    this.context = context;
+    this.reorderSize = backing.getReorderSize();
+    assert(this.reorderSize >= 0);
+  }
+  async readNext() {
+    if (this.decodeOrderPackets.length === 0) {
+      const didRead = await this.readNextPacket();
+      if (!didRead) {
+        return null;
+      }
+    }
+    await this.ensureCurrentPacketHasNext();
+    const packet = this.decodeOrderPackets[0];
+    const presentationIndex = this.presentationOrderPackets.indexOf(packet);
+    assert(presentationIndex !== -1);
+    let duration;
+    if (presentationIndex === this.presentationOrderPackets.length - 1) {
+      duration = this.lastDuration;
+    } else {
+      const nextPacket = this.presentationOrderPackets[presentationIndex + 1];
+      duration = nextPacket.pts - packet.pts;
+      this.lastDuration = duration;
+    }
+    this.decodeOrderPackets.shift();
+    while (this.presentationOrderPackets.length > 0) {
+      const first = this.presentationOrderPackets[0];
+      if (this.decodeOrderPackets.includes(first)) {
+        break;
+      }
+      this.presentationOrderPackets.shift();
+    }
+    return { packet, duration };
+  }
+  async readNextPacket() {
+    if (this.reachedEnd) {
+      return false;
+    }
+    let suppliedPacket;
+    if (this.context.suppliedPacket) {
+      suppliedPacket = this.context.suppliedPacket;
+    } else {
+      await markNextPacket(this.context);
+      suppliedPacket = this.context.suppliedPacket;
+    }
+    this.context.suppliedPacket = null;
+    if (!suppliedPacket) {
+      this.reachedEnd = true;
+      this.flushReorderBuffer();
+      return false;
+    }
+    this.decodeOrderPackets.push(suppliedPacket);
+    this.processPacketThroughReorderBuffer(suppliedPacket);
+    return true;
+  }
+  async ensureCurrentPacketHasNext() {
+    const current = this.decodeOrderPackets[0];
+    assert(current);
+    while (true) {
+      const presentationIndex = this.presentationOrderPackets.indexOf(current);
+      if (presentationIndex !== -1 && presentationIndex <= this.presentationOrderPackets.length - 2) {
+        break;
+      }
+      const didRead = await this.readNextPacket();
+      if (!didRead) {
+        break;
+      }
+    }
+  }
+  processPacketThroughReorderBuffer(packet) {
+    this.reorderBuffer.push(packet);
+    if (this.reorderBuffer.length >= this.reorderSize) {
+      let minIndex = 0;
+      for (let i = 1; i < this.reorderBuffer.length; i++) {
+        if (this.reorderBuffer[i].pts < this.reorderBuffer[minIndex].pts) {
+          minIndex = i;
+        }
+      }
+      const packet2 = this.reorderBuffer.splice(minIndex, 1)[0];
+      this.presentationOrderPackets.push(packet2);
+    }
+  }
+  flushReorderBuffer() {
+    this.reorderBuffer.sort((a, b) => a.pts - b.pts);
+    this.presentationOrderPackets.push(...this.reorderBuffer);
+    this.reorderBuffer.length = 0;
   }
 }
 class InputFormat {
@@ -13158,13 +14997,7 @@ class WebMInputFormat extends MatroskaInputFormat {
 class Mp3InputFormat extends InputFormat {
   /** @internal */
   async _canReadInput(input) {
-    let slice = input._reader.requestSlice(0, 10);
-    if (slice instanceof Promise)
-      slice = await slice;
-    if (!slice)
-      return false;
     let currentPos = 0;
-    let id3V2HeaderFound = false;
     while (true) {
       let slice2 = input._reader.requestSlice(currentPos, ID3_V2_HEADER_SIZE);
       if (slice2 instanceof Promise)
@@ -13175,22 +15008,29 @@ class Mp3InputFormat extends InputFormat {
       if (!id3V2Header) {
         break;
       }
-      id3V2HeaderFound = true;
       currentPos = slice2.filePos + id3V2Header.size;
     }
-    const firstResult = await readNextFrameHeader(input._reader, currentPos, currentPos + 4096);
+    const firstResult = await readNextMp3FrameHeader(input._reader, currentPos, currentPos + 4096);
     if (!firstResult) {
       return false;
     }
-    if (id3V2HeaderFound) {
+    const firstHeader = firstResult.header;
+    const xingOffset = getXingOffset(firstHeader.mpegVersionId, firstHeader.channel);
+    let slice = input._reader.requestSlice(firstResult.startPos + xingOffset, 4);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return false;
+    const word = readU32Be(slice);
+    const isXing = word === XING || word === INFO;
+    if (isXing) {
       return true;
     }
     currentPos = firstResult.startPos + firstResult.header.totalSize;
-    const secondResult = await readNextFrameHeader(input._reader, currentPos, currentPos + FRAME_HEADER_SIZE);
+    const secondResult = await readNextMp3FrameHeader(input._reader, currentPos, currentPos + FRAME_HEADER_SIZE);
     if (!secondResult) {
       return false;
     }
-    const firstHeader = firstResult.header;
     const secondHeader = secondResult.header;
     if (firstHeader.channel !== secondHeader.channel || firstHeader.sampleRate !== secondHeader.sampleRate) {
       return false;
@@ -13280,21 +15120,35 @@ class FlacInputFormat extends InputFormat {
 class AdtsInputFormat extends InputFormat {
   /** @internal */
   async _canReadInput(input) {
-    let slice = input._reader.requestSliceRange(0, MIN_FRAME_HEADER_SIZE, MAX_FRAME_HEADER_SIZE);
+    let currentPos = 0;
+    while (true) {
+      let slice2 = input._reader.requestSlice(currentPos, ID3_V2_HEADER_SIZE);
+      if (slice2 instanceof Promise)
+        slice2 = await slice2;
+      if (!slice2)
+        break;
+      const id3V2Header = readId3V2Header(slice2);
+      if (!id3V2Header) {
+        break;
+      }
+      currentPos = slice2.filePos + id3V2Header.size;
+    }
+    let slice = input._reader.requestSliceRange(currentPos, MIN_ADTS_FRAME_HEADER_SIZE, MAX_ADTS_FRAME_HEADER_SIZE);
     if (slice instanceof Promise)
       slice = await slice;
     if (!slice)
       return false;
-    const firstHeader = readFrameHeader(slice);
+    const firstHeader = readAdtsFrameHeader(slice);
     if (!firstHeader) {
       return false;
     }
-    slice = input._reader.requestSliceRange(firstHeader.frameLength, MIN_FRAME_HEADER_SIZE, MAX_FRAME_HEADER_SIZE);
+    currentPos += firstHeader.frameLength;
+    slice = input._reader.requestSliceRange(currentPos, MIN_ADTS_FRAME_HEADER_SIZE, MAX_ADTS_FRAME_HEADER_SIZE);
     if (slice instanceof Promise)
       slice = await slice;
     if (!slice)
       return false;
-    const secondHeader = readFrameHeader(slice);
+    const secondHeader = readAdtsFrameHeader(slice);
     if (!secondHeader) {
       return false;
     }
@@ -13311,6 +15165,36 @@ class AdtsInputFormat extends InputFormat {
     return "audio/aac";
   }
 }
+class MpegTsInputFormat extends InputFormat {
+  /** @internal */
+  async _canReadInput(input) {
+    const lengthToCheck = TS_PACKET_SIZE + 16 + 1;
+    let slice = input._reader.requestSlice(0, lengthToCheck);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return false;
+    const bytes = readBytes(slice, lengthToCheck);
+    if (bytes[0] === 71 && bytes[TS_PACKET_SIZE] === 71) {
+      return true;
+    } else if (bytes[0] === 71 && bytes[TS_PACKET_SIZE + 16] === 71) {
+      return true;
+    } else if (bytes[4] === 71 && bytes[4 + TS_PACKET_SIZE] === 71) {
+      return true;
+    }
+    return false;
+  }
+  /** @internal */
+  _createDemuxer(input) {
+    return new MpegTsDemuxer(input);
+  }
+  get name() {
+    return "MPEG Transport Stream";
+  }
+  get mimeType() {
+    return "video/MP2T";
+  }
+}
 const MP4 = /* @__PURE__ */ new Mp4InputFormat();
 const QTFF = /* @__PURE__ */ new QuickTimeInputFormat();
 const MATROSKA = /* @__PURE__ */ new MatroskaInputFormat();
@@ -13320,7 +15204,8 @@ const WAVE = /* @__PURE__ */ new WaveInputFormat();
 const OGG = /* @__PURE__ */ new OggInputFormat();
 const ADTS = /* @__PURE__ */ new AdtsInputFormat();
 const FLAC = /* @__PURE__ */ new FlacInputFormat();
-const ALL_FORMATS = [MP4, QTFF, MATROSKA, WEBM, WAVE, OGG, FLAC, MP3, ADTS];
+const MPEG_TS = /* @__PURE__ */ new MpegTsInputFormat();
+const ALL_FORMATS = [MP4, QTFF, MATROSKA, WEBM, WAVE, OGG, FLAC, MP3, ADTS, MPEG_TS];
 class Source {
   constructor() {
     this._disposed = false;
@@ -13454,7 +15339,12 @@ const DEFAULT_RETRY_DELAY = ((previousAttempts, error, src) => {
   return Math.min(2 ** (previousAttempts - 2), 16);
 });
 class UrlSource extends Source {
-  /** Creates a new {@link UrlSource} backed by the resource at the specified URL. */
+  /**
+   * Creates a new {@link UrlSource} backed by the resource at the specified URL.
+   *
+   * When passing a `Request` instance, note that the `signal` and `headers.Range` options will be overridden by
+   * Mediabunny. If you want to cancel ongoing requests, use {@link Input.dispose}.
+   */
   constructor(url, options = {}) {
     if (typeof url !== "string" && !(url instanceof URL) && !(typeof Request !== "undefined" && url instanceof Request)) {
       throw new TypeError("url must be a string, URL or Request.");
@@ -13471,6 +15361,9 @@ class UrlSource extends Source {
     if (options.maxCacheSize !== void 0 && (!isNumber(options.maxCacheSize) || options.maxCacheSize < 0)) {
       throw new TypeError("options.maxCacheSize, when provided, must be a non-negative number.");
     }
+    if (options.parallelism !== void 0 && (!Number.isInteger(options.parallelism) || options.parallelism < 1)) {
+      throw new TypeError("options.parallelism, when provided, must be a positive number.");
+    }
     if (options.fetchFn !== void 0 && typeof options.fetchFn !== "function") {
       throw new TypeError("options.fetchFn, when provided, must be a function.");
     }
@@ -13479,11 +15372,10 @@ class UrlSource extends Source {
     this._url = url;
     this._options = options;
     this._getRetryDelay = options.getRetryDelay ?? DEFAULT_RETRY_DELAY;
+    const DEFAULT_PARALLELISM = 2;
     this._orchestrator = new ReadOrchestrator({
       maxCacheSize: options.maxCacheSize ?? 64 * 2 ** 20,
-      // Most files in the real-world have a single sequential access pattern, but having two in parallel can
-      // also happen
-      maxWorkerCount: 2,
+      maxWorkerCount: options.parallelism ?? DEFAULT_PARALLELISM,
       runWorker: this._runWorker.bind(this),
       prefetchProfile: PREFETCH_PROFILES.network
     });
@@ -14173,6 +16065,18 @@ class Input {
     const demuxer = await this._getDemuxer();
     return demuxer.computeDuration();
   }
+  /**
+   * Returns the timestamp at which the input file starts. More precisely, returns the smallest starting timestamp
+   * among all tracks.
+   */
+  async getFirstTimestamp() {
+    const tracks = await this.getTracks();
+    if (tracks.length === 0) {
+      return 0;
+    }
+    const firstTimestamps = await Promise.all(tracks.map((x) => x.getFirstTimestamp()));
+    return Math.min(...firstTimestamps);
+  }
   /** Returns the list of all tracks of this input file. */
   async getTracks() {
     const demuxer = await this._getDemuxer();
@@ -14250,6 +16154,9 @@ class Reader {
     if (this.source._disposed) {
       throw new InputDisposedError();
     }
+    if (start < 0) {
+      return null;
+    }
     if (this.fileSize !== null && start + length > this.fileSize) {
       return null;
     }
@@ -14272,6 +16179,9 @@ class Reader {
   requestSliceRange(start, minLength, maxLength) {
     if (this.source._disposed) {
       throw new InputDisposedError();
+    }
+    if (start < 0) {
+      return null;
     }
     if (this.fileSize !== null) {
       return this.requestSlice(start, clamp$1(this.fileSize - start, minLength, maxLength));
@@ -14452,6 +16362,684 @@ const readAscii = (slice, length) => {
   }
   return str;
 };
+var Id3V2HeaderFlags;
+(function(Id3V2HeaderFlags2) {
+  Id3V2HeaderFlags2[Id3V2HeaderFlags2["Unsynchronisation"] = 128] = "Unsynchronisation";
+  Id3V2HeaderFlags2[Id3V2HeaderFlags2["ExtendedHeader"] = 64] = "ExtendedHeader";
+  Id3V2HeaderFlags2[Id3V2HeaderFlags2["ExperimentalIndicator"] = 32] = "ExperimentalIndicator";
+  Id3V2HeaderFlags2[Id3V2HeaderFlags2["Footer"] = 16] = "Footer";
+})(Id3V2HeaderFlags || (Id3V2HeaderFlags = {}));
+var Id3V2TextEncoding;
+(function(Id3V2TextEncoding2) {
+  Id3V2TextEncoding2[Id3V2TextEncoding2["ISO_8859_1"] = 0] = "ISO_8859_1";
+  Id3V2TextEncoding2[Id3V2TextEncoding2["UTF_16_WITH_BOM"] = 1] = "UTF_16_WITH_BOM";
+  Id3V2TextEncoding2[Id3V2TextEncoding2["UTF_16_BE_NO_BOM"] = 2] = "UTF_16_BE_NO_BOM";
+  Id3V2TextEncoding2[Id3V2TextEncoding2["UTF_8"] = 3] = "UTF_8";
+})(Id3V2TextEncoding || (Id3V2TextEncoding = {}));
+const ID3_V1_TAG_SIZE = 128;
+const ID3_V2_HEADER_SIZE = 10;
+const ID3_V1_GENRES = [
+  "Blues",
+  "Classic rock",
+  "Country",
+  "Dance",
+  "Disco",
+  "Funk",
+  "Grunge",
+  "Hip-hop",
+  "Jazz",
+  "Metal",
+  "New age",
+  "Oldies",
+  "Other",
+  "Pop",
+  "Rhythm and blues",
+  "Rap",
+  "Reggae",
+  "Rock",
+  "Techno",
+  "Industrial",
+  "Alternative",
+  "Ska",
+  "Death metal",
+  "Pranks",
+  "Soundtrack",
+  "Euro-techno",
+  "Ambient",
+  "Trip-hop",
+  "Vocal",
+  "Jazz & funk",
+  "Fusion",
+  "Trance",
+  "Classical",
+  "Instrumental",
+  "Acid",
+  "House",
+  "Game",
+  "Sound clip",
+  "Gospel",
+  "Noise",
+  "Alternative rock",
+  "Bass",
+  "Soul",
+  "Punk",
+  "Space",
+  "Meditative",
+  "Instrumental pop",
+  "Instrumental rock",
+  "Ethnic",
+  "Gothic",
+  "Darkwave",
+  "Techno-industrial",
+  "Electronic",
+  "Pop-folk",
+  "Eurodance",
+  "Dream",
+  "Southern rock",
+  "Comedy",
+  "Cult",
+  "Gangsta",
+  "Top 40",
+  "Christian rap",
+  "Pop/funk",
+  "Jungle music",
+  "Native US",
+  "Cabaret",
+  "New wave",
+  "Psychedelic",
+  "Rave",
+  "Showtunes",
+  "Trailer",
+  "Lo-fi",
+  "Tribal",
+  "Acid punk",
+  "Acid jazz",
+  "Polka",
+  "Retro",
+  "Musical",
+  "Rock 'n' roll",
+  "Hard rock",
+  "Folk",
+  "Folk rock",
+  "National folk",
+  "Swing",
+  "Fast fusion",
+  "Bebop",
+  "Latin",
+  "Revival",
+  "Celtic",
+  "Bluegrass",
+  "Avantgarde",
+  "Gothic rock",
+  "Progressive rock",
+  "Psychedelic rock",
+  "Symphonic rock",
+  "Slow rock",
+  "Big band",
+  "Chorus",
+  "Easy listening",
+  "Acoustic",
+  "Humour",
+  "Speech",
+  "Chanson",
+  "Opera",
+  "Chamber music",
+  "Sonata",
+  "Symphony",
+  "Booty bass",
+  "Primus",
+  "Porn groove",
+  "Satire",
+  "Slow jam",
+  "Club",
+  "Tango",
+  "Samba",
+  "Folklore",
+  "Ballad",
+  "Power ballad",
+  "Rhythmic Soul",
+  "Freestyle",
+  "Duet",
+  "Punk rock",
+  "Drum solo",
+  "A cappella",
+  "Euro-house",
+  "Dance hall",
+  "Goa music",
+  "Drum & bass",
+  "Club-house",
+  "Hardcore techno",
+  "Terror",
+  "Indie",
+  "Britpop",
+  "Negerpunk",
+  "Polsk punk",
+  "Beat",
+  "Christian gangsta rap",
+  "Heavy metal",
+  "Black metal",
+  "Crossover",
+  "Contemporary Christian",
+  "Christian rock",
+  "Merengue",
+  "Salsa",
+  "Thrash metal",
+  "Anime",
+  "Jpop",
+  "Synthpop",
+  "Christmas",
+  "Art rock",
+  "Baroque",
+  "Bhangra",
+  "Big beat",
+  "Breakbeat",
+  "Chillout",
+  "Downtempo",
+  "Dub",
+  "EBM",
+  "Eclectic",
+  "Electro",
+  "Electroclash",
+  "Emo",
+  "Experimental",
+  "Garage",
+  "Global",
+  "IDM",
+  "Illbient",
+  "Industro-Goth",
+  "Jam Band",
+  "Krautrock",
+  "Leftfield",
+  "Lounge",
+  "Math rock",
+  "New romantic",
+  "Nu-breakz",
+  "Post-punk",
+  "Post-rock",
+  "Psytrance",
+  "Shoegaze",
+  "Space rock",
+  "Trop rock",
+  "World music",
+  "Neoclassical",
+  "Audiobook",
+  "Audio theatre",
+  "Neue Deutsche Welle",
+  "Podcast",
+  "Indie rock",
+  "G-Funk",
+  "Dubstep",
+  "Garage rock",
+  "Psybient"
+];
+const parseId3V1Tag = (slice, tags) => {
+  var _a;
+  const startPos = slice.filePos;
+  tags.raw ?? (tags.raw = {});
+  (_a = tags.raw)["TAG"] ?? (_a["TAG"] = readBytes(slice, ID3_V1_TAG_SIZE - 3));
+  slice.filePos = startPos;
+  const title = readId3V1String(slice, 30);
+  if (title)
+    tags.title ?? (tags.title = title);
+  const artist = readId3V1String(slice, 30);
+  if (artist)
+    tags.artist ?? (tags.artist = artist);
+  const album = readId3V1String(slice, 30);
+  if (album)
+    tags.album ?? (tags.album = album);
+  const yearText = readId3V1String(slice, 4);
+  const year = Number.parseInt(yearText, 10);
+  if (Number.isInteger(year) && year > 0) {
+    tags.date ?? (tags.date = new Date(year, 0, 1));
+  }
+  const commentBytes = readBytes(slice, 30);
+  let comment;
+  if (commentBytes[28] === 0 && commentBytes[29] !== 0) {
+    const trackNum = commentBytes[29];
+    if (trackNum > 0) {
+      tags.trackNumber ?? (tags.trackNumber = trackNum);
+    }
+    slice.skip(-30);
+    comment = readId3V1String(slice, 28);
+    slice.skip(2);
+  } else {
+    slice.skip(-30);
+    comment = readId3V1String(slice, 30);
+  }
+  if (comment)
+    tags.comment ?? (tags.comment = comment);
+  const genreIndex = readU8(slice);
+  if (genreIndex < ID3_V1_GENRES.length) {
+    tags.genre ?? (tags.genre = ID3_V1_GENRES[genreIndex]);
+  }
+};
+const readId3V1String = (slice, length) => {
+  const bytes = readBytes(slice, length);
+  const endIndex = coalesceIndex(bytes.indexOf(0), bytes.length);
+  const relevantBytes = bytes.subarray(0, endIndex);
+  let str = "";
+  for (let i = 0; i < relevantBytes.length; i++) {
+    str += String.fromCharCode(relevantBytes[i]);
+  }
+  return str.trimEnd();
+};
+const readId3V2Header = (slice) => {
+  const startPos = slice.filePos;
+  const tag = readAscii(slice, 3);
+  const majorVersion = readU8(slice);
+  const revision = readU8(slice);
+  const flags = readU8(slice);
+  const sizeRaw = readU32Be(slice);
+  if (tag !== "ID3" || majorVersion === 255 || revision === 255 || (sizeRaw & 2155905152) !== 0) {
+    slice.filePos = startPos;
+    return null;
+  }
+  const size = decodeSynchsafe(sizeRaw);
+  return { majorVersion, revision, flags, size };
+};
+const parseId3V2Tag = (slice, header, tags) => {
+  var _a, _b, _c, _d;
+  if (![2, 3, 4].includes(header.majorVersion)) {
+    console.warn(`Unsupported ID3v2 major version: ${header.majorVersion}`);
+    return;
+  }
+  const bytes = readBytes(slice, header.size);
+  const reader = new Id3V2Reader(header, bytes);
+  if (header.flags & Id3V2HeaderFlags.Footer) {
+    reader.removeFooter();
+  }
+  if (header.flags & Id3V2HeaderFlags.Unsynchronisation && header.majorVersion === 3) {
+    reader.ununsynchronizeAll();
+  }
+  if (header.flags & Id3V2HeaderFlags.ExtendedHeader) {
+    const extendedHeaderSize = reader.readU32();
+    if (header.majorVersion === 3) {
+      reader.pos += extendedHeaderSize;
+    } else {
+      reader.pos += extendedHeaderSize - 4;
+    }
+  }
+  while (reader.pos <= reader.bytes.length - reader.frameHeaderSize()) {
+    const frame = reader.readId3V2Frame();
+    if (!frame) {
+      break;
+    }
+    const frameStartPos = reader.pos;
+    const frameEndPos = reader.pos + frame.size;
+    let frameEncrypted = false;
+    let frameCompressed = false;
+    let frameUnsynchronized = false;
+    if (header.majorVersion === 3) {
+      frameEncrypted = !!(frame.flags & 1 << 6);
+      frameCompressed = !!(frame.flags & 1 << 7);
+    } else if (header.majorVersion === 4) {
+      frameEncrypted = !!(frame.flags & 1 << 2);
+      frameCompressed = !!(frame.flags & 1 << 3);
+      frameUnsynchronized = !!(frame.flags & 1 << 1) || !!(header.flags & Id3V2HeaderFlags.Unsynchronisation);
+    }
+    if (frameEncrypted) {
+      console.warn(`Skipping encrypted ID3v2 frame ${frame.id}`);
+      reader.pos = frameEndPos;
+      continue;
+    }
+    if (frameCompressed) {
+      console.warn(`Skipping compressed ID3v2 frame ${frame.id}`);
+      reader.pos = frameEndPos;
+      continue;
+    }
+    if (frameUnsynchronized) {
+      reader.ununsynchronizeRegion(reader.pos, frameEndPos);
+    }
+    tags.raw ?? (tags.raw = {});
+    if (frame.id[0] === "T") {
+      (_a = tags.raw)[_b = frame.id] ?? (_a[_b] = reader.readId3V2EncodingAndText(frameEndPos));
+    } else {
+      (_c = tags.raw)[_d = frame.id] ?? (_c[_d] = reader.readBytes(frame.size));
+    }
+    reader.pos = frameStartPos;
+    switch (frame.id) {
+      case "TIT2":
+      case "TT2":
+        {
+          tags.title ?? (tags.title = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TIT3":
+      case "TT3":
+        {
+          tags.description ?? (tags.description = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TPE1":
+      case "TP1":
+        {
+          tags.artist ?? (tags.artist = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TALB":
+      case "TAL":
+        {
+          tags.album ?? (tags.album = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TPE2":
+      case "TP2":
+        {
+          tags.albumArtist ?? (tags.albumArtist = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TRCK":
+      case "TRK":
+        {
+          const trackText = reader.readId3V2EncodingAndText(frameEndPos);
+          const parts = trackText.split("/");
+          const trackNum = Number.parseInt(parts[0], 10);
+          const tracksTotal = parts[1] && Number.parseInt(parts[1], 10);
+          if (Number.isInteger(trackNum) && trackNum > 0) {
+            tags.trackNumber ?? (tags.trackNumber = trackNum);
+          }
+          if (tracksTotal && Number.isInteger(tracksTotal) && tracksTotal > 0) {
+            tags.tracksTotal ?? (tags.tracksTotal = tracksTotal);
+          }
+        }
+        break;
+      case "TPOS":
+      case "TPA":
+        {
+          const discText = reader.readId3V2EncodingAndText(frameEndPos);
+          const parts = discText.split("/");
+          const discNum = Number.parseInt(parts[0], 10);
+          const discsTotal = parts[1] && Number.parseInt(parts[1], 10);
+          if (Number.isInteger(discNum) && discNum > 0) {
+            tags.discNumber ?? (tags.discNumber = discNum);
+          }
+          if (discsTotal && Number.isInteger(discsTotal) && discsTotal > 0) {
+            tags.discsTotal ?? (tags.discsTotal = discsTotal);
+          }
+        }
+        break;
+      case "TCON":
+      case "TCO":
+        {
+          const genreText = reader.readId3V2EncodingAndText(frameEndPos);
+          let match = /^\((\d+)\)/.exec(genreText);
+          if (match) {
+            const genreNumber = Number.parseInt(match[1]);
+            if (ID3_V1_GENRES[genreNumber] !== void 0) {
+              tags.genre ?? (tags.genre = ID3_V1_GENRES[genreNumber]);
+              break;
+            }
+          }
+          match = /^\d+$/.exec(genreText);
+          if (match) {
+            const genreNumber = Number.parseInt(match[0]);
+            if (ID3_V1_GENRES[genreNumber] !== void 0) {
+              tags.genre ?? (tags.genre = ID3_V1_GENRES[genreNumber]);
+              break;
+            }
+          }
+          tags.genre ?? (tags.genre = genreText);
+        }
+        break;
+      case "TDRC":
+      case "TDAT":
+        {
+          const dateText = reader.readId3V2EncodingAndText(frameEndPos);
+          const date = new Date(dateText);
+          if (!Number.isNaN(date.getTime())) {
+            tags.date ?? (tags.date = date);
+          }
+        }
+        break;
+      case "TYER":
+      case "TYE":
+        {
+          const yearText = reader.readId3V2EncodingAndText(frameEndPos);
+          const year = Number.parseInt(yearText, 10);
+          if (Number.isInteger(year)) {
+            tags.date ?? (tags.date = new Date(year, 0, 1));
+          }
+        }
+        break;
+      case "USLT":
+      case "ULT":
+        {
+          const encoding = reader.readU8();
+          reader.pos += 3;
+          reader.readId3V2Text(encoding, frameEndPos);
+          tags.lyrics ?? (tags.lyrics = reader.readId3V2Text(encoding, frameEndPos));
+        }
+        break;
+      case "COMM":
+      case "COM":
+        {
+          const encoding = reader.readU8();
+          reader.pos += 3;
+          reader.readId3V2Text(encoding, frameEndPos);
+          tags.comment ?? (tags.comment = reader.readId3V2Text(encoding, frameEndPos));
+        }
+        break;
+      case "APIC":
+      case "PIC":
+        {
+          const encoding = reader.readId3V2TextEncoding();
+          let mimeType;
+          if (header.majorVersion === 2) {
+            const imageFormat = reader.readAscii(3);
+            mimeType = imageFormat === "PNG" ? "image/png" : imageFormat === "JPG" ? "image/jpeg" : "image/*";
+          } else {
+            mimeType = reader.readId3V2Text(encoding, frameEndPos);
+          }
+          const pictureType = reader.readU8();
+          const description = reader.readId3V2Text(encoding, frameEndPos).trimEnd();
+          const imageDataSize = frameEndPos - reader.pos;
+          if (imageDataSize >= 0) {
+            const imageData = reader.readBytes(imageDataSize);
+            if (!tags.images)
+              tags.images = [];
+            tags.images.push({
+              data: imageData,
+              mimeType,
+              kind: pictureType === 3 ? "coverFront" : pictureType === 4 ? "coverBack" : "unknown",
+              description
+            });
+          }
+        }
+        break;
+      default:
+        {
+          reader.pos += frame.size;
+        }
+        break;
+    }
+    reader.pos = frameEndPos;
+  }
+};
+class Id3V2Reader {
+  constructor(header, bytes) {
+    this.header = header;
+    this.bytes = bytes;
+    this.pos = 0;
+    this.view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  }
+  frameHeaderSize() {
+    return this.header.majorVersion === 2 ? 6 : 10;
+  }
+  ununsynchronizeAll() {
+    const newBytes = [];
+    for (let i = 0; i < this.bytes.length; i++) {
+      const value1 = this.bytes[i];
+      newBytes.push(value1);
+      if (value1 === 255 && i !== this.bytes.length - 1) {
+        const value2 = this.bytes[i];
+        if (value2 === 0) {
+          i++;
+        }
+      }
+    }
+    this.bytes = new Uint8Array(newBytes);
+    this.view = new DataView(this.bytes.buffer);
+  }
+  ununsynchronizeRegion(start, end) {
+    const newBytes = [];
+    for (let i = start; i < end; i++) {
+      const value1 = this.bytes[i];
+      newBytes.push(value1);
+      if (value1 === 255 && i !== end - 1) {
+        const value2 = this.bytes[i + 1];
+        if (value2 === 0) {
+          i++;
+        }
+      }
+    }
+    const before = this.bytes.subarray(0, start);
+    const after = this.bytes.subarray(end);
+    this.bytes = new Uint8Array(before.length + newBytes.length + after.length);
+    this.bytes.set(before, 0);
+    this.bytes.set(newBytes, before.length);
+    this.bytes.set(after, before.length + newBytes.length);
+    this.view = new DataView(this.bytes.buffer);
+  }
+  removeFooter() {
+    this.bytes = this.bytes.subarray(0, this.bytes.length - ID3_V2_HEADER_SIZE);
+    this.view = new DataView(this.bytes.buffer);
+  }
+  readBytes(length) {
+    const slice = this.bytes.subarray(this.pos, this.pos + length);
+    this.pos += length;
+    return slice;
+  }
+  readU8() {
+    const value = this.view.getUint8(this.pos);
+    this.pos += 1;
+    return value;
+  }
+  readU16() {
+    const value = this.view.getUint16(this.pos, false);
+    this.pos += 2;
+    return value;
+  }
+  readU24() {
+    const high = this.view.getUint16(this.pos, false);
+    const low = this.view.getUint8(this.pos + 1);
+    this.pos += 3;
+    return high * 256 + low;
+  }
+  readU32() {
+    const value = this.view.getUint32(this.pos, false);
+    this.pos += 4;
+    return value;
+  }
+  readAscii(length) {
+    let str = "";
+    for (let i = 0; i < length; i++) {
+      str += String.fromCharCode(this.view.getUint8(this.pos + i));
+    }
+    this.pos += length;
+    return str;
+  }
+  readId3V2Frame() {
+    if (this.header.majorVersion === 2) {
+      const id = this.readAscii(3);
+      if (id === "\0\0\0") {
+        return null;
+      }
+      const size = this.readU24();
+      return { id, size, flags: 0 };
+    } else {
+      const id = this.readAscii(4);
+      if (id === "\0\0\0\0") {
+        return null;
+      }
+      const sizeRaw = this.readU32();
+      let size = this.header.majorVersion === 4 ? decodeSynchsafe(sizeRaw) : sizeRaw;
+      const flags = this.readU16();
+      const headerEndPos = this.pos;
+      const isSizeValid = (size2) => {
+        const nextPos = this.pos + size2;
+        if (nextPos > this.bytes.length) {
+          return false;
+        }
+        if (nextPos <= this.bytes.length - this.frameHeaderSize()) {
+          this.pos += size2;
+          const nextId = this.readAscii(4);
+          if (nextId !== "\0\0\0\0" && !/[0-9A-Z]{4}/.test(nextId)) {
+            return false;
+          }
+        }
+        return true;
+      };
+      if (!isSizeValid(size)) {
+        const otherSize = this.header.majorVersion === 4 ? sizeRaw : decodeSynchsafe(sizeRaw);
+        if (isSizeValid(otherSize)) {
+          size = otherSize;
+        }
+      }
+      this.pos = headerEndPos;
+      return { id, size, flags };
+    }
+  }
+  readId3V2TextEncoding() {
+    const number = this.readU8();
+    if (number > 3) {
+      throw new Error(`Unsupported text encoding: ${number}`);
+    }
+    return number;
+  }
+  readId3V2Text(encoding, until) {
+    const startPos = this.pos;
+    const data = this.readBytes(until - this.pos);
+    switch (encoding) {
+      case Id3V2TextEncoding.ISO_8859_1: {
+        let str = "";
+        for (let i = 0; i < data.length; i++) {
+          const value = data[i];
+          if (value === 0) {
+            this.pos = startPos + i + 1;
+            break;
+          }
+          str += String.fromCharCode(value);
+        }
+        return str;
+      }
+      case Id3V2TextEncoding.UTF_16_WITH_BOM: {
+        if (data[0] === 255 && data[1] === 254) {
+          const decoder = new TextDecoder("utf-16le");
+          const endIndex = coalesceIndex(data.findIndex((x, i) => x === 0 && data[i + 1] === 0 && i % 2 === 0), data.length);
+          this.pos = startPos + Math.min(endIndex + 2, data.length);
+          return decoder.decode(data.subarray(2, endIndex));
+        } else if (data[0] === 254 && data[1] === 255) {
+          const decoder = new TextDecoder("utf-16be");
+          const endIndex = coalesceIndex(data.findIndex((x, i) => x === 0 && data[i + 1] === 0 && i % 2 === 0), data.length);
+          this.pos = startPos + Math.min(endIndex + 2, data.length);
+          return decoder.decode(data.subarray(2, endIndex));
+        } else {
+          const endIndex = coalesceIndex(data.findIndex((x) => x === 0), data.length);
+          this.pos = startPos + Math.min(endIndex + 1, data.length);
+          return textDecoder.decode(data.subarray(0, endIndex));
+        }
+      }
+      case Id3V2TextEncoding.UTF_16_BE_NO_BOM: {
+        const decoder = new TextDecoder("utf-16be");
+        const endIndex = coalesceIndex(data.findIndex((x, i) => x === 0 && data[i + 1] === 0 && i % 2 === 0), data.length);
+        this.pos = startPos + Math.min(endIndex + 2, data.length);
+        return decoder.decode(data.subarray(0, endIndex));
+      }
+      case Id3V2TextEncoding.UTF_8: {
+        const endIndex = coalesceIndex(data.findIndex((x) => x === 0), data.length);
+        this.pos = startPos + Math.min(endIndex + 1, data.length);
+        return textDecoder.decode(data.subarray(0, endIndex));
+      }
+    }
+  }
+  readId3V2EncodingAndText(until) {
+    if (this.pos >= until) {
+      return "";
+    }
+    const encoding = this.readId3V2TextEncoding();
+    return this.readId3V2Text(encoding, until);
+  }
+}
 class AudioEngine {
   constructor(events) {
     this.events = events;
