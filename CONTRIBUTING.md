@@ -1,4 +1,4 @@
-This project uses `parcel` as a development and packaging tool, so there are few overall configuration options
+This project uses `vite` as a development and packaging tool, so there are few overall configuration options
 
 ## 1. Install dependencies
 
