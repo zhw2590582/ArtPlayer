@@ -1,0 +1,7 @@
+/*!
+ * artplayer-plugin-audio-track.js v1.0.2
+ * Github: https://github.com/zhw2590582/ArtPlayer
+ * (c) 2017-2026 Harvey Zhao
+ * Released under the MIT License.
+ */
+!function(e,o){"object"===typeof exports&&"undefined"!==typeof module?module.exports=o():"function"==typeof define&&define.amd?(t.artplayerPluginAudioTrack=o(),define(function(){return t.artplayerPluginAudioTrack})):(e="undefined"!==typeof globalThis?globalThis:e||self).artplayerPluginAudioTrack=o()}(this,function(){"use strict";return function(e){return o=>{let{url:n,offset:a=0,sync:t=.3}=e;const u=new Audio;function i(){if(!o.video||!n)return;const e=o.currentTime+a;Math.abs(u.currentTime-e)>t&&(u.currentTime=e)}return u.preload="auto",n&&(u.src=n),o.on("play",()=>{n&&(i(),u.play().catch(e=>{console.warn(e)}))}),o.on("pause",()=>{u.pause()}),o.on("seek",()=>{i()}),o.on("video:timeupdate",()=>{o.playing&&i()}),o.on("video:ratechange",()=>{u.playbackRate=o.video.playbackRate}),o.on("video:volumechange",()=>{u.volume=o.volume,u.muted=o.muted}),o.on("video:waiting",()=>{u.pause()}),o.on("video:playing",()=>{n&&o.playing&&u.play().catch(e=>{console.warn(e)})}),o.on("destroy",()=>{u.pause(),u.src="",u.load()}),u.volume=o.volume,u.muted=o.muted,u.playbackRate=o.video?.playbackRate||1,{name:"artplayerPluginAudioTrack",audio:u,update:function(e){e.url&&e.url!==n&&(n=e.url,u.src=n,o.playing&&u.play().catch(e=>console.warn(e))),void 0!==e.offset&&(a=e.offset),void 0!==e.sync&&(t=e.sync)}}}}});
