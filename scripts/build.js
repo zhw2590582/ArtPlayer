@@ -4,7 +4,7 @@ import process from 'node:process'
 import cpy from 'cpy'
 import prompts from 'prompts'
 import { build as viteBuild } from 'vite'
-import { getProjects, getViteBuildConfig, toPascalCase } from './utils.js'
+import { getGlobalName, getProjects, getViteBuildConfig } from './utils.js'
 
 const projects = getProjects()
 const compiledPath = path.resolve('docs/compiled')
@@ -41,7 +41,7 @@ async function build(name, targetName, clean = false) {
   const config = getViteBuildConfig({
     entry: entryFile,
     outDir: distDir,
-    name: toPascalCase(name),
+    name: getGlobalName(name),
     format,
     fileName,
     minify,

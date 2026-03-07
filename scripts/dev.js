@@ -4,7 +4,7 @@ import prompts from 'prompts'
 import servor from 'servor'
 import openBrowser from 'servor/utils/openBrowser.js'
 import { build as viteBuild } from 'vite'
-import { getProjects, getViteBuildConfig, toPascalCase } from './utils.js'
+import { getGlobalName, getProjects, getViteBuildConfig } from './utils.js'
 
 const projects = getProjects()
 
@@ -29,7 +29,7 @@ async function develop(name) {
       const config = getViteBuildConfig({
         entry: entryFile,
         outDir: uncompiledPath,
-        name: toPascalCase(name),
+        name: getGlobalName(name),
         format: 'iife',
         fileName: 'index.js',
         minify: false,

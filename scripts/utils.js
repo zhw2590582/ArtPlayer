@@ -21,6 +21,21 @@ export function toPascalCase(name) {
   return name.replace(/(^|-)([a-z])/g, (_, _p, c) => c.toUpperCase())
 }
 
+// Convert kebab-case to camelCase: artplayer-plugin-ads -> artplayerPluginAds
+export function toCamelCase(name) {
+  return name.replace(/-([a-z])/g, (_, c) => c.toUpperCase())
+}
+
+// Get the global variable name for a package
+// - artplayer, artplayer-tool-* -> PascalCase (class)
+// - artplayer-plugin-*, artplayer-proxy-* -> camelCase (function)
+export function getGlobalName(name) {
+  if (name === 'artplayer' || name.startsWith('artplayer-tool-')) {
+    return toPascalCase(name)
+  }
+  return toCamelCase(name)
+}
+
 // Get Vite build config
 export function getViteBuildConfig(options) {
   const {
