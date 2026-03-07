@@ -4,4 +4,261 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-class t{on(t,e,i){const n=this.e||(this.e={});return(n[t]||(n[t]=[])).push({fn:e,ctx:i}),this}once(t,e,i){const n=this;function o(...s){n.off(t,o),e.apply(i,s)}return o._=e,this.on(t,o,i)}emit(t,...e){const i=((this.e||(this.e={}))[t]||[]).slice();for(let n=0;n<i.length;n+=1)i[n].fn.apply(i[n].ctx,e);return this}off(t,e){const i=this.e||(this.e={}),n=i[t],o=[];if(n&&e)for(let s=0,r=n.length;s<r;s+=1)n[s].fn!==e&&n[s].fn._!==e&&o.push(n[s]);return o.length?i[t]=o:delete i[t],this}}function e(t,e,i){return Math.max(Math.min(t,Math.max(e,i)),Math.min(e,i))}class i extends t{constructor(t={}){super(),this.processing=!1,this.option={},this.setup(Object.assign({},i.DEFAULTS,t)),this.video=i.creatVideo(),this.duration=0,this.inputChange=this.inputChange.bind(this),this.ondrop=this.ondrop.bind(this),this.option.fileInput.addEventListener("change",this.inputChange),this.option.fileInput.addEventListener("dragover",i.ondragover),this.option.fileInput.addEventListener("drop",i.ondrop)}static get DEFAULTS(){return{number:60,width:160,height:90,column:10,begin:0,end:Number.NaN}}static ondragover(t){t.preventDefault()}ondrop(t){t.preventDefault();const e=t.dataTransfer.files[0];this.loadVideo(e)}setup(t={}){this.option=Object.assign({},this.option,t);const{fileInput:i,number:n,width:o,column:s}=this.option;if(this.errorHandle(i instanceof Element,"The 'fileInput' is not a Element"),"INPUT"!==i.tagName||"file"!==i.type){i.style.position="relative";const t=document.createElement("input");t.type="file",t.style.position="absolute",t.style.width="100%",t.style.height="100%",t.style.left="0",t.style.top="0",t.style.right="0",t.style.bottom="0",t.style.opacity="0",i.appendChild(t),this.option.fileInput=t}return["number","width","column","begin","end"].forEach(t=>{this.errorHandle("number"===typeof this.option[t],`The '${t}' is not a number`)}),this.option.number=e(n,10,1e3),this.option.width=e(o,10,1e3),this.option.column=e(s,1,1e3),this}static creatVideo(){const t=document.createElement("video");return t.style.position="absolute",t.style.top="-9999px",t.style.left="-9999px",t.muted=!0,t.controls=!0,document.body.appendChild(t),t}inputChange(t){const e=this.option.fileInput.files[0];this.loadVideo(e),t.target.value=""}loadVideo(t){if(t){const e=this.video.canPlayType(t.type);this.errorHandle("maybe"===e||"probably"===e,`Playback of this file format is not supported: ${t.type}`);const i=URL.createObjectURL(t);this.videoUrl=i,this.file=t,this.emit("file",this.file),this.video.src=i,this.emit("video",this.video)}}start(){if(!this.video.duration)return(t=1e3,new Promise(e=>setTimeout(e,t))).then(()=>this.start());var t;const{width:i,number:n,begin:o,end:s}=this.option,r=this.video.videoHeight/this.video.videoWidth*i;this.option.height=r,this.option.begin=e(o,0,this.video.duration),this.option.end=e(s||this.video.duration,o,this.video.duration),this.errorHandle(this.option.end>this.option.begin,"End time must be greater than the start time"),this.duration=this.option.end-this.option.begin,this.density=n/this.duration,this.errorHandle(this.file&&this.video,"Please select the video file first"),this.errorHandle(!this.processing,"There is currently a task in progress, please wait a moment..."),this.errorHandle(this.density<=1,`The preview density cannot be greater than 1, but got ${this.density}`);const h=this.creatScreenshotDate(),a=this.creatCanvas(),l=a.getContext("2d");this.emit("canvas",a);const d=h.map((t,e)=>()=>new Promise(o=>{this.video.oncanplay=()=>{l.drawImage(this.video,t.x,t.y,i,r),a.toBlob(t=>{this.thumbnailUrl&&URL.revokeObjectURL(this.thumbnailUrl),this.thumbnailUrl=URL.createObjectURL(t),this.emit("update",this.thumbnailUrl,(e+1)/n),this.video.oncanplay=null,o()})},this.video.currentTime=t.time}));return this.processing=!0,(p=d,p.reduce((t,e)=>t.then(e),Promise.resolve())).then(()=>{this.processing=!1,this.emit("done")}).catch(t=>{throw this.processing=!1,this.emit("error",t.message),t});var p}creatScreenshotDate(){const{number:t,width:e,height:i,column:n,begin:o}=this.option,s=this.duration/t,r=[o+s];for(;r.length<t;){const t=r[r.length-1];r.push(t+s)}return r.map((t,o)=>({time:t-s/2,x:o%n*e,y:Math.floor(o/n)*i}))}creatCanvas(){const{number:t,width:e,height:i,column:n}=this.option,o=document.createElement("canvas"),s=o.getContext("2d");return o.width=e*n,o.height=Math.ceil(t/n)*i+30,s.fillStyle="black",s.fillRect(0,0,o.width,o.height),s.font="14px Georgia",s.fillStyle="#fff",s.fillText(`From: https://artplayer.org/, Number: ${t}, Width: ${e}, Height: ${i}, Column: ${n}`,10,o.height-11),o}download(){this.errorHandle(this.file&&this.thumbnailUrl,"Download does not seem to be ready, please create preview first"),this.errorHandle(!this.processing,"There is currently a task in progress, please wait a moment...");const t=document.createElement("a"),e=`${function(t){const e=t.split(".");return e.pop(),e.join(".")}(this.file.name)}.png`;return t.download=e,t.href=this.thumbnailUrl,document.body.appendChild(t),t.click(),document.body.removeChild(t),this.emit("download",e),this}errorHandle(t,e){if(!t)throw this.emit("error",e),new Error(e)}destroy(){this.option.fileInput.removeEventListener("change",this.inputChange),this.option.fileInput.removeEventListener("dragover",i.ondragover),this.option.fileInput.removeEventListener("drop",i.ondrop),document.body.removeChild(this.video),this.videoUrl&&URL.revokeObjectURL(this.videoUrl),this.thumbnailUrl&&URL.revokeObjectURL(this.thumbnailUrl),this.emit("destroy")}}export{i as default};
+class Emitter {
+  on(name, fn, ctx) {
+    const e = this.e || (this.e = {});
+    (e[name] || (e[name] = [])).push({ fn, ctx });
+    return this;
+  }
+  once(name, fn, ctx) {
+    const self = this;
+    function listener(...args) {
+      self.off(name, listener);
+      fn.apply(ctx, args);
+    }
+    listener._ = fn;
+    return this.on(name, listener, ctx);
+  }
+  emit(name, ...data) {
+    const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+    for (let i = 0; i < evtArr.length; i += 1) {
+      evtArr[i].fn.apply(evtArr[i].ctx, data);
+    }
+    return this;
+  }
+  off(name, callback) {
+    const e = this.e || (this.e = {});
+    const evts = e[name];
+    const liveEvents = [];
+    if (evts && callback) {
+      for (let i = 0, len = evts.length; i < len; i += 1) {
+        if (evts[i].fn !== callback && evts[i].fn._ !== callback)
+          liveEvents.push(evts[i]);
+      }
+    }
+    if (liveEvents.length) {
+      e[name] = liveEvents;
+    } else {
+      delete e[name];
+    }
+    return this;
+  }
+}
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+function runPromisesInSeries(ps) {
+  return ps.reduce((p, next) => p.then(next), Promise.resolve());
+}
+function getFileName(name) {
+  const nameArray = name.split(".");
+  nameArray.pop();
+  return nameArray.join(".");
+}
+function clamp(num, a, b) {
+  return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+}
+class ArtplayerToolThumbnail extends Emitter {
+  constructor(option = {}) {
+    super();
+    this.processing = false;
+    this.option = {};
+    this.setup(Object.assign({}, ArtplayerToolThumbnail.DEFAULTS, option));
+    this.video = ArtplayerToolThumbnail.creatVideo();
+    this.duration = 0;
+    this.inputChange = this.inputChange.bind(this);
+    this.ondrop = this.ondrop.bind(this);
+    this.option.fileInput.addEventListener("change", this.inputChange);
+    this.option.fileInput.addEventListener("dragover", ArtplayerToolThumbnail.ondragover);
+    this.option.fileInput.addEventListener("drop", ArtplayerToolThumbnail.ondrop);
+  }
+  static get DEFAULTS() {
+    return {
+      number: 60,
+      width: 160,
+      height: 90,
+      column: 10,
+      begin: 0,
+      end: Number.NaN
+    };
+  }
+  static ondragover(event) {
+    event.preventDefault();
+  }
+  ondrop(event) {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    this.loadVideo(file);
+  }
+  setup(option = {}) {
+    this.option = Object.assign({}, this.option, option);
+    const { fileInput, number, width, column } = this.option;
+    this.errorHandle(fileInput instanceof Element, "The 'fileInput' is not a Element");
+    if (!(fileInput.tagName === "INPUT" && fileInput.type === "file")) {
+      fileInput.style.position = "relative";
+      const newFileInput = document.createElement("input");
+      newFileInput.type = "file";
+      newFileInput.style.position = "absolute";
+      newFileInput.style.width = "100%";
+      newFileInput.style.height = "100%";
+      newFileInput.style.left = "0";
+      newFileInput.style.top = "0";
+      newFileInput.style.right = "0";
+      newFileInput.style.bottom = "0";
+      newFileInput.style.opacity = "0";
+      fileInput.appendChild(newFileInput);
+      this.option.fileInput = newFileInput;
+    }
+    ["number", "width", "column", "begin", "end"].forEach((item) => {
+      this.errorHandle(typeof this.option[item] === "number", `The '${item}' is not a number`);
+    });
+    this.option.number = clamp(number, 10, 1e3);
+    this.option.width = clamp(width, 10, 1e3);
+    this.option.column = clamp(column, 1, 1e3);
+    return this;
+  }
+  static creatVideo() {
+    const video = document.createElement("video");
+    video.style.position = "absolute";
+    video.style.top = "-9999px";
+    video.style.left = "-9999px";
+    video.muted = true;
+    video.controls = true;
+    document.body.appendChild(video);
+    return video;
+  }
+  inputChange(event) {
+    const file = this.option.fileInput.files[0];
+    this.loadVideo(file);
+    event.target.value = "";
+  }
+  loadVideo(file) {
+    if (file) {
+      const canPlayType = this.video.canPlayType(file.type);
+      this.errorHandle(
+        canPlayType === "maybe" || canPlayType === "probably",
+        `Playback of this file format is not supported: ${file.type}`
+      );
+      const videoUrl = URL.createObjectURL(file);
+      this.videoUrl = videoUrl;
+      this.file = file;
+      this.emit("file", this.file);
+      this.video.src = videoUrl;
+      this.emit("video", this.video);
+    }
+  }
+  start() {
+    if (!this.video.duration)
+      return sleep(1e3).then(() => this.start());
+    const { width, number, begin, end } = this.option;
+    const height = this.video.videoHeight / this.video.videoWidth * width;
+    this.option.height = height;
+    this.option.begin = clamp(begin, 0, this.video.duration);
+    this.option.end = clamp(end || this.video.duration, begin, this.video.duration);
+    this.errorHandle(this.option.end > this.option.begin, `End time must be greater than the start time`);
+    this.duration = this.option.end - this.option.begin;
+    this.density = number / this.duration;
+    this.errorHandle(this.file && this.video, "Please select the video file first");
+    this.errorHandle(!this.processing, "There is currently a task in progress, please wait a moment...");
+    this.errorHandle(this.density <= 1, `The preview density cannot be greater than 1, but got ${this.density}`);
+    const screenshotDate = this.creatScreenshotDate();
+    const canvas = this.creatCanvas();
+    const context2D = canvas.getContext("2d");
+    this.emit("canvas", canvas);
+    const promiseList = screenshotDate.map((item, index) => () => {
+      return new Promise((resolve) => {
+        this.video.oncanplay = () => {
+          context2D.drawImage(this.video, item.x, item.y, width, height);
+          canvas.toBlob((blob) => {
+            if (this.thumbnailUrl) {
+              URL.revokeObjectURL(this.thumbnailUrl);
+            }
+            this.thumbnailUrl = URL.createObjectURL(blob);
+            this.emit("update", this.thumbnailUrl, (index + 1) / number);
+            this.video.oncanplay = null;
+            resolve();
+          });
+        };
+        this.video.currentTime = item.time;
+      });
+    });
+    this.processing = true;
+    return runPromisesInSeries(promiseList).then(() => {
+      this.processing = false;
+      this.emit("done");
+    }).catch((err) => {
+      this.processing = false;
+      this.emit("error", err.message);
+      throw err;
+    });
+  }
+  creatScreenshotDate() {
+    const { number, width, height, column, begin } = this.option;
+    const timeGap = this.duration / number;
+    const timePoints = [begin + timeGap];
+    while (timePoints.length < number) {
+      const last = timePoints[timePoints.length - 1];
+      timePoints.push(last + timeGap);
+    }
+    return timePoints.map((item, index) => ({
+      time: item - timeGap / 2,
+      x: index % column * width,
+      y: Math.floor(index / column) * height
+    }));
+  }
+  creatCanvas() {
+    const { number, width, height, column } = this.option;
+    const canvas = document.createElement("canvas");
+    const context2D = canvas.getContext("2d");
+    canvas.width = width * column;
+    canvas.height = Math.ceil(number / column) * height + 30;
+    context2D.fillStyle = "black";
+    context2D.fillRect(0, 0, canvas.width, canvas.height);
+    context2D.font = "14px Georgia";
+    context2D.fillStyle = "#fff";
+    context2D.fillText(
+      `From: https://artplayer.org/, Number: ${number}, Width: ${width}, Height: ${height}, Column: ${column}`,
+      10,
+      canvas.height - 11
+    );
+    return canvas;
+  }
+  download() {
+    this.errorHandle(
+      this.file && this.thumbnailUrl,
+      "Download does not seem to be ready, please create preview first"
+    );
+    this.errorHandle(!this.processing, "There is currently a task in progress, please wait a moment...");
+    const elink = document.createElement("a");
+    const name = `${getFileName(this.file.name)}.png`;
+    elink.download = name;
+    elink.href = this.thumbnailUrl;
+    document.body.appendChild(elink);
+    elink.click();
+    document.body.removeChild(elink);
+    this.emit("download", name);
+    return this;
+  }
+  errorHandle(condition, msg) {
+    if (!condition) {
+      this.emit("error", msg);
+      throw new Error(msg);
+    }
+  }
+  destroy() {
+    this.option.fileInput.removeEventListener("change", this.inputChange);
+    this.option.fileInput.removeEventListener("dragover", ArtplayerToolThumbnail.ondragover);
+    this.option.fileInput.removeEventListener("drop", ArtplayerToolThumbnail.ondrop);
+    document.body.removeChild(this.video);
+    if (this.videoUrl) {
+      URL.revokeObjectURL(this.videoUrl);
+    }
+    if (this.thumbnailUrl) {
+      URL.revokeObjectURL(this.thumbnailUrl);
+    }
+    this.emit("destroy");
+  }
+}
+export {
+  ArtplayerToolThumbnail as default
+};

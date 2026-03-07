@@ -4,4 +4,101 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-function t(t={}){return e=>{const{$video:n}=e.template,{createElement:r,addClass:o,setStyles:i}=e.constructor.utils,{blur:a="50px",opacity:l=.5,frequency:s=10,duration:c=.3}=t,u=r("div"),d=((f=u).innerHTML=Array.from({length:9}).fill("<div></div>").join(""),Array.from(f.children));var f,m,g,p;!function(t,e){o(t,"artplayer-plugin-ambilight"),e.parentNode.insertBefore(t,e),i(t,{position:"absolute",top:0,left:0,zIndex:9,inset:0,display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gridTemplateRows:"1fr 1fr 1fr"})}(u,n),m=a,g=l,p=c,d.forEach(t=>{i(t,{opacity:g,filter:`blur(${m})`,transition:`background-color ${p}s ease`})});const y=function(t,n,o){const i=r("canvas"),a=i.getContext("2d");i.width=3,i.height=3;let l=0;return function r(){const i=performance.now();if(i-l<1e3/o||!e.playing)return void(h=requestAnimationFrame(r));l=i;const s=t.videoWidth/3,c=t.videoHeight/3,u=[[0,0],[s,0],[2*s,0],[0,c],[s,c],[2*s,c],[0,2*c],[s,2*c],[2*s,2*c]].map(([e,n])=>function(e,n,r,o){a.drawImage(t,e,n,r,o,0,0,1,1);const[i,l,s]=a.getImageData(0,0,1,1).data;return`rgb(${i}, ${l}, ${s})`}(e,n,s,c));n.forEach((t,e)=>{t.style.backgroundColor=u[e]}),h=requestAnimationFrame(r)}}(n,d,s);let h=null;function v(){h||y()}function b(){h&&(cancelAnimationFrame(h),h=null)}return e.on("ready",v),e.on("destroy",b),{name:"artplayerPluginAmbilight",start:v,stop:b}}}export{t as default};
+function artplayerPluginAmbilight(option = {}) {
+  return (art) => {
+    const { $video } = art.template;
+    const { createElement, addClass, setStyles } = art.constructor.utils;
+    const { blur = "50px", opacity = 0.5, frequency = 10, duration = 0.3 } = option;
+    const $ambilight = createElement("div");
+    const gridItems = createGridItems($ambilight);
+    setupAmbilight($ambilight, $video);
+    setupGridItems(gridItems, blur, opacity, duration);
+    const updateColors = createColorUpdater($video, gridItems, frequency);
+    let animationFrameId = null;
+    function start() {
+      if (!animationFrameId) {
+        updateColors();
+      }
+    }
+    function stop() {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    }
+    art.on("ready", start);
+    art.on("destroy", stop);
+    return {
+      name: "artplayerPluginAmbilight",
+      start,
+      stop
+    };
+    function createGridItems($ambilight2) {
+      $ambilight2.innerHTML = Array.from({ length: 9 }).fill("<div></div>").join("");
+      return Array.from($ambilight2.children);
+    }
+    function setupAmbilight($ambilight2, $video2) {
+      addClass($ambilight2, "artplayer-plugin-ambilight");
+      $video2.parentNode.insertBefore($ambilight2, $video2);
+      setStyles($ambilight2, {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 9,
+        inset: 0,
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr 1fr",
+        gridTemplateRows: "1fr 1fr 1fr"
+      });
+    }
+    function setupGridItems(gridItems2, blur2, opacity2, duration2) {
+      gridItems2.forEach(($item) => {
+        setStyles($item, {
+          opacity: opacity2,
+          filter: `blur(${blur2})`,
+          transition: `background-color ${duration2}s ease`
+        });
+      });
+    }
+    function createColorUpdater($video2, gridItems2, frequency2) {
+      const canvas = createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = 3;
+      canvas.height = 3;
+      function getAverageColor(x, y, w, h) {
+        ctx.drawImage($video2, x, y, w, h, 0, 0, 1, 1);
+        const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+        return `rgb(${r}, ${g}, ${b})`;
+      }
+      let lastUpdateTime = 0;
+      return function updateColors2() {
+        const now = performance.now();
+        if (now - lastUpdateTime < 1e3 / frequency2 || !art.playing) {
+          animationFrameId = requestAnimationFrame(updateColors2);
+          return;
+        }
+        lastUpdateTime = now;
+        const w = $video2.videoWidth / 3;
+        const h = $video2.videoHeight / 3;
+        const colors = [
+          [0, 0],
+          [w, 0],
+          [2 * w, 0],
+          [0, h],
+          [w, h],
+          [2 * w, h],
+          [0, 2 * h],
+          [w, 2 * h],
+          [2 * w, 2 * h]
+        ].map(([x, y]) => getAverageColor(x, y, w, h));
+        gridItems2.forEach(($item, index) => {
+          $item.style.backgroundColor = colors[index];
+        });
+        animationFrameId = requestAnimationFrame(updateColors2);
+      };
+    }
+  };
+}
+export {
+  artplayerPluginAmbilight as default
+};

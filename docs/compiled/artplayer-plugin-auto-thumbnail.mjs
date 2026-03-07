@@ -4,4 +4,60 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-function e(e){return async t=>(t.on("video:loadedmetadata",()=>{const n=e.url||t.option.url,o=e.width||160,a=e.number||100,r=e.scale||1;!function({url:e,width:t,number:n},o){const a=document.createElement("video");a.crossOrigin="anonymous",a.src=e,a.onloadedmetadata=()=>{const e=a.duration,r=document.createElement("canvas"),i=r.getContext("2d"),u=Math.floor(t*a.videoHeight/a.videoWidth);r.width=10*t,r.height=u*Math.ceil(n/10);let l=null;!function d(c){r.toBlob(e=>{URL.revokeObjectURL(l),l=URL.createObjectURL(e),o({url:l,height:u})},"image/jpeg"),c>=n||(a.currentTime=e*c/n,a.onseeked=()=>{i.drawImage(a,c%10*t,Math.floor(c/10)*u,t,u),d(c+1)})}(0)}}({url:n,width:o,number:a},e=>{t.thumbnails={...e,column:10,number:a,width:o,scale:r}})}),{name:"artplayerPluginAutoThumbnail"})}export{e as default};
+function create({ url, width, number }, callback) {
+  const video = document.createElement("video");
+  video.crossOrigin = "anonymous";
+  video.src = url;
+  video.onloadedmetadata = () => {
+    const duration = video.duration;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const height = Math.floor(width * video.videoHeight / video.videoWidth);
+    canvas.width = width * 10;
+    canvas.height = height * Math.ceil(number / 10);
+    let blobUrl = null;
+    function seekAndDraw(index) {
+      canvas.toBlob((blob) => {
+        URL.revokeObjectURL(blobUrl);
+        blobUrl = URL.createObjectURL(blob);
+        callback({
+          url: blobUrl,
+          height
+        });
+      }, "image/jpeg");
+      if (index >= number)
+        return;
+      video.currentTime = duration * index / number;
+      video.onseeked = () => {
+        ctx.drawImage(video, index % 10 * width, Math.floor(index / 10) * height, width, height);
+        seekAndDraw(index + 1);
+      };
+    }
+    seekAndDraw(0);
+  };
+}
+function artplayerPluginAutoThumbnail(option) {
+  return async (art) => {
+    art.on("video:loadedmetadata", () => {
+      const url = option.url || art.option.url;
+      const width = option.width || 160;
+      const number = option.number || 100;
+      const scale = option.scale || 1;
+      create({ url, width, number }, (config) => {
+        art.thumbnails = {
+          ...config,
+          column: 10,
+          number,
+          width,
+          scale
+        };
+      });
+    });
+    return {
+      name: "artplayerPluginAutoThumbnail"
+    };
+  };
+}
+export {
+  artplayerPluginAutoThumbnail as default
+};

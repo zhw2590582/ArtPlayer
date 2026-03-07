@@ -21,7 +21,7 @@ function getBanner(name, version) {
 const BUILD_FORMATS = {
   main: { format: 'umd', ext: '.js', target: 'es2020', minify: 'terser' },
   legacy: { format: 'umd', ext: '.legacy.js', target: 'es2015', minify: 'terser' },
-  esm: { format: 'es', ext: '.mjs', target: 'es2020', minify: 'terser' },
+  esm: { format: 'es', ext: '.mjs', target: 'es2020', minify: false },
 }
 
 async function build(name, targetName, clean = false) {

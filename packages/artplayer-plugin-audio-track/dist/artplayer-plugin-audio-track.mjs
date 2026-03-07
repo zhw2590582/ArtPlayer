@@ -4,4 +4,89 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-function e(e){return a=>{let{url:o,offset:n=0,sync:t=.3}=e;const u=new Audio;function c(){if(!a.video||!o)return;const e=a.currentTime+n;Math.abs(u.currentTime-e)>t&&(u.currentTime=e)}return u.preload="auto",o&&(u.src=o),a.on("play",()=>{o&&(c(),u.play().catch(e=>{console.warn(e)}))}),a.on("pause",()=>{u.pause()}),a.on("seek",()=>{c()}),a.on("video:timeupdate",()=>{a.playing&&c()}),a.on("video:ratechange",()=>{u.playbackRate=a.video.playbackRate}),a.on("video:volumechange",()=>{u.volume=a.volume,u.muted=a.muted}),a.on("video:waiting",()=>{u.pause()}),a.on("video:playing",()=>{o&&a.playing&&u.play().catch(e=>{console.warn(e)})}),a.on("destroy",()=>{u.pause(),u.src="",u.load()}),u.volume=a.volume,u.muted=a.muted,u.playbackRate=a.video?.playbackRate||1,{name:"artplayerPluginAudioTrack",audio:u,update:function(e){e.url&&e.url!==o&&(o=e.url,u.src=o,a.playing&&u.play().catch(e=>console.warn(e))),void 0!==e.offset&&(n=e.offset),void 0!==e.sync&&(t=e.sync)}}}}export{e as default};
+function artplayerPluginAudioTrack(option) {
+  return (art) => {
+    let { url, offset = 0, sync = 0.3 } = option;
+    const audio = new Audio();
+    audio.preload = "auto";
+    if (url) {
+      audio.src = url;
+    }
+    function syncAudio() {
+      if (!art.video || !url)
+        return;
+      const videoTime = art.currentTime;
+      const targetTime = videoTime + offset;
+      if (Math.abs(audio.currentTime - targetTime) > sync) {
+        audio.currentTime = targetTime;
+      }
+    }
+    art.on("play", () => {
+      if (!url)
+        return;
+      syncAudio();
+      audio.play().catch((err) => {
+        console.warn(err);
+      });
+    });
+    art.on("pause", () => {
+      audio.pause();
+    });
+    art.on("seek", () => {
+      syncAudio();
+    });
+    art.on("video:timeupdate", () => {
+      if (art.playing) {
+        syncAudio();
+      }
+    });
+    art.on("video:ratechange", () => {
+      audio.playbackRate = art.video.playbackRate;
+    });
+    art.on("video:volumechange", () => {
+      audio.volume = art.volume;
+      audio.muted = art.muted;
+    });
+    art.on("video:waiting", () => {
+      audio.pause();
+    });
+    art.on("video:playing", () => {
+      if (url && art.playing) {
+        audio.play().catch((err) => {
+          console.warn(err);
+        });
+      }
+    });
+    art.on("destroy", () => {
+      audio.pause();
+      audio.src = "";
+      audio.load();
+    });
+    function update(newOption) {
+      if (newOption.url && newOption.url !== url) {
+        url = newOption.url;
+        audio.src = url;
+        if (art.playing) {
+          audio.play().catch((err) => console.warn(err));
+        }
+      }
+      if (newOption.offset !== void 0) {
+        offset = newOption.offset;
+      }
+      if (newOption.sync !== void 0) {
+        sync = newOption.sync;
+      }
+    }
+    audio.volume = art.volume;
+    audio.muted = art.muted;
+    audio.playbackRate = art.video?.playbackRate || 1;
+    return {
+      name: "artplayerPluginAudioTrack",
+      audio,
+      update
+    };
+  };
+}
+export {
+  artplayerPluginAudioTrack as default
+};
