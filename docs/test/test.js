@@ -1,5 +1,5 @@
 // Auto-generated smoke tests from documentation code blocks
-// Generated at: 2026-03-07T07:48:59.683Z
+// Generated at: 2026-03-07T07:54:41.642Z
 // Do not edit manually - run 'node scripts/build-test.js' to regenerate
 
 describe('Documentation Code Examples', function () {
@@ -1895,7 +1895,7 @@ describe('Documentation Code Examples', function () {
                     url: '/assets/sample/video.mp4',
                 });
                 
-                // Only destroys the UI, does not actively clear src
+                // 只销毁界面，不主动清空 src
                 art.destroy();
                 // Wait a bit for async initialization
                 setTimeout(() => done(), 100);
@@ -2125,7 +2125,7 @@ describe('Documentation Code Examples', function () {
                 });
                 
                 art.on('ready', () => {
-                    // Only reset the video, do not remove the interface
+                    // 仅重置 video，不移除界面
                     art.reset();
                 });
                 // Wait a bit for async initialization
@@ -2523,7 +2523,7 @@ describe('Documentation Code Examples', function () {
                 });
                 
                 art.on('ready', () => {
-                    console.info(art.state); // Default: standard
+                    console.info(art.state); // 默认 standard
                     art.state = 'mini';
                 });
                 // Wait a bit for async initialization
@@ -4018,7 +4018,7 @@ describe('Documentation Code Examples', function () {
                 var art = new Artplayer({
                     container: '.artplayer-app',
                     url: '/assets/sample/video.mp4',
-                    backdrop: false, // Disable frosted glass effect
+                    backdrop: false, // 关闭毛玻璃效果
                 });
                 // Wait a bit for async initialization
                 setTimeout(() => done(), 100);

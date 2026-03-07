@@ -1,8 +1,12 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
-const docsDir = path.resolve('packages/artplayer-vitepress/docs/en')
+// 使用中文文档作为源（中文是原始文档，英文是 AI 翻译的）
+const docsDir = path.resolve('packages/artplayer-vitepress/docs')
 const outputFile = path.resolve('docs/test/test.js')
+
+// 排除的目录
+const excludeDirs = ['en', '.vitepress', 'public', 'plugin']
 
 // Regex to match code blocks after "Run Code" markers
 // Match until we find a closing ``` that's on its own line
@@ -35,6 +39,11 @@ function processMarkdownFiles(dir, relativePath = '') {
   const items = fs.readdirSync(dir)
 
   for (const item of items) {
+    // 跳过排除的目录
+    if (excludeDirs.includes(item)) {
+      continue
+    }
+    
     const fullPath = path.join(dir, item)
     const relPath = path.join(relativePath, item)
     const stat = fs.statSync(fullPath)
