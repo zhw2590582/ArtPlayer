@@ -28,8 +28,8 @@
     <div id="player"></div>
     <script type="module">
         import Artplayer from 'artplayer';
-        import ArtplayerPluginDanmuku from 'artplayer-plugin-danmuku';
-        import ArtplayerPluginDocumentPip from 'artplayer-plugin-document-pip';
+        import artplayerPluginDanmuku from 'artplayer-plugin-danmuku';
+        import artplayerPluginDocumentPip from 'artplayer-plugin-document-pip';
         import id from 'id';
 
         const art = new Artplayer({
@@ -38,7 +38,7 @@
             i18n: { id },
             lang: 'id',
             plugins: [
-                ArtplayerPluginDocumentPip(),
+                artplayerPluginDocumentPip(),
                 artplayerPluginDanmuku({
                     danmuku: '/assets/sample/danmuku.xml',
                 })
