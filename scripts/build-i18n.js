@@ -41,7 +41,7 @@ async function buildI18n() {
     console.log(`✅ Built i18n: ${baseName}`)
   }
 
-  await cpy(distDir, compiledPath)
+  await cpy(path.join(distDir, '*'), compiledPath, { flat: true })
   console.log('✨ Finished building i18n')
 }
 
