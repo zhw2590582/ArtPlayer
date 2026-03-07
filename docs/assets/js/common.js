@@ -67,7 +67,6 @@
       './assets/ts/artplayer-plugin-multiple-subtitles.d.ts',
       './assets/ts/artplayer-plugin-vast.d.ts',
       './assets/ts/artplayer-plugin-vtt-thumbnail.d.ts',
-      './assets/ts/artplayer-plugin-websr.d.ts',
       './assets/ts/artplayer-proxy-canvas.d.ts',
       './assets/ts/artplayer-proxy-mediabunny.d.ts',
       './assets/ts/artplayer-tool-iframe.d.ts',
