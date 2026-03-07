@@ -1,4 +1,4 @@
-import style from 'bundle-text:./style.less'
+import style from './style.less?inline'
 
 export default function artplayerPluginDocumentPip(userOptions = {}) {
   const options = {

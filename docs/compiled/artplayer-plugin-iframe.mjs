@@ -1,8 +1,140 @@
-
 /*!
- * artplayer-plugin-iframe.js v1.0.0
+ * artplayer-plugin-iframe.js v1.0.1
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-!function(e,t,r,o,s){var n="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},i="function"==typeof n[o]&&n[o],a=i.i||{},f=i.cache||{},l="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function u(t,r){if(!f[t]){if(!e[t]){if(s[t])return s[t];var a="function"==typeof n[o]&&n[o];if(!r&&a)return a(t,!0);if(i)return i(t,!0);if(l&&"string"==typeof t)return l(t);var c=Error("Cannot find module '"+t+"'");throw c.code="MODULE_NOT_FOUND",c}p.resolve=function(r){var o=e[t][1][r];return null!=o?o:r},p.cache={};var d=f[t]=new u.Module(t);e[t][0].call(d.exports,p,d,d.exports,n)}return f[t].exports;function p(e){var t=p.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var r={__esModule:!0};return t.forEach(function(e){var t=e[0],o=e[1],s=e[2]||e[0],n=u(o);"*"===t?Object.keys(n).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(r,e)||Object.defineProperty(r,e,{enumerable:!0,get:function(){return n[e]}})}):"*"===s?Object.defineProperty(r,t,{enumerable:!0,value:n}):Object.defineProperty(r,t,{enumerable:!0,get:function(){return"default"===s?n.__esModule?n.default:n:n[s]}})}),r}return u(t)}}u.isParcelRequire=!0,u.Module=function(e){this.id=e,this.bundle=u,this.require=l,this.exports={}},u.modules=e,u.cache=f,u.parent=i,u.distDir=void 0,u.publicUrl=void 0,u.devServer=void 0,u.i=a,u.register=function(t,r){e[t]=[function(e,t){t.exports=r},{}]},Object.defineProperty(u,"root",{get:function(){return n[o]}}),n[o]=u;for(var c=0;c<t.length;c++)u(t[c]);if(r){var d=u(r);"object"==typeof exports&&"u">typeof module?module.exports=d:"function"==typeof define&&define.amd&&define(function(){return d})}}({bfwB8:[function(e,t,r,o){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r);class s{static get iframe(){return window.top!==window}static postMessage({type:e,data:t,id:r=0}){if(!s.iframe)throw Error('The "ArtplayerPluginIframe.postMessage" method can only be used in iframe');window.parent.postMessage({type:e,data:t,id:r},"*")}static async onMessage(e){if(!s.iframe)throw Error('The "ArtplayerPluginIframe.onMessage" method can only be used in iframe');let{type:t,data:r,id:o}=e.data;if("commit"===t)try{if(r.match(/\bresolve\((.*?)\)/)){let e=`return new Promise(function(resolve){ ${r} })`,t=await Function(e)();s.postMessage({type:"response",data:t,id:o})}else{let e=Function(r)();s.postMessage({type:"response",data:e,id:o})}}catch(e){throw s.postMessage({type:"error",data:e.message,id:o}),e}}static inject(){if(!s.iframe)throw Error('The "ArtplayerPluginIframe.inject" method can only be used in iframe');s.postMessage({type:"inject"}),window.addEventListener("message",s.onMessage)}constructor({iframe:e,url:t}){if(e instanceof HTMLIFrameElement==!1)throw TypeError('"option.iframe" needs to be a HTMLIFrameElement');if("string"!=typeof t)throw TypeError('"option.url" needs to be a string');this.url=t,this.$iframe=e,this.promises={},this.injected=!1,this.destroyed=!1,this.messageCallback=()=>null,this.onMessage=this.onMessage.bind(this),window.addEventListener("message",this.onMessage),this.$iframe.src=this.url}onMessage(e){let{type:t,data:r,id:o}=e.data;"inject"===t&&(this.injected=!0),this.promises[o]&&("error"===t?this.promises[o].reject(Error(r)):this.promises[o].resove(r),delete this.promises[o]),this.messageCallback&&this.messageCallback({type:t,data:r})}postMessage({type:e,data:t}){return new Promise((r,o)=>{(function s(){if(this.destroyed)o(Error("The instance has been destroyed"));else if(this.injected){let s=Date.now();this.promises[s]={resove:r,reject:o},this.$iframe.contentWindow.postMessage({type:e,data:t,id:s},"*")}else setTimeout(s.bind(this),200)}).call(this)})}commit(e){if("function"!=typeof e)throw TypeError('"commit.callback" needs to be a function');let t=e.toString(),r=t.substring(t.indexOf("{")+1,t.lastIndexOf("}"));return this.postMessage({type:"commit",data:r})}message(e){if("function"!=typeof e)throw TypeError('"message.callback" needs to be a function');this.messageCallback=e}destroy(){this.destroyed=!0,window.removeEventListener("message",this.onMessage)}}r.default=s,"u">typeof window&&(window.ArtplayerPluginIframe=s)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],loqXi:[function(e,t,r,o){r.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},r.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},r.exportAll=function(e,t){return Object.keys(e).forEach(function(r){"default"===r||"__esModule"===r||Object.prototype.hasOwnProperty.call(t,r)||Object.defineProperty(t,r,{enumerable:!0,get:function(){return e[r]}})}),t},r.export=function(e,t,r){Object.defineProperty(e,t,{enumerable:!0,get:r})}},{}]},["bfwB8"],"bfwB8","parcelRequire4dc0",{});let{default:e}=parcelRequire4dc0("bfwB8");export{e as default};
+class ArtplayerPluginIframe {
+  static get iframe() {
+    return window.top !== window;
+  }
+  static postMessage({ type, data, id = 0 }) {
+    if (!ArtplayerPluginIframe.iframe) {
+      throw new Error('The "ArtplayerPluginIframe.postMessage" method can only be used in iframe');
+    }
+    window.parent.postMessage(
+      {
+        type,
+        data,
+        id
+      },
+      "*"
+    );
+  }
+  static async onMessage(event) {
+    if (!ArtplayerPluginIframe.iframe) {
+      throw new Error('The "ArtplayerPluginIframe.onMessage" method can only be used in iframe');
+    }
+    const { type, data, id } = event.data;
+    switch (type) {
+      case "commit":
+        try {
+          if (data.match(/\bresolve\((.*?)\)/)) {
+            const string = `return new Promise(function(resolve){
+${data}
+})`;
+            const result = await new Function(string)();
+            ArtplayerPluginIframe.postMessage({ type: "response", data: result, id });
+          } else {
+            const result = new Function(data)();
+            ArtplayerPluginIframe.postMessage({ type: "response", data: result, id });
+          }
+        } catch (error) {
+          ArtplayerPluginIframe.postMessage({ type: "error", data: error.message, id });
+          throw error;
+        }
+        break;
+    }
+  }
+  static inject() {
+    if (!ArtplayerPluginIframe.iframe) {
+      throw new Error('The "ArtplayerPluginIframe.inject" method can only be used in iframe');
+    }
+    ArtplayerPluginIframe.postMessage({ type: "inject" });
+    window.addEventListener("message", ArtplayerPluginIframe.onMessage);
+  }
+  constructor({ iframe, url }) {
+    if (iframe instanceof HTMLIFrameElement === false) {
+      throw new TypeError('"option.iframe" needs to be a HTMLIFrameElement');
+    }
+    if (typeof url !== "string") {
+      throw new TypeError('"option.url" needs to be a string');
+    }
+    this.url = url;
+    this.$iframe = iframe;
+    this.promises = {};
+    this.injected = false;
+    this.destroyed = false;
+    this.messageCallback = () => null;
+    this.onMessage = this.onMessage.bind(this);
+    window.addEventListener("message", this.onMessage);
+    this.$iframe.src = this.url;
+  }
+  onMessage(event) {
+    const { type, data, id } = event.data;
+    switch (type) {
+      case "inject":
+        this.injected = true;
+        break;
+    }
+    if (this.promises[id]) {
+      if (type === "error") {
+        this.promises[id].reject(new Error(data));
+      } else {
+        this.promises[id].resove(data);
+      }
+      delete this.promises[id];
+    }
+    if (this.messageCallback) {
+      this.messageCallback({ type, data });
+    }
+  }
+  postMessage({ type, data }) {
+    return new Promise((resove, reject) => {
+      (function loop() {
+        if (this.destroyed) {
+          reject(new Error("The instance has been destroyed"));
+        } else {
+          if (this.injected) {
+            const id = Date.now();
+            this.promises[id] = { resove, reject };
+            this.$iframe.contentWindow.postMessage(
+              {
+                type,
+                data,
+                id
+              },
+              "*"
+            );
+          } else {
+            setTimeout(loop.bind(this), 200);
+          }
+        }
+      }).call(this);
+    });
+  }
+  commit(callback) {
+    if (typeof callback !== "function") {
+      throw new TypeError('"commit.callback" needs to be a function');
+    }
+    const callbackString = callback.toString();
+    const bodyString = callbackString.substring(callbackString.indexOf("{") + 1, callbackString.lastIndexOf("}"));
+    return this.postMessage({ type: "commit", data: bodyString });
+  }
+  message(callback) {
+    if (typeof callback !== "function") {
+      throw new TypeError('"message.callback" needs to be a function');
+    }
+    this.messageCallback = callback;
+  }
+  destroy() {
+    this.destroyed = true;
+    window.removeEventListener("message", this.onMessage);
+  }
+}
+if (typeof window !== "undefined") {
+  window.ArtplayerPluginIframe = ArtplayerPluginIframe;
+}
+export {
+  ArtplayerPluginIframe as default
+};

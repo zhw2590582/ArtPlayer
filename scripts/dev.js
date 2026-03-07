@@ -1,11 +1,10 @@
+import fs from 'node:fs'
 import path from 'node:path'
-import process from 'node:process'
-import { fileURLToPath } from 'node:url'
-import { Parcel } from '@parcel/core'
 import prompts from 'prompts'
 import servor from 'servor'
 import openBrowser from 'servor/utils/openBrowser.js'
-import { getProjects } from './utils.js'
+import { build as viteBuild } from 'vite'
+import { getProjects, getViteBuildConfig, toPascalCase } from './utils.js'
 
 const projects = getProjects()
 
@@ -13,8 +12,7 @@ async function develop(name) {
   const projectPath = projects[name]
   const uncompiledPath = path.resolve(`docs/uncompiled/${name}`)
   const entryFile = path.join(projectPath, 'src/index.js')
-
-  let isOpenBrowser = false
+  let browserOpened = false
 
   const { url } = await servor({
     root: 'docs',
@@ -23,72 +21,55 @@ async function develop(name) {
     port: 8082,
   })
 
-  process.chdir(projectPath)
+  fs.mkdirSync(uncompiledPath, { recursive: true })
 
-  const bundler = new Parcel({
-    entries: entryFile,
-    defaultConfig: '@parcel/config-default',
-    mode: 'development',
-    targets: {
-      main: {
-        distDir: uncompiledPath,
-        outputFormat: 'global',
-        isLibrary: true,
-        engines: {
-          browsers: ['last 1 Chrome version'],
-        },
-      },
-    },
-    env: {
-      NODE_ENV: 'development',
-    },
-    additionalReporters: [
-      {
-        packageName: '@parcel/reporter-cli',
-        resolveFrom: fileURLToPath(import.meta.url),
-      },
-    ],
-  })
+  async function buildBundle() {
+    const startTime = Date.now()
+    try {
+      const config = getViteBuildConfig({
+        entry: entryFile,
+        outDir: uncompiledPath,
+        name: toPascalCase(name),
+        format: 'iife',
+        fileName: 'index.js',
+        minify: false,
+        emptyOutDir: true,
+      })
+      config.define['process.env.NODE_ENV'] = JSON.stringify('development')
 
-  bundler.watch((error, event) => {
-    if (error) {
-      console.error(`[${name}] ❌ Build error:`, error)
-      return
-    }
+      await viteBuild({ root: projectPath, ...config })
+      console.log(`[${name}] ✅ Built in ${Date.now() - startTime}ms`)
 
-    if (event.type === 'buildSuccess') {
-      const bundles = event.bundleGraph.getBundles()
-      console.log(`[${name}] ✅ Built ${bundles.length} bundles in ${event.buildTime}ms`)
-      if (!isOpenBrowser) {
-        isOpenBrowser = true
+      if (!browserOpened) {
+        browserOpened = true
         openBrowser(url)
       }
     }
+    catch (error) {
+      console.error(`[${name}] ❌ Build error:`, error)
+    }
+  }
 
-    if (event.type === 'buildFailure') {
-      console.error(`[${name}] ❌ Build failure:`, event.diagnostics)
+  await buildBundle()
+
+  const srcPath = path.join(projectPath, 'src')
+  console.log(`[${name}] 👀 Watching ${srcPath}...`)
+
+  fs.watch(srcPath, { recursive: true }, async (_, filename) => {
+    if (filename) {
+      console.log(`[${name}] 📝 Changed: ${filename}`)
+      await buildBundle()
     }
   })
 }
 
 (async () => {
-  try {
-    const response = await prompts({
-      type: 'select',
-      name: 'value',
-      message: 'Which project do you want to develop?',
-      choices: Object.keys(projects).map(name => ({
-        title: name,
-        value: name,
-      })),
-      initial: 0,
-    })
-
-    if (response.value) {
-      await develop(response.value)
-    }
-  }
-  catch (error) {
-    console.error(`❌ Prompt error: ${error.message}`)
-  }
+  const { value } = await prompts({
+    type: 'select',
+    name: 'value',
+    message: 'Which project do you want to develop?',
+    choices: Object.keys(projects).map(name => ({ title: name, value: name })),
+  })
+  if (value)
+    await develop(value)
 })()

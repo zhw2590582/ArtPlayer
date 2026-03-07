@@ -1,8 +1,727 @@
-
 /*!
- * artplayer-plugin-websr.js v1.0.0
+ * artplayer-plugin-websr.js v1.0.1
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-!function(e,t,r,i,a){var o="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},s="function"==typeof o[i]&&o[i],n=s.i||{},l=s.cache||{},d="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function u(t,r){if(!l[t]){if(!e[t]){if(a[t])return a[t];var n="function"==typeof o[i]&&o[i];if(!r&&n)return n(t,!0);if(s)return s(t,!0);if(d&&"string"==typeof t)return d(t);var c=Error("Cannot find module '"+t+"'");throw c.code="MODULE_NOT_FOUND",c}h.resolve=function(r){var i=e[t][1][r];return null!=i?i:r},h.cache={};var m=l[t]=new u.Module(t);e[t][0].call(m.exports,h,m,m.exports,o)}return l[t].exports;function h(e){var t=h.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var r={__esModule:!0};return t.forEach(function(e){var t=e[0],i=e[1],a=e[2]||e[0],o=u(i);"*"===t?Object.keys(o).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(r,e)||Object.defineProperty(r,e,{enumerable:!0,get:function(){return o[e]}})}):"*"===a?Object.defineProperty(r,t,{enumerable:!0,value:o}):Object.defineProperty(r,t,{enumerable:!0,get:function(){return"default"===a?o.__esModule?o.default:o:o[a]}})}),r}return u(t)}}u.isParcelRequire=!0,u.Module=function(e){this.id=e,this.bundle=u,this.require=d,this.exports={}},u.modules=e,u.cache=l,u.parent=s,u.distDir=void 0,u.publicUrl=void 0,u.devServer=void 0,u.i=n,u.register=function(t,r){e[t]=[function(e,t){t.exports=r},{}]},Object.defineProperty(u,"root",{get:function(){return o[i]}}),o[i]=u;for(var c=0;c<t.length;c++)u(t[c]);if(r){var m=u(r);"object"==typeof exports&&"u">typeof module?module.exports=m:"function"==typeof define&&define.amd&&define(function(){return m})}}({hOg5u:[function(e,t,r,i){var a=e("@parcel/transformer-js/src/esmodule-helpers.js"),o=e("./Upscaler.js"),s=a.interopDefault(o);window.artplayerPluginWebsr=function(e={networkSize:"medium",compare:!1,weightsBaseUrl:"/weights",workerUrl:"/worker/main.js",videoScale:2}){return t=>{let{$video:r,$player:i}=t.template,a=document.createElement("canvas");function o(){let e=t.video,r=i.offsetWidth||640,a=i.offsetHeight||360,o=(e.videoWidth||640)/(e.videoHeight||360),s=r,n=a;return r/a>o?s=a*o:n=r/o,{displayWidth:s,displayHeight:n}}if(i.appendChild(a),a.style.position="absolute",a.style.zIndex="11",a.style.pointerEvents="none",a.style.top="50%",a.style.left="50%",a.style.transform="translate(-50%, -50%)",a.style.opacity="0",a.style.transition="opacity 0.2s ease",!s.default||!s.default.isSupported||!s.default.isSupported())return void console.warn("Upscaler is not supported in this environment");let n=new(0,s.default)({networkSize:e.networkSize||"medium",weightsBaseUrl:e.weightsBaseUrl||"/weights",workerUrl:e.workerUrl||"/worker/main.js",videoScale:e.videoScale||2}),l=!1;async function d(){if(!l){l=!0;try{await new Promise((e,t)=>{if(r.readyState>=1)return void e();let i=()=>{o(),e()},a=()=>{o(),t(Error("Failed to load video metadata"))},o=()=>{r.removeEventListener("loadedmetadata",i),r.removeEventListener("error",a)};r.addEventListener("loadedmetadata",i),r.addEventListener("error",a)}),await n.startRealtimeUpscale(r,a,e.networkSize||n.networkSize),requestAnimationFrame(()=>{a.style.opacity="1"})}catch(e){console.error("artplayer-plugin-upscaler: failed to start realtime",e)}}}let{displayWidth:u,displayHeight:c}=o();a.style.width=u+"px",a.style.height=c+"px";let m=50,h=!1,p=!!e.compare,f=document.createElement("div");function g(){if(p){let{displayWidth:e,displayHeight:t}=o(),r=`linear-gradient(to right, transparent 0%, transparent ${m}%, black ${m}%, black 100%)`;a.style.maskImage=r;let s=i.offsetWidth||640,n=i.offsetHeight||360,l=(s-e)/2+e*m/100;f.style.top=(n-t)/2+"px",f.style.left=l+"px",f.style.height=t+"px",f.style.transform="translateX(-50%)"}else a.style.maskImage="none"}function w(e){p&&(h=!0)}function y(e){if(p&&h){let t=i.getBoundingClientRect(),{displayWidth:r}=o(),a=i.offsetWidth||640;m=Math.max(0,Math.min(100,m=(e.clientX-t.left-(a-r)/2)/r*100)),g()}}function v(e){h=!1}return f.style.position="absolute",f.style.width="3px",f.style.backgroundColor="rgba(255, 255, 255, 0.75)",f.style.cursor="ew-resize",f.style.zIndex="12",f.style.pointerEvents="auto",f.style.display=p?"block":"none",f.style.boxShadow="0 0 2px rgba(0, 0, 0, 0.1)",p&&(i.appendChild(f),f.addEventListener("mousedown",w),document.addEventListener("mousemove",y),document.addEventListener("mouseup",v),g()),t.on("destroy",()=>{n&&"function"==typeof n.dispose&&n.dispose(),f.removeEventListener("mousedown",w),document.removeEventListener("mousemove",y),document.removeEventListener("mouseup",v)}),t.on("resize",()=>{let{displayWidth:e,displayHeight:t}=o();a.style.width=e+"px",a.style.height=t+"px",g()}),t.on("play",()=>{d()}),{name:"artplayerPluginWebsr",upscaler:n,update:function(r={}){if(r&&"object"==typeof r){if(Object.prototype.hasOwnProperty.call(r,"compare")){let t=!!r.compare;e.compare=t,(p=t)?(f.parentNode||i.appendChild(f),f.style.display="block",f.addEventListener("mousedown",w),document.addEventListener("mousemove",y),document.addEventListener("mouseup",v),g()):(a.style.maskImage="none",f.style.display="none",f.removeEventListener("mousedown",w),document.removeEventListener("mousemove",y),document.removeEventListener("mouseup",v))}r.networkSize&&(e.networkSize=r.networkSize,n&&"function"==typeof n.stopRealtimeUpscale&&n.stopRealtimeUpscale(),l=!1,t.paused||d())}}}}}},{"./Upscaler.js":"6fh0X","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"6fh0X":[function(e,t,r,i){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r);class a{static DEFAULT_TIMEOUTS={IMAGE:3e5,VIDEO:36e5,METADATA:1e4};static DEFAULT_DELAYS={INIT:500,NETWORK:300};static isSupported(){try{let e="u">typeof Worker,t="u">typeof OffscreenCanvas||"u">typeof document&&!!document.createElement("canvas").transferControlToOffscreen,r="u">typeof Blob;return e&&t&&r}catch{return!1}}static isVideoSupported(){try{return"u">typeof VideoEncoder&&"u">typeof VideoDecoder}catch{return!1}}constructor(e={}){let t=e.weightsBaseUrl||"/weights";this.networks=e.networks||{small:{name:"anime4k/cnn-2x-l",weightsUrl:`${t}/cnn-8.json`},medium:{name:"anime4k/cnn-2x-16",weightsUrl:`${t}/cnn-16.json`},large:{name:"anime4k/cnn-2x-28",weightsUrl:`${t}/cnn-28.json`}},this.weightsBaseUrl=t,this.networkSize=e.networkSize||"medium",this.workerUrl=e.workerUrl||"/worker/main.js",this.timeouts={...a.DEFAULT_TIMEOUTS,...e.timeouts||{}},this.delays={...a.DEFAULT_DELAYS,...e.delays||{}},this.imageScale="number"==typeof e.imageScale&&e.imageScale>0?e.imageScale:2,this.videoScale="number"==typeof e.videoScale&&e.videoScale>0?e.videoScale:2,this.weightsCache=new Map,this.workerInstance=null,this.messageHandlers={},this.progressCallback=null,this.processingType=null,this.realtimeLoopId=null,this.realtimeState=null,this.init()}init({prewarm:e=!0}={}){if(!a.isSupported())throw Error("Upscaler is not supported in this environment");return e&&this.getWorker().postMessage({cmd:"isSupported"}),this}getWorker(){return this.workerInstance||(this.workerInstance=new Worker(this.workerUrl),this.workerInstance.onmessage=e=>this.handleWorkerMessage(e)),this.workerInstance}static extractProgressValue(e){let t=e.data??e.progress??e.value??e.percentage;return"number"==typeof t?Math.min(100,Math.max(0,Math.round(t))):null}handleBlobResponse(e){let t="video"===this.processingType?"videoBlob":"imageBlob",r=this.messageHandlers[t];e.data instanceof Blob&&r&&r({[t]:e.data})}requestBlob(){let e="video"===this.processingType?"getVideoBlob":"getImageBlob";this.getWorker().postMessage({cmd:e})}handleWorkerMessage(e){let{data:t}=e;if(console.debug("Worker message:",t),!t.cmd)return;let{cmd:r}=t;if("progress"===r){let e=a.extractProgressValue(t);null!==e&&this.progressCallback&&this.progressCallback(e),this.messageHandlers.progress&&this.messageHandlers.progress(t)}else"finished"===r?t.data instanceof Blob?this.handleBlobResponse(t):this.requestBlob():this.messageHandlers[r]&&this.messageHandlers[r](t)}async loadWeights(e){if(this.validateNetworkSize(e),this.weightsCache.has(e))return this.weightsCache.get(e);let t=this.networks[e],r=await fetch(t.weightsUrl);if(!r.ok)throw Error(`Failed to fetch weights: ${r.statusText}`);let i=await r.json();return this.weightsCache.set(e,i),i}static loadImageMetadata(e,t){return new Promise((r,i)=>{let a=new Blob([e],{type:t}),o=URL.createObjectURL(a),s=new Image;s.onload=()=>{URL.revokeObjectURL(o),r({width:s.width,height:s.height})},s.onerror=()=>{URL.revokeObjectURL(o),i(Error("Failed to load image"))},s.src=o})}static loadVideoMetadata(e,t){return new Promise((r,i)=>{let a=URL.createObjectURL(e),o=document.createElement("video");o.src=a;let s=setTimeout(()=>i(Error("Timeout")),t);o.onloadedmetadata=()=>{clearTimeout(s),URL.revokeObjectURL(a),r({width:o.videoWidth,height:o.videoHeight,duration:o.duration})},o.onerror=()=>{clearTimeout(s),URL.revokeObjectURL(a),i(Error("Failed to load video"))}})}createOffscreenCanvas(e,t,r=2){let i="number"==typeof r&&r>0?r:1,a=document.createElement("canvas");if(a.width=e*i,a.height=t*i,"function"!=typeof a.transferControlToOffscreen)throw Error("OffscreenCanvas is not supported in this environment");return a.transferControlToOffscreen()}createBlobPromise(e,t){return new Promise((r,i)=>{let a=setTimeout(()=>{this.messageHandlers[e]&&(delete this.messageHandlers[e],i(Error(`${e} processing timeout`)))},t);this.messageHandlers[e]=t=>{delete this.messageHandlers[e],clearTimeout(a);let o=t[e]||t.data;o instanceof Blob?r(o):i(Error(`Invalid ${e} format`))}})}validateNetworkSize(e){if(!this.networks[e])throw Error("Invalid networkSize: use one of "+Object.keys(this.networks).join(", "))}async upscaleImage(e,t,r){if(!e)throw Error("Image file is required");let i=t||this.networkSize;this.validateNetworkSize(i),this.processingType="image";let o=await e.arrayBuffer(),s=e.type||"image/jpeg",{width:n,height:l}=await a.loadImageMetadata(o,s),d=await this.loadWeights(i),u=this.networks[i],c="number"==typeof r&&r>0?r:this.imageScale,[m,h]=[this.createOffscreenCanvas(n,l,c),this.createOffscreenCanvas(n,l,1)],p=this.createBlobPromise("imageBlob",this.timeouts.IMAGE);return this.getWorker().postMessage({cmd:"init",data:{imageArrayBuffer:o,imageMimeType:s,upscaled:m,original:h,resolution:{width:n,height:l},network_name:u.name,weights:d}},[m,h]),setTimeout(()=>{this.getWorker().postMessage({cmd:"network",data:{name:u.name,imageArrayBuffer:o,imageMimeType:s,weights:d}}),setTimeout(()=>{this.getWorker().postMessage({cmd:"getImageBlob",data:{imageArrayBuffer:o,imageMimeType:s}})},this.delays.NETWORK)},this.delays.INIT),p}async upscaleVideo(e,t,r){if(!e)throw Error("Video file is required");let i=t||this.networkSize;if(this.validateNetworkSize(i),!a.isVideoSupported())throw Error("WebCodecs API not supported. Requires Chrome 94+");this.processingType="video";let{width:o,height:s,duration:n}=await a.loadVideoMetadata(e,this.timeouts.METADATA),l=await this.loadWeights(i),d=this.networks[i],u="number"==typeof r&&r>0?r:this.videoScale,[c,m]=[this.createOffscreenCanvas(o,s,u),this.createOffscreenCanvas(o,s,1)],h=this.createBlobPromise("videoBlob",this.timeouts.VIDEO);return this.getWorker().postMessage({cmd:"process",file:e,fileSize:e.size,duration:n,adjustedResolution:{adjustedInputWidth:o,adjustedInputHeight:s,adjustedOutputWidth:o*u,adjustedOutputHeight:s*u},upscaled:c,original:m,weights:l,network_name:d.name,skipDemuxProgress:!0},[c,m]),h}async startRealtimeUpscale(e,t,r,i){if(!e||!t)throw Error("videoElement and canvasElement are required");let a=r||this.networkSize;this.validateNetworkSize(a);let o=this.networks[a],s=await this.loadWeights(a),n="number"==typeof i&&i>0?i:this.videoScale;await new Promise((t,r)=>{if(e.readyState>=1)return void t();let i=()=>{o(),t()},a=()=>{o(),r(Error("Failed to load video metadata"))},o=()=>{e.removeEventListener("loadedmetadata",i),e.removeEventListener("error",a)};e.addEventListener("loadedmetadata",i),e.addEventListener("error",a)});let l=e.videoWidth,d=e.videoHeight;if(!l||!d)throw Error("Invalid video dimensions");let u=!t._upscalerTransferred,c=null;if(u){if(t.width=l*n,t.height=d*n,"function"!=typeof t.transferControlToOffscreen)throw Error("OffscreenCanvas is not supported in this environment");c=t.transferControlToOffscreen(),t._upscalerTransferred=!0}let m=document.createElement("canvas");m.width=l,m.height=d;let h=m.getContext("2d");this.realtimeLoopId&&(cancelAnimationFrame(this.realtimeLoopId),this.realtimeLoopId=null);let p={cmd:"realtimeInit",data:{upscaled:u?c:null,resolution:{width:l,height:d,scale:n,outputWidth:l*n,outputHeight:d*n},network_name:o.name,weights:s}};u&&c?this.getWorker().postMessage(p,[c]):this.getWorker().postMessage(p),this.realtimeState={running:!0,video:e,canvas:t,scale:n,busy:!1,frameIndex:0,captureCanvas:m,captureCtx:h};let f=async()=>{if(!this.realtimeState||!this.realtimeState.running)return;let e=this.realtimeState,t=e.video,r=t.HAVE_CURRENT_DATA||2;if(!t.paused&&!t.ended&&!e.busy&&t.readyState>=r&&t.videoWidth>0&&t.videoHeight>0){e.busy=!0;try{let r=e.captureCanvas,i=e.captureCtx;if(!r||!i)throw Error("Missing capture canvas");i.drawImage(t,0,0,r.width,r.height);let a=await createImageBitmap(r);e.frameIndex+=1,this.getWorker().postMessage({cmd:"realtimeFrame",frame:a},[a])}catch(e){console.warn("realtimeFrame error",e)}finally{this.realtimeState&&(this.realtimeState.busy=!1)}}this.realtimeLoopId=requestAnimationFrame(f)};this.realtimeLoopId=requestAnimationFrame(f)}stopRealtimeUpscale(){this.realtimeLoopId&&(cancelAnimationFrame(this.realtimeLoopId),this.realtimeLoopId=null),this.realtimeState&&(this.realtimeState.running=!1,this.realtimeState=null)}async downloadUpscaled(e,t,r=null){let i=e.type.startsWith("video"),a=t||this.networkSize,o=i?await this.upscaleVideo(e,a):await this.upscaleImage(e,a),s=URL.createObjectURL(o),n=document.createElement("a");return n.href=s,n.download=r||`upscaled_${Date.now()}.${i?"mp4":"png"}`,n.click(),URL.revokeObjectURL(s),o}getSupportedNetworks(){return Object.keys(this.networks)}static async getGPUCapability(){try{if(navigator.gpu){let e=await navigator.gpu.requestAdapter();if(e){let t=e.limits.maxStorageBufferBindingSize/512;return Math.min(t,0x4000000)}}let e=document.createElement("canvas").getContext("webgl2");if(e)return e.getParameter(e.MAX_TEXTURE_SIZE)**2;return 8388608}catch{return 8388608}}static getBackendType(){try{if(navigator.gpu)return"webgpu";if(document.createElement("canvas").getContext("webgl2"))return"webgl";return"unknown"}catch{return"unknown"}}getAppState(){return{backend:a.getBackendType(),isProcessing:!1,progress:0,width:0,height:0}}onProgress(e){"function"==typeof e&&(this.progressCallback=e)}dispose(){this.stopRealtimeUpscale(),this.workerInstance&&(this.workerInstance.terminate(),this.workerInstance=null),this.messageHandlers={},this.progressCallback=null,this.processingType=null,this.weightsCache.clear()}}r.default=a},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],loqXi:[function(e,t,r,i){r.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},r.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},r.exportAll=function(e,t){return Object.keys(e).forEach(function(r){"default"===r||"__esModule"===r||Object.prototype.hasOwnProperty.call(t,r)||Object.defineProperty(t,r,{enumerable:!0,get:function(){return e[r]}})}),t},r.export=function(e,t,r){Object.defineProperty(e,t,{enumerable:!0,get:r})}},{}]},["hOg5u"],"hOg5u","parcelRequire4dc0",{});let{}=parcelRequire4dc0("hOg5u");export{};
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+const _Upscaler = class _Upscaler {
+  static isSupported() {
+    try {
+      const hasWorker = typeof Worker !== "undefined";
+      const hasOffscreen = typeof OffscreenCanvas !== "undefined" || typeof document !== "undefined" && !!document.createElement("canvas").transferControlToOffscreen;
+      const hasBlob = typeof Blob !== "undefined";
+      return hasWorker && hasOffscreen && hasBlob;
+    } catch {
+      return false;
+    }
+  }
+  static isVideoSupported() {
+    try {
+      return typeof VideoEncoder !== "undefined" && typeof VideoDecoder !== "undefined";
+    } catch {
+      return false;
+    }
+  }
+  constructor(options = {}) {
+    const weightsBaseUrl = options.weightsBaseUrl || "/weights";
+    this.networks = options.networks || {
+      small: {
+        name: "anime4k/cnn-2x-l",
+        weightsUrl: `${weightsBaseUrl}/cnn-8.json`
+      },
+      medium: {
+        name: "anime4k/cnn-2x-16",
+        weightsUrl: `${weightsBaseUrl}/cnn-16.json`
+      },
+      large: {
+        name: "anime4k/cnn-2x-28",
+        weightsUrl: `${weightsBaseUrl}/cnn-28.json`
+      }
+    };
+    this.weightsBaseUrl = weightsBaseUrl;
+    this.networkSize = options.networkSize || "medium";
+    this.workerUrl = options.workerUrl || "/worker/main.js";
+    this.timeouts = {
+      ..._Upscaler.DEFAULT_TIMEOUTS,
+      ...options.timeouts || {}
+    };
+    this.delays = { ..._Upscaler.DEFAULT_DELAYS, ...options.delays || {} };
+    this.imageScale = typeof options.imageScale === "number" && options.imageScale > 0 ? options.imageScale : 2;
+    this.videoScale = typeof options.videoScale === "number" && options.videoScale > 0 ? options.videoScale : 2;
+    this.weightsCache = /* @__PURE__ */ new Map();
+    this.workerInstance = null;
+    this.messageHandlers = {};
+    this.progressCallback = null;
+    this.processingType = null;
+    this.realtimeLoopId = null;
+    this.realtimeState = null;
+    this.init();
+  }
+  init({ prewarm = true } = {}) {
+    if (!_Upscaler.isSupported()) {
+      throw new Error("Upscaler is not supported in this environment");
+    }
+    if (prewarm) {
+      this.getWorker().postMessage({ cmd: "isSupported" });
+    }
+    return this;
+  }
+  getWorker() {
+    if (!this.workerInstance) {
+      this.workerInstance = new Worker(this.workerUrl);
+      this.workerInstance.onmessage = (event) => this.handleWorkerMessage(event);
+    }
+    return this.workerInstance;
+  }
+  static extractProgressValue(data) {
+    const value = data.data ?? data.progress ?? data.value ?? data.percentage;
+    return typeof value === "number" ? Math.min(100, Math.max(0, Math.round(value))) : null;
+  }
+  handleBlobResponse(data) {
+    const blobType = this.processingType === "video" ? "videoBlob" : "imageBlob";
+    const handler = this.messageHandlers[blobType];
+    if (data.data instanceof Blob && handler) {
+      handler({ [blobType]: data.data });
+    }
+  }
+  requestBlob() {
+    const cmd = this.processingType === "video" ? "getVideoBlob" : "getImageBlob";
+    this.getWorker().postMessage({ cmd });
+  }
+  handleWorkerMessage(event) {
+    const { data } = event;
+    if (!data.cmd)
+      return;
+    const { cmd } = data;
+    if (cmd === "progress") {
+      const progress = _Upscaler.extractProgressValue(data);
+      if (progress !== null && this.progressCallback) {
+        this.progressCallback(progress);
+      }
+      if (this.messageHandlers.progress)
+        this.messageHandlers.progress(data);
+    } else if (cmd === "finished") {
+      if (data.data instanceof Blob) {
+        this.handleBlobResponse(data);
+      } else {
+        this.requestBlob();
+      }
+    } else if (this.messageHandlers[cmd]) {
+      this.messageHandlers[cmd](data);
+    }
+  }
+  async loadWeights(networkSize) {
+    this.validateNetworkSize(networkSize);
+    if (this.weightsCache.has(networkSize)) {
+      return this.weightsCache.get(networkSize);
+    }
+    const network = this.networks[networkSize];
+    const response = await fetch(network.weightsUrl);
+    if (!response.ok)
+      throw new Error(`Failed to fetch weights: ${response.statusText}`);
+    const weights = await response.json();
+    this.weightsCache.set(networkSize, weights);
+    return weights;
+  }
+  static loadImageMetadata(arrayBuffer, mimeType) {
+    return new Promise((resolve, reject) => {
+      const blob = new Blob([arrayBuffer], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve({ width: img.width, height: img.height });
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error("Failed to load image"));
+      };
+      img.src = url;
+    });
+  }
+  static loadVideoMetadata(file, timeoutMs) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const video = document.createElement("video");
+      video.src = url;
+      const timeout = setTimeout(() => reject(new Error("Timeout")), timeoutMs);
+      video.onloadedmetadata = () => {
+        clearTimeout(timeout);
+        URL.revokeObjectURL(url);
+        resolve({
+          width: video.videoWidth,
+          height: video.videoHeight,
+          duration: video.duration
+        });
+      };
+      video.onerror = () => {
+        clearTimeout(timeout);
+        URL.revokeObjectURL(url);
+        reject(new Error("Failed to load video"));
+      };
+    });
+  }
+  createOffscreenCanvas(width, height, scale = 2) {
+    const factor = typeof scale === "number" && scale > 0 ? scale : 1;
+    const canvas = document.createElement("canvas");
+    canvas.width = width * factor;
+    canvas.height = height * factor;
+    if (typeof canvas.transferControlToOffscreen !== "function") {
+      throw new TypeError("OffscreenCanvas is not supported in this environment");
+    }
+    return canvas.transferControlToOffscreen();
+  }
+  createBlobPromise(blobType, timeout) {
+    return new Promise((resolve, reject) => {
+      const timeoutId = setTimeout(() => {
+        if (this.messageHandlers[blobType]) {
+          delete this.messageHandlers[blobType];
+          reject(new Error(`${blobType} processing timeout`));
+        }
+      }, timeout);
+      this.messageHandlers[blobType] = (msg) => {
+        delete this.messageHandlers[blobType];
+        clearTimeout(timeoutId);
+        const blob = msg[blobType] || msg.data;
+        if (blob instanceof Blob) {
+          resolve(blob);
+        } else {
+          reject(new Error(`Invalid ${blobType} format`));
+        }
+      };
+    });
+  }
+  validateNetworkSize(size) {
+    if (!this.networks[size]) {
+      throw new Error(
+        `Invalid networkSize: use one of ${Object.keys(this.networks).join(", ")}`
+      );
+    }
+  }
+  async upscaleImage(imageFile, networkSize, scaleOverride) {
+    if (!imageFile)
+      throw new Error("Image file is required");
+    const size = networkSize || this.networkSize;
+    this.validateNetworkSize(size);
+    this.processingType = "image";
+    const arrayBuffer = await imageFile.arrayBuffer();
+    const mimeType = imageFile.type || "image/jpeg";
+    const { width, height } = await _Upscaler.loadImageMetadata(
+      arrayBuffer,
+      mimeType
+    );
+    const weights = await this.loadWeights(size);
+    const network = this.networks[size];
+    const scale = typeof scaleOverride === "number" && scaleOverride > 0 ? scaleOverride : this.imageScale;
+    const [canvasUp, canvasOrig] = [
+      this.createOffscreenCanvas(width, height, scale),
+      this.createOffscreenCanvas(width, height, 1)
+    ];
+    const blobPromise = this.createBlobPromise(
+      "imageBlob",
+      this.timeouts.IMAGE
+    );
+    this.getWorker().postMessage(
+      {
+        cmd: "init",
+        data: {
+          imageArrayBuffer: arrayBuffer,
+          imageMimeType: mimeType,
+          upscaled: canvasUp,
+          original: canvasOrig,
+          resolution: { width, height },
+          network_name: network.name,
+          weights
+        }
+      },
+      [canvasUp, canvasOrig]
+    );
+    setTimeout(() => {
+      this.getWorker().postMessage({
+        cmd: "network",
+        data: {
+          name: network.name,
+          imageArrayBuffer: arrayBuffer,
+          imageMimeType: mimeType,
+          weights
+        }
+      });
+      setTimeout(() => {
+        this.getWorker().postMessage({
+          cmd: "getImageBlob",
+          data: { imageArrayBuffer: arrayBuffer, imageMimeType: mimeType }
+        });
+      }, this.delays.NETWORK);
+    }, this.delays.INIT);
+    return blobPromise;
+  }
+  async upscaleVideo(videoFile, networkSize, scaleOverride) {
+    if (!videoFile)
+      throw new Error("Video file is required");
+    const size = networkSize || this.networkSize;
+    this.validateNetworkSize(size);
+    if (!_Upscaler.isVideoSupported()) {
+      throw new Error("WebCodecs API not supported. Requires Chrome 94+");
+    }
+    this.processingType = "video";
+    const { width, height, duration } = await _Upscaler.loadVideoMetadata(
+      videoFile,
+      this.timeouts.METADATA
+    );
+    const weights = await this.loadWeights(size);
+    const network = this.networks[size];
+    const scale = typeof scaleOverride === "number" && scaleOverride > 0 ? scaleOverride : this.videoScale;
+    const [canvasOut, canvasIn] = [
+      this.createOffscreenCanvas(width, height, scale),
+      this.createOffscreenCanvas(width, height, 1)
+    ];
+    const blobPromise = this.createBlobPromise(
+      "videoBlob",
+      this.timeouts.VIDEO
+    );
+    this.getWorker().postMessage(
+      {
+        cmd: "process",
+        file: videoFile,
+        fileSize: videoFile.size,
+        duration,
+        adjustedResolution: {
+          adjustedInputWidth: width,
+          adjustedInputHeight: height,
+          adjustedOutputWidth: width * scale,
+          adjustedOutputHeight: height * scale
+        },
+        upscaled: canvasOut,
+        original: canvasIn,
+        weights,
+        network_name: network.name,
+        skipDemuxProgress: true
+      },
+      [canvasOut, canvasIn]
+    );
+    return blobPromise;
+  }
+  async startRealtimeUpscale(videoElement, canvasElement, networkSize, scaleOverride) {
+    if (!videoElement || !canvasElement) {
+      throw new Error("videoElement and canvasElement are required");
+    }
+    const size = networkSize || this.networkSize;
+    this.validateNetworkSize(size);
+    const network = this.networks[size];
+    const weights = await this.loadWeights(size);
+    const scale = typeof scaleOverride === "number" && scaleOverride > 0 ? scaleOverride : this.videoScale;
+    const ensureMetadata = () => {
+      return new Promise((resolve, reject) => {
+        if (videoElement.readyState >= 1) {
+          resolve();
+          return;
+        }
+        let onLoaded, onError;
+        const cleanup = () => {
+          videoElement.removeEventListener("loadedmetadata", onLoaded);
+          videoElement.removeEventListener("error", onError);
+        };
+        onLoaded = () => {
+          cleanup();
+          resolve();
+        };
+        onError = () => {
+          cleanup();
+          reject(new Error("Failed to load video metadata"));
+        };
+        videoElement.addEventListener("loadedmetadata", onLoaded);
+        videoElement.addEventListener("error", onError);
+      });
+    };
+    await ensureMetadata();
+    const width = videoElement.videoWidth;
+    const height = videoElement.videoHeight;
+    if (!width || !height) {
+      throw new Error("Invalid video dimensions");
+    }
+    const firstInit = !canvasElement._upscalerTransferred;
+    let offscreen = null;
+    if (firstInit) {
+      canvasElement.width = width * scale;
+      canvasElement.height = height * scale;
+      if (typeof canvasElement.transferControlToOffscreen !== "function") {
+        throw new TypeError("OffscreenCanvas is not supported in this environment");
+      }
+      offscreen = canvasElement.transferControlToOffscreen();
+      canvasElement._upscalerTransferred = true;
+    }
+    const captureCanvas = document.createElement("canvas");
+    captureCanvas.width = width;
+    captureCanvas.height = height;
+    const captureCtx = captureCanvas.getContext("2d");
+    if (this.realtimeLoopId) {
+      cancelAnimationFrame(this.realtimeLoopId);
+      this.realtimeLoopId = null;
+    }
+    const initPayload = {
+      cmd: "realtimeInit",
+      data: {
+        upscaled: firstInit ? offscreen : null,
+        resolution: {
+          width,
+          height,
+          scale,
+          outputWidth: width * scale,
+          outputHeight: height * scale
+        },
+        network_name: network.name,
+        weights
+      }
+    };
+    if (firstInit && offscreen) {
+      this.getWorker().postMessage(initPayload, [offscreen]);
+    } else {
+      this.getWorker().postMessage(initPayload);
+    }
+    this.realtimeState = {
+      running: true,
+      video: videoElement,
+      canvas: canvasElement,
+      scale,
+      busy: false,
+      frameIndex: 0,
+      captureCanvas,
+      captureCtx
+    };
+    const loop = async () => {
+      if (!this.realtimeState || !this.realtimeState.running)
+        return;
+      const state = this.realtimeState;
+      const v = state.video;
+      const haveCurrentData = v.HAVE_CURRENT_DATA || 2;
+      if (!v.paused && !v.ended && !state.busy && v.readyState >= haveCurrentData && v.videoWidth > 0 && v.videoHeight > 0) {
+        state.busy = true;
+        try {
+          const captureCanvas2 = state.captureCanvas;
+          const captureCtx2 = state.captureCtx;
+          if (!captureCanvas2 || !captureCtx2) {
+            throw new Error("Missing capture canvas");
+          }
+          captureCtx2.drawImage(v, 0, 0, captureCanvas2.width, captureCanvas2.height);
+          const frame = await createImageBitmap(captureCanvas2);
+          state.frameIndex += 1;
+          this.getWorker().postMessage(
+            {
+              cmd: "realtimeFrame",
+              frame
+            },
+            [frame]
+          );
+        } catch (e) {
+          console.warn("realtimeFrame error", e);
+        } finally {
+          if (this.realtimeState) {
+            this.realtimeState.busy = false;
+          }
+        }
+      }
+      this.realtimeLoopId = requestAnimationFrame(loop);
+    };
+    this.realtimeLoopId = requestAnimationFrame(loop);
+  }
+  stopRealtimeUpscale() {
+    if (this.realtimeLoopId) {
+      cancelAnimationFrame(this.realtimeLoopId);
+      this.realtimeLoopId = null;
+    }
+    if (this.realtimeState) {
+      this.realtimeState.running = false;
+      this.realtimeState = null;
+    }
+  }
+  async downloadUpscaled(file, networkSize, filename = null) {
+    const isVideo = file.type.startsWith("video");
+    const size = networkSize || this.networkSize;
+    const blob = isVideo ? await this.upscaleVideo(file, size) : await this.upscaleImage(file, size);
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename || `upscaled_${Date.now()}.${isVideo ? "mp4" : "png"}`;
+    link.click();
+    URL.revokeObjectURL(url);
+    return blob;
+  }
+  getSupportedNetworks() {
+    return Object.keys(this.networks);
+  }
+  static async getGPUCapability() {
+    try {
+      if (navigator.gpu) {
+        const adapter = await navigator.gpu.requestAdapter();
+        if (adapter) {
+          const buffer = adapter.limits.maxStorageBufferBindingSize / 512;
+          const texture = 8192 * 8192;
+          return Math.min(buffer, texture);
+        }
+      }
+      const canvas = document.createElement("canvas");
+      const gl = canvas.getContext("webgl2");
+      if (gl)
+        return gl.getParameter(gl.MAX_TEXTURE_SIZE) ** 2;
+      return 8388608;
+    } catch {
+      return 8388608;
+    }
+  }
+  static getBackendType() {
+    try {
+      if (navigator.gpu)
+        return "webgpu";
+      if (document.createElement("canvas").getContext("webgl2"))
+        return "webgl";
+      return "unknown";
+    } catch {
+      return "unknown";
+    }
+  }
+  getAppState() {
+    return {
+      backend: _Upscaler.getBackendType(),
+      isProcessing: false,
+      progress: 0,
+      width: 0,
+      height: 0
+    };
+  }
+  onProgress(callback) {
+    if (typeof callback === "function") {
+      this.progressCallback = callback;
+    }
+  }
+  dispose() {
+    this.stopRealtimeUpscale();
+    if (this.workerInstance) {
+      this.workerInstance.terminate();
+      this.workerInstance = null;
+    }
+    this.messageHandlers = {};
+    this.progressCallback = null;
+    this.processingType = null;
+    this.weightsCache.clear();
+  }
+};
+__publicField(_Upscaler, "DEFAULT_TIMEOUTS", { IMAGE: 3e5, VIDEO: 36e5, METADATA: 1e4 });
+__publicField(_Upscaler, "DEFAULT_DELAYS", { INIT: 500, NETWORK: 300 });
+let Upscaler = _Upscaler;
+function artplayerPluginWebsr(option = {
+  networkSize: "medium",
+  compare: false,
+  weightsBaseUrl: "/weights",
+  workerUrl: "/worker/main.js",
+  videoScale: 2
+}) {
+  return (art) => {
+    const { $video, $player } = art.template;
+    const $canvas = document.createElement("canvas");
+    $player.appendChild($canvas);
+    $canvas.style.position = "absolute";
+    $canvas.style.zIndex = "11";
+    $canvas.style.pointerEvents = "none";
+    $canvas.style.top = "50%";
+    $canvas.style.left = "50%";
+    $canvas.style.transform = "translate(-50%, -50%)";
+    $canvas.style.opacity = "0";
+    $canvas.style.transition = "opacity 0.2s ease";
+    function calcCanvasSize() {
+      const videoElement = art.video;
+      const containerWidth = $player.offsetWidth || 640;
+      const containerHeight = $player.offsetHeight || 360;
+      const videoWidth = videoElement.videoWidth || 640;
+      const videoHeight = videoElement.videoHeight || 360;
+      const aspectRatio = videoWidth / videoHeight;
+      let displayWidth2 = containerWidth;
+      let displayHeight2 = containerHeight;
+      if (containerWidth / containerHeight > aspectRatio) {
+        displayWidth2 = containerHeight * aspectRatio;
+      } else {
+        displayHeight2 = containerWidth / aspectRatio;
+      }
+      return { displayWidth: displayWidth2, displayHeight: displayHeight2 };
+    }
+    if (!Upscaler || !Upscaler.isSupported || !Upscaler.isSupported()) {
+      console.warn("Upscaler is not supported in this environment");
+      return;
+    }
+    const upscaler = new Upscaler({
+      networkSize: option.networkSize || "medium",
+      weightsBaseUrl: option.weightsBaseUrl || "/weights",
+      workerUrl: option.workerUrl || "/worker/main.js",
+      videoScale: option.videoScale || 2
+    });
+    let realtimeStarted = false;
+    async function startRealtime() {
+      if (realtimeStarted)
+        return;
+      realtimeStarted = true;
+      try {
+        await new Promise((resolve, reject) => {
+          if ($video.readyState >= 1) {
+            resolve();
+            return;
+          }
+          let onLoaded, onError;
+          const cleanup = () => {
+            $video.removeEventListener("loadedmetadata", onLoaded);
+            $video.removeEventListener("error", onError);
+          };
+          onLoaded = () => {
+            cleanup();
+            resolve();
+          };
+          onError = () => {
+            cleanup();
+            reject(new Error("Failed to load video metadata"));
+          };
+          $video.addEventListener("loadedmetadata", onLoaded);
+          $video.addEventListener("error", onError);
+        });
+        await upscaler.startRealtimeUpscale(
+          $video,
+          $canvas,
+          option.networkSize || upscaler.networkSize
+        );
+        requestAnimationFrame(() => {
+          $canvas.style.opacity = "1";
+        });
+      } catch (e) {
+        console.error(
+          "artplayer-plugin-upscaler: failed to start realtime",
+          e
+        );
+      }
+    }
+    const { displayWidth, displayHeight } = calcCanvasSize();
+    $canvas.style.width = `${displayWidth}px`;
+    $canvas.style.height = `${displayHeight}px`;
+    let comparePosition = 50;
+    let isDragging = false;
+    let compareEnabled = !!option.compare;
+    const $handler = document.createElement("div");
+    $handler.style.position = "absolute";
+    $handler.style.width = "3px";
+    $handler.style.backgroundColor = "rgba(255, 255, 255, 0.75)";
+    $handler.style.cursor = "ew-resize";
+    $handler.style.zIndex = "12";
+    $handler.style.pointerEvents = "auto";
+    $handler.style.display = compareEnabled ? "block" : "none";
+    $handler.style.boxShadow = "0 0 2px rgba(0, 0, 0, 0.1)";
+    if (compareEnabled) {
+      $player.appendChild($handler);
+      $handler.addEventListener("mousedown", handleMouseDown);
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+      updateCompareMask();
+    }
+    function updateCompareMask() {
+      if (compareEnabled) {
+        const { displayWidth: displayWidth2, displayHeight: displayHeight2 } = calcCanvasSize();
+        const gradient = `linear-gradient(to right, transparent 0%, transparent ${comparePosition}%, black ${comparePosition}%, black 100%)`;
+        $canvas.style.maskImage = gradient;
+        const containerWidth = $player.offsetWidth || 640;
+        const containerHeight = $player.offsetHeight || 360;
+        const canvasLeft = (containerWidth - displayWidth2) / 2;
+        const canvasTop = (containerHeight - displayHeight2) / 2;
+        const handlerX = canvasLeft + displayWidth2 * comparePosition / 100;
+        $handler.style.top = `${canvasTop}px`;
+        $handler.style.left = `${handlerX}px`;
+        $handler.style.height = `${displayHeight2}px`;
+        $handler.style.transform = "translateX(-50%)";
+      } else {
+        $canvas.style.maskImage = "none";
+      }
+    }
+    function handleMouseDown(_e) {
+      if (compareEnabled) {
+        isDragging = true;
+      }
+    }
+    function handleMouseMove(e) {
+      if (compareEnabled && isDragging) {
+        const rect = $player.getBoundingClientRect();
+        const { displayWidth: displayWidth2 } = calcCanvasSize();
+        const containerWidth = $player.offsetWidth || 640;
+        const canvasLeft = (containerWidth - displayWidth2) / 2;
+        const x = e.clientX - rect.left;
+        const relativeX = x - canvasLeft;
+        comparePosition = relativeX / displayWidth2 * 100;
+        comparePosition = Math.max(0, Math.min(100, comparePosition));
+        updateCompareMask();
+      }
+    }
+    function handleMouseUp(_e) {
+      isDragging = false;
+    }
+    art.on("destroy", () => {
+      if (upscaler && typeof upscaler.dispose === "function") {
+        upscaler.dispose();
+      }
+      $handler.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    });
+    art.on("resize", () => {
+      const { displayWidth: displayWidth2, displayHeight: displayHeight2 } = calcCanvasSize();
+      $canvas.style.width = `${displayWidth2}px`;
+      $canvas.style.height = `${displayHeight2}px`;
+      updateCompareMask();
+    });
+    art.on("play", () => {
+      startRealtime();
+    });
+    function update(newOption = {}) {
+      if (!newOption || typeof newOption !== "object")
+        return;
+      if (Object.prototype.hasOwnProperty.call(newOption, "compare")) {
+        const nextCompare = !!newOption.compare;
+        option.compare = nextCompare;
+        compareEnabled = nextCompare;
+        if (compareEnabled) {
+          if (!$handler.parentNode) {
+            $player.appendChild($handler);
+          }
+          $handler.style.display = "block";
+          $handler.addEventListener("mousedown", handleMouseDown);
+          document.addEventListener("mousemove", handleMouseMove);
+          document.addEventListener("mouseup", handleMouseUp);
+          updateCompareMask();
+        } else {
+          $canvas.style.maskImage = "none";
+          $handler.style.display = "none";
+          $handler.removeEventListener("mousedown", handleMouseDown);
+          document.removeEventListener("mousemove", handleMouseMove);
+          document.removeEventListener("mouseup", handleMouseUp);
+        }
+      }
+      if (newOption.networkSize) {
+        const nextSize = newOption.networkSize;
+        option.networkSize = nextSize;
+        if (upscaler && typeof upscaler.stopRealtimeUpscale === "function") {
+          upscaler.stopRealtimeUpscale();
+        }
+        realtimeStarted = false;
+        if (!art.paused) {
+          startRealtime();
+        }
+      }
+    }
+    return {
+      name: "artplayerPluginWebsr",
+      upscaler,
+      update
+    };
+  };
+}
+if (typeof window !== "undefined") {
+  window.artplayerPluginWebsr = artplayerPluginWebsr;
+}
+export {
+  artplayerPluginWebsr as default
+};

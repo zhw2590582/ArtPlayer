@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-jassub",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "jassub plugin for ArtPlayer",
   "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",
@@ -27,7 +27,6 @@
       "types": "./types/artplayer-plugin-jassub.d.ts",
       "import": "./dist/artplayer-plugin-jassub.legacy.js",
       "require": "./dist/artplayer-plugin-jassub.legacy.js"
-
     }
   },
   "main": "dist/artplayer-plugin-jassub.js",

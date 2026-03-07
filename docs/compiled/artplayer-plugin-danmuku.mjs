@@ -1,8 +1,1570 @@
-
 /*!
- * artplayer-plugin-danmuku.js v5.2.0
+ * artplayer-plugin-danmuku.js v5.2.1
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-!function(e,t,i,a,o,n,s,r){var l="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},d="function"==typeof l[a]&&l[a],p=d.i||{},u=d.cache||{},h="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function m(t,i){if(!u[t]){if(!e[t]){if(o[t])return o[t];var n="function"==typeof l[a]&&l[a];if(!i&&n)return n(t,!0);if(d)return d(t,!0);if(h&&"string"==typeof t)return h(t);var s=Error("Cannot find module '"+t+"'");throw s.code="MODULE_NOT_FOUND",s}p.resolve=function(i){var a=e[t][1][i];return null!=a?a:i},p.cache={};var r=u[t]=new m.Module(t);e[t][0].call(r.exports,p,r,r.exports,l)}return u[t].exports;function p(e){var t=p.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var i={__esModule:!0};return t.forEach(function(e){var t=e[0],a=e[1],o=e[2]||e[0],n=m(a);"*"===t?Object.keys(n).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(i,e)||Object.defineProperty(i,e,{enumerable:!0,get:function(){return n[e]}})}):"*"===o?Object.defineProperty(i,t,{enumerable:!0,value:n}):Object.defineProperty(i,t,{enumerable:!0,get:function(){return"default"===o?n.__esModule?n.default:n:n[o]}})}),i}return m(t)}}m.isParcelRequire=!0,m.Module=function(e){this.id=e,this.bundle=m,this.require=h,this.exports={}},m.modules=e,m.cache=u,m.parent=d,m.distDir=void 0,m.publicUrl=void 0,m.devServer=void 0,m.i=p,m.register=function(t,i){e[t]=[function(e,t){t.exports=i},{}]},Object.defineProperty(m,"root",{get:function(){return l[a]}}),l[a]=m;for(var c=0;c<t.length;c++)m(t[c]);if(i){var f=m(i);"object"==typeof exports&&"u">typeof module?module.exports=f:"function"==typeof define&&define.amd&&define(function(){return f})}}({"7ICE7":[function(e,t,i,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(i),o.export(i,"default",()=>u);var n=e("./danmuku"),s=o.interopDefault(n),r=e("./heatmap"),l=o.interopDefault(r),d=e("./setting"),p=o.interopDefault(d);function u(e){return t=>{let i=new(0,s.default)(t,e),a=new(0,p.default)(t,i);return i.option.heatmap&&(0,l.default)(t,i,i.option.heatmap),{name:"artplayerPluginDanmuku",emit:i.emit.bind(i),load:i.load.bind(i),config:i.config.bind(i),hide:i.hide.bind(i),show:i.show.bind(i),reset:i.reset.bind(i),mount:a.mount.bind(a),get option(){return i.option},get isHide(){return i.isHide},get isStop(){return i.isStop}}}}u.icons=p.default.icons,"u">typeof window&&(window.artplayerPluginDanmuku=u)},{"./danmuku":"9bpce","./heatmap":"9KNY2","./setting":"94xSe","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"9bpce":[function(e,t,i,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(i);var n=e("bundle-text:./worker"),s=o.interopDefault(n),r=e("./bilibili");class l{constructor(e,t){let{constructor:i,template:a}=e;this.utils=i.utils,this.validator=i.validator,this.$danmuku=a.$danmuku,this.$player=a.$player,this.art=e,this.queue=[],this.$refs=[],this.isStop=!1,this.isHide=!1,this.timer=null,this.index=0,this.option=l.option,this.states={wait:[],ready:[],emit:[],stop:[]},this.config(t,!0);let o=new Blob([s.default.replace("export{e as default};","")],{type:"application/javascript"});this.worker=new Worker(URL.createObjectURL(o)),this.start=this.start.bind(this),this.stop=this.stop.bind(this),this.reset=this.reset.bind(this),this.resize=this.resize.bind(this),this.destroy=this.destroy.bind(this),e.on("video:play",this.start),e.on("video:playing",this.start),e.on("video:pause",this.stop),e.on("video:waiting",this.stop),e.on("destroy",this.destroy),e.on("resize",this.resize),this.load()}static get option(){return{danmuku:[],speed:5,margin:[10,"25%"],opacity:1,color:"#FFFFFF",mode:0,modes:[0,1,2],fontSize:25,antiOverlap:!0,synchronousPlayback:!1,mount:void 0,heatmap:!1,width:512,points:[],filter:()=>!0,beforeEmit:()=>!0,beforeVisible:()=>!0,visible:!0,emitter:!0,maxLength:200,lockTime:5,theme:"dark",OPACITY:{},FONT_SIZE:{},MARGIN:{},SPEED:{},COLOR:[]}}static get scheme(){return{danmuku:"array|function|string",speed:"number",margin:"array",opacity:"number",color:"string",mode:"number",modes:"array",fontSize:"number|string",antiOverlap:"boolean",synchronousPlayback:"boolean",mount:"?htmldivelement|string",heatmap:"object|boolean",width:"number",points:"array",filter:"function",beforeEmit:"function",beforeVisible:"function",visible:"boolean",emitter:"boolean",maxLength:"number",lockTime:"number",theme:"string",OPACITY:"object",FONT_SIZE:"object",MARGIN:"object",SPEED:"object",COLOR:"array"}}static get cssText(){return` user-select: none; position: absolute; white-space: pre; pointer-events: none; perspective: 500px; display: inline-block; will-change: transform; font-weight: normal; line-height: 1.125; visibility: hidden; font-family: SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif; text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px; `}get isRotate(){return this.art.plugins?.autoOrientation?.state}get marginTop(){let{clamp:e}=this.utils,t=this.option.margin[0],{clientHeight:i}=this.$player;return"number"==typeof t?e(t,0,i):"string"==typeof t&&t.endsWith("%")?e(i*(Number.parseFloat(t)/100),0,i):l.option.margin[0]}get marginBottom(){let{clamp:e}=this.utils,t=this.option.margin[1],{clientHeight:i}=this.$player;return"number"==typeof t?e(t,0,i):"string"==typeof t&&t.endsWith("%")?e(i*(Number.parseFloat(t)/100),0,i):l.option.margin[1]}get fontSize(){let{clamp:e}=this.utils,{clientHeight:t}=this.$player,i=this.option.fontSize;return"number"==typeof i?Math.round(e(i,12,t)):"string"==typeof i&&i.endsWith("%")?Math.round(e(t*(Number.parseFloat(i)/100),12,t)):l.option.fontSize}get $ref(){let e=this.$refs.pop()||document.createElement("div");return e.style.cssText=l.cssText,e.dataset.mode="",e.dataset.id="",e.className="",e}get readys(){let{currentTime:e}=this.art,t=[];return this.filter("ready",e=>t.push(e)),this.filter("wait",i=>{e+.1>=i.time&&i.time>=e-.1&&t.push(i)}),t}get visibles(){let e=[],{clientWidth:t}=this.$player,i=this.getLeft(this.$player);return this.filter("emit",a=>{let o=a.$ref.offsetTop,n=this.getLeft(a.$ref)-i,s=a.$ref.clientHeight,r=a.$ref.clientWidth,l=n+r,d=l/a.$restTime,p={};p.top=o,p.left=n,p.height=s,p.width=r,p.right=t-l,p.speed=d,p.distance=l,p.time=a.$restTime,p.mode=a.mode,e.push(p)}),e}get speed(){return this.option.synchronousPlayback&&this.art.playbackRate?this.option.speed/Number(this.art.playbackRate):this.option.speed}async load(e){let{errorHandle:t}=this.utils,i=[],a=e||this.option.danmuku;try{"function"==typeof a?i=await a():a instanceof Promise?i=await a:"string"==typeof a?i=await (0,r.bilibiliDanmuParseFromUrl)(a):Array.isArray(a)&&(i=a),t(Array.isArray(i),"Danmuku need return an array as result"),void 0===e&&(this.reset(),this.queue=[],this.states={wait:[],ready:[],emit:[],stop:[]},this.$refs=[],this.$danmuku.textContent="");for(let e=0;e<i.length;e++){let t=i[e];await this.emit(t)}this.art.emit("artplayerPluginDanmuku:loaded",this.queue)}catch(e){throw this.art.emit("artplayerPluginDanmuku:error",e),e}return this}async emit(e){let{clamp:t}=this.utils;if(this.validator(e,{id:"?string",text:"string",mode:"?number",color:"?string",time:"?number",border:"?boolean",style:"?object"}),!e.text.trim()||(e.time?e.time=t(e.time,0,1/0):e.time=this.art.currentTime+.5,void 0===e.mode&&(e.mode=this.option.mode),void 0===e.style&&(e.style={}),void 0===e.color&&(e.color=this.option.color),![0,1,2].includes(e.mode)||!this.option.filter(e)))return this;let i={...e,$state:"wait",$index:this.index++,$ref:null,$restTime:0,$lastStartTime:0};return this.setState(i,"wait"),this.queue.push(i),this}config(e,t=!1){let{clamp:i}=this.utils,{$controlsCenter:a}=this.art.template;return(Object.keys(e).some(t=>JSON.stringify(this.option[t])!==JSON.stringify(e[t]))||t)&&(this.option=Object.assign({},l.option,this.option,e),this.validator(this.option,l.scheme),this.option.mode=i(this.option.mode,0,2),this.option.speed=i(this.option.speed,1,10),this.option.opacity=i(this.option.opacity,0,1),this.option.lockTime=i(this.option.lockTime,1,60),this.option.maxLength=i(this.option.maxLength,1,1e3),this.option.mount=this.option.mount||a,e.fontSize&&this.reset(),this.option.visible?this.show():this.hide(),this.art.emit("artplayerPluginDanmuku:config",this.option)),this}getLeft(e){let t=e.getBoundingClientRect();return this.isRotate?t.top:t.left}postMessage(e={}){return new Promise(t=>{e.id=Date.now(),this.worker.postMessage(e),this.worker.onmessage=i=>{let{data:a}=i;a.id===e.id&&t(a)}})}filter(e,t){let i=this.states[e]||[];for(let e=0;e<i.length;e++)t(i[e]);return i}setState(e,t){this.states[e.$state]=this.states[e.$state].filter(t=>t!==e),e.$state=t,e.$ref&&(e.$ref.dataset.state=t),this.states[t].push(e)}makeWait(e){this.setState(e,"wait"),e.$ref&&(e.$ref.style.cssText=l.cssText,e.$ref.style.visibility="hidden",e.$ref.style.marginLeft="0px",e.$ref.style.transform="translateX(0px)",e.$ref.style.transition="transform 0s linear 0s",this.$refs.push(e.$ref),e.$ref=null)}update(){let{setStyles:e}=this.utils;return this.timer=window.requestAnimationFrame(async()=>{if(this.art.playing&&!this.isHide){this.filter("emit",e=>{let t=(Date.now()-e.$lastStartTime)/1e3;e.$restTime-=t,e.$lastStartTime=Date.now(),e.$restTime<=0&&this.makeWait(e)});let t=this.readys;for(let i=0;i<t.length;i++){let a=t[i];if(await this.option.beforeVisible(a)){let{clientWidth:t,clientHeight:i}=this.$player;a.$ref=this.$ref,a.$ref.textContent=a.text,this.$danmuku.appendChild(a.$ref),a.$ref.style.opacity=this.option.opacity,a.$ref.style.fontSize=`${this.fontSize}px`,a.$ref.style.color=a.color,a.$ref.style.border=a.border?`1px solid ${a.color}`:null,a.$ref.style.backgroundColor=a.border?"rgb(0 0 0 / 50%)":null,e(a.$ref,a.style),a.$lastStartTime=Date.now(),a.$restTime=this.speed;let o=t+a.$ref.clientWidth,{result:n}=await this.postMessage({type:"getDanmuTop",target:{mode:a.mode,height:a.$ref.clientHeight,speed:o/a.$restTime},visibles:this.visibles,antiOverlap:this.option.antiOverlap,clientWidth:t,clientHeight:i,marginBottom:this.marginBottom,marginTop:this.marginTop});if(a.$ref)if(this.isStop||void 0===n)this.setState(a,"ready"),this.$refs.push(a.$ref),a.$ref=null;else{switch(this.setState(a,"emit"),a.$ref.style.top=`${n}px`,a.$ref.style.visibility="visible",a.$ref.dataset.mode=a.mode,a.$ref.dataset.id=a.id||"",a.mode){case 0:a.$ref.style.left=`${t}px`,a.$ref.style.marginLeft="0px",a.$ref.style.transform=`translateX(${-o}px)`,a.$ref.style.transition=`transform ${a.$restTime}s linear 0s`;break;case 1:case 2:a.$ref.style.left="50%",a.$ref.style.marginLeft=`-${a.$ref.clientWidth/2}px`}this.art.emit("artplayerPluginDanmuku:visible",a)}}}}this.isStop||this.update()}),this}resize(){let{clientWidth:e}=this.$player;this.filter("stop",t=>{0===t.mode&&(t.$ref.style.left=`${e}px`)}),this.filter("emit",t=>{if(t.$lastStartTime=Date.now(),0===t.mode){let i=e+t.$ref.clientWidth;t.$ref.style.left=`${e}px`,t.$ref.style.transform=`translateX(${-i}px)`,t.$ref.style.transition=`transform ${t.$restTime}s linear 0s`}})}continue(){let{clientWidth:e}=this.$player;return this.filter("stop",t=>{if(this.setState(t,"emit"),t.$lastStartTime=Date.now(),0===t.mode){let i=e+t.$ref.clientWidth;t.$ref.style.transform=`translateX(${-i}px)`,t.$ref.style.transition=`transform ${t.$restTime}s linear 0s`}}),this}suspend(){let{clientWidth:e}=this.$player;return this.filter("emit",t=>{if(this.setState(t,"stop"),0===t.mode){let i=e-(this.getLeft(t.$ref)-this.getLeft(this.$player));t.$ref.style.transform=`translateX(${-i}px)`,t.$ref.style.transition="transform 0s linear 0s"}}),this}stop(){return this.isStop=!0,this.suspend(),window.cancelAnimationFrame(this.timer),this.art.emit("artplayerPluginDanmuku:stop"),this}start(){return this.isStop=!1,this.continue(),this.update(),this.art.emit("artplayerPluginDanmuku:start"),this}reset(){return this.queue.forEach(e=>this.makeWait(e)),this.art.emit("artplayerPluginDanmuku:reset"),this}show(){return this.isHide=!1,this.$danmuku.style.opacity=1,this.option.visible=!0,this.art.emit("artplayerPluginDanmuku:show"),this}hide(){return this.isHide=!0,this.$danmuku.style.opacity=0,this.option.visible=!1,this.art.emit("artplayerPluginDanmuku:hide"),this}destroy(){this.stop(),this.worker.terminate(),this.art.off("video:play",this.start),this.art.off("video:playing",this.start),this.art.off("video:pause",this.stop),this.art.off("video:waiting",this.stop),this.art.off("resize",this.reset),this.art.off("destroy",this.destroy),this.art.emit("artplayerPluginDanmuku:destroy")}}i.default=l},{"bundle-text:./worker":"eStRD","./bilibili":"f9FoX","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],eStRD:[function(e,t,i,a){t.exports='!function(e,t,r,o,i,n,u,l){var f="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},p="function"==typeof f[o]&&f[o],s=p.i||{},d=p.cache||{},a="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function h(t,r){if(!d[t]){if(!e[t]){if(i[t])return i[t];var n="function"==typeof f[o]&&f[o];if(!r&&n)return n(t,!0);if(p)return p(t,!0);if(a&&"string"==typeof t)return a(t);var u=Error("Cannot find module \'"+t+"\'");throw u.code="MODULE_NOT_FOUND",u}s.resolve=function(r){var o=e[t][1][r];return null!=o?o:r},s.cache={};var l=d[t]=new h.Module(t);e[t][0].call(l.exports,s,l,l.exports,f)}return d[t].exports;function s(e){var t=s.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var r={__esModule:!0};return t.forEach(function(e){var t=e[0],o=e[1],i=e[2]||e[0],n=h(o);"*"===t?Object.keys(n).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(r,e)||Object.defineProperty(r,e,{enumerable:!0,get:function(){return n[e]}})}):"*"===i?Object.defineProperty(r,t,{enumerable:!0,value:n}):Object.defineProperty(r,t,{enumerable:!0,get:function(){return"default"===i?n.__esModule?n.default:n:n[i]}})}),r}return h(t)}}h.isParcelRequire=!0,h.Module=function(e){this.id=e,this.bundle=h,this.require=a,this.exports={}},h.modules=e,h.cache=d,h.parent=p,h.distDir=void 0,h.publicUrl=void 0,h.devServer=void 0,h.i=s,h.register=function(t,r){e[t]=[function(e,t){t.exports=r},{}]},Object.defineProperty(h,"root",{get:function(){return f[o]}}),f[o]=h;for(var c=0;c<t.length;c++)h(t[c]);if(r){var g=h(r);"object"==typeof exports&&"u">typeof module?module.exports=g:"function"==typeof define&&define.amd&&define(function(){return g})}}({b8YFA:[function(e,t,r,o){function i({target:e,visibles:t,clientWidth:r,clientHeight:o,marginBottom:i,marginTop:n,antiOverlap:u}){let l=o-i,f=t.filter(t=>t.mode===e.mode&&t.top<=l).sort((e,t)=>e.top-t.top);if(0===f.length)if(2===e.mode)return l-e.height;else return n;if(f.unshift({type:"top",top:0,left:0,right:0,height:n,width:r,speed:0,distance:r}),f.push({type:"bottom",top:l,left:0,right:0,height:i,width:r,speed:0,distance:r}),2===e.mode)for(let t=f.length-2;t>=0;t-=1){let r=f[t],o=f[t+1],i=r.top+r.height;if(o.top-i>=e.height)return o.top-e.height}else for(let t=1;t<f.length;t+=1){let r=f[t],o=f[t-1],i=o.top+o.height;if(r.top-i>=e.height)return i}let p=[];for(let e=1;e<f.length-1;e+=1){let t=f[e];if(p.length){let e=p[p.length-1];e[0].top===t.top?e.push(t):p.push([t])}else p.push([t])}if(u)switch(e.mode){case 0:{let t=p.find(t=>t.every(t=>!(r<t.distance)&&(!!(e.speed<t.speed)||!!(t.right/(e.speed-t.speed)>t.time))));return t&&t[0]?t[0].top:void 0}case 1:case 2:return}else{switch(e.mode){case 0:p.sort((e,t)=>{let r=Math.min(...t.map(e=>e.right)),o=Math.min(...e.map(e=>e.right));return r*t.length-o*e.length});break;case 1:case 2:p.sort((e,t)=>{let r=Math.max(...t.map(e=>e.width));return Math.max(...e.map(e=>e.width))*e.length-r*t.length})}return p[0][0].top}}onmessage=e=>{let{data:t}=e;t.id&&t.type&&globalThis.postMessage({result:(0,({getDanmuTop:i})[t.type])(t),id:t.id})}},{}]},["b8YFA"],"b8YFA","parcelRequire4dc0",{});let{"*":e}=parcelRequire4dc0("b8YFA");export{e as default};'},{}],f9FoX:[function(e,t,i,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function n(e){switch(e){case 1:case 2:case 3:default:return 0;case 4:return 2;case 5:return 1}}function s(e){return"string"!=typeof e?[]:Array.from(e.matchAll(/<d[^>]*?p="(?<p>[^"]+)"[^>]*>(?<text>.*?)<\/d>/gs)).map(e=>{let t=e.groups.p.split(",");return t.length>=8?{text:e.groups.text.trim().replaceAll("&quot;",'"').replaceAll("&apos;","'").replaceAll("&lt;","<").replaceAll("&gt;",">").replaceAll("&amp;","&"),time:Number(t[0]),mode:n(Number(t[1])),fontSize:Number(t[2]),color:`#${Number(t[3]).toString(16)}`,timestamp:Number(t[4]),pool:Number(t[5]),userID:t[6],rowID:Number(t[7])}:null}).filter(Boolean)}function r({data:e}){let{xml:t,id:i}=e;i&&t&&globalThis.postMessage({danmus:s(t),id:i})}function l(e){return new Promise(async t=>{let i=await fetch(e),a=await i.text();try{let e,i=(e=new Blob([` ${n.toString()} ${s.toString()} onmessage = ${r.toString()} `],{type:"application/javascript"}),new Worker(URL.createObjectURL(e)));i.onmessage=e=>{let{danmus:a,id:o}=e.data;o&&a&&(t(a),i.terminate())},i.postMessage({xml:a,id:Date.now()})}catch(e){console.error("Error parsing Bilibili Danmu:",e),t(s(a))}})}o.defineInteropFlag(i),o.export(i,"bilibiliDanmuParseFromUrl",()=>l)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],loqXi:[function(e,t,i,a){i.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},i.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},i.exportAll=function(e,t){return Object.keys(e).forEach(function(i){"default"===i||"__esModule"===i||Object.prototype.hasOwnProperty.call(t,i)||Object.defineProperty(t,i,{enumerable:!0,get:function(){return e[i]}})}),t},i.export=function(e,t,i){Object.defineProperty(e,t,{enumerable:!0,get:i})}},{}],"9KNY2":[function(e,t,i,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(i),o.export(i,"default",()=>s);let n={map:(e,t,i,a,o)=>(e-t)*(o-a)/(i-t)+a,range(e,t,i){let a=Math.round(e/i)*i;return Array.from({length:Math.floor((t-e)/i)},(e,t)=>t*i+a)}};function s(e,t,i){let{query:a}=e.constructor.utils;e.controls.add({name:"heatmap",position:"top",html:"",style:{position:"absolute",top:"-100px",left:"0px",right:"0px",height:"100px",width:"100%",pointerEvents:"none"},mounted(o){let s=null,r=null;function l(d=[]){if(s=null,r=null,o.innerHTML="",!e.duration||e.option.isLive)return;let p={w:o.offsetWidth,h:o.offsetHeight},u={xMin:0,xMax:p.w,yMin:0,yMax:128,scale:.25,opacity:.2,minHeight:Math.floor(.05*p.h),sampling:Math.floor(p.w/100),smoothing:.2,flattening:.2};"object"==typeof i&&Object.assign(u,i);let h=[];if(Array.isArray(d)&&d.length)h=[...d];else{let i=e.duration/p.w;for(let e=0;e<=p.w;e+=u.sampling){let a=t.queue.filter(({time:t})=>t>e*i&&t<=(e+u.sampling)*i).length;h.push([e,a])}}if(0===h.length)return;let m=h[h.length-1],c=m[0],f=m[1];c!==p.w&&h.push([p.w,f]);let g=h.map(e=>e[1]),y=(Math.min(...g)+Math.max(...g))/2;for(let e=0;e<h.length;e++){let t=h[e],i=t[1];t[1]=i*(i>y?1+u.scale:1-u.scale)+u.minHeight}let v=(e,t,i,a)=>{let o,s,r=t||e,l=i||e,d=(o=l[0]-r[0],{length:Math.sqrt(o**2+(s=l[1]-r[1])**2),angle:Math.atan2(s,o)}),p=n.map(Math.cos(d.angle)*u.flattening,0,1,1,0),h=d.angle*p+(a?Math.PI:0),m=d.length*u.smoothing;return[e[0]+Math.cos(h)*m,e[1]+Math.sin(h)*m]},x=h.map(e=>[n.map(e[0],u.xMin,u.xMax,0,p.w),n.map(e[1],u.yMin,u.yMax,p.h,0)]).reduce((e,t,i,a)=>{let o,n,s;return 0===i?`M ${a[a.length-1][0]},${p.h} L ${t[0]},${p.h} L ${t[0]},${t[1]}`:`${e} ${o=v(a[i-1],a[i-2],t),n=v(t,a[i-1],a[i+1],!0),s=i===a.length-1?" z":"",`C ${o[0]},${o[1]} ${n[0]},${n[1]} ${t[0]},${t[1]}${s}`}`},"");o.innerHTML=`<svg viewBox="0 0 ${p.w} ${p.h}"><defs><linearGradient id="heatmap-solids" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${u.opacity}" /><stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${u.opacity}" id="heatmap-start" /><stop offset="0%" style="stop-color:var(--art-progress-color);stop-opacity:1" id="heatmap-stop" /><stop offset="100%" style="stop-color:var(--art-progress-color);stop-opacity:1" /></linearGradient></defs><path fill="url(#heatmap-solids)" d="${x}"></path></svg>`,s=a("#heatmap-start",o),r=a("#heatmap-stop",o),s.setAttribute("offset",`${100*e.played}%`),r.setAttribute("offset",`${100*e.played}%`)}e.on("video:timeupdate",()=>{s&&r&&(s.setAttribute("offset",`${100*e.played}%`),r.setAttribute("offset",`${100*e.played}%`))}),e.on("setBar",(e,t)=>{s&&r&&"played"===e&&(s.setAttribute("offset",`${100*t}%`),r.setAttribute("offset",`${100*t}%`))}),e.on("ready",()=>l()),e.on("resize",()=>l()),e.on("artplayerPluginDanmuku:loaded",()=>l()),e.on("artplayerPluginDanmuku:points",e=>l(e))}})}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"94xSe":[function(e,t,i,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(i);var n=e("bundle-text:./img/check_off.svg"),s=o.interopDefault(n),r=e("bundle-text:./img/check_on.svg"),l=o.interopDefault(r),d=e("bundle-text:./img/config.svg"),p=o.interopDefault(d),u=e("bundle-text:./img/mode_0_off.svg"),h=o.interopDefault(u),m=e("bundle-text:./img/mode_0_on.svg"),c=o.interopDefault(m),f=e("bundle-text:./img/mode_1_off.svg"),g=o.interopDefault(f),y=e("bundle-text:./img/mode_1_on.svg"),v=o.interopDefault(y),x=e("bundle-text:./img/mode_2_off.svg"),b=o.interopDefault(x),k=e("bundle-text:./img/mode_2_on.svg"),$=o.interopDefault(k),w=e("bundle-text:./img/off.svg"),M=o.interopDefault(w),D=e("bundle-text:./img/on.svg"),S=o.interopDefault(D),E=e("bundle-text:./img/style.svg"),O=o.interopDefault(E),A=e("bundle-text:./style.less"),q=o.interopDefault(A);if(i.default=class{constructor(e,t){this.art=e,this.danmuku=t,this.utils=e.constructor.utils;let{setStyle:i}=this.utils,{$controlsCenter:a}=e.template;i(a,"display","flex"),this.template={$controlsCenter:a,$mount:a,$danmuku:null,$toggle:null,$config:null,$configPanel:null,$configModes:null,$style:null,$stylePanel:null,$styleModes:null,$colors:null,$opacitySlider:null,$opacityValue:null,$marginSlider:null,$marginValue:null,$fontSizeSlider:null,$fontSizeValue:null,$speedSlider:null,$speedValue:null,$input:null,$send:null},this.slider={opacity:null,margin:null,fontSize:null,speed:null},this.emitting=!1,this.isLock=!1,this.timer=null,this.createTemplate(),this.createSliders(),this.createEvents(),this.mount(this.option.mount),e.on("resize",()=>this.resize()),e.on("fullscreen",e=>this.onFullscreen(e)),e.on("fullscreenWeb",e=>this.onFullscreen(e)),e.proxy(this.template.$config,"mouseenter",()=>{this.onMouseEnter({$control:this.template.$config,$panel:this.template.$configPanel})}),e.proxy(this.template.$style,"mouseenter",()=>{this.onMouseEnter({$control:this.template.$style,$panel:this.template.$stylePanel})})}static get icons(){return{$on:S.default,$off:M.default,$config:p.default,$style:O.default,$mode_0_off:h.default,$mode_0_on:c.default,$mode_1_off:g.default,$mode_1_on:v.default,$mode_2_off:b.default,$mode_2_on:$.default,$check_on:l.default,$check_off:s.default}}get option(){return this.danmuku.option}get outside(){return this.template.$mount!==this.template.$controlsCenter}get TEMPLATE(){let{option:e}=this;return`<div class="apd-toggle">${S.default}${M.default}</div><div class="apd-config">${p.default}<div class="apd-config-panel"><div class="apd-config-panel-inner"><div class="apd-config-mode">\u{6309}\u{7C7B}\u{578B}\u{5C4F}\u{853D}<div class="apd-modes"><div data-mode="0" class="apd-mode">${h.default}${c.default}<div>\u{6EDA}\u{52A8}</div></div><div data-mode="1" class="apd-mode">${g.default}${v.default}<div>\u{9876}\u{90E8}</div></div><div data-mode="2" class="apd-mode">${b.default}${$.default}<div>\u{5E95}\u{90E8}</div></div></div></div><div class="apd-config-other"><div class="apd-other apd-anti-overlap">${l.default}${s.default} \u{9632}\u{6B62}\u{5F39}\u{5E55}\u{91CD}\u{53E0}</div><div class="apd-other apd-sync-video">${l.default}${s.default} \u{540C}\u{6B65}\u{89C6}\u{9891}\u{901F}\u{5EA6}</div></div><div class="apd-config-slider apd-config-opacity">\u{4E0D}\u{900F}\u{660E}\u{5EA6}<div class="apd-slider"></div><div class="apd-value">\u{672A}\u{77E5}</div></div><div class="apd-config-slider apd-config-margin">\u{663E}\u{793A}\u{533A}\u{57DF}<div class="apd-slider"></div><div class="apd-value">\u{672A}\u{77E5}</div></div><div class="apd-config-slider apd-config-fontSize">\u{5F39}\u{5E55}\u{5B57}\u{53F7}<div class="apd-slider"></div><div class="apd-value">\u{672A}\u{77E5}</div></div><div class="apd-config-slider apd-config-speed">\u{5F39}\u{5E55}\u{901F}\u{5EA6}<div class="apd-slider"></div><div class="apd-value">\u{672A}\u{77E5}</div></div></div></div></div><div class="apd-emitter"><div class="apd-style">${O.default}<div class="apd-style-panel"><div class="apd-style-panel-inner"><div class="apd-style-mode">\u{6A21}\u{5F0F}<div class="apd-modes"><div data-mode="0" class="apd-mode">${c.default}<div>\u{6EDA}\u{52A8}</div></div><div data-mode="1" class="apd-mode">${v.default}<div>\u{9876}\u{90E8}</div></div><div data-mode="2" class="apd-mode">${$.default}<div>\u{5E95}\u{90E8}</div></div></div></div><div class="apd-style-color">\u{989C}\u{8272}<div class="apd-colors">${this.COLOR.map(e=>`<div data-color="${e}" class="apd-color" style="background-color: ${e}"></div>`).join("")}</div></div></div></div></div><input class="apd-input" placeholder="\u{53D1}\u{4E2A}\u{53CB}\u{5584}\u{7684}\u{5F39}\u{5E55}\u{89C1}\u{8BC1}\u{5F53}\u{4E0B}" autocomplete="off" maxLength="${e.maxLength}" /><div class="apd-send">\u{53D1}\u{9001}</div></div>`}get OPACITY(){return{min:0,max:100,steps:[],...this.option.OPACITY}}get FONT_SIZE(){return{min:12,max:120,steps:[],...this.option.FONT_SIZE}}get MARGIN(){return{min:0,max:3,steps:[{name:"1/4",value:[10,"75%"]},{name:"半屏",value:[10,"50%"]},{name:"3/4",value:[10,"25%"]},{name:"满屏",value:[10,10]}],...this.option.MARGIN}}get SPEED(){return{min:0,max:4,steps:[{name:"极慢",value:10},{name:"较慢",value:7.5,hide:!0},{name:"适中",value:5},{name:"较快",value:2.5,hide:!0},{name:"极快",value:1}],...this.option.SPEED}}get COLOR(){return this.option.COLOR.length?this.option.COLOR:["#FE0302","#FF7204","#FFAA02","#FFD302","#FFFF00","#A0EE00","#00CD00","#019899","#4266BE","#89D5FF","#CC0273","#222222","#9B9B9B","#FFFFFF"]}query(e){let{query:t}=this.utils,{$danmuku:i}=this.template;return t(e,i)}append(e,t){let{append:i}=this.utils;[...e.children].includes(t)||i(e,t)}setData(e,t){let{$player:i}=this.art.template,{$mount:a}=this.template;i.dataset[e]=t,this.outside&&(a.dataset[e]=t)}createTemplate(){let{createElement:e,tooltip:t}=this.utils,i=e("div");i.className="artplayer-plugin-danmuku",i.innerHTML=this.TEMPLATE,this.template.$danmuku=i,this.template.$toggle=this.query(".apd-toggle"),this.template.$config=this.query(".apd-config"),this.template.$configPanel=this.query(".apd-config-panel"),this.template.$configModes=this.query(".apd-config-mode .apd-modes"),this.template.$style=this.query(".apd-style"),this.template.$stylePanel=this.query(".apd-style-panel"),this.template.$styleModes=this.query(".apd-style-mode .apd-modes"),this.template.$colors=this.query(".apd-colors"),this.template.$antiOverlap=this.query(".apd-anti-overlap"),this.template.$syncVideo=this.query(".apd-sync-video"),this.template.$opacitySlider=this.query(".apd-config-opacity .apd-slider"),this.template.$opacityValue=this.query(".apd-config-opacity .apd-value"),this.template.$marginSlider=this.query(".apd-config-margin .apd-slider"),this.template.$marginValue=this.query(".apd-config-margin .apd-value"),this.template.$fontSizeSlider=this.query(".apd-config-fontSize .apd-slider"),this.template.$fontSizeValue=this.query(".apd-config-fontSize .apd-value"),this.template.$speedSlider=this.query(".apd-config-speed .apd-slider"),this.template.$speedValue=this.query(".apd-config-speed .apd-value"),this.template.$input=this.query(".apd-input"),this.template.$send=this.query(".apd-send");let{$toggle:a}=this.template;this.art.on("artplayerPluginDanmuku:show",()=>{t(a,"关闭弹幕")}),this.art.on("artplayerPluginDanmuku:hide",()=>{t(a,"打开弹幕")})}createEvents(){let{$toggle:e,$configModes:t,$styleModes:i,$colors:a,$antiOverlap:o,$syncVideo:n,$send:s,$input:r}=this.template;this.art.proxy(e,"click",()=>{this.danmuku.config({visible:!this.option.visible}),this.reset()}),this.art.proxy(t,"click",e=>{let t=e.target.closest(".apd-mode");if(!t)return;let i=Number(t.dataset.mode);this.option.modes.includes(i)?this.danmuku.config({modes:this.option.modes.filter(e=>e!==i)}):this.danmuku.config({modes:[...this.option.modes,i]}),this.reset()}),this.art.proxy(o,"click",()=>{this.danmuku.config({antiOverlap:!this.option.antiOverlap}),this.reset()}),this.art.proxy(n,"click",()=>{this.danmuku.config({synchronousPlayback:!this.option.synchronousPlayback}),this.reset()}),this.art.proxy(i,"click",e=>{let t=e.target.closest(".apd-mode");if(!t)return;let i=Number(t.dataset.mode);this.danmuku.config({mode:i}),this.reset()}),this.art.proxy(a,"click",e=>{let t=e.target.closest(".apd-color");t&&(this.danmuku.config({color:t.dataset.color}),this.reset())}),this.art.proxy(s,"click",()=>this.emit()),this.art.proxy(r,"keypress",e=>{"Enter"===e.key&&(e.preventDefault(),this.emit())})}createSliders(){this.slider.opacity=this.createSlider({...this.OPACITY,container:this.template.$opacitySlider,findIndex:()=>Math.round(100*this.option.opacity),onChange:e=>{let{$opacityValue:t}=this.template;t.textContent=`${e}%`,this.danmuku.config({opacity:e/100})}}),this.slider.margin=this.createSlider({...this.MARGIN,container:this.template.$marginSlider,findIndex:()=>this.MARGIN.steps.findIndex(e=>e.value[0]===this.option.margin[0]&&e.value[1]===this.option.margin[1]),onChange:e=>{let t=this.MARGIN.steps[e];if(!t)return;let{$marginValue:i}=this.template;i.textContent=t.name,this.danmuku.config({margin:t.value})}}),this.slider.fontSize=this.createSlider({...this.FONT_SIZE,container:this.template.$fontSizeSlider,findIndex:()=>this.danmuku.fontSize,onChange:e=>{let{$fontSizeValue:t}=this.template;t.textContent=`${e}px`,e!==this.danmuku.fontSize&&this.danmuku.config({fontSize:e})}}),this.slider.speed=this.createSlider({...this.SPEED,container:this.template.$speedSlider,findIndex:()=>this.SPEED.steps.findIndex(e=>e.value===this.option.speed),onChange:e=>{let t=this.SPEED.steps[e];if(!t)return;let{$speedValue:i}=this.template;i.textContent=t.name,this.danmuku.config({speed:t.value})}})}createSlider({min:e,max:t,container:i,findIndex:a,onChange:o,steps:n=[]}){let{query:s,clamp:r,setStyle:l}=this.utils;l(i,"touch-action","none"),i.innerHTML=`<div class="apd-slider-line"><div class="apd-slider-points">${n.map(()=>'<div class="apd-slider-point"></div>').join("")}</div><div class="apd-slider-progress"></div></div><div class="apd-slider-dot"></div><div class="apd-slider-steps">${n.map(e=>e.hide?"":`<div class="apd-slider-step">${e.name}</div>`).join("")}</div>`;let d=s(".apd-slider-dot",i),p=s(".apd-slider-progress",i),u=!1;function h(i=a()){if(i<e||i>t)return;let s=(i-e)/(t-e);d.style.left=`${100*s}%`,0===n.length&&(p.style.width=d.style.left),o(i)}function m(a){let{top:o,height:n,left:s,width:l}=i.getBoundingClientRect();this.art.isRotate?h(Math.round(r(a.clientY-o,0,n)/n*(t-e)+e)):h(Math.round(r(a.clientX-s,0,l)/l*(t-e)+e))}return this.art.proxy(i,"click",e=>{m.call(this,e)}),this.art.proxy(i,"pointerdown",e=>{u=0===e.button}),this.art.on("document:pointermove",e=>{u&&m.call(this,e)}),this.art.on("document:pointerup",e=>{u&&(u=!1,m.call(this,e))}),{reset:h}}onFullscreen(e){let{$danmuku:t,$controlsCenter:i,$mount:a}=this.template;this.outside?e?this.append(i,t):this.append(a,t):this.append(i,t)}onMouseEnter({$control:e,$panel:t}){let{$player:i}=this.art.template,a=e.getBoundingClientRect(),o=t.getBoundingClientRect(),n=i.getBoundingClientRect(),s=o.width/2-a.width/2,r=n.left-(a.left-s),l=a.right+s-n.right;r>0?t.style.left=`${-s+r}px`:l>0?t.style.left=`${-s-l}px`:t.style.left=`${-s}px`}async emit(){let{$input:e}=this.template,t=e.value.trim();if(!t.length||this.isLock||this.emitting)return;let i={text:t,mode:this.option.mode,color:this.option.color,time:this.art.currentTime};try{this.emitting=!0;let t=await this.option.beforeEmit(i);if(this.emitting=!1,!0!==t)return;i.border=!0,delete i.time,this.danmuku.emit(i),e.value="",this.lock()}catch(e){console.error("Error emitting danmuku:",e),this.emitting=!1}}lock(){let{addClass:e}=this.utils,{$send:t}=this.template;this.isLock=!0;let i=this.option.lockTime;t.textContent=i,e(t,"apd-lock");let a=()=>{this.timer=setTimeout(()=>{0===i?this.unlock():(t.textContent=i-=1,a())},1e3)};a()}unlock(){let{removeClass:e}=this.utils,{$send:t}=this.template;clearTimeout(this.timer),this.isLock=!1,t.textContent="发送",e(t,"apd-lock")}resize(){if(this.outside||this.art.fullscreen||this.art.fullscreenWeb)return;let{$player:e,$controlsCenter:t}=this.art.template,{$danmuku:i}=this.template;this.art.width<this.option.width?this.append(e,i):this.append(t,i)}reset(){let{inverseClass:e,tooltip:t}=this.utils,{$toggle:i,$colors:a}=this.template;this.slider.opacity.reset(),this.slider.margin.reset(),this.slider.fontSize.reset(),this.slider.speed.reset(),this.setData("danmukuVisible",this.option.visible),this.setData("danmukuMode",this.option.mode),this.setData("danmukuColor",this.option.color),this.setData("danmukuMode0",this.option.modes.includes(0)),this.setData("danmukuMode1",this.option.modes.includes(1)),this.setData("danmukuMode2",this.option.modes.includes(2)),this.setData("danmukuAntiOverlap",this.option.antiOverlap),this.setData("danmukuSyncVideo",this.option.synchronousPlayback),this.setData("danmukuTheme",this.option.theme),this.setData("danmukuEmitter",this.option.emitter);let o=Array.from(a.children).find(e=>e.dataset.color===this.option.color.toUpperCase());o&&e(o,"apd-active"),t(i,this.option.visible?"关闭弹幕":"打开弹幕"),this.resize()}mount(e){let{errorHandle:t}=this.utils,i="string"==typeof e?document.querySelector(e):e;t(i,`Can not find the mount point: ${e}`),this.append(i,this.template.$danmuku),this.template.$mount=i,this.reset()}},"u">typeof document){let e="artplayer-plugin-danmuku",t=document.getElementById(e);t||((t=document.createElement("style")).id=e,"loading"===document.readyState?document.addEventListener("DOMContentLoaded",()=>{document.head.appendChild(t)}):(document.head||document.documentElement).appendChild(t)),t.textContent=q.default}},{"bundle-text:./img/check_off.svg":"im46l","bundle-text:./img/check_on.svg":"ltwtZ","bundle-text:./img/config.svg":"8OIDW","bundle-text:./img/mode_0_off.svg":"5p0NW","bundle-text:./img/mode_0_on.svg":"6UO2K","bundle-text:./img/mode_1_off.svg":"3NEwu","bundle-text:./img/mode_1_on.svg":"i22mQ","bundle-text:./img/mode_2_off.svg":"61WC2","bundle-text:./img/mode_2_on.svg":"aE6Hl","bundle-text:./img/off.svg":"jKHHh","bundle-text:./img/on.svg":"iryDR","bundle-text:./img/style.svg":"4Oibx","bundle-text:./style.less":"bjrFj","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],im46l:[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="apd-icon apd-check-off" data-pointer="none" viewBox="0 0 32 32"><path fill="#fff" d="M8 6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Zm0-2h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4"/></svg>'},{}],ltwtZ:[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="apd-icon apd-check-on" data-pointer="none" viewBox="0 0 32 32"><path fill="#00aeec" d="m13 18.25-1.8-1.8c-.6-.6-1.65-.6-2.25 0s-.6 1.5 0 2.25l2.85 2.85c.318.318.762.468 1.2.448.438.02.882-.13 1.2-.448l8.85-8.85c.6-.6.6-1.65 0-2.25s-1.65-.6-2.25 0ZM8 4h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4"/></svg>'},{}],"8OIDW":[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="apd-icon apd-config-icon" data-pointer="none" viewBox="0 0 24 24"><path fill-rule="evenodd" d="m15.645 4.881 1.06-1.473a.998.998 0 1 0-1.622-1.166L13.22 4.835a111 111 0 0 0-1.1-.007h-.131q-.705 0-1.515.012L8.783 2.3A.998.998 0 0 0 7.12 3.408l.988 1.484q-1.033.028-2.188.069a4.01 4.01 0 0 0-3.83 3.44q-.246 1.725-.245 4.185-.001 2.947.35 5.116a4.01 4.01 0 0 0 3.763 3.363 100 100 0 0 0 5.513.141.988.988 0 0 0 0-1.975 98 98 0 0 1-5.416-.139 2.04 2.04 0 0 1-1.91-1.708q-.325-1.986-.325-4.798 0-2.344.225-3.904c.14-.977.96-1.713 1.945-1.747q3.666-.13 6.063-.131 2.398 0 6.064.13c.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.005.183.01.07.014-.038.004-.096.008-.189.011-.081a.987.987 0 1 0 1.974-.069c-.004-.105-.007-.009-.011.09a2 2 0 0 1-.007.135l-.002.01a1 1 0 0 1-.005-.091v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507q-1.357-.048-2.543-.079Zm-3.113 4.703h-1.307v4.643h2.2v.04l.651-1.234c.113-.215.281-.389.482-.509v-.11h.235q.207-.074.433-.074h1.553V9.584h-1.264a8.5 8.5 0 0 0 .741-1.405l-1.078-.381c-.24.631-.501 1.23-.806 1.786h-1.503l.686-.305a8.6 8.6 0 0 0-.806-1.394l-1.034.348c.294.392.566.839.817 1.35Zm-1.7 5.502h2.16l-.564 1.068h-1.595Zm-2.498-1.863.152-1.561h1.96V8.289H7.277v.969h2.048v1.435h-1.84l-.306 3.51h2.254c0 1.155-.043 1.906-.12 2.255-.076.348-.38.523-.925.523-.305 0-.61-.022-.893-.055l.294 1.056.061.005c.282.02.546.039.81.039.991-.065 1.547-.414 1.677-1.046.11-.631.175-1.883.175-3.757Zm5.09-.8v.85h-1.188v-.85h1.187Zm-1.188-.955h1.187v-.893h-1.187Zm2.322.007v-.893h1.241v.893Zm.528 2.757a1.26 1.26 0 0 1 1.087-.627l4.003-.009a1.26 1.26 0 0 1 1.094.63l1.721 2.982c.226.39.225.872-.001 1.263l-1.743 3a1.26 1.26 0 0 1-1.086.628l-4.003.009a1.26 1.26 0 0 1-1.094-.63l-1.722-2.982a1.26 1.26 0 0 1 .002-1.263Zm1.967.858a1.26 1.26 0 0 0-1.08.614l-.903 1.513a1.26 1.26 0 0 0-.002 1.289l.885 1.492c.227.384.64.62 1.086.618l2.192-.005a1.26 1.26 0 0 0 1.08-.615l.904-1.518a1.26 1.26 0 0 0 .001-1.288l-.884-1.489a1.26 1.26 0 0 0-1.086-.616Zm2.517 2.76a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0" clip-rule="evenodd"/></svg>'},{}],"5p0NW":[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="28" height="28" class="apd-icon apd-mode-0-off" data-pointer="none" viewBox="0 0 28 28"><path fill="#00aeec" d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15M11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2m-3 2H6V9h2Zm4 4h-2v-2h2Zm2-1a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1"/><path fill="#00aeec" d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071m-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586m4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001"/></svg>'},{}],"6UO2K":[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="28" height="28" class="apd-icon apd-mode-0-on" data-pointer="none" viewBox="0 0 28 28"><path fill="#fff" d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4M11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2m-3 2H6V9h2Zm4 4h-2v-2h2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2"/></svg>'},{}],"3NEwu":[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="28" height="28" class="apd-icon apd-mode-1-off" data-pointer="none" viewBox="0 0 28 28"><path fill="#00aeec" d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15m-4-8h2v2h-2ZM9 9H7V7h2Zm4 0h-2V7h2Zm2-2h2v2h-2Z"/><path fill="#00aeec" d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071m-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586m4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001"/></svg>'},{}],i22mQ:[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="28" height="28" class="apd-icon apd-mode-1-on" data-pointer="none" viewBox="0 0 28 28"><path fill="#fff" d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4M9 9H7V7h2Zm4 0h-2V7h2Zm4 0h-2V7h2Zm4 0h-2V7h2Z"/></svg>'},{}],"61WC2":[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="28" height="28" class="apd-icon apd-mode-2-off" data-pointer="none" viewBox="0 0 28 28"><path fill="#00aeec" d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15M9 21H7v-2h2Zm4 0h-2v-2h2Z"/><path fill="#00aeec" d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071m-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586m4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001"/></svg>'},{}],aE6Hl:[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="28" height="28" class="apd-icon apd-mode-2-on" data-pointer="none" viewBox="0 0 28 28"><path fill="#fff" d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4M9 21H7v-2h2Zm4 0h-2v-2h2Zm4 0h-2v-2h2Zm4 0h-2v-2h2Z"/></svg>'},{}],jKHHh:[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="apd-icon apd-toggle-off" data-pointer="none" viewBox="0 0 24 24"><path fill-rule="evenodd" d="m8.085 4.891-.999-1.499a1.008 1.008 0 0 1 1.679-1.118l1.709 2.566q.81-.012 1.515-.012h.13q.517 0 1.088.007l1.862-2.59a1.008 1.008 0 0 1 1.637 1.177l-1.049 1.46q1.182.03 2.53.078c1.958.069 3.468 1.6 3.74 3.507.088.613.13 2.158.16 3.276l.001.027c.01.333.017.63.025.856a.987.987 0 0 1-1.974.069c-.008-.23-.016-.539-.025-.881v-.002c-.028-1.103-.066-2.541-.142-3.065-.143-1.004-.895-1.78-1.854-1.813a179 179 0 0 0-6.064-.131q-2.397 0-6.063.13a2.04 2.04 0 0 0-1.945 1.748q-.225 1.56-.225 3.904.001 2.811.325 4.798c.154.949.95 1.66 1.91 1.708a98 98 0 0 0 5.416.139.988.988 0 0 1 0 1.975 100 100 0 0 1-5.513-.141A4.01 4.01 0 0 1 2.197 17.7q-.353-2.169-.351-5.116-.001-2.46.245-4.184A4.01 4.01 0 0 1 5.92 4.96q1.142-.04 2.164-.069Zm4.436 4.707h-1.32v4.63h2.222v.848h-2.618v1.078h2.431a5.01 5.01 0 0 1 3.575-3.115V9.598h-1.276a8.6 8.6 0 0 0 .748-1.42l-1.089-.384a14 14 0 0 1-.814 1.804h-1.518l.693-.308a9 9 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364m-4.18 3.564.154-1.485h1.98V8.289h-3.2v.979h2.067v1.43H7.483l-.308 3.454h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.004c.285.02.551.04.818.04 1.001-.066 1.562-.418 1.694-1.056.11-.638.176-1.903.176-3.795Zm7.458.11v-.858h-1.254v.858H15.8Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2Zm2.321 0v-.902H15.8v.902h-1.254Zm3.517 10.594a4 4 0 1 0 0-8 4 4 0 0 0 0 8m-.002-1.502a2.5 2.5 0 0 1-2.217-3.657l3.326 3.398a2.5 2.5 0 0 1-1.109.259m2.5-2.5c0 .42-.103.815-.286 1.162l-3.328-3.401a2.5 2.5 0 0 1 3.614 2.239" clip-rule="evenodd"/></svg>'},{}],iryDR:[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="apd-icon apd-toggle-on" data-pointer="none" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M11.989 4.828q-.705 0-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5q-1.022.027-2.164.068a4.01 4.01 0 0 0-3.83 3.44q-.246 1.725-.245 4.185-.001 2.947.35 5.116a4.01 4.01 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.04 2.04 0 0 1-1.91-1.708q-.325-1.987-.325-4.798 0-2.344.225-3.904c.14-.977.96-1.713 1.945-1.747q3.666-.13 6.063-.131 2.398 0 6.064.13c.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507q-1.35-.048-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59q-.571-.006-1.088-.007Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.6 8.6 0 0 0 .748-1.42L15.183 7.8a14 14 0 0 1-.814 1.804h-1.518l.693-.308a9 9 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795Zm7.458.11v-.858h-1.254v.858Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2Zm2.321 0v-.902h1.254v.902Z" clip-rule="evenodd"/><path fill="#00aeec" fill-rule="evenodd" d="M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005a1 1 0 0 0 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295" clip-rule="evenodd"/></svg>'},{}],"4Oibx":[function(e,t,i,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="36" height="24" class="apd-icon apd-style-icon" data-pointer="none" viewBox="0 0 22 22"><path d="M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1M6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34M11 5.98 12.87 11H9.13Z"/></svg>'},{}],bjrFj:[function(e,t,i,a){t.exports='.artplayer-plugin-danmuku{z-index:99;color:#fff;flex-shrink:0;justify-content:center;align-items:center;gap:10px;width:100%;height:32px;font-size:12px;font-weight:300;display:flex;position:relative}.artplayer-plugin-danmuku .apd-icon{cursor:pointer;opacity:.75;fill:#fff;transition:all .2s}.artplayer-plugin-danmuku .apd-icon:hover{opacity:1}.artplayer-plugin-danmuku .apd-config{display:flex;position:relative}.artplayer-plugin-danmuku .apd-config .apd-config-panel{opacity:0;pointer-events:none;width:320px;padding:10px;position:absolute;bottom:24px;left:0}.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner{background-color:#000000d9;border-radius:3px;width:100%;padding:10px}.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel{opacity:100;pointer-events:all}.artplayer-plugin-danmuku .apd-config-mode,.artplayer-plugin-danmuku .apd-config-slider,.artplayer-plugin-danmuku .apd-config-other,.artplayer-plugin-danmuku .apd-style-mode{margin-bottom:15px}.artplayer-plugin-danmuku .apd-modes{align-items:center;gap:20px;margin-top:5px;display:flex}.artplayer-plugin-danmuku .apd-modes .apd-mode{cursor:pointer;text-align:center}.artplayer-plugin-danmuku .apd-modes .apd-mode:hover{color:#00a1d6}.artplayer-plugin-danmuku .apd-config-slider{align-items:center;gap:12px;display:flex}.artplayer-plugin-danmuku .apd-config-slider .apd-value{text-align:right;width:32px}.artplayer-plugin-danmuku .apd-slider{cursor:pointer;flex:1;justify-content:center;align-items:center;height:20px;display:flex;position:relative}.artplayer-plugin-danmuku .apd-slider .apd-slider-line{background-color:#ffffff40;border-radius:3px;width:100%;height:2px;position:relative;overflow:hidden}.artplayer-plugin-danmuku .apd-slider .apd-slider-points{justify-content:space-between;align-items:center;display:flex;position:absolute;inset:0}.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point{background-color:#ffffff80;border-radius:50%;width:2px;height:2px}.artplayer-plugin-danmuku .apd-slider .apd-slider-progress{background-color:#00a1d6;width:0%;height:100%}.artplayer-plugin-danmuku .apd-slider .apd-slider-dot{background-color:#00a1d6;border-radius:50%;width:12px;height:12px;position:absolute;left:0%;transform:translate(-6px)}.artplayer-plugin-danmuku .apd-slider .apd-slider-steps{color:#777;justify-content:space-between;align-items:center;width:calc(100% + 32px);display:flex;position:absolute;bottom:-12px}.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step{text-align:center;flex-shrink:0;width:36px;scale:.95}.artplayer-plugin-danmuku .apd-config-other{align-items:center;gap:20px;display:flex}.artplayer-plugin-danmuku .apd-config-other .apd-check-off,.artplayer-plugin-danmuku .apd-config-other .apd-check-on{width:16px;height:16px}.artplayer-plugin-danmuku .apd-config-other .apd-other{cursor:pointer;align-items:center;gap:2px;display:flex}.artplayer-plugin-danmuku .apd-config-other .apd-other:hover{color:#00a1d6}.artplayer-plugin-danmuku .apd-emitter{background-color:#ffffff40;border-radius:5px;flex:1;align-items:center;height:100%;display:flex}.artplayer-plugin-danmuku .apd-style{justify-content:center;align-items:center;display:flex;position:relative}.artplayer-plugin-danmuku .apd-style .apd-style-panel{opacity:0;pointer-events:none;width:200px;padding:10px;position:absolute;bottom:24px;left:0}.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner{background-color:#000000d9;border-radius:3px;width:100%;padding:10px}.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel{opacity:100;pointer-events:all}.artplayer-plugin-danmuku .apd-colors{flex-wrap:wrap;gap:8px;margin-top:5px;display:flex}.artplayer-plugin-danmuku .apd-colors .apd-color{cursor:pointer;border-radius:2px;width:16px;height:16px}.artplayer-plugin-danmuku .apd-colors .apd-color.apd-active{border:1px solid #000;box-shadow:0 0 0 1px #fff}.artplayer-plugin-danmuku .apd-input{color:#fff;background-color:#0000;border:none;outline:none;flex:1;width:auto;min-width:0;height:100%;line-height:1}.artplayer-plugin-danmuku .apd-input::placeholder{color:#ffffff80}.artplayer-plugin-danmuku .apd-send{cursor:pointer;width:60px;height:100%;text-shadow:none;background-color:#00a1d6;border-top-right-radius:5px;border-bottom-right-radius:5px;flex-shrink:0;justify-content:center;align-items:center;display:flex}.artplayer-plugin-danmuku .apd-send.apd-lock{cursor:not-allowed;color:#666;background-color:#e7e7e7}.art-controls-center .apd-emitter{flex:none;width:260px}.art-fullscreen .artplayer-plugin-danmuku,.art-fullscreen-web .artplayer-plugin-danmuku{gap:16px;height:38px}.art-fullscreen .artplayer-plugin-danmuku .apd-config-icon,.art-fullscreen-web .artplayer-plugin-danmuku .apd-config-icon,.art-fullscreen .artplayer-plugin-danmuku .apd-toggle-off,.art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-off,.art-fullscreen .artplayer-plugin-danmuku .apd-toggle-on,.art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-on{width:28px;height:28px}.art-fullscreen .artplayer-plugin-danmuku .apd-emitter,.art-fullscreen-web .artplayer-plugin-danmuku .apd-emitter{flex:none;width:400px}.art-video-player>.artplayer-plugin-danmuku{padding:0 10px;position:absolute;bottom:-40px;left:0;right:0}.art-video-player:has(>.artplayer-plugin-danmuku){margin-bottom:40px}[data-danmuku-emitter=false] .apd-emitter{display:none!important}[data-danmuku-emitter=false] .art-controls-center .artplayer-plugin-danmuku{justify-content:flex-end;gap:18px}[data-danmuku-emitter=false].art-fullscreen .art-controls-center .artplayer-plugin-danmuku,[data-danmuku-emitter=false].art-fullscreen-web .art-controls-center .artplayer-plugin-danmuku{gap:24px}[data-danmuku-theme=light]>.artplayer-plugin-danmuku .apd-icon{fill:#333}[data-danmuku-theme=light]>.artplayer-plugin-danmuku .apd-emitter{background-color:#f1f2f3}[data-danmuku-theme=light]>.artplayer-plugin-danmuku .apd-input{color:#000}[data-danmuku-theme=light]>.artplayer-plugin-danmuku .apd-input::placeholder{color:#0000004d}[data-danmuku-visible=false] .apd-toggle-off{display:block}[data-danmuku-visible=false] .apd-toggle-on,[data-danmuku-visible=true] .apd-toggle-off{display:none}[data-danmuku-visible=true] .apd-toggle-on{display:block}[data-danmuku-anti-overlap=false] .apd-anti-overlap .apd-check-on{display:none}[data-danmuku-anti-overlap=false] .apd-anti-overlap .apd-check-off,[data-danmuku-anti-overlap=true] .apd-anti-overlap .apd-check-on{display:block}[data-danmuku-anti-overlap=true] .apd-anti-overlap .apd-check-off,[data-danmuku-sync-video=false] .apd-sync-video .apd-check-on{display:none}[data-danmuku-sync-video=false] .apd-sync-video .apd-check-off,[data-danmuku-sync-video=true] .apd-sync-video .apd-check-on{display:block}[data-danmuku-sync-video=true] .apd-sync-video .apd-check-off{display:none}[data-danmuku-mode0=false] .apd-config-mode .apd-mode-0-off{display:block}[data-danmuku-mode0=false] .apd-config-mode .apd-mode-0-on{display:none}[data-danmuku-mode0=false] .art-danmuku [data-mode="0"]{opacity:0!important}[data-danmuku-mode0=true] .apd-config-mode .apd-mode-0-off{display:none}[data-danmuku-mode0=true] .apd-config-mode .apd-mode-0-on{display:block}[data-danmuku-mode="0"] .apd-style-mode [data-mode="0"]{color:#00a1d6}[data-danmuku-mode="0"] .apd-style-mode [data-mode="0"] path{fill:#00a1d6}[data-danmuku-mode1=false] .apd-config-mode .apd-mode-1-off{display:block}[data-danmuku-mode1=false] .apd-config-mode .apd-mode-1-on{display:none}[data-danmuku-mode1=false] .art-danmuku [data-mode="1"]{opacity:0!important}[data-danmuku-mode1=true] .apd-config-mode .apd-mode-1-off{display:none}[data-danmuku-mode1=true] .apd-config-mode .apd-mode-1-on{display:block}[data-danmuku-mode="1"] .apd-style-mode [data-mode="1"]{color:#00a1d6}[data-danmuku-mode="1"] .apd-style-mode [data-mode="1"] path{fill:#00a1d6}[data-danmuku-mode2=false] .apd-config-mode .apd-mode-2-off{display:block}[data-danmuku-mode2=false] .apd-config-mode .apd-mode-2-on{display:none}[data-danmuku-mode2=false] .art-danmuku [data-mode="2"]{opacity:0!important}[data-danmuku-mode2=true] .apd-config-mode .apd-mode-2-off{display:none}[data-danmuku-mode2=true] .apd-config-mode .apd-mode-2-on{display:block}[data-danmuku-mode="2"] .apd-style-mode [data-mode="2"]{color:#00a1d6}[data-danmuku-mode="2"] .apd-style-mode [data-mode="2"] path{fill:#00a1d6}'},{}]},["7ICE7"],"7ICE7","parcelRequire4dc0",{});let{default:e}=parcelRequire4dc0("7ICE7");export{e as default};
+function getMode(key) {
+  switch (key) {
+    case 1:
+    case 2:
+    case 3:
+      return 0;
+    case 4:
+      return 2;
+    case 5:
+      return 1;
+    default:
+      return 0;
+  }
+}
+function bilibiliDanmuParseFromXml(xmlString) {
+  if (typeof xmlString !== "string")
+    return [];
+  const reg = /<d[^>]*?p="(?<p>[^"]+)"[^>]*>(?<text>.*?)<\/d>/gs;
+  const matches = xmlString.matchAll(reg);
+  return Array.from(matches).map((match) => {
+    const attr = match.groups.p.split(",");
+    if (attr.length >= 8) {
+      const text = match.groups.text.trim().replaceAll("&quot;", '"').replaceAll("&apos;", "'").replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
+      return {
+        text,
+        time: Number(attr[0]),
+        mode: getMode(Number(attr[1])),
+        fontSize: Number(attr[2]),
+        color: `#${Number(attr[3]).toString(16)}`,
+        timestamp: Number(attr[4]),
+        pool: Number(attr[5]),
+        userID: attr[6],
+        rowID: Number(attr[7])
+      };
+    } else {
+      return null;
+    }
+  }).filter(Boolean);
+}
+function onmessage({ data }) {
+  const { xml, id } = data;
+  if (!id || !xml)
+    return;
+  const danmus = bilibiliDanmuParseFromXml(xml);
+  globalThis.postMessage({ danmus, id });
+}
+function createWorker() {
+  const workerText = `
+        ${getMode.toString()}
+        ${bilibiliDanmuParseFromXml.toString()}
+        onmessage = ${onmessage.toString()}
+    `;
+  const blob2 = new Blob([workerText], { type: "application/javascript" });
+  return new Worker(URL.createObjectURL(blob2));
+}
+function bilibiliDanmuParseFromUrl(url) {
+  return new Promise(async (resolve) => {
+    const res = await fetch(url);
+    const xml = await res.text();
+    try {
+      const worker = createWorker();
+      worker.onmessage = (event) => {
+        const { danmus, id } = event.data;
+        if (!id || !danmus)
+          return;
+        resolve(danmus);
+        worker.terminate();
+      };
+      worker.postMessage({ xml, id: Date.now() });
+    } catch (error) {
+      console.error("Error parsing Bilibili Danmu:", error);
+      const danmus = bilibiliDanmuParseFromXml(xml);
+      resolve(danmus);
+    }
+  });
+}
+const jsContent = '/*!\n * artplayer-plugin-danmuku.js v5.2.1\n * Github: https://github.com/zhw2590582/ArtPlayer\n * (c) 2017-2026 Harvey Zhao\n * Released under the MIT License.\n */\nfunction getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n  const maxTop = clientHeight - marginBottom;\n  const danmus = visibles.filter((item) => item.mode === target.mode && item.top <= maxTop).sort((prev, next) => prev.top - next.top);\n  if (danmus.length === 0) {\n    if (target.mode === 2) {\n      return maxTop - target.height;\n    } else {\n      return marginTop;\n    }\n  }\n  danmus.unshift({\n    type: "top",\n    top: 0,\n    left: 0,\n    right: 0,\n    height: marginTop,\n    width: clientWidth,\n    speed: 0,\n    distance: clientWidth\n  });\n  danmus.push({\n    type: "bottom",\n    top: maxTop,\n    left: 0,\n    right: 0,\n    height: marginBottom,\n    width: clientWidth,\n    speed: 0,\n    distance: clientWidth\n  });\n  if (target.mode === 2) {\n    for (let index = danmus.length - 2; index >= 0; index -= 1) {\n      const item = danmus[index];\n      const prev = danmus[index + 1];\n      const itemBottom = item.top + item.height;\n      const diff = prev.top - itemBottom;\n      if (diff >= target.height) {\n        return prev.top - target.height;\n      }\n    }\n  } else {\n    for (let index = 1; index < danmus.length; index += 1) {\n      const item = danmus[index];\n      const prev = danmus[index - 1];\n      const prevBottom = prev.top + prev.height;\n      const diff = item.top - prevBottom;\n      if (diff >= target.height) {\n        return prevBottom;\n      }\n    }\n  }\n  const topMap = [];\n  for (let index = 1; index < danmus.length - 1; index += 1) {\n    const item = danmus[index];\n    if (topMap.length) {\n      const last = topMap[topMap.length - 1];\n      if (last[0].top === item.top) {\n        last.push(item);\n      } else {\n        topMap.push([item]);\n      }\n    } else {\n      topMap.push([item]);\n    }\n  }\n  if (antiOverlap) {\n    switch (target.mode) {\n      case 0: {\n        const result = topMap.find((list) => {\n          return list.every((danmu) => {\n            if (clientWidth < danmu.distance)\n              return false;\n            if (target.speed < danmu.speed)\n              return true;\n            const overlapTime = danmu.right / (target.speed - danmu.speed);\n            if (overlapTime > danmu.time)\n              return true;\n            return false;\n          });\n        });\n        return result && result[0] ? result[0].top : void 0;\n      }\n      // 静止弹幕没有重叠问题\n      case 1:\n      case 2:\n        return void 0;\n    }\n  } else {\n    switch (target.mode) {\n      case 0:\n        topMap.sort((prev, next) => {\n          const nextMinRight = Math.min(...next.map((item) => item.right));\n          const prevMinRight = Math.min(...prev.map((item) => item.right));\n          return nextMinRight * next.length - prevMinRight * prev.length;\n        });\n        break;\n      case 1:\n      case 2:\n        topMap.sort((prev, next) => {\n          const nextMaxWidth = Math.max(...next.map((item) => item.width));\n          const prevMaxWidth = Math.max(...prev.map((item) => item.width));\n          return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n        });\n        break;\n    }\n    return topMap[0][0].top;\n  }\n}\nonmessage = (event) => {\n  const { data } = event;\n  if (!data.id || !data.type)\n    return;\n  const fns = { getDanmuTop };\n  const fn = fns[data.type];\n  const result = fn(data);\n  globalThis.postMessage({\n    result,\n    id: data.id\n  });\n};\n';
+const blob = typeof self !== "undefined" && self.Blob && new Blob(["URL.revokeObjectURL(import.meta.url);", jsContent], { type: "text/javascript;charset=utf-8" });
+function WorkerWrapper(options) {
+  let objURL;
+  try {
+    objURL = blob && (self.URL || self.webkitURL).createObjectURL(blob);
+    if (!objURL) throw "";
+    const worker = new Worker(objURL, {
+      type: "module",
+      name: options?.name
+    });
+    worker.addEventListener("error", () => {
+      (self.URL || self.webkitURL).revokeObjectURL(objURL);
+    });
+    return worker;
+  } catch (e) {
+    return new Worker(
+      "data:text/javascript;charset=utf-8," + encodeURIComponent(jsContent),
+      {
+        type: "module",
+        name: options?.name
+      }
+    );
+  }
+}
+class Danmuku {
+  constructor(art, option) {
+    const { constructor, template } = art;
+    this.utils = constructor.utils;
+    this.validator = constructor.validator;
+    this.$danmuku = template.$danmuku;
+    this.$player = template.$player;
+    this.art = art;
+    this.queue = [];
+    this.$refs = [];
+    this.isStop = false;
+    this.isHide = false;
+    this.timer = null;
+    this.index = 0;
+    this.option = Danmuku.option;
+    this.states = { wait: [], ready: [], emit: [], stop: [] };
+    this.config(option, true);
+    this.worker = new WorkerWrapper();
+    this.start = this.start.bind(this);
+    this.stop = this.stop.bind(this);
+    this.reset = this.reset.bind(this);
+    this.resize = this.resize.bind(this);
+    this.destroy = this.destroy.bind(this);
+    art.on("video:play", this.start);
+    art.on("video:playing", this.start);
+    art.on("video:pause", this.stop);
+    art.on("video:waiting", this.stop);
+    art.on("destroy", this.destroy);
+    art.on("resize", this.resize);
+    this.load();
+  }
+  // 默认配置
+  static get option() {
+    return {
+      danmuku: [],
+      // 弹幕数据
+      speed: 5,
+      // 弹幕持续时间，范围在[1 ~ 10]
+      margin: [10, "25%"],
+      // 弹幕上下边距，支持像素数字和百分比
+      opacity: 1,
+      // 弹幕透明度，范围在[0 ~ 1]
+      color: "#FFFFFF",
+      // 默认弹幕颜色，可以被单独弹幕项覆盖
+      mode: 0,
+      // 默认弹幕模式: 0: 滚动，1: 顶部，2: 底部
+      modes: [0, 1, 2],
+      // 弹幕可见的模式
+      fontSize: 25,
+      // 弹幕字体大小，支持像素数字和百分比
+      antiOverlap: true,
+      // 弹幕是否防重叠
+      synchronousPlayback: false,
+      // 是否同步播放速度
+      mount: void 0,
+      // 弹幕发射器挂载点, 默认为播放器控制栏中部
+      heatmap: false,
+      // 是否开启热力图
+      width: 512,
+      // 当播放器宽度小于此值时，弹幕发射器置于播放器底部
+      points: [],
+      // 热力图数据
+      filter: () => true,
+      // 弹幕载入前的过滤器，只支持返回布尔值
+      beforeEmit: () => true,
+      // 弹幕发送前的过滤器，支持返回 Promise
+      beforeVisible: () => true,
+      // 弹幕显示前的过滤器，支持返回 Promise
+      visible: true,
+      // 弹幕层是否可见
+      emitter: true,
+      // 是否开启弹幕发射器
+      maxLength: 200,
+      // 弹幕输入框最大长度, 范围在[1 ~ 1000]
+      lockTime: 5,
+      // 输入框锁定时间，范围在[1 ~ 60]
+      theme: "dark",
+      // 弹幕主题，支持 dark 和 light，只在自定义挂载时生效
+      OPACITY: {},
+      // 不透明度配置项
+      FONT_SIZE: {},
+      // 弹幕字号配置项
+      MARGIN: {},
+      // 显示区域配置项
+      SPEED: {},
+      // 弹幕速度配置项
+      COLOR: []
+      // 颜色列表配置项
+    };
+  }
+  // 配置校验
+  static get scheme() {
+    return {
+      danmuku: "array|function|string",
+      speed: "number",
+      margin: "array",
+      opacity: "number",
+      color: "string",
+      mode: "number",
+      modes: "array",
+      fontSize: "number|string",
+      antiOverlap: "boolean",
+      synchronousPlayback: "boolean",
+      mount: "?htmldivelement|string",
+      heatmap: "object|boolean",
+      width: "number",
+      points: "array",
+      filter: "function",
+      beforeEmit: "function",
+      beforeVisible: "function",
+      visible: "boolean",
+      emitter: "boolean",
+      maxLength: "number",
+      lockTime: "number",
+      theme: "string",
+      OPACITY: "object",
+      FONT_SIZE: "object",
+      MARGIN: "object",
+      SPEED: "object",
+      COLOR: "array"
+    };
+  }
+  // 初始弹幕样式
+  static get cssText() {
+    return `
+            user-select: none;
+            position: absolute;
+            white-space: pre;
+            pointer-events: none;
+            perspective: 500px;
+            display: inline-block;
+            will-change: transform;
+            font-weight: normal;
+            line-height: 1.125;
+            visibility: hidden;
+            font-family: SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif;
+            text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px;
+        `;
+  }
+  // 是否在移动端使用了自动旋屏，会影响弹幕的left和top值
+  get isRotate() {
+    return this.art.plugins?.autoOrientation?.state;
+  }
+  // 计算上空白边距
+  get marginTop() {
+    const { clamp } = this.utils;
+    const value = this.option.margin[0];
+    const { clientHeight } = this.$player;
+    if (typeof value === "number") {
+      return clamp(value, 0, clientHeight);
+    }
+    if (typeof value === "string" && value.endsWith("%")) {
+      const ratio = Number.parseFloat(value) / 100;
+      return clamp(clientHeight * ratio, 0, clientHeight);
+    }
+    return Danmuku.option.margin[0];
+  }
+  // 计算下空白边距
+  get marginBottom() {
+    const { clamp } = this.utils;
+    const value = this.option.margin[1];
+    const { clientHeight } = this.$player;
+    if (typeof value === "number") {
+      return clamp(value, 0, clientHeight);
+    }
+    if (typeof value === "string" && value.endsWith("%")) {
+      const ratio = Number.parseFloat(value) / 100;
+      return clamp(clientHeight * ratio, 0, clientHeight);
+    }
+    return Danmuku.option.margin[1];
+  }
+  // 计算弹幕字体大小
+  get fontSize() {
+    const { clamp } = this.utils;
+    const { clientHeight } = this.$player;
+    const fontSize = this.option.fontSize;
+    if (typeof fontSize === "number") {
+      return Math.round(clamp(fontSize, 12, clientHeight));
+    }
+    if (typeof fontSize === "string" && fontSize.endsWith("%")) {
+      const ratio = Number.parseFloat(fontSize) / 100;
+      return Math.round(clamp(clientHeight * ratio, 12, clientHeight));
+    }
+    return Danmuku.option.fontSize;
+  }
+  // 获取弹幕DOM节点
+  get $ref() {
+    const $ref = this.$refs.pop() || document.createElement("div");
+    $ref.style.cssText = Danmuku.cssText;
+    $ref.dataset.mode = "";
+    $ref.dataset.id = "";
+    $ref.className = "";
+    return $ref;
+  }
+  // 获取准备好发送的弹幕
+  get readys() {
+    const { currentTime } = this.art;
+    const result = [];
+    this.filter("ready", (danmu) => result.push(danmu));
+    this.filter("wait", (danmu) => {
+      if (currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1) {
+        result.push(danmu);
+      }
+    });
+    return result;
+  }
+  // 可见的弹幕的数据，用于计算下一个弹幕的top值
+  get visibles() {
+    const result = [];
+    const { clientWidth } = this.$player;
+    const clientLeft = this.getLeft(this.$player);
+    this.filter("emit", (danmu) => {
+      const top = danmu.$ref.offsetTop;
+      const left = this.getLeft(danmu.$ref) - clientLeft;
+      const height = danmu.$ref.clientHeight;
+      const width = danmu.$ref.clientWidth;
+      const distance = left + width;
+      const right = clientWidth - distance;
+      const speed = distance / danmu.$restTime;
+      const emit = {};
+      emit.top = top;
+      emit.left = left;
+      emit.height = height;
+      emit.width = width;
+      emit.right = right;
+      emit.speed = speed;
+      emit.distance = distance;
+      emit.time = danmu.$restTime;
+      emit.mode = danmu.mode;
+      result.push(emit);
+    });
+    return result;
+  }
+  // 计算弹幕速度
+  get speed() {
+    return this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
+  }
+  // 加载弹幕
+  async load(danmuku) {
+    const { errorHandle } = this.utils;
+    let danmus = [];
+    const target = danmuku || this.option.danmuku;
+    try {
+      if (typeof target === "function") {
+        danmus = await target();
+      } else if (target instanceof Promise) {
+        danmus = await target;
+      } else if (typeof target === "string") {
+        danmus = await bilibiliDanmuParseFromUrl(target);
+      } else if (Array.isArray(target)) {
+        danmus = target;
+      }
+      errorHandle(Array.isArray(danmus), "Danmuku need return an array as result");
+      if (danmuku === void 0) {
+        this.reset();
+        this.queue = [];
+        this.states = { wait: [], ready: [], emit: [], stop: [] };
+        this.$refs = [];
+        this.$danmuku.textContent = "";
+      }
+      for (let index = 0; index < danmus.length; index++) {
+        const danmu = danmus[index];
+        await this.emit(danmu);
+      }
+      this.art.emit("artplayerPluginDanmuku:loaded", this.queue);
+    } catch (error) {
+      this.art.emit("artplayerPluginDanmuku:error", error);
+      throw error;
+    }
+    return this;
+  }
+  // 把原始弹幕转换到弹幕队列
+  async emit(danmu) {
+    const { clamp } = this.utils;
+    this.validator(danmu, {
+      id: "?string",
+      // 弹幕唯一标识
+      text: "string",
+      // 弹幕文本
+      mode: "?number",
+      // 弹幕模式: 0: 滚动，1: 顶部，2: 底部
+      color: "?string",
+      // 弹幕颜色
+      time: "?number",
+      // 弹幕时间
+      border: "?boolean",
+      // 弹幕是否有边框
+      style: "?object"
+      // 弹幕额外样式
+    });
+    if (!danmu.text.trim())
+      return this;
+    if (danmu.time) {
+      danmu.time = clamp(danmu.time, 0, Infinity);
+    } else {
+      danmu.time = this.art.currentTime + 0.5;
+    }
+    if (danmu.mode === void 0) {
+      danmu.mode = this.option.mode;
+    }
+    if (danmu.style === void 0) {
+      danmu.style = {};
+    }
+    if (danmu.color === void 0) {
+      danmu.color = this.option.color;
+    }
+    if (![0, 1, 2].includes(danmu.mode))
+      return this;
+    if (!this.option.filter(danmu))
+      return this;
+    const item = {
+      ...danmu,
+      $state: "wait",
+      // 弹幕初始状态
+      $index: this.index++,
+      // 弹幕索引
+      $ref: null,
+      // 弹幕 DOM 节点
+      $restTime: 0,
+      // 弹幕剩余时间
+      $lastStartTime: 0
+      // 弹幕上次开始时间
+    };
+    this.setState(item, "wait");
+    this.queue.push(item);
+    return this;
+  }
+  // 动态配置
+  config(option, isInit = false) {
+    const { clamp } = this.utils;
+    const { $controlsCenter } = this.art.template;
+    const changed = Object.keys(option).some(
+      (key) => JSON.stringify(this.option[key]) !== JSON.stringify(option[key])
+    );
+    if (!changed && !isInit)
+      return this;
+    this.option = Object.assign({}, Danmuku.option, this.option, option);
+    this.validator(this.option, Danmuku.scheme);
+    this.option.mode = clamp(this.option.mode, 0, 2);
+    this.option.speed = clamp(this.option.speed, 1, 10);
+    this.option.opacity = clamp(this.option.opacity, 0, 1);
+    this.option.lockTime = clamp(this.option.lockTime, 1, 60);
+    this.option.maxLength = clamp(this.option.maxLength, 1, 1e3);
+    this.option.mount = this.option.mount || $controlsCenter;
+    if (option.fontSize) {
+      this.reset();
+    }
+    if (this.option.visible) {
+      this.show();
+    } else {
+      this.hide();
+    }
+    this.art.emit("artplayerPluginDanmuku:config", this.option);
+    return this;
+  }
+  // 计算DOM的left值，受到旋屏影响
+  getLeft($ref) {
+    const rect = $ref.getBoundingClientRect();
+    return this.isRotate ? rect.top : rect.left;
+  }
+  // 复杂运算交给 Web Worker 处理
+  postMessage(message = {}) {
+    return new Promise((resolve) => {
+      message.id = Date.now();
+      this.worker.postMessage(message);
+      this.worker.onmessage = (event) => {
+        const { data } = event;
+        if (data.id === message.id) {
+          resolve(data);
+        }
+      };
+    });
+  }
+  // 根据状态获取弹幕
+  filter(state, callback) {
+    const danmus = this.states[state] || [];
+    for (let index = 0; index < danmus.length; index++) {
+      callback(danmus[index]);
+    }
+    return danmus;
+  }
+  // 设置弹幕状态
+  setState(danmu, state) {
+    this.states[danmu.$state] = this.states[danmu.$state].filter((item) => item !== danmu);
+    danmu.$state = state;
+    if (danmu.$ref) {
+      danmu.$ref.dataset.state = state;
+    }
+    this.states[state].push(danmu);
+  }
+  // 重置弹幕到wait状态，回收弹幕DOM节点
+  makeWait(danmu) {
+    this.setState(danmu, "wait");
+    if (danmu.$ref) {
+      danmu.$ref.style.cssText = Danmuku.cssText;
+      danmu.$ref.style.visibility = "hidden";
+      danmu.$ref.style.marginLeft = "0px";
+      danmu.$ref.style.transform = "translateX(0px)";
+      danmu.$ref.style.transition = "transform 0s linear 0s";
+      this.$refs.push(danmu.$ref);
+      danmu.$ref = null;
+    }
+  }
+  // 实时更新弹幕
+  update() {
+    const { setStyles } = this.utils;
+    this.timer = window.requestAnimationFrame(async () => {
+      if (this.art.playing && !this.isHide) {
+        this.filter("emit", (danmu) => {
+          const emitTime = (Date.now() - danmu.$lastStartTime) / 1e3;
+          danmu.$restTime -= emitTime;
+          danmu.$lastStartTime = Date.now();
+          if (danmu.$restTime <= 0) {
+            this.makeWait(danmu);
+          }
+        });
+        const readys = this.readys;
+        for (let index = 0; index < readys.length; index++) {
+          const danmu = readys[index];
+          const state = await this.option.beforeVisible(danmu);
+          if (state) {
+            const { clientWidth, clientHeight } = this.$player;
+            danmu.$ref = this.$ref;
+            danmu.$ref.textContent = danmu.text;
+            this.$danmuku.appendChild(danmu.$ref);
+            danmu.$ref.style.opacity = this.option.opacity;
+            danmu.$ref.style.fontSize = `${this.fontSize}px`;
+            danmu.$ref.style.color = danmu.color;
+            danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
+            danmu.$ref.style.backgroundColor = danmu.border ? "rgb(0 0 0 / 50%)" : null;
+            setStyles(danmu.$ref, danmu.style);
+            danmu.$lastStartTime = Date.now();
+            danmu.$restTime = this.speed;
+            const distance = clientWidth + danmu.$ref.clientWidth;
+            const { result: top } = await this.postMessage({
+              type: "getDanmuTop",
+              target: {
+                mode: danmu.mode,
+                height: danmu.$ref.clientHeight,
+                speed: distance / danmu.$restTime
+              },
+              // 当前弹幕信息
+              visibles: this.visibles,
+              // 可见的弹幕的数据
+              antiOverlap: this.option.antiOverlap,
+              clientWidth,
+              clientHeight,
+              marginBottom: this.marginBottom,
+              marginTop: this.marginTop
+            });
+            if (danmu.$ref) {
+              if (!this.isStop && top !== void 0) {
+                this.setState(danmu, "emit");
+                danmu.$ref.style.top = `${top}px`;
+                danmu.$ref.style.visibility = "visible";
+                danmu.$ref.dataset.mode = danmu.mode;
+                danmu.$ref.dataset.id = danmu.id || "";
+                switch (danmu.mode) {
+                  // 滚动的弹幕
+                  case 0: {
+                    danmu.$ref.style.left = `${clientWidth}px`;
+                    danmu.$ref.style.marginLeft = "0px";
+                    danmu.$ref.style.transform = `translateX(${-distance}px)`;
+                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                    break;
+                  }
+                  case 1:
+                  // falls through
+                  case 2:
+                    danmu.$ref.style.left = "50%";
+                    danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
+                    break;
+                }
+                this.art.emit("artplayerPluginDanmuku:visible", danmu);
+              } else {
+                this.setState(danmu, "ready");
+                this.$refs.push(danmu.$ref);
+                danmu.$ref = null;
+              }
+            }
+          }
+        }
+      }
+      if (!this.isStop) {
+        this.update();
+      }
+    });
+    return this;
+  }
+  // 重置正在显示的弹幕: stop/emit 状态的弹幕
+  resize() {
+    const { clientWidth } = this.$player;
+    this.filter("stop", (danmu) => {
+      switch (danmu.mode) {
+        // 滚动的弹幕
+        case 0:
+          danmu.$ref.style.left = `${clientWidth}px`;
+          break;
+      }
+    });
+    this.filter("emit", (danmu) => {
+      danmu.$lastStartTime = Date.now();
+      switch (danmu.mode) {
+        // 滚动的弹幕
+        case 0: {
+          const distance = clientWidth + danmu.$ref.clientWidth;
+          danmu.$ref.style.left = `${clientWidth}px`;
+          danmu.$ref.style.transform = `translateX(${-distance}px)`;
+          danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+          break;
+        }
+      }
+    });
+  }
+  // 继续弹幕
+  continue() {
+    const { clientWidth } = this.$player;
+    this.filter("stop", (danmu) => {
+      this.setState(danmu, "emit");
+      danmu.$lastStartTime = Date.now();
+      switch (danmu.mode) {
+        // 继续滚动的弹幕
+        case 0: {
+          const distance = clientWidth + danmu.$ref.clientWidth;
+          danmu.$ref.style.transform = `translateX(${-distance}px)`;
+          danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+          break;
+        }
+      }
+    });
+    return this;
+  }
+  // 暂停弹幕
+  suspend() {
+    const { clientWidth } = this.$player;
+    this.filter("emit", (danmu) => {
+      this.setState(danmu, "stop");
+      switch (danmu.mode) {
+        // 停止滚动的弹幕
+        case 0: {
+          const translateX = clientWidth - (this.getLeft(danmu.$ref) - this.getLeft(this.$player));
+          danmu.$ref.style.transform = `translateX(${-translateX}px)`;
+          danmu.$ref.style.transition = "transform 0s linear 0s";
+          break;
+        }
+      }
+    });
+    return this;
+  }
+  stop() {
+    this.isStop = true;
+    this.suspend();
+    window.cancelAnimationFrame(this.timer);
+    this.art.emit("artplayerPluginDanmuku:stop");
+    return this;
+  }
+  start() {
+    this.isStop = false;
+    this.continue();
+    this.update();
+    this.art.emit("artplayerPluginDanmuku:start");
+    return this;
+  }
+  reset() {
+    this.queue.forEach((danmu) => this.makeWait(danmu));
+    this.art.emit("artplayerPluginDanmuku:reset");
+    return this;
+  }
+  show() {
+    this.isHide = false;
+    this.$danmuku.style.opacity = 1;
+    this.option.visible = true;
+    this.art.emit("artplayerPluginDanmuku:show");
+    return this;
+  }
+  hide() {
+    this.isHide = true;
+    this.$danmuku.style.opacity = 0;
+    this.option.visible = false;
+    this.art.emit("artplayerPluginDanmuku:hide");
+    return this;
+  }
+  destroy() {
+    this.stop();
+    this.worker.terminate();
+    this.art.off("video:play", this.start);
+    this.art.off("video:playing", this.start);
+    this.art.off("video:pause", this.stop);
+    this.art.off("video:waiting", this.stop);
+    this.art.off("resize", this.reset);
+    this.art.off("destroy", this.destroy);
+    this.art.emit("artplayerPluginDanmuku:destroy");
+  }
+}
+const lib = {
+  map(value, inMin, inMax, outMin, outMax) {
+    return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+  },
+  range(start, end, tick) {
+    const s = Math.round(start / tick) * tick;
+    return Array.from(
+      {
+        length: Math.floor((end - start) / tick)
+      },
+      (v, k) => {
+        return k * tick + s;
+      }
+    );
+  }
+};
+function line(pointA, pointB) {
+  const lengthX = pointB[0] - pointA[0];
+  const lengthY = pointB[1] - pointA[1];
+  return {
+    length: Math.sqrt(lengthX ** 2 + lengthY ** 2),
+    angle: Math.atan2(lengthY, lengthX)
+  };
+}
+function heatmap(art, danmuku, option) {
+  const { query } = art.constructor.utils;
+  art.controls.add({
+    name: "heatmap",
+    position: "top",
+    html: "",
+    style: {
+      position: "absolute",
+      top: "-100px",
+      left: "0px",
+      right: "0px",
+      height: "100px",
+      width: "100%",
+      pointerEvents: "none"
+    },
+    mounted($heatmap) {
+      let $start = null;
+      let $stop = null;
+      function update(arg = []) {
+        $start = null;
+        $stop = null;
+        $heatmap.innerHTML = "";
+        if (!art.duration || art.option.isLive)
+          return;
+        const svg = {
+          w: $heatmap.offsetWidth,
+          h: $heatmap.offsetHeight
+        };
+        const options = {
+          xMin: 0,
+          xMax: svg.w,
+          yMin: 0,
+          yMax: 128,
+          scale: 0.25,
+          opacity: 0.2,
+          minHeight: Math.floor(svg.h * 0.05),
+          sampling: Math.floor(svg.w / 100),
+          smoothing: 0.2,
+          flattening: 0.2
+        };
+        if (typeof option === "object") {
+          Object.assign(options, option);
+        }
+        let points = [];
+        if (Array.isArray(arg) && arg.length) {
+          points = [...arg];
+        } else {
+          const gap = art.duration / svg.w;
+          for (let x = 0; x <= svg.w; x += options.sampling) {
+            const y = danmuku.queue.filter(
+              ({ time }) => time > x * gap && time <= (x + options.sampling) * gap
+            ).length;
+            points.push([x, y]);
+          }
+        }
+        if (points.length === 0)
+          return;
+        const lastPoint = points[points.length - 1];
+        const lastX = lastPoint[0];
+        const lastY = lastPoint[1];
+        if (lastX !== svg.w) {
+          points.push([svg.w, lastY]);
+        }
+        const yPoints = points.map((point) => point[1]);
+        const yMin = Math.min(...yPoints);
+        const yMax = Math.max(...yPoints);
+        const yMid = (yMin + yMax) / 2;
+        for (let i = 0; i < points.length; i++) {
+          const point = points[i];
+          const y = point[1];
+          point[1] = y * (y > yMid ? 1 + options.scale : 1 - options.scale) + options.minHeight;
+        }
+        const controlPoint = (current, previous, next, reverse) => {
+          const p = previous || current;
+          const n = next || current;
+          const o = line(p, n);
+          const flat = lib.map(Math.cos(o.angle) * options.flattening, 0, 1, 1, 0);
+          const angle = o.angle * flat + (reverse ? Math.PI : 0);
+          const length = o.length * options.smoothing;
+          const x = current[0] + Math.cos(angle) * length;
+          const y = current[1] + Math.sin(angle) * length;
+          return [x, y];
+        };
+        const bezierCommand = (point, i, a) => {
+          const cps = controlPoint(a[i - 1], a[i - 2], point);
+          const cpe = controlPoint(point, a[i - 1], a[i + 1], true);
+          const close = i === a.length - 1 ? " z" : "";
+          return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point[0]},${point[1]}${close}`;
+        };
+        const pointsPositions = points.map((e) => {
+          const x = lib.map(e[0], options.xMin, options.xMax, 0, svg.w);
+          const y = lib.map(e[1], options.yMin, options.yMax, svg.h, 0);
+          return [x, y];
+        });
+        const pathD = pointsPositions.reduce(
+          (acc, e, i, a) => i === 0 ? `M ${a[a.length - 1][0]},${svg.h} L ${e[0]},${svg.h} L ${e[0]},${e[1]}` : `${acc} ${bezierCommand(e, i, a)}`,
+          ""
+        );
+        $heatmap.innerHTML = `
+                    <svg viewBox="0 0 ${svg.w} ${svg.h}">
+                        <defs>
+                            <linearGradient id="heatmap-solids" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" />
+                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" id="heatmap-start" />
+                                <stop offset="0%" style="stop-color:var(--art-progress-color);stop-opacity:1" id="heatmap-stop" />
+                                <stop offset="100%" style="stop-color:var(--art-progress-color);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#heatmap-solids)" d="${pathD}"></path>
+                    </svg>
+                `;
+        $start = query("#heatmap-start", $heatmap);
+        $stop = query("#heatmap-stop", $heatmap);
+        $start.setAttribute("offset", `${art.played * 100}%`);
+        $stop.setAttribute("offset", `${art.played * 100}%`);
+      }
+      art.on("video:timeupdate", () => {
+        if ($start && $stop) {
+          $start.setAttribute("offset", `${art.played * 100}%`);
+          $stop.setAttribute("offset", `${art.played * 100}%`);
+        }
+      });
+      art.on("setBar", (type, percentage) => {
+        if ($start && $stop && type === "played") {
+          $start.setAttribute("offset", `${percentage * 100}%`);
+          $stop.setAttribute("offset", `${percentage * 100}%`);
+        }
+      });
+      art.on("ready", () => update());
+      art.on("resize", () => update());
+      art.on("artplayerPluginDanmuku:loaded", () => update());
+      art.on("artplayerPluginDanmuku:points", (points) => update(points));
+    }
+  });
+}
+const $check_off = '<svg  class="apd-icon apd-check-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 32 32" width="32"  height="32" ><path d="M8 6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H8zm0-2h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z" fill="#FFFFFF"></path></svg>';
+const $check_on = '<svg class="apd-icon apd-check-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 32 32" width="32"  height="32" ><path d="m13 18.25-1.8-1.8c-.6-.6-1.65-.6-2.25 0s-.6 1.5 0 2.25l2.85 2.85c.318.318.762.468 1.2.448.438.02.882-.13 1.2-.448l8.85-8.85c.6-.6.6-1.65 0-2.25s-1.65-.6-2.25 0l-7.8 7.8zM8 4h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z" fill="#00AEEC"></path></svg>';
+const $config = '<svg class="apd-icon apd-config-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 24 24" width="24"  height="24" ><path fill-rule="evenodd" d="m15.645 4.881 1.06-1.473a.998.998 0 1 0-1.622-1.166L13.22 4.835a110.67 110.67 0 0 0-1.1-.007h-.131c-.47 0-.975.004-1.515.012L8.783 2.3A.998.998 0 0 0 7.12 3.408l.988 1.484c-.688.019-1.418.042-2.188.069a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363c1.903.094 3.317.141 5.513.141a.988.988 0 0 0 0-1.975 97.58 97.58 0 0 1-5.416-.139 2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.005.183.01.07.014-.038.004-.096.008-.189.011-.081a.987.987 0 1 0 1.974-.069c-.004-.105-.007-.009-.011.09-.002.056-.004.112-.007.135l-.002.01a.574.574 0 0 1-.005-.091v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.905-.032-1.752-.058-2.543-.079Zm-3.113 4.703h-1.307v4.643h2.2v.04l.651-1.234c.113-.215.281-.389.482-.509v-.11h.235c.137-.049.283-.074.433-.074h1.553V9.584h-1.264a8.5 8.5 0 0 0 .741-1.405l-1.078-.381c-.24.631-.501 1.23-.806 1.786h-1.503l.686-.305c-.228-.501-.5-.959-.806-1.394l-1.034.348c.294.392.566.839.817 1.35Zm-1.7 5.502h2.16l-.564 1.068h-1.595v-1.068Zm-2.498-1.863.152-1.561h1.96V8.289H7.277v.969h2.048v1.435h-1.84l-.306 3.51h2.254c0 1.155-.043 1.906-.12 2.255-.076.348-.38.523-.925.523-.305 0-.61-.022-.893-.055l.294 1.056.061.005c.282.02.546.039.81.039.991-.065 1.547-.414 1.677-1.046.11-.631.175-1.883.175-3.757H8.334Zm5.09-.8v.85h-1.188v-.85h1.187Zm-1.188-.955h1.187v-.893h-1.187v.893Zm2.322.007v-.893h1.241v.893h-1.241Zm.528 2.757a1.26 1.26 0 0 1 1.087-.627l4.003-.009a1.26 1.26 0 0 1 1.094.63l1.721 2.982c.226.39.225.872-.001 1.263l-1.743 3a1.26 1.26 0 0 1-1.086.628l-4.003.009a1.26 1.26 0 0 1-1.094-.63l-1.722-2.982a1.26 1.26 0 0 1 .002-1.263l1.742-3Zm1.967.858a1.26 1.26 0 0 0-1.08.614l-.903 1.513a1.26 1.26 0 0 0-.002 1.289l.885 1.492c.227.384.64.62 1.086.618l2.192-.005a1.26 1.26 0 0 0 1.08-.615l.904-1.518a1.26 1.26 0 0 0 .001-1.288l-.884-1.489a1.26 1.26 0 0 0-1.086-.616l-2.193.005Zm2.517 2.76a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0Z" clip-rule="evenodd"></path></svg>';
+const $mode_0_off = '<svg class="apd-icon apd-mode-0-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm2-1a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+const $mode_0_on = '<svg class="apd-icon apd-mode-0-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2z" fill="#FFFFFF"></path></svg>';
+const $mode_1_off = '<svg class="apd-icon apd-mode-1-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zm-4-8h2v2h-2V7zM9 9H7V7h2v2zm4 0h-2V7h2v2zm2-2h2v2h-2V7z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+const $mode_1_on = '<svg class="apd-icon apd-mode-1-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 9H7V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2z" fill="#FFFFFF"></path></svg>';
+const $mode_2_off = '<svg class="apd-icon apd-mode-2-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM9 21H7v-2h2v2zm4 0h-2v-2h2v2z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+const $mode_2_on = '<svg class="apd-icon apd-mode-2-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 21H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" fill="#FFFFFF"></path></svg>';
+const $off = '<svg class="apd-icon apd-toggle-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 24 24" width="24"  height="24" ><path fill-rule="evenodd" d="m8.085 4.891-.999-1.499a1.008 1.008 0 0 1 1.679-1.118l1.709 2.566c.54-.008 1.045-.012 1.515-.012h.13c.345 0 .707.003 1.088.007l1.862-2.59a1.008 1.008 0 0 1 1.637 1.177l-1.049 1.46c.788.02 1.631.046 2.53.078 1.958.069 3.468 1.6 3.74 3.507.088.613.13 2.158.16 3.276l.001.027c.01.333.017.63.025.856a.987.987 0 0 1-1.974.069c-.008-.23-.016-.539-.025-.881v-.002c-.028-1.103-.066-2.541-.142-3.065-.143-1.004-.895-1.78-1.854-1.813-2.444-.087-4.466-.13-6.064-.131-1.598 0-3.619.044-6.063.13a2.037 2.037 0 0 0-1.945 1.748c-.15 1.04-.225 2.341-.225 3.904 0 1.874.11 3.474.325 4.798.154.949.95 1.66 1.91 1.708a97.58 97.58 0 0 0 5.416.139.988.988 0 0 1 0 1.975c-2.196 0-3.61-.047-5.513-.141A4.012 4.012 0 0 1 2.197 17.7c-.236-1.446-.351-3.151-.351-5.116 0-1.64.08-3.035.245-4.184A4.013 4.013 0 0 1 5.92 4.96c.761-.027 1.483-.05 2.164-.069Zm4.436 4.707h-1.32v4.63h2.222v.848h-2.618v1.078h2.431a5.01 5.01 0 0 1 3.575-3.115V9.598h-1.276a8.59 8.59 0 0 0 .748-1.42l-1.089-.384a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.289h-3.2v.979h2.067v1.43H7.483l-.308 3.454h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.004c.285.02.551.04.818.04 1.001-.066 1.562-.418 1.694-1.056.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858H15.8Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902H15.8v.902h-1.254Zm3.517 10.594a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-.002-1.502a2.5 2.5 0 0 1-2.217-3.657l3.326 3.398a2.49 2.49 0 0 1-1.109.259Zm2.5-2.5c0 .42-.103.815-.286 1.162l-3.328-3.401a2.5 2.5 0 0 1 3.614 2.239Z" clip-rule="evenodd"></path></svg>';
+const $on = '<svg class="apd-icon apd-toggle-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 24 24" width="24"  height="24" ><path fill-rule="evenodd" d="M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z" clip-rule="evenodd"></path><path fill="#00AEEC" fill-rule="evenodd" d="M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z" clip-rule="evenodd"></path></svg>';
+const $style = '<svg class="apd-icon apd-style-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 22 22" viewBox="0 0 22 22" width="36"  height="24" ><path d="M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98 12.87 11H9.13L11 5.98z"></path></svg>';
+const style = '.artplayer-plugin-danmuku{display:flex;position:relative;z-index:99;align-items:center;justify-content:center;font-size:12px;height:32px;width:100%;color:#fff;font-weight:300;flex-shrink:0;gap:10px}.artplayer-plugin-danmuku .apd-icon{cursor:pointer;opacity:.75;transition:all .2s ease;fill:#fff}.artplayer-plugin-danmuku .apd-icon:hover{opacity:1}.artplayer-plugin-danmuku .apd-config{display:flex;position:relative}.artplayer-plugin-danmuku .apd-config .apd-config-panel{position:absolute;bottom:24px;left:0;width:320px;padding:10px;opacity:0;pointer-events:none}.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner{width:100%;border-radius:3px;background-color:#000000d9;padding:10px}.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel{opacity:100;pointer-events:all}.artplayer-plugin-danmuku .apd-config-mode,.artplayer-plugin-danmuku .apd-config-slider,.artplayer-plugin-danmuku .apd-config-other,.artplayer-plugin-danmuku .apd-style-mode{margin-bottom:15px}.artplayer-plugin-danmuku .apd-modes{display:flex;align-items:center;margin-top:5px;gap:20px}.artplayer-plugin-danmuku .apd-modes .apd-mode{cursor:pointer;text-align:center}.artplayer-plugin-danmuku .apd-modes .apd-mode:hover{color:#00a1d6}.artplayer-plugin-danmuku .apd-config-slider{display:flex;align-items:center;gap:12px}.artplayer-plugin-danmuku .apd-config-slider .apd-value{width:32px;text-align:right}.artplayer-plugin-danmuku .apd-slider{position:relative;flex:1;display:flex;height:20px;align-items:center;justify-content:center;cursor:pointer}.artplayer-plugin-danmuku .apd-slider .apd-slider-line{position:relative;height:2px;width:100%;overflow:hidden;border-radius:3px;background-color:#ffffff40}.artplayer-plugin-danmuku .apd-slider .apd-slider-points{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between}.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point{width:2px;height:2px;border-radius:50%;background-color:#ffffff80}.artplayer-plugin-danmuku .apd-slider .apd-slider-progress{width:0%;height:100%;background-color:#00a1d6}.artplayer-plugin-danmuku .apd-slider .apd-slider-dot{position:absolute;transform:translate(-6px);left:0%;width:12px;height:12px;border-radius:50%;background-color:#00a1d6}.artplayer-plugin-danmuku .apd-slider .apd-slider-steps{display:flex;align-items:center;justify-content:space-between;position:absolute;bottom:-12px;width:calc(100% + 32px);color:#777}.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step{flex-shrink:0;width:36px;text-align:center;scale:.95}.artplayer-plugin-danmuku .apd-config-other{display:flex;align-items:center;gap:20px}.artplayer-plugin-danmuku .apd-config-other .apd-check-off,.artplayer-plugin-danmuku .apd-config-other .apd-check-on{width:16px;height:16px}.artplayer-plugin-danmuku .apd-config-other .apd-other{display:flex;align-items:center;cursor:pointer;gap:2px}.artplayer-plugin-danmuku .apd-config-other .apd-other:hover{color:#00a1d6}.artplayer-plugin-danmuku .apd-emitter{display:flex;flex:1;align-items:center;height:100%;background-color:#ffffff40;border-radius:5px}.artplayer-plugin-danmuku .apd-style{position:relative;display:flex;align-items:center;justify-content:center}.artplayer-plugin-danmuku .apd-style .apd-style-panel{position:absolute;bottom:24px;left:0;width:200px;padding:10px;opacity:0;pointer-events:none}.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner{width:100%;border-radius:3px;background-color:#000000d9;padding:10px}.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel{opacity:100;pointer-events:all}.artplayer-plugin-danmuku .apd-colors{display:flex;flex-wrap:wrap;margin-top:5px;gap:8px}.artplayer-plugin-danmuku .apd-colors .apd-color{width:16px;height:16px;border-radius:2px;cursor:pointer}.artplayer-plugin-danmuku .apd-colors .apd-color.apd-active{border:1px solid black;box-shadow:0 0 0 1px #fff}.artplayer-plugin-danmuku .apd-input{outline:none;height:100%;flex:1;min-width:0;width:auto;border:none;line-height:1;color:#fff;background-color:transparent}.artplayer-plugin-danmuku .apd-input::placeholder{color:#ffffff80}.artplayer-plugin-danmuku .apd-send{display:flex;align-items:center;justify-content:center;height:100%;width:60px;flex-shrink:0;cursor:pointer;text-shadow:none;border-top-right-radius:5px;border-bottom-right-radius:5px;background-color:#00a1d6}.artplayer-plugin-danmuku .apd-send.apd-lock{cursor:not-allowed;color:#666;background-color:#e7e7e7}.art-controls-center .apd-emitter{width:260px;flex:none}.art-fullscreen .artplayer-plugin-danmuku,.art-fullscreen-web .artplayer-plugin-danmuku{height:38px;gap:16px}.art-fullscreen .artplayer-plugin-danmuku .apd-config-icon,.art-fullscreen-web .artplayer-plugin-danmuku .apd-config-icon,.art-fullscreen .artplayer-plugin-danmuku .apd-toggle-off,.art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-off,.art-fullscreen .artplayer-plugin-danmuku .apd-toggle-on,.art-fullscreen-web .artplayer-plugin-danmuku .apd-toggle-on{width:28px;height:28px}.art-fullscreen .artplayer-plugin-danmuku .apd-emitter,.art-fullscreen-web .artplayer-plugin-danmuku .apd-emitter{width:400px;flex:none}.art-video-player>.artplayer-plugin-danmuku{position:absolute;left:0;right:0;bottom:-40px;padding:0 10px}.art-video-player:has(>.artplayer-plugin-danmuku){margin-bottom:40px}[data-danmuku-emitter=false] .apd-emitter{display:none!important}[data-danmuku-emitter=false] .art-controls-center .artplayer-plugin-danmuku{justify-content:flex-end;gap:18px}[data-danmuku-emitter=false].art-fullscreen .art-controls-center .artplayer-plugin-danmuku,[data-danmuku-emitter=false].art-fullscreen-web .art-controls-center .artplayer-plugin-danmuku{gap:24px}[data-danmuku-theme=light]>.artplayer-plugin-danmuku .apd-icon{fill:#333}[data-danmuku-theme=light]>.artplayer-plugin-danmuku .apd-emitter{background-color:#f1f2f3}[data-danmuku-theme=light]>.artplayer-plugin-danmuku .apd-input{color:#000}[data-danmuku-theme=light]>.artplayer-plugin-danmuku .apd-input::placeholder{color:#0000004d}[data-danmuku-visible=false] .apd-toggle-off{display:block}[data-danmuku-visible=false] .apd-toggle-on,[data-danmuku-visible=true] .apd-toggle-off{display:none}[data-danmuku-visible=true] .apd-toggle-on{display:block}[data-danmuku-anti-overlap=false] .apd-anti-overlap .apd-check-on{display:none}[data-danmuku-anti-overlap=false] .apd-anti-overlap .apd-check-off,[data-danmuku-anti-overlap=true] .apd-anti-overlap .apd-check-on{display:block}[data-danmuku-anti-overlap=true] .apd-anti-overlap .apd-check-off,[data-danmuku-sync-video=false] .apd-sync-video .apd-check-on{display:none}[data-danmuku-sync-video=false] .apd-sync-video .apd-check-off,[data-danmuku-sync-video=true] .apd-sync-video .apd-check-on{display:block}[data-danmuku-sync-video=true] .apd-sync-video .apd-check-off{display:none}[data-danmuku-mode0=false] .apd-config-mode .apd-mode-0-off{display:block}[data-danmuku-mode0=false] .apd-config-mode .apd-mode-0-on{display:none}[data-danmuku-mode0=false] .art-danmuku [data-mode="0"]{opacity:0!important}[data-danmuku-mode0=true] .apd-config-mode .apd-mode-0-off{display:none}[data-danmuku-mode0=true] .apd-config-mode .apd-mode-0-on{display:block}[data-danmuku-mode="0"] .apd-style-mode [data-mode="0"]{color:#00a1d6}[data-danmuku-mode="0"] .apd-style-mode [data-mode="0"] path{fill:#00a1d6}[data-danmuku-mode1=false] .apd-config-mode .apd-mode-1-off{display:block}[data-danmuku-mode1=false] .apd-config-mode .apd-mode-1-on{display:none}[data-danmuku-mode1=false] .art-danmuku [data-mode="1"]{opacity:0!important}[data-danmuku-mode1=true] .apd-config-mode .apd-mode-1-off{display:none}[data-danmuku-mode1=true] .apd-config-mode .apd-mode-1-on{display:block}[data-danmuku-mode="1"] .apd-style-mode [data-mode="1"]{color:#00a1d6}[data-danmuku-mode="1"] .apd-style-mode [data-mode="1"] path{fill:#00a1d6}[data-danmuku-mode2=false] .apd-config-mode .apd-mode-2-off{display:block}[data-danmuku-mode2=false] .apd-config-mode .apd-mode-2-on{display:none}[data-danmuku-mode2=false] .art-danmuku [data-mode="2"]{opacity:0!important}[data-danmuku-mode2=true] .apd-config-mode .apd-mode-2-off{display:none}[data-danmuku-mode2=true] .apd-config-mode .apd-mode-2-on{display:block}[data-danmuku-mode="2"] .apd-style-mode [data-mode="2"]{color:#00a1d6}[data-danmuku-mode="2"] .apd-style-mode [data-mode="2"] path{fill:#00a1d6}';
+class Setting {
+  constructor(art, danmuku) {
+    this.art = art;
+    this.danmuku = danmuku;
+    this.utils = art.constructor.utils;
+    const { setStyle } = this.utils;
+    const { $controlsCenter } = art.template;
+    setStyle($controlsCenter, "display", "flex");
+    this.template = {
+      $controlsCenter,
+      $mount: $controlsCenter,
+      $danmuku: null,
+      $toggle: null,
+      $config: null,
+      $configPanel: null,
+      $configModes: null,
+      $style: null,
+      $stylePanel: null,
+      $styleModes: null,
+      $colors: null,
+      $opacitySlider: null,
+      $opacityValue: null,
+      $marginSlider: null,
+      $marginValue: null,
+      $fontSizeSlider: null,
+      $fontSizeValue: null,
+      $speedSlider: null,
+      $speedValue: null,
+      $input: null,
+      $send: null
+    };
+    this.slider = {
+      opacity: null,
+      margin: null,
+      fontSize: null,
+      speed: null
+    };
+    this.emitting = false;
+    this.isLock = false;
+    this.timer = null;
+    this.createTemplate();
+    this.createSliders();
+    this.createEvents();
+    this.mount(this.option.mount);
+    art.on("resize", () => this.resize());
+    art.on("fullscreen", (state) => this.onFullscreen(state));
+    art.on("fullscreenWeb", (state) => this.onFullscreen(state));
+    art.proxy(this.template.$config, "mouseenter", () => {
+      this.onMouseEnter({
+        $control: this.template.$config,
+        $panel: this.template.$configPanel
+      });
+    });
+    art.proxy(this.template.$style, "mouseenter", () => {
+      this.onMouseEnter({
+        $control: this.template.$style,
+        $panel: this.template.$stylePanel
+      });
+    });
+  }
+  static get icons() {
+    return {
+      $on,
+      $off,
+      $config,
+      $style,
+      $mode_0_off,
+      $mode_0_on,
+      $mode_1_off,
+      $mode_1_on,
+      $mode_2_off,
+      $mode_2_on,
+      $check_on,
+      $check_off
+    };
+  }
+  get option() {
+    return this.danmuku.option;
+  }
+  get outside() {
+    return this.template.$mount !== this.template.$controlsCenter;
+  }
+  get TEMPLATE() {
+    const { option } = this;
+    return `
+            <div class="apd-toggle">
+                ${$on}${$off}
+            </div>
+            <div class="apd-config">
+                ${$config}
+                <div class="apd-config-panel">
+                    <div class="apd-config-panel-inner">
+                        <div class="apd-config-mode">
+                            按类型屏蔽
+                            <div class="apd-modes">
+                                <div data-mode="0" class="apd-mode">
+                                    ${$mode_0_off}${$mode_0_on}
+                                    <div>滚动</div>
+                                </div>
+                                <div data-mode="1" class="apd-mode">
+                                    ${$mode_1_off}${$mode_1_on}
+                                    <div>顶部</div>
+                                </div>
+                                <div data-mode="2" class="apd-mode">
+                                    ${$mode_2_off}${$mode_2_on}
+                                    <div>底部</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="apd-config-other">
+                            <div class="apd-other apd-anti-overlap">
+                                ${$check_on}${$check_off}
+                                防止弹幕重叠
+                            </div>
+                            <div class="apd-other apd-sync-video">
+                                ${$check_on}${$check_off}
+                                同步视频速度
+                            </div>
+                        </div>
+                        <div class="apd-config-slider apd-config-opacity">
+                            不透明度
+                            <div class="apd-slider"></div>
+                            <div class="apd-value">未知</div>
+                        </div>
+                        <div class="apd-config-slider apd-config-margin">
+                            显示区域
+                            <div class="apd-slider"></div>
+                            <div class="apd-value">未知</div>
+                        </div>
+                        <div class="apd-config-slider apd-config-fontSize">
+                            弹幕字号
+                            <div class="apd-slider"></div>
+                            <div class="apd-value">未知</div>
+                        </div>
+                        <div class="apd-config-slider apd-config-speed">
+                            弹幕速度
+                            <div class="apd-slider"></div>
+                            <div class="apd-value">未知</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="apd-emitter">
+                <div class="apd-style">
+                    ${$style}
+                    <div class="apd-style-panel">
+                        <div class="apd-style-panel-inner">
+                            <div class="apd-style-mode">
+                                模式
+                                <div class="apd-modes">
+                                    <div data-mode="0" class="apd-mode">
+                                        ${$mode_0_on}
+                                        <div>滚动</div>
+                                    </div>
+                                    <div data-mode="1" class="apd-mode">
+                                        ${$mode_1_on}
+                                        <div>顶部</div>
+                                    </div>
+                                    <div data-mode="2" class="apd-mode">
+                                        ${$mode_2_on}
+                                        <div>底部</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="apd-style-color">
+                                颜色
+                                <div class="apd-colors">
+                                    ${this.COLOR.map((color) => `<div data-color="${color}" class="apd-color" style="background-color: ${color}"></div>`).join("")}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${option.maxLength}" />
+                <div class="apd-send">发送</div>
+            </div>
+        `;
+  }
+  get OPACITY() {
+    return {
+      min: 0,
+      max: 100,
+      steps: [],
+      ...this.option.OPACITY
+    };
+  }
+  get FONT_SIZE() {
+    return {
+      min: 12,
+      max: 120,
+      steps: [],
+      ...this.option.FONT_SIZE
+    };
+  }
+  get MARGIN() {
+    return {
+      min: 0,
+      max: 3,
+      steps: [
+        {
+          name: "1/4",
+          value: [10, "75%"]
+        },
+        {
+          name: "半屏",
+          value: [10, "50%"]
+        },
+        {
+          name: "3/4",
+          value: [10, "25%"]
+        },
+        {
+          name: "满屏",
+          value: [10, 10]
+        }
+      ],
+      ...this.option.MARGIN
+    };
+  }
+  get SPEED() {
+    return {
+      min: 0,
+      max: 4,
+      steps: [
+        {
+          name: "极慢",
+          value: 10
+        },
+        {
+          name: "较慢",
+          value: 7.5,
+          hide: true
+        },
+        {
+          name: "适中",
+          value: 5
+        },
+        {
+          name: "较快",
+          value: 2.5,
+          hide: true
+        },
+        {
+          name: "极快",
+          value: 1
+        }
+      ],
+      ...this.option.SPEED
+    };
+  }
+  get COLOR() {
+    return this.option.COLOR.length ? this.option.COLOR : [
+      "#FE0302",
+      "#FF7204",
+      "#FFAA02",
+      "#FFD302",
+      "#FFFF00",
+      "#A0EE00",
+      "#00CD00",
+      "#019899",
+      "#4266BE",
+      "#89D5FF",
+      "#CC0273",
+      "#222222",
+      "#9B9B9B",
+      "#FFFFFF"
+    ];
+  }
+  query(selector) {
+    const { query } = this.utils;
+    const { $danmuku } = this.template;
+    return query(selector, $danmuku);
+  }
+  append(el, target) {
+    const { append } = this.utils;
+    const children = [...el.children];
+    if (children.includes(target))
+      return;
+    append(el, target);
+  }
+  setData(key, value) {
+    const { $player } = this.art.template;
+    const { $mount } = this.template;
+    $player.dataset[key] = value;
+    if (this.outside) {
+      $mount.dataset[key] = value;
+    }
+  }
+  createTemplate() {
+    const { createElement, tooltip } = this.utils;
+    const $danmuku = createElement("div");
+    $danmuku.className = "artplayer-plugin-danmuku";
+    $danmuku.innerHTML = this.TEMPLATE;
+    this.template.$danmuku = $danmuku;
+    this.template.$toggle = this.query(".apd-toggle");
+    this.template.$config = this.query(".apd-config");
+    this.template.$configPanel = this.query(".apd-config-panel");
+    this.template.$configModes = this.query(".apd-config-mode .apd-modes");
+    this.template.$style = this.query(".apd-style");
+    this.template.$stylePanel = this.query(".apd-style-panel");
+    this.template.$styleModes = this.query(".apd-style-mode .apd-modes");
+    this.template.$colors = this.query(".apd-colors");
+    this.template.$antiOverlap = this.query(".apd-anti-overlap");
+    this.template.$syncVideo = this.query(".apd-sync-video");
+    this.template.$opacitySlider = this.query(".apd-config-opacity .apd-slider");
+    this.template.$opacityValue = this.query(".apd-config-opacity .apd-value");
+    this.template.$marginSlider = this.query(".apd-config-margin .apd-slider");
+    this.template.$marginValue = this.query(".apd-config-margin .apd-value");
+    this.template.$fontSizeSlider = this.query(".apd-config-fontSize .apd-slider");
+    this.template.$fontSizeValue = this.query(".apd-config-fontSize .apd-value");
+    this.template.$speedSlider = this.query(".apd-config-speed .apd-slider");
+    this.template.$speedValue = this.query(".apd-config-speed .apd-value");
+    this.template.$input = this.query(".apd-input");
+    this.template.$send = this.query(".apd-send");
+    const { $toggle } = this.template;
+    this.art.on("artplayerPluginDanmuku:show", () => {
+      tooltip($toggle, "关闭弹幕");
+    });
+    this.art.on("artplayerPluginDanmuku:hide", () => {
+      tooltip($toggle, "打开弹幕");
+    });
+  }
+  createEvents() {
+    const { $toggle, $configModes, $styleModes, $colors, $antiOverlap, $syncVideo, $send, $input } = this.template;
+    this.art.proxy($toggle, "click", () => {
+      this.danmuku.config({
+        visible: !this.option.visible
+      });
+      this.reset();
+    });
+    this.art.proxy($configModes, "click", (event) => {
+      const $mode = event.target.closest(".apd-mode");
+      if (!$mode)
+        return;
+      const mode = Number($mode.dataset.mode);
+      if (this.option.modes.includes(mode)) {
+        this.danmuku.config({
+          modes: this.option.modes.filter((m) => m !== mode)
+        });
+      } else {
+        this.danmuku.config({
+          modes: [...this.option.modes, mode]
+        });
+      }
+      this.reset();
+    });
+    this.art.proxy($antiOverlap, "click", () => {
+      this.danmuku.config({
+        antiOverlap: !this.option.antiOverlap
+      });
+      this.reset();
+    });
+    this.art.proxy($syncVideo, "click", () => {
+      this.danmuku.config({
+        synchronousPlayback: !this.option.synchronousPlayback
+      });
+      this.reset();
+    });
+    this.art.proxy($styleModes, "click", (event) => {
+      const $mode = event.target.closest(".apd-mode");
+      if (!$mode)
+        return;
+      const mode = Number($mode.dataset.mode);
+      this.danmuku.config({
+        mode
+      });
+      this.reset();
+    });
+    this.art.proxy($colors, "click", (event) => {
+      const $color = event.target.closest(".apd-color");
+      if (!$color)
+        return;
+      this.danmuku.config({
+        color: $color.dataset.color
+      });
+      this.reset();
+    });
+    this.art.proxy($send, "click", () => this.emit());
+    this.art.proxy($input, "keypress", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        this.emit();
+      }
+    });
+  }
+  createSliders() {
+    this.slider.opacity = this.createSlider({
+      ...this.OPACITY,
+      container: this.template.$opacitySlider,
+      findIndex: () => {
+        return Math.round(this.option.opacity * 100);
+      },
+      onChange: (index) => {
+        const { $opacityValue } = this.template;
+        $opacityValue.textContent = `${index}%`;
+        this.danmuku.config({
+          opacity: index / 100
+        });
+      }
+    });
+    this.slider.margin = this.createSlider({
+      ...this.MARGIN,
+      container: this.template.$marginSlider,
+      findIndex: () => {
+        return this.MARGIN.steps.findIndex(
+          (item) => item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1]
+        );
+      },
+      onChange: (index) => {
+        const margin = this.MARGIN.steps[index];
+        if (!margin)
+          return;
+        const { $marginValue } = this.template;
+        $marginValue.textContent = margin.name;
+        this.danmuku.config({
+          margin: margin.value
+        });
+      }
+    });
+    this.slider.fontSize = this.createSlider({
+      ...this.FONT_SIZE,
+      container: this.template.$fontSizeSlider,
+      findIndex: () => {
+        return this.danmuku.fontSize;
+      },
+      onChange: (index) => {
+        const { $fontSizeValue } = this.template;
+        $fontSizeValue.textContent = `${index}px`;
+        if (index === this.danmuku.fontSize)
+          return;
+        this.danmuku.config({
+          fontSize: index
+        });
+      }
+    });
+    this.slider.speed = this.createSlider({
+      ...this.SPEED,
+      container: this.template.$speedSlider,
+      findIndex: () => {
+        return this.SPEED.steps.findIndex((item) => item.value === this.option.speed);
+      },
+      onChange: (index) => {
+        const speed = this.SPEED.steps[index];
+        if (!speed)
+          return;
+        const { $speedValue } = this.template;
+        $speedValue.textContent = speed.name;
+        this.danmuku.config({
+          speed: speed.value
+        });
+      }
+    });
+  }
+  createSlider({ min, max, container, findIndex, onChange, steps = [] }) {
+    const { query, clamp, setStyle } = this.utils;
+    setStyle(container, "touch-action", "none");
+    container.innerHTML = `
+            <div class="apd-slider-line">
+                <div class="apd-slider-points">
+                    ${steps.map(() => `<div class="apd-slider-point"></div>`).join("")}
+                </div>
+                <div class="apd-slider-progress"></div>
+            </div>
+            <div class="apd-slider-dot"></div>
+            <div class="apd-slider-steps">
+                ${steps.map((step) => step.hide ? "" : `<div class="apd-slider-step">${step.name}</div>`).join("")}
+            </div>
+        `;
+    const $dot = query(".apd-slider-dot", container);
+    const $progress = query(".apd-slider-progress", container);
+    let isDroging = false;
+    function reset(index = findIndex()) {
+      if (index < min || index > max)
+        return;
+      const percentage = (index - min) / (max - min);
+      $dot.style.left = `${percentage * 100}%`;
+      if (steps.length === 0) {
+        $progress.style.width = $dot.style.left;
+      }
+      onChange(index);
+    }
+    function updateLeft(event) {
+      const { top, height, left, width } = container.getBoundingClientRect();
+      if (this.art.isRotate) {
+        const value = clamp(event.clientY - top, 0, height);
+        const index = Math.round(value / height * (max - min) + min);
+        reset(index);
+      } else {
+        const value = clamp(event.clientX - left, 0, width);
+        const index = Math.round(value / width * (max - min) + min);
+        reset(index);
+      }
+    }
+    this.art.proxy(container, "click", (event) => {
+      updateLeft.call(this, event);
+    });
+    this.art.proxy(container, "pointerdown", (event) => {
+      isDroging = event.button === 0;
+    });
+    this.art.on("document:pointermove", (event) => {
+      if (isDroging) {
+        updateLeft.call(this, event);
+      }
+    });
+    this.art.on("document:pointerup", (event) => {
+      if (isDroging) {
+        isDroging = false;
+        updateLeft.call(this, event);
+      }
+    });
+    return { reset };
+  }
+  onFullscreen(state) {
+    const { $danmuku, $controlsCenter, $mount } = this.template;
+    if (this.outside) {
+      if (state) {
+        this.append($controlsCenter, $danmuku);
+      } else {
+        this.append($mount, $danmuku);
+      }
+    } else {
+      this.append($controlsCenter, $danmuku);
+    }
+  }
+  onMouseEnter({ $control, $panel }) {
+    const { $player } = this.art.template;
+    const controlRect = $control.getBoundingClientRect();
+    const panelRect = $panel.getBoundingClientRect();
+    const playerRect = $player.getBoundingClientRect();
+    const half = panelRect.width / 2 - controlRect.width / 2;
+    const left = playerRect.left - (controlRect.left - half);
+    const right = controlRect.right + half - playerRect.right;
+    if (left > 0) {
+      $panel.style.left = `${-half + left}px`;
+    } else if (right > 0) {
+      $panel.style.left = `${-half - right}px`;
+    } else {
+      $panel.style.left = `${-half}px`;
+    }
+  }
+  async emit() {
+    const { $input } = this.template;
+    const text = $input.value.trim();
+    if (!text.length)
+      return;
+    if (this.isLock)
+      return;
+    if (this.emitting)
+      return;
+    const danmu = {
+      text,
+      mode: this.option.mode,
+      color: this.option.color,
+      time: this.art.currentTime
+    };
+    try {
+      this.emitting = true;
+      const state = await this.option.beforeEmit(danmu);
+      this.emitting = false;
+      if (state !== true)
+        return;
+      danmu.border = true;
+      delete danmu.time;
+      this.danmuku.emit(danmu);
+      $input.value = "";
+      this.lock();
+    } catch (error) {
+      console.error("Error emitting danmuku:", error);
+      this.emitting = false;
+    }
+  }
+  lock() {
+    const { addClass } = this.utils;
+    const { $send } = this.template;
+    this.isLock = true;
+    let time = this.option.lockTime;
+    $send.textContent = time;
+    addClass($send, "apd-lock");
+    const loop = () => {
+      this.timer = setTimeout(() => {
+        if (time === 0) {
+          this.unlock();
+        } else {
+          time -= 1;
+          $send.textContent = time;
+          loop();
+        }
+      }, 1e3);
+    };
+    loop();
+  }
+  unlock() {
+    const { removeClass } = this.utils;
+    const { $send } = this.template;
+    clearTimeout(this.timer);
+    this.isLock = false;
+    $send.textContent = "发送";
+    removeClass($send, "apd-lock");
+  }
+  resize() {
+    if (this.outside)
+      return;
+    if (this.art.fullscreen)
+      return;
+    if (this.art.fullscreenWeb)
+      return;
+    const { $player, $controlsCenter } = this.art.template;
+    const { $danmuku } = this.template;
+    if (this.art.width < this.option.width) {
+      this.append($player, $danmuku);
+    } else {
+      this.append($controlsCenter, $danmuku);
+    }
+  }
+  reset() {
+    const { inverseClass, tooltip } = this.utils;
+    const { $toggle, $colors } = this.template;
+    this.slider.opacity.reset();
+    this.slider.margin.reset();
+    this.slider.fontSize.reset();
+    this.slider.speed.reset();
+    this.setData("danmukuVisible", this.option.visible);
+    this.setData("danmukuMode", this.option.mode);
+    this.setData("danmukuColor", this.option.color);
+    this.setData("danmukuMode0", this.option.modes.includes(0));
+    this.setData("danmukuMode1", this.option.modes.includes(1));
+    this.setData("danmukuMode2", this.option.modes.includes(2));
+    this.setData("danmukuAntiOverlap", this.option.antiOverlap);
+    this.setData("danmukuSyncVideo", this.option.synchronousPlayback);
+    this.setData("danmukuTheme", this.option.theme);
+    this.setData("danmukuEmitter", this.option.emitter);
+    const colors = $colors.children;
+    const $color = Array.from(colors).find((item) => item.dataset.color === this.option.color.toUpperCase());
+    $color && inverseClass($color, "apd-active");
+    tooltip($toggle, this.option.visible ? "关闭弹幕" : "打开弹幕");
+    this.resize();
+  }
+  mount(target) {
+    const { errorHandle } = this.utils;
+    const $el = typeof target === "string" ? document.querySelector(target) : target;
+    errorHandle($el, `Can not find the mount point: ${target}`);
+    this.append($el, this.template.$danmuku);
+    this.template.$mount = $el;
+    this.reset();
+  }
+}
+if (typeof document !== "undefined") {
+  const id = "artplayer-plugin-danmuku";
+  let $style2 = document.getElementById(id);
+  if (!$style2) {
+    $style2 = document.createElement("style");
+    $style2.id = id;
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.head.appendChild($style2);
+      });
+    } else {
+      (document.head || document.documentElement).appendChild($style2);
+    }
+  }
+  $style2.textContent = style;
+}
+function artplayerPluginDanmuku(option) {
+  return (art) => {
+    const danmuku = new Danmuku(art, option);
+    const setting = new Setting(art, danmuku);
+    if (danmuku.option.heatmap) {
+      heatmap(art, danmuku, danmuku.option.heatmap);
+    }
+    return {
+      name: "artplayerPluginDanmuku",
+      emit: danmuku.emit.bind(danmuku),
+      load: danmuku.load.bind(danmuku),
+      config: danmuku.config.bind(danmuku),
+      hide: danmuku.hide.bind(danmuku),
+      show: danmuku.show.bind(danmuku),
+      reset: danmuku.reset.bind(danmuku),
+      mount: setting.mount.bind(setting),
+      get option() {
+        return danmuku.option;
+      },
+      get isHide() {
+        return danmuku.isHide;
+      },
+      get isStop() {
+        return danmuku.isStop;
+      }
+    };
+  };
+}
+artplayerPluginDanmuku.icons = Setting.icons;
+if (typeof window !== "undefined") {
+  window.artplayerPluginDanmuku = artplayerPluginDanmuku;
+}
+export {
+  artplayerPluginDanmuku as default
+};

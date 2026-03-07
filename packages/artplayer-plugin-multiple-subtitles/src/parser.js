@@ -4,8 +4,7 @@
 // Not intended to be fast, but if you can make it faster, please help out!
 
 /* eslint-disable */
-(function () {
-    var defaultCueSettings = {
+var defaultCueSettings = {
         direction: 'horizontal',
         snapToLines: true,
         linePosition: 'auto',
@@ -886,12 +885,4 @@
         };
     };
 
-    function exportify(object) {
-        object.WebVTTParser = WebVTTParser;
-        object.WebVTTCueTimingsAndSettingsParser = WebVTTCueTimingsAndSettingsParser;
-        object.WebVTTCueTextParser = WebVTTCueTextParser;
-        object.WebVTTSerializer = WebVTTSerializer;
-    }
-    if (typeof window !== 'undefined') exportify(window);
-    if (typeof exports !== 'undefined') exportify(exports);
-})();
+export { WebVTTParser, WebVTTCueTimingsAndSettingsParser, WebVTTCueTextParser, WebVTTSerializer };

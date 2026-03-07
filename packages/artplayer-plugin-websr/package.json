@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-websr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI upscaling plugin for ArtPlayer using WebSR - real-time video super-resolution with WebGPU",
   "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",

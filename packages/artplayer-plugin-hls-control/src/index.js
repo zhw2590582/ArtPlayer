@@ -1,5 +1,5 @@
-import $audio from 'bundle-text:./audio.svg'
-import $quality from 'bundle-text:./quality.svg'
+import $audio from './audio.svg?raw'
+import $quality from './quality.svg?raw'
 
 function uniqBy(array, property) {
   const seen = new Map()

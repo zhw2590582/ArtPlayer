@@ -1,8 +1,5013 @@
-
 /*!
- * artplayer.js v5.3.1-beta.1
+ * artplayer.js v5.3.1
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-!function(e,t,r,a,o){var i="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},n="function"==typeof i[a]&&i[a],s=n.i||{},l=n.cache||{},c="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function p(t,r){if(!l[t]){if(!e[t]){if(o[t])return o[t];var s="function"==typeof i[a]&&i[a];if(!r&&s)return s(t,!0);if(n)return n(t,!0);if(c&&"string"==typeof t)return c(t);var d=Error("Cannot find module '"+t+"'");throw d.code="MODULE_NOT_FOUND",d}f.resolve=function(r){var a=e[t][1][r];return null!=a?a:r},f.cache={};var u=l[t]=new p.Module(t);e[t][0].call(u.exports,f,u,u.exports,i)}return l[t].exports;function f(e){var t=f.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var r={__esModule:!0};return t.forEach(function(e){var t=e[0],a=e[1],o=e[2]||e[0],i=p(a);"*"===t?Object.keys(i).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(r,e)||Object.defineProperty(r,e,{enumerable:!0,get:function(){return i[e]}})}):"*"===o?Object.defineProperty(r,t,{enumerable:!0,value:i}):Object.defineProperty(r,t,{enumerable:!0,get:function(){return"default"===o?i.__esModule?i.default:i:i[o]}})}),r}return p(t)}}p.isParcelRequire=!0,p.Module=function(e){this.id=e,this.bundle=p,this.require=c,this.exports={}},p.modules=e,p.cache=l,p.parent=n,p.distDir=void 0,p.publicUrl=void 0,p.devServer=void 0,p.i=s,p.register=function(t,r){e[t]=[function(e,t){t.exports=r},{}]},Object.defineProperty(p,"root",{get:function(){return i[a]}}),i[a]=p;for(var d=0;d<t.length;d++)p(t[d]);if(r){var u=p(r);"object"==typeof exports&&"u">typeof module?module.exports=u:"function"==typeof define&&define.amd&&define(function(){return u})}}({esqvp:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("bundle-text:./style/index.less"),n=o.interopDefault(i),s=e("option-validator"),l=o.interopDefault(s),c=e("../package.json"),p=e("./config"),d=o.interopDefault(p),u=e("./contextmenu"),f=o.interopDefault(u),h=e("./control"),m=o.interopDefault(h),g=e("./events"),v=o.interopDefault(g),y=e("./hotkey"),b=o.interopDefault(y),x=e("./i18n"),w=o.interopDefault(x),j=e("./icons"),k=o.interopDefault(j),E=e("./info"),S=o.interopDefault(E),$=e("./layer"),M=o.interopDefault($),I=e("./loading"),T=o.interopDefault(I),C=e("./mask"),F=o.interopDefault(C),q=e("./notice"),D=o.interopDefault(q),R=e("./player"),A=o.interopDefault(R),B=e("./plugins"),L=o.interopDefault(B),O=e("./scheme"),P=o.interopDefault(O),z=e("./setting"),X=o.interopDefault(z),_=e("./storage"),V=o.interopDefault(_),H=e("./subtitle"),N=o.interopDefault(H),W=e("./template"),U=o.interopDefault(W),Y=e("./utils"),Z=e("./utils/emitter"),G=o.interopDefault(Z);let K=0,J=[];class Q extends G.default{constructor(e,t){if(super(),!Y.isBrowser)throw Error("Artplayer can only be used in the browser environment");this.id=++K;let r=Y.mergeDeep(Q.option,e);if(r.container=e.container,this.option=(0,l.default)(r,P.default),this.isLock=!1,this.isReady=!1,this.isFocus=!1,this.isInput=!1,this.isRotate=!1,this.isDestroy=!1,this.template=new(0,U.default)(this),this.events=new(0,v.default)(this),this.storage=new(0,V.default)(this),this.icons=new(0,k.default)(this),this.i18n=new(0,w.default)(this),this.notice=new(0,D.default)(this),this.player=new(0,A.default)(this),this.layers=new(0,M.default)(this),this.controls=new(0,m.default)(this),this.contextmenu=new(0,f.default)(this),this.subtitle=new(0,N.default)(this),this.info=new(0,S.default)(this),this.loading=new(0,T.default)(this),this.hotkey=new(0,b.default)(this),this.mask=new(0,F.default)(this),this.setting=new(0,X.default)(this),this.plugins=new(0,L.default)(this),"function"==typeof t&&this.on("ready",()=>t.call(this,this)),Q.DEBUG){let e=e=>console.log(`[ART.${this.id}] -> ${e}`);e(`Version@${Q.version}`);for(let t=0;t<d.default.events.length;t++)this.on(`video:${d.default.events[t]}`,t=>e(`Event@${t.type}`))}J.push(this)}static get instances(){return J}static get version(){return c.version}static get config(){return d.default}static get utils(){return Y}static get scheme(){return P.default}static get Emitter(){return G.default}static get validator(){return l.default}static get kindOf(){return l.default.kindOf}static get html(){return U.default.html}static get option(){return{id:"",container:"#artplayer",url:"",poster:"",type:"",theme:"#f00",volume:.7,isLive:!1,muted:!1,autoplay:!1,autoSize:!1,autoMini:!1,loop:!1,flip:!1,playbackRate:!1,aspectRatio:!1,screenshot:!1,setting:!1,hotkey:!0,pip:!1,mutex:!0,backdrop:!0,fullscreen:!1,fullscreenWeb:!1,subtitleOffset:!1,miniProgressBar:!1,useSSR:!1,playsInline:!0,lock:!1,gesture:!0,fastForward:!1,autoPlayback:!1,autoOrientation:!1,airplay:!1,proxy:void 0,layers:[],contextmenu:[],controls:[],settings:[],quality:[],highlight:[],plugins:[],thumbnails:{url:"",number:60,column:10,width:0,height:0,scale:1},subtitle:{url:"",type:"",style:{},name:"",escape:!0,encoding:"utf-8",onVttLoad:e=>e},moreVideoAttr:{controls:!1,preload:Y.isSafari?"auto":"metadata"},i18n:{},icons:{},cssVar:{},customType:{},lang:navigator?.language.toLowerCase()}}get proxy(){return this.events.proxy}get query(){return this.template.query}get video(){return this.template.$video}reset(){this.video.removeAttribute("src"),this.video.load()}destroy(e=!0){Q.REMOVE_SRC_WHEN_DESTROY&&this.reset(),this.events.destroy(),this.template.destroy(e),J.splice(J.indexOf(this),1),this.isDestroy=!0,this.emit("destroy")}}r.default=Q,Q.STYLE=n.default,Q.DEBUG=!1,Q.CONTEXTMENU=!0,Q.NOTICE_TIME=2e3,Q.SETTING_WIDTH=250,Q.SETTING_ITEM_WIDTH=200,Q.SETTING_ITEM_HEIGHT=35,Q.RESIZE_TIME=200,Q.SCROLL_TIME=200,Q.SCROLL_GAP=50,Q.AUTO_PLAYBACK_MAX=10,Q.AUTO_PLAYBACK_MIN=5,Q.AUTO_PLAYBACK_TIMEOUT=3e3,Q.RECONNECT_TIME_MAX=5,Q.RECONNECT_SLEEP_TIME=1e3,Q.CONTROL_HIDE_TIME=3e3,Q.DBCLICK_TIME=300,Q.DBCLICK_FULLSCREEN=!0,Q.MOBILE_DBCLICK_PLAY=!0,Q.MOBILE_CLICK_PLAY=!1,Q.AUTO_ORIENTATION_TIME=200,Q.INFO_LOOP_TIME=1e3,Q.FAST_FORWARD_VALUE=3,Q.FAST_FORWARD_TIME=1e3,Q.TOUCH_MOVE_RATIO=.5,Q.VOLUME_STEP=.1,Q.SEEK_STEP=5,Q.PLAYBACK_RATE=[.5,.75,1,1.25,1.5,2],Q.ASPECT_RATIO=["default","4:3","16:9"],Q.FLIP=["normal","horizontal","vertical"],Q.FULLSCREEN_WEB_IN_BODY=!0,Q.LOG_VERSION=!0,Q.USE_RAF=!1,Q.REMOVE_SRC_WHEN_DESTROY=!0,Y.isBrowser&&(window.Artplayer=Q,Y.setStyleText("artplayer-style",n.default),setTimeout(()=>{Q.LOG_VERSION&&console.log(`%c ArtPlayer %c ${Q.version} %c https://artplayer.org`,"color: #fff; background: #5f5f5f","color: #fff; background: #4bc729","")},100))},{"bundle-text:./style/index.less":"ePB25","option-validator":"g7VGh","../package.json":"lh3R5","./config":"eJfh8","./contextmenu":"9zso8","./control":"dp1yk","./events":"jmVSD","./hotkey":"dswts","./i18n":"d9ktO","./icons":"fFHY0","./info":"kZ0F8","./layer":"j9lbi","./loading":"bMjWd","./mask":"k1nkQ","./notice":"fPVaU","./player":"uR0Sw","./plugins":"cjxJL","./scheme":"biLjm","./setting":"bwLGT","./storage":"kwqbK","./subtitle":"k5613","./template":"fwOA1","./utils":"aBlEo","./utils/emitter":"4NM7P","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],ePB25:[function(e,t,r,a){t.exports='.art-video-player{--art-theme:red;--art-font-color:#fff;--art-background-color:#000;--art-text-shadow-color:#00000080;--art-transition-duration:.2s;--art-padding:10px;--art-border-radius:3px;--art-progress-height:6px;--art-progress-color:#ffffff40;--art-progress-top-gap:8px;--art-hover-color:#ffffff40;--art-loaded-color:#ffffff40;--art-state-size:80px;--art-state-opacity:.8;--art-bottom-height:100px;--art-bottom-offset:20px;--art-bottom-gap:5px;--art-highlight-width:8px;--art-highlight-color:#ffffff80;--art-control-height:46px;--art-control-opacity:.75;--art-control-icon-size:36px;--art-control-icon-scale:1.1;--art-volume-height:120px;--art-volume-handle-size:14px;--art-lock-size:36px;--art-indicator-scale:0;--art-indicator-size:16px;--art-fullscreen-web-index:9999;--art-settings-icon-size:24px;--art-settings-max-height:300px;--art-selector-max-height:300px;--art-contextmenus-min-width:250px;--art-subtitle-font-size:20px;--art-subtitle-gap:5px;--art-subtitle-bottom:15px;--art-subtitle-border:#000;--art-widget-background:#000000d9;--art-tip-background:#000000b3;--art-scrollbar-size:4px;--art-scrollbar-background:#ffffff40;--art-scrollbar-background-hover:#ffffff80;--art-mini-progress-height:2px}.art-bg-cover{background-position:50%;background-repeat:no-repeat;background-size:cover}.art-bottom-gradient{background-image:linear-gradient(#0000,#0006,#000);background-position:bottom;background-repeat:repeat-x}.art-backdrop-filter{backdrop-filter:saturate(180%)blur(20px);background-color:#000000bf!important}.art-truncate{text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.art-video-player{zoom:1;text-align:left;user-select:none;box-sizing:border-box;width:100%;height:100%;color:var(--art-font-color);background-color:var(--art-background-color);text-shadow:0 0 2px var(--art-text-shadow-color);-webkit-tap-highlight-color:#0000;-ms-touch-action:manipulation;touch-action:manipulation;-ms-high-contrast-adjust:none;direction:ltr;outline:0;margin:0 auto;padding:0;font-family:PingFang SC,Helvetica Neue,Microsoft YaHei,Roboto,Arial,sans-serif;font-size:14px;line-height:1.3;position:relative}.art-video-player *,.art-video-player :before,.art-video-player :after{box-sizing:border-box}.art-video-player ::-webkit-scrollbar{width:var(--art-scrollbar-size);height:var(--art-scrollbar-size)}.art-video-player ::-webkit-scrollbar-thumb{background-color:var(--art-scrollbar-background)}.art-video-player ::-webkit-scrollbar-thumb:hover{background-color:var(--art-scrollbar-background-hover)}.art-video-player img{vertical-align:top;max-width:100%}.art-video-player svg{fill:var(--art-font-color)}.art-video-player a{color:var(--art-font-color);text-decoration:none}.art-icon{justify-content:center;align-items:center;line-height:1;display:flex}.art-video-player.art-backdrop .art-contextmenus,.art-video-player.art-backdrop .art-info,.art-video-player.art-backdrop .art-settings,.art-video-player.art-backdrop .art-layer-auto-playback,.art-video-player.art-backdrop .art-selector-list,.art-video-player.art-backdrop .art-volume-inner{backdrop-filter:saturate(180%)blur(20px);background-color:#000000bf!important}.art-video{z-index:10;cursor:pointer;width:100%;height:100%;position:absolute;inset:0}.art-poster{z-index:11;pointer-events:none;background-position:50%;background-repeat:no-repeat;background-size:cover;width:100%;height:100%;position:absolute;inset:0}.art-video-player .art-subtitle{z-index:20;text-align:center;pointer-events:none;justify-content:center;align-items:center;gap:var(--art-subtitle-gap);width:100%;bottom:var(--art-subtitle-bottom);font-size:var(--art-subtitle-font-size);transition:bottom var(--art-transition-duration) ease;text-shadow:var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;flex-direction:column;padding:0 5%;display:none;position:absolute}.art-video-player.art-subtitle-show .art-subtitle{display:flex}.art-video-player.art-control-show .art-subtitle{bottom:calc(var(--art-control-height) + var(--art-subtitle-bottom))}.art-danmuku{z-index:30;pointer-events:none;width:100%;height:100%;position:absolute;inset:0;overflow:hidden}.art-video-player .art-layers{z-index:40;pointer-events:none;width:100%;height:100%;display:none;position:absolute;inset:0}.art-video-player .art-layers .art-layer{pointer-events:auto}.art-video-player.art-layer-show .art-layers{display:flex}.art-video-player .art-mask{z-index:50;pointer-events:none;justify-content:center;align-items:center;width:100%;height:100%;display:flex;position:absolute;inset:0}.art-video-player .art-mask .art-state{opacity:0;width:var(--art-state-size);height:var(--art-state-size);transition:all var(--art-transition-duration) ease;justify-content:center;align-items:center;display:flex;transform:scale(2)}.art-video-player.art-mask-show .art-state{cursor:pointer;pointer-events:auto;opacity:var(--art-state-opacity);transform:scale(1)}.art-video-player.art-loading-show .art-state{display:none}.art-video-player .art-loading{z-index:70;pointer-events:none;justify-content:center;align-items:center;width:100%;height:100%;display:none;position:absolute;inset:0}.art-video-player.art-loading-show .art-loading{display:flex}.art-video-player.art-loading-show .art-mask{display:none}.art-video-player .art-bottom{z-index:60;opacity:0;pointer-events:none;width:100%;height:100%;padding:0 var(--art-padding);transition:all var(--art-transition-duration) ease;background-size:100% var(--art-bottom-height);background-image:linear-gradient(#0000,#0006,#000);background-position:bottom;background-repeat:repeat-x;flex-direction:column;justify-content:flex-end;display:flex;position:absolute;inset:0;overflow:hidden}.art-video-player .art-bottom .art-controls,.art-video-player .art-bottom .art-progress{transform:translateY(var(--art-bottom-offset));transition:transform var(--art-transition-duration) ease}.art-video-player.art-control-show .art-bottom,.art-video-player.art-hover .art-bottom{opacity:1}.art-video-player.art-control-show .art-bottom .art-controls,.art-video-player.art-hover .art-bottom .art-controls,.art-video-player.art-control-show .art-bottom .art-progress,.art-video-player.art-hover .art-bottom .art-progress{transform:translateY(0)}.art-bottom .art-progress{z-index:0;pointer-events:auto;padding-top:var(--art-progress-top-gap);padding-bottom:var(--art-bottom-gap);position:relative}.art-bottom .art-progress .art-control-progress{cursor:pointer;height:var(--art-progress-height);justify-content:center;align-items:center;display:flex;position:relative}.art-bottom .art-progress .art-control-progress .art-control-progress-inner{width:100%;height:50%;transition:height var(--art-transition-duration) ease;background-color:var(--art-progress-color);align-items:center;display:flex;position:relative}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover{z-index:0;background-color:var(--art-hover-color);width:0%;height:100%;position:absolute;inset:0}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded{z-index:10;background-color:var(--art-loaded-color);width:0%;height:100%;position:absolute;inset:0}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played{z-index:20;background-color:var(--art-theme);width:0%;height:100%;position:absolute;inset:0}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight{z-index:30;pointer-events:none;width:100%;height:100%;position:absolute;inset:0}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span{z-index:0;pointer-events:auto;width:100%;height:100%;transform:translateX(calc(var(--art-highlight-width) / -2));background-color:var(--art-highlight-color);position:absolute;inset:0 auto 0 0;width:var(--art-highlight-width)!important}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator{z-index:40;width:var(--art-indicator-size);height:var(--art-indicator-size);transform:scale(var(--art-indicator-scale));margin-left:calc(var(--art-indicator-size) / -2);transition:transform var(--art-transition-duration) ease;border-radius:50%;justify-content:center;align-items:center;display:flex;position:absolute;left:0}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon{pointer-events:none;width:100%;height:100%}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover{transform:scale(1.2)!important}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active{transform:scale(1)!important}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip{transform-origin:bottom;opacity:0;z-index:50;border-radius:var(--art-border-radius);white-space:nowrap;background-color:var(--art-tip-background);transition:transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;padding:3px 5px;font-size:12px;line-height:1;position:absolute;top:-25px;left:0;transform:scale(.5)}.art-bottom .art-progress .art-control-progress:hover .art-control-progress-inner{height:100%}.art-bottom .art-progress .art-control-thumbnails{transform-origin:bottom;opacity:0;bottom:calc(var(--art-bottom-gap) + 10px);border-radius:var(--art-border-radius);pointer-events:none;background-color:var(--art-widget-background);transition:transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;position:absolute;left:0;transform:scale(.5);box-shadow:0 1px 3px #0003,0 1px 2px -1px #0003}.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator{transform:scale(1)}.art-progress-hover .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip,.art-progress-hover .art-bottom .art-progress .art-control-thumbnails{opacity:1;transform:scale(1)}.art-video-player .art-controls{z-index:10;pointer-events:auto;height:var(--art-control-height);justify-content:space-between;align-items:center;display:flex;position:relative}.art-video-player .art-controls .art-controls-left,.art-video-player .art-controls .art-controls-right{height:100%;display:flex}.art-video-player .art-controls .art-controls-center{flex:1;justify-content:center;align-items:center;height:100%;padding:0 10px;display:none}.art-video-player .art-controls .art-controls-right{justify-content:flex-end}.art-video-player .art-controls .art-control{cursor:pointer;white-space:nowrap;opacity:var(--art-control-opacity);min-height:var(--art-control-height);min-width:var(--art-control-height);transition:opacity var(--art-transition-duration) ease;flex-shrink:0;justify-content:center;align-items:center;display:flex}.art-video-player .art-controls .art-control .art-icon{height:var(--art-control-icon-size);width:var(--art-control-icon-size);transform:scale(var(--art-control-icon-scale));transition:transform var(--art-transition-duration) ease}.art-video-player .art-controls .art-control .art-icon:active{transform:scale(calc(var(--art-control-icon-scale) * .8))}.art-video-player .art-controls .art-control:hover{opacity:1}.art-control-volume{position:relative}.art-control-volume .art-volume-panel{text-align:center;cursor:default;opacity:0;pointer-events:none;left:0;right:0;bottom:var(--art-control-height);width:var(--art-control-height);height:var(--art-volume-height);transition:all var(--art-transition-duration) ease;justify-content:center;align-items:center;padding:0 5px;font-size:12px;display:flex;position:absolute;transform:translateY(10px)}.art-control-volume .art-volume-panel .art-volume-inner{border-radius:var(--art-border-radius);background-color:var(--art-widget-background);flex-direction:column;align-items:center;gap:10px;width:100%;height:100%;padding:10px 0 12px;display:flex}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider{cursor:pointer;flex:1;justify-content:center;width:100%;display:flex;position:relative}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle{border-radius:var(--art-border-radius);background-color:#ffffff40;justify-content:center;width:2px;display:flex;position:relative;overflow:hidden}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded{z-index:0;background-color:var(--art-theme);width:100%;height:100%;position:absolute;inset:0}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator{width:var(--art-volume-handle-size);height:var(--art-volume-handle-size);margin-top:calc(var(--art-volume-handle-size) / -2);background-color:var(--art-theme);transition:transform var(--art-transition-duration) ease;border-radius:100%;flex-shrink:0;position:absolute;transform:scale(1)}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator{transform:scale(.9)}.art-control-volume:hover .art-volume-panel{opacity:1;pointer-events:auto;transform:translateY(0)}.art-video-player .art-notice{z-index:80;width:100%;height:auto;padding:var(--art-padding);pointer-events:none;display:none;position:absolute;inset:0 0 auto}.art-video-player .art-notice .art-notice-inner{border-radius:var(--art-border-radius);background-color:var(--art-tip-background);padding:5px;line-height:1;display:inline-flex}.art-video-player.art-notice-show .art-notice{display:flex}.art-video-player .art-contextmenus{z-index:120;border-radius:var(--art-border-radius);background-color:var(--art-widget-background);min-width:var(--art-contextmenus-min-width);flex-direction:column;padding:5px 0;font-size:12px;display:none;position:absolute}.art-video-player .art-contextmenus .art-contextmenu{cursor:pointer;border-bottom:1px solid #ffffff1a;padding:10px 15px;display:flex}.art-video-player .art-contextmenus .art-contextmenu span{padding:0 8px}.art-video-player .art-contextmenus .art-contextmenu span:hover,.art-video-player .art-contextmenus .art-contextmenu span.art-current{color:var(--art-theme)}.art-video-player .art-contextmenus .art-contextmenu:hover{background-color:#ffffff1a}.art-video-player .art-contextmenus .art-contextmenu:last-child{border-bottom:none}.art-video-player.art-contextmenu-show .art-contextmenus{display:flex}.art-video-player .art-settings{z-index:90;border-radius:var(--art-border-radius);max-height:var(--art-settings-max-height);left:auto;right:var(--art-padding);bottom:var(--art-control-height);transition:all var(--art-transition-duration) ease;background-color:var(--art-widget-background);flex-direction:column;display:none;position:absolute;overflow:hidden auto}.art-video-player .art-settings .art-setting-panel{flex-direction:column;display:none}.art-video-player .art-settings .art-setting-panel.art-current{display:flex}.art-video-player .art-settings .art-setting-panel .art-setting-item{cursor:pointer;transition:background-color var(--art-transition-duration) ease;justify-content:space-between;align-items:center;padding:0 5px;display:flex;overflow:hidden}.art-video-player .art-settings .art-setting-panel .art-setting-item:hover{background-color:#ffffff1a}.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current{color:var(--art-theme)}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check{visibility:hidden;height:15px}.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check{visibility:visible}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left{flex-shrink:0;justify-content:center;align-items:center;gap:5px;display:flex}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon{height:var(--art-settings-icon-size);width:var(--art-settings-icon-size);justify-content:center;align-items:center;display:flex}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right{justify-content:center;align-items:center;gap:5px;font-size:12px;display:flex}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip{white-space:nowrap;color:#ffffff80}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon{justify-content:center;align-items:center;min-width:32px;height:24px;display:flex}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range{appearance:none;background-color:#fff3;outline:none;width:80px;height:3px}.art-video-player .art-settings .art-setting-panel .art-setting-item-back{border-bottom:1px solid #ffffff1a}.art-video-player.art-setting-show .art-settings{display:flex}.art-video-player .art-info{left:var(--art-padding);top:var(--art-padding);z-index:100;border-radius:var(--art-border-radius);background-color:var(--art-widget-background);padding:10px;font-size:12px;display:none;position:absolute}.art-video-player .art-info .art-info-panel{flex-direction:column;gap:5px;display:flex}.art-video-player .art-info .art-info-panel .art-info-item{align-items:center;gap:5px;display:flex}.art-video-player .art-info .art-info-panel .art-info-item .art-info-title{text-align:right;width:100px}.art-video-player .art-info .art-info-panel .art-info-item .art-info-content{text-overflow:ellipsis;white-space:nowrap;user-select:all;width:250px;overflow:hidden}.art-video-player .art-info .art-info-close{cursor:pointer;position:absolute;top:5px;right:5px}.art-video-player.art-info-show .art-info{display:flex}.art-hide-cursor *{cursor:none!important}.art-video-player[data-aspect-ratio]{overflow:hidden}.art-video-player[data-aspect-ratio] .art-video{object-fit:fill;box-sizing:content-box}.art-fullscreen{--art-progress-height:8px;--art-indicator-size:20px;--art-control-height:60px;--art-control-icon-scale:1.3}.art-fullscreen-web{--art-progress-height:8px;--art-indicator-size:20px;--art-control-height:60px;--art-control-icon-scale:1.3;z-index:var(--art-fullscreen-web-index);width:100%;height:100%;position:fixed;inset:0}.art-mini-popup{z-index:9999;border-radius:var(--art-border-radius);cursor:move;user-select:none;background:#000;width:320px;height:180px;transition:opacity .2s;position:fixed;overflow:hidden;box-shadow:0 0 5px #00000080}.art-mini-popup svg{fill:#fff}.art-mini-popup .art-video{pointer-events:none}.art-mini-popup .art-mini-close{z-index:20;cursor:pointer;opacity:0;transition:opacity .2s;position:absolute;top:10px;right:10px}.art-mini-popup .art-mini-state{z-index:30;pointer-events:none;opacity:0;background-color:#00000040;justify-content:center;align-items:center;width:100%;height:100%;transition:opacity .2s;display:flex;position:absolute;inset:0}.art-mini-popup .art-mini-state .art-icon{opacity:.75;cursor:pointer;pointer-events:auto;transition:transform .2s;transform:scale(3)}.art-mini-popup .art-mini-state .art-icon:active{transform:scale(2.5)}.art-mini-popup.art-mini-dragging{opacity:.9}.art-mini-popup:hover .art-mini-close,.art-mini-popup:hover .art-mini-state{opacity:1}.art-video-player[data-flip=horizontal] .art-video{transform:scaleX(-1)}.art-video-player[data-flip=vertical] .art-video{transform:scaleY(-1)}.art-video-player .art-layer-lock{height:var(--art-lock-size);width:var(--art-lock-size);top:50%;left:var(--art-padding);background-color:var(--art-tip-background);border-radius:50%;justify-content:center;align-items:center;display:none;position:absolute;transform:translateY(-50%)}.art-video-player .art-layer-auto-playback{border-radius:var(--art-border-radius);left:var(--art-padding);bottom:calc(var(--art-control-height) + var(--art-bottom-gap) + 10px);background-color:var(--art-widget-background);align-items:center;gap:10px;padding:10px;line-height:1;display:none;position:absolute}.art-video-player .art-layer-auto-playback .art-auto-playback-close{cursor:pointer;justify-content:center;align-items:center;display:flex}.art-video-player .art-layer-auto-playback .art-auto-playback-close svg{width:15px;height:15px;fill:var(--art-theme)}.art-video-player .art-layer-auto-playback .art-auto-playback-jump{color:var(--art-theme);cursor:pointer}.art-video-player.art-lock .art-subtitle{bottom:var(--art-subtitle-bottom)!important}.art-video-player.art-mini-progress-bar .art-bottom,.art-video-player.art-lock .art-bottom{opacity:1;background-image:none;padding:0}.art-video-player.art-mini-progress-bar .art-bottom .art-controls,.art-video-player.art-lock .art-bottom .art-controls,.art-video-player.art-mini-progress-bar .art-bottom .art-progress,.art-video-player.art-lock .art-bottom .art-progress{transform:translateY(calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4))}.art-video-player.art-mini-progress-bar .art-bottom .art-progress-indicator,.art-video-player.art-lock .art-bottom .art-progress-indicator{display:none!important}.art-video-player.art-control-show .art-layer-lock{display:flex}.art-control-selector{justify-content:center;display:flex;position:relative}.art-control-selector .art-selector-list{text-align:center;border-radius:var(--art-border-radius);opacity:0;pointer-events:none;bottom:var(--art-control-height);max-height:var(--art-selector-max-height);background-color:var(--art-widget-background);transition:all var(--art-transition-duration) ease;flex-direction:column;align-items:center;display:flex;position:absolute;overflow:hidden auto;transform:translateY(10px)}.art-control-selector .art-selector-list .art-selector-item{flex-shrink:0;justify-content:center;align-items:center;width:100%;padding:10px 15px;line-height:1;display:flex}.art-control-selector .art-selector-list .art-selector-item:hover{background-color:#ffffff1a}.art-control-selector .art-selector-list .art-selector-item:hover,.art-control-selector .art-selector-list .art-selector-item.art-current{color:var(--art-theme)}.art-control-selector:hover .art-selector-list{opacity:1;pointer-events:auto;transform:translateY(0)}.art-video-player [class*=hint--]{font-style:normal;display:inline-block;position:relative}.art-video-player [class*=hint--]:before,.art-video-player [class*=hint--]:after{visibility:hidden;opacity:0;z-index:1000000;pointer-events:none;transition:all .3s;position:absolute;transform:translate(0,0)}.art-video-player [class*=hint--]:hover:before,.art-video-player [class*=hint--]:hover:after{visibility:visible;opacity:1;transition-delay:.1s}.art-video-player [class*=hint--]:before{content:"";z-index:1000001;background:0 0;border:6px solid #0000;position:absolute}.art-video-player [class*=hint--]:after{color:#fff;white-space:nowrap;background:#000;padding:8px 10px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size:12px;line-height:12px}.art-video-player [class*=hint--][aria-label]:after{content:attr(aria-label)}.art-video-player [class*=hint--][data-hint]:after{content:attr(data-hint)}.art-video-player [aria-label=""]:before,.art-video-player [aria-label=""]:after,.art-video-player [data-hint=""]:before,.art-video-player [data-hint=""]:after{display:none!important}.art-video-player .hint--top-left:before,.art-video-player .hint--top-right:before,.art-video-player .hint--top:before{border-top-color:#000}.art-video-player .hint--bottom-left:before,.art-video-player .hint--bottom-right:before,.art-video-player .hint--bottom:before{border-bottom-color:#000}.art-video-player .hint--left:before{border-left-color:#000}.art-video-player .hint--right:before{border-right-color:#000}.art-video-player .hint--top:before{margin-bottom:-11px}.art-video-player .hint--top:before,.art-video-player .hint--top:after{bottom:100%;left:50%}.art-video-player .hint--top:before{left:calc(50% - 6px)}.art-video-player .hint--top:after{transform:translate(-50%)}.art-video-player .hint--top:hover:before{transform:translateY(-8px)}.art-video-player .hint--top:hover:after{transform:translate(-50%)translateY(-8px)}.art-video-player .hint--bottom:before{margin-top:-11px}.art-video-player .hint--bottom:before,.art-video-player .hint--bottom:after{top:100%;left:50%}.art-video-player .hint--bottom:before{left:calc(50% - 6px)}.art-video-player .hint--bottom:after{transform:translate(-50%)}.art-video-player .hint--bottom:hover:before{transform:translateY(8px)}.art-video-player .hint--bottom:hover:after{transform:translate(-50%)translateY(8px)}.art-video-player .hint--right:before{margin-bottom:-6px;margin-left:-11px}.art-video-player .hint--right:after{margin-bottom:-14px}.art-video-player .hint--right:before,.art-video-player .hint--right:after{bottom:50%;left:100%}.art-video-player .hint--right:hover:before,.art-video-player .hint--right:hover:after{transform:translate(8px)}.art-video-player .hint--left:before{margin-bottom:-6px;margin-right:-11px}.art-video-player .hint--left:after{margin-bottom:-14px}.art-video-player .hint--left:before,.art-video-player .hint--left:after{bottom:50%;right:100%}.art-video-player .hint--left:hover:before,.art-video-player .hint--left:hover:after{transform:translate(-8px)}.art-video-player .hint--top-left:before{margin-bottom:-11px}.art-video-player .hint--top-left:before,.art-video-player .hint--top-left:after{bottom:100%;left:50%}.art-video-player .hint--top-left:before{left:calc(50% - 6px)}.art-video-player .hint--top-left:after{margin-left:12px;transform:translate(-100%)}.art-video-player .hint--top-left:hover:before{transform:translateY(-8px)}.art-video-player .hint--top-left:hover:after{transform:translate(-100%)translateY(-8px)}.art-video-player .hint--top-right:before{margin-bottom:-11px}.art-video-player .hint--top-right:before,.art-video-player .hint--top-right:after{bottom:100%;left:50%}.art-video-player .hint--top-right:before{left:calc(50% - 6px)}.art-video-player .hint--top-right:after{margin-left:-12px;transform:translate(0)}.art-video-player .hint--top-right:hover:before,.art-video-player .hint--top-right:hover:after{transform:translateY(-8px)}.art-video-player .hint--bottom-left:before{margin-top:-11px}.art-video-player .hint--bottom-left:before,.art-video-player .hint--bottom-left:after{top:100%;left:50%}.art-video-player .hint--bottom-left:before{left:calc(50% - 6px)}.art-video-player .hint--bottom-left:after{margin-left:12px;transform:translate(-100%)}.art-video-player .hint--bottom-left:hover:before{transform:translateY(8px)}.art-video-player .hint--bottom-left:hover:after{transform:translate(-100%)translateY(8px)}.art-video-player .hint--bottom-right:before{margin-top:-11px}.art-video-player .hint--bottom-right:before,.art-video-player .hint--bottom-right:after{top:100%;left:50%}.art-video-player .hint--bottom-right:before{left:calc(50% - 6px)}.art-video-player .hint--bottom-right:after{margin-left:-12px;transform:translate(0)}.art-video-player .hint--bottom-right:hover:before,.art-video-player .hint--bottom-right:hover:after{transform:translateY(8px)}.art-video-player .hint--small:after,.art-video-player .hint--medium:after,.art-video-player .hint--large:after{white-space:normal;word-wrap:break-word;line-height:1.4em}.art-video-player .hint--small:after{width:80px}.art-video-player .hint--medium:after{width:150px}.art-video-player .hint--large:after{width:300px}.art-video-player [class*=hint--]:after{text-shadow:0 -1px #000;box-shadow:4px 4px 8px #0000004d}.art-video-player .hint--error:after{text-shadow:0 -1px #592726;background-color:#b34e4d}.art-video-player .hint--error.hint--top-left:before,.art-video-player .hint--error.hint--top-right:before,.art-video-player .hint--error.hint--top:before{border-top-color:#b34e4d}.art-video-player .hint--error.hint--bottom-left:before,.art-video-player .hint--error.hint--bottom-right:before,.art-video-player .hint--error.hint--bottom:before{border-bottom-color:#b34e4d}.art-video-player .hint--error.hint--left:before{border-left-color:#b34e4d}.art-video-player .hint--error.hint--right:before{border-right-color:#b34e4d}.art-video-player .hint--warning:after{text-shadow:0 -1px #6c5328;background-color:#c09854}.art-video-player .hint--warning.hint--top-left:before,.art-video-player .hint--warning.hint--top-right:before,.art-video-player .hint--warning.hint--top:before{border-top-color:#c09854}.art-video-player .hint--warning.hint--bottom-left:before,.art-video-player .hint--warning.hint--bottom-right:before,.art-video-player .hint--warning.hint--bottom:before{border-bottom-color:#c09854}.art-video-player .hint--warning.hint--left:before{border-left-color:#c09854}.art-video-player .hint--warning.hint--right:before{border-right-color:#c09854}.art-video-player .hint--info:after{text-shadow:0 -1px #1a3c4d;background-color:#3986ac}.art-video-player .hint--info.hint--top-left:before,.art-video-player .hint--info.hint--top-right:before,.art-video-player .hint--info.hint--top:before{border-top-color:#3986ac}.art-video-player .hint--info.hint--bottom-left:before,.art-video-player .hint--info.hint--bottom-right:before,.art-video-player .hint--info.hint--bottom:before{border-bottom-color:#3986ac}.art-video-player .hint--info.hint--left:before{border-left-color:#3986ac}.art-video-player .hint--info.hint--right:before{border-right-color:#3986ac}.art-video-player .hint--success:after{text-shadow:0 -1px #1a321a;background-color:#458746}.art-video-player .hint--success.hint--top-left:before,.art-video-player .hint--success.hint--top-right:before,.art-video-player .hint--success.hint--top:before{border-top-color:#458746}.art-video-player .hint--success.hint--bottom-left:before,.art-video-player .hint--success.hint--bottom-right:before,.art-video-player .hint--success.hint--bottom:before{border-bottom-color:#458746}.art-video-player .hint--success.hint--left:before{border-left-color:#458746}.art-video-player .hint--success.hint--right:before{border-right-color:#458746}.art-video-player .hint--always:after,.art-video-player .hint--always:before{opacity:1;visibility:visible}.art-video-player .hint--always.hint--top:before{transform:translateY(-8px)}.art-video-player .hint--always.hint--top:after{transform:translate(-50%)translateY(-8px)}.art-video-player .hint--always.hint--top-left:before{transform:translateY(-8px)}.art-video-player .hint--always.hint--top-left:after{transform:translate(-100%)translateY(-8px)}.art-video-player .hint--always.hint--top-right:before,.art-video-player .hint--always.hint--top-right:after{transform:translateY(-8px)}.art-video-player .hint--always.hint--bottom:before{transform:translateY(8px)}.art-video-player .hint--always.hint--bottom:after{transform:translate(-50%)translateY(8px)}.art-video-player .hint--always.hint--bottom-left:before{transform:translateY(8px)}.art-video-player .hint--always.hint--bottom-left:after{transform:translate(-100%)translateY(8px)}.art-video-player .hint--always.hint--bottom-right:before,.art-video-player .hint--always.hint--bottom-right:after{transform:translateY(8px)}.art-video-player .hint--always.hint--left:before,.art-video-player .hint--always.hint--left:after{transform:translate(-8px)}.art-video-player .hint--always.hint--right:before,.art-video-player .hint--always.hint--right:after{transform:translate(8px)}.art-video-player .hint--rounded:after{border-radius:4px}.art-video-player .hint--no-animate:before,.art-video-player .hint--no-animate:after{transition-duration:0s}.art-video-player .hint--bounce:before,.art-video-player .hint--bounce:after{-webkit-transition:opacity .3s,visibility .3s,-webkit-transform .3s cubic-bezier(.71,1.7,.77,1.24);-moz-transition:opacity .3s,visibility .3s,-moz-transform .3s cubic-bezier(.71,1.7,.77,1.24);transition:opacity .3s,visibility .3s,transform .3s cubic-bezier(.71,1.7,.77,1.24)}.art-video-player .hint--no-shadow:before,.art-video-player .hint--no-shadow:after{text-shadow:initial;box-shadow:initial}.art-video-player .hint--no-arrow:before{display:none}.art-video-player.art-mobile{--art-bottom-gap:10px;--art-control-height:38px;--art-control-icon-scale:1;--art-state-size:60px;--art-settings-max-height:180px;--art-selector-max-height:180px;--art-indicator-scale:1;--art-control-opacity:1}.art-video-player.art-mobile .art-controls-left{margin-left:calc(var(--art-padding) / -1)}.art-video-player.art-mobile .art-controls-right{margin-right:calc(var(--art-padding) / -1)}'},{}],g7VGh:[function(e,t,r,a){t.exports=function(){function e(t){return(e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(t)}var t=Object.prototype.toString,r=function(r){if(void 0===r)return"undefined";if(null===r)return"null";var o=e(r);if("boolean"===o)return"boolean";if("string"===o)return"string";if("number"===o)return"number";if("symbol"===o)return"symbol";if("function"===o)return"GeneratorFunction"===a(r)?"generatorfunction":"function";if(Array.isArray?Array.isArray(r):r instanceof Array)return"array";if(r.constructor&&"function"==typeof r.constructor.isBuffer&&r.constructor.isBuffer(r))return"buffer";if(function(e){try{if("number"==typeof e.length&&"function"==typeof e.callee)return!0}catch(e){if(-1!==e.message.indexOf("callee"))return!0}return!1}(r))return"arguments";if(r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate)return"date";if(r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit)return"error";if(r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global)return"regexp";switch(a(r)){case"Symbol":return"symbol";case"Promise":return"promise";case"WeakMap":return"weakmap";case"WeakSet":return"weakset";case"Map":return"map";case"Set":return"set";case"Int8Array":return"int8array";case"Uint8Array":return"uint8array";case"Uint8ClampedArray":return"uint8clampedarray";case"Int16Array":return"int16array";case"Uint16Array":return"uint16array";case"Int32Array":return"int32array";case"Uint32Array":return"uint32array";case"Float32Array":return"float32array";case"Float64Array":return"float64array"}if("function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next)return"generator";switch(o=t.call(r)){case"[object Object]":return"object";case"[object Map Iterator]":return"mapiterator";case"[object Set Iterator]":return"setiterator";case"[object String Iterator]":return"stringiterator";case"[object Array Iterator]":return"arrayiterator"}return o.slice(8,-1).toLowerCase().replace(/\s/g,"")};function a(e){return e.constructor?e.constructor.name:null}function o(e,t){var a=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return i(e,t,a),n(e,t,a),function(e,t,a){var s=r(t),l=r(e);if("object"===s){if("object"!==l)throw Error("[Type Error]: '".concat(a.join("."),"' require 'object' type, but got '").concat(l,"'"));Object.keys(t).forEach(function(r){var s=e[r],l=t[r],c=a.slice();c.push(r),i(s,l,c),n(s,l,c),o(s,l,c)})}if("array"===s){if("array"!==l)throw Error("[Type Error]: '".concat(a.join("."),"' require 'array' type, but got '").concat(l,"'"));e.forEach(function(r,s){var l=e[s],c=t[s]||t[0],p=a.slice();p.push(s),i(l,c,p),n(l,c,p),o(l,c,p)})}}(e,t,a),e}function i(e,t,a){if("string"===r(t)){var o=r(e);if("?"===t[0]&&(t=t.slice(1)+"|undefined"),!(-1<t.indexOf("|")?t.split("|").map(function(e){return e.toLowerCase().trim()}).filter(Boolean).some(function(e){return o===e}):t.toLowerCase().trim()===o))throw Error("[Type Error]: '".concat(a.join("."),"' require '").concat(t,"' type, but got '").concat(o,"'"))}}function n(e,t,a){if("function"===r(t)){var o=t(e,r(e),a);if(!0!==o){var i=r(o);throw"string"===i?Error(o):"error"===i?o:Error("[Validator Error]: The scheme for '".concat(a.join("."),"' validator require return true, but got '").concat(o,"'"))}}}return o.kindOf=r,o}()},{}],lh3R5:[function(e,t,r,a){t.exports=JSON.parse('{"name":"artplayer","version":"5.3.1-beta.1","description":"ArtPlayer.js is a modern and full featured HTML5 video player","author":"Harvey Zhao <laozhaochaguan@gmail.com>","license":"MIT","homepage":"https://artplayer.org","repository":{"type":"git","url":"git+https://github.com/zhw2590582/ArtPlayer.git"},"bugs":{"url":"https://github.com/zhw2590582/ArtPlayer/issues"},"keywords":["html5","video","player"],"exports":{".":{"types":"./types/artplayer.d.ts","import":"./dist/artplayer.mjs","require":"./dist/artplayer.js"},"./legacy":{"types":"./types/artplayer.d.ts","import":"./dist/artplayer.legacy.js","require":"./dist/artplayer.legacy.js"},"./i18n/*":{"types":"./types/i18n.d.ts","import":"./dist/i18n/*.mjs","require":"./dist/i18n/*.js"}},"main":"./dist/artplayer.js","module":"./dist/artplayer.mjs","types":"./types/artplayer.d.ts","typesVersions":{"*":{"i18n/*":["types/i18n.d.ts"],"legacy":["types/artplayer.d.ts"]}},"legacy":"./dist/artplayer.legacy.js","browserslist":"last 1 Chrome version","dependencies":{"option-validator":"^2.0.6"}}')},{}],eJfh8:[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r),r.default={properties:["audioTracks","autoplay","buffered","controller","controls","crossOrigin","currentSrc","currentTime","defaultMuted","defaultPlaybackRate","duration","ended","error","loop","mediaGroup","muted","networkState","paused","playbackRate","played","preload","readyState","seekable","seeking","src","startDate","textTracks","videoTracks","volume"],methods:["addTextTrack","canPlayType","load","play","pause"],events:["abort","canplay","canplaythrough","durationchange","emptied","ended","error","loadeddata","loadedmetadata","loadstart","pause","play","playing","progress","ratechange","seeked","seeking","stalled","suspend","timeupdate","volumechange","waiting"],prototypes:["width","height","videoWidth","videoHeight","poster","webkitDecodedFrameCount","webkitDroppedFrameCount","playsInline","webkitSupportsFullscreen","webkitDisplayingFullscreen","onenterpictureinpicture","onleavepictureinpicture","disablePictureInPicture","cancelVideoFrameCallback","requestVideoFrameCallback","getVideoPlaybackQuality","requestPictureInPicture","webkitEnterFullScreen","webkitEnterFullscreen","webkitExitFullScreen","webkitExitFullscreen"]}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],loqXi:[function(e,t,r,a){r.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},r.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},r.exportAll=function(e,t){return Object.keys(e).forEach(function(r){"default"===r||"__esModule"===r||Object.prototype.hasOwnProperty.call(t,r)||Object.defineProperty(t,r,{enumerable:!0,get:function(){return e[r]}})}),t},r.export=function(e,t,r){Object.defineProperty(e,t,{enumerable:!0,get:r})}},{}],"9zso8":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("../utils"),n=e("../utils/component"),s=o.interopDefault(n),l=e("./aspectRatio"),c=o.interopDefault(l),p=e("./close"),d=o.interopDefault(p),u=e("./flip"),f=o.interopDefault(u),h=e("./info"),m=o.interopDefault(h),g=e("./playbackRate"),v=o.interopDefault(g),y=e("./version"),b=o.interopDefault(y);class x extends s.default{constructor(e){super(e),this.name="contextmenu",this.$parent=e.template.$contextmenu,i.isMobile||this.init()}init(){let{option:e,proxy:t,template:{$player:r,$contextmenu:a}}=this.art;e.playbackRate&&this.add((0,v.default)({name:"playbackRate",index:10})),e.aspectRatio&&this.add((0,c.default)({name:"aspectRatio",index:20})),e.flip&&this.add((0,f.default)({name:"flip",index:30})),this.add((0,m.default)({name:"info",index:40})),this.add((0,b.default)({name:"version",index:50})),this.add((0,d.default)({name:"close",index:60}));for(let t=0;t<e.contextmenu.length;t++)this.add(e.contextmenu[t]);t(r,"contextmenu",e=>{if(!this.art.constructor.CONTEXTMENU)return;e.preventDefault(),this.show=!0;let t=e.clientX,o=e.clientY,{height:n,width:s,left:l,top:c}=(0,i.getRect)(r),{height:p,width:d}=(0,i.getRect)(a),u=t-l,f=o-c;t+d>l+s&&(u=s-d),o+p>c+n&&(f=n-p),(0,i.setStyles)(a,{top:`${f}px`,left:`${u}px`})}),t(r,"click",e=>{(0,i.includeFromEvent)(e,a)||(this.show=!1)}),this.art.on("blur",()=>{this.show=!1})}}r.default=x},{"../utils":"aBlEo","../utils/component":"idCEj","./aspectRatio":"6XHP2","./close":"eF6AX","./flip":"7Wg1P","./info":"fjRnU","./playbackRate":"hm1DY","./version":"aJBeL","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],aBlEo:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("./compatibility");o.exportAll(i,r);var n=e("./dom");o.exportAll(n,r);var s=e("./error");o.exportAll(s,r);var l=e("./file");o.exportAll(l,r);var c=e("./format");o.exportAll(c,r);var p=e("./property");o.exportAll(p,r);var d=e("./subtitle");o.exportAll(d,r);var u=e("./time");o.exportAll(u,r)},{"./compatibility":"jg0yq","./dom":"eANXw","./error":"4FwTI","./file":"i2JbS","./format":"dy9GH","./property":"jY49c","./subtitle":"ke7ox","./time":"f7gsx","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jg0yq:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"userAgent",()=>i),o.export(r,"isSafari",()=>n),o.export(r,"isIOS",()=>s),o.export(r,"isIOS13",()=>l),o.export(r,"isMobile",()=>c),o.export(r,"isBrowser",()=>p);let i=globalThis?.CUSTOM_USER_AGENT??("u">typeof navigator?navigator.userAgent:""),n=/^(?:(?!chrome|android).)*safari/i.test(i),s=/iPad|iPhone|iPod/i.test(i)&&!window.MSStream,l=s||i.includes("Macintosh")&&navigator.maxTouchPoints>=1,c=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(i)||l,p="u">typeof window&&"u">typeof document},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],eANXw:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"query",()=>n),o.export(r,"queryAll",()=>s),o.export(r,"addClass",()=>l),o.export(r,"removeClass",()=>c),o.export(r,"hasClass",()=>p),o.export(r,"append",()=>d),o.export(r,"remove",()=>u),o.export(r,"setStyle",()=>f),o.export(r,"setStyles",()=>h),o.export(r,"getStyle",()=>m),o.export(r,"siblings",()=>g),o.export(r,"inverseClass",()=>v),o.export(r,"tooltip",()=>y),o.export(r,"isInViewport",()=>b),o.export(r,"includeFromEvent",()=>x),o.export(r,"replaceElement",()=>w),o.export(r,"createElement",()=>j),o.export(r,"getIcon",()=>k),o.export(r,"setStyleText",()=>E),o.export(r,"supportsFlex",()=>S),o.export(r,"getRect",()=>$),o.export(r,"loadImg",()=>M),o.export(r,"getComposedPath",()=>I);var i=e("./compatibility");function n(e,t=document){return t.querySelector(e)}function s(e,t=document){return Array.from(t.querySelectorAll(e))}function l(e,t){return e.classList.add(t)}function c(e,t){return e.classList.remove(t)}function p(e,t){return e.classList.contains(t)}function d(e,t){return t instanceof Element?e.appendChild(t):e.insertAdjacentHTML("beforeend",String(t)),e.lastElementChild||e.lastChild}function u(e){return e.parentNode.removeChild(e)}function f(e,t,r){return e.style[t]=r,e}function h(e,t){for(let r in t)f(e,r,t[r]);return e}function m(e,t,r=!0){let a=window.getComputedStyle(e,null).getPropertyValue(t);return r?Number.parseFloat(a):a}function g(e){return Array.from(e.parentElement.children).filter(t=>t!==e)}function v(e,t){g(e).forEach(e=>c(e,t)),l(e,t)}function y(e,t,r="top"){i.isMobile||(e.setAttribute("aria-label",t),l(e,"hint--rounded"),l(e,`hint--${r}`))}function b(e,t=0){let r=e.getBoundingClientRect(),a=window.innerHeight||document.documentElement.clientHeight,o=window.innerWidth||document.documentElement.clientWidth,i=r.top-t<=a&&r.top+r.height+t>=0,n=r.left-t<=o+t&&r.left+r.width+t>=0;return i&&n}function x(e,t){return I(e).includes(t)}function w(e,t){return t.parentNode.replaceChild(e,t),e}function j(e){return document.createElement(e)}function k(e="",t=""){let r=j("i");return l(r,"art-icon"),l(r,`art-icon-${e}`),d(r,t),r}function E(e,t){let r=document.getElementById(e);r||((r=document.createElement("style")).id=e,"loading"===document.readyState?document.addEventListener("DOMContentLoaded",()=>{document.head.appendChild(r)}):(document.head||document.documentElement).appendChild(r)),r.textContent=t}function S(){let e=document.createElement("div");return e.style.display="flex","flex"===e.style.display}function $(e){return e.getBoundingClientRect()}function M(e,t){return new Promise((r,a)=>{let o=new Image;o.onload=function(){if(t&&1!==t){let i=document.createElement("canvas"),n=i.getContext("2d");i.width=o.width*t,i.height=o.height*t,n.drawImage(o,0,0,i.width,i.height),i.toBlob(t=>{let o=URL.createObjectURL(t),i=new Image;i.onload=function(){r(i)},i.onerror=function(){URL.revokeObjectURL(o),a(Error(`Image load failed: ${e}`))},i.src=o})}else r(o)},o.onerror=function(){a(Error(`Image load failed: ${e}`))},o.src=e})}function I(e){if(e.composedPath)return e.composedPath();let t=[],r=e.target;for(;r;)t.push(r),r=r.parentNode;return t.includes(window)||void 0===window||t.push(window),t}},{"./compatibility":"jg0yq","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"4FwTI":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"ArtPlayerError",()=>i),o.export(r,"errorHandle",()=>n);class i extends Error{constructor(e,t){super(e),"function"==typeof Error.captureStackTrace&&Error.captureStackTrace(this,t||this.constructor),this.name="ArtPlayerError"}}function n(e,t){if(!e)throw new i(t);return e}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],i2JbS:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e,t){let r=document.createElement("a");r.style.display="none",r.href=e,r.download=t,document.body.appendChild(r),r.click(),document.body.removeChild(r)}o.defineInteropFlag(r),o.export(r,"getExt",()=>function e(t){return t.includes("?")?e(t.split("?")[0]):t.includes("#")?e(t.split("#")[0]):t.trim().toLowerCase().split(".").pop()}),o.export(r,"download",()=>i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],dy9GH:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e,t,r){return Math.max(Math.min(e,Math.max(t,r)),Math.min(t,r))}function n(e){return e.charAt(0).toUpperCase()+e.slice(1)}function s(e){if(!e)return"00:00";let t=Math.floor(e/3600),r=Math.floor((e-3600*t)/60),a=Math.floor(e-3600*t-60*r);return(t>0?[t,r,a]:[r,a]).map(e=>e<10?`0${e}`:String(e)).join(":")}function l(e){return e.replace(/[&<>'"]/g,e=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[e]||e)}function c(e){let t={"&amp;":"&","&lt;":"<","&gt;":">","&#39;":"'","&quot;":'"'},r=RegExp(`(${Object.keys(t).join("|")})`,"g");return e.replace(r,e=>t[e]||e)}o.defineInteropFlag(r),o.export(r,"clamp",()=>i),o.export(r,"capitalize",()=>n),o.export(r,"secondToTime",()=>s),o.export(r,"escape",()=>l),o.export(r,"unescape",()=>c)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jY49c:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"def",()=>i),o.export(r,"has",()=>s),o.export(r,"get",()=>l),o.export(r,"mergeDeep",()=>function e(...t){let r=e=>e&&"object"==typeof e&&!Array.isArray(e);return t.reduce((t,a)=>(Object.keys(a).forEach(o=>{let i=t[o],n=a[o];Array.isArray(i)&&Array.isArray(n)?t[o]=i.concat(...n):r(i)&&r(n)?t[o]=e(i,n):t[o]=n}),t),{})});let i=Object.defineProperty,{hasOwnProperty:n}=Object.prototype;function s(e,t){return n.call(e,t)}function l(e,t){return Object.getOwnPropertyDescriptor(e,t)}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],ke7ox:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e){return"WEBVTT \r\n\r\n".concat(e.replace(/(\d\d:\d\d:\d\d)[,.](\d+)/g,(e,t,r)=>{let a=r.slice(0,3);return 1===r.length&&(a=`${r}00`),2===r.length&&(a=`${r}0`),`${t},${a}`}).replace(/\{\\([ibu])\}/g,"</$1>").replace(/\{\\([ibu])1\}/g,"<$1>").replace(/\{([ibu])\}/g,"<$1>").replace(/\{\/([ibu])\}/g,"</$1>").replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g,"$1.$2").replace(/\{[\s\S]*?\}/g,"").concat("\r\n\r\n"))}function n(e){return URL.createObjectURL(new Blob([e],{type:"text/vtt"}))}function s(e){let t=RegExp("Dialogue:\\s\\d,(\\d+:\\d\\d:\\d\\d.\\d\\d),(\\d+:\\d\\d:\\d\\d.\\d\\d),([^,]*),([^,]*),(?:[^,]*,){4}([\\s\\S]*)$","i");function r(e=""){return e.split(/[:.]/).map((e,t,r)=>{if(t===r.length-1){if(1===e.length)return`.${e}00`;if(2===e.length)return`.${e}0`}else if(1===e.length)return(0===t?"0":":0")+e;return 0===t?e:t===r.length-1?`.${e}`:`:${e}`}).join("")}return`WEBVTT ${e.split(/\r?\n/).map(e=>{let a=e.match(t);return a?{start:r(a[1].trim()),end:r(a[2].trim()),text:a[5].replace(/\{[\s\S]*?\}/g,"").replace(/(\\N)/g,"\n").trim().split(/\r?\n/).map(e=>e.trim()).join("\n")}:null}).filter(e=>e).map((e,t)=>e?`${t+1} ${e.start} --> ${e.end} ${e.text}`:"").filter(e=>e.trim()).join("\n\n")}`}o.defineInteropFlag(r),o.export(r,"srtToVtt",()=>i),o.export(r,"vttToBlob",()=>n),o.export(r,"assToVtt",()=>s)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],f7gsx:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e=0){return new Promise(t=>setTimeout(t,e))}function n(e,t){let r;return function(...a){let o=()=>(r=null,e.apply(this,a));clearTimeout(r),r=setTimeout(o,t)}}function s(e,t){let r=!1;return function(...a){r||(e.apply(this,a),r=!0,setTimeout(()=>{r=!1},t))}}o.defineInteropFlag(r),o.export(r,"sleep",()=>i),o.export(r,"debounce",()=>n),o.export(r,"throttle",()=>s)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],idCEj:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("option-validator"),n=o.interopDefault(i),s=e("../scheme"),l=e("./dom"),c=e("./error");r.default=class{constructor(e){this.id=0,this.art=e,this.cache=new Map,this.add=this.add.bind(this),this.remove=this.remove.bind(this),this.update=this.update.bind(this)}get show(){return(0,l.hasClass)(this.art.template.$player,`art-${this.name}-show`)}set show(e){let{$player:t}=this.art.template,r=`art-${this.name}-show`;e?(0,l.addClass)(t,r):(0,l.removeClass)(t,r),this.art.emit(this.name,e)}toggle(){this.show=!this.show}add(e){let t="function"==typeof e?e(this.art):e;if(t.html=t.html||"",(0,n.default)(t,s.ComponentOption),!this.$parent||!this.name||t.disable)return;let r=t.name||`${this.name}${this.id}`;(0,c.errorHandle)(!this.cache.has(r),`Can't add an existing [${r}] to the [${this.name}]`),this.id+=1;let a=(0,l.createElement)("div");(0,l.addClass)(a,`art-${this.name}`),(0,l.addClass)(a,`art-${this.name}-${r}`);let o=Array.from(this.$parent.children);a.dataset.index=t.index||this.id;let i=o.find(e=>Number(e.dataset.index)>=Number(a.dataset.index));i?i.insertAdjacentElement("beforebegin",a):(0,l.append)(this.$parent,a),t.html&&(0,l.append)(a,t.html),t.style&&(0,l.setStyles)(a,t.style),t.tooltip&&(0,l.tooltip)(a,t.tooltip);let p=[];if(t.click){let e=this.art.events.proxy(a,"click",e=>{e.preventDefault(),t.click.call(this.art,this,e)});p.push(e)}return t.selector&&["left","right"].includes(t.position)&&this.selector(t,a,p),this[r]=a,this.cache.set(r,{$ref:a,events:p,option:t}),t.mounted&&t.mounted.call(this.art,a),a}remove(e){(0,c.errorHandle)(this.cache.has(e),`Can't find [${e}] from the [${this.name}]`);let t=this.cache.get(e);for(let e of(t.option.beforeUnmount&&t.option.beforeUnmount.call(this.art,t.$ref),t.events))this.art.events.remove(e);this.cache.delete(e),delete this[e],(0,l.remove)(t.$ref)}update(e){return this.cache.has(e.name)&&(e=Object.assign(this.cache.get(e.name).option,e),this.remove(e.name)),this.add(e)}}},{"option-validator":"g7VGh","../scheme":"biLjm","./dom":"eANXw","./error":"4FwTI","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],biLjm:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"ComponentOption",()=>f);var i=e("../utils");let n="array",s="boolean",l="string",c="number",p="object",d="function";function u(e,t,r){return(0,i.errorHandle)(t===l||t===c||e instanceof Element,`${r.join(".")} require '${l}' or 'Element' type`)}let f={html:u,disable:`?${s}`,name:`?${l}`,index:`?${c}`,style:`?${p}`,click:`?${d}`,mounted:`?${d}`,tooltip:`?${l}|${c}`,width:`?${c}`,selector:`?${n}`,onSelect:`?${d}`,switch:`?${s}`,onSwitch:`?${d}`,range:`?${n}`,onRange:`?${d}`,onChange:`?${d}`};r.default={id:l,container:u,url:l,poster:l,type:l,theme:l,lang:l,volume:c,isLive:s,muted:s,autoplay:s,autoSize:s,autoMini:s,loop:s,flip:s,playbackRate:s,aspectRatio:s,screenshot:s,setting:s,hotkey:s,pip:s,mutex:s,backdrop:s,fullscreen:s,fullscreenWeb:s,subtitleOffset:s,miniProgressBar:s,useSSR:s,playsInline:s,lock:s,gesture:s,fastForward:s,autoPlayback:s,autoOrientation:s,airplay:s,proxy:`?${d}`,plugins:[d],layers:[f],contextmenu:[f],settings:[f],controls:[{...f,position:(e,t,r)=>{let a=["top","left","right"];return(0,i.errorHandle)(a.includes(e),`${r.join(".")} only accept ${a.toString()} as parameters`)}}],quality:[{default:`?${s}`,html:l,url:l}],highlight:[{time:c,text:l}],thumbnails:{url:l,number:c,column:c,width:c,height:c,scale:c},subtitle:{url:l,name:l,type:l,style:p,escape:s,encoding:l,onVttLoad:d},moreVideoAttr:p,i18n:p,icons:p,cssVar:p,customType:p}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"6XHP2":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>{let{i18n:r,constructor:{ASPECT_RATIO:a}}=t,o=a.map(e=>`<span data-value="${e}">${"default"===e?r.get("Default"):e}</span>`).join("");return{...e,html:`${r.get("Aspect Ratio")}: ${o}`,click:(e,r)=>{let{value:a}=r.target.dataset;a&&(t.aspectRatio=a,e.show=!1)},mounted:e=>{let r=(0,i.query)('[data-value="default"]',e);r&&(0,i.inverseClass)(r,"art-current"),t.on("aspectRatio",t=>{let r=(0,i.queryAll)("span",e).find(e=>e.dataset.value===t);r&&(0,i.inverseClass)(r,"art-current")})}}}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],eF6AX:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e){return t=>({...e,html:t.i18n.get("Close"),click:e=>{e.show=!1}})}o.defineInteropFlag(r),o.export(r,"default",()=>i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"7Wg1P":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>{let{i18n:r,constructor:{FLIP:a}}=t,o=a.map(e=>`<span data-value="${e}">${r.get((0,i.capitalize)(e))}</span>`).join("");return{...e,html:`${r.get("Video Flip")}: ${o}`,click:(e,r)=>{let{value:a}=r.target.dataset;a&&(t.flip=a.toLowerCase(),e.show=!1)},mounted:e=>{let r=(0,i.query)('[data-value="normal"]',e);r&&(0,i.inverseClass)(r,"art-current"),t.on("flip",t=>{let r=(0,i.queryAll)("span",e).find(e=>e.dataset.value===t);r&&(0,i.inverseClass)(r,"art-current")})}}}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],fjRnU:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e){return t=>({...e,html:t.i18n.get("Video Info"),click:e=>{t.info.show=!0,e.show=!1}})}o.defineInteropFlag(r),o.export(r,"default",()=>i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],hm1DY:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>{let{i18n:r,constructor:{PLAYBACK_RATE:a}}=t,o=a.map(e=>`<span data-value="${e}">${1===e?r.get("Normal"):e.toFixed(1)}</span>`).join("");return{...e,html:`${r.get("Play Speed")}: ${o}`,click:(e,r)=>{let{value:a}=r.target.dataset;a&&(t.playbackRate=Number(a),e.show=!1)},mounted:e=>{let r=(0,i.query)('[data-value="1"]',e);r&&(0,i.inverseClass)(r,"art-current"),t.on("video:ratechange",()=>{let r=(0,i.queryAll)("span",e).find(e=>Number(e.dataset.value)===t.playbackRate);r&&(0,i.inverseClass)(r,"art-current")})}}}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],aJBeL:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>function(e){return{...e,html:`<a href="https://artplayer.org" target="_blank" style="width:100%;">ArtPlayer ${i.version}</a>`}});var i=e("../../package.json")},{"../../package.json":"lh3R5","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],dp1yk:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("../utils"),n=e("../utils/component"),s=o.interopDefault(n),l=e("./airplay"),c=o.interopDefault(l),p=e("./fullscreen"),d=o.interopDefault(p),u=e("./fullscreenWeb"),f=o.interopDefault(u),h=e("./pip"),m=o.interopDefault(h),g=e("./playAndPause"),v=o.interopDefault(g),y=e("./progress"),b=o.interopDefault(y),x=e("./screenshot"),w=o.interopDefault(x),j=e("./setting"),k=o.interopDefault(j),E=e("./time"),S=o.interopDefault(E),$=e("./volume"),M=o.interopDefault($);class I extends s.default{constructor(e){super(e),this.isHover=!1,this.name="control",this.timer=Date.now();let{constructor:t}=e,{$player:r,$bottom:a}=this.art.template;e.on("mousemove",()=>{i.isMobile||(this.show=!0)}),e.on("click",()=>{i.isMobile?this.toggle():this.show=!0}),e.on("document:mousemove",e=>{this.isHover=(0,i.includeFromEvent)(e,a)}),e.on("video:timeupdate",()=>{!e.setting.show&&!this.isHover&&!e.isInput&&e.playing&&this.show&&Date.now()-this.timer>=t.CONTROL_HIDE_TIME&&(this.show=!1)}),e.on("control",e=>{e?((0,i.removeClass)(r,"art-hide-cursor"),(0,i.addClass)(r,"art-hover"),this.timer=Date.now()):((0,i.addClass)(r,"art-hide-cursor"),(0,i.removeClass)(r,"art-hover"))}),this.init()}init(){let{option:e}=this.art;e.isLive||this.add((0,b.default)({name:"progress",position:"top",index:10})),this.add({name:"thumbnails",position:"top",index:20}),this.add((0,v.default)({name:"playAndPause",position:"left",index:10})),this.add((0,M.default)({name:"volume",position:"left",index:20})),e.isLive||this.add((0,S.default)({name:"time",position:"left",index:30})),e.quality.length&&(0,i.sleep)().then(()=>{this.art.quality=e.quality}),e.screenshot&&!i.isMobile&&this.add((0,w.default)({name:"screenshot",position:"right",index:20})),e.setting&&this.add((0,k.default)({name:"setting",position:"right",index:30})),e.pip&&this.add((0,m.default)({name:"pip",position:"right",index:40})),e.airplay&&window.WebKitPlaybackTargetAvailabilityEvent&&this.add((0,c.default)({name:"airplay",position:"right",index:50})),e.fullscreenWeb&&this.add((0,f.default)({name:"fullscreenWeb",position:"right",index:60})),e.fullscreen&&this.add((0,d.default)({name:"fullscreen",position:"right",index:70}));for(let t=0;t<e.controls.length;t++)this.add(e.controls[t])}add(e){let t="function"==typeof e?e(this.art):e,{$progress:r,$controlsLeft:a,$controlsRight:o}=this.art.template;switch(t.position){case"top":this.$parent=r;break;case"left":this.$parent=a;break;case"right":this.$parent=o;break;default:(0,i.errorHandle)(!1,"Control option.position must one of 'top', 'left', 'right'")}super.add(t)}check(e){if(e){e.$control_value.innerHTML=e.html;for(let t=0;t<e.$control_option.length;t++){let r=e.$control_option[t];r.default=r===e,r.default&&(0,i.inverseClass)(r.$control_item,"art-current")}}}selector(e,t,r){let{proxy:a}=this.art.events;(0,i.addClass)(t,"art-control-selector");let o=(0,i.createElement)("div");(0,i.addClass)(o,"art-selector-value"),(0,i.append)(o,e.html),t.textContent="",(0,i.append)(t,o);let n=(0,i.createElement)("div");(0,i.addClass)(n,"art-selector-list"),(0,i.append)(t,n);for(let t=0;t<e.selector.length;t++){let r=e.selector[t],a=(0,i.createElement)("div");(0,i.addClass)(a,"art-selector-item"),r.default&&(0,i.addClass)(a,"art-current"),a.dataset.index=t,a.dataset.value=r.value,a.innerHTML=r.html,(0,i.append)(n,a),(0,i.def)(r,"$control_option",{get:()=>e.selector}),(0,i.def)(r,"$control_item",{get:()=>a}),(0,i.def)(r,"$control_value",{get:()=>o})}let s=a(n,"click",async t=>{let r=(0,i.getComposedPath)(t),a=e.selector.find(e=>e.$control_item===r.find(t=>e.$control_item===t));this.check(a),e.onSelect&&(o.innerHTML=await e.onSelect.call(this.art,a,a.$control_item,t))});r.push(s)}}r.default=I},{"../utils":"aBlEo","../utils/component":"idCEj","./airplay":"amOzz","./fullscreen":"3GuBU","./fullscreenWeb":"jj1KV","./pip":"jMeHN","./playAndPause":"u3h8M","./progress":"1XZSS","./screenshot":"dIscA","./setting":"aqA0g","./time":"ihweO","./volume":"fJVWn","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],amOzz:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>({...e,tooltip:t.i18n.get("AirPlay"),mounted:e=>{let{proxy:r,icons:a}=t;(0,i.append)(e,a.airplay),r(e,"click",()=>t.airplay())}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"3GuBU":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>({...e,tooltip:t.i18n.get("Fullscreen"),mounted:e=>{let{proxy:r,icons:a,i18n:o}=t,n=(0,i.append)(e,a.fullscreenOn),s=(0,i.append)(e,a.fullscreenOff);(0,i.setStyle)(s,"display","none"),r(e,"click",()=>{t.fullscreen=!t.fullscreen}),t.on("fullscreen",t=>{t?((0,i.tooltip)(e,o.get("Exit Fullscreen")),(0,i.setStyle)(n,"display","none"),(0,i.setStyle)(s,"display","inline-flex")):((0,i.tooltip)(e,o.get("Fullscreen")),(0,i.setStyle)(n,"display","inline-flex"),(0,i.setStyle)(s,"display","none"))})}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jj1KV:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>({...e,tooltip:t.i18n.get("Web Fullscreen"),mounted:e=>{let{proxy:r,icons:a,i18n:o}=t,n=(0,i.append)(e,a.fullscreenWebOn),s=(0,i.append)(e,a.fullscreenWebOff);(0,i.setStyle)(s,"display","none"),r(e,"click",()=>{t.fullscreenWeb=!t.fullscreenWeb}),t.on("fullscreenWeb",t=>{t?((0,i.tooltip)(e,o.get("Exit Web Fullscreen")),(0,i.setStyle)(n,"display","none"),(0,i.setStyle)(s,"display","inline-flex")):((0,i.tooltip)(e,o.get("Web Fullscreen")),(0,i.setStyle)(n,"display","inline-flex"),(0,i.setStyle)(s,"display","none"))})}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jMeHN:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>({...e,tooltip:t.i18n.get("PIP Mode"),mounted:e=>{let{proxy:r,icons:a,i18n:o}=t;(0,i.append)(e,a.pip),r(e,"click",()=>{t.pip=!t.pip}),t.on("pip",t=>{(0,i.tooltip)(e,o.get(t?"Exit PIP Mode":"PIP Mode"))})}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],u3h8M:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>({...e,mounted:e=>{let{proxy:r,icons:a,i18n:o}=t,n=(0,i.append)(e,a.play),s=(0,i.append)(e,a.pause);function l(){(0,i.setStyle)(n,"display","flex"),(0,i.setStyle)(s,"display","none")}function c(){(0,i.setStyle)(n,"display","none"),(0,i.setStyle)(s,"display","flex")}(0,i.tooltip)(n,o.get("Play")),(0,i.tooltip)(s,o.get("Pause")),r(n,"click",()=>{t.play()}),r(s,"click",()=>{t.pause()}),t.playing?c():l(),t.on("video:playing",()=>{c()}),t.on("video:pause",()=>{l()})}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"1XZSS":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"getPosFromEvent",()=>n),o.export(r,"setCurrentTime",()=>s),o.export(r,"default",()=>l);var i=e("../utils");function n(e,t){let{$progress:r}=e.template,{left:a}=(0,i.getRect)(r),o=i.isMobile?t.touches[0].clientX:t.clientX,n=(0,i.clamp)(o-a,0,r.clientWidth),s=n/r.clientWidth*e.duration,l=(0,i.secondToTime)(s),c=(0,i.clamp)(n/r.clientWidth,0,1);return{second:s,time:l,width:n,percentage:c}}function s(e,t){if(e.isRotate){let r=t.touches[0].clientY/e.height,a=r*e.duration;e.emit("setBar","played",r,t),e.seek=a}else{let{second:r,percentage:a}=n(e,t);e.emit("setBar","played",a,t),e.seek=r}}function l(e){return t=>{let{icons:r,option:a,proxy:o}=t,{$player:l}=t.template;return{...e,html:`<div class="art-control-progress-inner"><div class="art-progress-hover"></div><div class="art-progress-loaded"></div><div class="art-progress-played"></div><div class="art-progress-highlight"></div><div class="art-progress-indicator"></div><div class="art-progress-tip">00:00</div></div>`,mounted:e=>{let c=null,p=!1,d=(0,i.query)(".art-progress-hover",e),u=(0,i.query)(".art-progress-loaded",e),f=(0,i.query)(".art-progress-played",e),h=(0,i.query)(".art-progress-highlight",e),m=(0,i.query)(".art-progress-indicator",e),g=(0,i.query)(".art-progress-tip",e);function v(r,a){let{width:o,time:s}=a||n(t,r);g.textContent=s||"00:00";let l=g.clientWidth;o<=l/2?(0,i.setStyle)(g,"left",0):o>e.clientWidth-l/2?(0,i.setStyle)(g,"left",`${e.clientWidth-l}px`):(0,i.setStyle)(g,"left",`${o-l/2}px`)}r.indicator?(0,i.append)(m,r.indicator):(0,i.setStyle)(m,"backgroundColor","var(--art-theme)"),t.on("setBar",function(r,a,o){let s="played"===r&&o&&i.isMobile;"loaded"===r&&(0,i.setStyle)(u,"width",`${100*a}%`),"hover"===r&&((0,i.setStyle)(d,"width",`${100*a}%`),(0,i.includeFromEvent)(o,h)?!function(r){let{width:a}=n(t,r),{text:o}=r.target.dataset;g.textContent=o;let s=g.clientWidth;a<=s/2?(0,i.setStyle)(g,"left",0):a>e.clientWidth-s/2?(0,i.setStyle)(g,"left",`${e.clientWidth-s}px`):(0,i.setStyle)(g,"left",`${a-s/2}px`)}(o):v(o),0===a?(0,i.removeClass)(l,"art-progress-hover"):(0,i.addClass)(l,"art-progress-hover")),"played"===r&&((0,i.setStyle)(f,"width",`${100*a}%`),(0,i.setStyle)(m,"left",`${100*a}%`)),s&&((0,i.addClass)(l,"art-progress-hover"),v(o,{width:e.clientWidth*a,time:(0,i.secondToTime)(a*t.duration)}),clearTimeout(c),c=setTimeout(()=>{(0,i.removeClass)(l,"art-progress-hover")},500))}),t.on("video:loadedmetadata",function(){h.textContent="";for(let e=0;e<a.highlight.length;e++){let r=a.highlight[e],o=(0,i.clamp)(r.time,0,t.duration)/t.duration*100,n=`<span data-text="${r.text}" data-time="${r.time}" style="left: ${o}%"></span>`;(0,i.append)(h,n)}}),t.constructor.USE_RAF?t.on("raf",()=>{t.emit("setBar","played",t.played),t.emit("setBar","loaded",t.loaded)}):(t.on("video:timeupdate",()=>{t.emit("setBar","played",t.played)}),t.on("video:progress",()=>{t.emit("setBar","loaded",t.loaded)}),t.on("video:ended",()=>{t.emit("setBar","played",1)})),t.emit("setBar","loaded",t.loaded||0),i.isMobile||(o(e,"click",e=>{e.target!==m&&s(t,e)}),o(e,"mousemove",e=>{let{percentage:r}=n(t,e);t.emit("setBar","hover",r,e)}),o(e,"mouseleave",e=>{t.emit("setBar","hover",0,e)}),o(e,"mousedown",e=>{p=0===e.button}),t.on("document:mousemove",e=>{if(p){let{second:r,percentage:a}=n(t,e);t.emit("setBar","played",a,e),t.seek=r}}),t.on("document:mouseup",()=>{p&&(p=!1)}))}}}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],dIscA:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>({...e,tooltip:t.i18n.get("Screenshot"),mounted:e=>{let{proxy:r,icons:a}=t;(0,i.append)(e,a.screenshot),r(e,"click",()=>{t.screenshot()})}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],aqA0g:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>({...e,tooltip:t.i18n.get("Show Setting"),mounted:e=>{let{proxy:r,icons:a,i18n:o}=t;(0,i.append)(e,a.setting),r(e,"click",()=>{t.setting.toggle(),t.setting.resize()}),t.on("setting",t=>{(0,i.tooltip)(e,o.get(t?"Hide Setting":"Show Setting"))})}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],ihweO:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>({...e,style:i.isMobile?{fontSize:"12px",padding:"0 5px"}:{cursor:"auto",padding:"0 10px"},mounted:e=>{function r(){let r=`${(0,i.secondToTime)(t.currentTime)} / ${(0,i.secondToTime)(t.duration)}`;r!==e.textContent&&(e.textContent=r)}r();let a=["video:loadedmetadata","video:timeupdate","video:progress"];for(let e=0;e<a.length;e++)t.on(a[e],r)}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],fJVWn:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return t=>({...e,mounted:e=>{let{proxy:r,icons:a}=t,o=(0,i.append)(e,a.volume),n=(0,i.append)(e,a.volumeClose),s=(0,i.append)(e,'<div class="art-volume-panel"></div>'),l=(0,i.append)(s,'<div class="art-volume-inner"></div>'),c=(0,i.append)(l,'<div class="art-volume-val"></div>'),p=(0,i.append)(l,'<div class="art-volume-slider"></div>'),d=(0,i.append)(p,'<div class="art-volume-handle"></div>'),u=(0,i.append)(d,'<div class="art-volume-loaded"></div>'),f=(0,i.append)(p,'<div class="art-volume-indicator"></div>');function h(e){let{top:t,height:r}=(0,i.getRect)(p);return 1-(e.clientY-t)/r}function m(){if(t.muted||0===t.volume)(0,i.setStyle)(o,"display","none"),(0,i.setStyle)(n,"display","flex"),(0,i.setStyle)(f,"top","100%"),(0,i.setStyle)(u,"top","100%"),c.textContent=0;else{let e=100*t.volume;(0,i.setStyle)(o,"display","flex"),(0,i.setStyle)(n,"display","none"),(0,i.setStyle)(f,"top",`${100-e}%`),(0,i.setStyle)(u,"top",`${100-e}%`),c.textContent=Math.floor(e)}}if(m(),t.on("video:volumechange",m),r(o,"click",()=>{t.muted=!0}),r(n,"click",()=>{t.muted=!1}),i.isMobile)(0,i.setStyle)(s,"display","none");else{let e=!1;r(p,"mousedown",r=>{e=0===r.button,t.volume=h(r)}),t.on("document:mousemove",r=>{e&&(t.muted=!1,t.volume=h(r))}),t.on("document:mouseup",()=>{e&&(e=!1)})}}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jmVSD:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("./clickInit"),n=o.interopDefault(i),s=e("./gestureInit"),l=o.interopDefault(s),c=e("./globalInit"),p=o.interopDefault(c),d=e("./hoverInit"),u=o.interopDefault(d),f=e("./moveInit"),h=o.interopDefault(f),m=e("./resizeInit"),g=o.interopDefault(m),v=e("./updateInit"),y=o.interopDefault(v),b=e("./viewInit"),x=o.interopDefault(b);r.default=class{constructor(e){this.destroyEvents=new Set,this.proxy=this.proxy.bind(this),this.hover=this.hover.bind(this),(0,n.default)(e,this),(0,u.default)(e,this),(0,h.default)(e,this),(0,g.default)(e,this),(0,l.default)(e,this),(0,x.default)(e,this),(0,p.default)(e,this),(0,y.default)(e,this)}proxy(e,t,r,a={}){if(Array.isArray(t))return t.map(t=>this.proxy(e,t,r,a));e.addEventListener(t,r,a);let o=()=>e.removeEventListener(t,r,a);return this.destroyEvents.add(o),o}hover(e,t,r){t&&this.proxy(e,"mouseenter",t),r&&this.proxy(e,"mouseleave",r)}remove(e){if(this.destroyEvents.has(e))try{e()}catch(e){console.warn("Failed to remove event listener:",e)}finally{this.destroyEvents.delete(e)}}destroy(){for(let e of this.destroyEvents)try{e()}catch(e){console.warn("Failed to destroy event listener:",e)}this.destroyEvents.clear()}}},{"./clickInit":"i8G6V","./gestureInit":"9wEzB","./globalInit":"ikBrS","./hoverInit":"jwNq0","./moveInit":"eqSsP","./resizeInit":"42JNz","./updateInit":"7kM1M","./viewInit":"2IW9m","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],i8G6V:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e,t){let{constructor:r,template:{$player:a,$video:o}}=e;function n(t){(0,i.includeFromEvent)(t,a)?(e.isInput="INPUT"===t.target.tagName,e.isFocus=!0,e.emit("focus",t)):(e.isInput=!1,e.isFocus=!1,e.emit("blur",t))}e.on("document:click",n),e.on("document:contextmenu",n);let s=[];t.proxy(o,"click",t=>{let a=Date.now();s.push(a);let{MOBILE_CLICK_PLAY:o,DBCLICK_TIME:n,MOBILE_DBCLICK_PLAY:l,DBCLICK_FULLSCREEN:c}=r,p=s.filter(e=>a-e<=n);switch(p.length){case 1:e.emit("click",t),i.isMobile?!e.isLock&&o&&e.toggle():e.toggle(),s=p;break;case 2:e.emit("dblclick",t),i.isMobile?!e.isLock&&l&&e.toggle():c&&(e.fullscreen=!e.fullscreen),s=[];break;default:s=[]}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"9wEzB":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>s);var i=e("../control/progress"),n=e("../utils");function s(e,t){if(n.isMobile&&!e.option.isLive){let{$video:r,$progress:a}=e.template,o=null,s=!1,l=0,c=0,p=0,d=t=>{if(1===t.touches.length&&!e.isLock){o===a&&(0,i.setCurrentTime)(e,t),s=!0;let{pageX:r,pageY:n}=t.touches[0];l=r,c=n,p=e.currentTime}},u=t=>{if(1===t.touches.length&&s&&e.duration){let{pageX:a,pageY:i}=t.touches[0],s=function(e,t,r,a){let o=t-a,i=r-e,n=0;if(2>Math.abs(i)&&2>Math.abs(o))return n;let s=180*Math.atan2(o,i)/Math.PI;return s>=-45&&s<45?n=4:s>=45&&s<135?n=1:s>=-135&&s<-45?n=2:(s>=135&&s<=180||s>=-180&&s<-135)&&(n=3),n}(l,c,a,i),d=[3,4].includes(s),u=[1,2].includes(s);if(d&&!e.isRotate||u&&e.isRotate){let s=(0,n.clamp)((a-l)/e.width,-1,1),d=(0,n.clamp)((i-c)/e.height,-1,1),u=e.isRotate?d:s,f=o===r?e.constructor.TOUCH_MOVE_RATIO:1,h=(0,n.clamp)(p+e.duration*u*f,0,e.duration);e.seek=h,e.emit("setBar","played",(0,n.clamp)(h/e.duration,0,1),t),e.notice.show=`${(0,n.secondToTime)(h)} / ${(0,n.secondToTime)(e.duration)}`}}};e.option.gesture&&(t.proxy(r,"touchstart",e=>{o=r,d(e)}),t.proxy(r,"touchmove",u)),t.proxy(a,"touchstart",e=>{o=a,d(e)}),t.proxy(a,"touchmove",u),e.on("document:touchend",()=>{s&&(l=0,c=0,p=0,s=!1,o=null)})}}},{"../control/progress":"1XZSS","../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],ikBrS:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e,t){let r=["click","mouseup","keydown","touchend","touchmove","mousemove","pointerup","contextmenu","pointermove","visibilitychange","webkitfullscreenchange"],a=["resize","scroll","orientationchange"],o=[];function i(n={}){for(let e=0;e<o.length;e++)t.remove(o[e]);o.length=0;let{$player:s}=e.template;r.forEach(r=>{let a=n.document||s.ownerDocument||document,i=t.proxy(a,r,t=>{e.emit(`document:${r}`,t)});o.push(i)}),a.forEach(r=>{let a=n.window||s.ownerDocument?.defaultView||window,i=t.proxy(a,r,t=>{e.emit(`window:${r}`,t)});o.push(i)})}i(),t.bindGlobalEvents=i}o.defineInteropFlag(r),o.export(r,"default",()=>i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jwNq0:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e,t){let{$player:r}=e.template;t.hover(r,t=>{(0,i.addClass)(r,"art-hover"),e.emit("hover",!0,t)},t=>{(0,i.removeClass)(r,"art-hover"),e.emit("hover",!1,t)})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],eqSsP:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e,t){let{$player:r}=e.template;t.proxy(r,"mousemove",t=>{e.emit("mousemove",t)})}o.defineInteropFlag(r),o.export(r,"default",()=>i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"42JNz":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e,t){let{option:r,constructor:a}=e;e.on("resize",()=>{let{aspectRatio:t,notice:a}=e;"standard"===e.state&&r.autoSize&&e.autoSize(),e.aspectRatio=t,a.show=""});let o=(0,i.debounce)(()=>e.emit("resize"),a.RESIZE_TIME);e.on("window:orientationchange",()=>o()),e.on("window:resize",()=>o()),screen&&screen.orientation&&screen.orientation.onchange&&t.proxy(screen.orientation,"change",()=>o())}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"7kM1M":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e){if(e.constructor.USE_RAF){let t=null;!function r(){e.playing&&e.emit("raf"),e.isDestroy||(t=requestAnimationFrame(r))}(),e.on("destroy",()=>{cancelAnimationFrame(t)})}}o.defineInteropFlag(r),o.export(r,"default",()=>i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"2IW9m":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{option:t,constructor:r,template:{$container:a}}=e,o=(0,i.throttle)(()=>{e.emit("view",(0,i.isInViewport)(a,r.SCROLL_GAP))},r.SCROLL_TIME);e.on("window:scroll",()=>o()),e.on("view",r=>{t.autoMini&&(e.mini=!r)})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],dswts:[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r);var o=e("./utils");r.default=class{constructor(e){this.art=e,this.keys={},o.isMobile||this.init()}init(){let{constructor:e}=this.art;this.art.option.hotkey&&(this.add("Escape",()=>{this.art.fullscreenWeb&&(this.art.fullscreenWeb=!1)}),this.add("Space",()=>{this.art.toggle()}),this.add("ArrowLeft",()=>{this.art.backward=e.SEEK_STEP}),this.add("ArrowUp",()=>{this.art.volume+=e.VOLUME_STEP}),this.add("ArrowRight",()=>{this.art.forward=e.SEEK_STEP}),this.add("ArrowDown",()=>{this.art.volume-=e.VOLUME_STEP})),this.art.on("document:keydown",e=>{if(this.art.isFocus){let t=document.activeElement.tagName.toUpperCase(),r=document.activeElement.getAttribute("contenteditable");if("INPUT"!==t&&"TEXTAREA"!==t&&""!==r&&"true"!==r&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey){let t=this.keys[e.code];if(t){e.preventDefault();for(let r=0;r<t.length;r++)t[r].call(this.art,e);this.art.emit("hotkey",e)}}}this.art.emit("keydown",e)})}add(e,t){return this.keys[e]?this.keys[e].includes(t)||this.keys[e].push(t):this.keys[e]=[t],this}remove(e,t){if(this.keys[e]){let r=this.keys[e].indexOf(t);-1!==r&&this.keys[e].splice(r,1),0===this.keys[e].length&&delete this.keys[e]}return this}}},{"./utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],d9ktO:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("../utils"),n=e("./zh-cn"),s=o.interopDefault(n);r.default=class{constructor(e){this.art=e,this.languages={"zh-cn":s.default},this.language={},this.update(e.option.i18n)}init(){let e=this.art.option.lang.toLowerCase();this.language=this.languages[e]||{}}get(e){return this.language[e]||e}update(e){this.languages=(0,i.mergeDeep)(this.languages,e),this.init()}}},{"../utils":"aBlEo","./zh-cn":"3hyaR","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"3hyaR":[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r);let o={"Video Info":"统计信息",Close:"关闭","Video Load Failed":"加载失败",Volume:"音量",Play:"播放",Pause:"暂停",Rate:"速度",Mute:"静音","Video Flip":"画面翻转",Horizontal:"水平",Vertical:"垂直",Reconnect:"重新连接","Show Setting":"显示设置","Hide Setting":"隐藏设置",Screenshot:"截图","Play Speed":"播放速度","Aspect Ratio":"画面比例",Default:"默认",Normal:"正常",Open:"打开","Switch Video":"切换","Switch Subtitle":"切换字幕",Fullscreen:"全屏","Exit Fullscreen":"退出全屏","Web Fullscreen":"网页全屏","Exit Web Fullscreen":"退出网页全屏","Mini Player":"迷你播放器","PIP Mode":"开启画中画","Exit PIP Mode":"退出画中画","PIP Not Supported":"不支持画中画","Fullscreen Not Supported":"不支持全屏","Subtitle Offset":"字幕偏移","Last Seen":"上次看到","Jump Play":"跳转播放",AirPlay:"隔空播放","AirPlay Not Available":"隔空播放不可用"};r.default=o,"u">typeof window&&(window["artplayer-i18n-zh-cn"]=o)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],fFHY0:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("bundle-text:./airplay.svg"),n=o.interopDefault(i),s=e("bundle-text:./arrow-left.svg"),l=o.interopDefault(s),c=e("bundle-text:./arrow-right.svg"),p=o.interopDefault(c),d=e("bundle-text:./aspect-ratio.svg"),u=o.interopDefault(d),f=e("bundle-text:./check.svg"),h=o.interopDefault(f),m=e("bundle-text:./close.svg"),g=o.interopDefault(m),v=e("bundle-text:./config.svg"),y=o.interopDefault(v),b=e("bundle-text:./error.svg"),x=o.interopDefault(b),w=e("bundle-text:./flip.svg"),j=o.interopDefault(w),k=e("bundle-text:./fullscreen-off.svg"),E=o.interopDefault(k),S=e("bundle-text:./fullscreen-on.svg"),$=o.interopDefault(S),M=e("bundle-text:./fullscreen-web-off.svg"),I=o.interopDefault(M),T=e("bundle-text:./fullscreen-web-on.svg"),C=o.interopDefault(T),F=e("bundle-text:./loading.svg"),q=o.interopDefault(F),D=e("bundle-text:./lock.svg"),R=o.interopDefault(D),A=e("bundle-text:./pause.svg"),B=o.interopDefault(A),L=e("bundle-text:./pip.svg"),O=o.interopDefault(L),P=e("bundle-text:./play.svg"),z=o.interopDefault(P),X=e("bundle-text:./playback-rate.svg"),_=o.interopDefault(X),V=e("bundle-text:./screenshot.svg"),H=o.interopDefault(V),N=e("bundle-text:./setting.svg"),W=o.interopDefault(N),U=e("bundle-text:./state.svg"),Y=o.interopDefault(U),Z=e("bundle-text:./switch-off.svg"),G=o.interopDefault(Z),K=e("bundle-text:./switch-on.svg"),J=o.interopDefault(K),Q=e("bundle-text:./unlock.svg"),ee=o.interopDefault(Q),et=e("bundle-text:./volume-close.svg"),er=o.interopDefault(et),ea=e("bundle-text:./volume.svg"),eo=o.interopDefault(ea),ei=e("../utils");r.default=class{constructor(e){let t={loading:q.default,state:Y.default,play:z.default,pause:B.default,check:h.default,volume:eo.default,volumeClose:er.default,screenshot:H.default,setting:W.default,pip:O.default,arrowLeft:l.default,arrowRight:p.default,playbackRate:_.default,aspectRatio:u.default,config:y.default,lock:R.default,flip:j.default,unlock:ee.default,fullscreenOff:E.default,fullscreenOn:$.default,fullscreenWebOff:I.default,fullscreenWebOn:C.default,switchOn:J.default,switchOff:G.default,error:x.default,close:g.default,airplay:n.default,...e.option.icons};for(let e in t)(0,ei.def)(this,e,{get:()=>(0,ei.getIcon)(e,t[e])})}}},{"bundle-text:./airplay.svg":"d0PLM","bundle-text:./arrow-left.svg":"fTS3N","bundle-text:./arrow-right.svg":"6dd2Y","bundle-text:./aspect-ratio.svg":"7w1WQ","bundle-text:./check.svg":"9Gnzl","bundle-text:./close.svg":"gZ6se","bundle-text:./config.svg":"11nqH","bundle-text:./error.svg":"2lNXD","bundle-text:./flip.svg":"g93LV","bundle-text:./fullscreen-off.svg":"9GxXs","bundle-text:./fullscreen-on.svg":"2o4YV","bundle-text:./fullscreen-web-off.svg":"3Tcul","bundle-text:./fullscreen-web-on.svg":"h8zri","bundle-text:./loading.svg":"20Kng","bundle-text:./lock.svg":"ikSDt","bundle-text:./pause.svg":"2z8ZO","bundle-text:./pip.svg":"IKR3O","bundle-text:./play.svg":"5uOQP","bundle-text:./playback-rate.svg":"f4InP","bundle-text:./screenshot.svg":"ghQE9","bundle-text:./setting.svg":"1slZT","bundle-text:./state.svg":"gDV5Q","bundle-text:./switch-off.svg":"bs1zJ","bundle-text:./switch-on.svg":"fcgnB","bundle-text:./unlock.svg":"6Jzwj","bundle-text:./volume-close.svg":"hQCfd","bundle-text:./volume.svg":"5sR5c","../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],d0PLM:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M16 1H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3v-2H3V3h12v8h-2v2h3a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/><path d="M4 17h10l-5-6Z"/></svg>'},{}],fTS3N:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="m19.41 20.09-4.58-4.59 4.58-4.59L18 9.5l-6 6 6 6Z"/></svg>'},{}],"6dd2Y":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="m12.59 20.34 4.58-4.59-4.58-4.59L14 9.75l6 6-6 6Z"/></svg>'},{}],"7w1WQ":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;transform:translate(0)" viewBox="0 0 88 88"><defs><clipPath id="__lottie_element_216"><path d="M0 0h88v88H0Z"/></clipPath></defs><g clip-path="url(#__lottie_element_216)"><g style="display:block"><path d="m12.438-12.702-2.82 2.82c-.79.79-.79 2.05 0 2.83l7.07 7.07-7.07 7.07c-.79.79-.79 2.05 0 2.83l2.82 2.83c.79.78 2.05.78 2.83 1.4495849676166017e-7l11.32-11.31c.78-.78.78-2.05 0-2.83l-11.32-11.31C14.488-13.492 13.228-13.492 12.438-12.702m-24.88 0c-.74-.74-1.92-.78-2.7-.12l-.13.12-11.31 11.31a2 2 0 0 0-.12 2.7l.12.13 11.31 11.31a2 2 0 0 0 2.7.12l.13-.12 2.83-2.83c.74-.74.78-1.91.11-2.7l-.11-.13-7.07-7.07 7.07-7.07c.74-.74.78-1.91.11-2.7l-.11-.13ZM28-28c4.42 0 8 3.58 8 8v40c0 4.42-3.58 8-8 8h-56c-4.42 0-8-3.58-8-8v-40c0-4.42 3.58-8 8-8Z" style="--darkreader-inline-fill:#a8a6a4" transform="translate(44 44)"/></g></g></svg>'},{}],"9Gnzl":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4Z"/></svg>'},{}],gZ6se:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="icon" viewBox="0 0 1024 1024"><path d="m571.733 512 268.8-268.8c17.067-17.067 17.067-42.667 0-59.733C823.467 166.4 797.867 166.4 780.8 183.466L512 452.267l-268.8-268.8C226.133 166.4 200.533 166.4 183.467 183.466c-17.067 17.066-17.067 42.666 0 59.733l268.8 268.8-268.8 268.8c-17.067 17.067-17.067 42.667 0 59.733 8.533 8.534 19.2 12.8 29.866 12.8s21.334-4.266 29.867-12.8l268.8-268.8 268.8 268.8c8.533 8.534 19.2 12.8 29.867 12.8s21.333-4.266 29.866-12.8c17.067-17.066 17.067-42.666 0-59.733Z"/></svg>'},{}],"11nqH":[function(e,t,r,a){t.exports='<svg width="24" height="24" viewBox="0 0 24 24"><path d="M15 17h6v1h-6Zm-4 0H3v1h8v2h1v-5h-1Zm3-9h1V3h-1v2H3v1h11Zm4-3v1h3V5ZM6 14h1V9H6v2H3v1h3Zm4-2h11v-1H10Z" style="--darkreader-inline-fill:#a8a6a4"/></svg>'},{}],"2lNXD":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024"><path d="M593.818 168.55 949.82 763.76c26.153 43.746 10.732 99.738-34.447 125.052-14.397 8.069-30.72 12.308-47.37 12.308H155.976c-52.224 0-94.536-40.96-94.536-91.505 0-16.097 4.383-31.928 12.718-45.875l356.004-595.19c26.173-43.724 84.009-58.654 129.208-33.341a93.1 93.1 0 0 1 34.447 33.341M512 819.2a61.44 61.44 0 1 0 0-122.88 61.44 61.44 0 0 0 0 122.88m0-512a72.315 72.315 0 0 0-71.762 81.306l25.723 205.721a46.408 46.408 0 0 0 92.078 0l25.723-205.742A72.315 72.315 0 0 0 512 307.2"/></svg>'},{}],g93LV:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="icon" viewBox="0 0 1024 1024"><path d="M554.667 810.667V896h-85.333v-85.333Zm-384-632.662a42.67 42.67 0 0 1 34.987 18.219l203.903 291.328a42.67 42.67 0 0 1 0 48.896L205.611 827.776A42.667 42.667 0 0 1 128 803.328V220.672a42.667 42.667 0 0 1 42.667-42.667m682.666 0a42.667 42.667 0 0 1 42.368 37.717l.299 4.95v582.656a42.667 42.667 0 0 1-74.24 28.63l-3.413-4.182-203.904-291.328a42.67 42.67 0 0 1-3.03-43.861l3.03-5.035 203.946-291.328a42.67 42.67 0 0 1 34.944-18.219M554.667 640v85.333h-85.333V640Zm-358.4-320.896V716.8L335.957 512 196.31 319.104Zm358.4 150.23v85.333h-85.333v-85.333Zm0-170.667V384h-85.333v-85.333Zm0-170.667v85.333h-85.333V128Z"/></svg>'},{}],"9GxXs":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="icon" viewBox="0 0 1024 1024"><path d="M768 298.667h170.667V384h-256V128H768ZM341.333 384h-256v-85.333H256V128h85.333ZM768 725.333V896h-85.333V640h256v85.333ZM341.333 640v256H256V725.333H85.333V640Z"/></svg>'},{}],"2o4YV":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="icon" viewBox="0 0 1024 1024"><path d="M625.778 256H768v142.222h113.778v-256h-256ZM256 398.222V256h142.222V142.222h-256v256Zm512 227.556V768H625.778v113.778h256v-256ZM398.222 768H256V625.778H142.222v256h256Z"/></svg>'},{}],"3Tcul":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="icon" viewBox="0 0 1152 1024"><path d="M1075.2 0H76.8A76.8 76.8 0 0 0 0 76.8v870.4a76.8 76.8 0 0 0 76.8 76.8h998.4a76.8 76.8 0 0 0 76.8-76.8V76.8A76.8 76.8 0 0 0 1075.2 0M1024 128v768H128V128ZM896 512a64 64 0 0 1 7.488 127.552L896 640H768v128a64 64 0 0 1-56.512 63.552L704 832a64 64 0 0 1-63.552-56.512L640 768V582.592c0-34.496 25.024-66.112 61.632-70.208l8-.384Zm-640 0a64 64 0 0 1-7.488-127.552L256 384h128V256a64 64 0 0 1 56.512-63.552L448 192a64 64 0 0 1 63.552 56.512L512 256v185.408c0 34.432-25.024 66.112-61.632 70.144l-8 .448Z"/></svg>'},{}],h8zri:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="icon" viewBox="0 0 1152 1024"><path d="M1075.2 0H76.8A76.8 76.8 0 0 0 0 76.8v870.4a76.8 76.8 0 0 0 76.8 76.8h998.4a76.8 76.8 0 0 0 76.8-76.8V76.8A76.8 76.8 0 0 0 1075.2 0M1024 128v768H128V128Zm-576 64a64 64 0 0 1 7.488 127.552L448 320H320v128a64 64 0 0 1-56.512 63.552L256 512a64 64 0 0 1-63.552-56.512L192 448V262.592c0-34.432 25.024-66.112 61.632-70.144l8-.448Zm256 640a64 64 0 0 1-7.488-127.552L704 704h128V576a64 64 0 0 1 56.512-63.552L896 512a64 64 0 0 1 63.552 56.512L960 576v185.408c0 34.496-25.024 66.112-61.632 70.208l-8 .384Z"/></svg>'},{}],"20Kng":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" class="uil-default" preserveAspectRatio="xMidYMid" viewBox="0 0 100 100"><path fill="none" d="M0 0h100v100H0Z" class="bk"/><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="translate(0 -30)"><animate attributeName="opacity" begin="-1s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(30 105.98 65)"><animate attributeName="opacity" begin="-0.9166666666666666s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(60 75.98 65)"><animate attributeName="opacity" begin="-0.8333333333333334s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(90 65 65)"><animate attributeName="opacity" begin="-0.75s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(120 58.66 65)"><animate attributeName="opacity" begin="-0.6666666666666666s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(150 54.02 65)"><animate attributeName="opacity" begin="-0.5833333333333334s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="matrix(-1 0 0 -1 100 130)"><animate attributeName="opacity" begin="-0.5s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(210 45.98 65)"><animate attributeName="opacity" begin="-0.4166666666666667s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(240 41.34 65)"><animate attributeName="opacity" begin="-0.3333333333333333s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(-90 35 65)"><animate attributeName="opacity" begin="-0.25s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(-60 24.02 65)"><animate attributeName="opacity" begin="-0.16666666666666666s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect><rect width="6" height="20" x="47" y="40" rx="5" ry="5" transform="rotate(-30 -5.98 65)"><animate attributeName="opacity" begin="-0.08333333333333333s" dur="1s" from="1" repeatCount="indefinite" to="0"/></rect></svg>'},{}],ikSDt:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon" viewBox="0 0 1024 1024"><path d="M298.667 426.667v-85.333a213.333 213.333 0 1 1 426.667 0v85.333H768A85.333 85.333 0 0 1 853.333 512v256A85.333 85.333 0 0 1 768 853.333H256A85.333 85.333 0 0 1 170.667 768V512A85.333 85.333 0 0 1 256 426.667ZM512 213.333a128 128 0 0 0-128 128v85.333h256v-85.333a128 128 0 0 0-128-128"/></svg>'},{}],"2z8ZO":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path d="M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2m8 0a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2"/></svg>'},{}],IKR3O:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 1024 1024"><path d="M844.8 219.648H179.2c-6.144 0-10.24 4.608-10.24 10.752v563.2c0 5.632 4.096 10.24 10.24 10.24h256V896h-256A102.4 102.4 0 0 1 76.8 793.6V230.4c0-56.832 45.568-102.4 102.4-102.4h665.6a102.4 102.4 0 0 1 102.4 102.4v204.8h-92.16V230.4c0-6.144-4.608-10.752-10.24-10.752M614.4 588.8c-28.672 0-51.2 22.528-51.2 51.2v204.8c0 28.16 22.528 51.2 51.2 51.2H896c28.16 0 51.2-23.04 51.2-51.2V640c0-28.672-23.04-51.2-51.2-51.2Z"/></svg>'},{}],"5uOQP":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path d="M17.982 9.275 8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45"/></svg>'},{}],f4InP:[function(e,t,r,a){t.exports='<svg width="24" height="24" viewBox="0 0 24 24"><path d="M10 8v8l6-4ZM6.3 5l-.6-.8C7.2 3 9 2.2 11 2l.1 1c-1.8.2-3.4.9-4.8 2M5 6.3l-.8-.6C3 7.2 2.2 9 2 11l1 .1c.2-1.8.9-3.4 2-4.8m0 11.4c-1.1-1.4-1.8-3.1-2-4.8L2 13c.2 2 1 3.8 2.2 5.4Zm6.1 3.3c-1.8-.2-3.4-.9-4.8-2l-.6.8C7.2 21 9 21.8 11 22ZM22 12c0-5.2-3.9-9.4-9-10l-.1 1c4.6.5 8.1 4.3 8.1 9s-3.5 8.5-8.1 9l.1 1c5.2-.5 9-4.8 9-10" style="--darkreader-inline-fill:#a8a6a4"/></svg>'},{}],ghQE9:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 50 50"><path d="M19.402 6a5 5 0 0 0-4.902 4.012L14.098 12H9a5 5 0 0 0-5 5v21a5 5 0 0 0 5 5h32a5 5 0 0 0 5-5V17a5 5 0 0 0-5-5h-5.098l-.402-1.988A5 5 0 0 0 30.598 6ZM25 17c5.52 0 10 4.48 10 10s-4.48 10-10 10-10-4.48-10-10 4.48-10 10-10m0 2c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8"/></svg>'},{}],"1slZT":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="2"/><path d="M19.164 8.861 17.6 8.6a7 7 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1 1 0 0 0-1.272.23l-1.008 1.225a7 7 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A7 7 0 0 0 4.4 8.6l-1.564.261A1 1 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.1 7.1 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a1 1 0 0 0 .835-.986V9.847a1 1 0 0 0-.836-.986M11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8"/></svg>'},{}],gDV5Q:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24"><path d="M9.5 9.325v5.35q0 .575.525.875t1.025-.05l4.15-2.65q.475-.3.475-.85t-.475-.85L11.05 8.5q-.5-.35-1.025-.05t-.525.875M12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12t.788-3.9 2.137-3.175q1.35-1.35 3.175-2.137T12 2t3.9.788 3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22"/></svg>'},{}],bs1zJ:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" class="icon" viewBox="0 0 1740 1024"><path d="M511.898 1024h670.515c282.419-.41 511.18-229.478 511.18-511.898 0-282.419-228.761-511.488-511.18-511.897H511.898C229.478.615.717 229.683.717 512.102c0 282.42 228.761 511.488 511.18 511.898m-.564-975.36A464.589 464.589 0 1 1 48.025 513.024 463.87 463.87 0 0 1 511.335 48.435Z"/></svg>'},{}],fcgnB:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" class="icon" viewBox="0 0 1664 1024"><path fill="#648ffc" d="M1152 0H512a512 512 0 0 0 0 1024h640a512 512 0 0 0 0-1024m0 960a448 448 0 1 1 448-448 448 448 0 0 1-448 448"/></svg>'},{}],"6Jzwj":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon" viewBox="0 0 1024 1024"><path d="m666.752 194.517-49.365 74.112A128 128 0 0 0 384 341.333l.043 85.334h384A85.333 85.333 0 0 1 853.376 512v256a85.333 85.333 0 0 1-85.333 85.333H256A85.333 85.333 0 0 1 170.667 768V512A85.333 85.333 0 0 1 256 426.667h42.667v-85.333a213.333 213.333 0 0 1 368.085-146.816"/></svg>'},{}],hQCfd:[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path d="M15 11a4 4 0 0 0-2-3.465v2.636l1.865 1.865A4 4 0 0 0 15 11"/><path d="M13.583 5.583A6 6 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8 8 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805m5.195 13.195-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806q.322-.154.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416M11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172Z"/></svg>'},{}],"5sR5c":[function(e,t,r,a){t.exports='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path d="M10.188 4.65 6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39m4.258-.872a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8 8 0 0 0 19 11a8 8 0 0 0-4.554-7.222"/><path d="M15 11a4 4 0 0 0-2-3.465v6.93A4 4 0 0 0 15 11"/></svg>'},{}],kZ0F8:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("./utils"),n=e("./utils/component"),s=o.interopDefault(n);class l extends s.default{constructor(e){super(e),this.name="info",i.isMobile||this.init()}init(){let{proxy:e,constructor:t,template:{$infoPanel:r,$infoClose:a,$video:o}}=this.art;e(a,"click",()=>{this.show=!1});let n=null,s=(0,i.queryAll)("[data-video]",r)||[];this.art.on("destroy",()=>clearTimeout(n)),!function e(){for(let e=0;e<s.length;e++){let t=s[e],r=o[t.dataset.video],a="number"==typeof r?r.toFixed(2):r;t.textContent!==a&&(t.textContent=a)}n=setTimeout(e,t.INFO_LOOP_TIME)}()}}r.default=l},{"./utils":"aBlEo","./utils/component":"idCEj","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],j9lbi:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("./utils/component"),n=o.interopDefault(i);class s extends n.default{constructor(e){super(e);let{option:t,template:{$layer:r}}=e;this.name="layer",this.$parent=r;for(let e=0;e<t.layers.length;e++)this.add(t.layers[e])}}r.default=s},{"./utils/component":"idCEj","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],bMjWd:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("./utils"),n=e("./utils/component"),s=o.interopDefault(n);class l extends s.default{constructor(e){super(e),this.name="loading",(0,i.append)(e.template.$loading,e.icons.loading)}}r.default=l},{"./utils":"aBlEo","./utils/component":"idCEj","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],k1nkQ:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("./utils"),n=e("./utils/component"),s=o.interopDefault(n);class l extends s.default{constructor(e){super(e),this.name="mask";let{template:t,icons:r,events:a}=e,o=(0,i.append)(t.$state,r.state),n=(0,i.append)(t.$state,r.error);(0,i.setStyle)(n,"display","none"),e.on("destroy",()=>{(0,i.setStyle)(o,"display","none"),(0,i.setStyle)(n,"display",null)}),a.proxy(t.$state,"click",()=>e.play())}}r.default=l},{"./utils":"aBlEo","./utils/component":"idCEj","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],fPVaU:[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r);var o=e("./utils");r.default=class{constructor(e){this.art=e,this.timer=null,e.on("destroy",()=>this.destroy())}destroy(){this.timer&&(clearTimeout(this.timer),this.timer=null)}set show(e){let{constructor:t,template:{$player:r,$noticeInner:a}}=this.art;e?(a.textContent=e instanceof Error?e.message.trim():e,(0,o.addClass)(r,"art-notice-show"),clearTimeout(this.timer),this.timer=setTimeout(()=>{a.textContent="",(0,o.removeClass)(r,"art-notice-show")},t.NOTICE_TIME)):(0,o.removeClass)(r,"art-notice-show")}get show(){let{template:{$player:e}}=this.art;return e.classList.contains("art-notice-show")}}},{"./utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],uR0Sw:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("./airplayMix"),n=o.interopDefault(i),s=e("./aspectRatioMix"),l=o.interopDefault(s),c=e("./attrMix"),p=o.interopDefault(c),d=e("./autoHeightMix"),u=o.interopDefault(d),f=e("./autoSizeMix"),h=o.interopDefault(f),m=e("./cssVarMix"),g=o.interopDefault(m),v=e("./currentTimeMix"),y=o.interopDefault(v),b=e("./durationMix"),x=o.interopDefault(b),w=e("./eventInit"),j=o.interopDefault(w),k=e("./flipMix"),E=o.interopDefault(k),S=e("./fullscreenMix"),$=o.interopDefault(S),M=e("./fullscreenWebMix"),I=o.interopDefault(M),T=e("./loadedMix"),C=o.interopDefault(T),F=e("./miniMix"),q=o.interopDefault(F),D=e("./optionInit"),R=o.interopDefault(D),A=e("./pauseMix"),B=o.interopDefault(A),L=e("./pipMix"),O=o.interopDefault(L),P=e("./playbackRateMix"),z=o.interopDefault(P),X=e("./playedMix"),_=o.interopDefault(X),V=e("./playingMix"),H=o.interopDefault(V),N=e("./playMix"),W=o.interopDefault(N),U=e("./posterMix"),Y=o.interopDefault(U),Z=e("./qualityMix"),G=o.interopDefault(Z),K=e("./rectMix"),J=o.interopDefault(K),Q=e("./screenshotMix"),ee=o.interopDefault(Q),et=e("./seekMix"),er=o.interopDefault(et),ea=e("./stateMix"),eo=o.interopDefault(ea),ei=e("./subtitleOffsetMix"),en=o.interopDefault(ei),es=e("./switchMix"),el=o.interopDefault(es),ec=e("./themeMix"),ep=o.interopDefault(ec),ed=e("./thumbnailsMix"),eu=o.interopDefault(ed),ef=e("./toggleMix"),eh=o.interopDefault(ef),em=e("./typeMix"),eg=o.interopDefault(em),ev=e("./urlMix"),ey=o.interopDefault(ev),eb=e("./volumeMix"),ex=o.interopDefault(eb);r.default=class{constructor(e){(0,ey.default)(e),(0,p.default)(e),(0,W.default)(e),(0,B.default)(e),(0,eh.default)(e),(0,er.default)(e),(0,ex.default)(e),(0,y.default)(e),(0,x.default)(e),(0,el.default)(e),(0,z.default)(e),(0,l.default)(e),(0,ee.default)(e),(0,$.default)(e),(0,I.default)(e),(0,O.default)(e),(0,C.default)(e),(0,_.default)(e),(0,H.default)(e),(0,h.default)(e),(0,J.default)(e),(0,E.default)(e),(0,q.default)(e),(0,Y.default)(e),(0,u.default)(e),(0,g.default)(e),(0,ep.default)(e),(0,eg.default)(e),(0,eo.default)(e),(0,en.default)(e),(0,n.default)(e),(0,G.default)(e),(0,eu.default)(e),(0,j.default)(e),(0,R.default)(e)}}},{"./airplayMix":"d8BTB","./aspectRatioMix":"aQNJl","./attrMix":"5DA9e","./autoHeightMix":"1swKn","./autoSizeMix":"lSbiD","./cssVarMix":"32Hp1","./currentTimeMix":"kfZbu","./durationMix":"eV1ag","./eventInit":"f8NQq","./flipMix":"ea3Qm","./fullscreenMix":"ffXE3","./fullscreenWebMix":"8tarF","./loadedMix":"f9syH","./miniMix":"dLuS7","./optionInit":"d1F69","./pauseMix":"kewk9","./pipMix":"4XzDs","./playbackRateMix":"jphfi","./playedMix":"iNpeS","./playingMix":"aBIWL","./playMix":"hRBri","./posterMix":"fgfXC","./qualityMix":"17rUP","./rectMix":"55qzI","./screenshotMix":"bC6TG","./seekMix":"j8GRO","./stateMix":"cn7iR","./subtitleOffsetMix":"2k4nP","./switchMix":"6SU6j","./themeMix":"7iMuh","./thumbnailsMix":"6P0RS","./toggleMix":"eNi78","./typeMix":"7AUBD","./urlMix":"cnlLL","./volumeMix":"iX66j","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],d8BTB:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{i18n:t,notice:r,proxy:a,template:{$video:o}}=e,n=!0;window.WebKitPlaybackTargetAvailabilityEvent&&o.webkitShowPlaybackTargetPicker?a(o,"webkitplaybacktargetavailabilitychanged",e=>{switch(e.availability){case"available":n=!0;break;case"not-available":n=!1}}):n=!1,(0,i.def)(e,"airplay",{value(){n?(o.webkitShowPlaybackTargetPicker(),e.emit("airplay")):r.show=t.get("AirPlay Not Available")}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],aQNJl:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{i18n:t,notice:r,template:{$video:a,$player:o}}=e;(0,i.def)(e,"aspectRatio",{get:()=>o.dataset.aspectRatio||"default",set(n){if(n||(n="default"),"default"===n)(0,i.setStyle)(a,"width",null),(0,i.setStyle)(a,"height",null),(0,i.setStyle)(a,"margin",null),delete o.dataset.aspectRatio;else{let e=n.split(":").map(Number),{clientWidth:t,clientHeight:r}=o,s=e[0]/e[1];t/r>s?((0,i.setStyle)(a,"width",`${s*r}px`),(0,i.setStyle)(a,"height","100%"),(0,i.setStyle)(a,"margin","0 auto")):((0,i.setStyle)(a,"width","100%"),(0,i.setStyle)(a,"height",`${t/s}px`),(0,i.setStyle)(a,"margin","auto 0")),o.dataset.aspectRatio=n}r.show=`${t.get("Aspect Ratio")}: ${"default"===n?t.get("Default"):n}`,e.emit("aspectRatio",n)}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"5DA9e":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{template:{$video:t}}=e;(0,i.def)(e,"attr",{value(e,r){if(void 0===r)return t[e];t[e]=r}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"1swKn":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{template:{$container:t,$video:r}}=e;(0,i.def)(e,"autoHeight",{value(){let{clientWidth:a}=t,{videoHeight:o,videoWidth:n}=r,s=a/n*o;(0,i.setStyle)(t,"height",`${s}px`),e.emit("autoHeight",s)}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],lSbiD:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{$container:t,$player:r,$video:a}=e.template;(0,i.def)(e,"autoSize",{value(){let{videoWidth:o,videoHeight:n}=a,{width:s,height:l}=(0,i.getRect)(t),c=o/n;s/l>c?((0,i.setStyle)(r,"width",`${l*c/s*100}%`),(0,i.setStyle)(r,"height","100%")):((0,i.setStyle)(r,"width","100%"),(0,i.setStyle)(r,"height",`${s/c/l*100}%`)),e.emit("autoSize",{width:e.width,height:e.height})}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"32Hp1":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{$player:t}=e.template;(0,i.def)(e,"cssVar",{value:(e,r)=>r?t.style.setProperty(e,r):getComputedStyle(t).getPropertyValue(e)})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],kfZbu:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{$video:t}=e.template;(0,i.def)(e,"currentTime",{get:()=>t.currentTime||0,set:r=>{Number.isNaN(r=Number.parseFloat(r))||(t.currentTime=(0,i.clamp)(r,0,e.duration))}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],eV1ag:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){(0,i.def)(e,"duration",{get:()=>{let{duration:t}=e.template.$video;return t===1/0?0:t||0}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],f8NQq:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>l);var i=e("../config"),n=o.interopDefault(i),s=e("../utils");function l(e){let{i18n:t,notice:r,option:a,constructor:o,proxy:i,template:{$player:l,$video:c,$poster:p}}=e,d=0;for(let t=0;t<n.default.events.length;t++)i(c,n.default.events[t],t=>{e.emit(`video:${t.type}`,t)});e.on("video:canplay",()=>{d=0,e.loading.show=!1}),e.once("video:canplay",()=>{e.loading.show=!1,e.controls.show=!0,e.mask.show=!0,e.isReady=!0,e.emit("ready")}),e.on("video:ended",()=>{a.loop?(e.seek=0,e.play(),e.controls.show=!1,e.mask.show=!1):(e.controls.show=!0,e.mask.show=!0)}),e.on("video:error",async i=>{d<o.RECONNECT_TIME_MAX?(await (0,s.sleep)(o.RECONNECT_SLEEP_TIME),d+=1,e.url=a.url,r.show=`${t.get("Reconnect")}: ${d}`,e.emit("error",i,d)):(e.mask.show=!0,e.loading.show=!1,e.controls.show=!0,(0,s.addClass)(l,"art-error"),await (0,s.sleep)(o.RECONNECT_SLEEP_TIME),r.show=t.get("Video Load Failed"))}),e.on("video:loadedmetadata",()=>{e.emit("resize"),s.isMobile&&(e.loading.show=!1,e.controls.show=!0,e.mask.show=!0)}),e.on("video:loadstart",()=>{e.loading.show=!0,e.mask.show=!1,e.controls.show=!0}),e.on("video:pause",()=>{e.controls.show=!0,e.mask.show=!0}),e.on("video:play",()=>{e.mask.show=!1,(0,s.setStyle)(p,"display","none")}),e.on("video:playing",()=>{e.mask.show=!1}),e.on("video:progress",()=>{e.playing&&(e.loading.show=!1)}),e.on("video:seeked",()=>{e.loading.show=!1,e.mask.show=!0}),e.on("video:seeking",()=>{e.loading.show=!0,e.mask.show=!1}),e.on("video:timeupdate",()=>{e.mask.show=!1}),e.on("video:waiting",()=>{e.loading.show=!0,e.mask.show=!1})}},{"../config":"eJfh8","../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],ea3Qm:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{template:{$player:t},i18n:r,notice:a}=e;(0,i.def)(e,"flip",{get:()=>t.dataset.flip||"normal",set(o){o||(o="normal"),"normal"===o?delete t.dataset.flip:t.dataset.flip=o,a.show=`${r.get("Video Flip")}: ${r.get((0,i.capitalize)(o))}`,e.emit("flip",o)}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],ffXE3:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>l);var i=e("../libs/screenfull"),n=o.interopDefault(i),s=e("../utils");function l(e){let{i18n:t,notice:r,template:{$video:a,$player:o}}=e;e.once("video:loadedmetadata",()=>{n.default.isEnabled?(n.default.on("change",()=>{e.emit("fullscreen",n.default.isFullscreen),n.default.isFullscreen?(e.state="fullscreen",(0,s.addClass)(o,"art-fullscreen")):(0,s.removeClass)(o,"art-fullscreen"),e.emit("resize")}),n.default.on("error",t=>{e.emit("fullscreenError",t)}),(0,s.def)(e,"fullscreen",{get:()=>n.default.isFullscreen,async set(e){e?await n.default.request(o):await n.default.exit()}})):a.webkitSupportsFullscreen?(e.on("document:webkitfullscreenchange",()=>{e.emit("fullscreen",e.fullscreen),e.emit("resize")}),(0,s.def)(e,"fullscreen",{get:()=>document.fullscreenElement===a,set(t){t?(e.state="fullscreen",a.webkitEnterFullscreen()):a.webkitExitFullscreen()}})):(0,s.def)(e,"fullscreen",{get:()=>!1,set(){r.show=t.get("Fullscreen Not Supported")}}),(0,s.def)(e,"fullscreen",(0,s.get)(e,"fullscreen"))})}},{"../libs/screenfull":"iSPAQ","../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],iSPAQ:[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r);let o=[["requestFullscreen","exitFullscreen","fullscreenElement","fullscreenEnabled","fullscreenchange","fullscreenerror"],["webkitRequestFullscreen","webkitExitFullscreen","webkitFullscreenElement","webkitFullscreenEnabled","webkitfullscreenchange","webkitfullscreenerror"],["webkitRequestFullScreen","webkitCancelFullScreen","webkitCurrentFullScreenElement","webkitCancelFullScreen","webkitfullscreenchange","webkitfullscreenerror"],["mozRequestFullScreen","mozCancelFullScreen","mozFullScreenElement","mozFullScreenEnabled","mozfullscreenchange","mozfullscreenerror"],["msRequestFullscreen","msExitFullscreen","msFullscreenElement","msFullscreenEnabled","MSFullscreenChange","MSFullscreenError"]],i=(()=>{if("u"<typeof document)return!1;let e=o[0],t={};for(let r of o)if(r[1]in document){for(let[a,o]of r.entries())t[e[a]]=o;return t}return!1})(),n={change:i.fullscreenchange,error:i.fullscreenerror},s={request:(e=document.documentElement,t)=>new Promise((r,a)=>{let o=()=>{s.off("change",o),r()};s.on("change",o);let n=e[i.requestFullscreen](t);n instanceof Promise&&n.then(o).catch(a)}),exit:()=>new Promise((e,t)=>{if(!s.isFullscreen)return void e();let r=()=>{s.off("change",r),e()};s.on("change",r);let a=document[i.exitFullscreen]();a instanceof Promise&&a.then(r).catch(t)}),toggle:(e,t)=>s.isFullscreen?s.exit():s.request(e,t),onchange(e){s.on("change",e)},onerror(e){s.on("error",e)},on(e,t){let r=n[e];r&&document.addEventListener(r,t,!1)},off(e,t){let r=n[e];r&&document.removeEventListener(r,t,!1)},raw:i};Object.defineProperties(s,{isFullscreen:{get:()=>!!document[i.fullscreenElement]},element:{enumerable:!0,get:()=>document[i.fullscreenElement]},isEnabled:{enumerable:!0,get:()=>!!document[i.fullscreenEnabled]}}),r.default=s},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"8tarF":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{constructor:t,template:{$container:r,$player:a}}=e,o="";(0,i.def)(e,"fullscreenWeb",{get:()=>(0,i.hasClass)(a,"art-fullscreen-web"),set(n){n?(o=a.style.cssText,t.FULLSCREEN_WEB_IN_BODY&&(0,i.append)(document.body,a),e.state="fullscreenWeb",(0,i.setStyle)(a,"width","100%"),(0,i.setStyle)(a,"height","100%"),(0,i.addClass)(a,"art-fullscreen-web"),e.emit("fullscreenWeb",!0)):(t.FULLSCREEN_WEB_IN_BODY&&(0,i.append)(r,a),o&&(a.style.cssText=o,o=""),(0,i.removeClass)(a,"art-fullscreen-web"),e.emit("fullscreenWeb",!1)),e.emit("resize")}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],f9syH:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{$video:t}=e.template;(0,i.def)(e,"loaded",{get:()=>e.loadedTime/t.duration}),(0,i.def)(e,"loadedTime",{get:()=>t.buffered.length?t.buffered.end(t.buffered.length-1):0})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],dLuS7:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{icons:t,proxy:r,storage:a,template:{$player:o,$video:n}}=e,s=!1,l=0,c=0;function p(){let{$mini:t}=e.template;t&&((0,i.removeClass)(o,"art-mini"),(0,i.setStyle)(t,"display","none"),o.prepend(n),e.emit("mini",!1))}function d(t,r){e.playing?((0,i.setStyle)(t,"display","none"),(0,i.setStyle)(r,"display","flex")):((0,i.setStyle)(t,"display","flex"),(0,i.setStyle)(r,"display","none"))}function u(){let{$mini:t}=e.template,r=(0,i.getRect)(t),o=window.innerHeight-r.height-50,n=window.innerWidth-r.width-50;a.set("top",o),a.set("left",n),(0,i.setStyle)(t,"top",`${o}px`),(0,i.setStyle)(t,"left",`${n}px`)}(0,i.def)(e,"mini",{get:()=>(0,i.hasClass)(o,"art-mini"),set(f){if(f){e.state="mini",(0,i.addClass)(o,"art-mini");let f=function(){let{$mini:o}=e.template;if(o)return(0,i.append)(o,n),(0,i.setStyle)(o,"display","flex");{let o=(0,i.createElement)("div");(0,i.addClass)(o,"art-mini-popup"),(0,i.append)(document.body,o),e.template.$mini=o,(0,i.append)(o,n);let u=(0,i.append)(o,'<div class="art-mini-close"></div>');(0,i.append)(u,t.close),r(u,"click",p);let f=(0,i.append)(o,'<div class="art-mini-state"></div>'),h=(0,i.append)(f,t.play),m=(0,i.append)(f,t.pause);return r(h,"click",()=>e.play()),r(m,"click",()=>e.pause()),d(h,m),e.on("video:playing",()=>d(h,m)),e.on("video:pause",()=>d(h,m)),e.on("video:timeupdate",()=>d(h,m)),r(o,"mousedown",e=>{s=0===e.button,l=e.pageX,c=e.pageY}),e.on("document:mousemove",e=>{if(s){(0,i.addClass)(o,"art-mini-dragging");let t=e.pageX-l,r=e.pageY-c;(0,i.setStyle)(o,"transform",`translate(${t}px, ${r}px)`)}}),e.on("document:mouseup",()=>{if(s){s=!1,(0,i.removeClass)(o,"art-mini-dragging");let e=(0,i.getRect)(o);a.set("left",e.left),a.set("top",e.top),(0,i.setStyle)(o,"left",`${e.left}px`),(0,i.setStyle)(o,"top",`${e.top}px`),(0,i.setStyle)(o,"transform",null)}}),o}}(),h=a.get("top"),m=a.get("left");"number"==typeof h&&"number"==typeof m?((0,i.setStyle)(f,"top",`${h}px`),(0,i.setStyle)(f,"left",`${m}px`),(0,i.isInViewport)(f)||u()):u(),e.emit("mini",!0)}else p()}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],d1F69:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{option:t,storage:r,template:{$video:a,$poster:o}}=e;for(let r in t.moreVideoAttr)e.attr(r,t.moreVideoAttr[r]);t.muted&&(e.muted=t.muted),t.volume&&(a.volume=(0,i.clamp)(t.volume,0,1));let n=r.get("volume");for(let r in"number"==typeof n&&(a.volume=(0,i.clamp)(n,0,1)),t.poster&&(0,i.setStyle)(o,"backgroundImage",`url(${t.poster})`),t.autoplay&&(a.autoplay=t.autoplay),t.playsInline&&(a.playsInline=!0,a["webkit-playsinline"]=!0),t.theme&&(t.cssVar["--art-theme"]=t.theme),t.cssVar)e.cssVar(r,t.cssVar[r]);e.url=t.url}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],kewk9:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{template:{$video:t},i18n:r,notice:a}=e;(0,i.def)(e,"pause",{value(){let o=t.pause();return a.show=r.get("Pause"),e.emit("pause"),o}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"4XzDs":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{i18n:t,notice:r,template:{$video:a}}=e;document.pictureInPictureEnabled?function(e){let{template:{$video:t},proxy:r,notice:a}=e;t.disablePictureInPicture=!1,(0,i.def)(e,"pip",{get:()=>document.pictureInPictureElement,set(r){r?(e.state="pip",t.requestPictureInPicture().catch(e=>{throw a.show=e,e})):document.exitPictureInPicture().catch(e=>{throw a.show=e,e})}}),r(t,"enterpictureinpicture",()=>{e.emit("pip",!0)}),r(t,"leavepictureinpicture",()=>{e.emit("pip",!1)})}(e):a.webkitSupportsPresentationMode?function(e){let{$video:t}=e.template;t.webkitSetPresentationMode("inline"),(0,i.def)(e,"pip",{get:()=>"picture-in-picture"===t.webkitPresentationMode,set(r){r?(e.state="pip",t.webkitSetPresentationMode("picture-in-picture"),e.emit("pip",!0)):(t.webkitSetPresentationMode("inline"),e.emit("pip",!1))}})}(e):(0,i.def)(e,"pip",{get:()=>!1,set(){r.show=t.get("PIP Not Supported")}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jphfi:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{template:{$video:t},i18n:r,notice:a}=e;(0,i.def)(e,"playbackRate",{get:()=>t.playbackRate,set(o){o?o!==t.playbackRate&&(t.playbackRate=o,a.show=`${r.get("Rate")}: ${1===o?r.get("Normal"):`${o}x`}`):e.playbackRate=1}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],iNpeS:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){(0,i.def)(e,"played",{get:()=>e.currentTime/e.duration})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],aBIWL:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{$video:t}=e.template;(0,i.def)(e,"playing",{get:()=>"boolean"==typeof t.playing?t.playing:!!(t.currentTime>0&&!t.paused&&!t.ended&&t.readyState>2)})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],hRBri:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{i18n:t,notice:r,option:a,constructor:{instances:o},template:{$video:n}}=e;(0,i.def)(e,"play",{async value(){let i=await n.play();if(r.show=t.get("Play"),e.emit("play"),a.mutex)for(let t=0;t<o.length;t++){let r=o[t];r!==e&&r.pause()}return i}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],fgfXC:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{template:{$poster:t}}=e;(0,i.def)(e,"poster",{get:()=>{try{return t.style.backgroundImage.match(/"(.*)"/)[1]}catch{return""}},set(e){(0,i.setStyle)(t,"backgroundImage",`url(${e})`)}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"17rUP":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){(0,i.def)(e,"quality",{set(t){let{controls:r,notice:a,i18n:o}=e,i=t.find(e=>e.default)||t[0];r.update({name:"quality",position:"right",index:10,style:{marginRight:"10px"},html:i?.html||"",selector:t,onSelect:async t=>(await e.switchQuality(t.url),a.show=`${o.get("Switch Video")}: ${t.html}`,t.html)})}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"55qzI":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){(0,i.def)(e,"rect",{get:()=>(0,i.getRect)(e.template.$player)});let t=["bottom","height","left","right","top","width"];for(let r=0;r<t.length;r++){let a=t[r];(0,i.def)(e,a,{get:()=>e.rect[a]})}(0,i.def)(e,"x",{get:()=>e.left+window.pageXOffset}),(0,i.def)(e,"y",{get:()=>e.top+window.pageYOffset})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],bC6TG:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{notice:t,template:{$video:r}}=e,a=(0,i.createElement)("canvas");(0,i.def)(e,"getDataURL",{value:()=>new Promise((e,o)=>{try{a.width=r.videoWidth,a.height=r.videoHeight,a.getContext("2d").drawImage(r,0,0),e(a.toDataURL("image/png"))}catch(e){t.show=e,o(e)}})}),(0,i.def)(e,"getBlobUrl",{value:()=>new Promise((e,o)=>{try{a.width=r.videoWidth,a.height=r.videoHeight,a.getContext("2d").drawImage(r,0,0),a.toBlob(t=>{e(URL.createObjectURL(t))})}catch(e){t.show=e,o(e)}})}),(0,i.def)(e,"screenshot",{value:async t=>{let a=await e.getDataURL(),o=t||`artplayer_${(0,i.secondToTime)(r.currentTime)}`;return(0,i.download)(a,`${o}.png`),e.emit("screenshot",a),a}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],j8GRO:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{notice:t}=e;(0,i.def)(e,"seek",{set(r){e.currentTime=r,e.duration&&(t.show=`${(0,i.secondToTime)(e.currentTime)} / ${(0,i.secondToTime)(e.duration)}`),e.emit("seek",e.currentTime,r)}}),(0,i.def)(e,"forward",{set(t){e.seek=e.currentTime+t}}),(0,i.def)(e,"backward",{set(t){e.seek=e.currentTime-t}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],cn7iR:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let t=["mini","pip","fullscreen","fullscreenWeb"];(0,i.def)(e,"state",{get:()=>t.find(t=>e[t])||"standard",set(r){for(let a=0;a<t.length;a++){let o=t[a];o!==r&&e[o]&&(e[o]=!1)}}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"2k4nP":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{notice:t,i18n:r,template:a}=e;(0,i.def)(e,"subtitleOffset",{get:()=>a.$track?.offset||0,set(o){let{cues:n}=e.subtitle;if(!a.$track||0===n.length)return;let s=(0,i.clamp)(o,-10,10);a.$track.offset=s;for(let t=0;t<n.length;t++){let r=n[t];r.originalStartTime=r.originalStartTime??r.startTime,r.originalEndTime=r.originalEndTime??r.endTime,r.startTime=(0,i.clamp)(r.originalStartTime+s,0,e.duration),r.endTime=(0,i.clamp)(r.originalEndTime+s,0,e.duration)}e.subtitle.update(),t.show=`${r.get("Subtitle Offset")}: ${o}s`,e.emit("subtitleOffset",o)}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"6SU6j":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){function t(t,r){return new Promise((a,o)=>{if(t===e.url)return void a();let{playing:i,aspectRatio:n,playbackRate:s}=e;e.pause(),e.url=t,e.notice.show="";let l={};l.error=t=>{e.off("video:canplay",l.canplay),e.off("video:loadedmetadata",l.metadata),o(t)},l.metadata=()=>{e.currentTime=r},l.canplay=async()=>{e.off("video:error",l.error),e.playbackRate=s,e.aspectRatio=n,i&&await e.play(),e.notice.show="",a()},e.once("video:error",l.error),e.once("video:loadedmetadata",l.metadata),e.once("video:canplay",l.canplay)})}(0,i.def)(e,"switchQuality",{value:r=>t(r,e.currentTime)}),(0,i.def)(e,"switchUrl",{value:e=>t(e,0)}),(0,i.def)(e,"switch",{set:e.switchUrl})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"7iMuh":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){(0,i.def)(e,"theme",{get:()=>e.cssVar("--art-theme"),set(t){e.cssVar("--art-theme",t)}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"6P0RS":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{option:t,template:{$progress:r,$video:a}}=e,o=null,n=!1,s=null;e.on("setBar",async(o,l,c)=>{let p=e.controls?.thumbnails,{url:d,scale:u}=t.thumbnails;if(!p||!d)return;let f="played"===o&&c&&i.isMobile;if("hover"===o||f){if(s||n||(n=!0,s=await (0,i.loadImg)(d,u),n=!1),!s)return;let o=r.clientWidth*l;o>0&&o<r.clientWidth&&function(o){let n=e.controls?.thumbnails;if(!n)return;let{number:l,column:c,width:p,height:d,scale:u}=t.thumbnails,f=p*u||s.naturalWidth/c,h=d*u||f/(a.videoWidth/a.videoHeight),m=Math.floor(o/(r.clientWidth/l)),g=Math.ceil(m/c)-1;(0,i.setStyle)(n,"backgroundImage",`url(${s.src})`),(0,i.setStyle)(n,"height",`${h}px`),(0,i.setStyle)(n,"width",`${f}px`),(0,i.setStyle)(n,"backgroundPosition",`-${(m%c||c-1)*f}px -${g*h}px`),o<=f/2?(0,i.setStyle)(n,"left",0):o>r.clientWidth-f/2?(0,i.setStyle)(n,"left",`${r.clientWidth-f}px`):(0,i.setStyle)(n,"left",`${o-f/2}px`)}(o)}}),(0,i.def)(e,"thumbnails",{get:()=>e.option.thumbnails,set(t){t.url&&!e.option.isLive&&(e.option.thumbnails=t,clearTimeout(o),o=null,n=!1,s=null)}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],eNi78:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){(0,i.def)(e,"toggle",{value:()=>e.playing?e.pause():e.play()})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"7AUBD":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){(0,i.def)(e,"type",{get:()=>e.option.type,set(t){e.option.type=t}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],cnlLL:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{option:t,template:{$video:r}}=e;(0,i.def)(e,"url",{get:()=>r.src,async set(a){if(a){let o=e.url,n=t.type||(0,i.getExt)(a),s=t.customType[n];n&&s?(await (0,i.sleep)(),e.loading.show=!0,s.call(e,r,a,e)):(URL.revokeObjectURL(o),r.src=a),o!==e.url&&(e.option.url=a,e.isReady&&o&&e.once("video:canplay",()=>{e.emit("restart",a)}))}else await (0,i.sleep)(),e.loading.show=!0}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],iX66j:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{template:{$video:t},i18n:r,notice:a,storage:o}=e;(0,i.def)(e,"volume",{get:()=>t.volume||0,set:e=>{t.volume=(0,i.clamp)(e,0,1),a.show=`${r.get("Volume")}: ${Number.parseInt(100*t.volume,10)}`,0!==t.volume&&o.set("volume",t.volume)}}),(0,i.def)(e,"muted",{get:()=>t.muted,set:r=>{t.muted=r,e.emit("muted",r)}})}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],cjxJL:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("../utils"),n=e("./autoOrientation"),s=o.interopDefault(n),l=e("./autoPlayback"),c=o.interopDefault(l),p=e("./fastForward"),d=o.interopDefault(p),u=e("./lock"),f=o.interopDefault(u),h=e("./miniProgressBar"),m=o.interopDefault(h);r.default=class{constructor(e){this.art=e,this.id=0;let{option:t}=e;t.miniProgressBar&&!t.isLive&&this.add(m.default),t.lock&&i.isMobile&&this.add(f.default),t.autoPlayback&&!t.isLive&&this.add(c.default),t.autoOrientation&&i.isMobile&&this.add(s.default),t.fastForward&&i.isMobile&&!t.isLive&&this.add(d.default);for(let e=0;e<t.plugins.length;e++)this.add(t.plugins[e])}add(e){this.id+=1;let t=e.call(this.art,this.art);return t instanceof Promise?t.then(t=>this.next(e,t)):this.next(e,t)}next(e,t){let r=t&&t.name||e.name||`plugin${this.id}`;return(0,i.errorHandle)(!(0,i.has)(this,r),`Cannot add a plugin that already has the same name: ${r}`),(0,i.def)(this,r,{value:t}),this}}},{"../utils":"aBlEo","./autoOrientation":"jb9jb","./autoPlayback":"21HWM","./fastForward":"4sxBO","./lock":"fjy9V","./miniProgressBar":"d0xRp","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jb9jb:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{notice:t,constructor:r,template:{$player:a,$video:o}}=e,n="art-auto-orientation",s="art-auto-orientation-fullscreen",l=!1;function c(){let{videoWidth:e,videoHeight:t}=o,r=document.documentElement.clientWidth,a=document.documentElement.clientHeight;return e>t&&r<a||e<t&&r>a}return e.on("fullscreenWeb",t=>{t?c()&&setTimeout(()=>{let t,r;e.fullscreenWeb&&!(0,i.hasClass)(a,n)&&(t=document.documentElement.clientWidth,r=document.documentElement.clientHeight,(0,i.setStyle)(a,"width",`${r}px`),(0,i.setStyle)(a,"height",`${t}px`),(0,i.setStyle)(a,"transform-origin","0 0"),(0,i.setStyle)(a,"transform",`rotate(90deg) translate(0, -${t}px)`),(0,i.addClass)(a,n),e.isRotate=!0,e.emit("resize"))},Number(r.AUTO_ORIENTATION_TIME??0)):(0,i.hasClass)(a,n)&&((0,i.setStyle)(a,"width",""),(0,i.setStyle)(a,"height",""),(0,i.setStyle)(a,"transform-origin",""),(0,i.setStyle)(a,"transform",""),(0,i.removeClass)(a,n),e.isRotate=!1,e.emit("resize"))}),e.on("fullscreen",async e=>{let r=!!screen?.orientation?.lock;if(e){if(r&&c())try{let e=screen.orientation.type.startsWith("portrait")?"landscape":"portrait";await screen.orientation.lock(e),l=!0,(0,i.addClass)(a,s)}catch(e){l=!1,t.show=e}}else if((0,i.hasClass)(a,s)&&(0,i.removeClass)(a,s),r&&l){try{screen.orientation.unlock()}catch{}l=!1}}),{name:"autoOrientation",get state(){return(0,i.hasClass)(a,n)}}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"21HWM":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{i18n:t,icons:r,storage:a,constructor:o,proxy:n,template:{$poster:s}}=e,l=e.layers.add({name:"auto-playback",html:`<div class="art-auto-playback-close"></div><div class="art-auto-playback-last"></div><div class="art-auto-playback-jump"></div>`}),c=(0,i.query)(".art-auto-playback-last",l),p=(0,i.query)(".art-auto-playback-jump",l),d=(0,i.query)(".art-auto-playback-close",l);(0,i.append)(d,r.close);let u=null;function f(){let r=(a.get("times")||{})[e.option.id||e.option.url];clearTimeout(u),(0,i.setStyle)(l,"display","none"),r&&r>=o.AUTO_PLAYBACK_MIN&&((0,i.setStyle)(l,"display","flex"),c.textContent=`${t.get("Last Seen")} ${(0,i.secondToTime)(r)}`,p.textContent=t.get("Jump Play"),n(d,"click",()=>{(0,i.setStyle)(l,"display","none")}),n(p,"click",()=>{e.seek=r,e.play(),(0,i.setStyle)(s,"display","none"),(0,i.setStyle)(l,"display","none")}),e.once("video:timeupdate",()=>{u=setTimeout(()=>{(0,i.setStyle)(l,"display","none")},o.AUTO_PLAYBACK_TIMEOUT)}))}return e.on("video:timeupdate",()=>{if(e.playing){let t=a.get("times")||{},r=Object.keys(t);r.length>o.AUTO_PLAYBACK_MAX&&delete t[r[0]],t[e.option.id||e.option.url]=e.currentTime,a.set("times",t)}}),e.on("ready",f),e.on("restart",f),{name:"auto-playback",get times(){return a.get("times")||{}},clear:()=>a.del("times"),delete(e){let t=a.get("times")||{};return delete t[e],a.set("times",t),t}}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"4sxBO":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{constructor:t,proxy:r,template:{$player:a,$video:o}}=e,n=null,s=!1,l=1,c=()=>{clearTimeout(n),s&&(s=!1,e.playbackRate=l,(0,i.removeClass)(a,"art-fast-forward"))};return r(o,"touchstart",r=>{1===r.touches.length&&e.playing&&!e.isLock&&(n=setTimeout(()=>{s=!0,l=e.playbackRate,e.playbackRate=t.FAST_FORWARD_VALUE,(0,i.addClass)(a,"art-fast-forward")},t.FAST_FORWARD_TIME))}),e.on("document:touchmove",c),e.on("document:touchend",c),{name:"fastForward",get state(){return(0,i.hasClass)(a,"art-fast-forward")}}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],fjy9V:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{layers:t,icons:r,template:{$player:a}}=e;function o(){return(0,i.hasClass)(a,"art-lock")}function n(){(0,i.addClass)(a,"art-lock"),e.isLock=!0,e.emit("lock",!0)}function s(){(0,i.removeClass)(a,"art-lock"),e.isLock=!1,e.emit("lock",!1)}return t.add({name:"lock",mounted(t){let a=(0,i.append)(t,r.lock),o=(0,i.append)(t,r.unlock);(0,i.setStyle)(a,"display","none"),e.on("lock",e=>{e?((0,i.setStyle)(a,"display","inline-flex"),(0,i.setStyle)(o,"display","none")):((0,i.setStyle)(a,"display","none"),(0,i.setStyle)(o,"display","inline-flex"))})},click(){o()?s():n()}}),{name:"lock",get state(){return o()},set state(value){value?n():s()}}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],d0xRp:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){return e.on("control",t=>{t?(0,i.removeClass)(e.template.$player,"art-mini-progress-bar"):(0,i.addClass)(e.template.$player,"art-mini-progress-bar")}),{name:"mini-progress-bar"}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],bwLGT:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("../utils"),n=e("../utils/component"),s=o.interopDefault(n),l=e("./aspectRatio"),c=o.interopDefault(l),p=e("./flip"),d=o.interopDefault(p),u=e("./playbackRate"),f=o.interopDefault(u),h=e("./subtitleOffset"),m=o.interopDefault(h);class g extends s.default{constructor(e){super(e);let{option:t,controls:r,template:{$setting:a}}=e;this.name="setting",this.$parent=a,this.id=0,this.active=null,this.cache=new Map,this.option=[...this.builtin,...t.settings],t.setting&&(this.format(),this.render(),e.on("blur",()=>{this.show&&(this.show=!1,this.render())}),e.on("focus",e=>{let t=(0,i.includeFromEvent)(e,r.setting),a=(0,i.includeFromEvent)(e,this.$parent);!this.show||t||a||(this.show=!1,this.render())}),e.on("resize",()=>this.resize()))}get builtin(){let e=[],{option:t}=this.art;return t.playbackRate&&e.push((0,f.default)(this.art)),t.aspectRatio&&e.push((0,c.default)(this.art)),t.flip&&e.push((0,d.default)(this.art)),t.subtitleOffset&&e.push((0,m.default)(this.art)),e}traverse(e,t=this.option){for(let r=0;r<t.length;r++){let a=t[r];e(a),a.selector?.length&&this.traverse(e,a.selector)}}check(e){e&&(e.$parent.tooltip=e.html,this.traverse(t=>{t.default=t===e,t.default&&t.$item&&(0,i.inverseClass)(t.$item,"art-current")},e.$option),this.render(e.$parents))}format(e=this.option,t,r,a=[]){for(let o=0;o<e.length;o++){let n=e[o];if(n?.name?((0,i.errorHandle)(!a.includes(n.name),`The [${n.name}] already exists in [setting]`),a.push(n.name)):n.name=`setting-${this.id++}`,!n.$formatted){(0,i.def)(n,"$parent",{get:()=>t}),(0,i.def)(n,"$parents",{get:()=>r}),(0,i.def)(n,"$option",{get:()=>e});let a=[];(0,i.def)(n,"$events",{get:()=>a}),(0,i.def)(n,"$formatted",{get:()=>!0})}this.format(n.selector||[],n,e,a)}this.option=e}find(e=""){let t=null;return this.traverse(r=>{r.name===e&&(t=r)}),t}resize(){let{controls:e,constructor:{SETTING_WIDTH:t,SETTING_ITEM_HEIGHT:r},template:{$player:a,$setting:o}}=this.art;if(e.setting&&this.show){let n=this.active[0]?.$parent?.width||t,{left:s,width:l}=(0,i.getRect)(e.setting),{left:c,width:p}=(0,i.getRect)(a),d=s-c+l/2-n/2,u=this.active===this.option?this.active.length*r:(this.active.length+1)*r;if((0,i.setStyle)(o,"height",`${u}px`),(0,i.setStyle)(o,"width",`${n}px`),this.art.isRotate||i.isMobile)return;d+n>p?((0,i.setStyle)(o,"left",null),(0,i.setStyle)(o,"right",null)):((0,i.setStyle)(o,"left",`${d}px`),(0,i.setStyle)(o,"right","auto"))}}inactivate(e){for(let t=0;t<e.$events.length;t++)this.art.events.remove(e.$events[t]);e.$events.length=0}remove(e){let t=this.find(e);(0,i.errorHandle)(t,`Can't find [${e}] in the [setting]`);let r=t.$option.indexOf(t);t.$option.splice(r,1),this.inactivate(t),t.$item&&(0,i.remove)(t.$item),this.render()}update(e){let t=this.find(e.name);return t?(this.inactivate(t),Object.assign(t,e),this.format(),this.createItem(t,!0),this.render(),t):this.add(e)}add(e,t=this.option){return t.push(e),this.format(),this.createItem(e),this.render(),e}createHeader(e){if(!this.cache.has(e.$option))return;let t=this.cache.get(e.$option),{proxy:r,icons:{arrowLeft:a},constructor:{SETTING_ITEM_HEIGHT:o}}=this.art,n=(0,i.createElement)("div");(0,i.setStyle)(n,"height",`${o}px`),(0,i.addClass)(n,"art-setting-item"),(0,i.addClass)(n,"art-setting-item-back");let s=(0,i.append)(n,'<div class="art-setting-item-left"></div>'),l=(0,i.createElement)("div");(0,i.addClass)(l,"art-setting-item-left-icon"),(0,i.append)(l,a),(0,i.append)(s,l),(0,i.append)(s,e.$parent.html);let c=r(n,"click",()=>this.render(e.$parents));e.$parent.$events.push(c),(0,i.append)(t,n)}createItem(e,t=!1){if(!this.cache.has(e.$option))return;let r=this.cache.get(e.$option),a=e.$item,o="selector";(0,i.has)(e,"switch")&&(o="switch"),(0,i.has)(e,"range")&&(o="range"),(0,i.has)(e,"onClick")&&(o="button");let{icons:n,proxy:s,constructor:l}=this.art,c=(0,i.createElement)("div");(0,i.addClass)(c,"art-setting-item"),(0,i.setStyle)(c,"height",`${l.SETTING_ITEM_HEIGHT}px`),c.dataset.name=e.name||"",c.dataset.value=e.value||"";let p=(0,i.append)(c,'<div class="art-setting-item-left"></div>'),d=(0,i.append)(c,'<div class="art-setting-item-right"></div>'),u=(0,i.createElement)("div");switch((0,i.addClass)(u,"art-setting-item-left-icon"),o){case"button":case"switch":case"range":(0,i.append)(u,e.icon||n.config);break;case"selector":e.selector?.length?(0,i.append)(u,e.icon||n.config):(0,i.append)(u,n.check)}(0,i.append)(p,u),(0,i.def)(e,"$icon",{configurable:!0,get:()=>u}),(0,i.def)(e,"icon",{configurable:!0,get:()=>u.innerHTML,set(e){u.innerHTML="",(0,i.append)(u,e)}});let f=(0,i.createElement)("div");(0,i.addClass)(f,"art-setting-item-left-text"),(0,i.append)(f,e.html||""),(0,i.append)(p,f),(0,i.def)(e,"$html",{configurable:!0,get:()=>f}),(0,i.def)(e,"html",{configurable:!0,get:()=>f.innerHTML,set(e){f.innerHTML="",(0,i.append)(f,e)}});let h=(0,i.createElement)("div");switch((0,i.addClass)(h,"art-setting-item-right-tooltip"),(0,i.append)(h,e.tooltip||""),(0,i.append)(d,h),(0,i.def)(e,"$tooltip",{configurable:!0,get:()=>h}),(0,i.def)(e,"tooltip",{configurable:!0,get:()=>h.innerHTML,set(e){h.innerHTML="",(0,i.append)(h,e)}}),o){case"switch":{let t=(0,i.createElement)("div");(0,i.addClass)(t,"art-setting-item-right-icon");let r=(0,i.append)(t,n.switchOn),a=(0,i.append)(t,n.switchOff);(0,i.setStyle)(e.switch?a:r,"display","none"),(0,i.append)(d,t),(0,i.def)(e,"$switch",{configurable:!0,get:()=>t});let o=e.switch;(0,i.def)(e,"switch",{configurable:!0,get:()=>o,set(e){o=e,e?((0,i.setStyle)(a,"display","none"),(0,i.setStyle)(r,"display",null)):((0,i.setStyle)(a,"display",null),(0,i.setStyle)(r,"display","none"))}});break}case"range":{let t=(0,i.createElement)("div");(0,i.addClass)(t,"art-setting-item-right-icon");let r=(0,i.append)(t,'<input type="range">');r.value=e.range[0],r.min=e.range[1],r.max=e.range[2],r.step=e.range[3],(0,i.addClass)(r,"art-setting-range"),(0,i.append)(d,t),(0,i.def)(e,"$range",{configurable:!0,get:()=>r});let a=[...e.range];(0,i.def)(e,"range",{configurable:!0,get:()=>a,set(e){a=[...e],r.value=e[0],r.min=e[1],r.max=e[2],r.step=e[3]}})}break;case"selector":if(e.selector?.length){let e=(0,i.createElement)("div");(0,i.addClass)(e,"art-setting-item-right-icon"),(0,i.append)(e,n.arrowRight),(0,i.append)(d,e)}}switch(o){case"switch":if(e.onSwitch){let t=s(c,"click",async t=>{e.switch=await e.onSwitch.call(this.art,e,c,t)});e.$events.push(t)}break;case"range":if(e.$range){if(e.onRange){let t=s(e.$range,"change",async t=>{e.range[0]=e.$range.valueAsNumber,e.tooltip=await e.onRange.call(this.art,e,c,t)});e.$events.push(t)}if(e.onChange){let t=s(e.$range,"input",async t=>{e.range[0]=e.$range.valueAsNumber,e.tooltip=await e.onChange.call(this.art,e,c,t)});e.$events.push(t)}}break;case"selector":{let t=s(c,"click",async t=>{e.selector?.length?this.render(e.selector):(this.check(e),e.$parent.onSelect&&(e.$parent.tooltip=await e.$parent.onSelect.call(this.art,e,c,t)))});e.$events.push(t),e.default&&(0,i.addClass)(c,"art-current")}break;case"button":if(e.onClick){let t=s(c,"click",async t=>{e.tooltip=await e.onClick.call(this.art,e,c,t)});e.$events.push(t)}}(0,i.def)(e,"$item",{configurable:!0,get:()=>c}),t?(0,i.replaceElement)(c,a):(0,i.append)(r,c),e.mounted&&setTimeout(()=>e.mounted.call(this.art,e.$item,e),0)}render(e=this.option){if(this.active=e,this.cache.has(e)){let t=this.cache.get(e);(0,i.inverseClass)(t,"art-current")}else{let t=(0,i.createElement)("div");this.cache.set(e,t),(0,i.addClass)(t,"art-setting-panel"),(0,i.append)(this.$parent,t),(0,i.inverseClass)(t,"art-current"),e[0]?.$parent&&this.createHeader(e[0]);for(let t=0;t<e.length;t++)this.createItem(e[t])}this.resize()}}r.default=g},{"../utils":"aBlEo","../utils/component":"idCEj","./aspectRatio":"cb8VK","./flip":"ljJTO","./playbackRate":"3QcSQ","./subtitleOffset":"eB5hg","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],cb8VK:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e){let{i18n:t,icons:r,constructor:{SETTING_ITEM_WIDTH:a,ASPECT_RATIO:o}}=e;function i(e){return"default"===e?t.get("Default"):e}function n(){let t=e.setting.find(`aspect-ratio-${e.aspectRatio}`);e.setting.check(t)}return{width:a,name:"aspect-ratio",html:t.get("Aspect Ratio"),icon:r.aspectRatio,tooltip:i(e.aspectRatio),selector:o.map(t=>({value:t,name:`aspect-ratio-${t}`,default:t===e.aspectRatio,html:i(t)})),onSelect:t=>(e.aspectRatio=t.value,t.html),mounted:()=>{n(),e.on("aspectRatio",()=>n())}}}o.defineInteropFlag(r),o.export(r,"default",()=>i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],ljJTO:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>n);var i=e("../utils");function n(e){let{i18n:t,icons:r,constructor:{SETTING_ITEM_WIDTH:a,FLIP:o}}=e;function n(e){return t.get((0,i.capitalize)(e))}function s(){let t=e.setting.find(`flip-${e.flip}`);e.setting.check(t)}return{width:a,name:"flip",html:t.get("Video Flip"),tooltip:n(e.flip),icon:r.flip,selector:o.map(t=>({value:t,name:`flip-${t}`,default:t===e.flip,html:n(t)})),onSelect:t=>(e.flip=t.value,t.html),mounted:()=>{s(),e.on("flip",()=>s())}}}},{"../utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"3QcSQ":[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e){let{i18n:t,icons:r,constructor:{SETTING_ITEM_WIDTH:a,PLAYBACK_RATE:o}}=e;function i(e){return 1===e?t.get("Normal"):e.toFixed(1)}function n(){let t=e.setting.find(`playback-rate-${e.playbackRate}`);e.setting.check(t)}return{width:a,name:"playback-rate",html:t.get("Play Speed"),tooltip:i(e.playbackRate),icon:r.playbackRate,selector:o.map(t=>({value:t,name:`playback-rate-${t}`,default:t===e.playbackRate,html:i(t)})),onSelect:t=>(e.playbackRate=t.value,t.html),mounted:()=>{n(),e.on("video:ratechange",()=>n())}}}o.defineInteropFlag(r),o.export(r,"default",()=>i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],eB5hg:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e){let{i18n:t,icons:r,constructor:a}=e;return{width:a.SETTING_ITEM_WIDTH,name:"subtitle-offset",html:t.get("Subtitle Offset"),icon:r.subtitle,tooltip:"0s",range:[0,-10,10,.1],onChange:t=>(e.subtitleOffset=t.range[0],`${t.range[0]}s`),mounted:(t,r)=>{e.on("subtitleOffset",e=>{r.$range.value=e,r.tooltip=`${e}s`})}}}o.defineInteropFlag(r),o.export(r,"default",()=>i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],kwqbK:[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r),r.default=class{constructor(){this.name="artplayer_settings",this.settings={}}get(e){try{let t=JSON.parse(window.localStorage.getItem(this.name))||{};return e?t[e]:t}catch{return e?this.settings[e]:this.settings}}set(e,t){try{let r=Object.assign({},this.get(),{[e]:t});window.localStorage.setItem(this.name,JSON.stringify(r))}catch{this.settings[e]=t}}del(e){try{let t=this.get();delete t[e],window.localStorage.setItem(this.name,JSON.stringify(t))}catch{delete this.settings[e]}}clear(){try{window.localStorage.removeItem(this.name)}catch{this.settings={}}}}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],k5613:[function(e,t,r,a){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r);var i=e("option-validator"),n=o.interopDefault(i),s=e("./scheme"),l=o.interopDefault(s),c=e("./utils"),p=e("./utils/component"),d=o.interopDefault(p);class u extends d.default{constructor(e){super(e),this.name="subtitle",this.option=null,this.destroyEvent=()=>null,this.init(e.option.subtitle);let t=!1;e.on("video:timeupdate",()=>{if(!this.url)return;let e=this.art.template.$video.webkitDisplayingFullscreen;"boolean"==typeof e&&e!==t&&(t=e,this.createTrack(e?"subtitles":"metadata",this.url))})}get url(){return this.art.template.$track.src}set url(e){this.switch(e)}get textTrack(){return this.art.template.$video?.textTracks?.[0]}get activeCues(){return this.textTrack?Array.from(this.textTrack.activeCues):[]}get cues(){return this.textTrack?Array.from(this.textTrack.cues):[]}style(e,t){let{$subtitle:r}=this.art.template;return"object"==typeof e?(0,c.setStyles)(r,e):(0,c.setStyle)(r,e,t)}update(){let{option:{subtitle:e},template:{$subtitle:t}}=this.art;t.innerHTML="",this.activeCues.length&&(this.art.emit("subtitleBeforeUpdate",this.activeCues),t.innerHTML=this.activeCues.map((t,r)=>t.text.split(/\r?\n/).filter(e=>e.trim()).map(t=>`<div class="art-subtitle-line" data-group="${r}">${e.escape?(0,c.escape)(t):t}</div>`).join("")).join(""),this.art.emit("subtitleAfterUpdate",this.activeCues))}async switch(e,t={}){let{i18n:r,notice:a,option:o}=this.art,i={...o.subtitle,...t,url:e},n=await this.init(i);return t.name&&(a.show=`${r.get("Switch Subtitle")}: ${t.name}`),n}createTrack(e,t){let{template:r,proxy:a,option:o}=this.art,{$video:i,$track:n}=r,s=(0,c.createElement)("track");s.default=!0,s.kind=e,s.src=t,s.label=o.subtitle.name||"Artplayer",s.track.mode="hidden",s.onload=()=>{this.art.emit("subtitleLoad",this.cues,this.option)},this.art.events.remove(this.destroyEvent),n.onload=null,(0,c.remove)(n),(0,c.append)(i,s),r.$track=s,this.destroyEvent=a(this.textTrack,"cuechange",()=>this.update())}async init(e){let{notice:t,template:{$subtitle:r}}=this.art;return this.textTrack?((0,n.default)(e,l.default.subtitle),e.url)?(this.option=e,this.style(e.style),fetch(e.url).then(e=>e.arrayBuffer()).then(t=>{let r=new TextDecoder(e.encoding).decode(t);switch(e.type||(0,c.getExt)(e.url)){case"srt":{let t=(0,c.srtToVtt)(r),a=e.onVttLoad(t);return(0,c.vttToBlob)(a)}case"ass":{let t=(0,c.assToVtt)(r),a=e.onVttLoad(t);return(0,c.vttToBlob)(a)}case"vtt":{let t=e.onVttLoad(r);return(0,c.vttToBlob)(t)}default:return e.url}}).then(e=>(r.innerHTML="",this.url===e||(URL.revokeObjectURL(this.url),this.createTrack("metadata",e)),e)).catch(e=>{throw r.innerHTML="",t.show=e,e})):void 0:null}}r.default=u},{"option-validator":"g7VGh","./scheme":"biLjm","./utils":"aBlEo","./utils/component":"idCEj","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],fwOA1:[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r);var o=e("../package.json"),i=e("./utils");class n{constructor(e){this.art=e;let{option:t,constructor:r}=e;t.container instanceof Element?this.$container=t.container:(this.$container=(0,i.query)(t.container),(0,i.errorHandle)(this.$container,`No container element found by ${t.container}`)),(0,i.errorHandle)((0,i.supportsFlex)(),"The current browser does not support flex layout");let a=this.$container.tagName.toLowerCase();(0,i.errorHandle)("div"===a,`Unsupported container element type, only support 'div' but got '${a}'`),(0,i.errorHandle)(r.instances.every(e=>e.template.$container!==this.$container),"Cannot mount multiple instances on the same dom element"),this.query=this.query.bind(this),this.$container.dataset.artId=e.id,this.init()}static get html(){return`<div class="art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show"><video class="art-video"><track default kind="metadata" src=""></track></video><div class="art-poster"></div><div class="art-subtitle"></div><div class="art-danmuku"></div><div class="art-layers"></div><div class="art-mask"><div class="art-state"></div></div><div class="art-bottom"><div class="art-progress"></div><div class="art-controls"><div class="art-controls-left"></div><div class="art-controls-center"></div><div class="art-controls-right"></div></div></div><div class="art-loading"></div><div class="art-notice"><div class="art-notice-inner"></div></div><div class="art-settings"></div><div class="art-info"><div class="art-info-panel"><div class="art-info-item"><div class="art-info-title">Player version:</div><div class="art-info-content">${o.version}</div></div><div class="art-info-item"><div class="art-info-title">Video url:</div><div class="art-info-content" data-video="currentSrc"></div></div><div class="art-info-item"><div class="art-info-title">Video volume:</div><div class="art-info-content" data-video="volume"></div></div><div class="art-info-item"><div class="art-info-title">Video time:</div><div class="art-info-content" data-video="currentTime"></div></div><div class="art-info-item"><div class="art-info-title">Video duration:</div><div class="art-info-content" data-video="duration"></div></div><div class="art-info-item"><div class="art-info-title">Video resolution:</div><div class="art-info-content"><span data-video="videoWidth"></span>x<span data-video="videoHeight"></span></div></div></div><div class="art-info-close">[x]</div></div><div class="art-contextmenus"></div></div>`}query(e){return(0,i.query)(e,this.$container)}init(){let{option:e}=this.art;if(e.useSSR||(this.$container.innerHTML=n.html),this.$player=this.query(".art-video-player"),this.$video=this.query(".art-video"),this.$track=this.query("track"),this.$poster=this.query(".art-poster"),this.$subtitle=this.query(".art-subtitle"),this.$danmuku=this.query(".art-danmuku"),this.$bottom=this.query(".art-bottom"),this.$progress=this.query(".art-progress"),this.$controls=this.query(".art-controls"),this.$controlsLeft=this.query(".art-controls-left"),this.$controlsCenter=this.query(".art-controls-center"),this.$controlsRight=this.query(".art-controls-right"),this.$layer=this.query(".art-layers"),this.$loading=this.query(".art-loading"),this.$notice=this.query(".art-notice"),this.$noticeInner=this.query(".art-notice-inner"),this.$mask=this.query(".art-mask"),this.$state=this.query(".art-state"),this.$setting=this.query(".art-settings"),this.$info=this.query(".art-info"),this.$infoPanel=this.query(".art-info-panel"),this.$infoClose=this.query(".art-info-close"),this.$contextmenu=this.query(".art-contextmenus"),e.proxy){let t=e.proxy.call(this.art,this.art);(0,i.errorHandle)(t instanceof HTMLVideoElement||t instanceof HTMLCanvasElement,"Function 'option.proxy' needs to return 'HTMLVideoElement' or 'HTMLCanvasElement'"),(0,i.replaceElement)(t,this.$video),t.className="art-video",this.$video=t}e.backdrop&&(0,i.addClass)(this.$player,"art-backdrop"),i.isMobile&&(0,i.addClass)(this.$player,"art-mobile")}destroy(e){e?this.$container.innerHTML="":(0,i.addClass)(this.$player,"art-destroy")}}r.default=n},{"../package.json":"lh3R5","./utils":"aBlEo","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"4NM7P":[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r),r.default=class{on(e,t,r){let a=this.e||(this.e={});return(a[e]||(a[e]=[])).push({fn:t,ctx:r}),this}once(e,t,r){let a=this;function o(...i){a.off(e,o),t.apply(r,i)}return o._=t,this.on(e,o,r)}emit(e,...t){let r=((this.e||(this.e={}))[e]||[]).slice();for(let e=0;e<r.length;e+=1)r[e].fn.apply(r[e].ctx,t);return this}off(e,t){let r=this.e||(this.e={}),a=r[e],o=[];if(a&&t)for(let e=0,r=a.length;e<r;e+=1)a[e].fn!==t&&a[e].fn._!==t&&o.push(a[e]);return o.length?r[e]=o:delete r[e],this}}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}]},["esqvp"],"esqvp","parcelRequire4dc0",{});let{default:e}=parcelRequire4dc0("esqvp");export{e as default};
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+}
+var optionValidator$1 = { exports: {} };
+var optionValidator = optionValidator$1.exports;
+var hasRequiredOptionValidator;
+function requireOptionValidator() {
+  if (hasRequiredOptionValidator) return optionValidator$1.exports;
+  hasRequiredOptionValidator = 1;
+  (function(module, exports$1) {
+    !(function(r, t) {
+      module.exports = t();
+    })(optionValidator, function() {
+      function e(r) {
+        return (e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(r2) {
+          return typeof r2;
+        } : function(r2) {
+          return r2 && "function" == typeof Symbol && r2.constructor === Symbol && r2 !== Symbol.prototype ? "symbol" : typeof r2;
+        })(r);
+      }
+      var n2 = Object.prototype.toString, c = function(r) {
+        if (void 0 === r) return "undefined";
+        if (null === r) return "null";
+        var t = e(r);
+        if ("boolean" === t) return "boolean";
+        if ("string" === t) return "string";
+        if ("number" === t) return "number";
+        if ("symbol" === t) return "symbol";
+        if ("function" === t) return (function(r2) {
+          return "GeneratorFunction" === o2(r2);
+        })(r) ? "generatorfunction" : "function";
+        if ((function(r2) {
+          return Array.isArray ? Array.isArray(r2) : r2 instanceof Array;
+        })(r)) return "array";
+        if ((function(r2) {
+          if (r2.constructor && "function" == typeof r2.constructor.isBuffer) return r2.constructor.isBuffer(r2);
+          return false;
+        })(r)) return "buffer";
+        if ((function(r2) {
+          try {
+            if ("number" == typeof r2.length && "function" == typeof r2.callee) return true;
+          } catch (r3) {
+            if (-1 !== r3.message.indexOf("callee")) return true;
+          }
+          return false;
+        })(r)) return "arguments";
+        if ((function(r2) {
+          return r2 instanceof Date || "function" == typeof r2.toDateString && "function" == typeof r2.getDate && "function" == typeof r2.setDate;
+        })(r)) return "date";
+        if ((function(r2) {
+          return r2 instanceof Error || "string" == typeof r2.message && r2.constructor && "number" == typeof r2.constructor.stackTraceLimit;
+        })(r)) return "error";
+        if ((function(r2) {
+          return r2 instanceof RegExp || "string" == typeof r2.flags && "boolean" == typeof r2.ignoreCase && "boolean" == typeof r2.multiline && "boolean" == typeof r2.global;
+        })(r)) return "regexp";
+        switch (o2(r)) {
+          case "Symbol":
+            return "symbol";
+          case "Promise":
+            return "promise";
+          case "WeakMap":
+            return "weakmap";
+          case "WeakSet":
+            return "weakset";
+          case "Map":
+            return "map";
+          case "Set":
+            return "set";
+          case "Int8Array":
+            return "int8array";
+          case "Uint8Array":
+            return "uint8array";
+          case "Uint8ClampedArray":
+            return "uint8clampedarray";
+          case "Int16Array":
+            return "int16array";
+          case "Uint16Array":
+            return "uint16array";
+          case "Int32Array":
+            return "int32array";
+          case "Uint32Array":
+            return "uint32array";
+          case "Float32Array":
+            return "float32array";
+          case "Float64Array":
+            return "float64array";
+        }
+        if ((function(r2) {
+          return "function" == typeof r2.throw && "function" == typeof r2.return && "function" == typeof r2.next;
+        })(r)) return "generator";
+        switch (t = n2.call(r)) {
+          case "[object Object]":
+            return "object";
+          case "[object Map Iterator]":
+            return "mapiterator";
+          case "[object Set Iterator]":
+            return "setiterator";
+          case "[object String Iterator]":
+            return "stringiterator";
+          case "[object Array Iterator]":
+            return "arrayiterator";
+        }
+        return t.slice(8, -1).toLowerCase().replace(/\s/g, "");
+      };
+      function o2(r) {
+        return r.constructor ? r.constructor.name : null;
+      }
+      function f2(r, t) {
+        var e2 = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : ["option"];
+        return s2(r, t, e2), y(r, t, e2), (function(a2, i, u) {
+          var r2 = c(i), t2 = c(a2);
+          if ("object" === r2) {
+            if ("object" !== t2) throw new Error("[Type Error]: '".concat(u.join("."), "' require 'object' type, but got '").concat(t2, "'"));
+            Object.keys(i).forEach(function(r3) {
+              var t3 = a2[r3], e3 = i[r3], n3 = u.slice();
+              n3.push(r3), s2(t3, e3, n3), y(t3, e3, n3), f2(t3, e3, n3);
+            });
+          }
+          if ("array" === r2) {
+            if ("array" !== t2) throw new Error("[Type Error]: '".concat(u.join("."), "' require 'array' type, but got '").concat(t2, "'"));
+            a2.forEach(function(r3, t3) {
+              var e3 = a2[t3], n3 = i[t3] || i[0], o3 = u.slice();
+              o3.push(t3), s2(e3, n3, o3), y(e3, n3, o3), f2(e3, n3, o3);
+            });
+          }
+        })(r, t, e2), r;
+      }
+      function s2(r, t, e2) {
+        if ("string" === c(t)) {
+          var n3 = c(r);
+          if ("?" === t[0] && (t = t.slice(1) + "|undefined"), !(-1 < t.indexOf("|") ? t.split("|").map(function(r2) {
+            return r2.toLowerCase().trim();
+          }).filter(Boolean).some(function(r2) {
+            return n3 === r2;
+          }) : t.toLowerCase().trim() === n3)) throw new Error("[Type Error]: '".concat(e2.join("."), "' require '").concat(t, "' type, but got '").concat(n3, "'"));
+        }
+      }
+      function y(r, t, e2) {
+        if ("function" === c(t)) {
+          var n3 = t(r, c(r), e2);
+          if (true !== n3) {
+            var o3 = c(n3);
+            throw "string" === o3 ? new Error(n3) : "error" === o3 ? n3 : new Error("[Validator Error]: The scheme for '".concat(e2.join("."), "' validator require return true, but got '").concat(n3, "'"));
+          }
+        }
+      }
+      return f2.kindOf = c, f2;
+    });
+  })(optionValidator$1);
+  return optionValidator$1.exports;
+}
+var optionValidatorExports = requireOptionValidator();
+const validator = /* @__PURE__ */ getDefaultExportFromCjs(optionValidatorExports);
+const version$1 = "5.3.1";
+const config$1 = {
+  properties: [
+    "audioTracks",
+    "autoplay",
+    "buffered",
+    "controller",
+    "controls",
+    "crossOrigin",
+    "currentSrc",
+    "currentTime",
+    "defaultMuted",
+    "defaultPlaybackRate",
+    "duration",
+    "ended",
+    "error",
+    "loop",
+    "mediaGroup",
+    "muted",
+    "networkState",
+    "paused",
+    "playbackRate",
+    "played",
+    "preload",
+    "readyState",
+    "seekable",
+    "seeking",
+    "src",
+    "startDate",
+    "textTracks",
+    "videoTracks",
+    "volume"
+  ],
+  methods: ["addTextTrack", "canPlayType", "load", "play", "pause"],
+  events: [
+    "abort",
+    "canplay",
+    "canplaythrough",
+    "durationchange",
+    "emptied",
+    "ended",
+    "error",
+    "loadeddata",
+    "loadedmetadata",
+    "loadstart",
+    "pause",
+    "play",
+    "playing",
+    "progress",
+    "ratechange",
+    "seeked",
+    "seeking",
+    "stalled",
+    "suspend",
+    "timeupdate",
+    "volumechange",
+    "waiting"
+  ],
+  prototypes: [
+    "width",
+    "height",
+    "videoWidth",
+    "videoHeight",
+    "poster",
+    "webkitDecodedFrameCount",
+    "webkitDroppedFrameCount",
+    "playsInline",
+    "webkitSupportsFullscreen",
+    "webkitDisplayingFullscreen",
+    "onenterpictureinpicture",
+    "onleavepictureinpicture",
+    "disablePictureInPicture",
+    "cancelVideoFrameCallback",
+    "requestVideoFrameCallback",
+    "getVideoPlaybackQuality",
+    "requestPictureInPicture",
+    "webkitEnterFullScreen",
+    "webkitEnterFullscreen",
+    "webkitExitFullScreen",
+    "webkitExitFullscreen"
+  ]
+};
+const userAgent = globalThis?.CUSTOM_USER_AGENT ?? (typeof navigator !== "undefined" ? navigator.userAgent : "");
+const isSafari = /^(?:(?!chrome|android).)*safari/i.test(userAgent);
+const isIOS = /iPad|iPhone|iPod/i.test(userAgent) && !window.MSStream;
+const isIOS13 = isIOS || userAgent.includes("Macintosh") && navigator.maxTouchPoints >= 1;
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || isIOS13;
+const isBrowser = typeof window !== "undefined" && typeof document !== "undefined";
+function query(selector, parent = document) {
+  return parent.querySelector(selector);
+}
+function queryAll(selector, parent = document) {
+  return Array.from(parent.querySelectorAll(selector));
+}
+function addClass(target, className) {
+  return target.classList.add(className);
+}
+function removeClass(target, className) {
+  return target.classList.remove(className);
+}
+function hasClass(target, className) {
+  return target.classList.contains(className);
+}
+function append(parent, child) {
+  if (child instanceof Element) {
+    parent.appendChild(child);
+  } else {
+    parent.insertAdjacentHTML("beforeend", String(child));
+  }
+  return parent.lastElementChild || parent.lastChild;
+}
+function remove(child) {
+  return child.parentNode.removeChild(child);
+}
+function setStyle(element, key, value) {
+  element.style[key] = value;
+  return element;
+}
+function setStyles(element, styles) {
+  for (const key in styles) {
+    setStyle(element, key, styles[key]);
+  }
+  return element;
+}
+function getStyle(element, key, numberType = true) {
+  const value = window.getComputedStyle(element, null).getPropertyValue(key);
+  return numberType ? Number.parseFloat(value) : value;
+}
+function siblings(target) {
+  return Array.from(target.parentElement.children).filter((item) => item !== target);
+}
+function inverseClass(target, className) {
+  siblings(target).forEach((item) => removeClass(item, className));
+  addClass(target, className);
+}
+function tooltip(target, msg, pos = "top") {
+  if (isMobile)
+    return;
+  target.setAttribute("aria-label", msg);
+  addClass(target, "hint--rounded");
+  addClass(target, `hint--${pos}`);
+}
+function isInViewport(el, offset = 0) {
+  const rect = el.getBoundingClientRect();
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+  const vertInView = rect.top - offset <= windowHeight && rect.top + rect.height + offset >= 0;
+  const horInView = rect.left - offset <= windowWidth + offset && rect.left + rect.width + offset >= 0;
+  return vertInView && horInView;
+}
+function includeFromEvent(event, target) {
+  return getComposedPath(event).includes(target);
+}
+function replaceElement(newChild, oldChild) {
+  oldChild.parentNode.replaceChild(newChild, oldChild);
+  return newChild;
+}
+function createElement(tag) {
+  return document.createElement(tag);
+}
+function getIcon(key = "", html = "") {
+  const icon = createElement("i");
+  addClass(icon, "art-icon");
+  addClass(icon, `art-icon-${key}`);
+  append(icon, html);
+  return icon;
+}
+function setStyleText(id2, style2) {
+  let $style = document.getElementById(id2);
+  if (!$style) {
+    $style = document.createElement("style");
+    $style.id = id2;
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.head.appendChild($style);
+      });
+    } else {
+      (document.head || document.documentElement).appendChild($style);
+    }
+  }
+  $style.textContent = style2;
+}
+function supportsFlex() {
+  const div = document.createElement("div");
+  div.style.display = "flex";
+  return div.style.display === "flex";
+}
+function getRect(el) {
+  return el.getBoundingClientRect();
+}
+function loadImg(url, scale) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = function() {
+      if (!scale || scale === 1) {
+        resolve(img);
+      } else {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((blob) => {
+          const blobUrl = URL.createObjectURL(blob);
+          const scaledImg = new Image();
+          scaledImg.onload = function() {
+            resolve(scaledImg);
+          };
+          scaledImg.onerror = function() {
+            URL.revokeObjectURL(blobUrl);
+            reject(new Error(`Image load failed: ${url}`));
+          };
+          scaledImg.src = blobUrl;
+        });
+      }
+    };
+    img.onerror = function() {
+      reject(new Error(`Image load failed: ${url}`));
+    };
+    img.src = url;
+  });
+}
+function getComposedPath(event) {
+  if (event.composedPath)
+    return event.composedPath();
+  const path = [];
+  let node = event.target;
+  while (node) {
+    path.push(node);
+    node = node.parentNode;
+  }
+  if (!path.includes(window) && window !== void 0) {
+    path.push(window);
+  }
+  return path;
+}
+class ArtPlayerError extends Error {
+  constructor(message, context) {
+    super(message);
+    if (typeof Error.captureStackTrace === "function") {
+      Error.captureStackTrace(this, context || this.constructor);
+    }
+    this.name = "ArtPlayerError";
+  }
+}
+function errorHandle(condition, msg) {
+  if (!condition) {
+    throw new ArtPlayerError(msg);
+  }
+  return condition;
+}
+function getExt(url) {
+  if (url.includes("?")) {
+    return getExt(url.split("?")[0]);
+  }
+  if (url.includes("#")) {
+    return getExt(url.split("#")[0]);
+  }
+  return url.trim().toLowerCase().split(".").pop();
+}
+function download(url, name) {
+  const elink = document.createElement("a");
+  elink.style.display = "none";
+  elink.href = url;
+  elink.download = name;
+  document.body.appendChild(elink);
+  elink.click();
+  document.body.removeChild(elink);
+}
+function clamp(num, a2, b2) {
+  return Math.max(Math.min(num, Math.max(a2, b2)), Math.min(a2, b2));
+}
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+function secondToTime(second) {
+  if (!second)
+    return "00:00";
+  const add0 = (num) => num < 10 ? `0${num}` : String(num);
+  const hour = Math.floor(second / 3600);
+  const min = Math.floor((second - hour * 3600) / 60);
+  const sec = Math.floor(second - hour * 3600 - min * 60);
+  return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(":");
+}
+function escape(str) {
+  return str.replace(
+    /[&<>'"]/g,
+    (tag) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "'": "&#39;",
+      '"': "&quot;"
+    })[tag] || tag
+  );
+}
+function unescape(str) {
+  const map = {
+    "&amp;": "&",
+    "&lt;": "<",
+    "&gt;": ">",
+    "&#39;": "'",
+    "&quot;": '"'
+  };
+  const reg = new RegExp(`(${Object.keys(map).join("|")})`, "g");
+  return str.replace(reg, (tag) => map[tag] || tag);
+}
+const def = Object.defineProperty;
+const { hasOwnProperty } = Object.prototype;
+function has(obj, name) {
+  return hasOwnProperty.call(obj, name);
+}
+function get(obj, name) {
+  return Object.getOwnPropertyDescriptor(obj, name);
+}
+function mergeDeep(...objects) {
+  const isObject = (item) => item && typeof item === "object" && !Array.isArray(item);
+  return objects.reduce((prev, obj) => {
+    Object.keys(obj).forEach((key) => {
+      const pVal = prev[key];
+      const oVal = obj[key];
+      if (Array.isArray(pVal) && Array.isArray(oVal)) {
+        prev[key] = pVal.concat(...oVal);
+      } else if (isObject(pVal) && isObject(oVal)) {
+        prev[key] = mergeDeep(pVal, oVal);
+      } else {
+        prev[key] = oVal;
+      }
+    });
+    return prev;
+  }, {});
+}
+function fixSrt(srt) {
+  return srt.replace(/(\d\d:\d\d:\d\d)[,.](\d+)/g, (_, $1, $2) => {
+    let ms = $2.slice(0, 3);
+    if ($2.length === 1) {
+      ms = `${$2}00`;
+    }
+    if ($2.length === 2) {
+      ms = `${$2}0`;
+    }
+    return `${$1},${ms}`;
+  });
+}
+function srtToVtt(srtText) {
+  return "WEBVTT \r\n\r\n".concat(
+    fixSrt(srtText).replace(/\{\\([ibu])\}/g, "</$1>").replace(/\{\\([ibu])1\}/g, "<$1>").replace(/\{([ibu])\}/g, "<$1>").replace(/\{\/([ibu])\}/g, "</$1>").replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, "$1.$2").replace(/\{[\s\S]*?\}/g, "").concat("\r\n\r\n")
+  );
+}
+function vttToBlob(vttText) {
+  return URL.createObjectURL(
+    new Blob([vttText], {
+      type: "text/vtt"
+    })
+  );
+}
+function assToVtt(ass) {
+  const reAss = new RegExp(
+    "Dialogue:\\s\\d,(\\d+:\\d\\d:\\d\\d.\\d\\d),(\\d+:\\d\\d:\\d\\d.\\d\\d),([^,]*),([^,]*),(?:[^,]*,){4}([\\s\\S]*)$",
+    "i"
+  );
+  function fixTime(time2 = "") {
+    return time2.split(/[:.]/).map((item, index, arr) => {
+      if (index === arr.length - 1) {
+        if (item.length === 1) {
+          return `.${item}00`;
+        }
+        if (item.length === 2) {
+          return `.${item}0`;
+        }
+      } else if (item.length === 1) {
+        return (index === 0 ? "0" : ":0") + item;
+      }
+      return index === 0 ? item : index === arr.length - 1 ? `.${item}` : `:${item}`;
+    }).join("");
+  }
+  return `WEBVTT
+
+${ass.split(/\r?\n/).map((line) => {
+    const m = line.match(reAss);
+    if (!m)
+      return null;
+    return {
+      start: fixTime(m[1].trim()),
+      end: fixTime(m[2].trim()),
+      text: m[5].replace(/\{[\s\S]*?\}/g, "").replace(/(\\N)/g, "\n").trim().split(/\r?\n/).map((item) => item.trim()).join("\n")
+    };
+  }).filter((line) => line).map((line, index) => {
+    if (line) {
+      return `${index + 1}
+${line.start} --> ${line.end}
+${line.text}`;
+    }
+    return "";
+  }).filter((line) => line.trim()).join("\n\n")}`;
+}
+function sleep(ms = 0) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+function debounce(func, duration) {
+  let timeout;
+  return function(...args) {
+    const effect = () => {
+      timeout = null;
+      return func.apply(this, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(effect, duration);
+  };
+}
+function throttle(func, duration) {
+  let shouldWait = false;
+  return function(...args) {
+    if (!shouldWait) {
+      func.apply(this, args);
+      shouldWait = true;
+      setTimeout(() => {
+        shouldWait = false;
+      }, duration);
+    }
+  };
+}
+const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  ArtPlayerError,
+  addClass,
+  append,
+  assToVtt,
+  capitalize,
+  clamp,
+  createElement,
+  debounce,
+  def,
+  download,
+  errorHandle,
+  escape,
+  get,
+  getComposedPath,
+  getExt,
+  getIcon,
+  getRect,
+  getStyle,
+  has,
+  hasClass,
+  includeFromEvent,
+  inverseClass,
+  isBrowser,
+  isIOS,
+  isIOS13,
+  isInViewport,
+  isMobile,
+  isSafari,
+  loadImg,
+  mergeDeep,
+  query,
+  queryAll,
+  remove,
+  removeClass,
+  replaceElement,
+  secondToTime,
+  setStyle,
+  setStyleText,
+  setStyles,
+  siblings,
+  sleep,
+  srtToVtt,
+  supportsFlex,
+  throttle,
+  tooltip,
+  unescape,
+  userAgent,
+  vttToBlob
+}, Symbol.toStringTag, { value: "Module" }));
+const a = "array";
+const b = "boolean";
+const s = "string";
+const n = "number";
+const o = "object";
+const f = "function";
+function validElement(value, type, paths) {
+  return errorHandle(
+    type === s || type === n || value instanceof Element,
+    `${paths.join(".")} require '${s}' or 'Element' type`
+  );
+}
+const ComponentOption = {
+  html: validElement,
+  disable: `?${b}`,
+  name: `?${s}`,
+  index: `?${n}`,
+  style: `?${o}`,
+  click: `?${f}`,
+  mounted: `?${f}`,
+  tooltip: `?${s}|${n}`,
+  width: `?${n}`,
+  selector: `?${a}`,
+  onSelect: `?${f}`,
+  switch: `?${b}`,
+  onSwitch: `?${f}`,
+  range: `?${a}`,
+  onRange: `?${f}`,
+  onChange: `?${f}`
+};
+const scheme = {
+  id: s,
+  container: validElement,
+  url: s,
+  poster: s,
+  type: s,
+  theme: s,
+  lang: s,
+  volume: n,
+  isLive: b,
+  muted: b,
+  autoplay: b,
+  autoSize: b,
+  autoMini: b,
+  loop: b,
+  flip: b,
+  playbackRate: b,
+  aspectRatio: b,
+  screenshot: b,
+  setting: b,
+  hotkey: b,
+  pip: b,
+  mutex: b,
+  backdrop: b,
+  fullscreen: b,
+  fullscreenWeb: b,
+  subtitleOffset: b,
+  miniProgressBar: b,
+  useSSR: b,
+  playsInline: b,
+  lock: b,
+  gesture: b,
+  fastForward: b,
+  autoPlayback: b,
+  autoOrientation: b,
+  airplay: b,
+  proxy: `?${f}`,
+  plugins: [f],
+  layers: [ComponentOption],
+  contextmenu: [ComponentOption],
+  settings: [ComponentOption],
+  controls: [
+    {
+      ...ComponentOption,
+      position: (value, _, paths) => {
+        const position = ["top", "left", "right"];
+        return errorHandle(
+          position.includes(value),
+          `${paths.join(".")} only accept ${position.toString()} as parameters`
+        );
+      }
+    }
+  ],
+  quality: [
+    {
+      default: `?${b}`,
+      html: s,
+      url: s
+    }
+  ],
+  highlight: [
+    {
+      time: n,
+      text: s
+    }
+  ],
+  thumbnails: {
+    url: s,
+    number: n,
+    column: n,
+    width: n,
+    height: n,
+    scale: n
+  },
+  subtitle: {
+    url: s,
+    name: s,
+    type: s,
+    style: o,
+    escape: b,
+    encoding: s,
+    onVttLoad: f
+  },
+  moreVideoAttr: o,
+  i18n: o,
+  icons: o,
+  cssVar: o,
+  customType: o
+};
+class Component {
+  constructor(art) {
+    this.id = 0;
+    this.art = art;
+    this.cache = /* @__PURE__ */ new Map();
+    this.add = this.add.bind(this);
+    this.remove = this.remove.bind(this);
+    this.update = this.update.bind(this);
+  }
+  get show() {
+    return hasClass(this.art.template.$player, `art-${this.name}-show`);
+  }
+  set show(value) {
+    const { $player } = this.art.template;
+    const className = `art-${this.name}-show`;
+    if (value) {
+      addClass($player, className);
+    } else {
+      removeClass($player, className);
+    }
+    this.art.emit(this.name, value);
+  }
+  toggle() {
+    this.show = !this.show;
+  }
+  add(getOption) {
+    const option = typeof getOption === "function" ? getOption(this.art) : getOption;
+    option.html = option.html || "";
+    validator(option, ComponentOption);
+    if (!this.$parent || !this.name || option.disable)
+      return;
+    const name = option.name || `${this.name}${this.id}`;
+    errorHandle(!this.cache.has(name), `Can't add an existing [${name}] to the [${this.name}]`);
+    this.id += 1;
+    const $ref = createElement("div");
+    addClass($ref, `art-${this.name}`);
+    addClass($ref, `art-${this.name}-${name}`);
+    const childs = Array.from(this.$parent.children);
+    $ref.dataset.index = option.index || this.id;
+    const nextChild = childs.find((item) => Number(item.dataset.index) >= Number($ref.dataset.index));
+    if (nextChild) {
+      nextChild.insertAdjacentElement("beforebegin", $ref);
+    } else {
+      append(this.$parent, $ref);
+    }
+    if (option.html) {
+      append($ref, option.html);
+    }
+    if (option.style) {
+      setStyles($ref, option.style);
+    }
+    if (option.tooltip) {
+      tooltip($ref, option.tooltip);
+    }
+    const events = [];
+    if (option.click) {
+      const destroyEvent = this.art.events.proxy($ref, "click", (event) => {
+        event.preventDefault();
+        option.click.call(this.art, this, event);
+      });
+      events.push(destroyEvent);
+    }
+    if (option.selector && ["left", "right"].includes(option.position)) {
+      this.selector(option, $ref, events);
+    }
+    this[name] = $ref;
+    this.cache.set(name, { $ref, events, option });
+    if (option.mounted) {
+      option.mounted.call(this.art, $ref);
+    }
+    return $ref;
+  }
+  remove(name) {
+    errorHandle(this.cache.has(name), `Can't find [${name}] from the [${this.name}]`);
+    const item = this.cache.get(name);
+    if (item.option.beforeUnmount) {
+      item.option.beforeUnmount.call(this.art, item.$ref);
+    }
+    for (const event of item.events) {
+      this.art.events.remove(event);
+    }
+    this.cache.delete(name);
+    delete this[name];
+    remove(item.$ref);
+  }
+  update(option) {
+    if (this.cache.has(option.name)) {
+      const item = this.cache.get(option.name);
+      option = Object.assign(item.option, option);
+      this.remove(option.name);
+    }
+    return this.add(option);
+  }
+}
+function aspectRatio$2(option) {
+  return (art) => {
+    const {
+      i18n,
+      constructor: { ASPECT_RATIO }
+    } = art;
+    const html = ASPECT_RATIO.map(
+      (item) => `<span data-value="${item}">${item === "default" ? i18n.get("Default") : item}</span>`
+    ).join("");
+    return {
+      ...option,
+      html: `${i18n.get("Aspect Ratio")}: ${html}`,
+      click: (contextmenu, event) => {
+        const { value } = event.target.dataset;
+        if (value) {
+          art.aspectRatio = value;
+          contextmenu.show = false;
+        }
+      },
+      mounted: ($panel) => {
+        const $default = query('[data-value="default"]', $panel);
+        if ($default) {
+          inverseClass($default, "art-current");
+        }
+        art.on("aspectRatio", (value) => {
+          const $current = queryAll("span", $panel).find((item) => item.dataset.value === value);
+          if ($current) {
+            inverseClass($current, "art-current");
+          }
+        });
+      }
+    };
+  };
+}
+function close$1(option) {
+  return (art) => ({
+    ...option,
+    html: art.i18n.get("Close"),
+    click: (contextmenu) => {
+      contextmenu.show = false;
+    }
+  });
+}
+function flip$2(option) {
+  return (art) => {
+    const {
+      i18n,
+      constructor: { FLIP }
+    } = art;
+    const html = FLIP.map((item) => `<span data-value="${item}">${i18n.get(capitalize(item))}</span>`).join("");
+    return {
+      ...option,
+      html: `${i18n.get("Video Flip")}: ${html}`,
+      click: (contextmenu, event) => {
+        const { value } = event.target.dataset;
+        if (value) {
+          art.flip = value.toLowerCase();
+          contextmenu.show = false;
+        }
+      },
+      mounted: ($panel) => {
+        const $default = query('[data-value="normal"]', $panel);
+        if ($default) {
+          inverseClass($default, "art-current");
+        }
+        art.on("flip", (value) => {
+          const $current = queryAll("span", $panel).find((item) => item.dataset.value === value);
+          if ($current) {
+            inverseClass($current, "art-current");
+          }
+        });
+      }
+    };
+  };
+}
+function info(option) {
+  return (art) => ({
+    ...option,
+    html: art.i18n.get("Video Info"),
+    click: (contextmenu) => {
+      art.info.show = true;
+      contextmenu.show = false;
+    }
+  });
+}
+function playbackRate$2(option) {
+  return (art) => {
+    const {
+      i18n,
+      constructor: { PLAYBACK_RATE }
+    } = art;
+    const html = PLAYBACK_RATE.map(
+      (item) => `<span data-value="${item}">${item === 1 ? i18n.get("Normal") : item.toFixed(1)}</span>`
+    ).join("");
+    return {
+      ...option,
+      html: `${i18n.get("Play Speed")}: ${html}`,
+      click: (contextmenu, event) => {
+        const { value } = event.target.dataset;
+        if (value) {
+          art.playbackRate = Number(value);
+          contextmenu.show = false;
+        }
+      },
+      mounted: ($panel) => {
+        const $default = query('[data-value="1"]', $panel);
+        if ($default)
+          inverseClass($default, "art-current");
+        art.on("video:ratechange", () => {
+          const $current = queryAll("span", $panel).find(
+            (item) => Number(item.dataset.value) === art.playbackRate
+          );
+          if ($current) {
+            inverseClass($current, "art-current");
+          }
+        });
+      }
+    };
+  };
+}
+function version(option) {
+  const url = isBrowser ? location.href : "";
+  return {
+    ...option,
+    html: `<a href="https://artplayer.org?ref=${encodeURIComponent(url)}" target="_blank" style="width:100%;">ArtPlayer ${version$1}</a>`
+  };
+}
+class Contextmenu extends Component {
+  constructor(art) {
+    super(art);
+    this.name = "contextmenu";
+    this.$parent = art.template.$contextmenu;
+    if (!isMobile) {
+      this.init();
+    }
+  }
+  init() {
+    const {
+      option,
+      proxy,
+      template: { $player, $contextmenu }
+    } = this.art;
+    if (option.playbackRate) {
+      this.add(
+        playbackRate$2({
+          name: "playbackRate",
+          index: 10
+        })
+      );
+    }
+    if (option.aspectRatio) {
+      this.add(
+        aspectRatio$2({
+          name: "aspectRatio",
+          index: 20
+        })
+      );
+    }
+    if (option.flip) {
+      this.add(
+        flip$2({
+          name: "flip",
+          index: 30
+        })
+      );
+    }
+    this.add(
+      info({
+        name: "info",
+        index: 40
+      })
+    );
+    this.add(
+      version({
+        name: "version",
+        index: 50
+      })
+    );
+    this.add(
+      close$1({
+        name: "close",
+        index: 60
+      })
+    );
+    for (let index = 0; index < option.contextmenu.length; index++) {
+      this.add(option.contextmenu[index]);
+    }
+    proxy($player, "contextmenu", (event) => {
+      if (!this.art.constructor.CONTEXTMENU)
+        return;
+      event.preventDefault();
+      this.show = true;
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
+      const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = getRect($player);
+      const { height: mHeight, width: mWidth } = getRect($contextmenu);
+      let menuLeft = mouseX - cLeft;
+      let menuTop = mouseY - cTop;
+      if (mouseX + mWidth > cLeft + cWidth) {
+        menuLeft = cWidth - mWidth;
+      }
+      if (mouseY + mHeight > cTop + cHeight) {
+        menuTop = cHeight - mHeight;
+      }
+      setStyles($contextmenu, {
+        top: `${menuTop}px`,
+        left: `${menuLeft}px`
+      });
+    });
+    proxy($player, "click", (event) => {
+      if (!includeFromEvent(event, $contextmenu)) {
+        this.show = false;
+      }
+    });
+    this.art.on("blur", () => {
+      this.show = false;
+    });
+  }
+}
+function airplay$1(option) {
+  return (art) => ({
+    ...option,
+    tooltip: art.i18n.get("AirPlay"),
+    mounted: ($control) => {
+      const { proxy, icons } = art;
+      append($control, icons.airplay);
+      proxy($control, "click", () => art.airplay());
+    }
+  });
+}
+function fullscreen(option) {
+  return (art) => ({
+    ...option,
+    tooltip: art.i18n.get("Fullscreen"),
+    mounted: ($control) => {
+      const { proxy, icons, i18n } = art;
+      const $fullscreenOn = append($control, icons.fullscreenOn);
+      const $fullscreenOff = append($control, icons.fullscreenOff);
+      setStyle($fullscreenOff, "display", "none");
+      proxy($control, "click", () => {
+        art.fullscreen = !art.fullscreen;
+      });
+      art.on("fullscreen", (state2) => {
+        if (state2) {
+          tooltip($control, i18n.get("Exit Fullscreen"));
+          setStyle($fullscreenOn, "display", "none");
+          setStyle($fullscreenOff, "display", "inline-flex");
+        } else {
+          tooltip($control, i18n.get("Fullscreen"));
+          setStyle($fullscreenOn, "display", "inline-flex");
+          setStyle($fullscreenOff, "display", "none");
+        }
+      });
+    }
+  });
+}
+function fullscreenWeb(option) {
+  return (art) => ({
+    ...option,
+    tooltip: art.i18n.get("Web Fullscreen"),
+    mounted: ($control) => {
+      const { proxy, icons, i18n } = art;
+      const $fullscreenWebOn = append($control, icons.fullscreenWebOn);
+      const $fullscreenWebOff = append($control, icons.fullscreenWebOff);
+      setStyle($fullscreenWebOff, "display", "none");
+      proxy($control, "click", () => {
+        art.fullscreenWeb = !art.fullscreenWeb;
+      });
+      art.on("fullscreenWeb", (value) => {
+        if (value) {
+          tooltip($control, i18n.get("Exit Web Fullscreen"));
+          setStyle($fullscreenWebOn, "display", "none");
+          setStyle($fullscreenWebOff, "display", "inline-flex");
+        } else {
+          tooltip($control, i18n.get("Web Fullscreen"));
+          setStyle($fullscreenWebOn, "display", "inline-flex");
+          setStyle($fullscreenWebOff, "display", "none");
+        }
+      });
+    }
+  });
+}
+function pip$1(option) {
+  return (art) => ({
+    ...option,
+    tooltip: art.i18n.get("PIP Mode"),
+    mounted: ($control) => {
+      const { proxy, icons, i18n } = art;
+      append($control, icons.pip);
+      proxy($control, "click", () => {
+        art.pip = !art.pip;
+      });
+      art.on("pip", (value) => {
+        tooltip($control, i18n.get(value ? "Exit PIP Mode" : "PIP Mode"));
+      });
+    }
+  });
+}
+function playAndPause(option) {
+  return (art) => ({
+    ...option,
+    mounted: ($control) => {
+      const { proxy, icons, i18n } = art;
+      const $play = append($control, icons.play);
+      const $pause = append($control, icons.pause);
+      tooltip($play, i18n.get("Play"));
+      tooltip($pause, i18n.get("Pause"));
+      proxy($play, "click", () => {
+        art.play();
+      });
+      proxy($pause, "click", () => {
+        art.pause();
+      });
+      function showPlay() {
+        setStyle($play, "display", "flex");
+        setStyle($pause, "display", "none");
+      }
+      function showPause() {
+        setStyle($play, "display", "none");
+        setStyle($pause, "display", "flex");
+      }
+      if (art.playing) {
+        showPause();
+      } else {
+        showPlay();
+      }
+      art.on("video:playing", () => {
+        showPause();
+      });
+      art.on("video:pause", () => {
+        showPlay();
+      });
+    }
+  });
+}
+function getPosFromEvent(art, event) {
+  const { $progress } = art.template;
+  const { left } = getRect($progress);
+  const eventLeft = isMobile ? event.touches[0].clientX : event.clientX;
+  const width = clamp(eventLeft - left, 0, $progress.clientWidth);
+  const second = width / $progress.clientWidth * art.duration;
+  const time2 = secondToTime(second);
+  const percentage = clamp(width / $progress.clientWidth, 0, 1);
+  return { second, time: time2, width, percentage };
+}
+function setCurrentTime(art, event) {
+  if (art.isRotate) {
+    const percentage = event.touches[0].clientY / art.height;
+    const second = percentage * art.duration;
+    art.emit("setBar", "played", percentage, event);
+    art.seek = second;
+  } else {
+    const { second, percentage } = getPosFromEvent(art, event);
+    art.emit("setBar", "played", percentage, event);
+    art.seek = second;
+  }
+}
+function progress(options) {
+  return (art) => {
+    const { icons, option, proxy } = art;
+    const { $player } = art.template;
+    return {
+      ...options,
+      html: `
+                <div class="art-control-progress-inner">
+                    <div class="art-progress-hover"></div>
+                    <div class="art-progress-loaded"></div>
+                    <div class="art-progress-played"></div>
+                    <div class="art-progress-highlight"></div>
+                    <div class="art-progress-indicator"></div>
+                    <div class="art-progress-tip">00:00</div>
+                </div>
+            `,
+      mounted: ($control) => {
+        let tipTimer = null;
+        let isDragging = false;
+        const $hover = query(".art-progress-hover", $control);
+        const $loaded = query(".art-progress-loaded", $control);
+        const $played = query(".art-progress-played", $control);
+        const $highlight = query(".art-progress-highlight", $control);
+        const $indicator = query(".art-progress-indicator", $control);
+        const $tip = query(".art-progress-tip", $control);
+        if (icons.indicator) {
+          append($indicator, icons.indicator);
+        } else {
+          setStyle($indicator, "backgroundColor", "var(--art-theme)");
+        }
+        function showHighlight(event) {
+          const { width } = getPosFromEvent(art, event);
+          const { text } = event.target.dataset;
+          $tip.textContent = text;
+          const tipWidth = $tip.clientWidth;
+          if (width <= tipWidth / 2) {
+            setStyle($tip, "left", 0);
+          } else if (width > $control.clientWidth - tipWidth / 2) {
+            setStyle($tip, "left", `${$control.clientWidth - tipWidth}px`);
+          } else {
+            setStyle($tip, "left", `${width - tipWidth / 2}px`);
+          }
+        }
+        function showTime(event, touch) {
+          const { width, time: time2 } = touch || getPosFromEvent(art, event);
+          $tip.textContent = time2 || "00:00";
+          const tipWidth = $tip.clientWidth;
+          if (width <= tipWidth / 2) {
+            setStyle($tip, "left", 0);
+          } else if (width > $control.clientWidth - tipWidth / 2) {
+            setStyle($tip, "left", `${$control.clientWidth - tipWidth}px`);
+          } else {
+            setStyle($tip, "left", `${width - tipWidth / 2}px`);
+          }
+        }
+        function updateHighlight() {
+          $highlight.textContent = "";
+          for (let index = 0; index < option.highlight.length; index++) {
+            const item = option.highlight[index];
+            const left = clamp(item.time, 0, art.duration) / art.duration * 100;
+            const html = `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`;
+            append($highlight, html);
+          }
+        }
+        function setBar(type, percentage, event) {
+          const isMobileDragging = type === "played" && event && isMobile;
+          if (type === "loaded") {
+            setStyle($loaded, "width", `${percentage * 100}%`);
+          }
+          if (type === "hover") {
+            setStyle($hover, "width", `${percentage * 100}%`);
+            if (includeFromEvent(event, $highlight)) {
+              showHighlight(event);
+            } else {
+              showTime(event);
+            }
+            if (percentage === 0) {
+              removeClass($player, "art-progress-hover");
+            } else {
+              addClass($player, "art-progress-hover");
+            }
+          }
+          if (type === "played") {
+            setStyle($played, "width", `${percentage * 100}%`);
+            setStyle($indicator, "left", `${percentage * 100}%`);
+          }
+          if (isMobileDragging) {
+            addClass($player, "art-progress-hover");
+            const width = $control.clientWidth * percentage;
+            const time2 = secondToTime(percentage * art.duration);
+            showTime(event, { width, time: time2 });
+            clearTimeout(tipTimer);
+            tipTimer = setTimeout(() => {
+              removeClass($player, "art-progress-hover");
+            }, 500);
+          }
+        }
+        art.on("setBar", setBar);
+        art.on("video:loadedmetadata", updateHighlight);
+        if (art.constructor.USE_RAF) {
+          art.on("raf", () => {
+            art.emit("setBar", "played", art.played);
+            art.emit("setBar", "loaded", art.loaded);
+          });
+        } else {
+          art.on("video:timeupdate", () => {
+            art.emit("setBar", "played", art.played);
+          });
+          art.on("video:progress", () => {
+            art.emit("setBar", "loaded", art.loaded);
+          });
+          art.on("video:ended", () => {
+            art.emit("setBar", "played", 1);
+          });
+        }
+        art.emit("setBar", "loaded", art.loaded || 0);
+        if (!isMobile) {
+          proxy($control, "click", (event) => {
+            if (event.target !== $indicator) {
+              setCurrentTime(art, event);
+            }
+          });
+          proxy($control, "mousemove", (event) => {
+            const { percentage } = getPosFromEvent(art, event);
+            art.emit("setBar", "hover", percentage, event);
+          });
+          proxy($control, "mouseleave", (event) => {
+            art.emit("setBar", "hover", 0, event);
+          });
+          proxy($control, "mousedown", (event) => {
+            isDragging = event.button === 0;
+          });
+          art.on("document:mousemove", (event) => {
+            if (isDragging) {
+              const { second, percentage } = getPosFromEvent(art, event);
+              art.emit("setBar", "played", percentage, event);
+              art.seek = second;
+            }
+          });
+          art.on("document:mouseup", () => {
+            if (isDragging) {
+              isDragging = false;
+            }
+          });
+        }
+      }
+    };
+  };
+}
+function screenshot$1(option) {
+  return (art) => ({
+    ...option,
+    tooltip: art.i18n.get("Screenshot"),
+    mounted: ($control) => {
+      const { proxy, icons } = art;
+      append($control, icons.screenshot);
+      proxy($control, "click", () => {
+        art.screenshot();
+      });
+    }
+  });
+}
+function setting$1(option) {
+  return (art) => ({
+    ...option,
+    tooltip: art.i18n.get("Show Setting"),
+    mounted: ($control) => {
+      const { proxy, icons, i18n } = art;
+      append($control, icons.setting);
+      proxy($control, "click", () => {
+        art.setting.toggle();
+        art.setting.resize();
+      });
+      art.on("setting", (value) => {
+        tooltip($control, i18n.get(value ? "Hide Setting" : "Show Setting"));
+      });
+    }
+  });
+}
+function time(option) {
+  return (art) => ({
+    ...option,
+    style: isMobile ? {
+      fontSize: "12px",
+      padding: "0 5px"
+    } : {
+      cursor: "auto",
+      padding: "0 10px"
+    },
+    mounted: ($control) => {
+      function getTime() {
+        const newTime = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`;
+        if (newTime !== $control.textContent) {
+          $control.textContent = newTime;
+        }
+      }
+      getTime();
+      const events = ["video:loadedmetadata", "video:timeupdate", "video:progress"];
+      for (let index = 0; index < events.length; index++) {
+        art.on(events[index], getTime);
+      }
+    }
+  });
+}
+function volume$1(option) {
+  return (art) => ({
+    ...option,
+    mounted: ($control) => {
+      const { proxy, icons } = art;
+      const $volume = append($control, icons.volume);
+      const $close = append($control, icons.volumeClose);
+      const $panel = append($control, '<div class="art-volume-panel"></div>');
+      const $inner = append($panel, '<div class="art-volume-inner"></div>');
+      const $value = append($inner, `<div class="art-volume-val"></div>`);
+      const $slider = append($inner, `<div class="art-volume-slider"></div>`);
+      const $handle = append($slider, `<div class="art-volume-handle"></div>`);
+      const $loaded = append($handle, `<div class="art-volume-loaded"></div>`);
+      const $indicator = append($slider, `<div class="art-volume-indicator"></div>`);
+      function getVolumeFromEvent(event) {
+        const { top, height } = getRect($slider);
+        return 1 - (event.clientY - top) / height;
+      }
+      function update() {
+        if (art.muted || art.volume === 0) {
+          setStyle($volume, "display", "none");
+          setStyle($close, "display", "flex");
+          setStyle($indicator, "top", "100%");
+          setStyle($loaded, "top", "100%");
+          $value.textContent = 0;
+        } else {
+          const percentage = art.volume * 100;
+          setStyle($volume, "display", "flex");
+          setStyle($close, "display", "none");
+          setStyle($indicator, "top", `${100 - percentage}%`);
+          setStyle($loaded, "top", `${100 - percentage}%`);
+          $value.textContent = Math.floor(percentage);
+        }
+      }
+      update();
+      art.on("video:volumechange", update);
+      proxy($volume, "click", () => {
+        art.muted = true;
+      });
+      proxy($close, "click", () => {
+        art.muted = false;
+      });
+      if (isMobile) {
+        setStyle($panel, "display", "none");
+      } else {
+        let isDragging = false;
+        proxy($slider, "mousedown", (event) => {
+          isDragging = event.button === 0;
+          art.volume = getVolumeFromEvent(event);
+        });
+        art.on("document:mousemove", (event) => {
+          if (isDragging) {
+            art.muted = false;
+            art.volume = getVolumeFromEvent(event);
+          }
+        });
+        art.on("document:mouseup", () => {
+          if (isDragging) {
+            isDragging = false;
+          }
+        });
+      }
+    }
+  });
+}
+class Control extends Component {
+  constructor(art) {
+    super(art);
+    this.isHover = false;
+    this.name = "control";
+    this.timer = Date.now();
+    const { constructor } = art;
+    const { $player, $bottom } = this.art.template;
+    art.on("mousemove", () => {
+      if (!isMobile) {
+        this.show = true;
+      }
+    });
+    art.on("click", () => {
+      if (isMobile) {
+        this.toggle();
+      } else {
+        this.show = true;
+      }
+    });
+    art.on("document:mousemove", (event) => {
+      this.isHover = includeFromEvent(event, $bottom);
+    });
+    art.on("video:timeupdate", () => {
+      if (!art.setting.show && !this.isHover && !art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) {
+        this.show = false;
+      }
+    });
+    art.on("control", (state2) => {
+      if (state2) {
+        removeClass($player, "art-hide-cursor");
+        addClass($player, "art-hover");
+        this.timer = Date.now();
+      } else {
+        addClass($player, "art-hide-cursor");
+        removeClass($player, "art-hover");
+      }
+    });
+    this.init();
+  }
+  init() {
+    const { option } = this.art;
+    if (!option.isLive) {
+      this.add(
+        progress({
+          name: "progress",
+          position: "top",
+          index: 10
+        })
+      );
+    }
+    this.add({
+      name: "thumbnails",
+      position: "top",
+      index: 20
+    });
+    this.add(
+      playAndPause({
+        name: "playAndPause",
+        position: "left",
+        index: 10
+      })
+    );
+    this.add(
+      volume$1({
+        name: "volume",
+        position: "left",
+        index: 20
+      })
+    );
+    if (!option.isLive) {
+      this.add(
+        time({
+          name: "time",
+          position: "left",
+          index: 30
+        })
+      );
+    }
+    if (option.quality.length) {
+      sleep().then(() => {
+        this.art.quality = option.quality;
+      });
+    }
+    if (option.screenshot && !isMobile) {
+      this.add(
+        screenshot$1({
+          name: "screenshot",
+          position: "right",
+          index: 20
+        })
+      );
+    }
+    if (option.setting) {
+      this.add(
+        setting$1({
+          name: "setting",
+          position: "right",
+          index: 30
+        })
+      );
+    }
+    if (option.pip) {
+      this.add(
+        pip$1({
+          name: "pip",
+          position: "right",
+          index: 40
+        })
+      );
+    }
+    if (option.airplay && window.WebKitPlaybackTargetAvailabilityEvent) {
+      this.add(
+        airplay$1({
+          name: "airplay",
+          position: "right",
+          index: 50
+        })
+      );
+    }
+    if (option.fullscreenWeb) {
+      this.add(
+        fullscreenWeb({
+          name: "fullscreenWeb",
+          position: "right",
+          index: 60
+        })
+      );
+    }
+    if (option.fullscreen) {
+      this.add(
+        fullscreen({
+          name: "fullscreen",
+          position: "right",
+          index: 70
+        })
+      );
+    }
+    for (let index = 0; index < option.controls.length; index++) {
+      this.add(option.controls[index]);
+    }
+  }
+  add(getOption) {
+    const option = typeof getOption === "function" ? getOption(this.art) : getOption;
+    const { $progress, $controlsLeft, $controlsRight } = this.art.template;
+    switch (option.position) {
+      case "top":
+        this.$parent = $progress;
+        break;
+      case "left":
+        this.$parent = $controlsLeft;
+        break;
+      case "right":
+        this.$parent = $controlsRight;
+        break;
+      default:
+        errorHandle(false, `Control option.position must one of 'top', 'left', 'right'`);
+        break;
+    }
+    super.add(option);
+  }
+  check(target) {
+    if (!target) {
+      return;
+    }
+    target.$control_value.innerHTML = target.html;
+    for (let index = 0; index < target.$control_option.length; index++) {
+      const item = target.$control_option[index];
+      item.default = item === target;
+      if (item.default) {
+        inverseClass(item.$control_item, "art-current");
+      }
+    }
+  }
+  selector(option, $ref, events) {
+    const { proxy } = this.art.events;
+    addClass($ref, "art-control-selector");
+    const $value = createElement("div");
+    addClass($value, "art-selector-value");
+    append($value, option.html);
+    $ref.textContent = "";
+    append($ref, $value);
+    const $list = createElement("div");
+    addClass($list, "art-selector-list");
+    append($ref, $list);
+    for (let index = 0; index < option.selector.length; index++) {
+      const item = option.selector[index];
+      const $item = createElement("div");
+      addClass($item, "art-selector-item");
+      if (item.default)
+        addClass($item, "art-current");
+      $item.dataset.index = index;
+      $item.dataset.value = item.value;
+      $item.innerHTML = item.html;
+      append($list, $item);
+      def(item, "$control_option", {
+        get: () => option.selector
+      });
+      def(item, "$control_item", {
+        get: () => $item
+      });
+      def(item, "$control_value", {
+        get: () => $value
+      });
+    }
+    const event = proxy($list, "click", async (event2) => {
+      const path = getComposedPath(event2);
+      const item = option.selector.find(
+        (item2) => item2.$control_item === path.find(($item) => item2.$control_item === $item)
+      );
+      this.check(item);
+      if (option.onSelect) {
+        $value.innerHTML = await option.onSelect.call(this.art, item, item.$control_item, event2);
+      }
+    });
+    events.push(event);
+  }
+}
+function clickInit(art, events) {
+  const {
+    constructor,
+    template: { $player, $video }
+  } = art;
+  function onDocumentClick(event) {
+    if (includeFromEvent(event, $player)) {
+      art.isInput = event.target.tagName === "INPUT";
+      art.isFocus = true;
+      art.emit("focus", event);
+    } else {
+      art.isInput = false;
+      art.isFocus = false;
+      art.emit("blur", event);
+    }
+  }
+  art.on("document:click", onDocumentClick);
+  art.on("document:contextmenu", onDocumentClick);
+  let clickTimes = [];
+  events.proxy($video, "click", (event) => {
+    const now = Date.now();
+    clickTimes.push(now);
+    const { MOBILE_CLICK_PLAY, DBCLICK_TIME, MOBILE_DBCLICK_PLAY, DBCLICK_FULLSCREEN } = constructor;
+    const clicks = clickTimes.filter((t) => now - t <= DBCLICK_TIME);
+    switch (clicks.length) {
+      case 1:
+        art.emit("click", event);
+        if (isMobile) {
+          if (!art.isLock && MOBILE_CLICK_PLAY) {
+            art.toggle();
+          }
+        } else {
+          art.toggle();
+        }
+        clickTimes = clicks;
+        break;
+      case 2:
+        art.emit("dblclick", event);
+        if (isMobile) {
+          if (!art.isLock && MOBILE_DBCLICK_PLAY) {
+            art.toggle();
+          }
+        } else {
+          if (DBCLICK_FULLSCREEN) {
+            art.fullscreen = !art.fullscreen;
+          }
+        }
+        clickTimes = [];
+        break;
+      default:
+        clickTimes = [];
+    }
+  });
+}
+function GetSlideAngle(dx, dy) {
+  return Math.atan2(dy, dx) * 180 / Math.PI;
+}
+function GetSlideDirection(startX, startY, endX, endY) {
+  const dy = startY - endY;
+  const dx = endX - startX;
+  let result = 0;
+  if (Math.abs(dx) < 2 && Math.abs(dy) < 2) {
+    return result;
+  }
+  const angle = GetSlideAngle(dx, dy);
+  if (angle >= -45 && angle < 45) {
+    result = 4;
+  } else if (angle >= 45 && angle < 135) {
+    result = 1;
+  } else if (angle >= -135 && angle < -45) {
+    result = 2;
+  } else if (angle >= 135 && angle <= 180 || angle >= -180 && angle < -135) {
+    result = 3;
+  }
+  return result;
+}
+function gestureInit(art, events) {
+  if (isMobile && !art.option.isLive) {
+    const { $video, $progress } = art.template;
+    let touchTarget = null;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let startTime = 0;
+    const onTouchStart = (event) => {
+      if (event.touches.length === 1 && !art.isLock) {
+        if (touchTarget === $progress) {
+          setCurrentTime(art, event);
+        }
+        isDragging = true;
+        const { pageX, pageY } = event.touches[0];
+        startX = pageX;
+        startY = pageY;
+        startTime = art.currentTime;
+      }
+    };
+    const onTouchMove = (event) => {
+      if (event.touches.length === 1 && isDragging && art.duration) {
+        const { pageX, pageY } = event.touches[0];
+        const direction = GetSlideDirection(startX, startY, pageX, pageY);
+        const isHorizontal = [3, 4].includes(direction);
+        const isVertical = [1, 2].includes(direction);
+        const isLegal = isHorizontal && !art.isRotate || isVertical && art.isRotate;
+        if (isLegal) {
+          const ratioX = clamp((pageX - startX) / art.width, -1, 1);
+          const ratioY = clamp((pageY - startY) / art.height, -1, 1);
+          const ratio = art.isRotate ? ratioY : ratioX;
+          const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
+          const currentTime = clamp(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
+          art.seek = currentTime;
+          art.emit("setBar", "played", clamp(currentTime / art.duration, 0, 1), event);
+          art.notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
+        }
+      }
+    };
+    const onTouchEnd = () => {
+      if (isDragging) {
+        startX = 0;
+        startY = 0;
+        startTime = 0;
+        isDragging = false;
+        touchTarget = null;
+      }
+    };
+    if (art.option.gesture) {
+      events.proxy($video, "touchstart", (event) => {
+        touchTarget = $video;
+        onTouchStart(event);
+      });
+      events.proxy($video, "touchmove", onTouchMove);
+    }
+    events.proxy($progress, "touchstart", (event) => {
+      touchTarget = $progress;
+      onTouchStart(event);
+    });
+    events.proxy($progress, "touchmove", onTouchMove);
+    art.on("document:touchend", onTouchEnd);
+  }
+}
+function globalInit(art, events) {
+  const documentEvents = [
+    "click",
+    "mouseup",
+    "keydown",
+    "touchend",
+    "touchmove",
+    "mousemove",
+    "pointerup",
+    "contextmenu",
+    "pointermove",
+    "visibilitychange",
+    "webkitfullscreenchange"
+  ];
+  const windowEvents = [
+    "resize",
+    "scroll",
+    "orientationchange"
+  ];
+  const destroyEvents = [];
+  function bindGlobalEvents(source = {}) {
+    for (let index = 0; index < destroyEvents.length; index++) {
+      events.remove(destroyEvents[index]);
+    }
+    destroyEvents.length = 0;
+    const { $player } = art.template;
+    documentEvents.forEach((name) => {
+      const doc = source.document || $player.ownerDocument || document;
+      const destroy = events.proxy(doc, name, (event) => {
+        art.emit(`document:${name}`, event);
+      });
+      destroyEvents.push(destroy);
+    });
+    windowEvents.forEach((name) => {
+      const win = source.window || $player.ownerDocument?.defaultView || window;
+      const destroy = events.proxy(win, name, (event) => {
+        art.emit(`window:${name}`, event);
+      });
+      destroyEvents.push(destroy);
+    });
+  }
+  bindGlobalEvents();
+  events.bindGlobalEvents = bindGlobalEvents;
+}
+function hoverInit(art, events) {
+  const { $player } = art.template;
+  events.hover(
+    $player,
+    (event) => {
+      addClass($player, "art-hover");
+      art.emit("hover", true, event);
+    },
+    (event) => {
+      removeClass($player, "art-hover");
+      art.emit("hover", false, event);
+    }
+  );
+}
+function moveInit(art, events) {
+  const { $player } = art.template;
+  events.proxy($player, "mousemove", (event) => {
+    art.emit("mousemove", event);
+  });
+}
+function resizeInit(art, events) {
+  const { option, constructor } = art;
+  art.on("resize", () => {
+    const { aspectRatio: aspectRatio2, notice } = art;
+    if (art.state === "standard" && option.autoSize) {
+      art.autoSize();
+    }
+    art.aspectRatio = aspectRatio2;
+    notice.show = "";
+  });
+  const resizeFn = debounce(() => art.emit("resize"), constructor.RESIZE_TIME);
+  art.on("window:orientationchange", () => resizeFn());
+  art.on("window:resize", () => resizeFn());
+  if (screen && screen.orientation && screen.orientation.onchange) {
+    events.proxy(screen.orientation, "change", () => resizeFn());
+  }
+}
+function updateInit(art) {
+  if (art.constructor.USE_RAF) {
+    let timer = null;
+    (function update() {
+      if (art.playing) {
+        art.emit("raf");
+      }
+      if (!art.isDestroy) {
+        timer = requestAnimationFrame(update);
+      }
+    })();
+    art.on("destroy", () => {
+      cancelAnimationFrame(timer);
+    });
+  }
+}
+function viewInit(art) {
+  const {
+    option,
+    constructor,
+    template: { $container }
+  } = art;
+  const scrollFn = throttle(() => {
+    art.emit("view", isInViewport($container, constructor.SCROLL_GAP));
+  }, constructor.SCROLL_TIME);
+  art.on("window:scroll", () => scrollFn());
+  art.on("view", (state2) => {
+    if (option.autoMini) {
+      art.mini = !state2;
+    }
+  });
+}
+class Events {
+  constructor(art) {
+    this.destroyEvents = /* @__PURE__ */ new Set();
+    this.proxy = this.proxy.bind(this);
+    this.hover = this.hover.bind(this);
+    clickInit(art, this);
+    hoverInit(art, this);
+    moveInit(art, this);
+    resizeInit(art, this);
+    gestureInit(art, this);
+    viewInit(art);
+    globalInit(art, this);
+    updateInit(art);
+  }
+  proxy(target, name, callback, option = {}) {
+    if (Array.isArray(name)) {
+      return name.map((item) => this.proxy(target, item, callback, option));
+    }
+    target.addEventListener(name, callback, option);
+    const destroy = () => target.removeEventListener(name, callback, option);
+    this.destroyEvents.add(destroy);
+    return destroy;
+  }
+  hover(target, mouseenter, mouseleave) {
+    if (mouseenter) {
+      this.proxy(target, "mouseenter", mouseenter);
+    }
+    if (mouseleave) {
+      this.proxy(target, "mouseleave", mouseleave);
+    }
+  }
+  remove(destroyEvent) {
+    if (this.destroyEvents.has(destroyEvent)) {
+      try {
+        destroyEvent();
+      } catch (error2) {
+        console.warn("Failed to remove event listener:", error2);
+      } finally {
+        this.destroyEvents.delete(destroyEvent);
+      }
+    }
+  }
+  destroy() {
+    for (const destroyEvent of this.destroyEvents) {
+      try {
+        destroyEvent();
+      } catch (error2) {
+        console.warn("Failed to destroy event listener:", error2);
+      }
+    }
+    this.destroyEvents.clear();
+  }
+}
+class Hotkey {
+  constructor(art) {
+    this.art = art;
+    this.keys = {};
+    if (!isMobile) {
+      this.init();
+    }
+  }
+  init() {
+    const { constructor } = this.art;
+    if (this.art.option.hotkey) {
+      this.add("Escape", () => {
+        if (this.art.fullscreenWeb) {
+          this.art.fullscreenWeb = false;
+        }
+      });
+      this.add("Space", () => {
+        this.art.toggle();
+      });
+      this.add("ArrowLeft", () => {
+        this.art.backward = constructor.SEEK_STEP;
+      });
+      this.add("ArrowUp", () => {
+        this.art.volume += constructor.VOLUME_STEP;
+      });
+      this.add("ArrowRight", () => {
+        this.art.forward = constructor.SEEK_STEP;
+      });
+      this.add("ArrowDown", () => {
+        this.art.volume -= constructor.VOLUME_STEP;
+      });
+    }
+    this.art.on("document:keydown", (event) => {
+      if (this.art.isFocus) {
+        const tag = document.activeElement.tagName.toUpperCase();
+        const editable = document.activeElement.getAttribute("contenteditable");
+        if (tag !== "INPUT" && tag !== "TEXTAREA" && editable !== "" && editable !== "true" && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+          const events = this.keys[event.code];
+          if (events) {
+            event.preventDefault();
+            for (let index = 0; index < events.length; index++) {
+              events[index].call(this.art, event);
+            }
+            this.art.emit("hotkey", event);
+          }
+        }
+      }
+      this.art.emit("keydown", event);
+    });
+  }
+  add(key, event) {
+    if (this.keys[key]) {
+      if (!this.keys[key].includes(event)) {
+        this.keys[key].push(event);
+      }
+    } else {
+      this.keys[key] = [event];
+    }
+    return this;
+  }
+  remove(key, event) {
+    if (this.keys[key]) {
+      const index = this.keys[key].indexOf(event);
+      if (index !== -1) {
+        this.keys[key].splice(index, 1);
+      }
+      if (this.keys[key].length === 0) {
+        delete this.keys[key];
+      }
+    }
+    return this;
+  }
+}
+const zhCn = {
+  "Video Info": "统计信息",
+  "Close": "关闭",
+  "Video Load Failed": "加载失败",
+  "Volume": "音量",
+  "Play": "播放",
+  "Pause": "暂停",
+  "Rate": "速度",
+  "Mute": "静音",
+  "Video Flip": "画面翻转",
+  "Horizontal": "水平",
+  "Vertical": "垂直",
+  "Reconnect": "重新连接",
+  "Show Setting": "显示设置",
+  "Hide Setting": "隐藏设置",
+  "Screenshot": "截图",
+  "Play Speed": "播放速度",
+  "Aspect Ratio": "画面比例",
+  "Default": "默认",
+  "Normal": "正常",
+  "Open": "打开",
+  "Switch Video": "切换",
+  "Switch Subtitle": "切换字幕",
+  "Fullscreen": "全屏",
+  "Exit Fullscreen": "退出全屏",
+  "Web Fullscreen": "网页全屏",
+  "Exit Web Fullscreen": "退出网页全屏",
+  "Mini Player": "迷你播放器",
+  "PIP Mode": "开启画中画",
+  "Exit PIP Mode": "退出画中画",
+  "PIP Not Supported": "不支持画中画",
+  "Fullscreen Not Supported": "不支持全屏",
+  "Subtitle Offset": "字幕偏移",
+  "Last Seen": "上次看到",
+  "Jump Play": "跳转播放",
+  "AirPlay": "隔空播放",
+  "AirPlay Not Available": "隔空播放不可用"
+};
+if (typeof window !== "undefined") {
+  window["artplayer-i18n-zh-cn"] = zhCn;
+}
+class I18n {
+  constructor(art) {
+    this.art = art;
+    this.languages = {
+      "zh-cn": zhCn
+    };
+    this.language = {};
+    this.update(art.option.i18n);
+  }
+  init() {
+    const lang = this.art.option.lang.toLowerCase();
+    this.language = this.languages[lang] || {};
+  }
+  get(key) {
+    return this.language[key] || key;
+  }
+  update(value) {
+    this.languages = mergeDeep(this.languages, value);
+    this.init();
+  }
+}
+const airplay = '<svg width="18px" height="18px" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">\n    <g>\n        <path d="M16,1 L2,1 C1.447,1 1,1.447 1,2 L1,12 C1,12.553 1.447,13 2,13 L5,13 L5,11 L3,11 L3,3 L15,3 L15,11 L13,11 L13,13 L16,13 C16.553,13 17,12.553 17,12 L17,2 C17,1.447 16.553,1 16,1 L16,1 Z"></path>\n        <polygon points="4 17 14 17 9 11"></polygon>\n    </g>\n</svg>\n';
+const arrowLeft = '<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" version="1.1" viewBox="0 0 32 32">\n    <path d="M 19.41,20.09 14.83,15.5 19.41,10.91 18,9.5 l -6,6 6,6 z" />\n</svg>';
+const arrowRight = '<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" version="1.1" viewBox="0 0 32 32">\n    <path d="m 12.59,20.34 4.58,-4.59 -4.58,-4.59 1.41,-1.41 6,6 -6,6 z" />\n</svg>';
+const aspectRatio$1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);"><defs><clipPath id="__lottie_element_216"><rect width="88" height="88" x="0" y="0"></rect></clipPath></defs><g clip-path="url(#__lottie_element_216)"><g transform="matrix(1,0,0,1,44,44)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill-opacity="1" d=" M12.437999725341797,-12.70199966430664 C12.437999725341797,-12.70199966430664 9.618000030517578,-9.881999969482422 9.618000030517578,-9.881999969482422 C8.82800006866455,-9.092000007629395 8.82800006866455,-7.831999778747559 9.618000030517578,-7.052000045776367 C9.618000030517578,-7.052000045776367 16.687999725341797,0.017999999225139618 16.687999725341797,0.017999999225139618 C16.687999725341797,0.017999999225139618 9.618000030517578,7.0879998207092285 9.618000030517578,7.0879998207092285 C8.82800006866455,7.877999782562256 8.82800006866455,9.137999534606934 9.618000030517578,9.918000221252441 C9.618000030517578,9.918000221252441 12.437999725341797,12.748000144958496 12.437999725341797,12.748000144958496 C13.227999687194824,13.527999877929688 14.48799991607666,13.527999877929688 15.267999649047852,12.748000144958496 C15.267999649047852,12.748000144958496 26.58799934387207,1.437999963760376 26.58799934387207,1.437999963760376 C27.368000030517578,0.6579999923706055 27.368000030517578,-0.6119999885559082 26.58799934387207,-1.3919999599456787 C26.58799934387207,-1.3919999599456787 15.267999649047852,-12.70199966430664 15.267999649047852,-12.70199966430664 C14.48799991607666,-13.491999626159668 13.227999687194824,-13.491999626159668 12.437999725341797,-12.70199966430664z M-12.442000389099121,-12.70199966430664 C-13.182000160217285,-13.442000389099121 -14.362000465393066,-13.482000350952148 -15.142000198364258,-12.821999549865723 C-15.142000198364258,-12.821999549865723 -15.272000312805176,-12.70199966430664 -15.272000312805176,-12.70199966430664 C-15.272000312805176,-12.70199966430664 -26.582000732421875,-1.3919999599456787 -26.582000732421875,-1.3919999599456787 C-27.32200050354004,-0.6520000100135803 -27.36199951171875,0.5180000066757202 -26.70199966430664,1.3079999685287476 C-26.70199966430664,1.3079999685287476 -26.582000732421875,1.437999963760376 -26.582000732421875,1.437999963760376 C-26.582000732421875,1.437999963760376 -15.272000312805176,12.748000144958496 -15.272000312805176,12.748000144958496 C-14.531999588012695,13.48799991607666 -13.362000465393066,13.527999877929688 -12.571999549865723,12.868000030517578 C-12.571999549865723,12.868000030517578 -12.442000389099121,12.748000144958496 -12.442000389099121,12.748000144958496 C-12.442000389099121,12.748000144958496 -9.612000465393066,9.918000221252441 -9.612000465393066,9.918000221252441 C-8.871999740600586,9.178000450134277 -8.831999778747559,8.008000373840332 -9.501999855041504,7.2179999351501465 C-9.501999855041504,7.2179999351501465 -9.612000465393066,7.0879998207092285 -9.612000465393066,7.0879998207092285 C-9.612000465393066,7.0879998207092285 -16.68199920654297,0.017999999225139618 -16.68199920654297,0.017999999225139618 C-16.68199920654297,0.017999999225139618 -9.612000465393066,-7.052000045776367 -9.612000465393066,-7.052000045776367 C-8.871999740600586,-7.791999816894531 -8.831999778747559,-8.961999893188477 -9.501999855041504,-9.751999855041504 C-9.501999855041504,-9.751999855041504 -9.612000465393066,-9.881999969482422 -9.612000465393066,-9.881999969482422 C-9.612000465393066,-9.881999969482422 -12.442000389099121,-12.70199966430664 -12.442000389099121,-12.70199966430664z M28,-28 C32.41999816894531,-28 36,-24.420000076293945 36,-20 C36,-20 36,20 36,20 C36,24.420000076293945 32.41999816894531,28 28,28 C28,28 -28,28 -28,28 C-32.41999816894531,28 -36,24.420000076293945 -36,20 C-36,20 -36,-20 -36,-20 C-36,-24.420000076293945 -32.41999816894531,-28 -28,-28 C-28,-28 28,-28 28,-28z" data-darkreader-inline-fill="" style="--darkreader-inline-fill:#a8a6a4;"></path></g></g></g></svg>';
+const check = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24" style="width: 100%; height: 100%;">\n<path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />\n</svg>';
+const close = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg t="1655876154826" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22">\n<path d="M571.733333 512l268.8-268.8c17.066667-17.066667 17.066667-42.666667 0-59.733333-17.066667-17.066667-42.666667-17.066667-59.733333 0L512 452.266667 243.2 183.466667c-17.066667-17.066667-42.666667-17.066667-59.733333 0-17.066667 17.066667-17.066667 42.666667 0 59.733333L452.266667 512 183.466667 780.8c-17.066667 17.066667-17.066667 42.666667 0 59.733333 8.533333 8.533333 19.2 12.8 29.866666 12.8s21.333333-4.266667 29.866667-12.8L512 571.733333l268.8 268.8c8.533333 8.533333 19.2 12.8 29.866667 12.8s21.333333-4.266667 29.866666-12.8c17.066667-17.066667 17.066667-42.666667 0-59.733333L571.733333 512z" p-id="2131">\n</path>\n</svg>';
+const config = '<svg height="24" viewBox="0 0 24 24" width="24"><path d="M15,17h6v1h-6V17z M11,17H3v1h8v2h1v-2v-1v-2h-1V17z M14,8h1V6V5V3h-1v2H3v1h11V8z            M18,5v1h3V5H18z M6,14h1v-2v-1V9H6v2H3v1 h3V14z M10,12h11v-1H10V12z" data-darkreader-inline-fill="" style="--darkreader-inline-fill:#a8a6a4;"></path></svg>';
+const error = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg t="1652850026663" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2749" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50">\n<path d="M593.8176 168.5504l356.00384 595.21024c26.15296 43.74528 10.73152 99.7376-34.44736 125.05088-14.39744 8.06912-30.72 12.30848-47.37024 12.30848H155.97568C103.75168 901.12 61.44 860.16 61.44 809.61536c0-16.09728 4.38272-31.92832 12.71808-45.8752L430.16192 168.5504c26.17344-43.7248 84.00896-58.65472 129.20832-33.34144a93.0816 93.0816 0 0 1 34.44736 33.34144zM512 819.2a61.44 61.44 0 1 0 0-122.88 61.44 61.44 0 0 0 0 122.88z m0-512a72.31488 72.31488 0 0 0-71.76192 81.3056l25.72288 205.7216a46.40768 46.40768 0 0 0 92.07808 0l25.72288-205.74208A72.31488 72.31488 0 0 0 512 307.2z" p-id="2750">\n</path>\n</svg>';
+const flip$1 = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg t="1652445277062" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24">\n<path d="M554.666667 810.666667v85.333333h-85.333334v-85.333333h85.333334zM170.666667 178.005333a42.666667 42.666667 0 0 1 34.986666 18.218667l203.904 291.328a42.666667 42.666667 0 0 1 0 48.896l-203.946666 291.328A42.666667 42.666667 0 0 1 128 803.328V220.672a42.666667 42.666667 0 0 1 42.666667-42.666667z m682.666666 0a42.666667 42.666667 0 0 1 42.368 37.717334l0.298667 4.949333v582.656a42.666667 42.666667 0 0 1-74.24 28.629333l-3.413333-4.181333-203.904-291.328a42.666667 42.666667 0 0 1-3.029334-43.861333l3.029334-5.034667 203.946666-291.328A42.666667 42.666667 0 0 1 853.333333 178.005333zM554.666667 640v85.333333h-85.333334v-85.333333h85.333334zM196.266667 319.104V716.8L335.957333 512 196.309333 319.104zM554.666667 469.333333v85.333334h-85.333334v-85.333334h85.333334z m0-170.666666v85.333333h-85.333334V298.666667h85.333334z m0-170.666667v85.333333h-85.333334V128h85.333334z">\n</path>\n</svg>\n';
+const fullscreenOff = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg class="icon" width="22" height="22" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">\n<path d="M768 298.666667h170.666667v85.333333h-256V128h85.333333v170.666667zM341.333333 384H85.333333V298.666667h170.666667V128h85.333333v256z m426.666667 341.333333v170.666667h-85.333333v-256h256v85.333333h-170.666667zM341.333333 640v256H256v-170.666667H85.333333v-85.333333h256z" />\n</svg>\n';
+const fullscreenOn = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg class="icon" width="22" height="22" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">\n<path d="M625.777778 256h142.222222V398.222222h113.777778V142.222222H625.777778v113.777778zM256 398.222222V256H398.222222v-113.777778H142.222222V398.222222h113.777778zM768 625.777778v142.222222H625.777778v113.777778h256V625.777778h-113.777778zM398.222222 768H256V625.777778h-113.777778v256H398.222222v-113.777778z" />\n</svg>\n';
+const fullscreenWebOff = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg class="icon" width="18" height="18" viewBox="0 0 1152 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">\n<path d="M1075.2 0H76.8A76.8 76.8 0 0 0 0 76.8v870.4A76.8 76.8 0 0 0 76.8 1024h998.4a76.8 76.8 0 0 0 76.8-76.8V76.8A76.8 76.8 0 0 0 1075.2 0zM1024 128v768H128V128h896zM896 512a64 64 0 0 1 7.488 127.552L896 640h-128v128a64 64 0 0 1-56.512 63.552L704 832a64 64 0 0 1-63.552-56.512L640 768V582.592c0-34.496 25.024-66.112 61.632-70.208L709.632 512H896zM256 512a64 64 0 0 1-7.488-127.552L256 384h128V256a64 64 0 0 1 56.512-63.552L448 192a64 64 0 0 1 63.552 56.512L512 256v185.408c0 34.432-25.024 66.112-61.632 70.144L442.368 512H256z" />\n</svg>\n';
+const fullscreenWebOn = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg class="icon" width="18" height="18" viewBox="0 0 1152 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">\n<path d="M1075.2 0H76.8A76.8 76.8 0 0 0 0 76.8v870.4A76.8 76.8 0 0 0 76.8 1024h998.4a76.8 76.8 0 0 0 76.8-76.8V76.8A76.8 76.8 0 0 0 1075.2 0zM1024 128v768H128V128h896zM448 192a64 64 0 0 1 7.488 127.552L448 320H320v128a64 64 0 0 1-56.512 63.552L256 512a64 64 0 0 1-63.552-56.512L192 448V262.592c0-34.432 25.024-66.112 61.632-70.144L261.632 192H448zM704 832a64 64 0 0 1-7.488-127.552L704 704h128V576a64 64 0 0 1 56.512-63.552L896 512a64 64 0 0 1 63.552 56.512L960 576v185.408c0 34.496-25.024 66.112-61.632 70.208l-8 0.384H704z" />\n</svg>\n';
+const loading = '<svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-default">\n  <rect x="0" y="0" width="100" height="100" fill="none" class="bk"/>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(0 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-1s" repeatCount="indefinite"/>\n  </rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(30 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"/>\n  </rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(60 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"/>\n  </rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(90 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.75s" repeatCount="indefinite"/></rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(120 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"/>\n  </rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(150 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"/>\n  </rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(180 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.5s" repeatCount="indefinite"/></rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(210 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"/>\n  </rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(240 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"/>\n  </rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(270 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.25s" repeatCount="indefinite"/></rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(300 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"/>\n  </rect>\n  <rect x="47" y="40" width="6" height="20" rx="5" ry="5" transform="rotate(330 50 50) translate(0 -30)">\n    <animate attributeName="opacity" from="1" to="0" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"/>\n  </rect>\n</svg>';
+const lock$1 = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg t="1650612139149" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20">\n<path d="M298.666667 426.666667V341.333333a213.333333 213.333333 0 1 1 426.666666 0v85.333334h42.666667a85.333333 85.333333 0 0 1 85.333333 85.333333v256a85.333333 85.333333 0 0 1-85.333333 85.333333H256a85.333333 85.333333 0 0 1-85.333333-85.333333v-256a85.333333 85.333333 0 0 1 85.333333-85.333333h42.666667z m213.333333-213.333334a128 128 0 0 0-128 128v85.333334h256V341.333333a128 128 0 0 0-128-128z"></path>\n</svg>\n';
+const pause = '<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 22 22">\n    <path d="M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z"></path>\n</svg>';
+const pip = '<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="22" height="22">\n<path d="M844.8 219.648h-665.6c-6.144 0-10.24 4.608-10.24 10.752v563.2c0 5.632 4.096 10.24 10.24 10.24h256v92.16h-256a102.4 102.4 0 0 1-102.4-102.4v-563.2c0-56.832 45.568-102.4 102.4-102.4h665.6a102.4 102.4 0 0 1 102.4 102.4v204.8h-92.16v-204.8c0-6.144-4.608-10.752-10.24-10.752zM614.4 588.8c-28.672 0-51.2 22.528-51.2 51.2v204.8c0 28.16 22.528 51.2 51.2 51.2h281.6c28.16 0 51.2-23.04 51.2-51.2v-204.8c0-28.672-23.04-51.2-51.2-51.2H614.4z"></path>\n</svg>';
+const play = '<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 22 22">\n  <path d="M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z"></path>\n</svg>';
+const playbackRate$1 = '<svg height="24" viewBox="0 0 24 24" width="24"><path d="M10,8v8l6-4L10,8L10,8z M6.3,5L5.7,4.2C7.2,3,9,2.2,11,2l0.1,1C9.3,3.2,7.7,3.9,6.3,5z            M5,6.3L4.2,5.7C3,7.2,2.2,9,2,11 l1,.1C3.2,9.3,3.9,7.7,5,6.3z            M5,17.7c-1.1-1.4-1.8-3.1-2-4.8L2,13c0.2,2,1,3.8,2.2,5.4L5,17.7z            M11.1,21c-1.8-0.2-3.4-0.9-4.8-2 l-0.6,.8C7.2,21,9,21.8,11,22L11.1,21z            M22,12c0-5.2-3.9-9.4-9-10l-0.1,1c4.6,.5,8.1,4.3,8.1,9s-3.5,8.5-8.1,9l0.1,1 C18.2,21.5,22,17.2,22,12z" data-darkreader-inline-fill="" style="--darkreader-inline-fill:#a8a6a4;"></path></svg>';
+const screenshot = '<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 50 50">\n	<path d="M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z "/>\n</svg>\n';
+const setting = '<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 22 22">\n    <circle cx="11" cy="11" r="2"></circle>\n    <path d="M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path>\n</svg>';
+const state = '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24">\n<path d="M9.5 9.325v5.35q0 .575.525.875t1.025-.05l4.15-2.65q.475-.3.475-.85t-.475-.85L11.05 8.5q-.5-.35-1.025-.05t-.525.875ZM12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"/>\n</svg>\n';
+const switchOff = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg class="icon" width="26" height="26" viewBox="0 0 1740 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">\n    <path d="M511.8976 1024h670.5152c282.4192-0.4096 511.1808-229.4784 511.1808-511.8976 0-282.4192-228.7616-511.488-511.1808-511.8976H511.8976C229.4784 0.6144 0.7168 229.6832 0.7168 512.1024c0 282.4192 228.7616 511.488 511.1808 511.8976zM511.3344 48.64A464.5888 464.5888 0 1 1 48.0256 513.024 463.872 463.872 0 0 1 511.3344 48.4352V48.64z" />\n</svg>\n';
+const switchOn = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg class="icon" width="26" height="26" viewBox="0 0 1664 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">\n    <path fill="#648FFC" d="M1152 0H512a512 512 0 0 0 0 1024h640a512 512 0 0 0 0-1024z m0 960a448 448 0 1 1 448-448 448 448 0 0 1-448 448z"  />\n</svg>';
+const unlock = '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<svg t="1650612464266" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"><path d="M666.752 194.517333L617.386667 268.629333A128 128 0 0 0 384 341.333333l0.042667 85.333334h384a85.333333 85.333333 0 0 1 85.333333 85.333333v256a85.333333 85.333333 0 0 1-85.333333 85.333333H256a85.333333 85.333333 0 0 1-85.333333-85.333333v-256a85.333333 85.333333 0 0 1 85.333333-85.333333h42.666667V341.333333a213.333333 213.333333 0 0 1 368.085333-146.816z"></path></svg>\n';
+const volumeClose = '<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 22 22">\n    <path d="M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z"></path>\n    <path d="M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z"></path>\n</svg>';
+const volume = '<svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 22 22">\n    <path d="M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z"></path>\n    <path d="M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z"></path>\n</svg>';
+class Icons {
+  constructor(art) {
+    const icons = {
+      loading,
+      state,
+      play,
+      pause,
+      check,
+      volume,
+      volumeClose,
+      screenshot,
+      setting,
+      pip,
+      arrowLeft,
+      arrowRight,
+      playbackRate: playbackRate$1,
+      aspectRatio: aspectRatio$1,
+      config,
+      lock: lock$1,
+      flip: flip$1,
+      unlock,
+      fullscreenOff,
+      fullscreenOn,
+      fullscreenWebOff,
+      fullscreenWebOn,
+      switchOn,
+      switchOff,
+      error,
+      close,
+      airplay,
+      ...art.option.icons
+    };
+    for (const key in icons) {
+      def(this, key, {
+        get: () => getIcon(key, icons[key])
+      });
+    }
+  }
+}
+class Info extends Component {
+  constructor(art) {
+    super(art);
+    this.name = "info";
+    if (!isMobile) {
+      this.init();
+    }
+  }
+  init() {
+    const {
+      proxy,
+      constructor,
+      template: { $infoPanel, $infoClose, $video }
+    } = this.art;
+    proxy($infoClose, "click", () => {
+      this.show = false;
+    });
+    let timer = null;
+    const $types = queryAll("[data-video]", $infoPanel) || [];
+    this.art.on("destroy", () => clearTimeout(timer));
+    function loop() {
+      for (let index = 0; index < $types.length; index++) {
+        const item = $types[index];
+        const value = $video[item.dataset.video];
+        const textContent = typeof value === "number" ? value.toFixed(2) : value;
+        if (item.textContent !== textContent) {
+          item.textContent = textContent;
+        }
+      }
+      timer = setTimeout(loop, constructor.INFO_LOOP_TIME);
+    }
+    loop();
+  }
+}
+class Layer extends Component {
+  constructor(art) {
+    super(art);
+    const {
+      option,
+      template: { $layer }
+    } = art;
+    this.name = "layer";
+    this.$parent = $layer;
+    for (let index = 0; index < option.layers.length; index++) {
+      this.add(option.layers[index]);
+    }
+  }
+}
+class Loading extends Component {
+  constructor(art) {
+    super(art);
+    this.name = "loading";
+    append(art.template.$loading, art.icons.loading);
+  }
+}
+class Mask extends Component {
+  constructor(art) {
+    super(art);
+    this.name = "mask";
+    const { template, icons, events } = art;
+    const $state = append(template.$state, icons.state);
+    const $error = append(template.$state, icons.error);
+    setStyle($error, "display", "none");
+    art.on("destroy", () => {
+      setStyle($state, "display", "none");
+      setStyle($error, "display", null);
+    });
+    events.proxy(template.$state, "click", () => art.play());
+  }
+}
+class Notice {
+  constructor(art) {
+    this.art = art;
+    this.timer = null;
+    art.on("destroy", () => this.destroy());
+  }
+  destroy() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+  }
+  set show(msg) {
+    const {
+      constructor,
+      template: { $player, $noticeInner }
+    } = this.art;
+    if (msg) {
+      $noticeInner.textContent = msg instanceof Error ? msg.message.trim() : msg;
+      addClass($player, "art-notice-show");
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        $noticeInner.textContent = "";
+        removeClass($player, "art-notice-show");
+      }, constructor.NOTICE_TIME);
+    } else {
+      removeClass($player, "art-notice-show");
+    }
+  }
+  get show() {
+    const {
+      template: { $player }
+    } = this.art;
+    return $player.classList.contains("art-notice-show");
+  }
+}
+function airplayMix(art) {
+  const {
+    i18n,
+    notice,
+    proxy,
+    template: { $video }
+  } = art;
+  let available = true;
+  if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) {
+    proxy($video, "webkitplaybacktargetavailabilitychanged", (event) => {
+      switch (event.availability) {
+        case "available":
+          available = true;
+          break;
+        case "not-available":
+          available = false;
+          break;
+      }
+    });
+  } else {
+    available = false;
+  }
+  def(art, "airplay", {
+    value() {
+      if (available) {
+        $video.webkitShowPlaybackTargetPicker();
+        art.emit("airplay");
+      } else {
+        notice.show = i18n.get("AirPlay Not Available");
+      }
+    }
+  });
+}
+function aspectRatioMix(art) {
+  const {
+    i18n,
+    notice,
+    template: { $video, $player }
+  } = art;
+  def(art, "aspectRatio", {
+    get() {
+      return $player.dataset.aspectRatio || "default";
+    },
+    set(ratio) {
+      if (!ratio)
+        ratio = "default";
+      if (ratio === "default") {
+        setStyle($video, "width", null);
+        setStyle($video, "height", null);
+        setStyle($video, "margin", null);
+        delete $player.dataset.aspectRatio;
+      } else {
+        const ratioArray = ratio.split(":").map(Number);
+        const { clientWidth, clientHeight } = $player;
+        const playerRatio = clientWidth / clientHeight;
+        const setupRatio = ratioArray[0] / ratioArray[1];
+        if (playerRatio > setupRatio) {
+          setStyle($video, "width", `${setupRatio * clientHeight}px`);
+          setStyle($video, "height", "100%");
+          setStyle($video, "margin", "0 auto");
+        } else {
+          setStyle($video, "width", "100%");
+          setStyle($video, "height", `${clientWidth / setupRatio}px`);
+          setStyle($video, "margin", "auto 0");
+        }
+        $player.dataset.aspectRatio = ratio;
+      }
+      notice.show = `${i18n.get("Aspect Ratio")}: ${ratio === "default" ? i18n.get("Default") : ratio}`;
+      art.emit("aspectRatio", ratio);
+    }
+  });
+}
+function attrMix(art) {
+  const {
+    template: { $video }
+  } = art;
+  def(art, "attr", {
+    value(key, value) {
+      if (value === void 0)
+        return $video[key];
+      $video[key] = value;
+    }
+  });
+}
+function autoHeightMix(art) {
+  const {
+    template: { $container, $video }
+  } = art;
+  def(art, "autoHeight", {
+    value() {
+      const { clientWidth } = $container;
+      const { videoHeight, videoWidth } = $video;
+      const height = videoHeight * (clientWidth / videoWidth);
+      setStyle($container, "height", `${height}px`);
+      art.emit("autoHeight", height);
+    }
+  });
+}
+function autoSizeMix(art) {
+  const { $container, $player, $video } = art.template;
+  def(art, "autoSize", {
+    value() {
+      const { videoWidth, videoHeight } = $video;
+      const { width, height } = getRect($container);
+      const videoRatio = videoWidth / videoHeight;
+      const containerRatio = width / height;
+      if (containerRatio > videoRatio) {
+        const percentage = height * videoRatio / width * 100;
+        setStyle($player, "width", `${percentage}%`);
+        setStyle($player, "height", "100%");
+      } else {
+        const percentage = width / videoRatio / height * 100;
+        setStyle($player, "width", "100%");
+        setStyle($player, "height", `${percentage}%`);
+      }
+      art.emit("autoSize", {
+        width: art.width,
+        height: art.height
+      });
+    }
+  });
+}
+function cssVarMix(art) {
+  const { $player } = art.template;
+  def(art, "cssVar", {
+    value(key, value) {
+      if (value) {
+        return $player.style.setProperty(key, value);
+      } else {
+        return getComputedStyle($player).getPropertyValue(key);
+      }
+    }
+  });
+}
+function currentTimeMix(art) {
+  const { $video } = art.template;
+  def(art, "currentTime", {
+    get: () => $video.currentTime || 0,
+    set: (time2) => {
+      time2 = Number.parseFloat(time2);
+      if (Number.isNaN(time2))
+        return;
+      $video.currentTime = clamp(time2, 0, art.duration);
+    }
+  });
+}
+function durationMix(art) {
+  def(art, "duration", {
+    get: () => {
+      const { duration } = art.template.$video;
+      if (duration === Infinity)
+        return 0;
+      return duration || 0;
+    }
+  });
+}
+function eventInit(art) {
+  const {
+    i18n,
+    notice,
+    option,
+    constructor,
+    proxy,
+    template: { $player, $video, $poster }
+  } = art;
+  let reconnectTime = 0;
+  for (let index = 0; index < config$1.events.length; index++) {
+    proxy($video, config$1.events[index], (event) => {
+      art.emit(`video:${event.type}`, event);
+    });
+  }
+  art.on("video:canplay", () => {
+    reconnectTime = 0;
+    art.loading.show = false;
+  });
+  art.once("video:canplay", () => {
+    art.loading.show = false;
+    art.controls.show = true;
+    art.mask.show = true;
+    art.isReady = true;
+    art.emit("ready");
+  });
+  art.on("video:ended", () => {
+    if (option.loop) {
+      art.seek = 0;
+      art.play();
+      art.controls.show = false;
+      art.mask.show = false;
+    } else {
+      art.controls.show = true;
+      art.mask.show = true;
+    }
+  });
+  art.on("video:error", async (error2) => {
+    if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
+      await sleep(constructor.RECONNECT_SLEEP_TIME);
+      reconnectTime += 1;
+      art.url = option.url;
+      notice.show = `${i18n.get("Reconnect")}: ${reconnectTime}`;
+      art.emit("error", error2, reconnectTime);
+    } else {
+      art.mask.show = true;
+      art.loading.show = false;
+      art.controls.show = true;
+      addClass($player, "art-error");
+      await sleep(constructor.RECONNECT_SLEEP_TIME);
+      notice.show = i18n.get("Video Load Failed");
+    }
+  });
+  art.on("video:loadedmetadata", () => {
+    art.emit("resize");
+    if (isMobile) {
+      art.loading.show = false;
+      art.controls.show = true;
+      art.mask.show = true;
+    }
+  });
+  art.on("video:loadstart", () => {
+    art.loading.show = true;
+    art.mask.show = false;
+    art.controls.show = true;
+  });
+  art.on("video:pause", () => {
+    art.controls.show = true;
+    art.mask.show = true;
+  });
+  art.on("video:play", () => {
+    art.mask.show = false;
+    setStyle($poster, "display", "none");
+  });
+  art.on("video:playing", () => {
+    art.mask.show = false;
+  });
+  art.on("video:progress", () => {
+    if (art.playing) {
+      art.loading.show = false;
+    }
+  });
+  art.on("video:seeked", () => {
+    art.loading.show = false;
+    art.mask.show = true;
+  });
+  art.on("video:seeking", () => {
+    art.loading.show = true;
+    art.mask.show = false;
+  });
+  art.on("video:timeupdate", () => {
+    art.mask.show = false;
+  });
+  art.on("video:waiting", () => {
+    art.loading.show = true;
+    art.mask.show = false;
+  });
+}
+function flipMix(art) {
+  const {
+    template: { $player },
+    i18n,
+    notice
+  } = art;
+  def(art, "flip", {
+    get() {
+      return $player.dataset.flip || "normal";
+    },
+    set(flip2) {
+      if (!flip2)
+        flip2 = "normal";
+      if (flip2 === "normal") {
+        delete $player.dataset.flip;
+      } else {
+        $player.dataset.flip = flip2;
+      }
+      notice.show = `${i18n.get("Video Flip")}: ${i18n.get(capitalize(flip2))}`;
+      art.emit("flip", flip2);
+    }
+  });
+}
+const methodMap = [
+  [
+    "requestFullscreen",
+    "exitFullscreen",
+    "fullscreenElement",
+    "fullscreenEnabled",
+    "fullscreenchange",
+    "fullscreenerror"
+  ],
+  // New WebKit
+  [
+    "webkitRequestFullscreen",
+    "webkitExitFullscreen",
+    "webkitFullscreenElement",
+    "webkitFullscreenEnabled",
+    "webkitfullscreenchange",
+    "webkitfullscreenerror"
+  ],
+  // Old WebKit
+  [
+    "webkitRequestFullScreen",
+    "webkitCancelFullScreen",
+    "webkitCurrentFullScreenElement",
+    "webkitCancelFullScreen",
+    "webkitfullscreenchange",
+    "webkitfullscreenerror"
+  ],
+  [
+    "mozRequestFullScreen",
+    "mozCancelFullScreen",
+    "mozFullScreenElement",
+    "mozFullScreenEnabled",
+    "mozfullscreenchange",
+    "mozfullscreenerror"
+  ],
+  [
+    "msRequestFullscreen",
+    "msExitFullscreen",
+    "msFullscreenElement",
+    "msFullscreenEnabled",
+    "MSFullscreenChange",
+    "MSFullscreenError"
+  ]
+];
+const nativeAPI = (() => {
+  if (typeof document === "undefined") {
+    return false;
+  }
+  const unprefixedMethods = methodMap[0];
+  const returnValue = {};
+  for (const methodList of methodMap) {
+    const exitFullscreenMethod = methodList[1];
+    if (exitFullscreenMethod in document) {
+      for (const [index, method] of methodList.entries()) {
+        returnValue[unprefixedMethods[index]] = method;
+      }
+      return returnValue;
+    }
+  }
+  return false;
+})();
+const eventNameMap = {
+  change: nativeAPI.fullscreenchange,
+  error: nativeAPI.fullscreenerror
+};
+const screenfull = {
+  request(element = document.documentElement, options) {
+    return new Promise((resolve, reject) => {
+      const onFullScreenEntered = () => {
+        screenfull.off("change", onFullScreenEntered);
+        resolve();
+      };
+      screenfull.on("change", onFullScreenEntered);
+      const returnPromise = element[nativeAPI.requestFullscreen](options);
+      if (returnPromise instanceof Promise) {
+        returnPromise.then(onFullScreenEntered).catch(reject);
+      }
+    });
+  },
+  exit() {
+    return new Promise((resolve, reject) => {
+      if (!screenfull.isFullscreen) {
+        resolve();
+        return;
+      }
+      const onFullScreenExit = () => {
+        screenfull.off("change", onFullScreenExit);
+        resolve();
+      };
+      screenfull.on("change", onFullScreenExit);
+      const returnPromise = document[nativeAPI.exitFullscreen]();
+      if (returnPromise instanceof Promise) {
+        returnPromise.then(onFullScreenExit).catch(reject);
+      }
+    });
+  },
+  toggle(element, options) {
+    return screenfull.isFullscreen ? screenfull.exit() : screenfull.request(element, options);
+  },
+  onchange(callback) {
+    screenfull.on("change", callback);
+  },
+  onerror(callback) {
+    screenfull.on("error", callback);
+  },
+  on(event, callback) {
+    const eventName = eventNameMap[event];
+    if (eventName) {
+      document.addEventListener(eventName, callback, false);
+    }
+  },
+  off(event, callback) {
+    const eventName = eventNameMap[event];
+    if (eventName) {
+      document.removeEventListener(eventName, callback, false);
+    }
+  },
+  raw: nativeAPI
+};
+Object.defineProperties(screenfull, {
+  isFullscreen: {
+    get: () => Boolean(document[nativeAPI.fullscreenElement])
+  },
+  element: {
+    enumerable: true,
+    get: () => document[nativeAPI.fullscreenElement]
+  },
+  isEnabled: {
+    enumerable: true,
+    get: () => Boolean(document[nativeAPI.fullscreenEnabled])
+  }
+});
+function fullscreenMix(art) {
+  const {
+    i18n,
+    notice,
+    template: { $video, $player }
+  } = art;
+  const nativeScreenfull = (art2) => {
+    screenfull.on("change", () => {
+      art2.emit("fullscreen", screenfull.isFullscreen);
+      if (screenfull.isFullscreen) {
+        art2.state = "fullscreen";
+        addClass($player, "art-fullscreen");
+      } else {
+        removeClass($player, "art-fullscreen");
+      }
+      art2.emit("resize");
+    });
+    screenfull.on("error", (event) => {
+      art2.emit("fullscreenError", event);
+    });
+    def(art2, "fullscreen", {
+      get() {
+        return screenfull.isFullscreen;
+      },
+      async set(value) {
+        if (value) {
+          await screenfull.request($player);
+        } else {
+          await screenfull.exit();
+        }
+      }
+    });
+  };
+  const webkitScreenfull = (art2) => {
+    art2.on("document:webkitfullscreenchange", () => {
+      art2.emit("fullscreen", art2.fullscreen);
+      art2.emit("resize");
+    });
+    def(art2, "fullscreen", {
+      get() {
+        return document.fullscreenElement === $video;
+      },
+      set(value) {
+        if (value) {
+          art2.state = "fullscreen";
+          $video.webkitEnterFullscreen();
+        } else {
+          $video.webkitExitFullscreen();
+        }
+      }
+    });
+  };
+  art.once("video:loadedmetadata", () => {
+    if (screenfull.isEnabled) {
+      nativeScreenfull(art);
+    } else if ($video.webkitSupportsFullscreen) {
+      webkitScreenfull(art);
+    } else {
+      def(art, "fullscreen", {
+        get() {
+          return false;
+        },
+        set() {
+          notice.show = i18n.get("Fullscreen Not Supported");
+        }
+      });
+    }
+    def(art, "fullscreen", get(art, "fullscreen"));
+  });
+}
+function fullscreenWebMix(art) {
+  const {
+    constructor,
+    template: { $container, $player }
+  } = art;
+  let cssText = "";
+  def(art, "fullscreenWeb", {
+    get() {
+      return hasClass($player, "art-fullscreen-web");
+    },
+    set(value) {
+      if (value) {
+        cssText = $player.style.cssText;
+        if (constructor.FULLSCREEN_WEB_IN_BODY) {
+          append(document.body, $player);
+        }
+        art.state = "fullscreenWeb";
+        setStyle($player, "width", "100%");
+        setStyle($player, "height", "100%");
+        addClass($player, "art-fullscreen-web");
+        art.emit("fullscreenWeb", true);
+      } else {
+        if (constructor.FULLSCREEN_WEB_IN_BODY) {
+          append($container, $player);
+        }
+        if (cssText) {
+          $player.style.cssText = cssText;
+          cssText = "";
+        }
+        removeClass($player, "art-fullscreen-web");
+        art.emit("fullscreenWeb", false);
+      }
+      art.emit("resize");
+    }
+  });
+}
+function loadedMix(art) {
+  const { $video } = art.template;
+  def(art, "loaded", {
+    get: () => art.loadedTime / $video.duration
+  });
+  def(art, "loadedTime", {
+    get: () => {
+      return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0;
+    }
+  });
+}
+function miniMix(art) {
+  const {
+    icons,
+    proxy,
+    storage,
+    template: { $player, $video }
+  } = art;
+  let isDragging = false;
+  let lastPageX = 0;
+  let lastPageY = 0;
+  function hideMini() {
+    const { $mini } = art.template;
+    if ($mini) {
+      removeClass($player, "art-mini");
+      setStyle($mini, "display", "none");
+      $player.prepend($video);
+      art.emit("mini", false);
+    }
+  }
+  function initState($play, $pause) {
+    if (art.playing) {
+      setStyle($play, "display", `none`);
+      setStyle($pause, "display", `flex`);
+    } else {
+      setStyle($play, "display", `flex`);
+      setStyle($pause, "display", `none`);
+    }
+  }
+  function createMini() {
+    const { $mini } = art.template;
+    if ($mini) {
+      append($mini, $video);
+      return setStyle($mini, "display", "flex");
+    } else {
+      const $mini2 = createElement("div");
+      addClass($mini2, "art-mini-popup");
+      append(document.body, $mini2);
+      art.template.$mini = $mini2;
+      append($mini2, $video);
+      const $close = append($mini2, `<div class="art-mini-close"></div>`);
+      append($close, icons.close);
+      proxy($close, "click", hideMini);
+      const $state = append($mini2, `<div class="art-mini-state"></div>`);
+      const $play = append($state, icons.play);
+      const $pause = append($state, icons.pause);
+      proxy($play, "click", () => art.play());
+      proxy($pause, "click", () => art.pause());
+      initState($play, $pause);
+      art.on("video:playing", () => initState($play, $pause));
+      art.on("video:pause", () => initState($play, $pause));
+      art.on("video:timeupdate", () => initState($play, $pause));
+      proxy($mini2, "mousedown", (event) => {
+        isDragging = event.button === 0;
+        lastPageX = event.pageX;
+        lastPageY = event.pageY;
+      });
+      art.on("document:mousemove", (event) => {
+        if (isDragging) {
+          addClass($mini2, "art-mini-dragging");
+          const x = event.pageX - lastPageX;
+          const y = event.pageY - lastPageY;
+          setStyle($mini2, "transform", `translate(${x}px, ${y}px)`);
+        }
+      });
+      art.on("document:mouseup", () => {
+        if (isDragging) {
+          isDragging = false;
+          removeClass($mini2, "art-mini-dragging");
+          const rect = getRect($mini2);
+          storage.set("left", rect.left);
+          storage.set("top", rect.top);
+          setStyle($mini2, "left", `${rect.left}px`);
+          setStyle($mini2, "top", `${rect.top}px`);
+          setStyle($mini2, "transform", null);
+        }
+      });
+      return $mini2;
+    }
+  }
+  function initMini() {
+    const { $mini } = art.template;
+    const rect = getRect($mini);
+    const top = window.innerHeight - rect.height - 50;
+    const left = window.innerWidth - rect.width - 50;
+    storage.set("top", top);
+    storage.set("left", left);
+    setStyle($mini, "top", `${top}px`);
+    setStyle($mini, "left", `${left}px`);
+  }
+  def(art, "mini", {
+    get() {
+      return hasClass($player, "art-mini");
+    },
+    set(value) {
+      if (value) {
+        art.state = "mini";
+        addClass($player, "art-mini");
+        const $mini = createMini();
+        const top = storage.get("top");
+        const left = storage.get("left");
+        if (typeof top === "number" && typeof left === "number") {
+          setStyle($mini, "top", `${top}px`);
+          setStyle($mini, "left", `${left}px`);
+          if (!isInViewport($mini)) {
+            initMini();
+          }
+        } else {
+          initMini();
+        }
+        art.emit("mini", true);
+      } else {
+        hideMini();
+      }
+    }
+  });
+}
+function optionInit(art) {
+  const {
+    option,
+    storage,
+    template: { $video, $poster }
+  } = art;
+  for (const key in option.moreVideoAttr) {
+    art.attr(key, option.moreVideoAttr[key]);
+  }
+  if (option.muted) {
+    art.muted = option.muted;
+  }
+  if (option.volume) {
+    $video.volume = clamp(option.volume, 0, 1);
+  }
+  const volumeStorage = storage.get("volume");
+  if (typeof volumeStorage === "number") {
+    $video.volume = clamp(volumeStorage, 0, 1);
+  }
+  if (option.poster) {
+    setStyle($poster, "backgroundImage", `url(${option.poster})`);
+  }
+  if (option.autoplay) {
+    $video.autoplay = option.autoplay;
+  }
+  if (option.playsInline) {
+    $video.playsInline = true;
+    $video["webkit-playsinline"] = true;
+  }
+  if (option.theme) {
+    option.cssVar["--art-theme"] = option.theme;
+  }
+  for (const key in option.cssVar) {
+    art.cssVar(key, option.cssVar[key]);
+  }
+  art.url = option.url;
+}
+function pauseMix(art) {
+  const {
+    template: { $video },
+    i18n,
+    notice
+  } = art;
+  def(art, "pause", {
+    value() {
+      const result = $video.pause();
+      notice.show = i18n.get("Pause");
+      art.emit("pause");
+      return result;
+    }
+  });
+}
+function nativePip(art) {
+  const {
+    template: { $video },
+    proxy,
+    notice
+  } = art;
+  $video.disablePictureInPicture = false;
+  def(art, "pip", {
+    get() {
+      return document.pictureInPictureElement;
+    },
+    set(value) {
+      if (value) {
+        art.state = "pip";
+        $video.requestPictureInPicture().catch((err) => {
+          notice.show = err;
+          throw err;
+        });
+      } else {
+        document.exitPictureInPicture().catch((err) => {
+          notice.show = err;
+          throw err;
+        });
+      }
+    }
+  });
+  proxy($video, "enterpictureinpicture", () => {
+    art.emit("pip", true);
+  });
+  proxy($video, "leavepictureinpicture", () => {
+    art.emit("pip", false);
+  });
+}
+function webkitPip(art) {
+  const { $video } = art.template;
+  $video.webkitSetPresentationMode("inline");
+  def(art, "pip", {
+    get() {
+      return $video.webkitPresentationMode === "picture-in-picture";
+    },
+    set(value) {
+      if (value) {
+        art.state = "pip";
+        $video.webkitSetPresentationMode("picture-in-picture");
+        art.emit("pip", true);
+      } else {
+        $video.webkitSetPresentationMode("inline");
+        art.emit("pip", false);
+      }
+    }
+  });
+}
+function pipMix(art) {
+  const {
+    i18n,
+    notice,
+    template: { $video }
+  } = art;
+  if (document.pictureInPictureEnabled) {
+    nativePip(art);
+  } else if ($video.webkitSupportsPresentationMode) {
+    webkitPip(art);
+  } else {
+    def(art, "pip", {
+      get() {
+        return false;
+      },
+      set() {
+        notice.show = i18n.get("PIP Not Supported");
+      }
+    });
+  }
+}
+function playbackRateMix(art) {
+  const {
+    template: { $video },
+    i18n,
+    notice
+  } = art;
+  def(art, "playbackRate", {
+    get() {
+      return $video.playbackRate;
+    },
+    set(rate) {
+      if (rate) {
+        if (rate === $video.playbackRate)
+          return;
+        $video.playbackRate = rate;
+        notice.show = `${i18n.get("Rate")}: ${rate === 1 ? i18n.get("Normal") : `${rate}x`}`;
+      } else {
+        art.playbackRate = 1;
+      }
+    }
+  });
+}
+function playedMix(art) {
+  def(art, "played", {
+    get: () => art.currentTime / art.duration
+  });
+}
+function playingMix(art) {
+  const { $video } = art.template;
+  def(art, "playing", {
+    get: () => {
+      if (typeof $video.playing === "boolean")
+        return $video.playing;
+      return !!($video.currentTime > 0 && !$video.paused && !$video.ended && $video.readyState > 2);
+    }
+  });
+}
+function playMix(art) {
+  const {
+    i18n,
+    notice,
+    option,
+    constructor: { instances: instances2 },
+    template: { $video }
+  } = art;
+  def(art, "play", {
+    async value() {
+      const result = await $video.play();
+      notice.show = i18n.get("Play");
+      art.emit("play");
+      if (option.mutex) {
+        for (let index = 0; index < instances2.length; index++) {
+          const instance = instances2[index];
+          if (instance !== art) {
+            instance.pause();
+          }
+        }
+      }
+      return result;
+    }
+  });
+}
+function posterMix(art) {
+  const {
+    template: { $poster }
+  } = art;
+  def(art, "poster", {
+    get: () => {
+      try {
+        return $poster.style.backgroundImage.match(/"(.*)"/)[1];
+      } catch {
+        return "";
+      }
+    },
+    set(url) {
+      setStyle($poster, "backgroundImage", `url(${url})`);
+    }
+  });
+}
+function qualityMix(art) {
+  def(art, "quality", {
+    set(quality) {
+      const { controls, notice, i18n } = art;
+      const qualityDefault = quality.find((item) => item.default) || quality[0];
+      controls.update({
+        name: "quality",
+        position: "right",
+        index: 10,
+        style: {
+          marginRight: "10px"
+        },
+        html: qualityDefault?.html || "",
+        selector: quality,
+        async onSelect(item) {
+          await art.switchQuality(item.url);
+          notice.show = `${i18n.get("Switch Video")}: ${item.html}`;
+          return item.html;
+        }
+      });
+    }
+  });
+}
+function rectMix(art) {
+  def(art, "rect", {
+    get: () => {
+      return getRect(art.template.$player);
+    }
+  });
+  const keys = ["bottom", "height", "left", "right", "top", "width"];
+  for (let index = 0; index < keys.length; index++) {
+    const key = keys[index];
+    def(art, key, {
+      get: () => {
+        return art.rect[key];
+      }
+    });
+  }
+  def(art, "x", {
+    get: () => {
+      return art.left + window.pageXOffset;
+    }
+  });
+  def(art, "y", {
+    get: () => {
+      return art.top + window.pageYOffset;
+    }
+  });
+}
+function screenshotMix(art) {
+  const {
+    notice,
+    template: { $video }
+  } = art;
+  const $canvas = createElement("canvas");
+  def(art, "getDataURL", {
+    value: () => new Promise((resolve, reject) => {
+      try {
+        $canvas.width = $video.videoWidth;
+        $canvas.height = $video.videoHeight;
+        $canvas.getContext("2d").drawImage($video, 0, 0);
+        resolve($canvas.toDataURL("image/png"));
+      } catch (err) {
+        notice.show = err;
+        reject(err);
+      }
+    })
+  });
+  def(art, "getBlobUrl", {
+    value: () => new Promise((resolve, reject) => {
+      try {
+        $canvas.width = $video.videoWidth;
+        $canvas.height = $video.videoHeight;
+        $canvas.getContext("2d").drawImage($video, 0, 0);
+        $canvas.toBlob((blob) => {
+          resolve(URL.createObjectURL(blob));
+        });
+      } catch (err) {
+        notice.show = err;
+        reject(err);
+      }
+    })
+  });
+  def(art, "screenshot", {
+    value: async (name) => {
+      const dataUri = await art.getDataURL();
+      const fileName = name || `artplayer_${secondToTime($video.currentTime)}`;
+      download(dataUri, `${fileName}.png`);
+      art.emit("screenshot", dataUri);
+      return dataUri;
+    }
+  });
+}
+function seekMix(art) {
+  const { notice } = art;
+  def(art, "seek", {
+    set(time2) {
+      art.currentTime = time2;
+      if (art.duration) {
+        notice.show = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`;
+      }
+      art.emit("seek", art.currentTime, time2);
+    }
+  });
+  def(art, "forward", {
+    set(time2) {
+      art.seek = art.currentTime + time2;
+    }
+  });
+  def(art, "backward", {
+    set(time2) {
+      art.seek = art.currentTime - time2;
+    }
+  });
+}
+function stateMix(art) {
+  const states = ["mini", "pip", "fullscreen", "fullscreenWeb"];
+  def(art, "state", {
+    get: () => states.find((name) => art[name]) || "standard",
+    set(name) {
+      for (let index = 0; index < states.length; index++) {
+        const prop = states[index];
+        if (prop !== name && art[prop]) {
+          art[prop] = false;
+        }
+      }
+    }
+  });
+}
+function subtitleOffsetMix(art) {
+  const { notice, i18n, template } = art;
+  def(art, "subtitleOffset", {
+    get() {
+      return template.$track?.offset || 0;
+    },
+    set(value) {
+      const { cues } = art.subtitle;
+      if (!template.$track || cues.length === 0)
+        return;
+      const offset = clamp(value, -10, 10);
+      template.$track.offset = offset;
+      for (let index = 0; index < cues.length; index++) {
+        const cue = cues[index];
+        cue.originalStartTime = cue.originalStartTime ?? cue.startTime;
+        cue.originalEndTime = cue.originalEndTime ?? cue.endTime;
+        cue.startTime = clamp(cue.originalStartTime + offset, 0, art.duration);
+        cue.endTime = clamp(cue.originalEndTime + offset, 0, art.duration);
+      }
+      art.subtitle.update();
+      notice.show = `${i18n.get("Subtitle Offset")}: ${value}s`;
+      art.emit("subtitleOffset", value);
+    }
+  });
+}
+function switchMix(art) {
+  function switchUrl(url, currentTime) {
+    return new Promise((resolve, reject) => {
+      if (url === art.url) {
+        resolve();
+        return;
+      }
+      const { playing, aspectRatio: aspectRatio2, playbackRate: playbackRate2 } = art;
+      art.pause();
+      art.url = url;
+      art.notice.show = "";
+      const handlers = {};
+      handlers.error = (error2) => {
+        art.off("video:canplay", handlers.canplay);
+        art.off("video:loadedmetadata", handlers.metadata);
+        reject(error2);
+      };
+      handlers.metadata = () => {
+        art.currentTime = currentTime;
+      };
+      handlers.canplay = async () => {
+        art.off("video:error", handlers.error);
+        art.playbackRate = playbackRate2;
+        art.aspectRatio = aspectRatio2;
+        if (playing) {
+          await art.play();
+        }
+        art.notice.show = "";
+        resolve();
+      };
+      art.once("video:error", handlers.error);
+      art.once("video:loadedmetadata", handlers.metadata);
+      art.once("video:canplay", handlers.canplay);
+    });
+  }
+  def(art, "switchQuality", {
+    value: (url) => {
+      return switchUrl(url, art.currentTime);
+    }
+  });
+  def(art, "switchUrl", {
+    value: (url) => {
+      return switchUrl(url, 0);
+    }
+  });
+  def(art, "switch", {
+    set: art.switchUrl
+  });
+}
+function themeMix(art) {
+  def(art, "theme", {
+    get() {
+      return art.cssVar("--art-theme");
+    },
+    set(theme) {
+      art.cssVar("--art-theme", theme);
+    }
+  });
+}
+function thumbnailsMix(art) {
+  const {
+    option,
+    template: { $progress, $video }
+  } = art;
+  let timer = null;
+  let loding = false;
+  let image = null;
+  function reset() {
+    clearTimeout(timer);
+    timer = null;
+    loding = false;
+    image = null;
+  }
+  function showThumbnails(posWidth) {
+    const $thumbnails = art.controls?.thumbnails;
+    if (!$thumbnails)
+      return;
+    const { number, column, width, height, scale } = option.thumbnails;
+    const width2 = width * scale || image.naturalWidth / column;
+    const height2 = height * scale || width2 / ($video.videoWidth / $video.videoHeight);
+    const perWidth = $progress.clientWidth / number;
+    const perIndex = Math.floor(posWidth / perWidth);
+    const yIndex = Math.ceil(perIndex / column) - 1;
+    const xIndex = perIndex % column || column - 1;
+    setStyle($thumbnails, "backgroundImage", `url(${image.src})`);
+    setStyle($thumbnails, "height", `${height2}px`);
+    setStyle($thumbnails, "width", `${width2}px`);
+    setStyle($thumbnails, "backgroundPosition", `-${xIndex * width2}px -${yIndex * height2}px`);
+    if (posWidth <= width2 / 2) {
+      setStyle($thumbnails, "left", 0);
+    } else if (posWidth > $progress.clientWidth - width2 / 2) {
+      setStyle($thumbnails, "left", `${$progress.clientWidth - width2}px`);
+    } else {
+      setStyle($thumbnails, "left", `${posWidth - width2 / 2}px`);
+    }
+  }
+  art.on("setBar", async (type, percentage, event) => {
+    const $thumbnails = art.controls?.thumbnails;
+    const { url, scale } = option.thumbnails;
+    if (!$thumbnails || !url)
+      return;
+    const isMobileDragging = type === "played" && event && isMobile;
+    if (type === "hover" || isMobileDragging) {
+      if (!image && !loding) {
+        loding = true;
+        image = await loadImg(url, scale);
+        loding = false;
+      }
+      if (!image)
+        return;
+      const width = $progress.clientWidth * percentage;
+      if (width > 0 && width < $progress.clientWidth) {
+        showThumbnails(width);
+      }
+    }
+  });
+  def(art, "thumbnails", {
+    get() {
+      return art.option.thumbnails;
+    },
+    set(thumbnails) {
+      if (thumbnails.url && !art.option.isLive) {
+        art.option.thumbnails = thumbnails;
+        reset();
+      }
+    }
+  });
+}
+function toggleMix(art) {
+  def(art, "toggle", {
+    value() {
+      if (art.playing) {
+        return art.pause();
+      } else {
+        return art.play();
+      }
+    }
+  });
+}
+function typeMix(art) {
+  def(art, "type", {
+    get() {
+      return art.option.type;
+    },
+    set(type) {
+      art.option.type = type;
+    }
+  });
+}
+function urlMix(art) {
+  const {
+    option,
+    template: { $video }
+  } = art;
+  def(art, "url", {
+    get() {
+      return $video.src;
+    },
+    async set(newUrl) {
+      if (newUrl) {
+        const oldUrl = art.url;
+        const typeName = option.type || getExt(newUrl);
+        const typeCallback = option.customType[typeName];
+        if (typeName && typeCallback) {
+          await sleep();
+          art.loading.show = true;
+          typeCallback.call(art, $video, newUrl, art);
+        } else {
+          URL.revokeObjectURL(oldUrl);
+          $video.src = newUrl;
+        }
+        if (oldUrl !== art.url) {
+          art.option.url = newUrl;
+          if (art.isReady && oldUrl) {
+            art.once("video:canplay", () => {
+              art.emit("restart", newUrl);
+            });
+          }
+        }
+      } else {
+        await sleep();
+        art.loading.show = true;
+      }
+    }
+  });
+}
+function volumeMix(art) {
+  const {
+    template: { $video },
+    i18n,
+    notice,
+    storage
+  } = art;
+  def(art, "volume", {
+    get: () => $video.volume || 0,
+    set: (percentage) => {
+      $video.volume = clamp(percentage, 0, 1);
+      notice.show = `${i18n.get("Volume")}: ${Number.parseInt($video.volume * 100, 10)}`;
+      if ($video.volume !== 0) {
+        storage.set("volume", $video.volume);
+      }
+    }
+  });
+  def(art, "muted", {
+    get: () => $video.muted,
+    set: (muted) => {
+      $video.muted = muted;
+      art.emit("muted", muted);
+    }
+  });
+}
+class Player {
+  constructor(art) {
+    urlMix(art);
+    attrMix(art);
+    playMix(art);
+    pauseMix(art);
+    toggleMix(art);
+    seekMix(art);
+    volumeMix(art);
+    currentTimeMix(art);
+    durationMix(art);
+    switchMix(art);
+    playbackRateMix(art);
+    aspectRatioMix(art);
+    screenshotMix(art);
+    fullscreenMix(art);
+    fullscreenWebMix(art);
+    pipMix(art);
+    loadedMix(art);
+    playedMix(art);
+    playingMix(art);
+    autoSizeMix(art);
+    rectMix(art);
+    flipMix(art);
+    miniMix(art);
+    posterMix(art);
+    autoHeightMix(art);
+    cssVarMix(art);
+    themeMix(art);
+    typeMix(art);
+    stateMix(art);
+    subtitleOffsetMix(art);
+    airplayMix(art);
+    qualityMix(art);
+    thumbnailsMix(art);
+    eventInit(art);
+    optionInit(art);
+  }
+}
+function autoOrientation(art) {
+  const {
+    notice,
+    constructor,
+    template: { $player, $video }
+  } = art;
+  const WEB_CLASS = "art-auto-orientation";
+  const FS_CLASS = "art-auto-orientation-fullscreen";
+  let fsLocked = false;
+  function applyWebRotate() {
+    const viewWidth = document.documentElement.clientWidth;
+    const viewHeight = document.documentElement.clientHeight;
+    setStyle($player, "width", `${viewHeight}px`);
+    setStyle($player, "height", `${viewWidth}px`);
+    setStyle($player, "transform-origin", "0 0");
+    setStyle($player, "transform", `rotate(90deg) translate(0, -${viewWidth}px)`);
+    addClass($player, WEB_CLASS);
+    art.isRotate = true;
+    art.emit("resize");
+  }
+  function clearWebRotate() {
+    setStyle($player, "width", "");
+    setStyle($player, "height", "");
+    setStyle($player, "transform-origin", "");
+    setStyle($player, "transform", "");
+    removeClass($player, WEB_CLASS);
+    art.isRotate = false;
+    art.emit("resize");
+  }
+  function needRotate() {
+    const { videoWidth, videoHeight } = $video;
+    const vw = document.documentElement.clientWidth;
+    const vh = document.documentElement.clientHeight;
+    return videoWidth > videoHeight && vw < vh || videoWidth < videoHeight && vw > vh;
+  }
+  art.on("fullscreenWeb", (state2) => {
+    if (state2) {
+      if (needRotate()) {
+        const delay = Number(constructor.AUTO_ORIENTATION_TIME ?? 0);
+        setTimeout(() => {
+          if (art.fullscreenWeb && !hasClass($player, WEB_CLASS)) {
+            applyWebRotate();
+          }
+        }, delay);
+      }
+    } else {
+      if (hasClass($player, WEB_CLASS))
+        clearWebRotate();
+    }
+  });
+  art.on("fullscreen", async (state2) => {
+    const canLock = !!screen?.orientation?.lock;
+    if (state2) {
+      if (canLock && needRotate()) {
+        try {
+          const last = screen.orientation.type;
+          const opposite = last.startsWith("portrait") ? "landscape" : "portrait";
+          await screen.orientation.lock(opposite);
+          fsLocked = true;
+          addClass($player, FS_CLASS);
+        } catch (err) {
+          fsLocked = false;
+          notice.show = err;
+        }
+      }
+    } else {
+      if (hasClass($player, FS_CLASS)) {
+        removeClass($player, FS_CLASS);
+      }
+      if (canLock && fsLocked) {
+        try {
+          screen.orientation.unlock();
+        } catch {
+        }
+        fsLocked = false;
+      }
+    }
+  });
+  return {
+    name: "autoOrientation",
+    get state() {
+      return hasClass($player, WEB_CLASS);
+    }
+  };
+}
+function autoPlayback(art) {
+  const {
+    i18n,
+    icons,
+    storage,
+    constructor,
+    proxy,
+    template: { $poster }
+  } = art;
+  const $autoPlayback = art.layers.add({
+    name: "auto-playback",
+    html: `
+            <div class="art-auto-playback-close"></div>
+            <div class="art-auto-playback-last"></div>
+            <div class="art-auto-playback-jump"></div>
+        `
+  });
+  const $last = query(".art-auto-playback-last", $autoPlayback);
+  const $jump = query(".art-auto-playback-jump", $autoPlayback);
+  const $close = query(".art-auto-playback-close", $autoPlayback);
+  append($close, icons.close);
+  let timer = null;
+  art.on("video:timeupdate", () => {
+    if (art.playing) {
+      const times = storage.get("times") || {};
+      const keys = Object.keys(times);
+      if (keys.length > constructor.AUTO_PLAYBACK_MAX) {
+        delete times[keys[0]];
+      }
+      times[art.option.id || art.option.url] = art.currentTime;
+      storage.set("times", times);
+    }
+  });
+  function init() {
+    const times = storage.get("times") || {};
+    const currentTime = times[art.option.id || art.option.url];
+    clearTimeout(timer);
+    setStyle($autoPlayback, "display", "none");
+    if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
+      setStyle($autoPlayback, "display", "flex");
+      $last.textContent = `${i18n.get("Last Seen")} ${secondToTime(currentTime)}`;
+      $jump.textContent = i18n.get("Jump Play");
+      proxy($close, "click", () => {
+        setStyle($autoPlayback, "display", "none");
+      });
+      proxy($jump, "click", () => {
+        art.seek = currentTime;
+        art.play();
+        setStyle($poster, "display", "none");
+        setStyle($autoPlayback, "display", "none");
+      });
+      art.once("video:timeupdate", () => {
+        timer = setTimeout(() => {
+          setStyle($autoPlayback, "display", "none");
+        }, constructor.AUTO_PLAYBACK_TIMEOUT);
+      });
+    }
+  }
+  art.on("ready", init);
+  art.on("restart", init);
+  return {
+    name: "auto-playback",
+    get times() {
+      return storage.get("times") || {};
+    },
+    clear() {
+      return storage.del("times");
+    },
+    delete(id2) {
+      const times = storage.get("times") || {};
+      delete times[id2];
+      storage.set("times", times);
+      return times;
+    }
+  };
+}
+function fastForward(art) {
+  const {
+    constructor,
+    proxy,
+    template: { $player, $video }
+  } = art;
+  let timer = null;
+  let isPress = false;
+  let lastPlaybackRate = 1;
+  const onStart = (event) => {
+    if (event.touches.length === 1 && art.playing && !art.isLock) {
+      timer = setTimeout(() => {
+        isPress = true;
+        lastPlaybackRate = art.playbackRate;
+        art.playbackRate = constructor.FAST_FORWARD_VALUE;
+        addClass($player, "art-fast-forward");
+      }, constructor.FAST_FORWARD_TIME);
+    }
+  };
+  const onStop = () => {
+    clearTimeout(timer);
+    if (isPress) {
+      isPress = false;
+      art.playbackRate = lastPlaybackRate;
+      removeClass($player, "art-fast-forward");
+    }
+  };
+  proxy($video, "touchstart", onStart);
+  art.on("document:touchmove", onStop);
+  art.on("document:touchend", onStop);
+  return {
+    name: "fastForward",
+    get state() {
+      return hasClass($player, "art-fast-forward");
+    }
+  };
+}
+function lock(art) {
+  const {
+    layers,
+    icons,
+    template: { $player }
+  } = art;
+  function getState() {
+    return hasClass($player, "art-lock");
+  }
+  function setLock() {
+    addClass($player, "art-lock");
+    art.isLock = true;
+    art.emit("lock", true);
+  }
+  function setUnlock() {
+    removeClass($player, "art-lock");
+    art.isLock = false;
+    art.emit("lock", false);
+  }
+  layers.add({
+    name: "lock",
+    mounted($el) {
+      const $lock = append($el, icons.lock);
+      const $unlock = append($el, icons.unlock);
+      setStyle($lock, "display", "none");
+      art.on("lock", (state2) => {
+        if (state2) {
+          setStyle($lock, "display", "inline-flex");
+          setStyle($unlock, "display", "none");
+        } else {
+          setStyle($lock, "display", "none");
+          setStyle($unlock, "display", "inline-flex");
+        }
+      });
+    },
+    click() {
+      if (getState()) {
+        setUnlock();
+      } else {
+        setLock();
+      }
+    }
+  });
+  return {
+    name: "lock",
+    get state() {
+      return getState();
+    },
+    set state(value) {
+      if (value) {
+        setLock();
+      } else {
+        setUnlock();
+      }
+    }
+  };
+}
+function miniProgressBar(art) {
+  art.on("control", (state2) => {
+    if (state2) {
+      removeClass(art.template.$player, "art-mini-progress-bar");
+    } else {
+      addClass(art.template.$player, "art-mini-progress-bar");
+    }
+  });
+  return { name: "mini-progress-bar" };
+}
+class Plugins {
+  constructor(art) {
+    this.art = art;
+    this.id = 0;
+    const { option } = art;
+    if (option.miniProgressBar && !option.isLive) {
+      this.add(miniProgressBar);
+    }
+    if (option.lock && isMobile) {
+      this.add(lock);
+    }
+    if (option.autoPlayback && !option.isLive) {
+      this.add(autoPlayback);
+    }
+    if (option.autoOrientation && isMobile) {
+      this.add(autoOrientation);
+    }
+    if (option.fastForward && isMobile && !option.isLive) {
+      this.add(fastForward);
+    }
+    for (let index = 0; index < option.plugins.length; index++) {
+      this.add(option.plugins[index]);
+    }
+  }
+  add(plugin) {
+    this.id += 1;
+    const result = plugin.call(this.art, this.art);
+    if (result instanceof Promise) {
+      return result.then((res) => this.next(plugin, res));
+    } else {
+      return this.next(plugin, result);
+    }
+  }
+  next(plugin, result) {
+    const pluginName = result && result.name || plugin.name || `plugin${this.id}`;
+    errorHandle(!has(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
+    def(this, pluginName, {
+      value: result
+    });
+    return this;
+  }
+}
+function aspectRatio(art) {
+  const {
+    i18n,
+    icons,
+    constructor: { SETTING_ITEM_WIDTH, ASPECT_RATIO }
+  } = art;
+  function getI18n(value) {
+    return value === "default" ? i18n.get("Default") : value;
+  }
+  function update() {
+    const target = art.setting.find(`aspect-ratio-${art.aspectRatio}`);
+    art.setting.check(target);
+  }
+  return {
+    width: SETTING_ITEM_WIDTH,
+    name: "aspect-ratio",
+    html: i18n.get("Aspect Ratio"),
+    icon: icons.aspectRatio,
+    tooltip: getI18n(art.aspectRatio),
+    selector: ASPECT_RATIO.map((item) => {
+      return {
+        value: item,
+        name: `aspect-ratio-${item}`,
+        default: item === art.aspectRatio,
+        html: getI18n(item)
+      };
+    }),
+    onSelect(item) {
+      art.aspectRatio = item.value;
+      return item.html;
+    },
+    mounted: () => {
+      update();
+      art.on("aspectRatio", () => update());
+    }
+  };
+}
+function flip(art) {
+  const {
+    i18n,
+    icons,
+    constructor: { SETTING_ITEM_WIDTH, FLIP }
+  } = art;
+  function getI18n(value) {
+    return i18n.get(capitalize(value));
+  }
+  function update() {
+    const target = art.setting.find(`flip-${art.flip}`);
+    art.setting.check(target);
+  }
+  return {
+    width: SETTING_ITEM_WIDTH,
+    name: "flip",
+    html: i18n.get("Video Flip"),
+    tooltip: getI18n(art.flip),
+    icon: icons.flip,
+    selector: FLIP.map((item) => {
+      return {
+        value: item,
+        name: `flip-${item}`,
+        default: item === art.flip,
+        html: getI18n(item)
+      };
+    }),
+    onSelect(item) {
+      art.flip = item.value;
+      return item.html;
+    },
+    mounted: () => {
+      update();
+      art.on("flip", () => update());
+    }
+  };
+}
+function playbackRate(art) {
+  const {
+    i18n,
+    icons,
+    constructor: { SETTING_ITEM_WIDTH, PLAYBACK_RATE }
+  } = art;
+  function getI18n(value) {
+    return value === 1 ? i18n.get("Normal") : value.toFixed(1);
+  }
+  function update() {
+    const target = art.setting.find(`playback-rate-${art.playbackRate}`);
+    art.setting.check(target);
+  }
+  return {
+    width: SETTING_ITEM_WIDTH,
+    name: "playback-rate",
+    html: i18n.get("Play Speed"),
+    tooltip: getI18n(art.playbackRate),
+    icon: icons.playbackRate,
+    selector: PLAYBACK_RATE.map((item) => {
+      return {
+        value: item,
+        name: `playback-rate-${item}`,
+        default: item === art.playbackRate,
+        html: getI18n(item)
+      };
+    }),
+    onSelect(item) {
+      art.playbackRate = item.value;
+      return item.html;
+    },
+    mounted: () => {
+      update();
+      art.on("video:ratechange", () => update());
+    }
+  };
+}
+function subtitleOffset(art) {
+  const { i18n, icons, constructor } = art;
+  return {
+    width: constructor.SETTING_ITEM_WIDTH,
+    name: "subtitle-offset",
+    html: i18n.get("Subtitle Offset"),
+    icon: icons.subtitle,
+    tooltip: "0s",
+    range: [0, -10, 10, 0.1],
+    onChange(item) {
+      art.subtitleOffset = item.range[0];
+      return `${item.range[0]}s`;
+    },
+    mounted: (_, item) => {
+      art.on("subtitleOffset", (value) => {
+        item.$range.value = value;
+        item.tooltip = `${value}s`;
+      });
+    }
+  };
+}
+class Setting extends Component {
+  constructor(art) {
+    super(art);
+    const {
+      option,
+      controls,
+      template: { $setting }
+    } = art;
+    this.name = "setting";
+    this.$parent = $setting;
+    this.id = 0;
+    this.active = null;
+    this.cache = /* @__PURE__ */ new Map();
+    this.option = [...this.builtin, ...option.settings];
+    if (option.setting) {
+      this.format();
+      this.render();
+      art.on("blur", () => {
+        if (this.show) {
+          this.show = false;
+          this.render();
+        }
+      });
+      art.on("focus", (event) => {
+        const isControl = includeFromEvent(event, controls.setting);
+        const isSetting = includeFromEvent(event, this.$parent);
+        if (this.show && !isControl && !isSetting) {
+          this.show = false;
+          this.render();
+        }
+      });
+      art.on("resize", () => this.resize());
+    }
+  }
+  get builtin() {
+    const result = [];
+    const { option } = this.art;
+    if (option.playbackRate) {
+      result.push(playbackRate(this.art));
+    }
+    if (option.aspectRatio) {
+      result.push(aspectRatio(this.art));
+    }
+    if (option.flip) {
+      result.push(flip(this.art));
+    }
+    if (option.subtitleOffset) {
+      result.push(subtitleOffset(this.art));
+    }
+    return result;
+  }
+  traverse(callback, option = this.option) {
+    for (let index = 0; index < option.length; index++) {
+      const item = option[index];
+      callback(item);
+      if (item.selector?.length) {
+        this.traverse(callback, item.selector);
+      }
+    }
+  }
+  check(target) {
+    if (!target) {
+      return;
+    }
+    target.$parent.tooltip = target.html;
+    this.traverse((item) => {
+      item.default = item === target;
+      if (item.default && item.$item) {
+        inverseClass(item.$item, "art-current");
+      }
+    }, target.$option);
+    this.render(target.$parents);
+  }
+  format(option = this.option, parent, parents, names = []) {
+    for (let index = 0; index < option.length; index++) {
+      const item = option[index];
+      if (item?.name) {
+        errorHandle(!names.includes(item.name), `The [${item.name}] already exists in [setting]`);
+        names.push(item.name);
+      } else {
+        item.name = `setting-${this.id++}`;
+      }
+      if (!item.$formatted) {
+        def(item, "$parent", {
+          get: () => parent
+        });
+        def(item, "$parents", {
+          get: () => parents
+        });
+        def(item, "$option", {
+          get: () => option
+        });
+        const $events = [];
+        def(item, "$events", {
+          get: () => $events
+        });
+        def(item, "$formatted", {
+          get: () => true
+        });
+      }
+      this.format(item.selector || [], item, option, names);
+    }
+    this.option = option;
+  }
+  find(name = "") {
+    let result = null;
+    this.traverse((item) => {
+      if (item.name === name) {
+        result = item;
+      }
+    });
+    return result;
+  }
+  resize() {
+    const {
+      controls,
+      constructor: { SETTING_WIDTH, SETTING_ITEM_HEIGHT },
+      template: { $player, $setting }
+    } = this.art;
+    if (controls.setting && this.show) {
+      const settingWidth = this.active[0]?.$parent?.width || SETTING_WIDTH;
+      const { left: controlLeft, width: controlWidth } = getRect(controls.setting);
+      const { left: playerLeft, width: playerWidth } = getRect($player);
+      const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
+      const settingHeight = this.active === this.option ? this.active.length * SETTING_ITEM_HEIGHT : (this.active.length + 1) * SETTING_ITEM_HEIGHT;
+      setStyle($setting, "height", `${settingHeight}px`);
+      setStyle($setting, "width", `${settingWidth}px`);
+      if (this.art.isRotate || isMobile)
+        return;
+      if (settingLeft + settingWidth > playerWidth) {
+        setStyle($setting, "left", null);
+        setStyle($setting, "right", null);
+      } else {
+        setStyle($setting, "left", `${settingLeft}px`);
+        setStyle($setting, "right", "auto");
+      }
+    }
+  }
+  inactivate(item) {
+    for (let index = 0; index < item.$events.length; index++) {
+      this.art.events.remove(item.$events[index]);
+    }
+    item.$events.length = 0;
+  }
+  remove(name) {
+    const item = this.find(name);
+    errorHandle(item, `Can't find [${name}] in the [setting]`);
+    const index = item.$option.indexOf(item);
+    item.$option.splice(index, 1);
+    this.inactivate(item);
+    if (item.$item)
+      remove(item.$item);
+    this.render();
+  }
+  update(target) {
+    const item = this.find(target.name);
+    if (item) {
+      this.inactivate(item);
+      Object.assign(item, target);
+      this.format();
+      this.createItem(item, true);
+      this.render();
+      return item;
+    } else {
+      return this.add(target);
+    }
+  }
+  add(item, option = this.option) {
+    option.push(item);
+    this.format();
+    this.createItem(item);
+    this.render();
+    return item;
+  }
+  createHeader(item) {
+    if (!this.cache.has(item.$option))
+      return;
+    const $panel = this.cache.get(item.$option);
+    const {
+      proxy,
+      icons: { arrowLeft: arrowLeft2 },
+      constructor: { SETTING_ITEM_HEIGHT }
+    } = this.art;
+    const $item = createElement("div");
+    setStyle($item, "height", `${SETTING_ITEM_HEIGHT}px`);
+    addClass($item, "art-setting-item");
+    addClass($item, "art-setting-item-back");
+    const $left = append($item, '<div class="art-setting-item-left"></div>');
+    const $icon = createElement("div");
+    addClass($icon, "art-setting-item-left-icon");
+    append($icon, arrowLeft2);
+    append($left, $icon);
+    append($left, item.$parent.html);
+    const event = proxy($item, "click", () => this.render(item.$parents));
+    item.$parent.$events.push(event);
+    append($panel, $item);
+  }
+  createItem(item, isUpdate = false) {
+    if (!this.cache.has(item.$option))
+      return;
+    const $panel = this.cache.get(item.$option);
+    const oldItem = item.$item;
+    let type = "selector";
+    if (has(item, "switch")) {
+      type = "switch";
+    }
+    if (has(item, "range")) {
+      type = "range";
+    }
+    if (has(item, "onClick")) {
+      type = "button";
+    }
+    const { icons, proxy, constructor } = this.art;
+    const $item = createElement("div");
+    addClass($item, "art-setting-item");
+    setStyle($item, "height", `${constructor.SETTING_ITEM_HEIGHT}px`);
+    $item.dataset.name = item.name || "";
+    $item.dataset.value = item.value || "";
+    const $left = append($item, '<div class="art-setting-item-left"></div>');
+    const $right = append($item, '<div class="art-setting-item-right"></div>');
+    const $icon = createElement("div");
+    addClass($icon, "art-setting-item-left-icon");
+    switch (type) {
+      case "button":
+      case "switch":
+      case "range":
+        append($icon, item.icon || icons.config);
+        break;
+      case "selector":
+        if (item.selector?.length) {
+          append($icon, item.icon || icons.config);
+        } else {
+          append($icon, icons.check);
+        }
+        break;
+    }
+    append($left, $icon);
+    def(item, "$icon", {
+      configurable: true,
+      get: () => $icon
+    });
+    def(item, "icon", {
+      configurable: true,
+      get() {
+        return $icon.innerHTML;
+      },
+      set(value) {
+        $icon.innerHTML = "";
+        append($icon, value);
+      }
+    });
+    const $html = createElement("div");
+    addClass($html, "art-setting-item-left-text");
+    append($html, item.html || "");
+    append($left, $html);
+    def(item, "$html", {
+      configurable: true,
+      get: () => $html
+    });
+    def(item, "html", {
+      configurable: true,
+      get() {
+        return $html.innerHTML;
+      },
+      set(value) {
+        $html.innerHTML = "";
+        append($html, value);
+      }
+    });
+    const $tooltip = createElement("div");
+    addClass($tooltip, "art-setting-item-right-tooltip");
+    append($tooltip, item.tooltip || "");
+    append($right, $tooltip);
+    def(item, "$tooltip", {
+      configurable: true,
+      get: () => $tooltip
+    });
+    def(item, "tooltip", {
+      configurable: true,
+      get() {
+        return $tooltip.innerHTML;
+      },
+      set(value) {
+        $tooltip.innerHTML = "";
+        append($tooltip, value);
+      }
+    });
+    switch (type) {
+      case "switch": {
+        const $switch = createElement("div");
+        addClass($switch, "art-setting-item-right-icon");
+        const $switchOn = append($switch, icons.switchOn);
+        const $switchOff = append($switch, icons.switchOff);
+        setStyle(item.switch ? $switchOff : $switchOn, "display", "none");
+        append($right, $switch);
+        def(item, "$switch", {
+          configurable: true,
+          get: () => $switch
+        });
+        let $switchValue = item.switch;
+        def(item, "switch", {
+          configurable: true,
+          get: () => $switchValue,
+          set(value) {
+            $switchValue = value;
+            if (value) {
+              setStyle($switchOff, "display", "none");
+              setStyle($switchOn, "display", null);
+            } else {
+              setStyle($switchOff, "display", null);
+              setStyle($switchOn, "display", "none");
+            }
+          }
+        });
+        break;
+      }
+      case "range":
+        {
+          const $state = createElement("div");
+          addClass($state, "art-setting-item-right-icon");
+          const $range = append($state, '<input type="range">');
+          $range.value = item.range[0];
+          $range.min = item.range[1];
+          $range.max = item.range[2];
+          $range.step = item.range[3];
+          addClass($range, "art-setting-range");
+          append($right, $state);
+          def(item, "$range", {
+            configurable: true,
+            get: () => $range
+          });
+          let $rangeValue = [...item.range];
+          def(item, "range", {
+            configurable: true,
+            get: () => $rangeValue,
+            set(value) {
+              $rangeValue = [...value];
+              $range.value = value[0];
+              $range.min = value[1];
+              $range.max = value[2];
+              $range.step = value[3];
+            }
+          });
+        }
+        break;
+      case "selector":
+        if (item.selector?.length) {
+          const $state = createElement("div");
+          addClass($state, "art-setting-item-right-icon");
+          append($state, icons.arrowRight);
+          append($right, $state);
+        }
+        break;
+    }
+    switch (type) {
+      case "switch": {
+        if (item.onSwitch) {
+          const event = proxy($item, "click", async (event2) => {
+            item.switch = await item.onSwitch.call(this.art, item, $item, event2);
+          });
+          item.$events.push(event);
+        }
+        break;
+      }
+      case "range": {
+        if (item.$range) {
+          if (item.onRange) {
+            const event = proxy(item.$range, "change", async (event2) => {
+              item.range[0] = item.$range.valueAsNumber;
+              item.tooltip = await item.onRange.call(this.art, item, $item, event2);
+            });
+            item.$events.push(event);
+          }
+          if (item.onChange) {
+            const event = proxy(item.$range, "input", async (event2) => {
+              item.range[0] = item.$range.valueAsNumber;
+              item.tooltip = await item.onChange.call(this.art, item, $item, event2);
+            });
+            item.$events.push(event);
+          }
+        }
+        break;
+      }
+      case "selector":
+        {
+          const event = proxy($item, "click", async (event2) => {
+            if (item.selector?.length) {
+              this.render(item.selector);
+            } else {
+              this.check(item);
+              if (item.$parent.onSelect) {
+                item.$parent.tooltip = await item.$parent.onSelect.call(this.art, item, $item, event2);
+              }
+            }
+          });
+          item.$events.push(event);
+          if (item.default) {
+            addClass($item, "art-current");
+          }
+        }
+        break;
+      case "button":
+        if (item.onClick) {
+          const event = proxy($item, "click", async (event2) => {
+            item.tooltip = await item.onClick.call(this.art, item, $item, event2);
+          });
+          item.$events.push(event);
+        }
+        break;
+    }
+    def(item, "$item", {
+      configurable: true,
+      get: () => $item
+    });
+    if (isUpdate) {
+      replaceElement($item, oldItem);
+    } else {
+      append($panel, $item);
+    }
+    if (item.mounted) {
+      setTimeout(() => item.mounted.call(this.art, item.$item, item), 0);
+    }
+  }
+  render(option = this.option) {
+    this.active = option;
+    if (this.cache.has(option)) {
+      const $panel = this.cache.get(option);
+      inverseClass($panel, "art-current");
+    } else {
+      const $panel = createElement("div");
+      this.cache.set(option, $panel);
+      addClass($panel, "art-setting-panel");
+      append(this.$parent, $panel);
+      inverseClass($panel, "art-current");
+      if (option[0]?.$parent) {
+        this.createHeader(option[0]);
+      }
+      for (let index = 0; index < option.length; index++) {
+        this.createItem(option[index]);
+      }
+    }
+    this.resize();
+  }
+}
+class Storage {
+  constructor() {
+    this.name = "artplayer_settings";
+    this.settings = {};
+  }
+  get(key) {
+    try {
+      const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
+      return key ? storage[key] : storage;
+    } catch {
+      return key ? this.settings[key] : this.settings;
+    }
+  }
+  set(key, value) {
+    try {
+      const storage = Object.assign({}, this.get(), {
+        [key]: value
+      });
+      window.localStorage.setItem(this.name, JSON.stringify(storage));
+    } catch {
+      this.settings[key] = value;
+    }
+  }
+  del(key) {
+    try {
+      const storage = this.get();
+      delete storage[key];
+      window.localStorage.setItem(this.name, JSON.stringify(storage));
+    } catch {
+      delete this.settings[key];
+    }
+  }
+  clear() {
+    try {
+      window.localStorage.removeItem(this.name);
+    } catch {
+      this.settings = {};
+    }
+  }
+}
+const style = '.art-video-player{--art-theme: #f00;--art-font-color: #fff;--art-background-color: #000;--art-text-shadow-color: rgba(0, 0, 0, .5);--art-transition-duration: .2s;--art-padding: 10px;--art-border-radius: 3px;--art-progress-height: 6px;--art-progress-color: rgba(255, 255, 255, .25);--art-progress-top-gap: 8px;--art-hover-color: rgba(255, 255, 255, .25);--art-loaded-color: rgba(255, 255, 255, .25);--art-state-size: 80px;--art-state-opacity: .8;--art-bottom-height: 100px;--art-bottom-offset: 20px;--art-bottom-gap: 5px;--art-highlight-width: 8px;--art-highlight-color: rgba(255, 255, 255, .5);--art-control-height: 46px;--art-control-opacity: .75;--art-control-icon-size: 36px;--art-control-icon-scale: 1.1;--art-volume-height: 120px;--art-volume-handle-size: 14px;--art-lock-size: 36px;--art-indicator-scale: 0;--art-indicator-size: 16px;--art-fullscreen-web-index: 9999;--art-settings-icon-size: 24px;--art-settings-max-height: 300px;--art-selector-max-height: 300px;--art-contextmenus-min-width: 250px;--art-subtitle-font-size: 20px;--art-subtitle-gap: 5px;--art-subtitle-bottom: 15px;--art-subtitle-border: #000;--art-widget-background: rgba(0, 0, 0, .85);--art-tip-background: rgba(0, 0, 0, .7);--art-scrollbar-size: 4px;--art-scrollbar-background: rgba(255, 255, 255, .25);--art-scrollbar-background-hover: rgba(255, 255, 255, .5);--art-mini-progress-height: 2px}.art-bg-cover{background-position:center center;background-repeat:no-repeat;background-size:cover}.art-bottom-gradient{background-image:linear-gradient(to top,#000,rgba(0,0,0,.4),transparent);background-repeat:repeat-x;background-position:center bottom}.art-backdrop-filter{-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);background-color:#000000bf!important}.art-truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.art-video-player{position:relative;margin:0 auto;width:100%;height:100%;outline:0;zoom:1;padding:0;text-align:left;direction:ltr;font-size:14px;line-height:1.3;user-select:none;box-sizing:border-box;color:var(--art-font-color);background-color:var(--art-background-color);text-shadow:0 0 2px var(--art-text-shadow-color);font-family:PingFang SC,Helvetica Neue,Microsoft YaHei,Roboto,Arial,sans-serif;-webkit-tap-highlight-color:rgba(0,0,0,0);-ms-touch-action:manipulation;touch-action:manipulation;-ms-high-contrast-adjust:none}.art-video-player *,.art-video-player *:before,.art-video-player *:after{box-sizing:border-box}.art-video-player ::-webkit-scrollbar{width:var(--art-scrollbar-size);height:var(--art-scrollbar-size)}.art-video-player ::-webkit-scrollbar-thumb{background-color:var(--art-scrollbar-background)}.art-video-player ::-webkit-scrollbar-thumb:hover{background-color:var(--art-scrollbar-background-hover)}.art-video-player img{max-width:100%;vertical-align:top}.art-video-player svg{fill:var(--art-font-color)}.art-video-player a{color:var(--art-font-color);text-decoration:none}.art-icon{line-height:1;display:flex;justify-content:center;align-items:center}.art-video-player.art-backdrop .art-contextmenus,.art-video-player.art-backdrop .art-info,.art-video-player.art-backdrop .art-settings,.art-video-player.art-backdrop .art-layer-auto-playback,.art-video-player.art-backdrop .art-selector-list,.art-video-player.art-backdrop .art-volume-inner{-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);background-color:#000000bf!important}.art-video{position:absolute;inset:0;z-index:10;width:100%;height:100%;cursor:pointer}.art-poster{position:absolute;inset:0;z-index:11;width:100%;height:100%;background-position:center center;background-repeat:no-repeat;background-size:cover;pointer-events:none}.art-video-player .art-subtitle{display:none;justify-content:center;align-items:center;flex-direction:column;position:absolute;z-index:20;width:100%;padding:0 5%;text-align:center;pointer-events:none;gap:var(--art-subtitle-gap);bottom:var(--art-subtitle-bottom);font-size:var(--art-subtitle-font-size);transition:bottom var(--art-transition-duration) ease;text-shadow:var(--art-subtitle-border) 1px 0 1px,var(--art-subtitle-border) 0 1px 1px,var(--art-subtitle-border) -1px 0 1px,var(--art-subtitle-border) 0 -1px 1px,var(--art-subtitle-border) 1px 1px 1px,var(--art-subtitle-border) -1px -1px 1px,var(--art-subtitle-border) 1px -1px 1px,var(--art-subtitle-border) -1px 1px 1px}.art-video-player.art-subtitle-show .art-subtitle{display:flex}.art-video-player.art-control-show .art-subtitle{bottom:calc(var(--art-control-height) + var(--art-subtitle-bottom))}.art-danmuku{position:absolute;inset:0;z-index:30;width:100%;height:100%;pointer-events:none;overflow:hidden}.art-video-player .art-layers{position:absolute;inset:0;z-index:40;width:100%;height:100%;display:none;pointer-events:none}.art-video-player .art-layers .art-layer{pointer-events:auto}.art-video-player.art-layer-show .art-layers{display:flex}.art-video-player .art-mask{display:flex;justify-content:center;align-items:center;position:absolute;inset:0;z-index:50;width:100%;height:100%;pointer-events:none}.art-video-player .art-mask .art-state{display:flex;justify-content:center;align-items:center;opacity:0;transform:scale(2);width:var(--art-state-size);height:var(--art-state-size);transition:all var(--art-transition-duration) ease}.art-video-player.art-mask-show .art-state{cursor:pointer;pointer-events:auto;opacity:var(--art-state-opacity);transform:scale(1)}.art-video-player.art-loading-show .art-state{display:none}.art-video-player .art-loading{display:none;justify-content:center;align-items:center;position:absolute;inset:0;z-index:70;width:100%;height:100%;pointer-events:none}.art-video-player.art-loading-show .art-loading{display:flex}.art-video-player.art-loading-show .art-mask{display:none}.art-video-player .art-bottom{position:absolute;inset:0;z-index:60;width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;overflow:hidden;pointer-events:none;padding:0 var(--art-padding);transition:all var(--art-transition-duration) ease;background-size:100% var(--art-bottom-height);background-image:linear-gradient(to top,#000,rgba(0,0,0,.4),transparent);background-repeat:repeat-x;background-position:center bottom}.art-video-player .art-bottom .art-controls,.art-video-player .art-bottom .art-progress{transform:translateY(var(--art-bottom-offset));transition:transform var(--art-transition-duration) ease}.art-video-player.art-control-show .art-bottom,.art-video-player.art-hover .art-bottom{opacity:1}.art-video-player.art-control-show .art-bottom .art-controls,.art-video-player.art-hover .art-bottom .art-controls,.art-video-player.art-control-show .art-bottom .art-progress,.art-video-player.art-hover .art-bottom .art-progress{transform:translateY(0)}.art-bottom .art-progress{position:relative;z-index:0;pointer-events:auto;padding-top:var(--art-progress-top-gap);padding-bottom:var(--art-bottom-gap)}.art-bottom .art-progress .art-control-progress{position:relative;display:flex;justify-content:center;align-items:center;cursor:pointer;height:var(--art-progress-height)}.art-bottom .art-progress .art-control-progress .art-control-progress-inner{display:flex;align-items:center;position:relative;height:50%;width:100%;transition:height var(--art-transition-duration) ease;background-color:var(--art-progress-color)}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover{position:absolute;inset:0;z-index:0;width:100%;height:100%;width:0%;background-color:var(--art-hover-color)}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded{position:absolute;inset:0;z-index:10;width:100%;height:100%;width:0%;background-color:var(--art-loaded-color)}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played{position:absolute;inset:0;z-index:20;width:100%;height:100%;width:0%;background-color:var(--art-theme)}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight{position:absolute;inset:0;z-index:30;width:100%;height:100%;pointer-events:none}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span{position:absolute;inset:0 auto 0 0;z-index:0;width:100%;height:100%;pointer-events:auto;width:var(--art-highlight-width)!important;transform:translate(calc(var(--art-highlight-width) / -2));background-color:var(--art-highlight-color)}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator{display:flex;justify-content:center;align-items:center;position:absolute;z-index:40;left:0;border-radius:50%;width:var(--art-indicator-size);height:var(--art-indicator-size);transform:scale(var(--art-indicator-scale));margin-left:calc(var(--art-indicator-size) / -2);transition:transform var(--art-transition-duration) ease}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon{width:100%;height:100%;pointer-events:none}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover{transform:scale(1.2)!important}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active{transform:scale(1)!important}.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip{transform-origin:bottom center;transform:scale(.5);opacity:0;position:absolute;z-index:50;top:-25px;left:0;padding:3px 5px;line-height:1;font-size:12px;border-radius:var(--art-border-radius);white-space:nowrap;background-color:var(--art-tip-background);transition:transform var(--art-transition-duration) ease,opacity var(--art-transition-duration) ease}.art-bottom .art-progress .art-control-progress:hover .art-control-progress-inner{height:100%}.art-bottom .art-progress .art-control-thumbnails{transform-origin:bottom center;transform:scale(.5);opacity:0;position:absolute;bottom:calc(var(--art-bottom-gap) + 10px);left:0;border-radius:var(--art-border-radius);pointer-events:none;background-color:var(--art-widget-background);transition:transform var(--art-transition-duration) ease,opacity var(--art-transition-duration) ease;box-shadow:0 1px 3px #0003,0 1px 2px -1px #0003}.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator{transform:scale(1)}.art-progress-hover .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip,.art-progress-hover .art-bottom .art-progress .art-control-thumbnails{transform:scale(1);opacity:1}.art-video-player .art-controls{position:relative;z-index:10;pointer-events:auto;display:flex;align-items:center;justify-content:space-between;height:var(--art-control-height)}.art-video-player .art-controls .art-controls-left,.art-video-player .art-controls .art-controls-right{display:flex;height:100%}.art-video-player .art-controls .art-controls-center{display:none;justify-content:center;align-items:center;flex:1;height:100%;padding:0 10px}.art-video-player .art-controls .art-controls-right{justify-content:flex-end}.art-video-player .art-controls .art-control{display:flex;justify-content:center;align-items:center;flex-shrink:0;cursor:pointer;white-space:nowrap;opacity:var(--art-control-opacity);min-height:var(--art-control-height);min-width:var(--art-control-height);transition:opacity var(--art-transition-duration) ease}.art-video-player .art-controls .art-control .art-icon{height:var(--art-control-icon-size);width:var(--art-control-icon-size);transform:scale(var(--art-control-icon-scale));transition:transform var(--art-transition-duration) ease}.art-video-player .art-controls .art-control .art-icon:active{transform:scale(calc(var(--art-control-icon-scale) * .8))}.art-video-player .art-controls .art-control:hover{opacity:1}.art-control-volume{position:relative}.art-control-volume .art-volume-panel{display:flex;justify-content:center;align-items:center;position:absolute;left:0;right:0;padding:0 5px;font-size:12px;text-align:center;cursor:default;opacity:0;transform:translateY(10px);pointer-events:none;bottom:var(--art-control-height);width:var(--art-control-height);height:var(--art-volume-height);transition:all var(--art-transition-duration) ease}.art-control-volume .art-volume-panel .art-volume-inner{display:flex;flex-direction:column;align-items:center;gap:10px;height:100%;width:100%;padding:10px 0 12px;border-radius:var(--art-border-radius);background-color:var(--art-widget-background)}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider{flex:1;width:100%;display:flex;cursor:pointer;position:relative;justify-content:center}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle{position:relative;display:flex;justify-content:center;width:2px;border-radius:var(--art-border-radius);overflow:hidden;background-color:#ffffff40}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded{position:absolute;inset:0;z-index:0;width:100%;height:100%;background-color:var(--art-theme)}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator{position:absolute;width:var(--art-volume-handle-size);height:var(--art-volume-handle-size);margin-top:calc(var(--art-volume-handle-size) / -2);flex-shrink:0;transform:scale(1);border-radius:100%;background-color:var(--art-theme);transition:transform var(--art-transition-duration) ease}.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator{transform:scale(.9)}.art-control-volume:hover .art-volume-panel{opacity:1;transform:translateY(0);pointer-events:auto}.art-video-player .art-notice{display:none;position:absolute;inset:0 0 auto;z-index:80;width:100%;height:100%;height:auto;padding:var(--art-padding);pointer-events:none}.art-video-player .art-notice .art-notice-inner{display:inline-flex;padding:5px;line-height:1;border-radius:var(--art-border-radius);background-color:var(--art-tip-background)}.art-video-player.art-notice-show .art-notice{display:flex}.art-video-player .art-contextmenus{display:none;flex-direction:column;position:absolute;z-index:120;padding:5px 0;border-radius:var(--art-border-radius);font-size:12px;background-color:var(--art-widget-background);min-width:var(--art-contextmenus-min-width)}.art-video-player .art-contextmenus .art-contextmenu{cursor:pointer;display:flex;padding:10px 15px;border-bottom:1px solid rgba(255,255,255,.1)}.art-video-player .art-contextmenus .art-contextmenu span{padding:0 8px}.art-video-player .art-contextmenus .art-contextmenu span:hover,.art-video-player .art-contextmenus .art-contextmenu span.art-current{color:var(--art-theme)}.art-video-player .art-contextmenus .art-contextmenu:hover{background-color:#ffffff1a}.art-video-player .art-contextmenus .art-contextmenu:last-child{border-bottom:none}.art-video-player.art-contextmenu-show .art-contextmenus{display:flex}.art-video-player .art-settings{display:none;flex-direction:column;position:absolute;z-index:90;left:auto;overflow-y:auto;overflow-x:hidden;border-radius:var(--art-border-radius);max-height:var(--art-settings-max-height);right:var(--art-padding);bottom:var(--art-control-height);transition:all var(--art-transition-duration) ease;background-color:var(--art-widget-background)}.art-video-player .art-settings .art-setting-panel{display:none;flex-direction:column}.art-video-player .art-settings .art-setting-panel.art-current{display:flex}.art-video-player .art-settings .art-setting-panel .art-setting-item{display:flex;justify-content:space-between;align-items:center;padding:0 5px;cursor:pointer;overflow:hidden;transition:background-color var(--art-transition-duration) ease}.art-video-player .art-settings .art-setting-panel .art-setting-item:hover{background-color:#ffffff1a}.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current{color:var(--art-theme)}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check{visibility:hidden;height:15px}.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check{visibility:visible}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left{display:flex;justify-content:center;align-items:center;flex-shrink:0;gap:5px}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon{display:flex;justify-content:center;align-items:center;height:var(--art-settings-icon-size);width:var(--art-settings-icon-size)}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right{display:flex;justify-content:center;align-items:center;gap:5px;font-size:12px}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip{white-space:nowrap;color:#ffffff80}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon{display:flex;justify-content:center;align-items:center;min-width:32px;height:24px}.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range{height:3px;width:80px;outline:none;appearance:none;background-color:#fff3}.art-video-player .art-settings .art-setting-panel .art-setting-item-back{border-bottom:1px solid rgba(255,255,255,.1)}.art-video-player.art-setting-show .art-settings{display:flex}.art-video-player .art-info{display:none;position:absolute;left:var(--art-padding);top:var(--art-padding);z-index:100;padding:10px;font-size:12px;border-radius:var(--art-border-radius);background-color:var(--art-widget-background)}.art-video-player .art-info .art-info-panel{display:flex;flex-direction:column;gap:5px}.art-video-player .art-info .art-info-panel .art-info-item{display:flex;align-items:center;gap:5px}.art-video-player .art-info .art-info-panel .art-info-item .art-info-title{width:100px;text-align:right}.art-video-player .art-info .art-info-panel .art-info-item .art-info-content{width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;user-select:all}.art-video-player .art-info .art-info-close{position:absolute;top:5px;right:5px;cursor:pointer}.art-video-player.art-info-show .art-info{display:flex}.art-hide-cursor *{cursor:none!important}.art-video-player[data-aspect-ratio]{overflow:hidden}.art-video-player[data-aspect-ratio] .art-video{object-fit:fill;box-sizing:content-box}.art-fullscreen{--art-progress-height: 8px;--art-indicator-size: 20px;--art-control-height: 60px;--art-control-icon-scale: 1.3}.art-fullscreen-web{--art-progress-height: 8px;--art-indicator-size: 20px;--art-control-height: 60px;--art-control-icon-scale: 1.3;position:fixed;inset:0;z-index:var(--art-fullscreen-web-index);width:100%;height:100%}.art-mini-popup{position:fixed;z-index:9999;width:320px;height:180px;background:#000;border-radius:var(--art-border-radius);cursor:move;user-select:none;overflow:hidden;transition:opacity .2s ease;box-shadow:0 0 5px #00000080}.art-mini-popup svg{fill:#fff}.art-mini-popup .art-video{pointer-events:none}.art-mini-popup .art-mini-close{position:absolute;z-index:20;right:10px;top:10px;cursor:pointer;opacity:0;transition:opacity .2s ease}.art-mini-popup .art-mini-state{position:absolute;inset:0;z-index:30;width:100%;height:100%;display:flex;justify-content:center;align-items:center;pointer-events:none;opacity:0;transition:opacity .2s ease;background-color:#00000040}.art-mini-popup .art-mini-state .art-icon{opacity:.75;cursor:pointer;transform:scale(3);pointer-events:auto;transition:transform .2s ease}.art-mini-popup .art-mini-state .art-icon:active{transform:scale(2.5)}.art-mini-popup.art-mini-dragging{opacity:.9}.art-mini-popup:hover .art-mini-close,.art-mini-popup:hover .art-mini-state{opacity:1}.art-video-player[data-flip=horizontal] .art-video{transform:scaleX(-1)}.art-video-player[data-flip=vertical] .art-video{transform:scaleY(-1)}.art-video-player .art-layer-lock{display:none;justify-content:center;align-items:center;position:absolute;top:50%;border-radius:50%;transform:translateY(-50%);height:var(--art-lock-size);width:var(--art-lock-size);left:var(--art-padding);background-color:var(--art-tip-background)}.art-video-player .art-layer-auto-playback{display:none;gap:10px;align-items:center;position:absolute;border-radius:var(--art-border-radius);padding:10px;line-height:1;left:var(--art-padding);bottom:calc(var(--art-control-height) + var(--art-bottom-gap) + 10px);background-color:var(--art-widget-background)}.art-video-player .art-layer-auto-playback .art-auto-playback-close{display:flex;justify-content:center;align-items:center;cursor:pointer}.art-video-player .art-layer-auto-playback .art-auto-playback-close svg{width:15px;height:15px;fill:var(--art-theme)}.art-video-player .art-layer-auto-playback .art-auto-playback-jump{color:var(--art-theme);cursor:pointer}.art-video-player.art-lock .art-subtitle{bottom:var(--art-subtitle-bottom)!important}.art-video-player.art-mini-progress-bar .art-bottom,.art-video-player.art-lock .art-bottom{opacity:1;padding:0;background-image:none}.art-video-player.art-mini-progress-bar .art-bottom .art-controls,.art-video-player.art-lock .art-bottom .art-controls,.art-video-player.art-mini-progress-bar .art-bottom .art-progress,.art-video-player.art-lock .art-bottom .art-progress{transform:translateY(calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4))}.art-video-player.art-mini-progress-bar .art-bottom .art-progress-indicator,.art-video-player.art-lock .art-bottom .art-progress-indicator{display:none!important}.art-video-player.art-control-show .art-layer-lock{display:flex}.art-control-selector{position:relative;display:flex;justify-content:center}.art-control-selector .art-selector-list{display:flex;flex-direction:column;align-items:center;text-align:center;position:absolute;border-radius:var(--art-border-radius);overflow-y:auto;overflow-x:hidden;opacity:0;transform:translateY(10px);pointer-events:none;bottom:var(--art-control-height);max-height:var(--art-selector-max-height);background-color:var(--art-widget-background);transition:all var(--art-transition-duration) ease}.art-control-selector .art-selector-list .art-selector-item{display:flex;justify-content:center;align-items:center;width:100%;padding:10px 15px;flex-shrink:0;line-height:1}.art-control-selector .art-selector-list .art-selector-item:hover{background-color:#ffffff1a}.art-control-selector .art-selector-list .art-selector-item:hover,.art-control-selector .art-selector-list .art-selector-item.art-current{color:var(--art-theme)}.art-control-selector:hover .art-selector-list{opacity:1;transform:translateY(0);pointer-events:auto}.art-video-player [class*=hint--]{position:relative;display:inline-block;font-style:normal}.art-video-player [class*=hint--]:before,.art-video-player [class*=hint--]:after{position:absolute;-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);transform:translateZ(0);visibility:hidden;opacity:0;z-index:1000000;pointer-events:none;-webkit-transition:.3s ease;-moz-transition:.3s ease;transition:.3s ease;-webkit-transition-delay:0ms;-moz-transition-delay:0ms;transition-delay:0ms}.art-video-player [class*=hint--]:hover:before,.art-video-player [class*=hint--]:hover:after{visibility:visible;opacity:1}.art-video-player [class*=hint--]:hover:before,.art-video-player [class*=hint--]:hover:after{-webkit-transition-delay:.1s;-moz-transition-delay:.1s;transition-delay:.1s}.art-video-player [class*=hint--]:before{content:"";position:absolute;background:transparent;border:6px solid transparent;z-index:1000001}.art-video-player [class*=hint--]:after{background:#000;color:#fff;padding:8px 10px;font-size:12px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;line-height:12px;white-space:nowrap}.art-video-player [class*=hint--][aria-label]:after{content:attr(aria-label)}.art-video-player [class*=hint--][data-hint]:after{content:attr(data-hint)}.art-video-player [aria-label=""]:before,.art-video-player [aria-label=""]:after,.art-video-player [data-hint=""]:before,.art-video-player [data-hint=""]:after{display:none!important}.art-video-player .hint--top-left:before{border-top-color:#000}.art-video-player .hint--top-right:before{border-top-color:#000}.art-video-player .hint--top:before{border-top-color:#000}.art-video-player .hint--bottom-left:before{border-bottom-color:#000}.art-video-player .hint--bottom-right:before{border-bottom-color:#000}.art-video-player .hint--bottom:before{border-bottom-color:#000}.art-video-player .hint--left:before{border-left-color:#000}.art-video-player .hint--right:before{border-right-color:#000}.art-video-player .hint--top:before{margin-bottom:-11px}.art-video-player .hint--top:before,.art-video-player .hint--top:after{bottom:100%;left:50%}.art-video-player .hint--top:before{left:calc(50% - 6px)}.art-video-player .hint--top:after{-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);transform:translate(-50%)}.art-video-player .hint--top:hover:before{-webkit-transform:translateY(-8px);-moz-transform:translateY(-8px);transform:translateY(-8px)}.art-video-player .hint--top:hover:after{-webkit-transform:translateX(-50%) translateY(-8px);-moz-transform:translateX(-50%) translateY(-8px);transform:translate(-50%) translateY(-8px)}.art-video-player .hint--bottom:before{margin-top:-11px}.art-video-player .hint--bottom:before,.art-video-player .hint--bottom:after{top:100%;left:50%}.art-video-player .hint--bottom:before{left:calc(50% - 6px)}.art-video-player .hint--bottom:after{-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);transform:translate(-50%)}.art-video-player .hint--bottom:hover:before{-webkit-transform:translateY(8px);-moz-transform:translateY(8px);transform:translateY(8px)}.art-video-player .hint--bottom:hover:after{-webkit-transform:translateX(-50%) translateY(8px);-moz-transform:translateX(-50%) translateY(8px);transform:translate(-50%) translateY(8px)}.art-video-player .hint--right:before{margin-left:-11px;margin-bottom:-6px}.art-video-player .hint--right:after{margin-bottom:-14px}.art-video-player .hint--right:before,.art-video-player .hint--right:after{left:100%;bottom:50%}.art-video-player .hint--right:hover:before{-webkit-transform:translateX(8px);-moz-transform:translateX(8px);transform:translate(8px)}.art-video-player .hint--right:hover:after{-webkit-transform:translateX(8px);-moz-transform:translateX(8px);transform:translate(8px)}.art-video-player .hint--left:before{margin-right:-11px;margin-bottom:-6px}.art-video-player .hint--left:after{margin-bottom:-14px}.art-video-player .hint--left:before,.art-video-player .hint--left:after{right:100%;bottom:50%}.art-video-player .hint--left:hover:before{-webkit-transform:translateX(-8px);-moz-transform:translateX(-8px);transform:translate(-8px)}.art-video-player .hint--left:hover:after{-webkit-transform:translateX(-8px);-moz-transform:translateX(-8px);transform:translate(-8px)}.art-video-player .hint--top-left:before{margin-bottom:-11px}.art-video-player .hint--top-left:before,.art-video-player .hint--top-left:after{bottom:100%;left:50%}.art-video-player .hint--top-left:before{left:calc(50% - 6px)}.art-video-player .hint--top-left:after{-webkit-transform:translateX(-100%);-moz-transform:translateX(-100%);transform:translate(-100%)}.art-video-player .hint--top-left:after{margin-left:12px}.art-video-player .hint--top-left:hover:before{-webkit-transform:translateY(-8px);-moz-transform:translateY(-8px);transform:translateY(-8px)}.art-video-player .hint--top-left:hover:after{-webkit-transform:translateX(-100%) translateY(-8px);-moz-transform:translateX(-100%) translateY(-8px);transform:translate(-100%) translateY(-8px)}.art-video-player .hint--top-right:before{margin-bottom:-11px}.art-video-player .hint--top-right:before,.art-video-player .hint--top-right:after{bottom:100%;left:50%}.art-video-player .hint--top-right:before{left:calc(50% - 6px)}.art-video-player .hint--top-right:after{-webkit-transform:translateX(0);-moz-transform:translateX(0);transform:translate(0)}.art-video-player .hint--top-right:after{margin-left:-12px}.art-video-player .hint--top-right:hover:before{-webkit-transform:translateY(-8px);-moz-transform:translateY(-8px);transform:translateY(-8px)}.art-video-player .hint--top-right:hover:after{-webkit-transform:translateY(-8px);-moz-transform:translateY(-8px);transform:translateY(-8px)}.art-video-player .hint--bottom-left:before{margin-top:-11px}.art-video-player .hint--bottom-left:before,.art-video-player .hint--bottom-left:after{top:100%;left:50%}.art-video-player .hint--bottom-left:before{left:calc(50% - 6px)}.art-video-player .hint--bottom-left:after{-webkit-transform:translateX(-100%);-moz-transform:translateX(-100%);transform:translate(-100%)}.art-video-player .hint--bottom-left:after{margin-left:12px}.art-video-player .hint--bottom-left:hover:before{-webkit-transform:translateY(8px);-moz-transform:translateY(8px);transform:translateY(8px)}.art-video-player .hint--bottom-left:hover:after{-webkit-transform:translateX(-100%) translateY(8px);-moz-transform:translateX(-100%) translateY(8px);transform:translate(-100%) translateY(8px)}.art-video-player .hint--bottom-right:before{margin-top:-11px}.art-video-player .hint--bottom-right:before,.art-video-player .hint--bottom-right:after{top:100%;left:50%}.art-video-player .hint--bottom-right:before{left:calc(50% - 6px)}.art-video-player .hint--bottom-right:after{-webkit-transform:translateX(0);-moz-transform:translateX(0);transform:translate(0)}.art-video-player .hint--bottom-right:after{margin-left:-12px}.art-video-player .hint--bottom-right:hover:before{-webkit-transform:translateY(8px);-moz-transform:translateY(8px);transform:translateY(8px)}.art-video-player .hint--bottom-right:hover:after{-webkit-transform:translateY(8px);-moz-transform:translateY(8px);transform:translateY(8px)}.art-video-player .hint--small:after,.art-video-player .hint--medium:after,.art-video-player .hint--large:after{white-space:normal;line-height:1.4em;word-wrap:break-word}.art-video-player .hint--small:after{width:80px}.art-video-player .hint--medium:after{width:150px}.art-video-player .hint--large:after{width:300px}.art-video-player [class*=hint--]:after{text-shadow:0 -1px 0px black;box-shadow:4px 4px 8px #0000004d}.art-video-player .hint--error:after{background-color:#b34e4d;text-shadow:0 -1px 0px #592726}.art-video-player .hint--error.hint--top-left:before{border-top-color:#b34e4d}.art-video-player .hint--error.hint--top-right:before{border-top-color:#b34e4d}.art-video-player .hint--error.hint--top:before{border-top-color:#b34e4d}.art-video-player .hint--error.hint--bottom-left:before{border-bottom-color:#b34e4d}.art-video-player .hint--error.hint--bottom-right:before{border-bottom-color:#b34e4d}.art-video-player .hint--error.hint--bottom:before{border-bottom-color:#b34e4d}.art-video-player .hint--error.hint--left:before{border-left-color:#b34e4d}.art-video-player .hint--error.hint--right:before{border-right-color:#b34e4d}.art-video-player .hint--warning:after{background-color:#c09854;text-shadow:0 -1px 0px #6c5328}.art-video-player .hint--warning.hint--top-left:before{border-top-color:#c09854}.art-video-player .hint--warning.hint--top-right:before{border-top-color:#c09854}.art-video-player .hint--warning.hint--top:before{border-top-color:#c09854}.art-video-player .hint--warning.hint--bottom-left:before{border-bottom-color:#c09854}.art-video-player .hint--warning.hint--bottom-right:before{border-bottom-color:#c09854}.art-video-player .hint--warning.hint--bottom:before{border-bottom-color:#c09854}.art-video-player .hint--warning.hint--left:before{border-left-color:#c09854}.art-video-player .hint--warning.hint--right:before{border-right-color:#c09854}.art-video-player .hint--info:after{background-color:#3986ac;text-shadow:0 -1px 0px #1a3c4d}.art-video-player .hint--info.hint--top-left:before{border-top-color:#3986ac}.art-video-player .hint--info.hint--top-right:before{border-top-color:#3986ac}.art-video-player .hint--info.hint--top:before{border-top-color:#3986ac}.art-video-player .hint--info.hint--bottom-left:before{border-bottom-color:#3986ac}.art-video-player .hint--info.hint--bottom-right:before{border-bottom-color:#3986ac}.art-video-player .hint--info.hint--bottom:before{border-bottom-color:#3986ac}.art-video-player .hint--info.hint--left:before{border-left-color:#3986ac}.art-video-player .hint--info.hint--right:before{border-right-color:#3986ac}.art-video-player .hint--success:after{background-color:#458746;text-shadow:0 -1px 0px #1a321a}.art-video-player .hint--success.hint--top-left:before{border-top-color:#458746}.art-video-player .hint--success.hint--top-right:before{border-top-color:#458746}.art-video-player .hint--success.hint--top:before{border-top-color:#458746}.art-video-player .hint--success.hint--bottom-left:before{border-bottom-color:#458746}.art-video-player .hint--success.hint--bottom-right:before{border-bottom-color:#458746}.art-video-player .hint--success.hint--bottom:before{border-bottom-color:#458746}.art-video-player .hint--success.hint--left:before{border-left-color:#458746}.art-video-player .hint--success.hint--right:before{border-right-color:#458746}.art-video-player .hint--always:after,.art-video-player .hint--always:before{opacity:1;visibility:visible}.art-video-player .hint--always.hint--top:before{-webkit-transform:translateY(-8px);-moz-transform:translateY(-8px);transform:translateY(-8px)}.art-video-player .hint--always.hint--top:after{-webkit-transform:translateX(-50%) translateY(-8px);-moz-transform:translateX(-50%) translateY(-8px);transform:translate(-50%) translateY(-8px)}.art-video-player .hint--always.hint--top-left:before{-webkit-transform:translateY(-8px);-moz-transform:translateY(-8px);transform:translateY(-8px)}.art-video-player .hint--always.hint--top-left:after{-webkit-transform:translateX(-100%) translateY(-8px);-moz-transform:translateX(-100%) translateY(-8px);transform:translate(-100%) translateY(-8px)}.art-video-player .hint--always.hint--top-right:before{-webkit-transform:translateY(-8px);-moz-transform:translateY(-8px);transform:translateY(-8px)}.art-video-player .hint--always.hint--top-right:after{-webkit-transform:translateY(-8px);-moz-transform:translateY(-8px);transform:translateY(-8px)}.art-video-player .hint--always.hint--bottom:before{-webkit-transform:translateY(8px);-moz-transform:translateY(8px);transform:translateY(8px)}.art-video-player .hint--always.hint--bottom:after{-webkit-transform:translateX(-50%) translateY(8px);-moz-transform:translateX(-50%) translateY(8px);transform:translate(-50%) translateY(8px)}.art-video-player .hint--always.hint--bottom-left:before{-webkit-transform:translateY(8px);-moz-transform:translateY(8px);transform:translateY(8px)}.art-video-player .hint--always.hint--bottom-left:after{-webkit-transform:translateX(-100%) translateY(8px);-moz-transform:translateX(-100%) translateY(8px);transform:translate(-100%) translateY(8px)}.art-video-player .hint--always.hint--bottom-right:before{-webkit-transform:translateY(8px);-moz-transform:translateY(8px);transform:translateY(8px)}.art-video-player .hint--always.hint--bottom-right:after{-webkit-transform:translateY(8px);-moz-transform:translateY(8px);transform:translateY(8px)}.art-video-player .hint--always.hint--left:before{-webkit-transform:translateX(-8px);-moz-transform:translateX(-8px);transform:translate(-8px)}.art-video-player .hint--always.hint--left:after{-webkit-transform:translateX(-8px);-moz-transform:translateX(-8px);transform:translate(-8px)}.art-video-player .hint--always.hint--right:before{-webkit-transform:translateX(8px);-moz-transform:translateX(8px);transform:translate(8px)}.art-video-player .hint--always.hint--right:after{-webkit-transform:translateX(8px);-moz-transform:translateX(8px);transform:translate(8px)}.art-video-player .hint--rounded:after{border-radius:4px}.art-video-player .hint--no-animate:before,.art-video-player .hint--no-animate:after{-webkit-transition-duration:0ms;-moz-transition-duration:0ms;transition-duration:0ms}.art-video-player .hint--bounce:before,.art-video-player .hint--bounce:after{-webkit-transition:opacity .3s ease,visibility .3s ease,-webkit-transform .3s cubic-bezier(.71,1.7,.77,1.24);-moz-transition:opacity .3s ease,visibility .3s ease,-moz-transform .3s cubic-bezier(.71,1.7,.77,1.24);transition:opacity .3s ease,visibility .3s ease,transform .3s cubic-bezier(.71,1.7,.77,1.24)}.art-video-player .hint--no-shadow:before,.art-video-player .hint--no-shadow:after{text-shadow:initial;box-shadow:initial}.art-video-player .hint--no-arrow:before{display:none}.art-video-player.art-mobile{--art-bottom-gap: 10px;--art-control-height: 38px;--art-control-icon-scale: 1;--art-state-size: 60px;--art-settings-max-height: 180px;--art-selector-max-height: 180px;--art-indicator-scale: 1;--art-control-opacity: 1}.art-video-player.art-mobile .art-controls-left{margin-left:calc(var(--art-padding) / -1)}.art-video-player.art-mobile .art-controls-right{margin-right:calc(var(--art-padding) / -1)}';
+class Subtitle extends Component {
+  constructor(art) {
+    super(art);
+    this.name = "subtitle";
+    this.option = null;
+    this.destroyEvent = () => null;
+    this.init(art.option.subtitle);
+    let lastState = false;
+    art.on("video:timeupdate", () => {
+      if (!this.url)
+        return;
+      const state2 = this.art.template.$video.webkitDisplayingFullscreen;
+      if (typeof state2 !== "boolean")
+        return;
+      if (state2 !== lastState) {
+        lastState = state2;
+        this.createTrack(state2 ? "subtitles" : "metadata", this.url);
+      }
+    });
+  }
+  get url() {
+    return this.art.template.$track.src;
+  }
+  set url(url) {
+    this.switch(url);
+  }
+  get textTrack() {
+    return this.art.template.$video?.textTracks?.[0];
+  }
+  get activeCues() {
+    if (!this.textTrack)
+      return [];
+    return Array.from(this.textTrack.activeCues);
+  }
+  get cues() {
+    if (!this.textTrack)
+      return [];
+    return Array.from(this.textTrack.cues);
+  }
+  style(key, value) {
+    const { $subtitle } = this.art.template;
+    if (typeof key === "object") {
+      return setStyles($subtitle, key);
+    }
+    return setStyle($subtitle, key, value);
+  }
+  update() {
+    const {
+      option: { subtitle },
+      template: { $subtitle }
+    } = this.art;
+    $subtitle.innerHTML = "";
+    if (!this.activeCues.length)
+      return;
+    this.art.emit("subtitleBeforeUpdate", this.activeCues);
+    $subtitle.innerHTML = this.activeCues.map(
+      (cue, index) => cue.text.split(/\r?\n/).filter((line) => line.trim()).map(
+        (line) => `<div class="art-subtitle-line" data-group="${index}">
+                                ${subtitle.escape ? escape(line) : line}
+                            </div>`
+      ).join("")
+    ).join("");
+    this.art.emit("subtitleAfterUpdate", this.activeCues);
+  }
+  async switch(url, newOption = {}) {
+    const { i18n, notice, option } = this.art;
+    const subtitleOption = { ...option.subtitle, ...newOption, url };
+    const subUrl = await this.init(subtitleOption);
+    if (newOption.name) {
+      notice.show = `${i18n.get("Switch Subtitle")}: ${newOption.name}`;
+    }
+    return subUrl;
+  }
+  createTrack(kind, url) {
+    const { template, proxy, option } = this.art;
+    const { $video, $track } = template;
+    const $newTrack = createElement("track");
+    $newTrack.default = true;
+    $newTrack.kind = kind;
+    $newTrack.src = url;
+    $newTrack.label = option.subtitle.name || "Artplayer";
+    $newTrack.track.mode = "hidden";
+    $newTrack.onload = () => {
+      this.art.emit("subtitleLoad", this.cues, this.option);
+    };
+    this.art.events.remove(this.destroyEvent);
+    $track.onload = null;
+    remove($track);
+    append($video, $newTrack);
+    template.$track = $newTrack;
+    this.destroyEvent = proxy(this.textTrack, "cuechange", () => this.update());
+  }
+  async init(subtitleOption) {
+    const {
+      notice,
+      template: { $subtitle }
+    } = this.art;
+    if (!this.textTrack)
+      return null;
+    validator(subtitleOption, scheme.subtitle);
+    if (!subtitleOption.url)
+      return;
+    this.option = subtitleOption;
+    this.style(subtitleOption.style);
+    return fetch(subtitleOption.url).then((response) => response.arrayBuffer()).then((buffer) => {
+      const decoder = new TextDecoder(subtitleOption.encoding);
+      const text = decoder.decode(buffer);
+      switch (subtitleOption.type || getExt(subtitleOption.url)) {
+        case "srt": {
+          const vtt = srtToVtt(text);
+          const vttNew = subtitleOption.onVttLoad(vtt);
+          return vttToBlob(vttNew);
+        }
+        case "ass": {
+          const vtt = assToVtt(text);
+          const vttNew = subtitleOption.onVttLoad(vtt);
+          return vttToBlob(vttNew);
+        }
+        case "vtt": {
+          const vttNew = subtitleOption.onVttLoad(text);
+          return vttToBlob(vttNew);
+        }
+        default:
+          return subtitleOption.url;
+      }
+    }).then((subUrl) => {
+      $subtitle.innerHTML = "";
+      if (this.url === subUrl)
+        return subUrl;
+      URL.revokeObjectURL(this.url);
+      this.createTrack("metadata", subUrl);
+      return subUrl;
+    }).catch((err) => {
+      $subtitle.innerHTML = "";
+      notice.show = err;
+      throw err;
+    });
+  }
+}
+class Template {
+  constructor(art) {
+    this.art = art;
+    const { option, constructor } = art;
+    if (option.container instanceof Element) {
+      this.$container = option.container;
+    } else {
+      this.$container = query(option.container);
+      errorHandle(this.$container, `No container element found by ${option.container}`);
+    }
+    errorHandle(supportsFlex(), "The current browser does not support flex layout");
+    const type = this.$container.tagName.toLowerCase();
+    errorHandle(type === "div", `Unsupported container element type, only support 'div' but got '${type}'`);
+    errorHandle(
+      constructor.instances.every((ins) => ins.template.$container !== this.$container),
+      "Cannot mount multiple instances on the same dom element"
+    );
+    this.query = this.query.bind(this);
+    this.$container.dataset.artId = art.id;
+    this.init();
+  }
+  static get html() {
+    return `
+          <div class="art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show">
+            <video class="art-video">
+              <track default kind="metadata" src=""></track>
+            </video>
+            <div class="art-poster"></div>
+            <div class="art-subtitle"></div>
+            <div class="art-danmuku"></div>
+            <div class="art-layers"></div>
+            <div class="art-mask">
+              <div class="art-state"></div>
+            </div>
+            <div class="art-bottom">
+              <div class="art-progress"></div>
+              <div class="art-controls">
+                <div class="art-controls-left"></div>
+                <div class="art-controls-center"></div>
+                <div class="art-controls-right"></div>
+              </div>
+            </div>
+            <div class="art-loading"></div>
+            <div class="art-notice">
+              <div class="art-notice-inner"></div>
+            </div>
+            <div class="art-settings"></div>
+            <div class="art-info">
+              <div class="art-info-panel">
+                <div class="art-info-item">
+                  <div class="art-info-title">Player version:</div>
+                  <div class="art-info-content">${version$1}</div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video url:</div>
+                  <div class="art-info-content" data-video="currentSrc"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video volume:</div>
+                  <div class="art-info-content" data-video="volume"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video time:</div>
+                  <div class="art-info-content" data-video="currentTime"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video duration:</div>
+                  <div class="art-info-content" data-video="duration"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video resolution:</div>
+                  <div class="art-info-content">
+                    <span data-video="videoWidth"></span> x <span data-video="videoHeight"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="art-info-close">[x]</div>
+            </div>
+            <div class="art-contextmenus"></div>
+          </div>
+        `;
+  }
+  query(className) {
+    return query(className, this.$container);
+  }
+  init() {
+    const { option } = this.art;
+    if (!option.useSSR) {
+      this.$container.innerHTML = Template.html;
+    }
+    this.$player = this.query(".art-video-player");
+    this.$video = this.query(".art-video");
+    this.$track = this.query("track");
+    this.$poster = this.query(".art-poster");
+    this.$subtitle = this.query(".art-subtitle");
+    this.$danmuku = this.query(".art-danmuku");
+    this.$bottom = this.query(".art-bottom");
+    this.$progress = this.query(".art-progress");
+    this.$controls = this.query(".art-controls");
+    this.$controlsLeft = this.query(".art-controls-left");
+    this.$controlsCenter = this.query(".art-controls-center");
+    this.$controlsRight = this.query(".art-controls-right");
+    this.$layer = this.query(".art-layers");
+    this.$loading = this.query(".art-loading");
+    this.$notice = this.query(".art-notice");
+    this.$noticeInner = this.query(".art-notice-inner");
+    this.$mask = this.query(".art-mask");
+    this.$state = this.query(".art-state");
+    this.$setting = this.query(".art-settings");
+    this.$info = this.query(".art-info");
+    this.$infoPanel = this.query(".art-info-panel");
+    this.$infoClose = this.query(".art-info-close");
+    this.$contextmenu = this.query(".art-contextmenus");
+    if (option.proxy) {
+      const video = option.proxy.call(this.art, this.art);
+      errorHandle(
+        video instanceof HTMLVideoElement || video instanceof HTMLCanvasElement,
+        `Function 'option.proxy' needs to return 'HTMLVideoElement' or 'HTMLCanvasElement'`
+      );
+      replaceElement(video, this.$video);
+      video.className = "art-video";
+      this.$video = video;
+    }
+    if (option.backdrop) {
+      addClass(this.$player, "art-backdrop");
+    }
+    if (isMobile) {
+      addClass(this.$player, "art-mobile");
+    }
+  }
+  destroy(removeHtml) {
+    if (removeHtml) {
+      this.$container.innerHTML = "";
+    } else {
+      addClass(this.$player, "art-destroy");
+    }
+  }
+}
+class Emitter {
+  on(name, fn, ctx) {
+    const e = this.e || (this.e = {});
+    (e[name] || (e[name] = [])).push({ fn, ctx });
+    return this;
+  }
+  once(name, fn, ctx) {
+    const self = this;
+    function listener(...args) {
+      self.off(name, listener);
+      fn.apply(ctx, args);
+    }
+    listener._ = fn;
+    return this.on(name, listener, ctx);
+  }
+  emit(name, ...data) {
+    const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+    for (let i = 0; i < evtArr.length; i += 1) {
+      evtArr[i].fn.apply(evtArr[i].ctx, data);
+    }
+    return this;
+  }
+  off(name, callback) {
+    const e = this.e || (this.e = {});
+    const evts = e[name];
+    const liveEvents = [];
+    if (evts && callback) {
+      for (let i = 0, len = evts.length; i < len; i += 1) {
+        if (evts[i].fn !== callback && evts[i].fn._ !== callback)
+          liveEvents.push(evts[i]);
+      }
+    }
+    if (liveEvents.length) {
+      e[name] = liveEvents;
+    } else {
+      delete e[name];
+    }
+    return this;
+  }
+}
+let id = 0;
+const instances = [];
+class Artplayer extends Emitter {
+  constructor(option, readyCallback) {
+    super();
+    if (!isBrowser) {
+      throw new Error("Artplayer can only be used in the browser environment");
+    }
+    this.id = ++id;
+    const mergeOption = mergeDeep(Artplayer.option, option);
+    mergeOption.container = option.container;
+    this.option = validator(mergeOption, scheme);
+    this.isLock = false;
+    this.isReady = false;
+    this.isFocus = false;
+    this.isInput = false;
+    this.isRotate = false;
+    this.isDestroy = false;
+    this.template = new Template(this);
+    this.events = new Events(this);
+    this.storage = new Storage(this);
+    this.icons = new Icons(this);
+    this.i18n = new I18n(this);
+    this.notice = new Notice(this);
+    this.player = new Player(this);
+    this.layers = new Layer(this);
+    this.controls = new Control(this);
+    this.contextmenu = new Contextmenu(this);
+    this.subtitle = new Subtitle(this);
+    this.info = new Info(this);
+    this.loading = new Loading(this);
+    this.hotkey = new Hotkey(this);
+    this.mask = new Mask(this);
+    this.setting = new Setting(this);
+    this.plugins = new Plugins(this);
+    if (typeof readyCallback === "function") {
+      this.on("ready", () => readyCallback.call(this, this));
+    }
+    if (Artplayer.DEBUG) {
+      const log = (msg) => console.log(`[ART.${this.id}] -> ${msg}`);
+      log(`Version@${Artplayer.version}`);
+      for (let index = 0; index < config$1.events.length; index++) {
+        this.on(`video:${config$1.events[index]}`, (event) => log(`Event@${event.type}`));
+      }
+    }
+    instances.push(this);
+  }
+  static get instances() {
+    return instances;
+  }
+  static get version() {
+    return version$1;
+  }
+  static get config() {
+    return config$1;
+  }
+  static get utils() {
+    return utils;
+  }
+  static get scheme() {
+    return scheme;
+  }
+  static get Emitter() {
+    return Emitter;
+  }
+  static get validator() {
+    return validator;
+  }
+  static get kindOf() {
+    return validator.kindOf;
+  }
+  static get html() {
+    return Template.html;
+  }
+  static get option() {
+    return {
+      id: "",
+      container: "#artplayer",
+      url: "",
+      poster: "",
+      type: "",
+      theme: "#f00",
+      volume: 0.7,
+      isLive: false,
+      muted: false,
+      autoplay: false,
+      autoSize: false,
+      autoMini: false,
+      loop: false,
+      flip: false,
+      playbackRate: false,
+      aspectRatio: false,
+      screenshot: false,
+      setting: false,
+      hotkey: true,
+      pip: false,
+      mutex: true,
+      backdrop: true,
+      fullscreen: false,
+      fullscreenWeb: false,
+      subtitleOffset: false,
+      miniProgressBar: false,
+      useSSR: false,
+      playsInline: true,
+      lock: false,
+      gesture: true,
+      fastForward: false,
+      autoPlayback: false,
+      autoOrientation: false,
+      airplay: false,
+      proxy: void 0,
+      layers: [],
+      contextmenu: [],
+      controls: [],
+      settings: [],
+      quality: [],
+      highlight: [],
+      plugins: [],
+      thumbnails: {
+        url: "",
+        number: 60,
+        column: 10,
+        width: 0,
+        height: 0,
+        scale: 1
+      },
+      subtitle: {
+        url: "",
+        type: "",
+        style: {},
+        name: "",
+        escape: true,
+        encoding: "utf-8",
+        onVttLoad: (vtt) => vtt
+      },
+      moreVideoAttr: {
+        controls: false,
+        preload: isSafari ? "auto" : "metadata"
+      },
+      i18n: {},
+      icons: {},
+      cssVar: {},
+      customType: {},
+      lang: navigator?.language.toLowerCase()
+    };
+  }
+  get proxy() {
+    return this.events.proxy;
+  }
+  get query() {
+    return this.template.query;
+  }
+  get video() {
+    return this.template.$video;
+  }
+  reset() {
+    this.video.removeAttribute("src");
+    this.video.load();
+  }
+  destroy(removeHtml = true) {
+    if (Artplayer.REMOVE_SRC_WHEN_DESTROY) {
+      this.reset();
+    }
+    this.events.destroy();
+    this.template.destroy(removeHtml);
+    instances.splice(instances.indexOf(this), 1);
+    this.isDestroy = true;
+    this.emit("destroy");
+  }
+}
+Artplayer.STYLE = style;
+Artplayer.DEBUG = false;
+Artplayer.CONTEXTMENU = true;
+Artplayer.NOTICE_TIME = 2e3;
+Artplayer.SETTING_WIDTH = 250;
+Artplayer.SETTING_ITEM_WIDTH = 200;
+Artplayer.SETTING_ITEM_HEIGHT = 35;
+Artplayer.RESIZE_TIME = 200;
+Artplayer.SCROLL_TIME = 200;
+Artplayer.SCROLL_GAP = 50;
+Artplayer.AUTO_PLAYBACK_MAX = 10;
+Artplayer.AUTO_PLAYBACK_MIN = 5;
+Artplayer.AUTO_PLAYBACK_TIMEOUT = 3e3;
+Artplayer.RECONNECT_TIME_MAX = 5;
+Artplayer.RECONNECT_SLEEP_TIME = 1e3;
+Artplayer.CONTROL_HIDE_TIME = 3e3;
+Artplayer.DBCLICK_TIME = 300;
+Artplayer.DBCLICK_FULLSCREEN = true;
+Artplayer.MOBILE_DBCLICK_PLAY = true;
+Artplayer.MOBILE_CLICK_PLAY = false;
+Artplayer.AUTO_ORIENTATION_TIME = 200;
+Artplayer.INFO_LOOP_TIME = 1e3;
+Artplayer.FAST_FORWARD_VALUE = 3;
+Artplayer.FAST_FORWARD_TIME = 1e3;
+Artplayer.TOUCH_MOVE_RATIO = 0.5;
+Artplayer.VOLUME_STEP = 0.1;
+Artplayer.SEEK_STEP = 5;
+Artplayer.PLAYBACK_RATE = [0.5, 0.75, 1, 1.25, 1.5, 2];
+Artplayer.ASPECT_RATIO = ["default", "4:3", "16:9"];
+Artplayer.FLIP = ["normal", "horizontal", "vertical"];
+Artplayer.FULLSCREEN_WEB_IN_BODY = true;
+Artplayer.LOG_VERSION = true;
+Artplayer.USE_RAF = false;
+Artplayer.REMOVE_SRC_WHEN_DESTROY = true;
+if (isBrowser) {
+  window.Artplayer = Artplayer;
+  setStyleText("artplayer-style", style);
+  setTimeout(() => {
+    if (Artplayer.LOG_VERSION) {
+      console.log(
+        `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
+        "color: #fff; background: #5f5f5f",
+        "color: #fff; background: #4bc729",
+        ""
+      );
+    }
+  }, 100);
+}
+export {
+  Artplayer as default
+};

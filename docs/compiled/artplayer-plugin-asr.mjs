@@ -1,8 +1,255 @@
-
 /*!
- * artplayer-plugin-asr.js v2.0.0
+ * artplayer-plugin-asr.js v2.0.1
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-!function(e,t,r,n,o){var a="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},l="function"==typeof a[n]&&a[n],i=l.i||{},u=l.cache||{},s="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function c(t,r){if(!u[t]){if(!e[t]){if(o[t])return o[t];var i="function"==typeof a[n]&&a[n];if(!r&&i)return i(t,!0);if(l)return l(t,!0);if(s&&"string"==typeof t)return s(t);var d=Error("Cannot find module '"+t+"'");throw d.code="MODULE_NOT_FOUND",d}f.resolve=function(r){var n=e[t][1][r];return null!=n?n:r},f.cache={};var p=u[t]=new c.Module(t);e[t][0].call(p.exports,f,p,p.exports,a)}return u[t].exports;function f(e){var t=f.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var r={__esModule:!0};return t.forEach(function(e){var t=e[0],n=e[1],o=e[2]||e[0],a=c(n);"*"===t?Object.keys(a).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(r,e)||Object.defineProperty(r,e,{enumerable:!0,get:function(){return a[e]}})}):"*"===o?Object.defineProperty(r,t,{enumerable:!0,value:a}):Object.defineProperty(r,t,{enumerable:!0,get:function(){return"default"===o?a.__esModule?a.default:a:a[o]}})}),r}return c(t)}}c.isParcelRequire=!0,c.Module=function(e){this.id=e,this.bundle=c,this.require=s,this.exports={}},c.modules=e,c.cache=u,c.parent=l,c.distDir=void 0,c.publicUrl=void 0,c.devServer=void 0,c.i=i,c.register=function(t,r){e[t]=[function(e,t){t.exports=r},{}]},Object.defineProperty(c,"root",{get:function(){return a[n]}}),a[n]=c;for(var d=0;d<t.length;d++)c(t[d]);if(r){var p=c(r);"object"==typeof exports&&"u">typeof module?module.exports=p:"function"==typeof define&&define.amd&&define(function(){return p})}}({ejGkt:[function(e,t,r,n){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(r),o.export(r,"default",()=>i);var a=e("bundle-text:./style.less"),l=o.interopDefault(a);function i(e={}){let{length:t=3,interval:r=100,sampleRate:n=16e3,autoHideTimeout:o=1e4,onAudioChunk:a=()=>null}=e;return e=>{let l=!1,i=null,u=null,s=null,c=null,d=[],p=null,f=!1,y=null,m=null,b=null,g=e.layers.add({name:"asr",html:""});function v(){g.style.display="none"}function h(e){"string"==typeof e&&(clearTimeout(y),y=setTimeout(v,o),g.style.display="",g.innerHTML=e.split(/(?<=[、。！？!?.])\s*/u).map(e=>e.trim()).filter(Boolean).slice(-t).map(e=>`<div class="art-asr-line">${e}</div>`).join(""))}let w=` class RecorderProcessor extends AudioWorkletProcessor { process(inputs) { const input = inputs[0]; if (input && input[0]) { this.port.postMessage(input[0]); } return true; } } registerProcessor('recorder-processor', RecorderProcessor); `;async function x(){return i||"suspended"===(i=new(window.AudioContext||window.webkitAudioContext)({sampleRate:n})).state&&await i.resume(),i}async function j(){if(!u&&e.video)try{return u=i.createMediaElementSource(e.video)}catch(e){console.warn("[artplayerPluginAsr] Direct connection failed:",e)}try{if(m||(m=await A(e.video)),m)return b=i.createMediaStreamSource(m)}catch(e){console.warn("[artplayerPluginAsr] MediaStream fallback failed:",e)}return null}async function A(e){try{if(e.captureStream)return e.captureStream();if(e.mozCaptureStream)return e.mozCaptureStream();return console.warn("[artplayerPluginAsr] captureStream not supported"),null}catch(e){return console.warn("[artplayerPluginAsr] Error capturing stream:",e),null}}async function P(){if(!l)try{await x();let e=await j();if(!e)throw Error("Could not establish audio source");if(!f){let e,t=(e=new Blob([w],{type:"application/javascript"}),URL.createObjectURL(e));await i.audioWorklet.addModule(t),URL.revokeObjectURL(t),f=!0}(c=i.createGain()).gain.value=1,(s=new AudioWorkletNode(i,"recorder-processor")).port.onmessage=e=>{d.push(new Float32Array(e.data))},e.connect(s),e.connect(c),c.connect(i.destination);let t=r/1e3*n;p=setInterval(async()=>{let e,r,o,l;if(0===d.length)return;let i=new Float32Array(0);for(;i.length<t&&d.length;){let e=d.shift(),t=new Float32Array(i.length+e.length);t.set(i,0),t.set(e,i.length),i=t}if(i.length<t)return;let u=i.slice(0,t),s=function(e){let t=e.length,r=new ArrayBuffer(2*t),n=new DataView(r);for(let r=0;r<t;r++){let t=Math.max(-1,Math.min(1,e[r]));n.setInt16(2*r,t<0?32768*t:32767*t,!0)}return r}(u),c=(e=s.byteLength,r=new ArrayBuffer(44+e),o=new DataView(r),(l=(e,t)=>{for(let r=0;r<t.length;r++)o.setUint8(e+r,t.charCodeAt(r))})(0,"RIFF"),o.setUint32(4,36+e,!0),l(8,"WAVE"),l(12,"fmt "),o.setUint32(16,16,!0),o.setUint16(20,1,!0),o.setUint16(22,1,!0),o.setUint32(24,n,!0),o.setUint32(28,2*n,!0),o.setUint16(32,2,!0),o.setUint16(34,16,!0),l(36,"data"),o.setUint32(40,e,!0),new Uint8Array(r).set(new Uint8Array(s),44),r),p=await a({pcm:s,wav:c});h(p)},r),l=!0}catch(e){console.error("[artplayerPluginAsr] Initialization failed:",e),await U()}}async function U(){l&&(l=!1,clearInterval(p),p=null,s&&(s.disconnect(),s.port.onmessage=null,s=null),c&&(c.disconnect(),c=null),d=[])}async function O(){await U(),b&&(b.disconnect(),b=null),u&&(u.disconnect(),u=null),m&&(m.getTracks().forEach(e=>e.stop()),m=null),i&&(await i.close(),i=null),f=!1}return e.on("video:volumechange",()=>{c&&(c.gain.value=e.volume)}),e.on("play",P),e.on("pause",U),e.on("destroy",O),{name:"artplayerPluginAsr",stop:O,hide:v,append:h}}}if("u">typeof document&&!document.getElementById("artplayer-plugin-asr")){let e=document.createElement("style");e.id="artplayer-plugin-asr",e.textContent=l.default,document.head.appendChild(e)}"u">typeof window&&(window.artplayerPluginAsr=i)},{"bundle-text:./style.less":"27Ck2","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"27Ck2":[function(e,t,r,n){t.exports=".art-video-player .art-layer-asr{z-index:150;justify-content:end;gap:var(--art-subtitle-gap);padding:0 2%;padding-bottom:var(--art-subtitle-bottom);transition:padding-bottom var(--art-transition-duration) ease;text-shadow:var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;flex-direction:column;font-size:1rem;display:flex;position:absolute;inset:0;pointer-events:none!important}.art-video-player.art-control-show .art-layer-asr{padding-bottom:calc(var(--art-control-height) + var(--art-subtitle-bottom))}"},{}],loqXi:[function(e,t,r,n){r.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},r.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},r.exportAll=function(e,t){return Object.keys(e).forEach(function(r){"default"===r||"__esModule"===r||Object.prototype.hasOwnProperty.call(t,r)||Object.defineProperty(t,r,{enumerable:!0,get:function(){return e[r]}})}),t},r.export=function(e,t,r){Object.defineProperty(e,t,{enumerable:!0,get:r})}},{}]},["ejGkt"],"ejGkt","parcelRequire4dc0",{});let{default:e}=parcelRequire4dc0("ejGkt");export{e as default};
+const style = ".art-video-player .art-layer-asr{pointer-events:none!important;position:absolute;z-index:150;inset:0;display:flex;flex-direction:column;justify-content:end;padding:0 2%;font-size:1rem;gap:var(--art-subtitle-gap);padding-bottom:var(--art-subtitle-bottom);transition:padding-bottom var(--art-transition-duration) ease;text-shadow:var(--art-subtitle-border) 1px 0 1px,var(--art-subtitle-border) 0 1px 1px,var(--art-subtitle-border) -1px 0 1px,var(--art-subtitle-border) 0 -1px 1px,var(--art-subtitle-border) 1px 1px 1px,var(--art-subtitle-border) -1px -1px 1px,var(--art-subtitle-border) 1px -1px 1px,var(--art-subtitle-border) -1px 1px 1px}.art-video-player.art-control-show .art-layer-asr{padding-bottom:calc(var(--art-control-height) + var(--art-subtitle-bottom))}";
+function artplayerPluginAsr(option = {}) {
+  const {
+    length = 3,
+    interval = 100,
+    sampleRate = 16e3,
+    autoHideTimeout = 1e4,
+    onAudioChunk = () => null
+  } = option;
+  return (art) => {
+    let started = false;
+    let audioCtx = null;
+    let sourceNode = null;
+    let recorderNode = null;
+    let gainNode = null;
+    let bufferChunks = [];
+    let timer = null;
+    let workletLoaded = false;
+    let hideTimer = null;
+    let mediaStream = null;
+    let mediaStreamSource = null;
+    const $asr = art.layers.add({
+      name: "asr",
+      html: ""
+    });
+    function splitByPunctuation(text) {
+      return text.split(/(?<=[、。！？!?.])\s*/u).map((s) => s.trim()).filter(Boolean).slice(-length);
+    }
+    function hide() {
+      $asr.style.display = "none";
+    }
+    function append(subtitle) {
+      if (typeof subtitle !== "string")
+        return;
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(hide, autoHideTimeout);
+      $asr.style.display = "";
+      $asr.innerHTML = splitByPunctuation(subtitle).map((line) => `<div class="art-asr-line">${line}</div>`).join("");
+    }
+    const recorderProcessorCode = `
+            class RecorderProcessor extends AudioWorkletProcessor {
+                process(inputs) {
+                    const input = inputs[0];
+                    if (input && input[0]) {
+                        this.port.postMessage(input[0]);
+                    }
+                    return true;
+                }
+            }
+            registerProcessor('recorder-processor', RecorderProcessor);
+        `;
+    const createWorkletBlobUrl = () => {
+      const blob = new Blob([recorderProcessorCode], { type: "application/javascript" });
+      return URL.createObjectURL(blob);
+    };
+    function floatTo16BitPCM(float32Array) {
+      const len = float32Array.length;
+      const buffer = new ArrayBuffer(len * 2);
+      const view = new DataView(buffer);
+      for (let i = 0; i < len; i++) {
+        const s = Math.max(-1, Math.min(1, float32Array[i]));
+        view.setInt16(i * 2, s < 0 ? s * 32768 : s * 32767, true);
+      }
+      return buffer;
+    }
+    function pcmToWav(pcmBuffer, sampleRate2) {
+      const pcmLength = pcmBuffer.byteLength;
+      const wavBuffer = new ArrayBuffer(44 + pcmLength);
+      const view = new DataView(wavBuffer);
+      const writeString = (offset, str) => {
+        for (let i = 0; i < str.length; i++) {
+          view.setUint8(offset + i, str.charCodeAt(i));
+        }
+      };
+      writeString(0, "RIFF");
+      view.setUint32(4, 36 + pcmLength, true);
+      writeString(8, "WAVE");
+      writeString(12, "fmt ");
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, 1, true);
+      view.setUint32(24, sampleRate2, true);
+      view.setUint32(28, sampleRate2 * 2, true);
+      view.setUint16(32, 2, true);
+      view.setUint16(34, 16, true);
+      writeString(36, "data");
+      view.setUint32(40, pcmLength, true);
+      new Uint8Array(wavBuffer).set(new Uint8Array(pcmBuffer), 44);
+      return wavBuffer;
+    }
+    async function setupAudioContext() {
+      if (audioCtx)
+        return audioCtx;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate });
+      if (audioCtx.state === "suspended")
+        await audioCtx.resume();
+      return audioCtx;
+    }
+    async function setupAudioSource() {
+      if (!sourceNode && art.video) {
+        try {
+          sourceNode = audioCtx.createMediaElementSource(art.video);
+          return sourceNode;
+        } catch (err) {
+          console.warn("[artplayerPluginAsr] Direct connection failed:", err);
+        }
+      }
+      try {
+        if (!mediaStream) {
+          mediaStream = await captureAudioFromVideo(art.video);
+        }
+        if (mediaStream) {
+          mediaStreamSource = audioCtx.createMediaStreamSource(mediaStream);
+          return mediaStreamSource;
+        }
+      } catch (err) {
+        console.warn("[artplayerPluginAsr] MediaStream fallback failed:", err);
+      }
+      return null;
+    }
+    async function captureAudioFromVideo(videoElement) {
+      try {
+        if (videoElement.captureStream)
+          return videoElement.captureStream();
+        if (videoElement.mozCaptureStream)
+          return videoElement.mozCaptureStream();
+        console.warn("[artplayerPluginAsr] captureStream not supported");
+        return null;
+      } catch (err) {
+        console.warn("[artplayerPluginAsr] Error capturing stream:", err);
+        return null;
+      }
+    }
+    async function startCapture() {
+      if (started)
+        return;
+      try {
+        await setupAudioContext();
+        const audioSource = await setupAudioSource();
+        if (!audioSource)
+          throw new Error("Could not establish audio source");
+        if (!workletLoaded) {
+          const blobUrl = createWorkletBlobUrl();
+          await audioCtx.audioWorklet.addModule(blobUrl);
+          URL.revokeObjectURL(blobUrl);
+          workletLoaded = true;
+        }
+        gainNode = audioCtx.createGain();
+        gainNode.gain.value = 1;
+        recorderNode = new AudioWorkletNode(audioCtx, "recorder-processor");
+        recorderNode.port.onmessage = (event) => {
+          bufferChunks.push(new Float32Array(event.data));
+        };
+        audioSource.connect(recorderNode);
+        audioSource.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        const CHUNK_SAMPLES = sampleRate * (interval / 1e3);
+        timer = setInterval(async () => {
+          if (bufferChunks.length === 0)
+            return;
+          let accumulated = new Float32Array(0);
+          while (accumulated.length < CHUNK_SAMPLES && bufferChunks.length) {
+            const next = bufferChunks.shift();
+            const tmp = new Float32Array(accumulated.length + next.length);
+            tmp.set(accumulated, 0);
+            tmp.set(next, accumulated.length);
+            accumulated = tmp;
+          }
+          if (accumulated.length < CHUNK_SAMPLES)
+            return;
+          const chunkToSend = accumulated.slice(0, CHUNK_SAMPLES);
+          const pcm = floatTo16BitPCM(chunkToSend);
+          const wav = pcmToWav(pcm, sampleRate);
+          const subtitle = await onAudioChunk({ pcm, wav });
+          append(subtitle);
+        }, interval);
+        started = true;
+      } catch (err) {
+        console.error("[artplayerPluginAsr] Initialization failed:", err);
+        await stopCapture();
+      }
+    }
+    async function stopCapture() {
+      if (!started)
+        return;
+      started = false;
+      clearInterval(timer);
+      timer = null;
+      if (recorderNode) {
+        recorderNode.disconnect();
+        recorderNode.port.onmessage = null;
+        recorderNode = null;
+      }
+      if (gainNode) {
+        gainNode.disconnect();
+        gainNode = null;
+      }
+      bufferChunks = [];
+    }
+    async function destroy() {
+      await stopCapture();
+      if (mediaStreamSource) {
+        mediaStreamSource.disconnect();
+        mediaStreamSource = null;
+      }
+      if (sourceNode) {
+        sourceNode.disconnect();
+        sourceNode = null;
+      }
+      if (mediaStream) {
+        mediaStream.getTracks().forEach((track) => track.stop());
+        mediaStream = null;
+      }
+      if (audioCtx) {
+        await audioCtx.close();
+        audioCtx = null;
+      }
+      workletLoaded = false;
+    }
+    art.on("video:volumechange", () => {
+      if (gainNode) {
+        gainNode.gain.value = art.volume;
+      }
+    });
+    art.on("play", startCapture);
+    art.on("pause", stopCapture);
+    art.on("destroy", destroy);
+    return {
+      name: "artplayerPluginAsr",
+      stop: destroy,
+      hide,
+      append
+    };
+  };
+}
+if (typeof document !== "undefined") {
+  if (!document.getElementById("artplayer-plugin-asr")) {
+    const $style = document.createElement("style");
+    $style.id = "artplayer-plugin-asr";
+    $style.textContent = style;
+    document.head.appendChild($style);
+  }
+}
+if (typeof window !== "undefined") {
+  window.artplayerPluginAsr = artplayerPluginAsr;
+}
+export {
+  artplayerPluginAsr as default
+};

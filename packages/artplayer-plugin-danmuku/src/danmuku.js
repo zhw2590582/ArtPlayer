@@ -1,5 +1,5 @@
-import workerText from 'bundle-text:./worker'
 import { bilibiliDanmuParseFromUrl } from './bilibili'
+import DanmuWorker from './worker.js?worker&inline'
 
 export default class Danmuku {
   constructor(art, option) {
@@ -28,9 +28,7 @@ export default class Danmuku {
     this.config(option, true)
 
     // 创建 Web Worker, 用于计算弹幕的 top 值
-    const workerText2 = workerText.replace('export{e as default};', '')
-    const blob = new Blob([workerText2], { type: 'application/javascript' })
-    this.worker = new Worker(URL.createObjectURL(blob))
+    this.worker = new DanmuWorker()
 
     // 绑定公用事件
     this.start = this.start.bind(this)

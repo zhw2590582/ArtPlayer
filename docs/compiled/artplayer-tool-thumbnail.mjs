@@ -1,8 +1,265 @@
-
 /*!
  * artplayer-tool-thumbnail.js v4.3.12
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-!function(e,t,i,r,o){var n="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},s="function"==typeof n[r]&&n[r],l=s.i||{},a=s.cache||{},h="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function u(t,i){if(!a[t]){if(!e[t]){if(o[t])return o[t];var l="function"==typeof n[r]&&n[r];if(!i&&l)return l(t,!0);if(s)return s(t,!0);if(h&&"string"==typeof t)return h(t);var d=Error("Cannot find module '"+t+"'");throw d.code="MODULE_NOT_FOUND",d}c.resolve=function(i){var r=e[t][1][i];return null!=r?r:i},c.cache={};var p=a[t]=new u.Module(t);e[t][0].call(p.exports,c,p,p.exports,n)}return a[t].exports;function c(e){var t=c.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var i={__esModule:!0};return t.forEach(function(e){var t=e[0],r=e[1],o=e[2]||e[0],n=u(r);"*"===t?Object.keys(n).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(i,e)||Object.defineProperty(i,e,{enumerable:!0,get:function(){return n[e]}})}):"*"===o?Object.defineProperty(i,t,{enumerable:!0,value:n}):Object.defineProperty(i,t,{enumerable:!0,get:function(){return"default"===o?n.__esModule?n.default:n:n[o]}})}),i}return u(t)}}u.isParcelRequire=!0,u.Module=function(e){this.id=e,this.bundle=u,this.require=h,this.exports={}},u.modules=e,u.cache=a,u.parent=s,u.distDir=void 0,u.publicUrl=void 0,u.devServer=void 0,u.i=l,u.register=function(t,i){e[t]=[function(e,t){t.exports=i},{}]},Object.defineProperty(u,"root",{get:function(){return n[r]}}),n[r]=u;for(var d=0;d<t.length;d++)u(t[d]);if(i){var p=u(i);"object"==typeof exports&&"u">typeof module?module.exports=p:"function"==typeof define&&define.amd&&define(function(){return p})}}({"81Ebp":[function(e,t,i,r){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");o.defineInteropFlag(i);var n=e("./emitter"),s=o.interopDefault(n),l=e("./utils");class a extends s.default{constructor(e={}){super(),this.processing=!1,this.option={},this.setup(Object.assign({},a.DEFAULTS,e)),this.video=a.creatVideo(),this.duration=0,this.inputChange=this.inputChange.bind(this),this.ondrop=this.ondrop.bind(this),this.option.fileInput.addEventListener("change",this.inputChange),this.option.fileInput.addEventListener("dragover",a.ondragover),this.option.fileInput.addEventListener("drop",a.ondrop)}static get DEFAULTS(){return{number:60,width:160,height:90,column:10,begin:0,end:NaN}}static ondragover(e){e.preventDefault()}ondrop(e){e.preventDefault();let t=e.dataTransfer.files[0];this.loadVideo(t)}setup(e={}){this.option=Object.assign({},this.option,e);let{fileInput:t,number:i,width:r,column:o}=this.option;if(this.errorHandle(t instanceof Element,"The 'fileInput' is not a Element"),"INPUT"!==t.tagName||"file"!==t.type){t.style.position="relative";let e=document.createElement("input");e.type="file",e.style.position="absolute",e.style.width="100%",e.style.height="100%",e.style.left="0",e.style.top="0",e.style.right="0",e.style.bottom="0",e.style.opacity="0",t.appendChild(e),this.option.fileInput=e}return["number","width","column","begin","end"].forEach(e=>{this.errorHandle("number"==typeof this.option[e],`The '${e}' is not a number`)}),this.option.number=(0,l.clamp)(i,10,1e3),this.option.width=(0,l.clamp)(r,10,1e3),this.option.column=(0,l.clamp)(o,1,1e3),this}static creatVideo(){let e=document.createElement("video");return e.style.position="absolute",e.style.top="-9999px",e.style.left="-9999px",e.muted=!0,e.controls=!0,document.body.appendChild(e),e}inputChange(e){let t=this.option.fileInput.files[0];this.loadVideo(t),e.target.value=""}loadVideo(e){if(e){let t=this.video.canPlayType(e.type);this.errorHandle("maybe"===t||"probably"===t,`Playback of this file format is not supported: ${e.type}`);let i=URL.createObjectURL(e);this.videoUrl=i,this.file=e,this.emit("file",this.file),this.video.src=i,this.emit("video",this.video)}}start(){if(!this.video.duration)return(0,l.sleep)(1e3).then(()=>this.start());let{width:e,number:t,begin:i,end:r}=this.option,o=this.video.videoHeight/this.video.videoWidth*e;this.option.height=o,this.option.begin=(0,l.clamp)(i,0,this.video.duration),this.option.end=(0,l.clamp)(r||this.video.duration,i,this.video.duration),this.errorHandle(this.option.end>this.option.begin,"End time must be greater than the start time"),this.duration=this.option.end-this.option.begin,this.density=t/this.duration,this.errorHandle(this.file&&this.video,"Please select the video file first"),this.errorHandle(!this.processing,"There is currently a task in progress, please wait a moment..."),this.errorHandle(this.density<=1,`The preview density cannot be greater than 1, but got ${this.density}`);let n=this.creatScreenshotDate(),s=this.creatCanvas(),a=s.getContext("2d");this.emit("canvas",s);let h=n.map((i,r)=>()=>new Promise(n=>{this.video.oncanplay=()=>{a.drawImage(this.video,i.x,i.y,e,o),s.toBlob(e=>{this.thumbnailUrl&&URL.revokeObjectURL(this.thumbnailUrl),this.thumbnailUrl=URL.createObjectURL(e),this.emit("update",this.thumbnailUrl,(r+1)/t),this.video.oncanplay=null,n()})},this.video.currentTime=i.time}));return this.processing=!0,(0,l.runPromisesInSeries)(h).then(()=>{this.processing=!1,this.emit("done")}).catch(e=>{throw this.processing=!1,this.emit("error",e.message),e})}creatScreenshotDate(){let{number:e,width:t,height:i,column:r,begin:o}=this.option,n=this.duration/e,s=[o+n];for(;s.length<e;){let e=s[s.length-1];s.push(e+n)}return s.map((e,o)=>({time:e-n/2,x:o%r*t,y:Math.floor(o/r)*i}))}creatCanvas(){let{number:e,width:t,height:i,column:r}=this.option,o=document.createElement("canvas"),n=o.getContext("2d");return o.width=t*r,o.height=Math.ceil(e/r)*i+30,n.fillStyle="black",n.fillRect(0,0,o.width,o.height),n.font="14px Georgia",n.fillStyle="#fff",n.fillText(`From: https://artplayer.org/, Number: ${e}, Width: ${t}, Height: ${i}, Column: ${r}`,10,o.height-11),o}download(){this.errorHandle(this.file&&this.thumbnailUrl,"Download does not seem to be ready, please create preview first"),this.errorHandle(!this.processing,"There is currently a task in progress, please wait a moment...");let e=document.createElement("a"),t=`${(0,l.getFileName)(this.file.name)}.png`;return e.download=t,e.href=this.thumbnailUrl,document.body.appendChild(e),e.click(),document.body.removeChild(e),this.emit("download",t),this}errorHandle(e,t){if(!e)throw this.emit("error",t),Error(t)}destroy(){this.option.fileInput.removeEventListener("change",this.inputChange),this.option.fileInput.removeEventListener("dragover",a.ondragover),this.option.fileInput.removeEventListener("drop",a.ondrop),document.body.removeChild(this.video),this.videoUrl&&URL.revokeObjectURL(this.videoUrl),this.thumbnailUrl&&URL.revokeObjectURL(this.thumbnailUrl),this.emit("destroy")}}i.default=a,window.ArtplayerToolThumbnail=a},{"./emitter":"2Mzft","./utils":"3Nqqx","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"2Mzft":[function(e,t,i,r){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(i),i.default=class{on(e,t,i){let r=this.e||(this.e={});return(r[e]||(r[e]=[])).push({fn:t,ctx:i}),this}once(e,t,i){let r=this;function o(...n){r.off(e,o),t.apply(i,n)}return o._=t,this.on(e,o,i)}emit(e,...t){let i=((this.e||(this.e={}))[e]||[]).slice();for(let e=0;e<i.length;e+=1)i[e].fn.apply(i[e].ctx,t);return this}off(e,t){let i=this.e||(this.e={}),r=i[e],o=[];if(r&&t)for(let e=0,i=r.length;e<i;e+=1)r[e].fn!==t&&r[e].fn._!==t&&o.push(r[e]);return o.length?i[e]=o:delete i[e],this}}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],loqXi:[function(e,t,i,r){i.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},i.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},i.exportAll=function(e,t){return Object.keys(e).forEach(function(i){"default"===i||"__esModule"===i||Object.prototype.hasOwnProperty.call(t,i)||Object.defineProperty(t,i,{enumerable:!0,get:function(){return e[i]}})}),t},i.export=function(e,t,i){Object.defineProperty(e,t,{enumerable:!0,get:i})}},{}],"3Nqqx":[function(e,t,i,r){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function n(e){return new Promise(t=>setTimeout(t,e))}function s(e){return e.reduce((e,t)=>e.then(t),Promise.resolve())}function l(e){let t=e.split(".");return t.pop(),t.join(".")}function a(e,t,i){return Math.max(Math.min(e,Math.max(t,i)),Math.min(t,i))}o.defineInteropFlag(i),o.export(i,"sleep",()=>n),o.export(i,"runPromisesInSeries",()=>s),o.export(i,"getFileName",()=>l),o.export(i,"clamp",()=>a)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}]},["81Ebp"],"81Ebp","parcelRequire4dc0",{});let{default:e}=parcelRequire4dc0("81Ebp");export{e as default};
+class Emitter {
+  on(name, fn, ctx) {
+    const e = this.e || (this.e = {});
+    (e[name] || (e[name] = [])).push({ fn, ctx });
+    return this;
+  }
+  once(name, fn, ctx) {
+    const self = this;
+    function listener(...args) {
+      self.off(name, listener);
+      fn.apply(ctx, args);
+    }
+    listener._ = fn;
+    return this.on(name, listener, ctx);
+  }
+  emit(name, ...data) {
+    const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+    for (let i = 0; i < evtArr.length; i += 1) {
+      evtArr[i].fn.apply(evtArr[i].ctx, data);
+    }
+    return this;
+  }
+  off(name, callback) {
+    const e = this.e || (this.e = {});
+    const evts = e[name];
+    const liveEvents = [];
+    if (evts && callback) {
+      for (let i = 0, len = evts.length; i < len; i += 1) {
+        if (evts[i].fn !== callback && evts[i].fn._ !== callback)
+          liveEvents.push(evts[i]);
+      }
+    }
+    if (liveEvents.length) {
+      e[name] = liveEvents;
+    } else {
+      delete e[name];
+    }
+    return this;
+  }
+}
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+function runPromisesInSeries(ps) {
+  return ps.reduce((p, next) => p.then(next), Promise.resolve());
+}
+function getFileName(name) {
+  const nameArray = name.split(".");
+  nameArray.pop();
+  return nameArray.join(".");
+}
+function clamp(num, a, b) {
+  return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+}
+class ArtplayerToolThumbnail extends Emitter {
+  constructor(option = {}) {
+    super();
+    this.processing = false;
+    this.option = {};
+    this.setup(Object.assign({}, ArtplayerToolThumbnail.DEFAULTS, option));
+    this.video = ArtplayerToolThumbnail.creatVideo();
+    this.duration = 0;
+    this.inputChange = this.inputChange.bind(this);
+    this.ondrop = this.ondrop.bind(this);
+    this.option.fileInput.addEventListener("change", this.inputChange);
+    this.option.fileInput.addEventListener("dragover", ArtplayerToolThumbnail.ondragover);
+    this.option.fileInput.addEventListener("drop", ArtplayerToolThumbnail.ondrop);
+  }
+  static get DEFAULTS() {
+    return {
+      number: 60,
+      width: 160,
+      height: 90,
+      column: 10,
+      begin: 0,
+      end: Number.NaN
+    };
+  }
+  static ondragover(event) {
+    event.preventDefault();
+  }
+  ondrop(event) {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    this.loadVideo(file);
+  }
+  setup(option = {}) {
+    this.option = Object.assign({}, this.option, option);
+    const { fileInput, number, width, column } = this.option;
+    this.errorHandle(fileInput instanceof Element, "The 'fileInput' is not a Element");
+    if (!(fileInput.tagName === "INPUT" && fileInput.type === "file")) {
+      fileInput.style.position = "relative";
+      const newFileInput = document.createElement("input");
+      newFileInput.type = "file";
+      newFileInput.style.position = "absolute";
+      newFileInput.style.width = "100%";
+      newFileInput.style.height = "100%";
+      newFileInput.style.left = "0";
+      newFileInput.style.top = "0";
+      newFileInput.style.right = "0";
+      newFileInput.style.bottom = "0";
+      newFileInput.style.opacity = "0";
+      fileInput.appendChild(newFileInput);
+      this.option.fileInput = newFileInput;
+    }
+    ["number", "width", "column", "begin", "end"].forEach((item) => {
+      this.errorHandle(typeof this.option[item] === "number", `The '${item}' is not a number`);
+    });
+    this.option.number = clamp(number, 10, 1e3);
+    this.option.width = clamp(width, 10, 1e3);
+    this.option.column = clamp(column, 1, 1e3);
+    return this;
+  }
+  static creatVideo() {
+    const video = document.createElement("video");
+    video.style.position = "absolute";
+    video.style.top = "-9999px";
+    video.style.left = "-9999px";
+    video.muted = true;
+    video.controls = true;
+    document.body.appendChild(video);
+    return video;
+  }
+  inputChange(event) {
+    const file = this.option.fileInput.files[0];
+    this.loadVideo(file);
+    event.target.value = "";
+  }
+  loadVideo(file) {
+    if (file) {
+      const canPlayType = this.video.canPlayType(file.type);
+      this.errorHandle(
+        canPlayType === "maybe" || canPlayType === "probably",
+        `Playback of this file format is not supported: ${file.type}`
+      );
+      const videoUrl = URL.createObjectURL(file);
+      this.videoUrl = videoUrl;
+      this.file = file;
+      this.emit("file", this.file);
+      this.video.src = videoUrl;
+      this.emit("video", this.video);
+    }
+  }
+  start() {
+    if (!this.video.duration)
+      return sleep(1e3).then(() => this.start());
+    const { width, number, begin, end } = this.option;
+    const height = this.video.videoHeight / this.video.videoWidth * width;
+    this.option.height = height;
+    this.option.begin = clamp(begin, 0, this.video.duration);
+    this.option.end = clamp(end || this.video.duration, begin, this.video.duration);
+    this.errorHandle(this.option.end > this.option.begin, `End time must be greater than the start time`);
+    this.duration = this.option.end - this.option.begin;
+    this.density = number / this.duration;
+    this.errorHandle(this.file && this.video, "Please select the video file first");
+    this.errorHandle(!this.processing, "There is currently a task in progress, please wait a moment...");
+    this.errorHandle(this.density <= 1, `The preview density cannot be greater than 1, but got ${this.density}`);
+    const screenshotDate = this.creatScreenshotDate();
+    const canvas = this.creatCanvas();
+    const context2D = canvas.getContext("2d");
+    this.emit("canvas", canvas);
+    const promiseList = screenshotDate.map((item, index) => () => {
+      return new Promise((resolve) => {
+        this.video.oncanplay = () => {
+          context2D.drawImage(this.video, item.x, item.y, width, height);
+          canvas.toBlob((blob) => {
+            if (this.thumbnailUrl) {
+              URL.revokeObjectURL(this.thumbnailUrl);
+            }
+            this.thumbnailUrl = URL.createObjectURL(blob);
+            this.emit("update", this.thumbnailUrl, (index + 1) / number);
+            this.video.oncanplay = null;
+            resolve();
+          });
+        };
+        this.video.currentTime = item.time;
+      });
+    });
+    this.processing = true;
+    return runPromisesInSeries(promiseList).then(() => {
+      this.processing = false;
+      this.emit("done");
+    }).catch((err) => {
+      this.processing = false;
+      this.emit("error", err.message);
+      throw err;
+    });
+  }
+  creatScreenshotDate() {
+    const { number, width, height, column, begin } = this.option;
+    const timeGap = this.duration / number;
+    const timePoints = [begin + timeGap];
+    while (timePoints.length < number) {
+      const last = timePoints[timePoints.length - 1];
+      timePoints.push(last + timeGap);
+    }
+    return timePoints.map((item, index) => ({
+      time: item - timeGap / 2,
+      x: index % column * width,
+      y: Math.floor(index / column) * height
+    }));
+  }
+  creatCanvas() {
+    const { number, width, height, column } = this.option;
+    const canvas = document.createElement("canvas");
+    const context2D = canvas.getContext("2d");
+    canvas.width = width * column;
+    canvas.height = Math.ceil(number / column) * height + 30;
+    context2D.fillStyle = "black";
+    context2D.fillRect(0, 0, canvas.width, canvas.height);
+    context2D.font = "14px Georgia";
+    context2D.fillStyle = "#fff";
+    context2D.fillText(
+      `From: https://artplayer.org/, Number: ${number}, Width: ${width}, Height: ${height}, Column: ${column}`,
+      10,
+      canvas.height - 11
+    );
+    return canvas;
+  }
+  download() {
+    this.errorHandle(
+      this.file && this.thumbnailUrl,
+      "Download does not seem to be ready, please create preview first"
+    );
+    this.errorHandle(!this.processing, "There is currently a task in progress, please wait a moment...");
+    const elink = document.createElement("a");
+    const name = `${getFileName(this.file.name)}.png`;
+    elink.download = name;
+    elink.href = this.thumbnailUrl;
+    document.body.appendChild(elink);
+    elink.click();
+    document.body.removeChild(elink);
+    this.emit("download", name);
+    return this;
+  }
+  errorHandle(condition, msg) {
+    if (!condition) {
+      this.emit("error", msg);
+      throw new Error(msg);
+    }
+  }
+  destroy() {
+    this.option.fileInput.removeEventListener("change", this.inputChange);
+    this.option.fileInput.removeEventListener("dragover", ArtplayerToolThumbnail.ondragover);
+    this.option.fileInput.removeEventListener("drop", ArtplayerToolThumbnail.ondrop);
+    document.body.removeChild(this.video);
+    if (this.videoUrl) {
+      URL.revokeObjectURL(this.videoUrl);
+    }
+    if (this.thumbnailUrl) {
+      URL.revokeObjectURL(this.thumbnailUrl);
+    }
+    this.emit("destroy");
+  }
+}
+window.ArtplayerToolThumbnail = ArtplayerToolThumbnail;
+export {
+  ArtplayerToolThumbnail as default
+};

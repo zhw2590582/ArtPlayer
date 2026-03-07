@@ -1,8 +1,254 @@
-
 /*!
- * artplayer-plugin-ads.js v2.0.0
+ * artplayer-plugin-ads.js v2.0.1
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-!function(e,t,l,n,i){var r="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},a="function"==typeof r[n]&&r[n],o=a.i||{},d=a.cache||{},u="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function p(t,l){if(!d[t]){if(!e[t]){if(i[t])return i[t];var o="function"==typeof r[n]&&r[n];if(!l&&o)return o(t,!0);if(a)return a(t,!0);if(u&&"string"==typeof t)return u(t);var s=Error("Cannot find module '"+t+"'");throw s.code="MODULE_NOT_FOUND",s}y.resolve=function(l){var n=e[t][1][l];return null!=n?n:l},y.cache={};var c=d[t]=new p.Module(t);e[t][0].call(c.exports,y,c,c.exports,r)}return d[t].exports;function y(e){var t=y.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var l={__esModule:!0};return t.forEach(function(e){var t=e[0],n=e[1],i=e[2]||e[0],r=p(n);"*"===t?Object.keys(r).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(l,e)||Object.defineProperty(l,e,{enumerable:!0,get:function(){return r[e]}})}):"*"===i?Object.defineProperty(l,t,{enumerable:!0,value:r}):Object.defineProperty(l,t,{enumerable:!0,get:function(){return"default"===i?r.__esModule?r.default:r:r[i]}})}),l}return p(t)}}p.isParcelRequire=!0,p.Module=function(e){this.id=e,this.bundle=p,this.require=u,this.exports={}},p.modules=e,p.cache=d,p.parent=a,p.distDir=void 0,p.publicUrl=void 0,p.devServer=void 0,p.i=o,p.register=function(t,l){e[t]=[function(e,t){t.exports=l},{}]},Object.defineProperty(p,"root",{get:function(){return r[n]}}),r[n]=p;for(var s=0;s<t.length;s++)p(t[s]);if(l){var c=p(l);"object"==typeof exports&&"u">typeof module?module.exports=c:"function"==typeof define&&define.amd&&define(function(){return c})}}({fZ8n3:[function(e,t,l,n){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(l),i.export(l,"default",()=>o);var r=e("bundle-text:./style.less"),a=i.interopDefault(r);function o(e){return t=>{!function(e){let{version:t,utils:{errorHandle:l}}=e.constructor,n=t.split(".").map(Number);l(n[0]+n[1]/100>=5,`Artplayer.js@${t} is not compatible the artplayerPluginAds@${o.version}. Please update it to version Artplayer.js@5.x.x`)}(t);let{template:{$player:l},icons:{volume:n,volumeClose:i,fullscreenOn:r,fullscreenOff:a,loading:d},constructor:{validator:u,utils:{query:p,append:s,setStyle:c}}}=t;e=u({html:"",video:"",url:"",playDuration:5,totalDuration:10,muted:!1,i18n:{close:"关闭广告",countdown:"%s秒",detail:"查看详情",canBeClosed:"%s秒后可关闭广告"},...e},{html:"?string",video:"?string",url:"?string",playDuration:"number",totalDuration:"number",muted:"?boolean",i18n:{close:"string",countdown:"string",detail:"string",canBeClosed:"string"}});let y=null,f=null,g=null,m=null,v=null,x=null,h=0,b=null,w=!1,j=!1,D=!1;function P(e,t){return t.replace("%s",e)}function O(){w=!0,t.play(),e.video&&y.pause(),c(t.template.$ads,"display","none"),t.emit("artplayerPluginAds:skip",e)}function _(){w||(b=setTimeout(()=>{h+=1;let t=e.playDuration-h;t>=1?g.innerHTML=P(t,e.i18n.canBeClosed):(g.innerHTML=e.i18n.close,D||(D=!0)),m.innerHTML=P(e.totalDuration-h,e.i18n.countdown),h>=e.totalDuration?O():_()},1e3))}function k(){w||clearTimeout(b)}function $(){j||(j=!0,function(){t.template.$ads=s(l,'<div class="artplayer-plugin-ads"></div>'),y=s(t.template.$ads,e.video?`<video class="artplayer-plugin-ads-video" src="${e.video}" loop playsInline></video>`:`<div class="artplayer-plugin-ads-html">${e.html}</div>`),x=s(t.template.$ads,'<div class="artplayer-plugin-ads-loading"></div>'),s(x,d),g=p(".artplayer-plugin-ads-close",f=s(t.template.$ads,`<div class="artplayer-plugin-ads-timer"><div class="artplayer-plugin-ads-close">${e.playDuration<=0?e.i18n.close:P(e.playDuration,e.i18n.canBeClosed)}</div><div class="artplayer-plugin-ads-countdown">${P(e.totalDuration,e.i18n.countdown)}</div></div>`)),m=p(".artplayer-plugin-ads-countdown",f),e.playDuration>=e.totalDuration&&c(g,"display","none"),t.proxy(g,"click",()=>{D&&O()});let o=p(".artplayer-plugin-ads-detail",v=s(t.template.$ads,`<div class="artplayer-plugin-ads-control"><div class="artplayer-plugin-ads-detail">${e.i18n.detail}</div><div class="artplayer-plugin-ads-muted"></div><div class="artplayer-plugin-ads-fullscreen"></div></div>`)),u=p(".artplayer-plugin-ads-muted",v),h=p(".artplayer-plugin-ads-fullscreen",v);if(e.url?t.proxy(o,"click",()=>{window.open(e.url),t.emit("artplayerPluginAds:click",e)}):c(o,"display","none"),e.video){let l=s(u,n),r=s(u,i);c(r,"display","none"),e.muted&&(y.muted=!0,c(l,"display","none"),c(r,"display","inline-flex")),t.proxy(u,"click",()=>{y.muted=!y.muted,y.muted?(c(l,"display","none"),c(r,"display","inline-flex")):(c(l,"display","inline-flex"),c(r,"display","none"))})}else c(u,"display","none");let b=s(h,r),w=s(h,a);c(w,"display","none"),t.proxy(h,"click",()=>{t.fullscreen=!t.fullscreen,t.fullscreen?(c(b,"display","inline-flex"),c(w,"display","none")):(c(b,"display","none"),c(w,"display","inline-flex"))}),t.proxy(y,"click",()=>{e.url&&window.open(e.url),t.emit("artplayerPluginAds:click",e)})}(),t.pause(),e.video?(t.proxy(y,"error",O),t.proxy(y,"loadedmetadata",()=>{_(),y.play(),c(f,"display","flex"),c(v,"display","flex"),c(x,"display","none")})):(_(),c(f,"display","flex"),c(v,"display","flex"),c(x,"display","none")),t.on("document:visibilitychange",()=>{document.hidden?k():_()}))}return t.on("ready",()=>{t.once("play",$),t.once("video:playing",$)}),{name:"artplayerPluginAds",skip:O,pause:k,play:_}}}if("u">typeof document&&!document.getElementById("artplayer-plugin-ads")){let e=document.createElement("style");e.id="artplayer-plugin-ads",e.textContent=a.default,document.head.appendChild(e)}"u">typeof window&&(window.artplayerPluginAds=o)},{"bundle-text:./style.less":"3vq6I","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"3vq6I":[function(e,t,l,n){t.exports=".artplayer-plugin-ads{z-index:150;color:#fff;background-color:#000;width:100%;height:100%;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{justify-content:center;align-items:center;width:100%;height:100%;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:none;position:absolute;top:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{justify-content:center;align-items:center;width:100%;height:100%;display:flex;position:absolute;inset:0}"},{}],loqXi:[function(e,t,l,n){l.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},l.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},l.exportAll=function(e,t){return Object.keys(e).forEach(function(l){"default"===l||"__esModule"===l||Object.prototype.hasOwnProperty.call(t,l)||Object.defineProperty(t,l,{enumerable:!0,get:function(){return e[l]}})}),t},l.export=function(e,t,l){Object.defineProperty(e,t,{enumerable:!0,get:l})}},{}]},["fZ8n3"],"fZ8n3","parcelRequire4dc0",{});let{default:e}=parcelRequire4dc0("fZ8n3");export{e as default};
+const style = ".artplayer-plugin-ads{position:absolute;z-index:150;inset:0;width:100%;height:100%;overflow:hidden;font-size:13px;line-height:1;color:#fff;background-color:#000}.artplayer-plugin-ads .artplayer-plugin-ads-html{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:none;position:absolute;top:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div{display:flex;align-items:center;background-color:#00000080;border-radius:15px;margin-left:5px;padding:5px 10px;cursor:pointer}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{display:flex;align-items:center;background-color:#00000080;border-radius:15px;margin-left:5px;padding:5px 10px;cursor:pointer}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{display:flex;align-items:center;justify-content:center;position:absolute;inset:0;width:100%;height:100%}";
+function checkVersion(art) {
+  const {
+    version,
+    utils: { errorHandle }
+  } = art.constructor;
+  const arr = version.split(".").map(Number);
+  const major = arr[0];
+  const minor = arr[1] / 100;
+  errorHandle(
+    major + minor >= 5,
+    `Artplayer.js@${version} is not compatible the artplayerPluginAds@${artplayerPluginAds.version}. Please update it to version Artplayer.js@5.x.x`
+  );
+}
+function artplayerPluginAds(option) {
+  return (art) => {
+    checkVersion(art);
+    const {
+      template: { $player },
+      icons: { volume, volumeClose, fullscreenOn, fullscreenOff, loading },
+      constructor: {
+        validator,
+        utils: { query, append, setStyle }
+      }
+    } = art;
+    option = validator(
+      {
+        html: "",
+        video: "",
+        url: "",
+        playDuration: 5,
+        totalDuration: 10,
+        muted: false,
+        i18n: {
+          close: "关闭广告",
+          countdown: "%s秒",
+          detail: "查看详情",
+          canBeClosed: "%s秒后可关闭广告"
+        },
+        ...option
+      },
+      {
+        html: "?string",
+        video: "?string",
+        url: "?string",
+        playDuration: "number",
+        totalDuration: "number",
+        muted: "?boolean",
+        i18n: {
+          close: "string",
+          countdown: "string",
+          detail: "string",
+          canBeClosed: "string"
+        }
+      }
+    );
+    let $ads = null;
+    let $timer = null;
+    let $close = null;
+    let $countdown = null;
+    let $control = null;
+    let $loading = null;
+    let time = 0;
+    let timer = null;
+    let isEnd = false;
+    let isInit = false;
+    let isCanClose = false;
+    function getI18n(val, str) {
+      return str.replace("%s", val);
+    }
+    function skip() {
+      isEnd = true;
+      art.play();
+      if (option.video)
+        $ads.pause();
+      setStyle(art.template.$ads, "display", "none");
+      art.emit("artplayerPluginAds:skip", option);
+    }
+    function play() {
+      if (isEnd)
+        return;
+      timer = setTimeout(() => {
+        time += 1;
+        const playDuration = option.playDuration - time;
+        if (playDuration >= 1) {
+          $close.innerHTML = getI18n(playDuration, option.i18n.canBeClosed);
+        } else {
+          $close.innerHTML = option.i18n.close;
+          if (!isCanClose) {
+            isCanClose = true;
+          }
+        }
+        $countdown.innerHTML = getI18n(option.totalDuration - time, option.i18n.countdown);
+        if (time >= option.totalDuration) {
+          skip();
+        } else {
+          play();
+        }
+      }, 1e3);
+    }
+    function pause() {
+      if (isEnd)
+        return;
+      clearTimeout(timer);
+    }
+    function show() {
+      art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
+      $ads = append(
+        art.template.$ads,
+        option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop playsInline></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`
+      );
+      $loading = append(art.template.$ads, '<div class="artplayer-plugin-ads-loading"></div>');
+      append($loading, loading);
+      $timer = append(
+        art.template.$ads,
+        `<div class="artplayer-plugin-ads-timer">
+                    <div class="artplayer-plugin-ads-close">${option.playDuration <= 0 ? option.i18n.close : getI18n(option.playDuration, option.i18n.canBeClosed)}</div>
+                    <div class="artplayer-plugin-ads-countdown">${getI18n(
+          option.totalDuration,
+          option.i18n.countdown
+        )}</div>
+                </div>`
+      );
+      $close = query(".artplayer-plugin-ads-close", $timer);
+      $countdown = query(".artplayer-plugin-ads-countdown", $timer);
+      if (option.playDuration >= option.totalDuration) {
+        setStyle($close, "display", "none");
+      }
+      art.proxy($close, "click", () => {
+        if (isCanClose) {
+          skip();
+        }
+      });
+      $control = append(
+        art.template.$ads,
+        `<div class="artplayer-plugin-ads-control">
+                    <div class="artplayer-plugin-ads-detail">${option.i18n.detail}</div>
+                    <div class="artplayer-plugin-ads-muted"></div>
+                    <div class="artplayer-plugin-ads-fullscreen"></div>
+                </div>`
+      );
+      const $detail = query(".artplayer-plugin-ads-detail", $control);
+      const $muted = query(".artplayer-plugin-ads-muted", $control);
+      const $fullscreen = query(".artplayer-plugin-ads-fullscreen", $control);
+      if (option.url) {
+        art.proxy($detail, "click", () => {
+          window.open(option.url);
+          art.emit("artplayerPluginAds:click", option);
+        });
+      } else {
+        setStyle($detail, "display", "none");
+      }
+      if (option.video) {
+        const $volume = append($muted, volume);
+        const $volumeClose = append($muted, volumeClose);
+        setStyle($volumeClose, "display", "none");
+        if (option.muted) {
+          $ads.muted = true;
+          setStyle($volume, "display", "none");
+          setStyle($volumeClose, "display", "inline-flex");
+        }
+        art.proxy($muted, "click", () => {
+          $ads.muted = !$ads.muted;
+          if ($ads.muted) {
+            setStyle($volume, "display", "none");
+            setStyle($volumeClose, "display", "inline-flex");
+          } else {
+            setStyle($volume, "display", "inline-flex");
+            setStyle($volumeClose, "display", "none");
+          }
+        });
+      } else {
+        setStyle($muted, "display", "none");
+      }
+      const $fullscreenOn = append($fullscreen, fullscreenOn);
+      const $fullscreenOff = append($fullscreen, fullscreenOff);
+      setStyle($fullscreenOff, "display", "none");
+      art.proxy($fullscreen, "click", () => {
+        art.fullscreen = !art.fullscreen;
+        if (art.fullscreen) {
+          setStyle($fullscreenOn, "display", "inline-flex");
+          setStyle($fullscreenOff, "display", "none");
+        } else {
+          setStyle($fullscreenOn, "display", "none");
+          setStyle($fullscreenOff, "display", "inline-flex");
+        }
+      });
+      art.proxy($ads, "click", () => {
+        if (option.url)
+          window.open(option.url);
+        art.emit("artplayerPluginAds:click", option);
+      });
+    }
+    function init() {
+      if (isInit)
+        return;
+      isInit = true;
+      show();
+      art.pause();
+      if (option.video) {
+        art.proxy($ads, "error", skip);
+        art.proxy($ads, "loadedmetadata", () => {
+          play();
+          $ads.play();
+          setStyle($timer, "display", "flex");
+          setStyle($control, "display", "flex");
+          setStyle($loading, "display", "none");
+        });
+      } else {
+        play();
+        setStyle($timer, "display", "flex");
+        setStyle($control, "display", "flex");
+        setStyle($loading, "display", "none");
+      }
+      art.on("document:visibilitychange", () => {
+        if (document.hidden) {
+          pause();
+        } else {
+          play();
+        }
+      });
+    }
+    art.on("ready", () => {
+      art.once("play", init);
+      art.once("video:playing", init);
+    });
+    return {
+      name: "artplayerPluginAds",
+      skip,
+      pause,
+      play
+    };
+  };
+}
+if (typeof document !== "undefined") {
+  if (!document.getElementById("artplayer-plugin-ads")) {
+    const $style = document.createElement("style");
+    $style.id = "artplayer-plugin-ads";
+    $style.textContent = style;
+    document.head.appendChild($style);
+  }
+}
+if (typeof window !== "undefined") {
+  window.artplayerPluginAds = artplayerPluginAds;
+}
+export {
+  artplayerPluginAds as default
+};

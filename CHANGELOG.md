@@ -6,10 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+- Refactor `Parcel` to `Vite`
 - Change `Artplayer.FULLSCREEN_WEB_IN_BODY` defaults to `true`
 - The `reset` method is used to reset video request
 - Fix [#1014](https://github.com/zhw2590582/ArtPlayer/issues/1014)
 - Fix [#1023](https://github.com/zhw2590582/ArtPlayer/issues/1023)
+- Fix [#1028](https://github.com/zhw2590582/ArtPlayer/issues/1028)
 - Add `artplayer-plugin-jassub` plugin
 - Add `artplayer-proxy-mediabunny` plugin
 - Add `artplayer-plugin-audio-track` plugin

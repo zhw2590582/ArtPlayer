@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-iframe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Iframe plugin for ArtPlayer",
   "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "artplayer-proxy-mediabunny",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "mediabunny proxy for ArtPlayer",
   "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",

@@ -1,8 +1,15611 @@
-
 /*!
- * artplayer-proxy-mediabunny.js v1.0.0
+ * artplayer-proxy-mediabunny.js v1.0.1
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-!function(e,t,r,a,i){var s="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},n="function"==typeof s[a]&&s[a],o=n.i||{},l=n.cache||{},c="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function d(t,r){if(!l[t]){if(!e[t]){if(i[t])return i[t];var o="function"==typeof s[a]&&s[a];if(!r&&o)return o(t,!0);if(n)return n(t,!0);if(c&&"string"==typeof t)return c(t);var u=Error("Cannot find module '"+t+"'");throw u.code="MODULE_NOT_FOUND",u}m.resolve=function(r){var a=e[t][1][r];return null!=a?a:r},m.cache={};var h=l[t]=new d.Module(t);e[t][0].call(h.exports,m,h,h.exports,s)}return l[t].exports;function m(e){var t=m.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var r={__esModule:!0};return t.forEach(function(e){var t=e[0],a=e[1],i=e[2]||e[0],s=d(a);"*"===t?Object.keys(s).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(r,e)||Object.defineProperty(r,e,{enumerable:!0,get:function(){return s[e]}})}):"*"===i?Object.defineProperty(r,t,{enumerable:!0,value:s}):Object.defineProperty(r,t,{enumerable:!0,get:function(){return"default"===i?s.__esModule?s.default:s:s[i]}})}),r}return d(t)}}d.isParcelRequire=!0,d.Module=function(e){this.id=e,this.bundle=d,this.require=c,this.exports={}},d.modules=e,d.cache=l,d.parent=n,d.distDir=void 0,d.publicUrl=void 0,d.devServer=void 0,d.i=o,d.register=function(t,r){e[t]=[function(e,t){t.exports=r},{}]},Object.defineProperty(d,"root",{get:function(){return s[a]}}),s[a]=d;for(var u=0;u<t.length;u++)d(t[u]);if(r){var h=d(r);"object"==typeof exports&&"u">typeof module?module.exports=h:"function"==typeof define&&define.amd&&define(function(){return h})}}({"2x2Ir":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"default",()=>o);var s=e("./VideoShim.js"),n=i.interopDefault(s);function o(e={}){return t=>{let{constructor:r}=t,{createElement:a}=r.utils,i=a("canvas"),s=i.getContext("2d"),o=new(0,n.default)({art:t,canvas:i,ctx:s,option:e}),l={};for(let e in i)"function"==typeof i[e]&&(l[e]=i[e].bind(i));for(let e of new Set([...Object.getOwnPropertyNames(o),...Object.getOwnPropertyNames(Object.getPrototypeOf(o))]))"constructor"!==e&&(e in i||Object.defineProperty(i,e,{get(){let t=o[e];return"function"==typeof t?t.bind(o):t},set(t){o[e]=t},configurable:!0,enumerable:!0}));for(let e in l)i[e]=(...t)=>l[e](...t);function c(){t.template?.$player&&!t.option.autoSize&&Object.assign(i.style,{width:"100%",height:"100%",objectFit:"contain"})}return t.on("resize",c),t.on("video:loadedmetadata",c),t.on("destroy",()=>{o.destroy()}),i}}"u">typeof window&&(window.artplayerProxyMediabunny=o)},{"./VideoShim.js":"kzYuW","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],kzYuW:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r);var s=e("./EventTarget.js"),n=i.interopDefault(s),o=e("./MediaBunnyEngine.js"),l=i.interopDefault(o);r.default=class{constructor({art:e,canvas:t,ctx:r,option:a}){this.art=e,this.canvas=t,this.option=a,this.events=new(0,n.default),this.engine=new(0,l.default)({canvas:t,ctx:r,events:this.events,option:a}),this._src=null,this._volume=a.volume??.7,this._muted=!!a.muted,this._playbackRate=1,this.engine.setVolume(this._volume,this._muted),this.setupEventForwarding(),a.source?this.src=a.source:e.option?.url&&(this.src=e.option.url)}setupEventForwarding(){let{events:e}=this.art.constructor.config;e.forEach(e=>{this.events.addEventListener(e,e=>{this.art.emit(`video:${e.type}`,e)})})}addEventListener(e,t){this.events.addEventListener(e,t)}removeEventListener(e,t){this.events.removeEventListener(e,t)}get src(){return this._src}set src(e){this._src=e,e&&this.engine.load(e)}get currentSrc(){return this._src}get currentTime(){return this.engine.currentTime}set currentTime(e){this.engine.seek(Number(e)||0)}get duration(){return this.engine.duration}get buffered(){return this.createTimeRanges(0,this.engine.duration)}get played(){return this.createTimeRanges(0,this.engine.currentTime)}get seekable(){return this.createTimeRanges(0,this.engine.duration)}createTimeRanges(e,t){let r=this.engine.duration;return!r||Number.isNaN(r)||t<=0?{length:0,start:()=>0,end:()=>0}:{length:1,start:()=>e,end:()=>t}}get paused(){return this.engine.paused}get playing(){return!this.engine.paused&&!this.engine.ended}get ended(){return this.engine.ended}get seeking(){return this.engine.seeking}get readyState(){return this.engine.readyState}get networkState(){return this.engine.networkState}get error(){return this.engine.error}get playbackRate(){return this._playbackRate}set playbackRate(e){let t=Number(e);Number.isNaN(t)||t<=0||(this._playbackRate=t,this.engine.setPlaybackRate(t),this.events.emit("ratechange"))}get volume(){return this._volume}set volume(e){this._volume=Math.max(0,Math.min(1,Number(e)||0)),this._muted=!1,this.engine.setVolume(this._volume,this._muted),this.events.emit("volumechange")}get muted(){return this._muted}set muted(e){this._muted=!!e,this.engine.setVolume(this._volume,this._muted),this.events.emit("volumechange")}play(){return this.engine.play()}pause(){this.engine.pause()}load(){this._src&&this.engine.load(this._src)}get videoWidth(){return this.engine.videoWidth}get videoHeight(){return this.engine.videoHeight}get poster(){return this.option.poster||""}set poster(e){this.option.poster=e}get autoplay(){return this.option.autoplay||!1}set autoplay(e){}get loop(){return this.option.loop||!1}set loop(e){}get controls(){return!1}set controls(e){}get playsInline(){return!0}set playsInline(e){}get crossOrigin(){return this.option.crossOrigin||""}set crossOrigin(e){}get preload(){return"auto"}set preload(e){}get defaultMuted(){return!1}set defaultMuted(e){}get defaultPlaybackRate(){return 1}set defaultPlaybackRate(e){}canPlayType(e){return"maybe"}getBoundingClientRect(){return this.canvas.getBoundingClientRect()}requestVideoFrameCallback(e){return requestAnimationFrame(t=>{e(t,{presentationTime:this.engine.currentTime,expectedDisplayTime:t+16.6,width:this.engine.videoWidth,height:this.engine.videoHeight,mediaTime:this.engine.currentTime,presentedFrames:0,processingDuration:0,captureTime:t,receiveTime:t,rtpTimestamp:0})})}cancelVideoFrameCallback(e){cancelAnimationFrame(e)}setAttribute(e,t){"src"===e?this.src=t:"autoplay"===e?this.autoplay=t:"loop"===e?this.loop=t:"muted"===e?this.muted=!0:this.canvas.setAttribute(e,t)}destroy(){this.engine.destroy()}}},{"./EventTarget.js":"b6QFU","./MediaBunnyEngine.js":"ftYJr","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],b6QFU:[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r),r.default=class{constructor(){this.listeners=new Map}addEventListener(e,t){this.listeners.has(e)||this.listeners.set(e,[]),this.listeners.get(e).push(t)}removeEventListener(e,t){let r=this.listeners.get(e);if(!r)return;let a=r.indexOf(t);a>=0&&r.splice(a,1)}emit(e,t){let r=new Event(e);r.detail=t;let a=this.listeners.get(e);a&&a.forEach(e=>e(r))}}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],loqXi:[function(e,t,r,a){r.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},r.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},r.exportAll=function(e,t){return Object.keys(e).forEach(function(r){"default"===r||"__esModule"===r||Object.prototype.hasOwnProperty.call(t,r)||Object.defineProperty(t,r,{enumerable:!0,get:function(){return e[r]}})}),t},r.export=function(e,t,r){Object.defineProperty(e,t,{enumerable:!0,get:r})}},{}],ftYJr:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r);var s=e("./AudioEngine.js"),n=i.interopDefault(s),o=e("./VideoEngine.js"),l=i.interopDefault(o);r.default=class{constructor({canvas:e,ctx:t,events:r,option:a={}}){this.events=r,this.option=a,this.audio=new(0,n.default)(r),this.video=new(0,l.default)({canvas:e,ctx:t,events:r,timeupdateInterval:a.timeupdateInterval??250,avSyncTolerance:a.avSyncTolerance??.12,dropLateFrames:a.dropLateFrames??!1,poster:a.poster??"",preflightRange:a.preflightRange??!1}),this.paused=!0,this.ended=!1,this.readyState=0,this.networkState=0,this.error=null,this.seeking=!1,this.loadSeq=0,r.addEventListener?.("ended",()=>{this.ended=!0,this.paused=!0})}async load(e){let t=++this.loadSeq;this.pause(),this.ended=!1,this.error=null,this.networkState=2,this.readyState=0,setTimeout(()=>this.events.emit("waiting"),0),setTimeout(()=>this.events.emit("loadstart"),0);let r=Number.isFinite(this.option.loadTimeout)?this.option.loadTimeout:0;try{await Promise.race([this.performLoad(e,t),r>0?this.createTimeout(r):new Promise(()=>{})])}catch(e){if(t!==this.loadSeq)return;this.loadSeq++,this.error={code:4,message:e.message},this.networkState=3,this.events.emit("error")}}async performLoad(e,t){let r=!1,a=!1,i=()=>{r&&a&&(this.readyState=1,this.events.emit("loadedmetadata"),this.events.emit("durationchange"),this.events.emit("progress"))};try{if(await Promise.all([this.video.load(e,()=>{t===this.loadSeq&&(r=!0,i())}),this.audio.load(e,()=>{t===this.loadSeq&&(a=!0,i())})]),t!==this.loadSeq)return;this.readyState=4,this.networkState=1,this.events.emit("loadeddata"),this.events.emit("canplay"),this.events.emit("canplaythrough"),this.events.emit("progress")}catch(e){if(t!==this.loadSeq)return;this.error={code:4,message:e.message},this.networkState=3,this.events.emit("error"),console.error("MediaBunny load error:",e)}}createTimeout(e){return new Promise((t,r)=>{setTimeout(()=>r(Error("Load timeout")),e)})}async play(){this.paused&&(this.ended&&(this.ended=!1,await this.seek(0)),this.paused=!1,await this.audio.play(),this.video.start(this.audio),this.events.emit("play"),this.events.emit("playing"))}pause(){this.paused||(this.paused=!0,this.audio.pause(),this.video.stop(),this.events.emit("pause"))}async seek(e){let t=!this.paused;this.ended=!1,this.seeking=!0,this.events.emit("seeking"),this.events.emit("waiting"),this.pause(),await Promise.all([this.audio.seek(e),this.video.seek(e)]),this.seeking=!1,this.events.emit("seeked"),t&&!this.ended&&await this.play()}setVolume(e,t){this.audio.setVolume(e,t)}setPlaybackRate(e){this.audio.setPlaybackRate(e),this.video.setPlaybackRate(e)}destroy(){this.pause(),this.audio.destroy(),this.video.destroy()}get currentTime(){return this.audio.currentTime}get duration(){return this.audio.duration||this.video.duration}get videoWidth(){return this.video.width}get videoHeight(){return this.video.height}}},{"./AudioEngine.js":"4pDqb","./VideoEngine.js":"5CrUd","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"4pDqb":[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r);var i=e("mediabunny");r.default=class{constructor(e){this.events=e,this.input=null,this.audioSink=null,this.audioIterator=null,this.audioContext=null,this.gainNode=null,this.audioContextStartTime=0,this.playbackTimeAtStart=0,this.latestScheduledEndTime=0,this.duration=NaN,this.paused=!0,this.volume=.7,this.muted=!1,this.playbackRate=1,this.asyncId=0,this.queuedNodes=new Set}get currentTime(){return this.paused?this.playbackTimeAtStart:(this.audioContext.currentTime-this.audioContextStartTime)*this.playbackRate+this.playbackTimeAtStart}normalizeSource(e){return"string"==typeof e?new(0,i.UrlSource)(e):e instanceof Blob?new(0,i.BlobSource)(e):"u">typeof ReadableStream&&e instanceof ReadableStream?new(0,i.ReadableStreamSource)(e):e}ensureAudioContext(e){if(this.audioContext)return;let t=window.AudioContext||window.webkitAudioContext;try{this.audioContext=new t({sampleRate:e})}catch{this.audioContext=new t}this.gainNode=this.audioContext.createGain(),this.gainNode.connect(this.audioContext.destination),this.updateGain()}updateGain(){if(!this.gainNode)return;let e=this.muted?0:this.volume;this.gainNode.gain.value=e*e}stopQueuedNodes(){this.queuedNodes.forEach(e=>e.stop()),this.queuedNodes.clear()}async stopIterator(){await this.audioIterator?.return(),this.audioIterator=null}async load(e,t){let r=++this.asyncId;await this.stopIterator(),this.stopQueuedNodes(),this.paused=!0,this.playbackTimeAtStart=0,this.audioContextStartTime=0;let a=this.normalizeSource(e);if(!a||(this.input=new(0,i.Input)({source:a,formats:i.ALL_FORMATS}),this.duration=await this.input.computeDuration(),r!==this.asyncId))return;let s=await this.input.getPrimaryAudioTrack();if(!s||null===s.codec||!await s.canDecode()){this.audioSink=null,this.ensureAudioContext(),t?.();return}this.ensureAudioContext(s.sampleRate),this.audioSink=new(0,i.AudioBufferSink)(s),t?.()}async runIterator(e){if(this.audioSink)for(await this.stopIterator(),this.audioIterator=this.audioSink.buffers(this.currentTime);;){let t;if(e!==this.asyncId||this.paused)return;let r=this.audioIterator.next(),a=setInterval(()=>{e!==this.asyncId||this.paused?clearInterval(a):"running"===this.audioContext.state&&this.audioContext.currentTime>=this.latestScheduledEndTime-.2&&(this.audioContext.suspend(),this.events.emit("waiting"))},50);try{t=await r}catch(e){console.error("Audio iterator error:",e);break}finally{clearInterval(a)}if(e!==this.asyncId||this.paused)return;if("suspended"===this.audioContext.state&&(await this.audioContext.resume(),this.events.emit("canplay"),this.events.emit("playing")),t.done)break;let{buffer:i,timestamp:s}=t.value,n=this.audioContext.createBufferSource();n.buffer=i,n.connect(this.gainNode),n.playbackRate.value=this.playbackRate;let o=this.audioContextStartTime+(s-this.playbackTimeAtStart)/this.playbackRate,l=o+i.duration/this.playbackRate;l>this.latestScheduledEndTime&&(this.latestScheduledEndTime=l),o>=this.audioContext.currentTime?n.start(o):n.start(this.audioContext.currentTime,(this.audioContext.currentTime-o)*this.playbackRate),this.queuedNodes.add(n),n.onended=()=>this.queuedNodes.delete(n)}}async play(){if(!this.paused)return;this.audioContext||this.ensureAudioContext(),"suspended"===this.audioContext.state&&await this.audioContext.resume(),this.audioContextStartTime=this.audioContext.currentTime,this.latestScheduledEndTime=this.audioContextStartTime,this.paused=!1;let e=++this.asyncId;this.runIterator(e)}pause(){this.paused||(this.playbackTimeAtStart=this.currentTime,this.paused=!0,this.stopIterator(),this.stopQueuedNodes())}async seek(e){this.playbackTimeAtStart=Math.max(0,e),this.audioContextStartTime=this.audioContext.currentTime,this.latestScheduledEndTime=this.audioContextStartTime;let t=++this.asyncId;this.paused||this.runIterator(t)}setVolume(e,t){this.volume=e,this.muted=t,this.updateGain()}setPlaybackRate(e){if(e!==this.playbackRate&&(this.paused||(this.playbackTimeAtStart=this.currentTime,this.audioContextStartTime=this.audioContext.currentTime),this.playbackRate=e,!this.paused)){let e=++this.asyncId;this.runIterator(e)}}destroy(){this.asyncId++,this.pause(),this.audioContext?.close(),this.audioContext=null,this.input=null,this.audioSink=null}}},{mediabunny:[["ALL_FORMATS","gFGfd"],["AudioBufferSink","6e2oW"],["BlobSource","108pa"],["ReadableStreamSource","108pa"],["UrlSource","108pa"],["Input","6K6yf"]],"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],gFGfd:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"InputFormat",()=>S),i.export(r,"IsobmffInputFormat",()=>T),i.export(r,"Mp4InputFormat",()=>I),i.export(r,"QuickTimeInputFormat",()=>w),i.export(r,"MatroskaInputFormat",()=>x),i.export(r,"WebMInputFormat",()=>E),i.export(r,"Mp3InputFormat",()=>P),i.export(r,"WaveInputFormat",()=>v),i.export(r,"OggInputFormat",()=>C),i.export(r,"FlacInputFormat",()=>A),i.export(r,"AdtsInputFormat",()=>B),i.export(r,"MpegTsInputFormat",()=>_),i.export(r,"MP4",()=>D),i.export(r,"QTFF",()=>M),i.export(r,"MATROSKA",()=>F),i.export(r,"WEBM",()=>R),i.export(r,"MP3",()=>U),i.export(r,"WAVE",()=>L),i.export(r,"OGG",()=>N),i.export(r,"ADTS",()=>O),i.export(r,"FLAC",()=>j),i.export(r,"MPEG_TS",()=>z),i.export(r,"ALL_FORMATS",()=>V);var s=e("./isobmff/isobmff-demuxer.js"),n=e("./matroska/ebml.js"),o=e("./matroska/matroska-demuxer.js"),l=e("./mp3/mp3-demuxer.js"),c=e("../shared/mp3-misc.js"),d=e("./id3.js"),u=e("./mp3/mp3-reader.js"),h=e("./ogg/ogg-demuxer.js"),m=e("./wave/wave-demuxer.js"),p=e("./adts/adts-reader.js"),f=e("./adts/adts-demuxer.js"),g=e("./reader.js"),k=e("./flac/flac-demuxer.js"),b=e("./mpeg-ts/mpeg-ts-demuxer.js"),y=e("./mpeg-ts/mpeg-ts-misc.js");class S{}class T extends S{async _getMajorBrand(e){let t=e._reader.requestSlice(0,12);return(t instanceof Promise&&(t=await t),t)?(t.skip(4),"ftyp"!==(0,g.readAscii)(t,4))?null:(0,g.readAscii)(t,4):null}_createDemuxer(e){return new(0,s.IsobmffDemuxer)(e)}}class I extends T{async _canReadInput(e){let t=await this._getMajorBrand(e);return!!t&&"qt "!==t}get name(){return"MP4"}get mimeType(){return"video/mp4"}}class w extends T{async _canReadInput(e){return"qt "===await this._getMajorBrand(e)}get name(){return"QuickTime File Format"}get mimeType(){return"video/quicktime"}}class x extends S{async isSupportedEBMLOfDocType(e,t){let r=e._reader.requestSlice(0,n.MAX_HEADER_SIZE);if(r instanceof Promise&&(r=await r),!r)return!1;let a=(0,n.readVarIntSize)(r);if(null===a||a<1||a>8||(0,n.readUnsignedInt)(r,a)!==n.EBMLId.EBML)return!1;let i=(0,n.readElementSize)(r);if("number"!=typeof i)return!1;let s=e._reader.requestSlice(r.filePos,i);if(s instanceof Promise&&(s=await s),!s)return!1;let o=r.filePos;for(;s.filePos<=o+i-n.MIN_HEADER_SIZE;){let e=(0,n.readElementHeader)(s);if(!e)break;let{id:r,size:a}=e,i=s.filePos;if(void 0===a)return!1;switch(r){case n.EBMLId.EBMLVersion:case n.EBMLId.EBMLReadVersion:if(1!==(0,n.readUnsignedInt)(s,a))return!1;break;case n.EBMLId.DocType:if((0,n.readAsciiString)(s,a)!==t)return!1;break;case n.EBMLId.DocTypeVersion:if((0,n.readUnsignedInt)(s,a)>4)return!1}s.filePos=i+a}return!0}_canReadInput(e){return this.isSupportedEBMLOfDocType(e,"matroska")}_createDemuxer(e){return new(0,o.MatroskaDemuxer)(e)}get name(){return"Matroska"}get mimeType(){return"video/x-matroska"}}class E extends x{_canReadInput(e){return this.isSupportedEBMLOfDocType(e,"webm")}get name(){return"WebM"}get mimeType(){return"video/webm"}}class P extends S{async _canReadInput(e){let t=0;for(;;){let r=e._reader.requestSlice(t,d.ID3_V2_HEADER_SIZE);if(r instanceof Promise&&(r=await r),!r)break;let a=(0,d.readId3V2Header)(r);if(!a)break;t=r.filePos+a.size}let r=await (0,u.readNextMp3FrameHeader)(e._reader,t,t+4096);if(!r)return!1;let a=r.header,i=(0,c.getXingOffset)(a.mpegVersionId,a.channel),s=e._reader.requestSlice(r.startPos+i,4);if(s instanceof Promise&&(s=await s),!s)return!1;let n=(0,g.readU32Be)(s);if(n===c.XING||n===c.INFO)return!0;t=r.startPos+r.header.totalSize;let o=await (0,u.readNextMp3FrameHeader)(e._reader,t,t+c.FRAME_HEADER_SIZE);if(!o)return!1;let l=o.header;return a.channel===l.channel&&a.sampleRate===l.sampleRate}_createDemuxer(e){return new(0,l.Mp3Demuxer)(e)}get name(){return"MP3"}get mimeType(){return"audio/mpeg"}}class v extends S{async _canReadInput(e){let t=e._reader.requestSlice(0,12);if(t instanceof Promise&&(t=await t),!t)return!1;let r=(0,g.readAscii)(t,4);return("RIFF"===r||"RIFX"===r||"RF64"===r)&&(t.skip(4),"WAVE"===(0,g.readAscii)(t,4))}_createDemuxer(e){return new(0,m.WaveDemuxer)(e)}get name(){return"WAVE"}get mimeType(){return"audio/wav"}}class C extends S{async _canReadInput(e){let t=e._reader.requestSlice(0,4);return t instanceof Promise&&(t=await t),!!t&&"OggS"===(0,g.readAscii)(t,4)}_createDemuxer(e){return new(0,h.OggDemuxer)(e)}get name(){return"Ogg"}get mimeType(){return"application/ogg"}}class A extends S{async _canReadInput(e){let t=e._reader.requestSlice(0,4);return t instanceof Promise&&(t=await t),!!t&&"fLaC"===(0,g.readAscii)(t,4)}get name(){return"FLAC"}get mimeType(){return"audio/flac"}_createDemuxer(e){return new(0,k.FlacDemuxer)(e)}}class B extends S{async _canReadInput(e){let t=0;for(;;){let r=e._reader.requestSlice(t,d.ID3_V2_HEADER_SIZE);if(r instanceof Promise&&(r=await r),!r)break;let a=(0,d.readId3V2Header)(r);if(!a)break;t=r.filePos+a.size}let r=e._reader.requestSliceRange(t,p.MIN_ADTS_FRAME_HEADER_SIZE,p.MAX_ADTS_FRAME_HEADER_SIZE);if(r instanceof Promise&&(r=await r),!r)return!1;let a=(0,p.readAdtsFrameHeader)(r);if(!a||(t+=a.frameLength,(r=e._reader.requestSliceRange(t,p.MIN_ADTS_FRAME_HEADER_SIZE,p.MAX_ADTS_FRAME_HEADER_SIZE))instanceof Promise&&(r=await r),!r))return!1;let i=(0,p.readAdtsFrameHeader)(r);return!!i&&a.objectType===i.objectType&&a.samplingFrequencyIndex===i.samplingFrequencyIndex&&a.channelConfiguration===i.channelConfiguration}_createDemuxer(e){return new(0,f.AdtsDemuxer)(e)}get name(){return"ADTS"}get mimeType(){return"audio/aac"}}class _ extends S{async _canReadInput(e){let t=y.TS_PACKET_SIZE+16+1,r=e._reader.requestSlice(0,t);if(r instanceof Promise&&(r=await r),!r)return!1;let a=(0,g.readBytes)(r,t);return 71===a[0]&&71===a[y.TS_PACKET_SIZE]||71===a[0]&&71===a[y.TS_PACKET_SIZE+16]||71===a[4]&&71===a[4+y.TS_PACKET_SIZE]||!1}_createDemuxer(e){return new(0,b.MpegTsDemuxer)(e)}get name(){return"MPEG Transport Stream"}get mimeType(){return"video/MP2T"}}let D=new I,M=new w,F=new x,R=new E,U=new P,L=new v,N=new C,O=new B,j=new A,z=new _,V=[D,M,F,R,L,N,j,U,O,z]},{"./isobmff/isobmff-demuxer.js":"kdFjc","./matroska/ebml.js":"4qt3Y","./matroska/matroska-demuxer.js":"fO0Ln","./mp3/mp3-demuxer.js":"1xfyp","../shared/mp3-misc.js":"jGy7Y","./id3.js":"8coNE","./mp3/mp3-reader.js":"ixvHZ","./ogg/ogg-demuxer.js":"lRP3H","./wave/wave-demuxer.js":"lP1MW","./adts/adts-reader.js":"iNEYI","./adts/adts-demuxer.js":"b3bBY","./reader.js":"6AkKg","./flac/flac-demuxer.js":"4fsLo","./mpeg-ts/mpeg-ts-demuxer.js":"hFAEl","./mpeg-ts/mpeg-ts-misc.js":"bkuJB","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],kdFjc:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"IsobmffDemuxer",()=>f);var s=e("../codec.js"),n=e("../codec-data.js"),o=e("../demuxer.js"),l=e("../input-track.js"),c=e("../misc.js"),d=e("../packet.js"),u=e("./isobmff-misc.js"),h=e("./isobmff-reader.js"),m=e("../reader.js"),p=e("../metadata.js");class f extends o.Demuxer{constructor(e){super(e),this.moovSlice=null,this.currentTrack=null,this.tracks=[],this.metadataPromise=null,this.movieTimescale=-1,this.movieDurationInTimescale=-1,this.isQuickTime=!1,this.metadataTags={},this.currentMetadataKeys=null,this.isFragmented=!1,this.fragmentTrackDefaults=[],this.currentFragment=null,this.lastReadFragment=null,this.reader=e._reader}async computeDuration(){let e=await this.getTracks();return Math.max(0,...await Promise.all(e.map(e=>e.computeDuration())))}async getTracks(){return await this.readMetadata(),this.tracks.map(e=>e.inputTrack)}async getMimeType(){await this.readMetadata();let e=await Promise.all(this.tracks.map(e=>e.inputTrack.getCodecParameterString()));return(0,u.buildIsobmffMimeType)({isQuickTime:this.isQuickTime,hasVideo:this.tracks.some(e=>e.info?.type==="video"),hasAudio:this.tracks.some(e=>e.info?.type==="audio"),codecStrings:e.filter(Boolean)})}async getMetadataTags(){return await this.readMetadata(),this.metadataTags}readMetadata(){return this.metadataPromise??=(async()=>{let e=0;for(;;){let t=this.reader.requestSliceRange(e,h.MIN_BOX_HEADER_SIZE,h.MAX_BOX_HEADER_SIZE);if(t instanceof Promise&&(t=await t),!t)break;let r=e,a=(0,h.readBoxHeader)(t);if(!a)break;if("ftyp"===a.name){let e=(0,m.readAscii)(t,4);this.isQuickTime="qt "===e}else if("moov"===a.name){let e=this.reader.requestSlice(t.filePos,a.contentSize);if(e instanceof Promise&&(e=await e),!e)break;for(let t of(this.moovSlice=e,this.readContiguousBoxes(this.moovSlice),this.tracks.sort((e,t)=>Number(t.disposition.default)-Number(e.disposition.default)),this.tracks)){let e=t.editListPreviousSegmentDurations/this.movieTimescale;t.editListOffset-=Math.round(e*t.timescale)}break}e=r+a.totalSize}if(this.isFragmented&&null!==this.reader.fileSize){let e=this.reader.requestSlice(this.reader.fileSize-4,4);e instanceof Promise&&(e=await e),(0,c.assert)(e);let t=(0,m.readU32Be)(e),r=this.reader.fileSize-t;if(r>=0&&r<=this.reader.fileSize-h.MAX_BOX_HEADER_SIZE){let e=this.reader.requestSliceRange(r,h.MIN_BOX_HEADER_SIZE,h.MAX_BOX_HEADER_SIZE);if(e instanceof Promise&&(e=await e),e){let t=(0,h.readBoxHeader)(e);if(t&&"mfra"===t.name){let r=this.reader.requestSlice(e.filePos,t.contentSize);r instanceof Promise&&(r=await r),r&&this.readContiguousBoxes(r)}}}}})()}getSampleTableForTrack(e){if(e.sampleTable)return e.sampleTable;let t={sampleTimingEntries:[],sampleCompositionTimeOffsets:[],sampleSizes:[],keySampleIndices:null,chunkOffsets:[],sampleToChunk:[],presentationTimestamps:null,presentationTimestampIndexMap:null};e.sampleTable=t,(0,c.assert)(this.moovSlice);let r=this.moovSlice.slice(e.sampleTableByteOffset);if(this.currentTrack=e,this.traverseBox(r),this.currentTrack=null,e.info?.type==="audio"&&e.info.codec&&s.PCM_AUDIO_CODECS.includes(e.info.codec)&&0===t.sampleCompositionTimeOffsets.length){(0,c.assert)(e.info?.type==="audio");let r=(0,s.parsePcmCodec)(e.info.codec),a=[],i=[];for(let s=0;s<t.sampleToChunk.length;s++){let n=t.sampleToChunk[s],o=t.sampleToChunk[s+1],l=(o?o.startChunkIndex:t.chunkOffsets.length)-n.startChunkIndex;for(let s=0;s<l;s++){let o=n.startSampleIndex+s*n.samplesPerChunk,l=o+n.samplesPerChunk,d=(0,c.binarySearchLessOrEqual)(t.sampleTimingEntries,o,e=>e.startIndex),u=t.sampleTimingEntries[d],h=(0,c.binarySearchLessOrEqual)(t.sampleTimingEntries,l,e=>e.startIndex),m=t.sampleTimingEntries[h],p=u.startDecodeTimestamp+(o-u.startIndex)*u.delta,f=m.startDecodeTimestamp+(l-m.startIndex)*m.delta-p,g=(0,c.last)(a);g&&g.delta===f?g.count++:a.push({startIndex:n.startChunkIndex+s,startDecodeTimestamp:p,count:1,delta:f});let k=n.samplesPerChunk*r.sampleSize*e.info.numberOfChannels;i.push(k)}n.startSampleIndex=n.startChunkIndex,n.samplesPerChunk=1}t.sampleTimingEntries=a,t.sampleSizes=i}if(t.sampleCompositionTimeOffsets.length>0){for(let e of(t.presentationTimestamps=[],t.sampleTimingEntries))for(let r=0;r<e.count;r++)t.presentationTimestamps.push({presentationTimestamp:e.startDecodeTimestamp+r*e.delta,sampleIndex:e.startIndex+r});for(let e of t.sampleCompositionTimeOffsets)for(let r=0;r<e.count;r++){let a=e.startIndex+r,i=t.presentationTimestamps[a];i&&(i.presentationTimestamp+=e.offset)}t.presentationTimestamps.sort((e,t)=>e.presentationTimestamp-t.presentationTimestamp),t.presentationTimestampIndexMap=Array(t.presentationTimestamps.length).fill(-1);for(let e=0;e<t.presentationTimestamps.length;e++)t.presentationTimestampIndexMap[t.presentationTimestamps[e].sampleIndex]=e}return t}async readFragment(e){if(this.lastReadFragment?.moofOffset===e)return this.lastReadFragment;let t=this.reader.requestSliceRange(e,h.MIN_BOX_HEADER_SIZE,h.MAX_BOX_HEADER_SIZE);t instanceof Promise&&(t=await t),(0,c.assert)(t);let r=(0,h.readBoxHeader)(t);(0,c.assert)(r?.name==="moof");let a=this.reader.requestSlice(e,r.totalSize);a instanceof Promise&&(a=await a),(0,c.assert)(a),this.traverseBox(a);let i=this.lastReadFragment;for(let[,t]of((0,c.assert)(i&&i.moofOffset===e),i.trackData)){let e=t.track,{fragmentPositionCache:r}=e;if(!t.startTimestampIsFinal){let a=e.fragmentLookupTable.find(e=>e.moofOffset===i.moofOffset);if(a)w(t,a.timestamp);else{let e=(0,c.binarySearchLessOrEqual)(r,i.moofOffset-1,e=>e.moofOffset);-1!==e&&w(t,r[e].endTimestamp)}t.startTimestampIsFinal=!0}let a=(0,c.binarySearchLessOrEqual)(r,t.startTimestamp,e=>e.startTimestamp);(-1===a||r[a].moofOffset!==i.moofOffset)&&r.splice(a+1,0,{moofOffset:i.moofOffset,startTimestamp:t.startTimestamp,endTimestamp:t.endTimestamp})}return i}readContiguousBoxes(e){let t=e.filePos;for(;e.filePos-t<=e.length-h.MIN_BOX_HEADER_SIZE&&this.traverseBox(e););}*iterateContiguousBoxes(e){let t=e.filePos;for(;e.filePos-t<=e.length-h.MIN_BOX_HEADER_SIZE;){let t=e.filePos,r=(0,h.readBoxHeader)(e);if(!r)break;yield{boxInfo:r,slice:e},e.filePos=t+r.totalSize}}traverseBox(e){let t=e.filePos,r=(0,h.readBoxHeader)(e);if(!r)return!1;let a=e.filePos,i=t+r.totalSize;switch(r.name){case"mdia":case"minf":case"dinf":case"mfra":case"edts":case"wave":this.readContiguousBoxes(e.slice(a,r.contentSize));break;case"mvhd":{let t=(0,m.readU8)(e);e.skip(3),1===t?(e.skip(16),this.movieTimescale=(0,m.readU32Be)(e),this.movieDurationInTimescale=(0,m.readU64Be)(e)):(e.skip(8),this.movieTimescale=(0,m.readU32Be)(e),this.movieDurationInTimescale=(0,m.readU32Be)(e))}break;case"trak":{let t={id:-1,demuxer:this,inputTrack:null,disposition:{...p.DEFAULT_TRACK_DISPOSITION},info:null,timescale:-1,durationInMovieTimescale:-1,durationInMediaTimescale:-1,rotation:0,internalCodecId:null,name:null,languageCode:c.UNDETERMINED_LANGUAGE,sampleTableByteOffset:-1,sampleTable:null,fragmentLookupTable:[],currentFragmentState:null,fragmentPositionCache:[],editListPreviousSegmentDurations:0,editListOffset:0};this.currentTrack=t,this.readContiguousBoxes(e.slice(a,r.contentSize)),-1!==t.id&&-1!==t.timescale&&null!==t.info&&("video"===t.info.type&&-1!==t.info.width?(t.inputTrack=new(0,l.InputVideoTrack)(this.input,new k(t)),this.tracks.push(t)):"audio"===t.info.type&&-1!==t.info.numberOfChannels&&(t.inputTrack=new(0,l.InputAudioTrack)(this.input,new b(t)),this.tracks.push(t))),this.currentTrack=null}break;case"tkhd":{let t=this.currentTrack;if(!t)break;let r=(0,m.readU8)(e),a=(0,m.readU24Be)(e);if(t.disposition.default=!!(1&a),0===r)e.skip(8),t.id=(0,m.readU32Be)(e),e.skip(4),t.durationInMovieTimescale=(0,m.readU32Be)(e);else if(1===r)e.skip(16),t.id=(0,m.readU32Be)(e),e.skip(4),t.durationInMovieTimescale=(0,m.readU64Be)(e);else throw Error(`Incorrect track header version ${r}.`);e.skip(16);let i=[(0,h.readFixed_16_16)(e),(0,h.readFixed_16_16)(e),(0,h.readFixed_2_30)(e),(0,h.readFixed_16_16)(e),(0,h.readFixed_16_16)(e),(0,h.readFixed_2_30)(e),(0,h.readFixed_16_16)(e),(0,h.readFixed_16_16)(e),(0,h.readFixed_2_30)(e)],s=(0,c.normalizeRotation)((0,c.roundToMultiple)(x(i),90));(0,c.assert)(0===s||90===s||180===s||270===s),t.rotation=s}break;case"elst":{let t=this.currentTrack;if(!t)break;let r=(0,m.readU8)(e);e.skip(3);let a=!1,i=0,s=(0,m.readU32Be)(e);for(let n=0;n<s;n++){let s=1===r?(0,m.readU64Be)(e):(0,m.readU32Be)(e),n=1===r?(0,m.readI64Be)(e):(0,m.readI32Be)(e),o=(0,h.readFixed_16_16)(e);if(0!==s){if(a){console.warn("Unsupported edit list: multiple edits are not currently supported. Only using first edit.");break}if(-1===n){i+=s;continue}if(1!==o){console.warn("Unsupported edit list entry: media rate must be 1.");break}t.editListPreviousSegmentDurations=i,t.editListOffset=n,a=!0}}}break;case"mdhd":{let t=this.currentTrack;if(!t)break;let r=(0,m.readU8)(e);e.skip(3),0===r?(e.skip(8),t.timescale=(0,m.readU32Be)(e),t.durationInMediaTimescale=(0,m.readU32Be)(e)):1===r&&(e.skip(16),t.timescale=(0,m.readU32Be)(e),t.durationInMediaTimescale=(0,m.readU64Be)(e));let a=(0,m.readU16Be)(e);if(a>0){t.languageCode="";for(let e=0;e<3;e++)t.languageCode=String.fromCharCode(96+(31&a))+t.languageCode,a>>=5;(0,c.isIso639Dash2LanguageCode)(t.languageCode)||(t.languageCode=c.UNDETERMINED_LANGUAGE)}}break;case"hdlr":{let t=this.currentTrack;if(!t)break;e.skip(8);let r=(0,m.readAscii)(e,4);"vide"===r?t.info={type:"video",width:-1,height:-1,codec:null,codecDescription:null,colorSpace:null,avcType:null,avcCodecInfo:null,hevcCodecInfo:null,vp9CodecInfo:null,av1CodecInfo:null}:"soun"===r&&(t.info={type:"audio",numberOfChannels:-1,sampleRate:-1,codec:null,codecDescription:null,aacCodecInfo:null})}break;case"stbl":{let i=this.currentTrack;if(!i)break;i.sampleTableByteOffset=t,this.readContiguousBoxes(e.slice(a,r.contentSize))}break;case"stsd":{let t=this.currentTrack;if(!t||null===t.info||t.sampleTable)break;let r=(0,m.readU8)(e);e.skip(3);let a=(0,m.readU32Be)(e);for(let i=0;i<a;i++){let a=e.filePos,i=(0,h.readBoxHeader)(e);if(!i)break;t.internalCodecId=i.name;let n=i.name.toLowerCase();if("video"===t.info.type)"avc1"===n||"avc3"===n?(t.info.codec="avc",t.info.avcType="avc1"===n?1:3):"hvc1"===n||"hev1"===n?t.info.codec="hevc":"vp08"===n?t.info.codec="vp8":"vp09"===n?t.info.codec="vp9":"av01"===n?t.info.codec="av1":console.warn(`Unsupported video codec (sample entry type '${i.name}').`),e.skip(24),t.info.width=(0,m.readU16Be)(e),t.info.height=(0,m.readU16Be)(e),e.skip(50),this.readContiguousBoxes(e.slice(e.filePos,a+i.totalSize-e.filePos));else{"mp4a"===n||("opus"===n?t.info.codec="opus":"flac"===n?t.info.codec="flac":"twos"===n||"sowt"===n||"raw "===n||"in24"===n||"in32"===n||"fl32"===n||"fl64"===n||"lpcm"===n||"ipcm"===n||"fpcm"===n||("ulaw"===n?t.info.codec="ulaw":"alaw"===n?t.info.codec="alaw":console.warn(`Unsupported audio codec (sample entry type '${i.name}').`))),e.skip(8);let o=(0,m.readU16Be)(e);e.skip(6);let l=(0,m.readU16Be)(e),c=(0,m.readU16Be)(e);e.skip(4);let d=(0,m.readU32Be)(e)/65536;if(0===r&&o>0){if(1===o)e.skip(4),c=8*(0,m.readU32Be)(e),e.skip(8);else if(2===o){e.skip(4),d=(0,m.readF64Be)(e),l=(0,m.readU32Be)(e),e.skip(4),c=(0,m.readU32Be)(e);let r=(0,m.readU32Be)(e);if(e.skip(8),"lpcm"===n){let e=c+7>>3,a=!!(1&r),i=!!(2&r),s=4&r?-1:0;c>0&&c<=64&&(a?32===c&&(t.info.codec=i?"pcm-f32be":"pcm-f32"):s&1<<e-1?1===e?t.info.codec="pcm-s8":2===e?t.info.codec=i?"pcm-s16be":"pcm-s16":3===e?t.info.codec=i?"pcm-s24be":"pcm-s24":4===e&&(t.info.codec=i?"pcm-s32be":"pcm-s32"):1===e&&(t.info.codec="pcm-u8")),null===t.info.codec&&console.warn("Unsupported PCM format.")}}}"opus"===t.info.codec&&(d=s.OPUS_SAMPLE_RATE),t.info.numberOfChannels=l,t.info.sampleRate=d,"twos"===n?8===c?t.info.codec="pcm-s8":16===c?t.info.codec="pcm-s16be":(console.warn(`Unsupported sample size ${c} for codec 'twos'.`),t.info.codec=null):"sowt"===n?8===c?t.info.codec="pcm-s8":16===c?t.info.codec="pcm-s16":(console.warn(`Unsupported sample size ${c} for codec 'sowt'.`),t.info.codec=null):"raw "===n?t.info.codec="pcm-u8":"in24"===n?t.info.codec="pcm-s24be":"in32"===n?t.info.codec="pcm-s32be":"fl32"===n?t.info.codec="pcm-f32be":"fl64"===n?t.info.codec="pcm-f64be":"ipcm"===n?t.info.codec="pcm-s16be":"fpcm"===n&&(t.info.codec="pcm-f32be"),this.readContiguousBoxes(e.slice(e.filePos,a+i.totalSize-e.filePos))}}}break;case"avcC":{let t=this.currentTrack;if(!t)break;(0,c.assert)(t.info),t.info.codecDescription=(0,m.readBytes)(e,r.contentSize)}break;case"hvcC":{let t=this.currentTrack;if(!t)break;(0,c.assert)(t.info),t.info.codecDescription=(0,m.readBytes)(e,r.contentSize)}break;case"vpcC":{let t=this.currentTrack;if(!t)break;(0,c.assert)(t.info?.type==="video"),e.skip(4);let r=(0,m.readU8)(e),a=(0,m.readU8)(e),i=(0,m.readU8)(e),s=(0,m.readU8)(e),n=(0,m.readU8)(e),o=(0,m.readU8)(e);t.info.vp9CodecInfo={profile:r,level:a,bitDepth:i>>4,chromaSubsampling:i>>1&7,videoFullRangeFlag:1&i,colourPrimaries:s,transferCharacteristics:n,matrixCoefficients:o}}break;case"av1C":{let t=this.currentTrack;if(!t)break;(0,c.assert)(t.info?.type==="video"),e.skip(1);let r=(0,m.readU8)(e),a=r>>5,i=(0,m.readU8)(e),s=i>>6&1;t.info.av1CodecInfo={profile:a,level:31&r,tier:i>>7,bitDepth:2===a&&s?i>>5&1?12:10:s?10:8,monochrome:i>>4&1,chromaSubsamplingX:i>>3&1,chromaSubsamplingY:i>>2&1,chromaSamplePosition:3&i}}break;case"colr":{let t=this.currentTrack;if(!t||((0,c.assert)(t.info?.type==="video"),"nclx"!==(0,m.readAscii)(e,4)))break;let r=(0,m.readU16Be)(e),a=(0,m.readU16Be)(e),i=(0,m.readU16Be)(e),s=!!(128&(0,m.readU8)(e));t.info.colorSpace={primaries:c.COLOR_PRIMARIES_MAP_INVERSE[r],transfer:c.TRANSFER_CHARACTERISTICS_MAP_INVERSE[a],matrix:c.MATRIX_COEFFICIENTS_MAP_INVERSE[i],fullRange:s}}break;case"esds":{let t=this.currentTrack;if(!t)break;(0,c.assert)(t.info?.type==="audio"),e.skip(4);let r=(0,m.readU8)(e);(0,c.assert)(3===r),(0,h.readIsomVariableInteger)(e),e.skip(2);let a=(0,m.readU8)(e);if((128&a)!=0&&e.skip(2),(64&a)!=0){let t=(0,m.readU8)(e);e.skip(t)}(32&a)!=0&&e.skip(2);let i=(0,m.readU8)(e);(0,c.assert)(4===i);let n=(0,h.readIsomVariableInteger)(e),o=e.filePos,l=(0,m.readU8)(e);if(64===l||103===l?(t.info.codec="aac",t.info.aacCodecInfo={isMpeg2:103===l,objectType:null}):105===l||107===l?t.info.codec="mp3":221===l?t.info.codec="vorbis":console.warn(`Unsupported audio codec (objectTypeIndication ${l}) - discarding track.`),e.skip(12),n>e.filePos-o){let r=(0,m.readU8)(e);(0,c.assert)(5===r);let a=(0,h.readIsomVariableInteger)(e);if(t.info.codecDescription=(0,m.readBytes)(e,a),"aac"===t.info.codec){let e=(0,s.parseAacAudioSpecificConfig)(t.info.codecDescription);null!==e.numberOfChannels&&(t.info.numberOfChannels=e.numberOfChannels),null!==e.sampleRate&&(t.info.sampleRate=e.sampleRate)}}}break;case"enda":{let t=this.currentTrack;if(!t)break;(0,c.assert)(t.info?.type==="audio"),255&(0,m.readU16Be)(e)&&("pcm-s16be"===t.info.codec?t.info.codec="pcm-s16":"pcm-s24be"===t.info.codec?t.info.codec="pcm-s24":"pcm-s32be"===t.info.codec?t.info.codec="pcm-s32":"pcm-f32be"===t.info.codec?t.info.codec="pcm-f32":"pcm-f64be"===t.info.codec&&(t.info.codec="pcm-f64"))}break;case"pcmC":{let t=this.currentTrack;if(!t)break;(0,c.assert)(t.info?.type==="audio"),e.skip(4);let r=!!(1&(0,m.readU8)(e)),a=(0,m.readU8)(e);"pcm-s16be"===t.info.codec?r?16===a?t.info.codec="pcm-s16":24===a?t.info.codec="pcm-s24":32===a?t.info.codec="pcm-s32":(console.warn(`Invalid ipcm sample size ${a}.`),t.info.codec=null):16===a?t.info.codec="pcm-s16be":24===a?t.info.codec="pcm-s24be":32===a?t.info.codec="pcm-s32be":(console.warn(`Invalid ipcm sample size ${a}.`),t.info.codec=null):"pcm-f32be"===t.info.codec&&(r?32===a?t.info.codec="pcm-f32":64===a?t.info.codec="pcm-f64":(console.warn(`Invalid fpcm sample size ${a}.`),t.info.codec=null):32===a?t.info.codec="pcm-f32be":64===a?t.info.codec="pcm-f64be":(console.warn(`Invalid fpcm sample size ${a}.`),t.info.codec=null));break}case"dOps":{let t,r=this.currentTrack;if(!r)break;(0,c.assert)(r.info?.type==="audio"),e.skip(1);let a=(0,m.readU8)(e),i=(0,m.readU16Be)(e),s=(0,m.readU32Be)(e),n=(0,m.readI16Be)(e),o=(0,m.readU8)(e);t=0!==o?(0,m.readBytes)(e,2+a):new Uint8Array(0);let l=new Uint8Array(19+t.byteLength),d=new DataView(l.buffer);d.setUint32(0,0x4f707573,!1),d.setUint32(4,0x48656164,!1),d.setUint8(8,1),d.setUint8(9,a),d.setUint16(10,i,!0),d.setUint32(12,s,!0),d.setInt16(16,n,!0),d.setUint8(18,o),l.set(t,19),r.info.codecDescription=l,r.info.numberOfChannels=a}break;case"dfLa":{let t=this.currentTrack;if(!t)break;(0,c.assert)(t.info?.type==="audio"),e.skip(4);let r=e.filePos;for(;e.filePos<i;){let r=(0,m.readU8)(e),a=(0,m.readU24Be)(e);if((127&r)===n.FlacBlockType.STREAMINFO){e.skip(10);let r=(0,m.readU32Be)(e),a=r>>>12,i=(r>>9&7)+1;t.info.sampleRate=a,t.info.numberOfChannels=i,e.skip(20)}else e.skip(a);if(128&r)break}let a=e.filePos;e.filePos=r;let s=(0,m.readBytes)(e,a-r),o=new Uint8Array(4+s.byteLength);new DataView(o.buffer).setUint32(0,0x664c6143,!1),o.set(s,4),t.info.codecDescription=o}break;case"stts":{let t=this.currentTrack;if(!t||!t.sampleTable)break;e.skip(4);let r=(0,m.readU32Be)(e),a=0,i=0;for(let s=0;s<r;s++){let r=(0,m.readU32Be)(e),s=(0,m.readU32Be)(e);t.sampleTable.sampleTimingEntries.push({startIndex:a,startDecodeTimestamp:i,count:r,delta:s}),a+=r,i+=r*s}}break;case"ctts":{let t=this.currentTrack;if(!t||!t.sampleTable)break;e.skip(4);let r=(0,m.readU32Be)(e),a=0;for(let i=0;i<r;i++){let r=(0,m.readU32Be)(e),i=(0,m.readI32Be)(e);t.sampleTable.sampleCompositionTimeOffsets.push({startIndex:a,count:r,offset:i}),a+=r}}break;case"stsz":{let t=this.currentTrack;if(!t||!t.sampleTable)break;e.skip(4);let r=(0,m.readU32Be)(e),a=(0,m.readU32Be)(e);if(0===r)for(let r=0;r<a;r++){let r=(0,m.readU32Be)(e);t.sampleTable.sampleSizes.push(r)}else t.sampleTable.sampleSizes.push(r)}break;case"stz2":{let t=this.currentTrack;if(!t||!t.sampleTable)break;e.skip(4),e.skip(3);let r=(0,m.readU8)(e),a=(0,m.readU32Be)(e),i=(0,m.readBytes)(e,Math.ceil(a*r/8)),s=new(0,c.Bitstream)(i);for(let e=0;e<a;e++){let e=s.readBits(r);t.sampleTable.sampleSizes.push(e)}}break;case"stss":{let t=this.currentTrack;if(!t||!t.sampleTable)break;e.skip(4),t.sampleTable.keySampleIndices=[];let r=(0,m.readU32Be)(e);for(let a=0;a<r;a++){let r=(0,m.readU32Be)(e)-1;t.sampleTable.keySampleIndices.push(r)}0!==t.sampleTable.keySampleIndices[0]&&t.sampleTable.keySampleIndices.unshift(0)}break;case"stsc":{let t=this.currentTrack;if(!t||!t.sampleTable)break;e.skip(4);let r=(0,m.readU32Be)(e);for(let a=0;a<r;a++){let r=(0,m.readU32Be)(e)-1,a=(0,m.readU32Be)(e),i=(0,m.readU32Be)(e);t.sampleTable.sampleToChunk.push({startSampleIndex:-1,startChunkIndex:r,samplesPerChunk:a,sampleDescriptionIndex:i})}let a=0;for(let e=0;e<t.sampleTable.sampleToChunk.length;e++)t.sampleTable.sampleToChunk[e].startSampleIndex=a,e<t.sampleTable.sampleToChunk.length-1&&(a+=(t.sampleTable.sampleToChunk[e+1].startChunkIndex-t.sampleTable.sampleToChunk[e].startChunkIndex)*t.sampleTable.sampleToChunk[e].samplesPerChunk)}break;case"stco":{let t=this.currentTrack;if(!t||!t.sampleTable)break;e.skip(4);let r=(0,m.readU32Be)(e);for(let a=0;a<r;a++){let r=(0,m.readU32Be)(e);t.sampleTable.chunkOffsets.push(r)}}break;case"co64":{let t=this.currentTrack;if(!t||!t.sampleTable)break;e.skip(4);let r=(0,m.readU32Be)(e);for(let a=0;a<r;a++){let r=(0,m.readU64Be)(e);t.sampleTable.chunkOffsets.push(r)}}break;case"mvex":this.isFragmented=!0,this.readContiguousBoxes(e.slice(a,r.contentSize));break;case"mehd":{let t=(0,m.readU8)(e);e.skip(3);let r=1===t?(0,m.readU64Be)(e):(0,m.readU32Be)(e);this.movieDurationInTimescale=r}break;case"trex":{e.skip(4);let t=(0,m.readU32Be)(e),r=(0,m.readU32Be)(e),a=(0,m.readU32Be)(e),i=(0,m.readU32Be)(e),s=(0,m.readU32Be)(e);this.fragmentTrackDefaults.push({trackId:t,defaultSampleDescriptionIndex:r,defaultSampleDuration:a,defaultSampleSize:i,defaultSampleFlags:s})}break;case"tfra":{let t=(0,m.readU8)(e);e.skip(3);let r=(0,m.readU32Be)(e),a=this.tracks.find(e=>e.id===r);if(!a)break;let i=(0,m.readU32Be)(e),s=[m.readU8,m.readU16Be,m.readU24Be,m.readU32Be],n=s[(48&i)>>4],o=s[(12&i)>>2],l=s[3&i],c=(0,m.readU32Be)(e);for(let r=0;r<c;r++){let r=1===t?(0,m.readU64Be)(e):(0,m.readU32Be)(e),i=1===t?(0,m.readU64Be)(e):(0,m.readU32Be)(e);n(e),o(e),l(e),a.fragmentLookupTable.push({timestamp:r,moofOffset:i})}a.fragmentLookupTable.sort((e,t)=>e.timestamp-t.timestamp);for(let e=0;e<a.fragmentLookupTable.length-1;e++){let t=a.fragmentLookupTable[e],r=a.fragmentLookupTable[e+1];t.timestamp===r.timestamp&&(a.fragmentLookupTable.splice(e+1,1),e--)}}break;case"moof":this.currentFragment={moofOffset:t,moofSize:r.totalSize,implicitBaseDataOffset:t,trackData:new Map},this.readContiguousBoxes(e.slice(a,r.contentSize)),this.lastReadFragment=this.currentFragment,this.currentFragment=null;break;case"traf":if((0,c.assert)(this.currentFragment),this.readContiguousBoxes(e.slice(a,r.contentSize)),this.currentTrack){let e=this.currentFragment.trackData.get(this.currentTrack.id);if(e){let{currentFragmentState:t}=this.currentTrack;(0,c.assert)(t),null!==t.startTimestamp&&(w(e,t.startTimestamp),e.startTimestampIsFinal=!0)}this.currentTrack.currentFragmentState=null,this.currentTrack=null}break;case"tfhd":{(0,c.assert)(this.currentFragment),e.skip(1);let t=(0,m.readU24Be)(e),r=(0,m.readU32Be)(e),a=this.tracks.find(e=>e.id===r);if(!a)break;let i=this.fragmentTrackDefaults.find(e=>e.trackId===r);this.currentTrack=a,a.currentFragmentState={baseDataOffset:this.currentFragment.implicitBaseDataOffset,sampleDescriptionIndex:i?.defaultSampleDescriptionIndex??null,defaultSampleDuration:i?.defaultSampleDuration??null,defaultSampleSize:i?.defaultSampleSize??null,defaultSampleFlags:i?.defaultSampleFlags??null,startTimestamp:null},1&t?a.currentFragmentState.baseDataOffset=(0,m.readU64Be)(e):131072&t&&(a.currentFragmentState.baseDataOffset=this.currentFragment.moofOffset),2&t&&(a.currentFragmentState.sampleDescriptionIndex=(0,m.readU32Be)(e)),8&t&&(a.currentFragmentState.defaultSampleDuration=(0,m.readU32Be)(e)),16&t&&(a.currentFragmentState.defaultSampleSize=(0,m.readU32Be)(e)),32&t&&(a.currentFragmentState.defaultSampleFlags=(0,m.readU32Be)(e)),65536&t&&(a.currentFragmentState.defaultSampleDuration=0)}break;case"tfdt":{let t=this.currentTrack;if(!t)break;(0,c.assert)(t.currentFragmentState);let r=(0,m.readU8)(e);e.skip(3);let a=0===r?(0,m.readU32Be)(e):(0,m.readU64Be)(e);t.currentFragmentState.startTimestamp=a}break;case"trun":{let t=this.currentTrack;if(!t)break;if((0,c.assert)(this.currentFragment),(0,c.assert)(t.currentFragmentState),this.currentFragment.trackData.has(t.id)){console.warn("Can't have two trun boxes for the same track in one fragment. Ignoring...");break}let r=(0,m.readU8)(e),a=(0,m.readU24Be)(e),i=!!(256&a),s=!!(512&a),n=!!(1024&a),o=!!(2048&a),l=(0,m.readU32Be)(e),d=t.currentFragmentState.baseDataOffset;1&a&&(d+=(0,m.readI32Be)(e));let u=null;4&a&&(u=(0,m.readU32Be)(e));let h=d;if(0===l){this.currentFragment.implicitBaseDataOffset=h;break}let p=0,f={track:t,startTimestamp:0,endTimestamp:0,firstKeyFrameTimestamp:null,samples:[],presentationTimestamps:[],startTimestampIsFinal:!1};this.currentFragment.trackData.set(t.id,f);for(let a=0;a<l;a++){let l,d,g;i?l=(0,m.readU32Be)(e):((0,c.assert)(null!==t.currentFragmentState.defaultSampleDuration),l=t.currentFragmentState.defaultSampleDuration),s?d=(0,m.readU32Be)(e):((0,c.assert)(null!==t.currentFragmentState.defaultSampleSize),d=t.currentFragmentState.defaultSampleSize),n?g=(0,m.readU32Be)(e):((0,c.assert)(null!==t.currentFragmentState.defaultSampleFlags),g=t.currentFragmentState.defaultSampleFlags),0===a&&null!==u&&(g=u);let k=0;o&&(k=0===r?(0,m.readU32Be)(e):(0,m.readI32Be)(e));let b=!(65536&g);f.samples.push({presentationTimestamp:p+k,duration:l,byteOffset:h,byteSize:d,isKeyFrame:b}),h+=d,p+=l}f.presentationTimestamps=f.samples.map((e,t)=>({presentationTimestamp:e.presentationTimestamp,sampleIndex:t})).sort((e,t)=>e.presentationTimestamp-t.presentationTimestamp);for(let e=0;e<f.presentationTimestamps.length;e++){let t=f.presentationTimestamps[e],r=f.samples[t.sampleIndex];null===f.firstKeyFrameTimestamp&&r.isKeyFrame&&(f.firstKeyFrameTimestamp=r.presentationTimestamp),e<f.presentationTimestamps.length-1&&(r.duration=f.presentationTimestamps[e+1].presentationTimestamp-t.presentationTimestamp)}let g=f.samples[f.presentationTimestamps[0].sampleIndex],k=f.samples[(0,c.last)(f.presentationTimestamps).sampleIndex];f.startTimestamp=g.presentationTimestamp,f.endTimestamp=k.presentationTimestamp+k.duration,this.currentFragment.implicitBaseDataOffset=h}break;case"udta":for(let{boxInfo:t,slice:i}of this.iterateContiguousBoxes(e.slice(a,r.contentSize))){if("meta"!==t.name&&!this.currentTrack){let e=i.filePos;this.metadataTags.raw??={},"©"===t.name[0]?this.metadataTags.raw[t.name]??=(0,h.readMetadataStringShort)(i):this.metadataTags.raw[t.name]??=(0,m.readBytes)(i,t.contentSize),i.filePos=e}switch(t.name){case"meta":i.skip(-t.headerSize),this.traverseBox(i);break;case"©nam":case"name":this.currentTrack?this.currentTrack.name=c.textDecoder.decode((0,m.readBytes)(i,t.contentSize)):this.metadataTags.title??=(0,h.readMetadataStringShort)(i);break;case"©des":this.currentTrack||(this.metadataTags.description??=(0,h.readMetadataStringShort)(i));break;case"©ART":this.currentTrack||(this.metadataTags.artist??=(0,h.readMetadataStringShort)(i));break;case"©alb":this.currentTrack||(this.metadataTags.album??=(0,h.readMetadataStringShort)(i));break;case"albr":this.currentTrack||(this.metadataTags.albumArtist??=(0,h.readMetadataStringShort)(i));break;case"©gen":this.currentTrack||(this.metadataTags.genre??=(0,h.readMetadataStringShort)(i));break;case"©day":if(!this.currentTrack){let e=new Date((0,h.readMetadataStringShort)(i));Number.isNaN(e.getTime())||(this.metadataTags.date??=e)}break;case"©cmt":this.currentTrack||(this.metadataTags.comment??=(0,h.readMetadataStringShort)(i));break;case"©lyr":this.currentTrack||(this.metadataTags.lyrics??=(0,h.readMetadataStringShort)(i))}}break;case"meta":{if(this.currentTrack)break;let t=(0,m.readU32Be)(e);this.currentMetadataKeys=new Map,0!==t?this.readContiguousBoxes(e.slice(a,r.contentSize)):this.readContiguousBoxes(e.slice(a+4,r.contentSize-4)),this.currentMetadataKeys=null}break;case"keys":{if(!this.currentMetadataKeys)break;e.skip(4);let t=(0,m.readU32Be)(e);for(let r=0;r<t;r++){let t=(0,m.readU32Be)(e);e.skip(4);let a=c.textDecoder.decode((0,m.readBytes)(e,t-8));this.currentMetadataKeys.set(r+1,a)}}break;case"ilst":if(!this.currentMetadataKeys)break;for(let{boxInfo:t,slice:i}of this.iterateContiguousBoxes(e.slice(a,r.contentSize))){let e=t.name,r=(e.charCodeAt(0)<<24)+(e.charCodeAt(1)<<16)+(e.charCodeAt(2)<<8)+e.charCodeAt(3);this.currentMetadataKeys.has(r)&&(e=this.currentMetadataKeys.get(r));let a=(0,h.readDataBox)(i);switch(this.metadataTags.raw??={},this.metadataTags.raw[e]??=a,e){case"©nam":case"titl":case"com.apple.quicktime.title":case"title":"string"==typeof a&&(this.metadataTags.title??=a);break;case"©des":case"desc":case"dscp":case"com.apple.quicktime.description":case"description":"string"==typeof a&&(this.metadataTags.description??=a);break;case"©ART":case"com.apple.quicktime.artist":case"artist":"string"==typeof a&&(this.metadataTags.artist??=a);break;case"©alb":case"albm":case"com.apple.quicktime.album":case"album":"string"==typeof a&&(this.metadataTags.album??=a);break;case"aART":case"album_artist":"string"==typeof a&&(this.metadataTags.albumArtist??=a);break;case"©cmt":case"com.apple.quicktime.comment":case"comment":"string"==typeof a&&(this.metadataTags.comment??=a);break;case"©gen":case"gnre":case"com.apple.quicktime.genre":case"genre":"string"==typeof a&&(this.metadataTags.genre??=a);break;case"©lyr":case"lyrics":"string"==typeof a&&(this.metadataTags.lyrics??=a);break;case"©day":case"rldt":case"com.apple.quicktime.creationdate":case"date":if("string"==typeof a){let e=new Date(a);Number.isNaN(e.getTime())||(this.metadataTags.date??=e)}break;case"covr":case"com.apple.quicktime.artwork":a instanceof p.RichImageData?(this.metadataTags.images??=[],this.metadataTags.images.push({data:a.data,kind:"coverFront",mimeType:a.mimeType})):a instanceof Uint8Array&&(this.metadataTags.images??=[],this.metadataTags.images.push({data:a,kind:"coverFront",mimeType:"image/*"}));break;case"track":if("string"==typeof a){let e=a.split("/"),t=Number.parseInt(e[0],10),r=e[1]&&Number.parseInt(e[1],10);Number.isInteger(t)&&t>0&&(this.metadataTags.trackNumber??=t),r&&Number.isInteger(r)&&r>0&&(this.metadataTags.tracksTotal??=r)}break;case"trkn":if(a instanceof Uint8Array&&a.length>=6){let e=(0,c.toDataView)(a),t=e.getUint16(2,!1),r=e.getUint16(4,!1);t>0&&(this.metadataTags.trackNumber??=t),r>0&&(this.metadataTags.tracksTotal??=r)}break;case"disc":case"disk":if(a instanceof Uint8Array&&a.length>=6){let e=(0,c.toDataView)(a),t=e.getUint16(2,!1),r=e.getUint16(4,!1);t>0&&(this.metadataTags.discNumber??=t),r>0&&(this.metadataTags.discsTotal??=r)}}}}return e.filePos=i,!0}}class g{constructor(e){this.internalTrack=e,this.packetToSampleIndex=new WeakMap,this.packetToFragmentLocation=new WeakMap}getId(){return this.internalTrack.id}getNumber(){let e=this.internalTrack.demuxer,t=this.internalTrack.inputTrack.type,r=0;for(let a of e.tracks)if(a.inputTrack.type===t&&r++,a===this.internalTrack)break;return r}getCodec(){throw Error("Not implemented on base class.")}getInternalCodecId(){return this.internalTrack.internalCodecId}getName(){return this.internalTrack.name}getLanguageCode(){return this.internalTrack.languageCode}getTimeResolution(){return this.internalTrack.timescale}getDisposition(){return this.internalTrack.disposition}async computeDuration(){let e=await this.getPacket(1/0,{metadataOnly:!0});return(e?.timestamp??0)+(e?.duration??0)}async getFirstTimestamp(){let e=await this.getFirstPacket({metadataOnly:!0});return e?.timestamp??0}async getFirstPacket(e){let t=await this.fetchPacketForSampleIndex(0,e);return t||!this.internalTrack.demuxer.isFragmented?t:this.performFragmentedLookup(null,e=>e.trackData.get(this.internalTrack.id)?{sampleIndex:0,correctSampleFound:!0}:{sampleIndex:-1,correctSampleFound:!1},-1/0,1/0,e)}mapTimestampIntoTimescale(e){return(0,c.roundIfAlmostInteger)(e*this.internalTrack.timescale)+this.internalTrack.editListOffset}async getPacket(e,t){let r=this.mapTimestampIntoTimescale(e),a=this.internalTrack.demuxer.getSampleTableForTrack(this.internalTrack),i=y(a,r),s=await this.fetchPacketForSampleIndex(i,t);return E(a)&&this.internalTrack.demuxer.isFragmented?this.performFragmentedLookup(null,e=>{let t=e.trackData.get(this.internalTrack.id);if(!t)return{sampleIndex:-1,correctSampleFound:!1};let a=(0,c.binarySearchLessOrEqual)(t.presentationTimestamps,r,e=>e.presentationTimestamp);return{sampleIndex:-1!==a?t.presentationTimestamps[a].sampleIndex:-1,correctSampleFound:-1!==a&&r<t.endTimestamp}},r,r,t):s}async getNextPacket(e,t){let r=this.packetToSampleIndex.get(e);if(void 0!==r)return this.fetchPacketForSampleIndex(r+1,t);let a=this.packetToFragmentLocation.get(e);if(void 0===a)throw Error("Packet was not created from this track.");return this.performFragmentedLookup(a.fragment,e=>{if(e===a.fragment){let t=e.trackData.get(this.internalTrack.id);if(a.sampleIndex+1<t.samples.length)return{sampleIndex:a.sampleIndex+1,correctSampleFound:!0}}else if(e.trackData.get(this.internalTrack.id))return{sampleIndex:0,correctSampleFound:!0};return{sampleIndex:-1,correctSampleFound:!1}},-1/0,1/0,t)}async getKeyPacket(e,t){let r=this.mapTimestampIntoTimescale(e),a=this.internalTrack.demuxer.getSampleTableForTrack(this.internalTrack),i=S(a,r),s=await this.fetchPacketForSampleIndex(i,t);return E(a)&&this.internalTrack.demuxer.isFragmented?this.performFragmentedLookup(null,e=>{let t=e.trackData.get(this.internalTrack.id);if(!t)return{sampleIndex:-1,correctSampleFound:!1};let a=(0,c.findLastIndex)(t.presentationTimestamps,e=>t.samples[e.sampleIndex].isKeyFrame&&e.presentationTimestamp<=r);return{sampleIndex:-1!==a?t.presentationTimestamps[a].sampleIndex:-1,correctSampleFound:-1!==a&&r<t.endTimestamp}},r,r,t):s}async getNextKeyPacket(e,t){let r=this.packetToSampleIndex.get(e);if(void 0!==r){let e=I(this.internalTrack.demuxer.getSampleTableForTrack(this.internalTrack),r);return this.fetchPacketForSampleIndex(e,t)}let a=this.packetToFragmentLocation.get(e);if(void 0===a)throw Error("Packet was not created from this track.");return this.performFragmentedLookup(a.fragment,e=>{if(e===a.fragment){let t=e.trackData.get(this.internalTrack.id).samples.findIndex((e,t)=>e.isKeyFrame&&t>a.sampleIndex);if(-1!==t)return{sampleIndex:t,correctSampleFound:!0}}else{let t=e.trackData.get(this.internalTrack.id);if(t&&null!==t.firstKeyFrameTimestamp){let e=t.samples.findIndex(e=>e.isKeyFrame);return(0,c.assert)(-1!==e),{sampleIndex:e,correctSampleFound:!0}}}return{sampleIndex:-1,correctSampleFound:!1}},-1/0,1/0,t)}async fetchPacketForSampleIndex(e,t){let r;if(-1===e)return null;let a=T(this.internalTrack.demuxer.getSampleTableForTrack(this.internalTrack),e);if(!a)return null;if(t.metadataOnly)r=d.PLACEHOLDER_DATA;else{let e=this.internalTrack.demuxer.reader.requestSlice(a.sampleOffset,a.sampleSize);e instanceof Promise&&(e=await e),(0,c.assert)(e),r=(0,m.readBytes)(e,a.sampleSize)}let i=(a.presentationTimestamp-this.internalTrack.editListOffset)/this.internalTrack.timescale,s=a.duration/this.internalTrack.timescale,n=new(0,d.EncodedPacket)(r,a.isKeyFrame?"key":"delta",i,s,e,a.sampleSize);return this.packetToSampleIndex.set(n,e),n}async fetchPacketInFragment(e,t,r){let a;if(-1===t)return null;let i=e.trackData.get(this.internalTrack.id).samples[t];if((0,c.assert)(i),r.metadataOnly)a=d.PLACEHOLDER_DATA;else{let e=this.internalTrack.demuxer.reader.requestSlice(i.byteOffset,i.byteSize);e instanceof Promise&&(e=await e),(0,c.assert)(e),a=(0,m.readBytes)(e,i.byteSize)}let s=(i.presentationTimestamp-this.internalTrack.editListOffset)/this.internalTrack.timescale,n=i.duration/this.internalTrack.timescale,o=new(0,d.EncodedPacket)(a,i.isKeyFrame?"key":"delta",s,n,e.moofOffset+t,i.byteSize);return this.packetToFragmentLocation.set(o,{fragment:e,sampleIndex:t}),o}async performFragmentedLookup(e,t,r,a,i){let s,n=this.internalTrack.demuxer,o=null,l=null,d=-1;if(e){let{sampleIndex:r,correctSampleFound:a}=t(e);if(a)return this.fetchPacketInFragment(e,r,i);-1!==r&&(l=e,d=r)}let u=(0,c.binarySearchLessOrEqual)(this.internalTrack.fragmentLookupTable,r,e=>e.timestamp),m=-1!==u?this.internalTrack.fragmentLookupTable[u]:null,p=(0,c.binarySearchLessOrEqual)(this.internalTrack.fragmentPositionCache,r,e=>e.startTimestamp),f=-1!==p?this.internalTrack.fragmentPositionCache[p]:null,g=Math.max(m?.moofOffset??0,f?.moofOffset??0)||null;for(e?null===g||e.moofOffset>=g?(s=e.moofOffset+e.moofSize,o=e):s=g:s=g??0;;){if(o){let e=o.trackData.get(this.internalTrack.id);if(e&&e.startTimestamp>a)break}let e=n.reader.requestSliceRange(s,h.MIN_BOX_HEADER_SIZE,h.MAX_BOX_HEADER_SIZE);if(e instanceof Promise&&(e=await e),!e)break;let r=s,c=(0,h.readBoxHeader)(e);if(!c)break;if("moof"===c.name){let{sampleIndex:e,correctSampleFound:a}=t(o=await n.readFragment(r));if(a)return this.fetchPacketInFragment(o,e,i);-1!==e&&(l=o,d=e)}s=r+c.totalSize}if(m&&(!l||l.moofOffset<m.moofOffset)){let e=this.internalTrack.fragmentLookupTable[u-1];(0,c.assert)(!e||e.timestamp<m.timestamp);let r=e?.timestamp??-1/0;return this.performFragmentedLookup(null,t,r,a,i)}return l?this.fetchPacketInFragment(l,d,i):null}}class k extends g{constructor(e){super(e),this.decoderConfigPromise=null,this.internalTrack=e}getCodec(){return this.internalTrack.info.codec}getCodedWidth(){return this.internalTrack.info.width}getCodedHeight(){return this.internalTrack.info.height}getRotation(){return this.internalTrack.rotation}async getColorSpace(){return{primaries:this.internalTrack.info.colorSpace?.primaries,transfer:this.internalTrack.info.colorSpace?.transfer,matrix:this.internalTrack.info.colorSpace?.matrix,fullRange:this.internalTrack.info.colorSpace?.fullRange}}async canBeTransparent(){return!1}async getDecoderConfig(){return this.internalTrack.info.codec?this.decoderConfigPromise??=(async()=>{if("vp9"!==this.internalTrack.info.codec||this.internalTrack.info.vp9CodecInfo){if("av1"===this.internalTrack.info.codec&&!this.internalTrack.info.av1CodecInfo){let e=await this.getFirstPacket({});this.internalTrack.info.av1CodecInfo=e&&(0,n.extractAv1CodecInfoFromPacket)(e.data)}}else{let e=await this.getFirstPacket({});this.internalTrack.info.vp9CodecInfo=e&&(0,n.extractVp9CodecInfoFromPacket)(e.data)}return{codec:(0,s.extractVideoCodecString)(this.internalTrack.info),codedWidth:this.internalTrack.info.width,codedHeight:this.internalTrack.info.height,description:this.internalTrack.info.codecDescription??void 0,colorSpace:this.internalTrack.info.colorSpace??void 0}})():null}}class b extends g{constructor(e){super(e),this.decoderConfig=null,this.internalTrack=e}getCodec(){return this.internalTrack.info.codec}getNumberOfChannels(){return this.internalTrack.info.numberOfChannels}getSampleRate(){return this.internalTrack.info.sampleRate}async getDecoderConfig(){return this.internalTrack.info.codec?this.decoderConfig??={codec:(0,s.extractAudioCodecString)(this.internalTrack.info),numberOfChannels:this.internalTrack.info.numberOfChannels,sampleRate:this.internalTrack.info.sampleRate,description:this.internalTrack.info.codecDescription??void 0}:null}}let y=(e,t)=>{if(e.presentationTimestamps){let r=(0,c.binarySearchLessOrEqual)(e.presentationTimestamps,t,e=>e.presentationTimestamp);return -1===r?-1:e.presentationTimestamps[r].sampleIndex}{let r=(0,c.binarySearchLessOrEqual)(e.sampleTimingEntries,t,e=>e.startDecodeTimestamp);if(-1===r)return -1;let a=e.sampleTimingEntries[r];return a.startIndex+Math.min(Math.floor((t-a.startDecodeTimestamp)/a.delta),a.count-1)}},S=(e,t)=>{if(!e.keySampleIndices)return y(e,t);if(e.presentationTimestamps){let r=(0,c.binarySearchLessOrEqual)(e.presentationTimestamps,t,e=>e.presentationTimestamp);if(-1===r)return -1;for(let t=r;t>=0;t--){let r=e.presentationTimestamps[t].sampleIndex;if(-1!==(0,c.binarySearchExact)(e.keySampleIndices,r,e=>e))return r}return -1}{let r=y(e,t),a=(0,c.binarySearchLessOrEqual)(e.keySampleIndices,r,e=>e);return e.keySampleIndices[a]??-1}},T=(e,t)=>{let r=(0,c.binarySearchLessOrEqual)(e.sampleTimingEntries,t,e=>e.startIndex),a=e.sampleTimingEntries[r];if(!a||a.startIndex+a.count<=t)return null;let i=a.startDecodeTimestamp+(t-a.startIndex)*a.delta,s=(0,c.binarySearchLessOrEqual)(e.sampleCompositionTimeOffsets,t,e=>e.startIndex),n=e.sampleCompositionTimeOffsets[s];n&&t-n.startIndex<n.count&&(i+=n.offset);let o=e.sampleSizes[Math.min(t,e.sampleSizes.length-1)],l=(0,c.binarySearchLessOrEqual)(e.sampleToChunk,t,e=>e.startSampleIndex),d=e.sampleToChunk[l];(0,c.assert)(d);let u=d.startChunkIndex+Math.floor((t-d.startSampleIndex)/d.samplesPerChunk),h=e.chunkOffsets[u],m=d.startSampleIndex+(u-d.startChunkIndex)*d.samplesPerChunk,p=0,f=h;if(1===e.sampleSizes.length)f+=o*(t-m),p+=o*d.samplesPerChunk;else for(let r=m;r<m+d.samplesPerChunk;r++){let a=e.sampleSizes[r];r<t&&(f+=a),p+=a}let g=a.delta;if(e.presentationTimestamps){let r=e.presentationTimestampIndexMap[t];(0,c.assert)(void 0!==r),r<e.presentationTimestamps.length-1&&(g=e.presentationTimestamps[r+1].presentationTimestamp-i)}return{presentationTimestamp:i,duration:g,sampleOffset:f,sampleSize:o,chunkOffset:h,chunkSize:p,isKeyFrame:!e.keySampleIndices||-1!==(0,c.binarySearchExact)(e.keySampleIndices,t,e=>e)}},I=(e,t)=>{if(!e.keySampleIndices)return t+1;let r=(0,c.binarySearchLessOrEqual)(e.keySampleIndices,t,e=>e);return e.keySampleIndices[r+1]??-1},w=(e,t)=>{for(let r of(e.startTimestamp+=t,e.endTimestamp+=t,e.samples))r.presentationTimestamp+=t;for(let r of e.presentationTimestamps)r.presentationTimestamp+=t},x=e=>{let[t,,,r]=e,a=Math.hypot(t,r),i=-(180/Math.PI*Math.atan2(r/a,t/a));return Number.isFinite(i)?i:0},E=e=>0===e.sampleSizes.length},{"../codec.js":"4GUiq","../codec-data.js":"zx4dz","../demuxer.js":"73Qqp","../input-track.js":"aU0uf","../misc.js":"jrq2g","../packet.js":"8dQhf","./isobmff-misc.js":"fHhRy","./isobmff-reader.js":"8zjcB","../reader.js":"6AkKg","../metadata.js":"1RzS5","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"4GUiq":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"VIDEO_CODECS",()=>n),i.export(r,"PCM_AUDIO_CODECS",()=>o),i.export(r,"NON_PCM_AUDIO_CODECS",()=>l),i.export(r,"AUDIO_CODECS",()=>c),i.export(r,"SUBTITLE_CODECS",()=>d),i.export(r,"AVC_LEVEL_TABLE",()=>u),i.export(r,"VP9_LEVEL_TABLE",()=>m),i.export(r,"buildVideoCodecString",()=>k),i.export(r,"generateVp9CodecConfigurationFromCodecString",()=>b),i.export(r,"generateAv1CodecConfigurationFromCodecString",()=>y),i.export(r,"extractVideoCodecString",()=>S),i.export(r,"buildAudioCodecString",()=>T),i.export(r,"extractAudioCodecString",()=>I),i.export(r,"aacFrequencyTable",()=>w),i.export(r,"aacChannelMap",()=>x),i.export(r,"parseAacAudioSpecificConfig",()=>E),i.export(r,"buildAacAudioSpecificConfig",()=>P),i.export(r,"OPUS_SAMPLE_RATE",()=>v),i.export(r,"parsePcmCodec",()=>A),i.export(r,"inferCodecFromCodecString",()=>B),i.export(r,"getVideoEncoderConfigExtension",()=>_),i.export(r,"getAudioEncoderConfigExtension",()=>D),i.export(r,"validateVideoChunkMetadata",()=>N),i.export(r,"validateAudioChunkMetadata",()=>j),i.export(r,"validateSubtitleMetadata",()=>z);var s=e("./misc.js");let n=["avc","hevc","vp9","av1","vp8"],o=["pcm-s16","pcm-s16be","pcm-s24","pcm-s24be","pcm-s32","pcm-s32be","pcm-f32","pcm-f32be","pcm-f64","pcm-f64be","pcm-u8","pcm-s8","ulaw","alaw"],l=["aac","opus","mp3","vorbis","flac"],c=[...l,...o],d=["webvtt"],u=[{maxMacroblocks:99,maxBitrate:64e3,maxDpbMbs:396,level:10},{maxMacroblocks:396,maxBitrate:192e3,maxDpbMbs:900,level:11},{maxMacroblocks:396,maxBitrate:384e3,maxDpbMbs:2376,level:12},{maxMacroblocks:396,maxBitrate:768e3,maxDpbMbs:2376,level:13},{maxMacroblocks:396,maxBitrate:2e6,maxDpbMbs:2376,level:20},{maxMacroblocks:792,maxBitrate:4e6,maxDpbMbs:4752,level:21},{maxMacroblocks:1620,maxBitrate:4e6,maxDpbMbs:8100,level:22},{maxMacroblocks:1620,maxBitrate:1e7,maxDpbMbs:8100,level:30},{maxMacroblocks:3600,maxBitrate:14e6,maxDpbMbs:18e3,level:31},{maxMacroblocks:5120,maxBitrate:2e7,maxDpbMbs:20480,level:32},{maxMacroblocks:8192,maxBitrate:2e7,maxDpbMbs:32768,level:40},{maxMacroblocks:8192,maxBitrate:5e7,maxDpbMbs:32768,level:41},{maxMacroblocks:8704,maxBitrate:5e7,maxDpbMbs:34816,level:42},{maxMacroblocks:22080,maxBitrate:135e6,maxDpbMbs:110400,level:50},{maxMacroblocks:36864,maxBitrate:24e7,maxDpbMbs:184320,level:51},{maxMacroblocks:36864,maxBitrate:24e7,maxDpbMbs:184320,level:52},{maxMacroblocks:139264,maxBitrate:24e7,maxDpbMbs:696320,level:60},{maxMacroblocks:139264,maxBitrate:48e7,maxDpbMbs:696320,level:61},{maxMacroblocks:139264,maxBitrate:8e8,maxDpbMbs:696320,level:62}],h=[{maxPictureSize:36864,maxBitrate:128e3,tier:"L",level:30},{maxPictureSize:122880,maxBitrate:15e5,tier:"L",level:60},{maxPictureSize:245760,maxBitrate:3e6,tier:"L",level:63},{maxPictureSize:552960,maxBitrate:6e6,tier:"L",level:90},{maxPictureSize:983040,maxBitrate:1e7,tier:"L",level:93},{maxPictureSize:2228224,maxBitrate:12e6,tier:"L",level:120},{maxPictureSize:2228224,maxBitrate:3e7,tier:"H",level:120},{maxPictureSize:2228224,maxBitrate:2e7,tier:"L",level:123},{maxPictureSize:2228224,maxBitrate:5e7,tier:"H",level:123},{maxPictureSize:8912896,maxBitrate:25e6,tier:"L",level:150},{maxPictureSize:8912896,maxBitrate:1e8,tier:"H",level:150},{maxPictureSize:8912896,maxBitrate:4e7,tier:"L",level:153},{maxPictureSize:8912896,maxBitrate:16e7,tier:"H",level:153},{maxPictureSize:8912896,maxBitrate:6e7,tier:"L",level:156},{maxPictureSize:8912896,maxBitrate:24e7,tier:"H",level:156},{maxPictureSize:0x2200000,maxBitrate:6e7,tier:"L",level:180},{maxPictureSize:0x2200000,maxBitrate:24e7,tier:"H",level:180},{maxPictureSize:0x2200000,maxBitrate:12e7,tier:"L",level:183},{maxPictureSize:0x2200000,maxBitrate:48e7,tier:"H",level:183},{maxPictureSize:0x2200000,maxBitrate:24e7,tier:"L",level:186},{maxPictureSize:0x2200000,maxBitrate:8e8,tier:"H",level:186}],m=[{maxPictureSize:36864,maxBitrate:2e5,level:10},{maxPictureSize:73728,maxBitrate:8e5,level:11},{maxPictureSize:122880,maxBitrate:18e5,level:20},{maxPictureSize:245760,maxBitrate:36e5,level:21},{maxPictureSize:552960,maxBitrate:72e5,level:30},{maxPictureSize:983040,maxBitrate:12e6,level:31},{maxPictureSize:2228224,maxBitrate:18e6,level:40},{maxPictureSize:2228224,maxBitrate:3e7,level:41},{maxPictureSize:8912896,maxBitrate:6e7,level:50},{maxPictureSize:8912896,maxBitrate:12e7,level:51},{maxPictureSize:8912896,maxBitrate:18e7,level:52},{maxPictureSize:0x2200000,maxBitrate:18e7,level:60},{maxPictureSize:0x2200000,maxBitrate:24e7,level:61},{maxPictureSize:0x2200000,maxBitrate:48e7,level:62}],p=[{maxPictureSize:147456,maxBitrate:15e5,tier:"M",level:0},{maxPictureSize:278784,maxBitrate:3e6,tier:"M",level:1},{maxPictureSize:665856,maxBitrate:6e6,tier:"M",level:4},{maxPictureSize:1065024,maxBitrate:1e7,tier:"M",level:5},{maxPictureSize:2359296,maxBitrate:12e6,tier:"M",level:8},{maxPictureSize:2359296,maxBitrate:3e7,tier:"H",level:8},{maxPictureSize:2359296,maxBitrate:2e7,tier:"M",level:9},{maxPictureSize:2359296,maxBitrate:5e7,tier:"H",level:9},{maxPictureSize:8912896,maxBitrate:3e7,tier:"M",level:12},{maxPictureSize:8912896,maxBitrate:1e8,tier:"H",level:12},{maxPictureSize:8912896,maxBitrate:4e7,tier:"M",level:13},{maxPictureSize:8912896,maxBitrate:16e7,tier:"H",level:13},{maxPictureSize:8912896,maxBitrate:6e7,tier:"M",level:14},{maxPictureSize:8912896,maxBitrate:24e7,tier:"H",level:14},{maxPictureSize:0x2200000,maxBitrate:6e7,tier:"M",level:15},{maxPictureSize:0x2200000,maxBitrate:24e7,tier:"H",level:15},{maxPictureSize:0x2200000,maxBitrate:6e7,tier:"M",level:16},{maxPictureSize:0x2200000,maxBitrate:24e7,tier:"H",level:16},{maxPictureSize:0x2200000,maxBitrate:1e8,tier:"M",level:17},{maxPictureSize:0x2200000,maxBitrate:48e7,tier:"H",level:17},{maxPictureSize:0x2200000,maxBitrate:16e7,tier:"M",level:18},{maxPictureSize:0x2200000,maxBitrate:8e8,tier:"H",level:18},{maxPictureSize:0x2200000,maxBitrate:16e7,tier:"M",level:19},{maxPictureSize:0x2200000,maxBitrate:8e8,tier:"H",level:19}],f=".01.01.01.01.00",g=".0.110.01.01.01.0",k=(e,t,r,a)=>{if("avc"===e){let e=Math.ceil(t/16)*Math.ceil(r/16),i=u.find(t=>e<=t.maxMacroblocks&&a<=t.maxBitrate)??(0,s.last)(u),n=i?i.level:0,o="64".padStart(2,"0"),l=n.toString(16).padStart(2,"0");return`avc1.${o}00${l}`}if("hevc"===e){let e=t*r,i=h.find(t=>e<=t.maxPictureSize&&a<=t.maxBitrate)??(0,s.last)(h);return`hev1.1.6.${i.tier}${i.level}.B0`}if("vp8"===e)return"vp8";if("vp9"===e){let e=t*r,i=m.find(t=>e<=t.maxPictureSize&&a<=t.maxBitrate)??(0,s.last)(m);return`vp09.00.${i.level.toString().padStart(2,"0")}.08`}if("av1"===e){let e=t*r,i=p.find(t=>e<=t.maxPictureSize&&a<=t.maxBitrate)??(0,s.last)(p),n=i.level.toString().padStart(2,"0");return`av01.0.${n}${i.tier}.08`}throw TypeError(`Unhandled codec '${e}'.`)},b=e=>{let t=e.split(".");return[1,1,Number(t[1]),2,1,Number(t[2]),3,1,Number(t[3]),4,1,t[4]?Number(t[4]):1]},y=e=>{let t=e.split("."),r=Number(t[1]),a=t[2];return[129,(r<<5)+Number(a.slice(0,-1)),(("H"===a.slice(-1))<<7)+((8!==Number(t[3]))<<6)+0+((t[4]?Number(t[4]):0)<<4)+((t[5]?Number(t[5][0]):1)<<3)+((t[5]?Number(t[5][1]):1)<<2)+(t[5]?Number(t[5][2]):0),0]},S=e=>{let{codec:t,codecDescription:r,colorSpace:a,avcCodecInfo:i,hevcCodecInfo:n,vp9CodecInfo:o,av1CodecInfo:l}=e;if("avc"===t){if((0,s.assert)(null!==e.avcType),i){let t=new Uint8Array([i.avcProfileIndication,i.profileCompatibility,i.avcLevelIndication]);return`avc${e.avcType}.${(0,s.bytesToHexString)(t)}`}if(!r||r.byteLength<4)throw TypeError("AVC decoder description is not provided or is not at least 4 bytes long.");return`avc${e.avcType}.${(0,s.bytesToHexString)(r.subarray(1,4))}`}if("hevc"===t){let e,t,a,i,o,l;if(n)e=n.generalProfileSpace,t=n.generalProfileIdc,a=(0,s.reverseBitsU32)(n.generalProfileCompatibilityFlags),i=n.generalTierFlag,o=n.generalLevelIdc,l=[...n.generalConstraintIndicatorFlags];else{if(!r||r.byteLength<23)throw TypeError("HEVC decoder description is not provided or is not at least 23 bytes long.");let n=(0,s.toDataView)(r),c=n.getUint8(1);e=c>>6&3,t=31&c,a=(0,s.reverseBitsU32)(n.getUint32(2)),i=c>>5&1,o=n.getUint8(12),l=[];for(let e=0;e<6;e++)l.push(n.getUint8(6+e))}let c="hev1.";for(c+=["","A","B","C"][e]+t,c+=".",c+=a.toString(16).toUpperCase(),c+=".",c+=0===i?"L":"H",c+=o;l.length>0&&0===l[l.length-1];)l.pop();return l.length>0&&(c+=".",c+=l.map(e=>e.toString(16).toUpperCase()).join(".")),c}if("vp8"===t)return"vp8";if("vp9"===t){if(!o){let t=e.width*e.height,r=(0,s.last)(m).level;for(let e of m)if(t<=e.maxPictureSize){r=e.level;break}return`vp09.00.${r.toString().padStart(2,"0")}.08`}let t=o.profile.toString().padStart(2,"0"),r=o.level.toString().padStart(2,"0"),a=o.bitDepth.toString().padStart(2,"0"),i=o.chromaSubsampling.toString().padStart(2,"0"),n=o.colourPrimaries.toString().padStart(2,"0"),l=o.transferCharacteristics.toString().padStart(2,"0"),c=o.matrixCoefficients.toString().padStart(2,"0"),d=o.videoFullRangeFlag.toString().padStart(2,"0"),u=`vp09.${t}.${r}.${a}.${i}`;return(u+=`.${n}.${l}.${c}.${d}`).endsWith(f)&&(u=u.slice(0,-f.length)),u}if("av1"===t){if(!l){let t=e.width*e.height,r=(0,s.last)(m).level;for(let e of m)if(t<=e.maxPictureSize){r=e.level;break}return`av01.0.${r.toString().padStart(2,"0")}M.08`}let t=l.profile,r=l.level.toString().padStart(2,"0"),i=l.tier?"H":"M",n=l.bitDepth.toString().padStart(2,"0"),o=l.monochrome?"1":"0",c=100*l.chromaSubsamplingX+10*l.chromaSubsamplingY+ +(l.chromaSubsamplingX&&l.chromaSubsamplingY?l.chromaSamplePosition:0),d=a?.primaries?s.COLOR_PRIMARIES_MAP[a.primaries]:1,u=a?.transfer?s.TRANSFER_CHARACTERISTICS_MAP[a.transfer]:1,h=a?.matrix?s.MATRIX_COEFFICIENTS_MAP[a.matrix]:1,p=+!!a?.fullRange,f=`av01.${t}.${r}${i}.${n}`;return f+=`.${o}.${c.toString().padStart(3,"0")}`,f+=`.${d.toString().padStart(2,"0")}`,f+=`.${u.toString().padStart(2,"0")}`,f+=`.${h.toString().padStart(2,"0")}`,(f+=`.${p}`).endsWith(g)&&(f=f.slice(0,-g.length)),f}throw TypeError(`Unhandled codec '${t}'.`)},T=(e,t,r)=>{if("aac"===e)return t>=2&&r<=24e3?"mp4a.40.29":r<=24e3?"mp4a.40.5":"mp4a.40.2";if("mp3"===e)return"mp3";if("opus"===e)return"opus";if("vorbis"===e)return"vorbis";if("flac"===e)return"flac";else if(o.includes(e))return e;throw TypeError(`Unhandled codec '${e}'.`)},I=e=>{let{codec:t,codecDescription:r,aacCodecInfo:a}=e;if("aac"===t){if(!a)throw TypeError("AAC codec info must be provided.");if(a.isMpeg2)return"mp4a.67";{let e;return e=null!==a.objectType?a.objectType:E(r).objectType,`mp4a.40.${e}`}}if("mp3"===t)return"mp3";if("opus"===t)return"opus";if("vorbis"===t)return"vorbis";if("flac"===t)return"flac";else if(t&&o.includes(t))return t;throw TypeError(`Unhandled codec '${t}'.`)},w=[96e3,88200,64e3,48e3,44100,32e3,24e3,22050,16e3,12e3,11025,8e3,7350],x=[-1,1,2,3,4,5,6,8],E=e=>{if(!e||e.byteLength<2)throw TypeError("AAC description must be at least 2 bytes long.");let t=new(0,s.Bitstream)(e),r=t.readBits(5);31===r&&(r=32+t.readBits(6));let a=t.readBits(4),i=null;15===a?i=t.readBits(24):a<w.length&&(i=w[a]);let n=t.readBits(4),o=null;return n>=1&&n<=7&&(o=x[n]),{objectType:r,frequencyIndex:a,sampleRate:i,channelConfiguration:n,numberOfChannels:o}},P=e=>{let t=w.indexOf(e.sampleRate),r=null;-1===t&&(t=15,r=e.sampleRate);let a=x.indexOf(e.numberOfChannels);if(-1===a)throw TypeError(`Unsupported number of channels: ${e.numberOfChannels}`);let i=13;e.objectType>=32&&(i+=6),15===t&&(i+=24);let n=new Uint8Array(Math.ceil(i/8)),o=new(0,s.Bitstream)(n);return e.objectType<32?o.writeBits(5,e.objectType):(o.writeBits(5,31),o.writeBits(6,e.objectType-32)),o.writeBits(4,t),15===t&&o.writeBits(24,r),o.writeBits(4,a),n},v=48e3,C=/^pcm-([usf])(\d+)+(be)?$/,A=e=>{let t;if((0,s.assert)(o.includes(e)),"ulaw"===e)return{dataType:"ulaw",sampleSize:1,littleEndian:!0,silentValue:255};if("alaw"===e)return{dataType:"alaw",sampleSize:1,littleEndian:!0,silentValue:213};let r=C.exec(e);(0,s.assert)(r),t="u"===r[1]?"unsigned":"s"===r[1]?"signed":"float";let a=Number(r[2])/8;return{dataType:t,sampleSize:a,littleEndian:"be"!==r[3],silentValue:128*("pcm-u8"===e)}},B=e=>{if(e.startsWith("avc1")||e.startsWith("avc3"))return"avc";if(e.startsWith("hev1")||e.startsWith("hvc1"))return"hevc";if("vp8"===e)return"vp8";if(e.startsWith("vp09"))return"vp9";if(e.startsWith("av01"))return"av1";if(e.startsWith("mp4a.40")||"mp4a.67"===e)return"aac";if("mp3"===e||"mp4a.69"===e||"mp4a.6B"===e||"mp4a.6b"===e)return"mp3";if("opus"===e)return"opus";if("vorbis"===e)return"vorbis";if("flac"===e)return"flac";else if("ulaw"===e)return"ulaw";else if("alaw"===e)return"alaw";else if(C.test(e))return e;return"webvtt"===e?"webvtt":null},_=e=>"avc"===e?{avc:{format:"avc"}}:"hevc"===e?{hevc:{format:"hevc"}}:{},D=e=>"aac"===e?{aac:{format:"aac"}}:"opus"===e?{opus:{format:"opus"}}:{},M=["avc1","avc3","hev1","hvc1","vp8","vp09","av01"],F=/^(avc1|avc3)\.[0-9a-fA-F]{6}$/,R=/^(hev1|hvc1)\.(?:[ABC]?\d+)\.[0-9a-fA-F]{1,8}\.[LH]\d+(?:\.[0-9a-fA-F]{1,2}){0,6}$/,U=/^vp09(?:\.\d{2}){3}(?:(?:\.\d{2}){5})?$/,L=/^av01\.\d\.\d{2}[MH]\.\d{2}(?:\.\d\.\d{3}\.\d{2}\.\d{2}\.\d{2}\.\d)?$/,N=e=>{if(!e)throw TypeError("Video chunk metadata must be provided.");if("object"!=typeof e)throw TypeError("Video chunk metadata must be an object.");if(!e.decoderConfig)throw TypeError("Video chunk metadata must include a decoder configuration.");if("object"!=typeof e.decoderConfig)throw TypeError("Video chunk metadata decoder configuration must be an object.");if("string"!=typeof e.decoderConfig.codec)throw TypeError("Video chunk metadata decoder configuration must specify a codec string.");if(!M.some(t=>e.decoderConfig.codec.startsWith(t)))throw TypeError("Video chunk metadata decoder configuration codec string must be a valid video codec string as specified in the WebCodecs Codec Registry.");if(!Number.isInteger(e.decoderConfig.codedWidth)||e.decoderConfig.codedWidth<=0)throw TypeError("Video chunk metadata decoder configuration must specify a valid codedWidth (positive integer).");if(!Number.isInteger(e.decoderConfig.codedHeight)||e.decoderConfig.codedHeight<=0)throw TypeError("Video chunk metadata decoder configuration must specify a valid codedHeight (positive integer).");if(void 0!==e.decoderConfig.description&&!(0,s.isAllowSharedBufferSource)(e.decoderConfig.description))throw TypeError("Video chunk metadata decoder configuration description, when defined, must be an ArrayBuffer or an ArrayBuffer view.");if(void 0!==e.decoderConfig.colorSpace){let{colorSpace:t}=e.decoderConfig;if("object"!=typeof t)throw TypeError("Video chunk metadata decoder configuration colorSpace, when provided, must be an object.");let r=Object.keys(s.COLOR_PRIMARIES_MAP);if(null!=t.primaries&&!r.includes(t.primaries))throw TypeError(`Video chunk metadata decoder configuration colorSpace primaries, when defined, must be one of ${r.join(", ")}.`);let a=Object.keys(s.TRANSFER_CHARACTERISTICS_MAP);if(null!=t.transfer&&!a.includes(t.transfer))throw TypeError(`Video chunk metadata decoder configuration colorSpace transfer, when defined, must be one of ${a.join(", ")}.`);let i=Object.keys(s.MATRIX_COEFFICIENTS_MAP);if(null!=t.matrix&&!i.includes(t.matrix))throw TypeError(`Video chunk metadata decoder configuration colorSpace matrix, when defined, must be one of ${i.join(", ")}.`);if(null!=t.fullRange&&"boolean"!=typeof t.fullRange)throw TypeError("Video chunk metadata decoder configuration colorSpace fullRange, when defined, must be a boolean.")}if(e.decoderConfig.codec.startsWith("avc1")||e.decoderConfig.codec.startsWith("avc3")){if(!F.test(e.decoderConfig.codec))throw TypeError("Video chunk metadata decoder configuration codec string for AVC must be a valid AVC codec string as specified in Section 3.4 of RFC 6381.")}else if(e.decoderConfig.codec.startsWith("hev1")||e.decoderConfig.codec.startsWith("hvc1")){if(!R.test(e.decoderConfig.codec))throw TypeError("Video chunk metadata decoder configuration codec string for HEVC must be a valid HEVC codec string as specified in Section E.3 of ISO 14496-15.")}else if(e.decoderConfig.codec.startsWith("vp8")){if("vp8"!==e.decoderConfig.codec)throw TypeError('Video chunk metadata decoder configuration codec string for VP8 must be "vp8".')}else if(e.decoderConfig.codec.startsWith("vp09")){if(!U.test(e.decoderConfig.codec))throw TypeError('Video chunk metadata decoder configuration codec string for VP9 must be a valid VP9 codec string as specified in Section "Codecs Parameter String" of https://www.webmproject.org/vp9/mp4/.')}else if(e.decoderConfig.codec.startsWith("av01")&&!L.test(e.decoderConfig.codec))throw TypeError('Video chunk metadata decoder configuration codec string for AV1 must be a valid AV1 codec string as specified in Section "Codecs Parameter String" of https://aomediacodec.github.io/av1-isobmff/.')},O=["mp4a","mp3","opus","vorbis","flac","ulaw","alaw","pcm"],j=e=>{if(!e)throw TypeError("Audio chunk metadata must be provided.");if("object"!=typeof e)throw TypeError("Audio chunk metadata must be an object.");if(!e.decoderConfig)throw TypeError("Audio chunk metadata must include a decoder configuration.");if("object"!=typeof e.decoderConfig)throw TypeError("Audio chunk metadata decoder configuration must be an object.");if("string"!=typeof e.decoderConfig.codec)throw TypeError("Audio chunk metadata decoder configuration must specify a codec string.");if(!O.some(t=>e.decoderConfig.codec.startsWith(t)))throw TypeError("Audio chunk metadata decoder configuration codec string must be a valid audio codec string as specified in the WebCodecs Codec Registry.");if(!Number.isInteger(e.decoderConfig.sampleRate)||e.decoderConfig.sampleRate<=0)throw TypeError("Audio chunk metadata decoder configuration must specify a valid sampleRate (positive integer).");if(!Number.isInteger(e.decoderConfig.numberOfChannels)||e.decoderConfig.numberOfChannels<=0)throw TypeError("Audio chunk metadata decoder configuration must specify a valid numberOfChannels (positive integer).");if(void 0!==e.decoderConfig.description&&!(0,s.isAllowSharedBufferSource)(e.decoderConfig.description))throw TypeError("Audio chunk metadata decoder configuration description, when defined, must be an ArrayBuffer or an ArrayBuffer view.");if(e.decoderConfig.codec.startsWith("mp4a")&&"mp4a.69"!==e.decoderConfig.codec&&"mp4a.6B"!==e.decoderConfig.codec&&"mp4a.6b"!==e.decoderConfig.codec){if(!["mp4a.40.2","mp4a.40.02","mp4a.40.5","mp4a.40.05","mp4a.40.29","mp4a.67"].includes(e.decoderConfig.codec))throw TypeError("Audio chunk metadata decoder configuration codec string for AAC must be a valid AAC codec string as specified in https://www.w3.org/TR/webcodecs-aac-codec-registration/.")}else if(e.decoderConfig.codec.startsWith("mp3")||e.decoderConfig.codec.startsWith("mp4a")){if("mp3"!==e.decoderConfig.codec&&"mp4a.69"!==e.decoderConfig.codec&&"mp4a.6B"!==e.decoderConfig.codec&&"mp4a.6b"!==e.decoderConfig.codec)throw TypeError('Audio chunk metadata decoder configuration codec string for MP3 must be "mp3", "mp4a.69" or "mp4a.6B".')}else if(e.decoderConfig.codec.startsWith("opus")){if("opus"!==e.decoderConfig.codec)throw TypeError('Audio chunk metadata decoder configuration codec string for Opus must be "opus".');if(e.decoderConfig.description&&e.decoderConfig.description.byteLength<18)throw TypeError("Audio chunk metadata decoder configuration description, when specified, is expected to be an Identification Header as specified in Section 5.1 of RFC 7845.")}else if(e.decoderConfig.codec.startsWith("vorbis")){if("vorbis"!==e.decoderConfig.codec)throw TypeError('Audio chunk metadata decoder configuration codec string for Vorbis must be "vorbis".');if(!e.decoderConfig.description)throw TypeError("Audio chunk metadata decoder configuration for Vorbis must include a description, which is expected to adhere to the format described in https://www.w3.org/TR/webcodecs-vorbis-codec-registration/.")}else if(e.decoderConfig.codec.startsWith("flac")){if("flac"!==e.decoderConfig.codec)throw TypeError('Audio chunk metadata decoder configuration codec string for FLAC must be "flac".');if(!e.decoderConfig.description||e.decoderConfig.description.byteLength<42)throw TypeError("Audio chunk metadata decoder configuration for FLAC must include a description, which is expected to adhere to the format described in https://www.w3.org/TR/webcodecs-flac-codec-registration/.")}else if((e.decoderConfig.codec.startsWith("pcm")||e.decoderConfig.codec.startsWith("ulaw")||e.decoderConfig.codec.startsWith("alaw"))&&!o.includes(e.decoderConfig.codec))throw TypeError(`Audio chunk metadata decoder configuration codec string for PCM must be one of the supported PCM codecs (${o.join(", ")}).`)},z=e=>{if(!e)throw TypeError("Subtitle metadata must be provided.");if("object"!=typeof e)throw TypeError("Subtitle metadata must be an object.");if(!e.config)throw TypeError("Subtitle metadata must include a config object.");if("object"!=typeof e.config)throw TypeError("Subtitle metadata config must be an object.");if("string"!=typeof e.config.description)throw TypeError("Subtitle metadata config description must be a string.")}},{"./misc.js":"jrq2g","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jrq2g:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");function s(e){if(!e)throw Error("Assertion failed.")}i.defineInteropFlag(r),i.export(r,"assert",()=>s),i.export(r,"normalizeRotation",()=>n),i.export(r,"last",()=>o),i.export(r,"isU32",()=>l),i.export(r,"Bitstream",()=>c),i.export(r,"readExpGolomb",()=>d),i.export(r,"readSignedExpGolomb",()=>u),i.export(r,"writeBits",()=>h),i.export(r,"toUint8Array",()=>m),i.export(r,"toDataView",()=>p),i.export(r,"textDecoder",()=>f),i.export(r,"textEncoder",()=>g),i.export(r,"isIso88591Compatible",()=>k),i.export(r,"COLOR_PRIMARIES_MAP",()=>y),i.export(r,"COLOR_PRIMARIES_MAP_INVERSE",()=>S),i.export(r,"TRANSFER_CHARACTERISTICS_MAP",()=>T),i.export(r,"TRANSFER_CHARACTERISTICS_MAP_INVERSE",()=>I),i.export(r,"MATRIX_COEFFICIENTS_MAP",()=>w),i.export(r,"MATRIX_COEFFICIENTS_MAP_INVERSE",()=>x),i.export(r,"colorSpaceIsComplete",()=>E),i.export(r,"isAllowSharedBufferSource",()=>P),i.export(r,"AsyncMutex",()=>v),i.export(r,"bytesToHexString",()=>C),i.export(r,"reverseBitsU32",()=>A),i.export(r,"binarySearchExact",()=>B),i.export(r,"binarySearchLessOrEqual",()=>_),i.export(r,"insertSorted",()=>D),i.export(r,"promiseWithResolvers",()=>M),i.export(r,"removeItem",()=>F),i.export(r,"findLast",()=>R),i.export(r,"findLastIndex",()=>U),i.export(r,"toAsyncIterator",()=>L),i.export(r,"validateAnyIterable",()=>N),i.export(r,"assertNever",()=>O),i.export(r,"getUint24",()=>j),i.export(r,"getInt24",()=>z),i.export(r,"setUint24",()=>V),i.export(r,"setInt24",()=>H),i.export(r,"setInt64",()=>q),i.export(r,"mapAsyncGenerator",()=>G),i.export(r,"clamp",()=>W),i.export(r,"UNDETERMINED_LANGUAGE",()=>K),i.export(r,"roundIfAlmostInteger",()=>X),i.export(r,"roundToMultiple",()=>$),i.export(r,"floorToMultiple",()=>Z),i.export(r,"ilog",()=>Q),i.export(r,"isIso639Dash2LanguageCode",()=>J),i.export(r,"SECOND_TO_MICROSECOND_FACTOR",()=>ee),i.export(r,"mergeRequestInit",()=>et),i.export(r,"retriedFetch",()=>ea),i.export(r,"computeRationalApproximation",()=>ei),i.export(r,"CallSerializer",()=>es),i.export(r,"isWebKit",()=>eo),i.export(r,"isFirefox",()=>ec),i.export(r,"isChromium",()=>eu),i.export(r,"getChromiumVersion",()=>em),i.export(r,"coalesceIndex",()=>ep),i.export(r,"closedIntervalsOverlap",()=>ef),i.export(r,"keyValueIterator",()=>eg),i.export(r,"imageMimeTypeToExtension",()=>ek),i.export(r,"base64ToBytes",()=>eb),i.export(r,"bytesToBase64",()=>ey),i.export(r,"uint8ArraysAreEqual",()=>eS),i.export(r,"polyfillSymbolDispose",()=>eT),i.export(r,"isNumber",()=>eI);let n=e=>{let t=(e%360+360)%360;if(0===t||90===t||180===t||270===t)return t;throw Error(`Invalid rotation ${e}.`)},o=e=>e&&e[e.length-1],l=e=>e>=0&&e<0x100000000;class c{constructor(e){this.bytes=e,this.pos=0}seekToByte(e){this.pos=8*e}readBit(){let e=Math.floor(this.pos/8),t=this.bytes[e]??0,r=7-(7&this.pos);return this.pos++,(t&1<<r)>>r}readBits(e){if(1===e)return this.readBit();let t=0;for(let r=0;r<e;r++)t<<=1,t|=this.readBit();return t}writeBits(e,t){let r=this.pos+e;for(let e=this.pos;e<r;e++){let a=Math.floor(e/8),i=this.bytes[a],s=7-(7&e);i&=~(1<<s),i|=(t&1<<r-e-1)>>r-e-1<<s,this.bytes[a]=i}this.pos=r}readAlignedByte(){if(this.pos%8!=0)throw Error("Bitstream is not byte-aligned.");let e=this.pos/8,t=this.bytes[e]??0;return this.pos+=8,t}skipBits(e){this.pos+=e}getBitsLeft(){return 8*this.bytes.length-this.pos}clone(){let e=new c(this.bytes);return e.pos=this.pos,e}}let d=e=>{let t=0;for(;0===e.readBits(1)&&t<32;)t++;if(t>=32)throw Error("Invalid exponential-Golomb code.");return(1<<t)-1+e.readBits(t)},u=e=>{let t=d(e);return(1&t)==0?-(t>>1):t+1>>1},h=(e,t,r,a)=>{for(let i=t;i<r;i++){let t=Math.floor(i/8),s=e[t],n=7-(7&i);s&=~(1<<n),s|=(a&1<<r-i-1)>>r-i-1<<n,e[t]=s}},m=e=>e.constructor===Uint8Array?e:ArrayBuffer.isView(e)?new Uint8Array(e.buffer,e.byteOffset,e.byteLength):new Uint8Array(e),p=e=>e.constructor===DataView?e:ArrayBuffer.isView(e)?new DataView(e.buffer,e.byteOffset,e.byteLength):new DataView(e),f=new TextDecoder,g=new TextEncoder,k=e=>{for(let t=0;t<e.length;t++)if(e.charCodeAt(t)>255)return!1;return!0},b=e=>Object.fromEntries(Object.entries(e).map(([e,t])=>[t,e])),y={bt709:1,bt470bg:5,smpte170m:6,bt2020:9,smpte432:12},S=b(y),T={bt709:1,smpte170m:6,linear:8,"iec61966-2-1":13,pq:16,hlg:18},I=b(T),w={rgb:0,bt709:1,bt470bg:5,smpte170m:6,"bt2020-ncl":9},x=b(w),E=e=>!!e&&!!e.primaries&&!!e.transfer&&!!e.matrix&&void 0!==e.fullRange,P=e=>e instanceof ArrayBuffer||"u">typeof SharedArrayBuffer&&e instanceof SharedArrayBuffer||ArrayBuffer.isView(e);class v{constructor(){this.currentPromise=Promise.resolve(),this.pending=0}async acquire(){let e,t=new Promise(t=>{let r=!1;e=()=>{r||(t(),this.pending--,r=!0)}}),r=this.currentPromise;return this.currentPromise=t,this.pending++,await r,e}}let C=e=>[...e].map(e=>e.toString(16).padStart(2,"0")).join(""),A=e=>(e=(e=(e=(e=(e=e>>1&0x55555555|(0x55555555&e)<<1)>>2&0x33333333|(0x33333333&e)<<2)>>4&0xf0f0f0f|(0xf0f0f0f&e)<<4)>>8&0xff00ff|(0xff00ff&e)<<8)>>16&65535|(65535&e)<<16)>>>0,B=(e,t,r)=>{let a=0,i=e.length-1,s=-1;for(;a<=i;){let n=a+i>>1,o=r(e[n]);o===t?(s=n,i=n-1):o<t?a=n+1:i=n-1}return s},_=(e,t,r)=>{let a=0,i=e.length-1,s=-1;for(;a<=i;){let n=a+(i-a+1)/2|0;r(e[n])<=t?(s=n,a=n+1):i=n-1}return s},D=(e,t,r)=>{let a=_(e,r(t),r);e.splice(a+1,0,t)},M=()=>{let e,t;return{promise:new Promise((r,a)=>{e=r,t=a}),resolve:e,reject:t}},F=(e,t)=>{let r=e.indexOf(t);-1!==r&&e.splice(r,1)},R=(e,t)=>{for(let r=e.length-1;r>=0;r--)if(t(e[r]))return e[r]},U=(e,t)=>{for(let r=e.length-1;r>=0;r--)if(t(e[r]))return r;return -1},L=async function*(e){Symbol.iterator in e?yield*e[Symbol.iterator]():yield*e[Symbol.asyncIterator]()},N=e=>{if(!(Symbol.iterator in e)&&!(Symbol.asyncIterator in e))throw TypeError("Argument must be an iterable or async iterable.")},O=e=>{throw Error(`Unexpected value: ${e}`)},j=(e,t,r)=>{let a=e.getUint8(t),i=e.getUint8(t+1),s=e.getUint8(t+2);return r?a|i<<8|s<<16:a<<16|i<<8|s},z=(e,t,r)=>j(e,t,r)<<8>>8,V=(e,t,r,a)=>{r>>>=0,r&=0xffffff,a?(e.setUint8(t,255&r),e.setUint8(t+1,r>>>8&255),e.setUint8(t+2,r>>>16&255)):(e.setUint8(t,r>>>16&255),e.setUint8(t+1,r>>>8&255),e.setUint8(t+2,255&r))},H=(e,t,r,a)=>{(r=W(r,-8388608,8388607))<0&&(r=r+0x1000000&0xffffff),V(e,t,r,a)},q=(e,t,r,a)=>{a?(e.setUint32(t+0,r,!0),e.setInt32(t+4,Math.floor(r/0x100000000),!0)):(e.setInt32(t+0,Math.floor(r/0x100000000),!0),e.setUint32(t+4,r,!0))},G=(e,t)=>({async next(){let r=await e.next();return r.done?{value:void 0,done:!0}:{value:t(r.value),done:!1}},return:()=>e.return(),throw:t=>e.throw(t),[Symbol.asyncIterator](){return this}}),W=(e,t,r)=>Math.max(t,Math.min(r,e)),K="und",X=e=>{let t=Math.round(e);return Math.abs(e/t-1)<10*Number.EPSILON?t:e},$=(e,t)=>Math.round(e/t)*t,Z=(e,t)=>Math.floor(e/t)*t,Q=e=>{let t=0;for(;e;)t++,e>>=1;return t},Y=/^[a-z]{3}$/,J=e=>Y.test(e),ee=1e6*(1+Number.EPSILON),et=(e,t)=>{let r={...e,...t};if(e.headers||t.headers){let a=e.headers?er(e.headers):{},i=t.headers?er(t.headers):{},s={...a};Object.entries(i).forEach(([e,t])=>{let r=Object.keys(s).find(t=>t.toLowerCase()===e.toLowerCase());r&&delete s[r],s[e]=t}),r.headers=s}return r},er=e=>{if(e instanceof Headers){let t={};return e.forEach((e,r)=>{t[r]=e}),t}if(Array.isArray(e)){let t={};return e.forEach(([e,r])=>{t[e]=r}),t}return e},ea=async(e,t,r,a,i)=>{let s=0;for(;;)try{return await e(t,r)}catch(r){if(i())throw r;let e=a(++s,r,t);if(null===e)throw r;if(console.error("Retrying failed fetch. Error:",r),!Number.isFinite(e)||e<0)throw TypeError("Retry delay must be a non-negative finite number.");if(e>0&&await new Promise(t=>setTimeout(t,1e3*e)),i())throw r}},ei=(e,t)=>{let r=e<0?-1:1,a=0,i=1,s=1,n=0,o=e=Math.abs(e);for(;;){let e=Math.floor(o),r=e*s+a,l=e*n+i;if(l>t||(a=s,i=n,s=r,n=l,!isFinite(o=1/(o-e))))break}return{numerator:r*s,denominator:n}};class es{constructor(){this.currentPromise=Promise.resolve()}call(e){return this.currentPromise=this.currentPromise.then(e)}}let en=null,eo=()=>null!==en?en:en=!!("u">typeof navigator&&(navigator.vendor?.match(/apple/i)||/AppleWebKit/.test(navigator.userAgent)&&!/Chrome/.test(navigator.userAgent)||/\b(iPad|iPhone|iPod)\b/.test(navigator.userAgent))),el=null,ec=()=>null!==el?el:el="u">typeof navigator&&navigator.userAgent?.includes("Firefox"),ed=null,eu=()=>null!==ed?ed:ed=!!("u">typeof navigator&&(navigator.vendor?.includes("Google Inc")||/Chrome/.test(navigator.userAgent))),eh=null,em=()=>{if(null!==eh)return eh;if("u"<typeof navigator)return null;let e=/\bChrome\/(\d+)/.exec(navigator.userAgent);return e?eh=Number(e[1]):null},ep=(e,t)=>-1!==e?e:t,ef=(e,t,r,a)=>e<=a&&r<=t,eg=function*(e){for(let t in e){let r=e[t];void 0!==r&&(yield{key:t,value:r})}},ek=e=>{switch(e.toLowerCase()){case"image/jpeg":case"image/jpg":return".jpg";case"image/png":return".png";case"image/gif":return".gif";case"image/webp":return".webp";case"image/bmp":return".bmp";case"image/svg+xml":return".svg";case"image/tiff":return".tiff";case"image/avif":return".avif";case"image/x-icon":case"image/vnd.microsoft.icon":return".ico";default:return null}},eb=e=>{let t=atob(e),r=new Uint8Array(t.length);for(let e=0;e<t.length;e++)r[e]=t.charCodeAt(e);return r},ey=e=>{let t="";for(let r=0;r<e.length;r++)t+=String.fromCharCode(e[r]);return btoa(t)},eS=(e,t)=>{if(e.length!==t.length)return!1;for(let r=0;r<e.length;r++)if(e[r]!==t[r])return!1;return!0},eT=()=>{Symbol.dispose??=Symbol("Symbol.dispose")},eI=e=>"number"==typeof e&&!Number.isNaN(e)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],zx4dz:[function(e,t,r,a){var i,s,n,o,l,c,d=e("@parcel/transformer-js/src/esmodule-helpers.js");d.defineInteropFlag(r),d.export(r,"AvcNalUnitType",()=>o),d.export(r,"HevcNalUnitType",()=>l),d.export(r,"iterateNalUnitsInAnnexB",()=>m),d.export(r,"iterateNalUnitsInLengthPrefixed",()=>p),d.export(r,"iterateAvcNalUnits",()=>f),d.export(r,"extractNalUnitTypeForAvc",()=>g),d.export(r,"concatNalUnitsInAnnexB",()=>y),d.export(r,"concatNalUnitsInLengthPrefixed",()=>S),d.export(r,"concatAvcNalUnits",()=>T),d.export(r,"extractAvcDecoderConfigurationRecord",()=>I),d.export(r,"serializeAvcDecoderConfigurationRecord",()=>w),d.export(r,"deserializeAvcDecoderConfigurationRecord",()=>x),d.export(r,"parseAvcSps",()=>E),d.export(r,"iterateHevcNalUnits",()=>v),d.export(r,"extractNalUnitTypeForHevc",()=>C),d.export(r,"parseHevcSps",()=>A),d.export(r,"extractHevcDecoderConfigurationRecord",()=>B),d.export(r,"serializeHevcDecoderConfigurationRecord",()=>N),d.export(r,"deserializeHevcDecoderConfigurationRecord",()=>O),d.export(r,"extractVp9CodecInfoFromPacket",()=>j),d.export(r,"iterateAv1PacketObus",()=>z),d.export(r,"extractAv1CodecInfoFromPacket",()=>V),d.export(r,"parseOpusIdentificationHeader",()=>H),d.export(r,"parseOpusTocByte",()=>G),d.export(r,"parseModesFromVorbisSetupPacket",()=>W),d.export(r,"determineVideoPacketType",()=>K),d.export(r,"FlacBlockType",()=>c),d.export(r,"readVorbisComments",()=>X),d.export(r,"createVorbisComments",()=>$);var u=e("./codec.js"),h=e("./misc.js");(i=o||(o={}))[i.NON_IDR_SLICE=1]="NON_IDR_SLICE",i[i.SLICE_DPA=2]="SLICE_DPA",i[i.SLICE_DPB=3]="SLICE_DPB",i[i.SLICE_DPC=4]="SLICE_DPC",i[i.IDR=5]="IDR",i[i.SEI=6]="SEI",i[i.SPS=7]="SPS",i[i.PPS=8]="PPS",i[i.AUD=9]="AUD",i[i.SPS_EXT=13]="SPS_EXT",(s=l||(l={}))[s.RASL_N=8]="RASL_N",s[s.RASL_R=9]="RASL_R",s[s.BLA_W_LP=16]="BLA_W_LP",s[s.RSV_IRAP_VCL23=23]="RSV_IRAP_VCL23",s[s.VPS_NUT=32]="VPS_NUT",s[s.SPS_NUT=33]="SPS_NUT",s[s.PPS_NUT=34]="PPS_NUT",s[s.AUD_NUT=35]="AUD_NUT",s[s.PREFIX_SEI_NUT=39]="PREFIX_SEI_NUT",s[s.SUFFIX_SEI_NUT=40]="SUFFIX_SEI_NUT";let m=function*(e){let t=0,r=-1;for(;t<e.length-2;){let a=e.indexOf(0,t);if(-1===a||a>=e.length-2)break;let i=0;if((t=a)+3<e.length&&0===e[t+1]&&0===e[t+2]&&1===e[t+3]?i=4:0===e[t+1]&&1===e[t+2]&&(i=3),0===i){t++;continue}-1!==r&&t>r&&(yield{offset:r,length:t-r}),t=r=t+i}-1!==r&&r<e.length&&(yield{offset:r,length:e.length-r})},p=function*(e,t){let r=0,a=new DataView(e.buffer,e.byteOffset,e.byteLength);for(;r+t<=e.length;){let e;1===t?e=a.getUint8(r):2===t?e=a.getUint16(r,!1):3===t?e=(0,h.getUint24)(a,r,!1):((0,h.assert)(4===t),e=a.getUint32(r,!1)),r+=t,yield{offset:r,length:e},r+=e}},f=(e,t)=>t.description?p(e,(3&(0,h.toUint8Array)(t.description)[4])+1):m(e),g=e=>31&e,k=e=>{let t=[],r=e.length;for(let a=0;a<r;a++)a+2<r&&0===e[a]&&0===e[a+1]&&3===e[a+2]?(t.push(0,0),a+=2):t.push(e[a]);return new Uint8Array(t)},b=new Uint8Array([0,0,0,1]),y=e=>{let t=new Uint8Array(e.reduce((e,t)=>e+b.byteLength+t.byteLength,0)),r=0;for(let a of e)t.set(b,r),r+=b.byteLength,t.set(a,r),r+=a.byteLength;return t},S=(e,t)=>{let r=new Uint8Array(e.reduce((e,r)=>e+t+r.byteLength,0)),a=0;for(let i of e){let e=new DataView(r.buffer,r.byteOffset,r.byteLength);switch(t){case 1:e.setUint8(a,i.byteLength);break;case 2:e.setUint16(a,i.byteLength,!1);break;case 3:(0,h.setUint24)(e,a,i.byteLength,!1);break;case 4:e.setUint32(a,i.byteLength,!1)}a+=t,r.set(i,a),a+=i.byteLength}return r},T=(e,t)=>t.description?S(e,(3&(0,h.toUint8Array)(t.description)[4])+1):y(e),I=e=>{try{let t=[],r=[],a=[];for(let i of m(e)){let s=e.subarray(i.offset,i.offset+i.length),n=g(s[0]);n===o.SPS?t.push(s):n===o.PPS?r.push(s):n===o.SPS_EXT&&a.push(s)}if(0===t.length||0===r.length)return null;let i=t[0],s=E(i);(0,h.assert)(null!==s);let n=100===s.profileIdc||110===s.profileIdc||122===s.profileIdc||144===s.profileIdc;return{configurationVersion:1,avcProfileIndication:s.profileIdc,profileCompatibility:s.constraintFlags,avcLevelIndication:s.levelIdc,lengthSizeMinusOne:3,sequenceParameterSets:t,pictureParameterSets:r,chromaFormat:n?s.chromaFormatIdc:null,bitDepthLumaMinus8:n?s.bitDepthLumaMinus8:null,bitDepthChromaMinus8:n?s.bitDepthChromaMinus8:null,sequenceParameterSetExt:n?a:null}}catch(e){return console.error("Error building AVC Decoder Configuration Record:",e),null}},w=e=>{let t=[];for(let r of(t.push(e.configurationVersion),t.push(e.avcProfileIndication),t.push(e.profileCompatibility),t.push(e.avcLevelIndication),t.push(252|3&e.lengthSizeMinusOne),t.push(224|31&e.sequenceParameterSets.length),e.sequenceParameterSets)){let e=r.byteLength;t.push(e>>8),t.push(255&e);for(let a=0;a<e;a++)t.push(r[a])}for(let r of(t.push(e.pictureParameterSets.length),e.pictureParameterSets)){let e=r.byteLength;t.push(e>>8),t.push(255&e);for(let a=0;a<e;a++)t.push(r[a])}if(100===e.avcProfileIndication||110===e.avcProfileIndication||122===e.avcProfileIndication||144===e.avcProfileIndication)for(let r of((0,h.assert)(null!==e.chromaFormat),(0,h.assert)(null!==e.bitDepthLumaMinus8),(0,h.assert)(null!==e.bitDepthChromaMinus8),(0,h.assert)(null!==e.sequenceParameterSetExt),t.push(252|3&e.chromaFormat),t.push(248|7&e.bitDepthLumaMinus8),t.push(248|7&e.bitDepthChromaMinus8),t.push(e.sequenceParameterSetExt.length),e.sequenceParameterSetExt)){let e=r.byteLength;t.push(e>>8),t.push(255&e);for(let a=0;a<e;a++)t.push(r[a])}return new Uint8Array(t)},x=e=>{try{let t=(0,h.toDataView)(e),r=0,a=t.getUint8(r++),i=t.getUint8(r++),s=t.getUint8(r++),n=t.getUint8(r++),o=3&t.getUint8(r++),l=31&t.getUint8(r++),c=[];for(let a=0;a<l;a++){let a=t.getUint16(r,!1);r+=2,c.push(e.subarray(r,r+a)),r+=a}let d=t.getUint8(r++),u=[];for(let a=0;a<d;a++){let a=t.getUint16(r,!1);r+=2,u.push(e.subarray(r,r+a)),r+=a}let m={configurationVersion:a,avcProfileIndication:i,profileCompatibility:s,avcLevelIndication:n,lengthSizeMinusOne:o,sequenceParameterSets:c,pictureParameterSets:u,chromaFormat:null,bitDepthLumaMinus8:null,bitDepthChromaMinus8:null,sequenceParameterSetExt:null};if((100===i||110===i||122===i||144===i)&&r+4<=e.length){let a=3&t.getUint8(r++),i=7&t.getUint8(r++),s=7&t.getUint8(r++),n=t.getUint8(r++);m.chromaFormat=a,m.bitDepthLumaMinus8=i,m.bitDepthChromaMinus8=s;let o=[];for(let a=0;a<n;a++){let a=t.getUint16(r,!1);r+=2,o.push(e.subarray(r,r+a)),r+=a}m.sequenceParameterSetExt=o}return m}catch(e){return console.error("Error deserializing AVC Decoder Configuration Record:",e),null}},E=e=>{try{let t=new(0,h.Bitstream)(k(e));t.skipBits(1),t.skipBits(2);let r=t.readBits(5);if(7!==r)return null;let a=t.readAlignedByte(),i=t.readAlignedByte(),s=t.readAlignedByte();(0,h.readExpGolomb)(t);let n=1,o=0,l=0,c=0;if((100===a||110===a||122===a||244===a||44===a||83===a||86===a||118===a||128===a)&&(n=(0,h.readExpGolomb)(t),3===n&&(c=t.readBits(1)),o=(0,h.readExpGolomb)(t),l=(0,h.readExpGolomb)(t),t.skipBits(1),t.readBits(1))){for(let e=0;e<(3!==n?8:12);e++)if(t.readBits(1)){let r=e<6?16:64,a=8,i=8;for(let e=0;e<r;e++){if(0!==i){let e=(0,h.readSignedExpGolomb)(t);i=(a+e+256)%256}a=0===i?a:i}}}(0,h.readExpGolomb)(t);let d=(0,h.readExpGolomb)(t);if(0===d)(0,h.readExpGolomb)(t);else if(1===d){t.skipBits(1),(0,h.readSignedExpGolomb)(t),(0,h.readSignedExpGolomb)(t);let e=(0,h.readExpGolomb)(t);for(let r=0;r<e;r++)(0,h.readSignedExpGolomb)(t)}(0,h.readExpGolomb)(t),t.skipBits(1);let m=(0,h.readExpGolomb)(t),p=(0,h.readExpGolomb)(t),f=16*(m+1),g=16*(p+1),b=f,y=g,S=t.readBits(1);if(S||t.skipBits(1),t.skipBits(1),t.readBits(1)){let e,r,a=(0,h.readExpGolomb)(t),i=(0,h.readExpGolomb)(t),s=(0,h.readExpGolomb)(t),o=(0,h.readExpGolomb)(t),l=0===c?n:0;if(0===l)e=1,r=2-S;else{let t=3===n?1:2,a=1===n?2:1;e=t,r=a*(2-S)}b-=e*(a+i),y-=r*(s+o)}let T=2,I=2,w=2,x=0,E=null,v=null;if(t.readBits(1)){if(t.readBits(1)){let e=t.readBits(8);255===e&&(t.skipBits(16),t.skipBits(16))}t.readBits(1)&&t.skipBits(1),t.readBits(1)&&(t.skipBits(3),x=t.readBits(1),t.readBits(1)&&(T=t.readBits(8),I=t.readBits(8),w=t.readBits(8))),t.readBits(1)&&((0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t)),t.readBits(1)&&(t.skipBits(32),t.skipBits(32),t.skipBits(1));let e=t.readBits(1);e&&P(t);let r=t.readBits(1);r&&P(t),(e||r)&&t.skipBits(1),t.skipBits(1),t.readBits(1)&&(t.skipBits(1),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),E=(0,h.readExpGolomb)(t),v=(0,h.readExpGolomb)(t))}if(null===E)if((0,h.assert)(null===v),(44===a||86===a||100===a||110===a||122===a||244===a)&&16&i)E=0,v=0;else{let e=u.AVC_LEVEL_TABLE.find(e=>e.level>=s)??(0,h.last)(u.AVC_LEVEL_TABLE),t=Math.min(Math.floor(e.maxDpbMbs/((2-S)*(p+1)*(m+1))),16);E=t,v=t}return(0,h.assert)(null!==v),{profileIdc:a,constraintFlags:i,levelIdc:s,frameMbsOnlyFlag:S,chromaFormatIdc:n,bitDepthLumaMinus8:o,bitDepthChromaMinus8:l,codedWidth:f,codedHeight:g,displayWidth:b,displayHeight:y,colourPrimaries:T,matrixCoefficients:w,transferCharacteristics:I,fullRangeFlag:x,numReorderFrames:E,maxDecFrameBuffering:v}}catch(e){return console.error("Error parsing AVC SPS:",e),null}},P=e=>{let t=(0,h.readExpGolomb)(e);e.skipBits(4),e.skipBits(4);for(let r=0;r<=t;r++)(0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e),e.skipBits(1);e.skipBits(5),e.skipBits(5),e.skipBits(5),e.skipBits(5)},v=(e,t)=>t.description?p(e,(3&(0,h.toUint8Array)(t.description)[21])+1):m(e),C=e=>e>>1&63,A=e=>{try{let t=new(0,h.Bitstream)(k(e));t.skipBits(16),t.readBits(4);let r=t.readBits(3),a=t.readBits(1),{general_profile_space:i,general_tier_flag:s,general_profile_idc:n,general_profile_compatibility_flags:o,general_constraint_indicator_flags:l,general_level_idc:c}=_(t,r);(0,h.readExpGolomb)(t);let d=(0,h.readExpGolomb)(t),u=0;3===d&&(u=t.readBits(1));let m=(0,h.readExpGolomb)(t),p=(0,h.readExpGolomb)(t),f=m,g=p;if(t.readBits(1)){let e=(0,h.readExpGolomb)(t),r=(0,h.readExpGolomb)(t),a=(0,h.readExpGolomb)(t),i=(0,h.readExpGolomb)(t),s=1,n=1,o=0===u?d:0;1===o?(s=2,n=2):2===o&&(s=2,n=1),f-=(e+r)*s,g-=(a+i)*n}let b=(0,h.readExpGolomb)(t),y=(0,h.readExpGolomb)(t);(0,h.readExpGolomb)(t);let S=t.readBits(1)?0:r,T=0;for(let e=S;e<=r;e++)(0,h.readExpGolomb)(t),T=(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t);(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),t.readBits(1)&&t.readBits(1)&&D(t),t.skipBits(1),t.skipBits(1),t.readBits(1)&&(t.skipBits(4),t.skipBits(4),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),t.skipBits(1));let I=(0,h.readExpGolomb)(t);if(M(t,I),t.readBits(1)){let e=(0,h.readExpGolomb)(t);for(let r=0;r<e;r++)(0,h.readExpGolomb)(t),t.skipBits(1)}t.skipBits(1),t.skipBits(1);let w=2,x=2,E=2,P=0,v=0;if(t.readBits(1)){let e=R(t,r);w=e.colourPrimaries,x=e.transferCharacteristics,E=e.matrixCoefficients,P=e.fullRangeFlag,v=e.minSpatialSegmentationIdc}return{displayWidth:f,displayHeight:g,colourPrimaries:w,transferCharacteristics:x,matrixCoefficients:E,fullRangeFlag:P,maxDecFrameBuffering:T+1,spsMaxSubLayersMinus1:r,spsTemporalIdNestingFlag:a,generalProfileSpace:i,generalTierFlag:s,generalProfileIdc:n,generalProfileCompatibilityFlags:o,generalConstraintIndicatorFlags:l,generalLevelIdc:c,chromaFormatIdc:d,bitDepthLumaMinus8:b,bitDepthChromaMinus8:y,minSpatialSegmentationIdc:v}}catch(e){return console.error("Error parsing HEVC SPS:",e),null}},B=e=>{try{let t=[],r=[],a=[],i=[];for(let s of m(e)){let n=e.subarray(s.offset,s.offset+s.length),o=C(n[0]);o===l.VPS_NUT?t.push(n):o===l.SPS_NUT?r.push(n):o===l.PPS_NUT?a.push(n):(o===l.PREFIX_SEI_NUT||o===l.SUFFIX_SEI_NUT)&&i.push(n)}if(0===r.length||0===a.length)return null;let s=A(r[0]);if(!s)return null;let n=0;if(a.length>0){let e=a[0],t=new(0,h.Bitstream)(k(e));t.skipBits(16),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),t.skipBits(1),t.skipBits(1),t.skipBits(3),t.skipBits(1),t.skipBits(1),(0,h.readExpGolomb)(t),(0,h.readExpGolomb)(t),(0,h.readSignedExpGolomb)(t),t.skipBits(1),t.skipBits(1),t.readBits(1)&&(0,h.readExpGolomb)(t),(0,h.readSignedExpGolomb)(t),(0,h.readSignedExpGolomb)(t),t.skipBits(1),t.skipBits(1),t.skipBits(1),t.skipBits(1);let r=t.readBits(1),i=t.readBits(1);n=r||i?r&&!i?2:!r&&i?3:0:0}let o=[...t.length?[{arrayCompleteness:1,nalUnitType:l.VPS_NUT,nalUnits:t}]:[],...r.length?[{arrayCompleteness:1,nalUnitType:l.SPS_NUT,nalUnits:r}]:[],...a.length?[{arrayCompleteness:1,nalUnitType:l.PPS_NUT,nalUnits:a}]:[],...i.length?[{arrayCompleteness:1,nalUnitType:C(i[0][0]),nalUnits:i}]:[]];return{configurationVersion:1,generalProfileSpace:s.generalProfileSpace,generalTierFlag:s.generalTierFlag,generalProfileIdc:s.generalProfileIdc,generalProfileCompatibilityFlags:s.generalProfileCompatibilityFlags,generalConstraintIndicatorFlags:s.generalConstraintIndicatorFlags,generalLevelIdc:s.generalLevelIdc,minSpatialSegmentationIdc:s.minSpatialSegmentationIdc,parallelismType:n,chromaFormatIdc:s.chromaFormatIdc,bitDepthLumaMinus8:s.bitDepthLumaMinus8,bitDepthChromaMinus8:s.bitDepthChromaMinus8,avgFrameRate:0,constantFrameRate:0,numTemporalLayers:s.spsMaxSubLayersMinus1+1,temporalIdNested:s.spsTemporalIdNestingFlag,lengthSizeMinusOne:3,arrays:o}}catch(e){return console.error("Error building HEVC Decoder Configuration Record:",e),null}},_=(e,t)=>{let r=e.readBits(2),a=e.readBits(1),i=e.readBits(5),s=0;for(let t=0;t<32;t++)s=s<<1|e.readBits(1);let n=new Uint8Array(6);for(let t=0;t<6;t++)n[t]=e.readBits(8);let o=e.readBits(8),l=[],c=[];for(let r=0;r<t;r++)l.push(e.readBits(1)),c.push(e.readBits(1));if(t>0)for(let r=t;r<8;r++)e.skipBits(2);for(let r=0;r<t;r++)l[r]&&e.skipBits(88),c[r]&&e.skipBits(8);return{general_profile_space:r,general_tier_flag:a,general_profile_idc:i,general_profile_compatibility_flags:s,general_constraint_indicator_flags:n,general_level_idc:o}},D=e=>{for(let t=0;t<4;t++)for(let r=0;r<(3===t?2:6);r++)if(e.readBits(1)){let r=Math.min(64,1<<4+(t<<1));t>1&&(0,h.readSignedExpGolomb)(e);for(let t=0;t<r;t++)(0,h.readSignedExpGolomb)(e)}else(0,h.readExpGolomb)(e)},M=(e,t)=>{let r=[];for(let a=0;a<t;a++)r[a]=F(e,a,t,r)},F=(e,t,r,a)=>{let i=0,s=0,n=0;if(0!==t&&(s=e.readBits(1)),s){n=t===r?t-((0,h.readExpGolomb)(e)+1):t-1,e.readBits(1),(0,h.readExpGolomb)(e);let s=a[n]??0;for(let t=0;t<=s;t++)e.readBits(1)||e.readBits(1);i=a[n]}else{let t=(0,h.readExpGolomb)(e),r=(0,h.readExpGolomb)(e);for(let r=0;r<t;r++)(0,h.readExpGolomb)(e),e.readBits(1);for(let t=0;t<r;t++)(0,h.readExpGolomb)(e),e.readBits(1);i=t+r}return i},R=(e,t)=>{let r=2,a=2,i=2,s=0,n=0;return e.readBits(1)&&255===e.readBits(8)&&(e.readBits(16),e.readBits(16)),e.readBits(1)&&e.readBits(1),e.readBits(1)&&(e.readBits(3),s=e.readBits(1),e.readBits(1)&&(r=e.readBits(8),a=e.readBits(8),i=e.readBits(8))),e.readBits(1)&&((0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e)),e.readBits(1),e.readBits(1),e.readBits(1),e.readBits(1)&&((0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e)),e.readBits(1)&&(e.readBits(32),e.readBits(32),e.readBits(1)&&(0,h.readExpGolomb)(e),e.readBits(1)&&U(e,!0,t)),e.readBits(1)&&(e.readBits(1),e.readBits(1),e.readBits(1),n=(0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e)),{colourPrimaries:r,transferCharacteristics:a,matrixCoefficients:i,fullRangeFlag:s,minSpatialSegmentationIdc:n}},U=(e,t,r)=>{let a=!1,i=!1,s=!1;t&&(a=1===e.readBits(1),i=1===e.readBits(1),(a||i)&&((s=1===e.readBits(1))&&(e.readBits(8),e.readBits(5),e.readBits(1),e.readBits(5)),e.readBits(4),e.readBits(4),s&&e.readBits(4),e.readBits(5),e.readBits(5),e.readBits(5)));for(let t=0;t<=r;t++){let t=1===e.readBits(1),r=!0;t||(r=1===e.readBits(1));let n=!1;r?(0,h.readExpGolomb)(e):n=1===e.readBits(1);let o=1;n||(o=(0,h.readExpGolomb)(e)+1),a&&L(e,o,s),i&&L(e,o,s)}},L=(e,t,r)=>{for(let a=0;a<t;a++)(0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e),r&&((0,h.readExpGolomb)(e),(0,h.readExpGolomb)(e)),e.readBits(1)},N=e=>{let t=[];for(let r of(t.push(e.configurationVersion),t.push((3&e.generalProfileSpace)<<6|(1&e.generalTierFlag)<<5|31&e.generalProfileIdc),t.push(e.generalProfileCompatibilityFlags>>>24&255),t.push(e.generalProfileCompatibilityFlags>>>16&255),t.push(e.generalProfileCompatibilityFlags>>>8&255),t.push(255&e.generalProfileCompatibilityFlags),t.push(...e.generalConstraintIndicatorFlags),t.push(255&e.generalLevelIdc),t.push(240|e.minSpatialSegmentationIdc>>8&15),t.push(255&e.minSpatialSegmentationIdc),t.push(252|3&e.parallelismType),t.push(252|3&e.chromaFormatIdc),t.push(248|7&e.bitDepthLumaMinus8),t.push(248|7&e.bitDepthChromaMinus8),t.push(e.avgFrameRate>>8&255),t.push(255&e.avgFrameRate),t.push((3&e.constantFrameRate)<<6|(7&e.numTemporalLayers)<<3|(1&e.temporalIdNested)<<2|3&e.lengthSizeMinusOne),t.push(255&e.arrays.length),e.arrays))for(let e of(t.push((1&r.arrayCompleteness)<<7|63&r.nalUnitType),t.push(r.nalUnits.length>>8&255),t.push(255&r.nalUnits.length),r.nalUnits)){t.push(e.length>>8&255),t.push(255&e.length);for(let r=0;r<e.length;r++)t.push(e[r])}return new Uint8Array(t)},O=e=>{try{let t=(0,h.toDataView)(e),r=0,a=t.getUint8(r++),i=t.getUint8(r++),s=t.getUint32(r,!1);r+=4;let n=e.subarray(r,r+6);r+=6;let o=t.getUint8(r++),l=(15&t.getUint8(r++))<<8|t.getUint8(r++),c=3&t.getUint8(r++),d=3&t.getUint8(r++),u=7&t.getUint8(r++),m=7&t.getUint8(r++),p=t.getUint16(r,!1);r+=2;let f=t.getUint8(r++),g=t.getUint8(r++),k=[];for(let a=0;a<g;a++){let a=t.getUint8(r++),i=a>>7&1,s=63&a,n=t.getUint16(r,!1);r+=2;let o=[];for(let a=0;a<n;a++){let a=t.getUint16(r,!1);r+=2,o.push(e.subarray(r,r+a)),r+=a}k.push({arrayCompleteness:i,nalUnitType:s,nalUnits:o})}return{configurationVersion:a,generalProfileSpace:i>>6&3,generalTierFlag:i>>5&1,generalProfileIdc:31&i,generalProfileCompatibilityFlags:s,generalConstraintIndicatorFlags:n,generalLevelIdc:o,minSpatialSegmentationIdc:l,parallelismType:c,chromaFormatIdc:d,bitDepthLumaMinus8:u,bitDepthChromaMinus8:m,avgFrameRate:p,constantFrameRate:f>>6&3,numTemporalLayers:f>>3&7,temporalIdNested:f>>2&1,lengthSizeMinusOne:3&f,arrays:k}}catch(e){return console.error("Error deserializing HEVC Decoder Configuration Record:",e),null}},j=e=>{let t=new(0,h.Bitstream)(e);if(2!==t.readBits(2))return null;let r=t.readBits(1),a=(t.readBits(1)<<1)+r;if(3===a&&t.skipBits(1),1===t.readBits(1)||0!==t.readBits(1)||(t.skipBits(2),4817730!==t.readBits(24)))return null;let i=8;a>=2&&(i=t.readBits(1)?12:10);let s=t.readBits(3),n=0,o=0;if(7!==s)if(o=t.readBits(1),1===a||3===a){let e=t.readBits(1),r=t.readBits(1);n=e||r?e&&!r?2:1:3,t.skipBits(1)}else n=1;else n=3,o=1;let l=(t.readBits(16)+1)*(t.readBits(16)+1),c=(0,h.last)(u.VP9_LEVEL_TABLE).level;for(let e of u.VP9_LEVEL_TABLE)if(l<=e.maxPictureSize){c=e.level;break}return{profile:a,level:c,bitDepth:i,chromaSubsampling:n,videoFullRangeFlag:o,colourPrimaries:2===s?1:1===s?6:2,transferCharacteristics:2===s?1:1===s?6:2,matrixCoefficients:7===s?0:2===s?1:1===s?6:2}},z=function*(e){let t=new(0,h.Bitstream)(e),r=()=>{let e=0;for(let r=0;r<8;r++){let a=t.readAlignedByte();if(e|=(127&a)<<7*r,!(128&a))break;if(7===r&&128&a)return null}return e>=0x100000000-1?null:e};for(;t.getBitsLeft()>=8;){let a;t.skipBits(1);let i=t.readBits(4),s=t.readBits(1),n=t.readBits(1);if(t.skipBits(1),s&&t.skipBits(8),n){let e=r();if(null===e)return;a=e}else a=Math.floor(t.getBitsLeft()/8);(0,h.assert)(t.pos%8==0),yield{type:i,data:e.subarray(t.pos/8,t.pos/8+a)},t.skipBits(8*a)}},V=e=>{for(let{type:t,data:r}of z(e)){if(1!==t)continue;let e=new(0,h.Bitstream)(r),a=e.readBits(3);e.readBits(1);let i=e.readBits(1),s=0,n=0,o=0;if(i)s=e.readBits(5);else{if(e.readBits(1)&&(e.skipBits(32),e.skipBits(32),e.readBits(1)))return null;let t=e.readBits(1);t&&(o=e.readBits(5),e.skipBits(32),e.skipBits(5),e.skipBits(5));let r=e.readBits(5);for(let a=0;a<=r;a++){e.skipBits(12);let r=e.readBits(5);if(0===a&&(s=r),r>7){let t=e.readBits(1);0===a&&(n=t)}if(t&&e.readBits(1)){let t=o+1;e.skipBits(t),e.skipBits(t),e.skipBits(1)}e.readBits(1)&&e.skipBits(4)}}let l=e.readBits(4),c=e.readBits(4),d=l+1;e.skipBits(d);let u=c+1;e.skipBits(u);if((i?0:e.readBits(1))&&(e.skipBits(4),e.skipBits(3)),e.skipBits(1),e.skipBits(1),e.skipBits(1),!i){e.skipBits(1),e.skipBits(1),e.skipBits(1),e.skipBits(1);let t=e.readBits(1);t&&(e.skipBits(1),e.skipBits(1));let r=e.readBits(1);(r?2:e.readBits(1))>0&&(e.readBits(1)||e.skipBits(1)),t&&e.skipBits(3)}e.skipBits(1),e.skipBits(1),e.skipBits(1);let m=e.readBits(1),p=8;2===a&&m?p=e.readBits(1)?12:10:a<=2&&(p=m?10:8);let f=0;1!==a&&(f=e.readBits(1));let g=1,k=1,b=0;return!f&&(0===a?(g=1,k=1):1===a?(g=0,k=0):12===p&&(g=e.readBits(1))&&(k=e.readBits(1)),g&&k&&(b=e.readBits(2))),{profile:a,level:s,tier:n,bitDepth:p,monochrome:f,chromaSubsamplingX:g,chromaSubsamplingY:k,chromaSamplePosition:b}}return null},H=e=>{let t=(0,h.toDataView)(e),r=t.getUint8(9),a=t.getUint16(10,!0),i=t.getUint32(12,!0),s=t.getInt16(16,!0),n=t.getUint8(18),o=null;return n&&(o=e.subarray(19,21+r)),{outputChannelCount:r,preSkip:a,inputSampleRate:i,outputGain:s,channelMappingFamily:n,channelMappingTable:o}},q=[480,960,1920,2880,480,960,1920,2880,480,960,1920,2880,480,960,480,960,120,240,480,960,120,240,480,960,120,240,480,960,120,240,480,960],G=e=>({durationInSamples:q[e[0]>>3]}),W=e=>{if(e.length<7)throw Error("Setup header is too short.");if(5!==e[0])throw Error("Wrong packet type in Setup header.");if("vorbis"!==String.fromCharCode(...e.slice(1,7)))throw Error("Invalid packet signature in Setup header.");let t=e.length,r=new Uint8Array(t);for(let a=0;a<t;a++)r[a]=e[t-1-a];let a=new(0,h.Bitstream)(r),i=0;for(;a.getBitsLeft()>97;)if(1===a.readBits(1)){i=a.pos;break}if(0===i)throw Error("Invalid Setup header: framing bit not found.");let s=0,n=!1,o=0;for(;a.getBitsLeft()>=97;){let e=a.pos,t=a.readBits(8),r=a.readBits(16),i=a.readBits(16);if(t>63||0!==r||0!==i){a.pos=e;break}if(a.skipBits(1),++s>64)break;a.clone().readBits(6)+1===s&&(n=!0,o=s)}if(!n)throw Error("Invalid Setup header: mode header not found.");if(o>63)throw Error(`Unsupported mode count: ${o}.`);let l=o;a.pos=0,a.skipBits(i);let c=Array(l).fill(0);for(let e=l-1;e>=0;e--)a.skipBits(40),c[e]=a.readBits(1);return{modeBlockflags:c}},K=(e,t,r)=>{switch(e){case"avc":for(let e of f(r,t)){let t=g(r[e.offset]);if(t>=o.NON_IDR_SLICE&&t<=o.SLICE_DPC)break;if(t===o.IDR)return"key";if(t===o.SEI&&(!(0,h.isChromium)()||(0,h.getChromiumVersion)()>=144)){let t=k(r.subarray(e.offset,e.offset+e.length)),a=1;do{let e=0;for(;;){let r=t[a++];if(void 0===r||(e+=r,r<255))break}let r=0;for(;;){let e=t[a++];if(void 0===e||(r+=e,e<255))break}if(6===e){let e=new(0,h.Bitstream)(t);e.pos=8*a;let r=(0,h.readExpGolomb)(e),i=e.readBits(1);if(0===r&&1===i)return"key"}a+=r}while(a<t.length-1)}}return"delta";case"hevc":for(let e of v(r,t)){let t=C(r[e.offset]);if(t<l.BLA_W_LP)break;if(t<=l.RSV_IRAP_VCL23)return"key"}return"delta";case"vp8":return 0==(1&r[0])?"key":"delta";case"vp9":{let e=new(0,h.Bitstream)(r);if(2!==e.readBits(2))return null;let t=e.readBits(1);if(3===(e.readBits(1)<<1)+t&&e.skipBits(1),e.readBits(1))return null;return 0===e.readBits(1)?"key":"delta"}case"av1":{let e=!1;for(let{type:t,data:a}of z(r))if(1===t){let t=new(0,h.Bitstream)(a);t.skipBits(4),e=!!t.readBits(1)}else if(3===t||6===t||7===t){if(e)return"key";let t=new(0,h.Bitstream)(a);if(t.readBits(1))return null;return 0===t.readBits(2)?"key":"delta"}return null}default:(0,h.assertNever)(e),(0,h.assert)(!1)}};(n=c||(c={}))[n.STREAMINFO=0]="STREAMINFO",n[n.VORBIS_COMMENT=4]="VORBIS_COMMENT",n[n.PICTURE=6]="PICTURE";let X=(e,t)=>{let r=(0,h.toDataView)(e),a=0,i=r.getUint32(a,!0);a+=4;let s=h.textDecoder.decode(e.subarray(a,a+i));a+=i,i>0&&(t.raw??={},t.raw.vendor??=s);let n=r.getUint32(a,!0);a+=4;for(let i=0;i<n;i++){let i=r.getUint32(a,!0);a+=4;let s=h.textDecoder.decode(e.subarray(a,a+i));a+=i;let n=s.indexOf("=");if(-1===n)continue;let o=s.slice(0,n).toUpperCase(),l=s.slice(n+1);switch(t.raw??={},t.raw[o]??=l,o){case"TITLE":t.title??=l;break;case"DESCRIPTION":t.description??=l;break;case"ARTIST":t.artist??=l;break;case"ALBUM":t.album??=l;break;case"ALBUMARTIST":t.albumArtist??=l;break;case"COMMENT":t.comment??=l;break;case"LYRICS":t.lyrics??=l;break;case"TRACKNUMBER":{let e=l.split("/"),r=Number.parseInt(e[0],10),a=e[1]&&Number.parseInt(e[1],10);Number.isInteger(r)&&r>0&&(t.trackNumber??=r),a&&Number.isInteger(a)&&a>0&&(t.tracksTotal??=a)}break;case"TRACKTOTAL":{let e=Number.parseInt(l,10);Number.isInteger(e)&&e>0&&(t.tracksTotal??=e)}break;case"DISCNUMBER":{let e=l.split("/"),r=Number.parseInt(e[0],10),a=e[1]&&Number.parseInt(e[1],10);Number.isInteger(r)&&r>0&&(t.discNumber??=r),a&&Number.isInteger(a)&&a>0&&(t.discsTotal??=a)}break;case"DISCTOTAL":{let e=Number.parseInt(l,10);Number.isInteger(e)&&e>0&&(t.discsTotal??=e)}break;case"DATE":{let e=new Date(l);Number.isNaN(e.getTime())||(t.date??=e)}break;case"GENRE":t.genre??=l;break;case"METADATA_BLOCK_PICTURE":{let e=(0,h.base64ToBytes)(l),r=(0,h.toDataView)(e),a=r.getUint32(0,!1),i=r.getUint32(4,!1),s=String.fromCharCode(...e.subarray(8,8+i)),n=r.getUint32(8+i,!1),o=h.textDecoder.decode(e.subarray(12+i,12+i+n)),c=r.getUint32(i+n+28),d=e.subarray(i+n+32,i+n+32+c);t.images??=[],t.images.push({data:d,mimeType:s,kind:3===a?"coverFront":4===a?"coverBack":"unknown",name:void 0,description:o||void 0})}}}},$=(e,t,r)=>{let a=[e],i=h.textEncoder.encode("Mediabunny"),s=new Uint8Array(4+i.length),n=new DataView(s.buffer);n.setUint32(0,i.length,!0),s.set(i,4),a.push(s);let o=new Set,l=(e,t)=>{let r=`${e}=${t}`,i=h.textEncoder.encode(r);(n=new DataView((s=new Uint8Array(4+i.length)).buffer)).setUint32(0,i.length,!0),s.set(i,4),a.push(s),o.add(e)};for(let{key:e,value:a}of(0,h.keyValueIterator)(t))switch(e){case"title":l("TITLE",a);break;case"description":l("DESCRIPTION",a);break;case"artist":l("ARTIST",a);break;case"album":l("ALBUM",a);break;case"albumArtist":l("ALBUMARTIST",a);break;case"genre":l("GENRE",a);break;case"date":{let e=t.raw?.DATE??t.raw?.date;l("DATE",e&&"string"==typeof e?e:a.toISOString().slice(0,10))}break;case"comment":l("COMMENT",a);break;case"lyrics":l("LYRICS",a);break;case"trackNumber":l("TRACKNUMBER",a.toString());break;case"tracksTotal":l("TRACKTOTAL",a.toString());break;case"discNumber":l("DISCNUMBER",a.toString());break;case"discsTotal":l("DISCTOTAL",a.toString());break;case"images":if(!r)break;for(let e of a){let t="coverFront"===e.kind?3:4*("coverBack"===e.kind),r=new Uint8Array(e.mimeType.length);for(let t=0;t<e.mimeType.length;t++)r[t]=e.mimeType.charCodeAt(t);let a=h.textEncoder.encode(e.description??""),i=new Uint8Array(8+r.length+4+a.length+16+4+e.data.length),s=(0,h.toDataView)(i);s.setUint32(0,t,!1),s.setUint32(4,r.length,!1),i.set(r,8),s.setUint32(8+r.length,a.length,!1),i.set(a,12+r.length),s.setUint32(28+r.length+a.length,e.data.length,!1),i.set(e.data,32+r.length+a.length),l("METADATA_BLOCK_PICTURE",(0,h.bytesToBase64)(i))}break;case"raw":break;default:(0,h.assertNever)(e)}if(t.raw)for(let e in t.raw){let r=t.raw[e]??t.raw[e.toLowerCase()];"vendor"===e||null==r||o.has(e)||"string"==typeof r&&l(e,r)}let c=new Uint8Array(4);(0,h.toDataView)(c).setUint32(0,o.size,!0),a.splice(2,0,c);let d=new Uint8Array(a.reduce((e,t)=>e+t.length,0)),u=0;for(let e of a)d.set(e,u),u+=e.length;return d}},{"./codec.js":"4GUiq","./misc.js":"jrq2g","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"73Qqp":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"Demuxer",()=>s);class s{constructor(e){this.input=e}}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],aU0uf:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"InputTrack",()=>d),i.export(r,"InputVideoTrack",()=>u),i.export(r,"InputAudioTrack",()=>h);var s=e("./codec-data.js"),n=e("./custom-coder.js"),o=e("./media-sink.js"),l=e("./misc.js"),c=e("./packet.js");class d{constructor(e,t){this.input=e,this._backing=t}isVideoTrack(){return this instanceof u}isAudioTrack(){return this instanceof h}get id(){return this._backing.getId()}get number(){return this._backing.getNumber()}get internalCodecId(){return this._backing.getInternalCodecId()}get languageCode(){return this._backing.getLanguageCode()}get name(){return this._backing.getName()}get timeResolution(){return this._backing.getTimeResolution()}get disposition(){return this._backing.getDisposition()}getFirstTimestamp(){return this._backing.getFirstTimestamp()}computeDuration(){return this._backing.computeDuration()}async computePacketStats(e=1/0){let t=new(0,o.EncodedPacketSink)(this),r=1/0,a=-1/0,i=0,s=0;for await(let n of t.packets(void 0,void 0,{metadataOnly:!0})){if(i>=e&&n.timestamp>=a)break;r=Math.min(r,n.timestamp),a=Math.max(a,n.timestamp+n.duration),i++,s+=n.byteLength}return{packetCount:i,averagePacketRate:i?Number((i/(a-r)).toPrecision(16)):0,averageBitrate:i?Number((8*s/(a-r)).toPrecision(16)):0}}}class u extends d{constructor(e,t){super(e,t),this._backing=t}get type(){return"video"}get codec(){return this._backing.getCodec()}get codedWidth(){return this._backing.getCodedWidth()}get codedHeight(){return this._backing.getCodedHeight()}get rotation(){return this._backing.getRotation()}get displayWidth(){return this._backing.getRotation()%180==0?this._backing.getCodedWidth():this._backing.getCodedHeight()}get displayHeight(){return this._backing.getRotation()%180==0?this._backing.getCodedHeight():this._backing.getCodedWidth()}getColorSpace(){return this._backing.getColorSpace()}async hasHighDynamicRange(){let e=await this._backing.getColorSpace();return"bt2020"===e.primaries||"smpte432"===e.primaries||"pg"===e.transfer||"hlg"===e.transfer||"bt2020-ncl"===e.matrix}canBeTransparent(){return this._backing.canBeTransparent()}getDecoderConfig(){return this._backing.getDecoderConfig()}async getCodecParameterString(){let e=await this._backing.getDecoderConfig();return e?.codec??null}async canDecode(){try{let e=await this._backing.getDecoderConfig();if(!e)return!1;let t=this._backing.getCodec();if((0,l.assert)(null!==t),n.customVideoDecoders.some(r=>r.supports(t,e)))return!0;if("u"<typeof VideoDecoder)return!1;let r=await VideoDecoder.isConfigSupported(e);return!0===r.supported}catch(e){return console.error("Error during decodability check:",e),!1}}async determinePacketType(e){if(!(e instanceof c.EncodedPacket))throw TypeError("packet must be an EncodedPacket.");if(e.isMetadataOnly)throw TypeError("packet must not be metadata-only to determine its type.");if(null===this.codec)return null;let t=await this.getDecoderConfig();return(0,l.assert)(t),(0,s.determineVideoPacketType)(this.codec,t,e.data)}}class h extends d{constructor(e,t){super(e,t),this._backing=t}get type(){return"audio"}get codec(){return this._backing.getCodec()}get numberOfChannels(){return this._backing.getNumberOfChannels()}get sampleRate(){return this._backing.getSampleRate()}getDecoderConfig(){return this._backing.getDecoderConfig()}async getCodecParameterString(){let e=await this._backing.getDecoderConfig();return e?.codec??null}async canDecode(){try{let e=await this._backing.getDecoderConfig();if(!e)return!1;let t=this._backing.getCodec();if((0,l.assert)(null!==t),n.customAudioDecoders.some(r=>r.supports(t,e))||e.codec.startsWith("pcm-"))return!0;{if("u"<typeof AudioDecoder)return!1;let t=await AudioDecoder.isConfigSupported(e);return!0===t.supported}}catch(e){return console.error("Error during decodability check:",e),!1}}async determinePacketType(e){if(!(e instanceof c.EncodedPacket))throw TypeError("packet must be an EncodedPacket.");return null===this.codec?null:"key"}}},{"./codec-data.js":"zx4dz","./custom-coder.js":"57K5K","./media-sink.js":"6e2oW","./misc.js":"jrq2g","./packet.js":"8dQhf","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"57K5K":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"CustomVideoDecoder",()=>s),i.export(r,"CustomAudioDecoder",()=>n),i.export(r,"CustomVideoEncoder",()=>o),i.export(r,"CustomAudioEncoder",()=>l),i.export(r,"customVideoDecoders",()=>c),i.export(r,"customAudioDecoders",()=>d),i.export(r,"customVideoEncoders",()=>u),i.export(r,"customAudioEncoders",()=>h),i.export(r,"registerDecoder",()=>m),i.export(r,"registerEncoder",()=>p);class s{static supports(e,t){return!1}}class n{static supports(e,t){return!1}}class o{static supports(e,t){return!1}}class l{static supports(e,t){return!1}}let c=[],d=[],u=[],h=[],m=e=>{if(e.prototype instanceof s){if(c.includes(e))return void console.warn("Video decoder already registered.");c.push(e)}else if(e.prototype instanceof n){if(d.includes(e))return void console.warn("Audio decoder already registered.");d.push(e)}else throw TypeError("Decoder must be a CustomVideoDecoder or CustomAudioDecoder.")},p=e=>{if(e.prototype instanceof o){if(u.includes(e))return void console.warn("Video encoder already registered.");u.push(e)}else if(e.prototype instanceof l){if(h.includes(e))return void console.warn("Audio encoder already registered.");h.push(e)}else throw TypeError("Encoder must be a CustomVideoEncoder or CustomAudioEncoder.")}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"6e2oW":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"EncodedPacketSink",()=>k),i.export(r,"BaseMediaSampleSink",()=>y),i.export(r,"VideoSampleSink",()=>w),i.export(r,"CanvasSink",()=>x),i.export(r,"AudioSampleSink",()=>v),i.export(r,"AudioBufferSink",()=>C);var s=e("./codec.js"),n=e("./codec-data.js"),o=e("./custom-coder.js"),l=e("./input.js"),c=e("./input-track.js"),d=e("./misc.js"),u=e("./packet.js"),h=e("./pcm.js"),m=e("./sample.js");let p=e=>{if(!e||"object"!=typeof e)throw TypeError("options must be an object.");if(void 0!==e.metadataOnly&&"boolean"!=typeof e.metadataOnly)throw TypeError("options.metadataOnly, when defined, must be a boolean.");if(void 0!==e.verifyKeyPackets&&"boolean"!=typeof e.verifyKeyPackets)throw TypeError("options.verifyKeyPackets, when defined, must be a boolean.");if(e.verifyKeyPackets&&e.metadataOnly)throw TypeError("options.verifyKeyPackets and options.metadataOnly cannot be enabled together.")},f=e=>{if(!(0,d.isNumber)(e))throw TypeError("timestamp must be a number.")},g=(e,t,r)=>r.verifyKeyPackets?t.then(async t=>{if(!t||"delta"===t.type)return t;let r=await e.determinePacketType(t);return r&&(t.type=r),t}):t;class k{constructor(e){if(!(e instanceof c.InputTrack))throw TypeError("track must be an InputTrack.");this._track=e}getFirstPacket(e={}){if(p(e),this._track.input._disposed)throw new(0,l.InputDisposedError);return g(this._track,this._track._backing.getFirstPacket(e),e)}getPacket(e,t={}){if(f(e),p(t),this._track.input._disposed)throw new(0,l.InputDisposedError);return g(this._track,this._track._backing.getPacket(e,t),t)}getNextPacket(e,t={}){if(!(e instanceof u.EncodedPacket))throw TypeError("packet must be an EncodedPacket.");if(p(t),this._track.input._disposed)throw new(0,l.InputDisposedError);return g(this._track,this._track._backing.getNextPacket(e,t),t)}async getKeyPacket(e,t={}){if(f(e),p(t),this._track.input._disposed)throw new(0,l.InputDisposedError);if(!t.verifyKeyPackets)return this._track._backing.getKeyPacket(e,t);let r=await this._track._backing.getKeyPacket(e,t);return r&&((0,d.assert)("key"===r.type),"delta"===await this._track.determinePacketType(r))?this.getKeyPacket(r.timestamp-1/this._track.timeResolution,t):r}async getNextKeyPacket(e,t={}){if(!(e instanceof u.EncodedPacket))throw TypeError("packet must be an EncodedPacket.");if(p(t),this._track.input._disposed)throw new(0,l.InputDisposedError);if(!t.verifyKeyPackets)return this._track._backing.getNextKeyPacket(e,t);let r=await this._track._backing.getNextKeyPacket(e,t);return r&&((0,d.assert)("key"===r.type),"delta"===await this._track.determinePacketType(r))?this.getNextKeyPacket(r,t):r}packets(e,t,r={}){if(void 0!==e&&!(e instanceof u.EncodedPacket))throw TypeError("startPacket must be an EncodedPacket.");if(void 0!==e&&e.isMetadataOnly&&!r?.metadataOnly)throw TypeError("startPacket can only be metadata-only if options.metadataOnly is enabled.");if(void 0!==t&&!(t instanceof u.EncodedPacket))throw TypeError("endPacket must be an EncodedPacket.");if(p(r),this._track.input._disposed)throw new(0,l.InputDisposedError);let a=[],{promise:i,resolve:s}=(0,d.promiseWithResolvers)(),{promise:n,resolve:o}=(0,d.promiseWithResolvers)(),c=!1,h=!1,m=null,f=[],g=()=>Math.max(2,f.length);(async()=>{let l=e??await this.getFirstPacket(r);for(;l&&!h&&!this._track.input._disposed&&!(t&&l.sequenceNumber>=t?.sequenceNumber);){if(a.length>g()){({promise:n,resolve:o}=(0,d.promiseWithResolvers)()),await n;continue}a.push(l),s(),({promise:i,resolve:s}=(0,d.promiseWithResolvers)()),l=await this.getNextPacket(l,r)}c=!0,s()})().catch(e=>{m||(m=e,s())});let k=this._track;return{async next(){for(;;)if(k.input._disposed)throw new(0,l.InputDisposedError);else if(h)return{value:void 0,done:!0};else if(m)throw m;else if(a.length>0){let e=a.shift(),t=performance.now();for(f.push(t);f.length>0&&t-f[0]>=1e3;)f.shift();return o(),{value:e,done:!1}}else{if(c)return{value:void 0,done:!0};await i}},return:async()=>(h=!0,o(),s(),{value:void 0,done:!0}),async throw(e){throw e},[Symbol.asyncIterator](){return this}}}}class b{constructor(e,t){this.onSample=e,this.onError=t}}class y{mediaSamplesInRange(e=0,t=1/0){f(e),f(t);let r=[],a=!1,i=null,{promise:s,resolve:n}=(0,d.promiseWithResolvers)(),{promise:o,resolve:c}=(0,d.promiseWithResolvers)(),u=!1,h=!1,m=!1,p=null;(async()=>{let l=await this._createDecoder(o=>{(c(),o.timestamp>=t&&(h=!0),h)?o.close():(i&&(o.timestamp>e?(r.push(i),a=!0):i.close()),o.timestamp>=e&&(r.push(o),a=!0),i=a?null:o,r.length>0&&(n(),{promise:s,resolve:n}=(0,d.promiseWithResolvers)()))},e=>{p||(p=e,n())}),f=this._createPacketSink(),g=await f.getKeyPacket(e,{verifyKeyPackets:!0})??await f.getFirstPacket(),k=g,b=f.packets(g??void 0,void 0);for(await b.next();k&&!h&&!this._track.input._disposed;){let e=S(r.length);if(r.length+l.getDecodeQueueSize()>e){({promise:o,resolve:c}=(0,d.promiseWithResolvers)()),await o;continue}l.decode(k);let t=await b.next();if(t.done)break;k=t.value}await b.return(),m||this._track.input._disposed||await l.flush(),l.close(),!a&&i&&r.push(i),u=!0,n()})().catch(e=>{p||(p=e,n())});let g=this._track,k=()=>{for(let e of(i?.close(),r))e.close()};return{async next(){for(;;)if(g.input._disposed)throw k(),new(0,l.InputDisposedError);else if(m)return{value:void 0,done:!0};else if(p)throw k(),p;else if(r.length>0){let e=r.shift();return c(),{value:e,done:!1}}else{if(u)return{value:void 0,done:!0};await s}},return:async()=>(m=!0,h=!0,c(),n(),k(),{value:void 0,done:!0}),async throw(e){throw e},[Symbol.asyncIterator](){return this}}}mediaSamplesAtTimestamps(e){(0,d.validateAnyIterable)(e);let t=(0,d.toAsyncIterator)(e),r=[],a=[],{promise:i,resolve:s}=(0,d.promiseWithResolvers)(),{promise:n,resolve:o}=(0,d.promiseWithResolvers)(),c=!1,u=!1,h=null,m=e=>{a.push(e),s(),{promise:i,resolve:s}=(0,d.promiseWithResolvers)()};(async()=>{let e=await this._createDecoder(e=>{if(o(),u)return void e.close();let t=0;for(;r.length>0&&e.timestamp-r[0]>-1e-10;)t++,r.shift();if(t>0)for(let r=0;r<t;r++)m(r<t-1?e.clone():e);else e.close()},e=>{h||(h=e,s())}),i=this._createPacketSink(),l=null,p=null,g=-1,k=async()=>{(0,d.assert)(p);let t=p;for(e.decode(t);t.sequenceNumber<g;){let r=S(a.length);for(;a.length+e.getDecodeQueueSize()>r&&!u;)({promise:n,resolve:o}=(0,d.promiseWithResolvers)()),await n;if(u)break;let s=await i.getNextPacket(t);(0,d.assert)(s),e.decode(s),t=s}g=-1},b=async()=>{await e.flush();for(let e=0;e<r.length;e++)m(null);r.length=0};for await(let e of t){if(f(e),u||this._track.input._disposed)break;let t=await i.getPacket(e),a=t&&await i.getKeyPacket(e,{verifyKeyPackets:!0});if(!a){-1!==g&&(await k(),await b()),m(null),l=null;continue}l&&(a.sequenceNumber!==p.sequenceNumber||t.timestamp<l.timestamp)&&(await k(),await b()),r.push(t.timestamp),g=Math.max(t.sequenceNumber,g),l=t,p=a}u||this._track.input._disposed||(-1!==g&&await k(),await b()),e.close(),c=!0,s()})().catch(e=>{h||(h=e,s())});let p=this._track,g=()=>{for(let e of a)e?.close()};return{async next(){for(;;)if(p.input._disposed)throw g(),new(0,l.InputDisposedError);else if(u)return{value:void 0,done:!0};else if(h)throw g(),h;else if(a.length>0){let e=a.shift();return(0,d.assert)(void 0!==e),o(),{value:e,done:!1}}else{if(c)return{value:void 0,done:!0};await i}},return:async()=>(u=!0,o(),s(),g(),{value:void 0,done:!0}),async throw(e){throw e},[Symbol.asyncIterator](){return this}}}}let S=e=>0===e?40:8;class T extends b{constructor(e,t,r,a,i,s){super(e,t),this.codec=r,this.decoderConfig=a,this.rotation=i,this.timeResolution=s,this.decoder=null,this.customDecoder=null,this.customDecoderCallSerializer=new(0,d.CallSerializer),this.customDecoderQueueSize=0,this.inputTimestamps=[],this.sampleQueue=[],this.currentPacketIndex=0,this.raslSkipped=!1,this.alphaDecoder=null,this.alphaHadKeyframe=!1,this.colorQueue=[],this.alphaQueue=[],this.merger=null,this.mergerCreationFailed=!1,this.decodedAlphaChunkCount=0,this.alphaDecoderQueueSize=0,this.nullAlphaFrameQueue=[],this.currentAlphaPacketIndex=0,this.alphaRaslSkipped=!1;let l=o.customVideoDecoders.find(e=>e.supports(r,a));if(l)this.customDecoder=new l,this.customDecoder.codec=r,this.customDecoder.config=a,this.customDecoder.onSample=e=>{if(!(e instanceof m.VideoSample))throw TypeError("The argument passed to onSample must be a VideoSample.");this.finalizeAndEmitSample(e)},this.customDecoderCallSerializer.call(()=>this.customDecoder.init());else{let e=e=>{if(this.alphaQueue.length>0){let t=this.alphaQueue.shift();(0,d.assert)(void 0!==t),this.mergeAlpha(e,t)}else this.colorQueue.push(e)};if("avc"===r&&this.decoderConfig.description&&(0,d.isChromium)()){let e=(0,n.deserializeAvcDecoderConfigurationRecord)((0,d.toUint8Array)(this.decoderConfig.description));if(e&&e.sequenceParameterSets.length>0){let t=(0,n.parseAvcSps)(e.sequenceParameterSets[0]);t&&0===t.frameMbsOnlyFlag&&(this.decoderConfig={...this.decoderConfig,hardwareAcceleration:"prefer-software"})}}let t=Error("Decoding error").stack;this.decoder=new VideoDecoder({output:t=>{try{e(t)}catch(e){this.onError(e)}},error:e=>{e.stack=t,this.onError(e)}}),this.decoder.configure(this.decoderConfig)}}getDecodeQueueSize(){return this.customDecoder?this.customDecoderQueueSize:((0,d.assert)(this.decoder),Math.max(this.decoder.decodeQueueSize,this.alphaDecoder?.decodeQueueSize??0))}decode(e){if("hevc"===this.codec&&this.currentPacketIndex>0&&!this.raslSkipped){if(this.hasHevcRaslPicture(e.data))return;this.raslSkipped=!0}if(this.customDecoder)this.customDecoderQueueSize++,this.customDecoderCallSerializer.call(()=>this.customDecoder.decode(e)).then(()=>this.customDecoderQueueSize--);else{if((0,d.assert)(this.decoder),(0,d.isWebKit)()||(0,d.insertSorted)(this.inputTimestamps,e.timestamp,e=>e),(0,d.isChromium)()&&0===this.currentPacketIndex&&"avc"===this.codec){let t=[];for(let r of(0,n.iterateAvcNalUnits)(e.data,this.decoderConfig)){let a=(0,n.extractNalUnitTypeForAvc)(e.data[r.offset]);a>=20&&a<=31||t.push(e.data.subarray(r.offset,r.offset+r.length))}let r=(0,n.concatAvcNalUnits)(t,this.decoderConfig);e=new(0,u.EncodedPacket)(r,e.type,e.timestamp,e.duration)}this.decoder.decode(e.toEncodedVideoChunk()),this.decodeAlphaData(e)}this.currentPacketIndex++}decodeAlphaData(e){if(!e.sideData.alpha||this.mergerCreationFailed)return void this.pushNullAlphaFrame();if(!this.merger)try{this.merger=new I}catch(t){console.error("Due to an error, only color data will be decoded.",t),this.mergerCreationFailed=!0,this.decodeAlphaData(e);return}if(!this.alphaDecoder){let e=e=>{if(this.alphaDecoderQueueSize--,this.colorQueue.length>0){let t=this.colorQueue.shift();(0,d.assert)(void 0!==t),this.mergeAlpha(t,e)}else this.alphaQueue.push(e);for(this.decodedAlphaChunkCount++;this.nullAlphaFrameQueue.length>0&&this.nullAlphaFrameQueue[0]===this.decodedAlphaChunkCount;)if(this.nullAlphaFrameQueue.shift(),this.colorQueue.length>0){let e=this.colorQueue.shift();(0,d.assert)(void 0!==e),this.mergeAlpha(e,null)}else this.alphaQueue.push(null)},t=Error("Decoding error").stack;this.alphaDecoder=new VideoDecoder({output:t=>{try{e(t)}catch(e){this.onError(e)}},error:e=>{e.stack=t,this.onError(e)}}),this.alphaDecoder.configure(this.decoderConfig)}let t=(0,n.determineVideoPacketType)(this.codec,this.decoderConfig,e.sideData.alpha);if(this.alphaHadKeyframe||(this.alphaHadKeyframe="key"===t),this.alphaHadKeyframe){if("hevc"===this.codec&&this.currentAlphaPacketIndex>0&&!this.alphaRaslSkipped){if(this.hasHevcRaslPicture(e.sideData.alpha))return void this.pushNullAlphaFrame();this.alphaRaslSkipped=!0}this.currentAlphaPacketIndex++,this.alphaDecoder.decode(e.alphaToEncodedVideoChunk(t??e.type)),this.alphaDecoderQueueSize++}else this.pushNullAlphaFrame()}pushNullAlphaFrame(){0===this.alphaDecoderQueueSize?this.alphaQueue.push(null):this.nullAlphaFrameQueue.push(this.decodedAlphaChunkCount+this.alphaDecoderQueueSize)}hasHevcRaslPicture(e){for(let t of(0,n.iterateHevcNalUnits)(e,this.decoderConfig)){let r=(0,n.extractNalUnitTypeForHevc)(e[t.offset]);if(r===n.HevcNalUnitType.RASL_N||r===n.HevcNalUnitType.RASL_R)return!0}return!1}sampleHandler(e){if((0,d.isWebKit)()){if(this.sampleQueue.length>0&&e.timestamp>=(0,d.last)(this.sampleQueue).timestamp){for(let e of this.sampleQueue)this.finalizeAndEmitSample(e);this.sampleQueue.length=0}(0,d.insertSorted)(this.sampleQueue,e,e=>e.timestamp)}else{let t=this.inputTimestamps.shift();(0,d.assert)(void 0!==t),e.setTimestamp(t),this.finalizeAndEmitSample(e)}}finalizeAndEmitSample(e){e.setTimestamp(Math.round(e.timestamp*this.timeResolution)/this.timeResolution),e.setDuration(Math.round(e.duration*this.timeResolution)/this.timeResolution),e.setRotation(this.rotation),this.onSample(e)}mergeAlpha(e,t){if(!t){let t=new(0,m.VideoSample)(e);this.sampleHandler(t);return}(0,d.assert)(this.merger),this.merger.update(e,t),e.close(),t.close();let r=new VideoFrame(this.merger.canvas,{timestamp:e.timestamp,duration:e.duration??void 0}),a=new(0,m.VideoSample)(r);this.sampleHandler(a)}async flush(){if(this.customDecoder?await this.customDecoderCallSerializer.call(()=>this.customDecoder.flush()):((0,d.assert)(this.decoder),await Promise.all([this.decoder.flush(),this.alphaDecoder?.flush()]),this.colorQueue.forEach(e=>e.close()),this.colorQueue.length=0,this.alphaQueue.forEach(e=>e?.close()),this.alphaQueue.length=0,this.alphaHadKeyframe=!1,this.decodedAlphaChunkCount=0,this.alphaDecoderQueueSize=0,this.nullAlphaFrameQueue.length=0,this.currentAlphaPacketIndex=0,this.alphaRaslSkipped=!1),(0,d.isWebKit)()){for(let e of this.sampleQueue)this.finalizeAndEmitSample(e);this.sampleQueue.length=0}this.currentPacketIndex=0,this.raslSkipped=!1}close(){for(let e of(this.customDecoder?this.customDecoderCallSerializer.call(()=>this.customDecoder.close()):((0,d.assert)(this.decoder),this.decoder.close(),this.alphaDecoder?.close(),this.colorQueue.forEach(e=>e.close()),this.colorQueue.length=0,this.alphaQueue.forEach(e=>e?.close()),this.alphaQueue.length=0,this.merger?.close()),this.sampleQueue))e.close();this.sampleQueue.length=0}}class I{constructor(){"u">typeof OffscreenCanvas?this.canvas=new OffscreenCanvas(300,150):this.canvas=document.createElement("canvas");let e=this.canvas.getContext("webgl2",{premultipliedAlpha:!1});if(!e)throw Error("Couldn't acquire WebGL 2 context.");this.gl=e,this.program=this.createProgram(),this.vao=this.createVAO(),this.colorTexture=this.createTexture(),this.alphaTexture=this.createTexture(),this.gl.useProgram(this.program),this.gl.uniform1i(this.gl.getUniformLocation(this.program,"u_colorTexture"),0),this.gl.uniform1i(this.gl.getUniformLocation(this.program,"u_alphaTexture"),1)}createProgram(){let e=this.createShader(this.gl.VERTEX_SHADER,`#version 300 es in vec2 a_position; in vec2 a_texCoord; out vec2 v_texCoord; void main() { gl_Position = vec4(a_position, 0.0, 1.0); v_texCoord = a_texCoord; } `),t=this.createShader(this.gl.FRAGMENT_SHADER,`#version 300 es precision highp float; uniform sampler2D u_colorTexture; uniform sampler2D u_alphaTexture; in vec2 v_texCoord; out vec4 fragColor; void main() { vec3 color = texture(u_colorTexture, v_texCoord).rgb; float alpha = texture(u_alphaTexture, v_texCoord).r; fragColor = vec4(color, alpha); } `),r=this.gl.createProgram();return this.gl.attachShader(r,e),this.gl.attachShader(r,t),this.gl.linkProgram(r),r}createShader(e,t){let r=this.gl.createShader(e);return this.gl.shaderSource(r,t),this.gl.compileShader(r),r}createVAO(){let e=this.gl.createVertexArray();this.gl.bindVertexArray(e);let t=new Float32Array([-1,-1,0,1,1,-1,1,1,-1,1,0,0,1,1,1,0]),r=this.gl.createBuffer();this.gl.bindBuffer(this.gl.ARRAY_BUFFER,r),this.gl.bufferData(this.gl.ARRAY_BUFFER,t,this.gl.STATIC_DRAW);let a=this.gl.getAttribLocation(this.program,"a_position"),i=this.gl.getAttribLocation(this.program,"a_texCoord");return this.gl.enableVertexAttribArray(a),this.gl.vertexAttribPointer(a,2,this.gl.FLOAT,!1,16,0),this.gl.enableVertexAttribArray(i),this.gl.vertexAttribPointer(i,2,this.gl.FLOAT,!1,16,8),e}createTexture(){let e=this.gl.createTexture();return this.gl.bindTexture(this.gl.TEXTURE_2D,e),this.gl.texParameteri(this.gl.TEXTURE_2D,this.gl.TEXTURE_WRAP_S,this.gl.CLAMP_TO_EDGE),this.gl.texParameteri(this.gl.TEXTURE_2D,this.gl.TEXTURE_WRAP_T,this.gl.CLAMP_TO_EDGE),this.gl.texParameteri(this.gl.TEXTURE_2D,this.gl.TEXTURE_MIN_FILTER,this.gl.LINEAR),this.gl.texParameteri(this.gl.TEXTURE_2D,this.gl.TEXTURE_MAG_FILTER,this.gl.LINEAR),e}update(e,t){(e.displayWidth!==this.canvas.width||e.displayHeight!==this.canvas.height)&&(this.canvas.width=e.displayWidth,this.canvas.height=e.displayHeight),this.gl.activeTexture(this.gl.TEXTURE0),this.gl.bindTexture(this.gl.TEXTURE_2D,this.colorTexture),this.gl.texImage2D(this.gl.TEXTURE_2D,0,this.gl.RGBA,this.gl.RGBA,this.gl.UNSIGNED_BYTE,e),this.gl.activeTexture(this.gl.TEXTURE1),this.gl.bindTexture(this.gl.TEXTURE_2D,this.alphaTexture),this.gl.texImage2D(this.gl.TEXTURE_2D,0,this.gl.RGBA,this.gl.RGBA,this.gl.UNSIGNED_BYTE,t),this.gl.viewport(0,0,this.canvas.width,this.canvas.height),this.gl.clear(this.gl.COLOR_BUFFER_BIT),this.gl.bindVertexArray(this.vao),this.gl.drawArrays(this.gl.TRIANGLE_STRIP,0,4)}close(){this.gl.getExtension("WEBGL_lose_context")?.loseContext(),this.gl=null}}class w extends y{constructor(e){if(!(e instanceof c.InputVideoTrack))throw TypeError("videoTrack must be an InputVideoTrack.");super(),this._track=e}async _createDecoder(e,t){if(!await this._track.canDecode())throw Error("This video track cannot be decoded by this browser. Make sure to check decodability before using a track.");let r=this._track.codec,a=this._track.rotation,i=await this._track.getDecoderConfig(),s=this._track.timeResolution;return(0,d.assert)(r&&i),new T(e,t,r,i,a,s)}_createPacketSink(){return new k(this._track)}async getSample(e){for await(let t of(f(e),this.mediaSamplesAtTimestamps([e])))return t;throw Error("Internal error: Iterator returned nothing.")}samples(e=0,t=1/0){return this.mediaSamplesInRange(e,t)}samplesAtTimestamps(e){return this.mediaSamplesAtTimestamps(e)}}class x{constructor(e,t={}){if(this._nextCanvasIndex=0,!(e instanceof c.InputVideoTrack))throw TypeError("videoTrack must be an InputVideoTrack.");if(t&&"object"!=typeof t)throw TypeError("options must be an object.");if(void 0!==t.alpha&&"boolean"!=typeof t.alpha)throw TypeError("options.alpha, when provided, must be a boolean.");if(void 0!==t.width&&(!Number.isInteger(t.width)||t.width<=0))throw TypeError("options.width, when defined, must be a positive integer.");if(void 0!==t.height&&(!Number.isInteger(t.height)||t.height<=0))throw TypeError("options.height, when defined, must be a positive integer.");if(void 0!==t.fit&&!["fill","contain","cover"].includes(t.fit))throw TypeError('options.fit, when provided, must be one of "fill", "contain", or "cover".');if(void 0!==t.width&&void 0!==t.height&&void 0===t.fit)throw TypeError("When both options.width and options.height are provided, options.fit must also be provided.");if(void 0!==t.rotation&&![0,90,180,270].includes(t.rotation))throw TypeError("options.rotation, when provided, must be 0, 90, 180 or 270.");if(void 0!==t.crop&&(0,m.validateCropRectangle)(t.crop,"options."),void 0!==t.poolSize&&("number"!=typeof t.poolSize||!Number.isInteger(t.poolSize)||t.poolSize<0))throw TypeError("poolSize must be a non-negative integer.");let r=t.rotation??e.rotation,[a,i]=r%180==0?[e.codedWidth,e.codedHeight]:[e.codedHeight,e.codedWidth],s=t.crop;s&&(0,m.clampCropRectangle)(s,a,i);let[n,o]=s?[s.width,s.height]:[a,i],l=n/o;void 0!==t.width&&void 0===t.height?o=Math.round((n=t.width)/l):void 0===t.width&&void 0!==t.height?n=Math.round((o=t.height)*l):void 0!==t.width&&void 0!==t.height&&(n=t.width,o=t.height),this._videoTrack=e,this._alpha=t.alpha??!1,this._width=n,this._height=o,this._rotation=r,this._crop=s,this._fit=t.fit??"fill",this._videoSampleSink=new w(e),this._canvasPool=Array.from({length:t.poolSize??0},()=>null)}_videoSampleToWrappedCanvas(e){let t=this._canvasPool[this._nextCanvasIndex],r=!1;t||("u">typeof document?((t=document.createElement("canvas")).width=this._width,t.height=this._height):t=new OffscreenCanvas(this._width,this._height),this._canvasPool.length>0&&(this._canvasPool[this._nextCanvasIndex]=t),r=!0),this._canvasPool.length>0&&(this._nextCanvasIndex=(this._nextCanvasIndex+1)%this._canvasPool.length);let a=t.getContext("2d",{alpha:this._alpha||(0,d.isFirefox)()});(0,d.assert)(a),a.resetTransform(),r||(!this._alpha&&(0,d.isFirefox)()?(a.fillStyle="black",a.fillRect(0,0,this._width,this._height)):a.clearRect(0,0,this._width,this._height)),e.drawWithFit(a,{fit:this._fit,rotation:this._rotation,crop:this._crop});let i={canvas:t,timestamp:e.timestamp,duration:e.duration};return e.close(),i}async getCanvas(e){f(e);let t=await this._videoSampleSink.getSample(e);return t&&this._videoSampleToWrappedCanvas(t)}canvases(e=0,t=1/0){return(0,d.mapAsyncGenerator)(this._videoSampleSink.samples(e,t),e=>this._videoSampleToWrappedCanvas(e))}canvasesAtTimestamps(e){return(0,d.mapAsyncGenerator)(this._videoSampleSink.samplesAtTimestamps(e),e=>e&&this._videoSampleToWrappedCanvas(e))}}class E extends b{constructor(e,t,r,a){super(e,t),this.decoder=null,this.customDecoder=null,this.customDecoderCallSerializer=new(0,d.CallSerializer),this.customDecoderQueueSize=0,this.currentTimestamp=null;let i=t=>{(null===this.currentTimestamp||Math.abs(t.timestamp-this.currentTimestamp)>=t.duration)&&(this.currentTimestamp=t.timestamp);let r=this.currentTimestamp;if(this.currentTimestamp+=t.duration,0===t.numberOfFrames)return void t.close();let i=a.sampleRate;t.setTimestamp(Math.round(r*i)/i),e(t)},s=o.customAudioDecoders.find(e=>e.supports(r,a));if(s)this.customDecoder=new s,this.customDecoder.codec=r,this.customDecoder.config=a,this.customDecoder.onSample=e=>{if(!(e instanceof m.AudioSample))throw TypeError("The argument passed to onSample must be an AudioSample.");i(e)},this.customDecoderCallSerializer.call(()=>this.customDecoder.init());else{let e=Error("Decoding error").stack;this.decoder=new AudioDecoder({output:e=>{try{i(new(0,m.AudioSample)(e))}catch(e){this.onError(e)}},error:t=>{t.stack=e,this.onError(t)}}),this.decoder.configure(a)}}getDecodeQueueSize(){return this.customDecoder?this.customDecoderQueueSize:((0,d.assert)(this.decoder),this.decoder.decodeQueueSize)}decode(e){this.customDecoder?(this.customDecoderQueueSize++,this.customDecoderCallSerializer.call(()=>this.customDecoder.decode(e)).then(()=>this.customDecoderQueueSize--)):((0,d.assert)(this.decoder),this.decoder.decode(e.toEncodedAudioChunk()))}flush(){return this.customDecoder?this.customDecoderCallSerializer.call(()=>this.customDecoder.flush()):((0,d.assert)(this.decoder),this.decoder.flush())}close(){this.customDecoder?this.customDecoderCallSerializer.call(()=>this.customDecoder.close()):((0,d.assert)(this.decoder),this.decoder.close())}}class P extends b{constructor(e,t,r){super(e,t),this.decoderConfig=r,this.currentTimestamp=null,(0,d.assert)(s.PCM_AUDIO_CODECS.includes(r.codec)),this.codec=r.codec;let{dataType:a,sampleSize:i,littleEndian:n}=(0,s.parsePcmCodec)(this.codec);switch(this.inputSampleSize=i,i){case 1:"unsigned"===a?this.readInputValue=(e,t)=>e.getUint8(t)-128:"signed"===a?this.readInputValue=(e,t)=>e.getInt8(t):"ulaw"===a?this.readInputValue=(e,t)=>(0,h.fromUlaw)(e.getUint8(t)):"alaw"===a?this.readInputValue=(e,t)=>(0,h.fromAlaw)(e.getUint8(t)):(0,d.assert)(!1);break;case 2:"unsigned"===a?this.readInputValue=(e,t)=>e.getUint16(t,n)-32768:"signed"===a?this.readInputValue=(e,t)=>e.getInt16(t,n):(0,d.assert)(!1);break;case 3:"unsigned"===a?this.readInputValue=(e,t)=>(0,d.getUint24)(e,t,n)-8388608:"signed"===a?this.readInputValue=(e,t)=>(0,d.getInt24)(e,t,n):(0,d.assert)(!1);break;case 4:"unsigned"===a?this.readInputValue=(e,t)=>e.getUint32(t,n)-0x80000000:"signed"===a?this.readInputValue=(e,t)=>e.getInt32(t,n):"float"===a?this.readInputValue=(e,t)=>e.getFloat32(t,n):(0,d.assert)(!1);break;case 8:"float"===a?this.readInputValue=(e,t)=>e.getFloat64(t,n):(0,d.assert)(!1);break;default:(0,d.assertNever)(i),(0,d.assert)(!1)}switch(i){case 1:"ulaw"===a||"alaw"===a?(this.outputSampleSize=2,this.outputFormat="s16",this.writeOutputValue=(e,t,r)=>e.setInt16(t,r,!0)):(this.outputSampleSize=1,this.outputFormat="u8",this.writeOutputValue=(e,t,r)=>e.setUint8(t,r+128));break;case 2:this.outputSampleSize=2,this.outputFormat="s16",this.writeOutputValue=(e,t,r)=>e.setInt16(t,r,!0);break;case 3:this.outputSampleSize=4,this.outputFormat="s32",this.writeOutputValue=(e,t,r)=>e.setInt32(t,r<<8,!0);break;case 4:this.outputSampleSize=4,"float"===a?(this.outputFormat="f32",this.writeOutputValue=(e,t,r)=>e.setFloat32(t,r,!0)):(this.outputFormat="s32",this.writeOutputValue=(e,t,r)=>e.setInt32(t,r,!0));break;case 8:this.outputSampleSize=4,this.outputFormat="f32",this.writeOutputValue=(e,t,r)=>e.setFloat32(t,r,!0);break;default:(0,d.assertNever)(i),(0,d.assert)(!1)}}getDecodeQueueSize(){return 0}decode(e){let t=(0,d.toDataView)(e.data),r=e.byteLength/this.decoderConfig.numberOfChannels/this.inputSampleSize,a=new ArrayBuffer(r*this.decoderConfig.numberOfChannels*this.outputSampleSize),i=new DataView(a);for(let e=0;e<r*this.decoderConfig.numberOfChannels;e++){let r=e*this.inputSampleSize,a=e*this.outputSampleSize,s=this.readInputValue(t,r);this.writeOutputValue(i,a,s)}let s=r/this.decoderConfig.sampleRate;(null===this.currentTimestamp||Math.abs(e.timestamp-this.currentTimestamp)>=s)&&(this.currentTimestamp=e.timestamp);let n=this.currentTimestamp;this.currentTimestamp+=s;let o=new(0,m.AudioSample)({format:this.outputFormat,data:a,numberOfChannels:this.decoderConfig.numberOfChannels,sampleRate:this.decoderConfig.sampleRate,numberOfFrames:r,timestamp:n});this.onSample(o)}async flush(){}close(){}}class v extends y{constructor(e){if(!(e instanceof c.InputAudioTrack))throw TypeError("audioTrack must be an InputAudioTrack.");super(),this._track=e}async _createDecoder(e,t){if(!await this._track.canDecode())throw Error("This audio track cannot be decoded by this browser. Make sure to check decodability before using a track.");let r=this._track.codec,a=await this._track.getDecoderConfig();return((0,d.assert)(r&&a),s.PCM_AUDIO_CODECS.includes(a.codec))?new P(e,t,a):new E(e,t,r,a)}_createPacketSink(){return new k(this._track)}async getSample(e){for await(let t of(f(e),this.mediaSamplesAtTimestamps([e])))return t;throw Error("Internal error: Iterator returned nothing.")}samples(e=0,t=1/0){return this.mediaSamplesInRange(e,t)}samplesAtTimestamps(e){return this.mediaSamplesAtTimestamps(e)}}class C{constructor(e){if(!(e instanceof c.InputAudioTrack))throw TypeError("audioTrack must be an InputAudioTrack.");this._audioSampleSink=new v(e)}_audioSampleToWrappedArrayBuffer(e){let t={buffer:e.toAudioBuffer(),timestamp:e.timestamp,duration:e.duration};return e.close(),t}async getBuffer(e){f(e);let t=await this._audioSampleSink.getSample(e);return t&&this._audioSampleToWrappedArrayBuffer(t)}buffers(e=0,t=1/0){return(0,d.mapAsyncGenerator)(this._audioSampleSink.samples(e,t),e=>this._audioSampleToWrappedArrayBuffer(e))}buffersAtTimestamps(e){return(0,d.mapAsyncGenerator)(this._audioSampleSink.samplesAtTimestamps(e),e=>e&&this._audioSampleToWrappedArrayBuffer(e))}}},{"./codec.js":"4GUiq","./codec-data.js":"zx4dz","./custom-coder.js":"57K5K","./input.js":"6K6yf","./input-track.js":"aU0uf","./misc.js":"jrq2g","./packet.js":"8dQhf","./pcm.js":"3X3Vq","./sample.js":"1yEK7","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"6K6yf":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"Input",()=>c),i.export(r,"InputDisposedError",()=>d);var s=e("./input-format.js"),n=e("./misc.js"),o=e("./reader.js"),l=e("./source.js");(0,n.polyfillSymbolDispose)();class c{get disposed(){return this._disposed}constructor(e){if(this._demuxerPromise=null,this._format=null,this._disposed=!1,!e||"object"!=typeof e)throw TypeError("options must be an object.");if(!Array.isArray(e.formats)||e.formats.some(e=>!(e instanceof s.InputFormat)))throw TypeError("options.formats must be an array of InputFormat.");if(!(e.source instanceof l.Source))throw TypeError("options.source must be a Source.");if(e.source._disposed)throw Error("options.source must not be disposed.");this._formats=e.formats,this._source=e.source,this._reader=new(0,o.Reader)(e.source)}_getDemuxer(){return this._demuxerPromise??=(async()=>{for(let e of(this._reader.fileSize=await this._source.getSizeOrNull(),this._formats))if(await e._canReadInput(this))return this._format=e,e._createDemuxer(this);throw Error("Input has an unsupported or unrecognizable format.")})()}get source(){return this._source}async getFormat(){return await this._getDemuxer(),(0,n.assert)(this._format),this._format}async computeDuration(){return(await this._getDemuxer()).computeDuration()}async getFirstTimestamp(){let e=await this.getTracks();return 0===e.length?0:Math.min(...await Promise.all(e.map(e=>e.getFirstTimestamp())))}async getTracks(){return(await this._getDemuxer()).getTracks()}async getVideoTracks(){return(await this.getTracks()).filter(e=>e.isVideoTrack())}async getAudioTracks(){return(await this.getTracks()).filter(e=>e.isAudioTrack())}async getPrimaryVideoTrack(){return(await this.getTracks()).find(e=>e.isVideoTrack())??null}async getPrimaryAudioTrack(){return(await this.getTracks()).find(e=>e.isAudioTrack())??null}async getMimeType(){return(await this._getDemuxer()).getMimeType()}async getMetadataTags(){return(await this._getDemuxer()).getMetadataTags()}dispose(){this._disposed||(this._disposed=!0,this._source._disposed=!0,this._source._dispose())}[Symbol.dispose](){this.dispose()}}class d extends Error{constructor(e="Input has been disposed."){super(e),this.name="InputDisposedError"}}},{"./input-format.js":"gFGfd","./misc.js":"jrq2g","./reader.js":"6AkKg","./source.js":"108pa","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"6AkKg":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"Reader",()=>o),i.export(r,"FileSlice",()=>l),i.export(r,"readBytes",()=>d),i.export(r,"readU8",()=>u),i.export(r,"readU16",()=>h),i.export(r,"readU16Be",()=>m),i.export(r,"readU24Be",()=>p),i.export(r,"readI16Be",()=>f),i.export(r,"readU32",()=>g),i.export(r,"readU32Be",()=>k),i.export(r,"readU32Le",()=>b),i.export(r,"readI32Be",()=>y),i.export(r,"readI32Le",()=>S),i.export(r,"readU64",()=>T),i.export(r,"readU64Be",()=>I),i.export(r,"readI64Be",()=>w),i.export(r,"readI64Le",()=>x),i.export(r,"readF32Be",()=>E),i.export(r,"readF64Be",()=>P),i.export(r,"readAscii",()=>v);var s=e("./input.js"),n=e("./misc.js");class o{constructor(e){this.source=e}requestSlice(e,t){if(this.source._disposed)throw new(0,s.InputDisposedError);if(e<0||null!==this.fileSize&&e+t>this.fileSize)return null;let r=e+t,a=this.source._read(e,r);return a instanceof Promise?a.then(t=>t?new l(t.bytes,t.view,t.offset,e,r):null):a?new l(a.bytes,a.view,a.offset,e,r):null}requestSliceRange(e,t,r){if(this.source._disposed)throw new(0,s.InputDisposedError);if(e<0)return null;if(null!==this.fileSize)return this.requestSlice(e,(0,n.clamp)(this.fileSize-e,t,r));{let a=this.requestSlice(e,r),i=a=>{if(a)return a;let i=a=>((0,n.assert)(null!==a),this.requestSlice(e,(0,n.clamp)(a-e,t,r))),s=this.source._retrieveSize();return s instanceof Promise?s.then(i):i(s)};return a instanceof Promise?a.then(i):i(a)}}}class l{constructor(e,t,r,a,i){this.bytes=e,this.view=t,this.offset=r,this.start=a,this.end=i,this.bufferPos=a-r}static tempFromBytes(e){return new l(e,(0,n.toDataView)(e),0,0,e.length)}get length(){return this.end-this.start}get filePos(){return this.offset+this.bufferPos}set filePos(e){this.bufferPos=e-this.offset}get remainingLength(){return Math.max(this.end-this.filePos,0)}skip(e){this.bufferPos+=e}slice(e,t=this.end-e){if(e<this.start||e+t>this.end)throw RangeError("Slicing outside of original slice.");return new l(this.bytes,this.view,this.offset,e,e+t)}}let c=(e,t)=>{if(e.filePos<e.start||e.filePos+t>e.end)throw RangeError(`Tried reading [${e.filePos}, ${e.filePos+t}), but slice is [${e.start}, ${e.end}). This is likely an internal error, please report it alongside the file that caused it.`)},d=(e,t)=>{c(e,t);let r=e.bytes.subarray(e.bufferPos,e.bufferPos+t);return e.bufferPos+=t,r},u=e=>(c(e,1),e.view.getUint8(e.bufferPos++)),h=(e,t)=>{c(e,2);let r=e.view.getUint16(e.bufferPos,t);return e.bufferPos+=2,r},m=e=>{c(e,2);let t=e.view.getUint16(e.bufferPos,!1);return e.bufferPos+=2,t},p=e=>{c(e,3);let t=(0,n.getUint24)(e.view,e.bufferPos,!1);return e.bufferPos+=3,t},f=e=>{c(e,2);let t=e.view.getInt16(e.bufferPos,!1);return e.bufferPos+=2,t},g=(e,t)=>{c(e,4);let r=e.view.getUint32(e.bufferPos,t);return e.bufferPos+=4,r},k=e=>{c(e,4);let t=e.view.getUint32(e.bufferPos,!1);return e.bufferPos+=4,t},b=e=>{c(e,4);let t=e.view.getUint32(e.bufferPos,!0);return e.bufferPos+=4,t},y=e=>{c(e,4);let t=e.view.getInt32(e.bufferPos,!1);return e.bufferPos+=4,t},S=e=>{c(e,4);let t=e.view.getInt32(e.bufferPos,!0);return e.bufferPos+=4,t},T=(e,t)=>{let r,a;return t?(r=g(e,!0),a=g(e,!0)):(a=g(e,!1),r=g(e,!1)),0x100000000*a+r},I=e=>0x100000000*k(e)+k(e),w=e=>0x100000000*y(e)+k(e),x=e=>{let t=b(e);return 0x100000000*S(e)+t},E=e=>{c(e,4);let t=e.view.getFloat32(e.bufferPos,!1);return e.bufferPos+=4,t},P=e=>{c(e,8);let t=e.view.getFloat64(e.bufferPos,!1);return e.bufferPos+=8,t},v=(e,t)=>{c(e,t);let r="";for(let a=0;a<t;a++)r+=String.fromCharCode(e.bytes[e.bufferPos++]);return r}},{"./input.js":"6K6yf","./misc.js":"jrq2g","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"108pa":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"Source",()=>c),i.export(r,"BufferSource",()=>d),i.export(r,"BlobSource",()=>u),i.export(r,"UrlSource",()=>m),i.export(r,"FilePathSource",()=>p),i.export(r,"StreamSource",()=>f),i.export(r,"ReadableStreamSource",()=>g);var s=e("./misc.js"),n=e("./node.js"),o=e("./input.js");let l=void 0!==n?n:void 0;class c{constructor(){this._disposed=!1,this._sizePromise=null,this.onread=null}async getSizeOrNull(){if(this._disposed)throw new(0,o.InputDisposedError);return this._sizePromise??=Promise.resolve(this._retrieveSize())}async getSize(){if(this._disposed)throw new(0,o.InputDisposedError);let e=await this.getSizeOrNull();if(null===e)throw Error("Cannot determine the size of an unsized source.");return e}}class d extends c{constructor(e){if(!(e instanceof ArrayBuffer)&&!("u">typeof SharedArrayBuffer&&e instanceof SharedArrayBuffer)&&!ArrayBuffer.isView(e))throw TypeError("buffer must be an ArrayBuffer, SharedArrayBuffer, or ArrayBufferView.");super(),this._onreadCalled=!1,this._bytes=(0,s.toUint8Array)(e),this._view=(0,s.toDataView)(e)}_retrieveSize(){return this._bytes.byteLength}_read(){return this._onreadCalled||(this.onread?.(0,this._bytes.byteLength),this._onreadCalled=!0),{bytes:this._bytes,view:this._view,offset:0}}_dispose(){}}class u extends c{constructor(e,t={}){if(!(e instanceof Blob))throw TypeError("blob must be a Blob.");if(!t||"object"!=typeof t)throw TypeError("options must be an object.");if(void 0!==t.maxCacheSize&&(!(0,s.isNumber)(t.maxCacheSize)||t.maxCacheSize<0))throw TypeError("options.maxCacheSize, when provided, must be a non-negative number.");super(),this._readers=new WeakMap,this._blob=e,this._orchestrator=new b({maxCacheSize:t.maxCacheSize??8388608,maxWorkerCount:4,runWorker:this._runWorker.bind(this),prefetchProfile:k.fileSystem})}_retrieveSize(){let e=this._blob.size;return this._orchestrator.fileSize=e,e}_read(e,t){return this._orchestrator.read(e,t)}async _runWorker(e){let t=this._readers.get(e);for(void 0===t&&(t=("stream"in this._blob)&&!(0,s.isWebKit)()?this._blob.slice(e.currentPos).stream().getReader():null,this._readers.set(e,t));e.currentPos<e.targetPos&&!e.aborted;)if(t){let{done:r,value:a}=await t.read();if(r)throw this._orchestrator.forgetWorker(e),Error("Blob reader stopped unexpectedly before all requested data was read.");if(e.aborted)break;this.onread?.(e.currentPos,e.currentPos+a.length),this._orchestrator.supplyWorkerData(e,a)}else{let t=await this._blob.slice(e.currentPos,e.targetPos).arrayBuffer();if(e.aborted)break;this.onread?.(e.currentPos,e.currentPos+t.byteLength),this._orchestrator.supplyWorkerData(e,new Uint8Array(t))}e.running=!1,e.aborted&&await t?.cancel()}_dispose(){this._orchestrator.dispose()}}let h=(e,t,r)=>{if(t instanceof Error&&(t.message.includes("Failed to fetch")||t.message.includes("Load failed")||t.message.includes("NetworkError when attempting to fetch resource"))){let e=null;try{"u">typeof window&&void 0!==window.location&&(e=new URL(r instanceof Request?r.url:r,window.location.href).origin)}catch{}if(("u"<typeof navigator||"boolean"!=typeof navigator.onLine||navigator.onLine)&&null!==e&&e!==window.location.origin)return console.warn("Request will not be retried because a CORS error was suspected due to different origins. You can modify this behavior by providing your own function for the 'getRetryDelay' option."),null}return Math.min(2**(e-2),16)};class m extends c{constructor(e,t={}){if("string"!=typeof e&&!(e instanceof URL)&&!("u">typeof Request&&e instanceof Request))throw TypeError("url must be a string, URL or Request.");if(!t||"object"!=typeof t)throw TypeError("options must be an object.");if(void 0!==t.requestInit&&(!t.requestInit||"object"!=typeof t.requestInit))throw TypeError("options.requestInit, when provided, must be an object.");if(void 0!==t.getRetryDelay&&"function"!=typeof t.getRetryDelay)throw TypeError("options.getRetryDelay, when provided, must be a function.");if(void 0!==t.maxCacheSize&&(!(0,s.isNumber)(t.maxCacheSize)||t.maxCacheSize<0))throw TypeError("options.maxCacheSize, when provided, must be a non-negative number.");if(void 0!==t.parallelism&&(!Number.isInteger(t.parallelism)||t.parallelism<1))throw TypeError("options.parallelism, when provided, must be a positive number.");if(void 0!==t.fetchFn&&"function"!=typeof t.fetchFn)throw TypeError("options.fetchFn, when provided, must be a function.");super(),this._existingResponses=new WeakMap,this._url=e,this._options=t,this._getRetryDelay=t.getRetryDelay??h,this._orchestrator=new b({maxCacheSize:t.maxCacheSize??0x4000000,maxWorkerCount:t.parallelism??2,runWorker:this._runWorker.bind(this),prefetchProfile:k.network})}async _retrieveSize(){let e,t,r=new AbortController,a=await (0,s.retriedFetch)(this._options.fetchFn??fetch,this._url,(0,s.mergeRequestInit)(this._options.requestInit??{},{headers:{Range:"bytes=0-"},signal:r.signal}),this._getRetryDelay,()=>this._disposed);if(!a.ok)throw Error(`Error fetching ${String(this._url)}: ${a.status} ${a.statusText}`);if(206===a.status)t=this._getTotalLengthFromRangeResponse(a),e=this._orchestrator.createWorker(0,Math.min(t,524288));else{let r=a.headers.get("Content-Length");if(r)t=Number(r),e=this._orchestrator.createWorker(0,t),this._orchestrator.options.maxCacheSize=1/0,console.warn("HTTP server did not respond with 206 Partial Content, meaning the entire remote resource now has to be downloaded. For efficient media file streaming across a network, please make sure your server supports range requests.");else throw Error(`HTTP response (status ${a.status}) must surface Content-Length header.`)}return this._orchestrator.fileSize=t,this._existingResponses.set(e,{response:a,abortController:r}),this._orchestrator.runWorker(e),t}_read(e,t){return this._orchestrator.read(e,t)}async _runWorker(e){for(;;){let t=this._existingResponses.get(e);this._existingResponses.delete(e);let r=t?.abortController,a=t?.response;if(r||(r=new AbortController,a=await (0,s.retriedFetch)(this._options.fetchFn??fetch,this._url,(0,s.mergeRequestInit)(this._options.requestInit??{},{headers:{Range:`bytes=${e.currentPos}-`},signal:r.signal}),this._getRetryDelay,()=>this._disposed)),(0,s.assert)(a),!a.ok)throw Error(`Error fetching ${String(this._url)}: ${a.status} ${a.statusText}`);if(e.currentPos>0&&206!==a.status)throw Error("HTTP server did not respond with 206 Partial Content to a range request. To enable efficient media file streaming across a network, please make sure your server supports range requests.");if(!a.body)throw Error("Missing HTTP response body stream. The used fetch function must provide the response body as a ReadableStream.");let i=a.body.getReader();for(;;){let t;if(e.currentPos>=e.targetPos||e.aborted){r.abort(),e.running=!1;return}try{t=await i.read()}catch(t){if(this._disposed)throw t;let e=this._getRetryDelay(1,t,this._url);if(null!==e){console.error("Error while reading response stream. Attempting to resume.",t),await new Promise(t=>setTimeout(t,1e3*e));break}throw t}if(e.aborted)continue;let{done:a,value:s}=t;if(a){if(e.currentPos>=e.targetPos){this._orchestrator.forgetWorker(e),e.running=!1;return}break}this.onread?.(e.currentPos,e.currentPos+s.length),this._orchestrator.supplyWorkerData(e,s)}}}_getTotalLengthFromRangeResponse(e){let t=e.headers.get("Content-Range");if(t){let e=/\/(\d+)/.exec(t);if(e)return Number(e[1])}let r=e.headers.get("Content-Length");if(r)return Number(r);throw Error("Partial HTTP response (status 206) must surface either Content-Range or Content-Length header.")}_dispose(){this._orchestrator.dispose()}}class p extends c{constructor(e,t={}){if("string"!=typeof e)throw TypeError("filePath must be a string.");if(!t||"object"!=typeof t)throw TypeError("options must be an object.");if(void 0!==t.maxCacheSize&&(!(0,s.isNumber)(t.maxCacheSize)||t.maxCacheSize<0))throw TypeError("options.maxCacheSize, when provided, must be a non-negative number.");super(),this._fileHandle=null,this._streamSource=new f({getSize:async()=>(this._fileHandle=await l.fs.open(e,"r"),(await this._fileHandle.stat()).size),read:async(e,t)=>{(0,s.assert)(this._fileHandle);let r=new Uint8Array(t-e);return await this._fileHandle.read(r,0,t-e,e),r},maxCacheSize:t.maxCacheSize,prefetchProfile:"fileSystem"})}_read(e,t){return this._streamSource._read(e,t)}_retrieveSize(){return this._streamSource._retrieveSize()}_dispose(){this._streamSource._dispose(),this._fileHandle?.close(),this._fileHandle=null}}class f extends c{constructor(e){if(!e||"object"!=typeof e)throw TypeError("options must be an object.");if("function"!=typeof e.getSize)throw TypeError("options.getSize must be a function.");if("function"!=typeof e.read)throw TypeError("options.read must be a function.");if(void 0!==e.dispose&&"function"!=typeof e.dispose)throw TypeError("options.dispose, when provided, must be a function.");if(void 0!==e.maxCacheSize&&(!(0,s.isNumber)(e.maxCacheSize)||e.maxCacheSize<0))throw TypeError("options.maxCacheSize, when provided, must be a non-negative number.");if(e.prefetchProfile&&!["none","fileSystem","network"].includes(e.prefetchProfile))throw TypeError("options.prefetchProfile, when provided, must be one of 'none', 'fileSystem' or 'network'.");super(),this._options=e,this._orchestrator=new b({maxCacheSize:e.maxCacheSize??8388608,maxWorkerCount:2,prefetchProfile:k[e.prefetchProfile??"none"],runWorker:this._runWorker.bind(this)})}_retrieveSize(){let e=this._options.getSize();if(e instanceof Promise)return e.then(e=>{if(!Number.isInteger(e)||e<0)throw TypeError("options.getSize must return or resolve to a non-negative integer.");return this._orchestrator.fileSize=e,e});if(!Number.isInteger(e)||e<0)throw TypeError("options.getSize must return or resolve to a non-negative integer.");return this._orchestrator.fileSize=e,e}_read(e,t){return this._orchestrator.read(e,t)}async _runWorker(e){for(;e.currentPos<e.targetPos&&!e.aborted;){let t=e.currentPos,r=e.targetPos,a=this._options.read(e.currentPos,r);if(a instanceof Promise&&(a=await a),e.aborted)break;if(a instanceof Uint8Array){if((a=(0,s.toUint8Array)(a)).length!==r-e.currentPos)throw Error(`options.read returned a Uint8Array with unexpected length: Requested ${r-e.currentPos} bytes, but got ${a.length}.`);this.onread?.(e.currentPos,e.currentPos+a.length),this._orchestrator.supplyWorkerData(e,a)}else if(a instanceof ReadableStream){let i=a.getReader();for(;e.currentPos<r&&!e.aborted;){let{done:a,value:n}=await i.read();if(a){if(e.currentPos<r)throw Error(`ReadableStream returned by options.read ended before supplying enough data. Requested ${r-t} bytes, but got ${e.currentPos-t}`);break}if(!(n instanceof Uint8Array))throw TypeError("ReadableStream returned by options.read must yield Uint8Array chunks.");if(e.aborted)break;let o=(0,s.toUint8Array)(n);this.onread?.(e.currentPos,e.currentPos+o.length),this._orchestrator.supplyWorkerData(e,o)}}else throw TypeError("options.read must return or resolve to a Uint8Array or a ReadableStream.")}e.running=!1}_dispose(){this._orchestrator.dispose(),this._options.dispose?.()}}class g extends c{constructor(e,t={}){if(!(e instanceof ReadableStream))throw TypeError("stream must be a ReadableStream.");if(!t||"object"!=typeof t)throw TypeError("options must be an object.");if(void 0!==t.maxCacheSize&&(!(0,s.isNumber)(t.maxCacheSize)||t.maxCacheSize<0))throw TypeError("options.maxCacheSize, when provided, must be a non-negative number.");super(),this._reader=null,this._cache=[],this._pendingSlices=[],this._currentIndex=0,this._targetIndex=0,this._maxRequestedIndex=0,this._endIndex=null,this._pulling=!1,this._stream=e,this._maxCacheSize=t.maxCacheSize??0x1000000}_retrieveSize(){return this._endIndex}_read(e,t){if(null!==this._endIndex&&t>this._endIndex)return null;this._maxRequestedIndex=Math.max(this._maxRequestedIndex,t);let r=(0,s.binarySearchLessOrEqual)(this._cache,e,e=>e.start),a=-1!==r?this._cache[r]:null;if(a&&a.start<=e&&t<=a.end)return{bytes:a.bytes,view:a.view,offset:a.start};let i=e,n=new Uint8Array(t-e);if(-1!==r)for(let a=r;a<this._cache.length;a++){let r=this._cache[a];if(r.start>=t)break;let s=Math.max(e,r.start);s>i&&this._throwDueToCacheMiss();let o=Math.min(t,r.end);s<o&&(n.set(r.bytes.subarray(s-r.start,o-r.start),s-e),i=o)}if(i===t)return{bytes:n,view:(0,s.toDataView)(n),offset:e};this._currentIndex>i&&this._throwDueToCacheMiss();let{promise:o,resolve:l,reject:c}=(0,s.promiseWithResolvers)();return this._pendingSlices.push({start:e,end:t,bytes:n,resolve:l,reject:c}),this._targetIndex=Math.max(this._targetIndex,t),this._pulling||(this._pulling=!0,this._pull().catch(e=>{if(this._pulling=!1,this._pendingSlices.length>0)this._pendingSlices.forEach(t=>t.reject(e)),this._pendingSlices.length=0;else throw e})),o}_throwDueToCacheMiss(){throw Error("Read is before the cached region. With ReadableStreamSource, you must access the data more sequentially or increase the size of its cache.")}async _pull(){for(this._reader??=this._stream.getReader();this._currentIndex<this._targetIndex&&!this._disposed;){let{done:e,value:t}=await this._reader.read();if(e){for(let e of this._pendingSlices)e.resolve(null);this._pendingSlices.length=0,this._endIndex=this._currentIndex;break}let r=this._currentIndex,a=this._currentIndex+t.byteLength;for(let e=0;e<this._pendingSlices.length;e++){let i=this._pendingSlices[e],n=Math.max(r,i.start),o=Math.min(a,i.end);n<o&&(i.bytes.set(t.subarray(n-r,o-r),n-i.start),o===i.end&&(i.resolve({bytes:i.bytes,view:(0,s.toDataView)(i.bytes),offset:i.start}),this._pendingSlices.splice(e,1),e--))}for(this._cache.push({start:r,end:a,bytes:t,view:(0,s.toDataView)(t),age:0});this._cache.length>0;){let e=this._cache[0];if(this._maxRequestedIndex-e.end<=this._maxCacheSize)break;this._cache.shift()}this._currentIndex+=t.byteLength}this._pulling=!1}_dispose(){this._pendingSlices.length=0,this._cache.length=0}}let k={none:(e,t)=>({start:e,end:t}),fileSystem:(e,t)=>({start:e=65536*Math.floor((e-65536)/65536),end:t=65536*Math.ceil((t+65536)/65536)}),network:(e,t,r)=>{for(let a of(e=Math.max(0,65536*Math.floor((e-65536)/65536)),r)){let r=Math.max((a.startPos+a.targetPos)/2,a.targetPos-8388608);if((0,s.closedIntervalsOverlap)(e,t,r,a.targetPos)){let e=a.targetPos-a.startPos,r=8388608*Math.ceil((e+1)/8388608),i=Math.min(2**Math.ceil(Math.log2(e+1)),r);t=Math.max(t,a.startPos+i)}}return t=Math.max(t,e+524288),{start:e,end:t}}};class b{constructor(e){this.options=e,this.fileSize=null,this.nextAge=0,this.workers=[],this.cache=[],this.currentCacheSize=0,this.disposed=!1}read(e,t){(0,s.assert)(null!==this.fileSize);let r=this.options.prefetchProfile(e,t,this.workers),a=Math.max(r.start,0),i=Math.min(r.end,this.fileSize);(0,s.assert)(a<=e&&t<=i);let n=null,o=(0,s.binarySearchLessOrEqual)(this.cache,e,e=>e.start),l=-1!==o?this.cache[o]:null;l&&l.start<=e&&t<=l.end&&(l.age=this.nextAge++,n={bytes:l.bytes,view:l.view,offset:l.start});let c=(0,s.binarySearchLessOrEqual)(this.cache,a,e=>e.start),d=n?null:new Uint8Array(t-e),u=0,h=a,m=[];if(-1!==c){for(let r=c;r<this.cache.length;r++){let n=this.cache[r];if(n.start>=i)break;if(n.end<=a)continue;let o=Math.max(a,n.start),l=Math.min(i,n.end);if((0,s.assert)(o<=l),h<o&&m.push({start:h,end:o}),h=l,d){let r=Math.max(e,n.start),a=Math.min(t,n.end);if(r<a){let t=r-e;d.set(n.bytes.subarray(r-n.start,a-n.start),t),t===u&&(u=a-e)}}n.age=this.nextAge++}h<i&&m.push({start:h,end:i})}else m.push({start:a,end:i});if(d&&u>=d.length&&(n={bytes:d,view:(0,s.toDataView)(d),offset:e}),0===m.length)return(0,s.assert)(n),n;let{promise:p,resolve:f,reject:g}=(0,s.promiseWithResolvers)(),k=[];for(let r of m){let a=Math.max(e,r.start),i=Math.min(t,r.end);a===r.start&&i===r.end?k.push(r):a<i&&k.push({start:a,end:i})}for(let t of m){let r=d&&{start:e,bytes:d,holes:k,resolve:f,reject:g},a=!1;for(let e of this.workers)if((0,s.closedIntervalsOverlap)(t.start-131072,t.start,e.currentPos,e.targetPos)){e.targetPos=Math.max(e.targetPos,t.end),a=!0,r&&!e.pendingSlices.includes(r)&&e.pendingSlices.push(r),e.running||this.runWorker(e);break}if(!a){let e=this.createWorker(t.start,t.end);r&&(e.pendingSlices=[r]),this.runWorker(e)}}return n||((0,s.assert)(d),n=p.then(t=>({bytes:t,view:(0,s.toDataView)(t),offset:e}))),n}createWorker(e,t){let r={startPos:e,currentPos:e,targetPos:t,running:!1,aborted:this.disposed,pendingSlices:[],age:this.nextAge++};for(this.workers.push(r);this.workers.length>this.options.maxWorkerCount;){let e=0,t=this.workers[0];for(let r=1;r<this.workers.length;r++){let a=this.workers[r];a.age<t.age&&(e=r,t=a)}if(t.running&&t.pendingSlices.length>0)break;t.aborted=!0,this.workers.splice(e,1)}return r}runWorker(e){(0,s.assert)(!e.running),(0,s.assert)(e.currentPos<e.targetPos),e.running=!0,e.age=this.nextAge++,this.options.runWorker(e).catch(t=>{if(e.running=!1,e.pendingSlices.length>0)e.pendingSlices.forEach(e=>e.reject(t)),e.pendingSlices.length=0;else throw t})}supplyWorkerData(e,t){(0,s.assert)(!e.aborted);let r=e.currentPos,a=r+t.length;this.insertIntoCache({start:r,end:a,bytes:t,view:(0,s.toDataView)(t),age:this.nextAge++}),e.currentPos+=t.length,e.targetPos=Math.max(e.targetPos,e.currentPos);for(let i=0;i<e.pendingSlices.length;i++){let s=e.pendingSlices[i],n=Math.max(r,s.start),o=Math.min(a,s.start+s.bytes.length);n<o&&s.bytes.set(t.subarray(n-r,o-r),n-s.start);for(let e=0;e<s.holes.length;e++){let t=s.holes[e];r<=t.start&&a>t.start&&(t.start=a),t.end<=t.start&&(s.holes.splice(e,1),e--)}0===s.holes.length&&(s.resolve(s.bytes),e.pendingSlices.splice(i,1),i--)}for(let t=0;t<this.workers.length;t++){let i=this.workers[t];e!==i&&!i.running&&(0,s.closedIntervalsOverlap)(r,a,i.currentPos,i.targetPos)&&(this.workers.splice(t,1),t--)}}forgetWorker(e){let t=this.workers.indexOf(e);(0,s.assert)(-1!==t),this.workers.splice(t,1)}insertIntoCache(e){if(0===this.options.maxCacheSize)return;let t=(0,s.binarySearchLessOrEqual)(this.cache,e.start,e=>e.start)+1;if(t>0){let r=this.cache[t-1];if(r.end>=e.end)return;if(r.end>e.start){let a=new Uint8Array(e.end-r.start);a.set(r.bytes,0),a.set(e.bytes,e.start-r.start),this.currentCacheSize+=e.end-r.end,r.bytes=a,r.view=(0,s.toDataView)(a),r.end=e.end,t--,e=r}else this.cache.splice(t,0,e),this.currentCacheSize+=e.bytes.length}else this.cache.splice(t,0,e),this.currentCacheSize+=e.bytes.length;for(let r=t+1;r<this.cache.length;r++){let t=this.cache[r];if(e.end<=t.start)break;if(e.end>=t.end){this.cache.splice(r,1),this.currentCacheSize-=t.bytes.length,r--;continue}let a=new Uint8Array(t.end-e.start);a.set(e.bytes,0),a.set(t.bytes,t.start-e.start),this.currentCacheSize-=e.end-t.start,e.bytes=a,e.view=(0,s.toDataView)(a),e.end=t.end,this.cache.splice(r,1);break}for(;this.currentCacheSize>this.options.maxCacheSize;){let e=0,t=this.cache[0];for(let r=1;r<this.cache.length;r++){let a=this.cache[r];a.age<t.age&&(e=r,t=a)}if(this.currentCacheSize-t.bytes.length<=this.options.maxCacheSize)break;this.cache.splice(e,1),this.currentCacheSize-=t.bytes.length}}dispose(){for(let e of this.workers)e.aborted=!0;this.workers.length=0,this.cache.length=0,this.disposed=!0}}},{"./misc.js":"jrq2g","./node.js":"1arHq","./input.js":"6K6yf","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"1arHq":[function(e,t,r,a){},{}],"8dQhf":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"PLACEHOLDER_DATA",()=>n),i.export(r,"EncodedPacket",()=>o);var s=e("./misc.js");let n=new Uint8Array(0);class o{constructor(e,t,r,a,i=-1,s,o){if(this.data=e,this.type=t,this.timestamp=r,this.duration=a,this.sequenceNumber=i,e===n&&void 0===s)throw Error("Internal error: byteLength must be explicitly provided when constructing metadata-only packets.");if(void 0===s&&(s=e.byteLength),!(e instanceof Uint8Array))throw TypeError("data must be a Uint8Array.");if("key"!==t&&"delta"!==t)throw TypeError('type must be either "key" or "delta".');if(!Number.isFinite(r))throw TypeError("timestamp must be a number.");if(!Number.isFinite(a)||a<0)throw TypeError("duration must be a non-negative number.");if(!Number.isFinite(i))throw TypeError("sequenceNumber must be a number.");if(!Number.isInteger(s)||s<0)throw TypeError("byteLength must be a non-negative integer.");if(void 0!==o&&("object"!=typeof o||!o))throw TypeError("sideData, when provided, must be an object.");if(o?.alpha!==void 0&&!(o.alpha instanceof Uint8Array))throw TypeError("sideData.alpha, when provided, must be a Uint8Array.");if(o?.alphaByteLength!==void 0&&(!Number.isInteger(o.alphaByteLength)||o.alphaByteLength<0))throw TypeError("sideData.alphaByteLength, when provided, must be a non-negative integer.");this.byteLength=s,this.sideData=o??{},this.sideData.alpha&&void 0===this.sideData.alphaByteLength&&(this.sideData.alphaByteLength=this.sideData.alpha.byteLength)}get isMetadataOnly(){return this.data===n}get microsecondTimestamp(){return Math.trunc(s.SECOND_TO_MICROSECOND_FACTOR*this.timestamp)}get microsecondDuration(){return Math.trunc(s.SECOND_TO_MICROSECOND_FACTOR*this.duration)}toEncodedVideoChunk(){if(this.isMetadataOnly)throw TypeError("Metadata-only packets cannot be converted to a video chunk.");if("u"<typeof EncodedVideoChunk)throw Error("Your browser does not support EncodedVideoChunk.");return new EncodedVideoChunk({data:this.data,type:this.type,timestamp:this.microsecondTimestamp,duration:this.microsecondDuration})}alphaToEncodedVideoChunk(e=this.type){if(!this.sideData.alpha)throw TypeError("This packet does not contain alpha side data.");if(this.isMetadataOnly)throw TypeError("Metadata-only packets cannot be converted to a video chunk.");if("u"<typeof EncodedVideoChunk)throw Error("Your browser does not support EncodedVideoChunk.");return new EncodedVideoChunk({data:this.sideData.alpha,type:e,timestamp:this.microsecondTimestamp,duration:this.microsecondDuration})}toEncodedAudioChunk(){if(this.isMetadataOnly)throw TypeError("Metadata-only packets cannot be converted to an audio chunk.");if("u"<typeof EncodedAudioChunk)throw Error("Your browser does not support EncodedAudioChunk.");return new EncodedAudioChunk({data:this.data,type:this.type,timestamp:this.microsecondTimestamp,duration:this.microsecondDuration})}static fromEncodedChunk(e,t){if(!(e instanceof EncodedVideoChunk||e instanceof EncodedAudioChunk))throw TypeError("chunk must be an EncodedVideoChunk or EncodedAudioChunk.");let r=new Uint8Array(e.byteLength);return e.copyTo(r),new o(r,e.type,e.timestamp/1e6,(e.duration??0)/1e6,void 0,void 0,t)}clone(e){if(void 0!==e&&("object"!=typeof e||null===e))throw TypeError("options, when provided, must be an object.");if(e?.data!==void 0&&!(e.data instanceof Uint8Array))throw TypeError("options.data, when provided, must be a Uint8Array.");if(e?.type!==void 0&&"key"!==e.type&&"delta"!==e.type)throw TypeError('options.type, when provided, must be either "key" or "delta".');if(e?.timestamp!==void 0&&!Number.isFinite(e.timestamp))throw TypeError("options.timestamp, when provided, must be a number.");if(e?.duration!==void 0&&!Number.isFinite(e.duration))throw TypeError("options.duration, when provided, must be a number.");if(e?.sequenceNumber!==void 0&&!Number.isFinite(e.sequenceNumber))throw TypeError("options.sequenceNumber, when provided, must be a number.");if(e?.sideData!==void 0&&("object"!=typeof e.sideData||null===e.sideData))throw TypeError("options.sideData, when provided, must be an object.");return new o(e?.data??this.data,e?.type??this.type,e?.timestamp??this.timestamp,e?.duration??this.duration,e?.sequenceNumber??this.sequenceNumber,this.byteLength,e?.sideData??this.sideData)}}},{"./misc.js":"jrq2g","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"3X3Vq":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"toUlaw",()=>s),i.export(r,"fromUlaw",()=>n),i.export(r,"toAlaw",()=>o),i.export(r,"fromAlaw",()=>l);let s=e=>{let t=e,r=4096,a=0,i=12,s=0;for(t<0&&(t=-t,a=128),(t+=33)>8191&&(t=8191);(t&r)!==r&&i>=5;)r>>=1,i--;return s=t>>i-4&15,255&~(a|i-5<<4|s)},n=e=>{let t=0,r=0,a=~e;128&a&&(a&=-129,t=-1);let i=(1<<(r=((240&a)>>4)+5)|(15&a)<<r-4|1<<r-5)-33;return 0===t?i:-i},o=e=>{let t=2048,r=0,a=11,i=0,s=e;for(s<0&&(s=-s,r=128),s>4095&&(s=4095);(s&t)!==t&&a>=5;)t>>=1,a--;return i=s>>(4===a?1:a-4)&15,(r|a-4<<4|i)^85},l=e=>{let t=0,r=0,a=85^e;128&a&&(a&=-129,t=-1);let i=0;return i=4!=(r=((240&a)>>4)+4)?1<<r|(15&a)<<r-4|1<<r-5:a<<1|1,0===t?i:-i}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"1yEK7":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"VIDEO_SAMPLE_PIXEL_FORMATS",()=>c),i.export(r,"VideoSample",()=>u),i.export(r,"VideoSampleColorSpace",()=>h),i.export(r,"clampCropRectangle",()=>p),i.export(r,"validateCropRectangle",()=>f),i.export(r,"AudioSample",()=>S);var s=e("./misc.js");(0,s.polyfillSymbolDispose)();let n=-1/0,o=-1/0,l=null;"u">typeof FinalizationRegistry&&(l=new FinalizationRegistry(e=>{let t=Date.now();"video"===e.type?(t-n>=1e3&&(console.error("A VideoSample was garbage collected without first being closed. For proper resource management, make sure to call close() on all your VideoSamples as soon as you're done using them."),n=t),"u">typeof VideoFrame&&e.data instanceof VideoFrame&&e.data.close()):(t-o>=1e3&&(console.error("An AudioSample was garbage collected without first being closed. For proper resource management, make sure to call close() on all your AudioSamples as soon as you're done using them."),o=t),"u">typeof AudioData&&e.data instanceof AudioData&&e.data.close())}));let c=["I420","I420P10","I420P12","I420A","I420AP10","I420AP12","I422","I422P10","I422P12","I422A","I422AP10","I422AP12","I444","I444P10","I444P12","I444A","I444AP10","I444AP12","NV12","RGBA","RGBX","BGRA","BGRX"],d=new Set(c);class u{get displayWidth(){return this.rotation%180==0?this.codedWidth:this.codedHeight}get displayHeight(){return this.rotation%180==0?this.codedHeight:this.codedWidth}get microsecondTimestamp(){return Math.trunc(s.SECOND_TO_MICROSECOND_FACTOR*this.timestamp)}get microsecondDuration(){return Math.trunc(s.SECOND_TO_MICROSECOND_FACTOR*this.duration)}get hasAlpha(){return this.format&&this.format.includes("A")}constructor(e,t){if(this._closed=!1,e instanceof ArrayBuffer||"u">typeof SharedArrayBuffer&&e instanceof SharedArrayBuffer||ArrayBuffer.isView(e)){if(!t||"object"!=typeof t)throw TypeError("init must be an object.");if(void 0===t.format||!d.has(t.format))throw TypeError("init.format must be one of: "+c.join(", "));if(!Number.isInteger(t.codedWidth)||t.codedWidth<=0)throw TypeError("init.codedWidth must be a positive integer.");if(!Number.isInteger(t.codedHeight)||t.codedHeight<=0)throw TypeError("init.codedHeight must be a positive integer.");if(void 0!==t.rotation&&![0,90,180,270].includes(t.rotation))throw TypeError("init.rotation, when provided, must be 0, 90, 180, or 270.");if(!Number.isFinite(t.timestamp))throw TypeError("init.timestamp must be a number.");if(void 0!==t.duration&&(!Number.isFinite(t.duration)||t.duration<0))throw TypeError("init.duration, when provided, must be a non-negative number.");this._data=(0,s.toUint8Array)(e).slice(),this._layout=t.layout??k(t.format,t.codedWidth,t.codedHeight),this.format=t.format,this.codedWidth=t.codedWidth,this.codedHeight=t.codedHeight,this.rotation=t.rotation??0,this.timestamp=t.timestamp,this.duration=t.duration??0,this.colorSpace=new h(t.colorSpace)}else if("u">typeof VideoFrame&&e instanceof VideoFrame){if(t?.rotation!==void 0&&![0,90,180,270].includes(t.rotation))throw TypeError("init.rotation, when provided, must be 0, 90, 180, or 270.");if(t?.timestamp!==void 0&&!Number.isFinite(t?.timestamp))throw TypeError("init.timestamp, when provided, must be a number.");if(t?.duration!==void 0&&(!Number.isFinite(t.duration)||t.duration<0))throw TypeError("init.duration, when provided, must be a non-negative number.");this._data=e,this._layout=null,this.format=e.format,this.codedWidth=e.displayWidth,this.codedHeight=e.displayHeight,this.rotation=t?.rotation??0,this.timestamp=t?.timestamp??e.timestamp/1e6,this.duration=t?.duration??(e.duration??0)/1e6,this.colorSpace=new h(e.colorSpace)}else if("u">typeof HTMLImageElement&&e instanceof HTMLImageElement||"u">typeof SVGImageElement&&e instanceof SVGImageElement||"u">typeof ImageBitmap&&e instanceof ImageBitmap||"u">typeof HTMLVideoElement&&e instanceof HTMLVideoElement||"u">typeof HTMLCanvasElement&&e instanceof HTMLCanvasElement||"u">typeof OffscreenCanvas&&e instanceof OffscreenCanvas){if(!t||"object"!=typeof t)throw TypeError("init must be an object.");if(void 0!==t.rotation&&![0,90,180,270].includes(t.rotation))throw TypeError("init.rotation, when provided, must be 0, 90, 180, or 270.");if(!Number.isFinite(t.timestamp))throw TypeError("init.timestamp must be a number.");if(void 0!==t.duration&&(!Number.isFinite(t.duration)||t.duration<0))throw TypeError("init.duration, when provided, must be a non-negative number.");if("u">typeof VideoFrame)return new u(new VideoFrame(e,{timestamp:Math.trunc(t.timestamp*s.SECOND_TO_MICROSECOND_FACTOR),duration:Math.trunc((t.duration??0)*s.SECOND_TO_MICROSECOND_FACTOR)||void 0}),t);let r=0,a=0;if("naturalWidth"in e?(r=e.naturalWidth,a=e.naturalHeight):"videoWidth"in e?(r=e.videoWidth,a=e.videoHeight):"width"in e&&(r=Number(e.width),a=Number(e.height)),!r||!a)throw TypeError("Could not determine dimensions.");let i=new OffscreenCanvas(r,a),n=i.getContext("2d",{alpha:(0,s.isFirefox)(),willReadFrequently:!0});(0,s.assert)(n),n.drawImage(e,0,0),this._data=i,this._layout=null,this.format="RGBX",this.codedWidth=r,this.codedHeight=a,this.rotation=t.rotation??0,this.timestamp=t.timestamp,this.duration=t.duration??0,this.colorSpace=new h({matrix:"rgb",primaries:"bt709",transfer:"iec61966-2-1",fullRange:!0})}else throw TypeError("Invalid data type: Must be a BufferSource or CanvasImageSource.");l?.register(this,{type:"video",data:this._data},this)}clone(){if(this._closed)throw Error("VideoSample is closed.");return((0,s.assert)(null!==this._data),m(this._data))?new u(this._data.clone(),{timestamp:this.timestamp,duration:this.duration,rotation:this.rotation}):this._data instanceof Uint8Array?((0,s.assert)(this._layout),new u(this._data,{format:this.format,layout:this._layout,codedWidth:this.codedWidth,codedHeight:this.codedHeight,timestamp:this.timestamp,duration:this.duration,colorSpace:this.colorSpace,rotation:this.rotation})):new u(this._data,{format:this.format,codedWidth:this.codedWidth,codedHeight:this.codedHeight,timestamp:this.timestamp,duration:this.duration,colorSpace:this.colorSpace,rotation:this.rotation})}close(){this._closed||(l?.unregister(this),m(this._data)?this._data.close():this._data=null,this._closed=!0)}allocationSize(e={}){if(g(e),this._closed)throw Error("VideoSample is closed.");if(null===this.format)throw Error("Cannot get allocation size when format is null. Sorry!");if((0,s.assert)(null!==this._data),!m(this._data)&&(e.colorSpace||e.format&&e.format!==this.format||e.layout||e.rect)){let t=this.toVideoFrame(),r=t.allocationSize(e);return t.close(),r}return m(this._data)?this._data.allocationSize(e):this._data instanceof Uint8Array?this._data.byteLength:this.codedWidth*this.codedHeight*4}async copyTo(e,t={}){if(!(0,s.isAllowSharedBufferSource)(e))throw TypeError("destination must be an ArrayBuffer or an ArrayBuffer view.");if(g(t),this._closed)throw Error("VideoSample is closed.");if(null===this.format)throw Error("Cannot copy video sample data when format is null. Sorry!");if((0,s.assert)(null!==this._data),!m(this._data)&&(t.colorSpace||t.format&&t.format!==this.format||t.layout||t.rect)){let r=this.toVideoFrame(),a=await r.copyTo(e,t);return r.close(),a}if(m(this._data))return this._data.copyTo(e,t);if(this._data instanceof Uint8Array)return(0,s.assert)(this._layout),(0,s.toUint8Array)(e).set(this._data),this._layout;{let t=this._data.getContext("2d");(0,s.assert)(t);let r=t.getImageData(0,0,this.codedWidth,this.codedHeight);return(0,s.toUint8Array)(e).set(r.data),[{offset:0,stride:4*this.codedWidth}]}}toVideoFrame(){if(this._closed)throw Error("VideoSample is closed.");return((0,s.assert)(null!==this._data),m(this._data))?new VideoFrame(this._data,{timestamp:this.microsecondTimestamp,duration:this.microsecondDuration||void 0}):this._data instanceof Uint8Array?new VideoFrame(this._data,{format:this.format,codedWidth:this.codedWidth,codedHeight:this.codedHeight,timestamp:this.microsecondTimestamp,duration:this.microsecondDuration||void 0,colorSpace:this.colorSpace}):new VideoFrame(this._data,{timestamp:this.microsecondTimestamp,duration:this.microsecondDuration||void 0})}draw(e,t,r,a,i,s,n,o,l){let c=0,d=0,u=this.displayWidth,h=this.displayHeight,m=0,p=0,f=this.displayWidth,g=this.displayHeight;if(void 0!==s?(c=t,d=r,u=a,h=i,m=s,p=n,void 0!==o?(f=o,g=l):(f=u,g=h)):(m=t,p=r,void 0!==a&&(f=a,g=i)),!("u">typeof CanvasRenderingContext2D&&e instanceof CanvasRenderingContext2D||"u">typeof OffscreenCanvasRenderingContext2D&&e instanceof OffscreenCanvasRenderingContext2D))throw TypeError("context must be a CanvasRenderingContext2D or OffscreenCanvasRenderingContext2D.");if(!Number.isFinite(c))throw TypeError("sx must be a number.");if(!Number.isFinite(d))throw TypeError("sy must be a number.");if(!Number.isFinite(u)||u<0)throw TypeError("sWidth must be a non-negative number.");if(!Number.isFinite(h)||h<0)throw TypeError("sHeight must be a non-negative number.");if(!Number.isFinite(m))throw TypeError("dx must be a number.");if(!Number.isFinite(p))throw TypeError("dy must be a number.");if(!Number.isFinite(f)||f<0)throw TypeError("dWidth must be a non-negative number.");if(!Number.isFinite(g)||g<0)throw TypeError("dHeight must be a non-negative number.");if(this._closed)throw Error("VideoSample is closed.");({sx:c,sy:d,sWidth:u,sHeight:h}=this._rotateSourceRegion(c,d,u,h,this.rotation));let k=this.toCanvasImageSource();e.save();let b=m+f/2,y=p+g/2;e.translate(b,y),e.rotate(this.rotation*Math.PI/180);let S=this.rotation%180==0?1:f/g;e.scale(1/S,S),e.drawImage(k,c,d,u,h,-f/2,-g/2,f,g),e.restore()}drawWithFit(e,t){let r,a,i,s;if(!("u">typeof CanvasRenderingContext2D&&e instanceof CanvasRenderingContext2D||"u">typeof OffscreenCanvasRenderingContext2D&&e instanceof OffscreenCanvasRenderingContext2D))throw TypeError("context must be a CanvasRenderingContext2D or OffscreenCanvasRenderingContext2D.");if(!t||"object"!=typeof t)throw TypeError("options must be an object.");if(!["fill","contain","cover"].includes(t.fit))throw TypeError("options.fit must be 'fill', 'contain', or 'cover'.");if(void 0!==t.rotation&&![0,90,180,270].includes(t.rotation))throw TypeError("options.rotation, when provided, must be 0, 90, 180, or 270.");void 0!==t.crop&&f(t.crop,"options.");let n=e.canvas.width,o=e.canvas.height,l=t.rotation??this.rotation,[c,d]=l%180==0?[this.codedWidth,this.codedHeight]:[this.codedHeight,this.codedWidth];t.crop&&p(t.crop,c,d);let{sx:u,sy:h,sWidth:m,sHeight:g}=this._rotateSourceRegion(t.crop?.left??0,t.crop?.top??0,t.crop?.width??c,t.crop?.height??d,l);if("fill"===t.fit)r=0,a=0,i=n,s=o;else{let[e,l]=t.crop?[t.crop.width,t.crop.height]:[c,d],u="contain"===t.fit?Math.min(n/e,o/l):Math.max(n/e,o/l);i=e*u,s=l*u,r=(n-i)/2,a=(o-s)/2}e.save();let k=l%180==0?1:i/s;e.translate(n/2,o/2),e.rotate(l*Math.PI/180),e.scale(1/k,k),e.translate(-n/2,-o/2),e.drawImage(this.toCanvasImageSource(),u,h,m,g,r,a,i,s),e.restore()}_rotateSourceRegion(e,t,r,a,i){return 90===i?[e,t,r,a]=[t,this.codedHeight-e-r,a,r]:180===i?[e,t]=[this.codedWidth-e-r,this.codedHeight-t-a]:270===i&&([e,t,r,a]=[this.codedWidth-t-a,e,a,r]),{sx:e,sy:t,sWidth:r,sHeight:a}}toCanvasImageSource(){if(this._closed)throw Error("VideoSample is closed.");if((0,s.assert)(null!==this._data),!(this._data instanceof Uint8Array))return this._data;{let e=this.toVideoFrame();return queueMicrotask(()=>e.close()),e}}setRotation(e){if(![0,90,180,270].includes(e))throw TypeError("newRotation must be 0, 90, 180, or 270.");this.rotation=e}setTimestamp(e){if(!Number.isFinite(e))throw TypeError("newTimestamp must be a number.");this.timestamp=e}setDuration(e){if(!Number.isFinite(e)||e<0)throw TypeError("newDuration must be a non-negative number.");this.duration=e}[Symbol.dispose](){this.close()}}class h{constructor(e){this.primaries=e?.primaries??null,this.transfer=e?.transfer??null,this.matrix=e?.matrix??null,this.fullRange=e?.fullRange??null}toJSON(){return{primaries:this.primaries,transfer:this.transfer,matrix:this.matrix,fullRange:this.fullRange}}}let m=e=>"u">typeof VideoFrame&&e instanceof VideoFrame,p=(e,t,r)=>{e.left=Math.min(e.left,t),e.top=Math.min(e.top,r),e.width=Math.min(e.width,t-e.left),e.height=Math.min(e.height,r-e.top),(0,s.assert)(e.width>=0),(0,s.assert)(e.height>=0)},f=(e,t)=>{if(!e||"object"!=typeof e)throw TypeError(t+"crop, when provided, must be an object.");if(!Number.isInteger(e.left)||e.left<0)throw TypeError(t+"crop.left must be a non-negative integer.");if(!Number.isInteger(e.top)||e.top<0)throw TypeError(t+"crop.top must be a non-negative integer.");if(!Number.isInteger(e.width)||e.width<0)throw TypeError(t+"crop.width must be a non-negative integer.");if(!Number.isInteger(e.height)||e.height<0)throw TypeError(t+"crop.height must be a non-negative integer.")},g=e=>{if(!e||"object"!=typeof e)throw TypeError("options must be an object.");if(void 0!==e.colorSpace&&!["display-p3","srgb"].includes(e.colorSpace))throw TypeError("options.colorSpace, when provided, must be 'display-p3' or 'srgb'.");if(void 0!==e.format&&"string"!=typeof e.format)throw TypeError("options.format, when provided, must be a string.");if(void 0!==e.layout){if(!Array.isArray(e.layout))throw TypeError("options.layout, when provided, must be an array.");for(let t of e.layout){if(!t||"object"!=typeof t)throw TypeError("Each entry in options.layout must be an object.");if(!Number.isInteger(t.offset)||t.offset<0)throw TypeError("plane.offset must be a non-negative integer.");if(!Number.isInteger(t.stride)||t.stride<0)throw TypeError("plane.stride must be a non-negative integer.")}}if(void 0!==e.rect){if(!e.rect||"object"!=typeof e.rect)throw TypeError("options.rect, when provided, must be an object.");if(void 0!==e.rect.x&&(!Number.isInteger(e.rect.x)||e.rect.x<0))throw TypeError("options.rect.x, when provided, must be a non-negative integer.");if(void 0!==e.rect.y&&(!Number.isInteger(e.rect.y)||e.rect.y<0))throw TypeError("options.rect.y, when provided, must be a non-negative integer.");if(void 0!==e.rect.width&&(!Number.isInteger(e.rect.width)||e.rect.width<0))throw TypeError("options.rect.width, when provided, must be a non-negative integer.");if(void 0!==e.rect.height&&(!Number.isInteger(e.rect.height)||e.rect.height<0))throw TypeError("options.rect.height, when provided, must be a non-negative integer.")}},k=(e,t,r)=>{let a=b(e),i=[],s=0;for(let e of a){let a=Math.ceil(t/e.widthDivisor),n=Math.ceil(r/e.heightDivisor),o=a*e.sampleBytes,l=o*n;i.push({offset:s,stride:o}),s+=l}return i},b=e=>{let t=(e,t,r,a,i)=>{let s=[{sampleBytes:e,widthDivisor:1,heightDivisor:1},{sampleBytes:t,widthDivisor:r,heightDivisor:a},{sampleBytes:t,widthDivisor:r,heightDivisor:a}];return i&&s.push({sampleBytes:e,widthDivisor:1,heightDivisor:1}),s};switch(e){case"I420":return t(1,1,2,2,!1);case"I420P10":case"I420P12":return t(2,2,2,2,!1);case"I420A":return t(1,1,2,2,!0);case"I420AP10":case"I420AP12":return t(2,2,2,2,!0);case"I422":return t(1,1,2,1,!1);case"I422P10":case"I422P12":return t(2,2,2,1,!1);case"I422A":return t(1,1,2,1,!0);case"I422AP10":case"I422AP12":return t(2,2,2,1,!0);case"I444":return t(1,1,1,1,!1);case"I444P10":case"I444P12":return t(2,2,1,1,!1);case"I444A":return t(1,1,1,1,!0);case"I444AP10":case"I444AP12":return t(2,2,1,1,!0);case"NV12":return[{sampleBytes:1,widthDivisor:1,heightDivisor:1},{sampleBytes:2,widthDivisor:2,heightDivisor:2}];case"RGBA":case"RGBX":case"BGRA":case"BGRX":return[{sampleBytes:4,widthDivisor:1,heightDivisor:1}];default:(0,s.assertNever)(e),(0,s.assert)(!1)}},y=new Set(["f32","f32-planar","s16","s16-planar","s32","s32-planar","u8","u8-planar"]);class S{get microsecondTimestamp(){return Math.trunc(s.SECOND_TO_MICROSECOND_FACTOR*this.timestamp)}get microsecondDuration(){return Math.trunc(s.SECOND_TO_MICROSECOND_FACTOR*this.duration)}constructor(e){if(this._closed=!1,E(e)){if(null===e.format)throw TypeError("AudioData with null format is not supported.");this._data=e,this.format=e.format,this.sampleRate=e.sampleRate,this.numberOfFrames=e.numberOfFrames,this.numberOfChannels=e.numberOfChannels,this.timestamp=e.timestamp/1e6,this.duration=e.numberOfFrames/e.sampleRate}else{let t;if(!e||"object"!=typeof e)throw TypeError("Invalid AudioDataInit: must be an object.");if(!y.has(e.format))throw TypeError("Invalid AudioDataInit: invalid format.");if(!Number.isFinite(e.sampleRate)||e.sampleRate<=0)throw TypeError("Invalid AudioDataInit: sampleRate must be >0.");if(!Number.isInteger(e.numberOfChannels)||0===e.numberOfChannels)throw TypeError("Invalid AudioDataInit: numberOfChannels must be an integer > 0.");if(!Number.isFinite(e?.timestamp))throw TypeError("init.timestamp must be a number.");let r=e.data.byteLength/(T(e.format)*e.numberOfChannels);if(!Number.isInteger(r))throw TypeError("Invalid AudioDataInit: data size is not a multiple of frame size.");if(this.format=e.format,this.sampleRate=e.sampleRate,this.numberOfFrames=r,this.numberOfChannels=e.numberOfChannels,this.timestamp=e.timestamp,this.duration=r/e.sampleRate,e.data instanceof ArrayBuffer)t=new Uint8Array(e.data);else if(ArrayBuffer.isView(e.data))t=new Uint8Array(e.data.buffer,e.data.byteOffset,e.data.byteLength);else throw TypeError("Invalid AudioDataInit: data is not a BufferSource.");let a=this.numberOfFrames*this.numberOfChannels*T(this.format);if(t.byteLength<a)throw TypeError("Invalid AudioDataInit: insufficient data size.");this._data=t}l?.register(this,{type:"audio",data:this._data},this)}allocationSize(e){if(!e||"object"!=typeof e)throw TypeError("options must be an object.");if(!Number.isInteger(e.planeIndex)||e.planeIndex<0)throw TypeError("planeIndex must be a non-negative integer.");if(void 0!==e.format&&!y.has(e.format))throw TypeError("Invalid format.");if(void 0!==e.frameOffset&&(!Number.isInteger(e.frameOffset)||e.frameOffset<0))throw TypeError("frameOffset must be a non-negative integer.");if(void 0!==e.frameCount&&(!Number.isInteger(e.frameCount)||e.frameCount<0))throw TypeError("frameCount must be a non-negative integer.");if(this._closed)throw Error("AudioSample is closed.");let t=e.format??this.format,r=e.frameOffset??0;if(r>=this.numberOfFrames)throw RangeError("frameOffset out of range");let a=void 0!==e.frameCount?e.frameCount:this.numberOfFrames-r;if(a>this.numberOfFrames-r)throw RangeError("frameCount out of range");let i=T(t),s=I(t);if(s&&e.planeIndex>=this.numberOfChannels||!s&&0!==e.planeIndex)throw RangeError("planeIndex out of range");return(s?a:a*this.numberOfChannels)*i}copyTo(e,t){if(!(0,s.isAllowSharedBufferSource)(e))throw TypeError("destination must be an ArrayBuffer or an ArrayBuffer view.");if(!t||"object"!=typeof t)throw TypeError("options must be an object.");if(!Number.isInteger(t.planeIndex)||t.planeIndex<0)throw TypeError("planeIndex must be a non-negative integer.");if(void 0!==t.format&&!y.has(t.format))throw TypeError("Invalid format.");if(void 0!==t.frameOffset&&(!Number.isInteger(t.frameOffset)||t.frameOffset<0))throw TypeError("frameOffset must be a non-negative integer.");if(void 0!==t.frameCount&&(!Number.isInteger(t.frameCount)||t.frameCount<0))throw TypeError("frameCount must be a non-negative integer.");if(this._closed)throw Error("AudioSample is closed.");let{planeIndex:r,format:a,frameCount:i,frameOffset:n}=t,o=this.format,l=a??this.format;if(!l)throw Error("Destination format not determined");let c=this.numberOfFrames,d=this.numberOfChannels,u=n??0;if(u>=c)throw RangeError("frameOffset out of range");let h=void 0!==i?i:c-u;if(h>c-u)throw RangeError("frameCount out of range");let m=T(l),p=I(l);if(p&&r>=d||!p&&0!==r)throw RangeError("planeIndex out of range");let f=p?h:h*d;if(e.byteLength<f*m)throw RangeError("Destination buffer is too small");let g=(0,s.toDataView)(e),k=x(l);if(E(this._data))(0,s.isWebKit)()&&d>2&&l!==o?P(this._data,g,o,l,d,r,u,h):this._data.copyTo(e,{planeIndex:r,frameOffset:u,frameCount:h,format:l});else{let e=this._data,t=(0,s.toDataView)(e),a=w(o),i=T(o),n=I(o);for(let e=0;e<h;e++)if(p)k(g,e*m,a(t,n?(r*c+(e+u))*i:((e+u)*d+r)*i));else for(let r=0;r<d;r++)k(g,(e*d+r)*m,a(t,n?(r*c+(e+u))*i:((e+u)*d+r)*i))}}clone(){if(this._closed)throw Error("AudioSample is closed.");if(!E(this._data))return new S({format:this.format,sampleRate:this.sampleRate,numberOfFrames:this.numberOfFrames,numberOfChannels:this.numberOfChannels,timestamp:this.timestamp,data:this._data});{let e=new S(this._data.clone());return e.setTimestamp(this.timestamp),e}}close(){this._closed||(l?.unregister(this),E(this._data)?this._data.close():this._data=new Uint8Array(0),this._closed=!0)}toAudioData(){if(this._closed)throw Error("AudioSample is closed.");if(!E(this._data))return new AudioData({format:this.format,sampleRate:this.sampleRate,numberOfFrames:this.numberOfFrames,numberOfChannels:this.numberOfChannels,timestamp:this.microsecondTimestamp,data:this._data.buffer instanceof ArrayBuffer?this._data.buffer:this._data.slice()});if(this._data.timestamp===this.microsecondTimestamp)return this._data.clone();if(I(this.format)){let e=this.allocationSize({planeIndex:0,format:this.format}),t=new ArrayBuffer(e*this.numberOfChannels);for(let r=0;r<this.numberOfChannels;r++)this.copyTo(new Uint8Array(t,r*e,e),{planeIndex:r,format:this.format});return new AudioData({format:this.format,sampleRate:this.sampleRate,numberOfFrames:this.numberOfFrames,numberOfChannels:this.numberOfChannels,timestamp:this.microsecondTimestamp,data:t})}{let e=new ArrayBuffer(this.allocationSize({planeIndex:0,format:this.format}));return this.copyTo(e,{planeIndex:0,format:this.format}),new AudioData({format:this.format,sampleRate:this.sampleRate,numberOfFrames:this.numberOfFrames,numberOfChannels:this.numberOfChannels,timestamp:this.microsecondTimestamp,data:e})}}toAudioBuffer(){if(this._closed)throw Error("AudioSample is closed.");let e=new AudioBuffer({numberOfChannels:this.numberOfChannels,length:this.numberOfFrames,sampleRate:this.sampleRate}),t=new Float32Array(this.allocationSize({planeIndex:0,format:"f32-planar"})/4);for(let r=0;r<this.numberOfChannels;r++)this.copyTo(t,{planeIndex:r,format:"f32-planar"}),e.copyToChannel(t,r);return e}setTimestamp(e){if(!Number.isFinite(e))throw TypeError("newTimestamp must be a number.");this.timestamp=e}[Symbol.dispose](){this.close()}static*_fromAudioBuffer(e,t){if(!(e instanceof AudioBuffer))throw TypeError("audioBuffer must be an AudioBuffer.");let r=e.numberOfChannels,a=e.sampleRate,i=e.length,s=Math.floor(24e4/r),n=0,o=i;for(;o>0;){let i=Math.min(s,o),l=new Float32Array(r*i);for(let t=0;t<r;t++)e.copyFromChannel(l.subarray(t*i,(t+1)*i),t,n);yield new S({format:"f32-planar",sampleRate:a,numberOfFrames:i,numberOfChannels:r,timestamp:t+n/a,data:l}),n+=i,o-=i}}static fromAudioBuffer(e,t){if(!(e instanceof AudioBuffer))throw TypeError("audioBuffer must be an AudioBuffer.");let r=e.numberOfChannels,a=e.sampleRate,i=e.length,s=Math.floor(24e4/r),n=0,o=i,l=[];for(;o>0;){let i=Math.min(s,o),c=new Float32Array(r*i);for(let t=0;t<r;t++)e.copyFromChannel(c.subarray(t*i,(t+1)*i),t,n);let d=new S({format:"f32-planar",sampleRate:a,numberOfFrames:i,numberOfChannels:r,timestamp:t+n/a,data:c});l.push(d),n+=i,o-=i}return l}}let T=e=>{switch(e){case"u8":case"u8-planar":return 1;case"s16":case"s16-planar":return 2;case"s32":case"s32-planar":case"f32":case"f32-planar":return 4;default:throw Error("Unknown AudioSampleFormat")}},I=e=>{switch(e){case"u8-planar":case"s16-planar":case"s32-planar":case"f32-planar":return!0;default:return!1}},w=e=>{switch(e){case"u8":case"u8-planar":return(e,t)=>(e.getUint8(t)-128)/128;case"s16":case"s16-planar":return(e,t)=>e.getInt16(t,!0)/32768;case"s32":case"s32-planar":return(e,t)=>e.getInt32(t,!0)/0x80000000;case"f32":case"f32-planar":return(e,t)=>e.getFloat32(t,!0)}},x=e=>{switch(e){case"u8":case"u8-planar":return(e,t,r)=>e.setUint8(t,(0,s.clamp)((r+1)*127.5,0,255));case"s16":case"s16-planar":return(e,t,r)=>e.setInt16(t,(0,s.clamp)(Math.round(32767*r),-32768,32767),!0);case"s32":case"s32-planar":return(e,t,r)=>e.setInt32(t,(0,s.clamp)(Math.round(0x7fffffff*r),-0x80000000,0x7fffffff),!0);case"f32":case"f32-planar":return(e,t,r)=>e.setFloat32(t,r,!0)}},E=e=>"u">typeof AudioData&&e instanceof AudioData,P=(e,t,r,a,i,n,o,l)=>{let c=w(r),d=x(a),u=T(r),h=T(a),m=I(r);if(I(a))if(m){let a=new ArrayBuffer(l*u),i=(0,s.toDataView)(a);e.copyTo(a,{planeIndex:n,frameOffset:o,frameCount:l,format:r});for(let e=0;e<l;e++){let r=e*u;d(t,e*h,c(i,r))}}else{let a=new ArrayBuffer(l*i*u),m=(0,s.toDataView)(a);e.copyTo(a,{planeIndex:0,frameOffset:o,frameCount:l,format:r});for(let e=0;e<l;e++){let r=(e*i+n)*u;d(t,e*h,c(m,r))}}else if(m){let a=new ArrayBuffer(l*u),n=(0,s.toDataView)(a);for(let s=0;s<i;s++){e.copyTo(a,{planeIndex:s,frameOffset:o,frameCount:l,format:r});for(let e=0;e<l;e++){let r=e*u;d(t,(e*i+s)*h,c(n,r))}}}else{let a=new ArrayBuffer(l*i*u),n=(0,s.toDataView)(a);e.copyTo(a,{planeIndex:0,frameOffset:o,frameCount:l,format:r});for(let e=0;e<l;e++)for(let r=0;r<i;r++){let a=e*i+r,s=a*u;d(t,a*h,c(n,s))}}}},{"./misc.js":"jrq2g","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],fHhRy:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"buildIsobmffMimeType",()=>s);let s=e=>{let t=(e.hasVideo?"video/":e.hasAudio?"audio/":"application/")+(e.isQuickTime?"quicktime":"mp4");if(e.codecStrings.length>0){let r=[...new Set(e.codecStrings)];t+=`; codecs="${r.join(", ")}"`}return t}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"8zjcB":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"MIN_BOX_HEADER_SIZE",()=>l),i.export(r,"MAX_BOX_HEADER_SIZE",()=>c),i.export(r,"readBoxHeader",()=>d),i.export(r,"readFixed_16_16",()=>u),i.export(r,"readFixed_2_30",()=>h),i.export(r,"readIsomVariableInteger",()=>m),i.export(r,"readMetadataStringShort",()=>p),i.export(r,"readDataBox",()=>f);var s=e("../metadata.js"),n=e("../misc.js"),o=e("../reader.js");let l=8,c=16,d=e=>{let t=(0,o.readU32Be)(e),r=(0,o.readAscii)(e,4),a=8;1===t&&(t=(0,o.readU64Be)(e),a=16);let i=t-a;return i<0?null:{name:r,totalSize:t,headerSize:a,contentSize:i}},u=e=>(0,o.readI32Be)(e)/65536,h=e=>(0,o.readI32Be)(e)/0x40000000,m=e=>{let t=0;for(let r=0;r<4;r++){t<<=7;let r=(0,o.readU8)(e);if(t|=127&r,(128&r)==0)break}return t},p=e=>{let t=(0,o.readU16Be)(e);return e.skip(2),t=Math.min(t,e.remainingLength),n.textDecoder.decode((0,o.readBytes)(e,t))},f=e=>{let t=d(e);if(!t||"data"!==t.name||e.remainingLength<8)return null;let r=(0,o.readU32Be)(e);e.skip(4);let a=(0,o.readBytes)(e,t.contentSize-8);switch(r){case 1:return n.textDecoder.decode(a);case 2:return new TextDecoder("utf-16be").decode(a);case 13:return new(0,s.RichImageData)(a,"image/jpeg");case 14:return new(0,s.RichImageData)(a,"image/png");case 27:return new(0,s.RichImageData)(a,"image/bmp");default:return a}}},{"../metadata.js":"1RzS5","../misc.js":"jrq2g","../reader.js":"6AkKg","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"1RzS5":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"RichImageData",()=>s),i.export(r,"AttachedFile",()=>n),i.export(r,"validateMetadataTags",()=>o),i.export(r,"metadataTagsAreEmpty",()=>l),i.export(r,"DEFAULT_TRACK_DISPOSITION",()=>c),i.export(r,"validateTrackDisposition",()=>d);class s{constructor(e,t){if(this.data=e,this.mimeType=t,!(e instanceof Uint8Array))throw TypeError("data must be a Uint8Array.");if("string"!=typeof t)throw TypeError("mimeType must be a string.")}}class n{constructor(e,t,r,a){if(this.data=e,this.mimeType=t,this.name=r,this.description=a,!(e instanceof Uint8Array))throw TypeError("data must be a Uint8Array.");if(void 0!==t&&"string"!=typeof t)throw TypeError("mimeType, when provided, must be a string.");if(void 0!==r&&"string"!=typeof r)throw TypeError("name, when provided, must be a string.");if(void 0!==a&&"string"!=typeof a)throw TypeError("description, when provided, must be a string.")}}let o=e=>{if(!e||"object"!=typeof e)throw TypeError("tags must be an object.");if(void 0!==e.title&&"string"!=typeof e.title)throw TypeError("tags.title, when provided, must be a string.");if(void 0!==e.description&&"string"!=typeof e.description)throw TypeError("tags.description, when provided, must be a string.");if(void 0!==e.artist&&"string"!=typeof e.artist)throw TypeError("tags.artist, when provided, must be a string.");if(void 0!==e.album&&"string"!=typeof e.album)throw TypeError("tags.album, when provided, must be a string.");if(void 0!==e.albumArtist&&"string"!=typeof e.albumArtist)throw TypeError("tags.albumArtist, when provided, must be a string.");if(void 0!==e.trackNumber&&(!Number.isInteger(e.trackNumber)||e.trackNumber<=0))throw TypeError("tags.trackNumber, when provided, must be a positive integer.");if(void 0!==e.tracksTotal&&(!Number.isInteger(e.tracksTotal)||e.tracksTotal<=0))throw TypeError("tags.tracksTotal, when provided, must be a positive integer.");if(void 0!==e.discNumber&&(!Number.isInteger(e.discNumber)||e.discNumber<=0))throw TypeError("tags.discNumber, when provided, must be a positive integer.");if(void 0!==e.discsTotal&&(!Number.isInteger(e.discsTotal)||e.discsTotal<=0))throw TypeError("tags.discsTotal, when provided, must be a positive integer.");if(void 0!==e.genre&&"string"!=typeof e.genre)throw TypeError("tags.genre, when provided, must be a string.");if(void 0!==e.date&&(!(e.date instanceof Date)||Number.isNaN(e.date.getTime())))throw TypeError("tags.date, when provided, must be a valid Date.");if(void 0!==e.lyrics&&"string"!=typeof e.lyrics)throw TypeError("tags.lyrics, when provided, must be a string.");if(void 0!==e.images){if(!Array.isArray(e.images))throw TypeError("tags.images, when provided, must be an array.");for(let t of e.images){if(!t||"object"!=typeof t)throw TypeError("Each image in tags.images must be an object.");if(!(t.data instanceof Uint8Array))throw TypeError("Each image.data must be a Uint8Array.");if("string"!=typeof t.mimeType)throw TypeError("Each image.mimeType must be a string.");if(!["coverFront","coverBack","unknown"].includes(t.kind))throw TypeError("Each image.kind must be 'coverFront', 'coverBack', or 'unknown'.")}}if(void 0!==e.comment&&"string"!=typeof e.comment)throw TypeError("tags.comment, when provided, must be a string.");if(void 0!==e.raw){if(!e.raw||"object"!=typeof e.raw)throw TypeError("tags.raw, when provided, must be an object.");for(let t of Object.values(e.raw))if(null!==t&&"string"!=typeof t&&!(t instanceof Uint8Array)&&!(t instanceof s)&&!(t instanceof n))throw TypeError("Each value in tags.raw must be a string, Uint8Array, RichImageData, AttachedFile, or null.")}},l=e=>void 0===e.title&&void 0===e.description&&void 0===e.artist&&void 0===e.album&&void 0===e.albumArtist&&void 0===e.trackNumber&&void 0===e.tracksTotal&&void 0===e.discNumber&&void 0===e.discsTotal&&void 0===e.genre&&void 0===e.date&&void 0===e.lyrics&&(!e.images||0===e.images.length)&&void 0===e.comment&&(void 0===e.raw||0===Object.keys(e.raw).length),c={default:!0,forced:!1,original:!1,commentary:!1,hearingImpaired:!1,visuallyImpaired:!1},d=e=>{if(!e||"object"!=typeof e)throw TypeError("disposition must be an object.");if(void 0!==e.default&&"boolean"!=typeof e.default)throw TypeError("disposition.default must be a boolean.");if(void 0!==e.forced&&"boolean"!=typeof e.forced)throw TypeError("disposition.forced must be a boolean.");if(void 0!==e.original&&"boolean"!=typeof e.original)throw TypeError("disposition.original must be a boolean.");if(void 0!==e.commentary&&"boolean"!=typeof e.commentary)throw TypeError("disposition.commentary must be a boolean.");if(void 0!==e.hearingImpaired&&"boolean"!=typeof e.hearingImpaired)throw TypeError("disposition.hearingImpaired must be a boolean.");if(void 0!==e.visuallyImpaired&&"boolean"!=typeof e.visuallyImpaired)throw TypeError("disposition.visuallyImpaired must be a boolean.")}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"4qt3Y":[function(e,t,r,a){var i,s,n=e("@parcel/transformer-js/src/esmodule-helpers.js");n.defineInteropFlag(r),n.export(r,"EBMLFloat32",()=>c),n.export(r,"EBMLFloat64",()=>d),n.export(r,"EBMLSignedInt",()=>u),n.export(r,"EBMLUnicodeString",()=>h),n.export(r,"EBMLId",()=>s),n.export(r,"LEVEL_0_EBML_IDS",()=>m),n.export(r,"LEVEL_1_EBML_IDS",()=>p),n.export(r,"LEVEL_0_AND_1_EBML_IDS",()=>f),n.export(r,"measureUnsignedInt",()=>g),n.export(r,"measureUnsignedBigInt",()=>k),n.export(r,"measureSignedInt",()=>b),n.export(r,"measureVarInt",()=>y),n.export(r,"EBMLWriter",()=>S),n.export(r,"MAX_VAR_INT_SIZE",()=>T),n.export(r,"MIN_HEADER_SIZE",()=>I),n.export(r,"MAX_HEADER_SIZE",()=>w),n.export(r,"readVarIntSize",()=>x),n.export(r,"readVarInt",()=>E),n.export(r,"readUnsignedInt",()=>P),n.export(r,"readUnsignedBigInt",()=>v),n.export(r,"readSignedInt",()=>C),n.export(r,"readElementId",()=>A),n.export(r,"readElementSize",()=>B),n.export(r,"readElementHeader",()=>_),n.export(r,"readAsciiString",()=>D),n.export(r,"readUnicodeString",()=>M),n.export(r,"readFloat",()=>F),n.export(r,"searchForNextElementId",()=>R),n.export(r,"resync",()=>U),n.export(r,"CODEC_STRING_MAP",()=>L),n.export(r,"assertDefinedSize",()=>N);var o=e("../misc.js"),l=e("../reader.js");class c{constructor(e){this.value=e}}class d{constructor(e){this.value=e}}class u{constructor(e){this.value=e}}class h{constructor(e){this.value=e}}(i=s||(s={}))[i.EBML=0x1a45dfa3]="EBML",i[i.EBMLVersion=17030]="EBMLVersion",i[i.EBMLReadVersion=17143]="EBMLReadVersion",i[i.EBMLMaxIDLength=17138]="EBMLMaxIDLength",i[i.EBMLMaxSizeLength=17139]="EBMLMaxSizeLength",i[i.DocType=17026]="DocType",i[i.DocTypeVersion=17031]="DocTypeVersion",i[i.DocTypeReadVersion=17029]="DocTypeReadVersion",i[i.Void=236]="Void",i[i.Segment=0x18538067]="Segment",i[i.SeekHead=0x114d9b74]="SeekHead",i[i.Seek=19899]="Seek",i[i.SeekID=21419]="SeekID",i[i.SeekPosition=21420]="SeekPosition",i[i.Duration=17545]="Duration",i[i.Info=0x1549a966]="Info",i[i.TimestampScale=2807729]="TimestampScale",i[i.MuxingApp=19840]="MuxingApp",i[i.WritingApp=22337]="WritingApp",i[i.Tracks=0x1654ae6b]="Tracks",i[i.TrackEntry=174]="TrackEntry",i[i.TrackNumber=215]="TrackNumber",i[i.TrackUID=29637]="TrackUID",i[i.TrackType=131]="TrackType",i[i.FlagEnabled=185]="FlagEnabled",i[i.FlagDefault=136]="FlagDefault",i[i.FlagForced=21930]="FlagForced",i[i.FlagOriginal=21934]="FlagOriginal",i[i.FlagHearingImpaired=21931]="FlagHearingImpaired",i[i.FlagVisualImpaired=21932]="FlagVisualImpaired",i[i.FlagCommentary=21935]="FlagCommentary",i[i.FlagLacing=156]="FlagLacing",i[i.Name=21358]="Name",i[i.Language=2274716]="Language",i[i.LanguageBCP47=2274717]="LanguageBCP47",i[i.CodecID=134]="CodecID",i[i.CodecPrivate=25506]="CodecPrivate",i[i.CodecDelay=22186]="CodecDelay",i[i.SeekPreRoll=22203]="SeekPreRoll",i[i.DefaultDuration=2352003]="DefaultDuration",i[i.Video=224]="Video",i[i.PixelWidth=176]="PixelWidth",i[i.PixelHeight=186]="PixelHeight",i[i.AlphaMode=21440]="AlphaMode",i[i.Audio=225]="Audio",i[i.SamplingFrequency=181]="SamplingFrequency",i[i.Channels=159]="Channels",i[i.BitDepth=25188]="BitDepth",i[i.SimpleBlock=163]="SimpleBlock",i[i.BlockGroup=160]="BlockGroup",i[i.Block=161]="Block",i[i.BlockAdditions=30113]="BlockAdditions",i[i.BlockMore=166]="BlockMore",i[i.BlockAdditional=165]="BlockAdditional",i[i.BlockAddID=238]="BlockAddID",i[i.BlockDuration=155]="BlockDuration",i[i.ReferenceBlock=251]="ReferenceBlock",i[i.Cluster=0x1f43b675]="Cluster",i[i.Timestamp=231]="Timestamp",i[i.Cues=0x1c53bb6b]="Cues",i[i.CuePoint=187]="CuePoint",i[i.CueTime=179]="CueTime",i[i.CueTrackPositions=183]="CueTrackPositions",i[i.CueTrack=247]="CueTrack",i[i.CueClusterPosition=241]="CueClusterPosition",i[i.Colour=21936]="Colour",i[i.MatrixCoefficients=21937]="MatrixCoefficients",i[i.TransferCharacteristics=21946]="TransferCharacteristics",i[i.Primaries=21947]="Primaries",i[i.Range=21945]="Range",i[i.Projection=30320]="Projection",i[i.ProjectionType=30321]="ProjectionType",i[i.ProjectionPoseRoll=30325]="ProjectionPoseRoll",i[i.Attachments=0x1941a469]="Attachments",i[i.AttachedFile=24999]="AttachedFile",i[i.FileDescription=18046]="FileDescription",i[i.FileName=18030]="FileName",i[i.FileMediaType=18016]="FileMediaType",i[i.FileData=18012]="FileData",i[i.FileUID=18094]="FileUID",i[i.Chapters=0x1043a770]="Chapters",i[i.Tags=0x1254c367]="Tags",i[i.Tag=29555]="Tag",i[i.Targets=25536]="Targets",i[i.TargetTypeValue=26826]="TargetTypeValue",i[i.TargetType=25546]="TargetType",i[i.TagTrackUID=25541]="TagTrackUID",i[i.TagEditionUID=25545]="TagEditionUID",i[i.TagChapterUID=25540]="TagChapterUID",i[i.TagAttachmentUID=25542]="TagAttachmentUID",i[i.SimpleTag=26568]="SimpleTag",i[i.TagName=17827]="TagName",i[i.TagLanguage=17530]="TagLanguage",i[i.TagString=17543]="TagString",i[i.TagBinary=17541]="TagBinary",i[i.ContentEncodings=28032]="ContentEncodings",i[i.ContentEncoding=25152]="ContentEncoding",i[i.ContentEncodingOrder=20529]="ContentEncodingOrder",i[i.ContentEncodingScope=20530]="ContentEncodingScope",i[i.ContentCompression=20532]="ContentCompression",i[i.ContentCompAlgo=16980]="ContentCompAlgo",i[i.ContentCompSettings=16981]="ContentCompSettings",i[i.ContentEncryption=20533]="ContentEncryption";let m=[s.EBML,s.Segment],p=[s.SeekHead,s.Info,s.Cluster,s.Tracks,s.Cues,s.Attachments,s.Chapters,s.Tags],f=[...m,...p],g=e=>{if(e<256)return 1;if(e<65536)return 2;if(e<0x1000000)return 3;if(e<0x100000000)return 4;if(e<0x10000000000)return 5;else return 6},k=e=>{if(e<1n<<8n)return 1;if(e<1n<<16n)return 2;if(e<1n<<24n)return 3;if(e<1n<<32n)return 4;if(e<1n<<40n)return 5;else if(e<1n<<48n)return 6;else if(e<1n<<56n)return 7;else return 8},b=e=>{if(e>=-64&&e<64)return 1;if(e>=-8192&&e<8192)return 2;if(e>=-1048576&&e<1048576)return 3;if(e>=-0x8000000&&e<0x8000000)return 4;if(e>=-0x400000000&&e<0x400000000)return 5;else return 6},y=e=>{if(e<127)return 1;if(e<16383)return 2;if(e<2097151)return 3;if(e<0xfffffff)return 4;if(e<0x800000000-1)return 5;else if(e<0x40000000000-1)return 6;else throw Error("EBML varint size not supported "+e)};class S{constructor(e){this.writer=e,this.helper=new Uint8Array(8),this.helperView=new DataView(this.helper.buffer),this.offsets=new WeakMap,this.dataOffsets=new WeakMap}writeByte(e){this.helperView.setUint8(0,e),this.writer.write(this.helper.subarray(0,1))}writeFloat32(e){this.helperView.setFloat32(0,e,!1),this.writer.write(this.helper.subarray(0,4))}writeFloat64(e){this.helperView.setFloat64(0,e,!1),this.writer.write(this.helper)}writeUnsignedInt(e,t=g(e)){let r=0;switch(t){case 6:this.helperView.setUint8(r++,e/0x10000000000|0);case 5:this.helperView.setUint8(r++,e/0x100000000|0);case 4:this.helperView.setUint8(r++,e>>24);case 3:this.helperView.setUint8(r++,e>>16);case 2:this.helperView.setUint8(r++,e>>8);case 1:this.helperView.setUint8(r++,e);break;default:throw Error("Bad unsigned int size "+t)}this.writer.write(this.helper.subarray(0,r))}writeUnsignedBigInt(e,t=k(e)){let r=0;for(let a=t-1;a>=0;a--)this.helperView.setUint8(r++,Number(e>>BigInt(8*a)&255n));this.writer.write(this.helper.subarray(0,r))}writeSignedInt(e,t=b(e)){e<0&&(e+=2**(8*t)),this.writeUnsignedInt(e,t)}writeVarInt(e,t=y(e)){let r=0;switch(t){case 1:this.helperView.setUint8(r++,128|e);break;case 2:this.helperView.setUint8(r++,64|e>>8),this.helperView.setUint8(r++,e);break;case 3:this.helperView.setUint8(r++,32|e>>16),this.helperView.setUint8(r++,e>>8),this.helperView.setUint8(r++,e);break;case 4:this.helperView.setUint8(r++,16|e>>24),this.helperView.setUint8(r++,e>>16),this.helperView.setUint8(r++,e>>8),this.helperView.setUint8(r++,e);break;case 5:this.helperView.setUint8(r++,8|e/0x100000000&7),this.helperView.setUint8(r++,e>>24),this.helperView.setUint8(r++,e>>16),this.helperView.setUint8(r++,e>>8),this.helperView.setUint8(r++,e);break;case 6:this.helperView.setUint8(r++,4|e/0x10000000000&3),this.helperView.setUint8(r++,e/0x100000000|0),this.helperView.setUint8(r++,e>>24),this.helperView.setUint8(r++,e>>16),this.helperView.setUint8(r++,e>>8),this.helperView.setUint8(r++,e);break;default:throw Error("Bad EBML varint size "+t)}this.writer.write(this.helper.subarray(0,r))}writeAsciiString(e){this.writer.write(new Uint8Array(e.split("").map(e=>e.charCodeAt(0))))}writeEBML(e){if(null!==e)if(e instanceof Uint8Array)this.writer.write(e);else if(Array.isArray(e))for(let t of e)this.writeEBML(t);else if(this.offsets.set(e,this.writer.getPos()),this.writeUnsignedInt(e.id),Array.isArray(e.data)){let t=this.writer.getPos(),r=-1===e.size?1:e.size??4;-1===e.size?this.writeByte(255):this.writer.seek(this.writer.getPos()+r);let a=this.writer.getPos();if(this.dataOffsets.set(e,a),this.writeEBML(e.data),-1!==e.size){let e=this.writer.getPos()-a,i=this.writer.getPos();this.writer.seek(t),this.writeVarInt(e,r),this.writer.seek(i)}}else if("number"==typeof e.data){let t=e.size??g(e.data);this.writeVarInt(t),this.writeUnsignedInt(e.data,t)}else if("bigint"==typeof e.data){let t=e.size??k(e.data);this.writeVarInt(t),this.writeUnsignedBigInt(e.data,t)}else if("string"==typeof e.data)this.writeVarInt(e.data.length),this.writeAsciiString(e.data);else if(e.data instanceof Uint8Array)this.writeVarInt(e.data.byteLength,e.size),this.writer.write(e.data);else if(e.data instanceof c)this.writeVarInt(4),this.writeFloat32(e.data.value);else if(e.data instanceof d)this.writeVarInt(8),this.writeFloat64(e.data.value);else if(e.data instanceof u){let t=e.size??b(e.data.value);this.writeVarInt(t),this.writeSignedInt(e.data.value,t)}else if(e.data instanceof h){let t=o.textEncoder.encode(e.data.value);this.writeVarInt(t.length),this.writer.write(t)}else(0,o.assertNever)(e.data)}}let T=8,I=2,w=16,x=e=>{if(e.remainingLength<1)return null;let t=(0,l.readU8)(e);if(e.skip(-1),0===t)return null;let r=1,a=128;for(;(t&a)==0;)r++,a>>=1;return e.remainingLength<r?null:r},E=e=>{if(e.remainingLength<1)return null;let t=(0,l.readU8)(e);if(0===t)return null;let r=1,a=128;for(;(t&a)==0;)r++,a>>=1;if(e.remainingLength<r-1)return null;let i=t&a-1;for(let t=1;t<r;t++)i*=256,i+=(0,l.readU8)(e);return i},P=(e,t)=>{if(t<1||t>8)throw Error("Bad unsigned int size "+t);let r=0;for(let a=0;a<t;a++)r*=256,r+=(0,l.readU8)(e);return r},v=(e,t)=>{if(t<1)throw Error("Bad unsigned int size "+t);let r=0n;for(let a=0;a<t;a++)r<<=8n,r+=BigInt((0,l.readU8)(e));return r},C=(e,t)=>{let r=P(e,t);return r&1<<8*t-1&&(r-=2**(8*t)),r},A=e=>{let t=x(e);return null===t||e.remainingLength<t?null:P(e,t)},B=e=>{if(e.remainingLength<1)return null;if(255===(0,l.readU8)(e))return;e.skip(-1);let t=E(e);return null===t?null:0x100000000000000!==t?t:void 0},_=e=>{(0,o.assert)(e.remainingLength>=I);let t=A(e);if(null===t)return null;let r=B(e);return null===r?null:{id:t,size:r}},D=(e,t)=>{let r=(0,l.readBytes)(e,t),a=0;for(;a<t&&0!==r[a];)a+=1;return String.fromCharCode(...r.subarray(0,a))},M=(e,t)=>{let r=(0,l.readBytes)(e,t),a=0;for(;a<t&&0!==r[a];)a+=1;return o.textDecoder.decode(r.subarray(0,a))},F=(e,t)=>{if(0===t)return 0;if(4!==t&&8!==t)throw Error("Bad float size "+t);return 4===t?(0,l.readF32Be)(e):(0,l.readF64Be)(e)},R=async(e,t,r,a)=>{let i=new Set(r),s=t;for(;null===a||s<a;){let t=e.requestSliceRange(s,I,w);if(t instanceof Promise&&(t=await t),!t)break;let r=_(t);if(!r)break;if(i.has(r.id))return{pos:s,found:!0};N(r.size),s=t.filePos+r.size}return{pos:null!==a&&a>s?a:s,found:!1}},U=async(e,t,r,a)=>{let i=new Set(r),s=t;for(;s<a;){let t=e.requestSliceRange(s,0,Math.min(65536,a-s));if(t instanceof Promise&&(t=await t),!t||t.length<T)break;for(let e=0;e<t.length-T;e++){t.filePos=s;let e=A(t);if(null!==e&&i.has(e))return s;s++}}return null},L={avc:"V_MPEG4/ISO/AVC",hevc:"V_MPEGH/ISO/HEVC",vp8:"V_VP8",vp9:"V_VP9",av1:"V_AV1",aac:"A_AAC",mp3:"A_MPEG/L3",opus:"A_OPUS",vorbis:"A_VORBIS",flac:"A_FLAC","pcm-u8":"A_PCM/INT/LIT","pcm-s16":"A_PCM/INT/LIT","pcm-s16be":"A_PCM/INT/BIG","pcm-s24":"A_PCM/INT/LIT","pcm-s24be":"A_PCM/INT/BIG","pcm-s32":"A_PCM/INT/LIT","pcm-s32be":"A_PCM/INT/BIG","pcm-f32":"A_PCM/FLOAT/IEEE","pcm-f64":"A_PCM/FLOAT/IEEE",webvtt:"S_TEXT/WEBVTT"};function N(e){if(void 0===e)throw Error("Undefined element size is used in a place where it is not supported.")}},{"../misc.js":"jrq2g","../reader.js":"6AkKg","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],fO0Ln:[function(e,t,r,a){var i,s,n,o,l,c,d=e("@parcel/transformer-js/src/esmodule-helpers.js");d.defineInteropFlag(r),d.export(r,"MatroskaDemuxer",()=>I);var u=e("../codec-data.js"),h=e("../codec.js"),m=e("../demuxer.js"),p=e("../input-track.js"),f=e("../metadata.js"),g=e("../misc.js"),k=e("../packet.js"),b=e("./ebml.js"),y=e("./matroska-misc.js"),S=e("../reader.js");(i=o||(o={}))[i.None=0]="None",i[i.Xiph=1]="Xiph",i[i.FixedSize=2]="FixedSize",i[i.Ebml=3]="Ebml",(s=l||(l={}))[s.Block=1]="Block",s[s.Private=2]="Private",s[s.Next=4]="Next",(n=c||(c={}))[n.Zlib=0]="Zlib",n[n.Bzlib=1]="Bzlib",n[n.lzo1x=2]="lzo1x",n[n.HeaderStripping=3]="HeaderStripping";let T=[{id:b.EBMLId.SeekHead,flag:"seekHeadSeen"},{id:b.EBMLId.Info,flag:"infoSeen"},{id:b.EBMLId.Tracks,flag:"tracksSeen"},{id:b.EBMLId.Cues,flag:"cuesSeen"}];class I extends m.Demuxer{constructor(e){super(e),this.readMetadataPromise=null,this.segments=[],this.currentSegment=null,this.currentTrack=null,this.currentCluster=null,this.currentBlock=null,this.currentBlockAdditional=null,this.currentCueTime=null,this.currentDecodingInstruction=null,this.currentTagTargetIsMovie=!0,this.currentSimpleTagName=null,this.currentAttachedFile=null,this.isWebM=!1,this.reader=e._reader}async computeDuration(){let e=await this.getTracks();return Math.max(0,...await Promise.all(e.map(e=>e.computeDuration())))}async getTracks(){return await this.readMetadata(),this.segments.flatMap(e=>e.tracks.map(e=>e.inputTrack))}async getMimeType(){await this.readMetadata();let e=await this.getTracks(),t=await Promise.all(e.map(e=>e.getCodecParameterString()));return(0,y.buildMatroskaMimeType)({isWebM:this.isWebM,hasVideo:this.segments.some(e=>e.tracks.some(e=>e.info?.type==="video")),hasAudio:this.segments.some(e=>e.tracks.some(e=>e.info?.type==="audio")),codecStrings:t.filter(Boolean)})}async getMetadataTags(){for(let e of(await this.readMetadata(),this.segments))e.metadataTagsCollected||(null!==this.reader.fileSize&&await this.loadSegmentMetadata(e),e.metadataTagsCollected=!0);let e={};for(let t of this.segments)e={...e,...t.metadataTags};return e}readMetadata(){return this.readMetadataPromise??=(async()=>{let e=0;for(;;){let t=this.reader.requestSliceRange(e,b.MIN_HEADER_SIZE,b.MAX_HEADER_SIZE);if(t instanceof Promise&&(t=await t),!t)break;let r=(0,b.readElementHeader)(t);if(!r)break;let a=r.id,i=r.size,s=t.filePos;if(a===b.EBMLId.EBML){(0,b.assertDefinedSize)(i);let e=this.reader.requestSlice(s,i);if(e instanceof Promise&&(e=await e),!e)break;this.readContiguousElements(e)}else if(a===b.EBMLId.Segment){if(await this.readSegment(s,i),void 0===i||null===this.reader.fileSize)break}else if(a===b.EBMLId.Cluster){if(null===this.reader.fileSize)break;void 0===i&&(i=(await (0,b.searchForNextElementId)(this.reader,s,b.LEVEL_0_AND_1_EBML_IDS,this.reader.fileSize)).pos-s);let e=(0,g.last)(this.segments);e&&(e.elementEndPos=s+i)}(0,b.assertDefinedSize)(i),e=s+i}})()}async readSegment(e,t){this.currentSegment={seekHeadSeen:!1,infoSeen:!1,tracksSeen:!1,cuesSeen:!1,tagsSeen:!1,attachmentsSeen:!1,timestampScale:-1,timestampFactor:-1,duration:-1,seekEntries:[],tracks:[],cuePoints:[],dataStartPos:e,elementEndPos:void 0===t?null:e+t,clusterSeekStartPos:e,lastReadCluster:null,metadataTags:{},metadataTagsCollected:!1},this.segments.push(this.currentSegment);let r=e;for(;null===this.currentSegment.elementEndPos||r<this.currentSegment.elementEndPos;){let e=this.reader.requestSliceRange(r,b.MIN_HEADER_SIZE,b.MAX_HEADER_SIZE);if(e instanceof Promise&&(e=await e),!e)break;let t=r,a=(0,b.readElementHeader)(e);if(!a||!b.LEVEL_1_EBML_IDS.includes(a.id)&&a.id!==b.EBMLId.Void){let e=await (0,b.resync)(this.reader,t,b.LEVEL_1_EBML_IDS,Math.min(this.currentSegment.elementEndPos??1/0,t+0xa00000));if(e){r=e;continue}break}let{id:i,size:s}=a,n=e.filePos,o=T.findIndex(e=>e.id===i);if(-1!==o){let e=T[o].flag;this.currentSegment[e]=!0,(0,b.assertDefinedSize)(s);let t=this.reader.requestSlice(n,s);t instanceof Promise&&(t=await t),t&&this.readContiguousElements(t)}else if(i===b.EBMLId.Tags||i===b.EBMLId.Attachments){i===b.EBMLId.Tags?this.currentSegment.tagsSeen=!0:this.currentSegment.attachmentsSeen=!0,(0,b.assertDefinedSize)(s);let e=this.reader.requestSlice(n,s);e instanceof Promise&&(e=await e),e&&this.readContiguousElements(e)}else if(i===b.EBMLId.Cluster){this.currentSegment.clusterSeekStartPos=t;break}if(void 0===s)break;r=n+s}if(this.currentSegment.seekEntries.sort((e,t)=>e.segmentPosition-t.segmentPosition),null!==this.reader.fileSize)for(let t of this.currentSegment.seekEntries){let r=T.find(e=>e.id===t.id);if(!r||this.currentSegment[r.flag])continue;let a=this.reader.requestSliceRange(e+t.segmentPosition,b.MIN_HEADER_SIZE,b.MAX_HEADER_SIZE);if(a instanceof Promise&&(a=await a),!a)continue;let i=(0,b.readElementHeader)(a);if(!i)continue;let{id:s,size:n}=i;if(s!==r.id)continue;(0,b.assertDefinedSize)(n),this.currentSegment[r.flag]=!0;let o=this.reader.requestSlice(a.filePos,n);o instanceof Promise&&(o=await o),o&&this.readContiguousElements(o)}for(let e of(-1===this.currentSegment.timestampScale&&(this.currentSegment.timestampScale=1e6,this.currentSegment.timestampFactor=1e3),this.currentSegment.tracks))null!==e.defaultDurationNs&&(e.defaultDuration=this.currentSegment.timestampFactor*e.defaultDurationNs/1e9);this.currentSegment.tracks.sort((e,t)=>Number(t.disposition.default)-Number(e.disposition.default));let a=new Map(this.currentSegment.tracks.map(e=>[e.id,e]));for(let e of this.currentSegment.cuePoints){let t=a.get(e.trackId);t&&t.cuePoints.push(e)}for(let e of this.currentSegment.tracks){e.cuePoints.sort((e,t)=>e.time-t.time);for(let t=0;t<e.cuePoints.length-1;t++){let r=e.cuePoints[t],a=e.cuePoints[t+1];r.time===a.time&&(e.cuePoints.splice(t+1,1),t--)}}let i=null,s=-1/0;for(let e of this.currentSegment.tracks)e.cuePoints.length>s&&(s=e.cuePoints.length,i=e);for(let e of this.currentSegment.tracks)0===e.cuePoints.length&&(e.cuePoints=i.cuePoints);this.currentSegment=null}async readCluster(e,t){if(t.lastReadCluster?.elementStartPos===e)return t.lastReadCluster;let r=this.reader.requestSliceRange(e,b.MIN_HEADER_SIZE,b.MAX_HEADER_SIZE);r instanceof Promise&&(r=await r),(0,g.assert)(r);let a=(0,b.readElementHeader)(r);(0,g.assert)(a);let i=a.id;(0,g.assert)(i===b.EBMLId.Cluster);let s=a.size,n=r.filePos;void 0===s&&(s=(await (0,b.searchForNextElementId)(this.reader,n,b.LEVEL_0_AND_1_EBML_IDS,t.elementEndPos)).pos-n);let l=this.reader.requestSlice(n,s);l instanceof Promise&&(l=await l);let c={segment:t,elementStartPos:e,elementEndPos:n+s,dataStartPos:n,timestamp:-1,trackData:new Map};for(let[,t]of(this.currentCluster=c,l&&(c.elementEndPos=this.readContiguousElements(l,b.LEVEL_0_AND_1_EBML_IDS)),c.trackData)){let r=t.track;(0,g.assert)(t.blocks.length>0);let a=!1;for(let e=0;e<t.blocks.length;e++){let r=t.blocks[e];r.timestamp+=c.timestamp,a||=r.lacing!==o.None}t.presentationTimestamps=t.blocks.map((e,t)=>({timestamp:e.timestamp,blockIndex:t})).sort((e,t)=>e.timestamp-t.timestamp);for(let e=0;e<t.presentationTimestamps.length;e++){let a=t.presentationTimestamps[e],i=t.blocks[a.blockIndex];null===t.firstKeyFrameTimestamp&&i.isKeyFrame&&(t.firstKeyFrameTimestamp=i.timestamp),e<t.presentationTimestamps.length-1?i.duration=t.presentationTimestamps[e+1].timestamp-i.timestamp:0===i.duration&&null!=r.defaultDuration&&i.lacing===o.None&&(i.duration=r.defaultDuration)}a&&(this.expandLacedBlocks(t.blocks,r),t.presentationTimestamps=t.blocks.map((e,t)=>({timestamp:e.timestamp,blockIndex:t})).sort((e,t)=>e.timestamp-t.timestamp));let i=t.blocks[t.presentationTimestamps[0].blockIndex],s=t.blocks[(0,g.last)(t.presentationTimestamps).blockIndex];t.startTimestamp=i.timestamp,t.endTimestamp=s.timestamp+s.duration;let n=(0,g.binarySearchLessOrEqual)(r.clusterPositionCache,t.startTimestamp,e=>e.startTimestamp);(-1===n||r.clusterPositionCache[n].elementStartPos!==e)&&r.clusterPositionCache.splice(n+1,0,{elementStartPos:c.elementStartPos,startTimestamp:t.startTimestamp})}return t.lastReadCluster=c,c}getTrackDataInCluster(e,t){let r=e.trackData.get(t);if(!r){let a=e.segment.tracks.find(e=>e.id===t);if(!a)return null;r={track:a,startTimestamp:0,endTimestamp:0,firstKeyFrameTimestamp:null,blocks:[],presentationTimestamps:[]},e.trackData.set(t,r)}return r}expandLacedBlocks(e,t){for(let r=0;r<e.length;r++){let a=e[r];if(a.lacing===o.None)continue;a.decoded||(a.data=this.decodeBlockData(t,a.data),a.decoded=!0);let i=S.FileSlice.tempFromBytes(a.data),s=[],n=(0,S.readU8)(i)+1;switch(a.lacing){case o.Xiph:{let e=0;for(let t=0;t<n-1;t++){let t=0;for(;i.bufferPos<i.length;){let r=(0,S.readU8)(i);if(t+=r,r<255){s.push(t),e+=t;break}}}s.push(i.length-(i.bufferPos+e))}break;case o.FixedSize:{let e=Math.floor((i.length-1)/n);for(let t=0;t<n;t++)s.push(e)}break;case o.Ebml:{let e=(0,b.readVarInt)(i);(0,g.assert)(null!==e);let t=e;s.push(t);let r=t;for(let e=1;e<n-1;e++){let e=i.bufferPos,a=(0,b.readVarInt)(i);(0,g.assert)(null!==a),t+=a-((1<<7*(i.bufferPos-e)-1)-1),s.push(t),r+=t}s.push(i.length-(i.bufferPos+r))}break;default:(0,g.assert)(!1)}(0,g.assert)(s.length===n),e.splice(r,1);let l=a.duration||n*(t.defaultDuration??0);for(let t=0;t<n;t++){let c=s[t],d=(0,S.readBytes)(i,c),u=a.timestamp+l*t/n,h=l/n;e.splice(r+t,0,{timestamp:u,duration:h,isKeyFrame:a.isKeyFrame,data:d,lacing:o.None,decoded:!0,mainAdditional:a.mainAdditional})}r+=n,r--}}async loadSegmentMetadata(e){for(let t of e.seekEntries){if((t.id!==b.EBMLId.Tags||e.tagsSeen)&&(t.id!==b.EBMLId.Attachments||e.attachmentsSeen))continue;let r=this.reader.requestSliceRange(e.dataStartPos+t.segmentPosition,b.MIN_HEADER_SIZE,b.MAX_HEADER_SIZE);if(r instanceof Promise&&(r=await r),!r)continue;let a=(0,b.readElementHeader)(r);if(!a||a.id!==t.id)continue;let{size:i}=a;(0,b.assertDefinedSize)(i),(0,g.assert)(!this.currentSegment),this.currentSegment=e;let s=this.reader.requestSlice(r.filePos,i);s instanceof Promise&&(s=await s),s&&this.readContiguousElements(s),this.currentSegment=null,t.id===b.EBMLId.Tags?e.tagsSeen=!0:t.id===b.EBMLId.Attachments&&(e.attachmentsSeen=!0)}}readContiguousElements(e,t){for(;e.remainingLength>=b.MIN_HEADER_SIZE;){let r=e.filePos;if(!this.traverseElement(e,t))return r}return e.filePos}traverseElement(e,t){let r=(0,b.readElementHeader)(e);if(!r||t&&t.includes(r.id))return!1;let{id:a,size:i}=r,s=e.filePos;switch((0,b.assertDefinedSize)(i),a){case b.EBMLId.DocType:this.isWebM="webm"===(0,b.readAsciiString)(e,i);break;case b.EBMLId.Seek:{if(!this.currentSegment)break;let t={id:-1,segmentPosition:-1};this.currentSegment.seekEntries.push(t),this.readContiguousElements(e.slice(s,i)),(-1===t.id||-1===t.segmentPosition)&&this.currentSegment.seekEntries.pop()}break;case b.EBMLId.SeekID:{let t=this.currentSegment?.seekEntries[this.currentSegment.seekEntries.length-1];if(!t)break;t.id=(0,b.readUnsignedInt)(e,i)}break;case b.EBMLId.SeekPosition:{let t=this.currentSegment?.seekEntries[this.currentSegment.seekEntries.length-1];if(!t)break;t.segmentPosition=(0,b.readUnsignedInt)(e,i)}break;case b.EBMLId.TimestampScale:if(!this.currentSegment)break;this.currentSegment.timestampScale=(0,b.readUnsignedInt)(e,i),this.currentSegment.timestampFactor=1e9/this.currentSegment.timestampScale;break;case b.EBMLId.Duration:if(!this.currentSegment)break;this.currentSegment.duration=(0,b.readFloat)(e,i);break;case b.EBMLId.TrackEntry:if(!this.currentSegment||(this.currentTrack={id:-1,segment:this.currentSegment,demuxer:this,clusterPositionCache:[],cuePoints:[],disposition:{...f.DEFAULT_TRACK_DISPOSITION},inputTrack:null,codecId:null,codecPrivate:null,defaultDuration:null,defaultDurationNs:null,name:null,languageCode:g.UNDETERMINED_LANGUAGE,decodingInstructions:[],info:null},this.readContiguousElements(e.slice(s,i)),!this.currentTrack))break;if(this.currentTrack.decodingInstructions.some(e=>e.data?.type!=="decompress"||e.scope!==l.Block||e.data.algorithm!==c.HeaderStripping)&&(console.warn(`Track #${this.currentTrack.id} has an unsupported content encoding; dropping.`),this.currentTrack=null),this.currentTrack&&-1!==this.currentTrack.id&&this.currentTrack.codecId&&this.currentTrack.info){let e=this.currentTrack.codecId.indexOf("/"),t=-1===e?this.currentTrack.codecId:this.currentTrack.codecId.slice(0,e);if("video"===this.currentTrack.info.type&&-1!==this.currentTrack.info.width&&-1!==this.currentTrack.info.height){this.currentTrack.codecId===b.CODEC_STRING_MAP.avc?(this.currentTrack.info.codec="avc",this.currentTrack.info.codecDescription=this.currentTrack.codecPrivate):this.currentTrack.codecId===b.CODEC_STRING_MAP.hevc?(this.currentTrack.info.codec="hevc",this.currentTrack.info.codecDescription=this.currentTrack.codecPrivate):t===b.CODEC_STRING_MAP.vp8?this.currentTrack.info.codec="vp8":t===b.CODEC_STRING_MAP.vp9?this.currentTrack.info.codec="vp9":t===b.CODEC_STRING_MAP.av1&&(this.currentTrack.info.codec="av1");let e=this.currentTrack,r=new(0,p.InputVideoTrack)(this.input,new x(e));this.currentTrack.inputTrack=r,this.currentSegment.tracks.push(this.currentTrack)}else if("audio"===this.currentTrack.info.type&&-1!==this.currentTrack.info.numberOfChannels&&-1!==this.currentTrack.info.sampleRate){t===b.CODEC_STRING_MAP.aac?(this.currentTrack.info.codec="aac",this.currentTrack.info.aacCodecInfo={isMpeg2:this.currentTrack.codecId.includes("MPEG2"),objectType:null},this.currentTrack.info.codecDescription=this.currentTrack.codecPrivate):this.currentTrack.codecId===b.CODEC_STRING_MAP.mp3?this.currentTrack.info.codec="mp3":t===b.CODEC_STRING_MAP.opus?(this.currentTrack.info.codec="opus",this.currentTrack.info.codecDescription=this.currentTrack.codecPrivate,this.currentTrack.info.sampleRate=h.OPUS_SAMPLE_RATE):t===b.CODEC_STRING_MAP.vorbis?(this.currentTrack.info.codec="vorbis",this.currentTrack.info.codecDescription=this.currentTrack.codecPrivate):t===b.CODEC_STRING_MAP.flac?(this.currentTrack.info.codec="flac",this.currentTrack.info.codecDescription=this.currentTrack.codecPrivate):"A_PCM/INT/LIT"===this.currentTrack.codecId?8===this.currentTrack.info.bitDepth?this.currentTrack.info.codec="pcm-u8":16===this.currentTrack.info.bitDepth?this.currentTrack.info.codec="pcm-s16":24===this.currentTrack.info.bitDepth?this.currentTrack.info.codec="pcm-s24":32===this.currentTrack.info.bitDepth&&(this.currentTrack.info.codec="pcm-s32"):"A_PCM/INT/BIG"===this.currentTrack.codecId?8===this.currentTrack.info.bitDepth?this.currentTrack.info.codec="pcm-u8":16===this.currentTrack.info.bitDepth?this.currentTrack.info.codec="pcm-s16be":24===this.currentTrack.info.bitDepth?this.currentTrack.info.codec="pcm-s24be":32===this.currentTrack.info.bitDepth&&(this.currentTrack.info.codec="pcm-s32be"):"A_PCM/FLOAT/IEEE"===this.currentTrack.codecId&&(32===this.currentTrack.info.bitDepth?this.currentTrack.info.codec="pcm-f32":64===this.currentTrack.info.bitDepth&&(this.currentTrack.info.codec="pcm-f64"));let e=this.currentTrack,r=new(0,p.InputAudioTrack)(this.input,new E(e));this.currentTrack.inputTrack=r,this.currentSegment.tracks.push(this.currentTrack)}}this.currentTrack=null;break;case b.EBMLId.TrackNumber:if(!this.currentTrack)break;this.currentTrack.id=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.TrackType:{if(!this.currentTrack)break;let t=(0,b.readUnsignedInt)(e,i);1===t?this.currentTrack.info={type:"video",width:-1,height:-1,rotation:0,codec:null,codecDescription:null,colorSpace:null,alphaMode:!1}:2===t&&(this.currentTrack.info={type:"audio",numberOfChannels:-1,sampleRate:-1,bitDepth:-1,codec:null,codecDescription:null,aacCodecInfo:null})}break;case b.EBMLId.FlagEnabled:if(!this.currentTrack)break;(0,b.readUnsignedInt)(e,i)||(this.currentTrack=null);break;case b.EBMLId.FlagDefault:if(!this.currentTrack)break;this.currentTrack.disposition.default=!!(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.FlagForced:if(!this.currentTrack)break;this.currentTrack.disposition.forced=!!(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.FlagOriginal:if(!this.currentTrack)break;this.currentTrack.disposition.original=!!(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.FlagHearingImpaired:if(!this.currentTrack)break;this.currentTrack.disposition.hearingImpaired=!!(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.FlagVisualImpaired:if(!this.currentTrack)break;this.currentTrack.disposition.visuallyImpaired=!!(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.FlagCommentary:if(!this.currentTrack)break;this.currentTrack.disposition.commentary=!!(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.CodecID:if(!this.currentTrack)break;this.currentTrack.codecId=(0,b.readAsciiString)(e,i);break;case b.EBMLId.CodecPrivate:if(!this.currentTrack)break;this.currentTrack.codecPrivate=(0,S.readBytes)(e,i);break;case b.EBMLId.DefaultDuration:if(!this.currentTrack)break;this.currentTrack.defaultDurationNs=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.Name:if(!this.currentTrack)break;this.currentTrack.name=(0,b.readUnicodeString)(e,i);break;case b.EBMLId.Language:if(!this.currentTrack||this.currentTrack.languageCode!==g.UNDETERMINED_LANGUAGE)break;this.currentTrack.languageCode=(0,b.readAsciiString)(e,i),(0,g.isIso639Dash2LanguageCode)(this.currentTrack.languageCode)||(this.currentTrack.languageCode=g.UNDETERMINED_LANGUAGE);break;case b.EBMLId.LanguageBCP47:{if(!this.currentTrack)break;let t=(0,b.readAsciiString)(e,i).split("-")[0];t?this.currentTrack.languageCode=t:this.currentTrack.languageCode=g.UNDETERMINED_LANGUAGE}break;case b.EBMLId.Video:if(this.currentTrack?.info?.type!=="video")break;this.readContiguousElements(e.slice(s,i));break;case b.EBMLId.PixelWidth:if(this.currentTrack?.info?.type!=="video")break;this.currentTrack.info.width=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.PixelHeight:if(this.currentTrack?.info?.type!=="video")break;this.currentTrack.info.height=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.AlphaMode:if(this.currentTrack?.info?.type!=="video")break;this.currentTrack.info.alphaMode=1===(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.Colour:if(this.currentTrack?.info?.type!=="video")break;this.currentTrack.info.colorSpace={},this.readContiguousElements(e.slice(s,i));break;case b.EBMLId.MatrixCoefficients:{if(this.currentTrack?.info?.type!=="video"||!this.currentTrack.info.colorSpace)break;let t=(0,b.readUnsignedInt)(e,i),r=g.MATRIX_COEFFICIENTS_MAP_INVERSE[t]??null;this.currentTrack.info.colorSpace.matrix=r}break;case b.EBMLId.Range:if(this.currentTrack?.info?.type!=="video"||!this.currentTrack.info.colorSpace)break;this.currentTrack.info.colorSpace.fullRange=2===(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.TransferCharacteristics:{if(this.currentTrack?.info?.type!=="video"||!this.currentTrack.info.colorSpace)break;let t=(0,b.readUnsignedInt)(e,i),r=g.TRANSFER_CHARACTERISTICS_MAP_INVERSE[t]??null;this.currentTrack.info.colorSpace.transfer=r}break;case b.EBMLId.Primaries:{if(this.currentTrack?.info?.type!=="video"||!this.currentTrack.info.colorSpace)break;let t=(0,b.readUnsignedInt)(e,i),r=g.COLOR_PRIMARIES_MAP_INVERSE[t]??null;this.currentTrack.info.colorSpace.primaries=r}break;case b.EBMLId.Projection:if(this.currentTrack?.info?.type!=="video")break;this.readContiguousElements(e.slice(s,i));break;case b.EBMLId.ProjectionPoseRoll:{if(this.currentTrack?.info?.type!=="video")break;let t=(0,b.readFloat)(e,i);try{this.currentTrack.info.rotation=(0,g.normalizeRotation)(-t)}catch{}}break;case b.EBMLId.Audio:if(this.currentTrack?.info?.type!=="audio")break;this.readContiguousElements(e.slice(s,i));break;case b.EBMLId.SamplingFrequency:if(this.currentTrack?.info?.type!=="audio")break;this.currentTrack.info.sampleRate=(0,b.readFloat)(e,i);break;case b.EBMLId.Channels:if(this.currentTrack?.info?.type!=="audio")break;this.currentTrack.info.numberOfChannels=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.BitDepth:if(this.currentTrack?.info?.type!=="audio")break;this.currentTrack.info.bitDepth=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.CuePoint:if(!this.currentSegment)break;this.readContiguousElements(e.slice(s,i)),this.currentCueTime=null;break;case b.EBMLId.CueTime:this.currentCueTime=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.CueTrackPositions:{if(null===this.currentCueTime)break;(0,g.assert)(this.currentSegment);let t={time:this.currentCueTime,trackId:-1,clusterPosition:-1};this.currentSegment.cuePoints.push(t),this.readContiguousElements(e.slice(s,i)),(-1===t.trackId||-1===t.clusterPosition)&&this.currentSegment.cuePoints.pop()}break;case b.EBMLId.CueTrack:{let t=this.currentSegment?.cuePoints[this.currentSegment.cuePoints.length-1];if(!t)break;t.trackId=(0,b.readUnsignedInt)(e,i)}break;case b.EBMLId.CueClusterPosition:{let t=this.currentSegment?.cuePoints[this.currentSegment.cuePoints.length-1];if(!t)break;(0,g.assert)(this.currentSegment),t.clusterPosition=this.currentSegment.dataStartPos+(0,b.readUnsignedInt)(e,i)}break;case b.EBMLId.Timestamp:if(!this.currentCluster)break;this.currentCluster.timestamp=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.SimpleBlock:{if(!this.currentCluster)break;let t=(0,b.readVarInt)(e);if(null===t)break;let r=this.getTrackDataInCluster(this.currentCluster,t);if(!r)break;let a=(0,S.readI16Be)(e),n=(0,S.readU8)(e),o=!!(128&n);r.track.info?.type==="audio"&&r.track.info.codec&&(o=!0);let l=(0,S.readBytes)(e,i-(e.filePos-s)),c=r.track.decodingInstructions.length>0;r.blocks.push({timestamp:a,duration:0,isKeyFrame:o,data:l,lacing:n>>1&3,decoded:!c,mainAdditional:null})}break;case b.EBMLId.BlockGroup:if(!this.currentCluster)break;this.readContiguousElements(e.slice(s,i)),this.currentBlock=null;break;case b.EBMLId.Block:{if(!this.currentCluster)break;let t=(0,b.readVarInt)(e);if(null===t)break;let r=this.getTrackDataInCluster(this.currentCluster,t);if(!r)break;let a=(0,S.readI16Be)(e),n=(0,S.readU8)(e),o=(0,S.readBytes)(e,i-(e.filePos-s)),l=r.track.decodingInstructions.length>0;this.currentBlock={timestamp:a,duration:0,isKeyFrame:!0,data:o,lacing:n>>1&3,decoded:!l,mainAdditional:null},r.blocks.push(this.currentBlock)}break;case b.EBMLId.BlockAdditions:this.readContiguousElements(e.slice(s,i));break;case b.EBMLId.BlockMore:if(!this.currentBlock)break;this.currentBlockAdditional={addId:1,data:null},this.readContiguousElements(e.slice(s,i)),this.currentBlockAdditional.data&&1===this.currentBlockAdditional.addId&&(this.currentBlock.mainAdditional=this.currentBlockAdditional.data),this.currentBlockAdditional=null;break;case b.EBMLId.BlockAdditional:if(!this.currentBlockAdditional)break;this.currentBlockAdditional.data=(0,S.readBytes)(e,i);break;case b.EBMLId.BlockAddID:if(!this.currentBlockAdditional)break;this.currentBlockAdditional.addId=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.BlockDuration:if(!this.currentBlock)break;this.currentBlock.duration=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.ReferenceBlock:if(!this.currentBlock)break;this.currentBlock.isKeyFrame=!1;break;case b.EBMLId.Tag:this.currentTagTargetIsMovie=!0,this.readContiguousElements(e.slice(s,i));break;case b.EBMLId.Targets:this.readContiguousElements(e.slice(s,i));break;case b.EBMLId.TargetTypeValue:50!==(0,b.readUnsignedInt)(e,i)&&(this.currentTagTargetIsMovie=!1);break;case b.EBMLId.TagTrackUID:case b.EBMLId.TagEditionUID:case b.EBMLId.TagChapterUID:case b.EBMLId.TagAttachmentUID:this.currentTagTargetIsMovie=!1;break;case b.EBMLId.SimpleTag:if(!this.currentTagTargetIsMovie)break;this.currentSimpleTagName=null,this.readContiguousElements(e.slice(s,i));break;case b.EBMLId.TagName:this.currentSimpleTagName=(0,b.readUnicodeString)(e,i);break;case b.EBMLId.TagString:{if(!this.currentSimpleTagName)break;let t=(0,b.readUnicodeString)(e,i);this.processTagValue(this.currentSimpleTagName,t)}break;case b.EBMLId.TagBinary:{if(!this.currentSimpleTagName)break;let t=(0,S.readBytes)(e,i);this.processTagValue(this.currentSimpleTagName,t)}break;case b.EBMLId.AttachedFile:{if(!this.currentSegment)break;this.currentAttachedFile={fileUid:null,fileName:null,fileMediaType:null,fileData:null,fileDescription:null},this.readContiguousElements(e.slice(s,i));let t=this.currentSegment.metadataTags;if(this.currentAttachedFile.fileUid&&this.currentAttachedFile.fileData&&(t.raw??={},t.raw[this.currentAttachedFile.fileUid.toString()]=new(0,f.AttachedFile)(this.currentAttachedFile.fileData,this.currentAttachedFile.fileMediaType??void 0,this.currentAttachedFile.fileName??void 0,this.currentAttachedFile.fileDescription??void 0)),this.currentAttachedFile.fileMediaType?.startsWith("image/")&&this.currentAttachedFile.fileData){let e=this.currentAttachedFile.fileName,r="unknown";if(e){let t=e.toLowerCase();t.startsWith("cover.")?r="coverFront":t.startsWith("back.")&&(r="coverBack")}t.images??=[],t.images.push({data:this.currentAttachedFile.fileData,mimeType:this.currentAttachedFile.fileMediaType,kind:r,name:this.currentAttachedFile.fileName??void 0,description:this.currentAttachedFile.fileDescription??void 0})}this.currentAttachedFile=null}break;case b.EBMLId.FileUID:if(!this.currentAttachedFile)break;this.currentAttachedFile.fileUid=(0,b.readUnsignedBigInt)(e,i);break;case b.EBMLId.FileName:if(!this.currentAttachedFile)break;this.currentAttachedFile.fileName=(0,b.readUnicodeString)(e,i);break;case b.EBMLId.FileMediaType:if(!this.currentAttachedFile)break;this.currentAttachedFile.fileMediaType=(0,b.readAsciiString)(e,i);break;case b.EBMLId.FileData:if(!this.currentAttachedFile)break;this.currentAttachedFile.fileData=(0,S.readBytes)(e,i);break;case b.EBMLId.FileDescription:if(!this.currentAttachedFile)break;this.currentAttachedFile.fileDescription=(0,b.readUnicodeString)(e,i);break;case b.EBMLId.ContentEncodings:if(!this.currentTrack)break;this.readContiguousElements(e.slice(s,i)),this.currentTrack.decodingInstructions.sort((e,t)=>t.order-e.order);break;case b.EBMLId.ContentEncoding:this.currentDecodingInstruction={order:0,scope:l.Block,data:null},this.readContiguousElements(e.slice(s,i)),this.currentDecodingInstruction.data&&this.currentTrack.decodingInstructions.push(this.currentDecodingInstruction),this.currentDecodingInstruction=null;break;case b.EBMLId.ContentEncodingOrder:if(!this.currentDecodingInstruction)break;this.currentDecodingInstruction.order=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.ContentEncodingScope:if(!this.currentDecodingInstruction)break;this.currentDecodingInstruction.scope=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.ContentCompression:if(!this.currentDecodingInstruction)break;this.currentDecodingInstruction.data={type:"decompress",algorithm:c.Zlib,settings:null},this.readContiguousElements(e.slice(s,i));break;case b.EBMLId.ContentCompAlgo:if(this.currentDecodingInstruction?.data?.type!=="decompress")break;this.currentDecodingInstruction.data.algorithm=(0,b.readUnsignedInt)(e,i);break;case b.EBMLId.ContentCompSettings:if(this.currentDecodingInstruction?.data?.type!=="decompress")break;this.currentDecodingInstruction.data.settings=(0,S.readBytes)(e,i);break;case b.EBMLId.ContentEncryption:if(!this.currentDecodingInstruction)break;this.currentDecodingInstruction.data={type:"decrypt"}}return e.filePos=s+i,!0}decodeBlockData(e,t){(0,g.assert)(e.decodingInstructions.length>0);let r=t;for(let t of e.decodingInstructions)if((0,g.assert)(t.data),"decompress"===t.data.type&&t.data.algorithm===c.HeaderStripping&&t.data.settings&&t.data.settings.length>0){let e=t.data.settings,a=new Uint8Array(e.length+r.length);a.set(e,0),a.set(r,e.length),r=a}return r}processTagValue(e,t){if(!this.currentSegment?.metadataTags)return;let r=this.currentSegment.metadataTags;if(r.raw??={},r.raw[e]??=t,"string"==typeof t)switch(e.toLowerCase()){case"title":r.title??=t;break;case"description":r.description??=t;break;case"artist":r.artist??=t;break;case"album":r.album??=t;break;case"album_artist":r.albumArtist??=t;break;case"genre":r.genre??=t;break;case"comment":r.comment??=t;break;case"lyrics":r.lyrics??=t;break;case"date":{let e=new Date(t);Number.isNaN(e.getTime())||(r.date??=e)}break;case"track_number":case"part_number":{let e=t.split("/"),a=Number.parseInt(e[0],10),i=e[1]&&Number.parseInt(e[1],10);Number.isInteger(a)&&a>0&&(r.trackNumber??=a),i&&Number.isInteger(i)&&i>0&&(r.tracksTotal??=i)}break;case"disc_number":case"disc":{let e=t.split("/"),a=Number.parseInt(e[0],10),i=e[1]&&Number.parseInt(e[1],10);Number.isInteger(a)&&a>0&&(r.discNumber??=a),i&&Number.isInteger(i)&&i>0&&(r.discsTotal??=i)}}}}class w{constructor(e){this.internalTrack=e,this.packetToClusterLocation=new WeakMap}getId(){return this.internalTrack.id}getNumber(){let e=this.internalTrack.demuxer,t=this.internalTrack.inputTrack.type,r=0;for(let a of e.segments)for(let e of a.tracks)if(e.inputTrack.type===t&&r++,e===this.internalTrack)break;return r}getCodec(){throw Error("Not implemented on base class.")}getInternalCodecId(){return this.internalTrack.codecId}async computeDuration(){let e=await this.getPacket(1/0,{metadataOnly:!0});return(e?.timestamp??0)+(e?.duration??0)}getName(){return this.internalTrack.name}getLanguageCode(){return this.internalTrack.languageCode}async getFirstTimestamp(){let e=await this.getFirstPacket({metadataOnly:!0});return e?.timestamp??0}getTimeResolution(){return this.internalTrack.segment.timestampFactor}getDisposition(){return this.internalTrack.disposition}async getFirstPacket(e){return this.performClusterLookup(null,e=>e.trackData.get(this.internalTrack.id)?{blockIndex:0,correctBlockFound:!0}:{blockIndex:-1,correctBlockFound:!1},-1/0,1/0,e)}intoTimescale(e){return(0,g.roundIfAlmostInteger)(e*this.internalTrack.segment.timestampFactor)}async getPacket(e,t){let r=this.intoTimescale(e);return this.performClusterLookup(null,e=>{let t=e.trackData.get(this.internalTrack.id);if(!t)return{blockIndex:-1,correctBlockFound:!1};let a=(0,g.binarySearchLessOrEqual)(t.presentationTimestamps,r,e=>e.timestamp);return{blockIndex:-1!==a?t.presentationTimestamps[a].blockIndex:-1,correctBlockFound:-1!==a&&r<t.endTimestamp}},r,r,t)}async getNextPacket(e,t){let r=this.packetToClusterLocation.get(e);if(void 0===r)throw Error("Packet was not created from this track.");return this.performClusterLookup(r.cluster,e=>{if(e===r.cluster){let t=e.trackData.get(this.internalTrack.id);if(r.blockIndex+1<t.blocks.length)return{blockIndex:r.blockIndex+1,correctBlockFound:!0}}else if(e.trackData.get(this.internalTrack.id))return{blockIndex:0,correctBlockFound:!0};return{blockIndex:-1,correctBlockFound:!1}},-1/0,1/0,t)}async getKeyPacket(e,t){let r=this.intoTimescale(e);return this.performClusterLookup(null,e=>{let t=e.trackData.get(this.internalTrack.id);if(!t)return{blockIndex:-1,correctBlockFound:!1};let a=(0,g.findLastIndex)(t.presentationTimestamps,e=>t.blocks[e.blockIndex].isKeyFrame&&e.timestamp<=r);return{blockIndex:-1!==a?t.presentationTimestamps[a].blockIndex:-1,correctBlockFound:-1!==a&&r<t.endTimestamp}},r,r,t)}async getNextKeyPacket(e,t){let r=this.packetToClusterLocation.get(e);if(void 0===r)throw Error("Packet was not created from this track.");return this.performClusterLookup(r.cluster,e=>{if(e===r.cluster){let t=e.trackData.get(this.internalTrack.id).blocks.findIndex((e,t)=>e.isKeyFrame&&t>r.blockIndex);if(-1!==t)return{blockIndex:t,correctBlockFound:!0}}else{let t=e.trackData.get(this.internalTrack.id);if(t&&null!==t.firstKeyFrameTimestamp){let e=t.blocks.findIndex(e=>e.isKeyFrame);return(0,g.assert)(-1!==e),{blockIndex:e,correctBlockFound:!0}}}return{blockIndex:-1,correctBlockFound:!1}},-1/0,1/0,t)}async fetchPacketInCluster(e,t,r){if(-1===t)return null;let a=e.trackData.get(this.internalTrack.id).blocks[t];(0,g.assert)(a),a.decoded||(a.data=this.internalTrack.demuxer.decodeBlockData(this.internalTrack,a.data),a.decoded=!0);let i=r.metadataOnly?k.PLACEHOLDER_DATA:a.data,s=a.timestamp/this.internalTrack.segment.timestampFactor,n=a.duration/this.internalTrack.segment.timestampFactor,o={};a.mainAdditional&&this.internalTrack.info?.type==="video"&&this.internalTrack.info.alphaMode&&(o.alpha=r.metadataOnly?k.PLACEHOLDER_DATA:a.mainAdditional,o.alphaByteLength=a.mainAdditional.byteLength);let l=new(0,k.EncodedPacket)(i,a.isKeyFrame?"key":"delta",s,n,e.dataStartPos+t,a.data.byteLength,o);return this.packetToClusterLocation.set(l,{cluster:e,blockIndex:t}),l}async performClusterLookup(e,t,r,a,i){let s,{demuxer:n,segment:o}=this.internalTrack,l=null,c=null,d=-1;if(e){let{blockIndex:r,correctBlockFound:a}=t(e);if(a)return this.fetchPacketInCluster(e,r,i);-1!==r&&(c=e,d=r)}let u=(0,g.binarySearchLessOrEqual)(this.internalTrack.cuePoints,r,e=>e.time),h=-1!==u?this.internalTrack.cuePoints[u]:null,m=(0,g.binarySearchLessOrEqual)(this.internalTrack.clusterPositionCache,r,e=>e.startTimestamp),p=-1!==m?this.internalTrack.clusterPositionCache[m]:null,f=Math.max(h?.clusterPosition??0,p?.elementStartPos??0)||null;for(e?null===f||e.elementStartPos>=f?(s=e.elementEndPos,l=e):s=f:s=f??o.clusterSeekStartPos;null===o.elementEndPos||s<=o.elementEndPos-b.MIN_HEADER_SIZE;){if(l){let e=l.trackData.get(this.internalTrack.id);if(e&&e.startTimestamp>a)break}let e=n.reader.requestSliceRange(s,b.MIN_HEADER_SIZE,b.MAX_HEADER_SIZE);if(e instanceof Promise&&(e=await e),!e)break;let r=s,u=(0,b.readElementHeader)(e);if(!u||!b.LEVEL_1_EBML_IDS.includes(u.id)&&u.id!==b.EBMLId.Void){let e=await (0,b.resync)(n.reader,r,b.LEVEL_1_EBML_IDS,Math.min(o.elementEndPos??1/0,r+0xa00000));if(e){s=e;continue}break}let h=u.id,m=u.size,p=e.filePos;if(h===b.EBMLId.Cluster){m=(l=await n.readCluster(r,o)).elementEndPos-p;let{blockIndex:e,correctBlockFound:a}=t(l);if(a)return this.fetchPacketInCluster(l,e,i);-1!==e&&(c=l,d=e)}void 0===m&&((0,g.assert)(h!==b.EBMLId.Cluster),m=(await (0,b.searchForNextElementId)(n.reader,p,b.LEVEL_0_AND_1_EBML_IDS,o.elementEndPos)).pos-p);let f=p+m;if(null===o.elementEndPos){let e=n.reader.requestSliceRange(f,b.MIN_HEADER_SIZE,b.MAX_HEADER_SIZE);if(e instanceof Promise&&(e=await e),!e)break;if((0,b.readElementId)(e)===b.EBMLId.Segment){o.elementEndPos=f;break}}s=f}if(h&&(!c||c.elementStartPos<h.clusterPosition)){let e=this.internalTrack.cuePoints[u-1];(0,g.assert)(!e||e.time<h.time);let r=e?.time??-1/0;return this.performClusterLookup(null,t,r,a,i)}return c?this.fetchPacketInCluster(c,d,i):null}}class x extends w{constructor(e){super(e),this.decoderConfigPromise=null,this.internalTrack=e}getCodec(){return this.internalTrack.info.codec}getCodedWidth(){return this.internalTrack.info.width}getCodedHeight(){return this.internalTrack.info.height}getRotation(){return this.internalTrack.info.rotation}async getColorSpace(){return{primaries:this.internalTrack.info.colorSpace?.primaries,transfer:this.internalTrack.info.colorSpace?.transfer,matrix:this.internalTrack.info.colorSpace?.matrix,fullRange:this.internalTrack.info.colorSpace?.fullRange}}async canBeTransparent(){return this.internalTrack.info.alphaMode}async getDecoderConfig(){return this.internalTrack.info.codec?this.decoderConfigPromise??=(async()=>{let e=null;return"vp9"!==this.internalTrack.info.codec&&"av1"!==this.internalTrack.info.codec&&("avc"!==this.internalTrack.info.codec||this.internalTrack.info.codecDescription)&&("hevc"!==this.internalTrack.info.codec||this.internalTrack.info.codecDescription)||(e=await this.getFirstPacket({})),{codec:(0,h.extractVideoCodecString)({width:this.internalTrack.info.width,height:this.internalTrack.info.height,codec:this.internalTrack.info.codec,codecDescription:this.internalTrack.info.codecDescription,colorSpace:this.internalTrack.info.colorSpace,avcType:1,avcCodecInfo:"avc"===this.internalTrack.info.codec&&e?(0,u.extractAvcDecoderConfigurationRecord)(e.data):null,hevcCodecInfo:"hevc"===this.internalTrack.info.codec&&e?(0,u.extractHevcDecoderConfigurationRecord)(e.data):null,vp9CodecInfo:"vp9"===this.internalTrack.info.codec&&e?(0,u.extractVp9CodecInfoFromPacket)(e.data):null,av1CodecInfo:"av1"===this.internalTrack.info.codec&&e?(0,u.extractAv1CodecInfoFromPacket)(e.data):null}),codedWidth:this.internalTrack.info.width,codedHeight:this.internalTrack.info.height,description:this.internalTrack.info.codecDescription??void 0,colorSpace:this.internalTrack.info.colorSpace??void 0}})():null}}class E extends w{constructor(e){super(e),this.decoderConfig=null,this.internalTrack=e}getCodec(){return this.internalTrack.info.codec}getNumberOfChannels(){return this.internalTrack.info.numberOfChannels}getSampleRate(){return this.internalTrack.info.sampleRate}async getDecoderConfig(){return this.internalTrack.info.codec?this.decoderConfig??={codec:(0,h.extractAudioCodecString)({codec:this.internalTrack.info.codec,codecDescription:this.internalTrack.info.codecDescription,aacCodecInfo:this.internalTrack.info.aacCodecInfo}),numberOfChannels:this.internalTrack.info.numberOfChannels,sampleRate:this.internalTrack.info.sampleRate,description:this.internalTrack.info.codecDescription??void 0}:null}}},{"../codec-data.js":"zx4dz","../codec.js":"4GUiq","../demuxer.js":"73Qqp","../input-track.js":"aU0uf","../metadata.js":"1RzS5","../misc.js":"jrq2g","../packet.js":"8dQhf","./ebml.js":"4qt3Y","./matroska-misc.js":"civYS","../reader.js":"6AkKg","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],civYS:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"buildMatroskaMimeType",()=>s);let s=e=>{let t=(e.hasVideo?"video/":e.hasAudio?"audio/":"application/")+(e.isWebM?"webm":"x-matroska");if(e.codecStrings.length>0){let r=[...new Set(e.codecStrings.filter(Boolean))];t+=`; codecs="${r.join(", ")}"`}return t}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"1xfyp":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"Mp3Demuxer",()=>p);var s=e("../demuxer.js"),n=e("../input-track.js"),o=e("../metadata.js"),l=e("../misc.js"),c=e("../packet.js"),d=e("../../shared/mp3-misc.js"),u=e("../id3.js"),h=e("./mp3-reader.js"),m=e("../reader.js");class p extends s.Demuxer{constructor(e){super(e),this.metadataPromise=null,this.firstFrameHeader=null,this.loadedSamples=[],this.metadataTags=null,this.tracks=[],this.readingMutex=new(0,l.AsyncMutex),this.lastSampleLoaded=!1,this.lastLoadedPos=0,this.nextTimestampInSamples=0,this.reader=e._reader}async readMetadata(){return this.metadataPromise??=(async()=>{for(;!this.firstFrameHeader&&!this.lastSampleLoaded;)await this.advanceReader();if(!this.firstFrameHeader)throw Error("No valid MP3 frame found.");this.tracks=[new(0,n.InputAudioTrack)(this.input,new f(this))]})()}async advanceReader(){if(0===this.lastLoadedPos)for(;;){let e=this.reader.requestSlice(this.lastLoadedPos,u.ID3_V2_HEADER_SIZE);if(e instanceof Promise&&(e=await e),!e){this.lastSampleLoaded=!0;return}let t=(0,u.readId3V2Header)(e);if(!t)break;this.lastLoadedPos=e.filePos+t.size}let e=await (0,h.readNextMp3FrameHeader)(this.reader,this.lastLoadedPos,this.reader.fileSize);if(!e){this.lastSampleLoaded=!0;return}let t=e.header;this.lastLoadedPos=e.startPos+t.totalSize-1;let r=(0,d.getXingOffset)(t.mpegVersionId,t.channel),a=this.reader.requestSlice(e.startPos+r,4);if(a instanceof Promise&&(a=await a),a){let e=(0,m.readU32Be)(a);if(e===d.XING||e===d.INFO)return}this.firstFrameHeader||(this.firstFrameHeader=t),t.sampleRate!==this.firstFrameHeader.sampleRate&&console.warn(`MP3 changed sample rate mid-file: ${this.firstFrameHeader.sampleRate} Hz to ${t.sampleRate} Hz. Might be a bug, so please report this file.`);let i=t.audioSamplesInFrame/this.firstFrameHeader.sampleRate,s={timestamp:this.nextTimestampInSamples/this.firstFrameHeader.sampleRate,duration:i,dataStart:e.startPos,dataSize:t.totalSize};this.loadedSamples.push(s),this.nextTimestampInSamples+=t.audioSamplesInFrame}async getMimeType(){return"audio/mpeg"}async getTracks(){return await this.readMetadata(),this.tracks}async computeDuration(){await this.readMetadata();let e=this.tracks[0];return(0,l.assert)(e),e.computeDuration()}async getMetadataTags(){let e=await this.readingMutex.acquire();try{if(await this.readMetadata(),this.metadataTags)return this.metadataTags;this.metadataTags={};let e=0,t=!1;for(;;){let r=this.reader.requestSlice(e,u.ID3_V2_HEADER_SIZE);if(r instanceof Promise&&(r=await r),!r)break;let a=(0,u.readId3V2Header)(r);if(!a)break;t=!0;let i=this.reader.requestSlice(r.filePos,a.size);if(i instanceof Promise&&(i=await i),!i)break;(0,u.parseId3V2Tag)(i,a,this.metadataTags),e=r.filePos+a.size}if(!t&&null!==this.reader.fileSize&&this.reader.fileSize>=u.ID3_V1_TAG_SIZE){let e=this.reader.requestSlice(this.reader.fileSize-u.ID3_V1_TAG_SIZE,u.ID3_V1_TAG_SIZE);e instanceof Promise&&(e=await e),(0,l.assert)(e);let t=(0,m.readAscii)(e,3);"TAG"===t&&(0,u.parseId3V1Tag)(e,this.metadataTags)}return this.metadataTags}finally{e()}}}class f{constructor(e){this.demuxer=e}getId(){return 1}getNumber(){return 1}async getFirstTimestamp(){return 0}getTimeResolution(){return(0,l.assert)(this.demuxer.firstFrameHeader),this.demuxer.firstFrameHeader.sampleRate/this.demuxer.firstFrameHeader.audioSamplesInFrame}async computeDuration(){let e=await this.getPacket(1/0,{metadataOnly:!0});return(e?.timestamp??0)+(e?.duration??0)}getName(){return null}getLanguageCode(){return l.UNDETERMINED_LANGUAGE}getCodec(){return"mp3"}getInternalCodecId(){return null}getNumberOfChannels(){return(0,l.assert)(this.demuxer.firstFrameHeader),3===this.demuxer.firstFrameHeader.channel?1:2}getSampleRate(){return(0,l.assert)(this.demuxer.firstFrameHeader),this.demuxer.firstFrameHeader.sampleRate}getDisposition(){return{...o.DEFAULT_TRACK_DISPOSITION}}async getDecoderConfig(){return(0,l.assert)(this.demuxer.firstFrameHeader),{codec:"mp3",numberOfChannels:3===this.demuxer.firstFrameHeader.channel?1:2,sampleRate:this.demuxer.firstFrameHeader.sampleRate}}async getPacketAtIndex(e,t){let r;if(-1===e)return null;let a=this.demuxer.loadedSamples[e];if(!a)return null;if(t.metadataOnly)r=c.PLACEHOLDER_DATA;else{let e=this.demuxer.reader.requestSlice(a.dataStart,a.dataSize);if(e instanceof Promise&&(e=await e),!e)return null;r=(0,m.readBytes)(e,a.dataSize)}return new(0,c.EncodedPacket)(r,"key",a.timestamp,a.duration,e,a.dataSize)}getFirstPacket(e){return this.getPacketAtIndex(0,e)}async getNextPacket(e,t){let r=await this.demuxer.readingMutex.acquire();try{let r=(0,l.binarySearchExact)(this.demuxer.loadedSamples,e.timestamp,e=>e.timestamp);if(-1===r)throw Error("Packet was not created from this track.");let a=r+1;for(;a>=this.demuxer.loadedSamples.length&&!this.demuxer.lastSampleLoaded;)await this.demuxer.advanceReader();return this.getPacketAtIndex(a,t)}finally{r()}}async getPacket(e,t){let r=await this.demuxer.readingMutex.acquire();try{for(;;){let r=(0,l.binarySearchLessOrEqual)(this.demuxer.loadedSamples,e,e=>e.timestamp);if(-1===r&&this.demuxer.loadedSamples.length>0)return null;if(this.demuxer.lastSampleLoaded||r>=0&&r+1<this.demuxer.loadedSamples.length)return this.getPacketAtIndex(r,t);await this.demuxer.advanceReader()}}finally{r()}}getKeyPacket(e,t){return this.getPacket(e,t)}getNextKeyPacket(e,t){return this.getNextPacket(e,t)}}},{"../demuxer.js":"73Qqp","../input-track.js":"aU0uf","../metadata.js":"1RzS5","../misc.js":"jrq2g","../packet.js":"8dQhf","../../shared/mp3-misc.js":"jGy7Y","../id3.js":"8coNE","./mp3-reader.js":"ixvHZ","../reader.js":"6AkKg","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],jGy7Y:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"FRAME_HEADER_SIZE",()=>s),i.export(r,"SAMPLING_RATES",()=>n),i.export(r,"KILOBIT_RATES",()=>o),i.export(r,"XING",()=>l),i.export(r,"INFO",()=>c),i.export(r,"computeMp3FrameSize",()=>d),i.export(r,"getXingOffset",()=>u),i.export(r,"readMp3FrameHeader",()=>h),i.export(r,"encodeSynchsafe",()=>m),i.export(r,"decodeSynchsafe",()=>p);let s=4,n=[44100,48e3,32e3],o=[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,32,40,48,56,64,80,96,112,128,160,192,224,256,320,-1,-1,32,48,56,64,80,96,112,128,160,192,224,256,320,384,-1,-1,32,64,96,128,160,192,224,256,288,320,352,384,416,448,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,8,16,24,32,40,48,56,64,80,96,112,128,144,160,-1,-1,8,16,24,32,40,48,56,64,80,96,112,128,144,160,-1,-1,32,48,56,64,80,96,112,128,144,160,176,192,224,256,-1],l=0x58696e67,c=0x496e666f,d=(e,t,r,a,i)=>0===t?0:1===t?Math.floor(144*r/(a<<e))+i:2===t?Math.floor(144*r/a)+i:(Math.floor(12*r/a)+i)*4,u=(e,t)=>3===e?3===t?21:36:3===t?13:21,h=(e,t)=>{let r,a=e>>>24,i=e>>>16&255,s=e>>>8&255,l=255&e;if(255!==a&&255!==i&&255!==s&&255!==l)return{header:null,bytesAdvanced:4};if(255!==a||(224&i)!=224)return{header:null,bytesAdvanced:1};let c=0,u=0;16&i?c=8&i?0:1:(c=1,u=1);let h=i>>3&3,m=i>>1&3,p=(s>>2&3)%3,f=o[64*c+16*m+(s>>4&15)];if(-1===f)return{header:null,bytesAdvanced:1};let g=1e3*f,k=n[p]>>c+u,b=d(c,m,g,k,s>>1&1);return null!==t&&t<b?{header:null,bytesAdvanced:1}:(r=3===h?3===m?384:1152:3===m?384:2===m?1152:576,{header:{totalSize:b,mpegVersionId:h,layer:m,bitrate:g,frequencyIndex:p,sampleRate:k,channel:l>>6&3,modeExtension:l>>4&3,copyright:l>>3&1,original:l>>2&1,emphasis:3&l,audioSamplesInFrame:r},bytesAdvanced:1})},m=e=>{let t=127,r=0,a=e;for(;(0x7fffffff^t)!=0;)r=(a&~t)<<1|a&t,t=(t+1<<8)-1,a=r;return r},p=e=>{let t=0x7f000000,r=0;for(;0!==t;)r>>=1,r|=e&t,t>>=8;return r}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"8coNE":[function(e,t,r,a){var i,s,n,o,l=e("@parcel/transformer-js/src/esmodule-helpers.js");l.defineInteropFlag(r),l.export(r,"Id3V2HeaderFlags",()=>n),l.export(r,"Id3V2TextEncoding",()=>o),l.export(r,"ID3_V1_TAG_SIZE",()=>h),l.export(r,"ID3_V2_HEADER_SIZE",()=>m),l.export(r,"ID3_V1_GENRES",()=>p),l.export(r,"parseId3V1Tag",()=>f),l.export(r,"readId3V1String",()=>g),l.export(r,"readId3V2Header",()=>k),l.export(r,"parseId3V2Tag",()=>b),l.export(r,"Id3V2Reader",()=>y),l.export(r,"Id3V2Writer",()=>S);var c=e("../shared/mp3-misc.js"),d=e("./misc.js"),u=e("./reader.js");(i=n||(n={}))[i.Unsynchronisation=128]="Unsynchronisation",i[i.ExtendedHeader=64]="ExtendedHeader",i[i.ExperimentalIndicator=32]="ExperimentalIndicator",i[i.Footer=16]="Footer",(s=o||(o={}))[s.ISO_8859_1=0]="ISO_8859_1",s[s.UTF_16_WITH_BOM=1]="UTF_16_WITH_BOM",s[s.UTF_16_BE_NO_BOM=2]="UTF_16_BE_NO_BOM",s[s.UTF_8=3]="UTF_8";let h=128,m=10,p=["Blues","Classic rock","Country","Dance","Disco","Funk","Grunge","Hip-hop","Jazz","Metal","New age","Oldies","Other","Pop","Rhythm and blues","Rap","Reggae","Rock","Techno","Industrial","Alternative","Ska","Death metal","Pranks","Soundtrack","Euro-techno","Ambient","Trip-hop","Vocal","Jazz & funk","Fusion","Trance","Classical","Instrumental","Acid","House","Game","Sound clip","Gospel","Noise","Alternative rock","Bass","Soul","Punk","Space","Meditative","Instrumental pop","Instrumental rock","Ethnic","Gothic","Darkwave","Techno-industrial","Electronic","Pop-folk","Eurodance","Dream","Southern rock","Comedy","Cult","Gangsta","Top 40","Christian rap","Pop/funk","Jungle music","Native US","Cabaret","New wave","Psychedelic","Rave","Showtunes","Trailer","Lo-fi","Tribal","Acid punk","Acid jazz","Polka","Retro","Musical","Rock 'n' roll","Hard rock","Folk","Folk rock","National folk","Swing","Fast fusion","Bebop","Latin","Revival","Celtic","Bluegrass","Avantgarde","Gothic rock","Progressive rock","Psychedelic rock","Symphonic rock","Slow rock","Big band","Chorus","Easy listening","Acoustic","Humour","Speech","Chanson","Opera","Chamber music","Sonata","Symphony","Booty bass","Primus","Porn groove","Satire","Slow jam","Club","Tango","Samba","Folklore","Ballad","Power ballad","Rhythmic Soul","Freestyle","Duet","Punk rock","Drum solo","A cappella","Euro-house","Dance hall","Goa music","Drum & bass","Club-house","Hardcore techno","Terror","Indie","Britpop","Negerpunk","Polsk punk","Beat","Christian gangsta rap","Heavy metal","Black metal","Crossover","Contemporary Christian","Christian rock","Merengue","Salsa","Thrash metal","Anime","Jpop","Synthpop","Christmas","Art rock","Baroque","Bhangra","Big beat","Breakbeat","Chillout","Downtempo","Dub","EBM","Eclectic","Electro","Electroclash","Emo","Experimental","Garage","Global","IDM","Illbient","Industro-Goth","Jam Band","Krautrock","Leftfield","Lounge","Math rock","New romantic","Nu-breakz","Post-punk","Post-rock","Psytrance","Shoegaze","Space rock","Trop rock","World music","Neoclassical","Audiobook","Audio theatre","Neue Deutsche Welle","Podcast","Indie rock","G-Funk","Dubstep","Garage rock","Psybient"],f=(e,t)=>{let r,a=e.filePos;t.raw??={},t.raw.TAG??=(0,u.readBytes)(e,h-3),e.filePos=a;let i=g(e,30);i&&(t.title??=i);let s=g(e,30);s&&(t.artist??=s);let n=g(e,30);n&&(t.album??=n);let o=Number.parseInt(g(e,4),10);Number.isInteger(o)&&o>0&&(t.date??=new Date(o,0,1));let l=(0,u.readBytes)(e,30);if(0===l[28]&&0!==l[29]){let a=l[29];a>0&&(t.trackNumber??=a),e.skip(-30),r=g(e,28),e.skip(2)}else e.skip(-30),r=g(e,30);r&&(t.comment??=r);let c=(0,u.readU8)(e);c<p.length&&(t.genre??=p[c])},g=(e,t)=>{let r=(0,u.readBytes)(e,t),a=(0,d.coalesceIndex)(r.indexOf(0),r.length),i=r.subarray(0,a),s="";for(let e=0;e<i.length;e++)s+=String.fromCharCode(i[e]);return s.trimEnd()},k=e=>{let t=e.filePos,r=(0,u.readAscii)(e,3),a=(0,u.readU8)(e),i=(0,u.readU8)(e),s=(0,u.readU8)(e),n=(0,u.readU32Be)(e);return"ID3"!==r||255===a||255===i||(0x80808080&n)!=0?(e.filePos=t,null):{majorVersion:a,revision:i,flags:s,size:(0,c.decodeSynchsafe)(n)}},b=(e,t,r)=>{if(![2,3,4].includes(t.majorVersion))return void console.warn(`Unsupported ID3v2 major version: ${t.majorVersion}`);let a=(0,u.readBytes)(e,t.size),i=new y(t,a);if(t.flags&n.Footer&&i.removeFooter(),t.flags&n.Unsynchronisation&&3===t.majorVersion&&i.ununsynchronizeAll(),t.flags&n.ExtendedHeader){let e=i.readU32();3===t.majorVersion?i.pos+=e:i.pos+=e-4}for(;i.pos<=i.bytes.length-i.frameHeaderSize();){let e=i.readId3V2Frame();if(!e)break;let a=i.pos,s=i.pos+e.size,o=!1,l=!1,c=!1;if(3===t.majorVersion?(o=!!(64&e.flags),l=!!(128&e.flags)):4===t.majorVersion&&(o=!!(4&e.flags),l=!!(8&e.flags),c=!!(2&e.flags)||!!(t.flags&n.Unsynchronisation)),o){console.warn(`Skipping encrypted ID3v2 frame ${e.id}`),i.pos=s;continue}if(l){console.warn(`Skipping compressed ID3v2 frame ${e.id}`),i.pos=s;continue}switch(c&&i.ununsynchronizeRegion(i.pos,s),r.raw??={},"T"===e.id[0]?r.raw[e.id]??=i.readId3V2EncodingAndText(s):r.raw[e.id]??=i.readBytes(e.size),i.pos=a,e.id){case"TIT2":case"TT2":r.title??=i.readId3V2EncodingAndText(s);break;case"TIT3":case"TT3":r.description??=i.readId3V2EncodingAndText(s);break;case"TPE1":case"TP1":r.artist??=i.readId3V2EncodingAndText(s);break;case"TALB":case"TAL":r.album??=i.readId3V2EncodingAndText(s);break;case"TPE2":case"TP2":r.albumArtist??=i.readId3V2EncodingAndText(s);break;case"TRCK":case"TRK":{let e=i.readId3V2EncodingAndText(s).split("/"),t=Number.parseInt(e[0],10),a=e[1]&&Number.parseInt(e[1],10);Number.isInteger(t)&&t>0&&(r.trackNumber??=t),a&&Number.isInteger(a)&&a>0&&(r.tracksTotal??=a)}break;case"TPOS":case"TPA":{let e=i.readId3V2EncodingAndText(s).split("/"),t=Number.parseInt(e[0],10),a=e[1]&&Number.parseInt(e[1],10);Number.isInteger(t)&&t>0&&(r.discNumber??=t),a&&Number.isInteger(a)&&a>0&&(r.discsTotal??=a)}break;case"TCON":case"TCO":{let e=i.readId3V2EncodingAndText(s),t=/^\((\d+)\)/.exec(e);if(t){let e=Number.parseInt(t[1]);if(void 0!==p[e]){r.genre??=p[e];break}}if(t=/^\d+$/.exec(e)){let e=Number.parseInt(t[0]);if(void 0!==p[e]){r.genre??=p[e];break}}r.genre??=e}break;case"TDRC":case"TDAT":{let e=new Date(i.readId3V2EncodingAndText(s));Number.isNaN(e.getTime())||(r.date??=e)}break;case"TYER":case"TYE":{let e=Number.parseInt(i.readId3V2EncodingAndText(s),10);Number.isInteger(e)&&(r.date??=new Date(e,0,1))}break;case"USLT":case"ULT":{let e=i.readU8();i.pos+=3,i.readId3V2Text(e,s),r.lyrics??=i.readId3V2Text(e,s)}break;case"COMM":case"COM":{let e=i.readU8();i.pos+=3,i.readId3V2Text(e,s),r.comment??=i.readId3V2Text(e,s)}break;case"APIC":case"PIC":{let e,a=i.readId3V2TextEncoding();if(2===t.majorVersion){let t=i.readAscii(3);e="PNG"===t?"image/png":"JPG"===t?"image/jpeg":"image/*"}else e=i.readId3V2Text(a,s);let n=i.readU8(),o=i.readId3V2Text(a,s).trimEnd(),l=s-i.pos;if(l>=0){let t=i.readBytes(l);r.images||(r.images=[]),r.images.push({data:t,mimeType:e,kind:3===n?"coverFront":4===n?"coverBack":"unknown",description:o})}}break;default:i.pos+=e.size}i.pos=s}};class y{constructor(e,t){this.header=e,this.bytes=t,this.pos=0,this.view=new DataView(t.buffer,t.byteOffset,t.byteLength)}frameHeaderSize(){return 2===this.header.majorVersion?6:10}ununsynchronizeAll(){let e=[];for(let t=0;t<this.bytes.length;t++){let r=this.bytes[t];e.push(r),255===r&&t!==this.bytes.length-1&&0===this.bytes[t]&&t++}this.bytes=new Uint8Array(e),this.view=new DataView(this.bytes.buffer)}ununsynchronizeRegion(e,t){let r=[];for(let a=e;a<t;a++){let e=this.bytes[a];r.push(e),255===e&&a!==t-1&&0===this.bytes[a+1]&&a++}let a=this.bytes.subarray(0,e),i=this.bytes.subarray(t);this.bytes=new Uint8Array(a.length+r.length+i.length),this.bytes.set(a,0),this.bytes.set(r,a.length),this.bytes.set(i,a.length+r.length),this.view=new DataView(this.bytes.buffer)}removeFooter(){this.bytes=this.bytes.subarray(0,this.bytes.length-m),this.view=new DataView(this.bytes.buffer)}readBytes(e){let t=this.bytes.subarray(this.pos,this.pos+e);return this.pos+=e,t}readU8(){let e=this.view.getUint8(this.pos);return this.pos+=1,e}readU16(){let e=this.view.getUint16(this.pos,!1);return this.pos+=2,e}readU24(){let e=this.view.getUint16(this.pos,!1),t=this.view.getUint8(this.pos+1);return this.pos+=3,256*e+t}readU32(){let e=this.view.getUint32(this.pos,!1);return this.pos+=4,e}readAscii(e){let t="";for(let r=0;r<e;r++)t+=String.fromCharCode(this.view.getUint8(this.pos+r));return this.pos+=e,t}readId3V2Frame(){if(2===this.header.majorVersion){let e=this.readAscii(3);return"\0\0\0"===e?null:{id:e,size:this.readU24(),flags:0}}{let e=this.readAscii(4);if("\0\0\0\0"===e)return null;let t=this.readU32(),r=4===this.header.majorVersion?(0,c.decodeSynchsafe)(t):t,a=this.readU16(),i=this.pos,s=e=>{let t=this.pos+e;if(t>this.bytes.length)return!1;if(t<=this.bytes.length-this.frameHeaderSize()){this.pos+=e;let t=this.readAscii(4);if("\0\0\0\0"!==t&&!/[0-9A-Z]{4}/.test(t))return!1}return!0};if(!s(r)){let e=4===this.header.majorVersion?t:(0,c.decodeSynchsafe)(t);s(e)&&(r=e)}return this.pos=i,{id:e,size:r,flags:a}}}readId3V2TextEncoding(){let e=this.readU8();if(e>3)throw Error(`Unsupported text encoding: ${e}`);return e}readId3V2Text(e,t){let r=this.pos,a=this.readBytes(t-this.pos);switch(e){case o.ISO_8859_1:{let e="";for(let t=0;t<a.length;t++){let i=a[t];if(0===i){this.pos=r+t+1;break}e+=String.fromCharCode(i)}return e}case o.UTF_16_WITH_BOM:if(255===a[0]&&254===a[1]){let e=new TextDecoder("utf-16le"),t=(0,d.coalesceIndex)(a.findIndex((e,t)=>0===e&&0===a[t+1]&&t%2==0),a.length);return this.pos=r+Math.min(t+2,a.length),e.decode(a.subarray(2,t))}if(254===a[0]&&255===a[1]){let e=new TextDecoder("utf-16be"),t=(0,d.coalesceIndex)(a.findIndex((e,t)=>0===e&&0===a[t+1]&&t%2==0),a.length);return this.pos=r+Math.min(t+2,a.length),e.decode(a.subarray(2,t))}{let e=(0,d.coalesceIndex)(a.findIndex(e=>0===e),a.length);return this.pos=r+Math.min(e+1,a.length),d.textDecoder.decode(a.subarray(0,e))}case o.UTF_16_BE_NO_BOM:{let e=new TextDecoder("utf-16be"),t=(0,d.coalesceIndex)(a.findIndex((e,t)=>0===e&&0===a[t+1]&&t%2==0),a.length);return this.pos=r+Math.min(t+2,a.length),e.decode(a.subarray(0,t))}case o.UTF_8:{let e=(0,d.coalesceIndex)(a.findIndex(e=>0===e),a.length);return this.pos=r+Math.min(e+1,a.length),d.textDecoder.decode(a.subarray(0,e))}}}readId3V2EncodingAndText(e){if(this.pos>=e)return"";let t=this.readId3V2TextEncoding();return this.readId3V2Text(t,e)}}class S{constructor(e){this.helper=new Uint8Array(8),this.helperView=(0,d.toDataView)(this.helper),this.writer=e}writeId3V2Tag(e){let t=this.writer.getPos();this.writeAscii("ID3"),this.writeU8(4),this.writeU8(0),this.writeU8(0),this.writeSynchsafeU32(0);let r=this.writer.getPos(),a=new Set;for(let{key:t,value:r}of(0,d.keyValueIterator)(e))switch(t){case"title":this.writeId3V2TextFrame("TIT2",r),a.add("TIT2");break;case"description":this.writeId3V2TextFrame("TIT3",r),a.add("TIT3");break;case"artist":this.writeId3V2TextFrame("TPE1",r),a.add("TPE1");break;case"album":this.writeId3V2TextFrame("TALB",r),a.add("TALB");break;case"albumArtist":this.writeId3V2TextFrame("TPE2",r),a.add("TPE2");break;case"trackNumber":{let t=void 0!==e.tracksTotal?`${r}/${e.tracksTotal}`:r.toString();this.writeId3V2TextFrame("TRCK",t),a.add("TRCK")}break;case"discNumber":{let t=void 0!==e.discsTotal?`${r}/${e.discsTotal}`:r.toString();this.writeId3V2TextFrame("TPOS",t),a.add("TPOS")}break;case"genre":this.writeId3V2TextFrame("TCON",r),a.add("TCON");break;case"date":this.writeId3V2TextFrame("TDRC",r.toISOString().slice(0,10)),a.add("TDRC");break;case"lyrics":this.writeId3V2LyricsFrame(r),a.add("USLT");break;case"comment":this.writeId3V2CommentFrame(r),a.add("COMM");break;case"images":{let e={coverFront:3,coverBack:4,unknown:0};for(let t of r){let r=e[t.kind]??0,a=t.description??"";this.writeId3V2ApicFrame(t.mimeType,r,a,t.data)}}break;case"tracksTotal":case"discsTotal":case"raw":break;default:(0,d.assertNever)(t)}if(e.raw)for(let t in e.raw){let r,i=e.raw[t];if(!(null==i||4!==t.length||a.has(t))){if("string"==typeof i){let e=d.textEncoder.encode(i);(r=new Uint8Array(e.byteLength+2))[0]=o.UTF_8,r.set(e,1)}else{if(!(i instanceof Uint8Array))continue;r=i}this.writeAscii(t),this.writeSynchsafeU32(r.byteLength),this.writeU16(0),this.writer.write(r)}}let i=this.writer.getPos(),s=i-r;return this.writer.seek(t+6),this.writeSynchsafeU32(s),this.writer.seek(i),s+10}writeU8(e){this.helper[0]=e,this.writer.write(this.helper.subarray(0,1))}writeU16(e){this.helperView.setUint16(0,e,!1),this.writer.write(this.helper.subarray(0,2))}writeU32(e){this.helperView.setUint32(0,e,!1),this.writer.write(this.helper.subarray(0,4))}writeAscii(e){for(let t=0;t<e.length;t++)this.helper[t]=e.charCodeAt(t);this.writer.write(this.helper.subarray(0,e.length))}writeSynchsafeU32(e){this.writeU32((0,c.encodeSynchsafe)(e))}writeIsoString(e){let t=new Uint8Array(e.length+1);for(let r=0;r<e.length;r++)t[r]=e.charCodeAt(r);t[e.length]=0,this.writer.write(t)}writeUtf8String(e){let t=d.textEncoder.encode(e);this.writer.write(t),this.writeU8(0)}writeId3V2TextFrame(e,t){let r=(0,d.isIso88591Compatible)(t),a=r?t.length:d.textEncoder.encode(t).byteLength;this.writeAscii(e),this.writeSynchsafeU32(1+a+1),this.writeU16(0),this.writeU8(r?o.ISO_8859_1:o.UTF_8),r?this.writeIsoString(t):this.writeUtf8String(t)}writeId3V2LyricsFrame(e){let t=(0,d.isIso88591Compatible)(e),r=5+e.length+1;this.writeAscii("USLT"),this.writeSynchsafeU32(r),this.writeU16(0),this.writeU8(t?o.ISO_8859_1:o.UTF_8),this.writeAscii("und"),t?(this.writeIsoString(""),this.writeIsoString(e)):(this.writeUtf8String(""),this.writeUtf8String(e))}writeId3V2CommentFrame(e){let t=(0,d.isIso88591Compatible)(e),r=t?e.length:d.textEncoder.encode(e).byteLength;this.writeAscii("COMM"),this.writeSynchsafeU32(5+r+1),this.writeU16(0),this.writeU8(t?o.ISO_8859_1:o.UTF_8),this.writeU8(117),this.writeU8(110),this.writeU8(100),t?(this.writeIsoString(""),this.writeIsoString(e)):(this.writeUtf8String(""),this.writeUtf8String(e))}writeId3V2ApicFrame(e,t,r,a){let i=(0,d.isIso88591Compatible)(e)&&(0,d.isIso88591Compatible)(r),s=i?r.length:d.textEncoder.encode(r).byteLength,n=1+e.length+1+1+s+1+a.byteLength;this.writeAscii("APIC"),this.writeSynchsafeU32(n),this.writeU16(0),this.writeU8(i?o.ISO_8859_1:o.UTF_8),i?this.writeIsoString(e):this.writeUtf8String(e),this.writeU8(t),i?this.writeIsoString(r):this.writeUtf8String(r),this.writer.write(a)}}},{"../shared/mp3-misc.js":"jGy7Y","./misc.js":"jrq2g","./reader.js":"6AkKg","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],ixvHZ:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"readNextMp3FrameHeader",()=>o);var s=e("../../shared/mp3-misc.js"),n=e("../reader.js");let o=async(e,t,r)=>{let a=t;for(;null===r||a<r;){let t=e.requestSlice(a,s.FRAME_HEADER_SIZE);if(t instanceof Promise&&(t=await t),!t)break;let r=(0,n.readU32Be)(t),i=(0,s.readMp3FrameHeader)(r,null!==e.fileSize?e.fileSize-a:null);if(i.header)return{header:i.header,startPos:a};a+=i.bytesAdvanced}return null}},{"../../shared/mp3-misc.js":"jGy7Y","../reader.js":"6AkKg","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],lRP3H:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"OggDemuxer",()=>f);var s=e("../codec.js"),n=e("../codec-data.js"),o=e("../demuxer.js"),l=e("../input-track.js"),c=e("../metadata.js"),d=e("../misc.js"),u=e("../packet.js"),h=e("../reader.js"),m=e("./ogg-misc.js"),p=e("./ogg-reader.js");class f extends o.Demuxer{constructor(e){super(e),this.metadataPromise=null,this.bitstreams=[],this.tracks=[],this.metadataTags={},this.reader=e._reader}async readMetadata(){return this.metadataPromise??=(async()=>{let e=0;for(;;){let t=this.reader.requestSliceRange(e,p.MIN_PAGE_HEADER_SIZE,p.MAX_PAGE_HEADER_SIZE);if(t instanceof Promise&&(t=await t),!t)break;let r=(0,p.readPageHeader)(t);if(!r||!(2&r.headerType))break;this.bitstreams.push({serialNumber:r.serialNumber,bosPage:r,description:null,numberOfChannels:-1,sampleRate:-1,codecInfo:{codec:null,vorbisInfo:null,opusInfo:null},lastMetadataPacket:null}),e=r.headerStartPos+r.totalSize}for(let e of this.bitstreams){let t=await this.readPacket(e.bosPage,0);t&&(t.data.byteLength>=7&&1===t.data[0]&&118===t.data[1]&&111===t.data[2]&&114===t.data[3]&&98===t.data[4]&&105===t.data[5]&&115===t.data[6]?await this.readVorbisMetadata(t,e):t.data.byteLength>=8&&79===t.data[0]&&112===t.data[1]&&117===t.data[2]&&115===t.data[3]&&72===t.data[4]&&101===t.data[5]&&97===t.data[6]&&100===t.data[7]&&await this.readOpusMetadata(t,e),null!==e.codecInfo.codec&&this.tracks.push(new(0,l.InputAudioTrack)(this.input,new g(e,this))))}})()}async readVorbisMetadata(e,t){let r=await this.findNextPacketStart(e);if(!r)return;let a=await this.readPacket(r.startPage,r.startSegmentIndex);if(!a||!(r=await this.findNextPacketStart(a)))return;let i=await this.readPacket(r.startPage,r.startSegmentIndex);if(!i||3!==a.data[0]||5!==i.data[0])return;let s=[],o=e=>{for(;s.push(Math.min(255,e)),!(e<255);)e-=255};o(e.data.length),o(a.data.length);let l=new Uint8Array(1+s.length+e.data.length+a.data.length+i.data.length);l[0]=2,l.set(s,1),l.set(e.data,1+s.length),l.set(a.data,1+s.length+e.data.length),l.set(i.data,1+s.length+e.data.length+a.data.length),t.codecInfo.codec="vorbis",t.description=l,t.lastMetadataPacket=i;let c=(0,d.toDataView)(e.data);t.numberOfChannels=c.getUint8(11),t.sampleRate=c.getUint32(12,!0);let u=c.getUint8(28);t.codecInfo.vorbisInfo={blocksizes:[1<<(15&u),1<<(u>>4)],modeBlockflags:(0,n.parseModesFromVorbisSetupPacket)(i.data).modeBlockflags},(0,n.readVorbisComments)(a.data.subarray(7),this.metadataTags)}async readOpusMetadata(e,t){let r=await this.findNextPacketStart(e);if(!r)return;let a=await this.readPacket(r.startPage,r.startSegmentIndex);if(!a)return;t.codecInfo.codec="opus",t.description=e.data,t.lastMetadataPacket=a;let i=(0,n.parseOpusIdentificationHeader)(e.data);t.numberOfChannels=i.outputChannelCount,t.sampleRate=s.OPUS_SAMPLE_RATE,t.codecInfo.opusInfo={preSkip:i.preSkip},(0,n.readVorbisComments)(a.data.subarray(8),this.metadataTags)}async readPacket(e,t){(0,d.assert)(t<e.lacingValues.length);let r=0;for(let a=0;a<t;a++)r+=e.lacingValues[a];let a=e,i=r,s=t,n=[];e:for(;;){let t=this.reader.requestSlice(a.dataStartPos,a.dataSize);t instanceof Promise&&(t=await t),(0,d.assert)(t);let o=(0,h.readBytes)(t,a.dataSize);for(;;){if(s===a.lacingValues.length){n.push(o.subarray(r,i));break}let e=a.lacingValues[s];if(i+=e,e<255){n.push(o.subarray(r,i));break e}s++}let l=a.headerStartPos+a.totalSize;for(;;){let t=this.reader.requestSliceRange(l,p.MIN_PAGE_HEADER_SIZE,p.MAX_PAGE_HEADER_SIZE);if(t instanceof Promise&&(t=await t),!t)return null;let r=(0,p.readPageHeader)(t);if(!r)return null;if((a=r).serialNumber===e.serialNumber)break;l=a.headerStartPos+a.totalSize}r=0,i=0,s=0}let o=n.reduce((e,t)=>e+t.length,0);if(0===o)return null;let l=new Uint8Array(o),c=0;for(let e=0;e<n.length;e++){let t=n[e];l.set(t,c),c+=t.length}return{data:l,endPage:a,endSegmentIndex:s}}async findNextPacketStart(e){if(e.endSegmentIndex<e.endPage.lacingValues.length-1)return{startPage:e.endPage,startSegmentIndex:e.endSegmentIndex+1};if(4&e.endPage.headerType)return null;let t=e.endPage.headerStartPos+e.endPage.totalSize;for(;;){let r=this.reader.requestSliceRange(t,p.MIN_PAGE_HEADER_SIZE,p.MAX_PAGE_HEADER_SIZE);if(r instanceof Promise&&(r=await r),!r)return null;let a=(0,p.readPageHeader)(r);if(!a)return null;if(a.serialNumber===e.endPage.serialNumber)return{startPage:a,startSegmentIndex:0};t=a.headerStartPos+a.totalSize}}async getMimeType(){await this.readMetadata();let e=await Promise.all(this.tracks.map(e=>e.getCodecParameterString()));return(0,m.buildOggMimeType)({codecStrings:e.filter(Boolean)})}async getTracks(){return await this.readMetadata(),this.tracks}async computeDuration(){let e=await this.getTracks();return Math.max(0,...await Promise.all(e.map(e=>e.computeDuration())))}async getMetadataTags(){return await this.readMetadata(),this.metadataTags}}class g{constructor(e,t){this.bitstream=e,this.demuxer=t,this.encodedPacketToMetadata=new WeakMap,this.sequentialScanCache=[],this.sequentialScanMutex=new(0,d.AsyncMutex),this.internalSampleRate="opus"===e.codecInfo.codec?s.OPUS_SAMPLE_RATE:e.sampleRate}getId(){return this.bitstream.serialNumber}getNumber(){let e=this.demuxer.tracks.findIndex(e=>e._backing.bitstream===this.bitstream);return(0,d.assert)(-1!==e),e+1}getNumberOfChannels(){return this.bitstream.numberOfChannels}getSampleRate(){return this.bitstream.sampleRate}getTimeResolution(){return this.bitstream.sampleRate}getCodec(){return this.bitstream.codecInfo.codec}getInternalCodecId(){return null}async getDecoderConfig(){return(0,d.assert)(this.bitstream.codecInfo.codec),{codec:this.bitstream.codecInfo.codec,numberOfChannels:this.bitstream.numberOfChannels,sampleRate:this.bitstream.sampleRate,description:this.bitstream.description??void 0}}getName(){return null}getLanguageCode(){return d.UNDETERMINED_LANGUAGE}getDisposition(){return{...c.DEFAULT_TRACK_DISPOSITION}}async getFirstTimestamp(){return 0}async computeDuration(){let e=await this.getPacket(1/0,{metadataOnly:!0});return(e?.timestamp??0)+(e?.duration??0)}granulePositionToTimestampInSamples(e){return"opus"===this.bitstream.codecInfo.codec?((0,d.assert)(this.bitstream.codecInfo.opusInfo),e-this.bitstream.codecInfo.opusInfo.preSkip):e}createEncodedPacketFromOggPacket(e,t,r){if(!e)return null;let{durationInSamples:a,vorbisBlockSize:i}=(0,m.extractSampleMetadata)(e.data,this.bitstream.codecInfo,t.vorbisLastBlocksize),s=new(0,u.EncodedPacket)(r.metadataOnly?u.PLACEHOLDER_DATA:e.data,"key",Math.max(0,t.timestampInSamples)/this.internalSampleRate,a/this.internalSampleRate,e.endPage.headerStartPos+e.endSegmentIndex,e.data.byteLength);return this.encodedPacketToMetadata.set(s,{packet:e,timestampInSamples:t.timestampInSamples,durationInSamples:a,vorbisLastBlockSize:t.vorbisLastBlocksize,vorbisBlockSize:i}),s}async getFirstPacket(e){(0,d.assert)(this.bitstream.lastMetadataPacket);let t=await this.demuxer.findNextPacketStart(this.bitstream.lastMetadataPacket);if(!t)return null;let r=0;"opus"===this.bitstream.codecInfo.codec&&((0,d.assert)(this.bitstream.codecInfo.opusInfo),r-=this.bitstream.codecInfo.opusInfo.preSkip);let a=await this.demuxer.readPacket(t.startPage,t.startSegmentIndex);return this.createEncodedPacketFromOggPacket(a,{timestampInSamples:r,vorbisLastBlocksize:null},e)}async getNextPacket(e,t){let r=this.encodedPacketToMetadata.get(e);if(!r)throw Error("Packet was not created from this track.");let a=await this.demuxer.findNextPacketStart(r.packet);if(!a)return null;let i=r.timestampInSamples+r.durationInSamples,s=await this.demuxer.readPacket(a.startPage,a.startSegmentIndex);return this.createEncodedPacketFromOggPacket(s,{timestampInSamples:i,vorbisLastBlocksize:r.vorbisBlockSize},t)}async getPacket(e,t){let r,a;if(null===this.demuxer.reader.fileSize)return this.getPacketSequential(e,t);let i=(0,d.roundIfAlmostInteger)(e*this.internalSampleRate);if(0===i)return this.getFirstPacket(t);if(i<0)return null;(0,d.assert)(this.bitstream.lastMetadataPacket);let s=await this.demuxer.findNextPacketStart(this.bitstream.lastMetadataPacket);if(!s)return null;let n=s.startPage,o=this.demuxer.reader.fileSize,l=[n];e:for(;n.headerStartPos+n.totalSize<o;){let e=Math.floor((n.headerStartPos+o)/2),t=e;for(;;){let r=Math.min(t+p.MAX_PAGE_SIZE,o-p.MIN_PAGE_HEADER_SIZE),a=this.demuxer.reader.requestSlice(t,r-t);if(a instanceof Promise&&(a=await a),(0,d.assert)(a),!(0,p.findNextPageHeader)(a,r)){o=e+p.MIN_PAGE_HEADER_SIZE;continue e}let s=this.demuxer.reader.requestSliceRange(a.filePos,p.MIN_PAGE_HEADER_SIZE,p.MAX_PAGE_HEADER_SIZE);s instanceof Promise&&(s=await s),(0,d.assert)(s);let c=(0,p.readPageHeader)(s);(0,d.assert)(c);let u=!1;if(c.serialNumber===this.bitstream.serialNumber)u=!0;else{let e=this.demuxer.reader.requestSlice(c.headerStartPos,c.totalSize);e instanceof Promise&&(e=await e),(0,d.assert)(e);let t=(0,h.readBytes)(e,c.totalSize);u=(0,m.computeOggPageCrc)(t)===c.checksum}if(!u){t=c.headerStartPos+4;continue}if(u&&c.serialNumber!==this.bitstream.serialNumber||-1===c.granulePosition){t=c.headerStartPos+c.totalSize;continue}this.granulePositionToTimestampInSamples(c.granulePosition)>i?o=c.headerStartPos:(n=c,l.push(c));continue e}}let c=s.startPage;for(let e of l){if(e.granulePosition===n.granulePosition)break;(!c||e.headerStartPos>c.headerStartPos)&&(c=e)}let f=c,g=[f];for(;f.serialNumber!==this.bitstream.serialNumber||f.granulePosition!==n.granulePosition;){let e=f.headerStartPos+f.totalSize,t=this.demuxer.reader.requestSliceRange(e,p.MIN_PAGE_HEADER_SIZE,p.MAX_PAGE_HEADER_SIZE);t instanceof Promise&&(t=await t),(0,d.assert)(t);let r=(0,p.readPageHeader)(t);(0,d.assert)(r),(f=r).serialNumber===this.bitstream.serialNumber&&g.push(f)}(0,d.assert)(-1!==f.granulePosition);let y=null,S=f,T=0;if(f.headerStartPos===s.startPage.headerStartPos)r=this.granulePositionToTimestampInSamples(0),a=!0,y=0;else{r=0,a=!1;for(let e=f.lacingValues.length-1;e>=0;e--)if(f.lacingValues[e]<255){y=e+1;break}if(null===y)throw Error("Invalid page with granule position: no packets end on this page.");T=y-1;let e={data:u.PLACEHOLDER_DATA,endPage:S,endSegmentIndex:T};if(await this.demuxer.findNextPacketStart(e)){let e=b(g,f,y);(0,d.assert)(e);let t=k(g,e.page,e.segmentIndex);t&&(f=t.page,y=t.segmentIndex)}else for(;;){let e=b(g,f,y);if(!e)break;let t=k(g,e.page,e.segmentIndex);if(!t)break;if(f=t.page,y=t.segmentIndex,e.page.headerStartPos!==S.headerStartPos){S=e.page,T=e.segmentIndex;break}}}let I=null,w=null;for(;null!==f;){(0,d.assert)(null!==y);let e=await this.demuxer.readPacket(f,y);if(!e)break;if(!(f.headerStartPos===s.startPage.headerStartPos&&y<s.startSegmentIndex)){let s=this.createEncodedPacketFromOggPacket(e,{timestampInSamples:r,vorbisLastBlocksize:w?.vorbisBlockSize??null},t);(0,d.assert)(s);let n=this.encodedPacketToMetadata.get(s);if((0,d.assert)(n),a||e.endPage.headerStartPos!==S.headerStartPos||e.endSegmentIndex!==T?r+=n.durationInSamples:(r=this.granulePositionToTimestampInSamples(f.granulePosition),a=!0,s=this.createEncodedPacketFromOggPacket(e,{timestampInSamples:r-n.durationInSamples,vorbisLastBlocksize:w?.vorbisBlockSize??null},t),(0,d.assert)(s),n=this.encodedPacketToMetadata.get(s),(0,d.assert)(n)),I=s,w=n,a&&(Math.max(r,0)>i||Math.max(n.timestampInSamples,0)===i))break}let n=await this.demuxer.findNextPacketStart(e);if(!n)break;f=n.startPage,y=n.startSegmentIndex}return I}async getPacketSequential(e,t){let r=await this.sequentialScanMutex.acquire();try{let r,a=(0,d.roundIfAlmostInteger)(e*this.internalSampleRate);e=a/this.internalSampleRate;let i=(0,d.binarySearchLessOrEqual)(this.sequentialScanCache,a,e=>e.timestampInSamples);if(-1!==i){let e=this.sequentialScanCache[i];r=this.createEncodedPacketFromOggPacket(e.packet,{timestampInSamples:e.timestampInSamples,vorbisLastBlocksize:e.vorbisLastBlockSize},t)}else r=await this.getFirstPacket(t);let s=0;for(;r&&r.timestamp<e;){let a=await this.getNextPacket(r,t);if(!a||a.timestamp>e)break;if(r=a,s++,100===s){s=0;let e=this.encodedPacketToMetadata.get(r);(0,d.assert)(e),this.sequentialScanCache.length>0&&(0,d.assert)((0,d.last)(this.sequentialScanCache).timestampInSamples<=e.timestampInSamples),this.sequentialScanCache.push(e)}}return r}finally{r()}}getKeyPacket(e,t){return this.getPacket(e,t)}getNextKeyPacket(e,t){return this.getNextPacket(e,t)}}let k=(e,t,r)=>{let a=t,i=r;e:for(;;){for(i--;i>=0;i--)if(a.lacingValues[i]<255){i++;break e}if((0,d.assert)(-1===i),!(1&a.headerType)){i=0;break}let t=(0,d.findLast)(e,e=>e.headerStartPos<a.headerStartPos);if(!t)return null;i=(a=t).lacingValues.length}if((0,d.assert)(-1!==i),i===a.lacingValues.length){let t=e[e.indexOf(a)+1];(0,d.assert)(t),a=t,i=0}return{page:a,segmentIndex:i}},b=(e,t,r)=>{if(r>0)return{page:t,segmentIndex:r-1};let a=(0,d.findLast)(e,e=>e.headerStartPos<t.headerStartPos);return a?{page:a,segmentIndex:a.lacingValues.length-1}:null}},{"../codec.js":"4GUiq","../codec-data.js":"zx4dz","../demuxer.js":"73Qqp","../input-track.js":"aU0uf","../metadata.js":"1RzS5","../misc.js":"jrq2g","../packet.js":"8dQhf","../reader.js":"6AkKg","./ogg-misc.js":"lbYXN","./ogg-reader.js":"frvPd","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],lbYXN:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"OGGS",()=>o),i.export(r,"computeOggPageCrc",()=>c),i.export(r,"extractSampleMetadata",()=>d),i.export(r,"buildOggMimeType",()=>u);var s=e("../codec-data.js"),n=e("../misc.js");let o=0x5367674f,l=new Uint32Array(256);for(let e=0;e<256;e++){let t=e<<24;for(let e=0;e<8;e++)t=0x80000000&t?t<<1^0x4c11db7:t<<1;l[e]=t>>>0}let c=e=>{let t=(0,n.toDataView)(e),r=t.getUint32(22,!0);t.setUint32(22,0,!0);let a=0;for(let t=0;t<e.length;t++)a=(a<<8^l[a>>>24^e[t]])>>>0;return t.setUint32(22,r,!0),a},d=(e,t,r)=>{let a=0,i=null;if(e.length>0)if("vorbis"===t.codec){(0,n.assert)(t.vorbisInfo);let s=t.vorbisInfo.modeBlockflags.length,o=(1<<(0,n.ilog)(s-1))-1<<1,l=(e[0]&o)>>1;if(l>=t.vorbisInfo.modeBlockflags.length)throw Error("Invalid mode number.");let c=r,d=t.vorbisInfo.modeBlockflags[l];if(i=t.vorbisInfo.blocksizes[d],1===d){let r=e[0]&(1|o)+1?1:0;c=t.vorbisInfo.blocksizes[r]}a=null!==c?c+i>>2:0}else"opus"===t.codec&&(a=(0,s.parseOpusTocByte)(e).durationInSamples);return{durationInSamples:a,vorbisBlockSize:i}},u=e=>{let t="audio/ogg";if(e.codecStrings){let r=[...new Set(e.codecStrings)];t+=`; codecs="${r.join(", ")}"`}return t}},{"../codec-data.js":"zx4dz","../misc.js":"jrq2g","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],frvPd:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"MIN_PAGE_HEADER_SIZE",()=>o),i.export(r,"MAX_PAGE_HEADER_SIZE",()=>l),i.export(r,"MAX_PAGE_SIZE",()=>c),i.export(r,"readPageHeader",()=>d),i.export(r,"findNextPageHeader",()=>u);var s=e("../reader.js"),n=e("./ogg-misc.js");let o=27,l=282,c=65307,d=e=>{let t=e.filePos;if((0,s.readU32Le)(e)!==n.OGGS)return null;e.skip(1);let r=(0,s.readU8)(e),a=(0,s.readI64Le)(e),i=(0,s.readU32Le)(e),o=(0,s.readU32Le)(e),l=(0,s.readU32Le)(e),c=(0,s.readU8)(e),d=new Uint8Array(c);for(let t=0;t<c;t++)d[t]=(0,s.readU8)(e);let u=27+c,h=d.reduce((e,t)=>e+t,0);return{headerStartPos:t,totalSize:u+h,dataStartPos:t+u,dataSize:h,headerType:r,granulePosition:a,serialNumber:i,sequenceNumber:o,checksum:l,lacingValues:d}},u=(e,t)=>{for(;e.filePos<t-3;){let t=(0,s.readU32Le)(e),r=255&t,a=t>>>8&255,i=t>>>16&255,o=t>>>24&255;if(79===r||79===a||79===i||79===o){if(e.skip(-4),t===n.OGGS)return!0;e.skip(1)}}return!1}},{"../reader.js":"6AkKg","./ogg-misc.js":"lbYXN","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],lP1MW:[function(e,t,r,a){var i,s,n=e("@parcel/transformer-js/src/esmodule-helpers.js");n.defineInteropFlag(r),n.export(r,"WaveFormat",()=>s),n.export(r,"WaveDemuxer",()=>p);var o=e("../demuxer.js"),l=e("../input-track.js"),c=e("../metadata.js"),d=e("../misc.js"),u=e("../packet.js"),h=e("../reader.js"),m=e("../id3.js");(i=s||(s={}))[i.PCM=1]="PCM",i[i.IEEE_FLOAT=3]="IEEE_FLOAT",i[i.ALAW=6]="ALAW",i[i.MULAW=7]="MULAW",i[i.EXTENSIBLE=65534]="EXTENSIBLE";class p extends o.Demuxer{constructor(e){super(e),this.metadataPromise=null,this.dataStart=-1,this.dataSize=-1,this.audioInfo=null,this.tracks=[],this.lastKnownPacketIndex=0,this.metadataTags={},this.reader=e._reader}async readMetadata(){return this.metadataPromise??=(async()=>{let e=this.reader.requestSlice(0,12);e instanceof Promise&&(e=await e),(0,d.assert)(e);let t=(0,h.readAscii)(e,4),r="RIFX"!==t,a="RF64"===t,i=(0,h.readU32)(e,r),s=a?this.reader.fileSize:Math.min(i+8,this.reader.fileSize??1/0);if("WAVE"!==(0,h.readAscii)(e,4))throw Error("Invalid WAVE file - wrong format");let n=0,o=null,c=e.filePos;for(;null===s||c<s;){let e=this.reader.requestSlice(c,8);if(e instanceof Promise&&(e=await e),!e)break;let t=(0,h.readAscii)(e,4),i=(0,h.readU32)(e,r),l=e.filePos;if(a&&0===n&&"ds64"!==t)throw Error('Invalid RF64 file: First chunk must be "ds64".');if("fmt "===t)await this.parseFmtChunk(l,i,r);else if("data"===t){if(o??=i,this.dataStart=e.filePos,this.dataSize=Math.min(o,(s??1/0)-this.dataStart),null===this.reader.fileSize)break}else if("ds64"===t){let e=this.reader.requestSlice(l,i);if(e instanceof Promise&&(e=await e),!e)break;let t=(0,h.readU64)(e,r);o=(0,h.readU64)(e,r),s=Math.min(t+8,this.reader.fileSize??1/0)}else"LIST"===t?await this.parseListChunk(l,i,r):("ID3 "===t||"id3 "===t)&&await this.parseId3Chunk(l,i);c=l+i+(1&i),n++}if(!this.audioInfo)throw Error('Invalid WAVE file - missing "fmt " chunk');if(-1===this.dataStart)throw Error('Invalid WAVE file - missing "data" chunk');let u=this.audioInfo.blockSizeInBytes;this.dataSize=Math.floor(this.dataSize/u)*u,this.tracks.push(new(0,l.InputAudioTrack)(this.input,new f(this)))})()}async parseFmtChunk(e,t,r){let a,i=this.reader.requestSlice(e,t);if(i instanceof Promise&&(i=await i),!i)return;let n=(0,h.readU16)(i,r),o=(0,h.readU16)(i,r),l=(0,h.readU32)(i,r);i.skip(4);let c=(0,h.readU16)(i,r);if((a=14===t?8:(0,h.readU16)(i,r),t>=18&&357!==n)&&Math.min(t-18,(0,h.readU16)(i,r))>=22&&n===s.EXTENSIBLE){i.skip(6);let e=(0,h.readBytes)(i,16);n=e[0]|e[1]<<8}(n===s.MULAW||n===s.ALAW)&&(a=8),this.audioInfo={format:n,numberOfChannels:o,sampleRate:l,sampleSizeInBytes:Math.ceil(a/8),blockSizeInBytes:c}}async parseListChunk(e,t,r){let a=this.reader.requestSlice(e,t);if(a instanceof Promise&&(a=await a),!a)return;let i=(0,h.readAscii)(a,4);if("INFO"!==i&&"INF0"!==i)return;let s=a.filePos;for(;s<=e+t-8;){a.filePos=s;let e=(0,h.readAscii)(a,4),t=(0,h.readU32)(a,r),i=(0,h.readBytes)(a,t),n=0;for(let e=0;e<i.length&&0!==i[e];e++)n++;let o=String.fromCharCode(...i.subarray(0,n));switch(this.metadataTags.raw??={},this.metadataTags.raw[e]=o,e){case"INAM":case"TITL":this.metadataTags.title??=o;break;case"TIT3":this.metadataTags.description??=o;break;case"IART":this.metadataTags.artist??=o;break;case"IPRD":this.metadataTags.album??=o;break;case"IPRT":case"ITRK":case"TRCK":{let e=o.split("/"),t=Number.parseInt(e[0],10),r=e[1]&&Number.parseInt(e[1],10);Number.isInteger(t)&&t>0&&(this.metadataTags.trackNumber??=t),r&&Number.isInteger(r)&&r>0&&(this.metadataTags.tracksTotal??=r)}break;case"ICRD":case"IDIT":{let e=new Date(o);Number.isNaN(e.getTime())||(this.metadataTags.date??=e)}break;case"YEAR":{let e=Number.parseInt(o,10);Number.isInteger(e)&&e>0&&(this.metadataTags.date??=new Date(e,0,1))}break;case"IGNR":case"GENR":this.metadataTags.genre??=o;break;case"ICMT":case"CMNT":case"COMM":this.metadataTags.comment??=o}s+=8+t+(1&t)}}async parseId3Chunk(e,t){let r=this.reader.requestSlice(e,t);if(r instanceof Promise&&(r=await r),!r)return;let a=(0,m.readId3V2Header)(r);if(a){let t=r.slice(e+10,a.size);(0,m.parseId3V2Tag)(t,a,this.metadataTags)}}getCodec(){if((0,d.assert)(this.audioInfo),this.audioInfo.format===s.MULAW)return"ulaw";if(this.audioInfo.format===s.ALAW)return"alaw";if(this.audioInfo.format===s.PCM){if(1===this.audioInfo.sampleSizeInBytes)return"pcm-u8";else if(2===this.audioInfo.sampleSizeInBytes)return"pcm-s16";else if(3===this.audioInfo.sampleSizeInBytes)return"pcm-s24";else if(4===this.audioInfo.sampleSizeInBytes)return"pcm-s32"}return this.audioInfo.format===s.IEEE_FLOAT&&4===this.audioInfo.sampleSizeInBytes?"pcm-f32":null}async getMimeType(){return"audio/wav"}async computeDuration(){await this.readMetadata();let e=this.tracks[0];return(0,d.assert)(e),e.computeDuration()}async getTracks(){return await this.readMetadata(),this.tracks}async getMetadataTags(){return await this.readMetadata(),this.metadataTags}}class f{constructor(e){this.demuxer=e}getId(){return 1}getNumber(){return 1}getCodec(){return this.demuxer.getCodec()}getInternalCodecId(){return(0,d.assert)(this.demuxer.audioInfo),this.demuxer.audioInfo.format}async getDecoderConfig(){let e=this.demuxer.getCodec();return e?((0,d.assert)(this.demuxer.audioInfo),{codec:e,numberOfChannels:this.demuxer.audioInfo.numberOfChannels,sampleRate:this.demuxer.audioInfo.sampleRate}):null}async computeDuration(){let e=await this.getPacket(1/0,{metadataOnly:!0});return(e?.timestamp??0)+(e?.duration??0)}getNumberOfChannels(){return(0,d.assert)(this.demuxer.audioInfo),this.demuxer.audioInfo.numberOfChannels}getSampleRate(){return(0,d.assert)(this.demuxer.audioInfo),this.demuxer.audioInfo.sampleRate}getTimeResolution(){return(0,d.assert)(this.demuxer.audioInfo),this.demuxer.audioInfo.sampleRate}getName(){return null}getLanguageCode(){return d.UNDETERMINED_LANGUAGE}getDisposition(){return{...c.DEFAULT_TRACK_DISPOSITION}}async getFirstTimestamp(){return 0}async getPacketAtIndex(e,t){let r;(0,d.assert)(e>=0),(0,d.assert)(this.demuxer.audioInfo);let a=2048*e*this.demuxer.audioInfo.blockSizeInBytes;if(a>=this.demuxer.dataSize)return null;let i=Math.min(2048*this.demuxer.audioInfo.blockSizeInBytes,this.demuxer.dataSize-a);if(null===this.demuxer.reader.fileSize){let e=this.demuxer.reader.requestSlice(this.demuxer.dataStart+a,i);if(e instanceof Promise&&(e=await e),!e)return null}if(t.metadataOnly)r=u.PLACEHOLDER_DATA;else{let e=this.demuxer.reader.requestSlice(this.demuxer.dataStart+a,i);e instanceof Promise&&(e=await e),(0,d.assert)(e),r=(0,h.readBytes)(e,i)}let s=2048*e/this.demuxer.audioInfo.sampleRate,n=i/this.demuxer.audioInfo.blockSizeInBytes/this.demuxer.audioInfo.sampleRate;return this.demuxer.lastKnownPacketIndex=Math.max(e,this.demuxer.lastKnownPacketIndex),new(0,u.EncodedPacket)(r,"key",s,n,e,i)}getFirstPacket(e){return this.getPacketAtIndex(0,e)}async getPacket(e,t){(0,d.assert)(this.demuxer.audioInfo);let r=Math.floor(Math.min(e*this.demuxer.audioInfo.sampleRate/2048,(this.demuxer.dataSize-1)/(2048*this.demuxer.audioInfo.blockSizeInBytes)));if(r<0)return null;let a=await this.getPacketAtIndex(r,t);if(a)return a;if(0===r)return null;(0,d.assert)(null===this.demuxer.reader.fileSize);let i=await this.getPacketAtIndex(this.demuxer.lastKnownPacketIndex,t);for(;i;){let e=await this.getNextPacket(i,t);if(!e)break;i=e}return i}getNextPacket(e,t){(0,d.assert)(this.demuxer.audioInfo);let r=Math.round(e.timestamp*this.demuxer.audioInfo.sampleRate/2048);return this.getPacketAtIndex(r+1,t)}getKeyPacket(e,t){return this.getPacket(e,t)}getNextKeyPacket(e,t){return this.getNextPacket(e,t)}}},{"../demuxer.js":"73Qqp","../input-track.js":"aU0uf","../metadata.js":"1RzS5","../misc.js":"jrq2g","../packet.js":"8dQhf","../reader.js":"6AkKg","../id3.js":"8coNE","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],iNEYI:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"MIN_ADTS_FRAME_HEADER_SIZE",()=>o),i.export(r,"MAX_ADTS_FRAME_HEADER_SIZE",()=>l),i.export(r,"readAdtsFrameHeader",()=>c);var s=e("../misc.js"),n=e("../reader.js");let o=7,l=9,c=e=>{let t=e.filePos,r=(0,n.readBytes)(e,9),a=new(0,s.Bitstream)(r);if(4095!==a.readBits(12)||(a.skipBits(1),0!==a.readBits(2)))return null;let i=a.readBits(1),o=a.readBits(2)+1,l=a.readBits(4);if(15===l)return null;a.skipBits(1);let c=a.readBits(3);if(0===c)throw Error("ADTS frames with channel configuration 0 are not supported.");a.skipBits(1),a.skipBits(1),a.skipBits(1),a.skipBits(1);let d=a.readBits(13);a.skipBits(11);let u=a.readBits(2)+1;if(1!==u)throw Error("ADTS frames with more than one AAC frame are not supported.");let h=null;return 1===i?e.filePos-=2:h=a.readBits(16),{objectType:o,samplingFrequencyIndex:l,channelConfiguration:c,frameLength:d,numberOfAacFrames:u,crcCheck:h,startPos:t}}},{"../misc.js":"jrq2g","../reader.js":"6AkKg","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],b3bBY:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"SAMPLES_PER_AAC_FRAME",()=>p),i.export(r,"AdtsDemuxer",()=>f);var s=e("../codec.js"),n=e("../demuxer.js"),o=e("../id3.js"),l=e("../input-track.js"),c=e("../metadata.js"),d=e("../misc.js"),u=e("../packet.js"),h=e("../reader.js"),m=e("./adts-reader.js");let p=1024;class f extends n.Demuxer{constructor(e){super(e),this.metadataPromise=null,this.firstFrameHeader=null,this.loadedSamples=[],this.metadataTags=null,this.tracks=[],this.readingMutex=new(0,d.AsyncMutex),this.lastSampleLoaded=!1,this.lastLoadedPos=0,this.nextTimestampInSamples=0,this.reader=e._reader}async readMetadata(){return this.metadataPromise??=(async()=>{for(;!this.firstFrameHeader&&!this.lastSampleLoaded;)await this.advanceReader();(0,d.assert)(this.firstFrameHeader),this.tracks=[new(0,l.InputAudioTrack)(this.input,new g(this))]})()}async advanceReader(){if(0===this.lastLoadedPos)for(;;){let e=this.reader.requestSlice(this.lastLoadedPos,o.ID3_V2_HEADER_SIZE);if(e instanceof Promise&&(e=await e),!e){this.lastSampleLoaded=!0;return}let t=(0,o.readId3V2Header)(e);if(!t)break;this.lastLoadedPos=e.filePos+t.size}let e=this.reader.requestSliceRange(this.lastLoadedPos,m.MIN_ADTS_FRAME_HEADER_SIZE,m.MAX_ADTS_FRAME_HEADER_SIZE);if(e instanceof Promise&&(e=await e),!e){this.lastSampleLoaded=!0;return}let t=(0,m.readAdtsFrameHeader)(e);if(!t||null!==this.reader.fileSize&&t.startPos+t.frameLength>this.reader.fileSize){this.lastSampleLoaded=!0;return}this.firstFrameHeader||(this.firstFrameHeader=t);let r=s.aacFrequencyTable[t.samplingFrequencyIndex];(0,d.assert)(void 0!==r);let a={timestamp:this.nextTimestampInSamples/r,duration:p/r,dataStart:t.startPos,dataSize:t.frameLength};this.loadedSamples.push(a),this.nextTimestampInSamples+=p,this.lastLoadedPos=t.startPos+t.frameLength}async getMimeType(){return"audio/aac"}async getTracks(){return await this.readMetadata(),this.tracks}async computeDuration(){await this.readMetadata();let e=this.tracks[0];return(0,d.assert)(e),e.computeDuration()}async getMetadataTags(){let e=await this.readingMutex.acquire();try{if(await this.readMetadata(),this.metadataTags)return this.metadataTags;this.metadataTags={};let e=0;for(;;){let t=this.reader.requestSlice(e,o.ID3_V2_HEADER_SIZE);if(t instanceof Promise&&(t=await t),!t)break;let r=(0,o.readId3V2Header)(t);if(!r)break;let a=this.reader.requestSlice(t.filePos,r.size);if(a instanceof Promise&&(a=await a),!a)break;(0,o.parseId3V2Tag)(a,r,this.metadataTags),e=t.filePos+r.size}return this.metadataTags}finally{e()}}}class g{constructor(e){this.demuxer=e}getId(){return 1}getNumber(){return 1}async getFirstTimestamp(){return 0}getTimeResolution(){return this.getSampleRate()/p}async computeDuration(){let e=await this.getPacket(1/0,{metadataOnly:!0});return(e?.timestamp??0)+(e?.duration??0)}getName(){return null}getLanguageCode(){return d.UNDETERMINED_LANGUAGE}getCodec(){return"aac"}getInternalCodecId(){return(0,d.assert)(this.demuxer.firstFrameHeader),this.demuxer.firstFrameHeader.objectType}getNumberOfChannels(){(0,d.assert)(this.demuxer.firstFrameHeader);let e=s.aacChannelMap[this.demuxer.firstFrameHeader.channelConfiguration];return(0,d.assert)(void 0!==e),e}getSampleRate(){(0,d.assert)(this.demuxer.firstFrameHeader);let e=s.aacFrequencyTable[this.demuxer.firstFrameHeader.samplingFrequencyIndex];return(0,d.assert)(void 0!==e),e}getDisposition(){return{...c.DEFAULT_TRACK_DISPOSITION}}async getDecoderConfig(){return(0,d.assert)(this.demuxer.firstFrameHeader),{codec:`mp4a.40.${this.demuxer.firstFrameHeader.objectType}`,numberOfChannels:this.getNumberOfChannels(),sampleRate:this.getSampleRate()}}async getPacketAtIndex(e,t){let r;if(-1===e)return null;let a=this.demuxer.loadedSamples[e];if(!a)return null;if(t.metadataOnly)r=u.PLACEHOLDER_DATA;else{let e=this.demuxer.reader.requestSlice(a.dataStart,a.dataSize);if(e instanceof Promise&&(e=await e),!e)return null;r=(0,h.readBytes)(e,a.dataSize)}return new(0,u.EncodedPacket)(r,"key",a.timestamp,a.duration,e,a.dataSize)}getFirstPacket(e){return this.getPacketAtIndex(0,e)}async getNextPacket(e,t){let r=await this.demuxer.readingMutex.acquire();try{let r=(0,d.binarySearchExact)(this.demuxer.loadedSamples,e.timestamp,e=>e.timestamp);if(-1===r)throw Error("Packet was not created from this track.");let a=r+1;for(;a>=this.demuxer.loadedSamples.length&&!this.demuxer.lastSampleLoaded;)await this.demuxer.advanceReader();return this.getPacketAtIndex(a,t)}finally{r()}}async getPacket(e,t){let r=await this.demuxer.readingMutex.acquire();try{for(;;){let r=(0,d.binarySearchLessOrEqual)(this.demuxer.loadedSamples,e,e=>e.timestamp);if(-1===r&&this.demuxer.loadedSamples.length>0)return null;if(this.demuxer.lastSampleLoaded||r>=0&&r+1<this.demuxer.loadedSamples.length)return this.getPacketAtIndex(r,t);await this.demuxer.advanceReader()}}finally{r()}}getKeyPacket(e,t){return this.getPacket(e,t)}getNextKeyPacket(e,t){return this.getNextPacket(e,t)}}},{"../codec.js":"4GUiq","../demuxer.js":"73Qqp","../id3.js":"8coNE","../input-track.js":"aU0uf","../metadata.js":"1RzS5","../misc.js":"jrq2g","../packet.js":"8dQhf","../reader.js":"6AkKg","./adts-reader.js":"iNEYI","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"4fsLo":[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"FlacDemuxer",()=>m);var s=e("../codec-data.js"),n=e("../demuxer.js"),o=e("../input-track.js"),l=e("../misc.js"),c=e("../packet.js"),d=e("../reader.js"),u=e("../metadata.js"),h=e("./flac-misc.js");class m extends n.Demuxer{constructor(e){super(e),this.loadedSamples=[],this.metadataPromise=null,this.track=null,this.metadataTags={},this.audioInfo=null,this.lastLoadedPos=null,this.blockingBit=null,this.readingMutex=new(0,l.AsyncMutex),this.lastSampleLoaded=!1,this.reader=e._reader}async computeDuration(){return await this.readMetadata(),(0,l.assert)(this.track),this.track.computeDuration()}async getMetadataTags(){return await this.readMetadata(),this.metadataTags}async getTracks(){return await this.readMetadata(),(0,l.assert)(this.track),[this.track]}async getMimeType(){return"audio/flac"}async readMetadata(){let e=4;return this.metadataPromise??=(async()=>{for(;null===this.reader.fileSize||e<this.reader.fileSize;){let t=this.reader.requestSlice(e,4);if(t instanceof Promise&&(t=await t),e+=4,null===t)throw Error(`Metadata block at position ${e} is too small! Corrupted file.`);(0,l.assert)(t);let r=(0,d.readU8)(t),a=(0,d.readU24Be)(t),i=(128&r)!=0;switch(127&r){case s.FlacBlockType.STREAMINFO:{let t=this.reader.requestSlice(e,a);if(t instanceof Promise&&(t=await t),(0,l.assert)(t),null===t)throw Error(`StreamInfo block at position ${e} is too small! Corrupted file.`);let r=(0,d.readBytes)(t,34),i=new(0,l.Bitstream)(r),s=i.readBits(16),n=i.readBits(16),c=i.readBits(24),u=i.readBits(24),h=i.readBits(20),m=i.readBits(3)+1;i.readBits(5);let f=i.readBits(36);i.skipBits(128);let g=new Uint8Array(42);g.set(new Uint8Array([102,76,97,67]),0),g.set(new Uint8Array([128,0,0,34]),4),g.set(r,8),this.audioInfo={numberOfChannels:m,sampleRate:h,totalSamples:f,minimumBlockSize:s,maximumBlockSize:n,minimumFrameSize:c,maximumFrameSize:u,description:g},this.track=new(0,o.InputAudioTrack)(this.input,new p(this));break}case s.FlacBlockType.VORBIS_COMMENT:{let t=this.reader.requestSlice(e,a);t instanceof Promise&&(t=await t),(0,l.assert)(t),(0,s.readVorbisComments)((0,d.readBytes)(t,a),this.metadataTags);break}case s.FlacBlockType.PICTURE:{let t=this.reader.requestSlice(e,a);t instanceof Promise&&(t=await t),(0,l.assert)(t);let r=(0,d.readU32Be)(t),i=(0,d.readU32Be)(t),s=l.textDecoder.decode((0,d.readBytes)(t,i)),n=(0,d.readU32Be)(t),o=l.textDecoder.decode((0,d.readBytes)(t,n));t.skip(16);let c=(0,d.readU32Be)(t),u=(0,d.readBytes)(t,c);this.metadataTags.images??=[],this.metadataTags.images.push({data:u,mimeType:s,kind:3===r?"coverFront":4===r?"coverBack":"unknown",description:o})}}if(e+=a,i){this.lastLoadedPos=e;break}}})()}async readNextFlacFrame({startPos:e,isFirstPacket:t}){(0,l.assert)(this.audioInfo);let r=this.audioInfo.maximumFrameSize+16,a=await this.reader.requestSliceRange(e,this.audioInfo.minimumFrameSize,r);if(!a)return null;let i=this.readFlacFrameHeader({slice:a,isFirstPacket:t});if(!i)return null;for(a.filePos=e+this.audioInfo.minimumFrameSize;;){if(a.filePos>a.end-6)return{num:i.num,blockSize:i.blockSize,sampleRate:i.sampleRate,size:a.end-e,isLastFrame:!0};if(255===(0,d.readU8)(a)){let t=a.filePos;if((0,d.readU8)(a)!==(1===this.blockingBit?249:248)){a.filePos=t;continue}a.skip(-2);let r=a.filePos-e,s=this.readFlacFrameHeader({slice:a,isFirstPacket:!1});if(!s){a.filePos=t;continue}if(0===this.blockingBit){if(s.num-i.num!=1){a.filePos=t;continue}}else if(s.num-i.num!==i.blockSize){a.filePos=t;continue}return{num:i.num,blockSize:i.blockSize,sampleRate:i.sampleRate,size:r,isLastFrame:!1}}}}readFlacFrameHeader({slice:e,isFirstPacket:t}){let r=e.filePos,a=(0,d.readBytes)(e,4),i=new(0,l.Bitstream)(a);if(32764!==i.readBits(15))return null;if(null===this.blockingBit){(0,l.assert)(t);let e=i.readBits(1);this.blockingBit=e}else if(1===this.blockingBit){if((0,l.assert)(!t),1!==i.readBits(1))return null}else if(0===this.blockingBit){if((0,l.assert)(!t),0!==i.readBits(1))return null}else throw Error("Invalid blocking bit");let s=(0,h.getBlockSizeOrUncommon)(i.readBits(4));if(!s)return null;(0,l.assert)(this.audioInfo);let n=(0,h.getSampleRateOrUncommon)(i.readBits(4),this.audioInfo.sampleRate);if(!n||(i.readBits(4),i.readBits(3),0!==i.readBits(1)))return null;let o=(0,h.readCodedNumber)(e),c=(0,h.readBlockSize)(e,s),u=(0,h.readSampleRate)(e,n);if(null===u||u!==this.audioInfo.sampleRate)return null;let m=e.filePos-r,p=(0,d.readU8)(e);return(e.skip(-m),e.skip(-1),p!==(0,h.calculateCrc8)((0,d.readBytes)(e,m)))?null:{num:o,blockSize:c,sampleRate:u}}async advanceReader(){await this.readMetadata(),(0,l.assert)(null!==this.lastLoadedPos),(0,l.assert)(this.audioInfo);let e=this.lastLoadedPos,t=await this.readNextFlacFrame({startPos:e,isFirstPacket:0===this.loadedSamples.length});if(!t){this.lastSampleLoaded=!0;return}let r=this.loadedSamples[this.loadedSamples.length-1],a={blockOffset:r?r.blockOffset+r.blockSize:0,blockSize:t.blockSize,byteOffset:e,byteSize:t.size};if(this.lastLoadedPos=this.lastLoadedPos+t.size,this.loadedSamples.push(a),t.isLastFrame){this.lastSampleLoaded=!0;return}}}class p{constructor(e){this.demuxer=e}getId(){return 1}getNumber(){return 1}getCodec(){return"flac"}getInternalCodecId(){return null}getNumberOfChannels(){return(0,l.assert)(this.demuxer.audioInfo),this.demuxer.audioInfo.numberOfChannels}async computeDuration(){let e=await this.getPacket(1/0,{metadataOnly:!0});return(e?.timestamp??0)+(e?.duration??0)}getSampleRate(){return(0,l.assert)(this.demuxer.audioInfo),this.demuxer.audioInfo.sampleRate}getName(){return null}getLanguageCode(){return l.UNDETERMINED_LANGUAGE}getTimeResolution(){return(0,l.assert)(this.demuxer.audioInfo),this.demuxer.audioInfo.sampleRate}getDisposition(){return{...u.DEFAULT_TRACK_DISPOSITION}}async getFirstTimestamp(){return 0}async getDecoderConfig(){return(0,l.assert)(this.demuxer.audioInfo),{codec:"flac",numberOfChannels:this.demuxer.audioInfo.numberOfChannels,sampleRate:this.demuxer.audioInfo.sampleRate,description:this.demuxer.audioInfo.description}}async getPacket(e,t){if((0,l.assert)(this.demuxer.audioInfo),e<0)throw Error("Timestamp cannot be negative");let r=await this.demuxer.readingMutex.acquire();try{for(;;){let r=(0,l.binarySearchLessOrEqual)(this.demuxer.loadedSamples,e,e=>e.blockOffset/this.demuxer.audioInfo.sampleRate);if(-1===r){await this.demuxer.advanceReader();continue}let a=this.demuxer.loadedSamples[r],i=a.blockOffset/this.demuxer.audioInfo.sampleRate,s=a.blockSize/this.demuxer.audioInfo.sampleRate;if(i+s<=e){if(this.demuxer.lastSampleLoaded)return this.getPacketAtIndex(this.demuxer.loadedSamples.length-1,t);await this.demuxer.advanceReader();continue}return this.getPacketAtIndex(r,t)}}finally{r()}}async getNextPacket(e,t){let r=await this.demuxer.readingMutex.acquire();try{let r=e.sequenceNumber+1;if(this.demuxer.lastSampleLoaded&&r>=this.demuxer.loadedSamples.length)return null;for(;r>=this.demuxer.loadedSamples.length&&!this.demuxer.lastSampleLoaded;)await this.demuxer.advanceReader();return this.getPacketAtIndex(r,t)}finally{r()}}getKeyPacket(e,t){return this.getPacket(e,t)}getNextKeyPacket(e,t){return this.getNextPacket(e,t)}async getPacketAtIndex(e,t){let r,a=this.demuxer.loadedSamples[e];if(!a)return null;if(t.metadataOnly)r=c.PLACEHOLDER_DATA;else{let e=this.demuxer.reader.requestSlice(a.byteOffset,a.byteSize);if(e instanceof Promise&&(e=await e),!e)return null;r=(0,d.readBytes)(e,a.byteSize)}(0,l.assert)(this.demuxer.audioInfo);let i=a.blockOffset/this.demuxer.audioInfo.sampleRate,s=a.blockSize/this.demuxer.audioInfo.sampleRate;return new(0,c.EncodedPacket)(r,"key",i,s,e,a.byteSize)}async getFirstPacket(e){for(;0===this.demuxer.loadedSamples.length&&!this.demuxer.lastSampleLoaded;)await this.demuxer.advanceReader();return this.getPacketAtIndex(0,e)}}},{"../codec-data.js":"zx4dz","../demuxer.js":"73Qqp","../input-track.js":"aU0uf","../misc.js":"jrq2g","../packet.js":"8dQhf","../reader.js":"6AkKg","../metadata.js":"1RzS5","./flac-misc.js":"G9NqQ","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],G9NqQ:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"getBlockSizeOrUncommon",()=>o),i.export(r,"getSampleRateOrUncommon",()=>l),i.export(r,"readCodedNumber",()=>c),i.export(r,"readBlockSize",()=>d),i.export(r,"readSampleRate",()=>u),i.export(r,"calculateCrc8",()=>h);var s=e("../misc.js"),n=e("../reader.js");let o=e=>{if(0===e)return null;if(1===e)return 192;if(e>=2&&e<=5)return 144*2**e;if(6===e)return"uncommon-u8";if(7===e)return"uncommon-u16";else if(e>=8&&e<=15)return 2**e;else return null},l=(e,t)=>{switch(e){case 0:return t;case 1:return 88200;case 2:return 176400;case 3:return 192e3;case 4:return 8e3;case 5:return 16e3;case 6:return 22050;case 7:return 24e3;case 8:return 32e3;case 9:return 44100;case 10:return 48e3;case 11:return 96e3;case 12:return"uncommon-u8";case 13:return"uncommon-u16";case 14:return"uncommon-u16-10";default:return null}},c=e=>{let t=0,r=new(0,s.Bitstream)((0,n.readBytes)(e,1));for(;1===r.readBits(1);)t++;if(0===t)return r.readBits(7);let a=[],i=t-1,o=new(0,s.Bitstream)((0,n.readBytes)(e,i)),l=8-t-1;for(let e=0;e<l;e++)a.unshift(r.readBits(1));for(let e=0;e<i;e++)for(let e=0;e<8;e++){let t=o.readBits(1);e<2||a.unshift(t)}return a.reduce((e,t,r)=>e|t<<r,0)},d=(e,t)=>"uncommon-u16"===t?(0,n.readU16Be)(e)+1:"uncommon-u8"===t?(0,n.readU8)(e)+1:"number"==typeof t?t:void((0,s.assertNever)(t),(0,s.assert)(!1)),u=(e,t)=>"uncommon-u16"===t?(0,n.readU16Be)(e):"uncommon-u16-10"===t?10*(0,n.readU16Be)(e):"uncommon-u8"===t?(0,n.readU8)(e):"number"==typeof t?t:null,h=e=>{let t=0;for(let r of e){t^=r;for(let e=0;e<8;e++)(128&t)!=0?t=t<<1^7:t<<=1,t&=255}return t}},{"../misc.js":"jrq2g","../reader.js":"6AkKg","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],hFAEl:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"MpegTsDemuxer",()=>k),i.export(r,"MpegTsTrackBacking",()=>S);var s=e("../adts/adts-demuxer.js"),n=e("../adts/adts-reader.js"),o=e("../codec.js"),l=e("../codec-data.js"),c=e("../demuxer.js"),d=e("../input-track.js"),u=e("../metadata.js"),h=e("../misc.js"),m=e("../../shared/mp3-misc.js"),p=e("../packet.js"),f=e("../reader.js"),g=e("./mpeg-ts-misc.js");class k extends c.Demuxer{constructor(e){super(e),this.metadataPromise=null,this.elementaryStreams=[],this.tracks=[],this.packetOffset=0,this.packetStride=-1,this.sectionEndPositions=[],this.seekChunkSize=5242880,this.minReferencePointByteDistance=-1,this.reader=e._reader}async readMetadata(){return this.metadataPromise??=(async()=>{let e=g.TS_PACKET_SIZE+16+1,t=this.reader.requestSlice(0,e);t instanceof Promise&&(t=await t),(0,h.assert)(t);let r=(0,f.readBytes)(t,e);if(71===r[0]&&71===r[g.TS_PACKET_SIZE])this.packetOffset=0,this.packetStride=g.TS_PACKET_SIZE;else if(71===r[0]&&71===r[g.TS_PACKET_SIZE+16])this.packetOffset=0,this.packetStride=g.TS_PACKET_SIZE+16;else if(71===r[4]&&71===r[4+g.TS_PACKET_SIZE])this.packetOffset=4,this.packetStride=g.TS_PACKET_SIZE;else throw Error("Unreachable.");this.minReferencePointByteDistance=256*this.packetStride;let a=this.packetOffset,i=null,s=!1,c=!1;for(;;){let e=await this.readPacketHeader(a);if(!e)break;if(0===e.payloadUnitStartIndicator){a+=this.packetStride;continue}let t=await this.readSection(a,!0,!c);if(!t)break;let r=!1;if(!c&&0!==t.pid&&(0!==t.payload[0]||0!==t.payload[1]||1!==t.payload[2])){let e=new(0,h.Bitstream)(t.payload),a=e.readAlignedByte();e.skipBits(8*a),r=2===e.readBits(8)}if(0!==t.pid||s)if((t.pid===i||r)&&!c){let e=new(0,h.Bitstream)(t.payload),r=e.readAlignedByte();e.skipBits(8*r),e.skipBits(12);let a=e.readBits(12);e.skipBits(43),e.readBits(13),e.skipBits(6);let i=e.readBits(10);for(e.skipBits(8*i);8*(a+3)-e.pos>32;){let t=e.readBits(8);e.skipBits(3);let r=e.readBits(13);e.skipBits(6);let a=e.readBits(10);e.skipBits(8*a);let i=null;switch(t){case 3:case 4:case 15:i={type:"audio",codec:15===t?"aac":"mp3",aacCodecInfo:null,numberOfChannels:-1,sampleRate:-1};break;case 27:case 36:i={type:"video",codec:27===t?"avc":"hevc",avcCodecInfo:null,hevcCodecInfo:null,colorSpace:{primaries:null,transfer:null,matrix:null,fullRange:null},width:-1,height:-1,reorderSize:-1};break;default:console.warn(`Unsupported stream_type 0x${t.toString(16)}; ignoring stream.`)}i&&this.elementaryStreams.push({demuxer:this,pid:r,streamType:t,initialized:!1,firstSection:null,info:i,referencePesPackets:[]})}c=!0}else{let e=this.elementaryStreams.find(e=>e.pid===t.pid);if(e&&!e.initialized){let r=y(t);if(!r)throw Error(`Couldn't read first PES packet for Elementary Stream with PID ${e.pid}`);if(e.firstSection=t,"video"===e.info.type)if("avc"===e.info.codec){if(e.info.avcCodecInfo=(0,l.extractAvcDecoderConfigurationRecord)(r.data),!e.info.avcCodecInfo)throw Error("Invalid AVC video stream; could not extract AVCDecoderConfigurationRecord from first packet.");let t=e.info.avcCodecInfo.sequenceParameterSets[0];(0,h.assert)(t);let a=(0,l.parseAvcSps)(t);e.info.width=a.displayWidth,e.info.height=a.displayHeight,e.info.colorSpace={primaries:h.COLOR_PRIMARIES_MAP_INVERSE[a.colourPrimaries],transfer:h.TRANSFER_CHARACTERISTICS_MAP_INVERSE[a.transferCharacteristics],matrix:h.MATRIX_COEFFICIENTS_MAP_INVERSE[a.matrixCoefficients],fullRange:!!a.fullRangeFlag},e.info.reorderSize=a.maxDecFrameBuffering,e.initialized=!0}else if("hevc"===e.info.codec){if(e.info.hevcCodecInfo=(0,l.extractHevcDecoderConfigurationRecord)(r.data),!e.info.hevcCodecInfo)throw Error("Invalid HEVC video stream; could not extract HVCDecoderConfigurationRecord from first packet.");let t=e.info.hevcCodecInfo.arrays.find(e=>e.nalUnitType===l.HevcNalUnitType.SPS_NUT).nalUnits[0];(0,h.assert)(t);let a=(0,l.parseHevcSps)(t);e.info.width=a.displayWidth,e.info.height=a.displayHeight,e.info.colorSpace={primaries:h.COLOR_PRIMARIES_MAP_INVERSE[a.colourPrimaries],transfer:h.TRANSFER_CHARACTERISTICS_MAP_INVERSE[a.transferCharacteristics],matrix:h.MATRIX_COEFFICIENTS_MAP_INVERSE[a.matrixCoefficients],fullRange:!!a.fullRangeFlag},e.info.reorderSize=a.maxDecFrameBuffering,e.initialized=!0}else throw Error("Unhandled.");else if("aac"===e.info.codec){let t=f.FileSlice.tempFromBytes(r.data),a=(0,n.readAdtsFrameHeader)(t);if(!a)throw Error("Invalid AAC audio stream; could not read ADTS frame header from first packet.");e.info.aacCodecInfo={isMpeg2:!1,objectType:a.objectType},e.info.numberOfChannels=o.aacChannelMap[a.channelConfiguration],e.info.sampleRate=o.aacFrequencyTable[a.samplingFrequencyIndex],e.initialized=!0}else if("mp3"===e.info.codec){let t=(0,f.readU32Be)(f.FileSlice.tempFromBytes(r.data)),a=(0,m.readMp3FrameHeader)(t,r.data.byteLength);if(!a.header)throw Error("Invalid MP3 audio stream; could not read frame header from first packet.");e.info.numberOfChannels=3===a.header.channel?1:2,e.info.sampleRate=a.header.sampleRate,e.initialized=!0}else throw Error("Unhandled.")}}else{let e=new(0,h.Bitstream)(t.payload),r=e.readAlignedByte();e.skipBits(8*r),e.skipBits(14);let a=e.readBits(10);for(e.skipBits(40);8*(a+3)-e.pos>32;){let t=e.readBits(16);if(e.skipBits(3),0!==t)if(null!==i)throw Error("Only files with a single program are supported.");else i=e.readBits(13)}if(null===i)throw Error("Program Association Table must link to a Program Map Table.");s=!0}if(c&&this.elementaryStreams.every(e=>e.initialized))break;a+=this.packetStride}if(!c){if(!s)throw Error("No Program Association Table found in the file.");throw Error("No Program Map Table found in the file.")}for(let e of this.elementaryStreams)"video"===e.info.type?this.tracks.push(new(0,d.InputVideoTrack)(this.input,new T(e))):this.tracks.push(new(0,d.InputAudioTrack)(this.input,new I(e)))})()}async getTracks(){return await this.readMetadata(),this.tracks}async getMetadataTags(){return{}}async computeDuration(){let e=await this.getTracks();return Math.max(0,...await Promise.all(e.map(e=>e.computeDuration())))}async getMimeType(){await this.readMetadata();let e=await this.getTracks(),t=await Promise.all(e.map(e=>e.getCodecParameterString()));return(0,g.buildMpegTsMimeType)(t)}async readSection(e,t,r=!1){let a,i=e,s=e,n=[],o=0,l=null,c=!0,d=0;for(;;){let e=await this.readPacket(s);if(s+=this.packetStride,!e)break;if(l){if(e.pid!==l.pid)if(!r)continue;else break;if(1===e.payloadUnitStartIndicator)break}else{if(0===e.payloadUnitStartIndicator)break;l=e}let a=!!(2&e.adaptationFieldControl),u=!!(1&e.adaptationFieldControl),m=0;if(a&&(m=1+e.body[0],e===l&&m>1&&(d=e.body[1]>>6&1)),u&&(0===m?(n.push(e.body),o+=e.body.byteLength):(n.push(e.body.subarray(m)),o+=e.body.byteLength-m)),i=s,!t&&o>=64||-1!==(0,h.binarySearchExact)(this.sectionEndPositions,i,e=>e)){c=!1;break}}if(c){let e=(0,h.binarySearchLessOrEqual)(this.sectionEndPositions,i,e=>e);this.sectionEndPositions.splice(e+1,0,i)}if(!l)return null;if(1===n.length)a=n[0];else{a=new Uint8Array(n.reduce((e,t)=>e+t.length,0));let e=0;for(let t of n)a.set(t,e),e+=t.length}return{startPos:e,endPos:t?i:null,pid:l.pid,payload:a,randomAccessIndicator:d}}async readPacketHeader(e){let t=this.reader.requestSlice(e,4);if(t instanceof Promise&&(t=await t),!t)return null;if(71!==(0,f.readU8)(t))throw Error("Invalid TS packet sync byte. Likely an internal bug, please report this file.");let r=(0,f.readU16Be)(t);return{payloadUnitStartIndicator:r>>14&1,pid:8191&r,adaptationFieldControl:(0,f.readU8)(t)>>4&3}}async readPacket(e){let t=this.reader.requestSlice(e,g.TS_PACKET_SIZE);if(t instanceof Promise&&(t=await t),!t)return null;let r=(0,f.readBytes)(t,g.TS_PACKET_SIZE);if(71!==r[0])throw Error("Invalid TS packet sync byte. Likely an internal bug, please report this file.");let a=(r[1]<<8)+r[2];return{payloadUnitStartIndicator:a>>14&1,pid:8191&a,adaptationFieldControl:r[3]>>4&3,body:r.subarray(4)}}}let b=e=>{if(e.payload.byteLength<3)return null;let t=new(0,h.Bitstream)(e.payload);if(1!==t.readBits(24))return null;let r=t.readBits(8);if(t.skipBits(16),188===r||190===r||191===r||240===r||241===r||255===r||242===r||248===r)return null;t.skipBits(8);let a=t.readBits(2);t.skipBits(14);let i=0;if(2===a||3===a)t.skipBits(4),i+=0x40000000*t.readBits(3),t.skipBits(1),i+=32768*t.readBits(15),t.skipBits(1),i+=t.readBits(15);else throw Error("PES packets without PTS are not currently supported. If you think this file should be supported, please report it.");return{sectionStartPos:e.startPos,sectionEndPos:e.endPos,pts:i,randomAccessIndicator:e.randomAccessIndicator}},y=e=>{(0,h.assert)(null!==e.endPos);let t=b(e);if(!t)return null;let r=new(0,h.Bitstream)(e.payload);r.skipBits(32);let a=r.readBits(16);r.skipBits(16);let i=r.readBits(8),s=r.pos+8*i;r.pos=s;let n=s/8;(0,h.assert)(Number.isInteger(n));let o=e.payload.subarray(n,a>0?6+a:e.payload.byteLength);return{...t,data:o}};class S{constructor(e){this.elementaryStream=e,this.packetBuffers=new WeakMap,this.packetSectionStarts=new WeakMap}getId(){return this.elementaryStream.pid}getNumber(){let e=this.elementaryStream.demuxer,t=this.elementaryStream.info.type,r=0;for(let a of e.tracks)if(a.type===t&&r++,(0,h.assert)(a._backing instanceof S),a._backing.elementaryStream===this.elementaryStream)break;return r}getCodec(){throw Error("Not implemented on base class.")}getInternalCodecId(){return this.elementaryStream.streamType}getName(){return null}getLanguageCode(){return h.UNDETERMINED_LANGUAGE}getDisposition(){return u.DEFAULT_TRACK_DISPOSITION}getTimeResolution(){return g.TIMESCALE}async computeDuration(){let e=await this.getPacket(1/0,{metadataOnly:!0});return(e?.timestamp??0)+(e?.duration??0)}async getFirstTimestamp(){let e=await this.getFirstPacket({metadataOnly:!0});return e?.timestamp??0}createEncodedPacket(e,t,r){let a;return a=this.allPacketsAreKeyPackets()||1===e.randomAccessIndicator?"key":"delta",new(0,p.EncodedPacket)(r.metadataOnly?p.PLACEHOLDER_DATA:e.data,a,e.pts/g.TIMESCALE,Math.max(t/g.TIMESCALE,0),e.sequenceNumber,e.data.byteLength)}async getFirstPacket(e){let t=this.elementaryStream.firstSection;(0,h.assert)(t);let r=y(t);(0,h.assert)(r);let a=new P(this,new E(this.elementaryStream,r)),i=await a.readNext();if(!i)return null;let s=this.createEncodedPacket(i.packet,i.duration,e);return this.packetBuffers.set(s,a),this.packetSectionStarts.set(s,i.packet.sectionStartPos),s}async getNextPacket(e,t){let r=this.packetBuffers.get(e);if(r){let a=await r.readNext();if(!a)return null;this.packetBuffers.delete(e);let i=this.createEncodedPacket(a.packet,a.duration,t);return this.packetBuffers.set(i,r),this.packetSectionStarts.set(i,a.packet.sectionStartPos),i}let a=this.packetSectionStarts.get(e);if(void 0===a)throw Error("Packet was not created from this track.");let i=this.elementaryStream.demuxer,s=await i.readSection(a,!0);(0,h.assert)(s);let n=y(s);(0,h.assert)(n),r=new P(this,new E(this.elementaryStream,n));let o=e.sequenceNumber;for(;;){let e=await r.readNext();if(!e)return null;if(e.packet.sequenceNumber>o){let a=this.createEncodedPacket(e.packet,e.duration,t);return this.packetBuffers.set(a,r),this.packetSectionStarts.set(a,e.packet.sectionStartPos),a}}}async getNextKeyPacket(e,t){let r=e;for(;;){if(!(r=await this.getNextPacket(r,t)))return null;if("key"===r.type)return r}}getPacket(e,t){return this.doPacketLookup(e,!1,t)}getKeyPacket(e,t){return this.doPacketLookup(e,!0,t)}async doPacketLookup(e,t,r){let a,i=(0,h.roundIfAlmostInteger)(e*g.TIMESCALE),s=this.elementaryStream.demuxer,{reader:n,seekChunkSize:o}=s,l=this.elementaryStream.pid,c=async(e,t)=>{let r=e;for(;r<t;){let e=await s.readPacketHeader(r);if(!e)break;if(e.pid===l&&1===e.payloadUnitStartIndicator){let e=await s.readSection(r,!1);if(!e)return null;let t=b(e);if(t)return t}r+=s.packetStride}return null},d=this.elementaryStream.firstSection;(0,h.assert)(d);let u=b(d);if((0,h.assert)(u),i<u.pts)return null;let m=this.elementaryStream.referencePesPackets,p=(0,h.binarySearchLessOrEqual)(m,i,e=>e.pts),f=-1!==p?m[p]:null;if(f&&i-f.pts<g.TIMESCALE/2)a=f.sectionStartPos;else{let e=0;if(null!==n.fileSize){let t=Math.ceil(n.fileSize/o);if(t>1){let r=0,a=t-1;for(e=0;r<=a;){let t=Math.floor((r+a)/2),n=(0,h.floorToMultiple)(t*o,s.packetStride)+u.sectionStartPos,l=n+o,d=await c(n,l);if(!d){a=t-1;continue}d.pts<=i?(e=t,r=t+1):a=t-1}}}a=(0,h.floorToMultiple)(e*o,s.packetStride)+u.sectionStartPos}let k=await c(a,n.fileSize??1/0);k||(k=u);let S=this.getReorderSize(),T=async(e,t)=>{let a=await s.readSection(e,!0);(0,h.assert)(a);let n=y(a);(0,h.assert)(n);let o=new P(this,new E(this.elementaryStream,n));for(;!(((0,h.last)(o.presentationOrderPackets)?.pts??-1/0)>=i)&&await o.readNextPacket(););let l=(0,h.findLastIndex)(o.presentationOrderPackets,t);if(-1===l)return null;let c=o.presentationOrderPackets[l],d=0===l?0:c.pts-o.presentationOrderPackets[l-1].pts;for(;o.decodeOrderPackets[0]!==c;)o.decodeOrderPackets.shift();o.lastDuration=d;let u=await o.readNext();(0,h.assert)(u);let m=this.createEncodedPacket(u.packet,u.duration,r);return this.packetBuffers.set(m,o),this.packetSectionStarts.set(m,u.packet.sectionStartPos),m};if(!t||this.allPacketsAreKeyPackets()){e:for(;;){let e=k.sectionStartPos+s.packetStride;for(;;){let t=await s.readPacketHeader(e);if(!t)break e;if(t.pid===l&&1===t.payloadUnitStartIndicator){let t=await s.readSection(e,!1);if(t){let e=b(t);if(e){if(e.pts>i)break e;k=e,w(this.elementaryStream,e);break}}}e+=s.packetStride}}e:for(let e=0;e<S;e++){let e=k.sectionStartPos-s.packetStride;for(;e>=s.packetOffset;){let t=await s.readPacketHeader(e);if(!t)break e;if(t.pid===l&&1===t.payloadUnitStartIndicator){let t=await s.readSection(e,!1);if(t){let e=b(t);if(e){k=e;break}}}e-=s.packetStride}}return T(k.sectionStartPos,e=>e.pts<=i)}{let e=a,t=null;for(;;){let r,a=null,d=e<=u.sectionStartPos;d?(r=u,a=u):r=await c(e,n.fileSize??1/0);let m=!1,p=0;e:for(;r&&(null===t||!(r.sectionStartPos>=t))&&(1===r.randomAccessIndicator&&r.pts<=i&&(a=r),r.pts>i&&(m=!0),!(m&&++p>=S));){;let e=r.sectionStartPos+s.packetStride;for(;;){let t=await s.readPacketHeader(e);if(!t)break e;if(t.pid===l&&1===t.payloadUnitStartIndicator){let t=await s.readSection(e,!1);if(t&&(r=b(t))){w(this.elementaryStream,r);break}}e+=s.packetStride}}if(a){let e=a;if(0===p)e:for(let t=0;t<S-1;t++){let t=e.sectionStartPos-s.packetStride;for(;t>=s.packetOffset;){let r=await s.readPacketHeader(t);if(!r)break e;if(r.pid===l&&1===r.payloadUnitStartIndicator){let r=await s.readSection(t,!1);if(r){let t=b(r);if(t){e=t;break}}}t-=s.packetStride}}let t=await T(e.sectionStartPos,e=>e.pts<=i&&1===e.randomAccessIndicator);return(0,h.assert)(t),t}(0,h.assert)(!d),t=e,e=Math.max((0,h.floorToMultiple)(e-u.sectionStartPos-o,s.packetStride)+u.sectionStartPos,u.sectionStartPos)}}}}class T extends S{constructor(e){super(e),this.elementaryStream=e,this.decoderConfig={codec:(0,o.extractVideoCodecString)({width:this.elementaryStream.info.width,height:this.elementaryStream.info.height,codec:this.elementaryStream.info.codec,codecDescription:null,colorSpace:this.elementaryStream.info.colorSpace,avcType:1,avcCodecInfo:this.elementaryStream.info.avcCodecInfo,hevcCodecInfo:this.elementaryStream.info.hevcCodecInfo,vp9CodecInfo:null,av1CodecInfo:null}),codedWidth:this.elementaryStream.info.width,codedHeight:this.elementaryStream.info.height,colorSpace:this.elementaryStream.info.colorSpace}}getCodec(){return this.elementaryStream.info.codec}getCodedWidth(){return this.elementaryStream.info.width}getCodedHeight(){return this.elementaryStream.info.height}getRotation(){return 0}async getColorSpace(){return this.elementaryStream.info.colorSpace}async canBeTransparent(){return!1}async getDecoderConfig(){return this.decoderConfig}allPacketsAreKeyPackets(){return!1}getReorderSize(){return this.elementaryStream.info.reorderSize}}class I extends S{constructor(e){super(e),this.elementaryStream=e}getCodec(){return this.elementaryStream.info.codec}getNumberOfChannels(){return this.elementaryStream.info.numberOfChannels}getSampleRate(){return this.elementaryStream.info.sampleRate}async getDecoderConfig(){return{codec:(0,o.extractAudioCodecString)({codec:this.elementaryStream.info.codec,codecDescription:null,aacCodecInfo:this.elementaryStream.info.aacCodecInfo}),numberOfChannels:this.elementaryStream.info.numberOfChannels,sampleRate:this.elementaryStream.info.sampleRate}}allPacketsAreKeyPackets(){return!0}getReorderSize(){return 1}}let w=(e,t)=>{let r=e.referencePesPackets,a=(0,h.binarySearchLessOrEqual)(r,t.sectionStartPos,e=>e.sectionStartPos);if(a>=0){let i=r[a];if(t.pts<=i.pts)return!1;let s=e.demuxer.minReferencePointByteDistance;if(t.sectionStartPos-i.sectionStartPos<s)return!1;if(a<r.length-1){let e=r[a+1];if(e.pts<t.pts||e.sectionStartPos-t.sectionStartPos<s)return!1}}return r.splice(a+1,0,t),!0},x=async e=>{(0,h.assert)(!e.suppliedPacket);let t=e.elementaryStream;if("video"===t.info.type){let r=t.info.codec;if("avc"!==r&&"hevc"!==r)throw Error("Unhandled.");let a=null;for(;;){let t=e.ensureBuffered(1024);if(t instanceof Promise&&(t=await t),0===t)break;let i=e.currentPos,s=e.readBytes(t),n=s.byteLength,o=0;for(;o<n;){let t=s.indexOf(0,o);if(-1===t||t>=n)break;let c=i+(o=t);if(o+4>=n){e.seekTo(c);break}let d=s[o+1],u=s[o+2],h=s[o+3],m=0,p=null;if(0===d&&0===u&&1===h?(m=4,p=s[o+4]):0===d&&1===u&&(m=3,p=h),0===m){o++;continue}if(null===a){a=c,o+=m;continue}if(null!==p){let t="avc"===r?(0,l.extractNalUnitTypeForAvc)(p):(0,l.extractNalUnitTypeForHevc)(p);if("avc"===r?t===l.AvcNalUnitType.AUD:t===l.HevcNalUnitType.AUD_NUT){let t=c-a;return e.seekTo(a),e.supplyPacket(t,0)}}o+=m}if(t<1024)break}if(null!==a){let t=e.endPos-a;return e.seekTo(a),e.supplyPacket(t,0)}}else{let r=t.info.codec;for(;;){let a=e.ensureBuffered(128);a instanceof Promise&&(a=await a);let i=e.currentPos;for(;e.currentPos-i<a;){let a=e.readU8();if("aac"===r){if(255!==a)continue;e.skip(-1);let r=e.currentPos,i=e.ensureBuffered(n.MAX_ADTS_FRAME_HEADER_SIZE);if(i instanceof Promise&&(i=await i),i<n.MAX_ADTS_FRAME_HEADER_SIZE)return;let o=e.readBytes(n.MAX_ADTS_FRAME_HEADER_SIZE),l=(0,n.readAdtsFrameHeader)(f.FileSlice.tempFromBytes(o));if(l){e.seekTo(r);let a=e.ensureBuffered(l.frameLength);return a instanceof Promise&&(a=await a),e.supplyPacket(a,Math.round(s.SAMPLES_PER_AAC_FRAME*g.TIMESCALE/t.info.sampleRate))}e.seekTo(r+1)}else if("mp3"===r){if(255!==a)continue;e.skip(-1);let r=e.currentPos,i=e.ensureBuffered(m.FRAME_HEADER_SIZE);if(i instanceof Promise&&(i=await i),i<m.FRAME_HEADER_SIZE)return;let s=e.readBytes(m.FRAME_HEADER_SIZE),n=(0,h.toDataView)(s).getUint32(0),o=(0,m.readMp3FrameHeader)(n,null);if(o.header){e.seekTo(r);let a=e.ensureBuffered(o.header.totalSize);a instanceof Promise&&(a=await a);let i=o.header.audioSamplesInFrame*g.TIMESCALE/t.info.sampleRate;return e.supplyPacket(a,Math.round(i))}e.seekTo(r+1)}else throw Error("Unhandled.")}if(a<128)break}}};class E{constructor(e,t){this.currentPos=0,this.pesPackets=[],this.currentPesPacketIndex=0,this.currentPesPacketPos=0,this.endPos=0,this.nextPts=0,this.suppliedPacket=null,this.elementaryStream=e,this.pid=e.pid,this.demuxer=e.demuxer,this.startingPesPacket=t}clone(){let e=new E(this.elementaryStream,this.startingPesPacket);return e.currentPos=this.currentPos,e.pesPackets=[...this.pesPackets],e.currentPesPacketIndex=this.currentPesPacketIndex,e.currentPesPacketPos=this.currentPesPacketPos,e.endPos=this.endPos,e.nextPts=this.nextPts,e}ensureBuffered(e){let t=this.endPos-this.currentPos;return t>=e?e:this.bufferData(e-t).then(()=>Math.min(this.endPos-this.currentPos,e))}getCurrentPesPacket(){let e=this.pesPackets[this.currentPesPacketIndex];return(0,h.assert)(e),e}async bufferData(e){let t=this.endPos+e;for(;this.endPos<t;){let e;if(0===this.pesPackets.length)e=this.startingPesPacket;else{let t=(0,h.last)(this.pesPackets).sectionEndPos;for((0,h.assert)(null!==t);;){let r=await this.demuxer.readPacketHeader(t);if(!r)return;if(r.pid===this.pid){let r=await this.demuxer.readSection(t,!0);if(!r)return;let a=y(r);if(a){e=a;break}}t+=this.demuxer.packetStride}}this.pesPackets.push(e),this.endPos+=e.data.byteLength,1===this.pesPackets.length&&(this.nextPts=e.pts)}}readBytes(e){let t=this.getCurrentPesPacket(),r=this.currentPos-this.currentPesPacketPos,a=r+e;if(this.currentPos+=e,a<=t.data.byteLength)return t.data.subarray(r,a);let i=new Uint8Array(e);i.set(t.data.subarray(r));let s=t.data.byteLength-r;for(;;){this.advanceCurrentPacket();let t=this.getCurrentPesPacket(),r=e-s;if(r<=t.data.byteLength){i.set(t.data.subarray(0,r),s);break}i.set(t.data,s),s+=t.data.byteLength}return i}readU8(){let e=this.getCurrentPesPacket(),t=this.currentPos-this.currentPesPacketPos;return(this.currentPos++,t<e.data.byteLength)?e.data[t]:(this.advanceCurrentPacket(),(e=this.getCurrentPesPacket()).data[0])}seekTo(e){if(e!==this.currentPos){if(e<this.currentPos)for(;e<this.currentPesPacketPos;){this.currentPesPacketIndex--;let e=this.getCurrentPesPacket();this.currentPesPacketPos-=e.data.byteLength,this.nextPts=e.pts}else for(;;){let t=this.getCurrentPesPacket();if(e<this.currentPesPacketPos+t.data.byteLength)break;this.currentPesPacketPos+=t.data.byteLength,this.currentPesPacketIndex++,this.nextPts=this.getCurrentPesPacket().pts}this.currentPos=e}}skip(e){this.seekTo(this.currentPos+e)}advanceCurrentPacket(){this.currentPesPacketPos+=this.getCurrentPesPacket().data.byteLength,this.currentPesPacketIndex++,this.nextPts=this.getCurrentPesPacket().pts}supplyPacket(e,t){let r=this.getCurrentPesPacket();w(this.elementaryStream,r);let a=this.nextPts;this.nextPts+=t;let i=r.sectionStartPos,s=i+(this.currentPos-this.currentPesPacketPos),n=this.readBytes(e),o=r.randomAccessIndicator;(0,h.assert)(this.elementaryStream.firstSection),r.sectionStartPos===this.elementaryStream.firstSection.startPos&&(o=1),this.suppliedPacket={pts:a,data:n,sequenceNumber:s,sectionStartPos:i,randomAccessIndicator:o},this.pesPackets.splice(0,this.currentPesPacketIndex),this.currentPesPacketIndex=0}}class P{constructor(e,t){this.decodeOrderPackets=[],this.reorderBuffer=[],this.presentationOrderPackets=[],this.reachedEnd=!1,this.lastDuration=0,this.backing=e,this.context=t,this.reorderSize=e.getReorderSize(),(0,h.assert)(this.reorderSize>=0)}async readNext(){let e;if(0===this.decodeOrderPackets.length&&!await this.readNextPacket())return null;await this.ensureCurrentPacketHasNext();let t=this.decodeOrderPackets[0],r=this.presentationOrderPackets.indexOf(t);for((0,h.assert)(-1!==r),r===this.presentationOrderPackets.length-1?e=this.lastDuration:(e=this.presentationOrderPackets[r+1].pts-t.pts,this.lastDuration=e),this.decodeOrderPackets.shift();this.presentationOrderPackets.length>0;){let e=this.presentationOrderPackets[0];if(this.decodeOrderPackets.includes(e))break;this.presentationOrderPackets.shift()}return{packet:t,duration:e}}async readNextPacket(){let e;return!this.reachedEnd&&((this.context.suppliedPacket||await x(this.context),e=this.context.suppliedPacket,this.context.suppliedPacket=null,e)?(this.decodeOrderPackets.push(e),this.processPacketThroughReorderBuffer(e),!0):(this.reachedEnd=!0,this.flushReorderBuffer(),!1))}async ensureCurrentPacketHasNext(){let e=this.decodeOrderPackets[0];for((0,h.assert)(e);;){let t=this.presentationOrderPackets.indexOf(e);if(-1!==t&&t<=this.presentationOrderPackets.length-2||!await this.readNextPacket())break}}processPacketThroughReorderBuffer(e){if(this.reorderBuffer.push(e),this.reorderBuffer.length>=this.reorderSize){let e=0;for(let t=1;t<this.reorderBuffer.length;t++)this.reorderBuffer[t].pts<this.reorderBuffer[e].pts&&(e=t);let t=this.reorderBuffer.splice(e,1)[0];this.presentationOrderPackets.push(t)}}flushReorderBuffer(){this.reorderBuffer.sort((e,t)=>e.pts-t.pts),this.presentationOrderPackets.push(...this.reorderBuffer),this.reorderBuffer.length=0}}},{"../adts/adts-demuxer.js":"b3bBY","../adts/adts-reader.js":"iNEYI","../codec.js":"4GUiq","../codec-data.js":"zx4dz","../demuxer.js":"73Qqp","../input-track.js":"aU0uf","../metadata.js":"1RzS5","../misc.js":"jrq2g","../../shared/mp3-misc.js":"jGy7Y","../packet.js":"8dQhf","../reader.js":"6AkKg","./mpeg-ts-misc.js":"bkuJB","@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],bkuJB:[function(e,t,r,a){var i=e("@parcel/transformer-js/src/esmodule-helpers.js");i.defineInteropFlag(r),i.export(r,"TIMESCALE",()=>s),i.export(r,"TS_PACKET_SIZE",()=>n),i.export(r,"buildMpegTsMimeType",()=>o);let s=9e4,n=188,o=e=>{let t="video/MP2T",r=[...new Set(e.filter(Boolean))];return r.length>0&&(t+=`; codecs="${r.join(", ")}"`),t}},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],"5CrUd":[function(e,t,r,a){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(r);var i=e("mediabunny");r.default=class{constructor({canvas:e,ctx:t,events:r,timeupdateInterval:a=250,avSyncTolerance:i=.12,dropLateFrames:s=!1,poster:n="",preflightRange:o=!1}){this.canvas=e,this.ctx=t,this.events=r,this.timeupdateInterval=a,this.avSyncTolerance=i,this.dropLateFrames=s,this.poster=n,this.preflightRange=o,this.input=null,this.videoSink=null,this.videoIterator=null,this.nextFrame=null,this.rafId=0,this.asyncId=0,this.width=0,this.height=0,this.duration=NaN,this.audioClock=null,this.lastTimeUpdate=0,this.stalled=!1,this.playbackRate=1,this.posterDrawn=!1,this.isFetching=!1}normalizeSource(e){return"string"==typeof e?new(0,i.UrlSource)(e):e instanceof Blob?new(0,i.BlobSource)(e):"u">typeof ReadableStream&&e instanceof ReadableStream?new(0,i.ReadableStreamSource)(e):e}async preflight(e){if(!this.preflightRange||"string"!=typeof e)return!0;try{let t=(await fetch(e,{method:"HEAD"})).headers.get("accept-ranges");if(!t||"none"===t)return this.events.emit("error",new Event("RangeNotSupported")),!1;return!0}catch(e){return console.warn("Preflight check failed:",e),!0}}drawPoster(){if(!this.poster||this.posterDrawn)return;let e=new Image;e.onload=()=>{this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height),this.canvas.width=e.naturalWidth||this.canvas.width,this.canvas.height=e.naturalHeight||this.canvas.height,this.ctx.drawImage(e,0,0,this.canvas.width,this.canvas.height),this.posterDrawn=!0},e.src=this.poster}async stopIterator(){await this.videoIterator?.return(),this.videoIterator=null}clear(){this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height)}async load(e,t){let r=++this.asyncId;if(await this.stopIterator(),this.clear(),this.posterDrawn=!1,!await this.preflight(e))return;let a=this.normalizeSource(e);if(!a)return void this.drawPoster();if(this.input=new(0,i.Input)({source:a,formats:i.ALL_FORMATS}),this.duration=await this.input.computeDuration(),r!==this.asyncId)return;let s=await this.input.getPrimaryVideoTrack();if(!s||null===s.codec||!await s.canDecode()){this.handleNoVideoTrack(),t?.();return}let n=await s.canBeTransparent();this.videoSink=new(0,i.CanvasSink)(s,{poolSize:2,fit:"contain",alpha:n}),this.width=s.displayWidth,this.height=s.displayHeight,this.canvas.width=this.width,this.canvas.height=this.height,t?.(),await this.resetIterator(0)}handleNoVideoTrack(){this.videoSink=null,this.width=0,this.height=0,this.canvas.width=0,this.canvas.height=0,this.clear(),this.drawPoster()}async resetIterator(e){if(await this.stopIterator(),!this.videoSink)return;this.videoIterator=this.videoSink.canvases(e);let t=(await this.videoIterator.next()).value??null,r=(await this.videoIterator.next()).value??null;this.nextFrame=r,t?(this.ctx.drawImage(t.canvas,0,0),this.events.emit("loadeddata")):this.drawPoster()}async updateNextFrame(e){if(this.videoIterator&&!this.isFetching){this.isFetching=!0;try{for(;;){let t=(await this.videoIterator.next()).value??null;if(!t||e!==this.asyncId)return;let r=this.audioClock.currentTime,a=this.dropLateFrames?Math.max(.06,this.avSyncTolerance/Math.max(1,this.playbackRate)):0;if(!this.dropLateFrames||!(t.timestamp<r-a))if(t.timestamp<=r+a){if(this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height),this.ctx.drawImage(t.canvas,0,0),!this.dropLateFrames&&t.timestamp>r){this.nextFrame=null;return}}else{this.nextFrame=t;return}}}finally{this.isFetching=!1}}}render(){if(!this.audioClock)return;let e=this.audioClock.currentTime,t=Date.now();if(t-this.lastTimeUpdate>=this.timeupdateInterval&&(this.events.emit("timeupdate"),this.lastTimeUpdate=t),Number.isFinite(this.duration)&&e>=this.duration){this.stop(),this.stalled=!1,this.events.emit("ended"),this.events.emit("pause"),this.events.emit("canplay");return}this.nextFrame&&this.nextFrame.timestamp<=e?(this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height),this.ctx.drawImage(this.nextFrame.canvas,0,0),this.nextFrame=null,this.updateNextFrame(this.asyncId),this.stalled&&(this.events.emit("canplay"),this.events.emit("playing"),this.stalled=!1)):!this.nextFrame&&(this.updateNextFrame(this.asyncId),!this.nextFrame&&Number.isFinite(this.duration)&&e<this.duration&&!this.stalled&&(this.stalled=!0,this.events.emit("waiting"))),this.rafId=requestAnimationFrame(()=>this.render())}start(e){this.audioClock=e,this.asyncId++,this.stalled=!1,this.updateNextFrame(this.asyncId),this.rafId=requestAnimationFrame(()=>this.render())}stop(){cancelAnimationFrame(this.rafId)}async seek(e){this.asyncId++,await this.resetIterator(e)}setPlaybackRate(e){this.playbackRate=Math.max(.1,Number(e)||1)}destroy(){this.asyncId++,this.stop(),this.stopIterator(),this.posterDrawn=!1,this.input=null,this.videoSink=null}}},{mediabunny:[["ALL_FORMATS","gFGfd"],["BlobSource","108pa"],["ReadableStreamSource","108pa"],["UrlSource","108pa"],["CanvasSink","6e2oW"],["Input","6K6yf"]],"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}]},["2x2Ir"],"2x2Ir","parcelRequire4dc0",{});let{default:e}=parcelRequire4dc0("2x2Ir");export{e as default};
+class EventTarget {
+  constructor() {
+    this.listeners = /* @__PURE__ */ new Map();
+  }
+  addEventListener(type, fn) {
+    if (!this.listeners.has(type)) {
+      this.listeners.set(type, []);
+    }
+    this.listeners.get(type).push(fn);
+  }
+  removeEventListener(type, fn) {
+    const list = this.listeners.get(type);
+    if (!list)
+      return;
+    const index = list.indexOf(fn);
+    if (index >= 0) {
+      list.splice(index, 1);
+    }
+  }
+  emit(type, detail) {
+    const evt = new Event(type);
+    evt.detail = detail;
+    const list = this.listeners.get(type);
+    if (list) {
+      list.forEach((fn) => fn(evt));
+    }
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+function assert(x) {
+  if (!x) {
+    throw new Error("Assertion failed.");
+  }
+}
+const normalizeRotation = (rotation) => {
+  const mappedRotation = (rotation % 360 + 360) % 360;
+  if (mappedRotation === 0 || mappedRotation === 90 || mappedRotation === 180 || mappedRotation === 270) {
+    return mappedRotation;
+  } else {
+    throw new Error(`Invalid rotation ${rotation}.`);
+  }
+};
+const last = (arr) => {
+  return arr && arr[arr.length - 1];
+};
+class Bitstream {
+  constructor(bytes) {
+    this.bytes = bytes;
+    this.pos = 0;
+  }
+  seekToByte(byteOffset) {
+    this.pos = 8 * byteOffset;
+  }
+  readBit() {
+    const byteIndex = Math.floor(this.pos / 8);
+    const byte = this.bytes[byteIndex] ?? 0;
+    const bitIndex = 7 - (this.pos & 7);
+    const bit = (byte & 1 << bitIndex) >> bitIndex;
+    this.pos++;
+    return bit;
+  }
+  readBits(n) {
+    if (n === 1) {
+      return this.readBit();
+    }
+    let result = 0;
+    for (let i = 0; i < n; i++) {
+      result <<= 1;
+      result |= this.readBit();
+    }
+    return result;
+  }
+  writeBits(n, value) {
+    const end = this.pos + n;
+    for (let i = this.pos; i < end; i++) {
+      const byteIndex = Math.floor(i / 8);
+      let byte = this.bytes[byteIndex];
+      const bitIndex = 7 - (i & 7);
+      byte &= ~(1 << bitIndex);
+      byte |= (value & 1 << end - i - 1) >> end - i - 1 << bitIndex;
+      this.bytes[byteIndex] = byte;
+    }
+    this.pos = end;
+  }
+  readAlignedByte() {
+    if (this.pos % 8 !== 0) {
+      throw new Error("Bitstream is not byte-aligned.");
+    }
+    const byteIndex = this.pos / 8;
+    const byte = this.bytes[byteIndex] ?? 0;
+    this.pos += 8;
+    return byte;
+  }
+  skipBits(n) {
+    this.pos += n;
+  }
+  getBitsLeft() {
+    return this.bytes.length * 8 - this.pos;
+  }
+  clone() {
+    const clone = new Bitstream(this.bytes);
+    clone.pos = this.pos;
+    return clone;
+  }
+}
+const readExpGolomb = (bitstream) => {
+  let leadingZeroBits = 0;
+  while (bitstream.readBits(1) === 0 && leadingZeroBits < 32) {
+    leadingZeroBits++;
+  }
+  if (leadingZeroBits >= 32) {
+    throw new Error("Invalid exponential-Golomb code.");
+  }
+  const result = (1 << leadingZeroBits) - 1 + bitstream.readBits(leadingZeroBits);
+  return result;
+};
+const readSignedExpGolomb = (bitstream) => {
+  const codeNum = readExpGolomb(bitstream);
+  return (codeNum & 1) === 0 ? -(codeNum >> 1) : codeNum + 1 >> 1;
+};
+const toUint8Array = (source) => {
+  if (source.constructor === Uint8Array) {
+    return source;
+  } else if (ArrayBuffer.isView(source)) {
+    return new Uint8Array(source.buffer, source.byteOffset, source.byteLength);
+  } else {
+    return new Uint8Array(source);
+  }
+};
+const toDataView = (source) => {
+  if (source.constructor === DataView) {
+    return source;
+  } else if (ArrayBuffer.isView(source)) {
+    return new DataView(source.buffer, source.byteOffset, source.byteLength);
+  } else {
+    return new DataView(source);
+  }
+};
+const textDecoder = /* @__PURE__ */ new TextDecoder();
+const invertObject = (object) => {
+  return Object.fromEntries(Object.entries(object).map(([key, value]) => [value, key]));
+};
+const COLOR_PRIMARIES_MAP = {
+  bt709: 1,
+  // ITU-R BT.709
+  bt470bg: 5,
+  // ITU-R BT.470BG
+  smpte170m: 6,
+  // ITU-R BT.601 525 - SMPTE 170M
+  bt2020: 9,
+  // ITU-R BT.202
+  smpte432: 12
+  // SMPTE EG 432-1
+};
+const COLOR_PRIMARIES_MAP_INVERSE = /* @__PURE__ */ invertObject(COLOR_PRIMARIES_MAP);
+const TRANSFER_CHARACTERISTICS_MAP = {
+  "bt709": 1,
+  // ITU-R BT.709
+  "smpte170m": 6,
+  // SMPTE 170M
+  "linear": 8,
+  // Linear transfer characteristics
+  "iec61966-2-1": 13,
+  // IEC 61966-2-1
+  "pq": 16,
+  // Rec. ITU-R BT.2100-2 perceptual quantization (PQ) system
+  "hlg": 18
+  // Rec. ITU-R BT.2100-2 hybrid loggamma (HLG) system
+};
+const TRANSFER_CHARACTERISTICS_MAP_INVERSE = /* @__PURE__ */ invertObject(TRANSFER_CHARACTERISTICS_MAP);
+const MATRIX_COEFFICIENTS_MAP = {
+  "rgb": 0,
+  // Identity
+  "bt709": 1,
+  // ITU-R BT.709
+  "bt470bg": 5,
+  // ITU-R BT.470BG
+  "smpte170m": 6,
+  // SMPTE 170M
+  "bt2020-ncl": 9
+  // ITU-R BT.2020-2 (non-constant luminance)
+};
+const MATRIX_COEFFICIENTS_MAP_INVERSE = /* @__PURE__ */ invertObject(MATRIX_COEFFICIENTS_MAP);
+const isAllowSharedBufferSource = (x) => {
+  return x instanceof ArrayBuffer || typeof SharedArrayBuffer !== "undefined" && x instanceof SharedArrayBuffer || ArrayBuffer.isView(x);
+};
+class AsyncMutex {
+  constructor() {
+    this.currentPromise = Promise.resolve();
+  }
+  async acquire() {
+    let resolver;
+    const nextPromise = new Promise((resolve) => {
+      resolver = resolve;
+    });
+    const currentPromiseAlias = this.currentPromise;
+    this.currentPromise = nextPromise;
+    await currentPromiseAlias;
+    return resolver;
+  }
+}
+const bytesToHexString = (bytes) => {
+  return [...bytes].map((x) => x.toString(16).padStart(2, "0")).join("");
+};
+const reverseBitsU32 = (x) => {
+  x = x >> 1 & 1431655765 | (x & 1431655765) << 1;
+  x = x >> 2 & 858993459 | (x & 858993459) << 2;
+  x = x >> 4 & 252645135 | (x & 252645135) << 4;
+  x = x >> 8 & 16711935 | (x & 16711935) << 8;
+  x = x >> 16 & 65535 | (x & 65535) << 16;
+  return x >>> 0;
+};
+const binarySearchExact = (arr, key, valueGetter) => {
+  let low = 0;
+  let high = arr.length - 1;
+  let ans = -1;
+  while (low <= high) {
+    const mid = low + high >> 1;
+    const midVal = valueGetter(arr[mid]);
+    if (midVal === key) {
+      ans = mid;
+      high = mid - 1;
+    } else if (midVal < key) {
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+  return ans;
+};
+const binarySearchLessOrEqual = (arr, key, valueGetter) => {
+  let low = 0;
+  let high = arr.length - 1;
+  let ans = -1;
+  while (low <= high) {
+    const mid = low + (high - low + 1) / 2 | 0;
+    const midVal = valueGetter(arr[mid]);
+    if (midVal <= key) {
+      ans = mid;
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+  return ans;
+};
+const insertSorted = (arr, item, valueGetter) => {
+  const insertionIndex = binarySearchLessOrEqual(arr, valueGetter(item), valueGetter);
+  arr.splice(insertionIndex + 1, 0, item);
+};
+const promiseWithResolvers = () => {
+  let resolve;
+  let reject;
+  const promise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+  return { promise, resolve, reject };
+};
+const findLast = (arr, predicate) => {
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (predicate(arr[i])) {
+      return arr[i];
+    }
+  }
+  return void 0;
+};
+const findLastIndex = (arr, predicate) => {
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (predicate(arr[i])) {
+      return i;
+    }
+  }
+  return -1;
+};
+const toAsyncIterator = async function* (source) {
+  if (Symbol.iterator in source) {
+    yield* source[Symbol.iterator]();
+  } else {
+    yield* source[Symbol.asyncIterator]();
+  }
+};
+const validateAnyIterable = (iterable) => {
+  if (!(Symbol.iterator in iterable) && !(Symbol.asyncIterator in iterable)) {
+    throw new TypeError("Argument must be an iterable or async iterable.");
+  }
+};
+const assertNever = (x) => {
+  throw new Error(`Unexpected value: ${x}`);
+};
+const getUint24 = (view, byteOffset, littleEndian) => {
+  const byte1 = view.getUint8(byteOffset);
+  const byte2 = view.getUint8(byteOffset + 1);
+  const byte3 = view.getUint8(byteOffset + 2);
+  if (littleEndian) {
+    return byte1 | byte2 << 8 | byte3 << 16;
+  } else {
+    return byte1 << 16 | byte2 << 8 | byte3;
+  }
+};
+const getInt24 = (view, byteOffset, littleEndian) => {
+  return getUint24(view, byteOffset, littleEndian) << 8 >> 8;
+};
+const setUint24 = (view, byteOffset, value, littleEndian) => {
+  value = value >>> 0;
+  value = value & 16777215;
+  {
+    view.setUint8(byteOffset, value >>> 16 & 255);
+    view.setUint8(byteOffset + 1, value >>> 8 & 255);
+    view.setUint8(byteOffset + 2, value & 255);
+  }
+};
+const mapAsyncGenerator = (generator, map) => {
+  return {
+    async next() {
+      const result = await generator.next();
+      if (result.done) {
+        return { value: void 0, done: true };
+      } else {
+        return { value: map(result.value), done: false };
+      }
+    },
+    return() {
+      return generator.return();
+    },
+    throw(error) {
+      return generator.throw(error);
+    },
+    [Symbol.asyncIterator]() {
+      return this;
+    }
+  };
+};
+const clamp$1 = (value, min, max) => {
+  return Math.max(min, Math.min(max, value));
+};
+const UNDETERMINED_LANGUAGE = "und";
+const roundIfAlmostInteger = (value) => {
+  const rounded = Math.round(value);
+  if (Math.abs(value / rounded - 1) < 10 * Number.EPSILON) {
+    return rounded;
+  } else {
+    return value;
+  }
+};
+const roundToMultiple = (value, multiple) => {
+  return Math.round(value / multiple) * multiple;
+};
+const ilog = (x) => {
+  let ret = 0;
+  while (x) {
+    ret++;
+    x >>= 1;
+  }
+  return ret;
+};
+const ISO_639_2_REGEX = /^[a-z]{3}$/;
+const isIso639Dash2LanguageCode = (x) => {
+  return ISO_639_2_REGEX.test(x);
+};
+const SECOND_TO_MICROSECOND_FACTOR = 1e6 * (1 + Number.EPSILON);
+const mergeRequestInit = (init1, init2) => {
+  const merged = { ...init1, ...init2 };
+  if (init1.headers || init2.headers) {
+    const headers1 = init1.headers ? normalizeHeaders(init1.headers) : {};
+    const headers2 = init2.headers ? normalizeHeaders(init2.headers) : {};
+    const mergedHeaders = { ...headers1 };
+    Object.entries(headers2).forEach(([key2, value2]) => {
+      const existingKey = Object.keys(mergedHeaders).find((key1) => key1.toLowerCase() === key2.toLowerCase());
+      if (existingKey) {
+        delete mergedHeaders[existingKey];
+      }
+      mergedHeaders[key2] = value2;
+    });
+    merged.headers = mergedHeaders;
+  }
+  return merged;
+};
+const normalizeHeaders = (headers) => {
+  if (headers instanceof Headers) {
+    const result = {};
+    headers.forEach((value, key) => {
+      result[key] = value;
+    });
+    return result;
+  }
+  if (Array.isArray(headers)) {
+    const result = {};
+    headers.forEach(([key, value]) => {
+      result[key] = value;
+    });
+    return result;
+  }
+  return headers;
+};
+const retriedFetch = async (fetchFn, url, requestInit, getRetryDelay, shouldStop) => {
+  let attempts = 0;
+  while (true) {
+    try {
+      return await fetchFn(url, requestInit);
+    } catch (error) {
+      if (shouldStop()) {
+        throw error;
+      }
+      attempts++;
+      const retryDelayInSeconds = getRetryDelay(attempts, error, url);
+      if (retryDelayInSeconds === null) {
+        throw error;
+      }
+      console.error("Retrying failed fetch. Error:", error);
+      if (!Number.isFinite(retryDelayInSeconds) || retryDelayInSeconds < 0) {
+        throw new TypeError("Retry delay must be a non-negative finite number.");
+      }
+      if (retryDelayInSeconds > 0) {
+        await new Promise((resolve) => setTimeout(resolve, 1e3 * retryDelayInSeconds));
+      }
+      if (shouldStop()) {
+        throw error;
+      }
+    }
+  }
+};
+class CallSerializer {
+  constructor() {
+    this.currentPromise = Promise.resolve();
+  }
+  call(fn) {
+    return this.currentPromise = this.currentPromise.then(fn);
+  }
+}
+let isWebKitCache = null;
+const isWebKit = () => {
+  if (isWebKitCache !== null) {
+    return isWebKitCache;
+  }
+  return isWebKitCache = !!(typeof navigator !== "undefined" && (navigator.vendor?.match(/apple/i) || /AppleWebKit/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) || /\b(iPad|iPhone|iPod)\b/.test(navigator.userAgent)));
+};
+let isFirefoxCache = null;
+const isFirefox = () => {
+  if (isFirefoxCache !== null) {
+    return isFirefoxCache;
+  }
+  return isFirefoxCache = typeof navigator !== "undefined" && navigator.userAgent?.includes("Firefox");
+};
+let isChromiumCache = null;
+const isChromium = () => {
+  if (isChromiumCache !== null) {
+    return isChromiumCache;
+  }
+  return isChromiumCache = !!(typeof navigator !== "undefined" && (navigator.vendor?.includes("Google Inc") || /Chrome/.test(navigator.userAgent)));
+};
+let chromiumVersionCache = null;
+const getChromiumVersion = () => {
+  if (chromiumVersionCache !== null) {
+    return chromiumVersionCache;
+  }
+  if (typeof navigator === "undefined") {
+    return null;
+  }
+  const match = /\bChrome\/(\d+)/.exec(navigator.userAgent);
+  if (!match) {
+    return null;
+  }
+  return chromiumVersionCache = Number(match[1]);
+};
+const coalesceIndex = (a, b) => {
+  return a !== -1 ? a : b;
+};
+const closedIntervalsOverlap = (startA, endA, startB, endB) => {
+  return startA <= endB && startB <= endA;
+};
+const base64ToBytes = (base64) => {
+  const decoded = atob(base64);
+  const bytes = new Uint8Array(decoded.length);
+  for (let i = 0; i < decoded.length; i++) {
+    bytes[i] = decoded.charCodeAt(i);
+  }
+  return bytes;
+};
+const polyfillSymbolDispose = () => {
+  Symbol.dispose ?? (Symbol.dispose = Symbol("Symbol.dispose"));
+};
+const isNumber = (x) => {
+  return typeof x === "number" && !Number.isNaN(x);
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class RichImageData {
+  /** Creates a new {@link RichImageData}. */
+  constructor(data, mimeType) {
+    this.data = data;
+    this.mimeType = mimeType;
+    if (!(data instanceof Uint8Array)) {
+      throw new TypeError("data must be a Uint8Array.");
+    }
+    if (typeof mimeType !== "string") {
+      throw new TypeError("mimeType must be a string.");
+    }
+  }
+}
+class AttachedFile {
+  /** Creates a new {@link AttachedFile}. */
+  constructor(data, mimeType, name, description) {
+    this.data = data;
+    this.mimeType = mimeType;
+    this.name = name;
+    this.description = description;
+    if (!(data instanceof Uint8Array)) {
+      throw new TypeError("data must be a Uint8Array.");
+    }
+    if (mimeType !== void 0 && typeof mimeType !== "string") {
+      throw new TypeError("mimeType, when provided, must be a string.");
+    }
+    if (name !== void 0 && typeof name !== "string") {
+      throw new TypeError("name, when provided, must be a string.");
+    }
+    if (description !== void 0 && typeof description !== "string") {
+      throw new TypeError("description, when provided, must be a string.");
+    }
+  }
+}
+const DEFAULT_TRACK_DISPOSITION = {
+  default: true,
+  forced: false,
+  original: false,
+  commentary: false,
+  hearingImpaired: false,
+  visuallyImpaired: false
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const PCM_AUDIO_CODECS = [
+  "pcm-s16",
+  // We don't prefix 'le' so we're compatible with the WebCodecs-registered PCM codec strings
+  "pcm-s16be",
+  "pcm-s24",
+  "pcm-s24be",
+  "pcm-s32",
+  "pcm-s32be",
+  "pcm-f32",
+  "pcm-f32be",
+  "pcm-f64",
+  "pcm-f64be",
+  "pcm-u8",
+  "pcm-s8",
+  "ulaw",
+  "alaw"
+];
+const VP9_LEVEL_TABLE = [
+  { maxPictureSize: 36864, maxBitrate: 2e5, level: 10 },
+  // Level 1
+  { maxPictureSize: 73728, maxBitrate: 8e5, level: 11 },
+  // Level 1.1
+  { maxPictureSize: 122880, maxBitrate: 18e5, level: 20 },
+  // Level 2
+  { maxPictureSize: 245760, maxBitrate: 36e5, level: 21 },
+  // Level 2.1
+  { maxPictureSize: 552960, maxBitrate: 72e5, level: 30 },
+  // Level 3
+  { maxPictureSize: 983040, maxBitrate: 12e6, level: 31 },
+  // Level 3.1
+  { maxPictureSize: 2228224, maxBitrate: 18e6, level: 40 },
+  // Level 4
+  { maxPictureSize: 2228224, maxBitrate: 3e7, level: 41 },
+  // Level 4.1
+  { maxPictureSize: 8912896, maxBitrate: 6e7, level: 50 },
+  // Level 5
+  { maxPictureSize: 8912896, maxBitrate: 12e7, level: 51 },
+  // Level 5.1
+  { maxPictureSize: 8912896, maxBitrate: 18e7, level: 52 },
+  // Level 5.2
+  { maxPictureSize: 35651584, maxBitrate: 18e7, level: 60 },
+  // Level 6
+  { maxPictureSize: 35651584, maxBitrate: 24e7, level: 61 },
+  // Level 6.1
+  { maxPictureSize: 35651584, maxBitrate: 48e7, level: 62 }
+  // Level 6.2
+];
+const VP9_DEFAULT_SUFFIX = ".01.01.01.01.00";
+const AV1_DEFAULT_SUFFIX = ".0.110.01.01.01.0";
+const extractVideoCodecString = (trackInfo) => {
+  const { codec, codecDescription, colorSpace, avcCodecInfo, hevcCodecInfo, vp9CodecInfo, av1CodecInfo } = trackInfo;
+  if (codec === "avc") {
+    assert(trackInfo.avcType !== null);
+    if (avcCodecInfo) {
+      const bytes = new Uint8Array([
+        avcCodecInfo.avcProfileIndication,
+        avcCodecInfo.profileCompatibility,
+        avcCodecInfo.avcLevelIndication
+      ]);
+      return `avc${trackInfo.avcType}.${bytesToHexString(bytes)}`;
+    }
+    if (!codecDescription || codecDescription.byteLength < 4) {
+      throw new TypeError("AVC decoder description is not provided or is not at least 4 bytes long.");
+    }
+    return `avc${trackInfo.avcType}.${bytesToHexString(codecDescription.subarray(1, 4))}`;
+  } else if (codec === "hevc") {
+    let generalProfileSpace;
+    let generalProfileIdc;
+    let compatibilityFlags;
+    let generalTierFlag;
+    let generalLevelIdc;
+    let constraintFlags;
+    if (hevcCodecInfo) {
+      generalProfileSpace = hevcCodecInfo.generalProfileSpace;
+      generalProfileIdc = hevcCodecInfo.generalProfileIdc;
+      compatibilityFlags = reverseBitsU32(hevcCodecInfo.generalProfileCompatibilityFlags);
+      generalTierFlag = hevcCodecInfo.generalTierFlag;
+      generalLevelIdc = hevcCodecInfo.generalLevelIdc;
+      constraintFlags = [...hevcCodecInfo.generalConstraintIndicatorFlags];
+    } else {
+      if (!codecDescription || codecDescription.byteLength < 23) {
+        throw new TypeError("HEVC decoder description is not provided or is not at least 23 bytes long.");
+      }
+      const view = toDataView(codecDescription);
+      const profileByte = view.getUint8(1);
+      generalProfileSpace = profileByte >> 6 & 3;
+      generalProfileIdc = profileByte & 31;
+      compatibilityFlags = reverseBitsU32(view.getUint32(2));
+      generalTierFlag = profileByte >> 5 & 1;
+      generalLevelIdc = view.getUint8(12);
+      constraintFlags = [];
+      for (let i = 0; i < 6; i++) {
+        constraintFlags.push(view.getUint8(6 + i));
+      }
+    }
+    let codecString = "hev1.";
+    codecString += ["", "A", "B", "C"][generalProfileSpace] + generalProfileIdc;
+    codecString += ".";
+    codecString += compatibilityFlags.toString(16).toUpperCase();
+    codecString += ".";
+    codecString += generalTierFlag === 0 ? "L" : "H";
+    codecString += generalLevelIdc;
+    while (constraintFlags.length > 0 && constraintFlags[constraintFlags.length - 1] === 0) {
+      constraintFlags.pop();
+    }
+    if (constraintFlags.length > 0) {
+      codecString += ".";
+      codecString += constraintFlags.map((x) => x.toString(16).toUpperCase()).join(".");
+    }
+    return codecString;
+  } else if (codec === "vp8") {
+    return "vp8";
+  } else if (codec === "vp9") {
+    if (!vp9CodecInfo) {
+      const pictureSize = trackInfo.width * trackInfo.height;
+      let level2 = last(VP9_LEVEL_TABLE).level;
+      for (const entry of VP9_LEVEL_TABLE) {
+        if (pictureSize <= entry.maxPictureSize) {
+          level2 = entry.level;
+          break;
+        }
+      }
+      return `vp09.00.${level2.toString().padStart(2, "0")}.08`;
+    }
+    const profile = vp9CodecInfo.profile.toString().padStart(2, "0");
+    const level = vp9CodecInfo.level.toString().padStart(2, "0");
+    const bitDepth = vp9CodecInfo.bitDepth.toString().padStart(2, "0");
+    const chromaSubsampling = vp9CodecInfo.chromaSubsampling.toString().padStart(2, "0");
+    const colourPrimaries = vp9CodecInfo.colourPrimaries.toString().padStart(2, "0");
+    const transferCharacteristics = vp9CodecInfo.transferCharacteristics.toString().padStart(2, "0");
+    const matrixCoefficients = vp9CodecInfo.matrixCoefficients.toString().padStart(2, "0");
+    const videoFullRangeFlag = vp9CodecInfo.videoFullRangeFlag.toString().padStart(2, "0");
+    let string = `vp09.${profile}.${level}.${bitDepth}.${chromaSubsampling}`;
+    string += `.${colourPrimaries}.${transferCharacteristics}.${matrixCoefficients}.${videoFullRangeFlag}`;
+    if (string.endsWith(VP9_DEFAULT_SUFFIX)) {
+      string = string.slice(0, -VP9_DEFAULT_SUFFIX.length);
+    }
+    return string;
+  } else if (codec === "av1") {
+    if (!av1CodecInfo) {
+      const pictureSize = trackInfo.width * trackInfo.height;
+      let level2 = last(VP9_LEVEL_TABLE).level;
+      for (const entry of VP9_LEVEL_TABLE) {
+        if (pictureSize <= entry.maxPictureSize) {
+          level2 = entry.level;
+          break;
+        }
+      }
+      return `av01.0.${level2.toString().padStart(2, "0")}M.08`;
+    }
+    const profile = av1CodecInfo.profile;
+    const level = av1CodecInfo.level.toString().padStart(2, "0");
+    const tier = av1CodecInfo.tier ? "H" : "M";
+    const bitDepth = av1CodecInfo.bitDepth.toString().padStart(2, "0");
+    const monochrome = av1CodecInfo.monochrome ? "1" : "0";
+    const chromaSubsampling = 100 * av1CodecInfo.chromaSubsamplingX + 10 * av1CodecInfo.chromaSubsamplingY + 1 * (av1CodecInfo.chromaSubsamplingX && av1CodecInfo.chromaSubsamplingY ? av1CodecInfo.chromaSamplePosition : 0);
+    const colorPrimaries = colorSpace?.primaries ? COLOR_PRIMARIES_MAP[colorSpace.primaries] : 1;
+    const transferCharacteristics = colorSpace?.transfer ? TRANSFER_CHARACTERISTICS_MAP[colorSpace.transfer] : 1;
+    const matrixCoefficients = colorSpace?.matrix ? MATRIX_COEFFICIENTS_MAP[colorSpace.matrix] : 1;
+    const videoFullRangeFlag = colorSpace?.fullRange ? 1 : 0;
+    let string = `av01.${profile}.${level}${tier}.${bitDepth}`;
+    string += `.${monochrome}.${chromaSubsampling.toString().padStart(3, "0")}`;
+    string += `.${colorPrimaries.toString().padStart(2, "0")}`;
+    string += `.${transferCharacteristics.toString().padStart(2, "0")}`;
+    string += `.${matrixCoefficients.toString().padStart(2, "0")}`;
+    string += `.${videoFullRangeFlag}`;
+    if (string.endsWith(AV1_DEFAULT_SUFFIX)) {
+      string = string.slice(0, -AV1_DEFAULT_SUFFIX.length);
+    }
+    return string;
+  }
+  throw new TypeError(`Unhandled codec '${codec}'.`);
+};
+const extractAudioCodecString = (trackInfo) => {
+  const { codec, codecDescription, aacCodecInfo } = trackInfo;
+  if (codec === "aac") {
+    if (!aacCodecInfo) {
+      throw new TypeError("AAC codec info must be provided.");
+    }
+    if (aacCodecInfo.isMpeg2) {
+      return "mp4a.67";
+    } else {
+      const audioSpecificConfig = parseAacAudioSpecificConfig(codecDescription);
+      return `mp4a.40.${audioSpecificConfig.objectType}`;
+    }
+  } else if (codec === "mp3") {
+    return "mp3";
+  } else if (codec === "opus") {
+    return "opus";
+  } else if (codec === "vorbis") {
+    return "vorbis";
+  } else if (codec === "flac") {
+    return "flac";
+  } else if (codec && PCM_AUDIO_CODECS.includes(codec)) {
+    return codec;
+  }
+  throw new TypeError(`Unhandled codec '${codec}'.`);
+};
+const aacFrequencyTable = [
+  96e3,
+  88200,
+  64e3,
+  48e3,
+  44100,
+  32e3,
+  24e3,
+  22050,
+  16e3,
+  12e3,
+  11025,
+  8e3,
+  7350
+];
+const aacChannelMap = [-1, 1, 2, 3, 4, 5, 6, 8];
+const parseAacAudioSpecificConfig = (bytes) => {
+  if (!bytes || bytes.byteLength < 2) {
+    throw new TypeError("AAC description must be at least 2 bytes long.");
+  }
+  const bitstream = new Bitstream(bytes);
+  let objectType = bitstream.readBits(5);
+  if (objectType === 31) {
+    objectType = 32 + bitstream.readBits(6);
+  }
+  const frequencyIndex = bitstream.readBits(4);
+  let sampleRate = null;
+  if (frequencyIndex === 15) {
+    sampleRate = bitstream.readBits(24);
+  } else {
+    if (frequencyIndex < aacFrequencyTable.length) {
+      sampleRate = aacFrequencyTable[frequencyIndex];
+    }
+  }
+  const channelConfiguration = bitstream.readBits(4);
+  let numberOfChannels = null;
+  if (channelConfiguration >= 1 && channelConfiguration <= 7) {
+    numberOfChannels = aacChannelMap[channelConfiguration];
+  }
+  return {
+    objectType,
+    frequencyIndex,
+    sampleRate,
+    channelConfiguration,
+    numberOfChannels
+  };
+};
+const OPUS_SAMPLE_RATE = 48e3;
+const PCM_CODEC_REGEX = /^pcm-([usf])(\d+)+(be)?$/;
+const parsePcmCodec = (codec) => {
+  assert(PCM_AUDIO_CODECS.includes(codec));
+  if (codec === "ulaw") {
+    return { dataType: "ulaw", sampleSize: 1, littleEndian: true, silentValue: 255 };
+  } else if (codec === "alaw") {
+    return { dataType: "alaw", sampleSize: 1, littleEndian: true, silentValue: 213 };
+  }
+  const match = PCM_CODEC_REGEX.exec(codec);
+  assert(match);
+  let dataType;
+  if (match[1] === "u") {
+    dataType = "unsigned";
+  } else if (match[1] === "s") {
+    dataType = "signed";
+  } else {
+    dataType = "float";
+  }
+  const sampleSize = Number(match[2]) / 8;
+  const littleEndian = match[3] !== "be";
+  const silentValue = codec === "pcm-u8" ? 2 ** 7 : 0;
+  return { dataType, sampleSize, littleEndian, silentValue };
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+var AvcNalUnitType;
+(function(AvcNalUnitType2) {
+  AvcNalUnitType2[AvcNalUnitType2["IDR"] = 5] = "IDR";
+  AvcNalUnitType2[AvcNalUnitType2["SEI"] = 6] = "SEI";
+  AvcNalUnitType2[AvcNalUnitType2["SPS"] = 7] = "SPS";
+  AvcNalUnitType2[AvcNalUnitType2["PPS"] = 8] = "PPS";
+  AvcNalUnitType2[AvcNalUnitType2["SPS_EXT"] = 13] = "SPS_EXT";
+})(AvcNalUnitType || (AvcNalUnitType = {}));
+var HevcNalUnitType;
+(function(HevcNalUnitType2) {
+  HevcNalUnitType2[HevcNalUnitType2["RASL_N"] = 8] = "RASL_N";
+  HevcNalUnitType2[HevcNalUnitType2["RASL_R"] = 9] = "RASL_R";
+  HevcNalUnitType2[HevcNalUnitType2["BLA_W_LP"] = 16] = "BLA_W_LP";
+  HevcNalUnitType2[HevcNalUnitType2["RSV_IRAP_VCL23"] = 23] = "RSV_IRAP_VCL23";
+  HevcNalUnitType2[HevcNalUnitType2["VPS_NUT"] = 32] = "VPS_NUT";
+  HevcNalUnitType2[HevcNalUnitType2["SPS_NUT"] = 33] = "SPS_NUT";
+  HevcNalUnitType2[HevcNalUnitType2["PPS_NUT"] = 34] = "PPS_NUT";
+  HevcNalUnitType2[HevcNalUnitType2["PREFIX_SEI_NUT"] = 39] = "PREFIX_SEI_NUT";
+  HevcNalUnitType2[HevcNalUnitType2["SUFFIX_SEI_NUT"] = 40] = "SUFFIX_SEI_NUT";
+})(HevcNalUnitType || (HevcNalUnitType = {}));
+const findNalUnitsInAnnexB = (packetData) => {
+  const nalUnits = [];
+  let i = 0;
+  while (i < packetData.length) {
+    let startCodePos = -1;
+    let startCodeLength = 0;
+    for (let j = i; j < packetData.length - 3; j++) {
+      if (packetData[j] === 0 && packetData[j + 1] === 0 && packetData[j + 2] === 1) {
+        startCodePos = j;
+        startCodeLength = 3;
+        break;
+      }
+      if (j < packetData.length - 4 && packetData[j] === 0 && packetData[j + 1] === 0 && packetData[j + 2] === 0 && packetData[j + 3] === 1) {
+        startCodePos = j;
+        startCodeLength = 4;
+        break;
+      }
+    }
+    if (startCodePos === -1) {
+      break;
+    }
+    if (i > 0 && startCodePos > i) {
+      const nalData = packetData.subarray(i, startCodePos);
+      if (nalData.length > 0) {
+        nalUnits.push(nalData);
+      }
+    }
+    i = startCodePos + startCodeLength;
+  }
+  if (i < packetData.length) {
+    const nalData = packetData.subarray(i);
+    if (nalData.length > 0) {
+      nalUnits.push(nalData);
+    }
+  }
+  return nalUnits;
+};
+const findNalUnitsInLengthPrefixed = (packetData, lengthSize) => {
+  const nalUnits = [];
+  let offset = 0;
+  const dataView = new DataView(packetData.buffer, packetData.byteOffset, packetData.byteLength);
+  while (offset + lengthSize <= packetData.length) {
+    let nalUnitLength;
+    if (lengthSize === 1) {
+      nalUnitLength = dataView.getUint8(offset);
+    } else if (lengthSize === 2) {
+      nalUnitLength = dataView.getUint16(offset, false);
+    } else if (lengthSize === 3) {
+      nalUnitLength = getUint24(dataView, offset, false);
+    } else if (lengthSize === 4) {
+      nalUnitLength = dataView.getUint32(offset, false);
+    } else {
+      assertNever(lengthSize);
+      assert(false);
+    }
+    offset += lengthSize;
+    const nalUnit = packetData.subarray(offset, offset + nalUnitLength);
+    nalUnits.push(nalUnit);
+    offset += nalUnitLength;
+  }
+  return nalUnits;
+};
+const removeEmulationPreventionBytes = (data) => {
+  const result = [];
+  const len = data.length;
+  for (let i = 0; i < len; i++) {
+    if (i + 2 < len && data[i] === 0 && data[i + 1] === 0 && data[i + 2] === 3) {
+      result.push(0, 0);
+      i += 2;
+    } else {
+      result.push(data[i]);
+    }
+  }
+  return new Uint8Array(result);
+};
+const ANNEX_B_START_CODE = new Uint8Array([0, 0, 0, 1]);
+const concatNalUnitsInAnnexB = (nalUnits) => {
+  const totalLength = nalUnits.reduce((a, b) => a + ANNEX_B_START_CODE.byteLength + b.byteLength, 0);
+  const result = new Uint8Array(totalLength);
+  let offset = 0;
+  for (const nalUnit of nalUnits) {
+    result.set(ANNEX_B_START_CODE, offset);
+    offset += ANNEX_B_START_CODE.byteLength;
+    result.set(nalUnit, offset);
+    offset += nalUnit.byteLength;
+  }
+  return result;
+};
+const concatNalUnitsInLengthPrefixed = (nalUnits, lengthSize) => {
+  const totalLength = nalUnits.reduce((a, b) => a + lengthSize + b.byteLength, 0);
+  const result = new Uint8Array(totalLength);
+  let offset = 0;
+  for (const nalUnit of nalUnits) {
+    const dataView = new DataView(result.buffer, result.byteOffset, result.byteLength);
+    switch (lengthSize) {
+      case 1:
+        dataView.setUint8(offset, nalUnit.byteLength);
+        break;
+      case 2:
+        dataView.setUint16(offset, nalUnit.byteLength, false);
+        break;
+      case 3:
+        setUint24(dataView, offset, nalUnit.byteLength);
+        break;
+      case 4:
+        dataView.setUint32(offset, nalUnit.byteLength, false);
+        break;
+    }
+    offset += lengthSize;
+    result.set(nalUnit, offset);
+    offset += nalUnit.byteLength;
+  }
+  return result;
+};
+const extractAvcNalUnits = (packetData, decoderConfig) => {
+  if (decoderConfig.description) {
+    const bytes = toUint8Array(decoderConfig.description);
+    const lengthSizeMinusOne = bytes[4] & 3;
+    const lengthSize = lengthSizeMinusOne + 1;
+    return findNalUnitsInLengthPrefixed(packetData, lengthSize);
+  } else {
+    return findNalUnitsInAnnexB(packetData);
+  }
+};
+const concatAvcNalUnits = (nalUnits, decoderConfig) => {
+  if (decoderConfig.description) {
+    const bytes = toUint8Array(decoderConfig.description);
+    const lengthSizeMinusOne = bytes[4] & 3;
+    const lengthSize = lengthSizeMinusOne + 1;
+    return concatNalUnitsInLengthPrefixed(nalUnits, lengthSize);
+  } else {
+    return concatNalUnitsInAnnexB(nalUnits);
+  }
+};
+const extractNalUnitTypeForAvc = (data) => {
+  return data[0] & 31;
+};
+const extractAvcDecoderConfigurationRecord = (packetData) => {
+  try {
+    const nalUnits = findNalUnitsInAnnexB(packetData);
+    const spsUnits = nalUnits.filter((unit) => extractNalUnitTypeForAvc(unit) === AvcNalUnitType.SPS);
+    const ppsUnits = nalUnits.filter((unit) => extractNalUnitTypeForAvc(unit) === AvcNalUnitType.PPS);
+    const spsExtUnits = nalUnits.filter((unit) => extractNalUnitTypeForAvc(unit) === AvcNalUnitType.SPS_EXT);
+    if (spsUnits.length === 0) {
+      return null;
+    }
+    if (ppsUnits.length === 0) {
+      return null;
+    }
+    const spsData = spsUnits[0];
+    const spsInfo = parseAvcSps(spsData);
+    assert(spsInfo !== null);
+    const hasExtendedData = spsInfo.profileIdc === 100 || spsInfo.profileIdc === 110 || spsInfo.profileIdc === 122 || spsInfo.profileIdc === 144;
+    return {
+      configurationVersion: 1,
+      avcProfileIndication: spsInfo.profileIdc,
+      profileCompatibility: spsInfo.constraintFlags,
+      avcLevelIndication: spsInfo.levelIdc,
+      lengthSizeMinusOne: 3,
+      // Typically 4 bytes for length field
+      sequenceParameterSets: spsUnits,
+      pictureParameterSets: ppsUnits,
+      chromaFormat: hasExtendedData ? spsInfo.chromaFormatIdc : null,
+      bitDepthLumaMinus8: hasExtendedData ? spsInfo.bitDepthLumaMinus8 : null,
+      bitDepthChromaMinus8: hasExtendedData ? spsInfo.bitDepthChromaMinus8 : null,
+      sequenceParameterSetExt: hasExtendedData ? spsExtUnits : null
+    };
+  } catch (error) {
+    console.error("Error building AVC Decoder Configuration Record:", error);
+    return null;
+  }
+};
+const deserializeAvcDecoderConfigurationRecord = (data) => {
+  try {
+    const view = toDataView(data);
+    let offset = 0;
+    const configurationVersion = view.getUint8(offset++);
+    const avcProfileIndication = view.getUint8(offset++);
+    const profileCompatibility = view.getUint8(offset++);
+    const avcLevelIndication = view.getUint8(offset++);
+    const lengthSizeMinusOne = view.getUint8(offset++) & 3;
+    const numOfSequenceParameterSets = view.getUint8(offset++) & 31;
+    const sequenceParameterSets = [];
+    for (let i = 0; i < numOfSequenceParameterSets; i++) {
+      const length = view.getUint16(offset, false);
+      offset += 2;
+      sequenceParameterSets.push(data.subarray(offset, offset + length));
+      offset += length;
+    }
+    const numOfPictureParameterSets = view.getUint8(offset++);
+    const pictureParameterSets = [];
+    for (let i = 0; i < numOfPictureParameterSets; i++) {
+      const length = view.getUint16(offset, false);
+      offset += 2;
+      pictureParameterSets.push(data.subarray(offset, offset + length));
+      offset += length;
+    }
+    const record = {
+      configurationVersion,
+      avcProfileIndication,
+      profileCompatibility,
+      avcLevelIndication,
+      lengthSizeMinusOne,
+      sequenceParameterSets,
+      pictureParameterSets,
+      chromaFormat: null,
+      bitDepthLumaMinus8: null,
+      bitDepthChromaMinus8: null,
+      sequenceParameterSetExt: null
+    };
+    if ((avcProfileIndication === 100 || avcProfileIndication === 110 || avcProfileIndication === 122 || avcProfileIndication === 144) && offset + 4 <= data.length) {
+      const chromaFormat = view.getUint8(offset++) & 3;
+      const bitDepthLumaMinus8 = view.getUint8(offset++) & 7;
+      const bitDepthChromaMinus8 = view.getUint8(offset++) & 7;
+      const numOfSequenceParameterSetExt = view.getUint8(offset++);
+      record.chromaFormat = chromaFormat;
+      record.bitDepthLumaMinus8 = bitDepthLumaMinus8;
+      record.bitDepthChromaMinus8 = bitDepthChromaMinus8;
+      const sequenceParameterSetExt = [];
+      for (let i = 0; i < numOfSequenceParameterSetExt; i++) {
+        const length = view.getUint16(offset, false);
+        offset += 2;
+        sequenceParameterSetExt.push(data.subarray(offset, offset + length));
+        offset += length;
+      }
+      record.sequenceParameterSetExt = sequenceParameterSetExt;
+    }
+    return record;
+  } catch (error) {
+    console.error("Error deserializing AVC Decoder Configuration Record:", error);
+    return null;
+  }
+};
+const parseAvcSps = (sps) => {
+  try {
+    const bitstream = new Bitstream(removeEmulationPreventionBytes(sps));
+    bitstream.skipBits(1);
+    bitstream.skipBits(2);
+    const nalUnitType = bitstream.readBits(5);
+    if (nalUnitType !== 7) {
+      return null;
+    }
+    const profileIdc = bitstream.readAlignedByte();
+    const constraintFlags = bitstream.readAlignedByte();
+    const levelIdc = bitstream.readAlignedByte();
+    readExpGolomb(bitstream);
+    let chromaFormatIdc = null;
+    let bitDepthLumaMinus8 = null;
+    let bitDepthChromaMinus8 = null;
+    if (profileIdc === 100 || profileIdc === 110 || profileIdc === 122 || profileIdc === 244 || profileIdc === 44 || profileIdc === 83 || profileIdc === 86 || profileIdc === 118 || profileIdc === 128) {
+      chromaFormatIdc = readExpGolomb(bitstream);
+      if (chromaFormatIdc === 3) {
+        bitstream.skipBits(1);
+      }
+      bitDepthLumaMinus8 = readExpGolomb(bitstream);
+      bitDepthChromaMinus8 = readExpGolomb(bitstream);
+      bitstream.skipBits(1);
+      const seqScalingMatrixPresentFlag = bitstream.readBits(1);
+      if (seqScalingMatrixPresentFlag) {
+        for (let i = 0; i < (chromaFormatIdc !== 3 ? 8 : 12); i++) {
+          const seqScalingListPresentFlag = bitstream.readBits(1);
+          if (seqScalingListPresentFlag) {
+            const sizeOfScalingList = i < 6 ? 16 : 64;
+            let lastScale = 8;
+            let nextScale = 8;
+            for (let j = 0; j < sizeOfScalingList; j++) {
+              if (nextScale !== 0) {
+                const deltaScale = readSignedExpGolomb(bitstream);
+                nextScale = (lastScale + deltaScale + 256) % 256;
+              }
+              lastScale = nextScale === 0 ? lastScale : nextScale;
+            }
+          }
+        }
+      }
+    }
+    readExpGolomb(bitstream);
+    const picOrderCntType = readExpGolomb(bitstream);
+    if (picOrderCntType === 0) {
+      readExpGolomb(bitstream);
+    } else if (picOrderCntType === 1) {
+      bitstream.skipBits(1);
+      readSignedExpGolomb(bitstream);
+      readSignedExpGolomb(bitstream);
+      const numRefFramesInPicOrderCntCycle = readExpGolomb(bitstream);
+      for (let i = 0; i < numRefFramesInPicOrderCntCycle; i++) {
+        readSignedExpGolomb(bitstream);
+      }
+    }
+    readExpGolomb(bitstream);
+    bitstream.skipBits(1);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    const frameMbsOnlyFlag = bitstream.readBits(1);
+    return {
+      profileIdc,
+      constraintFlags,
+      levelIdc,
+      frameMbsOnlyFlag,
+      chromaFormatIdc,
+      bitDepthLumaMinus8,
+      bitDepthChromaMinus8
+    };
+  } catch (error) {
+    console.error("Error parsing AVC SPS:", error);
+    return null;
+  }
+};
+const extractHevcNalUnits = (packetData, decoderConfig) => {
+  if (decoderConfig.description) {
+    const bytes = toUint8Array(decoderConfig.description);
+    const lengthSizeMinusOne = bytes[21] & 3;
+    const lengthSize = lengthSizeMinusOne + 1;
+    return findNalUnitsInLengthPrefixed(packetData, lengthSize);
+  } else {
+    return findNalUnitsInAnnexB(packetData);
+  }
+};
+const extractNalUnitTypeForHevc = (data) => {
+  return data[0] >> 1 & 63;
+};
+const extractHevcDecoderConfigurationRecord = (packetData) => {
+  try {
+    const nalUnits = findNalUnitsInAnnexB(packetData);
+    const vpsUnits = nalUnits.filter((unit) => extractNalUnitTypeForHevc(unit) === HevcNalUnitType.VPS_NUT);
+    const spsUnits = nalUnits.filter((unit) => extractNalUnitTypeForHevc(unit) === HevcNalUnitType.SPS_NUT);
+    const ppsUnits = nalUnits.filter((unit) => extractNalUnitTypeForHevc(unit) === HevcNalUnitType.PPS_NUT);
+    const seiUnits = nalUnits.filter((unit) => extractNalUnitTypeForHevc(unit) === HevcNalUnitType.PREFIX_SEI_NUT || extractNalUnitTypeForHevc(unit) === HevcNalUnitType.SUFFIX_SEI_NUT);
+    if (spsUnits.length === 0 || ppsUnits.length === 0)
+      return null;
+    const sps = spsUnits[0];
+    const bitstream = new Bitstream(removeEmulationPreventionBytes(sps));
+    bitstream.skipBits(16);
+    bitstream.readBits(4);
+    const sps_max_sub_layers_minus1 = bitstream.readBits(3);
+    const sps_temporal_id_nesting_flag = bitstream.readBits(1);
+    const { general_profile_space, general_tier_flag, general_profile_idc, general_profile_compatibility_flags, general_constraint_indicator_flags, general_level_idc } = parseProfileTierLevel(bitstream, sps_max_sub_layers_minus1);
+    readExpGolomb(bitstream);
+    const chroma_format_idc = readExpGolomb(bitstream);
+    if (chroma_format_idc === 3)
+      bitstream.skipBits(1);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    if (bitstream.readBits(1)) {
+      readExpGolomb(bitstream);
+      readExpGolomb(bitstream);
+      readExpGolomb(bitstream);
+      readExpGolomb(bitstream);
+    }
+    const bit_depth_luma_minus8 = readExpGolomb(bitstream);
+    const bit_depth_chroma_minus8 = readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    const sps_sub_layer_ordering_info_present_flag = bitstream.readBits(1);
+    const maxNum = sps_sub_layer_ordering_info_present_flag ? 0 : sps_max_sub_layers_minus1;
+    for (let i = maxNum; i <= sps_max_sub_layers_minus1; i++) {
+      readExpGolomb(bitstream);
+      readExpGolomb(bitstream);
+      readExpGolomb(bitstream);
+    }
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    if (bitstream.readBits(1)) {
+      if (bitstream.readBits(1)) {
+        skipScalingListData(bitstream);
+      }
+    }
+    bitstream.skipBits(1);
+    bitstream.skipBits(1);
+    if (bitstream.readBits(1)) {
+      bitstream.skipBits(4);
+      bitstream.skipBits(4);
+      readExpGolomb(bitstream);
+      readExpGolomb(bitstream);
+      bitstream.skipBits(1);
+    }
+    const num_short_term_ref_pic_sets = readExpGolomb(bitstream);
+    skipAllStRefPicSets(bitstream, num_short_term_ref_pic_sets);
+    if (bitstream.readBits(1)) {
+      const num_long_term_ref_pics_sps = readExpGolomb(bitstream);
+      for (let i = 0; i < num_long_term_ref_pics_sps; i++) {
+        readExpGolomb(bitstream);
+        bitstream.skipBits(1);
+      }
+    }
+    bitstream.skipBits(1);
+    bitstream.skipBits(1);
+    let min_spatial_segmentation_idc = 0;
+    if (bitstream.readBits(1)) {
+      min_spatial_segmentation_idc = parseVuiForMinSpatialSegmentationIdc(bitstream, sps_max_sub_layers_minus1);
+    }
+    let parallelismType = 0;
+    if (ppsUnits.length > 0) {
+      const pps = ppsUnits[0];
+      const ppsBitstream = new Bitstream(removeEmulationPreventionBytes(pps));
+      ppsBitstream.skipBits(16);
+      readExpGolomb(ppsBitstream);
+      readExpGolomb(ppsBitstream);
+      ppsBitstream.skipBits(1);
+      ppsBitstream.skipBits(1);
+      ppsBitstream.skipBits(3);
+      ppsBitstream.skipBits(1);
+      ppsBitstream.skipBits(1);
+      readExpGolomb(ppsBitstream);
+      readExpGolomb(ppsBitstream);
+      readSignedExpGolomb(ppsBitstream);
+      ppsBitstream.skipBits(1);
+      ppsBitstream.skipBits(1);
+      if (ppsBitstream.readBits(1)) {
+        readExpGolomb(ppsBitstream);
+      }
+      readSignedExpGolomb(ppsBitstream);
+      readSignedExpGolomb(ppsBitstream);
+      ppsBitstream.skipBits(1);
+      ppsBitstream.skipBits(1);
+      ppsBitstream.skipBits(1);
+      ppsBitstream.skipBits(1);
+      const tiles_enabled_flag = ppsBitstream.readBits(1);
+      const entropy_coding_sync_enabled_flag = ppsBitstream.readBits(1);
+      if (!tiles_enabled_flag && !entropy_coding_sync_enabled_flag)
+        parallelismType = 0;
+      else if (tiles_enabled_flag && !entropy_coding_sync_enabled_flag)
+        parallelismType = 2;
+      else if (!tiles_enabled_flag && entropy_coding_sync_enabled_flag)
+        parallelismType = 3;
+      else
+        parallelismType = 0;
+    }
+    const arrays = [
+      ...vpsUnits.length ? [
+        {
+          arrayCompleteness: 1,
+          nalUnitType: HevcNalUnitType.VPS_NUT,
+          nalUnits: vpsUnits
+        }
+      ] : [],
+      ...spsUnits.length ? [
+        {
+          arrayCompleteness: 1,
+          nalUnitType: HevcNalUnitType.SPS_NUT,
+          nalUnits: spsUnits
+        }
+      ] : [],
+      ...ppsUnits.length ? [
+        {
+          arrayCompleteness: 1,
+          nalUnitType: HevcNalUnitType.PPS_NUT,
+          nalUnits: ppsUnits
+        }
+      ] : [],
+      ...seiUnits.length ? [
+        {
+          arrayCompleteness: 1,
+          nalUnitType: extractNalUnitTypeForHevc(seiUnits[0]),
+          nalUnits: seiUnits
+        }
+      ] : []
+    ];
+    const record = {
+      configurationVersion: 1,
+      generalProfileSpace: general_profile_space,
+      generalTierFlag: general_tier_flag,
+      generalProfileIdc: general_profile_idc,
+      generalProfileCompatibilityFlags: general_profile_compatibility_flags,
+      generalConstraintIndicatorFlags: general_constraint_indicator_flags,
+      generalLevelIdc: general_level_idc,
+      minSpatialSegmentationIdc: min_spatial_segmentation_idc,
+      parallelismType,
+      chromaFormatIdc: chroma_format_idc,
+      bitDepthLumaMinus8: bit_depth_luma_minus8,
+      bitDepthChromaMinus8: bit_depth_chroma_minus8,
+      avgFrameRate: 0,
+      constantFrameRate: 0,
+      numTemporalLayers: sps_max_sub_layers_minus1 + 1,
+      temporalIdNested: sps_temporal_id_nesting_flag,
+      lengthSizeMinusOne: 3,
+      arrays
+    };
+    return record;
+  } catch (error) {
+    console.error("Error building HEVC Decoder Configuration Record:", error);
+    return null;
+  }
+};
+const parseProfileTierLevel = (bitstream, maxNumSubLayersMinus1) => {
+  const general_profile_space = bitstream.readBits(2);
+  const general_tier_flag = bitstream.readBits(1);
+  const general_profile_idc = bitstream.readBits(5);
+  let general_profile_compatibility_flags = 0;
+  for (let i = 0; i < 32; i++) {
+    general_profile_compatibility_flags = general_profile_compatibility_flags << 1 | bitstream.readBits(1);
+  }
+  const general_constraint_indicator_flags = new Uint8Array(6);
+  for (let i = 0; i < 6; i++) {
+    general_constraint_indicator_flags[i] = bitstream.readBits(8);
+  }
+  const general_level_idc = bitstream.readBits(8);
+  const sub_layer_profile_present_flag = [];
+  const sub_layer_level_present_flag = [];
+  for (let i = 0; i < maxNumSubLayersMinus1; i++) {
+    sub_layer_profile_present_flag.push(bitstream.readBits(1));
+    sub_layer_level_present_flag.push(bitstream.readBits(1));
+  }
+  if (maxNumSubLayersMinus1 > 0) {
+    for (let i = maxNumSubLayersMinus1; i < 8; i++) {
+      bitstream.skipBits(2);
+    }
+  }
+  for (let i = 0; i < maxNumSubLayersMinus1; i++) {
+    if (sub_layer_profile_present_flag[i])
+      bitstream.skipBits(88);
+    if (sub_layer_level_present_flag[i])
+      bitstream.skipBits(8);
+  }
+  return {
+    general_profile_space,
+    general_tier_flag,
+    general_profile_idc,
+    general_profile_compatibility_flags,
+    general_constraint_indicator_flags,
+    general_level_idc
+  };
+};
+const skipScalingListData = (bitstream) => {
+  for (let sizeId = 0; sizeId < 4; sizeId++) {
+    for (let matrixId = 0; matrixId < (sizeId === 3 ? 2 : 6); matrixId++) {
+      const scaling_list_pred_mode_flag = bitstream.readBits(1);
+      if (!scaling_list_pred_mode_flag) {
+        readExpGolomb(bitstream);
+      } else {
+        const coefNum = Math.min(64, 1 << 4 + (sizeId << 1));
+        if (sizeId > 1) {
+          readSignedExpGolomb(bitstream);
+        }
+        for (let i = 0; i < coefNum; i++) {
+          readSignedExpGolomb(bitstream);
+        }
+      }
+    }
+  }
+};
+const skipAllStRefPicSets = (bitstream, num_short_term_ref_pic_sets) => {
+  const NumDeltaPocs = [];
+  for (let stRpsIdx = 0; stRpsIdx < num_short_term_ref_pic_sets; stRpsIdx++) {
+    NumDeltaPocs[stRpsIdx] = skipStRefPicSet(bitstream, stRpsIdx, num_short_term_ref_pic_sets, NumDeltaPocs);
+  }
+};
+const skipStRefPicSet = (bitstream, stRpsIdx, num_short_term_ref_pic_sets, NumDeltaPocs) => {
+  let NumDeltaPocsThis = 0;
+  let inter_ref_pic_set_prediction_flag = 0;
+  let RefRpsIdx = 0;
+  if (stRpsIdx !== 0) {
+    inter_ref_pic_set_prediction_flag = bitstream.readBits(1);
+  }
+  if (inter_ref_pic_set_prediction_flag) {
+    if (stRpsIdx === num_short_term_ref_pic_sets) {
+      const delta_idx_minus1 = readExpGolomb(bitstream);
+      RefRpsIdx = stRpsIdx - (delta_idx_minus1 + 1);
+    } else {
+      RefRpsIdx = stRpsIdx - 1;
+    }
+    bitstream.readBits(1);
+    readExpGolomb(bitstream);
+    const numDelta = NumDeltaPocs[RefRpsIdx] ?? 0;
+    for (let j = 0; j <= numDelta; j++) {
+      const used_by_curr_pic_flag = bitstream.readBits(1);
+      if (!used_by_curr_pic_flag) {
+        bitstream.readBits(1);
+      }
+    }
+    NumDeltaPocsThis = NumDeltaPocs[RefRpsIdx];
+  } else {
+    const num_negative_pics = readExpGolomb(bitstream);
+    const num_positive_pics = readExpGolomb(bitstream);
+    for (let i = 0; i < num_negative_pics; i++) {
+      readExpGolomb(bitstream);
+      bitstream.readBits(1);
+    }
+    for (let i = 0; i < num_positive_pics; i++) {
+      readExpGolomb(bitstream);
+      bitstream.readBits(1);
+    }
+    NumDeltaPocsThis = num_negative_pics + num_positive_pics;
+  }
+  return NumDeltaPocsThis;
+};
+const parseVuiForMinSpatialSegmentationIdc = (bitstream, sps_max_sub_layers_minus1) => {
+  if (bitstream.readBits(1)) {
+    const aspect_ratio_idc = bitstream.readBits(8);
+    if (aspect_ratio_idc === 255) {
+      bitstream.readBits(16);
+      bitstream.readBits(16);
+    }
+  }
+  if (bitstream.readBits(1)) {
+    bitstream.readBits(1);
+  }
+  if (bitstream.readBits(1)) {
+    bitstream.readBits(3);
+    bitstream.readBits(1);
+    if (bitstream.readBits(1)) {
+      bitstream.readBits(8);
+      bitstream.readBits(8);
+      bitstream.readBits(8);
+    }
+  }
+  if (bitstream.readBits(1)) {
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+  }
+  bitstream.readBits(1);
+  bitstream.readBits(1);
+  bitstream.readBits(1);
+  if (bitstream.readBits(1)) {
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+  }
+  if (bitstream.readBits(1)) {
+    bitstream.readBits(32);
+    bitstream.readBits(32);
+    if (bitstream.readBits(1)) {
+      readExpGolomb(bitstream);
+    }
+    if (bitstream.readBits(1)) {
+      skipHrdParameters(bitstream, true, sps_max_sub_layers_minus1);
+    }
+  }
+  if (bitstream.readBits(1)) {
+    bitstream.readBits(1);
+    bitstream.readBits(1);
+    bitstream.readBits(1);
+    const min_spatial_segmentation_idc = readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    return min_spatial_segmentation_idc;
+  }
+  return 0;
+};
+const skipHrdParameters = (bitstream, commonInfPresentFlag, maxNumSubLayersMinus1) => {
+  let nal_hrd_parameters_present_flag = false;
+  let vcl_hrd_parameters_present_flag = false;
+  let sub_pic_hrd_params_present_flag = false;
+  {
+    nal_hrd_parameters_present_flag = bitstream.readBits(1) === 1;
+    vcl_hrd_parameters_present_flag = bitstream.readBits(1) === 1;
+    if (nal_hrd_parameters_present_flag || vcl_hrd_parameters_present_flag) {
+      sub_pic_hrd_params_present_flag = bitstream.readBits(1) === 1;
+      if (sub_pic_hrd_params_present_flag) {
+        bitstream.readBits(8);
+        bitstream.readBits(5);
+        bitstream.readBits(1);
+        bitstream.readBits(5);
+      }
+      bitstream.readBits(4);
+      bitstream.readBits(4);
+      if (sub_pic_hrd_params_present_flag) {
+        bitstream.readBits(4);
+      }
+      bitstream.readBits(5);
+      bitstream.readBits(5);
+      bitstream.readBits(5);
+    }
+  }
+  for (let i = 0; i <= maxNumSubLayersMinus1; i++) {
+    const fixed_pic_rate_general_flag = bitstream.readBits(1) === 1;
+    let fixed_pic_rate_within_cvs_flag = true;
+    if (!fixed_pic_rate_general_flag) {
+      fixed_pic_rate_within_cvs_flag = bitstream.readBits(1) === 1;
+    }
+    let low_delay_hrd_flag = false;
+    if (fixed_pic_rate_within_cvs_flag) {
+      readExpGolomb(bitstream);
+    } else {
+      low_delay_hrd_flag = bitstream.readBits(1) === 1;
+    }
+    let CpbCnt = 1;
+    if (!low_delay_hrd_flag) {
+      const cpb_cnt_minus1 = readExpGolomb(bitstream);
+      CpbCnt = cpb_cnt_minus1 + 1;
+    }
+    if (nal_hrd_parameters_present_flag) {
+      skipSubLayerHrdParameters(bitstream, CpbCnt, sub_pic_hrd_params_present_flag);
+    }
+    if (vcl_hrd_parameters_present_flag) {
+      skipSubLayerHrdParameters(bitstream, CpbCnt, sub_pic_hrd_params_present_flag);
+    }
+  }
+};
+const skipSubLayerHrdParameters = (bitstream, CpbCnt, sub_pic_hrd_params_present_flag) => {
+  for (let i = 0; i < CpbCnt; i++) {
+    readExpGolomb(bitstream);
+    readExpGolomb(bitstream);
+    if (sub_pic_hrd_params_present_flag) {
+      readExpGolomb(bitstream);
+      readExpGolomb(bitstream);
+    }
+    bitstream.readBits(1);
+  }
+};
+const extractVp9CodecInfoFromPacket = (packet) => {
+  const bitstream = new Bitstream(packet);
+  const frameMarker = bitstream.readBits(2);
+  if (frameMarker !== 2) {
+    return null;
+  }
+  const profileLowBit = bitstream.readBits(1);
+  const profileHighBit = bitstream.readBits(1);
+  const profile = (profileHighBit << 1) + profileLowBit;
+  if (profile === 3) {
+    bitstream.skipBits(1);
+  }
+  const showExistingFrame = bitstream.readBits(1);
+  if (showExistingFrame === 1) {
+    return null;
+  }
+  const frameType = bitstream.readBits(1);
+  if (frameType !== 0) {
+    return null;
+  }
+  bitstream.skipBits(2);
+  const syncCode = bitstream.readBits(24);
+  if (syncCode !== 4817730) {
+    return null;
+  }
+  let bitDepth = 8;
+  if (profile >= 2) {
+    const tenOrTwelveBit = bitstream.readBits(1);
+    bitDepth = tenOrTwelveBit ? 12 : 10;
+  }
+  const colorSpace = bitstream.readBits(3);
+  let chromaSubsampling = 0;
+  let videoFullRangeFlag = 0;
+  if (colorSpace !== 7) {
+    const colorRange = bitstream.readBits(1);
+    videoFullRangeFlag = colorRange;
+    if (profile === 1 || profile === 3) {
+      const subsamplingX = bitstream.readBits(1);
+      const subsamplingY = bitstream.readBits(1);
+      chromaSubsampling = !subsamplingX && !subsamplingY ? 3 : subsamplingX && !subsamplingY ? 2 : 1;
+      bitstream.skipBits(1);
+    } else {
+      chromaSubsampling = 1;
+    }
+  } else {
+    chromaSubsampling = 3;
+    videoFullRangeFlag = 1;
+  }
+  const widthMinusOne = bitstream.readBits(16);
+  const heightMinusOne = bitstream.readBits(16);
+  const width = widthMinusOne + 1;
+  const height = heightMinusOne + 1;
+  const pictureSize = width * height;
+  let level = last(VP9_LEVEL_TABLE).level;
+  for (const entry of VP9_LEVEL_TABLE) {
+    if (pictureSize <= entry.maxPictureSize) {
+      level = entry.level;
+      break;
+    }
+  }
+  const matrixCoefficients = colorSpace === 7 ? 0 : colorSpace === 2 ? 1 : colorSpace === 1 ? 6 : 2;
+  const colourPrimaries = colorSpace === 2 ? 1 : colorSpace === 1 ? 6 : 2;
+  const transferCharacteristics = colorSpace === 2 ? 1 : colorSpace === 1 ? 6 : 2;
+  return {
+    profile,
+    level,
+    bitDepth,
+    chromaSubsampling,
+    videoFullRangeFlag,
+    colourPrimaries,
+    transferCharacteristics,
+    matrixCoefficients
+  };
+};
+const iterateAv1PacketObus = function* (packet) {
+  const bitstream = new Bitstream(packet);
+  const readLeb128 = () => {
+    let value = 0;
+    for (let i = 0; i < 8; i++) {
+      const byte = bitstream.readAlignedByte();
+      value |= (byte & 127) << i * 7;
+      if (!(byte & 128)) {
+        break;
+      }
+      if (i === 7 && byte & 128) {
+        return null;
+      }
+    }
+    if (value >= 2 ** 32 - 1) {
+      return null;
+    }
+    return value;
+  };
+  while (bitstream.getBitsLeft() >= 8) {
+    bitstream.skipBits(1);
+    const obuType = bitstream.readBits(4);
+    const obuExtension = bitstream.readBits(1);
+    const obuHasSizeField = bitstream.readBits(1);
+    bitstream.skipBits(1);
+    if (obuExtension) {
+      bitstream.skipBits(8);
+    }
+    let obuSize;
+    if (obuHasSizeField) {
+      const obuSizeValue = readLeb128();
+      if (obuSizeValue === null)
+        return;
+      obuSize = obuSizeValue;
+    } else {
+      obuSize = Math.floor(bitstream.getBitsLeft() / 8);
+    }
+    assert(bitstream.pos % 8 === 0);
+    yield {
+      type: obuType,
+      data: packet.subarray(bitstream.pos / 8, bitstream.pos / 8 + obuSize)
+    };
+    bitstream.skipBits(obuSize * 8);
+  }
+};
+const extractAv1CodecInfoFromPacket = (packet) => {
+  for (const { type, data } of iterateAv1PacketObus(packet)) {
+    if (type !== 1) {
+      continue;
+    }
+    const bitstream = new Bitstream(data);
+    const seqProfile = bitstream.readBits(3);
+    bitstream.readBits(1);
+    const reducedStillPictureHeader = bitstream.readBits(1);
+    let seqLevel = 0;
+    let seqTier = 0;
+    let bufferDelayLengthMinus1 = 0;
+    if (reducedStillPictureHeader) {
+      seqLevel = bitstream.readBits(5);
+    } else {
+      const timingInfoPresentFlag = bitstream.readBits(1);
+      if (timingInfoPresentFlag) {
+        bitstream.skipBits(32);
+        bitstream.skipBits(32);
+        const equalPictureInterval = bitstream.readBits(1);
+        if (equalPictureInterval) {
+          return null;
+        }
+      }
+      const decoderModelInfoPresentFlag = bitstream.readBits(1);
+      if (decoderModelInfoPresentFlag) {
+        bufferDelayLengthMinus1 = bitstream.readBits(5);
+        bitstream.skipBits(32);
+        bitstream.skipBits(5);
+        bitstream.skipBits(5);
+      }
+      const operatingPointsCntMinus1 = bitstream.readBits(5);
+      for (let i = 0; i <= operatingPointsCntMinus1; i++) {
+        bitstream.skipBits(12);
+        const seqLevelIdx = bitstream.readBits(5);
+        if (i === 0) {
+          seqLevel = seqLevelIdx;
+        }
+        if (seqLevelIdx > 7) {
+          const seqTierTemp = bitstream.readBits(1);
+          if (i === 0) {
+            seqTier = seqTierTemp;
+          }
+        }
+        if (decoderModelInfoPresentFlag) {
+          const decoderModelPresentForThisOp = bitstream.readBits(1);
+          if (decoderModelPresentForThisOp) {
+            const n = bufferDelayLengthMinus1 + 1;
+            bitstream.skipBits(n);
+            bitstream.skipBits(n);
+            bitstream.skipBits(1);
+          }
+        }
+        const initialDisplayDelayPresentFlag = bitstream.readBits(1);
+        if (initialDisplayDelayPresentFlag) {
+          bitstream.skipBits(4);
+        }
+      }
+    }
+    const frameWidthBitsMinus1 = bitstream.readBits(4);
+    const frameHeightBitsMinus1 = bitstream.readBits(4);
+    const n1 = frameWidthBitsMinus1 + 1;
+    bitstream.skipBits(n1);
+    const n2 = frameHeightBitsMinus1 + 1;
+    bitstream.skipBits(n2);
+    let frameIdNumbersPresentFlag = 0;
+    if (reducedStillPictureHeader) {
+      frameIdNumbersPresentFlag = 0;
+    } else {
+      frameIdNumbersPresentFlag = bitstream.readBits(1);
+    }
+    if (frameIdNumbersPresentFlag) {
+      bitstream.skipBits(4);
+      bitstream.skipBits(3);
+    }
+    bitstream.skipBits(1);
+    bitstream.skipBits(1);
+    bitstream.skipBits(1);
+    if (!reducedStillPictureHeader) {
+      bitstream.skipBits(1);
+      bitstream.skipBits(1);
+      bitstream.skipBits(1);
+      bitstream.skipBits(1);
+      const enableOrderHint = bitstream.readBits(1);
+      if (enableOrderHint) {
+        bitstream.skipBits(1);
+        bitstream.skipBits(1);
+      }
+      const seqChooseScreenContentTools = bitstream.readBits(1);
+      let seqForceScreenContentTools = 0;
+      if (seqChooseScreenContentTools) {
+        seqForceScreenContentTools = 2;
+      } else {
+        seqForceScreenContentTools = bitstream.readBits(1);
+      }
+      if (seqForceScreenContentTools > 0) {
+        const seqChooseIntegerMv = bitstream.readBits(1);
+        if (!seqChooseIntegerMv) {
+          bitstream.skipBits(1);
+        }
+      }
+      if (enableOrderHint) {
+        bitstream.skipBits(3);
+      }
+    }
+    bitstream.skipBits(1);
+    bitstream.skipBits(1);
+    bitstream.skipBits(1);
+    const highBitdepth = bitstream.readBits(1);
+    let bitDepth = 8;
+    if (seqProfile === 2 && highBitdepth) {
+      const twelveBit = bitstream.readBits(1);
+      bitDepth = twelveBit ? 12 : 10;
+    } else if (seqProfile <= 2) {
+      bitDepth = highBitdepth ? 10 : 8;
+    }
+    let monochrome = 0;
+    if (seqProfile !== 1) {
+      monochrome = bitstream.readBits(1);
+    }
+    let chromaSubsamplingX = 1;
+    let chromaSubsamplingY = 1;
+    let chromaSamplePosition = 0;
+    if (!monochrome) {
+      if (seqProfile === 0) {
+        chromaSubsamplingX = 1;
+        chromaSubsamplingY = 1;
+      } else if (seqProfile === 1) {
+        chromaSubsamplingX = 0;
+        chromaSubsamplingY = 0;
+      } else {
+        if (bitDepth === 12) {
+          chromaSubsamplingX = bitstream.readBits(1);
+          if (chromaSubsamplingX) {
+            chromaSubsamplingY = bitstream.readBits(1);
+          }
+        }
+      }
+      if (chromaSubsamplingX && chromaSubsamplingY) {
+        chromaSamplePosition = bitstream.readBits(2);
+      }
+    }
+    return {
+      profile: seqProfile,
+      level: seqLevel,
+      tier: seqTier,
+      bitDepth,
+      monochrome,
+      chromaSubsamplingX,
+      chromaSubsamplingY,
+      chromaSamplePosition
+    };
+  }
+  return null;
+};
+const parseOpusIdentificationHeader = (bytes) => {
+  const view = toDataView(bytes);
+  const outputChannelCount = view.getUint8(9);
+  const preSkip = view.getUint16(10, true);
+  const inputSampleRate = view.getUint32(12, true);
+  const outputGain = view.getInt16(16, true);
+  const channelMappingFamily = view.getUint8(18);
+  let channelMappingTable = null;
+  if (channelMappingFamily) {
+    channelMappingTable = bytes.subarray(19, 19 + 2 + outputChannelCount);
+  }
+  return {
+    outputChannelCount,
+    preSkip,
+    inputSampleRate,
+    outputGain,
+    channelMappingFamily,
+    channelMappingTable
+  };
+};
+const OPUS_FRAME_DURATION_TABLE = [
+  480,
+  960,
+  1920,
+  2880,
+  480,
+  960,
+  1920,
+  2880,
+  480,
+  960,
+  1920,
+  2880,
+  480,
+  960,
+  480,
+  960,
+  120,
+  240,
+  480,
+  960,
+  120,
+  240,
+  480,
+  960,
+  120,
+  240,
+  480,
+  960,
+  120,
+  240,
+  480,
+  960
+];
+const parseOpusTocByte = (packet) => {
+  const config = packet[0] >> 3;
+  return {
+    durationInSamples: OPUS_FRAME_DURATION_TABLE[config]
+  };
+};
+const parseModesFromVorbisSetupPacket = (setupHeader) => {
+  if (setupHeader.length < 7) {
+    throw new Error("Setup header is too short.");
+  }
+  if (setupHeader[0] !== 5) {
+    throw new Error("Wrong packet type in Setup header.");
+  }
+  const signature = String.fromCharCode(...setupHeader.slice(1, 7));
+  if (signature !== "vorbis") {
+    throw new Error("Invalid packet signature in Setup header.");
+  }
+  const bufSize = setupHeader.length;
+  const revBuffer = new Uint8Array(bufSize);
+  for (let i = 0; i < bufSize; i++) {
+    revBuffer[i] = setupHeader[bufSize - 1 - i];
+  }
+  const bitstream = new Bitstream(revBuffer);
+  let gotFramingBit = 0;
+  while (bitstream.getBitsLeft() > 97) {
+    if (bitstream.readBits(1) === 1) {
+      gotFramingBit = bitstream.pos;
+      break;
+    }
+  }
+  if (gotFramingBit === 0) {
+    throw new Error("Invalid Setup header: framing bit not found.");
+  }
+  let modeCount = 0;
+  let gotModeHeader = false;
+  let lastModeCount = 0;
+  while (bitstream.getBitsLeft() >= 97) {
+    const tempPos = bitstream.pos;
+    const a = bitstream.readBits(8);
+    const b = bitstream.readBits(16);
+    const c = bitstream.readBits(16);
+    if (a > 63 || b !== 0 || c !== 0) {
+      bitstream.pos = tempPos;
+      break;
+    }
+    bitstream.skipBits(1);
+    modeCount++;
+    if (modeCount > 64) {
+      break;
+    }
+    const bsClone = bitstream.clone();
+    const candidate = bsClone.readBits(6) + 1;
+    if (candidate === modeCount) {
+      gotModeHeader = true;
+      lastModeCount = modeCount;
+    }
+  }
+  if (!gotModeHeader) {
+    throw new Error("Invalid Setup header: mode header not found.");
+  }
+  if (lastModeCount > 63) {
+    throw new Error(`Unsupported mode count: ${lastModeCount}.`);
+  }
+  const finalModeCount = lastModeCount;
+  bitstream.pos = 0;
+  bitstream.skipBits(gotFramingBit);
+  const modeBlockflags = Array(finalModeCount).fill(0);
+  for (let i = finalModeCount - 1; i >= 0; i--) {
+    bitstream.skipBits(40);
+    modeBlockflags[i] = bitstream.readBits(1);
+  }
+  return { modeBlockflags };
+};
+const determineVideoPacketType = (codec, decoderConfig, packetData) => {
+  switch (codec) {
+    case "avc": {
+      const nalUnits = extractAvcNalUnits(packetData, decoderConfig);
+      let isKeyframe = nalUnits.some((x) => extractNalUnitTypeForAvc(x) === AvcNalUnitType.IDR);
+      if (!isKeyframe && (!isChromium() || getChromiumVersion() >= 144)) {
+        for (const nalUnit of nalUnits) {
+          const type = extractNalUnitTypeForAvc(nalUnit);
+          if (type !== AvcNalUnitType.SEI) {
+            continue;
+          }
+          const bytes = removeEmulationPreventionBytes(nalUnit);
+          let pos = 1;
+          do {
+            let payloadType = 0;
+            while (true) {
+              const nextByte = bytes[pos++];
+              if (nextByte === void 0)
+                break;
+              payloadType += nextByte;
+              if (nextByte < 255) {
+                break;
+              }
+            }
+            let payloadSize = 0;
+            while (true) {
+              const nextByte = bytes[pos++];
+              if (nextByte === void 0)
+                break;
+              payloadSize += nextByte;
+              if (nextByte < 255) {
+                break;
+              }
+            }
+            const PAYLOAD_TYPE_RECOVERY_POINT = 6;
+            if (payloadType === PAYLOAD_TYPE_RECOVERY_POINT) {
+              const bitstream = new Bitstream(bytes);
+              bitstream.pos = 8 * pos;
+              const recoveryFrameCount = readExpGolomb(bitstream);
+              const exactMatchFlag = bitstream.readBits(1);
+              if (recoveryFrameCount === 0 && exactMatchFlag === 1) {
+                isKeyframe = true;
+                break;
+              }
+            }
+            pos += payloadSize;
+          } while (pos < bytes.length - 1);
+        }
+      }
+      return isKeyframe ? "key" : "delta";
+    }
+    case "hevc": {
+      const nalUnits = extractHevcNalUnits(packetData, decoderConfig);
+      const isKeyframe = nalUnits.some((x) => {
+        const type = extractNalUnitTypeForHevc(x);
+        return HevcNalUnitType.BLA_W_LP <= type && type <= HevcNalUnitType.RSV_IRAP_VCL23;
+      });
+      return isKeyframe ? "key" : "delta";
+    }
+    case "vp8": {
+      const frameType = packetData[0] & 1;
+      return frameType === 0 ? "key" : "delta";
+    }
+    case "vp9": {
+      const bitstream = new Bitstream(packetData);
+      if (bitstream.readBits(2) !== 2) {
+        return null;
+      }
+      const profileLowBit = bitstream.readBits(1);
+      const profileHighBit = bitstream.readBits(1);
+      const profile = (profileHighBit << 1) + profileLowBit;
+      if (profile === 3) {
+        bitstream.skipBits(1);
+      }
+      const showExistingFrame = bitstream.readBits(1);
+      if (showExistingFrame) {
+        return null;
+      }
+      const frameType = bitstream.readBits(1);
+      return frameType === 0 ? "key" : "delta";
+    }
+    case "av1": {
+      let reducedStillPictureHeader = false;
+      for (const { type, data } of iterateAv1PacketObus(packetData)) {
+        if (type === 1) {
+          const bitstream = new Bitstream(data);
+          bitstream.skipBits(4);
+          reducedStillPictureHeader = !!bitstream.readBits(1);
+        } else if (type === 3 || type === 6 || type === 7) {
+          if (reducedStillPictureHeader) {
+            return "key";
+          }
+          const bitstream = new Bitstream(data);
+          const showExistingFrame = bitstream.readBits(1);
+          if (showExistingFrame) {
+            return null;
+          }
+          const frameType = bitstream.readBits(2);
+          return frameType === 0 ? "key" : "delta";
+        }
+      }
+      return null;
+    }
+    default: {
+      assertNever(codec);
+      assert(false);
+    }
+  }
+};
+var FlacBlockType;
+(function(FlacBlockType2) {
+  FlacBlockType2[FlacBlockType2["STREAMINFO"] = 0] = "STREAMINFO";
+  FlacBlockType2[FlacBlockType2["VORBIS_COMMENT"] = 4] = "VORBIS_COMMENT";
+  FlacBlockType2[FlacBlockType2["PICTURE"] = 6] = "PICTURE";
+})(FlacBlockType || (FlacBlockType = {}));
+const readVorbisComments = (bytes, metadataTags) => {
+  var _a, _b;
+  const commentView = toDataView(bytes);
+  let commentPos = 0;
+  const vendorStringLength = commentView.getUint32(commentPos, true);
+  commentPos += 4;
+  const vendorString = textDecoder.decode(bytes.subarray(commentPos, commentPos + vendorStringLength));
+  commentPos += vendorStringLength;
+  if (vendorStringLength > 0) {
+    metadataTags.raw ?? (metadataTags.raw = {});
+    (_a = metadataTags.raw)["vendor"] ?? (_a["vendor"] = vendorString);
+  }
+  const listLength = commentView.getUint32(commentPos, true);
+  commentPos += 4;
+  for (let i = 0; i < listLength; i++) {
+    const stringLength = commentView.getUint32(commentPos, true);
+    commentPos += 4;
+    const string = textDecoder.decode(bytes.subarray(commentPos, commentPos + stringLength));
+    commentPos += stringLength;
+    const separatorIndex = string.indexOf("=");
+    if (separatorIndex === -1) {
+      continue;
+    }
+    const key = string.slice(0, separatorIndex).toUpperCase();
+    const value = string.slice(separatorIndex + 1);
+    metadataTags.raw ?? (metadataTags.raw = {});
+    (_b = metadataTags.raw)[key] ?? (_b[key] = value);
+    switch (key) {
+      case "TITLE":
+        {
+          metadataTags.title ?? (metadataTags.title = value);
+        }
+        break;
+      case "DESCRIPTION":
+        {
+          metadataTags.description ?? (metadataTags.description = value);
+        }
+        break;
+      case "ARTIST":
+        {
+          metadataTags.artist ?? (metadataTags.artist = value);
+        }
+        break;
+      case "ALBUM":
+        {
+          metadataTags.album ?? (metadataTags.album = value);
+        }
+        break;
+      case "ALBUMARTIST":
+        {
+          metadataTags.albumArtist ?? (metadataTags.albumArtist = value);
+        }
+        break;
+      case "COMMENT":
+        {
+          metadataTags.comment ?? (metadataTags.comment = value);
+        }
+        break;
+      case "LYRICS":
+        {
+          metadataTags.lyrics ?? (metadataTags.lyrics = value);
+        }
+        break;
+      case "TRACKNUMBER":
+        {
+          const parts = value.split("/");
+          const trackNum = Number.parseInt(parts[0], 10);
+          const tracksTotal = parts[1] && Number.parseInt(parts[1], 10);
+          if (Number.isInteger(trackNum) && trackNum > 0) {
+            metadataTags.trackNumber ?? (metadataTags.trackNumber = trackNum);
+          }
+          if (tracksTotal && Number.isInteger(tracksTotal) && tracksTotal > 0) {
+            metadataTags.tracksTotal ?? (metadataTags.tracksTotal = tracksTotal);
+          }
+        }
+        break;
+      case "TRACKTOTAL":
+        {
+          const tracksTotal = Number.parseInt(value, 10);
+          if (Number.isInteger(tracksTotal) && tracksTotal > 0) {
+            metadataTags.tracksTotal ?? (metadataTags.tracksTotal = tracksTotal);
+          }
+        }
+        break;
+      case "DISCNUMBER":
+        {
+          const parts = value.split("/");
+          const discNum = Number.parseInt(parts[0], 10);
+          const discsTotal = parts[1] && Number.parseInt(parts[1], 10);
+          if (Number.isInteger(discNum) && discNum > 0) {
+            metadataTags.discNumber ?? (metadataTags.discNumber = discNum);
+          }
+          if (discsTotal && Number.isInteger(discsTotal) && discsTotal > 0) {
+            metadataTags.discsTotal ?? (metadataTags.discsTotal = discsTotal);
+          }
+        }
+        break;
+      case "DISCTOTAL":
+        {
+          const discsTotal = Number.parseInt(value, 10);
+          if (Number.isInteger(discsTotal) && discsTotal > 0) {
+            metadataTags.discsTotal ?? (metadataTags.discsTotal = discsTotal);
+          }
+        }
+        break;
+      case "DATE":
+        {
+          const date = new Date(value);
+          if (!Number.isNaN(date.getTime())) {
+            metadataTags.date ?? (metadataTags.date = date);
+          }
+        }
+        break;
+      case "GENRE":
+        {
+          metadataTags.genre ?? (metadataTags.genre = value);
+        }
+        break;
+      case "METADATA_BLOCK_PICTURE":
+        {
+          const decoded = base64ToBytes(value);
+          const view = toDataView(decoded);
+          const pictureType = view.getUint32(0, false);
+          const mediaTypeLength = view.getUint32(4, false);
+          const mediaType = String.fromCharCode(...decoded.subarray(8, 8 + mediaTypeLength));
+          const descriptionLength = view.getUint32(8 + mediaTypeLength, false);
+          const description = textDecoder.decode(decoded.subarray(12 + mediaTypeLength, 12 + mediaTypeLength + descriptionLength));
+          const dataLength = view.getUint32(mediaTypeLength + descriptionLength + 28);
+          const data = decoded.subarray(mediaTypeLength + descriptionLength + 32, mediaTypeLength + descriptionLength + 32 + dataLength);
+          metadataTags.images ?? (metadataTags.images = []);
+          metadataTags.images.push({
+            data,
+            mimeType: mediaType,
+            kind: pictureType === 3 ? "coverFront" : pictureType === 4 ? "coverBack" : "unknown",
+            name: void 0,
+            description: description || void 0
+          });
+        }
+        break;
+    }
+  }
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class Demuxer {
+  constructor(input) {
+    this.input = input;
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const customVideoDecoders = [];
+const customAudioDecoders = [];
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const PLACEHOLDER_DATA = /* @__PURE__ */ new Uint8Array(0);
+class EncodedPacket {
+  /** Creates a new {@link EncodedPacket} from raw bytes and timing information. */
+  constructor(data, type, timestamp, duration, sequenceNumber = -1, byteLength, sideData) {
+    this.data = data;
+    this.type = type;
+    this.timestamp = timestamp;
+    this.duration = duration;
+    this.sequenceNumber = sequenceNumber;
+    if (data === PLACEHOLDER_DATA && byteLength === void 0) {
+      throw new Error("Internal error: byteLength must be explicitly provided when constructing metadata-only packets.");
+    }
+    if (byteLength === void 0) {
+      byteLength = data.byteLength;
+    }
+    if (!(data instanceof Uint8Array)) {
+      throw new TypeError("data must be a Uint8Array.");
+    }
+    if (type !== "key" && type !== "delta") {
+      throw new TypeError('type must be either "key" or "delta".');
+    }
+    if (!Number.isFinite(timestamp)) {
+      throw new TypeError("timestamp must be a number.");
+    }
+    if (!Number.isFinite(duration) || duration < 0) {
+      throw new TypeError("duration must be a non-negative number.");
+    }
+    if (!Number.isFinite(sequenceNumber)) {
+      throw new TypeError("sequenceNumber must be a number.");
+    }
+    if (!Number.isInteger(byteLength) || byteLength < 0) {
+      throw new TypeError("byteLength must be a non-negative integer.");
+    }
+    if (sideData !== void 0 && (typeof sideData !== "object" || !sideData)) {
+      throw new TypeError("sideData, when provided, must be an object.");
+    }
+    if (sideData?.alpha !== void 0 && !(sideData.alpha instanceof Uint8Array)) {
+      throw new TypeError("sideData.alpha, when provided, must be a Uint8Array.");
+    }
+    if (sideData?.alphaByteLength !== void 0 && (!Number.isInteger(sideData.alphaByteLength) || sideData.alphaByteLength < 0)) {
+      throw new TypeError("sideData.alphaByteLength, when provided, must be a non-negative integer.");
+    }
+    this.byteLength = byteLength;
+    this.sideData = sideData ?? {};
+    if (this.sideData.alpha && this.sideData.alphaByteLength === void 0) {
+      this.sideData.alphaByteLength = this.sideData.alpha.byteLength;
+    }
+  }
+  /**
+   * If this packet is a metadata-only packet. Metadata-only packets don't contain their packet data. They are the
+   * result of retrieving packets with {@link PacketRetrievalOptions.metadataOnly} set to `true`.
+   */
+  get isMetadataOnly() {
+    return this.data === PLACEHOLDER_DATA;
+  }
+  /** The timestamp of this packet in microseconds. */
+  get microsecondTimestamp() {
+    return Math.trunc(SECOND_TO_MICROSECOND_FACTOR * this.timestamp);
+  }
+  /** The duration of this packet in microseconds. */
+  get microsecondDuration() {
+    return Math.trunc(SECOND_TO_MICROSECOND_FACTOR * this.duration);
+  }
+  /** Converts this packet to an
+   * [`EncodedVideoChunk`](https://developer.mozilla.org/en-US/docs/Web/API/EncodedVideoChunk) for use with the
+   * WebCodecs API. */
+  toEncodedVideoChunk() {
+    if (this.isMetadataOnly) {
+      throw new TypeError("Metadata-only packets cannot be converted to a video chunk.");
+    }
+    if (typeof EncodedVideoChunk === "undefined") {
+      throw new Error("Your browser does not support EncodedVideoChunk.");
+    }
+    return new EncodedVideoChunk({
+      data: this.data,
+      type: this.type,
+      timestamp: this.microsecondTimestamp,
+      duration: this.microsecondDuration
+    });
+  }
+  /**
+   * Converts this packet to an
+   * [`EncodedVideoChunk`](https://developer.mozilla.org/en-US/docs/Web/API/EncodedVideoChunk) for use with the
+   * WebCodecs API, using the alpha side data instead of the color data. Throws if no alpha side data is defined.
+   */
+  alphaToEncodedVideoChunk(type = this.type) {
+    if (!this.sideData.alpha) {
+      throw new TypeError("This packet does not contain alpha side data.");
+    }
+    if (this.isMetadataOnly) {
+      throw new TypeError("Metadata-only packets cannot be converted to a video chunk.");
+    }
+    if (typeof EncodedVideoChunk === "undefined") {
+      throw new Error("Your browser does not support EncodedVideoChunk.");
+    }
+    return new EncodedVideoChunk({
+      data: this.sideData.alpha,
+      type,
+      timestamp: this.microsecondTimestamp,
+      duration: this.microsecondDuration
+    });
+  }
+  /** Converts this packet to an
+   * [`EncodedAudioChunk`](https://developer.mozilla.org/en-US/docs/Web/API/EncodedAudioChunk) for use with the
+   * WebCodecs API. */
+  toEncodedAudioChunk() {
+    if (this.isMetadataOnly) {
+      throw new TypeError("Metadata-only packets cannot be converted to an audio chunk.");
+    }
+    if (typeof EncodedAudioChunk === "undefined") {
+      throw new Error("Your browser does not support EncodedAudioChunk.");
+    }
+    return new EncodedAudioChunk({
+      data: this.data,
+      type: this.type,
+      timestamp: this.microsecondTimestamp,
+      duration: this.microsecondDuration
+    });
+  }
+  /**
+   * Creates an {@link EncodedPacket} from an
+   * [`EncodedVideoChunk`](https://developer.mozilla.org/en-US/docs/Web/API/EncodedVideoChunk) or
+   * [`EncodedAudioChunk`](https://developer.mozilla.org/en-US/docs/Web/API/EncodedAudioChunk). This method is useful
+   * for converting chunks from the WebCodecs API to `EncodedPacket` instances.
+   */
+  static fromEncodedChunk(chunk, sideData) {
+    if (!(chunk instanceof EncodedVideoChunk || chunk instanceof EncodedAudioChunk)) {
+      throw new TypeError("chunk must be an EncodedVideoChunk or EncodedAudioChunk.");
+    }
+    const data = new Uint8Array(chunk.byteLength);
+    chunk.copyTo(data);
+    return new EncodedPacket(data, chunk.type, chunk.timestamp / 1e6, (chunk.duration ?? 0) / 1e6, void 0, void 0, sideData);
+  }
+  /** Clones this packet while optionally updating timing information. */
+  clone(options) {
+    if (options !== void 0 && (typeof options !== "object" || options === null)) {
+      throw new TypeError("options, when provided, must be an object.");
+    }
+    if (options?.timestamp !== void 0 && !Number.isFinite(options.timestamp)) {
+      throw new TypeError("options.timestamp, when provided, must be a number.");
+    }
+    if (options?.duration !== void 0 && !Number.isFinite(options.duration)) {
+      throw new TypeError("options.duration, when provided, must be a number.");
+    }
+    return new EncodedPacket(this.data, this.type, options?.timestamp ?? this.timestamp, options?.duration ?? this.duration, this.sequenceNumber, this.byteLength);
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const fromUlaw = (u8) => {
+  const MULAW_BIAS = 33;
+  let sign = 0;
+  let position = 0;
+  let number = ~u8;
+  if (number & 128) {
+    number &= -129;
+    sign = -1;
+  }
+  position = ((number & 240) >> 4) + 5;
+  const decoded = (1 << position | (number & 15) << position - 4 | 1 << position - 5) - MULAW_BIAS;
+  return sign === 0 ? decoded : -decoded;
+};
+const fromAlaw = (u8) => {
+  let sign = 0;
+  let position = 0;
+  let number = u8 ^ 85;
+  if (number & 128) {
+    number &= -129;
+    sign = -1;
+  }
+  position = ((number & 240) >> 4) + 4;
+  let decoded = 0;
+  if (position !== 4) {
+    decoded = 1 << position | (number & 15) << position - 4 | 1 << position - 5;
+  } else {
+    decoded = number << 1 | 1;
+  }
+  return sign === 0 ? decoded : -decoded;
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+polyfillSymbolDispose();
+let lastVideoGcErrorLog = -Infinity;
+let lastAudioGcErrorLog = -Infinity;
+let finalizationRegistry = null;
+if (typeof FinalizationRegistry !== "undefined") {
+  finalizationRegistry = new FinalizationRegistry((value) => {
+    const now = Date.now();
+    if (value.type === "video") {
+      if (now - lastVideoGcErrorLog >= 1e3) {
+        console.error(`A VideoSample was garbage collected without first being closed. For proper resource management, make sure to call close() on all your VideoSamples as soon as you're done using them.`);
+        lastVideoGcErrorLog = now;
+      }
+      if (typeof VideoFrame !== "undefined" && value.data instanceof VideoFrame) {
+        value.data.close();
+      }
+    } else {
+      if (now - lastAudioGcErrorLog >= 1e3) {
+        console.error(`An AudioSample was garbage collected without first being closed. For proper resource management, make sure to call close() on all your AudioSamples as soon as you're done using them.`);
+        lastAudioGcErrorLog = now;
+      }
+      if (typeof AudioData !== "undefined" && value.data instanceof AudioData) {
+        value.data.close();
+      }
+    }
+  });
+}
+const VIDEO_SAMPLE_PIXEL_FORMATS = [
+  // 4:2:0 Y, U, V
+  "I420",
+  "I420P10",
+  "I420P12",
+  // 4:2:0 Y, U, V, A
+  "I420A",
+  "I420AP10",
+  "I420AP12",
+  // 4:2:2 Y, U, V
+  "I422",
+  "I422P10",
+  "I422P12",
+  // 4:2:2 Y, U, V, A
+  "I422A",
+  "I422AP10",
+  "I422AP12",
+  // 4:4:4 Y, U, V
+  "I444",
+  "I444P10",
+  "I444P12",
+  // 4:4:4 Y, U, V, A
+  "I444A",
+  "I444AP10",
+  "I444AP12",
+  // 4:2:0 Y, UV
+  "NV12",
+  // 4:4:4 RGBA
+  "RGBA",
+  // 4:4:4 RGBX (opaque)
+  "RGBX",
+  // 4:4:4 BGRA
+  "BGRA",
+  // 4:4:4 BGRX (opaque)
+  "BGRX"
+];
+const VIDEO_SAMPLE_PIXEL_FORMATS_SET = new Set(VIDEO_SAMPLE_PIXEL_FORMATS);
+class VideoSample {
+  /** The width of the frame in pixels after rotation. */
+  get displayWidth() {
+    return this.rotation % 180 === 0 ? this.codedWidth : this.codedHeight;
+  }
+  /** The height of the frame in pixels after rotation. */
+  get displayHeight() {
+    return this.rotation % 180 === 0 ? this.codedHeight : this.codedWidth;
+  }
+  /** The presentation timestamp of the frame in microseconds. */
+  get microsecondTimestamp() {
+    return Math.trunc(SECOND_TO_MICROSECOND_FACTOR * this.timestamp);
+  }
+  /** The duration of the frame in microseconds. */
+  get microsecondDuration() {
+    return Math.trunc(SECOND_TO_MICROSECOND_FACTOR * this.duration);
+  }
+  /**
+   * Whether this sample uses a pixel format that can hold transparency data. Note that this doesn't necessarily mean
+   * that the sample is transparent.
+   */
+  get hasAlpha() {
+    return this.format && this.format.includes("A");
+  }
+  constructor(data, init) {
+    this._closed = false;
+    if (data instanceof ArrayBuffer || typeof SharedArrayBuffer !== "undefined" && data instanceof SharedArrayBuffer || ArrayBuffer.isView(data)) {
+      if (!init || typeof init !== "object") {
+        throw new TypeError("init must be an object.");
+      }
+      if (init.format === void 0 || !VIDEO_SAMPLE_PIXEL_FORMATS_SET.has(init.format)) {
+        throw new TypeError("init.format must be one of: " + VIDEO_SAMPLE_PIXEL_FORMATS.join(", "));
+      }
+      if (!Number.isInteger(init.codedWidth) || init.codedWidth <= 0) {
+        throw new TypeError("init.codedWidth must be a positive integer.");
+      }
+      if (!Number.isInteger(init.codedHeight) || init.codedHeight <= 0) {
+        throw new TypeError("init.codedHeight must be a positive integer.");
+      }
+      if (init.rotation !== void 0 && ![0, 90, 180, 270].includes(init.rotation)) {
+        throw new TypeError("init.rotation, when provided, must be 0, 90, 180, or 270.");
+      }
+      if (!Number.isFinite(init.timestamp)) {
+        throw new TypeError("init.timestamp must be a number.");
+      }
+      if (init.duration !== void 0 && (!Number.isFinite(init.duration) || init.duration < 0)) {
+        throw new TypeError("init.duration, when provided, must be a non-negative number.");
+      }
+      this._data = toUint8Array(data).slice();
+      this._layout = init.layout ?? createDefaultPlaneLayout(init.format, init.codedWidth, init.codedHeight);
+      this.format = init.format;
+      this.codedWidth = init.codedWidth;
+      this.codedHeight = init.codedHeight;
+      this.rotation = init.rotation ?? 0;
+      this.timestamp = init.timestamp;
+      this.duration = init.duration ?? 0;
+      this.colorSpace = new VideoSampleColorSpace(init.colorSpace);
+    } else if (typeof VideoFrame !== "undefined" && data instanceof VideoFrame) {
+      if (init?.rotation !== void 0 && ![0, 90, 180, 270].includes(init.rotation)) {
+        throw new TypeError("init.rotation, when provided, must be 0, 90, 180, or 270.");
+      }
+      if (init?.timestamp !== void 0 && !Number.isFinite(init?.timestamp)) {
+        throw new TypeError("init.timestamp, when provided, must be a number.");
+      }
+      if (init?.duration !== void 0 && (!Number.isFinite(init.duration) || init.duration < 0)) {
+        throw new TypeError("init.duration, when provided, must be a non-negative number.");
+      }
+      this._data = data;
+      this._layout = null;
+      this.format = data.format;
+      this.codedWidth = data.displayWidth;
+      this.codedHeight = data.displayHeight;
+      this.rotation = init?.rotation ?? 0;
+      this.timestamp = init?.timestamp ?? data.timestamp / 1e6;
+      this.duration = init?.duration ?? (data.duration ?? 0) / 1e6;
+      this.colorSpace = new VideoSampleColorSpace(data.colorSpace);
+    } else if (typeof HTMLImageElement !== "undefined" && data instanceof HTMLImageElement || typeof SVGImageElement !== "undefined" && data instanceof SVGImageElement || typeof ImageBitmap !== "undefined" && data instanceof ImageBitmap || typeof HTMLVideoElement !== "undefined" && data instanceof HTMLVideoElement || typeof HTMLCanvasElement !== "undefined" && data instanceof HTMLCanvasElement || typeof OffscreenCanvas !== "undefined" && data instanceof OffscreenCanvas) {
+      if (!init || typeof init !== "object") {
+        throw new TypeError("init must be an object.");
+      }
+      if (init.rotation !== void 0 && ![0, 90, 180, 270].includes(init.rotation)) {
+        throw new TypeError("init.rotation, when provided, must be 0, 90, 180, or 270.");
+      }
+      if (!Number.isFinite(init.timestamp)) {
+        throw new TypeError("init.timestamp must be a number.");
+      }
+      if (init.duration !== void 0 && (!Number.isFinite(init.duration) || init.duration < 0)) {
+        throw new TypeError("init.duration, when provided, must be a non-negative number.");
+      }
+      if (typeof VideoFrame !== "undefined") {
+        return new VideoSample(new VideoFrame(data, {
+          timestamp: Math.trunc(init.timestamp * SECOND_TO_MICROSECOND_FACTOR),
+          // Drag 0 to undefined
+          duration: Math.trunc((init.duration ?? 0) * SECOND_TO_MICROSECOND_FACTOR) || void 0
+        }), init);
+      }
+      let width = 0;
+      let height = 0;
+      if ("naturalWidth" in data) {
+        width = data.naturalWidth;
+        height = data.naturalHeight;
+      } else if ("videoWidth" in data) {
+        width = data.videoWidth;
+        height = data.videoHeight;
+      } else if ("width" in data) {
+        width = Number(data.width);
+        height = Number(data.height);
+      }
+      if (!width || !height) {
+        throw new TypeError("Could not determine dimensions.");
+      }
+      const canvas = new OffscreenCanvas(width, height);
+      const context = canvas.getContext("2d", {
+        alpha: isFirefox(),
+        // Firefox has VideoFrame glitches with opaque canvases
+        willReadFrequently: true
+      });
+      assert(context);
+      context.drawImage(data, 0, 0);
+      this._data = canvas;
+      this._layout = null;
+      this.format = "RGBX";
+      this.codedWidth = width;
+      this.codedHeight = height;
+      this.rotation = init.rotation ?? 0;
+      this.timestamp = init.timestamp;
+      this.duration = init.duration ?? 0;
+      this.colorSpace = new VideoSampleColorSpace({
+        matrix: "rgb",
+        primaries: "bt709",
+        transfer: "iec61966-2-1",
+        fullRange: true
+      });
+    } else {
+      throw new TypeError("Invalid data type: Must be a BufferSource or CanvasImageSource.");
+    }
+    finalizationRegistry?.register(this, { type: "video", data: this._data }, this);
+  }
+  /** Clones this video sample. */
+  clone() {
+    if (this._closed) {
+      throw new Error("VideoSample is closed.");
+    }
+    assert(this._data !== null);
+    if (isVideoFrame(this._data)) {
+      return new VideoSample(this._data.clone(), {
+        timestamp: this.timestamp,
+        duration: this.duration,
+        rotation: this.rotation
+      });
+    } else if (this._data instanceof Uint8Array) {
+      assert(this._layout);
+      return new VideoSample(this._data, {
+        format: this.format,
+        layout: this._layout,
+        codedWidth: this.codedWidth,
+        codedHeight: this.codedHeight,
+        timestamp: this.timestamp,
+        duration: this.duration,
+        colorSpace: this.colorSpace,
+        rotation: this.rotation
+      });
+    } else {
+      return new VideoSample(this._data, {
+        format: this.format,
+        codedWidth: this.codedWidth,
+        codedHeight: this.codedHeight,
+        timestamp: this.timestamp,
+        duration: this.duration,
+        colorSpace: this.colorSpace,
+        rotation: this.rotation
+      });
+    }
+  }
+  /**
+   * Closes this video sample, releasing held resources. Video samples should be closed as soon as they are not
+   * needed anymore.
+   */
+  close() {
+    if (this._closed) {
+      return;
+    }
+    finalizationRegistry?.unregister(this);
+    if (isVideoFrame(this._data)) {
+      this._data.close();
+    } else {
+      this._data = null;
+    }
+    this._closed = true;
+  }
+  /**
+   * Returns the number of bytes required to hold this video sample's pixel data. Throws if `format` is `null`.
+   */
+  allocationSize(options = {}) {
+    validateVideoFrameCopyToOptions(options);
+    if (this._closed) {
+      throw new Error("VideoSample is closed.");
+    }
+    if (this.format === null) {
+      throw new Error("Cannot get allocation size when format is null. Sorry!");
+    }
+    assert(this._data !== null);
+    if (!isVideoFrame(this._data)) {
+      if (options.colorSpace || options.format && options.format !== this.format || options.layout || options.rect) {
+        const videoFrame = this.toVideoFrame();
+        const size = videoFrame.allocationSize(options);
+        videoFrame.close();
+        return size;
+      }
+    }
+    if (isVideoFrame(this._data)) {
+      return this._data.allocationSize(options);
+    } else if (this._data instanceof Uint8Array) {
+      return this._data.byteLength;
+    } else {
+      return this.codedWidth * this.codedHeight * 4;
+    }
+  }
+  /**
+   * Copies this video sample's pixel data to an ArrayBuffer or ArrayBufferView. Throws if `format` is `null`.
+   * @returns The byte layout of the planes of the copied data.
+   */
+  async copyTo(destination, options = {}) {
+    if (!isAllowSharedBufferSource(destination)) {
+      throw new TypeError("destination must be an ArrayBuffer or an ArrayBuffer view.");
+    }
+    validateVideoFrameCopyToOptions(options);
+    if (this._closed) {
+      throw new Error("VideoSample is closed.");
+    }
+    if (this.format === null) {
+      throw new Error("Cannot copy video sample data when format is null. Sorry!");
+    }
+    assert(this._data !== null);
+    if (!isVideoFrame(this._data)) {
+      if (options.colorSpace || options.format && options.format !== this.format || options.layout || options.rect) {
+        const videoFrame = this.toVideoFrame();
+        const layout = await videoFrame.copyTo(destination, options);
+        videoFrame.close();
+        return layout;
+      }
+    }
+    if (isVideoFrame(this._data)) {
+      return this._data.copyTo(destination, options);
+    } else if (this._data instanceof Uint8Array) {
+      assert(this._layout);
+      const dest = toUint8Array(destination);
+      dest.set(this._data);
+      return this._layout;
+    } else {
+      const canvas = this._data;
+      const context = canvas.getContext("2d");
+      assert(context);
+      const imageData = context.getImageData(0, 0, this.codedWidth, this.codedHeight);
+      const dest = toUint8Array(destination);
+      dest.set(imageData.data);
+      return [{
+        offset: 0,
+        stride: 4 * this.codedWidth
+      }];
+    }
+  }
+  /**
+   * Converts this video sample to a VideoFrame for use with the WebCodecs API. The VideoFrame returned by this
+   * method *must* be closed separately from this video sample.
+   */
+  toVideoFrame() {
+    if (this._closed) {
+      throw new Error("VideoSample is closed.");
+    }
+    assert(this._data !== null);
+    if (isVideoFrame(this._data)) {
+      return new VideoFrame(this._data, {
+        timestamp: this.microsecondTimestamp,
+        duration: this.microsecondDuration || void 0
+        // Drag 0 duration to undefined, glitches some codecs
+      });
+    } else if (this._data instanceof Uint8Array) {
+      return new VideoFrame(this._data, {
+        format: this.format,
+        codedWidth: this.codedWidth,
+        codedHeight: this.codedHeight,
+        timestamp: this.microsecondTimestamp,
+        duration: this.microsecondDuration || void 0,
+        colorSpace: this.colorSpace
+      });
+    } else {
+      return new VideoFrame(this._data, {
+        timestamp: this.microsecondTimestamp,
+        duration: this.microsecondDuration || void 0
+      });
+    }
+  }
+  draw(context, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) {
+    let sx = 0;
+    let sy = 0;
+    let sWidth = this.displayWidth;
+    let sHeight = this.displayHeight;
+    let dx = 0;
+    let dy = 0;
+    let dWidth = this.displayWidth;
+    let dHeight = this.displayHeight;
+    if (arg5 !== void 0) {
+      sx = arg1;
+      sy = arg2;
+      sWidth = arg3;
+      sHeight = arg4;
+      dx = arg5;
+      dy = arg6;
+      if (arg7 !== void 0) {
+        dWidth = arg7;
+        dHeight = arg8;
+      } else {
+        dWidth = sWidth;
+        dHeight = sHeight;
+      }
+    } else {
+      dx = arg1;
+      dy = arg2;
+      if (arg3 !== void 0) {
+        dWidth = arg3;
+        dHeight = arg4;
+      }
+    }
+    if (!(typeof CanvasRenderingContext2D !== "undefined" && context instanceof CanvasRenderingContext2D || typeof OffscreenCanvasRenderingContext2D !== "undefined" && context instanceof OffscreenCanvasRenderingContext2D)) {
+      throw new TypeError("context must be a CanvasRenderingContext2D or OffscreenCanvasRenderingContext2D.");
+    }
+    if (!Number.isFinite(sx)) {
+      throw new TypeError("sx must be a number.");
+    }
+    if (!Number.isFinite(sy)) {
+      throw new TypeError("sy must be a number.");
+    }
+    if (!Number.isFinite(sWidth) || sWidth < 0) {
+      throw new TypeError("sWidth must be a non-negative number.");
+    }
+    if (!Number.isFinite(sHeight) || sHeight < 0) {
+      throw new TypeError("sHeight must be a non-negative number.");
+    }
+    if (!Number.isFinite(dx)) {
+      throw new TypeError("dx must be a number.");
+    }
+    if (!Number.isFinite(dy)) {
+      throw new TypeError("dy must be a number.");
+    }
+    if (!Number.isFinite(dWidth) || dWidth < 0) {
+      throw new TypeError("dWidth must be a non-negative number.");
+    }
+    if (!Number.isFinite(dHeight) || dHeight < 0) {
+      throw new TypeError("dHeight must be a non-negative number.");
+    }
+    if (this._closed) {
+      throw new Error("VideoSample is closed.");
+    }
+    ({ sx, sy, sWidth, sHeight } = this._rotateSourceRegion(sx, sy, sWidth, sHeight, this.rotation));
+    const source = this.toCanvasImageSource();
+    context.save();
+    const centerX = dx + dWidth / 2;
+    const centerY = dy + dHeight / 2;
+    context.translate(centerX, centerY);
+    context.rotate(this.rotation * Math.PI / 180);
+    const aspectRatioChange = this.rotation % 180 === 0 ? 1 : dWidth / dHeight;
+    context.scale(1 / aspectRatioChange, aspectRatioChange);
+    context.drawImage(source, sx, sy, sWidth, sHeight, -dWidth / 2, -dHeight / 2, dWidth, dHeight);
+    context.restore();
+  }
+  /**
+   * Draws the sample in the middle of the canvas corresponding to the context with the specified fit behavior.
+   */
+  drawWithFit(context, options) {
+    if (!(typeof CanvasRenderingContext2D !== "undefined" && context instanceof CanvasRenderingContext2D || typeof OffscreenCanvasRenderingContext2D !== "undefined" && context instanceof OffscreenCanvasRenderingContext2D)) {
+      throw new TypeError("context must be a CanvasRenderingContext2D or OffscreenCanvasRenderingContext2D.");
+    }
+    if (!options || typeof options !== "object") {
+      throw new TypeError("options must be an object.");
+    }
+    if (!["fill", "contain", "cover"].includes(options.fit)) {
+      throw new TypeError("options.fit must be 'fill', 'contain', or 'cover'.");
+    }
+    if (options.rotation !== void 0 && ![0, 90, 180, 270].includes(options.rotation)) {
+      throw new TypeError("options.rotation, when provided, must be 0, 90, 180, or 270.");
+    }
+    if (options.crop !== void 0) {
+      validateCropRectangle(options.crop, "options.");
+    }
+    const canvasWidth = context.canvas.width;
+    const canvasHeight = context.canvas.height;
+    const rotation = options.rotation ?? this.rotation;
+    const [rotatedWidth, rotatedHeight] = rotation % 180 === 0 ? [this.codedWidth, this.codedHeight] : [this.codedHeight, this.codedWidth];
+    if (options.crop) {
+      clampCropRectangle(options.crop, rotatedWidth, rotatedHeight);
+    }
+    let dx;
+    let dy;
+    let newWidth;
+    let newHeight;
+    const { sx, sy, sWidth, sHeight } = this._rotateSourceRegion(options.crop?.left ?? 0, options.crop?.top ?? 0, options.crop?.width ?? rotatedWidth, options.crop?.height ?? rotatedHeight, rotation);
+    if (options.fit === "fill") {
+      dx = 0;
+      dy = 0;
+      newWidth = canvasWidth;
+      newHeight = canvasHeight;
+    } else {
+      const [sampleWidth, sampleHeight] = options.crop ? [options.crop.width, options.crop.height] : [rotatedWidth, rotatedHeight];
+      const scale = options.fit === "contain" ? Math.min(canvasWidth / sampleWidth, canvasHeight / sampleHeight) : Math.max(canvasWidth / sampleWidth, canvasHeight / sampleHeight);
+      newWidth = sampleWidth * scale;
+      newHeight = sampleHeight * scale;
+      dx = (canvasWidth - newWidth) / 2;
+      dy = (canvasHeight - newHeight) / 2;
+    }
+    context.save();
+    const aspectRatioChange = rotation % 180 === 0 ? 1 : newWidth / newHeight;
+    context.translate(canvasWidth / 2, canvasHeight / 2);
+    context.rotate(rotation * Math.PI / 180);
+    context.scale(1 / aspectRatioChange, aspectRatioChange);
+    context.translate(-canvasWidth / 2, -canvasHeight / 2);
+    context.drawImage(this.toCanvasImageSource(), sx, sy, sWidth, sHeight, dx, dy, newWidth, newHeight);
+    context.restore();
+  }
+  /** @internal */
+  _rotateSourceRegion(sx, sy, sWidth, sHeight, rotation) {
+    if (rotation === 90) {
+      [sx, sy, sWidth, sHeight] = [
+        sy,
+        this.codedHeight - sx - sWidth,
+        sHeight,
+        sWidth
+      ];
+    } else if (rotation === 180) {
+      [sx, sy] = [
+        this.codedWidth - sx - sWidth,
+        this.codedHeight - sy - sHeight
+      ];
+    } else if (rotation === 270) {
+      [sx, sy, sWidth, sHeight] = [
+        this.codedWidth - sy - sHeight,
+        sx,
+        sHeight,
+        sWidth
+      ];
+    }
+    return { sx, sy, sWidth, sHeight };
+  }
+  /**
+   * Converts this video sample to a
+   * [`CanvasImageSource`](https://udn.realityripple.com/docs/Web/API/CanvasImageSource) for drawing to a canvas.
+   *
+   * You must use the value returned by this method immediately, as any VideoFrame created internally will
+   * automatically be closed in the next microtask.
+   */
+  toCanvasImageSource() {
+    if (this._closed) {
+      throw new Error("VideoSample is closed.");
+    }
+    assert(this._data !== null);
+    if (this._data instanceof Uint8Array) {
+      const videoFrame = this.toVideoFrame();
+      queueMicrotask(() => videoFrame.close());
+      return videoFrame;
+    } else {
+      return this._data;
+    }
+  }
+  /** Sets the rotation metadata of this video sample. */
+  setRotation(newRotation) {
+    if (![0, 90, 180, 270].includes(newRotation)) {
+      throw new TypeError("newRotation must be 0, 90, 180, or 270.");
+    }
+    this.rotation = newRotation;
+  }
+  /** Sets the presentation timestamp of this video sample, in seconds. */
+  setTimestamp(newTimestamp) {
+    if (!Number.isFinite(newTimestamp)) {
+      throw new TypeError("newTimestamp must be a number.");
+    }
+    this.timestamp = newTimestamp;
+  }
+  /** Sets the duration of this video sample, in seconds. */
+  setDuration(newDuration) {
+    if (!Number.isFinite(newDuration) || newDuration < 0) {
+      throw new TypeError("newDuration must be a non-negative number.");
+    }
+    this.duration = newDuration;
+  }
+  /** Calls `.close()`. */
+  [Symbol.dispose]() {
+    this.close();
+  }
+}
+class VideoSampleColorSpace {
+  /** Creates a new VideoSampleColorSpace. */
+  constructor(init) {
+    this.primaries = init?.primaries ?? null;
+    this.transfer = init?.transfer ?? null;
+    this.matrix = init?.matrix ?? null;
+    this.fullRange = init?.fullRange ?? null;
+  }
+  /** Serializes the color space to a JSON object. */
+  toJSON() {
+    return {
+      primaries: this.primaries,
+      transfer: this.transfer,
+      matrix: this.matrix,
+      fullRange: this.fullRange
+    };
+  }
+}
+const isVideoFrame = (x) => {
+  return typeof VideoFrame !== "undefined" && x instanceof VideoFrame;
+};
+const clampCropRectangle = (crop, outerWidth, outerHeight) => {
+  crop.left = Math.min(crop.left, outerWidth);
+  crop.top = Math.min(crop.top, outerHeight);
+  crop.width = Math.min(crop.width, outerWidth - crop.left);
+  crop.height = Math.min(crop.height, outerHeight - crop.top);
+  assert(crop.width >= 0);
+  assert(crop.height >= 0);
+};
+const validateCropRectangle = (crop, prefix) => {
+  if (!crop || typeof crop !== "object") {
+    throw new TypeError(prefix + "crop, when provided, must be an object.");
+  }
+  if (!Number.isInteger(crop.left) || crop.left < 0) {
+    throw new TypeError(prefix + "crop.left must be a non-negative integer.");
+  }
+  if (!Number.isInteger(crop.top) || crop.top < 0) {
+    throw new TypeError(prefix + "crop.top must be a non-negative integer.");
+  }
+  if (!Number.isInteger(crop.width) || crop.width < 0) {
+    throw new TypeError(prefix + "crop.width must be a non-negative integer.");
+  }
+  if (!Number.isInteger(crop.height) || crop.height < 0) {
+    throw new TypeError(prefix + "crop.height must be a non-negative integer.");
+  }
+};
+const validateVideoFrameCopyToOptions = (options) => {
+  if (!options || typeof options !== "object") {
+    throw new TypeError("options must be an object.");
+  }
+  if (options.colorSpace !== void 0 && !["display-p3", "srgb"].includes(options.colorSpace)) {
+    throw new TypeError("options.colorSpace, when provided, must be 'display-p3' or 'srgb'.");
+  }
+  if (options.format !== void 0 && typeof options.format !== "string") {
+    throw new TypeError("options.format, when provided, must be a string.");
+  }
+  if (options.layout !== void 0) {
+    if (!Array.isArray(options.layout)) {
+      throw new TypeError("options.layout, when provided, must be an array.");
+    }
+    for (const plane of options.layout) {
+      if (!plane || typeof plane !== "object") {
+        throw new TypeError("Each entry in options.layout must be an object.");
+      }
+      if (!Number.isInteger(plane.offset) || plane.offset < 0) {
+        throw new TypeError("plane.offset must be a non-negative integer.");
+      }
+      if (!Number.isInteger(plane.stride) || plane.stride < 0) {
+        throw new TypeError("plane.stride must be a non-negative integer.");
+      }
+    }
+  }
+  if (options.rect !== void 0) {
+    if (!options.rect || typeof options.rect !== "object") {
+      throw new TypeError("options.rect, when provided, must be an object.");
+    }
+    if (options.rect.x !== void 0 && (!Number.isInteger(options.rect.x) || options.rect.x < 0)) {
+      throw new TypeError("options.rect.x, when provided, must be a non-negative integer.");
+    }
+    if (options.rect.y !== void 0 && (!Number.isInteger(options.rect.y) || options.rect.y < 0)) {
+      throw new TypeError("options.rect.y, when provided, must be a non-negative integer.");
+    }
+    if (options.rect.width !== void 0 && (!Number.isInteger(options.rect.width) || options.rect.width < 0)) {
+      throw new TypeError("options.rect.width, when provided, must be a non-negative integer.");
+    }
+    if (options.rect.height !== void 0 && (!Number.isInteger(options.rect.height) || options.rect.height < 0)) {
+      throw new TypeError("options.rect.height, when provided, must be a non-negative integer.");
+    }
+  }
+};
+const createDefaultPlaneLayout = (format, codedWidth, codedHeight) => {
+  const planes = getPlaneConfigs(format);
+  const layouts = [];
+  let currentOffset = 0;
+  for (const plane of planes) {
+    const planeWidth = Math.ceil(codedWidth / plane.widthDivisor);
+    const planeHeight = Math.ceil(codedHeight / plane.heightDivisor);
+    const stride = planeWidth * plane.sampleBytes;
+    const planeSize = stride * planeHeight;
+    layouts.push({
+      offset: currentOffset,
+      stride
+    });
+    currentOffset += planeSize;
+  }
+  return layouts;
+};
+const getPlaneConfigs = (format) => {
+  const yuv = (yBytes, uvBytes, subX, subY, hasAlpha) => {
+    const configs = [
+      { sampleBytes: yBytes, widthDivisor: 1, heightDivisor: 1 },
+      { sampleBytes: uvBytes, widthDivisor: subX, heightDivisor: subY },
+      { sampleBytes: uvBytes, widthDivisor: subX, heightDivisor: subY }
+    ];
+    if (hasAlpha) {
+      configs.push({ sampleBytes: yBytes, widthDivisor: 1, heightDivisor: 1 });
+    }
+    return configs;
+  };
+  switch (format) {
+    case "I420":
+      return yuv(1, 1, 2, 2, false);
+    case "I420P10":
+    case "I420P12":
+      return yuv(2, 2, 2, 2, false);
+    case "I420A":
+      return yuv(1, 1, 2, 2, true);
+    case "I420AP10":
+    case "I420AP12":
+      return yuv(2, 2, 2, 2, true);
+    case "I422":
+      return yuv(1, 1, 2, 1, false);
+    case "I422P10":
+    case "I422P12":
+      return yuv(2, 2, 2, 1, false);
+    case "I422A":
+      return yuv(1, 1, 2, 1, true);
+    case "I422AP10":
+    case "I422AP12":
+      return yuv(2, 2, 2, 1, true);
+    case "I444":
+      return yuv(1, 1, 1, 1, false);
+    case "I444P10":
+    case "I444P12":
+      return yuv(2, 2, 1, 1, false);
+    case "I444A":
+      return yuv(1, 1, 1, 1, true);
+    case "I444AP10":
+    case "I444AP12":
+      return yuv(2, 2, 1, 1, true);
+    case "NV12":
+      return [
+        { sampleBytes: 1, widthDivisor: 1, heightDivisor: 1 },
+        { sampleBytes: 2, widthDivisor: 2, heightDivisor: 2 }
+        // Interleaved U and V
+      ];
+    case "RGBA":
+    case "RGBX":
+    case "BGRA":
+    case "BGRX":
+      return [
+        { sampleBytes: 4, widthDivisor: 1, heightDivisor: 1 }
+      ];
+    default:
+      assertNever(format);
+      assert(false);
+  }
+};
+const AUDIO_SAMPLE_FORMATS = /* @__PURE__ */ new Set(["f32", "f32-planar", "s16", "s16-planar", "s32", "s32-planar", "u8", "u8-planar"]);
+class AudioSample {
+  /** The presentation timestamp of the sample in microseconds. */
+  get microsecondTimestamp() {
+    return Math.trunc(SECOND_TO_MICROSECOND_FACTOR * this.timestamp);
+  }
+  /** The duration of the sample in microseconds. */
+  get microsecondDuration() {
+    return Math.trunc(SECOND_TO_MICROSECOND_FACTOR * this.duration);
+  }
+  /**
+   * Creates a new {@link AudioSample}, either from an existing
+   * [`AudioData`](https://developer.mozilla.org/en-US/docs/Web/API/AudioData) or from raw bytes specified in
+   * {@link AudioSampleInit}.
+   */
+  constructor(init) {
+    this._closed = false;
+    if (isAudioData(init)) {
+      if (init.format === null) {
+        throw new TypeError("AudioData with null format is not supported.");
+      }
+      this._data = init;
+      this.format = init.format;
+      this.sampleRate = init.sampleRate;
+      this.numberOfFrames = init.numberOfFrames;
+      this.numberOfChannels = init.numberOfChannels;
+      this.timestamp = init.timestamp / 1e6;
+      this.duration = init.numberOfFrames / init.sampleRate;
+    } else {
+      if (!init || typeof init !== "object") {
+        throw new TypeError("Invalid AudioDataInit: must be an object.");
+      }
+      if (!AUDIO_SAMPLE_FORMATS.has(init.format)) {
+        throw new TypeError("Invalid AudioDataInit: invalid format.");
+      }
+      if (!Number.isFinite(init.sampleRate) || init.sampleRate <= 0) {
+        throw new TypeError("Invalid AudioDataInit: sampleRate must be > 0.");
+      }
+      if (!Number.isInteger(init.numberOfChannels) || init.numberOfChannels === 0) {
+        throw new TypeError("Invalid AudioDataInit: numberOfChannels must be an integer > 0.");
+      }
+      if (!Number.isFinite(init?.timestamp)) {
+        throw new TypeError("init.timestamp must be a number.");
+      }
+      const numberOfFrames = init.data.byteLength / (getBytesPerSample(init.format) * init.numberOfChannels);
+      if (!Number.isInteger(numberOfFrames)) {
+        throw new TypeError("Invalid AudioDataInit: data size is not a multiple of frame size.");
+      }
+      this.format = init.format;
+      this.sampleRate = init.sampleRate;
+      this.numberOfFrames = numberOfFrames;
+      this.numberOfChannels = init.numberOfChannels;
+      this.timestamp = init.timestamp;
+      this.duration = numberOfFrames / init.sampleRate;
+      let dataBuffer;
+      if (init.data instanceof ArrayBuffer) {
+        dataBuffer = new Uint8Array(init.data);
+      } else if (ArrayBuffer.isView(init.data)) {
+        dataBuffer = new Uint8Array(init.data.buffer, init.data.byteOffset, init.data.byteLength);
+      } else {
+        throw new TypeError("Invalid AudioDataInit: data is not a BufferSource.");
+      }
+      const expectedSize = this.numberOfFrames * this.numberOfChannels * getBytesPerSample(this.format);
+      if (dataBuffer.byteLength < expectedSize) {
+        throw new TypeError("Invalid AudioDataInit: insufficient data size.");
+      }
+      this._data = dataBuffer;
+    }
+    finalizationRegistry?.register(this, { type: "audio", data: this._data }, this);
+  }
+  /** Returns the number of bytes required to hold the audio sample's data as specified by the given options. */
+  allocationSize(options) {
+    if (!options || typeof options !== "object") {
+      throw new TypeError("options must be an object.");
+    }
+    if (!Number.isInteger(options.planeIndex) || options.planeIndex < 0) {
+      throw new TypeError("planeIndex must be a non-negative integer.");
+    }
+    if (options.format !== void 0 && !AUDIO_SAMPLE_FORMATS.has(options.format)) {
+      throw new TypeError("Invalid format.");
+    }
+    if (options.frameOffset !== void 0 && (!Number.isInteger(options.frameOffset) || options.frameOffset < 0)) {
+      throw new TypeError("frameOffset must be a non-negative integer.");
+    }
+    if (options.frameCount !== void 0 && (!Number.isInteger(options.frameCount) || options.frameCount < 0)) {
+      throw new TypeError("frameCount must be a non-negative integer.");
+    }
+    if (this._closed) {
+      throw new Error("AudioSample is closed.");
+    }
+    const destFormat = options.format ?? this.format;
+    const frameOffset = options.frameOffset ?? 0;
+    if (frameOffset >= this.numberOfFrames) {
+      throw new RangeError("frameOffset out of range");
+    }
+    const copyFrameCount = options.frameCount !== void 0 ? options.frameCount : this.numberOfFrames - frameOffset;
+    if (copyFrameCount > this.numberOfFrames - frameOffset) {
+      throw new RangeError("frameCount out of range");
+    }
+    const bytesPerSample = getBytesPerSample(destFormat);
+    const isPlanar = formatIsPlanar(destFormat);
+    if (isPlanar && options.planeIndex >= this.numberOfChannels) {
+      throw new RangeError("planeIndex out of range");
+    }
+    if (!isPlanar && options.planeIndex !== 0) {
+      throw new RangeError("planeIndex out of range");
+    }
+    const elementCount = isPlanar ? copyFrameCount : copyFrameCount * this.numberOfChannels;
+    return elementCount * bytesPerSample;
+  }
+  /** Copies the audio sample's data to an ArrayBuffer or ArrayBufferView as specified by the given options. */
+  copyTo(destination, options) {
+    if (!isAllowSharedBufferSource(destination)) {
+      throw new TypeError("destination must be an ArrayBuffer or an ArrayBuffer view.");
+    }
+    if (!options || typeof options !== "object") {
+      throw new TypeError("options must be an object.");
+    }
+    if (!Number.isInteger(options.planeIndex) || options.planeIndex < 0) {
+      throw new TypeError("planeIndex must be a non-negative integer.");
+    }
+    if (options.format !== void 0 && !AUDIO_SAMPLE_FORMATS.has(options.format)) {
+      throw new TypeError("Invalid format.");
+    }
+    if (options.frameOffset !== void 0 && (!Number.isInteger(options.frameOffset) || options.frameOffset < 0)) {
+      throw new TypeError("frameOffset must be a non-negative integer.");
+    }
+    if (options.frameCount !== void 0 && (!Number.isInteger(options.frameCount) || options.frameCount < 0)) {
+      throw new TypeError("frameCount must be a non-negative integer.");
+    }
+    if (this._closed) {
+      throw new Error("AudioSample is closed.");
+    }
+    const { planeIndex, format, frameCount: optFrameCount, frameOffset: optFrameOffset } = options;
+    const srcFormat = this.format;
+    const destFormat = format ?? this.format;
+    if (!destFormat)
+      throw new Error("Destination format not determined");
+    const numFrames = this.numberOfFrames;
+    const numChannels = this.numberOfChannels;
+    const frameOffset = optFrameOffset ?? 0;
+    if (frameOffset >= numFrames) {
+      throw new RangeError("frameOffset out of range");
+    }
+    const copyFrameCount = optFrameCount !== void 0 ? optFrameCount : numFrames - frameOffset;
+    if (copyFrameCount > numFrames - frameOffset) {
+      throw new RangeError("frameCount out of range");
+    }
+    const destBytesPerSample = getBytesPerSample(destFormat);
+    const destIsPlanar = formatIsPlanar(destFormat);
+    if (destIsPlanar && planeIndex >= numChannels) {
+      throw new RangeError("planeIndex out of range");
+    }
+    if (!destIsPlanar && planeIndex !== 0) {
+      throw new RangeError("planeIndex out of range");
+    }
+    const destElementCount = destIsPlanar ? copyFrameCount : copyFrameCount * numChannels;
+    const requiredSize = destElementCount * destBytesPerSample;
+    if (destination.byteLength < requiredSize) {
+      throw new RangeError("Destination buffer is too small");
+    }
+    const destView = toDataView(destination);
+    const writeFn = getWriteFunction(destFormat);
+    if (isAudioData(this._data)) {
+      if (isWebKit() && numChannels > 2 && destFormat !== srcFormat) {
+        doAudioDataCopyToWebKitWorkaround(this._data, destView, srcFormat, destFormat, numChannels, planeIndex, frameOffset, copyFrameCount);
+      } else {
+        this._data.copyTo(destination, {
+          planeIndex,
+          frameOffset,
+          frameCount: copyFrameCount,
+          format: destFormat
+        });
+      }
+    } else {
+      const uint8Data = this._data;
+      const srcView = toDataView(uint8Data);
+      const readFn = getReadFunction(srcFormat);
+      const srcBytesPerSample = getBytesPerSample(srcFormat);
+      const srcIsPlanar = formatIsPlanar(srcFormat);
+      for (let i = 0; i < copyFrameCount; i++) {
+        if (destIsPlanar) {
+          const destOffset = i * destBytesPerSample;
+          let srcOffset;
+          if (srcIsPlanar) {
+            srcOffset = (planeIndex * numFrames + (i + frameOffset)) * srcBytesPerSample;
+          } else {
+            srcOffset = ((i + frameOffset) * numChannels + planeIndex) * srcBytesPerSample;
+          }
+          const normalized = readFn(srcView, srcOffset);
+          writeFn(destView, destOffset, normalized);
+        } else {
+          for (let ch = 0; ch < numChannels; ch++) {
+            const destIndex = i * numChannels + ch;
+            const destOffset = destIndex * destBytesPerSample;
+            let srcOffset;
+            if (srcIsPlanar) {
+              srcOffset = (ch * numFrames + (i + frameOffset)) * srcBytesPerSample;
+            } else {
+              srcOffset = ((i + frameOffset) * numChannels + ch) * srcBytesPerSample;
+            }
+            const normalized = readFn(srcView, srcOffset);
+            writeFn(destView, destOffset, normalized);
+          }
+        }
+      }
+    }
+  }
+  /** Clones this audio sample. */
+  clone() {
+    if (this._closed) {
+      throw new Error("AudioSample is closed.");
+    }
+    if (isAudioData(this._data)) {
+      const sample = new AudioSample(this._data.clone());
+      sample.setTimestamp(this.timestamp);
+      return sample;
+    } else {
+      return new AudioSample({
+        format: this.format,
+        sampleRate: this.sampleRate,
+        numberOfFrames: this.numberOfFrames,
+        numberOfChannels: this.numberOfChannels,
+        timestamp: this.timestamp,
+        data: this._data
+      });
+    }
+  }
+  /**
+   * Closes this audio sample, releasing held resources. Audio samples should be closed as soon as they are not
+   * needed anymore.
+   */
+  close() {
+    if (this._closed) {
+      return;
+    }
+    finalizationRegistry?.unregister(this);
+    if (isAudioData(this._data)) {
+      this._data.close();
+    } else {
+      this._data = new Uint8Array(0);
+    }
+    this._closed = true;
+  }
+  /**
+   * Converts this audio sample to an AudioData for use with the WebCodecs API. The AudioData returned by this
+   * method *must* be closed separately from this audio sample.
+   */
+  toAudioData() {
+    if (this._closed) {
+      throw new Error("AudioSample is closed.");
+    }
+    if (isAudioData(this._data)) {
+      if (this._data.timestamp === this.microsecondTimestamp) {
+        return this._data.clone();
+      } else {
+        if (formatIsPlanar(this.format)) {
+          const size = this.allocationSize({ planeIndex: 0, format: this.format });
+          const data = new ArrayBuffer(size * this.numberOfChannels);
+          for (let i = 0; i < this.numberOfChannels; i++) {
+            this.copyTo(new Uint8Array(data, i * size, size), { planeIndex: i, format: this.format });
+          }
+          return new AudioData({
+            format: this.format,
+            sampleRate: this.sampleRate,
+            numberOfFrames: this.numberOfFrames,
+            numberOfChannels: this.numberOfChannels,
+            timestamp: this.microsecondTimestamp,
+            data
+          });
+        } else {
+          const data = new ArrayBuffer(this.allocationSize({ planeIndex: 0, format: this.format }));
+          this.copyTo(data, { planeIndex: 0, format: this.format });
+          return new AudioData({
+            format: this.format,
+            sampleRate: this.sampleRate,
+            numberOfFrames: this.numberOfFrames,
+            numberOfChannels: this.numberOfChannels,
+            timestamp: this.microsecondTimestamp,
+            data
+          });
+        }
+      }
+    } else {
+      return new AudioData({
+        format: this.format,
+        sampleRate: this.sampleRate,
+        numberOfFrames: this.numberOfFrames,
+        numberOfChannels: this.numberOfChannels,
+        timestamp: this.microsecondTimestamp,
+        data: this._data.buffer instanceof ArrayBuffer ? this._data.buffer : this._data.slice()
+        // In the case of SharedArrayBuffer, convert to ArrayBuffer
+      });
+    }
+  }
+  /** Convert this audio sample to an AudioBuffer for use with the Web Audio API. */
+  toAudioBuffer() {
+    if (this._closed) {
+      throw new Error("AudioSample is closed.");
+    }
+    const audioBuffer = new AudioBuffer({
+      numberOfChannels: this.numberOfChannels,
+      length: this.numberOfFrames,
+      sampleRate: this.sampleRate
+    });
+    const dataBytes = new Float32Array(this.allocationSize({ planeIndex: 0, format: "f32-planar" }) / 4);
+    for (let i = 0; i < this.numberOfChannels; i++) {
+      this.copyTo(dataBytes, { planeIndex: i, format: "f32-planar" });
+      audioBuffer.copyToChannel(dataBytes, i);
+    }
+    return audioBuffer;
+  }
+  /** Sets the presentation timestamp of this audio sample, in seconds. */
+  setTimestamp(newTimestamp) {
+    if (!Number.isFinite(newTimestamp)) {
+      throw new TypeError("newTimestamp must be a number.");
+    }
+    this.timestamp = newTimestamp;
+  }
+  /** Calls `.close()`. */
+  [Symbol.dispose]() {
+    this.close();
+  }
+  /** @internal */
+  static *_fromAudioBuffer(audioBuffer, timestamp) {
+    if (!(audioBuffer instanceof AudioBuffer)) {
+      throw new TypeError("audioBuffer must be an AudioBuffer.");
+    }
+    const MAX_FLOAT_COUNT = 48e3 * 5;
+    const numberOfChannels = audioBuffer.numberOfChannels;
+    const sampleRate = audioBuffer.sampleRate;
+    const totalFrames = audioBuffer.length;
+    const maxFramesPerChunk = Math.floor(MAX_FLOAT_COUNT / numberOfChannels);
+    let currentRelativeFrame = 0;
+    let remainingFrames = totalFrames;
+    while (remainingFrames > 0) {
+      const framesToCopy = Math.min(maxFramesPerChunk, remainingFrames);
+      const chunkData = new Float32Array(numberOfChannels * framesToCopy);
+      for (let channel = 0; channel < numberOfChannels; channel++) {
+        audioBuffer.copyFromChannel(chunkData.subarray(channel * framesToCopy, (channel + 1) * framesToCopy), channel, currentRelativeFrame);
+      }
+      yield new AudioSample({
+        format: "f32-planar",
+        sampleRate,
+        numberOfFrames: framesToCopy,
+        numberOfChannels,
+        timestamp: timestamp + currentRelativeFrame / sampleRate,
+        data: chunkData
+      });
+      currentRelativeFrame += framesToCopy;
+      remainingFrames -= framesToCopy;
+    }
+  }
+  /**
+   * Creates AudioSamples from an AudioBuffer, starting at the given timestamp in seconds. Typically creates exactly
+   * one sample, but may create multiple if the AudioBuffer is exceedingly large.
+   */
+  static fromAudioBuffer(audioBuffer, timestamp) {
+    if (!(audioBuffer instanceof AudioBuffer)) {
+      throw new TypeError("audioBuffer must be an AudioBuffer.");
+    }
+    const MAX_FLOAT_COUNT = 48e3 * 5;
+    const numberOfChannels = audioBuffer.numberOfChannels;
+    const sampleRate = audioBuffer.sampleRate;
+    const totalFrames = audioBuffer.length;
+    const maxFramesPerChunk = Math.floor(MAX_FLOAT_COUNT / numberOfChannels);
+    let currentRelativeFrame = 0;
+    let remainingFrames = totalFrames;
+    const result = [];
+    while (remainingFrames > 0) {
+      const framesToCopy = Math.min(maxFramesPerChunk, remainingFrames);
+      const chunkData = new Float32Array(numberOfChannels * framesToCopy);
+      for (let channel = 0; channel < numberOfChannels; channel++) {
+        audioBuffer.copyFromChannel(chunkData.subarray(channel * framesToCopy, (channel + 1) * framesToCopy), channel, currentRelativeFrame);
+      }
+      const audioSample = new AudioSample({
+        format: "f32-planar",
+        sampleRate,
+        numberOfFrames: framesToCopy,
+        numberOfChannels,
+        timestamp: timestamp + currentRelativeFrame / sampleRate,
+        data: chunkData
+      });
+      result.push(audioSample);
+      currentRelativeFrame += framesToCopy;
+      remainingFrames -= framesToCopy;
+    }
+    return result;
+  }
+}
+const getBytesPerSample = (format) => {
+  switch (format) {
+    case "u8":
+    case "u8-planar":
+      return 1;
+    case "s16":
+    case "s16-planar":
+      return 2;
+    case "s32":
+    case "s32-planar":
+      return 4;
+    case "f32":
+    case "f32-planar":
+      return 4;
+    default:
+      throw new Error("Unknown AudioSampleFormat");
+  }
+};
+const formatIsPlanar = (format) => {
+  switch (format) {
+    case "u8-planar":
+    case "s16-planar":
+    case "s32-planar":
+    case "f32-planar":
+      return true;
+    default:
+      return false;
+  }
+};
+const getReadFunction = (format) => {
+  switch (format) {
+    case "u8":
+    case "u8-planar":
+      return (view, offset) => (view.getUint8(offset) - 128) / 128;
+    case "s16":
+    case "s16-planar":
+      return (view, offset) => view.getInt16(offset, true) / 32768;
+    case "s32":
+    case "s32-planar":
+      return (view, offset) => view.getInt32(offset, true) / 2147483648;
+    case "f32":
+    case "f32-planar":
+      return (view, offset) => view.getFloat32(offset, true);
+  }
+};
+const getWriteFunction = (format) => {
+  switch (format) {
+    case "u8":
+    case "u8-planar":
+      return (view, offset, value) => view.setUint8(offset, clamp$1((value + 1) * 127.5, 0, 255));
+    case "s16":
+    case "s16-planar":
+      return (view, offset, value) => view.setInt16(offset, clamp$1(Math.round(value * 32767), -32768, 32767), true);
+    case "s32":
+    case "s32-planar":
+      return (view, offset, value) => view.setInt32(offset, clamp$1(Math.round(value * 2147483647), -2147483648, 2147483647), true);
+    case "f32":
+    case "f32-planar":
+      return (view, offset, value) => view.setFloat32(offset, value, true);
+  }
+};
+const isAudioData = (x) => {
+  return typeof AudioData !== "undefined" && x instanceof AudioData;
+};
+const doAudioDataCopyToWebKitWorkaround = (audioData, destView, srcFormat, destFormat, numChannels, planeIndex, frameOffset, copyFrameCount) => {
+  const readFn = getReadFunction(srcFormat);
+  const writeFn = getWriteFunction(destFormat);
+  const srcBytesPerSample = getBytesPerSample(srcFormat);
+  const destBytesPerSample = getBytesPerSample(destFormat);
+  const srcIsPlanar = formatIsPlanar(srcFormat);
+  const destIsPlanar = formatIsPlanar(destFormat);
+  if (destIsPlanar) {
+    if (srcIsPlanar) {
+      const data = new ArrayBuffer(copyFrameCount * srcBytesPerSample);
+      const dataView = toDataView(data);
+      audioData.copyTo(data, {
+        planeIndex,
+        frameOffset,
+        frameCount: copyFrameCount,
+        format: srcFormat
+      });
+      for (let i = 0; i < copyFrameCount; i++) {
+        const srcOffset = i * srcBytesPerSample;
+        const destOffset = i * destBytesPerSample;
+        const sample = readFn(dataView, srcOffset);
+        writeFn(destView, destOffset, sample);
+      }
+    } else {
+      const data = new ArrayBuffer(copyFrameCount * numChannels * srcBytesPerSample);
+      const dataView = toDataView(data);
+      audioData.copyTo(data, {
+        planeIndex: 0,
+        frameOffset,
+        frameCount: copyFrameCount,
+        format: srcFormat
+      });
+      for (let i = 0; i < copyFrameCount; i++) {
+        const srcOffset = (i * numChannels + planeIndex) * srcBytesPerSample;
+        const destOffset = i * destBytesPerSample;
+        const sample = readFn(dataView, srcOffset);
+        writeFn(destView, destOffset, sample);
+      }
+    }
+  } else {
+    if (srcIsPlanar) {
+      const planeSize = copyFrameCount * srcBytesPerSample;
+      const data = new ArrayBuffer(planeSize);
+      const dataView = toDataView(data);
+      for (let ch = 0; ch < numChannels; ch++) {
+        audioData.copyTo(data, {
+          planeIndex: ch,
+          frameOffset,
+          frameCount: copyFrameCount,
+          format: srcFormat
+        });
+        for (let i = 0; i < copyFrameCount; i++) {
+          const srcOffset = i * srcBytesPerSample;
+          const destOffset = (i * numChannels + ch) * destBytesPerSample;
+          const sample = readFn(dataView, srcOffset);
+          writeFn(destView, destOffset, sample);
+        }
+      }
+    } else {
+      const data = new ArrayBuffer(copyFrameCount * numChannels * srcBytesPerSample);
+      const dataView = toDataView(data);
+      audioData.copyTo(data, {
+        planeIndex: 0,
+        frameOffset,
+        frameCount: copyFrameCount,
+        format: srcFormat
+      });
+      for (let i = 0; i < copyFrameCount; i++) {
+        for (let ch = 0; ch < numChannels; ch++) {
+          const idx = i * numChannels + ch;
+          const srcOffset = idx * srcBytesPerSample;
+          const destOffset = idx * destBytesPerSample;
+          const sample = readFn(dataView, srcOffset);
+          writeFn(destView, destOffset, sample);
+        }
+      }
+    }
+  }
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const validatePacketRetrievalOptions = (options) => {
+  if (!options || typeof options !== "object") {
+    throw new TypeError("options must be an object.");
+  }
+  if (options.metadataOnly !== void 0 && typeof options.metadataOnly !== "boolean") {
+    throw new TypeError("options.metadataOnly, when defined, must be a boolean.");
+  }
+  if (options.verifyKeyPackets !== void 0 && typeof options.verifyKeyPackets !== "boolean") {
+    throw new TypeError("options.verifyKeyPackets, when defined, must be a boolean.");
+  }
+  if (options.verifyKeyPackets && options.metadataOnly) {
+    throw new TypeError("options.verifyKeyPackets and options.metadataOnly cannot be enabled together.");
+  }
+};
+const validateTimestamp = (timestamp) => {
+  if (!isNumber(timestamp)) {
+    throw new TypeError("timestamp must be a number.");
+  }
+};
+const maybeFixPacketType = (track, promise, options) => {
+  if (options.verifyKeyPackets) {
+    return promise.then(async (packet) => {
+      if (!packet || packet.type === "delta") {
+        return packet;
+      }
+      const determinedType = await track.determinePacketType(packet);
+      if (determinedType) {
+        packet.type = determinedType;
+      }
+      return packet;
+    });
+  } else {
+    return promise;
+  }
+};
+class EncodedPacketSink {
+  /** Creates a new {@link EncodedPacketSink} for the given {@link InputTrack}. */
+  constructor(track) {
+    if (!(track instanceof InputTrack)) {
+      throw new TypeError("track must be an InputTrack.");
+    }
+    this._track = track;
+  }
+  /**
+   * Retrieves the track's first packet (in decode order), or null if it has no packets. The first packet is very
+   * likely to be a key packet.
+   */
+  getFirstPacket(options = {}) {
+    validatePacketRetrievalOptions(options);
+    if (this._track.input._disposed) {
+      throw new InputDisposedError();
+    }
+    return maybeFixPacketType(this._track, this._track._backing.getFirstPacket(options), options);
+  }
+  /**
+   * Retrieves the packet corresponding to the given timestamp, in seconds. More specifically, returns the last packet
+   * (in presentation order) with a start timestamp less than or equal to the given timestamp. This method can be
+   * used to retrieve a track's last packet using `getPacket(Infinity)`. The method returns null if the timestamp
+   * is before the first packet in the track.
+   *
+   * @param timestamp - The timestamp used for retrieval, in seconds.
+   */
+  getPacket(timestamp, options = {}) {
+    validateTimestamp(timestamp);
+    validatePacketRetrievalOptions(options);
+    if (this._track.input._disposed) {
+      throw new InputDisposedError();
+    }
+    return maybeFixPacketType(this._track, this._track._backing.getPacket(timestamp, options), options);
+  }
+  /**
+   * Retrieves the packet following the given packet (in decode order), or null if the given packet is the
+   * last packet.
+   */
+  getNextPacket(packet, options = {}) {
+    if (!(packet instanceof EncodedPacket)) {
+      throw new TypeError("packet must be an EncodedPacket.");
+    }
+    validatePacketRetrievalOptions(options);
+    if (this._track.input._disposed) {
+      throw new InputDisposedError();
+    }
+    return maybeFixPacketType(this._track, this._track._backing.getNextPacket(packet, options), options);
+  }
+  /**
+   * Retrieves the key packet corresponding to the given timestamp, in seconds. More specifically, returns the last
+   * key packet (in presentation order) with a start timestamp less than or equal to the given timestamp. A key packet
+   * is a packet that doesn't require previous packets to be decoded. This method can be used to retrieve a track's
+   * last key packet using `getKeyPacket(Infinity)`. The method returns null if the timestamp is before the first
+   * key packet in the track.
+   *
+   * To ensure that the returned packet is guaranteed to be a real key frame, enable `options.verifyKeyPackets`.
+   *
+   * @param timestamp - The timestamp used for retrieval, in seconds.
+   */
+  async getKeyPacket(timestamp, options = {}) {
+    validateTimestamp(timestamp);
+    validatePacketRetrievalOptions(options);
+    if (this._track.input._disposed) {
+      throw new InputDisposedError();
+    }
+    if (!options.verifyKeyPackets) {
+      return this._track._backing.getKeyPacket(timestamp, options);
+    }
+    const packet = await this._track._backing.getKeyPacket(timestamp, options);
+    if (!packet) {
+      return packet;
+    }
+    assert(packet.type === "key");
+    const determinedType = await this._track.determinePacketType(packet);
+    if (determinedType === "delta") {
+      return this.getKeyPacket(packet.timestamp - 1 / this._track.timeResolution, options);
+    }
+    return packet;
+  }
+  /**
+   * Retrieves the key packet following the given packet (in decode order), or null if the given packet is the last
+   * key packet.
+   *
+   * To ensure that the returned packet is guaranteed to be a real key frame, enable `options.verifyKeyPackets`.
+   */
+  async getNextKeyPacket(packet, options = {}) {
+    if (!(packet instanceof EncodedPacket)) {
+      throw new TypeError("packet must be an EncodedPacket.");
+    }
+    validatePacketRetrievalOptions(options);
+    if (this._track.input._disposed) {
+      throw new InputDisposedError();
+    }
+    if (!options.verifyKeyPackets) {
+      return this._track._backing.getNextKeyPacket(packet, options);
+    }
+    const nextPacket = await this._track._backing.getNextKeyPacket(packet, options);
+    if (!nextPacket) {
+      return nextPacket;
+    }
+    assert(nextPacket.type === "key");
+    const determinedType = await this._track.determinePacketType(nextPacket);
+    if (determinedType === "delta") {
+      return this.getNextKeyPacket(nextPacket, options);
+    }
+    return nextPacket;
+  }
+  /**
+   * Creates an async iterator that yields the packets in this track in decode order. To enable fast iteration, this
+   * method will intelligently preload packets based on the speed of the consumer.
+   *
+   * @param startPacket - (optional) The packet from which iteration should begin. This packet will also be yielded.
+   * @param endTimestamp - (optional) The timestamp at which iteration should end. This packet will _not_ be yielded.
+   */
+  packets(startPacket, endPacket, options = {}) {
+    if (startPacket !== void 0 && !(startPacket instanceof EncodedPacket)) {
+      throw new TypeError("startPacket must be an EncodedPacket.");
+    }
+    if (startPacket !== void 0 && startPacket.isMetadataOnly && !options?.metadataOnly) {
+      throw new TypeError("startPacket can only be metadata-only if options.metadataOnly is enabled.");
+    }
+    if (endPacket !== void 0 && !(endPacket instanceof EncodedPacket)) {
+      throw new TypeError("endPacket must be an EncodedPacket.");
+    }
+    validatePacketRetrievalOptions(options);
+    if (this._track.input._disposed) {
+      throw new InputDisposedError();
+    }
+    const packetQueue = [];
+    let { promise: queueNotEmpty, resolve: onQueueNotEmpty } = promiseWithResolvers();
+    let { promise: queueDequeue, resolve: onQueueDequeue } = promiseWithResolvers();
+    let ended = false;
+    let terminated = false;
+    let outOfBandError = null;
+    const timestamps = [];
+    const maxQueueSize = () => Math.max(2, timestamps.length);
+    (async () => {
+      let packet = startPacket ?? await this.getFirstPacket(options);
+      while (packet && !terminated && !this._track.input._disposed) {
+        if (endPacket && packet.sequenceNumber >= endPacket?.sequenceNumber) {
+          break;
+        }
+        if (packetQueue.length > maxQueueSize()) {
+          ({ promise: queueDequeue, resolve: onQueueDequeue } = promiseWithResolvers());
+          await queueDequeue;
+          continue;
+        }
+        packetQueue.push(packet);
+        onQueueNotEmpty();
+        ({ promise: queueNotEmpty, resolve: onQueueNotEmpty } = promiseWithResolvers());
+        packet = await this.getNextPacket(packet, options);
+      }
+      ended = true;
+      onQueueNotEmpty();
+    })().catch((error) => {
+      if (!outOfBandError) {
+        outOfBandError = error;
+        onQueueNotEmpty();
+      }
+    });
+    const track = this._track;
+    return {
+      async next() {
+        while (true) {
+          if (track.input._disposed) {
+            throw new InputDisposedError();
+          } else if (terminated) {
+            return { value: void 0, done: true };
+          } else if (outOfBandError) {
+            throw outOfBandError;
+          } else if (packetQueue.length > 0) {
+            const value = packetQueue.shift();
+            const now = performance.now();
+            timestamps.push(now);
+            while (timestamps.length > 0 && now - timestamps[0] >= 1e3) {
+              timestamps.shift();
+            }
+            onQueueDequeue();
+            return { value, done: false };
+          } else if (ended) {
+            return { value: void 0, done: true };
+          } else {
+            await queueNotEmpty;
+          }
+        }
+      },
+      async return() {
+        terminated = true;
+        onQueueDequeue();
+        onQueueNotEmpty();
+        return { value: void 0, done: true };
+      },
+      async throw(error) {
+        throw error;
+      },
+      [Symbol.asyncIterator]() {
+        return this;
+      }
+    };
+  }
+}
+class DecoderWrapper {
+  constructor(onSample, onError) {
+    this.onSample = onSample;
+    this.onError = onError;
+  }
+}
+class BaseMediaSampleSink {
+  /** @internal */
+  mediaSamplesInRange(startTimestamp = 0, endTimestamp = Infinity) {
+    validateTimestamp(startTimestamp);
+    validateTimestamp(endTimestamp);
+    const sampleQueue = [];
+    let firstSampleQueued = false;
+    let lastSample = null;
+    let { promise: queueNotEmpty, resolve: onQueueNotEmpty } = promiseWithResolvers();
+    let { promise: queueDequeue, resolve: onQueueDequeue } = promiseWithResolvers();
+    let decoderIsFlushed = false;
+    let ended = false;
+    let terminated = false;
+    let outOfBandError = null;
+    (async () => {
+      const decoder = await this._createDecoder((sample) => {
+        onQueueDequeue();
+        if (sample.timestamp >= endTimestamp) {
+          ended = true;
+        }
+        if (ended) {
+          sample.close();
+          return;
+        }
+        if (lastSample) {
+          if (sample.timestamp > startTimestamp) {
+            sampleQueue.push(lastSample);
+            firstSampleQueued = true;
+          } else {
+            lastSample.close();
+          }
+        }
+        if (sample.timestamp >= startTimestamp) {
+          sampleQueue.push(sample);
+          firstSampleQueued = true;
+        }
+        lastSample = firstSampleQueued ? null : sample;
+        if (sampleQueue.length > 0) {
+          onQueueNotEmpty();
+          ({ promise: queueNotEmpty, resolve: onQueueNotEmpty } = promiseWithResolvers());
+        }
+      }, (error) => {
+        if (!outOfBandError) {
+          outOfBandError = error;
+          onQueueNotEmpty();
+        }
+      });
+      const packetSink = this._createPacketSink();
+      const keyPacket = await packetSink.getKeyPacket(startTimestamp, { verifyKeyPackets: true }) ?? await packetSink.getFirstPacket();
+      let currentPacket = keyPacket;
+      const endPacket = void 0;
+      const packets = packetSink.packets(keyPacket ?? void 0, endPacket);
+      await packets.next();
+      while (currentPacket && !ended && !this._track.input._disposed) {
+        const maxQueueSize = computeMaxQueueSize(sampleQueue.length);
+        if (sampleQueue.length + decoder.getDecodeQueueSize() > maxQueueSize) {
+          ({ promise: queueDequeue, resolve: onQueueDequeue } = promiseWithResolvers());
+          await queueDequeue;
+          continue;
+        }
+        decoder.decode(currentPacket);
+        const packetResult = await packets.next();
+        if (packetResult.done) {
+          break;
+        }
+        currentPacket = packetResult.value;
+      }
+      await packets.return();
+      if (!terminated && !this._track.input._disposed) {
+        await decoder.flush();
+      }
+      decoder.close();
+      if (!firstSampleQueued && lastSample) {
+        sampleQueue.push(lastSample);
+      }
+      decoderIsFlushed = true;
+      onQueueNotEmpty();
+    })().catch((error) => {
+      if (!outOfBandError) {
+        outOfBandError = error;
+        onQueueNotEmpty();
+      }
+    });
+    const track = this._track;
+    const closeSamples = () => {
+      lastSample?.close();
+      for (const sample of sampleQueue) {
+        sample.close();
+      }
+    };
+    return {
+      async next() {
+        while (true) {
+          if (track.input._disposed) {
+            closeSamples();
+            throw new InputDisposedError();
+          } else if (terminated) {
+            return { value: void 0, done: true };
+          } else if (outOfBandError) {
+            closeSamples();
+            throw outOfBandError;
+          } else if (sampleQueue.length > 0) {
+            const value = sampleQueue.shift();
+            onQueueDequeue();
+            return { value, done: false };
+          } else if (!decoderIsFlushed) {
+            await queueNotEmpty;
+          } else {
+            return { value: void 0, done: true };
+          }
+        }
+      },
+      async return() {
+        terminated = true;
+        ended = true;
+        onQueueDequeue();
+        onQueueNotEmpty();
+        closeSamples();
+        return { value: void 0, done: true };
+      },
+      async throw(error) {
+        throw error;
+      },
+      [Symbol.asyncIterator]() {
+        return this;
+      }
+    };
+  }
+  /** @internal */
+  mediaSamplesAtTimestamps(timestamps) {
+    validateAnyIterable(timestamps);
+    const timestampIterator = toAsyncIterator(timestamps);
+    const timestampsOfInterest = [];
+    const sampleQueue = [];
+    let { promise: queueNotEmpty, resolve: onQueueNotEmpty } = promiseWithResolvers();
+    let { promise: queueDequeue, resolve: onQueueDequeue } = promiseWithResolvers();
+    let decoderIsFlushed = false;
+    let terminated = false;
+    let outOfBandError = null;
+    const pushToQueue = (sample) => {
+      sampleQueue.push(sample);
+      onQueueNotEmpty();
+      ({ promise: queueNotEmpty, resolve: onQueueNotEmpty } = promiseWithResolvers());
+    };
+    (async () => {
+      const decoder = await this._createDecoder((sample) => {
+        onQueueDequeue();
+        if (terminated) {
+          sample.close();
+          return;
+        }
+        let sampleUses = 0;
+        while (timestampsOfInterest.length > 0 && sample.timestamp - timestampsOfInterest[0] > -1e-10) {
+          sampleUses++;
+          timestampsOfInterest.shift();
+        }
+        if (sampleUses > 0) {
+          for (let i = 0; i < sampleUses; i++) {
+            pushToQueue(i < sampleUses - 1 ? sample.clone() : sample);
+          }
+        } else {
+          sample.close();
+        }
+      }, (error) => {
+        if (!outOfBandError) {
+          outOfBandError = error;
+          onQueueNotEmpty();
+        }
+      });
+      const packetSink = this._createPacketSink();
+      let lastPacket = null;
+      let lastKeyPacket = null;
+      let maxSequenceNumber = -1;
+      const decodePackets = async () => {
+        assert(lastKeyPacket);
+        let currentPacket = lastKeyPacket;
+        decoder.decode(currentPacket);
+        while (currentPacket.sequenceNumber < maxSequenceNumber) {
+          const maxQueueSize = computeMaxQueueSize(sampleQueue.length);
+          while (sampleQueue.length + decoder.getDecodeQueueSize() > maxQueueSize && !terminated) {
+            ({ promise: queueDequeue, resolve: onQueueDequeue } = promiseWithResolvers());
+            await queueDequeue;
+          }
+          if (terminated) {
+            break;
+          }
+          const nextPacket = await packetSink.getNextPacket(currentPacket);
+          assert(nextPacket);
+          decoder.decode(nextPacket);
+          currentPacket = nextPacket;
+        }
+        maxSequenceNumber = -1;
+      };
+      const flushDecoder = async () => {
+        await decoder.flush();
+        for (let i = 0; i < timestampsOfInterest.length; i++) {
+          pushToQueue(null);
+        }
+        timestampsOfInterest.length = 0;
+      };
+      for await (const timestamp of timestampIterator) {
+        validateTimestamp(timestamp);
+        if (terminated || this._track.input._disposed) {
+          break;
+        }
+        const targetPacket = await packetSink.getPacket(timestamp);
+        const keyPacket = targetPacket && await packetSink.getKeyPacket(timestamp, { verifyKeyPackets: true });
+        if (!keyPacket) {
+          if (maxSequenceNumber !== -1) {
+            await decodePackets();
+            await flushDecoder();
+          }
+          pushToQueue(null);
+          lastPacket = null;
+          continue;
+        }
+        if (lastPacket && (keyPacket.sequenceNumber !== lastKeyPacket.sequenceNumber || targetPacket.timestamp < lastPacket.timestamp)) {
+          await decodePackets();
+          await flushDecoder();
+        }
+        timestampsOfInterest.push(targetPacket.timestamp);
+        maxSequenceNumber = Math.max(targetPacket.sequenceNumber, maxSequenceNumber);
+        lastPacket = targetPacket;
+        lastKeyPacket = keyPacket;
+      }
+      if (!terminated && !this._track.input._disposed) {
+        if (maxSequenceNumber !== -1) {
+          await decodePackets();
+        }
+        await flushDecoder();
+      }
+      decoder.close();
+      decoderIsFlushed = true;
+      onQueueNotEmpty();
+    })().catch((error) => {
+      if (!outOfBandError) {
+        outOfBandError = error;
+        onQueueNotEmpty();
+      }
+    });
+    const track = this._track;
+    const closeSamples = () => {
+      for (const sample of sampleQueue) {
+        sample?.close();
+      }
+    };
+    return {
+      async next() {
+        while (true) {
+          if (track.input._disposed) {
+            closeSamples();
+            throw new InputDisposedError();
+          } else if (terminated) {
+            return { value: void 0, done: true };
+          } else if (outOfBandError) {
+            closeSamples();
+            throw outOfBandError;
+          } else if (sampleQueue.length > 0) {
+            const value = sampleQueue.shift();
+            assert(value !== void 0);
+            onQueueDequeue();
+            return { value, done: false };
+          } else if (!decoderIsFlushed) {
+            await queueNotEmpty;
+          } else {
+            return { value: void 0, done: true };
+          }
+        }
+      },
+      async return() {
+        terminated = true;
+        onQueueDequeue();
+        onQueueNotEmpty();
+        closeSamples();
+        return { value: void 0, done: true };
+      },
+      async throw(error) {
+        throw error;
+      },
+      [Symbol.asyncIterator]() {
+        return this;
+      }
+    };
+  }
+}
+const computeMaxQueueSize = (decodedSampleQueueSize) => {
+  return decodedSampleQueueSize === 0 ? 40 : 8;
+};
+class VideoDecoderWrapper extends DecoderWrapper {
+  constructor(onSample, onError, codec, decoderConfig, rotation, timeResolution) {
+    super(onSample, onError);
+    this.codec = codec;
+    this.decoderConfig = decoderConfig;
+    this.rotation = rotation;
+    this.timeResolution = timeResolution;
+    this.decoder = null;
+    this.customDecoder = null;
+    this.customDecoderCallSerializer = new CallSerializer();
+    this.customDecoderQueueSize = 0;
+    this.inputTimestamps = [];
+    this.sampleQueue = [];
+    this.currentPacketIndex = 0;
+    this.raslSkipped = false;
+    this.alphaDecoder = null;
+    this.alphaHadKeyframe = false;
+    this.colorQueue = [];
+    this.alphaQueue = [];
+    this.merger = null;
+    this.mergerCreationFailed = false;
+    this.decodedAlphaChunkCount = 0;
+    this.alphaDecoderQueueSize = 0;
+    this.nullAlphaFrameQueue = [];
+    this.currentAlphaPacketIndex = 0;
+    this.alphaRaslSkipped = false;
+    const MatchingCustomDecoder = customVideoDecoders.find((x) => x.supports(codec, decoderConfig));
+    if (MatchingCustomDecoder) {
+      this.customDecoder = new MatchingCustomDecoder();
+      this.customDecoder.codec = codec;
+      this.customDecoder.config = decoderConfig;
+      this.customDecoder.onSample = (sample) => {
+        if (!(sample instanceof VideoSample)) {
+          throw new TypeError("The argument passed to onSample must be a VideoSample.");
+        }
+        this.finalizeAndEmitSample(sample);
+      };
+      void this.customDecoderCallSerializer.call(() => this.customDecoder.init());
+    } else {
+      const colorHandler = (frame) => {
+        if (this.alphaQueue.length > 0) {
+          const alphaFrame = this.alphaQueue.shift();
+          assert(alphaFrame !== void 0);
+          this.mergeAlpha(frame, alphaFrame);
+        } else {
+          this.colorQueue.push(frame);
+        }
+      };
+      if (codec === "avc" && this.decoderConfig.description && isChromium()) {
+        const record = deserializeAvcDecoderConfigurationRecord(toUint8Array(this.decoderConfig.description));
+        if (record && record.sequenceParameterSets.length > 0) {
+          const sps = parseAvcSps(record.sequenceParameterSets[0]);
+          if (sps && sps.frameMbsOnlyFlag === 0) {
+            this.decoderConfig = {
+              ...this.decoderConfig,
+              hardwareAcceleration: "prefer-software"
+            };
+          }
+        }
+      }
+      const stack = new Error("Decoding error").stack;
+      this.decoder = new VideoDecoder({
+        output: (frame) => {
+          try {
+            colorHandler(frame);
+          } catch (error) {
+            this.onError(error);
+          }
+        },
+        error: (error) => {
+          error.stack = stack;
+          this.onError(error);
+        }
+      });
+      this.decoder.configure(this.decoderConfig);
+    }
+  }
+  getDecodeQueueSize() {
+    if (this.customDecoder) {
+      return this.customDecoderQueueSize;
+    } else {
+      assert(this.decoder);
+      return Math.max(this.decoder.decodeQueueSize, this.alphaDecoder?.decodeQueueSize ?? 0);
+    }
+  }
+  decode(packet) {
+    if (this.codec === "hevc" && this.currentPacketIndex > 0 && !this.raslSkipped) {
+      if (this.hasHevcRaslPicture(packet.data)) {
+        return;
+      }
+      this.raslSkipped = true;
+    }
+    if (this.customDecoder) {
+      this.customDecoderQueueSize++;
+      void this.customDecoderCallSerializer.call(() => this.customDecoder.decode(packet)).then(() => this.customDecoderQueueSize--);
+    } else {
+      assert(this.decoder);
+      if (!isWebKit()) {
+        insertSorted(this.inputTimestamps, packet.timestamp, (x) => x);
+      }
+      if (isChromium() && this.currentPacketIndex === 0 && this.codec === "avc") {
+        const nalUnits = extractAvcNalUnits(packet.data, this.decoderConfig);
+        const filteredNalUnits = nalUnits.filter((x) => {
+          const type = extractNalUnitTypeForAvc(x);
+          return !(type >= 20 && type <= 31);
+        });
+        const newData = concatAvcNalUnits(filteredNalUnits, this.decoderConfig);
+        packet = new EncodedPacket(newData, packet.type, packet.timestamp, packet.duration);
+      }
+      this.decoder.decode(packet.toEncodedVideoChunk());
+      this.decodeAlphaData(packet);
+    }
+    this.currentPacketIndex++;
+  }
+  decodeAlphaData(packet) {
+    if (!packet.sideData.alpha || this.mergerCreationFailed) {
+      this.pushNullAlphaFrame();
+      return;
+    }
+    if (!this.merger) {
+      try {
+        this.merger = new ColorAlphaMerger();
+      } catch (error) {
+        console.error("Due to an error, only color data will be decoded.", error);
+        this.mergerCreationFailed = true;
+        this.decodeAlphaData(packet);
+        return;
+      }
+    }
+    if (!this.alphaDecoder) {
+      const alphaHandler = (frame) => {
+        this.alphaDecoderQueueSize--;
+        if (this.colorQueue.length > 0) {
+          const colorFrame = this.colorQueue.shift();
+          assert(colorFrame !== void 0);
+          this.mergeAlpha(colorFrame, frame);
+        } else {
+          this.alphaQueue.push(frame);
+        }
+        this.decodedAlphaChunkCount++;
+        while (this.nullAlphaFrameQueue.length > 0 && this.nullAlphaFrameQueue[0] === this.decodedAlphaChunkCount) {
+          this.nullAlphaFrameQueue.shift();
+          if (this.colorQueue.length > 0) {
+            const colorFrame = this.colorQueue.shift();
+            assert(colorFrame !== void 0);
+            this.mergeAlpha(colorFrame, null);
+          } else {
+            this.alphaQueue.push(null);
+          }
+        }
+      };
+      const stack = new Error("Decoding error").stack;
+      this.alphaDecoder = new VideoDecoder({
+        output: (frame) => {
+          try {
+            alphaHandler(frame);
+          } catch (error) {
+            this.onError(error);
+          }
+        },
+        error: (error) => {
+          error.stack = stack;
+          this.onError(error);
+        }
+      });
+      this.alphaDecoder.configure(this.decoderConfig);
+    }
+    const type = determineVideoPacketType(this.codec, this.decoderConfig, packet.sideData.alpha);
+    if (!this.alphaHadKeyframe) {
+      this.alphaHadKeyframe = type === "key";
+    }
+    if (this.alphaHadKeyframe) {
+      if (this.codec === "hevc" && this.currentAlphaPacketIndex > 0 && !this.alphaRaslSkipped) {
+        if (this.hasHevcRaslPicture(packet.sideData.alpha)) {
+          this.pushNullAlphaFrame();
+          return;
+        }
+        this.alphaRaslSkipped = true;
+      }
+      this.currentAlphaPacketIndex++;
+      this.alphaDecoder.decode(packet.alphaToEncodedVideoChunk(type ?? packet.type));
+      this.alphaDecoderQueueSize++;
+    } else {
+      this.pushNullAlphaFrame();
+    }
+  }
+  pushNullAlphaFrame() {
+    if (this.alphaDecoderQueueSize === 0) {
+      this.alphaQueue.push(null);
+    } else {
+      this.nullAlphaFrameQueue.push(this.decodedAlphaChunkCount + this.alphaDecoderQueueSize);
+    }
+  }
+  /**
+   * If we're using HEVC, we need to make sure to skip any RASL slices that follow a non-IDR key frame such as
+   * CRA_NUT. This is because RASL slices cannot be decoded without data before the CRA_NUT. Browsers behave
+   * differently here: Chromium drops the packets, Safari throws a decoder error. Either way, it's not good
+   * and causes bugs upstream. So, let's take the dropping into our own hands.
+   */
+  hasHevcRaslPicture(packetData) {
+    const nalUnits = extractHevcNalUnits(packetData, this.decoderConfig);
+    return nalUnits.some((x) => {
+      const type = extractNalUnitTypeForHevc(x);
+      return type === HevcNalUnitType.RASL_N || type === HevcNalUnitType.RASL_R;
+    });
+  }
+  /** Handler for the WebCodecs VideoDecoder for ironing out browser differences. */
+  sampleHandler(sample) {
+    if (isWebKit()) {
+      if (this.sampleQueue.length > 0 && sample.timestamp >= last(this.sampleQueue).timestamp) {
+        for (const sample2 of this.sampleQueue) {
+          this.finalizeAndEmitSample(sample2);
+        }
+        this.sampleQueue.length = 0;
+      }
+      insertSorted(this.sampleQueue, sample, (x) => x.timestamp);
+    } else {
+      const timestamp = this.inputTimestamps.shift();
+      assert(timestamp !== void 0);
+      sample.setTimestamp(timestamp);
+      this.finalizeAndEmitSample(sample);
+    }
+  }
+  finalizeAndEmitSample(sample) {
+    sample.setTimestamp(Math.round(sample.timestamp * this.timeResolution) / this.timeResolution);
+    sample.setDuration(Math.round(sample.duration * this.timeResolution) / this.timeResolution);
+    sample.setRotation(this.rotation);
+    this.onSample(sample);
+  }
+  mergeAlpha(color, alpha) {
+    if (!alpha) {
+      const finalSample2 = new VideoSample(color);
+      this.sampleHandler(finalSample2);
+      return;
+    }
+    assert(this.merger);
+    this.merger.update(color, alpha);
+    color.close();
+    alpha.close();
+    const finalFrame = new VideoFrame(this.merger.canvas, {
+      timestamp: color.timestamp,
+      duration: color.duration ?? void 0
+    });
+    const finalSample = new VideoSample(finalFrame);
+    this.sampleHandler(finalSample);
+  }
+  async flush() {
+    if (this.customDecoder) {
+      await this.customDecoderCallSerializer.call(() => this.customDecoder.flush());
+    } else {
+      assert(this.decoder);
+      await Promise.all([
+        this.decoder.flush(),
+        this.alphaDecoder?.flush()
+      ]);
+      this.colorQueue.forEach((x) => x.close());
+      this.colorQueue.length = 0;
+      this.alphaQueue.forEach((x) => x?.close());
+      this.alphaQueue.length = 0;
+      this.alphaHadKeyframe = false;
+      this.decodedAlphaChunkCount = 0;
+      this.alphaDecoderQueueSize = 0;
+      this.nullAlphaFrameQueue.length = 0;
+      this.currentAlphaPacketIndex = 0;
+      this.alphaRaslSkipped = false;
+    }
+    if (isWebKit()) {
+      for (const sample of this.sampleQueue) {
+        this.finalizeAndEmitSample(sample);
+      }
+      this.sampleQueue.length = 0;
+    }
+    this.currentPacketIndex = 0;
+    this.raslSkipped = false;
+  }
+  close() {
+    if (this.customDecoder) {
+      void this.customDecoderCallSerializer.call(() => this.customDecoder.close());
+    } else {
+      assert(this.decoder);
+      this.decoder.close();
+      this.alphaDecoder?.close();
+      this.colorQueue.forEach((x) => x.close());
+      this.colorQueue.length = 0;
+      this.alphaQueue.forEach((x) => x?.close());
+      this.alphaQueue.length = 0;
+      this.merger?.close();
+    }
+    for (const sample of this.sampleQueue) {
+      sample.close();
+    }
+    this.sampleQueue.length = 0;
+  }
+}
+class ColorAlphaMerger {
+  constructor() {
+    if (typeof OffscreenCanvas !== "undefined") {
+      this.canvas = new OffscreenCanvas(300, 150);
+    } else {
+      this.canvas = document.createElement("canvas");
+    }
+    const gl = this.canvas.getContext("webgl2", {
+      premultipliedAlpha: false
+    });
+    if (!gl) {
+      throw new Error("Couldn't acquire WebGL 2 context.");
+    }
+    this.gl = gl;
+    this.program = this.createProgram();
+    this.vao = this.createVAO();
+    this.colorTexture = this.createTexture();
+    this.alphaTexture = this.createTexture();
+    this.gl.useProgram(this.program);
+    this.gl.uniform1i(this.gl.getUniformLocation(this.program, "u_colorTexture"), 0);
+    this.gl.uniform1i(this.gl.getUniformLocation(this.program, "u_alphaTexture"), 1);
+  }
+  createProgram() {
+    const vertexShader = this.createShader(this.gl.VERTEX_SHADER, `#version 300 es
+			in vec2 a_position;
+			in vec2 a_texCoord;
+			out vec2 v_texCoord;
+			
+			void main() {
+				gl_Position = vec4(a_position, 0.0, 1.0);
+				v_texCoord = a_texCoord;
+			}
+		`);
+    const fragmentShader = this.createShader(this.gl.FRAGMENT_SHADER, `#version 300 es
+			precision highp float;
+			
+			uniform sampler2D u_colorTexture;
+			uniform sampler2D u_alphaTexture;
+			in vec2 v_texCoord;
+			out vec4 fragColor;
+			
+			void main() {
+				vec3 color = texture(u_colorTexture, v_texCoord).rgb;
+				float alpha = texture(u_alphaTexture, v_texCoord).r;
+				fragColor = vec4(color, alpha);
+			}
+		`);
+    const program = this.gl.createProgram();
+    this.gl.attachShader(program, vertexShader);
+    this.gl.attachShader(program, fragmentShader);
+    this.gl.linkProgram(program);
+    return program;
+  }
+  createShader(type, source) {
+    const shader = this.gl.createShader(type);
+    this.gl.shaderSource(shader, source);
+    this.gl.compileShader(shader);
+    return shader;
+  }
+  createVAO() {
+    const vao = this.gl.createVertexArray();
+    this.gl.bindVertexArray(vao);
+    const vertices = new Float32Array([
+      -1,
+      -1,
+      0,
+      1,
+      1,
+      -1,
+      1,
+      1,
+      -1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0
+    ]);
+    const buffer = this.gl.createBuffer();
+    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffer);
+    this.gl.bufferData(this.gl.ARRAY_BUFFER, vertices, this.gl.STATIC_DRAW);
+    const positionLocation = this.gl.getAttribLocation(this.program, "a_position");
+    const texCoordLocation = this.gl.getAttribLocation(this.program, "a_texCoord");
+    this.gl.enableVertexAttribArray(positionLocation);
+    this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 16, 0);
+    this.gl.enableVertexAttribArray(texCoordLocation);
+    this.gl.vertexAttribPointer(texCoordLocation, 2, this.gl.FLOAT, false, 16, 8);
+    return vao;
+  }
+  createTexture() {
+    const texture = this.gl.createTexture();
+    this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
+    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
+    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
+    return texture;
+  }
+  update(color, alpha) {
+    if (color.displayWidth !== this.canvas.width || color.displayHeight !== this.canvas.height) {
+      this.canvas.width = color.displayWidth;
+      this.canvas.height = color.displayHeight;
+    }
+    this.gl.activeTexture(this.gl.TEXTURE0);
+    this.gl.bindTexture(this.gl.TEXTURE_2D, this.colorTexture);
+    this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, color);
+    this.gl.activeTexture(this.gl.TEXTURE1);
+    this.gl.bindTexture(this.gl.TEXTURE_2D, this.alphaTexture);
+    this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, alpha);
+    this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+    this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+    this.gl.bindVertexArray(this.vao);
+    this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
+  }
+  close() {
+    this.gl.getExtension("WEBGL_lose_context")?.loseContext();
+    this.gl = null;
+  }
+}
+class VideoSampleSink extends BaseMediaSampleSink {
+  /** Creates a new {@link VideoSampleSink} for the given {@link InputVideoTrack}. */
+  constructor(videoTrack) {
+    if (!(videoTrack instanceof InputVideoTrack)) {
+      throw new TypeError("videoTrack must be an InputVideoTrack.");
+    }
+    super();
+    this._track = videoTrack;
+  }
+  /** @internal */
+  async _createDecoder(onSample, onError) {
+    if (!await this._track.canDecode()) {
+      throw new Error("This video track cannot be decoded by this browser. Make sure to check decodability before using a track.");
+    }
+    const codec = this._track.codec;
+    const rotation = this._track.rotation;
+    const decoderConfig = await this._track.getDecoderConfig();
+    const timeResolution = this._track.timeResolution;
+    assert(codec && decoderConfig);
+    return new VideoDecoderWrapper(onSample, onError, codec, decoderConfig, rotation, timeResolution);
+  }
+  /** @internal */
+  _createPacketSink() {
+    return new EncodedPacketSink(this._track);
+  }
+  /**
+   * Retrieves the video sample (frame) corresponding to the given timestamp, in seconds. More specifically, returns
+   * the last video sample (in presentation order) with a start timestamp less than or equal to the given timestamp.
+   * Returns null if the timestamp is before the track's first timestamp.
+   *
+   * @param timestamp - The timestamp used for retrieval, in seconds.
+   */
+  async getSample(timestamp) {
+    validateTimestamp(timestamp);
+    for await (const sample of this.mediaSamplesAtTimestamps([timestamp])) {
+      return sample;
+    }
+    throw new Error("Internal error: Iterator returned nothing.");
+  }
+  /**
+   * Creates an async iterator that yields the video samples (frames) of this track in presentation order. This method
+   * will intelligently pre-decode a few frames ahead to enable fast iteration.
+   *
+   * @param startTimestamp - The timestamp in seconds at which to start yielding samples (inclusive).
+   * @param endTimestamp - The timestamp in seconds at which to stop yielding samples (exclusive).
+   */
+  samples(startTimestamp = 0, endTimestamp = Infinity) {
+    return this.mediaSamplesInRange(startTimestamp, endTimestamp);
+  }
+  /**
+   * Creates an async iterator that yields a video sample (frame) for each timestamp in the argument. This method
+   * uses an optimized decoding pipeline if these timestamps are monotonically sorted, decoding each packet at most
+   * once, and is therefore more efficient than manually getting the sample for every timestamp. The iterator may
+   * yield null if no frame is available for a given timestamp.
+   *
+   * @param timestamps - An iterable or async iterable of timestamps in seconds.
+   */
+  samplesAtTimestamps(timestamps) {
+    return this.mediaSamplesAtTimestamps(timestamps);
+  }
+}
+class CanvasSink {
+  /** Creates a new {@link CanvasSink} for the given {@link InputVideoTrack}. */
+  constructor(videoTrack, options = {}) {
+    this._nextCanvasIndex = 0;
+    if (!(videoTrack instanceof InputVideoTrack)) {
+      throw new TypeError("videoTrack must be an InputVideoTrack.");
+    }
+    if (options && typeof options !== "object") {
+      throw new TypeError("options must be an object.");
+    }
+    if (options.alpha !== void 0 && typeof options.alpha !== "boolean") {
+      throw new TypeError("options.alpha, when provided, must be a boolean.");
+    }
+    if (options.width !== void 0 && (!Number.isInteger(options.width) || options.width <= 0)) {
+      throw new TypeError("options.width, when defined, must be a positive integer.");
+    }
+    if (options.height !== void 0 && (!Number.isInteger(options.height) || options.height <= 0)) {
+      throw new TypeError("options.height, when defined, must be a positive integer.");
+    }
+    if (options.fit !== void 0 && !["fill", "contain", "cover"].includes(options.fit)) {
+      throw new TypeError('options.fit, when provided, must be one of "fill", "contain", or "cover".');
+    }
+    if (options.width !== void 0 && options.height !== void 0 && options.fit === void 0) {
+      throw new TypeError("When both options.width and options.height are provided, options.fit must also be provided.");
+    }
+    if (options.rotation !== void 0 && ![0, 90, 180, 270].includes(options.rotation)) {
+      throw new TypeError("options.rotation, when provided, must be 0, 90, 180 or 270.");
+    }
+    if (options.crop !== void 0) {
+      validateCropRectangle(options.crop, "options.");
+    }
+    if (options.poolSize !== void 0 && (typeof options.poolSize !== "number" || !Number.isInteger(options.poolSize) || options.poolSize < 0)) {
+      throw new TypeError("poolSize must be a non-negative integer.");
+    }
+    const rotation = options.rotation ?? videoTrack.rotation;
+    const [rotatedWidth, rotatedHeight] = rotation % 180 === 0 ? [videoTrack.codedWidth, videoTrack.codedHeight] : [videoTrack.codedHeight, videoTrack.codedWidth];
+    const crop = options.crop;
+    if (crop) {
+      clampCropRectangle(crop, rotatedWidth, rotatedHeight);
+    }
+    let [width, height] = crop ? [crop.width, crop.height] : [rotatedWidth, rotatedHeight];
+    const originalAspectRatio = width / height;
+    if (options.width !== void 0 && options.height === void 0) {
+      width = options.width;
+      height = Math.round(width / originalAspectRatio);
+    } else if (options.width === void 0 && options.height !== void 0) {
+      height = options.height;
+      width = Math.round(height * originalAspectRatio);
+    } else if (options.width !== void 0 && options.height !== void 0) {
+      width = options.width;
+      height = options.height;
+    }
+    this._videoTrack = videoTrack;
+    this._alpha = options.alpha ?? false;
+    this._width = width;
+    this._height = height;
+    this._rotation = rotation;
+    this._crop = crop;
+    this._fit = options.fit ?? "fill";
+    this._videoSampleSink = new VideoSampleSink(videoTrack);
+    this._canvasPool = Array.from({ length: options.poolSize ?? 0 }, () => null);
+  }
+  /** @internal */
+  _videoSampleToWrappedCanvas(sample) {
+    let canvas = this._canvasPool[this._nextCanvasIndex];
+    let canvasIsNew = false;
+    if (!canvas) {
+      if (typeof document !== "undefined") {
+        canvas = document.createElement("canvas");
+        canvas.width = this._width;
+        canvas.height = this._height;
+      } else {
+        canvas = new OffscreenCanvas(this._width, this._height);
+      }
+      if (this._canvasPool.length > 0) {
+        this._canvasPool[this._nextCanvasIndex] = canvas;
+      }
+      canvasIsNew = true;
+    }
+    if (this._canvasPool.length > 0) {
+      this._nextCanvasIndex = (this._nextCanvasIndex + 1) % this._canvasPool.length;
+    }
+    const context = canvas.getContext("2d", {
+      alpha: this._alpha || isFirefox()
+      // Firefox has VideoFrame glitches with opaque canvases
+    });
+    assert(context);
+    context.resetTransform();
+    if (!canvasIsNew) {
+      if (!this._alpha && isFirefox()) {
+        context.fillStyle = "black";
+        context.fillRect(0, 0, this._width, this._height);
+      } else {
+        context.clearRect(0, 0, this._width, this._height);
+      }
+    }
+    sample.drawWithFit(context, {
+      fit: this._fit,
+      rotation: this._rotation,
+      crop: this._crop
+    });
+    const result = {
+      canvas,
+      timestamp: sample.timestamp,
+      duration: sample.duration
+    };
+    sample.close();
+    return result;
+  }
+  /**
+   * Retrieves a canvas with the video frame corresponding to the given timestamp, in seconds. More specifically,
+   * returns the last video frame (in presentation order) with a start timestamp less than or equal to the given
+   * timestamp. Returns null if the timestamp is before the track's first timestamp.
+   *
+   * @param timestamp - The timestamp used for retrieval, in seconds.
+   */
+  async getCanvas(timestamp) {
+    validateTimestamp(timestamp);
+    const sample = await this._videoSampleSink.getSample(timestamp);
+    return sample && this._videoSampleToWrappedCanvas(sample);
+  }
+  /**
+   * Creates an async iterator that yields canvases with the video frames of this track in presentation order. This
+   * method will intelligently pre-decode a few frames ahead to enable fast iteration.
+   *
+   * @param startTimestamp - The timestamp in seconds at which to start yielding canvases (inclusive).
+   * @param endTimestamp - The timestamp in seconds at which to stop yielding canvases (exclusive).
+   */
+  canvases(startTimestamp = 0, endTimestamp = Infinity) {
+    return mapAsyncGenerator(this._videoSampleSink.samples(startTimestamp, endTimestamp), (sample) => this._videoSampleToWrappedCanvas(sample));
+  }
+  /**
+   * Creates an async iterator that yields a canvas for each timestamp in the argument. This method uses an optimized
+   * decoding pipeline if these timestamps are monotonically sorted, decoding each packet at most once, and is
+   * therefore more efficient than manually getting the canvas for every timestamp. The iterator may yield null if
+   * no frame is available for a given timestamp.
+   *
+   * @param timestamps - An iterable or async iterable of timestamps in seconds.
+   */
+  canvasesAtTimestamps(timestamps) {
+    return mapAsyncGenerator(this._videoSampleSink.samplesAtTimestamps(timestamps), (sample) => sample && this._videoSampleToWrappedCanvas(sample));
+  }
+}
+class AudioDecoderWrapper extends DecoderWrapper {
+  constructor(onSample, onError, codec, decoderConfig) {
+    super(onSample, onError);
+    this.decoder = null;
+    this.customDecoder = null;
+    this.customDecoderCallSerializer = new CallSerializer();
+    this.customDecoderQueueSize = 0;
+    this.currentTimestamp = null;
+    const sampleHandler = (sample) => {
+      if (this.currentTimestamp === null || Math.abs(sample.timestamp - this.currentTimestamp) >= sample.duration) {
+        this.currentTimestamp = sample.timestamp;
+      }
+      const preciseTimestamp = this.currentTimestamp;
+      this.currentTimestamp += sample.duration;
+      if (sample.numberOfFrames === 0) {
+        sample.close();
+        return;
+      }
+      const sampleRate = decoderConfig.sampleRate;
+      sample.setTimestamp(Math.round(preciseTimestamp * sampleRate) / sampleRate);
+      onSample(sample);
+    };
+    const MatchingCustomDecoder = customAudioDecoders.find((x) => x.supports(codec, decoderConfig));
+    if (MatchingCustomDecoder) {
+      this.customDecoder = new MatchingCustomDecoder();
+      this.customDecoder.codec = codec;
+      this.customDecoder.config = decoderConfig;
+      this.customDecoder.onSample = (sample) => {
+        if (!(sample instanceof AudioSample)) {
+          throw new TypeError("The argument passed to onSample must be an AudioSample.");
+        }
+        sampleHandler(sample);
+      };
+      void this.customDecoderCallSerializer.call(() => this.customDecoder.init());
+    } else {
+      const stack = new Error("Decoding error").stack;
+      this.decoder = new AudioDecoder({
+        output: (data) => {
+          try {
+            sampleHandler(new AudioSample(data));
+          } catch (error) {
+            this.onError(error);
+          }
+        },
+        error: (error) => {
+          error.stack = stack;
+          this.onError(error);
+        }
+      });
+      this.decoder.configure(decoderConfig);
+    }
+  }
+  getDecodeQueueSize() {
+    if (this.customDecoder) {
+      return this.customDecoderQueueSize;
+    } else {
+      assert(this.decoder);
+      return this.decoder.decodeQueueSize;
+    }
+  }
+  decode(packet) {
+    if (this.customDecoder) {
+      this.customDecoderQueueSize++;
+      void this.customDecoderCallSerializer.call(() => this.customDecoder.decode(packet)).then(() => this.customDecoderQueueSize--);
+    } else {
+      assert(this.decoder);
+      this.decoder.decode(packet.toEncodedAudioChunk());
+    }
+  }
+  flush() {
+    if (this.customDecoder) {
+      return this.customDecoderCallSerializer.call(() => this.customDecoder.flush());
+    } else {
+      assert(this.decoder);
+      return this.decoder.flush();
+    }
+  }
+  close() {
+    if (this.customDecoder) {
+      void this.customDecoderCallSerializer.call(() => this.customDecoder.close());
+    } else {
+      assert(this.decoder);
+      this.decoder.close();
+    }
+  }
+}
+class PcmAudioDecoderWrapper extends DecoderWrapper {
+  constructor(onSample, onError, decoderConfig) {
+    super(onSample, onError);
+    this.decoderConfig = decoderConfig;
+    this.currentTimestamp = null;
+    assert(PCM_AUDIO_CODECS.includes(decoderConfig.codec));
+    this.codec = decoderConfig.codec;
+    const { dataType, sampleSize, littleEndian } = parsePcmCodec(this.codec);
+    this.inputSampleSize = sampleSize;
+    switch (sampleSize) {
+      case 1:
+        {
+          if (dataType === "unsigned") {
+            this.readInputValue = (view, byteOffset) => view.getUint8(byteOffset) - 2 ** 7;
+          } else if (dataType === "signed") {
+            this.readInputValue = (view, byteOffset) => view.getInt8(byteOffset);
+          } else if (dataType === "ulaw") {
+            this.readInputValue = (view, byteOffset) => fromUlaw(view.getUint8(byteOffset));
+          } else if (dataType === "alaw") {
+            this.readInputValue = (view, byteOffset) => fromAlaw(view.getUint8(byteOffset));
+          } else {
+            assert(false);
+          }
+        }
+        break;
+      case 2:
+        {
+          if (dataType === "unsigned") {
+            this.readInputValue = (view, byteOffset) => view.getUint16(byteOffset, littleEndian) - 2 ** 15;
+          } else if (dataType === "signed") {
+            this.readInputValue = (view, byteOffset) => view.getInt16(byteOffset, littleEndian);
+          } else {
+            assert(false);
+          }
+        }
+        break;
+      case 3:
+        {
+          if (dataType === "unsigned") {
+            this.readInputValue = (view, byteOffset) => getUint24(view, byteOffset, littleEndian) - 2 ** 23;
+          } else if (dataType === "signed") {
+            this.readInputValue = (view, byteOffset) => getInt24(view, byteOffset, littleEndian);
+          } else {
+            assert(false);
+          }
+        }
+        break;
+      case 4:
+        {
+          if (dataType === "unsigned") {
+            this.readInputValue = (view, byteOffset) => view.getUint32(byteOffset, littleEndian) - 2 ** 31;
+          } else if (dataType === "signed") {
+            this.readInputValue = (view, byteOffset) => view.getInt32(byteOffset, littleEndian);
+          } else if (dataType === "float") {
+            this.readInputValue = (view, byteOffset) => view.getFloat32(byteOffset, littleEndian);
+          } else {
+            assert(false);
+          }
+        }
+        break;
+      case 8:
+        {
+          if (dataType === "float") {
+            this.readInputValue = (view, byteOffset) => view.getFloat64(byteOffset, littleEndian);
+          } else {
+            assert(false);
+          }
+        }
+        break;
+      default: {
+        assertNever(sampleSize);
+        assert(false);
+      }
+    }
+    switch (sampleSize) {
+      case 1:
+        {
+          if (dataType === "ulaw" || dataType === "alaw") {
+            this.outputSampleSize = 2;
+            this.outputFormat = "s16";
+            this.writeOutputValue = (view, byteOffset, value) => view.setInt16(byteOffset, value, true);
+          } else {
+            this.outputSampleSize = 1;
+            this.outputFormat = "u8";
+            this.writeOutputValue = (view, byteOffset, value) => view.setUint8(byteOffset, value + 2 ** 7);
+          }
+        }
+        break;
+      case 2:
+        {
+          this.outputSampleSize = 2;
+          this.outputFormat = "s16";
+          this.writeOutputValue = (view, byteOffset, value) => view.setInt16(byteOffset, value, true);
+        }
+        break;
+      case 3:
+        {
+          this.outputSampleSize = 4;
+          this.outputFormat = "s32";
+          this.writeOutputValue = (view, byteOffset, value) => view.setInt32(byteOffset, value << 8, true);
+        }
+        break;
+      case 4:
+        {
+          this.outputSampleSize = 4;
+          if (dataType === "float") {
+            this.outputFormat = "f32";
+            this.writeOutputValue = (view, byteOffset, value) => view.setFloat32(byteOffset, value, true);
+          } else {
+            this.outputFormat = "s32";
+            this.writeOutputValue = (view, byteOffset, value) => view.setInt32(byteOffset, value, true);
+          }
+        }
+        break;
+      case 8:
+        {
+          this.outputSampleSize = 4;
+          this.outputFormat = "f32";
+          this.writeOutputValue = (view, byteOffset, value) => view.setFloat32(byteOffset, value, true);
+        }
+        break;
+      default: {
+        assertNever(sampleSize);
+        assert(false);
+      }
+    }
+  }
+  getDecodeQueueSize() {
+    return 0;
+  }
+  decode(packet) {
+    const inputView = toDataView(packet.data);
+    const numberOfFrames = packet.byteLength / this.decoderConfig.numberOfChannels / this.inputSampleSize;
+    const outputBufferSize = numberOfFrames * this.decoderConfig.numberOfChannels * this.outputSampleSize;
+    const outputBuffer = new ArrayBuffer(outputBufferSize);
+    const outputView = new DataView(outputBuffer);
+    for (let i = 0; i < numberOfFrames * this.decoderConfig.numberOfChannels; i++) {
+      const inputIndex = i * this.inputSampleSize;
+      const outputIndex = i * this.outputSampleSize;
+      const value = this.readInputValue(inputView, inputIndex);
+      this.writeOutputValue(outputView, outputIndex, value);
+    }
+    const preciseDuration = numberOfFrames / this.decoderConfig.sampleRate;
+    if (this.currentTimestamp === null || Math.abs(packet.timestamp - this.currentTimestamp) >= preciseDuration) {
+      this.currentTimestamp = packet.timestamp;
+    }
+    const preciseTimestamp = this.currentTimestamp;
+    this.currentTimestamp += preciseDuration;
+    const audioSample = new AudioSample({
+      format: this.outputFormat,
+      data: outputBuffer,
+      numberOfChannels: this.decoderConfig.numberOfChannels,
+      sampleRate: this.decoderConfig.sampleRate,
+      numberOfFrames,
+      timestamp: preciseTimestamp
+    });
+    this.onSample(audioSample);
+  }
+  async flush() {
+  }
+  close() {
+  }
+}
+class AudioSampleSink extends BaseMediaSampleSink {
+  /** Creates a new {@link AudioSampleSink} for the given {@link InputAudioTrack}. */
+  constructor(audioTrack) {
+    if (!(audioTrack instanceof InputAudioTrack)) {
+      throw new TypeError("audioTrack must be an InputAudioTrack.");
+    }
+    super();
+    this._track = audioTrack;
+  }
+  /** @internal */
+  async _createDecoder(onSample, onError) {
+    if (!await this._track.canDecode()) {
+      throw new Error("This audio track cannot be decoded by this browser. Make sure to check decodability before using a track.");
+    }
+    const codec = this._track.codec;
+    const decoderConfig = await this._track.getDecoderConfig();
+    assert(codec && decoderConfig);
+    if (PCM_AUDIO_CODECS.includes(decoderConfig.codec)) {
+      return new PcmAudioDecoderWrapper(onSample, onError, decoderConfig);
+    } else {
+      return new AudioDecoderWrapper(onSample, onError, codec, decoderConfig);
+    }
+  }
+  /** @internal */
+  _createPacketSink() {
+    return new EncodedPacketSink(this._track);
+  }
+  /**
+   * Retrieves the audio sample corresponding to the given timestamp, in seconds. More specifically, returns
+   * the last audio sample (in presentation order) with a start timestamp less than or equal to the given timestamp.
+   * Returns null if the timestamp is before the track's first timestamp.
+   *
+   * @param timestamp - The timestamp used for retrieval, in seconds.
+   */
+  async getSample(timestamp) {
+    validateTimestamp(timestamp);
+    for await (const sample of this.mediaSamplesAtTimestamps([timestamp])) {
+      return sample;
+    }
+    throw new Error("Internal error: Iterator returned nothing.");
+  }
+  /**
+   * Creates an async iterator that yields the audio samples of this track in presentation order. This method
+   * will intelligently pre-decode a few samples ahead to enable fast iteration.
+   *
+   * @param startTimestamp - The timestamp in seconds at which to start yielding samples (inclusive).
+   * @param endTimestamp - The timestamp in seconds at which to stop yielding samples (exclusive).
+   */
+  samples(startTimestamp = 0, endTimestamp = Infinity) {
+    return this.mediaSamplesInRange(startTimestamp, endTimestamp);
+  }
+  /**
+   * Creates an async iterator that yields an audio sample for each timestamp in the argument. This method
+   * uses an optimized decoding pipeline if these timestamps are monotonically sorted, decoding each packet at most
+   * once, and is therefore more efficient than manually getting the sample for every timestamp. The iterator may
+   * yield null if no sample is available for a given timestamp.
+   *
+   * @param timestamps - An iterable or async iterable of timestamps in seconds.
+   */
+  samplesAtTimestamps(timestamps) {
+    return this.mediaSamplesAtTimestamps(timestamps);
+  }
+}
+class AudioBufferSink {
+  /** Creates a new {@link AudioBufferSink} for the given {@link InputAudioTrack}. */
+  constructor(audioTrack) {
+    if (!(audioTrack instanceof InputAudioTrack)) {
+      throw new TypeError("audioTrack must be an InputAudioTrack.");
+    }
+    this._audioSampleSink = new AudioSampleSink(audioTrack);
+  }
+  /** @internal */
+  _audioSampleToWrappedArrayBuffer(sample) {
+    const result = {
+      buffer: sample.toAudioBuffer(),
+      timestamp: sample.timestamp,
+      duration: sample.duration
+    };
+    sample.close();
+    return result;
+  }
+  /**
+   * Retrieves the audio buffer corresponding to the given timestamp, in seconds. More specifically, returns
+   * the last audio buffer (in presentation order) with a start timestamp less than or equal to the given timestamp.
+   * Returns null if the timestamp is before the track's first timestamp.
+   *
+   * @param timestamp - The timestamp used for retrieval, in seconds.
+   */
+  async getBuffer(timestamp) {
+    validateTimestamp(timestamp);
+    const data = await this._audioSampleSink.getSample(timestamp);
+    return data && this._audioSampleToWrappedArrayBuffer(data);
+  }
+  /**
+   * Creates an async iterator that yields audio buffers of this track in presentation order. This method
+   * will intelligently pre-decode a few buffers ahead to enable fast iteration.
+   *
+   * @param startTimestamp - The timestamp in seconds at which to start yielding buffers (inclusive).
+   * @param endTimestamp - The timestamp in seconds at which to stop yielding buffers (exclusive).
+   */
+  buffers(startTimestamp = 0, endTimestamp = Infinity) {
+    return mapAsyncGenerator(this._audioSampleSink.samples(startTimestamp, endTimestamp), (data) => this._audioSampleToWrappedArrayBuffer(data));
+  }
+  /**
+   * Creates an async iterator that yields an audio buffer for each timestamp in the argument. This method
+   * uses an optimized decoding pipeline if these timestamps are monotonically sorted, decoding each packet at most
+   * once, and is therefore more efficient than manually getting the buffer for every timestamp. The iterator may
+   * yield null if no buffer is available for a given timestamp.
+   *
+   * @param timestamps - An iterable or async iterable of timestamps in seconds.
+   */
+  buffersAtTimestamps(timestamps) {
+    return mapAsyncGenerator(this._audioSampleSink.samplesAtTimestamps(timestamps), (data) => data && this._audioSampleToWrappedArrayBuffer(data));
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class InputTrack {
+  /** @internal */
+  constructor(input, backing) {
+    this.input = input;
+    this._backing = backing;
+  }
+  /** Returns true if and only if this track is a video track. */
+  isVideoTrack() {
+    return this instanceof InputVideoTrack;
+  }
+  /** Returns true if and only if this track is an audio track. */
+  isAudioTrack() {
+    return this instanceof InputAudioTrack;
+  }
+  /** The unique ID of this track in the input file. */
+  get id() {
+    return this._backing.getId();
+  }
+  /**
+   * The identifier of the codec used internally by the container. It is not homogenized by Mediabunny
+   * and depends entirely on the container format.
+   *
+   * This field can be used to determine the codec of a track in case Mediabunny doesn't know that codec.
+   *
+   * - For ISOBMFF files, this field returns the name of the Sample Description Box (e.g. `'avc1'`).
+   * - For Matroska files, this field returns the value of the `CodecID` element.
+   * - For WAVE files, this field returns the value of the format tag in the `'fmt '` chunk.
+   * - For ADTS files, this field contains the `MPEG-4 Audio Object Type`.
+   * - In all other cases, this field is `null`.
+   */
+  get internalCodecId() {
+    return this._backing.getInternalCodecId();
+  }
+  /**
+   * The ISO 639-2/T language code for this track. If the language is unknown, this field is `'und'` (undetermined).
+   */
+  get languageCode() {
+    return this._backing.getLanguageCode();
+  }
+  /** A user-defined name for this track. */
+  get name() {
+    return this._backing.getName();
+  }
+  /**
+   * A positive number x such that all timestamps and durations of all packets of this track are
+   * integer multiples of 1/x.
+   */
+  get timeResolution() {
+    return this._backing.getTimeResolution();
+  }
+  /** The track's disposition, i.e. information about its intended usage. */
+  get disposition() {
+    return this._backing.getDisposition();
+  }
+  /**
+   * Returns the start timestamp of the first packet of this track, in seconds. While often near zero, this value
+   * may be positive or even negative. A negative starting timestamp means the track's timing has been offset. Samples
+   * with a negative timestamp should not be presented.
+   */
+  getFirstTimestamp() {
+    return this._backing.getFirstTimestamp();
+  }
+  /** Returns the end timestamp of the last packet of this track, in seconds. */
+  computeDuration() {
+    return this._backing.computeDuration();
+  }
+  /**
+   * Computes aggregate packet statistics for this track, such as average packet rate or bitrate.
+   *
+   * @param targetPacketCount - This optional parameter sets a target for how many packets this method must have
+   * looked at before it can return early; this means, you can use it to aggregate only a subset (prefix) of all
+   * packets. This is very useful for getting a great estimate of video frame rate without having to scan through the
+   * entire file.
+   */
+  async computePacketStats(targetPacketCount = Infinity) {
+    const sink = new EncodedPacketSink(this);
+    let startTimestamp = Infinity;
+    let endTimestamp = -Infinity;
+    let packetCount = 0;
+    let totalPacketBytes = 0;
+    for await (const packet of sink.packets(void 0, void 0, { metadataOnly: true })) {
+      if (packetCount >= targetPacketCount && packet.timestamp >= endTimestamp) {
+        break;
+      }
+      startTimestamp = Math.min(startTimestamp, packet.timestamp);
+      endTimestamp = Math.max(endTimestamp, packet.timestamp + packet.duration);
+      packetCount++;
+      totalPacketBytes += packet.byteLength;
+    }
+    return {
+      packetCount,
+      averagePacketRate: packetCount ? Number((packetCount / (endTimestamp - startTimestamp)).toPrecision(16)) : 0,
+      averageBitrate: packetCount ? Number((8 * totalPacketBytes / (endTimestamp - startTimestamp)).toPrecision(16)) : 0
+    };
+  }
+}
+class InputVideoTrack extends InputTrack {
+  /** @internal */
+  constructor(input, backing) {
+    super(input, backing);
+    this._backing = backing;
+  }
+  get type() {
+    return "video";
+  }
+  get codec() {
+    return this._backing.getCodec();
+  }
+  /** The width in pixels of the track's coded samples, before any transformations or rotations. */
+  get codedWidth() {
+    return this._backing.getCodedWidth();
+  }
+  /** The height in pixels of the track's coded samples, before any transformations or rotations. */
+  get codedHeight() {
+    return this._backing.getCodedHeight();
+  }
+  /** The angle in degrees by which the track's frames should be rotated (clockwise). */
+  get rotation() {
+    return this._backing.getRotation();
+  }
+  /** The width in pixels of the track's frames after rotation. */
+  get displayWidth() {
+    const rotation = this._backing.getRotation();
+    return rotation % 180 === 0 ? this._backing.getCodedWidth() : this._backing.getCodedHeight();
+  }
+  /** The height in pixels of the track's frames after rotation. */
+  get displayHeight() {
+    const rotation = this._backing.getRotation();
+    return rotation % 180 === 0 ? this._backing.getCodedHeight() : this._backing.getCodedWidth();
+  }
+  /** Returns the color space of the track's samples. */
+  getColorSpace() {
+    return this._backing.getColorSpace();
+  }
+  /** If this method returns true, the track's samples use a high dynamic range (HDR). */
+  async hasHighDynamicRange() {
+    const colorSpace = await this._backing.getColorSpace();
+    return colorSpace.primaries === "bt2020" || colorSpace.primaries === "smpte432" || colorSpace.transfer === "pg" || colorSpace.transfer === "hlg" || colorSpace.matrix === "bt2020-ncl";
+  }
+  /** Checks if this track may contain transparent samples with alpha data. */
+  canBeTransparent() {
+    return this._backing.canBeTransparent();
+  }
+  /**
+   * Returns the [decoder configuration](https://www.w3.org/TR/webcodecs/#video-decoder-config) for decoding the
+   * track's packets using a [`VideoDecoder`](https://developer.mozilla.org/en-US/docs/Web/API/VideoDecoder). Returns
+   * null if the track's codec is unknown.
+   */
+  getDecoderConfig() {
+    return this._backing.getDecoderConfig();
+  }
+  async getCodecParameterString() {
+    const decoderConfig = await this._backing.getDecoderConfig();
+    return decoderConfig?.codec ?? null;
+  }
+  async canDecode() {
+    try {
+      const decoderConfig = await this._backing.getDecoderConfig();
+      if (!decoderConfig) {
+        return false;
+      }
+      const codec = this._backing.getCodec();
+      assert(codec !== null);
+      if (customVideoDecoders.some((x) => x.supports(codec, decoderConfig))) {
+        return true;
+      }
+      if (typeof VideoDecoder === "undefined") {
+        return false;
+      }
+      const support = await VideoDecoder.isConfigSupported(decoderConfig);
+      return support.supported === true;
+    } catch (error) {
+      console.error("Error during decodability check:", error);
+      return false;
+    }
+  }
+  async determinePacketType(packet) {
+    if (!(packet instanceof EncodedPacket)) {
+      throw new TypeError("packet must be an EncodedPacket.");
+    }
+    if (packet.isMetadataOnly) {
+      throw new TypeError("packet must not be metadata-only to determine its type.");
+    }
+    if (this.codec === null) {
+      return null;
+    }
+    const decoderConfig = await this.getDecoderConfig();
+    assert(decoderConfig);
+    return determineVideoPacketType(this.codec, decoderConfig, packet.data);
+  }
+}
+class InputAudioTrack extends InputTrack {
+  /** @internal */
+  constructor(input, backing) {
+    super(input, backing);
+    this._backing = backing;
+  }
+  get type() {
+    return "audio";
+  }
+  get codec() {
+    return this._backing.getCodec();
+  }
+  /** The number of audio channels in the track. */
+  get numberOfChannels() {
+    return this._backing.getNumberOfChannels();
+  }
+  /** The track's audio sample rate in hertz. */
+  get sampleRate() {
+    return this._backing.getSampleRate();
+  }
+  /**
+   * Returns the [decoder configuration](https://www.w3.org/TR/webcodecs/#audio-decoder-config) for decoding the
+   * track's packets using an [`AudioDecoder`](https://developer.mozilla.org/en-US/docs/Web/API/AudioDecoder). Returns
+   * null if the track's codec is unknown.
+   */
+  getDecoderConfig() {
+    return this._backing.getDecoderConfig();
+  }
+  async getCodecParameterString() {
+    const decoderConfig = await this._backing.getDecoderConfig();
+    return decoderConfig?.codec ?? null;
+  }
+  async canDecode() {
+    try {
+      const decoderConfig = await this._backing.getDecoderConfig();
+      if (!decoderConfig) {
+        return false;
+      }
+      const codec = this._backing.getCodec();
+      assert(codec !== null);
+      if (customAudioDecoders.some((x) => x.supports(codec, decoderConfig))) {
+        return true;
+      }
+      if (decoderConfig.codec.startsWith("pcm-")) {
+        return true;
+      } else {
+        if (typeof AudioDecoder === "undefined") {
+          return false;
+        }
+        const support = await AudioDecoder.isConfigSupported(decoderConfig);
+        return support.supported === true;
+      }
+    } catch (error) {
+      console.error("Error during decodability check:", error);
+      return false;
+    }
+  }
+  async determinePacketType(packet) {
+    if (!(packet instanceof EncodedPacket)) {
+      throw new TypeError("packet must be an EncodedPacket.");
+    }
+    if (this.codec === null) {
+      return null;
+    }
+    return "key";
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const buildIsobmffMimeType = (info) => {
+  const base = info.hasVideo ? "video/" : info.hasAudio ? "audio/" : "application/";
+  let string = base + (info.isQuickTime ? "quicktime" : "mp4");
+  if (info.codecStrings.length > 0) {
+    const uniqueCodecMimeTypes = [...new Set(info.codecStrings)];
+    string += `; codecs="${uniqueCodecMimeTypes.join(", ")}"`;
+  }
+  return string;
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const MIN_BOX_HEADER_SIZE = 8;
+const MAX_BOX_HEADER_SIZE = 16;
+const readBoxHeader = (slice) => {
+  let totalSize = readU32Be(slice);
+  const name = readAscii(slice, 4);
+  let headerSize = 8;
+  const hasLargeSize = totalSize === 1;
+  if (hasLargeSize) {
+    totalSize = readU64Be(slice);
+    headerSize = 16;
+  }
+  const contentSize = totalSize - headerSize;
+  if (contentSize < 0) {
+    return null;
+  }
+  return { name, totalSize, headerSize, contentSize };
+};
+const readFixed_16_16 = (slice) => {
+  return readI32Be(slice) / 65536;
+};
+const readFixed_2_30 = (slice) => {
+  return readI32Be(slice) / 1073741824;
+};
+const readIsomVariableInteger = (slice) => {
+  let result = 0;
+  for (let i = 0; i < 4; i++) {
+    result <<= 7;
+    const nextByte = readU8(slice);
+    result |= nextByte & 127;
+    if ((nextByte & 128) === 0) {
+      break;
+    }
+  }
+  return result;
+};
+const readMetadataStringShort = (slice) => {
+  let stringLength = readU16Be(slice);
+  slice.skip(2);
+  stringLength = Math.min(stringLength, slice.remainingLength);
+  return textDecoder.decode(readBytes(slice, stringLength));
+};
+const readDataBox = (slice) => {
+  const header = readBoxHeader(slice);
+  if (!header || header.name !== "data") {
+    return null;
+  }
+  if (slice.remainingLength < 8) {
+    return null;
+  }
+  const typeIndicator = readU32Be(slice);
+  slice.skip(4);
+  const data = readBytes(slice, header.contentSize - 8);
+  switch (typeIndicator) {
+    case 1:
+      return textDecoder.decode(data);
+    // UTF-8
+    case 2:
+      return new TextDecoder("utf-16be").decode(data);
+    // UTF-16-BE
+    case 13:
+      return new RichImageData(data, "image/jpeg");
+    case 14:
+      return new RichImageData(data, "image/png");
+    case 27:
+      return new RichImageData(data, "image/bmp");
+    default:
+      return data;
+  }
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class IsobmffDemuxer extends Demuxer {
+  constructor(input) {
+    super(input);
+    this.moovSlice = null;
+    this.currentTrack = null;
+    this.tracks = [];
+    this.metadataPromise = null;
+    this.movieTimescale = -1;
+    this.movieDurationInTimescale = -1;
+    this.isQuickTime = false;
+    this.metadataTags = {};
+    this.currentMetadataKeys = null;
+    this.isFragmented = false;
+    this.fragmentTrackDefaults = [];
+    this.currentFragment = null;
+    this.lastReadFragment = null;
+    this.reader = input._reader;
+  }
+  async computeDuration() {
+    const tracks = await this.getTracks();
+    const trackDurations = await Promise.all(tracks.map((x) => x.computeDuration()));
+    return Math.max(0, ...trackDurations);
+  }
+  async getTracks() {
+    await this.readMetadata();
+    return this.tracks.map((track) => track.inputTrack);
+  }
+  async getMimeType() {
+    await this.readMetadata();
+    const codecStrings = await Promise.all(this.tracks.map((x) => x.inputTrack.getCodecParameterString()));
+    return buildIsobmffMimeType({
+      isQuickTime: this.isQuickTime,
+      hasVideo: this.tracks.some((x) => x.info?.type === "video"),
+      hasAudio: this.tracks.some((x) => x.info?.type === "audio"),
+      codecStrings: codecStrings.filter(Boolean)
+    });
+  }
+  async getMetadataTags() {
+    await this.readMetadata();
+    return this.metadataTags;
+  }
+  readMetadata() {
+    return this.metadataPromise ?? (this.metadataPromise = (async () => {
+      let currentPos = 0;
+      while (true) {
+        let slice = this.reader.requestSliceRange(currentPos, MIN_BOX_HEADER_SIZE, MAX_BOX_HEADER_SIZE);
+        if (slice instanceof Promise)
+          slice = await slice;
+        if (!slice)
+          break;
+        const startPos = currentPos;
+        const boxInfo = readBoxHeader(slice);
+        if (!boxInfo) {
+          break;
+        }
+        if (boxInfo.name === "ftyp") {
+          const majorBrand = readAscii(slice, 4);
+          this.isQuickTime = majorBrand === "qt  ";
+        } else if (boxInfo.name === "moov") {
+          let moovSlice = this.reader.requestSlice(slice.filePos, boxInfo.contentSize);
+          if (moovSlice instanceof Promise)
+            moovSlice = await moovSlice;
+          if (!moovSlice)
+            break;
+          this.moovSlice = moovSlice;
+          this.readContiguousBoxes(this.moovSlice);
+          this.tracks.sort((a, b) => Number(b.disposition.default) - Number(a.disposition.default));
+          for (const track of this.tracks) {
+            const previousSegmentDurationsInSeconds = track.editListPreviousSegmentDurations / this.movieTimescale;
+            track.editListOffset -= Math.round(previousSegmentDurationsInSeconds * track.timescale);
+          }
+          break;
+        }
+        currentPos = startPos + boxInfo.totalSize;
+      }
+      if (this.isFragmented && this.reader.fileSize !== null) {
+        let lastWordSlice = this.reader.requestSlice(this.reader.fileSize - 4, 4);
+        if (lastWordSlice instanceof Promise)
+          lastWordSlice = await lastWordSlice;
+        assert(lastWordSlice);
+        const lastWord = readU32Be(lastWordSlice);
+        const potentialMfraPos = this.reader.fileSize - lastWord;
+        if (potentialMfraPos >= 0 && potentialMfraPos <= this.reader.fileSize - MAX_BOX_HEADER_SIZE) {
+          let mfraHeaderSlice = this.reader.requestSliceRange(potentialMfraPos, MIN_BOX_HEADER_SIZE, MAX_BOX_HEADER_SIZE);
+          if (mfraHeaderSlice instanceof Promise)
+            mfraHeaderSlice = await mfraHeaderSlice;
+          if (mfraHeaderSlice) {
+            const boxInfo = readBoxHeader(mfraHeaderSlice);
+            if (boxInfo && boxInfo.name === "mfra") {
+              let mfraSlice = this.reader.requestSlice(mfraHeaderSlice.filePos, boxInfo.contentSize);
+              if (mfraSlice instanceof Promise)
+                mfraSlice = await mfraSlice;
+              if (mfraSlice) {
+                this.readContiguousBoxes(mfraSlice);
+              }
+            }
+          }
+        }
+      }
+    })());
+  }
+  getSampleTableForTrack(internalTrack) {
+    if (internalTrack.sampleTable) {
+      return internalTrack.sampleTable;
+    }
+    const sampleTable = {
+      sampleTimingEntries: [],
+      sampleCompositionTimeOffsets: [],
+      sampleSizes: [],
+      keySampleIndices: null,
+      chunkOffsets: [],
+      sampleToChunk: [],
+      presentationTimestamps: null,
+      presentationTimestampIndexMap: null
+    };
+    internalTrack.sampleTable = sampleTable;
+    assert(this.moovSlice);
+    const stblContainerSlice = this.moovSlice.slice(internalTrack.sampleTableByteOffset);
+    this.currentTrack = internalTrack;
+    this.traverseBox(stblContainerSlice);
+    this.currentTrack = null;
+    const isPcmCodec = internalTrack.info?.type === "audio" && internalTrack.info.codec && PCM_AUDIO_CODECS.includes(internalTrack.info.codec);
+    if (isPcmCodec && sampleTable.sampleCompositionTimeOffsets.length === 0) {
+      assert(internalTrack.info?.type === "audio");
+      const pcmInfo = parsePcmCodec(internalTrack.info.codec);
+      const newSampleTimingEntries = [];
+      const newSampleSizes = [];
+      for (let i = 0; i < sampleTable.sampleToChunk.length; i++) {
+        const chunkEntry = sampleTable.sampleToChunk[i];
+        const nextEntry = sampleTable.sampleToChunk[i + 1];
+        const chunkCount = (nextEntry ? nextEntry.startChunkIndex : sampleTable.chunkOffsets.length) - chunkEntry.startChunkIndex;
+        for (let j = 0; j < chunkCount; j++) {
+          const startSampleIndex = chunkEntry.startSampleIndex + j * chunkEntry.samplesPerChunk;
+          const endSampleIndex = startSampleIndex + chunkEntry.samplesPerChunk;
+          const startTimingEntryIndex = binarySearchLessOrEqual(sampleTable.sampleTimingEntries, startSampleIndex, (x) => x.startIndex);
+          const startTimingEntry = sampleTable.sampleTimingEntries[startTimingEntryIndex];
+          const endTimingEntryIndex = binarySearchLessOrEqual(sampleTable.sampleTimingEntries, endSampleIndex, (x) => x.startIndex);
+          const endTimingEntry = sampleTable.sampleTimingEntries[endTimingEntryIndex];
+          const firstSampleTimestamp = startTimingEntry.startDecodeTimestamp + (startSampleIndex - startTimingEntry.startIndex) * startTimingEntry.delta;
+          const lastSampleTimestamp = endTimingEntry.startDecodeTimestamp + (endSampleIndex - endTimingEntry.startIndex) * endTimingEntry.delta;
+          const delta = lastSampleTimestamp - firstSampleTimestamp;
+          const lastSampleTimingEntry = last(newSampleTimingEntries);
+          if (lastSampleTimingEntry && lastSampleTimingEntry.delta === delta) {
+            lastSampleTimingEntry.count++;
+          } else {
+            newSampleTimingEntries.push({
+              startIndex: chunkEntry.startChunkIndex + j,
+              startDecodeTimestamp: firstSampleTimestamp,
+              count: 1,
+              delta
+            });
+          }
+          const chunkSize = chunkEntry.samplesPerChunk * pcmInfo.sampleSize * internalTrack.info.numberOfChannels;
+          newSampleSizes.push(chunkSize);
+        }
+        chunkEntry.startSampleIndex = chunkEntry.startChunkIndex;
+        chunkEntry.samplesPerChunk = 1;
+      }
+      sampleTable.sampleTimingEntries = newSampleTimingEntries;
+      sampleTable.sampleSizes = newSampleSizes;
+    }
+    if (sampleTable.sampleCompositionTimeOffsets.length > 0) {
+      sampleTable.presentationTimestamps = [];
+      for (const entry of sampleTable.sampleTimingEntries) {
+        for (let i = 0; i < entry.count; i++) {
+          sampleTable.presentationTimestamps.push({
+            presentationTimestamp: entry.startDecodeTimestamp + i * entry.delta,
+            sampleIndex: entry.startIndex + i
+          });
+        }
+      }
+      for (const entry of sampleTable.sampleCompositionTimeOffsets) {
+        for (let i = 0; i < entry.count; i++) {
+          const sampleIndex = entry.startIndex + i;
+          const sample = sampleTable.presentationTimestamps[sampleIndex];
+          if (!sample) {
+            continue;
+          }
+          sample.presentationTimestamp += entry.offset;
+        }
+      }
+      sampleTable.presentationTimestamps.sort((a, b) => a.presentationTimestamp - b.presentationTimestamp);
+      sampleTable.presentationTimestampIndexMap = Array(sampleTable.presentationTimestamps.length).fill(-1);
+      for (let i = 0; i < sampleTable.presentationTimestamps.length; i++) {
+        sampleTable.presentationTimestampIndexMap[sampleTable.presentationTimestamps[i].sampleIndex] = i;
+      }
+    }
+    return sampleTable;
+  }
+  async readFragment(startPos) {
+    if (this.lastReadFragment?.moofOffset === startPos) {
+      return this.lastReadFragment;
+    }
+    let headerSlice = this.reader.requestSliceRange(startPos, MIN_BOX_HEADER_SIZE, MAX_BOX_HEADER_SIZE);
+    if (headerSlice instanceof Promise)
+      headerSlice = await headerSlice;
+    assert(headerSlice);
+    const moofBoxInfo = readBoxHeader(headerSlice);
+    assert(moofBoxInfo?.name === "moof");
+    let entireSlice = this.reader.requestSlice(startPos, moofBoxInfo.totalSize);
+    if (entireSlice instanceof Promise)
+      entireSlice = await entireSlice;
+    assert(entireSlice);
+    this.traverseBox(entireSlice);
+    const fragment = this.lastReadFragment;
+    assert(fragment && fragment.moofOffset === startPos);
+    for (const [, trackData] of fragment.trackData) {
+      const track = trackData.track;
+      const { fragmentPositionCache } = track;
+      if (!trackData.startTimestampIsFinal) {
+        const lookupEntry = track.fragmentLookupTable.find((x) => x.moofOffset === fragment.moofOffset);
+        if (lookupEntry) {
+          offsetFragmentTrackDataByTimestamp(trackData, lookupEntry.timestamp);
+        } else {
+          const lastCacheIndex = binarySearchLessOrEqual(fragmentPositionCache, fragment.moofOffset - 1, (x) => x.moofOffset);
+          if (lastCacheIndex !== -1) {
+            const lastCache = fragmentPositionCache[lastCacheIndex];
+            offsetFragmentTrackDataByTimestamp(trackData, lastCache.endTimestamp);
+          }
+        }
+        trackData.startTimestampIsFinal = true;
+      }
+      const insertionIndex = binarySearchLessOrEqual(fragmentPositionCache, trackData.startTimestamp, (x) => x.startTimestamp);
+      if (insertionIndex === -1 || fragmentPositionCache[insertionIndex].moofOffset !== fragment.moofOffset) {
+        fragmentPositionCache.splice(insertionIndex + 1, 0, {
+          moofOffset: fragment.moofOffset,
+          startTimestamp: trackData.startTimestamp,
+          endTimestamp: trackData.endTimestamp
+        });
+      }
+    }
+    return fragment;
+  }
+  readContiguousBoxes(slice) {
+    const startIndex = slice.filePos;
+    while (slice.filePos - startIndex <= slice.length - MIN_BOX_HEADER_SIZE) {
+      const foundBox = this.traverseBox(slice);
+      if (!foundBox) {
+        break;
+      }
+    }
+  }
+  // eslint-disable-next-line @stylistic/generator-star-spacing
+  *iterateContiguousBoxes(slice) {
+    const startIndex = slice.filePos;
+    while (slice.filePos - startIndex <= slice.length - MIN_BOX_HEADER_SIZE) {
+      const startPos = slice.filePos;
+      const boxInfo = readBoxHeader(slice);
+      if (!boxInfo) {
+        break;
+      }
+      yield { boxInfo, slice };
+      slice.filePos = startPos + boxInfo.totalSize;
+    }
+  }
+  traverseBox(slice) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B, _C, _D, _E, _F, _G;
+    const startPos = slice.filePos;
+    const boxInfo = readBoxHeader(slice);
+    if (!boxInfo) {
+      return false;
+    }
+    const contentStartPos = slice.filePos;
+    const boxEndPos = startPos + boxInfo.totalSize;
+    switch (boxInfo.name) {
+      case "mdia":
+      case "minf":
+      case "dinf":
+      case "mfra":
+      case "edts":
+        {
+          this.readContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+        }
+        break;
+      case "mvhd":
+        {
+          const version = readU8(slice);
+          slice.skip(3);
+          if (version === 1) {
+            slice.skip(8 + 8);
+            this.movieTimescale = readU32Be(slice);
+            this.movieDurationInTimescale = readU64Be(slice);
+          } else {
+            slice.skip(4 + 4);
+            this.movieTimescale = readU32Be(slice);
+            this.movieDurationInTimescale = readU32Be(slice);
+          }
+        }
+        break;
+      case "trak":
+        {
+          const track = {
+            id: -1,
+            demuxer: this,
+            inputTrack: null,
+            disposition: {
+              ...DEFAULT_TRACK_DISPOSITION
+            },
+            info: null,
+            timescale: -1,
+            durationInMovieTimescale: -1,
+            durationInMediaTimescale: -1,
+            rotation: 0,
+            internalCodecId: null,
+            name: null,
+            languageCode: UNDETERMINED_LANGUAGE,
+            sampleTableByteOffset: -1,
+            sampleTable: null,
+            fragmentLookupTable: [],
+            currentFragmentState: null,
+            fragmentPositionCache: [],
+            editListPreviousSegmentDurations: 0,
+            editListOffset: 0
+          };
+          this.currentTrack = track;
+          this.readContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+          if (track.id !== -1 && track.timescale !== -1 && track.info !== null) {
+            if (track.info.type === "video" && track.info.width !== -1) {
+              const videoTrack = track;
+              track.inputTrack = new InputVideoTrack(this.input, new IsobmffVideoTrackBacking(videoTrack));
+              this.tracks.push(track);
+            } else if (track.info.type === "audio" && track.info.numberOfChannels !== -1) {
+              const audioTrack = track;
+              track.inputTrack = new InputAudioTrack(this.input, new IsobmffAudioTrackBacking(audioTrack));
+              this.tracks.push(track);
+            }
+          }
+          this.currentTrack = null;
+        }
+        break;
+      case "tkhd":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          const version = readU8(slice);
+          const flags = readU24Be(slice);
+          const trackEnabled = !!(flags & 1);
+          track.disposition.default = trackEnabled;
+          if (version === 0) {
+            slice.skip(8);
+            track.id = readU32Be(slice);
+            slice.skip(4);
+            track.durationInMovieTimescale = readU32Be(slice);
+          } else if (version === 1) {
+            slice.skip(16);
+            track.id = readU32Be(slice);
+            slice.skip(4);
+            track.durationInMovieTimescale = readU64Be(slice);
+          } else {
+            throw new Error(`Incorrect track header version ${version}.`);
+          }
+          slice.skip(2 * 4 + 2 + 2 + 2 + 2);
+          const matrix = [
+            readFixed_16_16(slice),
+            readFixed_16_16(slice),
+            readFixed_2_30(slice),
+            readFixed_16_16(slice),
+            readFixed_16_16(slice),
+            readFixed_2_30(slice),
+            readFixed_16_16(slice),
+            readFixed_16_16(slice),
+            readFixed_2_30(slice)
+          ];
+          const rotation = normalizeRotation(roundToMultiple(extractRotationFromMatrix(matrix), 90));
+          assert(rotation === 0 || rotation === 90 || rotation === 180 || rotation === 270);
+          track.rotation = rotation;
+        }
+        break;
+      case "elst":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          const version = readU8(slice);
+          slice.skip(3);
+          let relevantEntryFound = false;
+          let previousSegmentDurations = 0;
+          const entryCount = readU32Be(slice);
+          for (let i = 0; i < entryCount; i++) {
+            const segmentDuration = version === 1 ? readU64Be(slice) : readU32Be(slice);
+            const mediaTime = version === 1 ? readI64Be(slice) : readI32Be(slice);
+            const mediaRate = readFixed_16_16(slice);
+            if (segmentDuration === 0) {
+              continue;
+            }
+            if (relevantEntryFound) {
+              console.warn("Unsupported edit list: multiple edits are not currently supported. Only using first edit.");
+              break;
+            }
+            if (mediaTime === -1) {
+              previousSegmentDurations += segmentDuration;
+              continue;
+            }
+            if (mediaRate !== 1) {
+              console.warn("Unsupported edit list entry: media rate must be 1.");
+              break;
+            }
+            track.editListPreviousSegmentDurations = previousSegmentDurations;
+            track.editListOffset = mediaTime;
+            relevantEntryFound = true;
+          }
+        }
+        break;
+      case "mdhd":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          const version = readU8(slice);
+          slice.skip(3);
+          if (version === 0) {
+            slice.skip(8);
+            track.timescale = readU32Be(slice);
+            track.durationInMediaTimescale = readU32Be(slice);
+          } else if (version === 1) {
+            slice.skip(16);
+            track.timescale = readU32Be(slice);
+            track.durationInMediaTimescale = readU64Be(slice);
+          }
+          let language = readU16Be(slice);
+          if (language > 0) {
+            track.languageCode = "";
+            for (let i = 0; i < 3; i++) {
+              track.languageCode = String.fromCharCode(96 + (language & 31)) + track.languageCode;
+              language >>= 5;
+            }
+            if (!isIso639Dash2LanguageCode(track.languageCode)) {
+              track.languageCode = UNDETERMINED_LANGUAGE;
+            }
+          }
+        }
+        break;
+      case "hdlr":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          slice.skip(8);
+          const handlerType = readAscii(slice, 4);
+          if (handlerType === "vide") {
+            track.info = {
+              type: "video",
+              width: -1,
+              height: -1,
+              codec: null,
+              codecDescription: null,
+              colorSpace: null,
+              avcType: null,
+              avcCodecInfo: null,
+              hevcCodecInfo: null,
+              vp9CodecInfo: null,
+              av1CodecInfo: null
+            };
+          } else if (handlerType === "soun") {
+            track.info = {
+              type: "audio",
+              numberOfChannels: -1,
+              sampleRate: -1,
+              codec: null,
+              codecDescription: null,
+              aacCodecInfo: null
+            };
+          }
+        }
+        break;
+      case "stbl":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          track.sampleTableByteOffset = startPos;
+          this.readContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+        }
+        break;
+      case "stsd":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          if (track.info === null || track.sampleTable) {
+            break;
+          }
+          const stsdVersion = readU8(slice);
+          slice.skip(3);
+          const entries = readU32Be(slice);
+          for (let i = 0; i < entries; i++) {
+            const sampleBoxStartPos = slice.filePos;
+            const sampleBoxInfo = readBoxHeader(slice);
+            if (!sampleBoxInfo) {
+              break;
+            }
+            track.internalCodecId = sampleBoxInfo.name;
+            const lowercaseBoxName = sampleBoxInfo.name.toLowerCase();
+            if (track.info.type === "video") {
+              if (lowercaseBoxName === "avc1" || lowercaseBoxName === "avc3") {
+                track.info.codec = "avc";
+                track.info.avcType = lowercaseBoxName === "avc1" ? 1 : 3;
+              } else if (lowercaseBoxName === "hvc1" || lowercaseBoxName === "hev1") {
+                track.info.codec = "hevc";
+              } else if (lowercaseBoxName === "vp08") {
+                track.info.codec = "vp8";
+              } else if (lowercaseBoxName === "vp09") {
+                track.info.codec = "vp9";
+              } else if (lowercaseBoxName === "av01") {
+                track.info.codec = "av1";
+              } else {
+                console.warn(`Unsupported video codec (sample entry type '${sampleBoxInfo.name}').`);
+              }
+              slice.skip(6 * 1 + 2 + 2 + 2 + 3 * 4);
+              track.info.width = readU16Be(slice);
+              track.info.height = readU16Be(slice);
+              slice.skip(4 + 4 + 4 + 2 + 32 + 2 + 2);
+              this.readContiguousBoxes(slice.slice(slice.filePos, sampleBoxStartPos + sampleBoxInfo.totalSize - slice.filePos));
+            } else {
+              if (lowercaseBoxName === "mp4a") ;
+              else if (lowercaseBoxName === "opus") {
+                track.info.codec = "opus";
+              } else if (lowercaseBoxName === "flac") {
+                track.info.codec = "flac";
+              } else if (lowercaseBoxName === "twos" || lowercaseBoxName === "sowt" || lowercaseBoxName === "raw " || lowercaseBoxName === "in24" || lowercaseBoxName === "in32" || lowercaseBoxName === "fl32" || lowercaseBoxName === "fl64" || lowercaseBoxName === "lpcm" || lowercaseBoxName === "ipcm" || lowercaseBoxName === "fpcm") ;
+              else if (lowercaseBoxName === "ulaw") {
+                track.info.codec = "ulaw";
+              } else if (lowercaseBoxName === "alaw") {
+                track.info.codec = "alaw";
+              } else {
+                console.warn(`Unsupported audio codec (sample entry type '${sampleBoxInfo.name}').`);
+              }
+              slice.skip(6 * 1 + 2);
+              const version = readU16Be(slice);
+              slice.skip(3 * 2);
+              let channelCount = readU16Be(slice);
+              let sampleSize = readU16Be(slice);
+              slice.skip(2 * 2);
+              let sampleRate = readU32Be(slice) / 65536;
+              if (stsdVersion === 0 && version > 0) {
+                if (version === 1) {
+                  slice.skip(4);
+                  sampleSize = 8 * readU32Be(slice);
+                  slice.skip(2 * 4);
+                } else if (version === 2) {
+                  slice.skip(4);
+                  sampleRate = readF64Be(slice);
+                  channelCount = readU32Be(slice);
+                  slice.skip(4);
+                  sampleSize = readU32Be(slice);
+                  const flags = readU32Be(slice);
+                  slice.skip(2 * 4);
+                  if (lowercaseBoxName === "lpcm") {
+                    const bytesPerSample = sampleSize + 7 >> 3;
+                    const isFloat = Boolean(flags & 1);
+                    const isBigEndian = Boolean(flags & 2);
+                    const sFlags = flags & 4 ? -1 : 0;
+                    if (sampleSize > 0 && sampleSize <= 64) {
+                      if (isFloat) {
+                        if (sampleSize === 32) {
+                          track.info.codec = isBigEndian ? "pcm-f32be" : "pcm-f32";
+                        }
+                      } else {
+                        if (sFlags & 1 << bytesPerSample - 1) {
+                          if (bytesPerSample === 1) {
+                            track.info.codec = "pcm-s8";
+                          } else if (bytesPerSample === 2) {
+                            track.info.codec = isBigEndian ? "pcm-s16be" : "pcm-s16";
+                          } else if (bytesPerSample === 3) {
+                            track.info.codec = isBigEndian ? "pcm-s24be" : "pcm-s24";
+                          } else if (bytesPerSample === 4) {
+                            track.info.codec = isBigEndian ? "pcm-s32be" : "pcm-s32";
+                          }
+                        } else {
+                          if (bytesPerSample === 1) {
+                            track.info.codec = "pcm-u8";
+                          }
+                        }
+                      }
+                    }
+                    if (track.info.codec === null) {
+                      console.warn("Unsupported PCM format.");
+                    }
+                  }
+                }
+              }
+              if (track.info.codec === "opus") {
+                sampleRate = OPUS_SAMPLE_RATE;
+              }
+              track.info.numberOfChannels = channelCount;
+              track.info.sampleRate = sampleRate;
+              if (lowercaseBoxName === "twos") {
+                if (sampleSize === 8) {
+                  track.info.codec = "pcm-s8";
+                } else if (sampleSize === 16) {
+                  track.info.codec = "pcm-s16be";
+                } else {
+                  console.warn(`Unsupported sample size ${sampleSize} for codec 'twos'.`);
+                  track.info.codec = null;
+                }
+              } else if (lowercaseBoxName === "sowt") {
+                if (sampleSize === 8) {
+                  track.info.codec = "pcm-s8";
+                } else if (sampleSize === 16) {
+                  track.info.codec = "pcm-s16";
+                } else {
+                  console.warn(`Unsupported sample size ${sampleSize} for codec 'sowt'.`);
+                  track.info.codec = null;
+                }
+              } else if (lowercaseBoxName === "raw ") {
+                track.info.codec = "pcm-u8";
+              } else if (lowercaseBoxName === "in24") {
+                track.info.codec = "pcm-s24be";
+              } else if (lowercaseBoxName === "in32") {
+                track.info.codec = "pcm-s32be";
+              } else if (lowercaseBoxName === "fl32") {
+                track.info.codec = "pcm-f32be";
+              } else if (lowercaseBoxName === "fl64") {
+                track.info.codec = "pcm-f64be";
+              } else if (lowercaseBoxName === "ipcm") {
+                track.info.codec = "pcm-s16be";
+              } else if (lowercaseBoxName === "fpcm") {
+                track.info.codec = "pcm-f32be";
+              }
+              this.readContiguousBoxes(slice.slice(slice.filePos, sampleBoxStartPos + sampleBoxInfo.totalSize - slice.filePos));
+            }
+          }
+        }
+        break;
+      case "avcC":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info);
+          track.info.codecDescription = readBytes(slice, boxInfo.contentSize);
+        }
+        break;
+      case "hvcC":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info);
+          track.info.codecDescription = readBytes(slice, boxInfo.contentSize);
+        }
+        break;
+      case "vpcC":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "video");
+          slice.skip(4);
+          const profile = readU8(slice);
+          const level = readU8(slice);
+          const thirdByte = readU8(slice);
+          const bitDepth = thirdByte >> 4;
+          const chromaSubsampling = thirdByte >> 1 & 7;
+          const videoFullRangeFlag = thirdByte & 1;
+          const colourPrimaries = readU8(slice);
+          const transferCharacteristics = readU8(slice);
+          const matrixCoefficients = readU8(slice);
+          track.info.vp9CodecInfo = {
+            profile,
+            level,
+            bitDepth,
+            chromaSubsampling,
+            videoFullRangeFlag,
+            colourPrimaries,
+            transferCharacteristics,
+            matrixCoefficients
+          };
+        }
+        break;
+      case "av1C":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "video");
+          slice.skip(1);
+          const secondByte = readU8(slice);
+          const profile = secondByte >> 5;
+          const level = secondByte & 31;
+          const thirdByte = readU8(slice);
+          const tier = thirdByte >> 7;
+          const highBitDepth = thirdByte >> 6 & 1;
+          const twelveBit = thirdByte >> 5 & 1;
+          const monochrome = thirdByte >> 4 & 1;
+          const chromaSubsamplingX = thirdByte >> 3 & 1;
+          const chromaSubsamplingY = thirdByte >> 2 & 1;
+          const chromaSamplePosition = thirdByte & 3;
+          const bitDepth = profile === 2 && highBitDepth ? twelveBit ? 12 : 10 : highBitDepth ? 10 : 8;
+          track.info.av1CodecInfo = {
+            profile,
+            level,
+            tier,
+            bitDepth,
+            monochrome,
+            chromaSubsamplingX,
+            chromaSubsamplingY,
+            chromaSamplePosition
+          };
+        }
+        break;
+      case "colr":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "video");
+          const colourType = readAscii(slice, 4);
+          if (colourType !== "nclx") {
+            break;
+          }
+          const colourPrimaries = readU16Be(slice);
+          const transferCharacteristics = readU16Be(slice);
+          const matrixCoefficients = readU16Be(slice);
+          const fullRangeFlag = Boolean(readU8(slice) & 128);
+          track.info.colorSpace = {
+            primaries: COLOR_PRIMARIES_MAP_INVERSE[colourPrimaries],
+            transfer: TRANSFER_CHARACTERISTICS_MAP_INVERSE[transferCharacteristics],
+            matrix: MATRIX_COEFFICIENTS_MAP_INVERSE[matrixCoefficients],
+            fullRange: fullRangeFlag
+          };
+        }
+        break;
+      case "wave":
+        {
+          this.readContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+        }
+        break;
+      case "esds":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "audio");
+          slice.skip(4);
+          const tag = readU8(slice);
+          assert(tag === 3);
+          readIsomVariableInteger(slice);
+          slice.skip(2);
+          const mixed = readU8(slice);
+          const streamDependenceFlag = (mixed & 128) !== 0;
+          const urlFlag = (mixed & 64) !== 0;
+          const ocrStreamFlag = (mixed & 32) !== 0;
+          if (streamDependenceFlag) {
+            slice.skip(2);
+          }
+          if (urlFlag) {
+            const urlLength = readU8(slice);
+            slice.skip(urlLength);
+          }
+          if (ocrStreamFlag) {
+            slice.skip(2);
+          }
+          const decoderConfigTag = readU8(slice);
+          assert(decoderConfigTag === 4);
+          const decoderConfigDescriptorLength = readIsomVariableInteger(slice);
+          const payloadStart = slice.filePos;
+          const objectTypeIndication = readU8(slice);
+          if (objectTypeIndication === 64 || objectTypeIndication === 103) {
+            track.info.codec = "aac";
+            track.info.aacCodecInfo = { isMpeg2: objectTypeIndication === 103 };
+          } else if (objectTypeIndication === 105 || objectTypeIndication === 107) {
+            track.info.codec = "mp3";
+          } else if (objectTypeIndication === 221) {
+            track.info.codec = "vorbis";
+          } else {
+            console.warn(`Unsupported audio codec (objectTypeIndication ${objectTypeIndication}) - discarding track.`);
+          }
+          slice.skip(1 + 3 + 4 + 4);
+          if (decoderConfigDescriptorLength > slice.filePos - payloadStart) {
+            const decoderSpecificInfoTag = readU8(slice);
+            assert(decoderSpecificInfoTag === 5);
+            const decoderSpecificInfoLength = readIsomVariableInteger(slice);
+            track.info.codecDescription = readBytes(slice, decoderSpecificInfoLength);
+            if (track.info.codec === "aac") {
+              const audioSpecificConfig = parseAacAudioSpecificConfig(track.info.codecDescription);
+              if (audioSpecificConfig.numberOfChannels !== null) {
+                track.info.numberOfChannels = audioSpecificConfig.numberOfChannels;
+              }
+              if (audioSpecificConfig.sampleRate !== null) {
+                track.info.sampleRate = audioSpecificConfig.sampleRate;
+              }
+            }
+          }
+        }
+        break;
+      case "enda":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "audio");
+          const littleEndian = readU16Be(slice) & 255;
+          if (littleEndian) {
+            if (track.info.codec === "pcm-s16be") {
+              track.info.codec = "pcm-s16";
+            } else if (track.info.codec === "pcm-s24be") {
+              track.info.codec = "pcm-s24";
+            } else if (track.info.codec === "pcm-s32be") {
+              track.info.codec = "pcm-s32";
+            } else if (track.info.codec === "pcm-f32be") {
+              track.info.codec = "pcm-f32";
+            } else if (track.info.codec === "pcm-f64be") {
+              track.info.codec = "pcm-f64";
+            }
+          }
+        }
+        break;
+      case "pcmC": {
+        const track = this.currentTrack;
+        if (!track) {
+          break;
+        }
+        assert(track.info?.type === "audio");
+        slice.skip(1 + 3);
+        const formatFlags = readU8(slice);
+        const isLittleEndian = Boolean(formatFlags & 1);
+        const pcmSampleSize = readU8(slice);
+        if (track.info.codec === "pcm-s16be") {
+          if (isLittleEndian) {
+            if (pcmSampleSize === 16) {
+              track.info.codec = "pcm-s16";
+            } else if (pcmSampleSize === 24) {
+              track.info.codec = "pcm-s24";
+            } else if (pcmSampleSize === 32) {
+              track.info.codec = "pcm-s32";
+            } else {
+              console.warn(`Invalid ipcm sample size ${pcmSampleSize}.`);
+              track.info.codec = null;
+            }
+          } else {
+            if (pcmSampleSize === 16) {
+              track.info.codec = "pcm-s16be";
+            } else if (pcmSampleSize === 24) {
+              track.info.codec = "pcm-s24be";
+            } else if (pcmSampleSize === 32) {
+              track.info.codec = "pcm-s32be";
+            } else {
+              console.warn(`Invalid ipcm sample size ${pcmSampleSize}.`);
+              track.info.codec = null;
+            }
+          }
+        } else if (track.info.codec === "pcm-f32be") {
+          if (isLittleEndian) {
+            if (pcmSampleSize === 32) {
+              track.info.codec = "pcm-f32";
+            } else if (pcmSampleSize === 64) {
+              track.info.codec = "pcm-f64";
+            } else {
+              console.warn(`Invalid fpcm sample size ${pcmSampleSize}.`);
+              track.info.codec = null;
+            }
+          } else {
+            if (pcmSampleSize === 32) {
+              track.info.codec = "pcm-f32be";
+            } else if (pcmSampleSize === 64) {
+              track.info.codec = "pcm-f64be";
+            } else {
+              console.warn(`Invalid fpcm sample size ${pcmSampleSize}.`);
+              track.info.codec = null;
+            }
+          }
+        }
+        break;
+      }
+      case "dOps":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "audio");
+          slice.skip(1);
+          const outputChannelCount = readU8(slice);
+          const preSkip = readU16Be(slice);
+          const inputSampleRate = readU32Be(slice);
+          const outputGain = readI16Be(slice);
+          const channelMappingFamily = readU8(slice);
+          let channelMappingTable;
+          if (channelMappingFamily !== 0) {
+            channelMappingTable = readBytes(slice, 2 + outputChannelCount);
+          } else {
+            channelMappingTable = new Uint8Array(0);
+          }
+          const description = new Uint8Array(8 + 1 + 1 + 2 + 4 + 2 + 1 + channelMappingTable.byteLength);
+          const view = new DataView(description.buffer);
+          view.setUint32(0, 1332770163, false);
+          view.setUint32(4, 1214603620, false);
+          view.setUint8(8, 1);
+          view.setUint8(9, outputChannelCount);
+          view.setUint16(10, preSkip, true);
+          view.setUint32(12, inputSampleRate, true);
+          view.setInt16(16, outputGain, true);
+          view.setUint8(18, channelMappingFamily);
+          description.set(channelMappingTable, 19);
+          track.info.codecDescription = description;
+          track.info.numberOfChannels = outputChannelCount;
+        }
+        break;
+      case "dfLa":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.info?.type === "audio");
+          slice.skip(4);
+          const BLOCK_TYPE_MASK = 127;
+          const LAST_METADATA_BLOCK_FLAG_MASK = 128;
+          const startPos2 = slice.filePos;
+          while (slice.filePos < boxEndPos) {
+            const flagAndType = readU8(slice);
+            const metadataBlockLength = readU24Be(slice);
+            const type = flagAndType & BLOCK_TYPE_MASK;
+            if (type === FlacBlockType.STREAMINFO) {
+              slice.skip(10);
+              const word = readU32Be(slice);
+              const sampleRate = word >>> 12;
+              const numberOfChannels = (word >> 9 & 7) + 1;
+              track.info.sampleRate = sampleRate;
+              track.info.numberOfChannels = numberOfChannels;
+              slice.skip(20);
+            } else {
+              slice.skip(metadataBlockLength);
+            }
+            if (flagAndType & LAST_METADATA_BLOCK_FLAG_MASK) {
+              break;
+            }
+          }
+          const endPos = slice.filePos;
+          slice.filePos = startPos2;
+          const bytes = readBytes(slice, endPos - startPos2);
+          const description = new Uint8Array(4 + bytes.byteLength);
+          const view = new DataView(description.buffer);
+          view.setUint32(0, 1716281667, false);
+          description.set(bytes, 4);
+          track.info.codecDescription = description;
+        }
+        break;
+      case "stts":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          if (!track.sampleTable) {
+            break;
+          }
+          slice.skip(4);
+          const entryCount = readU32Be(slice);
+          let currentIndex = 0;
+          let currentTimestamp = 0;
+          for (let i = 0; i < entryCount; i++) {
+            const sampleCount = readU32Be(slice);
+            const sampleDelta = readU32Be(slice);
+            track.sampleTable.sampleTimingEntries.push({
+              startIndex: currentIndex,
+              startDecodeTimestamp: currentTimestamp,
+              count: sampleCount,
+              delta: sampleDelta
+            });
+            currentIndex += sampleCount;
+            currentTimestamp += sampleCount * sampleDelta;
+          }
+        }
+        break;
+      case "ctts":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          if (!track.sampleTable) {
+            break;
+          }
+          slice.skip(1 + 3);
+          const entryCount = readU32Be(slice);
+          let sampleIndex = 0;
+          for (let i = 0; i < entryCount; i++) {
+            const sampleCount = readU32Be(slice);
+            const sampleOffset = readI32Be(slice);
+            track.sampleTable.sampleCompositionTimeOffsets.push({
+              startIndex: sampleIndex,
+              count: sampleCount,
+              offset: sampleOffset
+            });
+            sampleIndex += sampleCount;
+          }
+        }
+        break;
+      case "stsz":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          if (!track.sampleTable) {
+            break;
+          }
+          slice.skip(4);
+          const sampleSize = readU32Be(slice);
+          const sampleCount = readU32Be(slice);
+          if (sampleSize === 0) {
+            for (let i = 0; i < sampleCount; i++) {
+              const sampleSize2 = readU32Be(slice);
+              track.sampleTable.sampleSizes.push(sampleSize2);
+            }
+          } else {
+            track.sampleTable.sampleSizes.push(sampleSize);
+          }
+        }
+        break;
+      case "stz2":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          if (!track.sampleTable) {
+            break;
+          }
+          slice.skip(4);
+          slice.skip(3);
+          const fieldSize = readU8(slice);
+          const sampleCount = readU32Be(slice);
+          const bytes = readBytes(slice, Math.ceil(sampleCount * fieldSize / 8));
+          const bitstream = new Bitstream(bytes);
+          for (let i = 0; i < sampleCount; i++) {
+            const sampleSize = bitstream.readBits(fieldSize);
+            track.sampleTable.sampleSizes.push(sampleSize);
+          }
+        }
+        break;
+      case "stss":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          if (!track.sampleTable) {
+            break;
+          }
+          slice.skip(4);
+          track.sampleTable.keySampleIndices = [];
+          const entryCount = readU32Be(slice);
+          for (let i = 0; i < entryCount; i++) {
+            const sampleIndex = readU32Be(slice) - 1;
+            track.sampleTable.keySampleIndices.push(sampleIndex);
+          }
+          if (track.sampleTable.keySampleIndices[0] !== 0) {
+            track.sampleTable.keySampleIndices.unshift(0);
+          }
+        }
+        break;
+      case "stsc":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          if (!track.sampleTable) {
+            break;
+          }
+          slice.skip(4);
+          const entryCount = readU32Be(slice);
+          for (let i = 0; i < entryCount; i++) {
+            const startChunkIndex = readU32Be(slice) - 1;
+            const samplesPerChunk = readU32Be(slice);
+            const sampleDescriptionIndex = readU32Be(slice);
+            track.sampleTable.sampleToChunk.push({
+              startSampleIndex: -1,
+              startChunkIndex,
+              samplesPerChunk,
+              sampleDescriptionIndex
+            });
+          }
+          let startSampleIndex = 0;
+          for (let i = 0; i < track.sampleTable.sampleToChunk.length; i++) {
+            track.sampleTable.sampleToChunk[i].startSampleIndex = startSampleIndex;
+            if (i < track.sampleTable.sampleToChunk.length - 1) {
+              const nextChunk = track.sampleTable.sampleToChunk[i + 1];
+              const chunkCount = nextChunk.startChunkIndex - track.sampleTable.sampleToChunk[i].startChunkIndex;
+              startSampleIndex += chunkCount * track.sampleTable.sampleToChunk[i].samplesPerChunk;
+            }
+          }
+        }
+        break;
+      case "stco":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          if (!track.sampleTable) {
+            break;
+          }
+          slice.skip(4);
+          const entryCount = readU32Be(slice);
+          for (let i = 0; i < entryCount; i++) {
+            const chunkOffset = readU32Be(slice);
+            track.sampleTable.chunkOffsets.push(chunkOffset);
+          }
+        }
+        break;
+      case "co64":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          if (!track.sampleTable) {
+            break;
+          }
+          slice.skip(4);
+          const entryCount = readU32Be(slice);
+          for (let i = 0; i < entryCount; i++) {
+            const chunkOffset = readU64Be(slice);
+            track.sampleTable.chunkOffsets.push(chunkOffset);
+          }
+        }
+        break;
+      case "mvex":
+        {
+          this.isFragmented = true;
+          this.readContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+        }
+        break;
+      case "mehd":
+        {
+          const version = readU8(slice);
+          slice.skip(3);
+          const fragmentDuration = version === 1 ? readU64Be(slice) : readU32Be(slice);
+          this.movieDurationInTimescale = fragmentDuration;
+        }
+        break;
+      case "trex":
+        {
+          slice.skip(4);
+          const trackId = readU32Be(slice);
+          const defaultSampleDescriptionIndex = readU32Be(slice);
+          const defaultSampleDuration = readU32Be(slice);
+          const defaultSampleSize = readU32Be(slice);
+          const defaultSampleFlags = readU32Be(slice);
+          this.fragmentTrackDefaults.push({
+            trackId,
+            defaultSampleDescriptionIndex,
+            defaultSampleDuration,
+            defaultSampleSize,
+            defaultSampleFlags
+          });
+        }
+        break;
+      case "tfra":
+        {
+          const version = readU8(slice);
+          slice.skip(3);
+          const trackId = readU32Be(slice);
+          const track = this.tracks.find((x) => x.id === trackId);
+          if (!track) {
+            break;
+          }
+          const word = readU32Be(slice);
+          const lengthSizeOfTrafNum = (word & 48) >> 4;
+          const lengthSizeOfTrunNum = (word & 12) >> 2;
+          const lengthSizeOfSampleNum = word & 3;
+          const functions = [readU8, readU16Be, readU24Be, readU32Be];
+          const readTrafNum = functions[lengthSizeOfTrafNum];
+          const readTrunNum = functions[lengthSizeOfTrunNum];
+          const readSampleNum = functions[lengthSizeOfSampleNum];
+          const numberOfEntries = readU32Be(slice);
+          for (let i = 0; i < numberOfEntries; i++) {
+            const time = version === 1 ? readU64Be(slice) : readU32Be(slice);
+            const moofOffset = version === 1 ? readU64Be(slice) : readU32Be(slice);
+            readTrafNum(slice);
+            readTrunNum(slice);
+            readSampleNum(slice);
+            track.fragmentLookupTable.push({
+              timestamp: time,
+              moofOffset
+            });
+          }
+          track.fragmentLookupTable.sort((a, b) => a.timestamp - b.timestamp);
+          for (let i = 0; i < track.fragmentLookupTable.length - 1; i++) {
+            const entry1 = track.fragmentLookupTable[i];
+            const entry2 = track.fragmentLookupTable[i + 1];
+            if (entry1.timestamp === entry2.timestamp) {
+              track.fragmentLookupTable.splice(i + 1, 1);
+              i--;
+            }
+          }
+        }
+        break;
+      case "moof":
+        {
+          this.currentFragment = {
+            moofOffset: startPos,
+            moofSize: boxInfo.totalSize,
+            implicitBaseDataOffset: startPos,
+            trackData: /* @__PURE__ */ new Map()
+          };
+          this.readContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+          this.lastReadFragment = this.currentFragment;
+          this.currentFragment = null;
+        }
+        break;
+      case "traf":
+        {
+          assert(this.currentFragment);
+          this.readContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+          if (this.currentTrack) {
+            const trackData = this.currentFragment.trackData.get(this.currentTrack.id);
+            if (trackData) {
+              const { currentFragmentState } = this.currentTrack;
+              assert(currentFragmentState);
+              if (currentFragmentState.startTimestamp !== null) {
+                offsetFragmentTrackDataByTimestamp(trackData, currentFragmentState.startTimestamp);
+                trackData.startTimestampIsFinal = true;
+              }
+            }
+            this.currentTrack.currentFragmentState = null;
+            this.currentTrack = null;
+          }
+        }
+        break;
+      case "tfhd":
+        {
+          assert(this.currentFragment);
+          slice.skip(1);
+          const flags = readU24Be(slice);
+          const baseDataOffsetPresent = Boolean(flags & 1);
+          const sampleDescriptionIndexPresent = Boolean(flags & 2);
+          const defaultSampleDurationPresent = Boolean(flags & 8);
+          const defaultSampleSizePresent = Boolean(flags & 16);
+          const defaultSampleFlagsPresent = Boolean(flags & 32);
+          const durationIsEmpty = Boolean(flags & 65536);
+          const defaultBaseIsMoof = Boolean(flags & 131072);
+          const trackId = readU32Be(slice);
+          const track = this.tracks.find((x) => x.id === trackId);
+          if (!track) {
+            break;
+          }
+          const defaults = this.fragmentTrackDefaults.find((x) => x.trackId === trackId);
+          this.currentTrack = track;
+          track.currentFragmentState = {
+            baseDataOffset: this.currentFragment.implicitBaseDataOffset,
+            sampleDescriptionIndex: defaults?.defaultSampleDescriptionIndex ?? null,
+            defaultSampleDuration: defaults?.defaultSampleDuration ?? null,
+            defaultSampleSize: defaults?.defaultSampleSize ?? null,
+            defaultSampleFlags: defaults?.defaultSampleFlags ?? null,
+            startTimestamp: null
+          };
+          if (baseDataOffsetPresent) {
+            track.currentFragmentState.baseDataOffset = readU64Be(slice);
+          } else if (defaultBaseIsMoof) {
+            track.currentFragmentState.baseDataOffset = this.currentFragment.moofOffset;
+          }
+          if (sampleDescriptionIndexPresent) {
+            track.currentFragmentState.sampleDescriptionIndex = readU32Be(slice);
+          }
+          if (defaultSampleDurationPresent) {
+            track.currentFragmentState.defaultSampleDuration = readU32Be(slice);
+          }
+          if (defaultSampleSizePresent) {
+            track.currentFragmentState.defaultSampleSize = readU32Be(slice);
+          }
+          if (defaultSampleFlagsPresent) {
+            track.currentFragmentState.defaultSampleFlags = readU32Be(slice);
+          }
+          if (durationIsEmpty) {
+            track.currentFragmentState.defaultSampleDuration = 0;
+          }
+        }
+        break;
+      case "tfdt":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(track.currentFragmentState);
+          const version = readU8(slice);
+          slice.skip(3);
+          const baseMediaDecodeTime = version === 0 ? readU32Be(slice) : readU64Be(slice);
+          track.currentFragmentState.startTimestamp = baseMediaDecodeTime;
+        }
+        break;
+      case "trun":
+        {
+          const track = this.currentTrack;
+          if (!track) {
+            break;
+          }
+          assert(this.currentFragment);
+          assert(track.currentFragmentState);
+          if (this.currentFragment.trackData.has(track.id)) {
+            console.warn("Can't have two trun boxes for the same track in one fragment. Ignoring...");
+            break;
+          }
+          const version = readU8(slice);
+          const flags = readU24Be(slice);
+          const dataOffsetPresent = Boolean(flags & 1);
+          const firstSampleFlagsPresent = Boolean(flags & 4);
+          const sampleDurationPresent = Boolean(flags & 256);
+          const sampleSizePresent = Boolean(flags & 512);
+          const sampleFlagsPresent = Boolean(flags & 1024);
+          const sampleCompositionTimeOffsetsPresent = Boolean(flags & 2048);
+          const sampleCount = readU32Be(slice);
+          let dataOffset = track.currentFragmentState.baseDataOffset;
+          if (dataOffsetPresent) {
+            dataOffset += readI32Be(slice);
+          }
+          let firstSampleFlags = null;
+          if (firstSampleFlagsPresent) {
+            firstSampleFlags = readU32Be(slice);
+          }
+          let currentOffset = dataOffset;
+          if (sampleCount === 0) {
+            this.currentFragment.implicitBaseDataOffset = currentOffset;
+            break;
+          }
+          let currentTimestamp = 0;
+          const trackData = {
+            track,
+            startTimestamp: 0,
+            endTimestamp: 0,
+            firstKeyFrameTimestamp: null,
+            samples: [],
+            presentationTimestamps: [],
+            startTimestampIsFinal: false
+          };
+          this.currentFragment.trackData.set(track.id, trackData);
+          for (let i = 0; i < sampleCount; i++) {
+            let sampleDuration;
+            if (sampleDurationPresent) {
+              sampleDuration = readU32Be(slice);
+            } else {
+              assert(track.currentFragmentState.defaultSampleDuration !== null);
+              sampleDuration = track.currentFragmentState.defaultSampleDuration;
+            }
+            let sampleSize;
+            if (sampleSizePresent) {
+              sampleSize = readU32Be(slice);
+            } else {
+              assert(track.currentFragmentState.defaultSampleSize !== null);
+              sampleSize = track.currentFragmentState.defaultSampleSize;
+            }
+            let sampleFlags;
+            if (sampleFlagsPresent) {
+              sampleFlags = readU32Be(slice);
+            } else {
+              assert(track.currentFragmentState.defaultSampleFlags !== null);
+              sampleFlags = track.currentFragmentState.defaultSampleFlags;
+            }
+            if (i === 0 && firstSampleFlags !== null) {
+              sampleFlags = firstSampleFlags;
+            }
+            let sampleCompositionTimeOffset = 0;
+            if (sampleCompositionTimeOffsetsPresent) {
+              if (version === 0) {
+                sampleCompositionTimeOffset = readU32Be(slice);
+              } else {
+                sampleCompositionTimeOffset = readI32Be(slice);
+              }
+            }
+            const isKeyFrame = !(sampleFlags & 65536);
+            trackData.samples.push({
+              presentationTimestamp: currentTimestamp + sampleCompositionTimeOffset,
+              duration: sampleDuration,
+              byteOffset: currentOffset,
+              byteSize: sampleSize,
+              isKeyFrame
+            });
+            currentOffset += sampleSize;
+            currentTimestamp += sampleDuration;
+          }
+          trackData.presentationTimestamps = trackData.samples.map((x, i) => ({ presentationTimestamp: x.presentationTimestamp, sampleIndex: i })).sort((a, b) => a.presentationTimestamp - b.presentationTimestamp);
+          for (let i = 0; i < trackData.presentationTimestamps.length; i++) {
+            const currentEntry = trackData.presentationTimestamps[i];
+            const currentSample = trackData.samples[currentEntry.sampleIndex];
+            if (trackData.firstKeyFrameTimestamp === null && currentSample.isKeyFrame) {
+              trackData.firstKeyFrameTimestamp = currentSample.presentationTimestamp;
+            }
+            if (i < trackData.presentationTimestamps.length - 1) {
+              const nextEntry = trackData.presentationTimestamps[i + 1];
+              currentSample.duration = nextEntry.presentationTimestamp - currentEntry.presentationTimestamp;
+            }
+          }
+          const firstSample = trackData.samples[trackData.presentationTimestamps[0].sampleIndex];
+          const lastSample = trackData.samples[last(trackData.presentationTimestamps).sampleIndex];
+          trackData.startTimestamp = firstSample.presentationTimestamp;
+          trackData.endTimestamp = lastSample.presentationTimestamp + lastSample.duration;
+          this.currentFragment.implicitBaseDataOffset = currentOffset;
+        }
+        break;
+      // Metadata section
+      // https://exiftool.org/TagNames/QuickTime.html
+      // https://mp4workshop.com/about
+      case "udta":
+        {
+          const iterator = this.iterateContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+          for (const { boxInfo: boxInfo2, slice: slice2 } of iterator) {
+            if (boxInfo2.name !== "meta" && !this.currentTrack) {
+              const startPos2 = slice2.filePos;
+              (_a = this.metadataTags).raw ?? (_a.raw = {});
+              if (boxInfo2.name[0] === "©") {
+                (_b = this.metadataTags.raw)[_c = boxInfo2.name] ?? (_b[_c] = readMetadataStringShort(slice2));
+              } else {
+                (_d = this.metadataTags.raw)[_e = boxInfo2.name] ?? (_d[_e] = readBytes(slice2, boxInfo2.contentSize));
+              }
+              slice2.filePos = startPos2;
+            }
+            switch (boxInfo2.name) {
+              case "meta":
+                {
+                  slice2.skip(-boxInfo2.headerSize);
+                  this.traverseBox(slice2);
+                }
+                break;
+              case "©nam":
+              case "name":
+                {
+                  if (this.currentTrack) {
+                    this.currentTrack.name = textDecoder.decode(readBytes(slice2, boxInfo2.contentSize));
+                  } else {
+                    (_f = this.metadataTags).title ?? (_f.title = readMetadataStringShort(slice2));
+                  }
+                }
+                break;
+              case "©des":
+                {
+                  if (!this.currentTrack) {
+                    (_g = this.metadataTags).description ?? (_g.description = readMetadataStringShort(slice2));
+                  }
+                }
+                break;
+              case "©ART":
+                {
+                  if (!this.currentTrack) {
+                    (_h = this.metadataTags).artist ?? (_h.artist = readMetadataStringShort(slice2));
+                  }
+                }
+                break;
+              case "©alb":
+                {
+                  if (!this.currentTrack) {
+                    (_i = this.metadataTags).album ?? (_i.album = readMetadataStringShort(slice2));
+                  }
+                }
+                break;
+              case "albr":
+                {
+                  if (!this.currentTrack) {
+                    (_j = this.metadataTags).albumArtist ?? (_j.albumArtist = readMetadataStringShort(slice2));
+                  }
+                }
+                break;
+              case "©gen":
+                {
+                  if (!this.currentTrack) {
+                    (_k = this.metadataTags).genre ?? (_k.genre = readMetadataStringShort(slice2));
+                  }
+                }
+                break;
+              case "©day":
+                {
+                  if (!this.currentTrack) {
+                    const date = new Date(readMetadataStringShort(slice2));
+                    if (!Number.isNaN(date.getTime())) {
+                      (_l = this.metadataTags).date ?? (_l.date = date);
+                    }
+                  }
+                }
+                break;
+              case "©cmt":
+                {
+                  if (!this.currentTrack) {
+                    (_m = this.metadataTags).comment ?? (_m.comment = readMetadataStringShort(slice2));
+                  }
+                }
+                break;
+              case "©lyr":
+                {
+                  if (!this.currentTrack) {
+                    (_n = this.metadataTags).lyrics ?? (_n.lyrics = readMetadataStringShort(slice2));
+                  }
+                }
+                break;
+            }
+          }
+        }
+        break;
+      case "meta":
+        {
+          if (this.currentTrack) {
+            break;
+          }
+          const word = readU32Be(slice);
+          const isQuickTime = word !== 0;
+          this.currentMetadataKeys = /* @__PURE__ */ new Map();
+          if (isQuickTime) {
+            this.readContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+          } else {
+            this.readContiguousBoxes(slice.slice(contentStartPos + 4, boxInfo.contentSize - 4));
+          }
+          this.currentMetadataKeys = null;
+        }
+        break;
+      case "keys":
+        {
+          if (!this.currentMetadataKeys) {
+            break;
+          }
+          slice.skip(4);
+          const entryCount = readU32Be(slice);
+          for (let i = 0; i < entryCount; i++) {
+            const keySize = readU32Be(slice);
+            slice.skip(4);
+            const keyName = textDecoder.decode(readBytes(slice, keySize - 8));
+            this.currentMetadataKeys.set(i + 1, keyName);
+          }
+        }
+        break;
+      case "ilst":
+        {
+          if (!this.currentMetadataKeys) {
+            break;
+          }
+          const iterator = this.iterateContiguousBoxes(slice.slice(contentStartPos, boxInfo.contentSize));
+          for (const { boxInfo: boxInfo2, slice: slice2 } of iterator) {
+            let metadataKey = boxInfo2.name;
+            const nameAsNumber = (metadataKey.charCodeAt(0) << 24) + (metadataKey.charCodeAt(1) << 16) + (metadataKey.charCodeAt(2) << 8) + metadataKey.charCodeAt(3);
+            if (this.currentMetadataKeys.has(nameAsNumber)) {
+              metadataKey = this.currentMetadataKeys.get(nameAsNumber);
+            }
+            const data = readDataBox(slice2);
+            (_o = this.metadataTags).raw ?? (_o.raw = {});
+            (_p = this.metadataTags.raw)[metadataKey] ?? (_p[metadataKey] = data);
+            switch (metadataKey) {
+              case "©nam":
+              case "titl":
+              case "com.apple.quicktime.title":
+              case "title":
+                {
+                  if (typeof data === "string") {
+                    (_q = this.metadataTags).title ?? (_q.title = data);
+                  }
+                }
+                break;
+              case "©des":
+              case "desc":
+              case "dscp":
+              case "com.apple.quicktime.description":
+              case "description":
+                {
+                  if (typeof data === "string") {
+                    (_r = this.metadataTags).description ?? (_r.description = data);
+                  }
+                }
+                break;
+              case "©ART":
+              case "com.apple.quicktime.artist":
+              case "artist":
+                {
+                  if (typeof data === "string") {
+                    (_s = this.metadataTags).artist ?? (_s.artist = data);
+                  }
+                }
+                break;
+              case "©alb":
+              case "albm":
+              case "com.apple.quicktime.album":
+              case "album":
+                {
+                  if (typeof data === "string") {
+                    (_t = this.metadataTags).album ?? (_t.album = data);
+                  }
+                }
+                break;
+              case "aART":
+              case "album_artist":
+                {
+                  if (typeof data === "string") {
+                    (_u = this.metadataTags).albumArtist ?? (_u.albumArtist = data);
+                  }
+                }
+                break;
+              case "©cmt":
+              case "com.apple.quicktime.comment":
+              case "comment":
+                {
+                  if (typeof data === "string") {
+                    (_v = this.metadataTags).comment ?? (_v.comment = data);
+                  }
+                }
+                break;
+              case "©gen":
+              case "gnre":
+              case "com.apple.quicktime.genre":
+              case "genre":
+                {
+                  if (typeof data === "string") {
+                    (_w = this.metadataTags).genre ?? (_w.genre = data);
+                  }
+                }
+                break;
+              case "©lyr":
+              case "lyrics":
+                {
+                  if (typeof data === "string") {
+                    (_x = this.metadataTags).lyrics ?? (_x.lyrics = data);
+                  }
+                }
+                break;
+              case "©day":
+              case "rldt":
+              case "com.apple.quicktime.creationdate":
+              case "date":
+                {
+                  if (typeof data === "string") {
+                    const date = new Date(data);
+                    if (!Number.isNaN(date.getTime())) {
+                      (_y = this.metadataTags).date ?? (_y.date = date);
+                    }
+                  }
+                }
+                break;
+              case "covr":
+              case "com.apple.quicktime.artwork":
+                {
+                  if (data instanceof RichImageData) {
+                    (_z = this.metadataTags).images ?? (_z.images = []);
+                    this.metadataTags.images.push({
+                      data: data.data,
+                      kind: "coverFront",
+                      mimeType: data.mimeType
+                    });
+                  } else if (data instanceof Uint8Array) {
+                    (_A = this.metadataTags).images ?? (_A.images = []);
+                    this.metadataTags.images.push({
+                      data,
+                      kind: "coverFront",
+                      mimeType: "image/*"
+                    });
+                  }
+                }
+                break;
+              case "track":
+                {
+                  if (typeof data === "string") {
+                    const parts = data.split("/");
+                    const trackNum = Number.parseInt(parts[0], 10);
+                    const tracksTotal = parts[1] && Number.parseInt(parts[1], 10);
+                    if (Number.isInteger(trackNum) && trackNum > 0) {
+                      (_B = this.metadataTags).trackNumber ?? (_B.trackNumber = trackNum);
+                    }
+                    if (tracksTotal && Number.isInteger(tracksTotal) && tracksTotal > 0) {
+                      (_C = this.metadataTags).tracksTotal ?? (_C.tracksTotal = tracksTotal);
+                    }
+                  }
+                }
+                break;
+              case "trkn":
+                {
+                  if (data instanceof Uint8Array && data.length >= 6) {
+                    const view = toDataView(data);
+                    const trackNumber = view.getUint16(2, false);
+                    const tracksTotal = view.getUint16(4, false);
+                    if (trackNumber > 0) {
+                      (_D = this.metadataTags).trackNumber ?? (_D.trackNumber = trackNumber);
+                    }
+                    if (tracksTotal > 0) {
+                      (_E = this.metadataTags).tracksTotal ?? (_E.tracksTotal = tracksTotal);
+                    }
+                  }
+                }
+                break;
+              case "disc":
+              case "disk":
+                {
+                  if (data instanceof Uint8Array && data.length >= 6) {
+                    const view = toDataView(data);
+                    const discNumber = view.getUint16(2, false);
+                    const discNumberMax = view.getUint16(4, false);
+                    if (discNumber > 0) {
+                      (_F = this.metadataTags).discNumber ?? (_F.discNumber = discNumber);
+                    }
+                    if (discNumberMax > 0) {
+                      (_G = this.metadataTags).discsTotal ?? (_G.discsTotal = discNumberMax);
+                    }
+                  }
+                }
+                break;
+            }
+          }
+        }
+        break;
+    }
+    slice.filePos = boxEndPos;
+    return true;
+  }
+}
+class IsobmffTrackBacking {
+  constructor(internalTrack) {
+    this.internalTrack = internalTrack;
+    this.packetToSampleIndex = /* @__PURE__ */ new WeakMap();
+    this.packetToFragmentLocation = /* @__PURE__ */ new WeakMap();
+  }
+  getId() {
+    return this.internalTrack.id;
+  }
+  getCodec() {
+    throw new Error("Not implemented on base class.");
+  }
+  getInternalCodecId() {
+    return this.internalTrack.internalCodecId;
+  }
+  getName() {
+    return this.internalTrack.name;
+  }
+  getLanguageCode() {
+    return this.internalTrack.languageCode;
+  }
+  getTimeResolution() {
+    return this.internalTrack.timescale;
+  }
+  getDisposition() {
+    return this.internalTrack.disposition;
+  }
+  async computeDuration() {
+    const lastPacket = await this.getPacket(Infinity, { metadataOnly: true });
+    return (lastPacket?.timestamp ?? 0) + (lastPacket?.duration ?? 0);
+  }
+  async getFirstTimestamp() {
+    const firstPacket = await this.getFirstPacket({ metadataOnly: true });
+    return firstPacket?.timestamp ?? 0;
+  }
+  async getFirstPacket(options) {
+    const regularPacket = await this.fetchPacketForSampleIndex(0, options);
+    if (regularPacket || !this.internalTrack.demuxer.isFragmented) {
+      return regularPacket;
+    }
+    return this.performFragmentedLookup(
+      null,
+      (fragment) => {
+        const trackData = fragment.trackData.get(this.internalTrack.id);
+        if (trackData) {
+          return {
+            sampleIndex: 0,
+            correctSampleFound: true
+          };
+        }
+        return {
+          sampleIndex: -1,
+          correctSampleFound: false
+        };
+      },
+      -Infinity,
+      // Use -Infinity as a search timestamp to avoid using the lookup entries
+      Infinity,
+      options
+    );
+  }
+  mapTimestampIntoTimescale(timestamp) {
+    return roundIfAlmostInteger(timestamp * this.internalTrack.timescale) + this.internalTrack.editListOffset;
+  }
+  async getPacket(timestamp, options) {
+    const timestampInTimescale = this.mapTimestampIntoTimescale(timestamp);
+    const sampleTable = this.internalTrack.demuxer.getSampleTableForTrack(this.internalTrack);
+    const sampleIndex = getSampleIndexForTimestamp(sampleTable, timestampInTimescale);
+    const regularPacket = await this.fetchPacketForSampleIndex(sampleIndex, options);
+    if (!sampleTableIsEmpty(sampleTable) || !this.internalTrack.demuxer.isFragmented) {
+      return regularPacket;
+    }
+    return this.performFragmentedLookup(null, (fragment) => {
+      const trackData = fragment.trackData.get(this.internalTrack.id);
+      if (!trackData) {
+        return { sampleIndex: -1, correctSampleFound: false };
+      }
+      const index = binarySearchLessOrEqual(trackData.presentationTimestamps, timestampInTimescale, (x) => x.presentationTimestamp);
+      const sampleIndex2 = index !== -1 ? trackData.presentationTimestamps[index].sampleIndex : -1;
+      const correctSampleFound = index !== -1 && timestampInTimescale < trackData.endTimestamp;
+      return { sampleIndex: sampleIndex2, correctSampleFound };
+    }, timestampInTimescale, timestampInTimescale, options);
+  }
+  async getNextPacket(packet, options) {
+    const regularSampleIndex = this.packetToSampleIndex.get(packet);
+    if (regularSampleIndex !== void 0) {
+      return this.fetchPacketForSampleIndex(regularSampleIndex + 1, options);
+    }
+    const locationInFragment = this.packetToFragmentLocation.get(packet);
+    if (locationInFragment === void 0) {
+      throw new Error("Packet was not created from this track.");
+    }
+    return this.performFragmentedLookup(
+      locationInFragment.fragment,
+      (fragment) => {
+        if (fragment === locationInFragment.fragment) {
+          const trackData = fragment.trackData.get(this.internalTrack.id);
+          if (locationInFragment.sampleIndex + 1 < trackData.samples.length) {
+            return {
+              sampleIndex: locationInFragment.sampleIndex + 1,
+              correctSampleFound: true
+            };
+          }
+        } else {
+          const trackData = fragment.trackData.get(this.internalTrack.id);
+          if (trackData) {
+            return {
+              sampleIndex: 0,
+              correctSampleFound: true
+            };
+          }
+        }
+        return {
+          sampleIndex: -1,
+          correctSampleFound: false
+        };
+      },
+      -Infinity,
+      // Use -Infinity as a search timestamp to avoid using the lookup entries
+      Infinity,
+      options
+    );
+  }
+  async getKeyPacket(timestamp, options) {
+    const timestampInTimescale = this.mapTimestampIntoTimescale(timestamp);
+    const sampleTable = this.internalTrack.demuxer.getSampleTableForTrack(this.internalTrack);
+    const sampleIndex = getKeyframeSampleIndexForTimestamp(sampleTable, timestampInTimescale);
+    const regularPacket = await this.fetchPacketForSampleIndex(sampleIndex, options);
+    if (!sampleTableIsEmpty(sampleTable) || !this.internalTrack.demuxer.isFragmented) {
+      return regularPacket;
+    }
+    return this.performFragmentedLookup(null, (fragment) => {
+      const trackData = fragment.trackData.get(this.internalTrack.id);
+      if (!trackData) {
+        return { sampleIndex: -1, correctSampleFound: false };
+      }
+      const index = findLastIndex(trackData.presentationTimestamps, (x) => {
+        const sample = trackData.samples[x.sampleIndex];
+        return sample.isKeyFrame && x.presentationTimestamp <= timestampInTimescale;
+      });
+      const sampleIndex2 = index !== -1 ? trackData.presentationTimestamps[index].sampleIndex : -1;
+      const correctSampleFound = index !== -1 && timestampInTimescale < trackData.endTimestamp;
+      return { sampleIndex: sampleIndex2, correctSampleFound };
+    }, timestampInTimescale, timestampInTimescale, options);
+  }
+  async getNextKeyPacket(packet, options) {
+    const regularSampleIndex = this.packetToSampleIndex.get(packet);
+    if (regularSampleIndex !== void 0) {
+      const sampleTable = this.internalTrack.demuxer.getSampleTableForTrack(this.internalTrack);
+      const nextKeyFrameSampleIndex = getNextKeyframeIndexForSample(sampleTable, regularSampleIndex);
+      return this.fetchPacketForSampleIndex(nextKeyFrameSampleIndex, options);
+    }
+    const locationInFragment = this.packetToFragmentLocation.get(packet);
+    if (locationInFragment === void 0) {
+      throw new Error("Packet was not created from this track.");
+    }
+    return this.performFragmentedLookup(
+      locationInFragment.fragment,
+      (fragment) => {
+        if (fragment === locationInFragment.fragment) {
+          const trackData = fragment.trackData.get(this.internalTrack.id);
+          const nextKeyFrameIndex = trackData.samples.findIndex((x, i) => x.isKeyFrame && i > locationInFragment.sampleIndex);
+          if (nextKeyFrameIndex !== -1) {
+            return {
+              sampleIndex: nextKeyFrameIndex,
+              correctSampleFound: true
+            };
+          }
+        } else {
+          const trackData = fragment.trackData.get(this.internalTrack.id);
+          if (trackData && trackData.firstKeyFrameTimestamp !== null) {
+            const keyFrameIndex = trackData.samples.findIndex((x) => x.isKeyFrame);
+            assert(keyFrameIndex !== -1);
+            return {
+              sampleIndex: keyFrameIndex,
+              correctSampleFound: true
+            };
+          }
+        }
+        return {
+          sampleIndex: -1,
+          correctSampleFound: false
+        };
+      },
+      -Infinity,
+      // Use -Infinity as a search timestamp to avoid using the lookup entries
+      Infinity,
+      options
+    );
+  }
+  async fetchPacketForSampleIndex(sampleIndex, options) {
+    if (sampleIndex === -1) {
+      return null;
+    }
+    const sampleTable = this.internalTrack.demuxer.getSampleTableForTrack(this.internalTrack);
+    const sampleInfo = getSampleInfo(sampleTable, sampleIndex);
+    if (!sampleInfo) {
+      return null;
+    }
+    let data;
+    if (options.metadataOnly) {
+      data = PLACEHOLDER_DATA;
+    } else {
+      let slice = this.internalTrack.demuxer.reader.requestSlice(sampleInfo.sampleOffset, sampleInfo.sampleSize);
+      if (slice instanceof Promise)
+        slice = await slice;
+      assert(slice);
+      data = readBytes(slice, sampleInfo.sampleSize);
+    }
+    const timestamp = (sampleInfo.presentationTimestamp - this.internalTrack.editListOffset) / this.internalTrack.timescale;
+    const duration = sampleInfo.duration / this.internalTrack.timescale;
+    const packet = new EncodedPacket(data, sampleInfo.isKeyFrame ? "key" : "delta", timestamp, duration, sampleIndex, sampleInfo.sampleSize);
+    this.packetToSampleIndex.set(packet, sampleIndex);
+    return packet;
+  }
+  async fetchPacketInFragment(fragment, sampleIndex, options) {
+    if (sampleIndex === -1) {
+      return null;
+    }
+    const trackData = fragment.trackData.get(this.internalTrack.id);
+    const fragmentSample = trackData.samples[sampleIndex];
+    assert(fragmentSample);
+    let data;
+    if (options.metadataOnly) {
+      data = PLACEHOLDER_DATA;
+    } else {
+      let slice = this.internalTrack.demuxer.reader.requestSlice(fragmentSample.byteOffset, fragmentSample.byteSize);
+      if (slice instanceof Promise)
+        slice = await slice;
+      assert(slice);
+      data = readBytes(slice, fragmentSample.byteSize);
+    }
+    const timestamp = (fragmentSample.presentationTimestamp - this.internalTrack.editListOffset) / this.internalTrack.timescale;
+    const duration = fragmentSample.duration / this.internalTrack.timescale;
+    const packet = new EncodedPacket(data, fragmentSample.isKeyFrame ? "key" : "delta", timestamp, duration, fragment.moofOffset + sampleIndex, fragmentSample.byteSize);
+    this.packetToFragmentLocation.set(packet, { fragment, sampleIndex });
+    return packet;
+  }
+  /** Looks for a packet in the fragments while trying to load as few fragments as possible to retrieve it. */
+  async performFragmentedLookup(startFragment, getMatchInFragment, searchTimestamp, latestTimestamp, options) {
+    const demuxer = this.internalTrack.demuxer;
+    let currentFragment = null;
+    let bestFragment = null;
+    let bestSampleIndex = -1;
+    if (startFragment) {
+      const { sampleIndex, correctSampleFound } = getMatchInFragment(startFragment);
+      if (correctSampleFound) {
+        return this.fetchPacketInFragment(startFragment, sampleIndex, options);
+      }
+      if (sampleIndex !== -1) {
+        bestFragment = startFragment;
+        bestSampleIndex = sampleIndex;
+      }
+    }
+    const lookupEntryIndex = binarySearchLessOrEqual(this.internalTrack.fragmentLookupTable, searchTimestamp, (x) => x.timestamp);
+    const lookupEntry = lookupEntryIndex !== -1 ? this.internalTrack.fragmentLookupTable[lookupEntryIndex] : null;
+    const positionCacheIndex = binarySearchLessOrEqual(this.internalTrack.fragmentPositionCache, searchTimestamp, (x) => x.startTimestamp);
+    const positionCacheEntry = positionCacheIndex !== -1 ? this.internalTrack.fragmentPositionCache[positionCacheIndex] : null;
+    const lookupEntryPosition = Math.max(lookupEntry?.moofOffset ?? 0, positionCacheEntry?.moofOffset ?? 0) || null;
+    let currentPos;
+    if (!startFragment) {
+      currentPos = lookupEntryPosition ?? 0;
+    } else {
+      if (lookupEntryPosition === null || startFragment.moofOffset >= lookupEntryPosition) {
+        currentPos = startFragment.moofOffset + startFragment.moofSize;
+        currentFragment = startFragment;
+      } else {
+        currentPos = lookupEntryPosition;
+      }
+    }
+    while (true) {
+      if (currentFragment) {
+        const trackData = currentFragment.trackData.get(this.internalTrack.id);
+        if (trackData && trackData.startTimestamp > latestTimestamp) {
+          break;
+        }
+      }
+      let slice = demuxer.reader.requestSliceRange(currentPos, MIN_BOX_HEADER_SIZE, MAX_BOX_HEADER_SIZE);
+      if (slice instanceof Promise)
+        slice = await slice;
+      if (!slice)
+        break;
+      const boxStartPos = currentPos;
+      const boxInfo = readBoxHeader(slice);
+      if (!boxInfo) {
+        break;
+      }
+      if (boxInfo.name === "moof") {
+        currentFragment = await demuxer.readFragment(boxStartPos);
+        const { sampleIndex, correctSampleFound } = getMatchInFragment(currentFragment);
+        if (correctSampleFound) {
+          return this.fetchPacketInFragment(currentFragment, sampleIndex, options);
+        }
+        if (sampleIndex !== -1) {
+          bestFragment = currentFragment;
+          bestSampleIndex = sampleIndex;
+        }
+      }
+      currentPos = boxStartPos + boxInfo.totalSize;
+    }
+    if (lookupEntry && (!bestFragment || bestFragment.moofOffset < lookupEntry.moofOffset)) {
+      const previousLookupEntry = this.internalTrack.fragmentLookupTable[lookupEntryIndex - 1];
+      assert(!previousLookupEntry || previousLookupEntry.timestamp < lookupEntry.timestamp);
+      const newSearchTimestamp = previousLookupEntry?.timestamp ?? -Infinity;
+      return this.performFragmentedLookup(null, getMatchInFragment, newSearchTimestamp, latestTimestamp, options);
+    }
+    if (bestFragment) {
+      return this.fetchPacketInFragment(bestFragment, bestSampleIndex, options);
+    }
+    return null;
+  }
+}
+class IsobmffVideoTrackBacking extends IsobmffTrackBacking {
+  constructor(internalTrack) {
+    super(internalTrack);
+    this.decoderConfigPromise = null;
+    this.internalTrack = internalTrack;
+  }
+  getCodec() {
+    return this.internalTrack.info.codec;
+  }
+  getCodedWidth() {
+    return this.internalTrack.info.width;
+  }
+  getCodedHeight() {
+    return this.internalTrack.info.height;
+  }
+  getRotation() {
+    return this.internalTrack.rotation;
+  }
+  async getColorSpace() {
+    return {
+      primaries: this.internalTrack.info.colorSpace?.primaries,
+      transfer: this.internalTrack.info.colorSpace?.transfer,
+      matrix: this.internalTrack.info.colorSpace?.matrix,
+      fullRange: this.internalTrack.info.colorSpace?.fullRange
+    };
+  }
+  async canBeTransparent() {
+    return false;
+  }
+  async getDecoderConfig() {
+    if (!this.internalTrack.info.codec) {
+      return null;
+    }
+    return this.decoderConfigPromise ?? (this.decoderConfigPromise = (async () => {
+      if (this.internalTrack.info.codec === "vp9" && !this.internalTrack.info.vp9CodecInfo) {
+        const firstPacket = await this.getFirstPacket({});
+        this.internalTrack.info.vp9CodecInfo = firstPacket && extractVp9CodecInfoFromPacket(firstPacket.data);
+      } else if (this.internalTrack.info.codec === "av1" && !this.internalTrack.info.av1CodecInfo) {
+        const firstPacket = await this.getFirstPacket({});
+        this.internalTrack.info.av1CodecInfo = firstPacket && extractAv1CodecInfoFromPacket(firstPacket.data);
+      }
+      return {
+        codec: extractVideoCodecString(this.internalTrack.info),
+        codedWidth: this.internalTrack.info.width,
+        codedHeight: this.internalTrack.info.height,
+        description: this.internalTrack.info.codecDescription ?? void 0,
+        colorSpace: this.internalTrack.info.colorSpace ?? void 0
+      };
+    })());
+  }
+}
+class IsobmffAudioTrackBacking extends IsobmffTrackBacking {
+  constructor(internalTrack) {
+    super(internalTrack);
+    this.decoderConfig = null;
+    this.internalTrack = internalTrack;
+  }
+  getCodec() {
+    return this.internalTrack.info.codec;
+  }
+  getNumberOfChannels() {
+    return this.internalTrack.info.numberOfChannels;
+  }
+  getSampleRate() {
+    return this.internalTrack.info.sampleRate;
+  }
+  async getDecoderConfig() {
+    if (!this.internalTrack.info.codec) {
+      return null;
+    }
+    return this.decoderConfig ?? (this.decoderConfig = {
+      codec: extractAudioCodecString(this.internalTrack.info),
+      numberOfChannels: this.internalTrack.info.numberOfChannels,
+      sampleRate: this.internalTrack.info.sampleRate,
+      description: this.internalTrack.info.codecDescription ?? void 0
+    });
+  }
+}
+const getSampleIndexForTimestamp = (sampleTable, timescaleUnits) => {
+  if (sampleTable.presentationTimestamps) {
+    const index = binarySearchLessOrEqual(sampleTable.presentationTimestamps, timescaleUnits, (x) => x.presentationTimestamp);
+    if (index === -1) {
+      return -1;
+    }
+    return sampleTable.presentationTimestamps[index].sampleIndex;
+  } else {
+    const index = binarySearchLessOrEqual(sampleTable.sampleTimingEntries, timescaleUnits, (x) => x.startDecodeTimestamp);
+    if (index === -1) {
+      return -1;
+    }
+    const entry = sampleTable.sampleTimingEntries[index];
+    return entry.startIndex + Math.min(Math.floor((timescaleUnits - entry.startDecodeTimestamp) / entry.delta), entry.count - 1);
+  }
+};
+const getKeyframeSampleIndexForTimestamp = (sampleTable, timescaleUnits) => {
+  if (!sampleTable.keySampleIndices) {
+    return getSampleIndexForTimestamp(sampleTable, timescaleUnits);
+  }
+  if (sampleTable.presentationTimestamps) {
+    const index = binarySearchLessOrEqual(sampleTable.presentationTimestamps, timescaleUnits, (x) => x.presentationTimestamp);
+    if (index === -1) {
+      return -1;
+    }
+    for (let i = index; i >= 0; i--) {
+      const sampleIndex = sampleTable.presentationTimestamps[i].sampleIndex;
+      const isKeyFrame = binarySearchExact(sampleTable.keySampleIndices, sampleIndex, (x) => x) !== -1;
+      if (isKeyFrame) {
+        return sampleIndex;
+      }
+    }
+    return -1;
+  } else {
+    const sampleIndex = getSampleIndexForTimestamp(sampleTable, timescaleUnits);
+    const index = binarySearchLessOrEqual(sampleTable.keySampleIndices, sampleIndex, (x) => x);
+    return sampleTable.keySampleIndices[index] ?? -1;
+  }
+};
+const getSampleInfo = (sampleTable, sampleIndex) => {
+  const timingEntryIndex = binarySearchLessOrEqual(sampleTable.sampleTimingEntries, sampleIndex, (x) => x.startIndex);
+  const timingEntry = sampleTable.sampleTimingEntries[timingEntryIndex];
+  if (!timingEntry || timingEntry.startIndex + timingEntry.count <= sampleIndex) {
+    return null;
+  }
+  const decodeTimestamp = timingEntry.startDecodeTimestamp + (sampleIndex - timingEntry.startIndex) * timingEntry.delta;
+  let presentationTimestamp = decodeTimestamp;
+  const offsetEntryIndex = binarySearchLessOrEqual(sampleTable.sampleCompositionTimeOffsets, sampleIndex, (x) => x.startIndex);
+  const offsetEntry = sampleTable.sampleCompositionTimeOffsets[offsetEntryIndex];
+  if (offsetEntry && sampleIndex - offsetEntry.startIndex < offsetEntry.count) {
+    presentationTimestamp += offsetEntry.offset;
+  }
+  const sampleSize = sampleTable.sampleSizes[Math.min(sampleIndex, sampleTable.sampleSizes.length - 1)];
+  const chunkEntryIndex = binarySearchLessOrEqual(sampleTable.sampleToChunk, sampleIndex, (x) => x.startSampleIndex);
+  const chunkEntry = sampleTable.sampleToChunk[chunkEntryIndex];
+  assert(chunkEntry);
+  const chunkIndex = chunkEntry.startChunkIndex + Math.floor((sampleIndex - chunkEntry.startSampleIndex) / chunkEntry.samplesPerChunk);
+  const chunkOffset = sampleTable.chunkOffsets[chunkIndex];
+  const startSampleIndexOfChunk = chunkEntry.startSampleIndex + (chunkIndex - chunkEntry.startChunkIndex) * chunkEntry.samplesPerChunk;
+  let chunkSize = 0;
+  let sampleOffset = chunkOffset;
+  if (sampleTable.sampleSizes.length === 1) {
+    sampleOffset += sampleSize * (sampleIndex - startSampleIndexOfChunk);
+    chunkSize += sampleSize * chunkEntry.samplesPerChunk;
+  } else {
+    for (let i = startSampleIndexOfChunk; i < startSampleIndexOfChunk + chunkEntry.samplesPerChunk; i++) {
+      const sampleSize2 = sampleTable.sampleSizes[i];
+      if (i < sampleIndex) {
+        sampleOffset += sampleSize2;
+      }
+      chunkSize += sampleSize2;
+    }
+  }
+  let duration = timingEntry.delta;
+  if (sampleTable.presentationTimestamps) {
+    const presentationIndex = sampleTable.presentationTimestampIndexMap[sampleIndex];
+    assert(presentationIndex !== void 0);
+    if (presentationIndex < sampleTable.presentationTimestamps.length - 1) {
+      const nextEntry = sampleTable.presentationTimestamps[presentationIndex + 1];
+      const nextPresentationTimestamp = nextEntry.presentationTimestamp;
+      duration = nextPresentationTimestamp - presentationTimestamp;
+    }
+  }
+  return {
+    presentationTimestamp,
+    duration,
+    sampleOffset,
+    sampleSize,
+    chunkOffset,
+    chunkSize,
+    isKeyFrame: sampleTable.keySampleIndices ? binarySearchExact(sampleTable.keySampleIndices, sampleIndex, (x) => x) !== -1 : true
+  };
+};
+const getNextKeyframeIndexForSample = (sampleTable, sampleIndex) => {
+  if (!sampleTable.keySampleIndices) {
+    return sampleIndex + 1;
+  }
+  const index = binarySearchLessOrEqual(sampleTable.keySampleIndices, sampleIndex, (x) => x);
+  return sampleTable.keySampleIndices[index + 1] ?? -1;
+};
+const offsetFragmentTrackDataByTimestamp = (trackData, timestamp) => {
+  trackData.startTimestamp += timestamp;
+  trackData.endTimestamp += timestamp;
+  for (const sample of trackData.samples) {
+    sample.presentationTimestamp += timestamp;
+  }
+  for (const entry of trackData.presentationTimestamps) {
+    entry.presentationTimestamp += timestamp;
+  }
+};
+const extractRotationFromMatrix = (matrix) => {
+  const [m11, , , m21] = matrix;
+  const scaleX = Math.hypot(m11, m21);
+  const cosTheta = m11 / scaleX;
+  const sinTheta = m21 / scaleX;
+  const result = -Math.atan2(sinTheta, cosTheta) * (180 / Math.PI);
+  if (!Number.isFinite(result)) {
+    return 0;
+  }
+  return result;
+};
+const sampleTableIsEmpty = (sampleTable) => {
+  return sampleTable.sampleSizes.length === 0;
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+var EBMLId;
+(function(EBMLId2) {
+  EBMLId2[EBMLId2["EBML"] = 440786851] = "EBML";
+  EBMLId2[EBMLId2["EBMLVersion"] = 17030] = "EBMLVersion";
+  EBMLId2[EBMLId2["EBMLReadVersion"] = 17143] = "EBMLReadVersion";
+  EBMLId2[EBMLId2["EBMLMaxIDLength"] = 17138] = "EBMLMaxIDLength";
+  EBMLId2[EBMLId2["EBMLMaxSizeLength"] = 17139] = "EBMLMaxSizeLength";
+  EBMLId2[EBMLId2["DocType"] = 17026] = "DocType";
+  EBMLId2[EBMLId2["DocTypeVersion"] = 17031] = "DocTypeVersion";
+  EBMLId2[EBMLId2["DocTypeReadVersion"] = 17029] = "DocTypeReadVersion";
+  EBMLId2[EBMLId2["Void"] = 236] = "Void";
+  EBMLId2[EBMLId2["Segment"] = 408125543] = "Segment";
+  EBMLId2[EBMLId2["SeekHead"] = 290298740] = "SeekHead";
+  EBMLId2[EBMLId2["Seek"] = 19899] = "Seek";
+  EBMLId2[EBMLId2["SeekID"] = 21419] = "SeekID";
+  EBMLId2[EBMLId2["SeekPosition"] = 21420] = "SeekPosition";
+  EBMLId2[EBMLId2["Duration"] = 17545] = "Duration";
+  EBMLId2[EBMLId2["Info"] = 357149030] = "Info";
+  EBMLId2[EBMLId2["TimestampScale"] = 2807729] = "TimestampScale";
+  EBMLId2[EBMLId2["MuxingApp"] = 19840] = "MuxingApp";
+  EBMLId2[EBMLId2["WritingApp"] = 22337] = "WritingApp";
+  EBMLId2[EBMLId2["Tracks"] = 374648427] = "Tracks";
+  EBMLId2[EBMLId2["TrackEntry"] = 174] = "TrackEntry";
+  EBMLId2[EBMLId2["TrackNumber"] = 215] = "TrackNumber";
+  EBMLId2[EBMLId2["TrackUID"] = 29637] = "TrackUID";
+  EBMLId2[EBMLId2["TrackType"] = 131] = "TrackType";
+  EBMLId2[EBMLId2["FlagEnabled"] = 185] = "FlagEnabled";
+  EBMLId2[EBMLId2["FlagDefault"] = 136] = "FlagDefault";
+  EBMLId2[EBMLId2["FlagForced"] = 21930] = "FlagForced";
+  EBMLId2[EBMLId2["FlagOriginal"] = 21934] = "FlagOriginal";
+  EBMLId2[EBMLId2["FlagHearingImpaired"] = 21931] = "FlagHearingImpaired";
+  EBMLId2[EBMLId2["FlagVisualImpaired"] = 21932] = "FlagVisualImpaired";
+  EBMLId2[EBMLId2["FlagCommentary"] = 21935] = "FlagCommentary";
+  EBMLId2[EBMLId2["FlagLacing"] = 156] = "FlagLacing";
+  EBMLId2[EBMLId2["Name"] = 21358] = "Name";
+  EBMLId2[EBMLId2["Language"] = 2274716] = "Language";
+  EBMLId2[EBMLId2["LanguageBCP47"] = 2274717] = "LanguageBCP47";
+  EBMLId2[EBMLId2["CodecID"] = 134] = "CodecID";
+  EBMLId2[EBMLId2["CodecPrivate"] = 25506] = "CodecPrivate";
+  EBMLId2[EBMLId2["CodecDelay"] = 22186] = "CodecDelay";
+  EBMLId2[EBMLId2["SeekPreRoll"] = 22203] = "SeekPreRoll";
+  EBMLId2[EBMLId2["DefaultDuration"] = 2352003] = "DefaultDuration";
+  EBMLId2[EBMLId2["Video"] = 224] = "Video";
+  EBMLId2[EBMLId2["PixelWidth"] = 176] = "PixelWidth";
+  EBMLId2[EBMLId2["PixelHeight"] = 186] = "PixelHeight";
+  EBMLId2[EBMLId2["AlphaMode"] = 21440] = "AlphaMode";
+  EBMLId2[EBMLId2["Audio"] = 225] = "Audio";
+  EBMLId2[EBMLId2["SamplingFrequency"] = 181] = "SamplingFrequency";
+  EBMLId2[EBMLId2["Channels"] = 159] = "Channels";
+  EBMLId2[EBMLId2["BitDepth"] = 25188] = "BitDepth";
+  EBMLId2[EBMLId2["SimpleBlock"] = 163] = "SimpleBlock";
+  EBMLId2[EBMLId2["BlockGroup"] = 160] = "BlockGroup";
+  EBMLId2[EBMLId2["Block"] = 161] = "Block";
+  EBMLId2[EBMLId2["BlockAdditions"] = 30113] = "BlockAdditions";
+  EBMLId2[EBMLId2["BlockMore"] = 166] = "BlockMore";
+  EBMLId2[EBMLId2["BlockAdditional"] = 165] = "BlockAdditional";
+  EBMLId2[EBMLId2["BlockAddID"] = 238] = "BlockAddID";
+  EBMLId2[EBMLId2["BlockDuration"] = 155] = "BlockDuration";
+  EBMLId2[EBMLId2["ReferenceBlock"] = 251] = "ReferenceBlock";
+  EBMLId2[EBMLId2["Cluster"] = 524531317] = "Cluster";
+  EBMLId2[EBMLId2["Timestamp"] = 231] = "Timestamp";
+  EBMLId2[EBMLId2["Cues"] = 475249515] = "Cues";
+  EBMLId2[EBMLId2["CuePoint"] = 187] = "CuePoint";
+  EBMLId2[EBMLId2["CueTime"] = 179] = "CueTime";
+  EBMLId2[EBMLId2["CueTrackPositions"] = 183] = "CueTrackPositions";
+  EBMLId2[EBMLId2["CueTrack"] = 247] = "CueTrack";
+  EBMLId2[EBMLId2["CueClusterPosition"] = 241] = "CueClusterPosition";
+  EBMLId2[EBMLId2["Colour"] = 21936] = "Colour";
+  EBMLId2[EBMLId2["MatrixCoefficients"] = 21937] = "MatrixCoefficients";
+  EBMLId2[EBMLId2["TransferCharacteristics"] = 21946] = "TransferCharacteristics";
+  EBMLId2[EBMLId2["Primaries"] = 21947] = "Primaries";
+  EBMLId2[EBMLId2["Range"] = 21945] = "Range";
+  EBMLId2[EBMLId2["Projection"] = 30320] = "Projection";
+  EBMLId2[EBMLId2["ProjectionType"] = 30321] = "ProjectionType";
+  EBMLId2[EBMLId2["ProjectionPoseRoll"] = 30325] = "ProjectionPoseRoll";
+  EBMLId2[EBMLId2["Attachments"] = 423732329] = "Attachments";
+  EBMLId2[EBMLId2["AttachedFile"] = 24999] = "AttachedFile";
+  EBMLId2[EBMLId2["FileDescription"] = 18046] = "FileDescription";
+  EBMLId2[EBMLId2["FileName"] = 18030] = "FileName";
+  EBMLId2[EBMLId2["FileMediaType"] = 18016] = "FileMediaType";
+  EBMLId2[EBMLId2["FileData"] = 18012] = "FileData";
+  EBMLId2[EBMLId2["FileUID"] = 18094] = "FileUID";
+  EBMLId2[EBMLId2["Chapters"] = 272869232] = "Chapters";
+  EBMLId2[EBMLId2["Tags"] = 307544935] = "Tags";
+  EBMLId2[EBMLId2["Tag"] = 29555] = "Tag";
+  EBMLId2[EBMLId2["Targets"] = 25536] = "Targets";
+  EBMLId2[EBMLId2["TargetTypeValue"] = 26826] = "TargetTypeValue";
+  EBMLId2[EBMLId2["TargetType"] = 25546] = "TargetType";
+  EBMLId2[EBMLId2["TagTrackUID"] = 25541] = "TagTrackUID";
+  EBMLId2[EBMLId2["TagEditionUID"] = 25545] = "TagEditionUID";
+  EBMLId2[EBMLId2["TagChapterUID"] = 25540] = "TagChapterUID";
+  EBMLId2[EBMLId2["TagAttachmentUID"] = 25542] = "TagAttachmentUID";
+  EBMLId2[EBMLId2["SimpleTag"] = 26568] = "SimpleTag";
+  EBMLId2[EBMLId2["TagName"] = 17827] = "TagName";
+  EBMLId2[EBMLId2["TagLanguage"] = 17530] = "TagLanguage";
+  EBMLId2[EBMLId2["TagString"] = 17543] = "TagString";
+  EBMLId2[EBMLId2["TagBinary"] = 17541] = "TagBinary";
+  EBMLId2[EBMLId2["ContentEncodings"] = 28032] = "ContentEncodings";
+  EBMLId2[EBMLId2["ContentEncoding"] = 25152] = "ContentEncoding";
+  EBMLId2[EBMLId2["ContentEncodingOrder"] = 20529] = "ContentEncodingOrder";
+  EBMLId2[EBMLId2["ContentEncodingScope"] = 20530] = "ContentEncodingScope";
+  EBMLId2[EBMLId2["ContentCompression"] = 20532] = "ContentCompression";
+  EBMLId2[EBMLId2["ContentCompAlgo"] = 16980] = "ContentCompAlgo";
+  EBMLId2[EBMLId2["ContentCompSettings"] = 16981] = "ContentCompSettings";
+  EBMLId2[EBMLId2["ContentEncryption"] = 20533] = "ContentEncryption";
+})(EBMLId || (EBMLId = {}));
+const LEVEL_0_EBML_IDS = [
+  EBMLId.EBML,
+  EBMLId.Segment
+];
+const LEVEL_1_EBML_IDS = [
+  EBMLId.SeekHead,
+  EBMLId.Info,
+  EBMLId.Cluster,
+  EBMLId.Tracks,
+  EBMLId.Cues,
+  EBMLId.Attachments,
+  EBMLId.Chapters,
+  EBMLId.Tags
+];
+const LEVEL_0_AND_1_EBML_IDS = [
+  ...LEVEL_0_EBML_IDS,
+  ...LEVEL_1_EBML_IDS
+];
+const MAX_VAR_INT_SIZE = 8;
+const MIN_HEADER_SIZE = 2;
+const MAX_HEADER_SIZE = 2 * MAX_VAR_INT_SIZE;
+const readVarIntSize = (slice) => {
+  if (slice.remainingLength < 1) {
+    return null;
+  }
+  const firstByte = readU8(slice);
+  slice.skip(-1);
+  if (firstByte === 0) {
+    return null;
+  }
+  let width = 1;
+  let mask = 128;
+  while ((firstByte & mask) === 0) {
+    width++;
+    mask >>= 1;
+  }
+  if (slice.remainingLength < width) {
+    return null;
+  }
+  return width;
+};
+const readVarInt = (slice) => {
+  if (slice.remainingLength < 1) {
+    return null;
+  }
+  const firstByte = readU8(slice);
+  if (firstByte === 0) {
+    return null;
+  }
+  let width = 1;
+  let mask = 1 << 7;
+  while ((firstByte & mask) === 0) {
+    width++;
+    mask >>= 1;
+  }
+  if (slice.remainingLength < width - 1) {
+    return null;
+  }
+  let value = firstByte & mask - 1;
+  for (let i = 1; i < width; i++) {
+    value *= 1 << 8;
+    value += readU8(slice);
+  }
+  return value;
+};
+const readUnsignedInt = (slice, width) => {
+  if (width < 1 || width > 8) {
+    throw new Error("Bad unsigned int size " + width);
+  }
+  let value = 0;
+  for (let i = 0; i < width; i++) {
+    value *= 1 << 8;
+    value += readU8(slice);
+  }
+  return value;
+};
+const readUnsignedBigInt = (slice, width) => {
+  if (width < 1) {
+    throw new Error("Bad unsigned int size " + width);
+  }
+  let value = 0n;
+  for (let i = 0; i < width; i++) {
+    value <<= 8n;
+    value += BigInt(readU8(slice));
+  }
+  return value;
+};
+const readElementId = (slice) => {
+  const size = readVarIntSize(slice);
+  if (size === null) {
+    return null;
+  }
+  if (slice.remainingLength < size) {
+    return null;
+  }
+  const id = readUnsignedInt(slice, size);
+  return id;
+};
+const readElementSize = (slice) => {
+  if (slice.remainingLength < 1) {
+    return null;
+  }
+  const firstByte = readU8(slice);
+  if (firstByte === 255) {
+    return void 0;
+  }
+  slice.skip(-1);
+  const size = readVarInt(slice);
+  if (size === null) {
+    return null;
+  }
+  if (size === 72057594037927940) {
+    return void 0;
+  }
+  return size;
+};
+const readElementHeader = (slice) => {
+  assert(slice.remainingLength >= MIN_HEADER_SIZE);
+  const id = readElementId(slice);
+  if (id === null) {
+    return null;
+  }
+  const size = readElementSize(slice);
+  if (size === null) {
+    return null;
+  }
+  return { id, size };
+};
+const readAsciiString = (slice, length) => {
+  const bytes = readBytes(slice, length);
+  let strLength = 0;
+  while (strLength < length && bytes[strLength] !== 0) {
+    strLength += 1;
+  }
+  return String.fromCharCode(...bytes.subarray(0, strLength));
+};
+const readUnicodeString = (slice, length) => {
+  const bytes = readBytes(slice, length);
+  let strLength = 0;
+  while (strLength < length && bytes[strLength] !== 0) {
+    strLength += 1;
+  }
+  return textDecoder.decode(bytes.subarray(0, strLength));
+};
+const readFloat = (slice, width) => {
+  if (width === 0) {
+    return 0;
+  }
+  if (width !== 4 && width !== 8) {
+    throw new Error("Bad float size " + width);
+  }
+  return width === 4 ? readF32Be(slice) : readF64Be(slice);
+};
+const searchForNextElementId = async (reader, startPos, ids, until) => {
+  const idsSet = new Set(ids);
+  let currentPos = startPos;
+  while (until === null || currentPos < until) {
+    let slice = reader.requestSliceRange(currentPos, MIN_HEADER_SIZE, MAX_HEADER_SIZE);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      break;
+    const elementHeader = readElementHeader(slice);
+    if (!elementHeader) {
+      break;
+    }
+    if (idsSet.has(elementHeader.id)) {
+      return { pos: currentPos, found: true };
+    }
+    assertDefinedSize(elementHeader.size);
+    currentPos = slice.filePos + elementHeader.size;
+  }
+  return { pos: until !== null && until > currentPos ? until : currentPos, found: false };
+};
+const resync = async (reader, startPos, ids, until) => {
+  const CHUNK_SIZE = 2 ** 16;
+  const idsSet = new Set(ids);
+  let currentPos = startPos;
+  while (currentPos < until) {
+    let slice = reader.requestSliceRange(currentPos, 0, Math.min(CHUNK_SIZE, until - currentPos));
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      break;
+    if (slice.length < MAX_VAR_INT_SIZE)
+      break;
+    for (let i = 0; i < slice.length - MAX_VAR_INT_SIZE; i++) {
+      slice.filePos = currentPos;
+      const elementId = readElementId(slice);
+      if (elementId !== null && idsSet.has(elementId)) {
+        return currentPos;
+      }
+      currentPos++;
+    }
+  }
+  return null;
+};
+const CODEC_STRING_MAP = {
+  "avc": "V_MPEG4/ISO/AVC",
+  "hevc": "V_MPEGH/ISO/HEVC",
+  "vp8": "V_VP8",
+  "vp9": "V_VP9",
+  "av1": "V_AV1",
+  "aac": "A_AAC",
+  "mp3": "A_MPEG/L3",
+  "opus": "A_OPUS",
+  "vorbis": "A_VORBIS",
+  "flac": "A_FLAC"
+};
+function assertDefinedSize(size) {
+  if (size === void 0) {
+    throw new Error("Undefined element size is used in a place where it is not supported.");
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const buildMatroskaMimeType = (info) => {
+  const base = info.hasVideo ? "video/" : info.hasAudio ? "audio/" : "application/";
+  let string = base + (info.isWebM ? "webm" : "x-matroska");
+  if (info.codecStrings.length > 0) {
+    const uniqueCodecMimeTypes = [...new Set(info.codecStrings.filter(Boolean))];
+    string += `; codecs="${uniqueCodecMimeTypes.join(", ")}"`;
+  }
+  return string;
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+var BlockLacing;
+(function(BlockLacing2) {
+  BlockLacing2[BlockLacing2["None"] = 0] = "None";
+  BlockLacing2[BlockLacing2["Xiph"] = 1] = "Xiph";
+  BlockLacing2[BlockLacing2["FixedSize"] = 2] = "FixedSize";
+  BlockLacing2[BlockLacing2["Ebml"] = 3] = "Ebml";
+})(BlockLacing || (BlockLacing = {}));
+var ContentEncodingScope;
+(function(ContentEncodingScope2) {
+  ContentEncodingScope2[ContentEncodingScope2["Block"] = 1] = "Block";
+  ContentEncodingScope2[ContentEncodingScope2["Private"] = 2] = "Private";
+  ContentEncodingScope2[ContentEncodingScope2["Next"] = 4] = "Next";
+})(ContentEncodingScope || (ContentEncodingScope = {}));
+var ContentCompAlgo;
+(function(ContentCompAlgo2) {
+  ContentCompAlgo2[ContentCompAlgo2["Zlib"] = 0] = "Zlib";
+  ContentCompAlgo2[ContentCompAlgo2["Bzlib"] = 1] = "Bzlib";
+  ContentCompAlgo2[ContentCompAlgo2["lzo1x"] = 2] = "lzo1x";
+  ContentCompAlgo2[ContentCompAlgo2["HeaderStripping"] = 3] = "HeaderStripping";
+})(ContentCompAlgo || (ContentCompAlgo = {}));
+const METADATA_ELEMENTS = [
+  { id: EBMLId.SeekHead, flag: "seekHeadSeen" },
+  { id: EBMLId.Info, flag: "infoSeen" },
+  { id: EBMLId.Tracks, flag: "tracksSeen" },
+  { id: EBMLId.Cues, flag: "cuesSeen" }
+];
+const MAX_RESYNC_LENGTH = 10 * 2 ** 20;
+class MatroskaDemuxer extends Demuxer {
+  constructor(input) {
+    super(input);
+    this.readMetadataPromise = null;
+    this.segments = [];
+    this.currentSegment = null;
+    this.currentTrack = null;
+    this.currentCluster = null;
+    this.currentBlock = null;
+    this.currentBlockAdditional = null;
+    this.currentCueTime = null;
+    this.currentDecodingInstruction = null;
+    this.currentTagTargetIsMovie = true;
+    this.currentSimpleTagName = null;
+    this.currentAttachedFile = null;
+    this.isWebM = false;
+    this.reader = input._reader;
+  }
+  async computeDuration() {
+    const tracks = await this.getTracks();
+    const trackDurations = await Promise.all(tracks.map((x) => x.computeDuration()));
+    return Math.max(0, ...trackDurations);
+  }
+  async getTracks() {
+    await this.readMetadata();
+    return this.segments.flatMap((segment) => segment.tracks.map((track) => track.inputTrack));
+  }
+  async getMimeType() {
+    await this.readMetadata();
+    const tracks = await this.getTracks();
+    const codecStrings = await Promise.all(tracks.map((x) => x.getCodecParameterString()));
+    return buildMatroskaMimeType({
+      isWebM: this.isWebM,
+      hasVideo: this.segments.some((segment) => segment.tracks.some((x) => x.info?.type === "video")),
+      hasAudio: this.segments.some((segment) => segment.tracks.some((x) => x.info?.type === "audio")),
+      codecStrings: codecStrings.filter(Boolean)
+    });
+  }
+  async getMetadataTags() {
+    await this.readMetadata();
+    for (const segment of this.segments) {
+      if (!segment.metadataTagsCollected) {
+        if (this.reader.fileSize !== null) {
+          await this.loadSegmentMetadata(segment);
+        }
+        segment.metadataTagsCollected = true;
+      }
+    }
+    let metadataTags = {};
+    for (const segment of this.segments) {
+      metadataTags = { ...metadataTags, ...segment.metadataTags };
+    }
+    return metadataTags;
+  }
+  readMetadata() {
+    return this.readMetadataPromise ?? (this.readMetadataPromise = (async () => {
+      let currentPos = 0;
+      while (true) {
+        let slice = this.reader.requestSliceRange(currentPos, MIN_HEADER_SIZE, MAX_HEADER_SIZE);
+        if (slice instanceof Promise)
+          slice = await slice;
+        if (!slice)
+          break;
+        const header = readElementHeader(slice);
+        if (!header) {
+          break;
+        }
+        const id = header.id;
+        let size = header.size;
+        const dataStartPos = slice.filePos;
+        if (id === EBMLId.EBML) {
+          assertDefinedSize(size);
+          let slice2 = this.reader.requestSlice(dataStartPos, size);
+          if (slice2 instanceof Promise)
+            slice2 = await slice2;
+          if (!slice2)
+            break;
+          this.readContiguousElements(slice2);
+        } else if (id === EBMLId.Segment) {
+          await this.readSegment(dataStartPos, size);
+          if (size === void 0) {
+            break;
+          }
+          if (this.reader.fileSize === null) {
+            break;
+          }
+        } else if (id === EBMLId.Cluster) {
+          if (this.reader.fileSize === null) {
+            break;
+          }
+          if (size === void 0) {
+            const nextElementPos = await searchForNextElementId(this.reader, dataStartPos, LEVEL_0_AND_1_EBML_IDS, this.reader.fileSize);
+            size = nextElementPos.pos - dataStartPos;
+          }
+          const lastSegment = last(this.segments);
+          if (lastSegment) {
+            lastSegment.elementEndPos = dataStartPos + size;
+          }
+        }
+        assertDefinedSize(size);
+        currentPos = dataStartPos + size;
+      }
+    })());
+  }
+  async readSegment(segmentDataStart, dataSize) {
+    this.currentSegment = {
+      seekHeadSeen: false,
+      infoSeen: false,
+      tracksSeen: false,
+      cuesSeen: false,
+      tagsSeen: false,
+      attachmentsSeen: false,
+      timestampScale: -1,
+      timestampFactor: -1,
+      duration: -1,
+      seekEntries: [],
+      tracks: [],
+      cuePoints: [],
+      dataStartPos: segmentDataStart,
+      elementEndPos: dataSize === void 0 ? null : segmentDataStart + dataSize,
+      clusterSeekStartPos: segmentDataStart,
+      lastReadCluster: null,
+      metadataTags: {},
+      metadataTagsCollected: false
+    };
+    this.segments.push(this.currentSegment);
+    let currentPos = segmentDataStart;
+    while (this.currentSegment.elementEndPos === null || currentPos < this.currentSegment.elementEndPos) {
+      let slice = this.reader.requestSliceRange(currentPos, MIN_HEADER_SIZE, MAX_HEADER_SIZE);
+      if (slice instanceof Promise)
+        slice = await slice;
+      if (!slice)
+        break;
+      const elementStartPos = currentPos;
+      const header = readElementHeader(slice);
+      if (!header || !LEVEL_1_EBML_IDS.includes(header.id) && header.id !== EBMLId.Void) {
+        const nextPos = await resync(this.reader, elementStartPos, LEVEL_1_EBML_IDS, Math.min(this.currentSegment.elementEndPos ?? Infinity, elementStartPos + MAX_RESYNC_LENGTH));
+        if (nextPos) {
+          currentPos = nextPos;
+          continue;
+        } else {
+          break;
+        }
+      }
+      const { id, size } = header;
+      const dataStartPos = slice.filePos;
+      const metadataElementIndex = METADATA_ELEMENTS.findIndex((x) => x.id === id);
+      if (metadataElementIndex !== -1) {
+        const field = METADATA_ELEMENTS[metadataElementIndex].flag;
+        this.currentSegment[field] = true;
+        assertDefinedSize(size);
+        let slice2 = this.reader.requestSlice(dataStartPos, size);
+        if (slice2 instanceof Promise)
+          slice2 = await slice2;
+        if (slice2) {
+          this.readContiguousElements(slice2);
+        }
+      } else if (id === EBMLId.Tags || id === EBMLId.Attachments) {
+        if (id === EBMLId.Tags) {
+          this.currentSegment.tagsSeen = true;
+        } else {
+          this.currentSegment.attachmentsSeen = true;
+        }
+        assertDefinedSize(size);
+        let slice2 = this.reader.requestSlice(dataStartPos, size);
+        if (slice2 instanceof Promise)
+          slice2 = await slice2;
+        if (slice2) {
+          this.readContiguousElements(slice2);
+        }
+      } else if (id === EBMLId.Cluster) {
+        this.currentSegment.clusterSeekStartPos = elementStartPos;
+        break;
+      }
+      if (size === void 0) {
+        break;
+      } else {
+        currentPos = dataStartPos + size;
+      }
+    }
+    this.currentSegment.seekEntries.sort((a, b) => a.segmentPosition - b.segmentPosition);
+    if (this.reader.fileSize !== null) {
+      for (const seekEntry of this.currentSegment.seekEntries) {
+        const target = METADATA_ELEMENTS.find((x) => x.id === seekEntry.id);
+        if (!target) {
+          continue;
+        }
+        if (this.currentSegment[target.flag])
+          continue;
+        let slice = this.reader.requestSliceRange(segmentDataStart + seekEntry.segmentPosition, MIN_HEADER_SIZE, MAX_HEADER_SIZE);
+        if (slice instanceof Promise)
+          slice = await slice;
+        if (!slice)
+          continue;
+        const header = readElementHeader(slice);
+        if (!header)
+          continue;
+        const { id, size } = header;
+        if (id !== target.id)
+          continue;
+        assertDefinedSize(size);
+        this.currentSegment[target.flag] = true;
+        let dataSlice = this.reader.requestSlice(slice.filePos, size);
+        if (dataSlice instanceof Promise)
+          dataSlice = await dataSlice;
+        if (!dataSlice)
+          continue;
+        this.readContiguousElements(dataSlice);
+      }
+    }
+    if (this.currentSegment.timestampScale === -1) {
+      this.currentSegment.timestampScale = 1e6;
+      this.currentSegment.timestampFactor = 1e9 / 1e6;
+    }
+    for (const track of this.currentSegment.tracks) {
+      if (track.defaultDurationNs !== null) {
+        track.defaultDuration = this.currentSegment.timestampFactor * track.defaultDurationNs / 1e9;
+      }
+    }
+    this.currentSegment.tracks.sort((a, b) => Number(b.disposition.default) - Number(a.disposition.default));
+    const idToTrack = new Map(this.currentSegment.tracks.map((x) => [x.id, x]));
+    for (const cuePoint of this.currentSegment.cuePoints) {
+      const track = idToTrack.get(cuePoint.trackId);
+      if (track) {
+        track.cuePoints.push(cuePoint);
+      }
+    }
+    for (const track of this.currentSegment.tracks) {
+      track.cuePoints.sort((a, b) => a.time - b.time);
+      for (let i = 0; i < track.cuePoints.length - 1; i++) {
+        const cuePoint1 = track.cuePoints[i];
+        const cuePoint2 = track.cuePoints[i + 1];
+        if (cuePoint1.time === cuePoint2.time) {
+          track.cuePoints.splice(i + 1, 1);
+          i--;
+        }
+      }
+    }
+    let trackWithMostCuePoints = null;
+    let maxCuePointCount = -Infinity;
+    for (const track of this.currentSegment.tracks) {
+      if (track.cuePoints.length > maxCuePointCount) {
+        maxCuePointCount = track.cuePoints.length;
+        trackWithMostCuePoints = track;
+      }
+    }
+    for (const track of this.currentSegment.tracks) {
+      if (track.cuePoints.length === 0) {
+        track.cuePoints = trackWithMostCuePoints.cuePoints;
+      }
+    }
+    this.currentSegment = null;
+  }
+  async readCluster(startPos, segment) {
+    if (segment.lastReadCluster?.elementStartPos === startPos) {
+      return segment.lastReadCluster;
+    }
+    let headerSlice = this.reader.requestSliceRange(startPos, MIN_HEADER_SIZE, MAX_HEADER_SIZE);
+    if (headerSlice instanceof Promise)
+      headerSlice = await headerSlice;
+    assert(headerSlice);
+    const elementStartPos = startPos;
+    const elementHeader = readElementHeader(headerSlice);
+    assert(elementHeader);
+    const id = elementHeader.id;
+    assert(id === EBMLId.Cluster);
+    let size = elementHeader.size;
+    const dataStartPos = headerSlice.filePos;
+    if (size === void 0) {
+      const nextElementPos = await searchForNextElementId(this.reader, dataStartPos, LEVEL_0_AND_1_EBML_IDS, segment.elementEndPos);
+      size = nextElementPos.pos - dataStartPos;
+    }
+    let dataSlice = this.reader.requestSlice(dataStartPos, size);
+    if (dataSlice instanceof Promise)
+      dataSlice = await dataSlice;
+    const cluster = {
+      segment,
+      elementStartPos,
+      elementEndPos: dataStartPos + size,
+      dataStartPos,
+      timestamp: -1,
+      trackData: /* @__PURE__ */ new Map()
+    };
+    this.currentCluster = cluster;
+    if (dataSlice) {
+      const endPos = this.readContiguousElements(dataSlice, LEVEL_0_AND_1_EBML_IDS);
+      cluster.elementEndPos = endPos;
+    }
+    for (const [, trackData] of cluster.trackData) {
+      const track = trackData.track;
+      assert(trackData.blocks.length > 0);
+      let hasLacedBlocks = false;
+      for (let i = 0; i < trackData.blocks.length; i++) {
+        const block = trackData.blocks[i];
+        block.timestamp += cluster.timestamp;
+        hasLacedBlocks || (hasLacedBlocks = block.lacing !== BlockLacing.None);
+      }
+      trackData.presentationTimestamps = trackData.blocks.map((block, i) => ({ timestamp: block.timestamp, blockIndex: i })).sort((a, b) => a.timestamp - b.timestamp);
+      for (let i = 0; i < trackData.presentationTimestamps.length; i++) {
+        const currentEntry = trackData.presentationTimestamps[i];
+        const currentBlock = trackData.blocks[currentEntry.blockIndex];
+        if (trackData.firstKeyFrameTimestamp === null && currentBlock.isKeyFrame) {
+          trackData.firstKeyFrameTimestamp = currentBlock.timestamp;
+        }
+        if (i < trackData.presentationTimestamps.length - 1) {
+          const nextEntry = trackData.presentationTimestamps[i + 1];
+          currentBlock.duration = nextEntry.timestamp - currentBlock.timestamp;
+        } else if (currentBlock.duration === 0) {
+          if (track.defaultDuration != null) {
+            if (currentBlock.lacing === BlockLacing.None) {
+              currentBlock.duration = track.defaultDuration;
+            }
+          }
+        }
+      }
+      if (hasLacedBlocks) {
+        this.expandLacedBlocks(trackData.blocks, track);
+        trackData.presentationTimestamps = trackData.blocks.map((block, i) => ({ timestamp: block.timestamp, blockIndex: i })).sort((a, b) => a.timestamp - b.timestamp);
+      }
+      const firstBlock = trackData.blocks[trackData.presentationTimestamps[0].blockIndex];
+      const lastBlock = trackData.blocks[last(trackData.presentationTimestamps).blockIndex];
+      trackData.startTimestamp = firstBlock.timestamp;
+      trackData.endTimestamp = lastBlock.timestamp + lastBlock.duration;
+      const insertionIndex = binarySearchLessOrEqual(track.clusterPositionCache, trackData.startTimestamp, (x) => x.startTimestamp);
+      if (insertionIndex === -1 || track.clusterPositionCache[insertionIndex].elementStartPos !== elementStartPos) {
+        track.clusterPositionCache.splice(insertionIndex + 1, 0, {
+          elementStartPos: cluster.elementStartPos,
+          startTimestamp: trackData.startTimestamp
+        });
+      }
+    }
+    segment.lastReadCluster = cluster;
+    return cluster;
+  }
+  getTrackDataInCluster(cluster, trackNumber) {
+    let trackData = cluster.trackData.get(trackNumber);
+    if (!trackData) {
+      const track = cluster.segment.tracks.find((x) => x.id === trackNumber);
+      if (!track) {
+        return null;
+      }
+      trackData = {
+        track,
+        startTimestamp: 0,
+        endTimestamp: 0,
+        firstKeyFrameTimestamp: null,
+        blocks: [],
+        presentationTimestamps: []
+      };
+      cluster.trackData.set(trackNumber, trackData);
+    }
+    return trackData;
+  }
+  expandLacedBlocks(blocks, track) {
+    for (let blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
+      const originalBlock = blocks[blockIndex];
+      if (originalBlock.lacing === BlockLacing.None) {
+        continue;
+      }
+      if (!originalBlock.decoded) {
+        originalBlock.data = this.decodeBlockData(track, originalBlock.data);
+        originalBlock.decoded = true;
+      }
+      const slice = FileSlice.tempFromBytes(originalBlock.data);
+      const frameSizes = [];
+      const frameCount = readU8(slice) + 1;
+      switch (originalBlock.lacing) {
+        case BlockLacing.Xiph:
+          {
+            let totalUsedSize = 0;
+            for (let i = 0; i < frameCount - 1; i++) {
+              let frameSize = 0;
+              while (slice.bufferPos < slice.length) {
+                const value = readU8(slice);
+                frameSize += value;
+                if (value < 255) {
+                  frameSizes.push(frameSize);
+                  totalUsedSize += frameSize;
+                  break;
+                }
+              }
+            }
+            frameSizes.push(slice.length - (slice.bufferPos + totalUsedSize));
+          }
+          break;
+        case BlockLacing.FixedSize:
+          {
+            const totalDataSize = slice.length - 1;
+            const frameSize = Math.floor(totalDataSize / frameCount);
+            for (let i = 0; i < frameCount; i++) {
+              frameSizes.push(frameSize);
+            }
+          }
+          break;
+        case BlockLacing.Ebml:
+          {
+            const firstResult = readVarInt(slice);
+            assert(firstResult !== null);
+            let currentSize = firstResult;
+            frameSizes.push(currentSize);
+            let totalUsedSize = currentSize;
+            for (let i = 1; i < frameCount - 1; i++) {
+              const startPos = slice.bufferPos;
+              const diffResult = readVarInt(slice);
+              assert(diffResult !== null);
+              const unsignedDiff = diffResult;
+              const width = slice.bufferPos - startPos;
+              const bias = (1 << width * 7 - 1) - 1;
+              const diff = unsignedDiff - bias;
+              currentSize += diff;
+              frameSizes.push(currentSize);
+              totalUsedSize += currentSize;
+            }
+            frameSizes.push(slice.length - (slice.bufferPos + totalUsedSize));
+          }
+          break;
+        default:
+          assert(false);
+      }
+      assert(frameSizes.length === frameCount);
+      blocks.splice(blockIndex, 1);
+      const blockDuration = originalBlock.duration || frameCount * (track.defaultDuration ?? 0);
+      for (let i = 0; i < frameCount; i++) {
+        const frameSize = frameSizes[i];
+        const frameData = readBytes(slice, frameSize);
+        const frameTimestamp = originalBlock.timestamp + blockDuration * i / frameCount;
+        const frameDuration = blockDuration / frameCount;
+        blocks.splice(blockIndex + i, 0, {
+          timestamp: frameTimestamp,
+          duration: frameDuration,
+          isKeyFrame: originalBlock.isKeyFrame,
+          data: frameData,
+          lacing: BlockLacing.None,
+          decoded: true,
+          mainAdditional: originalBlock.mainAdditional
+        });
+      }
+      blockIndex += frameCount;
+      blockIndex--;
+    }
+  }
+  async loadSegmentMetadata(segment) {
+    for (const seekEntry of segment.seekEntries) {
+      if (seekEntry.id === EBMLId.Tags && !segment.tagsSeen) ;
+      else if (seekEntry.id === EBMLId.Attachments && !segment.attachmentsSeen) ;
+      else {
+        continue;
+      }
+      let slice = this.reader.requestSliceRange(segment.dataStartPos + seekEntry.segmentPosition, MIN_HEADER_SIZE, MAX_HEADER_SIZE);
+      if (slice instanceof Promise)
+        slice = await slice;
+      if (!slice)
+        continue;
+      const header = readElementHeader(slice);
+      if (!header || header.id !== seekEntry.id)
+        continue;
+      const { size } = header;
+      assertDefinedSize(size);
+      assert(!this.currentSegment);
+      this.currentSegment = segment;
+      let dataSlice = this.reader.requestSlice(slice.filePos, size);
+      if (dataSlice instanceof Promise)
+        dataSlice = await dataSlice;
+      if (dataSlice) {
+        this.readContiguousElements(dataSlice);
+      }
+      this.currentSegment = null;
+      if (seekEntry.id === EBMLId.Tags) {
+        segment.tagsSeen = true;
+      } else if (seekEntry.id === EBMLId.Attachments) {
+        segment.attachmentsSeen = true;
+      }
+    }
+  }
+  readContiguousElements(slice, stopIds) {
+    while (slice.remainingLength >= MIN_HEADER_SIZE) {
+      const startPos = slice.filePos;
+      const foundElement = this.traverseElement(slice, stopIds);
+      if (!foundElement) {
+        return startPos;
+      }
+    }
+    return slice.filePos;
+  }
+  traverseElement(slice, stopIds) {
+    const header = readElementHeader(slice);
+    if (!header) {
+      return false;
+    }
+    if (stopIds && stopIds.includes(header.id)) {
+      return false;
+    }
+    const { id, size } = header;
+    const dataStartPos = slice.filePos;
+    assertDefinedSize(size);
+    switch (id) {
+      case EBMLId.DocType:
+        {
+          this.isWebM = readAsciiString(slice, size) === "webm";
+        }
+        break;
+      case EBMLId.Seek:
+        {
+          if (!this.currentSegment)
+            break;
+          const seekEntry = { id: -1, segmentPosition: -1 };
+          this.currentSegment.seekEntries.push(seekEntry);
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+          if (seekEntry.id === -1 || seekEntry.segmentPosition === -1) {
+            this.currentSegment.seekEntries.pop();
+          }
+        }
+        break;
+      case EBMLId.SeekID:
+        {
+          const lastSeekEntry = this.currentSegment?.seekEntries[this.currentSegment.seekEntries.length - 1];
+          if (!lastSeekEntry)
+            break;
+          lastSeekEntry.id = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.SeekPosition:
+        {
+          const lastSeekEntry = this.currentSegment?.seekEntries[this.currentSegment.seekEntries.length - 1];
+          if (!lastSeekEntry)
+            break;
+          lastSeekEntry.segmentPosition = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.TimestampScale:
+        {
+          if (!this.currentSegment)
+            break;
+          this.currentSegment.timestampScale = readUnsignedInt(slice, size);
+          this.currentSegment.timestampFactor = 1e9 / this.currentSegment.timestampScale;
+        }
+        break;
+      case EBMLId.Duration:
+        {
+          if (!this.currentSegment)
+            break;
+          this.currentSegment.duration = readFloat(slice, size);
+        }
+        break;
+      case EBMLId.TrackEntry:
+        {
+          if (!this.currentSegment)
+            break;
+          this.currentTrack = {
+            id: -1,
+            segment: this.currentSegment,
+            demuxer: this,
+            clusterPositionCache: [],
+            cuePoints: [],
+            disposition: {
+              ...DEFAULT_TRACK_DISPOSITION
+            },
+            inputTrack: null,
+            codecId: null,
+            codecPrivate: null,
+            defaultDuration: null,
+            defaultDurationNs: null,
+            name: null,
+            languageCode: UNDETERMINED_LANGUAGE,
+            decodingInstructions: [],
+            info: null
+          };
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+          if (!this.currentTrack) {
+            break;
+          }
+          if (this.currentTrack.decodingInstructions.some((instruction) => {
+            return instruction.data?.type !== "decompress" || instruction.scope !== ContentEncodingScope.Block || instruction.data.algorithm !== ContentCompAlgo.HeaderStripping;
+          })) {
+            console.warn(`Track #${this.currentTrack.id} has an unsupported content encoding; dropping.`);
+            this.currentTrack = null;
+          }
+          if (this.currentTrack && this.currentTrack.id !== -1 && this.currentTrack.codecId && this.currentTrack.info) {
+            const slashIndex = this.currentTrack.codecId.indexOf("/");
+            const codecIdWithoutSuffix = slashIndex === -1 ? this.currentTrack.codecId : this.currentTrack.codecId.slice(0, slashIndex);
+            if (this.currentTrack.info.type === "video" && this.currentTrack.info.width !== -1 && this.currentTrack.info.height !== -1) {
+              if (this.currentTrack.codecId === CODEC_STRING_MAP.avc) {
+                this.currentTrack.info.codec = "avc";
+                this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
+              } else if (this.currentTrack.codecId === CODEC_STRING_MAP.hevc) {
+                this.currentTrack.info.codec = "hevc";
+                this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
+              } else if (codecIdWithoutSuffix === CODEC_STRING_MAP.vp8) {
+                this.currentTrack.info.codec = "vp8";
+              } else if (codecIdWithoutSuffix === CODEC_STRING_MAP.vp9) {
+                this.currentTrack.info.codec = "vp9";
+              } else if (codecIdWithoutSuffix === CODEC_STRING_MAP.av1) {
+                this.currentTrack.info.codec = "av1";
+              }
+              const videoTrack = this.currentTrack;
+              const inputTrack = new InputVideoTrack(this.input, new MatroskaVideoTrackBacking(videoTrack));
+              this.currentTrack.inputTrack = inputTrack;
+              this.currentSegment.tracks.push(this.currentTrack);
+            } else if (this.currentTrack.info.type === "audio" && this.currentTrack.info.numberOfChannels !== -1 && this.currentTrack.info.sampleRate !== -1) {
+              if (codecIdWithoutSuffix === CODEC_STRING_MAP.aac) {
+                this.currentTrack.info.codec = "aac";
+                this.currentTrack.info.aacCodecInfo = {
+                  isMpeg2: this.currentTrack.codecId.includes("MPEG2")
+                };
+                this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
+              } else if (this.currentTrack.codecId === CODEC_STRING_MAP.mp3) {
+                this.currentTrack.info.codec = "mp3";
+              } else if (codecIdWithoutSuffix === CODEC_STRING_MAP.opus) {
+                this.currentTrack.info.codec = "opus";
+                this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
+                this.currentTrack.info.sampleRate = OPUS_SAMPLE_RATE;
+              } else if (codecIdWithoutSuffix === CODEC_STRING_MAP.vorbis) {
+                this.currentTrack.info.codec = "vorbis";
+                this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
+              } else if (codecIdWithoutSuffix === CODEC_STRING_MAP.flac) {
+                this.currentTrack.info.codec = "flac";
+                this.currentTrack.info.codecDescription = this.currentTrack.codecPrivate;
+              } else if (this.currentTrack.codecId === "A_PCM/INT/LIT") {
+                if (this.currentTrack.info.bitDepth === 8) {
+                  this.currentTrack.info.codec = "pcm-u8";
+                } else if (this.currentTrack.info.bitDepth === 16) {
+                  this.currentTrack.info.codec = "pcm-s16";
+                } else if (this.currentTrack.info.bitDepth === 24) {
+                  this.currentTrack.info.codec = "pcm-s24";
+                } else if (this.currentTrack.info.bitDepth === 32) {
+                  this.currentTrack.info.codec = "pcm-s32";
+                }
+              } else if (this.currentTrack.codecId === "A_PCM/INT/BIG") {
+                if (this.currentTrack.info.bitDepth === 8) {
+                  this.currentTrack.info.codec = "pcm-u8";
+                } else if (this.currentTrack.info.bitDepth === 16) {
+                  this.currentTrack.info.codec = "pcm-s16be";
+                } else if (this.currentTrack.info.bitDepth === 24) {
+                  this.currentTrack.info.codec = "pcm-s24be";
+                } else if (this.currentTrack.info.bitDepth === 32) {
+                  this.currentTrack.info.codec = "pcm-s32be";
+                }
+              } else if (this.currentTrack.codecId === "A_PCM/FLOAT/IEEE") {
+                if (this.currentTrack.info.bitDepth === 32) {
+                  this.currentTrack.info.codec = "pcm-f32";
+                } else if (this.currentTrack.info.bitDepth === 64) {
+                  this.currentTrack.info.codec = "pcm-f64";
+                }
+              }
+              const audioTrack = this.currentTrack;
+              const inputTrack = new InputAudioTrack(this.input, new MatroskaAudioTrackBacking(audioTrack));
+              this.currentTrack.inputTrack = inputTrack;
+              this.currentSegment.tracks.push(this.currentTrack);
+            }
+          }
+          this.currentTrack = null;
+        }
+        break;
+      case EBMLId.TrackNumber:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.id = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.TrackType:
+        {
+          if (!this.currentTrack)
+            break;
+          const type = readUnsignedInt(slice, size);
+          if (type === 1) {
+            this.currentTrack.info = {
+              type: "video",
+              width: -1,
+              height: -1,
+              rotation: 0,
+              codec: null,
+              codecDescription: null,
+              colorSpace: null,
+              alphaMode: false
+            };
+          } else if (type === 2) {
+            this.currentTrack.info = {
+              type: "audio",
+              numberOfChannels: -1,
+              sampleRate: -1,
+              bitDepth: -1,
+              codec: null,
+              codecDescription: null,
+              aacCodecInfo: null
+            };
+          }
+        }
+        break;
+      case EBMLId.FlagEnabled:
+        {
+          if (!this.currentTrack)
+            break;
+          const enabled = readUnsignedInt(slice, size);
+          if (!enabled) {
+            this.currentTrack = null;
+          }
+        }
+        break;
+      case EBMLId.FlagDefault:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.disposition.default = !!readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.FlagForced:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.disposition.forced = !!readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.FlagOriginal:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.disposition.original = !!readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.FlagHearingImpaired:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.disposition.hearingImpaired = !!readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.FlagVisualImpaired:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.disposition.visuallyImpaired = !!readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.FlagCommentary:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.disposition.commentary = !!readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.CodecID:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.codecId = readAsciiString(slice, size);
+        }
+        break;
+      case EBMLId.CodecPrivate:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.codecPrivate = readBytes(slice, size);
+        }
+        break;
+      case EBMLId.DefaultDuration:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.defaultDurationNs = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.Name:
+        {
+          if (!this.currentTrack)
+            break;
+          this.currentTrack.name = readUnicodeString(slice, size);
+        }
+        break;
+      case EBMLId.Language:
+        {
+          if (!this.currentTrack)
+            break;
+          if (this.currentTrack.languageCode !== UNDETERMINED_LANGUAGE) {
+            break;
+          }
+          this.currentTrack.languageCode = readAsciiString(slice, size);
+          if (!isIso639Dash2LanguageCode(this.currentTrack.languageCode)) {
+            this.currentTrack.languageCode = UNDETERMINED_LANGUAGE;
+          }
+        }
+        break;
+      case EBMLId.LanguageBCP47:
+        {
+          if (!this.currentTrack)
+            break;
+          const bcp47 = readAsciiString(slice, size);
+          const languageSubtag = bcp47.split("-")[0];
+          if (languageSubtag) {
+            this.currentTrack.languageCode = languageSubtag;
+          } else {
+            this.currentTrack.languageCode = UNDETERMINED_LANGUAGE;
+          }
+        }
+        break;
+      case EBMLId.Video:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+        }
+        break;
+      case EBMLId.PixelWidth:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          this.currentTrack.info.width = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.PixelHeight:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          this.currentTrack.info.height = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.AlphaMode:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          this.currentTrack.info.alphaMode = readUnsignedInt(slice, size) === 1;
+        }
+        break;
+      case EBMLId.Colour:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          this.currentTrack.info.colorSpace = {};
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+        }
+        break;
+      case EBMLId.MatrixCoefficients:
+        {
+          if (this.currentTrack?.info?.type !== "video" || !this.currentTrack.info.colorSpace)
+            break;
+          const matrixCoefficients = readUnsignedInt(slice, size);
+          const mapped = MATRIX_COEFFICIENTS_MAP_INVERSE[matrixCoefficients] ?? null;
+          this.currentTrack.info.colorSpace.matrix = mapped;
+        }
+        break;
+      case EBMLId.Range:
+        {
+          if (this.currentTrack?.info?.type !== "video" || !this.currentTrack.info.colorSpace)
+            break;
+          this.currentTrack.info.colorSpace.fullRange = readUnsignedInt(slice, size) === 2;
+        }
+        break;
+      case EBMLId.TransferCharacteristics:
+        {
+          if (this.currentTrack?.info?.type !== "video" || !this.currentTrack.info.colorSpace)
+            break;
+          const transferCharacteristics = readUnsignedInt(slice, size);
+          const mapped = TRANSFER_CHARACTERISTICS_MAP_INVERSE[transferCharacteristics] ?? null;
+          this.currentTrack.info.colorSpace.transfer = mapped;
+        }
+        break;
+      case EBMLId.Primaries:
+        {
+          if (this.currentTrack?.info?.type !== "video" || !this.currentTrack.info.colorSpace)
+            break;
+          const primaries = readUnsignedInt(slice, size);
+          const mapped = COLOR_PRIMARIES_MAP_INVERSE[primaries] ?? null;
+          this.currentTrack.info.colorSpace.primaries = mapped;
+        }
+        break;
+      case EBMLId.Projection:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+        }
+        break;
+      case EBMLId.ProjectionPoseRoll:
+        {
+          if (this.currentTrack?.info?.type !== "video")
+            break;
+          const rotation = readFloat(slice, size);
+          const flippedRotation = -rotation;
+          try {
+            this.currentTrack.info.rotation = normalizeRotation(flippedRotation);
+          } catch {
+          }
+        }
+        break;
+      case EBMLId.Audio:
+        {
+          if (this.currentTrack?.info?.type !== "audio")
+            break;
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+        }
+        break;
+      case EBMLId.SamplingFrequency:
+        {
+          if (this.currentTrack?.info?.type !== "audio")
+            break;
+          this.currentTrack.info.sampleRate = readFloat(slice, size);
+        }
+        break;
+      case EBMLId.Channels:
+        {
+          if (this.currentTrack?.info?.type !== "audio")
+            break;
+          this.currentTrack.info.numberOfChannels = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.BitDepth:
+        {
+          if (this.currentTrack?.info?.type !== "audio")
+            break;
+          this.currentTrack.info.bitDepth = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.CuePoint:
+        {
+          if (!this.currentSegment)
+            break;
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+          this.currentCueTime = null;
+        }
+        break;
+      case EBMLId.CueTime:
+        {
+          this.currentCueTime = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.CueTrackPositions:
+        {
+          if (this.currentCueTime === null)
+            break;
+          assert(this.currentSegment);
+          const cuePoint = { time: this.currentCueTime, trackId: -1, clusterPosition: -1 };
+          this.currentSegment.cuePoints.push(cuePoint);
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+          if (cuePoint.trackId === -1 || cuePoint.clusterPosition === -1) {
+            this.currentSegment.cuePoints.pop();
+          }
+        }
+        break;
+      case EBMLId.CueTrack:
+        {
+          const lastCuePoint = this.currentSegment?.cuePoints[this.currentSegment.cuePoints.length - 1];
+          if (!lastCuePoint)
+            break;
+          lastCuePoint.trackId = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.CueClusterPosition:
+        {
+          const lastCuePoint = this.currentSegment?.cuePoints[this.currentSegment.cuePoints.length - 1];
+          if (!lastCuePoint)
+            break;
+          assert(this.currentSegment);
+          lastCuePoint.clusterPosition = this.currentSegment.dataStartPos + readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.Timestamp:
+        {
+          if (!this.currentCluster)
+            break;
+          this.currentCluster.timestamp = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.SimpleBlock:
+        {
+          if (!this.currentCluster)
+            break;
+          const trackNumber = readVarInt(slice);
+          if (trackNumber === null)
+            break;
+          const trackData = this.getTrackDataInCluster(this.currentCluster, trackNumber);
+          if (!trackData)
+            break;
+          const relativeTimestamp = readI16Be(slice);
+          const flags = readU8(slice);
+          const lacing = flags >> 1 & 3;
+          let isKeyFrame = !!(flags & 128);
+          if (trackData.track.info?.type === "audio" && trackData.track.info.codec) {
+            isKeyFrame = true;
+          }
+          const blockData = readBytes(slice, size - (slice.filePos - dataStartPos));
+          const hasDecodingInstructions = trackData.track.decodingInstructions.length > 0;
+          trackData.blocks.push({
+            timestamp: relativeTimestamp,
+            // We'll add the cluster's timestamp to this later
+            duration: 0,
+            // Will set later
+            isKeyFrame,
+            data: blockData,
+            lacing,
+            decoded: !hasDecodingInstructions,
+            mainAdditional: null
+          });
+        }
+        break;
+      case EBMLId.BlockGroup:
+        {
+          if (!this.currentCluster)
+            break;
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+          this.currentBlock = null;
+        }
+        break;
+      case EBMLId.Block:
+        {
+          if (!this.currentCluster)
+            break;
+          const trackNumber = readVarInt(slice);
+          if (trackNumber === null)
+            break;
+          const trackData = this.getTrackDataInCluster(this.currentCluster, trackNumber);
+          if (!trackData)
+            break;
+          const relativeTimestamp = readI16Be(slice);
+          const flags = readU8(slice);
+          const lacing = flags >> 1 & 3;
+          const blockData = readBytes(slice, size - (slice.filePos - dataStartPos));
+          const hasDecodingInstructions = trackData.track.decodingInstructions.length > 0;
+          this.currentBlock = {
+            timestamp: relativeTimestamp,
+            // We'll add the cluster's timestamp to this later
+            duration: 0,
+            // Will set later
+            isKeyFrame: true,
+            data: blockData,
+            lacing,
+            decoded: !hasDecodingInstructions,
+            mainAdditional: null
+          };
+          trackData.blocks.push(this.currentBlock);
+        }
+        break;
+      case EBMLId.BlockAdditions:
+        {
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+        }
+        break;
+      case EBMLId.BlockMore:
+        {
+          if (!this.currentBlock)
+            break;
+          this.currentBlockAdditional = {
+            addId: 1,
+            data: null
+          };
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+          if (this.currentBlockAdditional.data && this.currentBlockAdditional.addId === 1) {
+            this.currentBlock.mainAdditional = this.currentBlockAdditional.data;
+          }
+          this.currentBlockAdditional = null;
+        }
+        break;
+      case EBMLId.BlockAdditional:
+        {
+          if (!this.currentBlockAdditional)
+            break;
+          this.currentBlockAdditional.data = readBytes(slice, size);
+        }
+        break;
+      case EBMLId.BlockAddID:
+        {
+          if (!this.currentBlockAdditional)
+            break;
+          this.currentBlockAdditional.addId = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.BlockDuration:
+        {
+          if (!this.currentBlock)
+            break;
+          this.currentBlock.duration = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.ReferenceBlock:
+        {
+          if (!this.currentBlock)
+            break;
+          this.currentBlock.isKeyFrame = false;
+        }
+        break;
+      case EBMLId.Tag:
+        {
+          this.currentTagTargetIsMovie = true;
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+        }
+        break;
+      case EBMLId.Targets:
+        {
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+        }
+        break;
+      case EBMLId.TargetTypeValue:
+        {
+          const targetTypeValue = readUnsignedInt(slice, size);
+          if (targetTypeValue !== 50) {
+            this.currentTagTargetIsMovie = false;
+          }
+        }
+        break;
+      case EBMLId.TagTrackUID:
+      case EBMLId.TagEditionUID:
+      case EBMLId.TagChapterUID:
+      case EBMLId.TagAttachmentUID:
+        {
+          this.currentTagTargetIsMovie = false;
+        }
+        break;
+      case EBMLId.SimpleTag:
+        {
+          if (!this.currentTagTargetIsMovie)
+            break;
+          this.currentSimpleTagName = null;
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+        }
+        break;
+      case EBMLId.TagName:
+        {
+          this.currentSimpleTagName = readUnicodeString(slice, size);
+        }
+        break;
+      case EBMLId.TagString:
+        {
+          if (!this.currentSimpleTagName)
+            break;
+          const value = readUnicodeString(slice, size);
+          this.processTagValue(this.currentSimpleTagName, value);
+        }
+        break;
+      case EBMLId.TagBinary:
+        {
+          if (!this.currentSimpleTagName)
+            break;
+          const value = readBytes(slice, size);
+          this.processTagValue(this.currentSimpleTagName, value);
+        }
+        break;
+      case EBMLId.AttachedFile:
+        {
+          if (!this.currentSegment)
+            break;
+          this.currentAttachedFile = {
+            fileUid: null,
+            fileName: null,
+            fileMediaType: null,
+            fileData: null,
+            fileDescription: null
+          };
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+          const tags = this.currentSegment.metadataTags;
+          if (this.currentAttachedFile.fileUid && this.currentAttachedFile.fileData) {
+            tags.raw ?? (tags.raw = {});
+            tags.raw[this.currentAttachedFile.fileUid.toString()] = new AttachedFile(this.currentAttachedFile.fileData, this.currentAttachedFile.fileMediaType ?? void 0, this.currentAttachedFile.fileName ?? void 0, this.currentAttachedFile.fileDescription ?? void 0);
+          }
+          if (this.currentAttachedFile.fileMediaType?.startsWith("image/") && this.currentAttachedFile.fileData) {
+            const fileName = this.currentAttachedFile.fileName;
+            let kind = "unknown";
+            if (fileName) {
+              const lowerName = fileName.toLowerCase();
+              if (lowerName.startsWith("cover.")) {
+                kind = "coverFront";
+              } else if (lowerName.startsWith("back.")) {
+                kind = "coverBack";
+              }
+            }
+            tags.images ?? (tags.images = []);
+            tags.images.push({
+              data: this.currentAttachedFile.fileData,
+              mimeType: this.currentAttachedFile.fileMediaType,
+              kind,
+              name: this.currentAttachedFile.fileName ?? void 0,
+              description: this.currentAttachedFile.fileDescription ?? void 0
+            });
+          }
+          this.currentAttachedFile = null;
+        }
+        break;
+      case EBMLId.FileUID:
+        {
+          if (!this.currentAttachedFile)
+            break;
+          this.currentAttachedFile.fileUid = readUnsignedBigInt(slice, size);
+        }
+        break;
+      case EBMLId.FileName:
+        {
+          if (!this.currentAttachedFile)
+            break;
+          this.currentAttachedFile.fileName = readUnicodeString(slice, size);
+        }
+        break;
+      case EBMLId.FileMediaType:
+        {
+          if (!this.currentAttachedFile)
+            break;
+          this.currentAttachedFile.fileMediaType = readAsciiString(slice, size);
+        }
+        break;
+      case EBMLId.FileData:
+        {
+          if (!this.currentAttachedFile)
+            break;
+          this.currentAttachedFile.fileData = readBytes(slice, size);
+        }
+        break;
+      case EBMLId.FileDescription:
+        {
+          if (!this.currentAttachedFile)
+            break;
+          this.currentAttachedFile.fileDescription = readUnicodeString(slice, size);
+        }
+        break;
+      case EBMLId.ContentEncodings:
+        {
+          if (!this.currentTrack)
+            break;
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+          this.currentTrack.decodingInstructions.sort((a, b) => b.order - a.order);
+        }
+        break;
+      case EBMLId.ContentEncoding:
+        {
+          this.currentDecodingInstruction = {
+            order: 0,
+            scope: ContentEncodingScope.Block,
+            data: null
+          };
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+          if (this.currentDecodingInstruction.data) {
+            this.currentTrack.decodingInstructions.push(this.currentDecodingInstruction);
+          }
+          this.currentDecodingInstruction = null;
+        }
+        break;
+      case EBMLId.ContentEncodingOrder:
+        {
+          if (!this.currentDecodingInstruction)
+            break;
+          this.currentDecodingInstruction.order = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.ContentEncodingScope:
+        {
+          if (!this.currentDecodingInstruction)
+            break;
+          this.currentDecodingInstruction.scope = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.ContentCompression:
+        {
+          if (!this.currentDecodingInstruction)
+            break;
+          this.currentDecodingInstruction.data = {
+            type: "decompress",
+            algorithm: ContentCompAlgo.Zlib,
+            settings: null
+          };
+          this.readContiguousElements(slice.slice(dataStartPos, size));
+        }
+        break;
+      case EBMLId.ContentCompAlgo:
+        {
+          if (this.currentDecodingInstruction?.data?.type !== "decompress")
+            break;
+          this.currentDecodingInstruction.data.algorithm = readUnsignedInt(slice, size);
+        }
+        break;
+      case EBMLId.ContentCompSettings:
+        {
+          if (this.currentDecodingInstruction?.data?.type !== "decompress")
+            break;
+          this.currentDecodingInstruction.data.settings = readBytes(slice, size);
+        }
+        break;
+      case EBMLId.ContentEncryption:
+        {
+          if (!this.currentDecodingInstruction)
+            break;
+          this.currentDecodingInstruction.data = {
+            type: "decrypt"
+          };
+        }
+        break;
+    }
+    slice.filePos = dataStartPos + size;
+    return true;
+  }
+  decodeBlockData(track, rawData) {
+    assert(track.decodingInstructions.length > 0);
+    let currentData = rawData;
+    for (const instruction of track.decodingInstructions) {
+      assert(instruction.data);
+      switch (instruction.data.type) {
+        case "decompress":
+          {
+            switch (instruction.data.algorithm) {
+              case ContentCompAlgo.HeaderStripping:
+                {
+                  if (instruction.data.settings && instruction.data.settings.length > 0) {
+                    const prefix = instruction.data.settings;
+                    const newData = new Uint8Array(prefix.length + currentData.length);
+                    newData.set(prefix, 0);
+                    newData.set(currentData, prefix.length);
+                    currentData = newData;
+                  }
+                }
+                break;
+            }
+          }
+          break;
+      }
+    }
+    return currentData;
+  }
+  processTagValue(name, value) {
+    var _a;
+    if (!this.currentSegment?.metadataTags)
+      return;
+    const metadataTags = this.currentSegment.metadataTags;
+    metadataTags.raw ?? (metadataTags.raw = {});
+    (_a = metadataTags.raw)[name] ?? (_a[name] = value);
+    if (typeof value === "string") {
+      switch (name.toLowerCase()) {
+        case "title":
+          {
+            metadataTags.title ?? (metadataTags.title = value);
+          }
+          break;
+        case "description":
+          {
+            metadataTags.description ?? (metadataTags.description = value);
+          }
+          break;
+        case "artist":
+          {
+            metadataTags.artist ?? (metadataTags.artist = value);
+          }
+          break;
+        case "album":
+          {
+            metadataTags.album ?? (metadataTags.album = value);
+          }
+          break;
+        case "album_artist":
+          {
+            metadataTags.albumArtist ?? (metadataTags.albumArtist = value);
+          }
+          break;
+        case "genre":
+          {
+            metadataTags.genre ?? (metadataTags.genre = value);
+          }
+          break;
+        case "comment":
+          {
+            metadataTags.comment ?? (metadataTags.comment = value);
+          }
+          break;
+        case "lyrics":
+          {
+            metadataTags.lyrics ?? (metadataTags.lyrics = value);
+          }
+          break;
+        case "date":
+          {
+            const date = new Date(value);
+            if (!Number.isNaN(date.getTime())) {
+              metadataTags.date ?? (metadataTags.date = date);
+            }
+          }
+          break;
+        case "track_number":
+        case "part_number":
+          {
+            const parts = value.split("/");
+            const trackNum = Number.parseInt(parts[0], 10);
+            const tracksTotal = parts[1] && Number.parseInt(parts[1], 10);
+            if (Number.isInteger(trackNum) && trackNum > 0) {
+              metadataTags.trackNumber ?? (metadataTags.trackNumber = trackNum);
+            }
+            if (tracksTotal && Number.isInteger(tracksTotal) && tracksTotal > 0) {
+              metadataTags.tracksTotal ?? (metadataTags.tracksTotal = tracksTotal);
+            }
+          }
+          break;
+        case "disc_number":
+        case "disc":
+          {
+            const discParts = value.split("/");
+            const discNum = Number.parseInt(discParts[0], 10);
+            const discsTotal = discParts[1] && Number.parseInt(discParts[1], 10);
+            if (Number.isInteger(discNum) && discNum > 0) {
+              metadataTags.discNumber ?? (metadataTags.discNumber = discNum);
+            }
+            if (discsTotal && Number.isInteger(discsTotal) && discsTotal > 0) {
+              metadataTags.discsTotal ?? (metadataTags.discsTotal = discsTotal);
+            }
+          }
+          break;
+      }
+    }
+  }
+}
+class MatroskaTrackBacking {
+  constructor(internalTrack) {
+    this.internalTrack = internalTrack;
+    this.packetToClusterLocation = /* @__PURE__ */ new WeakMap();
+  }
+  getId() {
+    return this.internalTrack.id;
+  }
+  getCodec() {
+    throw new Error("Not implemented on base class.");
+  }
+  getInternalCodecId() {
+    return this.internalTrack.codecId;
+  }
+  async computeDuration() {
+    const lastPacket = await this.getPacket(Infinity, { metadataOnly: true });
+    return (lastPacket?.timestamp ?? 0) + (lastPacket?.duration ?? 0);
+  }
+  getName() {
+    return this.internalTrack.name;
+  }
+  getLanguageCode() {
+    return this.internalTrack.languageCode;
+  }
+  async getFirstTimestamp() {
+    const firstPacket = await this.getFirstPacket({ metadataOnly: true });
+    return firstPacket?.timestamp ?? 0;
+  }
+  getTimeResolution() {
+    return this.internalTrack.segment.timestampFactor;
+  }
+  getDisposition() {
+    return this.internalTrack.disposition;
+  }
+  async getFirstPacket(options) {
+    return this.performClusterLookup(
+      null,
+      (cluster) => {
+        const trackData = cluster.trackData.get(this.internalTrack.id);
+        if (trackData) {
+          return {
+            blockIndex: 0,
+            correctBlockFound: true
+          };
+        }
+        return {
+          blockIndex: -1,
+          correctBlockFound: false
+        };
+      },
+      -Infinity,
+      // Use -Infinity as a search timestamp to avoid using the cues
+      Infinity,
+      options
+    );
+  }
+  intoTimescale(timestamp) {
+    return roundIfAlmostInteger(timestamp * this.internalTrack.segment.timestampFactor);
+  }
+  async getPacket(timestamp, options) {
+    const timestampInTimescale = this.intoTimescale(timestamp);
+    return this.performClusterLookup(null, (cluster) => {
+      const trackData = cluster.trackData.get(this.internalTrack.id);
+      if (!trackData) {
+        return { blockIndex: -1, correctBlockFound: false };
+      }
+      const index = binarySearchLessOrEqual(trackData.presentationTimestamps, timestampInTimescale, (x) => x.timestamp);
+      const blockIndex = index !== -1 ? trackData.presentationTimestamps[index].blockIndex : -1;
+      const correctBlockFound = index !== -1 && timestampInTimescale < trackData.endTimestamp;
+      return { blockIndex, correctBlockFound };
+    }, timestampInTimescale, timestampInTimescale, options);
+  }
+  async getNextPacket(packet, options) {
+    const locationInCluster = this.packetToClusterLocation.get(packet);
+    if (locationInCluster === void 0) {
+      throw new Error("Packet was not created from this track.");
+    }
+    return this.performClusterLookup(
+      locationInCluster.cluster,
+      (cluster) => {
+        if (cluster === locationInCluster.cluster) {
+          const trackData = cluster.trackData.get(this.internalTrack.id);
+          if (locationInCluster.blockIndex + 1 < trackData.blocks.length) {
+            return {
+              blockIndex: locationInCluster.blockIndex + 1,
+              correctBlockFound: true
+            };
+          }
+        } else {
+          const trackData = cluster.trackData.get(this.internalTrack.id);
+          if (trackData) {
+            return {
+              blockIndex: 0,
+              correctBlockFound: true
+            };
+          }
+        }
+        return {
+          blockIndex: -1,
+          correctBlockFound: false
+        };
+      },
+      -Infinity,
+      // Use -Infinity as a search timestamp to avoid using the cues
+      Infinity,
+      options
+    );
+  }
+  async getKeyPacket(timestamp, options) {
+    const timestampInTimescale = this.intoTimescale(timestamp);
+    return this.performClusterLookup(null, (cluster) => {
+      const trackData = cluster.trackData.get(this.internalTrack.id);
+      if (!trackData) {
+        return { blockIndex: -1, correctBlockFound: false };
+      }
+      const index = findLastIndex(trackData.presentationTimestamps, (x) => {
+        const block = trackData.blocks[x.blockIndex];
+        return block.isKeyFrame && x.timestamp <= timestampInTimescale;
+      });
+      const blockIndex = index !== -1 ? trackData.presentationTimestamps[index].blockIndex : -1;
+      const correctBlockFound = index !== -1 && timestampInTimescale < trackData.endTimestamp;
+      return { blockIndex, correctBlockFound };
+    }, timestampInTimescale, timestampInTimescale, options);
+  }
+  async getNextKeyPacket(packet, options) {
+    const locationInCluster = this.packetToClusterLocation.get(packet);
+    if (locationInCluster === void 0) {
+      throw new Error("Packet was not created from this track.");
+    }
+    return this.performClusterLookup(
+      locationInCluster.cluster,
+      (cluster) => {
+        if (cluster === locationInCluster.cluster) {
+          const trackData = cluster.trackData.get(this.internalTrack.id);
+          const nextKeyFrameIndex = trackData.blocks.findIndex((x, i) => x.isKeyFrame && i > locationInCluster.blockIndex);
+          if (nextKeyFrameIndex !== -1) {
+            return {
+              blockIndex: nextKeyFrameIndex,
+              correctBlockFound: true
+            };
+          }
+        } else {
+          const trackData = cluster.trackData.get(this.internalTrack.id);
+          if (trackData && trackData.firstKeyFrameTimestamp !== null) {
+            const keyFrameIndex = trackData.blocks.findIndex((x) => x.isKeyFrame);
+            assert(keyFrameIndex !== -1);
+            return {
+              blockIndex: keyFrameIndex,
+              correctBlockFound: true
+            };
+          }
+        }
+        return {
+          blockIndex: -1,
+          correctBlockFound: false
+        };
+      },
+      -Infinity,
+      // Use -Infinity as a search timestamp to avoid using the cues
+      Infinity,
+      options
+    );
+  }
+  async fetchPacketInCluster(cluster, blockIndex, options) {
+    if (blockIndex === -1) {
+      return null;
+    }
+    const trackData = cluster.trackData.get(this.internalTrack.id);
+    const block = trackData.blocks[blockIndex];
+    assert(block);
+    if (!block.decoded) {
+      block.data = this.internalTrack.demuxer.decodeBlockData(this.internalTrack, block.data);
+      block.decoded = true;
+    }
+    const data = options.metadataOnly ? PLACEHOLDER_DATA : block.data;
+    const timestamp = block.timestamp / this.internalTrack.segment.timestampFactor;
+    const duration = block.duration / this.internalTrack.segment.timestampFactor;
+    const sideData = {};
+    if (block.mainAdditional && this.internalTrack.info?.type === "video" && this.internalTrack.info.alphaMode) {
+      sideData.alpha = options.metadataOnly ? PLACEHOLDER_DATA : block.mainAdditional;
+      sideData.alphaByteLength = block.mainAdditional.byteLength;
+    }
+    const packet = new EncodedPacket(data, block.isKeyFrame ? "key" : "delta", timestamp, duration, cluster.dataStartPos + blockIndex, block.data.byteLength, sideData);
+    this.packetToClusterLocation.set(packet, { cluster, blockIndex });
+    return packet;
+  }
+  /** Looks for a packet in the clusters while trying to load as few clusters as possible to retrieve it. */
+  async performClusterLookup(startCluster, getMatchInCluster, searchTimestamp, latestTimestamp, options) {
+    const { demuxer, segment } = this.internalTrack;
+    let currentCluster = null;
+    let bestCluster = null;
+    let bestBlockIndex = -1;
+    if (startCluster) {
+      const { blockIndex, correctBlockFound } = getMatchInCluster(startCluster);
+      if (correctBlockFound) {
+        return this.fetchPacketInCluster(startCluster, blockIndex, options);
+      }
+      if (blockIndex !== -1) {
+        bestCluster = startCluster;
+        bestBlockIndex = blockIndex;
+      }
+    }
+    const cuePointIndex = binarySearchLessOrEqual(this.internalTrack.cuePoints, searchTimestamp, (x) => x.time);
+    const cuePoint = cuePointIndex !== -1 ? this.internalTrack.cuePoints[cuePointIndex] : null;
+    const positionCacheIndex = binarySearchLessOrEqual(this.internalTrack.clusterPositionCache, searchTimestamp, (x) => x.startTimestamp);
+    const positionCacheEntry = positionCacheIndex !== -1 ? this.internalTrack.clusterPositionCache[positionCacheIndex] : null;
+    const lookupEntryPosition = Math.max(cuePoint?.clusterPosition ?? 0, positionCacheEntry?.elementStartPos ?? 0) || null;
+    let currentPos;
+    if (!startCluster) {
+      currentPos = lookupEntryPosition ?? segment.clusterSeekStartPos;
+    } else {
+      if (lookupEntryPosition === null || startCluster.elementStartPos >= lookupEntryPosition) {
+        currentPos = startCluster.elementEndPos;
+        currentCluster = startCluster;
+      } else {
+        currentPos = lookupEntryPosition;
+      }
+    }
+    while (segment.elementEndPos === null || currentPos <= segment.elementEndPos - MIN_HEADER_SIZE) {
+      if (currentCluster) {
+        const trackData = currentCluster.trackData.get(this.internalTrack.id);
+        if (trackData && trackData.startTimestamp > latestTimestamp) {
+          break;
+        }
+      }
+      let slice = demuxer.reader.requestSliceRange(currentPos, MIN_HEADER_SIZE, MAX_HEADER_SIZE);
+      if (slice instanceof Promise)
+        slice = await slice;
+      if (!slice)
+        break;
+      const elementStartPos = currentPos;
+      const elementHeader = readElementHeader(slice);
+      if (!elementHeader || !LEVEL_1_EBML_IDS.includes(elementHeader.id) && elementHeader.id !== EBMLId.Void) {
+        const nextPos = await resync(demuxer.reader, elementStartPos, LEVEL_1_EBML_IDS, Math.min(segment.elementEndPos ?? Infinity, elementStartPos + MAX_RESYNC_LENGTH));
+        if (nextPos) {
+          currentPos = nextPos;
+          continue;
+        } else {
+          break;
+        }
+      }
+      const id = elementHeader.id;
+      let size = elementHeader.size;
+      const dataStartPos = slice.filePos;
+      if (id === EBMLId.Cluster) {
+        currentCluster = await demuxer.readCluster(elementStartPos, segment);
+        size = currentCluster.elementEndPos - dataStartPos;
+        const { blockIndex, correctBlockFound } = getMatchInCluster(currentCluster);
+        if (correctBlockFound) {
+          return this.fetchPacketInCluster(currentCluster, blockIndex, options);
+        }
+        if (blockIndex !== -1) {
+          bestCluster = currentCluster;
+          bestBlockIndex = blockIndex;
+        }
+      }
+      if (size === void 0) {
+        assert(id !== EBMLId.Cluster);
+        const nextElementPos = await searchForNextElementId(demuxer.reader, dataStartPos, LEVEL_0_AND_1_EBML_IDS, segment.elementEndPos);
+        size = nextElementPos.pos - dataStartPos;
+      }
+      const endPos = dataStartPos + size;
+      if (segment.elementEndPos === null) {
+        let slice2 = demuxer.reader.requestSliceRange(endPos, MIN_HEADER_SIZE, MAX_HEADER_SIZE);
+        if (slice2 instanceof Promise)
+          slice2 = await slice2;
+        if (!slice2)
+          break;
+        const elementId = readElementId(slice2);
+        if (elementId === EBMLId.Segment) {
+          segment.elementEndPos = endPos;
+          break;
+        }
+      }
+      currentPos = endPos;
+    }
+    if (cuePoint && (!bestCluster || bestCluster.elementStartPos < cuePoint.clusterPosition)) {
+      const previousCuePoint = this.internalTrack.cuePoints[cuePointIndex - 1];
+      assert(!previousCuePoint || previousCuePoint.time < cuePoint.time);
+      const newSearchTimestamp = previousCuePoint?.time ?? -Infinity;
+      return this.performClusterLookup(null, getMatchInCluster, newSearchTimestamp, latestTimestamp, options);
+    }
+    if (bestCluster) {
+      return this.fetchPacketInCluster(bestCluster, bestBlockIndex, options);
+    }
+    return null;
+  }
+}
+class MatroskaVideoTrackBacking extends MatroskaTrackBacking {
+  constructor(internalTrack) {
+    super(internalTrack);
+    this.decoderConfigPromise = null;
+    this.internalTrack = internalTrack;
+  }
+  getCodec() {
+    return this.internalTrack.info.codec;
+  }
+  getCodedWidth() {
+    return this.internalTrack.info.width;
+  }
+  getCodedHeight() {
+    return this.internalTrack.info.height;
+  }
+  getRotation() {
+    return this.internalTrack.info.rotation;
+  }
+  async getColorSpace() {
+    return {
+      primaries: this.internalTrack.info.colorSpace?.primaries,
+      transfer: this.internalTrack.info.colorSpace?.transfer,
+      matrix: this.internalTrack.info.colorSpace?.matrix,
+      fullRange: this.internalTrack.info.colorSpace?.fullRange
+    };
+  }
+  async canBeTransparent() {
+    return this.internalTrack.info.alphaMode;
+  }
+  async getDecoderConfig() {
+    if (!this.internalTrack.info.codec) {
+      return null;
+    }
+    return this.decoderConfigPromise ?? (this.decoderConfigPromise = (async () => {
+      let firstPacket = null;
+      const needsPacketForAdditionalInfo = this.internalTrack.info.codec === "vp9" || this.internalTrack.info.codec === "av1" || this.internalTrack.info.codec === "avc" && !this.internalTrack.info.codecDescription || this.internalTrack.info.codec === "hevc" && !this.internalTrack.info.codecDescription;
+      if (needsPacketForAdditionalInfo) {
+        firstPacket = await this.getFirstPacket({});
+      }
+      return {
+        codec: extractVideoCodecString({
+          width: this.internalTrack.info.width,
+          height: this.internalTrack.info.height,
+          codec: this.internalTrack.info.codec,
+          codecDescription: this.internalTrack.info.codecDescription,
+          colorSpace: this.internalTrack.info.colorSpace,
+          avcType: 1,
+          // We don't know better (or do we?) so just assume 'avc1'
+          avcCodecInfo: this.internalTrack.info.codec === "avc" && firstPacket ? extractAvcDecoderConfigurationRecord(firstPacket.data) : null,
+          hevcCodecInfo: this.internalTrack.info.codec === "hevc" && firstPacket ? extractHevcDecoderConfigurationRecord(firstPacket.data) : null,
+          vp9CodecInfo: this.internalTrack.info.codec === "vp9" && firstPacket ? extractVp9CodecInfoFromPacket(firstPacket.data) : null,
+          av1CodecInfo: this.internalTrack.info.codec === "av1" && firstPacket ? extractAv1CodecInfoFromPacket(firstPacket.data) : null
+        }),
+        codedWidth: this.internalTrack.info.width,
+        codedHeight: this.internalTrack.info.height,
+        description: this.internalTrack.info.codecDescription ?? void 0,
+        colorSpace: this.internalTrack.info.colorSpace ?? void 0
+      };
+    })());
+  }
+}
+class MatroskaAudioTrackBacking extends MatroskaTrackBacking {
+  constructor(internalTrack) {
+    super(internalTrack);
+    this.decoderConfig = null;
+    this.internalTrack = internalTrack;
+  }
+  getCodec() {
+    return this.internalTrack.info.codec;
+  }
+  getNumberOfChannels() {
+    return this.internalTrack.info.numberOfChannels;
+  }
+  getSampleRate() {
+    return this.internalTrack.info.sampleRate;
+  }
+  async getDecoderConfig() {
+    if (!this.internalTrack.info.codec) {
+      return null;
+    }
+    return this.decoderConfig ?? (this.decoderConfig = {
+      codec: extractAudioCodecString({
+        codec: this.internalTrack.info.codec,
+        codecDescription: this.internalTrack.info.codecDescription,
+        aacCodecInfo: this.internalTrack.info.aacCodecInfo
+      }),
+      numberOfChannels: this.internalTrack.info.numberOfChannels,
+      sampleRate: this.internalTrack.info.sampleRate,
+      description: this.internalTrack.info.codecDescription ?? void 0
+    });
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const FRAME_HEADER_SIZE = 4;
+const SAMPLING_RATES = [44100, 48e3, 32e3];
+const KILOBIT_RATES = [
+  // lowSamplingFrequency === 0
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  // layer = 0
+  -1,
+  32,
+  40,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  160,
+  192,
+  224,
+  256,
+  320,
+  -1,
+  // layer 1
+  -1,
+  32,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  160,
+  192,
+  224,
+  256,
+  320,
+  384,
+  -1,
+  // layer = 2
+  -1,
+  32,
+  64,
+  96,
+  128,
+  160,
+  192,
+  224,
+  256,
+  288,
+  320,
+  352,
+  384,
+  416,
+  448,
+  -1,
+  // layer = 3
+  // lowSamplingFrequency === 1
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  -1,
+  // layer = 0
+  -1,
+  8,
+  16,
+  24,
+  32,
+  40,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  144,
+  160,
+  -1,
+  // layer = 1
+  -1,
+  8,
+  16,
+  24,
+  32,
+  40,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  144,
+  160,
+  -1,
+  // layer = 2
+  -1,
+  32,
+  48,
+  56,
+  64,
+  80,
+  96,
+  112,
+  128,
+  144,
+  160,
+  176,
+  192,
+  224,
+  256,
+  -1
+  // layer = 3
+];
+const XING = 1483304551;
+const INFO = 1231971951;
+const computeMp3FrameSize = (lowSamplingFrequency, layer, bitrate, sampleRate, padding) => {
+  if (layer === 0) {
+    return 0;
+  } else if (layer === 1) {
+    return Math.floor(144 * bitrate / (sampleRate << lowSamplingFrequency)) + padding;
+  } else if (layer === 2) {
+    return Math.floor(144 * bitrate / sampleRate) + padding;
+  } else {
+    return (Math.floor(12 * bitrate / sampleRate) + padding) * 4;
+  }
+};
+const getXingOffset = (mpegVersionId, channel) => {
+  return mpegVersionId === 3 ? channel === 3 ? 21 : 36 : channel === 3 ? 13 : 21;
+};
+const readFrameHeader$1 = (word, remainingBytes) => {
+  const firstByte = word >>> 24;
+  const secondByte = word >>> 16 & 255;
+  const thirdByte = word >>> 8 & 255;
+  const fourthByte = word & 255;
+  if (firstByte !== 255 && secondByte !== 255 && thirdByte !== 255 && fourthByte !== 255) {
+    return {
+      header: null,
+      bytesAdvanced: 4
+    };
+  }
+  if (firstByte !== 255) {
+    return { header: null, bytesAdvanced: 1 };
+  }
+  if ((secondByte & 224) !== 224) {
+    return { header: null, bytesAdvanced: 1 };
+  }
+  let lowSamplingFrequency = 0;
+  let mpeg25 = 0;
+  if (secondByte & 1 << 4) {
+    lowSamplingFrequency = secondByte & 1 << 3 ? 0 : 1;
+  } else {
+    lowSamplingFrequency = 1;
+    mpeg25 = 1;
+  }
+  const mpegVersionId = secondByte >> 3 & 3;
+  const layer = secondByte >> 1 & 3;
+  const bitrateIndex = thirdByte >> 4 & 15;
+  const frequencyIndex = (thirdByte >> 2 & 3) % 3;
+  const padding = thirdByte >> 1 & 1;
+  const channel = fourthByte >> 6 & 3;
+  const modeExtension = fourthByte >> 4 & 3;
+  const copyright = fourthByte >> 3 & 1;
+  const original = fourthByte >> 2 & 1;
+  const emphasis = fourthByte & 3;
+  const kilobitRate = KILOBIT_RATES[lowSamplingFrequency * 16 * 4 + layer * 16 + bitrateIndex];
+  if (kilobitRate === -1) {
+    return { header: null, bytesAdvanced: 1 };
+  }
+  const bitrate = kilobitRate * 1e3;
+  const sampleRate = SAMPLING_RATES[frequencyIndex] >> lowSamplingFrequency + mpeg25;
+  const frameLength = computeMp3FrameSize(lowSamplingFrequency, layer, bitrate, sampleRate, padding);
+  if (remainingBytes !== null && remainingBytes < frameLength) {
+    return { header: null, bytesAdvanced: 1 };
+  }
+  let audioSamplesInFrame;
+  if (mpegVersionId === 3) {
+    audioSamplesInFrame = layer === 3 ? 384 : 1152;
+  } else {
+    if (layer === 3) {
+      audioSamplesInFrame = 384;
+    } else if (layer === 2) {
+      audioSamplesInFrame = 1152;
+    } else {
+      audioSamplesInFrame = 576;
+    }
+  }
+  return {
+    header: {
+      totalSize: frameLength,
+      mpegVersionId,
+      layer,
+      bitrate,
+      frequencyIndex,
+      sampleRate,
+      channel,
+      modeExtension,
+      copyright,
+      original,
+      emphasis,
+      audioSamplesInFrame
+    },
+    bytesAdvanced: 1
+  };
+};
+const decodeSynchsafe = (synchsafed) => {
+  let mask = 2130706432;
+  let unsynchsafed = 0;
+  while (mask !== 0) {
+    unsynchsafed >>= 1;
+    unsynchsafed |= synchsafed & mask;
+    mask >>= 8;
+  }
+  return unsynchsafed;
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+var Id3V2HeaderFlags;
+(function(Id3V2HeaderFlags2) {
+  Id3V2HeaderFlags2[Id3V2HeaderFlags2["Unsynchronisation"] = 128] = "Unsynchronisation";
+  Id3V2HeaderFlags2[Id3V2HeaderFlags2["ExtendedHeader"] = 64] = "ExtendedHeader";
+  Id3V2HeaderFlags2[Id3V2HeaderFlags2["ExperimentalIndicator"] = 32] = "ExperimentalIndicator";
+  Id3V2HeaderFlags2[Id3V2HeaderFlags2["Footer"] = 16] = "Footer";
+})(Id3V2HeaderFlags || (Id3V2HeaderFlags = {}));
+var Id3V2TextEncoding;
+(function(Id3V2TextEncoding2) {
+  Id3V2TextEncoding2[Id3V2TextEncoding2["ISO_8859_1"] = 0] = "ISO_8859_1";
+  Id3V2TextEncoding2[Id3V2TextEncoding2["UTF_16_WITH_BOM"] = 1] = "UTF_16_WITH_BOM";
+  Id3V2TextEncoding2[Id3V2TextEncoding2["UTF_16_BE_NO_BOM"] = 2] = "UTF_16_BE_NO_BOM";
+  Id3V2TextEncoding2[Id3V2TextEncoding2["UTF_8"] = 3] = "UTF_8";
+})(Id3V2TextEncoding || (Id3V2TextEncoding = {}));
+const ID3_V1_TAG_SIZE = 128;
+const ID3_V2_HEADER_SIZE = 10;
+const ID3_V1_GENRES = [
+  "Blues",
+  "Classic rock",
+  "Country",
+  "Dance",
+  "Disco",
+  "Funk",
+  "Grunge",
+  "Hip-hop",
+  "Jazz",
+  "Metal",
+  "New age",
+  "Oldies",
+  "Other",
+  "Pop",
+  "Rhythm and blues",
+  "Rap",
+  "Reggae",
+  "Rock",
+  "Techno",
+  "Industrial",
+  "Alternative",
+  "Ska",
+  "Death metal",
+  "Pranks",
+  "Soundtrack",
+  "Euro-techno",
+  "Ambient",
+  "Trip-hop",
+  "Vocal",
+  "Jazz & funk",
+  "Fusion",
+  "Trance",
+  "Classical",
+  "Instrumental",
+  "Acid",
+  "House",
+  "Game",
+  "Sound clip",
+  "Gospel",
+  "Noise",
+  "Alternative rock",
+  "Bass",
+  "Soul",
+  "Punk",
+  "Space",
+  "Meditative",
+  "Instrumental pop",
+  "Instrumental rock",
+  "Ethnic",
+  "Gothic",
+  "Darkwave",
+  "Techno-industrial",
+  "Electronic",
+  "Pop-folk",
+  "Eurodance",
+  "Dream",
+  "Southern rock",
+  "Comedy",
+  "Cult",
+  "Gangsta",
+  "Top 40",
+  "Christian rap",
+  "Pop/funk",
+  "Jungle music",
+  "Native US",
+  "Cabaret",
+  "New wave",
+  "Psychedelic",
+  "Rave",
+  "Showtunes",
+  "Trailer",
+  "Lo-fi",
+  "Tribal",
+  "Acid punk",
+  "Acid jazz",
+  "Polka",
+  "Retro",
+  "Musical",
+  "Rock 'n' roll",
+  "Hard rock",
+  "Folk",
+  "Folk rock",
+  "National folk",
+  "Swing",
+  "Fast fusion",
+  "Bebop",
+  "Latin",
+  "Revival",
+  "Celtic",
+  "Bluegrass",
+  "Avantgarde",
+  "Gothic rock",
+  "Progressive rock",
+  "Psychedelic rock",
+  "Symphonic rock",
+  "Slow rock",
+  "Big band",
+  "Chorus",
+  "Easy listening",
+  "Acoustic",
+  "Humour",
+  "Speech",
+  "Chanson",
+  "Opera",
+  "Chamber music",
+  "Sonata",
+  "Symphony",
+  "Booty bass",
+  "Primus",
+  "Porn groove",
+  "Satire",
+  "Slow jam",
+  "Club",
+  "Tango",
+  "Samba",
+  "Folklore",
+  "Ballad",
+  "Power ballad",
+  "Rhythmic Soul",
+  "Freestyle",
+  "Duet",
+  "Punk rock",
+  "Drum solo",
+  "A cappella",
+  "Euro-house",
+  "Dance hall",
+  "Goa music",
+  "Drum & bass",
+  "Club-house",
+  "Hardcore techno",
+  "Terror",
+  "Indie",
+  "Britpop",
+  "Negerpunk",
+  "Polsk punk",
+  "Beat",
+  "Christian gangsta rap",
+  "Heavy metal",
+  "Black metal",
+  "Crossover",
+  "Contemporary Christian",
+  "Christian rock",
+  "Merengue",
+  "Salsa",
+  "Thrash metal",
+  "Anime",
+  "Jpop",
+  "Synthpop",
+  "Christmas",
+  "Art rock",
+  "Baroque",
+  "Bhangra",
+  "Big beat",
+  "Breakbeat",
+  "Chillout",
+  "Downtempo",
+  "Dub",
+  "EBM",
+  "Eclectic",
+  "Electro",
+  "Electroclash",
+  "Emo",
+  "Experimental",
+  "Garage",
+  "Global",
+  "IDM",
+  "Illbient",
+  "Industro-Goth",
+  "Jam Band",
+  "Krautrock",
+  "Leftfield",
+  "Lounge",
+  "Math rock",
+  "New romantic",
+  "Nu-breakz",
+  "Post-punk",
+  "Post-rock",
+  "Psytrance",
+  "Shoegaze",
+  "Space rock",
+  "Trop rock",
+  "World music",
+  "Neoclassical",
+  "Audiobook",
+  "Audio theatre",
+  "Neue Deutsche Welle",
+  "Podcast",
+  "Indie rock",
+  "G-Funk",
+  "Dubstep",
+  "Garage rock",
+  "Psybient"
+];
+const parseId3V1Tag = (slice, tags) => {
+  var _a;
+  const startPos = slice.filePos;
+  tags.raw ?? (tags.raw = {});
+  (_a = tags.raw)["TAG"] ?? (_a["TAG"] = readBytes(slice, ID3_V1_TAG_SIZE - 3));
+  slice.filePos = startPos;
+  const title = readId3V1String(slice, 30);
+  if (title)
+    tags.title ?? (tags.title = title);
+  const artist = readId3V1String(slice, 30);
+  if (artist)
+    tags.artist ?? (tags.artist = artist);
+  const album = readId3V1String(slice, 30);
+  if (album)
+    tags.album ?? (tags.album = album);
+  const yearText = readId3V1String(slice, 4);
+  const year = Number.parseInt(yearText, 10);
+  if (Number.isInteger(year) && year > 0) {
+    tags.date ?? (tags.date = new Date(year, 0, 1));
+  }
+  const commentBytes = readBytes(slice, 30);
+  let comment;
+  if (commentBytes[28] === 0 && commentBytes[29] !== 0) {
+    const trackNum = commentBytes[29];
+    if (trackNum > 0) {
+      tags.trackNumber ?? (tags.trackNumber = trackNum);
+    }
+    slice.skip(-30);
+    comment = readId3V1String(slice, 28);
+    slice.skip(2);
+  } else {
+    slice.skip(-30);
+    comment = readId3V1String(slice, 30);
+  }
+  if (comment)
+    tags.comment ?? (tags.comment = comment);
+  const genreIndex = readU8(slice);
+  if (genreIndex < ID3_V1_GENRES.length) {
+    tags.genre ?? (tags.genre = ID3_V1_GENRES[genreIndex]);
+  }
+};
+const readId3V1String = (slice, length) => {
+  const bytes = readBytes(slice, length);
+  const endIndex = coalesceIndex(bytes.indexOf(0), bytes.length);
+  const relevantBytes = bytes.subarray(0, endIndex);
+  let str = "";
+  for (let i = 0; i < relevantBytes.length; i++) {
+    str += String.fromCharCode(relevantBytes[i]);
+  }
+  return str.trimEnd();
+};
+const readId3V2Header = (slice) => {
+  const startPos = slice.filePos;
+  const tag = readAscii(slice, 3);
+  const majorVersion = readU8(slice);
+  const revision = readU8(slice);
+  const flags = readU8(slice);
+  const sizeRaw = readU32Be(slice);
+  if (tag !== "ID3" || majorVersion === 255 || revision === 255 || (sizeRaw & 2155905152) !== 0) {
+    slice.filePos = startPos;
+    return null;
+  }
+  const size = decodeSynchsafe(sizeRaw);
+  return { majorVersion, revision, flags, size };
+};
+const parseId3V2Tag = (slice, header, tags) => {
+  var _a, _b, _c, _d;
+  if (![2, 3, 4].includes(header.majorVersion)) {
+    console.warn(`Unsupported ID3v2 major version: ${header.majorVersion}`);
+    return;
+  }
+  const bytes = readBytes(slice, header.size);
+  const reader = new Id3V2Reader(header, bytes);
+  if (header.flags & Id3V2HeaderFlags.Footer) {
+    reader.removeFooter();
+  }
+  if (header.flags & Id3V2HeaderFlags.Unsynchronisation && header.majorVersion === 3) {
+    reader.ununsynchronizeAll();
+  }
+  if (header.flags & Id3V2HeaderFlags.ExtendedHeader) {
+    const extendedHeaderSize = reader.readU32();
+    if (header.majorVersion === 3) {
+      reader.pos += extendedHeaderSize;
+    } else {
+      reader.pos += extendedHeaderSize - 4;
+    }
+  }
+  while (reader.pos <= reader.bytes.length - reader.frameHeaderSize()) {
+    const frame = reader.readId3V2Frame();
+    if (!frame) {
+      break;
+    }
+    const frameStartPos = reader.pos;
+    const frameEndPos = reader.pos + frame.size;
+    let frameEncrypted = false;
+    let frameCompressed = false;
+    let frameUnsynchronized = false;
+    if (header.majorVersion === 3) {
+      frameEncrypted = !!(frame.flags & 1 << 6);
+      frameCompressed = !!(frame.flags & 1 << 7);
+    } else if (header.majorVersion === 4) {
+      frameEncrypted = !!(frame.flags & 1 << 2);
+      frameCompressed = !!(frame.flags & 1 << 3);
+      frameUnsynchronized = !!(frame.flags & 1 << 1) || !!(header.flags & Id3V2HeaderFlags.Unsynchronisation);
+    }
+    if (frameEncrypted) {
+      console.warn(`Skipping encrypted ID3v2 frame ${frame.id}`);
+      reader.pos = frameEndPos;
+      continue;
+    }
+    if (frameCompressed) {
+      console.warn(`Skipping compressed ID3v2 frame ${frame.id}`);
+      reader.pos = frameEndPos;
+      continue;
+    }
+    if (frameUnsynchronized) {
+      reader.ununsynchronizeRegion(reader.pos, frameEndPos);
+    }
+    tags.raw ?? (tags.raw = {});
+    if (frame.id[0] === "T") {
+      (_a = tags.raw)[_b = frame.id] ?? (_a[_b] = reader.readId3V2EncodingAndText(frameEndPos));
+    } else {
+      (_c = tags.raw)[_d = frame.id] ?? (_c[_d] = reader.readBytes(frame.size));
+    }
+    reader.pos = frameStartPos;
+    switch (frame.id) {
+      case "TIT2":
+      case "TT2":
+        {
+          tags.title ?? (tags.title = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TIT3":
+      case "TT3":
+        {
+          tags.description ?? (tags.description = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TPE1":
+      case "TP1":
+        {
+          tags.artist ?? (tags.artist = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TALB":
+      case "TAL":
+        {
+          tags.album ?? (tags.album = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TPE2":
+      case "TP2":
+        {
+          tags.albumArtist ?? (tags.albumArtist = reader.readId3V2EncodingAndText(frameEndPos));
+        }
+        break;
+      case "TRCK":
+      case "TRK":
+        {
+          const trackText = reader.readId3V2EncodingAndText(frameEndPos);
+          const parts = trackText.split("/");
+          const trackNum = Number.parseInt(parts[0], 10);
+          const tracksTotal = parts[1] && Number.parseInt(parts[1], 10);
+          if (Number.isInteger(trackNum) && trackNum > 0) {
+            tags.trackNumber ?? (tags.trackNumber = trackNum);
+          }
+          if (tracksTotal && Number.isInteger(tracksTotal) && tracksTotal > 0) {
+            tags.tracksTotal ?? (tags.tracksTotal = tracksTotal);
+          }
+        }
+        break;
+      case "TPOS":
+      case "TPA":
+        {
+          const discText = reader.readId3V2EncodingAndText(frameEndPos);
+          const parts = discText.split("/");
+          const discNum = Number.parseInt(parts[0], 10);
+          const discsTotal = parts[1] && Number.parseInt(parts[1], 10);
+          if (Number.isInteger(discNum) && discNum > 0) {
+            tags.discNumber ?? (tags.discNumber = discNum);
+          }
+          if (discsTotal && Number.isInteger(discsTotal) && discsTotal > 0) {
+            tags.discsTotal ?? (tags.discsTotal = discsTotal);
+          }
+        }
+        break;
+      case "TCON":
+      case "TCO":
+        {
+          const genreText = reader.readId3V2EncodingAndText(frameEndPos);
+          let match = /^\((\d+)\)/.exec(genreText);
+          if (match) {
+            const genreNumber = Number.parseInt(match[1]);
+            if (ID3_V1_GENRES[genreNumber] !== void 0) {
+              tags.genre ?? (tags.genre = ID3_V1_GENRES[genreNumber]);
+              break;
+            }
+          }
+          match = /^\d+$/.exec(genreText);
+          if (match) {
+            const genreNumber = Number.parseInt(match[0]);
+            if (ID3_V1_GENRES[genreNumber] !== void 0) {
+              tags.genre ?? (tags.genre = ID3_V1_GENRES[genreNumber]);
+              break;
+            }
+          }
+          tags.genre ?? (tags.genre = genreText);
+        }
+        break;
+      case "TDRC":
+      case "TDAT":
+        {
+          const dateText = reader.readId3V2EncodingAndText(frameEndPos);
+          const date = new Date(dateText);
+          if (!Number.isNaN(date.getTime())) {
+            tags.date ?? (tags.date = date);
+          }
+        }
+        break;
+      case "TYER":
+      case "TYE":
+        {
+          const yearText = reader.readId3V2EncodingAndText(frameEndPos);
+          const year = Number.parseInt(yearText, 10);
+          if (Number.isInteger(year)) {
+            tags.date ?? (tags.date = new Date(year, 0, 1));
+          }
+        }
+        break;
+      case "USLT":
+      case "ULT":
+        {
+          const encoding = reader.readU8();
+          reader.pos += 3;
+          reader.readId3V2Text(encoding, frameEndPos);
+          tags.lyrics ?? (tags.lyrics = reader.readId3V2Text(encoding, frameEndPos));
+        }
+        break;
+      case "COMM":
+      case "COM":
+        {
+          const encoding = reader.readU8();
+          reader.pos += 3;
+          reader.readId3V2Text(encoding, frameEndPos);
+          tags.comment ?? (tags.comment = reader.readId3V2Text(encoding, frameEndPos));
+        }
+        break;
+      case "APIC":
+      case "PIC":
+        {
+          const encoding = reader.readId3V2TextEncoding();
+          let mimeType;
+          if (header.majorVersion === 2) {
+            const imageFormat = reader.readAscii(3);
+            mimeType = imageFormat === "PNG" ? "image/png" : imageFormat === "JPG" ? "image/jpeg" : "image/*";
+          } else {
+            mimeType = reader.readId3V2Text(encoding, frameEndPos);
+          }
+          const pictureType = reader.readU8();
+          const description = reader.readId3V2Text(encoding, frameEndPos).trimEnd();
+          const imageDataSize = frameEndPos - reader.pos;
+          if (imageDataSize >= 0) {
+            const imageData = reader.readBytes(imageDataSize);
+            if (!tags.images)
+              tags.images = [];
+            tags.images.push({
+              data: imageData,
+              mimeType,
+              kind: pictureType === 3 ? "coverFront" : pictureType === 4 ? "coverBack" : "unknown",
+              description
+            });
+          }
+        }
+        break;
+      default:
+        {
+          reader.pos += frame.size;
+        }
+        break;
+    }
+    reader.pos = frameEndPos;
+  }
+};
+class Id3V2Reader {
+  constructor(header, bytes) {
+    this.header = header;
+    this.bytes = bytes;
+    this.pos = 0;
+    this.view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  }
+  frameHeaderSize() {
+    return this.header.majorVersion === 2 ? 6 : 10;
+  }
+  ununsynchronizeAll() {
+    const newBytes = [];
+    for (let i = 0; i < this.bytes.length; i++) {
+      const value1 = this.bytes[i];
+      newBytes.push(value1);
+      if (value1 === 255 && i !== this.bytes.length - 1) {
+        const value2 = this.bytes[i];
+        if (value2 === 0) {
+          i++;
+        }
+      }
+    }
+    this.bytes = new Uint8Array(newBytes);
+    this.view = new DataView(this.bytes.buffer);
+  }
+  ununsynchronizeRegion(start, end) {
+    const newBytes = [];
+    for (let i = start; i < end; i++) {
+      const value1 = this.bytes[i];
+      newBytes.push(value1);
+      if (value1 === 255 && i !== end - 1) {
+        const value2 = this.bytes[i + 1];
+        if (value2 === 0) {
+          i++;
+        }
+      }
+    }
+    const before = this.bytes.subarray(0, start);
+    const after = this.bytes.subarray(end);
+    this.bytes = new Uint8Array(before.length + newBytes.length + after.length);
+    this.bytes.set(before, 0);
+    this.bytes.set(newBytes, before.length);
+    this.bytes.set(after, before.length + newBytes.length);
+    this.view = new DataView(this.bytes.buffer);
+  }
+  removeFooter() {
+    this.bytes = this.bytes.subarray(0, this.bytes.length - ID3_V2_HEADER_SIZE);
+    this.view = new DataView(this.bytes.buffer);
+  }
+  readBytes(length) {
+    const slice = this.bytes.subarray(this.pos, this.pos + length);
+    this.pos += length;
+    return slice;
+  }
+  readU8() {
+    const value = this.view.getUint8(this.pos);
+    this.pos += 1;
+    return value;
+  }
+  readU16() {
+    const value = this.view.getUint16(this.pos, false);
+    this.pos += 2;
+    return value;
+  }
+  readU24() {
+    const high = this.view.getUint16(this.pos, false);
+    const low = this.view.getUint8(this.pos + 1);
+    this.pos += 3;
+    return high * 256 + low;
+  }
+  readU32() {
+    const value = this.view.getUint32(this.pos, false);
+    this.pos += 4;
+    return value;
+  }
+  readAscii(length) {
+    let str = "";
+    for (let i = 0; i < length; i++) {
+      str += String.fromCharCode(this.view.getUint8(this.pos + i));
+    }
+    this.pos += length;
+    return str;
+  }
+  readId3V2Frame() {
+    if (this.header.majorVersion === 2) {
+      const id = this.readAscii(3);
+      if (id === "\0\0\0") {
+        return null;
+      }
+      const size = this.readU24();
+      return { id, size, flags: 0 };
+    } else {
+      const id = this.readAscii(4);
+      if (id === "\0\0\0\0") {
+        return null;
+      }
+      const sizeRaw = this.readU32();
+      let size = this.header.majorVersion === 4 ? decodeSynchsafe(sizeRaw) : sizeRaw;
+      const flags = this.readU16();
+      const headerEndPos = this.pos;
+      const isSizeValid = (size2) => {
+        const nextPos = this.pos + size2;
+        if (nextPos > this.bytes.length) {
+          return false;
+        }
+        if (nextPos <= this.bytes.length - this.frameHeaderSize()) {
+          this.pos += size2;
+          const nextId = this.readAscii(4);
+          if (nextId !== "\0\0\0\0" && !/[0-9A-Z]{4}/.test(nextId)) {
+            return false;
+          }
+        }
+        return true;
+      };
+      if (!isSizeValid(size)) {
+        const otherSize = this.header.majorVersion === 4 ? sizeRaw : decodeSynchsafe(sizeRaw);
+        if (isSizeValid(otherSize)) {
+          size = otherSize;
+        }
+      }
+      this.pos = headerEndPos;
+      return { id, size, flags };
+    }
+  }
+  readId3V2TextEncoding() {
+    const number = this.readU8();
+    if (number > 3) {
+      throw new Error(`Unsupported text encoding: ${number}`);
+    }
+    return number;
+  }
+  readId3V2Text(encoding, until) {
+    const startPos = this.pos;
+    const data = this.readBytes(until - this.pos);
+    switch (encoding) {
+      case Id3V2TextEncoding.ISO_8859_1: {
+        let str = "";
+        for (let i = 0; i < data.length; i++) {
+          const value = data[i];
+          if (value === 0) {
+            this.pos = startPos + i + 1;
+            break;
+          }
+          str += String.fromCharCode(value);
+        }
+        return str;
+      }
+      case Id3V2TextEncoding.UTF_16_WITH_BOM: {
+        if (data[0] === 255 && data[1] === 254) {
+          const decoder = new TextDecoder("utf-16le");
+          const endIndex = coalesceIndex(data.findIndex((x, i) => x === 0 && data[i + 1] === 0 && i % 2 === 0), data.length);
+          this.pos = startPos + Math.min(endIndex + 2, data.length);
+          return decoder.decode(data.subarray(2, endIndex));
+        } else if (data[0] === 254 && data[1] === 255) {
+          const decoder = new TextDecoder("utf-16be");
+          const endIndex = coalesceIndex(data.findIndex((x, i) => x === 0 && data[i + 1] === 0 && i % 2 === 0), data.length);
+          this.pos = startPos + Math.min(endIndex + 2, data.length);
+          return decoder.decode(data.subarray(2, endIndex));
+        } else {
+          const endIndex = coalesceIndex(data.findIndex((x) => x === 0), data.length);
+          this.pos = startPos + Math.min(endIndex + 1, data.length);
+          return textDecoder.decode(data.subarray(0, endIndex));
+        }
+      }
+      case Id3V2TextEncoding.UTF_16_BE_NO_BOM: {
+        const decoder = new TextDecoder("utf-16be");
+        const endIndex = coalesceIndex(data.findIndex((x, i) => x === 0 && data[i + 1] === 0 && i % 2 === 0), data.length);
+        this.pos = startPos + Math.min(endIndex + 2, data.length);
+        return decoder.decode(data.subarray(0, endIndex));
+      }
+      case Id3V2TextEncoding.UTF_8: {
+        const endIndex = coalesceIndex(data.findIndex((x) => x === 0), data.length);
+        this.pos = startPos + Math.min(endIndex + 1, data.length);
+        return textDecoder.decode(data.subarray(0, endIndex));
+      }
+    }
+  }
+  readId3V2EncodingAndText(until) {
+    if (this.pos >= until) {
+      return "";
+    }
+    const encoding = this.readId3V2TextEncoding();
+    return this.readId3V2Text(encoding, until);
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const readNextFrameHeader = async (reader, startPos, until) => {
+  let currentPos = startPos;
+  while (until === null || currentPos < until) {
+    let slice = reader.requestSlice(currentPos, FRAME_HEADER_SIZE);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      break;
+    const word = readU32Be(slice);
+    const result = readFrameHeader$1(word, reader.fileSize !== null ? reader.fileSize - currentPos : null);
+    if (result.header) {
+      return { header: result.header, startPos: currentPos };
+    }
+    currentPos += result.bytesAdvanced;
+  }
+  return null;
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class Mp3Demuxer extends Demuxer {
+  constructor(input) {
+    super(input);
+    this.metadataPromise = null;
+    this.firstFrameHeader = null;
+    this.loadedSamples = [];
+    this.metadataTags = null;
+    this.tracks = [];
+    this.readingMutex = new AsyncMutex();
+    this.lastSampleLoaded = false;
+    this.lastLoadedPos = 0;
+    this.nextTimestampInSamples = 0;
+    this.reader = input._reader;
+  }
+  async readMetadata() {
+    return this.metadataPromise ?? (this.metadataPromise = (async () => {
+      while (!this.firstFrameHeader && !this.lastSampleLoaded) {
+        await this.advanceReader();
+      }
+      if (!this.firstFrameHeader) {
+        throw new Error("No valid MP3 frame found.");
+      }
+      this.tracks = [new InputAudioTrack(this.input, new Mp3AudioTrackBacking(this))];
+    })());
+  }
+  async advanceReader() {
+    if (this.lastLoadedPos === 0) {
+      while (true) {
+        let slice2 = this.reader.requestSlice(this.lastLoadedPos, ID3_V2_HEADER_SIZE);
+        if (slice2 instanceof Promise)
+          slice2 = await slice2;
+        if (!slice2) {
+          this.lastSampleLoaded = true;
+          return;
+        }
+        const id3V2Header = readId3V2Header(slice2);
+        if (!id3V2Header) {
+          break;
+        }
+        this.lastLoadedPos = slice2.filePos + id3V2Header.size;
+      }
+    }
+    const result = await readNextFrameHeader(this.reader, this.lastLoadedPos, this.reader.fileSize);
+    if (!result) {
+      this.lastSampleLoaded = true;
+      return;
+    }
+    const header = result.header;
+    this.lastLoadedPos = result.startPos + header.totalSize - 1;
+    const xingOffset = getXingOffset(header.mpegVersionId, header.channel);
+    let slice = this.reader.requestSlice(result.startPos + xingOffset, 4);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (slice) {
+      const word = readU32Be(slice);
+      const isXing = word === XING || word === INFO;
+      if (isXing) {
+        return;
+      }
+    }
+    if (!this.firstFrameHeader) {
+      this.firstFrameHeader = header;
+    }
+    if (header.sampleRate !== this.firstFrameHeader.sampleRate) {
+      console.warn(`MP3 changed sample rate mid-file: ${this.firstFrameHeader.sampleRate} Hz to ${header.sampleRate} Hz. Might be a bug, so please report this file.`);
+    }
+    const sampleDuration = header.audioSamplesInFrame / this.firstFrameHeader.sampleRate;
+    const sample = {
+      timestamp: this.nextTimestampInSamples / this.firstFrameHeader.sampleRate,
+      duration: sampleDuration,
+      dataStart: result.startPos,
+      dataSize: header.totalSize
+    };
+    this.loadedSamples.push(sample);
+    this.nextTimestampInSamples += header.audioSamplesInFrame;
+    return;
+  }
+  async getMimeType() {
+    return "audio/mpeg";
+  }
+  async getTracks() {
+    await this.readMetadata();
+    return this.tracks;
+  }
+  async computeDuration() {
+    await this.readMetadata();
+    const track = this.tracks[0];
+    assert(track);
+    return track.computeDuration();
+  }
+  async getMetadataTags() {
+    const release = await this.readingMutex.acquire();
+    try {
+      await this.readMetadata();
+      if (this.metadataTags) {
+        return this.metadataTags;
+      }
+      this.metadataTags = {};
+      let currentPos = 0;
+      let id3V2HeaderFound = false;
+      while (true) {
+        let headerSlice = this.reader.requestSlice(currentPos, ID3_V2_HEADER_SIZE);
+        if (headerSlice instanceof Promise)
+          headerSlice = await headerSlice;
+        if (!headerSlice)
+          break;
+        const id3V2Header = readId3V2Header(headerSlice);
+        if (!id3V2Header) {
+          break;
+        }
+        id3V2HeaderFound = true;
+        let contentSlice = this.reader.requestSlice(headerSlice.filePos, id3V2Header.size);
+        if (contentSlice instanceof Promise)
+          contentSlice = await contentSlice;
+        if (!contentSlice)
+          break;
+        parseId3V2Tag(contentSlice, id3V2Header, this.metadataTags);
+        currentPos = headerSlice.filePos + id3V2Header.size;
+      }
+      if (!id3V2HeaderFound && this.reader.fileSize !== null && this.reader.fileSize >= ID3_V1_TAG_SIZE) {
+        let slice = this.reader.requestSlice(this.reader.fileSize - ID3_V1_TAG_SIZE, ID3_V1_TAG_SIZE);
+        if (slice instanceof Promise)
+          slice = await slice;
+        assert(slice);
+        const tag = readAscii(slice, 3);
+        if (tag === "TAG") {
+          parseId3V1Tag(slice, this.metadataTags);
+        }
+      }
+      return this.metadataTags;
+    } finally {
+      release();
+    }
+  }
+}
+class Mp3AudioTrackBacking {
+  constructor(demuxer) {
+    this.demuxer = demuxer;
+  }
+  getId() {
+    return 1;
+  }
+  async getFirstTimestamp() {
+    return 0;
+  }
+  getTimeResolution() {
+    assert(this.demuxer.firstFrameHeader);
+    return this.demuxer.firstFrameHeader.sampleRate / this.demuxer.firstFrameHeader.audioSamplesInFrame;
+  }
+  async computeDuration() {
+    const lastPacket = await this.getPacket(Infinity, { metadataOnly: true });
+    return (lastPacket?.timestamp ?? 0) + (lastPacket?.duration ?? 0);
+  }
+  getName() {
+    return null;
+  }
+  getLanguageCode() {
+    return UNDETERMINED_LANGUAGE;
+  }
+  getCodec() {
+    return "mp3";
+  }
+  getInternalCodecId() {
+    return null;
+  }
+  getNumberOfChannels() {
+    assert(this.demuxer.firstFrameHeader);
+    return this.demuxer.firstFrameHeader.channel === 3 ? 1 : 2;
+  }
+  getSampleRate() {
+    assert(this.demuxer.firstFrameHeader);
+    return this.demuxer.firstFrameHeader.sampleRate;
+  }
+  getDisposition() {
+    return {
+      ...DEFAULT_TRACK_DISPOSITION
+    };
+  }
+  async getDecoderConfig() {
+    assert(this.demuxer.firstFrameHeader);
+    return {
+      codec: "mp3",
+      numberOfChannels: this.demuxer.firstFrameHeader.channel === 3 ? 1 : 2,
+      sampleRate: this.demuxer.firstFrameHeader.sampleRate
+    };
+  }
+  async getPacketAtIndex(sampleIndex, options) {
+    if (sampleIndex === -1) {
+      return null;
+    }
+    const rawSample = this.demuxer.loadedSamples[sampleIndex];
+    if (!rawSample) {
+      return null;
+    }
+    let data;
+    if (options.metadataOnly) {
+      data = PLACEHOLDER_DATA;
+    } else {
+      let slice = this.demuxer.reader.requestSlice(rawSample.dataStart, rawSample.dataSize);
+      if (slice instanceof Promise)
+        slice = await slice;
+      if (!slice) {
+        return null;
+      }
+      data = readBytes(slice, rawSample.dataSize);
+    }
+    return new EncodedPacket(data, "key", rawSample.timestamp, rawSample.duration, sampleIndex, rawSample.dataSize);
+  }
+  getFirstPacket(options) {
+    return this.getPacketAtIndex(0, options);
+  }
+  async getNextPacket(packet, options) {
+    const release = await this.demuxer.readingMutex.acquire();
+    try {
+      const sampleIndex = binarySearchExact(this.demuxer.loadedSamples, packet.timestamp, (x) => x.timestamp);
+      if (sampleIndex === -1) {
+        throw new Error("Packet was not created from this track.");
+      }
+      const nextIndex = sampleIndex + 1;
+      while (nextIndex >= this.demuxer.loadedSamples.length && !this.demuxer.lastSampleLoaded) {
+        await this.demuxer.advanceReader();
+      }
+      return this.getPacketAtIndex(nextIndex, options);
+    } finally {
+      release();
+    }
+  }
+  async getPacket(timestamp, options) {
+    const release = await this.demuxer.readingMutex.acquire();
+    try {
+      while (true) {
+        const index = binarySearchLessOrEqual(this.demuxer.loadedSamples, timestamp, (x) => x.timestamp);
+        if (index === -1 && this.demuxer.loadedSamples.length > 0) {
+          return null;
+        }
+        if (this.demuxer.lastSampleLoaded) {
+          return this.getPacketAtIndex(index, options);
+        }
+        if (index >= 0 && index + 1 < this.demuxer.loadedSamples.length) {
+          return this.getPacketAtIndex(index, options);
+        }
+        await this.demuxer.advanceReader();
+      }
+    } finally {
+      release();
+    }
+  }
+  getKeyPacket(timestamp, options) {
+    return this.getPacket(timestamp, options);
+  }
+  getNextKeyPacket(packet, options) {
+    return this.getNextPacket(packet, options);
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const OGGS = 1399285583;
+const OGG_CRC_POLYNOMIAL = 79764919;
+const OGG_CRC_TABLE = new Uint32Array(256);
+for (let n = 0; n < 256; n++) {
+  let crc = n << 24;
+  for (let k = 0; k < 8; k++) {
+    crc = crc & 2147483648 ? crc << 1 ^ OGG_CRC_POLYNOMIAL : crc << 1;
+  }
+  OGG_CRC_TABLE[n] = crc >>> 0 & 4294967295;
+}
+const computeOggPageCrc = (bytes) => {
+  const view = toDataView(bytes);
+  const originalChecksum = view.getUint32(22, true);
+  view.setUint32(22, 0, true);
+  let crc = 0;
+  for (let i = 0; i < bytes.length; i++) {
+    const byte = bytes[i];
+    crc = (crc << 8 ^ OGG_CRC_TABLE[crc >>> 24 ^ byte]) >>> 0;
+  }
+  view.setUint32(22, originalChecksum, true);
+  return crc;
+};
+const extractSampleMetadata = (data, codecInfo, vorbisLastBlocksize) => {
+  let durationInSamples = 0;
+  let currentBlocksize = null;
+  if (data.length > 0) {
+    if (codecInfo.codec === "vorbis") {
+      assert(codecInfo.vorbisInfo);
+      const vorbisModeCount = codecInfo.vorbisInfo.modeBlockflags.length;
+      const bitCount = ilog(vorbisModeCount - 1);
+      const modeMask = (1 << bitCount) - 1 << 1;
+      const modeNumber = (data[0] & modeMask) >> 1;
+      if (modeNumber >= codecInfo.vorbisInfo.modeBlockflags.length) {
+        throw new Error("Invalid mode number.");
+      }
+      let prevBlocksize = vorbisLastBlocksize;
+      const blockflag = codecInfo.vorbisInfo.modeBlockflags[modeNumber];
+      currentBlocksize = codecInfo.vorbisInfo.blocksizes[blockflag];
+      if (blockflag === 1) {
+        const prevMask = (modeMask | 1) + 1;
+        const flag = data[0] & prevMask ? 1 : 0;
+        prevBlocksize = codecInfo.vorbisInfo.blocksizes[flag];
+      }
+      durationInSamples = prevBlocksize !== null ? prevBlocksize + currentBlocksize >> 2 : 0;
+    } else if (codecInfo.codec === "opus") {
+      const toc = parseOpusTocByte(data);
+      durationInSamples = toc.durationInSamples;
+    }
+  }
+  return {
+    durationInSamples,
+    vorbisBlockSize: currentBlocksize
+  };
+};
+const buildOggMimeType = (info) => {
+  let string = "audio/ogg";
+  if (info.codecStrings) {
+    const uniqueCodecMimeTypes = [...new Set(info.codecStrings)];
+    string += `; codecs="${uniqueCodecMimeTypes.join(", ")}"`;
+  }
+  return string;
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const MIN_PAGE_HEADER_SIZE = 27;
+const MAX_PAGE_HEADER_SIZE = 27 + 255;
+const MAX_PAGE_SIZE = MAX_PAGE_HEADER_SIZE + 255 * 255;
+const readPageHeader = (slice) => {
+  const startPos = slice.filePos;
+  const capturePattern = readU32Le(slice);
+  if (capturePattern !== OGGS) {
+    return null;
+  }
+  slice.skip(1);
+  const headerType = readU8(slice);
+  const granulePosition = readI64Le(slice);
+  const serialNumber = readU32Le(slice);
+  const sequenceNumber = readU32Le(slice);
+  const checksum = readU32Le(slice);
+  const numberPageSegments = readU8(slice);
+  const lacingValues = new Uint8Array(numberPageSegments);
+  for (let i = 0; i < numberPageSegments; i++) {
+    lacingValues[i] = readU8(slice);
+  }
+  const headerSize = 27 + numberPageSegments;
+  const dataSize = lacingValues.reduce((a, b) => a + b, 0);
+  const totalSize = headerSize + dataSize;
+  return {
+    headerStartPos: startPos,
+    totalSize,
+    dataStartPos: startPos + headerSize,
+    dataSize,
+    headerType,
+    granulePosition,
+    serialNumber,
+    sequenceNumber,
+    checksum,
+    lacingValues
+  };
+};
+const findNextPageHeader = (slice, until) => {
+  while (slice.filePos < until - (4 - 1)) {
+    const word = readU32Le(slice);
+    const firstByte = word & 255;
+    const secondByte = word >>> 8 & 255;
+    const thirdByte = word >>> 16 & 255;
+    const fourthByte = word >>> 24 & 255;
+    const O = 79;
+    if (firstByte !== O && secondByte !== O && thirdByte !== O && fourthByte !== O) {
+      continue;
+    }
+    slice.skip(-4);
+    if (word === OGGS) {
+      return true;
+    }
+    slice.skip(1);
+  }
+  return false;
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class OggDemuxer extends Demuxer {
+  constructor(input) {
+    super(input);
+    this.metadataPromise = null;
+    this.bitstreams = [];
+    this.tracks = [];
+    this.metadataTags = {};
+    this.reader = input._reader;
+  }
+  async readMetadata() {
+    return this.metadataPromise ?? (this.metadataPromise = (async () => {
+      let currentPos = 0;
+      while (true) {
+        let slice = this.reader.requestSliceRange(currentPos, MIN_PAGE_HEADER_SIZE, MAX_PAGE_HEADER_SIZE);
+        if (slice instanceof Promise)
+          slice = await slice;
+        if (!slice)
+          break;
+        const page = readPageHeader(slice);
+        if (!page) {
+          break;
+        }
+        const isBos = !!(page.headerType & 2);
+        if (!isBos) {
+          break;
+        }
+        this.bitstreams.push({
+          serialNumber: page.serialNumber,
+          bosPage: page,
+          description: null,
+          numberOfChannels: -1,
+          sampleRate: -1,
+          codecInfo: {
+            codec: null,
+            vorbisInfo: null,
+            opusInfo: null
+          },
+          lastMetadataPacket: null
+        });
+        currentPos = page.headerStartPos + page.totalSize;
+      }
+      for (const bitstream of this.bitstreams) {
+        const firstPacket = await this.readPacket(bitstream.bosPage, 0);
+        if (!firstPacket) {
+          continue;
+        }
+        if (
+          // Check for Vorbis
+          firstPacket.data.byteLength >= 7 && firstPacket.data[0] === 1 && firstPacket.data[1] === 118 && firstPacket.data[2] === 111 && firstPacket.data[3] === 114 && firstPacket.data[4] === 98 && firstPacket.data[5] === 105 && firstPacket.data[6] === 115
+        ) {
+          await this.readVorbisMetadata(firstPacket, bitstream);
+        } else if (
+          // Check for Opus
+          firstPacket.data.byteLength >= 8 && firstPacket.data[0] === 79 && firstPacket.data[1] === 112 && firstPacket.data[2] === 117 && firstPacket.data[3] === 115 && firstPacket.data[4] === 72 && firstPacket.data[5] === 101 && firstPacket.data[6] === 97 && firstPacket.data[7] === 100
+        ) {
+          await this.readOpusMetadata(firstPacket, bitstream);
+        }
+        if (bitstream.codecInfo.codec !== null) {
+          this.tracks.push(new InputAudioTrack(this.input, new OggAudioTrackBacking(bitstream, this)));
+        }
+      }
+    })());
+  }
+  async readVorbisMetadata(firstPacket, bitstream) {
+    let nextPacketPosition = await this.findNextPacketStart(firstPacket);
+    if (!nextPacketPosition) {
+      return;
+    }
+    const secondPacket = await this.readPacket(nextPacketPosition.startPage, nextPacketPosition.startSegmentIndex);
+    if (!secondPacket) {
+      return;
+    }
+    nextPacketPosition = await this.findNextPacketStart(secondPacket);
+    if (!nextPacketPosition) {
+      return;
+    }
+    const thirdPacket = await this.readPacket(nextPacketPosition.startPage, nextPacketPosition.startSegmentIndex);
+    if (!thirdPacket) {
+      return;
+    }
+    if (secondPacket.data[0] !== 3 || thirdPacket.data[0] !== 5) {
+      return;
+    }
+    const lacingValues = [];
+    const addBytesToSegmentTable = (bytes) => {
+      while (true) {
+        lacingValues.push(Math.min(255, bytes));
+        if (bytes < 255) {
+          break;
+        }
+        bytes -= 255;
+      }
+    };
+    addBytesToSegmentTable(firstPacket.data.length);
+    addBytesToSegmentTable(secondPacket.data.length);
+    const description = new Uint8Array(1 + lacingValues.length + firstPacket.data.length + secondPacket.data.length + thirdPacket.data.length);
+    description[0] = 2;
+    description.set(lacingValues, 1);
+    description.set(firstPacket.data, 1 + lacingValues.length);
+    description.set(secondPacket.data, 1 + lacingValues.length + firstPacket.data.length);
+    description.set(thirdPacket.data, 1 + lacingValues.length + firstPacket.data.length + secondPacket.data.length);
+    bitstream.codecInfo.codec = "vorbis";
+    bitstream.description = description;
+    bitstream.lastMetadataPacket = thirdPacket;
+    const view = toDataView(firstPacket.data);
+    bitstream.numberOfChannels = view.getUint8(11);
+    bitstream.sampleRate = view.getUint32(12, true);
+    const blockSizeByte = view.getUint8(28);
+    bitstream.codecInfo.vorbisInfo = {
+      blocksizes: [
+        1 << (blockSizeByte & 15),
+        1 << (blockSizeByte >> 4)
+      ],
+      modeBlockflags: parseModesFromVorbisSetupPacket(thirdPacket.data).modeBlockflags
+    };
+    readVorbisComments(secondPacket.data.subarray(7), this.metadataTags);
+  }
+  async readOpusMetadata(firstPacket, bitstream) {
+    const nextPacketPosition = await this.findNextPacketStart(firstPacket);
+    if (!nextPacketPosition) {
+      return;
+    }
+    const secondPacket = await this.readPacket(nextPacketPosition.startPage, nextPacketPosition.startSegmentIndex);
+    if (!secondPacket) {
+      return;
+    }
+    bitstream.codecInfo.codec = "opus";
+    bitstream.description = firstPacket.data;
+    bitstream.lastMetadataPacket = secondPacket;
+    const header = parseOpusIdentificationHeader(firstPacket.data);
+    bitstream.numberOfChannels = header.outputChannelCount;
+    bitstream.sampleRate = OPUS_SAMPLE_RATE;
+    bitstream.codecInfo.opusInfo = {
+      preSkip: header.preSkip
+    };
+    readVorbisComments(secondPacket.data.subarray(8), this.metadataTags);
+  }
+  async readPacket(startPage, startSegmentIndex) {
+    assert(startSegmentIndex < startPage.lacingValues.length);
+    let startDataOffset = 0;
+    for (let i = 0; i < startSegmentIndex; i++) {
+      startDataOffset += startPage.lacingValues[i];
+    }
+    let currentPage = startPage;
+    let currentDataOffset = startDataOffset;
+    let currentSegmentIndex = startSegmentIndex;
+    const chunks = [];
+    outer: while (true) {
+      let pageSlice = this.reader.requestSlice(currentPage.dataStartPos, currentPage.dataSize);
+      if (pageSlice instanceof Promise)
+        pageSlice = await pageSlice;
+      assert(pageSlice);
+      const pageData = readBytes(pageSlice, currentPage.dataSize);
+      while (true) {
+        if (currentSegmentIndex === currentPage.lacingValues.length) {
+          chunks.push(pageData.subarray(startDataOffset, currentDataOffset));
+          break;
+        }
+        const lacingValue = currentPage.lacingValues[currentSegmentIndex];
+        currentDataOffset += lacingValue;
+        if (lacingValue < 255) {
+          chunks.push(pageData.subarray(startDataOffset, currentDataOffset));
+          break outer;
+        }
+        currentSegmentIndex++;
+      }
+      let currentPos = currentPage.headerStartPos + currentPage.totalSize;
+      while (true) {
+        let headerSlice = this.reader.requestSliceRange(currentPos, MIN_PAGE_HEADER_SIZE, MAX_PAGE_HEADER_SIZE);
+        if (headerSlice instanceof Promise)
+          headerSlice = await headerSlice;
+        if (!headerSlice) {
+          return null;
+        }
+        const nextPage = readPageHeader(headerSlice);
+        if (!nextPage) {
+          return null;
+        }
+        currentPage = nextPage;
+        if (currentPage.serialNumber === startPage.serialNumber) {
+          break;
+        }
+        currentPos = currentPage.headerStartPos + currentPage.totalSize;
+      }
+      startDataOffset = 0;
+      currentDataOffset = 0;
+      currentSegmentIndex = 0;
+    }
+    const totalPacketSize = chunks.reduce((sum, chunk) => sum + chunk.length, 0);
+    if (totalPacketSize === 0) {
+      return null;
+    }
+    const packetData = new Uint8Array(totalPacketSize);
+    let offset = 0;
+    for (let i = 0; i < chunks.length; i++) {
+      const chunk = chunks[i];
+      packetData.set(chunk, offset);
+      offset += chunk.length;
+    }
+    return {
+      data: packetData,
+      endPage: currentPage,
+      endSegmentIndex: currentSegmentIndex
+    };
+  }
+  async findNextPacketStart(lastPacket) {
+    if (lastPacket.endSegmentIndex < lastPacket.endPage.lacingValues.length - 1) {
+      return { startPage: lastPacket.endPage, startSegmentIndex: lastPacket.endSegmentIndex + 1 };
+    }
+    const isEos = !!(lastPacket.endPage.headerType & 4);
+    if (isEos) {
+      return null;
+    }
+    let currentPos = lastPacket.endPage.headerStartPos + lastPacket.endPage.totalSize;
+    while (true) {
+      let slice = this.reader.requestSliceRange(currentPos, MIN_PAGE_HEADER_SIZE, MAX_PAGE_HEADER_SIZE);
+      if (slice instanceof Promise)
+        slice = await slice;
+      if (!slice) {
+        return null;
+      }
+      const nextPage = readPageHeader(slice);
+      if (!nextPage) {
+        return null;
+      }
+      if (nextPage.serialNumber === lastPacket.endPage.serialNumber) {
+        return { startPage: nextPage, startSegmentIndex: 0 };
+      }
+      currentPos = nextPage.headerStartPos + nextPage.totalSize;
+    }
+  }
+  async getMimeType() {
+    await this.readMetadata();
+    const codecStrings = await Promise.all(this.tracks.map((x) => x.getCodecParameterString()));
+    return buildOggMimeType({
+      codecStrings: codecStrings.filter(Boolean)
+    });
+  }
+  async getTracks() {
+    await this.readMetadata();
+    return this.tracks;
+  }
+  async computeDuration() {
+    const tracks = await this.getTracks();
+    const trackDurations = await Promise.all(tracks.map((x) => x.computeDuration()));
+    return Math.max(0, ...trackDurations);
+  }
+  async getMetadataTags() {
+    await this.readMetadata();
+    return this.metadataTags;
+  }
+}
+class OggAudioTrackBacking {
+  constructor(bitstream, demuxer) {
+    this.bitstream = bitstream;
+    this.demuxer = demuxer;
+    this.encodedPacketToMetadata = /* @__PURE__ */ new WeakMap();
+    this.sequentialScanCache = [];
+    this.sequentialScanMutex = new AsyncMutex();
+    this.internalSampleRate = bitstream.codecInfo.codec === "opus" ? OPUS_SAMPLE_RATE : bitstream.sampleRate;
+  }
+  getId() {
+    return this.bitstream.serialNumber;
+  }
+  getNumberOfChannels() {
+    return this.bitstream.numberOfChannels;
+  }
+  getSampleRate() {
+    return this.bitstream.sampleRate;
+  }
+  getTimeResolution() {
+    return this.bitstream.sampleRate;
+  }
+  getCodec() {
+    return this.bitstream.codecInfo.codec;
+  }
+  getInternalCodecId() {
+    return null;
+  }
+  async getDecoderConfig() {
+    assert(this.bitstream.codecInfo.codec);
+    return {
+      codec: this.bitstream.codecInfo.codec,
+      numberOfChannels: this.bitstream.numberOfChannels,
+      sampleRate: this.bitstream.sampleRate,
+      description: this.bitstream.description ?? void 0
+    };
+  }
+  getName() {
+    return null;
+  }
+  getLanguageCode() {
+    return UNDETERMINED_LANGUAGE;
+  }
+  getDisposition() {
+    return {
+      ...DEFAULT_TRACK_DISPOSITION
+    };
+  }
+  async getFirstTimestamp() {
+    return 0;
+  }
+  async computeDuration() {
+    const lastPacket = await this.getPacket(Infinity, { metadataOnly: true });
+    return (lastPacket?.timestamp ?? 0) + (lastPacket?.duration ?? 0);
+  }
+  granulePositionToTimestampInSamples(granulePosition) {
+    if (this.bitstream.codecInfo.codec === "opus") {
+      assert(this.bitstream.codecInfo.opusInfo);
+      return granulePosition - this.bitstream.codecInfo.opusInfo.preSkip;
+    }
+    return granulePosition;
+  }
+  createEncodedPacketFromOggPacket(packet, additional, options) {
+    if (!packet) {
+      return null;
+    }
+    const { durationInSamples, vorbisBlockSize } = extractSampleMetadata(packet.data, this.bitstream.codecInfo, additional.vorbisLastBlocksize);
+    const encodedPacket = new EncodedPacket(options.metadataOnly ? PLACEHOLDER_DATA : packet.data, "key", Math.max(0, additional.timestampInSamples) / this.internalSampleRate, durationInSamples / this.internalSampleRate, packet.endPage.headerStartPos + packet.endSegmentIndex, packet.data.byteLength);
+    this.encodedPacketToMetadata.set(encodedPacket, {
+      packet,
+      timestampInSamples: additional.timestampInSamples,
+      durationInSamples,
+      vorbisLastBlockSize: additional.vorbisLastBlocksize,
+      vorbisBlockSize
+    });
+    return encodedPacket;
+  }
+  async getFirstPacket(options) {
+    assert(this.bitstream.lastMetadataPacket);
+    const packetPosition = await this.demuxer.findNextPacketStart(this.bitstream.lastMetadataPacket);
+    if (!packetPosition) {
+      return null;
+    }
+    let timestampInSamples = 0;
+    if (this.bitstream.codecInfo.codec === "opus") {
+      assert(this.bitstream.codecInfo.opusInfo);
+      timestampInSamples -= this.bitstream.codecInfo.opusInfo.preSkip;
+    }
+    const packet = await this.demuxer.readPacket(packetPosition.startPage, packetPosition.startSegmentIndex);
+    return this.createEncodedPacketFromOggPacket(packet, {
+      timestampInSamples,
+      vorbisLastBlocksize: null
+    }, options);
+  }
+  async getNextPacket(prevPacket, options) {
+    const prevMetadata = this.encodedPacketToMetadata.get(prevPacket);
+    if (!prevMetadata) {
+      throw new Error("Packet was not created from this track.");
+    }
+    const packetPosition = await this.demuxer.findNextPacketStart(prevMetadata.packet);
+    if (!packetPosition) {
+      return null;
+    }
+    const timestampInSamples = prevMetadata.timestampInSamples + prevMetadata.durationInSamples;
+    const packet = await this.demuxer.readPacket(packetPosition.startPage, packetPosition.startSegmentIndex);
+    return this.createEncodedPacketFromOggPacket(packet, {
+      timestampInSamples,
+      vorbisLastBlocksize: prevMetadata.vorbisBlockSize
+    }, options);
+  }
+  async getPacket(timestamp, options) {
+    if (this.demuxer.reader.fileSize === null) {
+      return this.getPacketSequential(timestamp, options);
+    }
+    const timestampInSamples = roundIfAlmostInteger(timestamp * this.internalSampleRate);
+    if (timestampInSamples === 0) {
+      return this.getFirstPacket(options);
+    }
+    if (timestampInSamples < 0) {
+      return null;
+    }
+    assert(this.bitstream.lastMetadataPacket);
+    const startPosition = await this.demuxer.findNextPacketStart(this.bitstream.lastMetadataPacket);
+    if (!startPosition) {
+      return null;
+    }
+    let lowPage = startPosition.startPage;
+    let high = this.demuxer.reader.fileSize;
+    const lowPages = [lowPage];
+    outer: while (lowPage.headerStartPos + lowPage.totalSize < high) {
+      const low = lowPage.headerStartPos;
+      const mid = Math.floor((low + high) / 2);
+      let searchStartPos = mid;
+      while (true) {
+        const until = Math.min(searchStartPos + MAX_PAGE_SIZE, high - MIN_PAGE_HEADER_SIZE);
+        let searchSlice = this.demuxer.reader.requestSlice(searchStartPos, until - searchStartPos);
+        if (searchSlice instanceof Promise)
+          searchSlice = await searchSlice;
+        assert(searchSlice);
+        const found = findNextPageHeader(searchSlice, until);
+        if (!found) {
+          high = mid + MIN_PAGE_HEADER_SIZE;
+          continue outer;
+        }
+        let headerSlice = this.demuxer.reader.requestSliceRange(searchSlice.filePos, MIN_PAGE_HEADER_SIZE, MAX_PAGE_HEADER_SIZE);
+        if (headerSlice instanceof Promise)
+          headerSlice = await headerSlice;
+        assert(headerSlice);
+        const page = readPageHeader(headerSlice);
+        assert(page);
+        let pageValid = false;
+        if (page.serialNumber === this.bitstream.serialNumber) {
+          pageValid = true;
+        } else {
+          let pageSlice = this.demuxer.reader.requestSlice(page.headerStartPos, page.totalSize);
+          if (pageSlice instanceof Promise)
+            pageSlice = await pageSlice;
+          assert(pageSlice);
+          const bytes = readBytes(pageSlice, page.totalSize);
+          const crc = computeOggPageCrc(bytes);
+          pageValid = crc === page.checksum;
+        }
+        if (!pageValid) {
+          searchStartPos = page.headerStartPos + 4;
+          continue;
+        }
+        if (pageValid && page.serialNumber !== this.bitstream.serialNumber) {
+          searchStartPos = page.headerStartPos + page.totalSize;
+          continue;
+        }
+        const isContinuationPage = page.granulePosition === -1;
+        if (isContinuationPage) {
+          searchStartPos = page.headerStartPos + page.totalSize;
+          continue;
+        }
+        if (this.granulePositionToTimestampInSamples(page.granulePosition) > timestampInSamples) {
+          high = page.headerStartPos;
+        } else {
+          lowPage = page;
+          lowPages.push(page);
+        }
+        continue outer;
+      }
+    }
+    let lowerPage = startPosition.startPage;
+    for (const otherLowPage of lowPages) {
+      if (otherLowPage.granulePosition === lowPage.granulePosition) {
+        break;
+      }
+      if (!lowerPage || otherLowPage.headerStartPos > lowerPage.headerStartPos) {
+        lowerPage = otherLowPage;
+      }
+    }
+    let currentPage = lowerPage;
+    const previousPages = [currentPage];
+    while (true) {
+      if (currentPage.serialNumber === this.bitstream.serialNumber && currentPage.granulePosition === lowPage.granulePosition) {
+        break;
+      }
+      const nextPos = currentPage.headerStartPos + currentPage.totalSize;
+      let slice = this.demuxer.reader.requestSliceRange(nextPos, MIN_PAGE_HEADER_SIZE, MAX_PAGE_HEADER_SIZE);
+      if (slice instanceof Promise)
+        slice = await slice;
+      assert(slice);
+      const nextPage = readPageHeader(slice);
+      assert(nextPage);
+      currentPage = nextPage;
+      if (currentPage.serialNumber === this.bitstream.serialNumber) {
+        previousPages.push(currentPage);
+      }
+    }
+    assert(currentPage.granulePosition !== -1);
+    let currentSegmentIndex = null;
+    let currentTimestampInSamples;
+    let currentTimestampIsCorrect;
+    let endPage = currentPage;
+    let endSegmentIndex = 0;
+    if (currentPage.headerStartPos === startPosition.startPage.headerStartPos) {
+      currentTimestampInSamples = this.granulePositionToTimestampInSamples(0);
+      currentTimestampIsCorrect = true;
+      currentSegmentIndex = 0;
+    } else {
+      currentTimestampInSamples = 0;
+      currentTimestampIsCorrect = false;
+      for (let i = currentPage.lacingValues.length - 1; i >= 0; i--) {
+        const value = currentPage.lacingValues[i];
+        if (value < 255) {
+          currentSegmentIndex = i + 1;
+          break;
+        }
+      }
+      if (currentSegmentIndex === null) {
+        throw new Error("Invalid page with granule position: no packets end on this page.");
+      }
+      endSegmentIndex = currentSegmentIndex - 1;
+      const pseudopacket = {
+        data: PLACEHOLDER_DATA,
+        endPage,
+        endSegmentIndex
+      };
+      const nextPosition = await this.demuxer.findNextPacketStart(pseudopacket);
+      if (nextPosition) {
+        const endPosition = findPreviousPacketEndPosition(previousPages, currentPage, currentSegmentIndex);
+        assert(endPosition);
+        const startPosition2 = findPacketStartPosition(previousPages, endPosition.page, endPosition.segmentIndex);
+        if (startPosition2) {
+          currentPage = startPosition2.page;
+          currentSegmentIndex = startPosition2.segmentIndex;
+        }
+      } else {
+        while (true) {
+          const endPosition = findPreviousPacketEndPosition(previousPages, currentPage, currentSegmentIndex);
+          if (!endPosition) {
+            break;
+          }
+          const startPosition2 = findPacketStartPosition(previousPages, endPosition.page, endPosition.segmentIndex);
+          if (!startPosition2) {
+            break;
+          }
+          currentPage = startPosition2.page;
+          currentSegmentIndex = startPosition2.segmentIndex;
+          if (endPosition.page.headerStartPos !== endPage.headerStartPos) {
+            endPage = endPosition.page;
+            endSegmentIndex = endPosition.segmentIndex;
+            break;
+          }
+        }
+      }
+    }
+    let lastEncodedPacket = null;
+    let lastEncodedPacketMetadata = null;
+    while (currentPage !== null) {
+      assert(currentSegmentIndex !== null);
+      const packet = await this.demuxer.readPacket(currentPage, currentSegmentIndex);
+      if (!packet) {
+        break;
+      }
+      const skipPacket = currentPage.headerStartPos === startPosition.startPage.headerStartPos && currentSegmentIndex < startPosition.startSegmentIndex;
+      if (!skipPacket) {
+        let encodedPacket = this.createEncodedPacketFromOggPacket(packet, {
+          timestampInSamples: currentTimestampInSamples,
+          vorbisLastBlocksize: lastEncodedPacketMetadata?.vorbisBlockSize ?? null
+        }, options);
+        assert(encodedPacket);
+        let encodedPacketMetadata = this.encodedPacketToMetadata.get(encodedPacket);
+        assert(encodedPacketMetadata);
+        if (!currentTimestampIsCorrect && packet.endPage.headerStartPos === endPage.headerStartPos && packet.endSegmentIndex === endSegmentIndex) {
+          currentTimestampInSamples = this.granulePositionToTimestampInSamples(currentPage.granulePosition);
+          currentTimestampIsCorrect = true;
+          encodedPacket = this.createEncodedPacketFromOggPacket(packet, {
+            timestampInSamples: currentTimestampInSamples - encodedPacketMetadata.durationInSamples,
+            vorbisLastBlocksize: lastEncodedPacketMetadata?.vorbisBlockSize ?? null
+          }, options);
+          assert(encodedPacket);
+          encodedPacketMetadata = this.encodedPacketToMetadata.get(encodedPacket);
+          assert(encodedPacketMetadata);
+        } else {
+          currentTimestampInSamples += encodedPacketMetadata.durationInSamples;
+        }
+        lastEncodedPacket = encodedPacket;
+        lastEncodedPacketMetadata = encodedPacketMetadata;
+        if (currentTimestampIsCorrect && // Next timestamp will be too late
+        (Math.max(currentTimestampInSamples, 0) > timestampInSamples || Math.max(encodedPacketMetadata.timestampInSamples, 0) === timestampInSamples)) {
+          break;
+        }
+      }
+      const nextPosition = await this.demuxer.findNextPacketStart(packet);
+      if (!nextPosition) {
+        break;
+      }
+      currentPage = nextPosition.startPage;
+      currentSegmentIndex = nextPosition.startSegmentIndex;
+    }
+    return lastEncodedPacket;
+  }
+  // A slower but simpler and sequential algorithm for finding a packet in a file
+  async getPacketSequential(timestamp, options) {
+    const release = await this.sequentialScanMutex.acquire();
+    try {
+      const timestampInSamples = roundIfAlmostInteger(timestamp * this.internalSampleRate);
+      timestamp = timestampInSamples / this.internalSampleRate;
+      const index = binarySearchLessOrEqual(this.sequentialScanCache, timestampInSamples, (x) => x.timestampInSamples);
+      let currentPacket;
+      if (index !== -1) {
+        const cacheEntry = this.sequentialScanCache[index];
+        currentPacket = this.createEncodedPacketFromOggPacket(cacheEntry.packet, {
+          timestampInSamples: cacheEntry.timestampInSamples,
+          vorbisLastBlocksize: cacheEntry.vorbisLastBlockSize
+        }, options);
+      } else {
+        currentPacket = await this.getFirstPacket(options);
+      }
+      let i = 0;
+      while (currentPacket && currentPacket.timestamp < timestamp) {
+        const nextPacket = await this.getNextPacket(currentPacket, options);
+        if (!nextPacket || nextPacket.timestamp > timestamp) {
+          break;
+        }
+        currentPacket = nextPacket;
+        i++;
+        if (i === 100) {
+          i = 0;
+          const metadata = this.encodedPacketToMetadata.get(currentPacket);
+          assert(metadata);
+          if (this.sequentialScanCache.length > 0) {
+            assert(last(this.sequentialScanCache).timestampInSamples <= metadata.timestampInSamples);
+          }
+          this.sequentialScanCache.push(metadata);
+        }
+      }
+      return currentPacket;
+    } finally {
+      release();
+    }
+  }
+  getKeyPacket(timestamp, options) {
+    return this.getPacket(timestamp, options);
+  }
+  getNextKeyPacket(packet, options) {
+    return this.getNextPacket(packet, options);
+  }
+}
+const findPacketStartPosition = (pageList, endPage, endSegmentIndex) => {
+  let page = endPage;
+  let segmentIndex = endSegmentIndex;
+  outer: while (true) {
+    segmentIndex--;
+    for (segmentIndex; segmentIndex >= 0; segmentIndex--) {
+      const lacingValue = page.lacingValues[segmentIndex];
+      if (lacingValue < 255) {
+        segmentIndex++;
+        break outer;
+      }
+    }
+    assert(segmentIndex === -1);
+    const pageStartsWithFreshPacket = !(page.headerType & 1);
+    if (pageStartsWithFreshPacket) {
+      segmentIndex = 0;
+      break;
+    }
+    const previousPage = findLast(pageList, (x) => x.headerStartPos < page.headerStartPos);
+    if (!previousPage) {
+      return null;
+    }
+    page = previousPage;
+    segmentIndex = page.lacingValues.length;
+  }
+  assert(segmentIndex !== -1);
+  if (segmentIndex === page.lacingValues.length) {
+    const nextPage = pageList[pageList.indexOf(page) + 1];
+    assert(nextPage);
+    page = nextPage;
+    segmentIndex = 0;
+  }
+  return { page, segmentIndex };
+};
+const findPreviousPacketEndPosition = (pageList, startPage, startSegmentIndex) => {
+  if (startSegmentIndex > 0) {
+    return { page: startPage, segmentIndex: startSegmentIndex - 1 };
+  }
+  const previousPage = findLast(pageList, (x) => x.headerStartPos < startPage.headerStartPos);
+  if (!previousPage) {
+    return null;
+  }
+  return { page: previousPage, segmentIndex: previousPage.lacingValues.length - 1 };
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+var WaveFormat;
+(function(WaveFormat2) {
+  WaveFormat2[WaveFormat2["PCM"] = 1] = "PCM";
+  WaveFormat2[WaveFormat2["IEEE_FLOAT"] = 3] = "IEEE_FLOAT";
+  WaveFormat2[WaveFormat2["ALAW"] = 6] = "ALAW";
+  WaveFormat2[WaveFormat2["MULAW"] = 7] = "MULAW";
+  WaveFormat2[WaveFormat2["EXTENSIBLE"] = 65534] = "EXTENSIBLE";
+})(WaveFormat || (WaveFormat = {}));
+class WaveDemuxer extends Demuxer {
+  constructor(input) {
+    super(input);
+    this.metadataPromise = null;
+    this.dataStart = -1;
+    this.dataSize = -1;
+    this.audioInfo = null;
+    this.tracks = [];
+    this.lastKnownPacketIndex = 0;
+    this.metadataTags = {};
+    this.reader = input._reader;
+  }
+  async readMetadata() {
+    return this.metadataPromise ?? (this.metadataPromise = (async () => {
+      let slice = this.reader.requestSlice(0, 12);
+      if (slice instanceof Promise)
+        slice = await slice;
+      assert(slice);
+      const riffType = readAscii(slice, 4);
+      const littleEndian = riffType !== "RIFX";
+      const isRf64 = riffType === "RF64";
+      const outerChunkSize = readU32(slice, littleEndian);
+      let totalFileSize = isRf64 ? this.reader.fileSize : Math.min(outerChunkSize + 8, this.reader.fileSize ?? Infinity);
+      const format = readAscii(slice, 4);
+      if (format !== "WAVE") {
+        throw new Error("Invalid WAVE file - wrong format");
+      }
+      let chunksRead = 0;
+      let dataChunkSize = null;
+      let currentPos = slice.filePos;
+      while (totalFileSize === null || currentPos < totalFileSize) {
+        let slice2 = this.reader.requestSlice(currentPos, 8);
+        if (slice2 instanceof Promise)
+          slice2 = await slice2;
+        if (!slice2)
+          break;
+        const chunkId = readAscii(slice2, 4);
+        const chunkSize = readU32(slice2, littleEndian);
+        const startPos = slice2.filePos;
+        if (isRf64 && chunksRead === 0 && chunkId !== "ds64") {
+          throw new Error('Invalid RF64 file: First chunk must be "ds64".');
+        }
+        if (chunkId === "fmt ") {
+          await this.parseFmtChunk(startPos, chunkSize, littleEndian);
+        } else if (chunkId === "data") {
+          dataChunkSize ?? (dataChunkSize = chunkSize);
+          this.dataStart = slice2.filePos;
+          this.dataSize = Math.min(dataChunkSize, (totalFileSize ?? Infinity) - this.dataStart);
+          if (this.reader.fileSize === null) {
+            break;
+          }
+        } else if (chunkId === "ds64") {
+          let ds64Slice = this.reader.requestSlice(startPos, chunkSize);
+          if (ds64Slice instanceof Promise)
+            ds64Slice = await ds64Slice;
+          if (!ds64Slice)
+            break;
+          const riffChunkSize = readU64(ds64Slice, littleEndian);
+          dataChunkSize = readU64(ds64Slice, littleEndian);
+          totalFileSize = Math.min(riffChunkSize + 8, this.reader.fileSize ?? Infinity);
+        } else if (chunkId === "LIST") {
+          await this.parseListChunk(startPos, chunkSize, littleEndian);
+        } else if (chunkId === "ID3 " || chunkId === "id3 ") {
+          await this.parseId3Chunk(startPos, chunkSize);
+        }
+        currentPos = startPos + chunkSize + (chunkSize & 1);
+        chunksRead++;
+      }
+      if (!this.audioInfo) {
+        throw new Error('Invalid WAVE file - missing "fmt " chunk');
+      }
+      if (this.dataStart === -1) {
+        throw new Error('Invalid WAVE file - missing "data" chunk');
+      }
+      const blockSize = this.audioInfo.blockSizeInBytes;
+      this.dataSize = Math.floor(this.dataSize / blockSize) * blockSize;
+      this.tracks.push(new InputAudioTrack(this.input, new WaveAudioTrackBacking(this)));
+    })());
+  }
+  async parseFmtChunk(startPos, size, littleEndian) {
+    let slice = this.reader.requestSlice(startPos, size);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return;
+    let formatTag = readU16(slice, littleEndian);
+    const numChannels = readU16(slice, littleEndian);
+    const sampleRate = readU32(slice, littleEndian);
+    slice.skip(4);
+    const blockAlign = readU16(slice, littleEndian);
+    let bitsPerSample;
+    if (size === 14) {
+      bitsPerSample = 8;
+    } else {
+      bitsPerSample = readU16(slice, littleEndian);
+    }
+    if (size >= 18 && formatTag !== 357) {
+      const cbSize = readU16(slice, littleEndian);
+      const remainingSize = size - 18;
+      const extensionSize = Math.min(remainingSize, cbSize);
+      if (extensionSize >= 22 && formatTag === WaveFormat.EXTENSIBLE) {
+        slice.skip(2 + 4);
+        const subFormat = readBytes(slice, 16);
+        formatTag = subFormat[0] | subFormat[1] << 8;
+      }
+    }
+    if (formatTag === WaveFormat.MULAW || formatTag === WaveFormat.ALAW) {
+      bitsPerSample = 8;
+    }
+    this.audioInfo = {
+      format: formatTag,
+      numberOfChannels: numChannels,
+      sampleRate,
+      sampleSizeInBytes: Math.ceil(bitsPerSample / 8),
+      blockSizeInBytes: blockAlign
+    };
+  }
+  async parseListChunk(startPos, size, littleEndian) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k;
+    let slice = this.reader.requestSlice(startPos, size);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return;
+    const infoType = readAscii(slice, 4);
+    if (infoType !== "INFO" && infoType !== "INF0") {
+      return;
+    }
+    let currentPos = slice.filePos;
+    while (currentPos <= startPos + size - 8) {
+      slice.filePos = currentPos;
+      const chunkName = readAscii(slice, 4);
+      const chunkSize = readU32(slice, littleEndian);
+      const bytes = readBytes(slice, chunkSize);
+      let stringLength = 0;
+      for (let i = 0; i < bytes.length; i++) {
+        if (bytes[i] === 0) {
+          break;
+        }
+        stringLength++;
+      }
+      const value = String.fromCharCode(...bytes.subarray(0, stringLength));
+      (_a = this.metadataTags).raw ?? (_a.raw = {});
+      this.metadataTags.raw[chunkName] = value;
+      switch (chunkName) {
+        case "INAM":
+        case "TITL":
+          {
+            (_b = this.metadataTags).title ?? (_b.title = value);
+          }
+          break;
+        case "TIT3":
+          {
+            (_c = this.metadataTags).description ?? (_c.description = value);
+          }
+          break;
+        case "IART":
+          {
+            (_d = this.metadataTags).artist ?? (_d.artist = value);
+          }
+          break;
+        case "IPRD":
+          {
+            (_e = this.metadataTags).album ?? (_e.album = value);
+          }
+          break;
+        case "IPRT":
+        case "ITRK":
+        case "TRCK":
+          {
+            const parts = value.split("/");
+            const trackNum = Number.parseInt(parts[0], 10);
+            const tracksTotal = parts[1] && Number.parseInt(parts[1], 10);
+            if (Number.isInteger(trackNum) && trackNum > 0) {
+              (_f = this.metadataTags).trackNumber ?? (_f.trackNumber = trackNum);
+            }
+            if (tracksTotal && Number.isInteger(tracksTotal) && tracksTotal > 0) {
+              (_g = this.metadataTags).tracksTotal ?? (_g.tracksTotal = tracksTotal);
+            }
+          }
+          break;
+        case "ICRD":
+        case "IDIT":
+          {
+            const date = new Date(value);
+            if (!Number.isNaN(date.getTime())) {
+              (_h = this.metadataTags).date ?? (_h.date = date);
+            }
+          }
+          break;
+        case "YEAR":
+          {
+            const year = Number.parseInt(value, 10);
+            if (Number.isInteger(year) && year > 0) {
+              (_i = this.metadataTags).date ?? (_i.date = new Date(year, 0, 1));
+            }
+          }
+          break;
+        case "IGNR":
+        case "GENR":
+          {
+            (_j = this.metadataTags).genre ?? (_j.genre = value);
+          }
+          break;
+        case "ICMT":
+        case "CMNT":
+        case "COMM":
+          {
+            (_k = this.metadataTags).comment ?? (_k.comment = value);
+          }
+          break;
+      }
+      currentPos += 8 + chunkSize + (chunkSize & 1);
+    }
+  }
+  async parseId3Chunk(startPos, size) {
+    let slice = this.reader.requestSlice(startPos, size);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return;
+    const id3V2Header = readId3V2Header(slice);
+    if (id3V2Header) {
+      const contentSlice = slice.slice(startPos + 10, id3V2Header.size);
+      parseId3V2Tag(contentSlice, id3V2Header, this.metadataTags);
+    }
+  }
+  getCodec() {
+    assert(this.audioInfo);
+    if (this.audioInfo.format === WaveFormat.MULAW) {
+      return "ulaw";
+    }
+    if (this.audioInfo.format === WaveFormat.ALAW) {
+      return "alaw";
+    }
+    if (this.audioInfo.format === WaveFormat.PCM) {
+      if (this.audioInfo.sampleSizeInBytes === 1) {
+        return "pcm-u8";
+      } else if (this.audioInfo.sampleSizeInBytes === 2) {
+        return "pcm-s16";
+      } else if (this.audioInfo.sampleSizeInBytes === 3) {
+        return "pcm-s24";
+      } else if (this.audioInfo.sampleSizeInBytes === 4) {
+        return "pcm-s32";
+      }
+    }
+    if (this.audioInfo.format === WaveFormat.IEEE_FLOAT) {
+      if (this.audioInfo.sampleSizeInBytes === 4) {
+        return "pcm-f32";
+      }
+    }
+    return null;
+  }
+  async getMimeType() {
+    return "audio/wav";
+  }
+  async computeDuration() {
+    await this.readMetadata();
+    const track = this.tracks[0];
+    assert(track);
+    return track.computeDuration();
+  }
+  async getTracks() {
+    await this.readMetadata();
+    return this.tracks;
+  }
+  async getMetadataTags() {
+    await this.readMetadata();
+    return this.metadataTags;
+  }
+}
+const PACKET_SIZE_IN_FRAMES = 2048;
+class WaveAudioTrackBacking {
+  constructor(demuxer) {
+    this.demuxer = demuxer;
+  }
+  getId() {
+    return 1;
+  }
+  getCodec() {
+    return this.demuxer.getCodec();
+  }
+  getInternalCodecId() {
+    assert(this.demuxer.audioInfo);
+    return this.demuxer.audioInfo.format;
+  }
+  async getDecoderConfig() {
+    const codec = this.demuxer.getCodec();
+    if (!codec) {
+      return null;
+    }
+    assert(this.demuxer.audioInfo);
+    return {
+      codec,
+      numberOfChannels: this.demuxer.audioInfo.numberOfChannels,
+      sampleRate: this.demuxer.audioInfo.sampleRate
+    };
+  }
+  async computeDuration() {
+    const lastPacket = await this.getPacket(Infinity, { metadataOnly: true });
+    return (lastPacket?.timestamp ?? 0) + (lastPacket?.duration ?? 0);
+  }
+  getNumberOfChannels() {
+    assert(this.demuxer.audioInfo);
+    return this.demuxer.audioInfo.numberOfChannels;
+  }
+  getSampleRate() {
+    assert(this.demuxer.audioInfo);
+    return this.demuxer.audioInfo.sampleRate;
+  }
+  getTimeResolution() {
+    assert(this.demuxer.audioInfo);
+    return this.demuxer.audioInfo.sampleRate;
+  }
+  getName() {
+    return null;
+  }
+  getLanguageCode() {
+    return UNDETERMINED_LANGUAGE;
+  }
+  getDisposition() {
+    return {
+      ...DEFAULT_TRACK_DISPOSITION
+    };
+  }
+  async getFirstTimestamp() {
+    return 0;
+  }
+  async getPacketAtIndex(packetIndex, options) {
+    assert(this.demuxer.audioInfo);
+    const startOffset = packetIndex * PACKET_SIZE_IN_FRAMES * this.demuxer.audioInfo.blockSizeInBytes;
+    if (startOffset >= this.demuxer.dataSize) {
+      return null;
+    }
+    const sizeInBytes = Math.min(PACKET_SIZE_IN_FRAMES * this.demuxer.audioInfo.blockSizeInBytes, this.demuxer.dataSize - startOffset);
+    if (this.demuxer.reader.fileSize === null) {
+      let slice = this.demuxer.reader.requestSlice(this.demuxer.dataStart + startOffset, sizeInBytes);
+      if (slice instanceof Promise)
+        slice = await slice;
+      if (!slice) {
+        return null;
+      }
+    }
+    let data;
+    if (options.metadataOnly) {
+      data = PLACEHOLDER_DATA;
+    } else {
+      let slice = this.demuxer.reader.requestSlice(this.demuxer.dataStart + startOffset, sizeInBytes);
+      if (slice instanceof Promise)
+        slice = await slice;
+      assert(slice);
+      data = readBytes(slice, sizeInBytes);
+    }
+    const timestamp = packetIndex * PACKET_SIZE_IN_FRAMES / this.demuxer.audioInfo.sampleRate;
+    const duration = sizeInBytes / this.demuxer.audioInfo.blockSizeInBytes / this.demuxer.audioInfo.sampleRate;
+    this.demuxer.lastKnownPacketIndex = Math.max(packetIndex, timestamp);
+    return new EncodedPacket(data, "key", timestamp, duration, packetIndex, sizeInBytes);
+  }
+  getFirstPacket(options) {
+    return this.getPacketAtIndex(0, options);
+  }
+  async getPacket(timestamp, options) {
+    assert(this.demuxer.audioInfo);
+    const packetIndex = Math.floor(Math.min(timestamp * this.demuxer.audioInfo.sampleRate / PACKET_SIZE_IN_FRAMES, (this.demuxer.dataSize - 1) / (PACKET_SIZE_IN_FRAMES * this.demuxer.audioInfo.blockSizeInBytes)));
+    const packet = await this.getPacketAtIndex(packetIndex, options);
+    if (packet) {
+      return packet;
+    }
+    if (packetIndex === 0) {
+      return null;
+    }
+    assert(this.demuxer.reader.fileSize === null);
+    let currentPacket = await this.getPacketAtIndex(this.demuxer.lastKnownPacketIndex, options);
+    while (currentPacket) {
+      const nextPacket = await this.getNextPacket(currentPacket, options);
+      if (!nextPacket) {
+        break;
+      }
+      currentPacket = nextPacket;
+    }
+    return currentPacket;
+  }
+  getNextPacket(packet, options) {
+    assert(this.demuxer.audioInfo);
+    const packetIndex = Math.round(packet.timestamp * this.demuxer.audioInfo.sampleRate / PACKET_SIZE_IN_FRAMES);
+    return this.getPacketAtIndex(packetIndex + 1, options);
+  }
+  getKeyPacket(timestamp, options) {
+    return this.getPacket(timestamp, options);
+  }
+  getNextKeyPacket(packet, options) {
+    return this.getNextPacket(packet, options);
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const MIN_FRAME_HEADER_SIZE = 7;
+const MAX_FRAME_HEADER_SIZE = 9;
+const readFrameHeader = (slice) => {
+  const startPos = slice.filePos;
+  const bytes = readBytes(slice, 9);
+  const bitstream = new Bitstream(bytes);
+  const syncword = bitstream.readBits(12);
+  if (syncword !== 4095) {
+    return null;
+  }
+  bitstream.skipBits(1);
+  const layer = bitstream.readBits(2);
+  if (layer !== 0) {
+    return null;
+  }
+  const protectionAbsence = bitstream.readBits(1);
+  const objectType = bitstream.readBits(2) + 1;
+  const samplingFrequencyIndex = bitstream.readBits(4);
+  if (samplingFrequencyIndex === 15) {
+    return null;
+  }
+  bitstream.skipBits(1);
+  const channelConfiguration = bitstream.readBits(3);
+  if (channelConfiguration === 0) {
+    throw new Error("ADTS frames with channel configuration 0 are not supported.");
+  }
+  bitstream.skipBits(1);
+  bitstream.skipBits(1);
+  bitstream.skipBits(1);
+  bitstream.skipBits(1);
+  const frameLength = bitstream.readBits(13);
+  bitstream.skipBits(11);
+  const numberOfAacFrames = bitstream.readBits(2) + 1;
+  if (numberOfAacFrames !== 1) {
+    throw new Error("ADTS frames with more than one AAC frame are not supported.");
+  }
+  let crcCheck = null;
+  if (protectionAbsence === 1) {
+    slice.filePos -= 2;
+  } else {
+    crcCheck = bitstream.readBits(16);
+  }
+  return {
+    objectType,
+    samplingFrequencyIndex,
+    channelConfiguration,
+    frameLength,
+    numberOfAacFrames,
+    crcCheck,
+    startPos
+  };
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const SAMPLES_PER_AAC_FRAME = 1024;
+class AdtsDemuxer extends Demuxer {
+  constructor(input) {
+    super(input);
+    this.metadataPromise = null;
+    this.firstFrameHeader = null;
+    this.loadedSamples = [];
+    this.tracks = [];
+    this.readingMutex = new AsyncMutex();
+    this.lastSampleLoaded = false;
+    this.lastLoadedPos = 0;
+    this.nextTimestampInSamples = 0;
+    this.reader = input._reader;
+  }
+  async readMetadata() {
+    return this.metadataPromise ?? (this.metadataPromise = (async () => {
+      while (!this.firstFrameHeader && !this.lastSampleLoaded) {
+        await this.advanceReader();
+      }
+      assert(this.firstFrameHeader);
+      this.tracks = [new InputAudioTrack(this.input, new AdtsAudioTrackBacking(this))];
+    })());
+  }
+  async advanceReader() {
+    let slice = this.reader.requestSliceRange(this.lastLoadedPos, MIN_FRAME_HEADER_SIZE, MAX_FRAME_HEADER_SIZE);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice) {
+      this.lastSampleLoaded = true;
+      return;
+    }
+    const header = readFrameHeader(slice);
+    if (!header) {
+      this.lastSampleLoaded = true;
+      return;
+    }
+    if (this.reader.fileSize !== null && header.startPos + header.frameLength > this.reader.fileSize) {
+      this.lastSampleLoaded = true;
+      return;
+    }
+    if (!this.firstFrameHeader) {
+      this.firstFrameHeader = header;
+    }
+    const sampleRate = aacFrequencyTable[header.samplingFrequencyIndex];
+    assert(sampleRate !== void 0);
+    const sampleDuration = SAMPLES_PER_AAC_FRAME / sampleRate;
+    const headerSize = header.crcCheck ? MAX_FRAME_HEADER_SIZE : MIN_FRAME_HEADER_SIZE;
+    const sample = {
+      timestamp: this.nextTimestampInSamples / sampleRate,
+      duration: sampleDuration,
+      dataStart: header.startPos + headerSize,
+      dataSize: header.frameLength - headerSize
+    };
+    this.loadedSamples.push(sample);
+    this.nextTimestampInSamples += SAMPLES_PER_AAC_FRAME;
+    this.lastLoadedPos = header.startPos + header.frameLength;
+  }
+  async getMimeType() {
+    return "audio/aac";
+  }
+  async getTracks() {
+    await this.readMetadata();
+    return this.tracks;
+  }
+  async computeDuration() {
+    await this.readMetadata();
+    const track = this.tracks[0];
+    assert(track);
+    return track.computeDuration();
+  }
+  async getMetadataTags() {
+    return {};
+  }
+}
+class AdtsAudioTrackBacking {
+  constructor(demuxer) {
+    this.demuxer = demuxer;
+  }
+  getId() {
+    return 1;
+  }
+  async getFirstTimestamp() {
+    return 0;
+  }
+  getTimeResolution() {
+    const sampleRate = this.getSampleRate();
+    return sampleRate / SAMPLES_PER_AAC_FRAME;
+  }
+  async computeDuration() {
+    const lastPacket = await this.getPacket(Infinity, { metadataOnly: true });
+    return (lastPacket?.timestamp ?? 0) + (lastPacket?.duration ?? 0);
+  }
+  getName() {
+    return null;
+  }
+  getLanguageCode() {
+    return UNDETERMINED_LANGUAGE;
+  }
+  getCodec() {
+    return "aac";
+  }
+  getInternalCodecId() {
+    assert(this.demuxer.firstFrameHeader);
+    return this.demuxer.firstFrameHeader.objectType;
+  }
+  getNumberOfChannels() {
+    assert(this.demuxer.firstFrameHeader);
+    const numberOfChannels = aacChannelMap[this.demuxer.firstFrameHeader.channelConfiguration];
+    assert(numberOfChannels !== void 0);
+    return numberOfChannels;
+  }
+  getSampleRate() {
+    assert(this.demuxer.firstFrameHeader);
+    const sampleRate = aacFrequencyTable[this.demuxer.firstFrameHeader.samplingFrequencyIndex];
+    assert(sampleRate !== void 0);
+    return sampleRate;
+  }
+  getDisposition() {
+    return {
+      ...DEFAULT_TRACK_DISPOSITION
+    };
+  }
+  async getDecoderConfig() {
+    assert(this.demuxer.firstFrameHeader);
+    const bytes = new Uint8Array(3);
+    const bitstream = new Bitstream(bytes);
+    const { objectType, samplingFrequencyIndex, channelConfiguration } = this.demuxer.firstFrameHeader;
+    if (objectType > 31) {
+      bitstream.writeBits(5, 31);
+      bitstream.writeBits(6, objectType - 32);
+    } else {
+      bitstream.writeBits(5, objectType);
+    }
+    bitstream.writeBits(4, samplingFrequencyIndex);
+    bitstream.writeBits(4, channelConfiguration);
+    return {
+      codec: `mp4a.40.${this.demuxer.firstFrameHeader.objectType}`,
+      numberOfChannels: this.getNumberOfChannels(),
+      sampleRate: this.getSampleRate(),
+      description: bytes.subarray(0, Math.ceil((bitstream.pos - 1) / 8))
+    };
+  }
+  async getPacketAtIndex(sampleIndex, options) {
+    if (sampleIndex === -1) {
+      return null;
+    }
+    const rawSample = this.demuxer.loadedSamples[sampleIndex];
+    if (!rawSample) {
+      return null;
+    }
+    let data;
+    if (options.metadataOnly) {
+      data = PLACEHOLDER_DATA;
+    } else {
+      let slice = this.demuxer.reader.requestSlice(rawSample.dataStart, rawSample.dataSize);
+      if (slice instanceof Promise)
+        slice = await slice;
+      if (!slice) {
+        return null;
+      }
+      data = readBytes(slice, rawSample.dataSize);
+    }
+    return new EncodedPacket(data, "key", rawSample.timestamp, rawSample.duration, sampleIndex, rawSample.dataSize);
+  }
+  getFirstPacket(options) {
+    return this.getPacketAtIndex(0, options);
+  }
+  async getNextPacket(packet, options) {
+    const release = await this.demuxer.readingMutex.acquire();
+    try {
+      const sampleIndex = binarySearchExact(this.demuxer.loadedSamples, packet.timestamp, (x) => x.timestamp);
+      if (sampleIndex === -1) {
+        throw new Error("Packet was not created from this track.");
+      }
+      const nextIndex = sampleIndex + 1;
+      while (nextIndex >= this.demuxer.loadedSamples.length && !this.demuxer.lastSampleLoaded) {
+        await this.demuxer.advanceReader();
+      }
+      return this.getPacketAtIndex(nextIndex, options);
+    } finally {
+      release();
+    }
+  }
+  async getPacket(timestamp, options) {
+    const release = await this.demuxer.readingMutex.acquire();
+    try {
+      while (true) {
+        const index = binarySearchLessOrEqual(this.demuxer.loadedSamples, timestamp, (x) => x.timestamp);
+        if (index === -1 && this.demuxer.loadedSamples.length > 0) {
+          return null;
+        }
+        if (this.demuxer.lastSampleLoaded) {
+          return this.getPacketAtIndex(index, options);
+        }
+        if (index >= 0 && index + 1 < this.demuxer.loadedSamples.length) {
+          return this.getPacketAtIndex(index, options);
+        }
+        await this.demuxer.advanceReader();
+      }
+    } finally {
+      release();
+    }
+  }
+  getKeyPacket(timestamp, options) {
+    return this.getPacket(timestamp, options);
+  }
+  getNextKeyPacket(packet, options) {
+    return this.getNextPacket(packet, options);
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+const getBlockSizeOrUncommon = (bits) => {
+  if (bits === 0) {
+    return null;
+  } else if (bits === 1) {
+    return 192;
+  } else if (bits >= 2 && bits <= 5) {
+    return 144 * 2 ** bits;
+  } else if (bits === 6) {
+    return "uncommon-u8";
+  } else if (bits === 7) {
+    return "uncommon-u16";
+  } else if (bits >= 8 && bits <= 15) {
+    return 2 ** bits;
+  } else {
+    return null;
+  }
+};
+const getSampleRateOrUncommon = (sampleRateBits, streamInfoSampleRate) => {
+  switch (sampleRateBits) {
+    case 0:
+      return streamInfoSampleRate;
+    case 1:
+      return 88200;
+    case 2:
+      return 176400;
+    case 3:
+      return 192e3;
+    case 4:
+      return 8e3;
+    case 5:
+      return 16e3;
+    case 6:
+      return 22050;
+    case 7:
+      return 24e3;
+    case 8:
+      return 32e3;
+    case 9:
+      return 44100;
+    case 10:
+      return 48e3;
+    case 11:
+      return 96e3;
+    case 12:
+      return "uncommon-u8";
+    case 13:
+      return "uncommon-u16";
+    case 14:
+      return "uncommon-u16-10";
+    default:
+      return null;
+  }
+};
+const readCodedNumber = (fileSlice) => {
+  let ones = 0;
+  const bitstream1 = new Bitstream(readBytes(fileSlice, 1));
+  while (bitstream1.readBits(1) === 1) {
+    ones++;
+  }
+  if (ones === 0) {
+    return bitstream1.readBits(7);
+  }
+  const bitArray = [];
+  const extraBytes = ones - 1;
+  const bitstream2 = new Bitstream(readBytes(fileSlice, extraBytes));
+  const firstByteBits = 8 - ones - 1;
+  for (let i = 0; i < firstByteBits; i++) {
+    bitArray.unshift(bitstream1.readBits(1));
+  }
+  for (let i = 0; i < extraBytes; i++) {
+    for (let j = 0; j < 8; j++) {
+      const val = bitstream2.readBits(1);
+      if (j < 2) {
+        continue;
+      }
+      bitArray.unshift(val);
+    }
+  }
+  const encoded = bitArray.reduce((acc, bit, index) => {
+    return acc | bit << index;
+  }, 0);
+  return encoded;
+};
+const readBlockSize = (slice, blockSizeBits) => {
+  if (blockSizeBits === "uncommon-u16") {
+    return readU16Be(slice) + 1;
+  } else if (blockSizeBits === "uncommon-u8") {
+    return readU8(slice) + 1;
+  } else if (typeof blockSizeBits === "number") {
+    return blockSizeBits;
+  } else {
+    assertNever(blockSizeBits);
+    assert(false);
+  }
+};
+const readSampleRate = (slice, sampleRateOrUncommon) => {
+  if (sampleRateOrUncommon === "uncommon-u16") {
+    return readU16Be(slice);
+  }
+  if (sampleRateOrUncommon === "uncommon-u16-10") {
+    return readU16Be(slice) * 10;
+  }
+  if (sampleRateOrUncommon === "uncommon-u8") {
+    return readU8(slice);
+  }
+  if (typeof sampleRateOrUncommon === "number") {
+    return sampleRateOrUncommon;
+  }
+  return null;
+};
+const calculateCrc8 = (data) => {
+  const polynomial = 7;
+  let crc = 0;
+  for (const byte of data) {
+    crc ^= byte;
+    for (let i = 0; i < 8; i++) {
+      if ((crc & 128) !== 0) {
+        crc = crc << 1 ^ polynomial;
+      } else {
+        crc <<= 1;
+      }
+      crc &= 255;
+    }
+  }
+  return crc;
+};
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class FlacDemuxer extends Demuxer {
+  constructor(input) {
+    super(input);
+    this.loadedSamples = [];
+    this.metadataPromise = null;
+    this.track = null;
+    this.metadataTags = {};
+    this.audioInfo = null;
+    this.lastLoadedPos = null;
+    this.blockingBit = null;
+    this.readingMutex = new AsyncMutex();
+    this.lastSampleLoaded = false;
+    this.reader = input._reader;
+  }
+  async computeDuration() {
+    await this.readMetadata();
+    assert(this.track);
+    return this.track.computeDuration();
+  }
+  async getMetadataTags() {
+    await this.readMetadata();
+    return this.metadataTags;
+  }
+  async getTracks() {
+    await this.readMetadata();
+    assert(this.track);
+    return [this.track];
+  }
+  async getMimeType() {
+    return "audio/flac";
+  }
+  async readMetadata() {
+    let currentPos = 4;
+    return this.metadataPromise ?? (this.metadataPromise = (async () => {
+      var _a;
+      while (this.reader.fileSize === null || currentPos < this.reader.fileSize) {
+        let sizeSlice = this.reader.requestSlice(currentPos, 4);
+        if (sizeSlice instanceof Promise)
+          sizeSlice = await sizeSlice;
+        currentPos += 4;
+        if (sizeSlice === null) {
+          throw new Error(`Metadata block at position ${currentPos} is too small! Corrupted file.`);
+        }
+        assert(sizeSlice);
+        const byte = readU8(sizeSlice);
+        const size = readU24Be(sizeSlice);
+        const isLastMetadata = (byte & 128) !== 0;
+        const metaBlockType = byte & 127;
+        switch (metaBlockType) {
+          case FlacBlockType.STREAMINFO: {
+            let streamInfoBlock = this.reader.requestSlice(currentPos, size);
+            if (streamInfoBlock instanceof Promise)
+              streamInfoBlock = await streamInfoBlock;
+            assert(streamInfoBlock);
+            if (streamInfoBlock === null) {
+              throw new Error(`StreamInfo block at position ${currentPos} is too small! Corrupted file.`);
+            }
+            const streamInfoBytes = readBytes(streamInfoBlock, 34);
+            const bitstream = new Bitstream(streamInfoBytes);
+            const minimumBlockSize = bitstream.readBits(16);
+            const maximumBlockSize = bitstream.readBits(16);
+            const minimumFrameSize = bitstream.readBits(24);
+            const maximumFrameSize = bitstream.readBits(24);
+            const sampleRate = bitstream.readBits(20);
+            const numberOfChannels = bitstream.readBits(3) + 1;
+            bitstream.readBits(5);
+            const totalSamples = bitstream.readBits(36);
+            bitstream.skipBits(16 * 8);
+            const description = new Uint8Array(42);
+            description.set(new Uint8Array([102, 76, 97, 67]), 0);
+            description.set(new Uint8Array([128, 0, 0, 34]), 4);
+            description.set(streamInfoBytes, 8);
+            this.audioInfo = {
+              numberOfChannels,
+              sampleRate,
+              totalSamples,
+              minimumBlockSize,
+              maximumBlockSize,
+              minimumFrameSize,
+              maximumFrameSize,
+              description
+            };
+            this.track = new InputAudioTrack(this.input, new FlacAudioTrackBacking(this));
+            break;
+          }
+          case FlacBlockType.VORBIS_COMMENT: {
+            let vorbisCommentBlock = this.reader.requestSlice(currentPos, size);
+            if (vorbisCommentBlock instanceof Promise)
+              vorbisCommentBlock = await vorbisCommentBlock;
+            assert(vorbisCommentBlock);
+            readVorbisComments(readBytes(vorbisCommentBlock, size), this.metadataTags);
+            break;
+          }
+          case FlacBlockType.PICTURE: {
+            let pictureBlock = this.reader.requestSlice(currentPos, size);
+            if (pictureBlock instanceof Promise)
+              pictureBlock = await pictureBlock;
+            assert(pictureBlock);
+            const pictureType = readU32Be(pictureBlock);
+            const mediaTypeLength = readU32Be(pictureBlock);
+            const mediaType = textDecoder.decode(readBytes(pictureBlock, mediaTypeLength));
+            const descriptionLength = readU32Be(pictureBlock);
+            const description = textDecoder.decode(readBytes(pictureBlock, descriptionLength));
+            pictureBlock.skip(4 + 4 + 4 + 4);
+            const dataLength = readU32Be(pictureBlock);
+            const data = readBytes(pictureBlock, dataLength);
+            (_a = this.metadataTags).images ?? (_a.images = []);
+            this.metadataTags.images.push({
+              data,
+              mimeType: mediaType,
+              // https://www.rfc-editor.org/rfc/rfc9639.html#table13
+              kind: pictureType === 3 ? "coverFront" : pictureType === 4 ? "coverBack" : "unknown",
+              description
+            });
+            break;
+          }
+        }
+        currentPos += size;
+        if (isLastMetadata) {
+          this.lastLoadedPos = currentPos;
+          break;
+        }
+      }
+    })());
+  }
+  async readNextFlacFrame({ startPos, isFirstPacket }) {
+    assert(this.audioInfo);
+    const minimumHeaderLength = 6;
+    const maximumHeaderSize = 16;
+    const maximumSliceLength = this.audioInfo.maximumFrameSize + maximumHeaderSize;
+    const slice = await this.reader.requestSliceRange(startPos, this.audioInfo.minimumFrameSize, maximumSliceLength);
+    if (!slice) {
+      return null;
+    }
+    const frameHeader = this.readFlacFrameHeader({
+      slice,
+      isFirstPacket
+    });
+    if (!frameHeader) {
+      return null;
+    }
+    slice.filePos = startPos + this.audioInfo.minimumFrameSize;
+    while (true) {
+      if (slice.filePos > slice.end - minimumHeaderLength) {
+        return {
+          num: frameHeader.num,
+          blockSize: frameHeader.blockSize,
+          sampleRate: frameHeader.sampleRate,
+          size: slice.end - startPos,
+          isLastFrame: true
+        };
+      }
+      const nextByte = readU8(slice);
+      if (nextByte === 255) {
+        const positionBeforeReading = slice.filePos;
+        const byteAfterNextByte = readU8(slice);
+        const expected = this.blockingBit === 1 ? 249 : 248;
+        if (byteAfterNextByte !== expected) {
+          slice.filePos = positionBeforeReading;
+          continue;
+        }
+        slice.skip(-2);
+        const lengthIfNextFlacFrameHeaderIsLegit = slice.filePos - startPos;
+        const nextFrameHeader = this.readFlacFrameHeader({
+          slice,
+          isFirstPacket: false
+        });
+        if (!nextFrameHeader) {
+          slice.filePos = positionBeforeReading;
+          continue;
+        }
+        if (this.blockingBit === 0) {
+          if (nextFrameHeader.num - frameHeader.num !== 1) {
+            slice.filePos = positionBeforeReading;
+            continue;
+          }
+        } else {
+          if (nextFrameHeader.num - frameHeader.num !== frameHeader.blockSize) {
+            slice.filePos = positionBeforeReading;
+            continue;
+          }
+        }
+        return {
+          num: frameHeader.num,
+          blockSize: frameHeader.blockSize,
+          sampleRate: frameHeader.sampleRate,
+          size: lengthIfNextFlacFrameHeaderIsLegit,
+          isLastFrame: false
+        };
+      }
+    }
+  }
+  readFlacFrameHeader({ slice, isFirstPacket }) {
+    const startOffset = slice.filePos;
+    const bytes = readBytes(slice, 4);
+    const bitstream = new Bitstream(bytes);
+    const bits = bitstream.readBits(15);
+    if (bits !== 32764) {
+      return null;
+    }
+    if (this.blockingBit === null) {
+      assert(isFirstPacket);
+      const newBlockingBit = bitstream.readBits(1);
+      this.blockingBit = newBlockingBit;
+    } else if (this.blockingBit === 1) {
+      assert(!isFirstPacket);
+      const newBlockingBit = bitstream.readBits(1);
+      if (newBlockingBit !== 1) {
+        return null;
+      }
+    } else if (this.blockingBit === 0) {
+      assert(!isFirstPacket);
+      const newBlockingBit = bitstream.readBits(1);
+      if (newBlockingBit !== 0) {
+        return null;
+      }
+    } else {
+      throw new Error("Invalid blocking bit");
+    }
+    const blockSizeOrUncommon = getBlockSizeOrUncommon(bitstream.readBits(4));
+    if (!blockSizeOrUncommon) {
+      return null;
+    }
+    assert(this.audioInfo);
+    const sampleRateOrUncommon = getSampleRateOrUncommon(bitstream.readBits(4), this.audioInfo.sampleRate);
+    if (!sampleRateOrUncommon) {
+      return null;
+    }
+    bitstream.readBits(4);
+    bitstream.readBits(3);
+    const reservedZero = bitstream.readBits(1);
+    if (reservedZero !== 0) {
+      return null;
+    }
+    const num = readCodedNumber(slice);
+    const blockSize = readBlockSize(slice, blockSizeOrUncommon);
+    const sampleRate = readSampleRate(slice, sampleRateOrUncommon);
+    if (sampleRate === null) {
+      return null;
+    }
+    if (sampleRate !== this.audioInfo.sampleRate) {
+      return null;
+    }
+    const size = slice.filePos - startOffset;
+    const crc = readU8(slice);
+    slice.skip(-size);
+    slice.skip(-1);
+    const crcCalculated = calculateCrc8(readBytes(slice, size));
+    if (crc !== crcCalculated) {
+      return null;
+    }
+    return { num, blockSize, sampleRate };
+  }
+  async advanceReader() {
+    await this.readMetadata();
+    assert(this.lastLoadedPos !== null);
+    assert(this.audioInfo);
+    const startPos = this.lastLoadedPos;
+    const frame = await this.readNextFlacFrame({
+      startPos,
+      isFirstPacket: this.loadedSamples.length === 0
+    });
+    if (!frame) {
+      this.lastSampleLoaded = true;
+      return;
+    }
+    const lastSample = this.loadedSamples[this.loadedSamples.length - 1];
+    const blockOffset = lastSample ? lastSample.blockOffset + lastSample.blockSize : 0;
+    const sample = {
+      blockOffset,
+      blockSize: frame.blockSize,
+      byteOffset: startPos,
+      byteSize: frame.size
+    };
+    this.lastLoadedPos = this.lastLoadedPos + frame.size;
+    this.loadedSamples.push(sample);
+    if (frame.isLastFrame) {
+      this.lastSampleLoaded = true;
+      return;
+    }
+  }
+}
+class FlacAudioTrackBacking {
+  constructor(demuxer) {
+    this.demuxer = demuxer;
+  }
+  getId() {
+    return 1;
+  }
+  getCodec() {
+    return "flac";
+  }
+  getInternalCodecId() {
+    return null;
+  }
+  getNumberOfChannels() {
+    assert(this.demuxer.audioInfo);
+    return this.demuxer.audioInfo.numberOfChannels;
+  }
+  async computeDuration() {
+    const lastPacket = await this.getPacket(Infinity, { metadataOnly: true });
+    return (lastPacket?.timestamp ?? 0) + (lastPacket?.duration ?? 0);
+  }
+  getSampleRate() {
+    assert(this.demuxer.audioInfo);
+    return this.demuxer.audioInfo.sampleRate;
+  }
+  getName() {
+    return null;
+  }
+  getLanguageCode() {
+    return UNDETERMINED_LANGUAGE;
+  }
+  getTimeResolution() {
+    assert(this.demuxer.audioInfo);
+    return this.demuxer.audioInfo.sampleRate;
+  }
+  getDisposition() {
+    return {
+      ...DEFAULT_TRACK_DISPOSITION
+    };
+  }
+  async getFirstTimestamp() {
+    return 0;
+  }
+  async getDecoderConfig() {
+    assert(this.demuxer.audioInfo);
+    return {
+      codec: "flac",
+      numberOfChannels: this.demuxer.audioInfo.numberOfChannels,
+      sampleRate: this.demuxer.audioInfo.sampleRate,
+      description: this.demuxer.audioInfo.description
+    };
+  }
+  async getPacket(timestamp, options) {
+    assert(this.demuxer.audioInfo);
+    if (timestamp < 0) {
+      throw new Error("Timestamp cannot be negative");
+    }
+    const release = await this.demuxer.readingMutex.acquire();
+    try {
+      while (true) {
+        const packetIndex = binarySearchLessOrEqual(this.demuxer.loadedSamples, timestamp, (x) => x.blockOffset / this.demuxer.audioInfo.sampleRate);
+        if (packetIndex === -1) {
+          await this.demuxer.advanceReader();
+          continue;
+        }
+        const packet = this.demuxer.loadedSamples[packetIndex];
+        const sampleTimestamp = packet.blockOffset / this.demuxer.audioInfo.sampleRate;
+        const sampleDuration = packet.blockSize / this.demuxer.audioInfo.sampleRate;
+        if (sampleTimestamp + sampleDuration <= timestamp) {
+          if (this.demuxer.lastSampleLoaded) {
+            return this.getPacketAtIndex(this.demuxer.loadedSamples.length - 1, options);
+          }
+          await this.demuxer.advanceReader();
+          continue;
+        }
+        return this.getPacketAtIndex(packetIndex, options);
+      }
+    } finally {
+      release();
+    }
+  }
+  async getNextPacket(packet, options) {
+    const release = await this.demuxer.readingMutex.acquire();
+    try {
+      const nextIndex = packet.sequenceNumber + 1;
+      if (this.demuxer.lastSampleLoaded && nextIndex >= this.demuxer.loadedSamples.length) {
+        return null;
+      }
+      while (nextIndex >= this.demuxer.loadedSamples.length && !this.demuxer.lastSampleLoaded) {
+        await this.demuxer.advanceReader();
+      }
+      return this.getPacketAtIndex(nextIndex, options);
+    } finally {
+      release();
+    }
+  }
+  getKeyPacket(timestamp, options) {
+    return this.getPacket(timestamp, options);
+  }
+  getNextKeyPacket(packet, options) {
+    return this.getNextPacket(packet, options);
+  }
+  async getPacketAtIndex(sampleIndex, options) {
+    const rawSample = this.demuxer.loadedSamples[sampleIndex];
+    if (!rawSample) {
+      return null;
+    }
+    let data;
+    if (options.metadataOnly) {
+      data = PLACEHOLDER_DATA;
+    } else {
+      let slice = this.demuxer.reader.requestSlice(rawSample.byteOffset, rawSample.byteSize);
+      if (slice instanceof Promise)
+        slice = await slice;
+      if (!slice) {
+        return null;
+      }
+      data = readBytes(slice, rawSample.byteSize);
+    }
+    assert(this.demuxer.audioInfo);
+    const timestamp = rawSample.blockOffset / this.demuxer.audioInfo.sampleRate;
+    const duration = rawSample.blockSize / this.demuxer.audioInfo.sampleRate;
+    return new EncodedPacket(data, "key", timestamp, duration, sampleIndex, rawSample.byteSize);
+  }
+  async getFirstPacket(options) {
+    while (this.demuxer.loadedSamples.length === 0 && !this.demuxer.lastSampleLoaded) {
+      await this.demuxer.advanceReader();
+    }
+    return this.getPacketAtIndex(0, options);
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class InputFormat {
+}
+class IsobmffInputFormat extends InputFormat {
+  /** @internal */
+  async _getMajorBrand(input) {
+    let slice = input._reader.requestSlice(0, 12);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return null;
+    slice.skip(4);
+    const fourCc = readAscii(slice, 4);
+    if (fourCc !== "ftyp") {
+      return null;
+    }
+    return readAscii(slice, 4);
+  }
+  /** @internal */
+  _createDemuxer(input) {
+    return new IsobmffDemuxer(input);
+  }
+}
+class Mp4InputFormat extends IsobmffInputFormat {
+  /** @internal */
+  async _canReadInput(input) {
+    const majorBrand = await this._getMajorBrand(input);
+    return !!majorBrand && majorBrand !== "qt  ";
+  }
+  get name() {
+    return "MP4";
+  }
+  get mimeType() {
+    return "video/mp4";
+  }
+}
+class QuickTimeInputFormat extends IsobmffInputFormat {
+  /** @internal */
+  async _canReadInput(input) {
+    const majorBrand = await this._getMajorBrand(input);
+    return majorBrand === "qt  ";
+  }
+  get name() {
+    return "QuickTime File Format";
+  }
+  get mimeType() {
+    return "video/quicktime";
+  }
+}
+class MatroskaInputFormat extends InputFormat {
+  /** @internal */
+  async isSupportedEBMLOfDocType(input, desiredDocType) {
+    let headerSlice = input._reader.requestSlice(0, MAX_HEADER_SIZE);
+    if (headerSlice instanceof Promise)
+      headerSlice = await headerSlice;
+    if (!headerSlice)
+      return false;
+    const varIntSize = readVarIntSize(headerSlice);
+    if (varIntSize === null) {
+      return false;
+    }
+    if (varIntSize < 1 || varIntSize > 8) {
+      return false;
+    }
+    const id = readUnsignedInt(headerSlice, varIntSize);
+    if (id !== EBMLId.EBML) {
+      return false;
+    }
+    const dataSize = readElementSize(headerSlice);
+    if (typeof dataSize !== "number") {
+      return false;
+    }
+    let dataSlice = input._reader.requestSlice(headerSlice.filePos, dataSize);
+    if (dataSlice instanceof Promise)
+      dataSlice = await dataSlice;
+    if (!dataSlice)
+      return false;
+    const startPos = headerSlice.filePos;
+    while (dataSlice.filePos <= startPos + dataSize - MIN_HEADER_SIZE) {
+      const header = readElementHeader(dataSlice);
+      if (!header)
+        break;
+      const { id: id2, size } = header;
+      const dataStartPos = dataSlice.filePos;
+      if (size === void 0)
+        return false;
+      switch (id2) {
+        case EBMLId.EBMLVersion:
+          {
+            const ebmlVersion = readUnsignedInt(dataSlice, size);
+            if (ebmlVersion !== 1) {
+              return false;
+            }
+          }
+          break;
+        case EBMLId.EBMLReadVersion:
+          {
+            const ebmlReadVersion = readUnsignedInt(dataSlice, size);
+            if (ebmlReadVersion !== 1) {
+              return false;
+            }
+          }
+          break;
+        case EBMLId.DocType:
+          {
+            const docType = readAsciiString(dataSlice, size);
+            if (docType !== desiredDocType) {
+              return false;
+            }
+          }
+          break;
+        case EBMLId.DocTypeVersion:
+          {
+            const docTypeVersion = readUnsignedInt(dataSlice, size);
+            if (docTypeVersion > 4) {
+              return false;
+            }
+          }
+          break;
+      }
+      dataSlice.filePos = dataStartPos + size;
+    }
+    return true;
+  }
+  /** @internal */
+  _canReadInput(input) {
+    return this.isSupportedEBMLOfDocType(input, "matroska");
+  }
+  /** @internal */
+  _createDemuxer(input) {
+    return new MatroskaDemuxer(input);
+  }
+  get name() {
+    return "Matroska";
+  }
+  get mimeType() {
+    return "video/x-matroska";
+  }
+}
+class WebMInputFormat extends MatroskaInputFormat {
+  /** @internal */
+  _canReadInput(input) {
+    return this.isSupportedEBMLOfDocType(input, "webm");
+  }
+  get name() {
+    return "WebM";
+  }
+  get mimeType() {
+    return "video/webm";
+  }
+}
+class Mp3InputFormat extends InputFormat {
+  /** @internal */
+  async _canReadInput(input) {
+    let slice = input._reader.requestSlice(0, 10);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return false;
+    let currentPos = 0;
+    let id3V2HeaderFound = false;
+    while (true) {
+      let slice2 = input._reader.requestSlice(currentPos, ID3_V2_HEADER_SIZE);
+      if (slice2 instanceof Promise)
+        slice2 = await slice2;
+      if (!slice2)
+        break;
+      const id3V2Header = readId3V2Header(slice2);
+      if (!id3V2Header) {
+        break;
+      }
+      id3V2HeaderFound = true;
+      currentPos = slice2.filePos + id3V2Header.size;
+    }
+    const firstResult = await readNextFrameHeader(input._reader, currentPos, currentPos + 4096);
+    if (!firstResult) {
+      return false;
+    }
+    if (id3V2HeaderFound) {
+      return true;
+    }
+    currentPos = firstResult.startPos + firstResult.header.totalSize;
+    const secondResult = await readNextFrameHeader(input._reader, currentPos, currentPos + FRAME_HEADER_SIZE);
+    if (!secondResult) {
+      return false;
+    }
+    const firstHeader = firstResult.header;
+    const secondHeader = secondResult.header;
+    if (firstHeader.channel !== secondHeader.channel || firstHeader.sampleRate !== secondHeader.sampleRate) {
+      return false;
+    }
+    return true;
+  }
+  /** @internal */
+  _createDemuxer(input) {
+    return new Mp3Demuxer(input);
+  }
+  get name() {
+    return "MP3";
+  }
+  get mimeType() {
+    return "audio/mpeg";
+  }
+}
+class WaveInputFormat extends InputFormat {
+  /** @internal */
+  async _canReadInput(input) {
+    let slice = input._reader.requestSlice(0, 12);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return false;
+    const riffType = readAscii(slice, 4);
+    if (riffType !== "RIFF" && riffType !== "RIFX" && riffType !== "RF64") {
+      return false;
+    }
+    slice.skip(4);
+    const format = readAscii(slice, 4);
+    return format === "WAVE";
+  }
+  /** @internal */
+  _createDemuxer(input) {
+    return new WaveDemuxer(input);
+  }
+  get name() {
+    return "WAVE";
+  }
+  get mimeType() {
+    return "audio/wav";
+  }
+}
+class OggInputFormat extends InputFormat {
+  /** @internal */
+  async _canReadInput(input) {
+    let slice = input._reader.requestSlice(0, 4);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return false;
+    return readAscii(slice, 4) === "OggS";
+  }
+  /** @internal */
+  _createDemuxer(input) {
+    return new OggDemuxer(input);
+  }
+  get name() {
+    return "Ogg";
+  }
+  get mimeType() {
+    return "application/ogg";
+  }
+}
+class FlacInputFormat extends InputFormat {
+  /** @internal */
+  async _canReadInput(input) {
+    let slice = input._reader.requestSlice(0, 4);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return false;
+    return readAscii(slice, 4) === "fLaC";
+  }
+  get name() {
+    return "FLAC";
+  }
+  get mimeType() {
+    return "audio/flac";
+  }
+  /** @internal */
+  _createDemuxer(input) {
+    return new FlacDemuxer(input);
+  }
+}
+class AdtsInputFormat extends InputFormat {
+  /** @internal */
+  async _canReadInput(input) {
+    let slice = input._reader.requestSliceRange(0, MIN_FRAME_HEADER_SIZE, MAX_FRAME_HEADER_SIZE);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return false;
+    const firstHeader = readFrameHeader(slice);
+    if (!firstHeader) {
+      return false;
+    }
+    slice = input._reader.requestSliceRange(firstHeader.frameLength, MIN_FRAME_HEADER_SIZE, MAX_FRAME_HEADER_SIZE);
+    if (slice instanceof Promise)
+      slice = await slice;
+    if (!slice)
+      return false;
+    const secondHeader = readFrameHeader(slice);
+    if (!secondHeader) {
+      return false;
+    }
+    return firstHeader.objectType === secondHeader.objectType && firstHeader.samplingFrequencyIndex === secondHeader.samplingFrequencyIndex && firstHeader.channelConfiguration === secondHeader.channelConfiguration;
+  }
+  /** @internal */
+  _createDemuxer(input) {
+    return new AdtsDemuxer(input);
+  }
+  get name() {
+    return "ADTS";
+  }
+  get mimeType() {
+    return "audio/aac";
+  }
+}
+const MP4 = /* @__PURE__ */ new Mp4InputFormat();
+const QTFF = /* @__PURE__ */ new QuickTimeInputFormat();
+const MATROSKA = /* @__PURE__ */ new MatroskaInputFormat();
+const WEBM = /* @__PURE__ */ new WebMInputFormat();
+const MP3 = /* @__PURE__ */ new Mp3InputFormat();
+const WAVE = /* @__PURE__ */ new WaveInputFormat();
+const OGG = /* @__PURE__ */ new OggInputFormat();
+const ADTS = /* @__PURE__ */ new AdtsInputFormat();
+const FLAC = /* @__PURE__ */ new FlacInputFormat();
+const ALL_FORMATS = [MP4, QTFF, MATROSKA, WEBM, WAVE, OGG, FLAC, MP3, ADTS];
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class Source {
+  constructor() {
+    this._disposed = false;
+    this._sizePromise = null;
+    this.onread = null;
+  }
+  /**
+   * Resolves with the total size of the file in bytes. This function is memoized, meaning only the first call
+   * will retrieve the size.
+   *
+   * Returns null if the source is unsized.
+   */
+  async getSizeOrNull() {
+    if (this._disposed) {
+      throw new InputDisposedError();
+    }
+    return this._sizePromise ?? (this._sizePromise = Promise.resolve(this._retrieveSize()));
+  }
+  /**
+   * Resolves with the total size of the file in bytes. This function is memoized, meaning only the first call
+   * will retrieve the size.
+   *
+   * Throws an error if the source is unsized.
+   */
+  async getSize() {
+    if (this._disposed) {
+      throw new InputDisposedError();
+    }
+    const result = await this.getSizeOrNull();
+    if (result === null) {
+      throw new Error("Cannot determine the size of an unsized source.");
+    }
+    return result;
+  }
+}
+class BlobSource extends Source {
+  /**
+   * Creates a new {@link BlobSource} backed by the specified
+   * [`Blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob).
+   */
+  constructor(blob, options = {}) {
+    if (!(blob instanceof Blob)) {
+      throw new TypeError("blob must be a Blob.");
+    }
+    if (!options || typeof options !== "object") {
+      throw new TypeError("options must be an object.");
+    }
+    if (options.maxCacheSize !== void 0 && (!isNumber(options.maxCacheSize) || options.maxCacheSize < 0)) {
+      throw new TypeError("options.maxCacheSize, when provided, must be a non-negative number.");
+    }
+    super();
+    this._readers = /* @__PURE__ */ new WeakMap();
+    this._blob = blob;
+    this._orchestrator = new ReadOrchestrator({
+      maxCacheSize: options.maxCacheSize ?? 8 * 2 ** 20,
+      maxWorkerCount: 4,
+      runWorker: this._runWorker.bind(this),
+      prefetchProfile: PREFETCH_PROFILES.fileSystem
+    });
+  }
+  /** @internal */
+  _retrieveSize() {
+    const size = this._blob.size;
+    this._orchestrator.fileSize = size;
+    return size;
+  }
+  /** @internal */
+  _read(start, end) {
+    return this._orchestrator.read(start, end);
+  }
+  /** @internal */
+  async _runWorker(worker) {
+    let reader = this._readers.get(worker);
+    if (reader === void 0) {
+      if ("stream" in this._blob && !isWebKit()) {
+        const slice = this._blob.slice(worker.currentPos);
+        reader = slice.stream().getReader();
+      } else {
+        reader = null;
+      }
+      this._readers.set(worker, reader);
+    }
+    while (worker.currentPos < worker.targetPos && !worker.aborted) {
+      if (reader) {
+        const { done, value } = await reader.read();
+        if (done) {
+          this._orchestrator.forgetWorker(worker);
+          throw new Error("Blob reader stopped unexpectedly before all requested data was read.");
+        }
+        if (worker.aborted) {
+          break;
+        }
+        this.onread?.(worker.currentPos, worker.currentPos + value.length);
+        this._orchestrator.supplyWorkerData(worker, value);
+      } else {
+        const data = await this._blob.slice(worker.currentPos, worker.targetPos).arrayBuffer();
+        if (worker.aborted) {
+          break;
+        }
+        this.onread?.(worker.currentPos, worker.currentPos + data.byteLength);
+        this._orchestrator.supplyWorkerData(worker, new Uint8Array(data));
+      }
+    }
+    worker.running = false;
+    if (worker.aborted) {
+      await reader?.cancel();
+    }
+  }
+  /** @internal */
+  _dispose() {
+    this._orchestrator.dispose();
+  }
+}
+const URL_SOURCE_MIN_LOAD_AMOUNT = 0.5 * 2 ** 20;
+const DEFAULT_RETRY_DELAY = ((previousAttempts, error, src) => {
+  const couldBeCorsError = error instanceof Error && (error.message.includes("Failed to fetch") || error.message.includes("Load failed") || error.message.includes("NetworkError when attempting to fetch resource"));
+  if (couldBeCorsError) {
+    let originOfSrc = null;
+    try {
+      if (typeof window !== "undefined" && typeof window.location !== "undefined") {
+        originOfSrc = new URL(src instanceof Request ? src.url : src, window.location.href).origin;
+      }
+    } catch {
+    }
+    const isOnline = typeof navigator !== "undefined" && typeof navigator.onLine === "boolean" ? navigator.onLine : true;
+    if (isOnline && originOfSrc !== null && originOfSrc !== window.location.origin) {
+      console.warn(`Request will not be retried because a CORS error was suspected due to different origins. You can modify this behavior by providing your own function for the 'getRetryDelay' option.`);
+      return null;
+    }
+  }
+  return Math.min(2 ** (previousAttempts - 2), 16);
+});
+class UrlSource extends Source {
+  /** Creates a new {@link UrlSource} backed by the resource at the specified URL. */
+  constructor(url, options = {}) {
+    if (typeof url !== "string" && !(url instanceof URL) && !(typeof Request !== "undefined" && url instanceof Request)) {
+      throw new TypeError("url must be a string, URL or Request.");
+    }
+    if (!options || typeof options !== "object") {
+      throw new TypeError("options must be an object.");
+    }
+    if (options.requestInit !== void 0 && (!options.requestInit || typeof options.requestInit !== "object")) {
+      throw new TypeError("options.requestInit, when provided, must be an object.");
+    }
+    if (options.getRetryDelay !== void 0 && typeof options.getRetryDelay !== "function") {
+      throw new TypeError("options.getRetryDelay, when provided, must be a function.");
+    }
+    if (options.maxCacheSize !== void 0 && (!isNumber(options.maxCacheSize) || options.maxCacheSize < 0)) {
+      throw new TypeError("options.maxCacheSize, when provided, must be a non-negative number.");
+    }
+    if (options.fetchFn !== void 0 && typeof options.fetchFn !== "function") {
+      throw new TypeError("options.fetchFn, when provided, must be a function.");
+    }
+    super();
+    this._existingResponses = /* @__PURE__ */ new WeakMap();
+    this._url = url;
+    this._options = options;
+    this._getRetryDelay = options.getRetryDelay ?? DEFAULT_RETRY_DELAY;
+    this._orchestrator = new ReadOrchestrator({
+      maxCacheSize: options.maxCacheSize ?? 64 * 2 ** 20,
+      // Most files in the real-world have a single sequential access pattern, but having two in parallel can
+      // also happen
+      maxWorkerCount: 2,
+      runWorker: this._runWorker.bind(this),
+      prefetchProfile: PREFETCH_PROFILES.network
+    });
+  }
+  /** @internal */
+  async _retrieveSize() {
+    const abortController = new AbortController();
+    const response = await retriedFetch(this._options.fetchFn ?? fetch, this._url, mergeRequestInit(this._options.requestInit ?? {}, {
+      headers: {
+        // We could also send a non-range request to request the same bytes (all of them), but doing it like
+        // this is an easy way to check if the server supports range requests in the first place
+        Range: "bytes=0-"
+      },
+      signal: abortController.signal
+    }), this._getRetryDelay, () => this._disposed);
+    if (!response.ok) {
+      throw new Error(`Error fetching ${String(this._url)}: ${response.status} ${response.statusText}`);
+    }
+    let worker;
+    let fileSize;
+    if (response.status === 206) {
+      fileSize = this._getTotalLengthFromRangeResponse(response);
+      worker = this._orchestrator.createWorker(0, Math.min(fileSize, URL_SOURCE_MIN_LOAD_AMOUNT));
+    } else {
+      const contentLength = response.headers.get("Content-Length");
+      if (contentLength) {
+        fileSize = Number(contentLength);
+        worker = this._orchestrator.createWorker(0, fileSize);
+        this._orchestrator.options.maxCacheSize = Infinity;
+        console.warn("HTTP server did not respond with 206 Partial Content, meaning the entire remote resource now has to be downloaded. For efficient media file streaming across a network, please make sure your server supports range requests.");
+      } else {
+        throw new Error(`HTTP response (status ${response.status}) must surface Content-Length header.`);
+      }
+    }
+    this._orchestrator.fileSize = fileSize;
+    this._existingResponses.set(worker, { response, abortController });
+    this._orchestrator.runWorker(worker);
+    return fileSize;
+  }
+  /** @internal */
+  _read(start, end) {
+    return this._orchestrator.read(start, end);
+  }
+  /** @internal */
+  async _runWorker(worker) {
+    while (true) {
+      const existing = this._existingResponses.get(worker);
+      this._existingResponses.delete(worker);
+      let abortController = existing?.abortController;
+      let response = existing?.response;
+      if (!abortController) {
+        abortController = new AbortController();
+        response = await retriedFetch(this._options.fetchFn ?? fetch, this._url, mergeRequestInit(this._options.requestInit ?? {}, {
+          headers: {
+            Range: `bytes=${worker.currentPos}-`
+          },
+          signal: abortController.signal
+        }), this._getRetryDelay, () => this._disposed);
+      }
+      assert(response);
+      if (!response.ok) {
+        throw new Error(`Error fetching ${String(this._url)}: ${response.status} ${response.statusText}`);
+      }
+      if (worker.currentPos > 0 && response.status !== 206) {
+        throw new Error("HTTP server did not respond with 206 Partial Content to a range request. To enable efficient media file streaming across a network, please make sure your server supports range requests.");
+      }
+      if (!response.body) {
+        throw new Error("Missing HTTP response body stream. The used fetch function must provide the response body as a ReadableStream.");
+      }
+      const reader = response.body.getReader();
+      while (true) {
+        if (worker.currentPos >= worker.targetPos || worker.aborted) {
+          abortController.abort();
+          worker.running = false;
+          return;
+        }
+        let readResult;
+        try {
+          readResult = await reader.read();
+        } catch (error) {
+          if (this._disposed) {
+            throw error;
+          }
+          const retryDelayInSeconds = this._getRetryDelay(1, error, this._url);
+          if (retryDelayInSeconds !== null) {
+            console.error("Error while reading response stream. Attempting to resume.", error);
+            await new Promise((resolve) => setTimeout(resolve, 1e3 * retryDelayInSeconds));
+            break;
+          } else {
+            throw error;
+          }
+        }
+        if (worker.aborted) {
+          continue;
+        }
+        const { done, value } = readResult;
+        if (done) {
+          if (worker.currentPos >= worker.targetPos) {
+            this._orchestrator.forgetWorker(worker);
+            worker.running = false;
+            return;
+          }
+          break;
+        }
+        this.onread?.(worker.currentPos, worker.currentPos + value.length);
+        this._orchestrator.supplyWorkerData(worker, value);
+      }
+    }
+  }
+  /** @internal */
+  _getTotalLengthFromRangeResponse(response) {
+    const contentRange = response.headers.get("Content-Range");
+    if (contentRange) {
+      const match = /\/(\d+)/.exec(contentRange);
+      if (match) {
+        return Number(match[1]);
+      }
+    }
+    const contentLength = response.headers.get("Content-Length");
+    if (contentLength) {
+      return Number(contentLength);
+    } else {
+      throw new Error("Partial HTTP response (status 206) must surface either Content-Range or Content-Length header.");
+    }
+  }
+  /** @internal */
+  _dispose() {
+    this._orchestrator.dispose();
+  }
+}
+class ReadableStreamSource extends Source {
+  /** Creates a new {@link ReadableStreamSource} backed by the specified `ReadableStream<Uint8Array>`. */
+  constructor(stream, options = {}) {
+    if (!(stream instanceof ReadableStream)) {
+      throw new TypeError("stream must be a ReadableStream.");
+    }
+    if (!options || typeof options !== "object") {
+      throw new TypeError("options must be an object.");
+    }
+    if (options.maxCacheSize !== void 0 && (!isNumber(options.maxCacheSize) || options.maxCacheSize < 0)) {
+      throw new TypeError("options.maxCacheSize, when provided, must be a non-negative number.");
+    }
+    super();
+    this._reader = null;
+    this._cache = [];
+    this._pendingSlices = [];
+    this._currentIndex = 0;
+    this._targetIndex = 0;
+    this._maxRequestedIndex = 0;
+    this._endIndex = null;
+    this._pulling = false;
+    this._stream = stream;
+    this._maxCacheSize = options.maxCacheSize ?? 16 * 2 ** 20;
+  }
+  /** @internal */
+  _retrieveSize() {
+    return this._endIndex;
+  }
+  /** @internal */
+  _read(start, end) {
+    if (this._endIndex !== null && end > this._endIndex) {
+      return null;
+    }
+    this._maxRequestedIndex = Math.max(this._maxRequestedIndex, end);
+    const cacheStartIndex = binarySearchLessOrEqual(this._cache, start, (x) => x.start);
+    const cacheStartEntry = cacheStartIndex !== -1 ? this._cache[cacheStartIndex] : null;
+    if (cacheStartEntry && cacheStartEntry.start <= start && end <= cacheStartEntry.end) {
+      return {
+        bytes: cacheStartEntry.bytes,
+        view: cacheStartEntry.view,
+        offset: cacheStartEntry.start
+      };
+    }
+    let lastEnd = start;
+    const bytes = new Uint8Array(end - start);
+    if (cacheStartIndex !== -1) {
+      for (let i = cacheStartIndex; i < this._cache.length; i++) {
+        const cacheEntry = this._cache[i];
+        if (cacheEntry.start >= end) {
+          break;
+        }
+        const cappedStart = Math.max(start, cacheEntry.start);
+        if (cappedStart > lastEnd) {
+          this._throwDueToCacheMiss();
+        }
+        const cappedEnd = Math.min(end, cacheEntry.end);
+        if (cappedStart < cappedEnd) {
+          bytes.set(cacheEntry.bytes.subarray(cappedStart - cacheEntry.start, cappedEnd - cacheEntry.start), cappedStart - start);
+          lastEnd = cappedEnd;
+        }
+      }
+    }
+    if (lastEnd === end) {
+      return {
+        bytes,
+        view: toDataView(bytes),
+        offset: start
+      };
+    }
+    if (this._currentIndex > lastEnd) {
+      this._throwDueToCacheMiss();
+    }
+    const { promise, resolve, reject } = promiseWithResolvers();
+    this._pendingSlices.push({
+      start,
+      end,
+      bytes,
+      resolve,
+      reject
+    });
+    this._targetIndex = Math.max(this._targetIndex, end);
+    if (!this._pulling) {
+      this._pulling = true;
+      void this._pull().catch((error) => {
+        this._pulling = false;
+        if (this._pendingSlices.length > 0) {
+          this._pendingSlices.forEach((x) => x.reject(error));
+          this._pendingSlices.length = 0;
+        } else {
+          throw error;
+        }
+      });
+    }
+    return promise;
+  }
+  /** @internal */
+  _throwDueToCacheMiss() {
+    throw new Error("Read is before the cached region. With ReadableStreamSource, you must access the data more sequentially or increase the size of its cache.");
+  }
+  /** @internal */
+  async _pull() {
+    this._reader ?? (this._reader = this._stream.getReader());
+    while (this._currentIndex < this._targetIndex && !this._disposed) {
+      const { done, value } = await this._reader.read();
+      if (done) {
+        for (const pendingSlice of this._pendingSlices) {
+          pendingSlice.resolve(null);
+        }
+        this._pendingSlices.length = 0;
+        this._endIndex = this._currentIndex;
+        break;
+      }
+      const startIndex = this._currentIndex;
+      const endIndex = this._currentIndex + value.byteLength;
+      for (let i = 0; i < this._pendingSlices.length; i++) {
+        const pendingSlice = this._pendingSlices[i];
+        const cappedStart = Math.max(startIndex, pendingSlice.start);
+        const cappedEnd = Math.min(endIndex, pendingSlice.end);
+        if (cappedStart < cappedEnd) {
+          pendingSlice.bytes.set(value.subarray(cappedStart - startIndex, cappedEnd - startIndex), cappedStart - pendingSlice.start);
+          if (cappedEnd === pendingSlice.end) {
+            pendingSlice.resolve({
+              bytes: pendingSlice.bytes,
+              view: toDataView(pendingSlice.bytes),
+              offset: pendingSlice.start
+            });
+            this._pendingSlices.splice(i, 1);
+            i--;
+          }
+        }
+      }
+      this._cache.push({
+        start: startIndex,
+        end: endIndex,
+        bytes: value,
+        view: toDataView(value),
+        age: 0
+        // Unused
+      });
+      while (this._cache.length > 0) {
+        const firstEntry = this._cache[0];
+        const distance = this._maxRequestedIndex - firstEntry.end;
+        if (distance <= this._maxCacheSize) {
+          break;
+        }
+        this._cache.shift();
+      }
+      this._currentIndex += value.byteLength;
+    }
+    this._pulling = false;
+  }
+  /** @internal */
+  _dispose() {
+    this._pendingSlices.length = 0;
+    this._cache.length = 0;
+  }
+}
+const PREFETCH_PROFILES = {
+  fileSystem: (start, end) => {
+    const padding = 2 ** 16;
+    start = Math.floor((start - padding) / padding) * padding;
+    end = Math.ceil((end + padding) / padding) * padding;
+    return { start, end };
+  },
+  network: (start, end, workers) => {
+    const paddingStart = 2 ** 16;
+    start = Math.max(0, Math.floor((start - paddingStart) / paddingStart) * paddingStart);
+    for (const worker of workers) {
+      const maxExtensionAmount = 8 * 2 ** 20;
+      const thresholdPoint = Math.max((worker.startPos + worker.targetPos) / 2, worker.targetPos - maxExtensionAmount);
+      if (closedIntervalsOverlap(start, end, thresholdPoint, worker.targetPos)) {
+        const size = worker.targetPos - worker.startPos;
+        const a = Math.ceil((size + 1) / maxExtensionAmount) * maxExtensionAmount;
+        const b = 2 ** Math.ceil(Math.log2(size + 1));
+        const extent = Math.min(b, a);
+        end = Math.max(end, worker.startPos + extent);
+      }
+    }
+    end = Math.max(end, start + URL_SOURCE_MIN_LOAD_AMOUNT);
+    return {
+      start,
+      end
+    };
+  }
+};
+class ReadOrchestrator {
+  constructor(options) {
+    this.options = options;
+    this.fileSize = null;
+    this.nextAge = 0;
+    this.workers = [];
+    this.cache = [];
+    this.currentCacheSize = 0;
+    this.disposed = false;
+  }
+  read(innerStart, innerEnd) {
+    assert(this.fileSize !== null);
+    const prefetchRange = this.options.prefetchProfile(innerStart, innerEnd, this.workers);
+    const outerStart = Math.max(prefetchRange.start, 0);
+    const outerEnd = Math.min(prefetchRange.end, this.fileSize);
+    assert(outerStart <= innerStart && innerEnd <= outerEnd);
+    let result = null;
+    const innerCacheStartIndex = binarySearchLessOrEqual(this.cache, innerStart, (x) => x.start);
+    const innerStartEntry = innerCacheStartIndex !== -1 ? this.cache[innerCacheStartIndex] : null;
+    if (innerStartEntry && innerStartEntry.start <= innerStart && innerEnd <= innerStartEntry.end) {
+      innerStartEntry.age = this.nextAge++;
+      result = {
+        bytes: innerStartEntry.bytes,
+        view: innerStartEntry.view,
+        offset: innerStartEntry.start
+      };
+    }
+    const outerCacheStartIndex = binarySearchLessOrEqual(this.cache, outerStart, (x) => x.start);
+    const bytes = result ? null : new Uint8Array(innerEnd - innerStart);
+    let contiguousBytesWriteEnd = 0;
+    let lastEnd = outerStart;
+    const outerHoles = [];
+    if (outerCacheStartIndex !== -1) {
+      for (let i = outerCacheStartIndex; i < this.cache.length; i++) {
+        const entry = this.cache[i];
+        if (entry.start >= outerEnd) {
+          break;
+        }
+        if (entry.end <= outerStart) {
+          continue;
+        }
+        const cappedOuterStart = Math.max(outerStart, entry.start);
+        const cappedOuterEnd = Math.min(outerEnd, entry.end);
+        assert(cappedOuterStart <= cappedOuterEnd);
+        if (lastEnd < cappedOuterStart) {
+          outerHoles.push({ start: lastEnd, end: cappedOuterStart });
+        }
+        lastEnd = cappedOuterEnd;
+        if (bytes) {
+          const cappedInnerStart = Math.max(innerStart, entry.start);
+          const cappedInnerEnd = Math.min(innerEnd, entry.end);
+          if (cappedInnerStart < cappedInnerEnd) {
+            const relativeOffset = cappedInnerStart - innerStart;
+            bytes.set(entry.bytes.subarray(cappedInnerStart - entry.start, cappedInnerEnd - entry.start), relativeOffset);
+            if (relativeOffset === contiguousBytesWriteEnd) {
+              contiguousBytesWriteEnd = cappedInnerEnd - innerStart;
+            }
+          }
+        }
+        entry.age = this.nextAge++;
+      }
+      if (lastEnd < outerEnd) {
+        outerHoles.push({ start: lastEnd, end: outerEnd });
+      }
+    } else {
+      outerHoles.push({ start: outerStart, end: outerEnd });
+    }
+    if (bytes && contiguousBytesWriteEnd >= bytes.length) {
+      result = {
+        bytes,
+        view: toDataView(bytes),
+        offset: innerStart
+      };
+    }
+    if (outerHoles.length === 0) {
+      assert(result);
+      return result;
+    }
+    const { promise, resolve, reject } = promiseWithResolvers();
+    const innerHoles = [];
+    for (const outerHole of outerHoles) {
+      const cappedStart = Math.max(innerStart, outerHole.start);
+      const cappedEnd = Math.min(innerEnd, outerHole.end);
+      if (cappedStart === outerHole.start && cappedEnd === outerHole.end) {
+        innerHoles.push(outerHole);
+      } else if (cappedStart < cappedEnd) {
+        innerHoles.push({ start: cappedStart, end: cappedEnd });
+      }
+    }
+    for (const outerHole of outerHoles) {
+      const pendingSlice = bytes && {
+        start: innerStart,
+        bytes,
+        holes: innerHoles,
+        resolve,
+        reject
+      };
+      let workerFound = false;
+      for (const worker of this.workers) {
+        const gapTolerance = 2 ** 17;
+        if (closedIntervalsOverlap(outerHole.start - gapTolerance, outerHole.start, worker.currentPos, worker.targetPos)) {
+          worker.targetPos = Math.max(worker.targetPos, outerHole.end);
+          workerFound = true;
+          if (pendingSlice && !worker.pendingSlices.includes(pendingSlice)) {
+            worker.pendingSlices.push(pendingSlice);
+          }
+          if (!worker.running) {
+            this.runWorker(worker);
+          }
+          break;
+        }
+      }
+      if (!workerFound) {
+        const newWorker = this.createWorker(outerHole.start, outerHole.end);
+        if (pendingSlice) {
+          newWorker.pendingSlices = [pendingSlice];
+        }
+        this.runWorker(newWorker);
+      }
+    }
+    if (!result) {
+      assert(bytes);
+      result = promise.then((bytes2) => ({
+        bytes: bytes2,
+        view: toDataView(bytes2),
+        offset: innerStart
+      }));
+    }
+    return result;
+  }
+  createWorker(startPos, targetPos) {
+    const worker = {
+      startPos,
+      currentPos: startPos,
+      targetPos,
+      running: false,
+      // Due to async shenanigans, it can happen that workers are started after disposal. In this case, instead of
+      // simply not creating the worker, we allow it to run but immediately label it as aborted, so it can then
+      // shut itself down.
+      aborted: this.disposed,
+      pendingSlices: [],
+      age: this.nextAge++
+    };
+    this.workers.push(worker);
+    while (this.workers.length > this.options.maxWorkerCount) {
+      let oldestIndex = 0;
+      let oldestWorker = this.workers[0];
+      for (let i = 1; i < this.workers.length; i++) {
+        const worker2 = this.workers[i];
+        if (worker2.age < oldestWorker.age) {
+          oldestIndex = i;
+          oldestWorker = worker2;
+        }
+      }
+      if (oldestWorker.running && oldestWorker.pendingSlices.length > 0) {
+        break;
+      }
+      oldestWorker.aborted = true;
+      this.workers.splice(oldestIndex, 1);
+    }
+    return worker;
+  }
+  runWorker(worker) {
+    assert(!worker.running);
+    assert(worker.currentPos < worker.targetPos);
+    worker.running = true;
+    worker.age = this.nextAge++;
+    void this.options.runWorker(worker).catch((error) => {
+      worker.running = false;
+      if (worker.pendingSlices.length > 0) {
+        worker.pendingSlices.forEach((x) => x.reject(error));
+        worker.pendingSlices.length = 0;
+      } else {
+        throw error;
+      }
+    });
+  }
+  /** Called by a worker when it has read some data. */
+  supplyWorkerData(worker, bytes) {
+    assert(!worker.aborted);
+    const start = worker.currentPos;
+    const end = start + bytes.length;
+    this.insertIntoCache({
+      start,
+      end,
+      bytes,
+      view: toDataView(bytes),
+      age: this.nextAge++
+    });
+    worker.currentPos += bytes.length;
+    worker.targetPos = Math.max(worker.targetPos, worker.currentPos);
+    for (let i = 0; i < worker.pendingSlices.length; i++) {
+      const pendingSlice = worker.pendingSlices[i];
+      const clampedStart = Math.max(start, pendingSlice.start);
+      const clampedEnd = Math.min(end, pendingSlice.start + pendingSlice.bytes.length);
+      if (clampedStart < clampedEnd) {
+        pendingSlice.bytes.set(bytes.subarray(clampedStart - start, clampedEnd - start), clampedStart - pendingSlice.start);
+      }
+      for (let j = 0; j < pendingSlice.holes.length; j++) {
+        const hole = pendingSlice.holes[j];
+        if (start <= hole.start && end > hole.start) {
+          hole.start = end;
+        }
+        if (hole.end <= hole.start) {
+          pendingSlice.holes.splice(j, 1);
+          j--;
+        }
+      }
+      if (pendingSlice.holes.length === 0) {
+        pendingSlice.resolve(pendingSlice.bytes);
+        worker.pendingSlices.splice(i, 1);
+        i--;
+      }
+    }
+    for (let i = 0; i < this.workers.length; i++) {
+      const otherWorker = this.workers[i];
+      if (worker === otherWorker || otherWorker.running) {
+        continue;
+      }
+      if (closedIntervalsOverlap(start, end, otherWorker.currentPos, otherWorker.targetPos)) {
+        this.workers.splice(i, 1);
+        i--;
+      }
+    }
+  }
+  forgetWorker(worker) {
+    const index = this.workers.indexOf(worker);
+    assert(index !== -1);
+    this.workers.splice(index, 1);
+  }
+  insertIntoCache(entry) {
+    if (this.options.maxCacheSize === 0) {
+      return;
+    }
+    let insertionIndex = binarySearchLessOrEqual(this.cache, entry.start, (x) => x.start) + 1;
+    if (insertionIndex > 0) {
+      const previous = this.cache[insertionIndex - 1];
+      if (previous.end >= entry.end) {
+        return;
+      }
+      if (previous.end > entry.start) {
+        const joined = new Uint8Array(entry.end - previous.start);
+        joined.set(previous.bytes, 0);
+        joined.set(entry.bytes, entry.start - previous.start);
+        this.currentCacheSize += entry.end - previous.end;
+        previous.bytes = joined;
+        previous.view = toDataView(joined);
+        previous.end = entry.end;
+        insertionIndex--;
+        entry = previous;
+      } else {
+        this.cache.splice(insertionIndex, 0, entry);
+        this.currentCacheSize += entry.bytes.length;
+      }
+    } else {
+      this.cache.splice(insertionIndex, 0, entry);
+      this.currentCacheSize += entry.bytes.length;
+    }
+    for (let i = insertionIndex + 1; i < this.cache.length; i++) {
+      const next = this.cache[i];
+      if (entry.end <= next.start) {
+        break;
+      }
+      if (entry.end >= next.end) {
+        this.cache.splice(i, 1);
+        this.currentCacheSize -= next.bytes.length;
+        i--;
+        continue;
+      }
+      const joined = new Uint8Array(next.end - entry.start);
+      joined.set(entry.bytes, 0);
+      joined.set(next.bytes, next.start - entry.start);
+      this.currentCacheSize -= entry.end - next.start;
+      entry.bytes = joined;
+      entry.view = toDataView(joined);
+      entry.end = next.end;
+      this.cache.splice(i, 1);
+      break;
+    }
+    while (this.currentCacheSize > this.options.maxCacheSize) {
+      let oldestIndex = 0;
+      let oldestEntry = this.cache[0];
+      for (let i = 1; i < this.cache.length; i++) {
+        const entry2 = this.cache[i];
+        if (entry2.age < oldestEntry.age) {
+          oldestIndex = i;
+          oldestEntry = entry2;
+        }
+      }
+      if (this.currentCacheSize - oldestEntry.bytes.length <= this.options.maxCacheSize) {
+        break;
+      }
+      this.cache.splice(oldestIndex, 1);
+      this.currentCacheSize -= oldestEntry.bytes.length;
+    }
+  }
+  dispose() {
+    for (const worker of this.workers) {
+      worker.aborted = true;
+    }
+    this.workers.length = 0;
+    this.cache.length = 0;
+    this.disposed = true;
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+polyfillSymbolDispose();
+class Input {
+  /** True if the input has been disposed. */
+  get disposed() {
+    return this._disposed;
+  }
+  /**
+   * Creates a new input file from the specified options. No reading operations will be performed until methods are
+   * called on this instance.
+   */
+  constructor(options) {
+    this._demuxerPromise = null;
+    this._format = null;
+    this._disposed = false;
+    if (!options || typeof options !== "object") {
+      throw new TypeError("options must be an object.");
+    }
+    if (!Array.isArray(options.formats) || options.formats.some((x) => !(x instanceof InputFormat))) {
+      throw new TypeError("options.formats must be an array of InputFormat.");
+    }
+    if (!(options.source instanceof Source)) {
+      throw new TypeError("options.source must be a Source.");
+    }
+    if (options.source._disposed) {
+      throw new Error("options.source must not be disposed.");
+    }
+    this._formats = options.formats;
+    this._source = options.source;
+    this._reader = new Reader(options.source);
+  }
+  /** @internal */
+  _getDemuxer() {
+    return this._demuxerPromise ?? (this._demuxerPromise = (async () => {
+      this._reader.fileSize = await this._source.getSizeOrNull();
+      for (const format of this._formats) {
+        const canRead = await format._canReadInput(this);
+        if (canRead) {
+          this._format = format;
+          return format._createDemuxer(this);
+        }
+      }
+      throw new Error("Input has an unsupported or unrecognizable format.");
+    })());
+  }
+  /**
+   * Returns the source from which this input file reads its data. This is the same source that was passed to the
+   * constructor.
+   */
+  get source() {
+    return this._source;
+  }
+  /**
+   * Returns the format of the input file. You can compare this result directly to the {@link InputFormat} singletons
+   * or use `instanceof` checks for subset-aware logic (for example, `format instanceof MatroskaInputFormat` is true
+   * for both MKV and WebM).
+   */
+  async getFormat() {
+    await this._getDemuxer();
+    assert(this._format);
+    return this._format;
+  }
+  /**
+   * Computes the duration of the input file, in seconds. More precisely, returns the largest end timestamp among
+   * all tracks.
+   */
+  async computeDuration() {
+    const demuxer = await this._getDemuxer();
+    return demuxer.computeDuration();
+  }
+  /** Returns the list of all tracks of this input file. */
+  async getTracks() {
+    const demuxer = await this._getDemuxer();
+    return demuxer.getTracks();
+  }
+  /** Returns the list of all video tracks of this input file. */
+  async getVideoTracks() {
+    const tracks = await this.getTracks();
+    return tracks.filter((x) => x.isVideoTrack());
+  }
+  /** Returns the list of all audio tracks of this input file. */
+  async getAudioTracks() {
+    const tracks = await this.getTracks();
+    return tracks.filter((x) => x.isAudioTrack());
+  }
+  /** Returns the primary video track of this input file, or null if there are no video tracks. */
+  async getPrimaryVideoTrack() {
+    const tracks = await this.getTracks();
+    return tracks.find((x) => x.isVideoTrack()) ?? null;
+  }
+  /** Returns the primary audio track of this input file, or null if there are no audio tracks. */
+  async getPrimaryAudioTrack() {
+    const tracks = await this.getTracks();
+    return tracks.find((x) => x.isAudioTrack()) ?? null;
+  }
+  /** Returns the full MIME type of this input file, including track codecs. */
+  async getMimeType() {
+    const demuxer = await this._getDemuxer();
+    return demuxer.getMimeType();
+  }
+  /**
+   * Returns descriptive metadata tags about the media file, such as title, author, date, cover art, or other
+   * attached files.
+   */
+  async getMetadataTags() {
+    const demuxer = await this._getDemuxer();
+    return demuxer.getMetadataTags();
+  }
+  /**
+   * Disposes this input and frees connected resources. When an input is disposed, ongoing read operations will be
+   * canceled, all future read operations will fail, any open decoders will be closed, and all ongoing media sink
+   * operations will be canceled. Disallowed and canceled operations will throw an {@link InputDisposedError}.
+   *
+   * You are expected not to use an input after disposing it. While some operations may still work, it is not
+   * specified and may change in any future update.
+   */
+  dispose() {
+    if (this._disposed) {
+      return;
+    }
+    this._disposed = true;
+    this._source._disposed = true;
+    this._source._dispose();
+  }
+  /**
+   * Calls `.dispose()` on the input, implementing the `Disposable` interface for use with
+   * JavaScript Explicit Resource Management features.
+   */
+  [Symbol.dispose]() {
+    this.dispose();
+  }
+}
+class InputDisposedError extends Error {
+  /** Creates a new {@link InputDisposedError}. */
+  constructor(message = "Input has been disposed.") {
+    super(message);
+    this.name = "InputDisposedError";
+  }
+}
+/*!
+ * Copyright (c) 2025-present, Vanilagy and contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+class Reader {
+  constructor(source) {
+    this.source = source;
+  }
+  requestSlice(start, length) {
+    if (this.source._disposed) {
+      throw new InputDisposedError();
+    }
+    if (this.fileSize !== null && start + length > this.fileSize) {
+      return null;
+    }
+    const end = start + length;
+    const result = this.source._read(start, end);
+    if (result instanceof Promise) {
+      return result.then((x) => {
+        if (!x) {
+          return null;
+        }
+        return new FileSlice(x.bytes, x.view, x.offset, start, end);
+      });
+    } else {
+      if (!result) {
+        return null;
+      }
+      return new FileSlice(result.bytes, result.view, result.offset, start, end);
+    }
+  }
+  requestSliceRange(start, minLength, maxLength) {
+    if (this.source._disposed) {
+      throw new InputDisposedError();
+    }
+    if (this.fileSize !== null) {
+      return this.requestSlice(start, clamp$1(this.fileSize - start, minLength, maxLength));
+    } else {
+      const promisedAttempt = this.requestSlice(start, maxLength);
+      const handleAttempt = (attempt) => {
+        if (attempt) {
+          return attempt;
+        }
+        const handleFileSize = (fileSize) => {
+          assert(fileSize !== null);
+          return this.requestSlice(start, clamp$1(fileSize - start, minLength, maxLength));
+        };
+        const promisedFileSize = this.source._retrieveSize();
+        if (promisedFileSize instanceof Promise) {
+          return promisedFileSize.then(handleFileSize);
+        } else {
+          return handleFileSize(promisedFileSize);
+        }
+      };
+      if (promisedAttempt instanceof Promise) {
+        return promisedAttempt.then(handleAttempt);
+      } else {
+        return handleAttempt(promisedAttempt);
+      }
+    }
+  }
+}
+class FileSlice {
+  constructor(bytes, view, offset, start, end) {
+    this.bytes = bytes;
+    this.view = view;
+    this.offset = offset;
+    this.start = start;
+    this.end = end;
+    this.bufferPos = start - offset;
+  }
+  static tempFromBytes(bytes) {
+    return new FileSlice(bytes, toDataView(bytes), 0, 0, bytes.length);
+  }
+  get length() {
+    return this.end - this.start;
+  }
+  get filePos() {
+    return this.offset + this.bufferPos;
+  }
+  set filePos(value) {
+    this.bufferPos = value - this.offset;
+  }
+  /** The number of bytes left from the current pos to the end of the slice. */
+  get remainingLength() {
+    return Math.max(this.end - this.filePos, 0);
+  }
+  skip(byteCount) {
+    this.bufferPos += byteCount;
+  }
+  /** Creates a new subslice of this slice whose byte range must be contained within this slice. */
+  slice(filePos, length = this.end - filePos) {
+    if (filePos < this.start || filePos + length > this.end) {
+      throw new RangeError("Slicing outside of original slice.");
+    }
+    return new FileSlice(this.bytes, this.view, this.offset, filePos, filePos + length);
+  }
+}
+const checkIsInRange = (slice, bytesToRead) => {
+  if (slice.filePos < slice.start || slice.filePos + bytesToRead > slice.end) {
+    throw new RangeError(`Tried reading [${slice.filePos}, ${slice.filePos + bytesToRead}), but slice is [${slice.start}, ${slice.end}). This is likely an internal error, please report it alongside the file that caused it.`);
+  }
+};
+const readBytes = (slice, length) => {
+  checkIsInRange(slice, length);
+  const bytes = slice.bytes.subarray(slice.bufferPos, slice.bufferPos + length);
+  slice.bufferPos += length;
+  return bytes;
+};
+const readU8 = (slice) => {
+  checkIsInRange(slice, 1);
+  return slice.view.getUint8(slice.bufferPos++);
+};
+const readU16 = (slice, littleEndian) => {
+  checkIsInRange(slice, 2);
+  const value = slice.view.getUint16(slice.bufferPos, littleEndian);
+  slice.bufferPos += 2;
+  return value;
+};
+const readU16Be = (slice) => {
+  checkIsInRange(slice, 2);
+  const value = slice.view.getUint16(slice.bufferPos, false);
+  slice.bufferPos += 2;
+  return value;
+};
+const readU24Be = (slice) => {
+  checkIsInRange(slice, 3);
+  const value = getUint24(slice.view, slice.bufferPos, false);
+  slice.bufferPos += 3;
+  return value;
+};
+const readI16Be = (slice) => {
+  checkIsInRange(slice, 2);
+  const value = slice.view.getInt16(slice.bufferPos, false);
+  slice.bufferPos += 2;
+  return value;
+};
+const readU32 = (slice, littleEndian) => {
+  checkIsInRange(slice, 4);
+  const value = slice.view.getUint32(slice.bufferPos, littleEndian);
+  slice.bufferPos += 4;
+  return value;
+};
+const readU32Be = (slice) => {
+  checkIsInRange(slice, 4);
+  const value = slice.view.getUint32(slice.bufferPos, false);
+  slice.bufferPos += 4;
+  return value;
+};
+const readU32Le = (slice) => {
+  checkIsInRange(slice, 4);
+  const value = slice.view.getUint32(slice.bufferPos, true);
+  slice.bufferPos += 4;
+  return value;
+};
+const readI32Be = (slice) => {
+  checkIsInRange(slice, 4);
+  const value = slice.view.getInt32(slice.bufferPos, false);
+  slice.bufferPos += 4;
+  return value;
+};
+const readI32Le = (slice) => {
+  checkIsInRange(slice, 4);
+  const value = slice.view.getInt32(slice.bufferPos, true);
+  slice.bufferPos += 4;
+  return value;
+};
+const readU64 = (slice, littleEndian) => {
+  let low;
+  let high;
+  if (littleEndian) {
+    low = readU32(slice, true);
+    high = readU32(slice, true);
+  } else {
+    high = readU32(slice, false);
+    low = readU32(slice, false);
+  }
+  return high * 4294967296 + low;
+};
+const readU64Be = (slice) => {
+  const high = readU32Be(slice);
+  const low = readU32Be(slice);
+  return high * 4294967296 + low;
+};
+const readI64Be = (slice) => {
+  const high = readI32Be(slice);
+  const low = readU32Be(slice);
+  return high * 4294967296 + low;
+};
+const readI64Le = (slice) => {
+  const low = readU32Le(slice);
+  const high = readI32Le(slice);
+  return high * 4294967296 + low;
+};
+const readF32Be = (slice) => {
+  checkIsInRange(slice, 4);
+  const value = slice.view.getFloat32(slice.bufferPos, false);
+  slice.bufferPos += 4;
+  return value;
+};
+const readF64Be = (slice) => {
+  checkIsInRange(slice, 8);
+  const value = slice.view.getFloat64(slice.bufferPos, false);
+  slice.bufferPos += 8;
+  return value;
+};
+const readAscii = (slice, length) => {
+  checkIsInRange(slice, length);
+  let str = "";
+  for (let i = 0; i < length; i++) {
+    str += String.fromCharCode(slice.bytes[slice.bufferPos++]);
+  }
+  return str;
+};
+class AudioEngine {
+  constructor(events) {
+    this.events = events;
+    this.input = null;
+    this.audioSink = null;
+    this.audioIterator = null;
+    this.audioContext = null;
+    this.gainNode = null;
+    this.audioContextStartTime = 0;
+    this.playbackTimeAtStart = 0;
+    this.latestScheduledEndTime = 0;
+    this.duration = Number.NaN;
+    this.paused = true;
+    this.volume = 0.7;
+    this.muted = false;
+    this.playbackRate = 1;
+    this.asyncId = 0;
+    this.queuedNodes = /* @__PURE__ */ new Set();
+  }
+  get currentTime() {
+    if (this.paused)
+      return this.playbackTimeAtStart;
+    return (this.audioContext.currentTime - this.audioContextStartTime) * this.playbackRate + this.playbackTimeAtStart;
+  }
+  normalizeSource(src) {
+    if (typeof src === "string")
+      return new UrlSource(src);
+    if (src instanceof Blob)
+      return new BlobSource(src);
+    if (typeof ReadableStream !== "undefined" && src instanceof ReadableStream) {
+      return new ReadableStreamSource(src);
+    }
+    return src;
+  }
+  ensureAudioContext(sampleRate) {
+    if (this.audioContext)
+      return;
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    try {
+      this.audioContext = new AudioContext({ sampleRate });
+    } catch {
+      this.audioContext = new AudioContext();
+    }
+    this.gainNode = this.audioContext.createGain();
+    this.gainNode.connect(this.audioContext.destination);
+    this.updateGain();
+  }
+  updateGain() {
+    if (!this.gainNode)
+      return;
+    const v = this.muted ? 0 : this.volume;
+    this.gainNode.gain.value = v * v;
+  }
+  stopQueuedNodes() {
+    this.queuedNodes.forEach((node) => node.stop());
+    this.queuedNodes.clear();
+  }
+  async stopIterator() {
+    await this.audioIterator?.return();
+    this.audioIterator = null;
+  }
+  async load(src, onMetadata) {
+    const id = ++this.asyncId;
+    await this.stopIterator();
+    this.stopQueuedNodes();
+    this.paused = true;
+    this.playbackTimeAtStart = 0;
+    this.audioContextStartTime = 0;
+    const source = this.normalizeSource(src);
+    if (!source)
+      return;
+    this.input = new Input({
+      source,
+      formats: ALL_FORMATS
+    });
+    this.duration = await this.input.computeDuration();
+    if (id !== this.asyncId)
+      return;
+    const audioTrack = await this.input.getPrimaryAudioTrack();
+    if (!audioTrack) {
+      this.audioSink = null;
+      this.ensureAudioContext();
+      onMetadata?.();
+      return;
+    }
+    if (audioTrack.codec === null || !await audioTrack.canDecode()) {
+      this.audioSink = null;
+      this.ensureAudioContext();
+      onMetadata?.();
+      return;
+    }
+    this.ensureAudioContext(audioTrack.sampleRate);
+    this.audioSink = new AudioBufferSink(audioTrack);
+    onMetadata?.();
+  }
+  async runIterator(localId) {
+    if (!this.audioSink)
+      return;
+    await this.stopIterator();
+    this.audioIterator = this.audioSink.buffers(this.currentTime);
+    while (true) {
+      if (localId !== this.asyncId || this.paused)
+        return;
+      const nextPromise = this.audioIterator.next();
+      const checkStarvation = setInterval(() => {
+        if (localId !== this.asyncId || this.paused) {
+          clearInterval(checkStarvation);
+          return;
+        }
+        if (this.audioContext.state === "running" && this.audioContext.currentTime >= this.latestScheduledEndTime - 0.2) {
+          this.audioContext.suspend();
+          this.events.emit("waiting");
+        }
+      }, 50);
+      let result;
+      try {
+        result = await nextPromise;
+      } catch (e) {
+        console.error("Audio iterator error:", e);
+        break;
+      } finally {
+        clearInterval(checkStarvation);
+      }
+      if (localId !== this.asyncId || this.paused)
+        return;
+      if (this.audioContext.state === "suspended") {
+        await this.audioContext.resume();
+        this.events.emit("canplay");
+        this.events.emit("playing");
+      }
+      if (result.done)
+        break;
+      const { buffer, timestamp } = result.value;
+      const node = this.audioContext.createBufferSource();
+      node.buffer = buffer;
+      node.connect(this.gainNode);
+      node.playbackRate.value = this.playbackRate;
+      const startAt = this.audioContextStartTime + (timestamp - this.playbackTimeAtStart) / this.playbackRate;
+      const duration = buffer.duration;
+      const endAt = startAt + duration / this.playbackRate;
+      if (endAt > this.latestScheduledEndTime) {
+        this.latestScheduledEndTime = endAt;
+      }
+      if (startAt >= this.audioContext.currentTime) {
+        node.start(startAt);
+      } else {
+        node.start(
+          this.audioContext.currentTime,
+          (this.audioContext.currentTime - startAt) * this.playbackRate
+        );
+      }
+      this.queuedNodes.add(node);
+      node.onended = () => this.queuedNodes.delete(node);
+    }
+  }
+  async play() {
+    if (!this.paused)
+      return;
+    if (!this.audioContext) {
+      this.ensureAudioContext();
+    }
+    if (this.audioContext.state === "suspended") {
+      await this.audioContext.resume();
+    }
+    this.audioContextStartTime = this.audioContext.currentTime;
+    this.latestScheduledEndTime = this.audioContextStartTime;
+    this.paused = false;
+    const id = ++this.asyncId;
+    this.runIterator(id);
+  }
+  pause() {
+    if (this.paused)
+      return;
+    this.playbackTimeAtStart = this.currentTime;
+    this.paused = true;
+    this.stopIterator();
+    this.stopQueuedNodes();
+  }
+  async seek(time) {
+    this.playbackTimeAtStart = Math.max(0, time);
+    this.audioContextStartTime = this.audioContext.currentTime;
+    this.latestScheduledEndTime = this.audioContextStartTime;
+    const id = ++this.asyncId;
+    if (!this.paused) {
+      this.runIterator(id);
+    }
+  }
+  setVolume(volume, muted) {
+    this.volume = volume;
+    this.muted = muted;
+    this.updateGain();
+  }
+  setPlaybackRate(rate) {
+    if (rate === this.playbackRate)
+      return;
+    if (!this.paused) {
+      this.playbackTimeAtStart = this.currentTime;
+      this.audioContextStartTime = this.audioContext.currentTime;
+    }
+    this.playbackRate = rate;
+    if (!this.paused) {
+      const id = ++this.asyncId;
+      this.runIterator(id);
+    }
+  }
+  destroy() {
+    this.asyncId++;
+    this.pause();
+    this.audioContext?.close();
+    this.audioContext = null;
+    this.input = null;
+    this.audioSink = null;
+  }
+}
+class VideoEngine {
+  constructor({
+    canvas,
+    ctx,
+    events,
+    timeupdateInterval = 250,
+    avSyncTolerance = 0.12,
+    dropLateFrames = false,
+    poster = "",
+    preflightRange = false
+  }) {
+    this.canvas = canvas;
+    this.ctx = ctx;
+    this.events = events;
+    this.timeupdateInterval = timeupdateInterval;
+    this.avSyncTolerance = avSyncTolerance;
+    this.dropLateFrames = dropLateFrames;
+    this.poster = poster;
+    this.preflightRange = preflightRange;
+    this.input = null;
+    this.videoSink = null;
+    this.videoIterator = null;
+    this.nextFrame = null;
+    this.rafId = 0;
+    this.asyncId = 0;
+    this.width = 0;
+    this.height = 0;
+    this.duration = Number.NaN;
+    this.audioClock = null;
+    this.lastTimeUpdate = 0;
+    this.stalled = false;
+    this.playbackRate = 1;
+    this.posterDrawn = false;
+    this.isFetching = false;
+  }
+  normalizeSource(src) {
+    if (typeof src === "string")
+      return new UrlSource(src);
+    if (src instanceof Blob)
+      return new BlobSource(src);
+    if (typeof ReadableStream !== "undefined" && src instanceof ReadableStream) {
+      return new ReadableStreamSource(src);
+    }
+    return src;
+  }
+  async preflight(url) {
+    if (!this.preflightRange || typeof url !== "string")
+      return true;
+    try {
+      const res = await fetch(url, { method: "HEAD" });
+      const acceptRanges = res.headers.get("accept-ranges");
+      if (!acceptRanges || acceptRanges === "none") {
+        this.events.emit("error", new Event("RangeNotSupported"));
+        return false;
+      }
+      return true;
+    } catch (e) {
+      console.warn("Preflight check failed:", e);
+      return true;
+    }
+  }
+  drawPoster() {
+    if (!this.poster || this.posterDrawn)
+      return;
+    const img = new Image();
+    img.onload = () => {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.canvas.width = img.naturalWidth || this.canvas.width;
+      this.canvas.height = img.naturalHeight || this.canvas.height;
+      this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+      this.posterDrawn = true;
+    };
+    img.src = this.poster;
+  }
+  async stopIterator() {
+    await this.videoIterator?.return();
+    this.videoIterator = null;
+  }
+  clear() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+  async load(src, onMetadata) {
+    const id = ++this.asyncId;
+    await this.stopIterator();
+    this.clear();
+    this.posterDrawn = false;
+    if (!await this.preflight(src))
+      return;
+    const source = this.normalizeSource(src);
+    if (!source) {
+      this.drawPoster();
+      return;
+    }
+    this.input = new Input({
+      source,
+      formats: ALL_FORMATS
+    });
+    this.duration = await this.input.computeDuration();
+    if (id !== this.asyncId)
+      return;
+    const videoTrack = await this.input.getPrimaryVideoTrack();
+    if (!videoTrack) {
+      this.handleNoVideoTrack();
+      onMetadata?.();
+      return;
+    }
+    if (videoTrack.codec === null || !await videoTrack.canDecode()) {
+      this.handleNoVideoTrack();
+      onMetadata?.();
+      return;
+    }
+    const transparent = await videoTrack.canBeTransparent();
+    this.videoSink = new CanvasSink(videoTrack, {
+      poolSize: 2,
+      fit: "contain",
+      alpha: transparent
+    });
+    this.width = videoTrack.displayWidth;
+    this.height = videoTrack.displayHeight;
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
+    onMetadata?.();
+    await this.resetIterator(0);
+  }
+  handleNoVideoTrack() {
+    this.videoSink = null;
+    this.width = 0;
+    this.height = 0;
+    this.canvas.width = 0;
+    this.canvas.height = 0;
+    this.clear();
+    this.drawPoster();
+  }
+  async resetIterator(time) {
+    await this.stopIterator();
+    if (!this.videoSink)
+      return;
+    this.videoIterator = this.videoSink.canvases(time);
+    const first = (await this.videoIterator.next()).value ?? null;
+    const second = (await this.videoIterator.next()).value ?? null;
+    this.nextFrame = second;
+    if (first) {
+      this.ctx.drawImage(first.canvas, 0, 0);
+      this.events.emit("loadeddata");
+    } else {
+      this.drawPoster();
+    }
+  }
+  async updateNextFrame(localId) {
+    if (!this.videoIterator || this.isFetching)
+      return;
+    this.isFetching = true;
+    try {
+      while (true) {
+        const frame = (await this.videoIterator.next()).value ?? null;
+        if (!frame || localId !== this.asyncId)
+          return;
+        const t = this.audioClock.currentTime;
+        const tolerance = this.dropLateFrames ? Math.max(0.06, this.avSyncTolerance / Math.max(1, this.playbackRate)) : 0;
+        if (this.dropLateFrames && frame.timestamp < t - tolerance) {
+          continue;
+        }
+        if (frame.timestamp <= t + tolerance) {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          this.ctx.drawImage(frame.canvas, 0, 0);
+          if (!this.dropLateFrames && frame.timestamp > t) {
+            this.nextFrame = null;
+            return;
+          }
+        } else {
+          this.nextFrame = frame;
+          return;
+        }
+      }
+    } finally {
+      this.isFetching = false;
+    }
+  }
+  render() {
+    if (!this.audioClock)
+      return;
+    const t = this.audioClock.currentTime;
+    const now = Date.now();
+    if (now - this.lastTimeUpdate >= this.timeupdateInterval) {
+      this.events.emit("timeupdate");
+      this.lastTimeUpdate = now;
+    }
+    if (Number.isFinite(this.duration) && t >= this.duration) {
+      this.stop();
+      this.stalled = false;
+      this.events.emit("ended");
+      this.events.emit("pause");
+      this.events.emit("canplay");
+      return;
+    }
+    if (this.nextFrame && this.nextFrame.timestamp <= t) {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.drawImage(this.nextFrame.canvas, 0, 0);
+      this.nextFrame = null;
+      this.updateNextFrame(this.asyncId);
+      if (this.stalled) {
+        this.events.emit("canplay");
+        this.events.emit("playing");
+        this.stalled = false;
+      }
+    } else if (!this.nextFrame) {
+      this.updateNextFrame(this.asyncId);
+      if (!this.nextFrame && Number.isFinite(this.duration) && t < this.duration && !this.stalled) {
+        this.stalled = true;
+        this.events.emit("waiting");
+      }
+    }
+    this.rafId = requestAnimationFrame(() => this.render());
+  }
+  start(audioEngine) {
+    this.audioClock = audioEngine;
+    this.asyncId++;
+    this.stalled = false;
+    this.updateNextFrame(this.asyncId);
+    this.rafId = requestAnimationFrame(() => this.render());
+  }
+  stop() {
+    cancelAnimationFrame(this.rafId);
+  }
+  async seek(time) {
+    this.asyncId++;
+    await this.resetIterator(time);
+  }
+  setPlaybackRate(rate) {
+    this.playbackRate = Math.max(0.1, Number(rate) || 1);
+  }
+  destroy() {
+    this.asyncId++;
+    this.stop();
+    this.stopIterator();
+    this.posterDrawn = false;
+    this.input = null;
+    this.videoSink = null;
+  }
+}
+class MediaBunnyEngine {
+  constructor({ canvas, ctx, events, option = {} }) {
+    this.events = events;
+    this.option = option;
+    this.audio = new AudioEngine(events);
+    this.video = new VideoEngine({
+      canvas,
+      ctx,
+      events,
+      timeupdateInterval: option.timeupdateInterval ?? 250,
+      avSyncTolerance: option.avSyncTolerance ?? 0.12,
+      dropLateFrames: option.dropLateFrames ?? false,
+      poster: option.poster ?? "",
+      preflightRange: option.preflightRange ?? false
+    });
+    this.paused = true;
+    this.ended = false;
+    this.readyState = 0;
+    this.networkState = 0;
+    this.error = null;
+    this.seeking = false;
+    this.loadSeq = 0;
+    events.addEventListener?.("ended", () => {
+      this.ended = true;
+      this.paused = true;
+    });
+  }
+  async load(src) {
+    const id = ++this.loadSeq;
+    this.pause();
+    this.ended = false;
+    this.error = null;
+    this.networkState = 2;
+    this.readyState = 0;
+    setTimeout(() => this.events.emit("waiting"), 0);
+    setTimeout(() => this.events.emit("loadstart"), 0);
+    const loadTimeout = Number.isFinite(this.option.loadTimeout) ? this.option.loadTimeout : 0;
+    try {
+      await Promise.race([
+        this.performLoad(src, id),
+        loadTimeout > 0 ? this.createTimeout(loadTimeout) : new Promise(() => {
+        })
+      ]);
+    } catch (err) {
+      if (id !== this.loadSeq)
+        return;
+      this.loadSeq++;
+      this.error = { code: 4, message: err.message };
+      this.networkState = 3;
+      this.events.emit("error");
+    }
+  }
+  async performLoad(src, id) {
+    let videoMetadataLoaded = false;
+    let audioMetadataLoaded = false;
+    const checkMetadata = () => {
+      if (videoMetadataLoaded && audioMetadataLoaded) {
+        this.readyState = 1;
+        this.events.emit("loadedmetadata");
+        this.events.emit("durationchange");
+        this.events.emit("progress");
+      }
+    };
+    try {
+      await Promise.all([
+        this.video.load(src, () => {
+          if (id !== this.loadSeq)
+            return;
+          videoMetadataLoaded = true;
+          checkMetadata();
+        }),
+        this.audio.load(src, () => {
+          if (id !== this.loadSeq)
+            return;
+          audioMetadataLoaded = true;
+          checkMetadata();
+        })
+      ]);
+      if (id !== this.loadSeq)
+        return;
+      this.readyState = 4;
+      this.networkState = 1;
+      this.events.emit("loadeddata");
+      this.events.emit("canplay");
+      this.events.emit("canplaythrough");
+      this.events.emit("progress");
+    } catch (err) {
+      if (id !== this.loadSeq)
+        return;
+      this.error = { code: 4, message: err.message };
+      this.networkState = 3;
+      this.events.emit("error");
+      console.error("MediaBunny load error:", err);
+    }
+  }
+  createTimeout(ms) {
+    return new Promise((_, reject) => {
+      setTimeout(() => reject(new Error("Load timeout")), ms);
+    });
+  }
+  async play() {
+    if (!this.paused)
+      return;
+    if (this.ended) {
+      this.ended = false;
+      await this.seek(0);
+    }
+    this.paused = false;
+    await this.audio.play();
+    this.video.start(this.audio);
+    this.events.emit("play");
+    this.events.emit("playing");
+  }
+  pause() {
+    if (this.paused)
+      return;
+    this.paused = true;
+    this.audio.pause();
+    this.video.stop();
+    this.events.emit("pause");
+  }
+  async seek(time) {
+    const shouldResume = !this.paused;
+    this.ended = false;
+    this.seeking = true;
+    this.events.emit("seeking");
+    this.events.emit("waiting");
+    this.pause();
+    await Promise.all([
+      this.audio.seek(time),
+      this.video.seek(time)
+    ]);
+    this.seeking = false;
+    this.events.emit("seeked");
+    if (shouldResume && !this.ended) {
+      await this.play();
+    }
+  }
+  setVolume(volume, muted) {
+    this.audio.setVolume(volume, muted);
+  }
+  setPlaybackRate(rate) {
+    this.audio.setPlaybackRate(rate);
+    this.video.setPlaybackRate(rate);
+  }
+  destroy() {
+    this.pause();
+    this.audio.destroy();
+    this.video.destroy();
+  }
+  // Getters
+  get currentTime() {
+    return this.audio.currentTime;
+  }
+  get duration() {
+    return this.audio.duration || this.video.duration;
+  }
+  get videoWidth() {
+    return this.video.width;
+  }
+  get videoHeight() {
+    return this.video.height;
+  }
+}
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, Number(v) || 0));
+}
+class VideoShim {
+  constructor({ art, canvas, ctx, option }) {
+    this.art = art;
+    this.canvas = canvas;
+    this.option = option;
+    this.events = new EventTarget();
+    this.engine = new MediaBunnyEngine({ canvas, ctx, events: this.events, option });
+    this._src = null;
+    this._volume = option.volume ?? 0.7;
+    this._muted = !!option.muted;
+    this._playbackRate = 1;
+    this.engine.setVolume(this._volume, this._muted);
+    this.setupEventForwarding();
+    if (option.source) {
+      this.src = option.source;
+    } else if (art.option?.url) {
+      this.src = art.option.url;
+    }
+  }
+  setupEventForwarding() {
+    const { events: artEvents } = this.art.constructor.config;
+    artEvents.forEach((name) => {
+      this.events.addEventListener(name, (e) => {
+        this.art.emit(`video:${e.type}`, e);
+      });
+    });
+  }
+  // Event methods
+  addEventListener(type, fn) {
+    this.events.addEventListener(type, fn);
+  }
+  removeEventListener(type, fn) {
+    this.events.removeEventListener(type, fn);
+  }
+  // Source
+  get src() {
+    return this._src;
+  }
+  set src(v) {
+    this._src = v;
+    if (v)
+      this.engine.load(v);
+  }
+  get currentSrc() {
+    return this._src;
+  }
+  // Time
+  get currentTime() {
+    return this.engine.currentTime;
+  }
+  set currentTime(t) {
+    this.engine.seek(Number(t) || 0);
+  }
+  get duration() {
+    return this.engine.duration;
+  }
+  // Buffered/Played/Seekable
+  get buffered() {
+    return this.createTimeRanges(0, this.engine.duration);
+  }
+  get played() {
+    return this.createTimeRanges(0, this.engine.currentTime);
+  }
+  get seekable() {
+    return this.createTimeRanges(0, this.engine.duration);
+  }
+  createTimeRanges(start, end) {
+    const duration = this.engine.duration;
+    if (!duration || Number.isNaN(duration) || end <= 0) {
+      return { length: 0, start: () => 0, end: () => 0 };
+    }
+    return {
+      length: 1,
+      start: () => start,
+      end: () => end
+    };
+  }
+  // Playback state
+  get paused() {
+    return this.engine.paused;
+  }
+  get playing() {
+    return !this.engine.paused && !this.engine.ended;
+  }
+  get ended() {
+    return this.engine.ended;
+  }
+  get seeking() {
+    return this.engine.seeking;
+  }
+  // Ready state
+  get readyState() {
+    return this.engine.readyState;
+  }
+  get networkState() {
+    return this.engine.networkState;
+  }
+  get error() {
+    return this.engine.error;
+  }
+  // Playback rate
+  get playbackRate() {
+    return this._playbackRate;
+  }
+  set playbackRate(v) {
+    const rate = Number(v);
+    if (Number.isNaN(rate) || rate <= 0)
+      return;
+    this._playbackRate = rate;
+    this.engine.setPlaybackRate(rate);
+    this.events.emit("ratechange");
+  }
+  // Volume
+  get volume() {
+    return this._volume;
+  }
+  set volume(v) {
+    this._volume = clamp(v, 0, 1);
+    this._muted = false;
+    this.engine.setVolume(this._volume, this._muted);
+    this.events.emit("volumechange");
+  }
+  get muted() {
+    return this._muted;
+  }
+  set muted(v) {
+    this._muted = !!v;
+    this.engine.setVolume(this._volume, this._muted);
+    this.events.emit("volumechange");
+  }
+  // Playback methods
+  play() {
+    return this.engine.play();
+  }
+  pause() {
+    this.engine.pause();
+  }
+  load() {
+    if (this._src)
+      this.engine.load(this._src);
+  }
+  // Video dimensions
+  get videoWidth() {
+    return this.engine.videoWidth;
+  }
+  get videoHeight() {
+    return this.engine.videoHeight;
+  }
+  // Other properties
+  get poster() {
+    return this.option.poster || "";
+  }
+  set poster(v) {
+    this.option.poster = v;
+  }
+  get autoplay() {
+    return this.option.autoplay || false;
+  }
+  set autoplay(v) {
+  }
+  get loop() {
+    return this.option.loop || false;
+  }
+  set loop(v) {
+  }
+  get controls() {
+    return false;
+  }
+  set controls(v) {
+  }
+  get playsInline() {
+    return true;
+  }
+  set playsInline(v) {
+  }
+  get crossOrigin() {
+    return this.option.crossOrigin || "";
+  }
+  set crossOrigin(v) {
+  }
+  get preload() {
+    return "auto";
+  }
+  set preload(v) {
+  }
+  get defaultMuted() {
+    return false;
+  }
+  set defaultMuted(v) {
+  }
+  get defaultPlaybackRate() {
+    return 1;
+  }
+  set defaultPlaybackRate(v) {
+  }
+  // Methods
+  canPlayType(_type) {
+    return "maybe";
+  }
+  getBoundingClientRect() {
+    return this.canvas.getBoundingClientRect();
+  }
+  requestVideoFrameCallback(callback) {
+    const id = requestAnimationFrame((time) => {
+      callback(time, {
+        presentationTime: this.engine.currentTime,
+        expectedDisplayTime: time + 16.6,
+        width: this.engine.videoWidth,
+        height: this.engine.videoHeight,
+        mediaTime: this.engine.currentTime,
+        presentedFrames: 0,
+        processingDuration: 0,
+        captureTime: time,
+        receiveTime: time,
+        rtpTimestamp: 0
+      });
+    });
+    return id;
+  }
+  cancelVideoFrameCallback(id) {
+    cancelAnimationFrame(id);
+  }
+  setAttribute(name, value) {
+    if (name === "src") {
+      this.src = value;
+    } else if (name === "autoplay") {
+      this.autoplay = value;
+    } else if (name === "loop") {
+      this.loop = value;
+    } else if (name === "muted") {
+      this.muted = true;
+    } else {
+      this.canvas.setAttribute(name, value);
+    }
+  }
+  destroy() {
+    this.engine.destroy();
+  }
+}
+function artplayerProxyMediabunny(option = {}) {
+  return (art) => {
+    const { constructor } = art;
+    const { createElement } = constructor.utils;
+    const canvas = createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const shim = new VideoShim({
+      art,
+      canvas,
+      ctx,
+      option
+    });
+    const originalCanvasMethods = {};
+    for (const prop in canvas) {
+      if (typeof canvas[prop] === "function") {
+        originalCanvasMethods[prop] = canvas[prop].bind(canvas);
+      }
+    }
+    const propertyNames = /* @__PURE__ */ new Set([
+      ...Object.getOwnPropertyNames(shim),
+      ...Object.getOwnPropertyNames(Object.getPrototypeOf(shim))
+    ]);
+    for (const prop of propertyNames) {
+      if (prop === "constructor")
+        continue;
+      if (!(prop in canvas)) {
+        Object.defineProperty(canvas, prop, {
+          get() {
+            const value = shim[prop];
+            return typeof value === "function" ? value.bind(shim) : value;
+          },
+          set(v) {
+            shim[prop] = v;
+          },
+          configurable: true,
+          enumerable: true
+        });
+      }
+    }
+    for (const prop in originalCanvasMethods) {
+      canvas[prop] = (...args) => originalCanvasMethods[prop](...args);
+    }
+    function resize() {
+      const player = art.template?.$player;
+      if (!player || art.option.autoSize)
+        return;
+      Object.assign(canvas.style, {
+        width: "100%",
+        height: "100%",
+        objectFit: "contain"
+      });
+    }
+    art.on("resize", resize);
+    art.on("video:loadedmetadata", resize);
+    art.on("destroy", () => {
+      shim.destroy();
+    });
+    return canvas;
+  };
+}
+if (typeof window !== "undefined") {
+  window.artplayerProxyMediabunny = artplayerProxyMediabunny;
+}
+export {
+  artplayerProxyMediabunny as default
+};

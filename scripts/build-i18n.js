@@ -1,9 +1,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import { Parcel } from '@parcel/core'
 import cpy from 'cpy'
 import { glob } from 'glob'
+import { build as viteBuild } from 'vite'
+import { getViteBuildConfig, toPascalCase } from './utils.js'
 
 const basePath = 'packages/artplayer'
 const i18nSrcDir = path.join(basePath, 'src/i18n')
@@ -21,63 +22,30 @@ async function buildI18n() {
   }
   fs.mkdirSync(distDir, { recursive: true })
 
-  const distJs = path.join(distDir, 'cjs')
-  const bundlerJs = new Parcel({
-    entries,
-    defaultConfig: '@parcel/config-default',
-    mode: 'production',
-    defaultTargetOptions: {
-      distDir: distJs,
-      outputFormat: 'global',
-      sourceMaps: false,
-      isLibrary: true,
-      engines: { browsers: ['last 1 Chrome version'] },
-    },
-    env: { NODE_ENV: 'production' },
-  })
-  await bundlerJs.run()
-  console.log('✅ Built i18n global (.js)')
+  for (const entry of entries) {
+    const baseName = path.basename(entry, '.js')
+    const globalName = `artplayerI18n${toPascalCase(baseName)}`
 
-  const distMjs = path.join(distDir, 'esm')
-  const bundlerMjs = new Parcel({
-    entries,
-    defaultConfig: '@parcel/config-default',
-    mode: 'production',
-    defaultTargetOptions: {
-      context: 'browser',
-      distDir: distMjs,
-      outputFormat: 'esmodule',
-      sourceMaps: false,
-      isLibrary: true,
-      engines: { browsers: ['last 1 Chrome version'] },
-    },
-    env: { NODE_ENV: 'production' },
-  })
-  const { bundleGraph } = await bundlerMjs.run()
-  const bundles = bundleGraph.getBundles()
-  for (const bundle of bundles) {
-    if (bundle.type === 'js') {
-      const oldPath = bundle.filePath
-      const newPath = oldPath.replace(/\.js$/, '.mjs')
-      fs.renameSync(oldPath, newPath)
+    // Build UMD and ESM formats
+    for (const [format, ext] of [['umd', '.js'], ['es', '.mjs']]) {
+      const config = getViteBuildConfig({
+        entry,
+        outDir: distDir,
+        name: globalName,
+        format,
+        fileName: `${baseName}${ext}`,
+      })
+      await viteBuild(config)
     }
-  }
-  console.log('✅ Built i18n esm (.mjs)')
 
-  for (const f of fs.readdirSync(distJs)) {
-    fs.renameSync(path.join(distJs, f), path.join(distDir, f))
+    console.log(`✅ Built i18n: ${baseName}`)
   }
-  for (const f of fs.readdirSync(distMjs)) {
-    fs.renameSync(path.join(distMjs, f), path.join(distDir, f))
-  }
-  fs.rmSync(distJs, { recursive: true, force: true })
-  fs.rmSync(distMjs, { recursive: true, force: true })
 
   await cpy(distDir, compiledPath)
-  console.log('✨ Finished building i18n with both .js and .mjs')
+  console.log('✨ Finished building i18n')
 }
 
 buildI18n().catch((err) => {
-  console.error('❌ Build i18n failed', err)
+  console.error('❌ Build i18n failed:', err)
   process.exitCode = 1
 })

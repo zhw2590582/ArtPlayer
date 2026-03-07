@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-document-pip",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Document PIP plugin for ArtPlayer",
   "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",

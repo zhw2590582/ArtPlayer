@@ -1,8 +1,127 @@
-
 /*!
- * artplayer-proxy-canvas.js v1.0.0
+ * artplayer-proxy-canvas.js v1.0.1
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-!function(e,t,r,n,o){var i="u">typeof globalThis?globalThis:"u">typeof self?self:"u">typeof window?window:"u">typeof global?global:{},a="function"==typeof i[n]&&i[n],u=a.i||{},l=a.cache||{},f="u">typeof module&&"function"==typeof module.require&&module.require.bind(module);function c(t,r){if(!l[t]){if(!e[t]){if(o[t])return o[t];var u="function"==typeof i[n]&&i[n];if(!r&&u)return u(t,!0);if(a)return a(t,!0);if(f&&"string"==typeof t)return f(t);var d=Error("Cannot find module '"+t+"'");throw d.code="MODULE_NOT_FOUND",d}s.resolve=function(r){var n=e[t][1][r];return null!=n?n:r},s.cache={};var p=l[t]=new c.Module(t);e[t][0].call(p.exports,s,p,p.exports,i)}return l[t].exports;function s(e){var t=s.resolve(e);if(!1===t)return{};if(Array.isArray(t)){var r={__esModule:!0};return t.forEach(function(e){var t=e[0],n=e[1],o=e[2]||e[0],i=c(n);"*"===t?Object.keys(i).forEach(function(e){"default"===e||"__esModule"===e||Object.prototype.hasOwnProperty.call(r,e)||Object.defineProperty(r,e,{enumerable:!0,get:function(){return i[e]}})}):"*"===o?Object.defineProperty(r,t,{enumerable:!0,value:i}):Object.defineProperty(r,t,{enumerable:!0,get:function(){return"default"===o?i.__esModule?i.default:i:i[o]}})}),r}return c(t)}}c.isParcelRequire=!0,c.Module=function(e){this.id=e,this.bundle=c,this.require=f,this.exports={}},c.modules=e,c.cache=l,c.parent=a,c.distDir=void 0,c.publicUrl=void 0,c.devServer=void 0,c.i=u,c.register=function(t,r){e[t]=[function(e,t){t.exports=r},{}]},Object.defineProperty(c,"root",{get:function(){return i[n]}}),i[n]=c;for(var d=0;d<t.length;d++)c(t[d]);if(r){var p=c(r);"object"==typeof exports&&"u">typeof module?module.exports=p:"function"==typeof define&&define.amd&&define(function(){return p})}}({"7gEKL":[function(e,t,r,n){var o=e("@parcel/transformer-js/src/esmodule-helpers.js");function i(e){return t=>{let{constructor:r}=t,{createElement:n}=r.utils,o=n("canvas"),i=n("video"),a=o.getContext("2d"),u=null,l={};for(let e in o)"function"==typeof o[e]&&(l[e]=o[e].bind(o));for(let e in i)e in o||Object.defineProperty(o,e,{get(){let t=i[e];return"function"==typeof t?t.bind(i):t},set(t){i[e]=t},configurable:!0,enumerable:!0});for(let e in l)o[e]=function(...t){return e in l?l[e](...t):i[e](...t)};return function(){let{events:e}=r.config;setTimeout(()=>{e.forEach(e=>{t.proxy(i,e,e=>{t.emit(`video:${e.type}`,e)})})})}(),t.on("video:loadedmetadata",()=>{o.width=i.videoWidth,o.height=i.videoHeight}),t.on("video:play",()=>{cancelAnimationFrame(u),c()}),t.on("video:pause",()=>{cancelAnimationFrame(u)}),t.on("resize",()=>{!function(){let e,r,n=t.template?.$player;if(!n||t.option.autoSize)return;let a=i.videoWidth/i.videoHeight,u=n.clientWidth,l=n.clientHeight;u/l>a?e=(r=l)*a:r=(e=u)/a,o.width=e,o.height=r;let f=(u-e)/2,c=(l-r)/2;Object.assign(o.style,{padding:`${c}px ${f}px`})}(),f()}),t.on("destroy",()=>{cancelAnimationFrame(u)}),o;async function f(){try{if("u">typeof createImageBitmap){let e=await createImageBitmap(i);a.drawImage(e,0,0,o.width,o.height),e.close()}else a.drawImage(i,0,0,o.width,o.height);e&&e(a,i),t.emit("artplayerProxyCanvas:draw",a,i)}catch(e){t.emit("artplayerProxyCanvas:error",e)}}async function c(){await f(),u=requestAnimationFrame(c)}}}o.defineInteropFlag(r),o.export(r,"default",()=>i),"u">typeof window&&(window.artplayerProxyCanvas=i)},{"@parcel/transformer-js/src/esmodule-helpers.js":"loqXi"}],loqXi:[function(e,t,r,n){r.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},r.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},r.exportAll=function(e,t){return Object.keys(e).forEach(function(r){"default"===r||"__esModule"===r||Object.prototype.hasOwnProperty.call(t,r)||Object.defineProperty(t,r,{enumerable:!0,get:function(){return e[r]}})}),t},r.export=function(e,t,r){Object.defineProperty(e,t,{enumerable:!0,get:r})}},{}]},["7gEKL"],"7gEKL","parcelRequire4dc0",{});let{default:e}=parcelRequire4dc0("7gEKL");export{e as default};
+function artplayerProxyCanvas(callback) {
+  return (art) => {
+    const { constructor } = art;
+    const { createElement } = constructor.utils;
+    const canvas = createElement("canvas");
+    const video = createElement("video");
+    const ctx = canvas.getContext("2d");
+    let animationId = null;
+    const originalCanvasMethods = {};
+    for (const prop in canvas) {
+      if (typeof canvas[prop] === "function") {
+        originalCanvasMethods[prop] = canvas[prop].bind(canvas);
+      }
+    }
+    for (const prop in video) {
+      if (!(prop in canvas)) {
+        Object.defineProperty(canvas, prop, {
+          get() {
+            const value = video[prop];
+            return typeof value === "function" ? value.bind(video) : value;
+          },
+          set(value) {
+            video[prop] = value;
+          },
+          configurable: true,
+          enumerable: true
+        });
+      }
+    }
+    for (const prop in originalCanvasMethods) {
+      canvas[prop] = function(...args) {
+        if (prop in originalCanvasMethods) {
+          return originalCanvasMethods[prop](...args);
+        }
+        return video[prop](...args);
+      };
+    }
+    setupEventListeners();
+    setupArtPlayerEvents();
+    return canvas;
+    function setupEventListeners() {
+      const { events } = constructor.config;
+      setTimeout(() => {
+        events.forEach((event) => {
+          art.proxy(video, event, (event2) => {
+            art.emit(`video:${event2.type}`, event2);
+          });
+        });
+      });
+    }
+    async function draw() {
+      try {
+        if (typeof createImageBitmap !== "undefined") {
+          const bitmap = await createImageBitmap(video);
+          ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+          bitmap.close();
+        } else {
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        }
+        callback && callback(ctx, video);
+        art.emit("artplayerProxyCanvas:draw", ctx, video);
+      } catch (error) {
+        art.emit("artplayerProxyCanvas:error", error);
+      }
+    }
+    async function animation() {
+      await draw();
+      animationId = requestAnimationFrame(animation);
+    }
+    function resize() {
+      const player = art.template?.$player;
+      if (!player || art.option.autoSize)
+        return;
+      const aspectRatio = video.videoWidth / video.videoHeight;
+      const containerWidth = player.clientWidth;
+      const containerHeight = player.clientHeight;
+      const containerRatio = containerWidth / containerHeight;
+      let canvasWidth, canvasHeight;
+      if (containerRatio > aspectRatio) {
+        canvasHeight = containerHeight;
+        canvasWidth = canvasHeight * aspectRatio;
+      } else {
+        canvasWidth = containerWidth;
+        canvasHeight = canvasWidth / aspectRatio;
+      }
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+      const paddingLeft = (containerWidth - canvasWidth) / 2;
+      const paddingTop = (containerHeight - canvasHeight) / 2;
+      Object.assign(canvas.style, {
+        padding: `${paddingTop}px ${paddingLeft}px`
+      });
+    }
+    function setupArtPlayerEvents() {
+      art.on("video:loadedmetadata", () => {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+      });
+      art.on("video:play", () => {
+        cancelAnimationFrame(animationId);
+        animation();
+      });
+      art.on("video:pause", () => {
+        cancelAnimationFrame(animationId);
+      });
+      art.on("resize", () => {
+        resize();
+        draw();
+      });
+      art.on("destroy", () => {
+        cancelAnimationFrame(animationId);
+      });
+    }
+  };
+}
+if (typeof window !== "undefined") {
+  window.artplayerProxyCanvas = artplayerProxyCanvas;
+}
+export {
+  artplayerProxyCanvas as default
+};
