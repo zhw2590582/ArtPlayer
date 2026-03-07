@@ -122,3 +122,4 @@ var art = new Artplayer({
         })
     ],
 });
+```

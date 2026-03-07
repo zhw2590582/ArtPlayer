@@ -501,3 +501,4 @@ function myPlugin(art) {
 art.on('ready', () => {
     art.plugins.add(myPlugin);
 });
+```

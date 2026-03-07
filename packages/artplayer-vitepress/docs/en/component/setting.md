@@ -168,6 +168,8 @@ var art = new Artplayer({
     ],
 });
 
+```
+
 ## Create - Toggle Button
 
 | Property   | Type                | Description               |
@@ -330,3 +332,4 @@ art.on('ready', () => {
         });
     }, 3000);
 });
+```

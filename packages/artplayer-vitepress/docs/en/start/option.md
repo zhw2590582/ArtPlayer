@@ -268,6 +268,8 @@ var art = new Artplayer({
     autoSize: true,
 });
 
+```
+
 ## `autoMini`
 
 -   Type: `Boolean`
@@ -532,6 +534,8 @@ var art = new Artplayer({
     setting: true,
 });
 
+```
+
 ## `miniProgressBar`
 
 -   Type: `Boolean`
@@ -742,6 +746,8 @@ var art = new Artplayer({
     ],
 });
 
+```
+
 :::warning For `Component Configuration`, please refer to:
 
 [/component/controls.html](/component/controls.html)
@@ -942,6 +948,8 @@ var art = new Artplayer({
         playsInline: true,
     },
 });
+
+```
 
 ## `icons`
 
@@ -1244,3 +1252,4 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     proxy: () => document.createElement('video')
 });
+```

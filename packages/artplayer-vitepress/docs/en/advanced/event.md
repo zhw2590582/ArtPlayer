@@ -263,6 +263,8 @@ art.on('error', (error, reconnectTime) => {
     console.info(error, reconnectTime);
 });
 
+```
+
 ## `hover`
 
 Triggered when the mouse enters or leaves the player
@@ -521,6 +523,8 @@ art.on('pip', (state) => {
     console.info('pip', state);
 });
 
+```
+
 ## `screenshot`
 
 Triggered when the player captures a screenshot
@@ -773,6 +777,8 @@ var art = new Artplayer({
 art.on('setting', (state) => {
     console.log(state);
 });
+
+```
 
 ## `muted`
 

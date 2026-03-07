@@ -133,3 +133,4 @@ Returns the default options for the player.
 
 ```js
 console.info(Artplayer.option);
+```

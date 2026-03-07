@@ -263,6 +263,8 @@ art.on('ready', () => {
     }, 3000);
 });
 
+```
+
 :::warning Note
 
 `art.switch` and `art.switchUrl` have the same functionality, but the `art.switchUrl` method returns a `Promise`. It `resolve`s when the new URL is playable and `reject`s when the new URL fails to load.
@@ -1024,6 +1026,8 @@ art.on('ready', () => {
 	}, 3000);
 })
 
+```
+
 ## `thumbnails`
 
 -   Type: `Setter/Getter`
@@ -1069,3 +1073,4 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.subtitleOffset = 1;
 });
+```

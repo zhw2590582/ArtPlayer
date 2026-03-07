@@ -251,6 +251,8 @@ var art = new Artplayer({
     url: '/assets/sample/404.mp4',
 });
 
+```
+
 ## CONTROL_HIDE_TIME
 
 The delay time in milliseconds for auto-hiding the bottom control bar. Default is `3000`.
@@ -499,6 +501,8 @@ var art = new Artplayer({
 art.contextmenu.show = true;
 art.setting.show = true;
 
+```
+
 ## FULLSCREEN_WEB_IN_BODY
 
 Determines whether to mount the player under the `body` element during web fullscreen mode. Defaults to `true`.
@@ -564,3 +568,4 @@ var art = new Artplayer({
 
 // Only destroys the UI, does not actively clear src
 art.destroy();
+```
