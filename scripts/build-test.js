@@ -10,25 +10,26 @@ const excludeDirs = ['en', '.vitepress', 'public', 'plugin']
 
 // Regex to match code blocks after "Run Code" markers
 // Match until we find a closing ``` that's on its own line
-const runCodePattern = /<div className="run-code">.*?<\/div>\s*\n\s*```js[^\n]*\n([\s\S]*?)\n```(?=\s*\n|$)/g
+const runCodePattern = /<div className="run-code">.*?<\/div>[\t\v\f\r \xA0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]*\n\s*```js[^\n]*\n([\s\S]*?)\n```(?=\s*\n|$)/g
 
 function extractCodeBlocks(content, filePath) {
   const blocks = []
-  let match
+  let match = runCodePattern.exec(content)
 
-  while ((match = runCodePattern.exec(content)) !== null) {
-    let code = match[1].trim()
-    
+  while (match !== null) {
+    const code = match[1].trim()
+
     // Skip if code contains markdown syntax (unclosed code block issue)
     if (code.includes('\n## ') || code.includes('\n:::') || code.includes('<div className="run-code">')) {
       console.warn(`⚠️  Skipping malformed code block in ${filePath}`)
       continue
     }
-    
+
     blocks.push({
       code,
       file: filePath,
     })
+    match = runCodePattern.exec(content)
   }
 
   return blocks
@@ -43,7 +44,7 @@ function processMarkdownFiles(dir, relativePath = '') {
     if (excludeDirs.includes(item)) {
       continue
     }
-    
+
     const fullPath = path.join(dir, item)
     const relPath = path.join(relativePath, item)
     const stat = fs.statSync(fullPath)
@@ -98,11 +99,6 @@ function generateTestCode(fileResults) {
 
     blocks.forEach((block, index) => {
       const testName = `Example ${index + 1}`
-      // Escape the code for embedding in a string
-      const escapedCode = block.code
-        .replace(/\\/g, '\\\\')
-        .replace(/`/g, '\\`')
-        .replace(/\$/g, '\\$')
 
       lines.push(`        it('${testName}', function (done) {`)
       lines.push(`            try {`)
