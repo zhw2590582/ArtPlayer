@@ -265,7 +265,7 @@ const option = {
 
 - Add `art.type` property to get/set video type
 - Add `art.video` property to get video element
-- Add `artplayer-plugin-iframe` plugin to control player inside iframe
+- Add `artplayer-tool-iframe` plugin to control player inside iframe
 - Add `artplayer-plugin-hls-quality` plugin for adding Hls quality list
 - Add `Artplayer.PLAYBACK_RATE` for default playback rates `[0.5, 0.75, 1, 1.25, 1.5, 2]`
 - Add `Artplayer.ASPECT_RATIO` for default ratios `['default','4:3','16:9']`

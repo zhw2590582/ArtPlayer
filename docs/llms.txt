@@ -5382,7 +5382,7 @@ export default artplayerPluginHlsControl
 export = artplayerPluginHlsControl
 export as namespace artplayerPluginHlsControl;
 
-===== artplayer-plugin-iframe.d.ts =====
+===== artplayer-tool-iframe.d.ts =====
 
 // Message structure for iframe communication
 interface Message {
@@ -5392,7 +5392,7 @@ interface Message {
 }
 
 // Iframe communication plugin for cross-origin player control
-declare class ArtplayerPluginIframe {
+declare class ArtplayerToolIframe {
   constructor(option: { iframe: HTMLIFrameElement, url: string })
 
   // Static properties and methods
@@ -5417,7 +5417,7 @@ declare class ArtplayerPluginIframe {
   destroy(): void                                       // Cleanup resources
 }
 
-export default ArtplayerPluginIframe
+export default ArtplayerToolIframe
 export = artplayerPluginIframe
 export as namespace artplayerPluginIframe;
 
@@ -7486,10 +7486,10 @@ art.on('ready', () => {
 ===== iframe.js =====
 
 Example 7: Iframe plugin for embedded ArtPlayer instances
-This example demonstrates how to use ArtplayerPluginIframe to embed ArtPlayer within an iframe and handle cross-frame communication for fullscreen functionality.
+This example demonstrates how to use ArtplayerToolIframe to embed ArtPlayer within an iframe and handle cross-frame communication for fullscreen functionality.
 
-// npm i artplayer-plugin-iframe
-// import ArtplayerPluginIframe from 'artplayer-plugin-iframe';
+// npm i artplayer-tool-iframe
+// import ArtplayerToolIframe from 'artplayer-tool-iframe';
 
 const $iframe = document.createElement('iframe')
 $iframe.allowFullscreen = true
@@ -7500,7 +7500,7 @@ const $container = document.querySelector('.artplayer-app')
 $container.innerHTML = ''
 $container.appendChild($iframe)
 
-const iframe = new ArtplayerPluginIframe({
+const iframe = new ArtplayerToolIframe({
   iframe: $iframe,
   url: '/iframe.html',
 })
@@ -7529,7 +7529,7 @@ iframe.commit(() => {
   })
 
   art.on('fullscreenWeb', (state) => {
-    ArtplayerPluginIframe.postMessage({
+    ArtplayerToolIframe.postMessage({
       type: 'fullscreenWeb',
       data: state,
     })

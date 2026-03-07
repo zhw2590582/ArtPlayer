@@ -63,7 +63,6 @@
       './assets/ts/artplayer-plugin-dash-control.d.ts',
       './assets/ts/artplayer-plugin-document-pip.d.ts',
       './assets/ts/artplayer-plugin-hls-control.d.ts',
-      './assets/ts/artplayer-plugin-iframe.d.ts',
       './assets/ts/artplayer-plugin-jassub.d.ts',
       './assets/ts/artplayer-plugin-multiple-subtitles.d.ts',
       './assets/ts/artplayer-plugin-vast.d.ts',
@@ -71,6 +70,7 @@
       './assets/ts/artplayer-plugin-websr.d.ts',
       './assets/ts/artplayer-proxy-canvas.d.ts',
       './assets/ts/artplayer-proxy-mediabunny.d.ts',
+      './assets/ts/artplayer-tool-iframe.d.ts',
       './assets/ts/artplayer.d.ts',
     ]
 

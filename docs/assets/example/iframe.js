@@ -1,5 +1,5 @@
-// npm i artplayer-plugin-iframe
-// import ArtplayerPluginIframe from 'artplayer-plugin-iframe';
+// npm i artplayer-tool-iframe
+// import ArtplayerToolIframe from 'artplayer-tool-iframe';
 
 const $iframe = document.createElement('iframe')
 $iframe.allowFullscreen = true
@@ -10,7 +10,7 @@ const $container = document.querySelector('.artplayer-app')
 $container.innerHTML = ''
 $container.appendChild($iframe)
 
-const iframe = new ArtplayerPluginIframe({
+const iframe = new ArtplayerToolIframe({
   iframe: $iframe,
   url: '/iframe.html',
 })
@@ -39,7 +39,7 @@ iframe.commit(() => {
   })
 
   art.on('fullscreenWeb', (state) => {
-    ArtplayerPluginIframe.postMessage({
+    ArtplayerToolIframe.postMessage({
       type: 'fullscreenWeb',
       data: state,
     })

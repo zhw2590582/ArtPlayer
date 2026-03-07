@@ -67,7 +67,7 @@ const config = {
             { text: '🎉 弹幕库', link: '/plugin/danmuku' },
             { text: '弹幕遮罩', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask' },
             { text: '视频广告', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads' },
-            { text: 'Iframe 控制', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe' },
+            { text: 'Iframe 控制', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-tool-iframe/index.js&example=iframe' },
             { text: 'HLS 控制', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control' },
             { text: 'DASH 控制', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control' },
             { text: 'VTT 缩略图', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail' },
@@ -138,7 +138,7 @@ const config = {
           collapsible: true,
           items: [
             { text: 'Advertise', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads' },
-            { text: 'Iframe Control', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe' },
+            { text: 'Iframe Control', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-tool-iframe/index.js&example=iframe' },
             { text: 'HLS Control', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control' },
             { text: 'DASH Control', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control' },
             { text: 'VTT Thumbnail', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail' },

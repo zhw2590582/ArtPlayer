@@ -1,0 +1,37 @@
+{
+  "name": "artplayer-tool-iframe",
+  "version": "1.0.1",
+  "description": "Iframe tool for ArtPlayer",
+  "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/artplayer-tool-iframe.d.ts",
+      "import": "./dist/artplayer-tool-iframe.mjs",
+      "require": "./dist/artplayer-tool-iframe.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-tool-iframe.d.ts",
+      "import": "./dist/artplayer-tool-iframe.legacy.js",
+      "require": "./dist/artplayer-tool-iframe.legacy.js"
+    }
+  },
+  "main": "./dist/artplayer-tool-iframe.js",
+  "module": "./dist/artplayer-tool-iframe.mjs",
+  "types": "./types/artplayer-tool-iframe.d.ts",
+  "legacy": "./dist/artplayer-tool-iframe.legacy.js",
+  "browserslist": "last 1 Chrome version"
+}

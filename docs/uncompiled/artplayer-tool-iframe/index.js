@@ -1,11 +1,11 @@
-var artplayerPluginIframe = (function() {
+var ArtplayerToolIframe = (function() {
   "use strict";
-  class ArtplayerToolIframe {
+  class ArtplayerToolIframe2 {
     static get iframe() {
       return window.top !== window;
     }
     static postMessage({ type, data, id = 0 }) {
-      if (!ArtplayerToolIframe.iframe) {
+      if (!ArtplayerToolIframe2.iframe) {
         throw new Error('The "ArtplayerToolIframe.postMessage" method can only be used in iframe');
       }
       window.parent.postMessage(
@@ -18,7 +18,7 @@ var artplayerPluginIframe = (function() {
       );
     }
     static async onMessage(event) {
-      if (!ArtplayerToolIframe.iframe) {
+      if (!ArtplayerToolIframe2.iframe) {
         throw new Error('The "ArtplayerToolIframe.onMessage" method can only be used in iframe');
       }
       const { type, data, id } = event.data;
@@ -30,24 +30,24 @@ var artplayerPluginIframe = (function() {
 ${data}
 })`;
               const result = await new Function(string)();
-              ArtplayerToolIframe.postMessage({ type: "response", data: result, id });
+              ArtplayerToolIframe2.postMessage({ type: "response", data: result, id });
             } else {
               const result = new Function(data)();
-              ArtplayerToolIframe.postMessage({ type: "response", data: result, id });
+              ArtplayerToolIframe2.postMessage({ type: "response", data: result, id });
             }
           } catch (error) {
-            ArtplayerToolIframe.postMessage({ type: "error", data: error.message, id });
+            ArtplayerToolIframe2.postMessage({ type: "error", data: error.message, id });
             throw error;
           }
           break;
       }
     }
     static inject() {
-      if (!ArtplayerToolIframe.iframe) {
+      if (!ArtplayerToolIframe2.iframe) {
         throw new Error('The "ArtplayerToolIframe.inject" method can only be used in iframe');
       }
-      ArtplayerToolIframe.postMessage({ type: "inject" });
-      window.addEventListener("message", ArtplayerToolIframe.onMessage);
+      ArtplayerToolIframe2.postMessage({ type: "inject" });
+      window.addEventListener("message", ArtplayerToolIframe2.onMessage);
     }
     constructor({ iframe, url }) {
       if (iframe instanceof HTMLIFrameElement === false) {
@@ -128,5 +128,5 @@ ${data}
       window.removeEventListener("message", this.onMessage);
     }
   }
-  return ArtplayerToolIframe;
+  return ArtplayerToolIframe2;
 })();

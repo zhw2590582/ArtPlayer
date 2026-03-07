@@ -4,7 +4,7 @@ interface Message {
   id?: number
 }
 
-declare class ArtplayerPluginIframe {
+declare class ArtplayerToolIframe {
   constructor(option: { iframe: HTMLIFrameElement, url: string })
 
   static iframe: boolean
@@ -26,4 +26,4 @@ declare class ArtplayerPluginIframe {
   destroy(): void
 }
 
-export default ArtplayerPluginIframe
+export default ArtplayerToolIframe

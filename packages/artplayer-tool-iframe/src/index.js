@@ -1,11 +1,11 @@
-export default class ArtplayerPluginIframe {
+export default class ArtplayerToolIframe {
   static get iframe() {
     return window.top !== window
   }
 
   static postMessage({ type, data, id = 0 }) {
-    if (!ArtplayerPluginIframe.iframe) {
-      throw new Error('The "ArtplayerPluginIframe.postMessage" method can only be used in iframe')
+    if (!ArtplayerToolIframe.iframe) {
+      throw new Error('The "ArtplayerToolIframe.postMessage" method can only be used in iframe')
     }
 
     window.parent.postMessage(
@@ -19,8 +19,8 @@ export default class ArtplayerPluginIframe {
   }
 
   static async onMessage(event) {
-    if (!ArtplayerPluginIframe.iframe) {
-      throw new Error('The "ArtplayerPluginIframe.onMessage" method can only be used in iframe')
+    if (!ArtplayerToolIframe.iframe) {
+      throw new Error('The "ArtplayerToolIframe.onMessage" method can only be used in iframe')
     }
 
     const { type, data, id } = event.data
@@ -31,16 +31,16 @@ export default class ArtplayerPluginIframe {
             const string = `return new Promise(function(resolve){\n${data}\n})`
             // eslint-disable-next-line no-new-func
             const result = await new Function(string)()
-            ArtplayerPluginIframe.postMessage({ type: 'response', data: result, id })
+            ArtplayerToolIframe.postMessage({ type: 'response', data: result, id })
           }
           else {
             // eslint-disable-next-line no-new-func
             const result = new Function(data)()
-            ArtplayerPluginIframe.postMessage({ type: 'response', data: result, id })
+            ArtplayerToolIframe.postMessage({ type: 'response', data: result, id })
           }
         }
         catch (error) {
-          ArtplayerPluginIframe.postMessage({ type: 'error', data: error.message, id })
+          ArtplayerToolIframe.postMessage({ type: 'error', data: error.message, id })
           throw error
         }
         break
@@ -50,12 +50,12 @@ export default class ArtplayerPluginIframe {
   }
 
   static inject() {
-    if (!ArtplayerPluginIframe.iframe) {
-      throw new Error('The "ArtplayerPluginIframe.inject" method can only be used in iframe')
+    if (!ArtplayerToolIframe.iframe) {
+      throw new Error('The "ArtplayerToolIframe.inject" method can only be used in iframe')
     }
 
-    ArtplayerPluginIframe.postMessage({ type: 'inject' })
-    window.addEventListener('message', ArtplayerPluginIframe.onMessage)
+    ArtplayerToolIframe.postMessage({ type: 'inject' })
+    window.addEventListener('message', ArtplayerToolIframe.onMessage)
   }
 
   constructor({ iframe, url }) {
