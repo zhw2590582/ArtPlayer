@@ -67,7 +67,7 @@ async function build(name, targetName, clean = false) {
 
   const outFile = path.join(distDir, fileName)
   const size = (fs.statSync(outFile).size / 1024).toFixed(2)
-  await cpy(outFile, compiledPath)
+  await cpy(outFile, compiledPath, { flat: true })
 
   console.log(`✨ Built@${targetName} ${name}@${version} Time@${Date.now() - startTime}ms Size@${size}kb`)
 }
