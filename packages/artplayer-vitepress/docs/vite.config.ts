@@ -1,7 +1,6 @@
 import { SearchPlugin } from "vitepress-plugin-search";
-import { defineConfig } from "vite";
 
-export default defineConfig({
+export default {
   plugins: [
     SearchPlugin({
       placeholder: "Search docs",
@@ -9,4 +8,4 @@ export default defineConfig({
       previewLength: 62,
     }),
   ],
-});
+};
