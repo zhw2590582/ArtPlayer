@@ -150,7 +150,3 @@ export default function artplayerPluginHlsControl(option = {}) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginHlsControl = artplayerPluginHlsControl
-}

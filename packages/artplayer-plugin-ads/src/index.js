@@ -292,7 +292,3 @@ if (typeof document !== 'undefined') {
     document.head.appendChild($style)
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginAds = artplayerPluginAds
-}

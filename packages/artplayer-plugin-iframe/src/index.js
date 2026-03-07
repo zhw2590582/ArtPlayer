@@ -152,7 +152,3 @@ export default class ArtplayerPluginIframe {
     window.removeEventListener('message', this.onMessage)
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.ArtplayerPluginIframe = ArtplayerPluginIframe
-}

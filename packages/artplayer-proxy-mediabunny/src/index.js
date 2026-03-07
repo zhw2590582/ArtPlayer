@@ -83,7 +83,3 @@ export default function artplayerProxyMediabunny(option = {}) {
     return canvas
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerProxyMediabunny = artplayerProxyMediabunny
-}

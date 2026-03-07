@@ -19,7 +19,3 @@ export default function artplayerPluginJassub(option) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginJassub = artplayerPluginJassub
-}

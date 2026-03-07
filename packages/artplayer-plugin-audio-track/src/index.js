@@ -99,7 +99,3 @@ export default function artplayerPluginAudioTrack(option) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginAudioTrack = artplayerPluginAudioTrack
-}

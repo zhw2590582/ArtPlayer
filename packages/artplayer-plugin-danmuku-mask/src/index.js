@@ -157,7 +157,3 @@ export default function artplayerPluginDanmukuMask(option = {}) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginDanmukuMask = artplayerPluginDanmukuMask
-}

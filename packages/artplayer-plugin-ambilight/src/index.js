@@ -113,7 +113,3 @@ export default function artplayerPluginAmbilight(option = {}) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginAmbilight = artplayerPluginAmbilight
-}

@@ -34,7 +34,3 @@ export default function artplayerPluginDanmuku(option) {
 }
 
 artplayerPluginDanmuku.icons = Setting.icons
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginDanmuku = artplayerPluginDanmuku
-}

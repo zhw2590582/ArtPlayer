@@ -175,7 +175,3 @@ export default function artplayerPluginDashControl(option = {}) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginDashControl = artplayerPluginDashControl
-}

@@ -62,7 +62,3 @@ export default function artplayerPluginAutoThumbnail(option) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginAutoThumbnail = artplayerPluginAutoThumbnail
-}

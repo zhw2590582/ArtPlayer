@@ -221,5 +221,3 @@ export default class ArtplayerToolThumbnail extends Emitter {
     this.emit('destroy')
   }
 }
-
-window.ArtplayerToolThumbnail = ArtplayerToolThumbnail

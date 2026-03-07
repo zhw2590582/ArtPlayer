@@ -128,7 +128,3 @@ export default function artplayerPluginVast(callback) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginVast = artplayerPluginVast
-}

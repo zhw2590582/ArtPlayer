@@ -4991,7 +4991,6 @@ ${line.text}`;
   Artplayer2.USE_RAF = false;
   Artplayer2.REMOVE_SRC_WHEN_DESTROY = true;
   if (isBrowser) {
-    window.Artplayer = Artplayer2;
     setStyleText("artplayer-style", style);
     setTimeout(() => {
       if (Artplayer2.LOG_VERSION) {

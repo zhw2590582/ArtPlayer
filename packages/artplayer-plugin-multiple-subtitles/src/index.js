@@ -93,7 +93,3 @@ export default function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginMultipleSubtitles = artplayerPluginMultipleSubtitles
-}

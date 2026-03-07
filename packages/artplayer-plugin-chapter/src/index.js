@@ -186,7 +186,3 @@ if (typeof document !== 'undefined') {
   }
   $style.textContent = style
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginChapter = artplayerPluginChapter
-}

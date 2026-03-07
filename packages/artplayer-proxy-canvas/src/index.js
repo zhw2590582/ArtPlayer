@@ -137,7 +137,3 @@ export default function artplayerProxyCanvas(callback) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerProxyCanvas = artplayerProxyCanvas
-}

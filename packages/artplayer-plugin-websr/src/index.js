@@ -247,8 +247,4 @@ function artplayerPluginWebsr(
   }
 }
 
-if (typeof window !== 'undefined') {
-  window.artplayerPluginWebsr = artplayerPluginWebsr
-}
-
 export default artplayerPluginWebsr

@@ -193,10 +193,6 @@ export default function artplayerPluginDocumentPip(userOptions = {}) {
   }
 }
 
-if (typeof window !== 'undefined') {
-  window.artplayerPluginDocumentPip = artplayerPluginDocumentPip
-}
-
 if (typeof document !== 'undefined') {
   const id = 'artplayer-plugin-document-pip'
   let $style = document.getElementById(id)

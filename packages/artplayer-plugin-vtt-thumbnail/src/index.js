@@ -72,7 +72,3 @@ export default function artplayerPluginVttThumbnail(option) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginVttThumbnail = artplayerPluginVttThumbnail
-}

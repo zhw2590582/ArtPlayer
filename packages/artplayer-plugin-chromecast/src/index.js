@@ -187,7 +187,3 @@ export default function artplayerPluginChromecast(option) {
     }
   }
 }
-
-if (typeof window !== 'undefined') {
-  window.artplayerPluginChromecast = artplayerPluginChromecast
-}
