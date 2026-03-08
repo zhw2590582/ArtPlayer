@@ -7,11 +7,11 @@
 | `disable` | `Boolean`           | Whether to disable the component     |
 | `name`    | `String`            | Unique component name for CSS class  |
 | `index`   | `Number`            | Component index for display priority |
-| `html`    | `String`, `Element` | Component DOM element                |
+| `html`    | `String`, `Element` | DOM element of the component         |
 | `style`   | `Object`            | Component style object               |
 | `click`   | `Function`          | Component click event                |
 | `mounted` | `Function`          | Triggered after component mount      |
-| `tooltip` | `String`            | Component tooltip text               |
+| `tooltip` | `String`            | Tooltip text for the component       |
 
 ## Creation
 
@@ -64,7 +64,7 @@ art.contextmenu.show = true;
 console.info(art.contextmenu['your-menu']);
 ```
 
-## Removal
+## Deletion
 
 <div className="run-code">▶ Run Code</div>
 

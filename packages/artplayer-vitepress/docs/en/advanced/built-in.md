@@ -49,7 +49,7 @@ This is the definition of all `DOM` elements: [artplayer/types/template.d.ts](ht
 
 ## `events`
 
-Manages all `DOM` events for the player. It essentially proxies `addEventListener` and `removeEventListener`. When using the following methods to handle events, the event will be automatically destroyed when the player is destroyed.
+Manages all `DOM` events for the player. It essentially proxies `addEventListener` and `removeEventListener`. When using the following methods to handle events, the events will also be automatically destroyed when the player is destroyed.
 
 - The `proxy` method is used to proxy `DOM` events.
 - The `hover` method is used to proxy custom `hover` events.
@@ -77,7 +77,7 @@ art.events.hover(container, (event) => {
 
 :::warning Note
 
-If you need `DOM` events that only exist during the player's lifecycle, it is strongly recommended to use these functions to avoid memory leaks.
+If you need `DOM` events that should only exist during the player's lifecycle, it is strongly recommended to use these functions to avoid memory leaks.
 
 :::
 
@@ -86,10 +86,10 @@ If you need `DOM` events that only exist during the player's lifecycle, it is st
 Manages the player's local storage.
 
 - The `name` property is used to set the cache `key`.
-- The `set` method is used to set a cache value.
-- The `get` method is used to get a cache value.
-- The `del` method is used to delete a cache value.
-- The `clear` method is used to clear all cache.
+- The `set` method is used to set a cache.
+- The `get` method is used to retrieve a cache.
+- The `del` method is used to delete a cache.
+- The `clear` method is used to clear all caches.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -151,7 +151,7 @@ console.info(art.icons.loading);
 
 Manages the player's `i18n`.
 
-- The `get` method is used to get an `i18n` value.
+- The `get` method is used to retrieve an `i18n` value.
 - The `update` method is used to update the `i18n` object.
 
 <div className="run-code">▶ Run Code</div>
@@ -173,7 +173,7 @@ art.i18n.update({
 
 :::warning
 
-Using `art.i18n.update` can only update the `i18n` after instantiation. If you want to update the `i18n` before instantiation, please use the `i18n` option in the basic options.
+Using `art.i18n.update` can only update the `i18n` after instantiation. If you want to update `i18n` before instantiation, please use the `i18n` option in the basic settings.
 
 :::
 
@@ -207,8 +207,8 @@ Manages the player's layers.
 - The `add` method is used to dynamically add a layer.
 - The `remove` method is used to dynamically remove a layer.
 - The `update` method is used to dynamically update a layer.
-- The `show` property is used to set whether all layers are visible.
-- The `toggle` method is used to toggle the visibility of all layers.
+- The `show` property is used to set whether all layers are displayed.
+- The `toggle` method is used to toggle the display of all layers.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -229,7 +229,7 @@ art.on('ready', () => {
 });
 ```
 
-:::warning Refer to the following address for `Component Configuration`:
+:::warning For `Component Configuration`, please refer to:
 
 [/component/layers.html](/component/layers.html)
 
@@ -469,7 +469,7 @@ art.on('ready', () => {
 });
 ```
 
-:::warning For the `Settings Panel`, please refer to:
+:::warning For `Settings Panel`, please refer to
 
 [/component/setting.html](/component/setting.html)
 
@@ -477,7 +477,7 @@ art.on('ready', () => {
 
 ## `plugins`
 
-Manages the player's plugin functionality, with only the `add` method for dynamically adding plugins
+Manages the player's plugin functionality, with only one method `add` for dynamically adding plugins
 
 <div className="run-code">▶ Run Code</div>
 

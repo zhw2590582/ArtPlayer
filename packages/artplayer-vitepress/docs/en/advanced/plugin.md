@@ -1,8 +1,8 @@
 # Writing Plugins
 
-Once you are familiar with the player's `properties`, `methods`, and `events`, writing plugins becomes very straightforward.
+Once you are familiar with the player's `properties`, `methods`, and `events`, writing a plugin becomes a very straightforward task.
 
-You can load plugin functions during instantiation:
+You can load a plugin function during instantiation.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -29,7 +29,7 @@ art.on('ready', () => {
 });
 ```
 
-You can also load plugin functions after instantiation:
+You can also load a plugin function after instantiation.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -57,7 +57,7 @@ art.on('ready', () => {
 });
 ```
 
-For example, let's say I want to write a plugin that displays an image ad when the video is paused:
+For example, let's say I want to write a plugin that displays an image ad when the video is paused.
 
 <div className="run-code">▶ Run Code</div>
 

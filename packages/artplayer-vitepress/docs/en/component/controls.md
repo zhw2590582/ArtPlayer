@@ -2,19 +2,19 @@
 
 ## Configuration
 
-| Property    | Type                | Description                                      |
-| ----------- | ------------------- | ------------------------------------------------ |
-| `disable`   | `Boolean`           | Whether to disable the control                   |
-| `name`      | `String`            | Unique control name for CSS class identification |
-| `index`     | `Number`            | Control index for display priority               |
-| `html`      | `String`, `Element` | Control's DOM element                            |
-| `style`     | `Object`            | Control style object                             |
-| `click`     | `Function`          | Control click event handler                      |
-| `mounted`   | `Function`          | Triggered after control is mounted               |
-| `tooltip`   | `String`            | Control tooltip text                             |
-| `position`  | `String`            | `left` or `right` - controls display position    |
-| `selector`  | `Array`             | Array of selector list objects                   |
-| `onSelect`  | `Function`          | Function triggered when selector item is clicked |
+| Property   | Type                | Description                                      |
+| ---------- | ------------------- | ------------------------------------------------ |
+| `disable`  | `Boolean`           | Whether to disable the control                   |
+| `name`     | `String`            | Unique name of the control, used for class marking |
+| `index`    | `Number`            | Control index, determines display priority       |
+| `html`     | `String`, `Element` | DOM element of the control                       |
+| `style`    | `Object`            | Style object for the control                     |
+| `click`    | `Function`          | Click event handler for the control              |
+| `mounted`  | `Function`          | Triggered after the control is mounted           |
+| `tooltip`  | `String`            | Tooltip text for the control                     |
+| `position` | `String`            | `left` or `right` - controls which side the control appears on |
+| `selector` | `Array`             | Array of objects for selection list              |
+| `onSelect` | `Function`          | Function triggered when a selection list item is clicked |
 
 ## Creation
 

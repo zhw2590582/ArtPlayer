@@ -1,10 +1,10 @@
 # Static Properties
 
-Here, `Static Properties` refer to the `top-level properties` mounted on the `constructor function`, which are very rarely used.
+Here, `static properties` refer to the `first-level properties` attached to the `constructor`, which are rarely used.
 
 ## `instances`
 
-Returns an array of all player instances. This property can be useful when you need to manage multiple player instances simultaneously.
+Returns an array of all player instances. This property can be useful when you need to manage multiple players simultaneously.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -41,7 +41,7 @@ console.info(Artplayer.env);
 
 ## `build`
 
-Returns the build time of the player.
+Returns the build timestamp of the player.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -87,7 +87,7 @@ console.info(Artplayer.scheme);
 
 ## `Emitter`
 
-Returns the constructor function for the event emitter.
+Returns the constructor of the event emitter.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -107,7 +107,7 @@ console.info(Artplayer.validator);
 
 ## `kindOf`
 
-Returns the utility function for type detection.
+Returns the type detection utility function.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -127,7 +127,7 @@ console.info(Artplayer.html);
 
 ## `option`
 
-Returns the default options for the player.
+Returns the default options of the player.
 
 <div className="run-code">▶ Run Code</div>
 

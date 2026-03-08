@@ -1,10 +1,10 @@
 # Global Properties
 
-These `global properties` refer to the `top-level properties` mounted on the `constructor`. The property names are all in uppercase. They are subject to change in the future and are generally not used.
+The `global properties` here refer to the `top-level properties` mounted on the `constructor`. All property names are in uppercase. These are subject to change in the future and are rarely used.
 
 ## DEBUG
 
-Whether to enable `debug` mode, which can print all built-in events of the video. Default is off.
+Whether to enable `debug` mode, which can print all built-in video events. Default is off.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -44,7 +44,7 @@ var art = new Artplayer({
 
 ## NOTICE_TIME
 
-The display duration for notification messages, in milliseconds. Default is `2000`.
+The display duration of notification messages, in milliseconds. Default is `2000`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -79,7 +79,7 @@ var art = new Artplayer({
 
 ## SETTING_ITEM_WIDTH
 
-The default width of settings items in the settings panel, in pixels. Default is `200`.
+The default width of a setting item in the settings panel, in pixels. Default is `200`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -99,7 +99,7 @@ var art = new Artplayer({
 
 ## SETTING_ITEM_HEIGHT
 
-The default height of settings items in the settings panel, in pixels. Default is `35`.
+The default height of a setting item in the settings panel, in pixels. Default is `35`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -255,7 +255,7 @@ var art = new Artplayer({
 
 ## CONTROL_HIDE_TIME
 
-The delay time in milliseconds for auto-hiding the bottom control bar. Default is `3000`.
+The auto-hide delay time for the bottom control bar, in milliseconds. Default is `3000`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -270,7 +270,7 @@ var art = new Artplayer({
 
 ## DBCLICK_TIME
 
-The delay time in milliseconds for double-click events. Default is `300`.
+The delay time for the double-click event, in milliseconds. Default is `300`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -289,7 +289,7 @@ art.on('dblclick', () => {
 
 ## DBCLICK_FULLSCREEN
 
-On desktop, whether double-click toggles fullscreen mode. Default is `true`.
+On desktop, whether double-click toggles fullscreen. Default is `true`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -304,7 +304,7 @@ var art = new Artplayer({
 
 ## MOBILE_DBCLICK_PLAY
 
-On mobile devices, whether double-click toggles play/pause. Default is `true`.
+On mobile, whether double-click toggles play/pause. Default is `true`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -319,7 +319,7 @@ var art = new Artplayer({
 
 ## MOBILE_CLICK_PLAY
 
-On mobile devices, whether single-click toggles play/pause. Default is `false`.
+On mobile, whether single-click toggles play/pause. Default is `false`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -334,7 +334,7 @@ var art = new Artplayer({
 
 ## AUTO_ORIENTATION_TIME
 
-On mobile devices, the delay time in milliseconds for automatic screen rotation. Default is `200`.
+On mobile, the delay time for auto-rotation, in milliseconds. Default is `200`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -350,7 +350,7 @@ var art = new Artplayer({
 
 ## INFO_LOOP_TIME
 
-The refresh interval in milliseconds for the information panel. Default is `1000`.
+The refresh interval for the info panel, in milliseconds. Default is `1000`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -367,7 +367,7 @@ art.info.show = true;
 
 ## FAST_FORWARD_VALUE
 
-On mobile devices, the speed multiplier for fast-forward during long-press. Default is `3`.
+On mobile, the speed multiplier for long-press fast-forward. Default is `3`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -383,7 +383,7 @@ var art = new Artplayer({
 
 ## FAST_FORWARD_TIME
 
-On mobile devices, the delay time in milliseconds for activating fast-forward during long-press. Default is `1000`.
+On mobile, the delay time for long-press fast-forward, in milliseconds. Default is `1000`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -399,7 +399,7 @@ var art = new Artplayer({
 
 ## TOUCH_MOVE_RATIO
 
-On mobile devices, the speed multiplier for seeking when swiping left/right. Default is `0.5`.
+On mobile, the speed multiplier for left/right swipe to seek. Default is `0.5`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -414,7 +414,7 @@ var art = new Artplayer({
 
 ## VOLUME_STEP
 
-The volume adjustment step for keyboard shortcuts. Default is `0.1`.
+The step size for volume adjustment via keyboard shortcuts. Default is `0.1`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -429,7 +429,7 @@ var art = new Artplayer({
 
 ## SEEK_STEP
 
-The seeking step in seconds for keyboard shortcuts. Default is `5`.
+The step size for seeking via keyboard shortcuts, in seconds. Default is `5`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -484,7 +484,7 @@ art.setting.show = true;
 
 ## FLIP
 
-The built-in list of video flip modes. Default is `['normal', 'horizontal', 'vertical']`.
+The built-in list of video flip options. Default is `['normal', 'horizontal', 'vertical']`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -505,7 +505,7 @@ art.setting.show = true;
 
 ## FULLSCREEN_WEB_IN_BODY
 
-Determines whether to mount the player under the `body` element during web fullscreen mode. Defaults to `true`.
+Whether to mount the player under the `body` element during web fullscreen mode. Default is `true`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -521,7 +521,7 @@ var art = new Artplayer({
 
 ## LOG_VERSION
 
-Sets whether to print the player version. Defaults to `true`.
+Sets whether to print the player version. Default is `true`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -536,7 +536,7 @@ var art = new Artplayer({
 
 ## USE_RAF
 
-Sets whether to use `requestAnimationFrame`. Defaults to `false`. Currently mainly used for smooth progress bar effects.
+Sets whether to use `requestAnimationFrame`. Default is `false`. Currently, it is primarily used for smooth progress bar effects.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -552,9 +552,9 @@ var art = new Artplayer({
 
 ## REMOVE_SRC_WHEN_DESTROY
 
-Determines whether to remove the video's `src` attribute and call `load()` to actively release media resources when destroying the player. Defaults to `true`.
+Whether to remove the video's `src` attribute and call `load()` to actively release media resources when destroying the player. Default is `true`.
 
-When enabled, this can reduce video resource usage in single-page applications or scenarios where players are frequently created/destroyed. If you wish to preserve the video element's state and only remove the UI, set this to `false`.
+Enabling this can reduce video resource usage in single-page applications or scenarios where players are frequently created/destroyed. If you wish to preserve the state of the video element and only remove the UI, you can set this to `false`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -566,6 +566,6 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-// Only destroys the UI, does not actively clear src
+// Only destroy the UI, do not actively clear the src
 art.destroy();
 ```

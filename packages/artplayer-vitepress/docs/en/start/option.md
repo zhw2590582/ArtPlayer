@@ -11,13 +11,13 @@ The `DOM` container where the player is mounted.
 
 ```js{2}
 var art = new Artplayer({
-    container: '.artplayer-app', 
+    container: '.artplayer-app',
     // container: document.querySelector('.artplayer-app'),
     url: '/assets/sample/video.mp4',
 });
 ```
 
-You may need to initialize the size of the container element, for example:
+You may need to set the size of the container element, for example:
 
 ```css{2-3}
 .artplayer-app {
@@ -56,7 +56,7 @@ var art = new Artplayer({
 });
 ```
 
-Sometimes the `url` is not known immediately; in such cases, you can set the `url` asynchronously.
+Sometimes the `url` is not known immediately. In such cases, you can set the `url` asynchronously.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -83,7 +83,7 @@ To play other formats like `.m3u8` or `.flv`, please refer to the `Third-party L
 -   Type: `String`
 -   Default: `''`
 
-The unique identifier for the player, currently only used for playback resumption `autoplayback`.
+The unique identifier for the player. Currently used only for playback memory `autoplayback`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -100,7 +100,7 @@ var art = new Artplayer({
 -   Type: `Function`
 -   Default: `undefined`
 
-The constructor accepts a function as the second parameter, which is triggered when the player is successfully initialized and the video is ready to play, similar to the `ready` event.
+The constructor accepts a function as the second parameter. This function is triggered when the player is successfully initialized and the video is ready to play, similar to the `ready` event.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -176,7 +176,7 @@ var art = new Artplayer({
 -   Type: `Number`
 -   Default: `0.7`
 
-The default volume of the player.
+The player's default volume.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -190,7 +190,7 @@ var art = new Artplayer({
 
 :::warning Note
 
-The player caches the last volume level; upon next initialization (e.g., page refresh), the player will read this cached value.
+The player caches the last volume setting. Upon the next initialization (e.g., page refresh), the player will read this cached value.
 
 :::
 
@@ -199,7 +199,7 @@ The player caches the last volume level; upon next initialization (e.g., page re
 -   Type: `Boolean`
 -   Default: `false`
 
-Enable live streaming mode, which hides the progress bar and playback time.
+Enable live streaming mode. This will hide the progress bar and playback time.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -216,7 +216,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to mute by default.
+Whether to start muted by default.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -257,7 +257,7 @@ If you want the video to autoplay immediately upon page load, `muted` must be se
 -   Type: `Boolean`
 -   Default: `false`
 
-By default, the player's dimensions fill the entire `container` size, often resulting in black bars. This option automatically adjusts the player size to hide the black bars, similar to `object-fit: cover;` in CSS.
+By default, the player's dimensions fill the entire `container`, often resulting in black bars. This option automatically adjusts the player size to hide black bars, similar to `css`'s `object-fit: cover;`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -275,7 +275,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Automatically enters `mini player` mode when the player scrolls out of the browser viewport.
+Automatically enters `Mini Player` mode when the player scrolls out of the browser viewport.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -292,7 +292,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to enable video looping.
+Whether to loop playback.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -309,7 +309,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to display the video flip functionality. Currently appears in the `Settings Panel` and `Context Menu`.
+Whether to display the video flip function. Currently only appears in the `Settings Panel` and `Context Menu`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -327,7 +327,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to display the video playback rate functionality. Appears in the `Settings Panel` and `Context Menu`.
+Whether to display the video playback speed function. It will appear in the `Settings Panel` and `Context Menu`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -345,7 +345,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to display the video aspect ratio functionality. Appears in the `Settings Panel` and `Context Menu`.
+Whether to display the video aspect ratio function. It will appear in the `Settings Panel` and `Context Menu`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -363,7 +363,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to display the `Video Screenshot` functionality in the bottom control bar.
+Whether to display the `Screenshot` function in the bottom control bar.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -377,7 +377,7 @@ var art = new Artplayer({
 
 :::warning Note
 
-Due to browser security mechanisms, screenshot capture may fail if the video source URL is cross-origin with the website.
+Due to browser security mechanisms, screenshotting may fail if the video source URL is cross-origin with the website.
 
 :::
 
@@ -403,7 +403,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `true`
 
-Whether to enable hotkeys.
+Whether to use hotkeys.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -425,7 +425,7 @@ var art = new Artplayer({
 
 :::warning Note
 
-These hotkeys only take effect after the player gains focus (e.g., by clicking on the player).
+These hotkeys only take effect after the player gains focus (e.g., after clicking on the player).
 
 :::
 
@@ -451,7 +451,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `true`
 
-If multiple players exist simultaneously on the page, whether only one player is allowed to play at a time.
+If multiple players exist on the page simultaneously, whether only one player is allowed to play at a time.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -468,7 +468,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `true`
 
-Whether to enable the backdrop blur effect for the player UI. When enabled, overlays such as the settings panel, context menu, and volume bar will apply a `backdrop-filter` frosted glass effect for a more transparent appearance. However, this may cause performance or compatibility issues on some low-performance devices or older browsers.
+Whether to enable the backdrop blur effect for the player UI. When enabled, overlays such as the settings panel, context menu, and volume bar will apply a `backdrop-filter` frosted glass effect for a more transparent look. However, this may cause performance or compatibility issues on some low-performance devices or older browsers.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -502,7 +502,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to display the player `Webpage Fullscreen` button in the bottom control bar.
+Whether to display the player `Web Fullscreen` button in the bottom control bar.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -519,7 +519,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Subtitle timing offset, range within `[-5s, 5s]`. Appears in the `Settings Panel`.
+Subtitle time offset, ranging from `[-5s, 5s]`. Appears in the `Settings Panel`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -541,7 +541,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Mini progress bar that appears only when the player loses focus and is playing.
+A mini progress bar that only appears when the player loses focus and is playing.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -558,7 +558,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to use SSR mount mode. Useful if you want to pre-render the player's required HTML before mounting.
+Whether to use SSR (Server-Side Rendering) mount mode. Useful if you want to pre-render the player's required HTML before the player is mounted.
 
 You can access the player's required HTML via `Artplayer.html`.
 
@@ -639,7 +639,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-Initialize custom settings panel.
+Initialize custom settings panels.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -692,7 +692,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-Initialize custom context menu.
+Initialize custom context menus.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -748,7 +748,7 @@ var art = new Artplayer({
 
 ```
 
-:::warning For `Component Configuration`, please refer to:
+:::warning For `Component Configuration`, please refer to the following address:
 
 [/component/controls.html](/component/controls.html)
 
@@ -794,10 +794,10 @@ var art = new Artplayer({
 
 Display `Highlight Information` on the progress bar.
 
-| Property | Type     | Description                    |
-| -------- | -------- | ------------------------------ |
-| `time`   | `Number` | Highlight time (in seconds)    |
-| `text`   | `String` | Highlight text                 |
+| Property | Type     | Description                     |
+| -------- | -------- | ------------------------------- |
+| `time`   | `Number` | Highlight time (in seconds)     |
+| `text`   | `String` | Highlight text                  |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -899,7 +899,7 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-Set the video subtitle. Supported subtitle formats: `vtt`, `srt`, `ass`.
+Set video subtitles. Supported subtitle formats: `vtt`, `srt`, `ass`.
 
 | Property    | Type       | Description                                      |
 | ----------- | ---------- | ------------------------------------------------ |
@@ -907,8 +907,8 @@ Set the video subtitle. Supported subtitle formats: `vtt`, `srt`, `ass`.
 | `url`       | `String`   | Subtitle URL                                     |
 | `type`      | `String`   | Subtitle type, options: `vtt`, `srt`, `ass`      |
 | `style`     | `Object`   | Subtitle style                                   |
-| `encoding`  | `String`   | Subtitle encoding, default: `utf-8`              |
-| `escape`    | `Boolean`  | Whether to escape `html` tags, default: `true`   |
+| `encoding`  | `String`   | Subtitle encoding, default `utf-8`               |
+| `escape`    | `Boolean`  | Whether to escape `html` tags, default `true`    |
 | `onVttLoad` | `Function` | Function for modifying `vtt` text                |
 
 <div className="run-code">▶ Run Code</div>
@@ -933,9 +933,9 @@ var art = new Artplayer({
 ## `moreVideoAttr`
 
 -   Type: `Object`
--   Default: `{'controls': false, 'preload': 'metadata'}` (In Safari, it automatically adjusts to `preload: 'auto'` for better loading experience).
+-   Default: `{'controls': false, 'preload': 'metadata'}` (In Safari, it will automatically adjust to `preload: 'auto'` for better loading experience.)
 
-More video attributes. These attributes will be directly written into the video element.
+More video attributes. These attributes will be written directly into the video element.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -956,7 +956,7 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-Used to replace default icons, supports both `Html` strings and `HTMLElement`.
+Used to replace default icons. Supports `Html` strings and `HTMLElement`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -982,7 +982,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `''`
 
-Used to specify the video format. It needs to be used in conjunction with `customType`. By default, the video format is determined by the suffix of the video URL (e.g., `.m3u8`, `.mkv`, `.ts`). However, sometimes the video URL lacks the correct suffix, so explicit specification is necessary.
+Used to specify the video format. It needs to be used together with `customType`. By default, the video format is determined by the suffix of the video URL (e.g., `.m3u8`, `.mkv`, `.ts`). However, sometimes the video URL may not have the correct suffix, so it needs to be explicitly specified.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1000,7 +1000,7 @@ The player can only parse suffixes like this: `/assets/sample/video.m3u8`
 
 But cannot parse suffixes like this: `/assets/sample/video?type=m3u8`
 
-Therefore, if you use `customType`, it is best to also specify the `type`.
+Therefore, if you use `customType`, it's best to also specify the `type`.
 
 :::
 
@@ -1009,7 +1009,7 @@ Therefore, if you use `customType`, it is best to also specify the `type`.
 -   Type: `Object`
 -   Default: `{}`
 
-Matches based on the video's `type` and delegates video decoding to third-party programs. The handler function receives three parameters:
+Matches based on the video's `type` and delegates video decoding to third-party programs for processing. The processing function can receive three parameters:
 
 - `video`: The video `DOM` element
 - `url`: The video URL
@@ -1172,9 +1172,9 @@ var art = new Artplayer({
 
 :::warning Note
 
-By default, the player uses the `url` as the `key` to cache the playback progress.
+Because the player uses the `url` as the `key` to cache playback progress by default.
 
-However, if the same video has different `url`s, you need to use the `id` to identify the unique `key` for the video.
+However, if the `url` for the same video is different, then you need to use `id` to identify the unique `key` for the video.
 
 :::
 
@@ -1183,7 +1183,7 @@ However, if the same video has different `url`s, you need to use the `id` to ide
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to rotate the player during fullscreen mode on mobile web, based on the video dimensions and viewport size.
+Whether to rotate the player in fullscreen mode on mobile web, based on the video dimensions and viewport dimensions.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1217,7 +1217,7 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-Used to modify built-in CSS variables.
+Used to modify the built-in CSS variables.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1231,7 +1231,7 @@ var art = new Artplayer({
 });
 ```
 
-:::warning CSS Variable Reference
+:::warning Reference for `cssVar` Syntax
 
 [artplayer/types/cssVar.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts)
 
