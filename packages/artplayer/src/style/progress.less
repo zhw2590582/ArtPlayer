@@ -2,6 +2,7 @@
     .art-progress {
         position: relative;
         z-index: 0;
+        cursor: pointer;
         pointer-events: auto;
         padding-top: var(--art-progress-top-gap);
         padding-bottom: var(--art-bottom-gap);
@@ -9,7 +10,6 @@
         .art-control-progress {
             position: relative;
             .art-center();
-            cursor: pointer;
             height: var(--art-progress-height);
 
             .art-control-progress-inner {
@@ -97,12 +97,6 @@
                     transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;
                 }
             }
-
-            &:hover {
-                .art-control-progress-inner {
-                    height: 100%;
-                }
-            }
         }
 
         .art-control-thumbnails {
@@ -119,6 +113,12 @@
             box-shadow:
                 0 1px 3px 0 rgb(0 0 0 / 0.2),
                 0 1px 2px -1px rgb(0 0 0 / 0.2);
+        }
+
+        &:hover {
+            .art-control-progress .art-control-progress-inner {
+                height: 100%;
+            }
         }
     }
 
