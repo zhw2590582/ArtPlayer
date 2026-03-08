@@ -48,6 +48,7 @@
     "dotenv": "^17.2.1",
     "esbuild": "^0.27.3",
     "eslint": "^9.32.0",
+    "eslint-plugin-format": "^2.0.1",
     "glob": "^13.0.6",
     "lerna": "^8.2.3",
     "less": "^4.5.1",

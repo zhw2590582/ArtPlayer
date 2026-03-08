@@ -1,80 +1,80 @@
 .artplayer-plugin-ads {
+  position: absolute;
+  z-index: 150;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1;
+  color: #fff;
+  background-color: #000;
+
+  .artplayer-plugin-ads-html {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .artplayer-plugin-ads-video {
+    width: 100%;
+    height: 100%;
+  }
+
+  .artplayer-plugin-ads-timer {
+    display: none;
     position: absolute;
-    z-index: 150;
+    top: 10px;
+    right: 10px;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      background-color: rgb(0 0 0 / 50%);
+      border-radius: 15px;
+      margin-left: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  }
+
+  .artplayer-plugin-ads-control {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      background-color: rgb(0 0 0 / 50%);
+      border-radius: 15px;
+      margin-left: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .art-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .artplayer-plugin-ads-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    font-size: 13px;
-    line-height: 1;
-    color: #fff;
-    background-color: #000;
-
-    .artplayer-plugin-ads-html {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .artplayer-plugin-ads-video {
-        width: 100%;
-        height: 100%;
-    }
-
-    .artplayer-plugin-ads-timer {
-        display: none;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-
-        & > div {
-            display: flex;
-            align-items: center;
-            background-color: rgb(0 0 0 / 50%);
-            border-radius: 15px;
-            margin-left: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-    }
-
-    .artplayer-plugin-ads-control {
-        display: none;
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-
-        & > div {
-            display: flex;
-            align-items: center;
-            background-color: rgb(0 0 0 / 50%);
-            border-radius: 15px;
-            margin-left: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        .art-icon svg {
-            width: 20px;
-            height: 20px;
-        }
-    }
-
-    .artplayer-plugin-ads-loading {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-    }
+  }
 }

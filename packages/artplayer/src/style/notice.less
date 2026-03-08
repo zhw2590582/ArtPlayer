@@ -1,24 +1,24 @@
 .art-video-player {
+  .art-notice {
+    display: none;
+    .art-full(80);
+    height: auto;
+    bottom: auto;
+    padding: var(--art-padding);
+    pointer-events: none;
+
+    .art-notice-inner {
+      display: inline-flex;
+      padding: 5px;
+      line-height: 1;
+      border-radius: var(--art-border-radius);
+      background-color: var(--art-tip-background);
+    }
+  }
+
+  &.art-notice-show {
     .art-notice {
-        display: none;
-        .art-full(80);
-        height: auto;
-        bottom: auto;
-        padding: var(--art-padding);
-        pointer-events: none;
-
-        .art-notice-inner {
-            display: inline-flex;
-            padding: 5px;
-            line-height: 1;
-            border-radius: var(--art-border-radius);
-            background-color: var(--art-tip-background);
-        }
+      display: flex;
     }
-
-    &.art-notice-show {
-        .art-notice {
-            display: flex;
-        }
-    }
+  }
 }

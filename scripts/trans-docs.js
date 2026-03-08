@@ -112,7 +112,7 @@ function cleanTranslation(text) {
   return text
     .replace(/^```(markdown|md)?/gi, '')
     .replace(/```$/g, '')
-    .replace(/^(Here('|')s|Below is|Translation|The English version|Here is)[:：]?\s*/gi, '')
+    .replace(/^(Here(')s|Below is|Translation|The English version|Here is)[:：]?\s*/gi, '')
     .replace(/(Translation completed\.?|End of translation\.?)$/gi, '')
     .trim()
 }
@@ -141,7 +141,7 @@ async function callDeepSeekAPI(prompt, tag, chunkId) {
 
       // 处理限流情况
       if (res.status === 429) {
-        const delay = Math.pow(2, attempt) * 1000
+        const delay = 2 ** attempt * 1000
         console.log(`⏳ [${tag}] Rate limited, waiting ${delay}ms...`)
         await new Promise(r => setTimeout(r, delay))
         continue

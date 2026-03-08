@@ -1,32 +1,32 @@
 .art-video-player {
+  .art-bottom {
+    .art-full(60);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    padding: 0 var(--art-padding);
+    transition: all var(--art-transition-duration) ease;
+    background-size: 100% var(--art-bottom-height);
+    .art-bottom-gradient();
+
+    .art-controls,
+    .art-progress {
+      transform: translateY(var(--art-bottom-offset));
+      transition: transform var(--art-transition-duration) ease;
+    }
+  }
+
+  &.art-control-show,
+  &.art-hover {
     .art-bottom {
-        .art-full(60);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        opacity: 0;
-        overflow: hidden;
-        pointer-events: none;
-        padding: 0 var(--art-padding);
-        transition: all var(--art-transition-duration) ease;
-        background-size: 100% var(--art-bottom-height);
-        .art-bottom-gradient();
-
-        .art-controls,
-        .art-progress {
-            transform: translateY(var(--art-bottom-offset));
-            transition: transform var(--art-transition-duration) ease;
-        }
+      opacity: 1;
+      .art-controls,
+      .art-progress {
+        transform: translateY(0);
+      }
     }
-
-    &.art-control-show,
-    &.art-hover {
-        .art-bottom {
-            opacity: 1;
-            .art-controls,
-            .art-progress {
-                transform: translateY(0);
-            }
-        }
-    }
+  }
 }

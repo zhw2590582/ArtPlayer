@@ -1,72 +1,74 @@
 .artplayer-plugin-chapter {
-    .art-control-progress-inner {
-        height: 100% !important;
-        background-color: transparent !important;
+  .art-control-progress-inner {
+    height: 100% !important;
+    background-color: transparent !important;
 
-        &>.art-progress-hover,
-        &>.art-progress-loaded,
-        &>.art-progress-played {
-            display: none !important;
-        }
+    & > .art-progress-hover,
+    & > .art-progress-loaded,
+    & > .art-progress-played {
+      display: none !important;
     }
+  }
 
-    .art-control-thumbnails {
-        bottom: calc(var(--art-bottom-gap) + 64px) !important;
-    }
+  .art-control-thumbnails {
+    bottom: calc(var(--art-bottom-gap) + 64px) !important;
+  }
 
-    .art-chapters {
-        position: absolute;
-        z-index: 0;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        gap: 4px;
+  .art-chapters {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    transform: scaleY(1.25);
+
+    .art-chapter {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      .art-chapter-inner {
+        position: relative;
+        cursor: pointer;
+        width: 100%;
+        height: 50%;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: height var(--art-transition-duration) ease;
+        background-color: var(--art-progress-color);
+      }
+
+      &:hover .art-chapter-inner {
         height: 100%;
-        transform: scaleY(1.25);
-
-        .art-chapter {
-            display: flex;
-            align-items: center;
-            height: 100%;
-
-            .art-chapter-inner {
-                position: relative;
-                cursor: pointer;
-                width: 100%;
-                height: 50%;
-                border-radius: 10px;
-                overflow: hidden;
-                transition: height var(--art-transition-duration) ease;
-                background-color: var(--art-progress-color);
-            }
-
-            &:hover .art-chapter-inner {
-                height: 100%;
-            }
-        }
+      }
     }
+  }
 
+  .art-chapter-title {
+    transform-origin: bottom center;
+    transform: scale(0.5);
+    opacity: 0;
+    position: absolute;
+    z-index: 70;
+    top: -50px;
+    left: 0;
+    padding: 3px 5px;
+    line-height: 1;
+    font-size: 14px;
+    border-radius: var(--art-border-radius);
+    white-space: nowrap;
+    background-color: var(--art-tip-background);
+    transition:
+      transform var(--art-transition-duration) ease,
+      opacity var(--art-transition-duration) ease;
+  }
+
+  &.art-progress-hover {
     .art-chapter-title {
-        transform-origin: bottom center;
-        transform: scale(0.5);
-        opacity: 0;
-        position: absolute;
-        z-index: 70;
-        top: -50px;
-        left: 0;
-        padding: 3px 5px;
-        line-height: 1;
-        font-size: 14px;
-        border-radius: var(--art-border-radius);
-        white-space: nowrap;
-        background-color: var(--art-tip-background);
-        transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;
+      transform: scale(1);
+      opacity: 1;
     }
-
-    &.art-progress-hover {
-        .art-chapter-title {
-            transform: scale(1);
-            opacity: 1;
-        }
-    }
+  }
 }

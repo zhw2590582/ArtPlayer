@@ -1,17 +1,17 @@
 .art-video-player {
+  .art-layers {
+    .art-full(40);
+    display: none;
+    pointer-events: none;
+
+    .art-layer {
+      pointer-events: auto;
+    }
+  }
+
+  &.art-layer-show {
     .art-layers {
-        .art-full(40);
-        display: none;
-        pointer-events: none;
-
-        .art-layer {
-            pointer-events: auto;
-        }
+      display: flex;
     }
-
-    &.art-layer-show {
-        .art-layers {
-            display: flex;
-        }
-    }
+  }
 }

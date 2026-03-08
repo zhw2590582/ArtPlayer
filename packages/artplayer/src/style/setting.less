@@ -1,100 +1,100 @@
 .art-video-player {
+  .art-settings {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    z-index: 90;
+    left: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: var(--art-border-radius);
+    max-height: var(--art-settings-max-height);
+    right: var(--art-padding);
+    bottom: var(--art-control-height);
+    transition: all var(--art-transition-duration) ease;
+    background-color: var(--art-widget-background);
+
+    .art-setting-panel {
+      display: none;
+      flex-direction: column;
+
+      &.art-current {
+        display: flex;
+      }
+
+      .art-setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: background-color var(--art-transition-duration) ease;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &.art-current {
+          color: var(--art-theme);
+        }
+
+        .art-icon-check {
+          visibility: hidden;
+          height: 15px;
+        }
+
+        &.art-current .art-icon-check {
+          visibility: visible;
+        }
+
+        .art-setting-item-left {
+          .art-center();
+          flex-shrink: 0;
+          gap: 5px;
+
+          .art-setting-item-left-icon {
+            .art-center();
+            height: var(--art-settings-icon-size);
+            width: var(--art-settings-icon-size);
+          }
+        }
+
+        .art-setting-item-right {
+          .art-center();
+          gap: 5px;
+          font-size: 12px;
+
+          .art-setting-item-right-tooltip {
+            white-space: nowrap;
+            color: rgba(255, 255, 255, 0.5);
+          }
+
+          .art-setting-item-right-icon {
+            .art-center();
+            min-width: 32px;
+            height: 24px;
+          }
+
+          .art-setting-range {
+            height: 3px;
+            width: 80px;
+            outline: none;
+            appearance: none;
+            background-color: rgba(255, 255, 255, 0.2);
+          }
+        }
+      }
+
+      .art-setting-item-back {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  &.art-setting-show {
     .art-settings {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        z-index: 90;
-        left: auto;
-        overflow-y: auto;
-        overflow-x: hidden;
-        border-radius: var(--art-border-radius);
-        max-height: var(--art-settings-max-height);
-        right: var(--art-padding);
-        bottom: var(--art-control-height);
-        transition: all var(--art-transition-duration) ease;
-        background-color: var(--art-widget-background);
-
-        .art-setting-panel {
-            display: none;
-            flex-direction: column;
-
-            &.art-current {
-                display: flex;
-            }
-
-            .art-setting-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0 5px;
-                cursor: pointer;
-                overflow: hidden;
-                transition: background-color var(--art-transition-duration) ease;
-
-                &:hover {
-                    background-color: rgba(255, 255, 255, 0.1);
-                }
-
-                &.art-current {
-                    color: var(--art-theme);
-                }
-
-                .art-icon-check {
-                    visibility: hidden;
-                    height: 15px;
-                }
-
-                &.art-current .art-icon-check {
-                    visibility: visible;
-                }
-
-                .art-setting-item-left {
-                    .art-center();
-                    flex-shrink: 0;
-                    gap: 5px;
-
-                    .art-setting-item-left-icon {
-                        .art-center();
-                        height: var(--art-settings-icon-size);
-                        width: var(--art-settings-icon-size);
-                    }
-                }
-
-                .art-setting-item-right {
-                    .art-center();
-                    gap: 5px;
-                    font-size: 12px;
-
-                    .art-setting-item-right-tooltip {
-                        white-space: nowrap;
-                        color: rgba(255, 255, 255, 0.5);
-                    }
-
-                    .art-setting-item-right-icon {
-                        .art-center();
-                        min-width: 32px;
-                        height: 24px;
-                    }
-
-                    .art-setting-range {
-                        height: 3px;
-                        width: 80px;
-                        outline: none;
-                        appearance: none;
-                        background-color: rgba(255, 255, 255, 0.2);
-                    }
-                }
-            }
-
-            .art-setting-item-back {
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-        }
+      display: flex;
     }
-
-    &.art-setting-show {
-        .art-settings {
-            display: flex;
-        }
-    }
+  }
 }

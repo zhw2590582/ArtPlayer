@@ -1,74 +1,72 @@
 .art-video-player {
+  .art-layer-lock {
+    .art-center(none);
+    position: absolute;
+    top: 50%;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    height: var(--art-lock-size);
+    width: var(--art-lock-size);
+    left: var(--art-padding);
+    background-color: var(--art-tip-background);
+  }
+
+  .art-layer-auto-playback {
+    display: none;
+    gap: 10px;
+    align-items: center;
+    position: absolute;
+    border-radius: var(--art-border-radius);
+    padding: 10px;
+    line-height: 1;
+    left: var(--art-padding);
+    bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + 10px);
+    background-color: var(--art-widget-background);
+
+    .art-auto-playback-close {
+      .art-center();
+      cursor: pointer;
+
+      svg {
+        width: 15px;
+        height: 15px;
+        fill: var(--art-theme);
+      }
+    }
+
+    .art-auto-playback-jump {
+      color: var(--art-theme);
+      cursor: pointer;
+    }
+  }
+
+  &.art-lock {
+    .art-subtitle {
+      bottom: var(--art-subtitle-bottom) !important;
+    }
+  }
+
+  &.art-mini-progress-bar,
+  &.art-lock {
+    .art-bottom {
+      opacity: 1;
+      padding: 0;
+      background-image: none;
+
+      .art-controls,
+      .art-progress {
+        transform: translateY(calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4));
+      }
+
+      .art-progress-indicator {
+        display: none !important;
+      }
+    }
+  }
+
+  &.art-control-show {
     .art-layer-lock {
-        .art-center(none);
-        position: absolute;
-        top: 50%;
-        border-radius: 50%;
-        transform: translateY(-50%);
-        height: var(--art-lock-size);
-        width: var(--art-lock-size);
-        left: var(--art-padding);
-        background-color: var(--art-tip-background);
+      display: flex;
     }
-
-    .art-layer-auto-playback {
-        display: none;
-        gap: 10px;
-        align-items: center;
-        position: absolute;
-        border-radius: var(--art-border-radius);
-        padding: 10px;
-        line-height: 1;
-        left: var(--art-padding);
-        bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + 10px);
-        background-color: var(--art-widget-background);
-
-        .art-auto-playback-close {
-            .art-center();
-            cursor: pointer;
-
-            svg {
-                width: 15px;
-                height: 15px;
-                fill: var(--art-theme);
-            }
-        }
-
-        .art-auto-playback-jump {
-            color: var(--art-theme);
-            cursor: pointer;
-        }
-    }
-
-    &.art-lock {
-        .art-subtitle {
-            bottom: var(--art-subtitle-bottom) !important;
-        }
-    }
-
-    &.art-mini-progress-bar,
-    &.art-lock {
-        .art-bottom {
-            opacity: 1;
-            padding: 0;
-            background-image: none;
-
-            .art-controls,
-            .art-progress {
-                transform: translateY(
-                    calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4)
-                );
-            }
-
-            .art-progress-indicator {
-                display: none !important;
-            }
-        }
-    }
-
-    &.art-control-show {
-        .art-layer-lock {
-            display: flex;
-        }
-    }
+  }
 }

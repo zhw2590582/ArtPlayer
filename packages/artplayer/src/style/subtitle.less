@@ -1,37 +1,37 @@
 .art-video-player {
+  .art-subtitle {
+    .art-center(none);
+    flex-direction: column;
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    padding: 0 5%;
+    text-align: center;
+    pointer-events: none;
+    gap: var(--art-subtitle-gap);
+    bottom: var(--art-subtitle-bottom);
+    font-size: var(--art-subtitle-font-size);
+    transition: bottom var(--art-transition-duration) ease;
+    text-shadow:
+      var(--art-subtitle-border) 1px 0 1px,
+      var(--art-subtitle-border) 0 1px 1px,
+      var(--art-subtitle-border) -1px 0 1px,
+      var(--art-subtitle-border) 0 -1px 1px,
+      var(--art-subtitle-border) 1px 1px 1px,
+      var(--art-subtitle-border) -1px -1px 1px,
+      var(--art-subtitle-border) 1px -1px 1px,
+      var(--art-subtitle-border) -1px 1px 1px;
+  }
+
+  &.art-subtitle-show {
     .art-subtitle {
-        .art-center(none);
-        flex-direction: column;
-        position: absolute;
-        z-index: 20;
-        width: 100%;
-        padding: 0 5%;
-        text-align: center;
-        pointer-events: none;
-        gap: var(--art-subtitle-gap);
-        bottom: var(--art-subtitle-bottom);
-        font-size: var(--art-subtitle-font-size);
-        transition: bottom var(--art-transition-duration) ease;
-        text-shadow:
-            var(--art-subtitle-border) 1px 0 1px,
-            var(--art-subtitle-border) 0 1px 1px,
-            var(--art-subtitle-border) -1px 0 1px,
-            var(--art-subtitle-border) 0 -1px 1px,
-            var(--art-subtitle-border) 1px 1px 1px,
-            var(--art-subtitle-border) -1px -1px 1px,
-            var(--art-subtitle-border) 1px -1px 1px,
-            var(--art-subtitle-border) -1px 1px 1px;
+      display: flex;
     }
+  }
 
-    &.art-subtitle-show {
-        .art-subtitle {
-            display: flex;
-        }
+  &.art-control-show {
+    .art-subtitle {
+      bottom: calc(var(--art-control-height) + var(--art-subtitle-bottom));
     }
-
-    &.art-control-show {
-        .art-subtitle {
-            bottom: calc(var(--art-control-height) + var(--art-subtitle-bottom));
-        }
-    }
+  }
 }

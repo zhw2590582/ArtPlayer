@@ -1,63 +1,63 @@
 .art-mini-popup {
-    position: fixed;
-    z-index: 9999;
-    width: 320px;
-    height: 180px;
-    background: #000;
-    border-radius: var(--art-border-radius);
-    cursor: move;
-    user-select: none;
-    overflow: hidden;
+  position: fixed;
+  z-index: 9999;
+  width: 320px;
+  height: 180px;
+  background: #000;
+  border-radius: var(--art-border-radius);
+  cursor: move;
+  user-select: none;
+  overflow: hidden;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
+  svg {
+    fill: #fff;
+  }
+
+  .art-video {
+    pointer-events: none;
+  }
+
+  .art-mini-close {
+    position: absolute;
+    z-index: 20;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    opacity: 0;
     transition: opacity 0.2s ease;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
 
-    svg {
-        fill: #fff;
+  .art-mini-state {
+    .art-full(30);
+    .art-center();
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    background-color: rgba(0, 0, 0, 0.25);
+
+    .art-icon {
+      opacity: 0.75;
+      cursor: pointer;
+      transform: scale(3);
+      pointer-events: auto;
+      transition: transform 0.2s ease;
+
+      &:active {
+        transform: scale(2.5);
+      }
     }
+  }
 
-    .art-video {
-        pointer-events: none;
-    }
+  &.art-mini-dragging {
+    opacity: 0.9;
+  }
 
-    .art-mini-close {
-        position: absolute;
-        z-index: 20;
-        right: 10px;
-        top: 10px;
-        cursor: pointer;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-    }
-
+  &:hover {
+    .art-mini-close,
     .art-mini-state {
-        .art-full(30);
-        .art-center();
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-        background-color: rgba(0, 0, 0, 0.25);
-
-        .art-icon {
-            opacity: 0.75;
-            cursor: pointer;
-            transform: scale(3);
-            pointer-events: auto;
-            transition: transform 0.2s ease;
-
-            &:active {
-                transform: scale(2.5);
-            }
-        }
+      opacity: 1;
     }
-
-    &.art-mini-dragging {
-        opacity: 0.9;
-    }
-
-    &:hover {
-        .art-mini-close,
-        .art-mini-state {
-            opacity: 1;
-        }
-    }
+  }
 }
