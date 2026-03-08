@@ -12,11 +12,13 @@ const rootDir = path.resolve(__dirname, '../packages/artplayer-vitepress')
 const dostDir = path.resolve(__dirname, '../docs')
 const outputFile = path.resolve(__dirname, '../docs/llms.txt')
 const API_URL = 'https://api.deepseek.com/v1/chat/completions'
-const API_KEY = process.env.DEEPL_API_KEY
+const API_KEY = process.env.DEEPSEEK_API_KEY
 const MAX_CONCURRENT_REQUESTS = 3 // 每类并发请求数
+const REQUEST_TIMEOUT = 60000 // 请求超时时间 60秒
+const MAX_RETRIES = 3 // 最大重试次数
 
 if (!API_KEY) {
-  console.error('❌ Missing DEEPL_API_KEY in .env file')
+  console.error('❌ Missing DEEPSEEK_API_KEY in .env file')
   process.exit(1)
 }
 
@@ -35,7 +37,7 @@ function readFiles(files) {
   return content
 }
 
-function splitText(text, maxLen = 5000) {
+function splitText(text, maxLen = 8000) {
   const paragraphs = text.split(/\n{2,}/)
   const chunks = []
   let buffer = ''
@@ -52,31 +54,62 @@ function splitText(text, maxLen = 5000) {
 }
 
 async function askDeepSeek(prompt, text, tag, id) {
-  console.log(`🧠 [${tag}] Sending chunk ${id}`)
-  const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: 'deepseek-chat',
-      messages: [
-        { role: 'system', content: 'You are a professional technical writer.' },
-        { role: 'user', content: `${prompt}\n\n${text}` },
-      ],
-      temperature: 0.3,
-    }),
-  })
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      console.log(`🧠 [${tag}] Sending chunk ${id} (attempt ${attempt}/${MAX_RETRIES})`)
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT)
 
-  if (!res.ok) {
-    const err = await res.text()
-    console.error(`[${tag}] API Error:`, err)
-    throw new Error(`DeepSeek API error: ${res.status}`)
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: 'deepseek-chat',
+          messages: [
+            { role: 'system', content: 'You are a professional technical writer.' },
+            { role: 'user', content: `${prompt}\n\n${text}` },
+          ],
+          temperature: 0.3,
+        }),
+      })
+      clearTimeout(timeout)
+
+      // 处理限流情况
+      if (res.status === 429) {
+        const delay = Math.pow(2, attempt) * 1000
+        console.log(`⏳ [${tag}] Rate limited, waiting ${delay}ms...`)
+        await new Promise(r => setTimeout(r, delay))
+        continue
+      }
+
+      if (!res.ok) {
+        const err = await res.text()
+        console.error(`[${tag}] API Error:`, err)
+        throw new Error(`DeepSeek API error: ${res.status}`)
+      }
+
+      const data = await res.json()
+      if (!data.choices || !data.choices[0]) {
+        throw new Error('Invalid API response: missing choices')
+      }
+      return data.choices[0].message?.content?.trim() || ''
+    }
+    catch (err) {
+      if (err.name === 'AbortError') {
+        console.error(`[${tag}] Request timeout for chunk ${id}`)
+      }
+      if (attempt === MAX_RETRIES) {
+        throw err
+      }
+      const delay = 1000 * attempt
+      console.log(`⚠️ [${tag}] Retry ${attempt}/${MAX_RETRIES} after ${delay}ms...`)
+      await new Promise(r => setTimeout(r, delay))
+    }
   }
-
-  const data = await res.json()
-  return data.choices?.[0]?.message?.content?.trim() || ''
 }
 
 async function runConcurrent(tasks, limit = MAX_CONCURRENT_REQUESTS) {
