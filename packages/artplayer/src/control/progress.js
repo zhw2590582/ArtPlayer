@@ -28,7 +28,7 @@ export function setCurrentTime(art, event) {
 export default function progress(options) {
   return (art) => {
     const { icons, option, proxy } = art
-    const { $player } = art.template
+    const { $player, $progress } = art.template
 
     return {
       ...options,
@@ -169,22 +169,22 @@ export default function progress(options) {
         art.emit('setBar', 'loaded', art.loaded || 0)
 
         if (!isMobile) {
-          proxy($control, 'click', (event) => {
+          proxy($progress, 'click', (event) => {
             if (event.target !== $indicator) {
               setCurrentTime(art, event)
             }
           })
 
-          proxy($control, 'mousemove', (event) => {
+          proxy($progress, 'mousemove', (event) => {
             const { percentage } = getPosFromEvent(art, event)
             art.emit('setBar', 'hover', percentage, event)
           })
 
-          proxy($control, 'mouseleave', (event) => {
+          proxy($progress, 'mouseleave', (event) => {
             art.emit('setBar', 'hover', 0, event)
           })
 
-          proxy($control, 'mousedown', (event) => {
+          proxy($progress, 'mousedown', (event) => {
             isDragging = event.button === 0
           })
 
