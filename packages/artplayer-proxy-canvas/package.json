@@ -1,6 +1,6 @@
 {
   "name": "artplayer-proxy-canvas",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "canvas proxy for ArtPlayer",
   "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-audio-track",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "audio-track plugin for ArtPlayer",
   "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",

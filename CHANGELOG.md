@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.4.0] - 2026-03-12
+
 - Refactor `Parcel` to `Vite`
 - Change `Artplayer.FULLSCREEN_WEB_IN_BODY` defaults to `true`
 - The `reset` method is used to reset video request

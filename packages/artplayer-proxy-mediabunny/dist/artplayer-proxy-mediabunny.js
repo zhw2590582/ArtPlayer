@@ -1,5 +1,5 @@
 /*!
- * artplayer-proxy-mediabunny.js v1.0.1
+ * artplayer-proxy-mediabunny.js v1.1.0
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.

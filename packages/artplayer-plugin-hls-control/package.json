@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-hls-control",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Hls control plugin for ArtPlayer",
   "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",
