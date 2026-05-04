@@ -194,6 +194,18 @@ export default class VideoShim {
       this.engine.load(this._src)
   }
 
+  getM3u8State() {
+    return this.engine.getHlsState()
+  }
+
+  switchM3u8Quality(value) {
+    return this.engine.selectHlsQuality(value)
+  }
+
+  switchM3u8Audio(value) {
+    return this.engine.selectHlsAudio(value)
+  }
+
   // Video dimensions
   get videoWidth() {
     return this.engine.videoWidth

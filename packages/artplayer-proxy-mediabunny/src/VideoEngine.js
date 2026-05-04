@@ -3,13 +3,9 @@
  * Handles video frame rendering and synchronization
  */
 import {
-  ALL_FORMATS,
-  BlobSource,
   CanvasSink,
-  Input,
-  ReadableStreamSource,
-  UrlSource,
 } from 'mediabunny'
+import { isHlsSource } from './input.js'
 
 export default class VideoEngine {
   constructor({
@@ -55,19 +51,8 @@ export default class VideoEngine {
     this.isFetching = false
   }
 
-  normalizeSource(src) {
-    if (typeof src === 'string')
-      return new UrlSource(src)
-    if (src instanceof Blob)
-      return new BlobSource(src)
-    if (typeof ReadableStream !== 'undefined' && src instanceof ReadableStream) {
-      return new ReadableStreamSource(src)
-    }
-    return src
-  }
-
   async preflight(url) {
-    if (!this.preflightRange || typeof url !== 'string')
+    if (!this.preflightRange || typeof url !== 'string' || isHlsSource(url))
       return true
 
     try {
@@ -109,32 +94,17 @@ export default class VideoEngine {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
-  async load(src, onMetadata) {
-    const id = ++this.asyncId
+  async load(media, onMetadata) {
+    ++this.asyncId
 
     await this.stopIterator()
     this.clear()
     this.posterDrawn = false
 
-    if (!(await this.preflight(src)))
-      return
+    const { input, videoTrack, duration } = media
+    this.input = input
+    this.duration = duration
 
-    const source = this.normalizeSource(src)
-    if (!source) {
-      this.drawPoster()
-      return
-    }
-
-    this.input = new Input({
-      source,
-      formats: ALL_FORMATS,
-    })
-
-    this.duration = await this.input.computeDuration()
-    if (id !== this.asyncId)
-      return
-
-    const videoTrack = await this.input.getPrimaryVideoTrack()
     if (!videoTrack) {
       this.handleNoVideoTrack()
       onMetadata?.()
@@ -190,7 +160,6 @@ export default class VideoEngine {
 
     if (first) {
       this.ctx.drawImage(first.canvas, 0, 0)
-      this.events.emit('loadeddata')
     }
     else {
       this.drawPoster()
@@ -312,7 +281,7 @@ export default class VideoEngine {
     this.stop()
     this.stopIterator()
     this.posterDrawn = false
-    this.input = null
     this.videoSink = null
+    this.input = null
   }
 }

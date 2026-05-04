@@ -3,12 +3,7 @@
  * Handles audio playback using Web Audio API
  */
 import {
-  ALL_FORMATS,
   AudioBufferSink,
-  BlobSource,
-  Input,
-  ReadableStreamSource,
-  UrlSource,
 } from 'mediabunny'
 
 export default class AudioEngine {
@@ -51,17 +46,6 @@ export default class AudioEngine {
     )
   }
 
-  normalizeSource(src) {
-    if (typeof src === 'string')
-      return new UrlSource(src)
-    if (src instanceof Blob)
-      return new BlobSource(src)
-    if (typeof ReadableStream !== 'undefined' && src instanceof ReadableStream) {
-      return new ReadableStreamSource(src)
-    }
-    return src
-  }
-
   ensureAudioContext(sampleRate) {
     if (this.audioContext)
       return
@@ -97,8 +81,13 @@ export default class AudioEngine {
     this.audioIterator = null
   }
 
-  async load(src, onMetadata) {
-    const id = ++this.asyncId
+  handleNoAudioTrack() {
+    this.audioSink = null
+    this.ensureAudioContext()
+  }
+
+  async load(media, onMetadata) {
+    ++this.asyncId
 
     await this.stopIterator()
     this.stopQueuedNodes()
@@ -107,23 +96,12 @@ export default class AudioEngine {
     this.playbackTimeAtStart = 0
     this.audioContextStartTime = 0
 
-    const source = this.normalizeSource(src)
-    if (!source)
-      return
+    const { input, audioTrack, duration } = media
+    this.input = input
+    this.duration = duration
 
-    this.input = new Input({
-      source,
-      formats: ALL_FORMATS,
-    })
-
-    this.duration = await this.input.computeDuration()
-    if (id !== this.asyncId)
-      return
-
-    const audioTrack = await this.input.getPrimaryAudioTrack()
     if (!audioTrack) {
-      this.audioSink = null
-      this.ensureAudioContext()
+      this.handleNoAudioTrack()
       onMetadata?.()
       return
     }
