@@ -2,24 +2,33 @@
 // import artplayerProxyMediabunny from 'artplayer-proxy-mediabunny';
 
 const art = new Artplayer({
-    container: '.artplayer-app',
-    url: 'https://artplayer.org/assets/sample/frag_bunny.mp4',
-    autoSize: true,
-    screenshot: true,
-    setting: true,
-    loop: true,
-    flip: true,
-    playbackRate: true,
-    fullscreen: true,
-    fullscreenWeb: true,
-    miniProgressBar: true,
-    autoPlayback: true,
-    autoOrientation: true,
-    thumbnails: {
-        url: '/assets/sample/frag_bunny.png',
-        number: 60,
-        column: 10,
-        scale: 0.85,
+  container: '.artplayer-app',
+  url: 'https://playertest.longtailvideo.com/adaptive/elephants_dream_v4/index.m3u8',
+  autoSize: true,
+  setting: true,
+  loop: true,
+  flip: true,
+  playbackRate: true,
+  fullscreen: true,
+  miniProgressBar: true,
+  autoPlayback: true,
+  autoOrientation: true,
+  proxy: artplayerProxyMediabunny({
+    m3u8: {
+      quality: {
+        control: true,
+        setting: true,
+        getName: level => level.height ? `${level.height}P` : level.name,
+        title: 'Quality',
+        auto: 'Auto',
+      },
+      audio: {
+        control: true,
+        setting: true,
+        getName: track => track.name || track.language,
+        title: 'Audio',
+        auto: 'Auto',
+      },
     },
-    proxy: artplayerProxyMediabunny(),
+  }),
 })

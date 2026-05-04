@@ -1,3 +1,4 @@
+import { setupM3u8Controls } from './m3u8.js'
 /**
  * ArtPlayer MediaBunny Proxy
  * Main entry point
@@ -20,6 +21,7 @@ export default function artplayerProxyMediabunny(option = {}) {
       ctx,
       option,
     })
+    art.mediabunny = shim
 
     // Proxy canvas methods to shim
     const originalCanvasMethods = {}
@@ -74,9 +76,11 @@ export default function artplayerProxyMediabunny(option = {}) {
 
     art.on('resize', resize)
     art.on('video:loadedmetadata', resize)
+    setupM3u8Controls({ art, shim, option })
 
     // Cleanup on destroy
     art.on('destroy', () => {
+      delete art.mediabunny
       shim.destroy()
     })
 

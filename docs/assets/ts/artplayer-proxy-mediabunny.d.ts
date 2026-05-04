@@ -1,4 +1,34 @@
 interface Option {
+  m3u8?: {
+    quality?: {
+      control?: boolean
+      setting?: boolean
+      title?: string
+      auto?: string
+      getName?: (level: {
+        id: number
+        index: number
+        name: null | string
+        height: number
+        bitrate: number
+      }) => string
+    }
+    audio?: {
+      control?: boolean
+      setting?: boolean
+      title?: string
+      auto?: string
+      getName?: (track: {
+        id: number
+        index: number
+        name: null | string
+        lang: string
+        language: string
+        bitrate: number
+      }) => string
+    }
+  }
+
   /**
    * Timeout for loading media in milliseconds
    * @default 0

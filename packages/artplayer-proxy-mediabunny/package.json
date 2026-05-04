@@ -1,6 +1,6 @@
 {
   "name": "artplayer-proxy-mediabunny",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "mediabunny proxy for ArtPlayer",
   "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
   "license": "MIT",
@@ -35,6 +35,6 @@
   "legacy": "./dist/artplayer-proxy-mediabunny.legacy.js",
   "browserslist": "last 1 Chrome version",
   "dependencies": {
-    "mediabunny": "^1.27.3"
+    "mediabunny": "^1.43.1"
   }
 }

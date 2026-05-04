@@ -3,6 +3,7 @@
  * Coordinates audio and video playback
  */
 import AudioEngine from './AudioEngine.js'
+import { createInput, getHlsState, resolveDuration, selectPlaybackTracks } from './input.js'
 import VideoEngine from './VideoEngine.js'
 
 export default class MediaBunnyEngine {
@@ -31,6 +32,8 @@ export default class MediaBunnyEngine {
     this.error = null
     this.seeking = false
     this.loadSeq = 0
+    this.input = null
+    this.media = null
 
     // Listen to ended event
     events.addEventListener?.('ended', () => {
@@ -43,6 +46,7 @@ export default class MediaBunnyEngine {
     const id = ++this.loadSeq
 
     this.pause()
+    this.disposeInput()
     this.ended = false
     this.error = null
     this.networkState = 2 // NETWORK_LOADING
@@ -73,8 +77,28 @@ export default class MediaBunnyEngine {
   }
 
   async performLoad(src, id) {
-    let videoMetadataLoaded = false
-    let audioMetadataLoaded = false
+    if (!(await this.video.preflight(src)))
+      return
+
+    const input = createInput(src)
+    if (!input) {
+      this.video.handleNoVideoTrack()
+      this.audio.handleNoAudioTrack()
+      return
+    }
+
+    const media = await selectPlaybackTracks(input, src)
+    if (id !== this.loadSeq) {
+      input.dispose()
+      return
+    }
+
+    this.disposeInput()
+    this.input = input
+    this.media = media
+
+    let videoMetadataLoaded = !media.videoTrack
+    let audioMetadataLoaded = !media.audioTrack
 
     const checkMetadata = () => {
       if (videoMetadataLoaded && audioMetadataLoaded) {
@@ -87,13 +111,13 @@ export default class MediaBunnyEngine {
 
     try {
       await Promise.all([
-        this.video.load(src, () => {
+        this.video.load(media, () => {
           if (id !== this.loadSeq)
             return
           videoMetadataLoaded = true
           checkMetadata()
         }),
-        this.audio.load(src, () => {
+        this.audio.load(media, () => {
           if (id !== this.loadSeq)
             return
           audioMetadataLoaded = true
@@ -126,6 +150,124 @@ export default class MediaBunnyEngine {
     return new Promise((_, reject) => {
       setTimeout(() => reject(new Error('Load timeout')), ms)
     })
+  }
+
+  disposeInput() {
+    this.input?.dispose()
+    this.input = null
+    this.media = null
+  }
+
+  async replaceTracks({ videoTrack, audioTrack, videoMode, audioMode }) {
+    if (!this.media)
+      return
+
+    const nextMedia = {
+      ...this.media,
+      videoTrack,
+      audioTrack,
+      videoMode,
+      audioMode,
+    }
+
+    const shouldResume = !this.paused
+    const currentTime = this.currentTime
+
+    this.pause()
+    this.ended = false
+    this.seeking = true
+    this.events.emit('seeking')
+    this.events.emit('waiting')
+
+    nextMedia.duration = await resolveDuration(nextMedia)
+    this.media = nextMedia
+
+    await Promise.all([
+      this.video.load(nextMedia),
+      this.audio.load(nextMedia),
+    ])
+
+    await Promise.all([
+      this.video.seek(currentTime),
+      this.audio.seek(currentTime),
+    ])
+
+    this.readyState = 4
+    this.networkState = 1
+    this.seeking = false
+    this.events.emit('loadedmetadata')
+    this.events.emit('durationchange')
+    this.events.emit('progress')
+    this.events.emit('loadeddata')
+    this.events.emit('canplay')
+    this.events.emit('canplaythrough')
+    this.events.emit('seeked')
+
+    if (shouldResume) {
+      await this.play()
+    }
+  }
+
+  async selectHlsQuality(value) {
+    if (!this.media?.isHls || !this.input)
+      return
+
+    const videoTracks = await this.input.getVideoTracks()
+    const videoTrack = value === 'auto'
+      ? await this.input.getPrimaryVideoTrack()
+      : videoTracks.find(track => track.id === value) ?? this.media.videoTrack
+
+    if (!videoTrack)
+      return
+
+    let audioTrack = this.media.audioTrack
+    let audioMode = this.media.audioMode
+
+    if (!audioTrack || !videoTrack.canBePairedWith(audioTrack)) {
+      audioTrack = await videoTrack.getPrimaryPairableAudioTrack()
+      audioMode = 'auto'
+    }
+
+    await this.replaceTracks({
+      videoTrack,
+      audioTrack,
+      videoMode: value === 'auto' ? 'auto' : 'manual',
+      audioMode,
+    })
+  }
+
+  async selectHlsAudio(value) {
+    if (!this.media?.isHls || !this.input)
+      return
+
+    const audioTracks = await this.input.getAudioTracks()
+    const audioTrack = value === 'auto'
+      ? this.media.videoTrack
+        ? await this.media.videoTrack.getPrimaryPairableAudioTrack()
+        : await this.input.getPrimaryAudioTrack()
+      : audioTracks.find(track => track.id === value) ?? this.media.audioTrack
+
+    if (!audioTrack)
+      return
+
+    let videoTrack = this.media.videoTrack
+    let videoMode = this.media.videoMode
+
+    if (!videoTrack || !audioTrack.canBePairedWith(videoTrack)) {
+      videoTrack = await audioTrack.getPrimaryPairableVideoTrack()
+      videoMode = 'auto'
+    }
+
+    await this.replaceTracks({
+      videoTrack,
+      audioTrack,
+      videoMode,
+      audioMode: value === 'auto' ? 'auto' : 'manual',
+    })
+  }
+
+  getHlsState() {
+    return getHlsState(this.media)
   }
 
   async play() {
@@ -193,6 +335,7 @@ export default class MediaBunnyEngine {
 
   destroy() {
     this.pause()
+    this.disposeInput()
     this.audio.destroy()
     this.video.destroy()
   }
@@ -203,7 +346,7 @@ export default class MediaBunnyEngine {
   }
 
   get duration() {
-    return this.audio.duration || this.video.duration
+    return this.media?.duration ?? this.audio.duration ?? this.video.duration
   }
 
   get videoWidth() {

@@ -1,6 +1,6 @@
 # artplayer-proxy-mediabunny
 
-mediabunny proxy for ArtPlayer
+mediabunny proxy for ArtPlayer, including `m3u8` playback through Mediabunny's HLS input support.
 
 ## Demo
 
