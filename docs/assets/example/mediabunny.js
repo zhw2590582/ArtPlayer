@@ -3,7 +3,7 @@
 
 const art = new Artplayer({
   container: '.artplayer-app',
-  url: 'https://playertest.longtailvideo.com/adaptive/elephants_dream_v4/index.m3u8',
+  url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
   autoSize: true,
   setting: true,
   loop: true,
