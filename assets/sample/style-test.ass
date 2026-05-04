@@ -1,0 +1,56 @@
+[Script Info]
+Title:
+ScriptType: v4.00+
+WrapStyle: 0
+PlayResX: 640
+PlayResY: 480
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,2,2,10,10,10,0
+Style: Alt,Times New Roman,40,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,2,8,10,10,10,0
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Comment: 0,0:00:00.00,0:00:05.00,Default,,0000,0000,0000,,This line is a comment and should not display on rendered output. This file is intended to be rendered on a 640x480 video, preferably a single solid colour, or maybe a checkerboard pattern.
+Dialogue: 0,0:00:00.00,0:00:05.00,Default,,0000,0000,0000,,This is a test of the ASS format and some basic features in it.
+Dialogue: 0,0:00:05.00,0:00:07.00,Default,,0000,0000,0000,,This and the previous line should both show at the bottom of the video in 20 pixel high white Arial with a 2 pixel black outline and 2 pixel offset shadow. This line is long so it should automatically be broken into several lines that are approximately even length, with upper lines being longer.
+Dialogue: 0,0:00:07.00,0:00:09.00,Default,,0000,0000,0000,,Now going to test conflict resolution. {By the way, this is a common abuse, "inline-comments" in override tag groups. They should not be rendered and not generate errors, just be ignored.}
+Dialogue: 0,0:00:07.50,0:00:09.00,Default,,0000,0000,0000,,This line should be above the previous.
+Dialogue: 0,0:00:09.00,0:00:11.00,Default,,0000,0000,0000,,{\an1}This line should be lower-left aligned using the \an1 override.
+Dialogue: 0,0:00:11.00,0:00:13.00,Default,,0000,0000,0000,,{\an9}Upper right
+Dialogue: 0,0:00:12.00,0:00:14.00,Alt,,0000,0000,0000,,This one should be below the "Upper right" line and be centered on screen. It should also be in 40 pixel high Times New Roman.
+Dialogue: 0,0:00:14.00,0:00:16.00,Alt,,0000,0000,0000,,{\fs10}This should also be a toptitle in Times New Roman, but much smaller. Using an override tag to change size.
+Dialogue: 0,0:00:16.00,0:00:18.00,Alt,,0000,0000,0000,,{\a5}Top-left using the legacy \a5 tag
+Dialogue: 0,0:00:18.00,0:00:20.00,Default,,0000,0000,0000,,{\an5}This line is centered on screen.\NAt the bottom of the screen should be two lines in different layers, they are rendered on top of each other because conflict resolution only considers lines in the same layer.
+Dialogue: 0,0:00:18.00,0:00:20.00,Default,,0000,0000,0000,,This is in layer 0
+Dialogue: 1,0:00:18.00,0:00:20.00,Default,,0000,0000,0000,,And this line is in layer 1
+Dialogue: 0,0:00:20.00,0:00:22.00,Default,,0000,0000,0000,,Another line in layer 0
+Dialogue: 1,0:00:20.00,0:00:22.00,Default,,0050,0000,0020,,And this line is in layer 1, but has changed its margins so it isn't exactly centered, and it's raised above the other line.
+Dialogue: 0,0:00:22.00,0:00:24.00,Default,,0000,0000,0000,,Switching {\fnTimes New Roman}font inline, {\r}and resetting styles
+Dialogue: 0,0:00:24.00,0:00:26.00,Default,,0000,0000,0000,,Also {\rAlt}switching to a different style {\r}inline
+Dialogue: 0,0:00:26.00,0:00:28.00,Default,,0000,0000,0000,,{\an5\pos(258,131)}Positioning... this line should be in an odd place
+Dialogue: 0,0:00:26.00,0:00:28.00,Default,,0000,0000,0000,,{\an5\pos(222,338)\frz29.559}So should this one, and be rotated
+Dialogue: 0,0:00:28.00,0:00:30.00,Default,,0000,0000,0000,,{\pos(371,314)\frz338.403\frx42\fry30\org(187,165)}Some more rotation tricks, this time in 3D and with a different origin
+Dialogue: 0,0:00:30.00,0:00:32.00,Default,,0000,0000,0000,,{\an5\t(\frz360)}This line is animated and rotates 360 degrees over its duration
+Dialogue: 0,0:00:32.00,0:00:34.00,Default,,0000,0000,0000,,{\an5\move(182,157,414,311)}This line moves
+Dialogue: 0,0:00:34.00,0:00:36.00,Default,,0000,0000,0000,,{\an5\clip(126,192,487,241)}This line is only partially visible\Nso if you can see this, \clip is handled incorrectly
+Dialogue: 0,0:00:36.00,0:00:38.00,Default,,0000,0000,0000,,{\an5\clip(m 178 212 l 163 249 212 302 257 232 309 249 366 241 392 285 473 267 487 210 421 241 353 219 207 258)}And this line has a funnily-shaped clip area
+Dialogue: 0,0:00:38.00,0:00:40.00,Default,,0000,0000,0000,,{\an5\pos(321,193)}Here should be a pretty feather with a thin border and no shadow:
+Dialogue: 0,0:00:38.00,0:00:40.00,Default,,0000,0000,0000,,{\an5\bord1\shad0\p1\fscx300\fscy300\pos(316,312)}m 0 0 b 33 -3 48 -7 61 -19 b 53 -7 31 -1 1 2 m 9 0 b 9 -5 10 -6 14 -12 b 9 -5 10 -3 10 0 m 10 -1 b 10 -5 11 -8 16 -12 b 17 -12 18 -13 22 -14 b 18 -10 16 -6 15 -1 b 17 -6 19 -10 23 -14 l 26 -15 b 22 -11 20 -6 19 -2 b 24 -11 27 -14 28 -15 b 31 -16 35 -16 39 -16 b 37 -14 36 -10 36 -5 b 36 -9 38 -14 39 -16 b 41 -16 43 -16 45 -15 b 44 -13 43 -10 43 -7 l 29 -3 m 43 -7 b 44 -11 45 -13 47 -15 b 46 -13 46 -11 46 -9 b 46 -11 47 -13 49 -15 b 51 -15 48 -13 48 -9 b 49 -11 49 -14 52 -16 b 55 -16 53 -17 51 -11 l 48 -8 m 54 -13 b 53 -14 54 -15 54 -16 b 54 -15 54 -14 55 -13 b 57 -13 60 -12 62 -14 b 61 -12 55 -12 53 -12 b 55 -11 56 -10 61 -10 b 61 -7 53 -9 52 -11 b 53 -8 55 -7 58 -6 b 57 -5 56 -4 54 -3 b 49 -5 48 -6 47 -9 b 47 -6 50 -4 53 -2 b 49 -3 47 -6 45 -8 b 46 -6 49 -3 52 -1 b 46 2 45 3 43 3 b 40 0 39 -3 40 -6 b 39 -3 39 1 42 3 b 40 6 36 1 34 -4 b 35 -1 36 2 38 5 b 32 7 26 9 22 8 b 19 5 17 2 16 -1 b 17 3 19 5 20 7 b 17 4 16 2 15 0 b 15 2 17 5 19 8 b 15 9 13 3 12 0 l 25 -2 l 42 -7 m 12 0 b 13 3 13 7 17 9 b 12 7 10 1 10 0
+Dialogue: 0,0:00:40.00,0:00:42.00,Default,,0000,0000,0000,,Some other basic font style tests:\NNormal, {\b1}Boldface{\r}, {\i1}Italics{\r}, {\u1}Underline{\r}, {\s1}Strikethrough
+Dialogue: 0,0:00:42.00,0:00:44.00,Default,,0000,0000,0000,,There should be no linebreak here,\nbut there should be one here\Nso this is on a separate line.
+Dialogue: 0,0:00:44.00,0:00:46.00,Default,,0000,0000,0000,,This line is pushed left by adding some hard spaces to the right\h\h\h\h\h\h\h\h\h\h\h\h\h\h\h\h\h\h\h\h
+Dialogue: 0,0:00:44.00,0:00:46.00,Default,,0000,0000,0000,,                          Regular spaces at line start/end are ignored, so this line is centered
+Dialogue: 0,0:00:46.00,0:00:48.00,Default,,0000,0000,0000,,{\an8\q2}This is a long line but it is not broken into several because it's using the \q override tag which changes the line-wrapping mode for a single line. The tag can take several values, 0 is the default which is "smart wrapping" with top lines longer, 1 is regular wrapping, 2 is no wrapping and 3 is smart-wrapping with bottom lines longer.
+Dialogue: 0,0:00:46.00,0:00:48.00,Default,,0000,0000,0000,,{\an5\q1}This is a long line using the \q1 override tag to get "dumb" wrapping, make as long lines as possible and first wrap when it'd go off screen. This is mostly visible when the last line generated is short.
+Dialogue: 0,0:00:46.00,0:00:48.00,Default,,0000,0000,0000,,{\q3}And this line uses the \q3 wrapping style, which is similar to the \q0 default smart-wrap style, but has lower lines longer than the upper ones.
+Dialogue: 0,0:00:48.00,0:00:50.00,Default,,0000,0000,0000,,{\an5}{\bord0\t(\bord10)}This text has a growing border\N{\r\shad0\t(\shad10)}This text has an increasing shadow\N{\r\t(\fry360)}This text is rotating around the Y axis\N{\r\t(\frz720)}This text rotates {\t(\frx360)}and this one even more
+Dialogue: 0,0:00:50.00,0:00:52.00,Default,,0000,0000,0000,,{\an5\bord0\shad0}All of this has no border or shadow...\N{\1c&H0000FF&}This is bright red, {\1c&H00FF00&}green, {\1c&HFF0000}blue{\1c&HFFFFFF&}\N{\1a&H80&}50% transparent
+Dialogue: 0,0:00:52.00,0:00:54.00,Default,,0000,0000,0000,,{\fsp10}Large inter-letter spacing
+Dialogue: 0,0:00:54.00,0:00:56.00,Default,,0000,0000,0000,,{\shad0}No shadow here, just regular border, {\be1}but this is \be1 blurred edges!
+Dialogue: 0,0:00:56.00,0:00:58.00,Default,,0000,0000,0000,,{\t(1000,2000,\alpha&HFF&)}Fading out after 1 sec on screen, using \alpha. Everything should fade.
+Dialogue: 0,0:00:58.00,0:01:00.00,Default,,0000,0000,0000,,{\fad(1000,1000)}Fading in and out using \fad
+Dialogue: 0,0:01:00.00,0:01:02.00,Default,,0000,0000,0000,,{\k10}And {\k5}now {\k20}for {\kf50}ka{\kf20}ra{\K70}o{\K10}ke{\k0}!
+Dialogue: 0,0:01:02.00,0:01:04.00,Default,,0000,0000,0000,,{\an5\t()\clip(69,215,573,267)\t(1000,2000,3,\clip(573,267,573,267))}And the last thing on the programme, an animated rectangular \clip, delayed by 1 second. And it even uses acceleration...!

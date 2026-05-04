@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Artplayer with i18n</title>
+    <style>
+        #player {
+            max-width: 720px;
+            aspect-ratio: 16 / 9;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="player"></div>
+    <script src="./compiled/artplayer.js"></script>
+    <script src="./compiled/i18n/ar.js"></script>
+    <script src="./compiled/i18n/cs.js"></script>
+    <script src="./compiled/i18n/es.js"></script>
+    <script src="./compiled/i18n/fa.js"></script>
+    <script src="./compiled/i18n/fr.js"></script>
+    <script src="./compiled/i18n/id.js"></script>
+    <script src="./compiled/i18n/pl.js"></script>
+    <script src="./compiled/i18n/ru.js"></script>
+    <script src="./compiled/i18n/tr.js"></script>
+    <script src="./compiled/i18n/vi.js"></script>
+    <script src="./compiled/i18n/zh-tw.js"></script>
+    <script>
+        const art = new Artplayer({
+            container: '#player',
+            url: '/assets/sample/video.mp4',
+            i18n: {
+                ar: window['artplayer-i18n-ar'],
+                cs: window['artplayer-i18n-cs'],
+                es: window['artplayer-i18n-es'],
+                fa: window['artplayer-i18n-fa'],
+                fr: window['artplayer-i18n-fr'],
+                id: window['artplayer-i18n-id'],
+                pl: window['artplayer-i18n-pl'],
+                ru: window['artplayer-i18n-ru'],
+                tr: window['artplayer-i18n-tr'],
+                vi: window['artplayer-i18n-vi'],
+                'zh-tw': window['artplayer-i18n-zh-tw'],
+            },
+            lang: 'id',
+        });
+        console.log(art.i18n.languages);
+    </script>
+</body>
+
+</html>
