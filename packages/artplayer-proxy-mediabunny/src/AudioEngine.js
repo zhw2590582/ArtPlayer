@@ -126,84 +126,90 @@ export default class AudioEngine {
     await this.stopIterator()
     this.audioIterator = this.audioSink.buffers(this.currentTime)
 
+    // Batch size: read multiple audio buffers per iteration to reduce
+    // IPC round-trip overhead. 16 buffers ≈ 340ms of audio.
+    const BATCH_SIZE = 16
+
     while (true) {
       if (localId !== this.asyncId || this.paused)
         return
 
-      const nextPromise = this.audioIterator.next()
-
-      // Monitor for buffer starvation
-      const checkStarvation = setInterval(() => {
-        if (localId !== this.asyncId || this.paused) {
-          clearInterval(checkStarvation)
-          return
-        }
-
-        if (
-          this.audioContext.state === 'running'
-          && this.audioContext.currentTime >= this.latestScheduledEndTime - 0.2
-        ) {
-          this.audioContext.suspend()
-          this.events.emit('waiting')
-        }
-      }, 50)
-
-      let result
+      const batch = []
+      let batchDone = false
       try {
-        result = await nextPromise
+        for (let i = 0; i < BATCH_SIZE; i++) {
+          const result = await this.audioIterator.next()
+          if (result.done) {
+            batchDone = true
+            break
+          }
+          batch.push(result.value)
+        }
       }
       catch (e) {
         console.error('Audio iterator error:', e)
-        break
-      }
-      finally {
-        clearInterval(checkStarvation)
+        batchDone = true
       }
 
       if (localId !== this.asyncId || this.paused)
         return
 
       // Resume if was suspended
-      if (this.audioContext.state === 'suspended') {
+      if (batch.length > 0 && this.audioContext.state === 'suspended') {
         await this.audioContext.resume()
         this.events.emit('canplay')
         this.events.emit('playing')
       }
 
-      if (result.done)
+      // Schedule all buffers in the batch
+      for (const { buffer, timestamp } of batch) {
+        const node = this.audioContext.createBufferSource()
+        node.buffer = buffer
+        node.connect(this.gainNode)
+        node.playbackRate.value = this.playbackRate
+
+        const startAt
+          = this.audioContextStartTime
+            + (timestamp - this.playbackTimeAtStart) / this.playbackRate
+
+        const duration = buffer.duration
+        const endAt = startAt + duration / this.playbackRate
+
+        const endMediaTime = (endAt - this.audioContextStartTime) * this.playbackRate + this.playbackTimeAtStart
+        if (endMediaTime > this.latestScheduledEndTime) {
+          this.latestScheduledEndTime = endMediaTime
+        }
+
+        if (startAt >= this.audioContext.currentTime) {
+          node.start(startAt)
+        }
+        else {
+          node.start(
+            this.audioContext.currentTime,
+            (this.audioContext.currentTime - startAt) * this.playbackRate,
+          )
+        }
+
+        this.queuedNodes.add(node)
+        node.onended = () => this.queuedNodes.delete(node)
+      }
+
+      if (batchDone)
         break
 
-      const { buffer, timestamp } = result.value
+      // Yield main thread after each batch so video rAF callbacks can run.
+      // Without this, the audio pump's tight loop starves the render loop.
+      await new Promise(resolve => setTimeout(resolve, 0))
 
-      // Schedule audio buffer
-      const node = this.audioContext.createBufferSource()
-      node.buffer = buffer
-      node.connect(this.gainNode)
-      node.playbackRate.value = this.playbackRate
-
-      const startAt
-        = this.audioContextStartTime
-          + (timestamp - this.playbackTimeAtStart) / this.playbackRate
-
-      const duration = buffer.duration
-      const endAt = startAt + duration / this.playbackRate
-
-      if (endAt > this.latestScheduledEndTime) {
-        this.latestScheduledEndTime = endAt
+      // Backpressure: if we've scheduled too far ahead, wait for playback
+      // to catch up before decoding more. This prevents the audio pump from
+      // consuming all WebCodecs resources and starving the video decoder.
+      const BUFFER_AHEAD = 1 // seconds
+      while (this.latestScheduledEndTime - this.currentTime > BUFFER_AHEAD) {
+        if (localId !== this.asyncId || this.paused)
+          return
+        await new Promise(resolve => setTimeout(resolve, 50))
       }
-
-      if (startAt >= this.audioContext.currentTime) {
-        node.start(startAt)
-      }
-      else {
-        node.start(
-          this.audioContext.currentTime,
-          (this.audioContext.currentTime - startAt) * this.playbackRate,
-        )
-      }
-
-      this.queuedNodes.add(node)
-      node.onended = () => this.queuedNodes.delete(node)
     }
   }
 
@@ -220,7 +226,7 @@ export default class AudioEngine {
     }
 
     this.audioContextStartTime = this.audioContext.currentTime
-    this.latestScheduledEndTime = this.audioContextStartTime
+    this.latestScheduledEndTime = this.playbackTimeAtStart
     this.paused = false
 
     const id = ++this.asyncId
@@ -241,7 +247,7 @@ export default class AudioEngine {
   async seek(time) {
     this.playbackTimeAtStart = Math.max(0, time)
     this.audioContextStartTime = this.audioContext.currentTime
-    this.latestScheduledEndTime = this.audioContextStartTime
+    this.latestScheduledEndTime = this.playbackTimeAtStart
 
     const id = ++this.asyncId
     if (!this.paused) {
