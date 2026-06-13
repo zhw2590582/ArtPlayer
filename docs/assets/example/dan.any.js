@@ -27,6 +27,8 @@ const art = new Artplayer({
       mount: undefined, // 弹幕控制面板挂载点，默认为播放器控制栏左侧
       visible: true, // 弹幕层是否可见
       emitter: true, // 是否开启弹幕发射器
+      heatmap: true, // 是否开启弹幕热力图
+      points: [], // 热力图数据，time 单位为秒；留空时根据已加载弹幕自动生成
       width: 512, // 当播放器宽度小于此值时，控制面板置于播放器底部
       maxLength: 200, // 弹幕输入框最大长度，范围在[1 ~ 1000]
       filter: danmaku => danmaku.content.length <= 100, // 弹幕进入渲染队列前的过滤器

@@ -18,2603 +18,2095 @@ var __privateWrapper = (obj, member, setter, getter) => ({
   }
 });
 
-  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B, _C, _D, _E, _F, _G, _H, _I, _J, _K, _L, _M, _N, _O, _P, _Q, _R, _S, _T, _U, _V, _W, _X, _Y, _Z, __, _$, _aa, _ba, _ca, _da, _ea, _fa, _ga, _ha, _ia, _ja, _ka, _la, _ma, _na, _oa, _pa, _qa, _ra, _sa, _ta, _ua, _va, _wa, _xa, _ya, _za, _Aa, _Ba, _Ca, _Da, _Ea, _Fa, _Ga, _Ha, _Ia, _Ja, _Ka, _La, _Ma, _Na, _Oa, _Pa, _Qa, _Ra, _Sa, _Ta, _Ua, _Va, _Wa, _Xa, _Ya, _Za, __a, _$a, _ab, _bb, _cb, _db, _eb, _fb, _gb, _hb, _ib, _jb, _kb, _lb, _mb, _nb, _ob, _pb, _qb, _rb, _sb, _tb, _ub, _vb, _wb, _xb, _yb, _zb, _Ab, _Bb, _Cb, _Db, _Eb, _Fb, _Gb, _Hb, _Ib, _Jb, _Kb, _Lb, _Mb, _Nb, _Ob, _Pb, _Qb, _Rb, _Sb, _Tb, _Ub, _Vb, _Wb, _Xb, _Yb, _Zb, __b, _$b, _ac, _bc, _cc, _dc, _ec, _fc, _gc, _hc, _ic, _jc, _kc, _lc, _mc, _nc, _oc, _pc, _qc, _rc, _sc, _tc, _uc, _vc, _wc, _xc, _yc, _zc, _Ac, _Bc, _Cc, _Dc, _Ec, _Fc, _Gc, _Hc, _Ic, _Jc, _Kc, _Lc, _Mc, _Nc, _Oc, _Pc, _Qc, _Rc, _Sc, _Tc, _Uc, _Vc, _Wc, _Xc, _Yc, _Zc, __c, _$c, _ad, _bd, _cd, _dd, _ed, _fd, _gd, _hd, _id, _jd, _kd, _ld, _md, _nd, _od, _pd, _qd, _rd, _sd, _td, _ud, _vd, _wd, _xd, _yd, _zd, _Ad, _Bd, _Cd, _Dd, _Ed, _Fd, _Gd, _Hd, _Id, _Jd, _Kd, _Ld, _Md, _Nd, _Od, _Pd, _Qd, _Rd, _Sd, _Td, _Ud, _Vd, _Wd, _Xd, _Yd, _Zd, __d, _$d, _ae, _be, _ce, _de, _ee, _fe, _ge, _he, _ie, _je, _ke, _le, _me, _ne, _oe, _pe, _qe, _re, _se, _te, _ue, _ve, _we, _xe, _ye, _ze, _Ae, _Be, _Ce, _De, _Ee, _Fe, _Ge, _He, _Ie, _Je, _Ke, _Le, _Me, _Ne, _Oe, _Pe, _Qe, _Re, _Se, _Te, _Ue, _Ve, _We, _Xe, _Ye, _Ze, __e, _$e, _af, _bf, _cf, _df, _ef, _ff, _gf, _hf, _if, _jf, _kf, _lf, _mf, _nf, _of, _e3, _t2, _n2, _pf, _e4, _t3, _n3, _qf;
-  var e = Object.defineProperty, t$1 = (t2, n2) => {
+  var _e2, _t, _n, _a2, _e3, _t2, _n2, _b, _c, _d, _e4, _f, _g, _h, _i, _j, _k, _l, _m, _n3, _o, _p, _q, _r, _s, _t3, _u, _v, _w, _x, _y, _z, _A, _B, _C, _D, _E, _F, _G, _H, _I, _J, _K, _L, _M, _N, _O, _P, _Q, _R, _S, _T, _U, _V, _W, _X, _Y, _Z, __, _$, _aa, _ba, _ca, _da, _ea, _fa, _ga, _ha, _ia, _ja, _ka, _la, _ma, _na, _oa, _pa, _qa, _ra, _sa, _ta, _ua, _va, _wa, _xa, _ya, _za, _Aa, _Ba, _Ca, _Da, _Ea, _Fa, _Ga, _Ha, _Ia, _Ja, _Ka, _La, _Ma, _Na, _Oa, _Pa, _Qa, _Ra, _Sa, _Ta, _Ua, _Va, _Wa, _Xa, _Ya, _Za, __a, _$a, _ab, _bb, _cb, _db, _eb, _fb, _gb, _hb, _ib, _jb, _kb, _lb, _mb, _nb, _ob, _pb, _qb, _rb, _sb, _tb, _ub, _vb, _wb, _xb, _yb, _zb, _Ab, _Bb, _Cb, _Db, _Eb, _Fb, _Gb, _Hb, _Ib, _Jb, _Kb, _Lb, _Mb, _Nb, _Ob, _Pb, _Qb, _Rb, _Sb, _Tb, _Ub, _Vb, _Wb, _Xb, _Yb, _Zb, __b, _$b, _ac, _bc, _cc, _dc, _ec, _fc, _gc, _hc, _ic, _jc, _kc, _lc, _mc, _nc, _oc, _pc, _qc, _rc, _sc, _tc, _uc, _vc, _wc, _xc, _yc, _zc, _Ac, _Bc, _Cc, _Dc, _Ec, _Fc, _Gc, _Hc, _Ic, _Jc, _Kc, _Lc, _Mc, _Nc, _Oc, _Pc, _Qc, _Rc, _Sc, _Tc, _Uc, _Vc, _Wc, _Xc, _Yc, _Zc, __c, _$c, _ad, _bd, _cd, _dd, _ed, _fd, _gd, _hd, _id, _jd, _kd, _ld, _md, _nd, _od, _pd, _qd, _rd, _sd, _td, _ud, _vd, _wd, _xd, _yd, _zd, _Ad, _Bd, _Cd, _Dd, _Ed, _Fd, _Gd, _Hd, _Id, _Jd, _Kd, _Ld, _Md, _Nd, _Od, _Pd, _Qd, _Rd, _Sd, _Td, _Ud, _Vd, _Wd, _Xd, _Yd, _Zd, __d, _$d, _ae, _be, _ce, _de, _ee, _fe, _ge, _he, _ie, _je, _ke, _le, _me, _ne, _oe, _pe, _qe, _re, _se, _te, _ue, _ve, _we, _xe, _ye, _ze, _Ae, _Be, _Ce, _De, _Ee, _Fe, _Ge, _He, _Ie, _Je, _Ke, _Le, _Me, _Ne, _Oe, _Pe, _Qe, _Re, _Se, _Te, _Ue, _Ve, _We, _Xe, _Ye, _Ze, __e, _$e, _af, _bf, _cf, _df, _ef, _ff, _gf, _hf, _if, _jf, _kf, _lf, _mf, _nf, _of, _pf, _qf;
+  var e = Object.defineProperty, t = (t2, n2) => {
     let r2 = {};
-    for (var i2 in t2) e(r2, i2, { get: t2[i2], enumerable: true });
+    for (var i in t2) e(r2, i, { get: t2[i], enumerable: true });
     return e(r2, Symbol.toStringTag, { value: `Module` }), r2;
   };
-  const entityKind = /* @__PURE__ */ Symbol.for("drizzle:entityKind");
-  function is$1(value, type) {
-    if (!value || typeof value !== "object") return false;
-    if (value instanceof type) return true;
-    if (!Object.prototype.hasOwnProperty.call(type, entityKind)) throw new Error(`Class "${type.name ?? "<unknown>"}" doesn't look like a Drizzle entity. If this is incorrect and the class is provided by Drizzle, please report this as a bug.`);
-    let cls = Object.getPrototypeOf(value)?.constructor;
-    if (cls) while (cls) {
-      if (entityKind in cls && cls[entityKind] === type[entityKind]) return true;
-      cls = Object.getPrototypeOf(cls);
-    }
-    return false;
+  const U32_MASK64 = /* @__PURE__ */ BigInt(2 ** 32 - 1);
+  const _32n = /* @__PURE__ */ BigInt(32);
+  function fromBig(n2, le2 = false) {
+    if (le2)
+      return { h: Number(n2 & U32_MASK64), l: Number(n2 >> _32n & U32_MASK64) };
+    return { h: Number(n2 >> _32n & U32_MASK64) | 0, l: Number(n2 & U32_MASK64) | 0 };
   }
-  var Subquery = (_a2 = entityKind, _b = class {
-    constructor(sql2, fields, alias, isWith = false, usedTables = []) {
-      this._ = {
-        brand: "Subquery",
-        sql: sql2,
-        selectedFields: fields,
-        alias,
-        isWith,
-        usedTables
-      };
+  function split(lst, le2 = false) {
+    const len = lst.length;
+    let Ah = new Uint32Array(len);
+    let Al = new Uint32Array(len);
+    for (let i = 0; i < len; i++) {
+      const { h: h2, l: l2 } = fromBig(lst[i], le2);
+      [Ah[i], Al[i]] = [h2, l2];
     }
-  }, __publicField(_b, _a2, "Subquery"), _b);
-  const OriginalColumn = /* @__PURE__ */ Symbol.for("drizzle:OriginalColumn");
-  const noop = (v2) => v2;
-  noop.isNoop = true;
-  var Column = (_d = class {
-    constructor(table, config2) {
-      /** @internal */
-      __publicField(this, "codec");
-      __publicField(this, "name");
-      __publicField(this, "keyAsName");
-      __publicField(this, "primary");
-      __publicField(this, "notNull");
-      __publicField(this, "default");
-      __publicField(this, "defaultFn");
-      __publicField(this, "onUpdateFn");
-      __publicField(this, "hasDefault");
-      __publicField(this, "isUnique");
-      __publicField(this, "uniqueName");
-      __publicField(this, "uniqueType");
-      __publicField(this, "dataType");
-      __publicField(this, "columnType");
-      __publicField(this, "enumValues");
-      __publicField(this, "generated");
-      __publicField(this, "generatedIdentity");
-      __publicField(this, "length");
-      __publicField(this, "isLengthExact");
-      __publicField(this, "isAlias");
-      /** @internal */
-      __publicField(this, "config");
-      /** @internal */
-      __publicField(this, "table");
-      __publicField(this, "mapFromDriverValue", noop);
-      __publicField(this, "mapToDriverValue", noop);
-      this.config = config2;
-      this.onInit();
-      this.table = table;
-      this.name = config2.name;
-      this.isAlias = false;
-      this.keyAsName = config2.keyAsName;
-      this.notNull = config2.notNull;
-      this.default = config2.default;
-      this.defaultFn = config2.defaultFn;
-      this.onUpdateFn = config2.onUpdateFn;
-      this.hasDefault = config2.hasDefault;
-      this.primary = config2.primaryKey;
-      this.isUnique = config2.isUnique;
-      this.uniqueName = config2.uniqueName;
-      this.uniqueType = config2.uniqueType;
-      this.dataType = config2.dataType;
-      this.columnType = config2.columnType;
-      this.generated = config2.generated;
-      this.generatedIdentity = config2.generatedIdentity;
-      this.length = config2["length"];
-      this.isLengthExact = config2["isLengthExact"];
-    }
-    /** @internal */
-    onInit() {
-    }
-    /** @internal */
-    postBuild() {
-      return this;
-    }
-    /** @internal */
-    shouldDisableInsert() {
-      return this.config.generated !== void 0 && this.config.generated.type !== "byDefault";
-    }
-    /** @internal */
-    [(_c = entityKind, OriginalColumn)]() {
-      return this;
-    }
-  }, __publicField(_d, _c, "Column"), _d);
-  function getColumnTable(column) {
-    return column.table;
+    return [Ah, Al];
   }
-  const TableName = /* @__PURE__ */ Symbol.for("drizzle:Name");
-  const TableSchema = /* @__PURE__ */ Symbol.for("drizzle:Schema");
-  const TableColumns = /* @__PURE__ */ Symbol.for("drizzle:Columns");
-  const ExtraConfigColumns = /* @__PURE__ */ Symbol.for("drizzle:ExtraConfigColumns");
-  const OriginalName = /* @__PURE__ */ Symbol.for("drizzle:OriginalName");
-  const BaseName = /* @__PURE__ */ Symbol.for("drizzle:BaseName");
-  const IsAlias = /* @__PURE__ */ Symbol.for("drizzle:IsAlias");
-  const ExtraConfigBuilder = /* @__PURE__ */ Symbol.for("drizzle:ExtraConfigBuilder");
-  const IsDrizzleTable = /* @__PURE__ */ Symbol.for("drizzle:IsDrizzleTable");
-  var Table = (_n = entityKind, _m = TableName, _l = OriginalName, _k = TableSchema, _j = TableColumns, _i = ExtraConfigColumns, _h = BaseName, _g = IsAlias, _f = IsDrizzleTable, _e2 = ExtraConfigBuilder, _o = class {
-    constructor(name, schema, baseName) {
-      /**
-      * @internal
-      * Can be changed if the table is aliased.
-      */
-      __publicField(this, _m);
-      /**
-      * @internal
-      * Used to store the original name of the table, before any aliasing.
-      */
-      __publicField(this, _l);
-      /** @internal */
-      __publicField(this, _k);
-      /** @internal */
-      __publicField(this, _j);
-      /** @internal */
-      __publicField(this, _i);
-      /**
-      *  @internal
-      * Used to store the table name before the transformation via the `tableCreator` functions.
-      */
-      __publicField(this, _h);
-      /** @internal */
-      __publicField(this, _g, false);
-      /** @internal */
-      __publicField(this, _f, true);
-      /** @internal */
-      __publicField(this, _e2);
-      this[TableName] = this[OriginalName] = name;
-      this[TableSchema] = schema;
-      this[BaseName] = baseName;
-    }
-  }, __publicField(_o, _n, "Table"), /** @internal */
-  __publicField(_o, "Symbol", {
-    Name: TableName,
-    Schema: TableSchema,
-    OriginalName,
-    Columns: TableColumns,
-    ExtraConfigColumns,
-    BaseName,
-    IsAlias,
-    ExtraConfigBuilder
-  }), _o);
-  function isTable(table) {
-    return typeof table === "object" && table !== null && IsDrizzleTable in table;
+  const rotlSH = (h2, l2, s2) => h2 << s2 | l2 >>> 32 - s2;
+  const rotlSL = (h2, l2, s2) => l2 << s2 | h2 >>> 32 - s2;
+  const rotlBH = (h2, l2, s2) => l2 << s2 - 32 | h2 >>> 64 - s2;
+  const rotlBL = (h2, l2, s2) => h2 << s2 - 32 | l2 >>> 64 - s2;
+  function isBytes(a2) {
+    return a2 instanceof Uint8Array || ArrayBuffer.isView(a2) && a2.constructor.name === "Uint8Array" && "BYTES_PER_ELEMENT" in a2 && a2.BYTES_PER_ELEMENT === 1;
   }
-  function getTableName(table) {
-    return table[TableName];
+  function anumber(n2, title = "") {
+    if (typeof n2 !== "number") {
+      const prefix = title && `"${title}" `;
+      throw new TypeError(`${prefix}expected number, got ${typeof n2}`);
+    }
+    if (!Number.isSafeInteger(n2) || n2 < 0) {
+      const prefix = title && `"${title}" `;
+      throw new RangeError(`${prefix}expected integer >= 0, got ${n2}`);
+    }
   }
-  function iife(fn, ...args) {
-    return fn(...args);
-  }
-  const tracer = { startActiveSpan(name, fn) {
-    return fn();
-  } };
-  const ViewBaseConfig = /* @__PURE__ */ Symbol.for("drizzle:ViewBaseConfig");
-  function isSQLWrapper(value) {
-    return value !== null && value !== void 0 && typeof value.getSQL === "function";
-  }
-  function mergeQueries(queries) {
-    const result = {
-      sql: "",
-      params: []
-    };
-    for (const query of queries) {
-      result.sql += query.sql;
-      result.params.push(...query.params);
+  function abytes(value, length, title = "") {
+    const bytes = isBytes(value);
+    const len = value?.length;
+    const needsLen = length !== void 0;
+    if (!bytes || needsLen) {
+      const prefix = title && `"${title}" `;
+      const ofLen = "";
+      const got = bytes ? `length=${len}` : `type=${typeof value}`;
+      const message = prefix + "expected Uint8Array" + ofLen + ", got " + got;
+      if (!bytes)
+        throw new TypeError(message);
+      throw new RangeError(message);
     }
-    return result;
-  }
-  function _mergeQueries(queries) {
-    const result = {
-      sql: "",
-      params: []
-    };
-    const sqls = [];
-    for (const query of queries) {
-      sqls.push(query.sql);
-      result.params.push(...query.params);
-    }
-    result._sql = Object.assign(sqls, { raw: sqls });
-    return result;
-  }
-  var StringChunk = (_p = entityKind, _q = class {
-    constructor(value) {
-      __publicField(this, "value");
-      this.value = Array.isArray(value) ? value : [value];
-    }
-    getSQL() {
-      return new SQL([this]);
-    }
-  }, __publicField(_q, _p, "StringChunk"), _q);
-  var SQL = (_r = entityKind, _s = class {
-    constructor(queryChunks) {
-      /** @internal */
-      __publicField(this, "decoder", noopDecoder);
-      /** @internal */
-      __publicField(this, "shouldInlineParams", false);
-      /** @internal */
-      __publicField(this, "usedTables", []);
-      this.queryChunks = queryChunks;
-      for (const chunk of queryChunks) if (is$1(chunk, Table)) {
-        const schemaName = chunk[Table.Symbol.Schema];
-        this.usedTables.push(schemaName === void 0 ? chunk[Table.Symbol.Name] : schemaName + "." + chunk[Table.Symbol.Name]);
-      }
-    }
-    append(query) {
-      this.queryChunks.push(...query.queryChunks);
-      return this;
-    }
-    toQuery(config2) {
-      return tracer.startActiveSpan("drizzle.buildSQL", (span) => {
-        const query = this.buildQueryFromSourceParams(this.queryChunks, config2);
-        span?.setAttributes({
-          "drizzle.query.text": query.sql,
-          "drizzle.query.params": JSON.stringify(query.params)
-        });
-        return query;
-      });
-    }
-    buildQueryFromSourceParams(chunks, _config) {
-      const config2 = Object.assign({}, _config, {
-        inlineParams: _config.inlineParams || this.shouldInlineParams,
-        paramStartIndex: _config.paramStartIndex || { value: 0 }
-      });
-      const { escapeName, escapeParam, codecs, inlineParams, paramStartIndex, invokeSource } = config2;
-      const mappedChunks = chunks.map((chunk) => {
-        if (is$1(chunk, StringChunk)) return {
-          sql: chunk.value.join(""),
-          params: []
-        };
-        if (is$1(chunk, Name)) return {
-          sql: escapeName(chunk.value),
-          params: []
-        };
-        if (chunk === void 0) return {
-          sql: "",
-          params: []
-        };
-        if (Array.isArray(chunk)) {
-          const result = [new StringChunk("(")];
-          for (const [i2, p] of chunk.entries()) {
-            result.push(p);
-            if (i2 < chunk.length - 1) result.push(new StringChunk(", "));
-          }
-          result.push(new StringChunk(")"));
-          return this.buildQueryFromSourceParams(result, config2);
-        }
-        if (is$1(chunk, _s)) return this.buildQueryFromSourceParams(chunk.queryChunks, {
-          ...config2,
-          inlineParams: inlineParams || chunk.shouldInlineParams
-        });
-        if (is$1(chunk, Table)) {
-          const schemaName = chunk[Table.Symbol.Schema];
-          const tableName = chunk[Table.Symbol.Name];
-          if (invokeSource === "mssql-view-with-schemabinding") return {
-            sql: (schemaName === void 0 ? escapeName("dbo") : escapeName(schemaName)) + "." + escapeName(tableName),
-            params: []
-          };
-          return {
-            sql: schemaName === void 0 || chunk[IsAlias] ? escapeName(tableName) : escapeName(schemaName) + "." + escapeName(tableName),
-            params: []
-          };
-        }
-        if (is$1(chunk, Column)) {
-          const columnName = chunk.name;
-          if (_config.invokeSource === "indexes") return {
-            sql: escapeName(columnName),
-            params: []
-          };
-          const schemaName = invokeSource === "mssql-check" ? void 0 : chunk.table[Table.Symbol.Schema];
-          return {
-            sql: chunk.isAlias ? escapeName(chunk.name) : chunk.table[IsAlias] || schemaName === void 0 ? escapeName(chunk.table[Table.Symbol.Name]) + "." + escapeName(columnName) : escapeName(schemaName) + "." + escapeName(chunk.table[Table.Symbol.Name]) + "." + escapeName(columnName),
-            params: []
-          };
-        }
-        if (is$1(chunk, View)) {
-          const schemaName = chunk[ViewBaseConfig].schema;
-          const viewName = chunk[ViewBaseConfig].name;
-          return {
-            sql: schemaName === void 0 || chunk[ViewBaseConfig].isAlias ? escapeName(viewName) : escapeName(schemaName) + "." + escapeName(viewName),
-            params: []
-          };
-        }
-        if (is$1(chunk, Param)) {
-          if (is$1(chunk.value, _s)) return this.buildQueryFromSourceParams([chunk.value], config2);
-          const useCodecs = codecs && is$1(chunk.encoder, Column);
-          if (is$1(chunk.value, Placeholder)) {
-            const escaped2 = escapeParam(paramStartIndex.value++, chunk);
-            chunk.codec = useCodecs ? (value) => codecs.apply(chunk.encoder, "normalizeParam", value) : void 0;
-            return {
-              sql: useCodecs ? codecs.apply(chunk.encoder, "castParam", escaped2) : escaped2,
-              params: [chunk]
-            };
-          }
-          let mappedValue;
-          if (chunk.value === null) mappedValue = chunk.value;
-          else {
-            mappedValue = chunk.encoder.mapToDriverValue.isNoop ? chunk.value : chunk.encoder.mapToDriverValue(chunk.value);
-            if (is$1(mappedValue, _s)) return this.buildQueryFromSourceParams([mappedValue], config2);
-            if (useCodecs) mappedValue = codecs.apply(chunk.encoder, "normalizeParam", mappedValue);
-          }
-          if (inlineParams) return {
-            sql: this.mapInlineParam(mappedValue, config2),
-            params: []
-          };
-          const escaped = escapeParam(paramStartIndex.value++, mappedValue);
-          return {
-            sql: useCodecs ? codecs.apply(chunk.encoder, "castParam", escaped) : escaped,
-            params: [mappedValue]
-          };
-        }
-        if (is$1(chunk, Placeholder)) return {
-          sql: escapeParam(paramStartIndex.value++, chunk),
-          params: [chunk]
-        };
-        if (is$1(chunk, _s.Aliased) && chunk.fieldAlias !== void 0) return {
-          sql: (chunk.origin !== void 0 ? escapeName(chunk.origin) + "." : "") + escapeName(chunk.fieldAlias),
-          params: []
-        };
-        if (is$1(chunk, Subquery)) {
-          if (chunk._.isWith) return {
-            sql: escapeName(chunk._.alias),
-            params: []
-          };
-          return this.buildQueryFromSourceParams([
-            new StringChunk("("),
-            chunk._.sql,
-            new StringChunk(") "),
-            new Name(chunk._.alias)
-          ], config2);
-        }
-        if (typeof chunk === "function" && "enumName" in chunk) {
-          if ("schema" in chunk && chunk.schema) return {
-            sql: escapeName(chunk.schema) + "." + escapeName(chunk.enumName),
-            params: []
-          };
-          return {
-            sql: escapeName(chunk.enumName),
-            params: []
-          };
-        }
-        if (isSQLWrapper(chunk)) {
-          if (chunk.shouldOmitSQLParens?.()) return this.buildQueryFromSourceParams([chunk.getSQL()], config2);
-          return this.buildQueryFromSourceParams([
-            new StringChunk("("),
-            chunk.getSQL(),
-            new StringChunk(")")
-          ], config2);
-        }
-        if (inlineParams) return {
-          sql: this.mapInlineParam(chunk, config2),
-          params: []
-        };
-        return {
-          sql: escapeParam(paramStartIndex.value++, chunk),
-          params: [chunk]
-        };
-      });
-      if (_config.tagged) return _mergeQueries(mappedChunks);
-      return mergeQueries(mappedChunks);
-    }
-    mapInlineParam(chunk, { escapeString }) {
-      if (chunk === null) return "null";
-      if (typeof chunk === "number" || typeof chunk === "boolean" || typeof chunk === "bigint") return chunk.toString();
-      if (typeof chunk === "string") return escapeString(chunk);
-      if (typeof chunk === "object") {
-        const mappedValueAsString = chunk.toString();
-        if (mappedValueAsString === "[object Object]") return escapeString(JSON.stringify(chunk));
-        return escapeString(mappedValueAsString);
-      }
-      throw new Error("Unexpected param value: " + chunk);
-    }
-    getSQL() {
-      return this;
-    }
-    as(alias) {
-      if (alias === void 0) return this;
-      return new _s.Aliased(this, alias);
-    }
-    mapWith(decoder) {
-      this.decoder = typeof decoder === "function" ? { mapFromDriverValue: decoder } : decoder;
-      return this;
-    }
-    inlineParams() {
-      this.shouldInlineParams = true;
-      return this;
-    }
-    /**
-    * This method is used to conditionally include a part of the query.
-    *
-    * @param condition - Condition to check
-    * @returns itself if the condition is `true`, otherwise `undefined`
-    */
-    if(condition) {
-      return condition ? this : void 0;
-    }
-  }, __publicField(_s, _r, "SQL"), _s);
-  var Name = (_t = entityKind, _u = class {
-    constructor(value) {
-      __publicField(this, "brand");
-      this.value = value;
-    }
-    getSQL() {
-      return new SQL([this]);
-    }
-  }, __publicField(_u, _t, "Name"), _u);
-  function isDriverValueEncoder(value) {
-    return typeof value === "object" && value !== null && "mapToDriverValue" in value && typeof value.mapToDriverValue === "function";
-  }
-  const noopDecoder = { mapFromDriverValue: (value) => value };
-  noopDecoder.mapFromDriverValue.isNoop = true;
-  const noopEncoder = { mapToDriverValue: (value) => value };
-  noopEncoder.mapToDriverValue.isNoop = true;
-  ({
-    ...noopDecoder,
-    ...noopEncoder
-  });
-  var Param = (_v = entityKind, _w = class {
-    /**
-    * @param value - Parameter value
-    * @param encoder - Encoder to convert the value to a driver parameter
-    */
-    constructor(value, encoder = noopEncoder, codec2) {
-      __publicField(this, "brand");
-      this.value = value;
-      this.encoder = encoder;
-      this.codec = codec2;
-    }
-    getSQL() {
-      return new SQL([this]);
-    }
-  }, __publicField(_w, _v, "Param"), _w);
-  function sql(strings, ...params) {
-    const queryChunks = [];
-    if (params.length > 0 || strings.length > 0 && strings[0] !== "") queryChunks.push(new StringChunk(strings[0]));
-    for (const [paramIndex, param] of params.entries()) queryChunks.push(param, new StringChunk(strings[paramIndex + 1]));
-    return new SQL(queryChunks);
-  }
-  (function(_sql) {
-    function empty() {
-      return new SQL([]);
-    }
-    _sql.empty = empty;
-    function fromList(list) {
-      return new SQL(list);
-    }
-    _sql.fromList = fromList;
-    function raw(str) {
-      return new SQL([new StringChunk(str)]);
-    }
-    _sql.raw = raw;
-    function join(chunks, separator) {
-      const result = [];
-      for (const [i2, chunk] of chunks.entries()) {
-        if (i2 > 0 && separator !== void 0) result.push(separator);
-        result.push(chunk);
-      }
-      return new SQL(result);
-    }
-    _sql.join = join;
-    function identifier(value) {
-      return new Name(value);
-    }
-    _sql.identifier = identifier;
-    function placeholder(name) {
-      return new Placeholder(name);
-    }
-    _sql.placeholder = placeholder;
-    function param(value, encoder) {
-      return new Param(value, encoder);
-    }
-    _sql.param = param;
-    function comment(input) {
-      const encoded = sqlCommenter(input);
-      if (!encoded.length) return void 0;
-      return sql.raw(encoded);
-    }
-    _sql.comment = comment;
-  })(sql || (sql = {}));
-  function sqlCommenter(input) {
-    const encoded = sqlCommenter.encodeInput(input);
-    if (!encoded.length) return "";
-    return `/*${encoded}*/`;
-  }
-  (function(_sqlCommenter) {
-    function merge2(input1, input2) {
-      let encoded;
-      if (typeof input1 === "object" && typeof input2 === "object") encoded = encodeInput({
-        ...input1,
-        ...input2
-      });
-      else if (input1 && input2) encoded = [encodeInput(input1), encodeInput(input2)].filter((i2) => i2.length).join(",");
-      else if (input2) encoded = encodeInput(input2);
-      else if (input1) encoded = encodeInput(input1);
-      else return "";
-      if (!encoded.length) return "";
-      return `/*${encoded}*/`;
-    }
-    _sqlCommenter.merge = merge2;
-    function encodeInput(input) {
-      if (typeof input === "string") {
-        if (!input.length) return input;
-        return sanitizeStringInput(input);
-      }
-      const parts = [];
-      for (const [key, value] of Object.entries(input)) {
-        if (value === null || value === void 0 || value === "") continue;
-        const encodedKey = sanitizeObjectElement(key);
-        const encodedValue = sanitizeObjectElement(String(value));
-        parts.push(`${encodedKey}='${encodedValue}'`);
-      }
-      if (!parts.length) return "";
-      return parts.sort().join(",");
-    }
-    _sqlCommenter.encodeInput = encodeInput;
-    function sanitizeObjectElement(key) {
-      return encodeURIComponent(key).replace(/'/g, `\\'`);
-    }
-    _sqlCommenter.sanitizeObjectElement = sanitizeObjectElement;
-    function sanitizeStringInput(input) {
-      return input.replace(/\/\*/g, "/ *").replace(/\*\//g, "* /");
-    }
-    _sqlCommenter.sanitizeStringInput = sanitizeStringInput;
-  })(sqlCommenter || (sqlCommenter = {}));
-  (function(_SQL) {
-    var _a3;
-    _a3 = entityKind;
-    const _Aliased = class _Aliased {
-      constructor(sql2, fieldAlias) {
-        /** @internal */
-        __publicField(this, "isSelectionField", false);
-        /** @internal */
-        __publicField(this, "origin");
-        this.sql = sql2;
-        this.fieldAlias = fieldAlias;
-      }
-      getSQL() {
-        return this.sql;
-      }
-      /** @internal */
-      clone() {
-        return new _Aliased(this.sql, this.fieldAlias);
-      }
-    };
-    __publicField(_Aliased, _a3, "SQL.Aliased");
-    let Aliased = _Aliased;
-    _SQL.Aliased = Aliased;
-  })(SQL || (SQL = {}));
-  var Placeholder = (_x = entityKind, _y = class {
-    constructor(name) {
-      this.name = name;
-    }
-    getSQL() {
-      return new SQL([this]);
-    }
-  }, __publicField(_y, _x, "Placeholder"), _y);
-  const IsDrizzleView = /* @__PURE__ */ Symbol.for("drizzle:IsDrizzleView");
-  var View = (_C = class {
-    constructor({ name, schema, selectedFields, query }) {
-      /** @internal */
-      __publicField(this, _A);
-      /** @internal */
-      __publicField(this, _z, true);
-      this[ViewBaseConfig] = {
-        name,
-        originalName: name,
-        schema,
-        selectedFields,
-        query,
-        isExisting: !query,
-        isAlias: false
-      };
-    }
-    /** @internal */
-    get [(_B = entityKind, _A = ViewBaseConfig, _z = IsDrizzleView, TableName)]() {
-      return this[ViewBaseConfig].name;
-    }
-    /** @internal */
-    get [TableSchema]() {
-      return this[ViewBaseConfig].schema;
-    }
-    /** @internal */
-    get [IsAlias]() {
-      return this[ViewBaseConfig].isAlias;
-    }
-    /** @internal */
-    get [OriginalName]() {
-      return this[ViewBaseConfig].originalName;
-    }
-    /** @internal */
-    get [TableColumns]() {
-      return this[ViewBaseConfig].selectedFields;
-    }
-  }, __publicField(_C, _B, "View"), _C);
-  function isView(view) {
-    return typeof view === "object" && view !== null && IsDrizzleView in view;
-  }
-  Column.prototype.getSQL = function() {
-    return new SQL([this]);
-  };
-  Subquery.prototype.getSQL = function() {
-    return new SQL([this]);
-  };
-  function extractExtendedColumnType(column) {
-    const [type, constraint] = column.dataType.split(" ");
-    return {
-      type,
-      constraint
-    };
-  }
-  function bindIfParam(value, column) {
-    if (isDriverValueEncoder(column) && !isSQLWrapper(value) && !is$1(value, Param) && !is$1(value, Placeholder) && !is$1(value, Column) && !is$1(value, Table) && !is$1(value, View)) return new Param(value, column);
     return value;
   }
-  const eq = (left, right) => {
-    return sql`${left} = ${bindIfParam(right, left)}`;
-  };
-  Object.getPrototypeOf(() => null).constructor;
-  function getColumns(table) {
-    return is$1(table, Table) ? table[Table.Symbol.Columns] : is$1(table, View) ? table[ViewBaseConfig].selectedFields : table._.selectedFields;
+  function aexists(instance, checkFinished = true) {
+    if (instance.destroyed)
+      throw new Error("Hash instance has been destroyed");
+    if (checkFinished && instance.finished)
+      throw new Error("Hash#digest() has already been called");
   }
-  function getColumnNameAndConfig(a, b2) {
-    return {
-      name: typeof a === "string" && a.length > 0 ? a : "",
-      config: typeof a === "object" ? a : b2
-    };
-  }
-  typeof TextDecoder === "undefined" ? null : new TextDecoder();
-  const CONSTANTS = {
-    INT8_MIN: -128,
-    INT8_MAX: 127,
-    INT8_UNSIGNED_MAX: 255,
-    INT16_MIN: -32768,
-    INT16_MAX: 32767,
-    INT16_UNSIGNED_MAX: 65535,
-    INT24_MIN: -8388608,
-    INT24_MAX: 8388607,
-    INT24_UNSIGNED_MAX: 16777215,
-    INT32_MIN: -2147483648,
-    INT32_MAX: 2147483647,
-    INT32_UNSIGNED_MAX: 4294967295,
-    INT48_MIN: -140737488355328,
-    INT48_MAX: 140737488355327,
-    INT48_UNSIGNED_MAX: 281474976710655,
-    INT64_MIN: -9223372036854775808n,
-    INT64_MAX: 9223372036854775807n,
-    INT64_UNSIGNED_MAX: 18446744073709551615n
-  };
-  function processRelations(tablesConfig, tables) {
-    for (const tableConfig of Object.values(tablesConfig)) for (const [relationFieldName, relation] of Object.entries(tableConfig.relations)) {
-      if (!is$1(relation, Relation)) continue;
-      relation.sourceTable = tableConfig.table;
-      relation.fieldName = relationFieldName;
+  function aoutput(out, instance) {
+    abytes(out, void 0, "digestInto() output");
+    const min = instance.outputLen;
+    if (out.length < min) {
+      throw new RangeError('"digestInto() output" expected to be of length >=' + min);
     }
-    for (const [sourceTableName, tableConfig] of Object.entries(tablesConfig)) for (const [relationFieldName, relation] of Object.entries(tableConfig.relations)) {
-      if (!is$1(relation, Relation)) continue;
-      let reverseRelation;
-      const { targetTableName, alias, sourceColumns, targetColumns, throughTable, sourceTable, through, where, sourceColumnTableNames, targetColumnTableNames } = relation;
-      const relationPrintName = `relations -> ${tableConfig.name}: { ${relationFieldName}: r.${is$1(relation, One) ? "one" : "many"}.${targetTableName}(...) }`;
-      if (relationFieldName in tableConfig.table[TableColumns]) throw new Error(`${relationPrintName}: relation name collides with column "${relationFieldName}" of table "${tableConfig.name}"`);
-      if (typeof alias === "string" && !alias) throw new Error(`${relationPrintName}: "alias" cannot be an empty string - omit it if you don't need it`);
-      if (sourceColumns?.length === 0) throw new Error(`${relationPrintName}: "from" cannot be empty`);
-      if (targetColumns?.length === 0) throw new Error(`${relationPrintName}: "to" cannot be empty`);
-      if (sourceColumns && targetColumns) {
-        if (sourceColumns.length !== targetColumns.length && !throughTable) throw new Error(`${relationPrintName}: "from" and "to" fields without "through" must have the same length`);
-        for (const sName of sourceColumnTableNames) if (sName !== sourceTableName) throw new Error(`${relationPrintName}: all "from" columns must belong to table "${sourceTableName}", found column of table "${sName}"`);
-        for (const tName of targetColumnTableNames) if (tName !== targetTableName) throw new Error(`${relationPrintName}: all "to" columns must belong to table "${targetTableName}", found column of table "${tName}"`);
-        if (through) {
-          if (through.source.length !== sourceColumns.length || through.target.length !== targetColumns.length) throw new Error(`${relationPrintName}: ".through(column)" must be used either on all columns in "from" and "to" or not defined on any of them`);
-          for (const column of through.source) if (tables[column._.tableName] !== throughTable) throw new Error(`${relationPrintName}: ".through(column)" must be used on the same table by all columns of the relation`);
-          for (const column of through.target) if (tables[column._.tableName] !== throughTable) throw new Error(`${relationPrintName}: ".through(column)" must be used on the same table by all columns of the relation`);
+  }
+  function u32(arr) {
+    return new Uint32Array(arr.buffer, arr.byteOffset, Math.floor(arr.byteLength / 4));
+  }
+  function clean(...arrays) {
+    for (let i = 0; i < arrays.length; i++) {
+      arrays[i].fill(0);
+    }
+  }
+  const isLE = /* @__PURE__ */ (() => new Uint8Array(new Uint32Array([287454020]).buffer)[0] === 68)();
+  function byteSwap(word) {
+    return word << 24 & 4278190080 | word << 8 & 16711680 | word >>> 8 & 65280 | word >>> 24 & 255;
+  }
+  function byteSwap32(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = byteSwap(arr[i]);
+    }
+    return arr;
+  }
+  const swap32IfBE = isLE ? (u2) => u2 : byteSwap32;
+  const hasHexBuiltin = /* @__PURE__ */ (() => (
+    // @ts-ignore
+    typeof Uint8Array.from([]).toHex === "function" && typeof Uint8Array.fromHex === "function"
+  ))();
+  const hexes = /* @__PURE__ */ Array.from({ length: 256 }, (_2, i) => i.toString(16).padStart(2, "0"));
+  function bytesToHex(bytes) {
+    abytes(bytes);
+    if (hasHexBuiltin)
+      return bytes.toHex();
+    let hex2 = "";
+    for (let i = 0; i < bytes.length; i++) {
+      hex2 += hexes[bytes[i]];
+    }
+    return hex2;
+  }
+  function utf8ToBytes(str) {
+    if (typeof str !== "string")
+      throw new TypeError("string expected");
+    return new Uint8Array(new TextEncoder().encode(str));
+  }
+  function createHasher(hashCons, info = {}) {
+    const hashC = (msg, opts) => hashCons(opts).update(msg).digest();
+    const tmp = hashCons(void 0);
+    hashC.outputLen = tmp.outputLen;
+    hashC.blockLen = tmp.blockLen;
+    hashC.canXOF = tmp.canXOF;
+    hashC.create = (opts) => hashCons(opts);
+    Object.assign(hashC, info);
+    return Object.freeze(hashC);
+  }
+  const oidNist = (suffix) => ({
+    // Current NIST hashAlgs suffixes used here fit in one DER subidentifier octet.
+    // Larger suffix values would need base-128 OID encoding and a different length byte.
+    oid: Uint8Array.from([6, 9, 96, 134, 72, 1, 101, 3, 4, 2, suffix])
+  });
+  const _0n = BigInt(0);
+  const _1n = BigInt(1);
+  const _2n = BigInt(2);
+  const _7n = BigInt(7);
+  const _256n = BigInt(256);
+  const _0x71n = BigInt(113);
+  const SHA3_PI = [];
+  const SHA3_ROTL = [];
+  const _SHA3_IOTA = [];
+  for (let round = 0, R2 = _1n, x2 = 1, y2 = 0; round < 24; round++) {
+    [x2, y2] = [y2, (2 * x2 + 3 * y2) % 5];
+    SHA3_PI.push(2 * (5 * y2 + x2));
+    SHA3_ROTL.push((round + 1) * (round + 2) / 2 % 64);
+    let t2 = _0n;
+    for (let j2 = 0; j2 < 7; j2++) {
+      R2 = (R2 << _1n ^ (R2 >> _7n) * _0x71n) % _256n;
+      if (R2 & _2n)
+        t2 ^= _1n << (_1n << BigInt(j2)) - _1n;
+    }
+    _SHA3_IOTA.push(t2);
+  }
+  const IOTAS = split(_SHA3_IOTA, true);
+  const SHA3_IOTA_H = IOTAS[0];
+  const SHA3_IOTA_L = IOTAS[1];
+  const rotlH = (h2, l2, s2) => s2 > 32 ? rotlBH(h2, l2, s2) : rotlSH(h2, l2, s2);
+  const rotlL = (h2, l2, s2) => s2 > 32 ? rotlBL(h2, l2, s2) : rotlSL(h2, l2, s2);
+  function keccakP(s2, rounds = 24) {
+    anumber(rounds, "rounds");
+    if (rounds < 1 || rounds > 24)
+      throw new Error('"rounds" expected integer 1..24');
+    const B2 = new Uint32Array(5 * 2);
+    for (let round = 24 - rounds; round < 24; round++) {
+      for (let x2 = 0; x2 < 10; x2++)
+        B2[x2] = s2[x2] ^ s2[x2 + 10] ^ s2[x2 + 20] ^ s2[x2 + 30] ^ s2[x2 + 40];
+      for (let x2 = 0; x2 < 10; x2 += 2) {
+        const idx1 = (x2 + 8) % 10;
+        const idx0 = (x2 + 2) % 10;
+        const B0 = B2[idx0];
+        const B1 = B2[idx0 + 1];
+        const Th = rotlH(B0, B1, 1) ^ B2[idx1];
+        const Tl = rotlL(B0, B1, 1) ^ B2[idx1 + 1];
+        for (let y2 = 0; y2 < 50; y2 += 10) {
+          s2[x2 + y2] ^= Th;
+          s2[x2 + y2 + 1] ^= Tl;
         }
-        continue;
       }
-      if (sourceColumns || targetColumns) throw new Error(`${relationPrintName}: relation must have either both "from" and "to" defined, or none of them`);
-      const reverseTableConfig = tablesConfig[targetTableName];
-      if (!reverseTableConfig) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and no reverse relations of table "${targetTableName}" were found"`);
-      if (alias) {
-        const reverseRelations = Object.values(reverseTableConfig.relations).filter((it2) => is$1(it2, Relation) && it2.alias === alias && it2 !== relation);
-        if (reverseRelations.length > 1) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and multiple relations with alias "${alias}" found in table "${targetTableName}": ${reverseRelations.map((it2) => `"${it2.fieldName}"`).join(", ")}`);
-        reverseRelation = reverseRelations[0];
-        if (!reverseRelation) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and there is no reverse relation of table "${targetTableName}" with alias "${alias}"`);
-      } else {
-        const reverseRelations = Object.values(reverseTableConfig.relations).filter((it2) => is$1(it2, Relation) && it2.targetTable === sourceTable && !it2.alias && it2 !== relation);
-        if (reverseRelations.length > 1) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and multiple relations between "${targetTableName}" and "${sourceTableName}" were found.
-Hint: you can specify "alias" on both sides of the relation with the same value`);
-        reverseRelation = reverseRelations[0];
-        if (!reverseRelation) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and no reverse relation of table "${targetTableName}" with target table "${sourceTableName}" was found`);
+      let curH = s2[2];
+      let curL = s2[3];
+      for (let t2 = 0; t2 < 24; t2++) {
+        const shift = SHA3_ROTL[t2];
+        const Th = rotlH(curH, curL, shift);
+        const Tl = rotlL(curH, curL, shift);
+        const PI = SHA3_PI[t2];
+        curH = s2[PI];
+        curL = s2[PI + 1];
+        s2[PI] = Th;
+        s2[PI + 1] = Tl;
       }
-      if (!reverseRelation.sourceColumns || !reverseRelation.targetColumns) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and reverse relation "${targetTableName}.${reverseRelation.fieldName}" does not have "from"/"to" defined`);
-      relation.sourceColumns = reverseRelation.targetColumns;
-      relation.targetColumns = reverseRelation.sourceColumns;
-      relation.through = reverseRelation.through ? {
-        source: reverseRelation.through.target,
-        target: reverseRelation.through.source
-      } : void 0;
-      relation.throughTable = reverseRelation.throughTable;
-      relation.isReversed = !where;
-      relation.where = where ?? reverseRelation.where;
-    }
-    return tablesConfig;
-  }
-  function buildRelations(tables, config2) {
-    const tablesConfig = {};
-    for (const [tsName, table] of Object.entries(tables)) tablesConfig[tsName] = {
-      table,
-      name: tsName,
-      relations: config2[tsName] ?? {}
-    };
-    return processRelations(tablesConfig, tables);
-  }
-  function buildRelationsParts(tables, config2) {
-    const tablesConfig = {};
-    for (const [tsName, relations] of Object.entries(config2)) {
-      if (!relations || !tables[tsName]) continue;
-      tablesConfig[tsName] = {
-        table: tables[tsName],
-        name: tsName,
-        relations
-      };
-    }
-    return processRelations(tablesConfig, tables);
-  }
-  var Relation = (_D = entityKind, _E = class {
-    constructor(targetTable, targetTableName) {
-      __publicField(this, "fieldName");
-      __publicField(this, "sourceColumns");
-      __publicField(this, "targetColumns");
-      __publicField(this, "alias");
-      __publicField(this, "where");
-      __publicField(this, "sourceTable");
-      __publicField(this, "targetTable");
-      __publicField(this, "through");
-      __publicField(this, "throughTable");
-      __publicField(this, "isReversed");
-      /** @internal */
-      __publicField(this, "sourceColumnTableNames", []);
-      /** @internal */
-      __publicField(this, "targetColumnTableNames", []);
-      this.targetTableName = targetTableName;
-      this.targetTable = targetTable;
-    }
-  }, __publicField(_E, _D, "RelationV2"), _E);
-  var One = (_H = class extends (_G = Relation, _F = entityKind, _G) {
-    constructor(tables, targetTable, targetTableName, config2) {
-      super(targetTable, targetTableName);
-      __publicField(this, "relationType", "one");
-      __publicField(this, "optional");
-      this.alias = config2?.alias;
-      this.where = config2?.where;
-      if (config2?.from) this.sourceColumns = (Array.isArray(config2.from) ? config2.from : [config2.from]).map((it2) => {
-        this.throughTable ?? (this.throughTable = it2._.through ? tables[it2._.through._.tableName] : void 0);
-        this.sourceColumnTableNames.push(it2._.tableName);
-        return it2._.column;
-      });
-      if (config2?.to) this.targetColumns = (Array.isArray(config2.to) ? config2.to : [config2.to]).map((it2) => {
-        this.throughTable ?? (this.throughTable = it2._.through ? tables[it2._.through._.tableName] : void 0);
-        this.targetColumnTableNames.push(it2._.tableName);
-        return it2._.column;
-      });
-      if (this.throughTable) this.through = {
-        source: (Array.isArray(config2?.from) ? config2.from : config2?.from ? [config2.from] : []).map((c2) => c2._.through),
-        target: (Array.isArray(config2?.to) ? config2.to : config2?.to ? [config2.to] : []).map((c2) => c2._.through)
-      };
-      this.optional = config2?.optional ?? true;
-    }
-  }, __publicField(_H, _F, "OneV2"), _H);
-  var Many = (_K = class extends (_J = Relation, _I = entityKind, _J) {
-    constructor(tables, targetTable, targetTableName, config2) {
-      super(targetTable, targetTableName);
-      __publicField(this, "relationType", "many");
-      this.config = config2;
-      this.alias = config2?.alias;
-      this.where = config2?.where;
-      if (config2?.from) this.sourceColumns = (Array.isArray(config2.from) ? config2.from : [config2.from]).map((it2) => {
-        this.throughTable ?? (this.throughTable = it2._.through ? tables[it2._.through._.tableName] : void 0);
-        this.sourceColumnTableNames.push(it2._.tableName);
-        return it2._.column;
-      });
-      if (config2?.to) this.targetColumns = (Array.isArray(config2.to) ? config2.to : [config2.to]).map((it2) => {
-        this.throughTable ?? (this.throughTable = it2._.through ? tables[it2._.through._.tableName] : void 0);
-        this.targetColumnTableNames.push(it2._.tableName);
-        return it2._.column;
-      });
-      if (this.throughTable) this.through = {
-        source: (Array.isArray(config2?.from) ? config2.from : config2?.from ? [config2.from] : []).map((c2) => c2._.through),
-        target: (Array.isArray(config2?.to) ? config2.to : config2?.to ? [config2.to] : []).map((c2) => c2._.through)
-      };
-    }
-  }, __publicField(_K, _I, "ManyV2"), _K);
-  var AggregatedField = (_L = entityKind, _M = class {
-    constructor() {
-      __publicField(this, "table");
-    }
-    onTable(table) {
-      this.table = table;
-      return this;
-    }
-  }, __publicField(_M, _L, "AggregatedField"), _M);
-  var Count = (_P = class extends (_O = AggregatedField, _N = entityKind, _O) {
-    constructor() {
-      super(...arguments);
-      __publicField(this, "query");
-    }
-    getSQL() {
-      if (!this.query) {
-        if (!this.table) throw new Error("Table must be set before building aggregate field");
-        this.query = sql`select count(*) as ${sql.identifier("r")} from ${getTableAsAliasSQL(this.table)}`.mapWith(Number);
+      for (let y2 = 0; y2 < 50; y2 += 10) {
+        const b0 = s2[y2], b1 = s2[y2 + 1], b2 = s2[y2 + 2], b3 = s2[y2 + 3];
+        s2[y2] ^= ~s2[y2 + 2] & s2[y2 + 4];
+        s2[y2 + 1] ^= ~s2[y2 + 3] & s2[y2 + 5];
+        s2[y2 + 2] ^= ~s2[y2 + 4] & s2[y2 + 6];
+        s2[y2 + 3] ^= ~s2[y2 + 5] & s2[y2 + 7];
+        s2[y2 + 4] ^= ~s2[y2 + 6] & s2[y2 + 8];
+        s2[y2 + 5] ^= ~s2[y2 + 7] & s2[y2 + 9];
+        s2[y2 + 6] ^= ~s2[y2 + 8] & b0;
+        s2[y2 + 7] ^= ~s2[y2 + 9] & b1;
+        s2[y2 + 8] ^= ~b0 & b2;
+        s2[y2 + 9] ^= ~b1 & b3;
       }
-      return this.query;
+      s2[0] ^= SHA3_IOTA_H[round];
+      s2[1] ^= SHA3_IOTA_L[round];
     }
-  }, __publicField(_P, _N, "AggregatedFieldCount"), _P);
-  var RelationsBuilderTable = (_Q = entityKind, _R = class {
-    constructor(table, name) {
-      __publicField(this, "_");
-      this._ = {
-        name,
-        table
-      };
+    clean(B2);
+  }
+  class Keccak {
+    // NOTE: we accept arguments in bytes instead of bits here.
+    constructor(blockLen, suffix, outputLen, enableXOF = false, rounds = 24) {
+      __publicField(this, "state");
+      __publicField(this, "pos", 0);
+      __publicField(this, "posOut", 0);
+      __publicField(this, "finished", false);
+      __publicField(this, "state32");
+      __publicField(this, "destroyed", false);
+      __publicField(this, "blockLen");
+      __publicField(this, "suffix");
+      __publicField(this, "outputLen");
+      __publicField(this, "canXOF");
+      __publicField(this, "enableXOF", false);
+      __publicField(this, "rounds");
+      this.blockLen = blockLen;
+      this.suffix = suffix;
+      this.outputLen = outputLen;
+      this.enableXOF = enableXOF;
+      this.canXOF = enableXOF;
+      this.rounds = rounds;
+      anumber(outputLen, "outputLen");
+      if (!(0 < blockLen && blockLen < 200))
+        throw new Error("only keccak-f1600 function is supported");
+      this.state = new Uint8Array(200);
+      this.state32 = u32(this.state);
     }
-  }, __publicField(_R, _Q, "RelationsBuilderTable"), _R);
-  var RelationsBuilderColumn = (_S = entityKind, _T = class {
-    constructor(column, tableName, key) {
-      __publicField(this, "_");
-      this._ = {
-        tableName,
-        column,
-        key
-      };
+    clone() {
+      return this._cloneInto();
     }
-    through(column) {
-      return new RelationsBuilderJunctionColumn(this._.column, this._.tableName, this._.key, column);
+    keccak() {
+      swap32IfBE(this.state32);
+      keccakP(this.state32, this.rounds);
+      swap32IfBE(this.state32);
+      this.posOut = 0;
+      this.pos = 0;
     }
-  }, __publicField(_T, _S, "RelationsBuilderColumn"), _T);
-  var RelationsBuilderJunctionColumn = (_U = entityKind, _V = class {
-    constructor(column, tableName, key, through) {
-      __publicField(this, "_");
-      this._ = {
-        tableName,
-        column,
-        through,
-        key
-      };
-    }
-  }, __publicField(_V, _U, "RelationsBuilderColumn"), _V);
-  var RelationsHelperStatic = (_W = entityKind, _X = class {
-    constructor(tables) {
-      __publicField(this, "_");
-      __publicField(this, "one");
-      __publicField(this, "many");
-      /** @internal - to be reworked */
-      __publicField(this, "aggs", { count() {
-        return new Count();
-      } });
-      this._ = { tables };
-      const one = {};
-      const many = {};
-      for (const [tableName, table] of Object.entries(tables)) {
-        one[tableName] = (config2) => {
-          return new One(tables, table, tableName, config2);
-        };
-        many[tableName] = (config2) => {
-          return new Many(tables, table, tableName, config2);
-        };
+    update(data) {
+      aexists(this);
+      abytes(data);
+      const { blockLen, state } = this;
+      const len = data.length;
+      for (let pos = 0; pos < len; ) {
+        const take = Math.min(blockLen - this.pos, len - pos);
+        for (let i = 0; i < take; i++)
+          state[this.pos++] ^= data[pos++];
+        if (this.pos === blockLen)
+          this.keccak();
       }
-      this.one = one;
-      this.many = many;
+      return this;
     }
-  }, __publicField(_X, _W, "RelationsHelperStatic"), _X);
-  function createRelationsHelper(tables) {
-    const helperStatic = new RelationsHelperStatic(tables);
-    const relationsTables = Object.entries(tables).reduce((acc, [tKey, value]) => {
-      const rTable = new RelationsBuilderTable(value, tKey);
-      const columns = Object.entries(value[TableColumns]).reduce((acc2, [cKey, column]) => {
-        acc2[cKey] = new RelationsBuilderColumn(column, tKey, cKey);
-        return acc2;
-      }, {});
-      acc[tKey] = Object.assign(rTable, columns);
-      return acc;
-    }, {});
-    return Object.assign(helperStatic, relationsTables);
-  }
-  function extractTablesFromSchema(schema) {
-    return Object.fromEntries(Object.entries(schema).filter(([_2, e2]) => is$1(e2, Table) || is$1(e2, View)));
-  }
-  function defineRelations(schema, relations) {
-    const tables = extractTablesFromSchema(schema);
-    return buildRelations(tables, {});
-  }
-  function defineRelationsPart(schema, relations) {
-    const tables = extractTablesFromSchema(schema);
-    return buildRelationsParts(tables, relations ? relations(createRelationsHelper(tables)) : Object.fromEntries(Object.keys(tables).map((k2) => [k2, {}])));
-  }
-  function getTableAsAliasSQL(table) {
-    return sql`${table[IsAlias] ? sql`${sql`${sql.identifier(table[TableSchema] ?? "")}.`.if(table[TableSchema])}${sql.identifier(table[OriginalName])} as ${table}` : table}`;
-  }
-  var ForeignKeyBuilder = (_Y = entityKind, _Z = class {
-    constructor(config2, actions) {
-      /** @internal */
-      __publicField(this, "reference");
-      /** @internal */
-      __publicField(this, "_onUpdate", "no action");
-      /** @internal */
-      __publicField(this, "_onDelete", "no action");
-      this.reference = () => {
-        const { name, columns, foreignColumns } = config2();
-        return {
-          name,
-          columns,
-          foreignTable: foreignColumns[0].table,
-          foreignColumns
-        };
-      };
-      if (actions) {
-        this._onUpdate = actions.onUpdate;
-        this._onDelete = actions.onDelete;
+    finish() {
+      if (this.finished)
+        return;
+      this.finished = true;
+      const { state, suffix, pos, blockLen } = this;
+      state[pos] ^= suffix;
+      if ((suffix & 128) !== 0 && pos === blockLen - 1)
+        this.keccak();
+      state[blockLen - 1] ^= 128;
+      this.keccak();
+    }
+    writeInto(out) {
+      aexists(this, false);
+      abytes(out);
+      this.finish();
+      const bufferOut = this.state;
+      const { blockLen } = this;
+      for (let pos = 0, len = out.length; pos < len; ) {
+        if (this.posOut >= blockLen)
+          this.keccak();
+        const take = Math.min(blockLen - this.posOut, len - pos);
+        out.set(bufferOut.subarray(this.posOut, this.posOut + take), pos);
+        this.posOut += take;
+        pos += take;
       }
+      return out;
     }
-    onUpdate(action) {
-      this._onUpdate = action === void 0 ? "no action" : action;
-      return this;
+    xofInto(out) {
+      if (!this.enableXOF)
+        throw new Error("XOF is not possible for this instance");
+      return this.writeInto(out);
     }
-    onDelete(action) {
-      this._onDelete = action === void 0 ? "no action" : action;
-      return this;
+    xof(bytes) {
+      anumber(bytes);
+      return this.xofInto(new Uint8Array(bytes));
     }
-    /** @internal */
-    build(table) {
-      return new ForeignKey(table, this);
+    digestInto(out) {
+      aoutput(out, this);
+      if (this.finished)
+        throw new Error("digest() was already called");
+      this.writeInto(out.subarray(0, this.outputLen));
+      this.destroy();
     }
-  }, __publicField(_Z, _Y, "PgForeignKeyBuilder"), _Z);
-  var ForeignKey = (__ = entityKind, _$ = class {
-    constructor(table, builder) {
-      __publicField(this, "reference");
-      __publicField(this, "onUpdate");
-      __publicField(this, "onDelete");
-      __publicField(this, "name");
-      this.table = table;
-      this.reference = builder.reference;
-      this.onUpdate = builder._onUpdate;
-      this.onDelete = builder._onDelete;
+    digest() {
+      const out = new Uint8Array(this.outputLen);
+      this.digestInto(out);
+      return out;
     }
-    getName() {
-      const { name, columns, foreignColumns } = this.reference();
-      const columnNames = columns.map((column) => column.name);
-      const foreignColumnNames = foreignColumns.map((column) => column.name);
-      const chunks = [
-        this.table[TableName],
-        ...columnNames,
-        foreignColumns[0].table[TableName],
-        ...foreignColumnNames
-      ];
-      return name ?? `${chunks.join("_")}_fk`;
+    destroy() {
+      this.destroyed = true;
+      clean(this.state);
     }
-    isNameExplicit() {
-      return !!this.reference().name;
+    _cloneInto(to) {
+      const { blockLen, suffix, outputLen, rounds, enableXOF } = this;
+      to || (to = new Keccak(blockLen, suffix, outputLen, enableXOF, rounds));
+      to.blockLen = blockLen;
+      to.state32.set(this.state32);
+      to.pos = this.pos;
+      to.posOut = this.posOut;
+      to.finished = this.finished;
+      to.rounds = rounds;
+      to.suffix = suffix;
+      to.outputLen = outputLen;
+      to.enableXOF = enableXOF;
+      to.canXOF = this.canXOF;
+      to.destroyed = this.destroyed;
+      return to;
     }
-  }, __publicField(_$, __, "PgForeignKey"), _$);
-  var PgColumnBuilder = (_aa = entityKind, _ba = class {
-    constructor(name, dataType, columnType) {
-      __publicField(this, "foreignKeyConfigs", []);
-      __publicField(this, "config");
-      /**
-      * Alias for {@link $defaultFn}.
-      */
-      __publicField(this, "$default", this.$defaultFn);
-      /**
-      * Alias for {@link $onUpdateFn}.
-      */
-      __publicField(this, "$onUpdate", this.$onUpdateFn);
-      this.config = {
-        name,
-        keyAsName: name === "",
-        notNull: false,
-        default: void 0,
-        hasDefault: false,
-        primaryKey: false,
-        isUnique: false,
-        uniqueName: void 0,
-        uniqueType: void 0,
-        dataType,
-        columnType,
-        generated: void 0,
-        defaultFn: void 0,
-        onUpdateFn: void 0,
-        generatedIdentity: void 0
-      };
-    }
-    /**
-    * Changes the data type of the column. Commonly used with `json` columns. Also, useful for branded types.
-    *
-    * @example
-    * ```ts
-    * const users = pgTable('users', {
-    * 	id: integer('id').$type<UserId>().primaryKey(),
-    * 	details: json('details').$type<UserDetails>().notNull(),
-    * });
-    * ```
-    */
-    $type() {
-      return this;
-    }
-    /**
-    * Adds a `not null` clause to the column definition.
-    *
-    * Affects the `select` model of the table - columns *without* `not null` will be nullable on select.
-    */
-    notNull() {
-      this.config.notNull = true;
-      return this;
-    }
-    /**
-    * Adds a `default <value>` clause to the column definition.
-    *
-    * Affects the `insert` model of the table - columns *with* `default` are optional on insert.
-    *
-    * If you need to set a dynamic default value, use {@link $defaultFn} instead.
-    */
-    default(value) {
-      this.config.default = value;
-      this.config.hasDefault = true;
-      return this;
-    }
-    /**
-    * Adds a dynamic default value to the column.
-    * The function will be called when the row is inserted, and the returned value will be used as the column value.
-    *
-    * **Note:** This value does not affect the `drizzle-kit` behavior, it is only used at runtime in `drizzle-orm`.
-    */
-    $defaultFn(fn) {
-      this.config.defaultFn = fn;
-      this.config.hasDefault = true;
-      return this;
-    }
-    /**
-    * Adds a dynamic update value to the column.
-    * The function will be called when the row is updated, and the returned value will be used as the column value if none is provided.
-    * If no `default` (or `$defaultFn`) value is provided, the function will be called when the row is inserted as well, and the returned value will be used as the column value.
-    *
-    * **Note:** This value does not affect the `drizzle-kit` behavior, it is only used at runtime in `drizzle-orm`.
-    */
-    $onUpdateFn(fn) {
-      this.config.onUpdateFn = fn;
-      this.config.hasDefault = true;
-      return this;
-    }
-    /**
-    * Adds a `primary key` clause to the column definition. This implicitly makes the column `not null`.
-    *
-    * In SQLite, `integer primary key` implicitly makes the column auto-incrementing.
-    */
-    primaryKey() {
-      this.config.primaryKey = true;
-      this.config.notNull = true;
-      return this;
-    }
-    /** @internal Sets the name of the column to the key within the table definition if a name was not given. */
-    setName(name, casingFn) {
-      if (this.config.name !== "") return;
-      this.config.name = casingFn(name);
-    }
-    array(dimensions) {
-      const dim = dimensions ?? "[]";
-      this.config.dimensions = dim.length / 2;
-      return this;
-    }
-    references(ref, config2 = {}) {
-      this.foreignKeyConfigs.push({
-        ref,
-        config: config2
-      });
-      return this;
-    }
-    unique(name, config2) {
-      this.config.isUnique = true;
-      this.config.uniqueName = name;
-      this.config.uniqueType = config2?.nulls;
-      return this;
-    }
-    generatedAlwaysAs(as) {
-      this.config.generated = {
-        as,
-        type: "always",
-        mode: "stored"
-      };
-      return this;
-    }
-    /** @internal */
-    buildForeignKeys(column, table) {
-      return this.foreignKeyConfigs.map(({ ref, config: config2 }) => {
-        return iife((ref2, config3) => {
-          const builder = new ForeignKeyBuilder(() => {
-            const foreignColumn = ref2();
+  }
+  const genKeccak = (suffix, blockLen, outputLen, info = {}) => createHasher(() => new Keccak(blockLen, suffix, outputLen), info);
+  const sha3_256 = /* @__PURE__ */ genKeccak(
+    6,
+    136,
+    32,
+    /* @__PURE__ */ oidNist(8)
+  );
+  function getDefaultExportFromCjs(x2) {
+    return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
+  }
+  var jsonBigint = { exports: {} };
+  var stringify = { exports: {} };
+  var bignumber$1 = { exports: {} };
+  var bignumber = bignumber$1.exports;
+  var hasRequiredBignumber;
+  function requireBignumber() {
+    if (hasRequiredBignumber) return bignumber$1.exports;
+    hasRequiredBignumber = 1;
+    (function(module) {
+      (function(globalObject) {
+        var BigNumber, isNumeric = /^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i, mathceil = Math.ceil, mathfloor = Math.floor, bignumberError = "[BigNumber Error] ", tooManyDigits = bignumberError + "Number primitive has more than 15 significant digits: ", BASE = 1e14, LOG_BASE = 14, MAX_SAFE_INTEGER = 9007199254740991, POWS_TEN = [1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13], SQRT_BASE = 1e7, MAX = 1e9;
+        function clone2(configObject) {
+          var div, convertBase, parseNumeric, P2 = BigNumber2.prototype = { constructor: BigNumber2, toString: null, valueOf: null }, ONE = new BigNumber2(1), DECIMAL_PLACES = 20, ROUNDING_MODE = 4, TO_EXP_NEG = -7, TO_EXP_POS = 21, MIN_EXP = -1e7, MAX_EXP = 1e7, CRYPTO = false, MODULO_MODE = 1, POW_PRECISION = 0, FORMAT = {
+            prefix: "",
+            groupSize: 3,
+            secondaryGroupSize: 0,
+            groupSeparator: ",",
+            decimalSeparator: ".",
+            fractionGroupSize: 0,
+            fractionGroupSeparator: " ",
+            // non-breaking space
+            suffix: ""
+          }, ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyz", alphabetHasNormalDecimalDigits = true;
+          function BigNumber2(v2, b2) {
+            var alphabet, c2, caseChanged, e2, i, isNum, len, str, x2 = this;
+            if (!(x2 instanceof BigNumber2)) return new BigNumber2(v2, b2);
+            if (b2 == null) {
+              if (v2 && v2._isBigNumber === true) {
+                x2.s = v2.s;
+                if (!v2.c || v2.e > MAX_EXP) {
+                  x2.c = x2.e = null;
+                } else if (v2.e < MIN_EXP) {
+                  x2.c = [x2.e = 0];
+                } else {
+                  x2.e = v2.e;
+                  x2.c = v2.c.slice();
+                }
+                return;
+              }
+              if ((isNum = typeof v2 == "number") && v2 * 0 == 0) {
+                x2.s = 1 / v2 < 0 ? (v2 = -v2, -1) : 1;
+                if (v2 === ~~v2) {
+                  for (e2 = 0, i = v2; i >= 10; i /= 10, e2++) ;
+                  if (e2 > MAX_EXP) {
+                    x2.c = x2.e = null;
+                  } else {
+                    x2.e = e2;
+                    x2.c = [v2];
+                  }
+                  return;
+                }
+                str = String(v2);
+              } else {
+                if (!isNumeric.test(str = String(v2))) return parseNumeric(x2, str, isNum);
+                x2.s = str.charCodeAt(0) == 45 ? (str = str.slice(1), -1) : 1;
+              }
+              if ((e2 = str.indexOf(".")) > -1) str = str.replace(".", "");
+              if ((i = str.search(/e/i)) > 0) {
+                if (e2 < 0) e2 = i;
+                e2 += +str.slice(i + 1);
+                str = str.substring(0, i);
+              } else if (e2 < 0) {
+                e2 = str.length;
+              }
+            } else {
+              intCheck(b2, 2, ALPHABET.length, "Base");
+              if (b2 == 10 && alphabetHasNormalDecimalDigits) {
+                x2 = new BigNumber2(v2);
+                return round(x2, DECIMAL_PLACES + x2.e + 1, ROUNDING_MODE);
+              }
+              str = String(v2);
+              if (isNum = typeof v2 == "number") {
+                if (v2 * 0 != 0) return parseNumeric(x2, str, isNum, b2);
+                x2.s = 1 / v2 < 0 ? (str = str.slice(1), -1) : 1;
+                if (BigNumber2.DEBUG && str.replace(/^0\.0*|\./, "").length > 15) {
+                  throw Error(tooManyDigits + v2);
+                }
+              } else {
+                x2.s = str.charCodeAt(0) === 45 ? (str = str.slice(1), -1) : 1;
+              }
+              alphabet = ALPHABET.slice(0, b2);
+              e2 = i = 0;
+              for (len = str.length; i < len; i++) {
+                if (alphabet.indexOf(c2 = str.charAt(i)) < 0) {
+                  if (c2 == ".") {
+                    if (i > e2) {
+                      e2 = len;
+                      continue;
+                    }
+                  } else if (!caseChanged) {
+                    if (str == str.toUpperCase() && (str = str.toLowerCase()) || str == str.toLowerCase() && (str = str.toUpperCase())) {
+                      caseChanged = true;
+                      i = -1;
+                      e2 = 0;
+                      continue;
+                    }
+                  }
+                  return parseNumeric(x2, String(v2), isNum, b2);
+                }
+              }
+              isNum = false;
+              str = convertBase(str, b2, 10, x2.s);
+              if ((e2 = str.indexOf(".")) > -1) str = str.replace(".", "");
+              else e2 = str.length;
+            }
+            for (i = 0; str.charCodeAt(i) === 48; i++) ;
+            for (len = str.length; str.charCodeAt(--len) === 48; ) ;
+            if (str = str.slice(i, ++len)) {
+              len -= i;
+              if (isNum && BigNumber2.DEBUG && len > 15 && (v2 > MAX_SAFE_INTEGER || v2 !== mathfloor(v2))) {
+                throw Error(tooManyDigits + x2.s * v2);
+              }
+              if ((e2 = e2 - i - 1) > MAX_EXP) {
+                x2.c = x2.e = null;
+              } else if (e2 < MIN_EXP) {
+                x2.c = [x2.e = 0];
+              } else {
+                x2.e = e2;
+                x2.c = [];
+                i = (e2 + 1) % LOG_BASE;
+                if (e2 < 0) i += LOG_BASE;
+                if (i < len) {
+                  if (i) x2.c.push(+str.slice(0, i));
+                  for (len -= LOG_BASE; i < len; ) {
+                    x2.c.push(+str.slice(i, i += LOG_BASE));
+                  }
+                  i = LOG_BASE - (str = str.slice(i)).length;
+                } else {
+                  i -= len;
+                }
+                for (; i--; str += "0") ;
+                x2.c.push(+str);
+              }
+            } else {
+              x2.c = [x2.e = 0];
+            }
+          }
+          BigNumber2.clone = clone2;
+          BigNumber2.ROUND_UP = 0;
+          BigNumber2.ROUND_DOWN = 1;
+          BigNumber2.ROUND_CEIL = 2;
+          BigNumber2.ROUND_FLOOR = 3;
+          BigNumber2.ROUND_HALF_UP = 4;
+          BigNumber2.ROUND_HALF_DOWN = 5;
+          BigNumber2.ROUND_HALF_EVEN = 6;
+          BigNumber2.ROUND_HALF_CEIL = 7;
+          BigNumber2.ROUND_HALF_FLOOR = 8;
+          BigNumber2.EUCLID = 9;
+          BigNumber2.config = BigNumber2.set = function(obj) {
+            var p2, v2;
+            if (obj != null) {
+              if (typeof obj == "object") {
+                if (obj.hasOwnProperty(p2 = "DECIMAL_PLACES")) {
+                  v2 = obj[p2];
+                  intCheck(v2, 0, MAX, p2);
+                  DECIMAL_PLACES = v2;
+                }
+                if (obj.hasOwnProperty(p2 = "ROUNDING_MODE")) {
+                  v2 = obj[p2];
+                  intCheck(v2, 0, 8, p2);
+                  ROUNDING_MODE = v2;
+                }
+                if (obj.hasOwnProperty(p2 = "EXPONENTIAL_AT")) {
+                  v2 = obj[p2];
+                  if (v2 && v2.pop) {
+                    intCheck(v2[0], -MAX, 0, p2);
+                    intCheck(v2[1], 0, MAX, p2);
+                    TO_EXP_NEG = v2[0];
+                    TO_EXP_POS = v2[1];
+                  } else {
+                    intCheck(v2, -MAX, MAX, p2);
+                    TO_EXP_NEG = -(TO_EXP_POS = v2 < 0 ? -v2 : v2);
+                  }
+                }
+                if (obj.hasOwnProperty(p2 = "RANGE")) {
+                  v2 = obj[p2];
+                  if (v2 && v2.pop) {
+                    intCheck(v2[0], -MAX, -1, p2);
+                    intCheck(v2[1], 1, MAX, p2);
+                    MIN_EXP = v2[0];
+                    MAX_EXP = v2[1];
+                  } else {
+                    intCheck(v2, -MAX, MAX, p2);
+                    if (v2) {
+                      MIN_EXP = -(MAX_EXP = v2 < 0 ? -v2 : v2);
+                    } else {
+                      throw Error(bignumberError + p2 + " cannot be zero: " + v2);
+                    }
+                  }
+                }
+                if (obj.hasOwnProperty(p2 = "CRYPTO")) {
+                  v2 = obj[p2];
+                  if (v2 === !!v2) {
+                    if (v2) {
+                      if (typeof crypto != "undefined" && crypto && (crypto.getRandomValues || crypto.randomBytes)) {
+                        CRYPTO = v2;
+                      } else {
+                        CRYPTO = !v2;
+                        throw Error(bignumberError + "crypto unavailable");
+                      }
+                    } else {
+                      CRYPTO = v2;
+                    }
+                  } else {
+                    throw Error(bignumberError + p2 + " not true or false: " + v2);
+                  }
+                }
+                if (obj.hasOwnProperty(p2 = "MODULO_MODE")) {
+                  v2 = obj[p2];
+                  intCheck(v2, 0, 9, p2);
+                  MODULO_MODE = v2;
+                }
+                if (obj.hasOwnProperty(p2 = "POW_PRECISION")) {
+                  v2 = obj[p2];
+                  intCheck(v2, 0, MAX, p2);
+                  POW_PRECISION = v2;
+                }
+                if (obj.hasOwnProperty(p2 = "FORMAT")) {
+                  v2 = obj[p2];
+                  if (typeof v2 == "object") FORMAT = v2;
+                  else throw Error(bignumberError + p2 + " not an object: " + v2);
+                }
+                if (obj.hasOwnProperty(p2 = "ALPHABET")) {
+                  v2 = obj[p2];
+                  if (typeof v2 == "string" && !/^.?$|[+\-.\s]|(.).*\1/.test(v2)) {
+                    alphabetHasNormalDecimalDigits = v2.slice(0, 10) == "0123456789";
+                    ALPHABET = v2;
+                  } else {
+                    throw Error(bignumberError + p2 + " invalid: " + v2);
+                  }
+                }
+              } else {
+                throw Error(bignumberError + "Object expected: " + obj);
+              }
+            }
             return {
-              name: config3.name,
-              columns: [column],
-              foreignColumns: [foreignColumn]
+              DECIMAL_PLACES,
+              ROUNDING_MODE,
+              EXPONENTIAL_AT: [TO_EXP_NEG, TO_EXP_POS],
+              RANGE: [MIN_EXP, MAX_EXP],
+              CRYPTO,
+              MODULO_MODE,
+              POW_PRECISION,
+              FORMAT,
+              ALPHABET
             };
-          });
-          if (config3.onUpdate) builder.onUpdate(config3.onUpdate);
-          if (config3.onDelete) builder.onDelete(config3.onDelete);
-          return builder.build(table);
-        }, ref, config2);
-      });
-    }
-    /** @internal */
-    buildExtraConfigColumn(table) {
-      return new ExtraConfigColumn(table, {
-        ...this.config,
-        dimensions: this.config.dimensions ?? 0
-      });
-    }
-  }, __publicField(_ba, _aa, "PgColumnBuilder"), _ba);
-  var PgColumn = (_ea = class extends (_da = Column, _ca = entityKind, _da) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "table");
-      __publicField(this, "dimensions");
-      this.table = table;
-      this.dimensions = config2.dimensions ?? 0;
-    }
-    /** @internal */
-    postBuild() {
-      if (this.dimensions) {
-        const originalFromDriver = this.mapFromDriverValue.bind(this);
-        const originalToDriver = this.mapToDriverValue.bind(this);
-        this.mapFromDriverValue = this.mapFromDriverValue.isNoop ? this.mapFromDriverValue : (value) => {
-          return this.mapArrayElements(value, originalFromDriver, this.dimensions);
-        };
-        this.mapToDriverValue = this.mapToDriverValue.isNoop ? this.mapToDriverValue : (value) => {
-          return this.mapArrayElements(value, originalToDriver, this.dimensions);
-        };
-      }
-      return this;
-    }
-    /** @internal */
-    mapArrayElements(value, mapper, depth) {
-      if (depth > 0 && Array.isArray(value)) return value.map((v2) => v2 === null ? null : this.mapArrayElements(v2, mapper, depth - 1));
-      return mapper(value);
-    }
-  }, __publicField(_ea, _ca, "PgColumn"), _ea);
-  var ExtraConfigColumn = (_ha = class extends (_ga = PgColumn, _fa = entityKind, _ga) {
-    constructor() {
-      super(...arguments);
-      /** @itnernal */
-      __publicField(this, "codec");
-      __publicField(this, "indexConfig", {
-        order: this.config.order ?? "asc",
-        nulls: this.config.nulls ?? "last",
-        opClass: this.config.opClass
-      });
-      __publicField(this, "defaultConfig", {
-        order: "asc",
-        nulls: "last",
-        opClass: void 0
-      });
-    }
-    getSQLType() {
-      return this.getSQLType();
-    }
-    asc() {
-      this.indexConfig.order = "asc";
-      return this;
-    }
-    desc() {
-      this.indexConfig.order = "desc";
-      return this;
-    }
-    nullsFirst() {
-      this.indexConfig.nulls = "first";
-      return this;
-    }
-    nullsLast() {
-      this.indexConfig.nulls = "last";
-      return this;
-    }
-    /**
-    * ### PostgreSQL documentation quote
-    *
-    * > An operator class with optional parameters can be specified for each column of an index.
-    * The operator class identifies the operators to be used by the index for that column.
-    * For example, a B-tree index on four-byte integers would use the int4_ops class;
-    * this operator class includes comparison functions for four-byte integers.
-    * In practice the default operator class for the column's data type is usually sufficient.
-    * The main point of having operator classes is that for some data types, there could be more than one meaningful ordering.
-    * For example, we might want to sort a complex-number data type either by absolute value or by real part.
-    * We could do this by defining two operator classes for the data type and then selecting the proper class when creating an index.
-    * More information about operator classes check:
-    *
-    * ### Useful links
-    * https://www.postgresql.org/docs/current/sql-createindex.html
-    *
-    * https://www.postgresql.org/docs/current/indexes-opclass.html
-    *
-    * https://www.postgresql.org/docs/current/xindex.html
-    *
-    * ### Additional types
-    * If you have the `pg_vector` extension installed in your database, you can use the
-    * `vector_l2_ops`, `vector_ip_ops`, `vector_cosine_ops`, `vector_l1_ops`, `bit_hamming_ops`, `bit_jaccard_ops`, `halfvec_l2_ops`, `sparsevec_l2_ops` options, which are predefined types.
-    *
-    * **You can always specify any string you want in the operator class, in case Drizzle doesn't have it natively in its types**
-    *
-    * @param opClass
-    * @returns
-    */
-    op(opClass) {
-      this.indexConfig.opClass = opClass;
-      return this;
-    }
-  }, __publicField(_ha, _fa, "ExtraConfigColumn"), _ha);
-  var PgIntColumnBuilder = (_ka = class extends (_ja = PgColumnBuilder, _ia = entityKind, _ja) {
-    /**
-    * Adds an `ALWAYS AS IDENTITY` clause to the column definition.
-    * Available for integer column types.
-    */
-    generatedAlwaysAsIdentity(sequence) {
-      if (sequence) {
-        const { name, ...options } = sequence;
-        this.config.generatedIdentity = {
-          type: "always",
-          sequenceName: name,
-          sequenceOptions: options
-        };
-      } else this.config.generatedIdentity = { type: "always" };
-      this.config.hasDefault = true;
-      this.config.notNull = true;
-      return this;
-    }
-    /**
-    * Adds a `BY DEFAULT AS IDENTITY` clause to the column definition.
-    * Available for integer column types.
-    */
-    generatedByDefaultAsIdentity(sequence) {
-      if (sequence) {
-        const { name, ...options } = sequence;
-        this.config.generatedIdentity = {
-          type: "byDefault",
-          sequenceName: name,
-          sequenceOptions: options
-        };
-      } else this.config.generatedIdentity = { type: "byDefault" };
-      this.config.hasDefault = true;
-      this.config.notNull = true;
-      return this;
-    }
-  }, __publicField(_ka, _ia, "PgIntColumnBaseBuilder"), _ka);
-  var PgBigInt53Builder = (_na = class extends (_ma = PgIntColumnBuilder, _la = entityKind, _ma) {
-    constructor(name) {
-      super(name, "number int53", "PgBigInt53");
-    }
-    /** @internal */
-    build(table) {
-      return new PgBigInt53(table, this.config);
-    }
-  }, __publicField(_na, _la, "PgBigInt53Builder"), _na);
-  var PgBigInt53 = (_qa = class extends (_pa = PgColumn, _oa = entityKind, _pa) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "bigint:number");
-    }
-    getSQLType() {
-      return "bigint";
-    }
-  }, __publicField(_qa, _oa, "PgBigInt53"), _qa);
-  var PgBigInt64Builder = (_ta = class extends (_sa = PgIntColumnBuilder, _ra = entityKind, _sa) {
-    constructor(name) {
-      super(name, "bigint int64", "PgBigInt64");
-    }
-    /** @internal */
-    build(table) {
-      return new PgBigInt64(table, this.config);
-    }
-  }, __publicField(_ta, _ra, "PgBigInt64Builder"), _ta);
-  var PgBigInt64 = (_wa = class extends (_va = PgColumn, _ua = entityKind, _va) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "bigint");
-    }
-    getSQLType() {
-      return "bigint";
-    }
-  }, __publicField(_wa, _ua, "PgBigInt64"), _wa);
-  var PgBigIntStringBuilder = (_za = class extends (_ya = PgIntColumnBuilder, _xa = entityKind, _ya) {
-    constructor(name) {
-      super(name, "string int64", "PgBigIntString");
-    }
-    /** @internal */
-    build(table) {
-      return new PgBigIntString(table, this.config);
-    }
-  }, __publicField(_za, _xa, "PgBigIntStringBuilder"), _za);
-  var PgBigIntString = (_Ca = class extends (_Ba = PgColumn, _Aa = entityKind, _Ba) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "bigint:string");
-    }
-    getSQLType() {
-      return "bigint";
-    }
-  }, __publicField(_Ca, _Aa, "PgBigIntString"), _Ca);
-  function bigint$3(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    if (config2.mode === "number") return new PgBigInt53Builder(name);
-    if (config2.mode === "string") return new PgBigIntStringBuilder(name);
-    return new PgBigInt64Builder(name);
+          };
+          BigNumber2.isBigNumber = function(v2) {
+            if (!v2 || v2._isBigNumber !== true) return false;
+            if (!BigNumber2.DEBUG) return true;
+            var i, n2, c2 = v2.c, e2 = v2.e, s2 = v2.s;
+            out: if ({}.toString.call(c2) == "[object Array]") {
+              if ((s2 === 1 || s2 === -1) && e2 >= -MAX && e2 <= MAX && e2 === mathfloor(e2)) {
+                if (c2[0] === 0) {
+                  if (e2 === 0 && c2.length === 1) return true;
+                  break out;
+                }
+                i = (e2 + 1) % LOG_BASE;
+                if (i < 1) i += LOG_BASE;
+                if (String(c2[0]).length == i) {
+                  for (i = 0; i < c2.length; i++) {
+                    n2 = c2[i];
+                    if (n2 < 0 || n2 >= BASE || n2 !== mathfloor(n2)) break out;
+                  }
+                  if (n2 !== 0) return true;
+                }
+              }
+            } else if (c2 === null && e2 === null && (s2 === null || s2 === 1 || s2 === -1)) {
+              return true;
+            }
+            throw Error(bignumberError + "Invalid BigNumber: " + v2);
+          };
+          BigNumber2.maximum = BigNumber2.max = function() {
+            return maxOrMin(arguments, -1);
+          };
+          BigNumber2.minimum = BigNumber2.min = function() {
+            return maxOrMin(arguments, 1);
+          };
+          BigNumber2.random = (function() {
+            var pow2_53 = 9007199254740992;
+            var random53bitInt = Math.random() * pow2_53 & 2097151 ? function() {
+              return mathfloor(Math.random() * pow2_53);
+            } : function() {
+              return (Math.random() * 1073741824 | 0) * 8388608 + (Math.random() * 8388608 | 0);
+            };
+            return function(dp) {
+              var a2, b2, e2, k2, v2, i = 0, c2 = [], rand = new BigNumber2(ONE);
+              if (dp == null) dp = DECIMAL_PLACES;
+              else intCheck(dp, 0, MAX);
+              k2 = mathceil(dp / LOG_BASE);
+              if (CRYPTO) {
+                if (crypto.getRandomValues) {
+                  a2 = crypto.getRandomValues(new Uint32Array(k2 *= 2));
+                  for (; i < k2; ) {
+                    v2 = a2[i] * 131072 + (a2[i + 1] >>> 11);
+                    if (v2 >= 9e15) {
+                      b2 = crypto.getRandomValues(new Uint32Array(2));
+                      a2[i] = b2[0];
+                      a2[i + 1] = b2[1];
+                    } else {
+                      c2.push(v2 % 1e14);
+                      i += 2;
+                    }
+                  }
+                  i = k2 / 2;
+                } else if (crypto.randomBytes) {
+                  a2 = crypto.randomBytes(k2 *= 7);
+                  for (; i < k2; ) {
+                    v2 = (a2[i] & 31) * 281474976710656 + a2[i + 1] * 1099511627776 + a2[i + 2] * 4294967296 + a2[i + 3] * 16777216 + (a2[i + 4] << 16) + (a2[i + 5] << 8) + a2[i + 6];
+                    if (v2 >= 9e15) {
+                      crypto.randomBytes(7).copy(a2, i);
+                    } else {
+                      c2.push(v2 % 1e14);
+                      i += 7;
+                    }
+                  }
+                  i = k2 / 7;
+                } else {
+                  CRYPTO = false;
+                  throw Error(bignumberError + "crypto unavailable");
+                }
+              }
+              if (!CRYPTO) {
+                for (; i < k2; ) {
+                  v2 = random53bitInt();
+                  if (v2 < 9e15) c2[i++] = v2 % 1e14;
+                }
+              }
+              k2 = c2[--i];
+              dp %= LOG_BASE;
+              if (k2 && dp) {
+                v2 = POWS_TEN[LOG_BASE - dp];
+                c2[i] = mathfloor(k2 / v2) * v2;
+              }
+              for (; c2[i] === 0; c2.pop(), i--) ;
+              if (i < 0) {
+                c2 = [e2 = 0];
+              } else {
+                for (e2 = -1; c2[0] === 0; c2.splice(0, 1), e2 -= LOG_BASE) ;
+                for (i = 1, v2 = c2[0]; v2 >= 10; v2 /= 10, i++) ;
+                if (i < LOG_BASE) e2 -= LOG_BASE - i;
+              }
+              rand.e = e2;
+              rand.c = c2;
+              return rand;
+            };
+          })();
+          BigNumber2.sum = function() {
+            var i = 1, args = arguments, sum = new BigNumber2(args[0]);
+            for (; i < args.length; ) sum = sum.plus(args[i++]);
+            return sum;
+          };
+          convertBase = /* @__PURE__ */ (function() {
+            var decimal = "0123456789";
+            function toBaseOut(str, baseIn, baseOut, alphabet) {
+              var j2, arr = [0], arrL, i = 0, len = str.length;
+              for (; i < len; ) {
+                for (arrL = arr.length; arrL--; arr[arrL] *= baseIn) ;
+                arr[0] += alphabet.indexOf(str.charAt(i++));
+                for (j2 = 0; j2 < arr.length; j2++) {
+                  if (arr[j2] > baseOut - 1) {
+                    if (arr[j2 + 1] == null) arr[j2 + 1] = 0;
+                    arr[j2 + 1] += arr[j2] / baseOut | 0;
+                    arr[j2] %= baseOut;
+                  }
+                }
+              }
+              return arr.reverse();
+            }
+            return function(str, baseIn, baseOut, sign, callerIsToString) {
+              var alphabet, d2, e2, k2, r2, x2, xc, y2, i = str.indexOf("."), dp = DECIMAL_PLACES, rm = ROUNDING_MODE;
+              if (i >= 0) {
+                k2 = POW_PRECISION;
+                POW_PRECISION = 0;
+                str = str.replace(".", "");
+                y2 = new BigNumber2(baseIn);
+                x2 = y2.pow(str.length - i);
+                POW_PRECISION = k2;
+                y2.c = toBaseOut(
+                  toFixedPoint(coeffToString(x2.c), x2.e, "0"),
+                  10,
+                  baseOut,
+                  decimal
+                );
+                y2.e = y2.c.length;
+              }
+              xc = toBaseOut(str, baseIn, baseOut, callerIsToString ? (alphabet = ALPHABET, decimal) : (alphabet = decimal, ALPHABET));
+              e2 = k2 = xc.length;
+              for (; xc[--k2] == 0; xc.pop()) ;
+              if (!xc[0]) return alphabet.charAt(0);
+              if (i < 0) {
+                --e2;
+              } else {
+                x2.c = xc;
+                x2.e = e2;
+                x2.s = sign;
+                x2 = div(x2, y2, dp, rm, baseOut);
+                xc = x2.c;
+                r2 = x2.r;
+                e2 = x2.e;
+              }
+              d2 = e2 + dp + 1;
+              i = xc[d2];
+              k2 = baseOut / 2;
+              r2 = r2 || d2 < 0 || xc[d2 + 1] != null;
+              r2 = rm < 4 ? (i != null || r2) && (rm == 0 || rm == (x2.s < 0 ? 3 : 2)) : i > k2 || i == k2 && (rm == 4 || r2 || rm == 6 && xc[d2 - 1] & 1 || rm == (x2.s < 0 ? 8 : 7));
+              if (d2 < 1 || !xc[0]) {
+                str = r2 ? toFixedPoint(alphabet.charAt(1), -dp, alphabet.charAt(0)) : alphabet.charAt(0);
+              } else {
+                xc.length = d2;
+                if (r2) {
+                  for (--baseOut; ++xc[--d2] > baseOut; ) {
+                    xc[d2] = 0;
+                    if (!d2) {
+                      ++e2;
+                      xc = [1].concat(xc);
+                    }
+                  }
+                }
+                for (k2 = xc.length; !xc[--k2]; ) ;
+                for (i = 0, str = ""; i <= k2; str += alphabet.charAt(xc[i++])) ;
+                str = toFixedPoint(str, e2, alphabet.charAt(0));
+              }
+              return str;
+            };
+          })();
+          div = /* @__PURE__ */ (function() {
+            function multiply(x2, k2, base) {
+              var m2, temp, xlo, xhi, carry = 0, i = x2.length, klo = k2 % SQRT_BASE, khi = k2 / SQRT_BASE | 0;
+              for (x2 = x2.slice(); i--; ) {
+                xlo = x2[i] % SQRT_BASE;
+                xhi = x2[i] / SQRT_BASE | 0;
+                m2 = khi * xlo + xhi * klo;
+                temp = klo * xlo + m2 % SQRT_BASE * SQRT_BASE + carry;
+                carry = (temp / base | 0) + (m2 / SQRT_BASE | 0) + khi * xhi;
+                x2[i] = temp % base;
+              }
+              if (carry) x2 = [carry].concat(x2);
+              return x2;
+            }
+            function compare2(a2, b2, aL, bL) {
+              var i, cmp;
+              if (aL != bL) {
+                cmp = aL > bL ? 1 : -1;
+              } else {
+                for (i = cmp = 0; i < aL; i++) {
+                  if (a2[i] != b2[i]) {
+                    cmp = a2[i] > b2[i] ? 1 : -1;
+                    break;
+                  }
+                }
+              }
+              return cmp;
+            }
+            function subtract(a2, b2, aL, base) {
+              var i = 0;
+              for (; aL--; ) {
+                a2[aL] -= i;
+                i = a2[aL] < b2[aL] ? 1 : 0;
+                a2[aL] = i * base + a2[aL] - b2[aL];
+              }
+              for (; !a2[0] && a2.length > 1; a2.splice(0, 1)) ;
+            }
+            return function(x2, y2, dp, rm, base) {
+              var cmp, e2, i, more, n2, prod, prodL, q2, qc, rem, remL, rem0, xi, xL, yc0, yL, yz, s2 = x2.s == y2.s ? 1 : -1, xc = x2.c, yc = y2.c;
+              if (!xc || !xc[0] || !yc || !yc[0]) {
+                return new BigNumber2(
+                  // Return NaN if either NaN, or both Infinity or 0.
+                  !x2.s || !y2.s || (xc ? yc && xc[0] == yc[0] : !yc) ? NaN : (
+                    // Return ±0 if x is ±0 or y is ±Infinity, or return ±Infinity as y is ±0.
+                    xc && xc[0] == 0 || !yc ? s2 * 0 : s2 / 0
+                  )
+                );
+              }
+              q2 = new BigNumber2(s2);
+              qc = q2.c = [];
+              e2 = x2.e - y2.e;
+              s2 = dp + e2 + 1;
+              if (!base) {
+                base = BASE;
+                e2 = bitFloor(x2.e / LOG_BASE) - bitFloor(y2.e / LOG_BASE);
+                s2 = s2 / LOG_BASE | 0;
+              }
+              for (i = 0; yc[i] == (xc[i] || 0); i++) ;
+              if (yc[i] > (xc[i] || 0)) e2--;
+              if (s2 < 0) {
+                qc.push(1);
+                more = true;
+              } else {
+                xL = xc.length;
+                yL = yc.length;
+                i = 0;
+                s2 += 2;
+                n2 = mathfloor(base / (yc[0] + 1));
+                if (n2 > 1) {
+                  yc = multiply(yc, n2, base);
+                  xc = multiply(xc, n2, base);
+                  yL = yc.length;
+                  xL = xc.length;
+                }
+                xi = yL;
+                rem = xc.slice(0, yL);
+                remL = rem.length;
+                for (; remL < yL; rem[remL++] = 0) ;
+                yz = yc.slice();
+                yz = [0].concat(yz);
+                yc0 = yc[0];
+                if (yc[1] >= base / 2) yc0++;
+                do {
+                  n2 = 0;
+                  cmp = compare2(yc, rem, yL, remL);
+                  if (cmp < 0) {
+                    rem0 = rem[0];
+                    if (yL != remL) rem0 = rem0 * base + (rem[1] || 0);
+                    n2 = mathfloor(rem0 / yc0);
+                    if (n2 > 1) {
+                      if (n2 >= base) n2 = base - 1;
+                      prod = multiply(yc, n2, base);
+                      prodL = prod.length;
+                      remL = rem.length;
+                      while (compare2(prod, rem, prodL, remL) == 1) {
+                        n2--;
+                        subtract(prod, yL < prodL ? yz : yc, prodL, base);
+                        prodL = prod.length;
+                        cmp = 1;
+                      }
+                    } else {
+                      if (n2 == 0) {
+                        cmp = n2 = 1;
+                      }
+                      prod = yc.slice();
+                      prodL = prod.length;
+                    }
+                    if (prodL < remL) prod = [0].concat(prod);
+                    subtract(rem, prod, remL, base);
+                    remL = rem.length;
+                    if (cmp == -1) {
+                      while (compare2(yc, rem, yL, remL) < 1) {
+                        n2++;
+                        subtract(rem, yL < remL ? yz : yc, remL, base);
+                        remL = rem.length;
+                      }
+                    }
+                  } else if (cmp === 0) {
+                    n2++;
+                    rem = [0];
+                  }
+                  qc[i++] = n2;
+                  if (rem[0]) {
+                    rem[remL++] = xc[xi] || 0;
+                  } else {
+                    rem = [xc[xi]];
+                    remL = 1;
+                  }
+                } while ((xi++ < xL || rem[0] != null) && s2--);
+                more = rem[0] != null;
+                if (!qc[0]) qc.splice(0, 1);
+              }
+              if (base == BASE) {
+                for (i = 1, s2 = qc[0]; s2 >= 10; s2 /= 10, i++) ;
+                round(q2, dp + (q2.e = i + e2 * LOG_BASE - 1) + 1, rm, more);
+              } else {
+                q2.e = e2;
+                q2.r = +more;
+              }
+              return q2;
+            };
+          })();
+          function format(n2, i, rm, id2) {
+            var c0, e2, ne, len, str;
+            if (rm == null) rm = ROUNDING_MODE;
+            else intCheck(rm, 0, 8);
+            if (!n2.c) return n2.toString();
+            c0 = n2.c[0];
+            ne = n2.e;
+            if (i == null) {
+              str = coeffToString(n2.c);
+              str = id2 == 1 || id2 == 2 && (ne <= TO_EXP_NEG || ne >= TO_EXP_POS) ? toExponential(str, ne) : toFixedPoint(str, ne, "0");
+            } else {
+              n2 = round(new BigNumber2(n2), i, rm);
+              e2 = n2.e;
+              str = coeffToString(n2.c);
+              len = str.length;
+              if (id2 == 1 || id2 == 2 && (i <= e2 || e2 <= TO_EXP_NEG)) {
+                for (; len < i; str += "0", len++) ;
+                str = toExponential(str, e2);
+              } else {
+                i -= ne + (id2 === 2 && e2 > ne);
+                str = toFixedPoint(str, e2, "0");
+                if (e2 + 1 > len) {
+                  if (--i > 0) for (str += "."; i--; str += "0") ;
+                } else {
+                  i += e2 - len;
+                  if (i > 0) {
+                    if (e2 + 1 == len) str += ".";
+                    for (; i--; str += "0") ;
+                  }
+                }
+              }
+            }
+            return n2.s < 0 && c0 ? "-" + str : str;
+          }
+          function maxOrMin(args, n2) {
+            var k2, y2, i = 1, x2 = new BigNumber2(args[0]);
+            for (; i < args.length; i++) {
+              y2 = new BigNumber2(args[i]);
+              if (!y2.s || (k2 = compare(x2, y2)) === n2 || k2 === 0 && x2.s === n2) {
+                x2 = y2;
+              }
+            }
+            return x2;
+          }
+          function normalise(n2, c2, e2) {
+            var i = 1, j2 = c2.length;
+            for (; !c2[--j2]; c2.pop()) ;
+            for (j2 = c2[0]; j2 >= 10; j2 /= 10, i++) ;
+            if ((e2 = i + e2 * LOG_BASE - 1) > MAX_EXP) {
+              n2.c = n2.e = null;
+            } else if (e2 < MIN_EXP) {
+              n2.c = [n2.e = 0];
+            } else {
+              n2.e = e2;
+              n2.c = c2;
+            }
+            return n2;
+          }
+          parseNumeric = /* @__PURE__ */ (function() {
+            var basePrefix = /^(-?)0([xbo])(?=\w[\w.]*$)/i, dotAfter = /^([^.]+)\.$/, dotBefore = /^\.([^.]+)$/, isInfinityOrNaN = /^-?(Infinity|NaN)$/, whitespaceOrPlus = /^\s*\+(?=[\w.])|^\s+|\s+$/g;
+            return function(x2, str, isNum, b2) {
+              var base, s2 = isNum ? str : str.replace(whitespaceOrPlus, "");
+              if (isInfinityOrNaN.test(s2)) {
+                x2.s = isNaN(s2) ? null : s2 < 0 ? -1 : 1;
+              } else {
+                if (!isNum) {
+                  s2 = s2.replace(basePrefix, function(m2, p1, p2) {
+                    base = (p2 = p2.toLowerCase()) == "x" ? 16 : p2 == "b" ? 2 : 8;
+                    return !b2 || b2 == base ? p1 : m2;
+                  });
+                  if (b2) {
+                    base = b2;
+                    s2 = s2.replace(dotAfter, "$1").replace(dotBefore, "0.$1");
+                  }
+                  if (str != s2) return new BigNumber2(s2, base);
+                }
+                if (BigNumber2.DEBUG) {
+                  throw Error(bignumberError + "Not a" + (b2 ? " base " + b2 : "") + " number: " + str);
+                }
+                x2.s = null;
+              }
+              x2.c = x2.e = null;
+            };
+          })();
+          function round(x2, sd, rm, r2) {
+            var d2, i, j2, k2, n2, ni, rd, xc = x2.c, pows10 = POWS_TEN;
+            if (xc) {
+              out: {
+                for (d2 = 1, k2 = xc[0]; k2 >= 10; k2 /= 10, d2++) ;
+                i = sd - d2;
+                if (i < 0) {
+                  i += LOG_BASE;
+                  j2 = sd;
+                  n2 = xc[ni = 0];
+                  rd = mathfloor(n2 / pows10[d2 - j2 - 1] % 10);
+                } else {
+                  ni = mathceil((i + 1) / LOG_BASE);
+                  if (ni >= xc.length) {
+                    if (r2) {
+                      for (; xc.length <= ni; xc.push(0)) ;
+                      n2 = rd = 0;
+                      d2 = 1;
+                      i %= LOG_BASE;
+                      j2 = i - LOG_BASE + 1;
+                    } else {
+                      break out;
+                    }
+                  } else {
+                    n2 = k2 = xc[ni];
+                    for (d2 = 1; k2 >= 10; k2 /= 10, d2++) ;
+                    i %= LOG_BASE;
+                    j2 = i - LOG_BASE + d2;
+                    rd = j2 < 0 ? 0 : mathfloor(n2 / pows10[d2 - j2 - 1] % 10);
+                  }
+                }
+                r2 = r2 || sd < 0 || // Are there any non-zero digits after the rounding digit?
+                // The expression  n % pows10[d - j - 1]  returns all digits of n to the right
+                // of the digit at j, e.g. if n is 908714 and j is 2, the expression gives 714.
+                xc[ni + 1] != null || (j2 < 0 ? n2 : n2 % pows10[d2 - j2 - 1]);
+                r2 = rm < 4 ? (rd || r2) && (rm == 0 || rm == (x2.s < 0 ? 3 : 2)) : rd > 5 || rd == 5 && (rm == 4 || r2 || rm == 6 && // Check whether the digit to the left of the rounding digit is odd.
+                (i > 0 ? j2 > 0 ? n2 / pows10[d2 - j2] : 0 : xc[ni - 1]) % 10 & 1 || rm == (x2.s < 0 ? 8 : 7));
+                if (sd < 1 || !xc[0]) {
+                  xc.length = 0;
+                  if (r2) {
+                    sd -= x2.e + 1;
+                    xc[0] = pows10[(LOG_BASE - sd % LOG_BASE) % LOG_BASE];
+                    x2.e = -sd || 0;
+                  } else {
+                    xc[0] = x2.e = 0;
+                  }
+                  return x2;
+                }
+                if (i == 0) {
+                  xc.length = ni;
+                  k2 = 1;
+                  ni--;
+                } else {
+                  xc.length = ni + 1;
+                  k2 = pows10[LOG_BASE - i];
+                  xc[ni] = j2 > 0 ? mathfloor(n2 / pows10[d2 - j2] % pows10[j2]) * k2 : 0;
+                }
+                if (r2) {
+                  for (; ; ) {
+                    if (ni == 0) {
+                      for (i = 1, j2 = xc[0]; j2 >= 10; j2 /= 10, i++) ;
+                      j2 = xc[0] += k2;
+                      for (k2 = 1; j2 >= 10; j2 /= 10, k2++) ;
+                      if (i != k2) {
+                        x2.e++;
+                        if (xc[0] == BASE) xc[0] = 1;
+                      }
+                      break;
+                    } else {
+                      xc[ni] += k2;
+                      if (xc[ni] != BASE) break;
+                      xc[ni--] = 0;
+                      k2 = 1;
+                    }
+                  }
+                }
+                for (i = xc.length; xc[--i] === 0; xc.pop()) ;
+              }
+              if (x2.e > MAX_EXP) {
+                x2.c = x2.e = null;
+              } else if (x2.e < MIN_EXP) {
+                x2.c = [x2.e = 0];
+              }
+            }
+            return x2;
+          }
+          function valueOf(n2) {
+            var str, e2 = n2.e;
+            if (e2 === null) return n2.toString();
+            str = coeffToString(n2.c);
+            str = e2 <= TO_EXP_NEG || e2 >= TO_EXP_POS ? toExponential(str, e2) : toFixedPoint(str, e2, "0");
+            return n2.s < 0 ? "-" + str : str;
+          }
+          P2.absoluteValue = P2.abs = function() {
+            var x2 = new BigNumber2(this);
+            if (x2.s < 0) x2.s = 1;
+            return x2;
+          };
+          P2.comparedTo = function(y2, b2) {
+            return compare(this, new BigNumber2(y2, b2));
+          };
+          P2.decimalPlaces = P2.dp = function(dp, rm) {
+            var c2, n2, v2, x2 = this;
+            if (dp != null) {
+              intCheck(dp, 0, MAX);
+              if (rm == null) rm = ROUNDING_MODE;
+              else intCheck(rm, 0, 8);
+              return round(new BigNumber2(x2), dp + x2.e + 1, rm);
+            }
+            if (!(c2 = x2.c)) return null;
+            n2 = ((v2 = c2.length - 1) - bitFloor(this.e / LOG_BASE)) * LOG_BASE;
+            if (v2 = c2[v2]) for (; v2 % 10 == 0; v2 /= 10, n2--) ;
+            if (n2 < 0) n2 = 0;
+            return n2;
+          };
+          P2.dividedBy = P2.div = function(y2, b2) {
+            return div(this, new BigNumber2(y2, b2), DECIMAL_PLACES, ROUNDING_MODE);
+          };
+          P2.dividedToIntegerBy = P2.idiv = function(y2, b2) {
+            return div(this, new BigNumber2(y2, b2), 0, 1);
+          };
+          P2.exponentiatedBy = P2.pow = function(n2, m2) {
+            var half, isModExp, i, k2, more, nIsBig, nIsNeg, nIsOdd, y2, x2 = this;
+            n2 = new BigNumber2(n2);
+            if (n2.c && !n2.isInteger()) {
+              throw Error(bignumberError + "Exponent not an integer: " + valueOf(n2));
+            }
+            if (m2 != null) m2 = new BigNumber2(m2);
+            nIsBig = n2.e > 14;
+            if (!x2.c || !x2.c[0] || x2.c[0] == 1 && !x2.e && x2.c.length == 1 || !n2.c || !n2.c[0]) {
+              y2 = new BigNumber2(Math.pow(+valueOf(x2), nIsBig ? n2.s * (2 - isOdd(n2)) : +valueOf(n2)));
+              return m2 ? y2.mod(m2) : y2;
+            }
+            nIsNeg = n2.s < 0;
+            if (m2) {
+              if (m2.c ? !m2.c[0] : !m2.s) return new BigNumber2(NaN);
+              isModExp = !nIsNeg && x2.isInteger() && m2.isInteger();
+              if (isModExp) x2 = x2.mod(m2);
+            } else if (n2.e > 9 && (x2.e > 0 || x2.e < -1 || (x2.e == 0 ? x2.c[0] > 1 || nIsBig && x2.c[1] >= 24e7 : x2.c[0] < 8e13 || nIsBig && x2.c[0] <= 9999975e7))) {
+              k2 = x2.s < 0 && isOdd(n2) ? -0 : 0;
+              if (x2.e > -1) k2 = 1 / k2;
+              return new BigNumber2(nIsNeg ? 1 / k2 : k2);
+            } else if (POW_PRECISION) {
+              k2 = mathceil(POW_PRECISION / LOG_BASE + 2);
+            }
+            if (nIsBig) {
+              half = new BigNumber2(0.5);
+              if (nIsNeg) n2.s = 1;
+              nIsOdd = isOdd(n2);
+            } else {
+              i = Math.abs(+valueOf(n2));
+              nIsOdd = i % 2;
+            }
+            y2 = new BigNumber2(ONE);
+            for (; ; ) {
+              if (nIsOdd) {
+                y2 = y2.times(x2);
+                if (!y2.c) break;
+                if (k2) {
+                  if (y2.c.length > k2) y2.c.length = k2;
+                } else if (isModExp) {
+                  y2 = y2.mod(m2);
+                }
+              }
+              if (i) {
+                i = mathfloor(i / 2);
+                if (i === 0) break;
+                nIsOdd = i % 2;
+              } else {
+                n2 = n2.times(half);
+                round(n2, n2.e + 1, 1);
+                if (n2.e > 14) {
+                  nIsOdd = isOdd(n2);
+                } else {
+                  i = +valueOf(n2);
+                  if (i === 0) break;
+                  nIsOdd = i % 2;
+                }
+              }
+              x2 = x2.times(x2);
+              if (k2) {
+                if (x2.c && x2.c.length > k2) x2.c.length = k2;
+              } else if (isModExp) {
+                x2 = x2.mod(m2);
+              }
+            }
+            if (isModExp) return y2;
+            if (nIsNeg) y2 = ONE.div(y2);
+            return m2 ? y2.mod(m2) : k2 ? round(y2, POW_PRECISION, ROUNDING_MODE, more) : y2;
+          };
+          P2.integerValue = function(rm) {
+            var n2 = new BigNumber2(this);
+            if (rm == null) rm = ROUNDING_MODE;
+            else intCheck(rm, 0, 8);
+            return round(n2, n2.e + 1, rm);
+          };
+          P2.isEqualTo = P2.eq = function(y2, b2) {
+            return compare(this, new BigNumber2(y2, b2)) === 0;
+          };
+          P2.isFinite = function() {
+            return !!this.c;
+          };
+          P2.isGreaterThan = P2.gt = function(y2, b2) {
+            return compare(this, new BigNumber2(y2, b2)) > 0;
+          };
+          P2.isGreaterThanOrEqualTo = P2.gte = function(y2, b2) {
+            return (b2 = compare(this, new BigNumber2(y2, b2))) === 1 || b2 === 0;
+          };
+          P2.isInteger = function() {
+            return !!this.c && bitFloor(this.e / LOG_BASE) > this.c.length - 2;
+          };
+          P2.isLessThan = P2.lt = function(y2, b2) {
+            return compare(this, new BigNumber2(y2, b2)) < 0;
+          };
+          P2.isLessThanOrEqualTo = P2.lte = function(y2, b2) {
+            return (b2 = compare(this, new BigNumber2(y2, b2))) === -1 || b2 === 0;
+          };
+          P2.isNaN = function() {
+            return !this.s;
+          };
+          P2.isNegative = function() {
+            return this.s < 0;
+          };
+          P2.isPositive = function() {
+            return this.s > 0;
+          };
+          P2.isZero = function() {
+            return !!this.c && this.c[0] == 0;
+          };
+          P2.minus = function(y2, b2) {
+            var i, j2, t2, xLTy, x2 = this, a2 = x2.s;
+            y2 = new BigNumber2(y2, b2);
+            b2 = y2.s;
+            if (!a2 || !b2) return new BigNumber2(NaN);
+            if (a2 != b2) {
+              y2.s = -b2;
+              return x2.plus(y2);
+            }
+            var xe2 = x2.e / LOG_BASE, ye2 = y2.e / LOG_BASE, xc = x2.c, yc = y2.c;
+            if (!xe2 || !ye2) {
+              if (!xc || !yc) return xc ? (y2.s = -b2, y2) : new BigNumber2(yc ? x2 : NaN);
+              if (!xc[0] || !yc[0]) {
+                return yc[0] ? (y2.s = -b2, y2) : new BigNumber2(xc[0] ? x2 : (
+                  // IEEE 754 (2008) 6.3: n - n = -0 when rounding to -Infinity
+                  ROUNDING_MODE == 3 ? -0 : 0
+                ));
+              }
+            }
+            xe2 = bitFloor(xe2);
+            ye2 = bitFloor(ye2);
+            xc = xc.slice();
+            if (a2 = xe2 - ye2) {
+              if (xLTy = a2 < 0) {
+                a2 = -a2;
+                t2 = xc;
+              } else {
+                ye2 = xe2;
+                t2 = yc;
+              }
+              t2.reverse();
+              for (b2 = a2; b2--; t2.push(0)) ;
+              t2.reverse();
+            } else {
+              j2 = (xLTy = (a2 = xc.length) < (b2 = yc.length)) ? a2 : b2;
+              for (a2 = b2 = 0; b2 < j2; b2++) {
+                if (xc[b2] != yc[b2]) {
+                  xLTy = xc[b2] < yc[b2];
+                  break;
+                }
+              }
+            }
+            if (xLTy) {
+              t2 = xc;
+              xc = yc;
+              yc = t2;
+              y2.s = -y2.s;
+            }
+            b2 = (j2 = yc.length) - (i = xc.length);
+            if (b2 > 0) for (; b2--; xc[i++] = 0) ;
+            b2 = BASE - 1;
+            for (; j2 > a2; ) {
+              if (xc[--j2] < yc[j2]) {
+                for (i = j2; i && !xc[--i]; xc[i] = b2) ;
+                --xc[i];
+                xc[j2] += BASE;
+              }
+              xc[j2] -= yc[j2];
+            }
+            for (; xc[0] == 0; xc.splice(0, 1), --ye2) ;
+            if (!xc[0]) {
+              y2.s = ROUNDING_MODE == 3 ? -1 : 1;
+              y2.c = [y2.e = 0];
+              return y2;
+            }
+            return normalise(y2, xc, ye2);
+          };
+          P2.modulo = P2.mod = function(y2, b2) {
+            var q2, s2, x2 = this;
+            y2 = new BigNumber2(y2, b2);
+            if (!x2.c || !y2.s || y2.c && !y2.c[0]) {
+              return new BigNumber2(NaN);
+            } else if (!y2.c || x2.c && !x2.c[0]) {
+              return new BigNumber2(x2);
+            }
+            if (MODULO_MODE == 9) {
+              s2 = y2.s;
+              y2.s = 1;
+              q2 = div(x2, y2, 0, 3);
+              y2.s = s2;
+              q2.s *= s2;
+            } else {
+              q2 = div(x2, y2, 0, MODULO_MODE);
+            }
+            y2 = x2.minus(q2.times(y2));
+            if (!y2.c[0] && MODULO_MODE == 1) y2.s = x2.s;
+            return y2;
+          };
+          P2.multipliedBy = P2.times = function(y2, b2) {
+            var c2, e2, i, j2, k2, m2, xcL, xlo, xhi, ycL, ylo, yhi, zc, base, sqrtBase, x2 = this, xc = x2.c, yc = (y2 = new BigNumber2(y2, b2)).c;
+            if (!xc || !yc || !xc[0] || !yc[0]) {
+              if (!x2.s || !y2.s || xc && !xc[0] && !yc || yc && !yc[0] && !xc) {
+                y2.c = y2.e = y2.s = null;
+              } else {
+                y2.s *= x2.s;
+                if (!xc || !yc) {
+                  y2.c = y2.e = null;
+                } else {
+                  y2.c = [0];
+                  y2.e = 0;
+                }
+              }
+              return y2;
+            }
+            e2 = bitFloor(x2.e / LOG_BASE) + bitFloor(y2.e / LOG_BASE);
+            y2.s *= x2.s;
+            xcL = xc.length;
+            ycL = yc.length;
+            if (xcL < ycL) {
+              zc = xc;
+              xc = yc;
+              yc = zc;
+              i = xcL;
+              xcL = ycL;
+              ycL = i;
+            }
+            for (i = xcL + ycL, zc = []; i--; zc.push(0)) ;
+            base = BASE;
+            sqrtBase = SQRT_BASE;
+            for (i = ycL; --i >= 0; ) {
+              c2 = 0;
+              ylo = yc[i] % sqrtBase;
+              yhi = yc[i] / sqrtBase | 0;
+              for (k2 = xcL, j2 = i + k2; j2 > i; ) {
+                xlo = xc[--k2] % sqrtBase;
+                xhi = xc[k2] / sqrtBase | 0;
+                m2 = yhi * xlo + xhi * ylo;
+                xlo = ylo * xlo + m2 % sqrtBase * sqrtBase + zc[j2] + c2;
+                c2 = (xlo / base | 0) + (m2 / sqrtBase | 0) + yhi * xhi;
+                zc[j2--] = xlo % base;
+              }
+              zc[j2] = c2;
+            }
+            if (c2) {
+              ++e2;
+            } else {
+              zc.splice(0, 1);
+            }
+            return normalise(y2, zc, e2);
+          };
+          P2.negated = function() {
+            var x2 = new BigNumber2(this);
+            x2.s = -x2.s || null;
+            return x2;
+          };
+          P2.plus = function(y2, b2) {
+            var t2, x2 = this, a2 = x2.s;
+            y2 = new BigNumber2(y2, b2);
+            b2 = y2.s;
+            if (!a2 || !b2) return new BigNumber2(NaN);
+            if (a2 != b2) {
+              y2.s = -b2;
+              return x2.minus(y2);
+            }
+            var xe2 = x2.e / LOG_BASE, ye2 = y2.e / LOG_BASE, xc = x2.c, yc = y2.c;
+            if (!xe2 || !ye2) {
+              if (!xc || !yc) return new BigNumber2(a2 / 0);
+              if (!xc[0] || !yc[0]) return yc[0] ? y2 : new BigNumber2(xc[0] ? x2 : a2 * 0);
+            }
+            xe2 = bitFloor(xe2);
+            ye2 = bitFloor(ye2);
+            xc = xc.slice();
+            if (a2 = xe2 - ye2) {
+              if (a2 > 0) {
+                ye2 = xe2;
+                t2 = yc;
+              } else {
+                a2 = -a2;
+                t2 = xc;
+              }
+              t2.reverse();
+              for (; a2--; t2.push(0)) ;
+              t2.reverse();
+            }
+            a2 = xc.length;
+            b2 = yc.length;
+            if (a2 - b2 < 0) {
+              t2 = yc;
+              yc = xc;
+              xc = t2;
+              b2 = a2;
+            }
+            for (a2 = 0; b2; ) {
+              a2 = (xc[--b2] = xc[b2] + yc[b2] + a2) / BASE | 0;
+              xc[b2] = BASE === xc[b2] ? 0 : xc[b2] % BASE;
+            }
+            if (a2) {
+              xc = [a2].concat(xc);
+              ++ye2;
+            }
+            return normalise(y2, xc, ye2);
+          };
+          P2.precision = P2.sd = function(sd, rm) {
+            var c2, n2, v2, x2 = this;
+            if (sd != null && sd !== !!sd) {
+              intCheck(sd, 1, MAX);
+              if (rm == null) rm = ROUNDING_MODE;
+              else intCheck(rm, 0, 8);
+              return round(new BigNumber2(x2), sd, rm);
+            }
+            if (!(c2 = x2.c)) return null;
+            v2 = c2.length - 1;
+            n2 = v2 * LOG_BASE + 1;
+            if (v2 = c2[v2]) {
+              for (; v2 % 10 == 0; v2 /= 10, n2--) ;
+              for (v2 = c2[0]; v2 >= 10; v2 /= 10, n2++) ;
+            }
+            if (sd && x2.e + 1 > n2) n2 = x2.e + 1;
+            return n2;
+          };
+          P2.shiftedBy = function(k2) {
+            intCheck(k2, -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER);
+            return this.times("1e" + k2);
+          };
+          P2.squareRoot = P2.sqrt = function() {
+            var m2, n2, r2, rep, t2, x2 = this, c2 = x2.c, s2 = x2.s, e2 = x2.e, dp = DECIMAL_PLACES + 4, half = new BigNumber2("0.5");
+            if (s2 !== 1 || !c2 || !c2[0]) {
+              return new BigNumber2(!s2 || s2 < 0 && (!c2 || c2[0]) ? NaN : c2 ? x2 : 1 / 0);
+            }
+            s2 = Math.sqrt(+valueOf(x2));
+            if (s2 == 0 || s2 == 1 / 0) {
+              n2 = coeffToString(c2);
+              if ((n2.length + e2) % 2 == 0) n2 += "0";
+              s2 = Math.sqrt(+n2);
+              e2 = bitFloor((e2 + 1) / 2) - (e2 < 0 || e2 % 2);
+              if (s2 == 1 / 0) {
+                n2 = "5e" + e2;
+              } else {
+                n2 = s2.toExponential();
+                n2 = n2.slice(0, n2.indexOf("e") + 1) + e2;
+              }
+              r2 = new BigNumber2(n2);
+            } else {
+              r2 = new BigNumber2(s2 + "");
+            }
+            if (r2.c[0]) {
+              e2 = r2.e;
+              s2 = e2 + dp;
+              if (s2 < 3) s2 = 0;
+              for (; ; ) {
+                t2 = r2;
+                r2 = half.times(t2.plus(div(x2, t2, dp, 1)));
+                if (coeffToString(t2.c).slice(0, s2) === (n2 = coeffToString(r2.c)).slice(0, s2)) {
+                  if (r2.e < e2) --s2;
+                  n2 = n2.slice(s2 - 3, s2 + 1);
+                  if (n2 == "9999" || !rep && n2 == "4999") {
+                    if (!rep) {
+                      round(t2, t2.e + DECIMAL_PLACES + 2, 0);
+                      if (t2.times(t2).eq(x2)) {
+                        r2 = t2;
+                        break;
+                      }
+                    }
+                    dp += 4;
+                    s2 += 4;
+                    rep = 1;
+                  } else {
+                    if (!+n2 || !+n2.slice(1) && n2.charAt(0) == "5") {
+                      round(r2, r2.e + DECIMAL_PLACES + 2, 1);
+                      m2 = !r2.times(r2).eq(x2);
+                    }
+                    break;
+                  }
+                }
+              }
+            }
+            return round(r2, r2.e + DECIMAL_PLACES + 1, ROUNDING_MODE, m2);
+          };
+          P2.toExponential = function(dp, rm) {
+            if (dp != null) {
+              intCheck(dp, 0, MAX);
+              dp++;
+            }
+            return format(this, dp, rm, 1);
+          };
+          P2.toFixed = function(dp, rm) {
+            if (dp != null) {
+              intCheck(dp, 0, MAX);
+              dp = dp + this.e + 1;
+            }
+            return format(this, dp, rm);
+          };
+          P2.toFormat = function(dp, rm, format2) {
+            var str, x2 = this;
+            if (format2 == null) {
+              if (dp != null && rm && typeof rm == "object") {
+                format2 = rm;
+                rm = null;
+              } else if (dp && typeof dp == "object") {
+                format2 = dp;
+                dp = rm = null;
+              } else {
+                format2 = FORMAT;
+              }
+            } else if (typeof format2 != "object") {
+              throw Error(bignumberError + "Argument not an object: " + format2);
+            }
+            str = x2.toFixed(dp, rm);
+            if (x2.c) {
+              var i, arr = str.split("."), g1 = +format2.groupSize, g2 = +format2.secondaryGroupSize, groupSeparator = format2.groupSeparator || "", intPart = arr[0], fractionPart = arr[1], isNeg = x2.s < 0, intDigits = isNeg ? intPart.slice(1) : intPart, len = intDigits.length;
+              if (g2) {
+                i = g1;
+                g1 = g2;
+                g2 = i;
+                len -= i;
+              }
+              if (g1 > 0 && len > 0) {
+                i = len % g1 || g1;
+                intPart = intDigits.substr(0, i);
+                for (; i < len; i += g1) intPart += groupSeparator + intDigits.substr(i, g1);
+                if (g2 > 0) intPart += groupSeparator + intDigits.slice(i);
+                if (isNeg) intPart = "-" + intPart;
+              }
+              str = fractionPart ? intPart + (format2.decimalSeparator || "") + ((g2 = +format2.fractionGroupSize) ? fractionPart.replace(
+                new RegExp("\\d{" + g2 + "}\\B", "g"),
+                "$&" + (format2.fractionGroupSeparator || "")
+              ) : fractionPart) : intPart;
+            }
+            return (format2.prefix || "") + str + (format2.suffix || "");
+          };
+          P2.toFraction = function(md) {
+            var d2, d0, d1, d22, e2, exp, n2, n0, n1, q2, r2, s2, x2 = this, xc = x2.c;
+            if (md != null) {
+              n2 = new BigNumber2(md);
+              if (!n2.isInteger() && (n2.c || n2.s !== 1) || n2.lt(ONE)) {
+                throw Error(bignumberError + "Argument " + (n2.isInteger() ? "out of range: " : "not an integer: ") + valueOf(n2));
+              }
+            }
+            if (!xc) return new BigNumber2(x2);
+            d2 = new BigNumber2(ONE);
+            n1 = d0 = new BigNumber2(ONE);
+            d1 = n0 = new BigNumber2(ONE);
+            s2 = coeffToString(xc);
+            e2 = d2.e = s2.length - x2.e - 1;
+            d2.c[0] = POWS_TEN[(exp = e2 % LOG_BASE) < 0 ? LOG_BASE + exp : exp];
+            md = !md || n2.comparedTo(d2) > 0 ? e2 > 0 ? d2 : n1 : n2;
+            exp = MAX_EXP;
+            MAX_EXP = 1 / 0;
+            n2 = new BigNumber2(s2);
+            n0.c[0] = 0;
+            for (; ; ) {
+              q2 = div(n2, d2, 0, 1);
+              d22 = d0.plus(q2.times(d1));
+              if (d22.comparedTo(md) == 1) break;
+              d0 = d1;
+              d1 = d22;
+              n1 = n0.plus(q2.times(d22 = n1));
+              n0 = d22;
+              d2 = n2.minus(q2.times(d22 = d2));
+              n2 = d22;
+            }
+            d22 = div(md.minus(d0), d1, 0, 1);
+            n0 = n0.plus(d22.times(n1));
+            d0 = d0.plus(d22.times(d1));
+            n0.s = n1.s = x2.s;
+            e2 = e2 * 2;
+            r2 = div(n1, d1, e2, ROUNDING_MODE).minus(x2).abs().comparedTo(
+              div(n0, d0, e2, ROUNDING_MODE).minus(x2).abs()
+            ) < 1 ? [n1, d1] : [n0, d0];
+            MAX_EXP = exp;
+            return r2;
+          };
+          P2.toNumber = function() {
+            return +valueOf(this);
+          };
+          P2.toPrecision = function(sd, rm) {
+            if (sd != null) intCheck(sd, 1, MAX);
+            return format(this, sd, rm, 2);
+          };
+          P2.toString = function(b2) {
+            var str, n2 = this, s2 = n2.s, e2 = n2.e;
+            if (e2 === null) {
+              if (s2) {
+                str = "Infinity";
+                if (s2 < 0) str = "-" + str;
+              } else {
+                str = "NaN";
+              }
+            } else {
+              if (b2 == null) {
+                str = e2 <= TO_EXP_NEG || e2 >= TO_EXP_POS ? toExponential(coeffToString(n2.c), e2) : toFixedPoint(coeffToString(n2.c), e2, "0");
+              } else if (b2 === 10 && alphabetHasNormalDecimalDigits) {
+                n2 = round(new BigNumber2(n2), DECIMAL_PLACES + e2 + 1, ROUNDING_MODE);
+                str = toFixedPoint(coeffToString(n2.c), n2.e, "0");
+              } else {
+                intCheck(b2, 2, ALPHABET.length, "Base");
+                str = convertBase(toFixedPoint(coeffToString(n2.c), e2, "0"), 10, b2, s2, true);
+              }
+              if (s2 < 0 && n2.c[0]) str = "-" + str;
+            }
+            return str;
+          };
+          P2.valueOf = P2.toJSON = function() {
+            return valueOf(this);
+          };
+          P2._isBigNumber = true;
+          if (configObject != null) BigNumber2.set(configObject);
+          return BigNumber2;
+        }
+        function bitFloor(n2) {
+          var i = n2 | 0;
+          return n2 > 0 || n2 === i ? i : i - 1;
+        }
+        function coeffToString(a2) {
+          var s2, z2, i = 1, j2 = a2.length, r2 = a2[0] + "";
+          for (; i < j2; ) {
+            s2 = a2[i++] + "";
+            z2 = LOG_BASE - s2.length;
+            for (; z2--; s2 = "0" + s2) ;
+            r2 += s2;
+          }
+          for (j2 = r2.length; r2.charCodeAt(--j2) === 48; ) ;
+          return r2.slice(0, j2 + 1 || 1);
+        }
+        function compare(x2, y2) {
+          var a2, b2, xc = x2.c, yc = y2.c, i = x2.s, j2 = y2.s, k2 = x2.e, l2 = y2.e;
+          if (!i || !j2) return null;
+          a2 = xc && !xc[0];
+          b2 = yc && !yc[0];
+          if (a2 || b2) return a2 ? b2 ? 0 : -j2 : i;
+          if (i != j2) return i;
+          a2 = i < 0;
+          b2 = k2 == l2;
+          if (!xc || !yc) return b2 ? 0 : !xc ^ a2 ? 1 : -1;
+          if (!b2) return k2 > l2 ^ a2 ? 1 : -1;
+          j2 = (k2 = xc.length) < (l2 = yc.length) ? k2 : l2;
+          for (i = 0; i < j2; i++) if (xc[i] != yc[i]) return xc[i] > yc[i] ^ a2 ? 1 : -1;
+          return k2 == l2 ? 0 : k2 > l2 ^ a2 ? 1 : -1;
+        }
+        function intCheck(n2, min, max, name) {
+          if (n2 < min || n2 > max || n2 !== mathfloor(n2)) {
+            throw Error(bignumberError + (name || "Argument") + (typeof n2 == "number" ? n2 < min || n2 > max ? " out of range: " : " not an integer: " : " not a primitive number: ") + String(n2));
+          }
+        }
+        function isOdd(n2) {
+          var k2 = n2.c.length - 1;
+          return bitFloor(n2.e / LOG_BASE) == k2 && n2.c[k2] % 2 != 0;
+        }
+        function toExponential(str, e2) {
+          return (str.length > 1 ? str.charAt(0) + "." + str.slice(1) : str) + (e2 < 0 ? "e" : "e+") + e2;
+        }
+        function toFixedPoint(str, e2, z2) {
+          var len, zs;
+          if (e2 < 0) {
+            for (zs = z2 + "."; ++e2; zs += z2) ;
+            str = zs + str;
+          } else {
+            len = str.length;
+            if (++e2 > len) {
+              for (zs = z2, e2 -= len; --e2; zs += z2) ;
+              str += zs;
+            } else if (e2 < len) {
+              str = str.slice(0, e2) + "." + str.slice(e2);
+            }
+          }
+          return str;
+        }
+        BigNumber = clone2();
+        BigNumber["default"] = BigNumber.BigNumber = BigNumber;
+        if (module.exports) {
+          module.exports = BigNumber;
+        } else {
+          if (!globalObject) {
+            globalObject = typeof self != "undefined" && self ? self : window;
+          }
+          globalObject.BigNumber = BigNumber;
+        }
+      })(bignumber);
+    })(bignumber$1);
+    return bignumber$1.exports;
   }
-  var PgBigSerial53Builder = (_Fa = class extends (_Ea = PgColumnBuilder, _Da = entityKind, _Ea) {
-    constructor(name) {
-      super(name, "number int53", "PgBigSerial53");
-      this.config.hasDefault = true;
-      this.config.notNull = true;
-    }
-    /** @internal */
-    build(table) {
-      return new PgBigSerial53(table, this.config);
-    }
-  }, __publicField(_Fa, _Da, "PgBigSerial53Builder"), _Fa);
-  var PgBigSerial53 = (_Ia = class extends (_Ha = PgColumn, _Ga = entityKind, _Ha) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "bigserial:number");
-    }
-    getSQLType() {
-      return "bigserial";
-    }
-  }, __publicField(_Ia, _Ga, "PgBigSerial53"), _Ia);
-  var PgBigSerial64Builder = (_La = class extends (_Ka = PgColumnBuilder, _Ja = entityKind, _Ka) {
-    constructor(name) {
-      super(name, "bigint int64", "PgBigSerial64");
-      this.config.hasDefault = true;
-      this.config.notNull = true;
-    }
-    /** @internal */
-    build(table) {
-      return new PgBigSerial64(table, this.config);
-    }
-  }, __publicField(_La, _Ja, "PgBigSerial64Builder"), _La);
-  var PgBigSerial64 = (_Oa = class extends (_Na = PgColumn, _Ma = entityKind, _Na) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "bigserial");
-    }
-    getSQLType() {
-      return "bigserial";
-    }
-  }, __publicField(_Oa, _Ma, "PgBigSerial64"), _Oa);
-  function bigserial(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    if (config2.mode === "number") return new PgBigSerial53Builder(name);
-    return new PgBigSerial64Builder(name);
+  var hasRequiredStringify;
+  function requireStringify() {
+    if (hasRequiredStringify) return stringify.exports;
+    hasRequiredStringify = 1;
+    (function(module) {
+      var BigNumber = requireBignumber();
+      var JSON2 = module.exports;
+      (function() {
+        var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g, gap, indent, meta2 = {
+          // table of character substitutions
+          "\b": "\\b",
+          "	": "\\t",
+          "\n": "\\n",
+          "\f": "\\f",
+          "\r": "\\r",
+          '"': '\\"',
+          "\\": "\\\\"
+        }, rep;
+        function quote(string2) {
+          escapable.lastIndex = 0;
+          return escapable.test(string2) ? '"' + string2.replace(escapable, function(a2) {
+            var c2 = meta2[a2];
+            return typeof c2 === "string" ? c2 : "\\u" + ("0000" + a2.charCodeAt(0).toString(16)).slice(-4);
+          }) + '"' : '"' + string2 + '"';
+        }
+        function str(key, holder) {
+          var i, k2, v2, length, mind = gap, partial2, value = holder[key], isBigNumber = value != null && (value instanceof BigNumber || BigNumber.isBigNumber(value));
+          if (value && typeof value === "object" && typeof value.toJSON === "function") {
+            value = value.toJSON(key);
+          }
+          if (typeof rep === "function") {
+            value = rep.call(holder, key, value);
+          }
+          switch (typeof value) {
+            case "string":
+              if (isBigNumber) {
+                return value;
+              } else {
+                return quote(value);
+              }
+            case "number":
+              return isFinite(value) ? String(value) : "null";
+            case "boolean":
+            case "null":
+            case "bigint":
+              return String(value);
+            // If the type is 'object', we might be dealing with an object or an array or
+            // null.
+            case "object":
+              if (!value) {
+                return "null";
+              }
+              gap += indent;
+              partial2 = [];
+              if (Object.prototype.toString.apply(value) === "[object Array]") {
+                length = value.length;
+                for (i = 0; i < length; i += 1) {
+                  partial2[i] = str(i, value) || "null";
+                }
+                v2 = partial2.length === 0 ? "[]" : gap ? "[\n" + gap + partial2.join(",\n" + gap) + "\n" + mind + "]" : "[" + partial2.join(",") + "]";
+                gap = mind;
+                return v2;
+              }
+              if (rep && typeof rep === "object") {
+                length = rep.length;
+                for (i = 0; i < length; i += 1) {
+                  if (typeof rep[i] === "string") {
+                    k2 = rep[i];
+                    v2 = str(k2, value);
+                    if (v2) {
+                      partial2.push(quote(k2) + (gap ? ": " : ":") + v2);
+                    }
+                  }
+                }
+              } else {
+                Object.keys(value).forEach(function(k3) {
+                  var v3 = str(k3, value);
+                  if (v3) {
+                    partial2.push(quote(k3) + (gap ? ": " : ":") + v3);
+                  }
+                });
+              }
+              v2 = partial2.length === 0 ? "{}" : gap ? "{\n" + gap + partial2.join(",\n" + gap) + "\n" + mind + "}" : "{" + partial2.join(",") + "}";
+              gap = mind;
+              return v2;
+          }
+        }
+        if (typeof JSON2.stringify !== "function") {
+          JSON2.stringify = function(value, replacer, space) {
+            var i;
+            gap = "";
+            indent = "";
+            if (typeof space === "number") {
+              for (i = 0; i < space; i += 1) {
+                indent += " ";
+              }
+            } else if (typeof space === "string") {
+              indent = space;
+            }
+            rep = replacer;
+            if (replacer && typeof replacer !== "function" && (typeof replacer !== "object" || typeof replacer.length !== "number")) {
+              throw new Error("JSON.stringify");
+            }
+            return str("", { "": value });
+          };
+        }
+      })();
+    })(stringify);
+    return stringify.exports;
   }
-  var PgBooleanBuilder = (_Ra = class extends (_Qa = PgColumnBuilder, _Pa = entityKind, _Qa) {
-    constructor(name) {
-      super(name, "boolean", "PgBoolean");
-    }
-    /** @internal */
-    build(table) {
-      return new PgBoolean(table, this.config);
-    }
-  }, __publicField(_Ra, _Pa, "PgBooleanBuilder"), _Ra);
-  var PgBoolean = (_Ua = class extends (_Ta = PgColumn, _Sa = entityKind, _Ta) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "bool");
-    }
-    getSQLType() {
-      return "boolean";
-    }
-  }, __publicField(_Ua, _Sa, "PgBoolean"), _Ua);
-  function boolean$3(name) {
-    return new PgBooleanBuilder(name ?? "");
-  }
-  var PgCharBuilder = (_Xa = class extends (_Wa = PgColumnBuilder, _Va = entityKind, _Wa) {
-    constructor(name, config2) {
-      super(name, config2.enum?.length ? "string enum" : "string", "PgChar");
-      this.config.length = config2.length ?? 1;
-      this.config.setLength = config2.length !== void 0;
-      this.config.enumValues = config2.enum;
-    }
-    /** @internal */
-    build(table) {
-      return new PgChar(table, this.config);
-    }
-  }, __publicField(_Xa, _Va, "PgCharBuilder"), _Xa);
-  var PgChar = (__a = class extends (_Za = PgColumn, _Ya = entityKind, _Za) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "char");
-      __publicField(this, "enumValues");
-      __publicField(this, "setLength");
-      this.enumValues = config2.enumValues;
-      this.setLength = config2.setLength;
-    }
-    getSQLType() {
-      return this.setLength ? `char(${this.length})` : `char`;
-    }
-  }, __publicField(__a, _Ya, "PgChar"), __a);
-  function char(a, b2 = {}) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    return new PgCharBuilder(name, config2);
-  }
-  var PgCidrBuilder = (_bb = class extends (_ab = PgColumnBuilder, _$a = entityKind, _ab) {
-    constructor(name) {
-      super(name, "string cidr", "PgCidr");
-    }
-    /** @internal */
-    build(table) {
-      return new PgCidr(table, this.config);
-    }
-  }, __publicField(_bb, _$a, "PgCidrBuilder"), _bb);
-  var PgCidr = (_eb = class extends (_db = PgColumn, _cb = entityKind, _db) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "cidr");
-    }
-    getSQLType() {
-      return "cidr";
-    }
-  }, __publicField(_eb, _cb, "PgCidr"), _eb);
-  function cidr(name) {
-    return new PgCidrBuilder(name ?? "");
-  }
-  function parsePgArrayValue(arrayString, startFrom, inQuotes) {
-    for (let i2 = startFrom; i2 < arrayString.length; i2++) {
-      const char2 = arrayString[i2];
-      if (char2 === "\\") {
-        i2++;
-        continue;
-      }
-      if (char2 === '"') return [arrayString.slice(startFrom, i2).replace(/\\/g, ""), i2 + 1];
-      if (inQuotes) continue;
-      if (char2 === "," || char2 === "}") return [arrayString.slice(startFrom, i2).replace(/\\/g, ""), i2];
-    }
-    return [arrayString.slice(startFrom).replace(/\\/g, ""), arrayString.length];
-  }
-  function parsePgNestedArray(arrayString, startFrom = 0) {
-    const result = [];
-    let i2 = startFrom;
-    let lastCharIsComma = false;
-    while (i2 < arrayString.length) {
-      const char2 = arrayString[i2];
-      if (char2 === ",") {
-        if (lastCharIsComma || i2 === startFrom) result.push("");
-        lastCharIsComma = true;
-        i2++;
-        continue;
-      }
-      lastCharIsComma = false;
-      if (char2 === "\\") {
-        i2 += 2;
-        continue;
-      }
-      if (char2 === '"') {
-        const [value2, startFrom2] = parsePgArrayValue(arrayString, i2 + 1, true);
-        result.push(value2);
-        i2 = startFrom2;
-        continue;
-      }
-      if (char2 === "}") return [result, i2 + 1];
-      if (char2 === "{") {
-        const [value2, startFrom2] = parsePgNestedArray(arrayString, i2 + 1);
-        result.push(value2);
-        i2 = startFrom2;
-        continue;
-      }
-      const [value, newStartFrom] = parsePgArrayValue(arrayString, i2, false);
-      result.push(value);
-      i2 = newStartFrom;
-    }
-    return [result, i2];
-  }
-  function parsePgArray(arrayString) {
-    const [result] = parsePgNestedArray(arrayString, 1);
-    return result;
-  }
-  const PG_ALIAS_TO_TYPE_MAP = {
-    int2: "smallint",
-    integer: "int",
-    int4: "int",
-    int8: "bigint",
-    decimal: "numeric",
-    real: "float4",
-    double: "float8",
-    "double precision": "float8",
-    serial2: "smallserial",
-    serial4: "serial",
-    serial8: "bigserial",
-    character: "char",
-    "character varying": "varchar",
-    "time with time zone": "timetz",
-    "time without time zone": "time",
-    "timestamp with time zone": "timestamptz",
-    "timestamp without time zone": "timestamp",
-    boolean: "bool",
-    "bit varying": "varbit"
-  };
-  function resolvePgTypeAlias(type) {
-    return PG_ALIAS_TO_TYPE_MAP[type] ?? type;
-  }
-  var PgCustomColumnBuilder = (_hb = class extends (_gb = PgColumnBuilder, _fb = entityKind, _gb) {
-    constructor(name, fieldConfig, customTypeParams) {
-      super(name, "custom", "PgCustomColumn");
-      this.config.fieldConfig = fieldConfig;
-      this.config.customTypeParams = customTypeParams;
-    }
-    /** @internal */
-    build(table) {
-      return new PgCustomColumn(table, this.config);
-    }
-  }, __publicField(_hb, _fb, "PgCustomColumnBuilder"), _hb);
-  var PgCustomColumn = (_kb = class extends (_jb = PgColumn, _ib = entityKind, _jb) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec");
-      __publicField(this, "sqlName");
-      __publicField(this, "mapFromJsonValue");
-      __publicField(this, "jsonSelectIdentifier");
-      this.sqlName = config2.customTypeParams.dataType(config2.fieldConfig);
-      this.mapToDriverValue = config2.customTypeParams.toDriver ?? this.mapToDriverValue;
-      this.mapFromDriverValue = config2.customTypeParams.fromDriver ?? this.mapFromDriverValue;
-      this.mapFromJsonValue = config2.customTypeParams.fromJson;
-      this.jsonSelectIdentifier = config2.customTypeParams.forJsonSelect;
-      const cfgCodec = typeof config2.customTypeParams.codec === "string" || typeof config2.customTypeParams.codec === "undefined" ? config2.customTypeParams.codec : config2.customTypeParams.codec(config2.fieldConfig);
-      this.codec = typeof cfgCodec === "string" ? resolvePgTypeAlias(cfgCodec) : void 0;
-      if (this.dimensions && config2.customTypeParams.fromJson) this.mapFromJsonValue = (value) => {
-        if (value === null) return value;
-        const arr = typeof value === "string" ? parsePgArray(value) : value;
-        return this.mapJsonArrayElements(arr, config2.customTypeParams.fromJson, this.dimensions);
+  var parse$2;
+  var hasRequiredParse;
+  function requireParse() {
+    if (hasRequiredParse) return parse$2;
+    hasRequiredParse = 1;
+    var BigNumber = null;
+    const suspectProtoRx = /(?:_|\\u005[Ff])(?:_|\\u005[Ff])(?:p|\\u0070)(?:r|\\u0072)(?:o|\\u006[Ff])(?:t|\\u0074)(?:o|\\u006[Ff])(?:_|\\u005[Ff])(?:_|\\u005[Ff])/;
+    const suspectConstructorRx = /(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)/;
+    var json_parse = function(options) {
+      var _options = {
+        strict: false,
+        // not being strict means do not generate syntax errors for "duplicate key"
+        storeAsString: false,
+        // toggles whether the values should be stored as BigNumber (default) or a string
+        alwaysParseAsBig: false,
+        // toggles whether all numbers should be Big
+        useNativeBigInt: false,
+        // toggles whether to use native BigInt instead of bignumber.js
+        protoAction: "error",
+        constructorAction: "error"
       };
-    }
-    /** @internal */
-    mapJsonArrayElements(value, mapper, depth) {
-      if (depth > 0 && Array.isArray(value)) return value.map((v2) => v2 === null ? null : this.mapJsonArrayElements(v2, mapper, depth - 1));
-      return mapper(value);
-    }
-    getSQLType() {
-      return this.sqlName;
-    }
-  }, __publicField(_kb, _ib, "PgCustomColumn"), _kb);
-  function customType(customTypeParams) {
-    return (a, b2) => {
-      const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-      return new PgCustomColumnBuilder(name, config2, customTypeParams);
+      if (options !== void 0 && options !== null) {
+        if (options.strict === true) {
+          _options.strict = true;
+        }
+        if (options.storeAsString === true) {
+          _options.storeAsString = true;
+        }
+        _options.alwaysParseAsBig = options.alwaysParseAsBig === true ? options.alwaysParseAsBig : false;
+        _options.useNativeBigInt = options.useNativeBigInt === true ? options.useNativeBigInt : false;
+        if (typeof options.constructorAction !== "undefined") {
+          if (options.constructorAction === "error" || options.constructorAction === "ignore" || options.constructorAction === "preserve") {
+            _options.constructorAction = options.constructorAction;
+          } else {
+            throw new Error(
+              `Incorrect value for constructorAction option, must be "error", "ignore" or undefined but passed ${options.constructorAction}`
+            );
+          }
+        }
+        if (typeof options.protoAction !== "undefined") {
+          if (options.protoAction === "error" || options.protoAction === "ignore" || options.protoAction === "preserve") {
+            _options.protoAction = options.protoAction;
+          } else {
+            throw new Error(
+              `Incorrect value for protoAction option, must be "error", "ignore" or undefined but passed ${options.protoAction}`
+            );
+          }
+        }
+      }
+      var at, ch, escapee = {
+        '"': '"',
+        "\\": "\\",
+        "/": "/",
+        b: "\b",
+        f: "\f",
+        n: "\n",
+        r: "\r",
+        t: "	"
+      }, text2, error2 = function(m2) {
+        throw {
+          name: "SyntaxError",
+          message: m2,
+          at,
+          text: text2
+        };
+      }, next = function(c2) {
+        if (c2 && c2 !== ch) {
+          error2("Expected '" + c2 + "' instead of '" + ch + "'");
+        }
+        ch = text2.charAt(at);
+        at += 1;
+        return ch;
+      }, number2 = function() {
+        var number3, string3 = "";
+        if (ch === "-") {
+          string3 = "-";
+          next("-");
+        }
+        while (ch >= "0" && ch <= "9") {
+          string3 += ch;
+          next();
+        }
+        if (ch === ".") {
+          string3 += ".";
+          while (next() && ch >= "0" && ch <= "9") {
+            string3 += ch;
+          }
+        }
+        if (ch === "e" || ch === "E") {
+          string3 += ch;
+          next();
+          if (ch === "-" || ch === "+") {
+            string3 += ch;
+            next();
+          }
+          while (ch >= "0" && ch <= "9") {
+            string3 += ch;
+            next();
+          }
+        }
+        number3 = +string3;
+        if (!isFinite(number3)) {
+          error2("Bad number");
+        } else {
+          if (BigNumber == null) BigNumber = requireBignumber();
+          if (string3.length > 15)
+            return _options.storeAsString ? string3 : _options.useNativeBigInt ? BigInt(string3) : new BigNumber(string3);
+          else
+            return !_options.alwaysParseAsBig ? number3 : _options.useNativeBigInt ? BigInt(number3) : new BigNumber(number3);
+        }
+      }, string2 = function() {
+        var hex2, i, string3 = "", uffff;
+        if (ch === '"') {
+          var startAt = at;
+          while (next()) {
+            if (ch === '"') {
+              if (at - 1 > startAt) string3 += text2.substring(startAt, at - 1);
+              next();
+              return string3;
+            }
+            if (ch === "\\") {
+              if (at - 1 > startAt) string3 += text2.substring(startAt, at - 1);
+              next();
+              if (ch === "u") {
+                uffff = 0;
+                for (i = 0; i < 4; i += 1) {
+                  hex2 = parseInt(next(), 16);
+                  if (!isFinite(hex2)) {
+                    break;
+                  }
+                  uffff = uffff * 16 + hex2;
+                }
+                string3 += String.fromCharCode(uffff);
+              } else if (typeof escapee[ch] === "string") {
+                string3 += escapee[ch];
+              } else {
+                break;
+              }
+              startAt = at;
+            }
+          }
+        }
+        error2("Bad string");
+      }, white = function() {
+        while (ch && ch <= " ") {
+          next();
+        }
+      }, word = function() {
+        switch (ch) {
+          case "t":
+            next("t");
+            next("r");
+            next("u");
+            next("e");
+            return true;
+          case "f":
+            next("f");
+            next("a");
+            next("l");
+            next("s");
+            next("e");
+            return false;
+          case "n":
+            next("n");
+            next("u");
+            next("l");
+            next("l");
+            return null;
+        }
+        error2("Unexpected '" + ch + "'");
+      }, value, array2 = function() {
+        var array3 = [];
+        if (ch === "[") {
+          next("[");
+          white();
+          if (ch === "]") {
+            next("]");
+            return array3;
+          }
+          while (ch) {
+            array3.push(value());
+            white();
+            if (ch === "]") {
+              next("]");
+              return array3;
+            }
+            next(",");
+            white();
+          }
+        }
+        error2("Bad array");
+      }, object2 = function() {
+        var key, object3 = /* @__PURE__ */ Object.create(null);
+        if (ch === "{") {
+          next("{");
+          white();
+          if (ch === "}") {
+            next("}");
+            return object3;
+          }
+          while (ch) {
+            key = string2();
+            white();
+            next(":");
+            if (_options.strict === true && Object.hasOwnProperty.call(object3, key)) {
+              error2('Duplicate key "' + key + '"');
+            }
+            if (suspectProtoRx.test(key) === true) {
+              if (_options.protoAction === "error") {
+                error2("Object contains forbidden prototype property");
+              } else if (_options.protoAction === "ignore") {
+                value();
+              } else {
+                object3[key] = value();
+              }
+            } else if (suspectConstructorRx.test(key) === true) {
+              if (_options.constructorAction === "error") {
+                error2("Object contains forbidden constructor property");
+              } else if (_options.constructorAction === "ignore") {
+                value();
+              } else {
+                object3[key] = value();
+              }
+            } else {
+              object3[key] = value();
+            }
+            white();
+            if (ch === "}") {
+              next("}");
+              return object3;
+            }
+            next(",");
+            white();
+          }
+        }
+        error2("Bad object");
+      };
+      value = function() {
+        white();
+        switch (ch) {
+          case "{":
+            return object2();
+          case "[":
+            return array2();
+          case '"':
+            return string2();
+          case "-":
+            return number2();
+          default:
+            return ch >= "0" && ch <= "9" ? number2() : word();
+        }
+      };
+      return function(source, reviver) {
+        var result;
+        text2 = source + "";
+        at = 0;
+        ch = " ";
+        result = value();
+        white();
+        if (ch) {
+          error2("Syntax error");
+        }
+        return typeof reviver === "function" ? (function walk(holder, key) {
+          var v2, value2 = holder[key];
+          if (value2 && typeof value2 === "object") {
+            Object.keys(value2).forEach(function(k2) {
+              v2 = walk(value2, k2);
+              if (v2 !== void 0) {
+                value2[k2] = v2;
+              } else {
+                delete value2[k2];
+              }
+            });
+          }
+          return reviver.call(holder, key, value2);
+        })({ "": result }, "") : result;
+      };
     };
+    parse$2 = json_parse;
+    return parse$2;
   }
-  var PgDateColumnBuilder = (_nb = class extends (_mb = PgColumnBuilder, _lb = entityKind, _mb) {
-    /**
-    * Adds a `default now()` clause to the column definition.
-    * Available for date/time column types.
-    */
-    defaultNow() {
-      return this.default(sql`now()`);
-    }
-  }, __publicField(_nb, _lb, "PgDateColumnBaseBuilder"), _nb);
-  var PgDateBuilder = (_qb = class extends (_pb = PgDateColumnBuilder, _ob = entityKind, _pb) {
-    constructor(name) {
-      super(name, "object date", "PgDate");
-    }
-    /** @internal */
-    build(table) {
-      return new PgDate(table, this.config);
-    }
-  }, __publicField(_qb, _ob, "PgDateBuilder"), _qb);
-  var PgDate = (_tb = class extends (_sb = PgColumn, _rb = entityKind, _sb) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "date");
-      __publicField(this, "mapToDriverValue", function(value) {
-        if (typeof value === "string") return value;
-        return value.toISOString();
-      });
-    }
-    getSQLType() {
-      return "date";
-    }
-  }, __publicField(_tb, _rb, "PgDate"), _tb);
-  var PgDateStringBuilder = (_wb = class extends (_vb = PgDateColumnBuilder, _ub = entityKind, _vb) {
-    constructor(name) {
-      super(name, "string date", "PgDateString");
-    }
-    /** @internal */
-    build(table) {
-      return new PgDateString(table, this.config);
-    }
-  }, __publicField(_wb, _ub, "PgDateStringBuilder"), _wb);
-  var PgDateString = (_zb = class extends (_yb = PgColumn, _xb = entityKind, _yb) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "date:string");
-      __publicField(this, "mapToDriverValue", (value) => {
-        if (typeof value === "string") return value;
-        return value.toISOString();
-      });
-    }
-    getSQLType() {
-      return "date";
-    }
-  }, __publicField(_zb, _xb, "PgDateString"), _zb);
-  function date$4(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    if (config2?.mode === "date") return new PgDateBuilder(name);
-    return new PgDateStringBuilder(name);
-  }
-  var PgDoublePrecisionBuilder = (_Cb = class extends (_Bb = PgColumnBuilder, _Ab = entityKind, _Bb) {
-    constructor(name) {
-      super(name, "number double", "PgDoublePrecision");
-    }
-    /** @internal */
-    build(table) {
-      return new PgDoublePrecision(table, this.config);
-    }
-  }, __publicField(_Cb, _Ab, "PgDoublePrecisionBuilder"), _Cb);
-  var PgDoublePrecision = (_Fb = class extends (_Eb = PgColumn, _Db = entityKind, _Eb) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "float8");
-    }
-    getSQLType() {
-      return "double precision";
-    }
-  }, __publicField(_Fb, _Db, "PgDoublePrecision"), _Fb);
-  function doublePrecision(name) {
-    return new PgDoublePrecisionBuilder(name ?? "");
-  }
-  var PgInetBuilder = (_Ib = class extends (_Hb = PgColumnBuilder, _Gb = entityKind, _Hb) {
-    constructor(name) {
-      super(name, "string inet", "PgInet");
-    }
-    /** @internal */
-    build(table) {
-      return new PgInet(table, this.config);
-    }
-  }, __publicField(_Ib, _Gb, "PgInetBuilder"), _Ib);
-  var PgInet = (_Lb = class extends (_Kb = PgColumn, _Jb = entityKind, _Kb) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "inet");
-    }
-    getSQLType() {
-      return "inet";
-    }
-  }, __publicField(_Lb, _Jb, "PgInet"), _Lb);
-  function inet(name) {
-    return new PgInetBuilder(name ?? "");
-  }
-  var PgIntegerBuilder = (_Ob = class extends (_Nb = PgIntColumnBuilder, _Mb = entityKind, _Nb) {
-    constructor(name) {
-      super(name, "number int32", "PgInteger");
-    }
-    /** @internal */
-    build(table) {
-      return new PgInteger(table, this.config);
-    }
-  }, __publicField(_Ob, _Mb, "PgIntegerBuilder"), _Ob);
-  var PgInteger = (_Rb = class extends (_Qb = PgColumn, _Pb = entityKind, _Qb) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "int");
-    }
-    getSQLType() {
-      return "integer";
-    }
-  }, __publicField(_Rb, _Pb, "PgInteger"), _Rb);
-  function integer$1(name) {
-    return new PgIntegerBuilder(name ?? "");
-  }
-  var PgIntervalBuilder = (_Ub = class extends (_Tb = PgColumnBuilder, _Sb = entityKind, _Tb) {
-    constructor(name, intervalConfig) {
-      super(name, "string interval", "PgInterval");
-      this.config.intervalConfig = intervalConfig;
-    }
-    /** @internal */
-    build(table) {
-      return new PgInterval(table, this.config);
-    }
-  }, __publicField(_Ub, _Sb, "PgIntervalBuilder"), _Ub);
-  var PgInterval = (_Xb = class extends (_Wb = PgColumn, _Vb = entityKind, _Wb) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "interval");
-      __publicField(this, "fields");
-      __publicField(this, "precision");
-      this.fields = config2.intervalConfig.fields;
-      this.precision = config2.intervalConfig.precision;
-    }
-    getSQLType() {
-      return `interval${this.fields ? ` ${this.fields}` : ""}${this.precision ? `(${this.precision})` : ""}`;
-    }
-  }, __publicField(_Xb, _Vb, "PgInterval"), _Xb);
-  function interval(a, b2 = {}) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    return new PgIntervalBuilder(name, config2);
-  }
-  var PgJsonBuilder = (__b = class extends (_Zb = PgColumnBuilder, _Yb = entityKind, _Zb) {
-    constructor(name) {
-      super(name, "object json", "PgJson");
-    }
-    /** @internal */
-    build(table) {
-      return new PgJson(table, this.config);
-    }
-  }, __publicField(__b, _Yb, "PgJsonBuilder"), __b);
-  var PgJson = (_bc = class extends (_ac = PgColumn, _$b = entityKind, _ac) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "json");
-    }
-    getSQLType() {
-      return "json";
-    }
-  }, __publicField(_bc, _$b, "PgJson"), _bc);
-  function json$1(name) {
-    return new PgJsonBuilder(name ?? "");
-  }
-  var PgJsonbBuilder = (_ec = class extends (_dc = PgColumnBuilder, _cc = entityKind, _dc) {
-    constructor(name) {
-      super(name, "object json", "PgJsonb");
-    }
-    /** @internal */
-    build(table) {
-      return new PgJsonb(table, this.config);
-    }
-  }, __publicField(_ec, _cc, "PgJsonbBuilder"), _ec);
-  var PgJsonb = (_hc = class extends (_gc = PgColumn, _fc = entityKind, _gc) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "jsonb");
-    }
-    getSQLType() {
-      return "jsonb";
-    }
-  }, __publicField(_hc, _fc, "PgJsonb"), _hc);
-  function jsonb(name) {
-    return new PgJsonbBuilder(name ?? "");
-  }
-  var PgLineBuilder = (_kc = class extends (_jc = PgColumnBuilder, _ic = entityKind, _jc) {
-    constructor(name) {
-      super(name, "array line", "PgLine");
-    }
-    /** @internal */
-    build(table) {
-      return new PgLineTuple(table, this.config);
-    }
-  }, __publicField(_kc, _ic, "PgLineBuilder"), _kc);
-  var PgLineTuple = (_nc = class extends (_mc = PgColumn, _lc = entityKind, _mc) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "line:tuple");
-      __publicField(this, "mode", "tuple");
-      __publicField(this, "mapToDriverValue", (value) => {
-        return `{${value[0]},${value[1]},${value[2]}}`;
-      });
-    }
-    getSQLType() {
-      return "line";
-    }
-  }, __publicField(_nc, _lc, "PgLine"), _nc);
-  var PgLineABCBuilder = (_qc = class extends (_pc = PgColumnBuilder, _oc = entityKind, _pc) {
-    constructor(name) {
-      super(name, "object line", "PgLineABC");
-    }
-    /** @internal */
-    build(table) {
-      return new PgLineABC(table, this.config);
-    }
-  }, __publicField(_qc, _oc, "PgLineABCBuilder"), _qc);
-  var PgLineABC = (_tc = class extends (_sc = PgColumn, _rc = entityKind, _sc) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "line");
-      __publicField(this, "mode", "abc");
-      __publicField(this, "mapToDriverValue", (value) => {
-        return `{${value.a},${value.b},${value.c}}`;
-      });
-    }
-    getSQLType() {
-      return "line";
-    }
-  }, __publicField(_tc, _rc, "PgLineABC"), _tc);
-  function line(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    if (!config2?.mode || config2.mode === "tuple") return new PgLineBuilder(name);
-    return new PgLineABCBuilder(name);
-  }
-  var PgMacaddrBuilder = (_wc = class extends (_vc = PgColumnBuilder, _uc = entityKind, _vc) {
-    constructor(name) {
-      super(name, "string macaddr", "PgMacaddr");
-    }
-    /** @internal */
-    build(table) {
-      return new PgMacaddr(table, this.config);
-    }
-  }, __publicField(_wc, _uc, "PgMacaddrBuilder"), _wc);
-  var PgMacaddr = (_zc = class extends (_yc = PgColumn, _xc = entityKind, _yc) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "macaddr");
-    }
-    getSQLType() {
-      return "macaddr";
-    }
-  }, __publicField(_zc, _xc, "PgMacaddr"), _zc);
-  function macaddr(name) {
-    return new PgMacaddrBuilder(name ?? "");
-  }
-  var PgMacaddr8Builder = (_Cc = class extends (_Bc = PgColumnBuilder, _Ac = entityKind, _Bc) {
-    constructor(name) {
-      super(name, "string macaddr8", "PgMacaddr8");
-    }
-    /** @internal */
-    build(table) {
-      return new PgMacaddr8(table, this.config);
-    }
-  }, __publicField(_Cc, _Ac, "PgMacaddr8Builder"), _Cc);
-  var PgMacaddr8 = (_Fc = class extends (_Ec = PgColumn, _Dc = entityKind, _Ec) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "macaddr8");
-    }
-    getSQLType() {
-      return "macaddr8";
-    }
-  }, __publicField(_Fc, _Dc, "PgMacaddr8"), _Fc);
-  function macaddr8(name) {
-    return new PgMacaddr8Builder(name ?? "");
-  }
-  var PgNumericBuilder = (_Ic = class extends (_Hc = PgColumnBuilder, _Gc = entityKind, _Hc) {
-    constructor(name, precision, scale) {
-      super(name, "string numeric", "PgNumeric");
-      this.config.precision = precision;
-      this.config.scale = scale;
-    }
-    /** @internal */
-    build(table) {
-      return new PgNumeric(table, this.config);
-    }
-  }, __publicField(_Ic, _Gc, "PgNumericBuilder"), _Ic);
-  var PgNumeric = (_Lc = class extends (_Kc = PgColumn, _Jc = entityKind, _Kc) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "numeric");
-      __publicField(this, "precision");
-      __publicField(this, "scale");
-      this.precision = config2.precision;
-      this.scale = config2.scale;
-    }
-    getSQLType() {
-      if (this.precision !== void 0 && this.scale !== void 0) return `numeric(${this.precision}, ${this.scale})`;
-      else if (this.precision === void 0) return "numeric";
-      else return `numeric(${this.precision})`;
-    }
-  }, __publicField(_Lc, _Jc, "PgNumeric"), _Lc);
-  var PgNumericNumberBuilder = (_Oc = class extends (_Nc = PgColumnBuilder, _Mc = entityKind, _Nc) {
-    constructor(name, precision, scale) {
-      super(name, "number", "PgNumericNumber");
-      this.config.precision = precision;
-      this.config.scale = scale;
-    }
-    /** @internal */
-    build(table) {
-      return new PgNumericNumber(table, this.config);
-    }
-  }, __publicField(_Oc, _Mc, "PgNumericNumberBuilder"), _Oc);
-  var PgNumericNumber = (_Rc = class extends (_Qc = PgColumn, _Pc = entityKind, _Qc) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "numeric:number");
-      __publicField(this, "precision");
-      __publicField(this, "scale");
-      __publicField(this, "mapToDriverValue", String);
-      this.precision = config2.precision;
-      this.scale = config2.scale;
-    }
-    getSQLType() {
-      if (this.precision !== void 0 && this.scale !== void 0) return `numeric(${this.precision}, ${this.scale})`;
-      else if (this.precision === void 0) return "numeric";
-      else return `numeric(${this.precision})`;
-    }
-  }, __publicField(_Rc, _Pc, "PgNumericNumber"), _Rc);
-  var PgNumericBigIntBuilder = (_Uc = class extends (_Tc = PgColumnBuilder, _Sc = entityKind, _Tc) {
-    constructor(name, precision, scale) {
-      super(name, "bigint int64", "PgNumericBigInt");
-      this.config.precision = precision;
-      this.config.scale = scale;
-    }
-    /** @internal */
-    build(table) {
-      return new PgNumericBigInt(table, this.config);
-    }
-  }, __publicField(_Uc, _Sc, "PgNumericBigIntBuilder"), _Uc);
-  var PgNumericBigInt = (_Xc = class extends (_Wc = PgColumn, _Vc = entityKind, _Wc) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "numeric:bigint");
-      __publicField(this, "precision");
-      __publicField(this, "scale");
-      __publicField(this, "mapToDriverValue", String);
-      this.precision = config2.precision;
-      this.scale = config2.scale;
-    }
-    getSQLType() {
-      if (this.precision !== void 0 && this.scale !== void 0) return `numeric(${this.precision}, ${this.scale})`;
-      else if (this.precision === void 0) return "numeric";
-      else return `numeric(${this.precision})`;
-    }
-  }, __publicField(_Xc, _Vc, "PgNumericBigInt"), _Xc);
-  function numeric(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    const mode = config2?.mode;
-    return mode === "number" ? new PgNumericNumberBuilder(name, config2?.precision, config2?.scale) : mode === "bigint" ? new PgNumericBigIntBuilder(name, config2?.precision, config2?.scale) : new PgNumericBuilder(name, config2?.precision, config2?.scale);
-  }
-  var PgPointTupleBuilder = (__c = class extends (_Zc = PgColumnBuilder, _Yc = entityKind, _Zc) {
-    constructor(name) {
-      super(name, "array point", "PgPointTuple");
-    }
-    /** @internal */
-    build(table) {
-      return new PgPointTuple(table, this.config);
-    }
-  }, __publicField(__c, _Yc, "PgPointTupleBuilder"), __c);
-  var PgPointTuple = (_bd = class extends (_ad = PgColumn, _$c = entityKind, _ad) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "point:tuple");
-      __publicField(this, "mode", "tuple");
-      __publicField(this, "mapToDriverValue", (value) => {
-        return `(${value[0]},${value[1]})`;
-      });
-    }
-    getSQLType() {
-      return "point";
-    }
-  }, __publicField(_bd, _$c, "PgPointTuple"), _bd);
-  var PgPointObjectBuilder = (_ed = class extends (_dd = PgColumnBuilder, _cd = entityKind, _dd) {
-    constructor(name) {
-      super(name, "object point", "PgPointObject");
-    }
-    /** @internal */
-    build(table) {
-      return new PgPointObject(table, this.config);
-    }
-  }, __publicField(_ed, _cd, "PgPointObjectBuilder"), _ed);
-  var PgPointObject = (_hd = class extends (_gd = PgColumn, _fd = entityKind, _gd) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "point");
-      __publicField(this, "mode", "xy");
-      __publicField(this, "mapToDriverValue", (value) => {
-        return `(${value.x},${value.y})`;
-      });
-    }
-    getSQLType() {
-      return "point";
-    }
-  }, __publicField(_hd, _fd, "PgPointObject"), _hd);
-  function point(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    if (!config2?.mode || config2.mode === "tuple") return new PgPointTupleBuilder(name);
-    return new PgPointObjectBuilder(name);
-  }
-  var PgGeometryBuilder = (_kd = class extends (_jd = PgColumnBuilder, _id = entityKind, _jd) {
-    constructor(name, srid) {
-      super(name, "array geometry", "PgGeometry");
-      this.config.srid = srid;
-    }
-    /** @internal */
-    build(table) {
-      return new PgGeometry(table, this.config);
-    }
-  }, __publicField(_kd, _id, "PgGeometryBuilder"), _kd);
-  var PgGeometry = (_nd = class extends (_md = PgColumn, _ld = entityKind, _md) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "geometry(point):tuple");
-      __publicField(this, "srid", this.config.srid);
-      __publicField(this, "mode", "tuple");
-      __publicField(this, "mapToDriverValue", (value) => {
-        return `point(${value[0]} ${value[1]})`;
-      });
-    }
-    getSQLType() {
-      return `geometry(point${this.srid === void 0 ? "" : `,${this.srid}`})`;
-    }
-  }, __publicField(_nd, _ld, "PgGeometry"), _nd);
-  var PgGeometryObjectBuilder = (_qd = class extends (_pd = PgColumnBuilder, _od = entityKind, _pd) {
-    constructor(name, srid) {
-      super(name, "object geometry", "PgGeometryObject");
-      this.config.srid = srid;
-    }
-    /** @internal */
-    build(table) {
-      return new PgGeometryObject(table, this.config);
-    }
-  }, __publicField(_qd, _od, "PgGeometryObjectBuilder"), _qd);
-  var PgGeometryObject = (_td = class extends (_sd = PgColumn, _rd = entityKind, _sd) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "geometry(point)");
-      __publicField(this, "srid", this.config.srid);
-      __publicField(this, "mode", "object");
-      __publicField(this, "mapToDriverValue", (value) => {
-        return `point(${value.x} ${value.y})`;
-      });
-    }
-    getSQLType() {
-      return `geometry(point${this.srid === void 0 ? "" : `,${this.srid}`})`;
-    }
-  }, __publicField(_td, _rd, "PgGeometryObject"), _td);
-  function geometry(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    if (!config2?.mode || config2.mode === "tuple") return new PgGeometryBuilder(name, config2?.srid);
-    return new PgGeometryObjectBuilder(name, config2?.srid);
-  }
-  var PgRealBuilder = (_wd = class extends (_vd = PgColumnBuilder, _ud = entityKind, _vd) {
-    constructor(name, length) {
-      super(name, "number float", "PgReal");
-      this.config.length = length;
-    }
-    /** @internal */
-    build(table) {
-      return new PgReal(table, this.config);
-    }
-  }, __publicField(_wd, _ud, "PgRealBuilder"), _wd);
-  var PgReal = (_zd = class extends (_yd = PgColumn, _xd = entityKind, _yd) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "float4");
-    }
-    getSQLType() {
-      return "real";
-    }
-  }, __publicField(_zd, _xd, "PgReal"), _zd);
-  function real(name) {
-    return new PgRealBuilder(name ?? "");
-  }
-  var PgSerialBuilder = (_Cd = class extends (_Bd = PgColumnBuilder, _Ad = entityKind, _Bd) {
-    constructor(name) {
-      super(name, "number int32", "PgSerial");
-      this.config.hasDefault = true;
-      this.config.notNull = true;
-    }
-    /** @internal */
-    build(table) {
-      return new PgSerial(table, this.config);
-    }
-  }, __publicField(_Cd, _Ad, "PgSerialBuilder"), _Cd);
-  var PgSerial = (_Fd = class extends (_Ed = PgColumn, _Dd = entityKind, _Ed) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "serial");
-    }
-    getSQLType() {
-      return "serial";
-    }
-  }, __publicField(_Fd, _Dd, "PgSerial"), _Fd);
-  function serial(name) {
-    return new PgSerialBuilder(name ?? "");
-  }
-  var PgSmallIntBuilder = (_Id = class extends (_Hd = PgIntColumnBuilder, _Gd = entityKind, _Hd) {
-    constructor(name) {
-      super(name, "number int16", "PgSmallInt");
-    }
-    /** @internal */
-    build(table) {
-      return new PgSmallInt(table, this.config);
-    }
-  }, __publicField(_Id, _Gd, "PgSmallIntBuilder"), _Id);
-  var PgSmallInt = (_Ld = class extends (_Kd = PgColumn, _Jd = entityKind, _Kd) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "smallint");
-    }
-    getSQLType() {
-      return "smallint";
-    }
-  }, __publicField(_Ld, _Jd, "PgSmallInt"), _Ld);
-  function smallint(name) {
-    return new PgSmallIntBuilder(name ?? "");
-  }
-  var PgSmallSerialBuilder = (_Od = class extends (_Nd = PgColumnBuilder, _Md = entityKind, _Nd) {
-    constructor(name) {
-      super(name, "number int16", "PgSmallSerial");
-      this.config.hasDefault = true;
-      this.config.notNull = true;
-    }
-    /** @internal */
-    build(table) {
-      return new PgSmallSerial(table, this.config);
-    }
-  }, __publicField(_Od, _Md, "PgSmallSerialBuilder"), _Od);
-  var PgSmallSerial = (_Rd = class extends (_Qd = PgColumn, _Pd = entityKind, _Qd) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "smallserial");
-    }
-    getSQLType() {
-      return "smallserial";
-    }
-  }, __publicField(_Rd, _Pd, "PgSmallSerial"), _Rd);
-  function smallserial(name) {
-    return new PgSmallSerialBuilder(name ?? "");
-  }
-  var PgTextBuilder = (_Ud = class extends (_Td = PgColumnBuilder, _Sd = entityKind, _Td) {
-    constructor(name, config2) {
-      super(name, config2.enum?.length ? "string enum" : "string", "PgText");
-      this.config.enumValues = config2.enum;
-    }
-    /** @internal */
-    build(table) {
-      return new PgText(table, this.config, this.config.enumValues);
-    }
-  }, __publicField(_Ud, _Sd, "PgTextBuilder"), _Ud);
-  var PgText = (_Xd = class extends (_Wd = PgColumn, _Vd = entityKind, _Wd) {
-    constructor(table, config2, enumValues) {
-      super(table, config2);
-      __publicField(this, "enumValues");
-      /** @internal */
-      __publicField(this, "codec", "text");
-      this.enumValues = enumValues;
-    }
-    getSQLType() {
-      return "text";
-    }
-  }, __publicField(_Xd, _Vd, "PgText"), _Xd);
-  function text(a, b2 = {}) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    return new PgTextBuilder(name, config2);
-  }
-  var PgTimeBuilder = (__d = class extends (_Zd = PgDateColumnBuilder, _Yd = entityKind, _Zd) {
-    constructor(name, withTimezone, precision) {
-      super(name, "string time", "PgTime");
-      this.withTimezone = withTimezone;
-      this.precision = precision;
-      this.config.withTimezone = withTimezone;
-      this.config.precision = precision;
-    }
-    /** @internal */
-    build(table) {
-      return new PgTime(table, this.config);
-    }
-  }, __publicField(__d, _Yd, "PgTimeBuilder"), __d);
-  var PgTime = (_be = class extends (_ae = PgColumn, _$d = entityKind, _ae) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "time");
-      __publicField(this, "withTimezone");
-      __publicField(this, "precision");
-      this.withTimezone = config2.withTimezone;
-      this.precision = config2.precision;
-    }
-    getSQLType() {
-      return `time${this.precision === void 0 ? "" : `(${this.precision})`}${this.withTimezone ? " with time zone" : ""}`;
-    }
-  }, __publicField(_be, _$d, "PgTime"), _be);
-  function time$2(a, b2 = {}) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    return new PgTimeBuilder(name, config2.withTimezone ?? false, config2.precision);
-  }
-  var PgTimestampBuilder = (_ee = class extends (_de = PgDateColumnBuilder, _ce = entityKind, _de) {
-    constructor(name, withTimezone, precision) {
-      super(name, "object date", "PgTimestamp");
-      this.config.withTimezone = withTimezone;
-      this.config.precision = precision;
-    }
-    /** @internal */
-    build(table) {
-      return new PgTimestamp(table, this.config);
-    }
-  }, __publicField(_ee, _ce, "PgTimestampBuilder"), _ee);
-  var PgTimestamp = (_he = class extends (_ge = PgColumn, _fe = entityKind, _ge) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec");
-      __publicField(this, "withTimezone");
-      __publicField(this, "precision");
-      __publicField(this, "mapToDriverValue", (value) => {
-        if (typeof value === "string") return value;
-        return value.toISOString();
-      });
-      this.withTimezone = config2.withTimezone;
-      this.precision = config2.precision;
-      this.codec = this.withTimezone ? "timestamptz" : "timestamp";
-    }
-    getSQLType() {
-      return `timestamp${this.precision === void 0 ? "" : ` (${this.precision})`}${this.withTimezone ? " with time zone" : ""}`;
-    }
-  }, __publicField(_he, _fe, "PgTimestamp"), _he);
-  var PgTimestampStringBuilder = (_ke = class extends (_je = PgDateColumnBuilder, _ie = entityKind, _je) {
-    constructor(name, withTimezone, precision) {
-      super(name, "string timestamp", "PgTimestampString");
-      this.config.withTimezone = withTimezone;
-      this.config.precision = precision;
-    }
-    /** @internal */
-    build(table) {
-      return new PgTimestampString(table, this.config);
-    }
-  }, __publicField(_ke, _ie, "PgTimestampStringBuilder"), _ke);
-  var PgTimestampString = (_ne = class extends (_me = PgColumn, _le = entityKind, _me) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec");
-      __publicField(this, "withTimezone");
-      __publicField(this, "precision");
-      __publicField(this, "mapToDriverValue", (value) => {
-        if (typeof value === "string") return value;
-        return value.toISOString();
-      });
-      this.withTimezone = config2.withTimezone;
-      this.precision = config2.precision;
-      this.codec = this.withTimezone ? "timestamptz:string" : "timestamp:string";
-    }
-    getSQLType() {
-      return `timestamp${this.precision === void 0 ? "" : `(${this.precision})`}${this.withTimezone ? " with time zone" : ""}`;
-    }
-  }, __publicField(_ne, _le, "PgTimestampString"), _ne);
-  function timestamp(a, b2 = {}) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    if (config2?.mode === "string") return new PgTimestampStringBuilder(name, config2.withTimezone ?? false, config2.precision);
-    return new PgTimestampBuilder(name, config2?.withTimezone ?? false, config2?.precision);
-  }
-  var PgUUIDBuilder = (_qe = class extends (_pe = PgColumnBuilder, _oe = entityKind, _pe) {
-    constructor(name) {
-      super(name, "string uuid", "PgUUID");
-    }
-    /**
-    * Adds `default gen_random_uuid()` to the column definition.
-    */
-    defaultRandom() {
-      return this.default(sql`gen_random_uuid()`);
-    }
-    /** @internal */
-    build(table) {
-      return new PgUUID(table, this.config);
-    }
-  }, __publicField(_qe, _oe, "PgUUIDBuilder"), _qe);
-  var PgUUID = (_te = class extends (_se = PgColumn, _re = entityKind, _se) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "uuid");
-    }
-    getSQLType() {
-      return "uuid";
-    }
-  }, __publicField(_te, _re, "PgUUID"), _te);
-  function uuid$2(name) {
-    return new PgUUIDBuilder(name ?? "");
-  }
-  var PgVarcharBuilder = (_we = class extends (_ve = PgColumnBuilder, _ue = entityKind, _ve) {
-    constructor(name, config2) {
-      super(name, config2.enum?.length ? "string enum" : "string", "PgVarchar");
-      this.config.length = config2.length;
-      this.config.enumValues = config2.enum;
-    }
-    /** @internal */
-    build(table) {
-      return new PgVarchar(table, this.config);
-    }
-  }, __publicField(_we, _ue, "PgVarcharBuilder"), _we);
-  var PgVarchar = (_ze = class extends (_ye = PgColumn, _xe = entityKind, _ye) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "varchar");
-      __publicField(this, "enumValues");
-      this.enumValues = config2.enumValues;
-    }
-    getSQLType() {
-      return this.length === void 0 ? `varchar` : `varchar(${this.length})`;
-    }
-  }, __publicField(_ze, _xe, "PgVarchar"), _ze);
-  function varchar(a, b2 = {}) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    return new PgVarcharBuilder(name, config2);
-  }
-  var PgBinaryVectorBuilder = (_Ce = class extends (_Be = PgColumnBuilder, _Ae = entityKind, _Be) {
-    constructor(name, config2) {
-      super(name, "string binary", "PgBinaryVector");
-      this.config.length = config2.dimensions;
-      this.config.isLengthExact = true;
-    }
-    /** @internal */
-    build(table) {
-      return new PgBinaryVector(table, this.config);
-    }
-  }, __publicField(_Ce, _Ae, "PgBinaryVectorBuilder"), _Ce);
-  var PgBinaryVector = (_Fe = class extends (_Ee = PgColumn, _De = entityKind, _Ee) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "bit");
-    }
-    getSQLType() {
-      return `bit(${this.length})`;
-    }
-  }, __publicField(_Fe, _De, "PgBinaryVector"), _Fe);
-  function bit(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    return new PgBinaryVectorBuilder(name, config2);
-  }
-  var PgHalfVectorBuilder = (_Ie = class extends (_He = PgColumnBuilder, _Ge = entityKind, _He) {
-    constructor(name, config2) {
-      super(name, "array halfvector", "PgHalfVector");
-      this.config.length = config2.dimensions;
-      this.config.isLengthExact = true;
-    }
-    /** @internal */
-    build(table) {
-      return new PgHalfVector(table, this.config);
-    }
-  }, __publicField(_Ie, _Ge, "PgHalfVectorBuilder"), _Ie);
-  var PgHalfVector = (_Le = class extends (_Ke = PgColumn, _Je = entityKind, _Ke) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "halfvec");
-      __publicField(this, "mapToDriverValue", (value) => {
-        return JSON.stringify(value);
-      });
-    }
-    getSQLType() {
-      return `halfvec(${this.length})`;
-    }
-  }, __publicField(_Le, _Je, "PgHalfVector"), _Le);
-  function halfvec(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    return new PgHalfVectorBuilder(name, config2);
-  }
-  var PgSparseVectorBuilder = (_Oe = class extends (_Ne = PgColumnBuilder, _Me = entityKind, _Ne) {
-    constructor(name, config2) {
-      super(name, "string sparsevec", "PgSparseVector");
-      this.config.vectorDimensions = config2.dimensions;
-    }
-    /** @internal */
-    build(table) {
-      return new PgSparseVector(table, this.config);
-    }
-  }, __publicField(_Oe, _Me, "PgSparseVectorBuilder"), _Oe);
-  var PgSparseVector = (_Re = class extends (_Qe = PgColumn, _Pe = entityKind, _Qe) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "sparsevec");
-      __publicField(this, "vectorDimensions", this.config.vectorDimensions);
-    }
-    getSQLType() {
-      return `sparsevec(${this.vectorDimensions})`;
-    }
-  }, __publicField(_Re, _Pe, "PgSparseVector"), _Re);
-  function sparsevec(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    return new PgSparseVectorBuilder(name, config2);
-  }
-  var PgVectorBuilder = (_Ue = class extends (_Te = PgColumnBuilder, _Se = entityKind, _Te) {
-    constructor(name, config2) {
-      super(name, "array vector", "PgVector");
-      this.config.length = config2.dimensions;
-      this.config.isLengthExact = true;
-    }
-    /** @internal */
-    build(table) {
-      return new PgVector(table, this.config);
-    }
-  }, __publicField(_Ue, _Se, "PgVectorBuilder"), _Ue);
-  var PgVector = (_Xe = class extends (_We = PgColumn, _Ve = entityKind, _We) {
-    constructor() {
-      super(...arguments);
-      /** @internal */
-      __publicField(this, "codec", "vector");
-      __publicField(this, "mapToDriverValue", (value) => {
-        return JSON.stringify(value);
-      });
-    }
-    getSQLType() {
-      return `vector(${this.length})`;
-    }
-  }, __publicField(_Xe, _Ve, "PgVector"), _Xe);
-  function vector(a, b2) {
-    const { name, config: config2 } = getColumnNameAndConfig(a, b2);
-    return new PgVectorBuilder(name, config2);
-  }
-  function getPgColumnBuilders() {
-    return {
-      bigint: bigint$3,
-      bigserial,
-      boolean: boolean$3,
-      char,
-      cidr,
-      customType,
-      date: date$4,
-      doublePrecision,
-      inet,
-      integer: integer$1,
-      interval,
-      json: json$1,
-      jsonb,
-      line,
-      macaddr,
-      macaddr8,
-      numeric,
-      point,
-      geometry,
-      real,
-      serial,
-      smallint,
-      smallserial,
-      text,
-      time: time$2,
-      timestamp,
-      uuid: uuid$2,
-      varchar,
-      bit,
-      halfvec,
-      sparsevec,
-      vector
+  var hasRequiredJsonBigint;
+  function requireJsonBigint() {
+    if (hasRequiredJsonBigint) return jsonBigint.exports;
+    hasRequiredJsonBigint = 1;
+    var json_stringify = requireStringify().stringify;
+    var json_parse = requireParse();
+    jsonBigint.exports = function(options) {
+      return {
+        parse: json_parse(options),
+        stringify: json_stringify
+      };
     };
+    jsonBigint.exports.parse = json_parse();
+    jsonBigint.exports.stringify = json_stringify;
+    return jsonBigint.exports;
   }
-  function getCasingFn(casing) {
-    return (name) => name;
-  }
-  const InlineForeignKeys = /* @__PURE__ */ Symbol.for("drizzle:PgInlineForeignKeys");
-  const EnableRLS = /* @__PURE__ */ Symbol.for("drizzle:EnableRLS");
-  var PgTable = (_cf = class extends (_bf = Table, _af = entityKind, _$e = InlineForeignKeys, __e = EnableRLS, _Ze = Table.Symbol.ExtraConfigBuilder, _Ye = Table.Symbol.ExtraConfigColumns, _bf) {
-    constructor() {
-      super(...arguments);
-      /**@internal */
-      __publicField(this, _$e, []);
-      /** @internal */
-      __publicField(this, __e, false);
-      /** @internal */
-      __publicField(this, _Ze);
-      /** @internal */
-      __publicField(this, _Ye, {});
-    }
-  }, __publicField(_cf, _af, "PgTable"), /** @internal */
-  __publicField(_cf, "Symbol", Object.assign({}, Table.Symbol, {
-    InlineForeignKeys,
-    EnableRLS
-  })), _cf);
-  function pgTableWithSchema(name, columns, extraConfig, schema, casing, baseName = name) {
-    const casingFn = getCasingFn();
-    const rawTable = new PgTable(name, schema, baseName);
-    const parsedColumns = typeof columns === "function" ? columns(getPgColumnBuilders()) : columns;
-    const builtColumns = Object.fromEntries(Object.entries(parsedColumns).map(([name2, colBuilderBase]) => {
-      const colBuilder = colBuilderBase;
-      colBuilder.setName(name2, casingFn);
-      const column = colBuilder.build(rawTable).postBuild();
-      rawTable[InlineForeignKeys].push(...colBuilder.buildForeignKeys(column, rawTable));
-      return [name2, column];
-    }));
-    const builtColumnsForExtraConfig = Object.fromEntries(Object.entries(parsedColumns).map(([name2, colBuilderBase]) => {
-      const colBuilder = colBuilderBase;
-      colBuilder.setName(name2, casingFn);
-      return [name2, colBuilder.buildExtraConfigColumn(rawTable)];
-    }));
-    const table = Object.assign(rawTable, builtColumns);
-    table[Table.Symbol.Columns] = builtColumns;
-    table[Table.Symbol.ExtraConfigColumns] = builtColumnsForExtraConfig;
-    if (extraConfig) table[PgTable.Symbol.ExtraConfigBuilder] = extraConfig;
-    return Object.assign(table, { enableRLS: () => {
-      table[PgTable.Symbol.EnableRLS] = true;
-      return table;
-    } });
-  }
-  function pgTableWithCasing(casing) {
-    const pgTableInternal = (name, columns, extraConfig) => {
-      return pgTableWithSchema(name, columns, extraConfig, void 0);
-    };
-    const pgTableWithRLS = (name, columns, extraConfig) => {
-      const table = pgTableWithSchema(name, columns, extraConfig, void 0);
-      table[EnableRLS] = true;
-      return table;
-    };
-    return Object.assign(pgTableInternal, { withRLS: pgTableWithRLS });
-  }
-  const pgTable = pgTableWithCasing();
-  var PgEnumObjectColumnBuilder = (_ff = class extends (_ef = PgColumnBuilder, _df = entityKind, _ef) {
-    constructor(name, enumInstance) {
-      super(name, "string enum", "PgEnumObjectColumn");
-      this.config.enum = enumInstance;
-    }
-    /** @internal */
-    build(table) {
-      return new PgEnumObjectColumn(table, this.config);
-    }
-  }, __publicField(_ff, _df, "PgEnumObjectColumnBuilder"), _ff);
-  var PgEnumObjectColumn = (_if = class extends (_hf = PgColumn, _gf = entityKind, _hf) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "enum");
-      __publicField(this, "enum");
-      __publicField(this, "enumValues");
-      this.enum = config2.enum;
-      this.enumValues = config2.enum.enumValues;
-    }
-    getSQLType() {
-      return this.enum.enumName;
-    }
-  }, __publicField(_if, _gf, "PgEnumObjectColumn"), _if);
-  const isPgEnumSym = /* @__PURE__ */ Symbol.for("drizzle:isPgEnum");
-  var PgEnumColumnBuilder = (_lf = class extends (_kf = PgColumnBuilder, _jf = entityKind, _kf) {
-    constructor(name, enumInstance) {
-      super(name, "string enum", "PgEnumColumn");
-      this.config.enum = enumInstance;
-    }
-    /** @internal */
-    build(table) {
-      return new PgEnumColumn(table, this.config);
-    }
-  }, __publicField(_lf, _jf, "PgEnumColumnBuilder"), _lf);
-  var PgEnumColumn = (_of = class extends (_nf = PgColumn, _mf = entityKind, _nf) {
-    constructor(table, config2) {
-      super(table, config2);
-      /** @internal */
-      __publicField(this, "codec", "enum");
-      __publicField(this, "enum");
-      __publicField(this, "enumValues");
-      this.enum = config2.enum;
-      this.enumValues = config2.enum.enumValues;
-    }
-    getSQLType() {
-      return this.enum.enumName;
-    }
-  }, __publicField(_of, _mf, "PgEnumColumn"), _of);
-  function pgEnum(enumName, input) {
-    return Array.isArray(input) ? pgEnumWithSchema(enumName, [...input], void 0) : pgEnumObjectWithSchema(enumName, input, void 0);
-  }
-  function pgEnumWithSchema(enumName, values, schema) {
-    const enumInstance = Object.assign((name) => new PgEnumColumnBuilder(name ?? "", enumInstance), {
-      enumName,
-      enumValues: values,
-      schema,
-      [isPgEnumSym]: true
-    });
-    return enumInstance;
-  }
-  function pgEnumObjectWithSchema(enumName, values, schema) {
-    const enumInstance = Object.assign((name) => new PgEnumObjectColumnBuilder(name ?? "", enumInstance), {
-      enumName,
-      enumValues: Object.values(values),
-      schema,
-      [isPgEnumSym]: true
-    });
-    return enumInstance;
-  }
+  var jsonBigintExports = requireJsonBigint();
+  const n$1 = /* @__PURE__ */ getDefaultExportFromCjs(jsonBigintExports);
   var _a$1;
   const NEVER = /* @__PURE__ */ Object.freeze({
     status: "aborted"
@@ -2638,8 +2130,8 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       initializer2(inst, def);
       const proto = _2.prototype;
       const keys = Object.keys(proto);
-      for (let i2 = 0; i2 < keys.length; i2++) {
-        const k2 = keys[i2];
+      for (let i = 0; i < keys.length; i++) {
+        const k2 = keys[i];
         if (!(k2 in inst)) {
           inst[k2] = proto[k2].bind(inst);
         }
@@ -2797,8 +2289,8 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     const promises = keys.map((key) => promisesObj[key]);
     return Promise.all(promises).then((results) => {
       const resolvedObj = {};
-      for (let i2 = 0; i2 < keys.length; i2++) {
-        resolvedObj[keys[i2]] = results[i2];
+      for (let i = 0; i < keys.length; i++) {
+        resolvedObj[keys[i]] = results[i];
       }
       return resolvedObj;
     });
@@ -2806,7 +2298,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   function randomString(length = 10) {
     const chars = "abcdefghijklmnopqrstuvwxyz";
     let str = "";
-    for (let i2 = 0; i2 < length; i2++) {
+    for (let i = 0; i < length; i++) {
       str += chars[Math.floor(Math.random() * chars.length)];
     }
     return str;
@@ -3093,13 +2585,13 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     });
     return clone(schema, def);
   }
-  function merge(a, b2) {
-    if (a._zod.def.checks?.length) {
+  function merge(a2, b2) {
+    if (a2._zod.def.checks?.length) {
       throw new Error(".merge() cannot be used on object schemas containing refinements. Use .safeExtend() instead.");
     }
-    const def = mergeDefs(a._zod.def, {
+    const def = mergeDefs(a2._zod.def, {
       get shape() {
-        const _shape = { ...a._zod.def.shape, ...b2._zod.def.shape };
+        const _shape = { ...a2._zod.def.shape, ...b2._zod.def.shape };
         assignProp(this, "shape", _shape);
         return _shape;
       },
@@ -3108,7 +2600,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       },
       checks: b2._zod.def.checks ?? []
     });
-    return clone(a, def);
+    return clone(a2, def);
   }
   function partial(Class2, schema, mask) {
     const currDef = schema._zod.def;
@@ -3182,8 +2674,8 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   function aborted(x2, startIndex = 0) {
     if (x2.aborted === true)
       return true;
-    for (let i2 = startIndex; i2 < x2.issues.length; i2++) {
-      if (x2.issues[i2]?.continue !== true) {
+    for (let i = startIndex; i < x2.issues.length; i++) {
+      if (x2.issues[i]?.continue !== true) {
         return true;
       }
     }
@@ -3192,8 +2684,8 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   function explicitlyAborted(x2, startIndex = 0) {
     if (x2.aborted === true)
       return true;
-    for (let i2 = startIndex; i2 < x2.issues.length; i2++) {
-      if (x2.issues[i2]?.continue === false) {
+    for (let i = startIndex; i < x2.issues.length; i++) {
+      if (x2.issues[i]?.continue === false) {
         return true;
       }
     }
@@ -3277,15 +2769,15 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   function base64ToUint8Array(base642) {
     const binaryString = atob(base642);
     const bytes = new Uint8Array(binaryString.length);
-    for (let i2 = 0; i2 < binaryString.length; i2++) {
-      bytes[i2] = binaryString.charCodeAt(i2);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
     }
     return bytes;
   }
   function uint8ArrayToBase64(bytes) {
     let binaryString = "";
-    for (let i2 = 0; i2 < bytes.length; i2++) {
-      binaryString += String.fromCharCode(bytes[i2]);
+    for (let i = 0; i < bytes.length; i++) {
+      binaryString += String.fromCharCode(bytes[i]);
     }
     return btoa(binaryString);
   }
@@ -3303,8 +2795,8 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       throw new Error("Invalid hex string length");
     }
     const bytes = new Uint8Array(cleanHex.length / 2);
-    for (let i2 = 0; i2 < cleanHex.length; i2 += 2) {
-      bytes[i2 / 2] = Number.parseInt(cleanHex.slice(i2, i2 + 2), 16);
+    for (let i = 0; i < cleanHex.length; i += 2) {
+      bytes[i / 2] = Number.parseInt(cleanHex.slice(i, i + 2), 16);
     }
     return bytes;
   }
@@ -3428,10 +2920,10 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
             fieldErrors._errors.push(mapper(issue2));
           } else {
             let curr = fieldErrors;
-            let i2 = 0;
-            while (i2 < fullpath.length) {
-              const el2 = fullpath[i2];
-              const terminal = i2 === fullpath.length - 1;
+            let i = 0;
+            while (i < fullpath.length) {
+              const el2 = fullpath[i];
+              const terminal = i === fullpath.length - 1;
               if (!terminal) {
                 curr[el2] = curr[el2] || { _errors: [] };
               } else {
@@ -3439,7 +2931,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
                 curr[el2]._errors.push(mapper(issue2));
               }
               curr = curr[el2];
-              i2++;
+              i++;
             }
           }
         }
@@ -3466,10 +2958,10 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
             continue;
           }
           let curr = result;
-          let i2 = 0;
-          while (i2 < fullpath.length) {
-            const el2 = fullpath[i2];
-            const terminal = i2 === fullpath.length - 1;
+          let i = 0;
+          while (i < fullpath.length) {
+            const el2 = fullpath[i];
+            const terminal = i === fullpath.length - 1;
             if (typeof el2 === "string") {
               curr.properties ?? (curr.properties = {});
               (_a3 = curr.properties)[el2] ?? (_a3[el2] = { errors: [] });
@@ -3482,7 +2974,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
             if (terminal) {
               curr.errors.push(mapper(issue2));
             }
-            i2++;
+            i++;
           }
         }
       }
@@ -3510,7 +3002,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   }
   function prettifyError(error2) {
     const lines = [];
-    const issues = [...error2.issues].sort((a, b2) => (a.path ?? []).length - (b2.path ?? []).length);
+    const issues = [...error2.issues].sort((a2, b2) => (a2.path ?? []).length - (b2.path ?? []).length);
     for (const issue2 of issues) {
       lines.push(`✖ ${issue2.message}`);
       if (issue2.path?.length)
@@ -3531,7 +3023,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     }
     return result.value;
   };
-  const parse$2 = /* @__PURE__ */ _parse($ZodRealError);
+  const parse$1 = /* @__PURE__ */ _parse($ZodRealError);
   const _parseAsync = (_Err) => async (schema, value, _ctx, params) => {
     const ctx = _ctx ? { ..._ctx, async: true } : { async: true };
     let result = schema._zod.run({ value, issues: [] }, ctx);
@@ -3613,14 +3105,14 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   const duration$1 = /^P(?:(\d+W)|(?!.*W)(?=\d|T\d)(\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+([.,]\d+)?S)?)?)$/;
   const extendedDuration = /^[-+]?P(?!$)(?:(?:[-+]?\d+Y)|(?:[-+]?\d+[.,]\d+Y$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:(?:[-+]?\d+W)|(?:[-+]?\d+[.,]\d+W$))?(?:(?:[-+]?\d+D)|(?:[-+]?\d+[.,]\d+D$))?(?:T(?=[\d+-])(?:(?:[-+]?\d+H)|(?:[-+]?\d+[.,]\d+H$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:[-+]?\d+(?:[.,]\d+)?S)?)??$/;
   const guid$1 = /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$/;
-  const uuid$1 = (version2) => {
+  const uuid$2 = (version2) => {
     if (!version2)
       return /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/;
     return new RegExp(`^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-${version2}[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$`);
   };
-  const uuid4 = /* @__PURE__ */ uuid$1(4);
-  const uuid6 = /* @__PURE__ */ uuid$1(6);
-  const uuid7 = /* @__PURE__ */ uuid$1(7);
+  const uuid4 = /* @__PURE__ */ uuid$2(4);
+  const uuid6 = /* @__PURE__ */ uuid$2(6);
+  const uuid7 = /* @__PURE__ */ uuid$2(7);
   const email$1 = /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/;
   const html5Email = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   const rfc5322Email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -3646,13 +3138,13 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   const httpProtocol = /^https?$/;
   const e164$1 = /^\+[1-9]\d{6,14}$/;
   const dateSource = `(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))`;
-  const date$3 = /* @__PURE__ */ new RegExp(`^${dateSource}$`);
+  const date$4 = /* @__PURE__ */ new RegExp(`^${dateSource}$`);
   function timeSource(args) {
     const hhmm = `(?:[01]\\d|2[0-3]):[0-5]\\d`;
     const regex = typeof args.precision === "number" ? args.precision === -1 ? `${hhmm}` : args.precision === 0 ? `${hhmm}:[0-5]\\d` : `${hhmm}:[0-5]\\d\\.\\d{${args.precision}}` : `${hhmm}(?::[0-5]\\d(?:\\.\\d+)?)?`;
     return regex;
   }
-  function time$1(args) {
+  function time$2(args) {
     return new RegExp(`^${timeSource(args)}$`);
   }
   function datetime$1(args) {
@@ -3669,10 +3161,10 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     const regex = params ? `[\\s\\S]{${params?.minimum ?? 0},${params?.maximum ?? ""}}` : `[\\s\\S]*`;
     return new RegExp(`^${regex}$`);
   };
-  const bigint$2 = /^-?\d+n?$/;
-  const integer = /^-?\d+$/;
+  const bigint$3 = /^-?\d+n?$/;
+  const integer$1 = /^-?\d+$/;
   const number$2 = /^-?\d+(?:\.\d+)?$/;
-  const boolean$2 = /^(?:true|false)$/i;
+  const boolean$3 = /^(?:true|false)$/i;
   const _null$2 = /^null$/i;
   const _undefined$2 = /^undefined$/i;
   const lowercase = /^[^A-Z]*$/;
@@ -3703,14 +3195,14 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     __proto__: null,
     base64: base64$1,
     base64url: base64url$1,
-    bigint: bigint$2,
-    boolean: boolean$2,
+    bigint: bigint$3,
+    boolean: boolean$3,
     browserEmail,
     cidrv4: cidrv4$1,
     cidrv6: cidrv6$1,
     cuid: cuid$1,
     cuid2: cuid2$1,
-    date: date$3,
+    date: date$4,
     datetime: datetime$1,
     domain,
     duration: duration$1,
@@ -3724,7 +3216,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     html5Email,
     httpProtocol,
     idnEmail,
-    integer,
+    integer: integer$1,
     ipv4: ipv4$1,
     ipv6: ipv6$1,
     ksuid: ksuid$1,
@@ -3750,12 +3242,12 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     sha512_base64url,
     sha512_hex,
     string: string$2,
-    time: time$1,
+    time: time$2,
     ulid: ulid$1,
     undefined: _undefined$2,
     unicodeEmail,
     uppercase,
-    uuid: uuid$1,
+    uuid: uuid$2,
     uuid4,
     uuid6,
     uuid7,
@@ -3862,7 +3354,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       bag.minimum = minimum;
       bag.maximum = maximum;
       if (isInt)
-        bag.pattern = integer;
+        bag.pattern = integer$1;
     });
     inst._zod.check = (payload) => {
       const input = payload.value;
@@ -4500,9 +3992,9 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       const v2 = versionMap[def.version];
       if (v2 === void 0)
         throw new Error(`Invalid UUID version: "${def.version}"`);
-      def.pattern ?? (def.pattern = uuid$1(v2));
+      def.pattern ?? (def.pattern = uuid$2(v2));
     } else
-      def.pattern ?? (def.pattern = uuid$1());
+      def.pattern ?? (def.pattern = uuid$2());
     $ZodStringFormat.init(inst, def);
   });
   const $ZodEmail = /* @__PURE__ */ $constructor("$ZodEmail", (inst, def) => {
@@ -4606,11 +4098,11 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     $ZodStringFormat.init(inst, def);
   });
   const $ZodISODate = /* @__PURE__ */ $constructor("$ZodISODate", (inst, def) => {
-    def.pattern ?? (def.pattern = date$3);
+    def.pattern ?? (def.pattern = date$4);
     $ZodStringFormat.init(inst, def);
   });
   const $ZodISOTime = /* @__PURE__ */ $constructor("$ZodISOTime", (inst, def) => {
-    def.pattern ?? (def.pattern = time$1(def));
+    def.pattern ?? (def.pattern = time$2(def));
     $ZodStringFormat.init(inst, def);
   });
   const $ZodISODuration = /* @__PURE__ */ $constructor("$ZodISODuration", (inst, def) => {
@@ -4812,7 +4304,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   });
   const $ZodBoolean = /* @__PURE__ */ $constructor("$ZodBoolean", (inst, def) => {
     $ZodType.init(inst, def);
-    inst._zod.pattern = boolean$2;
+    inst._zod.pattern = boolean$3;
     inst._zod.parse = (payload, _ctx) => {
       if (def.coerce)
         try {
@@ -4833,7 +4325,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   });
   const $ZodBigInt = /* @__PURE__ */ $constructor("$ZodBigInt", (inst, def) => {
     $ZodType.init(inst, def);
-    inst._zod.pattern = bigint$2;
+    inst._zod.pattern = bigint$3;
     inst._zod.parse = (payload, _ctx) => {
       if (def.coerce)
         try {
@@ -4984,16 +4476,16 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       }
       payload.value = Array(input.length);
       const proms = [];
-      for (let i2 = 0; i2 < input.length; i2++) {
-        const item = input[i2];
+      for (let i = 0; i < input.length; i++) {
+        const item = input[i];
         const result = def.element._zod.run({
           value: item,
           issues: []
         }, ctx);
         if (result instanceof Promise) {
-          proms.push(result.then((result2) => handleArrayResult(result2, payload, i2)));
+          proms.push(result.then((result2) => handleArrayResult(result2, payload, i)));
         } else {
-          handleArrayResult(result, payload, i2);
+          handleArrayResult(result, payload, i);
         }
       }
       if (proms.length) {
@@ -5306,7 +4798,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     defineLazy(inst._zod, "pattern", () => {
       if (def.options.every((o2) => o2._zod.pattern)) {
         const patterns = def.options.map((o2) => o2._zod.pattern);
-        return new RegExp(`^(${patterns.map((p) => cleanRegex(p.source)).join("|")})$`);
+        return new RegExp(`^(${patterns.map((p2) => cleanRegex(p2.source)).join("|")})$`);
       }
       return void 0;
     });
@@ -5473,19 +4965,19 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       return handleIntersectionResults(payload, left, right);
     };
   });
-  function mergeValues(a, b2) {
-    if (a === b2) {
-      return { valid: true, data: a };
+  function mergeValues(a2, b2) {
+    if (a2 === b2) {
+      return { valid: true, data: a2 };
     }
-    if (a instanceof Date && b2 instanceof Date && +a === +b2) {
-      return { valid: true, data: a };
+    if (a2 instanceof Date && b2 instanceof Date && +a2 === +b2) {
+      return { valid: true, data: a2 };
     }
-    if (isPlainObject(a) && isPlainObject(b2)) {
+    if (isPlainObject(a2) && isPlainObject(b2)) {
       const bKeys = Object.keys(b2);
-      const sharedKeys = Object.keys(a).filter((key) => bKeys.indexOf(key) !== -1);
-      const newObj = { ...a, ...b2 };
+      const sharedKeys = Object.keys(a2).filter((key) => bKeys.indexOf(key) !== -1);
+      const newObj = { ...a2, ...b2 };
       for (const key of sharedKeys) {
-        const sharedValue = mergeValues(a[key], b2[key]);
+        const sharedValue = mergeValues(a2[key], b2[key]);
         if (!sharedValue.valid) {
           return {
             valid: false,
@@ -5496,13 +4988,13 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       }
       return { valid: true, data: newObj };
     }
-    if (Array.isArray(a) && Array.isArray(b2)) {
-      if (a.length !== b2.length) {
+    if (Array.isArray(a2) && Array.isArray(b2)) {
+      if (a2.length !== b2.length) {
         return { valid: false, mergeErrorPath: [] };
       }
       const newArray = [];
-      for (let index2 = 0; index2 < a.length; index2++) {
-        const itemA = a[index2];
+      for (let index2 = 0; index2 < a2.length; index2++) {
+        const itemA = a2[index2];
         const itemB = b2[index2];
         const sharedValue = mergeValues(itemA, itemB);
         if (!sharedValue.valid) {
@@ -5598,26 +5090,26 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
         }
       }
       const itemResults = new Array(items.length);
-      for (let i2 = 0; i2 < items.length; i2++) {
-        const r2 = items[i2]._zod.run({ value: input[i2], issues: [] }, ctx);
+      for (let i = 0; i < items.length; i++) {
+        const r2 = items[i]._zod.run({ value: input[i], issues: [] }, ctx);
         if (r2 instanceof Promise) {
           proms.push(r2.then((rr) => {
-            itemResults[i2] = rr;
+            itemResults[i] = rr;
           }));
         } else {
-          itemResults[i2] = r2;
+          itemResults[i] = r2;
         }
       }
       if (def.rest) {
-        let i2 = items.length - 1;
+        let i = items.length - 1;
         const rest = input.slice(items.length);
         for (const el2 of rest) {
-          i2++;
+          i++;
           const result = def.rest._zod.run({ value: el2, issues: [] }, ctx);
           if (result instanceof Promise) {
-            proms.push(result.then((r2) => handleTupleResult(r2, payload, i2)));
+            proms.push(result.then((r2) => handleTupleResult(r2, payload, i)));
           } else {
-            handleTupleResult(result, payload, i2);
+            handleTupleResult(result, payload, i);
           }
         }
       }
@@ -5628,9 +5120,9 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     };
   });
   function getTupleOptStart(items, key) {
-    for (let i2 = items.length - 1; i2 >= 0; i2--) {
-      if (items[i2]._zod[key] !== "optional")
-        return i2 + 1;
+    for (let i = items.length - 1; i >= 0; i--) {
+      if (items[i]._zod[key] !== "optional")
+        return i + 1;
     }
     return 0;
   }
@@ -5641,21 +5133,21 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     final.value[index2] = result.value;
   }
   function handleTupleResults(itemResults, final, items, input, optoutStart) {
-    for (let i2 = 0; i2 < items.length; i2++) {
-      const r2 = itemResults[i2];
-      const isPresent = i2 < input.length;
+    for (let i = 0; i < items.length; i++) {
+      const r2 = itemResults[i];
+      const isPresent = i < input.length;
       if (r2.issues.length) {
-        if (!isPresent && i2 >= optoutStart) {
-          final.value.length = i2;
+        if (!isPresent && i >= optoutStart) {
+          final.value.length = i;
           break;
         }
-        final.issues.push(...prefixIssues(i2, r2.issues));
+        final.issues.push(...prefixIssues(i, r2.issues));
       }
-      final.value[i2] = r2.value;
+      final.value[i] = r2.value;
     }
-    for (let i2 = final.value.length - 1; i2 >= input.length; i2--) {
-      if (items[i2]._zod.optout === "optional" && final.value[i2] === void 0) {
-        final.value.length = i2;
+    for (let i = final.value.length - 1; i >= input.length; i--) {
+      if (items[i]._zod.optout === "optional" && final.value[i] === void 0) {
+        final.value.length = i;
       } else {
         break;
       }
@@ -6313,10 +5805,10 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
         throw new Error("implement() must be called with a function");
       }
       return function(...args) {
-        const parsedArgs = inst._def.input ? parse$2(inst._def.input, args) : args;
+        const parsedArgs = inst._def.input ? parse$1(inst._def.input, args) : args;
         const result = Reflect.apply(func, this, parsedArgs);
         if (inst._def.output) {
-          return parse$2(inst._def.output, result);
+          return parse$1(inst._def.output, result);
         }
         return result;
       };
@@ -6390,10 +5882,10 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
   const $ZodLazy = /* @__PURE__ */ $constructor("$ZodLazy", (inst, def) => {
     $ZodType.init(inst, def);
     defineLazy(inst._zod, "innerType", () => {
-      const d = def;
-      if (!d._cachedInner)
-        d._cachedInner = def.getter();
-      return d._cachedInner;
+      const d2 = def;
+      if (!d2._cachedInner)
+        d2._cachedInner = def.getter();
+      return d2._cachedInner;
     });
     defineLazy(inst._zod, "pattern", () => inst._zod.innerType?._zod?.pattern);
     defineLazy(inst._zod, "propValues", () => inst._zod.innerType?._zod?.propValues);
@@ -9045,7 +8537,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       }
     };
   };
-  function is() {
+  function is$1() {
     return {
       localeError: error$s()
     };
@@ -12254,7 +11746,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
     hu,
     hy,
     id,
-    is,
+    is: is$1,
     it,
     ja,
     ka,
@@ -12316,9 +11808,9 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       return this;
     }
     get(schema) {
-      const p = schema._zod.parent;
-      if (p) {
-        const pm = { ...this.get(p) ?? {} };
+      const p2 = schema._zod.parent;
+      if (p2) {
+        const pm = { ...this.get(p2) ?? {} };
         delete pm.id;
         const f2 = { ...pm, ...this._map.get(schema) };
         return Object.keys(f2).length ? f2 : void 0;
@@ -14010,9 +13502,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   const unionProcessor = (schema, ctx, json2, params) => {
     const def = schema._zod.def;
     const isExclusive = def.inclusive === false;
-    const options = def.options.map((x2, i2) => process$1(x2, ctx, {
+    const options = def.options.map((x2, i) => process$1(x2, ctx, {
       ...params,
-      path: [...params.path, isExclusive ? "oneOf" : "anyOf", i2]
+      path: [...params.path, isExclusive ? "oneOf" : "anyOf", i]
     }));
     if (isExclusive) {
       json2.oneOf = options;
@@ -14022,7 +13514,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   };
   const intersectionProcessor = (schema, ctx, json2, params) => {
     const def = schema._zod.def;
-    const a = process$1(def.left, ctx, {
+    const a2 = process$1(def.left, ctx, {
       ...params,
       path: [...params.path, "allOf", 0]
     });
@@ -14032,7 +13524,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     });
     const isSimpleIntersection = (val) => "allOf" in val && Object.keys(val).length === 1;
     const allOf = [
-      ...isSimpleIntersection(a) ? a.allOf : [a],
+      ...isSimpleIntersection(a2) ? a2.allOf : [a2],
       ...isSimpleIntersection(b2) ? b2.allOf : [b2]
     ];
     json2.allOf = allOf;
@@ -14043,9 +13535,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     json2.type = "array";
     const prefixPath = ctx.target === "draft-2020-12" ? "prefixItems" : "items";
     const restPath = ctx.target === "draft-2020-12" ? "items" : ctx.target === "openapi-3.0" ? "items" : "additionalItems";
-    const prefixItems = def.items.map((x2, i2) => process$1(x2, ctx, {
+    const prefixItems = def.items.map((x2, i) => process$1(x2, ctx, {
       ...params,
-      path: [...params.path, prefixPath, i2]
+      path: [...params.path, prefixPath, i]
     }));
     const rest = def.rest ? process$1(def.rest, ctx, {
       ...params,
@@ -14603,7 +14095,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     isValidJWT,
     locales: index$1,
     meta: meta$1,
-    parse: parse$2,
+    parse: parse$1,
     parseAsync: parseAsync$1,
     prettifyError,
     process: process$1,
@@ -14664,14 +14156,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     $ZodISODate.init(inst, def);
     ZodStringFormat.init(inst, def);
   });
-  function date$2(params) {
+  function date$3(params) {
     return /* @__PURE__ */ _isoDate(ZodISODate, params);
   }
   const ZodISOTime = /* @__PURE__ */ $constructor("ZodISOTime", (inst, def) => {
     $ZodISOTime.init(inst, def);
     ZodStringFormat.init(inst, def);
   });
-  function time(params) {
+  function time$1(params) {
     return /* @__PURE__ */ _isoTime(ZodISOTime, params);
   }
   const ZodISODuration = /* @__PURE__ */ $constructor("ZodISODuration", (inst, def) => {
@@ -14687,10 +14179,10 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     ZodISODateTime,
     ZodISODuration,
     ZodISOTime,
-    date: date$2,
+    date: date$3,
     datetime,
     duration,
-    time
+    time: time$1
   }, Symbol.toStringTag, { value: "Module" }));
   const initializer = (inst, issues) => {
     $ZodError.init(inst, issues);
@@ -14730,7 +14222,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   const ZodRealError = /* @__PURE__ */ $constructor("ZodError", initializer, {
     Parent: Error
   });
-  const parse$1 = /* @__PURE__ */ _parse(ZodRealError);
+  const parse = /* @__PURE__ */ _parse(ZodRealError);
   const parseAsync = /* @__PURE__ */ _parseAsync(ZodRealError);
   const safeParse = /* @__PURE__ */ _safeParse(ZodRealError);
   const safeParseAsync = /* @__PURE__ */ _safeParseAsync(ZodRealError);
@@ -14791,7 +14283,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     inst.def = def;
     inst.type = def.type;
     Object.defineProperty(inst, "_def", { value: def });
-    inst.parse = (data, params) => parse$1(inst, data, params, { callee: inst.parse });
+    inst.parse = (data, params) => parse(inst, data, params, { callee: inst.parse });
     inst.safeParse = (data, params) => safeParse(inst, data, params);
     inst.parseAsync = async (data, params) => parseAsync(inst, data, params, { callee: inst.parseAsync });
     inst.safeParseAsync = async (data, params) => safeParseAsync(inst, data, params);
@@ -14863,11 +14355,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       transform(tx) {
         return pipe(this, transform(tx));
       },
-      default(d) {
-        return _default(this, d);
+      default(d2) {
+        return _default(this, d2);
       },
-      prefault(d) {
-        return prefault(this, d);
+      prefault(d2) {
+        return prefault(this, d2);
       },
       catch(params) {
         return _catch(this, params);
@@ -14991,8 +14483,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     inst.cidrv6 = (params) => inst.check(/* @__PURE__ */ _cidrv6(ZodCIDRv6, params));
     inst.e164 = (params) => inst.check(/* @__PURE__ */ _e164(ZodE164, params));
     inst.datetime = (params) => inst.check(datetime(params));
-    inst.date = (params) => inst.check(date$2(params));
-    inst.time = (params) => inst.check(time(params));
+    inst.date = (params) => inst.check(date$3(params));
+    inst.time = (params) => inst.check(time$1(params));
     inst.duration = (params) => inst.check(duration(params));
   });
   function string$1(params) {
@@ -15020,7 +14512,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     $ZodUUID.init(inst, def);
     ZodStringFormat.init(inst, def);
   });
-  function uuid(params) {
+  function uuid$1(params) {
     return /* @__PURE__ */ _uuid(ZodUUID, params);
   }
   function uuidv4(params) {
@@ -15264,7 +14756,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     ZodType.init(inst, def);
     inst._zod.processJSONSchema = (ctx, json2, params) => booleanProcessor(inst, ctx, json2);
   });
-  function boolean$1(params) {
+  function boolean$2(params) {
     return /* @__PURE__ */ _boolean(ZodBoolean, params);
   }
   const ZodBigInt = /* @__PURE__ */ $constructor("ZodBigInt", (inst, def) => {
@@ -15289,7 +14781,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     inst.maxValue = bag.maximum ?? null;
     inst.format = bag.format ?? null;
   });
-  function bigint$1(params) {
+  function bigint$2(params) {
     return /* @__PURE__ */ _bigint(ZodBigInt, params);
   }
   const ZodBigIntFormat = /* @__PURE__ */ $constructor("ZodBigIntFormat", (inst, def) => {
@@ -15368,7 +14860,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     inst.minDate = c2.minimum ? new Date(c2.minimum) : null;
     inst.maxDate = c2.maximum ? new Date(c2.maximum) : null;
   });
-  function date$1(params) {
+  function date$2(params) {
     return /* @__PURE__ */ _date(ZodDate, params);
   }
   const ZodArray = /* @__PURE__ */ $constructor("ZodArray", (inst, def) => {
@@ -16017,9 +15509,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     Boolean: ZodBoolean,
     String: ZodString
   }, ...args);
-  function json(params) {
+  function json$1(params) {
     const jsonSchema2 = lazy(() => {
-      return union([string$1(params), number$1(), boolean$1(), _null(), array(jsonSchema2), record(string$1(), jsonSchema2)]);
+      return union([string$1(params), number$1(), boolean$2(), _null(), array(jsonSchema2), record(string$1(), jsonSchema2)]);
     });
     return jsonSchema2;
   }
@@ -16108,8 +15600,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     array,
     base64,
     base64url,
-    bigint: bigint$1,
-    boolean: boolean$1,
+    bigint: bigint$2,
+    boolean: boolean$2,
     catch: _catch,
     check,
     cidrv4,
@@ -16118,7 +15610,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     cuid,
     cuid2,
     custom,
-    date: date$1,
+    date: date$2,
     describe,
     discriminatedUnion,
     e164,
@@ -16143,7 +15635,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     invertCodec,
     ipv4,
     ipv6,
-    json,
+    json: json$1,
     jwt,
     keyof,
     ksuid,
@@ -16191,7 +15683,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     union,
     unknown,
     url,
-    uuid,
+    uuid: uuid$1,
     uuidv4,
     uuidv6,
     uuidv7,
@@ -16223,7 +15715,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   var ZodFirstPartyTypeKind;
   /* @__PURE__ */ (function(ZodFirstPartyTypeKind2) {
   })(ZodFirstPartyTypeKind || (ZodFirstPartyTypeKind = {}));
-  const z$3 = {
+  const z$2 = {
     ..._schemas,
     ..._checks,
     iso: _iso
@@ -16333,7 +15825,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   function convertBaseSchema(schema, ctx) {
     if (schema.not !== void 0) {
       if (typeof schema.not === "object" && Object.keys(schema.not).length === 0) {
-        return z$3.never();
+        return z$2.never();
       }
       throw new Error("not is not supported in Zod (except { not: {} } for never)");
     }
@@ -16355,7 +15847,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         return ctx.refs.get(refPath);
       }
       if (ctx.processing.has(refPath)) {
-        return z$3.lazy(() => {
+        return z$2.lazy(() => {
           if (!ctx.refs.has(refPath)) {
             throw new Error(`Circular reference not resolved: ${refPath}`);
           }
@@ -16372,25 +15864,25 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     if (schema.enum !== void 0) {
       const enumValues = schema.enum;
       if (ctx.version === "openapi-3.0" && schema.nullable === true && enumValues.length === 1 && enumValues[0] === null) {
-        return z$3.null();
+        return z$2.null();
       }
       if (enumValues.length === 0) {
-        return z$3.never();
+        return z$2.never();
       }
       if (enumValues.length === 1) {
-        return z$3.literal(enumValues[0]);
+        return z$2.literal(enumValues[0]);
       }
       if (enumValues.every((v2) => typeof v2 === "string")) {
-        return z$3.enum(enumValues);
+        return z$2.enum(enumValues);
       }
-      const literalSchemas = enumValues.map((v2) => z$3.literal(v2));
+      const literalSchemas = enumValues.map((v2) => z$2.literal(v2));
       if (literalSchemas.length < 2) {
         return literalSchemas[0];
       }
-      return z$3.union([literalSchemas[0], literalSchemas[1], ...literalSchemas.slice(2)]);
+      return z$2.union([literalSchemas[0], literalSchemas[1], ...literalSchemas.slice(2)]);
     }
     if (schema.const !== void 0) {
-      return z$3.literal(schema.const);
+      return z$2.literal(schema.const);
     }
     const type = schema.type;
     if (Array.isArray(type)) {
@@ -16399,68 +15891,68 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         return convertBaseSchema(typeSchema, ctx);
       });
       if (typeSchemas.length === 0) {
-        return z$3.never();
+        return z$2.never();
       }
       if (typeSchemas.length === 1) {
         return typeSchemas[0];
       }
-      return z$3.union(typeSchemas);
+      return z$2.union(typeSchemas);
     }
     if (!type) {
-      return z$3.any();
+      return z$2.any();
     }
     let zodSchema;
     switch (type) {
       case "string": {
-        let stringSchema = z$3.string();
+        let stringSchema = z$2.string();
         if (schema.format) {
           const format = schema.format;
           if (format === "email") {
-            stringSchema = stringSchema.check(z$3.email());
+            stringSchema = stringSchema.check(z$2.email());
           } else if (format === "uri" || format === "uri-reference") {
-            stringSchema = stringSchema.check(z$3.url());
+            stringSchema = stringSchema.check(z$2.url());
           } else if (format === "uuid" || format === "guid") {
-            stringSchema = stringSchema.check(z$3.uuid());
+            stringSchema = stringSchema.check(z$2.uuid());
           } else if (format === "date-time") {
-            stringSchema = stringSchema.check(z$3.iso.datetime());
+            stringSchema = stringSchema.check(z$2.iso.datetime());
           } else if (format === "date") {
-            stringSchema = stringSchema.check(z$3.iso.date());
+            stringSchema = stringSchema.check(z$2.iso.date());
           } else if (format === "time") {
-            stringSchema = stringSchema.check(z$3.iso.time());
+            stringSchema = stringSchema.check(z$2.iso.time());
           } else if (format === "duration") {
-            stringSchema = stringSchema.check(z$3.iso.duration());
+            stringSchema = stringSchema.check(z$2.iso.duration());
           } else if (format === "ipv4") {
-            stringSchema = stringSchema.check(z$3.ipv4());
+            stringSchema = stringSchema.check(z$2.ipv4());
           } else if (format === "ipv6") {
-            stringSchema = stringSchema.check(z$3.ipv6());
+            stringSchema = stringSchema.check(z$2.ipv6());
           } else if (format === "mac") {
-            stringSchema = stringSchema.check(z$3.mac());
+            stringSchema = stringSchema.check(z$2.mac());
           } else if (format === "cidr") {
-            stringSchema = stringSchema.check(z$3.cidrv4());
+            stringSchema = stringSchema.check(z$2.cidrv4());
           } else if (format === "cidr-v6") {
-            stringSchema = stringSchema.check(z$3.cidrv6());
+            stringSchema = stringSchema.check(z$2.cidrv6());
           } else if (format === "base64") {
-            stringSchema = stringSchema.check(z$3.base64());
+            stringSchema = stringSchema.check(z$2.base64());
           } else if (format === "base64url") {
-            stringSchema = stringSchema.check(z$3.base64url());
+            stringSchema = stringSchema.check(z$2.base64url());
           } else if (format === "e164") {
-            stringSchema = stringSchema.check(z$3.e164());
+            stringSchema = stringSchema.check(z$2.e164());
           } else if (format === "jwt") {
-            stringSchema = stringSchema.check(z$3.jwt());
+            stringSchema = stringSchema.check(z$2.jwt());
           } else if (format === "emoji") {
-            stringSchema = stringSchema.check(z$3.emoji());
+            stringSchema = stringSchema.check(z$2.emoji());
           } else if (format === "nanoid") {
-            stringSchema = stringSchema.check(z$3.nanoid());
+            stringSchema = stringSchema.check(z$2.nanoid());
           } else if (format === "cuid") {
-            stringSchema = stringSchema.check(z$3.cuid());
+            stringSchema = stringSchema.check(z$2.cuid());
           } else if (format === "cuid2") {
-            stringSchema = stringSchema.check(z$3.cuid2());
+            stringSchema = stringSchema.check(z$2.cuid2());
           } else if (format === "ulid") {
-            stringSchema = stringSchema.check(z$3.ulid());
+            stringSchema = stringSchema.check(z$2.ulid());
           } else if (format === "xid") {
-            stringSchema = stringSchema.check(z$3.xid());
+            stringSchema = stringSchema.check(z$2.xid());
           } else if (format === "ksuid") {
-            stringSchema = stringSchema.check(z$3.ksuid());
+            stringSchema = stringSchema.check(z$2.ksuid());
           }
         }
         if (typeof schema.minLength === "number") {
@@ -16477,7 +15969,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }
       case "number":
       case "integer": {
-        let numberSchema = type === "integer" ? z$3.number().int() : z$3.number();
+        let numberSchema = type === "integer" ? z$2.number().int() : z$2.number();
         if (typeof schema.minimum === "number") {
           numberSchema = numberSchema.min(schema.minimum);
         }
@@ -16501,11 +15993,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         break;
       }
       case "boolean": {
-        zodSchema = z$3.boolean();
+        zodSchema = z$2.boolean();
         break;
       }
       case "null": {
-        zodSchema = z$3.null();
+        zodSchema = z$2.null();
         break;
       }
       case "object": {
@@ -16518,14 +16010,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         }
         if (schema.propertyNames) {
           const keySchema = convertSchema(schema.propertyNames, ctx);
-          const valueSchema = schema.additionalProperties && typeof schema.additionalProperties === "object" ? convertSchema(schema.additionalProperties, ctx) : z$3.any();
+          const valueSchema = schema.additionalProperties && typeof schema.additionalProperties === "object" ? convertSchema(schema.additionalProperties, ctx) : z$2.any();
           if (Object.keys(shape).length === 0) {
-            zodSchema = z$3.record(keySchema, valueSchema);
+            zodSchema = z$2.record(keySchema, valueSchema);
             break;
           }
-          const objectSchema2 = z$3.object(shape).passthrough();
-          const recordSchema = z$3.looseRecord(keySchema, valueSchema);
-          zodSchema = z$3.intersection(objectSchema2, recordSchema);
+          const objectSchema2 = z$2.object(shape).passthrough();
+          const recordSchema = z$2.looseRecord(keySchema, valueSchema);
+          zodSchema = z$2.intersection(objectSchema2, recordSchema);
           break;
         }
         if (schema.patternProperties) {
@@ -16534,28 +16026,28 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           const looseRecords = [];
           for (const pattern of patternKeys) {
             const patternValue = convertSchema(patternProps[pattern], ctx);
-            const keySchema = z$3.string().regex(new RegExp(pattern));
-            looseRecords.push(z$3.looseRecord(keySchema, patternValue));
+            const keySchema = z$2.string().regex(new RegExp(pattern));
+            looseRecords.push(z$2.looseRecord(keySchema, patternValue));
           }
           const schemasToIntersect = [];
           if (Object.keys(shape).length > 0) {
-            schemasToIntersect.push(z$3.object(shape).passthrough());
+            schemasToIntersect.push(z$2.object(shape).passthrough());
           }
           schemasToIntersect.push(...looseRecords);
           if (schemasToIntersect.length === 0) {
-            zodSchema = z$3.object({}).passthrough();
+            zodSchema = z$2.object({}).passthrough();
           } else if (schemasToIntersect.length === 1) {
             zodSchema = schemasToIntersect[0];
           } else {
-            let result = z$3.intersection(schemasToIntersect[0], schemasToIntersect[1]);
-            for (let i2 = 2; i2 < schemasToIntersect.length; i2++) {
-              result = z$3.intersection(result, schemasToIntersect[i2]);
+            let result = z$2.intersection(schemasToIntersect[0], schemasToIntersect[1]);
+            for (let i = 2; i < schemasToIntersect.length; i++) {
+              result = z$2.intersection(result, schemasToIntersect[i]);
             }
             zodSchema = result;
           }
           break;
         }
-        const objectSchema = z$3.object(shape);
+        const objectSchema = z$2.object(shape);
         if (schema.additionalProperties === false) {
           zodSchema = objectSchema.strict();
         } else if (typeof schema.additionalProperties === "object") {
@@ -16572,33 +16064,33 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           const tupleItems = prefixItems.map((item) => convertSchema(item, ctx));
           const rest = items && typeof items === "object" && !Array.isArray(items) ? convertSchema(items, ctx) : void 0;
           if (rest) {
-            zodSchema = z$3.tuple(tupleItems).rest(rest);
+            zodSchema = z$2.tuple(tupleItems).rest(rest);
           } else {
-            zodSchema = z$3.tuple(tupleItems);
+            zodSchema = z$2.tuple(tupleItems);
           }
           if (typeof schema.minItems === "number") {
-            zodSchema = zodSchema.check(z$3.minLength(schema.minItems));
+            zodSchema = zodSchema.check(z$2.minLength(schema.minItems));
           }
           if (typeof schema.maxItems === "number") {
-            zodSchema = zodSchema.check(z$3.maxLength(schema.maxItems));
+            zodSchema = zodSchema.check(z$2.maxLength(schema.maxItems));
           }
         } else if (Array.isArray(items)) {
           const tupleItems = items.map((item) => convertSchema(item, ctx));
           const rest = schema.additionalItems && typeof schema.additionalItems === "object" ? convertSchema(schema.additionalItems, ctx) : void 0;
           if (rest) {
-            zodSchema = z$3.tuple(tupleItems).rest(rest);
+            zodSchema = z$2.tuple(tupleItems).rest(rest);
           } else {
-            zodSchema = z$3.tuple(tupleItems);
+            zodSchema = z$2.tuple(tupleItems);
           }
           if (typeof schema.minItems === "number") {
-            zodSchema = zodSchema.check(z$3.minLength(schema.minItems));
+            zodSchema = zodSchema.check(z$2.minLength(schema.minItems));
           }
           if (typeof schema.maxItems === "number") {
-            zodSchema = zodSchema.check(z$3.maxLength(schema.maxItems));
+            zodSchema = zodSchema.check(z$2.maxLength(schema.maxItems));
           }
         } else if (items !== void 0) {
           const element = convertSchema(items, ctx);
-          let arraySchema = z$3.array(element);
+          let arraySchema = z$2.array(element);
           if (typeof schema.minItems === "number") {
             arraySchema = arraySchema.min(schema.minItems);
           }
@@ -16607,7 +16099,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           }
           zodSchema = arraySchema;
         } else {
-          zodSchema = z$3.array(z$3.any());
+          zodSchema = z$2.array(z$2.any());
         }
         break;
       }
@@ -16618,37 +16110,37 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   }
   function convertSchema(schema, ctx) {
     if (typeof schema === "boolean") {
-      return schema ? z$3.any() : z$3.never();
+      return schema ? z$2.any() : z$2.never();
     }
     let baseSchema = convertBaseSchema(schema, ctx);
     const hasExplicitType = schema.type || schema.enum !== void 0 || schema.const !== void 0;
     if (schema.anyOf && Array.isArray(schema.anyOf)) {
       const options = schema.anyOf.map((s2) => convertSchema(s2, ctx));
-      const anyOfUnion = z$3.union(options);
-      baseSchema = hasExplicitType ? z$3.intersection(baseSchema, anyOfUnion) : anyOfUnion;
+      const anyOfUnion = z$2.union(options);
+      baseSchema = hasExplicitType ? z$2.intersection(baseSchema, anyOfUnion) : anyOfUnion;
     }
     if (schema.oneOf && Array.isArray(schema.oneOf)) {
       const options = schema.oneOf.map((s2) => convertSchema(s2, ctx));
-      const oneOfUnion = z$3.xor(options);
-      baseSchema = hasExplicitType ? z$3.intersection(baseSchema, oneOfUnion) : oneOfUnion;
+      const oneOfUnion = z$2.xor(options);
+      baseSchema = hasExplicitType ? z$2.intersection(baseSchema, oneOfUnion) : oneOfUnion;
     }
     if (schema.allOf && Array.isArray(schema.allOf)) {
       if (schema.allOf.length === 0) {
-        baseSchema = hasExplicitType ? baseSchema : z$3.any();
+        baseSchema = hasExplicitType ? baseSchema : z$2.any();
       } else {
         let result = hasExplicitType ? baseSchema : convertSchema(schema.allOf[0], ctx);
         const startIdx = hasExplicitType ? 0 : 1;
-        for (let i2 = startIdx; i2 < schema.allOf.length; i2++) {
-          result = z$3.intersection(result, convertSchema(schema.allOf[i2], ctx));
+        for (let i = startIdx; i < schema.allOf.length; i++) {
+          result = z$2.intersection(result, convertSchema(schema.allOf[i], ctx));
         }
         baseSchema = result;
       }
     }
     if (schema.nullable === true && ctx.version === "openapi-3.0") {
-      baseSchema = z$3.nullable(baseSchema);
+      baseSchema = z$2.nullable(baseSchema);
     }
     if (schema.readOnly === true) {
-      baseSchema = z$3.readonly(baseSchema);
+      baseSchema = z$2.readonly(baseSchema);
     }
     if (schema.default !== void 0) {
       baseSchema = baseSchema.default(schema.default);
@@ -16681,7 +16173,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   }
   function fromJSONSchema(schema, params) {
     if (typeof schema === "boolean") {
-      return schema ? z$3.any() : z$3.never();
+      return schema ? z$2.any() : z$2.never();
     }
     let normalized;
     try {
@@ -16707,25 +16199,25 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   function number(params) {
     return /* @__PURE__ */ _coercedNumber(ZodNumber, params);
   }
-  function boolean(params) {
+  function boolean$1(params) {
     return /* @__PURE__ */ _coercedBoolean(ZodBoolean, params);
   }
-  function bigint(params) {
+  function bigint$1(params) {
     return /* @__PURE__ */ _coercedBigint(ZodBigInt, params);
   }
-  function date(params) {
+  function date$1(params) {
     return /* @__PURE__ */ _coercedDate(ZodDate, params);
   }
   const coerce = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
     __proto__: null,
-    bigint,
-    boolean,
-    date,
+    bigint: bigint$1,
+    boolean: boolean$1,
+    date: date$1,
     number,
     string
   }, Symbol.toStringTag, { value: "Module" }));
   config(en());
-  const z$2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  const z$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
     __proto__: null,
     $brand,
     $input,
@@ -16818,8 +16310,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     array,
     base64,
     base64url,
-    bigint: bigint$1,
-    boolean: boolean$1,
+    bigint: bigint$2,
+    boolean: boolean$2,
     catch: _catch,
     check,
     cidrv4,
@@ -16832,7 +16324,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     cuid,
     cuid2,
     custom,
-    date: date$1,
+    date: date$2,
     decode,
     decodeAsync,
     describe,
@@ -16871,7 +16363,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     ipv4,
     ipv6,
     iso: _iso,
-    json,
+    json: json$1,
     jwt,
     keyof,
     ksuid,
@@ -16909,7 +16401,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     object,
     optional,
     overwrite: _overwrite,
-    parse: parse$1,
+    parse,
     parseAsync,
     partialRecord,
     pipe,
@@ -16960,7 +16452,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     uppercase: _uppercase,
     url,
     util,
-    uuid,
+    uuid: uuid$1,
     uuidv4,
     uuidv6,
     uuidv7,
@@ -16968,2427 +16460,34 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     xid,
     xor
   }, Symbol.toStringTag, { value: "Module" }));
-  const literalSchema = union([
-    string$1(),
-    number$1(),
-    boolean$1(),
-    _null()
-  ]);
-  const jsonSchema = union([
-    literalSchema,
-    record(string$1(), any()),
-    array(any())
-  ]);
-  const bufferSchema = custom((v2) => v2 instanceof Buffer);
-  function columnToSchema(column, factory) {
-    const z$12 = factory?.zodInstance ?? z$2;
-    const coerce2 = factory?.coerce ?? {};
-    let schema;
-    const dimensions = column.dimensions;
-    if (typeof dimensions === "number" && dimensions > 0) return pgArrayColumnToSchema(column, dimensions, z$12, coerce2);
-    const { type, constraint } = extractExtendedColumnType(column);
-    switch (type) {
-      case "array":
-        schema = arrayColumnToSchema(column, constraint, z$12, coerce2);
-        break;
-      case "object":
-        schema = objectColumnToSchema(column, constraint, z$12, coerce2);
-        break;
-      case "number":
-        schema = numberColumnToSchema(column, constraint, z$12, coerce2);
-        break;
-      case "bigint":
-        schema = bigintColumnToSchema(column, constraint, z$12, coerce2);
-        break;
-      case "boolean":
-        schema = coerce2 === true || coerce2.boolean ? z$12.coerce.boolean() : z$12.boolean();
-        break;
-      case "string":
-        schema = stringColumnToSchema(column, constraint, z$12, coerce2);
-        break;
-      case "custom":
-        schema = z$12.any();
-        break;
-      default:
-        schema = z$12.any();
-    }
-    return schema;
-  }
-  function numberColumnToSchema(column, constraint, z2, coerce2) {
-    let min;
-    let max;
-    let integer2 = false;
-    switch (constraint) {
-      case "int8":
-        min = CONSTANTS.INT8_MIN;
-        max = CONSTANTS.INT8_MAX;
-        integer2 = true;
-        break;
-      case "uint8":
-        min = 0;
-        max = CONSTANTS.INT8_UNSIGNED_MAX;
-        integer2 = true;
-        break;
-      case "int16":
-        min = CONSTANTS.INT16_MIN;
-        max = CONSTANTS.INT16_MAX;
-        integer2 = true;
-        break;
-      case "uint16":
-        min = 0;
-        max = CONSTANTS.INT16_UNSIGNED_MAX;
-        integer2 = true;
-        break;
-      case "int24":
-        min = CONSTANTS.INT24_MIN;
-        max = CONSTANTS.INT24_MAX;
-        integer2 = true;
-        break;
-      case "uint24":
-        min = 0;
-        max = CONSTANTS.INT24_UNSIGNED_MAX;
-        integer2 = true;
-        break;
-      case "int32":
-        min = CONSTANTS.INT32_MIN;
-        max = CONSTANTS.INT32_MAX;
-        integer2 = true;
-        break;
-      case "uint32":
-        min = 0;
-        max = CONSTANTS.INT32_UNSIGNED_MAX;
-        integer2 = true;
-        break;
-      case "int53":
-        min = Number.MIN_SAFE_INTEGER;
-        max = Number.MAX_SAFE_INTEGER;
-        integer2 = true;
-        break;
-      case "uint53":
-        min = 0;
-        max = Number.MAX_SAFE_INTEGER;
-        integer2 = true;
-        break;
-      case "float":
-        min = CONSTANTS.INT24_MIN;
-        max = CONSTANTS.INT24_MAX;
-        break;
-      case "ufloat":
-        min = 0;
-        max = CONSTANTS.INT24_UNSIGNED_MAX;
-        break;
-      case "double":
-        min = CONSTANTS.INT48_MIN;
-        max = CONSTANTS.INT48_MAX;
-        break;
-      case "udouble":
-        min = 0;
-        max = CONSTANTS.INT48_UNSIGNED_MAX;
-        break;
-      case "year":
-        min = 1901;
-        max = 2155;
-        integer2 = true;
-        break;
-      case "unsigned":
-        min = 0;
-        max = Number.MAX_SAFE_INTEGER;
-        break;
-      default:
-        min = Number.MIN_SAFE_INTEGER;
-        max = Number.MAX_SAFE_INTEGER;
-        break;
-    }
-    let schema = coerce2 === true || coerce2?.number ? integer2 ? z2.coerce.number().int() : z2.coerce.number() : integer2 ? z2.int() : z2.number();
-    schema = schema.gte(min).lte(max);
-    return schema;
-  }
-  const bigintStringModeSchema = string$1().regex(/^-?\d+$/).transform(BigInt).pipe(bigint$1().gte(CONSTANTS.INT64_MIN).lte(CONSTANTS.INT64_MAX)).transform(String);
-  const unsignedBigintStringModeSchema = string$1().regex(/^\d+$/).transform(BigInt).pipe(bigint$1().gte(0n).lte(CONSTANTS.INT64_MAX)).transform(String);
-  function bigintColumnToSchema(column, constraint, z2, coerce2) {
-    let min;
-    let max;
-    switch (constraint) {
-      case "int64":
-        min = CONSTANTS.INT64_MIN;
-        max = CONSTANTS.INT64_MAX;
-        break;
-      case "uint64":
-        min = 0n;
-        max = CONSTANTS.INT64_UNSIGNED_MAX;
-        break;
-    }
-    let schema = coerce2 === true || coerce2?.bigint ? z2.coerce.bigint() : z2.bigint();
-    if (min !== void 0) schema = schema.min(min);
-    if (max !== void 0) schema = schema.max(max);
-    return schema;
-  }
-  function pgArrayColumnToSchema(column, dimensions, z2, coerce2) {
-    const [baseType, baseConstraint] = column.dataType.split(" ");
-    let baseSchema;
-    switch (baseType) {
-      case "number":
-        baseSchema = numberColumnToSchema(column, baseConstraint, z2, coerce2);
-        break;
-      case "bigint":
-        baseSchema = bigintColumnToSchema(column, baseConstraint, z2, coerce2);
-        break;
-      case "boolean":
-        baseSchema = coerce2 === true || coerce2?.boolean ? z2.coerce.boolean() : z2.boolean();
-        break;
-      case "string":
-        baseSchema = stringColumnToSchema(column, baseConstraint, z2, coerce2);
-        break;
-      case "object":
-        baseSchema = objectColumnToSchema(column, baseConstraint, z2, coerce2);
-        break;
-      case "array":
-        baseSchema = arrayColumnToSchema(column, baseConstraint, z2, coerce2);
-        break;
-      default:
-        baseSchema = z2.any();
-    }
-    let schema = z2.array(baseSchema);
-    for (let i2 = 1; i2 < dimensions; i2++) schema = z2.array(schema);
-    return schema;
-  }
-  function arrayColumnToSchema(column, constraint, z2, coerce2) {
-    switch (constraint) {
-      case "geometry":
-      case "point":
-        return z2.tuple([z2.number(), z2.number()]);
-      case "line":
-        return z2.tuple([
-          z2.number(),
-          z2.number(),
-          z2.number()
-        ]);
-      case "vector":
-      case "halfvector": {
-        const length = column.length;
-        return length ? z2.array(z2.number()).length(length) : z2.array(z2.number());
-      }
-      case "int64vector": {
-        const length = column.length;
-        return length ? z2.array(z2.bigint().min(CONSTANTS.INT64_MIN).max(CONSTANTS.INT64_MAX)).length(length) : z2.array(z2.bigint().min(CONSTANTS.INT64_MIN).max(CONSTANTS.INT64_MAX));
-      }
-      case "basecolumn": {
-        const baseColumn = column.baseColumn;
-        if (baseColumn) {
-          const baseSchema = columnToSchema(baseColumn, {
-            zodInstance: z2,
-            coerce: coerce2
-          });
-          const length = column.length;
-          const schema = z2.array(baseSchema);
-          if (length) return schema.length(length);
-          return schema;
-        }
-        return z2.array(z2.any());
-      }
-      default:
-        return z2.array(z2.any());
-    }
-  }
-  function objectColumnToSchema(column, constraint, z2, coerce2) {
-    switch (constraint) {
-      case "buffer":
-        return bufferSchema;
-      case "date":
-        return coerce2 === true || coerce2?.date ? z2.coerce.date() : z2.date();
-      case "geometry":
-      case "point":
-        return z2.object({
-          x: z2.number(),
-          y: z2.number()
-        });
-      case "json":
-        return jsonSchema;
-      case "line":
-        return z2.object({
-          a: z2.number(),
-          b: z2.number(),
-          c: z2.number()
-        });
-      default:
-        return z2.looseObject({});
-    }
-  }
-  function stringColumnToSchema(column, constraint, z2, coerce2) {
-    const { name: columnName, length, isLengthExact } = column;
-    let regex;
-    if (constraint === "binary") regex = /^[01]*$/;
-    if (constraint === "uuid") return z2.uuid();
-    if (constraint === "enum") {
-      const enumValues = column.enumValues;
-      if (!enumValues) throw new Error(`Column "${getTableName(getColumnTable(column))}"."${columnName}" is of 'enum' type, but lacks enum values`);
-      return z2.enum(enumValues);
-    }
-    if (constraint === "int64") return bigintStringModeSchema;
-    if (constraint === "uint64") return unsignedBigintStringModeSchema;
-    let schema = coerce2 === true || coerce2?.string ? z2.coerce.string() : z2.string();
-    schema = regex ? schema.regex(regex) : schema;
-    return length && isLengthExact ? schema.length(length) : length ? schema.max(length) : schema;
-  }
-  function handleColumns(columns, refinements, conditions, factory) {
-    const columnSchemas = {};
-    for (const [key, selected] of Object.entries(columns)) {
-      if (!is$1(selected, Column) && !is$1(selected, SQL) && !is$1(selected, SQL.Aliased) && typeof selected === "object") {
-        columnSchemas[key] = handleColumns(isTable(selected) || isView(selected) ? getColumns(selected) : selected, refinements[key] ?? {}, conditions, factory);
-        continue;
-      }
-      const refinement = refinements[key];
-      if (refinement !== void 0 && typeof refinement !== "function") {
-        columnSchemas[key] = refinement;
-        continue;
-      }
-      const column = is$1(selected, Column) ? selected : void 0;
-      const schema = column ? columnToSchema(column, factory) : any();
-      const refined = typeof refinement === "function" ? refinement(schema) : schema;
-      if (conditions.never(column)) continue;
-      else columnSchemas[key] = refined;
-      if (column) {
-        if (conditions.nullable(column)) columnSchemas[key] = columnSchemas[key].nullable();
-        if (conditions.optional(column)) columnSchemas[key] = columnSchemas[key].optional();
-      }
-    }
-    return object(columnSchemas);
-  }
-  const insertConditions = {
-    never: (column) => column?.generated?.type === "always" || column?.generatedIdentity?.type === "always" || "identity" in (column ?? {}) && typeof column?.identity !== "undefined",
-    optional: (column) => !column.notNull || column.notNull && column.hasDefault,
-    nullable: (column) => !column.notNull
+  const o$2 = n$1({ useNativeBigInt: true }), s$2 = (e2, n2 = 8) => {
+    let a2 = utf8ToBytes([e2.SOID, e2.progress, e2.mode, e2.fontsize, e2.color, e2.senderID, e2.content, e2.ctime.toISOString(), e2.weight, e2.pool, e2.attr.toSorted().join(`,`), e2.platform ?? null, o$2.stringify(e2.extra)].join(`|`));
+    return bytesToHex(sha3_256.create().update(a2).digest()).slice(0, n2);
   };
-  const createInsertSchema = (entity, refine2) => {
-    return handleColumns(getColumns(entity), {}, insertConditions);
-  };
-  const o = pgEnum(`mode`, [`Normal`, `Bottom`, `Top`, `Reverse`, `Ext`]), s = pgEnum(`pool`, [`Def`, `Sub`, `Adv`, `Ix`]), c = pgEnum(`dm_attr`, [`Protect`, `FromLive`, `HighLike`, `Compatible`, `Reported`, `Unchecked`, `HasEvent`, `Hide`]), l = pgTable(`danmakus`, { SOID: text().notNull(), DMID: text().primaryKey(), progress: integer$1().notNull(), mode: o().notNull(), fontsize: smallint().notNull(), color: integer$1().notNull(), senderID: text().notNull(), content: text().notNull(), ctime: timestamp().notNull(), weight: smallint().notNull(), pool: s().notNull(), attr: c().array().notNull(), platform: text(), extra: jsonb().$type() });
-  createInsertSchema(l);
-  createInsertSchema(l);
-  const f$1 = pgTable(`chunks`, { id: serial().primaryKey(), fromConverted: boolean$3().notNull().default(false), tmp: boolean$3().notNull().default(false) });
-  createInsertSchema(f$1);
-  const m$1 = pgTable(`chunk_danmakus`, { id: bigserial({ mode: `bigint` }).primaryKey(), chunkID: integer$1().references(() => f$1.id).notNull(), DMID: text().references(() => l.DMID).notNull() });
-  createInsertSchema(m$1);
-  defineRelations({ danmakus: l, chunks: f$1, chunk2danmakus: m$1 });
-  defineRelationsPart({ danmakus: l, chunks: f$1, chunk2danmakus: m$1 }, (e2) => ({ chunks: { danmakus: e2.many.danmakus({ from: e2.chunks.id.through(e2.chunk2danmakus.chunkID), to: e2.danmakus.DMID.through(e2.chunk2danmakus.DMID) }) } }));
-  const v$2 = { danmakus: Object.fromEntries(Object.keys(l).map((e2) => [e2, sql.raw(`excluded."${e2}"`)])) }, y$2 = { danmakus: { target: [l.DMID], set: v$2.danmakus } };
-  _enum(l.mode.enumValues);
-  _enum(l.pool.enumValues);
-  _enum(l.attr.enumValues);
-  const fail = () => {
-    throw new Error("artplayer-plugin-dan-any uses @dan-uni/dan-any pure backend; drizzle/PGlite is not bundled");
-  };
-  const i = fail;
-  const n = null;
-  const r = fail;
-  const t = fail;
-  const U32_MASK64 = /* @__PURE__ */ BigInt(2 ** 32 - 1);
-  const _32n = /* @__PURE__ */ BigInt(32);
-  function fromBig(n2, le2 = false) {
-    if (le2)
-      return { h: Number(n2 & U32_MASK64), l: Number(n2 >> _32n & U32_MASK64) };
-    return { h: Number(n2 >> _32n & U32_MASK64) | 0, l: Number(n2 & U32_MASK64) | 0 };
-  }
-  function split(lst, le2 = false) {
-    const len = lst.length;
-    let Ah = new Uint32Array(len);
-    let Al = new Uint32Array(len);
-    for (let i2 = 0; i2 < len; i2++) {
-      const { h: h2, l: l2 } = fromBig(lst[i2], le2);
-      [Ah[i2], Al[i2]] = [h2, l2];
-    }
-    return [Ah, Al];
-  }
-  const rotlSH = (h2, l2, s2) => h2 << s2 | l2 >>> 32 - s2;
-  const rotlSL = (h2, l2, s2) => l2 << s2 | h2 >>> 32 - s2;
-  const rotlBH = (h2, l2, s2) => l2 << s2 - 32 | h2 >>> 64 - s2;
-  const rotlBL = (h2, l2, s2) => h2 << s2 - 32 | l2 >>> 64 - s2;
-  function isBytes(a) {
-    return a instanceof Uint8Array || ArrayBuffer.isView(a) && a.constructor.name === "Uint8Array" && "BYTES_PER_ELEMENT" in a && a.BYTES_PER_ELEMENT === 1;
-  }
-  function anumber(n2, title = "") {
-    if (typeof n2 !== "number") {
-      const prefix = title && `"${title}" `;
-      throw new TypeError(`${prefix}expected number, got ${typeof n2}`);
-    }
-    if (!Number.isSafeInteger(n2) || n2 < 0) {
-      const prefix = title && `"${title}" `;
-      throw new RangeError(`${prefix}expected integer >= 0, got ${n2}`);
-    }
-  }
-  function abytes(value, length, title = "") {
-    const bytes = isBytes(value);
-    const len = value?.length;
-    const needsLen = length !== void 0;
-    if (!bytes || needsLen) {
-      const prefix = title && `"${title}" `;
-      const ofLen = "";
-      const got = bytes ? `length=${len}` : `type=${typeof value}`;
-      const message = prefix + "expected Uint8Array" + ofLen + ", got " + got;
-      if (!bytes)
-        throw new TypeError(message);
-      throw new RangeError(message);
-    }
-    return value;
-  }
-  function aexists(instance, checkFinished = true) {
-    if (instance.destroyed)
-      throw new Error("Hash instance has been destroyed");
-    if (checkFinished && instance.finished)
-      throw new Error("Hash#digest() has already been called");
-  }
-  function aoutput(out, instance) {
-    abytes(out, void 0, "digestInto() output");
-    const min = instance.outputLen;
-    if (out.length < min) {
-      throw new RangeError('"digestInto() output" expected to be of length >=' + min);
-    }
-  }
-  function u32(arr) {
-    return new Uint32Array(arr.buffer, arr.byteOffset, Math.floor(arr.byteLength / 4));
-  }
-  function clean(...arrays) {
-    for (let i2 = 0; i2 < arrays.length; i2++) {
-      arrays[i2].fill(0);
-    }
-  }
-  const isLE = /* @__PURE__ */ (() => new Uint8Array(new Uint32Array([287454020]).buffer)[0] === 68)();
-  function byteSwap(word) {
-    return word << 24 & 4278190080 | word << 8 & 16711680 | word >>> 8 & 65280 | word >>> 24 & 255;
-  }
-  function byteSwap32(arr) {
-    for (let i2 = 0; i2 < arr.length; i2++) {
-      arr[i2] = byteSwap(arr[i2]);
-    }
-    return arr;
-  }
-  const swap32IfBE = isLE ? (u) => u : byteSwap32;
-  const hasHexBuiltin = /* @__PURE__ */ (() => (
-    // @ts-ignore
-    typeof Uint8Array.from([]).toHex === "function" && typeof Uint8Array.fromHex === "function"
-  ))();
-  const hexes = /* @__PURE__ */ Array.from({ length: 256 }, (_2, i2) => i2.toString(16).padStart(2, "0"));
-  function bytesToHex(bytes) {
-    abytes(bytes);
-    if (hasHexBuiltin)
-      return bytes.toHex();
-    let hex2 = "";
-    for (let i2 = 0; i2 < bytes.length; i2++) {
-      hex2 += hexes[bytes[i2]];
-    }
-    return hex2;
-  }
-  function utf8ToBytes(str) {
-    if (typeof str !== "string")
-      throw new TypeError("string expected");
-    return new Uint8Array(new TextEncoder().encode(str));
-  }
-  function createHasher(hashCons, info = {}) {
-    const hashC = (msg, opts) => hashCons(opts).update(msg).digest();
-    const tmp = hashCons(void 0);
-    hashC.outputLen = tmp.outputLen;
-    hashC.blockLen = tmp.blockLen;
-    hashC.canXOF = tmp.canXOF;
-    hashC.create = (opts) => hashCons(opts);
-    Object.assign(hashC, info);
-    return Object.freeze(hashC);
-  }
-  const oidNist = (suffix) => ({
-    // Current NIST hashAlgs suffixes used here fit in one DER subidentifier octet.
-    // Larger suffix values would need base-128 OID encoding and a different length byte.
-    oid: Uint8Array.from([6, 9, 96, 134, 72, 1, 101, 3, 4, 2, suffix])
-  });
-  const _0n = BigInt(0);
-  const _1n = BigInt(1);
-  const _2n = BigInt(2);
-  const _7n = BigInt(7);
-  const _256n = BigInt(256);
-  const _0x71n = BigInt(113);
-  const SHA3_PI = [];
-  const SHA3_ROTL = [];
-  const _SHA3_IOTA = [];
-  for (let round = 0, R2 = _1n, x2 = 1, y2 = 0; round < 24; round++) {
-    [x2, y2] = [y2, (2 * x2 + 3 * y2) % 5];
-    SHA3_PI.push(2 * (5 * y2 + x2));
-    SHA3_ROTL.push((round + 1) * (round + 2) / 2 % 64);
-    let t2 = _0n;
-    for (let j2 = 0; j2 < 7; j2++) {
-      R2 = (R2 << _1n ^ (R2 >> _7n) * _0x71n) % _256n;
-      if (R2 & _2n)
-        t2 ^= _1n << (_1n << BigInt(j2)) - _1n;
-    }
-    _SHA3_IOTA.push(t2);
-  }
-  const IOTAS = split(_SHA3_IOTA, true);
-  const SHA3_IOTA_H = IOTAS[0];
-  const SHA3_IOTA_L = IOTAS[1];
-  const rotlH = (h2, l2, s2) => s2 > 32 ? rotlBH(h2, l2, s2) : rotlSH(h2, l2, s2);
-  const rotlL = (h2, l2, s2) => s2 > 32 ? rotlBL(h2, l2, s2) : rotlSL(h2, l2, s2);
-  function keccakP(s2, rounds = 24) {
-    anumber(rounds, "rounds");
-    if (rounds < 1 || rounds > 24)
-      throw new Error('"rounds" expected integer 1..24');
-    const B2 = new Uint32Array(5 * 2);
-    for (let round = 24 - rounds; round < 24; round++) {
-      for (let x2 = 0; x2 < 10; x2++)
-        B2[x2] = s2[x2] ^ s2[x2 + 10] ^ s2[x2 + 20] ^ s2[x2 + 30] ^ s2[x2 + 40];
-      for (let x2 = 0; x2 < 10; x2 += 2) {
-        const idx1 = (x2 + 8) % 10;
-        const idx0 = (x2 + 2) % 10;
-        const B0 = B2[idx0];
-        const B1 = B2[idx0 + 1];
-        const Th = rotlH(B0, B1, 1) ^ B2[idx1];
-        const Tl = rotlL(B0, B1, 1) ^ B2[idx1 + 1];
-        for (let y2 = 0; y2 < 50; y2 += 10) {
-          s2[x2 + y2] ^= Th;
-          s2[x2 + y2 + 1] ^= Tl;
-        }
-      }
-      let curH = s2[2];
-      let curL = s2[3];
-      for (let t2 = 0; t2 < 24; t2++) {
-        const shift = SHA3_ROTL[t2];
-        const Th = rotlH(curH, curL, shift);
-        const Tl = rotlL(curH, curL, shift);
-        const PI = SHA3_PI[t2];
-        curH = s2[PI];
-        curL = s2[PI + 1];
-        s2[PI] = Th;
-        s2[PI + 1] = Tl;
-      }
-      for (let y2 = 0; y2 < 50; y2 += 10) {
-        const b0 = s2[y2], b1 = s2[y2 + 1], b2 = s2[y2 + 2], b3 = s2[y2 + 3];
-        s2[y2] ^= ~s2[y2 + 2] & s2[y2 + 4];
-        s2[y2 + 1] ^= ~s2[y2 + 3] & s2[y2 + 5];
-        s2[y2 + 2] ^= ~s2[y2 + 4] & s2[y2 + 6];
-        s2[y2 + 3] ^= ~s2[y2 + 5] & s2[y2 + 7];
-        s2[y2 + 4] ^= ~s2[y2 + 6] & s2[y2 + 8];
-        s2[y2 + 5] ^= ~s2[y2 + 7] & s2[y2 + 9];
-        s2[y2 + 6] ^= ~s2[y2 + 8] & b0;
-        s2[y2 + 7] ^= ~s2[y2 + 9] & b1;
-        s2[y2 + 8] ^= ~b0 & b2;
-        s2[y2 + 9] ^= ~b1 & b3;
-      }
-      s2[0] ^= SHA3_IOTA_H[round];
-      s2[1] ^= SHA3_IOTA_L[round];
-    }
-    clean(B2);
-  }
-  class Keccak {
-    // NOTE: we accept arguments in bytes instead of bits here.
-    constructor(blockLen, suffix, outputLen, enableXOF = false, rounds = 24) {
-      __publicField(this, "state");
-      __publicField(this, "pos", 0);
-      __publicField(this, "posOut", 0);
-      __publicField(this, "finished", false);
-      __publicField(this, "state32");
-      __publicField(this, "destroyed", false);
-      __publicField(this, "blockLen");
-      __publicField(this, "suffix");
-      __publicField(this, "outputLen");
-      __publicField(this, "canXOF");
-      __publicField(this, "enableXOF", false);
-      __publicField(this, "rounds");
-      this.blockLen = blockLen;
-      this.suffix = suffix;
-      this.outputLen = outputLen;
-      this.enableXOF = enableXOF;
-      this.canXOF = enableXOF;
-      this.rounds = rounds;
-      anumber(outputLen, "outputLen");
-      if (!(0 < blockLen && blockLen < 200))
-        throw new Error("only keccak-f1600 function is supported");
-      this.state = new Uint8Array(200);
-      this.state32 = u32(this.state);
-    }
-    clone() {
-      return this._cloneInto();
-    }
-    keccak() {
-      swap32IfBE(this.state32);
-      keccakP(this.state32, this.rounds);
-      swap32IfBE(this.state32);
-      this.posOut = 0;
-      this.pos = 0;
-    }
-    update(data) {
-      aexists(this);
-      abytes(data);
-      const { blockLen, state } = this;
-      const len = data.length;
-      for (let pos = 0; pos < len; ) {
-        const take = Math.min(blockLen - this.pos, len - pos);
-        for (let i2 = 0; i2 < take; i2++)
-          state[this.pos++] ^= data[pos++];
-        if (this.pos === blockLen)
-          this.keccak();
-      }
-      return this;
-    }
-    finish() {
-      if (this.finished)
-        return;
-      this.finished = true;
-      const { state, suffix, pos, blockLen } = this;
-      state[pos] ^= suffix;
-      if ((suffix & 128) !== 0 && pos === blockLen - 1)
-        this.keccak();
-      state[blockLen - 1] ^= 128;
-      this.keccak();
-    }
-    writeInto(out) {
-      aexists(this, false);
-      abytes(out);
-      this.finish();
-      const bufferOut = this.state;
-      const { blockLen } = this;
-      for (let pos = 0, len = out.length; pos < len; ) {
-        if (this.posOut >= blockLen)
-          this.keccak();
-        const take = Math.min(blockLen - this.posOut, len - pos);
-        out.set(bufferOut.subarray(this.posOut, this.posOut + take), pos);
-        this.posOut += take;
-        pos += take;
-      }
-      return out;
-    }
-    xofInto(out) {
-      if (!this.enableXOF)
-        throw new Error("XOF is not possible for this instance");
-      return this.writeInto(out);
-    }
-    xof(bytes) {
-      anumber(bytes);
-      return this.xofInto(new Uint8Array(bytes));
-    }
-    digestInto(out) {
-      aoutput(out, this);
-      if (this.finished)
-        throw new Error("digest() was already called");
-      this.writeInto(out.subarray(0, this.outputLen));
-      this.destroy();
-    }
-    digest() {
-      const out = new Uint8Array(this.outputLen);
-      this.digestInto(out);
-      return out;
-    }
-    destroy() {
-      this.destroyed = true;
-      clean(this.state);
-    }
-    _cloneInto(to) {
-      const { blockLen, suffix, outputLen, rounds, enableXOF } = this;
-      to || (to = new Keccak(blockLen, suffix, outputLen, enableXOF, rounds));
-      to.blockLen = blockLen;
-      to.state32.set(this.state32);
-      to.pos = this.pos;
-      to.posOut = this.posOut;
-      to.finished = this.finished;
-      to.rounds = rounds;
-      to.suffix = suffix;
-      to.outputLen = outputLen;
-      to.enableXOF = enableXOF;
-      to.canXOF = this.canXOF;
-      to.destroyed = this.destroyed;
-      return to;
-    }
-  }
-  const genKeccak = (suffix, blockLen, outputLen, info = {}) => createHasher(() => new Keccak(blockLen, suffix, outputLen), info);
-  const sha3_256 = /* @__PURE__ */ genKeccak(
-    6,
-    136,
-    32,
-    /* @__PURE__ */ oidNist(8)
-  );
-  function getDefaultExportFromCjs(x2) {
-    return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
-  }
-  var jsonBigint = { exports: {} };
-  var stringify = { exports: {} };
-  var bignumber$1 = { exports: {} };
-  var bignumber = bignumber$1.exports;
-  var hasRequiredBignumber;
-  function requireBignumber() {
-    if (hasRequiredBignumber) return bignumber$1.exports;
-    hasRequiredBignumber = 1;
-    (function(module) {
-      (function(globalObject) {
-        var BigNumber, isNumeric = /^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i, mathceil = Math.ceil, mathfloor = Math.floor, bignumberError = "[BigNumber Error] ", tooManyDigits = bignumberError + "Number primitive has more than 15 significant digits: ", BASE = 1e14, LOG_BASE = 14, MAX_SAFE_INTEGER = 9007199254740991, POWS_TEN = [1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13], SQRT_BASE = 1e7, MAX = 1e9;
-        function clone2(configObject) {
-          var div, convertBase, parseNumeric, P2 = BigNumber2.prototype = { constructor: BigNumber2, toString: null, valueOf: null }, ONE = new BigNumber2(1), DECIMAL_PLACES = 20, ROUNDING_MODE = 4, TO_EXP_NEG = -7, TO_EXP_POS = 21, MIN_EXP = -1e7, MAX_EXP = 1e7, CRYPTO = false, MODULO_MODE = 1, POW_PRECISION = 0, FORMAT = {
-            prefix: "",
-            groupSize: 3,
-            secondaryGroupSize: 0,
-            groupSeparator: ",",
-            decimalSeparator: ".",
-            fractionGroupSize: 0,
-            fractionGroupSeparator: " ",
-            // non-breaking space
-            suffix: ""
-          }, ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyz", alphabetHasNormalDecimalDigits = true;
-          function BigNumber2(v2, b2) {
-            var alphabet, c2, caseChanged, e2, i2, isNum, len, str, x2 = this;
-            if (!(x2 instanceof BigNumber2)) return new BigNumber2(v2, b2);
-            if (b2 == null) {
-              if (v2 && v2._isBigNumber === true) {
-                x2.s = v2.s;
-                if (!v2.c || v2.e > MAX_EXP) {
-                  x2.c = x2.e = null;
-                } else if (v2.e < MIN_EXP) {
-                  x2.c = [x2.e = 0];
-                } else {
-                  x2.e = v2.e;
-                  x2.c = v2.c.slice();
-                }
-                return;
-              }
-              if ((isNum = typeof v2 == "number") && v2 * 0 == 0) {
-                x2.s = 1 / v2 < 0 ? (v2 = -v2, -1) : 1;
-                if (v2 === ~~v2) {
-                  for (e2 = 0, i2 = v2; i2 >= 10; i2 /= 10, e2++) ;
-                  if (e2 > MAX_EXP) {
-                    x2.c = x2.e = null;
-                  } else {
-                    x2.e = e2;
-                    x2.c = [v2];
-                  }
-                  return;
-                }
-                str = String(v2);
-              } else {
-                if (!isNumeric.test(str = String(v2))) return parseNumeric(x2, str, isNum);
-                x2.s = str.charCodeAt(0) == 45 ? (str = str.slice(1), -1) : 1;
-              }
-              if ((e2 = str.indexOf(".")) > -1) str = str.replace(".", "");
-              if ((i2 = str.search(/e/i)) > 0) {
-                if (e2 < 0) e2 = i2;
-                e2 += +str.slice(i2 + 1);
-                str = str.substring(0, i2);
-              } else if (e2 < 0) {
-                e2 = str.length;
-              }
-            } else {
-              intCheck(b2, 2, ALPHABET.length, "Base");
-              if (b2 == 10 && alphabetHasNormalDecimalDigits) {
-                x2 = new BigNumber2(v2);
-                return round(x2, DECIMAL_PLACES + x2.e + 1, ROUNDING_MODE);
-              }
-              str = String(v2);
-              if (isNum = typeof v2 == "number") {
-                if (v2 * 0 != 0) return parseNumeric(x2, str, isNum, b2);
-                x2.s = 1 / v2 < 0 ? (str = str.slice(1), -1) : 1;
-                if (BigNumber2.DEBUG && str.replace(/^0\.0*|\./, "").length > 15) {
-                  throw Error(tooManyDigits + v2);
-                }
-              } else {
-                x2.s = str.charCodeAt(0) === 45 ? (str = str.slice(1), -1) : 1;
-              }
-              alphabet = ALPHABET.slice(0, b2);
-              e2 = i2 = 0;
-              for (len = str.length; i2 < len; i2++) {
-                if (alphabet.indexOf(c2 = str.charAt(i2)) < 0) {
-                  if (c2 == ".") {
-                    if (i2 > e2) {
-                      e2 = len;
-                      continue;
-                    }
-                  } else if (!caseChanged) {
-                    if (str == str.toUpperCase() && (str = str.toLowerCase()) || str == str.toLowerCase() && (str = str.toUpperCase())) {
-                      caseChanged = true;
-                      i2 = -1;
-                      e2 = 0;
-                      continue;
-                    }
-                  }
-                  return parseNumeric(x2, String(v2), isNum, b2);
-                }
-              }
-              isNum = false;
-              str = convertBase(str, b2, 10, x2.s);
-              if ((e2 = str.indexOf(".")) > -1) str = str.replace(".", "");
-              else e2 = str.length;
-            }
-            for (i2 = 0; str.charCodeAt(i2) === 48; i2++) ;
-            for (len = str.length; str.charCodeAt(--len) === 48; ) ;
-            if (str = str.slice(i2, ++len)) {
-              len -= i2;
-              if (isNum && BigNumber2.DEBUG && len > 15 && (v2 > MAX_SAFE_INTEGER || v2 !== mathfloor(v2))) {
-                throw Error(tooManyDigits + x2.s * v2);
-              }
-              if ((e2 = e2 - i2 - 1) > MAX_EXP) {
-                x2.c = x2.e = null;
-              } else if (e2 < MIN_EXP) {
-                x2.c = [x2.e = 0];
-              } else {
-                x2.e = e2;
-                x2.c = [];
-                i2 = (e2 + 1) % LOG_BASE;
-                if (e2 < 0) i2 += LOG_BASE;
-                if (i2 < len) {
-                  if (i2) x2.c.push(+str.slice(0, i2));
-                  for (len -= LOG_BASE; i2 < len; ) {
-                    x2.c.push(+str.slice(i2, i2 += LOG_BASE));
-                  }
-                  i2 = LOG_BASE - (str = str.slice(i2)).length;
-                } else {
-                  i2 -= len;
-                }
-                for (; i2--; str += "0") ;
-                x2.c.push(+str);
-              }
-            } else {
-              x2.c = [x2.e = 0];
-            }
-          }
-          BigNumber2.clone = clone2;
-          BigNumber2.ROUND_UP = 0;
-          BigNumber2.ROUND_DOWN = 1;
-          BigNumber2.ROUND_CEIL = 2;
-          BigNumber2.ROUND_FLOOR = 3;
-          BigNumber2.ROUND_HALF_UP = 4;
-          BigNumber2.ROUND_HALF_DOWN = 5;
-          BigNumber2.ROUND_HALF_EVEN = 6;
-          BigNumber2.ROUND_HALF_CEIL = 7;
-          BigNumber2.ROUND_HALF_FLOOR = 8;
-          BigNumber2.EUCLID = 9;
-          BigNumber2.config = BigNumber2.set = function(obj) {
-            var p, v2;
-            if (obj != null) {
-              if (typeof obj == "object") {
-                if (obj.hasOwnProperty(p = "DECIMAL_PLACES")) {
-                  v2 = obj[p];
-                  intCheck(v2, 0, MAX, p);
-                  DECIMAL_PLACES = v2;
-                }
-                if (obj.hasOwnProperty(p = "ROUNDING_MODE")) {
-                  v2 = obj[p];
-                  intCheck(v2, 0, 8, p);
-                  ROUNDING_MODE = v2;
-                }
-                if (obj.hasOwnProperty(p = "EXPONENTIAL_AT")) {
-                  v2 = obj[p];
-                  if (v2 && v2.pop) {
-                    intCheck(v2[0], -MAX, 0, p);
-                    intCheck(v2[1], 0, MAX, p);
-                    TO_EXP_NEG = v2[0];
-                    TO_EXP_POS = v2[1];
-                  } else {
-                    intCheck(v2, -MAX, MAX, p);
-                    TO_EXP_NEG = -(TO_EXP_POS = v2 < 0 ? -v2 : v2);
-                  }
-                }
-                if (obj.hasOwnProperty(p = "RANGE")) {
-                  v2 = obj[p];
-                  if (v2 && v2.pop) {
-                    intCheck(v2[0], -MAX, -1, p);
-                    intCheck(v2[1], 1, MAX, p);
-                    MIN_EXP = v2[0];
-                    MAX_EXP = v2[1];
-                  } else {
-                    intCheck(v2, -MAX, MAX, p);
-                    if (v2) {
-                      MIN_EXP = -(MAX_EXP = v2 < 0 ? -v2 : v2);
-                    } else {
-                      throw Error(bignumberError + p + " cannot be zero: " + v2);
-                    }
-                  }
-                }
-                if (obj.hasOwnProperty(p = "CRYPTO")) {
-                  v2 = obj[p];
-                  if (v2 === !!v2) {
-                    if (v2) {
-                      if (typeof crypto != "undefined" && crypto && (crypto.getRandomValues || crypto.randomBytes)) {
-                        CRYPTO = v2;
-                      } else {
-                        CRYPTO = !v2;
-                        throw Error(bignumberError + "crypto unavailable");
-                      }
-                    } else {
-                      CRYPTO = v2;
-                    }
-                  } else {
-                    throw Error(bignumberError + p + " not true or false: " + v2);
-                  }
-                }
-                if (obj.hasOwnProperty(p = "MODULO_MODE")) {
-                  v2 = obj[p];
-                  intCheck(v2, 0, 9, p);
-                  MODULO_MODE = v2;
-                }
-                if (obj.hasOwnProperty(p = "POW_PRECISION")) {
-                  v2 = obj[p];
-                  intCheck(v2, 0, MAX, p);
-                  POW_PRECISION = v2;
-                }
-                if (obj.hasOwnProperty(p = "FORMAT")) {
-                  v2 = obj[p];
-                  if (typeof v2 == "object") FORMAT = v2;
-                  else throw Error(bignumberError + p + " not an object: " + v2);
-                }
-                if (obj.hasOwnProperty(p = "ALPHABET")) {
-                  v2 = obj[p];
-                  if (typeof v2 == "string" && !/^.?$|[+\-.\s]|(.).*\1/.test(v2)) {
-                    alphabetHasNormalDecimalDigits = v2.slice(0, 10) == "0123456789";
-                    ALPHABET = v2;
-                  } else {
-                    throw Error(bignumberError + p + " invalid: " + v2);
-                  }
-                }
-              } else {
-                throw Error(bignumberError + "Object expected: " + obj);
-              }
-            }
-            return {
-              DECIMAL_PLACES,
-              ROUNDING_MODE,
-              EXPONENTIAL_AT: [TO_EXP_NEG, TO_EXP_POS],
-              RANGE: [MIN_EXP, MAX_EXP],
-              CRYPTO,
-              MODULO_MODE,
-              POW_PRECISION,
-              FORMAT,
-              ALPHABET
-            };
-          };
-          BigNumber2.isBigNumber = function(v2) {
-            if (!v2 || v2._isBigNumber !== true) return false;
-            if (!BigNumber2.DEBUG) return true;
-            var i2, n2, c2 = v2.c, e2 = v2.e, s2 = v2.s;
-            out: if ({}.toString.call(c2) == "[object Array]") {
-              if ((s2 === 1 || s2 === -1) && e2 >= -MAX && e2 <= MAX && e2 === mathfloor(e2)) {
-                if (c2[0] === 0) {
-                  if (e2 === 0 && c2.length === 1) return true;
-                  break out;
-                }
-                i2 = (e2 + 1) % LOG_BASE;
-                if (i2 < 1) i2 += LOG_BASE;
-                if (String(c2[0]).length == i2) {
-                  for (i2 = 0; i2 < c2.length; i2++) {
-                    n2 = c2[i2];
-                    if (n2 < 0 || n2 >= BASE || n2 !== mathfloor(n2)) break out;
-                  }
-                  if (n2 !== 0) return true;
-                }
-              }
-            } else if (c2 === null && e2 === null && (s2 === null || s2 === 1 || s2 === -1)) {
-              return true;
-            }
-            throw Error(bignumberError + "Invalid BigNumber: " + v2);
-          };
-          BigNumber2.maximum = BigNumber2.max = function() {
-            return maxOrMin(arguments, -1);
-          };
-          BigNumber2.minimum = BigNumber2.min = function() {
-            return maxOrMin(arguments, 1);
-          };
-          BigNumber2.random = (function() {
-            var pow2_53 = 9007199254740992;
-            var random53bitInt = Math.random() * pow2_53 & 2097151 ? function() {
-              return mathfloor(Math.random() * pow2_53);
-            } : function() {
-              return (Math.random() * 1073741824 | 0) * 8388608 + (Math.random() * 8388608 | 0);
-            };
-            return function(dp) {
-              var a, b2, e2, k2, v2, i2 = 0, c2 = [], rand = new BigNumber2(ONE);
-              if (dp == null) dp = DECIMAL_PLACES;
-              else intCheck(dp, 0, MAX);
-              k2 = mathceil(dp / LOG_BASE);
-              if (CRYPTO) {
-                if (crypto.getRandomValues) {
-                  a = crypto.getRandomValues(new Uint32Array(k2 *= 2));
-                  for (; i2 < k2; ) {
-                    v2 = a[i2] * 131072 + (a[i2 + 1] >>> 11);
-                    if (v2 >= 9e15) {
-                      b2 = crypto.getRandomValues(new Uint32Array(2));
-                      a[i2] = b2[0];
-                      a[i2 + 1] = b2[1];
-                    } else {
-                      c2.push(v2 % 1e14);
-                      i2 += 2;
-                    }
-                  }
-                  i2 = k2 / 2;
-                } else if (crypto.randomBytes) {
-                  a = crypto.randomBytes(k2 *= 7);
-                  for (; i2 < k2; ) {
-                    v2 = (a[i2] & 31) * 281474976710656 + a[i2 + 1] * 1099511627776 + a[i2 + 2] * 4294967296 + a[i2 + 3] * 16777216 + (a[i2 + 4] << 16) + (a[i2 + 5] << 8) + a[i2 + 6];
-                    if (v2 >= 9e15) {
-                      crypto.randomBytes(7).copy(a, i2);
-                    } else {
-                      c2.push(v2 % 1e14);
-                      i2 += 7;
-                    }
-                  }
-                  i2 = k2 / 7;
-                } else {
-                  CRYPTO = false;
-                  throw Error(bignumberError + "crypto unavailable");
-                }
-              }
-              if (!CRYPTO) {
-                for (; i2 < k2; ) {
-                  v2 = random53bitInt();
-                  if (v2 < 9e15) c2[i2++] = v2 % 1e14;
-                }
-              }
-              k2 = c2[--i2];
-              dp %= LOG_BASE;
-              if (k2 && dp) {
-                v2 = POWS_TEN[LOG_BASE - dp];
-                c2[i2] = mathfloor(k2 / v2) * v2;
-              }
-              for (; c2[i2] === 0; c2.pop(), i2--) ;
-              if (i2 < 0) {
-                c2 = [e2 = 0];
-              } else {
-                for (e2 = -1; c2[0] === 0; c2.splice(0, 1), e2 -= LOG_BASE) ;
-                for (i2 = 1, v2 = c2[0]; v2 >= 10; v2 /= 10, i2++) ;
-                if (i2 < LOG_BASE) e2 -= LOG_BASE - i2;
-              }
-              rand.e = e2;
-              rand.c = c2;
-              return rand;
-            };
-          })();
-          BigNumber2.sum = function() {
-            var i2 = 1, args = arguments, sum = new BigNumber2(args[0]);
-            for (; i2 < args.length; ) sum = sum.plus(args[i2++]);
-            return sum;
-          };
-          convertBase = /* @__PURE__ */ (function() {
-            var decimal = "0123456789";
-            function toBaseOut(str, baseIn, baseOut, alphabet) {
-              var j2, arr = [0], arrL, i2 = 0, len = str.length;
-              for (; i2 < len; ) {
-                for (arrL = arr.length; arrL--; arr[arrL] *= baseIn) ;
-                arr[0] += alphabet.indexOf(str.charAt(i2++));
-                for (j2 = 0; j2 < arr.length; j2++) {
-                  if (arr[j2] > baseOut - 1) {
-                    if (arr[j2 + 1] == null) arr[j2 + 1] = 0;
-                    arr[j2 + 1] += arr[j2] / baseOut | 0;
-                    arr[j2] %= baseOut;
-                  }
-                }
-              }
-              return arr.reverse();
-            }
-            return function(str, baseIn, baseOut, sign, callerIsToString) {
-              var alphabet, d, e2, k2, r2, x2, xc, y2, i2 = str.indexOf("."), dp = DECIMAL_PLACES, rm = ROUNDING_MODE;
-              if (i2 >= 0) {
-                k2 = POW_PRECISION;
-                POW_PRECISION = 0;
-                str = str.replace(".", "");
-                y2 = new BigNumber2(baseIn);
-                x2 = y2.pow(str.length - i2);
-                POW_PRECISION = k2;
-                y2.c = toBaseOut(
-                  toFixedPoint(coeffToString(x2.c), x2.e, "0"),
-                  10,
-                  baseOut,
-                  decimal
-                );
-                y2.e = y2.c.length;
-              }
-              xc = toBaseOut(str, baseIn, baseOut, callerIsToString ? (alphabet = ALPHABET, decimal) : (alphabet = decimal, ALPHABET));
-              e2 = k2 = xc.length;
-              for (; xc[--k2] == 0; xc.pop()) ;
-              if (!xc[0]) return alphabet.charAt(0);
-              if (i2 < 0) {
-                --e2;
-              } else {
-                x2.c = xc;
-                x2.e = e2;
-                x2.s = sign;
-                x2 = div(x2, y2, dp, rm, baseOut);
-                xc = x2.c;
-                r2 = x2.r;
-                e2 = x2.e;
-              }
-              d = e2 + dp + 1;
-              i2 = xc[d];
-              k2 = baseOut / 2;
-              r2 = r2 || d < 0 || xc[d + 1] != null;
-              r2 = rm < 4 ? (i2 != null || r2) && (rm == 0 || rm == (x2.s < 0 ? 3 : 2)) : i2 > k2 || i2 == k2 && (rm == 4 || r2 || rm == 6 && xc[d - 1] & 1 || rm == (x2.s < 0 ? 8 : 7));
-              if (d < 1 || !xc[0]) {
-                str = r2 ? toFixedPoint(alphabet.charAt(1), -dp, alphabet.charAt(0)) : alphabet.charAt(0);
-              } else {
-                xc.length = d;
-                if (r2) {
-                  for (--baseOut; ++xc[--d] > baseOut; ) {
-                    xc[d] = 0;
-                    if (!d) {
-                      ++e2;
-                      xc = [1].concat(xc);
-                    }
-                  }
-                }
-                for (k2 = xc.length; !xc[--k2]; ) ;
-                for (i2 = 0, str = ""; i2 <= k2; str += alphabet.charAt(xc[i2++])) ;
-                str = toFixedPoint(str, e2, alphabet.charAt(0));
-              }
-              return str;
-            };
-          })();
-          div = /* @__PURE__ */ (function() {
-            function multiply(x2, k2, base) {
-              var m2, temp, xlo, xhi, carry = 0, i2 = x2.length, klo = k2 % SQRT_BASE, khi = k2 / SQRT_BASE | 0;
-              for (x2 = x2.slice(); i2--; ) {
-                xlo = x2[i2] % SQRT_BASE;
-                xhi = x2[i2] / SQRT_BASE | 0;
-                m2 = khi * xlo + xhi * klo;
-                temp = klo * xlo + m2 % SQRT_BASE * SQRT_BASE + carry;
-                carry = (temp / base | 0) + (m2 / SQRT_BASE | 0) + khi * xhi;
-                x2[i2] = temp % base;
-              }
-              if (carry) x2 = [carry].concat(x2);
-              return x2;
-            }
-            function compare2(a, b2, aL, bL) {
-              var i2, cmp;
-              if (aL != bL) {
-                cmp = aL > bL ? 1 : -1;
-              } else {
-                for (i2 = cmp = 0; i2 < aL; i2++) {
-                  if (a[i2] != b2[i2]) {
-                    cmp = a[i2] > b2[i2] ? 1 : -1;
-                    break;
-                  }
-                }
-              }
-              return cmp;
-            }
-            function subtract(a, b2, aL, base) {
-              var i2 = 0;
-              for (; aL--; ) {
-                a[aL] -= i2;
-                i2 = a[aL] < b2[aL] ? 1 : 0;
-                a[aL] = i2 * base + a[aL] - b2[aL];
-              }
-              for (; !a[0] && a.length > 1; a.splice(0, 1)) ;
-            }
-            return function(x2, y2, dp, rm, base) {
-              var cmp, e2, i2, more, n2, prod, prodL, q2, qc, rem, remL, rem0, xi, xL, yc0, yL, yz, s2 = x2.s == y2.s ? 1 : -1, xc = x2.c, yc = y2.c;
-              if (!xc || !xc[0] || !yc || !yc[0]) {
-                return new BigNumber2(
-                  // Return NaN if either NaN, or both Infinity or 0.
-                  !x2.s || !y2.s || (xc ? yc && xc[0] == yc[0] : !yc) ? NaN : (
-                    // Return ±0 if x is ±0 or y is ±Infinity, or return ±Infinity as y is ±0.
-                    xc && xc[0] == 0 || !yc ? s2 * 0 : s2 / 0
-                  )
-                );
-              }
-              q2 = new BigNumber2(s2);
-              qc = q2.c = [];
-              e2 = x2.e - y2.e;
-              s2 = dp + e2 + 1;
-              if (!base) {
-                base = BASE;
-                e2 = bitFloor(x2.e / LOG_BASE) - bitFloor(y2.e / LOG_BASE);
-                s2 = s2 / LOG_BASE | 0;
-              }
-              for (i2 = 0; yc[i2] == (xc[i2] || 0); i2++) ;
-              if (yc[i2] > (xc[i2] || 0)) e2--;
-              if (s2 < 0) {
-                qc.push(1);
-                more = true;
-              } else {
-                xL = xc.length;
-                yL = yc.length;
-                i2 = 0;
-                s2 += 2;
-                n2 = mathfloor(base / (yc[0] + 1));
-                if (n2 > 1) {
-                  yc = multiply(yc, n2, base);
-                  xc = multiply(xc, n2, base);
-                  yL = yc.length;
-                  xL = xc.length;
-                }
-                xi = yL;
-                rem = xc.slice(0, yL);
-                remL = rem.length;
-                for (; remL < yL; rem[remL++] = 0) ;
-                yz = yc.slice();
-                yz = [0].concat(yz);
-                yc0 = yc[0];
-                if (yc[1] >= base / 2) yc0++;
-                do {
-                  n2 = 0;
-                  cmp = compare2(yc, rem, yL, remL);
-                  if (cmp < 0) {
-                    rem0 = rem[0];
-                    if (yL != remL) rem0 = rem0 * base + (rem[1] || 0);
-                    n2 = mathfloor(rem0 / yc0);
-                    if (n2 > 1) {
-                      if (n2 >= base) n2 = base - 1;
-                      prod = multiply(yc, n2, base);
-                      prodL = prod.length;
-                      remL = rem.length;
-                      while (compare2(prod, rem, prodL, remL) == 1) {
-                        n2--;
-                        subtract(prod, yL < prodL ? yz : yc, prodL, base);
-                        prodL = prod.length;
-                        cmp = 1;
-                      }
-                    } else {
-                      if (n2 == 0) {
-                        cmp = n2 = 1;
-                      }
-                      prod = yc.slice();
-                      prodL = prod.length;
-                    }
-                    if (prodL < remL) prod = [0].concat(prod);
-                    subtract(rem, prod, remL, base);
-                    remL = rem.length;
-                    if (cmp == -1) {
-                      while (compare2(yc, rem, yL, remL) < 1) {
-                        n2++;
-                        subtract(rem, yL < remL ? yz : yc, remL, base);
-                        remL = rem.length;
-                      }
-                    }
-                  } else if (cmp === 0) {
-                    n2++;
-                    rem = [0];
-                  }
-                  qc[i2++] = n2;
-                  if (rem[0]) {
-                    rem[remL++] = xc[xi] || 0;
-                  } else {
-                    rem = [xc[xi]];
-                    remL = 1;
-                  }
-                } while ((xi++ < xL || rem[0] != null) && s2--);
-                more = rem[0] != null;
-                if (!qc[0]) qc.splice(0, 1);
-              }
-              if (base == BASE) {
-                for (i2 = 1, s2 = qc[0]; s2 >= 10; s2 /= 10, i2++) ;
-                round(q2, dp + (q2.e = i2 + e2 * LOG_BASE - 1) + 1, rm, more);
-              } else {
-                q2.e = e2;
-                q2.r = +more;
-              }
-              return q2;
-            };
-          })();
-          function format(n2, i2, rm, id2) {
-            var c0, e2, ne, len, str;
-            if (rm == null) rm = ROUNDING_MODE;
-            else intCheck(rm, 0, 8);
-            if (!n2.c) return n2.toString();
-            c0 = n2.c[0];
-            ne = n2.e;
-            if (i2 == null) {
-              str = coeffToString(n2.c);
-              str = id2 == 1 || id2 == 2 && (ne <= TO_EXP_NEG || ne >= TO_EXP_POS) ? toExponential(str, ne) : toFixedPoint(str, ne, "0");
-            } else {
-              n2 = round(new BigNumber2(n2), i2, rm);
-              e2 = n2.e;
-              str = coeffToString(n2.c);
-              len = str.length;
-              if (id2 == 1 || id2 == 2 && (i2 <= e2 || e2 <= TO_EXP_NEG)) {
-                for (; len < i2; str += "0", len++) ;
-                str = toExponential(str, e2);
-              } else {
-                i2 -= ne + (id2 === 2 && e2 > ne);
-                str = toFixedPoint(str, e2, "0");
-                if (e2 + 1 > len) {
-                  if (--i2 > 0) for (str += "."; i2--; str += "0") ;
-                } else {
-                  i2 += e2 - len;
-                  if (i2 > 0) {
-                    if (e2 + 1 == len) str += ".";
-                    for (; i2--; str += "0") ;
-                  }
-                }
-              }
-            }
-            return n2.s < 0 && c0 ? "-" + str : str;
-          }
-          function maxOrMin(args, n2) {
-            var k2, y2, i2 = 1, x2 = new BigNumber2(args[0]);
-            for (; i2 < args.length; i2++) {
-              y2 = new BigNumber2(args[i2]);
-              if (!y2.s || (k2 = compare(x2, y2)) === n2 || k2 === 0 && x2.s === n2) {
-                x2 = y2;
-              }
-            }
-            return x2;
-          }
-          function normalise(n2, c2, e2) {
-            var i2 = 1, j2 = c2.length;
-            for (; !c2[--j2]; c2.pop()) ;
-            for (j2 = c2[0]; j2 >= 10; j2 /= 10, i2++) ;
-            if ((e2 = i2 + e2 * LOG_BASE - 1) > MAX_EXP) {
-              n2.c = n2.e = null;
-            } else if (e2 < MIN_EXP) {
-              n2.c = [n2.e = 0];
-            } else {
-              n2.e = e2;
-              n2.c = c2;
-            }
-            return n2;
-          }
-          parseNumeric = /* @__PURE__ */ (function() {
-            var basePrefix = /^(-?)0([xbo])(?=\w[\w.]*$)/i, dotAfter = /^([^.]+)\.$/, dotBefore = /^\.([^.]+)$/, isInfinityOrNaN = /^-?(Infinity|NaN)$/, whitespaceOrPlus = /^\s*\+(?=[\w.])|^\s+|\s+$/g;
-            return function(x2, str, isNum, b2) {
-              var base, s2 = isNum ? str : str.replace(whitespaceOrPlus, "");
-              if (isInfinityOrNaN.test(s2)) {
-                x2.s = isNaN(s2) ? null : s2 < 0 ? -1 : 1;
-              } else {
-                if (!isNum) {
-                  s2 = s2.replace(basePrefix, function(m2, p1, p2) {
-                    base = (p2 = p2.toLowerCase()) == "x" ? 16 : p2 == "b" ? 2 : 8;
-                    return !b2 || b2 == base ? p1 : m2;
-                  });
-                  if (b2) {
-                    base = b2;
-                    s2 = s2.replace(dotAfter, "$1").replace(dotBefore, "0.$1");
-                  }
-                  if (str != s2) return new BigNumber2(s2, base);
-                }
-                if (BigNumber2.DEBUG) {
-                  throw Error(bignumberError + "Not a" + (b2 ? " base " + b2 : "") + " number: " + str);
-                }
-                x2.s = null;
-              }
-              x2.c = x2.e = null;
-            };
-          })();
-          function round(x2, sd, rm, r2) {
-            var d, i2, j2, k2, n2, ni, rd, xc = x2.c, pows10 = POWS_TEN;
-            if (xc) {
-              out: {
-                for (d = 1, k2 = xc[0]; k2 >= 10; k2 /= 10, d++) ;
-                i2 = sd - d;
-                if (i2 < 0) {
-                  i2 += LOG_BASE;
-                  j2 = sd;
-                  n2 = xc[ni = 0];
-                  rd = mathfloor(n2 / pows10[d - j2 - 1] % 10);
-                } else {
-                  ni = mathceil((i2 + 1) / LOG_BASE);
-                  if (ni >= xc.length) {
-                    if (r2) {
-                      for (; xc.length <= ni; xc.push(0)) ;
-                      n2 = rd = 0;
-                      d = 1;
-                      i2 %= LOG_BASE;
-                      j2 = i2 - LOG_BASE + 1;
-                    } else {
-                      break out;
-                    }
-                  } else {
-                    n2 = k2 = xc[ni];
-                    for (d = 1; k2 >= 10; k2 /= 10, d++) ;
-                    i2 %= LOG_BASE;
-                    j2 = i2 - LOG_BASE + d;
-                    rd = j2 < 0 ? 0 : mathfloor(n2 / pows10[d - j2 - 1] % 10);
-                  }
-                }
-                r2 = r2 || sd < 0 || // Are there any non-zero digits after the rounding digit?
-                // The expression  n % pows10[d - j - 1]  returns all digits of n to the right
-                // of the digit at j, e.g. if n is 908714 and j is 2, the expression gives 714.
-                xc[ni + 1] != null || (j2 < 0 ? n2 : n2 % pows10[d - j2 - 1]);
-                r2 = rm < 4 ? (rd || r2) && (rm == 0 || rm == (x2.s < 0 ? 3 : 2)) : rd > 5 || rd == 5 && (rm == 4 || r2 || rm == 6 && // Check whether the digit to the left of the rounding digit is odd.
-                (i2 > 0 ? j2 > 0 ? n2 / pows10[d - j2] : 0 : xc[ni - 1]) % 10 & 1 || rm == (x2.s < 0 ? 8 : 7));
-                if (sd < 1 || !xc[0]) {
-                  xc.length = 0;
-                  if (r2) {
-                    sd -= x2.e + 1;
-                    xc[0] = pows10[(LOG_BASE - sd % LOG_BASE) % LOG_BASE];
-                    x2.e = -sd || 0;
-                  } else {
-                    xc[0] = x2.e = 0;
-                  }
-                  return x2;
-                }
-                if (i2 == 0) {
-                  xc.length = ni;
-                  k2 = 1;
-                  ni--;
-                } else {
-                  xc.length = ni + 1;
-                  k2 = pows10[LOG_BASE - i2];
-                  xc[ni] = j2 > 0 ? mathfloor(n2 / pows10[d - j2] % pows10[j2]) * k2 : 0;
-                }
-                if (r2) {
-                  for (; ; ) {
-                    if (ni == 0) {
-                      for (i2 = 1, j2 = xc[0]; j2 >= 10; j2 /= 10, i2++) ;
-                      j2 = xc[0] += k2;
-                      for (k2 = 1; j2 >= 10; j2 /= 10, k2++) ;
-                      if (i2 != k2) {
-                        x2.e++;
-                        if (xc[0] == BASE) xc[0] = 1;
-                      }
-                      break;
-                    } else {
-                      xc[ni] += k2;
-                      if (xc[ni] != BASE) break;
-                      xc[ni--] = 0;
-                      k2 = 1;
-                    }
-                  }
-                }
-                for (i2 = xc.length; xc[--i2] === 0; xc.pop()) ;
-              }
-              if (x2.e > MAX_EXP) {
-                x2.c = x2.e = null;
-              } else if (x2.e < MIN_EXP) {
-                x2.c = [x2.e = 0];
-              }
-            }
-            return x2;
-          }
-          function valueOf(n2) {
-            var str, e2 = n2.e;
-            if (e2 === null) return n2.toString();
-            str = coeffToString(n2.c);
-            str = e2 <= TO_EXP_NEG || e2 >= TO_EXP_POS ? toExponential(str, e2) : toFixedPoint(str, e2, "0");
-            return n2.s < 0 ? "-" + str : str;
-          }
-          P2.absoluteValue = P2.abs = function() {
-            var x2 = new BigNumber2(this);
-            if (x2.s < 0) x2.s = 1;
-            return x2;
-          };
-          P2.comparedTo = function(y2, b2) {
-            return compare(this, new BigNumber2(y2, b2));
-          };
-          P2.decimalPlaces = P2.dp = function(dp, rm) {
-            var c2, n2, v2, x2 = this;
-            if (dp != null) {
-              intCheck(dp, 0, MAX);
-              if (rm == null) rm = ROUNDING_MODE;
-              else intCheck(rm, 0, 8);
-              return round(new BigNumber2(x2), dp + x2.e + 1, rm);
-            }
-            if (!(c2 = x2.c)) return null;
-            n2 = ((v2 = c2.length - 1) - bitFloor(this.e / LOG_BASE)) * LOG_BASE;
-            if (v2 = c2[v2]) for (; v2 % 10 == 0; v2 /= 10, n2--) ;
-            if (n2 < 0) n2 = 0;
-            return n2;
-          };
-          P2.dividedBy = P2.div = function(y2, b2) {
-            return div(this, new BigNumber2(y2, b2), DECIMAL_PLACES, ROUNDING_MODE);
-          };
-          P2.dividedToIntegerBy = P2.idiv = function(y2, b2) {
-            return div(this, new BigNumber2(y2, b2), 0, 1);
-          };
-          P2.exponentiatedBy = P2.pow = function(n2, m2) {
-            var half, isModExp, i2, k2, more, nIsBig, nIsNeg, nIsOdd, y2, x2 = this;
-            n2 = new BigNumber2(n2);
-            if (n2.c && !n2.isInteger()) {
-              throw Error(bignumberError + "Exponent not an integer: " + valueOf(n2));
-            }
-            if (m2 != null) m2 = new BigNumber2(m2);
-            nIsBig = n2.e > 14;
-            if (!x2.c || !x2.c[0] || x2.c[0] == 1 && !x2.e && x2.c.length == 1 || !n2.c || !n2.c[0]) {
-              y2 = new BigNumber2(Math.pow(+valueOf(x2), nIsBig ? n2.s * (2 - isOdd(n2)) : +valueOf(n2)));
-              return m2 ? y2.mod(m2) : y2;
-            }
-            nIsNeg = n2.s < 0;
-            if (m2) {
-              if (m2.c ? !m2.c[0] : !m2.s) return new BigNumber2(NaN);
-              isModExp = !nIsNeg && x2.isInteger() && m2.isInteger();
-              if (isModExp) x2 = x2.mod(m2);
-            } else if (n2.e > 9 && (x2.e > 0 || x2.e < -1 || (x2.e == 0 ? x2.c[0] > 1 || nIsBig && x2.c[1] >= 24e7 : x2.c[0] < 8e13 || nIsBig && x2.c[0] <= 9999975e7))) {
-              k2 = x2.s < 0 && isOdd(n2) ? -0 : 0;
-              if (x2.e > -1) k2 = 1 / k2;
-              return new BigNumber2(nIsNeg ? 1 / k2 : k2);
-            } else if (POW_PRECISION) {
-              k2 = mathceil(POW_PRECISION / LOG_BASE + 2);
-            }
-            if (nIsBig) {
-              half = new BigNumber2(0.5);
-              if (nIsNeg) n2.s = 1;
-              nIsOdd = isOdd(n2);
-            } else {
-              i2 = Math.abs(+valueOf(n2));
-              nIsOdd = i2 % 2;
-            }
-            y2 = new BigNumber2(ONE);
-            for (; ; ) {
-              if (nIsOdd) {
-                y2 = y2.times(x2);
-                if (!y2.c) break;
-                if (k2) {
-                  if (y2.c.length > k2) y2.c.length = k2;
-                } else if (isModExp) {
-                  y2 = y2.mod(m2);
-                }
-              }
-              if (i2) {
-                i2 = mathfloor(i2 / 2);
-                if (i2 === 0) break;
-                nIsOdd = i2 % 2;
-              } else {
-                n2 = n2.times(half);
-                round(n2, n2.e + 1, 1);
-                if (n2.e > 14) {
-                  nIsOdd = isOdd(n2);
-                } else {
-                  i2 = +valueOf(n2);
-                  if (i2 === 0) break;
-                  nIsOdd = i2 % 2;
-                }
-              }
-              x2 = x2.times(x2);
-              if (k2) {
-                if (x2.c && x2.c.length > k2) x2.c.length = k2;
-              } else if (isModExp) {
-                x2 = x2.mod(m2);
-              }
-            }
-            if (isModExp) return y2;
-            if (nIsNeg) y2 = ONE.div(y2);
-            return m2 ? y2.mod(m2) : k2 ? round(y2, POW_PRECISION, ROUNDING_MODE, more) : y2;
-          };
-          P2.integerValue = function(rm) {
-            var n2 = new BigNumber2(this);
-            if (rm == null) rm = ROUNDING_MODE;
-            else intCheck(rm, 0, 8);
-            return round(n2, n2.e + 1, rm);
-          };
-          P2.isEqualTo = P2.eq = function(y2, b2) {
-            return compare(this, new BigNumber2(y2, b2)) === 0;
-          };
-          P2.isFinite = function() {
-            return !!this.c;
-          };
-          P2.isGreaterThan = P2.gt = function(y2, b2) {
-            return compare(this, new BigNumber2(y2, b2)) > 0;
-          };
-          P2.isGreaterThanOrEqualTo = P2.gte = function(y2, b2) {
-            return (b2 = compare(this, new BigNumber2(y2, b2))) === 1 || b2 === 0;
-          };
-          P2.isInteger = function() {
-            return !!this.c && bitFloor(this.e / LOG_BASE) > this.c.length - 2;
-          };
-          P2.isLessThan = P2.lt = function(y2, b2) {
-            return compare(this, new BigNumber2(y2, b2)) < 0;
-          };
-          P2.isLessThanOrEqualTo = P2.lte = function(y2, b2) {
-            return (b2 = compare(this, new BigNumber2(y2, b2))) === -1 || b2 === 0;
-          };
-          P2.isNaN = function() {
-            return !this.s;
-          };
-          P2.isNegative = function() {
-            return this.s < 0;
-          };
-          P2.isPositive = function() {
-            return this.s > 0;
-          };
-          P2.isZero = function() {
-            return !!this.c && this.c[0] == 0;
-          };
-          P2.minus = function(y2, b2) {
-            var i2, j2, t2, xLTy, x2 = this, a = x2.s;
-            y2 = new BigNumber2(y2, b2);
-            b2 = y2.s;
-            if (!a || !b2) return new BigNumber2(NaN);
-            if (a != b2) {
-              y2.s = -b2;
-              return x2.plus(y2);
-            }
-            var xe2 = x2.e / LOG_BASE, ye2 = y2.e / LOG_BASE, xc = x2.c, yc = y2.c;
-            if (!xe2 || !ye2) {
-              if (!xc || !yc) return xc ? (y2.s = -b2, y2) : new BigNumber2(yc ? x2 : NaN);
-              if (!xc[0] || !yc[0]) {
-                return yc[0] ? (y2.s = -b2, y2) : new BigNumber2(xc[0] ? x2 : (
-                  // IEEE 754 (2008) 6.3: n - n = -0 when rounding to -Infinity
-                  ROUNDING_MODE == 3 ? -0 : 0
-                ));
-              }
-            }
-            xe2 = bitFloor(xe2);
-            ye2 = bitFloor(ye2);
-            xc = xc.slice();
-            if (a = xe2 - ye2) {
-              if (xLTy = a < 0) {
-                a = -a;
-                t2 = xc;
-              } else {
-                ye2 = xe2;
-                t2 = yc;
-              }
-              t2.reverse();
-              for (b2 = a; b2--; t2.push(0)) ;
-              t2.reverse();
-            } else {
-              j2 = (xLTy = (a = xc.length) < (b2 = yc.length)) ? a : b2;
-              for (a = b2 = 0; b2 < j2; b2++) {
-                if (xc[b2] != yc[b2]) {
-                  xLTy = xc[b2] < yc[b2];
-                  break;
-                }
-              }
-            }
-            if (xLTy) {
-              t2 = xc;
-              xc = yc;
-              yc = t2;
-              y2.s = -y2.s;
-            }
-            b2 = (j2 = yc.length) - (i2 = xc.length);
-            if (b2 > 0) for (; b2--; xc[i2++] = 0) ;
-            b2 = BASE - 1;
-            for (; j2 > a; ) {
-              if (xc[--j2] < yc[j2]) {
-                for (i2 = j2; i2 && !xc[--i2]; xc[i2] = b2) ;
-                --xc[i2];
-                xc[j2] += BASE;
-              }
-              xc[j2] -= yc[j2];
-            }
-            for (; xc[0] == 0; xc.splice(0, 1), --ye2) ;
-            if (!xc[0]) {
-              y2.s = ROUNDING_MODE == 3 ? -1 : 1;
-              y2.c = [y2.e = 0];
-              return y2;
-            }
-            return normalise(y2, xc, ye2);
-          };
-          P2.modulo = P2.mod = function(y2, b2) {
-            var q2, s2, x2 = this;
-            y2 = new BigNumber2(y2, b2);
-            if (!x2.c || !y2.s || y2.c && !y2.c[0]) {
-              return new BigNumber2(NaN);
-            } else if (!y2.c || x2.c && !x2.c[0]) {
-              return new BigNumber2(x2);
-            }
-            if (MODULO_MODE == 9) {
-              s2 = y2.s;
-              y2.s = 1;
-              q2 = div(x2, y2, 0, 3);
-              y2.s = s2;
-              q2.s *= s2;
-            } else {
-              q2 = div(x2, y2, 0, MODULO_MODE);
-            }
-            y2 = x2.minus(q2.times(y2));
-            if (!y2.c[0] && MODULO_MODE == 1) y2.s = x2.s;
-            return y2;
-          };
-          P2.multipliedBy = P2.times = function(y2, b2) {
-            var c2, e2, i2, j2, k2, m2, xcL, xlo, xhi, ycL, ylo, yhi, zc, base, sqrtBase, x2 = this, xc = x2.c, yc = (y2 = new BigNumber2(y2, b2)).c;
-            if (!xc || !yc || !xc[0] || !yc[0]) {
-              if (!x2.s || !y2.s || xc && !xc[0] && !yc || yc && !yc[0] && !xc) {
-                y2.c = y2.e = y2.s = null;
-              } else {
-                y2.s *= x2.s;
-                if (!xc || !yc) {
-                  y2.c = y2.e = null;
-                } else {
-                  y2.c = [0];
-                  y2.e = 0;
-                }
-              }
-              return y2;
-            }
-            e2 = bitFloor(x2.e / LOG_BASE) + bitFloor(y2.e / LOG_BASE);
-            y2.s *= x2.s;
-            xcL = xc.length;
-            ycL = yc.length;
-            if (xcL < ycL) {
-              zc = xc;
-              xc = yc;
-              yc = zc;
-              i2 = xcL;
-              xcL = ycL;
-              ycL = i2;
-            }
-            for (i2 = xcL + ycL, zc = []; i2--; zc.push(0)) ;
-            base = BASE;
-            sqrtBase = SQRT_BASE;
-            for (i2 = ycL; --i2 >= 0; ) {
-              c2 = 0;
-              ylo = yc[i2] % sqrtBase;
-              yhi = yc[i2] / sqrtBase | 0;
-              for (k2 = xcL, j2 = i2 + k2; j2 > i2; ) {
-                xlo = xc[--k2] % sqrtBase;
-                xhi = xc[k2] / sqrtBase | 0;
-                m2 = yhi * xlo + xhi * ylo;
-                xlo = ylo * xlo + m2 % sqrtBase * sqrtBase + zc[j2] + c2;
-                c2 = (xlo / base | 0) + (m2 / sqrtBase | 0) + yhi * xhi;
-                zc[j2--] = xlo % base;
-              }
-              zc[j2] = c2;
-            }
-            if (c2) {
-              ++e2;
-            } else {
-              zc.splice(0, 1);
-            }
-            return normalise(y2, zc, e2);
-          };
-          P2.negated = function() {
-            var x2 = new BigNumber2(this);
-            x2.s = -x2.s || null;
-            return x2;
-          };
-          P2.plus = function(y2, b2) {
-            var t2, x2 = this, a = x2.s;
-            y2 = new BigNumber2(y2, b2);
-            b2 = y2.s;
-            if (!a || !b2) return new BigNumber2(NaN);
-            if (a != b2) {
-              y2.s = -b2;
-              return x2.minus(y2);
-            }
-            var xe2 = x2.e / LOG_BASE, ye2 = y2.e / LOG_BASE, xc = x2.c, yc = y2.c;
-            if (!xe2 || !ye2) {
-              if (!xc || !yc) return new BigNumber2(a / 0);
-              if (!xc[0] || !yc[0]) return yc[0] ? y2 : new BigNumber2(xc[0] ? x2 : a * 0);
-            }
-            xe2 = bitFloor(xe2);
-            ye2 = bitFloor(ye2);
-            xc = xc.slice();
-            if (a = xe2 - ye2) {
-              if (a > 0) {
-                ye2 = xe2;
-                t2 = yc;
-              } else {
-                a = -a;
-                t2 = xc;
-              }
-              t2.reverse();
-              for (; a--; t2.push(0)) ;
-              t2.reverse();
-            }
-            a = xc.length;
-            b2 = yc.length;
-            if (a - b2 < 0) {
-              t2 = yc;
-              yc = xc;
-              xc = t2;
-              b2 = a;
-            }
-            for (a = 0; b2; ) {
-              a = (xc[--b2] = xc[b2] + yc[b2] + a) / BASE | 0;
-              xc[b2] = BASE === xc[b2] ? 0 : xc[b2] % BASE;
-            }
-            if (a) {
-              xc = [a].concat(xc);
-              ++ye2;
-            }
-            return normalise(y2, xc, ye2);
-          };
-          P2.precision = P2.sd = function(sd, rm) {
-            var c2, n2, v2, x2 = this;
-            if (sd != null && sd !== !!sd) {
-              intCheck(sd, 1, MAX);
-              if (rm == null) rm = ROUNDING_MODE;
-              else intCheck(rm, 0, 8);
-              return round(new BigNumber2(x2), sd, rm);
-            }
-            if (!(c2 = x2.c)) return null;
-            v2 = c2.length - 1;
-            n2 = v2 * LOG_BASE + 1;
-            if (v2 = c2[v2]) {
-              for (; v2 % 10 == 0; v2 /= 10, n2--) ;
-              for (v2 = c2[0]; v2 >= 10; v2 /= 10, n2++) ;
-            }
-            if (sd && x2.e + 1 > n2) n2 = x2.e + 1;
-            return n2;
-          };
-          P2.shiftedBy = function(k2) {
-            intCheck(k2, -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER);
-            return this.times("1e" + k2);
-          };
-          P2.squareRoot = P2.sqrt = function() {
-            var m2, n2, r2, rep, t2, x2 = this, c2 = x2.c, s2 = x2.s, e2 = x2.e, dp = DECIMAL_PLACES + 4, half = new BigNumber2("0.5");
-            if (s2 !== 1 || !c2 || !c2[0]) {
-              return new BigNumber2(!s2 || s2 < 0 && (!c2 || c2[0]) ? NaN : c2 ? x2 : 1 / 0);
-            }
-            s2 = Math.sqrt(+valueOf(x2));
-            if (s2 == 0 || s2 == 1 / 0) {
-              n2 = coeffToString(c2);
-              if ((n2.length + e2) % 2 == 0) n2 += "0";
-              s2 = Math.sqrt(+n2);
-              e2 = bitFloor((e2 + 1) / 2) - (e2 < 0 || e2 % 2);
-              if (s2 == 1 / 0) {
-                n2 = "5e" + e2;
-              } else {
-                n2 = s2.toExponential();
-                n2 = n2.slice(0, n2.indexOf("e") + 1) + e2;
-              }
-              r2 = new BigNumber2(n2);
-            } else {
-              r2 = new BigNumber2(s2 + "");
-            }
-            if (r2.c[0]) {
-              e2 = r2.e;
-              s2 = e2 + dp;
-              if (s2 < 3) s2 = 0;
-              for (; ; ) {
-                t2 = r2;
-                r2 = half.times(t2.plus(div(x2, t2, dp, 1)));
-                if (coeffToString(t2.c).slice(0, s2) === (n2 = coeffToString(r2.c)).slice(0, s2)) {
-                  if (r2.e < e2) --s2;
-                  n2 = n2.slice(s2 - 3, s2 + 1);
-                  if (n2 == "9999" || !rep && n2 == "4999") {
-                    if (!rep) {
-                      round(t2, t2.e + DECIMAL_PLACES + 2, 0);
-                      if (t2.times(t2).eq(x2)) {
-                        r2 = t2;
-                        break;
-                      }
-                    }
-                    dp += 4;
-                    s2 += 4;
-                    rep = 1;
-                  } else {
-                    if (!+n2 || !+n2.slice(1) && n2.charAt(0) == "5") {
-                      round(r2, r2.e + DECIMAL_PLACES + 2, 1);
-                      m2 = !r2.times(r2).eq(x2);
-                    }
-                    break;
-                  }
-                }
-              }
-            }
-            return round(r2, r2.e + DECIMAL_PLACES + 1, ROUNDING_MODE, m2);
-          };
-          P2.toExponential = function(dp, rm) {
-            if (dp != null) {
-              intCheck(dp, 0, MAX);
-              dp++;
-            }
-            return format(this, dp, rm, 1);
-          };
-          P2.toFixed = function(dp, rm) {
-            if (dp != null) {
-              intCheck(dp, 0, MAX);
-              dp = dp + this.e + 1;
-            }
-            return format(this, dp, rm);
-          };
-          P2.toFormat = function(dp, rm, format2) {
-            var str, x2 = this;
-            if (format2 == null) {
-              if (dp != null && rm && typeof rm == "object") {
-                format2 = rm;
-                rm = null;
-              } else if (dp && typeof dp == "object") {
-                format2 = dp;
-                dp = rm = null;
-              } else {
-                format2 = FORMAT;
-              }
-            } else if (typeof format2 != "object") {
-              throw Error(bignumberError + "Argument not an object: " + format2);
-            }
-            str = x2.toFixed(dp, rm);
-            if (x2.c) {
-              var i2, arr = str.split("."), g1 = +format2.groupSize, g2 = +format2.secondaryGroupSize, groupSeparator = format2.groupSeparator || "", intPart = arr[0], fractionPart = arr[1], isNeg = x2.s < 0, intDigits = isNeg ? intPart.slice(1) : intPart, len = intDigits.length;
-              if (g2) {
-                i2 = g1;
-                g1 = g2;
-                g2 = i2;
-                len -= i2;
-              }
-              if (g1 > 0 && len > 0) {
-                i2 = len % g1 || g1;
-                intPart = intDigits.substr(0, i2);
-                for (; i2 < len; i2 += g1) intPart += groupSeparator + intDigits.substr(i2, g1);
-                if (g2 > 0) intPart += groupSeparator + intDigits.slice(i2);
-                if (isNeg) intPart = "-" + intPart;
-              }
-              str = fractionPart ? intPart + (format2.decimalSeparator || "") + ((g2 = +format2.fractionGroupSize) ? fractionPart.replace(
-                new RegExp("\\d{" + g2 + "}\\B", "g"),
-                "$&" + (format2.fractionGroupSeparator || "")
-              ) : fractionPart) : intPart;
-            }
-            return (format2.prefix || "") + str + (format2.suffix || "");
-          };
-          P2.toFraction = function(md) {
-            var d, d0, d1, d2, e2, exp, n2, n0, n1, q2, r2, s2, x2 = this, xc = x2.c;
-            if (md != null) {
-              n2 = new BigNumber2(md);
-              if (!n2.isInteger() && (n2.c || n2.s !== 1) || n2.lt(ONE)) {
-                throw Error(bignumberError + "Argument " + (n2.isInteger() ? "out of range: " : "not an integer: ") + valueOf(n2));
-              }
-            }
-            if (!xc) return new BigNumber2(x2);
-            d = new BigNumber2(ONE);
-            n1 = d0 = new BigNumber2(ONE);
-            d1 = n0 = new BigNumber2(ONE);
-            s2 = coeffToString(xc);
-            e2 = d.e = s2.length - x2.e - 1;
-            d.c[0] = POWS_TEN[(exp = e2 % LOG_BASE) < 0 ? LOG_BASE + exp : exp];
-            md = !md || n2.comparedTo(d) > 0 ? e2 > 0 ? d : n1 : n2;
-            exp = MAX_EXP;
-            MAX_EXP = 1 / 0;
-            n2 = new BigNumber2(s2);
-            n0.c[0] = 0;
-            for (; ; ) {
-              q2 = div(n2, d, 0, 1);
-              d2 = d0.plus(q2.times(d1));
-              if (d2.comparedTo(md) == 1) break;
-              d0 = d1;
-              d1 = d2;
-              n1 = n0.plus(q2.times(d2 = n1));
-              n0 = d2;
-              d = n2.minus(q2.times(d2 = d));
-              n2 = d2;
-            }
-            d2 = div(md.minus(d0), d1, 0, 1);
-            n0 = n0.plus(d2.times(n1));
-            d0 = d0.plus(d2.times(d1));
-            n0.s = n1.s = x2.s;
-            e2 = e2 * 2;
-            r2 = div(n1, d1, e2, ROUNDING_MODE).minus(x2).abs().comparedTo(
-              div(n0, d0, e2, ROUNDING_MODE).minus(x2).abs()
-            ) < 1 ? [n1, d1] : [n0, d0];
-            MAX_EXP = exp;
-            return r2;
-          };
-          P2.toNumber = function() {
-            return +valueOf(this);
-          };
-          P2.toPrecision = function(sd, rm) {
-            if (sd != null) intCheck(sd, 1, MAX);
-            return format(this, sd, rm, 2);
-          };
-          P2.toString = function(b2) {
-            var str, n2 = this, s2 = n2.s, e2 = n2.e;
-            if (e2 === null) {
-              if (s2) {
-                str = "Infinity";
-                if (s2 < 0) str = "-" + str;
-              } else {
-                str = "NaN";
-              }
-            } else {
-              if (b2 == null) {
-                str = e2 <= TO_EXP_NEG || e2 >= TO_EXP_POS ? toExponential(coeffToString(n2.c), e2) : toFixedPoint(coeffToString(n2.c), e2, "0");
-              } else if (b2 === 10 && alphabetHasNormalDecimalDigits) {
-                n2 = round(new BigNumber2(n2), DECIMAL_PLACES + e2 + 1, ROUNDING_MODE);
-                str = toFixedPoint(coeffToString(n2.c), n2.e, "0");
-              } else {
-                intCheck(b2, 2, ALPHABET.length, "Base");
-                str = convertBase(toFixedPoint(coeffToString(n2.c), e2, "0"), 10, b2, s2, true);
-              }
-              if (s2 < 0 && n2.c[0]) str = "-" + str;
-            }
-            return str;
-          };
-          P2.valueOf = P2.toJSON = function() {
-            return valueOf(this);
-          };
-          P2._isBigNumber = true;
-          if (configObject != null) BigNumber2.set(configObject);
-          return BigNumber2;
-        }
-        function bitFloor(n2) {
-          var i2 = n2 | 0;
-          return n2 > 0 || n2 === i2 ? i2 : i2 - 1;
-        }
-        function coeffToString(a) {
-          var s2, z2, i2 = 1, j2 = a.length, r2 = a[0] + "";
-          for (; i2 < j2; ) {
-            s2 = a[i2++] + "";
-            z2 = LOG_BASE - s2.length;
-            for (; z2--; s2 = "0" + s2) ;
-            r2 += s2;
-          }
-          for (j2 = r2.length; r2.charCodeAt(--j2) === 48; ) ;
-          return r2.slice(0, j2 + 1 || 1);
-        }
-        function compare(x2, y2) {
-          var a, b2, xc = x2.c, yc = y2.c, i2 = x2.s, j2 = y2.s, k2 = x2.e, l2 = y2.e;
-          if (!i2 || !j2) return null;
-          a = xc && !xc[0];
-          b2 = yc && !yc[0];
-          if (a || b2) return a ? b2 ? 0 : -j2 : i2;
-          if (i2 != j2) return i2;
-          a = i2 < 0;
-          b2 = k2 == l2;
-          if (!xc || !yc) return b2 ? 0 : !xc ^ a ? 1 : -1;
-          if (!b2) return k2 > l2 ^ a ? 1 : -1;
-          j2 = (k2 = xc.length) < (l2 = yc.length) ? k2 : l2;
-          for (i2 = 0; i2 < j2; i2++) if (xc[i2] != yc[i2]) return xc[i2] > yc[i2] ^ a ? 1 : -1;
-          return k2 == l2 ? 0 : k2 > l2 ^ a ? 1 : -1;
-        }
-        function intCheck(n2, min, max, name) {
-          if (n2 < min || n2 > max || n2 !== mathfloor(n2)) {
-            throw Error(bignumberError + (name || "Argument") + (typeof n2 == "number" ? n2 < min || n2 > max ? " out of range: " : " not an integer: " : " not a primitive number: ") + String(n2));
-          }
-        }
-        function isOdd(n2) {
-          var k2 = n2.c.length - 1;
-          return bitFloor(n2.e / LOG_BASE) == k2 && n2.c[k2] % 2 != 0;
-        }
-        function toExponential(str, e2) {
-          return (str.length > 1 ? str.charAt(0) + "." + str.slice(1) : str) + (e2 < 0 ? "e" : "e+") + e2;
-        }
-        function toFixedPoint(str, e2, z2) {
-          var len, zs;
-          if (e2 < 0) {
-            for (zs = z2 + "."; ++e2; zs += z2) ;
-            str = zs + str;
-          } else {
-            len = str.length;
-            if (++e2 > len) {
-              for (zs = z2, e2 -= len; --e2; zs += z2) ;
-              str += zs;
-            } else if (e2 < len) {
-              str = str.slice(0, e2) + "." + str.slice(e2);
-            }
-          }
-          return str;
-        }
-        BigNumber = clone2();
-        BigNumber["default"] = BigNumber.BigNumber = BigNumber;
-        if (module.exports) {
-          module.exports = BigNumber;
-        } else {
-          if (!globalObject) {
-            globalObject = typeof self != "undefined" && self ? self : window;
-          }
-          globalObject.BigNumber = BigNumber;
-        }
-      })(bignumber);
-    })(bignumber$1);
-    return bignumber$1.exports;
-  }
-  var hasRequiredStringify;
-  function requireStringify() {
-    if (hasRequiredStringify) return stringify.exports;
-    hasRequiredStringify = 1;
-    (function(module) {
-      var BigNumber = requireBignumber();
-      var JSON2 = module.exports;
-      (function() {
-        var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g, gap, indent, meta2 = {
-          // table of character substitutions
-          "\b": "\\b",
-          "	": "\\t",
-          "\n": "\\n",
-          "\f": "\\f",
-          "\r": "\\r",
-          '"': '\\"',
-          "\\": "\\\\"
-        }, rep;
-        function quote(string2) {
-          escapable.lastIndex = 0;
-          return escapable.test(string2) ? '"' + string2.replace(escapable, function(a) {
-            var c2 = meta2[a];
-            return typeof c2 === "string" ? c2 : "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4);
-          }) + '"' : '"' + string2 + '"';
-        }
-        function str(key, holder) {
-          var i2, k2, v2, length, mind = gap, partial2, value = holder[key], isBigNumber = value != null && (value instanceof BigNumber || BigNumber.isBigNumber(value));
-          if (value && typeof value === "object" && typeof value.toJSON === "function") {
-            value = value.toJSON(key);
-          }
-          if (typeof rep === "function") {
-            value = rep.call(holder, key, value);
-          }
-          switch (typeof value) {
-            case "string":
-              if (isBigNumber) {
-                return value;
-              } else {
-                return quote(value);
-              }
-            case "number":
-              return isFinite(value) ? String(value) : "null";
-            case "boolean":
-            case "null":
-            case "bigint":
-              return String(value);
-            // If the type is 'object', we might be dealing with an object or an array or
-            // null.
-            case "object":
-              if (!value) {
-                return "null";
-              }
-              gap += indent;
-              partial2 = [];
-              if (Object.prototype.toString.apply(value) === "[object Array]") {
-                length = value.length;
-                for (i2 = 0; i2 < length; i2 += 1) {
-                  partial2[i2] = str(i2, value) || "null";
-                }
-                v2 = partial2.length === 0 ? "[]" : gap ? "[\n" + gap + partial2.join(",\n" + gap) + "\n" + mind + "]" : "[" + partial2.join(",") + "]";
-                gap = mind;
-                return v2;
-              }
-              if (rep && typeof rep === "object") {
-                length = rep.length;
-                for (i2 = 0; i2 < length; i2 += 1) {
-                  if (typeof rep[i2] === "string") {
-                    k2 = rep[i2];
-                    v2 = str(k2, value);
-                    if (v2) {
-                      partial2.push(quote(k2) + (gap ? ": " : ":") + v2);
-                    }
-                  }
-                }
-              } else {
-                Object.keys(value).forEach(function(k3) {
-                  var v3 = str(k3, value);
-                  if (v3) {
-                    partial2.push(quote(k3) + (gap ? ": " : ":") + v3);
-                  }
-                });
-              }
-              v2 = partial2.length === 0 ? "{}" : gap ? "{\n" + gap + partial2.join(",\n" + gap) + "\n" + mind + "}" : "{" + partial2.join(",") + "}";
-              gap = mind;
-              return v2;
-          }
-        }
-        if (typeof JSON2.stringify !== "function") {
-          JSON2.stringify = function(value, replacer, space) {
-            var i2;
-            gap = "";
-            indent = "";
-            if (typeof space === "number") {
-              for (i2 = 0; i2 < space; i2 += 1) {
-                indent += " ";
-              }
-            } else if (typeof space === "string") {
-              indent = space;
-            }
-            rep = replacer;
-            if (replacer && typeof replacer !== "function" && (typeof replacer !== "object" || typeof replacer.length !== "number")) {
-              throw new Error("JSON.stringify");
-            }
-            return str("", { "": value });
-          };
-        }
-      })();
-    })(stringify);
-    return stringify.exports;
-  }
-  var parse;
-  var hasRequiredParse;
-  function requireParse() {
-    if (hasRequiredParse) return parse;
-    hasRequiredParse = 1;
-    var BigNumber = null;
-    const suspectProtoRx = /(?:_|\\u005[Ff])(?:_|\\u005[Ff])(?:p|\\u0070)(?:r|\\u0072)(?:o|\\u006[Ff])(?:t|\\u0074)(?:o|\\u006[Ff])(?:_|\\u005[Ff])(?:_|\\u005[Ff])/;
-    const suspectConstructorRx = /(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)/;
-    var json_parse = function(options) {
-      var _options = {
-        strict: false,
-        // not being strict means do not generate syntax errors for "duplicate key"
-        storeAsString: false,
-        // toggles whether the values should be stored as BigNumber (default) or a string
-        alwaysParseAsBig: false,
-        // toggles whether all numbers should be Big
-        useNativeBigInt: false,
-        // toggles whether to use native BigInt instead of bignumber.js
-        protoAction: "error",
-        constructorAction: "error"
-      };
-      if (options !== void 0 && options !== null) {
-        if (options.strict === true) {
-          _options.strict = true;
-        }
-        if (options.storeAsString === true) {
-          _options.storeAsString = true;
-        }
-        _options.alwaysParseAsBig = options.alwaysParseAsBig === true ? options.alwaysParseAsBig : false;
-        _options.useNativeBigInt = options.useNativeBigInt === true ? options.useNativeBigInt : false;
-        if (typeof options.constructorAction !== "undefined") {
-          if (options.constructorAction === "error" || options.constructorAction === "ignore" || options.constructorAction === "preserve") {
-            _options.constructorAction = options.constructorAction;
-          } else {
-            throw new Error(
-              `Incorrect value for constructorAction option, must be "error", "ignore" or undefined but passed ${options.constructorAction}`
-            );
-          }
-        }
-        if (typeof options.protoAction !== "undefined") {
-          if (options.protoAction === "error" || options.protoAction === "ignore" || options.protoAction === "preserve") {
-            _options.protoAction = options.protoAction;
-          } else {
-            throw new Error(
-              `Incorrect value for protoAction option, must be "error", "ignore" or undefined but passed ${options.protoAction}`
-            );
-          }
-        }
-      }
-      var at, ch, escapee = {
-        '"': '"',
-        "\\": "\\",
-        "/": "/",
-        b: "\b",
-        f: "\f",
-        n: "\n",
-        r: "\r",
-        t: "	"
-      }, text2, error2 = function(m2) {
-        throw {
-          name: "SyntaxError",
-          message: m2,
-          at,
-          text: text2
-        };
-      }, next = function(c2) {
-        if (c2 && c2 !== ch) {
-          error2("Expected '" + c2 + "' instead of '" + ch + "'");
-        }
-        ch = text2.charAt(at);
-        at += 1;
-        return ch;
-      }, number2 = function() {
-        var number3, string3 = "";
-        if (ch === "-") {
-          string3 = "-";
-          next("-");
-        }
-        while (ch >= "0" && ch <= "9") {
-          string3 += ch;
-          next();
-        }
-        if (ch === ".") {
-          string3 += ".";
-          while (next() && ch >= "0" && ch <= "9") {
-            string3 += ch;
-          }
-        }
-        if (ch === "e" || ch === "E") {
-          string3 += ch;
-          next();
-          if (ch === "-" || ch === "+") {
-            string3 += ch;
-            next();
-          }
-          while (ch >= "0" && ch <= "9") {
-            string3 += ch;
-            next();
-          }
-        }
-        number3 = +string3;
-        if (!isFinite(number3)) {
-          error2("Bad number");
-        } else {
-          if (BigNumber == null) BigNumber = requireBignumber();
-          if (string3.length > 15)
-            return _options.storeAsString ? string3 : _options.useNativeBigInt ? BigInt(string3) : new BigNumber(string3);
-          else
-            return !_options.alwaysParseAsBig ? number3 : _options.useNativeBigInt ? BigInt(number3) : new BigNumber(number3);
-        }
-      }, string2 = function() {
-        var hex2, i2, string3 = "", uffff;
-        if (ch === '"') {
-          var startAt = at;
-          while (next()) {
-            if (ch === '"') {
-              if (at - 1 > startAt) string3 += text2.substring(startAt, at - 1);
-              next();
-              return string3;
-            }
-            if (ch === "\\") {
-              if (at - 1 > startAt) string3 += text2.substring(startAt, at - 1);
-              next();
-              if (ch === "u") {
-                uffff = 0;
-                for (i2 = 0; i2 < 4; i2 += 1) {
-                  hex2 = parseInt(next(), 16);
-                  if (!isFinite(hex2)) {
-                    break;
-                  }
-                  uffff = uffff * 16 + hex2;
-                }
-                string3 += String.fromCharCode(uffff);
-              } else if (typeof escapee[ch] === "string") {
-                string3 += escapee[ch];
-              } else {
-                break;
-              }
-              startAt = at;
-            }
-          }
-        }
-        error2("Bad string");
-      }, white = function() {
-        while (ch && ch <= " ") {
-          next();
-        }
-      }, word = function() {
-        switch (ch) {
-          case "t":
-            next("t");
-            next("r");
-            next("u");
-            next("e");
-            return true;
-          case "f":
-            next("f");
-            next("a");
-            next("l");
-            next("s");
-            next("e");
-            return false;
-          case "n":
-            next("n");
-            next("u");
-            next("l");
-            next("l");
-            return null;
-        }
-        error2("Unexpected '" + ch + "'");
-      }, value, array2 = function() {
-        var array3 = [];
-        if (ch === "[") {
-          next("[");
-          white();
-          if (ch === "]") {
-            next("]");
-            return array3;
-          }
-          while (ch) {
-            array3.push(value());
-            white();
-            if (ch === "]") {
-              next("]");
-              return array3;
-            }
-            next(",");
-            white();
-          }
-        }
-        error2("Bad array");
-      }, object2 = function() {
-        var key, object3 = /* @__PURE__ */ Object.create(null);
-        if (ch === "{") {
-          next("{");
-          white();
-          if (ch === "}") {
-            next("}");
-            return object3;
-          }
-          while (ch) {
-            key = string2();
-            white();
-            next(":");
-            if (_options.strict === true && Object.hasOwnProperty.call(object3, key)) {
-              error2('Duplicate key "' + key + '"');
-            }
-            if (suspectProtoRx.test(key) === true) {
-              if (_options.protoAction === "error") {
-                error2("Object contains forbidden prototype property");
-              } else if (_options.protoAction === "ignore") {
-                value();
-              } else {
-                object3[key] = value();
-              }
-            } else if (suspectConstructorRx.test(key) === true) {
-              if (_options.constructorAction === "error") {
-                error2("Object contains forbidden constructor property");
-              } else if (_options.constructorAction === "ignore") {
-                value();
-              } else {
-                object3[key] = value();
-              }
-            } else {
-              object3[key] = value();
-            }
-            white();
-            if (ch === "}") {
-              next("}");
-              return object3;
-            }
-            next(",");
-            white();
-          }
-        }
-        error2("Bad object");
-      };
-      value = function() {
-        white();
-        switch (ch) {
-          case "{":
-            return object2();
-          case "[":
-            return array2();
-          case '"':
-            return string2();
-          case "-":
-            return number2();
-          default:
-            return ch >= "0" && ch <= "9" ? number2() : word();
-        }
-      };
-      return function(source, reviver) {
-        var result;
-        text2 = source + "";
-        at = 0;
-        ch = " ";
-        result = value();
-        white();
-        if (ch) {
-          error2("Syntax error");
-        }
-        return typeof reviver === "function" ? (function walk(holder, key) {
-          var v2, value2 = holder[key];
-          if (value2 && typeof value2 === "object") {
-            Object.keys(value2).forEach(function(k2) {
-              v2 = walk(value2, k2);
-              if (v2 !== void 0) {
-                value2[k2] = v2;
-              } else {
-                delete value2[k2];
-              }
-            });
-          }
-          return reviver.call(holder, key, value2);
-        })({ "": result }, "") : result;
-      };
-    };
-    parse = json_parse;
-    return parse;
-  }
-  var hasRequiredJsonBigint;
-  function requireJsonBigint() {
-    if (hasRequiredJsonBigint) return jsonBigint.exports;
-    hasRequiredJsonBigint = 1;
-    var json_stringify = requireStringify().stringify;
-    var json_parse = requireParse();
-    jsonBigint.exports = function(options) {
-      return {
-        parse: json_parse(options),
-        stringify: json_stringify
-      };
-    };
-    jsonBigint.exports.parse = json_parse();
-    jsonBigint.exports.stringify = json_stringify;
-    return jsonBigint.exports;
-  }
-  var jsonBigintExports = requireJsonBigint();
-  const f = /* @__PURE__ */ getDefaultExportFromCjs(jsonBigintExports);
-  var h$1 = `@dan-uni/dan-any`, g$1 = `2.2.2`;
-  let _$1 = (function(e2) {
+  var c$2 = `@dan-uni/dan-any`, l$2 = `2.2.4`;
+  let u$1 = (function(e2) {
     return e2.Bangumi = `bgm`, e2.TMDB = `tmdb`, e2;
   })({});
-  const v$1 = Object.values(_$1);
-  let y$1 = (function(e2) {
+  const d = Object.values(u$1);
+  let f$1 = (function(e2) {
     return e2.Acfun = `acfun`, e2.Baha = `baha`, e2.Bilibili = `bili`, e2.BilibiliGlobal = `bglobal`, e2.Iqiyi = `iqiyi`, e2.Tencent = `tencent`, e2.Youku = `youku`, e2;
   })({});
-  const b$1 = Object.values(y$1);
-  let x$1 = (function(e2) {
+  const p = Object.values(f$1);
+  let m$2 = (function(e2) {
     return e2.DanDanPlay = `ddplay`, e2.TuCao = `tucao`, e2;
   })({});
-  const S$1 = Object.values(x$1), C$1 = [...b$1, ...S$1], w$1 = [...v$1, ...C$1], T$1 = templateLiteral([string$1(), `@`, string$1()]);
-  var E$1 = class e2 {
+  const h$1 = Object.values(m$2), g$1 = [...p, ...h$1], _$1 = [...d, ...g$1], v$1 = templateLiteral([string$1(), `@`, string$1()]);
+  var y$1 = class e2 {
     constructor(e3, t2) {
       __publicField(this, "id");
       __publicField(this, "domain");
       this.id = e3, this.domain = t2;
     }
     static validateString(e3) {
-      return T$1.safeParse(e3).success;
+      return v$1.safeParse(e3).success;
     }
     static fromStringSafe(e3) {
-      return this.fromString(T$1.parse(e3));
+      return this.fromString(v$1.parse(e3));
     }
     static fromString(t2) {
       let [n2, r2] = t2.split(`@`);
@@ -19407,168 +16506,132 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return t2 ? new e2(t2, n2) : this.fromNull(n2);
     }
   };
-  let D$1 = (function(e2) {
+  let b$1 = (function(e2) {
     return e2[e2.Normal = 0] = `Normal`, e2[e2.Bottom = 1] = `Bottom`, e2[e2.Top = 2] = `Top`, e2[e2.Reverse = 3] = `Reverse`, e2[e2.Ext = 4] = `Ext`, e2;
-  })({}), O$1 = (function(e2) {
+  })({}), x$1 = (function(e2) {
     return e2[e2.Def = 0] = `Def`, e2[e2.Sub = 1] = `Sub`, e2[e2.Adv = 2] = `Adv`, e2[e2.Ix = 3] = `Ix`, e2;
-  })({}), k$1 = (function(e2) {
+  })({}), S$1 = (function(e2) {
     return e2.Protect = `Protect`, e2.FromLive = `FromLive`, e2.HighLike = `HighLike`, e2.Compatible = `Compatible`, e2.Reported = `Reported`, e2.Unchecked = `Unchecked`, e2.HasEvent = `HasEvent`, e2.Hide = `Hide`, e2;
   })({});
-  const A$1 = { SOID: E$1.fromNull().toString(), progress: 0, mode: 0, fontsize: 25, color: 16777215, senderID: E$1.fromNull().toString(), content: ``, weight: 0, pool: 0, attr: [], platform: null, extra: null }, j$1 = { meassage: `Converted by DanUni!`, version: `JS/TS ${h$1} (v${g$1})` }, M$1 = f({ useNativeBigInt: true }), N$1 = (e2, t2 = 8) => {
-    let n2 = utf8ToBytes([e2.SOID, e2.progress, e2.mode, e2.fontsize, e2.color, e2.senderID, e2.content, e2.ctime.toISOString(), e2.weight, e2.pool, e2.attr.toSorted().join(`,`), e2.platform ?? null, M$1.stringify(e2.extra)].join(`|`));
-    return bytesToHex(sha3_256.create().update(n2).digest()).slice(0, t2);
-  };
-  function* P$1(e2, t2) {
-    let n2 = 2 ** 16 - 2, r2 = e2[0] ? Object.keys(e2[0]).length : 1, i2 = Math.floor(n2 / r2);
-    (!t2 || t2 > i2) && (t2 = i2);
-    for (let n3 = 0; n3 < e2.length; n3 += t2) yield e2.slice(n3, n3 + t2);
-  }
-  var F$1 = t$1({ InitedUniDB: () => R$1, UniChunk: () => z$1, UniDB: () => I$1 }), I$1 = class I {
-    constructor(e2 = n, t2 = N$1) {
+  const C$1 = { SOID: y$1.fromNull().toString(), progress: 0, mode: 0, fontsize: 25, color: 16777215, senderID: y$1.fromNull().toString(), content: ``, weight: 0, pool: 0, attr: [], platform: null, extra: null }, w$1 = { meassage: `Converted by DanUni!`, version: `JS/TS ${c$2} (v${l$2})` };
+  t({ DMAttr: () => S$1, DanUniConvertTipTemplate: () => w$1, InitedUniDB: () => D$1, Modes: () => b$1, PlatformDanmakuOnlySource: () => m$2, PlatformDanmakuOnlySources: () => h$1, PlatformDanmakuSources: () => g$1, PlatformInfoSource: () => u$1, PlatformInfoSources: () => d, PlatformSources: () => _$1, PlatformVideoSource: () => f$1, PlatformVideoSources: () => p, Pools: () => x$1, UniChunk: () => O$1, UniDB: () => E$1, UniID: () => y$1, createDMID: () => s$2, defaultUniDM: () => C$1 });
+  var E$1 = class E {
+    constructor(e2, t2 = s$2) {
       __publicField(this, "$db");
       __publicField(this, "DMIDGenerator");
       __publicField(this, "__isUniDB", true);
       this.$db = e2, this.DMIDGenerator = t2;
     }
-    async init(e2) {
-      return new R$1(await i(), this.DMIDGenerator);
+    static [Symbol.hasInstance](e2) {
+      return e2?.__isUniDB === true;
     }
-    async close() {
-      this.$db = null, await t();
-    }
-  };
-  async function L$1(e2, t2) {
-    t2 = t2.map((e3) => {
-      let t3 = e3.content;
-      return e3.content = t3.replace(/[\x00-\x1F\x7F]/g, ``), e3.content !== t3 && (e3.extra = { ...e3.extra, danuni: { ...e3.extra?.danuni, raw: { ...e3.extra?.danuni?.raw, content: Buffer.from(t3, `utf8`).toString(`base64`) } } }), e3;
-    });
-    for (let n2 of P$1(t2, 2340)) await e2.$db.insert(l).values(n2).onConflictDoUpdate(y$2.danmakus);
-  }
-  var R$1 = class R extends I$1 {
-    constructor(e2, t2 = N$1) {
+  }, D$1 = class D extends E$1 {
+    constructor(e2, t2 = s$2) {
       super(e2, t2);
       __publicField(this, "$db");
       __publicField(this, "DMIDGenerator");
       __publicField(this, "__isInitedUniDB", true);
       this.$db = e2, this.DMIDGenerator = t2;
     }
-    async dump() {
-      return await r(this.$db);
+    static [Symbol.hasInstance](e2) {
+      return e2?.__isInitedUniDB === true;
     }
-    get $chunks() {
-      return Promise.resolve(this.$db.query.chunks.findMany());
-    }
-    get $danmakus() {
-      return Promise.resolve(this.$db.query.chunks.findFirst({ with: { danmakus: true } }).then((e2) => e2?.danmakus ?? []));
-    }
-    async listChunks() {
-      return (await this.$chunks).map((e2) => new z$1(this, e2.id));
-    }
-    async makeChunk(e2) {
-      let t2 = await this.$db.insert(f$1).values(e2).returning();
-      return new z$1(this, t2[0].id);
-    }
-    async upsertDanmakus(e2, t2 = true) {
-      if (e2 instanceof Map) await this.upsertDanmakus([...e2.values()], false);
-      else if (t2) {
-        let t3 = /* @__PURE__ */ new Map();
-        e2.forEach((e3) => {
-          t3.set(e3.DMID, e3);
-        }), await L$1(this, [...t3.values()]);
-      } else await L$1(this, e2);
-    }
-    async shrink() {
-      let e2 = await this.$db.query.chunks.findMany({ where: { tmp: true } });
-      for (let t2 of e2) await new z$1(this, t2.id).delete();
-    }
-    import(e2) {
-      return e2(this);
-    }
-    async export(e2) {
-      return e2(await this.$danmakus, { DMIDGenerator: this.DMIDGenerator });
-    }
-  }, z$1 = class e2 {
-    constructor(e3, t2) {
+  }, O$1 = class O {
+    constructor(e2, t2) {
       __publicField(this, "$UniDB");
       __publicField(this, "id");
       __publicField(this, "__isUniChunk", true);
-      this.$UniDB = e3, this.id = t2;
+      this.$UniDB = e2, this.id = t2;
     }
-    get $db() {
-      return this.$UniDB.$db;
+    static [Symbol.hasInstance](e2) {
+      return e2?.__isUniChunk === true;
     }
-    static async makeChunk(e3, t2) {
-      return e3 instanceof R$1 ? e3.makeChunk(t2) : e3.$UniDB.makeChunk(t2);
+    static makeChunk(e2, t2) {
+      return e2 instanceof D$1 ? e2.makeChunk(t2) : e2.$UniDB.makeChunk(t2);
     }
-    static async assign(t2, r2) {
-      if (r2.length < 1) return t2;
-      let i2 = t2.$UniDB, a = t2.id, o2 = (await t2.$chunk()).fromConverted;
-      for (let e3 of r2) {
-        let n2 = await e3.$chunk();
-        o2 && (o2 = !!n2.fromConverted);
-        let r3 = await e3.$danmakus;
-        await t2.upsertDanmakus(r3, false), await e3.delete();
-      }
-      return await i2.$db.update(f$1).set({ fromConverted: o2 }).where(eq(f$1.id, a)), new e2(i2, a);
+    static assign(e2, t2) {
+      throw Error(`应当调用相应环境的实现`);
     }
-    static async compare(e3, t2) {
-      let n2 = await e3.$danmakus, r2 = await t2.$danmakus;
+    static async compare(e2, t2) {
+      let n2 = await e2.$danmakus, r2 = await t2.$danmakus;
       if (n2.length !== r2.length) return false;
-      let i2 = /* @__PURE__ */ new Set();
-      for (let e4 of n2) i2.add(e4.DMID);
-      for (let e4 of r2) {
-        let t3 = i2.has(e4.DMID);
-        if (!t3 || JSON.stringify(t3) !== JSON.stringify(e4)) return false;
+      let i = /* @__PURE__ */ new Set();
+      for (let e3 of n2) i.add(e3.DMID);
+      for (let e3 of r2) {
+        let t3 = i.has(e3.DMID);
+        if (!t3 || JSON.stringify(t3) !== JSON.stringify(e3)) return false;
       }
       return true;
     }
-    get $chunks() {
-      return this.$db.select().from(f$1).where(eq(f$1.id, this.id));
+  };
+  var n = (_a2 = class {
+    constructor() {
+      __privateAdd(this, _e2, /* @__PURE__ */ new Map());
+      __privateAdd(this, _t, []);
+      __privateAdd(this, _n, 0);
     }
-    async $chunk() {
-      return (await this.$chunks)[0];
+    get nextSerial() {
+      return __privateGet(this, _t).length > 0 ? __privateGet(this, _t).shift() : __privateWrapper(this, _n)._++;
     }
-    get $danmakus() {
-      return this.$db.query.chunks.findFirst({ where: { id: this.id }, with: { danmakus: true } }).then((e3) => e3?.danmakus ?? []);
+    add(e2) {
+      return __privateGet(this, _e2).set(this.nextSerial, e2), this;
     }
-    get $count() {
-      return this.$db.$count(m$1, eq(m$1.chunkID, this.id));
+    delete(e2) {
+      let t2 = __privateGet(this, _e2).delete(e2);
+      return t2 && __privateGet(this, _t).push(e2), t2;
     }
-    get isDeleted() {
-      return this.$chunks.then((e3) => e3.length === 0);
+    clear() {
+      __privateGet(this, _e2).clear(), __privateSet(this, _t, []), __privateSet(this, _n, 0);
     }
-    async upsertDanmakus(e3, n2 = false, r2 = true) {
-      let i2 = /* @__PURE__ */ new Set();
-      e3 instanceof Map ? (await this.$UniDB.upsertDanmakus([...e3.values()], false), e3.forEach((e4) => i2.add(e4.DMID))) : (n2 ? e3 = e3.map((e4) => {
-        let t2 = this.$UniDB.DMIDGenerator(e4);
-        return i2.add(t2), { ...e4, DMID: t2 };
-      }) : e3.forEach((e4) => {
-        i2.add(e4.DMID);
-      }), await this.$UniDB.upsertDanmakus(e3, r2));
-      for (let e4 of P$1([...i2].map((e5) => ({ chunkID: this.id, DMID: e5 })), 2340)) await this.$db.insert(m$1).values(e4).onConflictDoNothing();
+    toJSON() {
+      return { $typeName: `SerialMap`, "#map": __privateGet(this, _e2).entries().toArray(), "#freeSerials": __privateGet(this, _t), "#nextSerial": __privateGet(this, _n) };
     }
-    import(e3) {
-      return e3(this.$UniDB, this);
+    static fromJSON(t2) {
+      if (t2.$typeName !== `SerialMap`) throw Error(`Invalid data for SerialMap`);
+      let n2 = new _a2();
+      return __privateSet(n2, _e2, new Map(t2[`#map`])), __privateSet(n2, _t, t2[`#freeSerials`]), __privateSet(n2, _n, t2[`#nextSerial`]), n2;
     }
-    async export(e3) {
-      return e3(await this.$danmakus, { DMIDGenerator: this.$UniDB.DMIDGenerator, uchunk: await this.$chunk() });
+    get size() {
+      return __privateGet(this, _e2).size;
     }
-    plugin(e3) {
-      return e3(this);
+    has(...e2) {
+      return __privateGet(this, _e2).has(...e2);
     }
-    async delete() {
-      await this.$db.transaction(async (e3) => {
-        let i2 = (await e3.select().from(m$1).where(eq(m$1.chunkID, this.id))).map((e4) => e4.DMID);
-        await e3.delete(m$1).where(eq(m$1.chunkID, this.id));
-        for (let n2 of i2) (await e3.select().from(m$1).where(eq(m$1.DMID, n2))).length === 0 && await e3.delete(l).where(eq(l.DMID, n2));
-        await e3.delete(f$1).where(eq(f$1.id, this.id));
-      });
+    get(...e2) {
+      return __privateGet(this, _e2).get(...e2);
     }
-  }, B$1 = (_pf = class {
+    set(...e2) {
+      return __privateGet(this, _e2).set(...e2), this;
+    }
+    getOrInsert(...e2) {
+      return __privateGet(this, _e2).getOrInsert(...e2);
+    }
+    getOrInsertComputed(...e2) {
+      return __privateGet(this, _e2).getOrInsertComputed(...e2);
+    }
+    forEach(...e2) {
+      return __privateGet(this, _e2).forEach(...e2);
+    }
+    keys(...e2) {
+      return __privateGet(this, _e2).keys(...e2);
+    }
+    values(...e2) {
+      return __privateGet(this, _e2).values(...e2);
+    }
+    entries(...e2) {
+      return __privateGet(this, _e2).entries(...e2);
+    }
+    [Symbol.iterator]() {
+      return __privateGet(this, _e2)[Symbol.iterator]();
+    }
+    get [Symbol.toStringTag]() {
+      return `SerialMap`;
+    }
+  }, _e2 = new WeakMap(), _t = new WeakMap(), _n = new WeakMap(), _a2), r = (_b = class {
     constructor() {
       __privateAdd(this, _e3, /* @__PURE__ */ new Map());
       __privateAdd(this, _t2, []);
-      __privateAdd(this, _n2, 0);
+      __privateAdd(this, _n2, 0n);
     }
     get nextSerial() {
       return __privateGet(this, _t2).length > 0 ? __privateGet(this, _t2).shift() : __privateWrapper(this, _n2)._++;
@@ -19581,15 +16644,15 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return t2 && __privateGet(this, _t2).push(e2), t2;
     }
     clear() {
-      __privateGet(this, _e3).clear(), __privateSet(this, _t2, []), __privateSet(this, _n2, 0);
+      __privateGet(this, _e3).clear(), __privateSet(this, _t2, []), __privateSet(this, _n2, 0n);
     }
     toJSON() {
-      return { $typeName: `SerialMap`, "#map": __privateGet(this, _e3).entries().toArray(), "#freeSerials": __privateGet(this, _t2), "#nextSerial": __privateGet(this, _n2) };
+      return { $typeName: `BigSerialMap`, "#map": __privateGet(this, _e3).entries().map(([e2, t2]) => [e2.toString(), t2]).toArray(), "#freeSerials": __privateGet(this, _t2).map((e2) => e2.toString()), "#nextSerial": __privateGet(this, _n2).toString() };
     }
     static fromJSON(t2) {
-      if (t2.$typeName !== `SerialMap`) throw Error(`Invalid data for SerialMap`);
-      let n2 = new _pf();
-      return __privateSet(n2, _e3, new Map(t2[`#map`])), __privateSet(n2, _t2, t2[`#freeSerials`]), __privateSet(n2, _n2, t2[`#nextSerial`]), n2;
+      if (t2.$typeName !== `BigSerialMap`) throw Error(`Invalid data for BigSerialMap`);
+      let n2 = new _b();
+      return __privateSet(n2, _e3, new Map(t2[`#map`].map(([e2, t3]) => [BigInt(e2), t3]))), __privateSet(n2, _t2, t2[`#freeSerials`].map(BigInt)), __privateSet(n2, _n2, BigInt(t2[`#nextSerial`])), n2;
     }
     get size() {
       return __privateGet(this, _e3).size;
@@ -19625,103 +16688,41 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return __privateGet(this, _e3)[Symbol.iterator]();
     }
     get [Symbol.toStringTag]() {
-      return `SerialMap`;
-    }
-  }, _e3 = new WeakMap(), _t2 = new WeakMap(), _n2 = new WeakMap(), _pf), V$1 = (_qf = class {
-    constructor() {
-      __privateAdd(this, _e4, /* @__PURE__ */ new Map());
-      __privateAdd(this, _t3, []);
-      __privateAdd(this, _n3, 0n);
-    }
-    get nextSerial() {
-      return __privateGet(this, _t3).length > 0 ? __privateGet(this, _t3).shift() : __privateWrapper(this, _n3)._++;
-    }
-    add(e2) {
-      return __privateGet(this, _e4).set(this.nextSerial, e2), this;
-    }
-    delete(e2) {
-      let t2 = __privateGet(this, _e4).delete(e2);
-      return t2 && __privateGet(this, _t3).push(e2), t2;
-    }
-    clear() {
-      __privateGet(this, _e4).clear(), __privateSet(this, _t3, []), __privateSet(this, _n3, 0n);
-    }
-    toJSON() {
-      return { $typeName: `BigSerialMap`, "#map": __privateGet(this, _e4).entries().map(([e2, t2]) => [e2.toString(), t2]).toArray(), "#freeSerials": __privateGet(this, _t3).map((e2) => e2.toString()), "#nextSerial": __privateGet(this, _n3).toString() };
-    }
-    static fromJSON(t2) {
-      if (t2.$typeName !== `BigSerialMap`) throw Error(`Invalid data for BigSerialMap`);
-      let n2 = new _qf();
-      return __privateSet(n2, _e4, new Map(t2[`#map`].map(([e2, t3]) => [BigInt(e2), t3]))), __privateSet(n2, _t3, t2[`#freeSerials`].map(BigInt)), __privateSet(n2, _n3, BigInt(t2[`#nextSerial`])), n2;
-    }
-    get size() {
-      return __privateGet(this, _e4).size;
-    }
-    has(...e2) {
-      return __privateGet(this, _e4).has(...e2);
-    }
-    get(...e2) {
-      return __privateGet(this, _e4).get(...e2);
-    }
-    set(...e2) {
-      return __privateGet(this, _e4).set(...e2), this;
-    }
-    getOrInsert(...e2) {
-      return __privateGet(this, _e4).getOrInsert(...e2);
-    }
-    getOrInsertComputed(...e2) {
-      return __privateGet(this, _e4).getOrInsertComputed(...e2);
-    }
-    forEach(...e2) {
-      return __privateGet(this, _e4).forEach(...e2);
-    }
-    keys(...e2) {
-      return __privateGet(this, _e4).keys(...e2);
-    }
-    values(...e2) {
-      return __privateGet(this, _e4).values(...e2);
-    }
-    entries(...e2) {
-      return __privateGet(this, _e4).entries(...e2);
-    }
-    [Symbol.iterator]() {
-      return __privateGet(this, _e4)[Symbol.iterator]();
-    }
-    get [Symbol.toStringTag]() {
       return `BigSerialMap`;
     }
-  }, _e4 = new WeakMap(), _t3 = new WeakMap(), _n3 = new WeakMap(), _qf), H$1 = t$1({ InitedUniDB: () => q$1, UniChunk: () => J$1, UniDB: () => G$1, initNewDb: () => W$1 });
-  const U$1 = { danmakus: /* @__PURE__ */ new Map(), chunks: new B$1(), chunk2danmakus: new V$1() };
-  function W$1() {
-    return { ...U$1 };
+  }, _e3 = new WeakMap(), _t2 = new WeakMap(), _n2 = new WeakMap(), _b);
+  t({ InitedUniDB: () => l$1, UniChunk: () => u, UniDB: () => s$1, initNewDb: () => o$1 });
+  const a = { danmakus: /* @__PURE__ */ new Map(), chunks: new n(), chunk2danmakus: new r() };
+  function o$1() {
+    return { ...a };
   }
-  var G$1 = class G {
-    constructor(e2 = U$1, t2 = N$1) {
+  var s$1 = class s {
+    constructor(e2 = a, n2 = s$2) {
       __publicField(this, "$db");
       __publicField(this, "DMIDGenerator");
       __publicField(this, "__isUniDB", true);
-      this.$db = e2, this.DMIDGenerator = t2;
+      this.$db = e2, this.DMIDGenerator = n2;
     }
     init(e2) {
-      return e2 ? this.$db = { danmakus: new Map(e2.danmakus.map((e3) => [e3.DMID, e3])), chunks: B$1.fromJSON(e2.chunks), chunk2danmakus: V$1.fromJSON(e2.chunk2danmakus) } : this.$db = U$1, new q$1(this.$db, this.DMIDGenerator);
+      return e2 ? this.$db = { danmakus: new Map(e2.danmakus.map((e3) => [e3.DMID, e3])), chunks: n.fromJSON(e2.chunks), chunk2danmakus: r.fromJSON(e2.chunk2danmakus) } : this.$db = a, new l$1(this.$db, this.DMIDGenerator);
     }
     close() {
-      this.$db = { danmakus: /* @__PURE__ */ new Map(), chunks: new B$1(), chunk2danmakus: new V$1() };
+      this.$db = { danmakus: /* @__PURE__ */ new Map(), chunks: new n(), chunk2danmakus: new r() };
     }
   };
-  function K$1(e2, t2) {
+  function c$1(e2, t2) {
     t2.forEach((t3) => {
       let n2 = t3.content;
       t3.content = n2.replace(/[\x00-\x1F\x7F]/g, ``), t3.content !== n2 && (t3.extra = { ...t3.extra, danuni: { ...t3.extra?.danuni, raw: { ...t3.extra?.danuni?.raw, content: Buffer.from(n2, `utf8`).toString(`base64`) } } }), e2.$db.danmakus.set(t3.DMID, { ...t3, platform: t3.platform ?? null });
     });
   }
-  var q$1 = class q extends G$1 {
-    constructor(e2, t2 = N$1) {
-      super(e2, t2);
+  var l$1 = class l extends s$1 {
+    constructor(e2, n2 = s$2) {
+      super(e2, n2);
       __publicField(this, "$db");
       __publicField(this, "DMIDGenerator");
       __publicField(this, "__isInitedUniDB", true);
-      this.$db = e2, this.DMIDGenerator = t2;
+      this.$db = e2, this.DMIDGenerator = n2;
     }
     dump() {
       return { danmakus: [...this.$db.danmakus.values()], chunks: this.$db.chunks.toJSON(), chunk2danmakus: this.$db.chunk2danmakus.toJSON() };
@@ -19733,11 +16734,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return [...this.$db.danmakus.values()];
     }
     listChunks() {
-      return this.$chunks.map((e2) => new J$1(this, e2.id));
+      return this.$chunks.map((e2) => new u(this, e2.id));
     }
     makeChunk(e2) {
       let t2 = this.$db.chunks.nextSerial;
-      return this.$db.chunks.set(t2, { id: t2, fromConverted: e2.fromConverted ?? false, tmp: e2.tmp ?? false }), new J$1(this, t2);
+      return this.$db.chunks.set(t2, { id: t2, fromConverted: e2.fromConverted ?? false, tmp: e2.tmp ?? false }), new u(this, t2);
     }
     upsertDanmakus(e2, t2 = true) {
       if (e2 instanceof Map) this.upsertDanmakus([...e2.values()], false);
@@ -19745,12 +16746,12 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         let t3 = /* @__PURE__ */ new Map();
         e2.forEach((e3) => {
           t3.set(e3.DMID, e3);
-        }), K$1(this, [...t3.values()]);
-      } else K$1(this, e2);
+        }), c$1(this, [...t3.values()]);
+      } else c$1(this, e2);
     }
     shrink() {
       let e2 = this.$db.chunks.values().filter((e3) => e3.tmp);
-      for (let t2 of e2) new J$1(this, t2.id).delete();
+      for (let t2 of e2) new u(this, t2.id).delete();
     }
     import(e2) {
       return e2(this);
@@ -19758,7 +16759,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     export(e2) {
       return e2(this.$danmakus, { DMIDGenerator: this.DMIDGenerator });
     }
-  }, J$1 = class e2 {
+  }, u = class e2 {
     constructor(e3, t2) {
       __publicField(this, "$UniDB");
       __publicField(this, "id");
@@ -19769,24 +16770,24 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return this.$UniDB.$db;
     }
     static makeChunk(e3, t2) {
-      return e3 instanceof q$1 ? e3.makeChunk(t2) : e3.$UniDB.makeChunk(t2);
+      return e3 instanceof l$1 ? e3.makeChunk(t2) : e3.$UniDB.makeChunk(t2);
     }
     static assign(t2, n2) {
       if (n2.length < 1) return t2;
-      let r2 = t2.id, i2 = t2.$chunk(), a = i2.fromConverted;
+      let r2 = t2.id, i = t2.$chunk(), a2 = i.fromConverted;
       for (let e3 of n2) {
         let n3 = e3.$chunk();
-        a && (a = !!n3.fromConverted), t2.upsertDanmakus(e3.$danmakus, false), e3.delete();
+        a2 && (a2 = !!n3.fromConverted), t2.upsertDanmakus(e3.$danmakus, false), e3.delete();
       }
-      return t2.$db.chunks.set(r2, { ...i2, fromConverted: a }), new e2(t2.$UniDB, r2);
+      return t2.$db.chunks.set(r2, { ...i, fromConverted: a2 }), new e2(t2.$UniDB, r2);
     }
     static compare(e3, t2) {
       let n2 = e3.$danmakus, r2 = t2.$danmakus;
       if (n2.length !== r2.length) return false;
-      let i2 = /* @__PURE__ */ new Set();
-      for (let e4 of n2) i2.add(e4.DMID);
+      let i = /* @__PURE__ */ new Set();
+      for (let e4 of n2) i.add(e4.DMID);
       for (let e4 of r2) {
-        let t3 = i2.has(e4.DMID);
+        let t3 = i.has(e4.DMID);
         if (!t3 || JSON.stringify(t3) !== JSON.stringify(e4)) return false;
       }
       return true;
@@ -19837,57 +16838,6 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }), this.$db.chunks.delete(this.id);
     }
   };
-  t$1({ DMAttr: () => k$1, DanUniConvertTipTemplate: () => j$1, InitedUniDB: () => Z$1, Modes: () => D$1, PlatformDanmakuOnlySource: () => x$1, PlatformDanmakuOnlySources: () => S$1, PlatformDanmakuSources: () => C$1, PlatformInfoSource: () => _$1, PlatformInfoSources: () => v$1, PlatformSources: () => w$1, PlatformVideoSource: () => y$1, PlatformVideoSources: () => b$1, Pools: () => O$1, UniChunk: () => Q$1, UniDB: () => X$1, UniID: () => E$1, createDMID: () => N$1, defaultUniDM: () => A$1, main: () => $$1 });
-  var X$1 = class X {
-    constructor(e2, t2 = N$1) {
-      __publicField(this, "$db");
-      __publicField(this, "DMIDGenerator");
-      __publicField(this, "__isUniDB", true);
-      this.$db = e2, this.DMIDGenerator = t2;
-    }
-    static [Symbol.hasInstance](e2) {
-      return e2?.__isUniDB === true;
-    }
-  }, Z$1 = class Z extends X$1 {
-    constructor(e2, t2 = N$1) {
-      super(e2, t2);
-      __publicField(this, "$db");
-      __publicField(this, "DMIDGenerator");
-      __publicField(this, "__isInitedUniDB", true);
-      this.$db = e2, this.DMIDGenerator = t2;
-    }
-    static [Symbol.hasInstance](e2) {
-      return e2?.__isInitedUniDB === true;
-    }
-  }, Q$1 = class Q {
-    constructor(e2, t2) {
-      __publicField(this, "$UniDB");
-      __publicField(this, "id");
-      __publicField(this, "__isUniChunk", true);
-      this.$UniDB = e2, this.id = t2;
-    }
-    static [Symbol.hasInstance](e2) {
-      return e2?.__isUniChunk === true;
-    }
-    static makeChunk(e2, t2) {
-      return e2 instanceof Z$1 ? e2.makeChunk(t2) : e2.$UniDB.makeChunk(t2);
-    }
-    static assign(e2, t2) {
-      throw Error(`应当调用相应环境的实现`);
-    }
-    static async compare(e2, t2) {
-      let n2 = await e2.$danmakus, r2 = await t2.$danmakus;
-      if (n2.length !== r2.length) return false;
-      let i2 = /* @__PURE__ */ new Set();
-      for (let e3 of n2) i2.add(e3.DMID);
-      for (let e3 of r2) {
-        let t3 = i2.has(e3.DMID);
-        if (!t3 || JSON.stringify(t3) !== JSON.stringify(e3)) return false;
-      }
-      return true;
-    }
-  };
-  const $$1 = { drizzle: F$1, pure: H$1 };
   const iconCheckOff = '<svg  class="apd-icon apd-check-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 32 32" width="32"  height="32" ><path d="M8 6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H8zm0-2h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z" fill="#FFFFFF"></path></svg>';
   const iconCheckOn = '<svg class="apd-icon apd-check-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 32 32" width="32"  height="32" ><path d="m13 18.25-1.8-1.8c-.6-.6-1.65-.6-2.25 0s-.6 1.5 0 2.25l2.85 2.85c.318.318.762.468 1.2.448.438.02.882-.13 1.2-.448l8.85-8.85c.6-.6.6-1.65 0-2.25s-1.65-.6-2.25 0l-7.8 7.8zM8 4h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z" fill="#00AEEC"></path></svg>';
   const iconConfig = '<svg class="apd-icon apd-config-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 24 24" width="24"  height="24" ><path fill-rule="evenodd" d="m15.645 4.881 1.06-1.473a.998.998 0 1 0-1.622-1.166L13.22 4.835a110.67 110.67 0 0 0-1.1-.007h-.131c-.47 0-.975.004-1.515.012L8.783 2.3A.998.998 0 0 0 7.12 3.408l.988 1.484c-.688.019-1.418.042-2.188.069a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363c1.903.094 3.317.141 5.513.141a.988.988 0 0 0 0-1.975 97.58 97.58 0 0 1-5.416-.139 2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.005.183.01.07.014-.038.004-.096.008-.189.011-.081a.987.987 0 1 0 1.974-.069c-.004-.105-.007-.009-.011.09-.002.056-.004.112-.007.135l-.002.01a.574.574 0 0 1-.005-.091v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.905-.032-1.752-.058-2.543-.079Zm-3.113 4.703h-1.307v4.643h2.2v.04l.651-1.234c.113-.215.281-.389.482-.509v-.11h.235c.137-.049.283-.074.433-.074h1.553V9.584h-1.264a8.5 8.5 0 0 0 .741-1.405l-1.078-.381c-.24.631-.501 1.23-.806 1.786h-1.503l.686-.305c-.228-.501-.5-.959-.806-1.394l-1.034.348c.294.392.566.839.817 1.35Zm-1.7 5.502h2.16l-.564 1.068h-1.595v-1.068Zm-2.498-1.863.152-1.561h1.96V8.289H7.277v.969h2.048v1.435h-1.84l-.306 3.51h2.254c0 1.155-.043 1.906-.12 2.255-.076.348-.38.523-.925.523-.305 0-.61-.022-.893-.055l.294 1.056.061.005c.282.02.546.039.81.039.991-.065 1.547-.414 1.677-1.046.11-.631.175-1.883.175-3.757H8.334Zm5.09-.8v.85h-1.188v-.85h1.187Zm-1.188-.955h1.187v-.893h-1.187v.893Zm2.322.007v-.893h1.241v.893h-1.241Zm.528 2.757a1.26 1.26 0 0 1 1.087-.627l4.003-.009a1.26 1.26 0 0 1 1.094.63l1.721 2.982c.226.39.225.872-.001 1.263l-1.743 3a1.26 1.26 0 0 1-1.086.628l-4.003.009a1.26 1.26 0 0 1-1.094-.63l-1.722-2.982a1.26 1.26 0 0 1 .002-1.263l1.742-3Zm1.967.858a1.26 1.26 0 0 0-1.08.614l-.903 1.513a1.26 1.26 0 0 0-.002 1.289l.885 1.492c.227.384.64.62 1.086.618l2.192-.005a1.26 1.26 0 0 0 1.08-.615l.904-1.518a1.26 1.26 0 0 0 .001-1.288l-.884-1.489a1.26 1.26 0 0 0-1.086-.616l-2.193.005Zm2.517 2.76a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0Z" clip-rule="evenodd"></path></svg>';
@@ -19914,7 +16864,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   font-family: SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif;
   text-shadow: rgb(0 0 0) 1px 0 1px, rgb(0 0 0) 0 1px 1px, rgb(0 0 0) 0 -1px 1px, rgb(0 0 0) -1px 0 1px;
 `;
-  function clamp(value, min, max) {
+  function clamp$1(value, min, max) {
     return Math.max(min, Math.min(max, value));
   }
   function getDanmakuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {
@@ -20019,7 +16969,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return modes.filter((mode) => RENDER_MODES.includes(mode));
   }
   function normalizeColorNumber(color) {
-    return `#${clamp(Math.round(color), 0, 16777215).toString(16).padStart(6, "0")}`;
+    return `#${clamp$1(Math.round(color), 0, 16777215).toString(16).padStart(6, "0")}`;
   }
   function normalizeColor(color) {
     if (typeof color === "number" && Number.isFinite(color)) {
@@ -20055,6 +17005,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       synchronousPlayback: false,
       visible: true,
       emitter: true,
+      heatmap: false,
+      points: [],
       plugins: [],
       maxLength: 200,
       width: 512,
@@ -20062,12 +17014,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       beforeVisible: () => true,
       ...option
     };
-    normalized.speed = clamp(Number(normalized.speed) || 5, 1, 10);
-    normalized.opacity = clamp(Number(normalized.opacity) || 0, 0, 1);
-    normalized.maxLength = clamp(Number(normalized.maxLength) || 200, 1, 1e3);
+    normalized.speed = clamp$1(Number(normalized.speed) || 5, 1, 10);
+    normalized.opacity = clamp$1(Number(normalized.opacity) || 0, 0, 1);
+    normalized.maxLength = clamp$1(Number(normalized.maxLength) || 200, 1, 1e3);
     normalized.margin = Array.isArray(normalized.margin) ? normalized.margin : [10, "25%"];
     normalized.modes = normalizeModes(normalized.modes);
     normalized.plugins = Array.isArray(normalized.plugins) ? normalized.plugins.filter((plugin) => typeof plugin === "function") : [];
+    normalized.heatmap = normalized.heatmap && typeof normalized.heatmap === "object" ? { ...normalized.heatmap } : !!normalized.heatmap;
+    normalized.points = Array.isArray(normalized.points) ? [...normalized.points] : [];
     normalized.filter = typeof normalized.filter === "function" ? normalized.filter : () => true;
     normalized.beforeVisible = typeof normalized.beforeVisible === "function" ? normalized.beforeVisible : () => true;
     return normalized;
@@ -20114,18 +17068,18 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       const value = this.option.margin[0];
       const { clientHeight } = this.$player;
       if (typeof value === "number")
-        return clamp(value, 0, clientHeight);
+        return clamp$1(value, 0, clientHeight);
       if (typeof value === "string" && value.endsWith("%"))
-        return clamp(clientHeight * Number.parseFloat(value) / 100, 0, clientHeight);
+        return clamp$1(clientHeight * Number.parseFloat(value) / 100, 0, clientHeight);
       return 10;
     }
     get marginBottom() {
       const value = this.option.margin[1];
       const { clientHeight } = this.$player;
       if (typeof value === "number")
-        return clamp(value, 0, clientHeight);
+        return clamp$1(value, 0, clientHeight);
       if (typeof value === "string" && value.endsWith("%"))
-        return clamp(clientHeight * Number.parseFloat(value) / 100, 0, clientHeight);
+        return clamp$1(clientHeight * Number.parseFloat(value) / 100, 0, clientHeight);
       return clientHeight * 0.25;
     }
     get $ref() {
@@ -20178,10 +17132,10 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       const value = this.option.fontSize;
       const { clientHeight } = this.$player;
       if (typeof value === "number")
-        return Math.round(clamp(value, 12, clientHeight));
+        return Math.round(clamp$1(value, 12, clientHeight));
       if (typeof value === "string" && value.endsWith("%"))
-        return Math.round(clamp(clientHeight * Number.parseFloat(value) / 100, 12, clientHeight));
-      return Math.round(clamp(Number(danmaku.fontsize) || 25, 12, clientHeight || 25));
+        return Math.round(clamp$1(clientHeight * Number.parseFloat(value) / 100, 12, clientHeight));
+      return Math.round(clamp$1(Number(danmaku.fontsize) || 25, 12, clientHeight || 25));
     }
     getState(danmaku) {
       let state = this.stateMap.get(danmaku);
@@ -20820,11 +17774,3185 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       this.$control.remove();
     }
   }
+  const CONTROL_NAME = "danAnyHeatmap";
+  const GRADIENT_ID = "dan-any-heatmap-solids";
+  const START_ID = "dan-any-heatmap-start";
+  const STOP_ID = "dan-any-heatmap-stop";
+  const lib = {
+    map(value, inMin, inMax, outMin, outMax) {
+      if (inMin === inMax)
+        return outMin;
+      return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    }
+  };
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+  function toNumber$1(value, fallback) {
+    const number2 = Number(value);
+    return Number.isFinite(number2) ? number2 : fallback;
+  }
+  function line$1(pointA, pointB) {
+    const lengthX = pointB[0] - pointA[0];
+    const lengthY = pointB[1] - pointA[1];
+    return {
+      length: Math.sqrt(lengthX ** 2 + lengthY ** 2),
+      angle: Math.atan2(lengthY, lengthX)
+    };
+  }
+  function getOptions(svg, option) {
+    const options = {
+      xMin: 0,
+      xMax: svg.w,
+      yMin: 0,
+      yMax: 128,
+      scale: 0.25,
+      opacity: 0.2,
+      minHeight: Math.floor(svg.h * 0.05),
+      sampling: Math.max(1, Math.floor(svg.w / 100)),
+      smoothing: 0.2,
+      flattening: 0.2
+    };
+    if (option && typeof option === "object") {
+      Object.keys(options).forEach((key) => {
+        if (option[key] !== void 0)
+          options[key] = toNumber$1(option[key], options[key]);
+      });
+    }
+    options.sampling = Math.max(1, Math.round(options.sampling));
+    options.opacity = clamp(options.opacity, 0, 1);
+    return options;
+  }
+  function getQueue(danAny) {
+    if (Array.isArray(danAny.renderer?.queue))
+      return danAny.renderer.queue;
+    return Array.isArray(danAny.udanmakus) ? danAny.udanmakus : [];
+  }
+  function getDanmakuTime(danmaku) {
+    const progress = Number(danmaku?.progress);
+    if (!Number.isFinite(progress))
+      return null;
+    return progress / 1e3;
+  }
+  function getPointTime(point2) {
+    if (!point2 || typeof point2 !== "object")
+      return null;
+    const time2 = Number(point2.time);
+    if (!Number.isFinite(time2))
+      return null;
+    return time2;
+  }
+  function getPointValue(point2) {
+    const value = Number(point2.value);
+    if (!Number.isFinite(value))
+      return null;
+    return Math.max(0, value);
+  }
+  function getExternalPoints(points, art, svg) {
+    if (!Array.isArray(points) || !points.length)
+      return [];
+    return points.map((point2) => {
+      const time2 = getPointTime(point2);
+      const value = getPointValue(point2);
+      if (time2 === null || value === null)
+        return null;
+      return [
+        clamp(time2, 0, art.duration) / art.duration * svg.w,
+        value
+      ];
+    }).filter(Boolean).sort((prev, next) => prev[0] - next[0]);
+  }
+  function getAutoPoints(art, danAny, svg, options) {
+    const queue = getQueue(danAny);
+    const gap = art.duration / svg.w;
+    const points = [];
+    for (let x2 = 0; x2 <= svg.w; x2 += options.sampling) {
+      const start = x2 * gap;
+      const end = (x2 + options.sampling) * gap;
+      const y2 = queue.filter((danmaku) => {
+        const time2 = getDanmakuTime(danmaku);
+        return time2 !== null && time2 > start && time2 <= end;
+      }).length;
+      points.push([x2, y2]);
+    }
+    return points;
+  }
+  function resolvePoints(points, runtimePoints, art, danAny, svg, options) {
+    const source = Array.isArray(points) ? points : Array.isArray(runtimePoints) ? runtimePoints : danAny.option.points;
+    const externalPoints = getExternalPoints(source, art, svg);
+    if (externalPoints.length)
+      return externalPoints;
+    return getAutoPoints(art, danAny, svg, options);
+  }
+  function fillEdges(points, width) {
+    if (!points.length)
+      return;
+    const firstPoint = points[0];
+    const lastPoint = points[points.length - 1];
+    if (firstPoint[0] !== 0)
+      points.unshift([0, firstPoint[1]]);
+    if (lastPoint[0] !== width)
+      points.push([width, lastPoint[1]]);
+  }
+  function getPath(points, svg, options) {
+    const controlPoint = (current, previous, next, reverse) => {
+      const p2 = previous || current;
+      const n2 = next || current;
+      const o2 = line$1(p2, n2);
+      const flat = lib.map(Math.cos(o2.angle) * options.flattening, 0, 1, 1, 0);
+      const angle = o2.angle * flat + (reverse ? Math.PI : 0);
+      const length = o2.length * options.smoothing;
+      const x2 = current[0] + Math.cos(angle) * length;
+      const y2 = current[1] + Math.sin(angle) * length;
+      return [x2, y2];
+    };
+    const bezierCommand = (point2, i, a2) => {
+      const cps = controlPoint(a2[i - 1], a2[i - 2], point2);
+      const cpe = controlPoint(point2, a2[i - 1], a2[i + 1], true);
+      const close = i === a2.length - 1 ? " z" : "";
+      return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point2[0]},${point2[1]}${close}`;
+    };
+    const pointsPositions = points.map((point2) => {
+      const x2 = lib.map(point2[0], options.xMin, options.xMax, 0, svg.w);
+      const y2 = lib.map(point2[1], options.yMin, options.yMax, svg.h, 0);
+      return [x2, y2];
+    });
+    return pointsPositions.reduce(
+      (acc, point2, index2, array2) => index2 === 0 ? `M ${array2[array2.length - 1][0]},${svg.h} L ${point2[0]},${svg.h} L ${point2[0]},${point2[1]}` : `${acc} ${bezierCommand(point2, index2, array2)}`,
+      ""
+    );
+  }
+  function hasControl(art) {
+    return !!art.controls?.cache?.has(CONTROL_NAME);
+  }
+  function createHeatmap(art, danAny, option) {
+    const { query } = art.constructor.utils;
+    let heatmapOption = option;
+    let runtimePoints = null;
+    let handlers = null;
+    let update = () => {
+    };
+    function offEvents() {
+      if (!handlers)
+        return;
+      art.off("video:timeupdate", handlers.timeupdate);
+      art.off("setBar", handlers.setBar);
+      art.off("ready", handlers.ready);
+      art.off("resize", handlers.resize);
+      art.off("artplayerPluginDanAny:loaded", handlers.loaded);
+      art.off("artplayerPluginDanAny:points", handlers.points);
+      handlers = null;
+    }
+    const controller = {
+      config(nextOption) {
+        heatmapOption = nextOption;
+        return controller;
+      },
+      clearPoints() {
+        runtimePoints = null;
+        return controller;
+      },
+      update(points) {
+        update(points);
+        return controller;
+      },
+      destroy() {
+        offEvents();
+        if (hasControl(art))
+          art.controls.remove(CONTROL_NAME);
+      }
+    };
+    art.controls.add({
+      name: CONTROL_NAME,
+      position: "top",
+      html: "",
+      style: {
+        position: "absolute",
+        top: "-100px",
+        left: "0px",
+        right: "0px",
+        height: "100px",
+        width: "100%",
+        pointerEvents: "none"
+      },
+      mounted($heatmap) {
+        let $start = null;
+        let $stop = null;
+        function setPlayed(percentage = art.played) {
+          if ($start && $stop) {
+            $start.setAttribute("offset", `${percentage * 100}%`);
+            $stop.setAttribute("offset", `${percentage * 100}%`);
+          }
+        }
+        update = (points) => {
+          $start = null;
+          $stop = null;
+          $heatmap.innerHTML = "";
+          if (!art.duration || art.option.isLive)
+            return;
+          const svg = {
+            w: $heatmap.offsetWidth,
+            h: $heatmap.offsetHeight
+          };
+          if (!svg.w || !svg.h)
+            return;
+          const options = getOptions(svg, heatmapOption);
+          const heatmapPoints = resolvePoints(points, runtimePoints, art, danAny, svg, options);
+          if (heatmapPoints.length === 0)
+            return;
+          fillEdges(heatmapPoints, svg.w);
+          const yPoints = heatmapPoints.map((point2) => point2[1]);
+          const yMin = Math.min(...yPoints);
+          const yMax = Math.max(...yPoints);
+          const yMid = (yMin + yMax) / 2;
+          for (let index2 = 0; index2 < heatmapPoints.length; index2++) {
+            const point2 = heatmapPoints[index2];
+            const y2 = point2[1];
+            point2[1] = y2 * (y2 > yMid ? 1 + options.scale : 1 - options.scale) + options.minHeight;
+          }
+          const pathD = getPath(heatmapPoints, svg, options);
+          $heatmap.innerHTML = `
+                    <svg viewBox="0 0 ${svg.w} ${svg.h}">
+                        <defs>
+                            <linearGradient id="${GRADIENT_ID}" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" />
+                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" id="${START_ID}" />
+                                <stop offset="0%" style="stop-color:var(--art-progress-color);stop-opacity:1" id="${STOP_ID}" />
+                                <stop offset="100%" style="stop-color:var(--art-progress-color);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#${GRADIENT_ID})" d="${pathD}"></path>
+                    </svg>
+                `;
+          $start = query(`#${START_ID}`, $heatmap);
+          $stop = query(`#${STOP_ID}`, $heatmap);
+          setPlayed();
+        };
+        handlers = {
+          timeupdate: () => setPlayed(),
+          setBar: (type, percentage) => {
+            if (type === "played")
+              setPlayed(percentage);
+          },
+          ready: () => update(),
+          resize: () => update(),
+          loaded: () => update(),
+          points: (points) => {
+            runtimePoints = Array.isArray(points) ? points : [];
+            update(runtimePoints);
+          }
+        };
+        art.on("video:timeupdate", handlers.timeupdate);
+        art.on("setBar", handlers.setBar);
+        art.on("ready", handlers.ready);
+        art.on("resize", handlers.resize);
+        art.on("artplayerPluginDanAny:loaded", handlers.loaded);
+        art.on("artplayerPluginDanAny:points", handlers.points);
+        update();
+      },
+      beforeUnmount($heatmap) {
+        offEvents();
+        $heatmap.innerHTML = "";
+        update = () => {
+        };
+      }
+    });
+    return controller;
+  }
+  const entityKind = /* @__PURE__ */ Symbol.for("drizzle:entityKind");
+  function is(value, type) {
+    if (!value || typeof value !== "object") return false;
+    if (value instanceof type) return true;
+    if (!Object.prototype.hasOwnProperty.call(type, entityKind)) throw new Error(`Class "${type.name ?? "<unknown>"}" doesn't look like a Drizzle entity. If this is incorrect and the class is provided by Drizzle, please report this as a bug.`);
+    let cls = Object.getPrototypeOf(value)?.constructor;
+    if (cls) while (cls) {
+      if (entityKind in cls && cls[entityKind] === type[entityKind]) return true;
+      cls = Object.getPrototypeOf(cls);
+    }
+    return false;
+  }
+  var Subquery = (_c = entityKind, _d = class {
+    constructor(sql2, fields, alias, isWith = false, usedTables = []) {
+      this._ = {
+        brand: "Subquery",
+        sql: sql2,
+        selectedFields: fields,
+        alias,
+        isWith,
+        usedTables
+      };
+    }
+  }, __publicField(_d, _c, "Subquery"), _d);
+  const OriginalColumn = /* @__PURE__ */ Symbol.for("drizzle:OriginalColumn");
+  const noop = (v2) => v2;
+  noop.isNoop = true;
+  var Column = (_f = class {
+    constructor(table, config2) {
+      /** @internal */
+      __publicField(this, "codec");
+      __publicField(this, "name");
+      __publicField(this, "keyAsName");
+      __publicField(this, "primary");
+      __publicField(this, "notNull");
+      __publicField(this, "default");
+      __publicField(this, "defaultFn");
+      __publicField(this, "onUpdateFn");
+      __publicField(this, "hasDefault");
+      __publicField(this, "isUnique");
+      __publicField(this, "uniqueName");
+      __publicField(this, "uniqueType");
+      __publicField(this, "dataType");
+      __publicField(this, "columnType");
+      __publicField(this, "enumValues");
+      __publicField(this, "generated");
+      __publicField(this, "generatedIdentity");
+      __publicField(this, "length");
+      __publicField(this, "isLengthExact");
+      __publicField(this, "isAlias");
+      /** @internal */
+      __publicField(this, "config");
+      /** @internal */
+      __publicField(this, "table");
+      __publicField(this, "mapFromDriverValue", noop);
+      __publicField(this, "mapToDriverValue", noop);
+      this.config = config2;
+      this.onInit();
+      this.table = table;
+      this.name = config2.name;
+      this.isAlias = false;
+      this.keyAsName = config2.keyAsName;
+      this.notNull = config2.notNull;
+      this.default = config2.default;
+      this.defaultFn = config2.defaultFn;
+      this.onUpdateFn = config2.onUpdateFn;
+      this.hasDefault = config2.hasDefault;
+      this.primary = config2.primaryKey;
+      this.isUnique = config2.isUnique;
+      this.uniqueName = config2.uniqueName;
+      this.uniqueType = config2.uniqueType;
+      this.dataType = config2.dataType;
+      this.columnType = config2.columnType;
+      this.generated = config2.generated;
+      this.generatedIdentity = config2.generatedIdentity;
+      this.length = config2["length"];
+      this.isLengthExact = config2["isLengthExact"];
+    }
+    /** @internal */
+    onInit() {
+    }
+    /** @internal */
+    postBuild() {
+      return this;
+    }
+    /** @internal */
+    shouldDisableInsert() {
+      return this.config.generated !== void 0 && this.config.generated.type !== "byDefault";
+    }
+    /** @internal */
+    [(_e4 = entityKind, OriginalColumn)]() {
+      return this;
+    }
+  }, __publicField(_f, _e4, "Column"), _f);
+  function getColumnTable(column) {
+    return column.table;
+  }
+  const TableName = /* @__PURE__ */ Symbol.for("drizzle:Name");
+  const TableSchema = /* @__PURE__ */ Symbol.for("drizzle:Schema");
+  const TableColumns = /* @__PURE__ */ Symbol.for("drizzle:Columns");
+  const ExtraConfigColumns = /* @__PURE__ */ Symbol.for("drizzle:ExtraConfigColumns");
+  const OriginalName = /* @__PURE__ */ Symbol.for("drizzle:OriginalName");
+  const BaseName = /* @__PURE__ */ Symbol.for("drizzle:BaseName");
+  const IsAlias = /* @__PURE__ */ Symbol.for("drizzle:IsAlias");
+  const ExtraConfigBuilder = /* @__PURE__ */ Symbol.for("drizzle:ExtraConfigBuilder");
+  const IsDrizzleTable = /* @__PURE__ */ Symbol.for("drizzle:IsDrizzleTable");
+  var Table = (_p = entityKind, _o = TableName, _n3 = OriginalName, _m = TableSchema, _l = TableColumns, _k = ExtraConfigColumns, _j = BaseName, _i = IsAlias, _h = IsDrizzleTable, _g = ExtraConfigBuilder, _q = class {
+    constructor(name, schema, baseName) {
+      /**
+      * @internal
+      * Can be changed if the table is aliased.
+      */
+      __publicField(this, _o);
+      /**
+      * @internal
+      * Used to store the original name of the table, before any aliasing.
+      */
+      __publicField(this, _n3);
+      /** @internal */
+      __publicField(this, _m);
+      /** @internal */
+      __publicField(this, _l);
+      /** @internal */
+      __publicField(this, _k);
+      /**
+      *  @internal
+      * Used to store the table name before the transformation via the `tableCreator` functions.
+      */
+      __publicField(this, _j);
+      /** @internal */
+      __publicField(this, _i, false);
+      /** @internal */
+      __publicField(this, _h, true);
+      /** @internal */
+      __publicField(this, _g);
+      this[TableName] = this[OriginalName] = name;
+      this[TableSchema] = schema;
+      this[BaseName] = baseName;
+    }
+  }, __publicField(_q, _p, "Table"), /** @internal */
+  __publicField(_q, "Symbol", {
+    Name: TableName,
+    Schema: TableSchema,
+    OriginalName,
+    Columns: TableColumns,
+    ExtraConfigColumns,
+    BaseName,
+    IsAlias,
+    ExtraConfigBuilder
+  }), _q);
+  function isTable(table) {
+    return typeof table === "object" && table !== null && IsDrizzleTable in table;
+  }
+  function getTableName(table) {
+    return table[TableName];
+  }
+  function iife(fn, ...args) {
+    return fn(...args);
+  }
+  const tracer = { startActiveSpan(name, fn) {
+    return fn();
+  } };
+  const ViewBaseConfig = /* @__PURE__ */ Symbol.for("drizzle:ViewBaseConfig");
+  function isSQLWrapper(value) {
+    return value !== null && value !== void 0 && typeof value.getSQL === "function";
+  }
+  function mergeQueries(queries) {
+    const result = {
+      sql: "",
+      params: []
+    };
+    for (const query of queries) {
+      result.sql += query.sql;
+      result.params.push(...query.params);
+    }
+    return result;
+  }
+  function _mergeQueries(queries) {
+    const result = {
+      sql: "",
+      params: []
+    };
+    const sqls = [];
+    for (const query of queries) {
+      sqls.push(query.sql);
+      result.params.push(...query.params);
+    }
+    result._sql = Object.assign(sqls, { raw: sqls });
+    return result;
+  }
+  var StringChunk = (_r = entityKind, _s = class {
+    constructor(value) {
+      __publicField(this, "value");
+      this.value = Array.isArray(value) ? value : [value];
+    }
+    getSQL() {
+      return new SQL([this]);
+    }
+  }, __publicField(_s, _r, "StringChunk"), _s);
+  var SQL = (_t3 = entityKind, _u = class {
+    constructor(queryChunks) {
+      /** @internal */
+      __publicField(this, "decoder", noopDecoder);
+      /** @internal */
+      __publicField(this, "shouldInlineParams", false);
+      /** @internal */
+      __publicField(this, "usedTables", []);
+      this.queryChunks = queryChunks;
+      for (const chunk of queryChunks) if (is(chunk, Table)) {
+        const schemaName = chunk[Table.Symbol.Schema];
+        this.usedTables.push(schemaName === void 0 ? chunk[Table.Symbol.Name] : schemaName + "." + chunk[Table.Symbol.Name]);
+      }
+    }
+    append(query) {
+      this.queryChunks.push(...query.queryChunks);
+      return this;
+    }
+    toQuery(config2) {
+      return tracer.startActiveSpan("drizzle.buildSQL", (span) => {
+        const query = this.buildQueryFromSourceParams(this.queryChunks, config2);
+        span?.setAttributes({
+          "drizzle.query.text": query.sql,
+          "drizzle.query.params": JSON.stringify(query.params)
+        });
+        return query;
+      });
+    }
+    buildQueryFromSourceParams(chunks, _config) {
+      const config2 = Object.assign({}, _config, {
+        inlineParams: _config.inlineParams || this.shouldInlineParams,
+        paramStartIndex: _config.paramStartIndex || { value: 0 }
+      });
+      const { escapeName, escapeParam, codecs, inlineParams, paramStartIndex, invokeSource } = config2;
+      const mappedChunks = chunks.map((chunk) => {
+        if (is(chunk, StringChunk)) return {
+          sql: chunk.value.join(""),
+          params: []
+        };
+        if (is(chunk, Name)) return {
+          sql: escapeName(chunk.value),
+          params: []
+        };
+        if (chunk === void 0) return {
+          sql: "",
+          params: []
+        };
+        if (Array.isArray(chunk)) {
+          const result = [new StringChunk("(")];
+          for (const [i, p2] of chunk.entries()) {
+            result.push(p2);
+            if (i < chunk.length - 1) result.push(new StringChunk(", "));
+          }
+          result.push(new StringChunk(")"));
+          return this.buildQueryFromSourceParams(result, config2);
+        }
+        if (is(chunk, _u)) return this.buildQueryFromSourceParams(chunk.queryChunks, {
+          ...config2,
+          inlineParams: inlineParams || chunk.shouldInlineParams
+        });
+        if (is(chunk, Table)) {
+          const schemaName = chunk[Table.Symbol.Schema];
+          const tableName = chunk[Table.Symbol.Name];
+          if (invokeSource === "mssql-view-with-schemabinding") return {
+            sql: (schemaName === void 0 ? escapeName("dbo") : escapeName(schemaName)) + "." + escapeName(tableName),
+            params: []
+          };
+          return {
+            sql: schemaName === void 0 || chunk[IsAlias] ? escapeName(tableName) : escapeName(schemaName) + "." + escapeName(tableName),
+            params: []
+          };
+        }
+        if (is(chunk, Column)) {
+          const columnName = chunk.name;
+          if (_config.invokeSource === "indexes") return {
+            sql: escapeName(columnName),
+            params: []
+          };
+          const schemaName = invokeSource === "mssql-check" ? void 0 : chunk.table[Table.Symbol.Schema];
+          return {
+            sql: chunk.isAlias ? escapeName(chunk.name) : chunk.table[IsAlias] || schemaName === void 0 ? escapeName(chunk.table[Table.Symbol.Name]) + "." + escapeName(columnName) : escapeName(schemaName) + "." + escapeName(chunk.table[Table.Symbol.Name]) + "." + escapeName(columnName),
+            params: []
+          };
+        }
+        if (is(chunk, View)) {
+          const schemaName = chunk[ViewBaseConfig].schema;
+          const viewName = chunk[ViewBaseConfig].name;
+          return {
+            sql: schemaName === void 0 || chunk[ViewBaseConfig].isAlias ? escapeName(viewName) : escapeName(schemaName) + "." + escapeName(viewName),
+            params: []
+          };
+        }
+        if (is(chunk, Param)) {
+          if (is(chunk.value, _u)) return this.buildQueryFromSourceParams([chunk.value], config2);
+          const useCodecs = codecs && is(chunk.encoder, Column);
+          if (is(chunk.value, Placeholder)) {
+            const escaped2 = escapeParam(paramStartIndex.value++, chunk);
+            chunk.codec = useCodecs ? (value) => codecs.apply(chunk.encoder, "normalizeParam", value) : void 0;
+            return {
+              sql: useCodecs ? codecs.apply(chunk.encoder, "castParam", escaped2) : escaped2,
+              params: [chunk]
+            };
+          }
+          let mappedValue;
+          if (chunk.value === null) mappedValue = chunk.value;
+          else {
+            mappedValue = chunk.encoder.mapToDriverValue.isNoop ? chunk.value : chunk.encoder.mapToDriverValue(chunk.value);
+            if (is(mappedValue, _u)) return this.buildQueryFromSourceParams([mappedValue], config2);
+            if (useCodecs) mappedValue = codecs.apply(chunk.encoder, "normalizeParam", mappedValue);
+          }
+          if (inlineParams) return {
+            sql: this.mapInlineParam(mappedValue, config2),
+            params: []
+          };
+          const escaped = escapeParam(paramStartIndex.value++, mappedValue);
+          return {
+            sql: useCodecs ? codecs.apply(chunk.encoder, "castParam", escaped) : escaped,
+            params: [mappedValue]
+          };
+        }
+        if (is(chunk, Placeholder)) return {
+          sql: escapeParam(paramStartIndex.value++, chunk),
+          params: [chunk]
+        };
+        if (is(chunk, _u.Aliased) && chunk.fieldAlias !== void 0) return {
+          sql: (chunk.origin !== void 0 ? escapeName(chunk.origin) + "." : "") + escapeName(chunk.fieldAlias),
+          params: []
+        };
+        if (is(chunk, Subquery)) {
+          if (chunk._.isWith) return {
+            sql: escapeName(chunk._.alias),
+            params: []
+          };
+          return this.buildQueryFromSourceParams([
+            new StringChunk("("),
+            chunk._.sql,
+            new StringChunk(") "),
+            new Name(chunk._.alias)
+          ], config2);
+        }
+        if (typeof chunk === "function" && "enumName" in chunk) {
+          if ("schema" in chunk && chunk.schema) return {
+            sql: escapeName(chunk.schema) + "." + escapeName(chunk.enumName),
+            params: []
+          };
+          return {
+            sql: escapeName(chunk.enumName),
+            params: []
+          };
+        }
+        if (isSQLWrapper(chunk)) {
+          if (chunk.shouldOmitSQLParens?.()) return this.buildQueryFromSourceParams([chunk.getSQL()], config2);
+          return this.buildQueryFromSourceParams([
+            new StringChunk("("),
+            chunk.getSQL(),
+            new StringChunk(")")
+          ], config2);
+        }
+        if (inlineParams) return {
+          sql: this.mapInlineParam(chunk, config2),
+          params: []
+        };
+        return {
+          sql: escapeParam(paramStartIndex.value++, chunk),
+          params: [chunk]
+        };
+      });
+      if (_config.tagged) return _mergeQueries(mappedChunks);
+      return mergeQueries(mappedChunks);
+    }
+    mapInlineParam(chunk, { escapeString }) {
+      if (chunk === null) return "null";
+      if (typeof chunk === "number" || typeof chunk === "boolean" || typeof chunk === "bigint") return chunk.toString();
+      if (typeof chunk === "string") return escapeString(chunk);
+      if (typeof chunk === "object") {
+        const mappedValueAsString = chunk.toString();
+        if (mappedValueAsString === "[object Object]") return escapeString(JSON.stringify(chunk));
+        return escapeString(mappedValueAsString);
+      }
+      throw new Error("Unexpected param value: " + chunk);
+    }
+    getSQL() {
+      return this;
+    }
+    as(alias) {
+      if (alias === void 0) return this;
+      return new _u.Aliased(this, alias);
+    }
+    mapWith(decoder) {
+      this.decoder = typeof decoder === "function" ? { mapFromDriverValue: decoder } : decoder;
+      return this;
+    }
+    inlineParams() {
+      this.shouldInlineParams = true;
+      return this;
+    }
+    /**
+    * This method is used to conditionally include a part of the query.
+    *
+    * @param condition - Condition to check
+    * @returns itself if the condition is `true`, otherwise `undefined`
+    */
+    if(condition) {
+      return condition ? this : void 0;
+    }
+  }, __publicField(_u, _t3, "SQL"), _u);
+  var Name = (_v = entityKind, _w = class {
+    constructor(value) {
+      __publicField(this, "brand");
+      this.value = value;
+    }
+    getSQL() {
+      return new SQL([this]);
+    }
+  }, __publicField(_w, _v, "Name"), _w);
+  const noopDecoder = { mapFromDriverValue: (value) => value };
+  noopDecoder.mapFromDriverValue.isNoop = true;
+  const noopEncoder = { mapToDriverValue: (value) => value };
+  noopEncoder.mapToDriverValue.isNoop = true;
+  ({
+    ...noopDecoder,
+    ...noopEncoder
+  });
+  var Param = (_x = entityKind, _y = class {
+    /**
+    * @param value - Parameter value
+    * @param encoder - Encoder to convert the value to a driver parameter
+    */
+    constructor(value, encoder = noopEncoder, codec2) {
+      __publicField(this, "brand");
+      this.value = value;
+      this.encoder = encoder;
+      this.codec = codec2;
+    }
+    getSQL() {
+      return new SQL([this]);
+    }
+  }, __publicField(_y, _x, "Param"), _y);
+  function sql(strings, ...params) {
+    const queryChunks = [];
+    if (params.length > 0 || strings.length > 0 && strings[0] !== "") queryChunks.push(new StringChunk(strings[0]));
+    for (const [paramIndex, param] of params.entries()) queryChunks.push(param, new StringChunk(strings[paramIndex + 1]));
+    return new SQL(queryChunks);
+  }
+  (function(_sql) {
+    function empty() {
+      return new SQL([]);
+    }
+    _sql.empty = empty;
+    function fromList(list) {
+      return new SQL(list);
+    }
+    _sql.fromList = fromList;
+    function raw(str) {
+      return new SQL([new StringChunk(str)]);
+    }
+    _sql.raw = raw;
+    function join(chunks, separator) {
+      const result = [];
+      for (const [i, chunk] of chunks.entries()) {
+        if (i > 0 && separator !== void 0) result.push(separator);
+        result.push(chunk);
+      }
+      return new SQL(result);
+    }
+    _sql.join = join;
+    function identifier(value) {
+      return new Name(value);
+    }
+    _sql.identifier = identifier;
+    function placeholder(name) {
+      return new Placeholder(name);
+    }
+    _sql.placeholder = placeholder;
+    function param(value, encoder) {
+      return new Param(value, encoder);
+    }
+    _sql.param = param;
+    function comment(input) {
+      const encoded = sqlCommenter(input);
+      if (!encoded.length) return void 0;
+      return sql.raw(encoded);
+    }
+    _sql.comment = comment;
+  })(sql || (sql = {}));
+  function sqlCommenter(input) {
+    const encoded = sqlCommenter.encodeInput(input);
+    if (!encoded.length) return "";
+    return `/*${encoded}*/`;
+  }
+  (function(_sqlCommenter) {
+    function merge2(input1, input2) {
+      let encoded;
+      if (typeof input1 === "object" && typeof input2 === "object") encoded = encodeInput({
+        ...input1,
+        ...input2
+      });
+      else if (input1 && input2) encoded = [encodeInput(input1), encodeInput(input2)].filter((i) => i.length).join(",");
+      else if (input2) encoded = encodeInput(input2);
+      else if (input1) encoded = encodeInput(input1);
+      else return "";
+      if (!encoded.length) return "";
+      return `/*${encoded}*/`;
+    }
+    _sqlCommenter.merge = merge2;
+    function encodeInput(input) {
+      if (typeof input === "string") {
+        if (!input.length) return input;
+        return sanitizeStringInput(input);
+      }
+      const parts = [];
+      for (const [key, value] of Object.entries(input)) {
+        if (value === null || value === void 0 || value === "") continue;
+        const encodedKey = sanitizeObjectElement(key);
+        const encodedValue = sanitizeObjectElement(String(value));
+        parts.push(`${encodedKey}='${encodedValue}'`);
+      }
+      if (!parts.length) return "";
+      return parts.sort().join(",");
+    }
+    _sqlCommenter.encodeInput = encodeInput;
+    function sanitizeObjectElement(key) {
+      return encodeURIComponent(key).replace(/'/g, `\\'`);
+    }
+    _sqlCommenter.sanitizeObjectElement = sanitizeObjectElement;
+    function sanitizeStringInput(input) {
+      return input.replace(/\/\*/g, "/ *").replace(/\*\//g, "* /");
+    }
+    _sqlCommenter.sanitizeStringInput = sanitizeStringInput;
+  })(sqlCommenter || (sqlCommenter = {}));
+  (function(_SQL) {
+    var _a3;
+    _a3 = entityKind;
+    const _Aliased = class _Aliased {
+      constructor(sql2, fieldAlias) {
+        /** @internal */
+        __publicField(this, "isSelectionField", false);
+        /** @internal */
+        __publicField(this, "origin");
+        this.sql = sql2;
+        this.fieldAlias = fieldAlias;
+      }
+      getSQL() {
+        return this.sql;
+      }
+      /** @internal */
+      clone() {
+        return new _Aliased(this.sql, this.fieldAlias);
+      }
+    };
+    __publicField(_Aliased, _a3, "SQL.Aliased");
+    let Aliased = _Aliased;
+    _SQL.Aliased = Aliased;
+  })(SQL || (SQL = {}));
+  var Placeholder = (_z = entityKind, _A = class {
+    constructor(name) {
+      this.name = name;
+    }
+    getSQL() {
+      return new SQL([this]);
+    }
+  }, __publicField(_A, _z, "Placeholder"), _A);
+  const IsDrizzleView = /* @__PURE__ */ Symbol.for("drizzle:IsDrizzleView");
+  var View = (_E = class {
+    constructor({ name, schema, selectedFields, query }) {
+      /** @internal */
+      __publicField(this, _C);
+      /** @internal */
+      __publicField(this, _B, true);
+      this[ViewBaseConfig] = {
+        name,
+        originalName: name,
+        schema,
+        selectedFields,
+        query,
+        isExisting: !query,
+        isAlias: false
+      };
+    }
+    /** @internal */
+    get [(_D = entityKind, _C = ViewBaseConfig, _B = IsDrizzleView, TableName)]() {
+      return this[ViewBaseConfig].name;
+    }
+    /** @internal */
+    get [TableSchema]() {
+      return this[ViewBaseConfig].schema;
+    }
+    /** @internal */
+    get [IsAlias]() {
+      return this[ViewBaseConfig].isAlias;
+    }
+    /** @internal */
+    get [OriginalName]() {
+      return this[ViewBaseConfig].originalName;
+    }
+    /** @internal */
+    get [TableColumns]() {
+      return this[ViewBaseConfig].selectedFields;
+    }
+  }, __publicField(_E, _D, "View"), _E);
+  function isView(view) {
+    return typeof view === "object" && view !== null && IsDrizzleView in view;
+  }
+  Column.prototype.getSQL = function() {
+    return new SQL([this]);
+  };
+  Subquery.prototype.getSQL = function() {
+    return new SQL([this]);
+  };
+  function extractExtendedColumnType(column) {
+    const [type, constraint] = column.dataType.split(" ");
+    return {
+      type,
+      constraint
+    };
+  }
+  Object.getPrototypeOf(() => null).constructor;
+  function getColumns(table) {
+    return is(table, Table) ? table[Table.Symbol.Columns] : is(table, View) ? table[ViewBaseConfig].selectedFields : table._.selectedFields;
+  }
+  function getColumnNameAndConfig(a2, b2) {
+    return {
+      name: typeof a2 === "string" && a2.length > 0 ? a2 : "",
+      config: typeof a2 === "object" ? a2 : b2
+    };
+  }
+  typeof TextDecoder === "undefined" ? null : new TextDecoder();
+  const CONSTANTS = {
+    INT8_MIN: -128,
+    INT8_MAX: 127,
+    INT8_UNSIGNED_MAX: 255,
+    INT16_MIN: -32768,
+    INT16_MAX: 32767,
+    INT16_UNSIGNED_MAX: 65535,
+    INT24_MIN: -8388608,
+    INT24_MAX: 8388607,
+    INT24_UNSIGNED_MAX: 16777215,
+    INT32_MIN: -2147483648,
+    INT32_MAX: 2147483647,
+    INT32_UNSIGNED_MAX: 4294967295,
+    INT48_MIN: -140737488355328,
+    INT48_MAX: 140737488355327,
+    INT48_UNSIGNED_MAX: 281474976710655,
+    INT64_MIN: -9223372036854775808n,
+    INT64_MAX: 9223372036854775807n,
+    INT64_UNSIGNED_MAX: 18446744073709551615n
+  };
+  function processRelations(tablesConfig, tables) {
+    for (const tableConfig of Object.values(tablesConfig)) for (const [relationFieldName, relation] of Object.entries(tableConfig.relations)) {
+      if (!is(relation, Relation)) continue;
+      relation.sourceTable = tableConfig.table;
+      relation.fieldName = relationFieldName;
+    }
+    for (const [sourceTableName, tableConfig] of Object.entries(tablesConfig)) for (const [relationFieldName, relation] of Object.entries(tableConfig.relations)) {
+      if (!is(relation, Relation)) continue;
+      let reverseRelation;
+      const { targetTableName, alias, sourceColumns, targetColumns, throughTable, sourceTable, through, where, sourceColumnTableNames, targetColumnTableNames } = relation;
+      const relationPrintName = `relations -> ${tableConfig.name}: { ${relationFieldName}: r.${is(relation, One) ? "one" : "many"}.${targetTableName}(...) }`;
+      if (relationFieldName in tableConfig.table[TableColumns]) throw new Error(`${relationPrintName}: relation name collides with column "${relationFieldName}" of table "${tableConfig.name}"`);
+      if (typeof alias === "string" && !alias) throw new Error(`${relationPrintName}: "alias" cannot be an empty string - omit it if you don't need it`);
+      if (sourceColumns?.length === 0) throw new Error(`${relationPrintName}: "from" cannot be empty`);
+      if (targetColumns?.length === 0) throw new Error(`${relationPrintName}: "to" cannot be empty`);
+      if (sourceColumns && targetColumns) {
+        if (sourceColumns.length !== targetColumns.length && !throughTable) throw new Error(`${relationPrintName}: "from" and "to" fields without "through" must have the same length`);
+        for (const sName of sourceColumnTableNames) if (sName !== sourceTableName) throw new Error(`${relationPrintName}: all "from" columns must belong to table "${sourceTableName}", found column of table "${sName}"`);
+        for (const tName of targetColumnTableNames) if (tName !== targetTableName) throw new Error(`${relationPrintName}: all "to" columns must belong to table "${targetTableName}", found column of table "${tName}"`);
+        if (through) {
+          if (through.source.length !== sourceColumns.length || through.target.length !== targetColumns.length) throw new Error(`${relationPrintName}: ".through(column)" must be used either on all columns in "from" and "to" or not defined on any of them`);
+          for (const column of through.source) if (tables[column._.tableName] !== throughTable) throw new Error(`${relationPrintName}: ".through(column)" must be used on the same table by all columns of the relation`);
+          for (const column of through.target) if (tables[column._.tableName] !== throughTable) throw new Error(`${relationPrintName}: ".through(column)" must be used on the same table by all columns of the relation`);
+        }
+        continue;
+      }
+      if (sourceColumns || targetColumns) throw new Error(`${relationPrintName}: relation must have either both "from" and "to" defined, or none of them`);
+      const reverseTableConfig = tablesConfig[targetTableName];
+      if (!reverseTableConfig) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and no reverse relations of table "${targetTableName}" were found"`);
+      if (alias) {
+        const reverseRelations = Object.values(reverseTableConfig.relations).filter((it2) => is(it2, Relation) && it2.alias === alias && it2 !== relation);
+        if (reverseRelations.length > 1) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and multiple relations with alias "${alias}" found in table "${targetTableName}": ${reverseRelations.map((it2) => `"${it2.fieldName}"`).join(", ")}`);
+        reverseRelation = reverseRelations[0];
+        if (!reverseRelation) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and there is no reverse relation of table "${targetTableName}" with alias "${alias}"`);
+      } else {
+        const reverseRelations = Object.values(reverseTableConfig.relations).filter((it2) => is(it2, Relation) && it2.targetTable === sourceTable && !it2.alias && it2 !== relation);
+        if (reverseRelations.length > 1) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and multiple relations between "${targetTableName}" and "${sourceTableName}" were found.
+Hint: you can specify "alias" on both sides of the relation with the same value`);
+        reverseRelation = reverseRelations[0];
+        if (!reverseRelation) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and no reverse relation of table "${targetTableName}" with target table "${sourceTableName}" was found`);
+      }
+      if (!reverseRelation.sourceColumns || !reverseRelation.targetColumns) throw new Error(`${relationPrintName}: not enough data provided to build the relation - "from"/"to" are not defined, and reverse relation "${targetTableName}.${reverseRelation.fieldName}" does not have "from"/"to" defined`);
+      relation.sourceColumns = reverseRelation.targetColumns;
+      relation.targetColumns = reverseRelation.sourceColumns;
+      relation.through = reverseRelation.through ? {
+        source: reverseRelation.through.target,
+        target: reverseRelation.through.source
+      } : void 0;
+      relation.throughTable = reverseRelation.throughTable;
+      relation.isReversed = !where;
+      relation.where = where ?? reverseRelation.where;
+    }
+    return tablesConfig;
+  }
+  function buildRelations(tables, config2) {
+    const tablesConfig = {};
+    for (const [tsName, table] of Object.entries(tables)) tablesConfig[tsName] = {
+      table,
+      name: tsName,
+      relations: config2[tsName] ?? {}
+    };
+    return processRelations(tablesConfig, tables);
+  }
+  function buildRelationsParts(tables, config2) {
+    const tablesConfig = {};
+    for (const [tsName, relations] of Object.entries(config2)) {
+      if (!relations || !tables[tsName]) continue;
+      tablesConfig[tsName] = {
+        table: tables[tsName],
+        name: tsName,
+        relations
+      };
+    }
+    return processRelations(tablesConfig, tables);
+  }
+  var Relation = (_F = entityKind, _G = class {
+    constructor(targetTable, targetTableName) {
+      __publicField(this, "fieldName");
+      __publicField(this, "sourceColumns");
+      __publicField(this, "targetColumns");
+      __publicField(this, "alias");
+      __publicField(this, "where");
+      __publicField(this, "sourceTable");
+      __publicField(this, "targetTable");
+      __publicField(this, "through");
+      __publicField(this, "throughTable");
+      __publicField(this, "isReversed");
+      /** @internal */
+      __publicField(this, "sourceColumnTableNames", []);
+      /** @internal */
+      __publicField(this, "targetColumnTableNames", []);
+      this.targetTableName = targetTableName;
+      this.targetTable = targetTable;
+    }
+  }, __publicField(_G, _F, "RelationV2"), _G);
+  var One = (_J = class extends (_I = Relation, _H = entityKind, _I) {
+    constructor(tables, targetTable, targetTableName, config2) {
+      super(targetTable, targetTableName);
+      __publicField(this, "relationType", "one");
+      __publicField(this, "optional");
+      this.alias = config2?.alias;
+      this.where = config2?.where;
+      if (config2?.from) this.sourceColumns = (Array.isArray(config2.from) ? config2.from : [config2.from]).map((it2) => {
+        this.throughTable ?? (this.throughTable = it2._.through ? tables[it2._.through._.tableName] : void 0);
+        this.sourceColumnTableNames.push(it2._.tableName);
+        return it2._.column;
+      });
+      if (config2?.to) this.targetColumns = (Array.isArray(config2.to) ? config2.to : [config2.to]).map((it2) => {
+        this.throughTable ?? (this.throughTable = it2._.through ? tables[it2._.through._.tableName] : void 0);
+        this.targetColumnTableNames.push(it2._.tableName);
+        return it2._.column;
+      });
+      if (this.throughTable) this.through = {
+        source: (Array.isArray(config2?.from) ? config2.from : config2?.from ? [config2.from] : []).map((c2) => c2._.through),
+        target: (Array.isArray(config2?.to) ? config2.to : config2?.to ? [config2.to] : []).map((c2) => c2._.through)
+      };
+      this.optional = config2?.optional ?? true;
+    }
+  }, __publicField(_J, _H, "OneV2"), _J);
+  var Many = (_M = class extends (_L = Relation, _K = entityKind, _L) {
+    constructor(tables, targetTable, targetTableName, config2) {
+      super(targetTable, targetTableName);
+      __publicField(this, "relationType", "many");
+      this.config = config2;
+      this.alias = config2?.alias;
+      this.where = config2?.where;
+      if (config2?.from) this.sourceColumns = (Array.isArray(config2.from) ? config2.from : [config2.from]).map((it2) => {
+        this.throughTable ?? (this.throughTable = it2._.through ? tables[it2._.through._.tableName] : void 0);
+        this.sourceColumnTableNames.push(it2._.tableName);
+        return it2._.column;
+      });
+      if (config2?.to) this.targetColumns = (Array.isArray(config2.to) ? config2.to : [config2.to]).map((it2) => {
+        this.throughTable ?? (this.throughTable = it2._.through ? tables[it2._.through._.tableName] : void 0);
+        this.targetColumnTableNames.push(it2._.tableName);
+        return it2._.column;
+      });
+      if (this.throughTable) this.through = {
+        source: (Array.isArray(config2?.from) ? config2.from : config2?.from ? [config2.from] : []).map((c2) => c2._.through),
+        target: (Array.isArray(config2?.to) ? config2.to : config2?.to ? [config2.to] : []).map((c2) => c2._.through)
+      };
+    }
+  }, __publicField(_M, _K, "ManyV2"), _M);
+  var AggregatedField = (_N = entityKind, _O = class {
+    constructor() {
+      __publicField(this, "table");
+    }
+    onTable(table) {
+      this.table = table;
+      return this;
+    }
+  }, __publicField(_O, _N, "AggregatedField"), _O);
+  var Count = (_R = class extends (_Q = AggregatedField, _P = entityKind, _Q) {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "query");
+    }
+    getSQL() {
+      if (!this.query) {
+        if (!this.table) throw new Error("Table must be set before building aggregate field");
+        this.query = sql`select count(*) as ${sql.identifier("r")} from ${getTableAsAliasSQL(this.table)}`.mapWith(Number);
+      }
+      return this.query;
+    }
+  }, __publicField(_R, _P, "AggregatedFieldCount"), _R);
+  var RelationsBuilderTable = (_S = entityKind, _T = class {
+    constructor(table, name) {
+      __publicField(this, "_");
+      this._ = {
+        name,
+        table
+      };
+    }
+  }, __publicField(_T, _S, "RelationsBuilderTable"), _T);
+  var RelationsBuilderColumn = (_U = entityKind, _V = class {
+    constructor(column, tableName, key) {
+      __publicField(this, "_");
+      this._ = {
+        tableName,
+        column,
+        key
+      };
+    }
+    through(column) {
+      return new RelationsBuilderJunctionColumn(this._.column, this._.tableName, this._.key, column);
+    }
+  }, __publicField(_V, _U, "RelationsBuilderColumn"), _V);
+  var RelationsBuilderJunctionColumn = (_W = entityKind, _X = class {
+    constructor(column, tableName, key, through) {
+      __publicField(this, "_");
+      this._ = {
+        tableName,
+        column,
+        through,
+        key
+      };
+    }
+  }, __publicField(_X, _W, "RelationsBuilderColumn"), _X);
+  var RelationsHelperStatic = (_Y = entityKind, _Z = class {
+    constructor(tables) {
+      __publicField(this, "_");
+      __publicField(this, "one");
+      __publicField(this, "many");
+      /** @internal - to be reworked */
+      __publicField(this, "aggs", { count() {
+        return new Count();
+      } });
+      this._ = { tables };
+      const one = {};
+      const many = {};
+      for (const [tableName, table] of Object.entries(tables)) {
+        one[tableName] = (config2) => {
+          return new One(tables, table, tableName, config2);
+        };
+        many[tableName] = (config2) => {
+          return new Many(tables, table, tableName, config2);
+        };
+      }
+      this.one = one;
+      this.many = many;
+    }
+  }, __publicField(_Z, _Y, "RelationsHelperStatic"), _Z);
+  function createRelationsHelper(tables) {
+    const helperStatic = new RelationsHelperStatic(tables);
+    const relationsTables = Object.entries(tables).reduce((acc, [tKey, value]) => {
+      const rTable = new RelationsBuilderTable(value, tKey);
+      const columns = Object.entries(value[TableColumns]).reduce((acc2, [cKey, column]) => {
+        acc2[cKey] = new RelationsBuilderColumn(column, tKey, cKey);
+        return acc2;
+      }, {});
+      acc[tKey] = Object.assign(rTable, columns);
+      return acc;
+    }, {});
+    return Object.assign(helperStatic, relationsTables);
+  }
+  function extractTablesFromSchema(schema) {
+    return Object.fromEntries(Object.entries(schema).filter(([_2, e2]) => is(e2, Table) || is(e2, View)));
+  }
+  function defineRelations(schema, relations) {
+    const tables = extractTablesFromSchema(schema);
+    return buildRelations(tables, {});
+  }
+  function defineRelationsPart(schema, relations) {
+    const tables = extractTablesFromSchema(schema);
+    return buildRelationsParts(tables, relations ? relations(createRelationsHelper(tables)) : Object.fromEntries(Object.keys(tables).map((k2) => [k2, {}])));
+  }
+  function getTableAsAliasSQL(table) {
+    return sql`${table[IsAlias] ? sql`${sql`${sql.identifier(table[TableSchema] ?? "")}.`.if(table[TableSchema])}${sql.identifier(table[OriginalName])} as ${table}` : table}`;
+  }
+  var ForeignKeyBuilder = (__ = entityKind, _$ = class {
+    constructor(config2, actions) {
+      /** @internal */
+      __publicField(this, "reference");
+      /** @internal */
+      __publicField(this, "_onUpdate", "no action");
+      /** @internal */
+      __publicField(this, "_onDelete", "no action");
+      this.reference = () => {
+        const { name, columns, foreignColumns } = config2();
+        return {
+          name,
+          columns,
+          foreignTable: foreignColumns[0].table,
+          foreignColumns
+        };
+      };
+      if (actions) {
+        this._onUpdate = actions.onUpdate;
+        this._onDelete = actions.onDelete;
+      }
+    }
+    onUpdate(action) {
+      this._onUpdate = action === void 0 ? "no action" : action;
+      return this;
+    }
+    onDelete(action) {
+      this._onDelete = action === void 0 ? "no action" : action;
+      return this;
+    }
+    /** @internal */
+    build(table) {
+      return new ForeignKey(table, this);
+    }
+  }, __publicField(_$, __, "PgForeignKeyBuilder"), _$);
+  var ForeignKey = (_aa = entityKind, _ba = class {
+    constructor(table, builder) {
+      __publicField(this, "reference");
+      __publicField(this, "onUpdate");
+      __publicField(this, "onDelete");
+      __publicField(this, "name");
+      this.table = table;
+      this.reference = builder.reference;
+      this.onUpdate = builder._onUpdate;
+      this.onDelete = builder._onDelete;
+    }
+    getName() {
+      const { name, columns, foreignColumns } = this.reference();
+      const columnNames = columns.map((column) => column.name);
+      const foreignColumnNames = foreignColumns.map((column) => column.name);
+      const chunks = [
+        this.table[TableName],
+        ...columnNames,
+        foreignColumns[0].table[TableName],
+        ...foreignColumnNames
+      ];
+      return name ?? `${chunks.join("_")}_fk`;
+    }
+    isNameExplicit() {
+      return !!this.reference().name;
+    }
+  }, __publicField(_ba, _aa, "PgForeignKey"), _ba);
+  var PgColumnBuilder = (_ca = entityKind, _da = class {
+    constructor(name, dataType, columnType) {
+      __publicField(this, "foreignKeyConfigs", []);
+      __publicField(this, "config");
+      /**
+      * Alias for {@link $defaultFn}.
+      */
+      __publicField(this, "$default", this.$defaultFn);
+      /**
+      * Alias for {@link $onUpdateFn}.
+      */
+      __publicField(this, "$onUpdate", this.$onUpdateFn);
+      this.config = {
+        name,
+        keyAsName: name === "",
+        notNull: false,
+        default: void 0,
+        hasDefault: false,
+        primaryKey: false,
+        isUnique: false,
+        uniqueName: void 0,
+        uniqueType: void 0,
+        dataType,
+        columnType,
+        generated: void 0,
+        defaultFn: void 0,
+        onUpdateFn: void 0,
+        generatedIdentity: void 0
+      };
+    }
+    /**
+    * Changes the data type of the column. Commonly used with `json` columns. Also, useful for branded types.
+    *
+    * @example
+    * ```ts
+    * const users = pgTable('users', {
+    * 	id: integer('id').$type<UserId>().primaryKey(),
+    * 	details: json('details').$type<UserDetails>().notNull(),
+    * });
+    * ```
+    */
+    $type() {
+      return this;
+    }
+    /**
+    * Adds a `not null` clause to the column definition.
+    *
+    * Affects the `select` model of the table - columns *without* `not null` will be nullable on select.
+    */
+    notNull() {
+      this.config.notNull = true;
+      return this;
+    }
+    /**
+    * Adds a `default <value>` clause to the column definition.
+    *
+    * Affects the `insert` model of the table - columns *with* `default` are optional on insert.
+    *
+    * If you need to set a dynamic default value, use {@link $defaultFn} instead.
+    */
+    default(value) {
+      this.config.default = value;
+      this.config.hasDefault = true;
+      return this;
+    }
+    /**
+    * Adds a dynamic default value to the column.
+    * The function will be called when the row is inserted, and the returned value will be used as the column value.
+    *
+    * **Note:** This value does not affect the `drizzle-kit` behavior, it is only used at runtime in `drizzle-orm`.
+    */
+    $defaultFn(fn) {
+      this.config.defaultFn = fn;
+      this.config.hasDefault = true;
+      return this;
+    }
+    /**
+    * Adds a dynamic update value to the column.
+    * The function will be called when the row is updated, and the returned value will be used as the column value if none is provided.
+    * If no `default` (or `$defaultFn`) value is provided, the function will be called when the row is inserted as well, and the returned value will be used as the column value.
+    *
+    * **Note:** This value does not affect the `drizzle-kit` behavior, it is only used at runtime in `drizzle-orm`.
+    */
+    $onUpdateFn(fn) {
+      this.config.onUpdateFn = fn;
+      this.config.hasDefault = true;
+      return this;
+    }
+    /**
+    * Adds a `primary key` clause to the column definition. This implicitly makes the column `not null`.
+    *
+    * In SQLite, `integer primary key` implicitly makes the column auto-incrementing.
+    */
+    primaryKey() {
+      this.config.primaryKey = true;
+      this.config.notNull = true;
+      return this;
+    }
+    /** @internal Sets the name of the column to the key within the table definition if a name was not given. */
+    setName(name, casingFn) {
+      if (this.config.name !== "") return;
+      this.config.name = casingFn(name);
+    }
+    array(dimensions) {
+      const dim = dimensions ?? "[]";
+      this.config.dimensions = dim.length / 2;
+      return this;
+    }
+    references(ref, config2 = {}) {
+      this.foreignKeyConfigs.push({
+        ref,
+        config: config2
+      });
+      return this;
+    }
+    unique(name, config2) {
+      this.config.isUnique = true;
+      this.config.uniqueName = name;
+      this.config.uniqueType = config2?.nulls;
+      return this;
+    }
+    generatedAlwaysAs(as) {
+      this.config.generated = {
+        as,
+        type: "always",
+        mode: "stored"
+      };
+      return this;
+    }
+    /** @internal */
+    buildForeignKeys(column, table) {
+      return this.foreignKeyConfigs.map(({ ref, config: config2 }) => {
+        return iife((ref2, config3) => {
+          const builder = new ForeignKeyBuilder(() => {
+            const foreignColumn = ref2();
+            return {
+              name: config3.name,
+              columns: [column],
+              foreignColumns: [foreignColumn]
+            };
+          });
+          if (config3.onUpdate) builder.onUpdate(config3.onUpdate);
+          if (config3.onDelete) builder.onDelete(config3.onDelete);
+          return builder.build(table);
+        }, ref, config2);
+      });
+    }
+    /** @internal */
+    buildExtraConfigColumn(table) {
+      return new ExtraConfigColumn(table, {
+        ...this.config,
+        dimensions: this.config.dimensions ?? 0
+      });
+    }
+  }, __publicField(_da, _ca, "PgColumnBuilder"), _da);
+  var PgColumn = (_ga = class extends (_fa = Column, _ea = entityKind, _fa) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "table");
+      __publicField(this, "dimensions");
+      this.table = table;
+      this.dimensions = config2.dimensions ?? 0;
+    }
+    /** @internal */
+    postBuild() {
+      if (this.dimensions) {
+        const originalFromDriver = this.mapFromDriverValue.bind(this);
+        const originalToDriver = this.mapToDriverValue.bind(this);
+        this.mapFromDriverValue = this.mapFromDriverValue.isNoop ? this.mapFromDriverValue : (value) => {
+          return this.mapArrayElements(value, originalFromDriver, this.dimensions);
+        };
+        this.mapToDriverValue = this.mapToDriverValue.isNoop ? this.mapToDriverValue : (value) => {
+          return this.mapArrayElements(value, originalToDriver, this.dimensions);
+        };
+      }
+      return this;
+    }
+    /** @internal */
+    mapArrayElements(value, mapper, depth) {
+      if (depth > 0 && Array.isArray(value)) return value.map((v2) => v2 === null ? null : this.mapArrayElements(v2, mapper, depth - 1));
+      return mapper(value);
+    }
+  }, __publicField(_ga, _ea, "PgColumn"), _ga);
+  var ExtraConfigColumn = (_ja = class extends (_ia = PgColumn, _ha = entityKind, _ia) {
+    constructor() {
+      super(...arguments);
+      /** @itnernal */
+      __publicField(this, "codec");
+      __publicField(this, "indexConfig", {
+        order: this.config.order ?? "asc",
+        nulls: this.config.nulls ?? "last",
+        opClass: this.config.opClass
+      });
+      __publicField(this, "defaultConfig", {
+        order: "asc",
+        nulls: "last",
+        opClass: void 0
+      });
+    }
+    getSQLType() {
+      return this.getSQLType();
+    }
+    asc() {
+      this.indexConfig.order = "asc";
+      return this;
+    }
+    desc() {
+      this.indexConfig.order = "desc";
+      return this;
+    }
+    nullsFirst() {
+      this.indexConfig.nulls = "first";
+      return this;
+    }
+    nullsLast() {
+      this.indexConfig.nulls = "last";
+      return this;
+    }
+    /**
+    * ### PostgreSQL documentation quote
+    *
+    * > An operator class with optional parameters can be specified for each column of an index.
+    * The operator class identifies the operators to be used by the index for that column.
+    * For example, a B-tree index on four-byte integers would use the int4_ops class;
+    * this operator class includes comparison functions for four-byte integers.
+    * In practice the default operator class for the column's data type is usually sufficient.
+    * The main point of having operator classes is that for some data types, there could be more than one meaningful ordering.
+    * For example, we might want to sort a complex-number data type either by absolute value or by real part.
+    * We could do this by defining two operator classes for the data type and then selecting the proper class when creating an index.
+    * More information about operator classes check:
+    *
+    * ### Useful links
+    * https://www.postgresql.org/docs/current/sql-createindex.html
+    *
+    * https://www.postgresql.org/docs/current/indexes-opclass.html
+    *
+    * https://www.postgresql.org/docs/current/xindex.html
+    *
+    * ### Additional types
+    * If you have the `pg_vector` extension installed in your database, you can use the
+    * `vector_l2_ops`, `vector_ip_ops`, `vector_cosine_ops`, `vector_l1_ops`, `bit_hamming_ops`, `bit_jaccard_ops`, `halfvec_l2_ops`, `sparsevec_l2_ops` options, which are predefined types.
+    *
+    * **You can always specify any string you want in the operator class, in case Drizzle doesn't have it natively in its types**
+    *
+    * @param opClass
+    * @returns
+    */
+    op(opClass) {
+      this.indexConfig.opClass = opClass;
+      return this;
+    }
+  }, __publicField(_ja, _ha, "ExtraConfigColumn"), _ja);
+  var PgIntColumnBuilder = (_ma = class extends (_la = PgColumnBuilder, _ka = entityKind, _la) {
+    /**
+    * Adds an `ALWAYS AS IDENTITY` clause to the column definition.
+    * Available for integer column types.
+    */
+    generatedAlwaysAsIdentity(sequence) {
+      if (sequence) {
+        const { name, ...options } = sequence;
+        this.config.generatedIdentity = {
+          type: "always",
+          sequenceName: name,
+          sequenceOptions: options
+        };
+      } else this.config.generatedIdentity = { type: "always" };
+      this.config.hasDefault = true;
+      this.config.notNull = true;
+      return this;
+    }
+    /**
+    * Adds a `BY DEFAULT AS IDENTITY` clause to the column definition.
+    * Available for integer column types.
+    */
+    generatedByDefaultAsIdentity(sequence) {
+      if (sequence) {
+        const { name, ...options } = sequence;
+        this.config.generatedIdentity = {
+          type: "byDefault",
+          sequenceName: name,
+          sequenceOptions: options
+        };
+      } else this.config.generatedIdentity = { type: "byDefault" };
+      this.config.hasDefault = true;
+      this.config.notNull = true;
+      return this;
+    }
+  }, __publicField(_ma, _ka, "PgIntColumnBaseBuilder"), _ma);
+  var PgBigInt53Builder = (_pa = class extends (_oa = PgIntColumnBuilder, _na = entityKind, _oa) {
+    constructor(name) {
+      super(name, "number int53", "PgBigInt53");
+    }
+    /** @internal */
+    build(table) {
+      return new PgBigInt53(table, this.config);
+    }
+  }, __publicField(_pa, _na, "PgBigInt53Builder"), _pa);
+  var PgBigInt53 = (_sa = class extends (_ra = PgColumn, _qa = entityKind, _ra) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "bigint:number");
+    }
+    getSQLType() {
+      return "bigint";
+    }
+  }, __publicField(_sa, _qa, "PgBigInt53"), _sa);
+  var PgBigInt64Builder = (_va = class extends (_ua = PgIntColumnBuilder, _ta = entityKind, _ua) {
+    constructor(name) {
+      super(name, "bigint int64", "PgBigInt64");
+    }
+    /** @internal */
+    build(table) {
+      return new PgBigInt64(table, this.config);
+    }
+  }, __publicField(_va, _ta, "PgBigInt64Builder"), _va);
+  var PgBigInt64 = (_ya = class extends (_xa = PgColumn, _wa = entityKind, _xa) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "bigint");
+    }
+    getSQLType() {
+      return "bigint";
+    }
+  }, __publicField(_ya, _wa, "PgBigInt64"), _ya);
+  var PgBigIntStringBuilder = (_Ba = class extends (_Aa = PgIntColumnBuilder, _za = entityKind, _Aa) {
+    constructor(name) {
+      super(name, "string int64", "PgBigIntString");
+    }
+    /** @internal */
+    build(table) {
+      return new PgBigIntString(table, this.config);
+    }
+  }, __publicField(_Ba, _za, "PgBigIntStringBuilder"), _Ba);
+  var PgBigIntString = (_Ea = class extends (_Da = PgColumn, _Ca = entityKind, _Da) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "bigint:string");
+    }
+    getSQLType() {
+      return "bigint";
+    }
+  }, __publicField(_Ea, _Ca, "PgBigIntString"), _Ea);
+  function bigint(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    if (config2.mode === "number") return new PgBigInt53Builder(name);
+    if (config2.mode === "string") return new PgBigIntStringBuilder(name);
+    return new PgBigInt64Builder(name);
+  }
+  var PgBigSerial53Builder = (_Ha = class extends (_Ga = PgColumnBuilder, _Fa = entityKind, _Ga) {
+    constructor(name) {
+      super(name, "number int53", "PgBigSerial53");
+      this.config.hasDefault = true;
+      this.config.notNull = true;
+    }
+    /** @internal */
+    build(table) {
+      return new PgBigSerial53(table, this.config);
+    }
+  }, __publicField(_Ha, _Fa, "PgBigSerial53Builder"), _Ha);
+  var PgBigSerial53 = (_Ka = class extends (_Ja = PgColumn, _Ia = entityKind, _Ja) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "bigserial:number");
+    }
+    getSQLType() {
+      return "bigserial";
+    }
+  }, __publicField(_Ka, _Ia, "PgBigSerial53"), _Ka);
+  var PgBigSerial64Builder = (_Na = class extends (_Ma = PgColumnBuilder, _La = entityKind, _Ma) {
+    constructor(name) {
+      super(name, "bigint int64", "PgBigSerial64");
+      this.config.hasDefault = true;
+      this.config.notNull = true;
+    }
+    /** @internal */
+    build(table) {
+      return new PgBigSerial64(table, this.config);
+    }
+  }, __publicField(_Na, _La, "PgBigSerial64Builder"), _Na);
+  var PgBigSerial64 = (_Qa = class extends (_Pa = PgColumn, _Oa = entityKind, _Pa) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "bigserial");
+    }
+    getSQLType() {
+      return "bigserial";
+    }
+  }, __publicField(_Qa, _Oa, "PgBigSerial64"), _Qa);
+  function bigserial(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    if (config2.mode === "number") return new PgBigSerial53Builder(name);
+    return new PgBigSerial64Builder(name);
+  }
+  var PgBooleanBuilder = (_Ta = class extends (_Sa = PgColumnBuilder, _Ra = entityKind, _Sa) {
+    constructor(name) {
+      super(name, "boolean", "PgBoolean");
+    }
+    /** @internal */
+    build(table) {
+      return new PgBoolean(table, this.config);
+    }
+  }, __publicField(_Ta, _Ra, "PgBooleanBuilder"), _Ta);
+  var PgBoolean = (_Wa = class extends (_Va = PgColumn, _Ua = entityKind, _Va) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "bool");
+    }
+    getSQLType() {
+      return "boolean";
+    }
+  }, __publicField(_Wa, _Ua, "PgBoolean"), _Wa);
+  function boolean(name) {
+    return new PgBooleanBuilder(name ?? "");
+  }
+  var PgCharBuilder = (_Za = class extends (_Ya = PgColumnBuilder, _Xa = entityKind, _Ya) {
+    constructor(name, config2) {
+      super(name, config2.enum?.length ? "string enum" : "string", "PgChar");
+      this.config.length = config2.length ?? 1;
+      this.config.setLength = config2.length !== void 0;
+      this.config.enumValues = config2.enum;
+    }
+    /** @internal */
+    build(table) {
+      return new PgChar(table, this.config);
+    }
+  }, __publicField(_Za, _Xa, "PgCharBuilder"), _Za);
+  var PgChar = (_ab = class extends (_$a = PgColumn, __a = entityKind, _$a) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "char");
+      __publicField(this, "enumValues");
+      __publicField(this, "setLength");
+      this.enumValues = config2.enumValues;
+      this.setLength = config2.setLength;
+    }
+    getSQLType() {
+      return this.setLength ? `char(${this.length})` : `char`;
+    }
+  }, __publicField(_ab, __a, "PgChar"), _ab);
+  function char(a2, b2 = {}) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    return new PgCharBuilder(name, config2);
+  }
+  var PgCidrBuilder = (_db = class extends (_cb = PgColumnBuilder, _bb = entityKind, _cb) {
+    constructor(name) {
+      super(name, "string cidr", "PgCidr");
+    }
+    /** @internal */
+    build(table) {
+      return new PgCidr(table, this.config);
+    }
+  }, __publicField(_db, _bb, "PgCidrBuilder"), _db);
+  var PgCidr = (_gb = class extends (_fb = PgColumn, _eb = entityKind, _fb) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "cidr");
+    }
+    getSQLType() {
+      return "cidr";
+    }
+  }, __publicField(_gb, _eb, "PgCidr"), _gb);
+  function cidr(name) {
+    return new PgCidrBuilder(name ?? "");
+  }
+  function parsePgArrayValue(arrayString, startFrom, inQuotes) {
+    for (let i = startFrom; i < arrayString.length; i++) {
+      const char2 = arrayString[i];
+      if (char2 === "\\") {
+        i++;
+        continue;
+      }
+      if (char2 === '"') return [arrayString.slice(startFrom, i).replace(/\\/g, ""), i + 1];
+      if (inQuotes) continue;
+      if (char2 === "," || char2 === "}") return [arrayString.slice(startFrom, i).replace(/\\/g, ""), i];
+    }
+    return [arrayString.slice(startFrom).replace(/\\/g, ""), arrayString.length];
+  }
+  function parsePgNestedArray(arrayString, startFrom = 0) {
+    const result = [];
+    let i = startFrom;
+    let lastCharIsComma = false;
+    while (i < arrayString.length) {
+      const char2 = arrayString[i];
+      if (char2 === ",") {
+        if (lastCharIsComma || i === startFrom) result.push("");
+        lastCharIsComma = true;
+        i++;
+        continue;
+      }
+      lastCharIsComma = false;
+      if (char2 === "\\") {
+        i += 2;
+        continue;
+      }
+      if (char2 === '"') {
+        const [value2, startFrom2] = parsePgArrayValue(arrayString, i + 1, true);
+        result.push(value2);
+        i = startFrom2;
+        continue;
+      }
+      if (char2 === "}") return [result, i + 1];
+      if (char2 === "{") {
+        const [value2, startFrom2] = parsePgNestedArray(arrayString, i + 1);
+        result.push(value2);
+        i = startFrom2;
+        continue;
+      }
+      const [value, newStartFrom] = parsePgArrayValue(arrayString, i, false);
+      result.push(value);
+      i = newStartFrom;
+    }
+    return [result, i];
+  }
+  function parsePgArray(arrayString) {
+    const [result] = parsePgNestedArray(arrayString, 1);
+    return result;
+  }
+  const PG_ALIAS_TO_TYPE_MAP = {
+    int2: "smallint",
+    integer: "int",
+    int4: "int",
+    int8: "bigint",
+    decimal: "numeric",
+    real: "float4",
+    double: "float8",
+    "double precision": "float8",
+    serial2: "smallserial",
+    serial4: "serial",
+    serial8: "bigserial",
+    character: "char",
+    "character varying": "varchar",
+    "time with time zone": "timetz",
+    "time without time zone": "time",
+    "timestamp with time zone": "timestamptz",
+    "timestamp without time zone": "timestamp",
+    boolean: "bool",
+    "bit varying": "varbit"
+  };
+  function resolvePgTypeAlias(type) {
+    return PG_ALIAS_TO_TYPE_MAP[type] ?? type;
+  }
+  var PgCustomColumnBuilder = (_jb = class extends (_ib = PgColumnBuilder, _hb = entityKind, _ib) {
+    constructor(name, fieldConfig, customTypeParams) {
+      super(name, "custom", "PgCustomColumn");
+      this.config.fieldConfig = fieldConfig;
+      this.config.customTypeParams = customTypeParams;
+    }
+    /** @internal */
+    build(table) {
+      return new PgCustomColumn(table, this.config);
+    }
+  }, __publicField(_jb, _hb, "PgCustomColumnBuilder"), _jb);
+  var PgCustomColumn = (_mb = class extends (_lb = PgColumn, _kb = entityKind, _lb) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec");
+      __publicField(this, "sqlName");
+      __publicField(this, "mapFromJsonValue");
+      __publicField(this, "jsonSelectIdentifier");
+      this.sqlName = config2.customTypeParams.dataType(config2.fieldConfig);
+      this.mapToDriverValue = config2.customTypeParams.toDriver ?? this.mapToDriverValue;
+      this.mapFromDriverValue = config2.customTypeParams.fromDriver ?? this.mapFromDriverValue;
+      this.mapFromJsonValue = config2.customTypeParams.fromJson;
+      this.jsonSelectIdentifier = config2.customTypeParams.forJsonSelect;
+      const cfgCodec = typeof config2.customTypeParams.codec === "string" || typeof config2.customTypeParams.codec === "undefined" ? config2.customTypeParams.codec : config2.customTypeParams.codec(config2.fieldConfig);
+      this.codec = typeof cfgCodec === "string" ? resolvePgTypeAlias(cfgCodec) : void 0;
+      if (this.dimensions && config2.customTypeParams.fromJson) this.mapFromJsonValue = (value) => {
+        if (value === null) return value;
+        const arr = typeof value === "string" ? parsePgArray(value) : value;
+        return this.mapJsonArrayElements(arr, config2.customTypeParams.fromJson, this.dimensions);
+      };
+    }
+    /** @internal */
+    mapJsonArrayElements(value, mapper, depth) {
+      if (depth > 0 && Array.isArray(value)) return value.map((v2) => v2 === null ? null : this.mapJsonArrayElements(v2, mapper, depth - 1));
+      return mapper(value);
+    }
+    getSQLType() {
+      return this.sqlName;
+    }
+  }, __publicField(_mb, _kb, "PgCustomColumn"), _mb);
+  function customType(customTypeParams) {
+    return (a2, b2) => {
+      const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+      return new PgCustomColumnBuilder(name, config2, customTypeParams);
+    };
+  }
+  var PgDateColumnBuilder = (_pb = class extends (_ob = PgColumnBuilder, _nb = entityKind, _ob) {
+    /**
+    * Adds a `default now()` clause to the column definition.
+    * Available for date/time column types.
+    */
+    defaultNow() {
+      return this.default(sql`now()`);
+    }
+  }, __publicField(_pb, _nb, "PgDateColumnBaseBuilder"), _pb);
+  var PgDateBuilder = (_sb = class extends (_rb = PgDateColumnBuilder, _qb = entityKind, _rb) {
+    constructor(name) {
+      super(name, "object date", "PgDate");
+    }
+    /** @internal */
+    build(table) {
+      return new PgDate(table, this.config);
+    }
+  }, __publicField(_sb, _qb, "PgDateBuilder"), _sb);
+  var PgDate = (_vb = class extends (_ub = PgColumn, _tb = entityKind, _ub) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "date");
+      __publicField(this, "mapToDriverValue", function(value) {
+        if (typeof value === "string") return value;
+        return value.toISOString();
+      });
+    }
+    getSQLType() {
+      return "date";
+    }
+  }, __publicField(_vb, _tb, "PgDate"), _vb);
+  var PgDateStringBuilder = (_yb = class extends (_xb = PgDateColumnBuilder, _wb = entityKind, _xb) {
+    constructor(name) {
+      super(name, "string date", "PgDateString");
+    }
+    /** @internal */
+    build(table) {
+      return new PgDateString(table, this.config);
+    }
+  }, __publicField(_yb, _wb, "PgDateStringBuilder"), _yb);
+  var PgDateString = (_Bb = class extends (_Ab = PgColumn, _zb = entityKind, _Ab) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "date:string");
+      __publicField(this, "mapToDriverValue", (value) => {
+        if (typeof value === "string") return value;
+        return value.toISOString();
+      });
+    }
+    getSQLType() {
+      return "date";
+    }
+  }, __publicField(_Bb, _zb, "PgDateString"), _Bb);
+  function date(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    if (config2?.mode === "date") return new PgDateBuilder(name);
+    return new PgDateStringBuilder(name);
+  }
+  var PgDoublePrecisionBuilder = (_Eb = class extends (_Db = PgColumnBuilder, _Cb = entityKind, _Db) {
+    constructor(name) {
+      super(name, "number double", "PgDoublePrecision");
+    }
+    /** @internal */
+    build(table) {
+      return new PgDoublePrecision(table, this.config);
+    }
+  }, __publicField(_Eb, _Cb, "PgDoublePrecisionBuilder"), _Eb);
+  var PgDoublePrecision = (_Hb = class extends (_Gb = PgColumn, _Fb = entityKind, _Gb) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "float8");
+    }
+    getSQLType() {
+      return "double precision";
+    }
+  }, __publicField(_Hb, _Fb, "PgDoublePrecision"), _Hb);
+  function doublePrecision(name) {
+    return new PgDoublePrecisionBuilder(name ?? "");
+  }
+  var PgInetBuilder = (_Kb = class extends (_Jb = PgColumnBuilder, _Ib = entityKind, _Jb) {
+    constructor(name) {
+      super(name, "string inet", "PgInet");
+    }
+    /** @internal */
+    build(table) {
+      return new PgInet(table, this.config);
+    }
+  }, __publicField(_Kb, _Ib, "PgInetBuilder"), _Kb);
+  var PgInet = (_Nb = class extends (_Mb = PgColumn, _Lb = entityKind, _Mb) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "inet");
+    }
+    getSQLType() {
+      return "inet";
+    }
+  }, __publicField(_Nb, _Lb, "PgInet"), _Nb);
+  function inet(name) {
+    return new PgInetBuilder(name ?? "");
+  }
+  var PgIntegerBuilder = (_Qb = class extends (_Pb = PgIntColumnBuilder, _Ob = entityKind, _Pb) {
+    constructor(name) {
+      super(name, "number int32", "PgInteger");
+    }
+    /** @internal */
+    build(table) {
+      return new PgInteger(table, this.config);
+    }
+  }, __publicField(_Qb, _Ob, "PgIntegerBuilder"), _Qb);
+  var PgInteger = (_Tb = class extends (_Sb = PgColumn, _Rb = entityKind, _Sb) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "int");
+    }
+    getSQLType() {
+      return "integer";
+    }
+  }, __publicField(_Tb, _Rb, "PgInteger"), _Tb);
+  function integer(name) {
+    return new PgIntegerBuilder(name ?? "");
+  }
+  var PgIntervalBuilder = (_Wb = class extends (_Vb = PgColumnBuilder, _Ub = entityKind, _Vb) {
+    constructor(name, intervalConfig) {
+      super(name, "string interval", "PgInterval");
+      this.config.intervalConfig = intervalConfig;
+    }
+    /** @internal */
+    build(table) {
+      return new PgInterval(table, this.config);
+    }
+  }, __publicField(_Wb, _Ub, "PgIntervalBuilder"), _Wb);
+  var PgInterval = (_Zb = class extends (_Yb = PgColumn, _Xb = entityKind, _Yb) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "interval");
+      __publicField(this, "fields");
+      __publicField(this, "precision");
+      this.fields = config2.intervalConfig.fields;
+      this.precision = config2.intervalConfig.precision;
+    }
+    getSQLType() {
+      return `interval${this.fields ? ` ${this.fields}` : ""}${this.precision ? `(${this.precision})` : ""}`;
+    }
+  }, __publicField(_Zb, _Xb, "PgInterval"), _Zb);
+  function interval(a2, b2 = {}) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    return new PgIntervalBuilder(name, config2);
+  }
+  var PgJsonBuilder = (_ac = class extends (_$b = PgColumnBuilder, __b = entityKind, _$b) {
+    constructor(name) {
+      super(name, "object json", "PgJson");
+    }
+    /** @internal */
+    build(table) {
+      return new PgJson(table, this.config);
+    }
+  }, __publicField(_ac, __b, "PgJsonBuilder"), _ac);
+  var PgJson = (_dc = class extends (_cc = PgColumn, _bc = entityKind, _cc) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "json");
+    }
+    getSQLType() {
+      return "json";
+    }
+  }, __publicField(_dc, _bc, "PgJson"), _dc);
+  function json(name) {
+    return new PgJsonBuilder(name ?? "");
+  }
+  var PgJsonbBuilder = (_gc = class extends (_fc = PgColumnBuilder, _ec = entityKind, _fc) {
+    constructor(name) {
+      super(name, "object json", "PgJsonb");
+    }
+    /** @internal */
+    build(table) {
+      return new PgJsonb(table, this.config);
+    }
+  }, __publicField(_gc, _ec, "PgJsonbBuilder"), _gc);
+  var PgJsonb = (_jc = class extends (_ic = PgColumn, _hc = entityKind, _ic) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "jsonb");
+    }
+    getSQLType() {
+      return "jsonb";
+    }
+  }, __publicField(_jc, _hc, "PgJsonb"), _jc);
+  function jsonb(name) {
+    return new PgJsonbBuilder(name ?? "");
+  }
+  var PgLineBuilder = (_mc = class extends (_lc = PgColumnBuilder, _kc = entityKind, _lc) {
+    constructor(name) {
+      super(name, "array line", "PgLine");
+    }
+    /** @internal */
+    build(table) {
+      return new PgLineTuple(table, this.config);
+    }
+  }, __publicField(_mc, _kc, "PgLineBuilder"), _mc);
+  var PgLineTuple = (_pc = class extends (_oc = PgColumn, _nc = entityKind, _oc) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "line:tuple");
+      __publicField(this, "mode", "tuple");
+      __publicField(this, "mapToDriverValue", (value) => {
+        return `{${value[0]},${value[1]},${value[2]}}`;
+      });
+    }
+    getSQLType() {
+      return "line";
+    }
+  }, __publicField(_pc, _nc, "PgLine"), _pc);
+  var PgLineABCBuilder = (_sc = class extends (_rc = PgColumnBuilder, _qc = entityKind, _rc) {
+    constructor(name) {
+      super(name, "object line", "PgLineABC");
+    }
+    /** @internal */
+    build(table) {
+      return new PgLineABC(table, this.config);
+    }
+  }, __publicField(_sc, _qc, "PgLineABCBuilder"), _sc);
+  var PgLineABC = (_vc = class extends (_uc = PgColumn, _tc = entityKind, _uc) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "line");
+      __publicField(this, "mode", "abc");
+      __publicField(this, "mapToDriverValue", (value) => {
+        return `{${value.a},${value.b},${value.c}}`;
+      });
+    }
+    getSQLType() {
+      return "line";
+    }
+  }, __publicField(_vc, _tc, "PgLineABC"), _vc);
+  function line(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    if (!config2?.mode || config2.mode === "tuple") return new PgLineBuilder(name);
+    return new PgLineABCBuilder(name);
+  }
+  var PgMacaddrBuilder = (_yc = class extends (_xc = PgColumnBuilder, _wc = entityKind, _xc) {
+    constructor(name) {
+      super(name, "string macaddr", "PgMacaddr");
+    }
+    /** @internal */
+    build(table) {
+      return new PgMacaddr(table, this.config);
+    }
+  }, __publicField(_yc, _wc, "PgMacaddrBuilder"), _yc);
+  var PgMacaddr = (_Bc = class extends (_Ac = PgColumn, _zc = entityKind, _Ac) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "macaddr");
+    }
+    getSQLType() {
+      return "macaddr";
+    }
+  }, __publicField(_Bc, _zc, "PgMacaddr"), _Bc);
+  function macaddr(name) {
+    return new PgMacaddrBuilder(name ?? "");
+  }
+  var PgMacaddr8Builder = (_Ec = class extends (_Dc = PgColumnBuilder, _Cc = entityKind, _Dc) {
+    constructor(name) {
+      super(name, "string macaddr8", "PgMacaddr8");
+    }
+    /** @internal */
+    build(table) {
+      return new PgMacaddr8(table, this.config);
+    }
+  }, __publicField(_Ec, _Cc, "PgMacaddr8Builder"), _Ec);
+  var PgMacaddr8 = (_Hc = class extends (_Gc = PgColumn, _Fc = entityKind, _Gc) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "macaddr8");
+    }
+    getSQLType() {
+      return "macaddr8";
+    }
+  }, __publicField(_Hc, _Fc, "PgMacaddr8"), _Hc);
+  function macaddr8(name) {
+    return new PgMacaddr8Builder(name ?? "");
+  }
+  var PgNumericBuilder = (_Kc = class extends (_Jc = PgColumnBuilder, _Ic = entityKind, _Jc) {
+    constructor(name, precision, scale) {
+      super(name, "string numeric", "PgNumeric");
+      this.config.precision = precision;
+      this.config.scale = scale;
+    }
+    /** @internal */
+    build(table) {
+      return new PgNumeric(table, this.config);
+    }
+  }, __publicField(_Kc, _Ic, "PgNumericBuilder"), _Kc);
+  var PgNumeric = (_Nc = class extends (_Mc = PgColumn, _Lc = entityKind, _Mc) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "numeric");
+      __publicField(this, "precision");
+      __publicField(this, "scale");
+      this.precision = config2.precision;
+      this.scale = config2.scale;
+    }
+    getSQLType() {
+      if (this.precision !== void 0 && this.scale !== void 0) return `numeric(${this.precision}, ${this.scale})`;
+      else if (this.precision === void 0) return "numeric";
+      else return `numeric(${this.precision})`;
+    }
+  }, __publicField(_Nc, _Lc, "PgNumeric"), _Nc);
+  var PgNumericNumberBuilder = (_Qc = class extends (_Pc = PgColumnBuilder, _Oc = entityKind, _Pc) {
+    constructor(name, precision, scale) {
+      super(name, "number", "PgNumericNumber");
+      this.config.precision = precision;
+      this.config.scale = scale;
+    }
+    /** @internal */
+    build(table) {
+      return new PgNumericNumber(table, this.config);
+    }
+  }, __publicField(_Qc, _Oc, "PgNumericNumberBuilder"), _Qc);
+  var PgNumericNumber = (_Tc = class extends (_Sc = PgColumn, _Rc = entityKind, _Sc) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "numeric:number");
+      __publicField(this, "precision");
+      __publicField(this, "scale");
+      __publicField(this, "mapToDriverValue", String);
+      this.precision = config2.precision;
+      this.scale = config2.scale;
+    }
+    getSQLType() {
+      if (this.precision !== void 0 && this.scale !== void 0) return `numeric(${this.precision}, ${this.scale})`;
+      else if (this.precision === void 0) return "numeric";
+      else return `numeric(${this.precision})`;
+    }
+  }, __publicField(_Tc, _Rc, "PgNumericNumber"), _Tc);
+  var PgNumericBigIntBuilder = (_Wc = class extends (_Vc = PgColumnBuilder, _Uc = entityKind, _Vc) {
+    constructor(name, precision, scale) {
+      super(name, "bigint int64", "PgNumericBigInt");
+      this.config.precision = precision;
+      this.config.scale = scale;
+    }
+    /** @internal */
+    build(table) {
+      return new PgNumericBigInt(table, this.config);
+    }
+  }, __publicField(_Wc, _Uc, "PgNumericBigIntBuilder"), _Wc);
+  var PgNumericBigInt = (_Zc = class extends (_Yc = PgColumn, _Xc = entityKind, _Yc) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "numeric:bigint");
+      __publicField(this, "precision");
+      __publicField(this, "scale");
+      __publicField(this, "mapToDriverValue", String);
+      this.precision = config2.precision;
+      this.scale = config2.scale;
+    }
+    getSQLType() {
+      if (this.precision !== void 0 && this.scale !== void 0) return `numeric(${this.precision}, ${this.scale})`;
+      else if (this.precision === void 0) return "numeric";
+      else return `numeric(${this.precision})`;
+    }
+  }, __publicField(_Zc, _Xc, "PgNumericBigInt"), _Zc);
+  function numeric(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    const mode = config2?.mode;
+    return mode === "number" ? new PgNumericNumberBuilder(name, config2?.precision, config2?.scale) : mode === "bigint" ? new PgNumericBigIntBuilder(name, config2?.precision, config2?.scale) : new PgNumericBuilder(name, config2?.precision, config2?.scale);
+  }
+  var PgPointTupleBuilder = (_ad = class extends (_$c = PgColumnBuilder, __c = entityKind, _$c) {
+    constructor(name) {
+      super(name, "array point", "PgPointTuple");
+    }
+    /** @internal */
+    build(table) {
+      return new PgPointTuple(table, this.config);
+    }
+  }, __publicField(_ad, __c, "PgPointTupleBuilder"), _ad);
+  var PgPointTuple = (_dd = class extends (_cd = PgColumn, _bd = entityKind, _cd) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "point:tuple");
+      __publicField(this, "mode", "tuple");
+      __publicField(this, "mapToDriverValue", (value) => {
+        return `(${value[0]},${value[1]})`;
+      });
+    }
+    getSQLType() {
+      return "point";
+    }
+  }, __publicField(_dd, _bd, "PgPointTuple"), _dd);
+  var PgPointObjectBuilder = (_gd = class extends (_fd = PgColumnBuilder, _ed = entityKind, _fd) {
+    constructor(name) {
+      super(name, "object point", "PgPointObject");
+    }
+    /** @internal */
+    build(table) {
+      return new PgPointObject(table, this.config);
+    }
+  }, __publicField(_gd, _ed, "PgPointObjectBuilder"), _gd);
+  var PgPointObject = (_jd = class extends (_id = PgColumn, _hd = entityKind, _id) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "point");
+      __publicField(this, "mode", "xy");
+      __publicField(this, "mapToDriverValue", (value) => {
+        return `(${value.x},${value.y})`;
+      });
+    }
+    getSQLType() {
+      return "point";
+    }
+  }, __publicField(_jd, _hd, "PgPointObject"), _jd);
+  function point(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    if (!config2?.mode || config2.mode === "tuple") return new PgPointTupleBuilder(name);
+    return new PgPointObjectBuilder(name);
+  }
+  var PgGeometryBuilder = (_md = class extends (_ld = PgColumnBuilder, _kd = entityKind, _ld) {
+    constructor(name, srid) {
+      super(name, "array geometry", "PgGeometry");
+      this.config.srid = srid;
+    }
+    /** @internal */
+    build(table) {
+      return new PgGeometry(table, this.config);
+    }
+  }, __publicField(_md, _kd, "PgGeometryBuilder"), _md);
+  var PgGeometry = (_pd = class extends (_od = PgColumn, _nd = entityKind, _od) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "geometry(point):tuple");
+      __publicField(this, "srid", this.config.srid);
+      __publicField(this, "mode", "tuple");
+      __publicField(this, "mapToDriverValue", (value) => {
+        return `point(${value[0]} ${value[1]})`;
+      });
+    }
+    getSQLType() {
+      return `geometry(point${this.srid === void 0 ? "" : `,${this.srid}`})`;
+    }
+  }, __publicField(_pd, _nd, "PgGeometry"), _pd);
+  var PgGeometryObjectBuilder = (_sd = class extends (_rd = PgColumnBuilder, _qd = entityKind, _rd) {
+    constructor(name, srid) {
+      super(name, "object geometry", "PgGeometryObject");
+      this.config.srid = srid;
+    }
+    /** @internal */
+    build(table) {
+      return new PgGeometryObject(table, this.config);
+    }
+  }, __publicField(_sd, _qd, "PgGeometryObjectBuilder"), _sd);
+  var PgGeometryObject = (_vd = class extends (_ud = PgColumn, _td = entityKind, _ud) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "geometry(point)");
+      __publicField(this, "srid", this.config.srid);
+      __publicField(this, "mode", "object");
+      __publicField(this, "mapToDriverValue", (value) => {
+        return `point(${value.x} ${value.y})`;
+      });
+    }
+    getSQLType() {
+      return `geometry(point${this.srid === void 0 ? "" : `,${this.srid}`})`;
+    }
+  }, __publicField(_vd, _td, "PgGeometryObject"), _vd);
+  function geometry(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    if (!config2?.mode || config2.mode === "tuple") return new PgGeometryBuilder(name, config2?.srid);
+    return new PgGeometryObjectBuilder(name, config2?.srid);
+  }
+  var PgRealBuilder = (_yd = class extends (_xd = PgColumnBuilder, _wd = entityKind, _xd) {
+    constructor(name, length) {
+      super(name, "number float", "PgReal");
+      this.config.length = length;
+    }
+    /** @internal */
+    build(table) {
+      return new PgReal(table, this.config);
+    }
+  }, __publicField(_yd, _wd, "PgRealBuilder"), _yd);
+  var PgReal = (_Bd = class extends (_Ad = PgColumn, _zd = entityKind, _Ad) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "float4");
+    }
+    getSQLType() {
+      return "real";
+    }
+  }, __publicField(_Bd, _zd, "PgReal"), _Bd);
+  function real(name) {
+    return new PgRealBuilder(name ?? "");
+  }
+  var PgSerialBuilder = (_Ed = class extends (_Dd = PgColumnBuilder, _Cd = entityKind, _Dd) {
+    constructor(name) {
+      super(name, "number int32", "PgSerial");
+      this.config.hasDefault = true;
+      this.config.notNull = true;
+    }
+    /** @internal */
+    build(table) {
+      return new PgSerial(table, this.config);
+    }
+  }, __publicField(_Ed, _Cd, "PgSerialBuilder"), _Ed);
+  var PgSerial = (_Hd = class extends (_Gd = PgColumn, _Fd = entityKind, _Gd) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "serial");
+    }
+    getSQLType() {
+      return "serial";
+    }
+  }, __publicField(_Hd, _Fd, "PgSerial"), _Hd);
+  function serial(name) {
+    return new PgSerialBuilder(name ?? "");
+  }
+  var PgSmallIntBuilder = (_Kd = class extends (_Jd = PgIntColumnBuilder, _Id = entityKind, _Jd) {
+    constructor(name) {
+      super(name, "number int16", "PgSmallInt");
+    }
+    /** @internal */
+    build(table) {
+      return new PgSmallInt(table, this.config);
+    }
+  }, __publicField(_Kd, _Id, "PgSmallIntBuilder"), _Kd);
+  var PgSmallInt = (_Nd = class extends (_Md = PgColumn, _Ld = entityKind, _Md) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "smallint");
+    }
+    getSQLType() {
+      return "smallint";
+    }
+  }, __publicField(_Nd, _Ld, "PgSmallInt"), _Nd);
+  function smallint(name) {
+    return new PgSmallIntBuilder(name ?? "");
+  }
+  var PgSmallSerialBuilder = (_Qd = class extends (_Pd = PgColumnBuilder, _Od = entityKind, _Pd) {
+    constructor(name) {
+      super(name, "number int16", "PgSmallSerial");
+      this.config.hasDefault = true;
+      this.config.notNull = true;
+    }
+    /** @internal */
+    build(table) {
+      return new PgSmallSerial(table, this.config);
+    }
+  }, __publicField(_Qd, _Od, "PgSmallSerialBuilder"), _Qd);
+  var PgSmallSerial = (_Td = class extends (_Sd = PgColumn, _Rd = entityKind, _Sd) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "smallserial");
+    }
+    getSQLType() {
+      return "smallserial";
+    }
+  }, __publicField(_Td, _Rd, "PgSmallSerial"), _Td);
+  function smallserial(name) {
+    return new PgSmallSerialBuilder(name ?? "");
+  }
+  var PgTextBuilder = (_Wd = class extends (_Vd = PgColumnBuilder, _Ud = entityKind, _Vd) {
+    constructor(name, config2) {
+      super(name, config2.enum?.length ? "string enum" : "string", "PgText");
+      this.config.enumValues = config2.enum;
+    }
+    /** @internal */
+    build(table) {
+      return new PgText(table, this.config, this.config.enumValues);
+    }
+  }, __publicField(_Wd, _Ud, "PgTextBuilder"), _Wd);
+  var PgText = (_Zd = class extends (_Yd = PgColumn, _Xd = entityKind, _Yd) {
+    constructor(table, config2, enumValues) {
+      super(table, config2);
+      __publicField(this, "enumValues");
+      /** @internal */
+      __publicField(this, "codec", "text");
+      this.enumValues = enumValues;
+    }
+    getSQLType() {
+      return "text";
+    }
+  }, __publicField(_Zd, _Xd, "PgText"), _Zd);
+  function text(a2, b2 = {}) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    return new PgTextBuilder(name, config2);
+  }
+  var PgTimeBuilder = (_ae = class extends (_$d = PgDateColumnBuilder, __d = entityKind, _$d) {
+    constructor(name, withTimezone, precision) {
+      super(name, "string time", "PgTime");
+      this.withTimezone = withTimezone;
+      this.precision = precision;
+      this.config.withTimezone = withTimezone;
+      this.config.precision = precision;
+    }
+    /** @internal */
+    build(table) {
+      return new PgTime(table, this.config);
+    }
+  }, __publicField(_ae, __d, "PgTimeBuilder"), _ae);
+  var PgTime = (_de = class extends (_ce = PgColumn, _be = entityKind, _ce) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "time");
+      __publicField(this, "withTimezone");
+      __publicField(this, "precision");
+      this.withTimezone = config2.withTimezone;
+      this.precision = config2.precision;
+    }
+    getSQLType() {
+      return `time${this.precision === void 0 ? "" : `(${this.precision})`}${this.withTimezone ? " with time zone" : ""}`;
+    }
+  }, __publicField(_de, _be, "PgTime"), _de);
+  function time(a2, b2 = {}) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    return new PgTimeBuilder(name, config2.withTimezone ?? false, config2.precision);
+  }
+  var PgTimestampBuilder = (_ge = class extends (_fe = PgDateColumnBuilder, _ee = entityKind, _fe) {
+    constructor(name, withTimezone, precision) {
+      super(name, "object date", "PgTimestamp");
+      this.config.withTimezone = withTimezone;
+      this.config.precision = precision;
+    }
+    /** @internal */
+    build(table) {
+      return new PgTimestamp(table, this.config);
+    }
+  }, __publicField(_ge, _ee, "PgTimestampBuilder"), _ge);
+  var PgTimestamp = (_je = class extends (_ie = PgColumn, _he = entityKind, _ie) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec");
+      __publicField(this, "withTimezone");
+      __publicField(this, "precision");
+      __publicField(this, "mapToDriverValue", (value) => {
+        if (typeof value === "string") return value;
+        return value.toISOString();
+      });
+      this.withTimezone = config2.withTimezone;
+      this.precision = config2.precision;
+      this.codec = this.withTimezone ? "timestamptz" : "timestamp";
+    }
+    getSQLType() {
+      return `timestamp${this.precision === void 0 ? "" : ` (${this.precision})`}${this.withTimezone ? " with time zone" : ""}`;
+    }
+  }, __publicField(_je, _he, "PgTimestamp"), _je);
+  var PgTimestampStringBuilder = (_me = class extends (_le = PgDateColumnBuilder, _ke = entityKind, _le) {
+    constructor(name, withTimezone, precision) {
+      super(name, "string timestamp", "PgTimestampString");
+      this.config.withTimezone = withTimezone;
+      this.config.precision = precision;
+    }
+    /** @internal */
+    build(table) {
+      return new PgTimestampString(table, this.config);
+    }
+  }, __publicField(_me, _ke, "PgTimestampStringBuilder"), _me);
+  var PgTimestampString = (_pe = class extends (_oe = PgColumn, _ne = entityKind, _oe) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec");
+      __publicField(this, "withTimezone");
+      __publicField(this, "precision");
+      __publicField(this, "mapToDriverValue", (value) => {
+        if (typeof value === "string") return value;
+        return value.toISOString();
+      });
+      this.withTimezone = config2.withTimezone;
+      this.precision = config2.precision;
+      this.codec = this.withTimezone ? "timestamptz:string" : "timestamp:string";
+    }
+    getSQLType() {
+      return `timestamp${this.precision === void 0 ? "" : `(${this.precision})`}${this.withTimezone ? " with time zone" : ""}`;
+    }
+  }, __publicField(_pe, _ne, "PgTimestampString"), _pe);
+  function timestamp(a2, b2 = {}) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    if (config2?.mode === "string") return new PgTimestampStringBuilder(name, config2.withTimezone ?? false, config2.precision);
+    return new PgTimestampBuilder(name, config2?.withTimezone ?? false, config2?.precision);
+  }
+  var PgUUIDBuilder = (_se = class extends (_re = PgColumnBuilder, _qe = entityKind, _re) {
+    constructor(name) {
+      super(name, "string uuid", "PgUUID");
+    }
+    /**
+    * Adds `default gen_random_uuid()` to the column definition.
+    */
+    defaultRandom() {
+      return this.default(sql`gen_random_uuid()`);
+    }
+    /** @internal */
+    build(table) {
+      return new PgUUID(table, this.config);
+    }
+  }, __publicField(_se, _qe, "PgUUIDBuilder"), _se);
+  var PgUUID = (_ve = class extends (_ue = PgColumn, _te = entityKind, _ue) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "uuid");
+    }
+    getSQLType() {
+      return "uuid";
+    }
+  }, __publicField(_ve, _te, "PgUUID"), _ve);
+  function uuid(name) {
+    return new PgUUIDBuilder(name ?? "");
+  }
+  var PgVarcharBuilder = (_ye = class extends (_xe = PgColumnBuilder, _we = entityKind, _xe) {
+    constructor(name, config2) {
+      super(name, config2.enum?.length ? "string enum" : "string", "PgVarchar");
+      this.config.length = config2.length;
+      this.config.enumValues = config2.enum;
+    }
+    /** @internal */
+    build(table) {
+      return new PgVarchar(table, this.config);
+    }
+  }, __publicField(_ye, _we, "PgVarcharBuilder"), _ye);
+  var PgVarchar = (_Be = class extends (_Ae = PgColumn, _ze = entityKind, _Ae) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "varchar");
+      __publicField(this, "enumValues");
+      this.enumValues = config2.enumValues;
+    }
+    getSQLType() {
+      return this.length === void 0 ? `varchar` : `varchar(${this.length})`;
+    }
+  }, __publicField(_Be, _ze, "PgVarchar"), _Be);
+  function varchar(a2, b2 = {}) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    return new PgVarcharBuilder(name, config2);
+  }
+  var PgBinaryVectorBuilder = (_Ee = class extends (_De = PgColumnBuilder, _Ce = entityKind, _De) {
+    constructor(name, config2) {
+      super(name, "string binary", "PgBinaryVector");
+      this.config.length = config2.dimensions;
+      this.config.isLengthExact = true;
+    }
+    /** @internal */
+    build(table) {
+      return new PgBinaryVector(table, this.config);
+    }
+  }, __publicField(_Ee, _Ce, "PgBinaryVectorBuilder"), _Ee);
+  var PgBinaryVector = (_He = class extends (_Ge = PgColumn, _Fe = entityKind, _Ge) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "bit");
+    }
+    getSQLType() {
+      return `bit(${this.length})`;
+    }
+  }, __publicField(_He, _Fe, "PgBinaryVector"), _He);
+  function bit(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    return new PgBinaryVectorBuilder(name, config2);
+  }
+  var PgHalfVectorBuilder = (_Ke = class extends (_Je = PgColumnBuilder, _Ie = entityKind, _Je) {
+    constructor(name, config2) {
+      super(name, "array halfvector", "PgHalfVector");
+      this.config.length = config2.dimensions;
+      this.config.isLengthExact = true;
+    }
+    /** @internal */
+    build(table) {
+      return new PgHalfVector(table, this.config);
+    }
+  }, __publicField(_Ke, _Ie, "PgHalfVectorBuilder"), _Ke);
+  var PgHalfVector = (_Ne = class extends (_Me = PgColumn, _Le = entityKind, _Me) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "halfvec");
+      __publicField(this, "mapToDriverValue", (value) => {
+        return JSON.stringify(value);
+      });
+    }
+    getSQLType() {
+      return `halfvec(${this.length})`;
+    }
+  }, __publicField(_Ne, _Le, "PgHalfVector"), _Ne);
+  function halfvec(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    return new PgHalfVectorBuilder(name, config2);
+  }
+  var PgSparseVectorBuilder = (_Qe = class extends (_Pe = PgColumnBuilder, _Oe = entityKind, _Pe) {
+    constructor(name, config2) {
+      super(name, "string sparsevec", "PgSparseVector");
+      this.config.vectorDimensions = config2.dimensions;
+    }
+    /** @internal */
+    build(table) {
+      return new PgSparseVector(table, this.config);
+    }
+  }, __publicField(_Qe, _Oe, "PgSparseVectorBuilder"), _Qe);
+  var PgSparseVector = (_Te = class extends (_Se = PgColumn, _Re = entityKind, _Se) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "sparsevec");
+      __publicField(this, "vectorDimensions", this.config.vectorDimensions);
+    }
+    getSQLType() {
+      return `sparsevec(${this.vectorDimensions})`;
+    }
+  }, __publicField(_Te, _Re, "PgSparseVector"), _Te);
+  function sparsevec(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    return new PgSparseVectorBuilder(name, config2);
+  }
+  var PgVectorBuilder = (_We = class extends (_Ve = PgColumnBuilder, _Ue = entityKind, _Ve) {
+    constructor(name, config2) {
+      super(name, "array vector", "PgVector");
+      this.config.length = config2.dimensions;
+      this.config.isLengthExact = true;
+    }
+    /** @internal */
+    build(table) {
+      return new PgVector(table, this.config);
+    }
+  }, __publicField(_We, _Ue, "PgVectorBuilder"), _We);
+  var PgVector = (_Ze = class extends (_Ye = PgColumn, _Xe = entityKind, _Ye) {
+    constructor() {
+      super(...arguments);
+      /** @internal */
+      __publicField(this, "codec", "vector");
+      __publicField(this, "mapToDriverValue", (value) => {
+        return JSON.stringify(value);
+      });
+    }
+    getSQLType() {
+      return `vector(${this.length})`;
+    }
+  }, __publicField(_Ze, _Xe, "PgVector"), _Ze);
+  function vector(a2, b2) {
+    const { name, config: config2 } = getColumnNameAndConfig(a2, b2);
+    return new PgVectorBuilder(name, config2);
+  }
+  function getPgColumnBuilders() {
+    return {
+      bigint,
+      bigserial,
+      boolean,
+      char,
+      cidr,
+      customType,
+      date,
+      doublePrecision,
+      inet,
+      integer,
+      interval,
+      json,
+      jsonb,
+      line,
+      macaddr,
+      macaddr8,
+      numeric,
+      point,
+      geometry,
+      real,
+      serial,
+      smallint,
+      smallserial,
+      text,
+      time,
+      timestamp,
+      uuid,
+      varchar,
+      bit,
+      halfvec,
+      sparsevec,
+      vector
+    };
+  }
+  function getCasingFn(casing) {
+    return (name) => name;
+  }
+  const InlineForeignKeys = /* @__PURE__ */ Symbol.for("drizzle:PgInlineForeignKeys");
+  const EnableRLS = /* @__PURE__ */ Symbol.for("drizzle:EnableRLS");
+  var PgTable = (_ef = class extends (_df = Table, _cf = entityKind, _bf = InlineForeignKeys, _af = EnableRLS, _$e = Table.Symbol.ExtraConfigBuilder, __e = Table.Symbol.ExtraConfigColumns, _df) {
+    constructor() {
+      super(...arguments);
+      /**@internal */
+      __publicField(this, _bf, []);
+      /** @internal */
+      __publicField(this, _af, false);
+      /** @internal */
+      __publicField(this, _$e);
+      /** @internal */
+      __publicField(this, __e, {});
+    }
+  }, __publicField(_ef, _cf, "PgTable"), /** @internal */
+  __publicField(_ef, "Symbol", Object.assign({}, Table.Symbol, {
+    InlineForeignKeys,
+    EnableRLS
+  })), _ef);
+  function pgTableWithSchema(name, columns, extraConfig, schema, casing, baseName = name) {
+    const casingFn = getCasingFn();
+    const rawTable = new PgTable(name, schema, baseName);
+    const parsedColumns = typeof columns === "function" ? columns(getPgColumnBuilders()) : columns;
+    const builtColumns = Object.fromEntries(Object.entries(parsedColumns).map(([name2, colBuilderBase]) => {
+      const colBuilder = colBuilderBase;
+      colBuilder.setName(name2, casingFn);
+      const column = colBuilder.build(rawTable).postBuild();
+      rawTable[InlineForeignKeys].push(...colBuilder.buildForeignKeys(column, rawTable));
+      return [name2, column];
+    }));
+    const builtColumnsForExtraConfig = Object.fromEntries(Object.entries(parsedColumns).map(([name2, colBuilderBase]) => {
+      const colBuilder = colBuilderBase;
+      colBuilder.setName(name2, casingFn);
+      return [name2, colBuilder.buildExtraConfigColumn(rawTable)];
+    }));
+    const table = Object.assign(rawTable, builtColumns);
+    table[Table.Symbol.Columns] = builtColumns;
+    table[Table.Symbol.ExtraConfigColumns] = builtColumnsForExtraConfig;
+    if (extraConfig) table[PgTable.Symbol.ExtraConfigBuilder] = extraConfig;
+    return Object.assign(table, { enableRLS: () => {
+      table[PgTable.Symbol.EnableRLS] = true;
+      return table;
+    } });
+  }
+  function pgTableWithCasing(casing) {
+    const pgTableInternal = (name, columns, extraConfig) => {
+      return pgTableWithSchema(name, columns, extraConfig, void 0);
+    };
+    const pgTableWithRLS = (name, columns, extraConfig) => {
+      const table = pgTableWithSchema(name, columns, extraConfig, void 0);
+      table[EnableRLS] = true;
+      return table;
+    };
+    return Object.assign(pgTableInternal, { withRLS: pgTableWithRLS });
+  }
+  const pgTable = pgTableWithCasing();
+  var PgEnumObjectColumnBuilder = (_hf = class extends (_gf = PgColumnBuilder, _ff = entityKind, _gf) {
+    constructor(name, enumInstance) {
+      super(name, "string enum", "PgEnumObjectColumn");
+      this.config.enum = enumInstance;
+    }
+    /** @internal */
+    build(table) {
+      return new PgEnumObjectColumn(table, this.config);
+    }
+  }, __publicField(_hf, _ff, "PgEnumObjectColumnBuilder"), _hf);
+  var PgEnumObjectColumn = (_kf = class extends (_jf = PgColumn, _if = entityKind, _jf) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "enum");
+      __publicField(this, "enum");
+      __publicField(this, "enumValues");
+      this.enum = config2.enum;
+      this.enumValues = config2.enum.enumValues;
+    }
+    getSQLType() {
+      return this.enum.enumName;
+    }
+  }, __publicField(_kf, _if, "PgEnumObjectColumn"), _kf);
+  const isPgEnumSym = /* @__PURE__ */ Symbol.for("drizzle:isPgEnum");
+  var PgEnumColumnBuilder = (_nf = class extends (_mf = PgColumnBuilder, _lf = entityKind, _mf) {
+    constructor(name, enumInstance) {
+      super(name, "string enum", "PgEnumColumn");
+      this.config.enum = enumInstance;
+    }
+    /** @internal */
+    build(table) {
+      return new PgEnumColumn(table, this.config);
+    }
+  }, __publicField(_nf, _lf, "PgEnumColumnBuilder"), _nf);
+  var PgEnumColumn = (_qf = class extends (_pf = PgColumn, _of = entityKind, _pf) {
+    constructor(table, config2) {
+      super(table, config2);
+      /** @internal */
+      __publicField(this, "codec", "enum");
+      __publicField(this, "enum");
+      __publicField(this, "enumValues");
+      this.enum = config2.enum;
+      this.enumValues = config2.enum.enumValues;
+    }
+    getSQLType() {
+      return this.enum.enumName;
+    }
+  }, __publicField(_qf, _of, "PgEnumColumn"), _qf);
+  function pgEnum(enumName, input) {
+    return Array.isArray(input) ? pgEnumWithSchema(enumName, [...input], void 0) : pgEnumObjectWithSchema(enumName, input, void 0);
+  }
+  function pgEnumWithSchema(enumName, values, schema) {
+    const enumInstance = Object.assign((name) => new PgEnumColumnBuilder(name ?? "", enumInstance), {
+      enumName,
+      enumValues: values,
+      schema,
+      [isPgEnumSym]: true
+    });
+    return enumInstance;
+  }
+  function pgEnumObjectWithSchema(enumName, values, schema) {
+    const enumInstance = Object.assign((name) => new PgEnumObjectColumnBuilder(name ?? "", enumInstance), {
+      enumName,
+      enumValues: Object.values(values),
+      schema,
+      [isPgEnumSym]: true
+    });
+    return enumInstance;
+  }
+  const literalSchema = union([
+    string$1(),
+    number$1(),
+    boolean$2(),
+    _null()
+  ]);
+  const jsonSchema = union([
+    literalSchema,
+    record(string$1(), any()),
+    array(any())
+  ]);
+  const bufferSchema = custom((v2) => v2 instanceof Buffer);
+  function columnToSchema(column, factory) {
+    const z$1$1 = factory?.zodInstance ?? z$1;
+    const coerce2 = factory?.coerce ?? {};
+    let schema;
+    const dimensions = column.dimensions;
+    if (typeof dimensions === "number" && dimensions > 0) return pgArrayColumnToSchema(column, dimensions, z$1$1, coerce2);
+    const { type, constraint } = extractExtendedColumnType(column);
+    switch (type) {
+      case "array":
+        schema = arrayColumnToSchema(column, constraint, z$1$1, coerce2);
+        break;
+      case "object":
+        schema = objectColumnToSchema(column, constraint, z$1$1, coerce2);
+        break;
+      case "number":
+        schema = numberColumnToSchema(column, constraint, z$1$1, coerce2);
+        break;
+      case "bigint":
+        schema = bigintColumnToSchema(column, constraint, z$1$1, coerce2);
+        break;
+      case "boolean":
+        schema = coerce2 === true || coerce2.boolean ? z$1$1.coerce.boolean() : z$1$1.boolean();
+        break;
+      case "string":
+        schema = stringColumnToSchema(column, constraint, z$1$1, coerce2);
+        break;
+      case "custom":
+        schema = z$1$1.any();
+        break;
+      default:
+        schema = z$1$1.any();
+    }
+    return schema;
+  }
+  function numberColumnToSchema(column, constraint, z2, coerce2) {
+    let min;
+    let max;
+    let integer2 = false;
+    switch (constraint) {
+      case "int8":
+        min = CONSTANTS.INT8_MIN;
+        max = CONSTANTS.INT8_MAX;
+        integer2 = true;
+        break;
+      case "uint8":
+        min = 0;
+        max = CONSTANTS.INT8_UNSIGNED_MAX;
+        integer2 = true;
+        break;
+      case "int16":
+        min = CONSTANTS.INT16_MIN;
+        max = CONSTANTS.INT16_MAX;
+        integer2 = true;
+        break;
+      case "uint16":
+        min = 0;
+        max = CONSTANTS.INT16_UNSIGNED_MAX;
+        integer2 = true;
+        break;
+      case "int24":
+        min = CONSTANTS.INT24_MIN;
+        max = CONSTANTS.INT24_MAX;
+        integer2 = true;
+        break;
+      case "uint24":
+        min = 0;
+        max = CONSTANTS.INT24_UNSIGNED_MAX;
+        integer2 = true;
+        break;
+      case "int32":
+        min = CONSTANTS.INT32_MIN;
+        max = CONSTANTS.INT32_MAX;
+        integer2 = true;
+        break;
+      case "uint32":
+        min = 0;
+        max = CONSTANTS.INT32_UNSIGNED_MAX;
+        integer2 = true;
+        break;
+      case "int53":
+        min = Number.MIN_SAFE_INTEGER;
+        max = Number.MAX_SAFE_INTEGER;
+        integer2 = true;
+        break;
+      case "uint53":
+        min = 0;
+        max = Number.MAX_SAFE_INTEGER;
+        integer2 = true;
+        break;
+      case "float":
+        min = CONSTANTS.INT24_MIN;
+        max = CONSTANTS.INT24_MAX;
+        break;
+      case "ufloat":
+        min = 0;
+        max = CONSTANTS.INT24_UNSIGNED_MAX;
+        break;
+      case "double":
+        min = CONSTANTS.INT48_MIN;
+        max = CONSTANTS.INT48_MAX;
+        break;
+      case "udouble":
+        min = 0;
+        max = CONSTANTS.INT48_UNSIGNED_MAX;
+        break;
+      case "year":
+        min = 1901;
+        max = 2155;
+        integer2 = true;
+        break;
+      case "unsigned":
+        min = 0;
+        max = Number.MAX_SAFE_INTEGER;
+        break;
+      default:
+        min = Number.MIN_SAFE_INTEGER;
+        max = Number.MAX_SAFE_INTEGER;
+        break;
+    }
+    let schema = coerce2 === true || coerce2?.number ? integer2 ? z2.coerce.number().int() : z2.coerce.number() : integer2 ? z2.int() : z2.number();
+    schema = schema.gte(min).lte(max);
+    return schema;
+  }
+  const bigintStringModeSchema = string$1().regex(/^-?\d+$/).transform(BigInt).pipe(bigint$2().gte(CONSTANTS.INT64_MIN).lte(CONSTANTS.INT64_MAX)).transform(String);
+  const unsignedBigintStringModeSchema = string$1().regex(/^\d+$/).transform(BigInt).pipe(bigint$2().gte(0n).lte(CONSTANTS.INT64_MAX)).transform(String);
+  function bigintColumnToSchema(column, constraint, z2, coerce2) {
+    let min;
+    let max;
+    switch (constraint) {
+      case "int64":
+        min = CONSTANTS.INT64_MIN;
+        max = CONSTANTS.INT64_MAX;
+        break;
+      case "uint64":
+        min = 0n;
+        max = CONSTANTS.INT64_UNSIGNED_MAX;
+        break;
+    }
+    let schema = coerce2 === true || coerce2?.bigint ? z2.coerce.bigint() : z2.bigint();
+    if (min !== void 0) schema = schema.min(min);
+    if (max !== void 0) schema = schema.max(max);
+    return schema;
+  }
+  function pgArrayColumnToSchema(column, dimensions, z2, coerce2) {
+    const [baseType, baseConstraint] = column.dataType.split(" ");
+    let baseSchema;
+    switch (baseType) {
+      case "number":
+        baseSchema = numberColumnToSchema(column, baseConstraint, z2, coerce2);
+        break;
+      case "bigint":
+        baseSchema = bigintColumnToSchema(column, baseConstraint, z2, coerce2);
+        break;
+      case "boolean":
+        baseSchema = coerce2 === true || coerce2?.boolean ? z2.coerce.boolean() : z2.boolean();
+        break;
+      case "string":
+        baseSchema = stringColumnToSchema(column, baseConstraint, z2, coerce2);
+        break;
+      case "object":
+        baseSchema = objectColumnToSchema(column, baseConstraint, z2, coerce2);
+        break;
+      case "array":
+        baseSchema = arrayColumnToSchema(column, baseConstraint, z2, coerce2);
+        break;
+      default:
+        baseSchema = z2.any();
+    }
+    let schema = z2.array(baseSchema);
+    for (let i = 1; i < dimensions; i++) schema = z2.array(schema);
+    return schema;
+  }
+  function arrayColumnToSchema(column, constraint, z2, coerce2) {
+    switch (constraint) {
+      case "geometry":
+      case "point":
+        return z2.tuple([z2.number(), z2.number()]);
+      case "line":
+        return z2.tuple([
+          z2.number(),
+          z2.number(),
+          z2.number()
+        ]);
+      case "vector":
+      case "halfvector": {
+        const length = column.length;
+        return length ? z2.array(z2.number()).length(length) : z2.array(z2.number());
+      }
+      case "int64vector": {
+        const length = column.length;
+        return length ? z2.array(z2.bigint().min(CONSTANTS.INT64_MIN).max(CONSTANTS.INT64_MAX)).length(length) : z2.array(z2.bigint().min(CONSTANTS.INT64_MIN).max(CONSTANTS.INT64_MAX));
+      }
+      case "basecolumn": {
+        const baseColumn = column.baseColumn;
+        if (baseColumn) {
+          const baseSchema = columnToSchema(baseColumn, {
+            zodInstance: z2,
+            coerce: coerce2
+          });
+          const length = column.length;
+          const schema = z2.array(baseSchema);
+          if (length) return schema.length(length);
+          return schema;
+        }
+        return z2.array(z2.any());
+      }
+      default:
+        return z2.array(z2.any());
+    }
+  }
+  function objectColumnToSchema(column, constraint, z2, coerce2) {
+    switch (constraint) {
+      case "buffer":
+        return bufferSchema;
+      case "date":
+        return coerce2 === true || coerce2?.date ? z2.coerce.date() : z2.date();
+      case "geometry":
+      case "point":
+        return z2.object({
+          x: z2.number(),
+          y: z2.number()
+        });
+      case "json":
+        return jsonSchema;
+      case "line":
+        return z2.object({
+          a: z2.number(),
+          b: z2.number(),
+          c: z2.number()
+        });
+      default:
+        return z2.looseObject({});
+    }
+  }
+  function stringColumnToSchema(column, constraint, z2, coerce2) {
+    const { name: columnName, length, isLengthExact } = column;
+    let regex;
+    if (constraint === "binary") regex = /^[01]*$/;
+    if (constraint === "uuid") return z2.uuid();
+    if (constraint === "enum") {
+      const enumValues = column.enumValues;
+      if (!enumValues) throw new Error(`Column "${getTableName(getColumnTable(column))}"."${columnName}" is of 'enum' type, but lacks enum values`);
+      return z2.enum(enumValues);
+    }
+    if (constraint === "int64") return bigintStringModeSchema;
+    if (constraint === "uint64") return unsignedBigintStringModeSchema;
+    let schema = coerce2 === true || coerce2?.string ? z2.coerce.string() : z2.string();
+    schema = regex ? schema.regex(regex) : schema;
+    return length && isLengthExact ? schema.length(length) : length ? schema.max(length) : schema;
+  }
+  function handleColumns(columns, refinements, conditions, factory) {
+    const columnSchemas = {};
+    for (const [key, selected] of Object.entries(columns)) {
+      if (!is(selected, Column) && !is(selected, SQL) && !is(selected, SQL.Aliased) && typeof selected === "object") {
+        columnSchemas[key] = handleColumns(isTable(selected) || isView(selected) ? getColumns(selected) : selected, refinements[key] ?? {}, conditions, factory);
+        continue;
+      }
+      const refinement = refinements[key];
+      if (refinement !== void 0 && typeof refinement !== "function") {
+        columnSchemas[key] = refinement;
+        continue;
+      }
+      const column = is(selected, Column) ? selected : void 0;
+      const schema = column ? columnToSchema(column, factory) : any();
+      const refined = typeof refinement === "function" ? refinement(schema) : schema;
+      if (conditions.never(column)) continue;
+      else columnSchemas[key] = refined;
+      if (column) {
+        if (conditions.nullable(column)) columnSchemas[key] = columnSchemas[key].nullable();
+        if (conditions.optional(column)) columnSchemas[key] = columnSchemas[key].optional();
+      }
+    }
+    return object(columnSchemas);
+  }
+  const insertConditions = {
+    never: (column) => column?.generated?.type === "always" || column?.generatedIdentity?.type === "always" || "identity" in (column ?? {}) && typeof column?.identity !== "undefined",
+    optional: (column) => !column.notNull || column.notNull && column.hasDefault,
+    nullable: (column) => !column.notNull
+  };
+  const createInsertSchema = (entity, refine2) => {
+    return handleColumns(getColumns(entity), {}, insertConditions);
+  };
+  const o = pgEnum(`mode`, [`Normal`, `Bottom`, `Top`, `Reverse`, `Ext`]), s = pgEnum(`pool`, [`Def`, `Sub`, `Adv`, `Ix`]), c = pgEnum(`dm_attr`, [`Protect`, `FromLive`, `HighLike`, `Compatible`, `Reported`, `Unchecked`, `HasEvent`, `Hide`]), l = pgTable(`danmakus`, { SOID: text().notNull(), DMID: text().primaryKey(), progress: integer().notNull(), mode: o().notNull(), fontsize: smallint().notNull(), color: integer().notNull(), senderID: text().notNull(), content: text().notNull(), ctime: timestamp().notNull(), weight: smallint().notNull(), pool: s().notNull(), attr: c().array().notNull(), platform: text(), extra: jsonb().$type() });
+  createInsertSchema(l);
+  createInsertSchema(l);
+  const f = pgTable(`chunks`, { id: serial().primaryKey(), fromConverted: boolean().notNull().default(false), tmp: boolean().notNull().default(false) });
+  createInsertSchema(f);
+  const m$1 = pgTable(`chunk_danmakus`, { id: bigserial({ mode: `bigint` }).primaryKey(), chunkID: integer().references(() => f.id).notNull(), DMID: text().references(() => l.DMID).notNull() });
+  createInsertSchema(m$1);
+  defineRelations({ danmakus: l, chunks: f, chunk2danmakus: m$1 });
+  defineRelationsPart({ danmakus: l, chunks: f, chunk2danmakus: m$1 }, (e2) => ({ chunks: { danmakus: e2.many.danmakus({ from: e2.chunks.id.through(e2.chunk2danmakus.chunkID), to: e2.danmakus.DMID.through(e2.chunk2danmakus.DMID) }) } }));
+  ({ danmakus: Object.fromEntries(Object.keys(l).map((e2) => [e2, sql.raw(`excluded."${e2}"`)])) });
+  ({ danmakus: { target: [l.DMID] } });
+  _enum(l.mode.enumValues);
+  _enum(l.pool.enumValues);
+  _enum(l.attr.enumValues);
   function protoCamelCase(snakeCase) {
     let capNext = false;
     const b2 = [];
-    for (let i2 = 0; i2 < snakeCase.length; i2++) {
-      let c2 = snakeCase.charAt(i2);
+    for (let i = 0; i < snakeCase.length; i++) {
+      let c2 = snakeCase.charAt(i);
       switch (c2) {
         case "_":
           capNext = true;
@@ -20892,8 +21020,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     throw new Error("invalid varint");
   }
   function varint64write(lo, hi, bytes) {
-    for (let i2 = 0; i2 < 28; i2 = i2 + 7) {
-      const shift = lo >>> i2;
+    for (let i = 0; i < 28; i = i + 7) {
+      const shift = lo >>> i;
       const hasNext = !(shift >>> 7 == 0 && hi == 0);
       const byte = (hasNext ? shift | 128 : shift) & 255;
       bytes.push(byte);
@@ -20907,8 +21035,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     if (!hasMoreBits) {
       return;
     }
-    for (let i2 = 3; i2 < 31; i2 = i2 + 7) {
-      const shift = hi >>> i2;
+    for (let i = 3; i < 31; i = i + 7) {
+      const shift = hi >>> i;
       const hasNext = !(shift >>> 7 == 0);
       const byte = (hasNext ? shift | 128 : shift) & 255;
       bytes.push(byte);
@@ -21000,7 +21128,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }
       bytes.push(value);
     } else {
-      for (let i2 = 0; i2 < 9; i2++) {
+      for (let i = 0; i < 9; i++) {
         bytes.push(value & 127 | 128);
         value = value >> 7;
       }
@@ -21291,11 +21419,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       case ScalarType.STRING:
         return value;
       case ScalarType.BYTES: {
-        const u = unescapeBytesDefaultValue(value);
-        if (u === false) {
+        const u2 = unescapeBytesDefaultValue(value);
+        if (u2 === false) {
           throw new Error(`cannot parse ${ScalarType[type]} default value: ${value}`);
         }
-        return u;
+        return u2;
       }
       case ScalarType.INT64:
       case ScalarType.SFIXED64:
@@ -21797,18 +21925,18 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     };
     desc.open = isEnumOpen(desc);
     reg.add(desc);
-    for (const p of proto.value) {
-      const name = p.name;
+    for (const p2 of proto.value) {
+      const name = p2.name;
       desc.values.push(
         // biome-ignore lint/suspicious/noAssignInExpressions: no
-        desc.value[p.number] = {
+        desc.value[p2.number] = {
           kind: "enum_value",
-          proto: p,
-          deprecated: (_d2 = (_c2 = p.options) === null || _c2 === void 0 ? void 0 : _c2.deprecated) !== null && _d2 !== void 0 ? _d2 : false,
+          proto: p2,
+          deprecated: (_d2 = (_c2 = p2.options) === null || _c2 === void 0 ? void 0 : _c2.deprecated) !== null && _d2 !== void 0 ? _d2 : false,
           parent: desc,
           name,
           localName: safeObjectProperty(sharedPrefix == void 0 ? name : name.substring(sharedPrefix.length)),
-          number: p.number,
+          number: p2.number,
           toString() {
             return `enum value ${desc.typeName}.${name}`;
           }
@@ -22278,11 +22406,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       es2 -= 2;
     else if (base64Str[base64Str.length - 1] == "=")
       es2 -= 1;
-    let bytes = new Uint8Array(es2), bytePos = 0, groupPos = 0, b2, p = 0;
-    for (let i2 = 0; i2 < base64Str.length; i2++) {
-      b2 = table[base64Str.charCodeAt(i2)];
+    let bytes = new Uint8Array(es2), bytePos = 0, groupPos = 0, b2, p2 = 0;
+    for (let i = 0; i < base64Str.length; i++) {
+      b2 = table[base64Str.charCodeAt(i)];
       if (b2 === void 0) {
-        switch (base64Str[i2]) {
+        switch (base64Str[i]) {
           // @ts-ignore TS7029: Fallthrough case in switch -- ignore instead of expect-error for compiler settings without noFallthroughCasesInSwitch: true
           case "=":
             groupPos = 0;
@@ -22299,21 +22427,21 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }
       switch (groupPos) {
         case 0:
-          p = b2;
+          p2 = b2;
           groupPos = 1;
           break;
         case 1:
-          bytes[bytePos++] = p << 2 | (b2 & 48) >> 4;
-          p = b2;
+          bytes[bytePos++] = p2 << 2 | (b2 & 48) >> 4;
+          p2 = b2;
           groupPos = 2;
           break;
         case 2:
-          bytes[bytePos++] = (p & 15) << 4 | (b2 & 60) >> 2;
-          p = b2;
+          bytes[bytePos++] = (p2 & 15) << 4 | (b2 & 60) >> 2;
+          p2 = b2;
           groupPos = 3;
           break;
         case 3:
-          bytes[bytePos++] = (p & 3) << 6 | b2;
+          bytes[bytePos++] = (p2 & 3) << 6 | b2;
           groupPos = 0;
           break;
       }
@@ -22335,8 +22463,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     if (!decodeTable) {
       decodeTable = [];
       const encodeTable = getEncodeTable();
-      for (let i2 = 0; i2 < encodeTable.length; i2++)
-        decodeTable[encodeTable[i2].charCodeAt(0)] = i2;
+      for (let i = 0; i < encodeTable.length; i++)
+        decodeTable[encodeTable[i].charCodeAt(0)] = i;
       decodeTable["-".charCodeAt(0)] = encodeTable.indexOf("+");
       decodeTable["_".charCodeAt(0)] = encodeTable.indexOf("/");
     }
@@ -22366,9 +22494,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     var _a3, _b2, _c2, _d2;
     if (isObject$1(arg) && unsafeLocal in arg && "add" in arg && "field" in arg && typeof arg.field == "function") {
       if (field !== void 0) {
-        const a = field;
+        const a2 = field;
         const b2 = arg.field();
-        return a.listKind == b2.listKind && a.scalar === b2.scalar && ((_a3 = a.message) === null || _a3 === void 0 ? void 0 : _a3.typeName) === ((_b2 = b2.message) === null || _b2 === void 0 ? void 0 : _b2.typeName) && ((_c2 = a.enum) === null || _c2 === void 0 ? void 0 : _c2.typeName) === ((_d2 = b2.enum) === null || _d2 === void 0 ? void 0 : _d2.typeName);
+        return a2.listKind == b2.listKind && a2.scalar === b2.scalar && ((_a3 = a2.message) === null || _a3 === void 0 ? void 0 : _a3.typeName) === ((_b2 = b2.message) === null || _b2 === void 0 ? void 0 : _b2.typeName) && ((_c2 = a2.enum) === null || _c2 === void 0 ? void 0 : _c2.typeName) === ((_d2 = b2.enum) === null || _d2 === void 0 ? void 0 : _d2.typeName);
       }
       return true;
     }
@@ -22378,8 +22506,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     var _a3, _b2, _c2, _d2;
     if (isObject$1(arg) && unsafeLocal in arg && "has" in arg && "field" in arg && typeof arg.field == "function") {
       if (field !== void 0) {
-        const a = field, b2 = arg.field();
-        return a.mapKey === b2.mapKey && a.mapKind == b2.mapKind && a.scalar === b2.scalar && ((_a3 = a.message) === null || _a3 === void 0 ? void 0 : _a3.typeName) === ((_b2 = b2.message) === null || _b2 === void 0 ? void 0 : _b2.typeName) && ((_c2 = a.enum) === null || _c2 === void 0 ? void 0 : _c2.typeName) === ((_d2 = b2.enum) === null || _d2 === void 0 ? void 0 : _d2.typeName);
+        const a2 = field, b2 = arg.field();
+        return a2.mapKey === b2.mapKey && a2.mapKind == b2.mapKind && a2.scalar === b2.scalar && ((_a3 = a2.message) === null || _a3 === void 0 ? void 0 : _a3.typeName) === ((_b2 = b2.message) === null || _b2 === void 0 ? void 0 : _b2.typeName) && ((_c2 = a2.enum) === null || _c2 === void 0 ? void 0 : _c2.typeName) === ((_d2 = b2.enum) === null || _d2 === void 0 ? void 0 : _d2.typeName);
       }
       return true;
     }
@@ -22449,13 +22577,13 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         this.buf = [];
       }
       let len = 0;
-      for (let i2 = 0; i2 < this.chunks.length; i2++)
-        len += this.chunks[i2].length;
+      for (let i = 0; i < this.chunks.length; i++)
+        len += this.chunks[i].length;
       let bytes = new Uint8Array(len);
       let offset = 0;
-      for (let i2 = 0; i2 < this.chunks.length; i2++) {
-        bytes.set(this.chunks[i2], offset);
-        offset += this.chunks[i2].length;
+      for (let i = 0; i < this.chunks.length; i++) {
+        bytes.set(this.chunks[i], offset);
+        offset += this.chunks[i].length;
       }
       this.chunks = [];
       return bytes;
@@ -23270,7 +23398,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       if (cached2) {
         return cached2;
       }
-      const sortedFields = this.desc.fields.concat().sort((a, b2) => a.number - b2.number);
+      const sortedFields = this.desc.fields.concat().sort((a2, b2) => a2.number - b2.number);
       messageSortedFields.set(this.desc, sortedFields);
       return sortedFields;
     }
@@ -23417,8 +23545,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }
     }
     *entries() {
-      for (let i2 = 0; i2 < this._arr.length; i2++) {
-        yield [i2, listItemToReflect(this._field, this._arr[i2], this.check)];
+      for (let i = 0; i < this._arr.length; i++) {
+        yield [i, listItemToReflect(this._field, this._arr[i], this.check)];
       }
     }
   }
@@ -24292,31 +24420,31 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     if (xmlData[0] === "\uFEFF") {
       xmlData = xmlData.substr(1);
     }
-    for (let i2 = 0; i2 < xmlData.length; i2++) {
-      if (xmlData[i2] === "<" && xmlData[i2 + 1] === "?") {
-        i2 += 2;
-        i2 = readPI(xmlData, i2);
-        if (i2.err) return i2;
-      } else if (xmlData[i2] === "<") {
-        let tagStartPos = i2;
-        i2++;
-        if (xmlData[i2] === "!") {
-          i2 = readCommentAndCDATA(xmlData, i2);
+    for (let i = 0; i < xmlData.length; i++) {
+      if (xmlData[i] === "<" && xmlData[i + 1] === "?") {
+        i += 2;
+        i = readPI(xmlData, i);
+        if (i.err) return i;
+      } else if (xmlData[i] === "<") {
+        let tagStartPos = i;
+        i++;
+        if (xmlData[i] === "!") {
+          i = readCommentAndCDATA(xmlData, i);
           continue;
         } else {
           let closingTag = false;
-          if (xmlData[i2] === "/") {
+          if (xmlData[i] === "/") {
             closingTag = true;
-            i2++;
+            i++;
           }
           let tagName = "";
-          for (; i2 < xmlData.length && xmlData[i2] !== ">" && xmlData[i2] !== " " && xmlData[i2] !== "	" && xmlData[i2] !== "\n" && xmlData[i2] !== "\r"; i2++) {
-            tagName += xmlData[i2];
+          for (; i < xmlData.length && xmlData[i] !== ">" && xmlData[i] !== " " && xmlData[i] !== "	" && xmlData[i] !== "\n" && xmlData[i] !== "\r"; i++) {
+            tagName += xmlData[i];
           }
           tagName = tagName.trim();
           if (tagName[tagName.length - 1] === "/") {
             tagName = tagName.substring(0, tagName.length - 1);
-            i2--;
+            i--;
           }
           if (!validateTagName(tagName)) {
             let msg;
@@ -24325,16 +24453,16 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             } else {
               msg = "Tag '" + tagName + "' is an invalid name.";
             }
-            return getErrorObject("InvalidTag", msg, getLineNumberForPosition(xmlData, i2));
+            return getErrorObject("InvalidTag", msg, getLineNumberForPosition(xmlData, i));
           }
-          const result = readAttributeStr(xmlData, i2);
+          const result = readAttributeStr(xmlData, i);
           if (result === false) {
-            return getErrorObject("InvalidAttr", "Attributes for '" + tagName + "' have open quote.", getLineNumberForPosition(xmlData, i2));
+            return getErrorObject("InvalidAttr", "Attributes for '" + tagName + "' have open quote.", getLineNumberForPosition(xmlData, i));
           }
           let attrStr = result.value;
-          i2 = result.index;
+          i = result.index;
           if (attrStr[attrStr.length - 1] === "/") {
-            const attrStrStart = i2 - attrStr.length;
+            const attrStrStart = i - attrStr.length;
             attrStr = attrStr.substring(0, attrStr.length - 1);
             const isValid = validateAttributeString(attrStr, options);
             if (isValid === true) {
@@ -24344,7 +24472,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             }
           } else if (closingTag) {
             if (!result.tagClosed) {
-              return getErrorObject("InvalidTag", "Closing tag '" + tagName + "' doesn't have proper closing.", getLineNumberForPosition(xmlData, i2));
+              return getErrorObject("InvalidTag", "Closing tag '" + tagName + "' doesn't have proper closing.", getLineNumberForPosition(xmlData, i));
             } else if (attrStr.trim().length > 0) {
               return getErrorObject("InvalidTag", "Closing tag '" + tagName + "' can't have attributes or invalid starting.", getLineNumberForPosition(xmlData, tagStartPos));
             } else if (tags.length === 0) {
@@ -24366,48 +24494,48 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           } else {
             const isValid = validateAttributeString(attrStr, options);
             if (isValid !== true) {
-              return getErrorObject(isValid.err.code, isValid.err.msg, getLineNumberForPosition(xmlData, i2 - attrStr.length + isValid.err.line));
+              return getErrorObject(isValid.err.code, isValid.err.msg, getLineNumberForPosition(xmlData, i - attrStr.length + isValid.err.line));
             }
             if (reachedRoot === true) {
-              return getErrorObject("InvalidXml", "Multiple possible root nodes found.", getLineNumberForPosition(xmlData, i2));
+              return getErrorObject("InvalidXml", "Multiple possible root nodes found.", getLineNumberForPosition(xmlData, i));
             } else if (options.unpairedTags.indexOf(tagName) !== -1) ;
             else {
               tags.push({ tagName, tagStartPos });
             }
             tagFound = true;
           }
-          for (i2++; i2 < xmlData.length; i2++) {
-            if (xmlData[i2] === "<") {
-              if (xmlData[i2 + 1] === "!") {
-                i2++;
-                i2 = readCommentAndCDATA(xmlData, i2);
+          for (i++; i < xmlData.length; i++) {
+            if (xmlData[i] === "<") {
+              if (xmlData[i + 1] === "!") {
+                i++;
+                i = readCommentAndCDATA(xmlData, i);
                 continue;
-              } else if (xmlData[i2 + 1] === "?") {
-                i2 = readPI(xmlData, ++i2);
-                if (i2.err) return i2;
+              } else if (xmlData[i + 1] === "?") {
+                i = readPI(xmlData, ++i);
+                if (i.err) return i;
               } else {
                 break;
               }
-            } else if (xmlData[i2] === "&") {
-              const afterAmp = validateAmpersand(xmlData, i2);
+            } else if (xmlData[i] === "&") {
+              const afterAmp = validateAmpersand(xmlData, i);
               if (afterAmp == -1)
-                return getErrorObject("InvalidChar", "char '&' is not expected.", getLineNumberForPosition(xmlData, i2));
-              i2 = afterAmp;
+                return getErrorObject("InvalidChar", "char '&' is not expected.", getLineNumberForPosition(xmlData, i));
+              i = afterAmp;
             } else {
-              if (reachedRoot === true && !isWhiteSpace(xmlData[i2])) {
-                return getErrorObject("InvalidXml", "Extra text at the end", getLineNumberForPosition(xmlData, i2));
+              if (reachedRoot === true && !isWhiteSpace(xmlData[i])) {
+                return getErrorObject("InvalidXml", "Extra text at the end", getLineNumberForPosition(xmlData, i));
               }
             }
           }
-          if (xmlData[i2] === "<") {
-            i2--;
+          if (xmlData[i] === "<") {
+            i--;
           }
         }
       } else {
-        if (isWhiteSpace(xmlData[i2])) {
+        if (isWhiteSpace(xmlData[i])) {
           continue;
         }
-        return getErrorObject("InvalidChar", "char '" + xmlData[i2] + "' is not expected.", getLineNumberForPosition(xmlData, i2));
+        return getErrorObject("InvalidChar", "char '" + xmlData[i] + "' is not expected.", getLineNumberForPosition(xmlData, i));
       }
     }
     if (!tagFound) {
@@ -24422,81 +24550,81 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   function isWhiteSpace(char2) {
     return char2 === " " || char2 === "	" || char2 === "\n" || char2 === "\r";
   }
-  function readPI(xmlData, i2) {
-    const start = i2;
-    for (; i2 < xmlData.length; i2++) {
-      if (xmlData[i2] == "?" || xmlData[i2] == " ") {
-        const tagname = xmlData.substr(start, i2 - start);
-        if (i2 > 5 && tagname === "xml") {
-          return getErrorObject("InvalidXml", "XML declaration allowed only at the start of the document.", getLineNumberForPosition(xmlData, i2));
-        } else if (xmlData[i2] == "?" && xmlData[i2 + 1] == ">") {
-          i2++;
+  function readPI(xmlData, i) {
+    const start = i;
+    for (; i < xmlData.length; i++) {
+      if (xmlData[i] == "?" || xmlData[i] == " ") {
+        const tagname = xmlData.substr(start, i - start);
+        if (i > 5 && tagname === "xml") {
+          return getErrorObject("InvalidXml", "XML declaration allowed only at the start of the document.", getLineNumberForPosition(xmlData, i));
+        } else if (xmlData[i] == "?" && xmlData[i + 1] == ">") {
+          i++;
           break;
         } else {
           continue;
         }
       }
     }
-    return i2;
+    return i;
   }
-  function readCommentAndCDATA(xmlData, i2) {
-    if (xmlData.length > i2 + 5 && xmlData[i2 + 1] === "-" && xmlData[i2 + 2] === "-") {
-      for (i2 += 3; i2 < xmlData.length; i2++) {
-        if (xmlData[i2] === "-" && xmlData[i2 + 1] === "-" && xmlData[i2 + 2] === ">") {
-          i2 += 2;
+  function readCommentAndCDATA(xmlData, i) {
+    if (xmlData.length > i + 5 && xmlData[i + 1] === "-" && xmlData[i + 2] === "-") {
+      for (i += 3; i < xmlData.length; i++) {
+        if (xmlData[i] === "-" && xmlData[i + 1] === "-" && xmlData[i + 2] === ">") {
+          i += 2;
           break;
         }
       }
-    } else if (xmlData.length > i2 + 8 && xmlData[i2 + 1] === "D" && xmlData[i2 + 2] === "O" && xmlData[i2 + 3] === "C" && xmlData[i2 + 4] === "T" && xmlData[i2 + 5] === "Y" && xmlData[i2 + 6] === "P" && xmlData[i2 + 7] === "E") {
+    } else if (xmlData.length > i + 8 && xmlData[i + 1] === "D" && xmlData[i + 2] === "O" && xmlData[i + 3] === "C" && xmlData[i + 4] === "T" && xmlData[i + 5] === "Y" && xmlData[i + 6] === "P" && xmlData[i + 7] === "E") {
       let angleBracketsCount = 1;
-      for (i2 += 8; i2 < xmlData.length; i2++) {
-        if (xmlData[i2] === "<") {
+      for (i += 8; i < xmlData.length; i++) {
+        if (xmlData[i] === "<") {
           angleBracketsCount++;
-        } else if (xmlData[i2] === ">") {
+        } else if (xmlData[i] === ">") {
           angleBracketsCount--;
           if (angleBracketsCount === 0) {
             break;
           }
         }
       }
-    } else if (xmlData.length > i2 + 9 && xmlData[i2 + 1] === "[" && xmlData[i2 + 2] === "C" && xmlData[i2 + 3] === "D" && xmlData[i2 + 4] === "A" && xmlData[i2 + 5] === "T" && xmlData[i2 + 6] === "A" && xmlData[i2 + 7] === "[") {
-      for (i2 += 8; i2 < xmlData.length; i2++) {
-        if (xmlData[i2] === "]" && xmlData[i2 + 1] === "]" && xmlData[i2 + 2] === ">") {
-          i2 += 2;
+    } else if (xmlData.length > i + 9 && xmlData[i + 1] === "[" && xmlData[i + 2] === "C" && xmlData[i + 3] === "D" && xmlData[i + 4] === "A" && xmlData[i + 5] === "T" && xmlData[i + 6] === "A" && xmlData[i + 7] === "[") {
+      for (i += 8; i < xmlData.length; i++) {
+        if (xmlData[i] === "]" && xmlData[i + 1] === "]" && xmlData[i + 2] === ">") {
+          i += 2;
           break;
         }
       }
     }
-    return i2;
+    return i;
   }
   const doubleQuote = '"';
   const singleQuote = "'";
-  function readAttributeStr(xmlData, i2) {
+  function readAttributeStr(xmlData, i) {
     let attrStr = "";
     let startChar = "";
     let tagClosed = false;
-    for (; i2 < xmlData.length; i2++) {
-      if (xmlData[i2] === doubleQuote || xmlData[i2] === singleQuote) {
+    for (; i < xmlData.length; i++) {
+      if (xmlData[i] === doubleQuote || xmlData[i] === singleQuote) {
         if (startChar === "") {
-          startChar = xmlData[i2];
-        } else if (startChar !== xmlData[i2]) ;
+          startChar = xmlData[i];
+        } else if (startChar !== xmlData[i]) ;
         else {
           startChar = "";
         }
-      } else if (xmlData[i2] === ">") {
+      } else if (xmlData[i] === ">") {
         if (startChar === "") {
           tagClosed = true;
           break;
         }
       }
-      attrStr += xmlData[i2];
+      attrStr += xmlData[i];
     }
     if (startChar !== "") {
       return false;
     }
     return {
       value: attrStr,
-      index: i2,
+      index: i,
       tagClosed
     };
   }
@@ -24504,57 +24632,57 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   function validateAttributeString(attrStr, options) {
     const matches = getAllMatches(attrStr, validAttrStrRegxp);
     const attrNames = {};
-    for (let i2 = 0; i2 < matches.length; i2++) {
-      if (matches[i2][1].length === 0) {
-        return getErrorObject("InvalidAttr", "Attribute '" + matches[i2][2] + "' has no space in starting.", getPositionFromMatch(matches[i2]));
-      } else if (matches[i2][3] !== void 0 && matches[i2][4] === void 0) {
-        return getErrorObject("InvalidAttr", "Attribute '" + matches[i2][2] + "' is without value.", getPositionFromMatch(matches[i2]));
-      } else if (matches[i2][3] === void 0 && !options.allowBooleanAttributes) {
-        return getErrorObject("InvalidAttr", "boolean attribute '" + matches[i2][2] + "' is not allowed.", getPositionFromMatch(matches[i2]));
+    for (let i = 0; i < matches.length; i++) {
+      if (matches[i][1].length === 0) {
+        return getErrorObject("InvalidAttr", "Attribute '" + matches[i][2] + "' has no space in starting.", getPositionFromMatch(matches[i]));
+      } else if (matches[i][3] !== void 0 && matches[i][4] === void 0) {
+        return getErrorObject("InvalidAttr", "Attribute '" + matches[i][2] + "' is without value.", getPositionFromMatch(matches[i]));
+      } else if (matches[i][3] === void 0 && !options.allowBooleanAttributes) {
+        return getErrorObject("InvalidAttr", "boolean attribute '" + matches[i][2] + "' is not allowed.", getPositionFromMatch(matches[i]));
       }
-      const attrName = matches[i2][2];
+      const attrName = matches[i][2];
       if (!validateAttrName(attrName)) {
-        return getErrorObject("InvalidAttr", "Attribute '" + attrName + "' is an invalid name.", getPositionFromMatch(matches[i2]));
+        return getErrorObject("InvalidAttr", "Attribute '" + attrName + "' is an invalid name.", getPositionFromMatch(matches[i]));
       }
       if (!Object.prototype.hasOwnProperty.call(attrNames, attrName)) {
         attrNames[attrName] = 1;
       } else {
-        return getErrorObject("InvalidAttr", "Attribute '" + attrName + "' is repeated.", getPositionFromMatch(matches[i2]));
+        return getErrorObject("InvalidAttr", "Attribute '" + attrName + "' is repeated.", getPositionFromMatch(matches[i]));
       }
     }
     return true;
   }
-  function validateNumberAmpersand(xmlData, i2) {
+  function validateNumberAmpersand(xmlData, i) {
     let re = /\d/;
-    if (xmlData[i2] === "x") {
-      i2++;
+    if (xmlData[i] === "x") {
+      i++;
       re = /[\da-fA-F]/;
     }
-    for (; i2 < xmlData.length; i2++) {
-      if (xmlData[i2] === ";")
-        return i2;
-      if (!xmlData[i2].match(re))
+    for (; i < xmlData.length; i++) {
+      if (xmlData[i] === ";")
+        return i;
+      if (!xmlData[i].match(re))
         break;
     }
     return -1;
   }
-  function validateAmpersand(xmlData, i2) {
-    i2++;
-    if (xmlData[i2] === ";")
+  function validateAmpersand(xmlData, i) {
+    i++;
+    if (xmlData[i] === ";")
       return -1;
-    if (xmlData[i2] === "#") {
-      i2++;
-      return validateNumberAmpersand(xmlData, i2);
+    if (xmlData[i] === "#") {
+      i++;
+      return validateNumberAmpersand(xmlData, i);
     }
     let count = 0;
-    for (; i2 < xmlData.length; i2++, count++) {
-      if (xmlData[i2].match(/\w/) && count < 20)
+    for (; i < xmlData.length; i++, count++) {
+      if (xmlData[i].match(/\w/) && count < 20)
         continue;
-      if (xmlData[i2] === ";")
+      if (xmlData[i] === ";")
         break;
       return -1;
     }
-    return i2;
+    return i;
   }
   function getErrorObject(code, message, lineNumber) {
     return {
@@ -24629,6 +24757,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     frac14: "¼",
     frac34: "¾"
   };
+  const ENTITY_ACTION = Object.freeze({
+    /** Resolve and expand the entity normally. */
+    ALLOW: "allow",
+    /** Silently skip this entity — it will not be registered. */
+    BLOCK: "block",
+    /** Throw an error, aborting entity registration entirely. */
+    THROW: "throw"
+  });
   const SPECIAL_CHARS = new Set("!?\\\\/[]$%{}^&*()<>|+");
   function validateEntityName$1(name) {
     if (name[0] === "#") {
@@ -24708,6 +24844,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
      *   the effective action is max(onNCR, rangeMinimum).
      * @param {'remove'|'throw'} [options.ncr.nullNCR='remove']
      *   Action for U+0000 (null). 'allow' and 'leave' are clamped to 'remove' since null is never safe.
+     * @param {((name: string, value: string) => 'allow'|'block'|'throw')|null} [options.onExternalEntity=null]
+     *   Hook called when an external entity is registered via `setExternalEntities()` or
+     *   `addExternalEntity()`. Return `ENTITY_ACTION.ALLOW` to accept the entity,
+     *   `ENTITY_ACTION.BLOCK` to silently skip it, or `ENTITY_ACTION.THROW` to abort with an error.
+     * @param {((name: string, value: string) => 'allow'|'block'|'throw')|null} [options.onInputEntity=null]
+     *   Hook called when an input entity is registered via `addInputEntities()`. Return
+     *   `ENTITY_ACTION.ALLOW` to accept, `ENTITY_ACTION.BLOCK` to silently skip, or
+     *   `ENTITY_ACTION.THROW` to abort with an error.
      */
     constructor(options = {}) {
       this._limit = options.limit || {};
@@ -24727,6 +24871,33 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       this._ncrXmlVersion = ncrCfg.xmlVersion;
       this._ncrOnLevel = ncrCfg.onLevel;
       this._ncrNullLevel = ncrCfg.nullLevel;
+      this._onExternalEntity = typeof options.onExternalEntity === "function" ? options.onExternalEntity : null;
+      this._onInputEntity = typeof options.onInputEntity === "function" ? options.onInputEntity : null;
+    }
+    // -------------------------------------------------------------------------
+    // Private: registration hook dispatch
+    // -------------------------------------------------------------------------
+    /**
+     * Invoke a registration hook for a single entity name/value pair.
+     * Returns true when the entity should be accepted, false when it should be
+     * silently skipped (BLOCK), and throws when the hook returns THROW.
+     *
+     * @param {((name: string, value: string) => 'allow'|'block'|'throw')|null} hook
+     * @param {string} name
+     * @param {string} value
+     * @param {string} context  — used in error messages ('external' | 'input')
+     * @returns {boolean}  true = accept, false = skip
+     */
+    _applyRegistrationHook(hook, name, value, context) {
+      if (!hook) return true;
+      const action = hook(name, value);
+      if (action === ENTITY_ACTION.BLOCK) return false;
+      if (action === ENTITY_ACTION.THROW) {
+        throw new Error(
+          `[EntityDecoder] Registration of ${context} entity "&${name};" was rejected by hook`
+        );
+      }
+      return true;
     }
     // -------------------------------------------------------------------------
     // Persistent external entity registration
@@ -24734,6 +24905,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     /**
      * Replace the full set of persistent external entities.
      * All keys are validated — throws on invalid characters.
+     * If `onExternalEntity` is set, it is called once per entry; entries that
+     * return `ENTITY_ACTION.BLOCK` are silently omitted, `ENTITY_ACTION.THROW`
+     * aborts the whole call.
      * @param {Record<string, string | { regex?: RegExp, val: string }>} map
      */
     setExternalEntities(map2) {
@@ -24742,17 +24916,32 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           validateEntityName$1(key);
         }
       }
-      this._externalMap = mergeEntityMaps(map2);
+      if (!this._onExternalEntity) {
+        this._externalMap = mergeEntityMaps(map2);
+        return;
+      }
+      const flat = mergeEntityMaps(map2);
+      const filtered = /* @__PURE__ */ Object.create(null);
+      for (const [name, value] of Object.entries(flat)) {
+        if (this._applyRegistrationHook(this._onExternalEntity, name, value, "external")) {
+          filtered[name] = value;
+        }
+      }
+      this._externalMap = filtered;
     }
     /**
      * Add a single persistent external entity.
+     * If `onExternalEntity` is set it is called before the entity is stored;
+     * `ENTITY_ACTION.BLOCK` silently skips storage, `ENTITY_ACTION.THROW` raises.
      * @param {string} key
      * @param {string} value
      */
     addExternalEntity(key, value) {
       validateEntityName$1(key);
       if (typeof value === "string" && value.indexOf("&") === -1) {
-        this._externalMap[key] = value;
+        if (this._applyRegistrationHook(this._onExternalEntity, key, value, "external")) {
+          this._externalMap[key] = value;
+        }
       }
     }
     // -------------------------------------------------------------------------
@@ -24761,12 +24950,25 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     /**
      * Inject DOCTYPE entities for the current document.
      * Also resets per-document expansion counters.
+     * If `onInputEntity` is set it is called once per entry; entries returning
+     * `ENTITY_ACTION.BLOCK` are silently omitted, `ENTITY_ACTION.THROW` aborts.
      * @param {Record<string, string | { regx?: RegExp, regex?: RegExp, val: string }>} map
      */
     addInputEntities(map2) {
       this._totalExpansions = 0;
       this._expandedLength = 0;
-      this._inputMap = mergeEntityMaps(map2);
+      if (!this._onInputEntity) {
+        this._inputMap = mergeEntityMaps(map2);
+        return;
+      }
+      const flat = mergeEntityMaps(map2);
+      const filtered = /* @__PURE__ */ Object.create(null);
+      for (const [name, value] of Object.entries(flat)) {
+        if (this._applyRegistrationHook(this._onInputEntity, name, value, "input")) {
+          filtered[name] = value;
+        }
+      }
+      this._inputMap = filtered;
     }
     // -------------------------------------------------------------------------
     // Per-document reset
@@ -24809,24 +25011,24 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       const chunks = [];
       const len = str.length;
       let last = 0;
-      let i2 = 0;
+      let i = 0;
       const limitExpansions = this._maxTotalExpansions > 0;
       const limitLength = this._maxExpandedLength > 0;
       const checkLimits = limitExpansions || limitLength;
-      while (i2 < len) {
-        if (str.charCodeAt(i2) !== 38) {
-          i2++;
+      while (i < len) {
+        if (str.charCodeAt(i) !== 38) {
+          i++;
           continue;
         }
-        let j2 = i2 + 1;
-        while (j2 < len && str.charCodeAt(j2) !== 59 && j2 - i2 <= 32) j2++;
+        let j2 = i + 1;
+        while (j2 < len && str.charCodeAt(j2) !== 59 && j2 - i <= 32) j2++;
         if (j2 >= len || str.charCodeAt(j2) !== 59) {
-          i2++;
+          i++;
           continue;
         }
-        const token = str.slice(i2 + 1, j2);
+        const token = str.slice(i + 1, j2);
         if (token.length === 0) {
-          i2++;
+          i++;
           continue;
         }
         let replacement;
@@ -24837,12 +25039,12 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             tier = LIMIT_TIER_EXTERNAL;
           }
         } else if (this._leaveSet.has(token)) {
-          i2++;
+          i++;
           continue;
         } else if (token.charCodeAt(0) === 35) {
           const ncrResult = this._resolveNCR(token);
           if (ncrResult === void 0) {
-            i2++;
+            i++;
             continue;
           }
           replacement = ncrResult;
@@ -24853,13 +25055,13 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           tier = resolved?.tier;
         }
         if (replacement === void 0) {
-          i2++;
+          i++;
           continue;
         }
-        if (i2 > last) chunks.push(str.slice(last, i2));
+        if (i > last) chunks.push(str.slice(last, i));
         chunks.push(replacement);
         last = j2 + 1;
-        i2 = last;
+        i = last;
         if (checkLimits && this._tierCounts(tier)) {
           if (limitExpansions) {
             this._totalExpansions++;
@@ -25190,20 +25392,20 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     setXmlVersion(xmlVersion = 1) {
       this.xmlVersion = xmlVersion;
     }
-    readDocType(xmlData, i2) {
+    readDocType(xmlData, i) {
       const entities = /* @__PURE__ */ Object.create(null);
       let entityCount = 0;
-      if (xmlData[i2 + 3] === "O" && xmlData[i2 + 4] === "C" && xmlData[i2 + 5] === "T" && xmlData[i2 + 6] === "Y" && xmlData[i2 + 7] === "P" && xmlData[i2 + 8] === "E") {
-        i2 = i2 + 9;
+      if (xmlData[i + 3] === "O" && xmlData[i + 4] === "C" && xmlData[i + 5] === "T" && xmlData[i + 6] === "Y" && xmlData[i + 7] === "P" && xmlData[i + 8] === "E") {
+        i = i + 9;
         let angleBracketsCount = 1;
         let hasBody = false, comment = false;
         let exp = "";
-        for (; i2 < xmlData.length; i2++) {
-          if (xmlData[i2] === "<" && !comment) {
-            if (hasBody && hasSeq(xmlData, "!ENTITY", i2)) {
-              i2 += 7;
+        for (; i < xmlData.length; i++) {
+          if (xmlData[i] === "<" && !comment) {
+            if (hasBody && hasSeq(xmlData, "!ENTITY", i)) {
+              i += 7;
               let entityName, val;
-              [entityName, val, i2] = this.readEntityExp(xmlData, i2 + 1, this.suppressValidationErr);
+              [entityName, val, i] = this.readEntityExp(xmlData, i + 1, this.suppressValidationErr);
               if (val.indexOf("&") === -1) {
                 if (this.options.enabled !== false && this.options.maxEntityCount != null && entityCount >= this.options.maxEntityCount) {
                   throw new Error(
@@ -25213,23 +25415,23 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
                 entities[entityName] = val;
                 entityCount++;
               }
-            } else if (hasBody && hasSeq(xmlData, "!ELEMENT", i2)) {
-              i2 += 8;
-              const { index: index2 } = this.readElementExp(xmlData, i2 + 1);
-              i2 = index2;
-            } else if (hasBody && hasSeq(xmlData, "!ATTLIST", i2)) {
-              i2 += 8;
-            } else if (hasBody && hasSeq(xmlData, "!NOTATION", i2)) {
-              i2 += 9;
-              const { index: index2 } = this.readNotationExp(xmlData, i2 + 1, this.suppressValidationErr);
-              i2 = index2;
-            } else if (hasSeq(xmlData, "!--", i2)) comment = true;
+            } else if (hasBody && hasSeq(xmlData, "!ELEMENT", i)) {
+              i += 8;
+              const { index: index2 } = this.readElementExp(xmlData, i + 1);
+              i = index2;
+            } else if (hasBody && hasSeq(xmlData, "!ATTLIST", i)) {
+              i += 8;
+            } else if (hasBody && hasSeq(xmlData, "!NOTATION", i)) {
+              i += 9;
+              const { index: index2 } = this.readNotationExp(xmlData, i + 1, this.suppressValidationErr);
+              i = index2;
+            } else if (hasSeq(xmlData, "!--", i)) comment = true;
             else throw new Error(`Invalid DOCTYPE`);
             angleBracketsCount++;
             exp = "";
-          } else if (xmlData[i2] === ">") {
+          } else if (xmlData[i] === ">") {
             if (comment) {
-              if (xmlData[i2 - 1] === "-" && xmlData[i2 - 2] === "-") {
+              if (xmlData[i - 1] === "-" && xmlData[i - 2] === "-") {
                 comment = false;
                 angleBracketsCount--;
               }
@@ -25239,10 +25441,10 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             if (angleBracketsCount === 0) {
               break;
             }
-          } else if (xmlData[i2] === "[") {
+          } else if (xmlData[i] === "[") {
             hasBody = true;
           } else {
-            exp += xmlData[i2];
+            exp += xmlData[i];
           }
         }
         if (angleBracketsCount !== 0) {
@@ -25251,193 +25453,193 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       } else {
         throw new Error(`Invalid Tag instead of DOCTYPE`);
       }
-      return { entities, i: i2 };
+      return { entities, i };
     }
-    readEntityExp(xmlData, i2) {
-      i2 = skipWhitespace(xmlData, i2);
-      const startIndex = i2;
-      while (i2 < xmlData.length && !/\s/.test(xmlData[i2]) && xmlData[i2] !== '"' && xmlData[i2] !== "'") {
-        i2++;
+    readEntityExp(xmlData, i) {
+      i = skipWhitespace(xmlData, i);
+      const startIndex = i;
+      while (i < xmlData.length && !/\s/.test(xmlData[i]) && xmlData[i] !== '"' && xmlData[i] !== "'") {
+        i++;
       }
-      let entityName = xmlData.substring(startIndex, i2);
+      let entityName = xmlData.substring(startIndex, i);
       validateEntityName(entityName, { xmlVersion: this.xmlVersion });
-      i2 = skipWhitespace(xmlData, i2);
+      i = skipWhitespace(xmlData, i);
       if (!this.suppressValidationErr) {
-        if (xmlData.substring(i2, i2 + 6).toUpperCase() === "SYSTEM") {
+        if (xmlData.substring(i, i + 6).toUpperCase() === "SYSTEM") {
           throw new Error("External entities are not supported");
-        } else if (xmlData[i2] === "%") {
+        } else if (xmlData[i] === "%") {
           throw new Error("Parameter entities are not supported");
         }
       }
       let entityValue = "";
-      [i2, entityValue] = this.readIdentifierVal(xmlData, i2, "entity");
+      [i, entityValue] = this.readIdentifierVal(xmlData, i, "entity");
       if (this.options.enabled !== false && this.options.maxEntitySize != null && entityValue.length > this.options.maxEntitySize) {
         throw new Error(
           `Entity "${entityName}" size (${entityValue.length}) exceeds maximum allowed size (${this.options.maxEntitySize})`
         );
       }
-      i2--;
-      return [entityName, entityValue, i2];
+      i--;
+      return [entityName, entityValue, i];
     }
-    readNotationExp(xmlData, i2) {
-      i2 = skipWhitespace(xmlData, i2);
-      const startIndex = i2;
-      while (i2 < xmlData.length && !/\s/.test(xmlData[i2])) {
-        i2++;
+    readNotationExp(xmlData, i) {
+      i = skipWhitespace(xmlData, i);
+      const startIndex = i;
+      while (i < xmlData.length && !/\s/.test(xmlData[i])) {
+        i++;
       }
-      let notationName = xmlData.substring(startIndex, i2);
+      let notationName = xmlData.substring(startIndex, i);
       !this.suppressValidationErr && validateEntityName(notationName, { xmlVersion: this.xmlVersion });
-      i2 = skipWhitespace(xmlData, i2);
-      const identifierType = xmlData.substring(i2, i2 + 6).toUpperCase();
+      i = skipWhitespace(xmlData, i);
+      const identifierType = xmlData.substring(i, i + 6).toUpperCase();
       if (!this.suppressValidationErr && identifierType !== "SYSTEM" && identifierType !== "PUBLIC") {
         throw new Error(`Expected SYSTEM or PUBLIC, found "${identifierType}"`);
       }
-      i2 += identifierType.length;
-      i2 = skipWhitespace(xmlData, i2);
+      i += identifierType.length;
+      i = skipWhitespace(xmlData, i);
       let publicIdentifier = null;
       let systemIdentifier = null;
       if (identifierType === "PUBLIC") {
-        [i2, publicIdentifier] = this.readIdentifierVal(xmlData, i2, "publicIdentifier");
-        i2 = skipWhitespace(xmlData, i2);
-        if (xmlData[i2] === '"' || xmlData[i2] === "'") {
-          [i2, systemIdentifier] = this.readIdentifierVal(xmlData, i2, "systemIdentifier");
+        [i, publicIdentifier] = this.readIdentifierVal(xmlData, i, "publicIdentifier");
+        i = skipWhitespace(xmlData, i);
+        if (xmlData[i] === '"' || xmlData[i] === "'") {
+          [i, systemIdentifier] = this.readIdentifierVal(xmlData, i, "systemIdentifier");
         }
       } else if (identifierType === "SYSTEM") {
-        [i2, systemIdentifier] = this.readIdentifierVal(xmlData, i2, "systemIdentifier");
+        [i, systemIdentifier] = this.readIdentifierVal(xmlData, i, "systemIdentifier");
         if (!this.suppressValidationErr && !systemIdentifier) {
           throw new Error("Missing mandatory system identifier for SYSTEM notation");
         }
       }
-      return { notationName, publicIdentifier, systemIdentifier, index: --i2 };
+      return { notationName, publicIdentifier, systemIdentifier, index: --i };
     }
-    readIdentifierVal(xmlData, i2, type) {
+    readIdentifierVal(xmlData, i, type) {
       let identifierVal = "";
-      const startChar = xmlData[i2];
+      const startChar = xmlData[i];
       if (startChar !== '"' && startChar !== "'") {
         throw new Error(`Expected quoted string, found "${startChar}"`);
       }
-      i2++;
-      const startIndex = i2;
-      while (i2 < xmlData.length && xmlData[i2] !== startChar) {
-        i2++;
+      i++;
+      const startIndex = i;
+      while (i < xmlData.length && xmlData[i] !== startChar) {
+        i++;
       }
-      identifierVal = xmlData.substring(startIndex, i2);
-      if (xmlData[i2] !== startChar) {
+      identifierVal = xmlData.substring(startIndex, i);
+      if (xmlData[i] !== startChar) {
         throw new Error(`Unterminated ${type} value`);
       }
-      i2++;
-      return [i2, identifierVal];
+      i++;
+      return [i, identifierVal];
     }
-    readElementExp(xmlData, i2) {
-      i2 = skipWhitespace(xmlData, i2);
-      const startIndex = i2;
-      while (i2 < xmlData.length && !/\s/.test(xmlData[i2])) {
-        i2++;
+    readElementExp(xmlData, i) {
+      i = skipWhitespace(xmlData, i);
+      const startIndex = i;
+      while (i < xmlData.length && !/\s/.test(xmlData[i])) {
+        i++;
       }
-      let elementName = xmlData.substring(startIndex, i2);
+      let elementName = xmlData.substring(startIndex, i);
       if (!this.suppressValidationErr && !qName(elementName, { xmlVersion: this.xmlVersion })) {
         throw new Error(`Invalid element name: "${elementName}"`);
       }
-      i2 = skipWhitespace(xmlData, i2);
+      i = skipWhitespace(xmlData, i);
       let contentModel = "";
-      if (xmlData[i2] === "E" && hasSeq(xmlData, "MPTY", i2)) i2 += 4;
-      else if (xmlData[i2] === "A" && hasSeq(xmlData, "NY", i2)) i2 += 2;
-      else if (xmlData[i2] === "(") {
-        i2++;
-        const startIndex2 = i2;
-        while (i2 < xmlData.length && xmlData[i2] !== ")") {
-          i2++;
+      if (xmlData[i] === "E" && hasSeq(xmlData, "MPTY", i)) i += 4;
+      else if (xmlData[i] === "A" && hasSeq(xmlData, "NY", i)) i += 2;
+      else if (xmlData[i] === "(") {
+        i++;
+        const startIndex2 = i;
+        while (i < xmlData.length && xmlData[i] !== ")") {
+          i++;
         }
-        contentModel = xmlData.substring(startIndex2, i2);
-        if (xmlData[i2] !== ")") {
+        contentModel = xmlData.substring(startIndex2, i);
+        if (xmlData[i] !== ")") {
           throw new Error("Unterminated content model");
         }
       } else if (!this.suppressValidationErr) {
-        throw new Error(`Invalid Element Expression, found "${xmlData[i2]}"`);
+        throw new Error(`Invalid Element Expression, found "${xmlData[i]}"`);
       }
       return {
         elementName,
         contentModel: contentModel.trim(),
-        index: i2
+        index: i
       };
     }
-    readAttlistExp(xmlData, i2) {
-      i2 = skipWhitespace(xmlData, i2);
-      let startIndex = i2;
-      while (i2 < xmlData.length && !/\s/.test(xmlData[i2])) {
-        i2++;
+    readAttlistExp(xmlData, i) {
+      i = skipWhitespace(xmlData, i);
+      let startIndex = i;
+      while (i < xmlData.length && !/\s/.test(xmlData[i])) {
+        i++;
       }
-      let elementName = xmlData.substring(startIndex, i2);
+      let elementName = xmlData.substring(startIndex, i);
       validateEntityName(elementName, { xmlVersion: this.xmlVersion });
-      i2 = skipWhitespace(xmlData, i2);
-      startIndex = i2;
-      while (i2 < xmlData.length && !/\s/.test(xmlData[i2])) {
-        i2++;
+      i = skipWhitespace(xmlData, i);
+      startIndex = i;
+      while (i < xmlData.length && !/\s/.test(xmlData[i])) {
+        i++;
       }
-      let attributeName = xmlData.substring(startIndex, i2);
+      let attributeName = xmlData.substring(startIndex, i);
       if (!validateEntityName(attributeName, { xmlVersion: this.xmlVersion })) {
         throw new Error(`Invalid attribute name: "${attributeName}"`);
       }
-      i2 = skipWhitespace(xmlData, i2);
+      i = skipWhitespace(xmlData, i);
       let attributeType = "";
-      if (xmlData.substring(i2, i2 + 8).toUpperCase() === "NOTATION") {
+      if (xmlData.substring(i, i + 8).toUpperCase() === "NOTATION") {
         attributeType = "NOTATION";
-        i2 += 8;
-        i2 = skipWhitespace(xmlData, i2);
-        if (xmlData[i2] !== "(") {
-          throw new Error(`Expected '(', found "${xmlData[i2]}"`);
+        i += 8;
+        i = skipWhitespace(xmlData, i);
+        if (xmlData[i] !== "(") {
+          throw new Error(`Expected '(', found "${xmlData[i]}"`);
         }
-        i2++;
+        i++;
         let allowedNotations = [];
-        while (i2 < xmlData.length && xmlData[i2] !== ")") {
-          const startIndex2 = i2;
-          while (i2 < xmlData.length && xmlData[i2] !== "|" && xmlData[i2] !== ")") {
-            i2++;
+        while (i < xmlData.length && xmlData[i] !== ")") {
+          const startIndex2 = i;
+          while (i < xmlData.length && xmlData[i] !== "|" && xmlData[i] !== ")") {
+            i++;
           }
-          let notation = xmlData.substring(startIndex2, i2);
+          let notation = xmlData.substring(startIndex2, i);
           notation = notation.trim();
           if (!validateEntityName(notation, { xmlVersion: this.xmlVersion })) {
             throw new Error(`Invalid notation name: "${notation}"`);
           }
           allowedNotations.push(notation);
-          if (xmlData[i2] === "|") {
-            i2++;
-            i2 = skipWhitespace(xmlData, i2);
+          if (xmlData[i] === "|") {
+            i++;
+            i = skipWhitespace(xmlData, i);
           }
         }
-        if (xmlData[i2] !== ")") {
+        if (xmlData[i] !== ")") {
           throw new Error("Unterminated list of notations");
         }
-        i2++;
+        i++;
         attributeType += " (" + allowedNotations.join("|") + ")";
       } else {
-        const startIndex2 = i2;
-        while (i2 < xmlData.length && !/\s/.test(xmlData[i2])) {
-          i2++;
+        const startIndex2 = i;
+        while (i < xmlData.length && !/\s/.test(xmlData[i])) {
+          i++;
         }
-        attributeType += xmlData.substring(startIndex2, i2);
+        attributeType += xmlData.substring(startIndex2, i);
         const validTypes = ["CDATA", "ID", "IDREF", "IDREFS", "ENTITY", "ENTITIES", "NMTOKEN", "NMTOKENS"];
         if (!this.suppressValidationErr && !validTypes.includes(attributeType.toUpperCase())) {
           throw new Error(`Invalid attribute type: "${attributeType}"`);
         }
       }
-      i2 = skipWhitespace(xmlData, i2);
+      i = skipWhitespace(xmlData, i);
       let defaultValue = "";
-      if (xmlData.substring(i2, i2 + 8).toUpperCase() === "#REQUIRED") {
+      if (xmlData.substring(i, i + 8).toUpperCase() === "#REQUIRED") {
         defaultValue = "#REQUIRED";
-        i2 += 8;
-      } else if (xmlData.substring(i2, i2 + 7).toUpperCase() === "#IMPLIED") {
+        i += 8;
+      } else if (xmlData.substring(i, i + 7).toUpperCase() === "#IMPLIED") {
         defaultValue = "#IMPLIED";
-        i2 += 7;
+        i += 7;
       } else {
-        [i2, defaultValue] = this.readIdentifierVal(xmlData, i2, "ATTLIST");
+        [i, defaultValue] = this.readIdentifierVal(xmlData, i, "ATTLIST");
       }
       return {
         elementName,
         attributeName,
         attributeType,
         defaultValue,
-        index: i2
+        index: i
       };
     }
   }
@@ -25447,9 +25649,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     }
     return index2;
   };
-  function hasSeq(data, seq, i2) {
+  function hasSeq(data, seq, i) {
     for (let j2 = 0; j2 < seq.length; j2++) {
-      if (seq[j2] !== data[i2 + j2 + 1]) return false;
+      if (seq[j2] !== data[i + j2 + 1]) return false;
     }
     return true;
   }
@@ -25458,6 +25660,229 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return name;
     else
       throw new Error(`Invalid entity name ${name}`);
+  }
+  const SCRIPT_ZEROS = [
+    // Basic Latin (ASCII) — included for completeness / pass-through
+    48,
+    // 0-9
+    // Arabic scripts
+    1632,
+    // Arabic-Indic ٠١٢٣٤٥٦٧٨٩
+    1776,
+    // Extended Arabic-Indic (Urdu/Persian/Sindhi) ۰۱۲۳
+    // Indic scripts
+    2406,
+    // Devanagari ०१२३४५६७८९
+    2534,
+    // Bengali ০১২৩৪৫৬৭৮৯
+    2662,
+    // Gurmukhi ੦੧੨੩੪੫੬੭੮੯
+    2790,
+    // Gujarati ૦૧૨૩૪૫૬૭૮૯
+    2918,
+    // Odia ୦୧୨୩୪୫୬୭୮୯
+    3046,
+    // Tamil ௦௧௨௩௪௫௬௭௮௯
+    3174,
+    // Telugu ౦౧౨౩౪౫౬౭౮౯
+    3302,
+    // Kannada ೦೧೨೩೪೫೬೭೮೯
+    3430,
+    // Malayalam ൦൧൨൩൪൫൬൭൮൯
+    3558,
+    // Sinhala Archaic ෦෧෨෩෪෫෬෭෮෯
+    // Southeast Asian scripts
+    3664,
+    // Thai ๐๑๒๓๔๕๖๗๘๙
+    3792,
+    // Lao ໐໑໒໓໔໕໖໗໘໙
+    3872,
+    // Tibetan ༠༡༢༣༤༥༦༧༨༩
+    4160,
+    // Myanmar ၀၁၂၃၄၅၆၇၈၉
+    4240,
+    // Myanmar Shan ႐႑႒႓႔႕႖႗႘႙
+    6112,
+    // Khmer ០១២៣៤៥៦៧៨៩
+    6160,
+    // Mongolian ᠐᠑᠒᠓᠔᠕᠖᠗᠘᠙
+    6470,
+    // Limbu ᥆᥇᥈᥉᥊᥋᥌᥍᥎᥏
+    6608,
+    // New Tai Lue ᧐᧑᧒᧓᧔᧕᧖᧗᧘᧙
+    6784,
+    // Tai Tham Hora ᪀᪁᪂᪃᪄᪅᪆᪇᪈᪉
+    6800,
+    // Tai Tham Tham ᪐᪑᪒᪓᪔᪕᪖᪗᪘᪙
+    6992,
+    // Balinese ᭐᭑᭒᭓᭔᭕᭖᭗᭘᭙
+    7088,
+    // Sundanese ᮰᮱᮲᮳᮴᮵᮶᮷᮸᮹
+    7232,
+    // Lepcha ᱀᱁᱂᱃᱄᱅᱆᱇᱈᱉
+    7248,
+    // Ol Chiki ᱐᱑᱒᱓᱔᱕᱖᱗᱘᱙
+    // Fullwidth (CJK context)
+    65296,
+    // Fullwidth ０１２３４５６７８９
+    // Mathematical digit variants (Unicode math block)
+    120782,
+    // Mathematical Bold
+    120792,
+    // Mathematical Double-Struck
+    120802,
+    // Mathematical Sans-Serif
+    120812,
+    // Mathematical Sans-Serif Bold
+    120822,
+    // Mathematical Monospace
+    // Other scripts
+    66720,
+    // Osmanya 𐒠𐒡𐒢𐒣𐒤𐒥𐒦𐒧𐒨𐒩
+    68912,
+    // Hanifi Rohingya 𐴰𐴱𐴲𐴳𐴴𐴵𐴶𐴷𐴸𐴹
+    69734,
+    // Brahmi 𑁦𑁧𑁨𑁩𑁪𑁫𑁬𑁭𑁮𑁯
+    69872,
+    // Sora Sompeng 𑃰𑃱𑃲𑃳𑃴𑃵𑃶𑃷𑃸𑃹
+    69942,
+    // Chakma 𑄶𑄷𑄸𑄹𑄺𑄻𑄼𑄽𑄾𑄿
+    70096,
+    // Sharada 𑇐𑇑𑇒𑇓𑇔𑇕𑇖𑇗𑇘𑇙
+    70384,
+    // Khudawadi 𑋰𑋱𑋲𑋳𑋴𑋵𑋶𑋷𑋸𑋹
+    70736,
+    // Newa 𑑐𑑑𑑒𑑓𑑔𑑕𑑖𑑗𑑘𑑙
+    70864,
+    // Tirhuta 𑓐𑓑𑓒𑓓𑓔𑓕𑓖𑓗𑓘𑓙
+    71248,
+    // Modi 𑙐𑙑𑙒𑙓𑙔𑙕𑙖𑙗𑙘𑙙
+    71360,
+    // Takri 𑛀𑛁𑛂𑛃𑛄𑛅𑛆𑛇𑛈𑛉
+    71472,
+    // Ahom 𑜰𑜱𑜲𑜳𑜴𑜵𑜶𑜷𑜸𑜹
+    71904,
+    // Warang Citi 𑣠𑣡𑣢𑣣𑣤𑣥𑣦𑣧𑣨𑣩
+    72016,
+    // Dives Akuru 𑥐𑥑𑥒𑥓𑥔𑥕𑥖𑥗𑥘𑥙
+    72688,
+    // Khitan Small Script 𑯰𑯱𑯲𑯳𑯴𑯵𑯶𑯷𑯸𑯹
+    72784,
+    // Bhaiksuki 𑱐𑱑𑱒𑱓𑱔𑱕𑱖𑱗𑱘𑱙
+    73040,
+    // Masaram Gondi 𑵐𑵑𑵒𑵓𑵔𑵕𑵖𑵗𑵘𑵙
+    73120,
+    // Gunjala Gondi 𑶠𑶡𑶢𑶣𑶤𑶥𑶦𑶧𑶨𑶩
+    73552,
+    // Kawi 𑽐𑽑𑽒𑽓𑽔𑽕𑽖𑽗𑽘𑽙
+    92768,
+    // Mro 𖩠𖩡𖩢𖩣𖩤𖩥𖩦𖩧𖩨𖩩
+    92864,
+    // Tangsa 𖫀𖫁𖫂𖫃𖫄𖫅𖫆𖫇𖫈𖫉
+    93008,
+    // Pahawh Hmong 𖭐𖭑𖭒𖭓𖭔𖭕𖭖𖭗𖭘𖭙
+    123200,
+    // Nyiakeng Puachue Hmong 𞅀𞅁𞅂𞅃𞅄𞅅𞅆𞅇𞅈𞅉
+    123632,
+    // Wancho 𞋰𞋱𞋲𞋳𞋴𞋵𞋶𞋷𞋸𞋹
+    124144,
+    // Nag Mundari 𞓰𞓱𞓲𞓳𞓴𞓵𞓶𞓷𞓸𞓹
+    125264,
+    // Adlam 𞥐𞥑𞥒𞥓𞥔𞥕𞥖𞥗𞥘𞥙
+    130032
+    // Segmented digit symbols 🯰🯱🯲🯳🯴🯵🯶🯷🯸🯹
+  ];
+  const NOT_DIGIT = 255;
+  const HIGH_MAP = /* @__PURE__ */ new Map();
+  const LOW_MAX = 65535;
+  const LOW_MIN = 1632;
+  const TABLE_OFFSET = LOW_MIN;
+  const TABLE_SIZE = LOW_MAX - LOW_MIN + 1;
+  const TABLE = new Uint8Array(TABLE_SIZE).fill(NOT_DIGIT);
+  for (const zero of SCRIPT_ZEROS) {
+    for (let d2 = 0; d2 < 10; d2++) {
+      const cp = zero + d2;
+      if (cp <= LOW_MAX) {
+        TABLE[cp - TABLE_OFFSET] = d2;
+      } else {
+        HIGH_MAP.set(cp, d2);
+      }
+    }
+  }
+  const CHAR_0 = 48;
+  const CHAR_9 = 57;
+  const CHAR_MINUS = 45;
+  const MINUS_SET = /* @__PURE__ */ new Set([8722, 65293, 65123]);
+  function anynum(str) {
+    if (typeof str !== "string") return str;
+    const len = str.length;
+    if (len === 0) return str;
+    let firstHit = -1;
+    for (let i = 0; i < len; i++) {
+      const cc = str.charCodeAt(i);
+      if (cc >= CHAR_0 && cc <= CHAR_9 || cc === CHAR_MINUS) continue;
+      if (cc < TABLE_OFFSET) {
+        if (MINUS_SET.has(cc)) {
+          firstHit = i;
+          break;
+        }
+        continue;
+      }
+      if (cc >= 55296 && cc <= 56319) {
+        if (i + 1 < len) {
+          const low = str.charCodeAt(i + 1);
+          if (low >= 56320 && low <= 57343) {
+            const cp = 65536 + (cc - 55296 << 10) + (low - 56320);
+            if (HIGH_MAP.has(cp)) {
+              firstHit = i;
+              break;
+            }
+          }
+        }
+        continue;
+      }
+      if (TABLE[cc - TABLE_OFFSET] !== NOT_DIGIT || MINUS_SET.has(cc)) {
+        firstHit = i;
+        break;
+      }
+    }
+    if (firstHit === -1) return str;
+    const chars = [];
+    if (firstHit > 0) chars.push(str.slice(0, firstHit));
+    for (let i = firstHit; i < len; i++) {
+      const cc = str.charCodeAt(i);
+      if (cc >= CHAR_0 && cc <= CHAR_9 || cc === CHAR_MINUS) {
+        chars.push(str[i]);
+        continue;
+      }
+      if (cc < TABLE_OFFSET) {
+        chars.push(MINUS_SET.has(cc) ? "-" : str[i]);
+        continue;
+      }
+      if (cc >= 55296 && cc <= 56319) {
+        if (i + 1 < len) {
+          const low = str.charCodeAt(i + 1);
+          if (low >= 56320 && low <= 57343) {
+            const cp = 65536 + (cc - 55296 << 10) + (low - 56320);
+            const d3 = HIGH_MAP.get(cp);
+            if (d3 !== void 0) {
+              chars.push(String.fromCharCode(d3 + 48));
+              i++;
+              continue;
+            }
+          }
+        }
+        chars.push(str[i]);
+        continue;
+      }
+      if (MINUS_SET.has(cc)) {
+        chars.push("-");
+        continue;
+      }
+      const d2 = TABLE[cc - TABLE_OFFSET];
+      chars.push(d2 !== NOT_DIGIT ? String.fromCharCode(d2 + 48) : str[i]);
+    }
+    return chars.join("");
   }
   const hexRegex = /^[-+]?0x[a-fA-F0-9]+$/;
   const binRegex = /^0b[01]+$/;
@@ -25471,8 +25896,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     decimalPoint: ".",
     eNotation: true,
     //skipLike: /regex/,
-    infinity: "original"
+    infinity: "original",
     // "null", "infinity" (Infinity type), "string" ("Infinity" (the string literal))
+    unicode: false
   };
   function toNumber(str, options = {}) {
     options = Object.assign({}, consider, options);
@@ -25481,7 +25907,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     if (trimmedStr.length === 0) return str;
     else if (options.skipLike !== void 0 && options.skipLike.test(trimmedStr)) return str;
     else if (trimmedStr === "0") return 0;
-    else if (options.hex && hexRegex.test(trimmedStr)) {
+    if (options.unicode) {
+      trimmedStr = anynum(trimmedStr);
+      if (trimmedStr === "0") return 0;
+    }
+    if (options.hex && hexRegex.test(trimmedStr)) {
       return parse_int(trimmedStr, 16);
     } else if (options.binary && binRegex.test(trimmedStr)) {
       return parse_int(trimmedStr, 2);
@@ -25630,27 +26060,27 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
      */
     _parse(pattern) {
       const segments = [];
-      let i2 = 0;
+      let i = 0;
       let currentPart = "";
-      while (i2 < pattern.length) {
-        if (pattern[i2] === this.separator) {
-          if (i2 + 1 < pattern.length && pattern[i2 + 1] === this.separator) {
+      while (i < pattern.length) {
+        if (pattern[i] === this.separator) {
+          if (i + 1 < pattern.length && pattern[i + 1] === this.separator) {
             if (currentPart.trim()) {
               segments.push(this._parseSegment(currentPart.trim()));
               currentPart = "";
             }
             segments.push({ type: "deep-wildcard" });
-            i2 += 2;
+            i += 2;
           } else {
             if (currentPart.trim()) {
               segments.push(this._parseSegment(currentPart.trim()));
             }
             currentPart = "";
-            i2++;
+            i++;
           }
         } else {
-          currentPart += pattern[i2];
-          i2++;
+          currentPart += pattern[i];
+          i++;
         }
       }
       if (currentPart.trim()) {
@@ -25904,18 +26334,18 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       const exactKey = `${depth}:${tag}`;
       const exactBucket = this._byDepthAndTag.get(exactKey);
       if (exactBucket) {
-        for (let i2 = 0; i2 < exactBucket.length; i2++) {
-          if (matcher.matches(exactBucket[i2])) return exactBucket[i2];
+        for (let i = 0; i < exactBucket.length; i++) {
+          if (matcher.matches(exactBucket[i])) return exactBucket[i];
         }
       }
       const wildcardBucket = this._wildcardByDepth.get(depth);
       if (wildcardBucket) {
-        for (let i2 = 0; i2 < wildcardBucket.length; i2++) {
-          if (matcher.matches(wildcardBucket[i2])) return wildcardBucket[i2];
+        for (let i = 0; i < wildcardBucket.length; i++) {
+          if (matcher.matches(wildcardBucket[i])) return wildcardBucket[i];
         }
       }
-      for (let i2 = 0; i2 < this._deepWildcards.length; i2++) {
-        if (matcher.matches(this._deepWildcards[i2])) return this._deepWildcards[i2];
+      for (let i = 0; i < this._deepWildcards.length; i++) {
+        if (matcher.matches(this._deepWildcards[i])) return this._deepWildcards[i];
       }
       return null;
     }
@@ -26236,8 +26666,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       if (this.path.length !== segments.length) {
         return false;
       }
-      for (let i2 = 0; i2 < segments.length; i2++) {
-        if (!this._matchSegment(segments[i2], this.path[i2], i2 === this.path.length - 1)) {
+      for (let i = 0; i < segments.length; i++) {
+        if (!this._matchSegment(segments[i], this.path[i], i === this.path.length - 1)) {
           return false;
         }
       }
@@ -26258,9 +26688,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           }
           const nextSeg = segments[segIdx];
           let found = false;
-          for (let i2 = pathIdx; i2 >= 0; i2--) {
-            if (this._matchSegment(nextSeg, this.path[i2], i2 === this.path.length - 1)) {
-              pathIdx = i2 - 1;
+          for (let i = pathIdx; i >= 0; i--) {
+            if (this._matchSegment(nextSeg, this.path[i], i === this.path.length - 1)) {
+              pathIdx = i - 1;
               segIdx--;
               found = true;
               break;
@@ -26434,8 +26864,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       this.stopNodeExpressionsSet = new ExpressionSet();
       const stopNodesOpts = this.options.stopNodes;
       if (stopNodesOpts && stopNodesOpts.length > 0) {
-        for (let i2 = 0; i2 < stopNodesOpts.length; i2++) {
-          const stopNodeExp = stopNodesOpts[i2];
+        for (let i = 0; i < stopNodesOpts.length; i++) {
+          const stopNodeExp = stopNodesOpts[i];
           if (typeof stopNodeExp === "string") {
             this.stopNodeExpressionsSet.add(new Expression(stopNodeExp));
           } else if (stopNodeExp instanceof Expression) {
@@ -26496,14 +26926,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       const processedVals = new Array(len);
       let hasRawAttrs = false;
       const rawAttrsForMatcher = {};
-      for (let i2 = 0; i2 < len; i2++) {
-        const attrName = this.resolveNameSpace(matches[i2][1]);
-        const oldVal = matches[i2][4];
+      for (let i = 0; i < len; i++) {
+        const attrName = this.resolveNameSpace(matches[i][1]);
+        const oldVal = matches[i][4];
         if (attrName.length && oldVal !== void 0) {
           let val = oldVal;
           if (options.trimValues) val = val.trim();
           val = this.replaceEntitiesValue(val, tagName, this.readonlyMatcher);
-          processedVals[i2] = val;
+          processedVals[i] = val;
           rawAttrsForMatcher[attrName] = val;
           hasRawAttrs = true;
         }
@@ -26513,8 +26943,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }
       const jPathStr = options.jPath ? jPath.toString() : this.readonlyMatcher;
       let hasAttrs = false;
-      for (let i2 = 0; i2 < len; i2++) {
-        const attrName = this.resolveNameSpace(matches[i2][1]);
+      for (let i = 0; i < len; i++) {
+        const attrName = this.resolveNameSpace(matches[i][1]);
         if (this.ignoreAttributesFn(attrName, jPathStr)) continue;
         let aName = options.attributeNamePrefix + attrName;
         if (attrName.length) {
@@ -26522,8 +26952,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             aName = options.transformAttributeName(aName);
           }
           aName = sanitizeName(aName, options);
-          if (matches[i2][4] !== void 0) {
-            const oldVal = processedVals[i2];
+          if (matches[i][4] !== void 0) {
+            const oldVal = processedVals[i];
             const newVal = options.attributeValueProcessor(attrName, oldVal, jPathStr);
             if (newVal === null || newVal === void 0) {
               attrs[aName] = oldVal;
@@ -26560,13 +26990,13 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     const options = this.options;
     const docTypeReader = new DocTypeReader(options.processEntities);
     const xmlLen = xmlData.length;
-    for (let i2 = 0; i2 < xmlLen; i2++) {
-      const ch = xmlData[i2];
+    for (let i = 0; i < xmlLen; i++) {
+      const ch = xmlData[i];
       if (ch === "<") {
-        const c1 = xmlData.charCodeAt(i2 + 1);
+        const c1 = xmlData.charCodeAt(i + 1);
         if (c1 === 47) {
-          const closeIndex = findClosingIndex(xmlData, ">", i2, "Closing Tag is not closed.");
-          let tagName = xmlData.substring(i2 + 2, closeIndex).trim();
+          const closeIndex = findClosingIndex(xmlData, ">", i, "Closing Tag is not closed.");
+          let tagName = xmlData.substring(i + 2, closeIndex).trim();
           if (options.removeNSPrefix) {
             const colonIndex = tagName.indexOf(":");
             if (colonIndex !== -1) {
@@ -26589,9 +27019,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           this.isCurrentNodeStopNode = false;
           currentNode = this.tagsNodeStack.pop();
           textData = "";
-          i2 = closeIndex;
+          i = closeIndex;
         } else if (c1 === 63) {
-          let tagData = readTagExp(xmlData, i2, false, "?>");
+          let tagData = readTagExp(xmlData, i, false, "?>");
           if (!tagData) throw new Error("Pi Tag is not closed.");
           textData = this.saveTextToParentTag(textData, currentNode, this.readonlyMatcher);
           const attsMap = this.buildAttributesMap(tagData.tagExp, this.matcher, tagData.tagName, true);
@@ -26607,24 +27037,24 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             if (tagData.tagName !== tagData.tagExp && tagData.attrExpPresent && options.ignoreAttributes !== true) {
               childNode[":@"] = attsMap;
             }
-            this.addChild(currentNode, childNode, this.readonlyMatcher, i2);
+            this.addChild(currentNode, childNode, this.readonlyMatcher, i);
           }
-          i2 = tagData.closeIndex + 1;
-        } else if (c1 === 33 && xmlData.charCodeAt(i2 + 2) === 45 && xmlData.charCodeAt(i2 + 3) === 45) {
-          const endIndex = findClosingIndex(xmlData, "-->", i2 + 4, "Comment is not closed.");
+          i = tagData.closeIndex + 1;
+        } else if (c1 === 33 && xmlData.charCodeAt(i + 2) === 45 && xmlData.charCodeAt(i + 3) === 45) {
+          const endIndex = findClosingIndex(xmlData, "-->", i + 4, "Comment is not closed.");
           if (options.commentPropName) {
-            const comment = xmlData.substring(i2 + 4, endIndex - 2);
+            const comment = xmlData.substring(i + 4, endIndex - 2);
             textData = this.saveTextToParentTag(textData, currentNode, this.readonlyMatcher);
             currentNode.add(options.commentPropName, [{ [options.textNodeName]: comment }]);
           }
-          i2 = endIndex;
-        } else if (c1 === 33 && xmlData.charCodeAt(i2 + 2) === 68) {
-          const result = docTypeReader.readDocType(xmlData, i2);
+          i = endIndex;
+        } else if (c1 === 33 && xmlData.charCodeAt(i + 2) === 68) {
+          const result = docTypeReader.readDocType(xmlData, i);
           this.entityDecoder.addInputEntities(result.entities);
-          i2 = result.i;
-        } else if (c1 === 33 && xmlData.charCodeAt(i2 + 2) === 91) {
-          const closeIndex = findClosingIndex(xmlData, "]]>", i2, "CDATA is not closed.") - 2;
-          const tagExp = xmlData.substring(i2 + 9, closeIndex);
+          i = result.i;
+        } else if (c1 === 33 && xmlData.charCodeAt(i + 2) === 91) {
+          const closeIndex = findClosingIndex(xmlData, "]]>", i, "CDATA is not closed.") - 2;
+          const tagExp = xmlData.substring(i + 9, closeIndex);
           textData = this.saveTextToParentTag(textData, currentNode, this.readonlyMatcher);
           let val = this.parseTextData(tagExp, currentNode.tagname, this.readonlyMatcher, true, false, true, true);
           if (val == void 0) val = "";
@@ -26633,12 +27063,12 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           } else {
             currentNode.add(options.textNodeName, val);
           }
-          i2 = closeIndex + 2;
+          i = closeIndex + 2;
         } else {
-          let result = readTagExp(xmlData, i2, options.removeNSPrefix);
+          let result = readTagExp(xmlData, i, options.removeNSPrefix);
           if (!result) {
-            const context = xmlData.substring(Math.max(0, i2 - 50), Math.min(xmlLen, i2 + 50));
-            throw new Error(`readTagExp returned undefined at position ${i2}. Context: "${context}"`);
+            const context = xmlData.substring(Math.max(0, i - 50), Math.min(xmlLen, i + 50));
+            throw new Error(`readTagExp returned undefined at position ${i}. Context: "${context}"`);
           }
           let tagName = result.tagName;
           const rawTagName = result.rawTagName;
@@ -26685,17 +27115,17 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
           if (tagName !== xmlObj.tagname) {
             this.isCurrentNodeStopNode = this.isItStopNode();
           }
-          const startIndex = i2;
+          const startIndex = i;
           if (this.isCurrentNodeStopNode) {
             let tagContent = "";
             if (isSelfClosing) {
-              i2 = result.closeIndex;
+              i = result.closeIndex;
             } else if (options.unpairedTagsSet.has(tagName)) {
-              i2 = result.closeIndex;
+              i = result.closeIndex;
             } else {
               const result2 = this.readStopNodeData(xmlData, rawTagName, closeIndex + 1);
               if (!result2) throw new Error(`Unexpected end of ${rawTagName}`);
-              i2 = result2.i;
+              i = result2.i;
               tagContent = result2.tagContent;
             }
             const childNode = new XmlNode(tagName);
@@ -26724,7 +27154,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
               this.addChild(currentNode, childNode, this.readonlyMatcher, startIndex);
               this.matcher.pop();
               this.isCurrentNodeStopNode = false;
-              i2 = result.closeIndex;
+              i = result.closeIndex;
               continue;
             } else {
               const childNode = new XmlNode(tagName);
@@ -26739,11 +27169,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
               currentNode = childNode;
             }
             textData = "";
-            i2 = closeIndex;
+            i = closeIndex;
           }
         }
       } else {
-        textData += xmlData[i2];
+        textData += xmlData[i];
       }
     }
     return xmlObj.child;
@@ -26801,14 +27231,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     if (this.stopNodeExpressionsSet.size === 0) return false;
     return this.matcher.matchesAny(this.stopNodeExpressionsSet);
   }
-  function tagExpWithClosingIndex(xmlData, i2, closingChar = ">") {
+  function tagExpWithClosingIndex(xmlData, i, closingChar = ">") {
     let attrBoundary = 0;
     const len = xmlData.length;
     const closeCode0 = closingChar.charCodeAt(0);
     const closeCode1 = closingChar.length > 1 ? closingChar.charCodeAt(1) : -1;
     let result = "";
-    let segmentStart = i2;
-    for (let index2 = i2; index2 < len; index2++) {
+    let segmentStart = i;
+    for (let index2 = i; index2 < len; index2++) {
       const code = xmlData.charCodeAt(index2);
       if (attrBoundary) {
         if (code === attrBoundary) attrBoundary = 0;
@@ -26830,21 +27260,21 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }
     }
   }
-  function findClosingIndex(xmlData, str, i2, errMsg) {
-    const closingIndex = xmlData.indexOf(str, i2);
+  function findClosingIndex(xmlData, str, i, errMsg) {
+    const closingIndex = xmlData.indexOf(str, i);
     if (closingIndex === -1) {
       throw new Error(errMsg);
     } else {
       return closingIndex + str.length - 1;
     }
   }
-  function findClosingChar(xmlData, char2, i2, errMsg) {
-    const closingIndex = xmlData.indexOf(char2, i2);
+  function findClosingChar(xmlData, char2, i, errMsg) {
+    const closingIndex = xmlData.indexOf(char2, i);
     if (closingIndex === -1) throw new Error(errMsg);
     return closingIndex;
   }
-  function readTagExp(xmlData, i2, removeNSPrefix, closingChar = ">") {
-    const result = tagExpWithClosingIndex(xmlData, i2 + 1, closingChar);
+  function readTagExp(xmlData, i, removeNSPrefix, closingChar = ">") {
+    const result = tagExpWithClosingIndex(xmlData, i + 1, closingChar);
     if (!result) return;
     let tagExp = result.data;
     const closeIndex = result.index;
@@ -26871,43 +27301,43 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       rawTagName
     };
   }
-  function readStopNodeData(xmlData, tagName, i2) {
-    const startIndex = i2;
+  function readStopNodeData(xmlData, tagName, i) {
+    const startIndex = i;
     let openTagCount = 1;
     const xmllen = xmlData.length;
-    for (; i2 < xmllen; i2++) {
-      if (xmlData[i2] === "<") {
-        const c1 = xmlData.charCodeAt(i2 + 1);
+    for (; i < xmllen; i++) {
+      if (xmlData[i] === "<") {
+        const c1 = xmlData.charCodeAt(i + 1);
         if (c1 === 47) {
-          const closeIndex = findClosingChar(xmlData, ">", i2, `${tagName} is not closed`);
-          let closeTagName = xmlData.substring(i2 + 2, closeIndex).trim();
+          const closeIndex = findClosingChar(xmlData, ">", i, `${tagName} is not closed`);
+          let closeTagName = xmlData.substring(i + 2, closeIndex).trim();
           if (closeTagName === tagName) {
             openTagCount--;
             if (openTagCount === 0) {
               return {
-                tagContent: xmlData.substring(startIndex, i2),
+                tagContent: xmlData.substring(startIndex, i),
                 i: closeIndex
               };
             }
           }
-          i2 = closeIndex;
+          i = closeIndex;
         } else if (c1 === 63) {
-          const closeIndex = findClosingIndex(xmlData, "?>", i2 + 1, "StopNode is not closed.");
-          i2 = closeIndex;
-        } else if (c1 === 33 && xmlData.charCodeAt(i2 + 2) === 45 && xmlData.charCodeAt(i2 + 3) === 45) {
-          const closeIndex = findClosingIndex(xmlData, "-->", i2 + 3, "StopNode is not closed.");
-          i2 = closeIndex;
-        } else if (c1 === 33 && xmlData.charCodeAt(i2 + 2) === 91) {
-          const closeIndex = findClosingIndex(xmlData, "]]>", i2, "StopNode is not closed.") - 2;
-          i2 = closeIndex;
+          const closeIndex = findClosingIndex(xmlData, "?>", i + 1, "StopNode is not closed.");
+          i = closeIndex;
+        } else if (c1 === 33 && xmlData.charCodeAt(i + 2) === 45 && xmlData.charCodeAt(i + 3) === 45) {
+          const closeIndex = findClosingIndex(xmlData, "-->", i + 3, "StopNode is not closed.");
+          i = closeIndex;
+        } else if (c1 === 33 && xmlData.charCodeAt(i + 2) === 91) {
+          const closeIndex = findClosingIndex(xmlData, "]]>", i, "StopNode is not closed.") - 2;
+          i = closeIndex;
         } else {
-          const tagData = readTagExp(xmlData, i2, false);
+          const tagData = readTagExp(xmlData, i, false);
           if (tagData) {
             const openTagName = tagData && tagData.tagName;
             if (openTagName === tagName && tagData.tagExp[tagData.tagExp.length - 1] !== "/") {
               openTagCount++;
             }
-            i2 = tagData.closeIndex;
+            i = tagData.closeIndex;
           }
         }
       }
@@ -26967,8 +27397,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   function compress(arr, options, matcher, readonlyMatcher) {
     let text2;
     const compressedObj = {};
-    for (let i2 = 0; i2 < arr.length; i2++) {
-      const tagObj = arr[i2];
+    for (let i = 0; i < arr.length; i++) {
+      const tagObj = arr[i];
       const property = propName$1(tagObj);
       if (property !== void 0 && property !== options.textNodeName) {
         const rawAttrs = stripAttributePrefix(
@@ -27024,8 +27454,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   }
   function propName$1(obj) {
     const keys = Object.keys(obj);
-    for (let i2 = 0; i2 < keys.length; i2++) {
-      const key = keys[i2];
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
       if (key !== ":@") return key;
     }
   }
@@ -27033,8 +27463,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     if (attrMap) {
       const keys = Object.keys(attrMap);
       const len = keys.length;
-      for (let i2 = 0; i2 < len; i2++) {
-        const atrrName = keys[i2];
+      for (let i = 0; i < len; i++) {
+        const atrrName = keys[i];
         const rawAttrName = atrrName.startsWith(options.attributeNamePrefix) ? atrrName.substring(options.attributeNamePrefix.length) : atrrName;
         const jPathOrMatcher = options.jPath ? readonlyMatcher.toString() + "." + rawAttrName : readonlyMatcher;
         if (options.isArray(atrrName, jPathOrMatcher, true, true)) {
@@ -27149,8 +27579,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     }
     const stopNodeExpressions = [];
     if (options.stopNodes && Array.isArray(options.stopNodes)) {
-      for (let i2 = 0; i2 < options.stopNodes.length; i2++) {
-        const node = options.stopNodes[i2];
+      for (let i = 0; i < options.stopNodes.length; i++) {
+        const node = options.stopNodes[i];
         if (typeof node === "string") {
           stopNodeExpressions.push(new Expression(node));
         } else if (node instanceof Expression) {
@@ -27176,8 +27606,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       }
       return "";
     }
-    for (let i2 = 0; i2 < arr.length; i2++) {
-      const tagObj = arr[i2];
+    for (let i = 0; i < arr.length; i++) {
+      const tagObj = arr[i];
       const rawTagName = propName(tagObj);
       if (rawTagName === void 0) continue;
       const isSpecialName = rawTagName === options.textNodeName || rawTagName === options.cdataPropName || rawTagName === options.commentPropName || rawTagName[0] === "?";
@@ -27276,8 +27706,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return "";
     }
     let content = "";
-    for (let i2 = 0; i2 < arr.length; i2++) {
-      const item = arr[i2];
+    for (let i = 0; i < arr.length; i++) {
+      const item = arr[i];
       const tagName = propName(item);
       if (tagName === options.textNodeName) {
         content += item[tagName];
@@ -27316,8 +27746,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   }
   function propName(obj) {
     const keys = Object.keys(obj);
-    for (let i2 = 0; i2 < keys.length; i2++) {
-      const key = keys[i2];
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
       if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
       if (key !== ":@") return key;
     }
@@ -27347,8 +27777,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   }
   function checkStopNode(matcher, stopNodeExpressions) {
     if (!stopNodeExpressions || stopNodeExpressions.length === 0) return false;
-    for (let i2 = 0; i2 < stopNodeExpressions.length; i2++) {
-      if (matcher.matches(stopNodeExpressions[i2])) {
+    for (let i = 0; i < stopNodeExpressions.length; i++) {
+      if (matcher.matches(stopNodeExpressions[i])) {
         return true;
       }
     }
@@ -27356,8 +27786,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   }
   function replaceEntitiesValue(textValue, options) {
     if (textValue && textValue.length > 0 && options.processEntities) {
-      for (let i2 = 0; i2 < options.entities.length; i2++) {
-        const entity = options.entities[i2];
+      for (let i = 0; i < options.entities.length; i++) {
+        const entity = options.entities[i];
         textValue = textValue.replace(entity.regex, entity.val);
       }
     }
@@ -27392,11 +27822,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     suppressEmptyNode: false,
     suppressUnpairedNode: true,
     suppressBooleanAttributes: true,
-    tagValueProcessor: function(key, a) {
-      return a;
+    tagValueProcessor: function(key, a2) {
+      return a2;
     },
-    attributeValueProcessor: function(attrName, a) {
-      return a;
+    attributeValueProcessor: function(attrName, a2) {
+      return a2;
     },
     preserveOrder: false,
     commentPropName: false,
@@ -27435,8 +27865,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     }
     this.stopNodeExpressions = [];
     if (this.options.stopNodes && Array.isArray(this.options.stopNodes)) {
-      for (let i2 = 0; i2 < this.options.stopNodes.length; i2++) {
-        const node = this.options.stopNodes[i2];
+      for (let i = 0; i < this.options.stopNodes.length; i++) {
+        const node = this.options.stopNodes[i];
         if (typeof node === "string") {
           this.stopNodeExpressions.push(new Expression(node));
         } else if (node instanceof Expression) {
@@ -27780,8 +28210,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   };
   Builder.prototype.checkStopNode = function(matcher) {
     if (!this.stopNodeExpressions || this.stopNodeExpressions.length === 0) return false;
-    for (let i2 = 0; i2 < this.stopNodeExpressions.length; i2++) {
-      if (matcher.matches(this.stopNodeExpressions[i2])) {
+    for (let i = 0; i < this.stopNodeExpressions.length; i++) {
+      if (matcher.matches(this.stopNodeExpressions[i])) {
         return true;
       }
     }
@@ -27808,8 +28238,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   };
   Builder.prototype.replaceEntitiesValue = function(textValue) {
     if (textValue && textValue.length > 0 && this.options.processEntities) {
-      for (let i2 = 0; i2 < this.options.entities.length; i2++) {
-        const entity = this.options.entities[i2];
+      for (let i = 0; i < this.options.entities.length; i++) {
+        const entity = this.options.entities[i];
         textValue = textValue.replace(entity.regex, entity.val);
       }
     }
@@ -27830,7 +28260,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return e2.mode !== `Ext` && e2.extra && (e2.extra.artplayer || se(e2.extra.bili)) ? (e2.mode = `Ext`, true) : false;
   }
   function m(e2) {
-    let t2 = M$1.parse(e2);
+    let t2 = o$2.parse(e2);
     return { ...t2, bili: t2.bili ? { ...t2.bili, dmid: t2.bili.dmid?.toString(), mid: t2.bili.mid?.toString() } : void 0 };
   }
   const le = float32(), ue = int();
@@ -27866,20 +28296,20 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         throw Error(`Unsupported mod`);
     }
   }
-  const g = codec(_enum(D$1).default(0), _enum(l.mode.enumValues), { decode: (e2) => l.mode.enumValues[e2] || `Normal`, encode: (e2) => D$1[e2] || 0 }), _ = codec(_enum(O$1).default(0), _enum(l.pool.enumValues), { decode: (e2) => l.pool.enumValues[e2] || `Def`, encode: (e2) => O$1[e2] || 0 }), v = codec(_enum(k$1).array(), _enum(l.attr.enumValues).array(), { decode: (e2) => e2, encode: (e2) => e2.map((e3) => k$1[e3]) });
+  const g = codec(_enum(b$1).default(0), _enum(l.mode.enumValues), { decode: (e2) => l.mode.enumValues[e2] || `Normal`, encode: (e2) => b$1[e2] || 0 }), _ = codec(_enum(x$1).default(0), _enum(l.pool.enumValues), { decode: (e2) => l.pool.enumValues[e2] || `Def`, encode: (e2) => x$1[e2] || 0 }), v = codec(_enum(S$1).array(), _enum(l.attr.enumValues).array(), { decode: (e2) => e2, encode: (e2) => e2.map((e3) => S$1[e3]) });
   function fe(e2) {
     let t2 = !Number.isInteger(e2.progress), n2 = typeof e2.extraStr == `string`;
     return t2 || n2;
   }
   const y = Z((e2, t2) => async (n2, r2) => {
-    let i2 = /* @__PURE__ */ new Date(), a = r2 ?? await n2.makeChunk({}), o2 = t2?.isV1 ? true : e2.some((e3) => fe(e3));
-    return await a.upsertDanmakus(e2.map((e3) => {
-      let t3 = { SOID: e3.SOID || A$1.SOID, progress: e3.progress ? o2 ? de(e3.progress) : e3.progress : A$1.progress, mode: g.decode(e3.mode), fontsize: e3.fontsize ?? A$1.fontsize, color: e3.color ?? A$1.color, senderID: e3.senderID || A$1.senderID, content: e3.content ?? A$1.content, ctime: e3.ctime ? new Date(e3.ctime) : i2, weight: e3.weight ?? A$1.weight, pool: _.decode(e3.pool), attr: e3.attr ? v.decode(e3.attr) : A$1.attr, platform: e3.platform ?? A$1.platform, extra: e3.extra ?? (e3.extraStr ? m(e3.extraStr) : A$1.extra) };
-      return ce(t3), { ...t3, DMID: !o2 && e3.DMID ? e3.DMID : a.$UniDB.DMIDGenerator(t3) };
-    })), a;
+    let a2 = /* @__PURE__ */ new Date(), o2 = r2 ?? await n2.makeChunk({}), s2 = t2?.isV1 ? true : e2.some((e3) => fe(e3));
+    return await o2.upsertDanmakus(e2.map((e3) => {
+      let t3 = { SOID: e3.SOID || C$1.SOID, progress: e3.progress ? s2 ? de(e3.progress) : e3.progress : C$1.progress, mode: g.decode(e3.mode), fontsize: e3.fontsize ?? C$1.fontsize, color: e3.color ?? C$1.color, senderID: e3.senderID || C$1.senderID, content: e3.content ?? C$1.content, ctime: e3.ctime ? new Date(e3.ctime) : a2, weight: e3.weight ?? C$1.weight, pool: _.decode(e3.pool), attr: e3.attr ? v.decode(e3.attr) : C$1.attr, platform: e3.platform ?? C$1.platform, extra: e3.extra ?? (e3.extraStr ? m(e3.extraStr) : C$1.extra) };
+      return ce(t3), { ...t3, DMID: !s2 && e3.DMID ? e3.DMID : o2.$UniDB.DMIDGenerator(t3) };
+    })), o2;
   });
   function b(e2) {
-    return Q((t2) => e2?.minify ? t2.map((e3) => ({ SOID: e3.SOID === A$1.SOID ? void 0 : e3.SOID, progress: e3.progress === A$1.progress ? void 0 : e3.progress, mode: e3.mode === `Normal` ? void 0 : g.encode(e3.mode), fontsize: e3.fontsize === A$1.fontsize ? void 0 : e3.fontsize, color: e3.color === A$1.color ? void 0 : e3.color, senderID: e3.senderID === A$1.senderID ? void 0 : e3.senderID, content: e3.content === A$1.content ? void 0 : e3.content, ctime: e3.ctime, weight: e3.weight === A$1.weight ? void 0 : e3.weight, pool: e3.pool === `Def` ? void 0 : _.encode(e3.pool), attr: e3.attr && e3.attr.length > 0 ? v.encode(e3.attr) : void 0, platform: e3.platform ?? void 0, extra: e3.extra ?? void 0, DMID: e3.DMID })) : t2.map((e3) => ({ ...e3, mode: g.encode(e3.mode), pool: _.encode(e3.pool), attr: v.encode(e3.attr) })));
+    return Q((t2) => e2?.minify ? t2.map((e3) => ({ SOID: e3.SOID === C$1.SOID ? void 0 : e3.SOID, progress: e3.progress === C$1.progress ? void 0 : e3.progress, mode: e3.mode === `Normal` ? void 0 : g.encode(e3.mode), fontsize: e3.fontsize === C$1.fontsize ? void 0 : e3.fontsize, color: e3.color === C$1.color ? void 0 : e3.color, senderID: e3.senderID === C$1.senderID ? void 0 : e3.senderID, content: e3.content === C$1.content ? void 0 : e3.content, ctime: e3.ctime, weight: e3.weight === C$1.weight ? void 0 : e3.weight, pool: e3.pool === `Def` ? void 0 : _.encode(e3.pool), attr: e3.attr && e3.attr.length > 0 ? v.encode(e3.attr) : void 0, platform: e3.platform ?? void 0, extra: e3.extra ?? void 0, DMID: e3.DMID })) : t2.map((e3) => ({ ...e3, mode: g.encode(e3.mode), pool: _.encode(e3.pool), attr: v.encode(e3.attr) })));
   }
   const x = $({ type: `danuni.json`, ext: [`.json`], check: { adapter: async (e2, t2) => {
     try {
@@ -27894,29 +28324,29 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return e2[e2.DEF_UNSPECIFIED = 0] = `DEF_UNSPECIFIED`, e2[e2.SUB = 1] = `SUB`, e2[e2.ADV = 2] = `ADV`, e2[e2.IX = 3] = `IX`, e2;
   })({});
   const C = codec(_enum(pe), _enum(l.mode.enumValues), { decode: (e2) => l.mode.enumValues[e2] || `Normal`, encode: (e2) => {
-    let n2 = l.mode.enumValues.indexOf(e2);
-    return n2 === -1 ? 0 : n2;
+    let t2 = l.mode.enumValues.indexOf(e2);
+    return t2 === -1 ? 0 : t2;
   } }), he = codec(_enum(me), _enum(l.pool.enumValues), { decode: (e2) => l.pool.enumValues[e2] || `Def`, encode: (e2) => {
-    let n2 = l.pool.enumValues.indexOf(e2);
-    return n2 === -1 ? 0 : n2;
-  } }), w = Z((e2) => async (n2, r2) => {
-    let i2 = fromBinary(S, new Uint8Array(e2)), a = r2 ?? await n2.makeChunk({}), s2 = i2.danmakus.some((e3) => e3.extraV1);
-    return await a.upsertDanmakus(i2.danmakus.map((e3) => {
-      let n3 = { ...e3, SOID: e3.soid, DMID: e3.dmid, mode: C.decode(e3.mode), senderID: e3.senderId, ctime: timestampDate(e3.ctime || timestampNow()), pool: he.decode(e3.pool), attr: _enum(l.attr.enumValues).array().parse(e3.attr), platform: e3.platform ?? A$1.platform, extra: e3.extra ? M$1.parse(e3.extra) : e3.extraV1 ? m(e3.extraV1) : void 0 };
-      return s2 ? { ...n3, DMID: a.$UniDB.DMIDGenerator(n3) } : n3;
-    })), a;
-  }), ge = Q((e2) => toBinary(S, create(S, { danmakus: e2.map((e3) => ({ ...e3, soid: e3.SOID, dmid: e3.DMID, mode: C.encode(e3.mode), senderId: e3.senderID, ctime: timestampFromDate(e3.ctime), pool: he.encode(e3.pool), platform: e3.platform ?? void 0, extra: M$1.stringify(e3.extra) })) }))), T = $({ type: `danuni.binpb`, ext: [`.binpb`, `.bin`, `.pb.bin`], check: { adapter: async (e2, t2) => {
+    let t2 = l.pool.enumValues.indexOf(e2);
+    return t2 === -1 ? 0 : t2;
+  } }), w = Z((e2) => async (t2, r2) => {
+    let a2 = fromBinary(S, new Uint8Array(e2)), o2 = r2 ?? await t2.makeChunk({}), s2 = a2.danmakus.some((e3) => e3.extraV1);
+    return await o2.upsertDanmakus(a2.danmakus.map((e3) => {
+      let t3 = { ...e3, SOID: e3.soid, DMID: e3.dmid, mode: C.decode(e3.mode), senderID: e3.senderId, ctime: timestampDate(e3.ctime || timestampNow()), pool: he.decode(e3.pool), attr: _enum(l.attr.enumValues).array().parse(e3.attr), platform: e3.platform ?? C$1.platform, extra: e3.extra ? o$2.parse(e3.extra) : e3.extraV1 ? m(e3.extraV1) : void 0 };
+      return s2 ? { ...t3, DMID: o2.$UniDB.DMIDGenerator(t3) } : t3;
+    })), o2;
+  }), ge = Q((e2) => toBinary(S, create(S, { danmakus: e2.map((e3) => ({ ...e3, soid: e3.SOID, dmid: e3.DMID, mode: C.encode(e3.mode), senderId: e3.senderID, ctime: timestampFromDate(e3.ctime), pool: he.encode(e3.pool), platform: e3.platform ?? void 0, extra: o$2.stringify(e3.extra) })) }))), T = $({ type: `danuni.binpb`, ext: [`.binpb`, `.bin`, `.pb.bin`], check: { adapter: async (e2, t2) => {
     try {
       return await e2.import(w(await h(t2, `bin`)));
     } catch {
       return null;
     }
   } } }), E = fileDesc(`CiliaWxpYmlsaS9jb21tdW5pdHkvc2VydmljZS9kbS92MS9kbS5wcm90bxIgYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEiZAoGQXZhdGFyEgoKAmlkGAEgASgJEgsKA3VybBgCIAEoCRJBCgthdmF0YXJfdHlwZRgDIAEoDjIsLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkF2YXRhclR5cGUiIwoGQnViYmxlEgwKBHRleHQYASABKAkSCwoDdXJsGAIgASgJIsYBCghCdWJibGVWMhIMCgR0ZXh0GAEgASgJEgsKA3VybBgCIAEoCRJBCgtidWJibGVfdHlwZRgDIAEoDjIsLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkJ1YmJsZVR5cGUSFQoNZXhwb3N1cmVfb25jZRgEIAEoCBJFCg1leHBvc3VyZV90eXBlGAUgASgOMi4uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRXhwb3N1cmVUeXBlIlsKBkJ1dHRvbhIMCgR0ZXh0GAEgASgJEkMKBmFjdGlvbhgCIAEoDjIzLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlRvYXN0RnVuY3Rpb25UeXBlIlgKDkJ1enp3b3JkQ29uZmlnEkYKCGtleXdvcmRzGAEgAygLMjQuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuQnV6endvcmRTaG93Q29uZmlnIngKEkJ1enp3b3JkU2hvd0NvbmZpZxIMCgRuYW1lGAEgASgJEg4KBnNjaGVtYRgCIAEoCRIOCgZzb3VyY2UYAyABKAUSCgoCaWQYBCABKAMSEwoLYnV6endvcmRfaWQYBSABKAMSEwoLc2NoZW1hX3R5cGUYBiABKAUiewoIQ2hlY2tCb3gSDAoEdGV4dBgBIAEoCRI8CgR0eXBlGAIgASgOMi4uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuQ2hlY2tib3hUeXBlEhUKDWRlZmF1bHRfdmFsdWUYAyABKAgSDAoEc2hvdxgEIAEoCCJvCgpDaGVja0JveFYyEgwKBHRleHQYASABKAkSPAoEdHlwZRgCIAEoDjIuLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkNoZWNrYm94VHlwZRIVCg1kZWZhdWx0X3ZhbHVlGAMgASgIIoICCgtDbGlja0J1dHRvbhIVCg1wb3J0cmFpdF90ZXh0GAEgAygJEhYKDmxhbmRzY2FwZV90ZXh0GAIgAygJEhsKE3BvcnRyYWl0X3RleHRfZm9jdXMYAyADKAkSHAoUbGFuZHNjYXBlX3RleHRfZm9jdXMYBCADKAkSQQoLcmVuZGVyX3R5cGUYBSABKA4yLC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5SZW5kZXJUeXBlEgwKBHNob3cYBiABKAgSOAoGYnViYmxlGAcgASgLMiguYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuQnViYmxlIrMCCg1DbGlja0J1dHRvblYyEhUKDXBvcnRyYWl0X3RleHQYASADKAkSFgoObGFuZHNjYXBlX3RleHQYAiADKAkSGwoTcG9ydHJhaXRfdGV4dF9mb2N1cxgDIAMoCRIcChRsYW5kc2NhcGVfdGV4dF9mb2N1cxgEIAMoCRJBCgtyZW5kZXJfdHlwZRgFIAEoDjIsLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlJlbmRlclR5cGUSFwoPdGV4dF9pbnB1dF9wb3N0GAYgASgIEhUKDWV4cG9zdXJlX29uY2UYByABKAgSRQoNZXhwb3N1cmVfdHlwZRgIIAEoDjIuLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkV4cG9zdXJlVHlwZSJLCgdDb21tYW5kEkAKC2NvbW1hbmRfZG1zGAEgAygLMisuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuQ29tbWFuZERtIuYBCglDb21tYW5kRG0SCgoCaWQYASABKAMSCwoDb2lkGAIgASgDEgsKA21pZBgDIAEoAxIPCgdjb21tYW5kGAQgASgJEg8KB2NvbnRlbnQYBSABKAkSEAoIcHJvZ3Jlc3MYBiABKAUSDQoFY3RpbWUYByABKAkSDQoFbXRpbWUYCCABKAkSDQoFZXh0cmEYCSABKAkSDQoFaWRTdHIYCiABKAkSDAoEdHlwZRgLIAEoBRITCgthdXRvX2NyZWF0ZRgMIAEoCBISCgpjb3VudF9kb3duGA0gASgFEgwKBGF0dHIYDiABKAUiUAoNRGFubWFrdUFJRmxhZxI/CghkbV9mbGFncxgBIAMoCzItLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRhbm1ha3VGbGFnIosDCgtEYW5tYWt1RWxlbRIKCgJpZBgBIAEoAxIQCghwcm9ncmVzcxgCIAEoBRIMCgRtb2RlGAMgASgFEhAKCGZvbnRzaXplGAQgASgFEj8KBWNvbG9yGAUgASgOMjAuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRG1Db2xvcmZ1bFR5cGUSEAoIbWlkX2hhc2gYBiABKAkSDwoHY29udGVudBgHIAEoCRINCgVjdGltZRgIIAEoAxIOCgZ3ZWlnaHQYCSABKAUSDgoGYWN0aW9uGAogASgJEgwKBHBvb2wYCyABKAUSDgoGaWRfc3RyGAwgASgJEgwKBGF0dHIYDSABKAUSEQoJYW5pbWF0aW9uGBYgASgJEg0KBWV4dHJhGBcgASgJEkIKCGNvbG9yZnVsGBggASgOMjAuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRG1Db2xvcmZ1bFR5cGUSDAoEdHlwZRgZIAEoBRILCgNvaWQYGiABKAMiKQoLRGFubWFrdUZsYWcSDAoEZG1pZBgBIAEoAxIMCgRmbGFnGAIgASgFIksKEURhbm1ha3VGbGFnQ29uZmlnEhAKCHJlY19mbGFnGAEgASgFEhAKCHJlY190ZXh0GAIgASgJEhIKCnJlY19zd2l0Y2gYAyABKAUiiwcKGERhbm11RGVmYXVsdFBsYXllckNvbmZpZxIpCiFwbGF5ZXJfZGFubWFrdV91c2VfZGVmYXVsdF9jb25maWcYASABKAgSLAokcGxheWVyX2Rhbm1ha3VfYWlfcmVjb21tZW5kZWRfc3dpdGNoGAQgASgIEisKI3BsYXllcl9kYW5tYWt1X2FpX3JlY29tbWVuZGVkX2xldmVsGAUgASgFEh8KF3BsYXllcl9kYW5tYWt1X2Jsb2NrdG9wGAYgASgIEiIKGnBsYXllcl9kYW5tYWt1X2Jsb2Nrc2Nyb2xsGAcgASgIEiIKGnBsYXllcl9kYW5tYWt1X2Jsb2NrYm90dG9tGAggASgIEiQKHHBsYXllcl9kYW5tYWt1X2Jsb2NrY29sb3JmdWwYCSABKAgSIgoacGxheWVyX2Rhbm1ha3VfYmxvY2tyZXBlYXQYCiABKAgSIwobcGxheWVyX2Rhbm1ha3VfYmxvY2tzcGVjaWFsGAsgASgIEh4KFnBsYXllcl9kYW5tYWt1X29wYWNpdHkYDCABKAISJAoccGxheWVyX2Rhbm1ha3Vfc2NhbGluZ2ZhY3RvchgNIAEoAhIdChVwbGF5ZXJfZGFubWFrdV9kb21haW4YDiABKAISHAoUcGxheWVyX2Rhbm1ha3Vfc3BlZWQYDyABKAUSJAocaW5saW5lX3BsYXllcl9kYW5tYWt1X3N3aXRjaBgQIAEoCBIpCiFwbGF5ZXJfZGFubWFrdV9zZW5pb3JfbW9kZV9zd2l0Y2gYESABKAUSLgomcGxheWVyX2Rhbm1ha3VfYWlfcmVjb21tZW5kZWRfbGV2ZWxfdjIYEiABKAUSmAEKKnBsYXllcl9kYW5tYWt1X2FpX3JlY29tbWVuZGVkX2xldmVsX3YyX21hcBgTIAMoCzJkLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRhbm11RGVmYXVsdFBsYXllckNvbmZpZy5QbGF5ZXJEYW5tYWt1QWlSZWNvbW1lbmRlZExldmVsVjJNYXBFbnRyeRIlCh1wbGF5ZXJfZGFubWFrdV9lbmFibGVfaGVyZF9kbRgUIAEoCBpLCilQbGF5ZXJEYW5tYWt1QWlSZWNvbW1lbmRlZExldmVsVjJNYXBFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBIuwJChFEYW5tdVBsYXllckNvbmZpZxIdChVwbGF5ZXJfZGFubWFrdV9zd2l0Y2gYASABKAgSIgoacGxheWVyX2Rhbm1ha3Vfc3dpdGNoX3NhdmUYAiABKAgSKQohcGxheWVyX2Rhbm1ha3VfdXNlX2RlZmF1bHRfY29uZmlnGAMgASgIEiwKJHBsYXllcl9kYW5tYWt1X2FpX3JlY29tbWVuZGVkX3N3aXRjaBgEIAEoCBIrCiNwbGF5ZXJfZGFubWFrdV9haV9yZWNvbW1lbmRlZF9sZXZlbBgFIAEoBRIfChdwbGF5ZXJfZGFubWFrdV9ibG9ja3RvcBgGIAEoCBIiChpwbGF5ZXJfZGFubWFrdV9ibG9ja3Njcm9sbBgHIAEoCBIiChpwbGF5ZXJfZGFubWFrdV9ibG9ja2JvdHRvbRgIIAEoCBIkChxwbGF5ZXJfZGFubWFrdV9ibG9ja2NvbG9yZnVsGAkgASgIEiIKGnBsYXllcl9kYW5tYWt1X2Jsb2NrcmVwZWF0GAogASgIEiMKG3BsYXllcl9kYW5tYWt1X2Jsb2Nrc3BlY2lhbBgLIAEoCBIeChZwbGF5ZXJfZGFubWFrdV9vcGFjaXR5GAwgASgCEiQKHHBsYXllcl9kYW5tYWt1X3NjYWxpbmdmYWN0b3IYDSABKAISHQoVcGxheWVyX2Rhbm1ha3VfZG9tYWluGA4gASgCEhwKFHBsYXllcl9kYW5tYWt1X3NwZWVkGA8gASgFEiYKHnBsYXllcl9kYW5tYWt1X2VuYWJsZWJsb2NrbGlzdBgQIAEoCBIkChxpbmxpbmVfcGxheWVyX2Rhbm1ha3Vfc3dpdGNoGBEgASgIEiQKHGlubGluZV9wbGF5ZXJfZGFubWFrdV9jb25maWcYEiABKAUSJgoecGxheWVyX2Rhbm1ha3VfaW9zX3N3aXRjaF9zYXZlGBMgASgFEikKIXBsYXllcl9kYW5tYWt1X3Nlbmlvcl9tb2RlX3N3aXRjaBgUIAEoBRIuCiZwbGF5ZXJfZGFubWFrdV9haV9yZWNvbW1lbmRlZF9sZXZlbF92MhgVIAEoBRKRAQoqcGxheWVyX2Rhbm1ha3VfYWlfcmVjb21tZW5kZWRfbGV2ZWxfdjJfbWFwGBYgAygLMl0uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRGFubXVQbGF5ZXJDb25maWcuUGxheWVyRGFubWFrdUFpUmVjb21tZW5kZWRMZXZlbFYyTWFwRW50cnkSJQodcGxheWVyX2Rhbm1ha3VfZW5hYmxlX2hlcmRfZG0YFyABKAgSJgoecGxheWVyX2Rhbm1ha3VfYmxvY2t0b3BfYm90dG9tGBggASgIEiAKGHBsYXllcl9kYW5tYWt1X2RvbWFpbl92MhgZIAEoBRIeChZwbGF5ZXJfZGFubWFrdV9kZW5zaXR5GBogASgFEiUKHXBsYXllcl9kYW5tYWt1X3N1YnRpdGxlX3Byb29mGBsgASgIEiMKG3BsYXllcl9kYW5tYWt1X3Blb3BsZV9wcm9vZhgcIAEoCBpLCilQbGF5ZXJEYW5tYWt1QWlSZWNvbW1lbmRlZExldmVsVjJNYXBFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBIjAKFkRhbm11UGxheWVyQ29uZmlnUGFuZWwSFgoOc2VsZWN0aW9uX3RleHQYASABKAkiSwoYRGFubXVQbGF5ZXJEeW5hbWljQ29uZmlnEhAKCHByb2dyZXNzGAEgASgFEh0KFXBsYXllcl9kYW5tYWt1X2RvbWFpbhgOIAEoAiKQAwoVRGFubXVQbGF5ZXJWaWV3Q29uZmlnEmEKHWRhbm11a3VfZGVmYXVsdF9wbGF5ZXJfY29uZmlnGAEgASgLMjouYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRGFubXVEZWZhdWx0UGxheWVyQ29uZmlnElIKFWRhbm11a3VfcGxheWVyX2NvbmZpZxgCIAEoCzIzLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRhbm11UGxheWVyQ29uZmlnEmEKHWRhbm11a3VfcGxheWVyX2R5bmFtaWNfY29uZmlnGAMgAygLMjouYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRGFubXVQbGF5ZXJEeW5hbWljQ29uZmlnEl0KG2Rhbm11a3VfcGxheWVyX2NvbmZpZ19wYW5lbBgEIAEoCzI4LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRhbm11UGxheWVyQ29uZmlnUGFuZWwimQUKFERhbm11V2ViUGxheWVyQ29uZmlnEhEKCWRtX3N3aXRjaBgBIAEoCBIRCglhaV9zd2l0Y2gYAiABKAgSEAoIYWlfbGV2ZWwYAyABKAUSEAoIYmxvY2t0b3AYBCABKAgSEwoLYmxvY2tzY3JvbGwYBSABKAgSEwoLYmxvY2tib3R0b20YBiABKAgSEgoKYmxvY2tjb2xvchgHIAEoCBIUCgxibG9ja3NwZWNpYWwYCCABKAgSFAoMcHJldmVudHNoYWRlGAkgASgIEg0KBWRtYXNrGAogASgIEg8KB29wYWNpdHkYCyABKAISDgoGZG1hcmVhGAwgASgFEhEKCXNwZWVkcGx1cxgNIAEoAhIQCghmb250c2l6ZRgOIAEoAhISCgpzY3JlZW5zeW5jGA8gASgIEhEKCXNwZWVkc3luYxgQIAEoCBISCgpmb250ZmFtaWx5GBEgASgJEgwKBGJvbGQYEiABKAgSEgoKZm9udGJvcmRlchgTIAEoBRIRCglkcmF3X3R5cGUYFCABKAkSGgoSc2VuaW9yX21vZGVfc3dpdGNoGBUgASgFEhMKC2FpX2xldmVsX3YyGBYgASgFEmEKD2FpX2xldmVsX3YyX21hcBgXIAMoCzJILmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRhbm11V2ViUGxheWVyQ29uZmlnLkFpTGV2ZWxWMk1hcEVudHJ5EhcKD2Jsb2NrdG9wX2JvdHRvbRgYIAEoCBISCgpkbV9hcmVhX3YyGBkgASgFEhIKCmRtX2RlbnNpdHkYGiABKAUaMwoRQWlMZXZlbFYyTWFwRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ASJZCgpEbUNvbG9yZnVsEj4KBHR5cGUYASABKA4yMC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EbUNvbG9yZnVsVHlwZRILCgNzcmMYAiABKAkiUAoPRG1FeHBvUmVwb3J0UmVxEhIKCnNlc3Npb25faWQYASABKAkSCwoDb2lkGAIgASgDEg0KBWRtaWRzGAMgASgMEg0KBXNwbWlkGAQgASgJIhEKD0RtRXhwb1JlcG9ydFJlcyJtCgpEbUhlcmRWaWV3EhsKE2Rpc3BsYXlfaGVyZF9kbV9udW0YASABKAUSQgoIaGVyZF9kbXMYAiADKAsyMC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5WaWV3SGVyZERtRWxlbSKWAgoKRG1NYXNrV2FsbBINCgVzdGFydBgBIAEoAxILCgNlbmQYAiABKAMSDwoHY29udGVudBgDIAEoCRJNCgxjb250ZW50X3R5cGUYBCABKA4yNy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EbU1hc2tXYWxsQ29udGVudFR5cGUSRQoIYml6X3R5cGUYBSABKA4yMy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EbU1hc2tXYWxsQml6VHlwZRJFCghjb250ZW50cxgGIAMoCzIzLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRtTWFza1dhbGxDb250ZW50ImsKEURtTWFza1dhbGxDb250ZW50EkUKBHR5cGUYASABKA4yNy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EbU1hc2tXYWxsQ29udGVudFR5cGUSDwoHY29udGVudBgCIAEoCSLNEAoRRG1QbGF5ZXJDb25maWdSZXESCgoCdHMYASABKAMSRQoGc3dpdGNoGAIgASgLMjUuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUGxheWVyRGFubWFrdVN3aXRjaBJOCgtzd2l0Y2hfc2F2ZRgDIAEoCzI5LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VTd2l0Y2hTYXZlElsKEnVzZV9kZWZhdWx0X2NvbmZpZxgEIAEoCzI/LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VVc2VEZWZhdWx0Q29uZmlnEmEKFWFpX3JlY29tbWVuZGVkX3N3aXRjaBgFIAEoCzJCLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VBaVJlY29tbWVuZGVkU3dpdGNoEl8KFGFpX3JlY29tbWVuZGVkX2xldmVsGAYgASgLMkEuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUGxheWVyRGFubWFrdUFpUmVjb21tZW5kZWRMZXZlbBJJCghibG9ja3RvcBgHIAEoCzI3LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VCbG9ja3RvcBJPCgtibG9ja3Njcm9sbBgIIAEoCzI6LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VCbG9ja3Njcm9sbBJPCgtibG9ja2JvdHRvbRgJIAEoCzI6LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VCbG9ja2JvdHRvbRJTCg1ibG9ja2NvbG9yZnVsGAogASgLMjwuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUGxheWVyRGFubWFrdUJsb2NrY29sb3JmdWwSTwoLYmxvY2tyZXBlYXQYCyABKAsyOi5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5QbGF5ZXJEYW5tYWt1QmxvY2tyZXBlYXQSUQoMYmxvY2tzcGVjaWFsGAwgASgLMjsuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUGxheWVyRGFubWFrdUJsb2Nrc3BlY2lhbBJHCgdvcGFjaXR5GA0gASgLMjYuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUGxheWVyRGFubWFrdU9wYWNpdHkSUwoNc2NhbGluZ2ZhY3RvchgOIAEoCzI8LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VTY2FsaW5nZmFjdG9yEkUKBmRvbWFpbhgPIAEoCzI1LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VEb21haW4SQwoFc3BlZWQYECABKAsyNC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5QbGF5ZXJEYW5tYWt1U3BlZWQSVwoPZW5hYmxlYmxvY2tsaXN0GBEgASgLMj4uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUGxheWVyRGFubWFrdUVuYWJsZWJsb2NrbGlzdBJeChlpbmxpbmVQbGF5ZXJEYW5tYWt1U3dpdGNoGBIgASgLMjsuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuSW5saW5lUGxheWVyRGFubWFrdVN3aXRjaBJbChJzZW5pb3JfbW9kZV9zd2l0Y2gYEyABKAsyPy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5QbGF5ZXJEYW5tYWt1U2VuaW9yTW9kZVN3aXRjaBJkChdhaV9yZWNvbW1lbmRlZF9sZXZlbF92MhgUIAEoCzJDLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VBaVJlY29tbWVuZGVkTGV2ZWxWMhJTCg5lbmFibGVfaGVyZF9kbRgVIAEoCzI7LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VFbmFibGVIZXJkRG0SVgoPYmxvY2t0b3BfYm90dG9tGBYgASgLMj0uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUGxheWVyRGFubWFrdUJsb2NrdG9wQm90dG9tEkoKCWRvbWFpbl92MhgXIAEoCzI3LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBsYXllckRhbm1ha3VEb21haW5WMhJHCgdkZW5zaXR5GBggASgLMjYuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUGxheWVyRGFubWFrdURlbnNpdHkSVAoOc3VidGl0bGVfcHJvb2YYGSABKAsyPC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5QbGF5ZXJEYW5tYWt1U3VidGl0bGVQcm9vZhJQCgxwZW9wbGVfcHJvb2YYGiABKAsyOi5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5QbGF5ZXJEYW5tYWt1UGVvcGxlUHJvb2YiLwoLRG1TZWdDb25maWcSEQoJcGFnZV9zaXplGAEgASgDEg0KBXRvdGFsGAIgASgDIpECChBEbVNlZ01vYmlsZVJlcGx5EjwKBWVsZW1zGAEgAygLMi0uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRGFubWFrdUVsZW0SDQoFc3RhdGUYAiABKAUSQAoHYWlfZmxhZxgDIAEoCzIvLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRhbm1ha3VBSUZsYWcSFQoNc2VnbWVudF9ydWxlcxgEIAMoAxJCCgxjb2xvcmZ1bF9zcmMYBSADKAsyLC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EbUNvbG9yZnVsEhMKC2NvbnRleHRfc3JjGAYgASgJIsoBCg5EbVNlZ01vYmlsZVJlcRILCgNwaWQYASABKAMSCwoDb2lkGAIgASgDEgwKBHR5cGUYAyABKAUSFQoNc2VnbWVudF9pbmRleBgEIAEoAxIWCg50ZWVuYWdlcnNfbW9kZRgFIAEoBRIKCgJwcxgGIAEoAxIKCgJwZRgHIAEoAxIRCglwdWxsX21vZGUYCCABKAUSEgoKZnJvbV9zY2VuZRgJIAEoBRINCgVzcG1pZBgKIAEoCRITCgtjb250ZXh0X2V4dBgLIAEoCSJcCg1EbVNlZ090dFJlcGx5EjwKBWVsZW1zGAEgAygLMi0uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRGFubWFrdUVsZW0SDQoFc3RhdGUYAiABKAUiTAoLRG1TZWdPdHRSZXESCwoDcGlkGAEgASgDEgsKA29pZBgCIAEoAxIMCgR0eXBlGAMgASgFEhUKDXNlZ21lbnRfaW5kZXgYBCABKAMiXQoNRG1TZWdTREtSZXBseRIOCgZjbG9zZWQYASABKAgSPAoFZWxlbXMYAiADKAsyLS5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EYW5tYWt1RWxlbSJMCgtEbVNlZ1NES1JlcRILCgNwaWQYASABKAMSCwoDb2lkGAIgASgDEgwKBHR5cGUYAyABKAUSFQoNc2VnbWVudF9pbmRleBgEIAEoAyJ3CglEbVN1YlZpZXcSDAoEdHlwZRgBIAEoBRILCgNvaWQYAiABKAMSCwoDcGlkGAMgASgDEkIKC3Bvc3RfcGFuZWwyGAQgAygLMi0uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUG9zdFBhbmVsVjIioQkKC0RtVmlld1JlcGx5Eg4KBmNsb3NlZBgBIAEoCBI5CgRtYXNrGAIgASgLMisuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuVmlkZW9NYXNrEkEKCHN1YnRpdGxlGAMgASgLMi8uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuVmlkZW9TdWJ0aXRsZRITCgtzcGVjaWFsX2RtcxgEIAMoCRJECgdhaV9mbGFnGAUgASgLMjMuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRGFubWFrdUZsYWdDb25maWcSTgoNcGxheWVyX2NvbmZpZxgGIAEoCzI3LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRhbm11UGxheWVyVmlld0NvbmZpZxIWCg5zZW5kX2JveF9zdHlsZRgHIAEoBRINCgVhbGxvdxgIIAEoCBIRCgljaGVja19ib3gYCSABKAgSGgoSY2hlY2tfYm94X3Nob3dfbXNnGAogASgJEhgKEHRleHRfcGxhY2Vob2xkZXIYCyABKAkSGQoRaW5wdXRfcGxhY2Vob2xkZXIYDCABKAkSHQoVcmVwb3J0X2ZpbHRlcl9jb250ZW50GA0gAygJEkEKC2V4cG9fcmVwb3J0GA4gASgLMiwuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRXhwb1JlcG9ydBJJCg9idXp6d29yZF9jb25maWcYDyABKAsyMC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5CdXp6d29yZENvbmZpZxJCCgtleHByZXNzaW9ucxgQIAMoCzItLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkV4cHJlc3Npb25zEj8KCnBvc3RfcGFuZWwYESADKAsyKy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5Qb3N0UGFuZWwSFQoNYWN0aXZpdHlfbWV0YRgSIAMoCRJCCgtwb3N0X3BhbmVsMhgTIAMoCzItLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBvc3RQYW5lbFYyEkIKDGRtX21hc2tfd2FsbBgUIAMoCzIsLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRtTWFza1dhbGwSPQoHZG1faGVyZBgVIAEoCzIsLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRtSGVyZFZpZXcSOgoHY29tbWFuZBgWIAEoCzIpLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkNvbW1hbmQSCgoCa3YYFyABKAkSPgoJc3ViX3ZpZXdzGBggAygLMisuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRG1TdWJWaWV3EjYKA3FvZRgZIAEoCzIpLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlFvZUluZm8ibQoJRG1WaWV3UmVxEgsKA3BpZBgBIAEoAxILCgNvaWQYAiABKAMSDAoEdHlwZRgDIAEoBRINCgVzcG1pZBgEIAEoCRIUCgxpc19oYXJkX2Jvb3QYBSABKAUSEwoLY29udGV4dF9leHQYBiABKAkigQYKDkRtV2ViVmlld1JlcGx5Eg0KBXN0YXRlGAEgASgFEgwKBHRleHQYAiABKAkSEQoJdGV4dF9zaWRlGAMgASgJEj0KBmRtX3NnZRgEIAEoCzItLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRtU2VnQ29uZmlnEkEKBGZsYWcYBSABKAsyMy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EYW5tYWt1RmxhZ0NvbmZpZxITCgtzcGVjaWFsX2RtcxgGIAMoCRIRCgljaGVja19ib3gYByABKAgSDQoFY291bnQYCCABKAMSQAoLY29tbWFuZF9kbXMYCSADKAsyKy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5Db21tYW5kRG0STQoNcGxheWVyX2NvbmZpZxgKIAEoCzI2LmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRhbm11V2ViUGxheWVyQ29uZmlnEh0KFXJlcG9ydF9maWx0ZXJfY29udGVudBgLIAMoCRJCCgtleHByZXNzaW9ucxgMIAMoCzItLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkV4cHJlc3Npb25zEj8KCnBvc3RfcGFuZWwYDSADKAsyKy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5Qb3N0UGFuZWwSFQoNYWN0aXZpdHlfbWV0YRgOIAMoCRJCCgtwb3N0X3BhbmVsMhgPIAMoCzItLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBvc3RQYW5lbFYyEj4KCXN1Yl92aWV3cxgQIAMoCzIrLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRtU3ViVmlldxI2CgNxb2UYESABKAsyKS5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5Rb2VJbmZvIioKCkV4cG9SZXBvcnQSHAoUc2hvdWxkX3JlcG9ydF9hdF9lbmQYASABKAgiZAoKRXhwcmVzc2lvbhIPCgdrZXl3b3JkGAEgAygJEgsKA3VybBgCIAEoCRI4CgZwZXJpb2QYAyADKAsyKC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5QZXJpb2QiSQoLRXhwcmVzc2lvbnMSOgoEZGF0YRgBIAMoCzIsLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkV4cHJlc3Npb24iKgoZSW5saW5lUGxheWVyRGFubWFrdVN3aXRjaBINCgV2YWx1ZRgBIAEoCCInCgVMYWJlbBINCgV0aXRsZRgBIAEoCRIPCgdjb250ZW50GAIgAygJIocBCgdMYWJlbFYyEg0KBXRpdGxlGAEgASgJEg8KB2NvbnRlbnQYAiADKAkSFQoNZXhwb3N1cmVfb25jZRgDIAEoCBJFCg1leHBvc3VyZV90eXBlGAQgASgOMi4uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRXhwb3N1cmVUeXBlIiQKBlBlcmlvZBINCgVzdGFydBgBIAEoAxILCgNlbmQYAiABKAMiMAofUGxheWVyRGFubWFrdUFpUmVjb21tZW5kZWRMZXZlbBINCgV2YWx1ZRgBIAEoBSIyCiFQbGF5ZXJEYW5tYWt1QWlSZWNvbW1lbmRlZExldmVsVjISDQoFdmFsdWUYASABKAUiMQogUGxheWVyRGFubWFrdUFpUmVjb21tZW5kZWRTd2l0Y2gSDQoFdmFsdWUYASABKAgiKQoYUGxheWVyRGFubWFrdUJsb2NrYm90dG9tEg0KBXZhbHVlGAEgASgIIisKGlBsYXllckRhbm1ha3VCbG9ja2NvbG9yZnVsEg0KBXZhbHVlGAEgASgIIikKGFBsYXllckRhbm1ha3VCbG9ja3JlcGVhdBINCgV2YWx1ZRgBIAEoCCIpChhQbGF5ZXJEYW5tYWt1QmxvY2tzY3JvbGwSDQoFdmFsdWUYASABKAgiKgoZUGxheWVyRGFubWFrdUJsb2Nrc3BlY2lhbBINCgV2YWx1ZRgBIAEoCCImChVQbGF5ZXJEYW5tYWt1QmxvY2t0b3ASDQoFdmFsdWUYASABKAgiLAobUGxheWVyRGFubWFrdUJsb2NrdG9wQm90dG9tEg0KBXZhbHVlGAEgASgIIiUKFFBsYXllckRhbm1ha3VEZW5zaXR5Eg0KBXZhbHVlGAEgASgFIiQKE1BsYXllckRhbm1ha3VEb21haW4SDQoFdmFsdWUYASABKAIiJgoVUGxheWVyRGFubWFrdURvbWFpblYyEg0KBXZhbHVlGAEgASgFIioKGVBsYXllckRhbm1ha3VFbmFibGVIZXJkRG0SDQoFdmFsdWUYASABKAgiLQocUGxheWVyRGFubWFrdUVuYWJsZWJsb2NrbGlzdBINCgV2YWx1ZRgBIAEoCCIlChRQbGF5ZXJEYW5tYWt1T3BhY2l0eRINCgV2YWx1ZRgBIAEoAiIpChhQbGF5ZXJEYW5tYWt1UGVvcGxlUHJvb2YSDQoFdmFsdWUYASABKAgiKwoaUGxheWVyRGFubWFrdVNjYWxpbmdmYWN0b3ISDQoFdmFsdWUYASABKAIiLgodUGxheWVyRGFubWFrdVNlbmlvck1vZGVTd2l0Y2gSDQoFdmFsdWUYASABKAUiIwoSUGxheWVyRGFubWFrdVNwZWVkEg0KBXZhbHVlGAEgASgFIisKGlBsYXllckRhbm1ha3VTdWJ0aXRsZVByb29mEg0KBXZhbHVlGAEgASgIIjgKE1BsYXllckRhbm1ha3VTd2l0Y2gSDQoFdmFsdWUYASABKAgSEgoKY2FuX2lnbm9yZRgCIAEoCCIoChdQbGF5ZXJEYW5tYWt1U3dpdGNoU2F2ZRINCgV2YWx1ZRgBIAEoCCIuCh1QbGF5ZXJEYW5tYWt1VXNlRGVmYXVsdENvbmZpZxINCgV2YWx1ZRgBIAEoCCKMAwoJUG9zdFBhbmVsEg0KBXN0YXJ0GAEgASgDEgsKA2VuZBgCIAEoAxIQCghwcmlvcml0eRgDIAEoAxIOCgZiaXpfaWQYBCABKAMSRAoIYml6X3R5cGUYBSABKA4yMi5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5Qb3N0UGFuZWxCaXpUeXBlEkMKDGNsaWNrX2J1dHRvbhgGIAEoCzItLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkNsaWNrQnV0dG9uEj8KCnRleHRfaW5wdXQYByABKAsyKy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5UZXh0SW5wdXQSPQoJY2hlY2tfYm94GAggASgLMiouYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuQ2hlY2tCb3gSNgoFdG9hc3QYCSABKAsyJy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5Ub2FzdCKtBAoLUG9zdFBhbmVsVjISDQoFc3RhcnQYASABKAMSCwoDZW5kGAIgASgDEkQKCGJpel90eXBlGAMgASgOMjIuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUG9zdFBhbmVsQml6VHlwZRJFCgxjbGlja19idXR0b24YBCABKAsyLy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5DbGlja0J1dHRvblYyEkEKCnRleHRfaW5wdXQYBSABKAsyLS5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5UZXh0SW5wdXRWMhI/CgljaGVja19ib3gYBiABKAsyLC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5DaGVja0JveFYyEjgKBXRvYXN0GAcgASgLMikuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuVG9hc3RWMhI6CgZidWJibGUYCCABKAsyKi5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5CdWJibGVWMhI4CgVsYWJlbBgJIAEoCzIpLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkxhYmVsVjISQQoLcG9zdF9zdGF0dXMYCiABKA4yLC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5Qb3N0U3RhdHVzIhcKB1FvZUluZm8SDAoEaW5mbxgBIAEoCSIpCghSZXNwb25zZRIMCgRjb2RlGAEgASgFEg8KB21lc3NhZ2UYAiABKAki+QIKDFN1YnRpdGxlSXRlbRIKCgJpZBgBIAEoAxIOCgZpZF9zdHIYAiABKAkSCwoDbGFuGAMgASgJEg8KB2xhbl9kb2MYBCABKAkSFAoMc3VidGl0bGVfdXJsGAUgASgJEjoKBmF1dGhvchgGIAEoCzIqLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlVzZXJJbmZvEjwKBHR5cGUYByABKA4yLi5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5TdWJ0aXRsZVR5cGUSFQoNbGFuX2RvY19icmllZhgIIAEoCRJBCgdhaV90eXBlGAkgASgOMjAuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuU3VidGl0bGVBaVR5cGUSRQoJYWlfc3RhdHVzGAogASgOMjIuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuU3VidGl0bGVBaVN0YXR1cyLoAgoJVGV4dElucHV0EhwKFHBvcnRyYWl0X3BsYWNlaG9sZGVyGAEgAygJEh0KFWxhbmRzY2FwZV9wbGFjZWhvbGRlchgCIAMoCRJBCgtyZW5kZXJfdHlwZRgDIAEoDjIsLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlJlbmRlclR5cGUSGAoQcGxhY2Vob2xkZXJfcG9zdBgEIAEoCBIMCgRzaG93GAUgASgIEjgKBmF2YXRhchgGIAMoCzIoLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkF2YXRhchJBCgtwb3N0X3N0YXR1cxgHIAEoDjIsLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlBvc3RTdGF0dXMSNgoFbGFiZWwYCCABKAsyJy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5MYWJlbCL7AQoLVGV4dElucHV0VjISHAoUcG9ydHJhaXRfcGxhY2Vob2xkZXIYASADKAkSHQoVbGFuZHNjYXBlX3BsYWNlaG9sZGVyGAIgAygJEkEKC3JlbmRlcl90eXBlGAMgASgOMiwuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuUmVuZGVyVHlwZRIYChBwbGFjZWhvbGRlcl9wb3N0GAQgASgIEjgKBmF2YXRhchgFIAMoCzIoLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkF2YXRhchIYChB0ZXh0X2lucHV0X2xpbWl0GAYgASgFIm8KBVRvYXN0EgwKBHRleHQYASABKAkSEAoIZHVyYXRpb24YAiABKAUSDAoEc2hvdxgDIAEoCBI4CgZidXR0b24YBCABKAsyKC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5CdXR0b24iYgoNVG9hc3RCdXR0b25WMhIMCgR0ZXh0GAEgASgJEkMKBmFjdGlvbhgCIAEoDjIzLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlRvYXN0RnVuY3Rpb25UeXBlInMKB1RvYXN0VjISDAoEdGV4dBgBIAEoCRIQCghkdXJhdGlvbhgCIAEoBRJICg90b2FzdF9idXR0b25fdjIYAyABKAsyLy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5Ub2FzdEJ1dHRvblYyIlwKCFVzZXJJbmZvEgsKA21pZBgBIAEoAxIMCgRuYW1lGAIgASgJEgsKA3NleBgDIAEoCRIMCgRmYWNlGAQgASgJEgwKBHNpZ24YBSABKAkSDAoEcmFuaxgGIAEoBSJTCglWaWRlb01hc2sSCwoDY2lkGAEgASgDEgwKBHBsYXQYAiABKAUSCwoDZnBzGAMgASgFEgwKBHRpbWUYBCABKAMSEAoIbWFza191cmwYBSABKAkicAoNVmlkZW9TdWJ0aXRsZRILCgNsYW4YASABKAkSDwoHbGFuX2RvYxgCIAEoCRJBCglzdWJ0aXRsZXMYAyADKAsyLi5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5TdWJ0aXRsZUl0ZW0ikgEKDlZpZXdIZXJkRG1FbGVtEhAKCGhlcmRfbXNnGAEgASgJEhYKDmhlcmRfc3RhcnRfY250GAIgASgFEhQKDGhlcmRfZW5kX2NudBgDIAEoBRISCgpyZWdleF9ydWxlGAQgASgJEhYKDnN0YXJ0X3Byb2dyZXNzGAUgASgFEhQKDGVuZF9wcm9ncmVzcxgGIAEoBSozCgpBdmF0YXJUeXBlEhIKDkF2YXRhclR5cGVOb25lEAASEQoNQXZhdGFyVHlwZU5GVBABKlkKCkJ1YmJsZVR5cGUSEgoOQnViYmxlVHlwZU5vbmUQABIZChVCdWJibGVUeXBlQ2xpY2tCdXR0b24QARIcChhCdWJibGVUeXBlRG1TZXR0aW5nUGFuZWwQAipYCgxDaGVja2JveFR5cGUSFAoQQ2hlY2tib3hUeXBlTm9uZRAAEhkKFUNoZWNrYm94VHlwZUVuY291cmFnZRABEhcKE0NoZWNrYm94VHlwZUNvbG9yRE0QAio1Cg5EbUNvbG9yZnVsVHlwZRIMCghOb25lVHlwZRAAEhUKD1ZpcEdyYWR1YWxDb2xvchDh1AMqYAoRRG1NYXNrV2FsbEJpelR5cGUSCwoHVW5rbm93bhAAEgcKA09HVhABEgoKBkJpelBpYxACEggKBE11dGUQAxIKCgZSZWNvcmQQBBIJCgVDbG91ZBAFEggKBEFJR0MQBip2ChVEbU1hc2tXYWxsQ29udGVudFR5cGUSIAocRG1NYXNrV2FsbENvbnRlbnRUeXBlVW5rbm93bhAAEh0KGURtTWFza1dhbGxDb250ZW50VHlwZVRleHQQARIcChhEbU1hc2tXYWxsQ29udGVudFR5cGVQaWMQAio8CgxFeHBvc3VyZVR5cGUSFAoQRXhwb3N1cmVUeXBlTm9uZRAAEhYKEkV4cG9zdXJlVHlwZURNU2VuZBABKoMCChBQb3N0UGFuZWxCaXpUeXBlEhgKFFBvc3RQYW5lbEJpelR5cGVOb25lEAASHQoZUG9zdFBhbmVsQml6VHlwZUVuY291cmFnZRABEhsKF1Bvc3RQYW5lbEJpelR5cGVDb2xvckRNEAISGQoVUG9zdFBhbmVsQml6VHlwZU5GVERNEAMSHQoZUG9zdFBhbmVsQml6VHlwZUZyYWdDbG9zZRAEEh0KGVBvc3RQYW5lbEJpelR5cGVSZWNvbW1lbmQQBRIcChhQb3N0UGFuZWxCaXpUeXBlUGxvdExlYWsQBhIiCh5Qb3N0UGFuZWxCaXpUeXBlQW50aUhhcmFzc21lbnQQByo4CgpQb3N0U3RhdHVzEhQKEFBvc3RTdGF0dXNOb3JtYWwQABIUChBQb3N0U3RhdHVzQ2xvc2VkEAEqTgoKUmVuZGVyVHlwZRISCg5SZW5kZXJUeXBlTm9uZRAAEhQKEFJlbmRlclR5cGVTaW5nbGUQARIWChJSZW5kZXJUeXBlUm90YXRpb24QAio2ChBTdWJ0aXRsZUFpU3RhdHVzEggKBE5vbmUQABIMCghFeHBvc3VyZRABEgoKBkFzc2lzdBACKisKDlN1YnRpdGxlQWlUeXBlEgoKBk5vcm1hbBAAEg0KCVRyYW5zbGF0ZRABKh4KDFN1YnRpdGxlVHlwZRIGCgJDQxAAEgYKAkFJEAEqTgoRVG9hc3RGdW5jdGlvblR5cGUSGQoVVG9hc3RGdW5jdGlvblR5cGVOb25lEAASHgoaVG9hc3RGdW5jdGlvblR5cGVQb3N0UGFuZWwQATKgBQoCRE0ScwoLRG1TZWdNb2JpbGUSMC5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EbVNlZ01vYmlsZVJlcRoyLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRtU2VnTW9iaWxlUmVwbHkSZAoGRG1WaWV3EisuYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRG1WaWV3UmVxGi0uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRG1WaWV3UmVwbHkScQoORG1QbGF5ZXJDb25maWcSMy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EbVBsYXllckNvbmZpZ1JlcRoqLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLlJlc3BvbnNlEmoKCERtU2VnT3R0Ei0uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRG1TZWdPdHRSZXEaLy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EbVNlZ090dFJlcGx5EmoKCERtU2VnU0RLEi0uYmlsaWJpbGkuY29tbXVuaXR5LnNlcnZpY2UuZG0udjEuRG1TZWdTREtSZXEaLy5iaWxpYmlsaS5jb21tdW5pdHkuc2VydmljZS5kbS52MS5EbVNlZ1NES1JlcGx5EnQKDERtRXhwb1JlcG9ydBIxLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRtRXhwb1JlcG9ydFJlcRoxLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxLkRtRXhwb1JlcG9ydFJlc0LUAQokY29tLmJpbGliaWxpLmNvbW11bml0eS5zZXJ2aWNlLmRtLnYxQgdEbVByb3RvUAGiAgRCQ1NEqgIgQmlsaWJpbGkuQ29tbXVuaXR5LlNlcnZpY2UuRG0uVjHKAiBCaWxpYmlsaVxDb21tdW5pdHlcU2VydmljZVxEbVxWMeICLEJpbGliaWxpXENvbW11bml0eVxTZXJ2aWNlXERtXFYxXEdQQk1ldGFkYXRh6gIkQmlsaWJpbGk6OkNvbW11bml0eTo6U2VydmljZTo6RG06OlYxYgZwcm90bzM`), _e = messageDesc(E, 30), ve = messageDesc(E, 39), D = Z((e2) => async (t2, n2) => {
-    let i2 = n2 ?? await t2.makeChunk({}), a = fromBinary(ve, new Uint8Array(e2)).commandDms;
-    return await i2.upsertDanmakus(a.map((e3) => {
-      let t3 = `def_bili+${E$1.fromBili({ cid: e3.oid }).toString()}`, n3 = E$1.fromBili({ mid: e3.mid }), a2 = { SOID: t3, progress: e3.progress, mode: `Ext`, fontsize: A$1.fontsize, color: A$1.color, senderID: n3.toString(), content: e3.content, ctime: /* @__PURE__ */ new Date(`${e3.ctime} GMT+0800`), weight: 11, pool: `Adv`, attr: [`Protect`], platform: `bili`, extra: { bili: { dmid: e3.idStr, attr: e3.attr, mid: e3.mid?.toString(), command: e3 } } };
-      return { ...a2, DMID: i2.$UniDB.DMIDGenerator(a2) };
-    })), i2;
+    let r2 = n2 ?? await t2.makeChunk({}), a2 = fromBinary(ve, new Uint8Array(e2)).commandDms;
+    return await r2.upsertDanmakus(a2.map((e3) => {
+      let t3 = `def_bili+${y$1.fromBili({ cid: e3.oid }).toString()}`, n3 = y$1.fromBili({ mid: e3.mid }), a3 = { SOID: t3, progress: e3.progress, mode: `Ext`, fontsize: C$1.fontsize, color: C$1.color, senderID: n3.toString(), content: e3.content, ctime: /* @__PURE__ */ new Date(`${e3.ctime} GMT+0800`), weight: 11, pool: `Adv`, attr: [`Protect`], platform: `bili`, extra: { bili: { dmid: e3.idStr, attr: e3.attr, mid: e3.mid?.toString(), command: e3 } } };
+      return { ...a3, DMID: r2.$UniDB.DMIDGenerator(a3) };
+    })), r2;
   }), O = $({ type: `bili.cmd.binpb`, ext: [`.binpb`, `.bin`, `.pb.bin`, `.so`], check: { adapter: async (e2, t2) => {
     try {
       return e2.import(D(await h(t2, `bin`)));
@@ -27956,34 +28386,34 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     let n2 = new xe(0);
     return t2 === `bili` && (e2.includes(`Protect`) && n2.set1(0), e2.includes(`FromLive`) && n2.set1(1), e2.includes(`HighLike`) && n2.set1(2)), n2.bin;
   } };
-  function A(e2, t2, n2, i2) {
+  function A(e2, t2, n2, r2) {
     t2.oid && !n2 && (n2 = t2.oid);
-    let a = i2 || `def_bili+${E$1.fromBili({ cid: n2 }).toString()}`, o2 = E$1.validateString(t2.midHash) ? t2.midHash : E$1.fromBili({ midHash: t2.midHash }).toString(), s2, c2 = _.in.safeParse(t2.pool).success ? t2.pool : 0, l2 = { bili: { mode: t2.mode, pool: t2.pool, dmid: t2.idStr ?? t2.id.toString(), attr: t2.attr, mid: t2.mid?.toString(), adv: void 0, code: void 0, bas: void 0 } };
+    let i = r2 || `def_bili+${y$1.fromBili({ cid: n2 }).toString()}`, a2 = y$1.validateString(t2.midHash) ? t2.midHash : y$1.fromBili({ midHash: t2.midHash }).toString(), o2, c2 = _.in.safeParse(t2.pool).success ? t2.pool : 0, l2 = { bili: { mode: t2.mode, pool: t2.pool, dmid: t2.idStr ?? t2.id.toString(), attr: t2.attr, mid: t2.mid?.toString(), adv: void 0, code: void 0, bas: void 0 } };
     switch (t2.mode) {
       case 4:
-        s2 = 1;
+        o2 = 1;
         break;
       case 5:
-        s2 = 2;
+        o2 = 2;
         break;
       case 6:
-        s2 = 3;
+        o2 = 3;
         break;
       case 7:
-        s2 = 4, l2.bili.adv = t2.content;
+        o2 = 4, l2.bili.adv = t2.content;
         break;
       case 8:
-        s2 = 4, l2.bili.code = t2.content;
+        o2 = 4, l2.bili.code = t2.content;
         break;
       case 9:
-        s2 = 4, l2.bili.bas = t2.content;
+        o2 = 4, l2.bili.bas = t2.content;
         break;
       default:
-        s2 = 0;
+        o2 = 0;
         break;
     }
-    let u = { ...t2, SOID: a, mode: s2, senderID: o2, ctime: k(t2.ctime, `s`), weight: t2.weight || +(c2 === 3), pool: c2, attr: Se.fromBin(t2.attr, `bili`), platform: `bili`, extra: l2 };
-    return { ...u, mode: g.decode(s2), pool: _.decode(c2), DMID: e2.$UniDB.DMIDGenerator({ ...u, mode: g.decode(s2), pool: _.decode(c2) }) };
+    let u2 = { ...t2, SOID: i, mode: o2, senderID: a2, ctime: k(t2.ctime, `s`), weight: t2.weight || +(c2 === 3), pool: c2, attr: Se.fromBin(t2.attr, `bili`), platform: `bili`, extra: l2 };
+    return { ...u2, mode: g.decode(o2), pool: _.decode(c2), DMID: e2.$UniDB.DMIDGenerator({ ...u2, mode: g.decode(o2), pool: _.decode(c2) }) };
   }
   const j = (e2, t2) => {
     switch (e2) {
@@ -28003,26 +28433,26 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   };
   function M(e2, t2, n2) {
     if (n2?.skipBiliCommand && t2.extra?.bili?.command) return null;
-    let r2 = t2.extra?.bili?.mode || j(t2.mode, t2.extra?.bili), i2;
+    let r2 = t2.extra?.bili?.mode || j(t2.mode, t2.extra?.bili), i;
     switch (r2) {
       case 7:
-        i2 = t2.extra?.bili?.adv;
+        i = t2.extra?.bili?.adv;
         break;
       case 8:
-        i2 = t2.extra?.bili?.code;
+        i = t2.extra?.bili?.code;
         break;
       case 9:
-        i2 = t2.extra?.bili?.bas;
+        i = t2.extra?.bili?.bas;
         break;
       default:
-        i2 = t2.content;
+        i = t2.content;
         break;
     }
-    return { "#text": i2 ?? t2.content, "@_p": [t2.progress / 1e3, r2, t2.fontsize, t2.color, t2.ctime.getTime() / 1e3, t2.extra?.bili?.pool || t2.pool, n2?.avoidSenderIDWithAt ? t2.senderID.replaceAll(`@bili`, ``) : t2.senderID, t2.extra?.bili?.dmid || t2.DMID || e2(t2), t2.weight].join(`,`) };
+    return { "#text": i ?? t2.content, "@_p": [t2.progress / 1e3, r2, t2.fontsize, t2.color, t2.ctime.getTime() / 1e3, t2.extra?.bili?.pool || t2.pool, n2?.avoidSenderIDWithAt ? t2.senderID.replaceAll(`@bili`, ``) : t2.senderID, t2.extra?.bili?.dmid || t2.DMID || e2(t2), t2.weight].join(`,`) };
   }
   const N = Z((e2) => async (t2, n2) => {
-    let r2 = n2 ?? await t2.makeChunk({}), i2 = fromBinary(_e, new Uint8Array(e2)).elems;
-    return await r2.upsertDanmakus(i2.map((e3) => A(r2, e3))), r2;
+    let r2 = n2 ?? await t2.makeChunk({}), i = fromBinary(_e, new Uint8Array(e2)).elems;
+    return await r2.upsertDanmakus(i.map((e3) => A(r2, e3))), r2;
   }), P = $({ type: `bili.binpb`, ext: [`.binpb`, `.bin`, `.pb.bin`, `.so`], check: { adapter: async (e2, t2) => {
     try {
       return e2.import(N(await h(t2, `bin`)));
@@ -28037,7 +28467,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     })), r2;
   }), I = $({ type: `bili.up.json`, ext: [`.json`], check: { adapter: async (e2, t2) => {
     try {
-      return e2.import(F(await h(t2, `json`, M$1)));
+      return e2.import(F(await h(t2, `json`, o$2)));
     } catch {
       return null;
     }
@@ -28047,22 +28477,22 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     return { content: t2, progress: ~~(Number.parseFloat(n2[0]) * 1e3), mode: Number.parseInt(n2[1]), fontsize: Number.parseInt(n2[2]), color: Number.parseInt(n2[3]), ctime: BigInt(n2[4]), pool: Number.parseInt(n2[5]), midHash: n2[6], id: BigInt(n2[7]), idStr: n2[7], weight: Number.parseInt(n2[8]) };
   }
   const L = Z((e2) => async (t2, n2) => {
-    let r2 = Ce.parse(e2), i2 = r2.i.d, a = !!r2.i.danuni, o2 = BigInt(r2.i.chatid), s2 = a ? r2.i.danuni?.data : void 0, c2 = n2 ?? await t2.makeChunk({ fromConverted: a });
-    return await c2.upsertDanmakus(i2.map((e3) => A(c2, Te(e3[`@_p`], e3[`#text`]), o2, s2))), c2;
+    let r2 = Ce.parse(e2), i = r2.i.d, a2 = !!r2.i.danuni, o2 = BigInt(r2.i.chatid), s2 = a2 ? r2.i.danuni?.data : void 0, c2 = n2 ?? await t2.makeChunk({ fromConverted: a2 });
+    return await c2.upsertDanmakus(i.map((e3) => A(c2, Te(e3[`@_p`], e3[`#text`]), o2, s2))), c2;
   }), Ee = (e2, t2) => {
     if (e2) {
-      let n2 = E$1.fromStringSafe(e2);
+      let n2 = y$1.fromStringSafe(e2);
       if (n2.domain === `bili`) {
         let e3 = n2.id.replaceAll(`def_bili+`, ``);
         if (e3) return e3;
       }
       return t2?.cid || e2;
-    } else return t2?.cid || E$1.fromNull().toString();
+    } else return t2?.cid || y$1.fromNull().toString();
   }, De = (e2) => Q((t2, n2) => {
     let r2 = t2;
     if (e2?.avoidSenderIDWithAt && !r2.every((e3) => e3.senderID.endsWith(`@bili`))) throw Error(`存在其他来源的senderID，请关闭该功能再试！`);
-    let a = r2.map((t3) => M(n2.DMIDGenerator, t3, e2));
-    return e2?.skipBiliCommand && (a = a.filter((e3) => e3 !== null)), we.build({ "?xml": { "@_version": `1.0`, "@_encoding": `UTF-8` }, i: { chatserver: `chat.bilibili.com`, chatid: Ee(r2[0]?.SOID), mission: 0, maxlimit: r2.length, state: 0, real_name: 0, source: `k-v`, danuni: { ...j$1, data: [...new Set(r2.map((e3) => e3.SOID))][0] }, d: a } });
+    let i = r2.map((t3) => M(n2.DMIDGenerator, t3, e2));
+    return e2?.skipBiliCommand && (i = i.filter((e3) => e3 !== null)), we.build({ "?xml": { "@_version": `1.0`, "@_encoding": `UTF-8` }, i: { chatserver: `chat.bilibili.com`, chatid: Ee(r2[0]?.SOID), mission: 0, maxlimit: r2.length, state: 0, real_name: 0, source: `k-v`, danuni: { ...w$1, data: [...new Set(r2.map((e3) => e3.SOID))][0] }, d: i } });
   }), R = $({ type: `bili.xml`, ext: [`.xml`], check: { adapter: async (e2, t2) => {
     try {
       return e2.import(L(await h(t2, `string`)));
@@ -28113,15 +28543,15 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     }
     return n2;
   }
-  const B = Z((e2, t2, n2 = `other`) => async (i2, a) => {
-    let o2 = a ?? await i2.makeChunk({ fromConverted: !!e2.danuni }), s2 = t2 ? E$1.fromUnknown(t2, n2).toString() : E$1.fromNull(n2).toString(), l2 = E$1.fromNull(n2).toString(), u = /* @__PURE__ */ new Date();
+  const B = Z((e2, t2, n2 = `other`) => async (r2, a2) => {
+    let o2 = a2 ?? await r2.makeChunk({ fromConverted: !!e2.danuni }), c2 = t2 ? y$1.fromUnknown(t2, n2).toString() : y$1.fromNull(n2).toString(), l2 = y$1.fromNull(n2).toString(), u2 = /* @__PURE__ */ new Date();
     return await o2.upsertDanmakus(e2.danmuku.map((e3) => {
       let t3 = e3.border ? { artplayer: { border: e3.border, style: {} } } : null;
       e3.style && (t3 = t3 ? { ...t3, artplayer: { ...t3.artplayer, border: e3.border, style: e3.style } } : { artplayer: { border: e3.border, style: e3.style } });
-      let r2 = z(e3.mode ?? 0, `artplayer`), i3 = { attr: A$1.attr, fontsize: A$1.fontsize, ctime: u, weight: A$1.weight, pool: `Def`, content: e3.text, progress: (e3.time ?? 0) * 1e3, mode: r2, color: Number((e3.color || `FFFFFF`).replace(`#`, `0x`)), style: e3.style, SOID: s2, senderID: l2, platform: n2, extra: t3 };
-      return { ...i3, DMID: o2.$UniDB.DMIDGenerator(i3) };
+      let r3 = z(e3.mode ?? 0, `artplayer`), a3 = { attr: C$1.attr, fontsize: C$1.fontsize, ctime: u2, weight: C$1.weight, pool: `Def`, content: e3.text, progress: (e3.time ?? 0) * 1e3, mode: r3, color: Number((e3.color || `FFFFFF`).replace(`#`, `0x`)), style: e3.style, SOID: c2, senderID: l2, platform: n2, extra: t3 };
+      return { ...a3, DMID: o2.$UniDB.DMIDGenerator(a3) };
     })), o2;
-  }), V = Q((e2) => ({ danuni: { ...j$1, data: e2[0]?.SOID.split(`@`)[0] }, danmuku: e2.map((e3) => {
+  }), V = Q((e2) => ({ danuni: { ...w$1, data: e2[0]?.SOID.split(`@`)[0] }, danmuku: e2.map((e3) => {
     let t2 = 0;
     return e3.mode === `Top` ? t2 = 1 : e3.mode === `Bottom` && (t2 = 2), { text: e3.content, time: e3.progress / 1e3, mode: t2, color: `#${e3.color.toString(16).toUpperCase() || `FFFFFF`}`, border: e3.extra?.artplayer?.border, style: e3.extra?.artplayer?.style };
   }) })), H = $({ type: `artplayer.json`, ext: [`.json`], check: { adapter: async (e2, t2) => {
@@ -28130,13 +28560,13 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     } catch {
       return null;
     }
-  } } }), U = Z((e2, t2 = `0`, n2 = `ddplay`) => async (i2, a) => {
-    let o2 = a ?? await i2.makeChunk({ fromConverted: !!e2.danuni }), s2 = E$1.fromUnknown(`def_ddplay+${t2}`, n2).toString(), l2 = /* @__PURE__ */ new Date();
+  } } }), U = Z((e2, t2 = `0`, n2 = `ddplay`) => async (r2, a2) => {
+    let o2 = a2 ?? await r2.makeChunk({ fromConverted: !!e2.danuni }), c2 = y$1.fromUnknown(`def_ddplay+${t2}`, n2).toString(), l2 = /* @__PURE__ */ new Date();
     return await o2.upsertDanmakus(e2.comments.map((e3) => {
-      let t3 = e3.p.split(`,`), i3 = t3[3], a2 = E$1.fromUnknown(i3, n2).toString(), u = z(Number.parseInt(t3[1]), `ddplay`), d = { SOID: s2, color: Number.parseInt(t3[2]), progress: Number.parseFloat(t3[0]) * 1e3, mode: u, senderID: a2, content: e3.m, platform: n2, extra: { ddplay: { cid: e3.cid, uid: i3 } }, attr: A$1.attr, fontsize: A$1.fontsize, ctime: l2, weight: A$1.weight, pool: `Def` };
-      return { ...d, DMID: o2.$UniDB.DMIDGenerator(d) };
+      let t3 = e3.p.split(`,`), r3 = t3[3], a3 = y$1.fromUnknown(r3, n2).toString(), u2 = z(Number.parseInt(t3[1]), `ddplay`), d2 = { SOID: c2, color: Number.parseInt(t3[2]), progress: Number.parseFloat(t3[0]) * 1e3, mode: u2, senderID: a3, content: e3.m, platform: n2, extra: { ddplay: { cid: e3.cid, uid: r3 } }, attr: C$1.attr, fontsize: C$1.fontsize, ctime: l2, weight: C$1.weight, pool: `Def` };
+      return { ...d2, DMID: o2.$UniDB.DMIDGenerator(d2) };
     })), o2;
-  }), W = Q((e2) => ({ danuni: { ...j$1, data: e2[0]?.SOID.split(`@`)[0].replaceAll(`def_ddplay+`, ``) }, count: e2.length, comments: e2.map((e3) => {
+  }), W = Q((e2) => ({ danuni: { ...w$1, data: e2[0]?.SOID.split(`@`)[0].replaceAll(`def_ddplay+`, ``) }, count: e2.length, comments: e2.map((e3) => {
     let t2 = 1;
     return e3.mode === `Top` ? t2 = 5 : e3.mode === `Bottom` && (t2 = 4), { cid: e3.extra?.ddplay?.cid ?? Number.parseInt(`0x${Buffer.from(e3.DMID).toString(`hex`)}`) ?? 0, p: `${e3.progress / 1e3},${t2},${e3.color},${e3.extra?.ddplay?.uid ?? e3.senderID}`, m: e3.content };
   }) })), G = $({ type: `ddplay.json`, ext: [`.json`], check: { adapter: async (e2, t2) => {
@@ -28145,13 +28575,13 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     } catch {
       return null;
     }
-  } } }), K = Z((e2, t2, n2 = `other`) => async (i2, a) => {
-    let o2 = a ?? await i2.makeChunk({ fromConverted: !!e2.danuni }), s2 = t2 ? E$1.fromUnknown(t2, n2).toString() : E$1.fromNull(n2).toString(), l2 = /* @__PURE__ */ new Date();
-    return await o2.upsertDanmakus(e2.data.map(([e3, t3, i3, a2, u]) => {
-      let d = z(t3, `dplayer`), f2 = { attr: A$1.attr, fontsize: A$1.fontsize, ctime: l2, weight: A$1.weight, extra: A$1.extra, pool: `Def`, progress: e3 * 1e3, mode: d, color: i3, midHash: a2, content: u, SOID: s2, senderID: E$1.fromUnknown(a2, n2).toString(), platform: n2 };
+  } } }), K = Z((e2, t2, n2 = `other`) => async (r2, a2) => {
+    let o2 = a2 ?? await r2.makeChunk({ fromConverted: !!e2.danuni }), c2 = t2 ? y$1.fromUnknown(t2, n2).toString() : y$1.fromNull(n2).toString(), l2 = /* @__PURE__ */ new Date();
+    return await o2.upsertDanmakus(e2.data.map(([e3, t3, r3, a3, u2]) => {
+      let d2 = z(t3, `dplayer`), f2 = { attr: C$1.attr, fontsize: C$1.fontsize, ctime: l2, weight: C$1.weight, extra: C$1.extra, pool: `Def`, progress: e3 * 1e3, mode: d2, color: r3, midHash: a3, content: u2, SOID: c2, senderID: y$1.fromUnknown(a3, n2).toString(), platform: n2 };
       return { ...f2, DMID: o2.$UniDB.DMIDGenerator(f2) };
     })), o2;
-  }), Oe = Q((e2) => ({ code: 0, danuni: { ...j$1, data: e2[0]?.SOID.split(`@`)[0] }, data: e2.map((e3) => {
+  }), Oe = Q((e2) => ({ code: 0, danuni: { ...w$1, data: e2[0]?.SOID.split(`@`)[0] }, data: e2.map((e3) => {
     let t2 = 0;
     return e3.mode === `Top` ? t2 = 1 : e3.mode === `Bottom` && (t2 = 2), [e3.progress / 1e3, t2, e3.color, e3.senderID, e3.content];
   }) })), ke = $({ type: `dplayer.json`, ext: [`.json`], check: { adapter: async (e2, t2) => {
@@ -28174,27 +28604,27 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   }).transform((e2) => {
     let t2 = e2?.gradient_colors[0] ?? e2?.color ?? `ffffff`;
     return { color: Number(`#${t2}`.replace(`#`, `0x`)), mode: Ae(e2?.position) };
-  }), q = `tencent`, J = Z((e2, t2) => async (n2, i2) => {
-    let a = i2 ?? await n2.makeChunk({ fromConverted: false }), o2 = t2 ? E$1.fromUnknown(t2, q).toString() : E$1.fromNull(q).toString(), s2 = E$1.fromNull(q).toString(), l2 = Array.isArray(e2?.barrage_list) ? e2.barrage_list : [];
-    return await a.upsertDanmakus(l2.map((e3) => {
+  }), q = `tencent`, J = Z((e2, t2) => async (n2, r2) => {
+    let a2 = r2 ?? await n2.makeChunk({ fromConverted: false }), o2 = t2 ? y$1.fromUnknown(t2, q).toString() : y$1.fromNull(q).toString(), c2 = y$1.fromNull(q).toString(), l2 = Array.isArray(e2?.barrage_list) ? e2.barrage_list : [];
+    return await a2.upsertDanmakus(l2.map((e3) => {
       let t3 = Me.parse(e3.content_style), n3 = { ...e3 };
       delete n3.content, delete n3.time_offset, delete n3.create_time;
-      let r2 = { attr: A$1.attr, fontsize: A$1.fontsize, ctime: k(e3.create_time, `s`), weight: e3.show_weight ?? A$1.weight, pool: `Def`, content: e3.content, progress: Number.parseInt(e3.time_offset) || 0, mode: t3.mode, color: t3.color, SOID: o2, senderID: s2, platform: q, extra: { tencent: n3 } };
-      return { ...r2, DMID: a.$UniDB.DMIDGenerator(r2) };
-    })), a;
+      let r3 = { attr: C$1.attr, fontsize: C$1.fontsize, ctime: k(e3.create_time, `s`), weight: e3.show_weight ?? C$1.weight, pool: `Def`, content: e3.content, progress: Number.parseInt(e3.time_offset) || 0, mode: t3.mode, color: t3.color, SOID: o2, senderID: c2, platform: q, extra: { tencent: n3 } };
+      return { ...r3, DMID: a2.$UniDB.DMIDGenerator(r3) };
+    })), a2;
   }), Ne = $({ type: `tencent.json`, ext: [`.json`], check: { adapter: async (e2, t2) => {
     try {
       return await e2.import(J(await h(t2, `json`))), J;
     } catch {
       return null;
     }
-  } } }), Y = object({ code: number$1(), name: string$1(), danum: number$1(), danmuku: array(tuple([number().min(0), union([literal(`right`), literal(`top`), literal(`bottom`)]), string$1().toUpperCase().regex(/^#([0-9a-fA-F]{3}){1,2}$/, { error: `Invalid hex color format` }).transform((e2) => e2.length > 6 ? e2.toUpperCase() : `#${e2.split(`#`)[1].toUpperCase()}`), string$1().prefault(``), string$1(), string$1().prefault(``).optional(), string$1().prefault(``).optional(), string$1().regex(/^\d+px$/).optional()]).rest(any())) }), X = Z((e2, t2, n2 = `other`) => async (i2, a) => {
-    let o2 = a ?? await i2.makeChunk({ fromConverted: false }), s2 = t2 ? E$1.fromUnknown(t2, n2).toString() : E$1.fromNull(n2).toString(), l2 = E$1.fromNull(n2).toString(), u = /* @__PURE__ */ new Date();
+  } } }), Y = object({ code: number$1(), name: string$1(), danum: number$1(), danmuku: array(tuple([number().min(0), union([literal(`right`), literal(`top`), literal(`bottom`)]), string$1().toUpperCase().regex(/^#([0-9a-fA-F]{3}){1,2}$/, { error: `Invalid hex color format` }).transform((e2) => e2.length > 6 ? e2.toUpperCase() : `#${e2.split(`#`)[1].toUpperCase()}`), string$1().prefault(``), string$1(), string$1().prefault(``).optional(), string$1().prefault(``).optional(), string$1().regex(/^\d+px$/).optional()]).rest(any())) }), X = Z((e2, t2, n2 = `other`) => async (r2, a2) => {
+    let o2 = a2 ?? await r2.makeChunk({ fromConverted: false }), c2 = t2 ? y$1.fromUnknown(t2, n2).toString() : y$1.fromNull(n2).toString(), l2 = y$1.fromNull(n2).toString(), u2 = /* @__PURE__ */ new Date();
     return await o2.upsertDanmakus(e2.danmuku.slice(-e2.danum).map((e3) => {
-      let t3 = { ...A$1, pool: `Def`, ctime: u, SOID: s2, senderID: l2, progress: ~~(e3[0] * 1e3), mode: z(e3[1], `vod`), color: Number((e3[2] || `FFFFFF`).replace(`#`, `0x`)), content: e3[4], fontsize: e3[7] ? Number(e3[7].replace(`px`, ``)) : A$1.fontsize };
+      let t3 = { ...C$1, pool: `Def`, ctime: u2, SOID: c2, senderID: l2, progress: ~~(e3[0] * 1e3), mode: z(e3[1], `vod`), color: Number((e3[2] || `FFFFFF`).replace(`#`, `0x`)), content: e3[4], fontsize: e3[7] ? Number(e3[7].replace(`px`, ``)) : C$1.fontsize };
       return { ...t3, DMID: o2.$UniDB.DMIDGenerator(t3) };
     })), o2;
-  }), Pe = Q((e2) => ({ danuni: { ...j$1, data: e2[0]?.SOID.split(`@`)[0] }, code: 0, name: e2[0]?.SOID ?? `unknown`, danum: e2.length, danmuku: e2.map((e3) => {
+  }), Pe = Q((e2) => ({ danuni: { ...w$1, data: e2[0]?.SOID.split(`@`)[0] }, code: 0, name: e2[0]?.SOID ?? `unknown`, danum: e2.length, danmuku: e2.map((e3) => {
     let t2 = `right`;
     switch (e3.mode) {
       case `Top`:
@@ -28212,7 +28642,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return null;
     }
   } } });
-  t$1({ ArtplayerAdapter: () => B, ArtplayerMetadata: () => H, ArtplayerTransformer: () => V, BiliCommandGrpcAdapter: () => D, BiliCommandGrpcMetadata: () => O, BiliCommonBuilder: () => M, BiliCommonModeRec: () => j, BiliCommonParser: () => A, BiliGrpcAdapter: () => N, BiliGrpcMetadata: () => P, BiliUpAdapter: () => F, BiliUpMetadata: () => I, BiliXmlAdapter: () => L, BiliXmlMetadata: () => R, BiliXmlTransformerConfigurator: () => De, DanuniJsonAdapter: () => y, DanuniJsonMetadata: () => x, DanuniJsonTransformerConfigurator: () => b, DanuniPbAdapter: () => w, DanuniPbMetadata: () => T, DanuniPbTransformer: () => ge, DdplayAdapter: () => U, DdplayMetadata: () => G, DdplayTransformer: () => W, DplayerAdapter: () => K, DplayerMetadata: () => ke, DplayerTransformer: () => Oe, TencentAdapter: () => J, TencentMetadata: () => Ne, VodAdapter: () => X, VodMetadata: () => Fe, VodTransformer: () => Pe, VodZod: () => Y, defineAdapter: () => Z, defineMetadata: () => $, definePlugin: () => Le, defineTransformer: () => Q, enumAttrsCodec: () => v, enumModeCodec: () => g, enumPoolCodec: () => _ });
+  t({ ArtplayerAdapter: () => B, ArtplayerMetadata: () => H, ArtplayerTransformer: () => V, BiliCommandGrpcAdapter: () => D, BiliCommandGrpcMetadata: () => O, BiliCommonBuilder: () => M, BiliCommonModeRec: () => j, BiliCommonParser: () => A, BiliGrpcAdapter: () => N, BiliGrpcMetadata: () => P, BiliUpAdapter: () => F, BiliUpMetadata: () => I, BiliXmlAdapter: () => L, BiliXmlMetadata: () => R, BiliXmlTransformerConfigurator: () => De, DanuniJsonAdapter: () => y, DanuniJsonMetadata: () => x, DanuniJsonTransformerConfigurator: () => b, DanuniPbAdapter: () => w, DanuniPbMetadata: () => T, DanuniPbTransformer: () => ge, DdplayAdapter: () => U, DdplayMetadata: () => G, DdplayTransformer: () => W, DplayerAdapter: () => K, DplayerMetadata: () => ke, DplayerTransformer: () => Oe, TencentAdapter: () => J, TencentMetadata: () => Ne, VodAdapter: () => X, VodMetadata: () => Fe, VodTransformer: () => Pe, VodZod: () => Y, defineAdapter: () => Z, defineMetadata: () => $, definePlugin: () => Le, defineTransformer: () => Q, enumAttrsCodec: () => v, enumModeCodec: () => g, enumPoolCodec: () => _ });
   function Z(e2) {
     return e2;
   }
@@ -28486,9 +28916,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       this.destroyed = false;
       this.renderer = createRenderer(art, this.option);
       this.control = new DanAnyControl(art, this);
-      this.udbReady = Promise.resolve(new G$1().init());
+      this.heatmap = null;
+      this.udbReady = Promise.resolve(new s$1().init());
       this.destroy = this.destroy.bind(this);
       art.on("destroy", this.destroy);
+      this.updateHeatmap();
       this.load().catch(() => {
       });
     }
@@ -28532,13 +28964,35 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return this;
     }
     config(option = {}) {
+      const hasPoints = Object.prototype.hasOwnProperty.call(option, "points");
       this.option = normalizeRendererOption({
         ...this.option,
         ...option
       });
       callRenderer(this.renderer, "config", this.option);
       this.control.update();
+      this.updateHeatmap({ hasPoints });
       return this;
+    }
+    updateHeatmap({ hasPoints = false } = {}) {
+      if (!this.option.heatmap) {
+        this.destroyHeatmap();
+        return;
+      }
+      if (!this.heatmap) {
+        this.heatmap = createHeatmap(this.art, this, this.option.heatmap);
+      } else {
+        this.heatmap.config(this.option.heatmap);
+      }
+      if (hasPoints)
+        this.heatmap.clearPoints();
+      this.heatmap.update();
+    }
+    destroyHeatmap() {
+      if (!this.heatmap)
+        return;
+      this.heatmap.destroy();
+      this.heatmap = null;
     }
     hide() {
       this.config({ visible: false });
@@ -28565,6 +29019,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         return;
       this.destroyed = true;
       this.art.off("destroy", this.destroy);
+      this.destroyHeatmap();
       this.control.destroy();
       callRenderer(this.renderer, "destroy");
       Promise.resolve().then(() => this.deleteOwnedChunk()).then(() => this.closeDB()).catch(() => {

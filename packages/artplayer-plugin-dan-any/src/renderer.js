@@ -192,6 +192,8 @@ export function normalizeRendererOption(option = {}) {
     synchronousPlayback: false,
     visible: true,
     emitter: true,
+    heatmap: false,
+    points: [],
     plugins: [],
     maxLength: 200,
     width: 512,
@@ -208,6 +210,10 @@ export function normalizeRendererOption(option = {}) {
   normalized.plugins = Array.isArray(normalized.plugins)
     ? normalized.plugins.filter(plugin => typeof plugin === 'function')
     : []
+  normalized.heatmap = normalized.heatmap && typeof normalized.heatmap === 'object'
+    ? { ...normalized.heatmap }
+    : !!normalized.heatmap
+  normalized.points = Array.isArray(normalized.points) ? [...normalized.points] : []
   normalized.filter = typeof normalized.filter === 'function' ? normalized.filter : () => true
   normalized.beforeVisible = typeof normalized.beforeVisible === 'function' ? normalized.beforeVisible : () => true
 

@@ -1,5 +1,6 @@
 import { UniDB } from '@dan-uni/dan-any/core/main/pure'
 import DanAnyControl from './control'
+import createHeatmap from './heatmap'
 import DanAnyDomRenderer, { normalizeRendererOption } from './renderer'
 import { isUniChunk, resolveSource } from './source'
 import style from './style.less?inline'
@@ -84,11 +85,13 @@ class DanAny {
     this.destroyed = false
     this.renderer = createRenderer(art, this.option)
     this.control = new DanAnyControl(art, this)
+    this.heatmap = null
     this.udbReady = Promise.resolve(new UniDB().init())
 
     this.destroy = this.destroy.bind(this)
     art.on('destroy', this.destroy)
 
+    this.updateHeatmap()
     this.load().catch(() => {})
   }
 
@@ -144,6 +147,8 @@ class DanAny {
   }
 
   config(option = {}) {
+    const hasPoints = Object.prototype.hasOwnProperty.call(option, 'points')
+
     this.option = normalizeRendererOption({
       ...this.option,
       ...option,
@@ -151,8 +156,36 @@ class DanAny {
 
     callRenderer(this.renderer, 'config', this.option)
     this.control.update()
+    this.updateHeatmap({ hasPoints })
 
     return this
+  }
+
+  updateHeatmap({ hasPoints = false } = {}) {
+    if (!this.option.heatmap) {
+      this.destroyHeatmap()
+      return
+    }
+
+    if (!this.heatmap) {
+      this.heatmap = createHeatmap(this.art, this, this.option.heatmap)
+    }
+    else {
+      this.heatmap.config(this.option.heatmap)
+    }
+
+    if (hasPoints)
+      this.heatmap.clearPoints()
+
+    this.heatmap.update()
+  }
+
+  destroyHeatmap() {
+    if (!this.heatmap)
+      return
+
+    this.heatmap.destroy()
+    this.heatmap = null
   }
 
   hide() {
@@ -187,6 +220,7 @@ class DanAny {
 
     this.destroyed = true
     this.art.off('destroy', this.destroy)
+    this.destroyHeatmap()
     this.control.destroy()
     callRenderer(this.renderer, 'destroy')
 

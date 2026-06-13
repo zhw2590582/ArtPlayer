@@ -19,6 +19,30 @@ export type Mode = 'Normal' | 'Reverse' | 'Top' | 'Bottom'
 export type Color = string | number
 
 /**
+ * 热力图配置
+ */
+export interface HeatmapOption {
+  xMin?: number
+  xMax?: number
+  yMin?: number
+  yMax?: number
+  scale?: number
+  opacity?: number
+  minHeight?: number
+  sampling?: number
+  smoothing?: number
+  flattening?: number
+}
+
+/**
+ * 热力图数据点，time 单位为秒，value 为热度值
+ */
+export interface HeatmapPoint {
+  time: number
+  value: number
+}
+
+/**
  * 弹幕数据源
  */
 export type DanmakuSource
@@ -217,6 +241,16 @@ export interface Option {
    * 弹幕控制面板挂载点，默认为播放器控制栏左侧
    */
   mount?: HTMLDivElement | string
+
+  /**
+   * 是否开启弹幕热力图
+   */
+  heatmap?: boolean | HeatmapOption
+
+  /**
+   * 热力图数据，time 单位为秒；不传或为空时会根据已加载弹幕自动生成
+   */
+  points?: HeatmapPoint[]
 
   /**
    * 弹幕是否可见

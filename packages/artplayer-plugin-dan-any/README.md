@@ -6,7 +6,7 @@ It loads common danmaku formats through `@dan-uni/dan-any`, converts them to `UD
 
 ## Demo
 
-[https://artplayer.org](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-dan-any/index.js&example=dan-any)
+[https://artplayer.org](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-dan-any/index.js&example=dan.any)
 
 ## Install
 
@@ -33,6 +33,7 @@ const art = new Artplayer({
       opacity: 1,
       fontSize: 'source',
       speed: 5,
+      heatmap: true,
     }),
   ],
 })
@@ -129,6 +130,8 @@ Plugins run in array order. When a plugin returns a `UniChunk`, the next plugin 
 | `antiOverlap` | `true` | Avoid overlapping danmaku when possible. |
 | `synchronousPlayback` | `false` | Adjust danmaku speed with the video playback rate. |
 | `mount` | control bar left side | Control panel mount point. Accepts an element or selector. |
+| `heatmap` | `false` | Enables the danmaku heatmap. Accepts `true` or a heatmap option object. |
+| `points` | `[]` | External heatmap points as `{ time, value }[]`; `time` is in seconds. Empty points use loaded danmaku automatically. |
 | `visible` | `true` | Whether the danmaku layer is visible. |
 | `emitter` | `true` | Whether the danmaku emitter is enabled. |
 | `maxLength` | `200` | Maximum danmaku input length, clamped to `1` - `1000`. |
@@ -139,6 +142,8 @@ Plugins run in array order. When a plugin returns a `UniChunk`, the next plugin 
 
 Supported render modes are `Normal`, `Reverse`, `Top`, and `Bottom`.
 
+Heatmap option fields match `artplayer-plugin-danmuku`: `xMin`, `xMax`, `yMin`, `yMax`, `scale`, `opacity`, `minHeight`, `sampling`, `smoothing`, and `flattening`.
+
 ## Instance API
 
 After initialization, the plugin instance is available at `art.plugins.artplayerPluginDanAny`.
@@ -146,6 +151,16 @@ After initialization, the plugin instance is available at `art.plugins.artplayer
 ```js
 await art.plugins.artplayerPluginDanAny.load('/assets/sample/danmuku.xml')
 art.plugins.artplayerPluginDanAny.config({ opacity: 0.8 })
+art.plugins.artplayerPluginDanAny.config({
+  heatmap: true,
+  points: [
+    { time: 30, value: 12 },
+    { time: 60, value: 24 },
+  ],
+})
+art.emit('artplayerPluginDanAny:points', [
+  { time: 90, value: 18 },
+])
 art.plugins.artplayerPluginDanAny.hide()
 art.plugins.artplayerPluginDanAny.show()
 art.plugins.artplayerPluginDanAny.reset()
@@ -183,6 +198,11 @@ art.on('artplayerPluginDanAny:start', () => {})
 art.on('artplayerPluginDanAny:show', () => {})
 art.on('artplayerPluginDanAny:hide', () => {})
 art.on('artplayerPluginDanAny:destroy', () => {})
+
+art.emit('artplayerPluginDanAny:points', [
+  { time: 30, value: 10 },
+  { time: 60, value: 20 },
+])
 ```
 
 ## Custom Renderer
