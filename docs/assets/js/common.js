@@ -58,6 +58,7 @@
       './assets/ts/artplayer-plugin-auto-thumbnail.d.ts',
       './assets/ts/artplayer-plugin-chapter.d.ts',
       './assets/ts/artplayer-plugin-chromecast.d.ts',
+      './assets/ts/artplayer-plugin-dan-any.d.ts',
       './assets/ts/artplayer-plugin-danmuku-mask.d.ts',
       './assets/ts/artplayer-plugin-danmuku.d.ts',
       './assets/ts/artplayer-plugin-dash-control.d.ts',

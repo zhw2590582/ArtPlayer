@@ -13,5 +13,5 @@ declare const artplayerPluginAutoThumbnail: (option: Option) => (art: Artplayer)
 
 export default artplayerPluginAutoThumbnail
 
-export = artplayerPluginAutoThumbnail
+export = artplayerPluginAutoThumbnail;
 export as namespace artplayerPluginAutoThumbnail;
