@@ -120,6 +120,16 @@ artplayerPluginDanAny({
 
 Plugins run in array order. When a plugin returns a `UniChunk`, the next plugin runs on that returned chunk. When a plugin returns anything else, the next plugin keeps running on the current chunk.
 
+## Count Danmaku
+
+When a `UDanmaku` item contains `extra.danuni.merge`, the built-in DOM renderer treats it as a count danmaku. This data is produced by `MergePluginConfigurator()` from `@dan-uni/dan-any/plugins`.
+
+Count danmaku render as `{content}` plus a visually separated `x{count}` badge. When the danmaku appears, the count value quickly eases out from `0` to `count`. The `duration` field in `extra.danuni.merge` is interpreted as milliseconds; if it is missing or invalid, the renderer falls back to the current renderer speed.
+
+Count danmaku are fixed at the top of the player, use an adaptive font size based on the final text length and player size, stay above normal danmaku, and do not use the original `mode` for rolling/top/bottom animation. Multiple count danmaku with overlapping lifetimes use their own top lanes, separate from normal danmaku anti-overlap.
+
+The package type declarations re-export `ExtraDanUniMerge` from `@dan-uni/dan-any/core` for consumers that want to type `extra.danuni.merge` directly.
+
 ## Options
 
 | Name | Default | Description |
@@ -154,6 +164,8 @@ Plugins run in array order. When a plugin returns a `UniChunk`, the next plugin 
 | `renderer` | built-in DOM renderer | Custom renderer object or factory. |
 
 Supported render modes are `Normal`, `Reverse`, `Top`, and `Bottom`.
+
+Count danmaku with `extra.danuni.merge` are rendered even if their original mode is `Ext` or not included in `modes`.
 
 UI sent danmaku are built as complete `UDanmaku` objects. `content` comes from the input, `progress` defaults to `Math.round(art.currentTime * 1000)` clamped to a non-negative int32 millisecond value, `ctime` is the send time, and `DMID` is generated with the current `UniDB.DMIDGenerator`. The send order is `filter` -> `beforeEmit` -> `emit` -> local renderer -> `artplayerPluginDanAny:emit`. They are added only to the current renderer queue; they are not inserted into the current `UniChunk` and do not change `udanmakus`.
 

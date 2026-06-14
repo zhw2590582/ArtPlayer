@@ -45,6 +45,27 @@ const BASE_CSS_TEXT = `
   text-shadow: rgb(0 0 0) 1px 0 1px, rgb(0 0 0) 0 1px 1px, rgb(0 0 0) 0 -1px 1px, rgb(0 0 0) -1px 0 1px;
 `
 
+const MERGE_COUNT_CSS_TEXT = `
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-left: 0.35em;
+  padding: 0.02em 0.32em 0.04em;
+  border-radius: 0.3em;
+  color: #fff;
+  background: rgba(0, 161, 214, 0.88);
+  font-size: 0.78em;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: none;
+`
+
+const MERGE_COUNT_ANIMATION_DURATION = 600
+const MERGE_FONT_MIN_SIZE = 12
+const MERGE_FONT_MAX_SIZE = 42
+const MERGE_MAX_WIDTH_RATIO = 0.9
+
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value))
 }
@@ -166,6 +187,138 @@ function getDanmakuTop({ target, visibles, clientWidth, clientHeight, marginBott
   }
 
   return topMap[0]?.[0]?.top
+}
+
+function getDanmakuMerge(danmaku) {
+  const merge = danmaku?.extra?.danuni?.merge
+
+  return merge && typeof merge === 'object' ? merge : null
+}
+
+function isRenderableDanmaku(danmaku) {
+  return RENDER_MODES.includes(danmaku?.mode) || !!getDanmakuMerge(danmaku)
+}
+
+function getMergeRestTime(merge, speed) {
+  const duration = Number(merge.duration)
+
+  return Number.isFinite(duration) && duration > 0 ? duration / 1000 : speed
+}
+
+function getMergeCount(count) {
+  const value = Number(count)
+
+  return Number.isFinite(value) ? Math.max(0, Math.round(value)) : 0
+}
+
+function getMergeCountText(danmaku, count) {
+  return `${danmaku.content} x${count}`
+}
+
+function setMergeCountText($count, count) {
+  if ($count)
+    $count.textContent = `x${count}`
+}
+
+function setMergeDanmakuContent($ref, danmaku, count) {
+  const $content = document.createElement('span')
+  const $count = document.createElement('span')
+
+  $content.className = 'apda-danmaku-content'
+  $content.textContent = danmaku.content
+  $count.className = 'apda-danmaku-count'
+  $count.style.cssText = MERGE_COUNT_CSS_TEXT
+  setMergeCountText($count, count)
+
+  $ref.textContent = ''
+  $ref.appendChild($content)
+  $ref.appendChild($count)
+
+  return $count
+}
+
+function reserveMergeCountWidth($count) {
+  if ($count)
+    $count.style.minWidth = `${$count.clientWidth}px`
+}
+
+function getTextLength(text) {
+  return Array.from(String(text)).reduce((total, char) => {
+    const code = char.codePointAt(0) || 0
+
+    if (code <= 0x007F)
+      return total + 0.55
+
+    if (code <= 0x00FF)
+      return total + 0.7
+
+    return total + 1
+  }, 0)
+}
+
+function getMergeMaxWidth(clientWidth) {
+  const width = Number(clientWidth) || 0
+
+  return Math.max(MERGE_FONT_MIN_SIZE * 6, width * MERGE_MAX_WIDTH_RATIO)
+}
+
+function getMergeFontSize(text, clientWidth, clientHeight) {
+  const width = Number(clientWidth) || 0
+  const height = Number(clientHeight) || 0
+  const maxByPlayer = Math.min(height * 0.08, width * 0.055, MERGE_FONT_MAX_SIZE)
+  const maxFontSize = Math.max(MERGE_FONT_MIN_SIZE, Math.min(maxByPlayer, height || MERGE_FONT_MAX_SIZE))
+  const maxByLength = getMergeMaxWidth(width) / Math.max(1, getTextLength(text))
+
+  return Math.round(clamp(Math.min(maxFontSize, maxByLength), MERGE_FONT_MIN_SIZE, maxFontSize))
+}
+
+function fitMergeFontSize($ref, fontSize, maxWidth) {
+  const width = $ref.clientWidth
+
+  if (width <= maxWidth)
+    return width
+
+  const nextFontSize = Math.max(MERGE_FONT_MIN_SIZE, Math.floor(fontSize * maxWidth / width))
+
+  if (nextFontSize >= fontSize)
+    return width
+
+  $ref.style.fontSize = `${nextFontSize}px`
+
+  return $ref.clientWidth
+}
+
+function getMergeCountAnimationDuration(restTime) {
+  const restDuration = restTime * 1000
+
+  return Number.isFinite(restDuration) && restDuration > 0
+    ? Math.min(MERGE_COUNT_ANIMATION_DURATION, restDuration)
+    : MERGE_COUNT_ANIMATION_DURATION
+}
+
+function getEaseOutCubic(progress) {
+  return 1 - (1 - progress) ** 3
+}
+
+function getMergeDanmakuTop({ height, visibles, clientHeight }) {
+  if (height > clientHeight)
+    return undefined
+
+  const danmakus = visibles
+    .filter(item => item.top < clientHeight)
+    .sort((prev, next) => prev.top - next.top)
+
+  let top = 0
+  for (let index = 0; index < danmakus.length; index += 1) {
+    const item = danmakus[index]
+
+    if (item.top - top >= height)
+      return top
+
+    top = Math.max(top, item.top + item.height)
+  }
+
+  return clientHeight - top >= height ? top : undefined
 }
 
 function normalizeModes(modes) {
@@ -420,6 +573,9 @@ export default class DanAnyDomRenderer {
     const clientLeft = this.getLeft(this.$player)
 
     this.filter('emit', (danmaku) => {
+      if (getDanmakuMerge(danmaku))
+        return
+
       const state = this.getState(danmaku)
       const $ref = state.$ref
 
@@ -444,6 +600,28 @@ export default class DanAnyDomRenderer {
         distance,
         time: state.restTime,
         mode: danmaku.mode,
+      })
+    })
+
+    return result
+  }
+
+  get mergeVisibles() {
+    const result = []
+
+    this.filter('emit', (danmaku) => {
+      if (!getDanmakuMerge(danmaku))
+        return
+
+      const state = this.getState(danmaku)
+      const $ref = state.$ref
+
+      if (!$ref)
+        return
+
+      result.push({
+        top: $ref.offsetTop,
+        height: $ref.clientHeight,
       })
     })
 
@@ -477,6 +655,8 @@ export default class DanAnyDomRenderer {
         $ref: null,
         restTime: 0,
         lastStartTime: 0,
+        mergeCountAnimation: null,
+        mergeCountRef: null,
       }
       this.stateMap.set(danmaku, state)
     }
@@ -521,6 +701,8 @@ export default class DanAnyDomRenderer {
   recycle(danmaku, status = 'wait') {
     const state = this.getState(danmaku)
 
+    state.mergeCountAnimation = null
+    state.mergeCountRef = null
     this.setState(danmaku, status)
 
     if (state.$ref) {
@@ -545,7 +727,7 @@ export default class DanAnyDomRenderer {
   load(udanmakus = []) {
     this.clear()
     this.queue = udanmakus
-      .filter(danmaku => RENDER_MODES.includes(danmaku.mode))
+      .filter(isRenderableDanmaku)
       .filter(danmaku => typeof danmaku.content === 'string' && danmaku.content.trim())
       .filter(danmaku => this.option.filter(danmaku))
       .sort(compareDanmaku)
@@ -560,7 +742,7 @@ export default class DanAnyDomRenderer {
   }
 
   emit(danmaku) {
-    if (!RENDER_MODES.includes(danmaku?.mode))
+    if (!isRenderableDanmaku(danmaku))
       return false
 
     if (typeof danmaku.content !== 'string' || !danmaku.content.trim())
@@ -601,6 +783,11 @@ export default class DanAnyDomRenderer {
   }
 
   async showDanmaku(danmaku) {
+    const merge = getDanmakuMerge(danmaku)
+
+    if (merge)
+      return this.showMergeDanmaku(danmaku, merge)
+
     if (!this.option.modes.includes(danmaku.mode))
       return
 
@@ -677,6 +864,109 @@ export default class DanAnyDomRenderer {
     this.art.emit('artplayerPluginDanAny:visible', danmaku)
   }
 
+  async showMergeDanmaku(danmaku, merge) {
+    const visible = await this.option.beforeVisible(danmaku)
+    if (!visible)
+      return
+
+    const { clientWidth, clientHeight } = this.$player
+    const state = this.getState(danmaku)
+    const $ref = this.$ref
+    const count = getMergeCount(merge.count)
+    const text = getMergeCountText(danmaku, count)
+    const fontSize = getMergeFontSize(text, clientWidth, clientHeight)
+
+    state.$ref = $ref
+    state.mergeCountRef = setMergeDanmakuContent($ref, danmaku, count)
+    $ref.dataset.mode = 'Merge'
+    $ref.dataset.id = danmaku.DMID || ''
+    $ref.style.opacity = this.option.opacity
+    $ref.style.fontSize = `${fontSize}px`
+    $ref.style.color = normalizeColor(danmaku.color ?? this.option.color)
+    $ref.style.zIndex = 1
+    $ref.style.display = 'inline-flex'
+    $ref.style.alignItems = 'center'
+    $ref.style.justifyContent = 'center'
+    $ref.style.textAlign = 'center'
+
+    this.$danmuku.appendChild($ref)
+
+    const width = fitMergeFontSize($ref, fontSize, getMergeMaxWidth(clientWidth))
+    reserveMergeCountWidth(state.mergeCountRef)
+    const height = $ref.clientHeight
+    const top = getMergeDanmakuTop({
+      height,
+      visibles: this.mergeVisibles,
+      clientHeight,
+    })
+
+    if (this.isStop || top === undefined) {
+      this.recycle(danmaku, 'ready')
+      return
+    }
+
+    state.restTime = getMergeRestTime(merge, this.speed)
+    const now = Date.now()
+    const animationDuration = getMergeCountAnimationDuration(state.restTime)
+
+    state.lastStartTime = now
+    state.mergeCountAnimation = count > 0
+      ? {
+          target: count,
+          duration: animationDuration,
+          startTime: now,
+          elapsed: 0,
+          value: 0,
+        }
+      : null
+    this.setState(danmaku, 'emit')
+
+    setMergeCountText(state.mergeCountRef, state.mergeCountAnimation ? 0 : count)
+    $ref.style.width = `${width}px`
+    $ref.style.top = `${top}px`
+    $ref.style.left = '50%'
+    $ref.style.marginLeft = `${-width / 2}px`
+    $ref.style.transition = 'transform 0s linear 0s'
+    $ref.style.visibility = 'visible'
+
+    this.art.emit('artplayerPluginDanAny:visible', danmaku)
+  }
+
+  updateMergeCountAnimations() {
+    const now = Date.now()
+
+    this.filter('emit', (danmaku) => {
+      const state = this.getState(danmaku)
+      const animation = state.mergeCountAnimation
+      const $ref = state.$ref
+      const $count = state.mergeCountRef
+
+      if (!animation)
+        return
+
+      if (!$ref || !$count) {
+        state.mergeCountAnimation = null
+        return
+      }
+
+      const elapsed = clamp(now - animation.startTime, 0, animation.duration)
+      const progress = animation.duration > 0 ? elapsed / animation.duration : 1
+      const value = progress >= 1
+        ? animation.target
+        : Math.min(animation.target, Math.round(animation.target * getEaseOutCubic(progress)))
+
+      animation.elapsed = elapsed
+
+      if (value !== animation.value) {
+        animation.value = value
+        setMergeCountText($count, value)
+      }
+
+      if (progress >= 1)
+        state.mergeCountAnimation = null
+    })
+  }
+
   updateRestTimes() {
     this.filter('emit', (danmaku) => {
       const state = this.getState(danmaku)
@@ -693,6 +983,7 @@ export default class DanAnyDomRenderer {
     window.cancelAnimationFrame(this.timer)
     this.timer = window.requestAnimationFrame(async () => {
       if (this.art.playing && !this.isHide) {
+        this.updateMergeCountAnimations()
         this.updateRestTimes()
 
         const readys = this.readys
@@ -733,6 +1024,13 @@ export default class DanAnyDomRenderer {
       this.setState(danmaku, 'emit')
       state.lastStartTime = Date.now()
 
+      if (getDanmakuMerge(danmaku)) {
+        if (state.mergeCountAnimation)
+          state.mergeCountAnimation.startTime = state.lastStartTime - state.mergeCountAnimation.elapsed
+
+        return
+      }
+
       if (danmaku.mode === 'Normal') {
         const left = this.getLeft($ref) - this.getLeft(this.$player)
         const distance = left + $ref.clientWidth
@@ -751,6 +1049,7 @@ export default class DanAnyDomRenderer {
   }
 
   suspend() {
+    this.updateMergeCountAnimations()
     this.updateRestTimes()
 
     this.filter('emit', (danmaku) => {
@@ -761,6 +1060,9 @@ export default class DanAnyDomRenderer {
         return
 
       this.setState(danmaku, 'stop')
+
+      if (getDanmakuMerge(danmaku))
+        return
 
       if (danmaku.mode === 'Normal' || danmaku.mode === 'Reverse') {
         const left = this.getLeft($ref) - this.getLeft(this.$player)

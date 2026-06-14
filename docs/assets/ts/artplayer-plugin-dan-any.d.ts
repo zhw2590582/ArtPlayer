@@ -1,3 +1,5 @@
+export type { ExtraDanUniMerge }
+
 /**
  * 自动识别弹幕格式时使用的 Metadata / Adapter 列表
  */

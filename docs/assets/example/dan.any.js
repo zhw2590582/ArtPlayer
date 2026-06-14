@@ -1,5 +1,94 @@
 // npm i artplayer-plugin-dan-any
 // import artplayerPluginDanAny from 'artplayer-plugin-dan-any';
+// import { MergePluginConfigurator } from '@dan-uni/dan-any/plugins';
+
+// 本地示例不额外加载 @dan-uni/dan-any/plugins，这里保留一个演示插件作为回退。
+function DemoMergePluginConfigurator(lifetime = 10) {
+  return async (chunk) => {
+    const windowTime = Math.max(0, Number(lifetime) || 0) * 1000
+
+    if (!windowTime)
+      return chunk
+
+    const danmakus = [...await chunk.$danmakus].sort((prev, next) => {
+      return prev.progress - next.progress || prev.ctime.getTime() - next.ctime.getTime()
+    })
+    const buckets = new Map()
+    const groups = []
+    const getKey = (danmaku) => {
+      return [danmaku.SOID, danmaku.content, danmaku.mode, danmaku.pool, danmaku.platform || ''].join('|')
+    }
+
+    danmakus.forEach((danmaku) => {
+      const key = getKey(danmaku)
+      const bucket = buckets.get(key) || []
+      const group = bucket[bucket.length - 1]
+
+      if (group && danmaku.progress - group.lastProgress <= windowTime) {
+        group.members.push(danmaku)
+        group.lastProgress = danmaku.progress
+        return
+      }
+
+      const nextGroup = {
+        base: danmaku,
+        lastProgress: danmaku.progress,
+        members: [danmaku],
+      }
+
+      bucket.push(nextGroup)
+      buckets.set(key, bucket)
+      groups.push(nextGroup)
+    })
+
+    const output = await chunk.$UniDB.makeChunk({ tmp: true })
+    const merged = groups.map((group) => {
+      if (group.members.length === 1)
+        return group.base
+
+      const senders = []
+      group.members.forEach((danmaku) => {
+        if (!senders.includes(danmaku.senderID))
+          senders.push(danmaku.senderID)
+      })
+
+      const extra = {
+        ...(group.base.extra || {}),
+        danuni: {
+          ...((group.base.extra && group.base.extra.danuni) || {}),
+          merge: {
+            duration: group.lastProgress - group.base.progress,
+            count: group.members.length,
+            senders,
+            taolu_count: group.members.length,
+            taolu_senders: senders,
+          },
+        },
+      }
+      const attr = group.base.attr.includes('Protect')
+        ? [...group.base.attr]
+        : [...group.base.attr, 'Protect']
+      const next = {
+        ...group.base,
+        attr,
+        extra,
+        senderID: 'merge[bot]@dan-any',
+      }
+
+      next.DMID = output.$UniDB.DMIDGenerator(next)
+
+      return next
+    })
+
+    await output.upsertDanmakus(merged, false)
+
+    return output
+  }
+}
+
+const mergePlugin = typeof globalThis.MergePluginConfigurator === 'function'
+  ? globalThis.MergePluginConfigurator(10)
+  : DemoMergePluginConfigurator(10)
 
 const art = new Artplayer({
   container: '.artplayer-app',
@@ -81,7 +170,9 @@ const art = new Artplayer({
         return true
       }, // 弹幕发送处理器，返回 false 时不会进入本地渲染队列
       beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise<boolean>
-      plugins: [], // 载入弹幕后按顺序执行的 @dan-uni/dan-any 插件列表
+      plugins: [
+        mergePlugin,
+      ], // 载入弹幕后按顺序执行的 @dan-uni/dan-any 插件列表
     }),
   ],
 })

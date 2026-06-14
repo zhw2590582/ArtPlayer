@@ -1,6 +1,8 @@
 import type Artplayer from 'artplayer'
 import type { Adapter, Metadata, Plugin } from '@dan-uni/dan-any/adapters'
-import type { UDanmaku, UniChunk } from '@dan-uni/dan-any/core'
+import type { ExtraDanUniMerge, UDanmaku, UniChunk } from '@dan-uni/dan-any/core'
+
+export type { ExtraDanUniMerge }
 
 /**
  * 自动识别弹幕格式时使用的 Metadata / Adapter 列表
