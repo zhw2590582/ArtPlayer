@@ -34,6 +34,12 @@ const art = new Artplayer({
       fontSize: 'source',
       speed: 5,
       heatmap: true,
+      emitDefaults: {
+        fontsize: 25,
+        color: 0xFFFFFF,
+        mode: 'Normal',
+      },
+      beforeEmit: danmaku => danmaku.content.length <= 100,
     }),
   ],
 })
@@ -134,13 +140,38 @@ Plugins run in array order. When a plugin returns a `UniChunk`, the next plugin 
 | `points` | `[]` | External heatmap points as `{ time, value }[]`; `time` is in seconds. Empty points use loaded danmaku automatically. |
 | `visible` | `true` | Whether the danmaku layer is visible. |
 | `emitter` | `true` | Whether the danmaku emitter is enabled. |
+| `emitDefaults` | `{}` | Default `UDanmaku` fields used by the UI emitter. `ctime` and `DMID` are generated for every send. |
+| `emitterFontSizes` | `[{ size: 18, text: '较小' }, { size: 25, text: '标准' }, { size: 36, text: '较大' }]` | Font size choices for the emitter panel. |
+| `emitterColors` | common color list | DanUni number color values for the emitter panel. The default list includes `16777215`. |
+| `emitterModes` | `Normal` / `Top` / `Bottom` | Position choices for the emitter panel. Each item is `{ type, text? }`. |
 | `maxLength` | `200` | Maximum danmaku input length, clamped to `1` - `1000`. |
+| `lockTime` | `5` | UI emitter lock time after a successful send, clamped to `1` - `60` seconds. |
 | `width` | `512` | When player width is smaller than this value, the control panel moves below the player. |
 | `filter` | `() => true` | Filters loaded `UDanmaku` items before they enter the render queue. |
+| `beforeEmit` | `() => true` | Called before a UI or API sent danmaku enters the render queue. Can return a `Promise<boolean>`. |
+| `emit` | `() => true` | Called when a UI or API sent danmaku is accepted. Can return a `Promise`; returning `false` cancels local rendering. |
 | `beforeVisible` | `() => true` | Called before each danmaku is shown. Can return a `Promise<boolean>`. |
 | `renderer` | built-in DOM renderer | Custom renderer object or factory. |
 
 Supported render modes are `Normal`, `Reverse`, `Top`, and `Bottom`.
+
+UI sent danmaku are built as complete `UDanmaku` objects. `content` comes from the input, `progress` defaults to `Math.round(art.currentTime * 1000)` clamped to a non-negative int32 millisecond value, `ctime` is the send time, and `DMID` is generated with the current `UniDB.DMIDGenerator`. The send order is `filter` -> `beforeEmit` -> `emit` -> local renderer -> `artplayerPluginDanAny:emit`. They are added only to the current renderer queue; they are not inserted into the current `UniChunk` and do not change `udanmakus`.
+
+Use `emit` to persist accepted sent danmaku before they enter the local renderer queue:
+
+```js
+artplayerPluginDanAny({
+  emit: async (danmaku) => {
+    const response = await fetch('/api/danmaku', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(danmaku),
+    })
+
+    return response.ok
+  },
+})
+```
 
 Heatmap option fields match `artplayer-plugin-danmuku`: `xMin`, `xMax`, `yMin`, `yMax`, `scale`, `opacity`, `minHeight`, `sampling`, `smoothing`, and `flattening`.
 
@@ -150,6 +181,22 @@ After initialization, the plugin instance is available at `art.plugins.artplayer
 
 ```js
 await art.plugins.artplayerPluginDanAny.load('/assets/sample/danmuku.xml')
+await art.plugins.artplayerPluginDanAny.emit({
+  DMID: 'local-id',
+  SOID: 'video@artplayer',
+  attr: [],
+  color: 0xFFFFFF,
+  content: 'Hello ArtPlayer',
+  ctime: new Date(),
+  extra: null,
+  fontsize: 25,
+  mode: 'Normal',
+  platform: 'artplayer',
+  pool: 'Def',
+  progress: Math.round(art.currentTime * 1000),
+  senderID: 'user@artplayer',
+  weight: 0,
+})
 art.plugins.artplayerPluginDanAny.config({ opacity: 0.8 })
 art.plugins.artplayerPluginDanAny.config({
   heatmap: true,
@@ -173,6 +220,7 @@ console.log(art.plugins.artplayerPluginDanAny.chunk)
 API shape:
 
 - `load(source?)`: reloads or switches the danmaku source and returns `Promise<Result>`
+- `emit(danmaku)`: sends one complete `UDanmaku` to the current renderer queue and returns `Promise<Result>`; `progress` is an int32 millisecond value
 - `config(option)`: updates renderer/control options
 - `hide()`: hides the danmaku layer
 - `show()`: shows the danmaku layer
@@ -188,6 +236,7 @@ API shape:
 
 ```js
 art.on('artplayerPluginDanAny:loaded', (udanmakus, chunk) => {})
+art.on('artplayerPluginDanAny:emit', danmaku => {})
 art.on('artplayerPluginDanAny:error', error => {})
 art.on('artplayerPluginDanAny:config', option => {})
 art.on('artplayerPluginDanAny:visible', danmaku => {})
@@ -216,6 +265,7 @@ artplayerPluginDanAny({
     load(udanmakus) {
       console.log(udanmakus.length, option, art)
     },
+    emit(danmaku) {},
     config(nextOption) {},
     reset() {},
     destroy() {},
@@ -229,7 +279,7 @@ artplayerPluginDanAny({
 })
 ```
 
-Optional renderer methods are `load`, `config`, `hide`, `show`, `reset`, and `destroy`. Optional state fields are `isHide` and `isStop`.
+Optional renderer methods are `load`, `emit`, `config`, `hide`, `show`, `reset`, and `destroy`. Optional state fields are `isHide` and `isStop`.
 
 ## License
 

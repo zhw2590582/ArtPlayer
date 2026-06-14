@@ -5,6 +5,23 @@ import DanAnyDomRenderer, { normalizeRendererOption } from './renderer'
 import { isUniChunk, resolveSource } from './source'
 import style from './style.less?inline'
 
+const DEFAULT_EMIT_DANMAKU = {
+  SOID: 'artplayer@artplayer',
+  attr: [],
+  color: 0xFFFFFF,
+  content: '',
+  extra: null,
+  fontsize: 25,
+  mode: 'Normal',
+  platform: 'artplayer',
+  pool: 'Def',
+  progress: 0,
+  senderID: 'anonymous@artplayer',
+  weight: 0,
+}
+
+const MAX_INT32 = 0x7FFFFFFF
+
 function isPromise(value) {
   return !!value && typeof value.then === 'function'
 }
@@ -44,6 +61,41 @@ async function deleteChunk(chunk) {
 async function deleteChunks(chunks) {
   for (const chunk of new Set(chunks))
     await deleteChunk(chunk)
+}
+
+function isUsableDanmaku(danmaku) {
+  return danmaku && typeof danmaku.content === 'string' && danmaku.content.trim()
+}
+
+function toInt32Progress(value) {
+  const progress = Number(value)
+
+  if (!Number.isFinite(progress))
+    return 0
+
+  return Math.max(0, Math.min(MAX_INT32, Math.round(progress)))
+}
+
+function getProgress(defaults, art) {
+  if (Object.prototype.hasOwnProperty.call(defaults, 'progress')) {
+    const progress = Number(defaults.progress)
+
+    if (Number.isFinite(progress))
+      return toInt32Progress(progress)
+  }
+
+  return toInt32Progress(art.currentTime * 1000)
+}
+
+function copyDanmaku(danmaku) {
+  const source = danmaku || {}
+
+  return {
+    ...source,
+    attr: Array.isArray(source.attr) ? [...source.attr] : [],
+    extra: source.extra ?? null,
+    platform: source.platform ?? null,
+  }
 }
 
 async function applyPlugins(chunk, owned, plugins = []) {
@@ -203,6 +255,60 @@ class DanAny {
     return this
   }
 
+  async createEmitterDanmaku({ content, fontsize, color, mode }) {
+    const udb = await this.udbReady
+    const defaults = { ...this.option.emitDefaults }
+    delete defaults.ctime
+    delete defaults.DMID
+
+    const danmaku = {
+      ...DEFAULT_EMIT_DANMAKU,
+      ...defaults,
+      content,
+      progress: getProgress(defaults, this.art),
+      fontsize,
+      color,
+      mode,
+      ctime: new Date(),
+    }
+
+    danmaku.attr = Array.isArray(danmaku.attr) ? [...danmaku.attr] : []
+    danmaku.extra = danmaku.extra ?? null
+    danmaku.platform = danmaku.platform ?? null
+    danmaku.DMID = udb.DMIDGenerator(danmaku)
+
+    return danmaku
+  }
+
+  async emit(danmaku) {
+    try {
+      const item = copyDanmaku(danmaku)
+
+      if (!isUsableDanmaku(item))
+        return false
+
+      if (!this.option.filter(item))
+        return false
+
+      const allowed = await this.option.beforeEmit(item)
+      if (!allowed)
+        return false
+
+      const emitted = await this.option.emit(item)
+      if (emitted === false)
+        return false
+
+      await callRenderer(this.renderer, 'emit', item)
+      this.art.emit('artplayerPluginDanAny:emit', item)
+
+      return true
+    }
+    catch (error) {
+      this.art.emit('artplayerPluginDanAny:error', error)
+      throw error
+    }
+  }
+
   mount(el) {
     this.control.mount(el)
   }
@@ -242,6 +348,10 @@ export default function artplayerPluginDanAny(option = {}) {
       },
       config: (config) => {
         danAny.config(config)
+        return result
+      },
+      emit: async (danmaku) => {
+        await danAny.emit(danmaku)
         return result
       },
       hide: () => {

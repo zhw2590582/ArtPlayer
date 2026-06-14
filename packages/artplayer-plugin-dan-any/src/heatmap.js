@@ -218,6 +218,7 @@ export default function createHeatmap(art, danAny, option) {
     art.off('ready', handlers.ready)
     art.off('resize', handlers.resize)
     art.off('artplayerPluginDanAny:loaded', handlers.loaded)
+    art.off('artplayerPluginDanAny:emit', handlers.emit)
     art.off('artplayerPluginDanAny:points', handlers.points)
     handlers = null
   }
@@ -332,6 +333,7 @@ export default function createHeatmap(art, danAny, option) {
         ready: () => update(),
         resize: () => update(),
         loaded: () => update(),
+        emit: () => update(),
         points: (points) => {
           runtimePoints = Array.isArray(points) ? points : []
           update(runtimePoints)
@@ -343,6 +345,7 @@ export default function createHeatmap(art, danAny, option) {
       art.on('ready', handlers.ready)
       art.on('resize', handlers.resize)
       art.on('artplayerPluginDanAny:loaded', handlers.loaded)
+      art.on('artplayerPluginDanAny:emit', handlers.emit)
       art.on('artplayerPluginDanAny:points', handlers.points)
 
       update()

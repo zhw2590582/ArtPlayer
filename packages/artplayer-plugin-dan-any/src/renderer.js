@@ -1,4 +1,34 @@
 export const RENDER_MODES = ['Normal', 'Reverse', 'Top', 'Bottom']
+export const EMIT_MODES = [...RENDER_MODES, 'Ext']
+
+const DEFAULT_EMITTER_FONT_SIZES = [
+  { size: 18, text: '较小' },
+  { size: 25, text: '标准' },
+  { size: 36, text: '较大' },
+]
+
+const DEFAULT_EMITTER_COLORS = [
+  '#FE0302',
+  '#FF7204',
+  '#FFAA02',
+  '#FFD302',
+  '#FFFF00',
+  '#A0EE00',
+  '#00CD00',
+  '#019899',
+  '#4266BE',
+  '#89D5FF',
+  '#CC0273',
+  '#222222',
+  '#9B9B9B',
+  '#FFFFFF',
+].map(color => Number.parseInt(color.replace('#', ''), 16))
+
+const DEFAULT_EMITTER_MODES = [
+  { type: 'Normal', text: '滚动' },
+  { type: 'Top', text: '顶部' },
+  { type: 'Bottom', text: '底部' },
+]
 
 const BASE_CSS_TEXT = `
   user-select: none;
@@ -145,6 +175,63 @@ function normalizeModes(modes) {
   return modes.filter(mode => RENDER_MODES.includes(mode))
 }
 
+function normalizeEmitterFontSizes(fontSizes) {
+  const result = Array.isArray(fontSizes)
+    ? fontSizes
+        .map((item) => {
+          const size = Number(item?.size)
+
+          if (!Number.isFinite(size))
+            return null
+
+          return {
+            size: clamp(Math.round(size), 1, 200),
+            text: typeof item.text === 'string' ? item.text : undefined,
+          }
+        })
+        .filter(Boolean)
+    : []
+
+  return result.length ? result : DEFAULT_EMITTER_FONT_SIZES.map(item => ({ ...item }))
+}
+
+function normalizeEmitterColors(colors) {
+  const result = Array.isArray(colors)
+    ? colors
+        .map((color) => {
+          const value = Number(color)
+
+          if (!Number.isFinite(value))
+            return null
+
+          return clamp(Math.round(value), 0, 0xFFFFFF)
+        })
+        .filter(color => color !== null)
+    : []
+
+  return result.length ? result : [...DEFAULT_EMITTER_COLORS]
+}
+
+function normalizeEmitterModes(modes) {
+  const result = Array.isArray(modes)
+    ? modes
+        .map((item) => {
+          const type = item?.type
+
+          if (!EMIT_MODES.includes(type))
+            return null
+
+          return {
+            type,
+            text: typeof item.text === 'string' ? item.text : undefined,
+          }
+        })
+        .filter(Boolean)
+    : []
+
+  return result.length ? result : DEFAULT_EMITTER_MODES.map(item => ({ ...item }))
+}
+
 function normalizeColorNumber(color) {
   return `#${clamp(Math.round(color), 0, 0xFFFFFF).toString(16).padStart(6, '0')}`
 }
@@ -192,12 +279,19 @@ export function normalizeRendererOption(option = {}) {
     synchronousPlayback: false,
     visible: true,
     emitter: true,
+    emitDefaults: {},
+    emitterFontSizes: DEFAULT_EMITTER_FONT_SIZES,
+    emitterColors: DEFAULT_EMITTER_COLORS,
+    emitterModes: DEFAULT_EMITTER_MODES,
     heatmap: false,
     points: [],
     plugins: [],
     maxLength: 200,
+    lockTime: 5,
     width: 512,
     filter: () => true,
+    beforeEmit: () => true,
+    emit: () => true,
     beforeVisible: () => true,
     ...option,
   }
@@ -205,8 +299,15 @@ export function normalizeRendererOption(option = {}) {
   normalized.speed = clamp(Number(normalized.speed) || 5, 1, 10)
   normalized.opacity = clamp(Number(normalized.opacity) || 0, 0, 1)
   normalized.maxLength = clamp(Number(normalized.maxLength) || 200, 1, 1000)
+  normalized.lockTime = clamp(Number(normalized.lockTime) || 5, 1, 60)
   normalized.margin = Array.isArray(normalized.margin) ? normalized.margin : [10, '25%']
   normalized.modes = normalizeModes(normalized.modes)
+  normalized.emitDefaults = normalized.emitDefaults && typeof normalized.emitDefaults === 'object'
+    ? { ...normalized.emitDefaults }
+    : {}
+  normalized.emitterFontSizes = normalizeEmitterFontSizes(normalized.emitterFontSizes)
+  normalized.emitterColors = normalizeEmitterColors(normalized.emitterColors)
+  normalized.emitterModes = normalizeEmitterModes(normalized.emitterModes)
   normalized.plugins = Array.isArray(normalized.plugins)
     ? normalized.plugins.filter(plugin => typeof plugin === 'function')
     : []
@@ -215,6 +316,8 @@ export function normalizeRendererOption(option = {}) {
     : !!normalized.heatmap
   normalized.points = Array.isArray(normalized.points) ? [...normalized.points] : []
   normalized.filter = typeof normalized.filter === 'function' ? normalized.filter : () => true
+  normalized.beforeEmit = typeof normalized.beforeEmit === 'function' ? normalized.beforeEmit : () => true
+  normalized.emit = typeof normalized.emit === 'function' ? normalized.emit : () => true
   normalized.beforeVisible = typeof normalized.beforeVisible === 'function' ? normalized.beforeVisible : () => true
 
   return normalized
@@ -454,6 +557,24 @@ export default class DanAnyDomRenderer {
       this.start()
 
     return this
+  }
+
+  emit(danmaku) {
+    if (!RENDER_MODES.includes(danmaku?.mode))
+      return false
+
+    if (typeof danmaku.content !== 'string' || !danmaku.content.trim())
+      return false
+
+    this.queue.push(danmaku)
+    this.queue.sort(compareDanmaku)
+    this.udanmakus = this.queue
+    this.setState(danmaku, 'wait')
+
+    if (this.art.playing && !this.isHide && this.isStop)
+      this.start()
+
+    return true
   }
 
   config(option = {}, isInit = false) {

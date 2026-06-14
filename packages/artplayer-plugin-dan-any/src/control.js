@@ -9,7 +9,8 @@ import iconMode2Off from '../../artplayer-plugin-danmuku/src/img/mode_2_off.svg?
 import iconMode2On from '../../artplayer-plugin-danmuku/src/img/mode_2_on.svg?raw'
 import iconOff from '../../artplayer-plugin-danmuku/src/img/off.svg?raw'
 import iconOn from '../../artplayer-plugin-danmuku/src/img/on.svg?raw'
-import { RENDER_MODES } from './renderer'
+import iconStyle from '../../artplayer-plugin-danmuku/src/img/style.svg?raw'
+import { EMIT_MODES, RENDER_MODES } from './renderer'
 
 function queryMount(mount) {
   if (!mount)
@@ -35,9 +36,26 @@ function modeText(mode) {
       return '顶部'
     case 'Bottom':
       return '底部'
+    case 'Ext':
+      return '高级'
     default:
       return mode
   }
+}
+
+function escapeText(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    '\'': '&#39;',
+  }[char]))
+}
+
+function colorToCss(color) {
+  const value = Math.max(0, Math.min(0xFFFFFF, Math.round(Number(color) || 0)))
+  return `#${value.toString(16).padStart(6, '0')}`
 }
 
 function isSameMargin(prev, next) {
@@ -72,6 +90,13 @@ export default class DanAnyControl {
     this.outside = false
     this.sliders = {}
     this.dragging = null
+    this.lockTimer = null
+    this.lockRest = 0
+    this.sending = false
+    this.emitterSignature = ''
+    this.emitterFontSize = this.getInitialFontSize()
+    this.emitterColor = this.getInitialColor()
+    this.emitterMode = this.getInitialMode()
     this.$control = document.createElement('div')
     this.$control.className = 'artplayer-plugin-dan-any'
     this.$control.innerHTML = this.template
@@ -82,10 +107,13 @@ export default class DanAnyControl {
     this.onResize = this.onResize.bind(this)
     this.onFullscreen = this.onFullscreen.bind(this)
     this.onPanelEnter = this.onPanelEnter.bind(this)
+    this.onStylePanelEnter = this.onStylePanelEnter.bind(this)
+    this.onKeyDown = this.onKeyDown.bind(this)
 
     this.$control.addEventListener('click', this.onClick)
     this.$control.addEventListener('pointerdown', event => this.onPointerDown(event))
     this.$control.querySelector('.apda-config')?.addEventListener('mouseenter', this.onPanelEnter)
+    this.bindEmitterEvents()
     document.addEventListener('pointermove', this.onPointerMove)
     document.addEventListener('pointerup', this.onPointerUp)
     art.on('resize', this.onResize)
@@ -95,6 +123,21 @@ export default class DanAnyControl {
     this.createSliders()
     this.mount(plugin.option.mount)
     this.update()
+  }
+
+  getInitialFontSize() {
+    const value = Number(this.plugin.option.emitDefaults?.fontsize)
+    return Number.isFinite(value) ? value : 25
+  }
+
+  getInitialColor() {
+    const value = Number(this.plugin.option.emitDefaults?.color)
+    return Number.isFinite(value) ? value : 0xFFFFFF
+  }
+
+  getInitialMode() {
+    const mode = this.plugin.option.emitDefaults?.mode
+    return EMIT_MODES.includes(mode) ? mode : 'Normal'
   }
 
   get template() {
@@ -134,7 +177,95 @@ export default class DanAnyControl {
           </div>
         </div>
       </div>
+      ${this.emitterTemplate}
     `
+  }
+
+  get emitterTemplate() {
+    const { option } = this.plugin
+
+    return `
+      <div class="apda-emitter">
+        <div class="apda-style">
+          <button class="apda-style-button" type="button" title="弹幕样式">${iconStyle}</button>
+          <div class="apda-style-panel">
+            <div class="apda-style-panel-inner">
+              <div class="apda-style-section">
+                <div class="apda-label">字号</div>
+                <div class="apda-style-sizes">
+                  ${option.emitterFontSizes.map(item => `
+                    <button class="apda-style-size" type="button" data-emitter-font-size="${item.size}">
+                      ${escapeText(item.text || `${item.size}px`)}
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+              <div class="apda-style-section">
+                <div class="apda-label">位置</div>
+                <div class="apda-style-modes">
+                  ${option.emitterModes.map((item) => {
+                    const text = escapeText(item.text || modeText(item.type))
+
+                    return `
+                      <button class="apda-style-mode" type="button" data-emitter-mode="${item.type}" title="${text}">
+                        ${modeIcon(item.type, true)}
+                        <span>${text}</span>
+                      </button>
+                    `
+                  }).join('')}
+                </div>
+              </div>
+              <div class="apda-style-section">
+                <div class="apda-label">颜色</div>
+                <div class="apda-colors">
+                  ${option.emitterColors.map((color) => {
+                    const cssColor = colorToCss(color)
+
+                    return `
+                      <button
+                        class="apda-color"
+                        type="button"
+                        data-emitter-color="${color}"
+                        title="${cssColor}"
+                        style="background-color: ${cssColor};"
+                      ></button>
+                    `
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="apda-input" type="text" maxlength="${option.maxLength}" placeholder="发个弹幕" />
+        <button class="apda-send" type="button" data-action="emit">发送</button>
+      </div>
+    `
+  }
+
+  getEmitterSignature() {
+    const { emitterFontSizes, emitterColors, emitterModes, maxLength } = this.plugin.option
+    return JSON.stringify([emitterFontSizes, emitterColors, emitterModes, maxLength])
+  }
+
+  bindEmitterEvents() {
+    this.$control.querySelector('.apda-style')?.addEventListener('mouseenter', this.onStylePanelEnter)
+    this.$control.querySelector('.apda-input')?.addEventListener('keydown', this.onKeyDown)
+  }
+
+  refreshEmitterTemplate() {
+    const signature = this.getEmitterSignature()
+
+    if (signature === this.emitterSignature)
+      return
+
+    const $emitter = this.$control.querySelector('.apda-emitter')
+
+    if ($emitter) {
+      $emitter.outerHTML = this.emitterTemplate
+      this.bindEmitterEvents()
+    }
+
+    this.emitterSignature = signature
   }
 
   sliderTemplate(name, label) {
@@ -301,16 +432,145 @@ export default class DanAnyControl {
     this.dragging = null
   }
 
+  updateEmitterState() {
+    this.$control.querySelectorAll('[data-emitter-font-size]').forEach(($button) => {
+      $button.dataset.active = String(Number($button.dataset.emitterFontSize) === this.emitterFontSize)
+    })
+
+    this.$control.querySelectorAll('[data-emitter-color]').forEach(($button) => {
+      $button.dataset.active = String(Number($button.dataset.emitterColor) === this.emitterColor)
+    })
+
+    this.$control.querySelectorAll('[data-emitter-mode]').forEach(($button) => {
+      $button.dataset.active = String($button.dataset.emitterMode === this.emitterMode)
+    })
+  }
+
+  updateSendState() {
+    const $send = this.$control.querySelector('.apda-send')
+
+    if (!$send)
+      return
+
+    $send.dataset.lock = String(this.lockRest > 0)
+    $send.dataset.sending = String(this.sending)
+    $send.disabled = this.lockRest > 0 || this.sending
+    $send.textContent = this.lockRest > 0
+      ? `${this.lockRest}s`
+      : this.sending
+        ? '发送中'
+        : '发送'
+  }
+
+  clearLock() {
+    if (this.lockTimer) {
+      window.clearInterval(this.lockTimer)
+      this.lockTimer = null
+    }
+
+    this.lockRest = 0
+    this.updateSendState()
+  }
+
+  lock() {
+    this.clearLock()
+    this.lockRest = Math.round(this.plugin.option.lockTime)
+    this.updateSendState()
+    this.lockTimer = window.setInterval(() => {
+      this.lockRest -= 1
+
+      if (this.lockRest <= 0) {
+        this.clearLock()
+        return
+      }
+
+      this.updateSendState()
+    }, 1000)
+  }
+
+  async send() {
+    if (this.sending || this.lockRest > 0)
+      return
+
+    const $input = this.$control.querySelector('.apda-input')
+    const content = $input?.value.trim()
+
+    if (!content)
+      return
+
+    let danmaku = null
+    this.sending = true
+    this.updateSendState()
+
+    try {
+      danmaku = await this.plugin.createEmitterDanmaku({
+        content,
+        fontsize: this.emitterFontSize,
+        color: this.emitterColor,
+        mode: this.emitterMode,
+      })
+
+      const emitted = await this.plugin.emit(danmaku)
+
+      if (emitted) {
+        $input.value = ''
+        this.lock()
+      }
+    }
+    catch (error) {
+      if (!danmaku)
+        this.art.emit('artplayerPluginDanAny:error', error)
+    }
+    finally {
+      this.sending = false
+      this.updateSendState()
+    }
+  }
+
+  onKeyDown(event) {
+    if (event.key !== 'Enter' || event.shiftKey || event.isComposing)
+      return
+
+    event.preventDefault()
+    this.send()
+  }
+
   onClick(event) {
-    const $target = closest(event.target, '[data-action], [data-mode]')
+    const $target = closest(
+      event.target,
+      '[data-action], [data-mode], [data-emitter-font-size], [data-emitter-color], [data-emitter-mode]',
+    )
 
     if (!$target)
       return
 
     const { option } = this.plugin
 
+    if (Object.prototype.hasOwnProperty.call($target.dataset, 'emitterFontSize')) {
+      this.emitterFontSize = Number($target.dataset.emitterFontSize)
+      this.updateEmitterState()
+      return
+    }
+
+    if (Object.prototype.hasOwnProperty.call($target.dataset, 'emitterColor')) {
+      this.emitterColor = Number($target.dataset.emitterColor)
+      this.updateEmitterState()
+      return
+    }
+
+    if (Object.prototype.hasOwnProperty.call($target.dataset, 'emitterMode')) {
+      this.emitterMode = $target.dataset.emitterMode
+      this.updateEmitterState()
+      return
+    }
+
     if ($target.dataset.action === 'visible') {
       this.plugin.config({ visible: !option.visible })
+      return
+    }
+
+    if ($target.dataset.action === 'emit') {
+      this.send()
       return
     }
 
@@ -336,15 +596,13 @@ export default class DanAnyControl {
     }
   }
 
-  onPanelEnter() {
-    const $config = this.$control.querySelector('.apda-config')
-    const $panel = this.$control.querySelector('.apda-config-panel')
+  adjustPanel($root, $panel) {
     const { $player } = this.art.template
 
-    if (!$config || !$panel || !$player)
+    if (!$root || !$panel || !$player)
       return
 
-    const controlRect = $config.getBoundingClientRect()
+    const controlRect = $root.getBoundingClientRect()
     const panelRect = $panel.getBoundingClientRect()
     const playerRect = $player.getBoundingClientRect()
     const half = panelRect.width / 2 - controlRect.width / 2
@@ -357,6 +615,20 @@ export default class DanAnyControl {
       $panel.style.left = `${-half - right}px`
     else
       $panel.style.left = `${-half}px`
+  }
+
+  onPanelEnter() {
+    this.adjustPanel(
+      this.$control.querySelector('.apda-config'),
+      this.$control.querySelector('.apda-config-panel'),
+    )
+  }
+
+  onStylePanelEnter() {
+    this.adjustPanel(
+      this.$control.querySelector('.apda-style'),
+      this.$control.querySelector('.apda-style-panel'),
+    )
   }
 
   append($mount) {
@@ -407,6 +679,7 @@ export default class DanAnyControl {
     const { option } = this.plugin
     const { $player } = this.art.template
 
+    this.refreshEmitterTemplate()
     this.$control.dataset.visible = String(option.visible)
     this.$control.dataset.antiOverlap = String(option.antiOverlap)
     this.$control.dataset.synchronousPlayback = String(option.synchronousPlayback)
@@ -435,13 +708,22 @@ export default class DanAnyControl {
         $player.dataset[`danAnyMode${mode}`] = String(active)
     }
 
+    const $input = this.$control.querySelector('.apda-input')
+    if ($input)
+      $input.maxLength = option.maxLength
+
     Object.keys(this.sliders).forEach(name => this.updateSlider(name))
+    this.updateEmitterState()
+    this.updateSendState()
     this.onResize()
   }
 
   destroy() {
+    this.clearLock()
     this.$control.removeEventListener('click', this.onClick)
     this.$control.querySelector('.apda-config')?.removeEventListener('mouseenter', this.onPanelEnter)
+    this.$control.querySelector('.apda-style')?.removeEventListener('mouseenter', this.onStylePanelEnter)
+    this.$control.querySelector('.apda-input')?.removeEventListener('keydown', this.onKeyDown)
     document.removeEventListener('pointermove', this.onPointerMove)
     document.removeEventListener('pointerup', this.onPointerUp)
     this.art.off('resize', this.onResize)

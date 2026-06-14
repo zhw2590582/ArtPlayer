@@ -16853,7 +16853,35 @@ const iconMode2Off = '<svg class="apd-icon apd-mode-2-off" xmlns:xlink="http://w
 const iconMode2On = '<svg class="apd-icon apd-mode-2-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 21H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" fill="#FFFFFF"></path></svg>';
 const iconOff = '<svg class="apd-icon apd-toggle-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 24 24" width="24"  height="24" ><path fill-rule="evenodd" d="m8.085 4.891-.999-1.499a1.008 1.008 0 0 1 1.679-1.118l1.709 2.566c.54-.008 1.045-.012 1.515-.012h.13c.345 0 .707.003 1.088.007l1.862-2.59a1.008 1.008 0 0 1 1.637 1.177l-1.049 1.46c.788.02 1.631.046 2.53.078 1.958.069 3.468 1.6 3.74 3.507.088.613.13 2.158.16 3.276l.001.027c.01.333.017.63.025.856a.987.987 0 0 1-1.974.069c-.008-.23-.016-.539-.025-.881v-.002c-.028-1.103-.066-2.541-.142-3.065-.143-1.004-.895-1.78-1.854-1.813-2.444-.087-4.466-.13-6.064-.131-1.598 0-3.619.044-6.063.13a2.037 2.037 0 0 0-1.945 1.748c-.15 1.04-.225 2.341-.225 3.904 0 1.874.11 3.474.325 4.798.154.949.95 1.66 1.91 1.708a97.58 97.58 0 0 0 5.416.139.988.988 0 0 1 0 1.975c-2.196 0-3.61-.047-5.513-.141A4.012 4.012 0 0 1 2.197 17.7c-.236-1.446-.351-3.151-.351-5.116 0-1.64.08-3.035.245-4.184A4.013 4.013 0 0 1 5.92 4.96c.761-.027 1.483-.05 2.164-.069Zm4.436 4.707h-1.32v4.63h2.222v.848h-2.618v1.078h2.431a5.01 5.01 0 0 1 3.575-3.115V9.598h-1.276a8.59 8.59 0 0 0 .748-1.42l-1.089-.384a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.289h-3.2v.979h2.067v1.43H7.483l-.308 3.454h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.004c.285.02.551.04.818.04 1.001-.066 1.562-.418 1.694-1.056.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858H15.8Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902H15.8v.902h-1.254Zm3.517 10.594a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-.002-1.502a2.5 2.5 0 0 1-2.217-3.657l3.326 3.398a2.49 2.49 0 0 1-1.109.259Zm2.5-2.5c0 .42-.103.815-.286 1.162l-3.328-3.401a2.5 2.5 0 0 1 3.614 2.239Z" clip-rule="evenodd"></path></svg>';
 const iconOn = '<svg class="apd-icon apd-toggle-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 24 24" width="24"  height="24" ><path fill-rule="evenodd" d="M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z" clip-rule="evenodd"></path><path fill="#00AEEC" fill-rule="evenodd" d="M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z" clip-rule="evenodd"></path></svg>';
+const iconStyle = '<svg class="apd-icon apd-style-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 22 22" viewBox="0 0 22 22" width="36"  height="24" ><path d="M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98 12.87 11H9.13L11 5.98z"></path></svg>';
 const RENDER_MODES = ["Normal", "Reverse", "Top", "Bottom"];
+const EMIT_MODES = [...RENDER_MODES, "Ext"];
+const DEFAULT_EMITTER_FONT_SIZES = [
+  { size: 18, text: "较小" },
+  { size: 25, text: "标准" },
+  { size: 36, text: "较大" }
+];
+const DEFAULT_EMITTER_COLORS = [
+  "#FE0302",
+  "#FF7204",
+  "#FFAA02",
+  "#FFD302",
+  "#FFFF00",
+  "#A0EE00",
+  "#00CD00",
+  "#019899",
+  "#4266BE",
+  "#89D5FF",
+  "#CC0273",
+  "#222222",
+  "#9B9B9B",
+  "#FFFFFF"
+].map((color) => Number.parseInt(color.replace("#", ""), 16));
+const DEFAULT_EMITTER_MODES = [
+  { type: "Normal", text: "滚动" },
+  { type: "Top", text: "顶部" },
+  { type: "Bottom", text: "底部" }
+];
 const BASE_CSS_TEXT = `
   user-select: none;
   position: absolute;
@@ -16972,6 +17000,39 @@ function normalizeModes(modes) {
     return [...RENDER_MODES];
   return modes.filter((mode) => RENDER_MODES.includes(mode));
 }
+function normalizeEmitterFontSizes(fontSizes) {
+  const result = Array.isArray(fontSizes) ? fontSizes.map((item) => {
+    const size = Number(item?.size);
+    if (!Number.isFinite(size))
+      return null;
+    return {
+      size: clamp$1(Math.round(size), 1, 200),
+      text: typeof item.text === "string" ? item.text : void 0
+    };
+  }).filter(Boolean) : [];
+  return result.length ? result : DEFAULT_EMITTER_FONT_SIZES.map((item) => ({ ...item }));
+}
+function normalizeEmitterColors(colors) {
+  const result = Array.isArray(colors) ? colors.map((color) => {
+    const value = Number(color);
+    if (!Number.isFinite(value))
+      return null;
+    return clamp$1(Math.round(value), 0, 16777215);
+  }).filter((color) => color !== null) : [];
+  return result.length ? result : [...DEFAULT_EMITTER_COLORS];
+}
+function normalizeEmitterModes(modes) {
+  const result = Array.isArray(modes) ? modes.map((item) => {
+    const type = item?.type;
+    if (!EMIT_MODES.includes(type))
+      return null;
+    return {
+      type,
+      text: typeof item.text === "string" ? item.text : void 0
+    };
+  }).filter(Boolean) : [];
+  return result.length ? result : DEFAULT_EMITTER_MODES.map((item) => ({ ...item }));
+}
 function normalizeColorNumber(color) {
   return `#${clamp$1(Math.round(color), 0, 16777215).toString(16).padStart(6, "0")}`;
 }
@@ -17009,24 +17070,38 @@ function normalizeRendererOption(option = {}) {
     synchronousPlayback: false,
     visible: true,
     emitter: true,
+    emitDefaults: {},
+    emitterFontSizes: DEFAULT_EMITTER_FONT_SIZES,
+    emitterColors: DEFAULT_EMITTER_COLORS,
+    emitterModes: DEFAULT_EMITTER_MODES,
     heatmap: false,
     points: [],
     plugins: [],
     maxLength: 200,
+    lockTime: 5,
     width: 512,
     filter: () => true,
+    beforeEmit: () => true,
+    emit: () => true,
     beforeVisible: () => true,
     ...option
   };
   normalized.speed = clamp$1(Number(normalized.speed) || 5, 1, 10);
   normalized.opacity = clamp$1(Number(normalized.opacity) || 0, 0, 1);
   normalized.maxLength = clamp$1(Number(normalized.maxLength) || 200, 1, 1e3);
+  normalized.lockTime = clamp$1(Number(normalized.lockTime) || 5, 1, 60);
   normalized.margin = Array.isArray(normalized.margin) ? normalized.margin : [10, "25%"];
   normalized.modes = normalizeModes(normalized.modes);
+  normalized.emitDefaults = normalized.emitDefaults && typeof normalized.emitDefaults === "object" ? { ...normalized.emitDefaults } : {};
+  normalized.emitterFontSizes = normalizeEmitterFontSizes(normalized.emitterFontSizes);
+  normalized.emitterColors = normalizeEmitterColors(normalized.emitterColors);
+  normalized.emitterModes = normalizeEmitterModes(normalized.emitterModes);
   normalized.plugins = Array.isArray(normalized.plugins) ? normalized.plugins.filter((plugin) => typeof plugin === "function") : [];
   normalized.heatmap = normalized.heatmap && typeof normalized.heatmap === "object" ? { ...normalized.heatmap } : !!normalized.heatmap;
   normalized.points = Array.isArray(normalized.points) ? [...normalized.points] : [];
   normalized.filter = typeof normalized.filter === "function" ? normalized.filter : () => true;
+  normalized.beforeEmit = typeof normalized.beforeEmit === "function" ? normalized.beforeEmit : () => true;
+  normalized.emit = typeof normalized.emit === "function" ? normalized.emit : () => true;
   normalized.beforeVisible = typeof normalized.beforeVisible === "function" ? normalized.beforeVisible : () => true;
   return normalized;
 }
@@ -17208,6 +17283,19 @@ class DanAnyDomRenderer {
     if (this.art.playing && !this.isHide)
       this.start();
     return this;
+  }
+  emit(danmaku) {
+    if (!RENDER_MODES.includes(danmaku?.mode))
+      return false;
+    if (typeof danmaku.content !== "string" || !danmaku.content.trim())
+      return false;
+    this.queue.push(danmaku);
+    this.queue.sort(compareDanmaku);
+    this.udanmakus = this.queue;
+    this.setState(danmaku, "wait");
+    if (this.art.playing && !this.isHide && this.isStop)
+      this.start();
+    return true;
   }
   config(option = {}, isInit = false) {
     const shouldReset = !isInit && ["fontSize", "margin", "modes", "speed", "synchronousPlayback"].some(
@@ -17431,9 +17519,24 @@ function modeText(mode) {
       return "顶部";
     case "Bottom":
       return "底部";
+    case "Ext":
+      return "高级";
     default:
       return mode;
   }
+}
+function escapeText(value) {
+  return String(value).replace(/[&<>"']/g, (char2) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char2]);
+}
+function colorToCss(color) {
+  const value = Math.max(0, Math.min(16777215, Math.round(Number(color) || 0)));
+  return `#${value.toString(16).padStart(6, "0")}`;
 }
 function isSameMargin(prev, next) {
   return prev && next && prev[0] === next[0] && prev[1] === next[1];
@@ -17464,6 +17567,13 @@ class DanAnyControl {
     this.outside = false;
     this.sliders = {};
     this.dragging = null;
+    this.lockTimer = null;
+    this.lockRest = 0;
+    this.sending = false;
+    this.emitterSignature = "";
+    this.emitterFontSize = this.getInitialFontSize();
+    this.emitterColor = this.getInitialColor();
+    this.emitterMode = this.getInitialMode();
     this.$control = document.createElement("div");
     this.$control.className = "artplayer-plugin-dan-any";
     this.$control.innerHTML = this.template;
@@ -17473,9 +17583,12 @@ class DanAnyControl {
     this.onResize = this.onResize.bind(this);
     this.onFullscreen = this.onFullscreen.bind(this);
     this.onPanelEnter = this.onPanelEnter.bind(this);
+    this.onStylePanelEnter = this.onStylePanelEnter.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.$control.addEventListener("click", this.onClick);
     this.$control.addEventListener("pointerdown", (event) => this.onPointerDown(event));
     this.$control.querySelector(".apda-config")?.addEventListener("mouseenter", this.onPanelEnter);
+    this.bindEmitterEvents();
     document.addEventListener("pointermove", this.onPointerMove);
     document.addEventListener("pointerup", this.onPointerUp);
     art.on("resize", this.onResize);
@@ -17484,6 +17597,18 @@ class DanAnyControl {
     this.createSliders();
     this.mount(plugin.option.mount);
     this.update();
+  }
+  getInitialFontSize() {
+    const value = Number(this.plugin.option.emitDefaults?.fontsize);
+    return Number.isFinite(value) ? value : 25;
+  }
+  getInitialColor() {
+    const value = Number(this.plugin.option.emitDefaults?.color);
+    return Number.isFinite(value) ? value : 16777215;
+  }
+  getInitialMode() {
+    const mode = this.plugin.option.emitDefaults?.mode;
+    return EMIT_MODES.includes(mode) ? mode : "Normal";
   }
   get template() {
     return `
@@ -17522,7 +17647,84 @@ class DanAnyControl {
           </div>
         </div>
       </div>
+      ${this.emitterTemplate}
     `;
+  }
+  get emitterTemplate() {
+    const { option } = this.plugin;
+    return `
+      <div class="apda-emitter">
+        <div class="apda-style">
+          <button class="apda-style-button" type="button" title="弹幕样式">${iconStyle}</button>
+          <div class="apda-style-panel">
+            <div class="apda-style-panel-inner">
+              <div class="apda-style-section">
+                <div class="apda-label">字号</div>
+                <div class="apda-style-sizes">
+                  ${option.emitterFontSizes.map((item) => `
+                    <button class="apda-style-size" type="button" data-emitter-font-size="${item.size}">
+                      ${escapeText(item.text || `${item.size}px`)}
+                    </button>
+                  `).join("")}
+                </div>
+              </div>
+              <div class="apda-style-section">
+                <div class="apda-label">位置</div>
+                <div class="apda-style-modes">
+                  ${option.emitterModes.map((item) => {
+      const text2 = escapeText(item.text || modeText(item.type));
+      return `
+                      <button class="apda-style-mode" type="button" data-emitter-mode="${item.type}" title="${text2}">
+                        ${modeIcon(item.type, true)}
+                        <span>${text2}</span>
+                      </button>
+                    `;
+    }).join("")}
+                </div>
+              </div>
+              <div class="apda-style-section">
+                <div class="apda-label">颜色</div>
+                <div class="apda-colors">
+                  ${option.emitterColors.map((color) => {
+      const cssColor = colorToCss(color);
+      return `
+                      <button
+                        class="apda-color"
+                        type="button"
+                        data-emitter-color="${color}"
+                        title="${cssColor}"
+                        style="background-color: ${cssColor};"
+                      ></button>
+                    `;
+    }).join("")}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="apda-input" type="text" maxlength="${option.maxLength}" placeholder="发个弹幕" />
+        <button class="apda-send" type="button" data-action="emit">发送</button>
+      </div>
+    `;
+  }
+  getEmitterSignature() {
+    const { emitterFontSizes, emitterColors, emitterModes, maxLength } = this.plugin.option;
+    return JSON.stringify([emitterFontSizes, emitterColors, emitterModes, maxLength]);
+  }
+  bindEmitterEvents() {
+    this.$control.querySelector(".apda-style")?.addEventListener("mouseenter", this.onStylePanelEnter);
+    this.$control.querySelector(".apda-input")?.addEventListener("keydown", this.onKeyDown);
+  }
+  refreshEmitterTemplate() {
+    const signature = this.getEmitterSignature();
+    if (signature === this.emitterSignature)
+      return;
+    const $emitter = this.$control.querySelector(".apda-emitter");
+    if ($emitter) {
+      $emitter.outerHTML = this.emitterTemplate;
+      this.bindEmitterEvents();
+    }
+    this.emitterSignature = signature;
   }
   sliderTemplate(name, label) {
     return `
@@ -17661,13 +17863,112 @@ class DanAnyControl {
     this.setSliderByEvent(this.dragging, event);
     this.dragging = null;
   }
+  updateEmitterState() {
+    this.$control.querySelectorAll("[data-emitter-font-size]").forEach(($button) => {
+      $button.dataset.active = String(Number($button.dataset.emitterFontSize) === this.emitterFontSize);
+    });
+    this.$control.querySelectorAll("[data-emitter-color]").forEach(($button) => {
+      $button.dataset.active = String(Number($button.dataset.emitterColor) === this.emitterColor);
+    });
+    this.$control.querySelectorAll("[data-emitter-mode]").forEach(($button) => {
+      $button.dataset.active = String($button.dataset.emitterMode === this.emitterMode);
+    });
+  }
+  updateSendState() {
+    const $send = this.$control.querySelector(".apda-send");
+    if (!$send)
+      return;
+    $send.dataset.lock = String(this.lockRest > 0);
+    $send.dataset.sending = String(this.sending);
+    $send.disabled = this.lockRest > 0 || this.sending;
+    $send.textContent = this.lockRest > 0 ? `${this.lockRest}s` : this.sending ? "发送中" : "发送";
+  }
+  clearLock() {
+    if (this.lockTimer) {
+      window.clearInterval(this.lockTimer);
+      this.lockTimer = null;
+    }
+    this.lockRest = 0;
+    this.updateSendState();
+  }
+  lock() {
+    this.clearLock();
+    this.lockRest = Math.round(this.plugin.option.lockTime);
+    this.updateSendState();
+    this.lockTimer = window.setInterval(() => {
+      this.lockRest -= 1;
+      if (this.lockRest <= 0) {
+        this.clearLock();
+        return;
+      }
+      this.updateSendState();
+    }, 1e3);
+  }
+  async send() {
+    if (this.sending || this.lockRest > 0)
+      return;
+    const $input2 = this.$control.querySelector(".apda-input");
+    const content = $input2?.value.trim();
+    if (!content)
+      return;
+    let danmaku = null;
+    this.sending = true;
+    this.updateSendState();
+    try {
+      danmaku = await this.plugin.createEmitterDanmaku({
+        content,
+        fontsize: this.emitterFontSize,
+        color: this.emitterColor,
+        mode: this.emitterMode
+      });
+      const emitted = await this.plugin.emit(danmaku);
+      if (emitted) {
+        $input2.value = "";
+        this.lock();
+      }
+    } catch (error2) {
+      if (!danmaku)
+        this.art.emit("artplayerPluginDanAny:error", error2);
+    } finally {
+      this.sending = false;
+      this.updateSendState();
+    }
+  }
+  onKeyDown(event) {
+    if (event.key !== "Enter" || event.shiftKey || event.isComposing)
+      return;
+    event.preventDefault();
+    this.send();
+  }
   onClick(event) {
-    const $target = closest(event.target, "[data-action], [data-mode]");
+    const $target = closest(
+      event.target,
+      "[data-action], [data-mode], [data-emitter-font-size], [data-emitter-color], [data-emitter-mode]"
+    );
     if (!$target)
       return;
     const { option } = this.plugin;
+    if (Object.prototype.hasOwnProperty.call($target.dataset, "emitterFontSize")) {
+      this.emitterFontSize = Number($target.dataset.emitterFontSize);
+      this.updateEmitterState();
+      return;
+    }
+    if (Object.prototype.hasOwnProperty.call($target.dataset, "emitterColor")) {
+      this.emitterColor = Number($target.dataset.emitterColor);
+      this.updateEmitterState();
+      return;
+    }
+    if (Object.prototype.hasOwnProperty.call($target.dataset, "emitterMode")) {
+      this.emitterMode = $target.dataset.emitterMode;
+      this.updateEmitterState();
+      return;
+    }
     if ($target.dataset.action === "visible") {
       this.plugin.config({ visible: !option.visible });
+      return;
+    }
+    if ($target.dataset.action === "emit") {
+      this.send();
       return;
     }
     if ($target.dataset.action === "antiOverlap") {
@@ -17686,13 +17987,11 @@ class DanAnyControl {
       });
     }
   }
-  onPanelEnter() {
-    const $config = this.$control.querySelector(".apda-config");
-    const $panel = this.$control.querySelector(".apda-config-panel");
+  adjustPanel($root, $panel) {
     const { $player } = this.art.template;
-    if (!$config || !$panel || !$player)
+    if (!$root || !$panel || !$player)
       return;
-    const controlRect = $config.getBoundingClientRect();
+    const controlRect = $root.getBoundingClientRect();
     const panelRect = $panel.getBoundingClientRect();
     const playerRect = $player.getBoundingClientRect();
     const half = panelRect.width / 2 - controlRect.width / 2;
@@ -17704,6 +18003,18 @@ class DanAnyControl {
       $panel.style.left = `${-half - right}px`;
     else
       $panel.style.left = `${-half}px`;
+  }
+  onPanelEnter() {
+    this.adjustPanel(
+      this.$control.querySelector(".apda-config"),
+      this.$control.querySelector(".apda-config-panel")
+    );
+  }
+  onStylePanelEnter() {
+    this.adjustPanel(
+      this.$control.querySelector(".apda-style"),
+      this.$control.querySelector(".apda-style-panel")
+    );
   }
   append($mount) {
     if (!$mount || $mount === this.$control.parentElement)
@@ -17741,6 +18052,7 @@ class DanAnyControl {
   update() {
     const { option } = this.plugin;
     const { $player } = this.art.template;
+    this.refreshEmitterTemplate();
     this.$control.dataset.visible = String(option.visible);
     this.$control.dataset.antiOverlap = String(option.antiOverlap);
     this.$control.dataset.synchronousPlayback = String(option.synchronousPlayback);
@@ -17764,12 +18076,20 @@ class DanAnyControl {
       if ($player)
         $player.dataset[`danAnyMode${mode}`] = String(active);
     }
+    const $input2 = this.$control.querySelector(".apda-input");
+    if ($input2)
+      $input2.maxLength = option.maxLength;
     Object.keys(this.sliders).forEach((name) => this.updateSlider(name));
+    this.updateEmitterState();
+    this.updateSendState();
     this.onResize();
   }
   destroy() {
+    this.clearLock();
     this.$control.removeEventListener("click", this.onClick);
     this.$control.querySelector(".apda-config")?.removeEventListener("mouseenter", this.onPanelEnter);
+    this.$control.querySelector(".apda-style")?.removeEventListener("mouseenter", this.onStylePanelEnter);
+    this.$control.querySelector(".apda-input")?.removeEventListener("keydown", this.onKeyDown);
     document.removeEventListener("pointermove", this.onPointerMove);
     document.removeEventListener("pointerup", this.onPointerUp);
     this.art.off("resize", this.onResize);
@@ -17944,6 +18264,7 @@ function createHeatmap(art, danAny, option) {
     art.off("ready", handlers.ready);
     art.off("resize", handlers.resize);
     art.off("artplayerPluginDanAny:loaded", handlers.loaded);
+    art.off("artplayerPluginDanAny:emit", handlers.emit);
     art.off("artplayerPluginDanAny:points", handlers.points);
     handlers = null;
   }
@@ -18041,6 +18362,7 @@ function createHeatmap(art, danAny, option) {
         ready: () => update(),
         resize: () => update(),
         loaded: () => update(),
+        emit: () => update(),
         points: (points) => {
           runtimePoints = Array.isArray(points) ? points : [];
           update(runtimePoints);
@@ -18051,6 +18373,7 @@ function createHeatmap(art, danAny, option) {
       art.on("ready", handlers.ready);
       art.on("resize", handlers.resize);
       art.on("artplayerPluginDanAny:loaded", handlers.loaded);
+      art.on("artplayerPluginDanAny:emit", handlers.emit);
       art.on("artplayerPluginDanAny:points", handlers.points);
       update();
     },
@@ -28857,7 +29180,22 @@ async function resolveSource(udb, source, option) {
     return loadIterable(udb, source);
   throw new Error("Unsupported danmaku source");
 }
-const style = ".art-danmuku .apda-danmaku {\n  box-sizing: border-box;\n  max-width: none;\n}\n.artplayer-plugin-dan-any {\n  position: relative;\n  z-index: 99;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 32px;\n  min-width: 0;\n  flex-shrink: 0;\n  gap: 10px;\n  color: #fff;\n  font-size: 12px;\n  font-weight: 300;\n}\n.artplayer-plugin-dan-any button {\n  appearance: none;\n  border: 0;\n  padding: 0;\n  color: inherit;\n  font: inherit;\n  background: transparent;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-toggle,\n.artplayer-plugin-dan-any .apda-config-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  line-height: 1;\n}\n.artplayer-plugin-dan-any .apd-icon {\n  cursor: pointer;\n  opacity: 0.75;\n  transition: all 0.2s ease;\n  fill: #fff;\n}\n.artplayer-plugin-dan-any .apd-icon:hover {\n  opacity: 1;\n}\n.artplayer-plugin-dan-any .apda-config {\n  position: relative;\n  display: flex;\n}\n.artplayer-plugin-dan-any .apda-config-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 320px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n}\n.artplayer-plugin-dan-any .apda-config-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px 10px 22px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n}\n.artplayer-plugin-dan-any .apda-config:hover .apda-config-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-config-mode,\n.artplayer-plugin-dan-any .apda-config-slider,\n.artplayer-plugin-dan-any .apda-config-other {\n  margin-bottom: 15px;\n}\n.artplayer-plugin-dan-any .apda-config-slider:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-label {\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-modes {\n  display: flex;\n  align-items: center;\n  margin-top: 5px;\n  gap: 20px;\n}\n.artplayer-plugin-dan-any .apda-mode {\n  display: block;\n  text-align: center;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-mode:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-0-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-1-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-2-off {\n  display: none;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-0-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-1-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-2-on {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-0-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-1-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-2-off {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-0-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-1-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-2-on {\n  display: none;\n}\n.artplayer-plugin-dan-any .apda-config-other {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n}\n.artplayer-plugin-dan-any .apda-other {\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  gap: 2px;\n}\n.artplayer-plugin-dan-any .apda-other:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apd-check-on,\n.artplayer-plugin-dan-any .apd-check-off {\n  width: 16px;\n  height: 16px;\n}\n.artplayer-plugin-dan-any .apd-check-on {\n  display: none;\n}\n.artplayer-plugin-dan-any .apd-check-off {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-config-slider {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n.artplayer-plugin-dan-any .apda-value {\n  width: 32px;\n  flex-shrink: 0;\n  text-align: right;\n}\n.artplayer-plugin-dan-any .apda-slider {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 20px;\n  flex: 1;\n  cursor: pointer;\n  touch-action: none;\n}\n.artplayer-plugin-dan-any .apda-slider-line {\n  position: relative;\n  width: 100%;\n  height: 2px;\n  overflow: hidden;\n  border-radius: 3px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-slider-points {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.artplayer-plugin-dan-any .apda-slider-point {\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-slider-progress {\n  width: 0%;\n  height: 100%;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-slider-dot {\n  position: absolute;\n  left: 0%;\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: #00a1d6;\n  transform: translateX(-6px);\n}\n.artplayer-plugin-dan-any .apda-slider-steps {\n  position: absolute;\n  bottom: -12px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: calc(100% + 32px);\n  color: #777;\n}\n.artplayer-plugin-dan-any .apda-slider-step {\n  width: 36px;\n  flex-shrink: 0;\n  text-align: center;\n  scale: 0.95;\n}\n.art-controls-center .artplayer-plugin-dan-any {\n  width: auto;\n}\n.art-controls-left .artplayer-plugin-dan-any {\n  align-self: center;\n  height: var(--art-control-height);\n}\n.art-fullscreen .artplayer-plugin-dan-any,\n.art-fullscreen-web .artplayer-plugin-dan-any {\n  height: 38px;\n  gap: 16px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen .artplayer-plugin-dan-any .apda-config-button,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-config-button {\n  width: 28px;\n  height: 28px;\n}\n.art-video-player > .artplayer-plugin-dan-any {\n  position: absolute;\n  left: 10px;\n  bottom: -40px;\n}\n.art-video-player:has(> .artplayer-plugin-dan-any) {\n  margin-bottom: 40px;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off {\n  display: none;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'],\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] {\n  color: #00a1d6;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off {\n  display: none;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'],\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] {\n  color: #00a1d6;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off {\n  display: none;\n}\n";
+const style = ".art-danmuku .apda-danmaku {\n  box-sizing: border-box;\n  max-width: none;\n}\n.artplayer-plugin-dan-any {\n  position: relative;\n  z-index: 99;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 32px;\n  min-width: 0;\n  flex-shrink: 0;\n  gap: 10px;\n  color: #fff;\n  font-size: 12px;\n  font-weight: 300;\n}\n.artplayer-plugin-dan-any button {\n  appearance: none;\n  border: 0;\n  padding: 0;\n  color: inherit;\n  font: inherit;\n  background: transparent;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-toggle,\n.artplayer-plugin-dan-any .apda-config-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  line-height: 1;\n}\n.artplayer-plugin-dan-any .apd-icon {\n  cursor: pointer;\n  opacity: 0.75;\n  transition: all 0.2s ease;\n  fill: #fff;\n}\n.artplayer-plugin-dan-any .apd-icon:hover {\n  opacity: 1;\n}\n.artplayer-plugin-dan-any .apda-config {\n  position: relative;\n  display: flex;\n}\n.artplayer-plugin-dan-any .apda-config-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 320px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n}\n.artplayer-plugin-dan-any .apda-config-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px 10px 22px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n}\n.artplayer-plugin-dan-any .apda-config:hover .apda-config-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-config-mode,\n.artplayer-plugin-dan-any .apda-config-slider,\n.artplayer-plugin-dan-any .apda-config-other {\n  margin-bottom: 15px;\n}\n.artplayer-plugin-dan-any .apda-config-slider:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-label {\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-modes {\n  display: flex;\n  align-items: center;\n  margin-top: 5px;\n  gap: 20px;\n}\n.artplayer-plugin-dan-any .apda-mode {\n  display: block;\n  text-align: center;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-mode:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-0-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-1-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-2-off {\n  display: none;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-0-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-1-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-2-on {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-0-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-1-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-2-off {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-0-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-1-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-2-on {\n  display: none;\n}\n.artplayer-plugin-dan-any .apda-config-other {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n}\n.artplayer-plugin-dan-any .apda-other {\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  gap: 2px;\n}\n.artplayer-plugin-dan-any .apda-other:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apd-check-on,\n.artplayer-plugin-dan-any .apd-check-off {\n  width: 16px;\n  height: 16px;\n}\n.artplayer-plugin-dan-any .apd-check-on {\n  display: none;\n}\n.artplayer-plugin-dan-any .apd-check-off {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-emitter {\n  display: flex;\n  align-items: center;\n  width: 260px;\n  height: 26px;\n  min-width: 160px;\n  flex: none;\n  border-radius: 5px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-style {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 32px;\n  height: 100%;\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-style-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n}\n.artplayer-plugin-dan-any .apda-style-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 220px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n}\n.artplayer-plugin-dan-any .apda-style-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n}\n.artplayer-plugin-dan-any .apda-style:hover .apda-style-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-style-section {\n  margin-bottom: 14px;\n}\n.artplayer-plugin-dan-any .apda-style-section:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-style-sizes,\n.artplayer-plugin-dan-any .apda-style-modes {\n  display: flex;\n  align-items: center;\n  margin-top: 7px;\n  gap: 10px;\n}\n.artplayer-plugin-dan-any .apda-style-size {\n  padding: 2px 6px;\n  border-radius: 3px;\n  color: rgba(255, 255, 255, 0.8);\n  background-color: rgba(255, 255, 255, 0.12);\n}\n.artplayer-plugin-dan-any .apda-style-size:hover,\n.artplayer-plugin-dan-any .apda-style-size[data-active='true'] {\n  color: #fff;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode {\n  display: block;\n  text-align: center;\n}\n.artplayer-plugin-dan-any .apda-style-mode .apd-icon {\n  display: block;\n  margin: 0 auto;\n}\n.artplayer-plugin-dan-any .apda-style-mode span {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-style-mode:hover,\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] path {\n  fill: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-colors {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 7px;\n  gap: 8px;\n}\n.artplayer-plugin-dan-any .apda-color {\n  width: 16px;\n  height: 16px;\n  border-radius: 2px;\n  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);\n}\n.artplayer-plugin-dan-any .apda-color[data-active='true'] {\n  border: 1px solid #000;\n  box-shadow: 0 0 0 1px #fff;\n}\n.artplayer-plugin-dan-any .apda-input {\n  width: auto;\n  min-width: 0;\n  height: 100%;\n  flex: 1;\n  border: 0;\n  outline: none;\n  color: #fff;\n  line-height: 1;\n  background-color: transparent;\n}\n.artplayer-plugin-dan-any .apda-input::placeholder {\n  color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-send {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 60px;\n  height: 100%;\n  flex-shrink: 0;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  text-shadow: none;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-send[data-lock='true'],\n.artplayer-plugin-dan-any .apda-send[data-sending='true'] {\n  color: #666;\n  cursor: not-allowed;\n  background-color: #e7e7e7;\n}\n.artplayer-plugin-dan-any .apda-config-slider {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n.artplayer-plugin-dan-any .apda-value {\n  width: 32px;\n  flex-shrink: 0;\n  text-align: right;\n}\n.artplayer-plugin-dan-any .apda-slider {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 20px;\n  flex: 1;\n  cursor: pointer;\n  touch-action: none;\n}\n.artplayer-plugin-dan-any .apda-slider-line {\n  position: relative;\n  width: 100%;\n  height: 2px;\n  overflow: hidden;\n  border-radius: 3px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-slider-points {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.artplayer-plugin-dan-any .apda-slider-point {\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-slider-progress {\n  width: 0%;\n  height: 100%;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-slider-dot {\n  position: absolute;\n  left: 0%;\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: #00a1d6;\n  transform: translateX(-6px);\n}\n.artplayer-plugin-dan-any .apda-slider-steps {\n  position: absolute;\n  bottom: -12px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: calc(100% + 32px);\n  color: #777;\n}\n.artplayer-plugin-dan-any .apda-slider-step {\n  width: 36px;\n  flex-shrink: 0;\n  text-align: center;\n  scale: 0.95;\n}\n.art-controls-center .artplayer-plugin-dan-any {\n  width: auto;\n}\n.art-controls-left .artplayer-plugin-dan-any {\n  align-self: center;\n  height: var(--art-control-height);\n}\n.art-fullscreen .artplayer-plugin-dan-any,\n.art-fullscreen-web .artplayer-plugin-dan-any {\n  height: 38px;\n  gap: 16px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen .artplayer-plugin-dan-any .apda-config-button,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-config-button {\n  width: 28px;\n  height: 28px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-emitter,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-emitter {\n  width: 400px;\n  height: 30px;\n}\n.art-video-player > .artplayer-plugin-dan-any {\n  position: absolute;\n  left: 10px;\n  right: 10px;\n  bottom: -40px;\n}\n.art-video-player:has(> .artplayer-plugin-dan-any) {\n  margin-bottom: 40px;\n}\n[data-dan-any-emitter='false'] .apda-emitter,\n.artplayer-plugin-dan-any[data-dan-any-emitter='false'] .apda-emitter {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off {\n  display: none;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'],\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] {\n  color: #00a1d6;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off {\n  display: none;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'],\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] {\n  color: #00a1d6;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off {\n  display: none;\n}\n";
+const DEFAULT_EMIT_DANMAKU = {
+  SOID: "artplayer@artplayer",
+  attr: [],
+  color: 16777215,
+  content: "",
+  extra: null,
+  fontsize: 25,
+  mode: "Normal",
+  platform: "artplayer",
+  pool: "Def",
+  progress: 0,
+  senderID: "anonymous@artplayer",
+  weight: 0
+};
+const MAX_INT32 = 2147483647;
 function isPromise(value) {
   return !!value && typeof value.then === "function";
 }
@@ -28887,6 +29225,32 @@ async function deleteChunk(chunk) {
 async function deleteChunks(chunks) {
   for (const chunk of new Set(chunks))
     await deleteChunk(chunk);
+}
+function isUsableDanmaku(danmaku) {
+  return danmaku && typeof danmaku.content === "string" && danmaku.content.trim();
+}
+function toInt32Progress(value) {
+  const progress = Number(value);
+  if (!Number.isFinite(progress))
+    return 0;
+  return Math.max(0, Math.min(MAX_INT32, Math.round(progress)));
+}
+function getProgress(defaults, art) {
+  if (Object.prototype.hasOwnProperty.call(defaults, "progress")) {
+    const progress = Number(defaults.progress);
+    if (Number.isFinite(progress))
+      return toInt32Progress(progress);
+  }
+  return toInt32Progress(art.currentTime * 1e3);
+}
+function copyDanmaku(danmaku) {
+  const source = danmaku || {};
+  return {
+    ...source,
+    attr: Array.isArray(source.attr) ? [...source.attr] : [],
+    extra: source.extra ?? null,
+    platform: source.platform ?? null
+  };
 }
 async function applyPlugins(chunk, owned, plugins = []) {
   const result = {
@@ -29010,6 +29374,48 @@ class DanAny {
     callRenderer(this.renderer, "reset");
     return this;
   }
+  async createEmitterDanmaku({ content, fontsize, color, mode }) {
+    const udb = await this.udbReady;
+    const defaults = { ...this.option.emitDefaults };
+    delete defaults.ctime;
+    delete defaults.DMID;
+    const danmaku = {
+      ...DEFAULT_EMIT_DANMAKU,
+      ...defaults,
+      content,
+      progress: getProgress(defaults, this.art),
+      fontsize,
+      color,
+      mode,
+      ctime: /* @__PURE__ */ new Date()
+    };
+    danmaku.attr = Array.isArray(danmaku.attr) ? [...danmaku.attr] : [];
+    danmaku.extra = danmaku.extra ?? null;
+    danmaku.platform = danmaku.platform ?? null;
+    danmaku.DMID = udb.DMIDGenerator(danmaku);
+    return danmaku;
+  }
+  async emit(danmaku) {
+    try {
+      const item = copyDanmaku(danmaku);
+      if (!isUsableDanmaku(item))
+        return false;
+      if (!this.option.filter(item))
+        return false;
+      const allowed = await this.option.beforeEmit(item);
+      if (!allowed)
+        return false;
+      const emitted = await this.option.emit(item);
+      if (emitted === false)
+        return false;
+      await callRenderer(this.renderer, "emit", item);
+      this.art.emit("artplayerPluginDanAny:emit", item);
+      return true;
+    } catch (error2) {
+      this.art.emit("artplayerPluginDanAny:error", error2);
+      throw error2;
+    }
+  }
   mount(el2) {
     this.control.mount(el2);
   }
@@ -29041,6 +29447,10 @@ function artplayerPluginDanAny(option = {}) {
       },
       config: (config2) => {
         danAny.config(config2);
+        return result;
+      },
+      emit: async (danmaku) => {
+        await danAny.emit(danmaku);
         return result;
       },
       hide: () => {

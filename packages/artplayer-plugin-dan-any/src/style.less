@@ -171,6 +171,169 @@
     display: block;
   }
 
+  .apda-emitter {
+    display: flex;
+    align-items: center;
+    width: 260px;
+    height: 26px;
+    min-width: 160px;
+    flex: none;
+    border-radius: 5px;
+    background-color: rgb(255 255 255 / 25%);
+  }
+
+  .apda-style {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 100%;
+    flex-shrink: 0;
+  }
+
+  .apda-style-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .apda-style-panel {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    width: 220px;
+    padding: 10px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .apda-style-panel-inner {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: rgb(0 0 0 / 85%);
+  }
+
+  .apda-style:hover {
+    .apda-style-panel {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  .apda-style-section {
+    margin-bottom: 14px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .apda-style-sizes,
+  .apda-style-modes {
+    display: flex;
+    align-items: center;
+    margin-top: 7px;
+    gap: 10px;
+  }
+
+  .apda-style-size {
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: rgb(255 255 255 / 80%);
+    background-color: rgb(255 255 255 / 12%);
+
+    &:hover,
+    &[data-active='true'] {
+      color: #fff;
+      background-color: @highlight;
+    }
+  }
+
+  .apda-style-mode {
+    display: block;
+    text-align: center;
+
+    .apd-icon {
+      display: block;
+      margin: 0 auto;
+    }
+
+    span {
+      display: block;
+    }
+
+    &:hover,
+    &[data-active='true'] {
+      color: @highlight;
+    }
+  }
+
+  .apda-style-mode[data-active='true'] {
+    path {
+      fill: @highlight;
+    }
+  }
+
+  .apda-colors {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 7px;
+    gap: 8px;
+  }
+
+  .apda-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 15%);
+
+    &[data-active='true'] {
+      border: 1px solid #000;
+      box-shadow: 0 0 0 1px #fff;
+    }
+  }
+
+  .apda-input {
+    width: auto;
+    min-width: 0;
+    height: 100%;
+    flex: 1;
+    border: 0;
+    outline: none;
+    color: #fff;
+    line-height: 1;
+    background-color: transparent;
+
+    &::placeholder {
+      color: rgb(255 255 255 / 50%);
+    }
+  }
+
+  .apda-send {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 100%;
+    flex-shrink: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-shadow: none;
+    background-color: @highlight;
+
+    &[data-lock='true'],
+    &[data-sending='true'] {
+      color: #666;
+      cursor: not-allowed;
+      background-color: #e7e7e7;
+    }
+  }
+
   .apda-config-slider {
     display: flex;
     align-items: center;
@@ -276,6 +439,11 @@
       width: 28px;
       height: 28px;
     }
+
+    .apda-emitter {
+      width: 400px;
+      height: 30px;
+    }
   }
 }
 
@@ -283,11 +451,19 @@
   & > .artplayer-plugin-dan-any {
     position: absolute;
     left: 10px;
+    right: 10px;
     bottom: -40px;
   }
 
   &:has(> .artplayer-plugin-dan-any) {
     margin-bottom: 40px;
+  }
+}
+
+[data-dan-any-emitter='false'],
+.artplayer-plugin-dan-any[data-dan-any-emitter='false'] {
+  .apda-emitter {
+    display: none;
   }
 }
 

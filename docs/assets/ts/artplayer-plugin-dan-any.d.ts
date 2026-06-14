@@ -19,6 +19,22 @@ export type Mode = 'Normal' | 'Reverse' | 'Top' | 'Bottom'
 export type Color = string | number
 
 /**
+ * 发射器字号选项
+ */
+export interface EmitterFontSize {
+  size: number
+  text?: string
+}
+
+/**
+ * 发射器弹幕位置选项
+ */
+export interface EmitterMode {
+  type: UDanmaku['mode']
+  text?: string
+}
+
+/**
  * 热力图配置
  */
 export interface HeatmapOption {
@@ -146,6 +162,11 @@ export interface Renderer {
   load?: (udanmakus: UDanmaku[]) => unknown
 
   /**
+   * 实时发送一条弹幕，只进入当前渲染队列
+   */
+  emit?: (danmaku: UDanmaku) => unknown
+
+  /**
    * 实时改变渲染器配置
    */
   config?: (option: Option) => unknown
@@ -263,9 +284,34 @@ export interface Option {
   emitter?: boolean
 
   /**
-   * 保留的输入长度配置，当前插件不提供发送控件
+   * 发送弹幕的默认字段；UI 发送时会用这些字段补齐完整 UDanmaku
+   */
+  emitDefaults?: Partial<Omit<UDanmaku, 'ctime' | 'DMID'>>
+
+  /**
+   * 发射器字号列表
+   */
+  emitterFontSizes?: EmitterFontSize[]
+
+  /**
+   * 发射器颜色列表，使用 DanUni 的 number 颜色值
+   */
+  emitterColors?: number[]
+
+  /**
+   * 发射器弹幕位置列表
+   */
+  emitterModes?: EmitterMode[]
+
+  /**
+   * 弹幕输入框最大长度，范围在[1 ~ 1000]
    */
   maxLength?: number
+
+  /**
+   * 发送后输入框锁定时间，范围在[1 ~ 60]
+   */
+  lockTime?: number
 
   /**
    * 当播放器宽度小于此值时，控制面板置于播放器底部
@@ -276,6 +322,16 @@ export interface Option {
    * 弹幕载入前的过滤器，只支持返回布尔值
    */
   filter?: (danmaku: UDanmaku) => boolean
+
+  /**
+   * 弹幕发送前的过滤器，支持返回 Promise
+   */
+  beforeEmit?: (danmaku: UDanmaku) => boolean | Promise<boolean>
+
+  /**
+   * 弹幕发送处理器，支持返回 Promise；返回 false 时不会进入本地渲染队列
+   */
+  emit?: (danmaku: UDanmaku) => unknown | Promise<unknown>
 
   /**
    * 弹幕显示前的过滤器，支持返回 Promise
@@ -295,6 +351,11 @@ export interface Result {
    * 重载弹幕源，或者切换新弹幕
    */
   load: (danmuku?: DanmakuInput) => Promise<Result>
+
+  /**
+   * 发送一条完整 UDanmaku，只进入当前渲染队列；progress 为 int32 毫秒
+   */
+  emit: (danmaku: UDanmaku) => Promise<Result>
 
   /**
    * 实时改变弹幕配置
