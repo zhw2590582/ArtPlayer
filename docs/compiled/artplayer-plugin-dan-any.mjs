@@ -1,5 +1,5 @@
 /*!
- * artplayer-plugin-dan-any.js v0.6.0
+ * artplayer-plugin-dan-any.js v0.6.1
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
@@ -30522,10 +30522,7 @@ async function loadIterable(udb, source) {
 }
 async function resolveSource(udb, source, option) {
   if (isUniChunk(source)) {
-    return {
-      chunk: source,
-      owned: false
-    };
+    return loadIterable(udb, await source.$danmakus);
   }
   if (isFile(source)) {
     return loadByName(udb, getHandlerList(source, option), source.name, source);

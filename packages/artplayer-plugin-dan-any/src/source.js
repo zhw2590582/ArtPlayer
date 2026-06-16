@@ -227,10 +227,9 @@ async function loadIterable(udb, source) {
 
 export async function resolveSource(udb, source, option) {
   if (isUniChunk(source)) {
-    return {
-      chunk: source,
-      owned: false,
-    }
+    // 提取 $danmakus 创建新的 pure 后端 UniChunk
+    // 这样可以解决传入的弹幕为 drizzle 等其它后端的 UniChunk 的情况
+    return loadIterable(udb, await source.$danmakus)
   }
 
   if (isFile(source)) {
