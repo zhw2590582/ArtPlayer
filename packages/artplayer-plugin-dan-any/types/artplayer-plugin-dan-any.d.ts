@@ -250,6 +250,20 @@ export interface Option {
   modes?: Mode[]
 
   /**
+   * 类型过滤选项，color 和 count 分别控制是否显示彩色弹幕和计数弹幕（如 B 站的「1条精彩评论」），当某个选项为 false 时会统一使用默认颜色或隐藏计数弹幕
+   */
+  typeOptions: {
+    /**
+     * 是否显示彩色弹幕（false 时统一使用默认颜色）
+     */
+    color: true,
+    /**
+     * 是否显示计数弹幕
+     */
+    count: true,
+  },
+
+  /**
    * 弹幕字体大小，支持像素数字、百分比和源文件字号
    */
   fontSize?: number | `${number}%` | 'source'
@@ -348,6 +362,21 @@ export interface Option {
    * 自定义弹幕渲染器
    */
   renderer?: Renderer | ((context: RendererContext) => Renderer)
+
+  /**
+   * 弹幕点赞回调函数
+   */
+  onLike?: (danmaku: UDanmaku) => void | Promise<void>
+
+  /**
+   * 弹幕举报回调函数
+   */
+  onReport?: (danmaku: UDanmaku) => void | Promise<void>
+
+  /**
+   * 是否启用弹幕点击交互（默认 true）
+   */
+  enableInteraction?: boolean
 }
 
 export interface Result {

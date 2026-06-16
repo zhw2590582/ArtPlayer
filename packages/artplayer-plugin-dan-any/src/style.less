@@ -498,3 +498,178 @@
     }
   }
 }
+
+// 弹幕交互样式
+.art-danmuku {
+  .apda-danmaku {
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1 !important;
+    }
+
+    &.apda-danmaku-active {
+      z-index: 1000 !important;
+      opacity: 1 !important;
+      filter: drop-shadow(0 0 8px rgba(0, 161, 214, 0.6));
+    }
+  }
+}
+
+// Tooltip 样式
+.apda-danmaku-tooltip {
+  position: absolute;
+  z-index: 10000;
+  min-width: 200px;
+  max-width: 320px;
+  padding: 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.92);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  animation: apdaTooltipFadeIn 0.2s ease;
+  pointer-events: all;
+  user-select: none;
+
+  @media (max-width: 768px) {
+    min-width: 160px;
+    max-width: 280px;
+    padding: 10px;
+  }
+}
+
+@keyframes apdaTooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.apda-tooltip-content {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+.apda-tooltip-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-around;
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+}
+
+.apda-tooltip-btn {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    transition: transform 0.2s ease;
+  }
+
+  span {
+    white-space: nowrap;
+  }
+
+  &:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: @highlight;
+    transform: translateY(-1px);
+
+    svg {
+      transform: scale(1.1);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.apda-tooltip-btn-active {
+    color: @highlight;
+    background: rgba(0, 161, 214, 0.15);
+    border-color: @highlight;
+  }
+
+  &.apda-tooltip-btn-success {
+    color: #52c41a;
+    background: rgba(82, 196, 26, 0.15);
+    border-color: #52c41a;
+  }
+
+  &.apda-tooltip-btn-error {
+    color: #ff4d4f;
+    background: rgba(255, 77, 79, 0.15);
+    border-color: #ff4d4f;
+  }
+
+  @media (max-width: 768px) {
+    padding: 6px 4px;
+    font-size: 10px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+// 移动端触摸优化
+@media (hover: none) and (pointer: coarse) {
+  .apda-tooltip-btn {
+    &:hover {
+      transform: none;
+
+      svg {
+        transform: none;
+      }
+    }
+
+    &:active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(0.95);
+    }
+  }
+}
+
+// 禁用交互时隐藏光标
+.art-danmuku[data-interaction-disabled='true'] {
+  .apda-danmaku {
+    pointer-events: none;
+    cursor: default;
+  }
+}

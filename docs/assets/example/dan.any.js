@@ -177,6 +177,37 @@ const art = new Artplayer({
       plugins: [
         mergePlugin,
       ], // 载入弹幕后按顺序执行的 @dan-uni/dan-any 插件列表
+      // 弹幕交互配置
+      enableInteraction: true, // 启用弹幕点击交互（默认 true）
+      // 点赞回调 - 配置后会显示点赞按钮
+      onLike: async (danmaku) => {
+        console.log('点赞弹幕:', danmaku.content)
+        // 模拟 API 调用
+        await new Promise(resolve => setTimeout(resolve, 500))
+        // 实际使用时可以发送到服务器
+        // await fetch('/api/danmaku/like', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ id: danmaku.DMID })
+        // })
+      },
+      // 举报回调 - 配置后会显示举报按钮
+      onReport: async (danmaku) => {
+        console.log('举报弹幕:', danmaku.content)
+        // 确认对话框
+        if (confirm(`确认举报弹幕"${danmaku.content}"?`)) {
+          // 发送举报请求
+          // await fetch('/api/danmaku/report', {
+          //   method: 'POST',
+          //   headers: { 'Content-Type': 'application/json' },
+          //   body: JSON.stringify({
+          //     id: danmaku.DMID,
+          //     reason: 'inappropriate'
+          //   })
+          // })
+          alert('举报已提交')
+        }
+      },
     }),
   ],
 })
@@ -187,6 +218,18 @@ art.on('artplayerPluginDanAny:loaded', (udanmakus) => {
 
 art.on('artplayerPluginDanAny:emit', (danmaku) => {
   console.info('弹幕发送完成', danmaku)
+})
+
+art.on('artplayerPluginDanAny:like', (danmaku) => {
+  console.log('有弹幕被点赞了', danmaku.content)
+})
+
+art.on('artplayerPluginDanAny:copy', (danmaku) => {
+  console.log('有弹幕被复制了', danmaku.content)
+})
+
+art.on('artplayerPluginDanAny:report', (danmaku) => {
+  console.log('有弹幕被举报了', danmaku.content)
 })
 
 art.on('artplayerPluginDanAny:error', (error) => {

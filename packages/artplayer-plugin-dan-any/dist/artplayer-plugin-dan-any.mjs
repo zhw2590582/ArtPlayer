@@ -16894,7 +16894,8 @@ const BASE_CSS_TEXT = `
   user-select: none;
   position: absolute;
   white-space: pre;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
   perspective: 500px;
   display: inline-block;
   will-change: transform;
@@ -17216,6 +17217,9 @@ function normalizeRendererOption(option = {}) {
     beforeEmit: () => true,
     emit: () => true,
     beforeVisible: () => true,
+    onLike: void 0,
+    onReport: void 0,
+    enableInteraction: true,
     ...option
   };
   normalized.speed = clamp$1(Number(normalized.speed) || 5, 1, 10);
@@ -17236,6 +17240,9 @@ function normalizeRendererOption(option = {}) {
   normalized.beforeEmit = typeof normalized.beforeEmit === "function" ? normalized.beforeEmit : () => true;
   normalized.emit = typeof normalized.emit === "function" ? normalized.emit : () => true;
   normalized.beforeVisible = typeof normalized.beforeVisible === "function" ? normalized.beforeVisible : () => true;
+  normalized.onLike = typeof normalized.onLike === "function" ? normalized.onLike : void 0;
+  normalized.onReport = typeof normalized.onReport === "function" ? normalized.onReport : void 0;
+  normalized.enableInteraction = normalized.enableInteraction !== false;
   return normalized;
 }
 class DanAnyDomRenderer {
@@ -17255,11 +17262,19 @@ class DanAnyDomRenderer {
     this.isHide = false;
     this.destroyed = false;
     this.option = normalizeRendererOption(option);
+    this.interaction = {
+      activeDanmaku: null,
+      activeState: null,
+      $tooltip: null
+    };
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
     this.reset = this.reset.bind(this);
     this.resize = this.resize.bind(this);
     this.destroy = this.destroy.bind(this);
+    this.onDanmakuClick = this.onDanmakuClick.bind(this);
+    this.onDocumentClick = this.onDocumentClick.bind(this);
+    this.onTooltipAction = this.onTooltipAction.bind(this);
     art.on("video:play", this.start);
     art.on("video:playing", this.start);
     art.on("video:pause", this.stop);
@@ -17268,6 +17283,12 @@ class DanAnyDomRenderer {
     art.on("restart", this.reset);
     art.on("resize", this.resize);
     art.on("destroy", this.destroy);
+    if (this.option.enableInteraction) {
+      this.$danmuku.addEventListener("click", this.onDanmakuClick);
+      document.addEventListener("click", this.onDocumentClick);
+    } else {
+      this.$danmuku.dataset.interactionDisabled = "true";
+    }
     if (this.option.visible)
       this.show();
     else
@@ -17652,6 +17673,7 @@ class DanAnyDomRenderer {
     return this;
   }
   resize() {
+    this.closeTooltip();
     this.reset();
     this.art.emit("artplayerPluginDanAny:resize");
     return this;
@@ -17662,6 +17684,8 @@ class DanAnyDomRenderer {
       const state = this.getState(danmaku);
       const $ref = state.$ref;
       if (!$ref)
+        return;
+      if ($ref.dataset.interactionPaused === "true")
         return;
       this.setState(danmaku, "emit");
       state.lastStartTime = Date.now();
@@ -17691,6 +17715,8 @@ class DanAnyDomRenderer {
       const state = this.getState(danmaku);
       const $ref = state.$ref;
       if (!$ref)
+        return;
+      if ($ref.dataset.interactionPaused === "true")
         return;
       this.setState(danmaku, "stop");
       if (getDanmakuMerge(danmaku))
@@ -17734,12 +17760,285 @@ class DanAnyDomRenderer {
     this.art.emit("artplayerPluginDanAny:hide");
     return this;
   }
+  // 交互方法：暂停弹幕
+  pauseDanmaku(danmaku) {
+    const state = this.getState(danmaku);
+    const $ref = state.$ref;
+    if (!$ref || state.status !== "emit" && state.status !== "stop")
+      return;
+    const merge2 = getDanmakuMerge(danmaku);
+    state.pausedAt = Date.now();
+    state.wasPaused = true;
+    $ref.dataset.interactionPaused = "true";
+    if (state.status === "emit" && !merge2 && (danmaku.mode === "Normal" || danmaku.mode === "Reverse")) {
+      const computedStyle = window.getComputedStyle($ref);
+      const matrix = new DOMMatrix(computedStyle.transform);
+      $ref.style.transition = "none";
+      $ref.style.transform = `translateX(${matrix.m41}px)`;
+    }
+    if (state.status === "emit" && state.lastStartTime) {
+      const elapsed = (Date.now() - state.lastStartTime) / 1e3;
+      state.restTime -= elapsed;
+    }
+  }
+  // 交互方法：恢复弹幕
+  resumeDanmaku(danmaku) {
+    const state = this.getState(danmaku);
+    const $ref = state.$ref;
+    if (!$ref || !state.wasPaused)
+      return;
+    const merge2 = getDanmakuMerge(danmaku);
+    const { clientWidth } = this.$player;
+    state.lastStartTime = Date.now();
+    state.wasPaused = false;
+    delete $ref.dataset.interactionPaused;
+    if (state.status === "stop" && !this.isStop) {
+      this.setState(danmaku, "emit");
+    }
+    if (!this.isStop && !merge2 && danmaku.mode === "Normal") {
+      const currentLeft = this.getLeft($ref) - this.getLeft(this.$player);
+      const distance = currentLeft + $ref.clientWidth;
+      $ref.style.transform = `translateX(${-distance}px)`;
+      $ref.style.transition = `transform ${state.restTime}s linear 0s`;
+    } else if (!this.isStop && !merge2 && danmaku.mode === "Reverse") {
+      const currentLeft = this.getLeft($ref) - this.getLeft(this.$player);
+      const distance = clientWidth - currentLeft;
+      $ref.style.transform = `translateX(${distance}px)`;
+      $ref.style.transition = `transform ${state.restTime}s linear 0s`;
+    }
+    if (merge2 && state.mergeCountAnimation) {
+      state.mergeCountAnimation.startTime = Date.now() - state.mergeCountAnimation.elapsed;
+    }
+  }
+  // 交互方法：创建按钮
+  createButton(action, text2, svgIcon) {
+    const $btn = document.createElement("button");
+    $btn.className = "apda-tooltip-btn";
+    $btn.dataset.action = action;
+    $btn.type = "button";
+    $btn.title = text2;
+    $btn.innerHTML = `${svgIcon}<span>${text2}</span>`;
+    return $btn;
+  }
+  // 交互方法：创建tooltip
+  createTooltip(danmaku, _$ref) {
+    const $tooltip = document.createElement("div");
+    $tooltip.className = "apda-danmaku-tooltip";
+    const $content = document.createElement("div");
+    $content.className = "apda-tooltip-content";
+    $content.textContent = danmaku.content;
+    $tooltip.appendChild($content);
+    const $actions = document.createElement("div");
+    $actions.className = "apda-tooltip-actions";
+    const buttons = [];
+    if (typeof this.option.onLike === "function") {
+      buttons.push(this.createButton("like", "点赞", '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>'));
+    }
+    buttons.push(this.createButton("copy", "复制", '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>'));
+    if (typeof this.option.onReport === "function") {
+      buttons.push(this.createButton("report", "举报", '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>'));
+    }
+    buttons.forEach(($btn) => $actions.appendChild($btn));
+    $tooltip.appendChild($actions);
+    $tooltip.addEventListener("click", (e4) => {
+      e4.stopPropagation();
+      const $btn = e4.target.closest("[data-action]");
+      if ($btn)
+        this.onTooltipAction($btn.dataset.action, danmaku);
+    });
+    return $tooltip;
+  }
+  // 交互方法：定位tooltip
+  positionTooltip($tooltip, $ref) {
+    const refRect = $ref.getBoundingClientRect();
+    const playerRect = this.$player.getBoundingClientRect();
+    const tooltipRect = $tooltip.getBoundingClientRect();
+    let top = refRect.bottom - playerRect.top + 8;
+    let left = refRect.left - playerRect.left + refRect.width / 2 - tooltipRect.width / 2;
+    const minLeft = 10;
+    const maxLeft = playerRect.width - tooltipRect.width - 10;
+    left = Math.max(minLeft, Math.min(left, maxLeft));
+    const maxTop = playerRect.height - tooltipRect.height - 10;
+    if (top > maxTop) {
+      top = refRect.top - playerRect.top - tooltipRect.height - 8;
+    }
+    if (top < 10) {
+      top = refRect.top - playerRect.top;
+      left = refRect.right - playerRect.left + 8;
+      if (left + tooltipRect.width > playerRect.width - 10) {
+        left = refRect.left - playerRect.left - tooltipRect.width - 8;
+      }
+    }
+    $tooltip.style.top = `${Math.max(10, top)}px`;
+    $tooltip.style.left = `${left}px`;
+  }
+  // 交互方法：点击弹幕
+  onDanmakuClick(event) {
+    const $ref = event.target.closest(".apda-danmaku");
+    if (!$ref)
+      return;
+    event.stopPropagation();
+    let targetDanmaku = null;
+    this.filter("emit", (danmaku) => {
+      const state = this.getState(danmaku);
+      if (state.$ref === $ref) {
+        targetDanmaku = danmaku;
+      }
+    });
+    if (!targetDanmaku) {
+      this.filter("stop", (danmaku) => {
+        const state = this.getState(danmaku);
+        if (state.$ref === $ref) {
+          targetDanmaku = danmaku;
+        }
+      });
+    }
+    if (!targetDanmaku)
+      return;
+    if (this.interaction.activeDanmaku === targetDanmaku) {
+      this.closeTooltip();
+      return;
+    }
+    this.closeTooltip();
+    this.interaction.activeDanmaku = targetDanmaku;
+    this.interaction.activeState = this.getState(targetDanmaku);
+    this.pauseDanmaku(targetDanmaku);
+    const $tooltip = this.createTooltip(targetDanmaku, $ref);
+    this.interaction.$tooltip = $tooltip;
+    this.$danmuku.appendChild($tooltip);
+    requestAnimationFrame(() => {
+      this.positionTooltip($tooltip, $ref);
+    });
+    $ref.classList.add("apda-danmaku-active");
+  }
+  // 交互方法：关闭tooltip
+  closeTooltip() {
+    if (!this.interaction.activeDanmaku)
+      return;
+    this.resumeDanmaku(this.interaction.activeDanmaku);
+    const state = this.interaction.activeState;
+    if (state?.$ref) {
+      state.$ref.classList.remove("apda-danmaku-active");
+    }
+    if (this.interaction.$tooltip) {
+      this.interaction.$tooltip.remove();
+      this.interaction.$tooltip = null;
+    }
+    this.interaction.activeDanmaku = null;
+    this.interaction.activeState = null;
+  }
+  // 交互方法：文档点击
+  onDocumentClick(event) {
+    if (!this.$danmuku.contains(event.target)) {
+      this.closeTooltip();
+    }
+  }
+  // 交互方法：按钮操作
+  onTooltipAction(action, danmaku) {
+    const $tooltip = this.interaction.$tooltip;
+    if (!$tooltip)
+      return;
+    const $btn = $tooltip.querySelector(`[data-action="${action}"]`);
+    switch (action) {
+      case "like":
+        this.handleLike(danmaku, $btn);
+        break;
+      case "copy":
+        this.handleCopy(danmaku, $btn);
+        break;
+      case "report":
+        this.handleReport(danmaku, $btn);
+        break;
+    }
+  }
+  // 交互方法：处理点赞
+  async handleLike(danmaku, $btn) {
+    if (!this.option.onLike)
+      return;
+    $btn?.classList.add("apda-tooltip-btn-active");
+    this.art.emit("artplayerPluginDanAny:like", danmaku);
+    try {
+      await this.option.onLike(danmaku);
+    } catch (error2) {
+      this.art.emit("artplayerPluginDanAny:error", error2);
+    }
+    setTimeout(() => {
+      $btn?.classList.remove("apda-tooltip-btn-active");
+      this.closeTooltip();
+    }, 300);
+  }
+  // 交互方法：处理复制
+  async handleCopy(danmaku, $btn) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(danmaku.content);
+      } else {
+        this.fallbackCopy(danmaku.content);
+      }
+      if ($btn) {
+        const $span = $btn.querySelector("span");
+        const originalText = $span.textContent;
+        $span.textContent = "已复制";
+        $btn.classList.add("apda-tooltip-btn-success");
+        setTimeout(() => {
+          $span.textContent = originalText;
+          $btn.classList.remove("apda-tooltip-btn-success");
+          this.closeTooltip();
+        }, 1e3);
+      }
+      this.art.emit("artplayerPluginDanAny:copy", danmaku);
+    } catch (error2) {
+      console.error("Copy failed:", error2);
+      if ($btn) {
+        const $span = $btn.querySelector("span");
+        const originalText = $span.textContent;
+        $span.textContent = "复制失败";
+        $btn.classList.add("apda-tooltip-btn-error");
+        setTimeout(() => {
+          $span.textContent = originalText;
+          $btn.classList.remove("apda-tooltip-btn-error");
+        }, 1e3);
+      }
+    }
+  }
+  // 交互方法：降级复制方案
+  fallbackCopy(text2) {
+    const $textarea = document.createElement("textarea");
+    $textarea.value = text2;
+    $textarea.style.position = "fixed";
+    $textarea.style.opacity = "0";
+    document.body.appendChild($textarea);
+    $textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild($textarea);
+  }
+  // 交互方法：处理举报
+  async handleReport(danmaku, $btn) {
+    if (!this.option.onReport)
+      return;
+    $btn?.classList.add("apda-tooltip-btn-active");
+    this.art.emit("artplayerPluginDanAny:report", danmaku);
+    try {
+      await this.option.onReport(danmaku);
+    } catch (error2) {
+      this.art.emit("artplayerPluginDanAny:error", error2);
+    }
+    setTimeout(() => {
+      $btn?.classList.remove("apda-tooltip-btn-active");
+      this.closeTooltip();
+    }, 300);
+  }
   destroy() {
     if (this.destroyed)
       return;
     this.destroyed = true;
+    this.closeTooltip();
     this.stop();
     this.clear();
+    if (this.option.enableInteraction) {
+      this.$danmuku.removeEventListener("click", this.onDanmakuClick);
+      document.removeEventListener("click", this.onDocumentClick);
+    }
     this.art.off("video:play", this.start);
     this.art.off("video:playing", this.start);
     this.art.off("video:pause", this.stop);
@@ -29574,7 +29873,7 @@ async function resolveSource(udb, source, option) {
     return loadIterable(udb, source);
   throw new Error("Unsupported danmaku source");
 }
-const style = ".art-danmuku .apda-danmaku {\n  box-sizing: border-box;\n  max-width: none;\n}\n.artplayer-plugin-dan-any {\n  position: relative;\n  z-index: 99;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 32px;\n  min-width: 0;\n  flex-shrink: 0;\n  gap: 10px;\n  color: #fff;\n  font-size: 12px;\n  font-weight: 300;\n}\n.artplayer-plugin-dan-any button {\n  appearance: none;\n  border: 0;\n  padding: 0;\n  color: inherit;\n  font: inherit;\n  background: transparent;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-toggle,\n.artplayer-plugin-dan-any .apda-config-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  line-height: 1;\n}\n.artplayer-plugin-dan-any .apd-icon {\n  cursor: pointer;\n  opacity: 0.75;\n  transition: all 0.2s ease;\n  fill: #fff;\n}\n.artplayer-plugin-dan-any .apd-icon:hover {\n  opacity: 1;\n}\n.artplayer-plugin-dan-any .apda-config {\n  position: relative;\n  display: flex;\n}\n.artplayer-plugin-dan-any .apda-config-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 320px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n  overflow: hidden;\n}\n.artplayer-plugin-dan-any .apda-config-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px 10px 22px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.artplayer-plugin-dan-any .apda-config:hover .apda-config-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-config-mode,\n.artplayer-plugin-dan-any .apda-config-slider,\n.artplayer-plugin-dan-any .apda-config-other {\n  margin-bottom: 15px;\n}\n.artplayer-plugin-dan-any .apda-config-slider:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-label {\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-modes {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  margin-top: 5px;\n  gap: 10px 20px;\n}\n.artplayer-plugin-dan-any .apda-mode {\n  display: block;\n  text-align: center;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-mode:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-config-other {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n}\n.artplayer-plugin-dan-any .apda-other {\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  gap: 2px;\n}\n.artplayer-plugin-dan-any .apda-other:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apd-check-on,\n.artplayer-plugin-dan-any .apd-check-off {\n  width: 16px;\n  height: 16px;\n}\n.artplayer-plugin-dan-any .apd-check-on {\n  display: none;\n}\n.artplayer-plugin-dan-any .apd-check-off {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-emitter {\n  display: flex;\n  align-items: center;\n  width: 260px;\n  height: 26px;\n  min-width: 160px;\n  flex: none;\n  border-radius: 5px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-style {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 32px;\n  height: 100%;\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-style-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n}\n.artplayer-plugin-dan-any .apda-style-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 220px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n}\n.artplayer-plugin-dan-any .apda-style-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n}\n.artplayer-plugin-dan-any .apda-style:hover .apda-style-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-style-section {\n  margin-bottom: 14px;\n}\n.artplayer-plugin-dan-any .apda-style-section:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-style-sizes,\n.artplayer-plugin-dan-any .apda-style-modes {\n  display: flex;\n  align-items: center;\n  margin-top: 7px;\n  gap: 10px;\n}\n.artplayer-plugin-dan-any .apda-style-size {\n  padding: 2px 6px;\n  border-radius: 3px;\n  color: rgba(255, 255, 255, 0.8);\n  background-color: rgba(255, 255, 255, 0.12);\n}\n.artplayer-plugin-dan-any .apda-style-size:hover,\n.artplayer-plugin-dan-any .apda-style-size[data-active='true'] {\n  color: #fff;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode {\n  display: block;\n  text-align: center;\n}\n.artplayer-plugin-dan-any .apda-style-mode .apd-icon {\n  display: block;\n  margin: 0 auto;\n}\n.artplayer-plugin-dan-any .apda-style-mode span {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-style-mode:hover,\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] path {\n  fill: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-colors {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 7px;\n  gap: 8px;\n}\n.artplayer-plugin-dan-any .apda-color {\n  width: 16px;\n  height: 16px;\n  border-radius: 2px;\n  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);\n}\n.artplayer-plugin-dan-any .apda-color[data-active='true'] {\n  border: 1px solid #000;\n  box-shadow: 0 0 0 1px #fff;\n}\n.artplayer-plugin-dan-any .apda-input {\n  width: auto;\n  min-width: 0;\n  height: 100%;\n  flex: 1;\n  border: 0;\n  outline: none;\n  color: #fff;\n  line-height: 1;\n  background-color: transparent;\n}\n.artplayer-plugin-dan-any .apda-input::placeholder {\n  color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-send {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 60px;\n  height: 100%;\n  flex-shrink: 0;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  text-shadow: none;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-send[data-lock='true'],\n.artplayer-plugin-dan-any .apda-send[data-sending='true'] {\n  color: #666;\n  cursor: not-allowed;\n  background-color: #e7e7e7;\n}\n.artplayer-plugin-dan-any .apda-config-slider {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n.artplayer-plugin-dan-any .apda-value {\n  width: 32px;\n  flex-shrink: 0;\n  text-align: right;\n}\n.artplayer-plugin-dan-any .apda-slider {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 20px;\n  flex: 1;\n  cursor: pointer;\n  touch-action: none;\n}\n.artplayer-plugin-dan-any .apda-slider-line {\n  position: relative;\n  width: 100%;\n  height: 2px;\n  overflow: hidden;\n  border-radius: 3px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-slider-points {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.artplayer-plugin-dan-any .apda-slider-point {\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-slider-progress {\n  width: 0%;\n  height: 100%;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-slider-dot {\n  position: absolute;\n  left: 0%;\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: #00a1d6;\n  transform: translateX(-6px);\n}\n.artplayer-plugin-dan-any .apda-slider-steps {\n  position: absolute;\n  bottom: -12px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: calc(100% + 32px);\n  color: #777;\n}\n.artplayer-plugin-dan-any .apda-slider-step {\n  width: 36px;\n  flex-shrink: 0;\n  text-align: center;\n  scale: 0.95;\n}\n.art-controls-center .artplayer-plugin-dan-any {\n  width: auto;\n}\n.art-controls-left .artplayer-plugin-dan-any {\n  align-self: center;\n  height: var(--art-control-height);\n}\n.art-fullscreen .artplayer-plugin-dan-any,\n.art-fullscreen-web .artplayer-plugin-dan-any {\n  height: 38px;\n  gap: 16px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen .artplayer-plugin-dan-any .apda-config-button,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-config-button {\n  width: 28px;\n  height: 28px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-emitter,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-emitter {\n  width: 400px;\n  height: 30px;\n}\n.art-video-player > .artplayer-plugin-dan-any {\n  position: absolute;\n  left: 10px;\n  right: 10px;\n  bottom: -40px;\n}\n.art-video-player:has(> .artplayer-plugin-dan-any) {\n  margin-bottom: 40px;\n}\n[data-dan-any-emitter='false'] .apda-emitter,\n.artplayer-plugin-dan-any[data-dan-any-emitter='false'] .apda-emitter {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off {\n  display: none;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'],\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] {\n  color: #00a1d6;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off {\n  display: none;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'],\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] {\n  color: #00a1d6;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off {\n  display: none;\n}\n";
+const style = ".art-danmuku .apda-danmaku {\n  box-sizing: border-box;\n  max-width: none;\n}\n.artplayer-plugin-dan-any {\n  position: relative;\n  z-index: 99;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 32px;\n  min-width: 0;\n  flex-shrink: 0;\n  gap: 10px;\n  color: #fff;\n  font-size: 12px;\n  font-weight: 300;\n}\n.artplayer-plugin-dan-any button {\n  appearance: none;\n  border: 0;\n  padding: 0;\n  color: inherit;\n  font: inherit;\n  background: transparent;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-toggle,\n.artplayer-plugin-dan-any .apda-config-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  line-height: 1;\n}\n.artplayer-plugin-dan-any .apd-icon {\n  cursor: pointer;\n  opacity: 0.75;\n  transition: all 0.2s ease;\n  fill: #fff;\n}\n.artplayer-plugin-dan-any .apd-icon:hover {\n  opacity: 1;\n}\n.artplayer-plugin-dan-any .apda-config {\n  position: relative;\n  display: flex;\n}\n.artplayer-plugin-dan-any .apda-config-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 320px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n  overflow: hidden;\n}\n.artplayer-plugin-dan-any .apda-config-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px 10px 22px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.artplayer-plugin-dan-any .apda-config:hover .apda-config-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-config-mode,\n.artplayer-plugin-dan-any .apda-config-slider,\n.artplayer-plugin-dan-any .apda-config-other {\n  margin-bottom: 15px;\n}\n.artplayer-plugin-dan-any .apda-config-slider:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-label {\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-modes {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  margin-top: 5px;\n  gap: 10px 20px;\n}\n.artplayer-plugin-dan-any .apda-mode {\n  display: block;\n  text-align: center;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-mode:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-config-other {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n}\n.artplayer-plugin-dan-any .apda-other {\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  gap: 2px;\n}\n.artplayer-plugin-dan-any .apda-other:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apd-check-on,\n.artplayer-plugin-dan-any .apd-check-off {\n  width: 16px;\n  height: 16px;\n}\n.artplayer-plugin-dan-any .apd-check-on {\n  display: none;\n}\n.artplayer-plugin-dan-any .apd-check-off {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-emitter {\n  display: flex;\n  align-items: center;\n  width: 260px;\n  height: 26px;\n  min-width: 160px;\n  flex: none;\n  border-radius: 5px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-style {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 32px;\n  height: 100%;\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-style-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n}\n.artplayer-plugin-dan-any .apda-style-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 220px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n}\n.artplayer-plugin-dan-any .apda-style-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n}\n.artplayer-plugin-dan-any .apda-style:hover .apda-style-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-style-section {\n  margin-bottom: 14px;\n}\n.artplayer-plugin-dan-any .apda-style-section:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-style-sizes,\n.artplayer-plugin-dan-any .apda-style-modes {\n  display: flex;\n  align-items: center;\n  margin-top: 7px;\n  gap: 10px;\n}\n.artplayer-plugin-dan-any .apda-style-size {\n  padding: 2px 6px;\n  border-radius: 3px;\n  color: rgba(255, 255, 255, 0.8);\n  background-color: rgba(255, 255, 255, 0.12);\n}\n.artplayer-plugin-dan-any .apda-style-size:hover,\n.artplayer-plugin-dan-any .apda-style-size[data-active='true'] {\n  color: #fff;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode {\n  display: block;\n  text-align: center;\n}\n.artplayer-plugin-dan-any .apda-style-mode .apd-icon {\n  display: block;\n  margin: 0 auto;\n}\n.artplayer-plugin-dan-any .apda-style-mode span {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-style-mode:hover,\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] path {\n  fill: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-colors {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 7px;\n  gap: 8px;\n}\n.artplayer-plugin-dan-any .apda-color {\n  width: 16px;\n  height: 16px;\n  border-radius: 2px;\n  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);\n}\n.artplayer-plugin-dan-any .apda-color[data-active='true'] {\n  border: 1px solid #000;\n  box-shadow: 0 0 0 1px #fff;\n}\n.artplayer-plugin-dan-any .apda-input {\n  width: auto;\n  min-width: 0;\n  height: 100%;\n  flex: 1;\n  border: 0;\n  outline: none;\n  color: #fff;\n  line-height: 1;\n  background-color: transparent;\n}\n.artplayer-plugin-dan-any .apda-input::placeholder {\n  color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-send {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 60px;\n  height: 100%;\n  flex-shrink: 0;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  text-shadow: none;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-send[data-lock='true'],\n.artplayer-plugin-dan-any .apda-send[data-sending='true'] {\n  color: #666;\n  cursor: not-allowed;\n  background-color: #e7e7e7;\n}\n.artplayer-plugin-dan-any .apda-config-slider {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n.artplayer-plugin-dan-any .apda-value {\n  width: 32px;\n  flex-shrink: 0;\n  text-align: right;\n}\n.artplayer-plugin-dan-any .apda-slider {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 20px;\n  flex: 1;\n  cursor: pointer;\n  touch-action: none;\n}\n.artplayer-plugin-dan-any .apda-slider-line {\n  position: relative;\n  width: 100%;\n  height: 2px;\n  overflow: hidden;\n  border-radius: 3px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-slider-points {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.artplayer-plugin-dan-any .apda-slider-point {\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-slider-progress {\n  width: 0%;\n  height: 100%;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-slider-dot {\n  position: absolute;\n  left: 0%;\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: #00a1d6;\n  transform: translateX(-6px);\n}\n.artplayer-plugin-dan-any .apda-slider-steps {\n  position: absolute;\n  bottom: -12px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: calc(100% + 32px);\n  color: #777;\n}\n.artplayer-plugin-dan-any .apda-slider-step {\n  width: 36px;\n  flex-shrink: 0;\n  text-align: center;\n  scale: 0.95;\n}\n.art-controls-center .artplayer-plugin-dan-any {\n  width: auto;\n}\n.art-controls-left .artplayer-plugin-dan-any {\n  align-self: center;\n  height: var(--art-control-height);\n}\n.art-fullscreen .artplayer-plugin-dan-any,\n.art-fullscreen-web .artplayer-plugin-dan-any {\n  height: 38px;\n  gap: 16px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen .artplayer-plugin-dan-any .apda-config-button,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-config-button {\n  width: 28px;\n  height: 28px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-emitter,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-emitter {\n  width: 400px;\n  height: 30px;\n}\n.art-video-player > .artplayer-plugin-dan-any {\n  position: absolute;\n  left: 10px;\n  right: 10px;\n  bottom: -40px;\n}\n.art-video-player:has(> .artplayer-plugin-dan-any) {\n  margin-bottom: 40px;\n}\n[data-dan-any-emitter='false'] .apda-emitter,\n.artplayer-plugin-dan-any[data-dan-any-emitter='false'] .apda-emitter {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off {\n  display: none;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'],\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] {\n  color: #00a1d6;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off {\n  display: none;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'],\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] {\n  color: #00a1d6;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off {\n  display: none;\n}\n.art-danmuku .apda-danmaku {\n  transition: opacity 0.2s ease;\n}\n.art-danmuku .apda-danmaku:hover {\n  opacity: 1 !important;\n}\n.art-danmuku .apda-danmaku.apda-danmaku-active {\n  z-index: 1000 !important;\n  opacity: 1 !important;\n  filter: drop-shadow(0 0 8px rgba(0, 161, 214, 0.6));\n}\n.apda-danmaku-tooltip {\n  position: absolute;\n  z-index: 10000;\n  min-width: 200px;\n  max-width: 320px;\n  padding: 12px;\n  border-radius: 6px;\n  background: rgba(0, 0, 0, 0.92);\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);\n  backdrop-filter: blur(10px);\n  animation: apdaTooltipFadeIn 0.2s ease;\n  pointer-events: all;\n  user-select: none;\n}\n@media (max-width: 768px) {\n  .apda-danmaku-tooltip {\n    min-width: 160px;\n    max-width: 280px;\n    padding: 10px;\n  }\n}\n@keyframes apdaTooltipFadeIn {\n  from {\n    opacity: 0;\n    transform: translateY(-4px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n.apda-tooltip-content {\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n  color: #fff;\n  font-size: 13px;\n  line-height: 1.5;\n  word-break: break-word;\n}\n@media (max-width: 768px) {\n  .apda-tooltip-content {\n    font-size: 12px;\n    margin-bottom: 8px;\n    padding-bottom: 8px;\n  }\n}\n.apda-tooltip-actions {\n  display: flex;\n  gap: 8px;\n  align-items: center;\n  justify-content: space-around;\n}\n@media (max-width: 768px) {\n  .apda-tooltip-actions {\n    gap: 6px;\n  }\n}\n.apda-tooltip-btn {\n  display: flex;\n  flex: 1;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  gap: 4px;\n  padding: 8px 6px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n  border-radius: 4px;\n  color: rgba(255, 255, 255, 0.85);\n  background: rgba(255, 255, 255, 0.05);\n  font-size: 11px;\n  line-height: 1;\n  cursor: pointer;\n  transition: all 0.2s ease;\n}\n.apda-tooltip-btn svg {\n  width: 16px;\n  height: 16px;\n  fill: currentColor;\n  transition: transform 0.2s ease;\n}\n.apda-tooltip-btn span {\n  white-space: nowrap;\n}\n.apda-tooltip-btn:hover {\n  color: #fff;\n  background: rgba(255, 255, 255, 0.12);\n  border-color: #00a1d6;\n  transform: translateY(-1px);\n}\n.apda-tooltip-btn:hover svg {\n  transform: scale(1.1);\n}\n.apda-tooltip-btn:active {\n  transform: translateY(0);\n}\n.apda-tooltip-btn.apda-tooltip-btn-active {\n  color: #00a1d6;\n  background: rgba(0, 161, 214, 0.15);\n  border-color: #00a1d6;\n}\n.apda-tooltip-btn.apda-tooltip-btn-success {\n  color: #52c41a;\n  background: rgba(82, 196, 26, 0.15);\n  border-color: #52c41a;\n}\n.apda-tooltip-btn.apda-tooltip-btn-error {\n  color: #ff4d4f;\n  background: rgba(255, 77, 79, 0.15);\n  border-color: #ff4d4f;\n}\n@media (max-width: 768px) {\n  .apda-tooltip-btn {\n    padding: 6px 4px;\n    font-size: 10px;\n  }\n  .apda-tooltip-btn svg {\n    width: 14px;\n    height: 14px;\n  }\n}\n@media (hover: none) and (pointer: coarse) {\n  .apda-tooltip-btn:hover {\n    transform: none;\n  }\n  .apda-tooltip-btn:hover svg {\n    transform: none;\n  }\n  .apda-tooltip-btn:active {\n    background: rgba(255, 255, 255, 0.2);\n    transform: scale(0.95);\n  }\n}\n.art-danmuku[data-interaction-disabled='true'] .apda-danmaku {\n  pointer-events: none;\n  cursor: default;\n}\n";
 const DEFAULT_EMIT_DANMAKU = {
   SOID: "artplayer@artplayer",
   attr: [],

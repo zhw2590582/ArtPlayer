@@ -165,6 +165,9 @@ The package type declarations re-export `ExtraDanUniMerge` from `@dan-uni/dan-an
 | `emit` | `() => true` | Called when a UI or API sent danmaku is accepted. Can return a `Promise`; returning `false` cancels local rendering. |
 | `beforeVisible` | `() => true` | Called before each danmaku is shown. Can return a `Promise<boolean>`. |
 | `renderer` | built-in DOM renderer | Custom renderer object or factory. |
+| `onLike` | `undefined` | Callback when a danmaku is liked. When configured, the like button appears in the danmaku tooltip. Can return a `Promise`. |
+| `onReport` | `undefined` | Callback when a danmaku is reported. When configured, the report button appears in the danmaku tooltip. Can return a `Promise`. |
+| `enableInteraction` | `true` | Whether danmaku click interaction is enabled. When `false`, danmaku cannot be clicked. |
 
 Supported render modes are `Normal`, `Reverse`, `Top`, `Bottom`, and `Ext`. The default DOM renderer does not yet implement `Ext` mode rendering (non-count advanced danmaku).
 
@@ -262,12 +265,107 @@ art.on('artplayerPluginDanAny:start', () => {})
 art.on('artplayerPluginDanAny:show', () => {})
 art.on('artplayerPluginDanAny:hide', () => {})
 art.on('artplayerPluginDanAny:destroy', () => {})
+art.on('artplayerPluginDanAny:like', danmaku => {})
+art.on('artplayerPluginDanAny:copy', danmaku => {})
+art.on('artplayerPluginDanAny:report', danmaku => {})
 
 art.emit('artplayerPluginDanAny:points', [
   { time: 30, value: 10 },
   { time: 60, value: 20 },
 ])
 ```
+
+## Danmaku Interaction
+
+The plugin supports clicking on danmaku to display an interactive tooltip with action buttons. This feature is enabled by default.
+
+### Features
+
+- **Click to pause**: Clicking a danmaku pauses its movement and stops its disappearance timer
+- **Interactive tooltip**: A floating tooltip appears with action buttons
+- **Copy button**: Always visible, copies the danmaku content to clipboard
+- **Like button**: Appears when `onLike` callback is configured
+- **Report button**: Appears when `onReport` callback is configured
+- **Auto-close**: Clicking outside the tooltip or on another danmaku closes the current tooltip
+
+### Configuration
+
+```js
+artplayerPluginDanAny({
+  danmuku: '/assets/sample/danmuku.xml',
+  
+  // Enable/disable interaction (default: true)
+  enableInteraction: true,
+  
+  // Like callback - shows like button when configured
+  onLike: async (danmaku) => {
+    console.log('Liked:', danmaku.content)
+    // Send to server
+    await fetch('/api/danmaku/like', {
+      method: 'POST',
+      body: JSON.stringify({ id: danmaku.DMID })
+    })
+  },
+  
+  // Report callback - shows report button when configured
+  onReport: async (danmaku) => {
+    console.log('Reported:', danmaku.content)
+    if (confirm(`Report "${danmaku.content}"?`)) {
+      await fetch('/api/danmaku/report', {
+        method: 'POST',
+        body: JSON.stringify({ id: danmaku.DMID })
+      })
+    }
+  },
+})
+```
+
+### Events
+
+The plugin emits events when users interact with danmaku:
+
+```js
+// Triggered when like button is clicked
+art.on('artplayerPluginDanAny:like', (danmaku) => {
+  console.log('User liked:', danmaku.content)
+})
+
+// Triggered when copy button is clicked
+art.on('artplayerPluginDanAny:copy', (danmaku) => {
+  console.log('User copied:', danmaku.content)
+})
+
+// Triggered when report button is clicked
+art.on('artplayerPluginDanAny:report', (danmaku) => {
+  console.log('User reported:', danmaku.content)
+})
+```
+
+### Dynamic Configuration
+
+You can enable or disable interaction at runtime:
+
+```js
+// Disable interaction
+art.plugins.artplayerPluginDanAny.config({
+  enableInteraction: false
+})
+
+// Enable interaction
+art.plugins.artplayerPluginDanAny.config({
+  enableInteraction: true
+})
+```
+
+### Button Visibility
+
+Button visibility is determined by configuration:
+
+- **Copy button**: Always visible (built-in functionality)
+- **Like button**: Only visible when `onLike` is a function
+- **Report button**: Only visible when `onReport` is a function
+
+If neither `onLike` nor `onReport` is configured, the tooltip will only show the copy button.
 
 ## Custom Renderer
 
