@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-dan-any",
-  "version": "0.0.1",
+  "version": "0.6.0",
   "description": "Danmuku plugin (supported by @dan-uni/dan-any) for ArtPlayer",
   "author": "rinnein <gh@rinne.in>",
   "license": "MIT",
@@ -35,6 +35,6 @@
   "legacy": "./dist/artplayer-plugin-dan-any.legacy.js",
   "browserslist": "last 1 Chrome version",
   "dependencies": {
-    "@dan-uni/dan-any": "^2.2.4"
+    "@dan-uni/dan-any": "^2.2.7"
   }
 }
