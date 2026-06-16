@@ -1,5 +1,5 @@
-export const RENDER_MODES = ['Normal', 'Reverse', 'Top', 'Bottom']
-export const EMIT_MODES = [...RENDER_MODES, 'Ext']
+export const RENDER_MODES = ['Normal', 'Reverse', 'Top', 'Bottom', 'Ext']
+export const EMIT_MODES = [...RENDER_MODES]
 
 const DEFAULT_EMITTER_FONT_SIZES = [
   { size: 18, text: '较小' },
@@ -410,6 +410,16 @@ function normalizeColor(color) {
   return '#ffffff'
 }
 
+function normalizeTypeOptions(typeOptions) {
+  if (!typeOptions || typeof typeOptions !== 'object')
+    return { color: true, count: true }
+
+  return {
+    color: typeOptions.color !== false,
+    count: typeOptions.count !== false,
+  }
+}
+
 function compareDanmaku(prev, next) {
   const diff = prev.progress - next.progress
 
@@ -417,6 +427,13 @@ function compareDanmaku(prev, next) {
     return diff
 
   return String(prev.DMID || '').localeCompare(String(next.DMID || ''))
+}
+
+function getDanmakuColor(danmaku, typeOptions, defaultColor) {
+  if (typeOptions.color && danmaku.color != null)
+    return normalizeColor(danmaku.color)
+
+  return normalizeColor(defaultColor)
 }
 
 export function normalizeRendererOption(option = {}) {
@@ -427,6 +444,7 @@ export function normalizeRendererOption(option = {}) {
     opacity: 1,
     color: '#ffffff',
     modes: [...RENDER_MODES],
+    typeOptions: { color: true, count: true },
     fontSize: 'source',
     antiOverlap: true,
     synchronousPlayback: false,
@@ -455,6 +473,7 @@ export function normalizeRendererOption(option = {}) {
   normalized.lockTime = clamp(Number(normalized.lockTime) || 5, 1, 60)
   normalized.margin = Array.isArray(normalized.margin) ? normalized.margin : [10, '25%']
   normalized.modes = normalizeModes(normalized.modes)
+  normalized.typeOptions = normalizeTypeOptions(normalized.typeOptions)
   normalized.emitDefaults = normalized.emitDefaults && typeof normalized.emitDefaults === 'object'
     ? { ...normalized.emitDefaults }
     : {}
@@ -760,7 +779,7 @@ export default class DanAnyDomRenderer {
   }
 
   config(option = {}, isInit = false) {
-    const shouldReset = !isInit && ['fontSize', 'margin', 'modes', 'speed', 'synchronousPlayback'].some(
+    const shouldReset = !isInit && ['fontSize', 'margin', 'modes', 'speed', 'synchronousPlayback', 'typeOptions'].some(
       key => Object.prototype.hasOwnProperty.call(option, key),
     )
 
@@ -791,6 +810,10 @@ export default class DanAnyDomRenderer {
     if (!this.option.modes.includes(danmaku.mode))
       return
 
+    // Ext mode is not yet implemented in the default renderer
+    if (danmaku.mode === 'Ext')
+      return
+
     const visible = await this.option.beforeVisible(danmaku)
     if (!visible)
       return
@@ -805,7 +828,7 @@ export default class DanAnyDomRenderer {
     $ref.dataset.id = danmaku.DMID || ''
     $ref.style.opacity = this.option.opacity
     $ref.style.fontSize = `${this.getFontSize(danmaku)}px`
-    $ref.style.color = normalizeColor(danmaku.color ?? this.option.color)
+    $ref.style.color = getDanmakuColor(danmaku, this.option.typeOptions, this.option.color)
 
     this.$danmuku.appendChild($ref)
 
@@ -865,6 +888,9 @@ export default class DanAnyDomRenderer {
   }
 
   async showMergeDanmaku(danmaku, merge) {
+    if (!this.option.typeOptions.count)
+      return
+
     const visible = await this.option.beforeVisible(danmaku)
     if (!visible)
       return
@@ -882,7 +908,7 @@ export default class DanAnyDomRenderer {
     $ref.dataset.id = danmaku.DMID || ''
     $ref.style.opacity = this.option.opacity
     $ref.style.fontSize = `${fontSize}px`
-    $ref.style.color = normalizeColor(danmaku.color ?? this.option.color)
+    $ref.style.color = getDanmakuColor(danmaku, this.option.typeOptions, this.option.color)
     $ref.style.zIndex = 1
     $ref.style.display = 'inline-flex'
     $ref.style.alignItems = 'center'

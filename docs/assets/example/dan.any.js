@@ -106,6 +106,10 @@ const art = new Artplayer({
 
       // 以下为非必填
       modes: ['Normal', 'Reverse', 'Top', 'Bottom'], // 弹幕可见的模式
+      typeOptions: {
+        color: true, // 是否显示彩色弹幕（false 时统一使用默认颜色）
+        count: true, // 是否显示计数弹幕
+      }, // 类型过滤选项
       speed: 5, // 弹幕持续时间，范围在[1 ~ 10]，数值越小速度越快
       margin: [10, '25%'], // 弹幕上下边距，支持像素数字和百分比
       opacity: 1, // 弹幕透明度，范围在[0 ~ 1]

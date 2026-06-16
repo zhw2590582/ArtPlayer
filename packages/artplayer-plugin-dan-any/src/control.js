@@ -1,15 +1,23 @@
-import iconCheckOff from '../../artplayer-plugin-danmuku/src/img/check_off.svg?raw'
-import iconCheckOn from '../../artplayer-plugin-danmuku/src/img/check_on.svg?raw'
-import iconConfig from '../../artplayer-plugin-danmuku/src/img/config.svg?raw'
-import iconMode0Off from '../../artplayer-plugin-danmuku/src/img/mode_0_off.svg?raw'
-import iconMode0On from '../../artplayer-plugin-danmuku/src/img/mode_0_on.svg?raw'
-import iconMode1Off from '../../artplayer-plugin-danmuku/src/img/mode_1_off.svg?raw'
-import iconMode1On from '../../artplayer-plugin-danmuku/src/img/mode_1_on.svg?raw'
-import iconMode2Off from '../../artplayer-plugin-danmuku/src/img/mode_2_off.svg?raw'
-import iconMode2On from '../../artplayer-plugin-danmuku/src/img/mode_2_on.svg?raw'
-import iconOff from '../../artplayer-plugin-danmuku/src/img/off.svg?raw'
-import iconOn from '../../artplayer-plugin-danmuku/src/img/on.svg?raw'
-import iconStyle from '../../artplayer-plugin-danmuku/src/img/style.svg?raw'
+import iconCheckOff from './img/check_off.svg?raw'
+import iconCheckOn from './img/check_on.svg?raw'
+import iconConfig from './img/config.svg?raw'
+import iconModeBottomOff from './img/mode_bottom_off.svg?raw'
+import iconModeBottomOn from './img/mode_bottom_on.svg?raw'
+import iconModeExtOff from './img/mode_ext_off.svg?raw'
+import iconModeExtOn from './img/mode_ext_on.svg?raw'
+import iconModeNormalOff from './img/mode_normal_off.svg?raw'
+import iconModeNormalOn from './img/mode_normal_on.svg?raw'
+import iconModeReverseOff from './img/mode_reverse_off.svg?raw'
+import iconModeReverseOn from './img/mode_reverse_on.svg?raw'
+import iconModeTopOff from './img/mode_top_off.svg?raw'
+import iconModeTopOn from './img/mode_top_on.svg?raw'
+import iconOff from './img/off.svg?raw'
+import iconOn from './img/on.svg?raw'
+import iconStyle from './img/style.svg?raw'
+import iconTypeColorOff from './img/type_color_off.svg?raw'
+import iconTypeColorOn from './img/type_color_on.svg?raw'
+import iconTypeCountOff from './img/type_count_off.svg?raw'
+import iconTypeCountOn from './img/type_count_on.svg?raw'
 import { EMIT_MODES, RENDER_MODES } from './renderer'
 
 function queryMount(mount) {
@@ -29,17 +37,32 @@ function getDefaultMount(art) {
 function modeText(mode) {
   switch (mode) {
     case 'Normal':
-      return '滚动'
+      return '普通'
     case 'Reverse':
       return '逆向'
     case 'Top':
-      return '顶部'
+      return '置顶'
     case 'Bottom':
-      return '底部'
+      return '置底'
     case 'Ext':
       return '高级'
     default:
       return mode
+  }
+}
+
+function typeText(type) {
+  switch (type) {
+    case 'color':
+      return '彩色'
+    case 'count':
+      return '计数'
+    case 'scroll':
+      return '滚动'
+    case 'fixed':
+      return '固定'
+    default:
+      return type
   }
 }
 
@@ -69,12 +92,15 @@ function closest(target, selector) {
 function modeIcon(mode, active) {
   switch (mode) {
     case 'Normal':
+      return active ? iconModeNormalOn : iconModeNormalOff
     case 'Reverse':
-      return active ? iconMode0On : iconMode0Off
+      return active ? iconModeReverseOn : iconModeReverseOff
     case 'Top':
-      return active ? iconMode1On : iconMode1Off
+      return active ? iconModeTopOn : iconModeTopOff
     case 'Bottom':
-      return active ? iconMode2On : iconMode2Off
+      return active ? iconModeBottomOn : iconModeBottomOff
+    case 'Ext':
+      return active ? iconModeExtOn : iconModeExtOff
     default:
       return ''
   }
@@ -141,6 +167,15 @@ export default class DanAnyControl {
   }
 
   get template() {
+    const { option } = this.plugin
+    const hasTop = option.modes.includes('Top')
+    const hasBottom = option.modes.includes('Bottom')
+    const hasNormal = option.modes.includes('Normal')
+    const hasReverse = option.modes.includes('Reverse')
+    const hasExt = option.modes.includes('Ext')
+    const fixedActive = hasTop && hasBottom
+    const scrollActive = hasNormal && hasReverse
+
     return `
       <button class="apda-toggle" type="button" data-action="visible" title="关闭弹幕">
         ${iconOn}${iconOff}
@@ -152,12 +187,42 @@ export default class DanAnyControl {
             <div class="apda-config-mode">
               <div class="apda-label">按类型屏蔽</div>
               <div class="apda-modes">
-                ${RENDER_MODES.map(mode => `
-                  <button class="apda-mode" type="button" data-mode="${mode}" title="${modeText(mode)}">
-                    ${modeIcon(mode, false)}${modeIcon(mode, true)}
-                    <div>${modeText(mode)}</div>
-                  </button>
-                `).join('')}
+                <button class="apda-mode" type="button" data-aggregate="fixed" data-active="${fixedActive}" title="${typeText('fixed')}">
+                  ${modeIcon('Top', fixedActive)}
+                  <div>${typeText('fixed')}</div>
+                </button>
+                <button class="apda-mode" type="button" data-aggregate="scroll" data-active="${scrollActive}" title="${typeText('scroll')}">
+                  ${modeIcon('Normal', scrollActive)}
+                  <div>${typeText('scroll')}</div>
+                </button>
+                <button class="apda-mode" type="button" data-type="color" data-active="${option.typeOptions.color}" title="${typeText('color')}">
+                  ${option.typeOptions.color ? iconTypeColorOn : iconTypeColorOff}
+                  <div>${typeText('color')}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Ext" data-active="${hasExt}" title="${modeText('Ext')}">
+                  ${modeIcon('Ext', hasExt)}
+                  <div>${modeText('Ext')}</div>
+                </button>
+                <button class="apda-mode" type="button" data-type="count" data-active="${option.typeOptions.count}" title="${typeText('count')}">
+                  ${option.typeOptions.count ? iconTypeCountOn : iconTypeCountOff}
+                  <div>${typeText('count')}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Normal" data-active="${hasNormal}" title="${modeText('Normal')}">
+                  ${modeIcon('Normal', hasNormal)}
+                  <div>${modeText('Normal')}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Top" data-active="${hasTop}" title="${modeText('Top')}">
+                  ${modeIcon('Top', hasTop)}
+                  <div>${modeText('Top')}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Bottom" data-active="${hasBottom}" title="${modeText('Bottom')}">
+                  ${modeIcon('Bottom', hasBottom)}
+                  <div>${modeText('Bottom')}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Reverse" data-active="${hasReverse}" title="${modeText('Reverse')}">
+                  ${modeIcon('Reverse', hasReverse)}
+                  <div>${modeText('Reverse')}</div>
+                </button>
               </div>
             </div>
             <div class="apda-config-other">
@@ -538,7 +603,7 @@ export default class DanAnyControl {
   onClick(event) {
     const $target = closest(
       event.target,
-      '[data-action], [data-mode], [data-emitter-font-size], [data-emitter-color], [data-emitter-mode]',
+      '[data-action], [data-mode], [data-type], [data-aggregate], [data-emitter-font-size], [data-emitter-color], [data-emitter-mode]',
     )
 
     if (!$target)
@@ -584,6 +649,51 @@ export default class DanAnyControl {
       return
     }
 
+    if ($target.dataset.aggregate === 'fixed') {
+      const hasTop = option.modes.includes('Top')
+      const hasBottom = option.modes.includes('Bottom')
+      const allEnabled = hasTop && hasBottom
+
+      const modes = allEnabled
+        ? option.modes.filter(item => item !== 'Top' && item !== 'Bottom')
+        : [...new Set([...option.modes, 'Top', 'Bottom'])]
+
+      this.plugin.config({
+        modes: modes.filter(item => RENDER_MODES.includes(item)),
+      })
+      return
+    }
+
+    if ($target.dataset.aggregate === 'scroll') {
+      const hasNormal = option.modes.includes('Normal')
+      const hasReverse = option.modes.includes('Reverse')
+      const allEnabled = hasNormal && hasReverse
+
+      const modes = allEnabled
+        ? option.modes.filter(item => item !== 'Normal' && item !== 'Reverse')
+        : [...new Set([...option.modes, 'Normal', 'Reverse'])]
+
+      this.plugin.config({
+        modes: modes.filter(item => RENDER_MODES.includes(item)),
+      })
+      return
+    }
+
+    if ($target.dataset.type) {
+      const type = $target.dataset.type
+      const typeOptions = { ...option.typeOptions }
+
+      if (type === 'color') {
+        typeOptions.color = !typeOptions.color
+      }
+      else if (type === 'count') {
+        typeOptions.count = !typeOptions.count
+      }
+
+      this.plugin.config({ typeOptions })
+      return
+    }
+
     if ($target.dataset.mode) {
       const mode = $target.dataset.mode
       const modes = option.modes.includes(mode)
@@ -605,6 +715,8 @@ export default class DanAnyControl {
     const controlRect = $root.getBoundingClientRect()
     const panelRect = $panel.getBoundingClientRect()
     const playerRect = $player.getBoundingClientRect()
+
+    // Horizontal adjustment
     const half = panelRect.width / 2 - controlRect.width / 2
     const left = playerRect.left - (controlRect.left - half)
     const right = controlRect.right + half - playerRect.right
@@ -615,6 +727,17 @@ export default class DanAnyControl {
       $panel.style.left = `${-half - right}px`
     else
       $panel.style.left = `${-half}px`
+
+    // Vertical adjustment - limit panel height to player bounds
+    const $inner = $panel.querySelector('.apda-config-panel-inner') || $panel.querySelector('.apda-style-panel-inner')
+    if ($inner) {
+      const spaceAbove = controlRect.top - playerRect.top
+      const maxHeight = spaceAbove - 30 // 30px buffer from top edge
+
+      if (maxHeight > 100) { // Minimum useful height
+        $inner.style.maxHeight = `${maxHeight}px`
+      }
+    }
   }
 
   onPanelEnter() {
@@ -696,16 +819,73 @@ export default class DanAnyControl {
       $player.dataset.danAnyEmitter = String(option.emitter !== false)
     }
 
+    // Update mode buttons
+    const hasTop = option.modes.includes('Top')
+    const hasBottom = option.modes.includes('Bottom')
+    const hasNormal = option.modes.includes('Normal')
+    const hasReverse = option.modes.includes('Reverse')
+
     for (let index = 0; index < RENDER_MODES.length; index++) {
       const mode = RENDER_MODES[index]
       const active = option.modes.includes(mode)
       const $button = this.$control.querySelector(`[data-mode="${mode}"]`)
 
-      if ($button)
+      if ($button) {
         $button.dataset.active = String(active)
+        // Update icon
+        const icon = modeIcon(mode, active)
+        const $svg = $button.querySelector('svg')
+        if ($svg && icon) {
+          $svg.outerHTML = icon
+        }
+      }
 
       if ($player)
         $player.dataset[`danAnyMode${mode}`] = String(active)
+    }
+
+    // Update aggregate buttons
+    const fixedActive = hasTop && hasBottom
+    const $fixedButton = this.$control.querySelector('[data-aggregate="fixed"]')
+    if ($fixedButton) {
+      $fixedButton.dataset.active = String(fixedActive)
+      const icon = modeIcon('Top', fixedActive)
+      const $svg = $fixedButton.querySelector('svg')
+      if ($svg && icon) {
+        $svg.outerHTML = icon
+      }
+    }
+
+    const scrollActive = hasNormal && hasReverse
+    const $scrollButton = this.$control.querySelector('[data-aggregate="scroll"]')
+    if ($scrollButton) {
+      $scrollButton.dataset.active = String(scrollActive)
+      const icon = modeIcon('Normal', scrollActive)
+      const $svg = $scrollButton.querySelector('svg')
+      if ($svg && icon) {
+        $svg.outerHTML = icon
+      }
+    }
+
+    // Update type buttons
+    const $colorButton = this.$control.querySelector('[data-type="color"]')
+    if ($colorButton) {
+      $colorButton.dataset.active = String(option.typeOptions.color)
+      const icon = option.typeOptions.color ? iconTypeColorOn : iconTypeColorOff
+      const $svg = $colorButton.querySelector('svg')
+      if ($svg && icon) {
+        $svg.outerHTML = icon
+      }
+    }
+
+    const $countButton = this.$control.querySelector('[data-type="count"]')
+    if ($countButton) {
+      $countButton.dataset.active = String(option.typeOptions.count)
+      const icon = option.typeOptions.count ? iconTypeCountOn : iconTypeCountOff
+      const $svg = $countButton.querySelector('svg')
+      if ($svg && icon) {
+        $svg.outerHTML = icon
+      }
     }
 
     const $input = this.$control.querySelector('.apda-input')

@@ -64,6 +64,7 @@
     padding: 10px;
     opacity: 0;
     pointer-events: none;
+    overflow: hidden;
   }
 
   .apda-config-panel-inner {
@@ -72,6 +73,8 @@
     padding: 10px 10px 22px;
     border-radius: 3px;
     background-color: rgb(0 0 0 / 85%);
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .apda-config:hover {
@@ -98,8 +101,9 @@
   .apda-modes {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     margin-top: 5px;
-    gap: 20px;
+    gap: 10px 20px;
   }
 
   .apda-mode {
@@ -109,34 +113,6 @@
 
     &:hover {
       color: @highlight;
-    }
-  }
-
-  .apda-mode[data-active='true'] {
-    .apd-mode-0-off,
-    .apd-mode-1-off,
-    .apd-mode-2-off {
-      display: none;
-    }
-
-    .apd-mode-0-on,
-    .apd-mode-1-on,
-    .apd-mode-2-on {
-      display: block;
-    }
-  }
-
-  .apda-mode[data-active='false'] {
-    .apd-mode-0-off,
-    .apd-mode-1-off,
-    .apd-mode-2-off {
-      display: block;
-    }
-
-    .apd-mode-0-on,
-    .apd-mode-1-on,
-    .apd-mode-2-on {
-      display: none;
     }
   }
 

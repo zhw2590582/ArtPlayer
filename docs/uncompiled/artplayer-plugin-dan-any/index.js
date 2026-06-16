@@ -16841,17 +16841,25 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   const iconCheckOff = '<svg  class="apd-icon apd-check-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 32 32" width="32"  height="32" ><path d="M8 6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H8zm0-2h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z" fill="#FFFFFF"></path></svg>';
   const iconCheckOn = '<svg class="apd-icon apd-check-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 32 32" width="32"  height="32" ><path d="m13 18.25-1.8-1.8c-.6-.6-1.65-.6-2.25 0s-.6 1.5 0 2.25l2.85 2.85c.318.318.762.468 1.2.448.438.02.882-.13 1.2-.448l8.85-8.85c.6-.6.6-1.65 0-2.25s-1.65-.6-2.25 0l-7.8 7.8zM8 4h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z" fill="#00AEEC"></path></svg>';
   const iconConfig = '<svg class="apd-icon apd-config-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 24 24" width="24"  height="24" ><path fill-rule="evenodd" d="m15.645 4.881 1.06-1.473a.998.998 0 1 0-1.622-1.166L13.22 4.835a110.67 110.67 0 0 0-1.1-.007h-.131c-.47 0-.975.004-1.515.012L8.783 2.3A.998.998 0 0 0 7.12 3.408l.988 1.484c-.688.019-1.418.042-2.188.069a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363c1.903.094 3.317.141 5.513.141a.988.988 0 0 0 0-1.975 97.58 97.58 0 0 1-5.416-.139 2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.005.183.01.07.014-.038.004-.096.008-.189.011-.081a.987.987 0 1 0 1.974-.069c-.004-.105-.007-.009-.011.09-.002.056-.004.112-.007.135l-.002.01a.574.574 0 0 1-.005-.091v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.905-.032-1.752-.058-2.543-.079Zm-3.113 4.703h-1.307v4.643h2.2v.04l.651-1.234c.113-.215.281-.389.482-.509v-.11h.235c.137-.049.283-.074.433-.074h1.553V9.584h-1.264a8.5 8.5 0 0 0 .741-1.405l-1.078-.381c-.24.631-.501 1.23-.806 1.786h-1.503l.686-.305c-.228-.501-.5-.959-.806-1.394l-1.034.348c.294.392.566.839.817 1.35Zm-1.7 5.502h2.16l-.564 1.068h-1.595v-1.068Zm-2.498-1.863.152-1.561h1.96V8.289H7.277v.969h2.048v1.435h-1.84l-.306 3.51h2.254c0 1.155-.043 1.906-.12 2.255-.076.348-.38.523-.925.523-.305 0-.61-.022-.893-.055l.294 1.056.061.005c.282.02.546.039.81.039.991-.065 1.547-.414 1.677-1.046.11-.631.175-1.883.175-3.757H8.334Zm5.09-.8v.85h-1.188v-.85h1.187Zm-1.188-.955h1.187v-.893h-1.187v.893Zm2.322.007v-.893h1.241v.893h-1.241Zm.528 2.757a1.26 1.26 0 0 1 1.087-.627l4.003-.009a1.26 1.26 0 0 1 1.094.63l1.721 2.982c.226.39.225.872-.001 1.263l-1.743 3a1.26 1.26 0 0 1-1.086.628l-4.003.009a1.26 1.26 0 0 1-1.094-.63l-1.722-2.982a1.26 1.26 0 0 1 .002-1.263l1.742-3Zm1.967.858a1.26 1.26 0 0 0-1.08.614l-.903 1.513a1.26 1.26 0 0 0-.002 1.289l.885 1.492c.227.384.64.62 1.086.618l2.192-.005a1.26 1.26 0 0 0 1.08-.615l.904-1.518a1.26 1.26 0 0 0 .001-1.288l-.884-1.489a1.26 1.26 0 0 0-1.086-.616l-2.193.005Zm2.517 2.76a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0Z" clip-rule="evenodd"></path></svg>';
-  const iconMode0Off = '<svg class="apd-icon apd-mode-0-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm2-1a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
-  const iconMode0On = '<svg class="apd-icon apd-mode-0-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2z" fill="#FFFFFF"></path></svg>';
-  const iconMode1Off = '<svg class="apd-icon apd-mode-1-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zm-4-8h2v2h-2V7zM9 9H7V7h2v2zm4 0h-2V7h2v2zm2-2h2v2h-2V7z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
-  const iconMode1On = '<svg class="apd-icon apd-mode-1-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 9H7V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2z" fill="#FFFFFF"></path></svg>';
-  const iconMode2Off = '<svg class="apd-icon apd-mode-2-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM9 21H7v-2h2v2zm4 0h-2v-2h2v2z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
-  const iconMode2On = '<svg class="apd-icon apd-mode-2-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 21H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" fill="#FFFFFF"></path></svg>';
+  const iconModeBottomOff = '<svg class="apd-icon apd-mode-bottom-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM9 21H7v-2h2v2zm4 0h-2v-2h2v2z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+  const iconModeBottomOn = '<svg class="apd-icon apd-mode-bottom-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 21H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" fill="#FFFFFF"></path></svg>';
+  const iconModeExtOff = '<svg class="apd-icon apd-ext-off" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28" height="28"><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM7.849 11.669l.447-.828.492.782.894.184-.536.736.134.966-.85-.321-.804.414.045-.967L7 11.946l.849-.277zm3.352 7.101-1.43-.506L8.43 19v-1.565L7.357 16.33l1.43-.506.67-1.381.894 1.289 1.475.23-.894 1.289.269 1.519zm2.453-5.971-2.145-1.933 2.637-1.151L15.263 7l1.877 2.255 2.86.23-1.52 2.531.67 2.854-2.816-.69-2.458 1.565-.222-2.946z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+  const iconModeExtOn = '<svg class="apd-icon apd-ext-on" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28" height="28"><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM7.849 11.669l.447-.828.492.782.894.184-.536.736.134.966-.85-.321-.804.414.045-.967L7 11.946l.849-.277zm3.352 7.101-1.43-.506L8.43 19v-1.565L7.357 16.33l1.43-.506.67-1.381.894 1.289 1.475.23-.894 1.289.269 1.519zm7.95-3.9-2.816-.69-2.458 1.565-.223-2.946-2.145-1.933 2.637-1.151L15.263 7l1.877 2.255 2.86.23-1.52 2.531.671 2.854z" fill="#FFFFFF"></path></svg>\n';
+  const iconModeNormalOff = '<svg class="apd-icon apd-mode-normal-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28" height="28"><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm2-1a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+  const iconModeNormalOn = '<svg class="apd-icon apd-mode-normal-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2z" fill="#FFFFFF"></path></svg>';
+  const iconModeReverseOff = '<svg class="apd-icon apd-mode-reverse-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28" height="28"><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm2-1a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+  const iconModeReverseOn = '<svg class="apd-icon apd-mode-reverse-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2z" fill="#FFFFFF"></path></svg>';
+  const iconModeTopOff = '<svg class="apd-icon apd-mode-top-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zm-4-8h2v2h-2V7zM9 9H7V7h2v2zm4 0h-2V7h2v2zm2-2h2v2h-2V7z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+  const iconModeTopOn = '<svg class="apd-icon apd-mode-top-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 9H7V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2zm4 0h-2V7h2v2z" fill="#FFFFFF"></path></svg>';
   const iconOff = '<svg class="apd-icon apd-toggle-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 24 24" width="24"  height="24" ><path fill-rule="evenodd" d="m8.085 4.891-.999-1.499a1.008 1.008 0 0 1 1.679-1.118l1.709 2.566c.54-.008 1.045-.012 1.515-.012h.13c.345 0 .707.003 1.088.007l1.862-2.59a1.008 1.008 0 0 1 1.637 1.177l-1.049 1.46c.788.02 1.631.046 2.53.078 1.958.069 3.468 1.6 3.74 3.507.088.613.13 2.158.16 3.276l.001.027c.01.333.017.63.025.856a.987.987 0 0 1-1.974.069c-.008-.23-.016-.539-.025-.881v-.002c-.028-1.103-.066-2.541-.142-3.065-.143-1.004-.895-1.78-1.854-1.813-2.444-.087-4.466-.13-6.064-.131-1.598 0-3.619.044-6.063.13a2.037 2.037 0 0 0-1.945 1.748c-.15 1.04-.225 2.341-.225 3.904 0 1.874.11 3.474.325 4.798.154.949.95 1.66 1.91 1.708a97.58 97.58 0 0 0 5.416.139.988.988 0 0 1 0 1.975c-2.196 0-3.61-.047-5.513-.141A4.012 4.012 0 0 1 2.197 17.7c-.236-1.446-.351-3.151-.351-5.116 0-1.64.08-3.035.245-4.184A4.013 4.013 0 0 1 5.92 4.96c.761-.027 1.483-.05 2.164-.069Zm4.436 4.707h-1.32v4.63h2.222v.848h-2.618v1.078h2.431a5.01 5.01 0 0 1 3.575-3.115V9.598h-1.276a8.59 8.59 0 0 0 .748-1.42l-1.089-.384a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.289h-3.2v.979h2.067v1.43H7.483l-.308 3.454h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.004c.285.02.551.04.818.04 1.001-.066 1.562-.418 1.694-1.056.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858H15.8Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902H15.8v.902h-1.254Zm3.517 10.594a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-.002-1.502a2.5 2.5 0 0 1-2.217-3.657l3.326 3.398a2.49 2.49 0 0 1-1.109.259Zm2.5-2.5c0 .42-.103.815-.286 1.162l-3.328-3.401a2.5 2.5 0 0 1 3.614 2.239Z" clip-rule="evenodd"></path></svg>';
   const iconOn = '<svg class="apd-icon apd-toggle-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-pointer="none" viewBox="0 0 24 24" width="24"  height="24" ><path fill-rule="evenodd" d="M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z" clip-rule="evenodd"></path><path fill="#00AEEC" fill-rule="evenodd" d="M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z" clip-rule="evenodd"></path></svg>';
   const iconStyle = '<svg class="apd-icon apd-style-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 22 22" viewBox="0 0 22 22" width="36"  height="24" ><path d="M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98 12.87 11H9.13L11 5.98z"></path></svg>';
-  const RENDER_MODES = ["Normal", "Reverse", "Top", "Bottom"];
-  const EMIT_MODES = [...RENDER_MODES, "Ext"];
+  const iconTypeColorOff = '<svg class="apd-icon apd-type-color-off" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28" height="28"><path d="M17.823 15.247c.612 0 1.148-.535 1.148-1.147s-.536-1.147-1.148-1.147c-.611 0-1.147.535-1.147 1.147s.536 1.147 1.147 1.147zM17.365 11.118c0-.612-.535-1.147-1.147-1.147s-1.147.535-1.147 1.147c0 .611.535 1.147 1.147 1.147s1.147-.536 1.147-1.147z" fill="#00AEEC"></path><path d="M18.235 16.872c-1.483.086-2.859-.172-3.546.516-.918.918 1.529 1.606 0 2.219-1.988.84-7.341-.535-8.182-4.053-.841-3.441 2.905-6.5 5.888-7.035 2.906-.535 6.041.841 8.181 2.982 1.208 1.253 1.265 2.663.782 3.694A6.938 6.938 0 0 1 23 15c1.487 0 2.866.464 4 1.255V7.167C27 4.833 25.318 3 23.177 3H4.824C2.683 3 1 4.833 1 7.167v13.665C1 23.167 2.683 25 4.824 25h11.85A6.97 6.97 0 0 1 16 22c0-2.025.86-3.85 2.235-5.128z" fill="#00AEEC"></path><path d="M8.876 16.319c0 .611.535 1.146 1.147 1.146s1.147-.535 1.147-1.146c0-.612-.535-1.148-1.147-1.148s-1.147.536-1.147 1.148zM9.794 11.883c-.764 0-1.376.612-1.376 1.3 0 .689.612 1.3 1.376 1.3s1.376-.611 1.376-1.3c.001-.688-.611-1.3-1.376-1.3zM11.553 10.965c0 .689.612 1.301 1.376 1.301s1.376-.612 1.376-1.301-.612-1.3-1.376-1.3-1.376.611-1.376 1.3zM26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+  const iconTypeColorOn = '<svg class="apd-icon apd-type-color-on" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28" height="28"><path d="M17.365 11.118c0-.612-.535-1.147-1.147-1.147s-1.147.535-1.147 1.147c0 .611.535 1.147 1.147 1.147s1.147-.536 1.147-1.147zM12.93 9.665c-.764 0-1.376.611-1.376 1.3 0 .689.612 1.301 1.376 1.301s1.376-.612 1.376-1.301-.612-1.3-1.376-1.3zM9.794 11.883c-.764 0-1.376.612-1.376 1.3 0 .689.612 1.3 1.376 1.3s1.376-.611 1.376-1.3c.001-.688-.611-1.3-1.376-1.3zM10.023 15.171c-.612 0-1.147.536-1.147 1.148 0 .611.535 1.146 1.147 1.146s1.147-.535 1.147-1.146c.001-.612-.535-1.148-1.147-1.148zM17.823 12.953c-.611 0-1.147.535-1.147 1.147s.536 1.147 1.147 1.147c.612 0 1.148-.535 1.148-1.147s-.536-1.147-1.148-1.147z" fill="#FFFFFF"></path><path d="M23.177 3H4.824C2.683 3 1 4.833 1 7.167v13.665C1 23.167 2.683 25 4.824 25h18.353C25.318 25 27 23.167 27 20.833V7.167C27 4.833 25.318 3 23.177 3zm-3.442 13.624c-1.987.612-4.129-.154-5.046.764-.918.918 1.529 1.606 0 2.219-1.988.84-7.341-.535-8.182-4.053-.841-3.441 2.905-6.5 5.888-7.035 2.906-.535 6.041.841 8.181 2.982 2.065 2.141.765 4.74-.841 5.123z" fill="#FFFFFF"></path></svg>\n';
+  const iconTypeCountOff = '<svg class="apd-icon apd-type-count-off" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28" height="28"><path d="M23 15c1.487 0 2.866.464 4 1.255V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h11.674A7 7 0 0 1 23 15zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm2-1a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1z" fill="#00AEEC"></path><path d="M26.536 18.464a5 5 0 0 0-7.071 0 5 5 0 0 0 0 7.071 5 5 0 1 0 7.071-7.071zm-5.657 5.657a3 3 0 0 1-.586-3.415l4.001 4.001a3 3 0 0 1-3.415-.586zm4.829-.827-4.001-4.001a3.002 3.002 0 0 1 4.001 4.001z" fill="#00AEEC"></path></svg>';
+  const iconTypeCountOn = '<svg class="apd-icon apd-type-count-on" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" data-pointer="none" style="enable-background:new 0 0 28 28" viewBox="0 0 28 28" width="28"  height="28" ><path d="M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM11 9h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2zm-3 2H6V9h2v2zm4 4h-2v-2h2v2zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2z" fill="#FFFFFF"></path></svg>';
+  const RENDER_MODES = ["Normal", "Reverse", "Top", "Bottom", "Ext"];
+  const EMIT_MODES = [...RENDER_MODES];
   const DEFAULT_EMITTER_FONT_SIZES = [
     { size: 18, text: "较小" },
     { size: 25, text: "标准" },
@@ -17157,11 +17165,24 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     }
     return "#ffffff";
   }
+  function normalizeTypeOptions(typeOptions) {
+    if (!typeOptions || typeof typeOptions !== "object")
+      return { color: true, count: true };
+    return {
+      color: typeOptions.color !== false,
+      count: typeOptions.count !== false
+    };
+  }
   function compareDanmaku(prev, next) {
     const diff = prev.progress - next.progress;
     if (diff)
       return diff;
     return String(prev.DMID || "").localeCompare(String(next.DMID || ""));
+  }
+  function getDanmakuColor(danmaku, typeOptions, defaultColor) {
+    if (typeOptions.color && danmaku.color != null)
+      return normalizeColor(danmaku.color);
+    return normalizeColor(defaultColor);
   }
   function normalizeRendererOption(option = {}) {
     const normalized = {
@@ -17171,6 +17192,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       opacity: 1,
       color: "#ffffff",
       modes: [...RENDER_MODES],
+      typeOptions: { color: true, count: true },
       fontSize: "source",
       antiOverlap: true,
       synchronousPlayback: false,
@@ -17198,6 +17220,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     normalized.lockTime = clamp$1(Number(normalized.lockTime) || 5, 1, 60);
     normalized.margin = Array.isArray(normalized.margin) ? normalized.margin : [10, "25%"];
     normalized.modes = normalizeModes(normalized.modes);
+    normalized.typeOptions = normalizeTypeOptions(normalized.typeOptions);
     normalized.emitDefaults = normalized.emitDefaults && typeof normalized.emitDefaults === "object" ? { ...normalized.emitDefaults } : {};
     normalized.emitterFontSizes = normalizeEmitterFontSizes(normalized.emitterFontSizes);
     normalized.emitterColors = normalizeEmitterColors(normalized.emitterColors);
@@ -17426,7 +17449,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return true;
     }
     config(option = {}, isInit = false) {
-      const shouldReset = !isInit && ["fontSize", "margin", "modes", "speed", "synchronousPlayback"].some(
+      const shouldReset = !isInit && ["fontSize", "margin", "modes", "speed", "synchronousPlayback", "typeOptions"].some(
         (key) => Object.prototype.hasOwnProperty.call(option, key)
       );
       this.option = normalizeRendererOption({
@@ -17448,6 +17471,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         return this.showMergeDanmaku(danmaku, merge2);
       if (!this.option.modes.includes(danmaku.mode))
         return;
+      if (danmaku.mode === "Ext")
+        return;
       const visible = await this.option.beforeVisible(danmaku);
       if (!visible)
         return;
@@ -17460,7 +17485,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       $ref.dataset.id = danmaku.DMID || "";
       $ref.style.opacity = this.option.opacity;
       $ref.style.fontSize = `${this.getFontSize(danmaku)}px`;
-      $ref.style.color = normalizeColor(danmaku.color ?? this.option.color);
+      $ref.style.color = getDanmakuColor(danmaku, this.option.typeOptions, this.option.color);
       this.$danmuku.appendChild($ref);
       const width = $ref.clientWidth;
       const height = $ref.clientHeight;
@@ -17509,6 +17534,8 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       this.art.emit("artplayerPluginDanAny:visible", danmaku);
     }
     async showMergeDanmaku(danmaku, merge2) {
+      if (!this.option.typeOptions.count)
+        return;
       const visible = await this.option.beforeVisible(danmaku);
       if (!visible)
         return;
@@ -17524,7 +17551,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       $ref.dataset.id = danmaku.DMID || "";
       $ref.style.opacity = this.option.opacity;
       $ref.style.fontSize = `${fontSize}px`;
-      $ref.style.color = normalizeColor(danmaku.color ?? this.option.color);
+      $ref.style.color = getDanmakuColor(danmaku, this.option.typeOptions, this.option.color);
       $ref.style.zIndex = 1;
       $ref.style.display = "inline-flex";
       $ref.style.alignItems = "center";
@@ -17733,17 +17760,31 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   function modeText(mode) {
     switch (mode) {
       case "Normal":
-        return "滚动";
+        return "普通";
       case "Reverse":
         return "逆向";
       case "Top":
-        return "顶部";
+        return "置顶";
       case "Bottom":
-        return "底部";
+        return "置底";
       case "Ext":
         return "高级";
       default:
         return mode;
+    }
+  }
+  function typeText(type) {
+    switch (type) {
+      case "color":
+        return "彩色";
+      case "count":
+        return "计数";
+      case "scroll":
+        return "滚动";
+      case "fixed":
+        return "固定";
+      default:
+        return type;
     }
   }
   function escapeText(value) {
@@ -17768,12 +17809,15 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
   function modeIcon(mode, active) {
     switch (mode) {
       case "Normal":
+        return active ? iconModeNormalOn : iconModeNormalOff;
       case "Reverse":
-        return active ? iconMode0On : iconMode0Off;
+        return active ? iconModeReverseOn : iconModeReverseOff;
       case "Top":
-        return active ? iconMode1On : iconMode1Off;
+        return active ? iconModeTopOn : iconModeTopOff;
       case "Bottom":
-        return active ? iconMode2On : iconMode2Off;
+        return active ? iconModeBottomOn : iconModeBottomOff;
+      case "Ext":
+        return active ? iconModeExtOn : iconModeExtOff;
       default:
         return "";
     }
@@ -17832,6 +17876,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       return EMIT_MODES.includes(mode) ? mode : "Normal";
     }
     get template() {
+      const { option } = this.plugin;
+      const hasTop = option.modes.includes("Top");
+      const hasBottom = option.modes.includes("Bottom");
+      const hasNormal = option.modes.includes("Normal");
+      const hasReverse = option.modes.includes("Reverse");
+      const hasExt = option.modes.includes("Ext");
+      const fixedActive = hasTop && hasBottom;
+      const scrollActive = hasNormal && hasReverse;
       return `
       <button class="apda-toggle" type="button" data-action="visible" title="关闭弹幕">
         ${iconOn}${iconOff}
@@ -17843,12 +17895,42 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             <div class="apda-config-mode">
               <div class="apda-label">按类型屏蔽</div>
               <div class="apda-modes">
-                ${RENDER_MODES.map((mode) => `
-                  <button class="apda-mode" type="button" data-mode="${mode}" title="${modeText(mode)}">
-                    ${modeIcon(mode, false)}${modeIcon(mode, true)}
-                    <div>${modeText(mode)}</div>
-                  </button>
-                `).join("")}
+                <button class="apda-mode" type="button" data-aggregate="fixed" data-active="${fixedActive}" title="${typeText("fixed")}">
+                  ${modeIcon("Top", fixedActive)}
+                  <div>${typeText("fixed")}</div>
+                </button>
+                <button class="apda-mode" type="button" data-aggregate="scroll" data-active="${scrollActive}" title="${typeText("scroll")}">
+                  ${modeIcon("Normal", scrollActive)}
+                  <div>${typeText("scroll")}</div>
+                </button>
+                <button class="apda-mode" type="button" data-type="color" data-active="${option.typeOptions.color}" title="${typeText("color")}">
+                  ${option.typeOptions.color ? iconTypeColorOn : iconTypeColorOff}
+                  <div>${typeText("color")}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Ext" data-active="${hasExt}" title="${modeText("Ext")}">
+                  ${modeIcon("Ext", hasExt)}
+                  <div>${modeText("Ext")}</div>
+                </button>
+                <button class="apda-mode" type="button" data-type="count" data-active="${option.typeOptions.count}" title="${typeText("count")}">
+                  ${option.typeOptions.count ? iconTypeCountOn : iconTypeCountOff}
+                  <div>${typeText("count")}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Normal" data-active="${hasNormal}" title="${modeText("Normal")}">
+                  ${modeIcon("Normal", hasNormal)}
+                  <div>${modeText("Normal")}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Top" data-active="${hasTop}" title="${modeText("Top")}">
+                  ${modeIcon("Top", hasTop)}
+                  <div>${modeText("Top")}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Bottom" data-active="${hasBottom}" title="${modeText("Bottom")}">
+                  ${modeIcon("Bottom", hasBottom)}
+                  <div>${modeText("Bottom")}</div>
+                </button>
+                <button class="apda-mode" type="button" data-mode="Reverse" data-active="${hasReverse}" title="${modeText("Reverse")}">
+                  ${modeIcon("Reverse", hasReverse)}
+                  <div>${modeText("Reverse")}</div>
+                </button>
               </div>
             </div>
             <div class="apda-config-other">
@@ -18164,7 +18246,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     onClick(event) {
       const $target = closest(
         event.target,
-        "[data-action], [data-mode], [data-emitter-font-size], [data-emitter-color], [data-emitter-mode]"
+        "[data-action], [data-mode], [data-type], [data-aggregate], [data-emitter-font-size], [data-emitter-color], [data-emitter-mode]"
       );
       if (!$target)
         return;
@@ -18200,6 +18282,37 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         this.plugin.config({ synchronousPlayback: !option.synchronousPlayback });
         return;
       }
+      if ($target.dataset.aggregate === "fixed") {
+        const hasTop = option.modes.includes("Top");
+        const hasBottom = option.modes.includes("Bottom");
+        const allEnabled = hasTop && hasBottom;
+        const modes = allEnabled ? option.modes.filter((item) => item !== "Top" && item !== "Bottom") : [.../* @__PURE__ */ new Set([...option.modes, "Top", "Bottom"])];
+        this.plugin.config({
+          modes: modes.filter((item) => RENDER_MODES.includes(item))
+        });
+        return;
+      }
+      if ($target.dataset.aggregate === "scroll") {
+        const hasNormal = option.modes.includes("Normal");
+        const hasReverse = option.modes.includes("Reverse");
+        const allEnabled = hasNormal && hasReverse;
+        const modes = allEnabled ? option.modes.filter((item) => item !== "Normal" && item !== "Reverse") : [.../* @__PURE__ */ new Set([...option.modes, "Normal", "Reverse"])];
+        this.plugin.config({
+          modes: modes.filter((item) => RENDER_MODES.includes(item))
+        });
+        return;
+      }
+      if ($target.dataset.type) {
+        const type = $target.dataset.type;
+        const typeOptions = { ...option.typeOptions };
+        if (type === "color") {
+          typeOptions.color = !typeOptions.color;
+        } else if (type === "count") {
+          typeOptions.count = !typeOptions.count;
+        }
+        this.plugin.config({ typeOptions });
+        return;
+      }
       if ($target.dataset.mode) {
         const mode = $target.dataset.mode;
         const modes = option.modes.includes(mode) ? option.modes.filter((item) => item !== mode) : [...option.modes, mode];
@@ -18224,6 +18337,14 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         $panel.style.left = `${-half - right}px`;
       else
         $panel.style.left = `${-half}px`;
+      const $inner = $panel.querySelector(".apda-config-panel-inner") || $panel.querySelector(".apda-style-panel-inner");
+      if ($inner) {
+        const spaceAbove = controlRect.top - playerRect.top;
+        const maxHeight = spaceAbove - 30;
+        if (maxHeight > 100) {
+          $inner.style.maxHeight = `${maxHeight}px`;
+        }
+      }
     }
     onPanelEnter() {
       this.adjustPanel(
@@ -18288,14 +18409,62 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         $player.dataset.danAnySynchronousPlayback = String(option.synchronousPlayback);
         $player.dataset.danAnyEmitter = String(option.emitter !== false);
       }
+      const hasTop = option.modes.includes("Top");
+      const hasBottom = option.modes.includes("Bottom");
+      const hasNormal = option.modes.includes("Normal");
+      const hasReverse = option.modes.includes("Reverse");
       for (let index2 = 0; index2 < RENDER_MODES.length; index2++) {
         const mode = RENDER_MODES[index2];
         const active = option.modes.includes(mode);
         const $button = this.$control.querySelector(`[data-mode="${mode}"]`);
-        if ($button)
+        if ($button) {
           $button.dataset.active = String(active);
+          const icon = modeIcon(mode, active);
+          const $svg = $button.querySelector("svg");
+          if ($svg && icon) {
+            $svg.outerHTML = icon;
+          }
+        }
         if ($player)
           $player.dataset[`danAnyMode${mode}`] = String(active);
+      }
+      const fixedActive = hasTop && hasBottom;
+      const $fixedButton = this.$control.querySelector('[data-aggregate="fixed"]');
+      if ($fixedButton) {
+        $fixedButton.dataset.active = String(fixedActive);
+        const icon = modeIcon("Top", fixedActive);
+        const $svg = $fixedButton.querySelector("svg");
+        if ($svg && icon) {
+          $svg.outerHTML = icon;
+        }
+      }
+      const scrollActive = hasNormal && hasReverse;
+      const $scrollButton = this.$control.querySelector('[data-aggregate="scroll"]');
+      if ($scrollButton) {
+        $scrollButton.dataset.active = String(scrollActive);
+        const icon = modeIcon("Normal", scrollActive);
+        const $svg = $scrollButton.querySelector("svg");
+        if ($svg && icon) {
+          $svg.outerHTML = icon;
+        }
+      }
+      const $colorButton = this.$control.querySelector('[data-type="color"]');
+      if ($colorButton) {
+        $colorButton.dataset.active = String(option.typeOptions.color);
+        const icon = option.typeOptions.color ? iconTypeColorOn : iconTypeColorOff;
+        const $svg = $colorButton.querySelector("svg");
+        if ($svg && icon) {
+          $svg.outerHTML = icon;
+        }
+      }
+      const $countButton = this.$control.querySelector('[data-type="count"]');
+      if ($countButton) {
+        $countButton.dataset.active = String(option.typeOptions.count);
+        const icon = option.typeOptions.count ? iconTypeCountOn : iconTypeCountOff;
+        const $svg = $countButton.querySelector("svg");
+        if ($svg && icon) {
+          $svg.outerHTML = icon;
+        }
       }
       const $input2 = this.$control.querySelector(".apda-input");
       if ($input2)
@@ -29401,7 +29570,7 @@ Hint: you can specify "alias" on both sides of the relation with the same value`
       return loadIterable(udb, source);
     throw new Error("Unsupported danmaku source");
   }
-  const style = ".art-danmuku .apda-danmaku {\n  box-sizing: border-box;\n  max-width: none;\n}\n.artplayer-plugin-dan-any {\n  position: relative;\n  z-index: 99;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 32px;\n  min-width: 0;\n  flex-shrink: 0;\n  gap: 10px;\n  color: #fff;\n  font-size: 12px;\n  font-weight: 300;\n}\n.artplayer-plugin-dan-any button {\n  appearance: none;\n  border: 0;\n  padding: 0;\n  color: inherit;\n  font: inherit;\n  background: transparent;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-toggle,\n.artplayer-plugin-dan-any .apda-config-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  line-height: 1;\n}\n.artplayer-plugin-dan-any .apd-icon {\n  cursor: pointer;\n  opacity: 0.75;\n  transition: all 0.2s ease;\n  fill: #fff;\n}\n.artplayer-plugin-dan-any .apd-icon:hover {\n  opacity: 1;\n}\n.artplayer-plugin-dan-any .apda-config {\n  position: relative;\n  display: flex;\n}\n.artplayer-plugin-dan-any .apda-config-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 320px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n}\n.artplayer-plugin-dan-any .apda-config-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px 10px 22px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n}\n.artplayer-plugin-dan-any .apda-config:hover .apda-config-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-config-mode,\n.artplayer-plugin-dan-any .apda-config-slider,\n.artplayer-plugin-dan-any .apda-config-other {\n  margin-bottom: 15px;\n}\n.artplayer-plugin-dan-any .apda-config-slider:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-label {\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-modes {\n  display: flex;\n  align-items: center;\n  margin-top: 5px;\n  gap: 20px;\n}\n.artplayer-plugin-dan-any .apda-mode {\n  display: block;\n  text-align: center;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-mode:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-0-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-1-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-2-off {\n  display: none;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-0-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-1-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='true'] .apd-mode-2-on {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-0-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-1-off,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-2-off {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-0-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-1-on,\n.artplayer-plugin-dan-any .apda-mode[data-active='false'] .apd-mode-2-on {\n  display: none;\n}\n.artplayer-plugin-dan-any .apda-config-other {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n}\n.artplayer-plugin-dan-any .apda-other {\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  gap: 2px;\n}\n.artplayer-plugin-dan-any .apda-other:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apd-check-on,\n.artplayer-plugin-dan-any .apd-check-off {\n  width: 16px;\n  height: 16px;\n}\n.artplayer-plugin-dan-any .apd-check-on {\n  display: none;\n}\n.artplayer-plugin-dan-any .apd-check-off {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-emitter {\n  display: flex;\n  align-items: center;\n  width: 260px;\n  height: 26px;\n  min-width: 160px;\n  flex: none;\n  border-radius: 5px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-style {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 32px;\n  height: 100%;\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-style-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n}\n.artplayer-plugin-dan-any .apda-style-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 220px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n}\n.artplayer-plugin-dan-any .apda-style-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n}\n.artplayer-plugin-dan-any .apda-style:hover .apda-style-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-style-section {\n  margin-bottom: 14px;\n}\n.artplayer-plugin-dan-any .apda-style-section:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-style-sizes,\n.artplayer-plugin-dan-any .apda-style-modes {\n  display: flex;\n  align-items: center;\n  margin-top: 7px;\n  gap: 10px;\n}\n.artplayer-plugin-dan-any .apda-style-size {\n  padding: 2px 6px;\n  border-radius: 3px;\n  color: rgba(255, 255, 255, 0.8);\n  background-color: rgba(255, 255, 255, 0.12);\n}\n.artplayer-plugin-dan-any .apda-style-size:hover,\n.artplayer-plugin-dan-any .apda-style-size[data-active='true'] {\n  color: #fff;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode {\n  display: block;\n  text-align: center;\n}\n.artplayer-plugin-dan-any .apda-style-mode .apd-icon {\n  display: block;\n  margin: 0 auto;\n}\n.artplayer-plugin-dan-any .apda-style-mode span {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-style-mode:hover,\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] path {\n  fill: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-colors {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 7px;\n  gap: 8px;\n}\n.artplayer-plugin-dan-any .apda-color {\n  width: 16px;\n  height: 16px;\n  border-radius: 2px;\n  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);\n}\n.artplayer-plugin-dan-any .apda-color[data-active='true'] {\n  border: 1px solid #000;\n  box-shadow: 0 0 0 1px #fff;\n}\n.artplayer-plugin-dan-any .apda-input {\n  width: auto;\n  min-width: 0;\n  height: 100%;\n  flex: 1;\n  border: 0;\n  outline: none;\n  color: #fff;\n  line-height: 1;\n  background-color: transparent;\n}\n.artplayer-plugin-dan-any .apda-input::placeholder {\n  color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-send {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 60px;\n  height: 100%;\n  flex-shrink: 0;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  text-shadow: none;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-send[data-lock='true'],\n.artplayer-plugin-dan-any .apda-send[data-sending='true'] {\n  color: #666;\n  cursor: not-allowed;\n  background-color: #e7e7e7;\n}\n.artplayer-plugin-dan-any .apda-config-slider {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n.artplayer-plugin-dan-any .apda-value {\n  width: 32px;\n  flex-shrink: 0;\n  text-align: right;\n}\n.artplayer-plugin-dan-any .apda-slider {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 20px;\n  flex: 1;\n  cursor: pointer;\n  touch-action: none;\n}\n.artplayer-plugin-dan-any .apda-slider-line {\n  position: relative;\n  width: 100%;\n  height: 2px;\n  overflow: hidden;\n  border-radius: 3px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-slider-points {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.artplayer-plugin-dan-any .apda-slider-point {\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-slider-progress {\n  width: 0%;\n  height: 100%;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-slider-dot {\n  position: absolute;\n  left: 0%;\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: #00a1d6;\n  transform: translateX(-6px);\n}\n.artplayer-plugin-dan-any .apda-slider-steps {\n  position: absolute;\n  bottom: -12px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: calc(100% + 32px);\n  color: #777;\n}\n.artplayer-plugin-dan-any .apda-slider-step {\n  width: 36px;\n  flex-shrink: 0;\n  text-align: center;\n  scale: 0.95;\n}\n.art-controls-center .artplayer-plugin-dan-any {\n  width: auto;\n}\n.art-controls-left .artplayer-plugin-dan-any {\n  align-self: center;\n  height: var(--art-control-height);\n}\n.art-fullscreen .artplayer-plugin-dan-any,\n.art-fullscreen-web .artplayer-plugin-dan-any {\n  height: 38px;\n  gap: 16px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen .artplayer-plugin-dan-any .apda-config-button,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-config-button {\n  width: 28px;\n  height: 28px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-emitter,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-emitter {\n  width: 400px;\n  height: 30px;\n}\n.art-video-player > .artplayer-plugin-dan-any {\n  position: absolute;\n  left: 10px;\n  right: 10px;\n  bottom: -40px;\n}\n.art-video-player:has(> .artplayer-plugin-dan-any) {\n  margin-bottom: 40px;\n}\n[data-dan-any-emitter='false'] .apda-emitter,\n.artplayer-plugin-dan-any[data-dan-any-emitter='false'] .apda-emitter {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off {\n  display: none;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'],\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] {\n  color: #00a1d6;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off {\n  display: none;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'],\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] {\n  color: #00a1d6;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off {\n  display: none;\n}\n";
+  const style = ".art-danmuku .apda-danmaku {\n  box-sizing: border-box;\n  max-width: none;\n}\n.artplayer-plugin-dan-any {\n  position: relative;\n  z-index: 99;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 32px;\n  min-width: 0;\n  flex-shrink: 0;\n  gap: 10px;\n  color: #fff;\n  font-size: 12px;\n  font-weight: 300;\n}\n.artplayer-plugin-dan-any button {\n  appearance: none;\n  border: 0;\n  padding: 0;\n  color: inherit;\n  font: inherit;\n  background: transparent;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-toggle,\n.artplayer-plugin-dan-any .apda-config-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  line-height: 1;\n}\n.artplayer-plugin-dan-any .apd-icon {\n  cursor: pointer;\n  opacity: 0.75;\n  transition: all 0.2s ease;\n  fill: #fff;\n}\n.artplayer-plugin-dan-any .apd-icon:hover {\n  opacity: 1;\n}\n.artplayer-plugin-dan-any .apda-config {\n  position: relative;\n  display: flex;\n}\n.artplayer-plugin-dan-any .apda-config-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 320px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n  overflow: hidden;\n}\n.artplayer-plugin-dan-any .apda-config-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px 10px 22px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.artplayer-plugin-dan-any .apda-config:hover .apda-config-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-config-mode,\n.artplayer-plugin-dan-any .apda-config-slider,\n.artplayer-plugin-dan-any .apda-config-other {\n  margin-bottom: 15px;\n}\n.artplayer-plugin-dan-any .apda-config-slider:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-label {\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-modes {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  margin-top: 5px;\n  gap: 10px 20px;\n}\n.artplayer-plugin-dan-any .apda-mode {\n  display: block;\n  text-align: center;\n  cursor: pointer;\n}\n.artplayer-plugin-dan-any .apda-mode:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-config-other {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n}\n.artplayer-plugin-dan-any .apda-other {\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  gap: 2px;\n}\n.artplayer-plugin-dan-any .apda-other:hover {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apd-check-on,\n.artplayer-plugin-dan-any .apd-check-off {\n  width: 16px;\n  height: 16px;\n}\n.artplayer-plugin-dan-any .apd-check-on {\n  display: none;\n}\n.artplayer-plugin-dan-any .apd-check-off {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-emitter {\n  display: flex;\n  align-items: center;\n  width: 260px;\n  height: 26px;\n  min-width: 160px;\n  flex: none;\n  border-radius: 5px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-style {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 32px;\n  height: 100%;\n  flex-shrink: 0;\n}\n.artplayer-plugin-dan-any .apda-style-button {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n}\n.artplayer-plugin-dan-any .apda-style-panel {\n  position: absolute;\n  bottom: 24px;\n  left: 0;\n  width: 220px;\n  padding: 10px;\n  opacity: 0;\n  pointer-events: none;\n}\n.artplayer-plugin-dan-any .apda-style-panel-inner {\n  width: 100%;\n  box-sizing: border-box;\n  padding: 10px;\n  border-radius: 3px;\n  background-color: rgba(0, 0, 0, 0.85);\n}\n.artplayer-plugin-dan-any .apda-style:hover .apda-style-panel {\n  opacity: 1;\n  pointer-events: all;\n}\n.artplayer-plugin-dan-any .apda-style-section {\n  margin-bottom: 14px;\n}\n.artplayer-plugin-dan-any .apda-style-section:last-child {\n  margin-bottom: 0;\n}\n.artplayer-plugin-dan-any .apda-style-sizes,\n.artplayer-plugin-dan-any .apda-style-modes {\n  display: flex;\n  align-items: center;\n  margin-top: 7px;\n  gap: 10px;\n}\n.artplayer-plugin-dan-any .apda-style-size {\n  padding: 2px 6px;\n  border-radius: 3px;\n  color: rgba(255, 255, 255, 0.8);\n  background-color: rgba(255, 255, 255, 0.12);\n}\n.artplayer-plugin-dan-any .apda-style-size:hover,\n.artplayer-plugin-dan-any .apda-style-size[data-active='true'] {\n  color: #fff;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode {\n  display: block;\n  text-align: center;\n}\n.artplayer-plugin-dan-any .apda-style-mode .apd-icon {\n  display: block;\n  margin: 0 auto;\n}\n.artplayer-plugin-dan-any .apda-style-mode span {\n  display: block;\n}\n.artplayer-plugin-dan-any .apda-style-mode:hover,\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] {\n  color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-style-mode[data-active='true'] path {\n  fill: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-colors {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 7px;\n  gap: 8px;\n}\n.artplayer-plugin-dan-any .apda-color {\n  width: 16px;\n  height: 16px;\n  border-radius: 2px;\n  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);\n}\n.artplayer-plugin-dan-any .apda-color[data-active='true'] {\n  border: 1px solid #000;\n  box-shadow: 0 0 0 1px #fff;\n}\n.artplayer-plugin-dan-any .apda-input {\n  width: auto;\n  min-width: 0;\n  height: 100%;\n  flex: 1;\n  border: 0;\n  outline: none;\n  color: #fff;\n  line-height: 1;\n  background-color: transparent;\n}\n.artplayer-plugin-dan-any .apda-input::placeholder {\n  color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-send {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 60px;\n  height: 100%;\n  flex-shrink: 0;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  text-shadow: none;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-send[data-lock='true'],\n.artplayer-plugin-dan-any .apda-send[data-sending='true'] {\n  color: #666;\n  cursor: not-allowed;\n  background-color: #e7e7e7;\n}\n.artplayer-plugin-dan-any .apda-config-slider {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n.artplayer-plugin-dan-any .apda-value {\n  width: 32px;\n  flex-shrink: 0;\n  text-align: right;\n}\n.artplayer-plugin-dan-any .apda-slider {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 20px;\n  flex: 1;\n  cursor: pointer;\n  touch-action: none;\n}\n.artplayer-plugin-dan-any .apda-slider-line {\n  position: relative;\n  width: 100%;\n  height: 2px;\n  overflow: hidden;\n  border-radius: 3px;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.artplayer-plugin-dan-any .apda-slider-points {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.artplayer-plugin-dan-any .apda-slider-point {\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.5);\n}\n.artplayer-plugin-dan-any .apda-slider-progress {\n  width: 0%;\n  height: 100%;\n  background-color: #00a1d6;\n}\n.artplayer-plugin-dan-any .apda-slider-dot {\n  position: absolute;\n  left: 0%;\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  background-color: #00a1d6;\n  transform: translateX(-6px);\n}\n.artplayer-plugin-dan-any .apda-slider-steps {\n  position: absolute;\n  bottom: -12px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: calc(100% + 32px);\n  color: #777;\n}\n.artplayer-plugin-dan-any .apda-slider-step {\n  width: 36px;\n  flex-shrink: 0;\n  text-align: center;\n  scale: 0.95;\n}\n.art-controls-center .artplayer-plugin-dan-any {\n  width: auto;\n}\n.art-controls-left .artplayer-plugin-dan-any {\n  align-self: center;\n  height: var(--art-control-height);\n}\n.art-fullscreen .artplayer-plugin-dan-any,\n.art-fullscreen-web .artplayer-plugin-dan-any {\n  height: 38px;\n  gap: 16px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-toggle,\n.art-fullscreen .artplayer-plugin-dan-any .apda-config-button,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-config-button {\n  width: 28px;\n  height: 28px;\n}\n.art-fullscreen .artplayer-plugin-dan-any .apda-emitter,\n.art-fullscreen-web .artplayer-plugin-dan-any .apda-emitter {\n  width: 400px;\n  height: 30px;\n}\n.art-video-player > .artplayer-plugin-dan-any {\n  position: absolute;\n  left: 10px;\n  right: 10px;\n  bottom: -40px;\n}\n.art-video-player:has(> .artplayer-plugin-dan-any) {\n  margin-bottom: 40px;\n}\n[data-dan-any-emitter='false'] .apda-emitter,\n.artplayer-plugin-dan-any[data-dan-any-emitter='false'] .apda-emitter {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-on {\n  display: none;\n}\n[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='false'] .apda-toggle .apd-toggle-off {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-on {\n  display: block;\n}\n[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off,\n.artplayer-plugin-dan-any[data-dan-any-visible='true'] .apda-toggle .apd-toggle-off {\n  display: none;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'],\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] {\n  color: #00a1d6;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-anti-overlap='true'] .apda-other[data-action='antiOverlap'] .apd-check-off {\n  display: none;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'],\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] {\n  color: #00a1d6;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-on {\n  display: block;\n}\n[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off,\n.artplayer-plugin-dan-any[data-dan-any-synchronous-playback='true'] .apda-other[data-action='synchronousPlayback'] .apd-check-off {\n  display: none;\n}\n";
   const DEFAULT_EMIT_DANMAKU = {
     SOID: "artplayer@artplayer",
     attr: [],

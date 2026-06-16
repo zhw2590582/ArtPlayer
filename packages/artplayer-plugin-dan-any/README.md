@@ -128,6 +128,8 @@ Count danmaku render as `{content}` plus a visually separated `x{count}` badge. 
 
 Count danmaku are fixed at the top of the player, use an adaptive font size based on the final text length and player size, stay above normal danmaku, and do not use the original `mode` for rolling/top/bottom animation. Multiple count danmaku with overlapping lifetimes use their own top lanes, separate from normal danmaku anti-overlap.
 
+Count danmaku display is controlled by `typeOptions.count`. When `typeOptions.count` is `false`, count danmaku are not rendered even if their data is present.
+
 The package type declarations re-export `ExtraDanUniMerge` from `@dan-uni/dan-any/core` for consumers that want to type `extra.danuni.merge` directly.
 
 ## Options
@@ -141,7 +143,8 @@ The package type declarations re-export `ExtraDanUniMerge` from `@dan-uni/dan-an
 | `margin` | `[10, '25%']` | Top and bottom display margins. Values can be pixels or percentages. |
 | `opacity` | `1` | Danmaku opacity, clamped to `0` - `1`. |
 | `color` | `'#ffffff'` | Default CSS color or numeric color value. A danmaku item can override it. |
-| `modes` | `['Normal', 'Reverse', 'Top', 'Bottom']` | Visible modes. |
+| `modes` | `['Normal', 'Reverse', 'Top', 'Bottom', 'Ext']` | Visible modes. |
+| `typeOptions` | `{ color: true, count: true }` | Type filtering options. `color: false` ignores individual danmaku colors and uses the default color; `count: false` hides count danmaku. |
 | `fontSize` | `'source'` | Font size. Supports pixel number, percentage string, or source file size. |
 | `antiOverlap` | `true` | Avoid overlapping danmaku when possible. |
 | `synchronousPlayback` | `false` | Adjust danmaku speed with the video playback rate. |
@@ -163,9 +166,9 @@ The package type declarations re-export `ExtraDanUniMerge` from `@dan-uni/dan-an
 | `beforeVisible` | `() => true` | Called before each danmaku is shown. Can return a `Promise<boolean>`. |
 | `renderer` | built-in DOM renderer | Custom renderer object or factory. |
 
-Supported render modes are `Normal`, `Reverse`, `Top`, and `Bottom`.
+Supported render modes are `Normal`, `Reverse`, `Top`, `Bottom`, and `Ext`. The default DOM renderer does not yet implement `Ext` mode rendering (non-count advanced danmaku).
 
-Count danmaku with `extra.danuni.merge` are rendered even if their original mode is `Ext` or not included in `modes`.
+Count danmaku with `extra.danuni.merge` are rendered when `typeOptions.count` is `true`, regardless of their original mode or the `modes` list.
 
 UI sent danmaku are built as complete `UDanmaku` objects. `content` comes from the input, `progress` defaults to `Math.round(art.currentTime * 1000)` clamped to a non-negative int32 millisecond value, `ctime` is the send time, and `DMID` is generated with the current `UniDB.DMIDGenerator`. The send order is `filter` -> `beforeEmit` -> `emit` -> local renderer -> `artplayerPluginDanAny:emit`. They are added only to the current renderer queue; they are not inserted into the current `UniChunk` and do not change `udanmakus`.
 
