@@ -100,7 +100,7 @@ const art = new Artplayer({
   plugins: [
     artplayerPluginDanAny({
       danmuku: {
-        url: '/assets/sample/danmuku.xml',
+        url: '/assets/sample/danmuku-v3.xml',
         filename: 'danmuku.xml',
       },
 
@@ -162,6 +162,7 @@ const art = new Artplayer({
       width: 512, // 当播放器宽度小于此值时，控制面板置于播放器底部
       maxLength: 200, // 弹幕输入框最大长度，范围在[1 ~ 1000]
       lockTime: 5, // 发送成功后的锁定时间，范围在[1 ~ 60]
+      blockLevel: 0, // 弹幕屏蔽等级，范围在[0 ~ 10]，数值越大屏蔽等级越高
       filter: danmaku => danmaku.content.length <= 100, // 弹幕进入渲染队列前的过滤器
       beforeEmit: danmaku => danmaku.content.trim().length > 0, // 弹幕发送前的过滤器，支持返回 Promise<boolean>
       emit: async (danmaku) => {

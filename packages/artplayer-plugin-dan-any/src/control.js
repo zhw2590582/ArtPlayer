@@ -239,6 +239,7 @@ export default class DanAnyControl {
             ${this.sliderTemplate('margin', '显示区域')}
             ${this.sliderTemplate('fontSize', '弹幕字号')}
             ${this.sliderTemplate('speed', '弹幕速度')}
+            ${option.blockLevel !== false ? this.sliderTemplate('blockLevel', '屏蔽等级') : ''}
           </div>
         </div>
       </div>
@@ -414,6 +415,17 @@ export default class DanAnyControl {
           this.plugin.config({ speed: step.value })
       },
     })
+
+    // 只在启用屏蔽等级功能时创建滑块
+    if (this.plugin.option.blockLevel !== false) {
+      this.createSlider('blockLevel', {
+        min: 0,
+        max: 10,
+        findIndex: () => this.plugin.option.blockLevel,
+        label: index => `${index} 级`,
+        onChange: index => this.plugin.config({ blockLevel: index }),
+      })
+    }
   }
 
   createSlider(name, slider) {

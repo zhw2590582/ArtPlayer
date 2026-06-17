@@ -377,6 +377,11 @@ export interface Option {
    * 是否启用弹幕点击交互（默认 true）
    */
   enableInteraction?: boolean
+
+  /**
+   * 弹幕屏蔽等级：范围在[0 ~ 10]时视为默认值，将显示切换滑块；false 表示不开启
+   */
+  blockLevel?: number | false
 }
 
 export interface Result {

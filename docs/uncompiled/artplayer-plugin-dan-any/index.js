@@ -17216,6 +17216,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       onLike: void 0,
       onReport: void 0,
       enableInteraction: true,
+      blockLevel: false,
       ...option
     };
     normalized.speed = clamp$1(Number(normalized.speed) || 5, 1, 10);
@@ -17239,6 +17240,9 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     normalized.onLike = typeof normalized.onLike === "function" ? normalized.onLike : void 0;
     normalized.onReport = typeof normalized.onReport === "function" ? normalized.onReport : void 0;
     normalized.enableInteraction = normalized.enableInteraction !== false;
+    if (normalized.blockLevel !== false) {
+      normalized.blockLevel = clamp$1(Number(normalized.blockLevel) || 0, 0, 10);
+    }
     return normalized;
   }
   class DanAnyDomRenderer {
@@ -17494,6 +17498,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
         return;
       if (danmaku.mode === "Ext")
         return;
+      if (this.option.blockLevel !== false) {
+        const weight = Number(danmaku.weight) || 0;
+        if (weight < this.option.blockLevel)
+          return;
+      }
       const visible = await this.option.beforeVisible(danmaku);
       if (!visible)
         return;
@@ -17557,6 +17566,11 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
     async showMergeDanmaku(danmaku, merge2) {
       if (!this.option.typeOptions.count)
         return;
+      if (this.option.blockLevel !== false) {
+        const weight = Number(danmaku.weight) || 0;
+        if (weight < this.option.blockLevel)
+          return;
+      }
       const visible = await this.option.beforeVisible(danmaku);
       if (!visible)
         return;
@@ -18246,6 +18260,7 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             ${this.sliderTemplate("margin", "显示区域")}
             ${this.sliderTemplate("fontSize", "弹幕字号")}
             ${this.sliderTemplate("speed", "弹幕速度")}
+            ${option.blockLevel !== false ? this.sliderTemplate("blockLevel", "屏蔽等级") : ""}
           </div>
         </div>
       </div>
@@ -18403,6 +18418,15 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
             this.plugin.config({ speed: step.value });
         }
       });
+      if (this.plugin.option.blockLevel !== false) {
+        this.createSlider("blockLevel", {
+          min: 0,
+          max: 10,
+          findIndex: () => this.plugin.option.blockLevel,
+          label: (index2) => `${index2} 级`,
+          onChange: (index2) => this.plugin.config({ blockLevel: index2 })
+        });
+      }
     }
     createSlider(name, slider) {
       const $root = this.$control.querySelector(`[data-slider="${name}"]`);

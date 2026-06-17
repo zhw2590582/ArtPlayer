@@ -190,40 +190,41 @@ artplayerPluginDanAny({
 
 ## 全部选项
 
-| 选项                  | 默认值                                          | 说明                                                                                 |
-| --------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `danmuku`             | `[]`                                            | 初始弹幕来源                                                                         |
-| `handlerList`         | 内置列表                                        | 默认格式检测处理器                                                                   |
-| `plugins`             | `[]`                                            | `@dan-uni/dan-any` 插件数组                                                          |
-| `speed`               | `5`                                             | 弹幕持续时间（秒），范围 `1` - `10`，值越小速度越快                                  |
-| `margin`              | `[10, '25%']`                                   | 顶部和底部显示边距，支持像素或百分比                                                 |
-| `opacity`             | `1`                                             | 弹幕不透明度，范围 `0` - `1`                                                         |
-| `color`               | `'#ffffff'`                                     | 默认颜色，CSS 颜色或数值颜色                                                         |
-| `modes`               | `['Normal', 'Reverse', 'Top', 'Bottom', 'Ext']` | 可见模式列表                                                                         |
-| `typeOptions`         | `{ color: true, count: true }`                  | 类型过滤选项。`color: false` 忽略单条弹幕颜色使用默认色；`count: false` 隐藏计数弹幕 |
-| `fontSize`            | `'source'`                                      | 字号，支持像素数值、百分比字符串或源文件字号                                         |
-| `antiOverlap`         | `true`                                          | 尽可能避免弹幕重叠                                                                   |
-| `synchronousPlayback` | `false`                                         | 弹幕速度随视频播放速率调整                                                           |
-| `mount`               | 控制栏左侧                                      | 控制面板挂载点，接受元素或选择器                                                     |
-| `heatmap`             | `false`                                         | 启用弹幕热力图，接受 `true` 或热力图选项对象                                         |
-| `points`              | `[]`                                            | 外部热力图数据点 `{ time, value }[]`，`time` 单位为秒。空数组时自动使用已加载弹幕    |
-| `visible`             | `true`                                          | 弹幕层是否可见                                                                       |
-| `emitter`             | `true`                                          | 是否启用弹幕发射器                                                                   |
-| `emitDefaults`        | `{}`                                            | UI 发射器使用的默认 `UDanmaku` 字段。`ctime` 和 `DMID` 每次发送时自动生成            |
-| `emitterFontSizes`    | `[{ size: 18, text: '较小' }, ...]`             | 发射器面板字号选择                                                                   |
-| `emitterColors`       | 常用颜色列表                                    | 发射器面板颜色值，DanUni 数值颜色                                                    |
-| `emitterModes`        | `Normal`/`Top`/`Bottom`                         | 发射器面板位置选择，每项为 `{ type, text? }`                                         |
-| `maxLength`           | `200`                                           | 弹幕输入最大长度，范围 `1` - `1000`                                                  |
-| `lockTime`            | `5`                                             | 发送成功后 UI 发射器锁定时间（秒），范围 `1` - `60`                                  |
-| `width`               | `512`                                           | 当播放器宽度小于此值时，控制面板移到播放器下方                                       |
-| `filter`              | `() => true`                                    | 过滤加载的 `UDanmaku` 项                                                             |
-| `beforeEmit`          | `() => true`                                    | 发送前调用，可返回 `Promise<boolean>`                                                |
-| `emit`                | `() => true`                                    | 弹幕被接受时调用，可返回 `Promise`，返回 `false` 取消本地渲染                        |
-| `beforeVisible`       | `() => true`                                    | 每条弹幕显示前调用，可返回 `Promise<boolean>`                                        |
-| `renderer`            | 内置 DOM 渲染器                                 | 自定义渲染器对象或工厂函数                                                           |
-| `onLike`              | `undefined`                                     | 点赞弹幕回调。配置后弹幕工具提示显示点赞按钮，可返回 `Promise`                       |
-| `onReport`            | `undefined`                                     | 举报弹幕回调。配置后弹幕工具提示显示举报按钮，可返回 `Promise`                       |
-| `enableInteraction`   | `true`                                          | 是否启用弹幕点击交互。设为 `false` 时弹幕无法点击                                    |
+| 选项                  | 默认值                                          | 说明                                                                                                     |
+| --------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `danmuku`             | `[]`                                            | 初始弹幕来源                                                                                             |
+| `handlerList`         | 内置列表                                        | 默认格式检测处理器                                                                                       |
+| `plugins`             | `[]`                                            | `@dan-uni/dan-any` 插件数组                                                                              |
+| `speed`               | `5`                                             | 弹幕持续时间（秒），范围 `1` - `10`，值越小速度越快                                                      |
+| `margin`              | `[10, '25%']`                                   | 顶部和底部显示边距，支持像素或百分比                                                                     |
+| `opacity`             | `1`                                             | 弹幕不透明度，范围 `0` - `1`                                                                             |
+| `color`               | `'#ffffff'`                                     | 默认颜色，CSS 颜色或数值颜色                                                                             |
+| `modes`               | `['Normal', 'Reverse', 'Top', 'Bottom', 'Ext']` | 可见模式列表                                                                                             |
+| `typeOptions`         | `{ color: true, count: true }`                  | 类型过滤选项。`color: false` 忽略单条弹幕颜色使用默认色；`count: false` 隐藏计数弹幕                     |
+| `fontSize`            | `'source'`                                      | 字号，支持像素数值、百分比字符串或源文件字号                                                             |
+| `antiOverlap`         | `true`                                          | 尽可能避免弹幕重叠                                                                                       |
+| `synchronousPlayback` | `false`                                         | 弹幕速度随视频播放速率调整                                                                               |
+| `mount`               | 控制栏左侧                                      | 控制面板挂载点，接受元素或选择器                                                                         |
+| `heatmap`             | `false`                                         | 启用弹幕热力图，接受 `true` 或热力图选项对象                                                             |
+| `points`              | `[]`                                            | 外部热力图数据点 `{ time, value }[]`，`time` 单位为秒。空数组时自动使用已加载弹幕                        |
+| `visible`             | `true`                                          | 弹幕层是否可见                                                                                           |
+| `emitter`             | `true`                                          | 是否启用弹幕发射器                                                                                       |
+| `emitDefaults`        | `{}`                                            | UI 发射器使用的默认 `UDanmaku` 字段。`ctime` 和 `DMID` 每次发送时自动生成                                |
+| `emitterFontSizes`    | `[{ size: 18, text: '较小' }, ...]`             | 发射器面板字号选择                                                                                       |
+| `emitterColors`       | 常用颜色列表                                    | 发射器面板颜色值，DanUni 数值颜色                                                                        |
+| `emitterModes`        | `Normal`/`Top`/`Bottom`                         | 发射器面板位置选择，每项为 `{ type, text? }`                                                             |
+| `maxLength`           | `200`                                           | 弹幕输入最大长度，范围 `1` - `1000`                                                                      |
+| `lockTime`            | `5`                                             | 发送成功后 UI 发射器锁定时间（秒），范围 `1` - `60`                                                      |
+| `width`               | `512`                                           | 当播放器宽度小于此值时，控制面板移到播放器下方                                                           |
+| `filter`              | `() => true`                                    | 过滤加载的 `UDanmaku` 项                                                                                 |
+| `beforeEmit`          | `() => true`                                    | 发送前调用，可返回 `Promise<boolean>`                                                                    |
+| `emit`                | `() => true`                                    | 弹幕被接受时调用，可返回 `Promise`，返回 `false` 取消本地渲染                                            |
+| `beforeVisible`       | `() => true`                                    | 每条弹幕显示前调用，可返回 `Promise<boolean>`                                                            |
+| `renderer`            | 内置 DOM 渲染器                                 | 自定义渲染器对象或工厂函数                                                                               |
+| `onLike`              | `undefined`                                     | 点赞弹幕回调。配置后弹幕工具提示显示点赞按钮，可返回 `Promise`                                           |
+| `onReport`            | `undefined`                                     | 举报弹幕回调。配置后弹幕工具提示显示举报按钮，可返回 `Promise`                                           |
+| `enableInteraction`   | `true`                                          | 是否启用弹幕点击交互。设为 `false` 时弹幕无法点击                                                        |
+| `blockLevel`          | `false`                                         | 弹幕屏蔽等级。`false` 禁用功能；数字 `0-10` 启用功能并设置初始等级，只显示 `weight >= blockLevel` 的弹幕 |
 
 ### 支持的渲染模式
 
@@ -258,7 +259,7 @@ artplayerPluginDanAny({
     const response = await fetch('/api/danmaku', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(danmaku),
+      body: JSON.stringify(danmaku), // 不建议完全采纳本地的UDanmaku对象，如ctime、weight、DMID等字段应由后端生成以确保正确性和安全性，此处仅为示例
     })
 
     return response.ok
@@ -278,6 +279,7 @@ artplayerPluginDanAny({
 
 ```js
 // 重新加载或切换弹幕源
+// source 类型同 `option.danmuku`，支持多种输入格式
 await art.plugins.artplayerPluginDanAny.load('/assets/sample/danmuku.xml')
 
 // 发送完整 UDanmaku 到当前渲染器队列
@@ -426,6 +428,50 @@ art.emit('artplayerPluginDanAny:points', [
   { time: 60, value: 20 },
 ])
 ```
+
+## 弹幕屏蔽等级
+
+弹幕屏蔽等级功能允许根据弹幕的 `weight` 属性过滤显示内容，实现智能弹幕过滤。
+
+### 启用功能
+
+```js
+artplayerPluginDanAny({
+  danmuku: '/assets/sample/danmuku-v3.xml', // 需要弹幕数据包含 `weight` 字段(默认为 0),当前第三方弹幕源只有 bili 格式的新版(protobuf弹幕/近年获取的xml弹幕)支持
+  // 若您的弹幕后端使用 DanUni 方案，可以自行动态配置合适的 `weight` 值来区分弹幕优先级
+  blockLevel: 3, // 启用屏蔽等级功能，初始屏蔽等级设置为 3
+})
+```
+
+设置 `blockLevel` 为数字时启用功能，用户可以在弹幕设置面板通过滑块动态调整屏蔽等级。
+
+### 工作原理
+
+- 只显示 `weight >= blockLevel` 的弹幕
+- `weight` 默认为 `0`（最低优先级，最容易被屏蔽）
+- 设置 `blockLevel: false` 禁用过滤功能
+- 修改屏蔽等级后立即生效，无需重新加载
+
+### Weight 语义
+
+| Weight 值 | 建议用途                           |
+| --------- | ---------------------------------- |
+| `0-2`     | 低质量弹幕（广告、刷屏、垃圾内容） |
+| `3-5`     | 普通弹幕                           |
+| `6-8`     | 高质量弹幕                         |
+| `9-10`    | 重要弹幕（UP主、版主、重要公告）   |
+
+### 示例
+
+```js
+// 动态调整屏蔽等级
+art.plugins.artplayerPluginDanAny.config({ blockLevel: 3 })
+// 现在只显示 weight >= 3 的弹幕（屏蔽掉 weight < 3 的低质量弹幕）
+```
+
+### UI 控制
+
+启用功能后，弹幕设置面板会显示"屏蔽等级"滑块，用户可以通过拖动滑块动态调整屏蔽等级（0-10 级）。修改后立即生效。
 
 ## 弹幕交互
 

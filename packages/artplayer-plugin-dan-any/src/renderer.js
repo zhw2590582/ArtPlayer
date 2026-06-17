@@ -468,6 +468,7 @@ export function normalizeRendererOption(option = {}) {
     onLike: undefined,
     onReport: undefined,
     enableInteraction: true,
+    blockLevel: false,
     ...option,
   }
 
@@ -498,6 +499,11 @@ export function normalizeRendererOption(option = {}) {
   normalized.onLike = typeof normalized.onLike === 'function' ? normalized.onLike : undefined
   normalized.onReport = typeof normalized.onReport === 'function' ? normalized.onReport : undefined
   normalized.enableInteraction = normalized.enableInteraction !== false
+  // blockLevel 可以是 false (禁用功能) 或数字 0-10
+  // false 时禁用功能，数字时启用并作为初始值
+  if (normalized.blockLevel !== false) {
+    normalized.blockLevel = clamp(Number(normalized.blockLevel) || 0, 0, 10)
+  }
 
   return normalized
 }
@@ -840,6 +846,13 @@ export default class DanAnyDomRenderer {
     if (danmaku.mode === 'Ext')
       return
 
+    // 检查弹幕屏蔽等级
+    if (this.option.blockLevel !== false) {
+      const weight = Number(danmaku.weight) || 0
+      if (weight < this.option.blockLevel)
+        return
+    }
+
     const visible = await this.option.beforeVisible(danmaku)
     if (!visible)
       return
@@ -916,6 +929,13 @@ export default class DanAnyDomRenderer {
   async showMergeDanmaku(danmaku, merge) {
     if (!this.option.typeOptions.count)
       return
+
+    // 检查弹幕屏蔽等级
+    if (this.option.blockLevel !== false) {
+      const weight = Number(danmaku.weight) || 0
+      if (weight < this.option.blockLevel)
+        return
+    }
 
     const visible = await this.option.beforeVisible(danmaku)
     if (!visible)
