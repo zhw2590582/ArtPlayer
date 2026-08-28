@@ -152,7 +152,7 @@ export default class Artplayer extends Player {
 
   readonly notice: {
     timer: number | null
-    get show(): boolean
+    get show(): string | Error | false | ''
     set show(msg: string | Error | false | '')
     destroy: () => void
   }
