@@ -1,4 +1,4 @@
-import { addClass, append, createElement, def, getRect, hasClass, isInViewport, removeClass, setStyle } from '../utils'
+import { addClass, append, createElement, def, getRect, hasClass, isInViewport, removeClass, setStyle, silencePromise } from '../utils'
 
 export default function miniMix(art) {
   const {
@@ -53,7 +53,7 @@ export default function miniMix(art) {
       const $state = append($mini, `<div class="art-mini-state"></div>`)
       const $play = append($state, icons.play)
       const $pause = append($state, icons.pause)
-      proxy($play, 'click', () => art.play())
+      proxy($play, 'click', () => silencePromise(art.play()))
       proxy($pause, 'click', () => art.pause())
       initState($play, $pause)
       art.on('video:playing', () => initState($play, $pause))

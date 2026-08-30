@@ -1,5 +1,5 @@
 import config from '../config'
-import { addClass, isMobile, setStyle, sleep } from '../utils'
+import { addClass, isMobile, setStyle, silencePromise, sleep } from '../utils'
 
 export default function eventInit(art) {
   const {
@@ -51,7 +51,7 @@ export default function eventInit(art) {
   art.on('video:ended', () => {
     if (option.loop) {
       art.seek = 0
-      art.play()
+      silencePromise(art.play())
       art.controls.show = false
       art.mask.show = false
     }

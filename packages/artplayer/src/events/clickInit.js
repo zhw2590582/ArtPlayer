@@ -1,4 +1,4 @@
-import { includeFromEvent, isMobile } from '../utils'
+import { includeFromEvent, isMobile, silencePromise } from '../utils'
 
 export default function clickInit(art, events) {
   const {
@@ -35,11 +35,11 @@ export default function clickInit(art, events) {
 
         if (isMobile) {
           if (!art.isLock && MOBILE_CLICK_PLAY) {
-            art.toggle()
+            silencePromise(art.toggle())
           }
         }
         else {
-          art.toggle()
+          silencePromise(art.toggle())
         }
         clickTimes = clicks
         break
@@ -48,7 +48,7 @@ export default function clickInit(art, events) {
 
         if (isMobile) {
           if (!art.isLock && MOBILE_DBCLICK_PLAY) {
-            art.toggle()
+            silencePromise(art.toggle())
           }
         }
         else {

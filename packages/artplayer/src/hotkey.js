@@ -1,4 +1,4 @@
-import { isMobile } from './utils'
+import { isMobile, silencePromise } from './utils'
 
 export default class Hotkey {
   constructor(art) {
@@ -21,7 +21,7 @@ export default class Hotkey {
       })
 
       this.add('Space', () => {
-        this.art.toggle()
+        silencePromise(this.art.toggle())
       })
 
       this.add('ArrowLeft', () => {
