@@ -28,5 +28,5 @@ declare class ArtplayerToolIframe {
 
 export default ArtplayerToolIframe
 
-export = artplayerToolIframe
+export = artplayerToolIframe;
 export as namespace artplayerToolIframe;
