@@ -719,9 +719,12 @@
       "scope": [
         "artplayer-plugin-chapter"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
-      "evidence": [],
+      "evidence": [
+        "changes/2026-09-10-PILOT-01-chapter.md",
+        "baselines/pilot-validation.json"
+      ],
       "id": "PILOT-01",
       "phase": "2.1 早期试点",
       "title": "在旧核心上完成小插件迁移闭环",

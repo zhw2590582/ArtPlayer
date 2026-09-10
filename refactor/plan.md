@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 214 项，范围 22 个包及工作区/示例。
 
-状态：todo 179 / doing 0 / blocked 0 / done 35 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 178 / doing 0 / blocked 0 / done 36 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -98,7 +98,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PILOT-01 | artplayer-plugin-chapter<br>在旧核心上完成小插件迁移闭环 | PKG-CHAPTER-04, ENG-07, ENG-05, ENG-10 | chapter 的 TS、旧核心消费、真实浏览器、tarball、包内维护地图及粒度/成本反馈 | 不依赖 CORE 重构即可通过整个试点；最终核心仍由 chapter 05/06 重新验收 | H | todo |
+| PILOT-01 | artplayer-plugin-chapter<br>在旧核心上完成小插件迁移闭环 | PKG-CHAPTER-04, ENG-07, ENG-05, ENG-10 | chapter 的 TS、旧核心消费、真实浏览器、tarball、包内维护地图及粒度/成本反馈 | 不依赖 CORE 重构即可通过整个试点；最终核心仍由 chapter 05/06 重新验收 | H | done |
 
 ## 3-4 核心迁移
 
@@ -434,6 +434,7 @@
 - ENG-06: [记录](changes/2026-09-10-ENG-06-build-development.md) [记录](build-development.md) [记录](baselines/build-validation.json)
 - ENG-07: [记录](changes/2026-09-10-ENG-07-package-consumers.md) [记录](baselines/package-validation.json)
 - ENG-10: [记录](changes/2026-09-10-ENG-10-test-reliability.md) [记录](test-reliability.md)
+- PILOT-01: [记录](changes/2026-09-10-PILOT-01-chapter.md) [记录](baselines/pilot-validation.json)
 - PKG-CHAPTER-01: [记录](changes/2026-09-10-PKG-CHAPTER-01-contract.md) [记录](baselines/chapter-contract.md)
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)

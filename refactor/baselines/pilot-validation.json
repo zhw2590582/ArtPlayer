@@ -1,0 +1,26 @@
+{
+  "task": "PILOT-01",
+  "capturedAt": "2026-09-10T15:36:04.950Z",
+  "sourceFiles": [
+    "chapters.ts",
+    "index.ts",
+    "progress.ts",
+    "style.less",
+    "stylesheet.ts",
+    "types.ts"
+  ],
+  "packageMembersChecked": 56,
+  "reference": "chapter-types-validation.json",
+  "sourceReference": "chapter-migration-validation.json",
+  "runtimeChecks": 23,
+  "browser": {
+    "startTime": "2026-09-10T15:21:32.399Z",
+    "duration": 28003.863999999998,
+    "expected": 54,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "knownTypeBlockers": 0,
+  "finalCoreValidation": "PKG-CHAPTER-05/06 remains pending"
+}
