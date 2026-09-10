@@ -33,6 +33,7 @@ var artplayerPluginDashControl = (function() {
             return {
               html: getName(item),
               value: index,
+              id: item.id,
               default: !currentAuto && !!currentId && item.id === currentId
             };
           }),
@@ -64,7 +65,7 @@ var artplayerPluginDashControl = (function() {
                 }
               }
             });
-            dash.setRepresentationForTypeByIndex("video", item.value);
+            dash.setRepresentationForTypeById("video", item.id);
           }
           art.notice.show = `${title}: ${item.html}`;
           if (config.control)

@@ -25,6 +25,7 @@ jobs:
           yarn
           yarn lint
           yarn build:all
+          yarn test:dash-control
         env:
           CI: true
 
