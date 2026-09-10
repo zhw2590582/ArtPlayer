@@ -1,13 +1,13 @@
-import type { Option, Thumbnails } from '../../types/option'
+import type { OptionInput, Thumbnails } from '../../types/option'
 import type { Subtitle } from '../../types/subtitle'
 
-export type { Option } from '../../types/option'
+export type { Option, OptionInput } from '../../types/option'
 
 // A successfully merged typed input, not a general guard for arbitrary JS objects.
-export interface ResolvedOption extends Omit<Required<Option>, 'proxy' | 'subtitle' | 'thumbnails'> {
-  proxy: Option['proxy']
+export interface ResolvedOption extends Omit<Required<OptionInput>, 'proxy' | 'subtitle' | 'thumbnails'> {
+  proxy: OptionInput['proxy']
   subtitle: Required<Subtitle>
   thumbnails: Required<Thumbnails>
 }
 
-export type ResolvedInput<Input extends Option> = ResolvedOption & Omit<Input, keyof Option>
+export type ResolvedInput<Input extends OptionInput> = ResolvedOption & Omit<Input, keyof OptionInput>

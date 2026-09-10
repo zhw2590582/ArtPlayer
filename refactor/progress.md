@@ -1,5 +1,13 @@
 # 进度与证据
 
+## 当前实施：CORE-07 公开声明逐项协调完成
+
+OptionInput、数字组件输入、Utils 缺失项、静态 Emitter 和显式 cue 数组重载已补充，旧合法返回赋值样例保留。112 项 Node/基线、安装 UMD 三浏览器 144 项及 legacy 声明/配置 30 项通过；严格打包 27 项运行时与五组类型零诊断。见 [交付](changes/2026-09-11-CORE-07-declarations.md)。关闭 BASE-TYPE-06；BASE-TYPE-04/05/07 的返回/隐式推断冲突保持开放，已接入模块任务与 CORE-21 出口，不代表全部公开类型已精确化。当前 214 项，43 完成、171 待办；下一项 CORE-08 插件管理器与扩展类型。
+
+## 当前实施：CORE-07 公开声明协调进行中
+
+已补充 OptionInput/ComponentInput 和兼容重载，保留旧 Option 读取类型；补齐部分 Utils 声明，新增历史返回值消费样例。112 项 Node/基线、五组安装包类型及 18 项配置浏览器测试通过，见 [当前记录](changes/2026-09-11-CORE-07-declarations.md)。plugins/toggle/timer/setting/cue/static 仍需逐项协调，本任务保持 doing，尚未提交。当前 214 项，42 完成、1 实施、171 待办；上个完成任务 CORE-06 提交 ee859e48。
+
 ## 当前实施：CORE-06 媒体与宿主类型完成
 
 建立原生 video/canvas 媒体及最小宿主类型，五个播放/布局 mixin 迁移 TS，保持公开 art.video 身份、描述符和返回时序。111 项 Node/基线、安装 UMD 三浏览器 132 项及 legacy 播放/生命周期/代理 48 项通过；严格打包 27 项运行时、五组类型零诊断。见 [交付](changes/2026-09-11-CORE-06-media-hosts.md)。当前 214 项，42 完成、172 待办；核心二十三个 TS 文件、chapter 五个。代理完整迁移和主入口静态集成尚未完成；下一项 CORE-07 逐项协调公开声明差异。

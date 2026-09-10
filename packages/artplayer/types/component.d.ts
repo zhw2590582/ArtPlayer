@@ -1,5 +1,10 @@
 import type Artplayer from './artplayer'
 
+/** Input accepted by the existing HTML renderer, including numeric content. */
+export interface ComponentInput extends Omit<ComponentOption, 'html'> {
+  html?: string | HTMLElement | number
+}
+
 export interface Selector {
   /**
    * Whether the default is selected
@@ -56,7 +61,10 @@ export interface Component {
   /**
    * Dynamic add a component
    */
-  add: (option: ComponentOption | ((art: Artplayer) => ComponentOption)) => HTMLElement | undefined
+  add: {
+    (option: ComponentOption | ((art: Artplayer) => ComponentOption)): HTMLElement | undefined
+    (option: ComponentInput | ((art: Artplayer) => ComponentInput)): HTMLElement | undefined
+  }
 
   /**
    * Dynamic remove a component by name
@@ -66,7 +74,10 @@ export interface Component {
   /**
    * Dynamic update a component
    */
-  update: (option: ComponentOption) => HTMLElement | undefined
+  update: {
+    (option: ComponentOption): HTMLElement | undefined
+    (option: ComponentInput): HTMLElement | undefined
+  }
 }
 
 export interface ComponentOption {

@@ -1,5 +1,5 @@
 import type Artplayer from './artplayer'
-import type { ComponentOption } from './component'
+import type { ComponentInput, ComponentOption } from './component'
 import type { CssVar } from './cssVar'
 import type { I18n } from './i18n'
 import type { Icons } from './icons'
@@ -46,6 +46,14 @@ export interface Thumbnails {
    * The thumbnail scale
    */
   scale?: number
+}
+
+/** Constructor input; Option retains its historical required URL/read types. */
+export interface OptionInput extends Omit<Option, 'url' | 'controls' | 'layers' | 'contextmenu'> {
+  url?: string
+  controls?: ComponentInput[]
+  layers?: ComponentInput[]
+  contextmenu?: ComponentInput[]
 }
 
 export interface Option {

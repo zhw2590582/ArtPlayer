@@ -26,16 +26,24 @@ When changing types, run `yarn typecheck`, `yarn test:baseline` and
 chapter/legacy factories, language data, invalid inputs, NodeNext/Bundler and old
 TS 4.3.5 consumers. Run `yarn build:ts` to refresh editor declarations. Full editor
 behavior and other core declaration/runtime mismatches have CORE-07/SITE tasks.
+
 ## Configuration migration boundary
 
-CORE-05 keeps the public Option unchanged. Internal src/option/types.ts distinguishes
-typed input from defaults-filled ResolvedOption; it is not a new public export. The
-existing public url requirement and exclusion of numeric control HTML differ from
-verified JS behavior (BASE-TYPE-06, CORE-07). test/types/options-source.ts records the
-current rejection; replace those two negative cases with positive consumer coverage
-when expanding the public declarations. Do not change runtime validation to match a
-narrower historical declaration. Other optional fields and callback signatures remain
-subject to the existing public compatibility contract.
+Option retains its historical required URL and component read types. OptionInput is
+an additive constructor input: URL is optional and numeric component HTML is accepted.
+The constructor keeps its old overload and adds OptionInput; Component.add/update
+similarly retain their old signatures and add ComponentInput. Internal ResolvedOption
+uses the expanded input with defaults filled. It is not a new public runtime export.
+This preserves assignments such as `const url: string = option.url` for existing
+Option consumers while matching the verified JS input forms (BASE-TYPE-06).
+
+Use OptionInput for newly typed configurations that omit URL or use numeric HTML.
+test/types/options-source.ts and declaration-inputs.ts cover those forms positively;
+declaration-legacy.ts preserves old reads and historically legal return assumptions.
+Do not change runtime validation to match a narrower declaration. The additions,
+retained conflicts and follow-up owners are detailed in [COMPATIBILITY.md](./COMPATIBILITY.md).
+CORE-07 coordinates the differences; it does not close every conflicting old return
+signature. CORE-21 remains responsible for the generated/public declaration strategy.
 
 ## Internal media migration
 

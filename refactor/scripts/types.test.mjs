@@ -5,16 +5,52 @@ import test from 'node:test'
 import ts from 'typescript'
 import compat from 'typescript-compat'
 import { checkConsumer, checkProject } from '../../scripts/typecheck.mjs'
-import { refactorDir } from './releases.mjs'
+import { ensureArchive, hash, readMember, refactorDir } from './releases.mjs'
 
 test('Current and compatibility compilers reject invalid old public calls and unused error assertions', () => {
   const original = fs.readFileSync(path.join(refactorDir, '../test/types/public.ts'), 'utf8')
   for (const compiler of [ts, compat]) {
     assert.deepEqual(checkConsumer(compiler, 'node10-commonjs'), [])
     const invalid = "import Artplayer from 'artplayer'; new Artplayer({ container: '#player', url: 42 });"
-    assert(checkConsumer(compiler, 'node10-commonjs', invalid).some(d => d.code === 2322))
+    const diagnostics = checkConsumer(compiler, 'node10-commonjs', invalid)
+    assert.deepEqual(diagnostics.map(d => d.code), [2769], 'Both constructor overloads must reject the numeric URL')
+    assert.match(diagnostics[0].message, /Type 'number' is not assignable to type 'string/)
     const unused = original.replace('url: 42', "url: 'valid.mp4'")
     assert(checkConsumer(compiler, 'node10-commonjs', unused).some(d => d.code === 2578))
+  }
+})
+
+test('Historical return assignments retain exact published diagnostics and current acceptance', async () => {
+  const release = JSON.parse(fs.readFileSync(path.join(refactorDir, 'baselines/releases.json'), 'utf8')).releases.find(item => item.name === 'artplayer')
+  const archive = await ensureArchive(release)
+  const parent = path.join(refactorDir, '.cache')
+  const dir = fs.mkdtempSync(path.join(parent, 'legacy-types-'))
+  try {
+    for (const [member, digest] of Object.entries(release.files)) {
+      if (member !== 'package/package.json' && !member.startsWith('package/types/')) continue
+      const bytes = readMember(archive, member)
+      assert.equal(hash(bytes), digest)
+      const target = path.resolve(dir, 'node_modules/artplayer', member.slice('package/'.length))
+      assert(target.startsWith(path.join(dir, 'node_modules/artplayer') + path.sep))
+      fs.mkdirSync(path.dirname(target), { recursive: true })
+      fs.writeFileSync(target, bytes)
+    }
+    const filename = path.join(dir, 'legacy.ts')
+    fs.copyFileSync(path.join(refactorDir, '../test/types/declaration-legacy.ts'), filename)
+    for (const compiler of [ts, compat]) {
+      const program = compiler.createProgram([filename], { strict: true, noEmit: true, skipLibCheck: false, types: [], esModuleInterop: true, target: compiler.ScriptTarget.ES2020, module: compiler.ModuleKind.CommonJS, moduleResolution: compiler.ModuleResolutionKind.NodeJs, lib: ['lib.es2020.d.ts', 'lib.dom.d.ts'] })
+      const declarations = program.getSourceFiles().filter(file => file.fileName.replaceAll('\\', '/').includes('/artplayer/types/'))
+      assert(declarations.length > 0)
+      assert(declarations.every(file => path.resolve(file.fileName).startsWith(path.join(dir, 'node_modules/artplayer') + path.sep)))
+      const expected = compiler === compat ? [{ file: 'node_modules/artplayer/types/artplayer.d.ts', line: 155, code: 2380, message: "The return type of a 'get' accessor must be assignable to its 'set' accessor type" }] : []
+      assert.deepEqual(compiler.getPreEmitDiagnostics(program).map(d => ({ file: d.file && path.relative(dir, d.file.fileName).replaceAll('\\', '/'), line: d.file && d.file.getLineAndCharacterOfPosition(d.start).line + 1, code: d.code, message: compiler.flattenDiagnosticMessageText(d.messageText, '\n') })), expected, `TS ${compiler.version} historical consumer`)
+      assert.deepEqual(checkConsumer(compiler, 'node10-commonjs', fs.readFileSync(filename, 'utf8')), [], 'Current declarations must have zero diagnostics, including TS 4.3.5')
+    }
+  }
+  finally {
+    const resolved = fs.realpathSync(dir)
+    assert(path.dirname(resolved) === fs.realpathSync(parent) && path.basename(resolved).startsWith('legacy-types-'))
+    fs.rmSync(resolved, { recursive: true, force: true })
   }
 })
 

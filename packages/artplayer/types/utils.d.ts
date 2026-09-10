@@ -44,19 +44,28 @@ export interface Utils {
 
   errorHandle: <T extends boolean>(condition: T, msg: string) => T extends true ? T : never
   silencePromise: <T>(value: T) => T extends Promise<infer R> ? Promise<R | undefined> : T
-  def: (obj: object, name: string, value: unknown) => void
+  def: {
+    /** Historical string-key signature; runtime returns obj. */
+    (obj: object, name: string, value: unknown): void
+    <T>(obj: T, name: PropertyKey, value: PropertyDescriptor & ThisType<T>): T
+  }
   has: (obj: object, name: PropertyKey) => boolean
   get: (obj: object, name: PropertyKey) => PropertyDescriptor | undefined
   mergeDeep: <T extends object[]>(...args: T) => T[number]
 
-  sleep: (ms: number) => Promise<void>
+  sleep: (ms?: number) => Promise<void>
+  /** Historical return type; runtime discards the callback result and ignores context. */
   debounce: <F extends (...args: any[]) => any>(func: F, wait: number, context?: object) => (...args: Parameters<F>) => ReturnType<F>
+  /** Historical return type; runtime discards the callback result. */
   throttle: <F extends (...args: any[]) => any>(func: F, wait: number) => (...args: Parameters<F>) => ReturnType<F>
 
   clamp: (num: number, a: number, b: number) => number
   secondToTime: (second: number) => string
   escape: (str: string) => string
+  unescape: (str: string) => string
   capitalize: (str: string) => string
+
+  ArtPlayerError: new (message?: string, context?: ((...args: never[]) => unknown) | (abstract new (...args: never[]) => object)) => Error
 
   getIcon: (key?: string, html?: string | HTMLElement) => HTMLElement
   getComposedPath: (event: Event) => EventTarget[]

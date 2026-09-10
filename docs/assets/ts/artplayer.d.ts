@@ -44,19 +44,28 @@ export interface Utils {
 
   errorHandle: <T extends boolean>(condition: T, msg: string) => T extends true ? T : never
   silencePromise: <T>(value: T) => T extends Promise<infer R> ? Promise<R | undefined> : T
-  def: (obj: object, name: string, value: unknown) => void
+  def: {
+    /** Historical string-key signature; runtime returns obj. */
+    (obj: object, name: string, value: unknown): void
+    <T>(obj: T, name: PropertyKey, value: PropertyDescriptor & ThisType<T>): T
+  }
   has: (obj: object, name: PropertyKey) => boolean
   get: (obj: object, name: PropertyKey) => PropertyDescriptor | undefined
   mergeDeep: <T extends object[]>(...args: T) => T[number]
 
-  sleep: (ms: number) => Promise<void>
+  sleep: (ms?: number) => Promise<void>
+  /** Historical return type; runtime discards the callback result and ignores context. */
   debounce: <F extends (...args: any[]) => any>(func: F, wait: number, context?: object) => (...args: Parameters<F>) => ReturnType<F>
+  /** Historical return type; runtime discards the callback result. */
   throttle: <F extends (...args: any[]) => any>(func: F, wait: number) => (...args: Parameters<F>) => ReturnType<F>
 
   clamp: (num: number, a: number, b: number) => number
   secondToTime: (second: number) => string
   escape: (str: string) => string
+  unescape: (str: string) => string
   capitalize: (str: string) => string
+
+  ArtPlayerError: new (message?: string, context?: ((...args: never[]) => unknown) | (abstract new (...args: never[]) => object)) => Error
 
   getIcon: (key?: string, html?: string | HTMLElement) => HTMLElement
   getComposedPath: (event: Event) => EventTarget[]
@@ -330,6 +339,7 @@ export declare class Player {
 
   pause(): void
   play(): Promise<void>
+  /** Legacy signature; runtime preserves pause's synchronous result or play's Promise. */
   toggle(): void
 
   attr(key: string, value?: unknown): unknown
@@ -387,6 +397,14 @@ export interface Thumbnails {
    * The thumbnail scale
    */
   scale?: number
+}
+
+/** Constructor input; Option retains its historical required URL/read types. */
+export interface OptionInput extends Omit<Option, 'url' | 'controls' | 'layers' | 'contextmenu'> {
+  url?: string
+  controls?: ComponentInput[]
+  layers?: ComponentInput[]
+  contextmenu?: ComponentInput[]
 }
 
 export interface Option {
@@ -752,6 +770,12 @@ export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>
 
 export type Bar = 'loaded' | 'played' | 'hover'
 
+/** Actual built-in subtitle update payloads; legacy Events keeps its scalar types. */
+export interface SubtitleUpdateEvents {
+  subtitleBeforeUpdate: [cues: VTTCue[]]
+  subtitleAfterUpdate: [cues: VTTCue[]]
+}
+
 export interface Events {
   'document:click': [event: Event]
   'document:mouseup': [event: Event]
@@ -807,7 +831,9 @@ export interface Events {
   'destroy': []
 
   'subtitleOffset': [offset: number]
+  /** Legacy contextual type; annotate listeners with VTTCue[] for the runtime payload. */
   'subtitleBeforeUpdate': [cue: VTTCue]
+  /** Legacy contextual type; annotate listeners with VTTCue[] for the runtime payload. */
   'subtitleAfterUpdate': [cue: VTTCue]
   'subtitleLoad': [cues: VTTCue[], option: Subtitle]
 
@@ -843,6 +869,15 @@ export interface Events {
   'muted': [state: boolean]
   'setBar': [type: Bar, percentage: number, event?: Event | undefined]
   'keydown': [event: KeyboardEvent]
+}
+
+/** The event bus exposed by Artplayer.Emitter; no new runtime export. */
+export interface Emitter<Events extends { [Name in keyof Events]: readonly unknown[] } = Record<PropertyKey, unknown[]>> {
+  e?: { [Name in keyof Events]?: { fn: (...args: [...Events[Name]]) => unknown, ctx: unknown }[] }
+  on: <Name extends keyof Events, Context>(name: Name, fn: (this: Context, ...args: [...Events[Name]]) => unknown, ctx?: Context) => this
+  once: <Name extends keyof Events, Context>(name: Name, fn: (this: Context, ...args: [...Events[Name]]) => unknown, ctx?: Context) => this
+  emit: <Name extends keyof Events>(name: Name, ...args: [...Events[Name]]) => this
+  off: <Name extends keyof Events>(name: Name, fn?: (...args: [...Events[Name]]) => unknown) => this
 }
 
 export interface CssVar {
@@ -973,6 +1008,11 @@ export interface Config {
   ]
 }
 
+/** Input accepted by the existing HTML renderer, including numeric content. */
+export interface ComponentInput extends Omit<ComponentOption, 'html'> {
+  html?: string | HTMLElement | number
+}
+
 export interface Selector {
   /**
    * Whether the default is selected
@@ -1029,7 +1069,10 @@ export interface Component {
   /**
    * Dynamic add a component
    */
-  add: (option: ComponentOption | ((art: Artplayer) => ComponentOption)) => HTMLElement | undefined
+  add: {
+    (option: ComponentOption | ((art: Artplayer) => ComponentOption)): HTMLElement | undefined
+    (option: ComponentInput | ((art: Artplayer) => ComponentInput)): HTMLElement | undefined
+  }
 
   /**
    * Dynamic remove a component by name
@@ -1039,7 +1082,10 @@ export interface Component {
   /**
    * Dynamic update a component
    */
-  update: (option: ComponentOption) => HTMLElement | undefined
+  update: {
+    (option: ComponentOption): HTMLElement | undefined
+    (option: ComponentInput): HTMLElement | undefined
+  }
 }
 
 export interface ComponentOption {
@@ -1106,20 +1152,24 @@ export interface ComponentOption {
 
 export type {
   Config,
+  Emitter,
   Events,
   I18n,
   Icons,
   Option,
+  OptionInput,
   Player,
   Setting,
   SettingOption,
   Subtitle,
+  SubtitleUpdateEvents,
   Template,
   Utils,
 }
 
 export default class Artplayer extends Player {
   constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
+  constructor(option: OptionInput, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
 
   static readonly instances: Artplayer[]
   static readonly version: string
@@ -1128,7 +1178,7 @@ export default class Artplayer extends Player {
   static readonly config: Config
   static readonly utils: Utils
   static readonly scheme: Record<keyof Option, unknown>
-  static readonly Emitter: new (...args: unknown[]) => unknown
+  static readonly Emitter: new <Events extends { [Name in keyof Events]: readonly unknown[] } = Record<PropertyKey, unknown[]>>(...args: unknown[]) => Emitter<Events>
   static readonly validator: <T extends object>(option: T, scheme: object) => T
   static readonly kindOf: (item: unknown) => string
   static readonly html: Artplayer['template']['html']
@@ -1186,15 +1236,19 @@ export default class Artplayer extends Player {
   torrent?: unknown
 
   on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
+  on<T extends keyof SubtitleUpdateEvents>(name: T, fn: (...args: SubtitleUpdateEvents[T]) => unknown, ctx?: object): this
   on(name: string, fn: (...args: unknown[]) => unknown, ctx?: object): this
 
   once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
+  once<T extends keyof SubtitleUpdateEvents>(name: T, fn: (...args: SubtitleUpdateEvents[T]) => unknown, ctx?: object): this
   once(name: string, fn: (...args: unknown[]) => unknown, ctx?: object): this
 
   emit<T extends keyof Events>(name: T, ...args: Events[T]): this
+  emit<T extends keyof SubtitleUpdateEvents>(name: T, ...args: SubtitleUpdateEvents[T]): this
   emit(name: string, ...args: unknown[]): this
 
   off<T extends keyof Events>(name: T, callback?: (...args: Events[T]) => unknown): this
+  off<T extends keyof SubtitleUpdateEvents>(name: T, callback?: (...args: SubtitleUpdateEvents[T]) => unknown): this
   off(name: string, callback?: (...args: unknown[]) => unknown): this
 
   query: Artplayer['template']['query']
@@ -1280,13 +1334,18 @@ export default class Artplayer extends Player {
   readonly setting: {
     option: SettingOption[]
     updateStyle: (width?: number) => void
+    /** Legacy return signature; a missing runtime entry is null. */
     find: (name: string) => SettingOption | undefined
+    /** Legacy return signature; runtime returns the formatted input item. */
     add: (setting: Setting) => Artplayer['setting']
+    /** Legacy return signature; runtime returns the updated or added item. */
     update: (settings: Setting) => Artplayer['setting']
+    /** Legacy return signature; runtime returns undefined. */
     remove: (name: string) => Artplayer['setting']
   } & Component
 
   readonly plugins: {
+    /** Legacy signature: synchronous factories return this registry directly; Promise factories return a Promise of it. */
     add: (
       plugin: (this: Artplayer, art: Artplayer) => unknown | Promise<unknown>,
     ) => Promise<Artplayer['plugins']>

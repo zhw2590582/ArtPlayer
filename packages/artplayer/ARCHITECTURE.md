@@ -13,7 +13,7 @@ The entry passes Artplayer.option to `option/resolve.ts`, which performs the exi
 deep merge, restores input.container by reference and invokes the same option-validator
 function. Allocation of the instance id still precedes validation; DOM mounting follows it.
 
-`option/types.ts` reuses the public Option as the typed input contract. ResolvedOption
+`option/types.ts` reuses the public OptionInput as the typed input contract. ResolvedOption
 requires top-level defaults and subtitle/thumbnail defaults, while explicitly allowing
 proxy to remain undefined. ResolvedInput preserves extra typed application fields without
 adding a global any index signature. The one assertion after validation connects the
@@ -30,12 +30,14 @@ The public Artplayer.validator and scheme references remain available as before.
 
 Merge behavior includes unknown own keys, collection item references, two reads of an
 enumerable input container getter, and restoration of an inherited container. Explicit
-undefined can still fail the existing schema instead of being silently defaulted. This
-task changes neither validation rules nor public consumer declarations.
+undefined can still fail the existing schema instead of being silently defaulted.
+Runtime validation is unchanged; public input expansions are described below.
 
-Two verified declaration gaps are tracked as BASE-TYPE-06 for CORE-07: existing JS can
-omit url and use numeric control HTML, while the current public types reject those forms.
-The historical rejection fixtures must become positive consumer checks when reconciled.
+CORE-07 adds OptionInput for omitted URL and numeric component HTML. Historical Option
+keeps its required URL/read types; the constructor accepts both via overloads. Source
+fixtures now accept the expanded inputs, and declaration-legacy.ts protects old reads.
+The additive declarations and remaining return conflicts are tracked in
+[types/COMPATIBILITY.md](./types/COMPATIBILITY.md).
 Other permissive validator cases are not blanket guarantees that later DOM/media code
 can consume every accepted value. Preserve failure stages while migrating those consumers.
 
@@ -257,11 +259,10 @@ documented cast to the pre-existing generic return contract. No file-wide any or
 type-check suppression was added. The main public declarations remain a separate
 compatibility surface; see [types/README.md](./types/README.md).
 
-Existing declaration discrepancies are still tracked for CORE-07: Utils lacks some
-runtime exports, def is declared void, debounce/throttle declare the callback return
-instead of void, and debounce's old optional context argument is ignored at runtime.
-Sleep's declaration also requires a delay while runtime defaults to zero. These were
-not silently tightened during source migration; use the actual source types internally.
+Public return discrepancies remain after CORE-07. It adds unescape/ArtPlayerError,
+optional sleep and a symbol/PropertyKey def overload; old string def and debounce/throttle return declarations
+remain for source compatibility. The old debounce context argument is ignored at runtime.
+BASE-TYPE-05 remains open through CORE-21; use the actual source types internally.
 Lifecycle-owned timer cancellation is part of CORE-04/17 and the existing BASE-PERF-01
 finding, not a claim that a standalone debounce can know when its owner is destroyed.
 

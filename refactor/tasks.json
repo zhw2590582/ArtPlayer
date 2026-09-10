@@ -870,11 +870,14 @@
         "CORE-06",
         "BASE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "plugins/toggle/cue/setting/static 的旧新类型对照",
       "acceptance": "每项有兼容重载/扩展或待决结论，不能删除旧类型样例；处理 BASE-TYPE-01/04，分别保留旧合法声明消费并验证真实返回；协调 BASE-TYPE-05 的 Utils 导出、descriptor 和 timer 旧声明差异",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-07-declarations.md",
+        "baselines/declarations-validation.json"
+      ]
     },
     {
       "id": "CORE-08",
@@ -890,7 +893,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "注册流程、同步/异步结果、插件/事件扩展接口",
-      "acceptance": "旧插件同步可见性、重名与命名、销毁中异步插件保持明确语义；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-03 并增加候选正向回归",
+      "acceptance": "旧插件同步可见性、重名与命名、销毁中异步插件保持明确语义；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-03 并增加候选正向回归；接续 CORE-07 / BASE-TYPE-04 的同步/异步注册返回声明冲突，内部返回类型精确，保留历史消费者",
       "evidence": []
     },
     {
@@ -924,7 +927,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "play/pause/toggle/seek/volume/rate/duration 等模块",
-      "acceptance": "旧返回值、拒绝、mutex、位置恢复、属性描述符与事件通过",
+      "acceptance": "旧返回值、拒绝、mutex、位置恢复、属性描述符与事件通过；接续 CORE-07 / BASE-TYPE-04 的 toggle void 与实际 Promise 分支冲突，不吞拒绝",
       "evidence": []
     },
     {
@@ -991,7 +994,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "setting model/selection/render/layout 的分批实现",
-      "acceptance": "不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过；结合 BASE-DOM-02 验证窄容器设置定位",
+      "acceptance": "不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过；结合 BASE-DOM-02 验证窄容器设置定位；接续 BASE-TYPE-07 的 find null、add/update item、remove undefined 声明冲突",
       "evidence": []
     },
     {
@@ -1008,7 +1011,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "subtitle 请求/track/DOM/URL 生命周期与类型",
-      "acceptance": "过期结果、偏移、cue 数组、原生全屏及错误路径通过",
+      "acceptance": "过期结果、偏移、cue 数组、原生全屏及错误路径通过；接续 BASE-TYPE-07 的真实 cue 数组与旧隐式 scalar 回调声明兼容",
       "evidence": []
     },
     {
@@ -1060,7 +1063,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "autoPlayback/autoOrientation/fastForward/lock/miniProgressBar 及 info/notice/loading/mask",
-      "acceptance": "默认启用条件、storage 格式、定时器/动画清理通过；结合 BASE-PERF-01 防止销毁后重新安排 notice timer",
+      "acceptance": "默认启用条件、storage 格式、定时器/动画清理通过；结合 BASE-PERF-01 防止销毁后重新安排 notice timer；接续 BASE-TYPE-07 的 notice.show boolean getter 与历史读类型冲突",
       "evidence": []
     },
     {
@@ -1114,7 +1117,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "由 TS 生成的既有入口声明与三种发布产物",
-      "acceptance": "内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过",
+      "acceptance": "内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过；逐项完成 CORE-07 留下的 BASE-TYPE-04/05/07 声明方案，旧合法消费者与实际返回分别留证；不能以虚假的交叉返回类型或改变运行时来掩盖冲突，未决项阻止核心声明出口",
       "evidence": []
     },
     {

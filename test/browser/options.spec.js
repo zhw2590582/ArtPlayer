@@ -1,17 +1,25 @@
 import { expect, test } from './fixtures.js'
 
 for (const core of ['published', 'candidate']) {
-  test(`${core}: historical JS option forms remain accepted despite declaration gaps`, async ({ page }) => {
+  test(`${core}: expanded option input preserves historical JS forms`, async ({ page }) => {
     await page.goto(`/test/player.html?core=${core}&chapter=published`)
     const result = await page.evaluate(() => {
       const container = document.createElement('div')
       document.body.append(container)
-      const art = new window.Artplayer({ container, controls: [{ name: 'numeric', html: 42, position: 'left' }] })
-      const result = { url: art.option.url, html: art.controls.numeric.textContent }
+      const art = new window.Artplayer({
+        container,
+        controls: [{ name: 'numeric', html: 42, position: 'left' }],
+        layers: [{ name: 'numeric', html: 43 }],
+        contextmenu: [{ name: 'numeric', html: 44 }],
+      })
+      const result = { url: art.option.url, html: art.controls.numeric.textContent, layer: art.layers.numeric.textContent, menu: art.contextmenu.numeric.textContent }
+      art.controls.update({ name: 'numeric', html: 45, position: 'left' })
+      result.updated = art.controls.numeric.textContent
+      result.added = art.layers.add({ name: 'added', html: 46 }).textContent
       art.destroy()
       return result
     })
-    expect(result).toEqual({ url: '', html: '42' })
+    expect(result).toEqual({ url: '', html: '42', layer: '43', menu: '44', updated: '45', added: '46' })
   })
 
   test(`${core}: configuration errors occur before mounting and preserve allocation timing`, async ({ page }) => {

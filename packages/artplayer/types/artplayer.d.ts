@@ -1,9 +1,10 @@
 import type { Component } from './component'
 import type { Config } from './config'
-import type { Events } from './events'
+import type { Emitter } from './emitter'
+import type { Events, SubtitleUpdateEvents } from './events'
 import type { I18n } from './i18n'
 import type { Icons } from './icons'
-import type { Option } from './option'
+import type { Option, OptionInput } from './option'
 import type { Player } from './player'
 import type { Setting, SettingOption } from './setting'
 import type { Subtitle } from './subtitle'
@@ -12,20 +13,24 @@ import type { Utils } from './utils'
 
 export type {
   Config,
+  Emitter,
   Events,
   I18n,
   Icons,
   Option,
+  OptionInput,
   Player,
   Setting,
   SettingOption,
   Subtitle,
+  SubtitleUpdateEvents,
   Template,
   Utils,
 }
 
 export default class Artplayer extends Player {
   constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
+  constructor(option: OptionInput, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
 
   static readonly instances: Artplayer[]
   static readonly version: string
@@ -34,7 +39,7 @@ export default class Artplayer extends Player {
   static readonly config: Config
   static readonly utils: Utils
   static readonly scheme: Record<keyof Option, unknown>
-  static readonly Emitter: new (...args: unknown[]) => unknown
+  static readonly Emitter: new <Events extends { [Name in keyof Events]: readonly unknown[] } = Record<PropertyKey, unknown[]>>(...args: unknown[]) => Emitter<Events>
   static readonly validator: <T extends object>(option: T, scheme: object) => T
   static readonly kindOf: (item: unknown) => string
   static readonly html: Artplayer['template']['html']
@@ -92,15 +97,19 @@ export default class Artplayer extends Player {
   torrent?: unknown
 
   on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
+  on<T extends keyof SubtitleUpdateEvents>(name: T, fn: (...args: SubtitleUpdateEvents[T]) => unknown, ctx?: object): this
   on(name: string, fn: (...args: unknown[]) => unknown, ctx?: object): this
 
   once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
+  once<T extends keyof SubtitleUpdateEvents>(name: T, fn: (...args: SubtitleUpdateEvents[T]) => unknown, ctx?: object): this
   once(name: string, fn: (...args: unknown[]) => unknown, ctx?: object): this
 
   emit<T extends keyof Events>(name: T, ...args: Events[T]): this
+  emit<T extends keyof SubtitleUpdateEvents>(name: T, ...args: SubtitleUpdateEvents[T]): this
   emit(name: string, ...args: unknown[]): this
 
   off<T extends keyof Events>(name: T, callback?: (...args: Events[T]) => unknown): this
+  off<T extends keyof SubtitleUpdateEvents>(name: T, callback?: (...args: SubtitleUpdateEvents[T]) => unknown): this
   off(name: string, callback?: (...args: unknown[]) => unknown): this
 
   query: Artplayer['template']['query']
@@ -186,13 +195,18 @@ export default class Artplayer extends Player {
   readonly setting: {
     option: SettingOption[]
     updateStyle: (width?: number) => void
+    /** Legacy return signature; a missing runtime entry is null. */
     find: (name: string) => SettingOption | undefined
+    /** Legacy return signature; runtime returns the formatted input item. */
     add: (setting: Setting) => Artplayer['setting']
+    /** Legacy return signature; runtime returns the updated or added item. */
     update: (settings: Setting) => Artplayer['setting']
+    /** Legacy return signature; runtime returns undefined. */
     remove: (name: string) => Artplayer['setting']
   } & Component
 
   readonly plugins: {
+    /** Legacy signature: synchronous factories return this registry directly; Promise factories return a Promise of it. */
     add: (
       plugin: (this: Artplayer, art: Artplayer) => unknown | Promise<unknown>,
     ) => Promise<Artplayer['plugins']>

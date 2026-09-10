@@ -3,6 +3,12 @@ import type { Subtitle } from './subtitle'
 
 export type Bar = 'loaded' | 'played' | 'hover'
 
+/** Actual built-in subtitle update payloads; legacy Events keeps its scalar types. */
+export interface SubtitleUpdateEvents {
+  subtitleBeforeUpdate: [cues: VTTCue[]]
+  subtitleAfterUpdate: [cues: VTTCue[]]
+}
+
 export interface Events {
   'document:click': [event: Event]
   'document:mouseup': [event: Event]
@@ -58,7 +64,9 @@ export interface Events {
   'destroy': []
 
   'subtitleOffset': [offset: number]
+  /** Legacy contextual type; annotate listeners with VTTCue[] for the runtime payload. */
   'subtitleBeforeUpdate': [cue: VTTCue]
+  /** Legacy contextual type; annotate listeners with VTTCue[] for the runtime payload. */
   'subtitleAfterUpdate': [cue: VTTCue]
   'subtitleLoad': [cues: VTTCue[], option: Subtitle]
 

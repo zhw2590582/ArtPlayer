@@ -232,19 +232,25 @@
     {
       "id": "BASE-TYPE-04",
       "title": "plugins.add / toggle 的旧声明返回值与运行时不同",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
-        "CORE-07"
+        "CORE-07",
+        "CORE-08",
+        "CORE-10",
+        "CORE-21"
       ],
       "evidence": [
         "refactor/baselines/consumers.json",
         "refactor/baselines/public-api.json",
-        "refactor/baselines/lifecycle.json"
+        "refactor/baselines/lifecycle.json",
+        "test/types/declaration-legacy.ts",
+        "refactor/changes/2026-09-11-CORE-07-declarations.md",
+        "refactor/baselines/declarations-validation.json"
       ],
       "compatibleResolution": "保留旧声明接受范围并协调精确重载/扩展，不静默把同步注册改成 async。",
       "closureCriteria": "返回值类型与运行时差异逐项说明，旧合法消费和拒绝传播回归通过。",
-      "scopeNote": "plugins.add synchronous result is browser-reproduced; toggle return comparison also relies on current source/playback tests. Do not claim every declaration mismatch was independently browser-reproduced."
+      "scopeNote": "CORE-07 retains historical legal return assignments and records actual runtime separately; incompatible return tightening remains open through CORE-21. No release waiver."
     },
     {
       "id": "BASE-DIST-01",
@@ -726,16 +732,21 @@
       "confirmation": "source-observed",
       "status": "open",
       "owners": [
-        "CORE-07"
+        "CORE-07",
+        "CORE-21"
       ],
       "evidence": [
         "packages/artplayer/types/utils.d.ts",
         "test/utils.test.js",
         "test/types/utils-source.ts",
-        "refactor/changes/2026-09-10-CORE-01-typed-utils.md"
+        "refactor/changes/2026-09-10-CORE-01-typed-utils.md",
+        "test/types/declaration-legacy.ts",
+        "refactor/changes/2026-09-11-CORE-07-declarations.md",
+        "refactor/baselines/declarations-validation.json"
       ],
       "compatibleResolution": "Coordinate compatible public overloads/exports separately; use accurate strict types in migrated source.",
-      "closureCriteria": "Cover missing unescape/ArtPlayerError, def identity/property keys, optional sleep, timer void returns and ignored debounce context; retain legal old consumers in new/old compilers."
+      "closureCriteria": "Cover missing unescape/ArtPlayerError, def identity/property keys, optional sleep, timer void returns and ignored debounce context; retain legal old consumers in new/old compilers.",
+      "scopeNote": "CORE-07 retains historical legal return assignments and records actual runtime separately; incompatible return tightening remains open through CORE-21. No release waiver."
     },
     {
       "id": "EVENT-NAME-01",
@@ -787,7 +798,7 @@
       "id": "BASE-TYPE-06",
       "title": "Public Option requires url and excludes numeric control HTML accepted by existing JS",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-07"
       ],
@@ -798,7 +809,37 @@
         "refactor/changes/2026-09-11-CORE-05-resolved-options.md"
       ],
       "compatibleResolution": "Expand public declarations for the verified legal JS forms; preserve existing typed inputs and runtime defaults.",
-      "closureCriteria": "Replace the two historical negative fixtures with positive public consumers and verify old/new TypeScript plus installed package modes."
+      "closureCriteria": "Replace the two historical negative fixtures with positive public consumers and verify old/new TypeScript plus installed package modes.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-07-declarations.md",
+        "refactor/baselines/declarations-validation.json",
+        "test/types/declaration-inputs.ts",
+        "test/browser/options.spec.js"
+      ],
+      "resolutionRationale": "Additive OptionInput/ComponentInput and constructor/component overloads accept omitted URL and numeric HTML while preserving historical Option reads. Five installed compiler modes and old/new core browser input cases pass."
+    },
+    {
+      "id": "BASE-TYPE-07",
+      "title": "Setting returns, subtitle contextual payloads and notice getter conflict with historical declarations",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-07",
+        "CORE-14",
+        "CORE-15",
+        "CORE-18",
+        "CORE-21"
+      ],
+      "evidence": [
+        "test/browser/declarations.spec.js",
+        "test/types/declaration-legacy.ts",
+        "packages/artplayer/types/artplayer.d.ts",
+        "packages/artplayer/types/events.d.ts",
+        "refactor/baselines/declarations-validation.json"
+      ],
+      "compatibleResolution": "Keep legacy consumers; add explicit cue-array listener overloads, type internal implementations accurately, and resolve remaining generated/public facade contracts at CORE-21 without false intersections.",
+      "closureCriteria": "Actual setting/null/void and notice boolean returns, cue array callbacks and old legal type consumers all have an explicit compatible declaration strategy and package tests.",
+      "scopeNote": "CORE-07 provides runtime evidence and explicit cue-array overloads; old inferred scalar event callbacks and return signatures are not claimed corrected."
     }
   ]
 }

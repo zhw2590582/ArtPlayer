@@ -1,4 +1,4 @@
-import type { Events } from 'artplayer'
+import type { Events, Emitter as PublicEmitter } from 'artplayer'
 import Emitter from '../../packages/artplayer/src/utils/emitter'
 
 const symbol = Symbol('message')
@@ -12,6 +12,7 @@ class TypedEmitter extends Emitter<Messages> {
   count = 0
 }
 const events = new TypedEmitter()
+const publicShape: PublicEmitter<Messages> = events
 const context = { total: 0 }
 const chain: TypedEmitter = events.on('value', function (count, label) {
   this.total += count
@@ -39,4 +40,4 @@ events.on('ready', contextListener, { total: 'zero' })
 function contextListener(this: { total: number }) {
   return this.total
 }
-void chain
+void [chain, publicShape]

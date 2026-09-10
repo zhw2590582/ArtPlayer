@@ -1,4 +1,4 @@
-import type { Option, ResolvedOption } from '../../packages/artplayer/src/option/types'
+import type { Option, OptionInput, ResolvedOption } from '../../packages/artplayer/src/option/types'
 import createDefaults from '../../packages/artplayer/src/option/defaults'
 import resolveOption from '../../packages/artplayer/src/option/resolve'
 
@@ -25,9 +25,8 @@ resolved.subtitle.onVttLoad = () => 42
 // @ts-expect-error Application fields retain their own type.
 extended.application.token = 'invalid'
 
-// Historical public declaration gaps; CORE-07 must replace these with positive checks.
-// @ts-expect-error Runtime accepts an omitted URL, but the current public Option requires it.
-const omittedUrl: Option = { container: '#player' }
-// @ts-expect-error Runtime accepts numeric control HTML, but the current public type excludes it.
-const numericHtml: NonNullable<Option['controls']>[number] = { html: 42, position: 'left' }
-void [omittedUrl, numericHtml]
+const omittedUrl: OptionInput = { container: '#player' }
+const numericHtml: NonNullable<OptionInput['controls']>[number] = { html: 42, position: 'left' }
+const expanded = resolveOption({ ...omittedUrl, controls: [numericHtml] }, createDefaults())
+const defaultUrl: string = expanded.url
+void [omittedUrl, numericHtml, defaultUrl]

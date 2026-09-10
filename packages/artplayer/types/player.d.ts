@@ -93,6 +93,7 @@ export declare class Player {
 
   pause(): void
   play(): Promise<void>
+  /** Legacy signature; runtime preserves pause's synchronous result or play's Promise. */
   toggle(): void
 
   attr(key: string, value?: unknown): unknown
