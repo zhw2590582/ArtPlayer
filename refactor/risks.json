@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-10T13:46:01.011Z",
+  "updatedAt": "2026-09-10T14:41:52.219Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -163,7 +163,7 @@
       "id": "BASE-TYPE-02",
       "title": "chapter 可选运行时参数被声明为必填",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-CHAPTER-02"
       ],
@@ -172,7 +172,15 @@
         "refactor/fixtures/api.js"
       ],
       "compatibleResolution": "补充兼容可选参数，不删除已接受的配置。",
-      "closureCriteria": "无参数和正确参数编译，错误参数依旧被拒绝，运行时一致。"
+      "closureCriteria": "无参数和正确参数编译，错误参数依旧被拒绝，运行时一致。",
+      "resolutionEvidence": [
+        "packages/artplayer-plugin-chapter/types/artplayer-plugin-chapter.d.ts",
+        "test/types/chapter-options.ts",
+        "refactor/scripts/types.test.mjs",
+        "test/browser/chapter.spec.js",
+        "refactor/changes/2026-09-10-PKG-CHAPTER-02-tests.md"
+      ],
+      "resolutionRationale": "工厂 option 扩展为可选，旧/新 TS 消费与实际无参插件注册通过；update 及非法输入仍受严格约束。编辑器声明已重新生成。NodeNext ESM 与 legacy 分发问题仍由其他条目跟踪。"
     },
     {
       "id": "BASE-TYPE-03",

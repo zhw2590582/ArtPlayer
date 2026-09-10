@@ -24,7 +24,11 @@
           url,
           muted: true,
           plugins: chapter
-            ? [artplayerPluginChapter({ chapters: [{ start: 0, end: Infinity, title: 'Pattern' }] })]
+            ? [
+                artplayerPluginChapter(
+                  chapter === true ? { chapters: [{ start: 0, end: Infinity, title: 'Pattern' }] } : chapter,
+                ),
+              ]
             : [],
         })
         for (const name of [

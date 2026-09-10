@@ -1,0 +1,329 @@
+{
+  "task": "PKG-CHAPTER-02",
+  "capturedAt": "2026-09-10T14:39:42.386Z",
+  "node": "24.21.0",
+  "platform": "win32",
+  "sourceHashAlgorithm": "sha256-lf",
+  "hashes": {
+    "packages/artplayer-plugin-chapter/src/index.js": "fcd732e4257597a8cbb192fa4d715488b344df361a3a5b7d0e7c70f7554a73e6",
+    "packages/artplayer-plugin-chapter/types/artplayer-plugin-chapter.d.ts": "15856abc93ef140cf0c589c30f80335e5395b30b4604bc040e7e241281882127",
+    "docs/assets/ts/artplayer-plugin-chapter.d.ts": "2931630e9fca67ddf3b3b4018b7cce8df880c6528a4d34140bbacc15abab54d8",
+    "test/browser/chapter.spec.js": "a13aca482cf25eea4c240782262c597192781b763425d9da233275bd1d02c3c2",
+    "test/browser/player.html": "4037c6eadc5da176f9dd67b2b517acb06c8cb2246c841316df26c660e55584b4",
+    "test/browser/playback.spec.js": "5cc5df6f3968f3e834a6b2bc2c76c3c1c4ec5e7bda5ee3e99aa7394d24ac7e18",
+    "test/types/chapter-options.ts": "8ae16ff704befdcf5303012d15d108bad4aa7dab4d62da9c02cff4776680fe60",
+    "refactor/scripts/types.test.mjs": "17a4c9a2c2ae7cebe9c3007aad090f01371d8c7f65feb98662db08fc7cf619d8"
+  },
+  "resources": {
+    "/candidate/artplayer.js": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer\\src\\index.js"
+      },
+      "sha256": "c6f564431e03a198c81fc026af75ead9f7c624e5c7f2f23cba5ce984ec045290",
+      "bytes": 220281
+    },
+    "/compiled/artplayer.js": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer\\src\\index.js"
+      },
+      "sha256": "c6f564431e03a198c81fc026af75ead9f7c624e5c7f2f23cba5ce984ec045290",
+      "bytes": 220281,
+      "aliasOf": "/candidate/artplayer.js"
+    },
+    "/uncompiled/artplayer/index.js": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer\\src\\index.js"
+      },
+      "sha256": "c6f564431e03a198c81fc026af75ead9f7c624e5c7f2f23cba5ce984ec045290",
+      "bytes": 220281,
+      "aliasOf": "/candidate/artplayer.js"
+    },
+    "/candidate/artplayer-plugin-chapter.js": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer-plugin-chapter\\src\\index.js"
+      },
+      "sha256": "833b81bf3334443531ed1822e28a38a241484056c6dbbdd50cd1ec093303ab94",
+      "bytes": 8178
+    },
+    "/compiled/artplayer-plugin-chapter.js": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer-plugin-chapter\\src\\index.js"
+      },
+      "sha256": "833b81bf3334443531ed1822e28a38a241484056c6dbbdd50cd1ec093303ab94",
+      "bytes": 8178,
+      "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+    },
+    "/uncompiled/artplayer-plugin-chapter/index.js": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer-plugin-chapter\\src\\index.js"
+      },
+      "sha256": "833b81bf3334443531ed1822e28a38a241484056c6dbbdd50cd1ec093303ab94",
+      "bytes": 8178,
+      "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+    },
+    "/published/artplayer.js": {
+      "source": {
+        "kind": "npm-release",
+        "version": "5.4.0",
+        "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+        "member": "package/dist/artplayer.js"
+      },
+      "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+      "bytes": 134037
+    },
+    "/published/artplayer-plugin-chapter.js": {
+      "source": {
+        "kind": "npm-release",
+        "version": "1.1.0",
+        "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+        "member": "package/dist/artplayer-plugin-chapter.js"
+      },
+      "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+      "bytes": 4973
+    },
+    "/test/pattern.mp4": {
+      "source": {
+        "kind": "generated-media",
+        "file": "test/browser/media/pattern.mp4"
+      },
+      "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+      "bytes": 251538
+    },
+    "/test/pattern.webm": {
+      "source": {
+        "kind": "generated-media",
+        "file": "test/browser/media/pattern.webm"
+      },
+      "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+      "bytes": 162073
+    },
+    "/assets/sample/video.mp4": {
+      "source": {
+        "kind": "docs-media",
+        "file": "docs/assets/sample/video.mp4"
+      },
+      "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+      "bytes": 5818706
+    }
+  },
+  "fullBrowserSuite": {
+    "startTime": "2026-09-10T14:39:42.386Z",
+    "duration": 21337.515,
+    "expected": 39,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "scope": "chapter.spec.js / published-only observations: blank title, NaN and once-only metadata are historical defects",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12",
+      "errors": [],
+      "observation": {
+        "staleTitle": "Previous",
+        "endAfterSourceChange": 8,
+        "acceptsNaN": true
+      }
+    },
+    {
+      "scope": "chapter.spec.js / published-only observations: blank title, NaN and once-only metadata are historical defects",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0",
+      "errors": [],
+      "observation": {
+        "staleTitle": "Previous",
+        "endAfterSourceChange": 8,
+        "acceptsNaN": true
+      }
+    },
+    {
+      "scope": "chapter.spec.js / published-only observations: blank title, NaN and once-only metadata are historical defects",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6",
+      "errors": [],
+      "observation": {
+        "staleTitle": "Previous",
+        "endAfterSourceChange": 8,
+        "acceptsNaN": true
+      }
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / factory, registration, input normalization and safe title text",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / progress bars, real hover, title edges and boundary seek",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / explicit source update and core-owned destruction",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / factory, registration, input normalization and safe title text",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / progress bars, real hover, title edges and boundary seek",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / explicit source update and core-owned destruction",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / factory, registration, input normalization and safe title text",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / progress bars, real hover, title edges and boundary seek",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / published chapter on published core / explicit source update and core-owned destruction",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / factory, registration, input normalization and safe title text",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / progress bars, real hover, title edges and boundary seek",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / explicit source update and core-owned destruction",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / factory, registration, input normalization and safe title text",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / progress bars, real hover, title edges and boundary seek",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / explicit source update and core-owned destruction",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / factory, registration, input normalization and safe title text",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / progress bars, real hover, title edges and boundary seek",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6",
+      "errors": []
+    },
+    {
+      "scope": "chapter.spec.js / candidate chapter on published core / explicit source update and core-owned destruction",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6",
+      "errors": []
+    }
+  ]
+}

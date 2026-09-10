@@ -35,3 +35,14 @@ test('Browser implementation configuration catches source errors without emittin
     fs.rmSync(directory, { recursive: true, force: true })
   }
 })
+
+test('Chapter optional factory parameters preserve strict update and data types in new and old compilers', () => {
+  const source = fs.readFileSync(path.join(refactorDir, '../test/types/chapter-options.ts'), 'utf8')
+  for (const mode of ['node10-commonjs', 'nodenext-cjs', 'bundler-esm']) {
+    assert.deepEqual(checkConsumer(ts, mode, source), [])
+  }
+  assert.deepEqual(checkConsumer(compat, 'node10-commonjs', source), [])
+  const unguarded = source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')
+  const diagnostics = checkConsumer(ts, 'bundler-esm', unguarded)
+  assert.equal(diagnostics.length, 3, 'Invalid update, title and null option must each fail')
+})

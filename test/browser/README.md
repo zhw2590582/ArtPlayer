@@ -23,6 +23,10 @@ failed requests and final state. Tests attach decoded pixels and server-side med
 Windows WebKit media requests are not reliably visible to Playwright's page network events;
 use the loopback request log to prove that media was fetched. Its `videoWidth` can reflect layout
 size, so intrinsic-size compatibility is a separate test, not the playback-success predicate.
+Chromium's `net::ERR_ABORTED` and Firefox's `NS_ERROR_PARSED_DATA_CACHED` may cancel media range
+requests after buffering. The successful-playback tests allow only the exact engine-specific code,
+same-origin media type and two URLs bearing the current test ID; raw failures remain in reports.
+See [Mozilla's media-cache explanation](https://bugzilla.mozilla.org/show_bug.cgi?id=1347174#c4).
 
 Reports, failure screenshots and traces are under `refactor/.cache/browser/`. They contain local
 test URLs and paths. JSON and HTML are regenerated each run; archive them before another run

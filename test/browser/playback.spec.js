@@ -1,7 +1,7 @@
 import { expect, test } from './fixtures.js'
 
 for (const core of ['published', 'candidate']) {
-  test(`${core}: real playback, pause, seek, switch and destroy`, async ({ page, request, diagnostics }, testInfo) => {
+  test(`${core}: real playback, pause, seek, switch and destroy`, async ({ page, request, diagnostics, browserName }, testInfo) => {
     const caseId = encodeURIComponent(testInfo.testId)
     await page.goto(`/test/player.html?core=${core}`)
     await page.evaluate(url => window.createPlayer(url, true), `/test/pattern.mp4?case=${caseId}`)
@@ -55,11 +55,13 @@ for (const core of ['published', 'candidate']) {
     await expect(page.locator('.player')).toBeEmpty()
     expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)
     expect(diagnostics.consoleErrors).toEqual([])
-    // Chromium cancels media range requests as buffering, seeking and source ownership change.
+    // Engines cancel media range requests as buffering, seeking and source ownership change.
     // Only exact cancellations of this test's two media URLs are expected; retain all in evidence.
     const unexpectedRequests = diagnostics.failedRequests.filter((item) => {
       const url = new URL(item.url)
-      return !(item.resourceType === 'media' && item.failure?.errorText === 'net::ERR_ABORTED'
+      const expectedCancellation = (browserName === 'chromium' && item.failure?.errorText === 'net::ERR_ABORTED')
+        || (browserName === 'firefox' && item.failure?.errorText === 'NS_ERROR_PARSED_DATA_CACHED')
+      return !(item.resourceType === 'media' && expectedCancellation
         && url.origin === new URL(page.url()).origin
         && url.searchParams.get('case') === testInfo.testId
         && ['/test/pattern.mp4', '/assets/sample/video.mp4'].includes(url.pathname))

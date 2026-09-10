@@ -13,7 +13,7 @@ interface Result {
   update: (option: Option) => void
 }
 
-declare const artplayerPluginChapter: (option: Option) => (art: Artplayer) => Result
+declare const artplayerPluginChapter: (option?: Option) => (art: Artplayer) => Result
 
 export default artplayerPluginChapter
 

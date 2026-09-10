@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：PKG-CHAPTER-02 测试与声明修正完成
+
+chapter 27 项真实浏览器回归通过，合并原 smoke 共 39 项；工厂 option 声明已扩展为可选并重新生成编辑器声明，新旧 TS 正反例通过，BASE-TYPE-02 关闭。见 [交付](changes/2026-09-10-PKG-CHAPTER-02-tests.md)。当前 214 项，31 完成、183 待办。PKG-CHAPTER-01 提交 70174952，本任务单独提交；下一项 ENG-07，随后直接以 TS 拆分 chapter 源码。运行时源码尚未迁移。
+
 ## 当前实施：PKG-CHAPTER-01 契约完成
 
 源码/发布插件逻辑和元数据对照完成，冻结 chapter 调用、数组变更、DOM/事件和入口，登记待修问题；见 [契约](baselines/chapter-contract.md)。当前 214 项，30 完成、184 待办。ENG-05 提交 7318d338，下一项 PKG-CHAPTER-02 包特有测试与声明修正。生产源码 TS 迁移仍为零。
