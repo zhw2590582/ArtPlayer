@@ -4,6 +4,91 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Settings (CORE-14)
+
+setting/index.ts remains the specialized manager: panel cache keys are option arrays,
+add/update return the original item, remove returns undefined and missing find returns
+null. A narrow constructor type view preserves the actual Component prototype chain
+without imposing its incompatible string-keyed cache or registry return types.
+It delegates tree work to setting/model.ts and measurement to setting/layout.ts.
+The tree model preserves object/array identity and immutable hidden getter descriptors,
+while rebinding a removed/moved node to its current parent. Automatic names skip explicit
+names anywhere in the tree. Structural validation runs before installing bindings;
+traverse retains preorder and callback-driven child insertion. Model ownership uses
+an opaque owner state and root scope, with no direct player/manager reference. Closing
+the owner clears its root and scope references so bindings do not retain the old owner.
+It rejects an item that still belongs to another active tree before modifying either
+tree. Removing the subtree or closing its owner permits original-object reuse, with
+the same immutable getters and event array. Simultaneous sharing was already broken
+in the published player (the second instance had no row); it now reports an explicit
+ownership error instead of allowing the new player to steal the first player's row.
+
+The layout module computes dimensions independently from DOM reads. Width is bounded
+by player width and resolved bottom padding; height fits above actual control rows,
+using the existing scrolling panel. Control coordinates account for CSS scaling.
+The existing right-edge CSS fallback and mobile/rotation positioning branches remain.
+render.ts now owns DOM/descriptor rendering, selection.ts owns callback generations,
+and resources.ts owns item listeners, deferred mounts and recursive panel disposal.
+The four builtin setting factories are TS and release their Emitter subscriptions.
+events.ts owns root subscriptions and size/style observers. Control height changes
+can animate the panel's bottom offset; transitionend recalculates its final height.
+The MutationObserver fallback also consumes the existing resize event for container
+changes. All these callbacks stop when the instance closes.
+
+Failed additions unlink the attempted entry without releasing a duplicate's existing
+listeners. Successfully formatted new entries also release partial render resources.
+registration.ts prevents an obsolete failed add from removing a reentrant successful
+add/update of the same object; removal and update supersede the pending registration.
+Removal finishes row cleanup and root rendering even if event removal throws, then
+reports collected errors. Nonextensible metadata and unwritable generated names are
+checked before binding earlier entries. These checks do not roll back arbitrary
+user getter/setter or Proxy side effects.
+
+panels.ts gives each cached panel a root-owned scope. Rows are child scopes and the
+back header is owned by its panel while retaining the parent's public event array.
+Disposing the panel removes its cache entry, listeners, pending mounts and DOM.
+New-panel rendering checkpoints item descriptors and the original position of raw
+content nodes, without calling user getters. A failure restores those inputs, the
+previous active panel and owned layout properties. Creation stops if a header hook
+removes the parent or destroys the instance.
+
+update.ts suspends the old subtree instead of disposing it before assignment. The
+same public event array temporarily holds only replacement registrations; suspended
+scopes retain their old registrations privately. activity.ts prevents suspended
+callbacks and asynchronous writes. Success disposes the old resources; failure
+resumes the original registrations and restores descriptors, real DOM nodes, range
+array identity/live input values, switch state, tree bindings and owned layout.
+The current input getter order is retained, but assignment stops after a reentrant
+operation supersedes it. Pending operations are tracked across their descendants;
+removing an ancestor cancels its child's update before releasing the subtree.
+
+Renderers retain their captured operation/scope so a late getter failure cannot
+dispose a newer row. Cleanup failures after a committed replacement are reported;
+the successful new row is not rolled back to already-disposed resources. Arbitrary
+user accessor/Proxy side effects remain outside the managed-state rollback boundary.
+
+Cached-panel navigation now restores the previous panel/layout on failure. A newer
+navigation, removal or destruction supersedes that restoration, even if the failing
+outer call resumes afterward. It does not rebuild cached rows or their listeners.
+
+Long labels and tooltips shrink with ellipsis while retaining their full DOM content.
+Icons and native controls keep their width, including in a 320px player. Tests cover
+trusted keyboard input/change ordering, pointer switch callbacks, touch selection,
+and actual builtin autoOrientation transforms with a local video. Mobile UA/viewport
+and touch emulation are not certification on physical mobile devices.
+
+Public Setting return declaration discrepancies remain tracked by BASE-TYPE-07 for
+the compatible public facade at CORE-21. The source manager has precise item/null/void
+returns and does not change runtime behavior to match incorrect legacy declarations.
+
+Tests: setting-model.test.js, setting-layout.test.js, setting-resources.test.js,
+types/setting-model.ts, types/setting-manager.ts and
+browser/setting.spec.js, browser/setting-update.spec.js and browser/setting-ownership.spec.js.
+browser/setting-interaction.spec.js covers real input, long labels and mobile rotation.
+Run the shared test scripts and the full installed UMD/legacy browser matrices after
+changing these boundaries. The per-package and final release tasks own the complete
+ecosystem/SDK matrix, remote CI and physical-device release review.
+
 ## Components and controls (CORE-13)
 
 The public registries remain Component-based. utils/component.ts owns add/update/remove,

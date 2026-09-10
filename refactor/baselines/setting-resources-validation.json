@@ -1,0 +1,426 @@
+{
+  "task": "CORE-14",
+  "status": "partial",
+  "scope": "Tree/layout plus rendering, callback generations, item resources and builtin TS migration; manager integration and failure rollback remain unfinished.",
+  "date": "2026-09-11",
+  "node": "v24.21.0",
+  "files": {
+    "packages/artplayer/src/setting/aspectRatio.ts": "a16eb58fadf77f0a9009cf162d957ffd59d9b8fde83cc193d510fd642e3456cb",
+    "packages/artplayer/src/setting/flip.ts": "e72a4ae33300d9e48880897a4f85a04fa6d9a5fff7b06ecaf9081cfb1bb14404",
+    "packages/artplayer/src/setting/index.js": "50d1c640a18faa671368b94bd750a0c2b3cf57316c93439a4b2dbfe9c87e0426",
+    "packages/artplayer/src/setting/layout.ts": "584604e8fffaeaf1d633d1ed45e64d94595c2a56976e3a3f7ede01839b83a37d",
+    "packages/artplayer/src/setting/model.ts": "2486cf5b4dc68ca2bf23351eed2d0010506682324e4e1ac8f1c318ac2cc35163",
+    "packages/artplayer/src/setting/playbackRate.ts": "2e70e0d2a33cb0ec9fcdd6d22424979fed7b2e01f87015d6be4e520d5cf4e88a",
+    "packages/artplayer/src/setting/render.ts": "256c2561d28bac2e0af8bb81b971f62c180063928ecdd70782b6e0d035488d8f",
+    "packages/artplayer/src/setting/resources.ts": "8f0bbc4246ad5848fbd9bbd02c7eb9614ad64cd67615622995597a2eaae0f356",
+    "packages/artplayer/src/setting/selection.ts": "7664f73e31837fd0b8d22f7eb401877f04ab7fe3a972e4cb958e0f817ed3a92c",
+    "packages/artplayer/src/setting/subtitleOffset.ts": "86513835d4e542ac39e9d551507473e3e14c71fd0d5ea725267008ecbff6ab83",
+    "packages/artplayer/src/setting/types.ts": "81ad8ae3892510a2189bdd414b1743696bc713cccff8e4bc58eed24abcc99eac",
+    "test/setting-model.test.js": "bb1c4237646f128436450d5412a3202f6007831629f104c54dbcb025cd04d27a",
+    "test/setting-layout.test.js": "a7da46075bd478182559b9af4817b128eb9f9c219b6032d77fd437370f2a3563",
+    "test/setting-resources.test.js": "8fbc541cfede17cc63a7c54f630fcad2eba91ad780172c56f8fbe774d1586cc8",
+    "test/types/setting-model.ts": "ba024ffeae26428d06f07f98f62f211db94ef8b259251f9f424a4203f1187c7b",
+    "test/browser/setting.spec.js": "4c4c001b42fafeeeb1677b9d1b2d596af0591c6897a3882a93c1e84d1f56925e",
+    "package.json": "82459e37eb54391bb73ebd84b1b27a3c37750d7cc2cd24607fc8f983f7342960"
+  },
+  "ci": {
+    "passed": 193,
+    "unit": 164,
+    "engineering": 4,
+    "baseline": 25,
+    "strictSourceFiles": 120,
+    "logSha256": "8e49058f0d7c8f7565add94c0e94bc7c2e65242305854a0b932972ade7d26792"
+  },
+  "browser": {
+    "stats": {
+      "startTime": "2026-09-10T21:25:43.963Z",
+      "duration": 18728.229,
+      "expected": 60,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "candidate": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer\\src\\index.js"
+      },
+      "sha256": "2904030e8d84eca8678ecc6cedadb01af0ebffccae66a58ff0248800e66524c2",
+      "bytes": 252544
+    },
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "cases": [
+      {
+        "title": "published: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: deferred setting mounts belong to the rendered item generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed setting subtrees release child listeners and cached panels",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting button results cannot overwrite an updated or newer item",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: sibling setting selections share the parent result generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting callback rejection retains its original failure identity",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: deferred setting mounts belong to the rendered item generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed setting subtrees release child listeners and cached panels",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting button results cannot overwrite an updated or newer item",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: sibling setting selections share the parent result generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting callback rejection retains its original failure identity",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: deferred setting mounts belong to the rendered item generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed setting subtrees release child listeners and cached panels",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting button results cannot overwrite an updated or newer item",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: sibling setting selections share the parent result generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting callback rejection retains its original failure identity",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: deferred setting mounts belong to the rendered item generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed setting subtrees release child listeners and cached panels",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting button results cannot overwrite an updated or newer item",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: sibling setting selections share the parent result generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting callback rejection retains its original failure identity",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: deferred setting mounts belong to the rendered item generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed setting subtrees release child listeners and cached panels",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting button results cannot overwrite an updated or newer item",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: sibling setting selections share the parent result generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting callback rejection retains its original failure identity",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: deferred setting mounts belong to the rendered item generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed setting subtrees release child listeners and cached panels",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting button results cannot overwrite an updated or newer item",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: sibling setting selections share the parent result generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting callback rejection retains its original failure identity",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      }
+    ]
+  },
+  "limits": [
+    "Source fixture validation only; no final CORE-14 installed-package validation",
+    "Setting manager remains JavaScript; its root subscriptions have not yet migrated",
+    "Atomic update/render failure, independent header cleanup and cross-instance reuse still require work",
+    "BASE-DOM-02/06/07 and BASE-LIFE-12/13/14 remain open",
+    "Dynamic layout, switch/range, long text and mobile/rotation still need additional coverage"
+  ]
+}

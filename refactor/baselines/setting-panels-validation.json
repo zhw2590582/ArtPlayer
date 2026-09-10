@@ -1,0 +1,3351 @@
+{
+  "task": "CORE-14",
+  "status": "partial",
+  "date": "2026-09-11",
+  "node": "v24.21.0",
+  "scope": "Panel/header resource ownership, new-panel render failure restoration, and header reentry cleanup",
+  "files": {
+    "packages/artplayer/src/setting/aspectRatio.ts": "a16eb58fadf77f0a9009cf162d957ffd59d9b8fde83cc193d510fd642e3456cb",
+    "packages/artplayer/src/setting/checkpoint.ts": "70a09caf8de3f0cd3dab202a7097b5e3de154aad75fa29d29f7863ce185db48e",
+    "packages/artplayer/src/setting/events.ts": "f7a3347ca146232caf2a8c9a5a18731cf7bc91dca4cd36370e0265c6eb70df53",
+    "packages/artplayer/src/setting/flip.ts": "e72a4ae33300d9e48880897a4f85a04fa6d9a5fff7b06ecaf9081cfb1bb14404",
+    "packages/artplayer/src/setting/index.ts": "5041441ae24cb3610fc28dba563fb3904dd007710423175373b36f47eefb95b2",
+    "packages/artplayer/src/setting/layout.ts": "584604e8fffaeaf1d633d1ed45e64d94595c2a56976e3a3f7ede01839b83a37d",
+    "packages/artplayer/src/setting/model.ts": "944006a0191b675a8d76605a0544d81409e1e63224332f4b56de43a5f1a3a173",
+    "packages/artplayer/src/setting/panels.ts": "64d48720971763985a2a652a18c2ed2f32300c3553d56b52049ae40c4dfceae1",
+    "packages/artplayer/src/setting/playbackRate.ts": "2e70e0d2a33cb0ec9fcdd6d22424979fed7b2e01f87015d6be4e520d5cf4e88a",
+    "packages/artplayer/src/setting/render.ts": "1b16fa78405f6e414ab32143a192d38c58b863fc99cb8896a253214ae0843515",
+    "packages/artplayer/src/setting/resources.ts": "c74b642c8260a8adf5547f0c583f2a55fd1b11374ec920636a32545b9ef647fb",
+    "packages/artplayer/src/setting/selection.ts": "7664f73e31837fd0b8d22f7eb401877f04ab7fe3a972e4cb958e0f817ed3a92c",
+    "packages/artplayer/src/setting/subtitleOffset.ts": "86513835d4e542ac39e9d551507473e3e14c71fd0d5ea725267008ecbff6ab83",
+    "packages/artplayer/src/setting/types.ts": "12930e46c43b66803521403759dbdef658860e13006f8ac6f917d2fb1be96b5c",
+    "test/setting-model.test.js": "931bee643bea3cbd93927f7c9739a1bf559da5aaf58783d19b6898a092ba56bc",
+    "test/setting-layout.test.js": "a7da46075bd478182559b9af4817b128eb9f9c219b6032d77fd437370f2a3563",
+    "test/setting-resources.test.js": "8fbc541cfede17cc63a7c54f630fcad2eba91ad780172c56f8fbe774d1586cc8",
+    "test/types/setting-model.ts": "ba024ffeae26428d06f07f98f62f211db94ef8b259251f9f424a4203f1187c7b",
+    "test/types/setting-manager.ts": "27e3687a89909ea6f97aa842347cb8fbcd6f8ce5cf779a24d5dabad3eff8dc5c",
+    "test/browser/setting.spec.js": "19acfd07cb6316381e3bce61e0ae284303aeafc8fca14e1657d73568553c5bb6",
+    "package.json": "82459e37eb54391bb73ebd84b1b27a3c37750d7cc2cd24607fc8f983f7342960"
+  },
+  "ci": {
+    "passed": 194,
+    "unit": 165,
+    "engineering": 4,
+    "baseline": 25,
+    "strictSourceFiles": 124,
+    "logSha256": "8d005677c082d3399e749058fd3c7d654ac263a206d10ce953829ac187f60e01"
+  },
+  "focused": {
+    "stats": {
+      "startTime": "2026-09-10T21:55:35.260Z",
+      "duration": 22634.791,
+      "expected": 87,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportSha256": "5e61fb76b3aef64c987656bd192242f4c3c54230dda36f885bbb5c7c3615598b",
+    "candidate": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer\\src\\index.js"
+      },
+      "sha256": "1f9aa2504673846106b2744989260f71f4a36e46b86fc82f35a23dad5b92a8c4",
+      "bytes": 260096
+    },
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "cases": [
+      {
+        "title": "published: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: deferred setting mounts belong to the rendered item generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed setting subtrees release child listeners and cached panels",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting button results cannot overwrite an updated or newer item",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: sibling setting selections share the parent result generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting callback rejection retains its original failure identity",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: deferred setting mounts belong to the rendered item generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed setting subtrees release child listeners and cached panels",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting button results cannot overwrite an updated or newer item",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: sibling setting selections share the parent result generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting callback rejection retains its original failure identity",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=false",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=true",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed setting additions leave existing rows usable and allow retry",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting removal finishes DOM cleanup when the event-removal hook throws",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant remove",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: deferred setting mounts belong to the rendered item generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed setting subtrees release child listeners and cached panels",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting button results cannot overwrite an updated or newer item",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: sibling setting selections share the parent result generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting callback rejection retains its original failure identity",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: deferred setting mounts belong to the rendered item generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed setting subtrees release child listeners and cached panels",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting button results cannot overwrite an updated or newer item",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: sibling setting selections share the parent result generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting callback rejection retains its original failure identity",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=false",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=true",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed setting additions leave existing rows usable and allow retry",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting removal finishes DOM cleanup when the event-removal hook throws",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant remove",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: deferred setting mounts belong to the rendered item generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed setting subtrees release child listeners and cached panels",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting button results cannot overwrite an updated or newer item",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: sibling setting selections share the parent result generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting callback rejection retains its original failure identity",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: deferred setting mounts belong to the rendered item generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed setting subtrees release child listeners and cached panels",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting button results cannot overwrite an updated or newer item",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: sibling setting selections share the parent result generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting callback rejection retains its original failure identity",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=false",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=true",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed setting additions leave existing rows usable and allow retry",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting removal finishes DOM cleanup when the event-removal hook throws",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant remove",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      }
+    ],
+    "layouts": [
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      }
+    ]
+  },
+  "full": {
+    "stats": {
+      "startTime": "2026-09-10T21:56:26.399Z",
+      "duration": 103453.727,
+      "expected": 429,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportSha256": "ac1afb5160c437cc0e6d94cd5fada395cd4ad014f796db54fffe01981d7ef4d3",
+    "candidate": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer\\src\\index.js"
+      },
+      "sha256": "1f9aa2504673846106b2744989260f71f4a36e46b86fc82f35a23dad5b92a8c4",
+      "bytes": 260096
+    },
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "cases": [
+      {
+        "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate clears titles on blank chapters, zero hover and replacement",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate rejects NaN and can recover after an invalid update",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate ignores pending metadata initialization after immediate destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate deduplicates stylesheet injection while the document is loading",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate clears titles on blank chapters, zero hover and replacement",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate rejects NaN and can recover after an invalid update",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate ignores pending metadata initialization after immediate destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate deduplicates stylesheet injection while the document is loading",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate clears titles on blank chapters, zero hover and replacement",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate rejects NaN and can recover after an invalid update",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate ignores pending metadata initialization after immediate destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate deduplicates stylesheet injection while the document is loading",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "explicit source update and core-owned destruction",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "explicit source update and core-owned destruction",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "explicit source update and core-owned destruction",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "explicit source update and core-owned destruction",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "explicit source update and core-owned destruction",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "explicit source update and core-owned destruction",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: control layout follows resize and removal with observer fallback=false",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: control layout follows resize and removal with observer fallback=true",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: selector background clicks and rejection ownership are explicit",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: failed mounted reentry preserves its successful replacement",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: context menu builtin selection and owned updates preserve state",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a prototype-named component keeps the registry prototype intact",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed builtin time and volume controls stop owned effects",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: selector items can be reused by an update without changing getter flags",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: reentrant beforeUnmount removes only once",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: narrow controls stay inside the player without hiding buttons",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: progress markers treat text as data and removed drags cannot seek",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: selector background clicks and rejection ownership are explicit",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed mounted reentry preserves its successful replacement",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: context menu builtin selection and owned updates preserve state",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a prototype-named component keeps the registry prototype intact",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed builtin time and volume controls stop owned effects",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: selector items can be reused by an update without changing getter flags",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: reentrant beforeUnmount removes only once",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: narrow controls stay inside the player without hiding buttons",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: progress markers treat text as data and removed drags cannot seek",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: control layout follows resize and removal with observer fallback=false",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: control layout follows resize and removal with observer fallback=true",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: selector background clicks and rejection ownership are explicit",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: failed mounted reentry preserves its successful replacement",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: context menu builtin selection and owned updates preserve state",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a prototype-named component keeps the registry prototype intact",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed builtin time and volume controls stop owned effects",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: selector items can be reused by an update without changing getter flags",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: reentrant beforeUnmount removes only once",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: narrow controls stay inside the player without hiding buttons",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: progress markers treat text as data and removed drags cannot seek",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: selector background clicks and rejection ownership are explicit",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed mounted reentry preserves its successful replacement",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: context menu builtin selection and owned updates preserve state",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a prototype-named component keeps the registry prototype intact",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed builtin time and volume controls stop owned effects",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: selector items can be reused by an update without changing getter flags",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: reentrant beforeUnmount removes only once",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: narrow controls stay inside the player without hiding buttons",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: progress markers treat text as data and removed drags cannot seek",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: control layout follows resize and removal with observer fallback=false",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: control layout follows resize and removal with observer fallback=true",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: selector background clicks and rejection ownership are explicit",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: failed mounted reentry preserves its successful replacement",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: context menu builtin selection and owned updates preserve state",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a prototype-named component keeps the registry prototype intact",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed builtin time and volume controls stop owned effects",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: selector items can be reused by an update without changing getter flags",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: reentrant beforeUnmount removes only once",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: narrow controls stay inside the player without hiding buttons",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: progress markers treat text as data and removed drags cannot seek",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: selector background clicks and rejection ownership are explicit",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed mounted reentry preserves its successful replacement",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: context menu builtin selection and owned updates preserve state",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a prototype-named component keeps the registry prototype intact",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed builtin time and volume controls stop owned effects",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: selector items can be reused by an update without changing getter flags",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: reentrant beforeUnmount removes only once",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: narrow controls stay inside the player without hiding buttons",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: progress markers treat text as data and removed drags cannot seek",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: plugin, toggle, setting and static runtime return contracts",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: native subtitle update events carry cue arrays",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: plugin, toggle, setting and static runtime return contracts",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: native subtitle update events carry cue arrays",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: plugin, toggle, setting and static runtime return contracts",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: native subtitle update events carry cue arrays",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: plugin, toggle, setting and static runtime return contracts",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: native subtitle update events carry cue arrays",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: plugin, toggle, setting and static runtime return contracts",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: native subtitle update events carry cue arrays",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: plugin, toggle, setting and static runtime return contracts",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: native subtitle update events carry cue arrays",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: emitter event names and once across nested dispatch",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: emitter event names and once across nested dispatch",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: emitter event names and once across nested dispatch",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: emitter event names and once across nested dispatch",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: emitter event names and once across nested dispatch",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: emitter event names and once across nested dispatch",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: HTTP failure retries the updated option URL with the original event and one ready",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: replacing a failed source cancels candidate retries",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: HTTP failure retries the updated option URL with the original event and one ready",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: replacing a failed source cancels candidate retries",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: rejected real-media switch still allows current-source reconnect",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: destroying from first-ready controls prevents a candidate ghost ready event",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: destroying from first-ready controls prevents a candidate ghost ready event",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: HTTP failure retries the updated option URL with the original event and one ready",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: replacing a failed source cancels candidate retries",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: HTTP failure retries the updated option URL with the original event and one ready",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: replacing a failed source cancels candidate retries",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: rejected real-media switch still allows current-source reconnect",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: destroying from first-ready controls prevents a candidate ghost ready event",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: destroying from first-ready controls prevents a candidate ghost ready event",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: HTTP failure retries the updated option URL with the original event and one ready",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: replacing a failed source cancels candidate retries",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: HTTP failure retries the updated option URL with the original event and one ready",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: replacing a failed source cancels candidate retries",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: rejected real-media switch still allows current-source reconnect",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: destroying from first-ready controls prevents a candidate ghost ready event",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: destroying from first-ready controls prevents a candidate ghost ready event",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: metadata emits resize before mobile visibility changes",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: metadata emits resize before mobile visibility changes",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: metadata emits resize before mobile visibility changes",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: metadata emits resize before mobile visibility changes",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: metadata emits resize before mobile visibility changes",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: metadata emits resize before mobile visibility changes",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: existing canvas proxy keeps media identity, playback and layout",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: existing canvas proxy keeps media identity, playback and layout",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: existing canvas proxy keeps media identity, playback and layout",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: existing canvas proxy keeps media identity, playback and layout",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: existing canvas proxy keeps media identity, playback and layout",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: existing canvas proxy keeps media identity, playback and layout",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: expanded option input preserves historical JS forms",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: configuration errors occur before mounting and preserve allocation timing",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: expanded option input preserves historical JS forms",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: expanded option input preserves historical JS forms",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: configuration errors occur before mounting and preserve allocation timing",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: expanded option input preserves historical JS forms",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: expanded option input preserves historical JS forms",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: configuration errors occur before mounting and preserve allocation timing",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: expanded option input preserves historical JS forms",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: real media preserves timeline, volume, rate and property descriptors",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: invalid time inputs and rate no-op retain native behavior",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: real media preserves timeline, volume, rate and property descriptors",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: invalid time inputs and rate no-op retain native behavior",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: real media preserves timeline, volume, rate and property descriptors",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: invalid time inputs and rate no-op retain native behavior",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: real media preserves timeline, volume, rate and property descriptors",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: invalid time inputs and rate no-op retain native behavior",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: real media preserves timeline, volume, rate and property descriptors",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: invalid time inputs and rate no-op retain native behavior",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: real media preserves timeline, volume, rate and property descriptors",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: invalid time inputs and rate no-op retain native behavior",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "controlled HTTP media failure emits a real video error",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "Range, media identity and docs candidate routes",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "controlled HTTP media failure emits a real video error",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "Range, media identity and docs candidate routes",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "controlled HTTP media failure emits a real video error",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "Range, media identity and docs candidate routes",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: late plugin registration preserves fulfillment without reviving a closed candidate",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: late plugin registration preserves fulfillment without reviving a closed candidate",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a plugin that closes construction prevents subsequent factories",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: constructor-owned rejection is reported once without an unhandled rejection",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: late plugin registration preserves fulfillment without reviving a closed candidate",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: late plugin registration preserves fulfillment without reviving a closed candidate",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a plugin that closes construction prevents subsequent factories",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: constructor-owned rejection is reported once without an unhandled rejection",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: late plugin registration preserves fulfillment without reviving a closed candidate",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: late plugin registration preserves fulfillment without reviving a closed candidate",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a plugin that closes construction prevents subsequent factories",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: constructor-owned rejection is reported once without an unhandled rejection",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin order and live exclusions precede user plugins",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin order and live exclusions precede user plugins",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin order and live exclusions precede user plugins",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin order and live exclusions precede user plugins",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin order and live exclusions precede user plugins",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin order and live exclusions precede user plugins",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "internal resource scope: native DOM, RAF, timer, fetch abort and URL release",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "internal resource scope: native DOM, RAF, timer, fetch abort and URL release",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "internal resource scope: native DOM, RAF, timer, fetch abort and URL release",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: deferred setting mounts belong to the rendered item generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed setting subtrees release child listeners and cached panels",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting button results cannot overwrite an updated or newer item",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: sibling setting selections share the parent result generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting callback rejection retains its original failure identity",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: deferred setting mounts belong to the rendered item generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed setting subtrees release child listeners and cached panels",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting button results cannot overwrite an updated or newer item",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: sibling setting selections share the parent result generation",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting callback rejection retains its original failure identity",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=false",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=true",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed setting additions leave existing rows usable and allow retry",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting removal finishes DOM cleanup when the event-removal hook throws",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant remove",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: deferred setting mounts belong to the rendered item generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed setting subtrees release child listeners and cached panels",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting button results cannot overwrite an updated or newer item",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: sibling setting selections share the parent result generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting callback rejection retains its original failure identity",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: deferred setting mounts belong to the rendered item generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed setting subtrees release child listeners and cached panels",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting button results cannot overwrite an updated or newer item",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: sibling setting selections share the parent result generation",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting callback rejection retains its original failure identity",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=false",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=true",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed setting additions leave existing rows usable and allow retry",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting removal finishes DOM cleanup when the event-removal hook throws",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant remove",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: deferred setting mounts belong to the rendered item generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: removed setting subtrees release child listeners and cached panels",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting button results cannot overwrite an updated or newer item",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: sibling setting selections share the parent result generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting callback rejection retains its original failure identity",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: builtin setting subscriptions are replaced and removed with their row",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: deferred setting mounts belong to the rendered item generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: removed setting subtrees release child listeners and cached panels",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting button results cannot overwrite an updated or newer item",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: sibling setting selections share the parent result generation",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting callback rejection retains its original failure identity",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=false",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: open settings follow container and control height changes with fallback=true",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed setting additions leave existing rows usable and allow retry",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting removal finishes DOM cleanup when the event-removal hook throws",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant remove",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: panel creation stops after reentrant destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: rapid real-media switches identify the last restart and settle superseded work",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: destroy settles the candidate switch without waiting for detached media",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: rapid real-media switches identify the last restart and settle superseded work",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: destroy settles the candidate switch without waiting for detached media",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: quality switch restores position/rate and preserves real customType identities",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: real switch settles when the controlled native resume rejects",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: late native play completion cannot publish stale player effects",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: rapid real-media switches identify the last restart and settle superseded work",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: destroy settles the candidate switch without waiting for detached media",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: rapid real-media switches identify the last restart and settle superseded work",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: destroy settles the candidate switch without waiting for detached media",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: quality switch restores position/rate and preserves real customType identities",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: real switch settles when the controlled native resume rejects",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: late native play completion cannot publish stale player effects",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: rapid real-media switches identify the last restart and settle superseded work",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: destroy settles the candidate switch without waiting for detached media",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: rapid real-media switches identify the last restart and settle superseded work",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: destroy settles the candidate switch without waiting for detached media",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: quality switch restores position/rate and preserves real customType identities",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: real switch settles when the controlled native resume rejects",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: late native play completion cannot publish stale player effects",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: native fullscreen uses a real gesture when the engine supports it",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: SSR mounting preserves nodes, listeners, selectors and style ownership",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: proxy replacement preserves callback and node identity",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: icon access preserves descriptors and moves custom DOM into fresh wrappers",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: i18n prototype fallback difference and custom keys are explicit",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: fullscreen web retains DOM and CSS hooks through entry and exit",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: native fullscreen uses a real gesture when the engine supports it",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: SSR mounting preserves nodes, listeners, selectors and style ownership",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: proxy replacement preserves callback and node identity",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: icon access preserves descriptors and moves custom DOM into fresh wrappers",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: i18n prototype fallback difference and custom keys are explicit",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: fullscreen web retains DOM and CSS hooks through entry and exit",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: native fullscreen uses a real gesture when the engine supports it",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: SSR mounting preserves nodes, listeners, selectors and style ownership",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: proxy replacement preserves callback and node identity",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: icon access preserves descriptors and moves custom DOM into fresh wrappers",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: i18n prototype fallback difference and custom keys are explicit",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: fullscreen web retains DOM and CSS hooks through entry and exit",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: native fullscreen uses a real gesture when the engine supports it",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: SSR mounting preserves nodes, listeners, selectors and style ownership",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: proxy replacement preserves callback and node identity",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: icon access preserves descriptors and moves custom DOM into fresh wrappers",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: i18n prototype fallback difference and custom keys are explicit",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: fullscreen web retains DOM and CSS hooks through entry and exit",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: native fullscreen uses a real gesture when the engine supports it",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: SSR mounting preserves nodes, listeners, selectors and style ownership",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: proxy replacement preserves callback and node identity",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: icon access preserves descriptors and moves custom DOM into fresh wrappers",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: i18n prototype fallback difference and custom keys are explicit",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: fullscreen web retains DOM and CSS hooks through entry and exit",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: native fullscreen uses a real gesture when the engine supports it",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: SSR mounting preserves nodes, listeners, selectors and style ownership",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: proxy replacement preserves callback and node identity",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: icon access preserves descriptors and moves custom DOM into fresh wrappers",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: i18n prototype fallback difference and custom keys are explicit",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: fullscreen web retains DOM and CSS hooks through entry and exit",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: subtitle object URL contains real VTT data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: download starts and removes its temporary anchor",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: subtitle object URL contains real VTT data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: download starts and removes its temporary anchor",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate download releases the anchor even when click fails",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: subtitle object URL contains real VTT data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: download starts and removes its temporary anchor",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: subtitle object URL contains real VTT data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: download starts and removes its temporary anchor",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate download releases the anchor even when click fails",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: subtitle object URL contains real VTT data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: download starts and removes its temporary anchor",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: subtitle object URL contains real VTT data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: download starts and removes its temporary anchor",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate download releases the anchor even when click fails",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      }
+    ],
+    "layouts": [
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "chromium",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "firefox",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed header rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed item rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      },
+      {
+        "title": "candidate: failed layout rendering releases its panel and restores reusable inputs",
+        "engine": "webkit",
+        "beforeStyle": "",
+        "afterRollback": "",
+        "afterTick": "height: 35px; width: 250px;"
+      }
+    ]
+  },
+  "failures": [
+    {
+      "file": "refactor/.cache/core14-panel-browser.json",
+      "sha256": "196bda36c7c9c319d11ee1dfa23eae6a86d72cce566be073be259e58ff3e2509",
+      "stats": {
+        "startTime": "2026-09-10T21:53:10.269Z",
+        "duration": 22152.079999999998,
+        "expected": 72,
+        "skipped": 0,
+        "unexpected": 9,
+        "flaky": 0
+      },
+      "reason": "Style equality was checked after normal ResizeObserver callbacks updated the restored root panel"
+    },
+    {
+      "file": "refactor/.cache/core14-panel-rollback-browser.json",
+      "sha256": "783e5113923b2bb15d4367c48b79d7241073af42666f308abff61d3aba140777",
+      "stats": {
+        "startTime": "2026-09-10T21:54:14.455Z",
+        "duration": 7639.455,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "reason": "The test left its throwing resize hook installed across the next observer turn"
+    }
+  ],
+  "limits": [
+    "Workspace UMD source fixtures only; final installed UMD/legacy validation remains outstanding",
+    "Item update and existing-panel switching still need transactional failure/reentry handling",
+    "Cross-instance sharing/reuse, switch/range, long text and mobile/rotation still need dedicated coverage",
+    "No generic rollback of arbitrary getter/setter or Proxy side effects",
+    "CORE-14 remains doing and its open risks are not closed by this phase"
+  ]
+}

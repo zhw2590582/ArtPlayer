@@ -5,7 +5,7 @@
 ## 现状证据
 
 - [入口](../packages/artplayer/src/index.js)顺序构造所有子系统；[player](../packages/artplayer/src/player/index.js)通过 mixin 将属性安装到 art。
-- [Component](../packages/artplayer/src/utils/component.ts)负责控件缓存、DOM 和监听器；[Setting](../packages/artplayer/src/setting/index.js)还有独立的树、渲染和更新语义。
+- [Component](../packages/artplayer/src/utils/component.ts)负责控件缓存、DOM 和监听器；[Setting](../packages/artplayer/src/setting/index.ts)还有独立的树、渲染和更新语义。
 - [Events](../packages/artplayer/src/events/index.js)集中管理一部分 DOM 监听器，但定时器、异步请求和内部 Emitter 订阅仍由各模块管理。
 - [声明](../packages/artplayer/types/artplayer.d.ts)与源码独立维护；[build-ts](../scripts/build-ts.js)进行文本拼接。
 
@@ -20,7 +20,7 @@
 | 媒体能力 | template、proxy、player                      | 内部精确的能力接口与原生视频类型分离；公共 video 兼容层保留                  |
 | 播放流程 | play/pause/toggle/seek/url/switch/eventInit  | 媒体状态、操作身份、加载恢复与 UI 响应分离                                   |
 | UI 注册  | utils/component、control、layer、contextmenu | 保留 name/cache/update/remove；明确 DOM 和绑定的归属                         |
-| 设置面板 | setting/index.js                             | 分开树整理、选择状态、渲染、布局、绑定；共享能共享的逻辑，不强行统一返回类型 |
+| 设置面板 | setting/index.ts                             | 分开树整理、选择状态、渲染、布局、绑定；共享能共享的逻辑，不强行统一返回类型 |
 | 字幕     | subtitle.js、utils/subtitle.js               | 获取、解析、track/DOM 渲染、取消和对象 URL 回收分开                          |
 | 显示模式 | fullscreen/fullscreenWeb/pip/mini/auto*      | 显式恢复位置和样式，保持互斥顺序、用户手势与移动端语义                       |
 | 输入     | events、hotkey                               | 鼠标/触控/键盘/焦点归属清晰，跨 document 重新绑定和清理                      |

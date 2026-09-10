@@ -26,6 +26,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 5px;
         padding: 0 5px;
         cursor: pointer;
         overflow: hidden;
@@ -50,28 +51,45 @@
 
         .art-setting-item-left {
           .art-center();
-          flex-shrink: 0;
+          flex-shrink: 1;
+          min-width: 0;
+          overflow: hidden;
           gap: 5px;
 
           .art-setting-item-left-icon {
             .art-center();
+            flex-shrink: 0;
             height: var(--art-settings-icon-size);
             width: var(--art-settings-icon-size);
+          }
+
+          .art-setting-item-left-text {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
         }
 
         .art-setting-item-right {
           .art-center();
+          flex-shrink: 0;
+          min-width: 0;
+          max-width: 55%;
           gap: 5px;
           font-size: 12px;
 
           .art-setting-item-right-tooltip {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
             white-space: nowrap;
             color: rgba(255, 255, 255, 0.5);
           }
 
           .art-setting-item-right-icon {
             .art-center();
+            flex-shrink: 0;
             min-width: 32px;
             height: 24px;
           }

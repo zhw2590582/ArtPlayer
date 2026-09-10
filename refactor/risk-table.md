@@ -11,7 +11,7 @@
 | BASE-LIFE-04 | resolved / 已复现 | Destroying an instance twice unregisters a different live instance | CORE-04 |
 | BASE-LIFE-05 | resolved / 已复现 | Failed constructor leaves initialized markup/listeners until explicit probe cleanup | CORE-04 |
 | BASE-DOM-01 | open / 已复现 | 控件 Tab 不可达 | CORE-23, CORE-17 |
-| BASE-DOM-02 | open / 已复现 | 窄容器中控件裁切 | CORE-13, CORE-14 |
+| BASE-DOM-02 | resolved / 已复现 | 窄容器中控件裁切 | CORE-13, CORE-14 |
 | BASE-DEMO-01 | open / 源码/产物事实 | 旧 thumbnail 插件示例不对应当前 workspace 包 | SITE-01, EX-03 |
 | BASE-TYPE-01 | resolved / 已复现 | NodeNext ESM 默认导出与声明互操作失配 | ENG-04, CORE-07, PKG-CHAPTER-04 |
 | BASE-TYPE-02 | resolved / 已复现 | chapter 可选运行时参数被声明为必填 | PKG-CHAPTER-02 |
@@ -62,3 +62,9 @@
 | BASE-DOM-03 | resolved / 已复现 | Reusing selector items after update redefines nonconfigurable properties | CORE-13 |
 | BASE-DOM-04 | resolved / 已复现 | A component named __proto__ changes its registry prototype | CORE-13 |
 | BASE-DOM-05 | resolved / 已复现 | Highlight text interpolation permits unintended HTML attributes | CORE-13 |
+| BASE-DOM-06 | resolved / 已复现 | Moved setting items retain parent and option bindings from the old tree | CORE-14 |
+| BASE-DOM-07 | resolved / 已复现 | Generated setting names collide with explicit names in nested branches | CORE-14 |
+| BASE-LIFE-12 | resolved / 已复现 | Removed or updated setting rows retain descendant panels and builtin subscriptions | CORE-14 |
+| BASE-LIFE-13 | resolved / 已复现 | Obsolete setting callback completions overwrite current UI and failures are unhandled | CORE-14 |
+| BASE-LIFE-14 | resolved / 已复现 | Removed or replaced setting items still run deferred mounted callbacks | CORE-14 |
+| BASE-DOM-08 | resolved / 已复现 | Sharing a live setting object leaves a second published instance blank and can steal candidate bindings | CORE-14 |

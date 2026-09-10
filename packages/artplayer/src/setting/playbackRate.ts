@@ -1,11 +1,14 @@
-export default function playbackRate(art) {
+import type { SettingHost, SettingItem } from './types'
+import { subscribeSetting } from './resources'
+
+export default function playbackRate(art: SettingHost): SettingItem {
   const {
     i18n,
     icons,
     constructor: { SETTING_ITEM_WIDTH, PLAYBACK_RATE },
   } = art
 
-  function getI18n(value) {
+  function getI18n(value: number) {
     return value === 1.0 ? i18n.get('Normal') : value.toFixed(1)
   }
 
@@ -29,12 +32,12 @@ export default function playbackRate(art) {
       }
     }),
     onSelect(item) {
-      art.playbackRate = item.value
+      art.playbackRate = item.value as number
       return item.html
     },
-    mounted: () => {
+    mounted: (_element, item) => {
       update()
-      art.on('video:ratechange', () => update())
+      subscribeSetting(art, item, 'video:ratechange', () => update())
     },
   }
 }

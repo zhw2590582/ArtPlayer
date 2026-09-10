@@ -1,11 +1,14 @@
-export default function aspectRatio(art) {
+import type { SettingHost, SettingItem } from './types'
+import { subscribeSetting } from './resources'
+
+export default function aspectRatio(art: SettingHost): SettingItem {
   const {
     i18n,
     icons,
     constructor: { SETTING_ITEM_WIDTH, ASPECT_RATIO },
   } = art
 
-  function getI18n(value) {
+  function getI18n(value: string) {
     return value === 'default' ? i18n.get('Default') : value
   }
 
@@ -29,12 +32,12 @@ export default function aspectRatio(art) {
       }
     }),
     onSelect(item) {
-      art.aspectRatio = item.value
+      art.aspectRatio = item.value as string
       return item.html
     },
-    mounted: () => {
+    mounted: (_element, item) => {
       update()
-      art.on('aspectRatio', () => update())
+      subscribeSetting(art, item, 'aspectRatio', () => update())
     },
   }
 }

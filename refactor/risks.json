@@ -161,7 +161,7 @@
       "id": "BASE-DOM-02",
       "title": "窄容器中控件裁切",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-13",
         "CORE-14"
@@ -171,7 +171,18 @@
       ],
       "compatibleResolution": "在保留自定义控件扩展入口下修正布局。",
       "closureCriteria": "320px 及正常容器的设置/模式操作真实可用。",
-      "workspaceState": "CORE-13 final installed UMD and legacy verify wrapped controls at 640/320/240px with real 16:9 heights and observed total-height offsets, including ResizeObserver fallback. Narrow setting tree/panel interactions still require CORE-14; this finding remains open."
+      "workspaceState": "CORE-13 wrapped controls and CORE-14 bounded settings/native input/autoOrientation checks now pass the final installed UMD and legacy matrices; 320px layouts remain operable with long text and wrapped control rows.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-14-setting.md",
+        "refactor/baselines/setting-validation.json",
+        "test/browser/setting.spec.js",
+        "test/browser/setting-update.spec.js",
+        "test/browser/setting-ownership.spec.js",
+        "test/browser/setting-interaction.spec.js",
+        "test/setting-model.test.js",
+        "test/setting-resources.test.js"
+      ],
+      "resolutionRationale": "Final installed UMD and legacy each pass the complete 519-case three-engine matrix. Managed tree/DOM/resource rollback, async generation guards, scoped mounts and panel/header ownership preserve normal identities, callbacks and returns. Narrow layouts and native input/touch interactions pass; simultaneous live object sharing fails before mutation while transfer after removal/destruction preserves the original object. Source and shipped package bytes match the tested artifacts."
     },
     {
       "id": "BASE-DEMO-01",
@@ -888,7 +899,8 @@
       ],
       "compatibleResolution": "Keep legacy consumers; add explicit cue-array listener overloads, type internal implementations accurately, and resolve remaining generated/public facade contracts at CORE-21 without false intersections.",
       "closureCriteria": "Actual setting/null/void and notice boolean returns, cue array callbacks and old legal type consumers all have an explicit compatible declaration strategy and package tests.",
-      "scopeNote": "CORE-07 provides runtime evidence and explicit cue-array overloads; old inferred scalar event callbacks and return signatures are not claimed corrected."
+      "scopeNote": "CORE-07 provides runtime evidence and explicit cue-array overloads; old inferred scalar event callbacks and return signatures are not claimed corrected.",
+      "workspaceState": "CORE-14 source manager accurately models add/update item, remove void and missing find null; installed historical public consumers still compile. Public declaration coordination remains open for CORE-15/18/21."
     },
     {
       "id": "BASE-TYPE-08",
@@ -1132,6 +1144,168 @@
         "test/component-resources.test.js"
       ],
       "resolutionRationale": "Published/candidate behavior comparisons and both final installed artifact matrices pass. Entry ownership, transactional registration/removal, current selection guards and literal text assignment correct reproduced defects while retaining normal callbacks, return values, descriptors and public declarations. Source and shipped bytes match the tested package."
+    },
+    {
+      "id": "BASE-DOM-06",
+      "title": "Moved setting items retain parent and option bindings from the old tree",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-14"
+      ],
+      "evidence": [
+        "test/browser/setting.spec.js",
+        "test/setting-model.test.js",
+        "refactor/changes/2026-09-11-CORE-14-setting.md"
+      ],
+      "compatibleResolution": "Preserve hidden getter flags and identity while rebinding a removed item to its current parent/panel.",
+      "closureCriteria": "Final Setting migration, cleanup, strict types and installed UMD/legacy regressions must pass. Source-only model results do not close this task.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-14-setting.md",
+        "refactor/baselines/setting-validation.json",
+        "test/browser/setting.spec.js",
+        "test/browser/setting-update.spec.js",
+        "test/browser/setting-ownership.spec.js",
+        "test/browser/setting-interaction.spec.js",
+        "test/setting-model.test.js",
+        "test/setting-resources.test.js"
+      ],
+      "resolutionRationale": "Final installed UMD and legacy each pass the complete 519-case three-engine matrix. Managed tree/DOM/resource rollback, async generation guards, scoped mounts and panel/header ownership preserve normal identities, callbacks and returns. Narrow layouts and native input/touch interactions pass; simultaneous live object sharing fails before mutation while transfer after removal/destruction preserves the original object. Source and shipped package bytes match the tested artifacts."
+    },
+    {
+      "id": "BASE-DOM-07",
+      "title": "Generated setting names collide with explicit names in nested branches",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-14"
+      ],
+      "evidence": [
+        "test/browser/setting.spec.js",
+        "test/setting-model.test.js",
+        "refactor/changes/2026-09-11-CORE-14-setting.md"
+      ],
+      "compatibleResolution": "Reserve explicit names before allocating IDs; preserve normal names and monotonic counters.",
+      "closureCriteria": "Final Setting migration, cleanup, strict types and installed UMD/legacy regressions must pass. Source-only model results do not close this task.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-14-setting.md",
+        "refactor/baselines/setting-validation.json",
+        "test/browser/setting.spec.js",
+        "test/browser/setting-update.spec.js",
+        "test/browser/setting-ownership.spec.js",
+        "test/browser/setting-interaction.spec.js",
+        "test/setting-model.test.js",
+        "test/setting-resources.test.js"
+      ],
+      "resolutionRationale": "Final installed UMD and legacy each pass the complete 519-case three-engine matrix. Managed tree/DOM/resource rollback, async generation guards, scoped mounts and panel/header ownership preserve normal identities, callbacks and returns. Narrow layouts and native input/touch interactions pass; simultaneous live object sharing fails before mutation while transfer after removal/destruction preserves the original object. Source and shipped package bytes match the tested artifacts."
+    },
+    {
+      "id": "BASE-LIFE-12",
+      "title": "Removed or updated setting rows retain descendant panels and builtin subscriptions",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-14"
+      ],
+      "evidence": [
+        "test/browser/setting.spec.js",
+        "test/setting-resources.test.js",
+        "refactor/changes/2026-09-11-CORE-14-setting.md"
+      ],
+      "compatibleResolution": "Own DOM/Emitter subscriptions per rendered item and release descendants and cached panels on update/removal.",
+      "closureCriteria": "Finish manager/resource rollback and verify strict source types, full installed UMD/legacy and builtin/legacy plugin combinations before closure.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-14-setting.md",
+        "refactor/baselines/setting-validation.json",
+        "test/browser/setting.spec.js",
+        "test/browser/setting-update.spec.js",
+        "test/browser/setting-ownership.spec.js",
+        "test/browser/setting-interaction.spec.js",
+        "test/setting-model.test.js",
+        "test/setting-resources.test.js"
+      ],
+      "resolutionRationale": "Final installed UMD and legacy each pass the complete 519-case three-engine matrix. Managed tree/DOM/resource rollback, async generation guards, scoped mounts and panel/header ownership preserve normal identities, callbacks and returns. Narrow layouts and native input/touch interactions pass; simultaneous live object sharing fails before mutation while transfer after removal/destruction preserves the original object. Source and shipped package bytes match the tested artifacts."
+    },
+    {
+      "id": "BASE-LIFE-13",
+      "title": "Obsolete setting callback completions overwrite current UI and failures are unhandled",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-14"
+      ],
+      "evidence": [
+        "test/browser/setting.spec.js",
+        "test/setting-resources.test.js",
+        "refactor/changes/2026-09-11-CORE-14-setting.md"
+      ],
+      "compatibleResolution": "Preserve callback arguments and synchronous state; only the latest live write target may accept completion, and report the original failure.",
+      "closureCriteria": "Finish manager/resource rollback and verify strict source types, full installed UMD/legacy and builtin/legacy plugin combinations before closure.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-14-setting.md",
+        "refactor/baselines/setting-validation.json",
+        "test/browser/setting.spec.js",
+        "test/browser/setting-update.spec.js",
+        "test/browser/setting-ownership.spec.js",
+        "test/browser/setting-interaction.spec.js",
+        "test/setting-model.test.js",
+        "test/setting-resources.test.js"
+      ],
+      "resolutionRationale": "Final installed UMD and legacy each pass the complete 519-case three-engine matrix. Managed tree/DOM/resource rollback, async generation guards, scoped mounts and panel/header ownership preserve normal identities, callbacks and returns. Narrow layouts and native input/touch interactions pass; simultaneous live object sharing fails before mutation while transfer after removal/destruction preserves the original object. Source and shipped package bytes match the tested artifacts."
+    },
+    {
+      "id": "BASE-LIFE-14",
+      "title": "Removed or replaced setting items still run deferred mounted callbacks",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-14"
+      ],
+      "evidence": [
+        "test/browser/setting.spec.js",
+        "test/setting-resources.test.js",
+        "refactor/changes/2026-09-11-CORE-14-setting.md"
+      ],
+      "compatibleResolution": "Bind deferred mounted to its rendered generation and cancel obsolete timers without introducing a disposer return contract.",
+      "closureCriteria": "Finish manager/resource rollback and verify strict source types, full installed UMD/legacy and builtin/legacy plugin combinations before closure.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-14-setting.md",
+        "refactor/baselines/setting-validation.json",
+        "test/browser/setting.spec.js",
+        "test/browser/setting-update.spec.js",
+        "test/browser/setting-ownership.spec.js",
+        "test/browser/setting-interaction.spec.js",
+        "test/setting-model.test.js",
+        "test/setting-resources.test.js"
+      ],
+      "resolutionRationale": "Final installed UMD and legacy each pass the complete 519-case three-engine matrix. Managed tree/DOM/resource rollback, async generation guards, scoped mounts and panel/header ownership preserve normal identities, callbacks and returns. Narrow layouts and native input/touch interactions pass; simultaneous live object sharing fails before mutation while transfer after removal/destruction preserves the original object. Source and shipped package bytes match the tested artifacts."
+    },
+    {
+      "id": "BASE-DOM-08",
+      "title": "Sharing a live setting object leaves a second published instance blank and can steal candidate bindings",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-14"
+      ],
+      "evidence": [
+        "test/browser/setting-ownership.spec.js",
+        "test/setting-model.test.js",
+        "refactor/changes/2026-09-11-CORE-14-setting.md"
+      ],
+      "compatibleResolution": "Reject transfer from an active owner before mutating either tree; allow original-object reuse after removal or destruction, preserving item return identity and immutable getters.",
+      "closureCriteria": "Retain the published sharing baseline and candidate ownership diagnosis; verify rejection, both owner lifetimes, subtree reuse, full strict checks and final installed UMD/legacy matrices before closure.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-14-setting.md",
+        "refactor/baselines/setting-validation.json",
+        "test/browser/setting.spec.js",
+        "test/browser/setting-update.spec.js",
+        "test/browser/setting-ownership.spec.js",
+        "test/browser/setting-interaction.spec.js",
+        "test/setting-model.test.js",
+        "test/setting-resources.test.js"
+      ],
+      "resolutionRationale": "Final installed UMD and legacy each pass the complete 519-case three-engine matrix. Managed tree/DOM/resource rollback, async generation guards, scoped mounts and panel/header ownership preserve normal identities, callbacks and returns. Narrow layouts and native input/touch interactions pass; simultaneous live object sharing fails before mutation while transfer after removal/destruction preserves the original object. Source and shipped package bytes match the tested artifacts."
     }
   ]
 }

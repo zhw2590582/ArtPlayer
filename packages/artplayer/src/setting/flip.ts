@@ -1,13 +1,15 @@
+import type { SettingHost, SettingItem } from './types'
 import { capitalize } from '../utils'
+import { subscribeSetting } from './resources'
 
-export default function flip(art) {
+export default function flip(art: SettingHost): SettingItem {
   const {
     i18n,
     icons,
     constructor: { SETTING_ITEM_WIDTH, FLIP },
   } = art
 
-  function getI18n(value) {
+  function getI18n(value: string) {
     return i18n.get(capitalize(value))
   }
 
@@ -31,12 +33,12 @@ export default function flip(art) {
       }
     }),
     onSelect(item) {
-      art.flip = item.value
+      art.flip = item.value as string
       return item.html
     },
-    mounted: () => {
+    mounted: (_element, item) => {
       update()
-      art.on('flip', () => update())
+      subscribeSetting(art, item, 'flip', () => update())
     },
   }
 }

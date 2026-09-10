@@ -1009,11 +1009,14 @@
       "dependsOn": [
         "CORE-13"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "setting model/selection/render/layout 的分批实现",
       "acceptance": "不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过；结合 BASE-DOM-02 验证窄容器设置定位；接续 BASE-TYPE-07 的 find null、add/update item、remove undefined 声明冲突",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-14-setting.md",
+        "baselines/setting-validation.json"
+      ]
     },
     {
       "id": "CORE-15",

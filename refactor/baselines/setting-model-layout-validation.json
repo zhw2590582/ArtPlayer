@@ -1,0 +1,200 @@
+{
+  "task": "CORE-14",
+  "status": "partial",
+  "scope": "Tree model and initial bounded layout only; manager/render/selection/resource migration is unfinished.",
+  "date": "2026-09-11",
+  "files": {
+    "packages/artplayer/src/setting/model.ts": "2486cf5b4dc68ca2bf23351eed2d0010506682324e4e1ac8f1c318ac2cc35163",
+    "packages/artplayer/src/setting/layout.ts": "584604e8fffaeaf1d633d1ed45e64d94595c2a56976e3a3f7ede01839b83a37d",
+    "packages/artplayer/src/setting/index.js": "6bf37e3c321200474d0b6c953ed923a52f399b32674930589bb38fd71f0c535c",
+    "test/setting-model.test.js": "bb1c4237646f128436450d5412a3202f6007831629f104c54dbcb025cd04d27a",
+    "test/setting-layout.test.js": "a7da46075bd478182559b9af4817b128eb9f9c219b6032d77fd437370f2a3563",
+    "test/types/setting-model.ts": "ba024ffeae26428d06f07f98f62f211db94ef8b259251f9f424a4203f1187c7b",
+    "test/browser/setting.spec.js": "498d4281b6373c456d64f4257b335cc7f72604577d5ead701a781ec2dad042b2",
+    "package.json": "900034e913876951a050e9d896d5b6b83871663d252a0fe602a5ed016fd8ebaa"
+  },
+  "ci": {
+    "passed": 187,
+    "unit": 158,
+    "engineering": 4,
+    "baseline": 25,
+    "strictSourceFiles": 112,
+    "logSha256": "6e3a59e7662709c0baad4f9474be3d3853df98f24b898a536945d24a8aa11775"
+  },
+  "browser": {
+    "stats": {
+      "startTime": "2026-09-10T21:08:42.006Z",
+      "duration": 13188.141,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "candidate": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer\\src\\index.js"
+      },
+      "sha256": "e2f0b26373cc8e9865eb326d9d8d4f62122307154c9dadbfdd78843c17bb1f2a",
+      "bytes": 248698
+    },
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "cases": [
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: setting registry retains item returns and hidden tree bindings",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: moved setting items bind to their current parent and panel",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "published: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: a wide nested setting panel fits the narrow player and remains selectable",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: setting registry retains item returns and hidden tree bindings",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: moved setting items bind to their current parent and panel",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "title": "candidate: automatic setting names and explicit nested names have an explicit baseline",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      }
+    ]
+  },
+  "limits": [
+    "Source fixture validation only; no final CORE-14 installed-package validation",
+    "Setting manager and builtin rendering remain JavaScript",
+    "Descendant/panel cleanup, obsolete callbacks, mounted timers and strict host integration remain pending",
+    "BASE-DOM-02/06/07 remain open",
+    "Mobile/rotation, long text and dynamic container changes require further browser coverage"
+  ]
+}
