@@ -43,7 +43,7 @@ export interface Utils {
   loadImg: (url: string, scale?: number) => Promise<HTMLImageElement>
 
   errorHandle: <T extends boolean>(condition: T, msg: string) => T extends true ? T : never
-  silencePromise: <T>(value: T) => T extends PromiseLike<infer R> ? Promise<R | undefined> : T
+  silencePromise: <T>(value: T) => T extends Promise<infer R> ? Promise<R | undefined> : T
   def: (obj: object, name: string, value: unknown) => void
   has: (obj: object, name: PropertyKey) => boolean
   get: (obj: object, name: PropertyKey) => PropertyDescriptor | undefined

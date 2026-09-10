@@ -32,6 +32,7 @@
     "build:docs": "node ./scripts/build-docs.js",
     "build:i18n": "node ./scripts/build-i18n.js",
     "build:test": "node ./scripts/build-test.js",
+    "test:playback": "node --test test/playback.test.js",
     "trans:docs": "node ./scripts/trans-docs.js",
     "create:plugin": "node ./scripts/plugin/create.js",
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
