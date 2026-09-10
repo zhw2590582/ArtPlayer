@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 212 项，范围 22 个包及工作区/示例。
 
-状态：todo 197 / doing 0 / blocked 1 / done 14 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 196 / doing 0 / blocked 1 / done 15 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -72,7 +72,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| ENG-01 | workspace<br>固定 Node、包管理器与依赖 | BASE-01 | 版本 pin、唯一锁文件、安装说明 | 干净环境可复现，最低 Node 与构建依赖一致，未夹带全量升级 | M | todo |
+| ENG-01 | workspace<br>固定 Node、包管理器与依赖 | BASE-01 | 版本 pin、唯一锁文件、安装说明 | 干净环境可复现，最低 Node 与构建依赖一致，未夹带全量升级 | M | done |
 | ENG-02 | workspace<br>拆分只读检查并建立 PR CI | ENG-01 | lint/lint:fix、PR 与主线检查、独立部署任务；遵循 github-ci-cd.md，PR/重构分支触发、最小权限及 workflow 静态检查 | 仓库内检查可执行且不改源码、不发布；required checks 的外部设置状态列入发布台账，不阻塞本地框架建设 | M | todo |
 | ENG-03 | workspace<br>建立公共行为与单元测试入口 | ENG-02, BASE-03 | 保留现有 node:test，测试目录/夹具/统一入口 | 已有 19 项回归保留，旧版与候选可用同一夹具运行 | M | todo |
 | ENG-04 | workspace<br>建立类型测试基础 | ENG-02, BASE-05 | 根与分包 tsconfig、显式 TS 依赖、正反例测试 | 核心/试点与迁移模块严格检查，未迁移第三方/包历史问题独立台账；明确最低/当前 TS 和各环境类型 | M | todo |
@@ -416,3 +416,4 @@
 - BASE-01: [记录](changes/2026-09-10-BASE-01-published-baseline.md) [记录](baselines/releases.json)
 - BASE-HARNESS-01: [记录](changes/2026-09-10-BASE-HARNESS-01-browser-fixture.md)
 - BASE-02:  Chrome 工具连接连续失败，重置后仍不可用；用户要求先继续其他任务。恢复连接后执行 api.html 并核对报告，HTTP 服务通过不代表浏览器通过。
+- ENG-01: [记录](changes/2026-09-10-ENG-01-reproducible-toolchain.md) [记录](baselines/toolchain-validation.json)

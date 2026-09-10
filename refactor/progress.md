@@ -1,6 +1,12 @@
 # 进度与证据
 
-## 当前实施：浏览器夹具已保存，继续 ENG-01
+## 当前实施：ENG-01 工具链已验证
+
+Node 24.21.0/npm 11.19.0、16 个直接工具和 npm lock 已固定；干净安装 1141 包、原 19 项测试、21 库包 63 产物与文档站构建全部通过，已有依赖解析版本没有升级。详见 [ENG-01 交付](changes/2026-09-10-ENG-01-reproducible-toolchain.md)。
+
+完成 12 项规划、3 项实施基础任务；BASE-02 仍因 Chrome 连接阻塞，196 项待办。BASE-HARNESS-01 提交为 `3c759f14`。没有生产 TS 迁移、推送或发布。下一项 ENG-02，拆分只读检查并更新 PR/主线 CI。
+
+## 2026-09-10：浏览器夹具已保存
 
 BASE-01 已提交 `1d705b30`。BASE-HARNESS-01 完成发布包采集页面/本地 HTTP 服务及 1 项真实 HTTP 测试，详见 [交付记录](changes/2026-09-10-BASE-HARNESS-01-browser-fixture.md)。BASE-02 因 Chrome 连接失败保持 blocked；用户要求先继续其他实施任务，没有伪造浏览器基线。
 

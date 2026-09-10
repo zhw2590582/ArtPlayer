@@ -383,11 +383,14 @@
       "dependsOn": [
         "BASE-01"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "版本 pin、唯一锁文件、安装说明",
       "acceptance": "干净环境可复现，最低 Node 与构建依赖一致，未夹带全量升级",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-ENG-01-reproducible-toolchain.md",
+        "baselines/toolchain-validation.json"
+      ]
     },
     {
       "id": "ENG-02",

@@ -105,8 +105,16 @@ for (const task of data.tasks) {
 }
 
 let localLinks = 0
-const markdownFiles = fs.readdirSync(dir, { recursive: true })
-  .filter(file => file.endsWith('.md')).map(file => path.join(dir, file))
+function markdownIn(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const filename = path.join(directory, entry.name)
+    if (entry.isDirectory()) {
+      return ['.cache', 'node_modules', '.git'].includes(entry.name) ? [] : markdownIn(filename)
+    }
+    return entry.isFile() && entry.name.endsWith('.md') ? [filename] : []
+  })
+}
+const markdownFiles = markdownIn(dir)
 for (const file of [...markdownFiles, path.join(root, 'AGENTS.md')]) {
   const content = fs.readFileSync(file, 'utf8')
   for (const match of content.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
