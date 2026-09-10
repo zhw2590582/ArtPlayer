@@ -1,4 +1,14 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "src/**/*.cts", "types/**/*.d.ts", "types/**/*.d.mts", "types/**/*.d.cts", "../../types/assets.d.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.mts",
+    "src/**/*.cts",
+    "types/**/*.d.ts",
+    "types/**/*.d.mts",
+    "types/**/*.d.cts",
+    "../../types/assets.d.ts",
+    "../../types/option-validator.d.ts"
+  ]
 }

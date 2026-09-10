@@ -13,6 +13,8 @@ import { beginLifecycle, destroyInstance, finishLifecycle, getScope } from './li
 import Loading from './loading'
 import Mask from './mask'
 import Notice from './notice'
+import createDefaults from './option/defaults'
+import resolveOption from './option/resolve'
 import Player from './player'
 import Plugins from './plugins'
 import scheme from './scheme'
@@ -36,10 +38,7 @@ export default class Artplayer extends Emitter {
 
     this.id = ++id
 
-    const mergeOption = utils.mergeDeep(Artplayer.option, option)
-    mergeOption.container = option.container
-
-    this.option = validator(mergeOption, scheme)
+    this.option = resolveOption(option, Artplayer.option)
 
     this.isLock = false
     this.isReady = false
@@ -135,76 +134,7 @@ export default class Artplayer extends Emitter {
   }
 
   static get option() {
-    return {
-      id: '',
-      container: '#artplayer',
-      url: '',
-      poster: '',
-      type: '',
-      theme: '#f00',
-      volume: 0.7,
-      isLive: false,
-      muted: false,
-      autoplay: false,
-      autoSize: false,
-      autoMini: false,
-      loop: false,
-      flip: false,
-      playbackRate: false,
-      aspectRatio: false,
-      screenshot: false,
-      setting: false,
-      hotkey: true,
-      pip: false,
-      mutex: true,
-      backdrop: true,
-      fullscreen: false,
-      fullscreenWeb: false,
-      subtitleOffset: false,
-      miniProgressBar: false,
-      useSSR: false,
-      playsInline: true,
-      lock: false,
-      gesture: true,
-      fastForward: false,
-      autoPlayback: false,
-      autoOrientation: false,
-      airplay: false,
-      proxy: undefined,
-      layers: [],
-      contextmenu: [],
-      controls: [],
-      settings: [],
-      quality: [],
-      highlight: [],
-      plugins: [],
-      thumbnails: {
-        url: '',
-        number: 60,
-        column: 10,
-        width: 0,
-        height: 0,
-        scale: 1,
-      },
-      subtitle: {
-        url: '',
-        type: '',
-        style: {},
-        name: '',
-        escape: true,
-        encoding: 'utf-8',
-        onVttLoad: vtt => vtt,
-      },
-      moreVideoAttr: {
-        controls: false,
-        preload: utils.isSafari ? 'auto' : 'metadata',
-      },
-      i18n: {},
-      icons: {},
-      cssVar: {},
-      customType: {},
-      lang: navigator?.language.toLowerCase(),
-    }
+    return createDefaults()
   }
 
   get proxy() {

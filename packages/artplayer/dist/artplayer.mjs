@@ -735,7 +735,7 @@ const scheme = {
       position: (value, _, paths) => {
         const position = ["top", "left", "right"];
         return errorHandle(
-          position.includes(value),
+          typeof value === "string" && position.includes(value),
           `${paths.join(".")} only accept ${position.toString()} as parameters`
         );
       }
@@ -2532,6 +2532,83 @@ class Notice {
     } = this.art;
     return $player.classList.contains("art-notice-show");
   }
+}
+function createDefaults() {
+  return {
+    id: "",
+    container: "#artplayer",
+    url: "",
+    poster: "",
+    type: "",
+    theme: "#f00",
+    volume: 0.7,
+    isLive: false,
+    muted: false,
+    autoplay: false,
+    autoSize: false,
+    autoMini: false,
+    loop: false,
+    flip: false,
+    playbackRate: false,
+    aspectRatio: false,
+    screenshot: false,
+    setting: false,
+    hotkey: true,
+    pip: false,
+    mutex: true,
+    backdrop: true,
+    fullscreen: false,
+    fullscreenWeb: false,
+    subtitleOffset: false,
+    miniProgressBar: false,
+    useSSR: false,
+    playsInline: true,
+    lock: false,
+    gesture: true,
+    fastForward: false,
+    autoPlayback: false,
+    autoOrientation: false,
+    airplay: false,
+    proxy: void 0,
+    layers: [],
+    contextmenu: [],
+    controls: [],
+    settings: [],
+    quality: [],
+    highlight: [],
+    plugins: [],
+    thumbnails: {
+      url: "",
+      number: 60,
+      column: 10,
+      width: 0,
+      height: 0,
+      scale: 1
+    },
+    subtitle: {
+      url: "",
+      type: "",
+      style: {},
+      name: "",
+      escape: true,
+      encoding: "utf-8",
+      onVttLoad: (vtt) => vtt
+    },
+    moreVideoAttr: {
+      controls: false,
+      preload: isSafari ? "auto" : "metadata"
+    },
+    i18n: {},
+    icons: {},
+    cssVar: {},
+    customType: {},
+    lang: navigator?.language.toLowerCase()
+  };
+}
+function resolveOption(input, defaults) {
+  const merged = mergeDeep(defaults, input);
+  merged.container = input.container;
+  return validator(merged, scheme);
 }
 function airplayMix(art) {
   const {
@@ -5085,9 +5162,7 @@ class Artplayer extends Emitter {
       throw new Error("Artplayer can only be used in the browser environment");
     }
     this.id = ++id;
-    const mergeOption = mergeDeep(Artplayer.option, option);
-    mergeOption.container = option.container;
-    this.option = validator(mergeOption, scheme);
+    this.option = resolveOption(option, Artplayer.option);
     this.isLock = false;
     this.isReady = false;
     this.isFocus = false;
@@ -5164,76 +5239,7 @@ class Artplayer extends Emitter {
     return Template.html;
   }
   static get option() {
-    return {
-      id: "",
-      container: "#artplayer",
-      url: "",
-      poster: "",
-      type: "",
-      theme: "#f00",
-      volume: 0.7,
-      isLive: false,
-      muted: false,
-      autoplay: false,
-      autoSize: false,
-      autoMini: false,
-      loop: false,
-      flip: false,
-      playbackRate: false,
-      aspectRatio: false,
-      screenshot: false,
-      setting: false,
-      hotkey: true,
-      pip: false,
-      mutex: true,
-      backdrop: true,
-      fullscreen: false,
-      fullscreenWeb: false,
-      subtitleOffset: false,
-      miniProgressBar: false,
-      useSSR: false,
-      playsInline: true,
-      lock: false,
-      gesture: true,
-      fastForward: false,
-      autoPlayback: false,
-      autoOrientation: false,
-      airplay: false,
-      proxy: void 0,
-      layers: [],
-      contextmenu: [],
-      controls: [],
-      settings: [],
-      quality: [],
-      highlight: [],
-      plugins: [],
-      thumbnails: {
-        url: "",
-        number: 60,
-        column: 10,
-        width: 0,
-        height: 0,
-        scale: 1
-      },
-      subtitle: {
-        url: "",
-        type: "",
-        style: {},
-        name: "",
-        escape: true,
-        encoding: "utf-8",
-        onVttLoad: (vtt) => vtt
-      },
-      moreVideoAttr: {
-        controls: false,
-        preload: isSafari ? "auto" : "metadata"
-      },
-      i18n: {},
-      icons: {},
-      cssVar: {},
-      customType: {},
-      lang: navigator?.language.toLowerCase()
-    };
+    return createDefaults();
   }
   get proxy() {
     return this.events.proxy;

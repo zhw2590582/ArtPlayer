@@ -1,3 +1,5 @@
+import type { Scheme, ValidatorPath } from 'option-validator'
+import type { Option } from '../option/types'
 import { errorHandle } from '../utils'
 
 const a = 'array'
@@ -7,7 +9,7 @@ const n = 'number'
 const o = 'object'
 const f = 'function'
 
-function validElement(value, type, paths) {
+function validElement(value: unknown, type: string, paths: ValidatorPath) {
   return errorHandle(
     type === s || type === n || value instanceof Element,
     `${paths.join('.')} require '${s}' or 'Element' type`,
@@ -33,7 +35,7 @@ export const ComponentOption = {
   onChange: `?${f}`,
 }
 
-export default {
+const scheme = {
   id: s,
   container: validElement,
   url: s,
@@ -77,10 +79,10 @@ export default {
   controls: [
     {
       ...ComponentOption,
-      position: (value, _, paths) => {
+      position: (value: unknown, _: string, paths: ValidatorPath) => {
         const position = ['top', 'left', 'right']
         return errorHandle(
-          position.includes(value),
+          typeof value === 'string' && position.includes(value),
           `${paths.join('.')} only accept ${position.toString()} as parameters`,
         )
       },
@@ -121,4 +123,6 @@ export default {
   icons: o,
   cssVar: o,
   customType: o,
-}
+} satisfies Record<keyof Option, Scheme>
+
+export default scheme

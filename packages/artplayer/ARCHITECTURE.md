@@ -4,6 +4,47 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Input and resolved configuration
+
+`src/option/defaults.ts` creates fresh defaults on every Artplayer.option access,
+including nested objects, arrays and the identity onVttLoad callback. It reads browser
+language at the same getter call and retains the existing Safari preload decision.
+The entry passes Artplayer.option to `option/resolve.ts`, which performs the existing
+deep merge, restores input.container by reference and invokes the same option-validator
+function. Allocation of the instance id still precedes validation; DOM mounting follows it.
+
+`option/types.ts` reuses the public Option as the typed input contract. ResolvedOption
+requires top-level defaults and subtitle/thumbnail defaults, while explicitly allowing
+proxy to remain undefined. ResolvedInput preserves extra typed application fields without
+adding a global any index signature. The one assertion after validation connects the
+existing dynamic merge to a successfully resolved typed input; this function is not an
+unknown-to-safe-object guard. Arbitrary JS still passes through runtime validation,
+and permissive nested map/extension data needs checks in its consuming module.
+
+`src/scheme/index.ts` preserves the mutable runtime schema, shared ComponentOption
+objects and callback validation messages. Its keys are checked against Option at compile
+time. `types/option-validator.d.ts` at the repository root describes the installed 2.0.6
+identity validator, callback paths and kindOf; it adds no runtime wrapper or dependency.
+Root/core strict configs include that declaration and lint covers root declaration files.
+The public Artplayer.validator and scheme references remain available as before.
+
+Merge behavior includes unknown own keys, collection item references, two reads of an
+enumerable input container getter, and restoration of an inherited container. Explicit
+undefined can still fail the existing schema instead of being silently defaulted. This
+task changes neither validation rules nor public consumer declarations.
+
+Two verified declaration gaps are tracked as BASE-TYPE-06 for CORE-07: existing JS can
+omit url and use numeric control HTML, while the current public types reject those forms.
+The historical rejection fixtures must become positive consumer checks when reconciled.
+Other permissive validator cases are not blanket guarantees that later DOM/media code
+can consume every accepted value. Preserve failure stages while migrating those consumers.
+
+Run `yarn test:unit` for published/current defaults, merge and error comparisons, and
+`yarn typecheck` for required resolved fields and retained callback/application types.
+`options.spec.js` exercises actual candidate construction, invalid input timing and
+real-media customType/ready callbacks in the three browser engines. Keep those cases
+when changing defaults, schema or resolution; also rerun installed-package validation.
+
 ## Current TypeScript boundary: utilities
 
 | Module | Responsibility and constraints |

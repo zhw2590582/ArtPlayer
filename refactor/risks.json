@@ -782,6 +782,23 @@
         "test/browser/emitter.spec.js"
       ],
       "resolutionRationale": "The wrapper records consumption before unsubscribe/invocation; ordinary dispatch snapshot semantics are retained."
+    },
+    {
+      "id": "BASE-TYPE-06",
+      "title": "Public Option requires url and excludes numeric control HTML accepted by existing JS",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-07"
+      ],
+      "evidence": [
+        "test/browser/options.spec.js",
+        "test/types/options-source.ts",
+        "refactor/baselines/options-validation.json",
+        "refactor/changes/2026-09-11-CORE-05-resolved-options.md"
+      ],
+      "compatibleResolution": "Expand public declarations for the verified legal JS forms; preserve existing typed inputs and runtime defaults.",
+      "closureCriteria": "Replace the two historical negative fixtures with positive public consumers and verify old/new TypeScript plus installed package modes."
     }
   ]
 }

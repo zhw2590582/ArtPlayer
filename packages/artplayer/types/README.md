@@ -26,3 +26,13 @@ When changing types, run `yarn typecheck`, `yarn test:baseline` and
 chapter/legacy factories, language data, invalid inputs, NodeNext/Bundler and old
 TS 4.3.5 consumers. Run `yarn build:ts` to refresh editor declarations. Full editor
 behavior and other core declaration/runtime mismatches have CORE-07/SITE tasks.
+## Configuration migration boundary
+
+CORE-05 keeps the public Option unchanged. Internal src/option/types.ts distinguishes
+typed input from defaults-filled ResolvedOption; it is not a new public export. The
+existing public url requirement and exclusion of numeric control HTML differ from
+verified JS behavior (BASE-TYPE-06, CORE-07). test/types/options-source.ts records the
+current rejection; replace those two negative cases with positive consumer coverage
+when expanding the public declarations. Do not change runtime validation to match a
+narrower historical declaration. Other optional fields and callback signatures remain
+subject to the existing public compatibility contract.

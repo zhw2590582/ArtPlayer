@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：CORE-05 配置与默认值 TS 拆分完成
+
+核心入口接入独立默认值/解析模块，scheme 迁移 TS，区分 Option 与 ResolvedOption 并保留应用扩展类型。107 项 Node/基线、安装 UMD 三浏览器 126 项及 legacy 配置/生命周期 48 项通过；严格打包 27 项运行时、五组类型零诊断。见 [交付](changes/2026-09-11-CORE-05-resolved-options.md)。新登记 BASE-TYPE-06（省略 URL/数字控件 HTML 的声明缺口）交 CORE-07。当前 214 项，41 完成、173 待办；核心十六个 TS 文件、chapter 五个。下一项 CORE-06 内部媒体与宿主类型。
+
 ## 当前实施：CORE-04 构造/销毁生命周期完成
 
 核心入口接入实例作用域，修复重复/重入销毁、失败构造回滚和 pending resize；正常 destroy 回调仍可挂载替代实例。99 项 Node/基线、安装 UMD 三浏览器 108 项及 legacy 三浏览器 30 项通过；严格打包 27 项运行时、五组类型零诊断。见 [交付](changes/2026-09-11-CORE-04-instance-lifecycle.md)。关闭 BASE-LIFE-04/05 与 BASE-PERF-01，字幕/异步插件等后续任务继续开放。当前 214 项，40 完成、174 待办；核心十二个 TS 文件、chapter 五个，主入口仍为 JS 兼容门面。下一项 CORE-05 输入与内部配置类型。

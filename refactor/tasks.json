@@ -830,11 +830,14 @@
         "CORE-01",
         "ENG-04"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "Option/ResolvedOption、默认值与校验整理",
       "acceptance": "配置合并/错误时机不变，JS 输入仍运行时校验",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-05-resolved-options.md",
+        "baselines/options-validation.json"
+      ]
     },
     {
       "id": "CORE-06",

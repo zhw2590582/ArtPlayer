@@ -49,3 +49,4 @@
 | BASE-TYPE-05 | open / 源码/产物事实 | Public Utils declarations omit exports and misstate timer/descriptor signatures | CORE-07 |
 | EVENT-NAME-01 | resolved / 已复现 | Emitter event names collide with Object.prototype | CORE-02 |
 | EVENT-ONCE-01 | resolved / 已复现 | Nested dispatch snapshots invoke the same once registration twice | CORE-02 |
+| BASE-TYPE-06 | open / 已复现 | Public Option requires url and excludes numeric control HTML accepted by existing JS | CORE-07 |
