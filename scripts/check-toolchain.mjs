@@ -17,8 +17,9 @@ const nodeVersion = fs.readFileSync(path.join(root, '.node-version'), 'utf8').tr
 const [major, minor] = process.versions.node.split('.').map(Number)
 assert((major === 20 && minor >= 19) || (major === 22 && minor >= 12) || major >= 23, 'Build tooling requires Node ^20.19.0 || >=22.12.0')
 for (const [name, version] of Object.entries(manifest.devDependencies)) {
-  assert(/^\d+\.\d+\.\d+(?:-[\w.-]+)?$/.test(version), `Unpinned development dependency: ${name}`)
-  assert.equal(lock[`${name}@${version}`]?.version, version, `Lock resolution differs: ${name}`)
+  const pinned = version.match(/^(?:npm:(?:@[^/]+\/)?[^@]+@)?(\d+\.\d+\.\d+(?:-[\w.-]+)?)$/)?.[1]
+  assert(pinned, `Unpinned development dependency: ${name}`)
+  assert.equal(lock[`${name}@${version}`]?.version, pinned, `Lock resolution differs: ${name}`)
 }
 
 const checked = new Set()

@@ -8,10 +8,11 @@
 | --- | --- |
 | `yarn lint` | 只读 ESLint，覆盖包源码/声明、JS/MJS 工具、测试和编辑器声明 |
 | `yarn lint:fix` | 显式自动修复相同范围 |
+| `yarn typecheck` | 根/迁移包严格检查、当前与兼容 TS 消费；历史 NodeNext ESM 错误单独核对，见 typechecking.md |
 | `yarn test:node` | 显式执行 4 个有行为断言的 Node 测试文件，保留原 test:playback/test:dash-control 入口 |
 | `yarn test:imports` | 3 个既有包导入 smoke，构建后执行以使用新产物；不把 console 示例视为完整行为断言 |
 | `yarn test:baseline` | 固定发布包完整性及本地 HTTP 基线测试；首次可能下载已固定归档到缓存 |
-| `yarn ci:check` | 严格 Node/Yarn/锁检查、计划、只读 lint、Node 和基线测试；允许写忽略缓存，不修改源码 |
+| `yarn ci:check` | 严格 Node/Yarn/锁检查、计划、只读 lint、类型、Node 和基线测试；允许写忽略缓存，不修改源码 |
 | `yarn ci:build` | 21 库包、i18n、编辑器声明和文档站构建，以及构建后包导入 smoke；会生成 dist 和 docs 内容 |
 | `yarn build:all` | 保留旧入口，执行 ci:build 后只读 lint |
 

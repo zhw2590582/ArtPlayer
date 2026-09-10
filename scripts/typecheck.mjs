@@ -1,0 +1,87 @@
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
+import { fileURLToPath } from 'node:url'
+import ts from 'typescript'
+import compat from 'typescript-compat'
+
+const root = fileURLToPath(new URL('../', import.meta.url))
+const relative = name => path.relative(root, name).replaceAll('\\', '/')
+const read = name => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'))
+
+export function checkProject(configPath) {
+  const config = ts.readConfigFile(configPath, ts.sys.readFile)
+  if (config.error)
+    return { files: [], diagnostics: [config.error] }
+  const parsed = ts.parseJsonConfigFileContent(config.config, ts.sys, path.dirname(configPath))
+  assert.equal(parsed.options.strict, true, 'Migrated projects must stay strict')
+  assert.equal(parsed.options.skipLibCheck, false, 'Do not hide declaration errors')
+  assert.equal(parsed.options.noEmit, true, 'Type checks must not write build artifacts')
+  assert.deepEqual(parsed.options.types, [], 'Browser projects must not inherit ambient Node/test globals')
+  const program = ts.createProgram(parsed.fileNames, parsed.options)
+  return { files: parsed.fileNames, diagnostics: [...parsed.errors, ...ts.getPreEmitDiagnostics(program)] }
+}
+
+export function checkConsumer(compiler, mode, source = fs.readFileSync(path.join(root, 'test/types/public.ts'), 'utf8')) {
+  const nodeNext = mode.startsWith('nodenext')
+  const module = nodeNext ? compiler.ModuleKind.NodeNext : mode === 'bundler-esm' ? compiler.ModuleKind.ESNext : compiler.ModuleKind.CommonJS
+  const moduleResolution = nodeNext ? compiler.ModuleResolutionKind.NodeNext : mode === 'bundler-esm' ? compiler.ModuleResolutionKind.Bundler : compiler.ModuleResolutionKind.NodeJs
+  const filename = path.join(root, 'test/types', nodeNext ? `consumer.${mode.endsWith('-cjs') ? 'cts' : 'mts'}` : 'consumer.ts')
+  const options = { strict: true, noEmit: true, skipLibCheck: false, types: [], target: compiler.ScriptTarget.ES2020, lib: ['lib.es2020.d.ts', 'lib.dom.d.ts'], esModuleInterop: true, module, moduleResolution }
+  const host = compiler.createCompilerHost(options)
+  const getSourceFile = host.getSourceFile.bind(host)
+  host.getSourceFile = (name, languageVersion, onError, shouldCreateNewSourceFile) => path.resolve(name) === filename
+    ? compiler.createSourceFile(filename, source, languageVersion, true)
+    : getSourceFile(name, languageVersion, onError, shouldCreateNewSourceFile)
+  const program = compiler.createProgram([filename], options, host)
+  assert(program.getSourceFile(filename), 'Consumer fixture was not loaded')
+  return compiler.getPreEmitDiagnostics(program).map(diagnostic => ({
+    file: diagnostic.file ? relative(diagnostic.file.fileName).replace(/consumer\.[cm]?ts$/, 'consumer.ts') : null,
+    code: diagnostic.code,
+    line: diagnostic.file && diagnostic.start !== undefined ? diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start).line + 1 : null,
+    message: compiler.flattenDiagnosticMessageText(diagnostic.messageText, '\n').replaceAll(root.replaceAll('\\', '/'), '<workspace>/'),
+  }))
+}
+
+export function runTypechecks() {
+  const dependencies = read('package.json').devDependencies
+  assert.equal(ts.version, dependencies.typescript)
+  assert.equal(`npm:typescript@${compat.version}`, dependencies['typescript-compat'])
+  const configs = [path.join(root, 'tsconfig.json')]
+  for (const name of fs.readdirSync(path.join(root, 'packages'))) {
+    const config = path.join(root, 'packages', name, 'tsconfig.json')
+    if (fs.existsSync(config)) {
+      configs.push(config)
+    }
+    else {
+      const sources = ts.sys.readDirectory(path.join(root, 'packages', name, 'src'), ['.ts', '.tsx', '.mts', '.cts'])
+      assert(!sources.some(file => !/\.d\.[cm]?ts$/.test(file)), `Add a package tsconfig before migrating ${name}`)
+    }
+  }
+  let sourceCount = 0
+  for (const config of configs) {
+    const result = checkProject(config)
+    assert.equal(result.diagnostics.length, 0, ts.formatDiagnosticsWithColorAndContext(result.diagnostics, {
+      getCurrentDirectory: () => root,
+      getCanonicalFileName: name => name,
+      getNewLine: () => '\n',
+    }))
+    sourceCount += result.files.filter(file => relative(file).includes('/src/') && !/\.d\.[cm]?ts$/.test(file)).length
+    console.log(`Strict project passed: ${relative(config)} (${result.files.length} root files)`)
+  }
+  for (const mode of ['node10-commonjs', 'nodenext-cjs', 'bundler-esm']) {
+    assert.deepEqual(checkConsumer(ts, mode), [], `Current consumer failed: ${mode}`)
+    console.log(`Consumer passed: TS ${ts.version} ${mode}`)
+  }
+  assert.deepEqual(checkConsumer(compat, 'node10-commonjs'), [], 'Old compiler consumer failed')
+  console.log(`Consumer passed: TS ${compat.version} node10-commonjs`)
+  const expected = read('test/types/known-diagnostics.json')
+  const diagnostics = checkConsumer(ts, 'nodenext-esm')
+  assert.deepEqual(diagnostics, expected.diagnostics, 'NodeNext ESM changed: review BASE-TYPE-01; a fix needs updated success assertions')
+  console.log(`Historical failure retained: ${expected.risk}, ${diagnostics.length} NodeNext ESM diagnostics; this is not candidate approval`)
+  console.log(`TypeScript production source files checked: ${sourceCount}; unmigrated JS is not counted`)
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url))
+  runTypechecks()

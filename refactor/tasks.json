@@ -509,11 +509,14 @@
         "ENG-02",
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "根与分包 tsconfig、显式 TS 依赖、正反例测试",
       "acceptance": "核心/试点与迁移模块严格检查，未迁移第三方/包历史问题独立台账；明确最低/当前 TS 和各环境类型；复用 BASE-05 的四种消费模式，不以 skipLibCheck 掩盖 BASE-TYPE-01/03",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-ENG-04-typechecking.md",
+        "typechecking.md"
+      ]
     },
     {
       "id": "ENG-05",

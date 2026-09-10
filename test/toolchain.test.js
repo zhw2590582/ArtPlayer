@@ -32,6 +32,8 @@ test('toolchain guard rejects unlocked dependencies, competing locks and the wro
 
     writeManifest({ ...manifest, devDependencies: { ...manifest.devDependencies, 'unlocked-tool': '1.0.0' } })
     assert.match(run().stderr, /Lock resolution differs: unlocked-tool/)
+    writeManifest({ ...manifest, devDependencies: { ...manifest.devDependencies, 'typescript-compat': 'npm:typescript@^4.3.5' } })
+    assert.match(run().stderr, /Unpinned development dependency: typescript-compat/)
     writeManifest(manifest)
     fs.writeFileSync(path.join(fixture, 'packages/example/package.json'), JSON.stringify({ name: 'example', dependencies: { 'option-validator': '^99.0.0' } }))
     assert.match(run().stderr, /Dependency missing from Yarn lock: option-validator/)
