@@ -9,7 +9,7 @@
       "id": "BASE-LIFE-06",
       "title": "Published switch leaves an unhandled rejection and an unsettled promise when resume fails",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-09"
       ],
@@ -20,13 +20,21 @@
       ],
       "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
       "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。",
-      "workspaceState": "Current switchMix uses silencePromise and test/playback.test.js covers resume rejection. Published baseline still reproduces the old failure; preserve the existing workspace mitigation during migration."
+      "workspaceState": "Current switchMix uses silencePromise and test/playback.test.js covers resume rejection. Published baseline still reproduces the old failure; preserve the existing workspace mitigation during migration.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-09-source-operations.md",
+        "refactor/baselines/source-operations-validation.json",
+        "test/source.test.js",
+        "test/playback.test.js",
+        "test/browser/source.spec.js"
+      ],
+      "resolutionRationale": "Owned source generations settle superseded/destroyed calls with undefined, prevent stale restart/restoration and actual playMix effects, retain original load failures and best-effort resume settlement. Published baselines remain unchanged; real-media comparisons and controlled native-play tests cover the candidate."
     },
     {
       "id": "BASE-LIFE-01",
       "title": "Superseded switch resolves along with the latest source",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-09"
       ],
@@ -35,13 +43,21 @@
         "refactor/baselines/lifecycle-coverage.md"
       ],
       "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
-      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-09-source-operations.md",
+        "refactor/baselines/source-operations-validation.json",
+        "test/source.test.js",
+        "test/playback.test.js",
+        "test/browser/source.spec.js"
+      ],
+      "resolutionRationale": "Owned source generations settle superseded/destroyed calls with undefined, prevent stale restart/restoration and actual playMix effects, retain original load failures and best-effort resume settlement. Published baselines remain unchanged; real-media comparisons and controlled native-play tests cover the candidate."
     },
     {
       "id": "BASE-LIFE-02",
       "title": "Switch remains unsettled during the bounded observation after destroy",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-09"
       ],
@@ -50,7 +66,15 @@
         "refactor/baselines/lifecycle-coverage.md"
       ],
       "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
-      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-09-source-operations.md",
+        "refactor/baselines/source-operations-validation.json",
+        "test/source.test.js",
+        "test/playback.test.js",
+        "test/browser/source.spec.js"
+      ],
+      "resolutionRationale": "Owned source generations settle superseded/destroyed calls with undefined, prevent stale restart/restoration and actual playMix effects, retain original load failures and best-effort resume settlement. Published baselines remain unchanged; real-media comparisons and controlled native-play tests cover the candidate."
     },
     {
       "id": "BASE-LIFE-03",

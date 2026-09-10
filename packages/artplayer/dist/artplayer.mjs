@@ -1167,8 +1167,8 @@ function isClosing(owner) {
   return state2.destroying || state2.scope.closed;
 }
 function ownContainer(owner, container, rollback) {
-  const current = containers.get(container);
-  if (current && current !== owner)
+  const current2 = containers.get(container);
+  if (current2 && current2 !== owner)
     throw new Error("Cannot mount multiple instances on the same dom element");
   const state2 = stateOf(owner);
   state2.rollback = rollback;
@@ -3420,6 +3420,64 @@ function playingMix(art) {
     }
   });
 }
+const current = /* @__PURE__ */ new WeakMap();
+const assignments = /* @__PURE__ */ new WeakMap();
+function captureSource(owner) {
+  const operation = current.get(owner);
+  return () => current.get(owner) === operation && (!operation || operation.active());
+}
+function beginSource(owner) {
+  const previous = current.get(owner);
+  const scope = getScope(owner).child();
+  const operation = {
+    scope,
+    assigned: false,
+    acceptingEvents: false,
+    active: () => !isClosing(owner) && !scope.closed && current.get(owner) === operation
+  };
+  current.set(owner, operation);
+  scope.add(() => {
+    if (current.get(owner) === operation)
+      current.delete(owner);
+    operation.onAssigned = void 0;
+    operation.onError = void 0;
+  });
+  previous?.scope.dispose();
+  return operation;
+}
+function takeAssignment(owner) {
+  const operation = assignments.get(owner);
+  assignments.delete(owner);
+  return operation || beginSource(owner);
+}
+function finishAssignment(operation) {
+  operation.assigned = true;
+  const callback = operation.onAssigned;
+  operation.onAssigned = void 0;
+  if (operation.active())
+    callback?.();
+}
+function assignUrl(owner, operation, url) {
+  assignments.set(owner, operation);
+  operation.acceptingEvents = true;
+  try {
+    owner.url = url;
+  } finally {
+    if (assignments.get(owner) === operation) {
+      assignments.delete(owner);
+      finishAssignment(operation);
+    }
+  }
+}
+function failSource(operation, error2) {
+  if (!operation.active())
+    return;
+  if (operation.onError)
+    operation.onError(error2);
+  else
+    console.warn("Failed to initialize ArtPlayer source:", error2);
+  operation.scope.dispose();
+}
 function playMix(art) {
   const {
     i18n,
@@ -3430,11 +3488,21 @@ function playMix(art) {
   } = art;
   def(art, "play", {
     async value() {
+      const active = captureSource(art);
       const result = await $video.play();
-      notice.show = i18n.get("Play");
+      if (!active())
+        return result;
+      const message = i18n.get("Play");
+      if (!active())
+        return result;
+      notice.show = message;
+      if (!active())
+        return result;
       art.emit("play");
       if (option.mutex) {
         for (let index = 0; index < instances2.length; index++) {
+          if (!active())
+            break;
           const instance = instances2[index];
           if (instance !== art) {
             instance.pause();
@@ -3617,54 +3685,140 @@ function subtitleOffsetMix(art) {
     }
   });
 }
-function switchMix(art) {
-  function switchUrl(url, currentTime) {
-    return new Promise((resolve, reject) => {
-      if (url === art.url) {
-        resolve();
+function listenSource(scope, art, name, callback, once = true) {
+  let fired = false;
+  let release;
+  const guarded = (event) => {
+    if (scope.closed || fired)
+      return;
+    if (once) {
+      fired = true;
+      release();
+    }
+    callback(event);
+  };
+  art[once ? "once" : "on"](name, guarded);
+  release = scope.add(() => {
+    art.off(name, guarded);
+  });
+  return guarded;
+}
+function switchSource(art, url, currentTime) {
+  return new Promise((resolve, reject) => {
+    if (isClosing(art) || url === art.url) {
+      resolve();
+      return;
+    }
+    const operation = beginSource(art);
+    const scope = operation.scope.child();
+    let settled = false;
+    const settle = (failed = false, error2) => {
+      if (settled)
         return;
-      }
+      settled = true;
+      operation.onError = void 0;
+      operation.onAssigned = void 0;
+      scope.dispose();
+      if (failed)
+        reject(error2);
+      else
+        resolve();
+      if (failed)
+        operation.scope.dispose();
+    };
+    scope.add(() => {
+      settle();
+    });
+    const active = () => !settled && operation.active();
+    const fail = (error2) => settle(true, error2);
+    operation.onError = fail;
+    try {
       const { playing, aspectRatio: aspectRatio2, playbackRate: playbackRate2 } = art;
       art.pause();
-      art.url = url;
-      art.notice.show = "";
-      const handlers = {};
-      handlers.error = (error2) => {
-        art.off("video:canplay", handlers.canplay);
-        art.off("video:loadedmetadata", handlers.metadata);
-        reject(error2);
-      };
-      handlers.metadata = () => {
-        art.currentTime = currentTime;
-      };
-      handlers.canplay = async () => {
-        art.off("video:error", handlers.error);
-        art.playbackRate = playbackRate2;
-        art.aspectRatio = aspectRatio2;
-        if (playing) {
-          await silencePromise(art.play());
+      if (!active())
+        return;
+      const readiness = scope.child();
+      const handlers = {
+        "video:error": fail,
+        "video:loadedmetadata": () => {
+          if (!active())
+            return;
+          try {
+            art.currentTime = currentTime;
+          } catch (error2) {
+            fail(error2);
+          }
+        },
+        "video:canplay": () => {
+          if (!active())
+            return;
+          readiness.dispose();
+          const resume = async () => {
+            art.playbackRate = playbackRate2;
+            if (!active())
+              return;
+            art.aspectRatio = aspectRatio2;
+            if (!active())
+              return;
+            if (playing) {
+              try {
+                await art.play();
+              } catch {
+              }
+            }
+            if (!active())
+              return;
+            art.notice.show = "";
+            settle();
+          };
+          void resume().catch(fail);
         }
-        art.notice.show = "";
-        resolve();
       };
-      art.once("video:error", handlers.error);
-      art.once("video:loadedmetadata", handlers.metadata);
-      art.once("video:canplay", handlers.canplay);
-    });
-  }
-  def(art, "switchQuality", {
-    value: (url) => {
-      return switchUrl(url, art.currentTime);
+      const capture = scope.child();
+      const queued = [];
+      const names = Object.keys(handlers);
+      for (const name of names) {
+        listenSource(capture, art, name, (event) => {
+          if (operation.acceptingEvents)
+            queued.push([name, event]);
+        }, false);
+      }
+      assignUrl(art, operation, url);
+      if (!active())
+        return;
+      art.notice.show = "";
+      if (!active())
+        return;
+      const activate = () => {
+        capture.dispose();
+        if (!url) {
+          settle();
+          return;
+        }
+        const dispatch = {};
+        for (const name of names)
+          dispatch[name] = listenSource(readiness, art, name, handlers[name]);
+        for (const [name, event] of queued) {
+          if (!active() || readiness.closed)
+            break;
+          dispatch[name](event);
+        }
+        queued.length = 0;
+      };
+      if (operation.assigned)
+        activate();
+      else
+        operation.onAssigned = activate;
+    } catch (error2) {
+      fail(error2);
     }
   });
-  def(art, "switchUrl", {
-    value: (url) => {
-      return switchUrl(url, 0);
-    }
-  });
-  def(art, "switch", {
-    set: art.switchUrl
-  });
+}
+function switchMix(art) {
+  const switchUrl = (url) => switchSource(art, url, 0);
+  def(art, "switchQuality", { value: (url) => switchSource(art, url, art.currentTime) });
+  def(art, "switchUrl", { value: switchUrl });
+  def(art, "switch", { set: switchUrl });
 }
 function themeMix(art) {
   def(art, "theme", {
@@ -3767,40 +3921,75 @@ function typeMix(art) {
   });
 }
 function urlMix(art) {
-  const {
-    option,
-    template: { $video }
-  } = art;
+  const { option, template: { $video } } = art;
   def(art, "url", {
     get() {
       return $video.src;
     },
     async set(newUrl) {
-      if (newUrl) {
+      if (isClosing(art))
+        return;
+      const operation = takeAssignment(art);
+      operation.acceptingEvents = false;
+      try {
+        if (!newUrl) {
+          if (await wait(operation.scope) && operation.active())
+            art.loading.show = true;
+          return;
+        }
         const oldUrl = art.url;
         const typeName = option.type || getExt(newUrl);
         const typeCallback = option.customType[typeName];
         if (typeName && typeCallback) {
-          if (!await wait(getScope(art)) || getScope(art).closed)
+          if (!await wait(operation.scope) || !operation.active())
             return;
           art.loading.show = true;
-          typeCallback.call(art, $video, newUrl, art);
-        } else {
-          URL.revokeObjectURL(oldUrl);
-          $video.src = newUrl;
         }
+        if (!operation.active())
+          return;
+        const capture = operation.scope.child();
+        let ready = false;
+        let failed = false;
+        listenSource(capture, art, "video:canplay", () => {
+          ready = !failed;
+        });
+        listenSource(capture, art, "video:error", () => {
+          failed = true;
+        });
+        try {
+          operation.acceptingEvents = true;
+          if (typeName && typeCallback) {
+            const result = typeCallback.call(art, $video, newUrl, art);
+            void Promise.resolve(result).catch((error2) => failSource(operation, error2));
+          } else {
+            if (oldUrl)
+              URL.revokeObjectURL(oldUrl);
+            if (!operation.active())
+              return;
+            $video.src = newUrl;
+          }
+        } finally {
+          capture.dispose();
+        }
+        if (!operation.active())
+          return;
         if (oldUrl !== art.url) {
           art.option.url = newUrl;
-          if (art.isReady && oldUrl) {
-            art.once("video:canplay", () => {
-              art.emit("restart", newUrl);
-            });
+          if (operation.active() && art.isReady && oldUrl) {
+            const restart = () => {
+              if (operation.active())
+                art.emit("restart", newUrl);
+            };
+            if (ready)
+              restart();
+            else if (!failed)
+              listenSource(operation.scope, art, "video:canplay", restart);
           }
         }
-      } else {
-        if (!await wait(getScope(art)) || getScope(art).closed)
-          return;
-        art.loading.show = true;
+      } catch (error2) {
+        failSource(operation, error2);
+      } finally {
+        finishAssignment(operation);
       }
     }
   });

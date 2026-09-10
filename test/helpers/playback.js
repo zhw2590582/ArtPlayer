@@ -1,6 +1,6 @@
 import { mock } from 'node:test'
 
-export function playbackFactory({ Emitter, playMix, pauseMix, toggleMix, switchMix }) {
+export function playbackFactory({ Emitter, playMix, pauseMix, toggleMix, switchMix, beginLifecycle }) {
   return function createArt(play = () => Promise.resolve(), playing = false) {
     const art = Object.assign(new Emitter(), {
       url: 'old.mp4',
@@ -19,6 +19,7 @@ export function playbackFactory({ Emitter, playMix, pauseMix, toggleMix, switchM
         },
       },
     })
+    beginLifecycle(art)
     Object.defineProperty(art, 'playing', { get: () => !art.template.$video.paused })
     for (const mix of [playMix, pauseMix, toggleMix, switchMix])
       mix(art)

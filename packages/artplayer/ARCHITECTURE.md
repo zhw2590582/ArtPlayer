@@ -318,6 +318,34 @@ finding, not a claim that a standalone debounce can know when its owner is destr
 
 ## Verification and maintenance
 
+### Source operations (CORE-09)
+
+`player/urlMix.ts` and `player/switchMix.ts` preserve the public descriptors.
+`source/types.ts` defines minimal structural media/host capabilities;
+`source/operation.ts` owns a current generation and its resource scope;
+`source/listen.ts` owns individual media subscriptions; `source/switch.ts`
+coordinates assignment, readiness, state restoration and Promise settlement.
+
+A new URL assignment supersedes the prior operation, including direct `art.url`
+writes. Superseded/destroyed switches fulfill with undefined; actual source errors
+reject with their original value. Fulfillment does not prove the source became
+active. Same-string URL calls remain no-ops. Internal resume rejection stays
+handled while public play retains rejection. Synchronous proxy events are buffered
+until assignment finishes, and operation cleanup does not remove user listeners.
+
+customType still receives the real media object and player. Its arbitrary external
+SDK work cannot be cancelled generically: adapters must own that cleanup. The core
+guards deferred invocation, ignores obsolete returned failures, and cancels its own
+continuations. Direct assignment failures are reported with console.warn; switch
+callers receive the original rejection. `playMix.ts` captures the current source:
+its native result/rejection is preserved, while obsolete notice/event/mutex effects
+are suppressed. Object URL ownership, other playback migration and reconnect
+generations remain CORE-19/10/11 work.
+
+`test/source.test.js` checks cancellation, reentry, synchronous events and cleanup;
+`test/browser/source.spec.js` compares published/candidate real-media switching and
+destruction and verifies candidate customType and resume-failure behavior.
+
 Run `yarn test:unit` for shared published/workspace utility contracts and controlled
 timers. `test/utils.test.js` also accepts `ARTPLAYER_TEST_CORE` to test an actual
 UMD, legacy or ESM file. `test/types/utils-source.ts` checks source inference, receiver

@@ -911,11 +911,14 @@
         "CORE-06",
         "CORE-08"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "url/switch/customType 的操作身份及取消方案",
       "acceptance": "并发切源、错误、同 URL、销毁和 Promise 结算有契约；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-01/02/06 并增加候选正向回归",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-09-source-operations.md",
+        "baselines/source-operations-validation.json"
+      ]
     },
     {
       "id": "CORE-10",

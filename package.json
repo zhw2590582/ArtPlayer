@@ -49,7 +49,7 @@
     "ci:build": "yarn build all && yarn build:i18n && yarn build:ts && yarn build:docs && yarn test:imports",
     "test:imports": "node --test test/esm.test.js test/i18n.test.js test/ssr.test.js",
     "typecheck": "node scripts/typecheck.mjs",
-    "test:unit": "node --test test/playback.test.js test/dash-control.test.js test/public-behavior.test.js test/helpers.test.js test/chapter.test.js test/utils.test.js test/resource-scope.test.js test/instance-lifecycle.test.js test/options.test.js test/media-hosts.test.js test/plugins.test.js",
+    "test:unit": "node --test test/playback.test.js test/dash-control.test.js test/public-behavior.test.js test/helpers.test.js test/chapter.test.js test/utils.test.js test/resource-scope.test.js test/instance-lifecycle.test.js test/options.test.js test/media-hosts.test.js test/plugins.test.js test/source.test.js",
     "test": "yarn test:node && yarn test:baseline",
     "test:browser": "playwright test",
     "test:browser:install": "playwright install chromium firefox webkit",

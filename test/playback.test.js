@@ -13,6 +13,8 @@ const modules = await loadModules({
   pauseMix: 'packages/artplayer/src/player/pauseMix',
   toggleMix: 'packages/artplayer/src/player/toggleMix',
   switchMix: 'packages/artplayer/src/player/switchMix',
+  beginLifecycle: { file: 'packages/artplayer/src/lifecycle/instance', name: 'beginLifecycle' },
+  getScope: { file: 'packages/artplayer/src/lifecycle/instance', name: 'getScope' },
 })
 const { silencePromise, Hotkey } = modules
 const createArt = playbackFactory(modules)
