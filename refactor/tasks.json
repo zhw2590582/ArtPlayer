@@ -112,19 +112,37 @@
       ]
     },
     {
+      "scope": [
+        "workspace"
+      ],
+      "status": "done",
+      "risk": "L",
+      "evidence": [
+        "changes/2026-09-10-DOC-07-plan-review.md"
+      ],
+      "id": "DOC-07",
+      "phase": "0 规划",
+      "title": "复审并优化计划顺序和执行门槛",
+      "dependsOn": [
+        "DOC-06"
+      ],
+      "deliverable": "依赖优化、执行门槛规范、测试/发布补充和审查记录",
+      "acceptance": "依赖与覆盖校验、专项执行顺序断言通过；任务范围完整并独立提交"
+    },
+    {
       "id": "BASE-01",
       "phase": "1 基线",
-      "title": "固定消费者发布基线",
+      "title": "固定核心与试点的最小发布基线",
       "scope": [
         "workspace"
       ],
       "dependsOn": [
-        "DOC-06"
+        "DOC-07"
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "各包 npm tarball/integrity、源码 SHA、历史支持矩阵",
-      "acceptance": "区分源码版本与实际已发布版本，最低核心/TS/浏览器支持有证据",
+      "deliverable": "核心及 chapter 的 npm tarball/integrity、源码 SHA、已知支持窗口；其他包标待核对",
+      "acceptance": "核心/试点来源可重跑；不虚构全生态已验证，各包 01 步负责补齐自身历史发布基线",
       "evidence": []
     },
     {
@@ -139,7 +157,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "构造参数/默认值/静态及实例 API 快照",
+      "deliverable": "核心与试点的构造/默认值/静态和实例 API 快照，其余包由 01/02 步补齐",
       "acceptance": "真实发布包反射与旧用户调用可重跑，未验证项明确",
       "evidence": []
     },
@@ -171,8 +189,8 @@
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "模板/类名/变量及全部 demo 映射",
-      "acceptance": "用户样式覆盖、移动端与自定义 controls/setting 用法已记录",
+      "deliverable": "核心模板/类名/变量、键盘/焦点/可访问名称基线及全 demo 路径映射",
+      "acceptance": "核心/试点用户样式和输入用法已记录，其他 demo 运行状态与未知项明确",
       "evidence": []
     },
     {
@@ -187,8 +205,8 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "UMD/AMD/ESM/CJS/legacy/i18n、worker/WASM/字体路径矩阵",
-      "acceptance": "隔离消费者验证入口，记录 thumbnail tool 等不一致",
+      "deliverable": "全包 manifest/资源路径清单；核心/试点的 UMD/AMD/ESM/CJS/legacy/i18n 和类型消费者基线",
+      "acceptance": "核心/试点隔离消费可运行，其他包由各自契约任务验证，thumbnail tool 差异已登记",
       "evidence": []
     },
     {
@@ -226,6 +244,23 @@
       "evidence": []
     },
     {
+      "scope": [
+        "workspace"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "evidence": [],
+      "id": "BASE-08",
+      "phase": "1 基线",
+      "title": "建立消费者与真实环境验证矩阵",
+      "dependsOn": [
+        "BASE-01",
+        "BASE-05"
+      ],
+      "deliverable": "每包版本/浏览器/codec/SDK/设备/样本、证据和负责验证任务的矩阵",
+      "acceptance": "格式兼容与运行能力分开，未知/缺环境不算通过，明确哪些检查阻止哪些批次发布"
+    },
+    {
       "id": "ENG-01",
       "phase": "2 工程保障",
       "title": "固定 Node、包管理器与依赖",
@@ -254,7 +289,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "lint/lint:fix、PR 与主线检查、独立部署任务",
-      "acceptance": "检查不改源码、不发布，失败阻止合并；必要 required check 有配置证据",
+      "acceptance": "仓库内检查可执行且不改源码、不发布；required checks 的外部设置状态列入发布台账，不阻塞本地框架建设",
       "evidence": []
     },
     {
@@ -288,7 +323,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "根与分包 tsconfig、显式 TS 依赖、正反例测试",
-      "acceptance": "隔离 DOM/Node/worker 类型，最低和选定当前 TS 验证声明消费",
+      "acceptance": "核心/试点与迁移模块严格检查，未迁移第三方/包历史问题独立台账；明确最低/当前 TS 和各环境类型",
       "evidence": []
     },
     {
@@ -300,7 +335,8 @@
       ],
       "dependsOn": [
         "ENG-03",
-        "BASE-04"
+        "BASE-04",
+        "BASE-08"
       ],
       "status": "todo",
       "risk": "M",
@@ -373,9 +409,48 @@
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "共享核心/构建影响映射、计划文档检查接入",
-      "acceptance": "核心变化触发全生态必需检查，新增包不会漏计划",
+      "deliverable": "共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入",
+      "acceptance": "核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit",
       "evidence": []
+    },
+    {
+      "scope": [
+        "workspace"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "evidence": [],
+      "id": "ENG-10",
+      "phase": "2 工程保障",
+      "title": "建立历史失败分级和测试可靠性规则",
+      "dependsOn": [
+        "ENG-03",
+        "ENG-04",
+        "ENG-05",
+        "ENG-07",
+        "BASE-07"
+      ],
+      "deliverable": "历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则",
+      "acceptance": "不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见"
+    },
+    {
+      "scope": [
+        "artplayer-plugin-chapter"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "evidence": [],
+      "id": "PILOT-01",
+      "phase": "2.1 早期试点",
+      "title": "在旧核心上完成小插件迁移闭环",
+      "dependsOn": [
+        "PKG-CHAPTER-04",
+        "ENG-07",
+        "ENG-05",
+        "ENG-10"
+      ],
+      "deliverable": "chapter 的 TS、旧核心消费、真实浏览器、tarball、包内维护地图及粒度/成本反馈",
+      "acceptance": "不依赖 CORE 重构即可通过整个试点；最终核心仍由 chapter 05/06 重新验收"
     },
     {
       "id": "CORE-01",
@@ -387,7 +462,8 @@
       "dependsOn": [
         "ENG-03",
         "ENG-04",
-        "ENG-06"
+        "ENG-06",
+        "PILOT-01"
       ],
       "status": "todo",
       "risk": "M",
@@ -739,6 +815,26 @@
       "evidence": []
     },
     {
+      "scope": [
+        "artplayer"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "evidence": [],
+      "id": "CORE-23",
+      "phase": "3-4 核心迁移",
+      "title": "检查并补齐键盘、焦点与可访问名称",
+      "dependsOn": [
+        "CORE-13",
+        "CORE-14",
+        "CORE-17",
+        "ENG-05",
+        "BASE-04"
+      ],
+      "deliverable": "主要控件/设置/模式退出的键盘与焦点回归、名称和字幕可用性检查及必要兼容修正",
+      "acceptance": "保持旧快捷键和 DOM/CSS 钩子；真实浏览器验证，不以静态属性检查代替交互"
+    },
+    {
       "id": "CORE-22",
       "phase": "3-4 核心迁移",
       "title": "核心阶段完整验收",
@@ -747,12 +843,15 @@
       ],
       "dependsOn": [
         "CORE-21",
-        "PKG-CHAPTER-04"
+        "CORE-23",
+        "PILOT-01",
+        "ENG-08",
+        "ENG-10"
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "旧插件对候选核心的完整回归与资源/性能报告",
-      "acceptance": "公开兼容差异有结论，核心测试和简单插件试点通过",
+      "deliverable": "核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口",
+      "acceptance": "核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布",
       "evidence": []
     },
     {
@@ -798,13 +897,12 @@
       ],
       "dependsOn": [
         "PKG-CHAPTER-02",
-        "CORE-14",
-        "CORE-08"
+        "ENG-07"
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "拆分时间区间计算、进度 DOM、事件与布局",
-      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "deliverable": "在已有核心上整理时间区间计算、进度 DOM、事件/布局，合理简单代码可保持",
+      "acceptance": "不依赖新核心方法或大范围设置重构；旧 API/事件和资源通过，必要适配限包内",
       "evidence": []
     },
     {
@@ -817,12 +915,11 @@
       "dependsOn": [
         "PKG-CHAPTER-03",
         "ENG-04",
-        "ENG-06",
-        "CORE-07"
+        "ENG-06"
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "Chapters/Option/Result 与 update 推导，先做简单插件 TS 试点",
+      "deliverable": "基于既有公开核心类型的 Chapters/Option/Result 与 update 推导；JS/TS 工具链试点",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
       "evidence": []
     },
@@ -3022,38 +3119,38 @@
     {
       "id": "SITE-04",
       "phase": "6 文档与消费者",
-      "title": "同步核心和全部插件使用文档",
+      "title": "交叉核对逐包持续维护的文档",
       "scope": [
         "artplayer-vitepress"
       ],
       "dependsOn": [
-        "CORE-22",
-        "PKG-CHAPTER-06",
-        "PKG-AMBILIGHT-06",
-        "PKG-AUDIO-06",
-        "PKG-AUTO-THUMB-06",
-        "PKG-VTT-THUMB-06",
-        "PKG-HLS-06",
-        "PKG-DASH-06",
-        "PKG-MULTI-SUB-06",
-        "PKG-JASSUB-06",
-        "PKG-MASK-06",
-        "PKG-ASR-06",
-        "PKG-ADS-06",
-        "PKG-VAST-06",
-        "PKG-CAST-06",
-        "PKG-DPIP-06",
-        "PKG-DANMUKU-09",
-        "PKG-CANVAS-06",
-        "PKG-MB-10",
-        "PKG-IFRAME-06",
-        "PKG-TOOL-THUMB-06",
-        "SITE-03"
+        "CORE-21",
+        "SITE-03",
+        "PKG-CHAPTER-04",
+        "PKG-AMBILIGHT-04",
+        "PKG-AUDIO-04",
+        "PKG-AUTO-THUMB-04",
+        "PKG-VTT-THUMB-04",
+        "PKG-HLS-04",
+        "PKG-DASH-04",
+        "PKG-MULTI-SUB-04",
+        "PKG-JASSUB-04",
+        "PKG-MASK-04",
+        "PKG-ASR-04",
+        "PKG-ADS-04",
+        "PKG-VAST-04",
+        "PKG-CAST-04",
+        "PKG-DPIP-04",
+        "PKG-CANVAS-04",
+        "PKG-IFRAME-04",
+        "PKG-TOOL-THUMB-04",
+        "PKG-DANMUKU-06",
+        "PKG-MB-08"
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "中文/英文 API、插件选项、兼容说明及旧 JS 用法",
-      "acceptance": "不要求旧调用迁移，未支持能力不写成已支持",
+      "deliverable": "已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对",
+      "acceptance": "未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收",
       "evidence": []
     },
     {
@@ -3065,12 +3162,13 @@
       ],
       "dependsOn": [
         "SITE-04",
-        "EX-03"
+        "EX-01",
+        "EX-02"
       ],
       "status": "todo",
       "risk": "M",
       "deliverable": "VitePress 构建、链接与嵌入 demo 检查",
-      "acceptance": "产物可访问，全部包文档与 types 注入无丢失",
+      "acceptance": "文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛",
       "evidence": []
     },
     {
@@ -3184,7 +3282,7 @@
         "workspace"
       ],
       "dependsOn": [
-        "MOD-01",
+        "ENG-06",
         "SITE-03"
       ],
       "status": "todo",
@@ -3237,6 +3335,7 @@
         "workspace"
       ],
       "dependsOn": [
+        "MOD-01",
         "MOD-02",
         "MOD-03",
         "MOD-04"
@@ -3248,21 +3347,58 @@
       "evidence": []
     },
     {
+      "scope": [
+        "workspace"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "evidence": [],
+      "id": "REL-08",
+      "phase": "8 发布验收",
+      "title": "提前建立逐包发布准入台账",
+      "dependsOn": [
+        "BASE-08",
+        "ENG-07"
+      ],
+      "deliverable": "每批包/版本/源码/锁文件/工具/tarball integrity、必需测试/设备证据、限制和回退映射",
+      "acceptance": "受影响能力缺证据明确阻止对应批次；无关批次可独立准备，旧证据在候选内容变化后失效"
+    },
+    {
       "id": "REL-01",
       "phase": "8 发布验收",
-      "title": "确定分包版本与差异处置",
+      "title": "提前确定分包版本与差异方案",
       "scope": [
         "workspace"
       ],
       "dependsOn": [
-        "SITE-06",
-        "EX-03",
-        "MOD-05"
+        "REL-08",
+        "CORE-21",
+        "SITE-03",
+        "PKG-CHAPTER-04",
+        "PKG-AMBILIGHT-04",
+        "PKG-AUDIO-04",
+        "PKG-AUTO-THUMB-04",
+        "PKG-VTT-THUMB-04",
+        "PKG-HLS-04",
+        "PKG-DASH-04",
+        "PKG-MULTI-SUB-04",
+        "PKG-JASSUB-04",
+        "PKG-MASK-04",
+        "PKG-ASR-04",
+        "PKG-ADS-04",
+        "PKG-VAST-04",
+        "PKG-CAST-04",
+        "PKG-DPIP-04",
+        "PKG-CANVAS-04",
+        "PKG-IFRAME-04",
+        "PKG-TOOL-THUMB-04",
+        "PKG-DANMUKU-06",
+        "PKG-MB-08"
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "每包变更日志/版本/依赖/类型差异及支持范围",
-      "acceptance": "所有公共差异已解释或解决；未决破坏性变化阻止兼容发布",
+      "deliverable": "每包版本/变更日志/依赖/类型差异方案和独立准入状态",
+      "acceptance": "所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布",
       "evidence": []
     },
     {
@@ -3273,12 +3409,14 @@
         "workspace"
       ],
       "dependsOn": [
-        "REL-01"
+        "REL-01",
+        "CORE-22",
+        "ENG-07"
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "全部候选包与原支持范围消费者安装矩阵",
-      "acceptance": "新核心旧插件、旧核心新插件、新新组合和历史路径通过",
+      "deliverable": "各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注",
+      "acceptance": "隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容",
       "evidence": []
     },
     {
@@ -3289,28 +3427,32 @@
         "workspace"
       ],
       "dependsOn": [
-        "REL-02"
+        "REL-02",
+        "EX-03",
+        "SITE-06",
+        "MOD-05"
       ],
       "status": "todo",
       "risk": "H",
       "deliverable": "Safari/移动/PiP/Cast/IMA/模型/长播放完整报告",
-      "acceptance": "无环境验证的关键能力保持阻塞，mock 不能替代设备结论",
+      "acceptance": "包集成与全项目真机/SDK/压力结论齐全才完成本汇总；独立批次先建立自己的完整门槛子任务",
       "evidence": []
     },
     {
       "id": "REL-04",
       "phase": "8 发布验收",
-      "title": "演练回退与主线修复同步",
+      "title": "提前演练回退与主线修复同步",
       "scope": [
         "workspace"
       ],
       "dependsOn": [
-        "REL-03"
+        "REL-08",
+        "ENG-07"
       ],
       "status": "todo",
       "risk": "H",
       "deliverable": "分包旧版本/tag/依赖回退方案与 master 差异",
-      "acceptance": "独立回退可行，紧急修复能同步，无需所有用户联动升级",
+      "acceptance": "隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物",
       "evidence": []
     },
     {
@@ -3321,6 +3463,7 @@
         "workspace"
       ],
       "dependsOn": [
+        "REL-03",
         "REL-04"
       ],
       "status": "todo",

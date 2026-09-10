@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 192 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 198 项，范围 22 个包及工作区/示例。
 
-状态：todo 186 / doing 0 / blocked 0 / done 6 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 191 / doing 0 / blocked 0 / done 7 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -14,13 +14,13 @@
 
 | 包 | 基线版本 | 任务 |
 | --- | --- | --- |
-| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-22 |
+| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06 |
 | artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06 |
 | artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06 |
-| artplayer-plugin-chapter | 1.1.0 | PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06 |
+| artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06 |
 | artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
 | artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09 |
 | artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06 |
@@ -47,38 +47,47 @@
 | DOC-04 | workspace<br>验证文档完整性与生成表 | DOC-03 | 计划生成校验工具、AGENTS 入口 | 依赖无环、包覆盖、生成同步、文档链接通过 | L | done |
 | DOC-05 | workspace<br>建立每任务提交规则并提交文档基线 | DOC-04 | 根指令、质量要求、AI 流程、变更记录与初始文档提交 | 文档与计划检查通过，独立 DOC-05 commit 保存本次交付；提交后核实 SHA 和工作区 | L | done |
 | DOC-06 | workspace<br>记录自主安装依赖与添加脚本授权 | DOC-05 | 根指令、工具链规范、AI 流程、决策及变更记录 | 授权、依赖归属、脚本文档和兼容验证要求明确，计划校验通过并独立提交 DOC-06 | L | done |
+| DOC-07 | workspace<br>复审并优化计划顺序和执行门槛 | DOC-06 | 依赖优化、执行门槛规范、测试/发布补充和审查记录 | 依赖与覆盖校验、专项执行顺序断言通过；任务范围完整并独立提交 | L | done |
 
 ## 1 基线
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| BASE-01 | workspace<br>固定消费者发布基线 | DOC-06 | 各包 npm tarball/integrity、源码 SHA、历史支持矩阵 | 区分源码版本与实际已发布版本，最低核心/TS/浏览器支持有证据 | H | todo |
-| BASE-02 | workspace<br>捕获公共 API 和属性描述符 | BASE-01 | 构造参数/默认值/静态及实例 API 快照 | 真实发布包反射与旧用户调用可重跑，未验证项明确 | H | todo |
+| BASE-01 | workspace<br>固定核心与试点的最小发布基线 | DOC-07 | 核心及 chapter 的 npm tarball/integrity、源码 SHA、已知支持窗口；其他包标待核对 | 核心/试点来源可重跑；不虚构全生态已验证，各包 01 步负责补齐自身历史发布基线 | H | todo |
+| BASE-02 | workspace<br>捕获公共 API 和属性描述符 | BASE-01 | 核心与试点的构造/默认值/静态和实例 API 快照，其余包由 01/02 步补齐 | 真实发布包反射与旧用户调用可重跑，未验证项明确 | H | todo |
 | BASE-03 | workspace<br>捕获事件、异步和生命周期 | BASE-02 | ready/restart/destroy、Promise、切源/插件事件 trace | 成功、失败、重入和多实例有断言，历史缺陷有标记 | H | todo |
-| BASE-04 | workspace<br>捕获 DOM、CSS 和官方 demo | BASE-02 | 模板/类名/变量及全部 demo 映射 | 用户样式覆盖、移动端与自定义 controls/setting 用法已记录 | M | todo |
-| BASE-05 | workspace<br>捕获包入口、资源和类型消费 | BASE-01 | UMD/AMD/ESM/CJS/legacy/i18n、worker/WASM/字体路径矩阵 | 隔离消费者验证入口，记录 thumbnail tool 等不一致 | H | todo |
+| BASE-04 | workspace<br>捕获 DOM、CSS 和官方 demo | BASE-02 | 核心模板/类名/变量、键盘/焦点/可访问名称基线及全 demo 路径映射 | 核心/试点用户样式和输入用法已记录，其他 demo 运行状态与未知项明确 | M | todo |
+| BASE-05 | workspace<br>捕获包入口、资源和类型消费 | BASE-01 | 全包 manifest/资源路径清单；核心/试点的 UMD/AMD/ESM/CJS/legacy/i18n 和类型消费者基线 | 核心/试点隔离消费可运行，其他包由各自契约任务验证，thumbnail tool 差异已登记 | H | todo |
 | BASE-06 | workspace<br>记录性能与资源基线 | BASE-03, BASE-04 | 固定媒体/设备测量、包体积、反复装卸资源报告 | 多次采样可重跑，指标和审查阈值确定，不承诺未经测量的收益 | M | todo |
 | BASE-07 | workspace<br>建立差异和风险台账 | BASE-03, BASE-05 | 销毁/切源/类型差异、vendored 许可和外部 SDK 清单 | 已确认与待复现分开，每项有负责任务及兼容处理路线 | H | todo |
+| BASE-08 | workspace<br>建立消费者与真实环境验证矩阵 | BASE-01, BASE-05 | 每包版本/浏览器/codec/SDK/设备/样本、证据和负责验证任务的矩阵 | 格式兼容与运行能力分开，未知/缺环境不算通过，明确哪些检查阻止哪些批次发布 | H | todo |
 
 ## 2 工程保障
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | ENG-01 | workspace<br>固定 Node、包管理器与依赖 | BASE-01 | 版本 pin、唯一锁文件、安装说明 | 干净环境可复现，最低 Node 与构建依赖一致，未夹带全量升级 | M | todo |
-| ENG-02 | workspace<br>拆分只读检查并建立 PR CI | ENG-01 | lint/lint:fix、PR 与主线检查、独立部署任务 | 检查不改源码、不发布，失败阻止合并；必要 required check 有配置证据 | M | todo |
+| ENG-02 | workspace<br>拆分只读检查并建立 PR CI | ENG-01 | lint/lint:fix、PR 与主线检查、独立部署任务 | 仓库内检查可执行且不改源码、不发布；required checks 的外部设置状态列入发布台账，不阻塞本地框架建设 | M | todo |
 | ENG-03 | workspace<br>建立公共行为与单元测试入口 | ENG-02, BASE-03 | 保留现有 node:test，测试目录/夹具/统一入口 | 已有 19 项回归保留，旧版与候选可用同一夹具运行 | M | todo |
-| ENG-04 | workspace<br>建立类型测试基础 | ENG-02, BASE-05 | 根与分包 tsconfig、显式 TS 依赖、正反例测试 | 隔离 DOM/Node/worker 类型，最低和选定当前 TS 验证声明消费 | M | todo |
-| ENG-05 | workspace<br>建立真实浏览器测试服务 | ENG-03, BASE-04 | Playwright projects、本地 Range/失败媒体服务 | Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行 | M | todo |
+| ENG-04 | workspace<br>建立类型测试基础 | ENG-02, BASE-05 | 根与分包 tsconfig、显式 TS 依赖、正反例测试 | 核心/试点与迁移模块严格检查，未迁移第三方/包历史问题独立台账；明确最低/当前 TS 和各环境类型 | M | todo |
+| ENG-05 | workspace<br>建立真实浏览器测试服务 | ENG-03, BASE-04, BASE-08 | Playwright projects、本地 Range/失败媒体服务 | Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行 | M | todo |
 | ENG-06 | workspace<br>支持按包非交互与 JS/TS 构建 | ENG-02, BASE-05 | build/dev 入口解析、指定包参数、原交互保留 | 三种产物、Less/SVG/worker 和本地 8082 demo 正常 | H | todo |
 | ENG-07 | workspace<br>建立 tarball 消费与产物检查 | ENG-04, ENG-06 | 隔离 npm 消费 fixtures、API/声明/入口差分 | 不借 workspace 源码通过，能识别缺文件与默认导出变化 | H | todo |
 | ENG-08 | workspace<br>增加覆盖率、资源与性能报告 | ENG-03, ENG-05, BASE-06 | 覆盖率基线、资源清理断言、性能报告与阈值 | 关键生命周期分支有门槛，报告不靠无意义断言堆数量 | M | todo |
-| ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04 | 共享核心/构建影响映射、计划文档检查接入 | 核心变化触发全生态必需检查，新增包不会漏计划 | M | todo |
+| ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04 | 共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入 | 核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit | M | todo |
+| ENG-10 | workspace<br>建立历史失败分级和测试可靠性规则 | ENG-03, ENG-04, ENG-05, ENG-07, BASE-07 | 历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则 | 不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见 | M | todo |
+
+## 2.1 早期试点
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PILOT-01 | artplayer-plugin-chapter<br>在旧核心上完成小插件迁移闭环 | PKG-CHAPTER-04, ENG-07, ENG-05, ENG-10 | chapter 的 TS、旧核心消费、真实浏览器、tarball、包内维护地图及粒度/成本反馈 | 不依赖 CORE 重构即可通过整个试点；最终核心仍由 chapter 05/06 重新验收 | H | todo |
 
 ## 3-4 核心迁移
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| CORE-01 | artplayer<br>迁移纯工具并冻结导出 | ENG-03, ENG-04, ENG-06 | utils/time/property/format/file/error/subtitle 的分批 TS 迁移 | Artplayer.utils 导出/参数/绑定保持，纯逻辑与类型测试通过 | M | todo |
+| CORE-01 | artplayer<br>迁移纯工具并冻结导出 | ENG-03, ENG-04, ENG-06, PILOT-01 | utils/time/property/format/file/error/subtitle 的分批 TS 迁移 | Artplayer.utils 导出/参数/绑定保持，纯逻辑与类型测试通过 | M | todo |
 | CORE-02 | artplayer<br>迁移内部 Emitter | CORE-01, BASE-03 | 带类型事件映射的原 Emitter 实现 | ctx、once/off、重入/异常和链式返回保持 | H | todo |
 | CORE-03 | artplayer<br>建立内部资源作用域 | CORE-02 | 监听/订阅/定时器/RAF/请求/URL 的资源登记 | 实例与操作作用域分离，单项清理失败不阻断其他资源 | H | todo |
 | CORE-04 | artplayer<br>修复初始化与销毁生命周期 | CORE-03, ENG-05, BASE-07 | 构造失败回收、重复/重入 destroy、instances 修复 | 事件顺序、removeHtml、多实例和销毁中异步有真实回归 | H | todo |
@@ -99,7 +108,8 @@
 | CORE-19 | artplayer<br>整理进度、质量、缩略图和截图 | CORE-10, CORE-13, CORE-16 | 相关 player/control 功能与纯计算分离 | 截图跨域失败、缩略图布局、quality/进度边界保持 | M | todo |
 | CORE-20 | artplayer<br>收敛核心入口与依赖方向 | CORE-14, CORE-15, CORE-18, CORE-19 | Artplayer 门面、初始化依赖与最终目录 | 所有核心自有源码迁移，公开描述符/静态接口/事件差分通过 | H | todo |
 | CORE-21 | artplayer<br>生成核心声明并校验包内容 | CORE-20, ENG-07 | 由 TS 生成的既有入口声明与三种发布产物 | 内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过 | H | todo |
-| CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, PKG-CHAPTER-04 | 旧插件对候选核心的完整回归与资源/性能报告 | 公开兼容差异有结论，核心测试和简单插件试点通过 | H | todo |
+| CORE-23 | artplayer<br>检查并补齐键盘、焦点与可访问名称 | CORE-13, CORE-14, CORE-17, ENG-05, BASE-04 | 主要控件/设置/模式退出的键盘与焦点回归、名称和字幕可用性检查及必要兼容修正 | 保持旧快捷键和 DOM/CSS 钩子；真实浏览器验证，不以静态属性检查代替交互 | H | todo |
+| CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, CORE-23, PILOT-01, ENG-08, ENG-10 | 核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口 | 核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-chapter
 
@@ -107,8 +117,8 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-CHAPTER-01 | artplayer-plugin-chapter<br>核对包契约与历史用法 | BASE-05 | chapters 时间区间、update、name 和进度 DOM 清单 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | M | todo |
 | PKG-CHAPTER-02 | artplayer-plugin-chapter<br>建立特有行为与错误测试 | PKG-CHAPTER-01, ENG-03, ENG-05 | 区间重叠/空列表/边界 seek、hover 标题和 update 用例 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | M | todo |
-| PKG-CHAPTER-03 | artplayer-plugin-chapter<br>整理内部职责与资源 | PKG-CHAPTER-02, CORE-14, CORE-08 | 拆分时间区间计算、进度 DOM、事件与布局 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | todo |
-| PKG-CHAPTER-04 | artplayer-plugin-chapter<br>迁移自有源码和公开类型 | PKG-CHAPTER-03, ENG-04, ENG-06, CORE-07 | Chapters/Option/Result 与 update 推导，先做简单插件 TS 试点 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | todo |
+| PKG-CHAPTER-03 | artplayer-plugin-chapter<br>整理内部职责与资源 | PKG-CHAPTER-02, ENG-07 | 在已有核心上整理时间区间计算、进度 DOM、事件/布局，合理简单代码可保持 | 不依赖新核心方法或大范围设置重构；旧 API/事件和资源通过，必要适配限包内 | M | todo |
+| PKG-CHAPTER-04 | artplayer-plugin-chapter<br>迁移自有源码和公开类型 | PKG-CHAPTER-03, ENG-04, ENG-06 | 基于既有公开核心类型的 Chapters/Option/Result 与 update 推导；JS/TS 工具链试点 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | todo |
 | PKG-CHAPTER-05 | artplayer-plugin-chapter<br>验证新旧核心和组合 | PKG-CHAPTER-04, CORE-22 | chapter + quality/thumbnail、移动和全屏进度场景 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
 | PKG-CHAPTER-06 | artplayer-plugin-chapter<br>验证分发并同步文档 | PKG-CHAPTER-05, ENG-07 | chapter.js 示例、产物和变更记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
 
@@ -335,8 +345,8 @@
 | SITE-01 | artplayer-vitepress<br>清点文档/示例/生成链 | BASE-04, BASE-05 | 中英文文档、插件页面、demo URL、编辑器声明与生成目录清单 | 所有公开 API/插件有对应页面或明确补充任务 | M | todo |
 | SITE-02 | artplayer-vitepress<br>整理声明与示例生成器 | SITE-01, ENG-04, ENG-06 | build-ts/build-test 生成链的可验证 TS 脚本 | 不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke | M | todo |
 | SITE-03 | artplayer-vitepress<br>整理 i18n/文档/LLM 生成流程 | SITE-02 | build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理 | 原命令兼容、生成可复现，翻译步骤不隐式运行远程服务 | M | todo |
-| SITE-04 | artplayer-vitepress<br>同步核心和全部插件使用文档 | CORE-22, PKG-CHAPTER-06, PKG-AMBILIGHT-06, PKG-AUDIO-06, PKG-AUTO-THUMB-06, PKG-VTT-THUMB-06, PKG-HLS-06, PKG-DASH-06, PKG-MULTI-SUB-06, PKG-JASSUB-06, PKG-MASK-06, PKG-ASR-06, PKG-ADS-06, PKG-VAST-06, PKG-CAST-06, PKG-DPIP-06, PKG-DANMUKU-09, PKG-CANVAS-06, PKG-MB-10, PKG-IFRAME-06, PKG-TOOL-THUMB-06, SITE-03 | 中文/英文 API、插件选项、兼容说明及旧 JS 用法 | 不要求旧调用迁移，未支持能力不写成已支持 | M | todo |
-| SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-03 | VitePress 构建、链接与嵌入 demo 检查 | 产物可访问，全部包文档与 types 注入无丢失 | M | todo |
+| SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收 | M | todo |
+| SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-01, EX-02 | VitePress 构建、链接与嵌入 demo 检查 | 文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛 | M | todo |
 | SITE-06 | artplayer-vitepress<br>文档站交付验收 | SITE-05 | 维护指南和站点变更记录 | 未手改 generated 目录，旧 URL 可用、部署与检查分离 | M | todo |
 | EX-01 | example/react.js<br>验证 React 消费者与 TS | CORE-22, ENG-07 | React 挂载/卸载/重挂载、引用和插件样例 | 真实 tarball + TS 消费通过，保留既有 React 集成 API | M | todo |
 | EX-02 | example/vue.js<br>验证 Vue 消费者与更新卸载 | CORE-22, ENG-07 | Vue 实例/ref、参数更新、卸载及插件样例 | 旧 JS 组件用法无需修改，重复挂载不泄漏 | M | todo |
@@ -347,20 +357,21 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | MOD-01 | workspace<br>Bun 固定版本干净安装试点 | ENG-09 | 独立目录的 Bun 锁文件、lifecycle/peer/workspace 与全部构建对比 | Node 测试仍通过；安装与资源一致才决定采用；不改 bundler | H | todo |
-| MOD-02 | workspace<br>整理剩余开发/构建脚本与插件模板 | MOD-01, SITE-03 | dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API | 旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证 | M | todo |
+| MOD-02 | workspace<br>整理剩余开发/构建脚本与插件模板 | ENG-06, SITE-03 | dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API | 旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证 | M | todo |
 | MOD-03 | workspace<br>测量并优化核心热路径 | CORE-22, ENG-08 | DOM 读写、进度更新、持久化、初始化的测量与改进 | 相同设备媒体多次比较，契约不变，收益及无效尝试记录 | M | todo |
 | MOD-04 | workspace<br>测量并优化重型插件/proxy | PKG-DANMUKU-09, PKG-MASK-06, PKG-MB-10, ENG-08 | 帧/队列/推理/音画同步与资源长期运行比较 | 不改默认算法/阈值，性能改善有证据；无收益则保留旧实现 | M | todo |
-| MOD-05 | workspace<br>完成工具链与性能采用决策 | MOD-02, MOD-03, MOD-04 | 最终 runtime/packageManager/构建配置及性能台账 | 干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换 | M | todo |
+| MOD-05 | workspace<br>完成工具链与性能采用决策 | MOD-01, MOD-02, MOD-03, MOD-04 | 最终 runtime/packageManager/构建配置及性能台账 | 干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换 | M | todo |
 
 ## 8 发布验收
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| REL-01 | workspace<br>确定分包版本与差异处置 | SITE-06, EX-03, MOD-05 | 每包变更日志/版本/依赖/类型差异及支持范围 | 所有公共差异已解释或解决；未决破坏性变化阻止兼容发布 | H | todo |
-| REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01 | 全部候选包与原支持范围消费者安装矩阵 | 新核心旧插件、旧核心新插件、新新组合和历史路径通过 | H | todo |
-| REL-03 | workspace<br>完成真机、外部 SDK 与压力验收 | REL-02 | Safari/移动/PiP/Cast/IMA/模型/长播放完整报告 | 无环境验证的关键能力保持阻塞，mock 不能替代设备结论 | H | todo |
-| REL-04 | workspace<br>演练回退与主线修复同步 | REL-03 | 分包旧版本/tag/依赖回退方案与 master 差异 | 独立回退可行，紧急修复能同步，无需所有用户联动升级 | H | todo |
-| REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-04 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
+| REL-08 | workspace<br>提前建立逐包发布准入台账 | BASE-08, ENG-07 | 每批包/版本/源码/锁文件/工具/tarball integrity、必需测试/设备证据、限制和回退映射 | 受影响能力缺证据明确阻止对应批次；无关批次可独立准备，旧证据在候选内容变化后失效 | H | todo |
+| REL-01 | workspace<br>提前确定分包版本与差异方案 | REL-08, CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 每包版本/变更日志/依赖/类型差异方案和独立准入状态 | 所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布 | H | todo |
+| REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01, CORE-22, ENG-07 | 各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注 | 隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容 | H | todo |
+| REL-03 | workspace<br>完成真机、外部 SDK 与压力验收 | REL-02, EX-03, SITE-06, MOD-05 | Safari/移动/PiP/Cast/IMA/模型/长播放完整报告 | 包集成与全项目真机/SDK/压力结论齐全才完成本汇总；独立批次先建立自己的完整门槛子任务 | H | todo |
+| REL-04 | workspace<br>提前演练回退与主线修复同步 | REL-08, ENG-07 | 分包旧版本/tag/依赖回退方案与 master 差异 | 隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物 | H | todo |
+| REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-03, REL-04 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
 | REL-06 | workspace<br>经授权分批正式发布 | REL-05 | 正式分包版本/tag/站点文档及兼容公告 | 候选验收通过，安装/浏览器复核和回退入口就绪 | H | todo |
 | REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | todo |
 
@@ -372,3 +383,4 @@
 - DOC-04: [记录](progress.md)
 - DOC-05: [记录](changes/2026-09-10-DOC-05-task-commits.md)
 - DOC-06: [记录](changes/2026-09-10-DOC-06-dependencies-and-scripts.md)
+- DOC-07: [记录](changes/2026-09-10-DOC-07-plan-review.md)

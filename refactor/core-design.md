@@ -24,6 +24,7 @@
 | 字幕 | subtitle.js、utils/subtitle.js | 获取、解析、track/DOM 渲染、取消和对象 URL 回收分开 |
 | 显示模式 | fullscreen/fullscreenWeb/pip/mini/auto* | 显式恢复位置和样式，保持互斥顺序、用户手势与移动端语义 |
 | 输入 | events、hotkey | 鼠标/触控/键盘/焦点归属清晰，跨 document 重新绑定和清理 |
+| 无障碍 | template、control、setting、显示模式 | 明确键盘导航、可访问名称、焦点进入退出和字幕能力，保留旧 DOM/CSS 与热键契约 |
 | 内置功能 | plugins/*、info/notice/loading/mask | 逐项登记定时器和订阅，不能因内部插件迁移改变默认启用条件 |
 | 资源 | i18n、icons、style、libs | 保持子路径、图标键、CSS 类和样式注入；记录 vendored 依赖来源 |
 
