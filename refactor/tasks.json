@@ -532,11 +532,14 @@
         "BASE-04",
         "BASE-08"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "Playwright projects、本地 Range/失败媒体服务；复用 docs 页面/样本的状态隔离、错误采集与候选资源映射",
       "acceptance": "Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行；以媒体状态断言判定通过，区分轻量用例与真实编辑器交互",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-ENG-05-browser-tests.md",
+        "baselines/browser-validation.json"
+      ]
     },
     {
       "id": "ENG-06",

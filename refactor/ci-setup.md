@@ -12,6 +12,7 @@
 | `yarn test:unit` | 原播放/DASH 回归、同夹具的新旧公共契约与 JS/TS loader 验证 |
 | `yarn test:node` | test:unit 加工具链/文档构建回归，保留原 test:playback/test:dash-control 入口 |
 | `yarn test` | 统一执行 Node 与基线测试，源码/夹具维护入口见仓库 test/README.md |
+| `yarn test:browser` | 隔离服务执行 Chromium/Firefox/WebKit 真实播放；首次先运行 test:browser:install，详见 [入口](../test/browser/README.md) |
 | `yarn test:imports` | 3 个既有包导入 smoke，构建后执行以使用新产物；不把 console 示例视为完整行为断言 |
 | `yarn test:baseline` | 固定发布包完整性及本地 HTTP 基线测试；首次可能下载已固定归档到缓存 |
 | `yarn ci:check` | 严格 Node/Yarn/锁检查、计划、只读 lint、类型、Node 和基线测试；允许写忽略缓存，不修改源码 |
@@ -26,7 +27,7 @@ scripts/build-docs.js 保留原 npm run build 子命令兼容入口，现在传�
 
 Actions 固定完整 SHA，Node 来自 .node-version，Yarn 固定 1.22.22；安装使用 frozen-lockfile。actionlint 1.7.12 从官方固定归档取得，先核对提交在 workflow 中的 SHA-256，再执行。没有执行 curl 管道脚本。日志在失败时也尽量上传，包含源码 SHA、工具版本、锁摘要和生成差异概览，保留 14 天。
 
-本轮不缓存 node_modules；矩阵、下载缓存、覆盖率、浏览器 trace 和候选 tarball 汇总由 CI-01 等后续任务扩展。当前测试通过不代表尚未实现的类型消费者或浏览器矩阵通过。将来的稳定 required 汇总名称由 CI-01/CI-04 核实后设置，不把本地 YAML 当作分支保护已生效。
+不缓存 node_modules。ENG-04 已接入类型消费者；ENG-05 新增 macOS 的 `Browser playback smoke` 作业，运行三个浏览器并 always 上传 HTML/JSON、失败截图和 trace。本地 Windows 三浏览器已验证，远端 macOS 作业尚未运行。完整生态矩阵、下载缓存、覆盖率和候选 tarball 汇总由 CI-01 等后续任务扩展。稳定 required 汇总名称由 CI-01/CI-04 核实后设置，不把本地 YAML 当作分支保护已生效。
 
 ## Pages 隔离与启用条件
 

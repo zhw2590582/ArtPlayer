@@ -1,0 +1,666 @@
+{
+  "task": "ENG-05",
+  "capturedAt": "2026-09-10T14:21:28.353Z",
+  "node": "24.21.0",
+  "platform": "win32",
+  "playwright": "1.63.0",
+  "mode": "workspace-build",
+  "sourceHashAlgorithm": "sha256-lf",
+  "sourceHashes": {
+    "playwright.config.js": "df2384f5626252ec933725867e400ec22eb92bc5e6f04873059b32decf2f2d56",
+    "test/browser/server.mjs": "d9025f9585f941a3b9b1f5b6c1b7b297c1fde6f50266720cbcc66f1334976f4a",
+    "test/browser/player.html": "179c89abf50f7d69c9083a4c2951cb6cbcd624f61d3b417ead139506a6468eb7",
+    "test/browser/fixtures.js": "313414b8958eb5b03a2da8595fa0bbf6bfdc01484373898c6cb7179545df175d",
+    "test/browser/playback.spec.js": "f4d8f65f35bad9ceb68137e605881f2e799f94bc636c0fdbde07c49d3623d86c"
+  },
+  "manifest": {
+    "kind": "artplayer-browser-test",
+    "resources": {
+      "/candidate/artplayer.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer\\src\\index.js"
+        },
+        "sha256": "c6f564431e03a198c81fc026af75ead9f7c624e5c7f2f23cba5ce984ec045290",
+        "bytes": 220281
+      },
+      "/compiled/artplayer.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer\\src\\index.js"
+        },
+        "sha256": "c6f564431e03a198c81fc026af75ead9f7c624e5c7f2f23cba5ce984ec045290",
+        "bytes": 220281,
+        "aliasOf": "/candidate/artplayer.js"
+      },
+      "/uncompiled/artplayer/index.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer\\src\\index.js"
+        },
+        "sha256": "c6f564431e03a198c81fc026af75ead9f7c624e5c7f2f23cba5ce984ec045290",
+        "bytes": 220281,
+        "aliasOf": "/candidate/artplayer.js"
+      },
+      "/candidate/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer-plugin-chapter\\src\\index.js"
+        },
+        "sha256": "833b81bf3334443531ed1822e28a38a241484056c6dbbdd50cd1ec093303ab94",
+        "bytes": 8178
+      },
+      "/compiled/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer-plugin-chapter\\src\\index.js"
+        },
+        "sha256": "833b81bf3334443531ed1822e28a38a241484056c6dbbdd50cd1ec093303ab94",
+        "bytes": 8178,
+        "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+      },
+      "/uncompiled/artplayer-plugin-chapter/index.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer-plugin-chapter\\src\\index.js"
+        },
+        "sha256": "833b81bf3334443531ed1822e28a38a241484056c6dbbdd50cd1ec093303ab94",
+        "bytes": 8178,
+        "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+      },
+      "/published/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "/published/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "1.1.0",
+          "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+          "member": "package/dist/artplayer-plugin-chapter.js"
+        },
+        "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "bytes": 4973
+      },
+      "/test/pattern.mp4": {
+        "source": {
+          "kind": "generated-media",
+          "file": "test/browser/media/pattern.mp4"
+        },
+        "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+        "bytes": 251538
+      },
+      "/test/pattern.webm": {
+        "source": {
+          "kind": "generated-media",
+          "file": "test/browser/media/pattern.webm"
+        },
+        "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+        "bytes": 162073
+      },
+      "/assets/sample/video.mp4": {
+        "source": {
+          "kind": "docs-media",
+          "file": "docs/assets/sample/video.mp4"
+        },
+        "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+        "bytes": 5818706
+      }
+    }
+  },
+  "stats": {
+    "startTime": "2026-09-10T14:21:28.353Z",
+    "duration": 12894.75,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "project": "chromium",
+      "title": "published: real playback, pause, seek, switch and destroy",
+      "status": "passed",
+      "durationMs": 1796,
+      "browser": "153.0.8010.12",
+      "events": [
+        "video:loadedmetadata",
+        "ready",
+        "video:playing",
+        "video:pause",
+        "video:seeked",
+        "video:loadedmetadata",
+        "video:seeked",
+        "video:playing",
+        "destroy"
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:8084/test/pattern.mp4?case=b4ed495288f4b512a8ac-846a43d5c11f461bc706",
+          "resourceType": "media",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "http://127.0.0.1:8084/assets/sample/video.mp4?case=b4ed495288f4b512a8ac-846a43d5c11f461bc706",
+          "resourceType": "media",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "http://127.0.0.1:8084/assets/sample/video.mp4?case=b4ed495288f4b512a8ac-846a43d5c11f461bc706",
+          "resourceType": "media",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "decodedFrame": {
+        "pixels": [
+          [
+            255,
+            255,
+            2,
+            255
+          ],
+          [
+            0,
+            0,
+            253,
+            255
+          ],
+          [
+            1,
+            255,
+            255,
+            255
+          ]
+        ],
+        "mediaRequests": [
+          {
+            "path": "/test/pattern.mp4",
+            "range": "bytes=0-",
+            "method": "GET"
+          },
+          {
+            "path": "/test/pattern.mp4",
+            "range": "bytes=229376-",
+            "method": "GET"
+          }
+        ]
+      }
+    },
+    {
+      "project": "chromium",
+      "title": "candidate: real playback, pause, seek, switch and destroy",
+      "status": "passed",
+      "durationMs": 1727,
+      "browser": "153.0.8010.12",
+      "events": [
+        "video:loadedmetadata",
+        "ready",
+        "video:playing",
+        "video:pause",
+        "video:seeked",
+        "video:loadedmetadata",
+        "video:seeked",
+        "video:playing",
+        "destroy"
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:8084/test/pattern.mp4?case=b4ed495288f4b512a8ac-6fc43c2ad3b16ac57feb",
+          "resourceType": "media",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "http://127.0.0.1:8084/assets/sample/video.mp4?case=b4ed495288f4b512a8ac-6fc43c2ad3b16ac57feb",
+          "resourceType": "media",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "http://127.0.0.1:8084/assets/sample/video.mp4?case=b4ed495288f4b512a8ac-6fc43c2ad3b16ac57feb",
+          "resourceType": "media",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "decodedFrame": {
+        "pixels": [
+          [
+            255,
+            255,
+            2,
+            255
+          ],
+          [
+            0,
+            0,
+            253,
+            255
+          ],
+          [
+            1,
+            255,
+            255,
+            255
+          ]
+        ],
+        "mediaRequests": [
+          {
+            "path": "/test/pattern.mp4",
+            "range": "bytes=0-",
+            "method": "GET"
+          },
+          {
+            "path": "/test/pattern.mp4",
+            "range": "bytes=229376-",
+            "method": "GET"
+          }
+        ]
+      }
+    },
+    {
+      "project": "chromium",
+      "title": "controlled HTTP media failure emits a real video error",
+      "status": "passed",
+      "durationMs": 391,
+      "browser": "153.0.8010.12",
+      "events": [
+        "video:error",
+        "destroy"
+      ],
+      "errors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+      ],
+      "failedRequests": []
+    },
+    {
+      "project": "chromium",
+      "title": "Range, media identity and docs candidate routes",
+      "status": "passed",
+      "durationMs": 308,
+      "browser": "153.0.8010.12",
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    {
+      "project": "firefox",
+      "title": "published: real playback, pause, seek, switch and destroy",
+      "status": "passed",
+      "durationMs": 3064,
+      "browser": "155.0",
+      "events": [
+        "video:loadedmetadata",
+        "ready",
+        "video:playing",
+        "video:pause",
+        "video:seeked",
+        "video:loadedmetadata",
+        "video:seeked",
+        "video:playing",
+        "destroy"
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "decodedFrame": {
+        "pixels": [
+          [
+            255,
+            241,
+            2,
+            255
+          ],
+          [
+            0,
+            14,
+            253,
+            255
+          ],
+          [
+            0,
+            230,
+            255,
+            255
+          ]
+        ],
+        "mediaRequests": [
+          {
+            "path": "/test/pattern.mp4",
+            "range": "bytes=0-",
+            "method": "GET"
+          }
+        ]
+      }
+    },
+    {
+      "project": "firefox",
+      "title": "candidate: real playback, pause, seek, switch and destroy",
+      "status": "passed",
+      "durationMs": 3118,
+      "browser": "155.0",
+      "events": [
+        "video:loadedmetadata",
+        "ready",
+        "video:playing",
+        "video:pause",
+        "video:seeked",
+        "video:loadedmetadata",
+        "video:seeked",
+        "video:playing",
+        "destroy"
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "decodedFrame": {
+        "pixels": [
+          [
+            255,
+            241,
+            2,
+            255
+          ],
+          [
+            0,
+            14,
+            253,
+            255
+          ],
+          [
+            0,
+            230,
+            255,
+            255
+          ]
+        ],
+        "mediaRequests": [
+          {
+            "path": "/test/pattern.mp4",
+            "range": "bytes=0-",
+            "method": "GET"
+          }
+        ]
+      }
+    },
+    {
+      "project": "firefox",
+      "title": "controlled HTTP media failure emits a real video error",
+      "status": "passed",
+      "durationMs": 2403,
+      "browser": "155.0",
+      "events": [
+        "video:error",
+        "destroy"
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    {
+      "project": "firefox",
+      "title": "Range, media identity and docs candidate routes",
+      "status": "passed",
+      "durationMs": 543,
+      "browser": "155.0",
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    {
+      "project": "webkit",
+      "title": "published: real playback, pause, seek, switch and destroy",
+      "status": "passed",
+      "durationMs": 4626,
+      "browser": "26.6",
+      "events": [
+        "video:loadedmetadata",
+        "ready",
+        "video:playing",
+        "video:pause",
+        "video:seeked",
+        "video:loadedmetadata",
+        "video:seeked",
+        "video:playing",
+        "destroy"
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "decodedFrame": {
+        "pixels": [
+          [
+            235,
+            236,
+            12,
+            255
+          ],
+          [
+            16,
+            15,
+            239,
+            255
+          ],
+          [
+            13,
+            237,
+            237,
+            255
+          ]
+        ],
+        "mediaRequests": [
+          {
+            "path": "/test/pattern.mp4",
+            "range": "bytes=0-",
+            "method": "GET"
+          }
+        ]
+      }
+    },
+    {
+      "project": "webkit",
+      "title": "candidate: real playback, pause, seek, switch and destroy",
+      "status": "passed",
+      "durationMs": 4628,
+      "browser": "26.6",
+      "events": [
+        "video:loadedmetadata",
+        "ready",
+        "video:playing",
+        "video:pause",
+        "video:seeked",
+        "video:loadedmetadata",
+        "video:seeked",
+        "video:playing",
+        "destroy"
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "decodedFrame": {
+        "pixels": [
+          [
+            235,
+            236,
+            12,
+            255
+          ],
+          [
+            16,
+            15,
+            239,
+            255
+          ],
+          [
+            13,
+            237,
+            237,
+            255
+          ]
+        ],
+        "mediaRequests": [
+          {
+            "path": "/test/pattern.mp4",
+            "range": "bytes=0-",
+            "method": "GET"
+          }
+        ]
+      }
+    },
+    {
+      "project": "webkit",
+      "title": "controlled HTTP media failure emits a real video error",
+      "status": "passed",
+      "durationMs": 719,
+      "browser": "26.6",
+      "events": [
+        "video:error",
+        "destroy"
+      ],
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    {
+      "project": "webkit",
+      "title": "Range, media identity and docs candidate routes",
+      "status": "passed",
+      "durationMs": 577,
+      "browser": "26.6",
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    }
+  ],
+  "artifactMode": {
+    "browser": "155.0",
+    "platform": "win32",
+    "stats": {
+      "startTime": "2026-09-10T14:22:28.949Z",
+      "duration": 5939.912,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "resources": {
+      "/candidate/artplayer.js": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\eng-06-build\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "9ad044a601dafc24f449b690403fb1c343b40e99ffb31043272189fc3c1e7bfa",
+        "bytes": 134939
+      },
+      "/compiled/artplayer.js": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\eng-06-build\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "9ad044a601dafc24f449b690403fb1c343b40e99ffb31043272189fc3c1e7bfa",
+        "bytes": 134939,
+        "aliasOf": "/candidate/artplayer.js"
+      },
+      "/uncompiled/artplayer/index.js": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\eng-06-build\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "9ad044a601dafc24f449b690403fb1c343b40e99ffb31043272189fc3c1e7bfa",
+        "bytes": 134939,
+        "aliasOf": "/candidate/artplayer.js"
+      },
+      "/candidate/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\eng-06-build\\packages\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+        },
+        "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "bytes": 4973
+      },
+      "/compiled/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\eng-06-build\\packages\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+        },
+        "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "bytes": 4973,
+        "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+      },
+      "/uncompiled/artplayer-plugin-chapter/index.js": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\eng-06-build\\packages\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+        },
+        "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "bytes": 4973,
+        "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+      },
+      "/published/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "/published/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "1.1.0",
+          "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+          "member": "package/dist/artplayer-plugin-chapter.js"
+        },
+        "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "bytes": 4973
+      },
+      "/test/pattern.mp4": {
+        "source": {
+          "kind": "generated-media",
+          "file": "test/browser/media/pattern.mp4"
+        },
+        "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+        "bytes": 251538
+      },
+      "/test/pattern.webm": {
+        "source": {
+          "kind": "generated-media",
+          "file": "test/browser/media/pattern.webm"
+        },
+        "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+        "bytes": 162073
+      },
+      "/assets/sample/video.mp4": {
+        "source": {
+          "kind": "docs-media",
+          "file": "docs/assets/sample/video.mp4"
+        },
+        "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+        "bytes": 5818706
+      }
+    },
+    "source": "ENG-06 isolated build output, not a newly packed npm candidate"
+  }
+}

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ArtPlayer browser contracts</title>
+    <style>
+      .player {
+        width: 640px;
+        height: 360px;
+      }
+    </style>
+    <script src="/__CORE__/artplayer.js"></script>
+    <script src="/__CHAPTER__/artplayer-plugin-chapter.js"></script>
+  </head>
+  <body>
+    <div class="player"></div>
+    <button id="play">Play</button>
+    <button id="pause">Pause</button>
+    <script>
+      window.createPlayer = (url, chapter = false) => {
+        window.events = []
+        window.art = new Artplayer({
+          container: '.player',
+          url,
+          muted: true,
+          plugins: chapter
+            ? [artplayerPluginChapter({ chapters: [{ start: 0, end: Infinity, title: 'Pattern' }] })]
+            : [],
+        })
+        for (const name of [
+          'video:loadedmetadata',
+          'ready',
+          'video:playing',
+          'video:pause',
+          'video:seeked',
+          'video:error',
+          'destroy',
+        ]) {
+          art.on(name, () => events.push(name))
+        }
+        document.querySelector('#play').onclick = () => art.play()
+        document.querySelector('#pause').onclick = () => art.pause()
+      }
+    </script>
+  </body>
+</html>

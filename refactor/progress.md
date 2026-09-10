@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：ENG-05 真实浏览器入口完成
+
+Playwright 三浏览器 12 项真实播放/失败/映射测试通过，指定候选 UMD 文件的 Firefox 4 项通过；新增 CI smoke、报告与自生成媒体。见 [ENG-05](changes/2026-09-10-ENG-05-browser-tests.md)。当前 214 项，29 完成、185 待办；生产源码 TS 迁移仍为零。已具备 chapter 试点所需浏览器入口，下一项 PKG-CHAPTER-01，接特有测试和 ENG-07，再迁移插件源码。远端 CI、完整编辑器及真机尚未验收。
+
 ## 当前实施：ENG-03 公共行为与单元入口完成
 
 原 19 项播放/DASH 回归保留，JS/TS loader 与受控媒体夹具复用；同一份五组 Emitter 契约在发布 core 5.4.0、工作区和三格式候选上通过。统一 yarn test:unit/test 与 CI 入口已接入，见 [ENG-03](changes/2026-09-10-ENG-03-unit-entry.md)。当前 214 项，28 完成、186 待办；生产源码 TS 迁移仍为零。ENG-06 提交 b53461da，本任务独立提交，下一项 ENG-05 浏览器自动化。

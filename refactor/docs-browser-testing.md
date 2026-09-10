@@ -34,7 +34,7 @@ chapter 试点可使用 `http://localhost:8082/?libs=./uncompiled/artplayer-plug
 
 在线编辑器兼容用例继续通过实际 Run、键盘和控件交互验证；大量核心状态回归可以复用同一示例和样本在轻量测试页面运行，避免每项测试都依赖 Monaco 初始化。两类用例均保留，不能用轻量页面通过替代编辑器验收。
 
-发布阶段将相同页面/示例接到候选 tarball 的提取内容，使用明确的测试目录或服务路由映射保留相对路径，并记录映射及完整性。此能力待 ENG-05/ENG-07 实现；当前没有可用的新开关或命令。不能只检查开发 bundle 就批准 npm 发布。
+ENG-05 已提供 `yarn test:browser`、8084 隔离服务和 `ARTPLAYER_BROWSER_ARTIFACTS` 文件映射，见 [浏览器入口](../test/browser/README.md)。当前支持 core/chapter 的 compiled/uncompiled 别名，未映射的构建资源明确失败；每次报告保存实际文件 SHA-256。ENG-07 继续负责生成及核验候选 tarball，不能只检查开发 bundle 就批准 npm 发布。
 
 ## 任务归属与验收
 

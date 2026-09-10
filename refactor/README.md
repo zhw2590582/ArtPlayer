@@ -44,6 +44,7 @@
 | [类型检查与迁移入口](typechecking.md) | 根/分包配置、当前/旧编译器、严格正反例和历史声明错误 |
 | [JS/TS 构建与开发](build-development.md) | 非交互选包、开发重建、资源夹具和 AMD 全局修复 |
 | [测试目录维护说明](../test/README.md) | 统一测试命令、JS/TS loader、受控媒体及新旧公共契约 |
+| [真实浏览器入口](../test/browser/README.md) | 三浏览器、解码画面与媒体状态、Range/失败服务及候选文件映射 |
 
 ## 维护规则
 

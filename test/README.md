@@ -19,3 +19,9 @@ Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 Set `ARTPLAYER_TEST_CORE` to a built `.js`, `.legacy.js` or `.mjs` core file to add a candidate to the same public-contract run, then execute `node --test test/public-behavior.test.js`. An invalid path/export fails the run. This is a narrow event contract check, not isolated package installation or complete API compatibility; ENG-07 owns tarball consumption.
 
 When a production module moves, update its loader mapping and its maintenance documentation, preserving the behavioral assertions. New contracts belong in contracts/; test-specific controlled state belongs in helpers/. Do not modify frozen refactor/fixtures or baseline captures just to pass changed behavior. Record historical defects and candidate fixes separately.
+
+# Real browser tests
+
+See [browser/README.md](browser/README.md) for `yarn test:browser`, browser installation,
+published/current combinations, media fixtures, candidate mapping and failure reports.
+These tests are separate from the fast Node suite and run in the Browser playback smoke CI job.
