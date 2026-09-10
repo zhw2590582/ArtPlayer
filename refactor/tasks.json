@@ -407,9 +407,12 @@
       "scope": [
         "workspace"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
-      "evidence": [],
+      "evidence": [
+        "environment-matrix.md",
+        "changes/2026-09-10-BASE-08-environment-matrix.md"
+      ],
       "id": "BASE-08",
       "phase": "1 基线",
       "title": "建立消费者与真实环境验证矩阵",
