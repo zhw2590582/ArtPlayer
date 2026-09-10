@@ -1,4 +1,4 @@
-import { append, query, secondToTime, setStyle } from '../utils'
+import { append, query, secondToTime, setStyle, silencePromise } from '../utils'
 
 export default function autoPlayback(art) {
   const {
@@ -57,7 +57,7 @@ export default function autoPlayback(art) {
 
       proxy($jump, 'click', () => {
         art.seek = currentTime
-        art.play()
+        silencePromise(art.play())
         setStyle($poster, 'display', 'none')
         setStyle($autoPlayback, 'display', 'none')
       })

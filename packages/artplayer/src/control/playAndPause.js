@@ -1,4 +1,4 @@
-import { append, setStyle, tooltip } from '../utils'
+import { append, setStyle, silencePromise, tooltip } from '../utils'
 
 export default function playAndPause(option) {
   return art => ({
@@ -12,7 +12,7 @@ export default function playAndPause(option) {
       tooltip($pause, i18n.get('Pause'))
 
       proxy($play, 'click', () => {
-        art.play()
+        silencePromise(art.play())
       })
 
       proxy($pause, 'click', () => {

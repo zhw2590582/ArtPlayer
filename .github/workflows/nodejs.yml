@@ -23,6 +23,7 @@ jobs:
       - name: install, lint, build, and test
         run: |
           yarn
+          yarn test:playback
           yarn lint
           yarn build:all
         env:

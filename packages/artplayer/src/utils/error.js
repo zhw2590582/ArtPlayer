@@ -14,3 +14,12 @@ export function errorHandle(condition, msg) {
   }
   return condition
 }
+
+// Handle internal play rejections without changing the public play/toggle promises.
+// Values without catch (including synchronous pause results) pass through unchanged.
+export function silencePromise(value) {
+  if (value && typeof value.catch === 'function') {
+    return value.catch(() => {})
+  }
+  return value
+}

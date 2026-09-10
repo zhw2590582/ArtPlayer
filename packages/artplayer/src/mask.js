@@ -1,4 +1,4 @@
-import { append, setStyle } from './utils'
+import { append, setStyle, silencePromise } from './utils'
 import Component from './utils/component'
 
 export default class Mask extends Component {
@@ -18,6 +18,6 @@ export default class Mask extends Component {
       setStyle($error, 'display', null)
     })
 
-    events.proxy(template.$state, 'click', () => art.play())
+    events.proxy(template.$state, 'click', () => silencePromise(art.play()))
   }
 }

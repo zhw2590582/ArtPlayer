@@ -1,4 +1,4 @@
-import { def } from '../utils'
+import { def, silencePromise } from '../utils'
 
 export default function switchMix(art) {
   function switchUrl(url, currentTime) {
@@ -31,7 +31,7 @@ export default function switchMix(art) {
         art.aspectRatio = aspectRatio
 
         if (playing) {
-          await art.play()
+          await silencePromise(art.play())
         }
 
         art.notice.show = ''

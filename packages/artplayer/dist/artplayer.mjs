@@ -422,6 +422,13 @@ function errorHandle(condition, msg) {
   }
   return condition;
 }
+function silencePromise(value) {
+  if (value && typeof value.catch === "function") {
+    return value.catch(() => {
+    });
+  }
+  return value;
+}
 function getExt(url) {
   if (url.includes("?")) {
     return getExt(url.split("?")[0]);
@@ -636,6 +643,7 @@ const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   setStyleText,
   setStyles,
   siblings,
+  silencePromise,
   sleep,
   srtToVtt,
   supportsFlex,
@@ -1166,7 +1174,7 @@ function playAndPause(option) {
       tooltip($play, i18n.get("Play"));
       tooltip($pause, i18n.get("Pause"));
       proxy($play, "click", () => {
-        art.play();
+        silencePromise(art.play());
       });
       proxy($pause, "click", () => {
         art.pause();
@@ -1731,10 +1739,10 @@ function clickInit(art, events) {
         art.emit("click", event);
         if (isMobile) {
           if (!art.isLock && MOBILE_CLICK_PLAY) {
-            art.toggle();
+            silencePromise(art.toggle());
           }
         } else {
-          art.toggle();
+          silencePromise(art.toggle());
         }
         clickTimes = clicks;
         break;
@@ -1742,7 +1750,7 @@ function clickInit(art, events) {
         art.emit("dblclick", event);
         if (isMobile) {
           if (!art.isLock && MOBILE_DBCLICK_PLAY) {
-            art.toggle();
+            silencePromise(art.toggle());
           }
         } else {
           if (DBCLICK_FULLSCREEN) {
@@ -2024,7 +2032,7 @@ class Hotkey {
         }
       });
       this.add("Space", () => {
-        this.art.toggle();
+        silencePromise(this.art.toggle());
       });
       this.add("ArrowLeft", () => {
         this.art.backward = constructor.SEEK_STEP;
@@ -2275,7 +2283,7 @@ class Mask extends Component {
       setStyle($state, "display", "none");
       setStyle($error, "display", null);
     });
-    events.proxy(template.$state, "click", () => art.play());
+    events.proxy(template.$state, "click", () => silencePromise(art.play()));
   }
 }
 class Notice {
@@ -2499,7 +2507,7 @@ function eventInit(art) {
   art.on("video:ended", () => {
     if (option.loop) {
       art.seek = 0;
-      art.play();
+      silencePromise(art.play());
       art.controls.show = false;
       art.mask.show = false;
     } else {
@@ -2885,7 +2893,7 @@ function miniMix(art) {
       const $state = append($mini2, `<div class="art-mini-state"></div>`);
       const $play = append($state, icons.play);
       const $pause = append($state, icons.pause);
-      proxy($play, "click", () => art.play());
+      proxy($play, "click", () => silencePromise(art.play()));
       proxy($pause, "click", () => art.pause());
       initState($play, $pause);
       art.on("video:playing", () => initState($play, $pause));
@@ -3339,7 +3347,7 @@ function switchMix(art) {
         art.playbackRate = playbackRate2;
         art.aspectRatio = aspectRatio2;
         if (playing) {
-          await art.play();
+          await silencePromise(art.play());
         }
         art.notice.show = "";
         resolve();
@@ -3699,7 +3707,7 @@ function autoPlayback(art) {
       });
       proxy($jump, "click", () => {
         art.seek = currentTime;
-        art.play();
+        silencePromise(art.play());
         setStyle($poster, "display", "none");
         setStyle($autoPlayback, "display", "none");
       });
