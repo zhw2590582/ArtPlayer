@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 198 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 202 项，范围 22 个包及工作区/示例。
 
-状态：todo 191 / doing 0 / blocked 0 / done 7 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 194 / doing 0 / blocked 0 / done 8 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -48,6 +48,7 @@
 | DOC-05 | workspace<br>建立每任务提交规则并提交文档基线 | DOC-04 | 根指令、质量要求、AI 流程、变更记录与初始文档提交 | 文档与计划检查通过，独立 DOC-05 commit 保存本次交付；提交后核实 SHA 和工作区 | L | done |
 | DOC-06 | workspace<br>记录自主安装依赖与添加脚本授权 | DOC-05 | 根指令、工具链规范、AI 流程、决策及变更记录 | 授权、依赖归属、脚本文档和兼容验证要求明确，计划校验通过并独立提交 DOC-06 | L | done |
 | DOC-07 | workspace<br>复审并优化计划顺序和执行门槛 | DOC-06 | 依赖优化、执行门槛规范、测试/发布补充和审查记录 | 依赖与覆盖校验、专项执行顺序断言通过；任务范围完整并独立提交 | L | done |
+| DOC-08 | workspace<br>记录 Chrome 验证及多轮 npm 发布复盘 | DOC-07 | 浏览器分工、三轮复盘规范、发布依赖与接续文档 | 计划和发布依赖检查通过；独立提交 DOC-08，连接可用不冒充测试通过 | L | done |
 
 ## 1 基线
 
@@ -371,9 +372,17 @@
 | REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01, CORE-22, ENG-07 | 各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注 | 隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容 | H | todo |
 | REL-03 | workspace<br>完成真机、外部 SDK 与压力验收 | REL-02, EX-03, SITE-06, MOD-05 | Safari/移动/PiP/Cast/IMA/模型/长播放完整报告 | 包集成与全项目真机/SDK/压力结论齐全才完成本汇总；独立批次先建立自己的完整门槛子任务 | H | todo |
 | REL-04 | workspace<br>提前演练回退与主线修复同步 | REL-08, ENG-07 | 分包旧版本/tag/依赖回退方案与 master 差异 | 隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物 | H | todo |
-| REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-03, REL-04 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
-| REL-06 | workspace<br>经授权分批正式发布 | REL-05 | 正式分包版本/tag/站点文档及兼容公告 | 候选验收通过，安装/浏览器复核和回退入口就绪 | H | todo |
+| REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-03, REL-04, REVIEW-03 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
+| REL-06 | workspace<br>经授权分批正式发布 | REL-05 | 正式分包版本/tag/站点文档及兼容公告 | 候选验收通过，安装/浏览器复核和回退入口就绪；候选反馈修复须独立建任务并复验三轮受影响结论，正式内容与最终验证产物一致 | H | todo |
 | REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | todo |
+
+## 8.1 多轮复盘
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, MOD-05, DOC-08 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
+| REVIEW-02 | workspace<br>第二轮真实浏览器与生态集成复盘 | REVIEW-01, REL-03 | Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告 | 所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收 | H | todo |
+| REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish | H | todo |
 
 ## 完成证据与阻塞
 
@@ -384,3 +393,4 @@
 - DOC-05: [记录](changes/2026-09-10-DOC-05-task-commits.md)
 - DOC-06: [记录](changes/2026-09-10-DOC-06-dependencies-and-scripts.md)
 - DOC-07: [记录](changes/2026-09-10-DOC-07-plan-review.md)
+- DOC-08: [记录](changes/2026-09-10-DOC-08-browser-and-release-reviews.md)

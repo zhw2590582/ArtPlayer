@@ -21,6 +21,11 @@ The user also authorizes installing needed dependencies and adding or improving 
 project scripts for the refactor without asking again for routine tooling choices.
 Record their purpose and versions, use the appropriate workspace/dependency category, update
 the lockfile when applicable, and verify compatibility and reproducible execution.
+After implementation, follow [refactor/release-reviews.md](refactor/release-reviews.md):
+complete the three review rounds and close blocking findings before candidate publication.
+Connected Chrome interaction checks complement committed automated browser tests; neither
+connection availability nor mocks replace actual playback or required device evidence.
+Each review fix remains a separate task and commit. Revalidate changed candidate contents.
 
 ## Project Summary
 

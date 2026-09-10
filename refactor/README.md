@@ -23,6 +23,7 @@
 | [核心设计](core-design.md) | 核心各模块的目标职责、迁移方式和生命周期设计 |
 | [包迁移规范](packages.md) | 全生态统一流程、组合矩阵及包特有风险 |
 | [测试与验收](testing.md) | 测试层次、浏览器/消费者矩阵、证据和回归门槛 |
+| [多轮复盘与 npm 准入](release-reviews.md) | Chrome 验证分工、三轮全局复盘、问题闭环和候选发布门槛 |
 | [工具链与发布](toolchain-release.md) | TypeScript、Bun、构建、版本管理和发布回退 |
 | [AI 协作流程](ai-workflow.md) | AI 接续工作、任务边界、验证、记录和交接模板 |
 | [架构决策](decisions.md) | 已选方向、待验证方案及被拒绝方案 |

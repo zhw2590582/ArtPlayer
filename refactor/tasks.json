@@ -130,6 +130,24 @@
       "acceptance": "依赖与覆盖校验、专项执行顺序断言通过；任务范围完整并独立提交"
     },
     {
+      "id": "DOC-08",
+      "phase": "0 规划",
+      "title": "记录 Chrome 验证及多轮 npm 发布复盘",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-07"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "浏览器分工、三轮复盘规范、发布依赖与接续文档",
+      "acceptance": "计划和发布依赖检查通过；独立提交 DOC-08，连接可用不冒充测试通过",
+      "evidence": [
+        "changes/2026-09-10-DOC-08-browser-and-release-reviews.md"
+      ]
+    },
+    {
       "id": "BASE-01",
       "phase": "1 基线",
       "title": "固定核心与试点的最小发布基线",
@@ -3456,6 +3474,60 @@
       "evidence": []
     },
     {
+      "id": "REVIEW-01",
+      "phase": "8.1 多轮复盘",
+      "title": "第一轮全项目架构与兼容性复盘",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "REL-02",
+        "CORE-22",
+        "SITE-04",
+        "MOD-05",
+        "DOC-08"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告",
+      "acceptance": "本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪",
+      "evidence": []
+    },
+    {
+      "id": "REVIEW-02",
+      "phase": "8.1 多轮复盘",
+      "title": "第二轮真实浏览器与生态集成复盘",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "REVIEW-01",
+        "REL-03"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告",
+      "acceptance": "所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收",
+      "evidence": []
+    },
+    {
+      "id": "REVIEW-03",
+      "phase": "8.1 多轮复盘",
+      "title": "第三轮 npm 候选内容与发布准备复盘",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "REVIEW-02",
+        "REL-04"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总",
+      "acceptance": "最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish",
+      "evidence": []
+    },
+    {
       "id": "REL-05",
       "phase": "8 发布验收",
       "title": "经授权发布候选并收集反馈",
@@ -3464,7 +3536,8 @@
       ],
       "dependsOn": [
         "REL-03",
-        "REL-04"
+        "REL-04",
+        "REVIEW-03"
       ],
       "status": "todo",
       "risk": "H",
@@ -3485,7 +3558,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "正式分包版本/tag/站点文档及兼容公告",
-      "acceptance": "候选验收通过，安装/浏览器复核和回退入口就绪",
+      "acceptance": "候选验收通过，安装/浏览器复核和回退入口就绪；候选反馈修复须独立建任务并复验三轮受影响结论，正式内容与最终验证产物一致",
       "evidence": []
     },
     {

@@ -48,6 +48,8 @@ AI 用于源码分析、任务拆分、实现、测试和差异审查。现代�
 
 ## 后续任务提示模板
 
+重构实现完成后继续执行 [多轮复盘与 npm 准入](release-reviews.md)。用户计划分多次任务复盘，后续 AI 从 REVIEW 任务与持久报告接续；不以迁移完成或 Chrome 已连接宣称发布就绪。每项复盘发现的修复仍独立建任务、验证和提交。
+
 ```text
 执行 refactor/tasks.json 中的 <任务ID>。
 先读取 AGENTS.md、refactor/README.md、progress.md 和关联契约。
