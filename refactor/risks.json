@@ -1,0 +1,613 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-07",
+  "sourceCommit": "e01f39ff",
+  "updatedAt": "2026-09-10T12:58:34.267Z",
+  "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
+  "items": [
+    {
+      "id": "BASE-LIFE-06",
+      "title": "Published switch leaves an unhandled rejection and an unsettled promise when resume fails",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-09"
+      ],
+      "evidence": [
+        "refactor/baselines/lifecycle.json",
+        "refactor/baselines/lifecycle-coverage.md",
+        "test/playback.test.js"
+      ],
+      "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。",
+      "workspaceState": "Current switchMix uses silencePromise and test/playback.test.js covers resume rejection. Published baseline still reproduces the old failure; preserve the existing workspace mitigation during migration."
+    },
+    {
+      "id": "BASE-LIFE-01",
+      "title": "Superseded switch resolves along with the latest source",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-09"
+      ],
+      "evidence": [
+        "refactor/baselines/lifecycle.json",
+        "refactor/baselines/lifecycle-coverage.md"
+      ],
+      "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+    },
+    {
+      "id": "BASE-LIFE-02",
+      "title": "Switch remains unsettled during the bounded observation after destroy",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-09"
+      ],
+      "evidence": [
+        "refactor/baselines/lifecycle.json",
+        "refactor/baselines/lifecycle-coverage.md"
+      ],
+      "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+    },
+    {
+      "id": "BASE-LIFE-03",
+      "title": "Async plugin registers its result after destroy",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-08"
+      ],
+      "evidence": [
+        "refactor/baselines/lifecycle.json",
+        "refactor/baselines/lifecycle-coverage.md"
+      ],
+      "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+    },
+    {
+      "id": "BASE-LIFE-04",
+      "title": "Destroying an instance twice unregisters a different live instance",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-04"
+      ],
+      "evidence": [
+        "refactor/baselines/lifecycle.json",
+        "refactor/baselines/lifecycle-coverage.md"
+      ],
+      "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+    },
+    {
+      "id": "BASE-LIFE-05",
+      "title": "Failed constructor leaves initialized markup/listeners until explicit probe cleanup",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-04"
+      ],
+      "evidence": [
+        "refactor/baselines/lifecycle.json",
+        "refactor/baselines/lifecycle-coverage.md"
+      ],
+      "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+    },
+    {
+      "id": "BASE-DOM-01",
+      "title": "控件 Tab 不可达",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-23",
+        "CORE-17"
+      ],
+      "evidence": [
+        "refactor/baselines/dom.json"
+      ],
+      "compatibleResolution": "补键盘可达性、焦点及名称，保留旧 DOM/CSS 和快捷键。",
+      "closureCriteria": "真实键盘与焦点回归通过，不只检查静态属性。"
+    },
+    {
+      "id": "BASE-DOM-02",
+      "title": "窄容器中控件裁切",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-13",
+        "CORE-14"
+      ],
+      "evidence": [
+        "refactor/baselines/dom.json"
+      ],
+      "compatibleResolution": "在保留自定义控件扩展入口下修正布局。",
+      "closureCriteria": "320px 及正常容器的设置/模式操作真实可用。"
+    },
+    {
+      "id": "BASE-DEMO-01",
+      "title": "旧 thumbnail 插件示例不对应当前 workspace 包",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "SITE-01",
+        "EX-03"
+      ],
+      "evidence": [
+        "docs/assets/example/thumbnail.js",
+        "refactor/baselines/demo-inventory.json"
+      ],
+      "compatibleResolution": "核实旧外部插件和链接，不自动替换为不同 API 的 auto-thumbnail。",
+      "closureCriteria": "示例依赖有来源，旧参数/URL 的保留或迁移解释完整。"
+    },
+    {
+      "id": "BASE-TYPE-01",
+      "title": "NodeNext ESM 默认导出与声明互操作失配",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "ENG-04",
+        "CORE-07",
+        "PKG-CHAPTER-04"
+      ],
+      "evidence": [
+        "refactor/baselines/consumers.json"
+      ],
+      "compatibleResolution": "分配 ESM/CJS 声明入口，保留旧解析模式，避免 any/skipLibCheck 掩盖。",
+      "closureCriteria": "四模式原合法消费通过，NodeNext ESM 对实际默认导出可构造/调用。"
+    },
+    {
+      "id": "BASE-TYPE-02",
+      "title": "chapter 可选运行时参数被声明为必填",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-CHAPTER-02"
+      ],
+      "evidence": [
+        "refactor/baselines/consumers.json",
+        "refactor/fixtures/api.js"
+      ],
+      "compatibleResolution": "补充兼容可选参数，不删除已接受的配置。",
+      "closureCriteria": "无参数和正确参数编译，错误参数依旧被拒绝，运行时一致。"
+    },
+    {
+      "id": "BASE-TYPE-03",
+      "title": "chapter legacy 缺旧模块解析的声明回退",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "ENG-04",
+        "PKG-CHAPTER-04"
+      ],
+      "evidence": [
+        "refactor/baselines/consumers.json"
+      ],
+      "compatibleResolution": "保留 legacy 文件和导入路径，补旧解析类型回退。",
+      "closureCriteria": "Node10 解析和 NodeNext/Bundler 消费均有正向证据。"
+    },
+    {
+      "id": "BASE-TYPE-04",
+      "title": "plugins.add / toggle 的旧声明返回值与运行时不同",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "CORE-07"
+      ],
+      "evidence": [
+        "refactor/baselines/consumers.json",
+        "refactor/baselines/public-api.json",
+        "refactor/baselines/lifecycle.json"
+      ],
+      "compatibleResolution": "保留旧声明接受范围并协调精确重载/扩展，不静默把同步注册改成 async。",
+      "closureCriteria": "返回值类型与运行时差异逐项说明，旧合法消费和拒绝传播回归通过。",
+      "scopeNote": "plugins.add synchronous result is browser-reproduced; toggle return comparison also relies on current source/playback tests. Do not claim every declaration mismatch was independently browser-reproduced."
+    },
+    {
+      "id": "BASE-DIST-01",
+      "title": "thumbnail tool 分发入口与类型文件缺失",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-TOOL-THUMB-01",
+        "PKG-TOOL-THUMB-04"
+      ],
+      "evidence": [
+        "refactor/baselines/distribution.json"
+      ],
+      "compatibleResolution": "核实真实旧 npm 后保留 .esm.js 等历史路径的兼容入口并补声明。",
+      "closureCriteria": "隔离打包消费者能加载所有原承诺路径，dist 不作为源码直接手改。"
+    },
+    {
+      "id": "BASE-PERF-01",
+      "title": "销毁后的 resize 防抖重新创建 notice timer",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-17",
+        "CORE-04",
+        "CORE-18"
+      ],
+      "evidence": [
+        "refactor/baselines/performance.json"
+      ],
+      "compatibleResolution": "为 debounce/晚到 UI 工作建立销毁归属；不靠等待自然过期掩盖。",
+      "closureCriteria": "正常 resize 保持，destroy 后无该回调及新 notice timer。"
+    },
+    {
+      "id": "BASE-SOURCE-01",
+      "title": "工作区 5.4.1 与采集时真实发布 5.4.0 不同",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "BASE-08",
+        "REL-01"
+      ],
+      "evidence": [
+        "refactor/baselines/releases.json"
+      ],
+      "compatibleResolution": "分别保留工作区与 npm 基线，目标大版本不变；更新发布窗口需新取证。",
+      "closureCriteria": "候选报告明确比较版本与 tarball，不声称工作区版本即已发布。"
+    },
+    {
+      "id": "BASE-SOURCE-02",
+      "title": "registry gitHead 与发布包版本对应不可靠",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "ENG-07",
+        "REL-01"
+      ],
+      "evidence": [
+        "refactor/baselines/releases.json"
+      ],
+      "compatibleResolution": "以 tarball 内容和可验证的构建来源为准，不能据 gitHead 自动声称复现。",
+      "closureCriteria": "候选 commit、工具链、包内容可关联，旧来源未知仍明确。"
+    },
+    {
+      "id": "BASE-SITE-01",
+      "title": "文档站实际为静态站点但 manifest 未设 private",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "SITE-01",
+        "REL-01"
+      ],
+      "evidence": [
+        "refactor/baselines/distribution.json"
+      ],
+      "compatibleResolution": "区分站点部署和库 npm 发布；自身 next-major 要求保留。",
+      "closureCriteria": "发布流程显式列出站点处理方式，不机械将其当库发布。"
+    },
+    {
+      "id": "BASE-MEDIA-01",
+      "title": "示例媒体和字体的完整来源/授权链待核实",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "BASE-08",
+        "SITE-01",
+        "EX-03"
+      ],
+      "evidence": [
+        "docs/assets/sample",
+        "docs/assets/jassub"
+      ],
+      "compatibleResolution": "复用现有样本时记录来源；缺许可的公开分发样本需补证据或可兼容替代，不能从文件名猜授权。",
+      "closureCriteria": "候选实际分发样本有来源、许可/使用依据和测试映射。"
+    },
+    {
+      "id": "VENDOR-01",
+      "title": "screenfull 来源、版本与许可闭环",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "CORE-12"
+      ],
+      "evidence": [
+        "refactor/third-party.json",
+        "packages/artplayer/src/libs/screenfull.js"
+      ],
+      "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+    },
+    {
+      "id": "VENDOR-02",
+      "title": "hint.css 来源、版本与许可闭环",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "CORE-12"
+      ],
+      "evidence": [
+        "refactor/third-party.json",
+        "packages/artplayer/src/style/hint.less"
+      ],
+      "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+    },
+    {
+      "id": "VENDOR-03",
+      "title": "webvtt-parser 来源、版本与许可闭环",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-01"
+      ],
+      "evidence": [
+        "refactor/third-party.json",
+        "packages/artplayer-plugin-multiple-subtitles/src/parser.js"
+      ],
+      "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+    },
+    {
+      "id": "VENDOR-04",
+      "title": "jassub-code-and-workers 来源、版本与许可闭环",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-01"
+      ],
+      "evidence": [
+        "refactor/third-party.json",
+        "packages/artplayer-plugin-jassub/src/jassub.es.js",
+        "packages/artplayer-plugin-jassub/worker",
+        "docs/assets/jassub/jassub-worker.js",
+        "docs/assets/jassub/jassub-worker.wasm",
+        "docs/assets/jassub/jassub-worker-modern.wasm"
+      ],
+      "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+    },
+    {
+      "id": "VENDOR-05",
+      "title": "jassub-font-assets 来源、版本与许可闭环",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-01",
+        "SITE-01"
+      ],
+      "evidence": [
+        "refactor/third-party.json",
+        "docs/assets/jassub/default.woff2",
+        "docs/assets/jassub/fonts"
+      ],
+      "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+    },
+    {
+      "id": "VENDOR-06",
+      "title": "monaco-static-assets 来源、版本与许可闭环",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "SITE-01",
+        "SITE-05"
+      ],
+      "evidence": [
+        "refactor/third-party.json",
+        "docs/assets/js/vs"
+      ],
+      "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+    },
+    {
+      "id": "VENDOR-07",
+      "title": "vconsole 来源、版本与许可闭环",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "SITE-01"
+      ],
+      "evidence": [
+        "refactor/third-party.json",
+        "docs/assets/js/vconsole.min.js"
+      ],
+      "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+    },
+    {
+      "id": "VENDOR-08",
+      "title": "console-bundle 来源、版本与许可闭环",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "SITE-01"
+      ],
+      "evidence": [
+        "refactor/third-party.json",
+        "docs/assets/js/console.js"
+      ],
+      "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+    },
+    {
+      "id": "SDK-01",
+      "title": "hls.js 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-HLS-01",
+        "EX-03"
+      ],
+      "evidence": [
+        "packages/artplayer-plugin-hls-control/src/index.js",
+        "docs/assets/example/hls.control.js"
+      ],
+      "compatibleResolution": "Caller supplies art.hls; homepage demo loads hls.js 1.5.17. Preserve quality/audio selectors and old core integration.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-02",
+      "title": "dash.js 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-DASH-01",
+        "EX-03"
+      ],
+      "evidence": [
+        "packages/artplayer-plugin-dash-control/src/index.js",
+        "docs/assets/example/dash.control.js"
+      ],
+      "compatibleResolution": "Caller supplies art.dash; homepage demo loads dash.js 5.2.1. Preserve representation IDs, Auto/manual and audio topology.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-03",
+      "title": "flv.js 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "EX-03"
+      ],
+      "evidence": [
+        "docs/assets/example/flv.js"
+      ],
+      "compatibleResolution": "Demo dependency flv.js 1.6.2; customType playback/teardown must be tested with actual SDK.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-04",
+      "title": "mpegts.js 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "EX-03"
+      ],
+      "evidence": [
+        "docs/assets/example/mpegts.js"
+      ],
+      "compatibleResolution": "Demo dependency mpegts.js 1.7.3; actual codec/stream/browser support remains unverified.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-05",
+      "title": "webtorrent 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "EX-03"
+      ],
+      "evidence": [
+        "docs/assets/example/webtorrent.js"
+      ],
+      "compatibleResolution": "Demo URL uses webtorrent@1, a moving major selector; preserve caller integration and explicitly capture actual runtime version.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-06",
+      "title": "google-cast 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-CAST-01",
+        "PKG-CAST-05"
+      ],
+      "evidence": [
+        "packages/artplayer-plugin-chromecast/src/index.js"
+      ],
+      "compatibleResolution": "Default remote cast_sender.js?loadCastFramework=1; sdk URL/options and actual Cast device/session behavior require separate validation.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-07",
+      "title": "ima-via-glomex 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-VAST-01",
+        "PKG-VAST-05"
+      ],
+      "evidence": [
+        "packages/artplayer-plugin-vast/src/index.js"
+      ],
+      "compatibleResolution": "@glomex/vast-ima-player loadImaSdk loads external IMA; preserve event/content/ad state and teardown, do not equate mocks with vendor service acceptance.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-08",
+      "title": "mediapipe-tensorflow 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-MASK-01",
+        "PKG-MASK-05"
+      ],
+      "evidence": [
+        "packages/artplayer-plugin-danmuku-mask/src/index.js"
+      ],
+      "compatibleResolution": "Npm dependency versions are separate from unversioned solutionPath CDN assets; keep option override, backend fallback, model result disposal and masks.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-09",
+      "title": "jassub-worker-wasm-fonts 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-01",
+        "PKG-JASSUB-05"
+      ],
+      "evidence": [
+        "packages/artplayer-plugin-jassub/src/index.js",
+        "docs/assets/example/jassub.js"
+      ],
+      "compatibleResolution": "Preserve options pass-through, result.instance and worker/wasm/font URLs. Wrapper, worker and WASM must be a verified compatible set.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-10",
+      "title": "mediabunny 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-MB-01",
+        "PKG-MB-09"
+      ],
+      "evidence": [
+        "packages/artplayer-proxy-mediabunny/src/input.js",
+        "packages/artplayer-proxy-mediabunny/package.json"
+      ],
+      "compatibleResolution": "Preserve native-video-like events, HLS input and topology, codec capability failures and AV sync; actual library/codec environment still requires verification.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-11",
+      "title": "asr-caller-service 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-ASR-01",
+        "PKG-ASR-05",
+        "EX-03"
+      ],
+      "evidence": [
+        "packages/artplayer-plugin-asr/src/index.js",
+        "docs/assets/example/asr.js"
+      ],
+      "compatibleResolution": "Core plugin supplies PCM to caller onAudioChunk. Example fetches an external ASR endpoint and opens its returned WebSocket; not an embedded ASR SDK or a verified service.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "SDK-12",
+      "title": "option-validator 实际集成验证范围",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "CORE-01",
+        "CORE-07"
+      ],
+      "evidence": [
+        "packages/artplayer/src/index.js"
+      ],
+      "compatibleResolution": "Bundled validation dependency; preserve validation/default/merge behavior and failure cleanup when typing constructor boundaries.",
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    }
+  ]
+}

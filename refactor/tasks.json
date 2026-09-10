@@ -391,11 +391,17 @@
         "BASE-03",
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "销毁/切源/类型差异、vendored 许可和外部 SDK 清单",
       "acceptance": "已确认与待复现分开，每项有负责任务及兼容处理路线；纳入 BASE-TYPE-01/02/03/04 和 BASE-DIST-01 的发布/声明/工作区证据；纳入 BASE-PERF-01 销毁后 resize/notice 延迟工作",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-BASE-07-risk-register.md",
+        "risk-guide.md",
+        "risk-table.md",
+        "risks.json",
+        "third-party.json"
+      ]
     },
     {
       "scope": [
@@ -611,7 +617,7 @@
         "BASE-07"
       ],
       "deliverable": "历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则",
-      "acceptance": "不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见"
+      "acceptance": "不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见；以 risks.json 为统一差异索引；关闭必须有 resolutionEvidence/rationale，已复现、源码事实、未验证分开，登记不等于豁免"
     },
     {
       "id": "CI-01",
@@ -910,7 +916,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "template/icons/i18n/style、SSR 与 proxy 挂载",
-      "acceptance": "DOM/CSS/global/样式注入、i18n 子路径及 SSR import 保持；不把 SSR import/useSSR 保持扩大为服务端构造播放器；复跑 BASE-05 的 SSR import/模板、浏览器 useSSR 节点复用和非浏览器构造错误",
+      "acceptance": "DOM/CSS/global/样式注入、i18n 子路径及 SSR import 保持；不把 SSR import/useSSR 保持扩大为服务端构造播放器；复跑 BASE-05 的 SSR import/模板、浏览器 useSSR 节点复用和非浏览器构造错误；接续 VENDOR-01/02，核对 screenfull/hint 复制版本、修改与分发通知，保留 DOM/CSS/fullscreen 行为",
       "evidence": []
     },
     {
@@ -1854,7 +1860,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "subtitles/onParser、multipleSubtitles 名称及实际返回方法",
-      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-03，定位 WebVTT parser 来源/修订及 CC0 头，保留解析/序列化行为",
       "evidence": []
     },
     {
@@ -1958,7 +1964,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "选项透传、result.instance、vendor 来源、worker/WASM/font 路径",
-      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-04/05，核对 wrapper/worker/WASM/font 的独立来源与通知，保持资源路径和选项透传",
       "evidence": []
     },
     {
@@ -2063,7 +2069,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "模型参数、start/stop、默认下载路径及 mask 样式",
-      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 SDK-08，分别核实 Yarn 解析版本、未固定版本的模型 solutionPath 和资源来源",
       "evidence": []
     },
     {
@@ -2953,7 +2959,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "全部 option、art.mediabunny、canvas/shim 属性及事件表",
-      "acceptance": "公开暴露成员和实际发布依赖/资源范围明确",
+      "acceptance": "公开暴露成员和实际发布依赖/资源范围明确；核实 third-party.json 所记录依赖 MPL-2.0 元数据与实际 bundle 的许可/通知范围，不从根 MIT 推断",
       "evidence": []
     },
     {
@@ -3334,7 +3340,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "中英文文档、插件页面、demo URL、编辑器声明与生成目录清单；六类 HTML 入口、prod/libs/code/example 加载行为及移动重定向",
-      "acceptance": "所有公开 API/插件有对应页面或明确补充任务；核实 BASE-DEMO-01 的历史 thumbnail 插件来源及 29 示例/36 HTML 路径；明确 BASE-05 所记录站点实际分发与未设 private 的 manifest 意图",
+      "acceptance": "所有公开 API/插件有对应页面或明确补充任务；核实 BASE-DEMO-01 的历史 thumbnail 插件来源及 29 示例/36 HTML 路径；明确 BASE-05 所记录站点实际分发与未设 private 的 manifest 意图；接续 VENDOR-05/06/07/08 和 BASE-SITE-01/BASE-MEDIA-01，核对字体、Monaco、vConsole、console bundle 与样本来源及分发范围",
       "evidence": []
     },
     {
@@ -3616,7 +3622,7 @@
         "ENG-07"
       ],
       "deliverable": "每批包/版本/源码/锁文件/工具/tarball integrity、必需测试/设备证据、限制和回退映射",
-      "acceptance": "受影响能力缺证据明确阻止对应批次；无关批次可独立准备，旧证据在候选内容变化后失效；站点采用真实构建/URL/资源验收，npm 分发依据历史核实，不从版本清单推断新增发布范围"
+      "acceptance": "受影响能力缺证据明确阻止对应批次；无关批次可独立准备，旧证据在候选内容变化后失效；站点采用真实构建/URL/资源验收，npm 分发依据历史核实，不从版本清单推断新增发布范围；关联 risks.json 和 third-party.json；受影响 bundle/worker/WASM/font/模型的来源与许可通知缺口必须有审查结论，未决项阻止对应批次"
     },
     {
       "id": "REL-01",

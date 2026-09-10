@@ -1,0 +1,1178 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-07",
+  "sourceCommit": "e01f39ff",
+  "capturedAt": "2026-09-10T12:58:34.266Z",
+  "note": "Maintained provenance inventory. Unknown versions/licenses remain open. No complete legal, security or runtime audit is claimed; remote services were not invoked. Fingerprints cover selected copied assets, not every repository media file.",
+  "packages": [
+    {
+      "name": "artplayer",
+      "declaredRuntimeDependencies": {
+        "option-validator": "^2.0.6"
+      },
+      "resolvedRuntimeDependencies": [
+        {
+          "name": "option-validator",
+          "range": "^2.0.6",
+          "lockedVersion": "2.0.6",
+          "installedVersion": "2.0.6",
+          "manifestLicense": "MIT",
+          "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        }
+      ],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "declaredRuntimeDependencies": {
+        "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+        "@tensorflow-models/body-segmentation": "^1.0.2",
+        "@tensorflow/tfjs-backend-cpu": "^4.21.0",
+        "@tensorflow/tfjs-backend-webgl": "^4.21.0",
+        "@tensorflow/tfjs-converter": "^4.21.0",
+        "@tensorflow/tfjs-core": "^4.21.0"
+      },
+      "resolvedRuntimeDependencies": [
+        {
+          "name": "@mediapipe/selfie_segmentation",
+          "range": "^0.1.1675465747",
+          "lockedVersion": "0.1.1675465747",
+          "installedVersion": "0.1.1675465747",
+          "manifestLicense": "Apache-2.0",
+          "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        },
+        {
+          "name": "@tensorflow-models/body-segmentation",
+          "range": "^1.0.2",
+          "lockedVersion": "1.0.2",
+          "installedVersion": "1.0.2",
+          "manifestLicense": "Apache-2.0",
+          "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        },
+        {
+          "name": "@tensorflow/tfjs-backend-cpu",
+          "range": "^4.21.0",
+          "lockedVersion": "4.22.0",
+          "installedVersion": "4.22.0",
+          "manifestLicense": "Apache-2.0",
+          "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        },
+        {
+          "name": "@tensorflow/tfjs-backend-webgl",
+          "range": "^4.21.0",
+          "lockedVersion": "4.22.0",
+          "installedVersion": "4.22.0",
+          "manifestLicense": "Apache-2.0",
+          "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        },
+        {
+          "name": "@tensorflow/tfjs-converter",
+          "range": "^4.21.0",
+          "lockedVersion": "4.22.0",
+          "installedVersion": "4.22.0",
+          "manifestLicense": "Apache-2.0",
+          "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        },
+        {
+          "name": "@tensorflow/tfjs-core",
+          "range": "^4.21.0",
+          "lockedVersion": "4.22.0",
+          "installedVersion": "4.22.0",
+          "manifestLicense": "Apache-2.0",
+          "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        }
+      ],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "declaredRuntimeDependencies": {
+        "@glomex/vast-ima-player": "^1.21.2"
+      },
+      "resolvedRuntimeDependencies": [
+        {
+          "name": "@glomex/vast-ima-player",
+          "range": "^1.21.2",
+          "lockedVersion": "1.21.2",
+          "installedVersion": "1.21.2",
+          "manifestLicense": "Apache-2.0",
+          "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        }
+      ],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "declaredRuntimeDependencies": {
+        "mediabunny": "^1.43.1"
+      },
+      "resolvedRuntimeDependencies": [
+        {
+          "name": "mediabunny",
+          "range": "^1.43.1",
+          "lockedVersion": "1.56.1",
+          "installedVersion": "1.56.1",
+          "manifestLicense": "MPL-2.0",
+          "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        }
+      ],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {}
+    },
+    {
+      "name": "artplayer-vitepress",
+      "declaredRuntimeDependencies": {},
+      "resolvedRuntimeDependencies": [],
+      "developmentDependencies": {
+        "flexsearch": "0.8.158",
+        "markdown-it": "14.1.0",
+        "vitepress": "1.6.3",
+        "vitepress-plugin-search": "1.0.4-alpha.22",
+        "vue": "3.5.13"
+      }
+    }
+  ],
+  "vendored": [
+    {
+      "id": "screenfull",
+      "riskId": "VENDOR-01",
+      "inputs": [
+        "packages/artplayer/src/libs/screenfull.js"
+      ],
+      "owners": [
+        "CORE-12"
+      ],
+      "sourceStatus": "Local filename/implementation identifies screenfull; exact upstream revision not established.",
+      "licenseStatus": "Current upstream license is MIT; local copied file lacks a license header. Exact version and notice coverage remain unverified.",
+      "upstreamSources": [
+        "https://github.com/sindresorhus/screenfull/blob/main/license"
+      ],
+      "upstreamReviewedAt": "2026-09-10",
+      "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "fingerprints": [
+        {
+          "path": "packages/artplayer/src/libs/screenfull.js",
+          "algorithm": "sha256-lf",
+          "sha256": "2332b50c0c6364d5c99080be0f5739255e4b9e465d2cca40f761adce9a1908f8"
+        }
+      ]
+    },
+    {
+      "id": "hint.css",
+      "riskId": "VENDOR-02",
+      "inputs": [
+        "packages/artplayer/src/style/hint.less"
+      ],
+      "owners": [
+        "CORE-12"
+      ],
+      "sourceStatus": "Local header names Hint.css 2.7.0, 2021-10-01; code is scoped/adapted in Less.",
+      "licenseStatus": "Local copyright header and current upstream MIT license observed; exact upstream diff and shipped notices pending.",
+      "upstreamSources": [
+        "https://github.com/chinchang/hint.css/blob/master/LICENSE"
+      ],
+      "upstreamReviewedAt": "2026-09-10",
+      "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "fingerprints": [
+        {
+          "path": "packages/artplayer/src/style/hint.less",
+          "algorithm": "sha256-lf",
+          "sha256": "e2dc4940e6b212d8da75a404fd5ff1ad894008457677bc37554c6b64b735bc31"
+        }
+      ]
+    },
+    {
+      "id": "webvtt-parser",
+      "riskId": "VENDOR-03",
+      "inputs": [
+        "packages/artplayer-plugin-multiple-subtitles/src/parser.js"
+      ],
+      "owners": [
+        "PKG-MULTI-SUB-01"
+      ],
+      "sourceStatus": "Local WebVTTParser/Serializer and CC0 header correspond to the upstream family; exact revision/diff unknown.",
+      "licenseStatus": "Local public-domain/CC0 dedication present; upstream repository identifies CC0-1.0.",
+      "upstreamSources": [
+        "https://github.com/w3c/webvtt.js",
+        "https://raw.githubusercontent.com/w3c/webvtt.js/master/parser.js"
+      ],
+      "upstreamReviewedAt": "2026-09-10",
+      "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "fingerprints": [
+        {
+          "path": "packages/artplayer-plugin-multiple-subtitles/src/parser.js",
+          "algorithm": "sha256-lf",
+          "sha256": "ba582074d57fa2d72880e6e4253fe14646787916b2b68e2a1e748e685cf96ab1"
+        }
+      ]
+    },
+    {
+      "id": "jassub-code-and-workers",
+      "riskId": "VENDOR-04",
+      "inputs": [
+        "packages/artplayer-plugin-jassub/src/jassub.es.js",
+        "packages/artplayer-plugin-jassub/worker",
+        "docs/assets/jassub/jassub-worker.js",
+        "docs/assets/jassub/jassub-worker.wasm",
+        "docs/assets/jassub/jassub-worker-modern.wasm"
+      ],
+      "owners": [
+        "PKG-JASSUB-01"
+      ],
+      "sourceStatus": "JASSUB example links upstream; exact wrapper/worker/WASM build version and subcomponent graph not established.",
+      "licenseStatus": "Current upstream wrapper LICENSE is MIT; this does not certify linked WASM libraries, fonts, or the exact local build.",
+      "upstreamSources": [
+        "https://github.com/ThaUnknown/jassub/blob/main/LICENSE"
+      ],
+      "upstreamReviewedAt": "2026-09-10",
+      "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "fingerprints": [
+        {
+          "path": "docs/assets/jassub/jassub-worker-modern.wasm",
+          "algorithm": "sha256",
+          "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c"
+        },
+        {
+          "path": "docs/assets/jassub/jassub-worker.js",
+          "algorithm": "sha256-lf",
+          "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707"
+        },
+        {
+          "path": "docs/assets/jassub/jassub-worker.wasm",
+          "algorithm": "sha256",
+          "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0"
+        },
+        {
+          "path": "packages/artplayer-plugin-jassub/src/jassub.es.js",
+          "algorithm": "sha256-lf",
+          "sha256": "b973508ade00b5b9cea2f299d49f4943003372729be7350b6938e44fddb32038"
+        },
+        {
+          "path": "packages/artplayer-plugin-jassub/worker/jassub-worker-modern.wasm",
+          "algorithm": "sha256",
+          "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c"
+        },
+        {
+          "path": "packages/artplayer-plugin-jassub/worker/jassub-worker.js",
+          "algorithm": "sha256-lf",
+          "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707"
+        },
+        {
+          "path": "packages/artplayer-plugin-jassub/worker/jassub-worker.wasm",
+          "algorithm": "sha256",
+          "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0"
+        }
+      ]
+    },
+    {
+      "id": "jassub-font-assets",
+      "riskId": "VENDOR-05",
+      "inputs": [
+        "docs/assets/jassub/default.woff2",
+        "docs/assets/jassub/fonts"
+      ],
+      "owners": [
+        "PKG-JASSUB-01",
+        "SITE-01"
+      ],
+      "sourceStatus": "Mixed named font files; version/source provenance unavailable from file names alone.",
+      "licenseStatus": "Font redistribution rights are unverified; do not infer licenses from root MIT or font names.",
+      "upstreamSources": [],
+      "upstreamReviewedAt": null,
+      "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "fingerprints": [
+        {
+          "path": "docs/assets/jassub/default.woff2",
+          "algorithm": "sha256",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+          "algorithm": "sha256",
+          "sha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/Averia Serif Simple Light.ttf",
+          "algorithm": "sha256",
+          "sha256": "fb6398238298a7010920e1c216f7b29bc920477bc810f8bcc677ae4e6f411b4b"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/FRABK.TTF",
+          "algorithm": "sha256",
+          "sha256": "9ad3d0e5ef31c4a9a98cb0e169e4e625286aa34c712add3e001c0100138730d4"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/Gramond.ttf",
+          "algorithm": "sha256",
+          "sha256": "072859788bc577d35df2e852225c52cc5670339a4859d86b5edb96b1724a2177"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/Lato-Regular.ttf",
+          "algorithm": "sha256",
+          "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/SlatePro-Medium.otf",
+          "algorithm": "sha256",
+          "sha256": "56aa0fc2878bf782c10e5bba6dc45de1982a572d14ba9e10cd9d5a4414b6171e"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/allison-script.regular.otf",
+          "algorithm": "sha256",
+          "sha256": "97cd66bb6f89bdd32af2a9592f439536c85aa7553516514e2623bb1e81c65bd6"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/architext.regular.ttf",
+          "algorithm": "sha256",
+          "sha256": "a6b8e33ce190ee9c871590b982cff37e137b303bb73dcab55ef3ff7154ba143a"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/arial.ttf",
+          "algorithm": "sha256",
+          "sha256": "c9b76220a5be42ead4733611e417cd65c5fd8aeaa33eb56576ac378a37d130a1"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/chawp.otf",
+          "algorithm": "sha256",
+          "sha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6"
+        },
+        {
+          "path": "docs/assets/jassub/fonts/default.woff2",
+          "algorithm": "sha256",
+          "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c"
+        }
+      ]
+    },
+    {
+      "id": "monaco-static-assets",
+      "riskId": "VENDOR-06",
+      "inputs": [
+        "docs/assets/js/vs"
+      ],
+      "owners": [
+        "SITE-01",
+        "SITE-05"
+      ],
+      "sourceStatus": "Local headers name Monaco build 0.30.1 (829382514cb1065f5ebb90f436e1c6103e153953).",
+      "licenseStatus": "Headers identify MIT; editor.main also includes third-party notices such as DOMPurify. Full component/notice closure is pending.",
+      "upstreamSources": [],
+      "upstreamReviewedAt": null,
+      "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "fingerprints": [
+        {
+          "path": "docs/assets/js/vs/base/browser/ui/codicons/codicon/codicon.ttf",
+          "algorithm": "sha256",
+          "sha256": "ff6b888d65cfd8077d49c6c704c1bfc8f2ce1ed71db9c583c63e0a49f046c79c"
+        },
+        {
+          "path": "docs/assets/js/vs/base/worker/workerMain.js",
+          "algorithm": "sha256-lf",
+          "sha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/abap/abap.js",
+          "algorithm": "sha256-lf",
+          "sha256": "49638217243bab4ed7d928d194bafe334abb614777440bf46f8636b9e5dfe0a4"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/apex/apex.js",
+          "algorithm": "sha256-lf",
+          "sha256": "034f340001e4c340b80e18abe45c990564931c4a061b4e74de86c012fb7d7a21"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/azcli/azcli.js",
+          "algorithm": "sha256-lf",
+          "sha256": "be50c776891279c9717db0d48a20d6d99f07cb60d2d8d279422fa917826683cf"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/bat/bat.js",
+          "algorithm": "sha256-lf",
+          "sha256": "3ec5d66f73ee7e7dc2b43db5999a768d1a54e933de9f507015fe7709a184adee"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/bicep/bicep.js",
+          "algorithm": "sha256-lf",
+          "sha256": "59d02b8930e36e2cbc3e472e263f881a82d84da292a79faf1d379cb060a2d7e1"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/cameligo/cameligo.js",
+          "algorithm": "sha256-lf",
+          "sha256": "f93cd405c71f97f26b4739f7f917b242e82a993ad42884422a43bf27d5b413e2"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/clojure/clojure.js",
+          "algorithm": "sha256-lf",
+          "sha256": "9e99cf86bcfb25c1b33bac9e26e11e4646868fa753356c7d737cfb24b7b1e49c"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/coffee/coffee.js",
+          "algorithm": "sha256-lf",
+          "sha256": "90d6aae23c9f5e4f335df5cb57634fa0193a102629deb88b98f238b4025f0551"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/cpp/cpp.js",
+          "algorithm": "sha256-lf",
+          "sha256": "ece3d119688eaf8a37fffae388118b12f8724ac2c3c8ff10d44caf2e91026424"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/csharp/csharp.js",
+          "algorithm": "sha256-lf",
+          "sha256": "d6367d0d67c0612cf37d25319e00cda2e4e38869a3c3200b1bfcd856cfe7fb4b"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/csp/csp.js",
+          "algorithm": "sha256-lf",
+          "sha256": "01241c709a7dddc0b5cedffb6dcf913a5d95c826eb68e2c27f114640719af7df"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/css/css.js",
+          "algorithm": "sha256-lf",
+          "sha256": "1f8468a126f6bfdc43d49a75e0ae758de913ebf55e685165adb6d069a454de5c"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/dart/dart.js",
+          "algorithm": "sha256-lf",
+          "sha256": "6b410bbe17b8ebcaed969bdfcf8049df6fe863482756ae73d2aebb919630034c"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/dockerfile/dockerfile.js",
+          "algorithm": "sha256-lf",
+          "sha256": "315769a72a2877f8ddddf9497a2e7e259e8df51cc38232ddf76fbe4556c0d7cd"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/ecl/ecl.js",
+          "algorithm": "sha256-lf",
+          "sha256": "fc412fe18e564cff17e9a0bcd5674ba15c49f4739417cf589ce1c546b21033a9"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/elixir/elixir.js",
+          "algorithm": "sha256-lf",
+          "sha256": "130d310090d723f51111d573000a72aa26fe44c9d79e6d04d12524e6631cfb6b"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/flow9/flow9.js",
+          "algorithm": "sha256-lf",
+          "sha256": "fafd88d973aed314454cd7d842b270125553f7a7613bb068c3c799a21ac61b64"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/fsharp/fsharp.js",
+          "algorithm": "sha256-lf",
+          "sha256": "32027afd4be75ddeca6c7beb9b52eda07d59afe3ea39a84f0696a6b3d074dcbf"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/go/go.js",
+          "algorithm": "sha256-lf",
+          "sha256": "c93466a4479ee8aa5e3ec70a89b469db1277b801d1551d40ad700d5abd367363"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/graphql/graphql.js",
+          "algorithm": "sha256-lf",
+          "sha256": "60a8825e939ca81540eb6ac00b17867b3e55af97bff99a9fa40c422a4281bdcf"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/handlebars/handlebars.js",
+          "algorithm": "sha256-lf",
+          "sha256": "5a174247aa64c7a064fc977365bb1c7161b4c97e559a6121773188c25df9d9a2"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/hcl/hcl.js",
+          "algorithm": "sha256-lf",
+          "sha256": "6053e90b8aa918c9744f41dcb1c0e58229a4946f0968a39b00776c3893538f54"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/html/html.js",
+          "algorithm": "sha256-lf",
+          "sha256": "6e7ae0ce7f07ec01c64db1368869715c115690e40fb5c183d5ced0d2716038bd"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/ini/ini.js",
+          "algorithm": "sha256-lf",
+          "sha256": "ecdb5c36a38a8b68af6384789c380d0e28b5b3df86de9c3419d348e688b8810e"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/java/java.js",
+          "algorithm": "sha256-lf",
+          "sha256": "8fd9c491b67dfa9ab831ed71a3973cc6ffc840f438f41114a794163672f4cf9c"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/javascript/javascript.js",
+          "algorithm": "sha256-lf",
+          "sha256": "bbd7fb1b714d347704eae4c74cb36c352876864f2103a69af3965f32c1c982c6"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/julia/julia.js",
+          "algorithm": "sha256-lf",
+          "sha256": "ef3783cbb81cee25697c0bddc9476813b593fb64712c21bc60099c8109c748f0"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/kotlin/kotlin.js",
+          "algorithm": "sha256-lf",
+          "sha256": "31b082803acb08622aa2dd736dca42772f6a0d3224fdb7c0e9c3e1f17800ca32"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/less/less.js",
+          "algorithm": "sha256-lf",
+          "sha256": "5ba9296cc5c6a7699028ac6e263631eb9284f80bfbffe99a4429f6c85dfc0589"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/lexon/lexon.js",
+          "algorithm": "sha256-lf",
+          "sha256": "2be27259788a7a4a6fb94a59150b47d169ef6e04933f76977e568c4cb0227f57"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/liquid/liquid.js",
+          "algorithm": "sha256-lf",
+          "sha256": "f4454c09b7e66ab2ffd81451aef2f12c79c0011839e19bcdb0fce42928acce6b"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/lua/lua.js",
+          "algorithm": "sha256-lf",
+          "sha256": "f39154e727c8d3df5c70ecab1737c0a07df3011977288ba4adc7d25c8ef639b5"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/m3/m3.js",
+          "algorithm": "sha256-lf",
+          "sha256": "a3b616444441f34b90b4e06a6a3a845f2804da67220c19721b9461140eb7f074"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/markdown/markdown.js",
+          "algorithm": "sha256-lf",
+          "sha256": "47ae9f567af2e69e682d14703bf4ad5428708464edb3d30791f3255a2863a52e"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/mips/mips.js",
+          "algorithm": "sha256-lf",
+          "sha256": "fcc6104a8c7092794744a1472511cd348d585d1cba0421e61e5eb8e0c58af186"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/msdax/msdax.js",
+          "algorithm": "sha256-lf",
+          "sha256": "f98e43f6600e629bfc354196006a02f9f9cc26480de064cc480e3bc885beb283"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/mysql/mysql.js",
+          "algorithm": "sha256-lf",
+          "sha256": "1cafe5b6c81234fc6680a421dd6290ec590ce03b9e525eacb0936a78ab50aeae"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/objective-c/objective-c.js",
+          "algorithm": "sha256-lf",
+          "sha256": "7cfdb8b492b6f1c5a1d83fefc3bd349bb1acdd489516534aefacd553c2850e75"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pascal/pascal.js",
+          "algorithm": "sha256-lf",
+          "sha256": "f2886264f5ad42d173ef18e8ea961f674090be7513f48af95dcef4eb1191cac3"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pascaligo/pascaligo.js",
+          "algorithm": "sha256-lf",
+          "sha256": "3d3317429e0837f6960e33829a2c2fd62119ca1514ad735f62345da8fd1dd817"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/perl/perl.js",
+          "algorithm": "sha256-lf",
+          "sha256": "317b527f0ade315a7cb066eac72672e5f2ba6d0c02c6014be052c32fb6566aed"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pgsql/pgsql.js",
+          "algorithm": "sha256-lf",
+          "sha256": "f58b4ab8529e311f7f98f690ed39e13de22f3ae29cc8916bf99c21ac86917970"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/php/php.js",
+          "algorithm": "sha256-lf",
+          "sha256": "3d7d187fb2e3b959adfda7b7557ccda4b6f690f838babc525cabffbe0dda7dd0"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pla/pla.js",
+          "algorithm": "sha256-lf",
+          "sha256": "6138b0b0a1be95370c00afe6eca5022ea10e8b0f11f1db9382163f28975373e6"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/postiats/postiats.js",
+          "algorithm": "sha256-lf",
+          "sha256": "5b18eac81236e88ffca2e67e527fa1d6fb42f53a4df42c1fbeb37312a9ec2fe4"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/powerquery/powerquery.js",
+          "algorithm": "sha256-lf",
+          "sha256": "fb9705793a687b03fe08605f19c3f1019d83cf06394a8381db541bda92e230d4"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/powershell/powershell.js",
+          "algorithm": "sha256-lf",
+          "sha256": "b80339b4a8450fd3a5bb5bf3817fb1b67fe6202690fc1ce97ef22336bcd7053b"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/protobuf/protobuf.js",
+          "algorithm": "sha256-lf",
+          "sha256": "18f13fbd6b421023eec480901e48354d249bc9c3dce9d0e0cc842cbab4393fd3"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pug/pug.js",
+          "algorithm": "sha256-lf",
+          "sha256": "dbce9bb879b84cf3bf8bd05643a4d3d2ae6ded03b4a9234a0e8d2ebfab6ade44"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/python/python.js",
+          "algorithm": "sha256-lf",
+          "sha256": "b0c9cb9c96d3b289b4ee1bb6ca921e810d87ec2967ebaf8608d5570865ac6524"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/qsharp/qsharp.js",
+          "algorithm": "sha256-lf",
+          "sha256": "6cf9e660e8082f7a8dff4e8041c58c5e9fed1e622e0301b359886a5148c15327"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/r/r.js",
+          "algorithm": "sha256-lf",
+          "sha256": "889684005db07d8b2e8c6f17d54b7bbf1bd67ad948b0b9ca411c2e55ba3433dd"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/razor/razor.js",
+          "algorithm": "sha256-lf",
+          "sha256": "da07ee116d392fbf97f5adc9d4f1fd46e5bbbe9765949c8cb9a6f6a4917ce6cb"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/redis/redis.js",
+          "algorithm": "sha256-lf",
+          "sha256": "286518ee6a7e76356149bebfbcdc19d2d30c19a5fa48d4bfcbf2f7a946783bd0"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/redshift/redshift.js",
+          "algorithm": "sha256-lf",
+          "sha256": "8b865d41e76c227f3e1eb3bc74f8e9cf24627b449cc94164c803c1e515a9bbfd"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/restructuredtext/restructuredtext.js",
+          "algorithm": "sha256-lf",
+          "sha256": "32c72e9b8fa318289b628efee24bc5b573e3f74f8ab7dd544dead1b3545fc351"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/ruby/ruby.js",
+          "algorithm": "sha256-lf",
+          "sha256": "93a9fbda62d9b4ef5537de37d7b4c77a89d8e2b0a2193dddac534ce98da47b5f"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/rust/rust.js",
+          "algorithm": "sha256-lf",
+          "sha256": "6352c16af73494a44e09b5ccad8a61c0369933d94881fcf58a7e8a75a27315cf"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/sb/sb.js",
+          "algorithm": "sha256-lf",
+          "sha256": "7323046d28f72e54b5abda684d4ec67d55b688a0b5e1d23ffe1d675c1c141b69"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/scala/scala.js",
+          "algorithm": "sha256-lf",
+          "sha256": "57309bc0e00edda2c4edb5fd255e042e1ef6ce8d51f51c7e822a74268e04f444"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/scheme/scheme.js",
+          "algorithm": "sha256-lf",
+          "sha256": "3fe89a5618aa1c4eafa5c65aad212fcf2ba34e302de73df7db0867ba01dbd866"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/scss/scss.js",
+          "algorithm": "sha256-lf",
+          "sha256": "b01dfbdbd787642ed55a3ca7b0b89b2edb80e4aa486d89fee0ba748124dad4f9"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/shell/shell.js",
+          "algorithm": "sha256-lf",
+          "sha256": "39063f662fa62eb543e5d8f9b792b31d14c484abafd9a67943dae52fc9f5ce36"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/solidity/solidity.js",
+          "algorithm": "sha256-lf",
+          "sha256": "e25859bb2a1babe193f03028489c95296b1bfe98a92dcb450d4c539661b5a86d"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/sophia/sophia.js",
+          "algorithm": "sha256-lf",
+          "sha256": "4ba061aa0beb82ba64efeb6bd1128da0d3445ac8cfc26d3f4591c66df0fa4bb0"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/sparql/sparql.js",
+          "algorithm": "sha256-lf",
+          "sha256": "162783ddf2dd67384d379ebf485f6ed0cafd820e892e4d89e82c8ba8617390c4"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/sql/sql.js",
+          "algorithm": "sha256-lf",
+          "sha256": "3b1decbf86cb0b163070cc144e826f104ba10468798b36e6d0e64257a35fd1f8"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/st/st.js",
+          "algorithm": "sha256-lf",
+          "sha256": "b3ac35684d5668c2d08105cec31f43e8d897e4ab94103d8bd64ac804d256c20c"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/swift/swift.js",
+          "algorithm": "sha256-lf",
+          "sha256": "288a0ad2974e332bb873bacbb2a284f8f39cdc7d12b1fd5e3c46699147a63633"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/systemverilog/systemverilog.js",
+          "algorithm": "sha256-lf",
+          "sha256": "40b18f15d29e3201142eb02fd5cc5ad690b32386bbe5dc0a874fd68a2f176f41"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/tcl/tcl.js",
+          "algorithm": "sha256-lf",
+          "sha256": "317b63a872ce538d4eef5dae701641670fd3f99dfc0439465d444b2992b69bea"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/twig/twig.js",
+          "algorithm": "sha256-lf",
+          "sha256": "c3442379367d5ef43f1377a14e3c6a04ec451dabb05bed200571ea6dc328dfa0"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/typescript/typescript.js",
+          "algorithm": "sha256-lf",
+          "sha256": "25dd318efd5aada375fdf391c488bd0b5ec0d665ba16e49f1e7968217ad01139"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/vb/vb.js",
+          "algorithm": "sha256-lf",
+          "sha256": "41d3d863c8b955c53eddb8724866a487d3632995114c77c0e9bc416227d148bf"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/xml/xml.js",
+          "algorithm": "sha256-lf",
+          "sha256": "95ddef452d5ff87f5c9f807d56f3f74964727677b5a55baa13a0a4870e2ae850"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/yaml/yaml.js",
+          "algorithm": "sha256-lf",
+          "sha256": "a6ffa854247873af58df3ad550bbdd474b2d8dbc1d1c730fce4e44dfcb5f9b62"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.css",
+          "algorithm": "sha256-lf",
+          "sha256": "6240d544d93236ac40dd3bd1ee49afbd27cb43e056c24c04a0c2cb37f1fd4587"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.js",
+          "algorithm": "sha256-lf",
+          "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.de.js",
+          "algorithm": "sha256-lf",
+          "sha256": "e31a518baf29ffce15a27ac80a6b5406ebf21c76657f3344f46c9ac0e6d0c202"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.es.js",
+          "algorithm": "sha256-lf",
+          "sha256": "f86887a1575bc71f035e92eb68b3d4e8c4e351d93f3b98520660933fed984007"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.fr.js",
+          "algorithm": "sha256-lf",
+          "sha256": "673214777e1ba3518abe1bbde8b5250cb18d65257054c8adf9cb5e1e49918d27"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.it.js",
+          "algorithm": "sha256-lf",
+          "sha256": "66df8e46d4aa40b5393489efda7e8aee5ad5589fdf68fef03832e665f0aabc9c"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.ja.js",
+          "algorithm": "sha256-lf",
+          "sha256": "4688d4dfa1ddf91cbfa7005e1110b12f79315706e7d56463c96e8bc688a3d60d"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.js",
+          "algorithm": "sha256-lf",
+          "sha256": "4d4915b0ff284b77938d3be70b9000911554fc451263a7baa594d199ef170a0e"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.ko.js",
+          "algorithm": "sha256-lf",
+          "sha256": "a6d39e2202fa271bfd5e04b83a5265bbe7ef73a945471c9e9fcb65ff8f1a8663"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.ru.js",
+          "algorithm": "sha256-lf",
+          "sha256": "345850b05cc97c0c1978df43ee996a32da7cd33ba1a85be3b6958884a8307040"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.zh-cn.js",
+          "algorithm": "sha256-lf",
+          "sha256": "30ce784d1733d424e221009e097760b813e629d63579bddb62f7a4f229b9011f"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.zh-tw.js",
+          "algorithm": "sha256-lf",
+          "sha256": "ab5c148283e9afd0577afb5e522e45c6c2b323a0a12215b71f92155fbf003b74"
+        },
+        {
+          "path": "docs/assets/js/vs/language/css/cssMode.js",
+          "algorithm": "sha256-lf",
+          "sha256": "c0f3a99395d07b421ef75f6eb78389c6ef29477f6a05556f9b94e2bb918dd6c1"
+        },
+        {
+          "path": "docs/assets/js/vs/language/css/cssWorker.js",
+          "algorithm": "sha256-lf",
+          "sha256": "073e09f9301dcf147e40ef675e3f18d8cc29de9f49673ec8d17711569144552d"
+        },
+        {
+          "path": "docs/assets/js/vs/language/html/htmlMode.js",
+          "algorithm": "sha256-lf",
+          "sha256": "91f7b295ddc3b0b679c669b84865f3ace79fdd30bfcd814f2960c06f3e24d600"
+        },
+        {
+          "path": "docs/assets/js/vs/language/html/htmlWorker.js",
+          "algorithm": "sha256-lf",
+          "sha256": "0b14f0af7ae7ab85732574fb384496dae3e85d28f953188cc842eec468a8a457"
+        },
+        {
+          "path": "docs/assets/js/vs/language/json/jsonMode.js",
+          "algorithm": "sha256-lf",
+          "sha256": "9abacb664dcd8564f28ef004465da0f4b3c551b2741424bf42e61c0a26e61adb"
+        },
+        {
+          "path": "docs/assets/js/vs/language/json/jsonWorker.js",
+          "algorithm": "sha256-lf",
+          "sha256": "0eb929c56d44afddb3030c011913010311ce34e5eadb1129a3ce9cbafd4c771d"
+        },
+        {
+          "path": "docs/assets/js/vs/language/typescript/tsMode.js",
+          "algorithm": "sha256-lf",
+          "sha256": "35d94edaf7982c8b59c95cda38c5ebffcf93479ee91a5c9820b9bf60719351c2"
+        },
+        {
+          "path": "docs/assets/js/vs/language/typescript/tsWorker.js",
+          "algorithm": "sha256-lf",
+          "sha256": "95d7d318d3b6076692705bda50f69ccf2981aae6b06f240de5ac642f32970bf4"
+        },
+        {
+          "path": "docs/assets/js/vs/loader.js",
+          "algorithm": "sha256-lf",
+          "sha256": "be92515f6d2cbfc75cd240076246e8ccf6f698269c0402e367d2ee371655bbeb"
+        }
+      ]
+    },
+    {
+      "id": "vconsole",
+      "riskId": "VENDOR-07",
+      "inputs": [
+        "docs/assets/js/vconsole.min.js"
+      ],
+      "owners": [
+        "SITE-01"
+      ],
+      "sourceStatus": "Local header identifies vConsole 3.15.0 and Tencent copyright.",
+      "licenseStatus": "Local header identifies MIT; original tarball correspondence and deployment notices not yet verified.",
+      "upstreamSources": [],
+      "upstreamReviewedAt": null,
+      "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "fingerprints": [
+        {
+          "path": "docs/assets/js/vconsole.min.js",
+          "algorithm": "sha256-lf",
+          "sha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+        }
+      ]
+    },
+    {
+      "id": "console-bundle",
+      "riskId": "VENDOR-08",
+      "inputs": [
+        "docs/assets/js/console.js"
+      ],
+      "owners": [
+        "SITE-01"
+      ],
+      "sourceStatus": "Parcel bundle contains console-feed identifiers; originating source/build/dependency versions unresolved.",
+      "licenseStatus": "Root MIT is not sufficient evidence for all bundled components; inventory and notices pending.",
+      "upstreamSources": [],
+      "upstreamReviewedAt": null,
+      "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
+      "fingerprints": [
+        {
+          "path": "docs/assets/js/console.js",
+          "algorithm": "sha256-lf",
+          "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+        }
+      ]
+    }
+  ],
+  "integrations": [
+    {
+      "id": "hls.js",
+      "riskId": "SDK-01",
+      "owners": [
+        "PKG-HLS-01",
+        "EX-03"
+      ],
+      "sourceFiles": [
+        "packages/artplayer-plugin-hls-control/src/index.js",
+        "docs/assets/example/hls.control.js"
+      ],
+      "contract": "Caller supplies art.hls; homepage demo loads hls.js 1.5.17. Preserve quality/audio selectors and old core integration.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "dash.js",
+      "riskId": "SDK-02",
+      "owners": [
+        "PKG-DASH-01",
+        "EX-03"
+      ],
+      "sourceFiles": [
+        "packages/artplayer-plugin-dash-control/src/index.js",
+        "docs/assets/example/dash.control.js"
+      ],
+      "contract": "Caller supplies art.dash; homepage demo loads dash.js 5.2.1. Preserve representation IDs, Auto/manual and audio topology.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "flv.js",
+      "riskId": "SDK-03",
+      "owners": [
+        "EX-03"
+      ],
+      "sourceFiles": [
+        "docs/assets/example/flv.js"
+      ],
+      "contract": "Demo dependency flv.js 1.6.2; customType playback/teardown must be tested with actual SDK.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "mpegts.js",
+      "riskId": "SDK-04",
+      "owners": [
+        "EX-03"
+      ],
+      "sourceFiles": [
+        "docs/assets/example/mpegts.js"
+      ],
+      "contract": "Demo dependency mpegts.js 1.7.3; actual codec/stream/browser support remains unverified.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "webtorrent",
+      "riskId": "SDK-05",
+      "owners": [
+        "EX-03"
+      ],
+      "sourceFiles": [
+        "docs/assets/example/webtorrent.js"
+      ],
+      "contract": "Demo URL uses webtorrent@1, a moving major selector; preserve caller integration and explicitly capture actual runtime version.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "google-cast",
+      "riskId": "SDK-06",
+      "owners": [
+        "PKG-CAST-01",
+        "PKG-CAST-05"
+      ],
+      "sourceFiles": [
+        "packages/artplayer-plugin-chromecast/src/index.js"
+      ],
+      "contract": "Default remote cast_sender.js?loadCastFramework=1; sdk URL/options and actual Cast device/session behavior require separate validation.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "ima-via-glomex",
+      "riskId": "SDK-07",
+      "owners": [
+        "PKG-VAST-01",
+        "PKG-VAST-05"
+      ],
+      "sourceFiles": [
+        "packages/artplayer-plugin-vast/src/index.js"
+      ],
+      "contract": "@glomex/vast-ima-player loadImaSdk loads external IMA; preserve event/content/ad state and teardown, do not equate mocks with vendor service acceptance.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "mediapipe-tensorflow",
+      "riskId": "SDK-08",
+      "owners": [
+        "PKG-MASK-01",
+        "PKG-MASK-05"
+      ],
+      "sourceFiles": [
+        "packages/artplayer-plugin-danmuku-mask/src/index.js"
+      ],
+      "contract": "Npm dependency versions are separate from unversioned solutionPath CDN assets; keep option override, backend fallback, model result disposal and masks.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "jassub-worker-wasm-fonts",
+      "riskId": "SDK-09",
+      "owners": [
+        "PKG-JASSUB-01",
+        "PKG-JASSUB-05"
+      ],
+      "sourceFiles": [
+        "packages/artplayer-plugin-jassub/src/index.js",
+        "docs/assets/example/jassub.js"
+      ],
+      "contract": "Preserve options pass-through, result.instance and worker/wasm/font URLs. Wrapper, worker and WASM must be a verified compatible set.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "mediabunny",
+      "riskId": "SDK-10",
+      "owners": [
+        "PKG-MB-01",
+        "PKG-MB-09"
+      ],
+      "sourceFiles": [
+        "packages/artplayer-proxy-mediabunny/src/input.js",
+        "packages/artplayer-proxy-mediabunny/package.json"
+      ],
+      "contract": "Preserve native-video-like events, HLS input and topology, codec capability failures and AV sync; actual library/codec environment still requires verification.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "asr-caller-service",
+      "riskId": "SDK-11",
+      "owners": [
+        "PKG-ASR-01",
+        "PKG-ASR-05",
+        "EX-03"
+      ],
+      "sourceFiles": [
+        "packages/artplayer-plugin-asr/src/index.js",
+        "docs/assets/example/asr.js"
+      ],
+      "contract": "Core plugin supplies PCM to caller onAudioChunk. Example fetches an external ASR endpoint and opens its returned WebSocket; not an embedded ASR SDK or a verified service.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    },
+    {
+      "id": "option-validator",
+      "riskId": "SDK-12",
+      "owners": [
+        "CORE-01",
+        "CORE-07"
+      ],
+      "sourceFiles": [
+        "packages/artplayer/src/index.js"
+      ],
+      "contract": "Bundled validation dependency; preserve validation/default/merge behavior and failure cleanup when typing constructor boundaries.",
+      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 214 项，范围 22 个包及工作区/示例。
 
-状态：todo 191 / doing 0 / blocked 0 / done 23 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 190 / doing 0 / blocked 0 / done 24 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -66,7 +66,7 @@
 | BASE-04 | workspace<br>捕获 DOM、CSS 和官方 demo | BASE-02 | 核心模板/类名/变量、键盘/焦点/可访问名称基线及全 demo 路径映射；docs-browser-testing.md 中 HTML/编辑器的脚本来源与存储状态；登记契约/版本/固定测试 ID/命令/报告与负责任务 | 核心/试点用户样式和输入用法已记录，其他 demo 运行状态与未知项明确；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务 | M | done |
 | BASE-05 | workspace<br>捕获包入口、资源和类型消费 | BASE-01 | 全包 manifest/资源路径清单；核心/试点的 UMD/AMD/ESM/CJS/legacy/i18n 和类型消费者基线；登记契约/版本/固定测试 ID/命令/报告与负责任务；区分库/npm 与站点实际分发类别，SSR import/模板/非浏览器构造错误分别捕获 | 核心/试点隔离消费可运行，其他包由各自契约任务验证，thumbnail tool 差异已登记 | H | done |
 | BASE-06 | workspace<br>记录性能与资源基线 | BASE-03, BASE-04 | 固定媒体/设备测量、包体积、反复装卸资源报告 | 多次采样可重跑，指标和审查阈值确定，不承诺未经测量的收益；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务 | M | done |
-| BASE-07 | workspace<br>建立差异和风险台账 | BASE-03, BASE-05 | 销毁/切源/类型差异、vendored 许可和外部 SDK 清单 | 已确认与待复现分开，每项有负责任务及兼容处理路线；纳入 BASE-TYPE-01/02/03/04 和 BASE-DIST-01 的发布/声明/工作区证据；纳入 BASE-PERF-01 销毁后 resize/notice 延迟工作 | H | todo |
+| BASE-07 | workspace<br>建立差异和风险台账 | BASE-03, BASE-05 | 销毁/切源/类型差异、vendored 许可和外部 SDK 清单 | 已确认与待复现分开，每项有负责任务及兼容处理路线；纳入 BASE-TYPE-01/02/03/04 和 BASE-DIST-01 的发布/声明/工作区证据；纳入 BASE-PERF-01 销毁后 resize/notice 延迟工作 | H | done |
 | BASE-08 | workspace<br>建立消费者与真实环境验证矩阵 | BASE-01, BASE-05 | 每包版本/浏览器/codec/SDK/设备/样本、证据和负责验证任务的矩阵 | 格式兼容与运行能力分开，未知/缺环境不算通过，明确哪些检查阻止哪些批次发布 | H | todo |
 
 ## 2 工程保障
@@ -83,7 +83,7 @@
 | ENG-07 | workspace<br>建立 tarball 消费与产物检查 | ENG-04, ENG-06 | 隔离 npm 消费 fixtures、API/声明/入口差分 | 不借 workspace 源码通过，能识别缺文件与默认导出变化 | H | todo |
 | ENG-08 | workspace<br>增加覆盖率、资源与性能报告 | ENG-03, ENG-05, BASE-06 | 覆盖率基线、资源清理断言、性能报告与阈值 | 关键生命周期分支有门槛，报告不靠无意义断言堆数量；将 BASE-06 的同环境多组配对、计时/压缩审查阈值与资源异常分开接入候选，不把历史现象冻结成正常要求 | M | todo |
 | ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04 | 共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入；契约-支持版本-测试 ID-命令-候选/报告-任务的覆盖索引 | 核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit；计划/已执行/缺证据分开，识别缺少验证归属的公开契约 | M | todo |
-| ENG-10 | workspace<br>建立历史失败分级和测试可靠性规则 | ENG-03, ENG-04, ENG-05, ENG-07, BASE-07 | 历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则 | 不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见 | M | todo |
+| ENG-10 | workspace<br>建立历史失败分级和测试可靠性规则 | ENG-03, ENG-04, ENG-05, ENG-07, BASE-07 | 历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则 | 不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见；以 risks.json 为统一差异索引；关闭必须有 resolutionEvidence/rationale，已复现、源码事实、未验证分开，登记不等于豁免 | M | todo |
 
 ## 2.2 GitHub CI/CD
 
@@ -115,7 +115,7 @@
 | CORE-09 | artplayer<br>整理 URL 与切源操作 | CORE-04, CORE-06, CORE-08 | url/switch/customType 的操作身份及取消方案 | 并发切源、错误、同 URL、销毁和 Promise 结算有契约；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-01/02/06 并增加候选正向回归 | H | todo |
 | CORE-10 | artplayer<br>迁移播放与时间/状态属性 | CORE-09 | play/pause/toggle/seek/volume/rate/duration 等模块 | 旧返回值、拒绝、mutex、位置恢复、属性描述符与事件通过 | H | todo |
 | CORE-11 | artplayer<br>整理媒体事件、ready 与重连 | CORE-10 | 媒体转发、重连、UI 响应职责分离 | readiness 次数/顺序、过期重连、原错误参数有回归 | H | todo |
-| CORE-12 | artplayer<br>迁移模板及公开资源入口 | CORE-06, CORE-04, BASE-04 | template/icons/i18n/style、SSR 与 proxy 挂载 | DOM/CSS/global/样式注入、i18n 子路径及 SSR import 保持；不把 SSR import/useSSR 保持扩大为服务端构造播放器；复跑 BASE-05 的 SSR import/模板、浏览器 useSSR 节点复用和非浏览器构造错误 | H | todo |
+| CORE-12 | artplayer<br>迁移模板及公开资源入口 | CORE-06, CORE-04, BASE-04 | template/icons/i18n/style、SSR 与 proxy 挂载 | DOM/CSS/global/样式注入、i18n 子路径及 SSR import 保持；不把 SSR import/useSSR 保持扩大为服务端构造播放器；复跑 BASE-05 的 SSR import/模板、浏览器 useSSR 节点复用和非浏览器构造错误；接续 VENDOR-01/02，核对 screenfull/hint 复制版本、修改与分发通知，保留 DOM/CSS/fullscreen 行为 | H | todo |
 | CORE-13 | artplayer<br>迁移组件注册与控件 | CORE-12, CORE-08 | Component/control/layer/contextmenu 的资源与 TS 边界 | add/update/remove、name、selector、mounted/beforeUnmount 通过；处理 BASE-DOM-02 窄容器控件裁切，保留 controls.update 的旧 undefined 返回值 | H | todo |
 | CORE-14 | artplayer<br>拆分设置树、渲染和布局 | CORE-13 | setting model/selection/render/layout 的分批实现 | 不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过；结合 BASE-DOM-02 验证窄容器设置定位 | H | todo |
 | CORE-15 | artplayer<br>迁移字幕获取、解析和渲染 | CORE-11, CORE-13 | subtitle 请求/track/DOM/URL 生命周期与类型 | 过期结果、偏移、cue 数组、原生全屏及错误路径通过 | H | todo |
@@ -209,7 +209,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-MULTI-SUB-01 | artplayer-plugin-multiple-subtitles<br>核对包契约与历史用法 | BASE-05 | subtitles/onParser、multipleSubtitles 名称及实际返回方法 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-MULTI-SUB-01 | artplayer-plugin-multiple-subtitles<br>核对包契约与历史用法 | BASE-05 | subtitles/onParser、multipleSubtitles 名称及实际返回方法 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-03，定位 WebVTT parser 来源/修订及 CC0 头，保留解析/序列化行为 | H | todo |
 | PKG-MULTI-SUB-02 | artplayer-plugin-multiple-subtitles<br>建立特有行为与错误测试 | PKG-MULTI-SUB-01, ENG-03, ENG-05 | VTT/SRT/ASS、编码/重叠 cue/排序/空轨/失败与切换 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
 | PKG-MULTI-SUB-03 | artplayer-plugin-multiple-subtitles<br>整理内部职责与资源 | PKG-MULTI-SUB-02, CORE-15 | 解析与合并/获取/渲染分离，过期请求及对象 URL 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-MULTI-SUB-04 | artplayer-plugin-multiple-subtitles<br>迁移自有源码和公开类型 | PKG-MULTI-SUB-03, ENG-04, ENG-06, CORE-07 | 准确 parser/cue/tree/result 类型与真实异步形状 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
@@ -220,7 +220,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-JASSUB-01 | artplayer-plugin-jassub<br>核对包契约与历史用法 | BASE-05 | 选项透传、result.instance、vendor 来源、worker/WASM/font 路径 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-JASSUB-01 | artplayer-plugin-jassub<br>核对包契约与历史用法 | BASE-05 | 选项透传、result.instance、vendor 来源、worker/WASM/font 路径 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-04/05，核对 wrapper/worker/WASM/font 的独立来源与通知，保持资源路径和选项透传 | H | todo |
 | PKG-JASSUB-02 | artplayer-plugin-jassub<br>建立特有行为与错误测试 | PKG-JASSUB-01, ENG-03, ENG-05 | ASS 字体、时钟/seek/倍率/resize、加载失败和销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
 | PKG-JASSUB-03 | artplayer-plugin-jassub<br>整理内部职责与资源 | PKG-JASSUB-02, CORE-15, CORE-16 | 仅整理自有 adapter/销毁；保留第三方文件及来源 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-JASSUB-04 | artplayer-plugin-jassub<br>迁移自有源码和公开类型 | PKG-JASSUB-03, ENG-04, ENG-06, CORE-07 | JASSUB option/instance 的兼容类型包装，vendor JS 例外记录 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
@@ -231,7 +231,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-MASK-01 | artplayer-plugin-danmuku-mask<br>核对包契约与历史用法 | BASE-05 | 模型参数、start/stop、默认下载路径及 mask 样式 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-MASK-01 | artplayer-plugin-danmuku-mask<br>核对包契约与历史用法 | BASE-05 | 模型参数、start/stop、默认下载路径及 mask 样式 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 SDK-08，分别核实 Yarn 解析版本、未固定版本的模型 solutionPath 和资源来源 | H | todo |
 | PKG-MASK-02 | artplayer-plugin-danmuku-mask<br>建立特有行为与错误测试 | PKG-MASK-01, ENG-03, ENG-05 | 加载期间停止/销毁、重复启动、推理失败、WebGL/CPU 边界 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
 | PKG-MASK-03 | artplayer-plugin-danmuku-mask<br>整理内部职责与资源 | PKG-MASK-02, CORE-18, PKG-DANMUKU-07 | 模型加载/推理/画布输出分离，阻止重叠推理与过期写入 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-MASK-04 | artplayer-plugin-danmuku-mask<br>迁移自有源码和公开类型 | PKG-MASK-03, ENG-04, ENG-06, CORE-07 | 模型 adapter、canvas 和选项的精确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
@@ -322,7 +322,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-MB-01 | artplayer-proxy-mediabunny<br>核对 shim 与媒体契约 | BASE-05 | 全部 option、art.mediabunny、canvas/shim 属性及事件表 | 公开暴露成员和实际发布依赖/资源范围明确 | H | todo |
+| PKG-MB-01 | artplayer-proxy-mediabunny<br>核对 shim 与媒体契约 | BASE-05 | 全部 option、art.mediabunny、canvas/shim 属性及事件表 | 公开暴露成员和实际发布依赖/资源范围明确；核实 third-party.json 所记录依赖 MPL-2.0 元数据与实际 bundle 的许可/通知范围，不从根 MIT 推断 | H | todo |
 | PKG-MB-02 | artplayer-proxy-mediabunny<br>建立真实媒体与事件基线 | PKG-MB-01, ENG-05, ENG-08 | MP4/WebM/HLS/Blob/Stream、seek/错误/轨道切换样本 | ready 事件顺序、音画同步、超时和释放可重跑 | H | todo |
 | PKG-MB-03 | artplayer-proxy-mediabunny<br>整理 input 与加载取消 | PKG-MB-02, CORE-09 | input.js 源检测、输入资源、Range 与取消 | HLS 检测在 input 边界，旧来源类型和超时保持 | H | todo |
 | PKG-MB-04 | artplayer-proxy-mediabunny<br>整理 VideoShim/EventTarget/Engine 协调 | PKG-MB-03, CORE-06, CORE-11 | shim 描述符、事件桥、加载状态和操作隔离 | 公开属性/同步异步返回与事件重入顺序保持 | H | todo |
@@ -359,7 +359,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| SITE-01 | artplayer-vitepress<br>清点文档/示例/生成链 | BASE-04, BASE-05 | 中英文文档、插件页面、demo URL、编辑器声明与生成目录清单；六类 HTML 入口、prod/libs/code/example 加载行为及移动重定向 | 所有公开 API/插件有对应页面或明确补充任务；核实 BASE-DEMO-01 的历史 thumbnail 插件来源及 29 示例/36 HTML 路径；明确 BASE-05 所记录站点实际分发与未设 private 的 manifest 意图 | M | todo |
+| SITE-01 | artplayer-vitepress<br>清点文档/示例/生成链 | BASE-04, BASE-05 | 中英文文档、插件页面、demo URL、编辑器声明与生成目录清单；六类 HTML 入口、prod/libs/code/example 加载行为及移动重定向 | 所有公开 API/插件有对应页面或明确补充任务；核实 BASE-DEMO-01 的历史 thumbnail 插件来源及 29 示例/36 HTML 路径；明确 BASE-05 所记录站点实际分发与未设 private 的 manifest 意图；接续 VENDOR-05/06/07/08 和 BASE-SITE-01/BASE-MEDIA-01，核对字体、Monaco、vConsole、console bundle 与样本来源及分发范围 | M | todo |
 | SITE-02 | artplayer-vitepress<br>整理声明与示例生成器 | SITE-01, ENG-04, ENG-06 | build-ts/build-test 生成链的可验证 TS 脚本 | 不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke；替换固定 100ms 成功判定，明确异步错误、清理和生成覆盖限制 | M | todo |
 | SITE-03 | artplayer-vitepress<br>整理 i18n/文档/LLM 生成流程 | SITE-02 | build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理 | 原命令兼容、生成可复现，翻译步骤不隐式运行远程服务 | M | todo |
 | SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收 | M | todo |
@@ -383,7 +383,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| REL-08 | workspace<br>提前建立逐包发布准入台账 | BASE-08, ENG-07 | 每批包/版本/源码/锁文件/工具/tarball integrity、必需测试/设备证据、限制和回退映射 | 受影响能力缺证据明确阻止对应批次；无关批次可独立准备，旧证据在候选内容变化后失效；站点采用真实构建/URL/资源验收，npm 分发依据历史核实，不从版本清单推断新增发布范围 | H | todo |
+| REL-08 | workspace<br>提前建立逐包发布准入台账 | BASE-08, ENG-07 | 每批包/版本/源码/锁文件/工具/tarball integrity、必需测试/设备证据、限制和回退映射 | 受影响能力缺证据明确阻止对应批次；无关批次可独立准备，旧证据在候选内容变化后失效；站点采用真实构建/URL/资源验收，npm 分发依据历史核实，不从版本清单推断新增发布范围；关联 risks.json 和 third-party.json；受影响 bundle/worker/WASM/font/模型的来源与许可通知缺口必须有审查结论，未决项阻止对应批次 | H | todo |
 | REL-01 | workspace<br>提前确定分包版本与差异方案 | REL-08, CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 每包版本/变更日志/依赖/类型差异方案和独立准入状态；按 version-policy.md 冻结各包下一 major（minor/patch 归零）并核实 registry 占用 | 所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布；全部包有 major 目标，版本冲突明确处理，独立准备任务同步 manifest/锁/依赖/日志；按 BASE-05 区分 21 库与文档站分发，不机械把文档站当库上传 npm | H | todo |
 | REL-09 | workspace<br>落实全包下一 major 版本及依赖元数据 | REL-01, DOC-11 | 22 包版本目标落实、适用锁文件/依赖范围/示例/变更日志同步，核实 registry 版本占用 | 版本与 policy 一致，旧核心支持保留；必要拆子任务各自提交，候选构建前完成，不执行 publish | H | todo |
 | REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01, CORE-22, ENG-07, REL-09 | 各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注 | 隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本 | H | todo |
@@ -423,6 +423,7 @@
 - BASE-04: [记录](changes/2026-09-10-BASE-04-dom.md) [记录](baselines/dom.json) [记录](baselines/dom-coverage.md) [记录](baselines/demo-inventory.json)
 - BASE-05: [记录](changes/2026-09-10-BASE-05-consumers.md) [记录](baselines/consumer-coverage.md) [记录](baselines/consumers.json) [记录](baselines/ssr.json) [记录](baselines/distribution.json)
 - BASE-06: [记录](changes/2026-09-10-BASE-06-performance.md) [记录](baselines/performance-coverage.md) [记录](baselines/performance.json) [记录](baselines/sizes.json)
+- BASE-07: [记录](changes/2026-09-10-BASE-07-risk-register.md) [记录](risk-guide.md) [记录](risk-table.md) [记录](risks.json) [记录](third-party.json)
 - ENG-01: [记录](changes/2026-09-10-ENG-01-reproducible-toolchain.md) [记录](baselines/toolchain-validation.json)
 - ENG-PM-01: [记录](changes/2026-09-10-ENG-PM-01-yarn-toolchain.md) [记录](baselines/yarn-validation.json)
 - ENG-02: [记录](changes/2026-09-10-ENG-02-readonly-ci.md) [记录](baselines/ci-validation.json)

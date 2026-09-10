@@ -37,6 +37,9 @@
 | [任务数据](tasks.json) | 任务状态和依赖的唯一数据来源 |
 | [包基线](package-inventory.json) | 包版本、入口、声明、源码清单及对应 demo 的初始快照 |
 | [发布基线与重跑说明](baselines/README.md) | 固定 npm tarball、完整性及已知源码/发布差异 |
+| [差异与风险索引](risk-table.md) | 已复现问题、源码事实和待核实事项的责任任务 |
+| [风险维护说明](risk-guide.md) | 证据等级、关闭条件、第三方边界和校验命令 |
+| [第三方来源清单](third-party.json) | 依赖解析、vendor 文件指纹、SDK/CDN 与许可来源缺口 |
 
 ## 维护规则
 
