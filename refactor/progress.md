@@ -1,6 +1,12 @@
 # 进度与证据
 
-## 当前阶段：DOC-10 GitHub CI/CD 规划
+## 当前阶段：DOC-11 全包大版本策略
+
+2026-09-10，用户要求所有包各自升级到下一 major。已核对 22 个 manifest 并记录 [目标清单](version-policy.md)，同步发布/CI/复盘及根指令，详见 [DOC-11 记录](changes/2026-09-10-DOC-11-major-version-policy.md)。现有 209 项任务：11 项规划完成、198 项待办。
+
+版本目标对应与计划/链接/依赖、Git 差异检查通过。仅修改文档，未改 manifest/锁文件或运行生产测试；旧 API 兼容要求不变。DOC-10 提交为 `a9197f59`，本轮独立提交 DOC-11。下一项仍为 BASE-01。
+
+## 2026-09-10：DOC-10 GitHub CI/CD 规划
 
 2026-09-10，用户明确纳入 GitHub CI/CD 优化。已核对现有 workflow 源码，新增 CI-01 至 CI-04 并接入第三轮发布复盘，文档见 [CI/CD 规范](github-ci-cd.md) 和 [DOC-10 记录](changes/2026-09-10-DOC-10-github-ci-cd.md)。现有 208 项任务：10 项规划完成、198 项待办；生产重构和 CI 改造均未开始。
 

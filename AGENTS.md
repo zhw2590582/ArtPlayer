@@ -29,6 +29,9 @@ Each review fix remains a separate task and commit. Revalidate changed candidate
 The user explicitly includes GitHub CI/CD modernization in this refactor.
 Follow [refactor/github-ci-cd.md](refactor/github-ci-cd.md) for PR checks, regression matrices,
 artifacts, Pages and npm workflows. Distinguish local configuration from verified remote runs.
+The user requires every workspace package to move to its own next major version for this
+refactor (M.m.p -> (M+1).0.0). Follow refactor/version-policy.md; independent versions and
+old API compatibility remain mandatory. This version policy is not publication authorization.
 
 ## Project Summary
 

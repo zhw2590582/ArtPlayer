@@ -41,7 +41,7 @@ required checks、环境审批、Pages source、npm trusted publisher 等是外�
 
 Pages 优先评估官方 artifact 部署流程，替代 CI 内提交/force push gh-pages 的耦合；先核对当前站点来源、域名、静态目录及保留文件，迁移前准备恢复旧部署方式的步骤。具体权限及 artifact 约束依据 [GitHub Pages workflow 文档](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。尚未迁移远端设置时，旧站点仍须可恢复。
 
-npm 保持 Lerna independent 的分包版本，不自动统一版本或抬高 major。优先评估 [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/) 的 OIDC 和 provenance；逐包核对支持环境、CLI 版本及信任配置，不能因支持 OIDC 就假定本仓库已配置。发布 CLI 环境要求不自动改变消费者最低 Node 要求。
+npm 保持 Lerna independent 的分包版本；用户已要求全部包分别升级到自身下一个大版本，按 [版本策略](version-policy.md) 校验版本清单，不把所有包统一为核心版本。优先评估 [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/) 的 OIDC 和 provenance；逐包核对支持环境、CLI 版本及信任配置，不能因支持 OIDC 就假定本仓库已配置。发布 CLI 环境要求不自动改变消费者最低 Node 要求。
 
 发布只接收明确受信任来源的候选 artifact，并核对源码 SHA、workflow run、包/版本/registry/tag 和 tarball integrity。不能执行任意外部 URL 提供的代码或仅凭 artifact 名称信任内容。避免发布阶段生命周期脚本悄悄重建包；若内容改变，重新验证。dry run 不能证明 npm 权限、OIDC 或真实发布成功。
 

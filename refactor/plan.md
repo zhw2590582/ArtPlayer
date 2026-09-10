@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 208 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 209 项，范围 22 个包及工作区/示例。
 
-状态：todo 198 / doing 0 / blocked 0 / done 10 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 198 / doing 0 / blocked 0 / done 11 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -51,6 +51,7 @@
 | DOC-08 | workspace<br>记录 Chrome 验证及多轮 npm 发布复盘 | DOC-07 | 浏览器分工、三轮复盘规范、发布依赖与接续文档 | 计划和发布依赖检查通过；独立提交 DOC-08，连接可用不冒充测试通过 | L | done |
 | DOC-09 | workspace<br>记录 docs HTML 与在线编辑器测试入口 | DOC-08 | 页面/加载方式、状态隔离、行为断言与既有任务映射 | 源码清点和计划检查通过，独立提交 DOC-09；不把页面存在当作测试通过 | L | done |
 | DOC-10 | workspace<br>记录 GitHub CI/CD 增强范围与验收 | DOC-09 | CI/CD 规范、四项实施任务与发布依赖 | 现有 workflow 核对、计划检查通过并独立提交；不冒充远端执行完成 | L | done |
+| DOC-11 | workspace<br>记录全部包各自升级一个大版本 | DOC-10 | 22 包目标版本清单、决策和发布/CI/复盘规则同步 | 版本表与 manifest 对照、计划检查通过并独立提交；不修改旧 API 兼容要求 | L | done |
 
 ## 1 基线
 
@@ -86,7 +87,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | CI-01 | workspace<br>增强兼容矩阵、并发缓存与 CI 报告 | DOC-10, ENG-08, ENG-09, ENG-10 | OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告 | 固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯 | H | todo |
 | CI-02 | workspace<br>分离并改进 GitHub Pages 部署 | DOC-10, ENG-02, SITE-03 | Pages artifact 部署配置、旧路径/域名核对、预检和迁移恢复指南 | 部署只取受信任已验证产物；本地实现可验收，远端 source/环境和实际部署状态单独登记 | H | todo |
-| CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本 | H | todo |
+| CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围 | H | todo |
 | CI-04 | workspace<br>验收 GitHub 流水线与远端发布准入 | CI-01, CI-02, CI-03, SITE-06 | 静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南 | 必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行 | H | todo |
 
 ## 2.1 早期试点
@@ -379,8 +380,8 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | REL-08 | workspace<br>提前建立逐包发布准入台账 | BASE-08, ENG-07 | 每批包/版本/源码/锁文件/工具/tarball integrity、必需测试/设备证据、限制和回退映射 | 受影响能力缺证据明确阻止对应批次；无关批次可独立准备，旧证据在候选内容变化后失效 | H | todo |
-| REL-01 | workspace<br>提前确定分包版本与差异方案 | REL-08, CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 每包版本/变更日志/依赖/类型差异方案和独立准入状态 | 所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布 | H | todo |
-| REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01, CORE-22, ENG-07 | 各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注 | 隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容 | H | todo |
+| REL-01 | workspace<br>提前确定分包版本与差异方案 | REL-08, CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 每包版本/变更日志/依赖/类型差异方案和独立准入状态；按 version-policy.md 冻结各包下一 major（minor/patch 归零）并核实 registry 占用 | 所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布；全部包有 major 目标，版本冲突明确处理，独立准备任务同步 manifest/锁/依赖/日志 | H | todo |
+| REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01, CORE-22, ENG-07 | 各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注 | 隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本 | H | todo |
 | REL-03 | workspace<br>完成真机、外部 SDK 与压力验收 | REL-02, EX-03, SITE-06, MOD-05 | Safari/移动/PiP/Cast/IMA/模型/长播放完整报告 | 包集成与全项目真机/SDK/压力结论齐全才完成本汇总；独立批次先建立自己的完整门槛子任务 | H | todo |
 | REL-04 | workspace<br>提前演练回退与主线修复同步 | REL-08, ENG-07 | 分包旧版本/tag/依赖回退方案与 master 差异 | 隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物 | H | todo |
 | REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-03, REL-04, REVIEW-03 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
@@ -393,7 +394,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, MOD-05, DOC-08 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
 | REVIEW-02 | workspace<br>第二轮真实浏览器与生态集成复盘 | REVIEW-01, REL-03 | Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告 | 所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收 | H | todo |
-| REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04, CI-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish | H | todo |
+| REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04, CI-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish；逐包核对 major 目标，不能用大版本豁免旧 API 兼容 | H | todo |
 
 ## 完成证据与阻塞
 
@@ -407,3 +408,4 @@
 - DOC-08: [记录](changes/2026-09-10-DOC-08-browser-and-release-reviews.md)
 - DOC-09: [记录](changes/2026-09-10-DOC-09-docs-test-surfaces.md)
 - DOC-10: [记录](changes/2026-09-10-DOC-10-github-ci-cd.md)
+- DOC-11: [记录](changes/2026-09-10-DOC-11-major-version-policy.md)

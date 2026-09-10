@@ -184,6 +184,24 @@
       ]
     },
     {
+      "id": "DOC-11",
+      "phase": "0 规划",
+      "title": "记录全部包各自升级一个大版本",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-10"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "22 包目标版本清单、决策和发布/CI/复盘规则同步",
+      "acceptance": "版本表与 manifest 对照、计划检查通过并独立提交；不修改旧 API 兼容要求",
+      "evidence": [
+        "changes/2026-09-10-DOC-11-major-version-policy.md"
+      ]
+    },
+    {
       "id": "BASE-01",
       "phase": "1 基线",
       "title": "固定核心与试点的最小发布基线",
@@ -540,7 +558,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复",
-      "acceptance": "不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本",
+      "acceptance": "不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围",
       "evidence": []
     },
     {
@@ -3526,8 +3544,8 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "每包版本/变更日志/依赖/类型差异方案和独立准入状态",
-      "acceptance": "所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布",
+      "deliverable": "每包版本/变更日志/依赖/类型差异方案和独立准入状态；按 version-policy.md 冻结各包下一 major（minor/patch 归零）并核实 registry 占用",
+      "acceptance": "所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布；全部包有 major 目标，版本冲突明确处理，独立准备任务同步 manifest/锁/依赖/日志",
       "evidence": []
     },
     {
@@ -3545,7 +3563,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注",
-      "acceptance": "隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容",
+      "acceptance": "隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本",
       "evidence": []
     },
     {
@@ -3636,7 +3654,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总",
-      "acceptance": "最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish",
+      "acceptance": "最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish；逐包核对 major 目标，不能用大版本豁免旧 API 兼容",
       "evidence": []
     },
     {
