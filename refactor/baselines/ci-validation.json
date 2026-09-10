@@ -1,0 +1,61 @@
+{
+  "task": "ENG-02",
+  "date": "2026-09-10",
+  "sourceCommit": "9a6cfe5c",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "platform": "win32-x64",
+  "inputs": {
+    "package.json": "3d5cb61b9a802c19d7cdbb19318ab38562846725d972dcd3cf494d2754c779a8",
+    "yarn.lock": "5921f159477b65161b48d4b768f462cb05a537b6a257e62732ec9dfaf4d69e7e",
+    ".node-version": "73fb1b615e2043a933be1c0895cde4358036acc28d785692509b822aa53c761f",
+    ".github/workflows/nodejs.yml": "803842ba0c5bf5bd1806604ecdf0571792a245fff09865c6dc3c94fd9fbc4a1c",
+    ".github/workflows/pages.yml": "e63fb5609a98ae745ff5af68ddbf3adf18a9b483fee9d9d05a957674672f3459",
+    "scripts/build-docs.js": "95aae678608df443ccd14579fa39f2787ac364705f5d0c360ed55e8b0c8ca6e3",
+    "scripts/build-ts.js": "1e1f3448de0fbd88939c3a2ecaebc8a11a48e3b1b4c23dbaeac8b58a92ab7813",
+    "test/build-docs.test.js": "4382e9f445118ac02984425673c84b0678f598cc03ac418ec2bf3b0b2bad23d2"
+  },
+  "actionlint": {
+    "version": "1.7.12",
+    "windowsArchiveSha256": "6e7241b51e6817ea6a047693d8e6fed13b31819c9a0dd6c5a726e1592d22f6e9",
+    "linuxArchiveSha256": "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8",
+    "workflows": 2,
+    "passed": true,
+    "localShellcheck": false,
+    "localPyflakes": false,
+    "invalidKeyRejected": true
+  },
+  "check": {
+    "command": "yarn ci:check",
+    "passed": true,
+    "behaviorTests": 21,
+    "baselineTests": 2,
+    "sourceFilesUnchanged": 426,
+    "lintFailureRejectedWithoutFixing": true
+  },
+  "declarationGeneration": {
+    "command": "yarn build:ts",
+    "filesCompared": 21,
+    "typescriptPrinterOutputUnchanged": true,
+    "formattingFixTypes": [
+      "layout"
+    ]
+  },
+  "build": {
+    "command": "yarn ci:build",
+    "libraryPackages": 21,
+    "libraryArtifacts": 63,
+    "i18n": true,
+    "editorDeclarations": true,
+    "vitepress": true,
+    "postBuildImportSmokeFiles": 3,
+    "passed": true
+  },
+  "remote": {
+    "actionsRuns": "unverified",
+    "branchProtection": "unverified",
+    "pagesSource": "unverified",
+    "pagesEnableVariable": "unverified",
+    "npmPublication": "not performed"
+  }
+}

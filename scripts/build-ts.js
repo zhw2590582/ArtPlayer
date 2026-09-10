@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { ESLint } from 'eslint'
 import { glob } from 'glob'
 
 function ensureDirExists(filePath) {
@@ -57,6 +58,13 @@ console.log(`✨ Built ${artplayerTSoutput}`);
 
   pluginFiles.sort()
   const allFiles = [...pluginFiles, 'artplayer.d.ts']
+  const eslint = new ESLint({ fix: true, fixTypes: ['layout'] })
+  const results = await eslint.lintFiles(allFiles.map(file => path.join('docs/assets/ts', file)))
+  await ESLint.outputFixes(results)
+  if (results.some(result => result.errorCount)) {
+    const formatter = await eslint.loadFormatter('stylish')
+    throw new Error(formatter.format(results))
+  }
   const commonJsPath = path.join('docs/assets/js/common.js')
   const commonJsContent = fs.readFileSync(commonJsPath, 'utf-8')
   const newLibUris = allFiles.map(file => `'./assets/ts/${file}'`).join(',\n      ')

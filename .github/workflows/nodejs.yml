@@ -1,43 +1,79 @@
 name: Node CI
 
 on:
+  pull_request:
   push:
-    branches:
-      - master
+    branches: [master, 'codex/**']
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      pages-artifact:
+        description: Prepare the checked docs directory for the separate Pages workflow
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' || github.event_name == 'push' }}
 
 jobs:
-  build:
-
+  checks:
+    name: Checks and build
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.x]
-
+    timeout-minutes: 30
+    env:
+      CI: true
+    defaults:
+      run:
+        shell: bash
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: install, lint, build, and test
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - name: Install the pinned package manager
+        run: npm install --global --force yarn@1.22.22
+      - name: Validate workflow syntax
         run: |
-          yarn
-          yarn test:playback
-          yarn lint
-          yarn build:all
-          yarn test:dash-control
-        env:
-          CI: true
-
-      - name: Deploy to GitHub Pages
-        if: success()
+          curl --fail --silent --show-error --location https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz --output "$RUNNER_TEMP/actionlint.tar.gz"
+          printf '%s  %s\n' '8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8' "$RUNNER_TEMP/actionlint.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP" actionlint
+          "$RUNNER_TEMP/actionlint" -color
+      - name: Frozen install
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -f docs
-          git commit -m 'Deploy to GitHub Pages'
-          git subtree split --prefix docs master -b gh-pages-temp
-          git push origin gh-pages-temp:refs/heads/gh-pages --force
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          mkdir -p refactor/.cache/ci
+          yarn install --frozen-lockfile --non-interactive 2>&1 | tee refactor/.cache/ci/install.log
+      - name: Read-only checks and tests
+        run: yarn ci:check 2>&1 | tee refactor/.cache/ci/check.log
+      - name: Build libraries and documentation
+        run: yarn ci:build 2>&1 | tee refactor/.cache/ci/build.log
+      - name: Record source and tool versions
+        if: always()
+        run: |
+          mkdir -p refactor/.cache/ci
+          git rev-parse HEAD > refactor/.cache/ci/source.txt
+          node --version > refactor/.cache/ci/node.txt
+          yarn --version > refactor/.cache/ci/yarn.txt
+          sha256sum yarn.lock > refactor/.cache/ci/lock.sha256
+          git diff --stat > refactor/.cache/ci/generated-diff.txt
+      - name: Upload available logs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: checks-${{ github.run_id }}-${{ github.run_attempt }}
+          path: refactor/.cache/ci/
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Prepare Pages artifact
+        if: inputs.pages-artifact && github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: docs
+          include-hidden-files: true

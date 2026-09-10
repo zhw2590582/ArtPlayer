@@ -1,12 +1,12 @@
 # GitHub CI/CD 优化与验收
 
-2026-09-10 用户明确要求在本次重构中优化和增强 GitHub CI/CD。范围包含仓库检查、测试矩阵、构建产物、文档站部署和 npm 发布准备，并持续维护脚本文档及故障处理指南。本文是待实施规范，不代表 workflows 已更新或远端运行成功。
+2026-09-10 用户明确要求在本次重构中优化和增强 GitHub CI/CD。范围包含仓库检查、测试矩阵、构建产物、文档站部署和 npm 发布准备，并持续维护脚本文档及故障处理指南。ENG-02 已实现初步检查与部署隔离，操作见 [ci-setup.md](ci-setup.md)；完整矩阵及远端验收仍待后续任务。
 
-## 当前源码基线
+## ENG-02 前源码基线
 
-[nodejs.yml](../.github/workflows/nodejs.yml) 是当前唯一 workflow：仅 push master 触发，Ubuntu + Node 20.x，checkout/setup-node 使用 v2；单一 job 执行 yarn 安装、两组 Node 测试、lint 和 build:all，再提交 docs、subtree split 并 force push gh-pages。
+[nodejs.yml](../.github/workflows/nodejs.yml) 曾是唯一 workflow：仅 push master 触发，Ubuntu + Node 20.x，checkout/setup-node 使用 v2；单一 job 执行 yarn 安装、两组 Node 测试、lint 和 build:all，再提交 docs、subtree split 并 force push gh-pages。
 
-[package.json](../package.json) 中 lint 使用 --fix，build:all 又包含 lint；当前 workflow 没有 PR 触发、真实浏览器矩阵、类型消费者/tarball 检查、显式权限、并发取消、超时或报告上传。上述是文件检查结果，尚未核对 GitHub 的实际历史运行、Pages 配置、分支保护、环境规则或 npm 账号配置。旧流程的部署目标与访问路径必须先核实，不能仅改 YAML 就宣称迁移完成。
+改造前 [package.json](../package.json) 中 lint 使用 --fix，build:all 又包含 lint；当前 workflow 没有 PR 触发、真实浏览器矩阵、类型消费者/tarball 检查、显式权限、并发取消、超时或报告上传。上述是文件检查结果，尚未核对 GitHub 的实际历史运行、Pages 配置、分支保护、环境规则或 npm 账号配置。旧流程的部署目标与访问路径必须先核实，不能仅改 YAML 就宣称迁移完成。
 
 ## 目标流水线
 
@@ -22,7 +22,7 @@ ENG-02 先建立只读 PR 检查和部署隔离框架，后续 CI 任务逐步�
 
 ## CI 的可靠性与运行成本
 
-- Node/TS/包管理器版本来自 ENG-01、BASE-08 和 Bun 试点；最低消费者兼容与构建所需运行时分别验证，不因 Actions 升级静默提高消费者要求。
+- Node/TS/包管理器版本来自 ENG-01/ENG-PM-01 和 BASE-08；用户指定 Yarn 为包管理器，Bun 仅隔离评估。最低消费者兼容与构建所需运行时分别验证，不因 Actions 升级静默提高消费者要求。
 - 覆盖 Linux 与 Windows 的关键脚本；浏览器覆盖 Chromium/Firefox/WebKit 和有需要的正式 Chrome。真机、Cast 等证据仍使用环境矩阵，不将 hosted runner 通过当作真机通过。
 - 安装使用选定包管理器的锁定模式；缓存按 OS、运行时、包管理器及锁文件隔离，浏览器缓存还绑定测试工具版本。禁止无关 PR 缓存/产物进入有发布权限的任务。
 - 快速检查依据依赖图而非简单路径过滤；共享核心/构建/锁文件变化扩大检查，影响不确定时完整回归。文档单改可缩小范围，但 required 汇总检查必须给出真实结果，不能将失败/取消误报成功或留下永久 pending。

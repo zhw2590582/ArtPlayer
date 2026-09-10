@@ -439,11 +439,14 @@
         "ENG-01",
         "ENG-PM-01"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "lint/lint:fix、PR 与主线检查、独立部署任务；遵循 github-ci-cd.md，PR/重构分支触发、最小权限及 workflow 静态检查",
       "acceptance": "仓库内检查可执行且不改源码、不发布；required checks 的外部设置状态列入发布台账，不阻塞本地框架建设",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-ENG-02-readonly-ci.md",
+        "baselines/ci-validation.json"
+      ]
     },
     {
       "id": "ENG-03",

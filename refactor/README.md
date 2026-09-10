@@ -28,6 +28,7 @@
 | [工具链与发布](toolchain-release.md) | TypeScript、Bun、构建、版本管理和发布回退 |
 | [已实现的开发环境](toolchain-setup.md) | Node/Yarn 固定版本、锁文件、安装命令和实际验证范围 |
 | [全包大版本策略](version-policy.md) | 每包分别升级一个 major 的目标清单、兼容要求和版本落地步骤 |
+| [已实现的 CI 入口](ci-setup.md) | Yarn 检查/构建、只读 lint、Pages 隔离及远端待验收状态 |
 | [GitHub CI/CD](github-ci-cd.md) | PR/兼容矩阵、构建报告、Pages、npm 发布及远端准入验证 |
 | [AI 协作流程](ai-workflow.md) | AI 接续工作、任务边界、验证、记录和交接模板 |
 | [架构决策](decisions.md) | 已选方向、待验证方案及被拒绝方案 |

@@ -7,7 +7,7 @@
 1. 切换到 .node-version 指定的 Node，安装 Yarn 1.22.22；例如 `npm install --global yarn@1.22.22`，然后确认 `node --version` 和 `yarn --version`。npm 仅可用于安装 Yarn 工具及消费者兼容检查，不用于维护本仓库依赖锁。
 2. 干净 checkout 执行 `yarn install --frozen-lockfile --non-interactive`，禁止 CI 自动更新锁或忽略安装脚本/engines。参见 [Yarn Classic install](https://classic.yarnpkg.com/en/docs/cli/install/)。
 3. 执行 `yarn check:toolchain --strict`，核对实际 Node/Yarn、19 个固定开发工具和 22 个 workspace 的声明及传递依赖锁条目。普通检查允许满足最低工具要求的 Node，同时打印标准版本。
-4. 执行 `yarn test:playback`、`yarn test:dash-control`、`yarn build all` 和 `yarn workspace artplayer-vitepress build`。只读 lint 和 PR CI 的拆分由 ENG-02 完成；旧 lint 当前仍有 --fix。
+4. 执行 `yarn test:playback`、`yarn test:dash-control`、`yarn build all` 和 `yarn workspace artplayer-vitepress build`。ENG-02 已拆分只读 lint 与 lint:fix；PR/主线入口和独立 Pages 流程见 ci-setup.md。
 
 私有根包最低 Node 为 ^20.19.0 || >=22.12.0，与原本使用的 Vite 7 一致。本轮验证 Node 24.21.0，其他版本矩阵由 CI-01 接续，不能宣称所有最低环境已经通过。
 

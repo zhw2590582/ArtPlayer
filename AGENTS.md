@@ -74,7 +74,7 @@ Use the repo scripts rather than ad hoc bundler commands.
 ### Development
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 Starts the local dev site on port `8082` and interactively selects a package to watch. The selected package is built into:
@@ -84,7 +84,7 @@ Starts the local dev site on port `8082` and interactively selects a package to 
 ### Production Build
 
 ```bash
-npm run build
+yarn build
 ```
 
 Interactive build for one package. Outputs:
@@ -95,25 +95,27 @@ Interactive build for one package. Outputs:
 Build all packages:
 
 ```bash
-npm run build all
+yarn build all
 ```
 
 ### Other Project Scripts
 
 ```bash
-npm run build:i18n
-npm run build:ts
-npm run build:docs
-npm run build:llm
-npm run build:test
-npm run lint
-npm run build:all
+yarn build:i18n
+yarn build:ts
+yarn build:docs
+yarn build:llm
+yarn build:test
+yarn lint
+yarn build:all
 ```
 
 Notes:
 
-- `npm run lint` targets package source/types plus scripts and TypeScript demo assets.
-- `npm run build:all` is expensive; use it when a change truly spans builds/docs/types/lint together.
+- `yarn lint` is read-only; `yarn lint:fix` explicitly fixes the same source/type/script range.
+- `yarn ci:check` runs strict toolchain/plan/lint/tests; `yarn ci:build` generates outputs and checks imports.
+- See `refactor/ci-setup.md` for CI and separate Pages deployment; remote activation is tracked separately.
+- `yarn build:all` is expensive; use it when a change truly spans builds/docs/types/lint together.
 
 ## Useful Local URLs
 
@@ -251,9 +253,9 @@ If adding HLS-like quality/audio selection elsewhere:
 
 For package-specific builds, the normal flow is:
 
-1. `npm run dev` and pick the package for fast local iteration
+1. `yarn dev` and pick the package for fast local iteration
 2. validate in `http://localhost:8082`
-3. `npm run build` and pick the package when ready to update shippable artifacts
+3. `yarn build` and pick the package when ready to update shippable artifacts
 
 ## Documentation Expectations
 

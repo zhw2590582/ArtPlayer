@@ -38,9 +38,16 @@
     "test:dash-control": "node --test test/dash-control.test.js",
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
-    "lint": "npx eslint packages/*/{src,types,package.json} scripts/*.js test/* docs/assets/ts/* --fix",
-    "build:all": "npm run build all && npm run build:i18n && npm run build:ts && npm run build:docs && npm run lint",
-    "check:toolchain": "node scripts/check-toolchain.mjs"
+    "lint": "eslint \"packages/*/{src,types,package.json}\" \"scripts/*.{js,mjs}\" \"test/*\" \"docs/assets/ts/*\" --no-fix",
+    "build:all": "yarn ci:build && yarn lint",
+    "check:toolchain": "node scripts/check-toolchain.mjs",
+    "lint:fix": "eslint \"packages/*/{src,types,package.json}\" \"scripts/*.{js,mjs}\" \"test/*\" \"docs/assets/ts/*\" --fix",
+    "check:plan": "node refactor/scripts/plan.mjs --check",
+    "test:node": "node --test test/playback.test.js test/dash-control.test.js test/toolchain.test.js test/build-docs.test.js",
+    "test:baseline": "node --test refactor/scripts/*.test.mjs",
+    "ci:check": "yarn check:toolchain --strict && yarn check:plan && yarn lint && yarn test:node && yarn test:baseline",
+    "ci:build": "yarn build all && yarn build:i18n && yarn build:ts && yarn build:docs && yarn test:imports",
+    "test:imports": "node --test test/esm.test.js test/i18n.test.js test/ssr.test.js"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
