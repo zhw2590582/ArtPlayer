@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import http from 'node:http'
 import path from 'node:path'
-import { ensureArchive, readMember, refactorDir } from './releases.mjs'
+import { ensureArchive, hash, readMember, refactorDir } from './releases.mjs'
 
 const root = path.resolve(refactorDir, '..')
 const baseline = JSON.parse(fs.readFileSync(path.join(refactorDir, 'baselines/releases.json'), 'utf8'))
@@ -48,6 +48,16 @@ const server = http.createServer(async (req, res) => {
       }
       const report = JSON.parse(Buffer.concat(chunks).toString('utf8'))
       assert.equal(report.kind, 'public-api')
+      report.capture = {
+        capturedAt: new Date().toISOString(),
+        releases: baseline.releases.map(release => ({
+          name: release.name, version: release.version, integrity: release.integrity,
+          member: `package/${release.manifest.main.replace(/^\.\//, '')}`,
+          sha256: release.files[`package/${release.manifest.main.replace(/^\.\//, '')}`],
+        })),
+        fixtureHashAlgorithm: 'sha256-lf',
+        fixtures: Object.fromEntries(['api.html', 'api.js'].map(name => [name, hash(fs.readFileSync(path.join(refactorDir, 'fixtures', name), 'utf8').replaceAll('\r\n', '\n'))])),
+      }
       const output = path.join(refactorDir, '.cache/reports')
       fs.mkdirSync(output, { recursive: true })
       fs.writeFileSync(path.join(output, 'api.json'), `${JSON.stringify(report, null, 2)}\n`)

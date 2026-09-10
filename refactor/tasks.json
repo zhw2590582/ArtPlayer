@@ -285,11 +285,15 @@
         "BASE-01",
         "BASE-HARNESS-01"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "核心与试点的构造/默认值/静态和实例 API 快照，其余包由 01/02 步补齐；登记契约/版本/固定测试 ID/命令/报告与负责任务",
       "acceptance": "真实发布包反射与旧用户调用可重跑，未验证项明确",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-BASE-02-public-api.md",
+        "baselines/public-api.json",
+        "baselines/api-coverage.md"
+      ]
     },
     {
       "id": "BASE-03",

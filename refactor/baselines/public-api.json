@@ -1,0 +1,3785 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-02",
+  "sourceCommit": "833cc116",
+  "browserSurface": "Codex in-app browser",
+  "report": {
+    "kind": "public-api",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "language": "zh-CN"
+    },
+    "scripts": [
+      "/releases/artplayer/dist/artplayer.js",
+      "/releases/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js",
+      "/fixtures/api.js"
+    ],
+    "checks": [
+      {
+        "id": "API-01.version",
+        "passed": true
+      },
+      {
+        "id": "API-01.defaults-independent",
+        "passed": true
+      },
+      {
+        "id": "API-01.default-language",
+        "passed": true
+      },
+      {
+        "id": "API-01.instance-registration",
+        "passed": true
+      },
+      {
+        "id": "API-01.container-selector",
+        "passed": true
+      },
+      {
+        "id": "API-02.video",
+        "passed": true
+      },
+      {
+        "id": "API-02.bound-query",
+        "passed": true
+      },
+      {
+        "id": "API-06.sync-chapter",
+        "passed": true
+      },
+      {
+        "id": "API-06.add-return",
+        "passed": true
+      },
+      {
+        "id": "API-06.result-call",
+        "passed": true
+      },
+      {
+        "id": "API-04.on-return",
+        "passed": true
+      },
+      {
+        "id": "API-04.off",
+        "passed": true
+      },
+      {
+        "id": "API-05.destroy-return",
+        "passed": true
+      },
+      {
+        "id": "API-05.instance-cleanup",
+        "passed": true
+      }
+    ],
+    "errors": [],
+    "snapshot": {
+      "static": {
+        "ASPECT_RATIO": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "AUTO_ORIENTATION_TIME": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "AUTO_PLAYBACK_MAX": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "AUTO_PLAYBACK_MIN": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "AUTO_PLAYBACK_TIMEOUT": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "CONTEXTMENU": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "CONTROL_HIDE_TIME": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "DBCLICK_FULLSCREEN": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "DBCLICK_TIME": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "DEBUG": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "Emitter": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "FAST_FORWARD_TIME": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "FAST_FORWARD_VALUE": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "FLIP": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "FULLSCREEN_WEB_IN_BODY": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "INFO_LOOP_TIME": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "LOG_VERSION": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "MOBILE_CLICK_PLAY": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "MOBILE_DBCLICK_PLAY": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "NOTICE_TIME": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "PLAYBACK_RATE": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "RECONNECT_SLEEP_TIME": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "RECONNECT_TIME_MAX": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "REMOVE_SRC_WHEN_DESTROY": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "RESIZE_TIME": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "SCROLL_GAP": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "SCROLL_TIME": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "SEEK_STEP": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "SETTING_ITEM_HEIGHT": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "SETTING_ITEM_WIDTH": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "SETTING_WIDTH": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "STYLE": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "string"
+        },
+        "TOUCH_MOVE_RATIO": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "USE_RAF": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "VOLUME_STEP": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "config": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "html": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "instances": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "kindOf": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "length": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": false,
+          "type": "number"
+        },
+        "name": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": false,
+          "type": "string"
+        },
+        "option": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "prototype": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "object"
+        },
+        "scheme": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "utils": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "validator": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "version": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        }
+      },
+      "prototype": {
+        "constructor": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "destroy": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "proxy": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "query": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "reset": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "video": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        }
+      },
+      "emitterPrototype": {
+        "constructor": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "emit": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "off": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "on": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "once": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        }
+      },
+      "defaults": {
+        "airplay": false,
+        "aspectRatio": false,
+        "autoMini": false,
+        "autoOrientation": false,
+        "autoPlayback": false,
+        "autoSize": false,
+        "autoplay": false,
+        "backdrop": true,
+        "container": "#artplayer",
+        "contextmenu": [],
+        "controls": [],
+        "cssVar": {},
+        "customType": {},
+        "fastForward": false,
+        "flip": false,
+        "fullscreen": false,
+        "fullscreenWeb": false,
+        "gesture": true,
+        "highlight": [],
+        "hotkey": true,
+        "i18n": {},
+        "icons": {},
+        "id": "",
+        "isLive": false,
+        "lang": {
+          "$environment": "navigator.language.toLowerCase()"
+        },
+        "layers": [],
+        "lock": false,
+        "loop": false,
+        "miniProgressBar": false,
+        "moreVideoAttr": {
+          "controls": false,
+          "preload": "metadata"
+        },
+        "muted": false,
+        "mutex": true,
+        "pip": false,
+        "playbackRate": false,
+        "playsInline": true,
+        "plugins": [],
+        "poster": "",
+        "proxy": {
+          "$undefined": true
+        },
+        "quality": [],
+        "screenshot": false,
+        "setting": false,
+        "settings": [],
+        "subtitle": {
+          "encoding": "utf-8",
+          "escape": true,
+          "name": "",
+          "onVttLoad": {
+            "$function": true
+          },
+          "style": {},
+          "type": "",
+          "url": ""
+        },
+        "subtitleOffset": false,
+        "theme": "#f00",
+        "thumbnails": {
+          "column": 10,
+          "height": 0,
+          "number": 60,
+          "scale": 1,
+          "url": "",
+          "width": 0
+        },
+        "type": "",
+        "url": "",
+        "useSSR": false,
+        "volume": 0.7
+      },
+      "constants": {
+        "ASPECT_RATIO": [
+          "default",
+          "4:3",
+          "16:9"
+        ],
+        "AUTO_ORIENTATION_TIME": 200,
+        "AUTO_PLAYBACK_MAX": 10,
+        "AUTO_PLAYBACK_MIN": 5,
+        "AUTO_PLAYBACK_TIMEOUT": 3000,
+        "CONTEXTMENU": true,
+        "CONTROL_HIDE_TIME": 3000,
+        "DBCLICK_FULLSCREEN": true,
+        "DBCLICK_TIME": 300,
+        "DEBUG": false,
+        "FAST_FORWARD_TIME": 1000,
+        "FAST_FORWARD_VALUE": 3,
+        "FLIP": [
+          "normal",
+          "horizontal",
+          "vertical"
+        ],
+        "FULLSCREEN_WEB_IN_BODY": true,
+        "INFO_LOOP_TIME": 1000,
+        "LOG_VERSION": true,
+        "MOBILE_CLICK_PLAY": false,
+        "MOBILE_DBCLICK_PLAY": true,
+        "NOTICE_TIME": 2000,
+        "PLAYBACK_RATE": [
+          0.5,
+          0.75,
+          1,
+          1.25,
+          1.5,
+          2
+        ],
+        "RECONNECT_SLEEP_TIME": 1000,
+        "RECONNECT_TIME_MAX": 5,
+        "REMOVE_SRC_WHEN_DESTROY": true,
+        "RESIZE_TIME": 200,
+        "SCROLL_GAP": 50,
+        "SCROLL_TIME": 200,
+        "SEEK_STEP": 5,
+        "SETTING_ITEM_HEIGHT": 35,
+        "SETTING_ITEM_WIDTH": 200,
+        "SETTING_WIDTH": 250,
+        "TOUCH_MOVE_RATIO": 0.5,
+        "USE_RAF": false,
+        "VOLUME_STEP": 0.1
+      },
+      "config": {
+        "events": [
+          "abort",
+          "canplay",
+          "canplaythrough",
+          "durationchange",
+          "emptied",
+          "ended",
+          "error",
+          "loadeddata",
+          "loadedmetadata",
+          "loadstart",
+          "pause",
+          "play",
+          "playing",
+          "progress",
+          "ratechange",
+          "seeked",
+          "seeking",
+          "stalled",
+          "suspend",
+          "timeupdate",
+          "volumechange",
+          "waiting"
+        ],
+        "methods": [
+          "addTextTrack",
+          "canPlayType",
+          "load",
+          "play",
+          "pause"
+        ],
+        "properties": [
+          "audioTracks",
+          "autoplay",
+          "buffered",
+          "controller",
+          "controls",
+          "crossOrigin",
+          "currentSrc",
+          "currentTime",
+          "defaultMuted",
+          "defaultPlaybackRate",
+          "duration",
+          "ended",
+          "error",
+          "loop",
+          "mediaGroup",
+          "muted",
+          "networkState",
+          "paused",
+          "playbackRate",
+          "played",
+          "preload",
+          "readyState",
+          "seekable",
+          "seeking",
+          "src",
+          "startDate",
+          "textTracks",
+          "videoTracks",
+          "volume"
+        ],
+        "prototypes": [
+          "width",
+          "height",
+          "videoWidth",
+          "videoHeight",
+          "poster",
+          "webkitDecodedFrameCount",
+          "webkitDroppedFrameCount",
+          "playsInline",
+          "webkitSupportsFullscreen",
+          "webkitDisplayingFullscreen",
+          "onenterpictureinpicture",
+          "onleavepictureinpicture",
+          "disablePictureInPicture",
+          "cancelVideoFrameCallback",
+          "requestVideoFrameCallback",
+          "getVideoPlaybackQuality",
+          "requestPictureInPicture",
+          "webkitEnterFullScreen",
+          "webkitEnterFullscreen",
+          "webkitExitFullScreen",
+          "webkitExitFullscreen"
+        ]
+      },
+      "utilityDescriptors": {
+        "ArtPlayerError": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "addClass": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "append": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "assToVtt": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "capitalize": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "clamp": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "createElement": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "debounce": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "def": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "download": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "errorHandle": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "escape": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "get": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "getComposedPath": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "getExt": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "getIcon": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "getRect": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "getStyle": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "has": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "hasClass": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "includeFromEvent": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "inverseClass": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "isBrowser": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "boolean"
+        },
+        "isIOS": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "boolean"
+        },
+        "isIOS13": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "boolean"
+        },
+        "isInViewport": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "isMobile": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "boolean"
+        },
+        "isSafari": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "boolean"
+        },
+        "loadImg": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "mergeDeep": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "query": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "queryAll": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "remove": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "removeClass": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "replaceElement": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "secondToTime": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "setStyle": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "setStyleText": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "setStyles": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "siblings": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "sleep": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "srtToVtt": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "supportsFlex": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "throttle": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "tooltip": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "unescape": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "userAgent": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "string"
+        },
+        "vttToBlob": {
+          "enumerable": true,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        }
+      },
+      "instance": {
+        "airplay": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "aspectRatio": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "attr": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "autoHeight": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "autoSize": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "backward": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "bottom": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "contextmenu": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "controls": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "cssVar": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "currentTime": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "duration": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "e": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "events": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "flip": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "forward": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "fullscreenWeb": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "getBlobUrl": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "getDataURL": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "height": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "hotkey": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "i18n": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "icons": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "id": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "info": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "isDestroy": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isFocus": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isInput": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isLock": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isReady": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isRotate": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "layers": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "left": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "loaded": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "loadedTime": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "loading": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "mask": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "mini": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "muted": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "notice": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "option": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "pause": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "pip": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "play": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "playbackRate": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "played": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "player": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "playing": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "plugins": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "poster": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "quality": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "rect": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "right": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "screenshot": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "seek": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "setting": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "state": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "storage": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "subtitle": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "subtitleOffset": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "switch": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "switchQuality": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "switchUrl": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "template": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "theme": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "thumbnails": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "toggle": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "top": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "type": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "url": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "volume": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "width": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "x": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "y": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        }
+      },
+      "instanceResolved": {
+        "airplay": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "aspectRatio": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "attr": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "autoHeight": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "autoSize": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "backward": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "bottom": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "constructor": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "contextmenu": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "controls": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "cssVar": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "currentTime": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "destroy": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "duration": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "e": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "emit": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "events": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "flip": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "forward": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "fullscreenWeb": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "getBlobUrl": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "getDataURL": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "height": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "hotkey": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "i18n": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "icons": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "id": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "number"
+        },
+        "info": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "isDestroy": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isFocus": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isInput": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isLock": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isReady": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "isRotate": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "boolean"
+        },
+        "layers": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "left": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "loaded": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "loadedTime": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "loading": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "mask": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "mini": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "muted": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "notice": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "off": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "on": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "once": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "option": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "pause": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "pip": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "play": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "playbackRate": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "played": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "player": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "playing": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "plugins": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "poster": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "proxy": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "quality": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "query": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "rect": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "reset": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        },
+        "right": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "screenshot": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "seek": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "setting": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "state": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "storage": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "subtitle": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "subtitleOffset": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "switch": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "undefined",
+          "set": "function"
+        },
+        "switchQuality": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "switchUrl": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "template": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "object"
+        },
+        "theme": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "thumbnails": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "toggle": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": false,
+          "type": "function"
+        },
+        "top": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "type": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "url": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "video": {
+          "enumerable": false,
+          "configurable": true,
+          "get": "function",
+          "set": "undefined"
+        },
+        "volume": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "function"
+        },
+        "width": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "x": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        },
+        "y": {
+          "enumerable": false,
+          "configurable": false,
+          "get": "function",
+          "set": "undefined"
+        }
+      },
+      "chapterFactory": {
+        "length": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": false,
+          "type": "number"
+        },
+        "name": {
+          "enumerable": false,
+          "configurable": true,
+          "writable": false,
+          "type": "string"
+        },
+        "prototype": {
+          "enumerable": false,
+          "configurable": false,
+          "writable": true,
+          "type": "object"
+        }
+      },
+      "chapterResult": {
+        "name": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "string"
+        },
+        "update": {
+          "enumerable": true,
+          "configurable": true,
+          "writable": true,
+          "type": "function"
+        }
+      },
+      "integrations": {
+        "template": {
+          "own": {
+            "$bottom": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$container": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$contextmenu": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$controls": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$controlsCenter": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$controlsLeft": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$controlsRight": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$danmuku": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$info": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$infoClose": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$infoPanel": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$layer": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$loading": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$mask": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$notice": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$noticeInner": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$player": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$poster": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$progress": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$setting": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$state": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$subtitle": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$track": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$video": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "query": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "prototype": {
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "destroy": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "query": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "resolved": {
+            "$bottom": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$container": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$contextmenu": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$controls": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$controlsCenter": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$controlsLeft": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$controlsRight": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$danmuku": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$info": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$infoClose": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$infoPanel": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$layer": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$loading": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$mask": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$notice": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$noticeInner": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$player": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$poster": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$progress": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$setting": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$state": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$subtitle": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$track": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "$video": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "destroy": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "query": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          }
+        },
+        "events": {
+          "own": {
+            "bindGlobalEvents": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "destroyEvents": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "hover": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "proxy": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "prototype": {
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "destroy": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "hover": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "proxy": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "remove": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "resolved": {
+            "bindGlobalEvents": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "destroy": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "destroyEvents": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "hover": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "proxy": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "remove": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          }
+        },
+        "controls": {
+          "own": {
+            "$parent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "isHover": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "boolean"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "playAndPause": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "progress": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "thumbnails": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "time": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "timer": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "volume": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            }
+          },
+          "prototype": {
+            "add": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "check": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "selector": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "resolved": {
+            "$parent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "check": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "isHover": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "boolean"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "playAndPause": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "progress": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "selector": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "show": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "function"
+            },
+            "thumbnails": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "time": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "timer": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "toggle": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "volume": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            }
+          }
+        },
+        "setting": {
+          "own": {
+            "$parent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "active": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "option": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "prototype": {
+            "add": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "builtin": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "undefined"
+            },
+            "check": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "createHeader": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "createItem": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "find": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "format": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "inactivate": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "remove": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "render": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "resize": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "traverse": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "resolved": {
+            "$parent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "active": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "builtin": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "undefined"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "check": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "createHeader": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "createItem": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "find": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "format": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "inactivate": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "option": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "render": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "resize": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "show": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "function"
+            },
+            "toggle": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "traverse": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          }
+        },
+        "contextmenu": {
+          "own": {
+            "$parent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "close": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "info": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "version": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            }
+          },
+          "prototype": {
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "resolved": {
+            "$parent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "close": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "info": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "show": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "function"
+            },
+            "toggle": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "version": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            }
+          }
+        },
+        "layers": {
+          "own": {
+            "$parent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "prototype": {
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "resolved": {
+            "$parent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "show": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "function"
+            },
+            "toggle": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          }
+        },
+        "plugins": {
+          "own": {
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "artplayerPluginChapter": {
+              "enumerable": false,
+              "configurable": false,
+              "writable": false,
+              "type": "object"
+            },
+            "baselineProbe": {
+              "enumerable": false,
+              "configurable": false,
+              "writable": false,
+              "type": "object"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            }
+          },
+          "prototype": {
+            "add": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "next": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "resolved": {
+            "add": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "artplayerPluginChapter": {
+              "enumerable": false,
+              "configurable": false,
+              "writable": false,
+              "type": "object"
+            },
+            "baselineProbe": {
+              "enumerable": false,
+              "configurable": false,
+              "writable": false,
+              "type": "object"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "next": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          }
+        },
+        "storage": {
+          "own": {
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "settings": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            }
+          },
+          "prototype": {
+            "clear": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "del": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "get": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "set": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "resolved": {
+            "clear": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "del": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "get": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "set": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "settings": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            }
+          }
+        },
+        "subtitle": {
+          "own": {
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "destroyEvent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "option": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "prototype": {
+            "activeCues": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "undefined"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "createTrack": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "cues": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "undefined"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "style": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "switch": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "textTrack": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "undefined"
+            },
+            "update": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "url": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "function"
+            }
+          },
+          "resolved": {
+            "activeCues": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "undefined"
+            },
+            "add": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "cache": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "createTrack": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "cues": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "undefined"
+            },
+            "destroyEvent": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "id": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "number"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "name": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "string"
+            },
+            "option": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "remove": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "show": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "function"
+            },
+            "style": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "switch": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "textTrack": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "undefined"
+            },
+            "toggle": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "url": {
+              "enumerable": false,
+              "configurable": true,
+              "get": "function",
+              "set": "function"
+            }
+          }
+        },
+        "i18n": {
+          "own": {
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "language": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "languages": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            }
+          },
+          "prototype": {
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "get": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "update": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          },
+          "resolved": {
+            "art": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "constructor": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "get": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "init": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            },
+            "language": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "languages": {
+              "enumerable": true,
+              "configurable": true,
+              "writable": true,
+              "type": "object"
+            },
+            "update": {
+              "enumerable": false,
+              "configurable": true,
+              "writable": true,
+              "type": "function"
+            }
+          }
+        }
+      }
+    },
+    "capture": {
+      "capturedAt": "2026-09-10T11:31:33.847Z",
+      "releases": [
+        {
+          "name": "artplayer",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js",
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "version": "1.1.0",
+          "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+          "member": "package/dist/artplayer-plugin-chapter.js",
+          "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+        }
+      ],
+      "fixtureHashAlgorithm": "sha256-lf",
+      "fixtures": {
+        "api.html": "b19a20488892bfbbc7b8cc3d325a0472ce2c09259642443e193a00399b27b069",
+        "api.js": "296785fce39dda7f87b603ee16983f5dd305aada511b6f7fe7ae45ad07669dbf"
+      }
+    }
+  },
+  "verification": {
+    "repeatedCaptureAt": "2026-09-10T11:31:50.198Z",
+    "snapshotSha256": "fa95270e4f8fe0d5b8af2517b7be2e04d60d2d4ebbcbb2063a9ffbb1268ebdfe",
+    "repeatComparison": "equal"
+  }
+}
