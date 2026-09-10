@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-09-10T10:34:31.411Z",
+  "workspaceBaselineCommit": "40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f",
+  "captureStartCommit": "7a5354e356b7d6af5b3daf9280699e2e90e05a7d",
+  "registry": "https://registry.npmjs.org",
+  "observations": [
+    {
+      "name": "artplayer",
+      "workspaceVersion": "5.4.1",
+      "requestedMetadataStatus": 404,
+      "observedLatestStable": "5.4.0",
+      "impact": "Use published 5.4.0 for consumers, preserve workspace 5.4.1 as separate source baseline; target remains 6.0.0."
+    },
+    {
+      "issue": "Registry gitHead is stale for both releases",
+      "impact": "Keep registry claims and matching-version tag separately; do not assert tarball is reproduced by either source commit."
+    }
+  ],
+  "releases": [
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer/5.4.0",
+      "tarball": "https://registry.npmjs.org/artplayer/-/artplayer-5.4.0.tgz",
+      "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+      "sha256": "42b269a66b9658d53f9a92572bb36d656ea9af56254a387b3a69c7ddea43979e",
+      "archiveBytes": 133746,
+      "manifest": {
+        "name": "artplayer",
+        "version": "5.4.0",
+        "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.mjs",
+            "require": "./dist/artplayer.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.legacy.js",
+            "require": "./dist/artplayer.legacy.js"
+          },
+          "./i18n/*": {
+            "types": "./types/i18n.d.ts",
+            "import": "./dist/i18n/*.mjs",
+            "require": "./dist/i18n/*.js"
+          }
+        },
+        "main": "./dist/artplayer.js",
+        "module": "./dist/artplayer.mjs",
+        "types": "./types/artplayer.d.ts",
+        "typesVersions": {
+          "*": {
+            "i18n/*": [
+              "types/i18n.d.ts"
+            ],
+            "legacy": [
+              "types/artplayer.d.ts"
+            ]
+          }
+        },
+        "legacy": "./dist/artplayer.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "option-validator": "^2.0.6"
+        }
+      },
+      "files": {
+        "package/README.md": "b2e7985fe1cb42822e6a862acedf96bfebdd5a4800ae8e7817fd79e992881748",
+        "package/dist/artplayer.js": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "package/dist/artplayer.legacy.js": "cef83f9dac8a343060329ea6c5d603f0e7811fd0fd6c1590ae1c47f9e0afc9bb",
+        "package/dist/artplayer.mjs": "a1800b37ac7549f52fa960fe28bc6e1c69ec18bd4bc9a7e2534aecc3df10eb3e",
+        "package/dist/i18n/ar.js": "61c43469ee95a00dc624583f418653e3dcbf48b24ae6a4c203ad986234852365",
+        "package/dist/i18n/ar.mjs": "68922fdc9f80d3321ea0654c8ff8f5875b6715103d2b14ffcf17f93738b39cf9",
+        "package/dist/i18n/cs.js": "ad7bbf8853204a6955ef84bfbd932cab3f141a7e73a8145f28ba7a5b2b83b7c0",
+        "package/dist/i18n/cs.mjs": "29a489be767fda9d46b59c9adbaad323f17a5e67daf7f7aa78b7ce8fb5b4d63c",
+        "package/dist/i18n/es.js": "aaa95cc9645b734c58fba06fdbcdda962c4cb3a0e7eb6206f06d6168208cd86b",
+        "package/dist/i18n/es.mjs": "331d2ef74da2eec8f3304fec0b5340c795d9c1eec24e08167c9a7b66bf30973b",
+        "package/dist/i18n/fa.js": "c998467261cbdfd2c3fb16c0ae4b2c48c409f42f41aea35ed94766f1e12819d5",
+        "package/dist/i18n/fa.mjs": "b4c98894b46975cebf5ea9088bcf0b5bdfd408bc3c82f4e2e9128133c7de2d4d",
+        "package/dist/i18n/fr.js": "6b06e16b1fb01c8695fb5c10b32a00421399180de5dc5d845ce17010f2fd3e66",
+        "package/dist/i18n/fr.mjs": "abe8e3548fa7304f302e2c74818a6176edee8c3b65e33cb6f62e96d130749ee5",
+        "package/dist/i18n/id.js": "a5832c4bfc03c7f16418bf4b324d9773895541dc823ece9114741794737aad74",
+        "package/dist/i18n/id.mjs": "a40a433be6ca1ac1ee1810fe805ee60784d349e59b9ad82ea80201d660db4e68",
+        "package/dist/i18n/pl.js": "2491487062bdfc91d60f17c6e9a83ee196c991216d15f525fe3536b98873da2c",
+        "package/dist/i18n/pl.mjs": "ad8ea2c03785edbfe1f35761bec21b8a04213f9fa88a794d850bb3973564930f",
+        "package/dist/i18n/ru.js": "2d3a9ee6533cb6fa961f0a24a25ce63cc76992fca17e1769b6fa75104f8a1529",
+        "package/dist/i18n/ru.mjs": "a89b8c36cfd7c181c2b31aa823deda3d7c37b56b2b81746338c52ea1c1d93352",
+        "package/dist/i18n/tr.js": "438b06a4c3f479a2901b0085eaa7bdba8eaef87bdb07ff3faa559c85403fe433",
+        "package/dist/i18n/tr.mjs": "cc96f9cbb9c1587d5cd8f25b0b9800678ad76e93de089ae42c38dee16e6fe8fa",
+        "package/dist/i18n/vi.js": "1ffbd62843a902ea2967eab46432d3fc548f5633e53eed104314b523cacc46a8",
+        "package/dist/i18n/vi.mjs": "7872ded84622bcda20e8c1d70c597c2ba071b50701900efa47cc4683ee17f1a2",
+        "package/dist/i18n/zh-tw.js": "2d43577f98456488196921e1ec721695a95e1b8c827077286b02ce3fb987e8ff",
+        "package/dist/i18n/zh-tw.mjs": "7ec638b4babe59d3ab1d3e64abdd74a96fefb260a50e2cd7240f8d50a1340925",
+        "package/package.json": "d3dd8bb2f4c0629b60a88ca8328f5813f33ab56502989b63de31446cc9516d99",
+        "package/types/artplayer.d.ts": "f2bc49e8b708ec27d9f5c138cf32099318abbb5e6135a7ee723b20511dab7026",
+        "package/types/component.d.ts": "08a960348dc459a9ff529ab8e5bdae5fc2fd76448028d7743f58480ea8414cbd",
+        "package/types/config.d.ts": "97322dce493ac3d1160f426e4fd0ba89fa746f7d66bfbeabd9f45454198560ad",
+        "package/types/cssVar.d.ts": "2ff9827aa10bf326f60f6cda7556a94fdcabafba529185a1ceae46d865f33697",
+        "package/types/events.d.ts": "3d9ee111908d93efb4c531cdb6c82d698526328d78ecf77e2488d4aa1d43a310",
+        "package/types/i18n.d.ts": "01e7d7e7f775166eed6dbc6b86feb26306302fcbfe33fa01b7e363a14b3ef2b0",
+        "package/types/icons.d.ts": "61ce1b0cb9bc7488263b644419b5fd5a13e72de1493c8113eee81d5174f1234b",
+        "package/types/option.d.ts": "b4735183a4c9dde7620e178950df9f9d1c18bbaa79ef8f9f85ec6c51a5e47662",
+        "package/types/player.d.ts": "bce1aa214bfb10b017574f6175a400c059b4d56041c4b2329cc0873c66ac94e4",
+        "package/types/quality.d.ts": "dcca8c0f5b5c25373f85825a274fc3ee8beeffd7c8b2a978468e039ff4946a9e",
+        "package/types/setting.d.ts": "a60ed81da780439a55ee22ebe2611d936bd45da0d98e6bf44c92e9a5d9047492",
+        "package/types/subtitle.d.ts": "92f711ad0f7924e609ad4425cd26d19c73eb027cccddc6d89fcf9b8e334db065",
+        "package/types/template.d.ts": "b5f9bff43b4816bd2e3531a3a1750b8014fcf63d421fbc786341cedb1429035c",
+        "package/types/utils.d.ts": "4405a0d40628eaf40357fe31286f26f21b09b14d74581fff32358bb78fd789f4"
+      },
+      "sourceMapping": {
+        "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+        "versionAtRegistryGitHead": "5.3.1",
+        "versionTag": "5.4.0",
+        "versionTagCommit": "65e51751cd0c0db0bd00b5d7deb925d52cfaf3ef",
+        "versionAtTag": "5.4.0",
+        "exactSourceReproduction": "not-yet-verified"
+      }
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-chapter/1.1.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-chapter/-/artplayer-plugin-chapter-1.1.0.tgz",
+      "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+      "sha256": "4c3173661854ff96f643a479c0f1c2db7ce9e54681523bd059a7dd9bd77eeada",
+      "archiveBytes": 4221,
+      "manifest": {
+        "name": "artplayer-plugin-chapter",
+        "version": "1.1.0",
+        "description": "chapter plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-chapter.d.ts",
+            "import": "./dist/artplayer-plugin-chapter.mjs",
+            "require": "./dist/artplayer-plugin-chapter.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-chapter.d.ts",
+            "import": "./dist/artplayer-plugin-chapter.legacy.js",
+            "require": "./dist/artplayer-plugin-chapter.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-chapter.js",
+        "module": "./dist/artplayer-plugin-chapter.mjs",
+        "types": "./types/artplayer-plugin-chapter.d.ts",
+        "legacy": "./dist/artplayer-plugin-chapter.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "files": {
+        "package/README.md": "04f1d3338acdf7c4f56ac3596d7c5c3282f508400208cb6142da064ced7e72dc",
+        "package/dist/artplayer-plugin-chapter.js": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "package/dist/artplayer-plugin-chapter.legacy.js": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "package/dist/artplayer-plugin-chapter.mjs": "61342a069b84e0731d44a2464d0dfe637d1514d0037c740371fc866c516d2209",
+        "package/package.json": "233ed9b732e14cb06955536157ba1650c4cffded74015a2417942e70ee5aca04",
+        "package/types/artplayer-plugin-chapter.d.ts": "4ce65f8a55ed8f53ddd7f1cd7324923aacefeaee209d58d5981e1434050a6962"
+      },
+      "sourceMapping": {
+        "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+        "versionAtRegistryGitHead": "1.0.3",
+        "versionTag": "5.4.0",
+        "versionTagCommit": "65e51751cd0c0db0bd00b5d7deb925d52cfaf3ef",
+        "versionAtTag": "1.1.0",
+        "exactSourceReproduction": "not-yet-verified"
+      }
+    }
+  ],
+  "remainingPackages": [
+    {
+      "name": "artplayer-plugin-ads",
+      "workspaceVersion": "2.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "workspaceVersion": "2.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "workspaceVersion": "5.3.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "workspaceVersion": "1.2.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "workspaceVersion": "1.2.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "workspaceVersion": "1.2.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "workspaceVersion": "4.4.0",
+      "releaseBaseline": "not-yet-verified"
+    },
+    {
+      "name": "artplayer-vitepress",
+      "workspaceVersion": "1.1.0",
+      "releaseBaseline": "not-yet-verified"
+    }
+  ]
+}
