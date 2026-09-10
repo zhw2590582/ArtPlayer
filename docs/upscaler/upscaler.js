@@ -69,6 +69,8 @@ class Upscaler {
     this.messageHandlers = {};
     this.progressCallback = null;
     this.processingType = null;
+    this.currentReject = null;
+    this.currentTimeoutId = null;
 
     this.realtimeLoopId = null;
     this.realtimeState = null;
@@ -91,8 +93,37 @@ class Upscaler {
       this.workerInstance = new Worker(this.workerUrl);
       this.workerInstance.onmessage = (event) =>
         this.handleWorkerMessage(event);
+      this.workerInstance.onerror = (error) => {
+        console.error("[Upscaler] Worker error:", error);
+        this.rejectCurrent(
+          new Error(
+            error.message || "Worker crashed unexpectedly",
+          ),
+        );
+      };
+      this.workerInstance.onmessageerror = (error) => {
+        console.error("[Upscaler] Worker message error:", error);
+        this.rejectCurrent(
+          new Error("Worker message serialization error"),
+        );
+      };
     }
     return this.workerInstance;
+  }
+
+  rejectCurrent(error) {
+    if (this.currentReject) {
+      const reject = this.currentReject;
+      this.currentReject = null;
+      if (this.currentTimeoutId) {
+        clearTimeout(this.currentTimeoutId);
+        this.currentTimeoutId = null;
+      }
+      // Clean up whichever blob handler is currently registered
+      delete this.messageHandlers.videoBlob;
+      delete this.messageHandlers.imageBlob;
+      reject(error);
+    }
   }
 
   static extractProgressValue(data) {
@@ -124,7 +155,12 @@ class Upscaler {
 
     const { cmd } = data;
 
-    if (cmd === "progress") {
+    if (cmd === "error") {
+      const errorMsg =
+        data.data || data.message || "Unknown worker error";
+      console.error("[Upscaler] Worker reported error:", errorMsg);
+      this.rejectCurrent(new Error(errorMsg));
+    } else if (cmd === "progress") {
       const progress = Upscaler.extractProgressValue(data);
       if (progress !== null && this.progressCallback) {
         this.progressCallback(progress);
@@ -215,15 +251,22 @@ class Upscaler {
   createBlobPromise(blobType, timeout) {
     return new Promise((resolve, reject) => {
       const timeoutId = setTimeout(() => {
+        this.currentReject = null;
+        this.currentTimeoutId = null;
         if (this.messageHandlers[blobType]) {
           delete this.messageHandlers[blobType];
           reject(new Error(`${blobType} processing timeout`));
         }
       }, timeout);
 
+      this.currentReject = reject;
+      this.currentTimeoutId = timeoutId;
+
       this.messageHandlers[blobType] = (msg) => {
         delete this.messageHandlers[blobType];
         clearTimeout(timeoutId);
+        this.currentReject = null;
+        this.currentTimeoutId = null;
         const blob = msg[blobType] || msg.data;
         if (blob instanceof Blob) {
           resolve(blob);
@@ -247,6 +290,9 @@ class Upscaler {
     if (!imageFile) throw new Error("Image file is required");
     const size = networkSize || this.networkSize;
     this.validateNetworkSize(size);
+
+    // Reject any stale promise from a previous aborted operation
+    this.rejectCurrent(new Error("Aborted by new operation"));
 
     this.processingType = "image";
     const arrayBuffer = await imageFile.arrayBuffer();
@@ -318,6 +364,9 @@ class Upscaler {
     if (!Upscaler.isVideoSupported()) {
       throw new Error("WebCodecs API not supported. Requires Chrome 94+");
     }
+
+    // Reject any stale promise from a previous aborted operation
+    this.rejectCurrent(new Error("Aborted by new operation"));
 
     this.processingType = "video";
     const { width, height, duration } = await Upscaler.loadVideoMetadata(
@@ -597,6 +646,65 @@ class Upscaler {
     if (typeof callback === "function") {
       this.progressCallback = callback;
     }
+  }
+
+  async upscaleVideoBatch(files, options = {}) {
+    const {
+      networkSize,
+      directoryHandle,
+      onFileStart,
+      onFileProgress,
+      onFileComplete,
+      onFileError,
+    } = options;
+
+    const results = [];
+    const size = networkSize || this.networkSize;
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (!file.type.startsWith("video/")) {
+        const err = new Error(`Skipped (not a video): ${file.name}`);
+        if (onFileError) onFileError(file, i, err);
+        results.push({ file, error: err, success: false });
+        continue;
+      }
+
+      try {
+        if (onFileStart) onFileStart(file, i, files.length);
+
+        this.onProgress((progress) => {
+          if (onFileProgress) onFileProgress(file, i, progress);
+        });
+
+        const blob = await this.upscaleVideo(file, size);
+
+        if (directoryHandle) {
+          const outName = this._buildOutputName(file.name);
+          const fh = await directoryHandle.getFileHandle(outName, {
+            create: true,
+          });
+          const writable = await fh.createWritable();
+          await writable.write(blob);
+          await writable.close();
+        }
+
+        if (onFileComplete) onFileComplete(file, i, blob);
+        results.push({ file, blob, success: true });
+      } catch (error) {
+        if (onFileError) onFileError(file, i, error);
+        results.push({ file, error, success: false });
+      }
+    }
+
+    this.progressCallback = null;
+    return results;
+  }
+
+  _buildOutputName(originalName) {
+    const dot = originalName.lastIndexOf(".");
+    const base = dot > 0 ? originalName.slice(0, dot) : originalName;
+    return `${base}_upscaled.mp4`;
   }
 
   dispose() {

@@ -125,12 +125,22 @@
                             type="file"
                             id="universalInput"
                             accept="video/*"
+                            multiple
                             class="sr-only"
                         />
-                        <label
-                            for="universalInput"
+                        <input
+                            type="file"
+                            id="folderInput"
+                            webkitdirectory
+                            directory
+                            class="sr-only"
+                        />
+                        <div
                             class="group relative flex flex-col w-full aspect-video cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-slate-300 overflow-hidden bg-gradient-to-br from-slate-50 to-gray-100 transition-all duration-200 hover:from-blue-50 hover:to-blue-100 hover:border-blue-300"
                             id="uploadLabel"
+                            ondrop="handleDrop(event)"
+                            ondragover="handleDragOver(event)"
+                            ondragleave="handleDragLeave(event)"
                         >
                             <!-- Upload Placeholder -->
                             <div
@@ -156,12 +166,34 @@
                                 </div>
                                 <span
                                     class="text-slate-700 font-medium text-sm sm:text-base mb-1"
-                                    >Choose a video file</span
+                                    >Choose videos to upscale</span
                                 >
                                 <span
-                                    class="text-slate-400 text-xs sm:text-sm mb-3 sm:mb-4"
-                                    >or drag and drop here</span
+                                    class="text-slate-400 text-xs sm:text-sm mb-4"
+                                    >Drag & drop, or use the buttons below</span
                                 >
+                                <div class="flex flex-wrap items-center justify-center gap-3">
+                                    <button
+                                        type="button"
+                                        onclick="event.preventDefault(); document.getElementById('universalInput').click()"
+                                        class="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-all"
+                                    >
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                        </svg>
+                                        Select Files
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onclick="event.preventDefault(); document.getElementById('folderInput').click()"
+                                        class="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 rounded-lg transition-all"
+                                    >
+                                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                        </svg>
+                                        Select Folder
+                                    </button>
+                                </div>
                                 <button
                                     type="button"
                                     onclick="loadSampleVideo(event)"
@@ -199,6 +231,7 @@
                                     class="w-full h-full object-contain pointer-events-none"
                                     muted
                                     playsinline
+                                    preload="metadata"
                                 ></video>
                                 <!-- Video Info Overlay -->
                                 <div
@@ -233,11 +266,120 @@
                                     ></span>
                                     <span
                                         class="text-white/80 text-xs flex-shrink-0"
-                                        >Click to change</span
+                                        >Click to browse</span
                                     >
                                 </div>
                             </div>
-                        </label>
+                        </div>
+                    </div>
+
+                    <!-- Usage Tips -->
+                    <div
+                        class="mb-6 rounded-xl border border-blue-100 bg-blue-50/60 p-4"
+                    >
+                        <div class="flex items-start gap-3">
+                            <svg
+                                class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                            </svg>
+                            <div class="flex-1">
+                                <p
+                                    class="text-sm font-medium text-slate-700 mb-2"
+                                >
+                                    Usage Guide
+                                </p>
+                                <ul
+                                    class="space-y-1.5 text-xs text-slate-600 leading-relaxed"
+                                >
+                                    <li class="flex items-start gap-2">
+                                        <span
+                                            class="text-blue-400 font-bold flex-shrink-0"
+                                            >1.</span
+                                        >
+                                        <span
+                                            ><strong
+                                                >Single file</strong
+                                            > — click "Select Files" and
+                                            choose one video to upscale and
+                                            preview with side-by-side
+                                            comparison.</span
+                                        >
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span
+                                            class="text-blue-400 font-bold flex-shrink-0"
+                                            >2.</span
+                                        >
+                                        <span
+                                            ><strong>Multiple files</strong
+                                            > — click "Select Files" and pick
+                                            multiple videos, or drag & drop
+                                            several files at once. They will
+                                            be processed sequentially.</span
+                                        >
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span
+                                            class="text-blue-400 font-bold flex-shrink-0"
+                                            >3.</span
+                                        >
+                                        <span
+                                            ><strong>Entire folder</strong
+                                            > — click "Select Folder" to pick
+                                            a directory. All videos inside
+                                            will be found and processed in
+                                            order.</span
+                                        >
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span
+                                            class="text-blue-400 font-bold flex-shrink-0"
+                                            >4.</span
+                                        >
+                                        <span
+                                            ><strong>Save location</strong
+                                            > — click "Choose folder…" to
+                                            auto-save all results to a
+                                            directory. Otherwise, use the
+                                            Download button per file.</span
+                                        >
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span
+                                            class="text-blue-400 font-bold flex-shrink-0"
+                                            >5.</span
+                                        >
+                                        <span
+                                            ><strong>Compare results</strong
+                                            > — after batch processing, click
+                                            any item in the right-side
+                                            result list to load it into the
+                                            comparison viewer.</span
+                                        >
+                                    </li>
+                                </ul>
+                                <div
+                                    class="mt-3 pt-3 border-t border-blue-100"
+                                >
+                                    <p class="text-xs text-slate-500">
+                                        <span class="font-medium">Tip:</span>
+                                        Folder upload and directory save
+                                        require Chrome or Edge. Processing
+                                        happens locally — your videos never
+                                        leave your device.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Network Selection -->
@@ -282,10 +424,66 @@
                         </div>
                     </div>
 
+                    <!-- Save Directory Selection -->
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6"
+                    >
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-slate-700 mb-0.5 sm:mb-1"
+                            >
+                                Save Directory
+                            </label>
+                            <p class="text-xs text-slate-400">
+                                Results auto-saved to this folder
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            id="selectDirBtn"
+                            onclick="selectSaveDirectory()"
+                            class="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-all self-start sm:self-auto"
+                        >
+                            <svg
+                                class="w-4 h-4 text-slate-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                                />
+                            </svg>
+                            <span id="dirLabel">Choose folder…</span>
+                        </button>
+                    </div>
+
+                    <!-- Batch File List -->
+                    <div id="batchFileList" class="hidden mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span
+                                class="text-sm font-medium text-slate-700"
+                                id="batchListTitle"
+                                >Files</span
+                            >
+                            <span
+                                class="text-xs text-slate-400"
+                                id="batchListCount"
+                            ></span>
+                        </div>
+                        <div
+                            id="batchFileItems"
+                            class="space-y-2 max-h-64 overflow-y-auto"
+                        ></div>
+                    </div>
+
                     <!-- Process Button -->
                     <button
                         id="processBtn"
-                        onclick="handleProcess()"
+                        onclick="handleBatchProcess()"
                         disabled
                         class="relative w-full rounded-xl px-4 py-3.5 text-sm font-semibold text-white overflow-hidden bg-gradient-to-b from-slate-800 to-slate-900 transition-all duration-200 hover:from-slate-700 hover:to-slate-800 hover:shadow-lg disabled:bg-slate-200 disabled:from-slate-200 disabled:to-slate-200 disabled:text-slate-400 disabled:shadow-none"
                     >
@@ -294,7 +492,7 @@
                             id="progressFill"
                         ></span>
                         <span id="progressText" class="relative z-10">
-                            Select a video to start
+                            Select videos to start
                         </span>
                     </button>
                 </div>
@@ -324,6 +522,9 @@
                     </div>
 
                     <div id="videoResultSection" class="hidden">
+                      <div class="flex flex-col lg:flex-row gap-5">
+                        <!-- Left: Comparison Viewer -->
+                        <div class="flex-1 min-w-0">
                         <div id="videoComparisonViewer" class="mb-5">
                             <div
                                 class="comparison-container relative w-full max-w-full rounded-xl overflow-hidden bg-slate-900 shadow-md select-none"
@@ -335,7 +536,7 @@
                                     loop
                                     muted
                                     playsinline
-                                    preload="auto"
+                                    preload="metadata"
                                 >
                                     <source
                                         id="resultVideoSourceEnhanced"
@@ -349,7 +550,7 @@
                                     class="comparison-img original absolute inset-0 w-full h-full bg-slate-900 object-contain"
                                     loop
                                     playsinline
-                                    preload="auto"
+                                    preload="metadata"
                                 >
                                     <source
                                         id="resultVideoSourceOriginal"
@@ -419,7 +620,7 @@
 
                         <!-- File Info -->
                         <div
-                            class="grid grid-cols-3 gap-2 sm:gap-3 mb-5 text-center"
+                            class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-5 text-center"
                         >
                             <div
                                 class="bg-white rounded-lg px-2 sm:px-3 py-2.5 sm:py-3 border border-slate-200"
@@ -447,6 +648,21 @@
                                 <div
                                     class="text-xs sm:text-sm font-medium text-slate-700"
                                     id="resultVideoSize"
+                                >
+                                    -
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white rounded-lg px-2 sm:px-3 py-2.5 sm:py-3 border border-slate-200"
+                            >
+                                <div
+                                    class="text-[10px] sm:text-xs text-slate-400 mb-0.5 sm:mb-1"
+                                >
+                                    Duration
+                                </div>
+                                <div
+                                    class="text-xs sm:text-sm font-medium text-slate-700"
+                                    id="durationVideoInfo"
                                 >
                                     -
                                 </div>
@@ -509,9 +725,87 @@
                                 Start Over
                             </button>
                         </div>
+                        </div>
+
+                        <!-- Right: Batch Result List -->
+                        <div
+                            id="batchResultPanel"
+                            class="hidden w-full lg:w-72 lg:flex-shrink-0"
+                        >
+                            <div
+                                class="bg-white rounded-xl border border-slate-200 p-4 sticky top-4"
+                            >
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-sm font-semibold text-slate-700"
+                                        >Results</span
+                                    >
+                                    <span
+                                        class="text-xs text-slate-400"
+                                        id="batchResultCount"
+                                    ></span
+                                    >
+                                </div>
+                                <div
+                                    id="batchResultItems"
+                                    class="space-y-2 max-h-[420px] overflow-y-auto"
+                                ></div>
+                                <p
+                                    class="text-xs text-slate-400 mt-3 leading-relaxed"
+                                >
+                                    Click a result to load it into the
+                                    comparison viewer.
+                                </p>
+                            </div>
+                        </div>
+                      </div>
+
+                        <!-- Comparison Data Panel (full width) -->
+                        <div
+                            id="comparisonDataPanel"
+                            class="hidden mt-5 rounded-xl border border-slate-200"
+                        >
+                            <div
+                                class="bg-slate-50 px-4 py-2 border-b border-slate-200"
+                            >
+                                <span
+                                    class="text-xs font-semibold text-slate-600 uppercase tracking-wide"
+                                    >Video Data Comparison</span
+                                >
+                            </div>
+                            <table
+                                class="w-full text-sm border-collapse"
+                            >
+                                <thead>
+                                    <tr class="border-b border-slate-200">
+                                        <th
+                                            class="text-left px-4 py-2 font-medium text-slate-400 text-xs"
+                                        >
+                                            Metric
+                                        </th>
+                                        <th
+                                            class="text-right px-4 py-2 font-medium text-slate-400 text-xs"
+                                        >
+                                            Original
+                                        </th>
+                                        <th
+                                            class="text-right px-4 py-2 font-medium text-slate-400 text-xs"
+                                        >
+                                            Upscaled
+                                        </th>
+                                        <th
+                                            class="text-right px-4 py-2 font-medium text-slate-400 text-xs"
+                                        >
+                                            Change
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    id="comparisonDataBody"
+                                    class="divide-y divide-slate-100"
+                                ></tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            </div>
 
             <!-- Features Section for SEO -->
             <section
@@ -645,7 +939,12 @@
             let currentOriginalUrl = null;
             let isComparisonDragging = false;
             let comparisonCleanup = null;
-            let currentVideoFile = null;
+            let currentVideoFiles = [];
+            let saveDirectoryHandle = null;
+            let isBatchProcessing = false;
+            let batchResults = [];
+            let selectedResultIndex = -1;
+            let batchFileStatuses = [];
 
             // Create a configurable Upscaler instance
             const upscaler = new Upscaler({
@@ -759,37 +1058,58 @@
                     "resultVideoEnhanced",
                 );
 
-                enhancedVideo.addEventListener("play", () =>
-                    originalVideo.play(),
-                );
-                enhancedVideo.addEventListener("pause", () =>
-                    originalVideo.pause(),
-                );
-                enhancedVideo.addEventListener("timeupdate", () => {
-                    if (
-                        Math.abs(
-                            originalVideo.currentTime -
-                                enhancedVideo.currentTime,
-                        ) > 0.1
-                    ) {
-                        originalVideo.currentTime = enhancedVideo.currentTime;
-                    }
-                });
-                enhancedVideo.addEventListener("seeking", () => {
-                    originalVideo.currentTime = enhancedVideo.currentTime;
-                });
+                // Use AbortController for video sync event listeners
+                const syncController = new AbortController();
+                const { signal } = syncController;
 
-                comparisonCleanup = setupComparisonDrag(
+                enhancedVideo.addEventListener(
+                    "play",
+                    () => originalVideo.play(),
+                    { signal },
+                );
+                enhancedVideo.addEventListener(
+                    "pause",
+                    () => originalVideo.pause(),
+                    { signal },
+                );
+                enhancedVideo.addEventListener(
+                    "timeupdate",
+                    () => {
+                        if (
+                            Math.abs(
+                                originalVideo.currentTime -
+                                    enhancedVideo.currentTime,
+                            ) > 0.1
+                        ) {
+                            originalVideo.currentTime = enhancedVideo.currentTime;
+                        }
+                    },
+                    { signal },
+                );
+                enhancedVideo.addEventListener(
+                    "seeking",
+                    () => {
+                        originalVideo.currentTime = enhancedVideo.currentTime;
+                    },
+                    { signal },
+                );
+
+                // Initialize drag handle
+                const dragCleanup = setupComparisonDrag(
                     container,
                     handle,
                     originalVideo,
                 );
 
-                enhancedVideo.autoplay = true;
-                enhancedVideo.play().catch(() => {});
+                // Combined cleanup: abort sync listeners + drag cleanup
+                comparisonCleanup = () => {
+                    syncController.abort();
+                    if (dragCleanup) dragCleanup();
+                };
             }
 
-            function formatDuration(seconds) {
+            function formatVideoDuration(seconds) {
+                if (!seconds || isNaN(seconds)) return "-";
                 if (seconds < 60) return `${Math.floor(seconds)}s`;
                 const m = Math.floor(seconds / 60);
                 const s = Math.floor(seconds % 60);
@@ -859,6 +1179,7 @@
                 // Create new URL for the video
                 previewVideoUrl = URL.createObjectURL(file);
                 previewVideo.src = previewVideoUrl;
+                previewVideo.pause();
 
                 // Show preview area, hide placeholder
                 placeholder.classList.add("hidden");
@@ -879,7 +1200,7 @@
                     const width = previewVideo.videoWidth;
                     const height = previewVideo.videoHeight;
                     const duration = previewVideo.duration;
-                    metaInfo.textContent = `${width}×${height} · ${formatDuration(duration)}`;
+                    metaInfo.textContent = `${width}×${height} · ${formatVideoDuration(duration)}`;
                 };
             }
 
@@ -914,7 +1235,7 @@
                 }
             }
 
-            // Watch file input, only allow video and control button state
+            // Watch file input — supports batch selection
             (function initFileInputWatcher() {
                 const fileInput = document.getElementById("universalInput");
                 const processBtn = document.getElementById("processBtn");
@@ -923,11 +1244,14 @@
                 processBtn.disabled = true;
 
                 fileInput.addEventListener("change", async () => {
-                    const file = fileInput.files[0];
-                    // If user cancelled selection, keep previous state
-                    if (!file) return;
+                    const allFiles = Array.from(fileInput.files);
+                    if (allFiles.length === 0) return;
 
-                    if (!file.type.startsWith("video/")) {
+                    const videoFiles = allFiles.filter((f) =>
+                        f.type.startsWith("video/"),
+                    );
+
+                    if (videoFiles.length === 0) {
                         alert(
                             "Only video files are supported, please choose again.",
                         );
@@ -935,19 +1259,630 @@
                         return;
                     }
 
+                    currentVideoFiles = videoFiles;
                     processBtn.disabled = false;
-                    const progressText =
-                        document.getElementById("progressText");
-                    if (progressText)
-                        progressText.textContent = "Start upscaling";
+                    document.getElementById("progressText").textContent =
+                        videoFiles.length === 1
+                            ? "Start upscaling"
+                            : `Start upscaling ${videoFiles.length} videos`;
 
-                    // Save file reference
-                    currentVideoFile = file;
-
-                    // Show video preview
-                    showVideoPreview(file);
+                    renderBatchFileList();
+                    showVideoPreview(videoFiles[0]);
                 });
             })();
+
+            // Watch folder input — uploads entire folder
+            (function initFolderInputWatcher() {
+                const folderInput =
+                    document.getElementById("folderInput");
+                const processBtn = document.getElementById("processBtn");
+                if (!folderInput || !processBtn) return;
+
+                folderInput.addEventListener("change", async () => {
+                    const allFiles = Array.from(folderInput.files);
+                    if (allFiles.length === 0) return;
+
+                    // Filter video files from the folder
+                    const videoFiles = allFiles.filter((f) =>
+                        f.type.startsWith("video/"),
+                    );
+
+                    if (videoFiles.length === 0) {
+                        alert(
+                            "No video files found in the selected folder.",
+                        );
+                        folderInput.value = "";
+                        return;
+                    }
+
+                    // Sort by path for consistent ordering
+                    videoFiles.sort((a, b) =>
+                        (a.webkitRelativePath || a.name).localeCompare(
+                            b.webkitRelativePath || b.name,
+                        ),
+                    );
+
+                    currentVideoFiles = videoFiles;
+                    processBtn.disabled = false;
+                    document.getElementById("progressText").textContent =
+                        `Start upscaling ${videoFiles.length} videos`;
+
+                    renderBatchFileList();
+                    showVideoPreview(videoFiles[0]);
+                    folderInput.value = "";
+                });
+            })();
+
+            // Drag & drop support for files and folders
+            function handleDragOver(event) {
+                event.preventDefault();
+                event.currentTarget.classList.add(
+                    "border-blue-400",
+                    "bg-blue-50",
+                );
+            }
+
+            function handleDragLeave(event) {
+                event.preventDefault();
+                event.currentTarget.classList.remove(
+                    "border-blue-400",
+                    "bg-blue-50",
+                );
+            }
+
+            async function handleDrop(event) {
+                event.preventDefault();
+                event.currentTarget.classList.remove(
+                    "border-blue-400",
+                    "bg-blue-50",
+                );
+
+                const items = event.dataTransfer.items;
+                if (items && items.length > 0 && items[0].webkitGetAsEntry) {
+                    // Folder drag-drop via FileSystemEntry API
+                    const entries = [];
+                    for (let i = 0; i < items.length; i++) {
+                        const entry = items[i].webkitGetAsEntry();
+                        if (entry) entries.push(entry);
+                    }
+                    const files = await collectFilesFromEntries(entries);
+                    if (files.length > 0) {
+                        acceptVideoFiles(files);
+                    } else {
+                        alert("No video files found in dropped folder.");
+                    }
+                } else {
+                    // Plain file drag-drop
+                    const files = Array.from(event.dataTransfer.files);
+                    acceptVideoFiles(files);
+                }
+            }
+
+            // Recursively collect files from FileSystemEntry list
+            function collectFilesFromEntries(entries) {
+                return new Promise((resolve) => {
+                    const files = [];
+                    let pending = entries.length;
+                    if (pending === 0) return resolve(files);
+
+                    function checkDone() {
+                        pending--;
+                        if (pending === 0) resolve(files);
+                    }
+
+                    function traverseEntry(entry, path = "") {
+                        if (entry.isFile) {
+                            entry.file(
+                                (file) => {
+                                    file.webkitRelativePath =
+                                        path + file.name;
+                                    files.push(file);
+                                    checkDone();
+                                },
+                                (err) => {
+                                    console.warn(
+                                        "Failed to read file entry:",
+                                        err,
+                                    );
+                                    checkDone();
+                                },
+                            );
+                        } else if (entry.isDirectory) {
+                            const reader = entry.createReader();
+                            const readEntries = () => {
+                                reader.readEntries(
+                                    (results) => {
+                                        if (results.length === 0) {
+                                            checkDone();
+                                        } else {
+                                            for (const e of results) {
+                                                traverseEntry(
+                                                    e,
+                                                    path + entry.name + "/",
+                                                );
+                                            }
+                                            readEntries();
+                                        }
+                                    },
+                                    (err) => {
+                                        console.warn(
+                                            "Failed to read directory entries:",
+                                            err,
+                                        );
+                                        checkDone();
+                                    },
+                                );
+                            };
+                            readEntries();
+                        } else {
+                            checkDone();
+                        }
+                    }
+
+                    for (const entry of entries) {
+                        traverseEntry(entry);
+                    }
+                });
+            }
+
+            // Accept and set video files from any source
+            function acceptVideoFiles(files) {
+                const videoFiles = files.filter((f) =>
+                    f.type.startsWith("video/"),
+                );
+                if (videoFiles.length === 0) {
+                    alert(
+                        "No video files found. Please choose video files.",
+                    );
+                    return;
+                }
+
+                videoFiles.sort((a, b) =>
+                    (a.webkitRelativePath || a.name).localeCompare(
+                        b.webkitRelativePath || b.name,
+                    ),
+                );
+
+                currentVideoFiles = videoFiles;
+                document.getElementById("processBtn").disabled = false;
+                document.getElementById("progressText").textContent =
+                    videoFiles.length === 1
+                        ? "Start upscaling"
+                        : `Start upscaling ${videoFiles.length} videos`;
+                renderBatchFileList();
+                showVideoPreview(videoFiles[0]);
+            }
+
+            // Select save directory via File System Access API
+            async function selectSaveDirectory() {
+                if (!window.showDirectoryPicker) {
+                    alert(
+                        "File System Access API is not supported in this browser. Please use Chrome/Edge 86+.",
+                    );
+                    return;
+                }
+                try {
+                    saveDirectoryHandle = await window.showDirectoryPicker({
+                        mode: "readwrite",
+                    });
+                    document.getElementById("dirLabel").textContent =
+                        saveDirectoryHandle.name;
+                } catch (e) {
+                    if (e.name !== "AbortError") {
+                        console.error("Failed to select directory:", e);
+                    }
+                }
+            }
+
+            // Render batch file list with status badges
+            function renderBatchFileList() {
+                const container = document.getElementById("batchFileList");
+                const items = document.getElementById("batchFileItems");
+                const countLabel = document.getElementById("batchListCount");
+                if (!container || !items) return;
+
+                if (currentVideoFiles.length === 0) {
+                    container.classList.add("hidden");
+                    return;
+                }
+
+                container.classList.remove("hidden");
+                document.getElementById("batchListTitle").textContent =
+                    currentVideoFiles.length === 1
+                        ? "1 file"
+                        : `${currentVideoFiles.length} files`;
+                countLabel.textContent = "";
+
+                // Sync statuses array length
+                while (batchFileStatuses.length < currentVideoFiles.length) {
+                    batchFileStatuses.push({ status: "pending", error: null });
+                }
+
+                items.innerHTML = currentVideoFiles
+                    .map((file, i) => {
+                        const relPath = file.webkitRelativePath || file.name;
+                        const dirName = relPath.includes("/")
+                            ? relPath.substring(
+                                  0,
+                                  relPath.lastIndexOf("/"),
+                              )
+                            : "";
+                        const st = batchFileStatuses[i] || {
+                            status: "pending",
+                            error: null,
+                        };
+                        const hasError =
+                            st.status === "error" && st.error;
+                        return `
+                        <div class="rounded-lg border border-slate-200 bg-white px-3 py-2" id="batchItem-${i}">
+                            <div class="flex items-center gap-3">
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-slate-700 truncate">${escapeHtml(file.name)}</p>
+                                    <p class="text-xs text-slate-400 truncate">${formatBytes(file.size)}${dirName ? ` · <span class="text-slate-300">${escapeHtml(dirName)}</span>` : ""}</p>
+                                </div>
+                                <span class="text-xs font-medium text-slate-400 px-2 py-1 rounded-md bg-slate-100" id="batchStatus-${i}">Pending</span>
+                            </div>
+                            <div id="batchError-${i}" class="${hasError ? "mt-2" : "hidden"}">
+                                ${hasError ? `<p class="text-xs text-red-600 bg-red-50 rounded-md px-2 py-1.5 mb-2">${escapeHtml(st.error)}</p><button type="button" onclick="retryBatchItem(${i})" class="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 hover:text-blue-700"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>Retry</button>` : ""}
+                            </div>
+                        </div>`;
+                    })
+                    .join("");
+            }
+
+            function updateBatchItemStatus(index, status, detail, error) {
+                const el = document.getElementById(`batchStatus-${index}`);
+                if (!el) return;
+                const colors = {
+                    pending: "bg-slate-100 text-slate-400",
+                    processing: "bg-blue-100 text-blue-700",
+                    done: "bg-emerald-100 text-emerald-700",
+                    error: "bg-red-100 text-red-700",
+                };
+                el.className = `text-xs font-medium px-2 py-1 rounded-md ${colors[status] || colors.pending}`;
+                el.textContent = detail || status;
+
+                // Store status for re-render
+                if (!batchFileStatuses[index]) {
+                    batchFileStatuses[index] = { status: "pending", error: null };
+                }
+                batchFileStatuses[index].status = status;
+                batchFileStatuses[index].error = error || null;
+
+                // Show/hide error detail block
+                const errorBlock = document.getElementById(
+                    `batchError-${index}`,
+                );
+                if (errorBlock) {
+                    if (status === "error" && error) {
+                        errorBlock.innerHTML = `<p class="text-xs text-red-600 bg-red-50 rounded-md px-2 py-1.5 mb-2">${escapeHtml(error)}</p><button type="button" onclick="retryBatchItem(${index})" class="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 hover:text-blue-700"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>Retry</button>`;
+                        errorBlock.classList.remove("hidden");
+                    } else {
+                        errorBlock.classList.add("hidden");
+                        errorBlock.innerHTML = "";
+                    }
+                }
+            }
+
+            // Retry a single failed video
+            async function retryBatchItem(index) {
+                const file = currentVideoFiles[index];
+                if (!file) return;
+                if (isBatchProcessing) return;
+
+                const processBtn = document.getElementById("processBtn");
+                processBtn.disabled = true;
+                isBatchProcessing = true;
+
+                const networkToggle = document.getElementById("networkToggle");
+                const activeBtn = networkToggle?.querySelector(
+                    "button.bg-slate-800[data-network]",
+                );
+                const networkSize = activeBtn?.dataset.network || "medium";
+
+                updateBatchItemStatus(index, "processing", "Retrying");
+
+                // Update preview to show the file being retried
+                showVideoPreview(file);
+
+                const retryStartTime = Date.now();
+
+                upscaler.onProgress((progress) => {
+                    document.getElementById(
+                        "progressFill",
+                    ).style.width = progress + "%";
+                    document.getElementById(
+                        "progressText",
+                    ).textContent = `[Retry] ${Math.round(progress)}% — ${truncateName(file.name)}`;
+                });
+
+                try {
+                    const resultBlob = await upscaler.upscaleVideo(
+                        file,
+                        networkSize,
+                    );
+
+                    const saved = await writeToSaveDirectory(file, resultBlob);
+                    updateBatchItemStatus(index, "done", saved ? "Saved" : "Done");
+
+                    const retryDuration = Date.now() - retryStartTime;
+                    addBatchResult(file, resultBlob, index, retryDuration);
+
+                    // Load the retried result into comparison viewer
+                    const resultIdx = batchResults.findIndex(
+                        (r) => r.index === index,
+                    );
+                    if (resultIdx >= 0) {
+                        loadResultIntoComparison(resultIdx);
+                    }
+                } catch (error) {
+                    console.error(`Retry failed for ${file.name}:`, error);
+                    const errDetail = error.message
+                        ? error.message.substring(0, 120)
+                        : String(error).substring(0, 120);
+                    updateBatchItemStatus(index, "error", "Failed", errDetail);
+                } finally {
+                    isBatchProcessing = false;
+                    processBtn.disabled = false;
+                }
+            }
+
+            // Add a completed result to the right-side comparison list
+            function addBatchResult(file, blob, index, durationMs) {
+                const result = {
+                    file,
+                    blob,
+                    index,
+                    durationMs,
+                    enhancedUrl: URL.createObjectURL(blob),
+                    originalUrl: URL.createObjectURL(file),
+                };
+
+                // Replace existing entry (e.g. retry), revoking old URLs
+                const existing = batchResults.findIndex(
+                    (r) => r.index === index,
+                );
+                if (existing >= 0) {
+                    URL.revokeObjectURL(batchResults[existing].enhancedUrl);
+                    URL.revokeObjectURL(batchResults[existing].originalUrl);
+                    batchResults[existing] = result;
+                } else {
+                    batchResults.push(result);
+                }
+                renderBatchResultList();
+            }
+
+            // Render the right-side result list
+            function renderBatchResultList() {
+                const panel = document.getElementById("batchResultPanel");
+                const container = document.getElementById(
+                    "batchResultItems",
+                );
+                const countLabel = document.getElementById(
+                    "batchResultCount",
+                );
+                if (!panel || !container) return;
+
+                if (batchResults.length === 0) {
+                    panel.classList.add("hidden");
+                    return;
+                }
+
+                panel.classList.remove("hidden");
+                countLabel.textContent = `${batchResults.length} done`;
+
+                container.innerHTML = batchResults
+                    .map((r, i) => {
+                        const isActive = i === selectedResultIndex;
+                        return `
+                        <button
+                            type="button"
+                            onclick="loadResultIntoComparison(${i})"
+                            class="w-full text-left rounded-lg border px-3 py-2 transition-all ${isActive ? "border-blue-400 bg-blue-50" : "border-slate-200 bg-white hover:bg-slate-50"}"
+                        >
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 ${isActive ? "text-blue-500" : "text-slate-400"} flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs font-medium text-slate-700 truncate">${escapeHtml(r.file.name)}</p>
+                                    <p class="text-[10px] text-slate-400">${formatBytes(r.blob.size)} · ${formatDuration(r.durationMs)}</p>
+                                </div>
+                            </div>
+                        </button>`;
+                    })
+                    .join("");
+            }
+
+            // Render the video data comparison table
+            function renderComparisonData(result, orig, enh) {
+                const panel = document.getElementById(
+                    "comparisonDataPanel",
+                );
+                const body = document.getElementById("comparisonDataBody");
+                if (!panel || !body) return;
+
+                const origBitrate =
+                    orig.duration > 0
+                        ? (orig.size * 8) / orig.duration / 1e6
+                        : 0;
+                const enhBitrate =
+                    enh.duration > 0
+                        ? (enh.size * 8) / enh.duration / 1e6
+                        : 0;
+                const origPixels = orig.width * orig.height;
+                const enhPixels = enh.width * enh.height;
+
+                const rows = [
+                    {
+                        label: "Resolution",
+                        orig: `${orig.width}×${orig.height}`,
+                        enh: `${enh.width}×${enh.height}`,
+                        change: `${((enhPixels / origPixels - 1) * 100).toFixed(0)}%`,
+                        positive: enhPixels > origPixels,
+                    },
+                    {
+                        label: "File Size",
+                        orig: formatBytes(orig.size),
+                        enh: formatBytes(enh.size),
+                        change: `${((enh.size / orig.size - 1) * 100).toFixed(0)}%`,
+                        positive: null,
+                    },
+                    {
+                        label: "Duration",
+                        orig: formatVideoDuration(orig.duration),
+                        enh: formatVideoDuration(enh.duration),
+                        change:
+                            Math.abs(orig.duration - enh.duration) < 0.5
+                                ? "same"
+                                : `${((enh.duration / orig.duration - 1) * 100).toFixed(1)}%`,
+                        positive: null,
+                    },
+                    {
+                        label: "Est. Bitrate",
+                        orig: origBitrate.toFixed(1) + " Mbps",
+                        enh: enhBitrate.toFixed(1) + " Mbps",
+                        change: `${((enhBitrate / origBitrate - 1) * 100).toFixed(0)}%`,
+                        positive: enhBitrate > origBitrate,
+                    },
+                    {
+                        label: "Pixels",
+                        orig: origPixels.toLocaleString(),
+                        enh: enhPixels.toLocaleString(),
+                        change: `${((enhPixels / origPixels - 1) * 100).toFixed(0)}%`,
+                        positive: enhPixels > origPixels,
+                    },
+                    {
+                        label: "Process Time",
+                        orig: "—",
+                        enh: formatDuration(result.durationMs),
+                        change: "—",
+                        positive: null,
+                    },
+                ];
+
+                body.innerHTML = rows
+                    .map((row) => {
+                        let changeClass = "text-slate-400";
+                        let changeIcon = "";
+                        if (row.positive === true) {
+                            changeClass = "text-emerald-600 font-medium";
+                            changeIcon = "↑ ";
+                        } else if (row.positive === false) {
+                            changeClass = "text-red-500";
+                            changeIcon = "↓ ";
+                        }
+                        return `
+                        <tr>
+                            <td class="px-4 py-2 text-slate-600 font-medium">${row.label}</td>
+                            <td class="px-4 py-2 text-right text-slate-500">${row.orig}</td>
+                            <td class="px-4 py-2 text-right text-slate-700 font-medium">${row.enh}</td>
+                            <td class="px-4 py-2 text-right ${changeClass}">${changeIcon}${row.change}</td>
+                        </tr>`;
+                    })
+                    .join("");
+
+                panel.classList.remove("hidden");
+            }
+
+            // Load a result into the comparison viewer
+            function loadResultIntoComparison(index) {
+                const result = batchResults[index];
+                if (!result) return;
+
+                selectedResultIndex = index;
+                renderBatchResultList();
+
+                // Revoke old URLs if they exist
+                if (currentOriginalUrl) {
+                    URL.revokeObjectURL(currentOriginalUrl);
+                    currentOriginalUrl = null;
+                }
+
+                const enhancedSource = document.getElementById(
+                    "resultVideoSourceEnhanced",
+                );
+                const originalSource = document.getElementById(
+                    "resultVideoSourceOriginal",
+                );
+                enhancedSource.src = result.enhancedUrl;
+                enhancedSource.type = "video/mp4";
+                document.getElementById("resultVideoEnhanced").load();
+                originalSource.src = result.originalUrl;
+                originalSource.type = "video/mp4";
+                document.getElementById("resultVideoOriginal").load();
+
+                currentResultBlob = result.blob;
+
+                document.getElementById("originalVideoSize").textContent =
+                    formatBytes(result.file.size);
+                document.getElementById("resultVideoSize").textContent =
+                    formatBytes(result.blob.size);
+                document.getElementById("durationVideoInfo").textContent =
+                    formatDuration(result.durationMs);
+                document.getElementById("backendVideoInfo").textContent =
+                    Upscaler.getBackendType();
+
+                // Render comparison data table once both videos' metadata loads
+                const origV = document.getElementById("resultVideoOriginal");
+                const enhV = document.getElementById("resultVideoEnhanced");
+                let origMeta = null;
+                let enhMeta = null;
+
+                const tryRender = () => {
+                    if (origMeta && enhMeta) {
+                        renderComparisonData(result, origMeta, enhMeta);
+                    }
+                };
+
+                const onOrigMeta = () => {
+                    origMeta = {
+                        width: origV.videoWidth,
+                        height: origV.videoHeight,
+                        duration: origV.duration,
+                        size: result.file.size,
+                    };
+                    origV.removeEventListener("loadedmetadata", onOrigMeta);
+                    tryRender();
+                };
+                const onEnhMeta = () => {
+                    enhMeta = {
+                        width: enhV.videoWidth,
+                        height: enhV.videoHeight,
+                        duration: enhV.duration,
+                        size: result.blob.size,
+                    };
+                    enhV.removeEventListener("loadedmetadata", onEnhMeta);
+                    tryRender();
+                };
+                if (origV.readyState >= 1) onOrigMeta();
+                else origV.addEventListener("loadedmetadata", onOrigMeta);
+                if (enhV.readyState >= 1) onEnhMeta();
+                else enhV.addEventListener("loadedmetadata", onEnhMeta);
+
+                const resultSection =
+                    document.getElementById("resultSection");
+                const videoResultSection =
+                    document.getElementById("videoResultSection");
+                resultSection.classList.remove("hidden");
+                videoResultSection.classList.remove("hidden");
+
+                const enhancedVideo = document.getElementById(
+                    "resultVideoEnhanced",
+                );
+                const initComparison = () => {
+                    initVideoComparisonDrag();
+                };
+                if (enhancedVideo.readyState >= 2) {
+                    initComparison();
+                } else {
+                    enhancedVideo.addEventListener(
+                        "loadeddata",
+                        initComparison,
+                        { once: true },
+                    );
+                }
+            }
 
             // Network size toggle buttons (small / medium / large)
             (function initNetworkToggle() {
@@ -977,67 +1912,17 @@
                 });
             })();
 
-            // Drag and drop support
-            (function initDragDrop() {
-                const uploadLabel = document.getElementById("uploadLabel");
-                const fileInput = document.getElementById("universalInput");
-                if (!uploadLabel || !fileInput) return;
+            // Note: drag & drop is handled by inline ondrop/ondragover/ondragleave
+            // on the uploadLabel div, which calls handleDrop/handleDragOver/handleDragLeave.
+            // This supports both file and folder drag-drop via webkitGetAsEntry.
 
-                ["dragenter", "dragover", "dragleave", "drop"].forEach(
-                    (eventName) => {
-                        uploadLabel.addEventListener(eventName, (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        });
-                    },
-                );
-
-                ["dragenter", "dragover"].forEach((eventName) => {
-                    uploadLabel.addEventListener(eventName, () => {
-                        uploadLabel.classList.remove(
-                            "from-slate-50",
-                            "to-gray-100",
-                            "border-slate-300",
-                        );
-                        uploadLabel.classList.add(
-                            "from-blue-50",
-                            "to-blue-100",
-                            "border-blue-500",
-                        );
-                    });
-                });
-
-                ["dragleave", "drop"].forEach((eventName) => {
-                    uploadLabel.addEventListener(eventName, () => {
-                        uploadLabel.classList.remove(
-                            "from-blue-50",
-                            "to-blue-100",
-                            "border-blue-500",
-                        );
-                        uploadLabel.classList.add(
-                            "from-slate-50",
-                            "to-gray-100",
-                            "border-slate-300",
-                        );
-                    });
-                });
-
-                uploadLabel.addEventListener("drop", (e) => {
-                    const dt = e.dataTransfer;
-                    const files = dt.files;
-                    if (files.length > 0) {
-                        fileInput.files = files;
-                        fileInput.dispatchEvent(new Event("change"));
-                    }
-                });
-            })();
-
-            async function handleProcess() {
-                const file = currentVideoFile;
-                if (!file || !file.type.startsWith("video/")) {
-                    alert("Please choose a valid video file.");
+            async function handleBatchProcess() {
+                const files = currentVideoFiles;
+                if (!files || files.length === 0) {
+                    alert("Please choose video files.");
                     return;
                 }
+                if (isBatchProcessing) return;
 
                 const networkToggle = document.getElementById("networkToggle");
                 const activeBtn = networkToggle?.querySelector(
@@ -1046,121 +1931,173 @@
                 const networkSize = activeBtn?.dataset.network || "medium";
 
                 const processBtn = document.getElementById("processBtn");
-                const resultSection = document.getElementById("resultSection");
+                const resultSection =
+                    document.getElementById("resultSection");
                 const videoResultSection =
                     document.getElementById("videoResultSection");
 
                 processBtn.disabled = true;
+                isBatchProcessing = true;
                 resultSection.classList.add("hidden");
                 videoResultSection?.classList.add("hidden");
-                document.getElementById("progressText").textContent =
-                    "Initializing...";
                 document.getElementById("progressFill").style.width = "0%";
 
-                try {
+                const total = files.length;
+                let successCount = 0;
+                let failCount = 0;
+                const batchStartTime = Date.now();
+
+                for (let i = 0; i < total; i++) {
+                    const file = files[i];
+                    const tag = total > 1 ? `[${i + 1}/${total}] ` : "";
+                    const fileStartTime = Date.now();
+
+                    updateBatchItemStatus(i, "processing", "Processing");
+
+                    // Update preview to show current file being processed
+                    showVideoPreview(file);
+
                     let lastSeekTime = 0;
                     const previewVideo =
                         document.getElementById("videoPreviewPlayer");
-                    const videoDuration = previewVideo?.duration || 0;
 
                     upscaler.onProgress((progress) => {
-                        document.getElementById("progressFill").style.width =
-                            progress + "%";
-                        document.getElementById("progressText").textContent =
-                            `Processing... ${Math.round(progress)}%`;
-
-                        // Sync preview video seek, once per second
-                        const now = Date.now();
-                        if (
-                            previewVideo &&
-                            videoDuration &&
-                            now - lastSeekTime >= 1000
-                        ) {
-                            lastSeekTime = now;
-                            const targetTime = (progress / 100) * videoDuration;
-                            previewVideo.currentTime = targetTime;
-                        }
+                        document.getElementById(
+                            "progressFill",
+                        ).style.width = progress + "%";
+                        document.getElementById(
+                            "progressText",
+                        ).textContent =
+                            total > 1
+                                ? `${tag}${Math.round(progress)}% — ${truncateName(file.name)}`
+                                : `Processing... ${Math.round(progress)}%`;
                     });
 
-                    const resultBlob = await upscaler.upscaleVideo(
-                        file,
-                        networkSize,
-                    );
-                    currentResultBlob = resultBlob;
-
-                    const videoUrl = URL.createObjectURL(resultBlob);
-                    const originalVideoUrl =
-                        currentOriginalUrl || URL.createObjectURL(file);
-                    currentOriginalUrl = originalVideoUrl;
-
-                    const enhancedSource = document.getElementById(
-                        "resultVideoSourceEnhanced",
-                    );
-                    const originalSource = document.getElementById(
-                        "resultVideoSourceOriginal",
-                    );
-                    enhancedSource.src = videoUrl;
-                    enhancedSource.type = "video/mp4";
-                    document.getElementById("resultVideoEnhanced").load();
-                    originalSource.src = originalVideoUrl;
-                    originalSource.type = "video/mp4";
-                    document.getElementById("resultVideoOriginal").load();
-
-                    document.getElementById("originalVideoSize").textContent =
-                        formatBytes(file.size);
-                    document.getElementById("resultVideoSize").textContent =
-                        formatBytes(resultBlob.size);
-                    document.getElementById("backendVideoInfo").textContent =
-                        Upscaler.getBackendType();
-
-                    resultSection.classList.remove("hidden");
-                    videoResultSection?.classList.remove("hidden");
-
-                    // Scroll to result section
-                    resultSection.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                    });
-
-                    // Initialize comparison drag after video loads
-                    const enhancedVideo = document.getElementById(
-                        "resultVideoEnhanced",
-                    );
-                    if (enhancedVideo.readyState >= 2) {
-                        initVideoComparisonDrag();
-                    } else {
-                        enhancedVideo.addEventListener(
-                            "loadeddata",
-                            initVideoComparisonDrag,
-                            { once: true },
+                    try {
+                        const resultBlob = await upscaler.upscaleVideo(
+                            file,
+                            networkSize,
                         );
+
+                        const saved = await writeToSaveDirectory(
+                            file,
+                            resultBlob,
+                        );
+                        updateBatchItemStatus(
+                            i,
+                            "done",
+                            saved ? "Saved" : "Done",
+                        );
+
+                        successCount++;
+
+                        // Add to right-side result list
+                        const fileDuration = Date.now() - fileStartTime;
+                        addBatchResult(file, resultBlob, i, fileDuration);
+
+                        // Auto-load first result into comparison viewer
+                        if (batchResults.length === 1) {
+                            loadResultIntoComparison(0);
+                        }
+                    } catch (error) {
+                        console.error(
+                            `Upscaling error for ${file.name}:`,
+                            error,
+                        );
+                        const errDetail = error.message
+                            ? error.message.substring(0, 120)
+                            : String(error).substring(0, 120);
+                        updateBatchItemStatus(
+                            i,
+                            "error",
+                            "Failed",
+                            errDetail,
+                        );
+                        failCount++;
                     }
-                } catch (error) {
-                    console.error("Upscaling error:", error);
-                    alert("Upscaling failed:\n" + error.message);
-                } finally {
-                    processBtn.disabled = false;
-                    document.getElementById("progressFill").style.width = "0%";
+                }
+
+                const totalDuration = Date.now() - batchStartTime;
+
+                if (total > 1) {
+                    document.getElementById(
+                        "progressText",
+                    ).textContent = `${successCount} succeeded, ${failCount} failed · Total: ${formatDuration(totalDuration)}`;
+                    if (failCount === 0) {
+                        document.getElementById(
+                            "progressFill",
+                        ).style.width = "100%";
+                    }
+                } else if (successCount > 0) {
+                    document.getElementById(
+                        "progressText",
+                    ).textContent = `Done · ${formatDuration(totalDuration)}`;
+                } else {
+                    document.getElementById(
+                        "progressFill",
+                    ).style.width = "0%";
                     document.getElementById("progressText").textContent =
                         "Start upscaling";
                 }
+
+                if (failCount > 0) {
+                    alert(
+                        `${failCount} of ${total} video(s) failed to process.\n\n` +
+                            `Hover over the "Failed" badges in the file list to see error details.\n` +
+                            `Check the browser console (F12) for full error logs.`,
+                    );
+                }
+
+                processBtn.disabled = false;
+                isBatchProcessing = false;
             }
 
             function downloadResult() {
                 if (!currentResultBlob) return alert("No result available.");
                 const a = document.createElement("a");
-                a.href = URL.createObjectURL(currentResultBlob);
-                a.download = `upscaled_${Date.now()}.mp4`;
+                const downloadUrl = URL.createObjectURL(currentResultBlob);
+                a.href = downloadUrl;
+                const sel = batchResults[selectedResultIndex];
+                const origName = sel ? sel.file.name : "video";
+                const dot = origName.lastIndexOf(".");
+                const base = dot > 0 ? origName.slice(0, dot) : origName;
+                a.download = `${base}_upscaled.mp4`;
+                document.body.appendChild(a);
                 a.click();
-                URL.revokeObjectURL(a.href);
+                document.body.removeChild(a);
+                // Revoke after a delay to ensure large file downloads start
+                setTimeout(() => URL.revokeObjectURL(downloadUrl), 10000);
             }
 
             function formatBytes(bytes) {
-                if (!bytes) return "0 B";
+                if (!bytes || bytes < 0) return "0 B";
                 const k = 1024,
-                    sizes = ["B", "KB", "MB", "GB"];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                    sizes = ["B", "KB", "MB", "GB", "TB"];
+                const i = Math.min(
+                    Math.floor(Math.log(bytes) / Math.log(k)),
+                    sizes.length - 1,
+                );
                 return (bytes / Math.pow(k, i)).toFixed(1) + " " + sizes[i];
+            }
+
+            function escapeHtml(str) {
+                if (str == null) return "";
+                return String(str)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            function formatDuration(ms) {
+                if (ms == null || isNaN(ms)) return "-";
+                if (ms < 1000) return ms + " ms";
+                const s = ms / 1000;
+                if (s < 60) return s.toFixed(1) + " s";
+                const m = Math.floor(s / 60);
+                const rest = (s - m * 60).toFixed(0);
+                return `${m}m ${rest}s`;
             }
 
             function resetUpscalerUI() {
@@ -1172,14 +2109,26 @@
 
                 document.getElementById("universalInput").value = "";
                 currentResultBlob = null;
-                currentVideoFile = null;
+                currentVideoFiles = [];
                 if (currentOriginalUrl) URL.revokeObjectURL(currentOriginalUrl);
                 currentOriginalUrl = null;
+
+                // Revoke all batch result URLs
+                batchResults.forEach((r) => {
+                    URL.revokeObjectURL(r.enhancedUrl);
+                    URL.revokeObjectURL(r.originalUrl);
+                });
+                batchResults = [];
+                selectedResultIndex = -1;
+                batchFileStatuses = [];
+                document.getElementById("batchResultPanel")?.classList.add("hidden");
+                document.getElementById("comparisonDataPanel")?.classList.add("hidden");
 
                 document.getElementById("processBtn").disabled = true;
                 document.getElementById("progressFill").style.width = "0%";
                 document.getElementById("progressText").textContent =
-                    "Select a video to start";
+                    "Select videos to start";
+                document.getElementById("durationVideoInfo").textContent = "-";
                 document
                     .getElementById("resultSection")
                     .classList.add("hidden");
@@ -1195,7 +2144,33 @@
                         v.load();
                     }
                 });
+                document
+                    .getElementById("batchFileList")
+                    ?.classList.add("hidden");
                 resetVideoPreview();
+            }
+
+            // Shared: write a blob to the save directory
+            async function writeToSaveDirectory(file, blob) {
+                if (!saveDirectoryHandle) return false;
+                const dot = file.name.lastIndexOf(".");
+                const base = dot > 0 ? file.name.slice(0, dot) : file.name;
+                const outName = `${base}_upscaled.mp4`;
+                const fh = await saveDirectoryHandle.getFileHandle(outName, {
+                    create: true,
+                });
+                const writable = await fh.createWritable();
+                await writable.write(blob);
+                await writable.close();
+                return true;
+            }
+
+            // Shared: truncate long filenames for UI display
+            function truncateName(name, maxLen = 30) {
+                if (!name) return "";
+                return name.length > maxLen
+                    ? name.substring(0, maxLen - 3) + "..."
+                    : name;
             }
 
             console.log("Upscaler ready:", Upscaler.getBackendType());

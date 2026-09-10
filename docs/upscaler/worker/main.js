@@ -1764,7 +1764,7 @@ self.onmessage = async (event) => {
                 : { width: 2 * h.width, height: 2 * h.height };
             let y,
               U,
-              C = (b.width * b.height * 25e5) / 921600;
+              C = (b.width * b.height * 8e6) / 921600;
             const R = await E(r);
             if (t || a) {
               const e = a ? w : h;
@@ -1836,7 +1836,7 @@ self.onmessage = async (event) => {
               });
             const z = new B.fX(D);
             let I = b.width * b.height > 921600 ? "avc1.42003e" : "avc1.42001f",
-              O = ["avc1.640028", "avc1.64001e", "avc1.42003e", "avc1.42001f"];
+              O = ["avc1.640033", "avc1.640028", "avc1.64001e", "avc1.640034", "avc1.42003e", "avc1.42001f"];
             "firefox" === q && (O = ["avc1.42003e", "avc1.42001f"]);
             for (const e of O) {
               const t = {
@@ -1857,6 +1857,7 @@ self.onmessage = async (event) => {
                 height: b.height,
                 bitrate: Math.round(C),
                 framerate: 1e6 / F[0].duration,
+                latencyMode: "quality",
               },
               N = [],
               V = {},
@@ -2147,7 +2148,7 @@ self.onmessage = async (event) => {
                 : { width: 2 * d.width, height: 2 * d.height };
             let w,
               b,
-              y = (g.width * g.height * 25e5) / 921600;
+              y = (g.width * g.height * 8e6) / 921600;
             const k = await E(r);
             if (t || a) {
               const e = a ? v : d;
@@ -2207,8 +2208,10 @@ self.onmessage = async (event) => {
             const L = new B.fX(F);
             let M = g.width * g.height > 921600 ? "avc1.42003e" : "avc1.42001f";
             const G = [
+              "avc1.640033",
               "avc1.640028",
               "avc1.64001e",
+              "avc1.640034",
               "avc1.42003e",
               "avc1.42001f",
             ];
@@ -2231,6 +2234,7 @@ self.onmessage = async (event) => {
                 height: g.height,
                 bitrate: Math.round(y),
                 framerate: 1e6 / w.encoded_chunks[0].duration,
+                latencyMode: "quality",
               },
               D = [],
               z = new VideoDecoder({
@@ -2523,7 +2527,7 @@ self.onmessage = async (event) => {
           const B = new W.r({ format: new N.E1(), target: k }),
             E = new V.D0(f, {
               codec: "avc",
-              bitrate: X.n1,
+              bitrate: Math.round(X.n1 * 2),
               keyFrameInterval: 60,
             }),
             U = await w.getPrimaryVideoTrack();
@@ -2675,7 +2679,7 @@ self.onmessage = async (event) => {
             U = performance.now();
           console.log("Time to get WebSR: " + (U - g));
           const C = new W.r({ format: new N.E1(), target: E }),
-            P = new V.Dg({ codec: "avc", bitrate: X.n1, keyFrameInterval: 60 }),
+            P = new V.Dg({ codec: "avc", bitrate: Math.round(X.n1 * 2), keyFrameInterval: 60 }),
             R = await y.getPrimaryVideoTrack();
           if (!R && !R)
             return postMessage({
