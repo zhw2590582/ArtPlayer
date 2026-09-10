@@ -63,6 +63,35 @@ function visit(id) {
 }
 for (const id of ids.keys()) visit(id)
 
+function ancestors(id, found = new Set()) {
+  for (const dependency of ids.get(id).dependsOn) {
+    if (found.has(dependency)) continue
+    found.add(dependency)
+    ancestors(dependency, found)
+  }
+  return found
+}
+function requireAncestor(task, dependency) {
+  assert(ancestors(task).has(dependency), `${task} must depend on ${dependency}`)
+}
+assert(![...ancestors('PILOT-01')].some(id => id.startsWith('CORE-')), 'Pilot must precede core migration')
+requireAncestor('CORE-01', 'PILOT-01')
+for (const device of ['PKG-CAST-05', 'PKG-VAST-05', 'PKG-DPIP-05', 'PKG-MASK-05']) {
+  assert(!ancestors('REVIEW-01').has(device), `REVIEW-01 must not wait for ${device}`)
+  requireAncestor('REVIEW-02', device)
+}
+requireAncestor('REL-02', 'REL-09')
+for (const release of ['REL-05', 'REL-06']) {
+  for (const gate of ['REVIEW-01', 'REVIEW-02', 'REVIEW-03', 'CI-04', 'REL-03', 'REL-04', 'REL-09']) {
+    requireAncestor(release, gate)
+  }
+}
+const finalDependencies = ancestors('REL-07')
+for (const task of data.tasks) {
+  if (task.id === 'REL-07' || task.id.startsWith('DOC-')) continue
+  assert(finalDependencies.has(task.id), `Implementation task is disconnected from REL-07: ${task.id}`)
+}
+
 const packageNames = inventory.packages.map(pkg => pkg.name).sort()
 const currentNames = fs.readdirSync(path.join(root, 'packages'))
   .filter(name => fs.existsSync(path.join(root, 'packages', name, 'package.json'))).sort()
