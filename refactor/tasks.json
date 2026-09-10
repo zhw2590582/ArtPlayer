@@ -239,6 +239,24 @@
       ]
     },
     {
+      "id": "BASE-HARNESS-01",
+      "phase": "1 基线",
+      "title": "建立最小发布包浏览器采集夹具与服务",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "BASE-01"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "固定 tarball 静态服务、本地媒体 Range、公开 API 采集页面及受控报告路径",
+      "acceptance": "HTTP 精确内容/范围和路由隔离测试、夹具语法通过；浏览器采集仍由 BASE-02 负责",
+      "evidence": [
+        "changes/2026-09-10-BASE-HARNESS-01-browser-fixture.md"
+      ]
+    },
+    {
       "id": "BASE-02",
       "phase": "1 基线",
       "title": "捕获公共 API 和属性描述符",
@@ -246,13 +264,15 @@
         "workspace"
       ],
       "dependsOn": [
-        "BASE-01"
+        "BASE-01",
+        "BASE-HARNESS-01"
       ],
-      "status": "todo",
+      "status": "blocked",
       "risk": "H",
       "deliverable": "核心与试点的构造/默认值/静态和实例 API 快照，其余包由 01/02 步补齐；登记契约/版本/固定测试 ID/命令/报告与负责任务",
       "acceptance": "真实发布包反射与旧用户调用可重跑，未验证项明确",
-      "evidence": []
+      "evidence": [],
+      "reason": "Chrome 工具连接连续失败，重置后仍不可用；用户要求先继续其他任务。恢复连接后执行 api.html 并核对报告，HTTP 服务通过不代表浏览器通过。"
     },
     {
       "id": "BASE-03",

@@ -1,6 +1,12 @@
 # 进度与证据
 
-## 当前实施：BASE-01 已发布基线
+## 当前实施：浏览器夹具已保存，继续 ENG-01
+
+BASE-01 已提交 `1d705b30`。BASE-HARNESS-01 完成发布包采集页面/本地 HTTP 服务及 1 项真实 HTTP 测试，详见 [交付记录](changes/2026-09-10-BASE-HARNESS-01-browser-fixture.md)。BASE-02 因 Chrome 连接失败保持 blocked；用户要求先继续其他实施任务，没有伪造浏览器基线。
+
+完成 12 项规划、2 项实施基础任务；BASE-02 阻塞，其余 197 项待办。没有生产 TS 迁移。下一项 ENG-01 固定依赖和运行环境，浏览器恢复后继续 BASE-02。
+
+## 2026-09-10：BASE-01 已发布基线
 
 2026-09-10，goal 开始执行。固定核心 5.4.0/chapter 1.1.0 的真实 tarball、47 个成员哈希和支持范围未知项。核心工作区 5.4.1 未发布，两包 registry gitHead 版本过旧，均已如实记录。详见 [BASE-01 交付](changes/2026-09-10-BASE-01-published-baseline.md)。
 
