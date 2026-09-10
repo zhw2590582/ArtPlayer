@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Build compatibility probes</title>
+</head>
+<body>
+<button id="worker">Run TypeScript worker probe</button>
+<button id="amd">Run library AMD probes</button>
+<pre id="result">Ready</pre>
+<script src="/uncompiled/artplayer-plugin-build-probe/index.js"></script>
+<script>
+  const result = document.querySelector('#result');
+  document.querySelector('#worker').onclick = async () => {
+    let worker;
+    try {
+      const probe = artplayerPluginBuildProbe({ label: 'browser' });
+      worker = probe.createWorker();
+      const reply = await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('Worker response timed out')), 5000);
+        worker.onmessage = event => { clearTimeout(timeout); resolve(event.data); };
+        worker.onerror = event => { clearTimeout(timeout); reject(new Error(event.message)); };
+        worker.postMessage(41);
+      });
+      if (reply !== 42 || !probe.css.includes('#123abc') || !probe.svg.includes('<svg')) throw new Error('Resource result mismatch');
+      result.textContent = JSON.stringify({ status: 'passed', userAgent: navigator.userAgent, value: probe.value, label: probe.label, workerReply: reply, css: true, svg: true }, null, 2);
+    } catch (error) { result.textContent = JSON.stringify({ status: 'failed', error: String(error) }); }
+    finally { if (worker) worker.terminate(); }
+  };
+  document.querySelector('#amd').onclick = async () => {
+    const reports = [];
+    try {
+      const packages = await (await fetch('/build-packages.json')).json();
+      if (packages.length !== 21 || new Set(packages).size !== 21 || !packages.includes('artplayer')) throw new Error('Incomplete library inventory');
+      for (const name of packages) {
+        for (const extension of ['.js', '.legacy.js']) {
+          const frame = document.createElement('iframe');
+          frame.hidden = true;
+          document.body.append(frame);
+          try {
+            const scope = frame.contentWindow;
+            let exported;
+            let calls = 0;
+            scope.define = Object.assign(factory => { calls++; exported = factory(); }, { amd: true });
+            const script = frame.contentDocument.createElement('script');
+            const file = `/compiled/${name}${extension}`;
+            await new Promise((resolve, reject) => {
+              const timeout = setTimeout(() => reject(new Error(`Load timeout: ${file}`)), 10000);
+              script.onload = () => { clearTimeout(timeout); resolve(); };
+              script.onerror = () => { clearTimeout(timeout); reject(new Error(`Load failed: ${file}`)); };
+              script.src = file;
+              frame.contentDocument.body.append(script);
+            });
+            const global = name === 'artplayer' || name.startsWith('artplayer-tool-')
+              ? name.replace(/(^|-)([a-z])/g, (_, prefix, letter) => letter.toUpperCase())
+              : name.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+            reports.push({ name, extension, passed: calls === 1 && exported !== undefined && exported === scope[global] });
+          } finally { frame.remove(); }
+        }
+      }
+      result.textContent = JSON.stringify({ status: reports.every(item => item.passed) ? 'passed' : 'failed', userAgent: navigator.userAgent, reports }, null, 2);
+    } catch (error) { result.textContent = JSON.stringify({ status: 'failed', reports, error: String(error) }); }
+  };
+</script>
+</body>
+</html>

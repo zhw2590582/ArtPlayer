@@ -547,11 +547,15 @@
         "ENG-02",
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "build/dev 入口解析、指定包参数、原交互保留",
       "acceptance": "三种产物、Less/SVG/worker 和本地 8082 demo 正常；保持 BASE-05 的 AMD 同时写入全局行为及 i18n/legacy 入口",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-ENG-06-build-development.md",
+        "build-development.md",
+        "baselines/build-validation.json"
+      ]
     },
     {
       "id": "ENG-07",

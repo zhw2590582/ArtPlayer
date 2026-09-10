@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 214 项，范围 22 个包及工作区/示例。
 
-状态：todo 188 / doing 0 / blocked 0 / done 26 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 187 / doing 0 / blocked 0 / done 27 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -79,7 +79,7 @@
 | ENG-03 | workspace<br>建立公共行为与单元测试入口 | ENG-02, BASE-03 | 保留现有 node:test，测试目录/夹具/统一入口 | 已有 19 项回归保留，旧版与候选可用同一夹具运行 | M | todo |
 | ENG-04 | workspace<br>建立类型测试基础 | ENG-02, BASE-05 | 根与分包 tsconfig、显式 TS 依赖、正反例测试 | 核心/试点与迁移模块严格检查，未迁移第三方/包历史问题独立台账；明确最低/当前 TS 和各环境类型；复用 BASE-05 的四种消费模式，不以 skipLibCheck 掩盖 BASE-TYPE-01/03 | M | done |
 | ENG-05 | workspace<br>建立真实浏览器测试服务 | ENG-03, BASE-04, BASE-08 | Playwright projects、本地 Range/失败媒体服务；复用 docs 页面/样本的状态隔离、错误采集与候选资源映射 | Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行；以媒体状态断言判定通过，区分轻量用例与真实编辑器交互 | M | todo |
-| ENG-06 | workspace<br>支持按包非交互与 JS/TS 构建 | ENG-02, BASE-05 | build/dev 入口解析、指定包参数、原交互保留 | 三种产物、Less/SVG/worker 和本地 8082 demo 正常；保持 BASE-05 的 AMD 同时写入全局行为及 i18n/legacy 入口 | H | todo |
+| ENG-06 | workspace<br>支持按包非交互与 JS/TS 构建 | ENG-02, BASE-05 | build/dev 入口解析、指定包参数、原交互保留 | 三种产物、Less/SVG/worker 和本地 8082 demo 正常；保持 BASE-05 的 AMD 同时写入全局行为及 i18n/legacy 入口 | H | done |
 | ENG-07 | workspace<br>建立 tarball 消费与产物检查 | ENG-04, ENG-06 | 隔离 npm 消费 fixtures、API/声明/入口差分 | 不借 workspace 源码通过，能识别缺文件与默认导出变化 | H | todo |
 | ENG-08 | workspace<br>增加覆盖率、资源与性能报告 | ENG-03, ENG-05, BASE-06 | 覆盖率基线、资源清理断言、性能报告与阈值 | 关键生命周期分支有门槛，报告不靠无意义断言堆数量；将 BASE-06 的同环境多组配对、计时/压缩审查阈值与资源异常分开接入候选，不把历史现象冻结成正常要求 | M | todo |
 | ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04 | 共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入；契约-支持版本-测试 ID-命令-候选/报告-任务的覆盖索引 | 核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit；计划/已执行/缺证据分开，识别缺少验证归属的公开契约 | M | todo |
@@ -429,3 +429,4 @@
 - ENG-PM-01: [记录](changes/2026-09-10-ENG-PM-01-yarn-toolchain.md) [记录](baselines/yarn-validation.json)
 - ENG-02: [记录](changes/2026-09-10-ENG-02-readonly-ci.md) [记录](baselines/ci-validation.json)
 - ENG-04: [记录](changes/2026-09-10-ENG-04-typechecking.md) [记录](typechecking.md)
+- ENG-06: [记录](changes/2026-09-10-ENG-06-build-development.md) [记录](build-development.md) [记录](baselines/build-validation.json)

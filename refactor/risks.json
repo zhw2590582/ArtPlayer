@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-10T12:58:34.267Z",
+  "updatedAt": "2026-09-10T13:46:01.011Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -608,6 +608,28 @@
       ],
       "compatibleResolution": "Bundled validation dependency; preserve validation/default/merge behavior and failure cleanup when typing constructor boundaries.",
       "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+    },
+    {
+      "id": "BUILD-AMD-01",
+      "title": "AMD 全局导出补丁误将固定参数 t 当作全局对象",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "ENG-06"
+      ],
+      "evidence": [
+        "scripts/utils.js",
+        "refactor/scripts/build.test.mjs",
+        "refactor/baselines/build-validation.json"
+      ],
+      "compatibleResolution": "从实际 UMD 包装提取全局参数，保留 AMD 工厂返回和旧 global 名称；不识别的包装失败而非静默发布。",
+      "closureCriteria": "正常构建的 TS 资源夹具和全部库 UMD/legacy AMD 返回与全局为同一对象；其余输出仅允许已解释变化。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-10-ENG-06-build-development.md",
+        "refactor/baselines/build-validation.json",
+        "refactor/scripts/build.test.mjs"
+      ],
+      "resolutionRationale": "构建逻辑修复已完成；63 产物中 24 仅修复接收者，42 浏览器 AMD 检查通过。未改变旧 npm 内容；正式发布仍须用新工具生成实际候选。"
     }
   ]
 }

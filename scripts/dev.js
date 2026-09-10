@@ -1,17 +1,18 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import prompts from 'prompts'
+import process from 'node:process'
 import servor from 'servor'
 import openBrowser from 'servor/utils/openBrowser.js'
 import { build as viteBuild } from 'vite'
+import { getEntryFile, selectProjects } from './projects.js'
+import { createRebuildQueue } from './rebuild.js'
 import { getGlobalName, getProjects, getViteBuildConfig } from './utils.js'
 
 const projects = getProjects()
 
-async function develop(name) {
+async function develop(name, open) {
   const projectPath = projects[name]
   const uncompiledPath = path.resolve(`docs/uncompiled/${name}`)
-  const entryFile = path.join(projectPath, 'src/index.js')
   let browserOpened = false
 
   const { url } = await servor({
@@ -27,7 +28,7 @@ async function develop(name) {
     const startTime = Date.now()
     try {
       const config = getViteBuildConfig({
-        entry: entryFile,
+        entry: getEntryFile(projectPath),
         outDir: uncompiledPath,
         name: getGlobalName(name),
         format: 'iife',
@@ -40,7 +41,7 @@ async function develop(name) {
       await viteBuild({ root: projectPath, ...config })
       console.log(`[${name}] ✅ Built in ${Date.now() - startTime}ms`)
 
-      if (!browserOpened) {
+      if (open && !browserOpened) {
         browserOpened = true
         openBrowser(url)
       }
@@ -50,7 +51,9 @@ async function develop(name) {
     }
   }
 
-  await buildBundle()
+  const rebuild = createRebuildQueue(buildBundle)
+  await rebuild()
+  console.log(`[${name}] Demo: ${url}/?libs=./uncompiled/${name}/index.js`)
 
   const srcPath = path.join(projectPath, 'src')
   console.log(`[${name}] 👀 Watching ${srcPath}...`)
@@ -58,18 +61,16 @@ async function develop(name) {
   fs.watch(srcPath, { recursive: true }, async (_, filename) => {
     if (filename) {
       console.log(`[${name}] 📝 Changed: ${filename}`)
-      await buildBundle()
+      await rebuild()
     }
   })
 }
 
 (async () => {
-  const { value } = await prompts({
-    type: 'select',
-    name: 'value',
-    message: 'Which project do you want to develop?',
-    choices: Object.keys(projects).map(name => ({ title: name, value: name })),
-  })
-  if (value)
-    await develop(value)
-})()
+  const { names, open } = await selectProjects(projects, 'dev')
+  if (names.length)
+    await develop(names[0], open)
+})().catch((error) => {
+  console.error('❌ Development server failed:', error)
+  process.exitCode = 1
+})

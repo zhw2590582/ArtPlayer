@@ -1,20 +1,4 @@
-import fs from 'node:fs'
-import path from 'node:path'
-import process from 'node:process'
-import { glob } from 'glob'
-
-export function getProjects() {
-  return glob
-    .sync('packages/*')
-    .sort()
-    .filter(item => !item.endsWith('artplayer-vitepress'))
-    .filter(item => fs.existsSync(path.join(item, 'package.json')))
-    .reduce((result, item) => {
-      const name = item.split(/\/|\\/g).pop()
-      result[name] = path.resolve(process.cwd(), item)
-      return result
-    }, {})
-}
+export { getProjects } from './projects.js'
 
 // Convert kebab-case to PascalCase: artplayer-plugin-ads -> ArtplayerPluginAds
 export function toPascalCase(name) {
@@ -71,7 +55,7 @@ export function getViteBuildConfig(options) {
         plugins: banner
           ? [{
               name: 'add-banner-and-global',
-              generateBundle(_, bundle) {
+              generateBundle(outputOptions, bundle) {
                 for (const chunk of Object.values(bundle)) {
                   if (chunk.type === 'chunk') {
                     // Remove any inline worker banners (inside template literals)
@@ -83,14 +67,18 @@ export function getViteBuildConfig(options) {
                     }
                     // For UMD format, modify the wrapper to always expose global
                     // even when AMD loader is present (fix for RequireJS environments)
-                    if (format === 'umd') {
-                      // Match both original and minified UMD patterns:
-                      // Original: typeof define === 'function' && define.amd ? define(factory) :
-                      // Minified: "function"===typeof define&&define.amd?define(e):
-                      // Change to: ... ? (global.Name = factory(), define(function() { return global.Name; })) :
+                    if (outputOptions.format === 'umd') {
+                      const wrapper = code.replace(/^\/\*![\s\S]*?\*\/\s*/, '').match(/^[!(\s]*function\s*\(\s*([\w$]+)\s*,\s*([\w$]+)\s*\)/)
+                      if (!wrapper)
+                        throw new Error(`Unrecognized UMD wrapper for ${name}`)
+                      const global = wrapper[1]
+                      const amd = /["']function["']\s*===?\s*typeof define\s*&&\s*define\.amd\s*\?\s*define\(([\w$]+)\)\s*:/
+                      if (!amd.test(code))
+                        throw new Error(`Unrecognized AMD branch for ${name}`)
+                      // Keep AMD and the global export identical regardless of minified parameter names.
                       code = code.replace(
-                        /["']function["']\s*===?\s*typeof define\s*&&\s*define\.amd\s*\?\s*define\((\w+)\)\s*:/,
-                        `"function"==typeof define&&define.amd?(t.${name}=$1(),define(function(){return t.${name}})):`,
+                        amd,
+                        `"function"==typeof define&&define.amd?(${global}.${name}=$1(),define(function(){return ${global}.${name}})):`,
                       )
                     }
                     chunk.code = code

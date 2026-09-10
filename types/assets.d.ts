@@ -7,3 +7,8 @@ declare module '*.svg' {
   const svg: string
   export default svg
 }
+
+declare module '*.svg?raw' {
+  const svg: string
+  export default svg
+}

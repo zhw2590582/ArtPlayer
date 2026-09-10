@@ -2,8 +2,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import cpy from 'cpy'
-import prompts from 'prompts'
 import { build as viteBuild } from 'vite'
+import { getEntryFile, selectProjects } from './projects.js'
 import { getGlobalName, getProjects, getViteBuildConfig } from './utils.js'
 
 const projects = getProjects()
@@ -28,9 +28,11 @@ async function build(name, targetName, clean = false) {
   const projectDir = projects[name]
   const { version } = JSON.parse(fs.readFileSync(path.join(projectDir, 'package.json'), 'utf-8'))
   const distDir = path.join(projectDir, 'dist')
-  const entryFile = path.join(projectDir, 'src/index.js')
+  const entryFile = getEntryFile(projectDir)
 
   if (clean && fs.existsSync(distDir)) {
+    if (fs.realpathSync(distDir) !== path.join(fs.realpathSync(projectDir), 'dist'))
+      throw new Error(`Refusing to clean redirected dist directory: ${distDir}`)
     fs.rmSync(distDir, { recursive: true, force: true })
   }
 
@@ -79,22 +81,11 @@ async function buildProject(name) {
 }
 
 async function runBuild() {
-  if (process.argv.includes('all')) {
-    for (const name of Object.keys(projects)) {
-      await buildProject(name)
-    }
-    console.log('✅ Finished building all packages!')
-  }
-  else {
-    const { value } = await prompts({
-      type: 'select',
-      name: 'value',
-      message: 'Which project do you want to build?',
-      choices: Object.keys(projects).map(name => ({ title: name, value: name })),
-    })
-    if (value)
-      await buildProject(value)
-  }
+  const { names } = await selectProjects(projects, 'build')
+  for (const name of names)
+    await buildProject(name)
+  if (names.length)
+    console.log(`✅ Finished building ${names.length} package(s)!`)
 }
 
 runBuild().catch((error) => {

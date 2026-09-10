@@ -42,6 +42,7 @@
 | [第三方来源清单](third-party.json) | 依赖解析、vendor 文件指纹、SDK/CDN 与许可来源缺口 |
 | [消费者与真实环境矩阵](environment-matrix.md) | 22 包的版本依据、能力/设备/样本、现有证据、验证任务及发布影响 |
 | [类型检查与迁移入口](typechecking.md) | 根/分包配置、当前/旧编译器、严格正反例和历史声明错误 |
+| [JS/TS 构建与开发](build-development.md) | 非交互选包、开发重建、资源夹具和 AMD 全局修复 |
 
 ## 维护规则
 
