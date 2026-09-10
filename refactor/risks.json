@@ -891,6 +891,52 @@
       ],
       "compatibleResolution": "Keep historical consumer acceptance, model source command reads as undefined, and provide an accurate public facade without inventing runtime getters.",
       "closureCriteria": "seek/forward/backward/switch/quality reads and writes have an explicit accurate compatibility strategy validated against old TypeScript consumers and real package descriptors."
+    },
+    {
+      "id": "BASE-LIFE-07",
+      "title": "Queued reconnect survives source replacement and reloads the new resource",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-11"
+      ],
+      "evidence": [
+        "test/media-events.test.js",
+        "test/browser/media-events.spec.js",
+        "refactor/changes/2026-09-11-CORE-11-media-events.md"
+      ],
+      "compatibleResolution": "Keep ordinary event order and error identity; scope retries to the current source and stop internal UI/ready work when its instance closes.",
+      "closureCriteria": "Real published/candidate regression comparisons, controlled lifecycle tests and installed UMD/legacy validation pass without altering the frozen published baseline.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-11-media-events.md",
+        "refactor/baselines/media-events-validation.json",
+        "test/media-events.test.js",
+        "test/browser/media-events.spec.js"
+      ],
+      "resolutionRationale": "Published/candidate real-browser comparisons reproduce stale retry or ghost ready and validate candidate cancellation. Owned source lifetimes preserve retries after switch rejection, while instance closure stops UI work; original Event/count and ordinary readiness order remain tested."
+    },
+    {
+      "id": "BASE-LIFE-08",
+      "title": "Ready continues after a control callback destroys the instance",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-11"
+      ],
+      "evidence": [
+        "test/media-events.test.js",
+        "test/browser/media-events.spec.js",
+        "refactor/changes/2026-09-11-CORE-11-media-events.md"
+      ],
+      "compatibleResolution": "Keep ordinary event order and error identity; scope retries to the current source and stop internal UI/ready work when its instance closes.",
+      "closureCriteria": "Real published/candidate regression comparisons, controlled lifecycle tests and installed UMD/legacy validation pass without altering the frozen published baseline.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-11-media-events.md",
+        "refactor/baselines/media-events-validation.json",
+        "test/media-events.test.js",
+        "test/browser/media-events.spec.js"
+      ],
+      "resolutionRationale": "Published/candidate real-browser comparisons reproduce stale retry or ghost ready and validate candidate cancellation. Owned source lifetimes preserve retries after switch rejection, while instance closure stops UI work; original Event/count and ordinary readiness order remain tested."
     }
   ]
 }

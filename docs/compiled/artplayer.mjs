@@ -2770,105 +2770,241 @@ function durationMix(art) {
     }
   });
 }
-function eventInit(art) {
-  const {
-    i18n,
-    notice,
-    option,
-    constructor,
-    proxy,
-    template: { $player, $video, $poster }
-  } = art;
-  let reconnectTime = 0;
+function forwardMediaEvents(art) {
+  const { proxy, template: { $video } } = art;
   for (let index = 0; index < config$1.events.length; index++) {
     proxy($video, config$1.events[index], (event) => {
-      art.emit(`video:${event.type}`, event);
+      if (!isClosing(art))
+        art.emit(`video:${event.type}`, event);
     });
   }
-  art.on("video:canplay", () => {
-    reconnectTime = 0;
-    art.loading.show = false;
+}
+function listenMedia(art, name, callback, once = false) {
+  const guarded = (event) => {
+    if (!isClosing(art))
+      callback(event);
+  };
+  art[once ? "once" : "on"](name, guarded);
+  getScope(art).add(() => {
+    art.off(name, guarded);
   });
-  art.once("video:canplay", () => {
-    art.loading.show = false;
-    art.controls.show = true;
-    art.mask.show = true;
+}
+function showMediaUI(art, changes, active) {
+  for (const [name, value] of changes) {
+    if (isClosing(art) || active && !active())
+      return;
+    art[name].show = value;
+  }
+}
+const current = /* @__PURE__ */ new WeakMap();
+const assignments = /* @__PURE__ */ new WeakMap();
+const sources = /* @__PURE__ */ new WeakMap();
+function getSourceScope(owner) {
+  return sources.get(owner) || getScope(owner);
+}
+function captureSource(owner) {
+  const operation = current.get(owner);
+  const source = sources.get(owner);
+  return () => current.get(owner) === operation && (!operation || operation.active()) && sources.get(owner) === source && (!source || !source.closed);
+}
+function beginSource(owner) {
+  const previous = sources.get(owner);
+  const source = getScope(owner).child();
+  const scope = source.child();
+  sources.set(owner, source);
+  source.add(() => {
+    if (sources.get(owner) === source)
+      sources.delete(owner);
+  });
+  const operation = {
+    scope,
+    assigned: false,
+    acceptingEvents: false,
+    active: () => !isClosing(owner) && !scope.closed && current.get(owner) === operation
+  };
+  current.set(owner, operation);
+  scope.add(() => {
+    if (current.get(owner) === operation)
+      current.delete(owner);
+    operation.onAssigned = void 0;
+    operation.onError = void 0;
+  });
+  previous?.dispose();
+  return operation;
+}
+function takeAssignment(owner) {
+  const operation = assignments.get(owner);
+  assignments.delete(owner);
+  return operation || beginSource(owner);
+}
+function finishAssignment(operation) {
+  operation.assigned = true;
+  const callback = operation.onAssigned;
+  operation.onAssigned = void 0;
+  if (operation.active())
+    callback?.();
+}
+function assignUrl(owner, operation, url) {
+  assignments.set(owner, operation);
+  operation.acceptingEvents = true;
+  try {
+    owner.url = url;
+  } finally {
+    if (assignments.get(owner) === operation) {
+      assignments.delete(owner);
+      finishAssignment(operation);
+    }
+  }
+}
+function failSource(operation, error2) {
+  if (!operation.active())
+    return;
+  if (operation.onError)
+    operation.onError(error2);
+  else
+    console.warn("Failed to initialize ArtPlayer source:", error2);
+  operation.scope.dispose();
+}
+function installEnded(art) {
+  const { option } = art;
+  listenMedia(art, "video:ended", () => {
+    if (option.loop) {
+      const active = captureSource(art);
+      art.seek = 0;
+      if (isClosing(art) || !active())
+        return;
+      silencePromise(art.play());
+      if (active())
+        showMediaUI(art, [["controls", false], ["mask", false]], active);
+    } else {
+      showMediaUI(art, [["controls", true], ["mask", true]]);
+    }
+  });
+}
+function installPlaybackUI(art, reconnect) {
+  const { template: { $poster } } = art;
+  listenMedia(art, "video:loadedmetadata", () => {
+    art.emit("resize");
+    if (isMobile)
+      showMediaUI(art, [["loading", false], ["controls", true], ["mask", true]]);
+  });
+  listenMedia(art, "video:loadstart", () => {
+    reconnect.loadStart();
+    showMediaUI(art, [["loading", true], ["mask", false], ["controls", true]]);
+  });
+  listenMedia(art, "video:pause", () => {
+    showMediaUI(art, [["controls", true], ["mask", true]]);
+  });
+  listenMedia(art, "video:play", () => {
+    showMediaUI(art, [["mask", false]]);
+    if (!isClosing(art))
+      setStyle($poster, "display", "none");
+  });
+  listenMedia(art, "video:playing", () => showMediaUI(art, [["mask", false]]));
+  listenMedia(art, "video:progress", () => {
+    if (art.playing)
+      showMediaUI(art, [["loading", false]]);
+  });
+  listenMedia(art, "video:seeked", () => showMediaUI(art, [["loading", false], ["mask", true]]));
+  listenMedia(art, "video:seeking", () => showMediaUI(art, [["loading", true], ["mask", false]]));
+  listenMedia(art, "video:timeupdate", () => showMediaUI(art, [["mask", false]]));
+  listenMedia(art, "video:waiting", () => showMediaUI(art, [["loading", true], ["mask", false]]));
+}
+function installReadiness(art, reconnect) {
+  listenMedia(art, "video:canplay", () => {
+    reconnect.reset();
+    showMediaUI(art, [["loading", false]]);
+  });
+  listenMedia(art, "video:canplay", () => {
+    showMediaUI(art, [["loading", false], ["controls", true], ["mask", true]]);
+    if (isClosing(art))
+      return;
     art.isReady = true;
     art.emit("ready");
-  });
-  art.on("video:ended", () => {
-    if (option.loop) {
-      art.seek = 0;
-      silencePromise(art.play());
-      art.controls.show = false;
-      art.mask.show = false;
-    } else {
-      art.controls.show = true;
-      art.mask.show = true;
+  }, true);
+}
+function createReconnect(art) {
+  const { option, constructor, i18n, notice, template: { $player } } = art;
+  let source = getSourceScope(art);
+  let attempts = 0;
+  let pending;
+  const run = async (error2) => {
+    if (isClosing(art))
+      return;
+    const current2 = getSourceScope(art);
+    if (current2 !== source) {
+      source = current2;
+      attempts = 0;
     }
-  });
-  art.on("video:error", async (error2) => {
-    if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
-      if (!await wait(getScope(art), constructor.RECONNECT_SLEEP_TIME) || getScope(art).closed)
+    if (pending && !pending.closed)
+      return;
+    const attempt = current2.child();
+    pending = attempt;
+    attempt.add(() => {
+      if (pending === attempt)
+        pending = void 0;
+    });
+    const active = () => !isClosing(art) && !attempt.closed && current2 === getSourceScope(art);
+    const retry = attempts < constructor.RECONNECT_TIME_MAX;
+    try {
+      if (!retry) {
+        showMediaUI(art, [["mask", true], ["loading", false], ["controls", true]], active);
+        if (!active())
+          return;
+        addClass($player, "art-error");
+      }
+      if (!await wait(attempt, constructor.RECONNECT_SLEEP_TIME) || !active())
         return;
-      reconnectTime += 1;
-      art.url = option.url;
-      notice.show = `${i18n.get("Reconnect")}: ${reconnectTime}`;
-      art.emit("error", error2, reconnectTime);
-    } else {
-      art.mask.show = true;
-      art.loading.show = false;
-      art.controls.show = true;
-      addClass($player, "art-error");
-      if (!await wait(getScope(art), constructor.RECONNECT_SLEEP_TIME) || getScope(art).closed)
-        return;
-      notice.show = i18n.get("Video Load Failed");
+      if (retry) {
+        const url = option.url;
+        if (!active())
+          return;
+        attempts += 1;
+        const attemptNumber = attempts;
+        attempt.dispose();
+        const operation = beginSource(art);
+        source = getSourceScope(art);
+        assignUrl(art, operation, url);
+        if (!operation.active())
+          return;
+        const message = `${i18n.get("Reconnect")}: ${attemptNumber}`;
+        if (!operation.active())
+          return;
+        notice.show = message;
+        if (operation.active())
+          art.emit("error", error2, attemptNumber);
+      } else {
+        const message = i18n.get("Video Load Failed");
+        if (active())
+          notice.show = message;
+      }
+    } finally {
+      attempt.dispose();
     }
-  });
-  art.on("video:loadedmetadata", () => {
-    art.emit("resize");
-    if (isMobile) {
-      art.loading.show = false;
-      art.controls.show = true;
-      art.mask.show = true;
+  };
+  return {
+    reset() {
+      attempts = 0;
+      pending?.dispose();
+      removeClass($player, "art-error");
+    },
+    loadStart() {
+      removeClass($player, "art-error");
+    },
+    schedule(error2) {
+      void run(error2).catch((failure) => {
+        console.warn("ArtPlayer reconnect failed:", failure);
+      });
     }
-  });
-  art.on("video:loadstart", () => {
-    art.loading.show = true;
-    art.mask.show = false;
-    art.controls.show = true;
-  });
-  art.on("video:pause", () => {
-    art.controls.show = true;
-    art.mask.show = true;
-  });
-  art.on("video:play", () => {
-    art.mask.show = false;
-    setStyle($poster, "display", "none");
-  });
-  art.on("video:playing", () => {
-    art.mask.show = false;
-  });
-  art.on("video:progress", () => {
-    if (art.playing) {
-      art.loading.show = false;
-    }
-  });
-  art.on("video:seeked", () => {
-    art.loading.show = false;
-    art.mask.show = true;
-  });
-  art.on("video:seeking", () => {
-    art.loading.show = true;
-    art.mask.show = false;
-  });
-  art.on("video:timeupdate", () => {
-    art.mask.show = false;
-  });
-  art.on("video:waiting", () => {
-    art.loading.show = true;
-    art.mask.show = false;
-  });
+  };
+}
+function eventInit(art) {
+  forwardMediaEvents(art);
+  const reconnect = createReconnect(art);
+  installReadiness(art, reconnect);
+  installEnded(art);
+  listenMedia(art, "video:error", reconnect.schedule);
+  installPlaybackUI(art, reconnect);
 }
 function flipMix(art) {
   const {
@@ -3411,64 +3547,6 @@ function playingMix(art) {
       return !!($video.currentTime > 0 && !$video.paused && !$video.ended && $video.readyState > 2);
     }
   });
-}
-const current = /* @__PURE__ */ new WeakMap();
-const assignments = /* @__PURE__ */ new WeakMap();
-function captureSource(owner) {
-  const operation = current.get(owner);
-  return () => current.get(owner) === operation && (!operation || operation.active());
-}
-function beginSource(owner) {
-  const previous = current.get(owner);
-  const scope = getScope(owner).child();
-  const operation = {
-    scope,
-    assigned: false,
-    acceptingEvents: false,
-    active: () => !isClosing(owner) && !scope.closed && current.get(owner) === operation
-  };
-  current.set(owner, operation);
-  scope.add(() => {
-    if (current.get(owner) === operation)
-      current.delete(owner);
-    operation.onAssigned = void 0;
-    operation.onError = void 0;
-  });
-  previous?.scope.dispose();
-  return operation;
-}
-function takeAssignment(owner) {
-  const operation = assignments.get(owner);
-  assignments.delete(owner);
-  return operation || beginSource(owner);
-}
-function finishAssignment(operation) {
-  operation.assigned = true;
-  const callback = operation.onAssigned;
-  operation.onAssigned = void 0;
-  if (operation.active())
-    callback?.();
-}
-function assignUrl(owner, operation, url) {
-  assignments.set(owner, operation);
-  operation.acceptingEvents = true;
-  try {
-    owner.url = url;
-  } finally {
-    if (assignments.get(owner) === operation) {
-      assignments.delete(owner);
-      finishAssignment(operation);
-    }
-  }
-}
-function failSource(operation, error2) {
-  if (!operation.active())
-    return;
-  if (operation.onError)
-    operation.onError(error2);
-  else
-    console.warn("Failed to initialize ArtPlayer source:", error2);
-  operation.scope.dispose();
 }
 function playMix(art) {
   const {

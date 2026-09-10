@@ -99,15 +99,15 @@ when changing defaults, schema or resolution; also rerun installed-package valid
 
 ## Current TypeScript boundary: utilities
 
-| Module | Responsibility and constraints |
-| --- | --- |
-| `src/utils/index.ts` | Existing export barrel; no added runtime names or wrapper methods |
-| `src/utils/format.ts` | Clamp, capitalization, clock formatting and HTML entity conversion; reusable private lookup maps |
-| `src/utils/property.ts` | Native defineProperty alias, own-property inspection and recursive merge; keys are written as own data properties |
-| `src/utils/time.ts` | Sleep, trailing debounce and leading throttle; infer argument tuple/receiver, preserve scheduling and synchronous return behavior |
-| `src/utils/error.ts` | ArtPlayerError, truthiness guard and internal rejection handling; public media promises are handled elsewhere |
-| `src/utils/file.ts` | Historical extension parsing and transient download anchor lifecycle |
-| `src/utils/subtitle.ts` | Existing SRT/ASS-to-VTT text conversions and VTT Blob creation |
+| Module                  | Responsibility and constraints                                                                                                    |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `src/utils/index.ts`    | Existing export barrel; no added runtime names or wrapper methods                                                                 |
+| `src/utils/format.ts`   | Clamp, capitalization, clock formatting and HTML entity conversion; reusable private lookup maps                                  |
+| `src/utils/property.ts` | Native defineProperty alias, own-property inspection and recursive merge; keys are written as own data properties                 |
+| `src/utils/time.ts`     | Sleep, trailing debounce and leading throttle; infer argument tuple/receiver, preserve scheduling and synchronous return behavior |
+| `src/utils/error.ts`    | ArtPlayerError, truthiness guard and internal rejection handling; public media promises are handled elsewhere                     |
+| `src/utils/file.ts`     | Historical extension parsing and transient download anchor lifecycle                                                              |
+| `src/utils/subtitle.ts` | Existing SRT/ASS-to-VTT text conversions and VTT Blob creation                                                                    |
 
 These modules do not import the player, UI components or each other except for the
 barrel. Existing DOM and browser capability utilities remain JS and are re-exported
@@ -133,7 +133,7 @@ throw stops that dispatch and propagates unchanged. Off accepts either a once wr
 or its original callback; duplicate registrations of a callback are removed together.
 The once wrapper unsubscribes before invoking user code and now records consumption,
 so a nested dispatch cannot execute a captured copy twice. This fixes a demonstrated
-old defect without changing ordinary snapshot behavior. Event names such as __proto__
+old defect without changing ordinary snapshot behavior. Event names such as **proto**
 and toString use own properties rather than inherited Object.prototype values.
 
 Shared contracts in test/contracts/emitter.js run against published, workspace and
@@ -318,6 +318,42 @@ finding, not a claim that a standalone debounce can know when its owner is destr
 
 ## Verification and maintenance
 
+### Media events and reconnect (CORE-11)
+
+`player/eventInit.ts` preserves registration order while assembling
+`media/events/{forward,readiness,playback,reconnect,listen,types}.ts`.
+Forwarding keeps the configured names, original Event object and existing proxy.
+Owned Emitter handlers detach on destruction; public subscriptions remain intact.
+UI changes stop if a synchronous component callback closes the instance, so a
+first-ready control callback cannot cause a ghost ready after destroy.
+
+Source ownership is now layered:
+
+```text
+instance scope
+  current source scope
+    source operation scope (switch completion/failure)
+    pending reconnect scope
+```
+
+The source scope survives a rejected switch, allowing the current resource to retry.
+Playback guards capture both source and operation identity, including late play
+after a failed switch has already removed its operation from the current map.
+Changing URL releases the old source scope and all its pending work. Reconnect
+coalesces duplicate errors into one pending attempt, preserves its first Event,
+uses the existing delay/limit, and resets on canplay or an independent new source.
+It still reads option.url when the retry starts; reentrant source replacement
+invalidates that attempt. Attempt numbers are captured before source assignment
+so synchronous proxy canplay cannot change the reported number. Recovery cancels
+pending failure notices and clears art-error. Internal asynchronous observer errors
+are reported through console.warn with the original thrown value.
+
+`test/media-events.test.js` covers forwarding, sequence, cancellation, retry budget,
+failed-switch recovery and reentry. Its browser counterpart uses real HTTP 503 and
+local media, compares old/new stale retry and ghost-ready behavior, and checks the
+mobile metadata branch with an Android UA (not a physical device). Proxy-owned SDK
+events still need adapter-level source identity; native Event has no source token.
+
 ### Playback properties (CORE-10)
 
 The toggle, currentTime, seek/forward/backward, volume/muted, playbackRate,
@@ -365,8 +401,8 @@ guards deferred invocation, ignores obsolete returned failures, and cancels its 
 continuations. Direct assignment failures are reported with console.warn; switch
 callers receive the original rejection. `playMix.ts` captures the current source:
 its native result/rejection is preserved, while obsolete notice/event/mutex effects
-are suppressed. Object URL ownership, other playback migration and reconnect
-generations remain CORE-19/10/11 work.
+are suppressed. CORE-10 migrates playback properties and CORE-11 owns reconnect
+generations; object URL ownership remains CORE-19 work.
 
 `test/source.test.js` checks cancellation, reentry, synchronous events and cleanup;
 `test/browser/source.spec.js` compares published/candidate real-media switching and

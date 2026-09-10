@@ -13,15 +13,28 @@ export interface SourceOperation {
 
 const current = new WeakMap<object, SourceOperation>()
 const assignments = new WeakMap<object, SourceOperation>()
+const sources = new WeakMap<object, ResourceScope>()
+
+export function getSourceScope(owner: object): ResourceScope {
+  return sources.get(owner) || getScope(owner)
+}
 
 export function captureSource(owner: object): () => boolean {
   const operation = current.get(owner)
+  const source = sources.get(owner)
   return () => current.get(owner) === operation && (!operation || operation.active())
+    && sources.get(owner) === source && (!source || !source.closed)
 }
 
 export function beginSource(owner: object): SourceOperation {
-  const previous = current.get(owner)
-  const scope = getScope(owner).child()
+  const previous = sources.get(owner)
+  const source = getScope(owner).child()
+  const scope = source.child()
+  sources.set(owner, source)
+  source.add(() => {
+    if (sources.get(owner) === source)
+      sources.delete(owner)
+  })
   const operation: SourceOperation = {
     scope,
     assigned: false,
@@ -35,7 +48,7 @@ export function beginSource(owner: object): SourceOperation {
     operation.onAssigned = undefined
     operation.onError = undefined
   })
-  previous?.scope.dispose()
+  previous?.dispose()
   return operation
 }
 

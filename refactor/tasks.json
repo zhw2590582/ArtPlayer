@@ -949,11 +949,14 @@
       "dependsOn": [
         "CORE-10"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "媒体转发、重连、UI 响应职责分离",
       "acceptance": "readiness 次数/顺序、过期重连、原错误参数有回归",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-11-media-events.md",
+        "baselines/media-events-validation.json"
+      ]
     },
     {
       "id": "CORE-12",

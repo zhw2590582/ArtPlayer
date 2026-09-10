@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 214 项，范围 22 个包及工作区/示例。
 
-状态：todo 168 / doing 0 / blocked 0 / done 46 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 167 / doing 0 / blocked 0 / done 47 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -114,7 +114,7 @@
 | CORE-08 | artplayer<br>整理插件管理器与扩展类型 | CORE-03, CORE-07 | 注册流程、同步/异步结果、插件/事件扩展接口 | 旧插件同步可见性、重名与命名、销毁中异步插件保持明确语义；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-03 并增加候选正向回归；接续 CORE-07 / BASE-TYPE-04 的同步/异步注册返回声明冲突，内部返回类型精确，保留历史消费者 | H | done |
 | CORE-09 | artplayer<br>整理 URL 与切源操作 | CORE-04, CORE-06, CORE-08 | url/switch/customType 的操作身份及取消方案 | 并发切源、错误、同 URL、销毁和 Promise 结算有契约；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-01/02/06 并增加候选正向回归 | H | done |
 | CORE-10 | artplayer<br>迁移播放与时间/状态属性 | CORE-09 | play/pause/toggle/seek/volume/rate/duration 等模块 | 旧返回值、拒绝、mutex、位置恢复、属性描述符与事件通过；接续 CORE-07 / BASE-TYPE-04 的 toggle void 与实际 Promise 分支冲突，不吞拒绝 | H | done |
-| CORE-11 | artplayer<br>整理媒体事件、ready 与重连 | CORE-10 | 媒体转发、重连、UI 响应职责分离 | readiness 次数/顺序、过期重连、原错误参数有回归 | H | todo |
+| CORE-11 | artplayer<br>整理媒体事件、ready 与重连 | CORE-10 | 媒体转发、重连、UI 响应职责分离 | readiness 次数/顺序、过期重连、原错误参数有回归 | H | done |
 | CORE-12 | artplayer<br>迁移模板及公开资源入口 | CORE-06, CORE-04, BASE-04 | template/icons/i18n/style、SSR 与 proxy 挂载 | DOM/CSS/global/样式注入、i18n 子路径及 SSR import 保持；不把 SSR import/useSSR 保持扩大为服务端构造播放器；复跑 BASE-05 的 SSR import/模板、浏览器 useSSR 节点复用和非浏览器构造错误；接续 VENDOR-01/02，核对 screenfull/hint 复制版本、修改与分发通知，保留 DOM/CSS/fullscreen 行为 | H | todo |
 | CORE-13 | artplayer<br>迁移组件注册与控件 | CORE-12, CORE-08 | Component/control/layer/contextmenu 的资源与 TS 边界 | add/update/remove、name、selector、mounted/beforeUnmount 通过；处理 BASE-DOM-02 窄容器控件裁切，保留 controls.update 的旧 undefined 返回值 | H | todo |
 | CORE-14 | artplayer<br>拆分设置树、渲染和布局 | CORE-13 | setting model/selection/render/layout 的分批实现 | 不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过；结合 BASE-DOM-02 验证窄容器设置定位；接续 BASE-TYPE-07 的 find null、add/update item、remove undefined 声明冲突 | H | todo |
@@ -445,6 +445,7 @@
 - CORE-08: [记录](changes/2026-09-11-CORE-08-plugin-manager.md) [记录](baselines/plugins-validation.json)
 - CORE-09: [记录](changes/2026-09-11-CORE-09-source-operations.md) [记录](baselines/source-operations-validation.json)
 - CORE-10: [记录](changes/2026-09-11-CORE-10-playback-properties.md) [记录](baselines/playback-properties-validation.json)
+- CORE-11: [记录](changes/2026-09-11-CORE-11-media-events.md) [记录](baselines/media-events-validation.json)
 - PKG-CHAPTER-01: [记录](changes/2026-09-10-PKG-CHAPTER-01-contract.md) [记录](baselines/chapter-contract.md)
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)

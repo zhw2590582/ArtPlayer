@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：CORE-11 媒体事件、ready 与重连完成
+
+事件入口迁移 TS，拆出转发、ready、播放 UI、重连、订阅和宿主类型；资源代次与切源操作分离，失败切源仍可重试，换源/恢复/销毁取消过期工作。158 项 Node/基线、安装 UMD 与 legacy 各 222 项三浏览器、打包 27 项运行时及五组类型检查通过。见 [交付](changes/2026-09-11-CORE-11-media-events.md)。关闭新增 BASE-LIFE-07/08，保留原 Event、重试次数和正常 ready 顺序；第三方 SDK 事件仍由适配器负责。当前 214 项，47 完成、167 待办；核心 49 个 TS 文件、chapter 5 个。下一项 CORE-12 模板及公开资源入口。
+
 ## 当前实施：CORE-10 播放与时间/状态属性完成
 
 八个 mixin 迁移 TS，新增最小播放属性宿主；保持转换、通知、存储、进度和状态优先级。新增 PlaybackControls 精确视图，旧 toggle 声明仍兼容。145 项 Node/基线、安装 UMD 与 legacy 各 195 项三浏览器、打包 27 项运行时和五组类型检查通过。见 [交付](changes/2026-09-11-CORE-10-playback-properties.md)。发现 BASE-TYPE-08 的只写属性虚构 getter 声明，已交 CORE-21；没有添加运行时 getter 来掩盖它。当前 214 项，46 完成、168 待办；核心 42 个 TS 文件、chapter 5 个。下一项 CORE-11 媒体事件、ready 与重连。

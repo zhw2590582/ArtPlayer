@@ -52,3 +52,5 @@
 | BASE-TYPE-06 | resolved / 已复现 | Public Option requires url and excludes numeric control HTML accepted by existing JS | CORE-07 |
 | BASE-TYPE-07 | open / 已复现 | Setting returns, subtitle contextual payloads and notice getter conflict with historical declarations | CORE-07, CORE-14, CORE-15, CORE-18, CORE-21 |
 | BASE-TYPE-08 | open / 已复现 | Write-only player commands have fictitious public getter declarations | CORE-21 |
+| BASE-LIFE-07 | resolved / 已复现 | Queued reconnect survives source replacement and reloads the new resource | CORE-11 |
+| BASE-LIFE-08 | resolved / 已复现 | Ready continues after a control callback destroys the instance | CORE-11 |
