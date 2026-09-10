@@ -22,6 +22,14 @@ When a production module moves, update its loader mapping and its maintenance do
 
 # Real browser tests
 
+`test/utils.test.js` compares the published and current utilities, including exact formatting,
+subtitle text, property/merge behavior, controlled timers and the full utility export surface.
+It accepts the same `ARTPLAYER_TEST_CORE` option for all three artifact formats. The merge
+prototype fix is a candidate assertion alongside a published-only defect observation.
+`test/types/utils-source.ts` checks strict internal source inference without changing the
+still-separate public declaration contract. Browser utility tests exercise actual downloads,
+Blob URL contents and cleanup when a controlled click fails.
+
 See [browser/README.md](browser/README.md) for `yarn test:browser`, browser installation,
 published/current combinations, media fixtures, candidate mapping and failure reports.
 These tests are separate from the fast Node suite and run in the Browser playback smoke CI job.

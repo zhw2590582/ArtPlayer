@@ -44,3 +44,6 @@
 | SDK-11 | open / 待取证 | asr-caller-service 实际集成验证范围 | PKG-ASR-01, PKG-ASR-05, EX-03 |
 | SDK-12 | open / 待取证 | option-validator 实际集成验证范围 | CORE-01, CORE-07 |
 | BUILD-AMD-01 | resolved / 已复现 | AMD 全局导出补丁误将固定参数 t 当作全局对象 | ENG-06 |
+| UTIL-MERGE-01 | resolved / 已复现 | mergeDeep lets a JSON __proto__ key replace the result prototype | CORE-01 |
+| UTIL-DOWNLOAD-01 | resolved / 源码/产物事实 | Temporary download anchor remains if click throws | CORE-01 |
+| BASE-TYPE-05 | open / 源码/产物事实 | Public Utils declarations omit exports and misstate timer/descriptor signatures | CORE-07 |

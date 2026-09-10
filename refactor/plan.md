@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 214 项，范围 22 个包及工作区/示例。
 
-状态：todo 178 / doing 0 / blocked 0 / done 36 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 177 / doing 0 / blocked 0 / done 37 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -104,13 +104,13 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| CORE-01 | artplayer<br>迁移纯工具并冻结导出 | ENG-03, ENG-04, ENG-06, PILOT-01 | utils/time/property/format/file/error/subtitle 的分批 TS 迁移 | Artplayer.utils 导出/参数/绑定保持，纯逻辑与类型测试通过 | M | todo |
+| CORE-01 | artplayer<br>迁移纯工具并冻结导出 | ENG-03, ENG-04, ENG-06, PILOT-01 | utils/time/property/format/file/error/subtitle 的分批 TS 迁移 | Artplayer.utils 导出/参数/绑定保持，纯逻辑与类型测试通过 | M | done |
 | CORE-02 | artplayer<br>迁移内部 Emitter | CORE-01, BASE-03 | 带类型事件映射的原 Emitter 实现 | ctx、once/off、重入/异常和链式返回保持 | H | todo |
 | CORE-03 | artplayer<br>建立内部资源作用域 | CORE-02 | 监听/订阅/定时器/RAF/请求/URL 的资源登记 | 实例与操作作用域分离，单项清理失败不阻断其他资源 | H | todo |
 | CORE-04 | artplayer<br>修复初始化与销毁生命周期 | CORE-03, ENG-05, BASE-07 | 构造失败回收、重复/重入 destroy、instances 修复 | 事件顺序、removeHtml、多实例和销毁中异步有真实回归；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-04/05 并增加候选正向回归；协调 BASE-PERF-01 销毁后定时器与回调归属 | H | todo |
 | CORE-05 | artplayer<br>区分输入配置和内部配置 | CORE-01, ENG-04 | Option/ResolvedOption、默认值与校验整理 | 配置合并/错误时机不变，JS 输入仍运行时校验 | M | todo |
 | CORE-06 | artplayer<br>建立内部媒体与宿主类型 | CORE-05 | 原生 video、canvas shim、UI host 类型 | 不更改公开 art.video 用法，不以 HTMLVideoElement 断言掩盖 shim | M | todo |
-| CORE-07 | artplayer<br>逐项协调公开声明差异 | CORE-02, CORE-06, BASE-07 | plugins/toggle/cue/setting/static 的旧新类型对照 | 每项有兼容重载/扩展或待决结论，不能删除旧类型样例；处理 BASE-TYPE-01/04，分别保留旧合法声明消费并验证真实返回 | H | todo |
+| CORE-07 | artplayer<br>逐项协调公开声明差异 | CORE-02, CORE-06, BASE-07 | plugins/toggle/cue/setting/static 的旧新类型对照 | 每项有兼容重载/扩展或待决结论，不能删除旧类型样例；处理 BASE-TYPE-01/04，分别保留旧合法声明消费并验证真实返回；协调 BASE-TYPE-05 的 Utils 导出、descriptor 和 timer 旧声明差异 | H | todo |
 | CORE-08 | artplayer<br>整理插件管理器与扩展类型 | CORE-03, CORE-07 | 注册流程、同步/异步结果、插件/事件扩展接口 | 旧插件同步可见性、重名与命名、销毁中异步插件保持明确语义；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-03 并增加候选正向回归 | H | todo |
 | CORE-09 | artplayer<br>整理 URL 与切源操作 | CORE-04, CORE-06, CORE-08 | url/switch/customType 的操作身份及取消方案 | 并发切源、错误、同 URL、销毁和 Promise 结算有契约；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-01/02/06 并增加候选正向回归 | H | todo |
 | CORE-10 | artplayer<br>迁移播放与时间/状态属性 | CORE-09 | play/pause/toggle/seek/volume/rate/duration 等模块 | 旧返回值、拒绝、mutex、位置恢复、属性描述符与事件通过 | H | todo |
@@ -435,6 +435,7 @@
 - ENG-07: [记录](changes/2026-09-10-ENG-07-package-consumers.md) [记录](baselines/package-validation.json)
 - ENG-10: [记录](changes/2026-09-10-ENG-10-test-reliability.md) [记录](test-reliability.md)
 - PILOT-01: [记录](changes/2026-09-10-PILOT-01-chapter.md) [记录](baselines/pilot-validation.json)
+- CORE-01: [记录](changes/2026-09-10-CORE-01-typed-utils.md) [记录](baselines/core-utils-validation.json)
 - PKG-CHAPTER-01: [记录](changes/2026-09-10-PKG-CHAPTER-01-contract.md) [记录](baselines/chapter-contract.md)
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)

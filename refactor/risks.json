@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-10T15:27:41.538Z",
+  "updatedAt": "2026-09-10T15:48:43.324Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -656,6 +656,65 @@
         "refactor/scripts/build.test.mjs"
       ],
       "resolutionRationale": "构建逻辑修复已完成；63 产物中 24 仅修复接收者，42 浏览器 AMD 检查通过。未改变旧 npm 内容；正式发布仍须用新工具生成实际候选。"
+    },
+    {
+      "id": "UTIL-MERGE-01",
+      "title": "mergeDeep lets a JSON __proto__ key replace the result prototype",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-01"
+      ],
+      "evidence": [
+        "test/utils.test.js",
+        "refactor/changes/2026-09-10-CORE-01-typed-utils.md"
+      ],
+      "compatibleResolution": "Write own data properties while preserving ordinary deep merge and array semantics.",
+      "closureCriteria": "Published defect remains observable; current and three artifacts keep normal prototypes, nested behavior and input identity.",
+      "resolutionEvidence": [
+        "test/utils.test.js",
+        "packages/artplayer/src/utils/property.ts",
+        "refactor/changes/2026-09-10-CORE-01-typed-utils.md"
+      ],
+      "resolutionRationale": "Published/current and three format contracts prove the __proto__ result-prototype correction, with ordinary merge/reference behavior retained."
+    },
+    {
+      "id": "UTIL-DOWNLOAD-01",
+      "title": "Temporary download anchor remains if click throws",
+      "confirmation": "source-observed",
+      "status": "resolved",
+      "owners": [
+        "CORE-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-10-CORE-01-typed-utils.md",
+        "test/browser/utils.spec.js"
+      ],
+      "compatibleResolution": "Use finally to remove only the owned anchor, preserve thrown error and caller URL ownership.",
+      "closureCriteria": "Real successful download and controlled click-failure cleanup pass in all three browsers.",
+      "resolutionEvidence": [
+        "test/browser/utils.spec.js",
+        "packages/artplayer/src/utils/file.ts",
+        "refactor/changes/2026-09-10-CORE-01-typed-utils.md"
+      ],
+      "resolutionRationale": "Chromium, Firefox and WebKit downloaded the real fixture; controlled click failure still propagated and left no anchor."
+    },
+    {
+      "id": "BASE-TYPE-05",
+      "title": "Public Utils declarations omit exports and misstate timer/descriptor signatures",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "CORE-07"
+      ],
+      "evidence": [
+        "packages/artplayer/types/utils.d.ts",
+        "test/utils.test.js",
+        "test/types/utils-source.ts",
+        "refactor/changes/2026-09-10-CORE-01-typed-utils.md"
+      ],
+      "compatibleResolution": "Coordinate compatible public overloads/exports separately; use accurate strict types in migrated source.",
+      "closureCriteria": "Cover missing unescape/ArtPlayerError, def identity/property keys, optional sleep, timer void returns and ignored debounce context; retain legal old consumers in new/old compilers."
     }
   ]
 }

@@ -1,5 +1,5 @@
-function fixSrt(srt) {
-  return srt.replace(/(\d\d:\d\d:\d\d)[,.](\d+)/g, (_, $1, $2) => {
+function fixSrt(srt: string): string {
+  return srt.replace(/(\d\d:\d\d:\d\d)[,.](\d+)/g, (_match: string, $1: string, $2: string) => {
     let ms = $2.slice(0, 3)
     if ($2.length === 1) {
       ms = `${$2}00`
@@ -11,7 +11,7 @@ function fixSrt(srt) {
   })
 }
 
-export function srtToVtt(srtText) {
+export function srtToVtt(srtText: string): string {
   return 'WEBVTT \r\n\r\n'.concat(
     fixSrt(srtText)
       .replace(/\{\\([ibu])\}/g, '</$1>')
@@ -24,7 +24,7 @@ export function srtToVtt(srtText) {
   )
 }
 
-export function vttToBlob(vttText) {
+export function vttToBlob(vttText: string): string {
   return URL.createObjectURL(
     new Blob([vttText], {
       type: 'text/vtt',
@@ -32,7 +32,7 @@ export function vttToBlob(vttText) {
   )
 }
 
-export function assToVtt(ass) {
+export function assToVtt(ass: string): string {
   const reAss = new RegExp(
     'Dialogue:\\s\\d,'
     + '(\\d+:\\d\\d:\\d\\d.\\d\\d),'
@@ -76,10 +76,11 @@ export function assToVtt(ass) {
           const m = line.match(reAss)
           if (!m)
             return null
+          const [, start = '', end = '', , , text = ''] = m
           return {
-            start: fixTime(m[1].trim()),
-            end: fixTime(m[2].trim()),
-            text: m[5]
+            start: fixTime(start.trim()),
+            end: fixTime(end.trim()),
+            text: text
               .replace(/\{[\s\S]*?\}/g, '')
               .replace(/(\\N)/g, '\n')
               .trim()

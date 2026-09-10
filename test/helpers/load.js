@@ -39,26 +39,26 @@ export async function loadPackage(name, root = workspace) {
   return importCode(chunks[0].code)
 }
 
-function commonJs(code) {
+function commonJs(code, globals = {}) {
   const module = { exports: {} }
-  vm.runInNewContext(code, { module, exports: module.exports }, { timeout: 5000 })
+  vm.runInNewContext(code, { ...globals, module, exports: module.exports }, { timeout: 5000 })
   return module.exports
 }
 
-export async function loadPublishedCore() {
+export async function loadPublishedCore(globals = {}) {
   const release = JSON.parse(fs.readFileSync(path.join(workspace, 'refactor/baselines/releases.json'), 'utf8')).releases.find(item => item.name === 'artplayer')
   const archive = await ensureArchive(release)
   const member = 'package/dist/artplayer.js'
   const code = readMember(archive, member)
   assert.equal(hash(code), release.files[member], 'Published core member changed')
-  return { name: `published ${release.version}`, Artplayer: commonJs(code.toString('utf8')) }
+  return { name: `published ${release.version}`, Artplayer: commonJs(code.toString('utf8'), globals) }
 }
 
-export async function loadCoreArtifact(filename) {
+export async function loadCoreArtifact(filename, globals = {}) {
   const absolute = path.resolve(filename)
   const Artplayer = absolute.endsWith('.mjs')
     ? (await import(pathToFileURL(absolute))).default
-    : commonJs(fs.readFileSync(absolute, 'utf8'))
+    : commonJs(fs.readFileSync(absolute, 'utf8'), globals)
   assert.equal(typeof Artplayer?.Emitter, 'function', 'Candidate artifact must expose Artplayer.Emitter')
   return { name: `candidate ${Artplayer.version} (${path.basename(absolute)})`, Artplayer }
 }

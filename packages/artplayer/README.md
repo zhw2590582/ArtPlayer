@@ -10,6 +10,11 @@
 
 [https://artplayer.org](https://artplayer.org)
 
+## Maintenance
+
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for the current module map, compatibility
+boundaries, resource ownership and verification commands during the TypeScript migration.
+
 ## License
 
 MIT © Harvey Zhao
