@@ -325,11 +325,16 @@
       "dependsOn": [
         "BASE-02"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "核心模板/类名/变量、键盘/焦点/可访问名称基线及全 demo 路径映射；docs-browser-testing.md 中 HTML/编辑器的脚本来源与存储状态；登记契约/版本/固定测试 ID/命令/报告与负责任务",
       "acceptance": "核心/试点用户样式和输入用法已记录，其他 demo 运行状态与未知项明确；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-BASE-04-dom.md",
+        "baselines/dom.json",
+        "baselines/dom-coverage.md",
+        "baselines/demo-inventory.json"
+      ]
     },
     {
       "id": "BASE-05",
@@ -911,7 +916,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "Component/control/layer/contextmenu 的资源与 TS 边界",
-      "acceptance": "add/update/remove、name、selector、mounted/beforeUnmount 通过",
+      "acceptance": "add/update/remove、name、selector、mounted/beforeUnmount 通过；处理 BASE-DOM-02 窄容器控件裁切，保留 controls.update 的旧 undefined 返回值",
       "evidence": []
     },
     {
@@ -927,7 +932,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "setting model/selection/render/layout 的分批实现",
-      "acceptance": "不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过",
+      "acceptance": "不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过；结合 BASE-DOM-02 验证窄容器设置定位",
       "evidence": []
     },
     {
@@ -1071,7 +1076,7 @@
         "BASE-04"
       ],
       "deliverable": "主要控件/设置/模式退出的键盘与焦点回归、名称和字幕可用性检查及必要兼容修正",
-      "acceptance": "保持旧快捷键和 DOM/CSS 钩子；真实浏览器验证，不以静态属性检查代替交互"
+      "acceptance": "保持旧快捷键和 DOM/CSS 钩子；真实浏览器验证，不以静态属性检查代替交互；处理 BASE-DOM-01 的主要控件 Tab 不可达，保留既有名称与快捷键"
     },
     {
       "id": "CORE-22",
@@ -3318,7 +3323,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "中英文文档、插件页面、demo URL、编辑器声明与生成目录清单；六类 HTML 入口、prod/libs/code/example 加载行为及移动重定向",
-      "acceptance": "所有公开 API/插件有对应页面或明确补充任务",
+      "acceptance": "所有公开 API/插件有对应页面或明确补充任务；核实 BASE-DEMO-01 的历史 thumbnail 插件来源及 29 示例/36 HTML 路径",
       "evidence": []
     },
     {
@@ -3494,7 +3499,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录",
-      "acceptance": "旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据",
+      "acceptance": "旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据；依据 BASE-04 路径台账逐项消除 not-run，处理 BASE-DEMO-01",
       "evidence": []
     },
     {

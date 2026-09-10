@@ -1,0 +1,1630 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-04",
+  "sourceCommit": "94893929",
+  "browserSurface": "Codex in-app browser",
+  "report": {
+    "kind": "dom",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "language": "zh-CN"
+    },
+    "scripts": [
+      "/releases/artplayer/dist/artplayer.js",
+      "/releases/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js",
+      "/fixtures/dom.js"
+    ],
+    "checks": [
+      {
+        "id": "DOM.chapter-markup",
+        "passed": true
+      },
+      {
+        "id": "DOM.control-click",
+        "passed": true
+      },
+      {
+        "id": "DOM.control-remove",
+        "passed": true
+      },
+      {
+        "id": "DOM.control-update",
+        "passed": true
+      },
+      {
+        "id": "DOM.destroy",
+        "passed": true
+      },
+      {
+        "id": "DOM.fullscreen-web-enter",
+        "passed": true
+      },
+      {
+        "id": "DOM.fullscreen-web-exit",
+        "passed": true
+      },
+      {
+        "id": "DOM.input-ignores-hotkey",
+        "passed": true
+      },
+      {
+        "id": "DOM.keyboard-seek",
+        "passed": true
+      },
+      {
+        "id": "DOM.layer-remove",
+        "passed": true
+      },
+      {
+        "id": "DOM.narrow-container",
+        "passed": true
+      },
+      {
+        "id": "DOM.setting-remove",
+        "passed": true
+      },
+      {
+        "id": "DOM.setting-select",
+        "passed": true
+      },
+      {
+        "id": "DOM.setting-update",
+        "passed": true
+      },
+      {
+        "id": "DOM.user-style",
+        "passed": true
+      },
+      {
+        "id": "DOM.version-template",
+        "passed": true
+      }
+    ],
+    "errors": [],
+    "unhandled": [],
+    "interactions": [
+      {
+        "focus": "BUTTON",
+        "label": null,
+        "id": "tab-start"
+      },
+      {
+        "time": 0,
+        "hotkeys": 0,
+        "focused": false,
+        "target": "BUTTON",
+        "code": "Tab",
+        "trusted": true,
+        "afterTime": 0,
+        "afterHotkeys": 0,
+        "activeTag": "BUTTON",
+        "activeLabel": null
+      },
+      {
+        "focus": "INPUT",
+        "label": "Typing probe",
+        "id": ""
+      },
+      {
+        "time": 0,
+        "hotkeys": 0,
+        "focused": false,
+        "target": "INPUT",
+        "code": "Tab",
+        "trusted": true,
+        "afterTime": 0,
+        "afterHotkeys": 0,
+        "activeTag": "INPUT",
+        "activeLabel": "Typing probe"
+      },
+      {
+        "focus": "BUTTON",
+        "label": null,
+        "id": "narrow"
+      },
+      {
+        "time": 0,
+        "hotkeys": 0,
+        "focused": true,
+        "target": "BODY",
+        "code": "ArrowRight",
+        "trusted": true,
+        "afterTime": 5,
+        "afterHotkeys": 1,
+        "activeTag": "BODY",
+        "activeLabel": null
+      },
+      {
+        "focus": "INPUT",
+        "label": "Typing probe",
+        "id": ""
+      },
+      {
+        "time": 5,
+        "hotkeys": 1,
+        "focused": true,
+        "target": "INPUT",
+        "code": "ArrowRight",
+        "trusted": true,
+        "afterTime": 5,
+        "afterHotkeys": 1,
+        "activeTag": "INPUT",
+        "activeLabel": "Typing probe"
+      },
+      {
+        "time": 5,
+        "hotkeys": 1,
+        "focused": true,
+        "target": "BODY",
+        "code": "Escape",
+        "trusted": true,
+        "afterTime": 5,
+        "afterHotkeys": 2,
+        "activeTag": "BODY",
+        "activeLabel": null
+      },
+      {
+        "focus": "BUTTON",
+        "label": null,
+        "id": "narrow"
+      },
+      {
+        "focus": "BUTTON",
+        "label": null,
+        "id": "finish"
+      }
+    ],
+    "observations": {
+      "wide": {
+        "width": 640,
+        "height": 360,
+        "scrollWidth": 640,
+        "controls": [
+          {
+            "class": "art-control art-control-progress",
+            "width": 640,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-thumbnails",
+            "width": 0,
+            "withinPlayer": true,
+            "display": "block"
+          },
+          {
+            "class": "art-control art-control-playAndPause",
+            "width": 46,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-volume",
+            "width": 46,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-time",
+            "width": 106.69,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-compat hint--rounded hint--top",
+            "width": 91.19,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-setting hint--rounded hint--top",
+            "width": 46,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-fullscreenWeb hint--rounded hint--top",
+            "width": 46,
+            "withinPlayer": true,
+            "display": "flex"
+          }
+        ]
+      },
+      "selected": {
+        "html": "High",
+        "defaults": [
+          false,
+          true
+        ]
+      },
+      "narrow": {
+        "width": 320,
+        "height": 180,
+        "scrollWidth": 320,
+        "controls": [
+          {
+            "class": "art-control art-control-progress",
+            "width": 300,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-thumbnails",
+            "width": 0,
+            "withinPlayer": true,
+            "display": "block"
+          },
+          {
+            "class": "art-control art-control-playAndPause",
+            "width": 46,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-volume",
+            "width": 46,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-time",
+            "width": 106.69,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-compat hint--rounded hint--top",
+            "width": 91.19,
+            "withinPlayer": true,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-setting hint--rounded hint--top",
+            "width": 46,
+            "withinPlayer": false,
+            "display": "flex"
+          },
+          {
+            "class": "art-control art-control-fullscreenWeb hint--rounded hint--top",
+            "width": 46,
+            "withinPlayer": false,
+            "display": "flex"
+          }
+        ]
+      }
+    },
+    "snapshot": {
+      "template": "\n          <div class=\"art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show\">\n            <video class=\"art-video\">\n              <track default kind=\"metadata\" src=\"\"></track>\n            </video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-center\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\"></div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">5.4.0</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ",
+      "tree": {
+        "tag": "div",
+        "attributes": {
+          "class": "art-video-player art-subtitle-show art-layer-show art-control-show art-backdrop art-hover artplayer-plugin-chapter art-mask-show"
+        },
+        "children": [
+          {
+            "tag": "video",
+            "attributes": {
+              "class": "art-video"
+            },
+            "children": [
+              {
+                "tag": "track",
+                "attributes": {},
+                "children": []
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-poster"
+            },
+            "children": []
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-subtitle"
+            },
+            "children": []
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-danmuku"
+            },
+            "children": []
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-layers"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-layer art-layer-compat"
+                },
+                "children": [
+                  {
+                    "tag": "label",
+                    "attributes": {
+                      "class": "user-hook"
+                    },
+                    "children": [
+                      {
+                        "tag": "input",
+                        "attributes": {
+                          "aria-label": "Typing probe"
+                        },
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-mask"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-state"
+                },
+                "children": [
+                  {
+                    "tag": "i",
+                    "attributes": {
+                      "class": "art-icon art-icon-state"
+                    },
+                    "children": [
+                      {
+                        "tag": "svg",
+                        "attributes": {},
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "i",
+                    "attributes": {
+                      "class": "art-icon art-icon-error"
+                    },
+                    "children": [
+                      {
+                        "tag": "svg",
+                        "attributes": {},
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-bottom"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-progress"
+                },
+                "children": [
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-control art-control-progress"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-control-progress-inner"
+                        },
+                        "children": [
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-progress-hover"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-progress-loaded"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-progress-played"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-progress-highlight"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-progress-indicator"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-progress-tip"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-chapters"
+                            },
+                            "children": [
+                              {
+                                "tag": "div",
+                                "attributes": {
+                                  "class": "art-chapter"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "div",
+                                    "attributes": {
+                                      "class": "art-chapter-inner"
+                                    },
+                                    "children": [
+                                      {
+                                        "tag": "div",
+                                        "attributes": {
+                                          "class": "art-progress-hover"
+                                        },
+                                        "children": []
+                                      },
+                                      {
+                                        "tag": "div",
+                                        "attributes": {
+                                          "class": "art-progress-loaded"
+                                        },
+                                        "children": []
+                                      },
+                                      {
+                                        "tag": "div",
+                                        "attributes": {
+                                          "class": "art-progress-played"
+                                        },
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tag": "div",
+                                "attributes": {
+                                  "class": "art-chapter"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "div",
+                                    "attributes": {
+                                      "class": "art-chapter-inner"
+                                    },
+                                    "children": [
+                                      {
+                                        "tag": "div",
+                                        "attributes": {
+                                          "class": "art-progress-hover"
+                                        },
+                                        "children": []
+                                      },
+                                      {
+                                        "tag": "div",
+                                        "attributes": {
+                                          "class": "art-progress-loaded"
+                                        },
+                                        "children": []
+                                      },
+                                      {
+                                        "tag": "div",
+                                        "attributes": {
+                                          "class": "art-progress-played"
+                                        },
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-chapter-title"
+                            },
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-control art-control-thumbnails"
+                    },
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-controls"
+                },
+                "children": [
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-controls-left"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-control art-control-playAndPause"
+                        },
+                        "children": [
+                          {
+                            "tag": "i",
+                            "attributes": {
+                              "class": "art-icon art-icon-play hint--rounded hint--top",
+                              "aria-label": "Play"
+                            },
+                            "children": [
+                              {
+                                "tag": "svg",
+                                "attributes": {},
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "i",
+                            "attributes": {
+                              "class": "art-icon art-icon-pause hint--rounded hint--top",
+                              "aria-label": "Pause"
+                            },
+                            "children": [
+                              {
+                                "tag": "svg",
+                                "attributes": {},
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-control art-control-volume"
+                        },
+                        "children": [
+                          {
+                            "tag": "i",
+                            "attributes": {
+                              "class": "art-icon art-icon-volume"
+                            },
+                            "children": [
+                              {
+                                "tag": "svg",
+                                "attributes": {},
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "i",
+                            "attributes": {
+                              "class": "art-icon art-icon-volumeClose"
+                            },
+                            "children": [
+                              {
+                                "tag": "svg",
+                                "attributes": {},
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-volume-panel"
+                            },
+                            "children": [
+                              {
+                                "tag": "div",
+                                "attributes": {
+                                  "class": "art-volume-inner"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "div",
+                                    "attributes": {
+                                      "class": "art-volume-val"
+                                    },
+                                    "children": []
+                                  },
+                                  {
+                                    "tag": "div",
+                                    "attributes": {
+                                      "class": "art-volume-slider"
+                                    },
+                                    "children": [
+                                      {
+                                        "tag": "div",
+                                        "attributes": {
+                                          "class": "art-volume-handle"
+                                        },
+                                        "children": [
+                                          {
+                                            "tag": "div",
+                                            "attributes": {
+                                              "class": "art-volume-loaded"
+                                            },
+                                            "children": []
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "tag": "div",
+                                        "attributes": {
+                                          "class": "art-volume-indicator"
+                                        },
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-control art-control-time"
+                        },
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-controls-center"
+                    },
+                    "children": []
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-controls-right"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-control art-control-compat hint--rounded hint--top",
+                          "aria-label": "Probe control"
+                        },
+                        "children": []
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-control art-control-setting hint--rounded hint--top",
+                          "aria-label": "Show Setting"
+                        },
+                        "children": [
+                          {
+                            "tag": "i",
+                            "attributes": {
+                              "class": "art-icon art-icon-setting"
+                            },
+                            "children": [
+                              {
+                                "tag": "svg",
+                                "attributes": {},
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-control art-control-fullscreenWeb hint--rounded hint--top",
+                          "aria-label": "Web Fullscreen"
+                        },
+                        "children": [
+                          {
+                            "tag": "i",
+                            "attributes": {
+                              "class": "art-icon art-icon-fullscreenWebOn"
+                            },
+                            "children": [
+                              {
+                                "tag": "svg",
+                                "attributes": {
+                                  "class": "icon"
+                                },
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "i",
+                            "attributes": {
+                              "class": "art-icon art-icon-fullscreenWebOff"
+                            },
+                            "children": [
+                              {
+                                "tag": "svg",
+                                "attributes": {
+                                  "class": "icon"
+                                },
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-loading"
+            },
+            "children": [
+              {
+                "tag": "i",
+                "attributes": {
+                  "class": "art-icon art-icon-loading"
+                },
+                "children": [
+                  {
+                    "tag": "svg",
+                    "attributes": {
+                      "class": "uil-default"
+                    },
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-notice"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-notice-inner"
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-settings"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-setting-panel art-current"
+                },
+                "children": [
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-setting-item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-setting-item-left"
+                        },
+                        "children": [
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-left-icon"
+                            },
+                            "children": [
+                              {
+                                "tag": "i",
+                                "attributes": {
+                                  "class": "art-icon art-icon-playbackRate"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "svg",
+                                    "attributes": {},
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-left-text"
+                            },
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-setting-item-right"
+                        },
+                        "children": [
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-right-tooltip"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-right-icon"
+                            },
+                            "children": [
+                              {
+                                "tag": "i",
+                                "attributes": {
+                                  "class": "art-icon art-icon-arrowRight"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "svg",
+                                    "attributes": {},
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-setting-item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-setting-item-left"
+                        },
+                        "children": [
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-left-icon"
+                            },
+                            "children": [
+                              {
+                                "tag": "i",
+                                "attributes": {
+                                  "class": "art-icon art-icon-aspectRatio"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "svg",
+                                    "attributes": {},
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-left-text"
+                            },
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-setting-item-right"
+                        },
+                        "children": [
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-right-tooltip"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-right-icon"
+                            },
+                            "children": [
+                              {
+                                "tag": "i",
+                                "attributes": {
+                                  "class": "art-icon art-icon-arrowRight"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "svg",
+                                    "attributes": {},
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-setting-item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-setting-item-left"
+                        },
+                        "children": [
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-left-icon"
+                            },
+                            "children": [
+                              {
+                                "tag": "i",
+                                "attributes": {
+                                  "class": "art-icon art-icon-config"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "svg",
+                                    "attributes": {},
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-left-text"
+                            },
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-setting-item-right"
+                        },
+                        "children": [
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-right-tooltip"
+                            },
+                            "children": []
+                          },
+                          {
+                            "tag": "div",
+                            "attributes": {
+                              "class": "art-setting-item-right-icon"
+                            },
+                            "children": [
+                              {
+                                "tag": "i",
+                                "attributes": {
+                                  "class": "art-icon art-icon-arrowRight"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "svg",
+                                    "attributes": {},
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-info"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-info-panel"
+                },
+                "children": [
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-info-item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-title"
+                        },
+                        "children": []
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-content"
+                        },
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-info-item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-title"
+                        },
+                        "children": []
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-content"
+                        },
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-info-item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-title"
+                        },
+                        "children": []
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-content"
+                        },
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-info-item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-title"
+                        },
+                        "children": []
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-content"
+                        },
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-info-item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-title"
+                        },
+                        "children": []
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-content"
+                        },
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "attributes": {
+                      "class": "art-info-item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-title"
+                        },
+                        "children": []
+                      },
+                      {
+                        "tag": "div",
+                        "attributes": {
+                          "class": "art-info-content"
+                        },
+                        "children": [
+                          {
+                            "tag": "span",
+                            "attributes": {},
+                            "children": []
+                          },
+                          {
+                            "tag": "span",
+                            "attributes": {},
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-info-close"
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "attributes": {
+              "class": "art-contextmenus"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-contextmenu art-contextmenu-playbackRate"
+                },
+                "children": [
+                  {
+                    "tag": "span",
+                    "attributes": {},
+                    "children": []
+                  },
+                  {
+                    "tag": "span",
+                    "attributes": {},
+                    "children": []
+                  },
+                  {
+                    "tag": "span",
+                    "attributes": {
+                      "class": "art-current"
+                    },
+                    "children": []
+                  },
+                  {
+                    "tag": "span",
+                    "attributes": {},
+                    "children": []
+                  },
+                  {
+                    "tag": "span",
+                    "attributes": {},
+                    "children": []
+                  },
+                  {
+                    "tag": "span",
+                    "attributes": {},
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-contextmenu art-contextmenu-aspectRatio"
+                },
+                "children": [
+                  {
+                    "tag": "span",
+                    "attributes": {
+                      "class": "art-current"
+                    },
+                    "children": []
+                  },
+                  {
+                    "tag": "span",
+                    "attributes": {},
+                    "children": []
+                  },
+                  {
+                    "tag": "span",
+                    "attributes": {},
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-contextmenu art-contextmenu-info"
+                },
+                "children": []
+              },
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-contextmenu art-contextmenu-version"
+                },
+                "children": [
+                  {
+                    "tag": "a",
+                    "attributes": {},
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "div",
+                "attributes": {
+                  "class": "art-contextmenu art-contextmenu-close"
+                },
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "cssVariables": [
+        "--art-background-color",
+        "--art-border-radius",
+        "--art-bottom-gap",
+        "--art-bottom-height",
+        "--art-bottom-offset",
+        "--art-contextmenus-min-width",
+        "--art-control-height",
+        "--art-control-icon-scale",
+        "--art-control-icon-size",
+        "--art-control-opacity",
+        "--art-font-color",
+        "--art-fullscreen-web-index",
+        "--art-highlight-color",
+        "--art-highlight-width",
+        "--art-hover-color",
+        "--art-indicator-scale",
+        "--art-indicator-size",
+        "--art-loaded-color",
+        "--art-lock-size",
+        "--art-mini-progress-height",
+        "--art-padding",
+        "--art-progress-color",
+        "--art-progress-height",
+        "--art-progress-top-gap",
+        "--art-scrollbar-background",
+        "--art-scrollbar-background-hover",
+        "--art-scrollbar-size",
+        "--art-selector-max-height",
+        "--art-settings-icon-size",
+        "--art-settings-max-height",
+        "--art-state-opacity",
+        "--art-state-size",
+        "--art-subtitle-border",
+        "--art-subtitle-bottom",
+        "--art-subtitle-font-size",
+        "--art-subtitle-gap",
+        "--art-text-shadow-color",
+        "--art-theme",
+        "--art-tip-background",
+        "--art-transition-duration",
+        "--art-volume-handle-size",
+        "--art-volume-height",
+        "--art-widget-background"
+      ],
+      "cssClasses": [
+        ".art-auto-playback-close",
+        ".art-auto-playback-jump",
+        ".art-backdrop",
+        ".art-backdrop-filter",
+        ".art-bg-cover",
+        ".art-bottom",
+        ".art-bottom-gradient",
+        ".art-contextmenu",
+        ".art-contextmenu-show",
+        ".art-contextmenus",
+        ".art-control",
+        ".art-control-progress",
+        ".art-control-progress-inner",
+        ".art-control-selector",
+        ".art-control-show",
+        ".art-control-thumbnails",
+        ".art-control-volume",
+        ".art-controls",
+        ".art-controls-center",
+        ".art-controls-left",
+        ".art-controls-right",
+        ".art-current",
+        ".art-danmuku",
+        ".art-fullscreen",
+        ".art-fullscreen-web",
+        ".art-hide-cursor",
+        ".art-hover",
+        ".art-icon",
+        ".art-icon-check",
+        ".art-info",
+        ".art-info-close",
+        ".art-info-content",
+        ".art-info-item",
+        ".art-info-panel",
+        ".art-info-show",
+        ".art-info-title",
+        ".art-layer",
+        ".art-layer-auto-playback",
+        ".art-layer-lock",
+        ".art-layer-show",
+        ".art-layers",
+        ".art-loading",
+        ".art-loading-show",
+        ".art-lock",
+        ".art-mask",
+        ".art-mask-show",
+        ".art-mini-close",
+        ".art-mini-dragging",
+        ".art-mini-popup",
+        ".art-mini-progress-bar",
+        ".art-mini-state",
+        ".art-mobile",
+        ".art-notice",
+        ".art-notice-inner",
+        ".art-notice-show",
+        ".art-poster",
+        ".art-progress",
+        ".art-progress-highlight",
+        ".art-progress-hover",
+        ".art-progress-indicator",
+        ".art-progress-loaded",
+        ".art-progress-played",
+        ".art-progress-tip",
+        ".art-selector-item",
+        ".art-selector-list",
+        ".art-setting-item",
+        ".art-setting-item-back",
+        ".art-setting-item-left",
+        ".art-setting-item-left-icon",
+        ".art-setting-item-right",
+        ".art-setting-item-right-icon",
+        ".art-setting-item-right-tooltip",
+        ".art-setting-panel",
+        ".art-setting-range",
+        ".art-setting-show",
+        ".art-settings",
+        ".art-state",
+        ".art-subtitle",
+        ".art-subtitle-show",
+        ".art-truncate",
+        ".art-video",
+        ".art-video-player",
+        ".art-volume-handle",
+        ".art-volume-indicator",
+        ".art-volume-inner",
+        ".art-volume-loaded",
+        ".art-volume-panel",
+        ".art-volume-slider"
+      ],
+      "chapters": [
+        {
+          "class": "art-chapter",
+          "start": 0,
+          "end": 10,
+          "title": "First"
+        },
+        {
+          "class": "art-chapter",
+          "start": 10,
+          "end": 90.046009,
+          "title": "Second"
+        }
+      ],
+      "controlAttributes": [
+        {
+          "class": "art-control art-control-progress",
+          "tag": "DIV",
+          "tabIndex": -1,
+          "role": null,
+          "ariaLabel": null,
+          "tooltip": null,
+          "title": null
+        },
+        {
+          "class": "art-control art-control-thumbnails",
+          "tag": "DIV",
+          "tabIndex": -1,
+          "role": null,
+          "ariaLabel": null,
+          "tooltip": null,
+          "title": null
+        },
+        {
+          "class": "art-control art-control-playAndPause",
+          "tag": "DIV",
+          "tabIndex": -1,
+          "role": null,
+          "ariaLabel": null,
+          "tooltip": null,
+          "title": null
+        },
+        {
+          "class": "art-control art-control-volume",
+          "tag": "DIV",
+          "tabIndex": -1,
+          "role": null,
+          "ariaLabel": null,
+          "tooltip": null,
+          "title": null
+        },
+        {
+          "class": "art-control art-control-time",
+          "tag": "DIV",
+          "tabIndex": -1,
+          "role": null,
+          "ariaLabel": null,
+          "tooltip": null,
+          "title": null
+        },
+        {
+          "class": "art-control art-control-compat hint--rounded hint--top",
+          "tag": "DIV",
+          "tabIndex": -1,
+          "role": null,
+          "ariaLabel": "Probe control",
+          "tooltip": null,
+          "title": null
+        },
+        {
+          "class": "art-control art-control-setting hint--rounded hint--top",
+          "tag": "DIV",
+          "tabIndex": -1,
+          "role": null,
+          "ariaLabel": "Show Setting",
+          "tooltip": null,
+          "title": null
+        },
+        {
+          "class": "art-control art-control-fullscreenWeb hint--rounded hint--top",
+          "tag": "DIV",
+          "tabIndex": -1,
+          "role": null,
+          "ariaLabel": "Web Fullscreen",
+          "tooltip": null,
+          "title": null
+        }
+      ],
+      "chapterStylePresent": true
+    },
+    "capture": {
+      "capturedAt": "2026-09-10T12:09:18.280Z",
+      "releases": [
+        {
+          "name": "artplayer",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js",
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "version": "1.1.0",
+          "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+          "member": "package/dist/artplayer-plugin-chapter.js",
+          "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+        }
+      ],
+      "fixtureHashAlgorithm": "sha256-lf",
+      "fixtures": {
+        "dom.html": "cb2891446f74fb0e3fcb974d41170decb35977522f1ee5bfeb032f4f9b3e1fec",
+        "dom.js": "2a847ba117133046916a46ed586744785dc6e8b024805a69be7a7f3425b0d89b"
+      },
+      "media": {
+        "video.mp4": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+      }
+    }
+  },
+  "verification": {
+    "repeatCapturedAt": "2026-09-10T12:10:09.257Z",
+    "profileSha256": "89c7551f40086b22be89c2d6574e90bc25f31b3fde755af6c19bce1bf7f5f45f"
+  }
+}

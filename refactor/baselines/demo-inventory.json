@@ -1,0 +1,1106 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-04",
+  "sourceCommit": "94893929",
+  "capturedAt": "2026-09-10T12:11:47.047Z",
+  "note": "Historical source inventory, not browser or network evidence. ScriptSources excludes comments but does not resolve inline scripts, import maps or dynamic SDK loading. Hashes use LF and describe this capture; check validates coverage, not current content identity.",
+  "examples": [
+    {
+      "name": "ads",
+      "source": "docs/assets/example/ads.js",
+      "sha256Lf": "c84a97d2b1970c323a0c2538b846312bff38513e10de271fe5f239953da88cd3",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads",
+      "libs": [
+        "./uncompiled/artplayer-plugin-ads/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "ambilight",
+      "source": "docs/assets/example/ambilight.js",
+      "sha256Lf": "f97c1404886ba6474b4e14339c563fd2de50b7d50fdc4c9d59d85a3142a1ad52",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-ambilight/index.js&example=ambilight",
+      "libs": [
+        "./uncompiled/artplayer-plugin-ambilight/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "asr",
+      "source": "docs/assets/example/asr.js",
+      "sha256Lf": "bb7fd5eee3df887b7e0c72a6f42f74f0253350f9bc884f73cb9c2996f0e35724",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr",
+      "libs": [
+        "./uncompiled/artplayer-plugin-asr/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "audio.track",
+      "source": "docs/assets/example/audio.track.js",
+      "sha256Lf": "9ed26b2ee006e1a430db68b2a1b308c4801dd3a4cc87c74e8a8f5ccf3456ac8d",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-audio-track/index.js&example=audio.track",
+      "libs": [
+        "./uncompiled/artplayer-plugin-audio-track/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "auto.thumbnail",
+      "source": "docs/assets/example/auto.thumbnail.js",
+      "sha256Lf": "e0f706bbbab8e2d0f3201ea6b91f1d5530c6bb65f5c1745dc8ade9acc6d66295",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-auto-thumbnail/index.js&example=auto.thumbnail",
+      "libs": [
+        "./uncompiled/artplayer-plugin-auto-thumbnail/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "canvas",
+      "source": "docs/assets/example/canvas.js",
+      "sha256Lf": "95a971773e93cfb340a07eebcd49e333825f49ce0d167514ad98a188cd027799",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-proxy-canvas/index.js&example=canvas",
+      "libs": [
+        "./uncompiled/artplayer-proxy-canvas/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "chapter",
+      "source": "docs/assets/example/chapter.js",
+      "sha256Lf": "93f2378a1b7a105721511d34fd632ec7745b4b20c472072c410f76b25383c96b",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter",
+      "libs": [
+        "./uncompiled/artplayer-plugin-chapter/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "chromecast",
+      "source": "docs/assets/example/chromecast.js",
+      "sha256Lf": "edd4d232a667a3ca5bae247dca3c557431975b9ae38dc56cc590b57e327d048f",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast",
+      "libs": [
+        "./uncompiled/artplayer-plugin-chromecast/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "danmuku",
+      "source": "docs/assets/example/danmuku.js",
+      "sha256Lf": "3f91461e2466f13ed4e72e6bd69986461192d8c6a9ca866fa347599f6958e021",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku",
+      "libs": [
+        "./uncompiled/artplayer-plugin-danmuku/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "danmuku.mask",
+      "source": "docs/assets/example/danmuku.mask.js",
+      "sha256Lf": "c0fe4f2d4cd60738583c4bfeebc24bc3365d8ca382e6f4ff86e1056f5a2729a8",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-danmuku/index.js%0A./uncompiled/artplayer-plugin-danmuku-mask/index.js&example=danmuku.mask",
+      "libs": [
+        "./uncompiled/artplayer-plugin-danmuku/index.js",
+        "./uncompiled/artplayer-plugin-danmuku-mask/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "dash.control",
+      "source": "docs/assets/example/dash.control.js",
+      "sha256Lf": "edc4326f03262a222e06bb780aab05c903ee162829dec60970e738c1e260eef2",
+      "menuLinks": [
+        "/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control"
+      ],
+      "route": "/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control",
+      "libs": [
+        "https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js",
+        "./uncompiled/artplayer-plugin-dash-control/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "dash",
+      "source": "docs/assets/example/dash.js",
+      "sha256Lf": "49a7837016b6f0e8ac045e6aba7bb95e1997e6fd834243b4c62d0c97a2938776",
+      "menuLinks": [
+        "/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js&example=dash"
+      ],
+      "route": "/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js&example=dash",
+      "libs": [
+        "https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "document.pip",
+      "source": "docs/assets/example/document.pip.js",
+      "sha256Lf": "2600948ff0128e2e77fe08fbefa9be96543d8fcd81421534dfbfe9cb84e91fde",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-document-pip/index.js&example=document.pip",
+      "libs": [
+        "./uncompiled/artplayer-plugin-document-pip/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "flv",
+      "source": "docs/assets/example/flv.js",
+      "sha256Lf": "51e052e5423318aa25c69eae90a5181c1325edf2d0975fa169308eadb6b395eb",
+      "menuLinks": [
+        "/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv"
+      ],
+      "route": "/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv",
+      "libs": [
+        "https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "hls.control",
+      "source": "docs/assets/example/hls.control.js",
+      "sha256Lf": "b02fd290d79999790501447fad95736642344b9b30af3ccdbe353f80c7d53a6e",
+      "menuLinks": [
+        "/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control"
+      ],
+      "route": "/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control",
+      "libs": [
+        "https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js",
+        "./uncompiled/artplayer-plugin-hls-control/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "hls",
+      "source": "docs/assets/example/hls.js",
+      "sha256Lf": "7f82d60442223ced637daa896199607ca9bd52ac50dabbb47c75561f84e9ff48",
+      "menuLinks": [
+        "/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js&example=hls"
+      ],
+      "route": "/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js&example=hls",
+      "libs": [
+        "https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "iframe",
+      "source": "docs/assets/example/iframe.js",
+      "sha256Lf": "00a8441d2a9873f7be342a98b58acab1cf6aca2359414f126ffb63f6ee20c218",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-tool-iframe/index.js&example=iframe"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-tool-iframe/index.js&example=iframe",
+      "libs": [
+        "./uncompiled/artplayer-tool-iframe/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "index",
+      "source": "docs/assets/example/index.js",
+      "sha256Lf": "7fd8b85433ced107add0e0b3731ef192113435330d976166cbb63992b7625571",
+      "menuLinks": [],
+      "route": "/?example=index",
+      "libs": [],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "No menu link; example route follows common.js loader. Required globals are not automatically loaded."
+    },
+    {
+      "name": "jassub",
+      "source": "docs/assets/example/jassub.js",
+      "sha256Lf": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-jassub/index.js&example=jassub"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-jassub/index.js&example=jassub",
+      "libs": [
+        "./uncompiled/artplayer-plugin-jassub/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "mediabunny",
+      "source": "docs/assets/example/mediabunny.js",
+      "sha256Lf": "dad4cecb76b2e5ce9164a4da715793911123e8fd2bc4b93f4bcc86a7053bad7d",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-proxy-mediabunny/index.js&example=mediabunny"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-proxy-mediabunny/index.js&example=mediabunny",
+      "libs": [
+        "./uncompiled/artplayer-proxy-mediabunny/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "mobile",
+      "source": "docs/assets/example/mobile.js",
+      "sha256Lf": "c117fcd0e8b0f3da3745f5b97d2544b52aea49f28a7779704b0455f2a54d00e3",
+      "menuLinks": [],
+      "route": "/?example=mobile",
+      "libs": [],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "No menu link; example route follows common.js loader. Required globals are not automatically loaded."
+    },
+    {
+      "name": "mpegts",
+      "source": "docs/assets/example/mpegts.js",
+      "sha256Lf": "2e819af74536e02fdbccbf3379467dec7b1cf6f3aff7e46c370355320485a482",
+      "menuLinks": [
+        "/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts"
+      ],
+      "route": "/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts",
+      "libs": [
+        "https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "multiple.subtitles",
+      "source": "docs/assets/example/multiple.subtitles.js",
+      "sha256Lf": "d9ccbd334d4c77f26826144870d6700e4b62f1f00b7f8f49817b3ac2583e5cc4",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles",
+      "libs": [
+        "./uncompiled/artplayer-plugin-multiple-subtitles/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "setting.test",
+      "source": "docs/assets/example/setting.test.js",
+      "sha256Lf": "84d6489b87556df556cbf567c9e72895366e0abeba524b9bb67ef9561d1dda60",
+      "menuLinks": [],
+      "route": "/?example=setting.test",
+      "libs": [],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "No menu link; example route follows common.js loader. Required globals are not automatically loaded."
+    },
+    {
+      "name": "thumbnail",
+      "source": "docs/assets/example/thumbnail.js",
+      "sha256Lf": "e166845905f131dea0979eb77471f5531a59b93ab2dc28fef1b6791adb42fc30",
+      "menuLinks": [],
+      "route": "/?example=thumbnail",
+      "libs": [],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "References artplayer-plugin-thumbnail, which is absent from the 22 current workspace packages; dependency and route need reconciliation."
+    },
+    {
+      "name": "tool.thumbnail",
+      "source": "docs/assets/example/tool.thumbnail.js",
+      "sha256Lf": "ef830a5f499e14c09d51aa31aaa0a194ea1f910b27f14ef97c0ca8f67d529a54",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-tool-thumbnail/index.js&example=tool.thumbnail"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-tool-thumbnail/index.js&example=tool.thumbnail",
+      "libs": [
+        "./uncompiled/artplayer-tool-thumbnail/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "vast",
+      "source": "docs/assets/example/vast.js",
+      "sha256Lf": "ce93b48fabc2f1fd39fdaa8af3ae9f86a420c9aa65551e2e196d754070f36064",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast",
+      "libs": [
+        "./uncompiled/artplayer-plugin-vast/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "vtt.thumbnail",
+      "source": "docs/assets/example/vtt.thumbnail.js",
+      "sha256Lf": "05465b0da63b23626a3032a9c1f44d3e78ed501a313aaed885ac232ab720ffee",
+      "menuLinks": [
+        "/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail"
+      ],
+      "route": "/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail",
+      "libs": [
+        "./uncompiled/artplayer-plugin-vtt-thumbnail/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    },
+    {
+      "name": "webtorrent",
+      "source": "docs/assets/example/webtorrent.js",
+      "sha256Lf": "11e6541fbaeb2f854b43ed4ea2bea36f411505343dc79a3f3a9ede9d856b2226",
+      "menuLinks": [
+        "/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent"
+      ],
+      "route": "/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent",
+      "libs": [
+        "https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03",
+      "note": "Existing menu route; SDK and media loading have not been validated."
+    }
+  ],
+  "pages": [
+    {
+      "source": "docs/document/404.html",
+      "route": "/document/404.html",
+      "sha256Lf": "35330fa7a4443bb2bf2a44b7f474acc04b2d886f1acb1e800eff44e6ca8152b3",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/advanced/built-in.html",
+      "route": "/document/advanced/built-in.html",
+      "sha256Lf": "5879aef25987cedbdcbeed27b529a3db61811af4707460de4b26332197afe9fe",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/advanced/class.html",
+      "route": "/document/advanced/class.html",
+      "sha256Lf": "20253766226e1eea67923ed8b246e288973fa9274f6e2c78c9c5aabb7d094bb0",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/advanced/event.html",
+      "route": "/document/advanced/event.html",
+      "sha256Lf": "492f23ac44a57f38f5a8441a318c5db3921d35f237542f6ed75f7c299c42054c",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/advanced/global.html",
+      "route": "/document/advanced/global.html",
+      "sha256Lf": "1cde634d00316a5e66f90ad1763aa868fd84564bbc1f8ba7beded72e29a07d89",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/advanced/plugin.html",
+      "route": "/document/advanced/plugin.html",
+      "sha256Lf": "2cbc89cb96d6715995e28ab1a0ed6b74ef6e06e0b57a062d3208e1b7ca8ade8a",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/advanced/property.html",
+      "route": "/document/advanced/property.html",
+      "sha256Lf": "f020b32d5a0e67a237100cdb1bd2ad2129c829a1233608137ceb1442f4e69ae0",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/component/contextmenu.html",
+      "route": "/document/component/contextmenu.html",
+      "sha256Lf": "4b8ac7383e49262a41c842a84c946a880ff08a3defc9c1d160a109478e3bb9f8",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/component/controls.html",
+      "route": "/document/component/controls.html",
+      "sha256Lf": "c89c72f3fc06aa3b38c3793491c6cc1b2ced60823d34880c99336a741c740371",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/component/layers.html",
+      "route": "/document/component/layers.html",
+      "sha256Lf": "85d2bf5d6eecb10053bd677bff01dfe953d5e826c9e267b07a265eb51d78ce7e",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/component/setting.html",
+      "route": "/document/component/setting.html",
+      "sha256Lf": "e1910d93dfe2a4834dad24b15217d4f0e2679afa832d4ff2a8e57c0c6924136b",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/advanced/built-in.html",
+      "route": "/document/en/advanced/built-in.html",
+      "sha256Lf": "be5d00e9a4377b8b3e64a6ac669855b8784664c3ebaf49c2dce2bbd631d2a7b7",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/advanced/class.html",
+      "route": "/document/en/advanced/class.html",
+      "sha256Lf": "9a46b027c57e339ab406c48252d091b69daf51cfa423b9781cf9fed63b355145",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/advanced/event.html",
+      "route": "/document/en/advanced/event.html",
+      "sha256Lf": "0b59419963a461639888270048b96862abb14a6d045e2a3899567bc5aed7d854",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/advanced/global.html",
+      "route": "/document/en/advanced/global.html",
+      "sha256Lf": "d150fecaa5c258ac62b56d4c3f6a75ea2d7457d5da5006cb851b7cfa96e0471b",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/advanced/plugin.html",
+      "route": "/document/en/advanced/plugin.html",
+      "sha256Lf": "90af8fe2cb080a799cfa0a6eae7e66bd7916b59a0a456dc25ee20ffb813f9235",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/advanced/property.html",
+      "route": "/document/en/advanced/property.html",
+      "sha256Lf": "b38ae4ce4607dbdc70710d0615749c6760599b61e6428989cfcc2e3e1196a0da",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/component/contextmenu.html",
+      "route": "/document/en/component/contextmenu.html",
+      "sha256Lf": "f0426201d0dd91dce3eb1159ed4587acaba245dc393752675dc919108977d060",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/component/controls.html",
+      "route": "/document/en/component/controls.html",
+      "sha256Lf": "c8547522f8b9347aba1cd759159d60d067528e3d5c1431494f80381ce71531fc",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/component/layers.html",
+      "route": "/document/en/component/layers.html",
+      "sha256Lf": "eafb4ee60806ee346acf8bde70e96772302ea396df7afade4668e74eda01a195",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/component/setting.html",
+      "route": "/document/en/component/setting.html",
+      "sha256Lf": "e7687900bdcf1ba2202b57f154d32ff07c27fac821bf90f072d89deadf89555d",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/index.html",
+      "route": "/document/en/",
+      "sha256Lf": "f50df7a7ddd77accd512782a47a79d7d78218168ca6b6bae4c8121debd124993",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/start/i18n.html",
+      "route": "/document/en/start/i18n.html",
+      "sha256Lf": "cbf63c77cede2fd83221077a6600405a43b0025d61b4f87259107185c38a1bef",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/start/option.html",
+      "route": "/document/en/start/option.html",
+      "sha256Lf": "3bce1c34c6e56144726eb83052cf2f68b52a7e9a815101912257696b4a8bd1ba",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/index.html",
+      "route": "/document/",
+      "sha256Lf": "641d24f3fb5b98a09e193debb2b749f4d63e3708ee3fa6860efbbfd1c4722e73",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/plugin/danmuku.html",
+      "route": "/document/plugin/danmuku.html",
+      "sha256Lf": "4460414baf1a9c313ef7bba74f50fa009825ef3bcc1be3b1462e6571b47a2d67",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/start/i18n.html",
+      "route": "/document/start/i18n.html",
+      "sha256Lf": "8e219e949ab7b25b32c5c0e8f4ff8674d195492ccfa24b07e98722f27443ac97",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/start/option.html",
+      "route": "/document/start/option.html",
+      "sha256Lf": "5819935c8660dc958ad60a0211a2bbff1f7208c62b930d4b70a8972a1bd72c70",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.CkD0mcCX.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/esm.html",
+      "route": "/esm.html",
+      "sha256Lf": "bf9eaaf69b7705d53edab101fade2ce467dd63bb2830a89d4bc4cda44667ff3c",
+      "kind": "demo-or-editor",
+      "scriptSources": [],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/googlebcdef0d1e9238554.html",
+      "route": "/googlebcdef0d1e9238554.html",
+      "sha256Lf": "db372eb59ddfb090f7b09273bfeb87da90fb8d3454f7aa89b12a6c43ab27ed43",
+      "kind": "site-verification",
+      "scriptSources": [],
+      "status": "not-run",
+      "owner": "SITE-01"
+    },
+    {
+      "source": "docs/i18n.html",
+      "route": "/i18n.html",
+      "sha256Lf": "4e54b71d58f85ee386698d0e53267b3e3fa6251f48087a9724dd08c07495d03b",
+      "kind": "demo-or-editor",
+      "scriptSources": [
+        "./compiled/artplayer.js",
+        "./compiled/i18n/ar.js",
+        "./compiled/i18n/cs.js",
+        "./compiled/i18n/es.js",
+        "./compiled/i18n/fa.js",
+        "./compiled/i18n/fr.js",
+        "./compiled/i18n/id.js",
+        "./compiled/i18n/pl.js",
+        "./compiled/i18n/ru.js",
+        "./compiled/i18n/tr.js",
+        "./compiled/i18n/vi.js",
+        "./compiled/i18n/zh-tw.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/iframe.html",
+      "route": "/iframe.html",
+      "sha256Lf": "bc262262c66ad32459b7c91ae22a97217414dd5b18cbf68fe105c2269456f879",
+      "kind": "demo-or-editor",
+      "scriptSources": [
+        "./uncompiled/artplayer/index.js",
+        "./uncompiled/artplayer-tool-iframe/index.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/index.html",
+      "route": "/",
+      "sha256Lf": "bd2e7e32efce80725b70f2054c4d9c95465de567118f245924f2e6d17567ff23",
+      "kind": "demo-or-editor",
+      "scriptSources": [
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662",
+        "./assets/js/console.js",
+        "./assets/js/vs/loader.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/mobile.html",
+      "route": "/mobile.html",
+      "sha256Lf": "f6cf85608023ee57750af773908d4c8ecd95c1065b1aa587e28e2361b2cee7fd",
+      "kind": "demo-or-editor",
+      "scriptSources": [
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662",
+        "./assets/js/vconsole.min.js",
+        "./uncompiled/artplayer/index.js",
+        "./assets/js/mobile.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/test/index.html",
+      "route": "/test/",
+      "sha256Lf": "67132147ebbb63867c05be182ec18fc6c3129df89808bf17819c92cee9a4769c",
+      "kind": "demo-or-editor",
+      "scriptSources": [
+        "./chai.js",
+        "./mocha.js",
+        "../compiled/artplayer.js",
+        "../compiled/artplayer-plugin-ads.js",
+        "../compiled/artplayer-plugin-danmuku.js",
+        "../compiled/artplayer-plugin-dash-control.js",
+        "../compiled/artplayer-plugin-hls-control.js",
+        "../compiled/artplayer-tool-iframe.js",
+        "../compiled/artplayer-plugin-vtt-thumbnail.js",
+        "../compiled/artplayer-plugin-chapter.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js",
+        "./test.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/upscaler/index.html",
+      "route": "/upscaler/",
+      "sha256Lf": "a04d9e364ee20cb1245c0ac9200ba28d6a3ffff51407a71725f943a1026051aa",
+      "kind": "standalone-tool",
+      "scriptSources": [
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662",
+        "https://cdn.tailwindcss.com",
+        "upscaler.js"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    }
+  ],
+  "packages": [
+    {
+      "name": "artplayer",
+      "examples": [],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "examples": [
+        "ads"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "examples": [
+        "ambilight"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "examples": [
+        "asr"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "examples": [
+        "audio.track"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "examples": [
+        "auto.thumbnail"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "examples": [
+        "chapter"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "examples": [
+        "chromecast"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "examples": [
+        "danmuku",
+        "danmuku.mask"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "examples": [
+        "danmuku.mask"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "examples": [
+        "dash.control"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "examples": [
+        "document.pip"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "examples": [
+        "hls.control"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "examples": [
+        "jassub"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "examples": [
+        "multiple.subtitles"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "examples": [
+        "vast"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "examples": [
+        "vtt.thumbnail"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "examples": [
+        "canvas"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "examples": [
+        "mediabunny"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "examples": [
+        "iframe"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "examples": [
+        "tool.thumbnail"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "name": "artplayer-vitepress",
+      "examples": [],
+      "status": "not-run",
+      "owner": "SITE-01"
+    }
+  ],
+  "editor": {
+    "source": "docs/assets/js/common.js",
+    "sha256Lf": "2db7c8e198b06986a626631f0932fe7d8a687f758f196136833acdd00b71b107",
+    "storage": [
+      "prod",
+      "ts",
+      "code",
+      "log"
+    ],
+    "isolation": "Use separate test origin; record keys, do not erase user browser data.",
+    "core": {
+      "prodTrue": "./compiled/artplayer.js",
+      "otherwise": "./uncompiled/artplayer/index.js"
+    },
+    "pluginSources": "URL libs parameter; independent of prod toggle",
+    "execution": "Run evaluates editor text; TS mode alone is not strict tsc validation.",
+    "runtimeStatus": "not-run"
+  }
+}

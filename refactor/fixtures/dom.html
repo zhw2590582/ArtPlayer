@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>ArtPlayer published DOM baseline</title>
+<style>
+body { font: 14px sans-serif; }
+.player { width: 640px; height: 360px; margin: 10px 0; }
+.player .user-hook { color: rgb(12, 34, 56); background: white; padding: 4px; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+</style>
+<h1>Published DOM and input baseline</h1>
+<p>Use Probe control, ArrowRight, Typing probe + ArrowRight, settings Baseline selector / High, and web fullscreen + Escape. Then inspect narrow layout and save.</p>
+<button id="tab-start">Tab start</button>
+<div class="player"></div>
+<button id="narrow">Inspect narrow container</button>
+<button id="finish">Save DOM baseline</button>
+<p id="status">Loading published player</p>
+<pre id="result"></pre>
+<script src="/releases/artplayer/dist/artplayer.js"></script>
+<script src="/releases/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js"></script>
+<script src="/fixtures/dom.js"></script>
+</html>

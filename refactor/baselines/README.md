@@ -36,3 +36,7 @@ BASE-02 已在内置浏览器取得核心/chapter 的同步 API 和描述符快�
 ## 事件与生命周期报告
 
 BASE-03 已在内置浏览器实测播放推进、暂停/seek/切源、事件及销毁；两次 27 项断言通过，并保存 6 项历史问题。见 [覆盖与复现](lifecycle-coverage.md) 和 [原始报告](lifecycle.json)。受控拒绝与真正媒体播放分别标注，不代替全环境验收。
+
+## DOM 与官方示例路径
+
+BASE-04 已在内置浏览器完成两轮 16 项 DOM/样式/实际输入断言。见 [覆盖/复现/历史问题](dom-coverage.md)、[冻结报告](dom.json) 和 [29 示例/36 HTML/22 包路径](demo-inventory.json)。轻量夹具通过不代表 Monaco 或所有官方示例已验证。

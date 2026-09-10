@@ -13,7 +13,7 @@
 | `/iframe.html` | [iframe.html](../docs/iframe.html)、[iframe 示例](../docs/assets/example/iframe.js) | uncompiled 核心与 iframe tool，子页面 inject；父示例创建 iframe 并通信 | 父子通信、全屏及卸载；只打开子页面不能完成集成验收 |
 | `/test/` | [test/index.html](../docs/test/index.html)、[build-test.js](../scripts/build-test.js) | Mocha/Chai，compiled 核心及部分插件，生成的文档用例与外部播放依赖 | 文档 smoke 的现有入口，补充状态断言与自动化结果读取 |
 
-开发入口继续采用仓库脚本：`npm run dev` 交互选择包，在 `http://localhost:8082` 验证。[dev.js](../scripts/dev.js) 当前只构建所选包到 `docs/uncompiled/<name>/index.js`，不能假设所有插件同时更新。正常构建产生分发文件，不手改 compiled/uncompiled/dist 或生成的 test.js。
+开发入口继续采用仓库脚本：`yarn dev` 交互选择包，在 `http://localhost:8082` 验证。[dev.js](../scripts/dev.js) 当前只构建所选包到 `docs/uncompiled/<name>/index.js`，不能假设所有插件同时更新。正常构建产生分发文件，不手改 compiled/uncompiled/dist 或生成的 test.js。
 
 chapter 试点可使用 `http://localhost:8082/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter`，测试前确认核心及插件已构建。这是已有路由的用法，不表示当前服务已启动或页面已通过。
 
@@ -49,3 +49,9 @@ chapter 试点可使用 `http://localhost:8082/?libs=./uncompiled/artplayer-plug
 | REVIEW-02/03 | 分别复查真实浏览器覆盖与待发布内容的一致性 |
 
 页面行为和媒体验证按 [测试规范](testing.md) 留证，发布结论按 [多轮复盘](release-reviews.md) 核对。该清单不新增重复实施任务；真实状态以 tasks.json 为准。
+
+## BASE-04 已落地的记录
+
+[完整路径台账](baselines/demo-inventory.json) 已覆盖 29 个示例、36 个 HTML 和 22 包，包括生成文档、独立 upscaler 与站点验证页面。源脚本/菜单参数与 editor prod/ts/code/log 规则已有记录；这些官方入口尚未运行，运行时实际存储值和网络来源仍待 EX-03 采集。
+
+独立发布包夹具的 DOM/CSS、Tab/热键、设置与网页全屏已在内置浏览器两次实测，见 [覆盖及问题](baselines/dom-coverage.md)。它没有运行 Monaco，不代表编辑器 Run 或官方 chapter demo 通过。thumbnail 无菜单示例依赖不在当前 workspace 的旧插件，已交 SITE-01/EX-03 核实。
