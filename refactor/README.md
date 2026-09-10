@@ -45,6 +45,7 @@
 | [JS/TS 构建与开发](build-development.md) | 非交互选包、开发重建、资源夹具和 AMD 全局修复 |
 | [测试目录维护说明](../test/README.md) | 统一测试命令、JS/TS loader、受控媒体及新旧公共契约 |
 | [真实浏览器入口](../test/browser/README.md) | 三浏览器、解码画面与媒体状态、Range/失败服务及候选文件映射 |
+| [实际打包消费](../test/package/README.md) | 仓库外安装、运行时/声明检查、安装产物浏览器验证与严格发布检查 |
 
 ## 维护规则
 

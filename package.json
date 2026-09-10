@@ -43,7 +43,7 @@
     "check:toolchain": "node scripts/check-toolchain.mjs",
     "lint:fix": "eslint \"packages/*/{src,types,package.json}\" \"scripts/*.{js,mjs}\" \"test/*\" \"docs/assets/ts/*\" playwright.config.js --fix",
     "check:plan": "node refactor/scripts/plan.mjs --check",
-    "test:node": "yarn test:unit && node --test test/toolchain.test.js test/build-docs.test.js",
+    "test:node": "yarn test:unit && node --test test/toolchain.test.js test/build-docs.test.js test/package-check.test.js",
     "test:baseline": "node --test refactor/scripts/*.test.mjs",
     "ci:check": "yarn check:toolchain --strict && yarn check:plan && yarn lint && yarn typecheck && yarn test",
     "ci:build": "yarn build all && yarn build:i18n && yarn build:ts && yarn build:docs && yarn test:imports",
@@ -53,7 +53,9 @@
     "test": "yarn test:node && yarn test:baseline",
     "test:browser": "playwright test",
     "test:browser:install": "playwright install chromium firefox webkit",
-    "test:browser:report": "playwright show-report refactor/.cache/browser/html"
+    "test:browser:report": "playwright show-report refactor/.cache/browser/html",
+    "test:package": "node scripts/package-check.mjs",
+    "test:package:release": "node scripts/package-check.mjs --release"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

@@ -573,11 +573,14 @@
         "ENG-04",
         "ENG-06"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "隔离 npm 消费 fixtures、API/声明/入口差分",
       "acceptance": "不借 workspace 源码通过，能识别缺文件与默认导出变化",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-ENG-07-package-consumers.md",
+        "baselines/package-validation.json"
+      ]
     },
     {
       "id": "ENG-08",

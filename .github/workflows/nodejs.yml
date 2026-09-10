@@ -40,6 +40,10 @@ jobs:
           yarn install --frozen-lockfile --non-interactive
       - name: Install test browsers
         run: yarn test:browser:install
+      - name: Build and check installed tarballs
+        run: |
+          yarn test:package
+          node --input-type=module -e 'import fs from "node:fs"; const { output } = JSON.parse(fs.readFileSync("refactor/.cache/packages/latest.json")); fs.appendFileSync(process.env.GITHUB_ENV, `ARTPLAYER_BROWSER_ARTIFACTS=${output}/browser-artifacts.json\n`);'
       - name: Run all three engines
         run: yarn test:browser
       - name: Upload browser evidence
@@ -47,7 +51,13 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: browser-${{ github.run_id }}-${{ github.run_attempt }}
-          path: refactor/.cache/browser/
+          path: |
+            refactor/.cache/browser/
+            refactor/.cache/packages/latest.json
+            refactor/.cache/packages/run-*/*.json
+            refactor/.cache/packages/run-*/*.log
+            refactor/.cache/packages/run-*/*.tgz
+            refactor/.cache/packages/run-*/artifacts/
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: warn

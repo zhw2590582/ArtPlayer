@@ -1,0 +1,8 @@
+{
+  "note": "Exact published diagnostic references, not release waivers. Remove a case only with a verified fix; never edit the frozen baseline to accept a candidate regression.",
+  "cases": [
+    { "mode": "node10-commonjs", "fixture": "legacy-plugin.ts", "risk": "BASE-TYPE-03" },
+    { "mode": "nodenext-esm", "fixture": "legacy-plugin.ts", "risk": "BASE-TYPE-01" },
+    { "mode": "nodenext-esm", "fixture": "language.ts", "risk": "BASE-TYPE-01" }
+  ]
+}
