@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 203 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 208 项，范围 22 个包及工作区/示例。
 
-状态：todo 194 / doing 0 / blocked 0 / done 9 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 198 / doing 0 / blocked 0 / done 10 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -50,6 +50,7 @@
 | DOC-07 | workspace<br>复审并优化计划顺序和执行门槛 | DOC-06 | 依赖优化、执行门槛规范、测试/发布补充和审查记录 | 依赖与覆盖校验、专项执行顺序断言通过；任务范围完整并独立提交 | L | done |
 | DOC-08 | workspace<br>记录 Chrome 验证及多轮 npm 发布复盘 | DOC-07 | 浏览器分工、三轮复盘规范、发布依赖与接续文档 | 计划和发布依赖检查通过；独立提交 DOC-08，连接可用不冒充测试通过 | L | done |
 | DOC-09 | workspace<br>记录 docs HTML 与在线编辑器测试入口 | DOC-08 | 页面/加载方式、状态隔离、行为断言与既有任务映射 | 源码清点和计划检查通过，独立提交 DOC-09；不把页面存在当作测试通过 | L | done |
+| DOC-10 | workspace<br>记录 GitHub CI/CD 增强范围与验收 | DOC-09 | CI/CD 规范、四项实施任务与发布依赖 | 现有 workflow 核对、计划检查通过并独立提交；不冒充远端执行完成 | L | done |
 
 ## 1 基线
 
@@ -69,7 +70,7 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | ENG-01 | workspace<br>固定 Node、包管理器与依赖 | BASE-01 | 版本 pin、唯一锁文件、安装说明 | 干净环境可复现，最低 Node 与构建依赖一致，未夹带全量升级 | M | todo |
-| ENG-02 | workspace<br>拆分只读检查并建立 PR CI | ENG-01 | lint/lint:fix、PR 与主线检查、独立部署任务 | 仓库内检查可执行且不改源码、不发布；required checks 的外部设置状态列入发布台账，不阻塞本地框架建设 | M | todo |
+| ENG-02 | workspace<br>拆分只读检查并建立 PR CI | ENG-01 | lint/lint:fix、PR 与主线检查、独立部署任务；遵循 github-ci-cd.md，PR/重构分支触发、最小权限及 workflow 静态检查 | 仓库内检查可执行且不改源码、不发布；required checks 的外部设置状态列入发布台账，不阻塞本地框架建设 | M | todo |
 | ENG-03 | workspace<br>建立公共行为与单元测试入口 | ENG-02, BASE-03 | 保留现有 node:test，测试目录/夹具/统一入口 | 已有 19 项回归保留，旧版与候选可用同一夹具运行 | M | todo |
 | ENG-04 | workspace<br>建立类型测试基础 | ENG-02, BASE-05 | 根与分包 tsconfig、显式 TS 依赖、正反例测试 | 核心/试点与迁移模块严格检查，未迁移第三方/包历史问题独立台账；明确最低/当前 TS 和各环境类型 | M | todo |
 | ENG-05 | workspace<br>建立真实浏览器测试服务 | ENG-03, BASE-04, BASE-08 | Playwright projects、本地 Range/失败媒体服务；复用 docs 页面/样本的状态隔离、错误采集与候选资源映射 | Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行；以媒体状态断言判定通过，区分轻量用例与真实编辑器交互 | M | todo |
@@ -78,6 +79,15 @@
 | ENG-08 | workspace<br>增加覆盖率、资源与性能报告 | ENG-03, ENG-05, BASE-06 | 覆盖率基线、资源清理断言、性能报告与阈值 | 关键生命周期分支有门槛，报告不靠无意义断言堆数量 | M | todo |
 | ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04 | 共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入 | 核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit | M | todo |
 | ENG-10 | workspace<br>建立历史失败分级和测试可靠性规则 | ENG-03, ENG-04, ENG-05, ENG-07, BASE-07 | 历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则 | 不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见 | M | todo |
+
+## 2.2 GitHub CI/CD
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| CI-01 | workspace<br>增强兼容矩阵、并发缓存与 CI 报告 | DOC-10, ENG-08, ENG-09, ENG-10 | OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告 | 固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯 | H | todo |
+| CI-02 | workspace<br>分离并改进 GitHub Pages 部署 | DOC-10, ENG-02, SITE-03 | Pages artifact 部署配置、旧路径/域名核对、预检和迁移恢复指南 | 部署只取受信任已验证产物；本地实现可验收，远端 source/环境和实际部署状态单独登记 | H | todo |
+| CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本 | H | todo |
+| CI-04 | workspace<br>验收 GitHub 流水线与远端发布准入 | CI-01, CI-02, CI-03, SITE-06 | 静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南 | 必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行 | H | todo |
 
 ## 2.1 早期试点
 
@@ -383,7 +393,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, MOD-05, DOC-08 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
 | REVIEW-02 | workspace<br>第二轮真实浏览器与生态集成复盘 | REVIEW-01, REL-03 | Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告 | 所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收 | H | todo |
-| REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish | H | todo |
+| REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04, CI-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish | H | todo |
 
 ## 完成证据与阻塞
 
@@ -396,3 +406,4 @@
 - DOC-07: [记录](changes/2026-09-10-DOC-07-plan-review.md)
 - DOC-08: [记录](changes/2026-09-10-DOC-08-browser-and-release-reviews.md)
 - DOC-09: [记录](changes/2026-09-10-DOC-09-docs-test-surfaces.md)
+- DOC-10: [记录](changes/2026-09-10-DOC-10-github-ci-cd.md)

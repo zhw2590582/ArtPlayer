@@ -26,6 +26,7 @@
 | [docs 页面与编辑器测试](docs-browser-testing.md) | 复用已有 HTML、加载版本、隔离状态和补强文档 smoke |
 | [多轮复盘与 npm 准入](release-reviews.md) | Chrome 验证分工、三轮全局复盘、问题闭环和候选发布门槛 |
 | [工具链与发布](toolchain-release.md) | TypeScript、Bun、构建、版本管理和发布回退 |
+| [GitHub CI/CD](github-ci-cd.md) | PR/兼容矩阵、构建报告、Pages、npm 发布及远端准入验证 |
 | [AI 协作流程](ai-workflow.md) | AI 接续工作、任务边界、验证、记录和交接模板 |
 | [架构决策](decisions.md) | 已选方向、待验证方案及被拒绝方案 |
 | [进度与证据](progress.md) | 本次会话结果、阻塞、下一步；不重复维护每个任务状态 |

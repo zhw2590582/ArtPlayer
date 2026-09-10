@@ -50,6 +50,8 @@
 
 ## CI 分层
 
+用户已明确要求增强 GitHub CI/CD，当前 workflow 问题、目标矩阵、报告和实现任务见 [GitHub CI/CD 规范](github-ci-cd.md)。本地测试通过、workflow 静态检查、真实 Actions 通过分别记录。
+
 | 触发 | 内容 |
 | --- | --- |
 | 每次 PR | 固定安装、只读 lint、类型、受影响单元/生命周期、核心浏览器 smoke、受影响发布包检查 |

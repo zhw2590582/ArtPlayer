@@ -26,6 +26,9 @@ complete the three review rounds and close blocking findings before candidate pu
 Connected Chrome interaction checks complement committed automated browser tests; neither
 connection availability nor mocks replace actual playback or required device evidence.
 Each review fix remains a separate task and commit. Revalidate changed candidate contents.
+The user explicitly includes GitHub CI/CD modernization in this refactor.
+Follow [refactor/github-ci-cd.md](refactor/github-ci-cd.md) for PR checks, regression matrices,
+artifacts, Pages and npm workflows. Distinguish local configuration from verified remote runs.
 
 ## Project Summary
 

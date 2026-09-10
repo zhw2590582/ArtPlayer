@@ -166,6 +166,24 @@
       ]
     },
     {
+      "id": "DOC-10",
+      "phase": "0 规划",
+      "title": "记录 GitHub CI/CD 增强范围与验收",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-09"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "CI/CD 规范、四项实施任务与发布依赖",
+      "acceptance": "现有 workflow 核对、计划检查通过并独立提交；不冒充远端执行完成",
+      "evidence": [
+        "changes/2026-09-10-DOC-10-github-ci-cd.md"
+      ]
+    },
+    {
       "id": "BASE-01",
       "phase": "1 基线",
       "title": "固定核心与试点的最小发布基线",
@@ -324,7 +342,7 @@
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "lint/lint:fix、PR 与主线检查、独立部署任务",
+      "deliverable": "lint/lint:fix、PR 与主线检查、独立部署任务；遵循 github-ci-cd.md，PR/重构分支触发、最小权限及 workflow 静态检查",
       "acceptance": "仓库内检查可执行且不改源码、不发布；required checks 的外部设置状态列入发布台账，不阻塞本地框架建设",
       "evidence": []
     },
@@ -468,6 +486,81 @@
       ],
       "deliverable": "历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则",
       "acceptance": "不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见"
+    },
+    {
+      "id": "CI-01",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "增强兼容矩阵、并发缓存与 CI 报告",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-10",
+        "ENG-08",
+        "ENG-09",
+        "ENG-10"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告",
+      "acceptance": "固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯",
+      "evidence": []
+    },
+    {
+      "id": "CI-02",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "分离并改进 GitHub Pages 部署",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-10",
+        "ENG-02",
+        "SITE-03"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Pages artifact 部署配置、旧路径/域名核对、预检和迁移恢复指南",
+      "acceptance": "部署只取受信任已验证产物；本地实现可验收，远端 source/环境和实际部署状态单独登记",
+      "evidence": []
+    },
+    {
+      "id": "CI-03",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "建立 npm 分包候选与发布工作流",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-10",
+        "CI-01",
+        "REL-08",
+        "REL-04"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复",
+      "acceptance": "不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本",
+      "evidence": []
+    },
+    {
+      "id": "CI-04",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "验收 GitHub 流水线与远端发布准入",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "CI-01",
+        "CI-02",
+        "CI-03",
+        "SITE-06"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南",
+      "acceptance": "必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行",
+      "evidence": []
     },
     {
       "scope": [
@@ -3537,7 +3630,8 @@
       ],
       "dependsOn": [
         "REVIEW-02",
-        "REL-04"
+        "REL-04",
+        "CI-04"
       ],
       "status": "todo",
       "risk": "H",
