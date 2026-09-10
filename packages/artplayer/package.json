@@ -28,6 +28,9 @@
         "default": "./dist/artplayer.js"
       }
     },
+    "./types": {
+      "types": "./types/artplayer.d.ts"
+    },
     "./legacy": {
       "import": {
         "types": "./types/artplayer.d.cts",
@@ -54,6 +57,9 @@
   "types": "./types/artplayer.d.ts",
   "typesVersions": {
     "*": {
+      "types": [
+        "types/artplayer.d.ts"
+      ],
       "i18n/*": [
         "types/legacy/language.d.ts"
       ],

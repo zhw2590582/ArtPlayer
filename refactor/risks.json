@@ -56,7 +56,7 @@
       "id": "BASE-LIFE-03",
       "title": "Async plugin registers its result after destroy",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-08"
       ],
@@ -65,7 +65,14 @@
         "refactor/baselines/lifecycle-coverage.md"
       ],
       "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
-      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-08-plugin-manager.md",
+        "refactor/baselines/plugins-validation.json",
+        "test/plugins.test.js",
+        "test/browser/plugins.spec.js"
+      ],
+      "resolutionRationale": "Closing guards stop late writes, post-close factories and reentrant name/coercion/reset registration. Pending success still fulfills with the registry and public rejection identity is preserved. This closes late registration only, not arbitrary plugin resource ownership."
     },
     {
       "id": "BASE-LIFE-04",

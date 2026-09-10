@@ -7,7 +7,7 @@
 | BASE-LIFE-06 | open / 已复现 | Published switch leaves an unhandled rejection and an unsettled promise when resume fails | CORE-09 |
 | BASE-LIFE-01 | open / 已复现 | Superseded switch resolves along with the latest source | CORE-09 |
 | BASE-LIFE-02 | open / 已复现 | Switch remains unsettled during the bounded observation after destroy | CORE-09 |
-| BASE-LIFE-03 | open / 已复现 | Async plugin registers its result after destroy | CORE-08 |
+| BASE-LIFE-03 | resolved / 已复现 | Async plugin registers its result after destroy | CORE-08 |
 | BASE-LIFE-04 | resolved / 已复现 | Destroying an instance twice unregisters a different live instance | CORE-04 |
 | BASE-LIFE-05 | resolved / 已复现 | Failed constructor leaves initialized markup/listeners until explicit probe cleanup | CORE-04 |
 | BASE-DOM-01 | open / 已复现 | 控件 Tab 不可达 | CORE-23, CORE-17 |

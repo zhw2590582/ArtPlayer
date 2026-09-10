@@ -4,6 +4,56 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Plugin registration and ownership
+
+`src/plugins/index.ts` orchestrates registration; types.ts defines generic factories,
+minimal option hosts and internal sync/Promise return types. builtins.ts installs the
+five existing builtins in their original order and reads each condition at its turn.
+It keeps the mobile/live exclusions, including no fastForward for live media. The
+constructor captures option once before builtin installation, then traverses the
+same live user-plugin array. Builtin implementations remain JS until CORE-18.
+
+registration.ts owns result naming and non-enumerable/non-writable/non-configurable
+registry properties. Names still prefer result.name, then factory.name, then the
+current completion-time id. Duplicate detection uses own properties; failed factory
+calls still consume an id. No new name restrictions or thenable assimilation are
+introduced. Native object-key coercion remains in its three historical positions;
+the final coercion is resolved before defining so a reentrant destroy cannot publish
+a property on a closing registry. Dynamic name/key assertions are local to this
+legacy boundary and do not claim that arbitrary plugin returns are validated.
+
+Lifecycle.isClosing covers both the reset phase and a disposed scope. Public add
+after closure throws before incrementing id or executing the factory. Pending add
+fulfillments still settle with the original registry, but discard late results;
+factory rejection identity remains unchanged. A synchronous close during construction
+stops subsequent factories. Constructor-owned Promise rejections are observed and
+reported once with console.warn because no caller receives those promises. Public
+add retains its rejecting Promise rather than hiding failures.
+
+The manager does not call a result's destroy method: existing result methods are not
+an agreed disposal protocol. Plugins own their subscriptions and external SDK/media
+resources; arbitrary work created by a factory after an await still needs that
+plugin's lifecycle guards. Preventing late registry writes does not certify every
+plugin's cleanup. Names that shadow prototype methods and completion-time fallback
+naming keep their historical semantics.
+
+Public PluginFactory and Plugins are type-only contracts. Augment `artplayer/types`
+for a common plugin-result/event interface across old TS, NodeNext CJS/ESM and Bundler;
+augmenting the CJS root alias directly is not equivalent. The new subpath has only
+a types condition and typesVersions fallback: runtime require/import must reject it.
+Public add's legacy return signature remains tracked by BASE-TYPE-04/CORE-21; internal
+registration types preserve known synchronous/Promise results and use a union for
+unknown results. The Promise distinction retains instanceof semantics: foreign
+Promises and ordinary thenables are stored synchronously, not assimilated.
+
+Tests: plugins.test.js covers naming/coercion, sync/async/error identity, closed scopes,
+reentry and constructor-owned rejection. plugins-source.ts checks internal returns;
+plugins-public.ts checks the common augmentation path in every package consumer mode.
+Browser plugins.spec.js compares old/new late registration, constructor close/reporting,
+and builtin order/live exclusions under a mobile user agent. That UA test is not a
+physical-device or builtin-feature acceptance test. Run the full installed-artifact
+browser suite after modifying the manager or its lifecycle boundaries.
+
 ## Input and resolved configuration
 
 `src/option/defaults.ts` creates fresh defaults on every Artplayer.option access,

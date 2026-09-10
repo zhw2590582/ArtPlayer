@@ -1162,6 +1162,10 @@ function stateOf(owner) {
 function getScope(owner) {
   return stateOf(owner).scope;
 }
+function isClosing(owner) {
+  const state2 = stateOf(owner);
+  return state2.destroying || state2.scope.closed;
+}
 function ownContainer(owner, container, rollback) {
   const current = containers.get(container);
   if (current && current !== owner)
@@ -4133,46 +4137,63 @@ function miniProgressBar(art) {
   });
   return { name: "mini-progress-bar" };
 }
+function installBuiltins(registry, option) {
+  if (!isClosing(registry.art) && option.miniProgressBar && !option.isLive)
+    registry.add(miniProgressBar);
+  if (!isClosing(registry.art) && option.lock && isMobile)
+    registry.add(lock);
+  if (!isClosing(registry.art) && option.autoPlayback && !option.isLive)
+    registry.add(autoPlayback);
+  if (!isClosing(registry.art) && option.autoOrientation && isMobile)
+    registry.add(autoOrientation);
+  if (!isClosing(registry.art) && option.fastForward && isMobile && !option.isLive)
+    registry.add(fastForward);
+}
+function registerPlugin(registry, plugin, result) {
+  if (isClosing(registry.art))
+    return registry;
+  const name = result && result.name || plugin.name || `plugin${registry.id}`;
+  if (isClosing(registry.art))
+    return registry;
+  let key = name;
+  const duplicate = has(registry, key);
+  if (isClosing(registry.art))
+    return registry;
+  const message = `Cannot add a plugin that already has the same name: ${name}`;
+  if (isClosing(registry.art))
+    return registry;
+  errorHandle(!duplicate, message);
+  if (typeof name === "object" && name !== null || typeof name === "function")
+    key = Reflect.ownKeys({ [key]: void 0 })[0];
+  if (!isClosing(registry.art))
+    def(registry, key, { value: result });
+  return registry;
+}
 class Plugins {
   constructor(art) {
     this.art = art;
     this.id = 0;
     const { option } = art;
-    if (option.miniProgressBar && !option.isLive) {
-      this.add(miniProgressBar);
-    }
-    if (option.lock && isMobile) {
-      this.add(lock);
-    }
-    if (option.autoPlayback && !option.isLive) {
-      this.add(autoPlayback);
-    }
-    if (option.autoOrientation && isMobile) {
-      this.add(autoOrientation);
-    }
-    if (option.fastForward && isMobile && !option.isLive) {
-      this.add(fastForward);
-    }
+    installBuiltins(this, option);
     for (let index = 0; index < option.plugins.length; index++) {
-      this.add(option.plugins[index]);
+      if (isClosing(art))
+        return;
+      const registration = this.add(option.plugins[index]);
+      if (registration instanceof Promise) {
+        registration.catch((error2) => console.warn("Failed to initialize ArtPlayer plugin:", error2));
+      }
     }
   }
   add(plugin) {
+    errorHandle(!isClosing(this.art), "Cannot add a plugin after ArtPlayer is destroyed");
     this.id += 1;
     const result = plugin.call(this.art, this.art);
-    if (result instanceof Promise) {
+    if (result instanceof Promise)
       return result.then((res) => this.next(plugin, res));
-    } else {
-      return this.next(plugin, result);
-    }
+    return this.next(plugin, result);
   }
   next(plugin, result) {
-    const pluginName = result && result.name || plugin.name || `plugin${this.id}`;
-    errorHandle(!has(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
-    def(this, pluginName, {
-      value: result
-    });
-    return this;
+    return registerPlugin(this, plugin, result);
   }
 }
 function aspectRatio(art) {

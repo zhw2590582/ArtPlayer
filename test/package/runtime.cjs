@@ -75,7 +75,7 @@ const vm = require('node:vm');
   }
   check('DIST.i18n-cjs-esm-global', languages.length > 0)
   observations.blockedDeepImports = []
-  for (const specifier of ['artplayer/dist/artplayer.js', 'artplayer/types/artplayer.d.ts', 'artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js']) {
+  for (const specifier of ['artplayer/dist/artplayer.js', 'artplayer/types/artplayer.d.ts', 'artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js', 'artplayer/types']) {
     let code
     try {
       require.resolve(specifier)
@@ -84,7 +84,8 @@ const vm = require('node:vm');
     assert.equal(code, 'ERR_PACKAGE_PATH_NOT_EXPORTED')
     observations.blockedDeepImports.push({ specifier, code })
   }
-  check('DIST.exports-boundary', observations.blockedDeepImports.length === 3)
+  await assert.rejects(import('artplayer/types'), error => error.code === 'ERR_PACKAGE_PATH_NOT_EXPORTED')
+  check('DIST.exports-boundary', observations.blockedDeepImports.length === 4)
   observations.resolutions = {}
   for (const specifier of ['artplayer', 'artplayer/legacy', 'artplayer-plugin-chapter', 'artplayer-plugin-chapter/legacy']) {
     const resolved = require.resolve(specifier)

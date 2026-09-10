@@ -6,6 +6,7 @@ import type { I18n } from './i18n'
 import type { Icons } from './icons'
 import type { Option, OptionInput } from './option'
 import type { Player } from './player'
+import type { PluginFactory, Plugins } from './plugin'
 import type { Setting, SettingOption } from './setting'
 import type { Subtitle } from './subtitle'
 import type { Template } from './template'
@@ -20,6 +21,8 @@ export type {
   Option,
   OptionInput,
   Player,
+  PluginFactory,
+  Plugins,
   Setting,
   SettingOption,
   Subtitle,
@@ -205,10 +208,5 @@ export default class Artplayer extends Player {
     remove: (name: string) => Artplayer['setting']
   } & Component
 
-  readonly plugins: {
-    /** Legacy signature: synchronous factories return this registry directly; Promise factories return a Promise of it. */
-    add: (
-      plugin: (this: Artplayer, art: Artplayer) => unknown | Promise<unknown>,
-    ) => Promise<Artplayer['plugins']>
-  } & Record<string, unknown>
+  readonly plugins: Plugins
 }

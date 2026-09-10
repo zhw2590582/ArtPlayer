@@ -890,11 +890,14 @@
         "CORE-03",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "注册流程、同步/异步结果、插件/事件扩展接口",
       "acceptance": "旧插件同步可见性、重名与命名、销毁中异步插件保持明确语义；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-03 并增加候选正向回归；接续 CORE-07 / BASE-TYPE-04 的同步/异步注册返回声明冲突，内部返回类型精确，保留历史消费者",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-08-plugin-manager.md",
+        "baselines/plugins-validation.json"
+      ]
     },
     {
       "id": "CORE-09",

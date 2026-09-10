@@ -38,7 +38,7 @@ export function typeConsumers(dir) {
   for (const [compiler, mode] of [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'bundler-esm'], [compat, 'node10-commonjs'], [ts, 'nodenext-esm']]) {
     const next = mode.startsWith('nodenext')
     const extension = next ? (mode.endsWith('-cjs') ? 'cts' : 'mts') : 'ts'
-    const inputs = ['public', 'declaration-inputs', 'declaration-legacy', 'chapter-options', 'chapter-exports', 'language-value', 'language', 'legacy-plugin']
+    const inputs = ['public', 'declaration-inputs', 'declaration-legacy', 'plugins-public', 'chapter-options', 'chapter-exports', 'language-value', 'language', 'legacy-plugin']
     if (mode === 'nodenext-cjs')
       inputs.push('commonjs')
     const files = inputs.map((name) => {

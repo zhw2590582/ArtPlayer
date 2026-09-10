@@ -32,6 +32,11 @@ export function getScope(owner: object): ResourceScope {
   return stateOf(owner).scope
 }
 
+export function isClosing(owner: object): boolean {
+  const state = stateOf(owner)
+  return state.destroying || state.scope.closed
+}
+
 export function ownContainer(owner: object, container: Element, rollback: () => void): void {
   const current = containers.get(container)
   if (current && current !== owner)

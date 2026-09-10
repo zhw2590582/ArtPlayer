@@ -3,6 +3,7 @@ import type { ComponentInput, ComponentOption } from './component'
 import type { CssVar } from './cssVar'
 import type { I18n } from './i18n'
 import type { Icons } from './icons'
+import type { PluginFactory } from './plugin'
 import type { Quality } from './quality'
 import type { Setting } from './setting'
 import type { Subtitle } from './subtitle'
@@ -240,7 +241,7 @@ export interface Option {
   /**
    * Custom plugin list
    */
-  plugins?: ((this: Artplayer, art: Artplayer) => unknown | Promise<unknown>)[]
+  plugins?: PluginFactory[]
 
   /**
    * Custom layer list

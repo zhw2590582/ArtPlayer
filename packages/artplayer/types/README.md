@@ -55,3 +55,30 @@ declaration. Optional capability checks belong to their consumers. Full construc
 type integration is tracked by CORE-20; proxy package migration validates each real
 adapter separately. Source type fixtures and real canvas integration live in
 test/types/media-hosts.ts and test/browser/media-hosts.spec.js.
+
+## Plugin and event augmentation
+
+Use the type-only `artplayer/types` entry to augment the shared Plugins and Events
+interfaces. This reaches the same definition through Node10, NodeNext CJS/ESM and
+Bundler. Directly augmenting the root CJS namespace type alias is not equivalent.
+
+```ts
+import Artplayer from 'artplayer'
+
+declare module 'artplayer/types' {
+  interface Plugins {
+    customPlugin?: { update: (value: number) => void }
+  }
+}
+
+const art = new Artplayer({ container: '#player' })
+art.plugins.customPlugin?.update(1)
+```
+
+Types do not register a plugin or prove that it is installed; retain a presence
+guard unless the application owns and verifies installation. PluginFactory describes
+the existing single art argument and this receiver. Public add keeps its historical
+return signature; internal manager types model actual returns separately. The new
+subpath has no runtime export; use it only for types/augmentation. plugins-public.ts
+tests the same declarations in all installed consumer modes, and package runtime
+checks reject both require and import of artplayer/types.

@@ -248,6 +248,15 @@ export interface Quality {
   url: string
 }
 
+export type PluginFactory<Host = Artplayer, Result = unknown> = (this: Host, art: Host) => Result
+
+/** Augment this interface with installed plugin results; augmentation does not register a plugin. */
+export interface Plugins {
+  /** Legacy signature: synchronous factories return this registry; Promise factories return a Promise of it. */
+  add: (plugin: PluginFactory) => Promise<Plugins>
+  [name: string]: unknown
+}
+
 export type AspectRatio = 'default' | '4:3' | '16:9' | (`${number}:${number}` & Record<never, never>)
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>)
 export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never, never>)
@@ -591,7 +600,7 @@ export interface Option {
   /**
    * Custom plugin list
    */
-  plugins?: ((this: Artplayer, art: Artplayer) => unknown | Promise<unknown>)[]
+  plugins?: PluginFactory[]
 
   /**
    * Custom layer list
@@ -1159,6 +1168,8 @@ export type {
   Option,
   OptionInput,
   Player,
+  PluginFactory,
+  Plugins,
   Setting,
   SettingOption,
   Subtitle,
@@ -1344,12 +1355,7 @@ export default class Artplayer extends Player {
     remove: (name: string) => Artplayer['setting']
   } & Component
 
-  readonly plugins: {
-    /** Legacy signature: synchronous factories return this registry directly; Promise factories return a Promise of it. */
-    add: (
-      plugin: (this: Artplayer, art: Artplayer) => unknown | Promise<unknown>,
-    ) => Promise<Artplayer['plugins']>
-  } & Record<string, unknown>
+  readonly plugins: Plugins
 }
 
 export = Artplayer
