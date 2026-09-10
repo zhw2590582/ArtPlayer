@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：CORE-10 播放与时间/状态属性完成
+
+八个 mixin 迁移 TS，新增最小播放属性宿主；保持转换、通知、存储、进度和状态优先级。新增 PlaybackControls 精确视图，旧 toggle 声明仍兼容。145 项 Node/基线、安装 UMD 与 legacy 各 195 项三浏览器、打包 27 项运行时和五组类型检查通过。见 [交付](changes/2026-09-11-CORE-10-playback-properties.md)。发现 BASE-TYPE-08 的只写属性虚构 getter 声明，已交 CORE-21；没有添加运行时 getter 来掩盖它。当前 214 项，46 完成、168 待办；核心 42 个 TS 文件、chapter 5 个。下一项 CORE-11 媒体事件、ready 与重连。
+
 ## 当前实施：CORE-09 URL 与切源操作完成
 
 URL/switch 门面迁移 TS，新增四个 source 模块，统一切源取消、事件清理、同步代理事件和 Promise 结算；真实 playMix 同步接入源身份，避免晚到播放覆盖新状态。137 项 Node/基线、安装 UMD 与 legacy 各 183 项三浏览器检查、打包 27 项运行时和五组类型检查通过。见 [交付](changes/2026-09-11-CORE-09-source-operations.md)。关闭 BASE-LIFE-01/02/06；customType 外部 SDK 清理、对象 URL 归属和过期重连仍由对应后续任务处理。当前 214 项，45 完成、169 待办；核心 33 个 TS 文件、chapter 5 个。下一项 CORE-10 播放与时间/状态属性。

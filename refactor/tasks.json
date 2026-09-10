@@ -930,11 +930,14 @@
       "dependsOn": [
         "CORE-09"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "play/pause/toggle/seek/volume/rate/duration 等模块",
       "acceptance": "旧返回值、拒绝、mutex、位置恢复、属性描述符与事件通过；接续 CORE-07 / BASE-TYPE-04 的 toggle void 与实际 Promise 分支冲突，不吞拒绝",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-10-playback-properties.md",
+        "baselines/playback-properties-validation.json"
+      ]
     },
     {
       "id": "CORE-11",
@@ -1123,7 +1126,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "由 TS 生成的既有入口声明与三种发布产物",
-      "acceptance": "内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过；逐项完成 CORE-07 留下的 BASE-TYPE-04/05/07 声明方案，旧合法消费者与实际返回分别留证；不能以虚假的交叉返回类型或改变运行时来掩盖冲突，未决项阻止核心声明出口",
+      "acceptance": "内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过；逐项完成 CORE-07 留下的 BASE-TYPE-04/05/07 声明方案，旧合法消费者与实际返回分别留证；不能以虚假的交叉返回类型或改变运行时来掩盖冲突，未决项阻止核心声明出口；处理 CORE-10 / BASE-TYPE-08 的 setter-only 属性虚构 getter 声明，并复核 PlaybackControls 精确视图与旧 toggle 声明共存策略",
       "evidence": []
     },
     {

@@ -2753,10 +2753,10 @@ function currentTimeMix(art) {
   def(art, "currentTime", {
     get: () => $video.currentTime || 0,
     set: (time2) => {
-      time2 = Number.parseFloat(time2);
-      if (Number.isNaN(time2))
+      const parsed = Number.parseFloat(time2);
+      if (Number.isNaN(parsed))
         return;
-      $video.currentTime = clamp(time2, 0, art.duration);
+      $video.currentTime = clamp(parsed, 0, art.duration);
     }
   });
 }
@@ -3133,13 +3133,10 @@ function fullscreenWebMix(art) {
 }
 function loadedMix(art) {
   const { $video } = art.template;
-  def(art, "loaded", {
-    get: () => art.loadedTime / $video.duration
-  });
+  const target = art;
+  def(art, "loaded", { get: () => target.loadedTime / $video.duration });
   def(art, "loadedTime", {
-    get: () => {
-      return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0;
-    }
+    get: () => $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0
   });
 }
 function miniMix(art) {
@@ -3384,11 +3381,8 @@ function pipMix(art) {
   }
 }
 function playbackRateMix(art) {
-  const {
-    template: { $video },
-    i18n,
-    notice
-  } = art;
+  const { template: { $video }, i18n, notice } = art;
+  const target = art;
   def(art, "playbackRate", {
     get() {
       return $video.playbackRate;
@@ -3400,15 +3394,13 @@ function playbackRateMix(art) {
         $video.playbackRate = rate;
         notice.show = `${i18n.get("Rate")}: ${rate === 1 ? i18n.get("Normal") : `${rate}x`}`;
       } else {
-        art.playbackRate = 1;
+        target.playbackRate = 1;
       }
     }
   });
 }
 function playedMix(art) {
-  def(art, "played", {
-    get: () => art.currentTime / art.duration
-  });
+  def(art, "played", { get: () => art.currentTime / art.duration });
 }
 function playingMix(art) {
   const { $video } = art.template;
@@ -3629,20 +3621,20 @@ function seekMix(art) {
   def(art, "seek", {
     set(time2) {
       art.currentTime = time2;
-      if (art.duration) {
+      if (art.duration)
         notice.show = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`;
-      }
       art.emit("seek", art.currentTime, time2);
     }
   });
+  const target = art;
   def(art, "forward", {
     set(time2) {
-      art.seek = art.currentTime + time2;
+      target.seek = art.currentTime + time2;
     }
   });
   def(art, "backward", {
     set(time2) {
-      art.seek = art.currentTime - time2;
+      target.seek = art.currentTime - time2;
     }
   });
 }
@@ -3653,9 +3645,8 @@ function stateMix(art) {
     set(name) {
       for (let index = 0; index < states2.length; index++) {
         const prop = states2[index];
-        if (prop !== name && art[prop]) {
+        if (prop !== name && art[prop])
           art[prop] = false;
-        }
       }
     }
   });
@@ -3902,11 +3893,10 @@ function thumbnailsMix(art) {
 function toggleMix(art) {
   def(art, "toggle", {
     value() {
-      if (art.playing) {
+      if (art.playing)
         return art.pause();
-      } else {
+      else
         return art.play();
-      }
     }
   });
 }
@@ -3995,20 +3985,14 @@ function urlMix(art) {
   });
 }
 function volumeMix(art) {
-  const {
-    template: { $video },
-    i18n,
-    notice,
-    storage
-  } = art;
+  const { template: { $video }, i18n, notice, storage } = art;
   def(art, "volume", {
     get: () => $video.volume || 0,
     set: (percentage) => {
       $video.volume = clamp(percentage, 0, 1);
-      notice.show = `${i18n.get("Volume")}: ${Number.parseInt($video.volume * 100, 10)}`;
-      if ($video.volume !== 0) {
+      notice.show = `${i18n.get("Volume")}: ${Number.parseInt(String($video.volume * 100), 10)}`;
+      if ($video.volume !== 0)
         storage.set("volume", $video.volume);
-      }
     }
   });
   def(art, "muted", {

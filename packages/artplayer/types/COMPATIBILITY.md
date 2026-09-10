@@ -33,16 +33,33 @@ art.on('subtitleBeforeUpdate', (cues: VTTCue[]) => {
 
 ## Retained conflicts and owners
 
-| Surface                   | Actual runtime                                                                | Retained historical declaration                         | Follow-up                |
-| ------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------ |
-| plugins.add               | Registry for a synchronous factory; Promise of registry for a Promise factory | Always Promise                                          | CORE-08/21, BASE-TYPE-04 |
-| toggle                    | Pause result or original play Promise, including rejection                    | void                                                    | CORE-10/21, BASE-TYPE-04 |
-| debounce/throttle         | Wrapper returns undefined; debounce ignores its old context argument          | Callback return type                                    | CORE-21, BASE-TYPE-05    |
-| def with string key       | Native defineProperty returns the target                                      | void, arbitrary descriptor input accepted               | CORE-21, BASE-TYPE-05    |
-| setting.find              | Item or null                                                                  | Item or undefined                                       | CORE-14/21, BASE-TYPE-07 |
-| setting.add/update/remove | Item/item/undefined                                                           | Setting registry                                        | CORE-14/21, BASE-TYPE-07 |
-| subtitle update events    | VTTCue array                                                                  | Scalar contextual inference unless explicitly annotated | CORE-15/21, BASE-TYPE-07 |
-| notice.show getter        | Boolean visibility                                                            | Historical message/false union                          | CORE-18/21, BASE-TYPE-07 |
+CORE-10 adds an accurate method view without wrapping or replacing the player:
+
+```ts
+import type { PlaybackControls } from 'artplayer'
+
+const playback: PlaybackControls = art
+const pending = playback.toggle()
+if (pending)
+  pending.catch(error => console.error(error))
+```
+
+The original `art.toggle(): void` declaration remains accepted by historical
+consumers. The optional view exposes `Promise<void> | void`; play rejection and
+the original object identity remain unchanged. BASE-TYPE-04 stays open for the
+remaining plugins.add conflict and CORE-21's full facade review.
+
+| Surface                                    | Actual runtime                                                                | Retained historical declaration                         | Follow-up                |
+| ------------------------------------------ | ----------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------ |
+| plugins.add                                | Registry for a synchronous factory; Promise of registry for a Promise factory | Always Promise                                          | CORE-08/21, BASE-TYPE-04 |
+| toggle                                     | Pause result or original play Promise, including rejection                    | void                                                    | CORE-10/21, BASE-TYPE-04 |
+| debounce/throttle                          | Wrapper returns undefined; debounce ignores its old context argument          | Callback return type                                    | CORE-21, BASE-TYPE-05    |
+| def with string key                        | Native defineProperty returns the target                                      | void, arbitrary descriptor input accepted               | CORE-21, BASE-TYPE-05    |
+| setting.find                               | Item or null                                                                  | Item or undefined                                       | CORE-14/21, BASE-TYPE-07 |
+| setting.add/update/remove                  | Item/item/undefined                                                           | Setting registry                                        | CORE-14/21, BASE-TYPE-07 |
+| subtitle update events                     | VTTCue array                                                                  | Scalar contextual inference unless explicitly annotated | CORE-15/21, BASE-TYPE-07 |
+| notice.show getter                         | Boolean visibility                                                            | Historical message/false union                          | CORE-18/21, BASE-TYPE-07 |
+| seek/forward/backward/switch/quality reads | Undefined: these descriptors only have setters                                | Numeric/string/quality-array getters                    | CORE-21, BASE-TYPE-08    |
 
 These remain open declaration work, not release waivers. CORE-21 must resolve the
 public/generated facade strategy against both actual returns and historical source
@@ -51,6 +68,11 @@ For existing application code, awaiting plugins.add or toggle works for synchron
 and Promise results; ignore timer results, guard setting.find with a truthiness
 check, and explicitly annotate cue-array listeners. Do not rely on the inaccurate
 return types to call Promise methods on synchronous results or chain settings.
+
+CORE-10 records BASE-TYPE-08 from real published/candidate descriptors. Reading
+these command properties returns undefined; use currentTime, option and media
+state for observations. Source interfaces model undefined reads independently
+of setter inputs. Historical public getter declarations are not removed here.
 
 ## Evidence and maintenance
 

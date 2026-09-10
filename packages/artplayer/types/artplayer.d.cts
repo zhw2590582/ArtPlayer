@@ -14,6 +14,7 @@ declare namespace Artplayer {
   type Option = Definition.Option
   type OptionInput = Definition.OptionInput
   type Player = Definition.Player
+  type PlaybackControls = Definition.PlaybackControls
   type PluginFactory<Host = Artplayer, Result = unknown> = Definition.PluginFactory<Host, Result>
   type Plugins = Definition.Plugins
   type Setting = Definition.Setting

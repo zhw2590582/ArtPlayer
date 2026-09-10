@@ -40,5 +40,6 @@ export interface SwitchHost extends UrlTarget, SourceEvents {
 export interface SwitchMethods {
   switchUrl: (url: string) => Promise<void>
   switchQuality: (url: string) => Promise<void>
+  get switch(): undefined
   set switch(url: string)
 }

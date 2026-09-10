@@ -367,6 +367,13 @@ export declare class Player {
   reset(): void
 }
 
+/** Accurate playback method view; assign an existing player without a runtime wrapper. */
+export interface PlaybackControls {
+  play: () => Promise<void>
+  pause: () => void
+  toggle: () => Promise<void> | void
+}
+
 export type CustomType
   = | 'flv'
     | 'm3u8'
@@ -1167,6 +1174,7 @@ export type {
   Icons,
   Option,
   OptionInput,
+  PlaybackControls,
   Player,
   PluginFactory,
   Plugins,

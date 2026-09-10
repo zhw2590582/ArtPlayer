@@ -47,6 +47,12 @@ signature. CORE-21 remains responsible for the generated/public declaration stra
 
 ## Internal media migration
 
+`PlaybackControls` is an optional accurate view of play/pause/toggle. Assign the
+existing player directly (`const playback: PlaybackControls = art`); it preserves
+object identity and reports toggle's Promise-or-void branches. It is exported from
+the root and shared type entry in all five supported consumer modes. Historical
+`art.toggle(): void` remains available; see COMPATIBILITY.md for the distinction.
+
 CORE-06 uses src/media/types.ts and src/media/hosts.ts for native media, canvas
 shims and minimal playback/layout dependencies. These types are not exported by
 the package. Public art.video keeps its historical declaration and runtime identity;

@@ -13,7 +13,10 @@ test('Risk register rejects omitted findings, missing owners and unsupported clo
   for (const mutate of [
     value => value.items = value.items.filter(item => item.id !== 'BASE-LIFE-04'),
     value => value.items[0].owners = ['NO-SUCH-TASK'],
-    value => value.items[0].status = 'resolved',
+    (value) => {
+      value.items[0].status = 'resolved'
+      delete value.items[0].resolutionEvidence
+    },
     value => value.items[0].evidence = ['../outside-workspace'],
   ]) {
     const changed = structuredClone(register)

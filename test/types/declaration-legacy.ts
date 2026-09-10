@@ -13,8 +13,13 @@ const throttled: number = Artplayer.utils.throttle(() => 1, 10)()
 const descriptor: void = Artplayer.utils.def({}, 'value', { value: 1 })
 const updated: Artplayer['setting'] = art.setting.update({ name: 'entry', html: 'Entry' })
 const removed: Artplayer['setting'] = art.setting.remove('entry')
+const seekRead: number = art.seek
+const forwardRead: number = art.forward
+const backwardRead: number = art.backward
+const switchRead: string = art.switch
+const qualityRead: Artplayer['quality'] = art.quality
 art.on('subtitleBeforeUpdate', (cue) => {
   const historicalCue: VTTCue = cue
   void historicalCue
 })
-void [requiredUrl, registration, toggle, debounced, throttled, descriptor, updated, removed]
+void [requiredUrl, registration, toggle, debounced, throttled, descriptor, updated, removed, seekRead, forwardRead, backwardRead, switchRead, qualityRead]

@@ -318,6 +318,32 @@ finding, not a claim that a standalone debounce can know when its owner is destr
 
 ## Verification and maintenance
 
+### Playback properties (CORE-10)
+
+The toggle, currentTime, seek/forward/backward, volume/muted, playbackRate,
+played, loaded/loadedTime and state mixins are TypeScript modules.
+`media/playback.ts` defines their minimal timing, notice, storage and display-state
+hosts; toggle infers the union of its actual play/pause result types.
+
+Keep JS coercion and read/write differences explicit: currentTime uses parseFloat,
+seek emits both the clamped result and original request, and forward/backward
+retain native addition/subtraction behavior. Volume uses parseInt-style percentage
+formatting and stores nonzero actual media volume. Falsy playbackRate resets to 1;
+equal rates do not change the notice. Raw played/loaded ratios may be NaN or Infinity.
+Do not replace those rules without a separate compatibility decision.
+
+Most media getters capture the original video; duration reads the current template.
+The state setter only disables other modes, never enables its named mode. Native
+fullscreen/PiP implementation and event forwarding migrate in their own tasks.
+Public command-property getter discrepancies are BASE-TYPE-08, not runtime APIs
+to invent. The optional public PlaybackControls view accurately models toggle
+without changing the player's historical method declarations.
+
+`test/playback-properties.test.js` covers coercion, storage, descriptors, ranges,
+state priority and captured references. Its browser counterpart compares actual
+published/candidate media; type fixtures cover source inference and five installed
+consumer modes. Existing play/source/canvas tests continue to guard playback.
+
 ### Source operations (CORE-09)
 
 `player/urlMix.ts` and `player/switchMix.ts` preserve the public descriptors.

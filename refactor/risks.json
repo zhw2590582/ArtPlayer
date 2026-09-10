@@ -281,7 +281,8 @@
       ],
       "compatibleResolution": "保留旧声明接受范围并协调精确重载/扩展，不静默把同步注册改成 async。",
       "closureCriteria": "返回值类型与运行时差异逐项说明，旧合法消费和拒绝传播回归通过。",
-      "scopeNote": "CORE-07 retains historical legal return assignments and records actual runtime separately; incompatible return tightening remains open through CORE-21. No release waiver."
+      "scopeNote": "CORE-07 retains historical legal return assignments and records actual runtime separately; incompatible return tightening remains open through CORE-21. No release waiver.",
+      "playbackResolution": "CORE-10 adds assignable PlaybackControls with Promise<void> | void toggle; legacy root void remains accepted. All five installed type modes pass. The overall facade and plugins.add conflict stay open through CORE-21."
     },
     {
       "id": "BASE-DIST-01",
@@ -871,6 +872,25 @@
       "compatibleResolution": "Keep legacy consumers; add explicit cue-array listener overloads, type internal implementations accurately, and resolve remaining generated/public facade contracts at CORE-21 without false intersections.",
       "closureCriteria": "Actual setting/null/void and notice boolean returns, cue array callbacks and old legal type consumers all have an explicit compatible declaration strategy and package tests.",
       "scopeNote": "CORE-07 provides runtime evidence and explicit cue-array overloads; old inferred scalar event callbacks and return signatures are not claimed corrected."
+    },
+    {
+      "id": "BASE-TYPE-08",
+      "title": "Write-only player commands have fictitious public getter declarations",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-21"
+      ],
+      "evidence": [
+        "packages/artplayer/types/player.d.ts",
+        "test/playback-properties.test.js",
+        "test/browser/playback-properties.spec.js",
+        "refactor/changes/2026-09-11-CORE-10-playback-properties.md",
+        "refactor/baselines/playback-properties-validation.json",
+        "test/types/declaration-legacy.ts"
+      ],
+      "compatibleResolution": "Keep historical consumer acceptance, model source command reads as undefined, and provide an accurate public facade without inventing runtime getters.",
+      "closureCriteria": "seek/forward/backward/switch/quality reads and writes have an explicit accurate compatibility strategy validated against old TypeScript consumers and real package descriptors."
     }
   ]
 }

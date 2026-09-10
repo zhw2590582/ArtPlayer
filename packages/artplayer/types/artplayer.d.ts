@@ -5,6 +5,7 @@ import type { Events, SubtitleUpdateEvents } from './events'
 import type { I18n } from './i18n'
 import type { Icons } from './icons'
 import type { Option, OptionInput } from './option'
+import type { PlaybackControls } from './playback'
 import type { Player } from './player'
 import type { PluginFactory, Plugins } from './plugin'
 import type { Setting, SettingOption } from './setting'
@@ -20,6 +21,7 @@ export type {
   Icons,
   Option,
   OptionInput,
+  PlaybackControls,
   Player,
   PluginFactory,
   Plugins,
