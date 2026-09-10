@@ -48,7 +48,50 @@ installed versions. Candidate corrections have separate published-defect observa
 in test/public-behavior.test.js and test/browser/emitter.spec.js. The source type fixture
 checks event name/payload correlation, receiver types, custom channels and chain typing.
 Emitter owns registrations only; instance teardown must remove the relevant callbacks,
-not clear unrelated subscribers before destroy dispatch. Resource scopes follow in CORE-03.
+not clear unrelated subscribers before destroy dispatch. Internal resource scopes are described below.
+
+## Internal resource ownership
+
+`src/lifecycle/scope.ts` owns synchronous cleanup registrations. `resources.ts` supplies
+DOM listener, timeout, animation frame, request-controller and Blob URL adapters;
+it depends only on the scope type and native browser APIs. Neither file is exported
+from Artplayer or Artplayer.utils. CORE-03 introduces and tests this boundary;
+CORE-04 will connect instance construction/destruction. Existing Events, timers and
+requests have not yet been transferred, so their historical lifecycle findings remain open.
+
+Create one ResourceScope for an owner and child() for a replaceable operation.
+Call operation.dispose() on completion or replacement; it detaches from its parent,
+while sibling operations stay live. Disposing an instance closes all remaining
+children. add(cleanup) returns an idempotent release function. Registrations are removed
+before invoking cleanup; disposal closes the scope first and unwinds in reverse order.
+Late registrations are released immediately. Failures do not interrupt other cleanup:
+dispose throws one ResourceCleanupError containing the original errors after unwinding.
+Explicit release throws its own error immediately and is still consumed. Owners must
+handle these errors at their lifecycle boundary without replacing a primary operation error.
+
+Cleanup returns undefined, deliberately rejecting async callbacks in strict TS. An
+asynchronous media/SDK shutdown needs a separately awaited owner protocol; do not cast
+its Promise to a synchronous disposer. Emitter subscriptions use a per-owner callback
+and add(() => { emitter.off(name, callback) }); do not remove unrelated subscriptions.
+
+DOM adapters preserve function receivers and object handleEvent receivers, snapshot
+capture, and release once/aborted subscriptions. They are internal registrations with
+their own wrappers, not a replacement for the public Events.proxy identity contract.
+Timer/RAF callbacks detach before invoking work and guard queued callbacks after
+cancellation. They allocate nothing when closed. Request controllers are optional on
+engines lacking AbortController: consumers still need closed/generation checks and
+must own rejected fetch Promises. Release a completed request's operation scope to
+avoid retaining its controller. objectURL only accepts a Blob it creates a URL for;
+it never adopts a caller URL. A closed scope immediately revokes the newly created URL.
+
+Run `yarn test:unit` and `yarn typecheck` for scope failures, reentry, ownership,
+controlled timers, queued RAF and type rejection cases. `resource-scope.spec.js` runs
+an explicitly identified es2015 internal-source fixture in all three Playwright
+engines with native DOM, RAF, timers, fetch abort and URL access. It is not evidence
+that the player has adopted scopes or that an installed tarball exposes this API.
+Fresh fetches test URL revocation; decoded image caches are not a reliable revocation
+oracle. Keep adapter tests and owner integration tests separate and extend both when
+moving an existing resource into this boundary.
 
 ## Observable utility behavior
 

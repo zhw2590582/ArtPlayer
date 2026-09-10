@@ -1,0 +1,692 @@
+{
+  "task": "CORE-03",
+  "date": "2026-09-11",
+  "node": "v24.21.0",
+  "parentCommit": "362c6169987bb32c120e81ea267eeaa3bd8f63b8",
+  "source": {
+    "packages/artplayer/src/lifecycle/scope.ts": "e2188e8544b27cf8c7ac149e7146af628a2d6166c82b719a247adef5d85be5db",
+    "packages/artplayer/src/lifecycle/resources.ts": "2ff9cb71035ac5694c92a6b01f7454890bd652ba4b7774e8973500de7f7d204c",
+    "test/resource-scope.test.js": "f1b5bfb3fd863bee9493a26152aad6d110d47a8fc1f369da7e94c57d0538a123",
+    "test/types/resource-scope.ts": "a8c056914e8529c871891ed672030248d359a19f8571a5ac5a5f18952ea5def0",
+    "test/browser/resource-scope.spec.js": "0196bd9943c1ce2f6560f87156cd0de47606579c1a736bd46d4943179a121d3f"
+  },
+  "ci": {
+    "command": "yarn ci:check",
+    "passed": 94,
+    "unit": 66,
+    "engineering": 4,
+    "baseline": 24,
+    "sourceTypes": 15,
+    "logSha256": "e4982bd5055665e0bb40dc41c2c1ba319a935bff22ef6565ad102c4403ce09b6"
+  },
+  "build": {
+    "commands": [
+      "yarn build artplayer",
+      "yarn build:i18n"
+    ],
+    "generatedGitDifference": false,
+    "logs": [
+      {
+        "file": "core03-build.log",
+        "sha256": "21ffc4ba5064d496a5c5da4a3f5eaebe9bb6de240fdb44938f2858120e52d934"
+      },
+      {
+        "file": "core03-i18n.log",
+        "sha256": "4b5a3b6f03affadff34eb605405c16cad36f9fb9c7b61e54a446148140048490"
+      }
+    ]
+  },
+  "browser": {
+    "command": "yarn test:browser",
+    "candidateKind": "workspace-build",
+    "internalFixtureKind": "internal-source-fixture",
+    "stats": {
+      "startTime": "2026-09-10T16:19:36.559Z",
+      "duration": 28138.681,
+      "expected": 78,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "internal": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "win32",
+        "fixture": {
+          "kind": "internal-source-fixture",
+          "target": "es2015",
+          "sha256": "032ba327c57b8d94d005558c64bc153dfb2e1d6fcb80cf50adca0ae5cdd7f471"
+        },
+        "pageErrors": [],
+        "controlledConsole": [
+          "Failed to load resource: net::ERR_FILE_NOT_FOUND"
+        ],
+        "controlledFailedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "fetch",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          },
+          {
+            "url": "blob:http://127.0.0.1:8084/bb671d68-fcc1-4374-ac45-06ea586b13fd",
+            "resourceType": "fetch",
+            "failure": {
+              "errorText": "net::ERR_FILE_NOT_FOUND"
+            }
+          }
+        ]
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "platform": "win32",
+        "fixture": {
+          "kind": "internal-source-fixture",
+          "target": "es2015",
+          "sha256": "032ba327c57b8d94d005558c64bc153dfb2e1d6fcb80cf50adca0ae5cdd7f471"
+        },
+        "pageErrors": [],
+        "controlledConsole": [],
+        "controlledFailedRequests": []
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "platform": "win32",
+        "fixture": {
+          "kind": "internal-source-fixture",
+          "target": "es2015",
+          "sha256": "032ba327c57b8d94d005558c64bc153dfb2e1d6fcb80cf50adca0ae5cdd7f471"
+        },
+        "pageErrors": [],
+        "controlledConsole": [
+          "Failed to load resource"
+        ],
+        "controlledFailedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "fetch",
+            "failure": {
+              "errorText": "Load request cancelled"
+            }
+          },
+          {
+            "url": "blob:http://127.0.0.1:8084/884f53c0-917f-4730-be3f-32b8f0d5e2b8",
+            "resourceType": "fetch",
+            "failure": null
+          }
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "file": "chapter.spec.js",
+        "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate clears titles on blank chapters, zero hover and replacement",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate rejects NaN and can recover after an invalid update",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate ignores pending metadata initialization after immediate destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate deduplicates stylesheet injection while the document is loading",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate clears titles on blank chapters, zero hover and replacement",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate rejects NaN and can recover after an invalid update",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate ignores pending metadata initialization after immediate destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate deduplicates stylesheet injection while the document is loading",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate clears titles on blank chapters, zero hover and replacement",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate rejects NaN and can recover after an invalid update",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate ignores pending metadata initialization after immediate destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate deduplicates stylesheet injection while the document is loading",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "published: emitter event names and once across nested dispatch",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "candidate: emitter event names and once across nested dispatch",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "published: emitter event names and once across nested dispatch",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "candidate: emitter event names and once across nested dispatch",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "published: emitter event names and once across nested dispatch",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "candidate: emitter event names and once across nested dispatch",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "controlled HTTP media failure emits a real video error",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "Range, media identity and docs candidate routes",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "controlled HTTP media failure emits a real video error",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "Range, media identity and docs candidate routes",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "controlled HTTP media failure emits a real video error",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "Range, media identity and docs candidate routes",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "resource-scope.spec.js",
+        "title": "internal resource scope: native DOM, RAF, timer, fetch abort and URL release",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "resource-scope.spec.js",
+        "title": "internal resource scope: native DOM, RAF, timer, fetch abort and URL release",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "resource-scope.spec.js",
+        "title": "internal resource scope: native DOM, RAF, timer, fetch abort and URL release",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: subtitle object URL contains real VTT data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: download starts and removes its temporary anchor",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: subtitle object URL contains real VTT data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: download starts and removes its temporary anchor",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate download releases the anchor even when click fails",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: subtitle object URL contains real VTT data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: download starts and removes its temporary anchor",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: subtitle object URL contains real VTT data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: download starts and removes its temporary anchor",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate download releases the anchor even when click fails",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: subtitle object URL contains real VTT data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: download starts and removes its temporary anchor",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: subtitle object URL contains real VTT data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: download starts and removes its temporary anchor",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate download releases the anchor even when click fails",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      }
+    ]
+  },
+  "firstFailure": {
+    "stats": {
+      "startTime": "2026-09-10T16:15:26.658Z",
+      "duration": 33097.064,
+      "expected": 77,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "engine": "firefox",
+    "assertion": "revokedRejected expected true, received false using an already decoded image",
+    "resolution": "Replace image decoding with fresh fetch before and after revocation; assert exact TypeError. Also abort an in-flight native fetch.",
+    "reportSha256": "8e2bbafe70e81957f37501901957598b3a88d4e5f272dcdaaedb56839f59118a"
+  },
+  "limits": [
+    "No player constructor/destroy integration until CORE-04",
+    "No package install rerun for this currently unreferenced internal module",
+    "No remote CI, device or SDK validation in this task"
+  ]
+}
