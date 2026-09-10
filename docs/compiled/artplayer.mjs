@@ -302,6 +302,185 @@ const config$1 = {
     "webkitExitFullscreen"
   ]
 };
+class ResourceCleanupError extends Error {
+  constructor(errors) {
+    super("Failed to release ArtPlayer resources");
+    this.errors = errors;
+    this.name = "ResourceCleanupError";
+  }
+}
+class ResourceScope {
+  constructor() {
+    this.cleanups = /* @__PURE__ */ new Set();
+    this.disposed = false;
+  }
+  get closed() {
+    return this.disposed;
+  }
+  add(cleanup) {
+    let active = true;
+    const release = () => {
+      if (!active)
+        return;
+      active = false;
+      this.cleanups.delete(release);
+      cleanup();
+    };
+    if (this.closed)
+      release();
+    else
+      this.cleanups.add(release);
+    return release;
+  }
+  child() {
+    const child = new ResourceScope();
+    const release = this.add(() => {
+      child.dispose();
+    });
+    child.add(() => {
+      release();
+    });
+    return child;
+  }
+  dispose() {
+    if (this.closed)
+      return;
+    this.disposed = true;
+    const errors = [];
+    for (const release of Array.from(this.cleanups).reverse()) {
+      try {
+        release();
+      } catch (error2) {
+        if (error2 instanceof ResourceCleanupError)
+          errors.push(...error2.errors);
+        else
+          errors.push(error2);
+      }
+    }
+    if (errors.length)
+      throw new ResourceCleanupError(errors);
+  }
+}
+const states = /* @__PURE__ */ new WeakMap();
+const containers = /* @__PURE__ */ new WeakMap();
+function beginLifecycle(owner) {
+  states.set(owner, { scope: new ResourceScope(), destroying: false });
+}
+function stateOf(owner) {
+  const state2 = states.get(owner);
+  if (!state2)
+    throw new Error("ArtPlayer lifecycle has not been initialized");
+  return state2;
+}
+function getScope(owner) {
+  return stateOf(owner).scope;
+}
+function isClosing(owner) {
+  const state2 = stateOf(owner);
+  return state2.destroying || state2.scope.closed;
+}
+function ownContainer(owner, container, rollback) {
+  const current2 = containers.get(container);
+  if (current2 && current2 !== owner)
+    throw new Error("Cannot mount multiple instances on the same dom element");
+  const state2 = stateOf(owner);
+  state2.rollback = rollback;
+  containers.set(container, owner);
+  state2.releaseContainer = () => {
+    if (containers.get(container) === owner)
+      containers.delete(container);
+  };
+}
+function finishLifecycle(owner) {
+  const state2 = stateOf(owner);
+  state2.rollback = void 0;
+  return !state2.scope.closed;
+}
+function destroyInstance(owner, instances2, removeHtml, removeSource, failed = false) {
+  const state2 = stateOf(owner);
+  if (state2.destroying || state2.scope.closed)
+    return;
+  state2.destroying = true;
+  const errors = [];
+  const attempt = (cleanup) => {
+    try {
+      cleanup();
+    } catch (error2) {
+      errors.push(...error2 instanceof ResourceCleanupError ? error2.errors : [error2]);
+    }
+  };
+  if (removeSource && owner.template?.$video)
+    attempt(() => owner.reset());
+  attempt(() => state2.scope.dispose());
+  attempt(() => owner.template?.destroy(removeHtml));
+  const index = instances2.indexOf(owner);
+  if (index !== -1)
+    instances2.splice(index, 1);
+  owner.isDestroy = true;
+  if (!failed) {
+    state2.releaseContainer?.();
+    state2.releaseContainer = void 0;
+  }
+  attempt(() => owner.emit("destroy"));
+  if (failed && state2.rollback)
+    attempt(state2.rollback);
+  state2.rollback = void 0;
+  state2.releaseContainer?.();
+  state2.releaseContainer = void 0;
+  for (const error2 of errors.slice(1))
+    console.warn("Additional ArtPlayer cleanup failure:", error2);
+  if (errors.length)
+    throw errors[0];
+}
+const scopes$1 = /* @__PURE__ */ new WeakMap();
+function ownEntry(art, element) {
+  const scope = getScope(art).child();
+  scopes$1.set(element, scope);
+  return scope;
+}
+function entryScope(element) {
+  const scope = scopes$1.get(element);
+  if (!scope)
+    throw new Error("ArtPlayer component has not been registered");
+  return scope;
+}
+function releaseEntry(element) {
+  scopes$1.get(element)?.dispose();
+}
+function proxyEntry(art, element, target, name, callback) {
+  const scope = entryScope(element);
+  if (scope.closed)
+    return () => {
+    };
+  const cleanup = art.events.proxy(target, name, (event) => {
+    if (!scope.closed)
+      return callback(event);
+  });
+  return scope.add(() => {
+    art.events.remove(cleanup);
+  });
+}
+function subscribeEntry(art, element, name, callback) {
+  const scope = entryScope(element);
+  if (scope.closed)
+    return;
+  const guarded = (...args) => {
+    if (!scope.closed)
+      return callback(...args);
+  };
+  art.on(name, guarded);
+  scope.add(() => {
+    art.off(name, guarded);
+  });
+}
+function controlEvents(art, element) {
+  return {
+    on: (name, callback) => {
+      subscribeEntry(art, element, name, callback);
+    },
+    proxy: (target, name, callback) => proxyEntry(art, element, target, name, callback)
+  };
+}
 const userAgent = globalThis?.CUSTOM_USER_AGENT ?? (typeof navigator !== "undefined" ? navigator.userAgent : "");
 const isSafari = /^(?:(?!chrome|android).)*safari/i.test(userAgent);
 const isIOS = /iPad|iPhone|iPod/i.test(userAgent) && !window.MSStream;
@@ -721,6 +900,29 @@ const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   userAgent,
   vttToBlob
 }, Symbol.toStringTag, { value: "Module" }));
+function renderEntry(element, parent, kind, name, id2, option) {
+  addClass(element, `art-${kind}`);
+  addClass(element, `art-${kind}-${name}`);
+  const children = Array.from(parent.children);
+  element.dataset.index = String(option.index || id2);
+  const next = children.find((child) => Number(child.dataset.index) >= Number(element.dataset.index));
+  if (next)
+    next.insertAdjacentElement("beforebegin", element);
+  else
+    append(parent, element);
+  if (option.html)
+    append(element, option.html);
+  if (option.style)
+    setStyles(element, option.style);
+  if (option.tooltip)
+    tooltip(element, option.tooltip);
+}
+function appendElement(parent, child) {
+  return append(parent, child);
+}
+function queryElement(selector, parent) {
+  return parent.querySelector(selector);
+}
 const a = "array";
 const b = "boolean";
 const s = "string";
@@ -840,6 +1042,7 @@ const scheme = {
   cssVar: o,
   customType: o
 };
+const removing = /* @__PURE__ */ new WeakSet();
 class Component {
   constructor(art) {
     this.id = 0;
@@ -855,75 +1058,102 @@ class Component {
   set show(value) {
     const { $player } = this.art.template;
     const className = `art-${this.name}-show`;
-    if (value) {
+    if (value)
       addClass($player, className);
-    } else {
+    else
       removeClass($player, className);
-    }
     this.art.emit(this.name, value);
   }
   toggle() {
     this.show = !this.show;
   }
   add(getOption) {
+    if (isClosing(this.art))
+      return;
     const option = typeof getOption === "function" ? getOption(this.art) : getOption;
+    if (isClosing(this.art))
+      return;
     option.html = option.html || "";
     validator(option, ComponentOption);
     if (!this.$parent || !this.name || option.disable)
       return;
     const name = option.name || `${this.name}${this.id}`;
-    errorHandle(!this.cache.has(name), `Can't add an existing [${name}] to the [${this.name}]`);
+    const cache = this.cache;
+    errorHandle(!cache.has(name), `Can't add an existing [${name}] to the [${this.name}]`);
     this.id += 1;
-    const $ref = createElement("div");
-    addClass($ref, `art-${this.name}`);
-    addClass($ref, `art-${this.name}-${name}`);
-    const childs = Array.from(this.$parent.children);
-    $ref.dataset.index = option.index || this.id;
-    const nextChild = childs.find((item) => Number(item.dataset.index) >= Number($ref.dataset.index));
-    if (nextChild) {
-      nextChild.insertAdjacentElement("beforebegin", $ref);
-    } else {
-      append(this.$parent, $ref);
-    }
-    if (option.html) {
-      append($ref, option.html);
-    }
-    if (option.style) {
-      setStyles($ref, option.style);
-    }
-    if (option.tooltip) {
-      tooltip($ref, option.tooltip);
-    }
+    const $ref = document.createElement("div");
+    const scope = ownEntry(this.art, $ref);
     const events = [];
-    if (option.click) {
-      const destroyEvent = this.art.events.proxy($ref, "click", (event) => {
-        event.preventDefault();
-        option.click.call(this.art, this, event);
-      });
-      events.push(destroyEvent);
+    const previous = Object.getOwnPropertyDescriptor(this, name);
+    let aliased = false;
+    scope.add(() => {
+      for (const event of events)
+        this.art.events.remove(event);
+    });
+    try {
+      if (scope.closed)
+        return;
+      renderEntry($ref, this.$parent, this.name, name, this.id, option);
+      if (scope.closed)
+        return;
+      if (option.click) {
+        const cleanup = this.art.events.proxy($ref, "click", (event) => {
+          if (scope.closed)
+            return;
+          event.preventDefault();
+          option.click.call(this.art, this, event);
+        });
+        events.push(cleanup);
+      }
+      if (option.selector && ["left", "right"].includes(option.position))
+        this.selector(option, $ref, events);
+      if (scope.closed)
+        return;
+      assignAlias(this, name, $ref);
+      aliased = true;
+      cache.set(name, { $ref, events, option });
+      if (option.mounted)
+        option.mounted.call(this.art, $ref);
+      return $ref;
+    } catch (error2) {
+      try {
+        releaseEntry($ref);
+      } catch (cleanupError) {
+        console.warn("ArtPlayer component cleanup failed:", cleanupError);
+      }
+      if (cache.get(name)?.$ref === $ref)
+        cache.delete(name);
+      if (aliased && this[name] === $ref) {
+        if (previous)
+          Object.defineProperty(this, name, previous);
+        else
+          delete this[name];
+      }
+      $ref.remove();
+      throw error2;
     }
-    if (option.selector && ["left", "right"].includes(option.position)) {
-      this.selector(option, $ref, events);
-    }
-    this[name] = $ref;
-    this.cache.set(name, { $ref, events, option });
-    if (option.mounted) {
-      option.mounted.call(this.art, $ref);
-    }
-    return $ref;
   }
   remove(name) {
     errorHandle(this.cache.has(name), `Can't find [${name}] from the [${this.name}]`);
     const item = this.cache.get(name);
-    if (item.option.beforeUnmount) {
-      item.option.beforeUnmount.call(this.art, item.$ref);
+    if (removing.has(item))
+      return;
+    removing.add(item);
+    try {
+      if (item.option.beforeUnmount)
+        item.option.beforeUnmount.call(this.art, item.$ref);
+      try {
+        releaseEntry(item.$ref);
+      } finally {
+        if (this.cache.get(name) === item) {
+          this.cache.delete(name);
+          delete this[name];
+        }
+        item.$ref.remove();
+      }
+    } finally {
+      removing.delete(item);
     }
-    for (const event of item.events) {
-      this.art.events.remove(event);
-    }
-    this.cache.delete(name);
-    delete this[name];
-    remove(item.$ref);
   }
   update(option) {
     if (this.cache.has(option.name)) {
@@ -933,6 +1163,13 @@ class Component {
     }
     return this.add(option);
   }
+}
+function assignAlias(owner, name, value) {
+  const aliases = owner;
+  if (name === "__proto__")
+    Object.defineProperty(aliases, name, { value, enumerable: true, configurable: true, writable: true });
+  else
+    aliases[name] = value;
 }
 function aspectRatio$2(option) {
   return (art) => {
@@ -947,19 +1184,20 @@ function aspectRatio$2(option) {
       ...option,
       html: `${i18n.get("Aspect Ratio")}: ${html2}`,
       click: (contextmenu, event) => {
-        const { value } = event.target.dataset;
+        const value = event.target instanceof HTMLElement ? event.target.dataset.value : void 0;
         if (value) {
           art.aspectRatio = value;
           contextmenu.show = false;
         }
       },
       mounted: ($panel) => {
+        const { on } = controlEvents(art, $panel);
         const $default = query('[data-value="default"]', $panel);
         if ($default) {
           inverseClass($default, "art-current");
         }
-        art.on("aspectRatio", (value) => {
-          const $current = queryAll("span", $panel).find((item) => item.dataset.value === value);
+        on("aspectRatio", (value) => {
+          const $current = Array.from($panel.querySelectorAll("span")).find((item) => item.dataset.value === value);
           if ($current) {
             inverseClass($current, "art-current");
           }
@@ -988,19 +1226,20 @@ function flip$2(option) {
       ...option,
       html: `${i18n.get("Video Flip")}: ${html2}`,
       click: (contextmenu, event) => {
-        const { value } = event.target.dataset;
+        const value = event.target instanceof HTMLElement ? event.target.dataset.value : void 0;
         if (value) {
           art.flip = value.toLowerCase();
           contextmenu.show = false;
         }
       },
       mounted: ($panel) => {
+        const { on } = controlEvents(art, $panel);
         const $default = query('[data-value="normal"]', $panel);
         if ($default) {
           inverseClass($default, "art-current");
         }
-        art.on("flip", (value) => {
-          const $current = queryAll("span", $panel).find((item) => item.dataset.value === value);
+        on("flip", (value) => {
+          const $current = Array.from($panel.querySelectorAll("span")).find((item) => item.dataset.value === value);
           if ($current) {
             inverseClass($current, "art-current");
           }
@@ -1032,18 +1271,19 @@ function playbackRate$2(option) {
       ...option,
       html: `${i18n.get("Play Speed")}: ${html2}`,
       click: (contextmenu, event) => {
-        const { value } = event.target.dataset;
+        const value = event.target instanceof HTMLElement ? event.target.dataset.value : void 0;
         if (value) {
           art.playbackRate = Number(value);
           contextmenu.show = false;
         }
       },
       mounted: ($panel) => {
+        const { on } = controlEvents(art, $panel);
         const $default = query('[data-value="1"]', $panel);
         if ($default)
           inverseClass($default, "art-current");
-        art.on("video:ratechange", () => {
-          const $current = queryAll("span", $panel).find(
+        on("video:ratechange", () => {
+          const $current = Array.from($panel.querySelectorAll("span")).find(
             (item) => Number(item.dataset.value) === art.playbackRate
           );
           if ($current) {
@@ -1065,6 +1305,7 @@ class Contextmenu extends Component {
     super(art);
     this.name = "contextmenu";
     this.$parent = art.template.$contextmenu;
+    ownEntry(art, this.$parent);
     if (!isMobile) {
       this.init();
     }
@@ -1072,9 +1313,9 @@ class Contextmenu extends Component {
   init() {
     const {
       option,
-      proxy,
       template: { $player, $contextmenu }
     } = this.art;
+    const { on, proxy } = controlEvents(this.art, $contextmenu);
     if (option.playbackRate) {
       this.add(
         playbackRate$2({
@@ -1147,140 +1388,10 @@ class Contextmenu extends Component {
         this.show = false;
       }
     });
-    this.art.on("blur", () => {
+    on("blur", () => {
       this.show = false;
     });
   }
-}
-class ResourceCleanupError extends Error {
-  constructor(errors) {
-    super("Failed to release ArtPlayer resources");
-    this.errors = errors;
-    this.name = "ResourceCleanupError";
-  }
-}
-class ResourceScope {
-  constructor() {
-    this.cleanups = /* @__PURE__ */ new Set();
-    this.disposed = false;
-  }
-  get closed() {
-    return this.disposed;
-  }
-  add(cleanup) {
-    let active = true;
-    const release = () => {
-      if (!active)
-        return;
-      active = false;
-      this.cleanups.delete(release);
-      cleanup();
-    };
-    if (this.closed)
-      release();
-    else
-      this.cleanups.add(release);
-    return release;
-  }
-  child() {
-    const child = new ResourceScope();
-    const release = this.add(() => {
-      child.dispose();
-    });
-    child.add(() => {
-      release();
-    });
-    return child;
-  }
-  dispose() {
-    if (this.closed)
-      return;
-    this.disposed = true;
-    const errors = [];
-    for (const release of Array.from(this.cleanups).reverse()) {
-      try {
-        release();
-      } catch (error2) {
-        if (error2 instanceof ResourceCleanupError)
-          errors.push(...error2.errors);
-        else
-          errors.push(error2);
-      }
-    }
-    if (errors.length)
-      throw new ResourceCleanupError(errors);
-  }
-}
-const states = /* @__PURE__ */ new WeakMap();
-const containers = /* @__PURE__ */ new WeakMap();
-function beginLifecycle(owner) {
-  states.set(owner, { scope: new ResourceScope(), destroying: false });
-}
-function stateOf(owner) {
-  const state2 = states.get(owner);
-  if (!state2)
-    throw new Error("ArtPlayer lifecycle has not been initialized");
-  return state2;
-}
-function getScope(owner) {
-  return stateOf(owner).scope;
-}
-function isClosing(owner) {
-  const state2 = stateOf(owner);
-  return state2.destroying || state2.scope.closed;
-}
-function ownContainer(owner, container, rollback) {
-  const current2 = containers.get(container);
-  if (current2 && current2 !== owner)
-    throw new Error("Cannot mount multiple instances on the same dom element");
-  const state2 = stateOf(owner);
-  state2.rollback = rollback;
-  containers.set(container, owner);
-  state2.releaseContainer = () => {
-    if (containers.get(container) === owner)
-      containers.delete(container);
-  };
-}
-function finishLifecycle(owner) {
-  const state2 = stateOf(owner);
-  state2.rollback = void 0;
-  return !state2.scope.closed;
-}
-function destroyInstance(owner, instances2, removeHtml, removeSource, failed = false) {
-  const state2 = stateOf(owner);
-  if (state2.destroying || state2.scope.closed)
-    return;
-  state2.destroying = true;
-  const errors = [];
-  const attempt = (cleanup) => {
-    try {
-      cleanup();
-    } catch (error2) {
-      errors.push(...error2 instanceof ResourceCleanupError ? error2.errors : [error2]);
-    }
-  };
-  if (removeSource && owner.template?.$video)
-    attempt(() => owner.reset());
-  attempt(() => state2.scope.dispose());
-  attempt(() => owner.template?.destroy(removeHtml));
-  const index = instances2.indexOf(owner);
-  if (index !== -1)
-    instances2.splice(index, 1);
-  owner.isDestroy = true;
-  if (!failed) {
-    state2.releaseContainer?.();
-    state2.releaseContainer = void 0;
-  }
-  attempt(() => owner.emit("destroy"));
-  if (failed && state2.rollback)
-    attempt(state2.rollback);
-  state2.rollback = void 0;
-  state2.releaseContainer?.();
-  state2.releaseContainer = void 0;
-  for (const error2 of errors.slice(1))
-    console.warn("Additional ArtPlayer cleanup failure:", error2);
-  if (errors.length)
-    throw errors[0];
 }
 function timeout(scope, callback, delay) {
   if (scope.closed)
@@ -1346,8 +1457,9 @@ function airplay$1(option) {
     ...option,
     tooltip: art.i18n.get("AirPlay"),
     mounted: ($control) => {
-      const { proxy, icons } = art;
-      append($control, icons.airplay);
+      const { proxy } = controlEvents(art, $control);
+      const { icons } = art;
+      appendElement($control, icons.airplay);
       proxy($control, "click", () => art.airplay());
     }
   });
@@ -1357,14 +1469,15 @@ function fullscreen(option) {
     ...option,
     tooltip: art.i18n.get("Fullscreen"),
     mounted: ($control) => {
-      const { proxy, icons, i18n } = art;
-      const $fullscreenOn = append($control, icons.fullscreenOn);
-      const $fullscreenOff = append($control, icons.fullscreenOff);
+      const { on, proxy } = controlEvents(art, $control);
+      const { icons, i18n } = art;
+      const $fullscreenOn = appendElement($control, icons.fullscreenOn);
+      const $fullscreenOff = appendElement($control, icons.fullscreenOff);
       setStyle($fullscreenOff, "display", "none");
       proxy($control, "click", () => {
         art.fullscreen = !art.fullscreen;
       });
-      art.on("fullscreen", (state2) => {
+      on("fullscreen", (state2) => {
         if (state2) {
           tooltip($control, i18n.get("Exit Fullscreen"));
           setStyle($fullscreenOn, "display", "none");
@@ -1383,14 +1496,15 @@ function fullscreenWeb(option) {
     ...option,
     tooltip: art.i18n.get("Web Fullscreen"),
     mounted: ($control) => {
-      const { proxy, icons, i18n } = art;
-      const $fullscreenWebOn = append($control, icons.fullscreenWebOn);
-      const $fullscreenWebOff = append($control, icons.fullscreenWebOff);
+      const { on, proxy } = controlEvents(art, $control);
+      const { icons, i18n } = art;
+      const $fullscreenWebOn = appendElement($control, icons.fullscreenWebOn);
+      const $fullscreenWebOff = appendElement($control, icons.fullscreenWebOff);
       setStyle($fullscreenWebOff, "display", "none");
       proxy($control, "click", () => {
         art.fullscreenWeb = !art.fullscreenWeb;
       });
-      art.on("fullscreenWeb", (value) => {
+      on("fullscreenWeb", (value) => {
         if (value) {
           tooltip($control, i18n.get("Exit Web Fullscreen"));
           setStyle($fullscreenWebOn, "display", "none");
@@ -1409,12 +1523,13 @@ function pip$1(option) {
     ...option,
     tooltip: art.i18n.get("PIP Mode"),
     mounted: ($control) => {
-      const { proxy, icons, i18n } = art;
-      append($control, icons.pip);
+      const { on, proxy } = controlEvents(art, $control);
+      const { icons, i18n } = art;
+      appendElement($control, icons.pip);
       proxy($control, "click", () => {
         art.pip = !art.pip;
       });
-      art.on("pip", (value) => {
+      on("pip", (value) => {
         tooltip($control, i18n.get(value ? "Exit PIP Mode" : "PIP Mode"));
       });
     }
@@ -1424,9 +1539,10 @@ function playAndPause(option) {
   return (art) => ({
     ...option,
     mounted: ($control) => {
-      const { proxy, icons, i18n } = art;
-      const $play = append($control, icons.play);
-      const $pause = append($control, icons.pause);
+      const { on, proxy } = controlEvents(art, $control);
+      const { icons, i18n } = art;
+      const $play = appendElement($control, icons.play);
+      const $pause = appendElement($control, icons.pause);
       tooltip($play, i18n.get("Play"));
       tooltip($pause, i18n.get("Pause"));
       proxy($play, "click", () => {
@@ -1448,10 +1564,10 @@ function playAndPause(option) {
       } else {
         showPlay();
       }
-      art.on("video:playing", () => {
+      on("video:playing", () => {
         showPause();
       });
-      art.on("video:pause", () => {
+      on("video:pause", () => {
         showPlay();
       });
     }
@@ -1479,13 +1595,153 @@ function setCurrentTime(art, event) {
     art.seek = second;
   }
 }
+function installProgressInteractions(art, $control) {
+  const { $progress } = art.template;
+  const $indicator = $control.querySelector(".art-progress-indicator");
+  const { on, proxy } = controlEvents(art, $control);
+  if (!isMobile) {
+    let isDragging = false;
+    proxy($progress, "click", (event) => {
+      if (event.target !== $indicator) {
+        setCurrentTime(art, event);
+      }
+    });
+    proxy($progress, "mousemove", (event) => {
+      const { percentage } = getPosFromEvent(art, event);
+      art.emit("setBar", "hover", percentage, event);
+    });
+    proxy($progress, "mouseleave", (event) => {
+      art.emit("setBar", "hover", 0, event);
+    });
+    proxy($progress, "mousedown", (event) => {
+      isDragging = event.button === 0;
+    });
+    on("document:mousemove", (event) => {
+      if (isDragging) {
+        const { second, percentage } = getPosFromEvent(art, event);
+        art.emit("setBar", "played", percentage, event);
+        art.seek = second;
+      }
+    });
+    on("document:mouseup", () => {
+      if (isDragging) {
+        isDragging = false;
+      }
+    });
+  }
+}
+function mountProgressView(art, $control) {
+  const { icons, option } = art;
+  const { $player } = art.template;
+  const scope = entryScope($control);
+  const { on } = controlEvents(art, $control);
+  let cancelTip = () => {
+  };
+  const $hover = queryElement(".art-progress-hover", $control);
+  const $loaded = queryElement(".art-progress-loaded", $control);
+  const $played = queryElement(".art-progress-played", $control);
+  const $highlight = queryElement(".art-progress-highlight", $control);
+  const $indicator = queryElement(".art-progress-indicator", $control);
+  const $tip = queryElement(".art-progress-tip", $control);
+  if (icons.indicator) {
+    append($indicator, icons.indicator);
+  } else {
+    setStyle($indicator, "backgroundColor", "var(--art-theme)");
+  }
+  function showHighlight(event) {
+    const { width } = getPosFromEvent(art, event);
+    const text = event.target instanceof HTMLElement ? event.target.dataset.text : void 0;
+    $tip.textContent = text ?? "";
+    const tipWidth = $tip.clientWidth;
+    if (width <= tipWidth / 2) {
+      setStyle($tip, "left", 0);
+    } else if (width > $control.clientWidth - tipWidth / 2) {
+      setStyle($tip, "left", `${$control.clientWidth - tipWidth}px`);
+    } else {
+      setStyle($tip, "left", `${width - tipWidth / 2}px`);
+    }
+  }
+  function showTime(event, touch) {
+    const { width, time: time2 } = touch || getPosFromEvent(art, event);
+    $tip.textContent = time2 || "00:00";
+    const tipWidth = $tip.clientWidth;
+    if (width <= tipWidth / 2) {
+      setStyle($tip, "left", 0);
+    } else if (width > $control.clientWidth - tipWidth / 2) {
+      setStyle($tip, "left", `${$control.clientWidth - tipWidth}px`);
+    } else {
+      setStyle($tip, "left", `${width - tipWidth / 2}px`);
+    }
+  }
+  function updateHighlight() {
+    $highlight.textContent = "";
+    for (let index = 0; index < option.highlight.length; index++) {
+      const item = option.highlight[index];
+      const left = clamp(item.time, 0, art.duration) / art.duration * 100;
+      const marker = document.createElement("span");
+      marker.dataset.text = item.text;
+      marker.dataset.time = String(item.time);
+      marker.style.left = `${left}%`;
+      append($highlight, marker);
+    }
+  }
+  function setBar(type, percentage, event) {
+    const isMobileDragging = type === "played" && event && isMobile;
+    if (type === "loaded") {
+      setStyle($loaded, "width", `${percentage * 100}%`);
+    }
+    if (type === "hover") {
+      setStyle($hover, "width", `${percentage * 100}%`);
+      if (includeFromEvent(event, $highlight)) {
+        showHighlight(event);
+      } else {
+        showTime(event);
+      }
+      if (percentage === 0) {
+        removeClass($player, "art-progress-hover");
+      } else {
+        addClass($player, "art-progress-hover");
+      }
+    }
+    if (type === "played") {
+      setStyle($played, "width", `${percentage * 100}%`);
+      setStyle($indicator, "left", `${percentage * 100}%`);
+    }
+    if (isMobileDragging) {
+      addClass($player, "art-progress-hover");
+      const width = $control.clientWidth * percentage;
+      const time2 = secondToTime(percentage * art.duration);
+      showTime(event, { width, time: time2 });
+      cancelTip();
+      cancelTip = timeout(scope, () => {
+        removeClass($player, "art-progress-hover");
+      }, 500);
+    }
+  }
+  on("setBar", setBar);
+  on("video:loadedmetadata", updateHighlight);
+  if (art.constructor.USE_RAF) {
+    on("raf", () => {
+      art.emit("setBar", "played", art.played);
+      art.emit("setBar", "loaded", art.loaded);
+    });
+  } else {
+    on("video:timeupdate", () => {
+      art.emit("setBar", "played", art.played);
+    });
+    on("video:progress", () => {
+      art.emit("setBar", "loaded", art.loaded);
+    });
+    on("video:ended", () => {
+      art.emit("setBar", "played", 1);
+    });
+  }
+  art.emit("setBar", "loaded", art.loaded || 0);
+}
 function progress(options) {
-  return (art) => {
-    const { icons, option, proxy } = art;
-    const { $player, $progress } = art.template;
-    return {
-      ...options,
-      html: `
+  return (art) => ({
+    ...options,
+    html: `
                 <div class="art-control-progress-inner">
                     <div class="art-progress-hover"></div>
                     <div class="art-progress-loaded"></div>
@@ -1495,146 +1751,20 @@ function progress(options) {
                     <div class="art-progress-tip">00:00</div>
                 </div>
             `,
-      mounted: ($control) => {
-        let tipTimer = null;
-        let isDragging = false;
-        const $hover = query(".art-progress-hover", $control);
-        const $loaded = query(".art-progress-loaded", $control);
-        const $played = query(".art-progress-played", $control);
-        const $highlight = query(".art-progress-highlight", $control);
-        const $indicator = query(".art-progress-indicator", $control);
-        const $tip = query(".art-progress-tip", $control);
-        if (icons.indicator) {
-          append($indicator, icons.indicator);
-        } else {
-          setStyle($indicator, "backgroundColor", "var(--art-theme)");
-        }
-        function showHighlight(event) {
-          const { width } = getPosFromEvent(art, event);
-          const { text } = event.target.dataset;
-          $tip.textContent = text;
-          const tipWidth = $tip.clientWidth;
-          if (width <= tipWidth / 2) {
-            setStyle($tip, "left", 0);
-          } else if (width > $control.clientWidth - tipWidth / 2) {
-            setStyle($tip, "left", `${$control.clientWidth - tipWidth}px`);
-          } else {
-            setStyle($tip, "left", `${width - tipWidth / 2}px`);
-          }
-        }
-        function showTime(event, touch) {
-          const { width, time: time2 } = touch || getPosFromEvent(art, event);
-          $tip.textContent = time2 || "00:00";
-          const tipWidth = $tip.clientWidth;
-          if (width <= tipWidth / 2) {
-            setStyle($tip, "left", 0);
-          } else if (width > $control.clientWidth - tipWidth / 2) {
-            setStyle($tip, "left", `${$control.clientWidth - tipWidth}px`);
-          } else {
-            setStyle($tip, "left", `${width - tipWidth / 2}px`);
-          }
-        }
-        function updateHighlight() {
-          $highlight.textContent = "";
-          for (let index = 0; index < option.highlight.length; index++) {
-            const item = option.highlight[index];
-            const left = clamp(item.time, 0, art.duration) / art.duration * 100;
-            const html2 = `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`;
-            append($highlight, html2);
-          }
-        }
-        function setBar(type, percentage, event) {
-          const isMobileDragging = type === "played" && event && isMobile;
-          if (type === "loaded") {
-            setStyle($loaded, "width", `${percentage * 100}%`);
-          }
-          if (type === "hover") {
-            setStyle($hover, "width", `${percentage * 100}%`);
-            if (includeFromEvent(event, $highlight)) {
-              showHighlight(event);
-            } else {
-              showTime(event);
-            }
-            if (percentage === 0) {
-              removeClass($player, "art-progress-hover");
-            } else {
-              addClass($player, "art-progress-hover");
-            }
-          }
-          if (type === "played") {
-            setStyle($played, "width", `${percentage * 100}%`);
-            setStyle($indicator, "left", `${percentage * 100}%`);
-          }
-          if (isMobileDragging) {
-            addClass($player, "art-progress-hover");
-            const width = $control.clientWidth * percentage;
-            const time2 = secondToTime(percentage * art.duration);
-            showTime(event, { width, time: time2 });
-            clearTimeout(tipTimer);
-            tipTimer = setTimeout(() => {
-              removeClass($player, "art-progress-hover");
-            }, 500);
-          }
-        }
-        art.on("setBar", setBar);
-        art.on("video:loadedmetadata", updateHighlight);
-        if (art.constructor.USE_RAF) {
-          art.on("raf", () => {
-            art.emit("setBar", "played", art.played);
-            art.emit("setBar", "loaded", art.loaded);
-          });
-        } else {
-          art.on("video:timeupdate", () => {
-            art.emit("setBar", "played", art.played);
-          });
-          art.on("video:progress", () => {
-            art.emit("setBar", "loaded", art.loaded);
-          });
-          art.on("video:ended", () => {
-            art.emit("setBar", "played", 1);
-          });
-        }
-        art.emit("setBar", "loaded", art.loaded || 0);
-        if (!isMobile) {
-          proxy($progress, "click", (event) => {
-            if (event.target !== $indicator) {
-              setCurrentTime(art, event);
-            }
-          });
-          proxy($progress, "mousemove", (event) => {
-            const { percentage } = getPosFromEvent(art, event);
-            art.emit("setBar", "hover", percentage, event);
-          });
-          proxy($progress, "mouseleave", (event) => {
-            art.emit("setBar", "hover", 0, event);
-          });
-          proxy($progress, "mousedown", (event) => {
-            isDragging = event.button === 0;
-          });
-          art.on("document:mousemove", (event) => {
-            if (isDragging) {
-              const { second, percentage } = getPosFromEvent(art, event);
-              art.emit("setBar", "played", percentage, event);
-              art.seek = second;
-            }
-          });
-          art.on("document:mouseup", () => {
-            if (isDragging) {
-              isDragging = false;
-            }
-          });
-        }
-      }
-    };
-  };
+    mounted: ($control) => {
+      mountProgressView(art, $control);
+      installProgressInteractions(art, $control);
+    }
+  });
 }
 function screenshot$1(option) {
   return (art) => ({
     ...option,
     tooltip: art.i18n.get("Screenshot"),
     mounted: ($control) => {
-      const { proxy, icons } = art;
-      append($control, icons.screenshot);
+      const { proxy } = controlEvents(art, $control);
+      const { icons } = art;
+      appendElement($control, icons.screenshot);
       proxy($control, "click", () => {
         art.screenshot();
       });
@@ -1646,13 +1776,14 @@ function setting$1(option) {
     ...option,
     tooltip: art.i18n.get("Show Setting"),
     mounted: ($control) => {
-      const { proxy, icons, i18n } = art;
-      append($control, icons.setting);
+      const { on, proxy } = controlEvents(art, $control);
+      const { icons, i18n } = art;
+      appendElement($control, icons.setting);
       proxy($control, "click", () => {
         art.setting.toggle();
         art.setting.resize();
       });
-      art.on("setting", (value) => {
+      on("setting", (value) => {
         tooltip($control, i18n.get(value ? "Hide Setting" : "Show Setting"));
       });
     }
@@ -1669,6 +1800,7 @@ function time(option) {
       padding: "0 10px"
     },
     mounted: ($control) => {
+      const { on } = controlEvents(art, $control);
       function getTime() {
         const newTime = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`;
         if (newTime !== $control.textContent) {
@@ -1678,7 +1810,7 @@ function time(option) {
       getTime();
       const events = ["video:loadedmetadata", "video:timeupdate", "video:progress"];
       for (let index = 0; index < events.length; index++) {
-        art.on(events[index], getTime);
+        on(events[index], getTime);
       }
     }
   });
@@ -1687,16 +1819,17 @@ function volume$1(option) {
   return (art) => ({
     ...option,
     mounted: ($control) => {
-      const { proxy, icons } = art;
-      const $volume = append($control, icons.volume);
-      const $close = append($control, icons.volumeClose);
-      const $panel = append($control, '<div class="art-volume-panel"></div>');
-      const $inner = append($panel, '<div class="art-volume-inner"></div>');
-      const $value = append($inner, `<div class="art-volume-val"></div>`);
-      const $slider = append($inner, `<div class="art-volume-slider"></div>`);
-      const $handle = append($slider, `<div class="art-volume-handle"></div>`);
-      const $loaded = append($handle, `<div class="art-volume-loaded"></div>`);
-      const $indicator = append($slider, `<div class="art-volume-indicator"></div>`);
+      const { on, proxy } = controlEvents(art, $control);
+      const { icons } = art;
+      const $volume = appendElement($control, icons.volume);
+      const $close = appendElement($control, icons.volumeClose);
+      const $panel = appendElement($control, '<div class="art-volume-panel"></div>');
+      const $inner = appendElement($panel, '<div class="art-volume-inner"></div>');
+      const $value = appendElement($inner, `<div class="art-volume-val"></div>`);
+      const $slider = appendElement($inner, `<div class="art-volume-slider"></div>`);
+      const $handle = appendElement($slider, `<div class="art-volume-handle"></div>`);
+      const $loaded = appendElement($handle, `<div class="art-volume-loaded"></div>`);
+      const $indicator = appendElement($slider, `<div class="art-volume-indicator"></div>`);
       function getVolumeFromEvent(event) {
         const { top, height } = getRect($slider);
         return 1 - (event.clientY - top) / height;
@@ -1707,18 +1840,18 @@ function volume$1(option) {
           setStyle($close, "display", "flex");
           setStyle($indicator, "top", "100%");
           setStyle($loaded, "top", "100%");
-          $value.textContent = 0;
+          $value.textContent = "0";
         } else {
           const percentage = art.volume * 100;
           setStyle($volume, "display", "flex");
           setStyle($close, "display", "none");
           setStyle($indicator, "top", `${100 - percentage}%`);
           setStyle($loaded, "top", `${100 - percentage}%`);
-          $value.textContent = Math.floor(percentage);
+          $value.textContent = String(Math.floor(percentage));
         }
       }
       update();
-      art.on("video:volumechange", update);
+      on("video:volumechange", update);
       proxy($volume, "click", () => {
         art.muted = true;
       });
@@ -1733,13 +1866,13 @@ function volume$1(option) {
           isDragging = event.button === 0;
           art.volume = getVolumeFromEvent(event);
         });
-        art.on("document:mousemove", (event) => {
+        on("document:mousemove", (event) => {
           if (isDragging) {
             art.muted = false;
             art.volume = getVolumeFromEvent(event);
           }
         });
-        art.on("document:mouseup", () => {
+        on("document:mouseup", () => {
           if (isDragging) {
             isDragging = false;
           }
@@ -1747,6 +1880,226 @@ function volume$1(option) {
       }
     }
   });
+}
+function installControls(controls) {
+  const { option } = controls.art;
+  if (!option.isLive) {
+    controls.add(
+      progress({
+        name: "progress",
+        position: "top",
+        index: 10
+      })
+    );
+  }
+  controls.add({
+    name: "thumbnails",
+    position: "top",
+    index: 20
+  });
+  controls.add(
+    playAndPause({
+      name: "playAndPause",
+      position: "left",
+      index: 10
+    })
+  );
+  controls.add(
+    volume$1({
+      name: "volume",
+      position: "left",
+      index: 20
+    })
+  );
+  if (!option.isLive) {
+    controls.add(
+      time({
+        name: "time",
+        position: "left",
+        index: 30
+      })
+    );
+  }
+  if (option.quality.length) {
+    wait(getScope(controls.art)).then((active) => {
+      if (!active || getScope(controls.art).closed)
+        return;
+      controls.art.quality = option.quality;
+    }).catch((error2) => {
+      console.warn("ArtPlayer quality initialization failed:", error2);
+    });
+  }
+  if (option.screenshot && !isMobile) {
+    controls.add(
+      screenshot$1({
+        name: "screenshot",
+        position: "right",
+        index: 20
+      })
+    );
+  }
+  if (option.setting) {
+    controls.add(
+      setting$1({
+        name: "setting",
+        position: "right",
+        index: 30
+      })
+    );
+  }
+  if (option.pip) {
+    controls.add(
+      pip$1({
+        name: "pip",
+        position: "right",
+        index: 40
+      })
+    );
+  }
+  if (option.airplay && "WebKitPlaybackTargetAvailabilityEvent" in window && window.WebKitPlaybackTargetAvailabilityEvent) {
+    controls.add(
+      airplay$1({
+        name: "airplay",
+        position: "right",
+        index: 50
+      })
+    );
+  }
+  if (option.fullscreenWeb) {
+    controls.add(
+      fullscreenWeb({
+        name: "fullscreenWeb",
+        position: "right",
+        index: 60
+      })
+    );
+  }
+  if (option.fullscreen) {
+    controls.add(
+      fullscreen({
+        name: "fullscreen",
+        position: "right",
+        index: 70
+      })
+    );
+  }
+  for (let index = 0; index < option.controls.length; index++) {
+    controls.add(option.controls[index]);
+  }
+}
+function observeControlLayout(art) {
+  const { $bottom, $controls, $player } = art.template;
+  const scope = entryScope($bottom);
+  const { on } = controlEvents(art, $bottom);
+  const update = () => {
+    if (scope.closed)
+      return;
+    const height = $controls.offsetHeight;
+    if (height > 0 && $player.style.getPropertyValue("--art-controls-height") !== `${height}px`)
+      $player.style.setProperty("--art-controls-height", `${height}px`);
+  };
+  on("resize", update);
+  if (typeof ResizeObserver !== "undefined") {
+    const observer = new ResizeObserver(update);
+    observer.observe($controls);
+    scope.add(() => {
+      observer.disconnect();
+    });
+  } else if (typeof MutationObserver !== "undefined") {
+    const observer = new MutationObserver(update);
+    observer.observe($controls, { childList: true, subtree: true, attributes: true, characterData: true });
+    scope.add(() => {
+      observer.disconnect();
+    });
+  }
+  update();
+}
+const selections = /* @__PURE__ */ new WeakMap();
+function trackSelection(event, active) {
+  selections.set(event, active);
+  return () => {
+    if (selections.get(event) === active)
+      selections.delete(event);
+  };
+}
+function captureSelection(event) {
+  return event && selections.get(event) || (() => true);
+}
+const bindings = /* @__PURE__ */ new WeakMap();
+function bind(item, binding) {
+  const previous = bindings.get(item);
+  errorHandle(!previous || entryScope(previous.owner).closed, "Cannot share selector items between active controls");
+  if (!previous) {
+    def(item, "$control_option", { get: () => bindings.get(item).option.selector });
+    def(item, "$control_item", { get: () => bindings.get(item).item });
+    def(item, "$control_value", { get: () => bindings.get(item).value });
+  }
+  bindings.set(item, binding);
+}
+function setHTML(element, value) {
+  element.innerHTML = value;
+}
+function checkSelector(target) {
+  if (!target)
+    return;
+  setHTML(target.$control_value, target.html);
+  for (let index = 0; index < target.$control_option.length; index++) {
+    const item = target.$control_option[index];
+    item.default = item === target;
+    if (item.default)
+      inverseClass(item.$control_item, "art-current");
+  }
+}
+function renderSelector(art, check2, option, $ref, events) {
+  const { proxy } = art.events;
+  const scope = entryScope($ref);
+  const selector = option.selector;
+  addClass($ref, "art-control-selector");
+  const $value = document.createElement("div");
+  addClass($value, "art-selector-value");
+  append($value, option.html);
+  $ref.textContent = "";
+  append($ref, $value);
+  const $list = appendElement($ref, '<div class="art-selector-list"></div>');
+  for (let index = 0; index < selector.length; index++) {
+    const item = selector[index];
+    const $item = document.createElement("div");
+    addClass($item, "art-selector-item");
+    if (item.default)
+      addClass($item, "art-current");
+    $item.dataset.index = String(index);
+    $item.dataset.value = String(item.value);
+    setHTML($item, item.html);
+    append($list, $item);
+    bind(item, { option, item: $item, value: $value, owner: $ref });
+  }
+  let generation = 0;
+  const event = proxy($list, "click", async (event2) => {
+    if (scope.closed)
+      return;
+    const path = getComposedPath(event2);
+    const item = option.selector.find((item2) => path.includes(item2.$control_item));
+    if (!item)
+      return;
+    const current2 = ++generation;
+    const active = () => !scope.closed && current2 === generation;
+    const release = scope.add(trackSelection(event2, active));
+    try {
+      check2(item);
+      if (scope.closed)
+        return;
+      if (option.onSelect) {
+        const value = await option.onSelect.call(art, item, item.$control_item, event2);
+        if (active())
+          setHTML($value, value);
+      }
+    } catch (error2) {
+      console.warn("ArtPlayer selector failed:", error2);
+    } finally {
+      release();
+    }
+  });
+  events.push(event);
 }
 class Control extends Component {
   constructor(art) {
@@ -1756,27 +2109,29 @@ class Control extends Component {
     this.timer = Date.now();
     const { constructor } = art;
     const { $player, $bottom } = this.art.template;
-    art.on("mousemove", () => {
+    ownEntry(art, $bottom);
+    const { on } = controlEvents(art, $bottom);
+    on("mousemove", () => {
       if (!isMobile) {
         this.show = true;
       }
     });
-    art.on("click", () => {
+    on("click", () => {
       if (isMobile) {
         this.toggle();
       } else {
         this.show = true;
       }
     });
-    art.on("document:mousemove", (event) => {
+    on("document:mousemove", (event) => {
       this.isHover = includeFromEvent(event, $bottom);
     });
-    art.on("video:timeupdate", () => {
+    on("video:timeupdate", () => {
       if (!art.setting.show && !this.isHover && !art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) {
         this.show = false;
       }
     });
-    art.on("control", (state2) => {
+    on("control", (state2) => {
       if (state2) {
         removeClass($player, "art-hide-cursor");
         addClass($player, "art-hover");
@@ -1787,112 +2142,15 @@ class Control extends Component {
       }
     });
     this.init();
+    if (!getScope(art).closed)
+      observeControlLayout(art);
   }
   init() {
-    const { option } = this.art;
-    if (!option.isLive) {
-      this.add(
-        progress({
-          name: "progress",
-          position: "top",
-          index: 10
-        })
-      );
-    }
-    this.add({
-      name: "thumbnails",
-      position: "top",
-      index: 20
-    });
-    this.add(
-      playAndPause({
-        name: "playAndPause",
-        position: "left",
-        index: 10
-      })
-    );
-    this.add(
-      volume$1({
-        name: "volume",
-        position: "left",
-        index: 20
-      })
-    );
-    if (!option.isLive) {
-      this.add(
-        time({
-          name: "time",
-          position: "left",
-          index: 30
-        })
-      );
-    }
-    if (option.quality.length) {
-      wait(getScope(this.art)).then((active) => {
-        if (!active || getScope(this.art).closed)
-          return;
-        this.art.quality = option.quality;
-      });
-    }
-    if (option.screenshot && !isMobile) {
-      this.add(
-        screenshot$1({
-          name: "screenshot",
-          position: "right",
-          index: 20
-        })
-      );
-    }
-    if (option.setting) {
-      this.add(
-        setting$1({
-          name: "setting",
-          position: "right",
-          index: 30
-        })
-      );
-    }
-    if (option.pip) {
-      this.add(
-        pip$1({
-          name: "pip",
-          position: "right",
-          index: 40
-        })
-      );
-    }
-    if (option.airplay && window.WebKitPlaybackTargetAvailabilityEvent) {
-      this.add(
-        airplay$1({
-          name: "airplay",
-          position: "right",
-          index: 50
-        })
-      );
-    }
-    if (option.fullscreenWeb) {
-      this.add(
-        fullscreenWeb({
-          name: "fullscreenWeb",
-          position: "right",
-          index: 60
-        })
-      );
-    }
-    if (option.fullscreen) {
-      this.add(
-        fullscreen({
-          name: "fullscreen",
-          position: "right",
-          index: 70
-        })
-      );
-    }
-    for (let index = 0; index < option.controls.length; index++) {
-      this.add(option.controls[index]);
-    }
+    installControls(this);
   }
   add(getOption) {
+    if (isClosing(this.art))
+      return;
     const option = typeof getOption === "function" ? getOption(this.art) : getOption;
     const { $progress, $controlsLeft, $controlsRight } = this.art.template;
     switch (option.position) {
@@ -1912,60 +2170,10 @@ class Control extends Component {
     super.add(option);
   }
   check(target) {
-    if (!target) {
-      return;
-    }
-    target.$control_value.innerHTML = target.html;
-    for (let index = 0; index < target.$control_option.length; index++) {
-      const item = target.$control_option[index];
-      item.default = item === target;
-      if (item.default) {
-        inverseClass(item.$control_item, "art-current");
-      }
-    }
+    checkSelector(target);
   }
   selector(option, $ref, events) {
-    const { proxy } = this.art.events;
-    addClass($ref, "art-control-selector");
-    const $value = createElement("div");
-    addClass($value, "art-selector-value");
-    append($value, option.html);
-    $ref.textContent = "";
-    append($ref, $value);
-    const $list = createElement("div");
-    addClass($list, "art-selector-list");
-    append($ref, $list);
-    for (let index = 0; index < option.selector.length; index++) {
-      const item = option.selector[index];
-      const $item = createElement("div");
-      addClass($item, "art-selector-item");
-      if (item.default)
-        addClass($item, "art-current");
-      $item.dataset.index = index;
-      $item.dataset.value = item.value;
-      $item.innerHTML = item.html;
-      append($list, $item);
-      def(item, "$control_option", {
-        get: () => option.selector
-      });
-      def(item, "$control_item", {
-        get: () => $item
-      });
-      def(item, "$control_value", {
-        get: () => $value
-      });
-    }
-    const event = proxy($list, "click", async (event2) => {
-      const path = getComposedPath(event2);
-      const item = option.selector.find(
-        (item2) => item2.$control_item === path.find(($item) => item2.$control_item === $item)
-      );
-      this.check(item);
-      if (option.onSelect) {
-        $value.innerHTML = await option.onSelect.call(this.art, item, item.$control_item, event2);
-      }
-    });
-    events.push(event);
+    renderSelector(this.art, (target) => this.check(target), option, $ref, events);
   }
 }
 function clickInit(art, events) {
@@ -2530,15 +2738,11 @@ class Info extends Component {
 class Layer extends Component {
   constructor(art) {
     super(art);
-    const {
-      option,
-      template: { $layer }
-    } = art;
+    const { option, template: { $layer } } = art;
     this.name = "layer";
     this.$parent = $layer;
-    for (let index = 0; index < option.layers.length; index++) {
+    for (let index = 0; index < option.layers.length; index++)
       this.add(option.layers[index]);
-    }
   }
 }
 class Loading extends Component {
@@ -3674,14 +3878,17 @@ function qualityMix(art) {
         name: "quality",
         position: "right",
         index: 10,
-        style: {
-          marginRight: "10px"
-        },
+        style: { marginRight: "10px" },
         html: qualityDefault?.html || "",
         selector: quality,
-        async onSelect(item) {
+        async onSelect(item, _element, event) {
+          const active = captureSelection(event);
           await art.switchQuality(item.url);
-          notice.show = `${i18n.get("Switch Video")}: ${item.html}`;
+          if (!isClosing(art) && active()) {
+            const message = `${i18n.get("Switch Video")}: ${item.html}`;
+            if (!isClosing(art) && active())
+              notice.show = message;
+          }
           return item.html;
         }
       });
@@ -5128,7 +5335,7 @@ class Storage {
     }
   }
 }
-const css = ".art-video-player {\n  --art-theme: #f00;\n  --art-font-color: #fff;\n  --art-background-color: #000;\n  --art-text-shadow-color: rgba(0, 0, 0, 0.5);\n  --art-transition-duration: 0.2s;\n  --art-padding: 10px;\n  --art-border-radius: 3px;\n  --art-progress-height: 6px;\n  --art-progress-color: rgba(255, 255, 255, 0.25);\n  --art-progress-top-gap: 10px;\n  --art-hover-color: rgba(255, 255, 255, 0.25);\n  --art-loaded-color: rgba(255, 255, 255, 0.25);\n  --art-state-size: 80px;\n  --art-state-opacity: 0.8;\n  --art-bottom-height: 100px;\n  --art-bottom-offset: 20px;\n  --art-bottom-gap: 5px;\n  --art-highlight-width: 8px;\n  --art-highlight-color: rgba(255, 255, 255, 0.5);\n  --art-control-height: 46px;\n  --art-control-opacity: 0.75;\n  --art-control-icon-size: 36px;\n  --art-control-icon-scale: 1.1;\n  --art-volume-height: 120px;\n  --art-volume-handle-size: 14px;\n  --art-lock-size: 36px;\n  --art-indicator-scale: 0;\n  --art-indicator-size: 16px;\n  --art-fullscreen-web-index: 9999;\n  --art-settings-icon-size: 24px;\n  --art-settings-max-height: 300px;\n  --art-selector-max-height: 300px;\n  --art-contextmenus-min-width: 250px;\n  --art-subtitle-font-size: 20px;\n  --art-subtitle-gap: 5px;\n  --art-subtitle-bottom: 15px;\n  --art-subtitle-border: #000;\n  --art-widget-background: rgba(0, 0, 0, 0.85);\n  --art-tip-background: rgba(0, 0, 0, 0.7);\n  --art-scrollbar-size: 4px;\n  --art-scrollbar-background: rgba(255, 255, 255, 0.25);\n  --art-scrollbar-background-hover: rgba(255, 255, 255, 0.5);\n  --art-mini-progress-height: 2px;\n}\n.art-bg-cover {\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n.art-bottom-gradient {\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.art-video-player {\n  position: relative;\n  margin: 0 auto;\n  width: 100%;\n  height: 100%;\n  outline: 0;\n  zoom: 1;\n  padding: 0;\n  text-align: left;\n  direction: ltr;\n  font-size: 14px;\n  line-height: 1.3;\n  user-select: none;\n  box-sizing: border-box;\n  color: var(--art-font-color);\n  background-color: var(--art-background-color);\n  text-shadow: 0 0 2px var(--art-text-shadow-color);\n  font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, Roboto, Arial, sans-serif;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  -ms-touch-action: manipulation;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n}\n.art-video-player *,\n.art-video-player *::before,\n.art-video-player *::after {\n  box-sizing: border-box;\n}\n.art-video-player ::-webkit-scrollbar {\n  width: var(--art-scrollbar-size);\n  height: var(--art-scrollbar-size);\n}\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: var(--art-scrollbar-background);\n}\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: var(--art-scrollbar-background-hover);\n}\n.art-video-player img {\n  max-width: 100%;\n  vertical-align: top;\n}\n.art-video-player svg {\n  fill: var(--art-font-color);\n}\n.art-video-player a {\n  color: var(--art-font-color);\n  text-decoration: none;\n}\n.art-icon {\n  line-height: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.art-video-player.art-backdrop .art-contextmenus,\n.art-video-player.art-backdrop .art-info,\n.art-video-player.art-backdrop .art-settings,\n.art-video-player.art-backdrop .art-layer-auto-playback,\n.art-video-player.art-backdrop .art-selector-list,\n.art-video-player.art-backdrop .art-volume-inner {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-video {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n}\n.art-poster {\n  position: absolute;\n  inset: 0;\n  z-index: 11;\n  width: 100%;\n  height: 100%;\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  pointer-events: none;\n}\n.art-video-player .art-subtitle {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: absolute;\n  z-index: 20;\n  width: 100%;\n  padding: 0 5%;\n  text-align: center;\n  pointer-events: none;\n  gap: var(--art-subtitle-gap);\n  bottom: var(--art-subtitle-bottom);\n  font-size: var(--art-subtitle-font-size);\n  transition: bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n}\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: flex;\n}\n.art-video-player.art-control-show .art-subtitle {\n  bottom: calc(var(--art-control-height) + var(--art-subtitle-bottom));\n}\n.art-danmuku {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  overflow: hidden;\n}\n.art-video-player .art-layers {\n  position: absolute;\n  inset: 0;\n  z-index: 40;\n  width: 100%;\n  height: 100%;\n  display: none;\n  pointer-events: none;\n}\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n.art-video-player.art-layer-show .art-layers {\n  display: flex;\n}\n.art-video-player .art-mask {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 50;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player .art-mask .art-state {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  transform: scale(2);\n  width: var(--art-state-size);\n  height: var(--art-state-size);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-video-player.art-mask-show .art-state {\n  pointer-events: auto;\n  opacity: var(--art-state-opacity);\n  transform: scale(1);\n}\n.art-video-player.art-loading-show .art-state {\n  display: none;\n}\n.art-video-player .art-loading {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 70;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n.art-video-player.art-loading-show .art-mask {\n  display: none;\n}\n.art-video-player .art-bottom {\n  position: absolute;\n  inset: 0;\n  z-index: 60;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  opacity: 0;\n  overflow: hidden;\n  pointer-events: none;\n  padding: 0 var(--art-padding);\n  transition: all var(--art-transition-duration) ease;\n  background-size: 100% var(--art-bottom-height);\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-video-player .art-bottom .art-controls,\n.art-video-player .art-bottom .art-progress {\n  transform: translateY(var(--art-bottom-offset));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player.art-control-show .art-bottom,\n.art-video-player.art-hover .art-bottom {\n  opacity: 1;\n}\n.art-video-player.art-control-show .art-bottom .art-controls,\n.art-video-player.art-hover .art-bottom .art-controls,\n.art-video-player.art-control-show .art-bottom .art-progress,\n.art-video-player.art-hover .art-bottom .art-progress {\n  transform: translateY(0);\n}\n.art-bottom .art-progress {\n  position: relative;\n  z-index: 0;\n  cursor: pointer;\n  pointer-events: auto;\n  padding-top: var(--art-progress-top-gap);\n  padding-bottom: var(--art-bottom-gap);\n}\n.art-bottom .art-progress .art-control-progress {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: var(--art-progress-height);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  display: flex;\n  align-items: center;\n  position: relative;\n  height: 50%;\n  width: 100%;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-hover-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-loaded-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  position: absolute;\n  inset: 0;\n  z-index: 20;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-theme);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  right: auto;\n  pointer-events: auto;\n  width: var(--art-highlight-width) !important;\n  transform: translateX(calc(var(--art-highlight-width) / -2));\n  background-color: var(--art-highlight-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  z-index: 40;\n  left: 0;\n  border-radius: 50%;\n  width: var(--art-indicator-size);\n  height: var(--art-indicator-size);\n  transform: scale(var(--art-indicator-scale));\n  margin-left: calc(var(--art-indicator-size) / -2);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover {\n  transform: scale(1.2) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active {\n  transform: scale(1) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  z-index: 50;\n  top: -25px;\n  left: 0;\n  padding: 3px 5px;\n  line-height: 1;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-thumbnails {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  bottom: calc(var(--art-bottom-gap) + 10px);\n  left: 0;\n  border-radius: var(--art-border-radius);\n  pointer-events: none;\n  background-color: var(--art-widget-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px -1px rgba(0, 0, 0, 0.2);\n}\n.art-bottom .art-progress:hover .art-control-progress .art-control-progress-inner {\n  height: 100%;\n}\n.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  transform: scale(1);\n}\n.art-progress-hover .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip,\n.art-progress-hover .art-bottom .art-progress .art-control-thumbnails {\n  transform: scale(1);\n  opacity: 1;\n}\n.art-video-player .art-controls {\n  position: relative;\n  z-index: 10;\n  pointer-events: auto;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: var(--art-control-height);\n}\n.art-video-player .art-controls .art-controls-left,\n.art-video-player .art-controls .art-controls-right {\n  display: flex;\n  height: 100%;\n}\n.art-video-player .art-controls .art-controls-center {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex: 1;\n  height: 100%;\n  padding: 0 10px;\n}\n.art-video-player .art-controls .art-controls-right {\n  justify-content: flex-end;\n}\n.art-video-player .art-controls .art-control {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  cursor: pointer;\n  white-space: nowrap;\n  opacity: var(--art-control-opacity);\n  min-height: var(--art-control-height);\n  min-width: var(--art-control-height);\n  transition: opacity var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon {\n  height: var(--art-control-icon-size);\n  width: var(--art-control-icon-size);\n  transform: scale(var(--art-control-icon-scale));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon:active {\n  transform: scale(calc(var(--art-control-icon-scale) * 0.8));\n}\n.art-video-player .art-controls .art-control:hover {\n  opacity: 1;\n}\n.art-control-volume {\n  position: relative;\n}\n.art-control-volume .art-volume-panel {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  left: 0;\n  right: 0;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n  cursor: default;\n  opacity: 0;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  width: var(--art-control-height);\n  height: var(--art-volume-height);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 10px;\n  height: 100%;\n  width: 100%;\n  padding: 10px 0 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider {\n  flex: 1;\n  width: 100%;\n  display: flex;\n  cursor: pointer;\n  position: relative;\n  justify-content: center;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  width: 2px;\n  border-radius: var(--art-border-radius);\n  overflow: hidden;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  background-color: var(--art-theme);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator {\n  position: absolute;\n  width: var(--art-volume-handle-size);\n  height: var(--art-volume-handle-size);\n  margin-top: calc(var(--art-volume-handle-size) / -2);\n  flex-shrink: 0;\n  transform: scale(1);\n  border-radius: 100%;\n  background-color: var(--art-theme);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator {\n  transform: scale(0.9);\n}\n.art-control-volume:hover .art-volume-panel {\n  opacity: 1;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player .art-notice {\n  display: none;\n  position: absolute;\n  inset: 0;\n  z-index: 80;\n  width: 100%;\n  height: 100%;\n  height: auto;\n  bottom: auto;\n  padding: var(--art-padding);\n  pointer-events: none;\n}\n.art-video-player .art-notice .art-notice-inner {\n  display: inline-flex;\n  padding: 5px;\n  line-height: 1;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-tip-background);\n}\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n.art-video-player .art-contextmenus {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 120;\n  padding: 5px 0;\n  border-radius: var(--art-border-radius);\n  font-size: 12px;\n  background-color: var(--art-widget-background);\n  min-width: var(--art-contextmenus-min-width);\n}\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  display: flex;\n  padding: 10px 15px;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 8px;\n}\n.art-video-player .art-contextmenus .art-contextmenu span:hover,\n.art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n.art-video-player .art-settings {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 90;\n  left: auto;\n  overflow-y: auto;\n  overflow-x: hidden;\n  border-radius: var(--art-border-radius);\n  max-height: var(--art-settings-max-height);\n  right: var(--art-padding);\n  bottom: var(--art-control-height);\n  transition: all var(--art-transition-duration) ease;\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-settings .art-setting-panel {\n  display: none;\n  flex-direction: column;\n}\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: flex;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 5px;\n  cursor: pointer;\n  overflow: hidden;\n  transition: background-color var(--art-transition-duration) ease;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  gap: 5px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: var(--art-settings-icon-size);\n  width: var(--art-settings-icon-size);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  font-size: 12px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  white-space: nowrap;\n  color: rgba(255, 255, 255, 0.5);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-width: 32px;\n  height: 24px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  height: 3px;\n  width: 80px;\n  outline: none;\n  appearance: none;\n  background-color: rgba(255, 255, 255, 0.2);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player.art-setting-show .art-settings {\n  display: flex;\n}\n.art-video-player .art-info {\n  display: none;\n  position: absolute;\n  left: var(--art-padding);\n  top: var(--art-padding);\n  z-index: 100;\n  padding: 10px;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-info .art-info-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item {\n  display: flex;\n  align-items: center;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-title {\n  width: 100px;\n  text-align: right;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-content {\n  width: 250px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  user-select: all;\n}\n.art-video-player .art-info .art-info-close {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  cursor: pointer;\n}\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n.art-hide-cursor * {\n  cursor: none !important;\n}\n.art-video-player[data-aspect-ratio] {\n  overflow: hidden;\n}\n.art-video-player[data-aspect-ratio] .art-video {\n  object-fit: fill;\n  box-sizing: content-box;\n}\n.art-fullscreen {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n}\n.art-fullscreen-web {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n  position: fixed;\n  inset: 0;\n  z-index: var(--art-fullscreen-web-index);\n  width: 100%;\n  height: 100%;\n}\n.art-mini-popup {\n  position: fixed;\n  z-index: 9999;\n  width: 320px;\n  height: 180px;\n  background: #000;\n  border-radius: var(--art-border-radius);\n  cursor: move;\n  user-select: none;\n  overflow: hidden;\n  transition: opacity 0.2s ease;\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);\n}\n.art-mini-popup svg {\n  fill: #fff;\n}\n.art-mini-popup .art-video {\n  pointer-events: none;\n}\n.art-mini-popup .art-mini-close {\n  position: absolute;\n  z-index: 20;\n  right: 10px;\n  top: 10px;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n}\n.art-mini-popup .art-mini-state {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n  background-color: rgba(0, 0, 0, 0.25);\n}\n.art-mini-popup .art-mini-state .art-icon {\n  opacity: 0.75;\n  cursor: pointer;\n  transform: scale(3);\n  pointer-events: auto;\n  transition: transform 0.2s ease;\n}\n.art-mini-popup .art-mini-state .art-icon:active {\n  transform: scale(2.5);\n}\n.art-mini-popup.art-mini-dragging {\n  opacity: 0.9;\n}\n.art-mini-popup:hover .art-mini-close,\n.art-mini-popup:hover .art-mini-state {\n  opacity: 1;\n}\n.art-video-player[data-flip='horizontal'] .art-video {\n  transform: scaleX(-1);\n}\n.art-video-player[data-flip='vertical'] .art-video {\n  transform: scaleY(-1);\n}\n.art-video-player .art-layer-lock {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 50%;\n  border-radius: 50%;\n  transform: translateY(-50%);\n  height: var(--art-lock-size);\n  width: var(--art-lock-size);\n  left: var(--art-padding);\n  background-color: var(--art-tip-background);\n}\n.art-video-player .art-layer-auto-playback {\n  display: none;\n  gap: 10px;\n  align-items: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  padding: 10px;\n  line-height: 1;\n  left: var(--art-padding);\n  bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + 10px);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close svg {\n  width: 15px;\n  height: 15px;\n  fill: var(--art-theme);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-jump {\n  color: var(--art-theme);\n  cursor: pointer;\n}\n.art-video-player.art-lock .art-subtitle {\n  bottom: var(--art-subtitle-bottom) !important;\n}\n.art-video-player.art-mini-progress-bar .art-bottom,\n.art-video-player.art-lock .art-bottom {\n  opacity: 1;\n  padding: 0;\n  background-image: none;\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-controls,\n.art-video-player.art-lock .art-bottom .art-controls,\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress,\n.art-video-player.art-lock .art-bottom .art-progress {\n  transform: translateY(calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4));\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress-indicator,\n.art-video-player.art-lock .art-bottom .art-progress-indicator {\n  display: none !important;\n}\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n.art-control-selector {\n  position: relative;\n  display: flex;\n  justify-content: center;\n}\n.art-control-selector .art-selector-list {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  overflow-y: auto;\n  overflow-x: hidden;\n  opacity: 0;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  max-height: var(--art-selector-max-height);\n  background-color: var(--art-widget-background);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-control-selector .art-selector-list .art-selector-item {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  padding: 10px 15px;\n  flex-shrink: 0;\n  line-height: 1;\n}\n.art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-control-selector .art-selector-list .art-selector-item:hover,\n.art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: var(--art-theme);\n}\n.art-control-selector:hover .art-selector-list {\n  opacity: 1;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player {\n  /*! Hint.css - v2.7.0 - 2021-10-01\n    * https://kushagra.dev/lab/hint/\n    * Copyright (c) 2021 Kushagra Gour */\n  /*-------------------------------------*\\\n        HINT.css - A CSS tooltip library\n    \\*-------------------------------------*/\n  /**\n    * HINT.css is a tooltip library made in pure CSS.\n    *\n    * Source: https://github.com/chinchang/hint.css\n    * Demo: http://kushagragour.in/lab/hint/\n    *\n    */\n  /**\n    * source: hint-core.scss\n    *\n    * Defines the basic styling for the tooltip.\n    * Each tooltip is made of 2 parts:\n    * 	1) body (:after)\n    * 	2) arrow (:before)\n    *\n    * Classes added:\n    * 	1) hint\n    */\n  /**\n    * source: hint-position.scss\n    *\n    * Defines the positoning logic for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--top\n    * 	2) hint--bottom\n    * 	3) hint--left\n    * 	4) hint--right\n    */\n  /**\n    * set default color for tooltip arrows\n    */\n  /**\n    * top tooltip\n    */\n  /**\n    * bottom tooltip\n    */\n  /**\n    * right tooltip\n    */\n  /**\n    * left tooltip\n    */\n  /**\n    * top-left tooltip\n    */\n  /**\n    * top-right tooltip\n    */\n  /**\n    * bottom-left tooltip\n    */\n  /**\n    * bottom-right tooltip\n    */\n  /**\n    * source: hint-sizes.scss\n    *\n    * Defines width restricted tooltips that can span\n    * across multiple lines.\n    *\n    * Classes added:\n    * 	1) hint--small\n    * 	2) hint--medium\n    * 	3) hint--large\n    *\n    */\n  /**\n    * source: hint-theme.scss\n    *\n    * Defines basic theme for tooltips.\n    *\n    */\n  /**\n    * source: hint-color-types.scss\n    *\n    * Contains tooltips of various types based on color differences.\n    *\n    * Classes added:\n    * 	1) hint--error\n    * 	2) hint--warning\n    * 	3) hint--info\n    * 	4) hint--success\n    *\n    */\n  /**\n    * Error\n    */\n  /**\n    * Warning\n    */\n  /**\n    * Info\n    */\n  /**\n    * Success\n    */\n  /**\n    * source: hint-always.scss\n    *\n    * Defines a persisted tooltip which shows always.\n    *\n    * Classes added:\n    * 	1) hint--always\n    *\n    */\n  /**\n    * source: hint-rounded.scss\n    *\n    * Defines rounded corner tooltips.\n    *\n    * Classes added:\n    * 	1) hint--rounded\n    *\n    */\n  /**\n    * source: hint-effects.scss\n    *\n    * Defines various transition effects for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--no-animate\n    * 	2) hint--bounce\n    *\n    */\n}\n.art-video-player [class*='hint--'] {\n  position: relative;\n  display: inline-block;\n  font-style: normal;\n  /**\n        * tooltip arrow\n        */\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:before,\n.art-video-player [class*='hint--']:after {\n  position: absolute;\n  -webkit-transform: translate3d(0, 0, 0);\n  -moz-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  -webkit-transition: 0.3s ease;\n  -moz-transition: 0.3s ease;\n  transition: 0.3s ease;\n  -webkit-transition-delay: 0ms;\n  -moz-transition-delay: 0ms;\n  transition-delay: 0ms;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  visibility: visible;\n  opacity: 1;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  -webkit-transition-delay: 100ms;\n  -moz-transition-delay: 100ms;\n  transition-delay: 100ms;\n}\n.art-video-player [class*='hint--']:before {\n  content: '';\n  position: absolute;\n  background: transparent;\n  border: 6px solid transparent;\n  z-index: 1000001;\n}\n.art-video-player [class*='hint--']:after {\n  background: #000000;\n  color: white;\n  padding: 8px 10px;\n  font-size: 12px;\n  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  line-height: 12px;\n  white-space: nowrap;\n}\n.art-video-player [class*='hint--'][aria-label]:after {\n  content: attr(aria-label);\n}\n.art-video-player [class*='hint--'][data-hint]:after {\n  content: attr(data-hint);\n}\n.art-video-player [aria-label='']:before,\n.art-video-player [aria-label='']:after,\n.art-video-player [data-hint='']:before,\n.art-video-player [data-hint='']:after {\n  display: none !important;\n}\n.art-video-player .hint--top-left:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top-right:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--bottom-left:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom-right:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--left:before {\n  border-left-color: #000000;\n}\n.art-video-player .hint--right:before {\n  border-right-color: #000000;\n}\n.art-video-player .hint--top:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top:before,\n.art-video-player .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--top:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top:hover:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--bottom:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom:before,\n.art-video-player .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--bottom:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom:hover:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--right:before {\n  margin-left: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--right:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--right:before,\n.art-video-player .hint--right:after {\n  left: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--right:hover:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--right:hover:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--left:before {\n  margin-right: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--left:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--left:before,\n.art-video-player .hint--left:after {\n  right: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--left:hover:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--left:hover:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--top-left:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-left:before,\n.art-video-player .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--top-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--top-left:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--top-right:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-right:before,\n.art-video-player .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--top-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--top-right:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-right:hover:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--bottom-left:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-left:before,\n.art-video-player .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--bottom-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--bottom-left:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--bottom-right:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-right:before,\n.art-video-player .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--bottom-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--bottom-right:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-right:hover:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--small:after,\n.art-video-player .hint--medium:after,\n.art-video-player .hint--large:after {\n  white-space: normal;\n  line-height: 1.4em;\n  word-wrap: break-word;\n}\n.art-video-player .hint--small:after {\n  width: 80px;\n}\n.art-video-player .hint--medium:after {\n  width: 150px;\n}\n.art-video-player .hint--large:after {\n  width: 300px;\n}\n.art-video-player [class*='hint--'] {\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:after {\n  text-shadow: 0 -1px 0px black;\n  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);\n}\n.art-video-player .hint--error:after {\n  background-color: #b34e4d;\n  text-shadow: 0 -1px 0px #592726;\n}\n.art-video-player .hint--error.hint--top-left:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top-right:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-left:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-right:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n.art-video-player .hint--warning:after {\n  background-color: #c09854;\n  text-shadow: 0 -1px 0px #6c5328;\n}\n.art-video-player .hint--warning.hint--top-left:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top-right:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-left:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-right:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n.art-video-player .hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n.art-video-player .hint--info:after {\n  background-color: #3986ac;\n  text-shadow: 0 -1px 0px #1a3c4d;\n}\n.art-video-player .hint--info.hint--top-left:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top-right:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-left:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-right:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n.art-video-player .hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n.art-video-player .hint--success:after {\n  background-color: #458746;\n  text-shadow: 0 -1px 0px #1a321a;\n}\n.art-video-player .hint--success.hint--top-left:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top-right:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-left:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-right:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n.art-video-player .hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n.art-video-player .hint--always:after,\n.art-video-player .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n.art-video-player .hint--always.hint--top:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--bottom:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--left:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--left:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--right:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--always.hint--right:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--rounded:after {\n  border-radius: 4px;\n}\n.art-video-player .hint--no-animate:before,\n.art-video-player .hint--no-animate:after {\n  -webkit-transition-duration: 0ms;\n  -moz-transition-duration: 0ms;\n  transition-duration: 0ms;\n}\n.art-video-player .hint--bounce:before,\n.art-video-player .hint--bounce:after {\n  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  -moz-transition: opacity 0.3s ease, visibility 0.3s ease, -moz-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n}\n.art-video-player .hint--no-shadow:before,\n.art-video-player .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n.art-video-player .hint--no-arrow:before {\n  display: none;\n}\n.art-video-player.art-mobile {\n  --art-bottom-gap: 10px;\n  --art-control-height: 38px;\n  --art-control-icon-scale: 1;\n  --art-state-size: 60px;\n  --art-settings-max-height: 180px;\n  --art-selector-max-height: 180px;\n  --art-indicator-scale: 1;\n  --art-control-opacity: 1;\n}\n.art-video-player.art-mobile .art-controls-left {\n  margin-left: calc(var(--art-padding) / -1);\n}\n.art-video-player.art-mobile .art-controls-right {\n  margin-right: calc(var(--art-padding) / -1);\n}\n";
+const css = ".art-video-player {\n  --art-theme: #f00;\n  --art-font-color: #fff;\n  --art-background-color: #000;\n  --art-text-shadow-color: rgba(0, 0, 0, 0.5);\n  --art-transition-duration: 0.2s;\n  --art-padding: 10px;\n  --art-border-radius: 3px;\n  --art-progress-height: 6px;\n  --art-progress-color: rgba(255, 255, 255, 0.25);\n  --art-progress-top-gap: 10px;\n  --art-hover-color: rgba(255, 255, 255, 0.25);\n  --art-loaded-color: rgba(255, 255, 255, 0.25);\n  --art-state-size: 80px;\n  --art-state-opacity: 0.8;\n  --art-bottom-height: 100px;\n  --art-bottom-offset: 20px;\n  --art-bottom-gap: 5px;\n  --art-highlight-width: 8px;\n  --art-highlight-color: rgba(255, 255, 255, 0.5);\n  --art-control-height: 46px;\n  --art-control-opacity: 0.75;\n  --art-control-icon-size: 36px;\n  --art-control-icon-scale: 1.1;\n  --art-volume-height: 120px;\n  --art-volume-handle-size: 14px;\n  --art-lock-size: 36px;\n  --art-indicator-scale: 0;\n  --art-indicator-size: 16px;\n  --art-fullscreen-web-index: 9999;\n  --art-settings-icon-size: 24px;\n  --art-settings-max-height: 300px;\n  --art-selector-max-height: 300px;\n  --art-contextmenus-min-width: 250px;\n  --art-subtitle-font-size: 20px;\n  --art-subtitle-gap: 5px;\n  --art-subtitle-bottom: 15px;\n  --art-subtitle-border: #000;\n  --art-widget-background: rgba(0, 0, 0, 0.85);\n  --art-tip-background: rgba(0, 0, 0, 0.7);\n  --art-scrollbar-size: 4px;\n  --art-scrollbar-background: rgba(255, 255, 255, 0.25);\n  --art-scrollbar-background-hover: rgba(255, 255, 255, 0.5);\n  --art-mini-progress-height: 2px;\n}\n.art-bg-cover {\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n.art-bottom-gradient {\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.art-video-player {\n  position: relative;\n  margin: 0 auto;\n  width: 100%;\n  height: 100%;\n  outline: 0;\n  zoom: 1;\n  padding: 0;\n  text-align: left;\n  direction: ltr;\n  font-size: 14px;\n  line-height: 1.3;\n  user-select: none;\n  box-sizing: border-box;\n  color: var(--art-font-color);\n  background-color: var(--art-background-color);\n  text-shadow: 0 0 2px var(--art-text-shadow-color);\n  font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, Roboto, Arial, sans-serif;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  -ms-touch-action: manipulation;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n}\n.art-video-player *,\n.art-video-player *::before,\n.art-video-player *::after {\n  box-sizing: border-box;\n}\n.art-video-player ::-webkit-scrollbar {\n  width: var(--art-scrollbar-size);\n  height: var(--art-scrollbar-size);\n}\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: var(--art-scrollbar-background);\n}\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: var(--art-scrollbar-background-hover);\n}\n.art-video-player img {\n  max-width: 100%;\n  vertical-align: top;\n}\n.art-video-player svg {\n  fill: var(--art-font-color);\n}\n.art-video-player a {\n  color: var(--art-font-color);\n  text-decoration: none;\n}\n.art-icon {\n  line-height: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.art-video-player.art-backdrop .art-contextmenus,\n.art-video-player.art-backdrop .art-info,\n.art-video-player.art-backdrop .art-settings,\n.art-video-player.art-backdrop .art-layer-auto-playback,\n.art-video-player.art-backdrop .art-selector-list,\n.art-video-player.art-backdrop .art-volume-inner {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-video {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n}\n.art-poster {\n  position: absolute;\n  inset: 0;\n  z-index: 11;\n  width: 100%;\n  height: 100%;\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  pointer-events: none;\n}\n.art-video-player .art-subtitle {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: absolute;\n  z-index: 20;\n  width: 100%;\n  padding: 0 5%;\n  text-align: center;\n  pointer-events: none;\n  gap: var(--art-subtitle-gap);\n  bottom: var(--art-subtitle-bottom);\n  font-size: var(--art-subtitle-font-size);\n  transition: bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n}\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: flex;\n}\n.art-video-player.art-control-show .art-subtitle {\n  bottom: calc(var(--art-controls-height, var(--art-control-height)) + var(--art-subtitle-bottom));\n}\n.art-danmuku {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  overflow: hidden;\n}\n.art-video-player .art-layers {\n  position: absolute;\n  inset: 0;\n  z-index: 40;\n  width: 100%;\n  height: 100%;\n  display: none;\n  pointer-events: none;\n}\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n.art-video-player.art-layer-show .art-layers {\n  display: flex;\n}\n.art-video-player .art-mask {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 50;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player .art-mask .art-state {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  transform: scale(2);\n  width: var(--art-state-size);\n  height: var(--art-state-size);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-video-player.art-mask-show .art-state {\n  pointer-events: auto;\n  opacity: var(--art-state-opacity);\n  transform: scale(1);\n}\n.art-video-player.art-loading-show .art-state {\n  display: none;\n}\n.art-video-player .art-loading {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 70;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n.art-video-player.art-loading-show .art-mask {\n  display: none;\n}\n.art-video-player .art-bottom {\n  position: absolute;\n  inset: 0;\n  z-index: 60;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  opacity: 0;\n  overflow: hidden;\n  pointer-events: none;\n  padding: 0 var(--art-padding);\n  transition: all var(--art-transition-duration) ease;\n  background-size: 100% var(--art-bottom-height);\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-video-player .art-bottom .art-controls,\n.art-video-player .art-bottom .art-progress {\n  transform: translateY(var(--art-bottom-offset));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player.art-control-show .art-bottom,\n.art-video-player.art-hover .art-bottom {\n  opacity: 1;\n}\n.art-video-player.art-control-show .art-bottom .art-controls,\n.art-video-player.art-hover .art-bottom .art-controls,\n.art-video-player.art-control-show .art-bottom .art-progress,\n.art-video-player.art-hover .art-bottom .art-progress {\n  transform: translateY(0);\n}\n.art-bottom .art-progress {\n  position: relative;\n  z-index: 0;\n  cursor: pointer;\n  pointer-events: auto;\n  padding-top: var(--art-progress-top-gap);\n  padding-bottom: var(--art-bottom-gap);\n}\n.art-bottom .art-progress .art-control-progress {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: var(--art-progress-height);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  display: flex;\n  align-items: center;\n  position: relative;\n  height: 50%;\n  width: 100%;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-hover-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-loaded-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  position: absolute;\n  inset: 0;\n  z-index: 20;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-theme);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  right: auto;\n  pointer-events: auto;\n  width: var(--art-highlight-width) !important;\n  transform: translateX(calc(var(--art-highlight-width) / -2));\n  background-color: var(--art-highlight-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  z-index: 40;\n  left: 0;\n  border-radius: 50%;\n  width: var(--art-indicator-size);\n  height: var(--art-indicator-size);\n  transform: scale(var(--art-indicator-scale));\n  margin-left: calc(var(--art-indicator-size) / -2);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover {\n  transform: scale(1.2) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active {\n  transform: scale(1) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  z-index: 50;\n  top: -25px;\n  left: 0;\n  padding: 3px 5px;\n  line-height: 1;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-thumbnails {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  bottom: calc(var(--art-bottom-gap) + 10px);\n  left: 0;\n  border-radius: var(--art-border-radius);\n  pointer-events: none;\n  background-color: var(--art-widget-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px -1px rgba(0, 0, 0, 0.2);\n}\n.art-bottom .art-progress:hover .art-control-progress .art-control-progress-inner {\n  height: 100%;\n}\n.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  transform: scale(1);\n}\n.art-progress-hover .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip,\n.art-progress-hover .art-bottom .art-progress .art-control-thumbnails {\n  transform: scale(1);\n  opacity: 1;\n}\n.art-video-player .art-controls {\n  position: relative;\n  z-index: 10;\n  pointer-events: auto;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  flex-shrink: 0;\n  height: auto;\n  min-height: var(--art-control-height);\n}\n.art-video-player .art-controls .art-controls-left,\n.art-video-player .art-controls .art-controls-right {\n  display: flex;\n  flex-wrap: wrap;\n  max-width: 100%;\n  min-height: var(--art-control-height);\n}\n.art-video-player .art-controls .art-controls-center {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex: 1;\n  height: 100%;\n  padding: 0 10px;\n}\n.art-video-player .art-controls .art-controls-right {\n  justify-content: flex-end;\n  margin-left: auto;\n}\n.art-video-player .art-controls .art-control {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  max-width: 100%;\n  cursor: pointer;\n  white-space: nowrap;\n  opacity: var(--art-control-opacity);\n  min-height: var(--art-control-height);\n  min-width: var(--art-control-height);\n  transition: opacity var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon {\n  height: var(--art-control-icon-size);\n  width: var(--art-control-icon-size);\n  transform: scale(var(--art-control-icon-scale));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon:active {\n  transform: scale(calc(var(--art-control-icon-scale) * 0.8));\n}\n.art-video-player .art-controls .art-control:hover {\n  opacity: 1;\n}\n.art-control-volume {\n  position: relative;\n}\n.art-control-volume .art-volume-panel {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  left: 0;\n  right: 0;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n  cursor: default;\n  opacity: 0;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  width: var(--art-control-height);\n  height: var(--art-volume-height);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 10px;\n  height: 100%;\n  width: 100%;\n  padding: 10px 0 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider {\n  flex: 1;\n  width: 100%;\n  display: flex;\n  cursor: pointer;\n  position: relative;\n  justify-content: center;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  width: 2px;\n  border-radius: var(--art-border-radius);\n  overflow: hidden;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  background-color: var(--art-theme);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator {\n  position: absolute;\n  width: var(--art-volume-handle-size);\n  height: var(--art-volume-handle-size);\n  margin-top: calc(var(--art-volume-handle-size) / -2);\n  flex-shrink: 0;\n  transform: scale(1);\n  border-radius: 100%;\n  background-color: var(--art-theme);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator {\n  transform: scale(0.9);\n}\n.art-control-volume:hover .art-volume-panel {\n  opacity: 1;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player .art-notice {\n  display: none;\n  position: absolute;\n  inset: 0;\n  z-index: 80;\n  width: 100%;\n  height: 100%;\n  height: auto;\n  bottom: auto;\n  padding: var(--art-padding);\n  pointer-events: none;\n}\n.art-video-player .art-notice .art-notice-inner {\n  display: inline-flex;\n  padding: 5px;\n  line-height: 1;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-tip-background);\n}\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n.art-video-player .art-contextmenus {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 120;\n  padding: 5px 0;\n  border-radius: var(--art-border-radius);\n  font-size: 12px;\n  background-color: var(--art-widget-background);\n  min-width: var(--art-contextmenus-min-width);\n}\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  display: flex;\n  padding: 10px 15px;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 8px;\n}\n.art-video-player .art-contextmenus .art-contextmenu span:hover,\n.art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n.art-video-player .art-settings {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 90;\n  left: auto;\n  overflow-y: auto;\n  overflow-x: hidden;\n  border-radius: var(--art-border-radius);\n  max-height: var(--art-settings-max-height);\n  right: var(--art-padding);\n  bottom: var(--art-controls-height, var(--art-control-height));\n  transition: all var(--art-transition-duration) ease;\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-settings .art-setting-panel {\n  display: none;\n  flex-direction: column;\n}\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: flex;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 5px;\n  cursor: pointer;\n  overflow: hidden;\n  transition: background-color var(--art-transition-duration) ease;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  gap: 5px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: var(--art-settings-icon-size);\n  width: var(--art-settings-icon-size);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  font-size: 12px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  white-space: nowrap;\n  color: rgba(255, 255, 255, 0.5);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-width: 32px;\n  height: 24px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  height: 3px;\n  width: 80px;\n  outline: none;\n  appearance: none;\n  background-color: rgba(255, 255, 255, 0.2);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player.art-setting-show .art-settings {\n  display: flex;\n}\n.art-video-player .art-info {\n  display: none;\n  position: absolute;\n  left: var(--art-padding);\n  top: var(--art-padding);\n  z-index: 100;\n  padding: 10px;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-info .art-info-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item {\n  display: flex;\n  align-items: center;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-title {\n  width: 100px;\n  text-align: right;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-content {\n  width: 250px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  user-select: all;\n}\n.art-video-player .art-info .art-info-close {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  cursor: pointer;\n}\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n.art-hide-cursor * {\n  cursor: none !important;\n}\n.art-video-player[data-aspect-ratio] {\n  overflow: hidden;\n}\n.art-video-player[data-aspect-ratio] .art-video {\n  object-fit: fill;\n  box-sizing: content-box;\n}\n.art-fullscreen {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n}\n.art-fullscreen-web {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n  position: fixed;\n  inset: 0;\n  z-index: var(--art-fullscreen-web-index);\n  width: 100%;\n  height: 100%;\n}\n.art-mini-popup {\n  position: fixed;\n  z-index: 9999;\n  width: 320px;\n  height: 180px;\n  background: #000;\n  border-radius: var(--art-border-radius);\n  cursor: move;\n  user-select: none;\n  overflow: hidden;\n  transition: opacity 0.2s ease;\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);\n}\n.art-mini-popup svg {\n  fill: #fff;\n}\n.art-mini-popup .art-video {\n  pointer-events: none;\n}\n.art-mini-popup .art-mini-close {\n  position: absolute;\n  z-index: 20;\n  right: 10px;\n  top: 10px;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n}\n.art-mini-popup .art-mini-state {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n  background-color: rgba(0, 0, 0, 0.25);\n}\n.art-mini-popup .art-mini-state .art-icon {\n  opacity: 0.75;\n  cursor: pointer;\n  transform: scale(3);\n  pointer-events: auto;\n  transition: transform 0.2s ease;\n}\n.art-mini-popup .art-mini-state .art-icon:active {\n  transform: scale(2.5);\n}\n.art-mini-popup.art-mini-dragging {\n  opacity: 0.9;\n}\n.art-mini-popup:hover .art-mini-close,\n.art-mini-popup:hover .art-mini-state {\n  opacity: 1;\n}\n.art-video-player[data-flip='horizontal'] .art-video {\n  transform: scaleX(-1);\n}\n.art-video-player[data-flip='vertical'] .art-video {\n  transform: scaleY(-1);\n}\n.art-video-player .art-layer-lock {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 50%;\n  border-radius: 50%;\n  transform: translateY(-50%);\n  height: var(--art-lock-size);\n  width: var(--art-lock-size);\n  left: var(--art-padding);\n  background-color: var(--art-tip-background);\n}\n.art-video-player .art-layer-auto-playback {\n  display: none;\n  gap: 10px;\n  align-items: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  padding: 10px;\n  line-height: 1;\n  left: var(--art-padding);\n  bottom: calc(var(--art-controls-height, var(--art-control-height)) + var(--art-bottom-gap) + 10px);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close svg {\n  width: 15px;\n  height: 15px;\n  fill: var(--art-theme);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-jump {\n  color: var(--art-theme);\n  cursor: pointer;\n}\n.art-video-player.art-lock .art-subtitle {\n  bottom: var(--art-subtitle-bottom) !important;\n}\n.art-video-player.art-mini-progress-bar .art-bottom,\n.art-video-player.art-lock .art-bottom {\n  opacity: 1;\n  padding: 0;\n  background-image: none;\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-controls,\n.art-video-player.art-lock .art-bottom .art-controls,\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress,\n.art-video-player.art-lock .art-bottom .art-progress {\n  transform: translateY(calc(var(--art-controls-height, var(--art-control-height)) + var(--art-bottom-gap) + var(--art-progress-height) / 4));\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress-indicator,\n.art-video-player.art-lock .art-bottom .art-progress-indicator {\n  display: none !important;\n}\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n.art-control-selector {\n  position: relative;\n  display: flex;\n  justify-content: center;\n}\n.art-control-selector .art-selector-list {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  overflow-y: auto;\n  overflow-x: hidden;\n  opacity: 0;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  max-height: var(--art-selector-max-height);\n  background-color: var(--art-widget-background);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-control-selector .art-selector-list .art-selector-item {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  padding: 10px 15px;\n  flex-shrink: 0;\n  line-height: 1;\n}\n.art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-control-selector .art-selector-list .art-selector-item:hover,\n.art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: var(--art-theme);\n}\n.art-control-selector:hover .art-selector-list {\n  opacity: 1;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player {\n  /*! Hint.css - v2.7.0 - 2021-10-01\n    * https://kushagra.dev/lab/hint/\n    * Copyright (c) 2021 Kushagra Gour */\n  /*-------------------------------------*\\\n        HINT.css - A CSS tooltip library\n    \\*-------------------------------------*/\n  /**\n    * HINT.css is a tooltip library made in pure CSS.\n    *\n    * Source: https://github.com/chinchang/hint.css\n    * Demo: http://kushagragour.in/lab/hint/\n    *\n    */\n  /**\n    * source: hint-core.scss\n    *\n    * Defines the basic styling for the tooltip.\n    * Each tooltip is made of 2 parts:\n    * 	1) body (:after)\n    * 	2) arrow (:before)\n    *\n    * Classes added:\n    * 	1) hint\n    */\n  /**\n    * source: hint-position.scss\n    *\n    * Defines the positoning logic for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--top\n    * 	2) hint--bottom\n    * 	3) hint--left\n    * 	4) hint--right\n    */\n  /**\n    * set default color for tooltip arrows\n    */\n  /**\n    * top tooltip\n    */\n  /**\n    * bottom tooltip\n    */\n  /**\n    * right tooltip\n    */\n  /**\n    * left tooltip\n    */\n  /**\n    * top-left tooltip\n    */\n  /**\n    * top-right tooltip\n    */\n  /**\n    * bottom-left tooltip\n    */\n  /**\n    * bottom-right tooltip\n    */\n  /**\n    * source: hint-sizes.scss\n    *\n    * Defines width restricted tooltips that can span\n    * across multiple lines.\n    *\n    * Classes added:\n    * 	1) hint--small\n    * 	2) hint--medium\n    * 	3) hint--large\n    *\n    */\n  /**\n    * source: hint-theme.scss\n    *\n    * Defines basic theme for tooltips.\n    *\n    */\n  /**\n    * source: hint-color-types.scss\n    *\n    * Contains tooltips of various types based on color differences.\n    *\n    * Classes added:\n    * 	1) hint--error\n    * 	2) hint--warning\n    * 	3) hint--info\n    * 	4) hint--success\n    *\n    */\n  /**\n    * Error\n    */\n  /**\n    * Warning\n    */\n  /**\n    * Info\n    */\n  /**\n    * Success\n    */\n  /**\n    * source: hint-always.scss\n    *\n    * Defines a persisted tooltip which shows always.\n    *\n    * Classes added:\n    * 	1) hint--always\n    *\n    */\n  /**\n    * source: hint-rounded.scss\n    *\n    * Defines rounded corner tooltips.\n    *\n    * Classes added:\n    * 	1) hint--rounded\n    *\n    */\n  /**\n    * source: hint-effects.scss\n    *\n    * Defines various transition effects for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--no-animate\n    * 	2) hint--bounce\n    *\n    */\n}\n.art-video-player [class*='hint--'] {\n  position: relative;\n  display: inline-block;\n  font-style: normal;\n  /**\n        * tooltip arrow\n        */\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:before,\n.art-video-player [class*='hint--']:after {\n  position: absolute;\n  -webkit-transform: translate3d(0, 0, 0);\n  -moz-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  -webkit-transition: 0.3s ease;\n  -moz-transition: 0.3s ease;\n  transition: 0.3s ease;\n  -webkit-transition-delay: 0ms;\n  -moz-transition-delay: 0ms;\n  transition-delay: 0ms;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  visibility: visible;\n  opacity: 1;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  -webkit-transition-delay: 100ms;\n  -moz-transition-delay: 100ms;\n  transition-delay: 100ms;\n}\n.art-video-player [class*='hint--']:before {\n  content: '';\n  position: absolute;\n  background: transparent;\n  border: 6px solid transparent;\n  z-index: 1000001;\n}\n.art-video-player [class*='hint--']:after {\n  background: #000000;\n  color: white;\n  padding: 8px 10px;\n  font-size: 12px;\n  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  line-height: 12px;\n  white-space: nowrap;\n}\n.art-video-player [class*='hint--'][aria-label]:after {\n  content: attr(aria-label);\n}\n.art-video-player [class*='hint--'][data-hint]:after {\n  content: attr(data-hint);\n}\n.art-video-player [aria-label='']:before,\n.art-video-player [aria-label='']:after,\n.art-video-player [data-hint='']:before,\n.art-video-player [data-hint='']:after {\n  display: none !important;\n}\n.art-video-player .hint--top-left:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top-right:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--bottom-left:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom-right:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--left:before {\n  border-left-color: #000000;\n}\n.art-video-player .hint--right:before {\n  border-right-color: #000000;\n}\n.art-video-player .hint--top:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top:before,\n.art-video-player .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--top:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top:hover:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--bottom:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom:before,\n.art-video-player .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--bottom:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom:hover:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--right:before {\n  margin-left: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--right:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--right:before,\n.art-video-player .hint--right:after {\n  left: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--right:hover:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--right:hover:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--left:before {\n  margin-right: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--left:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--left:before,\n.art-video-player .hint--left:after {\n  right: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--left:hover:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--left:hover:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--top-left:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-left:before,\n.art-video-player .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--top-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--top-left:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--top-right:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-right:before,\n.art-video-player .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--top-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--top-right:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-right:hover:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--bottom-left:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-left:before,\n.art-video-player .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--bottom-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--bottom-left:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--bottom-right:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-right:before,\n.art-video-player .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--bottom-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--bottom-right:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-right:hover:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--small:after,\n.art-video-player .hint--medium:after,\n.art-video-player .hint--large:after {\n  white-space: normal;\n  line-height: 1.4em;\n  word-wrap: break-word;\n}\n.art-video-player .hint--small:after {\n  width: 80px;\n}\n.art-video-player .hint--medium:after {\n  width: 150px;\n}\n.art-video-player .hint--large:after {\n  width: 300px;\n}\n.art-video-player [class*='hint--'] {\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:after {\n  text-shadow: 0 -1px 0px black;\n  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);\n}\n.art-video-player .hint--error:after {\n  background-color: #b34e4d;\n  text-shadow: 0 -1px 0px #592726;\n}\n.art-video-player .hint--error.hint--top-left:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top-right:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-left:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-right:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n.art-video-player .hint--warning:after {\n  background-color: #c09854;\n  text-shadow: 0 -1px 0px #6c5328;\n}\n.art-video-player .hint--warning.hint--top-left:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top-right:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-left:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-right:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n.art-video-player .hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n.art-video-player .hint--info:after {\n  background-color: #3986ac;\n  text-shadow: 0 -1px 0px #1a3c4d;\n}\n.art-video-player .hint--info.hint--top-left:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top-right:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-left:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-right:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n.art-video-player .hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n.art-video-player .hint--success:after {\n  background-color: #458746;\n  text-shadow: 0 -1px 0px #1a321a;\n}\n.art-video-player .hint--success.hint--top-left:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top-right:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-left:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-right:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n.art-video-player .hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n.art-video-player .hint--always:after,\n.art-video-player .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n.art-video-player .hint--always.hint--top:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--bottom:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--left:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--left:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--right:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--always.hint--right:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--rounded:after {\n  border-radius: 4px;\n}\n.art-video-player .hint--no-animate:before,\n.art-video-player .hint--no-animate:after {\n  -webkit-transition-duration: 0ms;\n  -moz-transition-duration: 0ms;\n  transition-duration: 0ms;\n}\n.art-video-player .hint--bounce:before,\n.art-video-player .hint--bounce:after {\n  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  -moz-transition: opacity 0.3s ease, visibility 0.3s ease, -moz-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n}\n.art-video-player .hint--no-shadow:before,\n.art-video-player .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n.art-video-player .hint--no-arrow:before {\n  display: none;\n}\n.art-video-player.art-mobile {\n  --art-bottom-gap: 10px;\n  --art-control-height: 38px;\n  --art-control-icon-scale: 1;\n  --art-state-size: 60px;\n  --art-settings-max-height: 180px;\n  --art-selector-max-height: 180px;\n  --art-indicator-scale: 1;\n  --art-control-opacity: 1;\n}\n.art-video-player.art-mobile .art-controls-left {\n  margin-left: calc(var(--art-padding) / -1);\n}\n.art-video-player.art-mobile .art-controls-right {\n  margin-right: calc(var(--art-padding) / -1);\n}\n";
 class Subtitle extends Component {
   constructor(art) {
     super(art);

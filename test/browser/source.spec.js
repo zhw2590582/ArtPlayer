@@ -56,11 +56,32 @@ for (const core of ['published', 'candidate']) {
   })
 }
 
-test('candidate: quality switch restores position/rate and preserves real customType identities', async ({ page }) => {
+test('candidate: quality switch restores position/rate and preserves real customType identities', async ({ page }, testInfo) => {
   await page.goto('/test/player.html?core=candidate&chapter=published')
   await page.evaluate(() => window.createPlayer('/test/pattern.mp4?custom=initial'))
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
+  // A real gesture starts WebKit's media pipeline before the paused seek setup.
+  await page.locator('#play').click()
+  await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
+  await page.locator('#pause').click()
+  await expect.poll(() => page.evaluate(() => window.art.video.paused)).toBe(true)
+  await testInfo.attach('initial-media-ranges', {
+    body: JSON.stringify(await page.evaluate(() => {
+      const { video } = window.art
+      const ranges = value => Array.from({ length: value.length }, (_, index) => [value.start(index), value.end(index)])
+      return { buffered: ranges(video.buffered), seekable: ranges(video.seekable), readyState: video.readyState, duration: video.duration, currentTime: video.currentTime }
+    })),
+    contentType: 'application/json',
+  })
+  await expect.poll(() => page.evaluate(() => {
+    const ranges = window.art.video.seekable
+    return Array.from({ length: ranges.length }, (_, index) => index).some(index => ranges.start(index) <= 3 && ranges.end(index) >= 3)
+  })).toBe(true)
   await page.evaluate(() => {
+    window.switchMediaEvents = []
+    for (const name of ['loadedmetadata', 'seeking', 'seeked', 'canplay', 'pause', 'playing']) {
+      window.art.video.addEventListener(name, () => window.switchMediaEvents.push({ name, time: window.art.currentTime, seeking: window.art.video.seeking, source: window.art.video.currentSrc }))
+    }
     window.art.currentTime = 3
   })
   await expect.poll(() => page.evaluate(() => window.art.video.seeking)).toBe(false)
@@ -76,11 +97,16 @@ test('candidate: quality switch restores position/rate and preserves real custom
     art.aspectRatio = '16:9'
     const restart = []
     art.on('restart', url => restart.push(url))
+    const beforeSwitch = { time: art.currentTime, seeking: art.video.seeking, paused: art.video.paused }
     await art.switchQuality('/test/pattern.mp4?custom=next')
-    const result = { calls, restart, time: art.currentTime, rate: art.playbackRate, ratio: art.aspectRatio, paused: art.video.paused, error: art.video.error?.code || 0 }
+    const result = { beforeSwitch, mediaEvents: window.switchMediaEvents, calls, restart, time: art.currentTime, rate: art.playbackRate, ratio: art.aspectRatio, paused: art.video.paused, error: art.video.error?.code || 0 }
     art.destroy()
     return result
   })
+  await testInfo.attach('quality-switch-media-state', { body: JSON.stringify(result), contentType: 'application/json' })
+  expect(result.beforeSwitch.time).toBeCloseTo(3, 1)
+  expect(result.beforeSwitch.seeking).toBe(false)
+  expect(result.beforeSwitch.paused).toBe(true)
   expect(result.calls).toEqual([{ thisIdentity: true, ownerIdentity: true, videoIdentity: true, count: 3, url: '/test/pattern.mp4?custom=next' }])
   expect(result.restart).toEqual(['/test/pattern.mp4?custom=next'])
   expect(result.time).toBeCloseTo(3, 1)

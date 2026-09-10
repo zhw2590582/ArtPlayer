@@ -1,3 +1,6 @@
+import type { ContextmenuHost } from './types'
+import { ownEntry } from '../component/resources'
+import { controlEvents } from '../control/resources'
 import { getRect, includeFromEvent, isMobile, setStyles } from '../utils'
 import Component from '../utils/component'
 import aspectRatio from './aspectRatio'
@@ -7,24 +10,25 @@ import info from './info'
 import playbackRate from './playbackRate'
 import version from './version'
 
-export default class Contextmenu extends Component {
-  constructor(art) {
+export default class Contextmenu extends Component<ContextmenuHost> {
+  constructor(art: ContextmenuHost) {
     super(art)
 
     this.name = 'contextmenu'
     this.$parent = art.template.$contextmenu
+    ownEntry(art, this.$parent)
 
     if (!isMobile) {
       this.init()
     }
   }
 
-  init() {
+  init(): void {
     const {
       option,
-      proxy,
       template: { $player, $contextmenu },
     } = this.art
+    const { on, proxy } = controlEvents(this.art, $contextmenu)
 
     if (option.playbackRate) {
       this.add(
@@ -75,7 +79,7 @@ export default class Contextmenu extends Component {
     )
 
     for (let index = 0; index < option.contextmenu.length; index++) {
-      this.add(option.contextmenu[index])
+      this.add(option.contextmenu[index]!)
     }
 
     proxy($player, 'contextmenu', (event) => {
@@ -112,7 +116,7 @@ export default class Contextmenu extends Component {
       }
     })
 
-    this.art.on('blur', () => {
+    on('blur', () => {
       this.show = false
     })
   }

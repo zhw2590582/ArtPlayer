@@ -1,13 +1,17 @@
-import { append, setStyle, silencePromise, tooltip } from '../utils'
+import type { ControlFactory, ControlOption } from './types'
+import { appendElement } from '../component/dom'
+import { setStyle, silencePromise, tooltip } from '../utils'
+import { controlEvents } from './resources'
 
-export default function playAndPause(option) {
+export default function playAndPause(option: ControlOption): ControlFactory {
   return art => ({
     ...option,
     mounted: ($control) => {
-      const { proxy, icons, i18n } = art
+      const { on, proxy } = controlEvents(art, $control)
+      const { icons, i18n } = art
 
-      const $play = append($control, icons.play)
-      const $pause = append($control, icons.pause)
+      const $play = appendElement($control, icons.play)
+      const $pause = appendElement($control, icons.pause)
       tooltip($play, i18n.get('Play'))
       tooltip($pause, i18n.get('Pause'))
 
@@ -36,11 +40,11 @@ export default function playAndPause(option) {
         showPlay()
       }
 
-      art.on('video:playing', () => {
+      on('video:playing', () => {
         showPause()
       })
 
-      art.on('video:pause', () => {
+      on('video:pause', () => {
         showPlay()
       })
     },

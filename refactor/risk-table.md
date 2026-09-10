@@ -56,3 +56,9 @@
 | BASE-LIFE-08 | resolved / 已复现 | Ready continues after a control callback destroys the instance | CORE-11 |
 | BASE-I18N-01 | resolved / 已复现 | Missing prototype-named translations return inherited functions | CORE-12 |
 | BASE-TYPE-09 | open / 源码/产物事实 | Template and icon declarations claim incompatible DOM and static shapes | CORE-21 |
+| BASE-LIFE-09 | resolved / 已复现 | Removed builtin controls retain subscriptions and progress drag effects | CORE-13 |
+| BASE-LIFE-10 | resolved / 已复现 | Component mounting and removal failures leave partial entries or recurse | CORE-13 |
+| BASE-LIFE-11 | resolved / 已复现 | Selector failures are unhandled and obsolete completion overwrites current UI | CORE-13 |
+| BASE-DOM-03 | resolved / 已复现 | Reusing selector items after update redefines nonconfigurable properties | CORE-13 |
+| BASE-DOM-04 | resolved / 已复现 | A component named __proto__ changes its registry prototype | CORE-13 |
+| BASE-DOM-05 | resolved / 已复现 | Highlight text interpolation permits unintended HTML attributes | CORE-13 |

@@ -6,12 +6,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: var(--art-control-height);
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    height: auto;
+    min-height: var(--art-control-height);
 
     .art-controls-left,
     .art-controls-right {
       display: flex;
-      height: 100%;
+      flex-wrap: wrap;
+      max-width: 100%;
+      min-height: var(--art-control-height);
     }
 
     .art-controls-center {
@@ -23,11 +28,13 @@
 
     .art-controls-right {
       justify-content: flex-end;
+      margin-left: auto;
     }
 
     .art-control {
       .art-center();
       flex-shrink: 0;
+      max-width: 100%;
       cursor: pointer;
       white-space: nowrap;
       opacity: var(--art-control-opacity);

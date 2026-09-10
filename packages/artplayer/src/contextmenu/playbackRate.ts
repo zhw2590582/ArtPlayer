@@ -1,6 +1,8 @@
-import { inverseClass, query, queryAll } from '../utils'
+import type { ContextmenuFactory, ContextmenuOption } from './types'
+import { controlEvents } from '../control/resources'
+import { inverseClass, query } from '../utils'
 
-export default function playbackRate(option) {
+export default function playbackRate(option: ContextmenuOption): ContextmenuFactory {
   return (art) => {
     const {
       i18n,
@@ -15,18 +17,19 @@ export default function playbackRate(option) {
       ...option,
       html: `${i18n.get('Play Speed')}: ${html}`,
       click: (contextmenu, event) => {
-        const { value } = event.target.dataset
+        const value = event.target instanceof HTMLElement ? event.target.dataset.value : undefined
         if (value) {
           art.playbackRate = Number(value)
           contextmenu.show = false
         }
       },
       mounted: ($panel) => {
+        const { on } = controlEvents(art, $panel)
         const $default = query('[data-value="1"]', $panel)
         if ($default)
           inverseClass($default, 'art-current')
-        art.on('video:ratechange', () => {
-          const $current = queryAll('span', $panel).find(
+        on('video:ratechange', () => {
+          const $current = Array.from($panel.querySelectorAll('span')).find(
             item => Number(item.dataset.value) === art.playbackRate,
           )
           if ($current) {

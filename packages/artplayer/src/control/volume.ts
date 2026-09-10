@@ -1,22 +1,26 @@
-import { append, getRect, isMobile, setStyle } from '../utils'
+import type { ControlFactory, ControlOption } from './types'
+import { appendElement } from '../component/dom'
+import { getRect, isMobile, setStyle } from '../utils'
+import { controlEvents } from './resources'
 
-export default function volume(option) {
+export default function volume(option: ControlOption): ControlFactory {
   return art => ({
     ...option,
     mounted: ($control) => {
-      const { proxy, icons } = art
+      const { on, proxy } = controlEvents(art, $control)
+      const { icons } = art
 
-      const $volume = append($control, icons.volume)
-      const $close = append($control, icons.volumeClose)
-      const $panel = append($control, '<div class="art-volume-panel"></div>')
-      const $inner = append($panel, '<div class="art-volume-inner"></div>')
-      const $value = append($inner, `<div class="art-volume-val"></div>`)
-      const $slider = append($inner, `<div class="art-volume-slider"></div>`)
-      const $handle = append($slider, `<div class="art-volume-handle"></div>`)
-      const $loaded = append($handle, `<div class="art-volume-loaded"></div>`)
-      const $indicator = append($slider, `<div class="art-volume-indicator"></div>`)
+      const $volume = appendElement($control, icons.volume)
+      const $close = appendElement($control, icons.volumeClose)
+      const $panel = appendElement($control, '<div class="art-volume-panel"></div>')
+      const $inner = appendElement($panel, '<div class="art-volume-inner"></div>')
+      const $value = appendElement($inner, `<div class="art-volume-val"></div>`)
+      const $slider = appendElement($inner, `<div class="art-volume-slider"></div>`)
+      const $handle = appendElement($slider, `<div class="art-volume-handle"></div>`)
+      const $loaded = appendElement($handle, `<div class="art-volume-loaded"></div>`)
+      const $indicator = appendElement($slider, `<div class="art-volume-indicator"></div>`)
 
-      function getVolumeFromEvent(event) {
+      function getVolumeFromEvent(event: MouseEvent) {
         const { top, height } = getRect($slider)
         return 1 - (event.clientY - top) / height
       }
@@ -27,7 +31,7 @@ export default function volume(option) {
           setStyle($close, 'display', 'flex')
           setStyle($indicator, 'top', '100%')
           setStyle($loaded, 'top', '100%')
-          $value.textContent = 0
+          $value.textContent = '0'
         }
         else {
           const percentage = art.volume * 100
@@ -35,12 +39,12 @@ export default function volume(option) {
           setStyle($close, 'display', 'none')
           setStyle($indicator, 'top', `${100 - percentage}%`)
           setStyle($loaded, 'top', `${100 - percentage}%`)
-          $value.textContent = Math.floor(percentage)
+          $value.textContent = String(Math.floor(percentage))
         }
       }
 
       update()
-      art.on('video:volumechange', update)
+      on('video:volumechange', update)
 
       proxy($volume, 'click', () => {
         art.muted = true
@@ -61,14 +65,14 @@ export default function volume(option) {
           art.volume = getVolumeFromEvent(event)
         })
 
-        art.on('document:mousemove', (event) => {
+        on('document:mousemove', (event) => {
           if (isDragging) {
             art.muted = false
             art.volume = getVolumeFromEvent(event)
           }
         })
 
-        art.on('document:mouseup', () => {
+        on('document:mouseup', () => {
           if (isDragging) {
             isDragging = false
           }

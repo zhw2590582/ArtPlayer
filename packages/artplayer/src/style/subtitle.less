@@ -31,7 +31,7 @@
 
   &.art-control-show {
     .art-subtitle {
-      bottom: calc(var(--art-control-height) + var(--art-subtitle-bottom));
+      bottom: calc(var(--art-controls-height, var(--art-control-height)) + var(--art-subtitle-bottom));
     }
   }
 }

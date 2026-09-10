@@ -1,6 +1,8 @@
+import type { ControlFactory, ControlOption } from './types'
 import { isMobile, secondToTime } from '../utils'
+import { controlEvents } from './resources'
 
-export default function time(option) {
+export default function time(option: ControlOption): ControlFactory {
   return art => ({
     ...option,
     style: isMobile
@@ -13,6 +15,7 @@ export default function time(option) {
           padding: '0 10px',
         },
     mounted: ($control) => {
+      const { on } = controlEvents(art, $control)
       function getTime() {
         const newTime = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`
         if (newTime !== $control.textContent) {
@@ -22,9 +25,9 @@ export default function time(option) {
 
       getTime()
 
-      const events = ['video:loadedmetadata', 'video:timeupdate', 'video:progress']
+      const events = ['video:loadedmetadata', 'video:timeupdate', 'video:progress'] as const
       for (let index = 0; index < events.length; index++) {
-        art.on(events[index], getTime)
+        on(events[index]!, getTime)
       }
     },
   })

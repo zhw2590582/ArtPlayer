@@ -990,11 +990,14 @@
         "CORE-12",
         "CORE-08"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "Component/control/layer/contextmenu 的资源与 TS 边界",
       "acceptance": "add/update/remove、name、selector、mounted/beforeUnmount 通过；处理 BASE-DOM-02 窄容器控件裁切，保留 controls.update 的旧 undefined 返回值",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-13-components.md",
+        "baselines/components-validation.json"
+      ]
     },
     {
       "id": "CORE-14",

@@ -1,5 +1,13 @@
 # 进度与证据
 
+## 当前实施：CORE-13 组件注册与控件完成
+
+Component/control/layer/contextmenu 与 qualityMix 迁移 TS，拆清注册、DOM、资源、选择生命周期、进度交互和布局；修复移除后残留订阅、失败注册与重入清理、过期选择写入、selector 重用和文本属性注入。正常回调/排序/别名/描述符保持，controls.add/update 仍返回 undefined。
+
+177 项 Node/工程/基线通过，核心及 chapter 共 110 个生产 TS 文件严格检查；最终安装 UMD 和 legacy 各 342 项三浏览器通过，实际 tarball 27 项运行时与五组类型零诊断。见 [交付](changes/2026-09-11-CORE-13-components.md) 和 [指纹及结果](baselines/components-validation.json)。关闭 BASE-LIFE-09/10/11、BASE-DOM-03/04/05；BASE-DOM-02 的窄设置面板留 CORE-14，公开返回值与只写属性声明仍交 CORE-21。
+
+当前分支 codex/compatible-modernization，214 项中 49 完成、165 待办；核心 105 个 TS 文件、chapter 5 个。下一项 CORE-14 设置树、选择、渲染与布局；CORE-13 按单任务本地提交，未推送或发布。
+
 ## 当前实施：CORE-12 模板及公开资源入口完成
 
 模板、图标、语言和样式入口迁移 TS，保留 SSR/DOM/proxy 身份及语言分发。169 项 Node/工程/基线通过，最终安装 UMD 与 legacy 各 258 项三浏览器通过；打包 27 项运行时及五组类型零诊断。复制资源固定上游内容、全部适配和实际分发许可已核对，关闭 VENDOR-01/02 与 BASE-I18N-01；公开模板/图标类型差异 BASE-TYPE-09 交 CORE-21。见 [交付](changes/2026-09-11-CORE-12-template-resources.md)。当前 214 项，48 完成、166 待办；核心 71 个 TS 文件、chapter 5 个。下一项 CORE-13 组件注册与控件。
@@ -241,15 +249,15 @@ BASE-01 已提交 `1d705b30`。BASE-HARNESS-01 完成发布包采集页面/本�
 
 以下来自建立计划前的同一会话评估，属于初步诊断，不代替 BASE 阶段的已发布产物基线与完整浏览器测试：
 
-| 检查 | 结果与限制 |
-| --- | --- |
-| `node --test test/playback.test.js test/dash-control.test.js` | Node 25.2.1，19 项通过；这是 mock/单元测试 |
-| 核心 src/types、test、scripts/*.js 的 ESLint（不加 --fix） | 通过；没有把插件模板占位符作为普通源码 lint |
-| 三个 TS 样例，TS 5.9.3、strict、types: [] | 通过；未隔离环境类型时存在第三方 DOM/WebCodecs/markdown 声明冲突 |
-| 使用项目构建配置 write:false 进行 ESM/现代 UMD/legacy UMD 内存构建 | 成功；不是完整 npm pack 或全部发布构建；未写产物 |
-| 销毁源码隔离探针 | 重复 destroy 可误删其他实例注册项；需要正式回归用例 |
-| 连续切源源码隔离探针 | 一次 canplay 可结算两次切源；尚未真实浏览器复现影响 |
-| `bun test ./test/playback.test.js ./test/dash-control.test.js` | Bun 1.3.14：1 通过、18 失败，mock.fn 不兼容；未来版本需重测 |
+| 检查                                                               | 结果与限制                                                       |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| `node --test test/playback.test.js test/dash-control.test.js`      | Node 25.2.1，19 项通过；这是 mock/单元测试                       |
+| 核心 src/types、test、scripts/*.js 的 ESLint（不加 --fix）         | 通过；没有把插件模板占位符作为普通源码 lint                      |
+| 三个 TS 样例，TS 5.9.3、strict、types: []                          | 通过；未隔离环境类型时存在第三方 DOM/WebCodecs/markdown 声明冲突 |
+| 使用项目构建配置 write:false 进行 ESM/现代 UMD/legacy UMD 内存构建 | 成功；不是完整 npm pack 或全部发布构建；未写产物                 |
+| 销毁源码隔离探针                                                   | 重复 destroy 可误删其他实例注册项；需要正式回归用例              |
+| 连续切源源码隔离探针                                               | 一次 canplay 可结算两次切源；尚未真实浏览器复现影响              |
+| `bun test ./test/playback.test.js ./test/dash-control.test.js`     | Bun 1.3.14：1 通过、18 失败，mock.fn 不兼容；未来版本需重测      |
 
 ## 清点中新增的待核对项
 

@@ -4,6 +4,74 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Components and controls (CORE-13)
+
+The public registries remain Component-based. utils/component.ts owns add/update/remove,
+cache and dynamic name aliases; component/dom.ts owns insertion and known template
+queries; component/types.ts defines the minimal generic host and callback shapes.
+component/resources.ts owns each entry's child ResourceScope, DOM proxies and guarded
+Emitter subscriptions. control/resources.ts specializes the shared subscriptions with
+UIEvents; it does not create a second event bus. Builtins depend on these capabilities,
+not the full player class. CORE-20 still has to integrate the constructor facade.
+
+Control index.ts preserves routing and visibility behavior. builtins.ts preserves
+installation order and option/platform conditions. selector.ts owns item binding,
+selection rendering and asynchronous completion; progress.ts keeps the factory and
+its historical helper exports while progress/position.ts, view.ts and interactions.ts
+separate pointer math, rendering and drag ownership. The remaining simple controls
+stay individual factories. layer.ts retains the generic registry; contextmenu/index.ts
+owns positioning and root listeners, while its item factories own their own updates.
+
+Preserve the observable registry rules: option factories are bare calls with art;
+click/mounted/beforeUnmount use art as this; index 0 still follows the old index-or-id
+rule; equal indexes insert before their predecessor. update mutates the cached option
+before remove, so the newly supplied beforeUnmount runs on the old node. Component
+add/update may return a div; Control add/update still return undefined. Source types
+model that distinction; historical public declaration conflicts remain CORE-21 work.
+A name of `__proto__` now creates a normal own DOM alias without replacing the registry
+prototype. Other historical aliases and shadowing behavior are not broadly renamed.
+
+Entry ownership starts before rendering. Failed mounting releases owned effects and
+removes its DOM/cache/alias without masking the original exception or deleting a
+successful reentrant replacement. beforeUnmount failure retains the entry for retry;
+recursive removal of that same entry is ignored. Already detached DOM can be removed.
+Builtin DOM/Emitter listeners, progress drag handlers and tip timers end on entry
+removal/update or root destruction; closed handlers are inert even in an Emitter
+snapshot. Whole-player destruction retains its existing cache/alias and user-hook
+policy: it does not newly call every beforeUnmount. User mounted hook return values
+remain ignored. Arbitrary user listeners and third-party SDK work still need explicit
+user cleanup; internal scopes cannot infer their ownership.
+
+Selector items keep their non-enumerable, non-configurable getter bindings. A WeakMap
+allows the same items to bind to a replacement after the prior entry closes; sharing
+items across simultaneously active controls remains invalid. Each click keeps original
+item/node/Event/this arguments and synchronous default flags. Only the latest active
+selection may write a delayed title; removal invalidates pending writes. Background
+clicks are ignored and owned callback failures are warned with their original value.
+component/selection.ts links a click's active state to the builtin quality callback,
+so late source-switch completion cannot overwrite a newer or removed quality notice.
+Direct callback invocations retain their Promise result and original rejection.
+Deferred builtin quality installation reports errors without an unhandled Promise.
+This does not cancel arbitrary user onSelect work or change switchQuality's public
+settlement contract. Highlight text uses dataset assignment rather than interpolation
+into HTML attributes; normal text and marker positions retain their behavior.
+
+controls.less allows groups to wrap inside narrow players. Individual control height
+continues to use --art-control-height; control/layout.ts observes total layout height
+through offsetHeight and records --art-controls-height for subtitle/panel offsets.
+ResizeObserver is preferred; the fallback combines core resize and MutationObserver.
+Both observers and subscriptions are owned by the bottom controls scope. Without
+ResizeObserver, unrelated parent CSS resizing is not independently detected until a
+core resize or control mutation occurs. The 640/320/240px tests include real 16:9
+heights and verify all buttons remain visible. This does not promise arbitrary custom
+minimum widths will fit. Narrow setting-tree/panel behavior remains CORE-14 work.
+
+Use test/component-resources.test.js for ownership, reentry and quality settlement,
+test/types/components.ts for source contracts, and test/browser/components.spec.js
+for published/candidate registries, real pointer/contextmenu controls, asynchronous
+selectors, failures, actual layout and local-media progress. Run the full installed
+UMD and legacy browser matrices after building, not only the source fixture suite.
+
 ## Template and public resources
 
 `src/template.ts` owns container checks, reservation, proxy replacement and destruction.
@@ -29,7 +97,7 @@ uses the actual HTMLElement shape. This mismatch remains tracked for CORE-21.
 `i18n/index.ts` owns selected language, deep updates and key fallback. Standalone
 language modules keep default exports and artplayer-i18n-* aliases through publish.ts.
 Only own language/message keys participate in lookup; absent prototype names now return
-the requested string. Explicit custom constructor/toString/**proto** messages remain
+the requested string. Explicit custom constructor/toString/`__proto__` messages remain
 supported. Empty translations still fall back. build:i18n excludes built-in zh-cn and
 helper modules, retaining exactly eleven UMD/ESM pairs and their historical globals.
 
@@ -182,7 +250,7 @@ throw stops that dispatch and propagates unchanged. Off accepts either a once wr
 or its original callback; duplicate registrations of a callback are removed together.
 The once wrapper unsubscribes before invoking user code and now records consumption,
 so a nested dispatch cannot execute a captured copy twice. This fixes a demonstrated
-old defect without changing ordinary snapshot behavior. Event names such as **proto**
+old defect without changing ordinary snapshot behavior. Event names such as `__proto__`
 and toString use own properties rather than inherited Object.prototype values.
 
 Shared contracts in test/contracts/emitter.js run against published, workspace and
@@ -472,5 +540,5 @@ core files in docs/compiled when committing a shippable core change.
 For new utility behavior, extend the same old/new contract tests. Clearly separate
 intentional defect corrections from preserved behavior. For timers or Blob URLs,
 also identify the owner and verify cleanup in the consuming module. Remaining
-constructor, playback, UI, Component and capability migrations are recorded
+constructor, playback, setting, input and capability migrations are recorded
 in refactor/tasks.json and should extend this map as they land.

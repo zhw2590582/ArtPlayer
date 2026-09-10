@@ -1,6 +1,8 @@
-import { inverseClass, query, queryAll } from '../utils'
+import type { ContextmenuFactory, ContextmenuOption } from './types'
+import { controlEvents } from '../control/resources'
+import { inverseClass, query } from '../utils'
 
-export default function aspectRatio(option) {
+export default function aspectRatio(option: ContextmenuOption): ContextmenuFactory {
   return (art) => {
     const {
       i18n,
@@ -15,19 +17,20 @@ export default function aspectRatio(option) {
       ...option,
       html: `${i18n.get('Aspect Ratio')}: ${html}`,
       click: (contextmenu, event) => {
-        const { value } = event.target.dataset
+        const value = event.target instanceof HTMLElement ? event.target.dataset.value : undefined
         if (value) {
           art.aspectRatio = value
           contextmenu.show = false
         }
       },
       mounted: ($panel) => {
+        const { on } = controlEvents(art, $panel)
         const $default = query('[data-value="default"]', $panel)
         if ($default) {
           inverseClass($default, 'art-current')
         }
-        art.on('aspectRatio', (value) => {
-          const $current = queryAll('span', $panel).find(item => item.dataset.value === value)
+        on('aspectRatio', (value) => {
+          const $current = Array.from($panel.querySelectorAll('span')).find(item => item.dataset.value === value)
           if ($current) {
             inverseClass($current, 'art-current')
           }

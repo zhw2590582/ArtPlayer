@@ -170,7 +170,8 @@
         "refactor/baselines/dom.json"
       ],
       "compatibleResolution": "在保留自定义控件扩展入口下修正布局。",
-      "closureCriteria": "320px 及正常容器的设置/模式操作真实可用。"
+      "closureCriteria": "320px 及正常容器的设置/模式操作真实可用。",
+      "workspaceState": "CORE-13 final installed UMD and legacy verify wrapped controls at 640/320/240px with real 16:9 heights and observed total-height offsets, including ResizeObserver fallback. Narrow setting tree/panel interactions still require CORE-14; this finding remains open."
     },
     {
       "id": "BASE-DEMO-01",
@@ -993,6 +994,144 @@
       ],
       "compatibleResolution": "Keep old legal declarations accepted, expose accurate template and icon views without inventing runtime properties.",
       "closureCriteria": "Old consumers and accurate template/media/icon view consumers pass all supported type modes and runtime shape checks."
+    },
+    {
+      "id": "BASE-LIFE-09",
+      "title": "Removed builtin controls retain subscriptions and progress drag effects",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-13"
+      ],
+      "evidence": [
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js",
+        "refactor/changes/2026-09-11-CORE-13-components.md"
+      ],
+      "compatibleResolution": "Keep per-entry owned listeners, timers and drag callbacks inert after removal while preserving user subscriptions.",
+      "closureCriteria": "Published/candidate comparison, final installed UMD and legacy browser matrices, strict types and package verification must pass; original failure evidence remains recorded.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-13-components.md",
+        "refactor/baselines/components-validation.json",
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js"
+      ],
+      "resolutionRationale": "Published/candidate behavior comparisons and both final installed artifact matrices pass. Entry ownership, transactional registration/removal, current selection guards and literal text assignment correct reproduced defects while retaining normal callbacks, return values, descriptors and public declarations. Source and shipped bytes match the tested package."
+    },
+    {
+      "id": "BASE-LIFE-10",
+      "title": "Component mounting and removal failures leave partial entries or recurse",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-13"
+      ],
+      "evidence": [
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js",
+        "refactor/changes/2026-09-11-CORE-13-components.md"
+      ],
+      "compatibleResolution": "Rollback failed registration, preserve successful reentrant replacement and original errors, retain failed beforeUnmount for retry.",
+      "closureCriteria": "Published/candidate comparison, final installed UMD and legacy browser matrices, strict types and package verification must pass; original failure evidence remains recorded.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-13-components.md",
+        "refactor/baselines/components-validation.json",
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js"
+      ],
+      "resolutionRationale": "Published/candidate behavior comparisons and both final installed artifact matrices pass. Entry ownership, transactional registration/removal, current selection guards and literal text assignment correct reproduced defects while retaining normal callbacks, return values, descriptors and public declarations. Source and shipped bytes match the tested package."
+    },
+    {
+      "id": "BASE-LIFE-11",
+      "title": "Selector failures are unhandled and obsolete completion overwrites current UI",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-13"
+      ],
+      "evidence": [
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js",
+        "refactor/changes/2026-09-11-CORE-13-components.md"
+      ],
+      "compatibleResolution": "Keep callback arguments and default flags; report owned failures and gate titles and builtin quality notices by active selection.",
+      "closureCriteria": "Published/candidate comparison, final installed UMD and legacy browser matrices, strict types and package verification must pass; original failure evidence remains recorded.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-13-components.md",
+        "refactor/baselines/components-validation.json",
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js"
+      ],
+      "resolutionRationale": "Published/candidate behavior comparisons and both final installed artifact matrices pass. Entry ownership, transactional registration/removal, current selection guards and literal text assignment correct reproduced defects while retaining normal callbacks, return values, descriptors and public declarations. Source and shipped bytes match the tested package."
+    },
+    {
+      "id": "BASE-DOM-03",
+      "title": "Reusing selector items after update redefines nonconfigurable properties",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-13"
+      ],
+      "evidence": [
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js",
+        "refactor/changes/2026-09-11-CORE-13-components.md"
+      ],
+      "compatibleResolution": "Keep getter descriptors and rebind only after the previous entry closes.",
+      "closureCriteria": "Published/candidate comparison, final installed UMD and legacy browser matrices, strict types and package verification must pass; original failure evidence remains recorded.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-13-components.md",
+        "refactor/baselines/components-validation.json",
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js"
+      ],
+      "resolutionRationale": "Published/candidate behavior comparisons and both final installed artifact matrices pass. Entry ownership, transactional registration/removal, current selection guards and literal text assignment correct reproduced defects while retaining normal callbacks, return values, descriptors and public declarations. Source and shipped bytes match the tested package."
+    },
+    {
+      "id": "BASE-DOM-04",
+      "title": "A component named __proto__ changes its registry prototype",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-13"
+      ],
+      "evidence": [
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js",
+        "refactor/changes/2026-09-11-CORE-13-components.md"
+      ],
+      "compatibleResolution": "Preserve named DOM access with a normal own property without changing registry prototype.",
+      "closureCriteria": "Published/candidate comparison, final installed UMD and legacy browser matrices, strict types and package verification must pass; original failure evidence remains recorded.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-13-components.md",
+        "refactor/baselines/components-validation.json",
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js"
+      ],
+      "resolutionRationale": "Published/candidate behavior comparisons and both final installed artifact matrices pass. Entry ownership, transactional registration/removal, current selection guards and literal text assignment correct reproduced defects while retaining normal callbacks, return values, descriptors and public declarations. Source and shipped bytes match the tested package."
+    },
+    {
+      "id": "BASE-DOM-05",
+      "title": "Highlight text interpolation permits unintended HTML attributes",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-13"
+      ],
+      "evidence": [
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js",
+        "refactor/changes/2026-09-11-CORE-13-components.md"
+      ],
+      "compatibleResolution": "Assign highlight text through dataset while retaining marker positions and intentional control HTML APIs.",
+      "closureCriteria": "Published/candidate comparison, final installed UMD and legacy browser matrices, strict types and package verification must pass; original failure evidence remains recorded.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-13-components.md",
+        "refactor/baselines/components-validation.json",
+        "test/browser/components.spec.js",
+        "test/component-resources.test.js"
+      ],
+      "resolutionRationale": "Published/candidate behavior comparisons and both final installed artifact matrices pass. Entry ownership, transactional registration/removal, current selection guards and literal text assignment correct reproduced defects while retaining normal callbacks, return values, descriptors and public declarations. Source and shipped bytes match the tested package."
     }
   ]
 }
