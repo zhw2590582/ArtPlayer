@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：PKG-CHAPTER-01 契约完成
+
+源码/发布插件逻辑和元数据对照完成，冻结 chapter 调用、数组变更、DOM/事件和入口，登记待修问题；见 [契约](baselines/chapter-contract.md)。当前 214 项，30 完成、184 待办。ENG-05 提交 7318d338，下一项 PKG-CHAPTER-02 包特有测试与声明修正。生产源码 TS 迁移仍为零。
+
 ## 当前实施：ENG-05 真实浏览器入口完成
 
 Playwright 三浏览器 12 项真实播放/失败/映射测试通过，指定候选 UMD 文件的 Firefox 4 项通过；新增 CI smoke、报告与自生成媒体。见 [ENG-05](changes/2026-09-10-ENG-05-browser-tests.md)。当前 214 项，29 完成、185 待办；生产源码 TS 迁移仍为零。已具备 chapter 试点所需浏览器入口，下一项 PKG-CHAPTER-01，接特有测试和 ENG-07，再迁移插件源码。远端 CI、完整编辑器及真机尚未验收。
