@@ -17,22 +17,23 @@ var artplayerPluginDashControl = (function() {
       const { $video } = art.template;
       const { errorHandle } = art.constructor.utils;
       function updateQuality(dash) {
-        const qualities = dash.getBitrateInfoListFor("video");
+        const qualities = dash.getRepresentationsByType("video");
         if (!qualities || !qualities.length)
           return;
         const config = option.quality || {};
         const auto = config.auto || "Auto";
         const title = config.title || "Quality";
         const getName = config.getName || ((level) => `${level.height}p`);
-        const currentQuality = dash.getQualityFor("video");
+        const currentRepresentation = dash.getCurrentRepresentationForType("video");
+        const currentId = currentRepresentation && currentRepresentation.id;
         const currentAuto = dash.getSettings().streaming.abr.autoSwitchBitrate.video;
-        const defaultHtml = currentAuto ? auto : getName(qualities[currentQuality]);
+        const defaultHtml = !currentAuto && currentRepresentation ? getName(currentRepresentation) : auto;
         const selector = uniqBy(
-          qualities.map((item) => {
+          qualities.map((item, index) => {
             return {
               html: getName(item),
-              value: item.qualityIndex,
-              default: currentQuality === item.qualityIndex && !currentAuto
+              value: index,
+              default: !currentAuto && !!currentId && item.id === currentId
             };
           }),
           "html"
@@ -63,7 +64,7 @@ var artplayerPluginDashControl = (function() {
                 }
               }
             });
-            dash.setQualityFor("video", item.value);
+            dash.setRepresentationForTypeByIndex("video", item.value);
           }
           art.notice.show = `${title}: ${item.html}`;
           if (config.control)
