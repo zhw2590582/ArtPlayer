@@ -28,9 +28,16 @@ call update with chapters appropriate to the new duration; initialization listen
 
 ## Maintenance
 
-The implementation is currently in `src/index.js`, styles in `src/style.less`, and public declarations
+The implementation starts in `src/index.ts`, styles in `src/style.less`, and public declarations
 in `types/artplayer-plugin-chapter.d.ts`. Its migration contracts and known defects are recorded in
 [the chapter contract](../../refactor/baselines/chapter-contract.md).
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for module boundaries, event ordering, cleanup ownership,
+compatibility decisions and the tests to run when changing each responsibility.
+
+Blank chapters and replacement updates clear the hover title. Non-finite time points are rejected
+(an Infinity end is still supported); chapters wait for a positive finite media duration.
+Destroy releases this plugin's listeners and DOM, including when the player keeps its HTML.
+A retained plugin result ignores updates after destruction.
 
 Run `yarn test:browser chapter.spec.js` for published/current plugin behavior on the published core.
 Run `yarn typecheck` and `yarn test:baseline` for strict consumer checks, including optional factory

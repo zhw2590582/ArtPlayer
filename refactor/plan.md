@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 214 项，范围 22 个包及工作区/示例。
 
-状态：todo 182 / doing 0 / blocked 0 / done 32 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 181 / doing 0 / blocked 0 / done 33 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -134,8 +134,8 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-CHAPTER-01 | artplayer-plugin-chapter<br>核对包契约与历史用法 | BASE-05 | chapters 时间区间、update、name 和进度 DOM 清单 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | M | done |
 | PKG-CHAPTER-02 | artplayer-plugin-chapter<br>建立特有行为与错误测试 | PKG-CHAPTER-01, ENG-03, ENG-05 | 区间重叠/空列表/边界 seek、hover 标题和 update 用例 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言；修正 BASE-TYPE-02 的可选参数声明并补正反例 | M | done |
-| PKG-CHAPTER-03 | artplayer-plugin-chapter<br>整理内部职责与资源 | PKG-CHAPTER-02, ENG-07 | 在已有核心上整理时间区间计算、进度 DOM、事件/布局，合理简单代码可保持 | 不依赖新核心方法或大范围设置重构；旧 API/事件和资源通过，必要适配限包内 | M | todo |
-| PKG-CHAPTER-04 | artplayer-plugin-chapter<br>迁移自有源码和公开类型 | PKG-CHAPTER-03, ENG-04, ENG-06 | 基于既有公开核心类型的 Chapters/Option/Result 与 update 推导；JS/TS 工具链试点 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；处理 BASE-TYPE-01/03，保持运行时和新旧 TS 模块解析消费 | M | todo |
+| PKG-CHAPTER-03 | artplayer-plugin-chapter<br>以 TypeScript 拆分内部职责与资源 | PKG-CHAPTER-02, ENG-07 | 以严格 TS 拆分区间计算、进度 DOM、事件生命周期与样式注入；公开声明消费在 04 闭环 | 不依赖新核心方法或大范围设置重构；旧 API/事件和资源通过，必要适配限包内 | M | done |
+| PKG-CHAPTER-04 | artplayer-plugin-chapter<br>迁移自有源码和公开类型 | PKG-CHAPTER-03, ENG-04, ENG-06 | 承接 03 的自有源码 TS 化，完善公开 Chapters/Option/Result 与 update 推导，关闭声明模块解析和旧消费差异 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；处理 BASE-TYPE-01/03，保持运行时和新旧 TS 模块解析消费 | M | todo |
 | PKG-CHAPTER-05 | artplayer-plugin-chapter<br>验证新旧核心和组合 | PKG-CHAPTER-04, CORE-22 | chapter + quality/thumbnail、移动和全屏进度场景 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
 | PKG-CHAPTER-06 | artplayer-plugin-chapter<br>验证分发并同步文档 | PKG-CHAPTER-05, ENG-07 | chapter.js 示例、产物和变更记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
 
@@ -435,3 +435,4 @@
 - ENG-07: [记录](changes/2026-09-10-ENG-07-package-consumers.md) [记录](baselines/package-validation.json)
 - PKG-CHAPTER-01: [记录](changes/2026-09-10-PKG-CHAPTER-01-contract.md) [记录](baselines/chapter-contract.md)
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
+- PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)

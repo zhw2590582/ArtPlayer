@@ -153,3 +153,103 @@ test('published-only observations: blank title, NaN and once-only metadata are h
   expect(await page.locator('.art-chapter').first().evaluate(node => node.dataset.start)).toBe('NaN')
   await testInfo.attach('chapter-known-defects', { body: JSON.stringify({ staleTitle, endAfterSourceChange: 8, acceptsNaN: true }), contentType: 'application/json' })
 })
+
+test('candidate clears titles on blank chapters, zero hover and replacement', async ({ page }) => {
+  await openChapter(page, 'candidate', [{ start: 0, end: 2, title: 'Previous' }, { start: 4, end: 8, title: 'Next' }])
+  const title = page.locator('.art-chapter-title')
+  await hover(page, 0.1)
+  await expect(title).toHaveText('Previous')
+  await hover(page, 0.375)
+  await expect(title).toHaveText('')
+  await expect(title).toHaveCSS('visibility', 'hidden')
+  await hover(page, 0.75)
+  await expect(title).toHaveText('Next')
+  await hover(page, 0)
+  await expect(title).toHaveText('')
+  await hover(page, 0.1)
+  await page.evaluate(() => window.art.plugins.artplayerPluginChapter.update({ chapters: [{ start: 0, end: Infinity, title: 'Replacement' }] }))
+  await expect(title).toHaveText('')
+  await hover(page, 0.5)
+  await expect(title).toHaveText('Replacement')
+  await page.evaluate(() => window.art.plugins.artplayerPluginChapter.update({}))
+  await expect(title).toHaveText('')
+})
+
+test('candidate rejects NaN and can recover after an invalid update', async ({ page }) => {
+  await openChapter(page, 'candidate', [{ start: 0, end: 8, title: 'Valid' }])
+  expect(await page.evaluate(() => {
+    try {
+      window.art.plugins.artplayerPluginChapter.update({ chapters: [{ start: Number.NaN, end: 3, title: 'Invalid' }] })
+    }
+    catch (error) { return error.message }
+  })).toBe('Illegal chapter time point')
+  await expect(page.locator('.art-chapter')).toHaveCount(0)
+  await expect(page.locator('.art-video-player')).not.toHaveClass(/artplayer-plugin-chapter/)
+  await page.evaluate(() => window.art.plugins.artplayerPluginChapter.update({ chapters: [{ start: 0, end: Infinity, title: 'Recovered' }] }))
+  await expect(page.locator('.art-chapter')).toHaveCount(1)
+  await hover(page, 0.5)
+  await expect(page.locator('.art-chapter-title')).toHaveText('Recovered')
+})
+
+test('candidate releases only its listeners and DOM across multiple instances and early destruction', async ({ page }) => {
+  await openChapter(page, 'candidate', [{ start: 0, end: 8, title: 'First' }])
+  expect(await page.evaluate(() => {
+    const art = window.art
+    const plugin = art.plugins.artplayerPluginChapter
+    let observerCalls = 0
+    const observer = () => observerCalls++
+    art.on('setBar', observer)
+    const listenersBefore = art.e.setBar.length
+    const container = document.createElement('div')
+    container.className = 'second-player'
+    document.body.appendChild(container)
+    const other = new window.Artplayer({ container, url: '/test/pattern.mp4', muted: true, plugins: [window.artplayerPluginChapter()] })
+    other.plugins.artplayerPluginChapter.update({ chapters: [] })
+    art.destroy(false)
+    const entry = { start: 0, end: Infinity, title: 'Ignored' }
+    plugin.update({ chapters: [entry] })
+    const listenersAfter = art.e.setBar.length
+    art.emit('setBar', 'loaded', 0.5)
+    const result = {
+      ownDom: art.template.$player.querySelectorAll('.art-chapters, .art-chapter-title').length,
+      classRemoved: !art.template.$player.classList.contains('artplayer-plugin-chapter'),
+      listenersRemoved: listenersBefore - listenersAfter,
+      observerCalls,
+      inputUntouched: entry.end === Infinity,
+      otherDom: container.querySelectorAll('.art-chapters, .art-chapter-title').length,
+      otherAlive: !other.isDestroy,
+    }
+    other.destroy()
+    return result
+  })).toEqual({ ownDom: 0, classRemoved: true, listenersRemoved: 1, observerCalls: 1, inputUntouched: true, otherDom: 2, otherAlive: true })
+  expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)
+  await expect(page.locator('style#artplayer-plugin-chapter')).toHaveCount(1)
+})
+
+test('candidate ignores pending metadata initialization after immediate destroy', async ({ page }) => {
+  await page.goto('/test/player.html?core=published&chapter=candidate')
+  expect(await page.evaluate(() => {
+    const original = window.artplayerPluginChapter
+    let initialize
+    let plugin
+    const chapters = [{ start: 0, end: Infinity, title: 'Pending' }]
+    const art = new window.Artplayer({ container: '.player', url: '/test/pattern.mp4', muted: true, plugins: [(art) => {
+      const count = art.e['video:loadedmetadata']?.length || 0
+      plugin = original({ chapters })(art)
+      initialize = art.e['video:loadedmetadata'][count].fn._
+      return plugin
+    }] })
+    const before = art.e['video:loadedmetadata'].length
+    art.destroy()
+    const after = art.e['video:loadedmetadata']?.length || 0
+    initialize()
+    plugin.update({ chapters })
+    return { removed: before - after, untouched: chapters[0].end === Infinity, children: document.querySelector('.player').childElementCount }
+  })).toEqual({ removed: 1, untouched: true, children: 0 })
+})
+
+test('candidate deduplicates stylesheet injection while the document is loading', async ({ page, baseURL }) => {
+  await page.setContent(`<html><head><script src="${baseURL}/candidate/artplayer-plugin-chapter.js"></script><script src="${baseURL}/candidate/artplayer-plugin-chapter.js"></script></head><body></body></html>`)
+  await expect(page.locator('style#artplayer-plugin-chapter')).toHaveCount(1)
+  expect(await page.locator('style#artplayer-plugin-chapter').textContent()).toContain('.art-chapters')
+})

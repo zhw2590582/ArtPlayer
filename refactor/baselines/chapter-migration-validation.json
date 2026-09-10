@@ -1,0 +1,364 @@
+{
+  "task": "PKG-CHAPTER-03",
+  "capturedAt": "2026-09-10T15:10:43.475Z",
+  "source": {
+    "chapters.ts": "92206f524624ac3a7304677b6a69fda88e62caeca52e1e530d746e51579d3a4d",
+    "index.ts": "83dc022253c0539587590f7a551e090684d1944dcb2010a76e8498a683e7ef36",
+    "progress.ts": "4a18d19ed703772d73622ea3fa9d433dbc2c6092ba244c9bb1ec727368996951",
+    "style.less": "3b5aebcad4c433f09261facab26a881617238ec37e9c0be7a368f3f8e980d66b",
+    "stylesheet.ts": "6ccd88b6d17127acf6f6c1f02a7fbb3a55d59f427d2d92c007bf658122abd51c",
+    "types.ts": "07c528f9753cc54c12211276f28ff01a5f6e8f1ef1451b2b534f2d6cfaa17ee9"
+  },
+  "package": {
+    "name": "artplayer-plugin-chapter",
+    "version": "1.1.0",
+    "archive": "artplayer-plugin-chapter.tgz",
+    "sha256": "2d4fd1331d1bb2eebe8456afce84bcbb9060bf727b38f3bf47a25e4eb4cb623f",
+    "files": {
+      "package/ARCHITECTURE.md": "ed62ae2dbcdc31a2bde2b471738139390efe73edc1c71854f4f65ca1f8120ac5",
+      "package/README.md": "9fa74ae131401f43276baff287916bce7f2374ebf2b696324436e2f20bc0ee6a",
+      "package/dist/artplayer-plugin-chapter.js": "6ac3dfe28f46084ac7caedd571b1a97dcee3cf9d708112f1b8bbd6566e1dc5c5",
+      "package/dist/artplayer-plugin-chapter.legacy.js": "6d9bff885412169e701670961aa00c2e46c4b42c9b9647ff4e6d198777d2a359",
+      "package/dist/artplayer-plugin-chapter.mjs": "26415cecab2c0198c566cef0232e20123413782d5bad7534a32939b3298617af",
+      "package/package.json": "0fd20d82a9ddec642da8b26467b45c6c3e443f188ed75e7de3004e48efd4f766",
+      "package/types/artplayer-plugin-chapter.d.ts": "80338946aea05020abd285daca133fddfc81bd8b800345b2c76548fb93a555a9"
+    }
+  },
+  "runtimeChecks": 23,
+  "knownTypeBlockers": 11,
+  "ciChecks": 61,
+  "browser": {
+    "startTime": "2026-09-10T15:10:44.220Z",
+    "duration": 24021.322,
+    "expected": 54,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "candidate clears titles on blank chapters, zero hover and replacement",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "candidate rejects NaN and can recover after an invalid update",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "candidate ignores pending metadata initialization after immediate destroy",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "candidate deduplicates stylesheet injection while the document is loading",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "candidate clears titles on blank chapters, zero hover and replacement",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "candidate rejects NaN and can recover after an invalid update",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "candidate ignores pending metadata initialization after immediate destroy",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "candidate deduplicates stylesheet injection while the document is loading",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "candidate clears titles on blank chapters, zero hover and replacement",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "candidate rejects NaN and can recover after an invalid update",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "candidate ignores pending metadata initialization after immediate destroy",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "candidate deduplicates stylesheet injection while the document is loading",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "published: real playback, pause, seek, switch and destroy",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "candidate: real playback, pause, seek, switch and destroy",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "controlled HTTP media failure emits a real video error",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "Range, media identity and docs candidate routes",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "status": "passed"
+    },
+    {
+      "title": "published: real playback, pause, seek, switch and destroy",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "candidate: real playback, pause, seek, switch and destroy",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "controlled HTTP media failure emits a real video error",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "Range, media identity and docs candidate routes",
+      "project": "firefox",
+      "browser": "155.0",
+      "status": "passed"
+    },
+    {
+      "title": "published: real playback, pause, seek, switch and destroy",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "candidate: real playback, pause, seek, switch and destroy",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "controlled HTTP media failure emits a real video error",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    },
+    {
+      "title": "Range, media identity and docs candidate routes",
+      "project": "webkit",
+      "browser": "26.6",
+      "status": "passed"
+    }
+  ]
+}

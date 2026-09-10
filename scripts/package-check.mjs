@@ -75,7 +75,8 @@ export async function checkPackages({ release = false } = {}) {
   const output = fs.mkdtempSync(path.join(parent, 'run-'))
   const snapshot = path.join(output, 'build')
   fs.mkdirSync(snapshot)
-  for (const file of ['package.json', 'yarn.lock']) fs.copyFileSync(path.join(workspace, file), path.join(snapshot, file))
+  for (const file of ['package.json', 'yarn.lock', 'tsconfig.json', 'tsconfig.base.json']) fs.copyFileSync(path.join(workspace, file), path.join(snapshot, file))
+  fs.cpSync(path.join(workspace, 'types'), path.join(snapshot, 'types'), { recursive: true })
   fs.cpSync(path.join(workspace, 'scripts'), path.join(snapshot, 'scripts'), { recursive: true })
   fs.symlinkSync(path.join(workspace, 'node_modules'), path.join(snapshot, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir')
   for (const name of names) {

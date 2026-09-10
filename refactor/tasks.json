@@ -1176,7 +1176,7 @@
     {
       "id": "PKG-CHAPTER-03",
       "phase": "5 包迁移：artplayer-plugin-chapter",
-      "title": "整理内部职责与资源",
+      "title": "以 TypeScript 拆分内部职责与资源",
       "scope": [
         "artplayer-plugin-chapter"
       ],
@@ -1184,11 +1184,14 @@
         "PKG-CHAPTER-02",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
-      "deliverable": "在已有核心上整理时间区间计算、进度 DOM、事件/布局，合理简单代码可保持",
+      "deliverable": "以严格 TS 拆分区间计算、进度 DOM、事件生命周期与样式注入；公开声明消费在 04 闭环",
       "acceptance": "不依赖新核心方法或大范围设置重构；旧 API/事件和资源通过，必要适配限包内",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md",
+        "baselines/chapter-migration-validation.json"
+      ]
     },
     {
       "id": "PKG-CHAPTER-04",
@@ -1204,7 +1207,7 @@
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "基于既有公开核心类型的 Chapters/Option/Result 与 update 推导；JS/TS 工具链试点",
+      "deliverable": "承接 03 的自有源码 TS 化，完善公开 Chapters/Option/Result 与 update 推导，关闭声明模块解析和旧消费差异",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；处理 BASE-TYPE-01/03，保持运行时和新旧 TS 模块解析消费",
       "evidence": []
     },
