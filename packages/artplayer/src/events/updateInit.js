@@ -1,6 +1,10 @@
+import { getScope } from '../lifecycle/instance'
+import { animationFrame } from '../lifecycle/resources'
+
 export default function updateInit(art) {
   if (art.constructor.USE_RAF) {
-    let timer = null;
+    const scope = getScope(art)
+    let cancel = () => {};
 
     (function update() {
       if (art.playing) {
@@ -8,12 +12,12 @@ export default function updateInit(art) {
       }
 
       if (!art.isDestroy) {
-        timer = requestAnimationFrame(update)
+        cancel = animationFrame(scope, update)
       }
     })()
 
     art.on('destroy', () => {
-      cancelAnimationFrame(timer)
+      cancel()
     })
   }
 }

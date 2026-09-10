@@ -1,3 +1,5 @@
+import { getScope } from '../lifecycle/instance'
+import { wait } from '../lifecycle/resources'
 import {
   addClass,
   append,
@@ -9,7 +11,6 @@ import {
   inverseClass,
   isMobile,
   removeClass,
-  sleep,
 } from '../utils'
 import Component from '../utils/component'
 import airplay from './airplay'
@@ -127,7 +128,9 @@ export default class Control extends Component {
     }
 
     if (option.quality.length) {
-      sleep().then(() => {
+      wait(getScope(this.art)).then((active) => {
+        if (!active || getScope(this.art).closed)
+          return
         this.art.quality = option.quality
       })
     }

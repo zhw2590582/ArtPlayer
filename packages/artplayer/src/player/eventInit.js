@@ -1,5 +1,7 @@
 import config from '../config'
-import { addClass, isMobile, setStyle, silencePromise, sleep } from '../utils'
+import { getScope } from '../lifecycle/instance'
+import { wait } from '../lifecycle/resources'
+import { addClass, isMobile, setStyle, silencePromise } from '../utils'
 
 export default function eventInit(art) {
   const {
@@ -63,7 +65,8 @@ export default function eventInit(art) {
 
   art.on('video:error', async (error) => {
     if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
-      await sleep(constructor.RECONNECT_SLEEP_TIME)
+      if (!await wait(getScope(art), constructor.RECONNECT_SLEEP_TIME) || getScope(art).closed)
+        return
       reconnectTime += 1
       art.url = option.url
       notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`
@@ -74,7 +77,8 @@ export default function eventInit(art) {
       art.loading.show = false
       art.controls.show = true
       addClass($player, 'art-error')
-      await sleep(constructor.RECONNECT_SLEEP_TIME)
+      if (!await wait(getScope(art), constructor.RECONNECT_SLEEP_TIME) || getScope(art).closed)
+        return
       notice.show = i18n.get('Video Load Failed')
     }
   })

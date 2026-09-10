@@ -1,4 +1,5 @@
-import { debounce } from '../utils'
+import { getScope } from '../lifecycle/instance'
+import { timeout } from '../lifecycle/resources'
 
 export default function resizeInit(art, events) {
   const { option, constructor } = art
@@ -12,7 +13,12 @@ export default function resizeInit(art, events) {
     notice.show = ''
   })
 
-  const resizeFn = debounce(() => art.emit('resize'), constructor.RESIZE_TIME)
+  const scope = getScope(art)
+  let cancel = () => {}
+  const resizeFn = () => {
+    cancel()
+    cancel = timeout(scope, () => art.emit('resize'), constructor.RESIZE_TIME)
+  }
 
   art.on('window:orientationchange', () => resizeFn())
   art.on('window:resize', () => resizeFn())

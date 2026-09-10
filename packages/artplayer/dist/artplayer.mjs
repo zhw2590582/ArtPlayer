@@ -583,14 +583,14 @@ function sleep(ms = 0) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 function debounce(func, duration) {
-  let timeout;
+  let timeout2;
   return function(...args) {
     const effect = () => {
-      timeout = void 0;
+      timeout2 = void 0;
       return func.apply(this, args);
     };
-    clearTimeout(timeout);
-    timeout = setTimeout(effect, duration);
+    clearTimeout(timeout2);
+    timeout2 = setTimeout(effect, duration);
   };
 }
 function throttle(func, duration) {
@@ -1089,6 +1089,191 @@ class Contextmenu extends Component {
     });
   }
 }
+class ResourceCleanupError extends Error {
+  constructor(errors) {
+    super("Failed to release ArtPlayer resources");
+    this.errors = errors;
+    this.name = "ResourceCleanupError";
+  }
+}
+class ResourceScope {
+  constructor() {
+    this.cleanups = /* @__PURE__ */ new Set();
+    this.disposed = false;
+  }
+  get closed() {
+    return this.disposed;
+  }
+  add(cleanup) {
+    let active = true;
+    const release = () => {
+      if (!active)
+        return;
+      active = false;
+      this.cleanups.delete(release);
+      cleanup();
+    };
+    if (this.closed)
+      release();
+    else
+      this.cleanups.add(release);
+    return release;
+  }
+  child() {
+    const child = new ResourceScope();
+    const release = this.add(() => {
+      child.dispose();
+    });
+    child.add(() => {
+      release();
+    });
+    return child;
+  }
+  dispose() {
+    if (this.closed)
+      return;
+    this.disposed = true;
+    const errors = [];
+    for (const release of Array.from(this.cleanups).reverse()) {
+      try {
+        release();
+      } catch (error2) {
+        if (error2 instanceof ResourceCleanupError)
+          errors.push(...error2.errors);
+        else
+          errors.push(error2);
+      }
+    }
+    if (errors.length)
+      throw new ResourceCleanupError(errors);
+  }
+}
+const states = /* @__PURE__ */ new WeakMap();
+const containers = /* @__PURE__ */ new WeakMap();
+function beginLifecycle(owner) {
+  states.set(owner, { scope: new ResourceScope(), destroying: false });
+}
+function stateOf(owner) {
+  const state2 = states.get(owner);
+  if (!state2)
+    throw new Error("ArtPlayer lifecycle has not been initialized");
+  return state2;
+}
+function getScope(owner) {
+  return stateOf(owner).scope;
+}
+function ownContainer(owner, container, rollback) {
+  const current = containers.get(container);
+  if (current && current !== owner)
+    throw new Error("Cannot mount multiple instances on the same dom element");
+  const state2 = stateOf(owner);
+  state2.rollback = rollback;
+  containers.set(container, owner);
+  state2.releaseContainer = () => {
+    if (containers.get(container) === owner)
+      containers.delete(container);
+  };
+}
+function finishLifecycle(owner) {
+  const state2 = stateOf(owner);
+  state2.rollback = void 0;
+  return !state2.scope.closed;
+}
+function destroyInstance(owner, instances2, removeHtml, removeSource, failed = false) {
+  const state2 = stateOf(owner);
+  if (state2.destroying || state2.scope.closed)
+    return;
+  state2.destroying = true;
+  const errors = [];
+  const attempt = (cleanup) => {
+    try {
+      cleanup();
+    } catch (error2) {
+      errors.push(...error2 instanceof ResourceCleanupError ? error2.errors : [error2]);
+    }
+  };
+  if (removeSource && owner.template?.$video)
+    attempt(() => owner.reset());
+  attempt(() => state2.scope.dispose());
+  attempt(() => owner.template?.destroy(removeHtml));
+  const index = instances2.indexOf(owner);
+  if (index !== -1)
+    instances2.splice(index, 1);
+  owner.isDestroy = true;
+  if (!failed) {
+    state2.releaseContainer?.();
+    state2.releaseContainer = void 0;
+  }
+  attempt(() => owner.emit("destroy"));
+  if (failed && state2.rollback)
+    attempt(state2.rollback);
+  state2.rollback = void 0;
+  state2.releaseContainer?.();
+  state2.releaseContainer = void 0;
+  for (const error2 of errors.slice(1))
+    console.warn("Additional ArtPlayer cleanup failure:", error2);
+  if (errors.length)
+    throw errors[0];
+}
+function timeout(scope, callback, delay) {
+  if (scope.closed)
+    return () => {
+    };
+  let pending = true;
+  let release = () => {
+  };
+  const timer = setTimeout(() => {
+    if (!pending)
+      return;
+    release();
+    if (!scope.closed)
+      callback();
+  }, delay);
+  release = scope.add(() => {
+    pending = false;
+    clearTimeout(timer);
+  });
+  return release;
+}
+function animationFrame(scope, callback) {
+  if (scope.closed)
+    return () => {
+    };
+  let pending = true;
+  let release = () => {
+  };
+  const frame = requestAnimationFrame((time2) => {
+    if (!pending)
+      return;
+    release();
+    if (!scope.closed)
+      callback(time2);
+  });
+  release = scope.add(() => {
+    pending = false;
+    cancelAnimationFrame(frame);
+  });
+  return release;
+}
+function wait(scope, delay = 0) {
+  if (scope.closed)
+    return Promise.resolve(false);
+  return new Promise((resolve) => {
+    let completed = false;
+    let release = () => {
+    };
+    const timer = setTimeout(() => {
+      completed = true;
+      release();
+      resolve(true);
+    }, delay);
+    release = scope.add(() => {
+      clearTimeout(timer);
+      if (!completed)
+        resolve(false);
+    });
+  });
+}
 function airplay$1(option) {
   return (art) => ({
     ...option,
@@ -1576,7 +1761,9 @@ class Control extends Component {
       );
     }
     if (option.quality.length) {
-      sleep().then(() => {
+      wait(getScope(this.art)).then((active) => {
+        if (!active || getScope(this.art).closed)
+          return;
         this.art.quality = option.quality;
       });
     }
@@ -1927,7 +2114,13 @@ function resizeInit(art, events) {
     art.aspectRatio = aspectRatio2;
     notice.show = "";
   });
-  const resizeFn = debounce(() => art.emit("resize"), constructor.RESIZE_TIME);
+  const scope = getScope(art);
+  let cancel = () => {
+  };
+  const resizeFn = () => {
+    cancel();
+    cancel = timeout(scope, () => art.emit("resize"), constructor.RESIZE_TIME);
+  };
   art.on("window:orientationchange", () => resizeFn());
   art.on("window:resize", () => resizeFn());
   if (screen && screen.orientation && screen.orientation.onchange) {
@@ -1936,17 +2129,19 @@ function resizeInit(art, events) {
 }
 function updateInit(art) {
   if (art.constructor.USE_RAF) {
-    let timer = null;
+    const scope = getScope(art);
+    let cancel = () => {
+    };
     (function update() {
       if (art.playing) {
         art.emit("raf");
       }
       if (!art.isDestroy) {
-        timer = requestAnimationFrame(update);
+        cancel = animationFrame(scope, update);
       }
     })();
     art.on("destroy", () => {
-      cancelAnimationFrame(timer);
+      cancel();
     });
   }
 }
@@ -1966,9 +2161,13 @@ function viewInit(art) {
     }
   });
 }
+const scopes = /* @__PURE__ */ new WeakMap();
 class Events {
   constructor(art) {
     this.destroyEvents = /* @__PURE__ */ new Set();
+    const scope = getScope(art);
+    scopes.set(this, scope);
+    scope.add(() => this.destroy());
     this.proxy = this.proxy.bind(this);
     this.hover = this.hover.bind(this);
     clickInit(art, this);
@@ -1984,6 +2183,9 @@ class Events {
     if (Array.isArray(name)) {
       return name.map((item) => this.proxy(target, item, callback, option));
     }
+    if (scopes.get(this).closed)
+      return () => {
+      };
     target.addEventListener(name, callback, option);
     const destroy = () => target.removeEventListener(name, callback, option);
     this.destroyEvents.add(destroy);
@@ -2237,9 +2439,11 @@ class Info extends Component {
     proxy($infoClose, "click", () => {
       this.show = false;
     });
-    let timer = null;
+    let cancel = () => {
+    };
     const $types = queryAll("[data-video]", $infoPanel) || [];
-    this.art.on("destroy", () => clearTimeout(timer));
+    this.art.on("destroy", () => cancel());
+    const scope = getScope(this.art);
     function loop() {
       for (let index = 0; index < $types.length; index++) {
         const item = $types[index];
@@ -2249,7 +2453,7 @@ class Info extends Component {
           item.textContent = textContent;
         }
       }
-      timer = setTimeout(loop, constructor.INFO_LOOP_TIME);
+      cancel = timeout(scope, loop, constructor.INFO_LOOP_TIME);
     }
     loop();
   }
@@ -2294,6 +2498,7 @@ class Notice {
   constructor(art) {
     this.art = art;
     this.timer = null;
+    getScope(art).add(() => this.destroy());
     art.on("destroy", () => this.destroy());
   }
   destroy() {
@@ -2303,6 +2508,8 @@ class Notice {
     }
   }
   set show(msg) {
+    if (getScope(this.art).closed)
+      return;
     const {
       constructor,
       template: { $player, $noticeInner }
@@ -2521,7 +2728,8 @@ function eventInit(art) {
   });
   art.on("video:error", async (error2) => {
     if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
-      await sleep(constructor.RECONNECT_SLEEP_TIME);
+      if (!await wait(getScope(art), constructor.RECONNECT_SLEEP_TIME) || getScope(art).closed)
+        return;
       reconnectTime += 1;
       art.url = option.url;
       notice.show = `${i18n.get("Reconnect")}: ${reconnectTime}`;
@@ -2531,7 +2739,8 @@ function eventInit(art) {
       art.loading.show = false;
       art.controls.show = true;
       addClass($player, "art-error");
-      await sleep(constructor.RECONNECT_SLEEP_TIME);
+      if (!await wait(getScope(art), constructor.RECONNECT_SLEEP_TIME) || getScope(art).closed)
+        return;
       notice.show = i18n.get("Video Load Failed");
     }
   });
@@ -3288,12 +3497,12 @@ function seekMix(art) {
   });
 }
 function stateMix(art) {
-  const states = ["mini", "pip", "fullscreen", "fullscreenWeb"];
+  const states2 = ["mini", "pip", "fullscreen", "fullscreenWeb"];
   def(art, "state", {
-    get: () => states.find((name) => art[name]) || "standard",
+    get: () => states2.find((name) => art[name]) || "standard",
     set(name) {
-      for (let index = 0; index < states.length; index++) {
-        const prop = states[index];
+      for (let index = 0; index < states2.length; index++) {
+        const prop = states2[index];
         if (prop !== name && art[prop]) {
           art[prop] = false;
         }
@@ -3490,7 +3699,8 @@ function urlMix(art) {
         const typeName = option.type || getExt(newUrl);
         const typeCallback = option.customType[typeName];
         if (typeName && typeCallback) {
-          await sleep();
+          if (!await wait(getScope(art)) || getScope(art).closed)
+            return;
           art.loading.show = true;
           typeCallback.call(art, $video, newUrl, art);
         } else {
@@ -3506,7 +3716,8 @@ function urlMix(art) {
           }
         }
       } else {
-        await sleep();
+        if (!await wait(getScope(art)) || getScope(art).closed)
+          return;
         art.loading.show = true;
       }
     }
@@ -4438,7 +4649,7 @@ class Setting extends Component {
       append($panel, $item);
     }
     if (item.mounted) {
-      setTimeout(() => item.mounted.call(this.art, item.$item, item), 0);
+      timeout(getScope(this.art), () => item.mounted.call(this.art, item.$item, item), 0);
     }
   }
   render(option = this.option) {
@@ -4642,6 +4853,37 @@ class Subtitle extends Component {
     });
   }
 }
+function captureTemplate(container) {
+  const snapshots = [];
+  function capture(node) {
+    const children = Array.from(node.childNodes);
+    snapshots.push({
+      node,
+      children,
+      attributes: node.nodeType === 1 ? Array.from(node.attributes, (attr) => [attr.name, attr.value]) : void 0,
+      value: node.nodeValue
+    });
+    children.forEach(capture);
+  }
+  capture(container);
+  return () => {
+    for (const { node, children, attributes, value } of snapshots) {
+      while (node.firstChild)
+        node.removeChild(node.firstChild);
+      for (const child of children)
+        node.appendChild(child);
+      if (attributes) {
+        const element = node;
+        for (const attr of Array.from(element.attributes))
+          element.removeAttribute(attr.name);
+        for (const [name, content] of attributes)
+          element.setAttribute(name, content);
+      } else {
+        node.nodeValue = value;
+      }
+    }
+  };
+}
 class Template {
   constructor(art) {
     this.art = art;
@@ -4660,6 +4902,7 @@ class Template {
       "Cannot mount multiple instances on the same dom element"
     );
     this.query = this.query.bind(this);
+    ownContainer(art, this.$container, captureTemplate(this.$container));
     this.$container.dataset.artId = art.id;
     this.init();
   }
@@ -4851,34 +5094,47 @@ class Artplayer extends Emitter {
     this.isInput = false;
     this.isRotate = false;
     this.isDestroy = false;
-    this.template = new Template(this);
-    this.events = new Events(this);
-    this.storage = new Storage(this);
-    this.icons = new Icons(this);
-    this.i18n = new I18n(this);
-    this.notice = new Notice(this);
-    this.player = new Player(this);
-    this.layers = new Layer(this);
-    this.controls = new Control(this);
-    this.contextmenu = new Contextmenu(this);
-    this.subtitle = new Subtitle(this);
-    this.info = new Info(this);
-    this.loading = new Loading(this);
-    this.hotkey = new Hotkey(this);
-    this.mask = new Mask(this);
-    this.setting = new Setting(this);
-    this.plugins = new Plugins(this);
-    if (typeof readyCallback === "function") {
-      this.on("ready", () => readyCallback.call(this, this));
-    }
-    if (Artplayer.DEBUG) {
-      const log = (msg) => console.log(`[ART.${this.id}] -> ${msg}`);
-      log(`Version@${Artplayer.version}`);
-      for (let index = 0; index < config$1.events.length; index++) {
-        this.on(`video:${config$1.events[index]}`, (event) => log(`Event@${event.type}`));
+    beginLifecycle(this);
+    try {
+      this.template = new Template(this);
+      this.events = new Events(this);
+      this.storage = new Storage(this);
+      this.icons = new Icons(this);
+      this.i18n = new I18n(this);
+      this.notice = new Notice(this);
+      this.player = new Player(this);
+      this.layers = new Layer(this);
+      this.controls = new Control(this);
+      this.contextmenu = new Contextmenu(this);
+      this.subtitle = new Subtitle(this);
+      this.info = new Info(this);
+      this.loading = new Loading(this);
+      this.hotkey = new Hotkey(this);
+      this.mask = new Mask(this);
+      this.setting = new Setting(this);
+      this.plugins = new Plugins(this);
+      if (getScope(this).closed)
+        return;
+      if (typeof readyCallback === "function") {
+        this.on("ready", () => readyCallback.call(this, this));
       }
+      if (Artplayer.DEBUG) {
+        const log = (msg) => console.log(`[ART.${this.id}] -> ${msg}`);
+        log(`Version@${Artplayer.version}`);
+        for (let index = 0; index < config$1.events.length; index++) {
+          this.on(`video:${config$1.events[index]}`, (event) => log(`Event@${event.type}`));
+        }
+      }
+      if (finishLifecycle(this))
+        instances.push(this);
+    } catch (error2) {
+      try {
+        destroyInstance(this, instances, true, Artplayer.REMOVE_SRC_WHEN_DESTROY, true);
+      } catch (cleanupError) {
+        console.warn("Failed to clean up ArtPlayer initialization:", cleanupError);
+      }
+      throw error2;
     }
-    instances.push(this);
   }
   static get instances() {
     return instances;
@@ -4993,14 +5249,7 @@ class Artplayer extends Emitter {
     this.video.load();
   }
   destroy(removeHtml = true) {
-    if (Artplayer.REMOVE_SRC_WHEN_DESTROY) {
-      this.reset();
-    }
-    this.events.destroy();
-    this.template.destroy(removeHtml);
-    instances.splice(instances.indexOf(this), 1);
-    this.isDestroy = true;
-    this.emit("destroy");
+    destroyInstance(this, instances, removeHtml, Artplayer.REMOVE_SRC_WHEN_DESTROY);
   }
 }
 Artplayer.STYLE = style;

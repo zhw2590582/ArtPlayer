@@ -8,8 +8,8 @@
 | BASE-LIFE-01 | open / 已复现 | Superseded switch resolves along with the latest source | CORE-09 |
 | BASE-LIFE-02 | open / 已复现 | Switch remains unsettled during the bounded observation after destroy | CORE-09 |
 | BASE-LIFE-03 | open / 已复现 | Async plugin registers its result after destroy | CORE-08 |
-| BASE-LIFE-04 | open / 已复现 | Destroying an instance twice unregisters a different live instance | CORE-04 |
-| BASE-LIFE-05 | open / 已复现 | Failed constructor leaves initialized markup/listeners until explicit probe cleanup | CORE-04 |
+| BASE-LIFE-04 | resolved / 已复现 | Destroying an instance twice unregisters a different live instance | CORE-04 |
+| BASE-LIFE-05 | resolved / 已复现 | Failed constructor leaves initialized markup/listeners until explicit probe cleanup | CORE-04 |
 | BASE-DOM-01 | open / 已复现 | 控件 Tab 不可达 | CORE-23, CORE-17 |
 | BASE-DOM-02 | open / 已复现 | 窄容器中控件裁切 | CORE-13, CORE-14 |
 | BASE-DEMO-01 | open / 源码/产物事实 | 旧 thumbnail 插件示例不对应当前 workspace 包 | SITE-01, EX-03 |
@@ -18,7 +18,7 @@
 | BASE-TYPE-03 | resolved / 已复现 | chapter legacy 缺旧模块解析的声明回退 | ENG-04, PKG-CHAPTER-04 |
 | BASE-TYPE-04 | open / 源码/产物事实 | plugins.add / toggle 的旧声明返回值与运行时不同 | CORE-07 |
 | BASE-DIST-01 | open / 源码/产物事实 | thumbnail tool 分发入口与类型文件缺失 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-04 |
-| BASE-PERF-01 | open / 已复现 | 销毁后的 resize 防抖重新创建 notice timer | CORE-17, CORE-04, CORE-18 |
+| BASE-PERF-01 | resolved / 已复现 | 销毁后的 resize 防抖重新创建 notice timer | CORE-17, CORE-04, CORE-18 |
 | BASE-SOURCE-01 | open / 源码/产物事实 | 工作区 5.4.1 与采集时真实发布 5.4.0 不同 | BASE-08, REL-01 |
 | BASE-SOURCE-02 | open / 源码/产物事实 | registry gitHead 与发布包版本对应不可靠 | ENG-07, REL-01 |
 | BASE-SITE-01 | open / 源码/产物事实 | 文档站实际为静态站点但 manifest 未设 private | SITE-01, REL-01 |

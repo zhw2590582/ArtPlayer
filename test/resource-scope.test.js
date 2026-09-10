@@ -4,10 +4,10 @@ import { test } from 'node:test'
 import { loadModules } from './helpers/load.js'
 
 const source = 'packages/artplayer/src/lifecycle/'
-const { ResourceScope, ResourceCleanupError, timeout, animationFrame, listen, requestController, objectURL, Emitter } = await loadModules({
+const { ResourceScope, ResourceCleanupError, timeout, animationFrame, listen, requestController, objectURL, wait, Emitter } = await loadModules({
   ResourceScope: `${source}scope`,
   ResourceCleanupError: { file: `${source}scope`, name: 'ResourceCleanupError' },
-  ...Object.fromEntries(['timeout', 'animationFrame', 'listen', 'requestController', 'objectURL'].map(name => [name, { file: `${source}resources`, name }])),
+  ...Object.fromEntries(['timeout', 'animationFrame', 'listen', 'requestController', 'objectURL', 'wait'].map(name => [name, { file: `${source}resources`, name }])),
   Emitter: 'packages/artplayer/src/utils/emitter',
 })
 
@@ -193,4 +193,17 @@ test('request controller capability absence does not prevent synchronous cleanup
   const scope = new ResourceScope()
   assert.equal(requestController(scope), undefined)
   scope.dispose()
+})
+
+test('owned waits resolve on cancellation and preserve normal timer-to-microtask completion', async (context) => {
+  context.mock.timers.enable({ apis: ['setTimeout'] })
+  const scope = new ResourceScope()
+  const completed = wait(scope, 5)
+  const cancelled = wait(scope, 10)
+  context.mock.timers.tick(5)
+  assert.equal(await completed, true)
+  scope.dispose()
+  assert.equal(await cancelled, false)
+  assert.equal(await wait(scope), false)
+  context.mock.timers.tick(20)
 })

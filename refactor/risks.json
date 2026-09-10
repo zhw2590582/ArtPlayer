@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-10T16:03:52.413Z",
+  "updatedAt": "2026-09-11",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -71,7 +71,7 @@
       "id": "BASE-LIFE-04",
       "title": "Destroying an instance twice unregisters a different live instance",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-04"
       ],
@@ -80,13 +80,20 @@
         "refactor/baselines/lifecycle-coverage.md"
       ],
       "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
-      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-04-instance-lifecycle.md",
+        "refactor/baselines/instance-lifecycle-validation.json",
+        "test/browser/lifecycle.spec.js",
+        "test/instance-lifecycle.test.js"
+      ],
+      "resolutionRationale": "内部防重入与 index >= 0 检查保留其他实例；正常 destroy 回调可挂载替代实例，旧实例重复销毁不移除其 DOM。UMD 与 legacy 三浏览器通过。"
     },
     {
       "id": "BASE-LIFE-05",
       "title": "Failed constructor leaves initialized markup/listeners until explicit probe cleanup",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-04"
       ],
@@ -95,7 +102,14 @@
         "refactor/baselines/lifecycle-coverage.md"
       ],
       "compatibleResolution": "按对应 CORE 任务修复，保持合法旧调用；异步取消需明确结算策略，不把 pending 或重复销毁当正常兼容要求。",
-      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。"
+      "closureCriteria": "候选正向回归和旧新差异记录通过；有界观察问题不得仅靠延长等待隐藏。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-04-instance-lifecycle.md",
+        "refactor/baselines/instance-lifecycle-validation.json",
+        "test/browser/lifecycle.spec.js",
+        "test/instance-lifecycle.test.js"
+      ],
+      "resolutionRationale": "失败构造释放已初始化的监听/已接入定时器并恢复原 DOM/SSR 节点；proxy、插件及 Events 半初始化失败和清理同时抛错均有真实浏览器回归。未迁移的字幕/SDK 等资源仍由对应任务验收。"
     },
     {
       "id": "BASE-DOM-01",
@@ -251,7 +265,7 @@
       "id": "BASE-PERF-01",
       "title": "销毁后的 resize 防抖重新创建 notice timer",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-17",
         "CORE-04",
@@ -261,7 +275,14 @@
         "refactor/baselines/performance.json"
       ],
       "compatibleResolution": "为 debounce/晚到 UI 工作建立销毁归属；不靠等待自然过期掩盖。",
-      "closureCriteria": "正常 resize 保持，destroy 后无该回调及新 notice timer。"
+      "closureCriteria": "正常 resize 保持，destroy 后无该回调及新 notice timer。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-04-instance-lifecycle.md",
+        "refactor/baselines/instance-lifecycle-validation.json",
+        "test/browser/lifecycle.spec.js",
+        "test/instance-lifecycle.test.js"
+      ],
+      "resolutionRationale": "resize timeout 由实例 scope 取消，正常 burst 合并保持；销毁后该 resize 不再执行，Notice timer 为 null，已排队 UI 工作不再重建提示。"
     },
     {
       "id": "BASE-SOURCE-01",

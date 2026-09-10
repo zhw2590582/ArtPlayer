@@ -1,4 +1,6 @@
 import { version } from '../package.json'
+import { ownContainer } from './lifecycle/instance'
+import captureTemplate from './lifecycle/template-rollback'
 import { addClass, errorHandle, isMobile, query, replaceElement, supportsFlex } from './utils'
 
 export default class Template {
@@ -25,6 +27,7 @@ export default class Template {
     )
 
     this.query = this.query.bind(this)
+    ownContainer(art, this.$container, captureTemplate(this.$container))
     this.$container.dataset.artId = art.id
     this.init()
   }

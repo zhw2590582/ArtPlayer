@@ -1,9 +1,11 @@
+import { getScope } from './lifecycle/instance'
 import { addClass, removeClass } from './utils'
 
 export default class Notice {
   constructor(art) {
     this.art = art
     this.timer = null
+    getScope(art).add(() => this.destroy())
 
     art.on('destroy', () => this.destroy())
   }
@@ -16,6 +18,8 @@ export default class Notice {
   }
 
   set show(msg) {
+    if (getScope(this.art).closed)
+      return
     const {
       constructor,
       template: { $player, $noticeInner },

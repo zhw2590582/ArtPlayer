@@ -9,6 +9,7 @@ import I18n from './i18n'
 import Icons from './icons'
 import Info from './info'
 import Layer from './layer'
+import { beginLifecycle, destroyInstance, finishLifecycle, getScope } from './lifecycle/instance'
 import Loading from './loading'
 import Mask from './mask'
 import Notice from './notice'
@@ -47,38 +48,54 @@ export default class Artplayer extends Emitter {
     this.isRotate = false
     this.isDestroy = false
 
-    this.template = new Template(this)
-    this.events = new Events(this)
-    this.storage = new Storage(this)
-    this.icons = new Icons(this)
-    this.i18n = new I18n(this)
-    this.notice = new Notice(this)
-    this.player = new Player(this)
-    this.layers = new Layer(this)
-    this.controls = new Control(this)
-    this.contextmenu = new Contextmenu(this)
-    this.subtitle = new Subtitle(this)
-    this.info = new Info(this)
-    this.loading = new Loading(this)
-    this.hotkey = new Hotkey(this)
-    this.mask = new Mask(this)
-    this.setting = new Setting(this)
-    this.plugins = new Plugins(this)
+    beginLifecycle(this)
+    try {
+      this.template = new Template(this)
+      this.events = new Events(this)
+      this.storage = new Storage(this)
+      this.icons = new Icons(this)
+      this.i18n = new I18n(this)
+      this.notice = new Notice(this)
+      this.player = new Player(this)
+      this.layers = new Layer(this)
+      this.controls = new Control(this)
+      this.contextmenu = new Contextmenu(this)
+      this.subtitle = new Subtitle(this)
+      this.info = new Info(this)
+      this.loading = new Loading(this)
+      this.hotkey = new Hotkey(this)
+      this.mask = new Mask(this)
+      this.setting = new Setting(this)
+      this.plugins = new Plugins(this)
 
-    if (typeof readyCallback === 'function') {
-      this.on('ready', () => readyCallback.call(this, this))
-    }
+      if (getScope(this).closed)
+        return
 
-    if (Artplayer.DEBUG) {
-      // eslint-disable-next-line no-console
-      const log = msg => console.log(`[ART.${this.id}] -> ${msg}`)
-      log(`Version@${Artplayer.version}`)
-      for (let index = 0; index < config.events.length; index++) {
-        this.on(`video:${config.events[index]}`, event => log(`Event@${event.type}`))
+      if (typeof readyCallback === 'function') {
+        this.on('ready', () => readyCallback.call(this, this))
       }
-    }
 
-    instances.push(this)
+      if (Artplayer.DEBUG) {
+      // eslint-disable-next-line no-console
+        const log = msg => console.log(`[ART.${this.id}] -> ${msg}`)
+        log(`Version@${Artplayer.version}`)
+        for (let index = 0; index < config.events.length; index++) {
+          this.on(`video:${config.events[index]}`, event => log(`Event@${event.type}`))
+        }
+      }
+
+      if (finishLifecycle(this))
+        instances.push(this)
+    }
+    catch (error) {
+      try {
+        destroyInstance(this, instances, true, Artplayer.REMOVE_SRC_WHEN_DESTROY, true)
+      }
+      catch (cleanupError) {
+        console.warn('Failed to clean up ArtPlayer initialization:', cleanupError)
+      }
+      throw error
+    }
   }
 
   static get instances() {
@@ -208,14 +225,7 @@ export default class Artplayer extends Emitter {
   }
 
   destroy(removeHtml = true) {
-    if (Artplayer.REMOVE_SRC_WHEN_DESTROY) {
-      this.reset()
-    }
-    this.events.destroy()
-    this.template.destroy(removeHtml)
-    instances.splice(instances.indexOf(this), 1)
-    this.isDestroy = true
-    this.emit('destroy')
+    destroyInstance(this, instances, removeHtml, Artplayer.REMOVE_SRC_WHEN_DESTROY)
   }
 }
 

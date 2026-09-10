@@ -1,3 +1,5 @@
+import { getScope } from '../lifecycle/instance'
+import { timeout } from '../lifecycle/resources'
 import {
   addClass,
   append,
@@ -526,7 +528,7 @@ export default class Setting extends Component {
     }
 
     if (item.mounted) {
-      setTimeout(() => item.mounted.call(this.art, item.$item, item), 0)
+      timeout(getScope(this.art), () => item.mounted.call(this.art, item.$item, item), 0)
     }
   }
 

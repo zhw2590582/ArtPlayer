@@ -1,3 +1,5 @@
+import { getScope } from './lifecycle/instance'
+import { timeout } from './lifecycle/resources'
 import { isMobile, queryAll } from './utils'
 import Component from './utils/component'
 
@@ -22,9 +24,10 @@ export default class Info extends Component {
       this.show = false
     })
 
-    let timer = null
+    let cancel = () => {}
     const $types = queryAll('[data-video]', $infoPanel) || []
-    this.art.on('destroy', () => clearTimeout(timer))
+    this.art.on('destroy', () => cancel())
+    const scope = getScope(this.art)
 
     function loop() {
       for (let index = 0; index < $types.length; index++) {
@@ -35,7 +38,7 @@ export default class Info extends Component {
           item.textContent = textContent
         }
       }
-      timer = setTimeout(loop, constructor.INFO_LOOP_TIME)
+      cancel = timeout(scope, loop, constructor.INFO_LOOP_TIME)
     }
 
     loop()

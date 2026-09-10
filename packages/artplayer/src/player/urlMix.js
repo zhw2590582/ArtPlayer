@@ -1,4 +1,6 @@
-import { def, getExt, sleep } from '../utils'
+import { getScope } from '../lifecycle/instance'
+import { wait } from '../lifecycle/resources'
+import { def, getExt } from '../utils'
 
 export default function urlMix(art) {
   const {
@@ -17,7 +19,8 @@ export default function urlMix(art) {
         const typeCallback = option.customType[typeName]
 
         if (typeName && typeCallback) {
-          await sleep()
+          if (!await wait(getScope(art)) || getScope(art).closed)
+            return
           art.loading.show = true
           typeCallback.call(art, $video, newUrl, art)
         }
@@ -36,7 +39,8 @@ export default function urlMix(art) {
         }
       }
       else {
-        await sleep()
+        if (!await wait(getScope(art)) || getScope(art).closed)
+          return
         art.loading.show = true
       }
     },

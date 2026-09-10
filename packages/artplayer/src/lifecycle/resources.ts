@@ -83,3 +83,22 @@ export function objectURL(scope: ResourceScope, blob: Blob): string {
   })
   return url
 }
+
+export function wait(scope: ResourceScope, delay = 0): Promise<boolean> {
+  if (scope.closed)
+    return Promise.resolve(false)
+  return new Promise((resolve) => {
+    let completed = false
+    let release = () => {}
+    const timer = setTimeout(() => {
+      completed = true
+      release()
+      resolve(true)
+    }, delay)
+    release = scope.add(() => {
+      clearTimeout(timer)
+      if (!completed)
+        resolve(false)
+    })
+  })
+}

@@ -55,9 +55,9 @@ not clear unrelated subscribers before destroy dispatch. Internal resource scope
 `src/lifecycle/scope.ts` owns synchronous cleanup registrations. `resources.ts` supplies
 DOM listener, timeout, animation frame, request-controller and Blob URL adapters;
 it depends only on the scope type and native browser APIs. Neither file is exported
-from Artplayer or Artplayer.utils. CORE-03 introduces and tests this boundary;
-CORE-04 will connect instance construction/destruction. Existing Events, timers and
-requests have not yet been transferred, so their historical lifecycle findings remain open.
+from Artplayer or Artplayer.utils. `instance.ts` connects this boundary to construction
+and destruction through WeakMaps, adding no fields to public instances. The entry
+and most UI modules remain JS; their full TS migrations still have separate tasks.
 
 Create one ResourceScope for an owner and child() for a replaceable operation.
 Call operation.dispose() on completion or replacement; it detaches from its parent,
@@ -83,15 +83,68 @@ engines lacking AbortController: consumers still need closed/generation checks a
 must own rejected fetch Promises. Release a completed request's operation scope to
 avoid retaining its controller. objectURL only accepts a Blob it creates a URL for;
 it never adopts a caller URL. A closed scope immediately revokes the newly created URL.
+wait(scope, delay) resolves true when its timer finishes and false when disposed;
+it does not reject on cancellation or leave a pending Promise. Consumers must check
+both the result and scope.closed immediately after awaiting, since destruction can
+occur between timer completion and their microtask continuation.
 
 Run `yarn test:unit` and `yarn typecheck` for scope failures, reentry, ownership,
 controlled timers, queued RAF and type rejection cases. `resource-scope.spec.js` runs
 an explicitly identified es2015 internal-source fixture in all three Playwright
-engines with native DOM, RAF, timers, fetch abort and URL access. It is not evidence
-that the player has adopted scopes or that an installed tarball exposes this API.
+engines with native DOM, RAF, timers, fetch abort and URL access. That internal fixture
+is distinct from lifecycle.spec.js, which exercises the actual player candidate.
 Fresh fetches test URL revocation; decoded image caches are not a reliable revocation
 oracle. Keep adapter tests and owner integration tests separate and extend both when
 moving an existing resource into this boundary.
+
+## Construction and destruction
+
+Construction validates options before creating a scope, then initializes the existing
+subsystems in their historical order. Template reserves the container before mutating
+it, so reentrant construction cannot claim the same container before instances.push.
+`template-rollback.ts` captures original nodes, child order, text and attributes before
+mounting. Success drops the rollback closure; failure restores the same original nodes,
+including existing DOM listeners and SSR node identity. The two Element casts follow
+nodeType checks. This is DOM rollback, not a rollback of arbitrary user callback side
+effects, native media state, external nodes, storage or requests outside the scope.
+
+Events registers cleanup before installing listeners, so a throw during new Events
+is covered even before art.events is assigned. Constructor failure releases initialized
+resources, removes any registry entry, marks isDestroy, emits destroy for plugin-owned
+cleanup and restores the original container. The original constructor error is rethrown;
+secondary cleanup failures are reported separately. A synchronously destroyed constructor
+result is not added to Artplayer.instances. Async plugin result registration remains CORE-08.
+Container ownership lasts through failed-constructor cleanup and rollback, preventing a
+new mount inside its destroy callback from being overwritten by the old rollback. Normal
+destroy releases the container before its event, allowing a replacement to mount there.
+
+Normal destroy keeps the order reset -> owned resource/DOM listener cleanup -> template
+removal or art-destroy -> registry removal -> isDestroy=true -> destroy event. An internal
+guard closes reentry before reset without changing the public isDestroy value observed
+inside reset. Repeated calls do nothing, including after destroy(false); they cannot erase
+a replacement player's DOM or splice an unrelated instance at index -1. Resource, template
+and destroy-event failures are attempted independently; the first thrown value propagates
+unchanged after cleanup. Emitter's normal exception rule still stops later subscribers in
+the same dispatch; core cleanup no longer depends only on those subscribers.
+
+Current ownership covers Events, resize debounce, Info's loop, Notice's timer, update RAF,
+setting mounted callbacks and wait continuations for customType/empty URL, quality setup
+and reconnect. Events.proxy keeps original listener identities and destroyEvents shape;
+after the instance closes it returns inert disposers. Notice refuses new work after closure.
+The public standalone debounce/throttle/sleep utilities retain their original APIs.
+
+Remaining per-module migration includes view throttling and optional built-in plugin timers
+(CORE-17/18), progress/thumbnail work (CORE-19), subtitle requests/Blob URLs (CORE-15),
+switch Promise settlement (CORE-09), and async plugin results (CORE-08). These are not
+covered by the claim that BASE-LIFE-04/05 and the specific BASE-PERF-01 resize defect
+are fixed. Extend resource ownership and its actual owner tests as those tasks land.
+
+`test/instance-lifecycle.test.js` verifies ordering, reentry, thrown-value preservation
+and the timer-to-microtask destruction race. `test/browser/lifecycle.spec.js` covers
+published double-destroy behavior versus its correction, plugin/proxy/partial-Events
+constructor failures, SSR rollback, normal resize and destroyed delayed work. Run the
+complete installed-candidate browser suite alongside playback/chapter when changing this
+boundary; source-only tests cannot establish packaging or real media compatibility.
 
 ## Observable utility behavior
 

@@ -810,11 +810,14 @@
         "ENG-05",
         "BASE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "构造失败回收、重复/重入 destroy、instances 修复",
       "acceptance": "事件顺序、removeHtml、多实例和销毁中异步有真实回归；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-04/05 并增加候选正向回归；协调 BASE-PERF-01 销毁后定时器与回调归属",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-04-instance-lifecycle.md",
+        "baselines/instance-lifecycle-validation.json"
+      ]
     },
     {
       "id": "CORE-05",

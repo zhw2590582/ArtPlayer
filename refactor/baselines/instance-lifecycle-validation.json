@@ -1,0 +1,1338 @@
+{
+  "task": "CORE-04",
+  "date": "2026-09-11",
+  "status": "validated",
+  "node": "v24.21.0",
+  "parentCommit": "3e38dd0d192d58188750878313a00233daaf370c",
+  "source": {
+    "packages/artplayer/src/config/index.js": "d6d2bd612daaf6c5c6e982158acbdf724b16d3c35bb5f1a5c923284665a8de79",
+    "packages/artplayer/src/contextmenu/aspectRatio.js": "bac04419497c2949d0bed8417930e2b6d2c2fc40d31a853a736f4fa81409fb34",
+    "packages/artplayer/src/contextmenu/close.js": "3aaaf06927882b76e88460aa79ae5b6e075d5fab5c40e4995c0a82dc5dbbdcd0",
+    "packages/artplayer/src/contextmenu/flip.js": "93221aacd5bfa9fa4b0ba7641cd4c2496f1e54eb12a004eff6e1e16c35519847",
+    "packages/artplayer/src/contextmenu/index.js": "d9691244110920060c2418c2c50d74efdd486e96a4fa316f84b848d35076793f",
+    "packages/artplayer/src/contextmenu/info.js": "7d2d23a63aa7fa319896f3ea8adb4739604d60696d3e8f0519a36ba241d30e85",
+    "packages/artplayer/src/contextmenu/playbackRate.js": "c2b15147d2f0f62f1a490f84ca2f8ecd23fcc37113806c364ab7ce128765fcfe",
+    "packages/artplayer/src/contextmenu/version.js": "b35e652e3b55628ec3ad2cd3a874009a03e277835e91ff5f291f286003d1726c",
+    "packages/artplayer/src/control/airplay.js": "1f4d6d793b73ff4b814161ded1f59a8aff5a13bf04c7fffc328ea29b69536e4c",
+    "packages/artplayer/src/control/fullscreen.js": "31a4cf1079e6c9e44d76252b791d8a51bd99c9cb64e39e897c61e820abe69728",
+    "packages/artplayer/src/control/fullscreenWeb.js": "8c69c403ed80d911dc7389c05894ed41827c4aac9cf53e12a41a43a9cb9148ce",
+    "packages/artplayer/src/control/index.js": "4114a06ddce38fdc2738868d9a9dd0fe2141d1ca905fdf4663f350d44504c9cb",
+    "packages/artplayer/src/control/pip.js": "bd8a1187214f6fce5599db9d4ca93141cde82d51f0db372e54e0c7ba199a1031",
+    "packages/artplayer/src/control/playAndPause.js": "0020d1bfac5609fdd5a8d3900646622dbf48d74ff3d60fc34c180b10ef117e3b",
+    "packages/artplayer/src/control/progress.js": "2064d0766b7f40a4ce812f92333a3dd728ba71b5b920e3fa3cbc67dd2bc38e2e",
+    "packages/artplayer/src/control/screenshot.js": "07044ef4d0c8c172447391cd2b5e5c4fcb98ee813a71d3270e0f2cfbaa3db900",
+    "packages/artplayer/src/control/setting.js": "2e5c4a6d3f463d7dd7a81698929acaf45d1f3966f86b9a226011da9f46e3ded7",
+    "packages/artplayer/src/control/time.js": "c39fb755a848ad77b1681adb3bad35fdc6ec9458ee57efa99ad31bd4d963d9b7",
+    "packages/artplayer/src/control/volume.js": "3572668f5c56b9b5f76b4e002a545e7e6dab199eb47686c8385a7751426ad118",
+    "packages/artplayer/src/events/clickInit.js": "bc680c921a958c25705962577513677d5d97de94e4eff6a04ba20d2f60e6a1be",
+    "packages/artplayer/src/events/gestureInit.js": "a5dcdb4216c8e3544fc85a1b4d3ebd929ec6f7d51ab17f2cee713030ae7ad464",
+    "packages/artplayer/src/events/globalInit.js": "5d8c3147f17755b0d35504cfc69cf8cbff510b66b2a52686d8f2a235a6c5b9df",
+    "packages/artplayer/src/events/hoverInit.js": "7ed5666e01972dc0955d1c1b4006001c99dd55ed133ca026f685b71d6b4d01c6",
+    "packages/artplayer/src/events/index.js": "94ddb9ad5ceb21901fbbc974d983fec60c488314474c89138e4ab2b40e205d5a",
+    "packages/artplayer/src/events/moveInit.js": "782d627260c9fdf46c0766876138f05836860bc9c2fa2c519d22b43f3d24de15",
+    "packages/artplayer/src/events/resizeInit.js": "26fc9628490e6c45ef741e7bc7c1353097b21da1dc83aae65dc80783226e36bc",
+    "packages/artplayer/src/events/updateInit.js": "1b4ef85c819ae68eb0de1791241b2c3d4e22bb108746518fa67f7c322591e55a",
+    "packages/artplayer/src/events/viewInit.js": "2b4ce508812b8f03cf5801a5e3a7eaa4a5a8b05d6be500d217aeb6231fb93a51",
+    "packages/artplayer/src/hotkey.js": "689fb87b2ed8a424cbc2880c8f70610b3695dc5b0346c9a5833699996682c0d6",
+    "packages/artplayer/src/i18n/ar.js": "61294854675d72444a370f06a16c8d84bcdc782e88010b3c5a59326a98d3af56",
+    "packages/artplayer/src/i18n/cs.js": "f44e651be5d24dfce25122ebae03c76bedb83b145aadec134f0438e85c08e17c",
+    "packages/artplayer/src/i18n/es.js": "93785fd99ecbc906abd396d525f6ae715cddcce4a7b9d556838b98e927abc693",
+    "packages/artplayer/src/i18n/fa.js": "0a6b8f61ff7d5ec1e2839caa5f790c8681462a553c64d38ca7ec1988309e02f1",
+    "packages/artplayer/src/i18n/fr.js": "90421a72e6f8e82503a067d6c28cbc8ab91331de1342d367c3bd86e0fb62f621",
+    "packages/artplayer/src/i18n/id.js": "1a48adf6c940ef24870faa9cf1025fb6de45a63dc13ad54fe1d18222be0f481c",
+    "packages/artplayer/src/i18n/index.js": "35a07de6ed556f88637b129a9affe4f1ae1168cac7dce1171c197e023e714bfd",
+    "packages/artplayer/src/i18n/pl.js": "7f2c358f4aca1acbfc5e9edacc6619512fffcd81081c49830b276ed7f7e5e22c",
+    "packages/artplayer/src/i18n/ru.js": "26ca6dd2468847d656d283cc817dd8b78fe332f39a7eee9e630c72078ccc3459",
+    "packages/artplayer/src/i18n/tr.js": "c85a257270df2ce213d722a33bf342098b140defa321c0f197356fea419f6624",
+    "packages/artplayer/src/i18n/vi.js": "0c957375d7b0f4804d7bcc46b766a0e2c2a2d8d72616f9d20da69bd83b93533d",
+    "packages/artplayer/src/i18n/zh-cn.js": "cd58122e0e38846741775bf10bb71e2529a45f1157f8eb1083116ae3d4e1c897",
+    "packages/artplayer/src/i18n/zh-tw.js": "cbf6d2d14d5242f32c32e13e346c741fc074c10c164e78a2dd5f65cfff68c9aa",
+    "packages/artplayer/src/icons/airplay.svg": "8c75a40f1bfacee2be2a425e132ff51f3712eba60679010f7b1349d4a04374bc",
+    "packages/artplayer/src/icons/arrow-left.svg": "8b9d544b7bd728d01747005fc7a2d63f822eed3b605393e2435b6733861b585f",
+    "packages/artplayer/src/icons/arrow-right.svg": "68c63d6d5810173ec9192c9e96ee7b6aefdc3b79d3c1329fb4d6c750f859fe10",
+    "packages/artplayer/src/icons/aspect-ratio.svg": "987752a87701523057d8dfa7c45a6a139c4542b96fdcfaf8665722bbeb41f3b2",
+    "packages/artplayer/src/icons/check.svg": "963ce0aee2337fdee951aa6c917cc75ee0b4e75158887ccc16baebfd3925942b",
+    "packages/artplayer/src/icons/close.svg": "ebabfe8044f48d5df4d13f4f906a163fd55a4d6f1dedb3b5ba95601209bc8888",
+    "packages/artplayer/src/icons/config.svg": "e1884d5411296b5cd1bfec7803b558b0afa5ab64478393977b07a662e2e0f15c",
+    "packages/artplayer/src/icons/error.svg": "b40c01e511a599c9dd369aeb9a3b2a0d1a76ef3c5ede8124cbbc23f8e4e7248c",
+    "packages/artplayer/src/icons/fast-forward.svg": "abef6fe4d75ffa74d3a84683373b4702a4eda2a5b4045952f969ee62cc68b0be",
+    "packages/artplayer/src/icons/flip.svg": "474a9d53a97add71e3fb7bc6530a68580ce63a1d83f9b75d1c2908a7cf494152",
+    "packages/artplayer/src/icons/fullscreen-off.svg": "71125ac56586897e2c0e52035a4d65cff34cf52043a95b45d186e0d268671399",
+    "packages/artplayer/src/icons/fullscreen-on.svg": "d46cdf265cac729c9b7382722ebe7a4c76d71ad4e5a27c2d5ed8323fd595ebf5",
+    "packages/artplayer/src/icons/fullscreen-web-off.svg": "52a6862ecd7cba12ab7042de5064c498bc2e9f86b430358c912401fafe4f4a98",
+    "packages/artplayer/src/icons/fullscreen-web-on.svg": "5cfaae62b61456251e771bff01356fad8376ebedb10a4b8819740f60e6e5a073",
+    "packages/artplayer/src/icons/index.js": "2f258d42bf8dceb7a1b60fd8b3d20e9c338d06db8ce6bc5a7f80e84e935c275d",
+    "packages/artplayer/src/icons/loading.svg": "485472153890eff3ed49963f7bf7d841f66ca2f40894c01d6e8bcf1bf4ad1c58",
+    "packages/artplayer/src/icons/lock.svg": "431e9a25fae051016be0efa286387ec3e5f7651c3ecf569bf0ece9842f57156c",
+    "packages/artplayer/src/icons/pause.svg": "57405dba81dd3d9f329d957fdc704101cbb6f6654325eb0083c03324c4453a68",
+    "packages/artplayer/src/icons/pip.svg": "1e922140e0941e5b9ef53dc0b4776813e1c470ea229fe3ec786fd148148c3352",
+    "packages/artplayer/src/icons/play.svg": "41a961c629a55cb25a813e115a25204e492d4e935a0879177e65d6e1ddfd6796",
+    "packages/artplayer/src/icons/playback-rate.svg": "872deecac0365ab04aeb5ccb1cdd9a0c88589a1442709fdac7c0ed12a241ff2b",
+    "packages/artplayer/src/icons/screenshot.svg": "538b5cd0c6b20afb98bd850e15019072d652d191075c2869f2fc0f28b597b131",
+    "packages/artplayer/src/icons/setting.svg": "2976b00d1f03e78f28d0e55ebcb01d5a0746ec1a6ff8de97a5e8294bacdd1fad",
+    "packages/artplayer/src/icons/state.svg": "620a127f74bb5e249993bd7008c027373263eacb4a44af8adeaa0d7523346887",
+    "packages/artplayer/src/icons/switch-off.svg": "95a8d81a4a3bfcf7c016d5f71d46a72be73c5e94790c55fd1d31023416ef5deb",
+    "packages/artplayer/src/icons/switch-on.svg": "cccd0f9c1e54d9ac50c323360da944d8ff44633a82ff17889914b6bc8b1652ae",
+    "packages/artplayer/src/icons/unlock.svg": "fc058db3d99a475fb9ffbbbb6248978a95990a9c532b83d0955ac28eaa626c60",
+    "packages/artplayer/src/icons/volume-close.svg": "f7e100fd9e9f3f6e06afe5bc994d5d9305ee4d1ee23fae37e4108cf286dab379",
+    "packages/artplayer/src/icons/volume.svg": "3a78f40d8b48595e8f15d9189e4d767e0c7abbf0338d3f2db1ac810049dd3942",
+    "packages/artplayer/src/index.js": "abdb55797542744e08596119db1f772bb4a3e79b8925bd5cbdf875630f43c82c",
+    "packages/artplayer/src/info.js": "6dcdb4457d63ddb74fb6268df64522722420d6c0eb7b1654d6fb7703466d3b8c",
+    "packages/artplayer/src/layer.js": "e96173ca177e0446738205dd753e267aa433d595f719d9a5bcd747dea3d32f66",
+    "packages/artplayer/src/libs/screenfull.js": "2332b50c0c6364d5c99080be0f5739255e4b9e465d2cca40f761adce9a1908f8",
+    "packages/artplayer/src/lifecycle/instance.ts": "9eed31a766953dbb5d83a44a290b7686ad8b2a40e7dcf7f0ee674b4f1102f80a",
+    "packages/artplayer/src/lifecycle/resources.ts": "399ea5e84545c973f8967e8ffd7326dad7b3168ca6f96f77286995a5b62ee389",
+    "packages/artplayer/src/lifecycle/scope.ts": "e2188e8544b27cf8c7ac149e7146af628a2d6166c82b719a247adef5d85be5db",
+    "packages/artplayer/src/lifecycle/template-rollback.ts": "7a83da6739bcec1587b02f8157934988910d7f9103fe489a0d6f4f65290c3d77",
+    "packages/artplayer/src/loading.js": "4b08a8f9fa69f71d054cdf1508bbb9e92c075c8df1eda0fa8a79efbf08eb8c40",
+    "packages/artplayer/src/mask.js": "094162e28ec76c81f73bb7bfe276bf5832080ffb7aa9d9dc9dc013479659c2e5",
+    "packages/artplayer/src/notice.js": "72e97833e0499993d8d133111e32f32f031b911426117397be2003e824023664",
+    "packages/artplayer/src/player/airplayMix.js": "b9ce49489e75045b6a1df4d8ed28f123c1b105ac4c04fefaabcffe4353ad004d",
+    "packages/artplayer/src/player/aspectRatioMix.js": "c0a4cbd84bd0d70f078d87fc2ed082ee81fd33eed12b6265fa2d6f043b8f0f97",
+    "packages/artplayer/src/player/attrMix.js": "c873d587ff71e024cfda5b5464d0c70a09a6a319da3f18fbaa7451a16c9ae055",
+    "packages/artplayer/src/player/autoHeightMix.js": "e7400a46eeb01416d5ac7c6b787295cd9b9f90b38ce640a737ef5a34a8affd6d",
+    "packages/artplayer/src/player/autoSizeMix.js": "341e8c6a6a1b451c43f758a7774d1cd6cdf9e1f9e818692e03eb58c2fbda4525",
+    "packages/artplayer/src/player/cssVarMix.js": "93e641dd760e8f844a643a0b7d8af92b73a7f205e55087d9501934d218701bd2",
+    "packages/artplayer/src/player/currentTimeMix.js": "4733317778fefe6155f9d5ef46652b4267178d0c08003467eeaff6bc9955b41d",
+    "packages/artplayer/src/player/durationMix.js": "1033dac7f27977f3104aaa145f6e4c6a967be13d05d88ca343a06d3244e65662",
+    "packages/artplayer/src/player/eventInit.js": "faee770b0cbe5a6f9dd3259518ba91f00c2df290348ed3829c809f3875aa6338",
+    "packages/artplayer/src/player/flipMix.js": "f5abb8d079d0a9c4f9eaa31c4940723bf407ba422ac713dc73443dfa6cb6ac4f",
+    "packages/artplayer/src/player/fullscreenMix.js": "fe28104d9b3ab5f197204b69950b14c274d17b7a918dc9c45f749884f2e41cb8",
+    "packages/artplayer/src/player/fullscreenWebMix.js": "85f8800b4ed9027cdfdf79387b2dc95ed130fb03de267b85ac37badc15967661",
+    "packages/artplayer/src/player/index.js": "c3eaeab0aa5015a51dfeeb4de6f25b02b8cd66e1f8471940367d628b5fd0bdec",
+    "packages/artplayer/src/player/loadedMix.js": "08dda96239d054848a34063479da94af98834ef334276d7d22fe49be1e94f62b",
+    "packages/artplayer/src/player/miniMix.js": "7355a66a23de47be91ab08dd28e8d54116aa2a603bd47b687014e4ab4736094e",
+    "packages/artplayer/src/player/optionInit.js": "9d1d9d276da2403a580498c62f947373e000d9cd6e4bef5831d272c3055b5592",
+    "packages/artplayer/src/player/pauseMix.js": "6c8f1b0055e9e1f0c46f880306e4bc5a85c0161add80f07f3716209c8c651548",
+    "packages/artplayer/src/player/pipMix.js": "15322751e235a70e6f9dc4d5e2b6b0ee6a8b93080370c6a90cd96268e101a8ab",
+    "packages/artplayer/src/player/playbackRateMix.js": "531f25b5a9d86a5d0a884dac1b812a9ebfb588d3be785a0459e52f181c1de2a0",
+    "packages/artplayer/src/player/playedMix.js": "a5e664643666c3692c4e473d0d6c1c8ed72d6126346b9630cc3e0cce1b9344c8",
+    "packages/artplayer/src/player/playingMix.js": "1ced002c420aa8dd06a283115ae09896acfe2fea89163806482756e60def6aba",
+    "packages/artplayer/src/player/playMix.js": "5d0c156810f2797e06cfa23ed0d40c5c833c54eff9d0244df2c7f215a7c62b06",
+    "packages/artplayer/src/player/posterMix.js": "a96b0a9f5817919e373a5a55b43fe7ea94af357051c01ddd6ce9c68bc932ecba",
+    "packages/artplayer/src/player/qualityMix.js": "53d28d000bd0417e757e585d5c3460c5198d6d5067e7ea3d797244abd45b2832",
+    "packages/artplayer/src/player/rectMix.js": "cf98a26c4bc6f2086ec2a26123c966e102dc056c50070138b99600d67740bc21",
+    "packages/artplayer/src/player/screenshotMix.js": "c64871270b224233ea67ff31c3fbc0c2e2eb35635da5e4d5a263b930fb96e6e7",
+    "packages/artplayer/src/player/seekMix.js": "6d3779a19220358523c846275971f43157e11e1dd172049ac9de6c7b4fdeea8a",
+    "packages/artplayer/src/player/stateMix.js": "06968c1697487670e02af73045caaa676a01088e76d047cc87802d3df80f7251",
+    "packages/artplayer/src/player/subtitleOffsetMix.js": "c0ebf552e025dc5ede6ff3e5c2a82ff3382610268130941e5f56746568ac5baf",
+    "packages/artplayer/src/player/switchMix.js": "67560d22033945a0888860b2d50a5258342ca7901a837ed543996df7012761cd",
+    "packages/artplayer/src/player/themeMix.js": "382acfaf113fbd1ee77c63dba72953d984ea715f2d99748a12b9eae70c081d49",
+    "packages/artplayer/src/player/thumbnailsMix.js": "43bdbd9b62a803f4966103c6718305a9ef665d25df26f735d3e34558ddf339bf",
+    "packages/artplayer/src/player/toggleMix.js": "d29c407906c8407975756bf26090e0550f8cc38f0c6389836163161cf99a299c",
+    "packages/artplayer/src/player/typeMix.js": "70920c8f785dca6d4bd66d82b996c37f1b69265190d7747ae8de298afae3604e",
+    "packages/artplayer/src/player/urlMix.js": "2666333c9d7051d8c33250f6376662efd2abf0dced70618dc30f820d35879969",
+    "packages/artplayer/src/player/volumeMix.js": "38b9dd4a11cff3287769cace6fc161579eefb75af74c410b470083db6aba3251",
+    "packages/artplayer/src/plugins/autoOrientation.js": "6ceb81bb3a778323f88ecaa78ef5646b642dad3f7d3176031c4ce53815a8d153",
+    "packages/artplayer/src/plugins/autoPlayback.js": "26f4a21691a2b2f767304b7d2fe40a35c599575651b9ace0c55a709a2be279b8",
+    "packages/artplayer/src/plugins/fastForward.js": "d1f396efb22a279f9450fd02f85dc2245d274dbf0d36c99e87a5e5f895cc0029",
+    "packages/artplayer/src/plugins/index.js": "ed125ff960624655bbd55115b06289a3e5137cbad3dee2af60b2c056eefa416c",
+    "packages/artplayer/src/plugins/lock.js": "843caf8c7981463e8dadf1510cd028e7e70049f5a10038bd66dfccbc63bb7886",
+    "packages/artplayer/src/plugins/miniProgressBar.js": "3bf48d30c209105a0144c17062d6ea4e2bdd351b1bc928df73ea1680b78462e2",
+    "packages/artplayer/src/scheme/index.js": "f6e36b56ae9f36ef3338b707b49c2f22ac672b38a01aa1823108ed19d6a25277",
+    "packages/artplayer/src/setting/aspectRatio.js": "c07e382eb4a2dd29d6bbf5c697274809777bd72091239e108ddc3ca15b60fa64",
+    "packages/artplayer/src/setting/flip.js": "d9972868640ec6ad1e6600aa97ed8cf75702552ecaafed49f16002939fd8f832",
+    "packages/artplayer/src/setting/index.js": "9c16ee2161e100e0223d2878ffc40dd6b410afa35acd5b1908d18242049f9675",
+    "packages/artplayer/src/setting/playbackRate.js": "063e196324bd6f0e0cd841292b70f469593949073b60c9999b250addf1208e81",
+    "packages/artplayer/src/setting/subtitleOffset.js": "d1a18118c34e6121dd030e464bfe9047330ea7a60a83045aa762272d0b4b455f",
+    "packages/artplayer/src/storage.js": "92067265b7f1104c4680e27e35726cf033811c6551e7c38d66028f2dd5300491",
+    "packages/artplayer/src/style/artplayer.less": "4e8513138d5d10c05b66986977d24ed17f1de3c0df3816dec6d90db7a97b5da3",
+    "packages/artplayer/src/style/aspectRatio.less": "091931a0cdc83e65a669332811ef3276b85bca9e55f7fff42aa46893d728c1ef",
+    "packages/artplayer/src/style/backdrop.less": "6c2cd0fa200d1f3525df98c3c56dbdc553445724aece3feb0386949245813343",
+    "packages/artplayer/src/style/bottom.less": "6fb307d8449fd04b804d5e72ea0f175f8aa9c9dd2bf1efbf756f800b39ac97ab",
+    "packages/artplayer/src/style/contextmenu.less": "70f6c7e26dc96652b659c7bf6fdad92737ed477dea69d253c57dc7266c76586d",
+    "packages/artplayer/src/style/controls.less": "4ff79f7bdb166f4e65455726c1879d003deb504cc175ea0d371ca6753ef0f155",
+    "packages/artplayer/src/style/danmuku.less": "e4215ee9fa2f1d0599e7311a2415cc975138265b7c6af0448d27d21b6c9e3511",
+    "packages/artplayer/src/style/flip.less": "5d3c7a81df9be455c2f683ebf48f39597d218dc2144addacb72ee1736bac3b7f",
+    "packages/artplayer/src/style/fullscreen.less": "dd350d3a0fc556d59b622a53c786b8c2a583e8fb28176e4b9e91baff90479496",
+    "packages/artplayer/src/style/fullscreenWeb.less": "d74e785c2fbbb2976e131620e751326f622f2916eceff9f2333059ca3296cdc9",
+    "packages/artplayer/src/style/hideCursor.less": "09a4607c8b0005dc199828172aa8dda395f861e407769b9696d793476c4a7823",
+    "packages/artplayer/src/style/hint.less": "ae9f3115dfdb1e2d7b8249497c080e6a25f9667f915f6e89820338d67bbc2d85",
+    "packages/artplayer/src/style/icon.less": "52d8f75c1d193e6160f57ca6997c3f9135adad8eb2338ed60c1eb8e5fe443be5",
+    "packages/artplayer/src/style/index.less": "ec67999b458d5545a4f17eeda922872823d655da012fa69113902629ad847548",
+    "packages/artplayer/src/style/info.less": "fa56d1b8c8936218e581b2426026e4ba85cd5fea20d045c4f69aca96be4059be",
+    "packages/artplayer/src/style/layers.less": "9653c581190bb22d60a706109819cd010908898740701c9526957b5682991c5f",
+    "packages/artplayer/src/style/loading.less": "185b0f05274196ba71fdb1d088b55af568f3342a495490c99c3f0e058a40659e",
+    "packages/artplayer/src/style/mask.less": "d1239a171b71ea6184cb4aee6660d74d6ffc0c48f7c47c3cf5fbe52d2e93ac92",
+    "packages/artplayer/src/style/mini.less": "a352e7a63f9529f18e6e389202fc277c500bc70acb38c7aa6eea9d7dba831c0f",
+    "packages/artplayer/src/style/mixins.less": "c6be95aa682f266749fe37cb89796fbec6488abc537174f817da79bdac6e00b5",
+    "packages/artplayer/src/style/mobile.less": "ff3f64fca5d2dd7ddd50385d88d9b2fa1a645909488ab7a0978ba4f1670b7c0e",
+    "packages/artplayer/src/style/notice.less": "72a935c0effc557a9d7ab3baccb2c3b77fc3a1783450b4e3178a40a5325fe369",
+    "packages/artplayer/src/style/plugins.less": "a59d0fedb13eb79ea5c0251273e6d603363922e389faf43d051cb03c590a6788",
+    "packages/artplayer/src/style/poster.less": "36b38fe138f8c9537ff4e93f7ec4f2dbdba1ec41d243d741ddf1da7c6581e546",
+    "packages/artplayer/src/style/progress.less": "59b9d95d49dbcb1be40752d7086239b6de5925b0574da231199d999e22ff4990",
+    "packages/artplayer/src/style/selector.less": "295012ba379a7e957a24476616a0c3623d6a06e82ebbdaa45b916dd6412d7f4f",
+    "packages/artplayer/src/style/setting.less": "409dbdc3dae8b7b9e16c2e41f53b2801514545fc07af0bef752221cbd8b4e35e",
+    "packages/artplayer/src/style/subtitle.less": "43b72a07292a01cef45adffbd94ee9d9419e2997e0295d38e230fea2c1c0e0ca",
+    "packages/artplayer/src/style/variables.less": "703739b2bdfc77bfde063d8788ef6b6a55b8730764baae8e7d755b7c54d8ecc7",
+    "packages/artplayer/src/style/video.less": "b89c6f6e27592d49825c68c9ab98d46e81cb1e5add855863f89d19637f98e35f",
+    "packages/artplayer/src/style/volume.less": "a3954794a9478d3872202b90d349c873cbb51639dcd7d1e3d73a55ce635fcd99",
+    "packages/artplayer/src/subtitle.js": "7f926d99cc581f38804a9400bfe7159d0c4ef4c15c887811f9443bbb5ae7dd20",
+    "packages/artplayer/src/template.js": "ef60334f381f419cffb4628ee460ae0d0159de1ed0a3296a43863ff49b44d263",
+    "packages/artplayer/src/utils/compatibility.js": "51290838ef62be8e4251f4db8ecdd45a626cecd8c732e4e53a1c55df8d454a13",
+    "packages/artplayer/src/utils/component.js": "b9b190d31e9275d357396f6617a3dae87530227a6c8ef22b5ffe7c541246b546",
+    "packages/artplayer/src/utils/dom.js": "d72f934f55db3cd91db93eb388fc958a653c959a5ef776fb146c114bf523b21e",
+    "packages/artplayer/src/utils/emitter.ts": "26a93d3ff35b53e71a5f3bb22c252a854559d8151ede50a66a28d9eefae6c008",
+    "packages/artplayer/src/utils/error.ts": "ba303c7d4e4228919088f9d608fa364596f5853ee646eda2008deee354866f38",
+    "packages/artplayer/src/utils/file.ts": "ea71d7fc0e818d473bf5a596211ba9d571e4febdf1878014eadefa8d0a98d4cc",
+    "packages/artplayer/src/utils/format.ts": "891df5b7542b713aef46bf2b93924f42e68eee574afd802db3e6c62ff2655ede",
+    "packages/artplayer/src/utils/index.ts": "5211af833dddb2937d25dcc772740d62f9d5c5039ce5505bffff0796d4afd756",
+    "packages/artplayer/src/utils/property.ts": "c737d4582a4382f4038d12dafdf8b43418e508c9b8b859b2f0cc17c20f370343",
+    "packages/artplayer/src/utils/subtitle.ts": "f058851d11a418e321a8a498472b67fa535fec2c7b5d3df739b6b4f263d00337",
+    "packages/artplayer/src/utils/time.ts": "b8ce3d50865f6c343e8e3ce9f5c87de565a87b4e9fbcbccbe7030e30e80b93fe"
+  },
+  "tests": {
+    "test/instance-lifecycle.test.js": "710a41549954b3812ed7193a3515d9a4c8f354816a96657f3ef03ae32599f0ae",
+    "test/resource-scope.test.js": "4da8b8acc1802b63e6797f6a58e6f5f93737a11e0632c24d5a6b1a94d96d931c",
+    "test/browser/lifecycle.spec.js": "7726535769bdf01a57d15d562bad9b3bb2cce0d979b7b0def6cbcf77bd72f453"
+  },
+  "ci": {
+    "command": "yarn ci:check",
+    "passed": 99,
+    "unit": 71,
+    "engineering": 4,
+    "baseline": 24,
+    "strictSourceFiles": 17,
+    "logSha256": "0d5c8cece0d64ef158303f8fa0f63f29c7735ddd5d607096e03dccdd19a4bd10"
+  },
+  "packages": [
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "archive": "artplayer.tgz",
+      "sha256": "17e298339a2a616ef9d60414bbe89dfedea0b87935b8da1cbd58033304a4a8cd",
+      "files": {
+        "package/ARCHITECTURE.md": "e95c0124e363f624b0892fc5ce09c1deb51cbc4e3130c9318a9299b398d097f9",
+        "package/README.md": "1e185e65f67fc2081b4182bbc6c4558ea05b6e3fa3acc5dd0c3ac7df1d542b09",
+        "package/dist/artplayer.js": "175a7b3551a855d8edac4b154cf2c0167d3ca16a3e106449075c13269b02368d",
+        "package/dist/artplayer.legacy.js": "b5d54992fa0b468de086b0d2f22ebe78ccd8c2dc2ade2690671424efda4d9bc2",
+        "package/dist/artplayer.mjs": "b7683d1431b6e00a2552e5aebfb1d27537293766b5b550d25dd9c3b7bc2ab2d1",
+        "package/dist/i18n/ar.js": "61c43469ee95a00dc624583f418653e3dcbf48b24ae6a4c203ad986234852365",
+        "package/dist/i18n/ar.mjs": "68922fdc9f80d3321ea0654c8ff8f5875b6715103d2b14ffcf17f93738b39cf9",
+        "package/dist/i18n/cs.js": "ad7bbf8853204a6955ef84bfbd932cab3f141a7e73a8145f28ba7a5b2b83b7c0",
+        "package/dist/i18n/cs.mjs": "29a489be767fda9d46b59c9adbaad323f17a5e67daf7f7aa78b7ce8fb5b4d63c",
+        "package/dist/i18n/es.js": "aaa95cc9645b734c58fba06fdbcdda962c4cb3a0e7eb6206f06d6168208cd86b",
+        "package/dist/i18n/es.mjs": "331d2ef74da2eec8f3304fec0b5340c795d9c1eec24e08167c9a7b66bf30973b",
+        "package/dist/i18n/fa.js": "c998467261cbdfd2c3fb16c0ae4b2c48c409f42f41aea35ed94766f1e12819d5",
+        "package/dist/i18n/fa.mjs": "b4c98894b46975cebf5ea9088bcf0b5bdfd408bc3c82f4e2e9128133c7de2d4d",
+        "package/dist/i18n/fr.js": "6b06e16b1fb01c8695fb5c10b32a00421399180de5dc5d845ce17010f2fd3e66",
+        "package/dist/i18n/fr.mjs": "abe8e3548fa7304f302e2c74818a6176edee8c3b65e33cb6f62e96d130749ee5",
+        "package/dist/i18n/id.js": "a5832c4bfc03c7f16418bf4b324d9773895541dc823ece9114741794737aad74",
+        "package/dist/i18n/id.mjs": "a40a433be6ca1ac1ee1810fe805ee60784d349e59b9ad82ea80201d660db4e68",
+        "package/dist/i18n/pl.js": "2491487062bdfc91d60f17c6e9a83ee196c991216d15f525fe3536b98873da2c",
+        "package/dist/i18n/pl.mjs": "ad8ea2c03785edbfe1f35761bec21b8a04213f9fa88a794d850bb3973564930f",
+        "package/dist/i18n/ru.js": "2d3a9ee6533cb6fa961f0a24a25ce63cc76992fca17e1769b6fa75104f8a1529",
+        "package/dist/i18n/ru.mjs": "a89b8c36cfd7c181c2b31aa823deda3d7c37b56b2b81746338c52ea1c1d93352",
+        "package/dist/i18n/tr.js": "438b06a4c3f479a2901b0085eaa7bdba8eaef87bdb07ff3faa559c85403fe433",
+        "package/dist/i18n/tr.mjs": "cc96f9cbb9c1587d5cd8f25b0b9800678ad76e93de089ae42c38dee16e6fe8fa",
+        "package/dist/i18n/vi.js": "1ffbd62843a902ea2967eab46432d3fc548f5633e53eed104314b523cacc46a8",
+        "package/dist/i18n/vi.mjs": "7872ded84622bcda20e8c1d70c597c2ba071b50701900efa47cc4683ee17f1a2",
+        "package/dist/i18n/zh-tw.js": "2d43577f98456488196921e1ec721695a95e1b8c827077286b02ce3fb987e8ff",
+        "package/dist/i18n/zh-tw.mjs": "7ec638b4babe59d3ab1d3e64abdd74a96fefb260a50e2cd7240f8d50a1340925",
+        "package/package.json": "b343df9955df9ac0ea71ea775bd0743c6b26c06d3bb7699128f7eac484fa769f",
+        "package/types/README.md": "d38bb63f9e96f995273f9da6833a8b936a74718ef7b710dbd316530d41ccae07",
+        "package/types/artplayer.d.cts": "be67cbb6c352944741bca88f969ad1bafa9898049595930e2dc6693d5e7262f5",
+        "package/types/artplayer.d.mts": "87d1f0e2a7bf7b7bdf700875cb2c77dea8be34ba3ac943e5fd35e8daa99bf241",
+        "package/types/artplayer.d.ts": "98d3e7b65f9f81fba155da08fd47e4fb25f4c69279e3afd993c4a55070f8a850",
+        "package/types/component.d.ts": "facfa29d9092fe2c63a7d8357ce7d0faa5e32811d2fedeef6dc8b28ad5d04891",
+        "package/types/config.d.ts": "c4fd8681bf32b10c743e3e561c532520c8f32e43fd765524850b15e55cb91c72",
+        "package/types/cssVar.d.ts": "e027d82fb4f01c9ce7559cf679b2d5ee1962d3f7e5b4dd64ca21f472b933efb6",
+        "package/types/events.d.ts": "98c74aebb82455accc0b3523af5a1145bc9119da58c884200adc36e70a164b02",
+        "package/types/i18n.d.ts": "3e14759caf71f97f01650839248c8737c42d2c2979dabc43ad92b724da648708",
+        "package/types/icons.d.ts": "0d8e8e52e52130dd4a29bab551dd7a2a954797e42e92a6e068c85d583e23e6a4",
+        "package/types/language.d.cts": "1c9e0c47fae3c2d68c3e144d95a55071318a03bb31554dd049109efd3d0f95a4",
+        "package/types/language.d.mts": "c391e863012c77769e661afbf8fa949e9373aa88d17f58cbba7f5696edb8077f",
+        "package/types/legacy/language.d.ts": "c452ffd764ff9b29b819b3475c42395d2ea7a33560d8c186ef5df3844b9524c3",
+        "package/types/option.d.ts": "d4de53930c2fa9d59c77c4324d63f24b057bce6c4d0273c34a0ab06094dcea2c",
+        "package/types/player.d.ts": "986382bb6b4e82746fd2405092e69d0ef413988887a557a0fd4db85d64b78d54",
+        "package/types/quality.d.ts": "7ed6ed78cea52991b2f6ddd2bd3b7bd8c5146fdfff7486fe8b814c3e632f1567",
+        "package/types/setting.d.ts": "d12a75b656fff70cbb30be4bffec46d9c4273636e8722bce971a4d2b188712a1",
+        "package/types/subtitle.d.ts": "d25b470e47d6a9bd696d9c1ad8adb58e56a208f05695186d513bc8c43c2e8acf",
+        "package/types/template.d.ts": "68aed9e97d006d6be4fabb8504ca84dafab770b0925f4d6e7319e67c82f21b0d",
+        "package/types/utils.d.ts": "d3fb67b9187e1c81c6b3850694cf2627e927225ace160ae58c11631e9f673a98"
+      }
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-chapter.tgz",
+      "sha256": "6dd60ec4cf7e316ea84eb3b6a10bf67fb1a29335731e4393063deff00add012f",
+      "files": {
+        "package/ARCHITECTURE.md": "20743bad87a174b0450e0d876b6aa6b2a9f47df296d479511ce7cc9298fdb57c",
+        "package/README.md": "b95400ff3d525621a15268bb56a2d353aacaaadefde7e735d7abd91a34edd96f",
+        "package/dist/artplayer-plugin-chapter.js": "6ac3dfe28f46084ac7caedd571b1a97dcee3cf9d708112f1b8bbd6566e1dc5c5",
+        "package/dist/artplayer-plugin-chapter.legacy.js": "6d9bff885412169e701670961aa00c2e46c4b42c9b9647ff4e6d198777d2a359",
+        "package/dist/artplayer-plugin-chapter.mjs": "26415cecab2c0198c566cef0232e20123413782d5bad7534a32939b3298617af",
+        "package/package.json": "24eec6907b3218439189adab6af3f932c1497c47c2d41209311c01042b07fd4f",
+        "package/types/artplayer-plugin-chapter.d.cts": "4f07514b37453cd6cea8e5aa28fa018ff31738e0d423c11a3b5eccd50ed30bcc",
+        "package/types/artplayer-plugin-chapter.d.mts": "610179754db36276e161a07bccf4eaba8b4480f053e716a2bcc5a1574871a171",
+        "package/types/artplayer-plugin-chapter.d.ts": "581aa2862e709601c87a23585f54a969ebd350be56a7469a31ff53f1311b578d"
+      }
+    }
+  ],
+  "runtime": [
+    "DIST.cjs",
+    "DIST.cjs-legacy",
+    "DIST.esm",
+    "DIST.esm-default-only",
+    "DIST.esm-legacy",
+    "DIST.global-core",
+    "DIST.amd-core",
+    "DIST.global-core-legacy",
+    "DIST.amd-core-legacy",
+    "DIST.global-chapter",
+    "DIST.amd-chapter",
+    "DIST.global-chapter-legacy",
+    "DIST.amd-chapter-legacy",
+    "SSR.import-template",
+    "SSR.constructor-browser-only",
+    "DIST.i18n-cjs-esm-global",
+    "DIST.exports-boundary",
+    "DIST.direct-esm-file",
+    "EVENT.lazy-registry",
+    "EVENT.symbol-number-channels",
+    "EVENT.context-removal",
+    "EVENT.once-throw-consumed",
+    "EVENT.chain-context-arguments",
+    "EVENT.once-reentry",
+    "EVENT.dispatch-snapshot",
+    "EVENT.off-original-once",
+    "EVENT.throw-propagation"
+  ],
+  "types": [
+    {
+      "compiler": "5.9.3",
+      "mode": "node10-commonjs",
+      "diagnostics": []
+    },
+    {
+      "compiler": "5.9.3",
+      "mode": "nodenext-cjs",
+      "diagnostics": []
+    },
+    {
+      "compiler": "5.9.3",
+      "mode": "bundler-esm",
+      "diagnostics": []
+    },
+    {
+      "compiler": "4.3.5",
+      "mode": "node10-commonjs",
+      "diagnostics": []
+    },
+    {
+      "compiler": "5.9.3",
+      "mode": "nodenext-esm",
+      "diagnostics": []
+    }
+  ],
+  "browser": {
+    "stats": {
+      "startTime": "2026-09-10T16:41:11.756Z",
+      "duration": 35652.93,
+      "expected": 108,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "candidateMember": "artplayer.js",
+    "candidateSha256": "175a7b3551a855d8edac4b154cf2c0167d3ca16a3e106449075c13269b02368d",
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "cases": [
+      {
+        "file": "chapter.spec.js",
+        "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate clears titles on blank chapters, zero hover and replacement",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate rejects NaN and can recover after an invalid update",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate ignores pending metadata initialization after immediate destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate deduplicates stylesheet injection while the document is loading",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate clears titles on blank chapters, zero hover and replacement",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate rejects NaN and can recover after an invalid update",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate ignores pending metadata initialization after immediate destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate deduplicates stylesheet injection while the document is loading",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate clears titles on blank chapters, zero hover and replacement",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate rejects NaN and can recover after an invalid update",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate ignores pending metadata initialization after immediate destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "candidate deduplicates stylesheet injection while the document is loading",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "factory, registration, input normalization and safe title text",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "progress bars, real hover, title edges and boundary seek",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "sync update, Infinity, object identity, empty lists and invalid data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "chapter.spec.js",
+        "title": "explicit source update and core-owned destruction",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "published: emitter event names and once across nested dispatch",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "candidate: emitter event names and once across nested dispatch",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "published: emitter event names and once across nested dispatch",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "candidate: emitter event names and once across nested dispatch",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "published: emitter event names and once across nested dispatch",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "emitter.spec.js",
+        "title": "candidate: emitter event names and once across nested dispatch",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "controlled HTTP media failure emits a real video error",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "Range, media identity and docs candidate routes",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "controlled HTTP media failure emits a real video error",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "Range, media identity and docs candidate routes",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "published: real playback, pause, seek, switch and destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "candidate: real playback, pause, seek, switch and destroy",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "controlled HTTP media failure emits a real video error",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "playback.spec.js",
+        "title": "Range, media identity and docs candidate routes",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "resource-scope.spec.js",
+        "title": "internal resource scope: native DOM, RAF, timer, fetch abort and URL release",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "resource-scope.spec.js",
+        "title": "internal resource scope: native DOM, RAF, timer, fetch abort and URL release",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "resource-scope.spec.js",
+        "title": "internal resource scope: native DOM, RAF, timer, fetch abort and URL release",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: subtitle object URL contains real VTT data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: download starts and removes its temporary anchor",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: subtitle object URL contains real VTT data",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: download starts and removes its temporary anchor",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate download releases the anchor even when click fails",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: subtitle object URL contains real VTT data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: download starts and removes its temporary anchor",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: subtitle object URL contains real VTT data",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: download starts and removes its temporary anchor",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate download releases the anchor even when click fails",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: subtitle object URL contains real VTT data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "published: download starts and removes its temporary anchor",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: subtitle object URL contains real VTT data",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate: download starts and removes its temporary anchor",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "utils.spec.js",
+        "title": "candidate download releases the anchor even when click fails",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      }
+    ]
+  },
+  "legacyBrowser": {
+    "stats": {
+      "startTime": "2026-09-10T16:41:48.147Z",
+      "duration": 11613.684000000001,
+      "expected": 30,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "candidateMember": "artplayer.legacy.js",
+    "candidateSha256": "b5d54992fa0b468de086b0d2f22ebe78ccd8c2dc2ade2690671424efda4d9bc2",
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "cases": [
+      {
+        "file": "lifecycle.spec.js",
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "chromium",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "firefox",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "webkit",
+        "status": "passed",
+        "retry": 0
+      }
+    ]
+  },
+  "limits": [
+    "No remote CI or physical device run",
+    "Subtitle requests, thumbnails, optional built-in plugin timers and async plugin results remain owned by later tasks",
+    "DOM rollback does not undo arbitrary external callback side effects"
+  ]
+}
