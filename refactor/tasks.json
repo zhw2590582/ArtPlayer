@@ -621,9 +621,12 @@
       "scope": [
         "workspace"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
-      "evidence": [],
+      "evidence": [
+        "changes/2026-09-10-ENG-10-test-reliability.md",
+        "test-reliability.md"
+      ],
       "id": "ENG-10",
       "phase": "2 工程保障",
       "title": "建立历史失败分级和测试可靠性规则",
