@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：ENG-03 公共行为与单元入口完成
+
+原 19 项播放/DASH 回归保留，JS/TS loader 与受控媒体夹具复用；同一份五组 Emitter 契约在发布 core 5.4.0、工作区和三格式候选上通过。统一 yarn test:unit/test 与 CI 入口已接入，见 [ENG-03](changes/2026-09-10-ENG-03-unit-entry.md)。当前 214 项，28 完成、186 待办；生产源码 TS 迁移仍为零。ENG-06 提交 b53461da，本任务独立提交，下一项 ENG-05 浏览器自动化。
+
 ## 当前实施：ENG-06 JS/TS 构建与开发完成
 
 正常 build/dev 支持指定包与唯一 JS/TS 入口，dev 可禁止自动打开浏览器并串行重建。构建夹具复现并修复 AMD 全局参数错误；63 产物中 39 字节相同、24 仅该修复；内置浏览器 42 个 AMD 入口、TS worker/资源及首页真实播放通过。见 [ENG-06](changes/2026-09-10-ENG-06-build-development.md)。

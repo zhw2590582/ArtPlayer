@@ -1,24 +1,9 @@
 import assert from 'node:assert/strict'
-import { Buffer } from 'node:buffer'
 // eslint-disable-next-line test/no-import-node-test -- Use the built-in runner without adding a test framework.
 import { mock, test } from 'node:test'
-import { fileURLToPath } from 'node:url'
-import { build } from 'vite'
-import { getViteBuildConfig } from '../scripts/utils.js'
+import { loadPackage } from './helpers/load.js'
 
-const config = getViteBuildConfig({
-  entry: fileURLToPath(new URL('../packages/artplayer-plugin-dash-control/src/index.js', import.meta.url)),
-  name: 'artplayerPluginDashControl',
-  format: 'es',
-  fileName: 'index.js',
-  minify: false,
-})
-config.build.write = false
-const result = await build(config)
-const outputs = (Array.isArray(result) ? result : [result]).flatMap(item => item.output)
-const { default: dashControl } = await import(
-  `data:text/javascript;base64,${Buffer.from(outputs.find(item => item.type === 'chunk').code).toString('base64')}`,
-)
+const { default: dashControl } = await loadPackage('artplayer-plugin-dash-control')
 
 function createPlayer() {
   const representations = [
