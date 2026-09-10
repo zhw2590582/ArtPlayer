@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 191 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 192 项，范围 22 个包及工作区/示例。
 
-状态：todo 186 / doing 0 / blocked 0 / done 5 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 186 / doing 0 / blocked 0 / done 6 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -46,12 +46,13 @@
 | DOC-03 | workspace<br>建立计划、契约、决策和协作记录 | DOC-02 | refactor 文档集与任务数据 | 每包有独立步骤、依赖、交付物和验收条件 | L | done |
 | DOC-04 | workspace<br>验证文档完整性与生成表 | DOC-03 | 计划生成校验工具、AGENTS 入口 | 依赖无环、包覆盖、生成同步、文档链接通过 | L | done |
 | DOC-05 | workspace<br>建立每任务提交规则并提交文档基线 | DOC-04 | 根指令、质量要求、AI 流程、变更记录与初始文档提交 | 文档与计划检查通过，独立 DOC-05 commit 保存本次交付；提交后核实 SHA 和工作区 | L | done |
+| DOC-06 | workspace<br>记录自主安装依赖与添加脚本授权 | DOC-05 | 根指令、工具链规范、AI 流程、决策及变更记录 | 授权、依赖归属、脚本文档和兼容验证要求明确，计划校验通过并独立提交 DOC-06 | L | done |
 
 ## 1 基线
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| BASE-01 | workspace<br>固定消费者发布基线 | DOC-05 | 各包 npm tarball/integrity、源码 SHA、历史支持矩阵 | 区分源码版本与实际已发布版本，最低核心/TS/浏览器支持有证据 | H | todo |
+| BASE-01 | workspace<br>固定消费者发布基线 | DOC-06 | 各包 npm tarball/integrity、源码 SHA、历史支持矩阵 | 区分源码版本与实际已发布版本，最低核心/TS/浏览器支持有证据 | H | todo |
 | BASE-02 | workspace<br>捕获公共 API 和属性描述符 | BASE-01 | 构造参数/默认值/静态及实例 API 快照 | 真实发布包反射与旧用户调用可重跑，未验证项明确 | H | todo |
 | BASE-03 | workspace<br>捕获事件、异步和生命周期 | BASE-02 | ready/restart/destroy、Promise、切源/插件事件 trace | 成功、失败、重入和多实例有断言，历史缺陷有标记 | H | todo |
 | BASE-04 | workspace<br>捕获 DOM、CSS 和官方 demo | BASE-02 | 模板/类名/变量及全部 demo 映射 | 用户样式覆盖、移动端与自定义 controls/setting 用法已记录 | M | todo |
@@ -370,3 +371,4 @@
 - DOC-03: [记录](progress.md)
 - DOC-04: [记录](progress.md)
 - DOC-05: [记录](changes/2026-09-10-DOC-05-task-commits.md)
+- DOC-06: [记录](changes/2026-09-10-DOC-06-dependencies-and-scripts.md)

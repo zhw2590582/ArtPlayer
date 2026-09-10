@@ -94,6 +94,24 @@
       ]
     },
     {
+      "id": "DOC-06",
+      "phase": "0 规划",
+      "title": "记录自主安装依赖与添加脚本授权",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-05"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "根指令、工具链规范、AI 流程、决策及变更记录",
+      "acceptance": "授权、依赖归属、脚本文档和兼容验证要求明确，计划校验通过并独立提交 DOC-06",
+      "evidence": [
+        "changes/2026-09-10-DOC-06-dependencies-and-scripts.md"
+      ]
+    },
+    {
       "id": "BASE-01",
       "phase": "1 基线",
       "title": "固定消费者发布基线",
@@ -101,7 +119,7 @@
         "workspace"
       ],
       "dependsOn": [
-        "DOC-05"
+        "DOC-06"
       ],
       "status": "todo",
       "risk": "H",
