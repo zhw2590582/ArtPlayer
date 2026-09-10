@@ -369,11 +369,16 @@
         "BASE-03",
         "BASE-04"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "固定媒体/设备测量、包体积、反复装卸资源报告",
       "acceptance": "多次采样可重跑，指标和审查阈值确定，不承诺未经测量的收益；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-BASE-06-performance.md",
+        "baselines/performance-coverage.md",
+        "baselines/performance.json",
+        "baselines/sizes.json"
+      ]
     },
     {
       "id": "BASE-07",
@@ -389,7 +394,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "销毁/切源/类型差异、vendored 许可和外部 SDK 清单",
-      "acceptance": "已确认与待复现分开，每项有负责任务及兼容处理路线；纳入 BASE-TYPE-01/02/03/04 和 BASE-DIST-01 的发布/声明/工作区证据",
+      "acceptance": "已确认与待复现分开，每项有负责任务及兼容处理路线；纳入 BASE-TYPE-01/02/03/04 和 BASE-DIST-01 的发布/声明/工作区证据；纳入 BASE-PERF-01 销毁后 resize/notice 延迟工作",
       "evidence": []
     },
     {
@@ -568,7 +573,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "覆盖率基线、资源清理断言、性能报告与阈值",
-      "acceptance": "关键生命周期分支有门槛，报告不靠无意义断言堆数量",
+      "acceptance": "关键生命周期分支有门槛，报告不靠无意义断言堆数量；将 BASE-06 的同环境多组配对、计时/压缩审查阈值与资源异常分开接入候选，不把历史现象冻结成正常要求",
       "evidence": []
     },
     {
@@ -769,7 +774,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "构造失败回收、重复/重入 destroy、instances 修复",
-      "acceptance": "事件顺序、removeHtml、多实例和销毁中异步有真实回归；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-04/05 并增加候选正向回归",
+      "acceptance": "事件顺序、removeHtml、多实例和销毁中异步有真实回归；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-04/05 并增加候选正向回归；协调 BASE-PERF-01 销毁后定时器与回调归属",
       "evidence": []
     },
     {
@@ -989,7 +994,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "events/hotkey 的明确 document 与资源归属",
-      "acceptance": "跨 document 重绑、触摸/键盘、快捷键及销毁无重复响应",
+      "acceptance": "跨 document 重绑、触摸/键盘、快捷键及销毁无重复响应；修复 BASE-PERF-01 pending resize debounce 销毁后执行，并验证正常 resize 不变",
       "evidence": []
     },
     {
@@ -1007,7 +1012,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "autoPlayback/autoOrientation/fastForward/lock/miniProgressBar 及 info/notice/loading/mask",
-      "acceptance": "默认启用条件、storage 格式、定时器/动画清理通过",
+      "acceptance": "默认启用条件、storage 格式、定时器/动画清理通过；结合 BASE-PERF-01 防止销毁后重新安排 notice timer",
       "evidence": []
     },
     {
@@ -3555,7 +3560,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "DOM 读写、进度更新、持久化、初始化的测量与改进",
-      "acceptance": "相同设备媒体多次比较，契约不变，收益及无效尝试记录",
+      "acceptance": "相同设备媒体多次比较，契约不变，收益及无效尝试记录；复用 BASE-06 的原始样本与测量限制，至少三组同环境旧新配对，不以单次变快宣称收益",
       "evidence": []
     },
     {

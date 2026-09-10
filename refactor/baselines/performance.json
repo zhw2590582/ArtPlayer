@@ -1,0 +1,1488 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-06",
+  "sourceCommit": "c7a375e1",
+  "browserSurface": "Codex in-app browser",
+  "timingThresholds": {
+    "constructorMs": {
+      "relative": 0.25,
+      "absoluteMs": 2
+    },
+    "readyMs": {
+      "relative": 0.25,
+      "absoluteMs": 50
+    },
+    "playResolvedMs": {
+      "relative": 0.25,
+      "absoluteMs": 10
+    },
+    "destroyMs": {
+      "relative": 0.25,
+      "absoluteMs": 2
+    }
+  },
+  "runs": [
+    {
+      "kind": "performance",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+        "language": "zh-CN",
+        "hardwareConcurrency": 12,
+        "deviceMemory": 32,
+        "devicePixelRatio": 1,
+        "viewport": {
+          "width": 890,
+          "height": 1272
+        },
+        "visibility": "visible"
+      },
+      "scripts": [
+        "/releases/artplayer/dist/artplayer.js",
+        "/releases/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js",
+        "/fixtures/performance.js"
+      ],
+      "samples": [
+        {
+          "configuration": "core",
+          "warmup": true,
+          "round": 0,
+          "constructorMs": 8.099999994039536,
+          "readyMs": 27.700000002980232,
+          "playResolvedMs": 5,
+          "playbackObservedMs": 234.5,
+          "mediaProgress": 0.16374,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.5999999940395355,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": true,
+          "round": 0,
+          "constructorMs": 7.5999999940395355,
+          "readyMs": 28.799999997019768,
+          "playResolvedMs": 2.0999999940395355,
+          "playbackObservedMs": 233.09999999403954,
+          "mediaProgress": 0.164939,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 1.5,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 1,
+          "constructorMs": 3,
+          "readyMs": 15.800000011920929,
+          "playResolvedMs": 3.2999999970197678,
+          "playbackObservedMs": 233,
+          "mediaProgress": 0.16683,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 2.800000011920929,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 1,
+          "constructorMs": 6.9000000059604645,
+          "readyMs": 30.700000002980232,
+          "playResolvedMs": 3.5999999940395355,
+          "playbackObservedMs": 233.29999999701977,
+          "mediaProgress": 0.161376,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.4000000059604645,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 2,
+          "constructorMs": 5,
+          "readyMs": 12.400000005960464,
+          "playResolvedMs": 2.5,
+          "playbackObservedMs": 217.5,
+          "mediaProgress": 0.158314,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 5.799999997019768,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 2,
+          "constructorMs": 3.8999999910593033,
+          "readyMs": 27,
+          "playResolvedMs": 4.399999991059303,
+          "playbackObservedMs": 232.29999999701977,
+          "mediaProgress": 0.161005,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.1000000089406967,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 3,
+          "constructorMs": 5.600000008940697,
+          "readyMs": 31.200000002980232,
+          "playResolvedMs": 4.0999999940395355,
+          "playbackObservedMs": 215.79999999701977,
+          "mediaProgress": 0.151102,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 3,
+          "constructorMs": 4.700000002980232,
+          "readyMs": 14.700000002980232,
+          "playResolvedMs": 1.9000000059604645,
+          "playbackObservedMs": 215.40000000596046,
+          "mediaProgress": 0.15072,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 4,
+          "constructorMs": 7,
+          "readyMs": 30.19999998807907,
+          "playResolvedMs": 3,
+          "playbackObservedMs": 233.30000001192093,
+          "mediaProgress": 0.161219,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 4,
+          "constructorMs": 7.5,
+          "readyMs": 29.799999997019768,
+          "playResolvedMs": 3.4000000059604645,
+          "playbackObservedMs": 233.70000000298023,
+          "mediaProgress": 0.170126,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.1000000089406967,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 5,
+          "constructorMs": 6.200000002980232,
+          "readyMs": 31.099999994039536,
+          "playResolvedMs": 3,
+          "playbackObservedMs": 232.5,
+          "mediaProgress": 0.151235,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.199999988079071,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 5,
+          "constructorMs": 5.700000002980232,
+          "readyMs": 30.099999994039536,
+          "playResolvedMs": 2.9000000059604645,
+          "playbackObservedMs": 232.90000000596046,
+          "mediaProgress": 0.161492,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.7000000029802322,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        }
+      ],
+      "resources": [
+        {
+          "configuration": "core",
+          "round": 0,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 364.30000001192093,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "chapter",
+          "round": 0,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 354.3999999910593,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "core",
+          "round": 1,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 361.1000000089407,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "chapter",
+          "round": 1,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 358.8999999910593,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "core",
+          "round": 2,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 364.59999999403954,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "chapter",
+          "round": 2,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 350.20000000298023,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        }
+      ],
+      "errors": [],
+      "unhandled": [],
+      "visibilityChanges": [],
+      "remainingInstances": 0,
+      "capture": {
+        "capturedAt": "2026-09-10T12:39:24.007Z",
+        "releases": [
+          {
+            "name": "artplayer",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js",
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "version": "1.1.0",
+            "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+            "member": "package/dist/artplayer-plugin-chapter.js",
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+          }
+        ],
+        "fixtureHashAlgorithm": "sha256-lf",
+        "fixtures": {
+          "performance.html": "0a039781773f0c90edf6cb9fbe11049d321ee971dae8ae0b8779707648775508",
+          "performance.js": "f72abbead56dc6499c5f08cebbd90fffc9fa9ca42d788f71ddcce31f70259a0f"
+        },
+        "media": {
+          "video.mp4": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+        }
+      }
+    },
+    {
+      "kind": "performance",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+        "language": "zh-CN",
+        "hardwareConcurrency": 12,
+        "deviceMemory": 32,
+        "devicePixelRatio": 1,
+        "viewport": {
+          "width": 890,
+          "height": 1272
+        },
+        "visibility": "visible"
+      },
+      "scripts": [
+        "/releases/artplayer/dist/artplayer.js",
+        "/releases/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js",
+        "/fixtures/performance.js"
+      ],
+      "samples": [
+        {
+          "configuration": "core",
+          "warmup": true,
+          "round": 0,
+          "constructorMs": 10,
+          "readyMs": 42.8999999910593,
+          "playResolvedMs": 5.100000008940697,
+          "playbackObservedMs": 232.79999999701977,
+          "mediaProgress": 0.160365,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 1.2000000029802322,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": true,
+          "round": 0,
+          "constructorMs": 2.9000000059604645,
+          "readyMs": 15.900000005960464,
+          "playResolvedMs": 1.2999999970197678,
+          "playbackObservedMs": 216.79999999701977,
+          "mediaProgress": 0.1609,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 1,
+          "constructorMs": 4.0999999940395355,
+          "readyMs": 12.799999997019768,
+          "playResolvedMs": 3.1000000089406967,
+          "playbackObservedMs": 216.6000000089407,
+          "mediaProgress": 0.1511,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 1.7999999970197678,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 1,
+          "constructorMs": 3.1000000089406967,
+          "readyMs": 14.5,
+          "playResolvedMs": 1.9000000059604645,
+          "playbackObservedMs": 217.40000000596046,
+          "mediaProgress": 0.157789,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.2000000029802322,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 2,
+          "constructorMs": 3.6000000089406967,
+          "readyMs": 12.600000008940697,
+          "playResolvedMs": 1.5999999940395355,
+          "playbackObservedMs": 217,
+          "mediaProgress": 0.150429,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 0.9000000059604645,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 2,
+          "constructorMs": 1.7000000029802322,
+          "readyMs": 15.700000002980232,
+          "playResolvedMs": 1.2999999970197678,
+          "playbackObservedMs": 217.5,
+          "mediaProgress": 0.161528,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 4,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 3,
+          "constructorMs": 3.6000000089406967,
+          "readyMs": 12,
+          "playResolvedMs": 2.5,
+          "playbackObservedMs": 217.29999999701977,
+          "mediaProgress": 0.153246,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 2.7999999970197678,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 3,
+          "constructorMs": 5.600000008940697,
+          "readyMs": 39.5,
+          "playResolvedMs": 1.2000000029802322,
+          "playbackObservedMs": 207.70000000298023,
+          "mediaProgress": 0.160302,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 2.5,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 4,
+          "constructorMs": 4.5999999940395355,
+          "readyMs": 14.400000005960464,
+          "playResolvedMs": 3.3999999910593033,
+          "playbackObservedMs": 232.69999998807907,
+          "mediaProgress": 0.164161,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.3999999910593033,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 4,
+          "constructorMs": 5,
+          "readyMs": 12.400000005960464,
+          "playResolvedMs": 2.5,
+          "playbackObservedMs": 217.5,
+          "mediaProgress": 0.158221,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 2.9000000059604645,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "core",
+          "warmup": false,
+          "round": 5,
+          "constructorMs": 5.5,
+          "readyMs": 30.30000001192093,
+          "playResolvedMs": 4.199999988079071,
+          "playbackObservedMs": 233,
+          "mediaProgress": 0.161452,
+          "videoWidth": 640,
+          "nodes": 113,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.1000000089406967,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        },
+        {
+          "configuration": "chapter",
+          "warmup": false,
+          "round": 5,
+          "constructorMs": 5.799999997019768,
+          "readyMs": 12.099999994039536,
+          "playResolvedMs": 1.4000000059604645,
+          "playbackObservedMs": 234.30000001192093,
+          "mediaProgress": 0.164744,
+          "videoWidth": 640,
+          "nodes": 125,
+          "proxyCleanupEntries": 57,
+          "destroyMs": 3.9000000059604645,
+          "afterDestroy": {
+            "nodes": 0,
+            "instances": 0,
+            "proxyCleanupEntries": 0,
+            "paused": true,
+            "sourceAttribute": null
+          }
+        }
+      ],
+      "resources": [
+        {
+          "configuration": "core",
+          "round": 0,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 364.29999999701977,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "chapter",
+          "round": 0,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 350.8999999910593,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "core",
+          "round": 1,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 356.59999999403954,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "chapter",
+          "round": 1,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 357.5,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "core",
+          "round": 2,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 362.8999999910593,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        },
+        {
+          "configuration": "chapter",
+          "round": 2,
+          "useRaf": true,
+          "before": {
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 1000
+              },
+              {
+                "kind": "raf",
+                "delay": null
+              },
+              {
+                "kind": "timeout",
+                "delay": 2000
+              },
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "proxyCleanupEntries": 58,
+            "frames": 2,
+            "proxyCalls": 1
+          },
+          "immediatelyAfter": [
+            {
+              "kind": "timeout",
+              "delay": 200
+            }
+          ],
+          "after": {
+            "observedMs": 364.5,
+            "timers": [
+              {
+                "kind": "timeout",
+                "delay": 2000
+              }
+            ],
+            "lateCallbacks": [
+              {
+                "kind": "timeout",
+                "delay": 200
+              }
+            ],
+            "lateResizeEvents": 1,
+            "framesAfterDestroy": 0,
+            "proxyCalls": 1,
+            "proxyCleanupEntries": 0,
+            "nodes": 0,
+            "instances": 0
+          }
+        }
+      ],
+      "errors": [],
+      "unhandled": [],
+      "visibilityChanges": [],
+      "remainingInstances": 0,
+      "capture": {
+        "capturedAt": "2026-09-10T12:42:22.321Z",
+        "releases": [
+          {
+            "name": "artplayer",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js",
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "version": "1.1.0",
+            "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+            "member": "package/dist/artplayer-plugin-chapter.js",
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+          }
+        ],
+        "fixtureHashAlgorithm": "sha256-lf",
+        "fixtures": {
+          "performance.html": "0a039781773f0c90edf6cb9fbe11049d321ee971dae8ae0b8779707648775508",
+          "performance.js": "f72abbead56dc6499c5f08cebbd90fffc9fa9ca42d788f71ddcce31f70259a0f"
+        },
+        "media": {
+          "video.mp4": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+        }
+      }
+    }
+  ],
+  "summaries": [
+    {
+      "core": {
+        "constructorMs": {
+          "count": 5,
+          "min": 3,
+          "median": 5.600000008940697,
+          "max": 7
+        },
+        "readyMs": {
+          "count": 5,
+          "min": 12.400000005960464,
+          "median": 30.19999998807907,
+          "max": 31.200000002980232
+        },
+        "playResolvedMs": {
+          "count": 5,
+          "min": 2.5,
+          "median": 3,
+          "max": 4.0999999940395355
+        },
+        "destroyMs": {
+          "count": 5,
+          "min": 2.800000011920929,
+          "median": 3,
+          "max": 5.799999997019768
+        }
+      },
+      "chapter": {
+        "constructorMs": {
+          "count": 5,
+          "min": 3.8999999910593033,
+          "median": 5.700000002980232,
+          "max": 7.5
+        },
+        "readyMs": {
+          "count": 5,
+          "min": 14.700000002980232,
+          "median": 29.799999997019768,
+          "max": 30.700000002980232
+        },
+        "playResolvedMs": {
+          "count": 5,
+          "min": 1.9000000059604645,
+          "median": 3.4000000059604645,
+          "max": 4.399999991059303
+        },
+        "destroyMs": {
+          "count": 5,
+          "min": 3,
+          "median": 3.1000000089406967,
+          "max": 3.7000000029802322
+        }
+      }
+    },
+    {
+      "core": {
+        "constructorMs": {
+          "count": 5,
+          "min": 3.6000000089406967,
+          "median": 4.0999999940395355,
+          "max": 5.5
+        },
+        "readyMs": {
+          "count": 5,
+          "min": 12,
+          "median": 12.799999997019768,
+          "max": 30.30000001192093
+        },
+        "playResolvedMs": {
+          "count": 5,
+          "min": 1.5999999940395355,
+          "median": 3.1000000089406967,
+          "max": 4.199999988079071
+        },
+        "destroyMs": {
+          "count": 5,
+          "min": 0.9000000059604645,
+          "median": 2.7999999970197678,
+          "max": 3.3999999910593033
+        }
+      },
+      "chapter": {
+        "constructorMs": {
+          "count": 5,
+          "min": 1.7000000029802322,
+          "median": 5,
+          "max": 5.799999997019768
+        },
+        "readyMs": {
+          "count": 5,
+          "min": 12.099999994039536,
+          "median": 14.5,
+          "max": 39.5
+        },
+        "playResolvedMs": {
+          "count": 5,
+          "min": 1.2000000029802322,
+          "median": 1.4000000059604645,
+          "max": 2.5
+        },
+        "destroyMs": {
+          "count": 5,
+          "min": 2.5,
+          "median": 3.2000000029802322,
+          "max": 4
+        }
+      }
+    }
+  ],
+  "verification": {
+    "comparison": {
+      "summary": {
+        "core": {
+          "constructorMs": {
+            "count": 5,
+            "min": 3.6000000089406967,
+            "median": 4.0999999940395355,
+            "max": 5.5
+          },
+          "readyMs": {
+            "count": 5,
+            "min": 12,
+            "median": 12.799999997019768,
+            "max": 30.30000001192093
+          },
+          "playResolvedMs": {
+            "count": 5,
+            "min": 1.5999999940395355,
+            "median": 3.1000000089406967,
+            "max": 4.199999988079071
+          },
+          "destroyMs": {
+            "count": 5,
+            "min": 0.9000000059604645,
+            "median": 2.7999999970197678,
+            "max": 3.3999999910593033
+          }
+        },
+        "chapter": {
+          "constructorMs": {
+            "count": 5,
+            "min": 1.7000000029802322,
+            "median": 5,
+            "max": 5.799999997019768
+          },
+          "readyMs": {
+            "count": 5,
+            "min": 12.099999994039536,
+            "median": 14.5,
+            "max": 39.5
+          },
+          "playResolvedMs": {
+            "count": 5,
+            "min": 1.2000000029802322,
+            "median": 1.4000000059604645,
+            "max": 2.5
+          },
+          "destroyMs": {
+            "count": 5,
+            "min": 2.5,
+            "median": 3.2000000029802322,
+            "max": 4
+          }
+        }
+      },
+      "reviewSignals": [],
+      "resourceProfileChanged": false
+    }
+  },
+  "findings": [
+    {
+      "id": "BASE-PERF-01",
+      "owner": "CORE-17",
+      "relatedOwners": [
+        "CORE-04",
+        "CORE-18"
+      ],
+      "observation": "Pending resize debounce runs after destroy and schedules a new notice timer; observed for at least 350ms, not proof of a permanent leak."
+    }
+  ],
+  "hostContext": {
+    "source": "Windows CIM read after measurement; not a browser benchmark API",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12400F",
+    "physicalCores": 6,
+    "logicalProcessors": 12,
+    "memoryGiB": 31.8
+  }
+}

@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 214 项，范围 22 个包及工作区/示例。
 
-状态：todo 192 / doing 0 / blocked 0 / done 22 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 191 / doing 0 / blocked 0 / done 23 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -65,8 +65,8 @@
 | BASE-03 | workspace<br>捕获事件、异步和生命周期 | BASE-02 | ready/restart/destroy、Promise、切源/插件事件 trace；登记契约/版本/固定测试 ID/命令/报告与负责任务 | 成功、失败、重入和多实例有断言，历史缺陷有标记；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务 | H | done |
 | BASE-04 | workspace<br>捕获 DOM、CSS 和官方 demo | BASE-02 | 核心模板/类名/变量、键盘/焦点/可访问名称基线及全 demo 路径映射；docs-browser-testing.md 中 HTML/编辑器的脚本来源与存储状态；登记契约/版本/固定测试 ID/命令/报告与负责任务 | 核心/试点用户样式和输入用法已记录，其他 demo 运行状态与未知项明确；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务 | M | done |
 | BASE-05 | workspace<br>捕获包入口、资源和类型消费 | BASE-01 | 全包 manifest/资源路径清单；核心/试点的 UMD/AMD/ESM/CJS/legacy/i18n 和类型消费者基线；登记契约/版本/固定测试 ID/命令/报告与负责任务；区分库/npm 与站点实际分发类别，SSR import/模板/非浏览器构造错误分别捕获 | 核心/试点隔离消费可运行，其他包由各自契约任务验证，thumbnail tool 差异已登记 | H | done |
-| BASE-06 | workspace<br>记录性能与资源基线 | BASE-03, BASE-04 | 固定媒体/设备测量、包体积、反复装卸资源报告 | 多次采样可重跑，指标和审查阈值确定，不承诺未经测量的收益；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务 | M | todo |
-| BASE-07 | workspace<br>建立差异和风险台账 | BASE-03, BASE-05 | 销毁/切源/类型差异、vendored 许可和外部 SDK 清单 | 已确认与待复现分开，每项有负责任务及兼容处理路线；纳入 BASE-TYPE-01/02/03/04 和 BASE-DIST-01 的发布/声明/工作区证据 | H | todo |
+| BASE-06 | workspace<br>记录性能与资源基线 | BASE-03, BASE-04 | 固定媒体/设备测量、包体积、反复装卸资源报告 | 多次采样可重跑，指标和审查阈值确定，不承诺未经测量的收益；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务 | M | done |
+| BASE-07 | workspace<br>建立差异和风险台账 | BASE-03, BASE-05 | 销毁/切源/类型差异、vendored 许可和外部 SDK 清单 | 已确认与待复现分开，每项有负责任务及兼容处理路线；纳入 BASE-TYPE-01/02/03/04 和 BASE-DIST-01 的发布/声明/工作区证据；纳入 BASE-PERF-01 销毁后 resize/notice 延迟工作 | H | todo |
 | BASE-08 | workspace<br>建立消费者与真实环境验证矩阵 | BASE-01, BASE-05 | 每包版本/浏览器/codec/SDK/设备/样本、证据和负责验证任务的矩阵 | 格式兼容与运行能力分开，未知/缺环境不算通过，明确哪些检查阻止哪些批次发布 | H | todo |
 
 ## 2 工程保障
@@ -81,7 +81,7 @@
 | ENG-05 | workspace<br>建立真实浏览器测试服务 | ENG-03, BASE-04, BASE-08 | Playwright projects、本地 Range/失败媒体服务；复用 docs 页面/样本的状态隔离、错误采集与候选资源映射 | Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行；以媒体状态断言判定通过，区分轻量用例与真实编辑器交互 | M | todo |
 | ENG-06 | workspace<br>支持按包非交互与 JS/TS 构建 | ENG-02, BASE-05 | build/dev 入口解析、指定包参数、原交互保留 | 三种产物、Less/SVG/worker 和本地 8082 demo 正常；保持 BASE-05 的 AMD 同时写入全局行为及 i18n/legacy 入口 | H | todo |
 | ENG-07 | workspace<br>建立 tarball 消费与产物检查 | ENG-04, ENG-06 | 隔离 npm 消费 fixtures、API/声明/入口差分 | 不借 workspace 源码通过，能识别缺文件与默认导出变化 | H | todo |
-| ENG-08 | workspace<br>增加覆盖率、资源与性能报告 | ENG-03, ENG-05, BASE-06 | 覆盖率基线、资源清理断言、性能报告与阈值 | 关键生命周期分支有门槛，报告不靠无意义断言堆数量 | M | todo |
+| ENG-08 | workspace<br>增加覆盖率、资源与性能报告 | ENG-03, ENG-05, BASE-06 | 覆盖率基线、资源清理断言、性能报告与阈值 | 关键生命周期分支有门槛，报告不靠无意义断言堆数量；将 BASE-06 的同环境多组配对、计时/压缩审查阈值与资源异常分开接入候选，不把历史现象冻结成正常要求 | M | todo |
 | ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04 | 共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入；契约-支持版本-测试 ID-命令-候选/报告-任务的覆盖索引 | 核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit；计划/已执行/缺证据分开，识别缺少验证归属的公开契约 | M | todo |
 | ENG-10 | workspace<br>建立历史失败分级和测试可靠性规则 | ENG-03, ENG-04, ENG-05, ENG-07, BASE-07 | 历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则 | 不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见 | M | todo |
 
@@ -107,7 +107,7 @@
 | CORE-01 | artplayer<br>迁移纯工具并冻结导出 | ENG-03, ENG-04, ENG-06, PILOT-01 | utils/time/property/format/file/error/subtitle 的分批 TS 迁移 | Artplayer.utils 导出/参数/绑定保持，纯逻辑与类型测试通过 | M | todo |
 | CORE-02 | artplayer<br>迁移内部 Emitter | CORE-01, BASE-03 | 带类型事件映射的原 Emitter 实现 | ctx、once/off、重入/异常和链式返回保持 | H | todo |
 | CORE-03 | artplayer<br>建立内部资源作用域 | CORE-02 | 监听/订阅/定时器/RAF/请求/URL 的资源登记 | 实例与操作作用域分离，单项清理失败不阻断其他资源 | H | todo |
-| CORE-04 | artplayer<br>修复初始化与销毁生命周期 | CORE-03, ENG-05, BASE-07 | 构造失败回收、重复/重入 destroy、instances 修复 | 事件顺序、removeHtml、多实例和销毁中异步有真实回归；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-04/05 并增加候选正向回归 | H | todo |
+| CORE-04 | artplayer<br>修复初始化与销毁生命周期 | CORE-03, ENG-05, BASE-07 | 构造失败回收、重复/重入 destroy、instances 修复 | 事件顺序、removeHtml、多实例和销毁中异步有真实回归；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-04/05 并增加候选正向回归；协调 BASE-PERF-01 销毁后定时器与回调归属 | H | todo |
 | CORE-05 | artplayer<br>区分输入配置和内部配置 | CORE-01, ENG-04 | Option/ResolvedOption、默认值与校验整理 | 配置合并/错误时机不变，JS 输入仍运行时校验 | M | todo |
 | CORE-06 | artplayer<br>建立内部媒体与宿主类型 | CORE-05 | 原生 video、canvas shim、UI host 类型 | 不更改公开 art.video 用法，不以 HTMLVideoElement 断言掩盖 shim | M | todo |
 | CORE-07 | artplayer<br>逐项协调公开声明差异 | CORE-02, CORE-06, BASE-07 | plugins/toggle/cue/setting/static 的旧新类型对照 | 每项有兼容重载/扩展或待决结论，不能删除旧类型样例；处理 BASE-TYPE-01/04，分别保留旧合法声明消费并验证真实返回 | H | todo |
@@ -120,8 +120,8 @@
 | CORE-14 | artplayer<br>拆分设置树、渲染和布局 | CORE-13 | setting model/selection/render/layout 的分批实现 | 不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过；结合 BASE-DOM-02 验证窄容器设置定位 | H | todo |
 | CORE-15 | artplayer<br>迁移字幕获取、解析和渲染 | CORE-11, CORE-13 | subtitle 请求/track/DOM/URL 生命周期与类型 | 过期结果、偏移、cue 数组、原生全屏及错误路径通过 | H | todo |
 | CORE-16 | artplayer<br>迁移全屏、PiP、mini 与尺寸模式 | CORE-11, CORE-12 | 显示模式服务和原公开属性门面 | 模式互斥/恢复位置、手势权限、移动方向和退出失败通过 | H | todo |
-| CORE-17 | artplayer<br>迁移键盘、手势、焦点和全局事件 | CORE-13, CORE-16 | events/hotkey 的明确 document 与资源归属 | 跨 document 重绑、触摸/键盘、快捷键及销毁无重复响应 | H | todo |
-| CORE-18 | artplayer<br>迁移内置插件和提示模块 | CORE-14, CORE-16, CORE-17 | autoPlayback/autoOrientation/fastForward/lock/miniProgressBar 及 info/notice/loading/mask | 默认启用条件、storage 格式、定时器/动画清理通过 | M | todo |
+| CORE-17 | artplayer<br>迁移键盘、手势、焦点和全局事件 | CORE-13, CORE-16 | events/hotkey 的明确 document 与资源归属 | 跨 document 重绑、触摸/键盘、快捷键及销毁无重复响应；修复 BASE-PERF-01 pending resize debounce 销毁后执行，并验证正常 resize 不变 | H | todo |
+| CORE-18 | artplayer<br>迁移内置插件和提示模块 | CORE-14, CORE-16, CORE-17 | autoPlayback/autoOrientation/fastForward/lock/miniProgressBar 及 info/notice/loading/mask | 默认启用条件、storage 格式、定时器/动画清理通过；结合 BASE-PERF-01 防止销毁后重新安排 notice timer | M | todo |
 | CORE-19 | artplayer<br>整理进度、质量、缩略图和截图 | CORE-10, CORE-13, CORE-16 | 相关 player/control 功能与纯计算分离 | 截图跨域失败、缩略图布局、quality/进度边界保持 | M | todo |
 | CORE-20 | artplayer<br>收敛核心入口与依赖方向 | CORE-14, CORE-15, CORE-18, CORE-19 | Artplayer 门面、初始化依赖与最终目录 | 所有核心自有源码迁移，公开描述符/静态接口/事件差分通过 | H | todo |
 | CORE-21 | artplayer<br>生成核心声明并校验包内容 | CORE-20, ENG-07 | 由 TS 生成的既有入口声明与三种发布产物 | 内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过 | H | todo |
@@ -375,7 +375,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | MOD-01 | workspace<br>Bun 固定版本干净安装试点 | ENG-09 | 独立目录的 Bun 安装与 Yarn 冻结基线对比，默认仍为用户选定的 Yarn | Node 测试仍通过；安装与资源一致才决定采用；不改 bundler；不自动替换默认 packageManager 或维护锁文件 | H | todo |
 | MOD-02 | workspace<br>整理剩余开发/构建脚本与插件模板 | ENG-06, SITE-03 | dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API | 旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证 | M | todo |
-| MOD-03 | workspace<br>测量并优化核心热路径 | CORE-22, ENG-08 | DOM 读写、进度更新、持久化、初始化的测量与改进 | 相同设备媒体多次比较，契约不变，收益及无效尝试记录 | M | todo |
+| MOD-03 | workspace<br>测量并优化核心热路径 | CORE-22, ENG-08 | DOM 读写、进度更新、持久化、初始化的测量与改进 | 相同设备媒体多次比较，契约不变，收益及无效尝试记录；复用 BASE-06 的原始样本与测量限制，至少三组同环境旧新配对，不以单次变快宣称收益 | M | todo |
 | MOD-04 | workspace<br>测量并优化重型插件/proxy | PKG-DANMUKU-09, PKG-MASK-06, PKG-MB-10, ENG-08 | 帧/队列/推理/音画同步与资源长期运行比较 | 不改默认算法/阈值，性能改善有证据；无收益则保留旧实现 | M | todo |
 | MOD-05 | workspace<br>完成工具链与性能采用决策 | MOD-01, MOD-02, MOD-03, MOD-04 | 最终 runtime/packageManager/构建配置及性能台账 | 干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换 | M | todo |
 
@@ -422,6 +422,7 @@
 - BASE-03: [记录](changes/2026-09-10-BASE-03-lifecycle.md) [记录](baselines/lifecycle.json) [记录](baselines/lifecycle-coverage.md)
 - BASE-04: [记录](changes/2026-09-10-BASE-04-dom.md) [记录](baselines/dom.json) [记录](baselines/dom-coverage.md) [记录](baselines/demo-inventory.json)
 - BASE-05: [记录](changes/2026-09-10-BASE-05-consumers.md) [记录](baselines/consumer-coverage.md) [记录](baselines/consumers.json) [记录](baselines/ssr.json) [记录](baselines/distribution.json)
+- BASE-06: [记录](changes/2026-09-10-BASE-06-performance.md) [记录](baselines/performance-coverage.md) [记录](baselines/performance.json) [记录](baselines/sizes.json)
 - ENG-01: [记录](changes/2026-09-10-ENG-01-reproducible-toolchain.md) [记录](baselines/toolchain-validation.json)
 - ENG-PM-01: [记录](changes/2026-09-10-ENG-PM-01-yarn-toolchain.md) [记录](baselines/yarn-validation.json)
 - ENG-02: [记录](changes/2026-09-10-ENG-02-readonly-ci.md) [记录](baselines/ci-validation.json)

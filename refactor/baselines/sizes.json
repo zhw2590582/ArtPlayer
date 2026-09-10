@@ -1,0 +1,1036 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-06",
+  "sourceCommit": "c7a375e1",
+  "capturedAt": "2026-09-10T12:43:04.099Z",
+  "node": "v24.21.0",
+  "zlib": "1.3.2.1-motley-8002e91",
+  "brotli": "1.2.0",
+  "note": "Independent file compression: gzip level 9, Brotli quality 6. Not production HTTP transfer size. Workspace files match BASE-05 observed hashes and may be stale; do not treat them as verified npm releases. Documentation site has no library bundle entry.",
+  "reviewThreshold": {
+    "relative": 0.05,
+    "absoluteBytes": 1024,
+    "rule": "Review if same-file increase exceeds max(5 percent, 1024 bytes); not an optimization or automatic release verdict"
+  },
+  "published": [
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/artplayer.js",
+      "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+      "raw": 134037,
+      "gzip9": 35486,
+      "brotli6": 32533
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/artplayer.legacy.js",
+      "sha256": "cef83f9dac8a343060329ea6c5d603f0e7811fd0fd6c1590ae1c47f9e0afc9bb",
+      "raw": 135748,
+      "gzip9": 36021,
+      "brotli6": 33045
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/artplayer.mjs",
+      "sha256": "a1800b37ac7549f52fa960fe28bc6e1c69ec18bd4bc9a7e2534aecc3df10eb3e",
+      "raw": 208826,
+      "gzip9": 43868,
+      "brotli6": 40443
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/ar.js",
+      "sha256": "61c43469ee95a00dc624583f418653e3dcbf48b24ae6a4c203ad986234852365",
+      "raw": 1742,
+      "gzip9": 868,
+      "brotli6": 823
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/ar.mjs",
+      "sha256": "68922fdc9f80d3321ea0654c8ff8f5875b6715103d2b14ffcf17f93738b39cf9",
+      "raw": 1686,
+      "gzip9": 749,
+      "brotli6": 689
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/cs.js",
+      "sha256": "ad7bbf8853204a6955ef84bfbd932cab3f141a7e73a8145f28ba7a5b2b83b7c0",
+      "raw": 1441,
+      "gzip9": 797,
+      "brotli6": 770
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/cs.mjs",
+      "sha256": "29a489be767fda9d46b59c9adbaad323f17a5e67daf7f7aa78b7ce8fb5b4d63c",
+      "raw": 1385,
+      "gzip9": 688,
+      "brotli6": 680
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/es.js",
+      "sha256": "aaa95cc9645b734c58fba06fdbcdda962c4cb3a0e7eb6206f06d6168208cd86b",
+      "raw": 1398,
+      "gzip9": 733,
+      "brotli6": 703
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/es.mjs",
+      "sha256": "331d2ef74da2eec8f3304fec0b5340c795d9c1eec24e08167c9a7b66bf30973b",
+      "raw": 1342,
+      "gzip9": 630,
+      "brotli6": 613
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/fa.js",
+      "sha256": "c998467261cbdfd2c3fb16c0ae4b2c48c409f42f41aea35ed94766f1e12819d5",
+      "raw": 1597,
+      "gzip9": 855,
+      "brotli6": 812
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/fa.mjs",
+      "sha256": "b4c98894b46975cebf5ea9088bcf0b5bdfd408bc3c82f4e2e9128133c7de2d4d",
+      "raw": 1541,
+      "gzip9": 737,
+      "brotli6": 687
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/fr.js",
+      "sha256": "6b06e16b1fb01c8695fb5c10b32a00421399180de5dc5d845ce17010f2fd3e66",
+      "raw": 1413,
+      "gzip9": 733,
+      "brotli6": 709
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/fr.mjs",
+      "sha256": "abe8e3548fa7304f302e2c74818a6176edee8c3b65e33cb6f62e96d130749ee5",
+      "raw": 1357,
+      "gzip9": 634,
+      "brotli6": 624
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/id.js",
+      "sha256": "a5832c4bfc03c7f16418bf4b324d9773895541dc823ece9114741794737aad74",
+      "raw": 1347,
+      "gzip9": 703,
+      "brotli6": 679
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/id.mjs",
+      "sha256": "a40a433be6ca1ac1ee1810fe805ee60784d349e59b9ad82ea80201d660db4e68",
+      "raw": 1291,
+      "gzip9": 599,
+      "brotli6": 599
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/pl.js",
+      "sha256": "2491487062bdfc91d60f17c6e9a83ee196c991216d15f525fe3536b98873da2c",
+      "raw": 1402,
+      "gzip9": 791,
+      "brotli6": 765
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/pl.mjs",
+      "sha256": "ad8ea2c03785edbfe1f35761bec21b8a04213f9fa88a794d850bb3973564930f",
+      "raw": 1346,
+      "gzip9": 680,
+      "brotli6": 678
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/ru.js",
+      "sha256": "2d3a9ee6533cb6fa961f0a24a25ce63cc76992fca17e1769b6fa75104f8a1529",
+      "raw": 1998,
+      "gzip9": 995,
+      "brotli6": 938
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/ru.mjs",
+      "sha256": "a89b8c36cfd7c181c2b31aa823deda3d7c37b56b2b81746338c52ea1c1d93352",
+      "raw": 1942,
+      "gzip9": 881,
+      "brotli6": 808
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/tr.js",
+      "sha256": "438b06a4c3f479a2901b0085eaa7bdba8eaef87bdb07ff3faa559c85403fe433",
+      "raw": 1342,
+      "gzip9": 754,
+      "brotli6": 725
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/tr.mjs",
+      "sha256": "cc96f9cbb9c1587d5cd8f25b0b9800678ad76e93de089ae42c38dee16e6fe8fa",
+      "raw": 1286,
+      "gzip9": 646,
+      "brotli6": 638
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/vi.js",
+      "sha256": "1ffbd62843a902ea2967eab46432d3fc548f5633e53eed104314b523cacc46a8",
+      "raw": 1489,
+      "gzip9": 824,
+      "brotli6": 787
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/vi.mjs",
+      "sha256": "7872ded84622bcda20e8c1d70c597c2ba071b50701900efa47cc4683ee17f1a2",
+      "raw": 1433,
+      "gzip9": 712,
+      "brotli6": 696
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/zh-tw.js",
+      "sha256": "2d43577f98456488196921e1ec721695a95e1b8c827077286b02ce3fb987e8ff",
+      "raw": 1255,
+      "gzip9": 820,
+      "brotli6": 751
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "path": "package/dist/i18n/zh-tw.mjs",
+      "sha256": "7ec638b4babe59d3ab1d3e64abdd74a96fefb260a50e2cd7240f8d50a1340925",
+      "raw": 1197,
+      "gzip9": 695,
+      "brotli6": 620
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "path": "package/dist/artplayer-plugin-chapter.js",
+      "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+      "raw": 4973,
+      "gzip9": 1850,
+      "brotli6": 1653
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "path": "package/dist/artplayer-plugin-chapter.legacy.js",
+      "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+      "raw": 4973,
+      "gzip9": 1850,
+      "brotli6": 1653
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "path": "package/dist/artplayer-plugin-chapter.mjs",
+      "sha256": "61342a069b84e0731d44a2464d0dfe637d1514d0037c740371fc866c516d2209",
+      "raw": 7721,
+      "gzip9": 2126,
+      "brotli6": 1904
+    }
+  ],
+  "workspaceObserved": [
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/artplayer.js",
+      "sha256": "2ae05beeca573455af87b63259758f151f3c69e2a5553d6996cf1fcb161396b7",
+      "raw": 134753,
+      "gzip9": 35735,
+      "brotli6": 32757
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/artplayer.legacy.js",
+      "sha256": "3b85d82e59f0aaa61816ab66eb1a21735144a56310171b2ce571a00f2fb6f443",
+      "raw": 136473,
+      "gzip9": 36265,
+      "brotli6": 33246
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/artplayer.mjs",
+      "sha256": "f7df4dd5907dc58aaee1e456d7838e2ecfa352a74e219c08c318e80d98f94a0f",
+      "raw": 215072,
+      "gzip9": 44382,
+      "brotli6": 40944
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/ar.js",
+      "sha256": "61c43469ee95a00dc624583f418653e3dcbf48b24ae6a4c203ad986234852365",
+      "raw": 1742,
+      "gzip9": 868,
+      "brotli6": 823
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/ar.mjs",
+      "sha256": "fe7bf234e28e7c4405055051d230527ea5deb268168fe68bdc253cffd1af2703",
+      "raw": 1728,
+      "gzip9": 755,
+      "brotli6": 690
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/cs.js",
+      "sha256": "ad7bbf8853204a6955ef84bfbd932cab3f141a7e73a8145f28ba7a5b2b83b7c0",
+      "raw": 1441,
+      "gzip9": 797,
+      "brotli6": 770
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/cs.mjs",
+      "sha256": "a475449e19cffb67eb5762787752027bdc674f0d0d55fb10fbb5cd693dabe9da",
+      "raw": 1427,
+      "gzip9": 696,
+      "brotli6": 681
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/es.js",
+      "sha256": "aaa95cc9645b734c58fba06fdbcdda962c4cb3a0e7eb6206f06d6168208cd86b",
+      "raw": 1398,
+      "gzip9": 733,
+      "brotli6": 703
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/es.mjs",
+      "sha256": "f36b65a70247c580b9560ed5205a69916bf5d2b5c8bbbcaa41a4d015a0016272",
+      "raw": 1384,
+      "gzip9": 637,
+      "brotli6": 622
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/fa.js",
+      "sha256": "c998467261cbdfd2c3fb16c0ae4b2c48c409f42f41aea35ed94766f1e12819d5",
+      "raw": 1597,
+      "gzip9": 855,
+      "brotli6": 812
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/fa.mjs",
+      "sha256": "f44d249236e753606decc8b800f5f32888c6002d81975e1b1674f9a4c395cb8f",
+      "raw": 1583,
+      "gzip9": 745,
+      "brotli6": 690
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/fr.js",
+      "sha256": "6b06e16b1fb01c8695fb5c10b32a00421399180de5dc5d845ce17010f2fd3e66",
+      "raw": 1413,
+      "gzip9": 733,
+      "brotli6": 709
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/fr.mjs",
+      "sha256": "5b532775e7704e41f5ea5500d1d31d758f77b87c0d3e2e014f61ac3227cb3544",
+      "raw": 1399,
+      "gzip9": 642,
+      "brotli6": 634
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/id.js",
+      "sha256": "a5832c4bfc03c7f16418bf4b324d9773895541dc823ece9114741794737aad74",
+      "raw": 1347,
+      "gzip9": 703,
+      "brotli6": 679
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/id.mjs",
+      "sha256": "b18f86de99db2c5e71949f5c4e8e39130025b6d86e3dc61541fffd55826053d4",
+      "raw": 1333,
+      "gzip9": 607,
+      "brotli6": 600
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/pl.js",
+      "sha256": "2491487062bdfc91d60f17c6e9a83ee196c991216d15f525fe3536b98873da2c",
+      "raw": 1402,
+      "gzip9": 791,
+      "brotli6": 765
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/pl.mjs",
+      "sha256": "ba8f39c97ff5a4e5d28d62b91020c3b1f4844321eaad97a38d16beef58040be3",
+      "raw": 1388,
+      "gzip9": 688,
+      "brotli6": 677
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/ru.js",
+      "sha256": "2d3a9ee6533cb6fa961f0a24a25ce63cc76992fca17e1769b6fa75104f8a1529",
+      "raw": 1998,
+      "gzip9": 995,
+      "brotli6": 938
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/ru.mjs",
+      "sha256": "2e9ffc111f7d85170984d4e8a3d26b47eb4045a524696cc154dec11bd1495d96",
+      "raw": 1984,
+      "gzip9": 889,
+      "brotli6": 810
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/tr.js",
+      "sha256": "438b06a4c3f479a2901b0085eaa7bdba8eaef87bdb07ff3faa559c85403fe433",
+      "raw": 1342,
+      "gzip9": 754,
+      "brotli6": 725
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/tr.mjs",
+      "sha256": "a5a527bb40608558c1fe515e2a5a3552e6198eafbd79a2d10305f89cc3e7743f",
+      "raw": 1328,
+      "gzip9": 653,
+      "brotli6": 641
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/vi.js",
+      "sha256": "1ffbd62843a902ea2967eab46432d3fc548f5633e53eed104314b523cacc46a8",
+      "raw": 1489,
+      "gzip9": 824,
+      "brotli6": 787
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/vi.mjs",
+      "sha256": "06ac85d56d5d689d3db40e106d23cf06f6bdd867235b928613b9eb31ac3a51f8",
+      "raw": 1475,
+      "gzip9": 720,
+      "brotli6": 703
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/zh-tw.js",
+      "sha256": "2d43577f98456488196921e1ec721695a95e1b8c827077286b02ce3fb987e8ff",
+      "raw": 1255,
+      "gzip9": 820,
+      "brotli6": 751
+    },
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "path": "dist/i18n/zh-tw.mjs",
+      "sha256": "f6acdb6b64566abfa972bb2149ea7968f2f8c44c6d1cbc8813151f20d72c41bf",
+      "raw": 1239,
+      "gzip9": 705,
+      "brotli6": 619
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "2.1.0",
+      "path": "dist/artplayer-plugin-ads.js",
+      "sha256": "ceb2d8a23a6735c161b31a4a427d8a757679aaf8a5a106ef40a6f047061f1df8",
+      "raw": 5620,
+      "gzip9": 1930,
+      "brotli6": 1734
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "2.1.0",
+      "path": "dist/artplayer-plugin-ads.legacy.js",
+      "sha256": "1e10c3a6b51de18e54cd02dd342ab4010fc466de6257659cf1d2e087642aa9a3",
+      "raw": 5951,
+      "gzip9": 2090,
+      "brotli6": 1889
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "2.1.0",
+      "path": "dist/artplayer-plugin-ads.mjs",
+      "sha256": "5d53a55bd6fcc64a01abe460a6e9161240ee23bc8b4cf160c22c602de03f6356",
+      "raw": 9577,
+      "gzip9": 2330,
+      "brotli6": 2119
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-ambilight.js",
+      "sha256": "8f32290c65a13b0a3026dee0045fef4125a9c9ac788ecb1675aef05f79172693",
+      "raw": 1844,
+      "gzip9": 1039,
+      "brotli6": 936
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-ambilight.legacy.js",
+      "sha256": "8f32290c65a13b0a3026dee0045fef4125a9c9ac788ecb1675aef05f79172693",
+      "raw": 1844,
+      "gzip9": 1039,
+      "brotli6": 936
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-ambilight.mjs",
+      "sha256": "b9b56fdec4a39b5d9dd2f839ddefbe5e01d74823d5879b75bb776825ed1b8140",
+      "raw": 3433,
+      "gzip9": 1212,
+      "brotli6": 1098
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "version": "2.1.0",
+      "path": "dist/artplayer-plugin-asr.js",
+      "sha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+      "raw": 5064,
+      "gzip9": 2218,
+      "brotli6": 2041
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "version": "2.1.0",
+      "path": "dist/artplayer-plugin-asr.legacy.js",
+      "sha256": "8b9f07ce97a8ce2e4f29e41e79257be530fd7a76558369d34c3d7497ea606c33",
+      "raw": 5468,
+      "gzip9": 2344,
+      "brotli6": 2173
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "version": "2.1.0",
+      "path": "dist/artplayer-plugin-asr.mjs",
+      "sha256": "bf222a738fc7a8946769ebaf37c89d05968ec0d74fe1e6e5ec653e560cbb6eb8",
+      "raw": 9309,
+      "gzip9": 2808,
+      "brotli6": 2636
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-audio-track.js",
+      "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+      "raw": 1471,
+      "gzip9": 676,
+      "brotli6": 620
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-audio-track.legacy.js",
+      "sha256": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+      "raw": 1497,
+      "gzip9": 694,
+      "brotli6": 639
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-audio-track.mjs",
+      "sha256": "df9e2215d283450ba799545f38d26ed582dd245efe5abc31641bf88eb8d6faeb",
+      "raw": 2330,
+      "gzip9": 730,
+      "brotli6": 663
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-auto-thumbnail.js",
+      "sha256": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a",
+      "raw": 1299,
+      "gzip9": 734,
+      "brotli6": 661
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "sha256": "3561e51e0a5f294b56641bf0884a24a4a9e326582d2e99416a04f9526c7d0cc0",
+      "raw": 1949,
+      "gzip9": 1023,
+      "brotli6": 946
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-auto-thumbnail.mjs",
+      "sha256": "c362a86f38b3515c5d53a368cd94602e4531e93c638ed325fc179ec8664607f9",
+      "raw": 1894,
+      "gzip9": 793,
+      "brotli6": 712
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-chapter.js",
+      "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+      "raw": 4973,
+      "gzip9": 1850,
+      "brotli6": 1653
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-chapter.legacy.js",
+      "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+      "raw": 4973,
+      "gzip9": 1850,
+      "brotli6": 1653
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-chapter.mjs",
+      "sha256": "226c9ab5fbf7ea8bb3d96bd73a1cec6f86eb054f369aafb686333b65e85edc0f",
+      "raw": 7880,
+      "gzip9": 2137,
+      "brotli6": 1921
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-chromecast.js",
+      "sha256": "4959661fc7f22eee3d32363bb0392a486c44499ec4a9c608ccfea55de29aaac6",
+      "raw": 3934,
+      "gzip9": 1851,
+      "brotli6": 1708
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-chromecast.legacy.js",
+      "sha256": "e2ba7aebec099884bb806f3caf77f9ff739ff9f236aefdfd0a4e69a8295c9d01",
+      "raw": 4472,
+      "gzip9": 2029,
+      "brotli6": 1870
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-chromecast.mjs",
+      "sha256": "0c96dad4cee48c353d91d19852243d566345cc7977e1e19ccbd9deba73190b8b",
+      "raw": 6709,
+      "gzip9": 2126,
+      "brotli6": 1970
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.3.0",
+      "path": "dist/artplayer-plugin-danmuku.js",
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "raw": 52390,
+      "gzip9": 14529,
+      "brotli6": 13578
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.3.0",
+      "path": "dist/artplayer-plugin-danmuku.legacy.js",
+      "sha256": "62db96685c48b8573f0480cead6ac934b1d0382b9fdd0046d17d15d2549c56dc",
+      "raw": 53263,
+      "gzip9": 14894,
+      "brotli6": 14001
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.3.0",
+      "path": "dist/artplayer-plugin-danmuku.mjs",
+      "sha256": "f9e1c59adac3f399c022c5e5e6aef7c134e489862915141f25f931316e254f12",
+      "raw": 77263,
+      "gzip9": 18502,
+      "brotli6": 17068
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-danmuku-mask.js",
+      "sha256": "07cebbfbf77f8ec4b2df6a77d7d7300345b86f2993e220ff14e1aae530e4fb31",
+      "raw": 904243,
+      "gzip9": 229221,
+      "brotli6": 201958
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-danmuku-mask.legacy.js",
+      "sha256": "a678a3c0f6d3920bee3b66af9943b3612935028bff61c96677b8eaf8ef7cc8f0",
+      "raw": 907166,
+      "gzip9": 229714,
+      "brotli6": 202538
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-danmuku-mask.mjs",
+      "sha256": "f07030990a8d6adbe6db0acdacbae9db6e6c33f0fb8126e09697184d0ef8396d",
+      "raw": 1777425,
+      "gzip9": 320210,
+      "brotli6": 277273
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-dash-control.js",
+      "sha256": "248aa1162ffb2480965f8e12d766ba6b7d2abfc2d80e65e8a6e8db6bdfa750c5",
+      "raw": 3450,
+      "gzip9": 1608,
+      "brotli6": 1504
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-dash-control.legacy.js",
+      "sha256": "248aa1162ffb2480965f8e12d766ba6b7d2abfc2d80e65e8a6e8db6bdfa750c5",
+      "raw": 3450,
+      "gzip9": 1608,
+      "brotli6": 1504
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-dash-control.mjs",
+      "sha256": "a29459436962e54efc3203d3264264291723593196461a6f116a684e53d7154f",
+      "raw": 6074,
+      "gzip9": 1893,
+      "brotli6": 1767
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-document-pip.js",
+      "sha256": "261d4ae84579c569ade1b1e7e91d51e3bd00c6efbea8c51a48b8283e0f4f3496",
+      "raw": 4624,
+      "gzip9": 1776,
+      "brotli6": 1593
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-document-pip.legacy.js",
+      "sha256": "8e36b658196dece391add21c249b735f3abfe4082fc968d3dbbbb1ae58a77b31",
+      "raw": 5356,
+      "gzip9": 2081,
+      "brotli6": 1901
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-document-pip.mjs",
+      "sha256": "ba1ae10a27740abc1c516470db8d03d45b88e3550180720bf3353864d629cca2",
+      "raw": 7106,
+      "gzip9": 2072,
+      "brotli6": 1885
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-hls-control.js",
+      "sha256": "7a6ce18a0b16f61f6149e0ea77efbb6e0503f997d39afe84271b59e366759e6d",
+      "raw": 3156,
+      "gzip9": 1439,
+      "brotli6": 1327
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-hls-control.legacy.js",
+      "sha256": "893a3de27f9ed02b4b61f03732aec03bfcaf50d02c9beb15cc8a5767ef9121a0",
+      "raw": 3182,
+      "gzip9": 1457,
+      "brotli6": 1346
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-hls-control.mjs",
+      "sha256": "5e665c994be0cd2c00538ac2e5f79e4fbda34083d4d04cccbe5d0047a9306f24",
+      "raw": 5158,
+      "gzip9": 1656,
+      "brotli6": 1532
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-jassub.js",
+      "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a",
+      "raw": 16231,
+      "gzip9": 5354,
+      "brotli6": 5116
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-jassub.legacy.js",
+      "sha256": "0726c96bf0df2aab2662ac8973bb7676a0ca7f8e4cb806aa44cb3ec9de296e64",
+      "raw": 16947,
+      "gzip9": 5639,
+      "brotli6": 5399
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-jassub.mjs",
+      "sha256": "00a39303dd1eba1d78cf164e38dad359dc026bf57a3595175c48f30eb7f8f322",
+      "raw": 34349,
+      "gzip9": 10048,
+      "brotli6": 9589
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "version": "1.2.0",
+      "path": "dist/artplayer-plugin-multiple-subtitles.js",
+      "sha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+      "raw": 13433,
+      "gzip9": 4913,
+      "brotli6": 4721
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "version": "1.2.0",
+      "path": "dist/artplayer-plugin-multiple-subtitles.legacy.js",
+      "sha256": "0b17644827e5b199afe8293093c44bfda571821014ff5b087c7c918c630dcc18",
+      "raw": 14099,
+      "gzip9": 5198,
+      "brotli6": 4993
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "version": "1.2.0",
+      "path": "dist/artplayer-plugin-multiple-subtitles.mjs",
+      "sha256": "9c664c8410849d9ff0da1febf1b86357e326b879cb479c8df8d70a1847c97c90",
+      "raw": 27666,
+      "gzip9": 6211,
+      "brotli6": 5931
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "version": "1.2.0",
+      "path": "dist/artplayer-plugin-vast.js",
+      "sha256": "72842ae0b4a44e44a080f88783c0c9bcd0b572fa0e946d817b2c36d960a08bfe",
+      "raw": 23307,
+      "gzip9": 6935,
+      "brotli6": 6667
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "version": "1.2.0",
+      "path": "dist/artplayer-plugin-vast.legacy.js",
+      "sha256": "4b88cec8d12844d639cc7703f88703136a4fe586781d9939bf2e3a0c93b42b60",
+      "raw": 23571,
+      "gzip9": 7041,
+      "brotli6": 6770
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "version": "1.2.0",
+      "path": "dist/artplayer-plugin-vast.mjs",
+      "sha256": "5a66a4b40bbeaa47cb307f9a40935c1a0a73eee880b4df4a4580568df7162576",
+      "raw": 31443,
+      "gzip9": 7860,
+      "brotli6": 7544
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-vtt-thumbnail.js",
+      "sha256": "2d8e22cbd191bdac5a6c711b641590c2f8a90ba1aae185dd0e02a00baf000f8d",
+      "raw": 2325,
+      "gzip9": 1228,
+      "brotli6": 1133
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+      "sha256": "ecbd0abe12c537687fb058de552c328c71ced71d911e454d0e37887192e9a291",
+      "raw": 2594,
+      "gzip9": 1342,
+      "brotli6": 1244
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.1.0",
+      "path": "dist/artplayer-plugin-vtt-thumbnail.mjs",
+      "sha256": "1f3d0f2bcd68bf69a22fcc3023f1e6ffd4a154099597d899c317cd04a3c28d3b",
+      "raw": 4408,
+      "gzip9": 1542,
+      "brotli6": 1448
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "version": "1.1.0",
+      "path": "dist/artplayer-proxy-canvas.js",
+      "sha256": "ef489570e13f402f1a60eb256ce3900a0021a3d05699c2ba15adfaaeff184d4c",
+      "raw": 1927,
+      "gzip9": 944,
+      "brotli6": 876
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "version": "1.1.0",
+      "path": "dist/artplayer-proxy-canvas.legacy.js",
+      "sha256": "7d25f21170c06d067aeaa1c8e79b15f2c0130a27cff1b410532d6c4ef4d2d45f",
+      "raw": 2210,
+      "gzip9": 1071,
+      "brotli6": 1001
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "version": "1.1.0",
+      "path": "dist/artplayer-proxy-canvas.mjs",
+      "sha256": "406eb15d0194fadfcb2e9cb02aeb1281f1b0c42e66911106a3307c755b48e24c",
+      "raw": 3973,
+      "gzip9": 1209,
+      "brotli6": 1119
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "version": "1.2.0",
+      "path": "dist/artplayer-proxy-mediabunny.js",
+      "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+      "raw": 370208,
+      "gzip9": 93700,
+      "brotli6": 85708
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "version": "1.2.0",
+      "path": "dist/artplayer-proxy-mediabunny.legacy.js",
+      "sha256": "327da5f1be221af6887efb4175c1b92e4e0c28838cae8107acca652a76bddccb",
+      "raw": 390185,
+      "gzip9": 97578,
+      "brotli6": 88846
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "version": "1.2.0",
+      "path": "dist/artplayer-proxy-mediabunny.mjs",
+      "sha256": "9dec2077358ccc7e085c5d511b3c507265e3ea764b7d497b87c0eba199236001",
+      "raw": 817627,
+      "gzip9": 145209,
+      "brotli6": 130741
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "version": "1.1.0",
+      "path": "dist/artplayer-tool-iframe.js",
+      "sha256": "2ec257c8055a9448d12af3fecf1fae8ba58c06f47e85072d02c386cd258b0c86",
+      "raw": 2878,
+      "gzip9": 1108,
+      "brotli6": 1005
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "version": "1.1.0",
+      "path": "dist/artplayer-tool-iframe.legacy.js",
+      "sha256": "c0755d79f316cda71f045da86749648f95faf47c09180d525fb04bb753576d5f",
+      "raw": 3108,
+      "gzip9": 1211,
+      "brotli6": 1107
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "version": "1.1.0",
+      "path": "dist/artplayer-tool-iframe.mjs",
+      "sha256": "138fcad1c66d7180728a209e99c600ca585f7d8be9f8cb757bfd6ec71b3f0bb7",
+      "raw": 4231,
+      "gzip9": 1210,
+      "brotli6": 1097
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "version": "4.4.0",
+      "path": "dist/artplayer-tool-thumbnail.js",
+      "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+      "raw": 5984,
+      "gzip9": 2331,
+      "brotli6": 2147
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "version": "4.4.0",
+      "path": "dist/artplayer-tool-thumbnail.legacy.js",
+      "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+      "raw": 5984,
+      "gzip9": 2331,
+      "brotli6": 2147
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "version": "4.4.0",
+      "path": "dist/artplayer-tool-thumbnail.mjs",
+      "sha256": "0610fc05d3f5b207280fffcd0024411b53964d669fb09241c464eeda88b10570",
+      "raw": 9293,
+      "gzip9": 2779,
+      "brotli6": 2597
+    }
+  ]
+}

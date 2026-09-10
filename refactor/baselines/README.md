@@ -44,3 +44,7 @@ BASE-04 已在内置浏览器完成两轮 16 项 DOM/样式/实际输入断言�
 ## 分发、类型与 SSR 消费
 
 BASE-05 的 [覆盖/复跑/历史诊断](consumer-coverage.md) 包含 18 项 Node runtime、16 项严格 TS 场景和浏览器两轮各 5 项 SSR 检查。[消费者](consumers.json)、[SSR](ssr.json)、[22 包资源](distribution.json) 分别记录已发布内容与工作区观察。8 项类型历史失败保持显式，不能计作候选通过。
+
+## 性能和资源
+
+BASE-06 保存两轮交错计时与独立资源诊断，见 [采样/阈值/范围](performance-coverage.md)、[原始报告](performance.json) 和 [压缩体积](sizes.json)。销毁后的延迟 resize/notice 工作已登记，不能把基本清理通过当成无内存泄漏证明；本任务没有优化收益声明。
