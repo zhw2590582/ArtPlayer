@@ -36,3 +36,14 @@ current rejection; replace those two negative cases with positive consumer cover
 when expanding the public declarations. Do not change runtime validation to match a
 narrower historical declaration. Other optional fields and callback signatures remain
 subject to the existing public compatibility contract.
+
+## Internal media migration
+
+CORE-06 uses src/media/types.ts and src/media/hosts.ts for native media, canvas
+shims and minimal playback/layout dependencies. These types are not exported by
+the package. Public art.video keeps its historical declaration and runtime identity;
+do not cast an internal canvas to HTMLVideoElement merely to satisfy that public
+declaration. Optional capability checks belong to their consumers. Full constructor
+type integration is tracked by CORE-20; proxy package migration validates each real
+adapter separately. Source type fixtures and real canvas integration live in
+test/types/media-hosts.ts and test/browser/media-hosts.spec.js.

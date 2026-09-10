@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：CORE-06 媒体与宿主类型完成
+
+建立原生 video/canvas 媒体及最小宿主类型，五个播放/布局 mixin 迁移 TS，保持公开 art.video 身份、描述符和返回时序。111 项 Node/基线、安装 UMD 三浏览器 132 项及 legacy 播放/生命周期/代理 48 项通过；严格打包 27 项运行时、五组类型零诊断。见 [交付](changes/2026-09-11-CORE-06-media-hosts.md)。当前 214 项，42 完成、172 待办；核心二十三个 TS 文件、chapter 五个。代理完整迁移和主入口静态集成尚未完成；下一项 CORE-07 逐项协调公开声明差异。
+
 ## 当前实施：CORE-05 配置与默认值 TS 拆分完成
 
 核心入口接入独立默认值/解析模块，scheme 迁移 TS，区分 Option 与 ResolvedOption 并保留应用扩展类型。107 项 Node/基线、安装 UMD 三浏览器 126 项及 legacy 配置/生命周期 48 项通过；严格打包 27 项运行时、五组类型零诊断。见 [交付](changes/2026-09-11-CORE-05-resolved-options.md)。新登记 BASE-TYPE-06（省略 URL/数字控件 HTML 的声明缺口）交 CORE-07。当前 214 项，41 完成、173 待办；核心十六个 TS 文件、chapter 五个。下一项 CORE-06 内部媒体与宿主类型。

@@ -212,6 +212,45 @@ boundary; source-only tests cannot establish packaging or real media compatibili
 
 ## Types and remaining work
 
+### Media and host boundaries
+
+`src/media/types.ts` separates native video from canvas media shims. MediaState is
+the common playback state; PlaybackMethods preserves the actual play/pause return
+types. CanvasMedia requires a canvas with media operations, permits nullable source
+values used by MediaBunny, and does not claim the full HTMLVideoElement interface.
+Text tracks, picture-in-picture, frame callbacks and WebKit extensions are optional
+capabilities, including on NativeMedia where browser support can vary. Check them
+before use. These are internal types, not new public exports or runtime wrappers.
+
+`src/media/hosts.ts` describes the dependencies of individual consumers instead of
+requiring the whole Artplayer class. PlayHost needs play, notice, events, mutex and
+the instance registry; PauseHost only needs pause, notice and events. LayoutHost
+only needs the player element's bounding rectangle. Notice's read and write types
+differ because its getter is visibility state and its setter accepts a message.
+
+playMix, pauseMix, playingMix, durationMix and rectMix now consume these contracts.
+Their assertion signatures describe the properties installed with def; rectMix has
+one local cast for the getter properties it installs. They do not assert a shim to
+be native video. Play still awaits the media result before notice/event/mutex work;
+pause remains synchronous and preserves the media return value. Existing getter
+descriptors, boolean shim playing precedence, duration normalization and live layout
+reads are unchanged. play/pause/playing capture the original media object; duration
+reads template.$video on each access, as before.
+
+The JS construction facade still assembles these hosts dynamically. Its complete
+static integration belongs to CORE-20; capability consumers migrate in their own
+CORE tasks. Do not assume these types already validate every third-party proxy.
+Public art.video remains the original object and retains its existing declaration
+for consumer compatibility. A public proxy typing extension requires separate
+consumer checks; internal code must not use that old declaration to hide a canvas.
+
+`test/media-hosts.test.js` covers structural media methods, receiver/return values,
+event and mutex order, property descriptors and live getters. `test/types/media-hosts.ts`
+checks minimal hosts, native/canvas assignability and missing capabilities. The
+browser media-hosts suite combines published/candidate core with the existing
+workspace canvas proxy artifact (explicit hash attachment), real playback/seek and
+layout changes. It does not certify MediaBunny codecs or the proxy's full lifecycle.
+
 Migrated sources compile with strict/noUncheckedIndexedAccess and browser-only
 ambient types. The merge accumulator is a dynamic string-key boundary with one
 documented cast to the pre-existing generic return contract. No file-wide any or

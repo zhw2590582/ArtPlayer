@@ -3482,6 +3482,7 @@ function qualityMix(art) {
   });
 }
 function rectMix(art) {
+  const host = art;
   def(art, "rect", {
     get: () => {
       return getRect(art.template.$player);
@@ -3492,18 +3493,18 @@ function rectMix(art) {
     const key = keys[index];
     def(art, key, {
       get: () => {
-        return art.rect[key];
+        return host.rect[key];
       }
     });
   }
   def(art, "x", {
     get: () => {
-      return art.left + window.pageXOffset;
+      return host.left + window.pageXOffset;
     }
   });
   def(art, "y", {
     get: () => {
-      return art.top + window.pageYOffset;
+      return host.top + window.pageYOffset;
     }
   });
 }

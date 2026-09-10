@@ -1,6 +1,8 @@
+import type { MediaHost } from '../media/hosts'
+import type { MediaState } from '../media/types'
 import { def } from '../utils'
 
-export default function playingMix(art) {
+export default function playingMix(art: MediaHost<Omit<MediaState, 'duration'>>): asserts art is MediaHost<Omit<MediaState, 'duration'>> & { readonly playing: boolean } {
   const { $video } = art.template
   def(art, 'playing', {
     get: () => {

@@ -849,11 +849,14 @@
       "dependsOn": [
         "CORE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "原生 video、canvas shim、UI host 类型",
       "acceptance": "不更改公开 art.video 用法，不以 HTMLVideoElement 断言掩盖 shim",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-06-media-hosts.md",
+        "baselines/media-hosts-validation.json"
+      ]
     },
     {
       "id": "CORE-07",
