@@ -23,8 +23,8 @@
 | BASE-SOURCE-02 | open / 源码/产物事实 | registry gitHead 与发布包版本对应不可靠 | ENG-07, REL-01 |
 | BASE-SITE-01 | open / 源码/产物事实 | 文档站实际为静态站点但 manifest 未设 private | SITE-01, REL-01 |
 | BASE-MEDIA-01 | open / 待取证 | 示例媒体和字体的完整来源/授权链待核实 | BASE-08, SITE-01, EX-03 |
-| VENDOR-01 | open / 待取证 | screenfull 来源、版本与许可闭环 | CORE-12 |
-| VENDOR-02 | open / 待取证 | hint.css 来源、版本与许可闭环 | CORE-12 |
+| VENDOR-01 | resolved / 源码/产物事实 | screenfull 来源、版本与许可闭环 | CORE-12 |
+| VENDOR-02 | resolved / 源码/产物事实 | hint.css 来源、版本与许可闭环 | CORE-12 |
 | VENDOR-03 | open / 待取证 | webvtt-parser 来源、版本与许可闭环 | PKG-MULTI-SUB-01 |
 | VENDOR-04 | open / 待取证 | jassub-code-and-workers 来源、版本与许可闭环 | PKG-JASSUB-01 |
 | VENDOR-05 | open / 待取证 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01 |
@@ -54,3 +54,5 @@
 | BASE-TYPE-08 | open / 已复现 | Write-only player commands have fictitious public getter declarations | CORE-21 |
 | BASE-LIFE-07 | resolved / 已复现 | Queued reconnect survives source replacement and reloads the new resource | CORE-11 |
 | BASE-LIFE-08 | resolved / 已复现 | Ready continues after a control callback destroys the instance | CORE-11 |
+| BASE-I18N-01 | resolved / 已复现 | Missing prototype-named translations return inherited functions | CORE-12 |
+| BASE-TYPE-09 | open / 源码/产物事实 | Template and icon declarations claim incompatible DOM and static shapes | CORE-21 |

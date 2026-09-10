@@ -1,3 +1,6 @@
+import type { Dictionary } from './publish'
+import { publishLanguage } from './publish'
+
 const zhCn = {
   'Video Info': '统计信息',
   'Close': '关闭',
@@ -35,10 +38,8 @@ const zhCn = {
   'Jump Play': '跳转播放',
   'AirPlay': '隔空播放',
   'AirPlay Not Available': '隔空播放不可用',
-}
+} satisfies Dictionary
 
 export default zhCn
 
-if (typeof window !== 'undefined') {
-  window['artplayer-i18n-zh-cn'] = zhCn
-}
+publishLanguage('artplayer-i18n-zh-cn', zhCn)

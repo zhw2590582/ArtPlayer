@@ -1,2 +1,3 @@
 * text=auto
 *.js text eol=lf
+refactor/baselines/core-vendor/*.txt text eol=lf

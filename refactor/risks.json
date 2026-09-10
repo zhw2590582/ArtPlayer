@@ -387,8 +387,8 @@
     {
       "id": "VENDOR-01",
       "title": "screenfull 来源、版本与许可闭环",
-      "confirmation": "unverified",
-      "status": "open",
+      "confirmation": "source-observed",
+      "status": "resolved",
       "owners": [
         "CORE-12"
       ],
@@ -397,13 +397,21 @@
         "packages/artplayer/src/libs/screenfull.js"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
-      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-12-template-resources.md",
+        "refactor/baselines/template-resources-validation.json",
+        "refactor/scripts/core-vendor.mjs",
+        "test/core-vendor.test.js",
+        "packages/artplayer/THIRD_PARTY_NOTICES"
+      ],
+      "resolutionRationale": "Pinned upstream source and license contents, exhaustive normalized adaptation checks, actual package notices and standalone bundle headers verified. Local runtime retained; native fullscreen gestures and prefixed adapter tests pass. Historical screenfull acquisition tag is explicitly unknown; v6.0.2 is the fixed comparison reference."
     },
     {
       "id": "VENDOR-02",
       "title": "hint.css 来源、版本与许可闭环",
-      "confirmation": "unverified",
-      "status": "open",
+      "confirmation": "source-observed",
+      "status": "resolved",
       "owners": [
         "CORE-12"
       ],
@@ -412,7 +420,15 @@
         "packages/artplayer/src/style/hint.less"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
-      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-12-template-resources.md",
+        "refactor/baselines/template-resources-validation.json",
+        "refactor/scripts/core-vendor.mjs",
+        "test/core-vendor.test.js",
+        "packages/artplayer/THIRD_PARTY_NOTICES"
+      ],
+      "resolutionRationale": "Pinned upstream source and license contents, exhaustive normalized adaptation checks, actual package notices and standalone bundle headers verified. Local runtime retained; native fullscreen gestures and prefixed adapter tests pass. Historical screenfull acquisition tag is explicitly unknown; v6.0.2 is the fixed comparison reference."
     },
     {
       "id": "VENDOR-03",
@@ -937,6 +953,46 @@
         "test/browser/media-events.spec.js"
       ],
       "resolutionRationale": "Published/candidate real-browser comparisons reproduce stale retry or ghost ready and validate candidate cancellation. Owned source lifetimes preserve retries after switch rejection, while instance closure stops UI work; original Event/count and ordinary readiness order remain tested."
+    },
+    {
+      "id": "BASE-I18N-01",
+      "title": "Missing prototype-named translations return inherited functions",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-12"
+      ],
+      "evidence": [
+        "test/template-resources.test.js",
+        "test/browser/template-resources.spec.js",
+        "refactor/changes/2026-09-11-CORE-12-template-resources.md"
+      ],
+      "compatibleResolution": "Read own dictionary keys while preserving explicit custom names and empty-string fallback.",
+      "closureCriteria": "Published/candidate browser comparison, source tests and installed distribution entries pass.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-12-template-resources.md",
+        "refactor/baselines/template-resources-validation.json",
+        "test/template-resources.test.js",
+        "test/browser/template-resources.spec.js"
+      ],
+      "resolutionRationale": "Published/candidate real browser comparison verifies own-key fallback while preserving explicit prototype-named translations and empty values. Installed UMD/legacy and all language entries pass."
+    },
+    {
+      "id": "BASE-TYPE-09",
+      "title": "Template and icon declarations claim incompatible DOM and static shapes",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "CORE-21"
+      ],
+      "evidence": [
+        "packages/artplayer/types/template.d.ts",
+        "packages/artplayer/types/icons.d.ts",
+        "test/browser/template-resources.spec.js",
+        "refactor/changes/2026-09-11-CORE-12-template-resources.md"
+      ],
+      "compatibleResolution": "Keep old legal declarations accepted, expose accurate template and icon views without inventing runtime properties.",
+      "closureCriteria": "Old consumers and accurate template/media/icon view consumers pass all supported type modes and runtime shape checks."
     }
   ]
 }

@@ -1,3 +1,6 @@
+import type { Dictionary } from './publish'
+import { publishLanguage } from './publish'
+
 const pl = {
   'Video Info': 'Informacje o wideo',
   'Close': 'Zamknij',
@@ -35,10 +38,8 @@ const pl = {
   'Jump Play': 'Skocz do gry',
   'AirPlay': 'AirPlay',
   'AirPlay Not Available': 'AirPlay nie jest dostępny',
-}
+} satisfies Dictionary
 
 export default pl
 
-if (typeof window !== 'undefined') {
-  window['artplayer-i18n-pl'] = pl
-}
+publishLanguage('artplayer-i18n-pl', pl)

@@ -63,14 +63,25 @@ const vm = require('node:vm');
   check('SSR.constructor-browser-only', observations.constructorErrors.length === 6)
   observations.languages = []
   const languages = fs.readdirSync(path.join(root, 'node_modules/artplayer/dist/i18n')).filter(file => file.endsWith('.mjs')).map(file => file.slice(0, -4)).sort()
+  assert.deepEqual(languages, ['ar', 'cs', 'es', 'fa', 'fr', 'id', 'pl', 'ru', 'tr', 'vi', 'zh-tw'])
+  assert.deepEqual(fs.readdirSync(path.join(root, 'node_modules/artplayer/dist/i18n')).sort(), languages.flatMap(name => [`${name}.js`, `${name}.mjs`]).sort())
   for (const name of languages) {
     const cjs = require(`artplayer/i18n/${name}`)
-    const module = await import(`artplayer/i18n/${name}`)
+    globalThis.window = {}
+    let module
+    try {
+      module = await import(`artplayer/i18n/${name}`)
+      assert.equal(globalThis.window[`artplayer-i18n-${name}`], module.default)
+    }
+    finally {
+      delete globalThis.window
+    }
     assert.deepEqual(module.default, cjs)
     const globalName = `artplayerI18n${name.replace(/(^|-)([a-z])/g, (_, _prefix, char) => char.toUpperCase())}`
-    const context = vm.createContext({})
+    const context = vm.createContext({ window: {} })
     vm.runInContext(load(`artplayer/dist/i18n/${name}.js`), context, { timeout: 2000 })
     assert.equal(JSON.stringify(context[globalName]), JSON.stringify(cjs))
+    assert.equal(context.window[`artplayer-i18n-${name}`], context[globalName])
     observations.languages.push({ name, globalName, keys: Object.keys(cjs).sort(), play: cjs.Play })
   }
   check('DIST.i18n-cjs-esm-global', languages.length > 0)

@@ -243,12 +243,13 @@
       "owners": [
         "CORE-12"
       ],
-      "sourceStatus": "Local filename/implementation identifies screenfull; exact upstream revision not established.",
-      "licenseStatus": "Current upstream license is MIT; local copied file lacks a license header. Exact version and notice coverage remain unverified.",
+      "sourceStatus": "Fixed v6.0.2 comparison reference with four verified local adaptations; original acquisition tag is not recorded. Runtime file unchanged.",
+      "licenseStatus": "Pinned upstream MIT notice included verbatim in actual core tarball and all three standalone bundle headers; verified in CORE-12. Local copied implementation unchanged.",
       "upstreamSources": [
-        "https://github.com/sindresorhus/screenfull/blob/main/license"
+        "https://raw.githubusercontent.com/sindresorhus/screenfull/v6.0.2/index.js",
+        "https://raw.githubusercontent.com/sindresorhus/screenfull/v6.0.2/license"
       ],
-      "upstreamReviewedAt": "2026-09-10",
+      "upstreamReviewedAt": "2026-09-11",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {
@@ -256,6 +257,13 @@
           "algorithm": "sha256-lf",
           "sha256": "2332b50c0c6364d5c99080be0f5739255e4b9e465d2cca40f761adce9a1908f8"
         }
+      ],
+      "reviewEvidence": [
+        "refactor/changes/2026-09-11-CORE-12-template-resources.md",
+        "refactor/baselines/core-vendor/sources.json",
+        "refactor/scripts/core-vendor.mjs",
+        "test/core-vendor.test.js",
+        "refactor/baselines/template-resources-validation.json"
       ]
     },
     {
@@ -267,12 +275,13 @@
       "owners": [
         "CORE-12"
       ],
-      "sourceStatus": "Local header names Hint.css 2.7.0, 2021-10-01; code is scoped/adapted in Less.",
-      "licenseStatus": "Local copyright header and current upstream MIT license observed; exact upstream diff and shipped notices pending.",
+      "sourceStatus": "Header identifies v2.7.0; full normalized CSS comparison verifies ArtPlayer scoping, font-style and default color adaptations. Runtime file unchanged.",
+      "licenseStatus": "Pinned upstream MIT notice included verbatim in actual core tarball and all three standalone bundle headers; verified in CORE-12. Local copied implementation unchanged.",
       "upstreamSources": [
-        "https://github.com/chinchang/hint.css/blob/master/LICENSE"
+        "https://raw.githubusercontent.com/chinchang/hint.css/v2.7.0/hint.css",
+        "https://raw.githubusercontent.com/chinchang/hint.css/v2.7.0/LICENSE"
       ],
-      "upstreamReviewedAt": "2026-09-10",
+      "upstreamReviewedAt": "2026-09-11",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {
@@ -280,6 +289,13 @@
           "algorithm": "sha256-lf",
           "sha256": "e2dc4940e6b212d8da75a404fd5ff1ad894008457677bc37554c6b64b735bc31"
         }
+      ],
+      "reviewEvidence": [
+        "refactor/changes/2026-09-11-CORE-12-template-resources.md",
+        "refactor/baselines/core-vendor/sources.json",
+        "refactor/scripts/core-vendor.mjs",
+        "test/core-vendor.test.js",
+        "refactor/baselines/template-resources-validation.json"
       ]
     },
     {

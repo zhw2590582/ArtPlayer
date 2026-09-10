@@ -1,4 +1,3 @@
-import { def, getIcon } from '../utils'
 import airplay from './airplay.svg?raw'
 import arrowLeft from './arrow-left.svg?raw'
 import arrowRight from './arrow-right.svg?raw'
@@ -27,43 +26,32 @@ import unlock from './unlock.svg?raw'
 import volumeClose from './volume-close.svg?raw'
 import volume from './volume.svg?raw'
 
-export default class Icons {
-  constructor(art) {
-    const icons = {
-      loading,
-      state,
-      play,
-      pause,
-      check,
-      volume,
-      volumeClose,
-      screenshot,
-      setting,
-      pip,
-      arrowLeft,
-      arrowRight,
-      playbackRate,
-      aspectRatio,
-      config,
-      lock,
-      flip,
-      unlock,
-      fullscreenOff,
-      fullscreenOn,
-      fullscreenWebOff,
-      fullscreenWebOn,
-      switchOn,
-      switchOff,
-      error,
-      close,
-      airplay,
-      ...art.option.icons,
-    }
-
-    for (const key in icons) {
-      def(this, key, {
-        get: () => getIcon(key, icons[key]),
-      })
-    }
-  }
+export default {
+  loading,
+  state,
+  play,
+  pause,
+  check,
+  volume,
+  volumeClose,
+  screenshot,
+  setting,
+  pip,
+  arrowLeft,
+  arrowRight,
+  playbackRate,
+  aspectRatio,
+  config,
+  lock,
+  flip,
+  unlock,
+  fullscreenOff,
+  fullscreenOn,
+  fullscreenWebOff,
+  fullscreenWebOn,
+  switchOn,
+  switchOff,
+  error,
+  close,
+  airplay,
 }

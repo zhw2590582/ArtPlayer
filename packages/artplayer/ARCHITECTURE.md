@@ -4,6 +4,55 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Template and public resources
+
+`src/template.ts` owns container checks, reservation, proxy replacement and destruction.
+`template/html.ts` holds the exact versioned markup; `template/nodes.ts` binds selectors
+in historical assignment order. `template/types.ts` describes the minimal generic host
+and nullable SSR queries. Container casts are justified by the existing non-null/div
+checks before use; selector type parameters describe expected markup, not validation
+of arbitrary user HTML. A canvas proxy is a canvas, not an asserted native video.
+The generic proxy preserves the actual host as both callback this and its sole argument.
+
+useSSR preserves existing node objects and listeners. Missing nodes are not synthesized.
+Proxy replacement retains the original track reference even when it becomes detached,
+overwrites the proxy className with art-video and keeps the returned object's identity.
+Rollback remains in lifecycle/template-rollback.ts; destroy(false) marks art-destroy,
+whereas destroy(true) clears the container. Server imports expose html and STYLE but
+construction still fails with the original browser-only error.
+
+`icons/defaults.ts` owns SVG inputs; `icons/index.ts` creates the per-instance registry.
+Each read creates a fresh i.art-icon wrapper. Custom DOM nodes move into that wrapper;
+they are not cloned. Public declarations historically say HTMLDivElement, while source
+uses the actual HTMLElement shape. This mismatch remains tracked for CORE-21.
+
+`i18n/index.ts` owns selected language, deep updates and key fallback. Standalone
+language modules keep default exports and artplayer-i18n-* aliases through publish.ts.
+Only own language/message keys participate in lookup; absent prototype names now return
+the requested string. Explicit custom constructor/toString/**proto** messages remain
+supported. Empty translations still fall back. build:i18n excludes built-in zh-cn and
+helper modules, retaining exactly eleven UMD/ESM pairs and their historical globals.
+
+`style/index.ts` exports Less output without performing DOM work. The main facade
+keeps global assignment and injection timing; `style/inject.ts` implements the existing
+setStyleText helper re-exported from utils/dom.js. Existing IDs update in place; new
+styles defer attachment until DOMContentLoaded while loading. Shared core style survives
+instance destruction. This migration does not redesign repeated pre-DOMContentLoaded
+injection or validate untrusted SSR markup.
+
+Vendored screenfull.js and hint.less remain separate from owned TS. Full notices ship
+in THIRD_PARTY_NOTICES and each core bundle header; provenance and exact adaptations are
+checked by refactor/scripts/core-vendor.mjs against pinned upstream text. Historical
+screenfull acquisition tag is not recoverable from the repository: v6.0.2 is the fixed
+comparison reference, not a claim that the local file is its unmodified release.
+
+Run yarn test:unit, yarn typecheck and the installed-artifact browser suite when changing
+these boundaries. template-resources tests cover real SSR reuse, proxies, icon identity,
+language fallback, style ownership, fullscreen web and real native-fullscreen gestures
+when supported by the engine. Capability evidence identifies unsupported environments. core-vendor tests cover copied
+content and native/prefixed fullscreen adapters. Rebuild with yarn build artplayer and
+yarn build:i18n; yarn test:package:release validates every language entry and browser alias.
+
 ## Plugin registration and ownership
 
 `src/plugins/index.ts` orchestrates registration; types.ts defines generic factories,

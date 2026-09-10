@@ -1,4 +1,10 @@
-const e = {
+function t(e, a) {
+  if (typeof window < "u") {
+    const i = window;
+    i[e] = a;
+  }
+}
+const n = {
   "Video Info": "Informasi Video",
   Close: "Tutup",
   "Video Load Failed": "Gagal Memuat Video",
@@ -36,7 +42,7 @@ const e = {
   AirPlay: "AirPlay",
   "AirPlay Not Available": "AirPlay Tidak Tersedia"
 };
-typeof window < "u" && (window["artplayer-i18n-id"] = e);
+t("artplayer-i18n-id", n);
 export {
-  e as default
+  n as default
 };

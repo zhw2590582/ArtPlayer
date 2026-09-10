@@ -11,9 +11,9 @@ const i18nSrcDir = path.join(basePath, 'src/i18n')
 const distDir = path.join(basePath, 'dist/i18n')
 const compiledPath = path.resolve('docs/compiled/i18n')
 
-const entries = glob.sync('*.js', {
+const entries = glob.sync('*.{js,ts}', {
   cwd: i18nSrcDir,
-  ignore: ['index.js', 'zh-cn.js'],
+  ignore: ['index.{js,ts}', 'publish.{js,ts}', 'zh-cn.{js,ts}', '*.d.ts'],
 }).map(f => path.join(i18nSrcDir, f))
 
 async function buildI18n() {
@@ -23,7 +23,7 @@ async function buildI18n() {
   fs.mkdirSync(distDir, { recursive: true })
 
   for (const entry of entries) {
-    const baseName = path.basename(entry, '.js')
+    const baseName = path.basename(entry, path.extname(entry))
     const globalName = `artplayerI18n${toPascalCase(baseName)}`
 
     // Build UMD and ESM formats

@@ -1,5 +1,8 @@
 import { isMobile } from './compatibility'
 
+export { setStyleText } from '../style/inject'
+
+/** @param {string} selector @param {ParentNode} parent */
 export function query(selector, parent = document) {
   return parent.querySelector(selector)
 }
@@ -90,29 +93,13 @@ export function createElement(tag) {
   return document.createElement(tag)
 }
 
+/** @param {string} key @param {string | HTMLElement} html */
 export function getIcon(key = '', html = '') {
   const icon = createElement('i')
   addClass(icon, 'art-icon')
   addClass(icon, `art-icon-${key}`)
   append(icon, html)
   return icon
-}
-
-export function setStyleText(id, style) {
-  let $style = document.getElementById(id)
-  if (!$style) {
-    $style = document.createElement('style')
-    $style.id = id
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        document.head.appendChild($style)
-      })
-    }
-    else {
-      (document.head || document.documentElement).appendChild($style)
-    }
-  }
-  $style.textContent = style
 }
 
 export function supportsFlex() {

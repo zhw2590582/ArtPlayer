@@ -1,3 +1,6 @@
+import type { Dictionary } from './publish'
+import { publishLanguage } from './publish'
+
 const cs = {
   'Video Info': 'Info o videu',
   'Close': 'Zavřít',
@@ -35,10 +38,8 @@ const cs = {
   'Jump Play': 'Hra na skok',
   'AirPlay': 'AirPlay',
   'AirPlay Not Available': 'AirPlay není k dispozici',
-}
+} satisfies Dictionary
 
 export default cs
 
-if (typeof window !== 'undefined') {
-  window['artplayer-i18n-cs'] = cs
-}
+publishLanguage('artplayer-i18n-cs', cs)

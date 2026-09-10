@@ -1,3 +1,6 @@
+import type { Dictionary } from './publish'
+import { publishLanguage } from './publish'
+
 const ru = {
   'Video Info': 'Информация',
   'Close': 'Закрыть',
@@ -35,10 +38,8 @@ const ru = {
   'Jump Play': 'Перейти',
   'AirPlay': 'AirPlay',
   'AirPlay Not Available': 'AirPlay недоступен',
-}
+} satisfies Dictionary
 
 export default ru
 
-if (typeof window !== 'undefined') {
-  window['artplayer-i18n-ru'] = ru
-}
+publishLanguage('artplayer-i18n-ru', ru)

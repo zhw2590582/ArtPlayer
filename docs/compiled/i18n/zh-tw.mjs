@@ -1,4 +1,10 @@
-const e = {
+function i(e, t) {
+  if (typeof window < "u") {
+    const l = window;
+    l[e] = t;
+  }
+}
+const o = {
   "Video Info": "統計訊息",
   Close: "關閉",
   "Video Load Failed": "載入失敗",
@@ -36,7 +42,7 @@ const e = {
   AirPlay: "隔空播放",
   "AirPlay Not Available": "隔空播放不可用"
 };
-typeof window < "u" && (window["artplayer-i18n-zh-tw"] = e);
+i("artplayer-i18n-zh-tw", o);
 export {
-  e as default
+  o as default
 };

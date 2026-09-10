@@ -10,11 +10,14 @@ const projects = getProjects()
 const compiledPath = path.resolve('docs/compiled')
 
 function getBanner(name, version) {
+  const noticeFile = path.join(projects[name], 'THIRD_PARTY_NOTICES')
+  const notices = fs.existsSync(noticeFile) ? fs.readFileSync(noticeFile, 'utf8').trim() : ''
+  const noticeBlock = notices ? `\n *\n${notices.split(/\r?\n/).map(line => line.trimEnd() ? ` * ${line.trimEnd()}` : ' *').join('\n')}` : ''
   return `/*!
  * ${name}.js v${version}
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-${new Date().getFullYear()} Harvey Zhao
- * Released under the MIT License.
+ * Released under the MIT License.${noticeBlock}
  */`
 }
 

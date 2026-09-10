@@ -1,4 +1,10 @@
-const e = {
+function i(e, t) {
+  if (typeof window < "u") {
+    const l = window;
+    l[e] = t;
+  }
+}
+const o = {
   "Video Info": "اطلاعات ویدیو",
   Close: "بستن",
   "Video Load Failed": "بارگذاری ناموفق",
@@ -36,7 +42,7 @@ const e = {
   AirPlay: "ایر پلی",
   "AirPlay Not Available": "عدم پشتیبانی از ایرپلی"
 };
-typeof window < "u" && (window["artplayer-i18n-fa"] = e);
+i("artplayer-i18n-fa", o);
 export {
-  e as default
+  o as default
 };

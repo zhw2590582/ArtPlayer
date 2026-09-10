@@ -1,4 +1,10 @@
-const e = {
+function i(e, t) {
+  if (typeof window < "u") {
+    const o = window;
+    o[e] = t;
+  }
+}
+const n = {
   "Video Info": "Info o videu",
   Close: "Zavřít",
   "Video Load Failed": "Nahrání videa selhalo",
@@ -36,7 +42,7 @@ const e = {
   AirPlay: "AirPlay",
   "AirPlay Not Available": "AirPlay není k dispozici"
 };
-typeof window < "u" && (window["artplayer-i18n-cs"] = e);
+i("artplayer-i18n-cs", n);
 export {
-  e as default
+  n as default
 };

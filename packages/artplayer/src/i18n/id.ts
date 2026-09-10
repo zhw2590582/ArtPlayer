@@ -1,3 +1,6 @@
+import type { Dictionary } from './publish'
+import { publishLanguage } from './publish'
+
 const id = {
   'Video Info': 'Informasi Video',
   'Close': 'Tutup',
@@ -35,10 +38,8 @@ const id = {
   'Jump Play': 'Lompat Putar',
   'AirPlay': 'AirPlay',
   'AirPlay Not Available': 'AirPlay Tidak Tersedia',
-}
+} satisfies Dictionary
 
 export default id
 
-if (typeof window !== 'undefined') {
-  window['artplayer-i18n-id'] = id
-}
+publishLanguage('artplayer-i18n-id', id)

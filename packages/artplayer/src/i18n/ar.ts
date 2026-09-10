@@ -1,3 +1,6 @@
+import type { Dictionary } from './publish'
+import { publishLanguage } from './publish'
+
 const ar = {
   'Video Info': 'معلومات الفيديو',
   'Close': 'إغلاق',
@@ -35,10 +38,8 @@ const ar = {
   'Jump Play': 'التشغيل القافز',
   'AirPlay': 'AirPlay',
   'AirPlay Not Available': 'AirPlay غير متاح',
-}
+} satisfies Dictionary
 
 export default ar
 
-if (typeof window !== 'undefined') {
-  window['artplayer-i18n-ar'] = ar
-}
+publishLanguage('artplayer-i18n-ar', ar)

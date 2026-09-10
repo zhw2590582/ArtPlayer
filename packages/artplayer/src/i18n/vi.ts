@@ -1,3 +1,6 @@
+import type { Dictionary } from './publish'
+import { publishLanguage } from './publish'
+
 const vi = {
   'Video Info': 'Thông tin video',
   'Close': 'Đóng',
@@ -35,10 +38,8 @@ const vi = {
   'Jump Play': 'Nhảy đến đoạn phát',
   'AirPlay': 'AirPlay',
   'AirPlay Not Available': 'AirPlay không khả dụng',
-}
+} satisfies Dictionary
 
 export default vi
 
-if (typeof window !== 'undefined') {
-  window['artplayer-i18n-vi'] = vi
-}
+publishLanguage('artplayer-i18n-vi', vi)

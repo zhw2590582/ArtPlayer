@@ -1,3 +1,6 @@
+import type { Dictionary } from './publish'
+import { publishLanguage } from './publish'
+
 const fa = {
   'Video Info': 'اطلاعات ویدیو',
   'Close': 'بستن',
@@ -35,10 +38,8 @@ const fa = {
   'Jump Play': 'جامپ پلی',
   'AirPlay': 'ایر پلی',
   'AirPlay Not Available': 'عدم پشتیبانی از ایرپلی',
-}
+} satisfies Dictionary
 
 export default fa
 
-if (typeof window !== 'undefined') {
-  window['artplayer-i18n-fa'] = fa
-}
+publishLanguage('artplayer-i18n-fa', fa)

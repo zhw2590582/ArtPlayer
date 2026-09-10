@@ -1,0 +1,27 @@
+import type { TemplateNodes } from './types'
+
+export default function bindNodes(target: TemplateNodes & { query: <T extends Element = Element>(selector: string) => T | null }): void {
+  target.$player = target.query<HTMLDivElement>('.art-video-player')
+  target.$video = target.query<HTMLVideoElement>('.art-video')
+  target.$track = target.query<HTMLTrackElement>('track')
+  target.$poster = target.query<HTMLDivElement>('.art-poster')
+  target.$subtitle = target.query<HTMLDivElement>('.art-subtitle')
+  target.$danmuku = target.query<HTMLDivElement>('.art-danmuku')
+  target.$bottom = target.query<HTMLDivElement>('.art-bottom')
+  target.$progress = target.query<HTMLDivElement>('.art-progress')
+  target.$controls = target.query<HTMLDivElement>('.art-controls')
+  target.$controlsLeft = target.query<HTMLDivElement>('.art-controls-left')
+  target.$controlsCenter = target.query<HTMLDivElement>('.art-controls-center')
+  target.$controlsRight = target.query<HTMLDivElement>('.art-controls-right')
+  target.$layer = target.query<HTMLDivElement>('.art-layers')
+  target.$loading = target.query<HTMLDivElement>('.art-loading')
+  target.$notice = target.query<HTMLDivElement>('.art-notice')
+  target.$noticeInner = target.query<HTMLDivElement>('.art-notice-inner')
+  target.$mask = target.query<HTMLDivElement>('.art-mask')
+  target.$state = target.query<HTMLDivElement>('.art-state')
+  target.$setting = target.query<HTMLDivElement>('.art-settings')
+  target.$info = target.query<HTMLDivElement>('.art-info')
+  target.$infoPanel = target.query<HTMLDivElement>('.art-info-panel')
+  target.$infoClose = target.query<HTMLDivElement>('.art-info-close')
+  target.$contextmenu = target.query<HTMLDivElement>('.art-contextmenus')
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "file": "refactor/baselines/core-vendor/screenfull-6.0.2.txt",
+    "url": "https://raw.githubusercontent.com/sindresorhus/screenfull/v6.0.2/index.js",
+    "sha256": "4246711b342018b0f257f8fa6047f240a21af6218c7e79cab5c662e810bb3e01"
+  },
+  {
+    "file": "refactor/baselines/core-vendor/screenfull-license.txt",
+    "url": "https://raw.githubusercontent.com/sindresorhus/screenfull/v6.0.2/license",
+    "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+  },
+  {
+    "file": "refactor/baselines/core-vendor/hint-2.7.0.txt",
+    "url": "https://raw.githubusercontent.com/chinchang/hint.css/v2.7.0/hint.css",
+    "sha256": "a804fa4b607167e579b39d192f1a29d2b27226097094e0351f2d46ac8ebaa864"
+  },
+  {
+    "file": "refactor/baselines/core-vendor/hint-license.txt",
+    "url": "https://raw.githubusercontent.com/chinchang/hint.css/v2.7.0/LICENSE",
+    "sha256": "55cee0a0645d18366eaa0cd21208c224568e14c38b7894e0f9ff537702ff8ea0"
+  }
+]

@@ -1,3 +1,6 @@
+import type { Dictionary } from './publish'
+import { publishLanguage } from './publish'
+
 const tr = {
   'Video Info': 'Video Bilgisi',
   'Close': 'Kapat',
@@ -35,10 +38,8 @@ const tr = {
   'Jump Play': 'Atla ve Oynat',
   'AirPlay': 'AirPlay',
   'AirPlay Not Available': 'AirPlay Kullanılamıyor',
-}
+} satisfies Dictionary
 
 export default tr
 
-if (typeof window !== 'undefined') {
-  window['artplayer-i18n-tr'] = tr
-}
+publishLanguage('artplayer-i18n-tr', tr)
