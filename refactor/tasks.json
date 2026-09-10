@@ -1029,11 +1029,14 @@
         "CORE-11",
         "CORE-13"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "subtitle 请求/track/DOM/URL 生命周期与类型",
       "acceptance": "过期结果、偏移、cue 数组、原生全屏及错误路径通过；接续 BASE-TYPE-07 的真实 cue 数组与旧隐式 scalar 回调声明兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-15-subtitle.md",
+        "baselines/subtitle-validation.json"
+      ]
     },
     {
       "id": "CORE-16",

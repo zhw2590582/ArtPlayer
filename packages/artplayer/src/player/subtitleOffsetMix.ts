@@ -1,20 +1,21 @@
+import type { SubtitleOffsetHost } from '../subtitle/types'
 import { clamp, def } from '../utils'
 
-export default function subtitleOffsetMix(art) {
+export default function subtitleOffsetMix(art: SubtitleOffsetHost): void {
   const { notice, i18n, template } = art
 
   def(art, 'subtitleOffset', {
     get() {
       return template.$track?.offset || 0
     },
-    set(value) {
+    set(value: number) {
       const { cues } = art.subtitle
       if (!template.$track || cues.length === 0)
         return
       const offset = clamp(value, -10, 10)
       template.$track.offset = offset
       for (let index = 0; index < cues.length; index++) {
-        const cue = cues[index]
+        const cue = cues[index]!
         cue.originalStartTime = cue.originalStartTime ?? cue.startTime
         cue.originalEndTime = cue.originalEndTime ?? cue.endTime
         cue.startTime = clamp(cue.originalStartTime + offset, 0, art.duration)

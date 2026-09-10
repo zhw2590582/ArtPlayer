@@ -21,7 +21,7 @@
 | 播放流程 | play/pause/toggle/seek/url/switch/eventInit  | 媒体状态、操作身份、加载恢复与 UI 响应分离                                   |
 | UI 注册  | utils/component、control、layer、contextmenu | 保留 name/cache/update/remove；明确 DOM 和绑定的归属                         |
 | 设置面板 | setting/index.ts                             | 分开树整理、选择状态、渲染、布局、绑定；共享能共享的逻辑，不强行统一返回类型 |
-| 字幕     | subtitle.js、utils/subtitle.js               | 获取、解析、track/DOM 渲染、取消和对象 URL 回收分开                          |
+| 字幕     | subtitle/index.ts、utils/subtitle.ts         | 获取、解析、track/DOM 渲染、取消和对象 URL 回收分开                          |
 | 显示模式 | fullscreen/fullscreenWeb/pip/mini/auto*      | 显式恢复位置和样式，保持互斥顺序、用户手势与移动端语义                       |
 | 输入     | events、hotkey                               | 鼠标/触控/键盘/焦点归属清晰，跨 document 重新绑定和清理                      |
 | 无障碍   | template、control、setting、显示模式         | 明确键盘导航、可访问名称、焦点进入退出和字幕能力，保留旧 DOM/CSS 与热键契约  |

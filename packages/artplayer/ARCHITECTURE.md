@@ -4,6 +4,38 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Subtitles (CORE-15)
+
+src/subtitle/index.ts keeps the Component prototype, bound update, public methods and
+normal URL results. The request, parse, state, track and render modules now separate
+transport cancellation, conversion, ownership, native DOM events and cue rendering.
+The offset mixin remains the player property entry, with original cue bounds retained
+on native cue objects. Validation evidence and remaining release gates live in refactor/.
+
+request.ts races work against scope closure. Superseded requests settle undefined even
+when the transport ignores AbortSignal; active failures reject. state.ts owns request
+and track scopes and only generated object URLs. A caller-owned URL is never revoked.
+Replacing a track for native fullscreen keeps the same owned subtitle resource.
+parse.ts delegates SRT/ASS conversion to the public utility parsers, preserving callback
+this and type/extension/encoding behavior. Unknown formats retain the caller URL.
+render.ts retains the line/group markup and uses current global subtitle.escape; a
+switch-specific escape override does not silently change the legacy rendering contract.
+Before-update listeners may still edit cues; switching/destroying prevents obsolete DOM
+writes. Disabled text tracks return empty cue arrays; native cue identity is preserved.
+
+To change transport policy start with request.ts and index.ts; to change native track
+ownership start with track.ts and state.ts. Run test/subtitle.test.js, the browser
+subtitle-lifecycle and declarations specs, and strict source/consumer type checks.
+Track generations prevent a reentrant replacement from losing its callbacks when an
+older registration returns or throws. Failed insertion restores the previous node;
+cleanup failures after commit retain the new resource and remain observable to callers.
+Track load errors notify only while that node is current; all owned load/error/cuechange
+callbacks are cleared on replacement or destroy. HTTP errors reject before conversion.
+Constructor and URL-setter calls report through notice and consume their otherwise
+unobservable rejected promises; explicit init/switch calls keep rejection semantics.
+Public cue event inference remains tracked by BASE-TYPE-07 / CORE-21. Browser-engine
+tests do not certify physical iOS/Safari fullscreen or every proxy implementation.
+
 ## Settings (CORE-14)
 
 setting/index.ts remains the specialized manager: panel cache keys are option arrays,

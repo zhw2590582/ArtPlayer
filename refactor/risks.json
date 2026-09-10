@@ -900,7 +900,7 @@
       "compatibleResolution": "Keep legacy consumers; add explicit cue-array listener overloads, type internal implementations accurately, and resolve remaining generated/public facade contracts at CORE-21 without false intersections.",
       "closureCriteria": "Actual setting/null/void and notice boolean returns, cue array callbacks and old legal type consumers all have an explicit compatible declaration strategy and package tests.",
       "scopeNote": "CORE-07 provides runtime evidence and explicit cue-array overloads; old inferred scalar event callbacks and return signatures are not claimed corrected.",
-      "workspaceState": "CORE-14 source manager accurately models add/update item, remove void and missing find null; installed historical public consumers still compile. Public declaration coordination remains open for CORE-15/18/21."
+      "workspaceState": "CORE-14 source models item/null/void setting returns; CORE-15 source models cue arrays and string/null/undefined subtitle results. Historical public consumers and explicit array listener overloads still compile; scalar inference and public return facade coordination remain CORE-18/21."
     },
     {
       "id": "BASE-TYPE-08",
@@ -1306,6 +1306,50 @@
         "test/setting-resources.test.js"
       ],
       "resolutionRationale": "Final installed UMD and legacy each pass the complete 519-case three-engine matrix. Managed tree/DOM/resource rollback, async generation guards, scoped mounts and panel/header ownership preserve normal identities, callbacks and returns. Narrow layouts and native input/touch interactions pass; simultaneous live object sharing fails before mutation while transfer after removal/destruction preserves the original object. Source and shipped package bytes match the tested artifacts."
+    },
+    {
+      "id": "BASE-LIFE-15",
+      "title": "Subtitle requests overwrite newer state and mutate tracks after destroy",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-15"
+      ],
+      "evidence": [
+        "test/browser/subtitle-lifecycle.spec.js",
+        "refactor/changes/2026-09-11-CORE-15-subtitle.md"
+      ],
+      "compatibleResolution": "Scope requests, abort and settle superseded calls; ignore stale conversion, errors and notices.",
+      "closureCriteria": "Installed UMD/legacy cover out-of-order fetch/body completion, rejection, cancellation, reentry and destroy.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-15-subtitle.md",
+        "refactor/baselines/subtitle-validation.json",
+        "test/browser/subtitle-lifecycle.spec.js",
+        "test/subtitle.test.js"
+      ],
+      "resolutionRationale": "Final installed UMD and legacy each pass 600 real-browser checks. Subtitle cancellation settles promptly and stale work cannot commit. Only generated URLs are owned; native fullscreen-kind rebuilds retain them and failure/reentry/destroy cleanup is verified. Runtime and type consumers pass against the exact packed source and artifacts."
+    },
+    {
+      "id": "BASE-LIFE-16",
+      "title": "Subtitle URLs revoke caller resources and leak the final generated resource",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-15"
+      ],
+      "evidence": [
+        "test/browser/subtitle-lifecycle.spec.js",
+        "refactor/changes/2026-09-11-CORE-15-subtitle.md"
+      ],
+      "compatibleResolution": "Own only generated URLs and release track callbacks/resources on replace, failure and destroy.",
+      "closureCriteria": "Installed UMD/legacy prove caller URL survival, owned URL release, full-screen reuse, failed replacement and callback cleanup.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-15-subtitle.md",
+        "refactor/baselines/subtitle-validation.json",
+        "test/browser/subtitle-lifecycle.spec.js",
+        "test/subtitle.test.js"
+      ],
+      "resolutionRationale": "Final installed UMD and legacy each pass 600 real-browser checks. Subtitle cancellation settles promptly and stale work cannot commit. Only generated URLs are owned; native fullscreen-kind rebuilds retain them and failure/reentry/destroy cleanup is verified. Runtime and type consumers pass against the exact packed source and artifacts."
     }
   ]
 }

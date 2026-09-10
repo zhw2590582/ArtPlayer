@@ -361,13 +361,13 @@ class ResourceScope {
       throw new ResourceCleanupError(errors);
   }
 }
-const states$1 = /* @__PURE__ */ new WeakMap();
+const states$2 = /* @__PURE__ */ new WeakMap();
 const containers = /* @__PURE__ */ new WeakMap();
 function beginLifecycle(owner) {
-  states$1.set(owner, { scope: new ResourceScope(), destroying: false });
+  states$2.set(owner, { scope: new ResourceScope(), destroying: false });
 }
 function stateOf(owner) {
-  const state2 = states$1.get(owner);
+  const state2 = states$2.get(owner);
   if (!state2)
     throw new Error("ArtPlayer lifecycle has not been initialized");
   return state2;
@@ -1432,6 +1432,15 @@ function animationFrame(scope, callback) {
     cancelAnimationFrame(frame);
   });
   return release;
+}
+function requestController(scope) {
+  if (typeof AbortController === "undefined")
+    return void 0;
+  const controller = new AbortController();
+  scope.add(() => {
+    controller.abort();
+  });
+  return controller;
 }
 function wait(scope, delay = 0) {
   if (scope.closed)
@@ -5297,17 +5306,17 @@ function beginSettingAdd(item) {
     }
   };
 }
-const states = /* @__PURE__ */ new WeakMap();
+const states$1 = /* @__PURE__ */ new WeakMap();
 function rememberSettingState(item, capture) {
   if (capture)
-    states.set(item, capture);
+    states$1.set(item, capture);
   else
-    states.delete(item);
+    states$1.delete(item);
 }
 function captureSettingItem(item) {
   const descriptors = new Map(Reflect.ownKeys(item).map((key) => [key, Object.getOwnPropertyDescriptor(item, key)]));
   const nodes = [];
-  const state2 = states.get(item);
+  const state2 = states$1.get(item);
   const restoreState = state2?.();
   for (const key of ["html", "icon", "tooltip"]) {
     const value = descriptors.get(key)?.value;
@@ -6134,142 +6143,288 @@ class Storage {
   }
 }
 const css = ".art-video-player {\n  --art-theme: #f00;\n  --art-font-color: #fff;\n  --art-background-color: #000;\n  --art-text-shadow-color: rgba(0, 0, 0, 0.5);\n  --art-transition-duration: 0.2s;\n  --art-padding: 10px;\n  --art-border-radius: 3px;\n  --art-progress-height: 6px;\n  --art-progress-color: rgba(255, 255, 255, 0.25);\n  --art-progress-top-gap: 10px;\n  --art-hover-color: rgba(255, 255, 255, 0.25);\n  --art-loaded-color: rgba(255, 255, 255, 0.25);\n  --art-state-size: 80px;\n  --art-state-opacity: 0.8;\n  --art-bottom-height: 100px;\n  --art-bottom-offset: 20px;\n  --art-bottom-gap: 5px;\n  --art-highlight-width: 8px;\n  --art-highlight-color: rgba(255, 255, 255, 0.5);\n  --art-control-height: 46px;\n  --art-control-opacity: 0.75;\n  --art-control-icon-size: 36px;\n  --art-control-icon-scale: 1.1;\n  --art-volume-height: 120px;\n  --art-volume-handle-size: 14px;\n  --art-lock-size: 36px;\n  --art-indicator-scale: 0;\n  --art-indicator-size: 16px;\n  --art-fullscreen-web-index: 9999;\n  --art-settings-icon-size: 24px;\n  --art-settings-max-height: 300px;\n  --art-selector-max-height: 300px;\n  --art-contextmenus-min-width: 250px;\n  --art-subtitle-font-size: 20px;\n  --art-subtitle-gap: 5px;\n  --art-subtitle-bottom: 15px;\n  --art-subtitle-border: #000;\n  --art-widget-background: rgba(0, 0, 0, 0.85);\n  --art-tip-background: rgba(0, 0, 0, 0.7);\n  --art-scrollbar-size: 4px;\n  --art-scrollbar-background: rgba(255, 255, 255, 0.25);\n  --art-scrollbar-background-hover: rgba(255, 255, 255, 0.5);\n  --art-mini-progress-height: 2px;\n}\n.art-bg-cover {\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n.art-bottom-gradient {\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.art-video-player {\n  position: relative;\n  margin: 0 auto;\n  width: 100%;\n  height: 100%;\n  outline: 0;\n  zoom: 1;\n  padding: 0;\n  text-align: left;\n  direction: ltr;\n  font-size: 14px;\n  line-height: 1.3;\n  user-select: none;\n  box-sizing: border-box;\n  color: var(--art-font-color);\n  background-color: var(--art-background-color);\n  text-shadow: 0 0 2px var(--art-text-shadow-color);\n  font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, Roboto, Arial, sans-serif;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  -ms-touch-action: manipulation;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n}\n.art-video-player *,\n.art-video-player *::before,\n.art-video-player *::after {\n  box-sizing: border-box;\n}\n.art-video-player ::-webkit-scrollbar {\n  width: var(--art-scrollbar-size);\n  height: var(--art-scrollbar-size);\n}\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: var(--art-scrollbar-background);\n}\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: var(--art-scrollbar-background-hover);\n}\n.art-video-player img {\n  max-width: 100%;\n  vertical-align: top;\n}\n.art-video-player svg {\n  fill: var(--art-font-color);\n}\n.art-video-player a {\n  color: var(--art-font-color);\n  text-decoration: none;\n}\n.art-icon {\n  line-height: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.art-video-player.art-backdrop .art-contextmenus,\n.art-video-player.art-backdrop .art-info,\n.art-video-player.art-backdrop .art-settings,\n.art-video-player.art-backdrop .art-layer-auto-playback,\n.art-video-player.art-backdrop .art-selector-list,\n.art-video-player.art-backdrop .art-volume-inner {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-video {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n}\n.art-poster {\n  position: absolute;\n  inset: 0;\n  z-index: 11;\n  width: 100%;\n  height: 100%;\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  pointer-events: none;\n}\n.art-video-player .art-subtitle {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: absolute;\n  z-index: 20;\n  width: 100%;\n  padding: 0 5%;\n  text-align: center;\n  pointer-events: none;\n  gap: var(--art-subtitle-gap);\n  bottom: var(--art-subtitle-bottom);\n  font-size: var(--art-subtitle-font-size);\n  transition: bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n}\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: flex;\n}\n.art-video-player.art-control-show .art-subtitle {\n  bottom: calc(var(--art-controls-height, var(--art-control-height)) + var(--art-subtitle-bottom));\n}\n.art-danmuku {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  overflow: hidden;\n}\n.art-video-player .art-layers {\n  position: absolute;\n  inset: 0;\n  z-index: 40;\n  width: 100%;\n  height: 100%;\n  display: none;\n  pointer-events: none;\n}\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n.art-video-player.art-layer-show .art-layers {\n  display: flex;\n}\n.art-video-player .art-mask {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 50;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player .art-mask .art-state {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  transform: scale(2);\n  width: var(--art-state-size);\n  height: var(--art-state-size);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-video-player.art-mask-show .art-state {\n  pointer-events: auto;\n  opacity: var(--art-state-opacity);\n  transform: scale(1);\n}\n.art-video-player.art-loading-show .art-state {\n  display: none;\n}\n.art-video-player .art-loading {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 70;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n.art-video-player.art-loading-show .art-mask {\n  display: none;\n}\n.art-video-player .art-bottom {\n  position: absolute;\n  inset: 0;\n  z-index: 60;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  opacity: 0;\n  overflow: hidden;\n  pointer-events: none;\n  padding: 0 var(--art-padding);\n  transition: all var(--art-transition-duration) ease;\n  background-size: 100% var(--art-bottom-height);\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-video-player .art-bottom .art-controls,\n.art-video-player .art-bottom .art-progress {\n  transform: translateY(var(--art-bottom-offset));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player.art-control-show .art-bottom,\n.art-video-player.art-hover .art-bottom {\n  opacity: 1;\n}\n.art-video-player.art-control-show .art-bottom .art-controls,\n.art-video-player.art-hover .art-bottom .art-controls,\n.art-video-player.art-control-show .art-bottom .art-progress,\n.art-video-player.art-hover .art-bottom .art-progress {\n  transform: translateY(0);\n}\n.art-bottom .art-progress {\n  position: relative;\n  z-index: 0;\n  cursor: pointer;\n  pointer-events: auto;\n  padding-top: var(--art-progress-top-gap);\n  padding-bottom: var(--art-bottom-gap);\n}\n.art-bottom .art-progress .art-control-progress {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: var(--art-progress-height);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  display: flex;\n  align-items: center;\n  position: relative;\n  height: 50%;\n  width: 100%;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-hover-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-loaded-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  position: absolute;\n  inset: 0;\n  z-index: 20;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-theme);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  right: auto;\n  pointer-events: auto;\n  width: var(--art-highlight-width) !important;\n  transform: translateX(calc(var(--art-highlight-width) / -2));\n  background-color: var(--art-highlight-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  z-index: 40;\n  left: 0;\n  border-radius: 50%;\n  width: var(--art-indicator-size);\n  height: var(--art-indicator-size);\n  transform: scale(var(--art-indicator-scale));\n  margin-left: calc(var(--art-indicator-size) / -2);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover {\n  transform: scale(1.2) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active {\n  transform: scale(1) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  z-index: 50;\n  top: -25px;\n  left: 0;\n  padding: 3px 5px;\n  line-height: 1;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-thumbnails {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  bottom: calc(var(--art-bottom-gap) + 10px);\n  left: 0;\n  border-radius: var(--art-border-radius);\n  pointer-events: none;\n  background-color: var(--art-widget-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px -1px rgba(0, 0, 0, 0.2);\n}\n.art-bottom .art-progress:hover .art-control-progress .art-control-progress-inner {\n  height: 100%;\n}\n.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  transform: scale(1);\n}\n.art-progress-hover .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip,\n.art-progress-hover .art-bottom .art-progress .art-control-thumbnails {\n  transform: scale(1);\n  opacity: 1;\n}\n.art-video-player .art-controls {\n  position: relative;\n  z-index: 10;\n  pointer-events: auto;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  flex-shrink: 0;\n  height: auto;\n  min-height: var(--art-control-height);\n}\n.art-video-player .art-controls .art-controls-left,\n.art-video-player .art-controls .art-controls-right {\n  display: flex;\n  flex-wrap: wrap;\n  max-width: 100%;\n  min-height: var(--art-control-height);\n}\n.art-video-player .art-controls .art-controls-center {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex: 1;\n  height: 100%;\n  padding: 0 10px;\n}\n.art-video-player .art-controls .art-controls-right {\n  justify-content: flex-end;\n  margin-left: auto;\n}\n.art-video-player .art-controls .art-control {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  max-width: 100%;\n  cursor: pointer;\n  white-space: nowrap;\n  opacity: var(--art-control-opacity);\n  min-height: var(--art-control-height);\n  min-width: var(--art-control-height);\n  transition: opacity var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon {\n  height: var(--art-control-icon-size);\n  width: var(--art-control-icon-size);\n  transform: scale(var(--art-control-icon-scale));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon:active {\n  transform: scale(calc(var(--art-control-icon-scale) * 0.8));\n}\n.art-video-player .art-controls .art-control:hover {\n  opacity: 1;\n}\n.art-control-volume {\n  position: relative;\n}\n.art-control-volume .art-volume-panel {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  left: 0;\n  right: 0;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n  cursor: default;\n  opacity: 0;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  width: var(--art-control-height);\n  height: var(--art-volume-height);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 10px;\n  height: 100%;\n  width: 100%;\n  padding: 10px 0 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider {\n  flex: 1;\n  width: 100%;\n  display: flex;\n  cursor: pointer;\n  position: relative;\n  justify-content: center;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  width: 2px;\n  border-radius: var(--art-border-radius);\n  overflow: hidden;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  background-color: var(--art-theme);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator {\n  position: absolute;\n  width: var(--art-volume-handle-size);\n  height: var(--art-volume-handle-size);\n  margin-top: calc(var(--art-volume-handle-size) / -2);\n  flex-shrink: 0;\n  transform: scale(1);\n  border-radius: 100%;\n  background-color: var(--art-theme);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator {\n  transform: scale(0.9);\n}\n.art-control-volume:hover .art-volume-panel {\n  opacity: 1;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player .art-notice {\n  display: none;\n  position: absolute;\n  inset: 0;\n  z-index: 80;\n  width: 100%;\n  height: 100%;\n  height: auto;\n  bottom: auto;\n  padding: var(--art-padding);\n  pointer-events: none;\n}\n.art-video-player .art-notice .art-notice-inner {\n  display: inline-flex;\n  padding: 5px;\n  line-height: 1;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-tip-background);\n}\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n.art-video-player .art-contextmenus {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 120;\n  padding: 5px 0;\n  border-radius: var(--art-border-radius);\n  font-size: 12px;\n  background-color: var(--art-widget-background);\n  min-width: var(--art-contextmenus-min-width);\n}\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  display: flex;\n  padding: 10px 15px;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 8px;\n}\n.art-video-player .art-contextmenus .art-contextmenu span:hover,\n.art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n.art-video-player .art-settings {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 90;\n  left: auto;\n  overflow-y: auto;\n  overflow-x: hidden;\n  border-radius: var(--art-border-radius);\n  max-height: var(--art-settings-max-height);\n  right: var(--art-padding);\n  bottom: var(--art-controls-height, var(--art-control-height));\n  transition: all var(--art-transition-duration) ease;\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-settings .art-setting-panel {\n  display: none;\n  flex-direction: column;\n}\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: flex;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 5px;\n  padding: 0 5px;\n  cursor: pointer;\n  overflow: hidden;\n  transition: background-color var(--art-transition-duration) ease;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 1;\n  min-width: 0;\n  overflow: hidden;\n  gap: 5px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  height: var(--art-settings-icon-size);\n  width: var(--art-settings-icon-size);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-text {\n  min-width: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  min-width: 0;\n  max-width: 55%;\n  gap: 5px;\n  font-size: 12px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  min-width: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: rgba(255, 255, 255, 0.5);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  min-width: 32px;\n  height: 24px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  height: 3px;\n  width: 80px;\n  outline: none;\n  appearance: none;\n  background-color: rgba(255, 255, 255, 0.2);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player.art-setting-show .art-settings {\n  display: flex;\n}\n.art-video-player .art-info {\n  display: none;\n  position: absolute;\n  left: var(--art-padding);\n  top: var(--art-padding);\n  z-index: 100;\n  padding: 10px;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-info .art-info-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item {\n  display: flex;\n  align-items: center;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-title {\n  width: 100px;\n  text-align: right;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-content {\n  width: 250px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  user-select: all;\n}\n.art-video-player .art-info .art-info-close {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  cursor: pointer;\n}\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n.art-hide-cursor * {\n  cursor: none !important;\n}\n.art-video-player[data-aspect-ratio] {\n  overflow: hidden;\n}\n.art-video-player[data-aspect-ratio] .art-video {\n  object-fit: fill;\n  box-sizing: content-box;\n}\n.art-fullscreen {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n}\n.art-fullscreen-web {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n  position: fixed;\n  inset: 0;\n  z-index: var(--art-fullscreen-web-index);\n  width: 100%;\n  height: 100%;\n}\n.art-mini-popup {\n  position: fixed;\n  z-index: 9999;\n  width: 320px;\n  height: 180px;\n  background: #000;\n  border-radius: var(--art-border-radius);\n  cursor: move;\n  user-select: none;\n  overflow: hidden;\n  transition: opacity 0.2s ease;\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);\n}\n.art-mini-popup svg {\n  fill: #fff;\n}\n.art-mini-popup .art-video {\n  pointer-events: none;\n}\n.art-mini-popup .art-mini-close {\n  position: absolute;\n  z-index: 20;\n  right: 10px;\n  top: 10px;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n}\n.art-mini-popup .art-mini-state {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n  background-color: rgba(0, 0, 0, 0.25);\n}\n.art-mini-popup .art-mini-state .art-icon {\n  opacity: 0.75;\n  cursor: pointer;\n  transform: scale(3);\n  pointer-events: auto;\n  transition: transform 0.2s ease;\n}\n.art-mini-popup .art-mini-state .art-icon:active {\n  transform: scale(2.5);\n}\n.art-mini-popup.art-mini-dragging {\n  opacity: 0.9;\n}\n.art-mini-popup:hover .art-mini-close,\n.art-mini-popup:hover .art-mini-state {\n  opacity: 1;\n}\n.art-video-player[data-flip='horizontal'] .art-video {\n  transform: scaleX(-1);\n}\n.art-video-player[data-flip='vertical'] .art-video {\n  transform: scaleY(-1);\n}\n.art-video-player .art-layer-lock {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 50%;\n  border-radius: 50%;\n  transform: translateY(-50%);\n  height: var(--art-lock-size);\n  width: var(--art-lock-size);\n  left: var(--art-padding);\n  background-color: var(--art-tip-background);\n}\n.art-video-player .art-layer-auto-playback {\n  display: none;\n  gap: 10px;\n  align-items: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  padding: 10px;\n  line-height: 1;\n  left: var(--art-padding);\n  bottom: calc(var(--art-controls-height, var(--art-control-height)) + var(--art-bottom-gap) + 10px);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close svg {\n  width: 15px;\n  height: 15px;\n  fill: var(--art-theme);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-jump {\n  color: var(--art-theme);\n  cursor: pointer;\n}\n.art-video-player.art-lock .art-subtitle {\n  bottom: var(--art-subtitle-bottom) !important;\n}\n.art-video-player.art-mini-progress-bar .art-bottom,\n.art-video-player.art-lock .art-bottom {\n  opacity: 1;\n  padding: 0;\n  background-image: none;\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-controls,\n.art-video-player.art-lock .art-bottom .art-controls,\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress,\n.art-video-player.art-lock .art-bottom .art-progress {\n  transform: translateY(calc(var(--art-controls-height, var(--art-control-height)) + var(--art-bottom-gap) + var(--art-progress-height) / 4));\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress-indicator,\n.art-video-player.art-lock .art-bottom .art-progress-indicator {\n  display: none !important;\n}\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n.art-control-selector {\n  position: relative;\n  display: flex;\n  justify-content: center;\n}\n.art-control-selector .art-selector-list {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  overflow-y: auto;\n  overflow-x: hidden;\n  opacity: 0;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  max-height: var(--art-selector-max-height);\n  background-color: var(--art-widget-background);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-control-selector .art-selector-list .art-selector-item {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  padding: 10px 15px;\n  flex-shrink: 0;\n  line-height: 1;\n}\n.art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-control-selector .art-selector-list .art-selector-item:hover,\n.art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: var(--art-theme);\n}\n.art-control-selector:hover .art-selector-list {\n  opacity: 1;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player {\n  /*! Hint.css - v2.7.0 - 2021-10-01\n    * https://kushagra.dev/lab/hint/\n    * Copyright (c) 2021 Kushagra Gour */\n  /*-------------------------------------*\\\n        HINT.css - A CSS tooltip library\n    \\*-------------------------------------*/\n  /**\n    * HINT.css is a tooltip library made in pure CSS.\n    *\n    * Source: https://github.com/chinchang/hint.css\n    * Demo: http://kushagragour.in/lab/hint/\n    *\n    */\n  /**\n    * source: hint-core.scss\n    *\n    * Defines the basic styling for the tooltip.\n    * Each tooltip is made of 2 parts:\n    * 	1) body (:after)\n    * 	2) arrow (:before)\n    *\n    * Classes added:\n    * 	1) hint\n    */\n  /**\n    * source: hint-position.scss\n    *\n    * Defines the positoning logic for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--top\n    * 	2) hint--bottom\n    * 	3) hint--left\n    * 	4) hint--right\n    */\n  /**\n    * set default color for tooltip arrows\n    */\n  /**\n    * top tooltip\n    */\n  /**\n    * bottom tooltip\n    */\n  /**\n    * right tooltip\n    */\n  /**\n    * left tooltip\n    */\n  /**\n    * top-left tooltip\n    */\n  /**\n    * top-right tooltip\n    */\n  /**\n    * bottom-left tooltip\n    */\n  /**\n    * bottom-right tooltip\n    */\n  /**\n    * source: hint-sizes.scss\n    *\n    * Defines width restricted tooltips that can span\n    * across multiple lines.\n    *\n    * Classes added:\n    * 	1) hint--small\n    * 	2) hint--medium\n    * 	3) hint--large\n    *\n    */\n  /**\n    * source: hint-theme.scss\n    *\n    * Defines basic theme for tooltips.\n    *\n    */\n  /**\n    * source: hint-color-types.scss\n    *\n    * Contains tooltips of various types based on color differences.\n    *\n    * Classes added:\n    * 	1) hint--error\n    * 	2) hint--warning\n    * 	3) hint--info\n    * 	4) hint--success\n    *\n    */\n  /**\n    * Error\n    */\n  /**\n    * Warning\n    */\n  /**\n    * Info\n    */\n  /**\n    * Success\n    */\n  /**\n    * source: hint-always.scss\n    *\n    * Defines a persisted tooltip which shows always.\n    *\n    * Classes added:\n    * 	1) hint--always\n    *\n    */\n  /**\n    * source: hint-rounded.scss\n    *\n    * Defines rounded corner tooltips.\n    *\n    * Classes added:\n    * 	1) hint--rounded\n    *\n    */\n  /**\n    * source: hint-effects.scss\n    *\n    * Defines various transition effects for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--no-animate\n    * 	2) hint--bounce\n    *\n    */\n}\n.art-video-player [class*='hint--'] {\n  position: relative;\n  display: inline-block;\n  font-style: normal;\n  /**\n        * tooltip arrow\n        */\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:before,\n.art-video-player [class*='hint--']:after {\n  position: absolute;\n  -webkit-transform: translate3d(0, 0, 0);\n  -moz-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  -webkit-transition: 0.3s ease;\n  -moz-transition: 0.3s ease;\n  transition: 0.3s ease;\n  -webkit-transition-delay: 0ms;\n  -moz-transition-delay: 0ms;\n  transition-delay: 0ms;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  visibility: visible;\n  opacity: 1;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  -webkit-transition-delay: 100ms;\n  -moz-transition-delay: 100ms;\n  transition-delay: 100ms;\n}\n.art-video-player [class*='hint--']:before {\n  content: '';\n  position: absolute;\n  background: transparent;\n  border: 6px solid transparent;\n  z-index: 1000001;\n}\n.art-video-player [class*='hint--']:after {\n  background: #000000;\n  color: white;\n  padding: 8px 10px;\n  font-size: 12px;\n  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  line-height: 12px;\n  white-space: nowrap;\n}\n.art-video-player [class*='hint--'][aria-label]:after {\n  content: attr(aria-label);\n}\n.art-video-player [class*='hint--'][data-hint]:after {\n  content: attr(data-hint);\n}\n.art-video-player [aria-label='']:before,\n.art-video-player [aria-label='']:after,\n.art-video-player [data-hint='']:before,\n.art-video-player [data-hint='']:after {\n  display: none !important;\n}\n.art-video-player .hint--top-left:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top-right:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--bottom-left:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom-right:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--left:before {\n  border-left-color: #000000;\n}\n.art-video-player .hint--right:before {\n  border-right-color: #000000;\n}\n.art-video-player .hint--top:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top:before,\n.art-video-player .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--top:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top:hover:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--bottom:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom:before,\n.art-video-player .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--bottom:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom:hover:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--right:before {\n  margin-left: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--right:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--right:before,\n.art-video-player .hint--right:after {\n  left: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--right:hover:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--right:hover:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--left:before {\n  margin-right: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--left:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--left:before,\n.art-video-player .hint--left:after {\n  right: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--left:hover:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--left:hover:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--top-left:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-left:before,\n.art-video-player .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--top-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--top-left:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--top-right:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-right:before,\n.art-video-player .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--top-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--top-right:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-right:hover:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--bottom-left:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-left:before,\n.art-video-player .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--bottom-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--bottom-left:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--bottom-right:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-right:before,\n.art-video-player .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--bottom-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--bottom-right:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-right:hover:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--small:after,\n.art-video-player .hint--medium:after,\n.art-video-player .hint--large:after {\n  white-space: normal;\n  line-height: 1.4em;\n  word-wrap: break-word;\n}\n.art-video-player .hint--small:after {\n  width: 80px;\n}\n.art-video-player .hint--medium:after {\n  width: 150px;\n}\n.art-video-player .hint--large:after {\n  width: 300px;\n}\n.art-video-player [class*='hint--'] {\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:after {\n  text-shadow: 0 -1px 0px black;\n  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);\n}\n.art-video-player .hint--error:after {\n  background-color: #b34e4d;\n  text-shadow: 0 -1px 0px #592726;\n}\n.art-video-player .hint--error.hint--top-left:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top-right:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-left:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-right:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n.art-video-player .hint--warning:after {\n  background-color: #c09854;\n  text-shadow: 0 -1px 0px #6c5328;\n}\n.art-video-player .hint--warning.hint--top-left:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top-right:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-left:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-right:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n.art-video-player .hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n.art-video-player .hint--info:after {\n  background-color: #3986ac;\n  text-shadow: 0 -1px 0px #1a3c4d;\n}\n.art-video-player .hint--info.hint--top-left:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top-right:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-left:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-right:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n.art-video-player .hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n.art-video-player .hint--success:after {\n  background-color: #458746;\n  text-shadow: 0 -1px 0px #1a321a;\n}\n.art-video-player .hint--success.hint--top-left:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top-right:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-left:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-right:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n.art-video-player .hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n.art-video-player .hint--always:after,\n.art-video-player .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n.art-video-player .hint--always.hint--top:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--bottom:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--left:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--left:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--right:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--always.hint--right:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--rounded:after {\n  border-radius: 4px;\n}\n.art-video-player .hint--no-animate:before,\n.art-video-player .hint--no-animate:after {\n  -webkit-transition-duration: 0ms;\n  -moz-transition-duration: 0ms;\n  transition-duration: 0ms;\n}\n.art-video-player .hint--bounce:before,\n.art-video-player .hint--bounce:after {\n  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  -moz-transition: opacity 0.3s ease, visibility 0.3s ease, -moz-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n}\n.art-video-player .hint--no-shadow:before,\n.art-video-player .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n.art-video-player .hint--no-arrow:before {\n  display: none;\n}\n.art-video-player.art-mobile {\n  --art-bottom-gap: 10px;\n  --art-control-height: 38px;\n  --art-control-icon-scale: 1;\n  --art-state-size: 60px;\n  --art-settings-max-height: 180px;\n  --art-selector-max-height: 180px;\n  --art-indicator-scale: 1;\n  --art-control-opacity: 1;\n}\n.art-video-player.art-mobile .art-controls-left {\n  margin-left: calc(var(--art-padding) / -1);\n}\n.art-video-player.art-mobile .art-controls-right {\n  margin-right: calc(var(--art-padding) / -1);\n}\n";
-class Subtitle extends Component {
+function parseSubtitle(buffer, option) {
+  const text = new TextDecoder(option.encoding).decode(buffer);
+  switch (option.type || getExt(option.url)) {
+    case "srt":
+      return { vtt: option.onVttLoad(srtToVtt(text)) };
+    case "ass":
+      return { vtt: option.onVttLoad(assToVtt(text)) };
+    case "vtt":
+      return { vtt: option.onVttLoad(text) };
+    default:
+      return void 0;
+  }
+}
+class SubtitleRequest {
+  constructor(parent) {
+    this.scope = parent.child();
+    this.cancelled = new Promise((resolve) => {
+      this.scope.add(() => {
+        resolve(void 0);
+      });
+    });
+    this.signal = requestController(this.scope)?.signal;
+  }
+  get active() {
+    return !this.scope.closed;
+  }
+  cancel() {
+    this.scope.dispose();
+  }
+  async run(work) {
+    if (!this.active)
+      return void 0;
+    try {
+      return await Promise.race([work(), this.cancelled]);
+    } finally {
+      this.cancel();
+    }
+  }
+}
+const states = /* @__PURE__ */ new WeakMap();
+function initSubtitleState(subtitle, art) {
+  const scope = getScope(art).child();
+  const state2 = { scope, revision: 0, render: 0, trackRevision: 0 };
+  states.set(subtitle, state2);
+  scope.add(() => {
+    releaseSubtitleURL(state2);
+  });
+  return state2;
+}
+function subtitleState(subtitle) {
+  return states.get(subtitle);
+}
+function beginSubtitleRequest(state2) {
+  const previous = state2.request;
+  const request = new SubtitleRequest(state2.scope);
+  state2.request = request;
+  state2.revision += 1;
+  previous?.cancel();
+  return request;
+}
+function releaseSubtitleURL(state2) {
+  const url = state2.ownedURL;
+  state2.ownedURL = void 0;
+  if (url)
+    URL.revokeObjectURL(url);
+}
+function renderSubtitle(subtitle) {
+  const state2 = subtitleState(subtitle);
+  if (state2.scope.closed)
+    return;
+  const revision = state2.revision;
+  const render = ++state2.render;
+  const active = () => !state2.scope.closed && state2.revision === revision && state2.render === render;
+  const { art } = subtitle;
+  const { $subtitle } = art.template;
+  $subtitle.innerHTML = "";
+  if (!subtitle.activeCues.length)
+    return;
+  art.emit("subtitleBeforeUpdate", subtitle.activeCues);
+  if (!active())
+    return;
+  const html2 = subtitle.activeCues.map((cue, index) => cue.text.split(/\r?\n/).filter((line) => line.trim()).map((line) => `<div class="art-subtitle-line" data-group="${index}">
+                                ${art.option.subtitle.escape ? escape(line) : line}
+                            </div>`).join("")).join("");
+  if (!active())
+    return;
+  $subtitle.innerHTML = html2;
+  art.emit("subtitleAfterUpdate", subtitle.activeCues);
+}
+function replaceSubtitleTrack(subtitle, kind, url) {
+  const state2 = subtitleState(subtitle);
+  if (state2.scope.closed)
+    return;
+  const revision = ++state2.trackRevision;
+  const { art } = subtitle;
+  const { template } = art;
+  const previous = template.$track;
+  const parent = previous.parentNode;
+  const next = previous.nextSibling;
+  const track = document.createElement("track");
+  const scope = state2.scope.child();
+  scope.add(() => {
+    track.onload = null;
+    track.onerror = null;
+  });
+  let committed = false;
+  try {
+    track.default = true;
+    track.kind = kind;
+    track.src = url;
+    track.label = art.option.subtitle.name || "Artplayer";
+    track.track.mode = "hidden";
+    track.onload = () => {
+      if (!scope.closed && template.$track === track)
+        art.emit("subtitleLoad", subtitle.cues, subtitle.option);
+    };
+    track.onerror = () => {
+      if (!scope.closed && template.$track === track)
+        art.notice.show = new Error("Failed to load subtitle track");
+    };
+    if (scope.closed || state2.trackRevision !== revision) {
+      scope.dispose();
+      return;
+    }
+    previous.remove();
+    template.$video.appendChild(track);
+    template.$track = track;
+    const textTrack = subtitle.textTrack;
+    const cleanup = textTrack ? art.proxy(textTrack, "cuechange", () => {
+      if (!scope.closed && template.$track === track)
+        subtitle.update();
+    }) : () => {
+    };
+    scope.add(() => {
+      art.events.remove(cleanup);
+    });
+    if (scope.closed || state2.trackRevision !== revision) {
+      scope.dispose();
+      track.remove();
+      return;
+    }
+    const previousScope = state2.track;
+    state2.track = scope;
+    subtitle.destroyEvent = cleanup;
+    previous.onload = null;
+    previous.onerror = null;
+    committed = true;
+    try {
+      previousScope?.dispose();
+    } finally {
+      if (state2.ownedURL && state2.ownedURL !== url)
+        releaseSubtitleURL(state2);
+    }
+  } catch (error2) {
+    if (committed)
+      throw error2;
+    scope.dispose();
+    track.remove();
+    if (state2.scope.closed || state2.trackRevision !== revision)
+      throw error2;
+    template.$track = previous;
+    if (parent)
+      parent.insertBefore(previous, next?.parentNode === parent ? next : null);
+    throw error2;
+  }
+}
+const SubtitleBase = Component;
+class Subtitle extends SubtitleBase {
   constructor(art) {
     super(art);
     this.name = "subtitle";
     this.option = null;
     this.destroyEvent = () => null;
-    this.init(art.option.subtitle);
+    const state2 = initSubtitleState(this, art);
+    void this.init(art.option.subtitle).catch(() => {
+    });
     let lastState = false;
-    art.on("video:timeupdate", () => {
-      if (!this.url)
+    const timeupdate = () => {
+      if (state2.scope.closed || !this.url)
         return;
-      const state2 = this.art.template.$video.webkitDisplayingFullscreen;
-      if (typeof state2 !== "boolean")
-        return;
-      if (state2 !== lastState) {
-        lastState = state2;
-        this.createTrack(state2 ? "subtitles" : "metadata", this.url);
+      const fullscreen2 = art.template.$video.webkitDisplayingFullscreen;
+      if (typeof fullscreen2 === "boolean" && fullscreen2 !== lastState) {
+        lastState = fullscreen2;
+        this.createTrack(fullscreen2 ? "subtitles" : "metadata", this.url);
       }
+    };
+    art.on("video:timeupdate", timeupdate);
+    state2.scope.add(() => {
+      art.off("video:timeupdate", timeupdate);
     });
   }
   get url() {
     return this.art.template.$track.src;
   }
   set url(url) {
-    this.switch(url);
+    void this.switch(url).catch(() => {
+    });
   }
   get textTrack() {
     return this.art.template.$video?.textTracks?.[0];
   }
   get activeCues() {
-    if (!this.textTrack)
-      return [];
-    return Array.from(this.textTrack.activeCues);
+    return Array.from(this.textTrack?.activeCues || []);
   }
   get cues() {
-    if (!this.textTrack)
-      return [];
-    return Array.from(this.textTrack.cues);
+    return Array.from(this.textTrack?.cues || []);
   }
   style(key, value) {
     const { $subtitle } = this.art.template;
-    if (typeof key === "object") {
-      return setStyles($subtitle, key);
-    }
-    return setStyle($subtitle, key, value);
+    return typeof key === "object" ? setStyles($subtitle, key) : setStyle($subtitle, key, value);
   }
   update() {
-    const {
-      option: { subtitle },
-      template: { $subtitle }
-    } = this.art;
-    $subtitle.innerHTML = "";
-    if (!this.activeCues.length)
-      return;
-    this.art.emit("subtitleBeforeUpdate", this.activeCues);
-    $subtitle.innerHTML = this.activeCues.map(
-      (cue, index) => cue.text.split(/\r?\n/).filter((line) => line.trim()).map(
-        (line) => `<div class="art-subtitle-line" data-group="${index}">
-                                ${subtitle.escape ? escape(line) : line}
-                            </div>`
-      ).join("")
-    ).join("");
-    this.art.emit("subtitleAfterUpdate", this.activeCues);
+    renderSubtitle(this);
   }
   async switch(url, newOption = {}) {
     const { i18n, notice, option } = this.art;
     const subtitleOption = { ...option.subtitle, ...newOption, url };
+    const state2 = subtitleState(this);
+    const revision = state2.revision + 1;
     const subUrl = await this.init(subtitleOption);
-    if (newOption.name) {
+    if (!state2.scope.closed && state2.revision === revision && newOption.name)
       notice.show = `${i18n.get("Switch Subtitle")}: ${newOption.name}`;
-    }
     return subUrl;
   }
   createTrack(kind, url) {
-    const { template, proxy, option } = this.art;
-    const { $video, $track } = template;
-    const $newTrack = createElement("track");
-    $newTrack.default = true;
-    $newTrack.kind = kind;
-    $newTrack.src = url;
-    $newTrack.label = option.subtitle.name || "Artplayer";
-    $newTrack.track.mode = "hidden";
-    $newTrack.onload = () => {
-      this.art.emit("subtitleLoad", this.cues, this.option);
-    };
-    this.art.events.remove(this.destroyEvent);
-    $track.onload = null;
-    remove($track);
-    append($video, $newTrack);
-    template.$track = $newTrack;
-    this.destroyEvent = proxy(this.textTrack, "cuechange", () => this.update());
+    replaceSubtitleTrack(this, kind, url);
   }
   async init(subtitleOption) {
-    const {
-      notice,
-      template: { $subtitle }
-    } = this.art;
-    if (!this.textTrack)
-      return null;
-    validator(subtitleOption, scheme.subtitle);
-    if (!subtitleOption.url)
-      return;
-    this.option = subtitleOption;
-    this.style(subtitleOption.style);
-    return fetch(subtitleOption.url).then((response) => response.arrayBuffer()).then((buffer) => {
-      const decoder = new TextDecoder(subtitleOption.encoding);
-      const text = decoder.decode(buffer);
-      switch (subtitleOption.type || getExt(subtitleOption.url)) {
-        case "srt": {
-          const vtt = srtToVtt(text);
-          const vttNew = subtitleOption.onVttLoad(vtt);
-          return vttToBlob(vttNew);
+    const state2 = subtitleState(this);
+    const request = beginSubtitleRequest(state2);
+    const { notice, template: { $subtitle } } = this.art;
+    return request.run(async () => {
+      if (!this.textTrack)
+        return null;
+      validator(subtitleOption, scheme.subtitle);
+      if (!subtitleOption.url)
+        return void 0;
+      this.option = subtitleOption;
+      this.style(subtitleOption.style);
+      let generated;
+      try {
+        if (!request.active)
+          return void 0;
+        const response = await fetch(subtitleOption.url, { signal: request.signal });
+        if (!request.active)
+          return void 0;
+        if (!response.ok)
+          throw new Error(`Failed to load subtitle: ${response.status} ${response.statusText}`);
+        const buffer = await response.arrayBuffer();
+        if (!request.active)
+          return void 0;
+        const vtt = parseSubtitle(buffer, subtitleOption);
+        if (!request.active)
+          return void 0;
+        const subUrl = vtt === void 0 ? subtitleOption.url : generated = vttToBlob(vtt.vtt);
+        if (!request.active)
+          return void 0;
+        $subtitle.innerHTML = "";
+        const trackRevision = state2.trackRevision + 1;
+        if (this.url !== subUrl)
+          this.createTrack("metadata", subUrl);
+        if (!request.active || state2.trackRevision > trackRevision)
+          return void 0;
+        if (generated) {
+          state2.ownedURL = generated;
+          generated = void 0;
         }
-        case "ass": {
-          const vtt = assToVtt(text);
-          const vttNew = subtitleOption.onVttLoad(vtt);
-          return vttToBlob(vttNew);
-        }
-        case "vtt": {
-          const vttNew = subtitleOption.onVttLoad(text);
-          return vttToBlob(vttNew);
-        }
-        default:
-          return subtitleOption.url;
-      }
-    }).then((subUrl) => {
-      $subtitle.innerHTML = "";
-      if (this.url === subUrl)
         return subUrl;
-      URL.revokeObjectURL(this.url);
-      this.createTrack("metadata", subUrl);
-      return subUrl;
-    }).catch((err) => {
-      $subtitle.innerHTML = "";
-      notice.show = err;
-      throw err;
+      } catch (error2) {
+        if (!request.active)
+          return void 0;
+        $subtitle.innerHTML = "";
+        notice.show = error2;
+        throw error2;
+      } finally {
+        if (generated) {
+          if (!state2.scope.closed && this.url === generated)
+            state2.ownedURL = generated;
+          else
+            URL.revokeObjectURL(generated);
+        }
+      }
     });
   }
 }

@@ -68,3 +68,5 @@
 | BASE-LIFE-13 | resolved / 已复现 | Obsolete setting callback completions overwrite current UI and failures are unhandled | CORE-14 |
 | BASE-LIFE-14 | resolved / 已复现 | Removed or replaced setting items still run deferred mounted callbacks | CORE-14 |
 | BASE-DOM-08 | resolved / 已复现 | Sharing a live setting object leaves a second published instance blank and can steal candidate bindings | CORE-14 |
+| BASE-LIFE-15 | resolved / 已复现 | Subtitle requests overwrite newer state and mutate tracks after destroy | CORE-15 |
+| BASE-LIFE-16 | resolved / 已复现 | Subtitle URLs revoke caller resources and leak the final generated resource | CORE-15 |
