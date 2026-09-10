@@ -5,49 +5,6 @@
     "CORE-07",
     "PKG-CHAPTER-04"
   ],
-  "scope": "Existing workspace NodeNext ESM failure, not a candidate waiver. Remove expected failures when a documented fix adds passing consumer assertions.",
-  "diagnostics": [
-    {
-      "file": "test/types/consumer.ts",
-      "code": 2349,
-      "line": 8,
-      "message": "This expression is not callable.\n  Type 'typeof import(\"<workspace>/packages/artplayer-plugin-chapter/types/artplayer-plugin-chapter\")' has no call signatures."
-    },
-    {
-      "file": "test/types/consumer.ts",
-      "code": 2351,
-      "line": 10,
-      "message": "This expression is not constructable.\n  Type 'typeof import(\"<workspace>/packages/artplayer/types/artplayer\")' has no construct signatures."
-    },
-    {
-      "file": "test/types/consumer.ts",
-      "code": 7006,
-      "line": 10,
-      "message": "Parameter 'player' implicitly has an 'any' type."
-    },
-    {
-      "file": "test/types/consumer.ts",
-      "code": 2709,
-      "line": 12,
-      "message": "Cannot use namespace 'Artplayer' as a type."
-    },
-    {
-      "file": "test/types/consumer.ts",
-      "code": 2683,
-      "line": 12,
-      "message": "'this' implicitly has type 'any' because it does not have a type annotation."
-    },
-    {
-      "file": "test/types/consumer.ts",
-      "code": 2339,
-      "line": 17,
-      "message": "Property 'html' does not exist on type 'typeof import(\"<workspace>/packages/artplayer/types/artplayer\")'."
-    },
-    {
-      "file": "test/types/consumer.ts",
-      "code": 2349,
-      "line": 18,
-      "message": "This expression is not callable.\n  Type 'typeof import(\"<workspace>/packages/artplayer-plugin-chapter/types/artplayer-plugin-chapter\")' has no call signatures."
-    }
-  ]
+  "scope": "Resolved by PKG-CHAPTER-04. Historical failures remain frozen under refactor/baselines/consumers.json; current consumers must have zero diagnostics.",
+  "diagnostics": []
 }

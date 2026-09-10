@@ -750,12 +750,6 @@ interface I18nValue {
 
 export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>
 
-declare module 'artplayer/i18n/*' {
-  const lang: Partial<I18nValue>
-  // @ts-expect-error TS2666
-  export default lang
-}
-
 export type Bar = 'loaded' | 'played' | 'hover'
 
 export interface Events {

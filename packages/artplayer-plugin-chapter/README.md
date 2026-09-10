@@ -22,6 +22,10 @@ The registered name is `artplayerPluginChapter`. After metadata loads, use
 `update({})` to clear them. Update is synchronous and requires an options object.
 Chapter times are seconds; ranges must not overlap. `Infinity` as an end value uses the current duration.
 
+TypeScript users can import `Chapters`, `Option` and `Result` with `import type`.
+Modern ESM/CommonJS and `/legacy` share the same API; old TypeScript resolution
+keeps the original `.d.ts` entry and a legacy subpath fallback.
+
 The existing implementation sorts and fills the supplied array in place and replaces its Infinity end
 values. Pass a fresh array when you need to retain the original configuration. After switching media,
 call update with chapters appropriate to the new duration; initialization listens to metadata once.

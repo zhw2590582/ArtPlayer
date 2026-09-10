@@ -33,7 +33,8 @@ Actions 固定完整 SHA，Node 来自 .node-version，Yarn 固定 1.22.22；安
 
 ENG-07 将浏览器候选改为 `yarn test:package` 实际打包并安装后的文件，使用输出映射禁止
 回退到源码。安装/构建日志、tarball、成员指纹和浏览器结果一并上传，构建快照的 node_modules
-链接不上传。初始包范围为 core/chapter；精确历史类型诊断仍阻止严格发布检查通过。
+链接不上传。初始包范围为 core/chapter；PKG-CHAPTER-04 已将这两个包的已知类型诊断清零，
+严格打包检查现已通过，仍不等于整批发布准入或远端 CI 已通过。
 见 [消费者说明](../test/package/README.md)。本地已验证，远端执行仍待 CI-04。
 
 .github/workflows/pages.yml 仅支持手动运行，限定 master，且仓库变量 PAGES_DEPLOY_ENABLED 必须为 true。初始启用状态未经远端核实；没有修改该变量或其他 GitHub 设置。保留此门槛用于 CI-02 完成域名、路径和远端配置验收后再启用，不能直接自动部署 PR 产物。

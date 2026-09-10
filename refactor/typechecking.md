@@ -1,5 +1,11 @@
 # 已实现的类型检查与迁移入口
 
+PKG-CHAPTER-04 已修复核心/chapter 的条件类型入口、language 与 chapter legacy 回退。
+当前五组编译模式均要求零诊断，覆盖默认/命名类型、legacy、语言与 CJS require 形式；
+七条历史 NodeNext 诊断和打包额外四条诊断的候选豁免已移除，冻结发布基线不变。
+旧编译器仍使用 TS 4.3.5 和原 .d.ts 文件。以下 ENG-04 说明保留初始建立时的历史背景，
+当前实际入口以 scripts/typecheck.mjs、包内类型文档和任务变更记录为准。
+
 ENG-04 使用开发编译器 TypeScript 5.9.3，并将 TypeScript 4.3.5 作为 npm alias typescript-compat 固定在根开发依赖。后者仅用于旧编译器消费回归，不进入播放器运行依赖或产物。Yarn 锁文件校验现在接受精确版本的 npm alias，仍拒绝范围和浮动版本。
 
 ## 命令及真实覆盖

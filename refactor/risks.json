@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-10T14:41:52.219Z",
+  "updatedAt": "2026-09-10T15:27:41.538Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -147,7 +147,7 @@
       "id": "BASE-TYPE-01",
       "title": "NodeNext ESM 默认导出与声明互操作失配",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "ENG-04",
         "CORE-07",
@@ -157,7 +157,16 @@
         "refactor/baselines/consumers.json"
       ],
       "compatibleResolution": "分配 ESM/CJS 声明入口，保留旧解析模式，避免 any/skipLibCheck 掩盖。",
-      "closureCriteria": "四模式原合法消费通过，NodeNext ESM 对实际默认导出可构造/调用。"
+      "closureCriteria": "四模式原合法消费通过，NodeNext ESM 对实际默认导出可构造/调用。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-10-PKG-CHAPTER-04-public-types.md",
+        "refactor/baselines/chapter-types-validation.json",
+        "test/types/chapter-exports.ts",
+        "test/types/language-value.ts",
+        "test/types/commonjs.cts",
+        "refactor/scripts/types.test.mjs"
+      ],
+      "resolutionRationale": "格式匹配的 CJS/ESM 声明及旧 TS legacy/language 回退通过五组编译模式；实际安装 tarball 的已知诊断清零，运行时路径/导出不变，旧发布基线隔离重跑保持原失败。"
     },
     {
       "id": "BASE-TYPE-02",
@@ -186,7 +195,7 @@
       "id": "BASE-TYPE-03",
       "title": "chapter legacy 缺旧模块解析的声明回退",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "ENG-04",
         "PKG-CHAPTER-04"
@@ -195,7 +204,16 @@
         "refactor/baselines/consumers.json"
       ],
       "compatibleResolution": "保留 legacy 文件和导入路径，补旧解析类型回退。",
-      "closureCriteria": "Node10 解析和 NodeNext/Bundler 消费均有正向证据。"
+      "closureCriteria": "Node10 解析和 NodeNext/Bundler 消费均有正向证据。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-10-PKG-CHAPTER-04-public-types.md",
+        "refactor/baselines/chapter-types-validation.json",
+        "test/types/chapter-exports.ts",
+        "test/types/language-value.ts",
+        "test/types/commonjs.cts",
+        "refactor/scripts/types.test.mjs"
+      ],
+      "resolutionRationale": "格式匹配的 CJS/ESM 声明及旧 TS legacy/language 回退通过五组编译模式；实际安装 tarball 的已知诊断清零，运行时路径/导出不变，旧发布基线隔离重跑保持原失败。"
     },
     {
       "id": "BASE-TYPE-04",

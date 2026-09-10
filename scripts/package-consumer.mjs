@@ -38,11 +38,13 @@ export function typeConsumers(dir) {
   for (const [compiler, mode] of [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'bundler-esm'], [compat, 'node10-commonjs'], [ts, 'nodenext-esm']]) {
     const next = mode.startsWith('nodenext')
     const extension = next ? (mode.endsWith('-cjs') ? 'cts' : 'mts') : 'ts'
-    const inputs = [...(mode === 'nodenext-esm' ? ['public'] : ['public', 'chapter-options']), 'language', 'legacy-plugin']
+    const inputs = ['public', 'chapter-options', 'chapter-exports', 'language-value', 'language', 'legacy-plugin']
+    if (mode === 'nodenext-cjs')
+      inputs.push('commonjs')
     const files = inputs.map((name) => {
       const file = path.join(dir, `${name}.${extension}`)
       const folder = ['language', 'legacy-plugin'].includes(name) ? 'refactor/fixtures/consumers' : 'test/types'
-      fs.copyFileSync(path.join(workspace, folder, `${name}.ts`), file)
+      fs.copyFileSync(path.join(workspace, folder, `${name}.${name === 'commonjs' ? 'cts' : 'ts'}`), file)
       return file
     })
     const options = {

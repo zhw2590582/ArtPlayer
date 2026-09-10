@@ -22,8 +22,10 @@ export restrictions and shared Emitter behavior. Public property descriptors and
 default configuration are compared against the fixed published core/chapter.
 This is a targeted compatibility check, not a complete behavioral API comparison.
 
-Public, chapter-options, language and legacy-plugin TypeScript consumers run with
-TS 5.9.3 (Node10, NodeNext CJS/ESM and Bundler) and TS 4.3.5 (Node10). Exact known
+Public, chapter-options, chapter-exports, language and legacy-plugin consumers run with
+TS 5.9.3 (Node10, NodeNext CJS/ESM and Bundler) and TS 4.3.5 (Node10). NodeNext CJS also
+checks import-equals/require and namespaced types. PKG-CHAPTER-04 resolved the initial
+type failures; all five groups now require zero diagnostics. Exact known
 diagnostics are referenced by `known-types.json` and `test/types/known-diagnostics.json`.
 Unexpected errors and unexpectedly removed errors both require investigation.
 Remove a known case when its owning task fixes it; keep frozen release evidence intact.

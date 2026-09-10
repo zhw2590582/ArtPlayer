@@ -1,16 +1,16 @@
 import type Artplayer from 'artplayer'
 
-type Chapters = {
+export type Chapters = {
   start: number
   end: number
   title: string
 }[]
 
-interface Option {
+export interface Option {
   chapters?: Chapters
 }
 
-interface Result {
+export interface Result {
   name: 'artplayerPluginChapter'
   update: (option: Option) => void
 }

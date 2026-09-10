@@ -57,7 +57,9 @@ console.log(`✨ Built ${artplayerTSoutput}`);
   }
 
   pluginFiles.sort()
-  const allFiles = [...pluginFiles, 'artplayer.d.ts']
+  const languageFile = 'artplayer-i18n.d.ts'
+  fs.writeFileSync(path.join('docs/assets/ts', languageFile), `declare module 'artplayer/i18n/*' {\n  const language: NonNullable<Artplayer.I18n['en']>\n  export default language\n}\n`)
+  const allFiles = [...pluginFiles, 'artplayer.d.ts', languageFile]
   const eslint = new ESLint({ fix: true, fixTypes: ['layout'] })
   const results = await eslint.lintFiles(allFiles.map(file => path.join('docs/assets/ts', file)))
   await ESLint.outputFixes(results)

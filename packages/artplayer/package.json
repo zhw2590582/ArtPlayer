@@ -19,19 +19,34 @@
   ],
   "exports": {
     ".": {
-      "types": "./types/artplayer.d.ts",
-      "import": "./dist/artplayer.mjs",
-      "require": "./dist/artplayer.js"
+      "import": {
+        "types": "./types/artplayer.d.mts",
+        "default": "./dist/artplayer.mjs"
+      },
+      "require": {
+        "types": "./types/artplayer.d.cts",
+        "default": "./dist/artplayer.js"
+      }
     },
     "./legacy": {
-      "types": "./types/artplayer.d.ts",
-      "import": "./dist/artplayer.legacy.js",
-      "require": "./dist/artplayer.legacy.js"
+      "import": {
+        "types": "./types/artplayer.d.cts",
+        "default": "./dist/artplayer.legacy.js"
+      },
+      "require": {
+        "types": "./types/artplayer.d.cts",
+        "default": "./dist/artplayer.legacy.js"
+      }
     },
     "./i18n/*": {
-      "types": "./types/i18n.d.ts",
-      "import": "./dist/i18n/*.mjs",
-      "require": "./dist/i18n/*.js"
+      "import": {
+        "types": "./types/language.d.mts",
+        "default": "./dist/i18n/*.mjs"
+      },
+      "require": {
+        "types": "./types/language.d.cts",
+        "default": "./dist/i18n/*.js"
+      }
     }
   },
   "main": "./dist/artplayer.js",
@@ -40,7 +55,7 @@
   "typesVersions": {
     "*": {
       "i18n/*": [
-        "types/i18n.d.ts"
+        "types/legacy/language.d.ts"
       ],
       "legacy": [
         "types/artplayer.d.ts"

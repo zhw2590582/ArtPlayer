@@ -15,6 +15,7 @@ method; the update object is required. All implementation modules are TypeScript
 | `src/types.ts` | Internal aliases derived from the existing public declaration; no runtime imports |
 | `src/style.less` | Existing CSS classes and theme variables |
 | `types/artplayer-plugin-chapter.d.ts` | Consumer declaration and compatibility boundary |
+| `types/*.d.cts`, `types/*.d.mts` | CJS/ESM bridges sharing the same public types |
 
 Dependencies flow from the entry to normalization and rendering. Neither of those
 modules receives an ArtPlayer instance. Rendering accepts a progress container and
@@ -82,7 +83,9 @@ For UI, start at progress.ts/style.less and verify real mouse interaction. For e
 or cleanup changes, start at index.ts and rerun early destroy/multiple-instance tests.
 Any public declaration change also needs new/old compiler and tarball consumers.
 
-The public declaration is intentionally retained during the structural migration;
-PKG-CHAPTER-04 owns NodeNext ESM and legacy subpath declaration fixes. The frozen
+The public declaration remains available to old compilers and exports Chapters,
+Option and Result as types. Modern import/require conditions select format-specific
+bridges; typesVersions provides the legacy subpath to old resolvers. All bridges
+refer to one contract and runtime import paths stay unchanged. The frozen
 published baseline is under refactor/baselines; never overwrite it with candidate
 behavior. Physical device, full editor and final release checks remain separate tasks.

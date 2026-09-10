@@ -70,16 +70,14 @@ export function runTypechecks() {
     sourceCount += result.files.filter(file => relative(file).includes('/src/') && !/\.d\.[cm]?ts$/.test(file)).length
     console.log(`Strict project passed: ${relative(config)} (${result.files.length} root files)`)
   }
-  for (const mode of ['node10-commonjs', 'nodenext-cjs', 'bundler-esm']) {
-    assert.deepEqual(checkConsumer(ts, mode), [], `Current consumer failed: ${mode}`)
-    console.log(`Consumer passed: TS ${ts.version} ${mode}`)
+  for (const [compiler, mode] of [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'bundler-esm'], [ts, 'nodenext-esm'], [compat, 'node10-commonjs']]) {
+    for (const fixture of ['test/types/public.ts', 'test/types/chapter-options.ts', 'test/types/chapter-exports.ts', 'test/types/language-value.ts', 'refactor/fixtures/consumers/language.ts', 'refactor/fixtures/consumers/legacy-plugin.ts']) {
+      assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, fixture), 'utf8')), [], `Consumer failed: TS ${compiler.version} ${mode} ${fixture}`)
+    }
+    if (mode === 'nodenext-cjs')
+      assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, 'test/types/commonjs.cts'), 'utf8')), [], 'CommonJS export assignment consumer failed')
+    console.log(`Consumers passed: TS ${compiler.version} ${mode}`)
   }
-  assert.deepEqual(checkConsumer(compat, 'node10-commonjs'), [], 'Old compiler consumer failed')
-  console.log(`Consumer passed: TS ${compat.version} node10-commonjs`)
-  const expected = read('test/types/known-diagnostics.json')
-  const diagnostics = checkConsumer(ts, 'nodenext-esm')
-  assert.deepEqual(diagnostics, expected.diagnostics, 'NodeNext ESM changed: review BASE-TYPE-01; a fix needs updated success assertions')
-  console.log(`Historical failure retained: ${expected.risk}, ${diagnostics.length} NodeNext ESM diagnostics; this is not candidate approval`)
   console.log(`TypeScript production source files checked: ${sourceCount}; unmigrated JS is not counted`)
 }
 

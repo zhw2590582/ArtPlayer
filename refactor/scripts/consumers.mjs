@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
@@ -8,7 +9,7 @@ import { ensureArchive, hash, readMember, refactorDir } from './releases.mjs'
 
 const root = path.resolve(refactorDir, '..')
 const fixtures = path.join(refactorDir, 'fixtures/consumers')
-const parent = path.join(refactorDir, '.cache/consumers')
+const parent = os.tmpdir()
 const reportPath = path.join(refactorDir, 'baselines/consumers.json')
 const fixtureNames = ['runtime.cjs', 'public.ts', 'language.ts', 'optional-chapter.ts', 'legacy-plugin.ts']
 export const runtimeChecks = [
@@ -22,7 +23,7 @@ export const runtimeChecks = [
 export async function runConsumers() {
   const releases = JSON.parse(fs.readFileSync(path.join(refactorDir, 'baselines/releases.json'), 'utf8')).releases
   fs.mkdirSync(parent, { recursive: true })
-  const dir = fs.mkdtempSync(path.join(parent, 'published-'))
+  const dir = fs.mkdtempSync(path.join(parent, 'artplayer-published-'))
   try {
     const provenance = []
     for (const release of releases) {
@@ -68,8 +69,8 @@ export async function runConsumers() {
       fixtureHashAlgorithm: 'sha256-lf', fixtures: Object.fromEntries(fixtureNames.map(name => [name, hash(fs.readFileSync(path.join(fixtures, name), 'utf8').replaceAll('\r\n', '\n'))])), runtime, types }
   }
   finally {
-    const resolved = path.resolve(dir)
-    assert(resolved.startsWith(path.resolve(parent) + path.sep) && path.basename(resolved).startsWith('published-'), 'Unsafe consumer cleanup')
+    const resolved = fs.realpathSync(dir)
+    assert(path.dirname(resolved) === fs.realpathSync(parent) && path.basename(resolved).startsWith('artplayer-published-'), 'Unsafe consumer cleanup')
     fs.rmSync(resolved, { recursive: true, force: true })
   }
 }

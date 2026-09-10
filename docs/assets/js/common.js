@@ -71,6 +71,7 @@
       './assets/ts/artplayer-proxy-mediabunny.d.ts',
       './assets/ts/artplayer-tool-iframe.d.ts',
       './assets/ts/artplayer.d.ts',
+      './assets/ts/artplayer-i18n.d.ts',
     ]
 
     for (let index = 0; index < libUris.length; index++) {

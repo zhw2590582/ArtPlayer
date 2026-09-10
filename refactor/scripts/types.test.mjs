@@ -46,3 +46,18 @@ test('Chapter optional factory parameters preserve strict update and data types 
   const diagnostics = checkConsumer(ts, 'bundler-esm', unguarded)
   assert.equal(diagnostics.length, 3, 'Invalid update, title and null option must each fail')
 })
+
+test('Chapter named types and legacy aliases remain strict in modern and old consumers', () => {
+  const source = fs.readFileSync(path.join(refactorDir, '../test/types/chapter-exports.ts'), 'utf8')
+  const language = fs.readFileSync(path.join(refactorDir, '../test/types/language-value.ts'), 'utf8')
+  for (const [compiler, mode] of [[ts, 'nodenext-esm'], [ts, 'nodenext-cjs'], [compat, 'node10-commonjs']]) {
+    assert.deepEqual(checkConsumer(compiler, mode, source), [])
+    const invalid = source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')
+    assert.equal(checkConsumer(compiler, mode, invalid).length, 3)
+    assert.deepEqual(checkConsumer(compiler, mode, language), [])
+    assert.equal(checkConsumer(compiler, mode, language.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')).length, 2)
+  }
+  const commonjs = fs.readFileSync(path.join(refactorDir, '../test/types/commonjs.cts'), 'utf8')
+  assert.deepEqual(checkConsumer(ts, 'nodenext-cjs', commonjs), [])
+  assert.equal(checkConsumer(ts, 'nodenext-cjs', commonjs.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')).length, 1)
+})

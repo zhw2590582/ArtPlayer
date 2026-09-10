@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：PKG-CHAPTER-04 类型消费闭环完成
+
+chapter 公开命名类型、核心/插件 CJS/ESM 桥接及旧 legacy/language 回退通过五组编译模式（31 场景），实际 tarball 严格发布检查诊断为零；62 项 Node/基线测试和 54 项安装产物三浏览器检查通过。关闭 BASE-TYPE-01/03，旧发布基线不改。见 [交付](changes/2026-09-10-PKG-CHAPTER-04-public-types.md)。当前 214 项，34 完成、180 待办。生产运行时：chapter 已 TS 化，核心仍未迁移；本任务核心只修正类型入口。03 提交 48660c4e；下一项 ENG-10 接续现有风险/可靠性规则，然后 PILOT-01 汇总现有试点证据，进入 CORE-01。
+
 ## 当前实施：PKG-CHAPTER-03 首包 TS 源码拆分完成
 
 chapter 已从单体 JS 入口改为五个 TS 文件，区间、DOM、生命周期和样式职责清楚；修复标题、NaN、销毁和重复样式问题。61 项 Node/基线检查、源码及安装产物各 54 项三浏览器测试通过；三格式产物已生成。见 [交付](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md)。当前 214 项，33 完成、181 待办。生产迁移：chapter 自有运行时已 TS 化，核心尚未开始。ENG-07 提交 a0286c4e；下一项 PKG-CHAPTER-04 公开类型与消费者闭环。
