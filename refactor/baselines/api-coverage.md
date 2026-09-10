@@ -45,3 +45,5 @@ BASE-02 使用固定 npm artplayer 5.4.0 + artplayer-plugin-chapter 1.1.0 的 UM
 4. `node refactor/scripts/api.mjs --check` 只核对持久报告和来源/快照摘要；`node --test refactor/scripts/api.test.mjs` 运行报告/比较器负例。两者不启动浏览器，CI 不能把它们当作新一轮真实浏览器执行。
 
 yarn test:baseline / ci:check 已通过通配入口包含新增 api.test.mjs。负例涵盖缺检查、错误来源、采集失败、描述符变化、删除方法、选项/静态默认值变化和继承 API 删除。正式候选对照和浏览器自动回归由 ENG-05/07 逐步接入，当前夹具仍固定旧发布文件，不自动加载工作区候选。
+
+BASE-03 已完成首组事件/真实媒体/生命周期采集，覆盖细分与仍未验证部分见 [生命周期基线](lifecycle-coverage.md)；上表的后续责任仍按对应细项处理，不自动宣称整个契约通过。

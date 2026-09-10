@@ -12,3 +12,7 @@
 2026-09-10：按用户授权使用内置浏览器后，BASE-02 最终两次采集的 14 项检查均通过，快照相同，errors 为空。持久报告、比较命令、契约覆盖及剩余范围见 [API 基线](../baselines/api-coverage.md)。本页面没有验证真实播放。
 
 夹具与报告路径由基线任务维护；ENG-05 可复用并扩充受控等待、媒体错误和正式自动化。api.js 依据已核对源码设计断言，真实发布行为如有不同应调查并记录，不能修改断言来盲目通过。
+
+## 事件与真实媒体
+
+`/fixtures/lifecycle.html` 的按钮执行 BASE-03 场景，报告写入独立 `/reports/lifecycle`，不会覆盖 api.json。覆盖、受控拒绝边界与六项历史问题见 [生命周期基线](../baselines/lifecycle-coverage.md)。CAPTURE COMPLETE 仅表示采集成功，需同时查看 findings。

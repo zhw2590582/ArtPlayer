@@ -1,5 +1,11 @@
 # 进度与证据
 
+## 当前实施：BASE-03 生命周期基线完成
+
+固定发布包在内置浏览器最终两次执行 27 项断言、真实媒体时间推进与关键事件顺序均通过，语义观察相同，保存 64 条事件 trace 和六项历史问题。受控恢复拒绝单独登记，其余 errors/unhandled 为空；无把历史缺陷当作正常兼容要求。见 [BASE-03](changes/2026-09-10-BASE-03-lifecycle.md) 和 [问题/覆盖台账](baselines/lifecycle-coverage.md)。CORE-04/08/09 验收已链接相应复现。
+
+当前 214 项任务，20 完成、194 待办。BASE-02 已提交 b382ec08；本轮独立提交 BASE-03。没有生产 TS 迁移、推送或发布。下一任务 BASE-04：DOM/CSS 与基础交互基线。
+
 ## 当前实施：BASE-02 公共 API 基线完成
 
 内置浏览器最终两次执行固定 core 5.4.0/chapter 1.1.0 的 14 项同步 API 断言，快照相同，error/warn 日志为空。已保存静态配置、默认选项、实例及继承 API、10 个子系统的描述符和来源指纹；比较器能拒绝描述符/方法/默认值等回归。见 [BASE-02](changes/2026-09-10-BASE-02-public-api.md) 与 [契约覆盖](baselines/api-coverage.md)。

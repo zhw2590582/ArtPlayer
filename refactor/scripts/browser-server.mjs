@@ -37,7 +37,8 @@ function sendBytes(req, res, bytes, filename) {
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://127.0.0.1:${port}`)
-    if (req.method === 'POST' && url.pathname === '/reports/api') {
+    const reportName = { '/reports/api': 'api', '/reports/lifecycle': 'lifecycle' }[url.pathname]
+    if (req.method === 'POST' && reportName) {
       assert.equal(req.headers.origin, `http://127.0.0.1:${port}`, 'Unexpected report origin')
       const chunks = []
       let size = 0
@@ -47,7 +48,7 @@ const server = http.createServer(async (req, res) => {
         chunks.push(chunk)
       }
       const report = JSON.parse(Buffer.concat(chunks).toString('utf8'))
-      assert.equal(report.kind, 'public-api')
+      assert.equal(report.kind, reportName === 'api' ? 'public-api' : 'lifecycle')
       report.capture = {
         capturedAt: new Date().toISOString(),
         releases: baseline.releases.map(release => ({
@@ -56,11 +57,14 @@ const server = http.createServer(async (req, res) => {
           sha256: release.files[`package/${release.manifest.main.replace(/^\.\//, '')}`],
         })),
         fixtureHashAlgorithm: 'sha256-lf',
-        fixtures: Object.fromEntries(['api.html', 'api.js'].map(name => [name, hash(fs.readFileSync(path.join(refactorDir, 'fixtures', name), 'utf8').replaceAll('\r\n', '\n'))])),
+        fixtures: Object.fromEntries([`${reportName}.html`, `${reportName}.js`].map(name => [name, hash(fs.readFileSync(path.join(refactorDir, 'fixtures', name), 'utf8').replaceAll('\r\n', '\n'))])),
+      }
+      if (reportName === 'lifecycle') {
+        report.capture.media = Object.fromEntries(['video.mp4', 'video2.mp4'].map(name => [name, hash(fs.readFileSync(path.join(root, 'docs/assets/sample', name)))]))
       }
       const output = path.join(refactorDir, '.cache/reports')
       fs.mkdirSync(output, { recursive: true })
-      fs.writeFileSync(path.join(output, 'api.json'), `${JSON.stringify(report, null, 2)}\n`)
+      fs.writeFileSync(path.join(output, `${reportName}.json`), `${JSON.stringify(report, null, 2)}\n`)
       res.writeHead(204).end()
       return
     }

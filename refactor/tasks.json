@@ -305,11 +305,15 @@
       "dependsOn": [
         "BASE-02"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "ready/restart/destroy、Promise、切源/插件事件 trace；登记契约/版本/固定测试 ID/命令/报告与负责任务",
       "acceptance": "成功、失败、重入和多实例有断言，历史缺陷有标记；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-10-BASE-03-lifecycle.md",
+        "baselines/lifecycle.json",
+        "baselines/lifecycle-coverage.md"
+      ]
     },
     {
       "id": "BASE-04",
@@ -754,7 +758,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "构造失败回收、重复/重入 destroy、instances 修复",
-      "acceptance": "事件顺序、removeHtml、多实例和销毁中异步有真实回归",
+      "acceptance": "事件顺序、removeHtml、多实例和销毁中异步有真实回归；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-04/05 并增加候选正向回归",
       "evidence": []
     },
     {
@@ -822,7 +826,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "注册流程、同步/异步结果、插件/事件扩展接口",
-      "acceptance": "旧插件同步可见性、重名与命名、销毁中异步插件保持明确语义",
+      "acceptance": "旧插件同步可见性、重名与命名、销毁中异步插件保持明确语义；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-03 并增加候选正向回归",
       "evidence": []
     },
     {
@@ -840,7 +844,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "url/switch/customType 的操作身份及取消方案",
-      "acceptance": "并发切源、错误、同 URL、销毁和 Promise 结算有契约",
+      "acceptance": "并发切源、错误、同 URL、销毁和 Promise 结算有契约；处理 baselines/lifecycle-coverage.md 的 BASE-LIFE-01/02/06 并增加候选正向回归",
       "evidence": []
     },
     {

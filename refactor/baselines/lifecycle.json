@@ -1,0 +1,833 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-03",
+  "sourceCommit": "b382ec08",
+  "browserSurface": "Codex in-app browser",
+  "report": {
+    "kind": "lifecycle",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "language": "zh-CN"
+    },
+    "scripts": [
+      "/releases/artplayer/dist/artplayer.js",
+      "/releases/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js",
+      "/fixtures/lifecycle.js"
+    ],
+    "checks": [
+      {
+        "id": "LIFE.version",
+        "passed": true
+      },
+      {
+        "id": "EVENT.chain",
+        "passed": true
+      },
+      {
+        "id": "EVENT.context-arguments",
+        "passed": true
+      },
+      {
+        "id": "EVENT.once-reentry",
+        "passed": true
+      },
+      {
+        "id": "EVENT.dispatch-snapshot",
+        "passed": true
+      },
+      {
+        "id": "EVENT.off-original-once",
+        "passed": true
+      },
+      {
+        "id": "EVENT.throw-propagation",
+        "passed": true
+      },
+      {
+        "id": "LIFE.ready-callback",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.metadata",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.play-promise",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.play-result",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.time-advances",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.pause-sync-stable",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.seek",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.quality-preserves-time",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.url-resets-resumes",
+        "passed": true
+      },
+      {
+        "id": "LIFE.ready-once-after-switches",
+        "passed": true
+      },
+      {
+        "id": "LIFE.restart-url",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.play-rejects-original",
+        "passed": true
+      },
+      {
+        "id": "PLUGIN.async-promise",
+        "passed": true
+      },
+      {
+        "id": "PLUGIN.async-registry",
+        "passed": true
+      },
+      {
+        "id": "PLUGIN.duplicate-throws",
+        "passed": true
+      },
+      {
+        "id": "MEDIA.latest-source",
+        "passed": true
+      },
+      {
+        "id": "LIFE.destroy-retains-markup",
+        "passed": true
+      },
+      {
+        "id": "LIFE.destroy-cleans-proxy",
+        "passed": true
+      },
+      {
+        "id": "LIFE.destroy-removes-markup",
+        "passed": true
+      },
+      {
+        "id": "LIFE.constructor-plugin-error",
+        "passed": true
+      }
+    ],
+    "observations": {
+      "expectedUnhandled": [
+        {
+          "phase": "controlled-resume-rejection",
+          "message": "controlled switch resume rejection"
+        }
+      ],
+      "emitterOrder": [
+        "first",
+        "second",
+        "first",
+        "later"
+      ],
+      "playback": {
+        "start": 0,
+        "progressed": 0.196562,
+        "duration": 90.046009,
+        "width": 640,
+        "height": 360
+      },
+      "pause": {
+        "at": 0.200309,
+        "observedMs": 253.19999998807907,
+        "maxDelta": 0
+      },
+      "readyCallbacks": 1,
+      "restarts": [
+        "/assets/sample/video2.mp4",
+        "/assets/sample/video.mp4?normal-switch"
+      ],
+      "rejectedResume": {
+        "mode": "controlled video.play rejection after real canplay",
+        "switchState": "pending",
+        "observedMs": 252,
+        "expectedUnhandled": 1
+      },
+      "concurrentSwitch": {
+        "outcomes": [
+          "fulfilled",
+          "fulfilled"
+        ],
+        "finalSource": "/assets/sample/video2.mp4?race-last",
+        "canplayEvents": 1
+      },
+      "destroyPending": {
+        "switchState": "pending",
+        "observedMs": 256.80000001192093,
+        "latePluginRegistered": true
+      },
+      "repeatedDestroy": {
+        "survivorBefore": true,
+        "survivorAfter": false
+      },
+      "failedConstructor": {
+        "hasMarkup": true,
+        "listeners": 57,
+        "registered": false
+      },
+      "remainingInstances": 0
+    },
+    "findings": [
+      {
+        "id": "BASE-LIFE-06",
+        "observation": "Published switch leaves an unhandled rejection and an unsettled promise when resume fails",
+        "owner": "CORE-09"
+      },
+      {
+        "id": "BASE-LIFE-01",
+        "observation": "Superseded switch resolves along with the latest source",
+        "owner": "CORE-09"
+      },
+      {
+        "id": "BASE-LIFE-02",
+        "observation": "Switch remains unsettled during the bounded observation after destroy",
+        "owner": "CORE-09"
+      },
+      {
+        "id": "BASE-LIFE-03",
+        "observation": "Async plugin registers its result after destroy",
+        "owner": "CORE-08"
+      },
+      {
+        "id": "BASE-LIFE-04",
+        "observation": "Destroying an instance twice unregisters a different live instance",
+        "owner": "CORE-04"
+      },
+      {
+        "id": "BASE-LIFE-05",
+        "observation": "Failed constructor leaves initialized markup/listeners until explicit probe cleanup",
+        "owner": "CORE-04"
+      }
+    ],
+    "trace": [
+      {
+        "phase": "initial",
+        "event": "video:loadstart",
+        "time": 0,
+        "paused": true,
+        "ready": false,
+        "source": "/assets/sample/video.mp4",
+        "argument": "loadstart"
+      },
+      {
+        "phase": "initial",
+        "event": "video:loadedmetadata",
+        "time": 0,
+        "paused": true,
+        "ready": false,
+        "source": "/assets/sample/video.mp4",
+        "argument": "loadedmetadata"
+      },
+      {
+        "phase": "initial",
+        "event": "video:loadeddata",
+        "time": 0,
+        "paused": true,
+        "ready": false,
+        "source": "/assets/sample/video.mp4",
+        "argument": "loadeddata"
+      },
+      {
+        "phase": "initial",
+        "event": "ready",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": null
+      },
+      {
+        "phase": "initial",
+        "event": "video:canplay",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": "canplay"
+      },
+      {
+        "phase": "play",
+        "event": "video:play",
+        "time": 0,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": "play"
+      },
+      {
+        "phase": "play",
+        "event": "video:playing",
+        "time": 0,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": "playing"
+      },
+      {
+        "phase": "play",
+        "event": "play",
+        "time": 0,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": null
+      },
+      {
+        "phase": "pause",
+        "event": "pause",
+        "time": 0.200309,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": null
+      },
+      {
+        "phase": "pause",
+        "event": "video:pause",
+        "time": 0.200309,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": "pause"
+      },
+      {
+        "phase": "seek",
+        "event": "video:seeking",
+        "time": 2,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": "seeking"
+      },
+      {
+        "phase": "seek",
+        "event": "video:seeked",
+        "time": 2,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": "seeked"
+      },
+      {
+        "phase": "quality-paused",
+        "event": "pause",
+        "time": 2,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4",
+        "argument": null
+      },
+      {
+        "phase": "quality-paused",
+        "event": "video:loadstart",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "loadstart"
+      },
+      {
+        "phase": "quality-paused",
+        "event": "video:loadedmetadata",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "loadedmetadata"
+      },
+      {
+        "phase": "quality-paused",
+        "event": "video:loadeddata",
+        "time": 2,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "loadeddata"
+      },
+      {
+        "phase": "quality-paused",
+        "event": "video:canplay",
+        "time": 2,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "canplay"
+      },
+      {
+        "phase": "quality-paused",
+        "event": "restart",
+        "time": 2,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "/assets/sample/video2.mp4"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:seeking",
+        "time": 2,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "seeking"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:play",
+        "time": 2,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "play"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:seeked",
+        "time": 2.000308,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "seeked"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:canplay",
+        "time": 2.000344,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "canplay"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:playing",
+        "time": 2.000379,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": "playing"
+      },
+      {
+        "phase": "url-playing",
+        "event": "play",
+        "time": 2.000421,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": null
+      },
+      {
+        "phase": "url-playing",
+        "event": "pause",
+        "time": 2.220301,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4",
+        "argument": null
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:loadstart",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "loadstart"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:loadedmetadata",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "loadedmetadata"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:loadeddata",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "loadeddata"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:canplay",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "canplay"
+      },
+      {
+        "phase": "url-playing",
+        "event": "restart",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "/assets/sample/video.mp4?normal-switch"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:seeking",
+        "time": 0,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "seeking"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:play",
+        "time": 0,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "play"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:seeked",
+        "time": 0.000355,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "seeked"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:canplay",
+        "time": 0.000391,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "canplay"
+      },
+      {
+        "phase": "url-playing",
+        "event": "video:playing",
+        "time": 0.000424,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "playing"
+      },
+      {
+        "phase": "url-playing",
+        "event": "play",
+        "time": 0.000473,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": null
+      },
+      {
+        "phase": "url-playing",
+        "event": "pause",
+        "time": 0.226534,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": null
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:pause",
+        "time": 0.241612,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "pause"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:play",
+        "time": 0.241904,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "play"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:playing",
+        "time": 0.242067,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": "playing"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "play",
+        "time": 0.242231,
+        "paused": false,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": null
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "pause",
+        "time": 0.488549,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?normal-switch",
+        "argument": null
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:loadstart",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": "loadstart"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:loadedmetadata",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": "loadedmetadata"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:loadeddata",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": "loadeddata"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:canplay",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": "canplay"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "restart",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": "/assets/sample/video2.mp4?resume-rejection"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:seeking",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": "seeking"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:seeked",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": "seeked"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "video:canplay",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": "canplay"
+      },
+      {
+        "phase": "controlled-resume-rejection",
+        "event": "pause",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": null
+      },
+      {
+        "phase": "concurrent-switch",
+        "event": "pause",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?resume-rejection",
+        "argument": null
+      },
+      {
+        "phase": "concurrent-switch",
+        "event": "pause",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video.mp4?race-first",
+        "argument": null
+      },
+      {
+        "phase": "concurrent-switch",
+        "event": "video:loadstart",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?race-last",
+        "argument": "loadstart"
+      },
+      {
+        "phase": "concurrent-switch",
+        "event": "video:loadedmetadata",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?race-last",
+        "argument": "loadedmetadata"
+      },
+      {
+        "phase": "concurrent-switch",
+        "event": "video:loadeddata",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?race-last",
+        "argument": "loadeddata"
+      },
+      {
+        "phase": "concurrent-switch",
+        "event": "video:canplay",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?race-last",
+        "argument": "canplay"
+      },
+      {
+        "phase": "concurrent-switch",
+        "event": "restart",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?race-last",
+        "argument": "/assets/sample/video.mp4?race-first"
+      },
+      {
+        "phase": "concurrent-switch",
+        "event": "restart",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?race-last",
+        "argument": "/assets/sample/video2.mp4?race-last"
+      },
+      {
+        "phase": "destroy-pending",
+        "event": "pause",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": "/assets/sample/video2.mp4?race-last",
+        "argument": null
+      },
+      {
+        "phase": "destroy-pending",
+        "event": "destroy",
+        "time": 0,
+        "paused": true,
+        "ready": true,
+        "source": null,
+        "argument": null
+      },
+      {
+        "phase": "duplicate-destroy",
+        "event": "destroy",
+        "time": 0,
+        "paused": true,
+        "ready": false,
+        "source": null,
+        "argument": null
+      },
+      {
+        "phase": "duplicate-destroy",
+        "event": "destroy",
+        "time": 0,
+        "paused": true,
+        "ready": false,
+        "source": null,
+        "argument": null
+      },
+      {
+        "phase": "duplicate-destroy",
+        "event": "destroy",
+        "time": 0,
+        "paused": true,
+        "ready": false,
+        "source": null,
+        "argument": null
+      }
+    ],
+    "errors": [],
+    "unhandled": [],
+    "capture": {
+      "capturedAt": "2026-09-10T11:50:21.727Z",
+      "releases": [
+        {
+          "name": "artplayer",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js",
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "version": "1.1.0",
+          "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+          "member": "package/dist/artplayer-plugin-chapter.js",
+          "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+        }
+      ],
+      "fixtureHashAlgorithm": "sha256-lf",
+      "fixtures": {
+        "lifecycle.html": "120851612220cb5b2101f495f3c90c7bfe1541bc81f320d700a76781689c4a0d",
+        "lifecycle.js": "2017800cf809c386dc06879132aa34c5524cfb404a50ecd887ba28c2639044bd"
+      },
+      "media": {
+        "video.mp4": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+        "video2.mp4": "24b12d40ea21ace8e16a66cdb6085391e0262c3d96f8a972ac76607f48943b64"
+      }
+    }
+  },
+  "verification": {
+    "repeatedCaptureAt": "2026-09-10T11:52:08.593Z",
+    "profileSha256": "688f99f4d69ed937bc947cf9def2c546de6b644218c9f7509ee4c54dbef17964",
+    "repeatComparison": "equal semantic outcomes; variable media timestamps retained only as observations"
+  }
+}

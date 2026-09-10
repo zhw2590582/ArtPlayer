@@ -12,10 +12,7 @@ export const checkIds = [
   'API-05.destroy-return', 'API-05.instance-cleanup',
 ]
 
-export function validateApiReport(report) {
-  assert.equal(report.kind, 'public-api')
-  assert.deepEqual(report.errors, [], 'Browser capture failed')
-  assert.deepEqual(report.checks, checkIds.map(id => ({ id, passed: true })), 'Missing or failed API checks')
+export function validatePublishedCapture(report, fixture) {
   assert(report.environment.userAgent && report.environment.language, 'Missing browser environment')
   assert(Number.isFinite(Date.parse(report.capture.capturedAt)), 'Missing capture timestamp')
   const releases = JSON.parse(fs.readFileSync(path.join(refactorDir, 'baselines/releases.json'), 'utf8')).releases
@@ -24,12 +21,19 @@ export function validateApiReport(report) {
     return { name: release.name, version: release.version, integrity: release.integrity, member, sha256: release.files[member] }
   })
   assert.deepEqual(report.capture.releases, expectedSources, 'Published sources differ')
-  assert.deepEqual(report.scripts, [...expectedSources.map(release => `/releases/${release.name}/${release.member.slice('package/'.length)}`), '/fixtures/api.js'], 'Unexpected loaded scripts')
+  assert.deepEqual(report.scripts, [...expectedSources.map(release => `/releases/${release.name}/${release.member.slice('package/'.length)}`), `/fixtures/${fixture}.js`], 'Unexpected loaded scripts')
   assert.equal(report.capture.fixtureHashAlgorithm, 'sha256-lf')
-  for (const name of ['api.html', 'api.js']) {
+  for (const name of [`${fixture}.html`, `${fixture}.js`]) {
     const source = fs.readFileSync(path.join(refactorDir, 'fixtures', name), 'utf8').replaceAll('\r\n', '\n')
     assert.equal(report.capture.fixtures[name], hash(source), `Fixture changed: ${name}; review the baseline explicitly`)
   }
+}
+
+export function validateApiReport(report) {
+  assert.equal(report.kind, 'public-api')
+  assert.deepEqual(report.errors, [], 'Browser capture failed')
+  assert.deepEqual(report.checks, checkIds.map(id => ({ id, passed: true })), 'Missing or failed API checks')
+  validatePublishedCapture(report, 'api')
   for (const section of ['static', 'prototype', 'emitterPrototype', 'defaults', 'constants', 'config', 'utilityDescriptors', 'instance', 'instanceResolved', 'chapterFactory', 'chapterResult', 'integrations']) {
     assert(report.snapshot?.[section] && Object.keys(report.snapshot[section]).length, `Missing API section: ${section}`)
   }
