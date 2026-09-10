@@ -4780,36 +4780,49 @@ class Template {
     }
   }
 }
+const owns = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
 class Emitter {
   on(name, fn, ctx) {
     const e = this.e || (this.e = {});
-    (e[name] || (e[name] = [])).push({ fn, ctx });
+    let listeners = owns(e, name) ? e[name] : void 0;
+    if (!listeners) {
+      listeners = [];
+      Object.defineProperty(e, name, { value: listeners, enumerable: true, configurable: true, writable: true });
+    }
+    listeners.push({ fn, ctx });
     return this;
   }
   once(name, fn, ctx) {
     const self = this;
+    const callback = fn;
+    let fired = false;
     function listener(...args) {
+      if (fired)
+        return;
+      fired = true;
       self.off(name, listener);
-      fn.apply(ctx, args);
+      callback.apply(ctx, args);
     }
     listener._ = fn;
     return this.on(name, listener, ctx);
   }
   emit(name, ...data) {
-    const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
-    for (let i = 0; i < evtArr.length; i += 1) {
-      evtArr[i].fn.apply(evtArr[i].ctx, data);
+    const e = this.e || (this.e = {});
+    const snapshot = (owns(e, name) ? e[name] || [] : []).slice();
+    for (const event of snapshot) {
+      event.fn.apply(event.ctx, data);
     }
     return this;
   }
   off(name, callback) {
     const e = this.e || (this.e = {});
-    const evts = e[name];
+    const evts = owns(e, name) ? e[name] : void 0;
     const liveEvents = [];
     if (evts && callback) {
       for (let i = 0, len = evts.length; i < len; i += 1) {
-        if (evts[i].fn !== callback && evts[i].fn._ !== callback)
-          liveEvents.push(evts[i]);
+        const event = evts[i];
+        if (event.fn !== callback && event.fn._ !== callback)
+          liveEvents.push(event);
       }
     }
     if (liveEvents.length) {

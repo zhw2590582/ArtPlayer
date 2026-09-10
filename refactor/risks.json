@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-10T15:48:43.324Z",
+  "updatedAt": "2026-09-10T16:03:52.413Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -715,6 +715,52 @@
       ],
       "compatibleResolution": "Coordinate compatible public overloads/exports separately; use accurate strict types in migrated source.",
       "closureCriteria": "Cover missing unescape/ArtPlayerError, def identity/property keys, optional sleep, timer void returns and ignored debounce context; retain legal old consumers in new/old compilers."
+    },
+    {
+      "id": "EVENT-NAME-01",
+      "title": "Emitter event names collide with Object.prototype",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-02"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-11-CORE-02-typed-emitter.md",
+        "test/public-behavior.test.js",
+        "test/browser/emitter.spec.js"
+      ],
+      "compatibleResolution": "Own property lookup and data descriptors accept reserved event names while preserving registry prototype.",
+      "closureCriteria": "Published observation and candidate regression pass in Node, all three artifact formats and three browsers.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-02-typed-emitter.md",
+        "refactor/baselines/emitter-validation.json",
+        "test/public-behavior.test.js",
+        "test/browser/emitter.spec.js"
+      ],
+      "resolutionRationale": "Own property lookup and data descriptors accept reserved event names while preserving registry prototype."
+    },
+    {
+      "id": "EVENT-ONCE-01",
+      "title": "Nested dispatch snapshots invoke the same once registration twice",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-02"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-11-CORE-02-typed-emitter.md",
+        "test/public-behavior.test.js",
+        "test/browser/emitter.spec.js"
+      ],
+      "compatibleResolution": "The wrapper records consumption before unsubscribe/invocation; ordinary dispatch snapshot semantics are retained.",
+      "closureCriteria": "Published observation and candidate regression pass in Node, all three artifact formats and three browsers.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-02-typed-emitter.md",
+        "refactor/baselines/emitter-validation.json",
+        "test/public-behavior.test.js",
+        "test/browser/emitter.spec.js"
+      ],
+      "resolutionRationale": "The wrapper records consumption before unsubscribe/invocation; ordinary dispatch snapshot semantics are retained."
     }
   ]
 }

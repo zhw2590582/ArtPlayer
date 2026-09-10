@@ -1,0 +1,548 @@
+{
+  "task": "CORE-02",
+  "capturedAt": "2026-09-10T16:02:48.874Z",
+  "source": "26a93d3ff35b53e71a5f3bb22c252a854559d8151ede50a66a28d9eefae6c008",
+  "packages": [
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "archive": "artplayer.tgz",
+      "sha256": "1850bab2601b6b5c0fac6a4c3010edf4a5e700f00a6c26a29e8d35730f56dba3",
+      "files": {
+        "package/ARCHITECTURE.md": "bd26a46f62bac3aac033a9ea8b881d65aec162e8b697ddb37b3837748c4355b4",
+        "package/README.md": "1e185e65f67fc2081b4182bbc6c4558ea05b6e3fa3acc5dd0c3ac7df1d542b09",
+        "package/dist/artplayer.js": "fb9c8dca1d789631dd87cb0cf43f2e66c8419a751cdd3a188c2ee1a6481e04c1",
+        "package/dist/artplayer.legacy.js": "a0c0adb9c48d7a96ddba43eab7a7f6d91e920fde41ee8010e294ebe6efcc0062",
+        "package/dist/artplayer.mjs": "d1e206489b72001dfb570c9c8b358085eb18317c10e2fc8cc8c83148319ff7ff",
+        "package/dist/i18n/ar.js": "61c43469ee95a00dc624583f418653e3dcbf48b24ae6a4c203ad986234852365",
+        "package/dist/i18n/ar.mjs": "68922fdc9f80d3321ea0654c8ff8f5875b6715103d2b14ffcf17f93738b39cf9",
+        "package/dist/i18n/cs.js": "ad7bbf8853204a6955ef84bfbd932cab3f141a7e73a8145f28ba7a5b2b83b7c0",
+        "package/dist/i18n/cs.mjs": "29a489be767fda9d46b59c9adbaad323f17a5e67daf7f7aa78b7ce8fb5b4d63c",
+        "package/dist/i18n/es.js": "aaa95cc9645b734c58fba06fdbcdda962c4cb3a0e7eb6206f06d6168208cd86b",
+        "package/dist/i18n/es.mjs": "331d2ef74da2eec8f3304fec0b5340c795d9c1eec24e08167c9a7b66bf30973b",
+        "package/dist/i18n/fa.js": "c998467261cbdfd2c3fb16c0ae4b2c48c409f42f41aea35ed94766f1e12819d5",
+        "package/dist/i18n/fa.mjs": "b4c98894b46975cebf5ea9088bcf0b5bdfd408bc3c82f4e2e9128133c7de2d4d",
+        "package/dist/i18n/fr.js": "6b06e16b1fb01c8695fb5c10b32a00421399180de5dc5d845ce17010f2fd3e66",
+        "package/dist/i18n/fr.mjs": "abe8e3548fa7304f302e2c74818a6176edee8c3b65e33cb6f62e96d130749ee5",
+        "package/dist/i18n/id.js": "a5832c4bfc03c7f16418bf4b324d9773895541dc823ece9114741794737aad74",
+        "package/dist/i18n/id.mjs": "a40a433be6ca1ac1ee1810fe805ee60784d349e59b9ad82ea80201d660db4e68",
+        "package/dist/i18n/pl.js": "2491487062bdfc91d60f17c6e9a83ee196c991216d15f525fe3536b98873da2c",
+        "package/dist/i18n/pl.mjs": "ad8ea2c03785edbfe1f35761bec21b8a04213f9fa88a794d850bb3973564930f",
+        "package/dist/i18n/ru.js": "2d3a9ee6533cb6fa961f0a24a25ce63cc76992fca17e1769b6fa75104f8a1529",
+        "package/dist/i18n/ru.mjs": "a89b8c36cfd7c181c2b31aa823deda3d7c37b56b2b81746338c52ea1c1d93352",
+        "package/dist/i18n/tr.js": "438b06a4c3f479a2901b0085eaa7bdba8eaef87bdb07ff3faa559c85403fe433",
+        "package/dist/i18n/tr.mjs": "cc96f9cbb9c1587d5cd8f25b0b9800678ad76e93de089ae42c38dee16e6fe8fa",
+        "package/dist/i18n/vi.js": "1ffbd62843a902ea2967eab46432d3fc548f5633e53eed104314b523cacc46a8",
+        "package/dist/i18n/vi.mjs": "7872ded84622bcda20e8c1d70c597c2ba071b50701900efa47cc4683ee17f1a2",
+        "package/dist/i18n/zh-tw.js": "2d43577f98456488196921e1ec721695a95e1b8c827077286b02ce3fb987e8ff",
+        "package/dist/i18n/zh-tw.mjs": "7ec638b4babe59d3ab1d3e64abdd74a96fefb260a50e2cd7240f8d50a1340925",
+        "package/package.json": "b343df9955df9ac0ea71ea775bd0743c6b26c06d3bb7699128f7eac484fa769f",
+        "package/types/README.md": "d38bb63f9e96f995273f9da6833a8b936a74718ef7b710dbd316530d41ccae07",
+        "package/types/artplayer.d.cts": "be67cbb6c352944741bca88f969ad1bafa9898049595930e2dc6693d5e7262f5",
+        "package/types/artplayer.d.mts": "87d1f0e2a7bf7b7bdf700875cb2c77dea8be34ba3ac943e5fd35e8daa99bf241",
+        "package/types/artplayer.d.ts": "98d3e7b65f9f81fba155da08fd47e4fb25f4c69279e3afd993c4a55070f8a850",
+        "package/types/component.d.ts": "facfa29d9092fe2c63a7d8357ce7d0faa5e32811d2fedeef6dc8b28ad5d04891",
+        "package/types/config.d.ts": "c4fd8681bf32b10c743e3e561c532520c8f32e43fd765524850b15e55cb91c72",
+        "package/types/cssVar.d.ts": "e027d82fb4f01c9ce7559cf679b2d5ee1962d3f7e5b4dd64ca21f472b933efb6",
+        "package/types/events.d.ts": "98c74aebb82455accc0b3523af5a1145bc9119da58c884200adc36e70a164b02",
+        "package/types/i18n.d.ts": "3e14759caf71f97f01650839248c8737c42d2c2979dabc43ad92b724da648708",
+        "package/types/icons.d.ts": "0d8e8e52e52130dd4a29bab551dd7a2a954797e42e92a6e068c85d583e23e6a4",
+        "package/types/language.d.cts": "1c9e0c47fae3c2d68c3e144d95a55071318a03bb31554dd049109efd3d0f95a4",
+        "package/types/language.d.mts": "c391e863012c77769e661afbf8fa949e9373aa88d17f58cbba7f5696edb8077f",
+        "package/types/legacy/language.d.ts": "c452ffd764ff9b29b819b3475c42395d2ea7a33560d8c186ef5df3844b9524c3",
+        "package/types/option.d.ts": "d4de53930c2fa9d59c77c4324d63f24b057bce6c4d0273c34a0ab06094dcea2c",
+        "package/types/player.d.ts": "986382bb6b4e82746fd2405092e69d0ef413988887a557a0fd4db85d64b78d54",
+        "package/types/quality.d.ts": "7ed6ed78cea52991b2f6ddd2bd3b7bd8c5146fdfff7486fe8b814c3e632f1567",
+        "package/types/setting.d.ts": "d12a75b656fff70cbb30be4bffec46d9c4273636e8722bce971a4d2b188712a1",
+        "package/types/subtitle.d.ts": "d25b470e47d6a9bd696d9c1ad8adb58e56a208f05695186d513bc8c43c2e8acf",
+        "package/types/template.d.ts": "68aed9e97d006d6be4fabb8504ca84dafab770b0925f4d6e7319e67c82f21b0d",
+        "package/types/utils.d.ts": "d3fb67b9187e1c81c6b3850694cf2627e927225ace160ae58c11631e9f673a98"
+      }
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-chapter.tgz",
+      "sha256": "df90b76c987209cecaed5a3b5a480a85e0c300e463d7dc5cc508c9aad002bb4c",
+      "files": {
+        "package/ARCHITECTURE.md": "20743bad87a174b0450e0d876b6aa6b2a9f47df296d479511ce7cc9298fdb57c",
+        "package/README.md": "b95400ff3d525621a15268bb56a2d353aacaaadefde7e735d7abd91a34edd96f",
+        "package/dist/artplayer-plugin-chapter.js": "6ac3dfe28f46084ac7caedd571b1a97dcee3cf9d708112f1b8bbd6566e1dc5c5",
+        "package/dist/artplayer-plugin-chapter.legacy.js": "6d9bff885412169e701670961aa00c2e46c4b42c9b9647ff4e6d198777d2a359",
+        "package/dist/artplayer-plugin-chapter.mjs": "26415cecab2c0198c566cef0232e20123413782d5bad7534a32939b3298617af",
+        "package/package.json": "24eec6907b3218439189adab6af3f932c1497c47c2d41209311c01042b07fd4f",
+        "package/types/artplayer-plugin-chapter.d.cts": "4f07514b37453cd6cea8e5aa28fa018ff31738e0d423c11a3b5eccd50ed30bcc",
+        "package/types/artplayer-plugin-chapter.d.mts": "610179754db36276e161a07bccf4eaba8b4480f053e716a2bcc5a1574871a171",
+        "package/types/artplayer-plugin-chapter.d.ts": "581aa2862e709601c87a23585f54a969ebd350be56a7469a31ff53f1311b578d"
+      }
+    }
+  ],
+  "runtimeChecks": 27,
+  "knownTypeBlockers": 0,
+  "ciChecks": 85,
+  "artifactEmitterChecks": {
+    "umd": 29,
+    "legacy": 29,
+    "esm": 29
+  },
+  "browser": {
+    "startTime": "2026-09-10T15:59:51.244Z",
+    "duration": 31373.444,
+    "expected": 75,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate clears titles on blank chapters, zero hover and replacement",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate rejects NaN and can recover after an invalid update",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate ignores pending metadata initialization after immediate destroy",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate deduplicates stylesheet injection while the document is loading",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate clears titles on blank chapters, zero hover and replacement",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate rejects NaN and can recover after an invalid update",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate ignores pending metadata initialization after immediate destroy",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate deduplicates stylesheet injection while the document is loading",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "published-only observations: blank title, NaN and once-only metadata are historical defects",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate clears titles on blank chapters, zero hover and replacement",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate rejects NaN and can recover after an invalid update",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate releases only its listeners and DOM across multiple instances and early destruction",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate ignores pending metadata initialization after immediate destroy",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate deduplicates stylesheet injection while the document is loading",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "factory, registration, input normalization and safe title text",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "progress bars, real hover, title edges and boundary seek",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "sync update, Infinity, object identity, empty lists and invalid data",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "explicit source update and core-owned destruction",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "published: emitter event names and once across nested dispatch",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate: emitter event names and once across nested dispatch",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "published: emitter event names and once across nested dispatch",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate: emitter event names and once across nested dispatch",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "published: emitter event names and once across nested dispatch",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate: emitter event names and once across nested dispatch",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "published: real playback, pause, seek, switch and destroy",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate: real playback, pause, seek, switch and destroy",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "controlled HTTP media failure emits a real video error",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "Range, media identity and docs candidate routes",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "published: real playback, pause, seek, switch and destroy",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate: real playback, pause, seek, switch and destroy",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "controlled HTTP media failure emits a real video error",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "Range, media identity and docs candidate routes",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "published: real playback, pause, seek, switch and destroy",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate: real playback, pause, seek, switch and destroy",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "controlled HTTP media failure emits a real video error",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "Range, media identity and docs candidate routes",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "published: subtitle object URL contains real VTT data",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "published: download starts and removes its temporary anchor",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate: subtitle object URL contains real VTT data",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate: download starts and removes its temporary anchor",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "candidate download releases the anchor even when click fails",
+      "project": "chromium",
+      "status": "passed",
+      "browser": "153.0.8010.12"
+    },
+    {
+      "title": "published: subtitle object URL contains real VTT data",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "published: download starts and removes its temporary anchor",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate: subtitle object URL contains real VTT data",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate: download starts and removes its temporary anchor",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "candidate download releases the anchor even when click fails",
+      "project": "firefox",
+      "status": "passed",
+      "browser": "155.0"
+    },
+    {
+      "title": "published: subtitle object URL contains real VTT data",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "published: download starts and removes its temporary anchor",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate: subtitle object URL contains real VTT data",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate: download starts and removes its temporary anchor",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    },
+    {
+      "title": "candidate download releases the anchor even when click fails",
+      "project": "webkit",
+      "status": "passed",
+      "browser": "26.6"
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import path from 'node:path'
 import { test } from 'node:test'
 import { checkFiles, publishedConsumer } from '../scripts/package-check.mjs'
 import { removeConsumer, runtimeConsumer } from '../scripts/package-consumer.mjs'
+import { emitterContracts } from './contracts/emitter.js'
 
 test('Package checks reject missing files, missing wildcard exports and internal configuration', () => {
   const manifest = { name: 'fixture', main: './dist/main.js', module: './dist/main.mjs', types: './types/main.d.ts', legacy: './dist/legacy.js', exports: { '.': './dist/main.js', './lang/*': './dist/lang/*.js' } }
@@ -19,7 +20,7 @@ test('Package checks reject missing files, missing wildcard exports and internal
 test('Actual isolated runtime rejects removed default exports and required files', async () => {
   const { dir } = await publishedConsumer()
   try {
-    assert.equal(runtimeConsumer(dir).checks.length, 23)
+    assert.equal(runtimeConsumer(dir).checks.length, 18 + Object.keys(emitterContracts).length)
     const esm = path.join(dir, 'node_modules/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.mjs')
     const original = fs.readFileSync(esm)
     fs.writeFileSync(esm, 'export const removedDefault = true\n')

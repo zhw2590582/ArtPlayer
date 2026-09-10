@@ -47,3 +47,5 @@
 | UTIL-MERGE-01 | resolved / 已复现 | mergeDeep lets a JSON __proto__ key replace the result prototype | CORE-01 |
 | UTIL-DOWNLOAD-01 | resolved / 源码/产物事实 | Temporary download anchor remains if click throws | CORE-01 |
 | BASE-TYPE-05 | open / 源码/产物事实 | Public Utils declarations omit exports and misstate timer/descriptor signatures | CORE-07 |
+| EVENT-NAME-01 | resolved / 已复现 | Emitter event names collide with Object.prototype | CORE-02 |
+| EVENT-ONCE-01 | resolved / 已复现 | Nested dispatch snapshots invoke the same once registration twice | CORE-02 |

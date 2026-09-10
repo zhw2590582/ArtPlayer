@@ -18,8 +18,37 @@ boundaries rather than describing the entire core as TypeScript.
 
 These modules do not import the player, UI components or each other except for the
 barrel. Existing DOM and browser capability utilities remain JS and are re-exported
-unchanged. Emitter and Component are separate migration tasks. Imports from the
+unchanged. Emitter is now typed as described below; Component remains a later task. Imports from the
 barrel must not silently add runtime fields to `Artplayer.utils`.
+
+## Typed Emitter
+
+`src/utils/emitter.ts` keeps the original on/once/emit/off class and a lazy ordinary
+object registry. `declare e` emits no instance field; a fresh emitter still has no
+own keys. There are no additional prototype methods or mandatory constructor options.
+
+The generic event map associates event names with payload tuples, including readonly
+tuples, symbols and optional arguments. An open Record default preserves arbitrary
+JS event channels; internal typed consumers can use a closed map or intersect their
+known events with an open map. Receiver inference is checked on registration and
+erased inside each stored registration, where the original callback and ctx remain paired.
+Current JS player consumers remain incremental; public declaration expansion is CORE-07.
+
+Dispatch takes a shallow registration-array snapshot. Normal listeners removed during
+dispatch still run if already captured, additions wait for a later dispatch, and a
+throw stops that dispatch and propagates unchanged. Off accepts either a once wrapper
+or its original callback; duplicate registrations of a callback are removed together.
+The once wrapper unsubscribes before invoking user code and now records consumption,
+so a nested dispatch cannot execute a captured copy twice. This fixes a demonstrated
+old defect without changing ordinary snapshot behavior. Event names such as __proto__
+and toString use own properties rather than inherited Object.prototype values.
+
+Shared contracts in test/contracts/emitter.js run against published, workspace and
+installed versions. Candidate corrections have separate published-defect observations
+in test/public-behavior.test.js and test/browser/emitter.spec.js. The source type fixture
+checks event name/payload correlation, receiver types, custom channels and chain typing.
+Emitter owns registrations only; instance teardown must remove the relevant callbacks,
+not clear unrelated subscribers before destroy dispatch. Resource scopes follow in CORE-03.
 
 ## Observable utility behavior
 
@@ -77,5 +106,5 @@ core files in docs/compiled when committing a shippable core change.
 For new utility behavior, extend the same old/new contract tests. Clearly separate
 intentional defect corrections from preserved behavior. For timers or Blob URLs,
 also identify the owner and verify cleanup in the consuming module. Remaining
-constructor, playback, UI, Emitter, Component and capability migrations are recorded
+constructor, playback, UI, Component and capability migrations are recorded
 in refactor/tasks.json and should extend this map as they land.
