@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <VMAP xmlns:vmap="http://www.iab.net/vmap-1.0" version="1.0">
+  <vmap:AdBreak timeOffset="start" breakType="linear" breakId="start-0">
+    <vmap:AdSource id="start-0" allowMultipleAds="true" followRedirects="false">
+      <vmap:VASTAdData>
+      <VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vast.xsd" version="3.0">
+        <Ad sequence="1">
+          <Wrapper>
+            <AdSystem></AdSystem>
+            <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+            <VASTAdTagURI>
+              <![CDATA[https://artplayer.org/assets/vast/linear-ad.xml]]>
+            </VASTAdTagURI>
+          </Wrapper>
+        </Ad>
+        <Ad sequence="2">
+          <Wrapper>
+            <AdSystem></AdSystem>
+            <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+            <VASTAdTagURI>
+              <![CDATA[https://artplayer.org/assets/vast/linear-ad.xml]]>
+            </VASTAdTagURI>
+          </Wrapper>
+        </Ad>
+      </VAST>
+      </vmap:VASTAdData>
+    </vmap:AdSource>
+  </vmap:AdBreak>
+  <vmap:AdBreak timeOffset="00:00:05.000" breakType="linear" breakId="midroll-0">
+    <vmap:AdSource id="midroll-0" allowMultipleAds="true" followRedirects="false">
+      <vmap:VASTAdData>
+        <VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vast.xsd" version="3.0">
+        <Ad>
+          <Wrapper>
+            <AdSystem></AdSystem>
+            <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+            <VASTAdTagURI>
+              <![CDATA[https://artplayer.org/assets/vast/nonlinear-ad.xml]]>
+            </VASTAdTagURI>
+          </Wrapper>
+        </Ad>
+        </VAST>
+      </vmap:VASTAdData>
+    </vmap:AdSource>
+  </vmap:AdBreak>
+  <vmap:AdBreak timeOffset="00:00:15.000" breakType="linear" breakId="midroll-1">
+    <vmap:AdSource id="midroll-1" allowMultipleAds="true" followRedirects="false">
+      <vmap:VASTAdData>
+        <VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vast.xsd" version="3.0">
+        <Ad>
+          <Wrapper>
+            <AdSystem></AdSystem>
+            <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+            <VASTAdTagURI>
+              <![CDATA[https://artplayer.org/assets/vast/linear-ad.xml]]>
+            </VASTAdTagURI>
+          </Wrapper>
+        </Ad>
+        </VAST>
+      </vmap:VASTAdData>
+    </vmap:AdSource>
+  </vmap:AdBreak>
+  <vmap:AdBreak timeOffset="end" breakType="linear" breakId="postroll-0">
+    <vmap:AdSource id="postroll-0" allowMultipleAds="true" followRedirects="false">
+      <vmap:VASTAdData>
+        <VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vast.xsd" version="3.0">
+        <Ad>
+          <Wrapper>
+            <AdSystem></AdSystem>
+            <Error><![CDATA[https://error-pixel?[ERRORCODE]]]></Error>
+            <VASTAdTagURI>
+              <![CDATA[https://artplayer.org/assets/vast/linear-ad.xml]]>
+            </VASTAdTagURI>
+          </Wrapper>
+        </Ad>
+        </VAST>
+      </vmap:VASTAdData>
+    </vmap:AdSource>
+  </vmap:AdBreak>
+  </VMAP>
