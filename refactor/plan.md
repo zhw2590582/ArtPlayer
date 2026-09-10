@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 212 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 213 项，范围 22 个包及工作区/示例。
 
-状态：todo 196 / doing 0 / blocked 1 / done 15 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 197 / doing 0 / blocked 0 / done 16 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -53,6 +53,7 @@
 | DOC-10 | workspace<br>记录 GitHub CI/CD 增强范围与验收 | DOC-09 | CI/CD 规范、四项实施任务与发布依赖 | 现有 workflow 核对、计划检查通过并独立提交；不冒充远端执行完成 | L | done |
 | DOC-11 | workspace<br>记录全部包各自升级一个大版本 | DOC-10 | 22 包目标版本清单、决策和发布/CI/复盘规则同步 | 版本表与 manifest 对照、计划检查通过并独立提交；不修改旧 API 兼容要求 | L | done |
 | DOC-12 | workspace<br>复审开发启动、验收覆盖及发布依赖 | DOC-11 | 语义依赖修正、版本实施任务、基线/分发分类及契约映射要求、校验器保护 | 原范围状态保持，计划检查和故障负例通过，独立提交 DOC-12 | M | done |
+| DOC-13 | workspace<br>记录并验证内置浏览器回退规则 | DOC-08 | 根指令、复盘和夹具文档中的浏览器回退及实际环境证据 | 内置浏览器打开真实页面，报告基础检查结果及未覆盖项；独立提交 | L | done |
 
 ## 1 基线
 
@@ -60,7 +61,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | BASE-01 | workspace<br>固定核心与试点的最小发布基线 | DOC-07 | 核心及 chapter 的 npm tarball/integrity、源码 SHA、已知支持窗口；其他包标待核对 | 核心/试点来源可重跑；不虚构全生态已验证，各包 01 步负责补齐自身历史发布基线 | H | done |
 | BASE-HARNESS-01 | workspace<br>建立最小发布包浏览器采集夹具与服务 | BASE-01 | 固定 tarball 静态服务、本地媒体 Range、公开 API 采集页面及受控报告路径 | HTTP 精确内容/范围和路由隔离测试、夹具语法通过；浏览器采集仍由 BASE-02 负责 | M | done |
-| BASE-02 | workspace<br>捕获公共 API 和属性描述符 | BASE-01, BASE-HARNESS-01 | 核心与试点的构造/默认值/静态和实例 API 快照，其余包由 01/02 步补齐；登记契约/版本/固定测试 ID/命令/报告与负责任务 | 真实发布包反射与旧用户调用可重跑，未验证项明确 | H | blocked |
+| BASE-02 | workspace<br>捕获公共 API 和属性描述符 | BASE-01, BASE-HARNESS-01 | 核心与试点的构造/默认值/静态和实例 API 快照，其余包由 01/02 步补齐；登记契约/版本/固定测试 ID/命令/报告与负责任务 | 真实发布包反射与旧用户调用可重跑，未验证项明确 | H | todo |
 | BASE-03 | workspace<br>捕获事件、异步和生命周期 | BASE-02 | ready/restart/destroy、Promise、切源/插件事件 trace；登记契约/版本/固定测试 ID/命令/报告与负责任务 | 成功、失败、重入和多实例有断言，历史缺陷有标记；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务 | H | todo |
 | BASE-04 | workspace<br>捕获 DOM、CSS 和官方 demo | BASE-02 | 核心模板/类名/变量、键盘/焦点/可访问名称基线及全 demo 路径映射；docs-browser-testing.md 中 HTML/编辑器的脚本来源与存储状态；登记契约/版本/固定测试 ID/命令/报告与负责任务 | 核心/试点用户样式和输入用法已记录，其他 demo 运行状态与未知项明确；使用已发布包和最小可重跑探针启动，不等待后续 ENG 服务 | M | todo |
 | BASE-05 | workspace<br>捕获包入口、资源和类型消费 | BASE-01 | 全包 manifest/资源路径清单；核心/试点的 UMD/AMD/ESM/CJS/legacy/i18n 和类型消费者基线；登记契约/版本/固定测试 ID/命令/报告与负责任务；区分库/npm 与站点实际分发类别，SSR import/模板/非浏览器构造错误分别捕获 | 核心/试点隔离消费可运行，其他包由各自契约任务验证，thumbnail tool 差异已登记 | H | todo |
@@ -413,7 +414,7 @@
 - DOC-10: [记录](changes/2026-09-10-DOC-10-github-ci-cd.md)
 - DOC-11: [记录](changes/2026-09-10-DOC-11-major-version-policy.md)
 - DOC-12: [记录](changes/2026-09-10-DOC-12-execution-readiness-review.md)
+- DOC-13: [记录](changes/2026-09-10-DOC-13-browser-fallback.md)
 - BASE-01: [记录](changes/2026-09-10-BASE-01-published-baseline.md) [记录](baselines/releases.json)
 - BASE-HARNESS-01: [记录](changes/2026-09-10-BASE-HARNESS-01-browser-fixture.md)
-- BASE-02:  Chrome 工具连接连续失败，重置后仍不可用；用户要求先继续其他任务。恢复连接后执行 api.html 并核对报告，HTTP 服务通过不代表浏览器通过。
 - ENG-01: [记录](changes/2026-09-10-ENG-01-reproducible-toolchain.md) [记录](baselines/toolchain-validation.json)

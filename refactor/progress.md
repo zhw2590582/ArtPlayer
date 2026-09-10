@@ -1,5 +1,9 @@
 # 进度与证据
 
+## 当前实施：Yarn 选择与浏览器回退
+
+用户指定 packageManager 使用 Yarn，正在准备 ENG-PM-01 替换 ENG-01 的 npm 默认工具选择。ENG-02 暂回待办，待 Yarn 锁定验证后接续。用户同时授权 Chrome 不可用时使用内置浏览器；9 项发布包基础 API 检查已通过，BASE-02 连接阻塞解除，完整快照任务仍待完成。详见 [DOC-13](changes/2026-09-10-DOC-13-browser-fallback.md)。历史 npm 和 Chrome 失败记录保留为当时事实。
+
 ## 当前实施：ENG-01 工具链已验证
 
 Node 24.21.0/npm 11.19.0、16 个直接工具和 npm lock 已固定；干净安装 1141 包、原 19 项测试、21 库包 63 产物与文档站构建全部通过，已有依赖解析版本没有升级。详见 [ENG-01 交付](changes/2026-09-10-ENG-01-reproducible-toolchain.md)。

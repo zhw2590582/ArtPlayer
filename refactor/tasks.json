@@ -220,6 +220,24 @@
       ]
     },
     {
+      "id": "DOC-13",
+      "phase": "0 规划",
+      "title": "记录并验证内置浏览器回退规则",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-08"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "根指令、复盘和夹具文档中的浏览器回退及实际环境证据",
+      "acceptance": "内置浏览器打开真实页面，报告基础检查结果及未覆盖项；独立提交",
+      "evidence": [
+        "changes/2026-09-10-DOC-13-browser-fallback.md"
+      ]
+    },
+    {
       "id": "BASE-01",
       "phase": "1 基线",
       "title": "固定核心与试点的最小发布基线",
@@ -267,12 +285,11 @@
         "BASE-01",
         "BASE-HARNESS-01"
       ],
-      "status": "blocked",
+      "status": "todo",
       "risk": "H",
       "deliverable": "核心与试点的构造/默认值/静态和实例 API 快照，其余包由 01/02 步补齐；登记契约/版本/固定测试 ID/命令/报告与负责任务",
       "acceptance": "真实发布包反射与旧用户调用可重跑，未验证项明确",
-      "evidence": [],
-      "reason": "Chrome 工具连接连续失败，重置后仍不可用；用户要求先继续其他任务。恢复连接后执行 api.html 并核对报告，HTTP 服务通过不代表浏览器通过。"
+      "evidence": []
     },
     {
       "id": "BASE-03",

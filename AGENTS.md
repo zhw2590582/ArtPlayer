@@ -25,6 +25,9 @@ After implementation, follow [refactor/release-reviews.md](refactor/release-revi
 complete the three review rounds and close blocking findings before candidate publication.
 Connected Chrome interaction checks complement committed automated browser tests; neither
 connection availability nor mocks replace actual playback or required device evidence.
+If Chrome is unavailable, use the Codex in-app browser for supported real-page tests.
+The user explicitly authorizes this fallback; record the actual browser/version and limitations.
+Do not block ordinary browser checks solely on the Chrome extension connection.
 Each review fix remains a separate task and commit. Revalidate changed candidate contents.
 The user explicitly includes GitHub CI/CD modernization in this refactor.
 Follow [refactor/github-ci-cd.md](refactor/github-ci-cd.md) for PR checks, regression matrices,
