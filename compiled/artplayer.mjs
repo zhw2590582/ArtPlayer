@@ -13,7 +13,7 @@ var hasRequiredOptionValidator;
 function requireOptionValidator() {
   if (hasRequiredOptionValidator) return optionValidator$1.exports;
   hasRequiredOptionValidator = 1;
-  (function(module, exports$1) {
+  (function(module, exports) {
     !(function(r, t) {
       module.exports = t();
     })(optionValidator, function() {
@@ -987,10 +987,9 @@ function playbackRate$2(option) {
   };
 }
 function version(option) {
-  const url = isBrowser ? location.href : "";
   return {
     ...option,
-    html: `<a href="https://artplayer.org?ref=${encodeURIComponent(url)}" target="_blank" style="width:100%;">ArtPlayer ${version$1}</a>`
+    html: `<a href="https://artplayer.org" target="_blank" style="width:100%;">ArtPlayer ${version$1}</a>`
   };
 }
 class Contextmenu extends Component {
