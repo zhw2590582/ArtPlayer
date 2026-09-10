@@ -37,7 +37,7 @@ function sendBytes(req, res, bytes, filename) {
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://127.0.0.1:${port}`)
-    const reportName = { '/reports/api': 'api', '/reports/lifecycle': 'lifecycle', '/reports/dom': 'dom' }[url.pathname]
+    const reportName = { '/reports/api': 'api', '/reports/lifecycle': 'lifecycle', '/reports/dom': 'dom', '/reports/ssr': 'ssr' }[url.pathname]
     if (req.method === 'POST' && reportName) {
       assert.equal(req.headers.origin, `http://127.0.0.1:${port}`, 'Unexpected report origin')
       const chunks = []
@@ -62,7 +62,7 @@ const server = http.createServer(async (req, res) => {
       if (reportName === 'lifecycle') {
         report.capture.media = Object.fromEntries(['video.mp4', 'video2.mp4'].map(name => [name, hash(fs.readFileSync(path.join(root, 'docs/assets/sample', name)))]))
       }
-      if (reportName === 'dom') report.capture.media = { 'video.mp4': hash(fs.readFileSync(path.join(root, 'docs/assets/sample/video.mp4'))) }
+      if (['dom', 'ssr'].includes(reportName)) report.capture.media = { 'video.mp4': hash(fs.readFileSync(path.join(root, 'docs/assets/sample/video.mp4'))) }
       const output = path.join(refactorDir, '.cache/reports')
       fs.mkdirSync(output, { recursive: true })
       fs.writeFileSync(path.join(output, `${reportName}.json`), `${JSON.stringify(report, null, 2)}\n`)

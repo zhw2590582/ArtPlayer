@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-05",
+  "sourceCommit": "2b7054d8",
+  "browserSurface": "Codex in-app browser",
+  "report": {
+    "kind": "ssr",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "language": "zh-CN"
+    },
+    "scripts": [
+      "/releases/artplayer/dist/artplayer.js",
+      "/releases/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js",
+      "/fixtures/ssr.js"
+    ],
+    "checks": [
+      {
+        "id": "SSR.browser-reuses-player",
+        "passed": true
+      },
+      {
+        "id": "SSR.browser-reuses-video",
+        "passed": true
+      },
+      {
+        "id": "SSR.browser-ready",
+        "passed": true
+      },
+      {
+        "id": "SSR.browser-plugin",
+        "passed": true
+      },
+      {
+        "id": "SSR.browser-cleanup",
+        "passed": true
+      }
+    ],
+    "errors": [],
+    "unhandled": [],
+    "observations": {
+      "videoWidth": 640,
+      "duration": 90.046009,
+      "serverMarker": "preserved"
+    },
+    "capture": {
+      "capturedAt": "2026-09-10T12:25:30.884Z",
+      "releases": [
+        {
+          "name": "artplayer",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js",
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "version": "1.1.0",
+          "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+          "member": "package/dist/artplayer-plugin-chapter.js",
+          "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+        }
+      ],
+      "fixtureHashAlgorithm": "sha256-lf",
+      "fixtures": {
+        "ssr.html": "57f8ce4d0227b83d01a575551d2d9bc3e0d0042af6038680833b2609849e8ea0",
+        "ssr.js": "6396ad144a29b576f76974dac640ab47ddf28e6a27e71c56570c61d517d54242"
+      },
+      "media": {
+        "video.mp4": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+      }
+    }
+  },
+  "verification": {
+    "repeatCapturedAt": "2026-09-10T12:27:45.290Z"
+  }
+}

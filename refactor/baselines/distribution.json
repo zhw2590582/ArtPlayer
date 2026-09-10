@@ -1,0 +1,3366 @@
+{
+  "schemaVersion": 1,
+  "task": "BASE-05",
+  "capturedAt": "2026-09-10T12:27:08.794Z",
+  "sourceCommit": "2b7054d8",
+  "note": "Workspace manifest and observed resource inventory. Existing dist files may be stale; presence and hashes are not proof of a fresh build or npm publication. Only core/chapter published tarballs are verified in releases.json and consumers.json.",
+  "packages": [
+    {
+      "name": "artplayer",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer",
+        "version": "5.4.1",
+        "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.mjs",
+            "require": "./dist/artplayer.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.legacy.js",
+            "require": "./dist/artplayer.legacy.js"
+          },
+          "./i18n/*": {
+            "types": "./types/i18n.d.ts",
+            "import": "./dist/i18n/*.mjs",
+            "require": "./dist/i18n/*.js"
+          }
+        },
+        "main": "./dist/artplayer.js",
+        "module": "./dist/artplayer.mjs",
+        "types": "./types/artplayer.d.ts",
+        "typesVersions": {
+          "*": {
+            "i18n/*": [
+              "types/i18n.d.ts"
+            ],
+            "legacy": [
+              "types/artplayer.d.ts"
+            ]
+          }
+        },
+        "legacy": "./dist/artplayer.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "option-validator": "^2.0.6"
+        }
+      },
+      "manifestSha256Lf": "06cbc0de3f944dfc215ea1c4e7c3376e6352ee5d6f1f459828f45025c62f57f0",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer.js",
+          "observedMatches": [
+            "dist/artplayer.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer.mjs",
+          "observedMatches": [
+            "dist/artplayer.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer.legacy.js",
+          "observedMatches": [
+            "dist/artplayer.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer.d.ts",
+          "observedMatches": [
+            "types/artplayer.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer.d.ts",
+          "observedMatches": [
+            "types/artplayer.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer.mjs",
+          "observedMatches": [
+            "dist/artplayer.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer.js",
+          "observedMatches": [
+            "dist/artplayer.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer.d.ts",
+          "observedMatches": [
+            "types/artplayer.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer.legacy.js",
+          "observedMatches": [
+            "dist/artplayer.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer.legacy.js",
+          "observedMatches": [
+            "dist/artplayer.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../i18n/*.types",
+          "path": "./types/i18n.d.ts",
+          "observedMatches": [
+            "types/i18n.d.ts"
+          ]
+        },
+        {
+          "field": "exports../i18n/*.import",
+          "path": "./dist/i18n/*.mjs",
+          "observedMatches": [
+            "dist/i18n/ar.mjs",
+            "dist/i18n/cs.mjs",
+            "dist/i18n/es.mjs",
+            "dist/i18n/fa.mjs",
+            "dist/i18n/fr.mjs",
+            "dist/i18n/id.mjs",
+            "dist/i18n/pl.mjs",
+            "dist/i18n/ru.mjs",
+            "dist/i18n/tr.mjs",
+            "dist/i18n/vi.mjs",
+            "dist/i18n/zh-tw.mjs"
+          ]
+        },
+        {
+          "field": "exports../i18n/*.require",
+          "path": "./dist/i18n/*.js",
+          "observedMatches": [
+            "dist/i18n/ar.js",
+            "dist/i18n/cs.js",
+            "dist/i18n/es.js",
+            "dist/i18n/fa.js",
+            "dist/i18n/fr.js",
+            "dist/i18n/id.js",
+            "dist/i18n/pl.js",
+            "dist/i18n/ru.js",
+            "dist/i18n/tr.js",
+            "dist/i18n/vi.js",
+            "dist/i18n/zh-tw.js"
+          ]
+        },
+        {
+          "field": "typesVersions.*.i18n/*.0",
+          "path": "types/i18n.d.ts",
+          "observedMatches": [
+            "types/i18n.d.ts"
+          ]
+        },
+        {
+          "field": "typesVersions.*.legacy.0",
+          "path": "types/artplayer.d.ts",
+          "observedMatches": [
+            "types/artplayer.d.ts"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer.js",
+          "bytes": 134753,
+          "sha256": "2ae05beeca573455af87b63259758f151f3c69e2a5553d6996cf1fcb161396b7"
+        },
+        {
+          "path": "dist/artplayer.legacy.js",
+          "bytes": 136473,
+          "sha256": "3b85d82e59f0aaa61816ab66eb1a21735144a56310171b2ce571a00f2fb6f443"
+        },
+        {
+          "path": "dist/artplayer.mjs",
+          "bytes": 215072,
+          "sha256": "f7df4dd5907dc58aaee1e456d7838e2ecfa352a74e219c08c318e80d98f94a0f"
+        },
+        {
+          "path": "dist/i18n/ar.js",
+          "bytes": 1742,
+          "sha256": "61c43469ee95a00dc624583f418653e3dcbf48b24ae6a4c203ad986234852365"
+        },
+        {
+          "path": "dist/i18n/ar.mjs",
+          "bytes": 1728,
+          "sha256": "fe7bf234e28e7c4405055051d230527ea5deb268168fe68bdc253cffd1af2703"
+        },
+        {
+          "path": "dist/i18n/cs.js",
+          "bytes": 1441,
+          "sha256": "ad7bbf8853204a6955ef84bfbd932cab3f141a7e73a8145f28ba7a5b2b83b7c0"
+        },
+        {
+          "path": "dist/i18n/cs.mjs",
+          "bytes": 1427,
+          "sha256": "a475449e19cffb67eb5762787752027bdc674f0d0d55fb10fbb5cd693dabe9da"
+        },
+        {
+          "path": "dist/i18n/es.js",
+          "bytes": 1398,
+          "sha256": "aaa95cc9645b734c58fba06fdbcdda962c4cb3a0e7eb6206f06d6168208cd86b"
+        },
+        {
+          "path": "dist/i18n/es.mjs",
+          "bytes": 1384,
+          "sha256": "f36b65a70247c580b9560ed5205a69916bf5d2b5c8bbbcaa41a4d015a0016272"
+        },
+        {
+          "path": "dist/i18n/fa.js",
+          "bytes": 1597,
+          "sha256": "c998467261cbdfd2c3fb16c0ae4b2c48c409f42f41aea35ed94766f1e12819d5"
+        },
+        {
+          "path": "dist/i18n/fa.mjs",
+          "bytes": 1583,
+          "sha256": "f44d249236e753606decc8b800f5f32888c6002d81975e1b1674f9a4c395cb8f"
+        },
+        {
+          "path": "dist/i18n/fr.js",
+          "bytes": 1413,
+          "sha256": "6b06e16b1fb01c8695fb5c10b32a00421399180de5dc5d845ce17010f2fd3e66"
+        },
+        {
+          "path": "dist/i18n/fr.mjs",
+          "bytes": 1399,
+          "sha256": "5b532775e7704e41f5ea5500d1d31d758f77b87c0d3e2e014f61ac3227cb3544"
+        },
+        {
+          "path": "dist/i18n/id.js",
+          "bytes": 1347,
+          "sha256": "a5832c4bfc03c7f16418bf4b324d9773895541dc823ece9114741794737aad74"
+        },
+        {
+          "path": "dist/i18n/id.mjs",
+          "bytes": 1333,
+          "sha256": "b18f86de99db2c5e71949f5c4e8e39130025b6d86e3dc61541fffd55826053d4"
+        },
+        {
+          "path": "dist/i18n/pl.js",
+          "bytes": 1402,
+          "sha256": "2491487062bdfc91d60f17c6e9a83ee196c991216d15f525fe3536b98873da2c"
+        },
+        {
+          "path": "dist/i18n/pl.mjs",
+          "bytes": 1388,
+          "sha256": "ba8f39c97ff5a4e5d28d62b91020c3b1f4844321eaad97a38d16beef58040be3"
+        },
+        {
+          "path": "dist/i18n/ru.js",
+          "bytes": 1998,
+          "sha256": "2d3a9ee6533cb6fa961f0a24a25ce63cc76992fca17e1769b6fa75104f8a1529"
+        },
+        {
+          "path": "dist/i18n/ru.mjs",
+          "bytes": 1984,
+          "sha256": "2e9ffc111f7d85170984d4e8a3d26b47eb4045a524696cc154dec11bd1495d96"
+        },
+        {
+          "path": "dist/i18n/tr.js",
+          "bytes": 1342,
+          "sha256": "438b06a4c3f479a2901b0085eaa7bdba8eaef87bdb07ff3faa559c85403fe433"
+        },
+        {
+          "path": "dist/i18n/tr.mjs",
+          "bytes": 1328,
+          "sha256": "a5a527bb40608558c1fe515e2a5a3552e6198eafbd79a2d10305f89cc3e7743f"
+        },
+        {
+          "path": "dist/i18n/vi.js",
+          "bytes": 1489,
+          "sha256": "1ffbd62843a902ea2967eab46432d3fc548f5633e53eed104314b523cacc46a8"
+        },
+        {
+          "path": "dist/i18n/vi.mjs",
+          "bytes": 1475,
+          "sha256": "06ac85d56d5d689d3db40e106d23cf06f6bdd867235b928613b9eb31ac3a51f8"
+        },
+        {
+          "path": "dist/i18n/zh-tw.js",
+          "bytes": 1255,
+          "sha256": "2d43577f98456488196921e1ec721695a95e1b8c827077286b02ce3fb987e8ff"
+        },
+        {
+          "path": "dist/i18n/zh-tw.mjs",
+          "bytes": 1239,
+          "sha256": "f6acdb6b64566abfa972bb2149ea7968f2f8c44c6d1cbc8813151f20d72c41bf"
+        },
+        {
+          "path": "types/artplayer.d.ts",
+          "bytes": 6675,
+          "sha256": "98d3e7b65f9f81fba155da08fd47e4fb25f4c69279e3afd993c4a55070f8a850"
+        },
+        {
+          "path": "types/component.d.ts",
+          "bytes": 2456,
+          "sha256": "facfa29d9092fe2c63a7d8357ce7d0faa5e32811d2fedeef6dc8b28ad5d04891"
+        },
+        {
+          "path": "types/config.d.ts",
+          "bytes": 1704,
+          "sha256": "c4fd8681bf32b10c743e3e561c532520c8f32e43fd765524850b15e55cb91c72"
+        },
+        {
+          "path": "types/cssVar.d.ts",
+          "bytes": 1534,
+          "sha256": "e027d82fb4f01c9ce7559cf679b2d5ee1962d3f7e5b4dd64ca21f472b933efb6"
+        },
+        {
+          "path": "types/events.d.ts",
+          "bytes": 3056,
+          "sha256": "98c74aebb82455accc0b3523af5a1145bc9119da58c884200adc36e70a164b02"
+        },
+        {
+          "path": "types/i18n.d.ts",
+          "bytes": 1329,
+          "sha256": "d6c01cb758d365d46d0f3d36687e97d6283a272bea7d8052aedb0cf6494e82a4"
+        },
+        {
+          "path": "types/icons.d.ts",
+          "bytes": 1069,
+          "sha256": "0d8e8e52e52130dd4a29bab551dd7a2a954797e42e92a6e068c85d583e23e6a4"
+        },
+        {
+          "path": "types/option.d.ts",
+          "bytes": 5143,
+          "sha256": "d4de53930c2fa9d59c77c4324d63f24b057bce6c4d0273c34a0ab06094dcea2c"
+        },
+        {
+          "path": "types/player.d.ts",
+          "bytes": 2661,
+          "sha256": "986382bb6b4e82746fd2405092e69d0ef413988887a557a0fd4db85d64b78d54"
+        },
+        {
+          "path": "types/quality.d.ts",
+          "bytes": 234,
+          "sha256": "7ed6ed78cea52991b2f6ddd2bd3b7bd8c5146fdfff7486fe8b814c3e632f1567"
+        },
+        {
+          "path": "types/setting.d.ts",
+          "bytes": 2186,
+          "sha256": "d12a75b656fff70cbb30be4bffec46d9c4273636e8722bce971a4d2b188712a1"
+        },
+        {
+          "path": "types/subtitle.d.ts",
+          "bytes": 572,
+          "sha256": "d25b470e47d6a9bd696d9c1ad8adb58e56a208f05695186d513bc8c43c2e8acf"
+        },
+        {
+          "path": "types/template.d.ts",
+          "bytes": 966,
+          "sha256": "68aed9e97d006d6be4fabb8504ca84dafab770b0925f4d6e7319e67c82f21b0d"
+        },
+        {
+          "path": "types/utils.d.ts",
+          "bytes": 3202,
+          "sha256": "d3fb67b9187e1c81c6b3850694cf2627e927225ace160ae58c11631e9f673a98"
+        }
+      ],
+      "sourceAssets": [
+        "src/icons/airplay.svg",
+        "src/icons/arrow-left.svg",
+        "src/icons/arrow-right.svg",
+        "src/icons/aspect-ratio.svg",
+        "src/icons/check.svg",
+        "src/icons/close.svg",
+        "src/icons/config.svg",
+        "src/icons/error.svg",
+        "src/icons/fast-forward.svg",
+        "src/icons/flip.svg",
+        "src/icons/fullscreen-off.svg",
+        "src/icons/fullscreen-on.svg",
+        "src/icons/fullscreen-web-off.svg",
+        "src/icons/fullscreen-web-on.svg",
+        "src/icons/loading.svg",
+        "src/icons/lock.svg",
+        "src/icons/pause.svg",
+        "src/icons/pip.svg",
+        "src/icons/play.svg",
+        "src/icons/playback-rate.svg",
+        "src/icons/screenshot.svg",
+        "src/icons/setting.svg",
+        "src/icons/state.svg",
+        "src/icons/switch-off.svg",
+        "src/icons/switch-on.svg",
+        "src/icons/unlock.svg",
+        "src/icons/volume-close.svg",
+        "src/icons/volume.svg",
+        "src/style/artplayer.less",
+        "src/style/aspectRatio.less",
+        "src/style/backdrop.less",
+        "src/style/bottom.less",
+        "src/style/contextmenu.less",
+        "src/style/controls.less",
+        "src/style/danmuku.less",
+        "src/style/flip.less",
+        "src/style/fullscreen.less",
+        "src/style/fullscreenWeb.less",
+        "src/style/hideCursor.less",
+        "src/style/hint.less",
+        "src/style/icon.less",
+        "src/style/index.less",
+        "src/style/info.less",
+        "src/style/layers.less",
+        "src/style/loading.less",
+        "src/style/mask.less",
+        "src/style/mini.less",
+        "src/style/mixins.less",
+        "src/style/mobile.less",
+        "src/style/notice.less",
+        "src/style/plugins.less",
+        "src/style/poster.less",
+        "src/style/progress.less",
+        "src/style/selector.less",
+        "src/style/setting.less",
+        "src/style/subtitle.less",
+        "src/style/variables.less",
+        "src/style/video.less",
+        "src/style/volume.less"
+      ],
+      "buildOutputs": [
+        "dist/artplayer.js",
+        "dist/artplayer.legacy.js",
+        "dist/artplayer.mjs",
+        "docs/compiled/artplayer.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-ads",
+        "version": "2.1.0",
+        "description": "Ads plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-ads.d.ts",
+            "import": "./dist/artplayer-plugin-ads.mjs",
+            "require": "./dist/artplayer-plugin-ads.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-ads.d.ts",
+            "import": "./dist/artplayer-plugin-ads.legacy.js",
+            "require": "./dist/artplayer-plugin-ads.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-ads.js",
+        "module": "./dist/artplayer-plugin-ads.mjs",
+        "types": "./types/artplayer-plugin-ads.d.ts",
+        "legacy": "./dist/artplayer-plugin-ads.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "5b7a876d58b8e88c994c3a72754ce6d7dbea0100a35928a99d66641de7c82e0d",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-ads.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ads.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-ads.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-ads.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-ads.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ads.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-ads.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-ads.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-ads.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-ads.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-ads.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-ads.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-ads.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ads.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-ads.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-ads.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-ads.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ads.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-ads.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ads.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-ads.js",
+          "bytes": 5620,
+          "sha256": "ceb2d8a23a6735c161b31a4a427d8a757679aaf8a5a106ef40a6f047061f1df8"
+        },
+        {
+          "path": "dist/artplayer-plugin-ads.legacy.js",
+          "bytes": 5951,
+          "sha256": "1e10c3a6b51de18e54cd02dd342ab4010fc466de6257659cf1d2e087642aa9a3"
+        },
+        {
+          "path": "dist/artplayer-plugin-ads.mjs",
+          "bytes": 9577,
+          "sha256": "5d53a55bd6fcc64a01abe460a6e9161240ee23bc8b4cf160c22c602de03f6356"
+        },
+        {
+          "path": "types/artplayer-plugin-ads.d.ts",
+          "bytes": 851,
+          "sha256": "539f5ac5e4a8ba6dbe3065e89d7a646b890365d8e38deeac4394e5902db1b132"
+        }
+      ],
+      "sourceAssets": [
+        "src/style.less"
+      ],
+      "buildOutputs": [
+        "dist/artplayer-plugin-ads.js",
+        "dist/artplayer-plugin-ads.legacy.js",
+        "dist/artplayer-plugin-ads.mjs",
+        "docs/compiled/artplayer-plugin-ads.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-ambilight",
+        "version": "1.1.0",
+        "description": "ambilight plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-ambilight.d.ts",
+            "import": "./dist/artplayer-plugin-ambilight.mjs",
+            "require": "./dist/artplayer-plugin-ambilight.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-ambilight.d.ts",
+            "import": "./dist/artplayer-plugin-ambilight.legacy.js",
+            "require": "./dist/artplayer-plugin-ambilight.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-ambilight.js",
+        "module": "./dist/artplayer-plugin-ambilight.mjs",
+        "types": "./types/artplayer-plugin-ambilight.d.ts",
+        "legacy": "./dist/artplayer-plugin-ambilight.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "39aa2790a79cbc2a62ba925ee5ff53bbb649440a5d7b9f526b3de819ece4f792",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-ambilight.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ambilight.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-ambilight.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-ambilight.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-ambilight.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ambilight.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-ambilight.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-ambilight.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-ambilight.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-ambilight.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-ambilight.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-ambilight.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-ambilight.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ambilight.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-ambilight.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-ambilight.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-ambilight.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ambilight.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-ambilight.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-ambilight.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-ambilight.js",
+          "bytes": 1844,
+          "sha256": "8f32290c65a13b0a3026dee0045fef4125a9c9ac788ecb1675aef05f79172693"
+        },
+        {
+          "path": "dist/artplayer-plugin-ambilight.legacy.js",
+          "bytes": 1844,
+          "sha256": "8f32290c65a13b0a3026dee0045fef4125a9c9ac788ecb1675aef05f79172693"
+        },
+        {
+          "path": "dist/artplayer-plugin-ambilight.mjs",
+          "bytes": 3433,
+          "sha256": "b9b56fdec4a39b5d9dd2f839ddefbe5e01d74823d5879b75bb776825ed1b8140"
+        },
+        {
+          "path": "types/artplayer-plugin-ambilight.d.ts",
+          "bytes": 399,
+          "sha256": "06f86ccc7c6da280c2fdbcb047d12cc51f87c70cd36cedb7274c20f24df5423e"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-plugin-ambilight.js",
+        "dist/artplayer-plugin-ambilight.legacy.js",
+        "dist/artplayer-plugin-ambilight.mjs",
+        "docs/compiled/artplayer-plugin-ambilight.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-asr",
+        "version": "2.1.0",
+        "description": "Asr plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-asr.d.ts",
+            "import": "./dist/artplayer-plugin-asr.mjs",
+            "require": "./dist/artplayer-plugin-asr.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-asr.d.ts",
+            "import": "./dist/artplayer-plugin-asr.legacy.js",
+            "require": "./dist/artplayer-plugin-asr.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-asr.js",
+        "module": "./dist/artplayer-plugin-asr.mjs",
+        "types": "./types/artplayer-plugin-asr.d.ts",
+        "legacy": "./dist/artplayer-plugin-asr.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "f0c9fc6c294376c7ed8974556672b077e31fae480bd8e3ecc8b2a060811b29cd",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-asr.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-asr.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-asr.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-asr.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-asr.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-asr.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-asr.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-asr.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-asr.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-asr.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-asr.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-asr.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-asr.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-asr.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-asr.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-asr.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-asr.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-asr.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-asr.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-asr.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-asr.js",
+          "bytes": 5064,
+          "sha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d"
+        },
+        {
+          "path": "dist/artplayer-plugin-asr.legacy.js",
+          "bytes": 5468,
+          "sha256": "8b9f07ce97a8ce2e4f29e41e79257be530fd7a76558369d34c3d7497ea606c33"
+        },
+        {
+          "path": "dist/artplayer-plugin-asr.mjs",
+          "bytes": 9309,
+          "sha256": "bf222a738fc7a8946769ebaf37c89d05968ec0d74fe1e6e5ec653e560cbb6eb8"
+        },
+        {
+          "path": "types/artplayer-plugin-asr.d.ts",
+          "bytes": 581,
+          "sha256": "25756d3d8cd21941ed2bbce5392db8d20659f8a095de28fd6c2708ce5c79a130"
+        }
+      ],
+      "sourceAssets": [
+        "src/style.less"
+      ],
+      "buildOutputs": [
+        "dist/artplayer-plugin-asr.js",
+        "dist/artplayer-plugin-asr.legacy.js",
+        "dist/artplayer-plugin-asr.mjs",
+        "docs/compiled/artplayer-plugin-asr.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-audio-track",
+        "version": "1.1.0",
+        "description": "audio-track plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-audio-track.d.ts",
+            "import": "./dist/artplayer-plugin-audio-track.mjs",
+            "require": "./dist/artplayer-plugin-audio-track.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-audio-track.d.ts",
+            "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+            "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+          }
+        },
+        "main": "dist/artplayer-plugin-audio-track.js",
+        "module": "./dist/artplayer-plugin-audio-track.mjs",
+        "types": "types/artplayer-plugin-audio-track.d.ts",
+        "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "dist/artplayer-plugin-audio-track.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-audio-track.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-audio-track.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-audio-track.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "dist/artplayer-plugin-audio-track.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-audio-track.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "types/artplayer-plugin-audio-track.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-audio-track.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-audio-track.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-audio-track.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-audio-track.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-audio-track.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-audio-track.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-audio-track.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-audio-track.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-audio-track.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-audio-track.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-audio-track.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-audio-track.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-audio-track.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-audio-track.js",
+          "bytes": 1471,
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        },
+        {
+          "path": "dist/artplayer-plugin-audio-track.legacy.js",
+          "bytes": 1497,
+          "sha256": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb"
+        },
+        {
+          "path": "dist/artplayer-plugin-audio-track.mjs",
+          "bytes": 2330,
+          "sha256": "df9e2215d283450ba799545f38d26ed582dd245efe5abc31641bf88eb8d6faeb"
+        },
+        {
+          "path": "types/artplayer-plugin-audio-track.d.ts",
+          "bytes": 756,
+          "sha256": "4b94a4042e99f768697ce4dcd26fe6eec811d3dd6ad1ee02421fbf409bef6bb9"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-plugin-audio-track.js",
+        "dist/artplayer-plugin-audio-track.legacy.js",
+        "dist/artplayer-plugin-audio-track.mjs",
+        "docs/compiled/artplayer-plugin-audio-track.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "version": "1.1.0",
+        "description": "auto-thumbnail plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+            "import": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+            "require": "./dist/artplayer-plugin-auto-thumbnail.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+            "import": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+            "require": "./dist/artplayer-plugin-auto-thumbnail.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-auto-thumbnail.js",
+        "module": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+        "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+        "legacy": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "8d9e186c8767a88cd2f6b7d5fa07d35f9c5dad1a29bf321906d17dab7fc95504",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-auto-thumbnail.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-auto-thumbnail.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-auto-thumbnail.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-auto-thumbnail.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-auto-thumbnail.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-auto-thumbnail.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-auto-thumbnail.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-auto-thumbnail.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-auto-thumbnail.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-auto-thumbnail.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-auto-thumbnail.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-auto-thumbnail.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-auto-thumbnail.js",
+          "bytes": 1299,
+          "sha256": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a"
+        },
+        {
+          "path": "dist/artplayer-plugin-auto-thumbnail.legacy.js",
+          "bytes": 1949,
+          "sha256": "3561e51e0a5f294b56641bf0884a24a4a9e326582d2e99416a04f9526c7d0cc0"
+        },
+        {
+          "path": "dist/artplayer-plugin-auto-thumbnail.mjs",
+          "bytes": 1894,
+          "sha256": "c362a86f38b3515c5d53a368cd94602e4531e93c638ed325fc179ec8664607f9"
+        },
+        {
+          "path": "types/artplayer-plugin-auto-thumbnail.d.ts",
+          "bytes": 342,
+          "sha256": "b3fd5197b2d1de81bd80a871103821fc38f5af8faa432265ee1fc04ff3e1e51d"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-plugin-auto-thumbnail.js",
+        "dist/artplayer-plugin-auto-thumbnail.legacy.js",
+        "dist/artplayer-plugin-auto-thumbnail.mjs",
+        "docs/compiled/artplayer-plugin-auto-thumbnail.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-chapter",
+        "version": "1.1.0",
+        "description": "chapter plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-chapter.d.ts",
+            "import": "./dist/artplayer-plugin-chapter.mjs",
+            "require": "./dist/artplayer-plugin-chapter.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-chapter.d.ts",
+            "import": "./dist/artplayer-plugin-chapter.legacy.js",
+            "require": "./dist/artplayer-plugin-chapter.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-chapter.js",
+        "module": "./dist/artplayer-plugin-chapter.mjs",
+        "types": "./types/artplayer-plugin-chapter.d.ts",
+        "legacy": "./dist/artplayer-plugin-chapter.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "233ed9b732e14cb06955536157ba1650c4cffded74015a2417942e70ee5aca04",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-chapter.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chapter.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-chapter.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-chapter.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-chapter.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chapter.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-chapter.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-chapter.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-chapter.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-chapter.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-chapter.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-chapter.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-chapter.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chapter.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-chapter.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-chapter.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-chapter.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chapter.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-chapter.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chapter.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-chapter.js",
+          "bytes": 4973,
+          "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+        },
+        {
+          "path": "dist/artplayer-plugin-chapter.legacy.js",
+          "bytes": 4973,
+          "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+        },
+        {
+          "path": "dist/artplayer-plugin-chapter.mjs",
+          "bytes": 7880,
+          "sha256": "226c9ab5fbf7ea8bb3d96bd73a1cec6f86eb054f369aafb686333b65e85edc0f"
+        },
+        {
+          "path": "types/artplayer-plugin-chapter.d.ts",
+          "bytes": 387,
+          "sha256": "0db0d37ce894fb31e1028e40a63655f3f8732ae9531794469dc272018bfc8a18"
+        }
+      ],
+      "sourceAssets": [
+        "src/style.less"
+      ],
+      "buildOutputs": [
+        "dist/artplayer-plugin-chapter.js",
+        "dist/artplayer-plugin-chapter.legacy.js",
+        "dist/artplayer-plugin-chapter.mjs",
+        "docs/compiled/artplayer-plugin-chapter.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-chromecast",
+        "version": "1.1.0",
+        "description": "Chromecast plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-chromecast.d.ts",
+            "import": "./dist/artplayer-plugin-chromecast.mjs",
+            "require": "./dist/artplayer-plugin-chromecast.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-chromecast.d.ts",
+            "import": "./dist/artplayer-plugin-chromecast.legacy.js",
+            "require": "./dist/artplayer-plugin-chromecast.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-chromecast.js",
+        "module": "./dist/artplayer-plugin-chromecast.mjs",
+        "types": "./types/artplayer-plugin-chromecast.d.ts",
+        "legacy": "./dist/artplayer-plugin-chromecast.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "8157c06e4f764b1662ac108334e1240b07963400b906da6b21874e9a0e415adf",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-chromecast.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chromecast.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-chromecast.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-chromecast.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-chromecast.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chromecast.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-chromecast.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-chromecast.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-chromecast.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-chromecast.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-chromecast.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-chromecast.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-chromecast.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chromecast.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-chromecast.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-chromecast.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-chromecast.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chromecast.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-chromecast.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-chromecast.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-chromecast.js",
+          "bytes": 3934,
+          "sha256": "4959661fc7f22eee3d32363bb0392a486c44499ec4a9c608ccfea55de29aaac6"
+        },
+        {
+          "path": "dist/artplayer-plugin-chromecast.legacy.js",
+          "bytes": 4472,
+          "sha256": "e2ba7aebec099884bb806f3caf77f9ff739ff9f236aefdfd0a4e69a8295c9d01"
+        },
+        {
+          "path": "dist/artplayer-plugin-chromecast.mjs",
+          "bytes": 6709,
+          "sha256": "0c96dad4cee48c353d91d19852243d566345cc7977e1e19ccbd9deba73190b8b"
+        },
+        {
+          "path": "types/artplayer-plugin-chromecast.d.ts",
+          "bytes": 340,
+          "sha256": "20c22f3ada25b392f0bcaf21e2ac66cdc825d88763aa91a337fc4952b2c810c1"
+        }
+      ],
+      "sourceAssets": [
+        "src/cast.svg"
+      ],
+      "buildOutputs": [
+        "dist/artplayer-plugin-chromecast.js",
+        "dist/artplayer-plugin-chromecast.legacy.js",
+        "dist/artplayer-plugin-chromecast.mjs",
+        "docs/compiled/artplayer-plugin-chromecast.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-danmuku",
+        "version": "5.3.0",
+        "description": "Danmuku plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-danmuku.d.ts",
+            "import": "./dist/artplayer-plugin-danmuku.mjs",
+            "require": "./dist/artplayer-plugin-danmuku.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-danmuku.d.ts",
+            "import": "./dist/artplayer-plugin-danmuku.legacy.js",
+            "require": "./dist/artplayer-plugin-danmuku.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-danmuku.js",
+        "module": "./dist/artplayer-plugin-danmuku.mjs",
+        "types": "./types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "./dist/artplayer-plugin-danmuku.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "6e9b642cda22728631f71b3121b9dcae9f979c6eebb4b6d555d723b71cde9a50",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-danmuku.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-danmuku.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-danmuku.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-danmuku.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-danmuku.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-danmuku.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-danmuku.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-danmuku.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-danmuku.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-danmuku.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-danmuku.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-danmuku.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-danmuku.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-danmuku.js",
+          "bytes": 52390,
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f"
+        },
+        {
+          "path": "dist/artplayer-plugin-danmuku.legacy.js",
+          "bytes": 53263,
+          "sha256": "62db96685c48b8573f0480cead6ac934b1d0382b9fdd0046d17d15d2549c56dc"
+        },
+        {
+          "path": "dist/artplayer-plugin-danmuku.mjs",
+          "bytes": 77263,
+          "sha256": "f9e1c59adac3f399c022c5e5e6aef7c134e489862915141f25f931316e254f12"
+        },
+        {
+          "path": "types/artplayer-plugin-danmuku.d.ts",
+          "bytes": 4388,
+          "sha256": "3162fc3db91bff06f0709fa0e6ca78de05053e25436ca215846a6267d4680e53"
+        }
+      ],
+      "sourceAssets": [
+        "src/img/check_off.svg",
+        "src/img/check_on.svg",
+        "src/img/config.svg",
+        "src/img/mode_0_off.svg",
+        "src/img/mode_0_on.svg",
+        "src/img/mode_1_off.svg",
+        "src/img/mode_1_on.svg",
+        "src/img/mode_2_off.svg",
+        "src/img/mode_2_on.svg",
+        "src/img/off.svg",
+        "src/img/on.svg",
+        "src/img/style.svg",
+        "src/style.less"
+      ],
+      "buildOutputs": [
+        "dist/artplayer-plugin-danmuku.js",
+        "dist/artplayer-plugin-danmuku.legacy.js",
+        "dist/artplayer-plugin-danmuku.mjs",
+        "docs/compiled/artplayer-plugin-danmuku.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-danmuku-mask",
+        "version": "1.1.0",
+        "description": "Danmuku mask plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+            "import": "./dist/artplayer-plugin-danmuku-mask.mjs",
+            "require": "./dist/artplayer-plugin-danmuku-mask.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+            "import": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "require": "./dist/artplayer-plugin-danmuku-mask.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-danmuku-mask.js",
+        "module": "./dist/artplayer-plugin-danmuku-mask.mjs",
+        "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+        "legacy": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+          "@tensorflow-models/body-segmentation": "^1.0.2",
+          "@tensorflow/tfjs-backend-cpu": "^4.21.0",
+          "@tensorflow/tfjs-backend-webgl": "^4.21.0",
+          "@tensorflow/tfjs-converter": "^4.21.0",
+          "@tensorflow/tfjs-core": "^4.21.0"
+        }
+      },
+      "manifestSha256Lf": "b216164ada1b9baf4fcec3388036839c28686f864e3d2a706258af78e6633887",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-danmuku-mask.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku-mask.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-danmuku-mask.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku-mask.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku-mask.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-danmuku-mask.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-danmuku-mask.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-danmuku-mask.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-danmuku-mask.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-danmuku-mask.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku-mask.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-danmuku-mask.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku-mask.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-danmuku-mask.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-danmuku-mask.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku-mask.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-danmuku-mask.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-danmuku-mask.js",
+          "bytes": 904243,
+          "sha256": "07cebbfbf77f8ec4b2df6a77d7d7300345b86f2993e220ff14e1aae530e4fb31"
+        },
+        {
+          "path": "dist/artplayer-plugin-danmuku-mask.legacy.js",
+          "bytes": 907166,
+          "sha256": "a678a3c0f6d3920bee3b66af9943b3612935028bff61c96677b8eaf8ef7cc8f0"
+        },
+        {
+          "path": "dist/artplayer-plugin-danmuku-mask.mjs",
+          "bytes": 1777425,
+          "sha256": "f07030990a8d6adbe6db0acdacbae9db6e6c33f0fb8126e09697184d0ef8396d"
+        },
+        {
+          "path": "types/artplayer-plugin-danmuku-mask.d.ts",
+          "bytes": 597,
+          "sha256": "f2b67f82a6471b79d921a7376b24620d0ed8284a3e1882b0f75a9b38dfac3638"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-plugin-danmuku-mask.js",
+        "dist/artplayer-plugin-danmuku-mask.legacy.js",
+        "dist/artplayer-plugin-danmuku-mask.mjs",
+        "docs/compiled/artplayer-plugin-danmuku-mask.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-dash-control",
+        "version": "1.1.0",
+        "description": "Dash control plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-dash-control.d.ts",
+            "import": "./dist/artplayer-plugin-dash-control.mjs",
+            "require": "./dist/artplayer-plugin-dash-control.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-dash-control.d.ts",
+            "import": "./dist/artplayer-plugin-dash-control.legacy.js",
+            "require": "./dist/artplayer-plugin-dash-control.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-dash-control.js",
+        "module": "./dist/artplayer-plugin-dash-control.mjs",
+        "types": "./types/artplayer-plugin-dash-control.d.ts",
+        "legacy": "./dist/artplayer-plugin-dash-control.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-dash-control.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-dash-control.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-dash-control.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-dash-control.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-dash-control.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-dash-control.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-dash-control.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-dash-control.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-dash-control.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-dash-control.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-dash-control.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-dash-control.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-dash-control.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-dash-control.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-dash-control.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-dash-control.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-dash-control.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-dash-control.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-dash-control.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-dash-control.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-dash-control.js",
+          "bytes": 3450,
+          "sha256": "248aa1162ffb2480965f8e12d766ba6b7d2abfc2d80e65e8a6e8db6bdfa750c5"
+        },
+        {
+          "path": "dist/artplayer-plugin-dash-control.legacy.js",
+          "bytes": 3450,
+          "sha256": "248aa1162ffb2480965f8e12d766ba6b7d2abfc2d80e65e8a6e8db6bdfa750c5"
+        },
+        {
+          "path": "dist/artplayer-plugin-dash-control.mjs",
+          "bytes": 6074,
+          "sha256": "a29459436962e54efc3203d3264264291723593196461a6f116a684e53d7154f"
+        },
+        {
+          "path": "types/artplayer-plugin-dash-control.d.ts",
+          "bytes": 406,
+          "sha256": "88441371a11bffc371c259d08ab8d8df0fb60c4de8112ea1ee394ec855a53efc"
+        }
+      ],
+      "sourceAssets": [
+        "src/audio.svg",
+        "src/quality.svg"
+      ],
+      "buildOutputs": [
+        "dist/artplayer-plugin-dash-control.js",
+        "dist/artplayer-plugin-dash-control.legacy.js",
+        "dist/artplayer-plugin-dash-control.mjs",
+        "docs/compiled/artplayer-plugin-dash-control.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-document-pip",
+        "version": "1.1.0",
+        "description": "Document PIP plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-document-pip.d.ts",
+            "import": "./dist/artplayer-plugin-document-pip.mjs",
+            "require": "./dist/artplayer-plugin-document-pip.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-document-pip.d.ts",
+            "import": "./dist/artplayer-plugin-document-pip.legacy.js",
+            "require": "./dist/artplayer-plugin-document-pip.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-document-pip.js",
+        "module": "./dist/artplayer-plugin-document-pip.mjs",
+        "types": "./types/artplayer-plugin-document-pip.d.ts",
+        "legacy": "./dist/artplayer-plugin-document-pip.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "cd0c0c17fde404f93fc6bd64f6317d29ce54908e15b956c465124dd9fe2c77f6",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-document-pip.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-document-pip.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-document-pip.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-document-pip.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-document-pip.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-document-pip.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-document-pip.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-document-pip.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-document-pip.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-document-pip.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-document-pip.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-document-pip.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-document-pip.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-document-pip.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-document-pip.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-document-pip.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-document-pip.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-document-pip.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-document-pip.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-document-pip.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-document-pip.js",
+          "bytes": 4624,
+          "sha256": "261d4ae84579c569ade1b1e7e91d51e3bd00c6efbea8c51a48b8283e0f4f3496"
+        },
+        {
+          "path": "dist/artplayer-plugin-document-pip.legacy.js",
+          "bytes": 5356,
+          "sha256": "8e36b658196dece391add21c249b735f3abfe4082fc968d3dbbbb1ae58a77b31"
+        },
+        {
+          "path": "dist/artplayer-plugin-document-pip.mjs",
+          "bytes": 7106,
+          "sha256": "ba1ae10a27740abc1c516470db8d03d45b88e3550180720bf3353864d629cca2"
+        },
+        {
+          "path": "types/artplayer-plugin-document-pip.d.ts",
+          "bytes": 466,
+          "sha256": "90725c86b8d7b32b5e222d235a15ffeb45d39e98cb097ca6a49b2faa321f5d1d"
+        }
+      ],
+      "sourceAssets": [
+        "src/style.less"
+      ],
+      "buildOutputs": [
+        "dist/artplayer-plugin-document-pip.js",
+        "dist/artplayer-plugin-document-pip.legacy.js",
+        "dist/artplayer-plugin-document-pip.mjs",
+        "docs/compiled/artplayer-plugin-document-pip.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-hls-control",
+        "version": "1.1.0",
+        "description": "Hls control plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-hls-control.d.ts",
+            "import": "./dist/artplayer-plugin-hls-control.mjs",
+            "require": "./dist/artplayer-plugin-hls-control.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-hls-control.d.ts",
+            "import": "./dist/artplayer-plugin-hls-control.legacy.js",
+            "require": "./dist/artplayer-plugin-hls-control.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-hls-control.js",
+        "module": "./dist/artplayer-plugin-hls-control.mjs",
+        "types": "./types/artplayer-plugin-hls-control.d.ts",
+        "legacy": "./dist/artplayer-plugin-hls-control.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "710ec2a27dc71f7254e7a1d2eb7cff3f56a6e23811047ac97356f1b18c8ac8b5",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-hls-control.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-hls-control.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-hls-control.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-hls-control.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-hls-control.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-hls-control.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-hls-control.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-hls-control.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-hls-control.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-hls-control.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-hls-control.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-hls-control.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-hls-control.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-hls-control.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-hls-control.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-hls-control.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-hls-control.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-hls-control.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-hls-control.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-hls-control.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-hls-control.js",
+          "bytes": 3156,
+          "sha256": "7a6ce18a0b16f61f6149e0ea77efbb6e0503f997d39afe84271b59e366759e6d"
+        },
+        {
+          "path": "dist/artplayer-plugin-hls-control.legacy.js",
+          "bytes": 3182,
+          "sha256": "893a3de27f9ed02b4b61f03732aec03bfcaf50d02c9beb15cc8a5767ef9121a0"
+        },
+        {
+          "path": "dist/artplayer-plugin-hls-control.mjs",
+          "bytes": 5158,
+          "sha256": "5e665c994be0cd2c00538ac2e5f79e4fbda34083d4d04cccbe5d0047a9306f24"
+        },
+        {
+          "path": "types/artplayer-plugin-hls-control.d.ts",
+          "bytes": 403,
+          "sha256": "732ecca44e14061fe21b90860f6e02523374014a74c6a0977eff8708afbaff95"
+        }
+      ],
+      "sourceAssets": [
+        "src/audio.svg",
+        "src/quality.svg"
+      ],
+      "buildOutputs": [
+        "dist/artplayer-plugin-hls-control.js",
+        "dist/artplayer-plugin-hls-control.legacy.js",
+        "dist/artplayer-plugin-hls-control.mjs",
+        "docs/compiled/artplayer-plugin-hls-control.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-jassub",
+        "version": "1.1.0",
+        "description": "jassub plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-jassub.d.ts",
+            "import": "./dist/artplayer-plugin-jassub.mjs",
+            "require": "./dist/artplayer-plugin-jassub.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-jassub.d.ts",
+            "import": "./dist/artplayer-plugin-jassub.legacy.js",
+            "require": "./dist/artplayer-plugin-jassub.legacy.js"
+          }
+        },
+        "main": "dist/artplayer-plugin-jassub.js",
+        "module": "./dist/artplayer-plugin-jassub.mjs",
+        "types": "types/artplayer-plugin-jassub.d.ts",
+        "legacy": "dist/artplayer-plugin-jassub.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "fdbc6dd1441eb9bebc5bbec1a95a2105256febf56bb1160ca672646feb132be1",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "dist/artplayer-plugin-jassub.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-jassub.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-jassub.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-jassub.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "dist/artplayer-plugin-jassub.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-jassub.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "types/artplayer-plugin-jassub.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-jassub.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-jassub.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-jassub.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-jassub.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-jassub.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-jassub.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-jassub.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-jassub.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-jassub.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-jassub.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-jassub.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-jassub.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-jassub.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-jassub.js",
+          "bytes": 16231,
+          "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+        },
+        {
+          "path": "dist/artplayer-plugin-jassub.legacy.js",
+          "bytes": 16947,
+          "sha256": "0726c96bf0df2aab2662ac8973bb7676a0ca7f8e4cb806aa44cb3ec9de296e64"
+        },
+        {
+          "path": "dist/artplayer-plugin-jassub.mjs",
+          "bytes": 34349,
+          "sha256": "00a39303dd1eba1d78cf164e38dad359dc026bf57a3595175c48f30eb7f8f322"
+        },
+        {
+          "path": "types/artplayer-plugin-jassub.d.ts",
+          "bytes": 1015,
+          "sha256": "0c00ce8fd60780c7c01d23534c193cedd32898dc79739e7cf13d8700a6ab7676"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-plugin-jassub.js",
+        "dist/artplayer-plugin-jassub.legacy.js",
+        "dist/artplayer-plugin-jassub.mjs",
+        "docs/compiled/artplayer-plugin-jassub.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "version": "1.2.0",
+        "description": "multiple subtitles plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+            "import": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+            "require": "./dist/artplayer-plugin-multiple-subtitles.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+            "import": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+            "require": "./dist/artplayer-plugin-multiple-subtitles.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-multiple-subtitles.js",
+        "module": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+        "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+        "legacy": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "3f8b631444e51da259f86d6cc83095df788eb3c41843724ad2a35d8b896b985f",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-multiple-subtitles.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-multiple-subtitles.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-multiple-subtitles.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-multiple-subtitles.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-multiple-subtitles.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-multiple-subtitles.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-multiple-subtitles.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-multiple-subtitles.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-multiple-subtitles.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-multiple-subtitles.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-multiple-subtitles.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-multiple-subtitles.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-multiple-subtitles.js",
+          "bytes": 13433,
+          "sha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c"
+        },
+        {
+          "path": "dist/artplayer-plugin-multiple-subtitles.legacy.js",
+          "bytes": 14099,
+          "sha256": "0b17644827e5b199afe8293093c44bfda571821014ff5b087c7c918c630dcc18"
+        },
+        {
+          "path": "dist/artplayer-plugin-multiple-subtitles.mjs",
+          "bytes": 27666,
+          "sha256": "9c664c8410849d9ff0da1febf1b86357e326b879cb479c8df8d70a1847c97c90"
+        },
+        {
+          "path": "types/artplayer-plugin-multiple-subtitles.d.ts",
+          "bytes": 377,
+          "sha256": "ab5dae1d0bdfcf2515cb842b1d465edf21dd195fe2fc5b0cfe351a8c06eb965c"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-plugin-multiple-subtitles.js",
+        "dist/artplayer-plugin-multiple-subtitles.legacy.js",
+        "dist/artplayer-plugin-multiple-subtitles.mjs",
+        "docs/compiled/artplayer-plugin-multiple-subtitles.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-vast",
+        "version": "1.2.0",
+        "description": "VAST plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-vast.d.ts",
+            "import": "./dist/artplayer-plugin-vast.mjs",
+            "require": "./dist/artplayer-plugin-vast.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-vast.d.ts",
+            "import": "./dist/artplayer-plugin-vast.legacy.js",
+            "require": "./dist/artplayer-plugin-vast.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-vast.js",
+        "module": "./dist/artplayer-plugin-vast.mjs",
+        "types": "./types/artplayer-plugin-vast.d.ts",
+        "legacy": "./dist/artplayer-plugin-vast.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "@glomex/vast-ima-player": "^1.21.2"
+        }
+      },
+      "manifestSha256Lf": "615a17004252aa9301167a28d4b067f9d2866aa2392febad71c85cea02dbbd8e",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-vast.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vast.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-vast.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-vast.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-vast.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vast.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-vast.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-vast.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-vast.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-vast.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-vast.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-vast.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-vast.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vast.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-vast.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-vast.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-vast.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vast.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-vast.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vast.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-vast.js",
+          "bytes": 23307,
+          "sha256": "72842ae0b4a44e44a080f88783c0c9bcd0b572fa0e946d817b2c36d960a08bfe"
+        },
+        {
+          "path": "dist/artplayer-plugin-vast.legacy.js",
+          "bytes": 23571,
+          "sha256": "4b88cec8d12844d639cc7703f88703136a4fe586781d9939bf2e3a0c93b42b60"
+        },
+        {
+          "path": "dist/artplayer-plugin-vast.mjs",
+          "bytes": 31443,
+          "sha256": "5a66a4b40bbeaa47cb307f9a40935c1a0a73eee880b4df4a4580568df7162576"
+        },
+        {
+          "path": "types/artplayer-plugin-vast.d.ts",
+          "bytes": 953,
+          "sha256": "c99f260d5ea99924e78018c1e3da7f87097c3ae92443587213a63de84a3a20c1"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-plugin-vast.js",
+        "dist/artplayer-plugin-vast.legacy.js",
+        "dist/artplayer-plugin-vast.mjs",
+        "docs/compiled/artplayer-plugin-vast.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "version": "1.1.0",
+        "description": "vtt thumbnail plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+            "import": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
+            "require": "./dist/artplayer-plugin-vtt-thumbnail.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+            "import": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+            "require": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-vtt-thumbnail.js",
+        "module": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
+        "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+        "legacy": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "ed37ae39b73b67f6b6a9d43901ac11435f162e06d6a0a7b26c6614bcea0f9a38",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-plugin-vtt-thumbnail.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vtt-thumbnail.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-vtt-thumbnail.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vtt-thumbnail.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-vtt-thumbnail.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-vtt-thumbnail.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
+          "observedMatches": [
+            "dist/artplayer-plugin-vtt-thumbnail.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-plugin-vtt-thumbnail.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vtt-thumbnail.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+          "observedMatches": [
+            "types/artplayer-plugin-vtt-thumbnail.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vtt-thumbnail.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-plugin-vtt-thumbnail.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-plugin-vtt-thumbnail.js",
+          "bytes": 2325,
+          "sha256": "2d8e22cbd191bdac5a6c711b641590c2f8a90ba1aae185dd0e02a00baf000f8d"
+        },
+        {
+          "path": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+          "bytes": 2594,
+          "sha256": "ecbd0abe12c537687fb058de552c328c71ced71d911e454d0e37887192e9a291"
+        },
+        {
+          "path": "dist/artplayer-plugin-vtt-thumbnail.mjs",
+          "bytes": 4408,
+          "sha256": "1f3d0f2bcd68bf69a22fcc3023f1e6ffd4a154099597d899c317cd04a3c28d3b"
+        },
+        {
+          "path": "types/artplayer-plugin-vtt-thumbnail.d.ts",
+          "bytes": 271,
+          "sha256": "fcc44a4a5c6035a82b0207e3f042d95b4cc495698bed30a439c06c483b47dd70"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-plugin-vtt-thumbnail.js",
+        "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+        "dist/artplayer-plugin-vtt-thumbnail.mjs",
+        "docs/compiled/artplayer-plugin-vtt-thumbnail.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-proxy-canvas",
+        "version": "1.1.0",
+        "description": "canvas proxy for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-proxy-canvas.d.ts",
+            "import": "./dist/artplayer-proxy-canvas.mjs",
+            "require": "./dist/artplayer-proxy-canvas.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-proxy-canvas.d.ts",
+            "import": "./dist/artplayer-proxy-canvas.legacy.js",
+            "require": "./dist/artplayer-proxy-canvas.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-proxy-canvas.js",
+        "module": "./dist/artplayer-proxy-canvas.mjs",
+        "types": "./types/artplayer-proxy-canvas.d.ts",
+        "legacy": "./dist/artplayer-proxy-canvas.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "4df3a0098730cfc12232fc57066fd1f7159bbd41dce87904fa51f39b82252eed",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-proxy-canvas.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-canvas.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-proxy-canvas.mjs",
+          "observedMatches": [
+            "dist/artplayer-proxy-canvas.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-proxy-canvas.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-canvas.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-proxy-canvas.d.ts",
+          "observedMatches": [
+            "types/artplayer-proxy-canvas.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-proxy-canvas.d.ts",
+          "observedMatches": [
+            "types/artplayer-proxy-canvas.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-proxy-canvas.mjs",
+          "observedMatches": [
+            "dist/artplayer-proxy-canvas.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-proxy-canvas.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-canvas.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-proxy-canvas.d.ts",
+          "observedMatches": [
+            "types/artplayer-proxy-canvas.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-proxy-canvas.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-canvas.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-proxy-canvas.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-canvas.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-proxy-canvas.js",
+          "bytes": 1927,
+          "sha256": "ef489570e13f402f1a60eb256ce3900a0021a3d05699c2ba15adfaaeff184d4c"
+        },
+        {
+          "path": "dist/artplayer-proxy-canvas.legacy.js",
+          "bytes": 2210,
+          "sha256": "7d25f21170c06d067aeaa1c8e79b15f2c0130a27cff1b410532d6c4ef4d2d45f"
+        },
+        {
+          "path": "dist/artplayer-proxy-canvas.mjs",
+          "bytes": 3973,
+          "sha256": "406eb15d0194fadfcb2e9cb02aeb1281f1b0c42e66911106a3307c755b48e24c"
+        },
+        {
+          "path": "types/artplayer-proxy-canvas.d.ts",
+          "bytes": 283,
+          "sha256": "a6630a9412ae081d2ed2bff07dea3f3ae5563c0307add6c59aa6e11858ef918e"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-proxy-canvas.js",
+        "dist/artplayer-proxy-canvas.legacy.js",
+        "dist/artplayer-proxy-canvas.mjs",
+        "docs/compiled/artplayer-proxy-canvas.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-proxy-mediabunny",
+        "version": "1.2.0",
+        "description": "mediabunny proxy for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-proxy-mediabunny.d.ts",
+            "import": "./dist/artplayer-proxy-mediabunny.mjs",
+            "require": "./dist/artplayer-proxy-mediabunny.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-proxy-mediabunny.d.ts",
+            "import": "./dist/artplayer-proxy-mediabunny.legacy.js",
+            "require": "./dist/artplayer-proxy-mediabunny.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-proxy-mediabunny.js",
+        "module": "./dist/artplayer-proxy-mediabunny.mjs",
+        "types": "./types/artplayer-proxy-mediabunny.d.ts",
+        "legacy": "./dist/artplayer-proxy-mediabunny.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "mediabunny": "^1.43.1"
+        }
+      },
+      "manifestSha256Lf": "96b09ce19ea7914485aa9780329a0cfc43b18e38232ea1dd92d2e6dc27310055",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-proxy-mediabunny.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-mediabunny.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-proxy-mediabunny.mjs",
+          "observedMatches": [
+            "dist/artplayer-proxy-mediabunny.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-proxy-mediabunny.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-mediabunny.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-proxy-mediabunny.d.ts",
+          "observedMatches": [
+            "types/artplayer-proxy-mediabunny.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-proxy-mediabunny.d.ts",
+          "observedMatches": [
+            "types/artplayer-proxy-mediabunny.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-proxy-mediabunny.mjs",
+          "observedMatches": [
+            "dist/artplayer-proxy-mediabunny.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-proxy-mediabunny.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-mediabunny.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-proxy-mediabunny.d.ts",
+          "observedMatches": [
+            "types/artplayer-proxy-mediabunny.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-proxy-mediabunny.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-mediabunny.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-proxy-mediabunny.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-proxy-mediabunny.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-proxy-mediabunny.js",
+          "bytes": 370208,
+          "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd"
+        },
+        {
+          "path": "dist/artplayer-proxy-mediabunny.legacy.js",
+          "bytes": 390185,
+          "sha256": "327da5f1be221af6887efb4175c1b92e4e0c28838cae8107acca652a76bddccb"
+        },
+        {
+          "path": "dist/artplayer-proxy-mediabunny.mjs",
+          "bytes": 817627,
+          "sha256": "9dec2077358ccc7e085c5d511b3c507265e3ea764b7d497b87c0eba199236001"
+        },
+        {
+          "path": "types/artplayer-proxy-mediabunny.d.ts",
+          "bytes": 1975,
+          "sha256": "e9f4a88254590a7b1fff8a411519a28b15fe63af0a192fa77866be8bde62bc01"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-proxy-mediabunny.js",
+        "dist/artplayer-proxy-mediabunny.legacy.js",
+        "dist/artplayer-proxy-mediabunny.mjs",
+        "docs/compiled/artplayer-proxy-mediabunny.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-tool-iframe",
+        "version": "1.1.0",
+        "description": "Iframe tool for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-tool-iframe.d.ts",
+            "import": "./dist/artplayer-tool-iframe.mjs",
+            "require": "./dist/artplayer-tool-iframe.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-tool-iframe.d.ts",
+            "import": "./dist/artplayer-tool-iframe.legacy.js",
+            "require": "./dist/artplayer-tool-iframe.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-tool-iframe.js",
+        "module": "./dist/artplayer-tool-iframe.mjs",
+        "types": "./types/artplayer-tool-iframe.d.ts",
+        "legacy": "./dist/artplayer-tool-iframe.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "b28f5156f02a250539f0acaf302ec87fdd506f63b0e73dd308326ec78c691d03",
+      "declaredTargets": [
+        {
+          "field": "main",
+          "path": "./dist/artplayer-tool-iframe.js",
+          "observedMatches": [
+            "dist/artplayer-tool-iframe.js"
+          ]
+        },
+        {
+          "field": "module",
+          "path": "./dist/artplayer-tool-iframe.mjs",
+          "observedMatches": [
+            "dist/artplayer-tool-iframe.mjs"
+          ]
+        },
+        {
+          "field": "legacy",
+          "path": "./dist/artplayer-tool-iframe.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-tool-iframe.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "./types/artplayer-tool-iframe.d.ts",
+          "observedMatches": [
+            "types/artplayer-tool-iframe.d.ts"
+          ]
+        },
+        {
+          "field": "exports...types",
+          "path": "./types/artplayer-tool-iframe.d.ts",
+          "observedMatches": [
+            "types/artplayer-tool-iframe.d.ts"
+          ]
+        },
+        {
+          "field": "exports...import",
+          "path": "./dist/artplayer-tool-iframe.mjs",
+          "observedMatches": [
+            "dist/artplayer-tool-iframe.mjs"
+          ]
+        },
+        {
+          "field": "exports...require",
+          "path": "./dist/artplayer-tool-iframe.js",
+          "observedMatches": [
+            "dist/artplayer-tool-iframe.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.types",
+          "path": "./types/artplayer-tool-iframe.d.ts",
+          "observedMatches": [
+            "types/artplayer-tool-iframe.d.ts"
+          ]
+        },
+        {
+          "field": "exports../legacy.import",
+          "path": "./dist/artplayer-tool-iframe.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-tool-iframe.legacy.js"
+          ]
+        },
+        {
+          "field": "exports../legacy.require",
+          "path": "./dist/artplayer-tool-iframe.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-tool-iframe.legacy.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-tool-iframe.js",
+          "bytes": 2878,
+          "sha256": "2ec257c8055a9448d12af3fecf1fae8ba58c06f47e85072d02c386cd258b0c86"
+        },
+        {
+          "path": "dist/artplayer-tool-iframe.legacy.js",
+          "bytes": 3108,
+          "sha256": "c0755d79f316cda71f045da86749648f95faf47c09180d525fb04bb753576d5f"
+        },
+        {
+          "path": "dist/artplayer-tool-iframe.mjs",
+          "bytes": 4231,
+          "sha256": "138fcad1c66d7180728a209e99c600ca585f7d8be9f8cb757bfd6ec71b3f0bb7"
+        },
+        {
+          "path": "types/artplayer-tool-iframe.d.ts",
+          "bytes": 929,
+          "sha256": "becfcdba00b0275d3a7f00e46f57718685b711ff36fcf11d79271208b0492959"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-tool-iframe.js",
+        "dist/artplayer-tool-iframe.legacy.js",
+        "dist/artplayer-tool-iframe.mjs",
+        "docs/compiled/artplayer-tool-iframe.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "kind": "npm-library",
+      "manifest": {
+        "name": "artplayer-tool-thumbnail",
+        "version": "4.4.0",
+        "description": "Thumbnail tool for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "legacy": "dist/artplayer-tool-thumbnail.legacy.js",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          "import": "./dist/artplayer-tool-thumbnail.esm.js",
+          "require": "./dist/artplayer-tool-thumbnail.js",
+          "default": "./dist/artplayer-tool-thumbnail.js"
+        },
+        "module": "dist/artplayer-tool-thumbnail.esm.js",
+        "types": "types/artplayer-tool-thumbnail.d.ts",
+        "browserslist": "last 1 Chrome version"
+      },
+      "manifestSha256Lf": "9f4f9c6628ee48068f380bc52f4058c1f6aac31c20de6ed069a2c96ba635e23f",
+      "declaredTargets": [
+        {
+          "field": "module",
+          "path": "dist/artplayer-tool-thumbnail.esm.js",
+          "observedMatches": []
+        },
+        {
+          "field": "legacy",
+          "path": "dist/artplayer-tool-thumbnail.legacy.js",
+          "observedMatches": [
+            "dist/artplayer-tool-thumbnail.legacy.js"
+          ]
+        },
+        {
+          "field": "types",
+          "path": "types/artplayer-tool-thumbnail.d.ts",
+          "observedMatches": []
+        },
+        {
+          "field": "exports.import",
+          "path": "./dist/artplayer-tool-thumbnail.esm.js",
+          "observedMatches": []
+        },
+        {
+          "field": "exports.require",
+          "path": "./dist/artplayer-tool-thumbnail.js",
+          "observedMatches": [
+            "dist/artplayer-tool-thumbnail.js"
+          ]
+        },
+        {
+          "field": "exports.default",
+          "path": "./dist/artplayer-tool-thumbnail.js",
+          "observedMatches": [
+            "dist/artplayer-tool-thumbnail.js"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "path": "dist/artplayer-tool-thumbnail.js",
+          "bytes": 5984,
+          "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98"
+        },
+        {
+          "path": "dist/artplayer-tool-thumbnail.legacy.js",
+          "bytes": 5984,
+          "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98"
+        },
+        {
+          "path": "dist/artplayer-tool-thumbnail.mjs",
+          "bytes": 9293,
+          "sha256": "0610fc05d3f5b207280fffcd0024411b53964d669fb09241c464eeda88b10570"
+        }
+      ],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "dist/artplayer-tool-thumbnail.js",
+        "dist/artplayer-tool-thumbnail.legacy.js",
+        "dist/artplayer-tool-thumbnail.mjs",
+        "docs/compiled/artplayer-tool-thumbnail.{js,legacy.js,mjs} copied by root build"
+      ],
+      "distributionStatus": "Workspace inventory; per-package published contract remains required unless listed in releases.json."
+    },
+    {
+      "name": "artplayer-vitepress",
+      "kind": "documentation-site",
+      "manifest": {
+        "name": "artplayer-vitepress",
+        "version": "1.1.0",
+        "scripts": {
+          "dev": "vitepress dev docs",
+          "build": "vitepress build docs",
+          "preview": "vitepress preview docs"
+        },
+        "devDependencies": {
+          "flexsearch": "0.8.158",
+          "markdown-it": "14.1.0",
+          "vitepress": "1.6.3",
+          "vitepress-plugin-search": "1.0.4-alpha.22",
+          "vue": "3.5.13"
+        }
+      },
+      "manifestSha256Lf": "c3abb8ad7bf8168bf7891f96e0fdda537882fa2f242dcad8926a307ad2558ced",
+      "declaredTargets": [],
+      "resources": [],
+      "sourceAssets": [],
+      "buildOutputs": [
+        "docs/document/** via vitepress outDir"
+      ],
+      "distributionStatus": "Actual workflow builds a static site; no library entrypoints. Manifest lacks private:true; publication intent needs SITE/REL confirmation, not an automatic npm release."
+    }
+  ]
+}

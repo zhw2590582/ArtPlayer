@@ -40,3 +40,7 @@ BASE-03 已在内置浏览器实测播放推进、暂停/seek/切源、事件及
 ## DOM 与官方示例路径
 
 BASE-04 已在内置浏览器完成两轮 16 项 DOM/样式/实际输入断言。见 [覆盖/复现/历史问题](dom-coverage.md)、[冻结报告](dom.json) 和 [29 示例/36 HTML/22 包路径](demo-inventory.json)。轻量夹具通过不代表 Monaco 或所有官方示例已验证。
+
+## 分发、类型与 SSR 消费
+
+BASE-05 的 [覆盖/复跑/历史诊断](consumer-coverage.md) 包含 18 项 Node runtime、16 项严格 TS 场景和浏览器两轮各 5 项 SSR 检查。[消费者](consumers.json)、[SSR](ssr.json)、[22 包资源](distribution.json) 分别记录已发布内容与工作区观察。8 项类型历史失败保持显式，不能计作候选通过。
