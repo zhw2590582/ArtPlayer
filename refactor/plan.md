@@ -1,0 +1,372 @@
+# 完整重构执行计划表
+
+> 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
+
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 191 项，范围 22 个包及工作区/示例。
+
+状态：todo 186 / doing 0 / blocked 0 / done 5 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+
+前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
+
+每项实施任务同时适用[全项目质量要求](quality-contract.md)：清晰拆分职责和依赖，主动改善不合理设计，以有效测试证明旧接口兼容，并同步维护后续 AI 可接续的包内文档。
+
+## 包覆盖索引
+
+| 包 | 基线版本 | 任务 |
+| --- | --- | --- |
+| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-22 |
+| artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
+| artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06 |
+| artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06 |
+| artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06 |
+| artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06 |
+| artplayer-plugin-chapter | 1.1.0 | PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06 |
+| artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
+| artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09 |
+| artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06 |
+| artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-05, PKG-DASH-06 |
+| artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
+| artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-05, PKG-HLS-06 |
+| artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06 |
+| artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06 |
+| artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06 |
+| artplayer-plugin-vtt-thumbnail | 1.1.0 | PKG-VTT-THUMB-01, PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
+| artplayer-proxy-canvas | 1.1.0 | PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06 |
+| artplayer-proxy-mediabunny | 1.2.0 | PKG-MB-01, PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-08, PKG-MB-09, PKG-MB-10 |
+| artplayer-tool-iframe | 1.1.0 | PKG-IFRAME-01, PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-04, PKG-IFRAME-05, PKG-IFRAME-06 |
+| artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
+| artplayer-vitepress | 1.1.0 | SITE-01, SITE-02, SITE-03, SITE-04, SITE-05, SITE-06 |
+
+## 0 规划
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| DOC-01 | workspace<br>创建兼容重构分支 | - | 独立本地分支和起点 SHA | 分支由干净 master 创建，起点可追溯 | L | done |
+| DOC-02 | workspace<br>清点全部包与消费者 | DOC-01 | package-inventory.json | 22 包及 React/Vue/demo 有明确清单 | L | done |
+| DOC-03 | workspace<br>建立计划、契约、决策和协作记录 | DOC-02 | refactor 文档集与任务数据 | 每包有独立步骤、依赖、交付物和验收条件 | L | done |
+| DOC-04 | workspace<br>验证文档完整性与生成表 | DOC-03 | 计划生成校验工具、AGENTS 入口 | 依赖无环、包覆盖、生成同步、文档链接通过 | L | done |
+| DOC-05 | workspace<br>建立每任务提交规则并提交文档基线 | DOC-04 | 根指令、质量要求、AI 流程、变更记录与初始文档提交 | 文档与计划检查通过，独立 DOC-05 commit 保存本次交付；提交后核实 SHA 和工作区 | L | done |
+
+## 1 基线
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| BASE-01 | workspace<br>固定消费者发布基线 | DOC-05 | 各包 npm tarball/integrity、源码 SHA、历史支持矩阵 | 区分源码版本与实际已发布版本，最低核心/TS/浏览器支持有证据 | H | todo |
+| BASE-02 | workspace<br>捕获公共 API 和属性描述符 | BASE-01 | 构造参数/默认值/静态及实例 API 快照 | 真实发布包反射与旧用户调用可重跑，未验证项明确 | H | todo |
+| BASE-03 | workspace<br>捕获事件、异步和生命周期 | BASE-02 | ready/restart/destroy、Promise、切源/插件事件 trace | 成功、失败、重入和多实例有断言，历史缺陷有标记 | H | todo |
+| BASE-04 | workspace<br>捕获 DOM、CSS 和官方 demo | BASE-02 | 模板/类名/变量及全部 demo 映射 | 用户样式覆盖、移动端与自定义 controls/setting 用法已记录 | M | todo |
+| BASE-05 | workspace<br>捕获包入口、资源和类型消费 | BASE-01 | UMD/AMD/ESM/CJS/legacy/i18n、worker/WASM/字体路径矩阵 | 隔离消费者验证入口，记录 thumbnail tool 等不一致 | H | todo |
+| BASE-06 | workspace<br>记录性能与资源基线 | BASE-03, BASE-04 | 固定媒体/设备测量、包体积、反复装卸资源报告 | 多次采样可重跑，指标和审查阈值确定，不承诺未经测量的收益 | M | todo |
+| BASE-07 | workspace<br>建立差异和风险台账 | BASE-03, BASE-05 | 销毁/切源/类型差异、vendored 许可和外部 SDK 清单 | 已确认与待复现分开，每项有负责任务及兼容处理路线 | H | todo |
+
+## 2 工程保障
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| ENG-01 | workspace<br>固定 Node、包管理器与依赖 | BASE-01 | 版本 pin、唯一锁文件、安装说明 | 干净环境可复现，最低 Node 与构建依赖一致，未夹带全量升级 | M | todo |
+| ENG-02 | workspace<br>拆分只读检查并建立 PR CI | ENG-01 | lint/lint:fix、PR 与主线检查、独立部署任务 | 检查不改源码、不发布，失败阻止合并；必要 required check 有配置证据 | M | todo |
+| ENG-03 | workspace<br>建立公共行为与单元测试入口 | ENG-02, BASE-03 | 保留现有 node:test，测试目录/夹具/统一入口 | 已有 19 项回归保留，旧版与候选可用同一夹具运行 | M | todo |
+| ENG-04 | workspace<br>建立类型测试基础 | ENG-02, BASE-05 | 根与分包 tsconfig、显式 TS 依赖、正反例测试 | 隔离 DOM/Node/worker 类型，最低和选定当前 TS 验证声明消费 | M | todo |
+| ENG-05 | workspace<br>建立真实浏览器测试服务 | ENG-03, BASE-04 | Playwright projects、本地 Range/失败媒体服务 | Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行 | M | todo |
+| ENG-06 | workspace<br>支持按包非交互与 JS/TS 构建 | ENG-02, BASE-05 | build/dev 入口解析、指定包参数、原交互保留 | 三种产物、Less/SVG/worker 和本地 8082 demo 正常 | H | todo |
+| ENG-07 | workspace<br>建立 tarball 消费与产物检查 | ENG-04, ENG-06 | 隔离 npm 消费 fixtures、API/声明/入口差分 | 不借 workspace 源码通过，能识别缺文件与默认导出变化 | H | todo |
+| ENG-08 | workspace<br>增加覆盖率、资源与性能报告 | ENG-03, ENG-05, BASE-06 | 覆盖率基线、资源清理断言、性能报告与阈值 | 关键生命周期分支有门槛，报告不靠无意义断言堆数量 | M | todo |
+| ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04 | 共享核心/构建影响映射、计划文档检查接入 | 核心变化触发全生态必需检查，新增包不会漏计划 | M | todo |
+
+## 3-4 核心迁移
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| CORE-01 | artplayer<br>迁移纯工具并冻结导出 | ENG-03, ENG-04, ENG-06 | utils/time/property/format/file/error/subtitle 的分批 TS 迁移 | Artplayer.utils 导出/参数/绑定保持，纯逻辑与类型测试通过 | M | todo |
+| CORE-02 | artplayer<br>迁移内部 Emitter | CORE-01, BASE-03 | 带类型事件映射的原 Emitter 实现 | ctx、once/off、重入/异常和链式返回保持 | H | todo |
+| CORE-03 | artplayer<br>建立内部资源作用域 | CORE-02 | 监听/订阅/定时器/RAF/请求/URL 的资源登记 | 实例与操作作用域分离，单项清理失败不阻断其他资源 | H | todo |
+| CORE-04 | artplayer<br>修复初始化与销毁生命周期 | CORE-03, ENG-05, BASE-07 | 构造失败回收、重复/重入 destroy、instances 修复 | 事件顺序、removeHtml、多实例和销毁中异步有真实回归 | H | todo |
+| CORE-05 | artplayer<br>区分输入配置和内部配置 | CORE-01, ENG-04 | Option/ResolvedOption、默认值与校验整理 | 配置合并/错误时机不变，JS 输入仍运行时校验 | M | todo |
+| CORE-06 | artplayer<br>建立内部媒体与宿主类型 | CORE-05 | 原生 video、canvas shim、UI host 类型 | 不更改公开 art.video 用法，不以 HTMLVideoElement 断言掩盖 shim | M | todo |
+| CORE-07 | artplayer<br>逐项协调公开声明差异 | CORE-02, CORE-06, BASE-07 | plugins/toggle/cue/setting/static 的旧新类型对照 | 每项有兼容重载/扩展或待决结论，不能删除旧类型样例 | H | todo |
+| CORE-08 | artplayer<br>整理插件管理器与扩展类型 | CORE-03, CORE-07 | 注册流程、同步/异步结果、插件/事件扩展接口 | 旧插件同步可见性、重名与命名、销毁中异步插件保持明确语义 | H | todo |
+| CORE-09 | artplayer<br>整理 URL 与切源操作 | CORE-04, CORE-06, CORE-08 | url/switch/customType 的操作身份及取消方案 | 并发切源、错误、同 URL、销毁和 Promise 结算有契约 | H | todo |
+| CORE-10 | artplayer<br>迁移播放与时间/状态属性 | CORE-09 | play/pause/toggle/seek/volume/rate/duration 等模块 | 旧返回值、拒绝、mutex、位置恢复、属性描述符与事件通过 | H | todo |
+| CORE-11 | artplayer<br>整理媒体事件、ready 与重连 | CORE-10 | 媒体转发、重连、UI 响应职责分离 | readiness 次数/顺序、过期重连、原错误参数有回归 | H | todo |
+| CORE-12 | artplayer<br>迁移模板及公开资源入口 | CORE-06, CORE-04, BASE-04 | template/icons/i18n/style、SSR 与 proxy 挂载 | DOM/CSS/global/样式注入、i18n 子路径及 SSR import 保持 | H | todo |
+| CORE-13 | artplayer<br>迁移组件注册与控件 | CORE-12, CORE-08 | Component/control/layer/contextmenu 的资源与 TS 边界 | add/update/remove、name、selector、mounted/beforeUnmount 通过 | H | todo |
+| CORE-14 | artplayer<br>拆分设置树、渲染和布局 | CORE-13 | setting model/selection/render/layout 的分批实现 | 不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过 | H | todo |
+| CORE-15 | artplayer<br>迁移字幕获取、解析和渲染 | CORE-11, CORE-13 | subtitle 请求/track/DOM/URL 生命周期与类型 | 过期结果、偏移、cue 数组、原生全屏及错误路径通过 | H | todo |
+| CORE-16 | artplayer<br>迁移全屏、PiP、mini 与尺寸模式 | CORE-11, CORE-12 | 显示模式服务和原公开属性门面 | 模式互斥/恢复位置、手势权限、移动方向和退出失败通过 | H | todo |
+| CORE-17 | artplayer<br>迁移键盘、手势、焦点和全局事件 | CORE-13, CORE-16 | events/hotkey 的明确 document 与资源归属 | 跨 document 重绑、触摸/键盘、快捷键及销毁无重复响应 | H | todo |
+| CORE-18 | artplayer<br>迁移内置插件和提示模块 | CORE-14, CORE-16, CORE-17 | autoPlayback/autoOrientation/fastForward/lock/miniProgressBar 及 info/notice/loading/mask | 默认启用条件、storage 格式、定时器/动画清理通过 | M | todo |
+| CORE-19 | artplayer<br>整理进度、质量、缩略图和截图 | CORE-10, CORE-13, CORE-16 | 相关 player/control 功能与纯计算分离 | 截图跨域失败、缩略图布局、quality/进度边界保持 | M | todo |
+| CORE-20 | artplayer<br>收敛核心入口与依赖方向 | CORE-14, CORE-15, CORE-18, CORE-19 | Artplayer 门面、初始化依赖与最终目录 | 所有核心自有源码迁移，公开描述符/静态接口/事件差分通过 | H | todo |
+| CORE-21 | artplayer<br>生成核心声明并校验包内容 | CORE-20, ENG-07 | 由 TS 生成的既有入口声明与三种发布产物 | 内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过 | H | todo |
+| CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, PKG-CHAPTER-04 | 旧插件对候选核心的完整回归与资源/性能报告 | 公开兼容差异有结论，核心测试和简单插件试点通过 | H | todo |
+
+## 5 包迁移：artplayer-plugin-chapter
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-CHAPTER-01 | artplayer-plugin-chapter<br>核对包契约与历史用法 | BASE-05 | chapters 时间区间、update、name 和进度 DOM 清单 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | M | todo |
+| PKG-CHAPTER-02 | artplayer-plugin-chapter<br>建立特有行为与错误测试 | PKG-CHAPTER-01, ENG-03, ENG-05 | 区间重叠/空列表/边界 seek、hover 标题和 update 用例 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | M | todo |
+| PKG-CHAPTER-03 | artplayer-plugin-chapter<br>整理内部职责与资源 | PKG-CHAPTER-02, CORE-14, CORE-08 | 拆分时间区间计算、进度 DOM、事件与布局 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | todo |
+| PKG-CHAPTER-04 | artplayer-plugin-chapter<br>迁移自有源码和公开类型 | PKG-CHAPTER-03, ENG-04, ENG-06, CORE-07 | Chapters/Option/Result 与 update 推导，先做简单插件 TS 试点 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | todo |
+| PKG-CHAPTER-05 | artplayer-plugin-chapter<br>验证新旧核心和组合 | PKG-CHAPTER-04, CORE-22 | chapter + quality/thumbnail、移动和全屏进度场景 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
+| PKG-CHAPTER-06 | artplayer-plugin-chapter<br>验证分发并同步文档 | PKG-CHAPTER-05, ENG-07 | chapter.js 示例、产物和变更记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
+
+## 5 包迁移：artplayer-plugin-ambilight
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-AMBILIGHT-01 | artplayer-plugin-ambilight<br>核对包契约与历史用法 | BASE-05 | blur/opacity/frequency/duration、start/stop 与挂载样式 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | M | todo |
+| PKG-AMBILIGHT-02 | artplayer-plugin-ambilight<br>建立特有行为与错误测试 | PKG-AMBILIGHT-01, ENG-03, ENG-05 | 跨域 canvas 失败、零尺寸、暂停、重复 start/stop 和 destroy | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | M | todo |
+| PKG-AMBILIGHT-03 | artplayer-plugin-ambilight<br>整理内部职责与资源 | PKG-AMBILIGHT-02, CORE-03, CORE-12 | 取色计算与绘帧分离，统一 RAF 和 DOM 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | todo |
+| PKG-AMBILIGHT-04 | artplayer-plugin-ambilight<br>迁移自有源码和公开类型 | PKG-AMBILIGHT-03, ENG-04, ENG-06, CORE-07 | canvas 上下文、参数及 start/stop 的明确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | todo |
+| PKG-AMBILIGHT-05 | artplayer-plugin-ambilight<br>验证新旧核心和组合 | PKG-AMBILIGHT-04, CORE-22 | 原生 video、canvas proxy 的能力边界及销毁无帧循环 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
+| PKG-AMBILIGHT-06 | artplayer-plugin-ambilight<br>验证分发并同步文档 | PKG-AMBILIGHT-05, ENG-07 | ambilight.js 示例及样式/分发验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
+
+## 5 包迁移：artplayer-plugin-audio-track
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-AUDIO-01 | artplayer-plugin-audio-track<br>核对包契约与历史用法 | BASE-05 | url/offset/sync、audio 实例暴露、update 与音量语义 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-AUDIO-02 | artplayer-plugin-audio-track<br>建立特有行为与错误测试 | PKG-AUDIO-01, ENG-03, ENG-05 | 偏移、倍率、seek、waiting/playing、加载错误和 autoplay 拒绝 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-AUDIO-03 | artplayer-plugin-audio-track<br>整理内部职责与资源 | PKG-AUDIO-02, CORE-10 | 外部 audio 的同步策略、监听与源更新生命周期 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-AUDIO-04 | artplayer-plugin-audio-track<br>迁移自有源码和公开类型 | PKG-AUDIO-03, ENG-04, ENG-06, CORE-07 | Option/Result/audio、update 输入和事件类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-AUDIO-05 | artplayer-plugin-audio-track<br>验证新旧核心和组合 | PKG-AUDIO-04, CORE-22 | 主视频切源和缓冲恢复，多实例独立音频、旧核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-AUDIO-06 | artplayer-plugin-audio-track<br>验证分发并同步文档 | PKG-AUDIO-05, ENG-07 | audio.track.js 示例与运行返回值一致的声明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-auto-thumbnail
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-AUTO-THUMB-01 | artplayer-plugin-auto-thumbnail<br>核对包契约与历史用法 | BASE-05 | url/width/number/scale、异步工厂和渐进缩略图更新 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-AUTO-THUMB-02 | artplayer-plugin-auto-thumbnail<br>建立特有行为与错误测试 | PKG-AUTO-THUMB-01, ENG-03, ENG-05 | 抽帧边界、短视频、失败、连续来源和销毁中的抽帧 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-AUTO-THUMB-03 | artplayer-plugin-auto-thumbnail<br>整理内部职责与资源 | PKG-AUTO-THUMB-02, CORE-09, CORE-19 | 隐藏 video、seek 队列、canvas 编码与 Blob URL 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-AUTO-THUMB-04 | artplayer-plugin-auto-thumbnail<br>迁移自有源码和公开类型 | PKG-AUTO-THUMB-03, ENG-04, ENG-06, CORE-07 | 抽帧结果和真实异步插件返回类型兼容 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-AUTO-THUMB-05 | artplayer-plugin-auto-thumbnail<br>验证新旧核心和组合 | PKG-AUTO-THUMB-04, CORE-22 | 旧核心/候选核心预览、多次加载无过期缩略图覆盖 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-AUTO-THUMB-06 | artplayer-plugin-auto-thumbnail<br>验证分发并同步文档 | PKG-AUTO-THUMB-05, ENG-07 | auto.thumbnail.js、三种产物和内存/URL 证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-vtt-thumbnail
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-VTT-THUMB-01 | artplayer-plugin-vtt-thumbnail<br>核对包契约与历史用法 | BASE-05 | vtt/style、异步返回、预览控件名与样式契约 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | M | todo |
+| PKG-VTT-THUMB-02 | artplayer-plugin-vtt-thumbnail<br>建立特有行为与错误测试 | PKG-VTT-THUMB-01, ENG-03, ENG-05 | VTT 解析、xywh、相对 URL、时间边界、请求失败和定位 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | M | todo |
+| PKG-VTT-THUMB-03 | artplayer-plugin-vtt-thumbnail<br>整理内部职责与资源 | PKG-VTT-THUMB-02, CORE-09, CORE-19 | 纯解析/区间查找与 DOM、请求/定时器生命周期分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | todo |
+| PKG-VTT-THUMB-04 | artplayer-plugin-vtt-thumbnail<br>迁移自有源码和公开类型 | PKG-VTT-THUMB-03, ENG-04, ENG-06, CORE-07 | cue/rect/result 和参数可选性保持兼容 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | todo |
+| PKG-VTT-THUMB-05 | artplayer-plugin-vtt-thumbnail<br>验证新旧核心和组合 | PKG-VTT-THUMB-04, CORE-22 | 鼠标和移动进度、全屏、切源、chapter 组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
+| PKG-VTT-THUMB-06 | artplayer-plugin-vtt-thumbnail<br>验证分发并同步文档 | PKG-VTT-THUMB-05, ENG-07 | vtt.thumbnail.js、VTT/图片资源解析和产物验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
+
+## 5 包迁移：artplayer-plugin-hls-control
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-HLS-01 | artplayer-plugin-hls-control<br>核对包契约与历史用法 | BASE-05 | quality/audio 配置、getName、update、控件名及 Hls 实例绑定 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-HLS-02 | artplayer-plugin-hls-control<br>建立特有行为与错误测试 | PKG-HLS-01, ENG-03, ENG-05 | Auto/手动实际 level、音轨、去重/过滤和拓扑变化 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-HLS-03 | artplayer-plugin-hls-control<br>整理内部职责与资源 | PKG-HLS-02, CORE-11, CORE-14 | 映射计算与 selector 更新/删除、Hls 事件订阅分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-HLS-04 | artplayer-plugin-hls-control<br>迁移自有源码和公开类型 | PKG-HLS-03, ENG-04, ENG-06, CORE-07 | HLS 能力适配类型、回调上下文和旧 getName 参数 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-HLS-05 | artplayer-plugin-hls-control<br>验证新旧核心和组合 | PKG-HLS-04, CORE-22 | 本地多码率 HLS、换成无轨道来源、旧核心和最终核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-HLS-06 | artplayer-plugin-hls-control<br>验证分发并同步文档 | PKG-HLS-05, ENG-07 | hls.control.js、依赖范围与回退记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-dash-control
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-DASH-01 | artplayer-plugin-dash-control<br>核对包契约与历史用法 | BASE-05 | quality/audio、representation ID/Auto、getName 和 update | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-DASH-02 | artplayer-plugin-dash-control<br>建立特有行为与错误测试 | PKG-DASH-01, ENG-03, ENG-05 | 保留已有 5 项回归，补音轨/空列表/过滤/换源 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-DASH-03 | artplayer-plugin-dash-control<br>整理内部职责与资源 | PKG-DASH-02, CORE-11, CORE-14 | 稳定 ID 映射、ABR 状态与 UI 清理职责分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-DASH-04 | artplayer-plugin-dash-control<br>迁移自有源码和公开类型 | PKG-DASH-03, ENG-04, ENG-06, CORE-07 | dash.js adapter、selector 和回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-DASH-05 | artplayer-plugin-dash-control<br>验证新旧核心和组合 | PKG-DASH-04, CORE-22 | 本地 DASH 实际 representation、高亮、恢复 Auto 和换源 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-DASH-06 | artplayer-plugin-dash-control<br>验证分发并同步文档 | PKG-DASH-05, ENG-07 | dash.control.js、支持的 dash.js 版本与产物 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-multiple-subtitles
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-MULTI-SUB-01 | artplayer-plugin-multiple-subtitles<br>核对包契约与历史用法 | BASE-05 | subtitles/onParser、multipleSubtitles 名称及实际返回方法 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-MULTI-SUB-02 | artplayer-plugin-multiple-subtitles<br>建立特有行为与错误测试 | PKG-MULTI-SUB-01, ENG-03, ENG-05 | VTT/SRT/ASS、编码/重叠 cue/排序/空轨/失败与切换 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-MULTI-SUB-03 | artplayer-plugin-multiple-subtitles<br>整理内部职责与资源 | PKG-MULTI-SUB-02, CORE-15 | 解析与合并/获取/渲染分离，过期请求及对象 URL 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-MULTI-SUB-04 | artplayer-plugin-multiple-subtitles<br>迁移自有源码和公开类型 | PKG-MULTI-SUB-03, ENG-04, ENG-06, CORE-07 | 准确 parser/cue/tree/result 类型与真实异步形状 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-jassub
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-JASSUB-01 | artplayer-plugin-jassub<br>核对包契约与历史用法 | BASE-05 | 选项透传、result.instance、vendor 来源、worker/WASM/font 路径 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-JASSUB-02 | artplayer-plugin-jassub<br>建立特有行为与错误测试 | PKG-JASSUB-01, ENG-03, ENG-05 | ASS 字体、时钟/seek/倍率/resize、加载失败和销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-JASSUB-03 | artplayer-plugin-jassub<br>整理内部职责与资源 | PKG-JASSUB-02, CORE-15, CORE-16 | 仅整理自有 adapter/销毁；保留第三方文件及来源 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-JASSUB-04 | artplayer-plugin-jassub<br>迁移自有源码和公开类型 | PKG-JASSUB-03, ENG-04, ENG-06, CORE-07 | JASSUB option/instance 的兼容类型包装，vendor JS 例外记录 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-JASSUB-05 | artplayer-plugin-jassub<br>验证新旧核心和组合 | PKG-JASSUB-04, CORE-22 | 真实 worker/WASM 字幕渲染与全屏、旧核心测试 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-JASSUB-06 | artplayer-plugin-jassub<br>验证分发并同步文档 | PKG-JASSUB-05, ENG-07 | jassub.js、外部资源路径、许可和离线失败记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-danmuku-mask
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-MASK-01 | artplayer-plugin-danmuku-mask<br>核对包契约与历史用法 | BASE-05 | 模型参数、start/stop、默认下载路径及 mask 样式 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-MASK-02 | artplayer-plugin-danmuku-mask<br>建立特有行为与错误测试 | PKG-MASK-01, ENG-03, ENG-05 | 加载期间停止/销毁、重复启动、推理失败、WebGL/CPU 边界 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-MASK-03 | artplayer-plugin-danmuku-mask<br>整理内部职责与资源 | PKG-MASK-02, CORE-18, PKG-DANMUKU-07 | 模型加载/推理/画布输出分离，阻止重叠推理与过期写入 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-MASK-04 | artplayer-plugin-danmuku-mask<br>迁移自有源码和公开类型 | PKG-MASK-03, ENG-04, ENG-06, CORE-07 | 模型 adapter、canvas 和选项的精确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-MASK-05 | artplayer-plugin-danmuku-mask<br>验证新旧核心和组合 | PKG-MASK-04, CORE-22 | 真实模型和 danmuku/seek/全屏组合，GPU 资源释放 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-MASK-06 | artplayer-plugin-danmuku-mask<br>验证分发并同步文档 | PKG-MASK-05, ENG-07 | danmuku.mask.js、资源版本/许可、CPU fallback 和包体积证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-asr
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-ASR-01 | artplayer-plugin-asr<br>核对包契约与历史用法 | BASE-05 | length/interval/sampleRate/onAudioChunk、append/hide/stop 的真实能力 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-ASR-02 | artplayer-plugin-asr<br>建立特有行为与错误测试 | PKG-ASR-01, ENG-03, ENG-05 | PCM/WAV、chunk 时序、回调慢/拒绝、重复初始化与停止 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-ASR-03 | artplayer-plugin-asr<br>整理内部职责与资源 | PKG-ASR-02, CORE-10, CORE-18 | AudioContext/Worklet/Stream 生命周期和背压分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-ASR-04 | artplayer-plugin-asr<br>迁移自有源码和公开类型 | PKG-ASR-03, ENG-04, ENG-06, CORE-07 | 主线程/Worklet/音频 buffer 与异步回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-ASR-05 | artplayer-plugin-asr<br>验证新旧核心和组合 | PKG-ASR-04, CORE-22 | 真实 WebAudio 分块、播放暂停/切源/销毁，不引入网络 ASR | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-ASR-06 | artplayer-plugin-asr<br>验证分发并同步文档 | PKG-ASR-05, ENG-07 | asr.js、Worklet 资源、输出格式与声明证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-ads
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-ADS-01 | artplayer-plugin-ads<br>核对包契约与历史用法 | BASE-05 | 核对 html/video/url 与 source/type 声明差异，结果方法和倒计时 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-ADS-02 | artplayer-plugin-ads<br>建立特有行为与错误测试 | PKG-ADS-01, ENG-03, ENG-05 | 视频/HTML/图片实际支持路径、跳过阈值、暂停恢复、加载失败 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-ADS-03 | artplayer-plugin-ads<br>整理内部职责与资源 | PKG-ADS-02, CORE-10, CORE-13 | 广告状态/计时/视图/主视频恢复分离，不改变广告产品规则 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-ADS-04 | artplayer-plugin-ads<br>迁移自有源码和公开类型 | PKG-ADS-03, ENG-04, ENG-06, CORE-07 | 旧参数契约和真实返回方法的兼容类型；错误声明单独处理 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-ADS-05 | artplayer-plugin-ads<br>验证新旧核心和组合 | PKG-ADS-04, CORE-22 | 本地广告 fixture、多实例、正常结束/跳过/销毁恢复内容 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-ADS-06 | artplayer-plugin-ads<br>验证分发并同步文档 | PKG-ADS-05, ENG-07 | ads.js、README/类型一致性、旧参数保留与变更日志 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-vast
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-VAST-01 | artplayer-plugin-vast<br>核对包契约与历史用法 | BASE-05 | 异步工厂、callback context、playUrl/playRes/init 与 SDK 版本 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-VAST-02 | artplayer-plugin-vast<br>建立特有行为与错误测试 | PKG-VAST-01, ENG-03, ENG-05 | SDK 失败、重复初始化、广告事件、内容恢复和销毁竞态 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-VAST-03 | artplayer-plugin-vast<br>整理内部职责与资源 | PKG-VAST-02, CORE-10, CORE-13 | SDK loader、IMA adapter、广告状态和 DOM 清理分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-VAST-04 | artplayer-plugin-vast<br>迁移自有源码和公开类型 | PKG-VAST-03, ENG-04, ENG-06, CORE-07 | IMA/context/Promise 真实类型，外部 SDK 动态对象限定边界 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-VAST-05 | artplayer-plugin-vast<br>验证新旧核心和组合 | PKG-VAST-04, CORE-22 | 官方测试广告或受控 SDK 环境，错误后主视频状态恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-VAST-06 | artplayer-plugin-vast<br>验证分发并同步文档 | PKG-VAST-05, ENG-07 | vast.js、SDK 资源、声明消费和独立版本记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-chromecast
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-CAST-01 | artplayer-plugin-chromecast<br>核对包契约与历史用法 | BASE-05 | url/sdk/icon/mimeType、loader、会话、全局 SDK 与结果 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-CAST-02 | artplayer-plugin-chromecast<br>建立特有行为与错误测试 | PKG-CAST-01, ENG-03, ENG-05 | SDK 脚本加载失败/重入、无设备/拒绝、重复实例与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-CAST-03 | artplayer-plugin-chromecast<br>整理内部职责与资源 | PKG-CAST-02, CORE-11, CORE-13 | SDK singleton/实例订阅/会话与控件职责分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-CAST-04 | artplayer-plugin-chromecast<br>迁移自有源码和公开类型 | PKG-CAST-03, ENG-04, ENG-06, CORE-07 | Cast 能力 adapter、全局对象和元数据类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-CAST-05 | artplayer-plugin-chromecast<br>验证新旧核心和组合 | PKG-CAST-04, CORE-22 | stub 测试之外记录实际 Cast 设备会话、源更新和断开 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-CAST-06 | artplayer-plugin-chromecast<br>验证分发并同步文档 | PKG-CAST-05, ENG-07 | chromecast.js、SDK URL/权限能力及待支持环境说明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-document-pip
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-DPIP-01 | artplayer-plugin-document-pip<br>核对包契约与历史用法 | BASE-05 | width/height/placeholder/fallbackToVideoPiP、open/close/toggle 返回 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-DPIP-02 | artplayer-plugin-document-pip<br>建立特有行为与错误测试 | PKG-DPIP-01, ENG-03, ENG-05 | 不支持/拒绝、重复打开、pagehide、核心销毁和视频 PiP fallback | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-DPIP-03 | artplayer-plugin-document-pip<br>整理内部职责与资源 | PKG-DPIP-02, CORE-16, CORE-17 | 窗口生命周期、DOM 迁移、样式与事件 document 重绑分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-DPIP-04 | artplayer-plugin-document-pip<br>迁移自有源码和公开类型 | PKG-DPIP-03, ENG-04, ENG-06, CORE-07 | Document PiP 可选能力和真实状态/返回类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-DPIP-05 | artplayer-plugin-document-pip<br>验证新旧核心和组合 | PKG-DPIP-04, CORE-22 | 原生视频及两个 proxy、键盘/焦点/全屏与关闭还原 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-DPIP-06 | artplayer-plugin-document-pip<br>验证分发并同步文档 | PKG-DPIP-05, ENG-07 | document.pip.js、浏览器能力矩阵、旧接口与恢复证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-plugin-danmuku
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-DANMUKU-01 | artplayer-plugin-danmuku<br>核对弹幕全部公开契约 | BASE-05 | emit/load/config/hide/show/reset/mount、option/isHide/isStop/icons 与事件清单 | 源码、声明、发布包、Bilibili 输入和设置入口对照 | H | todo |
+| PKG-DANMUKU-02 | artplayer-plugin-danmuku<br>建立弹幕算法与浏览器基线 | PKG-DANMUKU-01, ENG-05, ENG-08 | 密集/稀疏弹幕、过滤/异步输入、seek/倍率/重载测试 | 轨道选择、发射顺序、事件、内存和可视结果可重跑 | H | todo |
+| PKG-DANMUKU-03 | artplayer-plugin-danmuku<br>整理加载、解析与配置 | PKG-DANMUKU-02, CORE-08 | bilibili/input/parser/config 的分层与取消 | 旧格式、回调、过滤、追加/替换语义保持 | M | todo |
+| PKG-DANMUKU-04 | artplayer-plugin-danmuku<br>整理时钟、队列与轨道调度 | PKG-DANMUKU-03, CORE-10 | danmuku 调度器和确定性时钟测试 | seek/暂停/倍率/长时间运行无顺序和碰撞回归 | H | todo |
+| PKG-DANMUKU-05 | artplayer-plugin-danmuku<br>整理 DOM 渲染、设置、热力图与 worker | PKG-DANMUKU-04, CORE-14, CORE-18 | renderer/setting/heatmap/worker 职责及资源归属 | mount/icons/设置和 worker 协议保持，销毁无后台工作 | H | todo |
+| PKG-DANMUKU-06 | artplayer-plugin-danmuku<br>迁移 TS 与公开声明 | PKG-DANMUKU-05, ENG-04, ENG-06 | 自有模块、worker 消息、option/item/result 类型 | 旧参数、扩展字段和事件消费通过，vendored 边界清楚 | H | todo |
+| PKG-DANMUKU-07 | artplayer-plugin-danmuku<br>弹幕能力稳定性验收 | PKG-DANMUKU-06 | 负载/渲染/资源对比及 mask 可依赖的稳定边界 | 在试点核心中旧插件 API 与关键帧路径通过 | H | todo |
+| PKG-DANMUKU-08 | artplayer-plugin-danmuku<br>完成新旧核心与组合验收 | PKG-DANMUKU-07, CORE-22 | 最终核心/旧核心、mask/fullscreen/PiP 组合报告 | 性能无未解释退化，反复装卸无累计资源 | H | todo |
+| PKG-DANMUKU-09 | artplayer-plugin-danmuku<br>完成分发、示例与文档 | PKG-DANMUKU-08, ENG-07 | danmuku.js、README、声明、worker 与产物 | tarball 和静态 icons 等旧调用通过，有独立回退版本 | H | todo |
+
+## 5 包迁移：artplayer-proxy-canvas
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-CANVAS-01 | artplayer-proxy-canvas<br>核对包契约与历史用法 | BASE-05 | callback、canvas 原方法、转发 media 属性/方法/事件 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-CANVAS-02 | artplayer-proxy-canvas<br>建立特有行为与错误测试 | PKG-CANVAS-01, ENG-03, ENG-05 | ready/loadeddata/canplay、play/seek、回调、resize 与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-CANVAS-03 | artplayer-proxy-canvas<br>整理内部职责与资源 | PKG-CANVAS-02, CORE-06, CORE-11, CORE-16 | video adapter/原 canvas 方法/RAF 绘制/事件订阅分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-CANVAS-04 | artplayer-proxy-canvas<br>迁移自有源码和公开类型 | PKG-CANVAS-03, ENG-04, ENG-06, CORE-07 | canvas 与媒体能力的精确组合类型，保持 Result | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-CANVAS-05 | artplayer-proxy-canvas<br>验证新旧核心和组合 | PKG-CANVAS-04, CORE-22 | 真实 video/canvas 绘制、字幕和 document PiP 恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-CANVAS-06 | artplayer-proxy-canvas<br>验证分发并同步文档 | PKG-CANVAS-05, ENG-07 | canvas.js、三种产物、调用兼容与资源证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-proxy-mediabunny
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-MB-01 | artplayer-proxy-mediabunny<br>核对 shim 与媒体契约 | BASE-05 | 全部 option、art.mediabunny、canvas/shim 属性及事件表 | 公开暴露成员和实际发布依赖/资源范围明确 | H | todo |
+| PKG-MB-02 | artplayer-proxy-mediabunny<br>建立真实媒体与事件基线 | PKG-MB-01, ENG-05, ENG-08 | MP4/WebM/HLS/Blob/Stream、seek/错误/轨道切换样本 | ready 事件顺序、音画同步、超时和释放可重跑 | H | todo |
+| PKG-MB-03 | artplayer-proxy-mediabunny<br>整理 input 与加载取消 | PKG-MB-02, CORE-09 | input.js 源检测、输入资源、Range 与取消 | HLS 检测在 input 边界，旧来源类型和超时保持 | H | todo |
+| PKG-MB-04 | artplayer-proxy-mediabunny<br>整理 VideoShim/EventTarget/Engine 协调 | PKG-MB-03, CORE-06, CORE-11 | shim 描述符、事件桥、加载状态和操作隔离 | 公开属性/同步异步返回与事件重入顺序保持 | H | todo |
+| PKG-MB-05 | artplayer-proxy-mediabunny<br>整理视频解码、seek 和帧释放 | PKG-MB-04 | VideoEngine 调度、队列、晚帧处理和资源释放 | 暂停/seek/切源无旧帧覆盖，默认丢帧策略不变 | H | todo |
+| PKG-MB-06 | artplayer-proxy-mediabunny<br>整理音频解码、时钟与同步 | PKG-MB-04 | AudioEngine 时钟、缓冲和 AudioContext 归属 | AV sync、倍速、无音轨、静音/音量和暂停恢复通过 | H | todo |
+| PKG-MB-07 | artplayer-proxy-mediabunny<br>整理 HLS 配对轨道与 selector | PKG-MB-05, PKG-MB-06, CORE-14 | m3u8 配对、质量/音频选择及拓扑清理 | 实际选择高亮、切到无轨道来源清理、无重复 readiness | H | todo |
+| PKG-MB-08 | artplayer-proxy-mediabunny<br>完成 TS 与媒体能力声明 | PKG-MB-07, ENG-04, ENG-06 | 8 个自有 JS 模块迁移与 Result/shim 类型 | 解码器/Stream/DOM 类型清楚，旧 Option 和 art.mediabunny 使用保持 | H | todo |
+| PKG-MB-09 | artplayer-proxy-mediabunny<br>完成新旧核心和真实媒体组合 | PKG-MB-08, CORE-22 | 跨浏览器能力、长播放、DPiP、HLS 音轨/质量报告 | 资源释放、事件顺序、AV sync 与支持范围满足基线 | H | todo |
+| PKG-MB-10 | artplayer-proxy-mediabunny<br>完成分发和文档 | PKG-MB-09, ENG-07 | mediabunny.js、README、依赖版本、三产物和许可 | tarball 可消费、无意外依赖升级、旧调用与回退可用 | H | todo |
+
+## 5 包迁移：artplayer-tool-iframe
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-IFRAME-01 | artplayer-tool-iframe<br>核对包契约与历史用法 | BASE-05 | constructor/commit/message/inject、postMessage 协议与历史公开拼写 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-IFRAME-02 | artplayer-tool-iframe<br>建立特有行为与错误测试 | PKG-IFRAME-01, ENG-03, ENG-05 | 跨窗口消息、ID 匹配、请求失败、重复 inject、销毁中请求 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-IFRAME-03 | artplayer-tool-iframe<br>整理内部职责与资源 | PKG-IFRAME-02, CORE-02, BASE-07 | 请求注册/响应匹配/监听清理分离；origin/source 安全边界独立决策 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-IFRAME-04 | artplayer-tool-iframe<br>迁移自有源码和公开类型 | PKG-IFRAME-03, ENG-04, ENG-06, CORE-07 | 消息联合类型、回调/Promise 推导、旧公开字段兼容 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-IFRAME-05 | artplayer-tool-iframe<br>验证新旧核心和组合 | PKG-IFRAME-04, CORE-22 | 真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-IFRAME-06 | artplayer-tool-iframe<br>验证分发并同步文档 | PKG-IFRAME-05, ENG-07 | iframe.js、示例集成和原 script/class 导出验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 5 包迁移：artplayer-tool-thumbnail
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-TOOL-THUMB-01 | artplayer-tool-thumbnail<br>核对包契约与历史用法 | BASE-05 | 构造/defaults/事件/方法/历史拼写、.esm.js 入口和缺失 types | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-TOOL-THUMB-02 | artplayer-tool-thumbnail<br>建立特有行为与错误测试 | PKG-TOOL-THUMB-01, ENG-03, ENG-05 | 文件输入/拖放、抽帧网格、begin/end、进度/失败/重复任务 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-TOOL-THUMB-03 | artplayer-tool-thumbnail<br>整理内部职责与资源 | PKG-TOOL-THUMB-02, CORE-01 | 输入、抽帧队列、网格导出、URL/监听清理分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-TOOL-THUMB-04 | artplayer-tool-thumbnail<br>迁移自有源码和公开类型 | PKG-TOOL-THUMB-03, ENG-04, ENG-06, CORE-07 | 补齐真实 API 声明，自有 emitter/utils TS 化 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-TOOL-THUMB-05 | artplayer-tool-thumbnail<br>验证新旧核心和组合 | PKG-TOOL-THUMB-04, CORE-22 | 工具独立浏览器使用，生成缩略图在核心中显示 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-TOOL-THUMB-06 | artplayer-tool-thumbnail<br>验证分发并同步文档 | PKG-TOOL-THUMB-05, ENG-07 | tool.thumbnail.js、历史 ESM 兼容文件、types 路径和 tarball | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+
+## 6 文档与消费者
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| SITE-01 | artplayer-vitepress<br>清点文档/示例/生成链 | BASE-04, BASE-05 | 中英文文档、插件页面、demo URL、编辑器声明与生成目录清单 | 所有公开 API/插件有对应页面或明确补充任务 | M | todo |
+| SITE-02 | artplayer-vitepress<br>整理声明与示例生成器 | SITE-01, ENG-04, ENG-06 | build-ts/build-test 生成链的可验证 TS 脚本 | 不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke | M | todo |
+| SITE-03 | artplayer-vitepress<br>整理 i18n/文档/LLM 生成流程 | SITE-02 | build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理 | 原命令兼容、生成可复现，翻译步骤不隐式运行远程服务 | M | todo |
+| SITE-04 | artplayer-vitepress<br>同步核心和全部插件使用文档 | CORE-22, PKG-CHAPTER-06, PKG-AMBILIGHT-06, PKG-AUDIO-06, PKG-AUTO-THUMB-06, PKG-VTT-THUMB-06, PKG-HLS-06, PKG-DASH-06, PKG-MULTI-SUB-06, PKG-JASSUB-06, PKG-MASK-06, PKG-ASR-06, PKG-ADS-06, PKG-VAST-06, PKG-CAST-06, PKG-DPIP-06, PKG-DANMUKU-09, PKG-CANVAS-06, PKG-MB-10, PKG-IFRAME-06, PKG-TOOL-THUMB-06, SITE-03 | 中文/英文 API、插件选项、兼容说明及旧 JS 用法 | 不要求旧调用迁移，未支持能力不写成已支持 | M | todo |
+| SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-03 | VitePress 构建、链接与嵌入 demo 检查 | 产物可访问，全部包文档与 types 注入无丢失 | M | todo |
+| SITE-06 | artplayer-vitepress<br>文档站交付验收 | SITE-05 | 维护指南和站点变更记录 | 未手改 generated 目录，旧 URL 可用、部署与检查分离 | M | todo |
+| EX-01 | example/react.js<br>验证 React 消费者与 TS | CORE-22, ENG-07 | React 挂载/卸载/重挂载、引用和插件样例 | 真实 tarball + TS 消费通过，保留既有 React 集成 API | M | todo |
+| EX-02 | example/vue.js<br>验证 Vue 消费者与更新卸载 | CORE-22, ENG-07 | Vue 实例/ref、参数更新、卸载及插件样例 | 旧 JS 组件用法无需修改，重复挂载不泄漏 | M | todo |
+| EX-03 | workspace<br>验证全部原生 demo 与外部播放集成 | EX-01, EX-02, PKG-CHAPTER-06, PKG-AMBILIGHT-06, PKG-AUDIO-06, PKG-AUTO-THUMB-06, PKG-VTT-THUMB-06, PKG-HLS-06, PKG-DASH-06, PKG-MULTI-SUB-06, PKG-JASSUB-06, PKG-MASK-06, PKG-ASR-06, PKG-ADS-06, PKG-VAST-06, PKG-CAST-06, PKG-DPIP-06, PKG-DANMUKU-09, PKG-CANVAS-06, PKG-MB-10, PKG-IFRAME-06, PKG-TOOL-THUMB-06 | 8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录 | 旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过 | H | todo |
+
+## 7 工具链与性能
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| MOD-01 | workspace<br>Bun 固定版本干净安装试点 | ENG-09 | 独立目录的 Bun 锁文件、lifecycle/peer/workspace 与全部构建对比 | Node 测试仍通过；安装与资源一致才决定采用；不改 bundler | H | todo |
+| MOD-02 | workspace<br>整理剩余开发/构建脚本与插件模板 | MOD-01, SITE-03 | dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API | 旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证 | M | todo |
+| MOD-03 | workspace<br>测量并优化核心热路径 | CORE-22, ENG-08 | DOM 读写、进度更新、持久化、初始化的测量与改进 | 相同设备媒体多次比较，契约不变，收益及无效尝试记录 | M | todo |
+| MOD-04 | workspace<br>测量并优化重型插件/proxy | PKG-DANMUKU-09, PKG-MASK-06, PKG-MB-10, ENG-08 | 帧/队列/推理/音画同步与资源长期运行比较 | 不改默认算法/阈值，性能改善有证据；无收益则保留旧实现 | M | todo |
+| MOD-05 | workspace<br>完成工具链与性能采用决策 | MOD-02, MOD-03, MOD-04 | 最终 runtime/packageManager/构建配置及性能台账 | 干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换 | M | todo |
+
+## 8 发布验收
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| REL-01 | workspace<br>确定分包版本与差异处置 | SITE-06, EX-03, MOD-05 | 每包变更日志/版本/依赖/类型差异及支持范围 | 所有公共差异已解释或解决；未决破坏性变化阻止兼容发布 | H | todo |
+| REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01 | 全部候选包与原支持范围消费者安装矩阵 | 新核心旧插件、旧核心新插件、新新组合和历史路径通过 | H | todo |
+| REL-03 | workspace<br>完成真机、外部 SDK 与压力验收 | REL-02 | Safari/移动/PiP/Cast/IMA/模型/长播放完整报告 | 无环境验证的关键能力保持阻塞，mock 不能替代设备结论 | H | todo |
+| REL-04 | workspace<br>演练回退与主线修复同步 | REL-03 | 分包旧版本/tag/依赖回退方案与 master 差异 | 独立回退可行，紧急修复能同步，无需所有用户联动升级 | H | todo |
+| REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-04 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
+| REL-06 | workspace<br>经授权分批正式发布 | REL-05 | 正式分包版本/tag/站点文档及兼容公告 | 候选验收通过，安装/浏览器复核和回退入口就绪 | H | todo |
+| REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | todo |
+
+## 完成证据与阻塞
+
+- DOC-01: [记录](progress.md)
+- DOC-02: [记录](progress.md)
+- DOC-03: [记录](progress.md)
+- DOC-04: [记录](progress.md)
+- DOC-05: [记录](changes/2026-09-10-DOC-05-task-commits.md)

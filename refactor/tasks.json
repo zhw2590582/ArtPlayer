@@ -1,0 +1,3347 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-10",
+  "baselineCommit": "40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f",
+  "branch": "codex/compatible-modernization",
+  "qualityContract": "quality-contract.md",
+  "tasks": [
+    {
+      "id": "DOC-01",
+      "phase": "0 规划",
+      "title": "创建兼容重构分支",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "独立本地分支和起点 SHA",
+      "acceptance": "分支由干净 master 创建，起点可追溯",
+      "evidence": [
+        "progress.md"
+      ]
+    },
+    {
+      "id": "DOC-02",
+      "phase": "0 规划",
+      "title": "清点全部包与消费者",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-01"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "package-inventory.json",
+      "acceptance": "22 包及 React/Vue/demo 有明确清单",
+      "evidence": [
+        "progress.md"
+      ]
+    },
+    {
+      "id": "DOC-03",
+      "phase": "0 规划",
+      "title": "建立计划、契约、决策和协作记录",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-02"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "refactor 文档集与任务数据",
+      "acceptance": "每包有独立步骤、依赖、交付物和验收条件",
+      "evidence": [
+        "progress.md"
+      ]
+    },
+    {
+      "id": "DOC-04",
+      "phase": "0 规划",
+      "title": "验证文档完整性与生成表",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-03"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "计划生成校验工具、AGENTS 入口",
+      "acceptance": "依赖无环、包覆盖、生成同步、文档链接通过",
+      "evidence": [
+        "progress.md"
+      ]
+    },
+    {
+      "id": "DOC-05",
+      "phase": "0 规划",
+      "title": "建立每任务提交规则并提交文档基线",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-04"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "根指令、质量要求、AI 流程、变更记录与初始文档提交",
+      "acceptance": "文档与计划检查通过，独立 DOC-05 commit 保存本次交付；提交后核实 SHA 和工作区",
+      "evidence": [
+        "changes/2026-09-10-DOC-05-task-commits.md"
+      ]
+    },
+    {
+      "id": "BASE-01",
+      "phase": "1 基线",
+      "title": "固定消费者发布基线",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "各包 npm tarball/integrity、源码 SHA、历史支持矩阵",
+      "acceptance": "区分源码版本与实际已发布版本，最低核心/TS/浏览器支持有证据",
+      "evidence": []
+    },
+    {
+      "id": "BASE-02",
+      "phase": "1 基线",
+      "title": "捕获公共 API 和属性描述符",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "BASE-01"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "构造参数/默认值/静态及实例 API 快照",
+      "acceptance": "真实发布包反射与旧用户调用可重跑，未验证项明确",
+      "evidence": []
+    },
+    {
+      "id": "BASE-03",
+      "phase": "1 基线",
+      "title": "捕获事件、异步和生命周期",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "BASE-02"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "ready/restart/destroy、Promise、切源/插件事件 trace",
+      "acceptance": "成功、失败、重入和多实例有断言，历史缺陷有标记",
+      "evidence": []
+    },
+    {
+      "id": "BASE-04",
+      "phase": "1 基线",
+      "title": "捕获 DOM、CSS 和官方 demo",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "BASE-02"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "模板/类名/变量及全部 demo 映射",
+      "acceptance": "用户样式覆盖、移动端与自定义 controls/setting 用法已记录",
+      "evidence": []
+    },
+    {
+      "id": "BASE-05",
+      "phase": "1 基线",
+      "title": "捕获包入口、资源和类型消费",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "BASE-01"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "UMD/AMD/ESM/CJS/legacy/i18n、worker/WASM/字体路径矩阵",
+      "acceptance": "隔离消费者验证入口，记录 thumbnail tool 等不一致",
+      "evidence": []
+    },
+    {
+      "id": "BASE-06",
+      "phase": "1 基线",
+      "title": "记录性能与资源基线",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "BASE-03",
+        "BASE-04"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "固定媒体/设备测量、包体积、反复装卸资源报告",
+      "acceptance": "多次采样可重跑，指标和审查阈值确定，不承诺未经测量的收益",
+      "evidence": []
+    },
+    {
+      "id": "BASE-07",
+      "phase": "1 基线",
+      "title": "建立差异和风险台账",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "BASE-03",
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "销毁/切源/类型差异、vendored 许可和外部 SDK 清单",
+      "acceptance": "已确认与待复现分开，每项有负责任务及兼容处理路线",
+      "evidence": []
+    },
+    {
+      "id": "ENG-01",
+      "phase": "2 工程保障",
+      "title": "固定 Node、包管理器与依赖",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "BASE-01"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "版本 pin、唯一锁文件、安装说明",
+      "acceptance": "干净环境可复现，最低 Node 与构建依赖一致，未夹带全量升级",
+      "evidence": []
+    },
+    {
+      "id": "ENG-02",
+      "phase": "2 工程保障",
+      "title": "拆分只读检查并建立 PR CI",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-01"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "lint/lint:fix、PR 与主线检查、独立部署任务",
+      "acceptance": "检查不改源码、不发布，失败阻止合并；必要 required check 有配置证据",
+      "evidence": []
+    },
+    {
+      "id": "ENG-03",
+      "phase": "2 工程保障",
+      "title": "建立公共行为与单元测试入口",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-02",
+        "BASE-03"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "保留现有 node:test，测试目录/夹具/统一入口",
+      "acceptance": "已有 19 项回归保留，旧版与候选可用同一夹具运行",
+      "evidence": []
+    },
+    {
+      "id": "ENG-04",
+      "phase": "2 工程保障",
+      "title": "建立类型测试基础",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-02",
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "根与分包 tsconfig、显式 TS 依赖、正反例测试",
+      "acceptance": "隔离 DOM/Node/worker 类型，最低和选定当前 TS 验证声明消费",
+      "evidence": []
+    },
+    {
+      "id": "ENG-05",
+      "phase": "2 工程保障",
+      "title": "建立真实浏览器测试服务",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-03",
+        "BASE-04"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "Playwright projects、本地 Range/失败媒体服务",
+      "acceptance": "Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行",
+      "evidence": []
+    },
+    {
+      "id": "ENG-06",
+      "phase": "2 工程保障",
+      "title": "支持按包非交互与 JS/TS 构建",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-02",
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "build/dev 入口解析、指定包参数、原交互保留",
+      "acceptance": "三种产物、Less/SVG/worker 和本地 8082 demo 正常",
+      "evidence": []
+    },
+    {
+      "id": "ENG-07",
+      "phase": "2 工程保障",
+      "title": "建立 tarball 消费与产物检查",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-04",
+        "ENG-06"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "隔离 npm 消费 fixtures、API/声明/入口差分",
+      "acceptance": "不借 workspace 源码通过，能识别缺文件与默认导出变化",
+      "evidence": []
+    },
+    {
+      "id": "ENG-08",
+      "phase": "2 工程保障",
+      "title": "增加覆盖率、资源与性能报告",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-03",
+        "ENG-05",
+        "BASE-06"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "覆盖率基线、资源清理断言、性能报告与阈值",
+      "acceptance": "关键生命周期分支有门槛，报告不靠无意义断言堆数量",
+      "evidence": []
+    },
+    {
+      "id": "ENG-09",
+      "phase": "2 工程保障",
+      "title": "建立全包依赖影响和文档检查",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-07",
+        "DOC-04"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "共享核心/构建影响映射、计划文档检查接入",
+      "acceptance": "核心变化触发全生态必需检查，新增包不会漏计划",
+      "evidence": []
+    },
+    {
+      "id": "CORE-01",
+      "phase": "3-4 核心迁移",
+      "title": "迁移纯工具并冻结导出",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "ENG-03",
+        "ENG-04",
+        "ENG-06"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "utils/time/property/format/file/error/subtitle 的分批 TS 迁移",
+      "acceptance": "Artplayer.utils 导出/参数/绑定保持，纯逻辑与类型测试通过",
+      "evidence": []
+    },
+    {
+      "id": "CORE-02",
+      "phase": "3-4 核心迁移",
+      "title": "迁移内部 Emitter",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-01",
+        "BASE-03"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "带类型事件映射的原 Emitter 实现",
+      "acceptance": "ctx、once/off、重入/异常和链式返回保持",
+      "evidence": []
+    },
+    {
+      "id": "CORE-03",
+      "phase": "3-4 核心迁移",
+      "title": "建立内部资源作用域",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-02"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "监听/订阅/定时器/RAF/请求/URL 的资源登记",
+      "acceptance": "实例与操作作用域分离，单项清理失败不阻断其他资源",
+      "evidence": []
+    },
+    {
+      "id": "CORE-04",
+      "phase": "3-4 核心迁移",
+      "title": "修复初始化与销毁生命周期",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-03",
+        "ENG-05",
+        "BASE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "构造失败回收、重复/重入 destroy、instances 修复",
+      "acceptance": "事件顺序、removeHtml、多实例和销毁中异步有真实回归",
+      "evidence": []
+    },
+    {
+      "id": "CORE-05",
+      "phase": "3-4 核心迁移",
+      "title": "区分输入配置和内部配置",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-01",
+        "ENG-04"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "Option/ResolvedOption、默认值与校验整理",
+      "acceptance": "配置合并/错误时机不变，JS 输入仍运行时校验",
+      "evidence": []
+    },
+    {
+      "id": "CORE-06",
+      "phase": "3-4 核心迁移",
+      "title": "建立内部媒体与宿主类型",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "原生 video、canvas shim、UI host 类型",
+      "acceptance": "不更改公开 art.video 用法，不以 HTMLVideoElement 断言掩盖 shim",
+      "evidence": []
+    },
+    {
+      "id": "CORE-07",
+      "phase": "3-4 核心迁移",
+      "title": "逐项协调公开声明差异",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-02",
+        "CORE-06",
+        "BASE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "plugins/toggle/cue/setting/static 的旧新类型对照",
+      "acceptance": "每项有兼容重载/扩展或待决结论，不能删除旧类型样例",
+      "evidence": []
+    },
+    {
+      "id": "CORE-08",
+      "phase": "3-4 核心迁移",
+      "title": "整理插件管理器与扩展类型",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-03",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "注册流程、同步/异步结果、插件/事件扩展接口",
+      "acceptance": "旧插件同步可见性、重名与命名、销毁中异步插件保持明确语义",
+      "evidence": []
+    },
+    {
+      "id": "CORE-09",
+      "phase": "3-4 核心迁移",
+      "title": "整理 URL 与切源操作",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-04",
+        "CORE-06",
+        "CORE-08"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "url/switch/customType 的操作身份及取消方案",
+      "acceptance": "并发切源、错误、同 URL、销毁和 Promise 结算有契约",
+      "evidence": []
+    },
+    {
+      "id": "CORE-10",
+      "phase": "3-4 核心迁移",
+      "title": "迁移播放与时间/状态属性",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-09"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "play/pause/toggle/seek/volume/rate/duration 等模块",
+      "acceptance": "旧返回值、拒绝、mutex、位置恢复、属性描述符与事件通过",
+      "evidence": []
+    },
+    {
+      "id": "CORE-11",
+      "phase": "3-4 核心迁移",
+      "title": "整理媒体事件、ready 与重连",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-10"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "媒体转发、重连、UI 响应职责分离",
+      "acceptance": "readiness 次数/顺序、过期重连、原错误参数有回归",
+      "evidence": []
+    },
+    {
+      "id": "CORE-12",
+      "phase": "3-4 核心迁移",
+      "title": "迁移模板及公开资源入口",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-06",
+        "CORE-04",
+        "BASE-04"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "template/icons/i18n/style、SSR 与 proxy 挂载",
+      "acceptance": "DOM/CSS/global/样式注入、i18n 子路径及 SSR import 保持",
+      "evidence": []
+    },
+    {
+      "id": "CORE-13",
+      "phase": "3-4 核心迁移",
+      "title": "迁移组件注册与控件",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-12",
+        "CORE-08"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Component/control/layer/contextmenu 的资源与 TS 边界",
+      "acceptance": "add/update/remove、name、selector、mounted/beforeUnmount 通过",
+      "evidence": []
+    },
+    {
+      "id": "CORE-14",
+      "phase": "3-4 核心迁移",
+      "title": "拆分设置树、渲染和布局",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-13"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "setting model/selection/render/layout 的分批实现",
+      "acceptance": "不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过",
+      "evidence": []
+    },
+    {
+      "id": "CORE-15",
+      "phase": "3-4 核心迁移",
+      "title": "迁移字幕获取、解析和渲染",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-11",
+        "CORE-13"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "subtitle 请求/track/DOM/URL 生命周期与类型",
+      "acceptance": "过期结果、偏移、cue 数组、原生全屏及错误路径通过",
+      "evidence": []
+    },
+    {
+      "id": "CORE-16",
+      "phase": "3-4 核心迁移",
+      "title": "迁移全屏、PiP、mini 与尺寸模式",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-11",
+        "CORE-12"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "显示模式服务和原公开属性门面",
+      "acceptance": "模式互斥/恢复位置、手势权限、移动方向和退出失败通过",
+      "evidence": []
+    },
+    {
+      "id": "CORE-17",
+      "phase": "3-4 核心迁移",
+      "title": "迁移键盘、手势、焦点和全局事件",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-13",
+        "CORE-16"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "events/hotkey 的明确 document 与资源归属",
+      "acceptance": "跨 document 重绑、触摸/键盘、快捷键及销毁无重复响应",
+      "evidence": []
+    },
+    {
+      "id": "CORE-18",
+      "phase": "3-4 核心迁移",
+      "title": "迁移内置插件和提示模块",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-14",
+        "CORE-16",
+        "CORE-17"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "autoPlayback/autoOrientation/fastForward/lock/miniProgressBar 及 info/notice/loading/mask",
+      "acceptance": "默认启用条件、storage 格式、定时器/动画清理通过",
+      "evidence": []
+    },
+    {
+      "id": "CORE-19",
+      "phase": "3-4 核心迁移",
+      "title": "整理进度、质量、缩略图和截图",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-10",
+        "CORE-13",
+        "CORE-16"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "相关 player/control 功能与纯计算分离",
+      "acceptance": "截图跨域失败、缩略图布局、quality/进度边界保持",
+      "evidence": []
+    },
+    {
+      "id": "CORE-20",
+      "phase": "3-4 核心迁移",
+      "title": "收敛核心入口与依赖方向",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-14",
+        "CORE-15",
+        "CORE-18",
+        "CORE-19"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Artplayer 门面、初始化依赖与最终目录",
+      "acceptance": "所有核心自有源码迁移，公开描述符/静态接口/事件差分通过",
+      "evidence": []
+    },
+    {
+      "id": "CORE-21",
+      "phase": "3-4 核心迁移",
+      "title": "生成核心声明并校验包内容",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-20",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "由 TS 生成的既有入口声明与三种发布产物",
+      "acceptance": "内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过",
+      "evidence": []
+    },
+    {
+      "id": "CORE-22",
+      "phase": "3-4 核心迁移",
+      "title": "核心阶段完整验收",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-21",
+        "PKG-CHAPTER-04"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "旧插件对候选核心的完整回归与资源/性能报告",
+      "acceptance": "公开兼容差异有结论，核心测试和简单插件试点通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CHAPTER-01",
+      "phase": "5 包迁移：artplayer-plugin-chapter",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-chapter"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "chapters 时间区间、update、name 和进度 DOM 清单",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CHAPTER-02",
+      "phase": "5 包迁移：artplayer-plugin-chapter",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-chapter"
+      ],
+      "dependsOn": [
+        "PKG-CHAPTER-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "区间重叠/空列表/边界 seek、hover 标题和 update 用例",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CHAPTER-03",
+      "phase": "5 包迁移：artplayer-plugin-chapter",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-chapter"
+      ],
+      "dependsOn": [
+        "PKG-CHAPTER-02",
+        "CORE-14",
+        "CORE-08"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "拆分时间区间计算、进度 DOM、事件与布局",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CHAPTER-04",
+      "phase": "5 包迁移：artplayer-plugin-chapter",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-chapter"
+      ],
+      "dependsOn": [
+        "PKG-CHAPTER-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "Chapters/Option/Result 与 update 推导，先做简单插件 TS 试点",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CHAPTER-05",
+      "phase": "5 包迁移：artplayer-plugin-chapter",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-chapter"
+      ],
+      "dependsOn": [
+        "PKG-CHAPTER-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "chapter + quality/thumbnail、移动和全屏进度场景",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CHAPTER-06",
+      "phase": "5 包迁移：artplayer-plugin-chapter",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-chapter"
+      ],
+      "dependsOn": [
+        "PKG-CHAPTER-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "chapter.js 示例、产物和变更记录",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AMBILIGHT-01",
+      "phase": "5 包迁移：artplayer-plugin-ambilight",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-ambilight"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "blur/opacity/frequency/duration、start/stop 与挂载样式",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AMBILIGHT-02",
+      "phase": "5 包迁移：artplayer-plugin-ambilight",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-ambilight"
+      ],
+      "dependsOn": [
+        "PKG-AMBILIGHT-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "跨域 canvas 失败、零尺寸、暂停、重复 start/stop 和 destroy",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AMBILIGHT-03",
+      "phase": "5 包迁移：artplayer-plugin-ambilight",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-ambilight"
+      ],
+      "dependsOn": [
+        "PKG-AMBILIGHT-02",
+        "CORE-03",
+        "CORE-12"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "取色计算与绘帧分离，统一 RAF 和 DOM 清理",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AMBILIGHT-04",
+      "phase": "5 包迁移：artplayer-plugin-ambilight",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-ambilight"
+      ],
+      "dependsOn": [
+        "PKG-AMBILIGHT-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "canvas 上下文、参数及 start/stop 的明确类型",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AMBILIGHT-05",
+      "phase": "5 包迁移：artplayer-plugin-ambilight",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-ambilight"
+      ],
+      "dependsOn": [
+        "PKG-AMBILIGHT-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "原生 video、canvas proxy 的能力边界及销毁无帧循环",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AMBILIGHT-06",
+      "phase": "5 包迁移：artplayer-plugin-ambilight",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-ambilight"
+      ],
+      "dependsOn": [
+        "PKG-AMBILIGHT-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "ambilight.js 示例及样式/分发验证",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUDIO-01",
+      "phase": "5 包迁移：artplayer-plugin-audio-track",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-audio-track"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "url/offset/sync、audio 实例暴露、update 与音量语义",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUDIO-02",
+      "phase": "5 包迁移：artplayer-plugin-audio-track",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-audio-track"
+      ],
+      "dependsOn": [
+        "PKG-AUDIO-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "偏移、倍率、seek、waiting/playing、加载错误和 autoplay 拒绝",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUDIO-03",
+      "phase": "5 包迁移：artplayer-plugin-audio-track",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-audio-track"
+      ],
+      "dependsOn": [
+        "PKG-AUDIO-02",
+        "CORE-10"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "外部 audio 的同步策略、监听与源更新生命周期",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUDIO-04",
+      "phase": "5 包迁移：artplayer-plugin-audio-track",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-audio-track"
+      ],
+      "dependsOn": [
+        "PKG-AUDIO-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Option/Result/audio、update 输入和事件类型",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUDIO-05",
+      "phase": "5 包迁移：artplayer-plugin-audio-track",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-audio-track"
+      ],
+      "dependsOn": [
+        "PKG-AUDIO-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "主视频切源和缓冲恢复，多实例独立音频、旧核心",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUDIO-06",
+      "phase": "5 包迁移：artplayer-plugin-audio-track",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-audio-track"
+      ],
+      "dependsOn": [
+        "PKG-AUDIO-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "audio.track.js 示例与运行返回值一致的声明",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUTO-THUMB-01",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "url/width/number/scale、异步工厂和渐进缩略图更新",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUTO-THUMB-02",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "抽帧边界、短视频、失败、连续来源和销毁中的抽帧",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUTO-THUMB-03",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-02",
+        "CORE-09",
+        "CORE-19"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "隐藏 video、seek 队列、canvas 编码与 Blob URL 清理",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUTO-THUMB-04",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "抽帧结果和真实异步插件返回类型兼容",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUTO-THUMB-05",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "旧核心/候选核心预览、多次加载无过期缩略图覆盖",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-AUTO-THUMB-06",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "auto.thumbnail.js、三种产物和内存/URL 证据",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VTT-THUMB-01",
+      "phase": "5 包迁移：artplayer-plugin-vtt-thumbnail",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-vtt-thumbnail"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "vtt/style、异步返回、预览控件名与样式契约",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VTT-THUMB-02",
+      "phase": "5 包迁移：artplayer-plugin-vtt-thumbnail",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-vtt-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-VTT-THUMB-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "VTT 解析、xywh、相对 URL、时间边界、请求失败和定位",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VTT-THUMB-03",
+      "phase": "5 包迁移：artplayer-plugin-vtt-thumbnail",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-vtt-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-VTT-THUMB-02",
+        "CORE-09",
+        "CORE-19"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "纯解析/区间查找与 DOM、请求/定时器生命周期分离",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VTT-THUMB-04",
+      "phase": "5 包迁移：artplayer-plugin-vtt-thumbnail",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-vtt-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-VTT-THUMB-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "cue/rect/result 和参数可选性保持兼容",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VTT-THUMB-05",
+      "phase": "5 包迁移：artplayer-plugin-vtt-thumbnail",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-vtt-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-VTT-THUMB-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "鼠标和移动进度、全屏、切源、chapter 组合",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VTT-THUMB-06",
+      "phase": "5 包迁移：artplayer-plugin-vtt-thumbnail",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-vtt-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-VTT-THUMB-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "vtt.thumbnail.js、VTT/图片资源解析和产物验证",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-HLS-01",
+      "phase": "5 包迁移：artplayer-plugin-hls-control",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-hls-control"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "quality/audio 配置、getName、update、控件名及 Hls 实例绑定",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-HLS-02",
+      "phase": "5 包迁移：artplayer-plugin-hls-control",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-hls-control"
+      ],
+      "dependsOn": [
+        "PKG-HLS-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Auto/手动实际 level、音轨、去重/过滤和拓扑变化",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-HLS-03",
+      "phase": "5 包迁移：artplayer-plugin-hls-control",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-hls-control"
+      ],
+      "dependsOn": [
+        "PKG-HLS-02",
+        "CORE-11",
+        "CORE-14"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "映射计算与 selector 更新/删除、Hls 事件订阅分离",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-HLS-04",
+      "phase": "5 包迁移：artplayer-plugin-hls-control",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-hls-control"
+      ],
+      "dependsOn": [
+        "PKG-HLS-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "HLS 能力适配类型、回调上下文和旧 getName 参数",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-HLS-05",
+      "phase": "5 包迁移：artplayer-plugin-hls-control",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-hls-control"
+      ],
+      "dependsOn": [
+        "PKG-HLS-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "本地多码率 HLS、换成无轨道来源、旧核心和最终核心",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-HLS-06",
+      "phase": "5 包迁移：artplayer-plugin-hls-control",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-hls-control"
+      ],
+      "dependsOn": [
+        "PKG-HLS-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "hls.control.js、依赖范围与回退记录",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DASH-01",
+      "phase": "5 包迁移：artplayer-plugin-dash-control",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-dash-control"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "quality/audio、representation ID/Auto、getName 和 update",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DASH-02",
+      "phase": "5 包迁移：artplayer-plugin-dash-control",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-dash-control"
+      ],
+      "dependsOn": [
+        "PKG-DASH-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "保留已有 5 项回归，补音轨/空列表/过滤/换源",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DASH-03",
+      "phase": "5 包迁移：artplayer-plugin-dash-control",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-dash-control"
+      ],
+      "dependsOn": [
+        "PKG-DASH-02",
+        "CORE-11",
+        "CORE-14"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "稳定 ID 映射、ABR 状态与 UI 清理职责分离",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DASH-04",
+      "phase": "5 包迁移：artplayer-plugin-dash-control",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-dash-control"
+      ],
+      "dependsOn": [
+        "PKG-DASH-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "dash.js adapter、selector 和回调类型",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DASH-05",
+      "phase": "5 包迁移：artplayer-plugin-dash-control",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-dash-control"
+      ],
+      "dependsOn": [
+        "PKG-DASH-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "本地 DASH 实际 representation、高亮、恢复 Auto 和换源",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DASH-06",
+      "phase": "5 包迁移：artplayer-plugin-dash-control",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-dash-control"
+      ],
+      "dependsOn": [
+        "PKG-DASH-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "dash.control.js、支持的 dash.js 版本与产物",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MULTI-SUB-01",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "subtitles/onParser、multipleSubtitles 名称及实际返回方法",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MULTI-SUB-02",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "dependsOn": [
+        "PKG-MULTI-SUB-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "VTT/SRT/ASS、编码/重叠 cue/排序/空轨/失败与切换",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MULTI-SUB-03",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "dependsOn": [
+        "PKG-MULTI-SUB-02",
+        "CORE-15"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "解析与合并/获取/渲染分离，过期请求及对象 URL 清理",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MULTI-SUB-04",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "dependsOn": [
+        "PKG-MULTI-SUB-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "准确 parser/cue/tree/result 类型与真实异步形状",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MULTI-SUB-05",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "dependsOn": [
+        "PKG-MULTI-SUB-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "与核心字幕/偏移/全屏组合，旧名称调用不变",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MULTI-SUB-06",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "dependsOn": [
+        "PKG-MULTI-SUB-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "multiple.subtitles.js、parser 来源许可及打包边界",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-JASSUB-01",
+      "phase": "5 包迁移：artplayer-plugin-jassub",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "选项透传、result.instance、vendor 来源、worker/WASM/font 路径",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-JASSUB-02",
+      "phase": "5 包迁移：artplayer-plugin-jassub",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "PKG-JASSUB-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "ASS 字体、时钟/seek/倍率/resize、加载失败和销毁",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-JASSUB-03",
+      "phase": "5 包迁移：artplayer-plugin-jassub",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "PKG-JASSUB-02",
+        "CORE-15",
+        "CORE-16"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "仅整理自有 adapter/销毁；保留第三方文件及来源",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-JASSUB-04",
+      "phase": "5 包迁移：artplayer-plugin-jassub",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "PKG-JASSUB-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "JASSUB option/instance 的兼容类型包装，vendor JS 例外记录",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-JASSUB-05",
+      "phase": "5 包迁移：artplayer-plugin-jassub",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "PKG-JASSUB-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "真实 worker/WASM 字幕渲染与全屏、旧核心测试",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-JASSUB-06",
+      "phase": "5 包迁移：artplayer-plugin-jassub",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "PKG-JASSUB-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "jassub.js、外部资源路径、许可和离线失败记录",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MASK-01",
+      "phase": "5 包迁移：artplayer-plugin-danmuku-mask",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-danmuku-mask"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "模型参数、start/stop、默认下载路径及 mask 样式",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MASK-02",
+      "phase": "5 包迁移：artplayer-plugin-danmuku-mask",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-danmuku-mask"
+      ],
+      "dependsOn": [
+        "PKG-MASK-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "加载期间停止/销毁、重复启动、推理失败、WebGL/CPU 边界",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MASK-03",
+      "phase": "5 包迁移：artplayer-plugin-danmuku-mask",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-danmuku-mask"
+      ],
+      "dependsOn": [
+        "PKG-MASK-02",
+        "CORE-18",
+        "PKG-DANMUKU-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "模型加载/推理/画布输出分离，阻止重叠推理与过期写入",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MASK-04",
+      "phase": "5 包迁移：artplayer-plugin-danmuku-mask",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-danmuku-mask"
+      ],
+      "dependsOn": [
+        "PKG-MASK-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "模型 adapter、canvas 和选项的精确类型",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MASK-05",
+      "phase": "5 包迁移：artplayer-plugin-danmuku-mask",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-danmuku-mask"
+      ],
+      "dependsOn": [
+        "PKG-MASK-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "真实模型和 danmuku/seek/全屏组合，GPU 资源释放",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MASK-06",
+      "phase": "5 包迁移：artplayer-plugin-danmuku-mask",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-danmuku-mask"
+      ],
+      "dependsOn": [
+        "PKG-MASK-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "danmuku.mask.js、资源版本/许可、CPU fallback 和包体积证据",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ASR-01",
+      "phase": "5 包迁移：artplayer-plugin-asr",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-asr"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "length/interval/sampleRate/onAudioChunk、append/hide/stop 的真实能力",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ASR-02",
+      "phase": "5 包迁移：artplayer-plugin-asr",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-asr"
+      ],
+      "dependsOn": [
+        "PKG-ASR-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "PCM/WAV、chunk 时序、回调慢/拒绝、重复初始化与停止",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ASR-03",
+      "phase": "5 包迁移：artplayer-plugin-asr",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-asr"
+      ],
+      "dependsOn": [
+        "PKG-ASR-02",
+        "CORE-10",
+        "CORE-18"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "AudioContext/Worklet/Stream 生命周期和背压分离",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ASR-04",
+      "phase": "5 包迁移：artplayer-plugin-asr",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-asr"
+      ],
+      "dependsOn": [
+        "PKG-ASR-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "主线程/Worklet/音频 buffer 与异步回调类型",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ASR-05",
+      "phase": "5 包迁移：artplayer-plugin-asr",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-asr"
+      ],
+      "dependsOn": [
+        "PKG-ASR-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "真实 WebAudio 分块、播放暂停/切源/销毁，不引入网络 ASR",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ASR-06",
+      "phase": "5 包迁移：artplayer-plugin-asr",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-asr"
+      ],
+      "dependsOn": [
+        "PKG-ASR-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "asr.js、Worklet 资源、输出格式与声明证据",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ADS-01",
+      "phase": "5 包迁移：artplayer-plugin-ads",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-ads"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "核对 html/video/url 与 source/type 声明差异，结果方法和倒计时",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ADS-02",
+      "phase": "5 包迁移：artplayer-plugin-ads",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-ads"
+      ],
+      "dependsOn": [
+        "PKG-ADS-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "视频/HTML/图片实际支持路径、跳过阈值、暂停恢复、加载失败",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ADS-03",
+      "phase": "5 包迁移：artplayer-plugin-ads",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-ads"
+      ],
+      "dependsOn": [
+        "PKG-ADS-02",
+        "CORE-10",
+        "CORE-13"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "广告状态/计时/视图/主视频恢复分离，不改变广告产品规则",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ADS-04",
+      "phase": "5 包迁移：artplayer-plugin-ads",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-ads"
+      ],
+      "dependsOn": [
+        "PKG-ADS-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "旧参数契约和真实返回方法的兼容类型；错误声明单独处理",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ADS-05",
+      "phase": "5 包迁移：artplayer-plugin-ads",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-ads"
+      ],
+      "dependsOn": [
+        "PKG-ADS-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "本地广告 fixture、多实例、正常结束/跳过/销毁恢复内容",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-ADS-06",
+      "phase": "5 包迁移：artplayer-plugin-ads",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-ads"
+      ],
+      "dependsOn": [
+        "PKG-ADS-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "ads.js、README/类型一致性、旧参数保留与变更日志",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VAST-01",
+      "phase": "5 包迁移：artplayer-plugin-vast",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-vast"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "异步工厂、callback context、playUrl/playRes/init 与 SDK 版本",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VAST-02",
+      "phase": "5 包迁移：artplayer-plugin-vast",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-vast"
+      ],
+      "dependsOn": [
+        "PKG-VAST-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "SDK 失败、重复初始化、广告事件、内容恢复和销毁竞态",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VAST-03",
+      "phase": "5 包迁移：artplayer-plugin-vast",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-vast"
+      ],
+      "dependsOn": [
+        "PKG-VAST-02",
+        "CORE-10",
+        "CORE-13"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "SDK loader、IMA adapter、广告状态和 DOM 清理分离",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VAST-04",
+      "phase": "5 包迁移：artplayer-plugin-vast",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-vast"
+      ],
+      "dependsOn": [
+        "PKG-VAST-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "IMA/context/Promise 真实类型，外部 SDK 动态对象限定边界",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VAST-05",
+      "phase": "5 包迁移：artplayer-plugin-vast",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-vast"
+      ],
+      "dependsOn": [
+        "PKG-VAST-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "官方测试广告或受控 SDK 环境，错误后主视频状态恢复",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-VAST-06",
+      "phase": "5 包迁移：artplayer-plugin-vast",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-vast"
+      ],
+      "dependsOn": [
+        "PKG-VAST-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "vast.js、SDK 资源、声明消费和独立版本记录",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CAST-01",
+      "phase": "5 包迁移：artplayer-plugin-chromecast",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-chromecast"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "url/sdk/icon/mimeType、loader、会话、全局 SDK 与结果",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CAST-02",
+      "phase": "5 包迁移：artplayer-plugin-chromecast",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-chromecast"
+      ],
+      "dependsOn": [
+        "PKG-CAST-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "SDK 脚本加载失败/重入、无设备/拒绝、重复实例与销毁",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CAST-03",
+      "phase": "5 包迁移：artplayer-plugin-chromecast",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-chromecast"
+      ],
+      "dependsOn": [
+        "PKG-CAST-02",
+        "CORE-11",
+        "CORE-13"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "SDK singleton/实例订阅/会话与控件职责分离",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CAST-04",
+      "phase": "5 包迁移：artplayer-plugin-chromecast",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-chromecast"
+      ],
+      "dependsOn": [
+        "PKG-CAST-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Cast 能力 adapter、全局对象和元数据类型",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CAST-05",
+      "phase": "5 包迁移：artplayer-plugin-chromecast",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-chromecast"
+      ],
+      "dependsOn": [
+        "PKG-CAST-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "stub 测试之外记录实际 Cast 设备会话、源更新和断开",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CAST-06",
+      "phase": "5 包迁移：artplayer-plugin-chromecast",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-chromecast"
+      ],
+      "dependsOn": [
+        "PKG-CAST-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "chromecast.js、SDK URL/权限能力及待支持环境说明",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DPIP-01",
+      "phase": "5 包迁移：artplayer-plugin-document-pip",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-plugin-document-pip"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "width/height/placeholder/fallbackToVideoPiP、open/close/toggle 返回",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DPIP-02",
+      "phase": "5 包迁移：artplayer-plugin-document-pip",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-plugin-document-pip"
+      ],
+      "dependsOn": [
+        "PKG-DPIP-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "不支持/拒绝、重复打开、pagehide、核心销毁和视频 PiP fallback",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DPIP-03",
+      "phase": "5 包迁移：artplayer-plugin-document-pip",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-plugin-document-pip"
+      ],
+      "dependsOn": [
+        "PKG-DPIP-02",
+        "CORE-16",
+        "CORE-17"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "窗口生命周期、DOM 迁移、样式与事件 document 重绑分离",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DPIP-04",
+      "phase": "5 包迁移：artplayer-plugin-document-pip",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-plugin-document-pip"
+      ],
+      "dependsOn": [
+        "PKG-DPIP-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Document PiP 可选能力和真实状态/返回类型",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DPIP-05",
+      "phase": "5 包迁移：artplayer-plugin-document-pip",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-plugin-document-pip"
+      ],
+      "dependsOn": [
+        "PKG-DPIP-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "原生视频及两个 proxy、键盘/焦点/全屏与关闭还原",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DPIP-06",
+      "phase": "5 包迁移：artplayer-plugin-document-pip",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-plugin-document-pip"
+      ],
+      "dependsOn": [
+        "PKG-DPIP-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "document.pip.js、浏览器能力矩阵、旧接口与恢复证据",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DANMUKU-01",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "核对弹幕全部公开契约",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "emit/load/config/hide/show/reset/mount、option/isHide/isStop/icons 与事件清单",
+      "acceptance": "源码、声明、发布包、Bilibili 输入和设置入口对照",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DANMUKU-02",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "建立弹幕算法与浏览器基线",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-01",
+        "ENG-05",
+        "ENG-08"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "密集/稀疏弹幕、过滤/异步输入、seek/倍率/重载测试",
+      "acceptance": "轨道选择、发射顺序、事件、内存和可视结果可重跑",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DANMUKU-03",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "整理加载、解析与配置",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-02",
+        "CORE-08"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "bilibili/input/parser/config 的分层与取消",
+      "acceptance": "旧格式、回调、过滤、追加/替换语义保持",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DANMUKU-04",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "整理时钟、队列与轨道调度",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-03",
+        "CORE-10"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "danmuku 调度器和确定性时钟测试",
+      "acceptance": "seek/暂停/倍率/长时间运行无顺序和碰撞回归",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DANMUKU-05",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "整理 DOM 渲染、设置、热力图与 worker",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-04",
+        "CORE-14",
+        "CORE-18"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "renderer/setting/heatmap/worker 职责及资源归属",
+      "acceptance": "mount/icons/设置和 worker 协议保持，销毁无后台工作",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DANMUKU-06",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "迁移 TS 与公开声明",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-05",
+        "ENG-04",
+        "ENG-06"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "自有模块、worker 消息、option/item/result 类型",
+      "acceptance": "旧参数、扩展字段和事件消费通过，vendored 边界清楚",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DANMUKU-07",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "弹幕能力稳定性验收",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-06"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "负载/渲染/资源对比及 mask 可依赖的稳定边界",
+      "acceptance": "在试点核心中旧插件 API 与关键帧路径通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DANMUKU-08",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "完成新旧核心与组合验收",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-07",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "最终核心/旧核心、mask/fullscreen/PiP 组合报告",
+      "acceptance": "性能无未解释退化，反复装卸无累计资源",
+      "evidence": []
+    },
+    {
+      "id": "PKG-DANMUKU-09",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "完成分发、示例与文档",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-08",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "danmuku.js、README、声明、worker 与产物",
+      "acceptance": "tarball 和静态 icons 等旧调用通过，有独立回退版本",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CANVAS-01",
+      "phase": "5 包迁移：artplayer-proxy-canvas",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-proxy-canvas"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "callback、canvas 原方法、转发 media 属性/方法/事件",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CANVAS-02",
+      "phase": "5 包迁移：artplayer-proxy-canvas",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-proxy-canvas"
+      ],
+      "dependsOn": [
+        "PKG-CANVAS-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "ready/loadeddata/canplay、play/seek、回调、resize 与销毁",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CANVAS-03",
+      "phase": "5 包迁移：artplayer-proxy-canvas",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-proxy-canvas"
+      ],
+      "dependsOn": [
+        "PKG-CANVAS-02",
+        "CORE-06",
+        "CORE-11",
+        "CORE-16"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "video adapter/原 canvas 方法/RAF 绘制/事件订阅分离",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CANVAS-04",
+      "phase": "5 包迁移：artplayer-proxy-canvas",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-proxy-canvas"
+      ],
+      "dependsOn": [
+        "PKG-CANVAS-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "canvas 与媒体能力的精确组合类型，保持 Result",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CANVAS-05",
+      "phase": "5 包迁移：artplayer-proxy-canvas",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-proxy-canvas"
+      ],
+      "dependsOn": [
+        "PKG-CANVAS-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "真实 video/canvas 绘制、字幕和 document PiP 恢复",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-CANVAS-06",
+      "phase": "5 包迁移：artplayer-proxy-canvas",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-proxy-canvas"
+      ],
+      "dependsOn": [
+        "PKG-CANVAS-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "canvas.js、三种产物、调用兼容与资源证据",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-01",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "核对 shim 与媒体契约",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "全部 option、art.mediabunny、canvas/shim 属性及事件表",
+      "acceptance": "公开暴露成员和实际发布依赖/资源范围明确",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-02",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "建立真实媒体与事件基线",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "PKG-MB-01",
+        "ENG-05",
+        "ENG-08"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "MP4/WebM/HLS/Blob/Stream、seek/错误/轨道切换样本",
+      "acceptance": "ready 事件顺序、音画同步、超时和释放可重跑",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-03",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "整理 input 与加载取消",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "PKG-MB-02",
+        "CORE-09"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "input.js 源检测、输入资源、Range 与取消",
+      "acceptance": "HLS 检测在 input 边界，旧来源类型和超时保持",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-04",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "整理 VideoShim/EventTarget/Engine 协调",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "PKG-MB-03",
+        "CORE-06",
+        "CORE-11"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "shim 描述符、事件桥、加载状态和操作隔离",
+      "acceptance": "公开属性/同步异步返回与事件重入顺序保持",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-05",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "整理视频解码、seek 和帧释放",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "PKG-MB-04"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "VideoEngine 调度、队列、晚帧处理和资源释放",
+      "acceptance": "暂停/seek/切源无旧帧覆盖，默认丢帧策略不变",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-06",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "整理音频解码、时钟与同步",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "PKG-MB-04"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "AudioEngine 时钟、缓冲和 AudioContext 归属",
+      "acceptance": "AV sync、倍速、无音轨、静音/音量和暂停恢复通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-07",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "整理 HLS 配对轨道与 selector",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "PKG-MB-05",
+        "PKG-MB-06",
+        "CORE-14"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "m3u8 配对、质量/音频选择及拓扑清理",
+      "acceptance": "实际选择高亮、切到无轨道来源清理、无重复 readiness",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-08",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "完成 TS 与媒体能力声明",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "PKG-MB-07",
+        "ENG-04",
+        "ENG-06"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "8 个自有 JS 模块迁移与 Result/shim 类型",
+      "acceptance": "解码器/Stream/DOM 类型清楚，旧 Option 和 art.mediabunny 使用保持",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-09",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "完成新旧核心和真实媒体组合",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "PKG-MB-08",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "跨浏览器能力、长播放、DPiP、HLS 音轨/质量报告",
+      "acceptance": "资源释放、事件顺序、AV sync 与支持范围满足基线",
+      "evidence": []
+    },
+    {
+      "id": "PKG-MB-10",
+      "phase": "5 包迁移：artplayer-proxy-mediabunny",
+      "title": "完成分发和文档",
+      "scope": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "dependsOn": [
+        "PKG-MB-09",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "mediabunny.js、README、依赖版本、三产物和许可",
+      "acceptance": "tarball 可消费、无意外依赖升级、旧调用与回退可用",
+      "evidence": []
+    },
+    {
+      "id": "PKG-IFRAME-01",
+      "phase": "5 包迁移：artplayer-tool-iframe",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-tool-iframe"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "constructor/commit/message/inject、postMessage 协议与历史公开拼写",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-IFRAME-02",
+      "phase": "5 包迁移：artplayer-tool-iframe",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-tool-iframe"
+      ],
+      "dependsOn": [
+        "PKG-IFRAME-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "跨窗口消息、ID 匹配、请求失败、重复 inject、销毁中请求",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-IFRAME-03",
+      "phase": "5 包迁移：artplayer-tool-iframe",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-tool-iframe"
+      ],
+      "dependsOn": [
+        "PKG-IFRAME-02",
+        "CORE-02",
+        "BASE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "请求注册/响应匹配/监听清理分离；origin/source 安全边界独立决策",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-IFRAME-04",
+      "phase": "5 包迁移：artplayer-tool-iframe",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-tool-iframe"
+      ],
+      "dependsOn": [
+        "PKG-IFRAME-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "消息联合类型、回调/Promise 推导、旧公开字段兼容",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-IFRAME-05",
+      "phase": "5 包迁移：artplayer-tool-iframe",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-tool-iframe"
+      ],
+      "dependsOn": [
+        "PKG-IFRAME-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-IFRAME-06",
+      "phase": "5 包迁移：artplayer-tool-iframe",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-tool-iframe"
+      ],
+      "dependsOn": [
+        "PKG-IFRAME-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "iframe.js、示例集成和原 script/class 导出验证",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "PKG-TOOL-THUMB-01",
+      "phase": "5 包迁移：artplayer-tool-thumbnail",
+      "title": "核对包契约与历史用法",
+      "scope": [
+        "artplayer-tool-thumbnail"
+      ],
+      "dependsOn": [
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "构造/defaults/事件/方法/历史拼写、.esm.js 入口和缺失 types",
+      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
+      "evidence": []
+    },
+    {
+      "id": "PKG-TOOL-THUMB-02",
+      "phase": "5 包迁移：artplayer-tool-thumbnail",
+      "title": "建立特有行为与错误测试",
+      "scope": [
+        "artplayer-tool-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-TOOL-THUMB-01",
+        "ENG-03",
+        "ENG-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "文件输入/拖放、抽帧网格、begin/end、进度/失败/重复任务",
+      "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
+      "evidence": []
+    },
+    {
+      "id": "PKG-TOOL-THUMB-03",
+      "phase": "5 包迁移：artplayer-tool-thumbnail",
+      "title": "整理内部职责与资源",
+      "scope": [
+        "artplayer-tool-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-TOOL-THUMB-02",
+        "CORE-01"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "输入、抽帧队列、网格导出、URL/监听清理分离",
+      "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
+      "evidence": []
+    },
+    {
+      "id": "PKG-TOOL-THUMB-04",
+      "phase": "5 包迁移：artplayer-tool-thumbnail",
+      "title": "迁移自有源码和公开类型",
+      "scope": [
+        "artplayer-tool-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-TOOL-THUMB-03",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "补齐真实 API 声明，自有 emitter/utils TS 化",
+      "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": []
+    },
+    {
+      "id": "PKG-TOOL-THUMB-05",
+      "phase": "5 包迁移：artplayer-tool-thumbnail",
+      "title": "验证新旧核心和组合",
+      "scope": [
+        "artplayer-tool-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-TOOL-THUMB-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "工具独立浏览器使用，生成缩略图在核心中显示",
+      "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
+      "evidence": []
+    },
+    {
+      "id": "PKG-TOOL-THUMB-06",
+      "phase": "5 包迁移：artplayer-tool-thumbnail",
+      "title": "验证分发并同步文档",
+      "scope": [
+        "artplayer-tool-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-TOOL-THUMB-05",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "tool.thumbnail.js、历史 ESM 兼容文件、types 路径和 tarball",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "evidence": []
+    },
+    {
+      "id": "SITE-01",
+      "phase": "6 文档与消费者",
+      "title": "清点文档/示例/生成链",
+      "scope": [
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "BASE-04",
+        "BASE-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "中英文文档、插件页面、demo URL、编辑器声明与生成目录清单",
+      "acceptance": "所有公开 API/插件有对应页面或明确补充任务",
+      "evidence": []
+    },
+    {
+      "id": "SITE-02",
+      "phase": "6 文档与消费者",
+      "title": "整理声明与示例生成器",
+      "scope": [
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "SITE-01",
+        "ENG-04",
+        "ENG-06"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "build-ts/build-test 生成链的可验证 TS 脚本",
+      "acceptance": "不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke",
+      "evidence": []
+    },
+    {
+      "id": "SITE-03",
+      "phase": "6 文档与消费者",
+      "title": "整理 i18n/文档/LLM 生成流程",
+      "scope": [
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "SITE-02"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理",
+      "acceptance": "原命令兼容、生成可复现，翻译步骤不隐式运行远程服务",
+      "evidence": []
+    },
+    {
+      "id": "SITE-04",
+      "phase": "6 文档与消费者",
+      "title": "同步核心和全部插件使用文档",
+      "scope": [
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "CORE-22",
+        "PKG-CHAPTER-06",
+        "PKG-AMBILIGHT-06",
+        "PKG-AUDIO-06",
+        "PKG-AUTO-THUMB-06",
+        "PKG-VTT-THUMB-06",
+        "PKG-HLS-06",
+        "PKG-DASH-06",
+        "PKG-MULTI-SUB-06",
+        "PKG-JASSUB-06",
+        "PKG-MASK-06",
+        "PKG-ASR-06",
+        "PKG-ADS-06",
+        "PKG-VAST-06",
+        "PKG-CAST-06",
+        "PKG-DPIP-06",
+        "PKG-DANMUKU-09",
+        "PKG-CANVAS-06",
+        "PKG-MB-10",
+        "PKG-IFRAME-06",
+        "PKG-TOOL-THUMB-06",
+        "SITE-03"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "中文/英文 API、插件选项、兼容说明及旧 JS 用法",
+      "acceptance": "不要求旧调用迁移，未支持能力不写成已支持",
+      "evidence": []
+    },
+    {
+      "id": "SITE-05",
+      "phase": "6 文档与消费者",
+      "title": "构建文档站和验证链接/示例",
+      "scope": [
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "SITE-04",
+        "EX-03"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "VitePress 构建、链接与嵌入 demo 检查",
+      "acceptance": "产物可访问，全部包文档与 types 注入无丢失",
+      "evidence": []
+    },
+    {
+      "id": "SITE-06",
+      "phase": "6 文档与消费者",
+      "title": "文档站交付验收",
+      "scope": [
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "SITE-05"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "维护指南和站点变更记录",
+      "acceptance": "未手改 generated 目录，旧 URL 可用、部署与检查分离",
+      "evidence": []
+    },
+    {
+      "id": "EX-01",
+      "phase": "6 文档与消费者",
+      "title": "验证 React 消费者与 TS",
+      "scope": [
+        "example/react.js"
+      ],
+      "dependsOn": [
+        "CORE-22",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "React 挂载/卸载/重挂载、引用和插件样例",
+      "acceptance": "真实 tarball + TS 消费通过，保留既有 React 集成 API",
+      "evidence": []
+    },
+    {
+      "id": "EX-02",
+      "phase": "6 文档与消费者",
+      "title": "验证 Vue 消费者与更新卸载",
+      "scope": [
+        "example/vue.js"
+      ],
+      "dependsOn": [
+        "CORE-22",
+        "ENG-07"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "Vue 实例/ref、参数更新、卸载及插件样例",
+      "acceptance": "旧 JS 组件用法无需修改，重复挂载不泄漏",
+      "evidence": []
+    },
+    {
+      "id": "EX-03",
+      "phase": "6 文档与消费者",
+      "title": "验证全部原生 demo 与外部播放集成",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "EX-01",
+        "EX-02",
+        "PKG-CHAPTER-06",
+        "PKG-AMBILIGHT-06",
+        "PKG-AUDIO-06",
+        "PKG-AUTO-THUMB-06",
+        "PKG-VTT-THUMB-06",
+        "PKG-HLS-06",
+        "PKG-DASH-06",
+        "PKG-MULTI-SUB-06",
+        "PKG-JASSUB-06",
+        "PKG-MASK-06",
+        "PKG-ASR-06",
+        "PKG-ADS-06",
+        "PKG-VAST-06",
+        "PKG-CAST-06",
+        "PKG-DPIP-06",
+        "PKG-DANMUKU-09",
+        "PKG-CANVAS-06",
+        "PKG-MB-10",
+        "PKG-IFRAME-06",
+        "PKG-TOOL-THUMB-06"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录",
+      "acceptance": "旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过",
+      "evidence": []
+    },
+    {
+      "id": "MOD-01",
+      "phase": "7 工具链与性能",
+      "title": "Bun 固定版本干净安装试点",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-09"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "独立目录的 Bun 锁文件、lifecycle/peer/workspace 与全部构建对比",
+      "acceptance": "Node 测试仍通过；安装与资源一致才决定采用；不改 bundler",
+      "evidence": []
+    },
+    {
+      "id": "MOD-02",
+      "phase": "7 工具链与性能",
+      "title": "整理剩余开发/构建脚本与插件模板",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "MOD-01",
+        "SITE-03"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API",
+      "acceptance": "旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证",
+      "evidence": []
+    },
+    {
+      "id": "MOD-03",
+      "phase": "7 工具链与性能",
+      "title": "测量并优化核心热路径",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "CORE-22",
+        "ENG-08"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "DOM 读写、进度更新、持久化、初始化的测量与改进",
+      "acceptance": "相同设备媒体多次比较，契约不变，收益及无效尝试记录",
+      "evidence": []
+    },
+    {
+      "id": "MOD-04",
+      "phase": "7 工具链与性能",
+      "title": "测量并优化重型插件/proxy",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-09",
+        "PKG-MASK-06",
+        "PKG-MB-10",
+        "ENG-08"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "帧/队列/推理/音画同步与资源长期运行比较",
+      "acceptance": "不改默认算法/阈值，性能改善有证据；无收益则保留旧实现",
+      "evidence": []
+    },
+    {
+      "id": "MOD-05",
+      "phase": "7 工具链与性能",
+      "title": "完成工具链与性能采用决策",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "MOD-02",
+        "MOD-03",
+        "MOD-04"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "最终 runtime/packageManager/构建配置及性能台账",
+      "acceptance": "干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换",
+      "evidence": []
+    },
+    {
+      "id": "REL-01",
+      "phase": "8 发布验收",
+      "title": "确定分包版本与差异处置",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "SITE-06",
+        "EX-03",
+        "MOD-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "每包变更日志/版本/依赖/类型差异及支持范围",
+      "acceptance": "所有公共差异已解释或解决；未决破坏性变化阻止兼容发布",
+      "evidence": []
+    },
+    {
+      "id": "REL-02",
+      "phase": "8 发布验收",
+      "title": "生成候选 tarball 并验证新旧组合",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "REL-01"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "全部候选包与原支持范围消费者安装矩阵",
+      "acceptance": "新核心旧插件、旧核心新插件、新新组合和历史路径通过",
+      "evidence": []
+    },
+    {
+      "id": "REL-03",
+      "phase": "8 发布验收",
+      "title": "完成真机、外部 SDK 与压力验收",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "REL-02"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Safari/移动/PiP/Cast/IMA/模型/长播放完整报告",
+      "acceptance": "无环境验证的关键能力保持阻塞，mock 不能替代设备结论",
+      "evidence": []
+    },
+    {
+      "id": "REL-04",
+      "phase": "8 发布验收",
+      "title": "演练回退与主线修复同步",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "REL-03"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "分包旧版本/tag/依赖回退方案与 master 差异",
+      "acceptance": "独立回退可行，紧急修复能同步，无需所有用户联动升级",
+      "evidence": []
+    },
+    {
+      "id": "REL-05",
+      "phase": "8 发布验收",
+      "title": "经授权发布候选并收集反馈",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "REL-04"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "候选 tag、完整产物 integrity、反馈与复现记录",
+      "acceptance": "实际发布授权/操作/版本可追溯；本计划不自动执行发布",
+      "evidence": []
+    },
+    {
+      "id": "REL-06",
+      "phase": "8 发布验收",
+      "title": "经授权分批正式发布",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "REL-05"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "正式分包版本/tag/站点文档及兼容公告",
+      "acceptance": "候选验收通过，安装/浏览器复核和回退入口就绪",
+      "evidence": []
+    },
+    {
+      "id": "REL-07",
+      "phase": "8 发布验收",
+      "title": "关闭重构里程碑并维护后续队列",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "REL-06"
+      ],
+      "status": "todo",
+      "risk": "L",
+      "deliverable": "最终任务/设计/证据归档和维护指南",
+      "acceptance": "全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任",
+      "evidence": []
+    }
+  ]
+}

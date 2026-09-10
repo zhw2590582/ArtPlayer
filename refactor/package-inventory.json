@@ -1,0 +1,954 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-10",
+  "baselineCommit": "40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f",
+  "note": "Checkout snapshot, not a verified npm release baseline. Preserve this initial snapshot.",
+  "packages": [
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "kind": "core",
+      "manifest": "packages/artplayer/package.json",
+      "entry": "packages/artplayer/src/index.js",
+      "main": "./dist/artplayer.js",
+      "module": "./dist/artplayer.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer.d.ts",
+          "import": "./dist/artplayer.mjs",
+          "require": "./dist/artplayer.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer.d.ts",
+          "import": "./dist/artplayer.legacy.js",
+          "require": "./dist/artplayer.legacy.js"
+        },
+        "./i18n/*": {
+          "types": "./types/i18n.d.ts",
+          "import": "./dist/i18n/*.mjs",
+          "require": "./dist/i18n/*.js"
+        }
+      },
+      "types": "./types/artplayer.d.ts",
+      "typesVersions": {
+        "*": {
+          "i18n/*": [
+            "types/i18n.d.ts"
+          ],
+          "legacy": [
+            "types/artplayer.d.ts"
+          ]
+        }
+      },
+      "legacy": "./dist/artplayer.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer/src/config/index.js",
+        "packages/artplayer/src/contextmenu/aspectRatio.js",
+        "packages/artplayer/src/contextmenu/close.js",
+        "packages/artplayer/src/contextmenu/flip.js",
+        "packages/artplayer/src/contextmenu/index.js",
+        "packages/artplayer/src/contextmenu/info.js",
+        "packages/artplayer/src/contextmenu/playbackRate.js",
+        "packages/artplayer/src/contextmenu/version.js",
+        "packages/artplayer/src/control/airplay.js",
+        "packages/artplayer/src/control/fullscreen.js",
+        "packages/artplayer/src/control/fullscreenWeb.js",
+        "packages/artplayer/src/control/index.js",
+        "packages/artplayer/src/control/pip.js",
+        "packages/artplayer/src/control/playAndPause.js",
+        "packages/artplayer/src/control/progress.js",
+        "packages/artplayer/src/control/screenshot.js",
+        "packages/artplayer/src/control/setting.js",
+        "packages/artplayer/src/control/time.js",
+        "packages/artplayer/src/control/volume.js",
+        "packages/artplayer/src/events/clickInit.js",
+        "packages/artplayer/src/events/gestureInit.js",
+        "packages/artplayer/src/events/globalInit.js",
+        "packages/artplayer/src/events/hoverInit.js",
+        "packages/artplayer/src/events/index.js",
+        "packages/artplayer/src/events/moveInit.js",
+        "packages/artplayer/src/events/resizeInit.js",
+        "packages/artplayer/src/events/updateInit.js",
+        "packages/artplayer/src/events/viewInit.js",
+        "packages/artplayer/src/hotkey.js",
+        "packages/artplayer/src/i18n/ar.js",
+        "packages/artplayer/src/i18n/cs.js",
+        "packages/artplayer/src/i18n/es.js",
+        "packages/artplayer/src/i18n/fa.js",
+        "packages/artplayer/src/i18n/fr.js",
+        "packages/artplayer/src/i18n/id.js",
+        "packages/artplayer/src/i18n/index.js",
+        "packages/artplayer/src/i18n/pl.js",
+        "packages/artplayer/src/i18n/ru.js",
+        "packages/artplayer/src/i18n/tr.js",
+        "packages/artplayer/src/i18n/vi.js",
+        "packages/artplayer/src/i18n/zh-cn.js",
+        "packages/artplayer/src/i18n/zh-tw.js",
+        "packages/artplayer/src/icons/index.js",
+        "packages/artplayer/src/index.js",
+        "packages/artplayer/src/info.js",
+        "packages/artplayer/src/layer.js",
+        "packages/artplayer/src/libs/screenfull.js",
+        "packages/artplayer/src/loading.js",
+        "packages/artplayer/src/mask.js",
+        "packages/artplayer/src/notice.js",
+        "packages/artplayer/src/player/airplayMix.js",
+        "packages/artplayer/src/player/aspectRatioMix.js",
+        "packages/artplayer/src/player/attrMix.js",
+        "packages/artplayer/src/player/autoHeightMix.js",
+        "packages/artplayer/src/player/autoSizeMix.js",
+        "packages/artplayer/src/player/cssVarMix.js",
+        "packages/artplayer/src/player/currentTimeMix.js",
+        "packages/artplayer/src/player/durationMix.js",
+        "packages/artplayer/src/player/eventInit.js",
+        "packages/artplayer/src/player/flipMix.js",
+        "packages/artplayer/src/player/fullscreenMix.js",
+        "packages/artplayer/src/player/fullscreenWebMix.js",
+        "packages/artplayer/src/player/index.js",
+        "packages/artplayer/src/player/loadedMix.js",
+        "packages/artplayer/src/player/miniMix.js",
+        "packages/artplayer/src/player/optionInit.js",
+        "packages/artplayer/src/player/pauseMix.js",
+        "packages/artplayer/src/player/pipMix.js",
+        "packages/artplayer/src/player/playMix.js",
+        "packages/artplayer/src/player/playbackRateMix.js",
+        "packages/artplayer/src/player/playedMix.js",
+        "packages/artplayer/src/player/playingMix.js",
+        "packages/artplayer/src/player/posterMix.js",
+        "packages/artplayer/src/player/qualityMix.js",
+        "packages/artplayer/src/player/rectMix.js",
+        "packages/artplayer/src/player/screenshotMix.js",
+        "packages/artplayer/src/player/seekMix.js",
+        "packages/artplayer/src/player/stateMix.js",
+        "packages/artplayer/src/player/subtitleOffsetMix.js",
+        "packages/artplayer/src/player/switchMix.js",
+        "packages/artplayer/src/player/themeMix.js",
+        "packages/artplayer/src/player/thumbnailsMix.js",
+        "packages/artplayer/src/player/toggleMix.js",
+        "packages/artplayer/src/player/typeMix.js",
+        "packages/artplayer/src/player/urlMix.js",
+        "packages/artplayer/src/player/volumeMix.js",
+        "packages/artplayer/src/plugins/autoOrientation.js",
+        "packages/artplayer/src/plugins/autoPlayback.js",
+        "packages/artplayer/src/plugins/fastForward.js",
+        "packages/artplayer/src/plugins/index.js",
+        "packages/artplayer/src/plugins/lock.js",
+        "packages/artplayer/src/plugins/miniProgressBar.js",
+        "packages/artplayer/src/scheme/index.js",
+        "packages/artplayer/src/setting/aspectRatio.js",
+        "packages/artplayer/src/setting/flip.js",
+        "packages/artplayer/src/setting/index.js",
+        "packages/artplayer/src/setting/playbackRate.js",
+        "packages/artplayer/src/setting/subtitleOffset.js",
+        "packages/artplayer/src/storage.js",
+        "packages/artplayer/src/subtitle.js",
+        "packages/artplayer/src/template.js",
+        "packages/artplayer/src/utils/compatibility.js",
+        "packages/artplayer/src/utils/component.js",
+        "packages/artplayer/src/utils/dom.js",
+        "packages/artplayer/src/utils/emitter.js",
+        "packages/artplayer/src/utils/error.js",
+        "packages/artplayer/src/utils/file.js",
+        "packages/artplayer/src/utils/format.js",
+        "packages/artplayer/src/utils/index.js",
+        "packages/artplayer/src/utils/property.js",
+        "packages/artplayer/src/utils/subtitle.js",
+        "packages/artplayer/src/utils/time.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer/types/artplayer.d.ts",
+        "packages/artplayer/types/component.d.ts",
+        "packages/artplayer/types/config.d.ts",
+        "packages/artplayer/types/cssVar.d.ts",
+        "packages/artplayer/types/events.d.ts",
+        "packages/artplayer/types/i18n.d.ts",
+        "packages/artplayer/types/icons.d.ts",
+        "packages/artplayer/types/option.d.ts",
+        "packages/artplayer/types/player.d.ts",
+        "packages/artplayer/types/quality.d.ts",
+        "packages/artplayer/types/setting.d.ts",
+        "packages/artplayer/types/subtitle.d.ts",
+        "packages/artplayer/types/template.d.ts",
+        "packages/artplayer/types/utils.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/index.js",
+        "docs/assets/example/mobile.js",
+        "docs/assets/example/setting.test.js",
+        "docs/assets/example/hls.js",
+        "docs/assets/example/dash.js",
+        "docs/assets/example/flv.js",
+        "docs/assets/example/mpegts.js",
+        "docs/assets/example/webtorrent.js",
+        "docs/assets/example/thumbnail.js"
+      ],
+      "dependencies": {
+        "option-validator": "^2.0.6"
+      },
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "2.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-ads/package.json",
+      "entry": "packages/artplayer-plugin-ads/src/index.js",
+      "main": "./dist/artplayer-plugin-ads.js",
+      "module": "./dist/artplayer-plugin-ads.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-ads.d.ts",
+          "import": "./dist/artplayer-plugin-ads.mjs",
+          "require": "./dist/artplayer-plugin-ads.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-ads.d.ts",
+          "import": "./dist/artplayer-plugin-ads.legacy.js",
+          "require": "./dist/artplayer-plugin-ads.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-ads.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-ads.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-ads/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-ads/types/artplayer-plugin-ads.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/ads.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-ambilight/package.json",
+      "entry": "packages/artplayer-plugin-ambilight/src/index.js",
+      "main": "./dist/artplayer-plugin-ambilight.js",
+      "module": "./dist/artplayer-plugin-ambilight.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-ambilight.d.ts",
+          "import": "./dist/artplayer-plugin-ambilight.mjs",
+          "require": "./dist/artplayer-plugin-ambilight.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-ambilight.d.ts",
+          "import": "./dist/artplayer-plugin-ambilight.legacy.js",
+          "require": "./dist/artplayer-plugin-ambilight.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-ambilight.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-ambilight.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-ambilight/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-ambilight/types/artplayer-plugin-ambilight.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/ambilight.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "version": "2.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-asr/package.json",
+      "entry": "packages/artplayer-plugin-asr/src/index.js",
+      "main": "./dist/artplayer-plugin-asr.js",
+      "module": "./dist/artplayer-plugin-asr.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-asr.d.ts",
+          "import": "./dist/artplayer-plugin-asr.mjs",
+          "require": "./dist/artplayer-plugin-asr.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-asr.d.ts",
+          "import": "./dist/artplayer-plugin-asr.legacy.js",
+          "require": "./dist/artplayer-plugin-asr.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-asr.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-asr.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-asr/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-asr/types/artplayer-plugin-asr.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/asr.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-audio-track/package.json",
+      "entry": "packages/artplayer-plugin-audio-track/src/index.js",
+      "main": "dist/artplayer-plugin-audio-track.js",
+      "module": "./dist/artplayer-plugin-audio-track.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-audio-track.d.ts",
+          "import": "./dist/artplayer-plugin-audio-track.mjs",
+          "require": "./dist/artplayer-plugin-audio-track.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-audio-track.d.ts",
+          "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+          "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+        }
+      },
+      "types": "types/artplayer-plugin-audio-track.d.ts",
+      "typesVersions": null,
+      "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-audio-track/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/audio.track.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-auto-thumbnail/package.json",
+      "entry": "packages/artplayer-plugin-auto-thumbnail/src/index.js",
+      "main": "./dist/artplayer-plugin-auto-thumbnail.js",
+      "module": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+          "import": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+          "require": "./dist/artplayer-plugin-auto-thumbnail.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+          "import": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+          "require": "./dist/artplayer-plugin-auto-thumbnail.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-auto-thumbnail/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-auto-thumbnail/types/artplayer-plugin-auto-thumbnail.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/auto.thumbnail.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-chapter/package.json",
+      "entry": "packages/artplayer-plugin-chapter/src/index.js",
+      "main": "./dist/artplayer-plugin-chapter.js",
+      "module": "./dist/artplayer-plugin-chapter.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-chapter.d.ts",
+          "import": "./dist/artplayer-plugin-chapter.mjs",
+          "require": "./dist/artplayer-plugin-chapter.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-chapter.d.ts",
+          "import": "./dist/artplayer-plugin-chapter.legacy.js",
+          "require": "./dist/artplayer-plugin-chapter.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-chapter.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-chapter.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-chapter/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-chapter/types/artplayer-plugin-chapter.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/chapter.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-chromecast/package.json",
+      "entry": "packages/artplayer-plugin-chromecast/src/index.js",
+      "main": "./dist/artplayer-plugin-chromecast.js",
+      "module": "./dist/artplayer-plugin-chromecast.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-chromecast.d.ts",
+          "import": "./dist/artplayer-plugin-chromecast.mjs",
+          "require": "./dist/artplayer-plugin-chromecast.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-chromecast.d.ts",
+          "import": "./dist/artplayer-plugin-chromecast.legacy.js",
+          "require": "./dist/artplayer-plugin-chromecast.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-chromecast.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-chromecast.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-chromecast/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-chromecast/types/artplayer-plugin-chromecast.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/chromecast.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.3.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-danmuku/package.json",
+      "entry": "packages/artplayer-plugin-danmuku/src/index.js",
+      "main": "./dist/artplayer-plugin-danmuku.js",
+      "module": "./dist/artplayer-plugin-danmuku.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-danmuku.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku.mjs",
+          "require": "./dist/artplayer-plugin-danmuku.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-danmuku.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku.legacy.js",
+          "require": "./dist/artplayer-plugin-danmuku.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-danmuku.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-danmuku.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-danmuku/src/bilibili.js",
+        "packages/artplayer-plugin-danmuku/src/danmuku.js",
+        "packages/artplayer-plugin-danmuku/src/heatmap.js",
+        "packages/artplayer-plugin-danmuku/src/index.js",
+        "packages/artplayer-plugin-danmuku/src/setting.js",
+        "packages/artplayer-plugin-danmuku/src/worker.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/danmuku.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-danmuku-mask/package.json",
+      "entry": "packages/artplayer-plugin-danmuku-mask/src/index.js",
+      "main": "./dist/artplayer-plugin-danmuku-mask.js",
+      "module": "./dist/artplayer-plugin-danmuku-mask.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku-mask.mjs",
+          "require": "./dist/artplayer-plugin-danmuku-mask.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+          "require": "./dist/artplayer-plugin-danmuku-mask.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-danmuku-mask/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-danmuku-mask/types/artplayer-plugin-danmuku-mask.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/danmuku.mask.js"
+      ],
+      "dependencies": {
+        "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+        "@tensorflow-models/body-segmentation": "^1.0.2",
+        "@tensorflow/tfjs-backend-cpu": "^4.21.0",
+        "@tensorflow/tfjs-backend-webgl": "^4.21.0",
+        "@tensorflow/tfjs-converter": "^4.21.0",
+        "@tensorflow/tfjs-core": "^4.21.0"
+      },
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-dash-control/package.json",
+      "entry": "packages/artplayer-plugin-dash-control/src/index.js",
+      "main": "./dist/artplayer-plugin-dash-control.js",
+      "module": "./dist/artplayer-plugin-dash-control.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-dash-control.d.ts",
+          "import": "./dist/artplayer-plugin-dash-control.mjs",
+          "require": "./dist/artplayer-plugin-dash-control.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-dash-control.d.ts",
+          "import": "./dist/artplayer-plugin-dash-control.legacy.js",
+          "require": "./dist/artplayer-plugin-dash-control.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-dash-control.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-dash-control.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-dash-control/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/dash.control.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-document-pip/package.json",
+      "entry": "packages/artplayer-plugin-document-pip/src/index.js",
+      "main": "./dist/artplayer-plugin-document-pip.js",
+      "module": "./dist/artplayer-plugin-document-pip.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-document-pip.d.ts",
+          "import": "./dist/artplayer-plugin-document-pip.mjs",
+          "require": "./dist/artplayer-plugin-document-pip.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-document-pip.d.ts",
+          "import": "./dist/artplayer-plugin-document-pip.legacy.js",
+          "require": "./dist/artplayer-plugin-document-pip.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-document-pip.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-document-pip.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-document-pip/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-document-pip/types/artplayer-plugin-document-pip.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/document.pip.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-hls-control/package.json",
+      "entry": "packages/artplayer-plugin-hls-control/src/index.js",
+      "main": "./dist/artplayer-plugin-hls-control.js",
+      "module": "./dist/artplayer-plugin-hls-control.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-hls-control.d.ts",
+          "import": "./dist/artplayer-plugin-hls-control.mjs",
+          "require": "./dist/artplayer-plugin-hls-control.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-hls-control.d.ts",
+          "import": "./dist/artplayer-plugin-hls-control.legacy.js",
+          "require": "./dist/artplayer-plugin-hls-control.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-hls-control.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-hls-control.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-hls-control/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/hls.control.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-jassub/package.json",
+      "entry": "packages/artplayer-plugin-jassub/src/index.js",
+      "main": "dist/artplayer-plugin-jassub.js",
+      "module": "./dist/artplayer-plugin-jassub.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-jassub.d.ts",
+          "import": "./dist/artplayer-plugin-jassub.mjs",
+          "require": "./dist/artplayer-plugin-jassub.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-jassub.d.ts",
+          "import": "./dist/artplayer-plugin-jassub.legacy.js",
+          "require": "./dist/artplayer-plugin-jassub.legacy.js"
+        }
+      },
+      "types": "types/artplayer-plugin-jassub.d.ts",
+      "typesVersions": null,
+      "legacy": "dist/artplayer-plugin-jassub.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-jassub/src/index.js",
+        "packages/artplayer-plugin-jassub/src/jassub.es.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-jassub/types/artplayer-plugin-jassub.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/jassub.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "version": "1.2.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-multiple-subtitles/package.json",
+      "entry": "packages/artplayer-plugin-multiple-subtitles/src/index.js",
+      "main": "./dist/artplayer-plugin-multiple-subtitles.js",
+      "module": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+          "import": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+          "require": "./dist/artplayer-plugin-multiple-subtitles.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+          "import": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+          "require": "./dist/artplayer-plugin-multiple-subtitles.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-multiple-subtitles/src/index.js",
+        "packages/artplayer-plugin-multiple-subtitles/src/parser.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-multiple-subtitles/types/artplayer-plugin-multiple-subtitles.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/multiple.subtitles.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "version": "1.2.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-vast/package.json",
+      "entry": "packages/artplayer-plugin-vast/src/index.js",
+      "main": "./dist/artplayer-plugin-vast.js",
+      "module": "./dist/artplayer-plugin-vast.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-vast.d.ts",
+          "import": "./dist/artplayer-plugin-vast.mjs",
+          "require": "./dist/artplayer-plugin-vast.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-vast.d.ts",
+          "import": "./dist/artplayer-plugin-vast.legacy.js",
+          "require": "./dist/artplayer-plugin-vast.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-vast.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-vast.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-vast/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-vast/types/artplayer-plugin-vast.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/vast.js"
+      ],
+      "dependencies": {
+        "@glomex/vast-ima-player": "^1.21.2"
+      },
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.1.0",
+      "kind": "plugin",
+      "manifest": "packages/artplayer-plugin-vtt-thumbnail/package.json",
+      "entry": "packages/artplayer-plugin-vtt-thumbnail/src/index.js",
+      "main": "./dist/artplayer-plugin-vtt-thumbnail.js",
+      "module": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+          "import": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
+          "require": "./dist/artplayer-plugin-vtt-thumbnail.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+          "import": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+          "require": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-plugin-vtt-thumbnail/src/getVttArray.js",
+        "packages/artplayer-plugin-vtt-thumbnail/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-plugin-vtt-thumbnail/types/artplayer-plugin-vtt-thumbnail.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/vtt.thumbnail.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "version": "1.1.0",
+      "kind": "proxy",
+      "manifest": "packages/artplayer-proxy-canvas/package.json",
+      "entry": "packages/artplayer-proxy-canvas/src/index.js",
+      "main": "./dist/artplayer-proxy-canvas.js",
+      "module": "./dist/artplayer-proxy-canvas.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-proxy-canvas.d.ts",
+          "import": "./dist/artplayer-proxy-canvas.mjs",
+          "require": "./dist/artplayer-proxy-canvas.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-proxy-canvas.d.ts",
+          "import": "./dist/artplayer-proxy-canvas.legacy.js",
+          "require": "./dist/artplayer-proxy-canvas.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-proxy-canvas.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-proxy-canvas.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-proxy-canvas/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-proxy-canvas/types/artplayer-proxy-canvas.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/canvas.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "version": "1.2.0",
+      "kind": "proxy",
+      "manifest": "packages/artplayer-proxy-mediabunny/package.json",
+      "entry": "packages/artplayer-proxy-mediabunny/src/index.js",
+      "main": "./dist/artplayer-proxy-mediabunny.js",
+      "module": "./dist/artplayer-proxy-mediabunny.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-proxy-mediabunny.d.ts",
+          "import": "./dist/artplayer-proxy-mediabunny.mjs",
+          "require": "./dist/artplayer-proxy-mediabunny.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-proxy-mediabunny.d.ts",
+          "import": "./dist/artplayer-proxy-mediabunny.legacy.js",
+          "require": "./dist/artplayer-proxy-mediabunny.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-proxy-mediabunny.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-proxy-mediabunny.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-proxy-mediabunny/src/AudioEngine.js",
+        "packages/artplayer-proxy-mediabunny/src/EventTarget.js",
+        "packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.js",
+        "packages/artplayer-proxy-mediabunny/src/VideoEngine.js",
+        "packages/artplayer-proxy-mediabunny/src/VideoShim.js",
+        "packages/artplayer-proxy-mediabunny/src/index.js",
+        "packages/artplayer-proxy-mediabunny/src/input.js",
+        "packages/artplayer-proxy-mediabunny/src/m3u8.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-proxy-mediabunny/types/artplayer-proxy-mediabunny.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/mediabunny.js"
+      ],
+      "dependencies": {
+        "mediabunny": "^1.43.1"
+      },
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "version": "1.1.0",
+      "kind": "tool",
+      "manifest": "packages/artplayer-tool-iframe/package.json",
+      "entry": "packages/artplayer-tool-iframe/src/index.js",
+      "main": "./dist/artplayer-tool-iframe.js",
+      "module": "./dist/artplayer-tool-iframe.mjs",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-tool-iframe.d.ts",
+          "import": "./dist/artplayer-tool-iframe.mjs",
+          "require": "./dist/artplayer-tool-iframe.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-tool-iframe.d.ts",
+          "import": "./dist/artplayer-tool-iframe.legacy.js",
+          "require": "./dist/artplayer-tool-iframe.legacy.js"
+        }
+      },
+      "types": "./types/artplayer-tool-iframe.d.ts",
+      "typesVersions": null,
+      "legacy": "./dist/artplayer-tool-iframe.legacy.js",
+      "declaredTypesExist": true,
+      "sourceFiles": [
+        "packages/artplayer-tool-iframe/src/index.js"
+      ],
+      "typeFiles": [
+        "packages/artplayer-tool-iframe/types/artplayer-tool-iframe.d.ts"
+      ],
+      "examples": [
+        "docs/assets/example/iframe.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "version": "4.4.0",
+      "kind": "tool",
+      "manifest": "packages/artplayer-tool-thumbnail/package.json",
+      "entry": "packages/artplayer-tool-thumbnail/src/index.js",
+      "main": null,
+      "module": "dist/artplayer-tool-thumbnail.esm.js",
+      "exports": {
+        "import": "./dist/artplayer-tool-thumbnail.esm.js",
+        "require": "./dist/artplayer-tool-thumbnail.js",
+        "default": "./dist/artplayer-tool-thumbnail.js"
+      },
+      "types": "types/artplayer-tool-thumbnail.d.ts",
+      "typesVersions": null,
+      "legacy": "dist/artplayer-tool-thumbnail.legacy.js",
+      "declaredTypesExist": false,
+      "sourceFiles": [
+        "packages/artplayer-tool-thumbnail/src/emitter.js",
+        "packages/artplayer-tool-thumbnail/src/index.js",
+        "packages/artplayer-tool-thumbnail/src/utils.js"
+      ],
+      "typeFiles": [],
+      "examples": [
+        "docs/assets/example/tool.thumbnail.js"
+      ],
+      "dependencies": {},
+      "peerDependencies": {}
+    },
+    {
+      "name": "artplayer-vitepress",
+      "version": "1.1.0",
+      "kind": "docs",
+      "manifest": "packages/artplayer-vitepress/package.json",
+      "entry": null,
+      "main": null,
+      "module": null,
+      "exports": null,
+      "types": null,
+      "typesVersions": null,
+      "legacy": null,
+      "declaredTypesExist": null,
+      "sourceFiles": [],
+      "typeFiles": [],
+      "examples": [],
+      "dependencies": {},
+      "peerDependencies": {}
+    }
+  ],
+  "consumerExamples": [
+    "example/react.js",
+    "example/vue.js"
+  ]
+}

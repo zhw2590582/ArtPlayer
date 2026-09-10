@@ -1,5 +1,23 @@
 # AGENTS.md
 
+## Compatibility Refactor
+
+The compatibility modernization plan is maintained in [refactor/README.md](refactor/README.md).
+For refactor work, read its compatibility contract, task plan, and progress log before editing.
+Use `refactor/tasks.json` as the task status source and regenerate the readable plan with
+`node refactor/scripts/plan.mjs --write`; validate it with `node refactor/scripts/plan.mjs --check`.
+Preserve existing public APIs, event behavior, types, DOM/CSS hooks, and distribution entrypoints.
+The planned TypeScript migration permits incremental JS/TS coexistence; it does not authorize
+changing consumer APIs or treating planned validation as completed validation.
+Apply [refactor/quality-contract.md](refactor/quality-contract.md) to every implementation task:
+the user authorizes improving unreasonable internals while preserving old public contracts.
+Refactor responsibilities and dependencies alongside TypeScript migration, add meaningful
+risk-based tests, and update package architecture/maintenance documentation in the same change.
+The user requires one separate local Git commit for each completed refactor task.
+Include the task ID in the commit subject and include its implementation, tests, documentation,
+and status updates together. Verify the commit before starting the next task. Do not bundle
+multiple newly completed tasks or include unrelated work. This does not authorize pushing or publishing.
+
 ## Project Summary
 
 ArtPlayer is a monorepo for a modern HTML5 video player and its ecosystem packages.
