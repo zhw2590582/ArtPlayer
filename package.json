@@ -45,6 +45,8 @@
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
     "@antfu/eslint-config": "5.4.1",
+    "@vue/compiler-sfc": "3.5.28",
+    "@yarnpkg/lockfile": "1.1.0",
     "cpy": "13.2.3",
     "cross-env": "10.1.0",
     "cross-spawn": "7.0.6",
@@ -59,7 +61,8 @@
     "servor": "4.0.2",
     "svgo": "4.1.0",
     "terser": "5.51.2",
+    "typescript": "5.9.3",
     "vite": "7.3.6"
   },
-  "packageManager": "npm@11.19.0"
+  "packageManager": "yarn@1.22.22"
 }

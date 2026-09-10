@@ -1,5 +1,11 @@
 # 进度与证据
 
+## 当前实施：ENG-PM-01 已完成 Yarn 切换
+
+标准工具链为 Node 24.21.0 / Yarn Classic 1.22.22，唯一维护 yarn.lock。最终干净冻结安装、20 项 Node 测试、只读工具检查、21 库包及文档站构建通过，63 个库产物与 npm 基线 SHA-256 全同。详见 [ENG-PM-01](changes/2026-09-10-ENG-PM-01-yarn-toolchain.md)。既有搜索 peer 警告交 SITE-05 验证。
+
+DOC-13 已提交 9d1d5fda；内置浏览器的 9 项基础 API 检查通过，BASE-02 可继续完整快照。当前 214 项任务，17 完成、197 待办。下一项 ENG-02，接入 Yarn 冻结安装和只读 PR CI；随后继续浏览器基线。没有生产 TS 迁移、推送或发布。
+
 ## 当前实施：Yarn 选择与浏览器回退
 
 用户指定 packageManager 使用 Yarn，正在准备 ENG-PM-01 替换 ENG-01 的 npm 默认工具选择。ENG-02 暂回待办，待 Yarn 锁定验证后接续。用户同时授权 Chrome 不可用时使用内置浏览器；9 项发布包基础 API 检查已通过，BASE-02 连接阻塞解除，完整快照任务仍待完成。详见 [DOC-13](changes/2026-09-10-DOC-13-browser-fallback.md)。历史 npm 和 Chrome 失败记录保留为当时事实。

@@ -410,6 +410,25 @@
       ]
     },
     {
+      "id": "ENG-PM-01",
+      "phase": "2 工程保障",
+      "title": "按用户选择切换固定 Yarn 包管理器",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-01"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "Yarn 固定版本、唯一 yarn.lock、工具检查与安装维护文档",
+      "acceptance": "干净冻结安装、Node 测试和全部构建通过；记录解析差异和依赖用途，独立提交",
+      "evidence": [
+        "changes/2026-09-10-ENG-PM-01-yarn-toolchain.md",
+        "baselines/yarn-validation.json"
+      ]
+    },
+    {
       "id": "ENG-02",
       "phase": "2 工程保障",
       "title": "拆分只读检查并建立 PR CI",
@@ -417,7 +436,8 @@
         "workspace"
       ],
       "dependsOn": [
-        "ENG-01"
+        "ENG-01",
+        "ENG-PM-01"
       ],
       "status": "todo",
       "risk": "M",
@@ -3376,7 +3396,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "VitePress 构建、链接与嵌入 demo 检查",
-      "acceptance": "文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛",
+      "acceptance": "文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为",
       "evidence": []
     },
     {
@@ -3478,8 +3498,8 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "独立目录的 Bun 锁文件、lifecycle/peer/workspace 与全部构建对比",
-      "acceptance": "Node 测试仍通过；安装与资源一致才决定采用；不改 bundler",
+      "deliverable": "独立目录的 Bun 安装与 Yarn 冻结基线对比，默认仍为用户选定的 Yarn",
+      "acceptance": "Node 测试仍通过；安装与资源一致才决定采用；不改 bundler；不自动替换默认 packageManager 或维护锁文件",
       "evidence": []
     },
     {

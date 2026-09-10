@@ -17,6 +17,9 @@ The user requires one separate local Git commit for each completed refactor task
 Include the task ID in the commit subject and include its implementation, tests, documentation,
 and status updates together. Verify the commit before starting the next task. Do not bundle
 multiple newly completed tasks or include unrelated work. This does not authorize pushing or publishing.
+Use Yarn Classic 1.22.22 as packageManager and maintain only the root yarn.lock.
+Use Node from .node-version; frozen Yarn installs and strict toolchain checks are required.
+Bun remains an isolated evaluation and must not replace Yarn without a new user decision.
 The user also authorizes installing needed dependencies and adding or improving reasonable
 project scripts for the refactor without asking again for routine tooling choices.
 Record their purpose and versions, use the appropriate workspace/dependency category, update

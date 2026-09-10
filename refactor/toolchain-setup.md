@@ -1,33 +1,29 @@
 # 可重跑的开发环境
 
-ENG-01 固定开发工具，消费者 API 和各包版本尚未修改。规范运行时是根 .node-version 的 Node 24.21.0，配套 npm 11.19.0；官方二进制已核对 SHA-256。开发依赖版本固定为本机改造前已经解析的版本，package-lock.json 是唯一提交和维护的依赖锁文件。
+用户指定 packageManager 使用 Yarn。标准组合为 Node 24.21.0（根 .node-version）和 Yarn Classic 1.22.22（根 package.json），唯一维护的安装锁文件为 yarn.lock。Yarn 版本沿用仓库原有 v1 锁格式；播放器消费者 API、包版本和浏览器构建目标不受该选择影响。
 
 ## 使用
 
-1. 安装/切换到 .node-version 指定版本，确认 `node --version` 和 `npm --version`。实施时采用的 [Node 官方发行索引](https://nodejs.org/dist/index.json) 给出 24.21.0 LTS 与 npm 11.19.0；固定后不能每次 CI 自动取 latest。
-2. 从干净 checkout 运行 `npm ci`。它会删除当前 node_modules 并按锁文件安装，不更新锁；在本轮验证中使用独立目录，未删除用户原有依赖。规则参见 [npm ci](https://docs.npmjs.com/cli/commands/npm-ci/)。
-3. 执行 `npm run check:toolchain -- --strict`，核对实际 Node/npm、16 个根开发工具及 22 workspace 的锁定声明。无 --strict 时允许满足工具最低要求的 Node，并打印与标准版本的差异。
-4. 现有 `npm run test:playback`、`npm run test:dash-control`、`npm run build -- all`、`npm --workspace artplayer-vitepress run build` 继续可用。CI 和只读 lint 的拆分由 ENG-02 接续；当前 lint 仍有 --fix，不当作只读验证。
+1. 切换到 .node-version 指定的 Node，安装 Yarn 1.22.22；例如 `npm install --global yarn@1.22.22`，然后确认 `node --version` 和 `yarn --version`。npm 仅可用于安装 Yarn 工具及消费者兼容检查，不用于维护本仓库依赖锁。
+2. 干净 checkout 执行 `yarn install --frozen-lockfile --non-interactive`，禁止 CI 自动更新锁或忽略安装脚本/engines。参见 [Yarn Classic install](https://classic.yarnpkg.com/en/docs/cli/install/)。
+3. 执行 `yarn check:toolchain --strict`，核对实际 Node/Yarn、19 个固定开发工具和 22 个 workspace 的声明及传递依赖锁条目。普通检查允许满足最低工具要求的 Node，同时打印标准版本。
+4. 执行 `yarn test:playback`、`yarn test:dash-control`、`yarn build all` 和 `yarn workspace artplayer-vitepress build`。只读 lint 和 PR CI 的拆分由 ENG-02 完成；旧 lint 当前仍有 --fix。
 
-私有根包的最低工具 Node 改为 ^20.19.0 || >=22.12.0，与已使用 Vite 7 的 engines 一致；这不是改变已发布播放器的 Node/browser 支持声明。本轮实际验证 Node 24.21.0，其他版本矩阵由 CI-01 执行，不能声称已经跑过全部最低环境。
+私有根包最低 Node 为 ^20.19.0 || >=22.12.0，与原本使用的 Vite 7 一致。本轮验证 Node 24.21.0，其他版本矩阵由 CI-01 接续，不能宣称所有最低环境已经通过。
 
-## 安装与锁文件维护
+## 锁文件和依赖维护
 
-- 原根 dependencies 全部是开发/构建工具，已移入 devDependencies 并固定精确版本；各发布包的 runtime dependencies/peer 范围保持原样。
-- 初始锁从现有安装及锁信息生成，确认已有解析路径、直接工具和 workspace runtime 版本没有升级；补齐跨平台可选包供后续 CI 使用。
-- 旧本地 yarn.lock 被忽略，留存以免删除用户文件；不作为维护锁或 CI 来源。不要混用 Yarn/Bun 改写依赖。MOD-01 另做 Bun 固定安装对比，结果通过再变更标准工具。
-- 新依赖仍按任务需要自主添加，并固定开发依赖版本；将 manifest 和 package-lock.json 同次提交。更新 runtime 范围需独立兼容证据。
-- 当前根 postinstall 执行已安装的 Lerna 8.2.4 run prepare；本轮 22 包无 prepare 脚本，输出 No packages found。是否删除空 hook 在 MOD-02 清理，不在初次固定锁时重写所有旧命令。
-- npm 11.19.0 本轮报告 esbuild（两个版本）、less、nx 安装脚本尚未列入 allowScripts 策略；未用 ignore-scripts 绕过干净安装。实际安装、构建和 Node 测试成功；后续 CI/Bun 脚本策略需按真实包版本审查，不把警告写成运行失败或自动批准任意脚本。
+- 根构建工具固定精确版本并放在 devDependencies；发布包的 dependencies/peer 范围保持原样。
+- 添加根开发依赖使用 `yarn add --dev --exact --ignore-workspace-root-check <name>@<version>`，包级依赖使用 `yarn workspace <name> add ...`；运行依赖升级需要独立兼容证据。
+- manifest 和 yarn.lock 同次提交；不提交 package-lock.json、bun.lock 或第二份安装锁。旧 npm 锁及验证报告保留于 ENG-01 Git 历史，原本地 Yarn 锁也已在忽略缓存中备份。
+- 新增 @yarnpkg/lockfile 1.1.0 为显式开发依赖，供检查器使用 Yarn 官方锁解析器；不依赖 Lerna 偶然安装的传递依赖。只验证 registry 依赖图及完整性字段，实际下载完整性由 Yarn 安装验证；peer 兼容仍由消费者测试和安装报告验证。
+- 另将原已解析的 TypeScript 5.9.3 和 @vue/compiler-sfc 3.5.28 显式声明为根开发依赖，满足 ESLint 工具链 peer 要求，防止依赖偶然提升到根目录；不在本任务迁移生产 TS 或更新公开声明。
+- packageManager 字段只是声明，严格检查核对实际执行工具。Yarn 不像 npm lock 一样存储 workspace manifest 副本，workspace 名称/版本的发布基线仍由 refactor 清单和版本任务维护。
+- 用户已选 Yarn；MOD-01 可在独立目录评估 Bun，但不能凭试点结果自行替换默认包管理器。
+- 现有 npx/npm 脚本入口仍可用，脚本整理由 MOD-02 接续；新增脚本采用本地依赖。当前 postinstall 的 Lerna prepare 在 22 包均无 prepare 时为空操作。
 
-## 已完成证据
+## 验证记录
 
-[toolchain-validation.json](baselines/toolchain-validation.json) 保存官方运行时归档 SHA、依赖锁及输入标识、安装计数、测试与构建文件摘要。
+ENG-01 的 [npm 验证报告](baselines/toolchain-validation.json) 是切换前历史证据，不代表 Yarn 已验证。[Yarn 验证报告](baselines/yarn-validation.json) 记录最终干净冻结安装、20 项 Node 测试、21 库包 63 产物及文档站构建全部通过；63 产物 SHA-256 与 ENG-01 完全相同。保留的旧锁条目版本变化为零，9 个 workspace runtime 依赖解析与 npm 基线一致。搜索 peer 警告由 SITE-05 接续验证。
 
-- Windows 独立空依赖目录：npm ci 安装 1141 个包，锁文件字节不变；无已有解析版本升级。
-- 独立 Node 24.21.0/npm 11.19.0 严格工具检查通过；原 19 项 Node 测试通过。
-- 21 个库包的正常构建全部通过（63 个 UMD/legacy/ESM 输出），VitePress 文档站构建通过；输出均在忽略的隔离目录。
-- 工具检查器能拒绝 manifest/lock 不一致。已有完整性/HTTP 服务测试加原测试共 21 项通过。
-- 计划校验器跳过 .cache/node_modules/.git，不再误扫工具下载和干净安装副本里的第三方文档。
-
-这些结果说明固定工具链能安装并构建原项目，不代表运行时、类型、真实浏览器或 npm 发布验收已完成。Chrome 连接阻塞继续由 BASE-02 登记。
+构建通过不代表运行时、类型、真实浏览器或 npm 发布验收已完成。Chrome 不可用时按 release-reviews.md 使用内置浏览器并注明实际环境。

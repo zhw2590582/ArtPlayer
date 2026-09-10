@@ -2,9 +2,9 @@
 
 ## 目标组合
 
-TypeScript 用于自有源码、检查与声明生成；Vite/Rollup 保留现有产物能力；Node 继续运行现有测试和必要脚本；Bun 先作为包管理器及脚本入口试点。浏览器消费者不依赖 Bun。
+TypeScript 用于自有源码、检查与声明生成；Vite/Rollup 保留现有产物能力；Node 继续运行现有测试和必要脚本；用户已指定 Yarn 为默认包管理器，Bun 仅作隔离试点评估。浏览器消费者不依赖 Bun。
 
-这是项目方向，不是已完成的切换。工具版本必须在 ENG-01 / MOD-01 通过干净环境试点后固定，不能沿用开发机器上偶然存在的传递依赖。
+实际固定版本与命令见 toolchain-setup.md，Yarn 切换由 ENG-PM-01 验证。新增工具必须显式声明并通过干净环境检查，不能沿用开发机器上偶然存在的传递依赖。
 
 ## 新依赖与脚本的自主选择
 
@@ -39,7 +39,7 @@ TypeScript 用于自有源码、检查与声明生成；Vite/Rollup 保留现有
 | 命令对比 | `bun run` 只是脚本入口；脚本中的 node 仍由 Node 执行，不能声称已经换运行时 |
 | 构建对比 | 相同版本和源码下构建全部包、文档、worker/WASM，比较包内容与消费者行为 |
 | Node 回归 | npm/Node 消费发布包仍通过；现有 node:test 不因包管理器变化被替换 |
-| 采用或保留 | 证据充分才改默认文档/CI/锁文件；否则保留 Node 工具链，登记试点结论 |
+| 采用或保留 | 记录对 Yarn 的对比结论；用户已选择 Yarn，未经后续新决定不得改默认文档/CI/锁文件 |
 
 评估时本机 Bun 1.3.14 直接运行现有测试遇到 node:test mock.fn 不兼容；这是具体版本的观察，未来升级应重测。Bun bundler 不作为本轮替换目标，因为需要保留 UMD、legacy 语法降级和现有资源处理。参考：[Bun bundler](https://bun.com/docs/bundler)、[workspaces](https://bun.com/docs/pm/workspaces)、[lifecycle](https://bun.com/docs/pm/lifecycle)、[TS allowJs](https://www.typescriptlang.org/tsconfig/allowJs.html)。执行时重新核对官方文档。
 
