@@ -148,6 +148,24 @@
       ]
     },
     {
+      "id": "DOC-09",
+      "phase": "0 规划",
+      "title": "记录 docs HTML 与在线编辑器测试入口",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "DOC-08"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "页面/加载方式、状态隔离、行为断言与既有任务映射",
+      "acceptance": "源码清点和计划检查通过，独立提交 DOC-09；不把页面存在当作测试通过",
+      "evidence": [
+        "changes/2026-09-10-DOC-09-docs-test-surfaces.md"
+      ]
+    },
+    {
       "id": "BASE-01",
       "phase": "1 基线",
       "title": "固定核心与试点的最小发布基线",
@@ -207,7 +225,7 @@
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "核心模板/类名/变量、键盘/焦点/可访问名称基线及全 demo 路径映射",
+      "deliverable": "核心模板/类名/变量、键盘/焦点/可访问名称基线及全 demo 路径映射；docs-browser-testing.md 中 HTML/编辑器的脚本来源与存储状态",
       "acceptance": "核心/试点用户样式和输入用法已记录，其他 demo 运行状态与未知项明确",
       "evidence": []
     },
@@ -358,8 +376,8 @@
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "Playwright projects、本地 Range/失败媒体服务",
-      "acceptance": "Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行",
+      "deliverable": "Playwright projects、本地 Range/失败媒体服务；复用 docs 页面/样本的状态隔离、错误采集与候选资源映射",
+      "acceptance": "Chromium/Firefox/WebKit 的基础播放 smoke 和报告可执行；以媒体状态断言判定通过，区分轻量用例与真实编辑器交互",
       "evidence": []
     },
     {
@@ -3096,7 +3114,7 @@
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "中英文文档、插件页面、demo URL、编辑器声明与生成目录清单",
+      "deliverable": "中英文文档、插件页面、demo URL、编辑器声明与生成目录清单；六类 HTML 入口、prod/libs/code/example 加载行为及移动重定向",
       "acceptance": "所有公开 API/插件有对应页面或明确补充任务",
       "evidence": []
     },
@@ -3115,7 +3133,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "build-ts/build-test 生成链的可验证 TS 脚本",
-      "acceptance": "不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke",
+      "acceptance": "不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke；替换固定 100ms 成功判定，明确异步错误、清理和生成覆盖限制",
       "evidence": []
     },
     {
@@ -3273,7 +3291,7 @@
       "status": "todo",
       "risk": "H",
       "deliverable": "8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录",
-      "acceptance": "旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过",
+      "acceptance": "旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据",
       "evidence": []
     },
     {

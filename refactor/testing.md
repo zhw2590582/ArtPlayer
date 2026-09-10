@@ -16,6 +16,8 @@
 
 ## 基线与差分
 
+优先复用仓库现有 HTML 和在线编辑器，入口清单及任务归属见 [docs 页面与编辑器测试](docs-browser-testing.md)。执行前固定 prod 存储状态、实际脚本路径和构建来源；现有文档 smoke 不代替异步媒体断言。
+
 1. 基线产物来自 BASE-01 固定的发布版本，保存 tarball integrity、源码 SHA、工具版本和样本信息。
 2. 同一测试对旧产物和候选产物运行，比较公开结果、事件 trace、属性描述符和 DOM 状态。
 3. 不使用整个 minified bundle 的文本相等作为 API 兼容证据。
