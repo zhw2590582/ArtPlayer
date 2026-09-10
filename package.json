@@ -35,6 +35,7 @@
     "test:playback": "node --test test/playback.test.js",
     "trans:docs": "node ./scripts/trans-docs.js",
     "create:plugin": "node ./scripts/plugin/create.js",
+    "test:dash-control": "node --test test/dash-control.test.js",
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
     "lint": "npx eslint packages/*/{src,types,package.json} scripts/*.js test/* docs/assets/ts/* --fix",
