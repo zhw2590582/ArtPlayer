@@ -76,3 +76,26 @@ TS 4.3/5.9 严格校验；真实 Monaco 验证推断、错误提示及编译后�
 MediaCapabilitiesDecodingInfo；仅 SDK 的消费者也出现相同两个诊断。插件无新增诊断，
 不注入虚假 DOM 定义或打开 skipLibCheck。独立插件五组类型模式均要求零诊断。
 PKG-HLS-05/06 继续完整 SDK、浏览器、示例及安装包验收，SDK-01/HLS-ENV-01 仍开放。
+
+## PKG-HLS-SDK-01 桌面 SDK 扩展
+
+本子任务作为 PKG-HLS-05 前置单独交付，不降低父任务的设备/SDK 验收条件。
+test/browser/hls-sdk.spec.js 使用冻结的 Hls.js 1.5.17/1.7.2 和真实 native Worker：
+监听 init/transmuxComplete 消息、错误与 terminate，并且同时验证视频帧、时间推进和销毁。
+只有 enableWorker=true 或仅创建 Worker 不算通过；实际转封装结果和清理是断言的一部分。
+这些探针委托原生操作，不注入模拟转封装输出。SDK 仍为测试归档，不进入生产依赖。
+
+worker 切源/清理覆盖两个 SDK 与新旧核心/插件四组合；候选插件另测 detach/reattach、
+两档位不同音轨组、组内重新编号和实际 SDK 切轨完成事件、鼠标选择与 UI 清理。
+高档组有 French/English/Commentary 三项、低档组有 English/French 两项，顺序有意不同。
+音频是确定性正弦样本，Commentary 复用 English 样本，不冒充真实语音或音频语言识别。
+
+版本来源、Apache-2.0 许可及成员哈希见 baselines/hls-sdk-matrix.json；新增版本来自
+[npm 固定 1.7.2 元数据](https://registry.npmjs.org/hls.js/1.7.2)，
+[上游发布记录](https://github.com/video-dev/hls.js/releases) 仅用于核对版本变化。
+这里不测试所有中间版本或外部服务器，也没有将 1.7.2 的声明改动等同于类型矩阵全部通过。
+实际 TypeScript SDK 声明消费仍只有 PKG-HLS-04 明确记录的 1.5.17 范围。
+
+本子任务暂未完成：一次 Firefox 分组切换后的销毁出现 Target crashed，HLS-CRASH-01
+仍待定位。后续完整矩阵和重复通过不能抹去首次失败；详见
+[进行中记录](changes/2026-09-12-PKG-HLS-SDK-01-integration.md)。

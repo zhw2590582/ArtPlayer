@@ -1861,6 +1861,27 @@
       ]
     },
     {
+      "id": "PKG-HLS-SDK-01",
+      "phase": "5 包迁移：artplayer-plugin-hls-control",
+      "title": "验证真实 SDK worker 与分组轨道组合",
+      "scope": [
+        "artplayer-plugin-hls-control"
+      ],
+      "dependsOn": [
+        "PKG-HLS-04",
+        "CORE-22"
+      ],
+      "status": "doing",
+      "risk": "H",
+      "deliverable": "固定历史及当前 SDK 归档、真实 worker/多音轨组、外部选择与重绑定浏览器证据",
+      "acceptance": "受支持桌面 MSE 引擎与新旧核心通过；无 worker 回退伪通过，设备缺口仍由 PKG-HLS-05 保持未完成",
+      "evidence": [
+        "changes/2026-09-12-PKG-HLS-SDK-01-integration.md",
+        "baselines/hls-sdk-validation.json",
+        "baselines/hls-sdk-diagnostics.json"
+      ]
+    },
+    {
       "id": "PKG-HLS-05",
       "phase": "5 包迁移：artplayer-plugin-hls-control",
       "title": "验证新旧核心和组合",
@@ -1869,7 +1890,8 @@
       ],
       "dependsOn": [
         "PKG-HLS-04",
-        "CORE-22"
+        "CORE-22",
+        "PKG-HLS-SDK-01"
       ],
       "status": "todo",
       "risk": "H",

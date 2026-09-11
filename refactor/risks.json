@@ -2606,6 +2606,43 @@
       ],
       "compatibleResolution": "显式验证宿主不支持，保留 14 skipped，不作为播放通过；补有 MSE 的 Safari/macOS/iOS 环境。",
       "closureCriteria": "实际 Safari/MSE/native 路径证据齐全，不能仅凭 Windows 能力检查关闭。"
+    },
+    {
+      "id": "HLS-CRASH-01",
+      "title": "Firefox Hls 1.5.17 worker 销毁可在原生 video 与候选核心复现崩溃",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-HLS-SDK-01",
+        "PKG-HLS-05",
+        "REVIEW-02"
+      ],
+      "evidence": [
+        "test/browser/hls-sdk.spec.js",
+        "refactor/changes/2026-09-12-PKG-HLS-SDK-01-integration.md",
+        "refactor/baselines/hls-sdk-diagnostics.json",
+        "refactor/scripts/hls-sdk-diagnostic.mjs"
+      ],
+      "compatibleResolution": "直接原生 video（无 ArtPlayer/插件）和候选核心已有 page crashed；候选核心无观察器也复现。继续区分 SDK、Firefox/Playwright 与媒体销毁，不静默改核心 destroy 顺序或调用方 SDK 配置。",
+      "closureCriteria": "取得可解释的崩溃诊断或直接 SDK 对照；验证处置和新旧核心/worker/分组销毁矩阵，不能仅以再次通过关闭。"
+    },
+    {
+      "id": "HLS-PLAYBACK-01",
+      "title": "Firefox 旧核心与 Hls 1.7.2 切组后视频档位未完成切换",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-HLS-SDK-01",
+        "PKG-HLS-05",
+        "REVIEW-02"
+      ],
+      "evidence": [
+        "test/browser/hls-sdk.spec.js",
+        "refactor/changes/2026-09-12-PKG-HLS-SDK-01-integration.md",
+        "refactor/baselines/hls-sdk-validation.json"
+      ],
+      "compatibleResolution": "区分 SDK、测试媒体/时序和宿主问题，保留真实档位/解码断言及 trace；不扩大等待或只验证菜单。",
+      "closureCriteria": "直接 Hls 与新旧核心对照定位切换停滞，验证处置和正常/连续组切换，不能以重复通过关闭。"
     }
   ]
 }

@@ -95,6 +95,7 @@ node --test test/hls-control.test.js
 node --test refactor/scripts/hls-types.test.mjs
 yarn test:browser hls-control.spec.js
 yarn test:browser hls-editor-types.spec.js
+yarn test:browser hls-sdk.spec.js
 yarn build artplayer-plugin-hls-control
 yarn build:ts
 yarn ci:check
@@ -106,11 +107,23 @@ and test attachments record its bytes. These checks do not replace isolated tarb
 Use the local demo at `http://localhost:8082` with example `hls.control` during example work.
 
 Windows Playwright WebKit lacks MSE; explicit capability/error cleanup runs there, while playback
-cases are marked skipped. Safari/native HLS, SDK workers, grouped track changes, SDK version range,
-updated example and isolated package verification remain PKG-HLS-05/06 work. See
+cases are marked skipped. The SDK suite uses frozen Hls.js 1.5.17/1.7.2, real native workers and local
+media to test replacement, detach/reattach and reordered audio groups with published/current core.
+Worker messages and termination are observed without substituting worker output. Grouped playlists
+reuse generated video/audio segments; the Commentary track intentionally reuses the English tone.
+The fixed releases are two tested points, not a supported version range or new minimum version.
+Safari/native HLS, external network/device evidence, updated example and isolated package verification
+remain PKG-HLS-05/06 work. See
 [refactor validation](../../refactor/hls-validation.md). Keep these gaps visible in release reviews.
 
 Actual Hls.js 1.5.17 declaration consumers pass TS 5.9.3. TS 4.3.5 reports two existing SDK DOM type
 errors (MediaDecodingConfiguration and MediaCapabilitiesDecodingInfo), reproduced with the SDK alone.
 The plugin introduces no additional errors; do not hide those SDK diagnostics with skipLibCheck or
 claim every SDK/compiler combination passes. Standalone plugin consumers pass both compilers.
+
+For unresolved Firefox grouped-stream diagnostics, use
+`node refactor/scripts/hls-sdk-diagnostic.mjs --host direct --transport route --iterations 5`.
+`--host published|candidate --plugin` adds an actual core and the candidate plugin;
+`--observe-workers` uses the same native-worker observer as the integration suite. Each run retains
+its own report and trace files. See the HLS-SDK-01 in-progress record: one target crash and a separate
+group-switch stall remain unclassified. Passing diagnostic repetitions are not release evidence.

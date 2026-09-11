@@ -1,5 +1,6 @@
 * text=auto
 *.js text eol=lf
 test/browser/media/hls/*.m3u8 text eol=lf
+test/browser/fixtures/hls-grouped.m3u8 text eol=lf
 test/browser/media/hls/*.mpegts binary
 refactor/baselines/core-vendor/*.txt text eol=lf

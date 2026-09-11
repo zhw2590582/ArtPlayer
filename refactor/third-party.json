@@ -1034,7 +1034,7 @@
         "docs/assets/example/hls.control.js"
       ],
       "contract": "Caller supplies art.hls; homepage demo loads hls.js 1.5.17. Preserve quality/audio selectors and old core integration.",
-      "validationStatus": "PKG-HLS-03 verifies actual Hls.js 1.5.17 on Chromium/Firefox with source/published core and modern/legacy candidate builds. Auto/topology/lifecycle defects fixed; Windows WebKit has no MSE. Safari/native, detach/reattach, worker, grouped tracks, versions and isolated installation remain HLS-05/06 and EX-03.",
+      "validationStatus": "PKG-HLS-SDK-01 tests pinned Hls.js 1.5.17/1.7.2 with native workers, grouped audio, replacement and detach/reattach across published/current core on desktop MSE engines. Inputs remain test-only archives. Windows WebKit lacks MSE; Safari/native, physical devices, external networks, full SDK types/version range and isolated installation remain HLS-05/06 and EX-03. One Firefox grouped teardown target crash remains unexplained (HLS-CRASH-01); passing subsequent runs are not closure evidence and SDK task remains doing.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

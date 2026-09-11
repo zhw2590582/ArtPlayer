@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 215 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 216 项，范围 22 个包及工作区/示例。
 
-状态：todo 150 / doing 0 / blocked 0 / done 65 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 150 / doing 1 / blocked 0 / done 65 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -26,7 +26,7 @@
 | artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06 |
 | artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-05, PKG-DASH-06 |
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
-| artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-05, PKG-HLS-06 |
+| artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06 |
 | artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06 |
 | artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06 |
 | artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06 |
@@ -192,7 +192,8 @@
 | PKG-HLS-02 | artplayer-plugin-hls-control<br>建立特有行为与错误测试 | PKG-HLS-01, ENG-03, ENG-05 | Auto/手动实际 level、音轨、去重/过滤和拓扑变化 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-HLS-03 | artplayer-plugin-hls-control<br>整理内部职责与资源 | PKG-HLS-02, CORE-11, CORE-14 | 映射计算与 selector 更新/删除、Hls 事件订阅分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-HLS-04 | artplayer-plugin-hls-control<br>迁移自有源码和公开类型 | PKG-HLS-03, ENG-04, ENG-06, CORE-07 | HLS 能力适配类型、回调上下文和旧 getName 参数 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-HLS-05 | artplayer-plugin-hls-control<br>验证新旧核心和组合 | PKG-HLS-04, CORE-22 | 本地多码率 HLS、换成无轨道来源、旧核心和最终核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-HLS-SDK-01 | artplayer-plugin-hls-control<br>验证真实 SDK worker 与分组轨道组合 | PKG-HLS-04, CORE-22 | 固定历史及当前 SDK 归档、真实 worker/多音轨组、外部选择与重绑定浏览器证据 | 受支持桌面 MSE 引擎与新旧核心通过；无 worker 回退伪通过，设备缺口仍由 PKG-HLS-05 保持未完成 | H | doing |
+| PKG-HLS-05 | artplayer-plugin-hls-control<br>验证新旧核心和组合 | PKG-HLS-04, CORE-22, PKG-HLS-SDK-01 | 本地多码率 HLS、换成无轨道来源、旧核心和最终核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-HLS-06 | artplayer-plugin-hls-control<br>验证分发并同步文档 | PKG-HLS-05, ENG-07 | hls.control.js、依赖范围与回退记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-dash-control
@@ -469,3 +470,4 @@
 - PKG-HLS-02: [记录](hls-validation.md) [记录](baselines/hls-sdk.json) [记录](baselines/hls-validation.json) [记录](changes/2026-09-11-PKG-HLS-02-tests.md)
 - PKG-HLS-03: [记录](changes/2026-09-12-PKG-HLS-03-modules.md) [记录](baselines/hls-modules-validation.json) [记录](hls-validation.md)
 - PKG-HLS-04: [记录](changes/2026-09-12-PKG-HLS-04-types.md) [记录](baselines/hls-types-validation.json) [记录](hls-validation.md)
+- PKG-HLS-SDK-01: [记录](changes/2026-09-12-PKG-HLS-SDK-01-integration.md) [记录](baselines/hls-sdk-validation.json) [记录](baselines/hls-sdk-diagnostics.json)

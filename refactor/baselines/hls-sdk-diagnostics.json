@@ -1,0 +1,6258 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-HLS-SDK-01",
+  "status": "doing",
+  "capturedAt": "2026-09-11T17:38:23.983Z",
+  "sourceHashesLF": {
+    "refactor/scripts/hls-sdk-diagnostic.mjs": "ba7b2e1c6decde696a64f9b877c0e6624c0a694f3b888d4e9a68b20295f41a4d",
+    "test/helpers/worker-observer.js": "8ecd23a41293b7b6b065a077ba352fff0007ba07f41ce5f84943ac5f546a1cc1",
+    "test/browser/hls-sdk.spec.js": "c6cd7332b38fe30d999811b209a1cf5786867f6c7d5455e9cca034527615f2ba",
+    "test/browser/fixtures/hls-grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc"
+  },
+  "runs": [
+    {
+      "log": "refactor/.cache/hls-direct-http-first.log",
+      "logSHA256": "a8de6b5af53bd56c33e5a6470567caea8f3ab3d495b678916fecf7c408ebb864",
+      "file": "refactor/.cache/hls-direct-o4skLU/report.json",
+      "reportSHA256": "a03f38d14f87012a2273c60b099d03b47f98a8c50742680109d4b13039681d05",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "http",
+        "teardown": "reset-first",
+        "worker": true
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "472081856787cd917bdd77e52c1a606118cd5a78f0d58f5d4f62f32ec20c7af1",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-direct-route-first.log",
+      "logSHA256": "16fce5a50ba24c70523f1ca6b3d539ee002c8f80c281f82e11202d94ec7b01bc",
+      "file": "refactor/.cache/hls-direct-Dmtujt/report.json",
+      "reportSHA256": "4cbd87e3d9062991144bd191088a5a0f07119c82a8efe33915fe142b70637532",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "472081856787cd917bdd77e52c1a606118cd5a78f0d58f5d4f62f32ec20c7af1",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-direct-route-confirm.log",
+      "logSHA256": "be5a6584fc3edd8a0c420c3de0dbf99686240d1ff613b88a66fd06f2b9b09f1e",
+      "file": "refactor/.cache/hls-direct-KH1H5m/report.json",
+      "reportSHA256": "7031e11fa44414a0989f492003142a3b6409c2e7ae78b5ca72ac68a3e618de2d",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "runnerSHA256": "a6647767e7e79477875fe681ff7f9d7d6cf33be838c63832f73a334527a00fb8",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "472081856787cd917bdd77e52c1a606118cd5a78f0d58f5d4f62f32ec20c7af1",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-host-published-plugin.log",
+      "logSHA256": "84c6a74d6d77e572572fea4dbbe147a1cc0254a38a2d8f95edf53a3446982e1d",
+      "file": "refactor/.cache/hls-direct-iPMuJo/report.json",
+      "reportSHA256": "21123a896dee4d539c5255ce82a902fc5ee0edb220852444a2365af9c38dbe5e",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "published",
+        "plugin": true,
+        "runnerSHA256": "53ff175198c05adfb3bdf0bafdf6602c37b872863f92584ed349242e74b9c60e",
+        "browserVersion": "155.0"
+      },
+      "classification": "excluded: initial diagnostic captured async video too early; fixed with getters",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "6b33b43e563164894cd623ddbcaaa232ee456aabf36db0ebc1fb8f5456a4c228",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.waitForFunction: can't access property \"readyState\", window.direct.video is undefined\n@debugger eval code line 311 > eval line 4 > eval:1:7\npredicate@debugger eval code line 311 > eval:7:27\nnext@debugger eval code line 311 > eval:29:33\n@debugger eval code line 311 > eval:42:13\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+          "errors": [
+            "can't access property \"readyState\", window.direct.video is undefined"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-host-published-plugin-fixed.log",
+      "logSHA256": "522e9d3c4669088d2c848a039f2791759768fd660fd8133dde23c7d04270a9a5",
+      "file": "refactor/.cache/hls-direct-c39lnT/report.json",
+      "reportSHA256": "38933834b161374fbb311b43631003ae3bf5f6ac8ed430b08184484a54efbf58",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "published",
+        "plugin": true,
+        "runnerSHA256": "88a804381300392397658157515ce5168af3e3cd7b1defbeae20f06b59c9dad3",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "6b33b43e563164894cd623ddbcaaa232ee456aabf36db0ebc1fb8f5456a4c228",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-paired-direct.log",
+      "logSHA256": "0728cec63dd0f2432d7c2f82c4bf668faa5ab24701f603b3c366c293484a0909",
+      "file": "refactor/.cache/hls-direct-CXPSmb/report.json",
+      "reportSHA256": "42a1c722cfa0d75e63b6ff9b6aefd25543e9b51f8045953d0054313cdfc19674",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 15,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "runnerSHA256": "88a804381300392397658157515ce5168af3e3cd7b1defbeae20f06b59c9dad3",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "1c068b91b4735ce17468c8c8faf926fa8ce018e0999d905de40992b7162ab463",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 10,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 11,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 12,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 13,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 14,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-paired-published.log",
+      "logSHA256": "e95b40295d00dae82508a9ec3516a822ac4d4178dc6c495f5fb1a8862f244ed0",
+      "file": "refactor/.cache/hls-direct-HUDrqZ/report.json",
+      "reportSHA256": "692c226e365233e6aed37f7b8948e687cb938ff686ccc9d4b5329a9ed0833b85",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 15,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "published",
+        "plugin": true,
+        "runnerSHA256": "88a804381300392397658157515ce5168af3e3cd7b1defbeae20f06b59c9dad3",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "6b33b43e563164894cd623ddbcaaa232ee456aabf36db0ebc1fb8f5456a4c228",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 10,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 11,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 12,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 13,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 14,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-paired-candidate.log",
+      "logSHA256": "cc336531db409335da8804b41efa4dda799e3f35a6fbc7db820815ba62f1ea4d",
+      "file": "refactor/.cache/hls-direct-TtULsJ/report.json",
+      "reportSHA256": "4c7999dfa8b6d5f730f9c47acdfd7ac45305355de1e8d965ac980725b1889e64",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 15,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "candidate",
+        "plugin": true,
+        "runnerSHA256": "88a804381300392397658157515ce5168af3e3cd7b1defbeae20f06b59c9dad3",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "b0e6b9c606d89e2e9a3d346fa3f49798932d0610c21ed16bc76885b448b9bb02",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 10,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 11,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 12,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 13,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 14,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            1,
+            0
+          ],
+          "observedAudio": [
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-matched-direct.log",
+      "logSHA256": "3c7e59b38abddfdd9954ba7ba36eff9c2afee013106b6dd6ff2675e52e2a3a29",
+      "file": "refactor/.cache/hls-direct-ahJIeD/report.json",
+      "reportSHA256": "d5bb935afda12478143c630e122fdadb47785fddbc977e36e21eef1a6b9cd0b7",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "runnerSHA256": "8b796674e76420b5559a3491b6bdd729101b0cf9f23fa4643407e158c6c91315",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "1c068b91b4735ce17468c8c8faf926fa8ce018e0999d905de40992b7162ab463",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-matched-published.log",
+      "logSHA256": "06af32ad34adc3c99668d21c18e179be0f9122f19bdf0f82596fd566a07c6c30",
+      "file": "refactor/.cache/hls-direct-nnx5q6/report.json",
+      "reportSHA256": "290e3f48403965795cc2aaa5b6a4d6257e82c0ea2f767fed88828ca96716b2dd",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "published",
+        "plugin": true,
+        "sdkLogs": false,
+        "runnerSHA256": "8b796674e76420b5559a3491b6bdd729101b0cf9f23fa4643407e158c6c91315",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "6b33b43e563164894cd623ddbcaaa232ee456aabf36db0ebc1fb8f5456a4c228",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-matched-candidate.log",
+      "logSHA256": "4377b183d065cfd3043a4569f051cdc2ba2bfe33ee2fd4d076a166a0c916d5be",
+      "file": "refactor/.cache/hls-direct-CxGKpC/report.json",
+      "reportSHA256": "2f865728aed2b8ed625053616e8eb2a068d227c13d9d21ad4677e30411ac323d",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "candidate",
+        "plugin": true,
+        "sdkLogs": false,
+        "runnerSHA256": "8b796674e76420b5559a3491b6bdd729101b0cf9f23fa4643407e158c6c91315",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "b0e6b9c606d89e2e9a3d346fa3f49798932d0610c21ed16bc76885b448b9bb02",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-observed-direct.log",
+      "logSHA256": "663a7db9d7aa85dd099aaa6fd5f7db5d6f3325056e1ec6ca1918aa4d7ac73ccd",
+      "file": "refactor/.cache/hls-direct-6dJk9k/report.json",
+      "reportSHA256": "f2f044f9db68f75a8246a4cd08f8c70e309763a545620e2019effce4c13c2ef2",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "workerObserver": true,
+        "runnerSHA256": "52568cb78db2ff17d51a30b225559175798de94e7365ce4467bef9cff00b0b51",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "1c068b91b4735ce17468c8c8faf926fa8ce018e0999d905de40992b7162ab463",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 98
+            }
+          ]
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 98
+            }
+          ]
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            1,
+            0,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 98
+            }
+          ]
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-observed-published.log",
+      "logSHA256": "38a74e13e495d643788cc6a287c725463164ab738688d8f8cac00bcfe963a531",
+      "file": "refactor/.cache/hls-direct-qJ8g0r/report.json",
+      "reportSHA256": "124f7463955675d2f8a644f47b30917f927c1c00e57bcde077a7f49bef9c8e34",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "published",
+        "plugin": true,
+        "sdkLogs": false,
+        "workerObserver": true,
+        "runnerSHA256": "52568cb78db2ff17d51a30b225559175798de94e7365ce4467bef9cff00b0b51",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "6b33b43e563164894cd623ddbcaaa232ee456aabf36db0ebc1fb8f5456a4c228",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 94
+            }
+          ]
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 104
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 103
+            }
+          ]
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 104
+            }
+          ]
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 103
+            }
+          ]
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 104
+            }
+          ]
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 102
+            }
+          ]
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 104
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-observed-candidate.log",
+      "logSHA256": "6a8ca7d47bf46c674e77d28b9bcf5fc05b89a048d9e154c21d2018b5c555b3ce",
+      "file": "refactor/.cache/hls-direct-tWS0zJ/report.json",
+      "reportSHA256": "991e06a58595de251a5ba11e2cfd3930051decef8db01098767571ba9b5caec8",
+      "settings": {
+        "version": "1.7.2",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "candidate",
+        "plugin": true,
+        "sdkLogs": false,
+        "workerObserver": true,
+        "runnerSHA256": "52568cb78db2ff17d51a30b225559175798de94e7365ce4467bef9cff00b0b51",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520",
+      "inputs": "b0e6b9c606d89e2e9a3d346fa3f49798932d0610c21ed16bc76885b448b9bb02",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 102
+            }
+          ]
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 102
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 103
+            }
+          ]
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 106
+            }
+          ]
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 104
+            }
+          ]
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 106
+            }
+          ]
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 101
+            }
+          ]
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 104
+            }
+          ]
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 100
+            }
+          ]
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 102
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-old-sdk-direct.log",
+      "logSHA256": "a98ff6452a9658328c84ed4404c087c38f19fe7c18482ad875ebdb168b64cc18",
+      "file": "refactor/.cache/hls-direct-t38MFm/report.json",
+      "reportSHA256": "dbf2d094291476cba51af2129fcb46eed5a128ae5d21b0073ebe357bc798af98",
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 5,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "workerObserver": true,
+        "runnerSHA256": "52568cb78db2ff17d51a30b225559175798de94e7365ce4467bef9cff00b0b51",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "b39576168aa734f42c8f473280a9f145aaf96bcb2d452283fa0e76aea6de709b",
+      "inputs": "1b23f4bb2447e6dde949e462fbfc5db908b2e9e39cdb1cce6c0373e504a32a6e",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "failed",
+          "failure": "page.evaluate: Target crashed ",
+          "errors": [
+            "page crashed"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-old-sdk-published.log",
+      "logSHA256": "aa36185bf3fb6f712273cf91f8ff3f77dfce2173e8a9c404b15c28a6c0c61d71",
+      "file": "refactor/.cache/hls-direct-dWKLZ9/report.json",
+      "reportSHA256": "ad0c4f8b4cf77095e74b2966b95d78409003db99a40ce06e0eab0ab802f268b3",
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 5,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "published",
+        "plugin": true,
+        "sdkLogs": false,
+        "workerObserver": true,
+        "runnerSHA256": "52568cb78db2ff17d51a30b225559175798de94e7365ce4467bef9cff00b0b51",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "b39576168aa734f42c8f473280a9f145aaf96bcb2d452283fa0e76aea6de709b",
+      "inputs": "a972338b7060f512fc2a010c15b88013df82b6574910d2fc603416831d8196f2",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 40
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-old-sdk-candidate.log",
+      "logSHA256": "72afd9cd6f93c845a46cfbe656b801b096ccd380fa3ef630d4bbf945903d1e0b",
+      "file": "refactor/.cache/hls-direct-hRzGOl/report.json",
+      "reportSHA256": "ecb1b49f39d7925d2f980b5f5faab55bb5eb0274481c5403a04e3594ffef9a8a",
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 5,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "candidate",
+        "plugin": true,
+        "sdkLogs": false,
+        "workerObserver": true,
+        "runnerSHA256": "52568cb78db2ff17d51a30b225559175798de94e7365ce4467bef9cff00b0b51",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "b39576168aa734f42c8f473280a9f145aaf96bcb2d452283fa0e76aea6de709b",
+      "inputs": "b159934b0749f80711100fba21a3e4f158f3744b8cf0af49857585819eee9d5b",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'page crashed'\n+ ]\n- []\n",
+          "errors": [
+            "page crashed"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "failed",
+          "failure": "page.evaluate: Target crashed ",
+          "errors": [
+            "page crashed"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "failed",
+          "failure": "page.evaluate: Target crashed ",
+          "errors": [
+            "page crashed"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "workers": [
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 38
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 2
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 12
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 16
+            },
+            {
+              "terminated": 1,
+              "errors": [],
+              "transmuxMessages": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-crash-control-native-no-observer.log",
+      "logSHA256": "792916f25f7f54c5dd0118ca4eef2f243f4168ca7242de594f68937e5ab5cae1",
+      "file": "refactor/.cache/hls-direct-Rx12tj/report.json",
+      "reportSHA256": "e1c80837e3c8ea2211fbf80b192c345414d3e15e34744a718063c87818aa5567",
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "workerObserver": false,
+        "runnerSHA256": "d80d61f67d1424da2b6ee377fab2d32c27356142fe45c13499536dc7abb54be5",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "b39576168aa734f42c8f473280a9f145aaf96bcb2d452283fa0e76aea6de709b",
+      "inputs": "1b23f4bb2447e6dde949e462fbfc5db908b2e9e39cdb1cce6c0373e504a32a6e",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-crash-control-native-sdk-first.log",
+      "logSHA256": "7e6cfbab23d73e6cb7203667ed2011d30806de7c51204e6c6f3202e8d458f8bd",
+      "file": "refactor/.cache/hls-direct-PPxFDk/report.json",
+      "reportSHA256": "5cd051576812a75b606c07261a1a1fc088a23f67d749359cbc7d12e390d020b7",
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "sdk-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "workerObserver": false,
+        "runnerSHA256": "d80d61f67d1424da2b6ee377fab2d32c27356142fe45c13499536dc7abb54be5",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "b39576168aa734f42c8f473280a9f145aaf96bcb2d452283fa0e76aea6de709b",
+      "inputs": "1b23f4bb2447e6dde949e462fbfc5db908b2e9e39cdb1cce6c0373e504a32a6e",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    },
+    {
+      "log": "refactor/.cache/hls-crash-control-candidate-no-observer.log",
+      "logSHA256": "d4f537f06301ac73625ca75e770c8a5bb73630534cf70d5041d5ea90e5227efa",
+      "file": "refactor/.cache/hls-direct-Epr4Sh/report.json",
+      "reportSHA256": "6abd841baa6e697a88414d03f89a565ed4a551e58bf7955805bac0fcccb7afc0",
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 10,
+        "transport": "route",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "candidate",
+        "plugin": true,
+        "sdkLogs": false,
+        "workerObserver": false,
+        "runnerSHA256": "d80d61f67d1424da2b6ee377fab2d32c27356142fe45c13499536dc7abb54be5",
+        "browserVersion": "155.0"
+      },
+      "classification": "diagnostic evidence; not a risk closure",
+      "release": "b39576168aa734f42c8f473280a9f145aaf96bcb2d452283fa0e76aea6de709b",
+      "inputs": "b159934b0749f80711100fba21a3e4f158f3744b8cf0af49857585819eee9d5b",
+      "cases": [
+        {
+          "iteration": 0,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.evaluate: Target crashed ",
+          "errors": [
+            "page crashed"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 1,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 2,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 3,
+          "recordedStatus": "failed",
+          "status": "failed",
+          "failure": "page.evaluate: Target crashed ",
+          "errors": [
+            "page crashed"
+          ],
+          "maxObservedHeight": 0,
+          "observedLevels": [],
+          "observedAudio": []
+        },
+        {
+          "iteration": 4,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 5,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 6,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 7,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 8,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        },
+        {
+          "iteration": 9,
+          "recordedStatus": "passed",
+          "status": "passed",
+          "errors": [],
+          "coreLoaded": "function",
+          "pluginLoaded": "function",
+          "maxObservedHeight": 180,
+          "observedLevels": [
+            0,
+            1
+          ],
+          "observedAudio": [
+            0,
+            1,
+            2
+          ],
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          }
+        }
+      ]
+    }
+  ],
+  "inputs": {
+    "f2a153e83f12feb8985e8fc06a8659196cbda79868446930539cc90499023520": {
+      "name": "hls.js",
+      "version": "1.7.2",
+      "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+      "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+      "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+      "files": {
+        "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+        "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+        "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+        "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+        "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+        "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+      }
+    },
+    "472081856787cd917bdd77e52c1a606118cd5a78f0d58f5d4f62f32ec20c7af1": {
+      "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+      "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+      "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+      "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+      "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+      "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+      "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+      "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+      "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+      "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+      "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+      "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+      "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+      "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+      "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+      "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+      "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+      "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+      "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+      "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+      "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+      "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+      "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+      "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+      "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+      "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+      "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+      "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+      "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+      "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+      "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+      "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+      "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+      "/hls.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+      "/": "58c97d48efbf421a43f13ddbfc390772a17256cf582a62059fe1642f7e874567"
+    },
+    "6b33b43e563164894cd623ddbcaaa232ee456aabf36db0ebc1fb8f5456a4c228": {
+      "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+      "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+      "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+      "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+      "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+      "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+      "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+      "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+      "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+      "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+      "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+      "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+      "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+      "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+      "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+      "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+      "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+      "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+      "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+      "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+      "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+      "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+      "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+      "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+      "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+      "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+      "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+      "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+      "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+      "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+      "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+      "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+      "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+      "/hls.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+      "/artplayer.js": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+      "/plugin.js": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+      "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+    },
+    "1c068b91b4735ce17468c8c8faf926fa8ce018e0999d905de40992b7162ab463": {
+      "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+      "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+      "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+      "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+      "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+      "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+      "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+      "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+      "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+      "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+      "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+      "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+      "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+      "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+      "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+      "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+      "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+      "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+      "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+      "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+      "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+      "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+      "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+      "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+      "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+      "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+      "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+      "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+      "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+      "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+      "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+      "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+      "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+      "/hls.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+      "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+    },
+    "b0e6b9c606d89e2e9a3d346fa3f49798932d0610c21ed16bc76885b448b9bb02": {
+      "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+      "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+      "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+      "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+      "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+      "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+      "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+      "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+      "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+      "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+      "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+      "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+      "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+      "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+      "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+      "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+      "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+      "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+      "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+      "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+      "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+      "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+      "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+      "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+      "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+      "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+      "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+      "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+      "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+      "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+      "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+      "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+      "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+      "/hls.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+      "/artplayer.js": "9741da1b0bb4e1ed6999a6089c62e5c3b8b2df280445631da7155c1c6da5e623",
+      "/plugin.js": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+      "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+    },
+    "b39576168aa734f42c8f473280a9f145aaf96bcb2d452283fa0e76aea6de709b": {
+      "name": "hls.js",
+      "version": "1.5.17",
+      "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+      "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+      "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+      "files": {
+        "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+        "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+        "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+        "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+        "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+      }
+    },
+    "1b23f4bb2447e6dde949e462fbfc5db908b2e9e39cdb1cce6c0373e504a32a6e": {
+      "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+      "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+      "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+      "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+      "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+      "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+      "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+      "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+      "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+      "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+      "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+      "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+      "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+      "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+      "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+      "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+      "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+      "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+      "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+      "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+      "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+      "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+      "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+      "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+      "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+      "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+      "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+      "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+      "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+      "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+      "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+      "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+      "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+      "/hls.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+      "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+    },
+    "a972338b7060f512fc2a010c15b88013df82b6574910d2fc603416831d8196f2": {
+      "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+      "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+      "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+      "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+      "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+      "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+      "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+      "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+      "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+      "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+      "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+      "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+      "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+      "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+      "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+      "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+      "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+      "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+      "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+      "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+      "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+      "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+      "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+      "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+      "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+      "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+      "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+      "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+      "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+      "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+      "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+      "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+      "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+      "/hls.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+      "/artplayer.js": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+      "/plugin.js": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+      "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+    },
+    "b159934b0749f80711100fba21a3e4f158f3744b8cf0af49857585819eee9d5b": {
+      "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+      "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+      "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+      "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+      "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+      "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+      "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+      "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+      "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+      "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+      "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+      "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+      "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+      "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+      "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+      "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+      "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+      "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+      "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+      "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+      "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+      "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+      "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+      "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+      "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+      "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+      "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+      "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+      "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+      "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+      "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+      "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+      "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+      "/hls.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+      "/artplayer.js": "9741da1b0bb4e1ed6999a6089c62e5c3b8b2df280445631da7155c1c6da5e623",
+      "/plugin.js": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+      "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+    }
+  },
+  "integrationCheckpoint": {
+    "file": "refactor/.cache/hls-sdk01-checkpoint.json",
+    "sha256": "8bb165bb1dba3d9e5b3aacec862ee110b96e2429cb2c8bb264b92e2ac1762efa",
+    "stats": {
+      "startTime": "2026-09-11T17:26:24.801Z",
+      "duration": 43919.157,
+      "expected": 38,
+      "skipped": 16,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "source": "final main build from 2f9bee4e; no production changes in this checkpoint",
+    "traces": "refactor/.cache/hls-sdk01-checkpoint-results"
+  },
+  "ci": {
+    "file": "refactor/.cache/hls-sdk01-checkpoint-ci.log",
+    "sha256": "35d20735c0f4e5cf0df0e78a664a5ff69e6c54f122516a4ea0005b7b60f8cd3d",
+    "counts": [
+      496,
+      11,
+      30
+    ],
+    "total": 537
+  },
+  "conclusion": "SDK 1.5.17 diagnostics reproduce page crashed in both direct native video and candidate core hosts. Effective results count late errors/state-read failures as failures even when an early harness recorded passed. This narrows attribution but does not close HLS-CRASH-01 or independent HLS-PLAYBACK-01. Keep task doing; original failures remain in hls-sdk-validation.json.",
+  "counts": {
+    "passed": 184,
+    "failed": 6,
+    "excludedHarnessCases": 10
+  }
+}

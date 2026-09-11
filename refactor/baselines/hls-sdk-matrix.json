@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-HLS-SDK-01",
+  "capturedAt": "2026-09-11T16:52:02.281Z",
+  "metadataUrl": "https://registry.npmjs.org/hls.js/1.7.2",
+  "releases": [
+    {
+      "name": "hls.js",
+      "version": "1.5.17",
+      "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+      "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+      "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+      "files": {
+        "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+        "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+        "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+        "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+        "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+      }
+    },
+    {
+      "name": "hls.js",
+      "version": "1.7.2",
+      "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.7.2.tgz",
+      "integrity": "sha512-CW/pPvSOFIRsosbwxrYaE9ERmpTo5fbTqL7wCvuCFlqW1Bmb1K5fXsY7yiH95rmlr4rVuA7UXHbM/cIXQ6AXwg==",
+      "sha256": "14311c46a7aea04a7ffc373653b11d019bb41df8a693a2459eb3115a262aef53",
+      "files": {
+        "package/package.json": "49918bb59328a44f4533dcfb5ecde80893db85072bd52b52721901b4ce239d81",
+        "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+        "package/dist/hls.min.js": "afcde07437ec84b072fe8782e772ceb5046eac751b2719f73ae0d83d763bc3f5",
+        "package/dist/hls.d.ts": "9571b0113a7103feb8e36e9fbc04c3baba07b5ab3e5c51166b50552ebbbf17f2",
+        "package/src/hls.ts": "e86f0bb70e845814aa2e3a4ff6a9f1f658d1c98fbdc738b02f623c9ddcf6c72c",
+        "package/src/controller/audio-track-controller.ts": "f7ec55e90cc2194e64432db1336d75d0309f6cddf8b55d7eac45b0ebba0517b1"
+      }
+    }
+  ],
+  "note": "Fixed integration test inputs only. Latest tag observed as 1.7.2; no range or minimum SDK compatibility claim and no runtime dependency."
+}

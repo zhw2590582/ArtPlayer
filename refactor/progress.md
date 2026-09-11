@@ -1,5 +1,34 @@
 # 进度与证据
 
+## HLS 诊断 checkpoint：已缩小范围，尚未关闭风险
+
+独立诊断 runner 已加入直接 Hls、发布核心、候选核心对照，以及 HTTP/route、worker/观察器、
+SDK 日志和直接 video 销毁顺序选项。1.5.17 的直接原生 video 对照也收到了 page crashed；
+候选核心关闭观察器仍复现，因此不是仅靠替换核心或移除观察器就能解释的问题。
+有效诊断重算为 184 passed、6 failed，另十条初期 runner 初始化失败独立排除；
+早期遗漏的末尾状态读取失败已纳入失败统计，没有删除原始证据。
+
+见 [诊断记录](baselines/hls-sdk-diagnostics.json) 与 [进行中说明](changes/2026-09-12-PKG-HLS-SDK-01-integration.md)。
+本次保存明确标注 checkpoint 的进度提交，PKG-HLS-SDK-01 继续 doing，HLS-CRASH-01/
+HLS-PLAYBACK-01 继续 open，完成数仍为 65。完整 CI 537 项通过，最终 main 集成矩阵
+38 通过、16 无 MSE 跳过；这些通过结果不覆盖已保留的六次诊断失败。
+未修改生产源码、公开 API 或 destroy 顺序。可继续独立生态包迁移，HLS 的调查与发布门槛仍须完成。
+
+## 当前实施：PKG-HLS-SDK-01 桌面 SDK 组合与崩溃取证
+
+从 HLS-05 拆出可独立验证的 worker/分组轨道子任务，父任务仍保留全部设备门槛。
+Hls 1.5.17/1.7.2 的实际 worker、切源清理、分组音轨和 detach/reattach 测试已加入。
+完整 CI 537 项、254 个生产 TS 文件通过；main/legacy 完整复核各 38 通过、16 WebKit 无 MSE 跳过。
+一次 Firefox 在候选核心 + 1.5.17 分组切换后的销毁阶段 Target crashed，尚未归因；
+后续 12 项重复与完整复核通过不构成关闭证据。HLS-CRASH-01 保持 open，子任务仍 doing。
+带 trace 的 20 项重复另有 1 项旧核心 + Hls 1.7.2 切组后画面未切到 180P，
+登记 HLS-PLAYBACK-01；它不是同一种崩溃，完整 trace 已单独保存。
+
+见 [进行中记录](changes/2026-09-12-PKG-HLS-SDK-01-integration.md) 与
+[部分证据](baselines/hls-sdk-validation.json)。带浏览器诊断和 trace 的重复另存专用目录；
+接续调查崩溃及直接 SDK 对照。当前 216 项、65 done、1 doing、150 todo；HLS-04 已独立提交
+2f9bee4e，本子任务尚未完成/提交，没有发布放行。
+
 ## 最新完成：PKG-HLS-04 严格 TS 与公开类型
 
 HLS 五个自有模块已迁移严格 TS；公开声明保留旧 object formatter、Parameters 配置提取、
