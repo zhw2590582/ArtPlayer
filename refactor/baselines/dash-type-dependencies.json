@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DASH-05",
+  "sdk": "dashjs@5.2.1",
+  "source": "package/index.d.ts import and package/package.json exact dependency",
+  "releases": [
+    {
+      "name": "@svta/cml-request",
+      "version": "1.0.12",
+      "tarball": "https://registry.npmjs.org/@svta/cml-request/-/cml-request-1.0.12.tgz",
+      "integrity": "sha512-4sJvnnoNpq58j2mCGP8k+MF6wVy/qa4gbt6kfT1dPIKmn3mPxw+JVfilhcWsUi+peK2yCZxOJJYyHj1cAcQE1w==",
+      "sha256": "43fa74a88a2b9e63cbf21b1e2474d2f31daa915b50939000df0526c98e09585e",
+      "files": {
+        "package/LICENSE": "95cdf13a152329c8a60cf739d442f578a172727f0584bff42406126719312f62",
+        "package/README.md": "a637c158ad890ecc643e13e93f29c1de7d582d2ae15e6b220f51f1642a0843c7",
+        "package/dist/index.d.ts": "982f2bbcb90aaa26bb6f8a58eb51868044444b22621204029aa7966871a67676",
+        "package/dist/index.d.ts.map": "a91339ae00c3d43ecb8d4d23670c1f7be759c6b658a56fd805309417b1a36f63",
+        "package/dist/index.js": "b9d39ada6e7a52b7c924306461f36a7e18e04f6345aa62d9d93298890dd2c259",
+        "package/dist/tsdoc-metadata.json": "12c1f31364a22600ae0cb9acb5e3a91ca3e3959e8f1d572dc772764f0b10e53d",
+        "package/package.json": "0d0859ef653c52a0992e205cfb1b8c2ef8996dfaa6bb37c63b0a195c3b6dd2fc"
+      }
+    },
+    {
+      "name": "@svta/cml-utils",
+      "version": "1.5.0",
+      "tarball": "https://registry.npmjs.org/@svta/cml-utils/-/cml-utils-1.5.0.tgz",
+      "integrity": "sha512-JMqclD7Akd+GSJiuaYNUHOP2wNtf/nauKeszlYeivSHfi0Lp3pmSW5PXDvJ2dO4aPmmSOQbF0ztTsW9Vcs2Whw==",
+      "sha256": "a18a61b0136b57ffe695b0ed7421056e86730be3a6073c914f785fed11e89ce0",
+      "files": {
+        "package/LICENSE": "95cdf13a152329c8a60cf739d442f578a172727f0584bff42406126719312f62",
+        "package/README.md": "15cd397de0b8a04b2cd377da9e6e7bf2a32004acb7a564481eaa20c868f0cc4b",
+        "package/dist/index.d.ts": "bfb26c90339ebfb233f49c054e9996bdc380bb99967a73b97e56d431db59351d",
+        "package/dist/index.d.ts.map": "1b2e804c7538ed47a6ce649632f786f10ea6194506416990e73db6f4b6930e59",
+        "package/dist/index.js": "9a3478ae9426f3f61bcd44c07b9bd014134cdb812c5ebe753b9d3b48c232d3e5",
+        "package/dist/index.js.map": "f8b3dcaa69e91fef72dc8ee497b3914586bb05c3eb2b1111e9e2c160e829aa95",
+        "package/dist/tsdoc-metadata.json": "12c1f31364a22600ae0cb9acb5e3a91ca3e3959e8f1d572dc772764f0b10e53d",
+        "package/package.json": "3a8735b7354a1af65fe7fc4bfdc01980d088aba8f42b11e0a9b58f57907237f9"
+      }
+    },
+    {
+      "name": "@svta/cml-cmcd",
+      "version": "2.3.2",
+      "tarball": "https://registry.npmjs.org/@svta/cml-cmcd/-/cml-cmcd-2.3.2.tgz",
+      "integrity": "sha512-SKBBjLmci0WK8HMjuv+36tVIMktonoOoxsXblOFZmB+ePPV2zjRMTD+2ZmE/1VEPJkKHENyhSjSHgJyeOlvZ1A==",
+      "sha256": "cff935fc624e365458f1e979d11ac707e45705eea47115ba6f5cac40ac18c0c5",
+      "files": {
+        "package/LICENSE": "5994a6fd6ce598174918ed40464bda1cf7f9a43248912bc62134b6020c6641c8",
+        "package/README.md": "3f28f6cb1244ea05dbf1a51b3322139a8a14e0a7213ce4c0346169630c58c4db",
+        "package/dist/index.d.ts": "d65aeda281887f5a1f68f0b009373d9a72ec020e7daf15c8400f14daa93f96f8",
+        "package/dist/index.d.ts.map": "2b9876b41f609dee7b2b3b46f29bd9a7ce55fb07964747c64966478027e33e28",
+        "package/dist/index.js": "69fbeffaaa20221ddc8d417e93bad1ad7b52c31f2dbebf75a6bb0378bc2ef6fc",
+        "package/dist/index.js.map": "4f0276e5c2381f028a12d31179e1a7ace15d121bc233bad2bc8541dca924b330",
+        "package/dist/tsdoc-metadata.json": "12c1f31364a22600ae0cb9acb5e3a91ca3e3959e8f1d572dc772764f0b10e53d",
+        "package/package.json": "955b1bc107d3c546ec64c69415fdfe0d84fc702e06f286789c72fb62109e3415"
+      }
+    },
+    {
+      "name": "@svta/cml-xml",
+      "version": "1.1.4",
+      "tarball": "https://registry.npmjs.org/@svta/cml-xml/-/cml-xml-1.1.4.tgz",
+      "integrity": "sha512-jbixqjiJIc16SGxylHwiOzO+DuhkGfuP+fJ9AHeVJKdFDKnabgfCDpnp6dvZpZnjMj4nHvzVtuUV7RISPIwYXw==",
+      "sha256": "4978a82e0808a08d7ae7e022e00d21cc0c89429315cdea05a3883e0451c217cb",
+      "files": {
+        "package/LICENSE": "95cdf13a152329c8a60cf739d442f578a172727f0584bff42406126719312f62",
+        "package/README.md": "60642dc6e6bdf70028142071388f8f38ebc51ef10bb2360c0c6ad7e9774eeb20",
+        "package/dist/index.d.ts": "abff2449b6a062f6adba6998e62f4de0ed4ca562c6d151aa85e9e4d71a55da14",
+        "package/dist/index.d.ts.map": "fd3dd2d889693c611e11bc3a647bee0df2b6703dd7f025f3702952f2f7a314b2",
+        "package/dist/index.js": "e81ecb78b99526748defd4e2287959e1b4258c03168ac20bde45e4bcb16c5c3b",
+        "package/dist/index.js.map": "5b99885f2b56d0da7ff07731531b7c80ee128182fb270ea3211fa1692af52191",
+        "package/dist/tsdoc-metadata.json": "12c1f31364a22600ae0cb9acb5e3a91ca3e3959e8f1d572dc772764f0b10e53d",
+        "package/package.json": "cf832fa49cd767dd063e427b10dbdccb82ee2f04a747e4eec11803e773adbef5"
+      }
+    },
+    {
+      "name": "@svta/cml-structured-field-values",
+      "version": "1.1.3",
+      "tarball": "https://registry.npmjs.org/@svta/cml-structured-field-values/-/cml-structured-field-values-1.1.3.tgz",
+      "integrity": "sha512-XqLzQOTznz6kh/nsSh8dy1kV7GQjL4csG+2U5EvLGhAqNuNUczbVg5EAsDobKDVg8xhdthdXx2UuwM+ZHQCxSg==",
+      "sha256": "0a8c33b8e1858376fa640eea5ea4fd78c1ea642cbbed6bb60319ae6594fce4fa",
+      "files": {
+        "package/LICENSE": "95cdf13a152329c8a60cf739d442f578a172727f0584bff42406126719312f62",
+        "package/README.md": "a42aa5169cb75f1b2c263a633874414f4beeda4741ceb25e3a41756ad7e12ae3",
+        "package/dist/index.d.ts": "b1aa7705715d801d381fce0b9f151b85f236f16a6eaf711ba46ee94f6b4dcaff",
+        "package/dist/index.d.ts.map": "f40757a3886a90a24d69c761d2b061dda8990598be8c752377be5006ddab4d6a",
+        "package/dist/index.js": "fe057a1c6bc86786c3eacf39a797d850f74327214771a99cd77d7b07b1570955",
+        "package/dist/index.js.map": "d362481ef0cd65f8f8baaea1f1fe4f035475daf62b4d305aced026f44126c34d",
+        "package/dist/tsdoc-metadata.json": "12c1f31364a22600ae0cb9acb5e3a91ca3e3959e8f1d572dc772764f0b10e53d",
+        "package/package.json": "cf83f2aedb4e7a3cef6e8eeb31974cd6dc96197f964b39f8ff1e3716f3a8d367"
+      }
+    }
+  ],
+  "note": "Test-only actual SDK declaration dependency. Preserve the actual package manifest and exports when resolving; no production dependency or declaration shim."
+}

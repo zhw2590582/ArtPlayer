@@ -10,9 +10,9 @@ declare namespace artplayerPluginDashControlDefinitions {
     bitrateInKbit?: number
   }
   export interface AudioTrack {
-    id?: string | number
-    index?: number
-    lang?: string
+    id?: string | number | null
+    index?: number | null
+    lang?: string | null
   }
   export interface Config<Item extends object = object> {
     control?: boolean

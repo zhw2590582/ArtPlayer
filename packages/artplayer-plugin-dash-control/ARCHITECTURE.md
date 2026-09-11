@@ -73,6 +73,9 @@ the controlled error/identity tests. Changes to SDK capability detection belong 
 `sdk.ts`, not in a global `any` or ambient module escape.
 
 Public `Config`, `Option`, `QualityLevel`, `AudioTrack`, and `Result` are named types.
+AudioTrack id/index/lang include null as declared by both actual SDK generations;
+internal AudioFields aliases that public shape. Nullable default labels preserve
+runtime behavior, while caller formatters must still return strings.
 Default callbacks infer known SDK fields; explicit generic parameters or callback
 annotations accept a caller's more detailed SDK interfaces. Original object-based
 formatters remain valid. The optional overload supports omitted/undefined options;
@@ -126,5 +129,9 @@ It also includes a native SDK control without an ArtPlayer instance. Early SDK 4
 paused-seek stalls remain open; later passes do not resolve them. Unsupported MSE is
 recorded as a playback capability gap, not acceptance. This plugin currently refreshes
 on ready/restart/explicit update, not automatically on external SDK events.
+`refactor/scripts/dash-sdk-types.test.mjs` compares actual SDK-only and plugin
+consumers across ten compiler/module configurations, retaining upstream-only
+Node10/old DOM diagnostics. The exact peer dependency closure is hash-pinned in
+`refactor/baselines/dash-type-dependencies.json`; no type shim or paths mapping is used.
 See [refactor validation](../../refactor/dash-validation.md) for baseline failures
 and [task plan](../../refactor/plan.md) for remaining type and release work.

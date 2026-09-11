@@ -70,7 +70,7 @@ const option: dash.Option = { quality: { getName: level => String(level.height) 
       assert.equal(invalid.length, 8, 'Installed package must reject all invalid uses')
       matrix.push({ compiler: compiler.version, mode, diagnostics, invalid })
     }
-    const report = { task: 'PKG-DASH-04', scope: 'Packed current core and DASH, offline Yarn install and frozen reinstall outside workspace; isolated public type acceptance only, not complete package runtime/SDK/media release validation.', packages, matrix }
+    const report = { suite: 'dash-isolated-package-types', introducedBy: 'PKG-DASH-04', scope: 'Packed current core and DASH, offline Yarn install and frozen reinstall outside workspace; isolated public type acceptance only, not complete package runtime/SDK/media release validation.', packages, matrix }
     writeJson(path.join(output, 'report.json'), report)
     console.log(`DASH installed type matrix passed: ${matrix.length} modes, eight invalid uses rejected in each; ${output}`)
   }

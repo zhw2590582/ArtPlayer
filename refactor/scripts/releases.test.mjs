@@ -11,7 +11,7 @@ test('release integrity rejects corrupted bytes and inconsistent frozen digests'
 })
 
 test('release cache rejects unsafe package and version path identifiers before I/O', async () => {
-  for (const name of ['../hls.js', '.hls', 'hls..js', 'hls/js', 'hls\\js', 'hls.js/evil', '-hls'])
+  for (const name of ['../hls.js', '.hls', 'hls..js', 'hls/js', 'hls\\js', 'hls.js/evil', '-hls', '@svta/../outside', '@../outside', '@svta/cml/request', '@svta\\cml-request', '@svta+cml-request', '@svta/', '@svta/.hidden'])
     await assert.rejects(ensureArchive({ name, version: '1.5.17' }), /Invalid release identifier/)
   for (const version of ['../1.5.17', '1.5.17/evil', 'latest'])
     await assert.rejects(ensureArchive({ name: 'hls.js', version }), /Invalid release identifier/)

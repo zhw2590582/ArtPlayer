@@ -18,6 +18,7 @@ const objectConfig: Config = { getName: (item: object) => String(item) }
 dashControl({ quality: objectConfig, audio: objectConfig })
 const level: QualityLevel = { height: 720, id: 0 }
 const track: AudioTrack = { id: 'en', lang: 'en' }
+const unknownTrack: AudioTrack = { id: null, index: null, lang: null }
 
 interface CustomLevel { height: number, bandwidth: number }
 interface CustomTrack { id: number, lang: string, roles: string[] }
@@ -40,4 +41,4 @@ legacy({ quality: { control: 'yes' } })
 dashControl(null)
 // @ts-expect-error Default SDK fields cannot silently become any.
 dashControl({ quality: { getName: level => level.unknownProperty } })
-void [done, level, track, promise, invalidName]
+void [done, level, track, unknownTrack, promise, invalidName]

@@ -2066,7 +2066,9 @@
         "changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md",
         "baselines/dash-sdk.json",
         "baselines/dash-sdk-checkpoint.json",
-        "dash-validation.md"
+        "dash-validation.md",
+        "changes/2026-09-12-PKG-DASH-05-sdk-types.md",
+        "baselines/dash-sdk-types-validation.json"
       ]
     },
     {

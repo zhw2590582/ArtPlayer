@@ -1,6 +1,6 @@
-import type { Config } from '../types/artplayer-plugin-dash-control'
+import type { AudioTrack, Config } from '../types/artplayer-plugin-dash-control'
 
-export type Label = string | number | undefined
+export type Label = string | number | null | undefined
 export type Identifier = string | number
 export type Valid = () => boolean
 export type Cleanup = () => void
@@ -12,11 +12,7 @@ export interface QualityFields {
   qualityIndex?: number
 }
 
-export interface AudioFields {
-  id?: Identifier
-  index?: number
-  lang?: string
-}
+export type AudioFields = AudioTrack
 
 export interface Dash<Level extends object = object, Track extends object = object> {
   getVideoElement: () => object | null

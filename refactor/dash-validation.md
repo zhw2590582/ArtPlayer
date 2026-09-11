@@ -7,7 +7,7 @@
 
 ## 可重跑的测试
 
-- `yarn test:dash-control`：原有 5 项过滤/稳定 ID 回归、80 项行为/历史观察、31 项候选生命周期，共 116 项。
+- `yarn test:dash-control`：原有 5 项过滤/稳定 ID 回归、80 项行为/历史观察、33 项候选生命周期，共 118 项。
   该脚本和 `test:unit` 都保留旧测试，完整 CI 自动执行。
 - `yarn test:browser test/browser/dash-control.spec.js --trace on`：84 项，两个核心、发布插件 SDK 4/
   候选插件 SDK 4/5、两类菜单、两种选择及候选清理、Chromium/Firefox/WebKit。
@@ -26,10 +26,14 @@
 - `node --test refactor/scripts/dash-sdk.test.mjs`：SDK 归档/成员/许可证来源、媒体指纹与拓扑。
   如需重新合成诊断媒体，用 `node scripts/generate-dash-fixture.mjs refactor/.cache/new-dash-media`，
   输出目录必须不存在；可通过 `ARTPLAYER_FFMPEG` 指定 FFmpeg，不覆盖已冻结输入。
+- `node --test refactor/scripts/dash-sdk-types.test.mjs`：实际 SDK 和固定类型依赖，十组编译器/
+  模块配置；插件正例不得增加 SDK-only 诊断，两条非法用法均拒绝。旧解析/DOM 库的上游
+  边界详见 [类型矩阵](changes/2026-09-12-PKG-DASH-05-sdk-types.md)。CLI
+  `node refactor/scripts/dash-sdk-types.mjs` 只生成诊断报告，验收应运行上述 test 命令。
 
 Node helper 分别加载当前源码、固定 Git 提交的旧工作区 UMD、实际 npm main/legacy/module。
 Git 内容以 LF 指纹核对，发布归档与成员以原始字节指纹核对。`ARTPLAYER_TEST_DASH` 可指定
-待测产物，以系统路径分隔符连接；同时指定 main/legacy/module 时共 266 项，包含两代 SDK 的
+待测产物，以系统路径分隔符连接；同时指定 main/legacy/module 时共 274 项，包含两代 SDK 的
 行为与生命周期。未设置时不会把源码测试冒充三种候选产物验证。
 
 `test/helpers/dash-control.js` 只提供可控 SDK 方法和组件注册表，检查 this、类型参数、

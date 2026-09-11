@@ -1,5 +1,20 @@
 # 进度与证据
 
+## 当前实施：DASH-05 实际 SDK 类型与 nullable 元数据
+
+实际 dash.js 4.5.2/5.2.1 类型消费者已接入，固定五个 @svta 类型依赖及原始 exports。
+发现并修正两代 SDK 的 nullable id/index/lang 无法赋给新 AudioTrack 的问题；内部类型
+直接复用公开形状，运行逻辑不变，重新构建的三份 JS 与 04 指纹逐字节一致。
+
+十组 SDK/编译器/模块配置中八组零诊断，两组 SDK 5/旧解析方式保留 SDK 自身诊断；
+候选插件均增加零诊断，两条非法用法均拒绝。源码 Node 118、三格式 274、Monaco 三引擎
+3 项通过；隔离 Yarn tarball 的五种类型模式和每组八条非法用法通过。
+完整工程 CI 720 项通过、261 个生产 TS 文件严格检查通过；最后的夹具整理已单独重跑十组类型矩阵。
+
+任务仍为 74 done、4 doing、139 todo。DASH-SEEK-01、SDK 自动状态刷新、legacy 真实媒体、
+有效设备和完整分发仍未完成。详见 [本步说明](changes/2026-09-12-PKG-DASH-05-sdk-types.md)
+与 [执行记录](baselines/dash-sdk-types-validation.json)。以下为各检查点当时的状态。
+
 ## 当前实施：DASH-05 真实 SDK 与 MPD 检查点
 
 已固定 npm dash.js 4.5.2/5.2.1 归档/成员/许可证指纹，新增本地双画质双音轨 DASH、

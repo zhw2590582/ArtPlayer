@@ -2931,7 +2931,9 @@
         "refactor/baselines/dash-types-validation.json",
         "refactor/changes/2026-09-12-PKG-DASH-04-types.md",
         "test/types/dash-control.ts",
-        "refactor/scripts/dash-package-types.mjs"
+        "refactor/scripts/dash-package-types.mjs",
+        "refactor/changes/2026-09-12-PKG-DASH-05-sdk-types.md",
+        "refactor/baselines/dash-sdk-types-validation.json"
       ],
       "resolutionRationale": "五个自有 TS 模块严格检查通过，真实旧 npm 声明/候选消费者在 TS 4.3/5.9 兼容，五种模块模式及非法用法验证、真实 Monaco、工作区外 Yarn tarball 安装与类型检查通过。只关闭插件自身声明和格式解析问题，实际 SDK 类型/媒体矩阵仍由 05 接续。"
     },

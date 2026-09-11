@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DASH-05",
+  "note": "Reviewed SDK-only baseline, not a waiver of declaration errors. Modern SDK 5 consumers require export-aware resolution; TS 4.3 also lacks FontFace. Plugin consumers must add no diagnostics; invalid usages must add the expected two.",
+  "matrix": [
+    {
+      "sdk": "4.5.2",
+      "compiler": "5.9.3",
+      "mode": "node10-commonjs",
+      "sdkOnly": {
+        "diagnostics": [],
+        "files": [
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    },
+    {
+      "sdk": "4.5.2",
+      "compiler": "5.9.3",
+      "mode": "nodenext-cjs",
+      "sdkOnly": {
+        "diagnostics": [],
+        "files": [
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    },
+    {
+      "sdk": "4.5.2",
+      "compiler": "5.9.3",
+      "mode": "nodenext-esm",
+      "sdkOnly": {
+        "diagnostics": [],
+        "files": [
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    },
+    {
+      "sdk": "4.5.2",
+      "compiler": "5.9.3",
+      "mode": "bundler-esm",
+      "sdkOnly": {
+        "diagnostics": [],
+        "files": [
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    },
+    {
+      "sdk": "4.5.2",
+      "compiler": "4.3.5",
+      "mode": "node10-commonjs",
+      "sdkOnly": {
+        "diagnostics": [],
+        "files": [
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    },
+    {
+      "sdk": "5.2.1",
+      "compiler": "5.9.3",
+      "mode": "node10-commonjs",
+      "sdkOnly": {
+        "diagnostics": [
+          {
+            "file": "node_modules/dashjs/index.d.ts",
+            "code": 2307,
+            "line": 6,
+            "message": "Cannot find module '@svta/cml-request' or its corresponding type declarations.\n  There are types at '<consumer>/node_modules/@svta/cml-request/dist/index.d.ts', but this result could not be resolved under your current 'moduleResolution' setting. Consider updating to 'node16', 'nodenext', or 'bundler'."
+          }
+        ],
+        "files": [
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    },
+    {
+      "sdk": "5.2.1",
+      "compiler": "5.9.3",
+      "mode": "nodenext-cjs",
+      "sdkOnly": {
+        "diagnostics": [],
+        "files": [
+          "node_modules/@svta/cml-utils/dist/index.d.ts",
+          "node_modules/@svta/cml-structured-field-values/dist/index.d.ts",
+          "node_modules/@svta/cml-cmcd/dist/index.d.ts",
+          "node_modules/@svta/cml-request/dist/index.d.ts",
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    },
+    {
+      "sdk": "5.2.1",
+      "compiler": "5.9.3",
+      "mode": "nodenext-esm",
+      "sdkOnly": {
+        "diagnostics": [],
+        "files": [
+          "node_modules/@svta/cml-utils/dist/index.d.ts",
+          "node_modules/@svta/cml-structured-field-values/dist/index.d.ts",
+          "node_modules/@svta/cml-cmcd/dist/index.d.ts",
+          "node_modules/@svta/cml-request/dist/index.d.ts",
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    },
+    {
+      "sdk": "5.2.1",
+      "compiler": "5.9.3",
+      "mode": "bundler-esm",
+      "sdkOnly": {
+        "diagnostics": [],
+        "files": [
+          "node_modules/@svta/cml-utils/dist/index.d.ts",
+          "node_modules/@svta/cml-structured-field-values/dist/index.d.ts",
+          "node_modules/@svta/cml-cmcd/dist/index.d.ts",
+          "node_modules/@svta/cml-request/dist/index.d.ts",
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    },
+    {
+      "sdk": "5.2.1",
+      "compiler": "4.3.5",
+      "mode": "node10-commonjs",
+      "sdkOnly": {
+        "diagnostics": [
+          {
+            "file": "node_modules/dashjs/index.d.ts",
+            "code": 2307,
+            "line": 6,
+            "message": "Cannot find module '@svta/cml-request' or its corresponding type declarations."
+          },
+          {
+            "file": "node_modules/dashjs/index.d.ts",
+            "code": 2304,
+            "line": 5067,
+            "message": "Cannot find name 'FontFace'."
+          }
+        ],
+        "files": [
+          "node_modules/dashjs/index.d.ts"
+        ]
+      }
+    }
+  ]
+}

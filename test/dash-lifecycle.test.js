@@ -6,6 +6,23 @@ import { bothMenus, dashHost, dashImplementations } from './helpers/dash-control
 const candidates = (await dashImplementations()).filter(item => item.name.startsWith('source') || item.name.startsWith('artifact'))
 const { factory } = candidates[0]
 for (const { sdk, name, factory } of candidates) {
+  test(`DASH ${sdk} (${name}): nullable SDK audio metadata retains labels and original track identity`, () => {
+    const host = dashHost(sdk)
+    const track = { id: null, index: null, lang: null }
+    host.state.tracks = [track]
+    host.state.currentTrack = track
+    factory(bothMenus())(host.art).update()
+    const menu = host.controls.get('dash-audio')
+    assert.equal(menu.html, null)
+    assert.equal(menu.selector[0].default, true)
+    assert.equal(menu.selector[0].value, track)
+    host.calls.length = 0
+    assert.equal(menu.onSelect(menu.selector[0]), null)
+    assert.equal(host.calls[0][0], 'setCurrentTrack')
+    assert.equal(host.calls[0][1], track)
+    assert.equal(host.state.currentTrack, track)
+  })
+
   test(`DASH ${sdk} (${name}): supports the original SDK method generation and stable selection keys`, () => {
     const host = dashHost(sdk)
     factory(bothMenus())(host.art).update()

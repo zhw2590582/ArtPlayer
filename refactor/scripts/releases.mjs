@@ -30,8 +30,8 @@ export function readMember(archive, member) {
 }
 
 export async function ensureArchive(release) {
-  assert(/^[a-z0-9]+(?:[.-][a-z0-9]+)*$/.test(release.name) && /^\d+\.\d+\.\d+$/.test(release.version), 'Invalid release identifier')
-  const archive = path.join(cacheDir, `${release.name}-${release.version}.tgz`)
+  assert(/^(?:@[a-z0-9]+(?:[.-][a-z0-9]+)*\/)?[a-z0-9]+(?:[.-][a-z0-9]+)*$/.test(release.name) && /^\d+\.\d+\.\d+$/.test(release.version), 'Invalid release identifier')
+  const archive = path.join(cacheDir, `${release.name.replace('/', '+')}-${release.version}.tgz`)
   if (!fs.existsSync(archive)) {
     const url = new URL(release.tarball)
     assert.equal(url.origin, 'https://registry.npmjs.org', 'Unexpected registry')

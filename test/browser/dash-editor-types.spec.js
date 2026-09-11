@@ -34,6 +34,7 @@ const dashOption: artplayerPluginDashControl.Option = {
 const oldQuality: NonNullable<Parameters<typeof artplayerPluginDashControl>[0]['quality']> = { getName: (value: object) => String(value) }
 const typedFactory: (art: Artplayer) => artplayerPluginDashControl.Result = artplayerPluginDashControl(dashOption)
 const defaultFactory = artplayerPluginDashControl()
+const unknownTrack: artplayerPluginDashControl.AudioTrack = { id: null, index: null, lang: null }
 `, 'typescript', api.Uri.parse('file:///dash-consumer.ts'))
     const invalid = api.editor.createModel('artplayerPluginDashControl({ quality: { getName: level => level.height } })', 'typescript', api.Uri.parse('file:///dash-invalid.ts'))
     try {
