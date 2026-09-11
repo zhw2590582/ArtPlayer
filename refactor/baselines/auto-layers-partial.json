@@ -1,0 +1,141 @@
+{
+  "task": "CORE-18",
+  "date": "2026-09-11",
+  "status": "partial",
+  "parentCommit": "a842058136997b94db93155dc6db06eab72604bb",
+  "node": "v24.21.0",
+  "scope": "Adds autoPlayback, lock and miniProgressBar. Info/loading/mask and installed-package exit remain outstanding.",
+  "fingerprints": {
+    "packages/artplayer/src/notice.ts": "cd13f8cb7147088a02ee4583d4edc2120848a039d07878dd996dcb54781db66e",
+    "packages/artplayer/src/input/long-press.ts": "110cf16cf9dae845597377ebbc43249e103cbc0ece56f89e44ec6ecc7f3819b0",
+    "packages/artplayer/src/plugins/fastForward.ts": "74c03e3fcfe2f87dcb0ef1a5da5410cb96322509fd07e32930128584c54f62b5",
+    "packages/artplayer/src/plugins/builtins.ts": "1f45028b00dd82e622cc6387b1ee73e39e6ab85ca0d15117ace11b5f02dee37f",
+    "packages/artplayer/src/plugins/autoPlayback.ts": "e349010813bbcd53503383b707c5f6e6e60d8ade6442d020fe6ba07a128c3122",
+    "packages/artplayer/src/plugins/auto-playback/records.ts": "731df519f264c602e5128c66f943b40e8645c403dc880652dea8f171574adc78",
+    "packages/artplayer/src/plugins/auto-playback/prompt.ts": "cdcfd8542d49c2be61a31c74f2ff5ff0cdd1f829858b9bf5b497f2dde85c2002",
+    "packages/artplayer/src/plugins/lock.ts": "9a08cec3a92006be8a9d2dba8d850bc4f8f38d586a50de86d725d0d8929130fd",
+    "packages/artplayer/src/plugins/miniProgressBar.ts": "21b4850fcaf6b0e82d5e62ca7aca60c179c578f7ff6d5606e6025628ff4b1cc7",
+    "test/auto-playback.test.js": "2d61bffa99bf7acab58f263fb60cb50fef8b1d450d3ea22a4f1eef8066b162a0",
+    "test/builtin-layers.test.js": "0ff767aadbfc7c142dc03e64891dd000b651e812509488f474dcf01ca5d0df05",
+    "test/types/auto-playback.ts": "3af10afc38be6eb0d6a8c9f82f76b6b046ab0b0439a22c1318fab5557a2157e4",
+    "test/types/builtin-layers.ts": "4bf0c661011e15bb3f620e0e4bf7b51ca381c420dda261fcd59988cafd2e53c8",
+    "test/browser/auto-playback.spec.js": "39d9258fb808ef42dfbd38836572335a5c759d99cc1b0ecc1b635a2d7cb3b0fe",
+    "test/browser/builtin-layers.spec.js": "4efa0ebe413cbf0ca9b06074ce73ead337136bc477c4f8fda6665be0504a31eb",
+    "package.json": "b51633ce5b1d55b8b9b91a2169a627c27f59c1cee0b00225b53a736802d35cc3"
+  },
+  "ci": {
+    "tests": 359,
+    "unit": 330,
+    "engineering": 4,
+    "baseline": 25,
+    "productionTs": 196,
+    "publicTypesUnchanged": true,
+    "log": "refactor/.cache/core18-auto-layers-ci-final.log",
+    "sha256": "9b6ab1f59cdba15a19833c001fd9eb292cd5160620aa06a437e7037d2944f42a"
+  },
+  "browser": {
+    "tests": 90,
+    "retries": 0,
+    "skipped": 0,
+    "unexpectedPageErrors": 0,
+    "knownRejections": [
+      {
+        "browser": "chromium",
+        "core": "published",
+        "rejections": [
+          {
+            "name": "Error",
+            "message": "controlled play rejection",
+            "same": true
+          },
+          {
+            "name": "Error",
+            "message": "controlled play rejection",
+            "same": true
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "core": "candidate",
+        "rejections": []
+      },
+      {
+        "browser": "firefox",
+        "core": "published",
+        "rejections": [
+          {
+            "name": "Error",
+            "message": "controlled play rejection",
+            "same": true
+          },
+          {
+            "name": "Error",
+            "message": "controlled play rejection",
+            "same": true
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "core": "candidate",
+        "rejections": []
+      },
+      {
+        "browser": "webkit",
+        "core": "published",
+        "rejections": [
+          {
+            "name": "Error",
+            "message": "controlled play rejection",
+            "same": true
+          },
+          {
+            "name": "Error",
+            "message": "controlled play rejection",
+            "same": true
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "core": "candidate",
+        "rejections": []
+      }
+    ],
+    "report": "refactor/.cache/core18-auto-layers-browser-final.json",
+    "sha256": "21c6ffce5aba6519f8dfd88b9678bf06db4d1880e12139887a99e13df8d82c88",
+    "browsers": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "candidate": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer\\src\\index.js"
+      },
+      "sha256": "6dc05603a158ec31a52629f7a0c370b8befbe82258aad26c90f8cd880169dd98",
+      "bytes": 316545
+    },
+    "limitation": "Workspace-built UMD, not installed-package or legacy acceptance. Simulated mobile conditions do not certify physical devices."
+  },
+  "initialReproduction": {
+    "autoPlayback": {
+      "passed": 2,
+      "failed": 6
+    },
+    "builtinLayers": {
+      "passed": 1,
+      "failed": 4
+    },
+    "node": "24.21.0"
+  },
+  "remaining": [
+    "info",
+    "loading",
+    "mask",
+    "all prompt integration",
+    "final build/i18n/package and installed browser matrices"
+  ]
+}

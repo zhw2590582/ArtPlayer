@@ -4,6 +4,69 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Builtins and prompts (CORE-18)
+
+`src/notice.ts` owns the notice timer and DOM visibility. Its minimal host, private
+WeakMap generations and closure checks prevent expired or reentrant writes from
+overwriting newer messages. Public art/timer fields and destroy/show methods remain.
+False/empty assignment only hides the notice; the old pending expiry still clears
+its text. Manual notice.destroy cancels the timer without hiding or permanently
+disabling a live instance. The source getter is boolean; the legacy public message
+read type remains tracked by BASE-TYPE-07 for compatible coordination in CORE-21.
+
+`src/plugins/fastForward.ts` wires the unchanged plugin result and input events.
+`src/input/long-press.ts` owns one press at a time in the current source scope,
+including its timer and previous playback rate. Touch move/end/cancel, lock, pause,
+source disposal and player destruction release the press. The native media element
+still performs its own defaultPlaybackRate reset on load/source replacement.
+Resource cleanup must not create a second press or overwrite a newer reentrant one.
+The typed builtin factory cast is confined to the existing JS constructor boundary;
+CORE-20 must revisit it when the full constructor host becomes typed.
+
+Run `test/notice.test.js` and `test/fast-forward.test.js` through the Node runner;
+their matching `test/types` fixtures check source inference and retained consumers.
+The matching browser specs compare frozen releases with candidate builds using
+actual video playback and controlled DOM touch events. They do not certify physical
+touch devices.
+
+`src/plugins/autoPlayback.ts` keeps the resume plugin's name/times/clear/delete
+surface. `auto-playback/records.ts` writes the existing times member of storage
+using option.id or option.url. Keep its historical strict `length > max` pruning
+and single-oldest deletion; changing the retention policy is a separate behavior
+decision. Playback recording remains instance-owned when the prompt layer is removed.
+`auto-playback/prompt.ts` prepares the original DOM before recording is subscribed,
+then installs ready/restart handlers. Each prompt owns its click listeners, one
+first-timeupdate subscription and timer under its layer, and is also cancelled by
+source disposal. Restart keeps only the latest resume target. Close only hides the
+prompt; seek/play precede poster/prompt hiding unless reentry invalidates that work.
+Extend `test/auto-playback.test.js`, its type fixture and browser spec for storage,
+restart, source/layer lifecycle, or actual resume playback changes.
+
+`src/plugins/lock.ts` preserves class -> isLock -> lock event ordering, including
+notifications for repeated assignments. Its icon subscription belongs to the lock
+layer; removing that layer does not disable a live plugin's state API. Destruction
+does disable further writes through retained setters/clicks. `miniProgressBar.ts`
+keeps its name-only result and control-driven class, with an instance-owned
+subscription. Both stay in one file because their responsibilities remain small.
+`test/builtin-layers.test.js` and its browser/type fixtures cover these contracts
+and the mobile/desktop, live/VOD builtin installation matrix. User-agent fixtures
+exercise the branch conditions, not physical mobile capability certification.
+
+`src/info.ts` owns a single initialization generation without adding public fields;
+`src/info/poll.ts` reads the current initialization's panel/media targets, converts
+media values as the native textContent setter does, and owns its timer and close
+listener. Reinitializing replaces that work; mobile construction still waits for an
+explicit init. Polling continues while the panel is hidden to preserve old behavior.
+`src/loading.ts` retains its simple icon insertion and Component facade.
+`src/mask.ts` keeps its original destroy listener position so earlier/later consumer
+observers see the same icon states. The internal lifecycle finalization scope runs
+after destroy event dispatch (even on error) and performs any missing terminal
+display/cleanup. Direct root-scope disposal releases finalizers after root resources.
+Use this phase only for work whose original event order must remain observable;
+ordinary timers/listeners still belong in the root or feature scope.
+`test/prompt-components.test.js` and its browser/type fixtures cover these modules,
+including getter/DOM reentry, conversion, listener order and throwing observers.
+
 ## Keyboard input (CORE-17)
 
 hotkey.ts retains the art/keys own fields, init/add/remove prototype methods, plain
@@ -546,7 +609,8 @@ minimal option hosts and internal sync/Promise return types. builtins.ts install
 five existing builtins in their original order and reads each condition at its turn.
 It keeps the mobile/live exclusions, including no fastForward for live media. The
 constructor captures option once before builtin installation, then traverses the
-same live user-plugin array. Builtin implementations remain JS until CORE-18.
+same live user-plugin array. All five builtin implementations are now TypeScript;
+their minimum-host factory casts remain confined to this constructor boundary until CORE-20.
 
 registration.ts owns result naming and non-enumerable/non-writable/non-configurable
 registry properties. Names still prefer result.name, then factory.name, then the

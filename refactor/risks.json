@@ -900,7 +900,7 @@
       "compatibleResolution": "Keep legacy consumers; add explicit cue-array listener overloads, type internal implementations accurately, and resolve remaining generated/public facade contracts at CORE-21 without false intersections.",
       "closureCriteria": "Actual setting/null/void and notice boolean returns, cue array callbacks and old legal type consumers all have an explicit compatible declaration strategy and package tests.",
       "scopeNote": "CORE-07 provides runtime evidence and explicit cue-array overloads; old inferred scalar event callbacks and return signatures are not claimed corrected.",
-      "workspaceState": "CORE-14 source models item/null/void setting returns; CORE-15 source models cue arrays and string/null/undefined subtitle results. Historical public consumers and explicit array listener overloads still compile; scalar inference and public return facade coordination remain CORE-18/21."
+      "workspaceState": "CORE-14 source models item/null/void setting returns; CORE-15 source models cue arrays and string/null/undefined subtitle results. Historical public consumers and explicit array listener overloads still compile; scalar inference and public return facade coordination remain CORE-18/21. CORE-18 notice.ts now models a boolean getter and string/Error/false writes; source and retained public consumer fixtures are in test/types/notice.ts. Public precise-view coordination remains CORE-21."
     },
     {
       "id": "BASE-TYPE-08",
@@ -1878,6 +1878,126 @@
         "refactor/baselines/input-validation.json"
       ],
       "resolutionRationale": "View calculations use the current owner viewport after iframe adoption and preserve the original edge/gap boundaries. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-LIFE-31",
+      "title": "Notice reentrant writes can schedule after destruction or erase a newer message",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-18"
+      ],
+      "evidence": [
+        "test/notice.test.js",
+        "test/browser/notice.spec.js",
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md"
+      ],
+      "compatibleResolution": "Preserve public fields and normal hide/expiry behavior; own timer generations and reject stale writes.",
+      "closureCriteria": "Installed UMD and legacy verify normal notices, reentrant writes and destruction without late timers or stale DOM effects.",
+      "workspaceState": "Final CORE-18 source, production outputs and installed UMD/legacy artifacts match; ownership and compatible behavior are verified.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md",
+        "refactor/baselines/builtins-prompts-validation.json",
+        "test/notice.test.js",
+        "test/browser/notice.spec.js"
+      ],
+      "resolutionRationale": "Owned prompt/input resources prevent stale callbacks and survive reentry/removal/destruction; normal public API and event ordering are retained. Final installed UMD and legacy each pass 1350 browser cases, including 207 CORE-18 cases, plus actual tarball runtime/type consumers. Physical mobile and release-review gates remain outstanding for the overall refactor."
+    },
+    {
+      "id": "BASE-LIFE-32",
+      "title": "Fast-forward repeated starts and missing cancellation retain timers or accelerated playback",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-18"
+      ],
+      "evidence": [
+        "test/fast-forward.test.js",
+        "test/browser/fast-forward.spec.js",
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md"
+      ],
+      "compatibleResolution": "Own a single press in the current source; restore its prior rate and clean subscriptions while preserving native load reset behavior.",
+      "closureCriteria": "Installed UMD and legacy verify touch and cancellation, pause/lock/source/destroy and rate restoration; physical touch limitations remain documented.",
+      "workspaceState": "Final CORE-18 source, production outputs and installed UMD/legacy artifacts match; ownership and compatible behavior are verified.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md",
+        "refactor/baselines/builtins-prompts-validation.json",
+        "test/fast-forward.test.js",
+        "test/browser/fast-forward.spec.js"
+      ],
+      "resolutionRationale": "Owned prompt/input resources prevent stale callbacks and survive reentry/removal/destruction; normal public API and event ordering are retained. Final installed UMD and legacy each pass 1350 browser cases, including 207 CORE-18 cases, plus actual tarball runtime/type consumers. Physical mobile and release-review gates remain outstanding for the overall refactor."
+    },
+    {
+      "id": "BASE-LIFE-33",
+      "title": "Auto-playback restarts retain obsolete resume clicks, subscriptions and timers",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-18"
+      ],
+      "evidence": [
+        "test/auto-playback.test.js",
+        "test/browser/auto-playback.spec.js",
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md"
+      ],
+      "compatibleResolution": "Keep storage and public plugin contracts; bind one prompt generation to the layer and source, independently of instance-owned time recording.",
+      "closureCriteria": "Installed UMD and legacy prove single current resume action, actual playback/storage, close/rejection and restart/source/remove/destroy cleanup.",
+      "workspaceState": "Final CORE-18 source, production outputs and installed UMD/legacy artifacts match; ownership and compatible behavior are verified.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md",
+        "refactor/baselines/builtins-prompts-validation.json",
+        "test/auto-playback.test.js",
+        "test/browser/auto-playback.spec.js"
+      ],
+      "resolutionRationale": "Owned prompt/input resources prevent stale callbacks and survive reentry/removal/destruction; normal public API and event ordering are retained. Final installed UMD and legacy each pass 1350 browser cases, including 207 CORE-18 cases, plus actual tarball runtime/type consumers. Physical mobile and release-review gates remain outstanding for the overall refactor."
+    },
+    {
+      "id": "BASE-LIFE-34",
+      "title": "Lock icon and miniature progress subscriptions outlive their UI or player",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-18"
+      ],
+      "evidence": [
+        "test/builtin-layers.test.js",
+        "test/browser/builtin-layers.spec.js",
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md"
+      ],
+      "compatibleResolution": "Scope icon subscriptions to their layer and miniature progress to the player; retain live lock setters after UI removal while suppressing post-destroy mutations.",
+      "closureCriteria": "Installed UMD and legacy verify builtin activation matrix, state/event/icon contracts, layer removal and retained setters/events after destruction.",
+      "workspaceState": "Final CORE-18 source, production outputs and installed UMD/legacy artifacts match; ownership and compatible behavior are verified.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md",
+        "refactor/baselines/builtins-prompts-validation.json",
+        "test/builtin-layers.test.js",
+        "test/browser/builtin-layers.spec.js"
+      ],
+      "resolutionRationale": "Owned prompt/input resources prevent stale callbacks and survive reentry/removal/destruction; normal public API and event ordering are retained. Final installed UMD and legacy each pass 1350 browser cases, including 207 CORE-18 cases, plus actual tarball runtime/type consumers. Physical mobile and release-review gates remain outstanding for the overall refactor."
+    },
+    {
+      "id": "BASE-LIFE-35",
+      "title": "Info repeated initialization retains polling and close callbacks; destroyed reads continue writing",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-18"
+      ],
+      "evidence": [
+        "test/prompt-components.test.js",
+        "test/browser/prompt-components.spec.js",
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md"
+      ],
+      "compatibleResolution": "Own one info initialization generation; preserve mask destroy observer ordering and finalize its resources after event dispatch, including failure paths.",
+      "closureCriteria": "Installed UMD and legacy verify info initial/repeated/mobile/manual/failed init and DOM conversion, plus mask playback, destroy ordering and throwing-observer finalization.",
+      "workspaceState": "Final CORE-18 source, production outputs and installed UMD/legacy artifacts match; ownership and compatible behavior are verified.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-18-builtins-prompts.md",
+        "refactor/baselines/builtins-prompts-validation.json",
+        "test/prompt-components.test.js",
+        "test/browser/prompt-components.spec.js"
+      ],
+      "resolutionRationale": "Owned prompt/input resources prevent stale callbacks and survive reentry/removal/destruction; normal public API and event ordering are retained. Final installed UMD and legacy each pass 1350 browser cases, including 207 CORE-18 cases, plus actual tarball runtime/type consumers. Physical mobile and release-review gates remain outstanding for the overall refactor."
     }
   ]
 }

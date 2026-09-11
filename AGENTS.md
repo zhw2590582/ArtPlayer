@@ -184,9 +184,9 @@ Controls and setting entries are managed through component registries.
 
 Relevant implementation:
 
-- `packages/artplayer/src/control/index.js`
-- `packages/artplayer/src/setting/index.js`
-- `packages/artplayer/src/utils/component.js`
+- `packages/artplayer/src/control/index.ts`
+- `packages/artplayer/src/setting/index.ts`
+- `packages/artplayer/src/utils/component.ts`
 
 Important behavior:
 
@@ -323,6 +323,6 @@ Start with the nearest sibling implementation instead of inventing a new pattern
 
 - control/setting UI: `artplayer-plugin-hls-control`, `artplayer-plugin-dash-control`
 - proxy behavior: `artplayer-proxy-canvas`, `artplayer-proxy-mediabunny`
-- component lifecycle: `packages/artplayer/src/utils/component.js`
+- component lifecycle: `packages/artplayer/src/utils/component.ts`
 
 If a change spans source, examples, and packaging, make all three consistent in the same pass.

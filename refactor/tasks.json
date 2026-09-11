@@ -1090,11 +1090,14 @@
         "CORE-16",
         "CORE-17"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "autoPlayback/autoOrientation/fastForward/lock/miniProgressBar 及 info/notice/loading/mask",
       "acceptance": "默认启用条件、storage 格式、定时器/动画清理通过；结合 BASE-PERF-01 防止销毁后重新安排 notice timer；接续 BASE-TYPE-07 的 notice.show boolean getter 与历史读类型冲突",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-18-builtins-prompts.md",
+        "baselines/builtins-prompts-validation.json"
+      ]
     },
     {
       "id": "CORE-19",

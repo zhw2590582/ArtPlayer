@@ -95,3 +95,8 @@
 | BASE-LIFE-29 | resolved / 已复现 | Scroll throttle reset timers remain pending after player destruction | CORE-17 |
 | BASE-LIFE-30 | resolved / 已复现 | Screen orientation changes are ignored when onchange is initially null | CORE-17 |
 | BASE-DOM-18 | resolved / 已复现 | View visibility uses the original global viewport after container adoption into an iframe | CORE-17 |
+| BASE-LIFE-31 | resolved / 已复现 | Notice reentrant writes can schedule after destruction or erase a newer message | CORE-18 |
+| BASE-LIFE-32 | resolved / 已复现 | Fast-forward repeated starts and missing cancellation retain timers or accelerated playback | CORE-18 |
+| BASE-LIFE-33 | resolved / 已复现 | Auto-playback restarts retain obsolete resume clicks, subscriptions and timers | CORE-18 |
+| BASE-LIFE-34 | resolved / 已复现 | Lock icon and miniature progress subscriptions outlive their UI or player | CORE-18 |
+| BASE-LIFE-35 | resolved / 已复现 | Info repeated initialization retains polling and close callbacks; destroyed reads continue writing | CORE-18 |

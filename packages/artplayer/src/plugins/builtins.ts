@@ -10,15 +10,15 @@ import miniProgressBar from './miniProgressBar'
 export default function installBuiltins<Host extends PluginHost<Host>>(registry: BuiltinRegistry<Host>, option: PluginHost<Host>['option']): void {
   // Read each condition at its original turn; earlier plugins may change options.
   if (!isClosing(registry.art) && option.miniProgressBar && !option.isLive)
-    registry.add(miniProgressBar)
+    registry.add(miniProgressBar as unknown as PluginFactory<Host>)
   if (!isClosing(registry.art) && option.lock && isMobile)
-    registry.add(lock)
+    registry.add(lock as unknown as PluginFactory<Host>)
   if (!isClosing(registry.art) && option.autoPlayback && !option.isLive)
-    registry.add(autoPlayback)
+    registry.add(autoPlayback as unknown as PluginFactory<Host>)
   if (!isClosing(registry.art) && option.autoOrientation && isMobile) {
     // The JS constructor supplies the complete host before builtin installation.
     registry.add(autoOrientation as unknown as PluginFactory<Host>)
   }
   if (!isClosing(registry.art) && option.fastForward && isMobile && !option.isLive)
-    registry.add(fastForward)
+    registry.add(fastForward as unknown as PluginFactory<Host>)
 }

@@ -1,0 +1,77 @@
+{
+  "task": "CORE-18",
+  "date": "2026-09-11",
+  "status": "partial",
+  "parentCommit": "a842058136997b94db93155dc6db06eab72604bb",
+  "node": "v24.21.0",
+  "scope": "Notice and fastForward only; other builtins/prompts and installed-package exit remain outstanding.",
+  "fingerprints": {
+    "packages/artplayer/src/notice.ts": "cd13f8cb7147088a02ee4583d4edc2120848a039d07878dd996dcb54781db66e",
+    "packages/artplayer/src/input/long-press.ts": "110cf16cf9dae845597377ebbc43249e103cbc0ece56f89e44ec6ecc7f3819b0",
+    "packages/artplayer/src/plugins/fastForward.ts": "74c03e3fcfe2f87dcb0ef1a5da5410cb96322509fd07e32930128584c54f62b5",
+    "packages/artplayer/src/plugins/builtins.ts": "b3848611b329a059df684e1f3d515a98e6f051aef9d3a7e0408693794c65c6ab",
+    "test/notice.test.js": "8d454d731cde5bf5d47f6573503fa7782de68b3c1b09ef4298a5fa1bd4b60855",
+    "test/fast-forward.test.js": "81172dc0fadbf62cf88904fb7a54d131f848602a0fdfe3be93a37fcf4ca7b389",
+    "test/types/notice.ts": "f896ea15c1dc1f71e7018e3a00e7276f415b9ff58fb6058d8767cac9438a047a",
+    "test/types/fast-forward.ts": "bd724069d82a78b8f9264f73ac3d7862f27b2bb161936a49763812e5d5966246",
+    "test/browser/notice.spec.js": "56b2d2977e19fd798f3867e9819e631bcb99e51496387a9c67791b60a41048a6",
+    "test/browser/fast-forward.spec.js": "5b884fae1cd48cb592c2004a8149890aed4741ac0a92b1e415e47b94411bb368",
+    "test/browser/event-scheduling.spec.js": "4ebd5dab23ca8e49580bd1dc3234e612cbae36b735c7c9401d168059eae11c5c",
+    "package.json": "6c772a8d39b30444c27bd4d12896050052392f65d99c7e41665cae00ab5adb6a"
+  },
+  "ci": {
+    "tests": 340,
+    "unit": 311,
+    "engineering": 4,
+    "baseline": 25,
+    "productionTs": 191,
+    "publicTypesUnchanged": true,
+    "log": "refactor/.cache/core18-partial-ci.log",
+    "sha256": "b9384ab43b6dd4bedf2cf14d738b190b84c709e1534c9260c9beaf2576a07d20"
+  },
+  "browser": {
+    "tests": 96,
+    "retries": 0,
+    "skipped": 0,
+    "pageErrors": 0,
+    "report": "refactor/.cache/core18-prompts-input-browser.json",
+    "sha256": "f8557584b8f9b21a714c3a7e0e5d809bef0d88614f84ee5f539060c053db58e4",
+    "browsers": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "candidate": {
+      "source": {
+        "kind": "workspace-build",
+        "entry": "packages\\artplayer\\src\\index.js"
+      },
+      "sha256": "ad326102f632ec856d8ed9a14f522a6b32c058c56ed82fe3e6204e44abd21376",
+      "bytes": 313815
+    },
+    "limitation": "Workspace-built UMD, not installed-package/legacy acceptance. Controlled touch events do not certify physical devices."
+  },
+  "initialReproduction": {
+    "notice": {
+      "passed": 3,
+      "failed": 3,
+      "node": "25.2.1"
+    },
+    "fastForward": {
+      "passed": 3,
+      "failed": 8,
+      "node": "24.21.0"
+    },
+    "source": "Before respective migration in this task; see ignored raw logs and committed regression tests."
+  },
+  "remaining": [
+    "autoPlayback",
+    "lock",
+    "miniProgressBar",
+    "info",
+    "loading",
+    "mask",
+    "autoOrientation/builtin integration",
+    "final build/i18n/package and installed browser matrices"
+  ]
+}

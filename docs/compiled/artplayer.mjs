@@ -361,19 +361,27 @@ class ResourceScope {
       throw new ResourceCleanupError(errors);
   }
 }
-const states$4 = /* @__PURE__ */ new WeakMap();
+const states$6 = /* @__PURE__ */ new WeakMap();
 const containers = /* @__PURE__ */ new WeakMap();
 function beginLifecycle(owner) {
-  states$4.set(owner, { scope: new ResourceScope(), destroying: false });
+  const state2 = { scope: new ResourceScope(), finalizers: new ResourceScope(), destroying: false };
+  states$6.set(owner, state2);
+  state2.scope.add(() => {
+    if (!state2.destroying)
+      state2.finalizers.dispose();
+  });
 }
 function stateOf$1(owner) {
-  const state2 = states$4.get(owner);
+  const state2 = states$6.get(owner);
   if (!state2)
     throw new Error("ArtPlayer lifecycle has not been initialized");
   return state2;
 }
 function getScope(owner) {
   return stateOf$1(owner).scope;
+}
+function getFinalizationScope(owner) {
+  return stateOf$1(owner).finalizers;
 }
 function isClosing(owner) {
   const state2 = stateOf$1(owner);
@@ -422,6 +430,7 @@ function destroyInstance(owner, instances2, removeHtml, removeSource, failed = f
     state2.releaseContainer = void 0;
   }
   attempt(() => owner.emit("destroy"));
+  attempt(() => state2.finalizers.dispose());
   if (failed && state2.rollback)
     attempt(state2.rollback);
   state2.rollback = void 0;
@@ -2536,12 +2545,12 @@ function hoverInit(art, events) {
     }
   );
 }
-const states$3 = /* @__PURE__ */ new WeakMap();
+const states$5 = /* @__PURE__ */ new WeakMap();
 function ownListeners(registry, art) {
-  states$3.set(registry, { scope: getScope(art), cleaning: false });
+  states$5.set(registry, { scope: getScope(art), cleaning: false });
 }
 function stateOf(registry) {
-  const state2 = states$3.get(registry);
+  const state2 = states$5.get(registry);
   if (!state2)
     throw new Error("ArtPlayer event registry has not been initialized");
   return state2;
@@ -2823,12 +2832,12 @@ function acceptsHotkey(event, fallback) {
   const first = asElement(event.composedPath?.()[0]) || asElement(event.target);
   return !first || !editable(first);
 }
-const states$2 = /* @__PURE__ */ new WeakMap();
+const states$4 = /* @__PURE__ */ new WeakMap();
 class Hotkey {
   constructor(art) {
     this.art = art;
     this.keys = {};
-    states$2.set(this, { subscribed: false });
+    states$4.set(this, { subscribed: false });
     if (!isMobile)
       this.init();
   }
@@ -2836,7 +2845,7 @@ class Hotkey {
     const art = this.art;
     if (isClosing(art))
       return;
-    const state2 = states$2.get(this);
+    const state2 = states$4.get(this);
     if (art.option.hotkey) {
       if (!state2.defaults) {
         const callbacks = defaultHotkeys(art);
@@ -3028,40 +3037,85 @@ class Icons {
     }
   }
 }
+function pollInfo(art, scope, close2) {
+  const active2 = () => !scope.closed && !isClosing(art);
+  const fail = (error2) => {
+    try {
+      scope.dispose();
+    } catch (cleanupError) {
+      console.warn("Failed to release info polling resources:", cleanupError);
+    }
+    throw error2;
+  };
+  try {
+    const { proxy, constructor, template: { $infoPanel, $infoClose, $video } } = art;
+    const cleanup = proxy($infoClose, "click", () => {
+      if (active2())
+        close2();
+    });
+    scope.add(() => {
+      art.events.remove(cleanup);
+    });
+    const items = Array.from($infoPanel.querySelectorAll("[data-video]"));
+    const destroy = () => scope.dispose();
+    art.on("destroy", destroy);
+    scope.add(() => {
+      art.off("destroy", destroy);
+    });
+    const loop = () => {
+      try {
+        for (const item of items) {
+          if (!active2())
+            return;
+          const value = Reflect.get($video, item.dataset.video ?? "undefined");
+          if (!active2())
+            return;
+          const raw = typeof value === "number" ? value.toFixed(2) : value;
+          if (!active2())
+            return;
+          if (item.textContent !== raw) {
+            const text = raw == null ? null : `${raw}`;
+            if (!active2())
+              return;
+            item.textContent = text;
+          }
+        }
+        if (active2())
+          timeout(scope, loop, constructor.INFO_LOOP_TIME);
+      } catch (error2) {
+        fail(error2);
+      }
+    };
+    if (active2())
+      loop();
+  } catch (error2) {
+    fail(error2);
+  }
+}
+const states$3 = /* @__PURE__ */ new WeakMap();
 class Info extends Component {
   constructor(art) {
     super(art);
     this.name = "info";
-    if (!isMobile) {
+    states$3.set(this, { revision: 0 });
+    if (!isMobile)
       this.init();
-    }
   }
   init() {
-    const {
-      proxy,
-      constructor,
-      template: { $infoPanel, $infoClose, $video }
-    } = this.art;
-    proxy($infoClose, "click", () => {
+    const state2 = states$3.get(this);
+    const revision = ++state2.revision;
+    state2.scope?.dispose();
+    if (isClosing(this.art) || state2.revision !== revision)
+      return;
+    const scope = getScope(this.art).child();
+    state2.scope = scope;
+    scope.add(() => {
+      if (state2.scope === scope)
+        state2.scope = void 0;
+    });
+    pollInfo(this.art, scope, () => {
       this.show = false;
     });
-    let cancel = () => {
-    };
-    const $types = queryAll("[data-video]", $infoPanel) || [];
-    this.art.on("destroy", () => cancel());
-    const scope = getScope(this.art);
-    function loop() {
-      for (let index = 0; index < $types.length; index++) {
-        const item = $types[index];
-        const value = $video[item.dataset.video];
-        const textContent = typeof value === "number" ? value.toFixed(2) : value;
-        if (item.textContent !== textContent) {
-          item.textContent = textContent;
-        }
-      }
-      cancel = timeout(scope, loop, constructor.INFO_LOOP_TIME);
-    }
-    loop();
   }
 }
 class Layer extends Component {
@@ -3078,7 +3132,9 @@ class Loading extends Component {
   constructor(art) {
     super(art);
     this.name = "loading";
-    append(art.template.$loading, art.icons.loading);
+    const icon = art.icons.loading;
+    if (!isClosing(art))
+      appendElement(art.template.$loading, icon);
   }
 }
 class Mask extends Component {
@@ -3086,44 +3142,103 @@ class Mask extends Component {
     super(art);
     this.name = "mask";
     const { template, icons, events } = art;
-    const $state = append(template.$state, icons.state);
-    const $error = append(template.$state, icons.error);
+    const stateIcon = icons.state;
+    if (isClosing(art))
+      return;
+    const $state = appendElement(template.$state, stateIcon);
+    const errorIcon = icons.error;
+    if (isClosing(art))
+      return;
+    const $error = appendElement(template.$state, errorIcon);
     setStyle($error, "display", "none");
-    art.on("destroy", () => {
+    let terminalEventHandled = false;
+    const destroy = () => {
       setStyle($state, "display", "none");
       setStyle($error, "display", null);
+      if (isClosing(art))
+        terminalEventHandled = true;
+    };
+    art.on("destroy", destroy);
+    getFinalizationScope(art).add(() => {
+      try {
+        if (!terminalEventHandled)
+          destroy();
+      } finally {
+        art.off("destroy", destroy);
+      }
     });
-    events.proxy(template.$state, "click", () => silencePromise(art.play()));
+    if (!isClosing(art)) {
+      events.proxy(template.$state, "click", () => {
+        if (!isClosing(art))
+          silencePromise(art.play());
+      });
+    }
+  }
+}
+const states$2 = /* @__PURE__ */ new WeakMap();
+function cancelNotice(notice) {
+  const state2 = states$2.get(notice);
+  state2.revision++;
+  state2.pending = void 0;
+  if (notice.timer !== null) {
+    clearTimeout(notice.timer);
+    notice.timer = null;
   }
 }
 class Notice {
   constructor(art) {
     this.art = art;
     this.timer = null;
-    getScope(art).add(() => this.destroy());
-    art.on("destroy", () => this.destroy());
+    states$2.set(this, { revision: 0 });
+    const destroy = () => this.destroy();
+    art.on("destroy", destroy);
+    getScope(art).add(() => {
+      art.off("destroy", destroy);
+    });
+    getScope(art).add(() => {
+      this.destroy();
+    });
   }
   destroy() {
-    if (this.timer) {
-      clearTimeout(this.timer);
-      this.timer = null;
-    }
+    cancelNotice(this);
   }
   set show(msg) {
-    if (getScope(this.art).closed)
+    if (isClosing(this.art))
       return;
+    const state2 = states$2.get(this);
+    state2.revision++;
     const {
       constructor,
       template: { $player, $noticeInner }
     } = this.art;
     if (msg) {
+      cancelNotice(this);
+      const revision = state2.revision;
+      const active2 = () => !isClosing(this.art) && state2.revision === revision;
       $noticeInner.textContent = msg instanceof Error ? msg.message.trim() : msg;
+      if (!active2())
+        return;
       addClass($player, "art-notice-show");
-      clearTimeout(this.timer);
-      this.timer = setTimeout(() => {
+      if (!active2())
+        return;
+      const delay = constructor.NOTICE_TIME;
+      if (!active2())
+        return;
+      const pending2 = {};
+      state2.pending = pending2;
+      const timer = setTimeout(() => {
+        if (isClosing(this.art) || state2.pending !== pending2)
+          return;
+        state2.pending = void 0;
+        const before = state2.revision;
         $noticeInner.textContent = "";
-        removeClass($player, "art-notice-show");
-      }, constructor.NOTICE_TIME);
+        if (!isClosing(this.art) && state2.revision === before)
+          removeClass($player, "art-notice-show");
+      }, delay);
+      if (active2())
+        this.timer = timer;
+      else
+        clearTimeout(timer);
     } else {
       removeClass($player, "art-notice-show");
     }
@@ -5451,16 +5566,31 @@ function autoOrientation(art) {
     }
   };
 }
-function autoPlayback(art) {
-  const {
-    i18n,
-    icons,
-    storage,
-    constructor,
-    proxy,
-    template: { $poster }
-  } = art;
-  const $autoPlayback = art.layers.add({
+function readTimes(storage) {
+  return storage.get("times") || {};
+}
+function installPlaybackRecords(art) {
+  const { storage, constructor } = art;
+  eventSubscriptions(art)("video:timeupdate", () => {
+    if (!art.playing)
+      return;
+    const times = readTimes(storage);
+    const keys2 = Object.keys(times);
+    const max = constructor.AUTO_PLAYBACK_MAX;
+    const key = art.option.id || art.option.url;
+    const time2 = art.currentTime;
+    if (isClosing(art))
+      return;
+    if (keys2.length > max)
+      delete times[keys2[0]];
+    times[key] = time2;
+    if (!isClosing(art))
+      storage.set("times", times);
+  });
+}
+function installResumePrompt(art) {
+  const { i18n, icons, storage, constructor, template: { $poster } } = art;
+  const element = art.layers.add({
     name: "auto-playback",
     html: `
             <div class="art-auto-playback-close"></div>
@@ -5468,95 +5598,204 @@ function autoPlayback(art) {
             <div class="art-auto-playback-jump"></div>
         `
   });
-  const $last = query(".art-auto-playback-last", $autoPlayback);
-  const $jump = query(".art-auto-playback-jump", $autoPlayback);
-  const $close = query(".art-auto-playback-close", $autoPlayback);
-  append($close, icons.close);
-  let timer = null;
-  art.on("video:timeupdate", () => {
-    if (art.playing) {
-      const times = storage.get("times") || {};
-      const keys2 = Object.keys(times);
-      if (keys2.length > constructor.AUTO_PLAYBACK_MAX) {
-        delete times[keys2[0]];
+  if (!element || isClosing(art))
+    return () => {
+    };
+  const $last = queryElement(".art-auto-playback-last", element);
+  const $jump = queryElement(".art-auto-playback-jump", element);
+  const $close = queryElement(".art-auto-playback-close", element);
+  appendElement($close, icons.close);
+  const owner = entryScope(element);
+  let current2;
+  let revision = 0;
+  const init = () => {
+    const generation = ++revision;
+    current2?.dispose();
+    if (owner.closed || isClosing(art) || revision !== generation)
+      return;
+    const scope = owner.child();
+    current2 = scope;
+    const active2 = () => current2 === scope && !scope.closed && !isClosing(art);
+    scope.add(() => {
+      if (current2 === scope) {
+        current2 = void 0;
+        setStyle(element, "display", "none");
       }
-      times[art.option.id || art.option.url] = art.currentTime;
-      storage.set("times", times);
-    }
-  });
-  function init() {
-    const times = storage.get("times") || {};
+    });
+    const releaseSource = getSourceScope(art).add(() => {
+      scope.dispose();
+    });
+    scope.add(() => {
+      releaseSource();
+    });
+    const times = readTimes(storage);
     const currentTime = times[art.option.id || art.option.url];
-    clearTimeout(timer);
-    setStyle($autoPlayback, "display", "none");
-    if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
-      setStyle($autoPlayback, "display", "flex");
-      $last.textContent = `${i18n.get("Last Seen")} ${secondToTime(currentTime)}`;
-      $jump.textContent = i18n.get("Jump Play");
-      proxy($close, "click", () => {
-        setStyle($autoPlayback, "display", "none");
+    if (!active2())
+      return;
+    setStyle(element, "display", "none");
+    if (!active2() || !currentTime || !(currentTime >= constructor.AUTO_PLAYBACK_MIN))
+      return;
+    if (!active2())
+      return;
+    setStyle(element, "display", "flex");
+    if (!active2())
+      return;
+    const lastText = `${i18n.get("Last Seen")} ${secondToTime(currentTime)}`;
+    if (!active2())
+      return;
+    $last.textContent = lastText;
+    if (!active2())
+      return;
+    const jumpText = i18n.get("Jump Play");
+    if (!active2())
+      return;
+    $jump.textContent = jumpText;
+    if (!active2())
+      return;
+    const bind2 = (target, callback) => {
+      const cleanup = art.events.proxy(target, "click", () => {
+        if (active2())
+          callback();
       });
-      proxy($jump, "click", () => {
-        art.seek = currentTime;
-        silencePromise(art.play());
-        setStyle($poster, "display", "none");
-        setStyle($autoPlayback, "display", "none");
+      scope.add(() => {
+        art.events.remove(cleanup);
       });
-      art.once("video:timeupdate", () => {
-        timer = setTimeout(() => {
-          setStyle($autoPlayback, "display", "none");
-        }, constructor.AUTO_PLAYBACK_TIMEOUT);
-      });
-    }
-  }
-  art.on("ready", init);
-  art.on("restart", init);
+    };
+    bind2($close, () => {
+      setStyle(element, "display", "none");
+    });
+    if (!active2())
+      return;
+    bind2($jump, () => {
+      art.seek = currentTime;
+      if (!active2())
+        return;
+      silencePromise(art.play());
+      if (!active2())
+        return;
+      setStyle($poster, "display", "none");
+      if (active2())
+        setStyle(element, "display", "none");
+    });
+    if (!active2())
+      return;
+    let releaseUpdate = () => {
+    };
+    let fired = false;
+    const update = () => {
+      if (fired || !active2())
+        return;
+      fired = true;
+      releaseUpdate();
+      timeout(scope, () => {
+        if (active2())
+          setStyle(element, "display", "none");
+      }, constructor.AUTO_PLAYBACK_TIMEOUT);
+    };
+    art.on("video:timeupdate", update);
+    releaseUpdate = scope.add(() => {
+      art.off("video:timeupdate", update);
+    });
+    if (fired)
+      releaseUpdate();
+  };
+  return () => {
+    subscribeEntry(art, element, "ready", init);
+    subscribeEntry(art, element, "restart", init);
+  };
+}
+function autoPlayback(art) {
+  const { storage } = art;
+  const installPrompt = installResumePrompt(art);
+  installPlaybackRecords(art);
+  installPrompt();
   return {
     name: "auto-playback",
     get times() {
-      return storage.get("times") || {};
+      return readTimes(storage);
     },
     clear() {
       return storage.del("times");
     },
     delete(id2) {
-      const times = storage.get("times") || {};
+      const times = readTimes(storage);
       delete times[id2];
       storage.set("times", times);
       return times;
     }
   };
 }
+function longPress(art) {
+  let current2;
+  let generation = 0;
+  const hasActivePress = () => current2?.active;
+  const stop = () => {
+    generation++;
+    current2?.scope.dispose();
+  };
+  const start = (event) => {
+    const revision = ++generation;
+    current2?.scope.dispose();
+    if (revision !== generation || isClosing(art) || event.touches.length !== 1 || !art.playing || art.isLock)
+      return;
+    const press = { scope: getSourceScope(art).child(), active: false, previousRate: 1 };
+    current2 = press;
+    press.scope.add(() => {
+      if (current2 !== press)
+        return;
+      current2 = void 0;
+      if (press.active) {
+        try {
+          art.playbackRate = press.previousRate;
+        } finally {
+          if (!hasActivePress())
+            removeClass(art.template.$player, "art-fast-forward");
+        }
+      }
+    });
+    timeout(press.scope, () => {
+      if (current2 !== press || isClosing(art) || !art.playing || art.isLock) {
+        press.scope.dispose();
+        return;
+      }
+      try {
+        press.previousRate = art.playbackRate;
+        if (current2 !== press || press.scope.closed)
+          return;
+        press.active = true;
+        const rate = art.constructor.FAST_FORWARD_VALUE;
+        if (current2 !== press || press.scope.closed || isClosing(art))
+          return;
+        art.playbackRate = rate;
+        if (current2 === press && !press.scope.closed && !isClosing(art))
+          addClass(art.template.$player, "art-fast-forward");
+      } catch (error2) {
+        try {
+          press.scope.dispose();
+        } catch (cleanupError) {
+          console.warn("Failed to restore fast-forward playback rate:", cleanupError);
+        }
+        throw error2;
+      }
+    }, art.constructor.FAST_FORWARD_TIME);
+  };
+  return { start, stop };
+}
 function fastForward(art) {
-  const {
-    constructor,
-    proxy,
-    template: { $player, $video }
-  } = art;
-  let timer = null;
-  let isPress = false;
-  let lastPlaybackRate = 1;
-  const onStart = (event) => {
-    if (event.touches.length === 1 && art.playing && !art.isLock) {
-      timer = setTimeout(() => {
-        isPress = true;
-        lastPlaybackRate = art.playbackRate;
-        art.playbackRate = constructor.FAST_FORWARD_VALUE;
-        addClass($player, "art-fast-forward");
-      }, constructor.FAST_FORWARD_TIME);
-    }
-  };
-  const onStop = () => {
-    clearTimeout(timer);
-    if (isPress) {
-      isPress = false;
-      art.playbackRate = lastPlaybackRate;
-      removeClass($player, "art-fast-forward");
-    }
-  };
-  proxy($video, "touchstart", onStart);
-  art.on("document:touchmove", onStop);
-  art.on("document:touchend", onStop);
+  const { proxy, template: { $player, $video } } = art;
+  const press = longPress(art);
+  const subscribe = eventSubscriptions(art);
+  proxy($video, "touchstart", (event) => press.start(event));
+  proxy($video, "touchcancel", press.stop);
+  subscribe("document:touchmove", press.stop);
+  subscribe("document:touchend", press.stop);
+  subscribe("document:touchcancel", press.stop);
+  subscribe("video:pause", press.stop);
+  subscribe("destroy", press.stop);
+  subscribe("lock", (locked) => {
+    if (locked)
+      press.stop();
+  });
   return {
     name: "fastForward",
     get state() {
@@ -5574,29 +5813,44 @@ function lock(art) {
     return hasClass($player, "art-lock");
   }
   function setLock() {
+    if (isClosing(art))
+      return;
     addClass($player, "art-lock");
+    if (isClosing(art))
+      return;
     art.isLock = true;
-    art.emit("lock", true);
+    if (!isClosing(art))
+      art.emit("lock", true);
   }
   function setUnlock() {
+    if (isClosing(art))
+      return;
     removeClass($player, "art-lock");
+    if (isClosing(art))
+      return;
     art.isLock = false;
-    art.emit("lock", false);
+    if (!isClosing(art))
+      art.emit("lock", false);
   }
   layers.add({
     name: "lock",
     mounted($el) {
-      const $lock = append($el, icons.lock);
-      const $unlock = append($el, icons.unlock);
+      const scope = entryScope($el);
+      if (scope.closed || isClosing(art))
+        return;
+      const $lock = appendElement($el, icons.lock);
+      if (scope.closed || isClosing(art))
+        return;
+      const $unlock = appendElement($el, icons.unlock);
+      if (scope.closed || isClosing(art))
+        return;
       setStyle($lock, "display", "none");
-      art.on("lock", (state2) => {
-        if (state2) {
-          setStyle($lock, "display", "inline-flex");
-          setStyle($unlock, "display", "none");
-        } else {
-          setStyle($lock, "display", "none");
-          setStyle($unlock, "display", "inline-flex");
-        }
+      subscribeEntry(art, $el, "lock", (state2) => {
+        if (isClosing(art))
+          return;
+        setStyle($lock, "display", state2 ? "inline-flex" : "none");
+        if (!scope.closed && !isClosing(art))
+          setStyle($unlock, "display", state2 ? "none" : "inline-flex");
       });
     },
     click() {
@@ -5622,7 +5876,7 @@ function lock(art) {
   };
 }
 function miniProgressBar(art) {
-  art.on("control", (state2) => {
+  eventSubscriptions(art)("control", (state2) => {
     if (state2) {
       removeClass(art.template.$player, "art-mini-progress-bar");
     } else {

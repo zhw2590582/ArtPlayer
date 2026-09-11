@@ -1,5 +1,13 @@
 # 进度与证据
 
+## 当前实施：CORE-18 内置插件与提示模块完成
+
+notice、autoPlayback、fastForward、lock、miniProgressBar、info、loading、mask 已迁移 TS，拆清记录、提示、长按与轮询归属；autoOrientation 组合复验通过。修复重复响应、陈旧回调和清理，同时保持公开结果、存储格式、DOM 与 destroy 观察顺序。
+
+CI 372 项、200 个生产 TS 严格检查、实际 tarball 27 项运行时与五组类型通过；安装 UMD/legacy 各 1350 项三浏览器全量通过，各含 207 项本任务专项。源码、包文件、三个格式、语言、文档副本和许可指纹一致。见 [交付记录](changes/2026-09-11-CORE-18-builtins-prompts.md) 和 [最终证据](baselines/builtins-prompts-validation.json)。
+
+关闭五项生命周期差异；BASE-TYPE-07 精确公共视图继续交 CORE-21，物理设备与多轮复盘仍保留发布门槛。当前 214 项：54 完成、160 待办；下一项 CORE-19。本任务独立本地提交，无推送或发布。
+
 ## 当前实施：CORE-17 输入、全局事件与调度完成
 
 Hotkey 与 Events 全部初始化器已迁移 TS，拆清焦点、监听器、全局重绑、手势和调度；正常旧 API、回调/事件和交互保持，新增 document:touchcancel。

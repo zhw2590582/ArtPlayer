@@ -9,6 +9,7 @@ interface LifecycleOwner {
 
 interface State {
   scope: ResourceScope
+  finalizers: ResourceScope
   destroying: boolean
   rollback?: () => void
   releaseContainer?: () => void
@@ -18,7 +19,13 @@ const states = new WeakMap<object, State>()
 const containers = new WeakMap<Element, object>()
 
 export function beginLifecycle(owner: object): void {
-  states.set(owner, { scope: new ResourceScope(), destroying: false })
+  const state: State = { scope: new ResourceScope(), finalizers: new ResourceScope(), destroying: false }
+  states.set(owner, state)
+  state.scope.add(() => {
+    // Direct scope disposal has no destroy-event phase to wait for.
+    if (!state.destroying)
+      state.finalizers.dispose()
+  })
 }
 
 function stateOf(owner: object): State {
@@ -30,6 +37,10 @@ function stateOf(owner: object): State {
 
 export function getScope(owner: object): ResourceScope {
   return stateOf(owner).scope
+}
+
+export function getFinalizationScope(owner: object): ResourceScope {
+  return stateOf(owner).finalizers
 }
 
 export function isClosing(owner: object): boolean {
@@ -83,6 +94,7 @@ export function destroyInstance(owner: LifecycleOwner, instances: LifecycleOwner
     state.releaseContainer = undefined
   }
   attempt(() => owner.emit('destroy'))
+  attempt(() => state.finalizers.dispose())
   if (failed && state.rollback)
     attempt(state.rollback)
   state.rollback = undefined
