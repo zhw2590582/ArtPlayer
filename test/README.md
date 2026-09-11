@@ -40,3 +40,8 @@ Blob URL contents and cleanup when a controlled click fails.
 See [browser/README.md](browser/README.md) for `yarn test:browser`, browser installation,
 published/current combinations, media fixtures, candidate mapping and failure reports.
 These tests are separate from the fast Node suite and run in the Browser playback smoke CI job.
+
+`test/audio-track.test.js` compares source and published Audio Track 1.1.0 in all three
+formats with a controlled Audio object: timing intent, offsets, source updates, rejection,
+volume/rate, independent instances and cleanup. Published-only tests retain defect evidence.
+See [audio validation](../refactor/audio-validation.md) for actual media tests and limitations.

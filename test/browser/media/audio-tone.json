@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "file": "audio-tone.m4a",
+  "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+  "bytes": 132436,
+  "command": "ffmpeg -hide_banner -loglevel error -f lavfi -i sine=frequency=440:sample_rate=48000:duration=16 -ac 1 -c:a aac -b:a 64k -map_metadata -1 -movflags +faststart test/browser/media/audio-tone.m4a",
+  "ffmpeg": "ffmpeg version 2025-11-12-git-6cdd2cbe32-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 1
+      }
+    ],
+    "format": {
+      "duration": "16.000000"
+    }
+  }
+}

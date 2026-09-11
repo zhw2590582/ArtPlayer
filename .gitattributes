@@ -3,4 +3,5 @@
 test/browser/media/hls/*.m3u8 text eol=lf
 test/browser/fixtures/hls-grouped.m3u8 text eol=lf
 test/browser/media/hls/*.mpegts binary
+test/browser/media/*.m4a binary
 refactor/baselines/core-vendor/*.txt text eol=lf

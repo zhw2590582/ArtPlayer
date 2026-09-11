@@ -1490,11 +1490,15 @@
         "ENG-03",
         "ENG-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "偏移、倍率、seek、waiting/playing、加载错误和 autoplay 拒绝",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-AUDIO-02-tests.md",
+        "audio-validation.md",
+        "baselines/audio-validation.json"
+      ]
     },
     {
       "id": "PKG-AUDIO-03",

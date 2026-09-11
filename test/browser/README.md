@@ -1,5 +1,10 @@
 # Browser regression entry
 
+Audio Track tests use the source and frozen 1.1.0 plugin on both cores. The local AAC fixture
+has a pinned hash and generation command in media/audio-tone.json and uses the existing Range
+server. The suite retains published cleanup/native-pause defects as explicit observations.
+See [audio validation](../../refactor/audio-validation.md) for passed scope and device limitations.
+
 Use the pinned Node and Yarn versions, then run:
 
 ```sh

@@ -126,7 +126,7 @@
 | HLS-ENV-01 | open / 已复现 | Windows WebKit 缺失 MSE，HLS 播放矩阵尚缺 Safari 证据 | PKG-HLS-05, REL-09, REVIEW-02 |
 | HLS-CRASH-01 | open / 已复现 | Firefox Hls 1.5.17 worker 销毁可在原生 video 与候选核心复现崩溃 | PKG-HLS-SDK-01, PKG-HLS-05, REVIEW-02 |
 | HLS-PLAYBACK-01 | open / 已复现 | Firefox 旧核心与 Hls 1.7.2 切组后视频档位未完成切换 | PKG-HLS-SDK-01, PKG-HLS-05, REVIEW-02 |
-| AUDIO-LIFE-01 | open / 源码/产物事实 | Audio Track 销毁后 update 与媒体/订阅缺少终止守卫 | PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-05 |
-| AUDIO-SYNC-01 | open / 待取证 | Audio Track 偏移边界和切源/缓冲恢复尚缺真实时序证据 | PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-05 |
+| AUDIO-LIFE-01 | open / 已复现 | Audio Track 销毁后 update 与媒体/订阅缺少终止守卫 | PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-05 |
+| AUDIO-SYNC-01 | open / 已复现 | Audio Track 未同步原生暂停/结束，偏移边界与切源/缓冲仍待完整验证 | PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-05 |
 | AUDIO-TYPE-01 | open / 源码/产物事实 | Audio Track update 部分配置与公开/编辑器声明不一致 | PKG-AUDIO-04 |
 | AUDIO-DEMO-01 | open / 源码/产物事实 | Audio Track README 示例链接名称不匹配且缺维护说明 | PKG-AUDIO-06 |
