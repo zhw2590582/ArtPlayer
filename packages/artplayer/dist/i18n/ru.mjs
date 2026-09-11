@@ -5,6 +5,11 @@ function i(e, t) {
   }
 }
 const o = {
+  "Context Menu": "Контекстное меню",
+  Lock: "Заблокировать",
+  Back: "Назад",
+  Settings: "Настройки",
+  Progress: "Ход воспроизведения",
   "Video Info": "Информация",
   Close: "Закрыть",
   "Video Load Failed": "Ошибка загрузки видео",

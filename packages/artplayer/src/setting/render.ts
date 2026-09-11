@@ -1,11 +1,14 @@
 import type { SettingKind } from './selection'
 import type { SettingItem, SettingManager, SettingRange } from './types'
+import { keyboardButton } from '../accessibility/button'
 import { appendElement } from '../component/dom'
 import { isClosing } from '../lifecycle/instance'
 import { timeout } from '../lifecycle/resources'
 import { addClass, append, def, has, inverseClass, setStyle } from '../utils'
 import { settingScopeActive } from './activity'
 import { captureSettingItem, rememberSettingState } from './checkpoint'
+import { captureSettingFocus } from './keyboard-focus'
+import { nameSettingRange, settingItemKeyboard } from './keyboard-item'
 import { ownSettingPanel, releaseSettingPanel, settingPanelScope } from './panels'
 import { ownSettingItem, proxySetting, settingItemOwner } from './resources'
 import { bindSettingActions } from './selection'
@@ -21,6 +24,8 @@ function bindContent(item: SettingItem, key: 'icon' | 'html' | 'tooltip', elemen
     set(value: unknown) {
       element.innerHTML = ''
       append(element, value)
+      if (key === 'html')
+        nameSettingRange(item)
     },
   })
 }
@@ -46,6 +51,10 @@ export function createSettingHeader(setting: SettingManager, item: SettingItem):
   append($left, $icon)
   append($left, item.$parent!.html)
   proxySetting(setting.art, item.$parent!, $item, 'click', () => setting.render(item.$parents), settingPanelScope($panel))
+  const scope = settingPanelScope($panel)
+  if (!$item.querySelector('button,input,select,textarea,a[href],[tabindex],[contenteditable]'))
+    keyboardButton(scope, $item, () => $item.click(), () => settingScopeActive(scope) && !isClosing(setting.art))
+  $item.setAttribute('aria-label', `${setting.art.i18n.get('Back')}: ${$item.textContent?.trim() || ''}`)
   append($panel, $item)
 }
 
@@ -177,6 +186,7 @@ export function createSettingItem(setting: SettingManager, item: SettingItem, is
           get: () => $switchValue,
           set(value) {
             $switchValue = value
+            $item.setAttribute('aria-checked', String(Boolean(value)))
             if (value) {
               setStyle($switchOff, 'display', 'none')
               setStyle($switchOn, 'display', null)
@@ -258,6 +268,7 @@ export function createSettingItem(setting: SettingManager, item: SettingItem, is
       configurable: true,
       get: () => $item,
     })
+    settingItemKeyboard(setting, item, $item, type, scope)
 
     if (isUpdate) {
       if (oldItem?.parentNode)
@@ -298,6 +309,7 @@ export function createSettingItem(setting: SettingManager, item: SettingItem, is
 export function renderSetting(setting: SettingManager, option = setting.option): void {
   if (isClosing(setting.art))
     return
+  const restoreFocus = captureSettingFocus(setting)
   const cached = setting.cache.get(option)
   if (cached && !settingScopeActive(settingPanelScope(cached)))
     return
@@ -335,6 +347,8 @@ export function renderSetting(setting: SettingManager, option = setting.option):
       if (!current())
         return
       addClass($panel, 'art-setting-panel')
+      $panel.setAttribute('role', 'group')
+      $panel.setAttribute('aria-label', option[0]?.$parent?.$html?.textContent || setting.art.i18n.get('Settings'))
       append(setting.$parent, $panel)
       inverseClass($panel, 'art-current')
 
@@ -376,4 +390,6 @@ export function renderSetting(setting: SettingManager, option = setting.option):
       throw error
     }
   }
+  if (currentNavigation())
+    restoreFocus(previous?.[0]?.$parent?.$item)
 }

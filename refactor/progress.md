@@ -1,5 +1,79 @@
 # 进度与证据
 
+## 最新完成：CORE-23 键盘、焦点与可访问名称
+
+默认菜单、原生模式/SSR/字幕检查已完成阶段验证；最终审查另复现并修正设置入口被删除/隐藏/禁用后留下隐藏焦点，以及导航进入隐藏/inert 设置项。四项旧产物回归全部失败，修正后三浏览器设置/集成组合 45 项通过。
+
+修正后的完整 CI 468 项、249 个生产 TS 文件、新安装包 34 项运行时/5 组旧类型/8 组精确类型通过；381 个源/声明/资源文件与打包快照一致，工作区生成产物与安装包字节一致。现代版与 legacy 安装包全量各 1749 项通过（各引擎 583 项），无失败、重试或跳过。见 [最终验收证据](baselines/keyboard-validation.json) 与 [实施记录](changes/2026-09-11-CORE-23-keyboard-focus.md)。
+
+CORE-23 done、BASE-DOM-01 resolved；58 done、156 todo。本任务以独立本地 commit 交付，包含源码、测试、生成文件、架构与迁移记录。下一步先完成 CORE-22 尚缺的依赖 ENG-08（覆盖率、资源与性能报告），再做核心总验收。其余生态包、CI/CD 完整流程、各包下一大版本及三轮发布复盘继续推进；没有 push/publish/tag/merge。下方各阶段保留当时的状态与证据。
+
+## 当前实施：CORE-23 默认菜单键盘阶段
+
+默认菜单新增 Shift+F10/ContextMenu 入口、方向键/Home/End/文字导航和 Escape/Tab 退出。保留原 action/choice 点击路径、回调参数与关闭职责；菜单转入信息面板或 mini 后回到最初控件。动态菜单项替换/移除复用组件焦点恢复；输入字段的上下文菜单手势不再被播放器拦截。Context Menu 可选翻译键、十二语言与两份声明已同步。
+
+完整 CI 468 项、249 个生产 TS 严格检查通过；accessibility/components/prompt-components/display-mini/hotkey 三浏览器组合 444 项全部通过，其中菜单十三场景共 39 项，无失败、重试或跳过。见 [菜单阶段证据](baselines/keyboard-contextmenu-partial.json) 和 [实施记录](changes/2026-09-11-CORE-23-keyboard-focus.md)。中途两个测试假设错误按实际 DOM 顺序和 Emitter 上下文契约修正，保留失败报告。
+
+CORE-23 doing、BASE-DOM-01 open；57 done、1 doing、156 todo。继续原生模式退出焦点与 SSR/字幕可用性，再进行新安装包/legacy 完整验收。本阶段仍是源码构建证据，尚无本任务完成 commit，无 push/publish/tag/merge。
+
+## 当前实施：CORE-23 信息面板与锁定层阶段
+
+信息面板新增独立键盘模块，支持进入、关闭和返回焦点，重复 init 保留返回目标并替换监听器；缺少可选 SSR 外层时保留原轮询/关闭行为。锁定层增加稳定按钮、aria-pressed 和 Escape 解锁，隐藏控制栏暂时退出 Tab 顺序，动态新增/移出控件和清理恢复原属性；保留调用方后续修改的值。已锁定时重挂载的图标初始化也按实际状态修正。
+
+最终完整 CI 468 项、245 个生产 TS 严格检查通过；accessibility/builtin-layers/prompt-components/hotkey 三浏览器组合 306 项通过，其中信息面板及锁定层共 39 项，无失败、重试或跳过。见 [阶段证据](baselines/keyboard-info-lock-partial.json) 与 [实施记录](changes/2026-09-11-CORE-23-keyboard-focus.md)。本轮新增可选 Lock 翻译键，十二语言、包声明与 Monaco 声明已同步生成。
+
+CORE-23 仍 doing、BASE-DOM-01 open；57 done、1 doing、156 todo。接下来审查默认菜单入口、其余模式退出和跨实例/SSR/字幕可用性，再做新安装包与 legacy 全量验收。当前为源码构建阶段证据，尚无本任务完成 commit；未推送或发布。
+
+## 当前实施：CORE-23 mini 键盘与退出焦点阶段
+
+mini 关闭和稳定播放 wrapper 已支持 Enter/Space，弹窗内 Escape 关闭；键盘打开聚焦关闭入口，关闭后恢复原控件或播放器，鼠标/程序打开保留外部焦点。重复会话不沿用陈旧入口，回调销毁/重入取消后续通知。复用现有翻译键及图标 click 路径，调用方自有 mini 容器的 DOM、样式和控件仍由调用方管理。
+
+修改前四项 Chromium 场景全部失败；最终六场景跨三引擎 18 项通过。完整 CI 468 项、242 个生产 TS 严格检查通过；accessibility/display-mini/display-web/hotkey 三浏览器组合回归 300 项通过，无失败、重试或跳过。见 [mini 阶段证据](baselines/keyboard-mini-partial.json) 与 [实施记录](changes/2026-09-11-CORE-23-keyboard-focus.md)。
+
+下一步信息面板/锁定层、其他模式退出和跨实例/SSR/字幕检查，然后重新构建安装包与 legacy 全量验收。CORE-23 doing、BASE-DOM-01 open；57 done、1 doing、156 todo。当前为源码构建专项证据，尚无本任务完成 commit，未推送或发布。
+
+## 当前实施：CORE-23 动态控件焦点阶段
+
+新增 component/focus.ts，控件更新只在完整替换结束后恢复一次焦点；移除、禁用替换或 mounted 失败时选择可用相邻控件，beforeUnmount 中断则保留原节点。支持 selector 子项与原生按钮，跳过隐藏/禁用/inert 内容；不抢回调用方已移交外部或另一实例的焦点。最后一个控件移除后使用受实例清理管理的 tabindex=-1 聚焦播放器，不新增顺序 Tab 入口。
+
+真实 Chromium 修改前六项中五项失败，修正后动态控件九场景跨三引擎 27 项通过。完整 CI 468 项、241 个生产 TS 严格检查通过；accessibility/components/setting/hotkey/progress-quality 三浏览器组合回归 507 项全部通过，无失败、重试或跳过。见 [阶段证据](baselines/keyboard-control-focus-partial.json) 与 [实施记录](changes/2026-09-11-CORE-23-keyboard-focus.md)。
+
+下一步补齐 mini/信息面板/锁定层等模式操作与退出焦点，继续跨实例/SSR/字幕可用性及最终安装包/legacy 全量验收。当前仍为 Vite 源码构建证据；CORE-23 doing、BASE-DOM-01 open，57 done、1 doing、156 todo，完成整项后独立 commit。最近完成提交仍 faaa3e8c，未推送或发布。
+
+## 当前实施：CORE-23 设置面板与播放位置校正阶段
+
+核心自有源码 TS 迁移已在 CORE-20 完成，公开声明生成与兼容入口在 CORE-21 完成。当前继续修改源码：设置面板新增独立键盘、条目语义与焦点恢复模块，支持进入/返回、Escape、原生范围输入及更新失败恢复；网页全屏移动播放器节点后恢复已有焦点。最新完成提交仍为 faaa3e8c，CORE-23 尚未验收提交。
+
+本阶段完整 CI 468 项通过（437 单元、6 工程、25 基线），239 个生产 TS 文件严格检查通过。扩大三浏览器回归 477 项通过；随后修正内部类型和清理回调返回类型，最终源码上的设置/滑块/切源专项 57 项通过。两轮构建指纹分别保留，不能合并宣称最终源码已跑完完整矩阵。见 [设置阶段证据](baselines/keyboard-settings-partial.json) 与 [实施记录](changes/2026-09-11-CORE-23-keyboard-focus.md)。
+
+回归复现 WebKit 在 End 后立即 PageDown 时原生结束状态覆盖新 seek；复用一次有限校正，保留公开事件顺序，新操作、公开时间写入、切源、控件移除或销毁取消旧校正。修复后的 WebKit 五次重复探针通过。另修正测试 once(setBar) 提前消费加载事件的竞态，未增加等待或跳过失败。
+
+总体仍为 214 项：57 done、1 doing、156 todo，覆盖 22 个包。下一步完成动态控件焦点、剩余模式退出及跨实例/SSR/字幕可用性，进行 CORE-23 新安装包和 legacy 全量验收，再提交并进入 CORE-22 核心总验收。多数生态包、后续 CI/CD、各包下一大版本、三轮发布复盘和真机门槛仍待实施。BASE-DOM-01 open；没有 push/publish/tag/merge。
+
+## 当前实施：CORE-23 选择列表阶段
+
+选择列表已拆出 selector-keyboard.ts，支持实际 Tab 入口、Enter/Space 打开与提交、方向键/Home/End/typeahead 导航、Escape 返回和不提交的 Tab 离开。原 selector.ts 保留绑定与异步结果归属；正常列表同步 aria-selected，包含原生交互 HTML 的内容保留按钮/输入框语义。鼠标悬停、异步结果、回调移交焦点及旧 click 参数均经过回归。
+
+补充浏览器用例先复现再修复“已关闭列表继续吞掉 Escape”和“空列表悬停报告展开”。最终 CI 463 项、235 个生产 TS 严格检查通过；相关三浏览器回归 282 项通过，无失败/重试/跳过，其中选择列表专项 30 项。见 [阶段证据](baselines/keyboard-selectors-partial.json) 和 [实施记录](changes/2026-09-11-CORE-23-keyboard-focus.md)。当前仍是源码构建证据，新安装包/legacy 全量验收尚待进行。
+
+下一步设置树和面板切换焦点，再检查模式退出、动态控件移除/替换、跨实例/SSR/字幕。CORE-23 doing，BASE-DOM-01 open；57 done、1 doing、156 todo，最新完成提交仍 faaa3e8c。整个 CORE-23 验收后独立 commit；未推送或发布。
+
+## 当前实施：CORE-23 进度与音量滑块阶段
+
+进度/音量已有独立 TS 键盘范围模块，支持方向键、PageUp/PageDown、Home/End、范围禁用和 ARIA 同步；进度保留 setBar-before-seek 及可选指针参数，切源/销毁/嵌套操作取消旧写入。音量面板可通过 Tab 进入，修复 visibility 过渡导致快速 Tab 跳过滑块的问题。新增十二语言 Progress 翻译，公开字段可选，包与 Monaco 声明均由脚本再生成。
+
+最终 CI 463 项、234 个生产 TS 严格检查通过；accessibility/hotkey/progress-quality 三浏览器 123 项通过，无失败/重试/跳过。WebKit 实际 seek 时间与目标的微小差值按实际媒体值校验；中途检出的 Monaco 声明遗漏已生成修复。具体失败、修正和来源见 [滑块阶段证据](baselines/keyboard-sliders-partial.json) 与 [实施记录](changes/2026-09-11-CORE-23-keyboard-focus.md)。这是源码构建专项，尚非新安装包/legacy 全量验收。
+
+接下来实现 selector、设置树和 Escape/焦点恢复，再检查模式退出、动态移除、跨实例/SSR/字幕。CORE-23 仍 doing，BASE-DOM-01 开放；57 done、1 doing、156 todo，最新完成提交仍 faaa3e8c。整个 CORE-23 完成后独立 commit；未推送或发布。
+
+## 当前实施：CORE-23 按钮与键盘焦点第一阶段
+
+从 faaa3e8c 接续，任务 doing。新增 accessibility/button、keyboard、focus 三个 TS 模块，接入播放、音量、设置、全屏/PiP/AirPlay/截图及自定义 click 控件；处理 Enter/Space、按键归属、焦点切换、动态移除和 scope 清理。新增键盘焦点样式，保留鼠标自动隐藏、旧点击回调和普通快捷键。
+
+真实 Chromium 固定修改前 Tab 缺口；Firefox 探针确认其原生 video 是既有 Tab 入口，测试保留该入口后继续检查控件。新指针用例复现并修正了本轮任意焦点策略造成的控制栏常驻，现使用独立输入方式状态。当前完整 CI 456 项、232 个生产 TS 文件、按钮/焦点及 Hotkey 三浏览器 69 项通过。见 [阶段证据](baselines/keyboard-buttons-partial.json) 和 [变更记录](changes/2026-09-11-CORE-23-keyboard-focus.md)。
+
+下一步实现/验证进度与音量 slider、selector、设置树进入/返回/Escape、模式退出、动态焦点恢复、跨实例/SSR 和字幕可用性，再进行安装包与全量矩阵验收。当前是源码构建浏览器证据，不能当作最新 npm/legacy 安装包已验证。CORE-23 与 BASE-DOM-01 保持开放，尚无本任务完成 commit；57 done、1 doing、156 todo。未推送或发布。
+
 ## 当前实施：CORE-21 公开声明生成与兼容视图完成
 
 从 ee895a55 接续。公开声明源移至 packages/artplayer/public/，生成 37 个声明文件：22 个历史文件与精确模块/入口。新增 artplayer/runtime、runtime/legacy 和共享类型扩展入口，映射原有 JS 产物；build:types/check:types 已接入 CI 和隔离构建。旧入口继续支持 4.3.5，新精确入口验证 5.1.6/5.9.3 各四模式。核心自有源码 TS 迁移已在 CORE-20 完成，本任务完成公开类型出口与核心编辑器验收。

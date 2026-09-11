@@ -1,6 +1,7 @@
 import type { ContextmenuFactory, ContextmenuOption } from './types'
 import { controlEvents } from '../control/resources'
 import { capitalize, inverseClass, query } from '../utils'
+import { keyboardChoices, updateChoices } from './choices'
 
 export default function flip(option: ContextmenuOption): ContextmenuFactory {
   return (art) => {
@@ -10,10 +11,11 @@ export default function flip(option: ContextmenuOption): ContextmenuFactory {
     } = art
 
     const html = FLIP.map(item => `<span data-value="${item}">${i18n.get(capitalize(item))}</span>`).join('')
+    const label = i18n.get('Video Flip')
 
     return {
       ...option,
-      html: `${i18n.get('Video Flip')}: ${html}`,
+      html: `${label}: ${html}`,
       click: (contextmenu, event) => {
         const value = event.target instanceof HTMLElement ? event.target.dataset.value : undefined
         if (value) {
@@ -27,10 +29,12 @@ export default function flip(option: ContextmenuOption): ContextmenuFactory {
         if ($default) {
           inverseClass($default, 'art-current')
         }
+        keyboardChoices($panel, label)
         on('flip', (value) => {
           const $current = Array.from($panel.querySelectorAll('span')).find(item => item.dataset.value === value)
           if ($current) {
             inverseClass($current, 'art-current')
+            updateChoices($panel)
           }
         })
       },

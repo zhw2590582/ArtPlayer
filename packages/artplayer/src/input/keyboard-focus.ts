@@ -1,3 +1,5 @@
+import { isClaimedKey } from '../accessibility/keyboard'
+
 function asElement(target: EventTarget | null | undefined): HTMLElement | undefined {
   if (target && (target as Node).nodeType === 1)
     return target as HTMLElement
@@ -16,7 +18,7 @@ function editable(target: HTMLElement): boolean {
 }
 
 export function acceptsHotkey(event: KeyboardEvent, fallback: Document): boolean {
-  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing || event.keyCode === 229)
+  if (isClaimedKey(event) || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing || event.keyCode === 229)
     return false
   const doc = eventDocument(event, fallback)
   let active = asElement(doc.activeElement)
@@ -26,5 +28,12 @@ export function acceptsHotkey(event: KeyboardEvent, fallback: Document): boolean
     return false
   // The composed path exposes an editable descendant behind a retargeted shadow host.
   const first = asElement(event.composedPath?.()[0]) || asElement(event.target)
+  const enter = event.key === 'Enter' || event.code === 'Enter' || event.code === 'NumpadEnter'
+  const activation = enter || event.key === ' ' || event.code === 'Space'
+  if (activation) {
+    const selector = `button,summary,[role="button"],[role="switch"]${enter ? ',a[href]' : ''}`
+    if (first?.closest?.(selector) || active?.closest?.(selector))
+      return false
+  }
   return !first || !editable(first)
 }

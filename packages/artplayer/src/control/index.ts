@@ -1,5 +1,6 @@
 import type { EntryInput, EntryOption, EventCleanup, SelectorItem } from '../component/types'
 import type { ControlHost } from './types'
+import { focusVisibility } from '../accessibility/focus'
 import { ownEntry } from '../component/resources'
 import { getScope, isClosing } from '../lifecycle/instance'
 import {
@@ -30,8 +31,22 @@ export default class Control extends Component<ControlHost> {
 
     const { constructor } = art
     const { $player, $bottom } = this.art.template
-    ownEntry(art, $bottom)
-    const { on } = controlEvents(art, $bottom)
+    const scope = ownEntry(art, $bottom)
+    const keyboardFocused = focusVisibility(scope, $player, () => {
+      this.show = true
+    })
+    const { on, proxy } = controlEvents(art, $bottom)
+
+    proxy($player, 'focusin', (event) => {
+      art.isFocus = true
+      art.isInput = (event.target as Element | null)?.tagName === 'INPUT'
+    })
+    proxy($player, 'focusout', (event) => {
+      if (!$player.contains(event.relatedTarget as Node | null)) {
+        art.isFocus = false
+        art.isInput = false
+      }
+    })
 
     on('mousemove', () => {
       if (!isMobile) {
@@ -57,6 +72,7 @@ export default class Control extends Component<ControlHost> {
         !art.setting.show
         && !this.isHover
         && !art.isInput
+        && !keyboardFocused()
         && art.playing
         && this.show
         && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME

@@ -2,6 +2,11 @@ import type { Dictionary } from './publish'
 import { publishLanguage } from './publish'
 
 const id = {
+  'Context Menu': 'Menu konteks',
+  'Lock': 'Kunci',
+  'Back': 'Kembali',
+  'Settings': 'Pengaturan',
+  'Progress': 'Progres pemutaran',
   'Video Info': 'Informasi Video',
   'Close': 'Tutup',
   'Video Load Failed': 'Gagal Memuat Video',

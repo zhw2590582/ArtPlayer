@@ -3,9 +3,11 @@ import { appendElement } from '../component/dom'
 import { entryScope, subscribeEntry } from '../component/resources'
 import { isClosing } from '../lifecycle/instance'
 import { addClass, hasClass, removeClass, setStyle } from '../utils'
+import { lockKeyboard } from './lock-keyboard'
 
 export interface LockHost extends SubscriptionHost<{ lock: [boolean] }> {
-  template: { $player: HTMLElement }
+  template: { $player: HTMLElement, $bottom: HTMLElement }
+  i18n: { get: (key: string) => string }
   icons: { lock: string | Element, unlock: string | Element }
   isLock: boolean
   emit: (name: 'lock', state: boolean) => unknown
@@ -57,7 +59,17 @@ export default function lock(art: LockHost): { name: string, state: boolean } {
       const $unlock = appendElement($el, icons.unlock)
       if (scope.closed || isClosing(art))
         return
-      setStyle($lock, 'display', 'none')
+      const updateKeyboard = lockKeyboard(art, $el, scope, getState)
+      if (scope.closed || isClosing(art))
+        return
+      if (getState()) {
+        setStyle($lock, 'display', 'inline-flex')
+        if (!scope.closed && !isClosing(art))
+          setStyle($unlock, 'display', 'none')
+      }
+      else {
+        setStyle($lock, 'display', 'none')
+      }
 
       subscribeEntry<{ lock: [boolean] }, 'lock'>(art, $el, 'lock', (state) => {
         if (isClosing(art))
@@ -65,6 +77,8 @@ export default function lock(art: LockHost): { name: string, state: boolean } {
         setStyle($lock, 'display', state ? 'inline-flex' : 'none')
         if (!scope.closed && !isClosing(art))
           setStyle($unlock, 'display', state ? 'none' : 'inline-flex')
+        if (!scope.closed && !isClosing(art))
+          updateKeyboard(state)
       })
     },
     click() {

@@ -2,6 +2,11 @@ import type { Dictionary } from './publish'
 import { publishLanguage } from './publish'
 
 const fa = {
+  'Context Menu': 'منوی زمینه',
+  'Lock': 'قفل',
+  'Back': 'بازگشت',
+  'Settings': 'تنظیمات',
+  'Progress': 'پیشرفت پخش',
   'Video Info': 'اطلاعات ویدیو',
   'Close': 'بستن',
   'Video Load Failed': 'بارگذاری ناموفق',

@@ -5,6 +5,11 @@ function o(e, i) {
   }
 }
 const a = {
+  "Context Menu": "Menu kontekstowe",
+  Lock: "Zablokuj",
+  Back: "Wstecz",
+  Settings: "Ustawienia",
+  Progress: "Postęp odtwarzania",
   "Video Info": "Informacje o wideo",
   Close: "Zamknij",
   "Video Load Failed": "Błąd ładowania wideo",

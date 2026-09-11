@@ -41,6 +41,20 @@
   }
 
   &.art-lock {
+    .art-layer-lock {
+      display: flex;
+    }
+
+    &:not(.art-control-show) .art-layer-lock {
+      opacity: 0;
+      pointer-events: none;
+
+      &:focus-within {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
     .art-subtitle {
       bottom: var(--art-subtitle-bottom) !important;
     }

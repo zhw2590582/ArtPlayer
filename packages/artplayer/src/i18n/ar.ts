@@ -2,6 +2,11 @@ import type { Dictionary } from './publish'
 import { publishLanguage } from './publish'
 
 const ar = {
+  'Context Menu': 'قائمة السياق',
+  'Lock': 'قفل',
+  'Back': 'رجوع',
+  'Settings': 'الإعدادات',
+  'Progress': 'تقدم التشغيل',
   'Video Info': 'معلومات الفيديو',
   'Close': 'إغلاق',
   'Video Load Failed': 'فشل تحميل الفيديو',

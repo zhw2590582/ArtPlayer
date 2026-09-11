@@ -6,6 +6,8 @@ import Component from '../utils/component'
 import aspectRatio from './aspectRatio'
 import { installSettingEvents } from './events'
 import flip from './flip'
+import { installSettingKeyboard } from './keyboard'
+import { captureSettingFocus } from './keyboard-focus'
 import { resizeSetting } from './layout'
 import { findItem, formatTree, registerTreeOwner, releaseTreeOwner, traverseTree } from './model'
 import playbackRate from './playbackRate'
@@ -53,6 +55,7 @@ export default class Setting extends SettingBase implements SettingManager {
 
       installSettingEvents(this)
     }
+    installSettingKeyboard(this)
   }
 
   get builtin(): SettingItem[] {
@@ -103,6 +106,7 @@ export default class Setting extends SettingBase implements SettingManager {
   }
 
   remove(name: string): void {
+    const restoreFocus = captureSettingFocus(this)
     const item = this.find(name)!
     errorHandle(item, `Can't find [${name}] in the [setting]`)
     this.traverse((item) => {
@@ -126,6 +130,7 @@ export default class Setting extends SettingBase implements SettingManager {
     }
     if (failures.length)
       throw new ResourceCleanupError(failures)
+    restoreFocus()
   }
 
   update(target: SettingItem): SettingItem {

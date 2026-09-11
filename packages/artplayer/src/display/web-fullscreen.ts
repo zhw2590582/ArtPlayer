@@ -1,5 +1,6 @@
 import type { Placement } from './placement'
 import type { WebFullscreenHost } from './types'
+import { captureMovedFocus } from '../accessibility/moved-focus'
 import { getScope, isClosing } from '../lifecycle/instance'
 import { ResourceCleanupError } from '../lifecycle/scope'
 import { capturePlacement, restorePlacement } from './placement'
@@ -55,6 +56,7 @@ export function webFullscreen(art: WebFullscreenHost): (value: boolean) => void 
       return
     const current = ++revision
     const active = () => current === revision && !isClosing(art)
+    const restoreFocus = captureMovedFocus($player)
     if (value) {
       if (!saved)
         saved = { placement: capturePlacement($player), style: $player.getAttribute('style') }
@@ -72,10 +74,15 @@ export function webFullscreen(art: WebFullscreenHost): (value: boolean) => void 
         $player.classList.add('art-fullscreen-web')
       }
       catch (error) {
-        if (active() && restore(snapshot, active))
+        if (active() && restore(snapshot, active)) {
           saved = undefined
+          restoreFocus()
+        }
         throw error
       }
+      if (!active())
+        return
+      restoreFocus()
       if (!active())
         return
       art.emit('fullscreenWeb', true)
@@ -89,6 +96,9 @@ export function webFullscreen(art: WebFullscreenHost): (value: boolean) => void 
       else {
         $player.classList.remove('art-fullscreen-web')
       }
+      if (!active())
+        return
+      restoreFocus()
       if (!active())
         return
       art.emit('fullscreenWeb', false)

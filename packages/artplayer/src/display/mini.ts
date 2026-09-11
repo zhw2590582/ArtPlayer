@@ -2,6 +2,7 @@ import type { MiniView } from './mini-view'
 import type { Placement } from './placement'
 import type { MiniHost } from './types'
 import { getScope, isClosing } from '../lifecycle/instance'
+import { miniFocus } from './mini-focus'
 import { miniGeometry, miniPosition } from './mini-layout'
 import { createMiniView } from './mini-view'
 import { capturePlacement, restorePlacement } from './placement'
@@ -15,6 +16,7 @@ export function mini(art: MiniHost): PropertyDescriptor {
   let creating = false
   let queued = false
   const active = () => !isClosing(art) && $player.classList.contains('art-mini')
+  const focus = miniFocus(art)
 
   function restore() {
     if (placement) {
@@ -37,6 +39,7 @@ export function mini(art: MiniHost): PropertyDescriptor {
       return
     const current = ++revision
     queued = false
+    const restoreFocus = focus.leaving(art.template.$mini)
     restore()
     if (isClosing(art) || current !== revision)
       return
@@ -44,7 +47,9 @@ export function mini(art: MiniHost): PropertyDescriptor {
     $player.classList.remove('art-mini')
     if (art.template.$mini) {
       art.template.$mini.style.display = 'none'
-      art.emit('mini', false)
+      restoreFocus()
+      if (!isClosing(art) && current === revision)
+        art.emit('mini', false)
     }
   }
 
@@ -67,6 +72,7 @@ export function mini(art: MiniHost): PropertyDescriptor {
       queued = true
       return
     }
+    const enterFocus = focus.entering()
     art.state = 'mini'
     if (isClosing(art) || current !== revision)
       return
@@ -115,6 +121,8 @@ export function mini(art: MiniHost): PropertyDescriptor {
           return
         art.storage.set('left', position.left)
       }
+      if (!isClosing(art) && current === revision)
+        enterFocus(view.focus)
       if (!isClosing(art) && current === revision)
         art.emit('mini', true)
     }

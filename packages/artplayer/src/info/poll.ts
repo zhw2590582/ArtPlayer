@@ -3,9 +3,11 @@ import type { ComponentHost } from '../component/types'
 import type ResourceScope from '../lifecycle/scope'
 import { isClosing } from '../lifecycle/instance'
 import { timeout } from '../lifecycle/resources'
+import { infoKeyboard } from './keyboard'
 
-export interface InfoHost extends ComponentHost, SubscriptionHost<{ destroy: [] }> {
-  template: { $player: HTMLElement, $infoPanel: HTMLElement, $infoClose: HTMLElement, $video: object }
+export interface InfoHost extends ComponentHost, SubscriptionHost<{ destroy: [], info: [boolean] }> {
+  template: { $player: HTMLElement, $info: HTMLElement | null, $infoPanel: HTMLElement, $infoClose: HTMLElement, $video: object }
+  i18n: { get: (key: string) => string }
   constructor: { INFO_LOOP_TIME: number }
   proxy: ComponentHost['events']['proxy']
 }
@@ -36,6 +38,7 @@ export function pollInfo(art: InfoHost, scope: ResourceScope, close: () => void)
     scope.add(() => {
       art.off('destroy', destroy)
     })
+    infoKeyboard(art, scope, close)
     const loop = () => {
       try {
         for (const item of items) {

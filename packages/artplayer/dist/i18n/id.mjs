@@ -5,6 +5,11 @@ function t(e, a) {
   }
 }
 const n = {
+  "Context Menu": "Menu konteks",
+  Lock: "Kunci",
+  Back: "Kembali",
+  Settings: "Pengaturan",
+  Progress: "Progres pemutaran",
   "Video Info": "Informasi Video",
   Close: "Tutup",
   "Video Load Failed": "Gagal Memuat Video",

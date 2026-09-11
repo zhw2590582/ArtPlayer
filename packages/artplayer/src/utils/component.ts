@@ -1,6 +1,8 @@
 import type { ComponentHost, Entry, EntryInput, EntryOption, EventCleanup } from '../component/types'
 import validator from 'option-validator'
+import { keyboardButton } from '../accessibility/button'
 import { renderEntry } from '../component/dom'
+import { captureComponentFocus } from '../component/focus'
 import { ownEntry, releaseEntry } from '../component/resources'
 import { isClosing } from '../lifecycle/instance'
 import { ComponentOption } from '../scheme'
@@ -74,6 +76,9 @@ export default class Component<Host extends ComponentHost = ComponentHost> {
       if (scope.closed)
         return
       if (option.click) {
+        const actionable = (this.name === 'control' && !option.selector) || (this.name === 'contextmenu' && !$ref.querySelector('[data-value]'))
+        if (actionable && !$ref.querySelector('button,input,select,textarea,a[href],[tabindex],[contenteditable]'))
+          keyboardButton(scope, $ref)
         const cleanup = this.art.events.proxy($ref, 'click', (event) => {
           if (scope.closed)
             return
@@ -118,6 +123,7 @@ export default class Component<Host extends ComponentHost = ComponentHost> {
     const item = this.cache.get(name)!
     if (removing.has(item))
       return
+    const restoreFocus = captureComponentFocus(this, item.$ref)
     removing.add(item)
     try {
       if (item.option.beforeUnmount)
@@ -135,17 +141,24 @@ export default class Component<Host extends ComponentHost = ComponentHost> {
     }
     finally {
       removing.delete(item)
+      restoreFocus()
     }
   }
 
   update(option: EntryOption<Host>): ReturnType<this['add']> {
-    if (this.cache.has(option.name!)) {
-      const item = this.cache.get(option.name!)!
-      option = Object.assign(item.option, option)
-      this.remove(option.name!)
+    const restoreFocus = captureComponentFocus(this, this.cache.get(option.name!)?.$ref, option.name)
+    try {
+      if (this.cache.has(option.name!)) {
+        const item = this.cache.get(option.name!)!
+        option = Object.assign(item.option, option)
+        this.remove(option.name!)
+      }
+      // add is polymorphic: Control intentionally returns undefined.
+      return this.add(option) as ReturnType<this['add']>
     }
-    // add is polymorphic: Control intentionally returns undefined.
-    return this.add(option) as ReturnType<this['add']>
+    finally {
+      restoreFocus()
+    }
   }
 }
 

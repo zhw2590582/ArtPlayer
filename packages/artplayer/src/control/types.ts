@@ -9,6 +9,10 @@ export interface UIEvents {
   'document:mouseup': [MouseEvent]
   'video:timeupdate': [Event]
   'video:loadedmetadata': [Event]
+  'video:durationchange': [Event]
+  'video:emptied': [Event]
+  'video:seeking': [Event]
+  'video:seeked': [Event]
   'video:progress': [Event]
   'video:ended': [Event]
   'video:playing': [Event]
@@ -22,6 +26,7 @@ export interface UIEvents {
   'fullscreenWeb': [boolean]
   'pip': [boolean]
   'setting': [boolean]
+  'contextmenu': [boolean]
   'aspectRatio': [string]
   'flip': [string]
   'blur': [Event]
@@ -34,6 +39,7 @@ type IconName = 'play' | 'pause' | 'volume' | 'volumeClose' | 'fullscreenOn' | '
 
 export interface ControlHost extends ComponentHost, SubscriptionHost<UIEvents>, PipProperty {
   template: {
+    $video?: { readonly currentTime: number, readonly seeking?: boolean }
     $player: HTMLDivElement
     $bottom: HTMLDivElement
     $controls: HTMLDivElement
@@ -55,9 +61,10 @@ export interface ControlHost extends ComponentHost, SubscriptionHost<UIEvents>, 
   }
   icons: Record<IconName, HTMLElement> & { indicator?: HTMLElement }
   i18n: { get: (key: string) => string }
-  constructor: { CONTROL_HIDE_TIME: number, USE_RAF: boolean }
+  constructor: { CONTROL_HIDE_TIME: number, USE_RAF: boolean, SEEK_STEP: number, VOLUME_STEP: number }
   setting: { show: boolean, toggle: () => void, resize: () => void }
   isInput: boolean
+  isFocus: boolean
   isRotate: boolean
   playing: boolean
   muted: boolean

@@ -1,10 +1,15 @@
-function i(e, t) {
+function n(e, t) {
   if (typeof window < "u") {
     const o = window;
     o[e] = t;
   }
 }
-const n = {
+const i = {
+  "Context Menu": "Kontextová nabídka",
+  Lock: "Zamknout",
+  Back: "Zpět",
+  Settings: "Nastavení",
+  Progress: "Průběh přehrávání",
   "Video Info": "Info o videu",
   Close: "Zavřít",
   "Video Load Failed": "Nahrání videa selhalo",
@@ -42,7 +47,7 @@ const n = {
   AirPlay: "AirPlay",
   "AirPlay Not Available": "AirPlay není k dispozici"
 };
-i("artplayer-i18n-cs", n);
+n("artplayer-i18n-cs", i);
 export {
-  n as default
+  i as default
 };

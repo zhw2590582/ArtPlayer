@@ -1,5 +1,7 @@
 import type { ControlFactory, ControlOption } from './types'
+import { keyboardButton } from '../accessibility/button'
 import { appendElement } from '../component/dom'
+import { entryScope } from '../component/resources'
 import { setStyle, tooltip } from '../utils'
 import { controlEvents } from './resources'
 
@@ -10,6 +12,7 @@ export default function fullscreen(option: ControlOption): ControlFactory {
     mounted: ($control) => {
       const { on, proxy } = controlEvents(art, $control)
       const { icons, i18n } = art
+      keyboardButton(entryScope($control), $control)
 
       const $fullscreenOn = appendElement($control, icons.fullscreenOn)
       const $fullscreenOff = appendElement($control, icons.fullscreenOff)

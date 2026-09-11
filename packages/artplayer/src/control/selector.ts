@@ -4,12 +4,14 @@ import { appendElement } from '../component/dom'
 import { entryScope } from '../component/resources'
 import { trackSelection } from '../component/selection'
 import { addClass, append, def, errorHandle, getComposedPath, inverseClass } from '../utils'
+import { selectorKeyboard } from './selector-keyboard'
 
 interface Binding {
   option: EntryOption<ControlHost>
   item: HTMLDivElement
   value: HTMLDivElement
   owner: HTMLDivElement
+  refresh?: (restore?: boolean) => void
 }
 const bindings = new WeakMap<SelectorItem, Binding>()
 
@@ -32,13 +34,17 @@ function setHTML(element: HTMLElement, value: unknown): void {
 export function checkSelector(target?: SelectorItem): void {
   if (!target)
     return
+  const restore = target.$control_value!.contains(target.$control_value!.ownerDocument.activeElement)
   setHTML(target.$control_value!, target.html)
   for (let index = 0; index < target.$control_option!.length; index++) {
     const item = target.$control_option![index]!
     item.default = item === target
+    const element = item.$control_item!
+    element.setAttribute(element.getAttribute('role') === 'option' ? 'aria-selected' : 'aria-current', String(item.default))
     if (item.default)
       inverseClass(item.$control_item!, 'art-current')
   }
+  bindings.get(target)?.refresh?.(restore)
 }
 
 export function renderSelector(art: ControlHost, check: (target?: SelectorItem) => void, option: EntryOption<ControlHost>, $ref: HTMLDivElement, events: EventCleanup[]): void {
@@ -81,8 +87,11 @@ export function renderSelector(art: ControlHost, check: (target?: SelectorItem) 
         return
       if (option.onSelect) {
         const value = await option.onSelect.call(art, item, item.$control_item!, event)
-        if (active())
+        if (active()) {
+          const restore = $value.contains($value.ownerDocument.activeElement)
           setHTML($value, value)
+          bindings.get(item)?.refresh?.(restore)
+        }
       }
     }
     catch (error) {
@@ -93,4 +102,7 @@ export function renderSelector(art: ControlHost, check: (target?: SelectorItem) 
     }
   })
   events.push(event)
+  const refresh = selectorKeyboard(scope, $ref, $value, $list, String(option.tooltip || option.name || $value.textContent || art.i18n.get('Open')))
+  for (const item of selector)
+    bindings.get(item)!.refresh = refresh
 }

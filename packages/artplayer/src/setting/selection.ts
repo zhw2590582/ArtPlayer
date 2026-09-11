@@ -13,6 +13,8 @@ export function checkSetting(setting: SettingManager, target?: SettingItem | nul
   target.$parent.tooltip = target.html
   setting.traverse((item) => {
     item.default = item === target
+    if (item.$item)
+      item.$item.setAttribute('aria-current', String(item.default))
     if (item.default && item.$item)
       inverseClass(item.$item, 'art-current')
   }, target.$option)

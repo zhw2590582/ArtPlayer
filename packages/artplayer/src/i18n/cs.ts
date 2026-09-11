@@ -2,6 +2,11 @@ import type { Dictionary } from './publish'
 import { publishLanguage } from './publish'
 
 const cs = {
+  'Context Menu': 'Kontextová nabídka',
+  'Lock': 'Zamknout',
+  'Back': 'Zpět',
+  'Settings': 'Nastavení',
+  'Progress': 'Průběh přehrávání',
   'Video Info': 'Info o videu',
   'Close': 'Zavřít',
   'Video Load Failed': 'Nahrání videa selhalo',

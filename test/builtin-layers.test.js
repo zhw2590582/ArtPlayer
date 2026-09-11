@@ -14,7 +14,15 @@ const { lock, miniProgressBar, Emitter, beginLifecycle, getScope, ownEntry, rele
 })
 
 function fixture(t) {
-  class Element {
+  class Element extends EventTarget {
+    ownerDocument = { activeElement: null }
+    attributes = new Map()
+    setAttribute(key, value) { this.attributes.set(key, String(value)) }
+    getAttribute(key) { return this.attributes.get(key) ?? null }
+    hasAttribute(key) { return this.attributes.has(key) }
+    removeAttribute(key) { this.attributes.delete(key) }
+    contains(node) { return node === this || this.children.some(child => child.contains(node)) }
+    querySelectorAll() { return this.children }
     style = {}
     children = []
     appendChild(child) {
@@ -30,7 +38,8 @@ function fixture(t) {
   const element = new Element()
   let option
   const art = Object.assign(new Emitter(), {
-    template: { $player: { classList } },
+    template: { $player: { classList }, $bottom: new Element() },
+    i18n: { get: key => key },
     isLock: false,
     icons: { lock: new Element(), unlock: new Element() },
     layers: { add(value) {

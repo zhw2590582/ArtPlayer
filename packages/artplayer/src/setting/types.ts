@@ -34,6 +34,7 @@ export interface SettingItem extends TreeItem {
 }
 
 export interface SettingEvents {
+  'setting': [boolean]
   'blur': [Event]
   'focus': [event: Event]
   'resize': []

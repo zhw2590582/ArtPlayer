@@ -1,10 +1,15 @@
 // Generated from public/i18n.ts by yarn build:types. Do not edit.
 type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | 'fr' | 'id' | 'ru' | 'tr' | 'ar' | 'vi' | (string & Record<never, never>)
 interface I18nValue {
+  'Context Menu'?: string
+  'Lock'?: string
   'Video Info': string
   'Close': string
   'Video Load Failed': string
   'Volume': string
+  'Progress'?: string
+  'Back'?: string
+  'Settings'?: string
   'Play': string
   'Pause': string
   'Rate': string

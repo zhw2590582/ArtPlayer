@@ -1168,9 +1168,12 @@
       "scope": [
         "artplayer"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
-      "evidence": [],
+      "evidence": [
+        "changes/2026-09-11-CORE-23-keyboard-focus.md",
+        "baselines/keyboard-validation.json"
+      ],
       "id": "CORE-23",
       "phase": "3-4 核心迁移",
       "title": "检查并补齐键盘、焦点与可访问名称",

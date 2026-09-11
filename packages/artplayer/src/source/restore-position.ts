@@ -13,11 +13,13 @@ export function positionRestoration(art: Pick<SwitchHost, 'currentTime' | 'templ
   const manualPosition = () => manual || positionRevision(art) !== revision
   const seeking = () => !!art.template?.$video?.seeking
   return {
-    restore(): void {
+    restore(write = () => {
+      art.currentTime = target
+    }): void {
       if (!active() || manualPosition())
         return
       const previousRevision = positionRevision(art)
-      art.currentTime = target
+      write()
       revision = positionRevision(art)
       // Nested public writes supersede the restoration's own setter call.
       if (revision > previousRevision + 1)

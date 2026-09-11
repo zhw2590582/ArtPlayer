@@ -2,6 +2,11 @@ import type { Dictionary } from './publish'
 import { publishLanguage } from './publish'
 
 const fr = {
+  'Context Menu': 'Menu contextuel',
+  'Lock': 'Verrouiller',
+  'Back': 'Retour',
+  'Settings': 'Paramètres',
+  'Progress': 'Progression de lecture',
   'Video Info': 'Informations de la vidéo',
   'Close': 'Fermer',
   'Video Load Failed': 'Téléchargement de la vidéo échoué',

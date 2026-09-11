@@ -1,10 +1,15 @@
-function i(e, t) {
+function o(e, t) {
   if (typeof window < "u") {
     const l = window;
     l[e] = t;
   }
 }
-const o = {
+const i = {
+  "Context Menu": "منوی زمینه",
+  Lock: "قفل",
+  Back: "بازگشت",
+  Settings: "تنظیمات",
+  Progress: "پیشرفت پخش",
   "Video Info": "اطلاعات ویدیو",
   Close: "بستن",
   "Video Load Failed": "بارگذاری ناموفق",
@@ -42,7 +47,7 @@ const o = {
   AirPlay: "ایر پلی",
   "AirPlay Not Available": "عدم پشتیبانی از ایرپلی"
 };
-i("artplayer-i18n-fa", o);
+o("artplayer-i18n-fa", i);
 export {
-  o as default
+  i as default
 };

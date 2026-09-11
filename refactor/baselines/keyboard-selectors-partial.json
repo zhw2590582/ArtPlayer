@@ -1,0 +1,2066 @@
+{
+  "task": "CORE-23",
+  "status": "partial-selectors",
+  "capturedAt": "2026-09-11T10:57:11.207Z",
+  "parentCommit": "faaa3e8c2d84a9b7864e81e06cbe5bb66c517bd6",
+  "source": {
+    "packages/artplayer/src/accessibility/button.ts": "f6f67e19bbee2f1fa6a82828c451bcb86b5b1062575de411a0e72313a38c1c06",
+    "packages/artplayer/src/accessibility/focus.ts": "2fa16941ac3632cb1e4b466e9a7e29700ef97b7eb2facd4330c59ec0a9320594",
+    "packages/artplayer/src/accessibility/keyboard.ts": "2d82122732f84f39e59c6852ca081614caa6430a82b32c4749e297826c77eb12",
+    "packages/artplayer/src/accessibility/slider.ts": "533d5e6d806c32a84a578b43ed50993d30b4a414b5a85a34bbc68c37c5673a44",
+    "packages/artplayer/src/bootstrap/browser.ts": "8d401627e8ea1c87fb44204227b04177a70cc7a0f79f95fb5dc73fe828e46a8c",
+    "packages/artplayer/src/capture/frame.ts": "eb25d81ec2d40a239103c63cfd80333705251291f2c2da77c740b4d413ea9cd9",
+    "packages/artplayer/src/component/dom.ts": "740f63e6e5942c444b9f05605880f8d56a77b066dbe5c4791da74f78cb96c668",
+    "packages/artplayer/src/component/resources.ts": "ff158ef0db8ba13343ff6ba329713820cfe2f5c2c446a7873a6cfff782855edf",
+    "packages/artplayer/src/component/selection.ts": "1f0bd089415da28db862647ffd1a0b4af752576465fb616d4b97ae4f8dcae3a7",
+    "packages/artplayer/src/component/types.ts": "d7b0e7008b0f6c82e3e97ac43e0188598dca4f740a860e7a60b3b38a46f4565d",
+    "packages/artplayer/src/config/index.ts": "a56b4d3d6942cfa3e2b47f909fc5ad87e6e3202fd61b29c7afd7649049e31d05",
+    "packages/artplayer/src/contextmenu/aspectRatio.ts": "a25464e14216b2be392fcb3fdda2439e6d6f98d1962f0acbba30e3bd53bcb2d4",
+    "packages/artplayer/src/contextmenu/close.ts": "84b7a96df910e6f38140df8b1e73519d209a7331e9be9f42d076ae791757024f",
+    "packages/artplayer/src/contextmenu/flip.ts": "42c192d23e347d74e0bb814697a4d59eac20afbec102a282d5aa15780cab5f72",
+    "packages/artplayer/src/contextmenu/index.ts": "4fd292a931b5bda9f16a1c2bedd50cd0d8c0b8fb6010ffc5faaad2c197d2d9e5",
+    "packages/artplayer/src/contextmenu/info.ts": "f37cf0104510c13a130d2f55114c8f7ff15cc1b51863f97e60825442bdb2bf01",
+    "packages/artplayer/src/contextmenu/playbackRate.ts": "e177f4017ea9291794fb4023715c81bfc01f927324ab9bd0e32c741e4a3b0ca7",
+    "packages/artplayer/src/contextmenu/types.ts": "a93fc90f4e17b731e8f6b486a507117810b61c1f1b0d9e775eba27dabeaeee1d",
+    "packages/artplayer/src/contextmenu/version.ts": "0553a716be0ba49f614059c41eef6dc694a9641fca79e6448b1b30382c6b582b",
+    "packages/artplayer/src/control/airplay.ts": "539bcc3671c7fe428ab95f9fea8a4943444066bcb742c7cf71591ba347642547",
+    "packages/artplayer/src/control/builtins.ts": "2a0e12a9741713c92938e1d2009149bbbde498284aa85c63f270d02b27dc22b1",
+    "packages/artplayer/src/control/fullscreen.ts": "7f8a9e8915abf9cbb9dda05b5c68523a47cc0ccf9ef5e0d9b82bc5c362fe346d",
+    "packages/artplayer/src/control/fullscreenWeb.ts": "9cb30987a3d2cbb334a80d3f2c41f39fd339bf37a9524c7ed0145cf5c98f1859",
+    "packages/artplayer/src/control/index.ts": "0d8e5a281f2eeba06c4cc4ac5a042847df53db1a19fdf140efea17d6ab2c0b78",
+    "packages/artplayer/src/control/layout.ts": "b5134a9d0cb5ad128b1fb229dce79a306b944f750d8620e224a99f5791e6cab5",
+    "packages/artplayer/src/control/pip.ts": "b829a7c83c5efa6751c2e434345e077339c9f5bc5022af9973f181ca8ce7f7ce",
+    "packages/artplayer/src/control/playAndPause.ts": "20ed88bcc7ac7622e02a7c4e6be518582c05f0d7c571a97a54b851d79dcf13c5",
+    "packages/artplayer/src/control/progress.ts": "629c622864619e2515b2eacb1bdfcf523ccce7ce680c8fdf51812e8e50a0cc7e",
+    "packages/artplayer/src/control/progress/interactions.ts": "da03600375451ecf8c152be5afcc5f1a4f8b759e837bbd54b7faaf8f8b228497",
+    "packages/artplayer/src/control/progress/keyboard.ts": "2e07680ce71ede06d6ba63cfc2c4a81a00dda5aab3daea1844552603a881f0ad",
+    "packages/artplayer/src/control/progress/position.ts": "a3794ab5ac5dafa5fd61e56acb12c94998bd4b9065dbf0fa4739c6bba1094aa1",
+    "packages/artplayer/src/control/progress/view.ts": "60ee16d5170be81b8132bb56dd0bc0eaf23e50f5c268d0697c9187b38a14aba9",
+    "packages/artplayer/src/control/resources.ts": "16fd7c53ac8f47b333041c4f298313390dc102523d47767b8a16f39a2564ba74",
+    "packages/artplayer/src/control/screenshot.ts": "11a1e3da919e476e7882abc3f74aaa809c3e9fc1de4346ec808731f78b6f27e2",
+    "packages/artplayer/src/control/selector-keyboard.ts": "6a749f48b23cda62148298e648bb380a6067cc18c7be4258b9ec85c382a56165",
+    "packages/artplayer/src/control/selector.ts": "a6f0c564c674530da9a0e4ed8762c6dfb81fa89373d64313e1020550731441f6",
+    "packages/artplayer/src/control/setting.ts": "10ee1118858c41f2e97a6df70d6d5dc978757d0e5d79ec36c11e743e6df86726",
+    "packages/artplayer/src/control/time.ts": "fa572092e0848878689367fb536e9658d13888d0a0d476babc5acd165af0f8d3",
+    "packages/artplayer/src/control/types.ts": "f82b0d645026121265cc8d780841a71ca5caad79ccec3765d7f03fc8aad3f17a",
+    "packages/artplayer/src/control/volume.ts": "45474d8d7f43d59263aa42e774eaaafeb45530ec24b81a5f589f6c906954568b",
+    "packages/artplayer/src/display/fullscreen-abandoned.ts": "1715b30d336976921b4957b444418702b7d93dbf1debce47429269638d15810f",
+    "packages/artplayer/src/display/fullscreen-adapter.ts": "71da10ec21c7706a8264badedac9022c74b865887931e9e369168fe3233c3b2f",
+    "packages/artplayer/src/display/fullscreen-request.ts": "c6292ded96aab0f2dbc978af251f6cd9f5fd074819529ca498077db8d14e1bfe",
+    "packages/artplayer/src/display/mini-drag.ts": "73d2f48f868c0ba4d8d5e5df40cbbdb4698c26540f3973b178d9cd374008f1cb",
+    "packages/artplayer/src/display/mini-layout.ts": "3835fe3d314da2fc624cbeb0e79fcdfa5393f08d87dfde730d2eac4e827f405b",
+    "packages/artplayer/src/display/mini-view.ts": "83a6e5c6d1923332973009b7ac1561f7a55fb72e5c60e5ebc88af1fa4b641d5e",
+    "packages/artplayer/src/display/mini.ts": "3ffae49b1407523da2dc5f2bc687018268f6c1d1d3c71911dd4aa96d1a66c1dc",
+    "packages/artplayer/src/display/native-fullscreen.ts": "323401f2b3ea5186da981a1215b1b9e7dcf4ef4261a8e885fe8ff0c090de6a7a",
+    "packages/artplayer/src/display/native-pip.ts": "647879ae027cc0ebe684daa31d75511dd882e123e4ca8da2942e659bae3719f2",
+    "packages/artplayer/src/display/orientation-native.ts": "909980ba837471d9b456545a18fb0ab19f0990e8788936f0580a4b332cd4baee",
+    "packages/artplayer/src/display/orientation-types.ts": "0d68d2bc99d04db1e2fdf16b74e406e31f8b7e03fd9b6ea271773ed263ffa890",
+    "packages/artplayer/src/display/orientation-web.ts": "aea55c3b9e8c708fe5559f07cf8f0afd7ad37ac5b1a43bf519245c3072ec4129",
+    "packages/artplayer/src/display/placement.ts": "dbe4491ebd0f46b4efe13ac567e476fcd9ca5b84da675f19025935b5e3f8d733",
+    "packages/artplayer/src/display/sizing-types.ts": "da9b3d957dafaca9331f7319257dd8156b3c3e7b6db11f33f11ded48512450ad",
+    "packages/artplayer/src/display/sizing.ts": "c19856976320f1f35ff5a1049d19a940768300e095270b336dd12861b200da2a",
+    "packages/artplayer/src/display/types.ts": "6f78b34b903fb30653cc7169f43861f8be426d1f6e9669ef292e41a1606d685c",
+    "packages/artplayer/src/display/video-fullscreen-state.ts": "5fcb5e6b80ac45577664ef67e0460e0ceefd4022cafacdd7434c376a86d619be",
+    "packages/artplayer/src/display/video-fullscreen.ts": "b425bf0df462524b5d3accc9e3df383c6635676c152bf4bef09c477a90662728",
+    "packages/artplayer/src/display/web-fullscreen.ts": "dd2c5cf65cfe35d6b5a87d01acb28f48119b27fe6e5f0c6a8b9bab3db1a1923f",
+    "packages/artplayer/src/display/webkit-pip.ts": "3617927b4bb8fa46f651d0e584141f804ae438e2b4531cc2e9cf9f7eeb027550",
+    "packages/artplayer/src/dom/event-path.ts": "e952ea847a2e844a79c5c1b83035e03917e0294b80b1eb8af3b3bec0d2f7d333",
+    "packages/artplayer/src/dom/measure.ts": "84a599351d26a790c5a8f6e7d271486a0a68d5b58457d8ce754d540b54902b96",
+    "packages/artplayer/src/dom/presentation.ts": "500bded394579dd8194778f73cc44d0724f0a59cb5400957491928534ed091c6",
+    "packages/artplayer/src/dom/styles.ts": "734e0a4e04d666417a18ac09ed6271ee7630c399d52d7f510a1c19fd6e7b3493",
+    "packages/artplayer/src/dom/tree.ts": "3bc517ab9fa5317a1445156d53afb27182685eb3b4c0ac2ff41bbde55c9eecb6",
+    "packages/artplayer/src/events/clickInit.ts": "bd1ba29fe0af4332ceb19297797c4c942a3a74bfd901998d6b93293f1b309300",
+    "packages/artplayer/src/events/core-types.ts": "a607a3b2eea1b031f23ec0f620f1f4cd68799c4a77138a1443ecb196b00d1662",
+    "packages/artplayer/src/events/gestureInit.ts": "9e9d1ac0da7f87e89dd0d86fa2820b980e9cb810782d6ab30017de8686fc910b",
+    "packages/artplayer/src/events/global-types.ts": "3f4672d7af959cfa34ba39aa84ce614f422901437686bba98b14f578df40021c",
+    "packages/artplayer/src/events/globalInit.ts": "6f6ea497a20a8fd0746b1f020caff76ad6817cd70a1a90fbaea12f992b6d03a7",
+    "packages/artplayer/src/events/hoverInit.ts": "d1250e0dd35a8ba8067275986acbe6320c22adf1a977ec1009c0c012ed1563fe",
+    "packages/artplayer/src/events/index.ts": "30d2286316dbd351e93f5a2234dcca84bf68ca28c05921169cca70c2e0b1ecf9",
+    "packages/artplayer/src/events/listener-registry.ts": "fb062df5151c4e8e970de469f1c7d9af948f72214d32c293c81a5feeb8406124",
+    "packages/artplayer/src/events/moveInit.ts": "da97591723f8b94a34702559b7ee67a35f172aa696d37dfbecd472581ad3de35",
+    "packages/artplayer/src/events/resizeInit.ts": "719e27d11d2f93fcbe8368393c9190e251fc86dd0c3c2919f60e9b3b1edd0192",
+    "packages/artplayer/src/events/scheduling-types.ts": "0fd98e94397064f32cae4c004d9932c006d2db69a7d6d9374ff174d74ff93cd4",
+    "packages/artplayer/src/events/subscriptions.ts": "98573ed6cce73a73467c0e7fdb8ddc45e66b6bdf684c38886749453b2002a1d8",
+    "packages/artplayer/src/events/types.ts": "df03625039605314a96ef15b5e3777cbb9d444fd317e1a2fbeaaa0f1e83f6b0f",
+    "packages/artplayer/src/events/updateInit.ts": "6f174db14d20319f03a76e6ea267a3d71973faac44a92483badfa4420791817a",
+    "packages/artplayer/src/events/viewInit.ts": "d77b83eab802ff0046a4966e28b810a25592bcada49f526adae37556c1e4c3e9",
+    "packages/artplayer/src/events/viewport.ts": "6196fccb8b08ae22bde732c4389d9aceb5d727a63efd87b6d3914e338aadc46f",
+    "packages/artplayer/src/hotkey.ts": "d8e477bf451143e566e1f743a5f253dcf00beb23544709794779f275e11498e8",
+    "packages/artplayer/src/i18n/ar.ts": "f224dcd83c4ca5a1a862a91a418faa7d5e0ee9762408ee70f332aa44c8f59861",
+    "packages/artplayer/src/i18n/cs.ts": "6d39bb19b20080a5960b6fa0fdb0b9b031ed5a72a609a9c15b9624d3868399fb",
+    "packages/artplayer/src/i18n/es.ts": "b6fafd2309515439c033f61060d1d717d2becced6ef4b9c733162287f8218d8a",
+    "packages/artplayer/src/i18n/fa.ts": "27ffb3d154f30f592aa2df9193acc5bcdd11aed99d6fe4dd6117fe3f365df59a",
+    "packages/artplayer/src/i18n/fr.ts": "eef378e4ca959983fddd24f435441344026480c9c5878fd9d2f360e11ca37f4b",
+    "packages/artplayer/src/i18n/id.ts": "dfb6bb205a721014fe4ee1e27e78d9df91b8286f17bc336e7400258de64d60e3",
+    "packages/artplayer/src/i18n/index.ts": "09c6f5bce58e4118dde10e8b2a2d3808785b7fde913a54dd189e0b473e21266a",
+    "packages/artplayer/src/i18n/pl.ts": "552cebb3685f5eb98eff0d30d947a84e58460cba2f920f34d8be8b6ad44e7b0a",
+    "packages/artplayer/src/i18n/publish.ts": "5b216bbe313b3cda56a5da41fba4fb9d095eeec0dc903fcf284ddd8f94926e99",
+    "packages/artplayer/src/i18n/ru.ts": "502595795c428f4b86bd3a8e86a87e54c77d0303c5cd86ea5d259f17ce400874",
+    "packages/artplayer/src/i18n/tr.ts": "9821f4652f56593c68110ddca34d9ed0616f1336267f17a33f01fdb5bd1e1e54",
+    "packages/artplayer/src/i18n/vi.ts": "4853b1c1fe1aca410c739a2017c3715fbcaaec2be47f3f0396f8ffb10be84987",
+    "packages/artplayer/src/i18n/zh-cn.ts": "81454382b97c0d2fa94128dd7e94c8089f13d16bc2dd9cacc58a88b7ddc9a130",
+    "packages/artplayer/src/i18n/zh-tw.ts": "22b7cdd27c117807f3990d3eab63cb09427bc79f1edf20356a2849cc45b5d450",
+    "packages/artplayer/src/icons/airplay.svg": "8c75a40f1bfacee2be2a425e132ff51f3712eba60679010f7b1349d4a04374bc",
+    "packages/artplayer/src/icons/arrow-left.svg": "8b9d544b7bd728d01747005fc7a2d63f822eed3b605393e2435b6733861b585f",
+    "packages/artplayer/src/icons/arrow-right.svg": "68c63d6d5810173ec9192c9e96ee7b6aefdc3b79d3c1329fb4d6c750f859fe10",
+    "packages/artplayer/src/icons/aspect-ratio.svg": "987752a87701523057d8dfa7c45a6a139c4542b96fdcfaf8665722bbeb41f3b2",
+    "packages/artplayer/src/icons/check.svg": "963ce0aee2337fdee951aa6c917cc75ee0b4e75158887ccc16baebfd3925942b",
+    "packages/artplayer/src/icons/close.svg": "ebabfe8044f48d5df4d13f4f906a163fd55a4d6f1dedb3b5ba95601209bc8888",
+    "packages/artplayer/src/icons/config.svg": "e1884d5411296b5cd1bfec7803b558b0afa5ab64478393977b07a662e2e0f15c",
+    "packages/artplayer/src/icons/defaults.ts": "31df862d754922fe5d68b20911c477d7c22893a6a67b5dcb1a48d3b437a0b23a",
+    "packages/artplayer/src/icons/error.svg": "b40c01e511a599c9dd369aeb9a3b2a0d1a76ef3c5ede8124cbbc23f8e4e7248c",
+    "packages/artplayer/src/icons/fast-forward.svg": "abef6fe4d75ffa74d3a84683373b4702a4eda2a5b4045952f969ee62cc68b0be",
+    "packages/artplayer/src/icons/flip.svg": "474a9d53a97add71e3fb7bc6530a68580ce63a1d83f9b75d1c2908a7cf494152",
+    "packages/artplayer/src/icons/fullscreen-off.svg": "71125ac56586897e2c0e52035a4d65cff34cf52043a95b45d186e0d268671399",
+    "packages/artplayer/src/icons/fullscreen-on.svg": "d46cdf265cac729c9b7382722ebe7a4c76d71ad4e5a27c2d5ed8323fd595ebf5",
+    "packages/artplayer/src/icons/fullscreen-web-off.svg": "52a6862ecd7cba12ab7042de5064c498bc2e9f86b430358c912401fafe4f4a98",
+    "packages/artplayer/src/icons/fullscreen-web-on.svg": "5cfaae62b61456251e771bff01356fad8376ebedb10a4b8819740f60e6e5a073",
+    "packages/artplayer/src/icons/index.ts": "7152126328f6e485ee92b6d924c34776518b4a3925b2887867b516f7523b15cc",
+    "packages/artplayer/src/icons/loading.svg": "485472153890eff3ed49963f7bf7d841f66ca2f40894c01d6e8bcf1bf4ad1c58",
+    "packages/artplayer/src/icons/lock.svg": "431e9a25fae051016be0efa286387ec3e5f7651c3ecf569bf0ece9842f57156c",
+    "packages/artplayer/src/icons/pause.svg": "57405dba81dd3d9f329d957fdc704101cbb6f6654325eb0083c03324c4453a68",
+    "packages/artplayer/src/icons/pip.svg": "1e922140e0941e5b9ef53dc0b4776813e1c470ea229fe3ec786fd148148c3352",
+    "packages/artplayer/src/icons/play.svg": "41a961c629a55cb25a813e115a25204e492d4e935a0879177e65d6e1ddfd6796",
+    "packages/artplayer/src/icons/playback-rate.svg": "872deecac0365ab04aeb5ccb1cdd9a0c88589a1442709fdac7c0ed12a241ff2b",
+    "packages/artplayer/src/icons/screenshot.svg": "538b5cd0c6b20afb98bd850e15019072d652d191075c2869f2fc0f28b597b131",
+    "packages/artplayer/src/icons/setting.svg": "2976b00d1f03e78f28d0e55ebcb01d5a0746ec1a6ff8de97a5e8294bacdd1fad",
+    "packages/artplayer/src/icons/state.svg": "620a127f74bb5e249993bd7008c027373263eacb4a44af8adeaa0d7523346887",
+    "packages/artplayer/src/icons/switch-off.svg": "95a8d81a4a3bfcf7c016d5f71d46a72be73c5e94790c55fd1d31023416ef5deb",
+    "packages/artplayer/src/icons/switch-on.svg": "cccd0f9c1e54d9ac50c323360da944d8ff44633a82ff17889914b6bc8b1652ae",
+    "packages/artplayer/src/icons/unlock.svg": "fc058db3d99a475fb9ffbbbb6248978a95990a9c532b83d0955ac28eaa626c60",
+    "packages/artplayer/src/icons/volume-close.svg": "f7e100fd9e9f3f6e06afe5bc994d5d9305ee4d1ee23fae37e4108cf286dab379",
+    "packages/artplayer/src/icons/volume.svg": "3a78f40d8b48595e8f15d9189e4d767e0c7abbf0338d3f2db1ac810049dd3942",
+    "packages/artplayer/src/image/load.ts": "b4f1517243249d5fb017b89f993660e8b148906bbf28d08fe5c9f6d3a41e1e88",
+    "packages/artplayer/src/index.ts": "20cfe3738b3ce7e11b69721a5f0bdad9db77807417d8e421397a40dfade4c047",
+    "packages/artplayer/src/info.ts": "6594ff3ee5643d63fec874631865d0e35b4ebdcf8aeafdd9fd3d9c595cfa3713",
+    "packages/artplayer/src/info/poll.ts": "1d7a519dd1960c8cd5fb7a020d8d3dbcd2eb272b612d823f2167997751aaf663",
+    "packages/artplayer/src/input/gesture-controller.ts": "1ebbd18184771a623b02ec19c363f84dcc72fdb7cd82bcf2adc97f4a138cb2b4",
+    "packages/artplayer/src/input/gesture-direction.ts": "65737f60e177338ebb3337a13ca75aeae77d77e94bc21495ddb829cc30de33a7",
+    "packages/artplayer/src/input/gesture-types.ts": "5ed25db69e0d9579a2fc0ab6faadf00fa073ad73a1ea5aa48096b4430c71141a",
+    "packages/artplayer/src/input/hotkey-defaults.ts": "c28e14821e5c7f7ac92a302e92439ab68fe77d5ef7d90a36b147b7c979ab96c6",
+    "packages/artplayer/src/input/hotkey-types.ts": "c7232470d725f3700481ab98bf9203403a67f1ab82e72394baa9c3ad6f3c9a4b",
+    "packages/artplayer/src/input/keyboard-focus.ts": "270c9dba40c0eb6d9fb36118b53e7f1d42a301ba4514917849523b6a05ed9e11",
+    "packages/artplayer/src/input/long-press.ts": "110cf16cf9dae845597377ebbc43249e103cbc0ece56f89e44ec6ecc7f3819b0",
+    "packages/artplayer/src/input/pointer-focus.ts": "802087098c786135eefa6727f13177ffe4a98e2abf48fad0e356b91e26960077",
+    "packages/artplayer/src/input/pointer-types.ts": "63e679498f8f42f6842f63e910c38717ac3438d58df3a75ef5b77c009b7931d4",
+    "packages/artplayer/src/layer.ts": "4014268eed043d5dd7b925cdeef6245e357cda67192a1301c5612ef98cdbec12",
+    "packages/artplayer/src/libs/screenfull.js": "2332b50c0c6364d5c99080be0f5739255e4b9e465d2cca40f761adce9a1908f8",
+    "packages/artplayer/src/lifecycle/instance.ts": "3168f7db4271bae7a242e80798546b755ac15443e15dd9ebb7675f5a259299d8",
+    "packages/artplayer/src/lifecycle/resources.ts": "399ea5e84545c973f8967e8ffd7326dad7b3168ca6f96f77286995a5b62ee389",
+    "packages/artplayer/src/lifecycle/scope.ts": "e2188e8544b27cf8c7ac149e7146af628a2d6166c82b719a247adef5d85be5db",
+    "packages/artplayer/src/lifecycle/template-rollback.ts": "7a83da6739bcec1587b02f8157934988910d7f9103fe489a0d6f4f65290c3d77",
+    "packages/artplayer/src/loading.ts": "216fa5e2af5be5fcbf95a1578c869553a02f625683a98333d4a404f9a70df9f5",
+    "packages/artplayer/src/mask.ts": "500b8c2fb5ded63d5acab3c984fc9757f28a8b6cbd4d5beeac8c5a6d73ca63e4",
+    "packages/artplayer/src/media/events/forward.ts": "6b1b7e80036bfb523b51843dc6ec6d83c2b949cefb9cef085b2d679a444e46d8",
+    "packages/artplayer/src/media/events/listen.ts": "4eb7e943c1ebca77da8025d83b7d408276187cd02860b7793284344378bd0fe0",
+    "packages/artplayer/src/media/events/playback.ts": "2c68e4f6274a0dc65e56d42c928e500fc1d63bf3e03bbdd8a83c3f3ed7ae8ee4",
+    "packages/artplayer/src/media/events/readiness.ts": "3ba74f26dd9ff0729967097c2cb6f329a9cea57745bfe8173f9173e0d134476a",
+    "packages/artplayer/src/media/events/reconnect.ts": "876027b5116d0d3628755705682b30630f4b713199ed8015541932d81d2944be",
+    "packages/artplayer/src/media/events/types.ts": "02bd29ad8b158fa04ce5c1524e397260ef24b94c2cf1f053e7bd02b23e5d29dd",
+    "packages/artplayer/src/media/hosts.ts": "498d1cde31bf9ee12af1f13523eb0a4553adb285264529378abba5b629829e9a",
+    "packages/artplayer/src/media/playback.ts": "b0364027e1ea26e44e435a938e93c022836885c2622cda6bc3a7ca791d3c2964",
+    "packages/artplayer/src/media/position-revision.ts": "ba074cce7e7c6bda84aa234de8eb315e5ca482aa9b06250896f9ac6251192851",
+    "packages/artplayer/src/media/types.ts": "96d4a7f066cbb6fb9138165dd736b4ca500cb19c827bd7702134d61c44cc0e87",
+    "packages/artplayer/src/notice.ts": "4faa700323a8fdfd91a59491a5f57da2dee9bd1f2de0d900ed16e9809a208c94",
+    "packages/artplayer/src/option/defaults.ts": "f357ef80cf32085fcbc3409d92dfa27b31c13fbcf823f576052c0347911c0cca",
+    "packages/artplayer/src/option/resolve.ts": "53a73627cd540e3f21349c0a43beda35ea5195647a31e3f5b30ac292390b4b1b",
+    "packages/artplayer/src/option/runtime.ts": "d1bcc7682da05a74d7af173304e47f71ba9eb59e5351436040e9dbdef5c58fa8",
+    "packages/artplayer/src/option/types.ts": "f2ce01c01acf45fac6cbb34685b8e6c321bcad6b0da2526f3f189eb5962ea0e5",
+    "packages/artplayer/src/player/airplayMix.ts": "bfa30e1dcd7cbaef97e977344e8a35524fad6bd23089cd8e45945e3b32b4bf04",
+    "packages/artplayer/src/player/aspectRatioMix.ts": "9e5e7365d469aeaef65a6010cb92734702191f9086b2f21d98c9f0ad7f356898",
+    "packages/artplayer/src/player/attrMix.ts": "d82150611a69423ed46bf673f44c3e0f61e80425026effd486a6951b6c0dd90c",
+    "packages/artplayer/src/player/autoHeightMix.ts": "5848e34cd826f5d4cc81d076c83fb3bcea0aed1228cd93a1edb6b8ca402ad175",
+    "packages/artplayer/src/player/autoSizeMix.ts": "6373a8ea7fff4cd875d17c5d3df6dc37764055ab77850a6c6348526969071cbb",
+    "packages/artplayer/src/player/cssVarMix.ts": "0d023f28b7a8b4c1a5e2c4dd5672ef4294c86bce0013babd9d52efa32a443b2a",
+    "packages/artplayer/src/player/currentTimeMix.ts": "cc374abeb85b203b9f31c566a6b9e53a4a1723d609fccc7b0c9c210993b79e75",
+    "packages/artplayer/src/player/durationMix.ts": "60a9d665cf302dcb6b3e37e2f057e31720935e5e588fd7709231f691f6014191",
+    "packages/artplayer/src/player/eventInit.ts": "a915c5a618e70b1ab10536b1273ba0fea4ec11d3a2ca629b538e90b5ad2b55f9",
+    "packages/artplayer/src/player/flipMix.ts": "a1519c83f8c9437a9b7e99a59e38a3d931032c579f4085226fc0955c7c9eab67",
+    "packages/artplayer/src/player/fullscreenMix.ts": "b339bebb4c87f7b75232d7e0d637ebe25bd09a0a0428ba87339a16af5daa71aa",
+    "packages/artplayer/src/player/fullscreenWebMix.ts": "75b83a6093c7887ca8725f63c55503d0bf3aafdbbf2347b579120cb257503555",
+    "packages/artplayer/src/player/index.ts": "359943c88dc99863e510fc0d51f8e8ee2397217e68045f755d4e9538579bdaec",
+    "packages/artplayer/src/player/loadedMix.ts": "6a4c4a08ed74346dad3e138b1dda22c8c9c12f175fe6d00da41b89c78cbe2c18",
+    "packages/artplayer/src/player/miniMix.ts": "d68a0c4f6c6059d5831d2d1fd4823b8d3cbce95eefd6d36d38670d6d8720f44e",
+    "packages/artplayer/src/player/optionInit.ts": "7c1c47679ee6201d0e0d203fc7b449a09309e7b24a0a1099ad259a70fc1b1a35",
+    "packages/artplayer/src/player/pauseMix.ts": "5bbb68eab7dcf2170c944cabb8d4b82be4e6d7623e37ad6ea464b81c1028bc0b",
+    "packages/artplayer/src/player/pipMix.ts": "63dfb29ffd66ce7d081b24f8e8bf697c041675b49ab8919e206d2df5132de236",
+    "packages/artplayer/src/player/playMix.ts": "60249fcacdc5b1bc6f33bcd806e8a4f5472cea21d40550b042794a75027fe34a",
+    "packages/artplayer/src/player/playbackRateMix.ts": "e185c6ff52cd567f7fd7c30553bbd6c65517324d1d16c4948c3623ef457ef536",
+    "packages/artplayer/src/player/playedMix.ts": "5b6b89bf8dec1efb19cd51e46af1505bae006bdb3fb798e9dec7e3fb5cf0acaa",
+    "packages/artplayer/src/player/playingMix.ts": "968c9f6e6d23c233c77d62a593db64adcc6d1a2411f5f1c61a35c6996d6a54d9",
+    "packages/artplayer/src/player/posterMix.ts": "d569dc24e8e64efe398bd76942bfaf563ffbf64d2a7387ea2e1cb1cf511183d4",
+    "packages/artplayer/src/player/properties.ts": "76806d6273545ff556cf9c6d341b59b9041455a8ecbe1fd40510e841c0d5710b",
+    "packages/artplayer/src/player/qualityMix.ts": "980ff584c8a5793f5ec9f049f144df31d184d7c9acef49fbe9d504b7657a96bb",
+    "packages/artplayer/src/player/rectMix.ts": "a741ee09fa3271df84363c5d73eac1b2e5adb39491f95f8112af81f1219ffed4",
+    "packages/artplayer/src/player/screenshotMix.ts": "1754bbce09f713204c120cd4657b52c06eb09eb1fe3244f84474e5967cd68e50",
+    "packages/artplayer/src/player/seekMix.ts": "e6e1bf00e8441f1ce58d2a67a66f7e5e98c86d78620ff10a5e6268d54f13fadb",
+    "packages/artplayer/src/player/stateMix.ts": "e45b3209a93ab14665d19c5740d5c632187e9fe234b019a2a0263e26884ab3b2",
+    "packages/artplayer/src/player/subtitleOffsetMix.ts": "e7866cf3a6d9fe271a4c34973f7a961542a738e89a3647df85197cee5853ce8b",
+    "packages/artplayer/src/player/switchMix.ts": "b47e174ef0edb2b96ff29f2ddd3c9f2dd2a38713db2a81002b18c89ce71994e9",
+    "packages/artplayer/src/player/themeMix.ts": "5bf11bcf8b77cd5d5f2970bc3edcee315c693c1be3d567770d5107a5951cb48f",
+    "packages/artplayer/src/player/thumbnailsMix.ts": "6c097d7d00779a6d0d3d65cf9ffd126624a48c9bdb98396c84c39f4de4bdf712",
+    "packages/artplayer/src/player/toggleMix.ts": "a3050136248e7d0b942387484c61286ac2b33a90724b1dc3460f5061be76f247",
+    "packages/artplayer/src/player/typeMix.ts": "c2a234a9c09f0269a4bd0659087635995945075ac70a5cf2478c8a135fc1b2fe",
+    "packages/artplayer/src/player/urlMix.ts": "726a42899261879e03c8b1d4f716458bf3e6e614cecc3bb8d7a581afc2b7866d",
+    "packages/artplayer/src/player/volumeMix.ts": "d830bb27b984e0ab2f687943fb49abcbd0331d71fe96049fd81edbddaa64f07f",
+    "packages/artplayer/src/plugins/auto-playback/prompt.ts": "58c6dcaf540296ee6f6bdeeda38ee7302aca2b06ddb152b716c0c2bf9c6c96b4",
+    "packages/artplayer/src/plugins/auto-playback/records.ts": "133a4ba2fd2d3df724d96eb203d05cffb0b82ecb8de72403974f7979bd37ce01",
+    "packages/artplayer/src/plugins/autoOrientation.ts": "4a13b0c010ea7a5002e66c422260ed24bb0d18b3ed41ce10974ac7ca2804cc09",
+    "packages/artplayer/src/plugins/autoPlayback.ts": "e349010813bbcd53503383b707c5f6e6e60d8ade6442d020fe6ba07a128c3122",
+    "packages/artplayer/src/plugins/builtins.ts": "4631c9775732982dfdc87e16b1bd6b41a350be36fb27e0a9132c11a85b0c016d",
+    "packages/artplayer/src/plugins/fastForward.ts": "74c03e3fcfe2f87dcb0ef1a5da5410cb96322509fd07e32930128584c54f62b5",
+    "packages/artplayer/src/plugins/index.ts": "4c97f354769bbcb338263f321876a90745a87a9af2d267e216bd3d9d007f268a",
+    "packages/artplayer/src/plugins/lock.ts": "9a08cec3a92006be8a9d2dba8d850bc4f8f38d586a50de86d725d0d8929130fd",
+    "packages/artplayer/src/plugins/miniProgressBar.ts": "21b4850fcaf6b0e82d5e62ca7aca60c179c578f7ff6d5606e6025628ff4b1cc7",
+    "packages/artplayer/src/plugins/registration.ts": "9891686c32aeaa33c48ca500cf30ab24ffbb0835c6248769b4c645a5ff20129b",
+    "packages/artplayer/src/plugins/types.ts": "6823098d5ec1bf053f60ddfdd36bfcd3f06f3b528cc5dd30fd676a1318dac590",
+    "packages/artplayer/src/scheme/index.ts": "dc4a3b5e08478cf72b46b0b59c023359ad5f79b891ea8a6a119ce24a5251821a",
+    "packages/artplayer/src/setting/activity.ts": "699ceed4bdeddb6d48eacf79c8dbf737f5d2d8c4983be70205322b14807a91b7",
+    "packages/artplayer/src/setting/aspectRatio.ts": "a16eb58fadf77f0a9009cf162d957ffd59d9b8fde83cc193d510fd642e3456cb",
+    "packages/artplayer/src/setting/checkpoint.ts": "9d3bff311f9b15c067ca49661af4f48de939f266b8077e7c2f0d66edef22dde6",
+    "packages/artplayer/src/setting/events.ts": "f7a3347ca146232caf2a8c9a5a18731cf7bc91dca4cd36370e0265c6eb70df53",
+    "packages/artplayer/src/setting/flip.ts": "e72a4ae33300d9e48880897a4f85a04fa6d9a5fff7b06ecaf9081cfb1bb14404",
+    "packages/artplayer/src/setting/index.ts": "f1e8a302077a8ccfa77c17ce344bdd6816943e77b5876c7f623314ff846742f7",
+    "packages/artplayer/src/setting/layout.ts": "584604e8fffaeaf1d633d1ed45e64d94595c2a56976e3a3f7ede01839b83a37d",
+    "packages/artplayer/src/setting/model.ts": "c47348f0f9494c4ce8ea5561bcde6eb698fb11e9197ccdc1ca1359a6d5e370dd",
+    "packages/artplayer/src/setting/panels.ts": "64d48720971763985a2a652a18c2ed2f32300c3553d56b52049ae40c4dfceae1",
+    "packages/artplayer/src/setting/playbackRate.ts": "2e70e0d2a33cb0ec9fcdd6d22424979fed7b2e01f87015d6be4e520d5cf4e88a",
+    "packages/artplayer/src/setting/registration.ts": "c29db62b5d90e0efa4a926c753015e65e96a47add3f5b8840ee51017052edf7c",
+    "packages/artplayer/src/setting/render.ts": "853090bfffe579c5106124d64c8d2a646876448bcc7258740a96820d56508ad0",
+    "packages/artplayer/src/setting/resources.ts": "64c28cc2cb08cb87b0864ab957d7999bc94931be4788f282d6f190b8806a81fd",
+    "packages/artplayer/src/setting/selection.ts": "a1bc04b99bda45cc1a2afcf2dd0925c88ccb55e169b971105277883ae2ccba0c",
+    "packages/artplayer/src/setting/subtitleOffset.ts": "86513835d4e542ac39e9d551507473e3e14c71fd0d5ea725267008ecbff6ab83",
+    "packages/artplayer/src/setting/types.ts": "08298ce2c04b5c909b3cc9b1071d2e3e91a7096ba878165a55073e20c33321b0",
+    "packages/artplayer/src/setting/update.ts": "949c0001e9ae10c08ad9a9fce1c88603d98a9cb9b7ac5fa6620ee00a07933187",
+    "packages/artplayer/src/source/listen.ts": "c0596b98258c1544c8e4b762509646428450e56588da36908cb8583b8b716c37",
+    "packages/artplayer/src/source/operation.ts": "a6cb65594a5b28247e3a6889fe0a2f47a34aeb08cdde5f0125800a87862cd559",
+    "packages/artplayer/src/source/restore-position.ts": "35d3fabf5415606a0bcf4c5f6c519d8b005a63ce1f1aeef67c75d0b37925266d",
+    "packages/artplayer/src/source/switch.ts": "16f5418d73a1d6e89fbb797afcd79af13857861ba25cca9046c16b70ad31d431",
+    "packages/artplayer/src/source/types.ts": "e5fa3a9cd6b84dffbbb02f61aad966d6046204d857de3e4564c795f02a0259ff",
+    "packages/artplayer/src/storage.ts": "9c0a0f3d8ac18261db6e49b2ea14322d1d53bfec3531c7337b85005e708fef30",
+    "packages/artplayer/src/style/accessibility.less": "2da8fcde7d38ca29cd1e42cd57ab0b0d47fde2a2866bbd33223f5c8e459472b5",
+    "packages/artplayer/src/style/artplayer.less": "4e8513138d5d10c05b66986977d24ed17f1de3c0df3816dec6d90db7a97b5da3",
+    "packages/artplayer/src/style/aspectRatio.less": "091931a0cdc83e65a669332811ef3276b85bca9e55f7fff42aa46893d728c1ef",
+    "packages/artplayer/src/style/backdrop.less": "6c2cd0fa200d1f3525df98c3c56dbdc553445724aece3feb0386949245813343",
+    "packages/artplayer/src/style/bottom.less": "6fb307d8449fd04b804d5e72ea0f175f8aa9c9dd2bf1efbf756f800b39ac97ab",
+    "packages/artplayer/src/style/contextmenu.less": "70f6c7e26dc96652b659c7bf6fdad92737ed477dea69d253c57dc7266c76586d",
+    "packages/artplayer/src/style/controls.less": "eb6d4bf4e4ff903d724d45f3ff60f0cf10c02e622fba195555a8179100cdce87",
+    "packages/artplayer/src/style/danmuku.less": "e4215ee9fa2f1d0599e7311a2415cc975138265b7c6af0448d27d21b6c9e3511",
+    "packages/artplayer/src/style/flip.less": "5d3c7a81df9be455c2f683ebf48f39597d218dc2144addacb72ee1736bac3b7f",
+    "packages/artplayer/src/style/fullscreen.less": "dd350d3a0fc556d59b622a53c786b8c2a583e8fb28176e4b9e91baff90479496",
+    "packages/artplayer/src/style/fullscreenWeb.less": "d74e785c2fbbb2976e131620e751326f622f2916eceff9f2333059ca3296cdc9",
+    "packages/artplayer/src/style/hideCursor.less": "09a4607c8b0005dc199828172aa8dda395f861e407769b9696d793476c4a7823",
+    "packages/artplayer/src/style/hint.less": "ae9f3115dfdb1e2d7b8249497c080e6a25f9667f915f6e89820338d67bbc2d85",
+    "packages/artplayer/src/style/icon.less": "52d8f75c1d193e6160f57ca6997c3f9135adad8eb2338ed60c1eb8e5fe443be5",
+    "packages/artplayer/src/style/index.less": "7fece0bc5b5a106d051eb80152d5e4558f2e73953c4c33175aa901b9695be61b",
+    "packages/artplayer/src/style/index.ts": "856afc037ffcd4d18c4b54901ddbb30e310014553fe9d19560e34fb54b8378c1",
+    "packages/artplayer/src/style/info.less": "fa56d1b8c8936218e581b2426026e4ba85cd5fea20d045c4f69aca96be4059be",
+    "packages/artplayer/src/style/inject.ts": "9cddbe51b5de0da74f27c045ab982b509c3854cc6b81eeb02a6b974914760a4d",
+    "packages/artplayer/src/style/layers.less": "9653c581190bb22d60a706109819cd010908898740701c9526957b5682991c5f",
+    "packages/artplayer/src/style/loading.less": "185b0f05274196ba71fdb1d088b55af568f3342a495490c99c3f0e058a40659e",
+    "packages/artplayer/src/style/mask.less": "d1239a171b71ea6184cb4aee6660d74d6ffc0c48f7c47c3cf5fbe52d2e93ac92",
+    "packages/artplayer/src/style/mini.less": "927fd6c6c5ab440a2b25ecc43211ab89106c739385385b62de3880ed45dd7601",
+    "packages/artplayer/src/style/mixins.less": "c6be95aa682f266749fe37cb89796fbec6488abc537174f817da79bdac6e00b5",
+    "packages/artplayer/src/style/mobile.less": "ff3f64fca5d2dd7ddd50385d88d9b2fa1a645909488ab7a0978ba4f1670b7c0e",
+    "packages/artplayer/src/style/notice.less": "72a935c0effc557a9d7ab3baccb2c3b77fc3a1783450b4e3178a40a5325fe369",
+    "packages/artplayer/src/style/plugins.less": "589d05e12a62e04fe848b36ba748433d23f0b909a04e861b1d6737f2799be183",
+    "packages/artplayer/src/style/poster.less": "36b38fe138f8c9537ff4e93f7ec4f2dbdba1ec41d243d741ddf1da7c6581e546",
+    "packages/artplayer/src/style/progress.less": "59b9d95d49dbcb1be40752d7086239b6de5925b0574da231199d999e22ff4990",
+    "packages/artplayer/src/style/selector.less": "44585c6b0179e34d21eeefce6d3494faacc0e9d108079426876e8847fd441513",
+    "packages/artplayer/src/style/setting.less": "5618eb443ab6368bc4a18e9a379ce6552629555cdca6074e753aa6fd7baf9bf9",
+    "packages/artplayer/src/style/subtitle.less": "273cacb63ec0214ba434dcf19a4a455dbbdd408fb2d1749de4878804c1371e41",
+    "packages/artplayer/src/style/variables.less": "703739b2bdfc77bfde063d8788ef6b6a55b8730764baae8e7d755b7c54d8ecc7",
+    "packages/artplayer/src/style/video.less": "b89c6f6e27592d49825c68c9ab98d46e81cb1e5add855863f89d19637f98e35f",
+    "packages/artplayer/src/style/volume.less": "6e99bbe0dbcb40667ef99789b65812dc9c94ce8a1071c00d2edec5eba041c434",
+    "packages/artplayer/src/subtitle/index.ts": "b4ead680dc82fa47c53d1ec7e5fb8bf94abbf55730d5d1130ad8d544cb42adc8",
+    "packages/artplayer/src/subtitle/parse.ts": "7db540c5edb1d2312eed82757fd15a7ce6a28996ba20d0087e56730f21dede74",
+    "packages/artplayer/src/subtitle/render.ts": "96493fc35680af635a8db225a8bf002208df79ed48b1d4ee6cc73587543add5c",
+    "packages/artplayer/src/subtitle/request.ts": "543c964571bd5ab984bc1adc9f64a8917dd134ed2892ad10b30ed9c859f34119",
+    "packages/artplayer/src/subtitle/state.ts": "9f79b982d66747170bc39bdaf99b65676310965f23da62a4dec15547c756a56b",
+    "packages/artplayer/src/subtitle/track.ts": "707f4c43af4ebf4b87521f6f577168460e739274d0cec28b9efe5704d2540d18",
+    "packages/artplayer/src/subtitle/types.ts": "615e389b4bb36196a69a059eb04cf7e519cdac13d2da15e4374fede2f3b6631b",
+    "packages/artplayer/src/template.ts": "0ea9155b9292d4c528a464d3c97996ee5a1c9c4aabc2959a744989085db2251b",
+    "packages/artplayer/src/template/html.ts": "351c472bfd01fa5ba1a4e347ed31bd5faaf823d9b4c5cab1ce8c651e3b175021",
+    "packages/artplayer/src/template/nodes.ts": "1572746a636647e4d313cc8752d3a110ff81fddb390ad7b0feb6a0db0d42b9d4",
+    "packages/artplayer/src/template/types.ts": "2bf906b4a209e17dae4d79225e758e2e53772e93f19f188d0131051ea2a0143a",
+    "packages/artplayer/src/thumbnails/layout.ts": "6630439242a880f53fcb374b7b15c7f486405aab8a0fad651b137f02971eeb59",
+    "packages/artplayer/src/utils/compatibility.ts": "1fd2a5b17ee3245712eda961d3c0a15caf3c428010112e48231890176ce1e5e2",
+    "packages/artplayer/src/utils/component.ts": "659b92428f54a64b7c1bbc8743c09b573b21c28080cbeb4d371293262a46c608",
+    "packages/artplayer/src/utils/dom.ts": "72f3539dabf296df37ab4cc7ade0c8ac9480f399987101589450c787e7d6719b",
+    "packages/artplayer/src/utils/emitter.ts": "26a93d3ff35b53e71a5f3bb22c252a854559d8151ede50a66a28d9eefae6c008",
+    "packages/artplayer/src/utils/error.ts": "ba303c7d4e4228919088f9d608fa364596f5853ee646eda2008deee354866f38",
+    "packages/artplayer/src/utils/file.ts": "ea71d7fc0e818d473bf5a596211ba9d571e4febdf1878014eadefa8d0a98d4cc",
+    "packages/artplayer/src/utils/format.ts": "891df5b7542b713aef46bf2b93924f42e68eee574afd802db3e6c62ff2655ede",
+    "packages/artplayer/src/utils/index.ts": "5211af833dddb2937d25dcc772740d62f9d5c5039ce5505bffff0796d4afd756",
+    "packages/artplayer/src/utils/property.ts": "c737d4582a4382f4038d12dafdf8b43418e508c9b8b859b2f0cc17c20f370343",
+    "packages/artplayer/src/utils/subtitle.ts": "f058851d11a418e321a8a498472b67fa535fec2c7b5d3df739b6b4f263d00337",
+    "packages/artplayer/src/utils/time.ts": "b8ce3d50865f6c343e8e3ce9f5c87de565a87b4e9fbcbccbe7030e30e80b93fe"
+  },
+  "tooling": {
+    "package.json": "315746ada69ccb62b8b8c10016b3e467667db9e39518b32dc8036cbade662ea4",
+    "test/browser/accessibility-selector.spec.js": "aae91d2449e2257bfd19999505cf0bb5c631bd49b0dbf597ea1ac48e2f2a25d1",
+    "test/browser/accessibility-slider.spec.js": "1a75012aae760cd1e3a2344786b3d7a5c80099f577e7e76235e7bc908fcbf9e3",
+    "test/browser/accessibility.spec.js": "f10bdefdaac2359d1af5d2099cb8e1770bd7ca486362143f663b5c54459d6cab",
+    "test/browser/components.spec.js": "2be381b052b69baa3b4ae9cf2582593b9d611158e709e056aaa5df3cf969bef4",
+    "test/browser/hotkey.spec.js": "a6565949f25d702aeb33ef8ebbddf2ed995d67f09a47c7bfaa20010da34dfa1c",
+    "test/browser/progress-quality.spec.js": "824596e3f0f1a7d8304ca7fed38de4f00b2f967eb87fd48346ad714fbb2e280f",
+    "test/browser/prompt-components.spec.js": "2513a31306bb17b713aca2f9bc44f045ce34ac547482b4507955b0f1f14484ed"
+  },
+  "ci": {
+    "passed": 463,
+    "productionTypeScript": 235,
+    "logSha256": "e9a83dd13102be340e857ae8aafd68cbc9791df8760fdb3a028d952141dbd49c"
+  },
+  "browser": {
+    "stats": {
+      "startTime": "2026-09-11T10:54:04.786Z",
+      "duration": 93083.624,
+      "expected": 282,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "sourceBuildSha256": "7e449d4d94aeded6be17d5f1c59445327a3f398822beaca836e99a0a4f39ec96",
+    "cases": [
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: selector Tab entry, focus navigation and typeahead do not commit before Enter",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: selector Space commits once and Escape closes before web fullscreen exits",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: keyboard selector retains asynchronous choice ownership and disposal",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: pointer hover and selector selection retain their existing click behavior",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: custom native controls retain their semantics and typing inside selector content",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: empty selectors are disabled and selection callbacks keep explicitly moved focus",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: typeahead accepts prefixes, resets after navigation and leaves modified input alone",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: native trigger markup remains a single button and can open the existing popup",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: a dismissed hovered selector releases the next Escape to fullscreen",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: hovering an empty selector does not announce an expanded popup",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: selector Tab entry, focus navigation and typeahead do not commit before Enter",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: selector Space commits once and Escape closes before web fullscreen exits",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: keyboard selector retains asynchronous choice ownership and disposal",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: pointer hover and selector selection retain their existing click behavior",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: custom native controls retain their semantics and typing inside selector content",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: empty selectors are disabled and selection callbacks keep explicitly moved focus",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: typeahead accepts prefixes, resets after navigation and leaves modified input alone",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: native trigger markup remains a single button and can open the existing popup",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: a dismissed hovered selector releases the next Escape to fullscreen",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: hovering an empty selector does not announce an expanded popup",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: selector Tab entry, focus navigation and typeahead do not commit before Enter",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: selector Space commits once and Escape closes before web fullscreen exits",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: keyboard selector retains asynchronous choice ownership and disposal",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: pointer hover and selector selection retain their existing click behavior",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: custom native controls retain their semantics and typing inside selector content",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: empty selectors are disabled and selection callbacks keep explicitly moved focus",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: typeahead accepts prefixes, resets after navigation and leaves modified input alone",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: native trigger markup remains a single button and can open the existing popup",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: a dismissed hovered selector releases the next Escape to fullscreen",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-selector.spec.js",
+        "title": "candidate: hovering an empty selector does not announce an expanded popup",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: progress is the first control, seeks with owned keys and follows actual media time",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: volume panel opens from keyboard focus and the slider unmutes without seeking",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: unknown duration disables progress until metadata returns and labels use i18n",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: progress removal and volume destruction inside callbacks cancel pending writes",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: progress is the first control, seeks with owned keys and follows actual media time",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: volume panel opens from keyboard focus and the slider unmutes without seeking",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: unknown duration disables progress until metadata returns and labels use i18n",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: progress removal and volume destruction inside callbacks cancel pending writes",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: progress is the first control, seeks with owned keys and follows actual media time",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: volume panel opens from keyboard focus and the slider unmutes without seeking",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: unknown duration disables progress until metadata returns and labels use i18n",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility-slider.spec.js",
+        "title": "candidate: progress removal and volume destruction inside callbacks cancel pending writes",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "published: Tab skips the non-interactive main controls",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: keyboard reaches stable play control and toggles once with focus retained",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: mute state, focus visibility and automatic hiding follow keyboard focus",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: custom control keyboard clicks retain the callback and release on replacement",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: native buttons inside custom controls retain activation without player hotkeys",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: pointer focus does not prevent the existing automatic control hiding",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "published: Tab skips the non-interactive main controls",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: keyboard reaches stable play control and toggles once with focus retained",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: mute state, focus visibility and automatic hiding follow keyboard focus",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: custom control keyboard clicks retain the callback and release on replacement",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: native buttons inside custom controls retain activation without player hotkeys",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: pointer focus does not prevent the existing automatic control hiding",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "published: Tab skips the non-interactive main controls",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: keyboard reaches stable play control and toggles once with focus retained",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: mute state, focus visibility and automatic hiding follow keyboard focus",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: custom control keyboard clicks retain the callback and release on replacement",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: native buttons inside custom controls retain activation without player hotkeys",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "accessibility.spec.js",
+        "title": "candidate: pointer focus does not prevent the existing automatic control hiding",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: control layout follows resize and removal with observer fallback=false",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: control layout follows resize and removal with observer fallback=true",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: selector background clicks and rejection ownership are explicit",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: failed mounted reentry preserves its successful replacement",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: context menu builtin selection and owned updates preserve state",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: a prototype-named component keeps the registry prototype intact",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: removed builtin time and volume controls stop owned effects",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: selector items can be reused by an update without changing getter flags",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: reentrant beforeUnmount removes only once",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: narrow controls stay inside the player without hiding buttons",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: progress markers treat text as data and removed drags cannot seek",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: selector background clicks and rejection ownership are explicit",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: failed mounted reentry preserves its successful replacement",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: context menu builtin selection and owned updates preserve state",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: a prototype-named component keeps the registry prototype intact",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: removed builtin time and volume controls stop owned effects",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: selector items can be reused by an update without changing getter flags",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: reentrant beforeUnmount removes only once",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: narrow controls stay inside the player without hiding buttons",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: progress markers treat text as data and removed drags cannot seek",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: control layout follows resize and removal with observer fallback=false",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: control layout follows resize and removal with observer fallback=true",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: selector background clicks and rejection ownership are explicit",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: failed mounted reentry preserves its successful replacement",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: context menu builtin selection and owned updates preserve state",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: a prototype-named component keeps the registry prototype intact",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: removed builtin time and volume controls stop owned effects",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: selector items can be reused by an update without changing getter flags",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: reentrant beforeUnmount removes only once",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: narrow controls stay inside the player without hiding buttons",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: progress markers treat text as data and removed drags cannot seek",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: selector background clicks and rejection ownership are explicit",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: failed mounted reentry preserves its successful replacement",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: context menu builtin selection and owned updates preserve state",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: a prototype-named component keeps the registry prototype intact",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: removed builtin time and volume controls stop owned effects",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: selector items can be reused by an update without changing getter flags",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: reentrant beforeUnmount removes only once",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: narrow controls stay inside the player without hiding buttons",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: progress markers treat text as data and removed drags cannot seek",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: control layout follows resize and removal with observer fallback=false",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: control layout follows resize and removal with observer fallback=true",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: selector background clicks and rejection ownership are explicit",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: failed mounted reentry preserves its successful replacement",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: context menu builtin selection and owned updates preserve state",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: a prototype-named component keeps the registry prototype intact",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: removed builtin time and volume controls stop owned effects",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: selector items can be reused by an update without changing getter flags",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: reentrant beforeUnmount removes only once",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: narrow controls stay inside the player without hiding buttons",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "published: progress markers treat text as data and removed drags cannot seek",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: selector background clicks and rejection ownership are explicit",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: beforeUnmount errors remain retryable and detached nodes can be removed",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: failed mounted reentry preserves its successful replacement",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: context menu builtin selection and owned updates preserve state",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: a prototype-named component keeps the registry prototype intact",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: component factories, ordering, bound methods and update hooks retain contracts",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: removed builtin time and volume controls stop owned effects",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: selector items can be reused by an update without changing getter flags",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: async selector results cannot overwrite a newer choice or removed entry",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: a failed mounted hook rolls back its DOM alias and listeners",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: reentrant beforeUnmount removes only once",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: narrow controls stay inside the player without hiding buttons",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "components.spec.js",
+        "title": "candidate: progress markers treat text as data and removed drags cannot seek",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: native keyboard play/pause, seek, volume and web-fullscreen Escape retain their behavior",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: inherited editing and IME composition do not activate player shortcuts",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: plaintext editing and IME composition do not activate player shortcuts",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: select editing and IME composition do not activate player shortcuts",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: destroying during a key callback stops remaining keys and notifications",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: native keyboard play/pause, seek, volume and web-fullscreen Escape retain their behavior",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: inherited editing and IME composition do not activate player shortcuts",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: plaintext editing and IME composition do not activate player shortcuts",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: select editing and IME composition do not activate player shortcuts",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: destroying during a key callback stops remaining keys and notifications",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: native keyboard play/pause, seek, volume and web-fullscreen Escape retain their behavior",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: inherited editing and IME composition do not activate player shortcuts",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: plaintext editing and IME composition do not activate player shortcuts",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: select editing and IME composition do not activate player shortcuts",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: destroying during a key callback stops remaining keys and notifications",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: progress click reentry through remove cannot continue an obsolete seek",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: progress click reentry through destroy cannot continue an obsolete seek",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: progress click reentry through source cannot continue an obsolete seek",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: real progress click keeps setBar before seek and clamps the edges",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: a progress drag ends when its source is replaced and can restart on the new source",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: a caller-owned media Blob URL remains readable after switching and destroying the player",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: quality selectors retain default labels, source position and empty-array behavior",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: progress click reentry through remove cannot continue an obsolete seek",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: progress click reentry through destroy cannot continue an obsolete seek",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: progress click reentry through source cannot continue an obsolete seek",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: real progress click keeps setBar before seek and clamps the edges",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: a progress drag ends when its source is replaced and can restart on the new source",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: a caller-owned media Blob URL remains readable after switching and destroying the player",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: quality selectors retain default labels, source position and empty-array behavior",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: progress click reentry through remove cannot continue an obsolete seek",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: progress click reentry through destroy cannot continue an obsolete seek",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: progress click reentry through source cannot continue an obsolete seek",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: real progress click keeps setBar before seek and clamps the edges",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: a progress drag ends when its source is replaced and can restart on the new source",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: a caller-owned media Blob URL remains readable after switching and destroying the player",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: quality selectors retain default labels, source position and empty-array behavior",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: progress click reentry through remove cannot continue an obsolete seek",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: progress click reentry through destroy cannot continue an obsolete seek",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: progress click reentry through source cannot continue an obsolete seek",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: real progress click keeps setBar before seek and clamps the edges",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: a progress drag ends when its source is replaced and can restart on the new source",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: a caller-owned media Blob URL remains readable after switching and destroying the player",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: quality selectors retain default labels, source position and empty-array behavior",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: progress click reentry through remove cannot continue an obsolete seek",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: progress click reentry through destroy cannot continue an obsolete seek",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: progress click reentry through source cannot continue an obsolete seek",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: real progress click keeps setBar before seek and clamps the edges",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: a progress drag ends when its source is replaced and can restart on the new source",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: a caller-owned media Blob URL remains readable after switching and destroying the player",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "published: quality selectors retain default labels, source position and empty-array behavior",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: progress click reentry through remove cannot continue an obsolete seek",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: progress click reentry through destroy cannot continue an obsolete seek",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: progress click reentry through source cannot continue an obsolete seek",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: real progress click keeps setBar before seek and clamps the edges",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: a progress drag ends when its source is replaced and can restart on the new source",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: a caller-owned media Blob URL remains readable after switching and destroying the player",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "progress-quality.spec.js",
+        "title": "candidate: quality selectors retain default labels, source position and empty-array behavior",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: mask preserves observations before and after its destroy handler",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: info preserves fields, native media text and close visibility",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: info retains native nullable string conversion for custom media fields",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: repeated info init owns only one new timer and close handler",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: info mobile construction waits for an explicit init",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: mask click plays native video and destruction displays the terminal icon",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: mask preserves observations before and after its destroy handler",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info preserves fields, native media text and close visibility",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info retains native nullable string conversion for custom media fields",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: repeated info init owns only one new timer and close handler",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info mobile construction waits for an explicit init",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: mask click plays native video and destruction displays the terminal icon",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info destruction during a media getter prevents text writes and late init",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: reentrant info text conversion cannot write after player destruction",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: mask finalization follows an earlier throwing observer without replacing its error",
+        "engine": "chromium",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: mask preserves observations before and after its destroy handler",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: info preserves fields, native media text and close visibility",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: info retains native nullable string conversion for custom media fields",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: repeated info init owns only one new timer and close handler",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: info mobile construction waits for an explicit init",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: mask click plays native video and destruction displays the terminal icon",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: mask preserves observations before and after its destroy handler",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info preserves fields, native media text and close visibility",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info retains native nullable string conversion for custom media fields",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: repeated info init owns only one new timer and close handler",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info mobile construction waits for an explicit init",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: mask click plays native video and destruction displays the terminal icon",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info destruction during a media getter prevents text writes and late init",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: reentrant info text conversion cannot write after player destruction",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: mask finalization follows an earlier throwing observer without replacing its error",
+        "engine": "firefox",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: mask preserves observations before and after its destroy handler",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: info preserves fields, native media text and close visibility",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: info retains native nullable string conversion for custom media fields",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: repeated info init owns only one new timer and close handler",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: info mobile construction waits for an explicit init",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "published: mask click plays native video and destruction displays the terminal icon",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: mask preserves observations before and after its destroy handler",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info preserves fields, native media text and close visibility",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info retains native nullable string conversion for custom media fields",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: repeated info init owns only one new timer and close handler",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info mobile construction waits for an explicit init",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: mask click plays native video and destruction displays the terminal icon",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: info destruction during a media getter prevents text writes and late init",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: reentrant info text conversion cannot write after player destruction",
+        "engine": "webkit",
+        "passed": true
+      },
+      {
+        "file": "prompt-components.spec.js",
+        "title": "candidate: mask finalization follows an earlier throwing observer without replacing its error",
+        "engine": "webkit",
+        "passed": true
+      }
+    ],
+    "screenshots": {
+      "refactor/.cache/core23-selector-keyboard-chromium.png": "cffa97ce62c1db68020f2f4e4567ec3d8308bc85a3b9e55d3488a7150ba75cc2",
+      "refactor/.cache/core23-selector-keyboard-firefox.png": "e0a8dd37cb8429b44868deb3cbe1759ca00f36b14d68ee739921b1be482d62ba",
+      "refactor/.cache/core23-selector-keyboard-webkit.png": "d88be3ad1ba84622e6b46a32aa7055a3b76090d17be1364a299e716f696b3d24"
+    },
+    "reportSha256": "72b84943b54584a6a0172dbd79d4bc94b55e9bb7ba56193649e3c085cde46be3"
+  },
+  "probes": [
+    {
+      "name": "core23-selector-edge-before",
+      "stats": {
+        "startTime": "2026-09-11T10:53:05.491Z",
+        "duration": 10476.812,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "reportSha256": "fd7ef4c50d19161cd98ca299c4891b86b5217a8d0466a27b784de1916c36348f",
+      "failures": [
+        {
+          "title": "candidate: a dismissed hovered selector releases the next Escape to fullscreen",
+          "engine": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  242 |   expect(await page.evaluate(() => window.art.fullscreenWeb)).toBe(true)\n  243 |   await page.keyboard.press('Escape')\n> 244 |   await expect.poll(() => page.evaluate(() => window.art.fullscreenWeb)).toBe(false)\n      |                                                                          ^\n  245 | })\n  246 |\n  247 | test('candidate: hovering an empty selector does not announce an expanded popup', async ({ page }) => {\n    at D:\\github\\ArtPlayer\\test\\browser\\accessibility-selector.spec.js:244:74"
+          ]
+        },
+        {
+          "title": "candidate: hovering an empty selector does not announce an expanded popup",
+          "engine": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-control-keyboard-selector .art-selector-value')\nExpected: \u001b[32m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.art-control-keyboard-selector .art-selector-value') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-control-keyboard-selector .art-selector-value')\u001b[22m\n\u001b[2m    18 × locator resolved to <div tabindex=\"0\" role=\"button\" aria-expanded=\"true\" aria-disabled=\"true\" aria-haspopup=\"listbox\" class=\"art-selector-value\">Bravo</div>\u001b[22m\n\u001b[2m       - unexpected value \"true\"\u001b[22m\n\n\n  248 |   await setup(page, 'empty')\n  249 |   await trigger(page).hover()\n> 250 |   await expect(trigger(page)).toHaveAttribute('aria-expanded', 'false')\n      |                               ^\n  251 |   await expect(trigger(page)).toHaveAttribute('aria-disabled', 'true')\n  252 | })\n  253 |\n    at D:\\github\\ArtPlayer\\test\\browser\\accessibility-selector.spec.js:250:31"
+          ]
+        }
+      ]
+    }
+  ],
+  "remaining": [
+    "CORE-23 remains doing and BASE-DOM-01 remains open; no completed-task commit.",
+    "Settings tree, mode exit, dynamic control removal/replacement focus, multi-instance/SSR and subtitle accessibility still need implementation/audit.",
+    "The browser suite uses a source build, not freshly packed modern/legacy artifacts or the full browser matrix.",
+    "Physical devices and screen-reader evidence remain release gates; no npm publication, push, tag or merge."
+  ]
+}

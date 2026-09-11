@@ -1279,3 +1279,228 @@ intentional defect corrections from preserved behavior. For timers or Blob URLs,
 also identify the owner and verify cleanup in the consuming module. Remaining
 ecosystem declaration work, accessibility and release validation are recorded
 in refactor/tasks.json and should extend this map as they land.
+
+## Keyboard interaction ownership
+
+`accessibility/button.ts` makes the existing control nodes keyboard-operable without
+replacing their DOM or pointer click callbacks. Enter activates on keydown; Space
+activates on keyup only if the same enabled control retained focus. Repeats, blur,
+modifier/composition input and disposed scopes cannot activate an armed action.
+Listeners belong to the existing component entry scope. `accessibility/keyboard.ts`
+records handled events in a WeakSet so Hotkey can retain generic keydown delivery
+without performing a second Space action. Unrelated prevented events retain the
+historical hotkey policy. Native button/summary and ARIA button/switch activation,
+and Enter on links, are reserved for those elements; unrelated custom keys remain.
+
+Play/pause uses its stable control wrapper and changes its accessible name with
+the existing media events. Volume keeps its original icon and panel hierarchy;
+both icon buttons use the localized Mute name and aria-pressed, transferring focus
+only when the previously focused icon becomes hidden. This leaves the volume panel
+outside a button's accessibility subtree. Setting, fullscreen/web-fullscreen, PiP,
+AirPlay and screenshot buttons reuse existing tooltip names and click paths. Custom
+controls with option.click receive the same behavior unless their supplied content
+already contains interactive elements, whose native behavior is preserved.
+
+`accessibility/focus.ts` owns keyboard/pointer modality and the additive
+art-keyboard-focus class. The control auto-hide predicate keeps keyboard-focused
+content visible, while pointer focus keeps its original hiding behavior. Root
+listeners survive DOM moves; document listeners rebind on focus in a new ownerDocument
+and release the old document. All listeners and the class release with the bottom
+entry scope. Native focus updates existing isFocus/isInput flags without emitting
+extra public pointer focus/blur events. `style/accessibility.less` supplies visible
+focus and keyboard control-bar visibility without changing existing class hooks.
+
+`accessibility/slider.ts` owns range keyboard input and ARIA state. Arrow keys use
+the configured step, PageUp/PageDown use ten steps, and Home/End select endpoints.
+Unavailable or non-finite ranges remain focusable but disabled; their navigation
+keys cannot fall through to player shortcuts. Values and accessible text follow
+the actual media properties, including native seek rounding.
+
+`control/progress/keyboard.ts` binds the range to the existing progress entry,
+separately from pointer dragging. It emits the existing setBar payload before seek,
+omitting the optional pointer event. Entry disposal, source changes or a newer
+nested keyboard action cancel the pending seek. Native metadata, seeking and time
+events refresh the range. Volume uses the same helper on the existing slider
+outside the mute buttons. Keyboard adjustment unmutes and then writes volume,
+unless the muted callback disposed the entry or started a newer action.
+
+The volume panel becomes visible on focus within the control. Only opacity and
+transform animate: delaying visibility can make rapid Tab navigation skip its
+slider. Mouse hover remains supported and keyboard visibility does not prevent
+the existing pointer auto-hide policy. The additive Progress translation exists
+in all twelve shipped dictionaries; its public type is optional so complete old
+dictionaries remain assignable. Regenerate types and Monaco declarations together.
+
+Run the accessibility-button/accessibility-focus/accessibility-slider unit tests and
+`yarn test:browser accessibility hotkey progress-quality`
+when changing these boundaries. Tests use actual Tab/Enter/Space input and media,
+including Firefox's pre-existing native video Tab stop, one-action semantics,
+native nested buttons, pointer hiding, replacement and disposal. Slider coverage
+includes real media seek/volume, fast Tab, unavailable metadata, localization and
+callback cancellation alongside old progress dragging. CORE-23 still owns
+settings-tree, dynamic control focus, mode-exit and full accessibility acceptance; these focused checks
+are not whole-player accessibility certification.
+
+`control/selector-keyboard.ts` owns the selector popup's keyboard focus and
+visibility. The existing value opens with Enter/Space/Up/Down. The current option
+receives focus; arrows, Home/End and typed prefixes move focus without selecting.
+Enter/Space call the existing item click path, preserving the onSelect receiver,
+item/node identity and click event. Escape dismisses the popup and returns focus
+to its value; Tab leaves without committing. Hover remains a separate input path.
+Only the component entry scope owns these listeners and popup classes.
+
+Ordinary selector lists expose listbox/options with aria-selected. Caller-supplied
+interactive option HTML uses a group instead so native buttons/inputs retain their
+semantics and editing keys. Native buttons in the value become the trigger instead
+of being nested inside a new button role. Selection and async returned HTML refresh
+that binding. Focus lost only because the focused value child was replaced is
+restored to the new trigger; callbacks that deliberately focus elsewhere retain
+that focus. Caller-supplied interactive content still needs its own accessible names.
+
+The existing selector generation and trackSelection guards remain responsible for
+async result ownership. Keyboard navigation does not change those generations;
+committing a real click does. Changing this boundary requires both
+accessibility-selector and the existing components/progress-quality browser tests,
+including reusing selector objects, rejecting async callbacks, updating controls,
+removing entries and preserving old property-descriptor flags.
+
+`setting/keyboard.ts` owns panel entry, arrow navigation, Escape and focusout;
+`setting/keyboard-item.ts` adds row activation, switch state and native range names;
+`setting/keyboard-focus.ts` selects visible targets and restores focus after panel
+navigation, replacement, rollback or removal. These helpers respect paused item
+and panel scopes. Native inputs retain editing keys; nested native buttons retain
+their click behavior. Tab exit checks actual focus in a scope-owned zero-delay
+task, since a microtask can observe body during the browser's focus transition.
+Pointer opening does not move focus into the panel. Existing click callbacks and
+selection/update generations remain the mutation boundaries.
+
+`accessibility/moved-focus.ts` restores a connected focused node when moving the
+player for web fullscreen makes the browser focus body. It never overrides focus
+deliberately assigned elsewhere and is not used during destruction cleanup. Mode
+code rechecks cancellation after focus callbacks before publishing notifications.
+Back and Settings names are optional public i18n fields with generated package
+and Monaco declarations; keep all shipped dictionaries synchronized.
+
+Progress keyboard seeks reuse `source/restore-position.ts` for one bounded
+correction when an outstanding native end seek overwrites the latest position.
+The initial operation uses the existing seek setter and setBar-before-seek order;
+the correction writes currentTime without another public seek notification. The
+pending operation belongs to both the control entry and current source. A newer
+keyboard action, public position write, source replacement, removal or destruction
+supersedes it. Never turn this into indefinite retries or overwrite manual input.
+Validate this boundary with accessibility-slider and source unit/browser tests;
+settings and moved-focus changes also require accessibility-setting and display-web.
+
+`component/focus.ts` restores control focus at the end of remove/update. An update
+owns one focus transaction, so its internal remove does not first focus a neighbor.
+Prefer the replacement entry, then surviving following/preceding controls; preserve
+focus explicitly assigned outside by beforeUnmount/mounted callbacks. Failed mounts
+can restore to a neighbor, while a beforeUnmount veto leaves the original focused
+node intact. Native descendants, disabled fieldsets, hidden entries and inert trees
+must be evaluated as actual focus targets. A selector option may be the removed
+focused descendant even though the replacement is an ordinary button.
+
+If no control survives, `accessibility/player-focus.ts` gives the connected player
+programmatic focus using tabindex=-1. Keep that owned attribute until instance
+cleanup: removing it immediately after focus blurs the player in Chromium. It adds
+no sequential Tab stop and preserves caller-supplied tabindex values. Focus recovery
+is skipped during destruction and for unrelated instances. Run accessibility-controls
+alongside components, settings, selectors, sliders and Hotkey after changing this
+boundary; keep Component/Control's historical return values and failure behavior.
+
+`display/mini-focus.ts` captures a mini session's originating player element and
+restores it only when closing would hide the current popup focus. Keyboard entry
+focuses Close; pointer/programmatic entry keeps external focus. If the origin was
+removed, hidden, disabled or made inert, use the player focus fallback. Starting a
+new session outside the player clears stale origins. Mini revision checks still
+surround focus callbacks, so reentry or destruction cancels obsolete notifications.
+
+The owned mini view makes its existing Close and stable playback wrapper keyboard
+buttons. Playback activation calls the existing visible icon's click handler, so
+native media playback, pause and public events retain their paths. Escape is owned
+only while the popup is active. Names reuse Close, Mini Player, Play and Pause from
+i18n; the wrapper name follows actual playback. Focus within reveals the existing
+hover controls and focus-visible supplies an outline. Custom caller-owned mini DOM
+keeps its own controls, structure and styling; no fresh-view button binding is added
+to it. Destroy releases owned listeners without attempting to restore focus.
+
+Run accessibility-mini with display-mini, display-web, the other accessibility
+scenarios and Hotkey. Check real Tab/Enter/Space/Escape, playback, repeated entry,
+external/removed focus origins, hidden controls, and destroy during restored focus;
+the older drag, DOM order, restore-failure and supplied-popup tests remain required.
+
+`info/keyboard.ts` installs the close button, panel Escape and visibility-driven
+focus restoration inside the existing polling scope. Keyboard opening focuses
+Close; pointer/programmatic visibility preserves unrelated focus. The originating
+player element survives repeated init calls, while each init replaces listeners.
+Closing restores a connected visible origin or the player fallback. An optional
+SSR info wrapper may be absent: skip wrapper-dependent keyboard behavior while
+retaining the historical poll and click close path. Info keeps its existing class
+fields and prototype; failed initialization and manual destroy release keyboard
+resources together with polling. Close and Video Info reuse existing i18n keys.
+
+`plugins/lock-keyboard.ts` binds the existing lock layer as a stable toggle button,
+with aria-pressed and Escape to unlock. The existing state setter and click path
+still own class/flag/event ordering. Its entry scope owns a temporary control-bar
+focus suspension. `accessibility/suspend-focus.ts` uses inert/aria-hidden plus saved
+tabindex values, so Tab exclusion also works without native inert. Child additions
+are observed, moved-out nodes regain their tabindex, and unlock/removal/destruction
+restore owned attributes without overwriting different caller values.
+
+Keyboard focus no longer overrides the locked control-bar transform. A locked
+layer whose controls are hidden stays a Tab target while visually hidden; focus
+reveals it through the existing control visibility behavior. Lock is an optional
+public i18n field with twelve dictionary translations; regenerate package and
+Monaco declarations together. Test accessibility-info/accessibility-lock alongside
+prompt-components, builtin-layers, other keyboard controls and Hotkey, including
+failed init, absent SSR wrapper, dynamic controls and focus-attribute ownership.
+When remounting the lock layer while already locked, initialize its icons from the
+actual current state along with aria-pressed and the new focus scope; defaulting
+the visible icon to unlocked would contradict the still-active public state.
+
+`contextmenu/keyboard.ts` binds Shift+F10 and ContextMenu to the existing menu,
+then owns arrow/Home/End navigation, typeahead, Escape, Tab exit and focus return.
+The container is a named group; action rows are buttons and choice rows contain
+individual buttons. Native links, buttons and editable custom HTML retain their
+roles and activation. Opening uses the focused element's viewport rectangle with
+the same positioning rules as pointer opening, extracted to contextmenu/position.ts.
+Editable input context gestures remain native; the static CONTEXTMENU switch
+disables both player opening paths. Pointer opening does not acquire focus.
+
+`contextmenu/choices.ts` adds keyboard activation and aria-pressed to the existing
+data-value spans, retaining click targets, art-current highlighting and property
+events. Custom row callbacks keep their old arguments, this, return values and
+responsibility for closing the menu. Component focus recovery covers contextmenu
+as well as control: replacement first, then following/preceding visible DOM entries.
+Initialization replaces root listeners only after entries were successfully added;
+a duplicate-entry error preserves the old bindings. Entry and instance scopes own
+all listeners and the deferred focusout check; destruction never restores focus.
+
+`accessibility/overlay-focus.ts` tracks menu origins in a WeakMap. Info and mini
+resolve an origin through it before an action closes the menu, so closing the next
+panel can return to the original control rather than a hidden menu item. This does
+not pre-focus another node or change the existing menu callback/event sequence.
+Closing skips removed, hidden, disabled or inert origins, uses the player fallback,
+and preserves deliberate external focus transfers. Context Menu is an optional
+public translation key; update all dictionaries and regenerate both declaration views.
+
+Run accessibility-contextmenu with accessibility, components, prompt-components,
+display-mini and hotkey. Cover real keyboard entry, one activation, choice rows,
+callback focus/destruction, repeated init, editable HTML, cross-player focus,
+Info/mini handoff and menu positioning. Browser automation does not certify screen
+reader speech, native system context menus or physical mobile keyboard behavior.
+
+Setting navigation excludes hidden, disabled (including fieldsets) and inert
+targets. `setting/keyboard-focus.ts` also owns exit fallback when a plugin removes,
+hides, disables or moves the setting button while the panel is open. Only focus
+still inside the closing panel is transferred; an external callback keeps its focus.
+
+Run accessibility-integration for native fullscreen entry/exit with actual keyboard
+gestures, browser-initiated fullscreen exit, and PiP with the native capability
+attachment. Unsupported PiP environments verify the existing notice/focus fallback;
+they are not successful native PiP sessions. SSR tests retain player/video/subtitle
+node identities, load actual WebVTT cues, toggle them from a custom keyboard control
+and check web fullscreen focus and caption visibility. Subtitles retain their
+existing passive rendering without adding Tab stops or continuous live announcements.
+Physical Apple presentation surfaces and assistive technology remain release-review
+checks; no simulated adapter is counted as those devices.

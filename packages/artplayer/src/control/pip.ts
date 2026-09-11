@@ -1,5 +1,7 @@
 import type { ControlFactory, ControlOption } from './types'
+import { keyboardButton } from '../accessibility/button'
 import { appendElement } from '../component/dom'
+import { entryScope } from '../component/resources'
 import { tooltip } from '../utils'
 import { controlEvents } from './resources'
 
@@ -10,6 +12,7 @@ export default function pip(option: ControlOption): ControlFactory {
     mounted: ($control) => {
       const { on, proxy } = controlEvents(art, $control)
       const { icons, i18n } = art
+      keyboardButton(entryScope($control), $control)
 
       appendElement($control, icons.pip)
 

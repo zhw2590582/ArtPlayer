@@ -146,7 +146,7 @@
       "id": "BASE-DOM-01",
       "title": "控件 Tab 不可达",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-23",
         "CORE-17"
@@ -155,7 +155,15 @@
         "refactor/baselines/dom.json"
       ],
       "compatibleResolution": "补键盘可达性、焦点及名称，保留旧 DOM/CSS 和快捷键。",
-      "closureCriteria": "真实键盘与焦点回归通过，不只检查静态属性。"
+      "closureCriteria": "真实键盘与焦点回归通过，不只检查静态属性。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-23-keyboard-focus.md",
+        "refactor/baselines/keyboard-validation.json",
+        "test/browser/accessibility.spec.js",
+        "test/browser/accessibility-setting.spec.js",
+        "test/browser/accessibility-integration.spec.js"
+      ],
+      "resolutionRationale": "旧发布包的 Tab 缺口保留对照；现有按钮、进度/音量滑块、选择列表、设置、mini、信息/锁定层及菜单具备真实键盘与焦点回归，保留旧快捷键和点击契约。新安装包 modern/legacy 各 1749 项三引擎全量通过，CI 468 项；动态入口失效先复现再修正。只关闭主要控件 Tab 不可达；物理 Apple/触摸/IME/辅助技术与 CORE-22/发布复盘仍为独立门槛。"
     },
     {
       "id": "BASE-DOM-02",

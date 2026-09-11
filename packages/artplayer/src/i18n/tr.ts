@@ -2,6 +2,11 @@ import type { Dictionary } from './publish'
 import { publishLanguage } from './publish'
 
 const tr = {
+  'Context Menu': 'Bağlam menüsü',
+  'Lock': 'Kilitle',
+  'Back': 'Geri',
+  'Settings': 'Ayarlar',
+  'Progress': 'Oynatma ilerlemesi',
   'Video Info': 'Video Bilgisi',
   'Close': 'Kapat',
   'Video Load Failed': 'Video Yüklenemedi',

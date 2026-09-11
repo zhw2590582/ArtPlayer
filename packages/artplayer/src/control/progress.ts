@@ -1,5 +1,6 @@
 import type { ControlFactory, ControlOption } from './types'
 import { installProgressInteractions } from './progress/interactions'
+import { installProgressKeyboard } from './progress/keyboard'
 import { mountProgressView } from './progress/view'
 
 export { getPosFromEvent, setCurrentTime } from './progress/position'
@@ -20,6 +21,7 @@ export default function progress(options: ControlOption): ControlFactory {
     mounted: ($control) => {
       mountProgressView(art, $control)
       installProgressInteractions(art, $control)
+      installProgressKeyboard(art, $control)
     },
   })
 }

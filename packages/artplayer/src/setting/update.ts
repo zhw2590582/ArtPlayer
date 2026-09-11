@@ -5,6 +5,7 @@ import captureTemplate from '../lifecycle/template-rollback'
 import { inverseClass } from '../utils/dom'
 import { pauseSettingScope } from './activity'
 import { captureSettingItem } from './checkpoint'
+import { captureSettingFocus } from './keyboard-focus'
 import { releaseSettingPanel, settingPanelScope } from './panels'
 import { cancelSettingAdd } from './registration'
 import { suspendSettingItem } from './resources'
@@ -112,6 +113,7 @@ export function updateSetting(setting: SettingManager, target: SettingItem): Set
     return item || target
   if (!item)
     return setting.add(target)
+  const restoreFocus = captureSettingFocus(setting)
   cancelSettingAdd(item)
   cancelSettingUpdate(item)
   const restoreItem = captureSettingItem(item)
@@ -161,6 +163,7 @@ export function updateSetting(setting: SettingManager, target: SettingItem): Set
           }
         },
       ])
+      restoreFocus(element)
     }
     catch (error) {
       console.warn('ArtPlayer setting restore failed:', error)
@@ -197,6 +200,7 @@ export function updateSetting(setting: SettingManager, target: SettingItem): Set
         pending.delete(affected)
     }
     tree.dispose()
+    restoreFocus(item.$item)
     return item
   }
   catch (error) {

@@ -1031,6 +1031,155 @@ const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   userAgent,
   vttToBlob
 }, Symbol.toStringTag, { value: "Module" }));
+function listen(scope, target, name, callback, options = {}) {
+  const { capture = false, once = false, signal } = options;
+  if (scope.closed || signal?.aborted)
+    return () => {
+    };
+  let release = () => {
+  };
+  function listener(event) {
+    if (once)
+      release();
+    if (scope.closed)
+      return;
+    if (typeof callback === "function")
+      callback.call(this, event);
+    else
+      callback.handleEvent(event);
+  }
+  target.addEventListener(name, listener, options);
+  release = scope.add(() => {
+    try {
+      target.removeEventListener(name, listener, capture);
+    } finally {
+      signal?.removeEventListener("abort", release);
+    }
+  });
+  signal?.addEventListener("abort", release, { once: true });
+  return release;
+}
+function timeout(scope, callback, delay) {
+  if (scope.closed)
+    return () => {
+    };
+  let pending2 = true;
+  let release = () => {
+  };
+  const timer = setTimeout(() => {
+    if (!pending2)
+      return;
+    release();
+    if (!scope.closed)
+      callback();
+  }, delay);
+  release = scope.add(() => {
+    pending2 = false;
+    clearTimeout(timer);
+  });
+  return release;
+}
+function animationFrame(scope, callback) {
+  if (scope.closed)
+    return () => {
+    };
+  let pending2 = true;
+  let release = () => {
+  };
+  const frame = requestAnimationFrame((time2) => {
+    if (!pending2)
+      return;
+    release();
+    if (!scope.closed)
+      callback(time2);
+  });
+  release = scope.add(() => {
+    pending2 = false;
+    cancelAnimationFrame(frame);
+  });
+  return release;
+}
+function requestController(scope) {
+  if (typeof AbortController === "undefined")
+    return void 0;
+  const controller = new AbortController();
+  scope.add(() => {
+    controller.abort();
+  });
+  return controller;
+}
+function wait(scope, delay = 0) {
+  if (scope.closed)
+    return Promise.resolve(false);
+  return new Promise((resolve) => {
+    let completed = false;
+    let release = () => {
+    };
+    const timer = setTimeout(() => {
+      completed = true;
+      release();
+      resolve(true);
+    }, delay);
+    release = scope.add(() => {
+      clearTimeout(timer);
+      if (!completed)
+        resolve(false);
+    });
+  });
+}
+const handled = /* @__PURE__ */ new WeakSet();
+function claimKey(event) {
+  handled.add(event);
+  event.preventDefault();
+}
+function isClaimedKey(event) {
+  return handled.has(event);
+}
+function plainKey(event) {
+  return !event.altKey && !event.ctrlKey && !event.metaKey && !event.isComposing && event.keyCode !== 229;
+}
+function keyboardButton(scope, element, activate = () => element.click(), active2 = () => true) {
+  if (scope.closed)
+    return;
+  if (!element.hasAttribute("role"))
+    element.setAttribute("role", "button");
+  if (!element.hasAttribute("tabindex"))
+    element.tabIndex = 0;
+  let space = false;
+  const enabled = () => active2() && element.getAttribute("aria-disabled") !== "true" && !element.hasAttribute("disabled");
+  const own = (event) => (event.composedPath()[0] || event.target) === element;
+  listen(scope, element, "keydown", (value) => {
+    const event = value;
+    if (!own(event) || !plainKey(event) || event.defaultPrevented)
+      return;
+    if (event.key === "Enter") {
+      claimKey(event);
+      if (!event.repeat && enabled())
+        activate();
+    } else if (event.key === " ") {
+      claimKey(event);
+      if (!event.repeat && enabled())
+        space = true;
+    }
+  });
+  listen(scope, element, "keyup", (value) => {
+    const event = value;
+    if (event.key !== " ")
+      return;
+    const armed = space;
+    space = false;
+    if (armed && own(event) && plainKey(event) && !event.defaultPrevented && enabled() && element.ownerDocument.activeElement === element) {
+      claimKey(event);
+      activate();
+    }
+  });
+  listen(scope, element, "blur", () => {
+    space = false;
+  });
+  scope.add(() => {
+    space = false;
+  });
+}
 function renderEntry(element, parent, kind, name, id2, option) {
   addClass(element, `art-${kind}`);
   addClass(element, `art-${kind}-${name}`);
@@ -1053,6 +1202,63 @@ function appendElement(parent, child) {
 }
 function queryElement(selector, parent) {
   return parent.querySelector(selector);
+}
+const owned = /* @__PURE__ */ new WeakSet();
+function focusPlayer(art) {
+  const player = art.template.$player;
+  if (isClosing(art) || !player.isConnected)
+    return;
+  if (!player.hasAttribute("tabindex")) {
+    player.setAttribute("tabindex", "-1");
+    if (!owned.has(player)) {
+      owned.add(player);
+      getScope(art).add(() => {
+        owned.delete(player);
+        if (player.getAttribute("tabindex") === "-1")
+          player.removeAttribute("tabindex");
+      });
+    }
+  }
+  player.focus({ preventScroll: true });
+}
+const pending$1 = /* @__PURE__ */ new WeakSet();
+const focusable = "[tabindex],button,input,select,textarea,a[href],[contenteditable]";
+function targetIn(element) {
+  const targets = [element, ...element.querySelectorAll(focusable)];
+  return targets.find((target) => {
+    if (!target.matches(focusable) || target.tabIndex < 0 || target.matches(":disabled") || target.closest("[inert]") || target.getAttribute("aria-disabled") === "true" || !target.getClientRects().length)
+      return false;
+    const style = target.ownerDocument.defaultView?.getComputedStyle(target);
+    return style?.visibility !== "hidden" && style?.visibility !== "collapse";
+  });
+}
+function captureComponentFocus(owner, element, replacement) {
+  const doc = element?.ownerDocument;
+  const focused = doc?.activeElement;
+  if (!["control", "contextmenu"].includes(owner.name ?? "") || pending$1.has(owner) || !element || !doc || !focused || !element.contains(focused))
+    return () => {
+    };
+  const player = owner.art.template.$player;
+  const controls = Array.from(player.querySelectorAll(`.art-${owner.name}`));
+  const index = controls.indexOf(element);
+  const neighbors = [...controls.slice(index + 1), ...controls.slice(0, index).reverse()];
+  pending$1.add(owner);
+  return () => {
+    pending$1.delete(owner);
+    if (isClosing(owner.art) || !player.isConnected || doc.activeElement !== doc.body)
+      return;
+    const next = replacement ? owner.cache.get(replacement)?.$ref : void 0;
+    for (const candidate of [...next ? [next] : [], ...neighbors]) {
+      if (!player.contains(candidate))
+        continue;
+      const target = targetIn(candidate);
+      if (target) {
+        target.focus({ preventScroll: true });
+        return;
+      }
+    }
+    focusPlayer(owner.art);
+  };
 }
 const a = "array";
 const b = "boolean";
@@ -1228,6 +1434,9 @@ class Component {
       if (scope.closed)
         return;
       if (option.click) {
+        const actionable = this.name === "control" && !option.selector || this.name === "contextmenu" && !$ref.querySelector("[data-value]");
+        if (actionable && !$ref.querySelector("button,input,select,textarea,a[href],[tabindex],[contenteditable]"))
+          keyboardButton(scope, $ref);
         const cleanup = this.art.events.proxy($ref, "click", (event) => {
           if (scope.closed)
             return;
@@ -1269,6 +1478,7 @@ class Component {
     const item = this.cache.get(name);
     if (removing.has(item))
       return;
+    const restoreFocus = captureComponentFocus(this, item.$ref);
     removing.add(item);
     try {
       if (item.option.beforeUnmount)
@@ -1284,15 +1494,21 @@ class Component {
       }
     } finally {
       removing.delete(item);
+      restoreFocus();
     }
   }
   update(option) {
-    if (this.cache.has(option.name)) {
-      const item = this.cache.get(option.name);
-      option = Object.assign(item.option, option);
-      this.remove(option.name);
+    const restoreFocus = captureComponentFocus(this, this.cache.get(option.name)?.$ref, option.name);
+    try {
+      if (this.cache.has(option.name)) {
+        const item = this.cache.get(option.name);
+        option = Object.assign(item.option, option);
+        this.remove(option.name);
+      }
+      return this.add(option);
+    } finally {
+      restoreFocus();
     }
-    return this.add(option);
   }
 }
 function assignAlias(owner, name, value) {
@@ -1301,6 +1517,22 @@ function assignAlias(owner, name, value) {
     Object.defineProperty(aliases, name, { value, enumerable: true, configurable: true, writable: true });
   else
     aliases[name] = value;
+}
+function updateChoices(panel) {
+  for (const item of panel.querySelectorAll("[data-value]"))
+    item.setAttribute("aria-pressed", String(item.classList.contains("art-current")));
+}
+function keyboardChoices(panel, label) {
+  const scope = entryScope(panel);
+  if (scope.closed)
+    return;
+  panel.setAttribute("role", "group");
+  panel.setAttribute("aria-label", label);
+  for (const item of panel.querySelectorAll("[data-value]")) {
+    keyboardButton(scope, item);
+    item.setAttribute("aria-label", `${label}: ${item.textContent?.trim() ?? ""}`);
+  }
+  updateChoices(panel);
 }
 function aspectRatio$2(option) {
   return (art) => {
@@ -1311,9 +1543,10 @@ function aspectRatio$2(option) {
     const html2 = ASPECT_RATIO.map(
       (item) => `<span data-value="${item}">${item === "default" ? i18n.get("Default") : item}</span>`
     ).join("");
+    const label = i18n.get("Aspect Ratio");
     return {
       ...option,
-      html: `${i18n.get("Aspect Ratio")}: ${html2}`,
+      html: `${label}: ${html2}`,
       click: (contextmenu, event) => {
         const value = event.target instanceof HTMLElement ? event.target.dataset.value : void 0;
         if (value) {
@@ -1327,10 +1560,12 @@ function aspectRatio$2(option) {
         if ($default) {
           inverseClass($default, "art-current");
         }
+        keyboardChoices($panel, label);
         on("aspectRatio", (value) => {
           const $current = Array.from($panel.querySelectorAll("span")).find((item) => item.dataset.value === value);
           if ($current) {
             inverseClass($current, "art-current");
+            updateChoices($panel);
           }
         });
       }
@@ -1353,9 +1588,10 @@ function flip$2(option) {
       constructor: { FLIP }
     } = art;
     const html2 = FLIP.map((item) => `<span data-value="${item}">${i18n.get(capitalize(item))}</span>`).join("");
+    const label = i18n.get("Video Flip");
     return {
       ...option,
-      html: `${i18n.get("Video Flip")}: ${html2}`,
+      html: `${label}: ${html2}`,
       click: (contextmenu, event) => {
         const value = event.target instanceof HTMLElement ? event.target.dataset.value : void 0;
         if (value) {
@@ -1369,10 +1605,12 @@ function flip$2(option) {
         if ($default) {
           inverseClass($default, "art-current");
         }
+        keyboardChoices($panel, label);
         on("flip", (value) => {
           const $current = Array.from($panel.querySelectorAll("span")).find((item) => item.dataset.value === value);
           if ($current) {
             inverseClass($current, "art-current");
+            updateChoices($panel);
           }
         });
       }
@@ -1389,6 +1627,158 @@ function info(option) {
     }
   });
 }
+const origins$1 = /* @__PURE__ */ new WeakMap();
+function setOverlayOrigin(overlay, origin) {
+  if (origin)
+    origins$1.set(overlay, origin);
+  else
+    origins$1.delete(overlay);
+}
+function resolveFocusOrigin(target) {
+  const visited = /* @__PURE__ */ new Set();
+  let current2 = target;
+  while (!visited.has(current2)) {
+    visited.add(current2);
+    let element = current2;
+    let origin;
+    while (element && !origin) {
+      origin = origins$1.get(element);
+      element = element.parentElement;
+    }
+    if (!origin)
+      return current2;
+    current2 = origin;
+  }
+  return target;
+}
+function editable$1(target) {
+  const element = target;
+  return !!element && (["INPUT", "TEXTAREA", "SELECT"].includes(element.tagName) || element.isContentEditable);
+}
+function available$1(element) {
+  const visibility = element.ownerDocument.defaultView?.getComputedStyle(element).visibility;
+  return element.isConnected && !element.matches(":disabled") && !element.closest("[inert]") && element.getAttribute("aria-disabled") !== "true" && element.getClientRects().length > 0 && visibility !== "hidden" && visibility !== "collapse";
+}
+function contextmenuKeyboard(menu, open) {
+  const { art } = menu;
+  const { $player, $contextmenu } = art.template;
+  const scope = entryScope($contextmenu);
+  const active2 = () => !scope.closed && !isClosing(art);
+  let origin;
+  let hadFocus = false;
+  let prefix = "";
+  let typedAt = 0;
+  const capture = () => {
+    const focused = $player.ownerDocument.activeElement;
+    origin = focused && $player.contains(focused) ? resolveFocusOrigin(focused) : $player;
+    setOverlayOrigin($contextmenu, origin);
+  };
+  const targets = () => Array.from($contextmenu.querySelectorAll("[tabindex],button,input,select,textarea,a[href],[contenteditable]")).filter((element) => element.tabIndex >= 0 && available$1(element));
+  const label = art.i18n.get("Context Menu");
+  if (!active2())
+    return { pointer: () => false };
+  $contextmenu.setAttribute("role", "group");
+  $contextmenu.setAttribute("aria-label", label);
+  const changed = (show) => {
+    if (!active2())
+      return;
+    if (show) {
+      if (!$contextmenu.contains($player.ownerDocument.activeElement))
+        capture();
+      return;
+    }
+    const focused = $player.ownerDocument.activeElement;
+    const restore = $contextmenu.contains(focused) || hadFocus && focused === $player.ownerDocument.body;
+    const previous = origin;
+    origin = void 0;
+    hadFocus = false;
+    prefix = "";
+    setOverlayOrigin($contextmenu);
+    if (!restore)
+      return;
+    if (previous && $player.contains(previous) && available$1(previous))
+      previous.focus({ preventScroll: true });
+    if ($player.ownerDocument.activeElement === $player.ownerDocument.body || $contextmenu.contains($player.ownerDocument.activeElement))
+      focusPlayer(art);
+  };
+  art.on("contextmenu", changed);
+  scope.add(() => {
+    art.off("contextmenu", changed);
+    setOverlayOrigin($contextmenu);
+  });
+  listen(scope, $contextmenu, "focusin", () => {
+    hadFocus = true;
+  });
+  let pending2 = false;
+  listen(scope, $contextmenu, "focusout", (input) => {
+    if ($contextmenu.contains(input.relatedTarget) || pending2)
+      return;
+    pending2 = true;
+    timeout(scope, () => {
+      pending2 = false;
+      if (active2() && menu.show && !$contextmenu.contains($player.ownerDocument.activeElement))
+        menu.show = false;
+    }, 0);
+  });
+  listen(scope, $player, "keydown", (input) => {
+    const event = input;
+    if (!active2() || !plainKey(event) || event.defaultPrevented)
+      return;
+    const opening = event.key === "ContextMenu" || event.key === "F10" && event.shiftKey;
+    if (opening && art.constructor.CONTEXTMENU && !editable$1(event.target)) {
+      claimKey(event);
+      capture();
+      const rect = event.target.getBoundingClientRect();
+      open(rect.left, rect.bottom);
+      if (active2() && menu.show)
+        targets()[0]?.focus({ preventScroll: true });
+      return;
+    }
+    if (!menu.show || !$contextmenu.contains(event.target))
+      return;
+    if (event.key === "Escape") {
+      claimKey(event);
+      menu.show = false;
+      return;
+    }
+    if (event.key === "Tab") {
+      menu.show = false;
+      return;
+    }
+    if (editable$1(event.target))
+      return;
+    const items = targets();
+    const index = items.indexOf(event.target);
+    let target;
+    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+      target = items[(index + 1) % items.length];
+    } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+      target = items[(index + items.length - 1) % items.length];
+    } else if (event.key === "Home") {
+      target = items[0];
+    } else if (event.key === "End") {
+      target = items[items.length - 1];
+    } else if (event.key.length === 1 && event.key !== " ") {
+      const key = event.key.toLowerCase();
+      prefix = Date.now() - typedAt > 700 ? key : prefix + key;
+      typedAt = Date.now();
+      const search = [...prefix].every((letter) => letter === key) ? key : prefix;
+      target = [...items.slice(index + 1), ...items.slice(0, index + 1)].find((item) => (item.getAttribute("aria-label") || item.textContent || "").trim().toLowerCase().startsWith(search));
+    } else {
+      return;
+    }
+    claimKey(event);
+    target?.focus({ preventScroll: true });
+  });
+  return {
+    pointer(event) {
+      if (!active2() || !art.constructor.CONTEXTMENU || editable$1(event.target))
+        return false;
+      capture();
+      return true;
+    }
+  };
+}
 function playbackRate$2(option) {
   return (art) => {
     const {
@@ -1398,9 +1788,10 @@ function playbackRate$2(option) {
     const html2 = PLAYBACK_RATE.map(
       (item) => `<span data-value="${item}">${item === 1 ? i18n.get("Normal") : item.toFixed(1)}</span>`
     ).join("");
+    const label = i18n.get("Play Speed");
     return {
       ...option,
-      html: `${i18n.get("Play Speed")}: ${html2}`,
+      html: `${label}: ${html2}`,
       click: (contextmenu, event) => {
         const value = event.target instanceof HTMLElement ? event.target.dataset.value : void 0;
         if (value) {
@@ -1413,17 +1804,32 @@ function playbackRate$2(option) {
         const $default = query('[data-value="1"]', $panel);
         if ($default)
           inverseClass($default, "art-current");
+        keyboardChoices($panel, label);
         on("video:ratechange", () => {
           const $current = Array.from($panel.querySelectorAll("span")).find(
             (item) => Number(item.dataset.value) === art.playbackRate
           );
           if ($current) {
             inverseClass($current, "art-current");
+            updateChoices($panel);
           }
         });
       }
     };
   };
+}
+function positionContextmenu(art, mouseX, mouseY) {
+  const { $player, $contextmenu } = art.template;
+  const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = getRect($player);
+  const { height: mHeight, width: mWidth } = getRect($contextmenu);
+  let menuLeft = mouseX - cLeft;
+  let menuTop = mouseY - cTop;
+  if (mouseX + mWidth > cLeft + cWidth)
+    menuLeft = cWidth - mWidth;
+  if (mouseY + mHeight > cTop + cHeight)
+    menuTop = cHeight - mHeight;
+  if (!isClosing(art))
+    setStyles($contextmenu, { top: `${menuTop}px`, left: `${menuLeft}px` });
 }
 function version(option) {
   return {
@@ -1492,27 +1898,21 @@ class Contextmenu extends Component {
     for (let index = 0; index < option.contextmenu.length; index++) {
       this.add(option.contextmenu[index]);
     }
+    if (isClosing(this.art))
+      return;
+    releaseEntry($contextmenu);
+    const scope = ownEntry(this.art, $contextmenu);
+    const open = (x, y) => {
+      this.show = true;
+      if (!scope.closed && !isClosing(this.art) && this.show)
+        positionContextmenu(this.art, x, y);
+    };
+    const keyboard = contextmenuKeyboard(this, open);
     proxy($player, "contextmenu", (event) => {
-      if (!this.art.constructor.CONTEXTMENU)
+      if (!keyboard.pointer(event))
         return;
       event.preventDefault();
-      this.show = true;
-      const mouseX = event.clientX;
-      const mouseY = event.clientY;
-      const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = getRect($player);
-      const { height: mHeight, width: mWidth } = getRect($contextmenu);
-      let menuLeft = mouseX - cLeft;
-      let menuTop = mouseY - cTop;
-      if (mouseX + mWidth > cLeft + cWidth) {
-        menuLeft = cWidth - mWidth;
-      }
-      if (mouseY + mHeight > cTop + cHeight) {
-        menuTop = cHeight - mHeight;
-      }
-      setStyles($contextmenu, {
-        top: `${menuTop}px`,
-        left: `${menuLeft}px`
-      });
+      open(event.clientX, event.clientY);
     });
     proxy($player, "click", (event) => {
       if (!includeFromEvent(event, $contextmenu)) {
@@ -1524,101 +1924,51 @@ class Contextmenu extends Component {
     });
   }
 }
-function listen(scope, target, name, callback, options = {}) {
-  const { capture = false, once = false, signal } = options;
-  if (scope.closed || signal?.aborted)
-    return () => {
-    };
-  let release = () => {
+function focusVisibility(scope, root, show) {
+  let keyboard = true;
+  let document2;
+  let documentScope;
+  const focused = () => !scope.closed && keyboard && root.contains(root.ownerDocument.activeElement);
+  const update = () => {
+    const visible = focused();
+    const previous = root.classList.contains("art-keyboard-focus");
+    root.classList.toggle("art-keyboard-focus", visible);
+    if (visible && !previous)
+      show();
   };
-  function listener(event) {
-    if (once)
-      release();
-    if (scope.closed)
-      return;
-    if (typeof callback === "function")
-      callback.call(this, event);
-    else
-      callback.handleEvent(event);
-  }
-  target.addEventListener(name, listener, options);
-  release = scope.add(() => {
-    try {
-      target.removeEventListener(name, listener, capture);
-    } finally {
-      signal?.removeEventListener("abort", release);
-    }
-  });
-  signal?.addEventListener("abort", release, { once: true });
-  return release;
-}
-function timeout(scope, callback, delay) {
-  if (scope.closed)
-    return () => {
-    };
-  let pending2 = true;
-  let release = () => {
+  const key = () => {
+    keyboard = true;
+    update();
   };
-  const timer = setTimeout(() => {
-    if (!pending2)
-      return;
-    release();
-    if (!scope.closed)
-      callback();
-  }, delay);
-  release = scope.add(() => {
-    pending2 = false;
-    clearTimeout(timer);
-  });
-  return release;
-}
-function animationFrame(scope, callback) {
-  if (scope.closed)
-    return () => {
-    };
-  let pending2 = true;
-  let release = () => {
+  const pointer = () => {
+    keyboard = false;
+    update();
   };
-  const frame = requestAnimationFrame((time2) => {
-    if (!pending2)
+  const bindDocument = () => {
+    if (document2 === root.ownerDocument)
       return;
-    release();
-    if (!scope.closed)
-      callback(time2);
+    documentScope?.dispose();
+    document2 = root.ownerDocument;
+    documentScope = scope.child();
+    listen(documentScope, document2, "keydown", key, { capture: true });
+    listen(documentScope, document2, "mousedown", pointer, { capture: true });
+    listen(documentScope, document2, "touchstart", pointer, { capture: true, passive: true });
+  };
+  bindDocument();
+  listen(scope, root, "keydown", key, { capture: true });
+  listen(scope, root, "mousedown", pointer, { capture: true });
+  listen(scope, root, "touchstart", pointer, { capture: true, passive: true });
+  listen(scope, root, "focusin", () => {
+    bindDocument();
+    update();
   });
-  release = scope.add(() => {
-    pending2 = false;
-    cancelAnimationFrame(frame);
+  listen(scope, root, "focusout", () => {
+    root.classList.remove("art-keyboard-focus");
   });
-  return release;
-}
-function requestController(scope) {
-  if (typeof AbortController === "undefined")
-    return void 0;
-  const controller = new AbortController();
   scope.add(() => {
-    controller.abort();
+    root.classList.remove("art-keyboard-focus");
   });
-  return controller;
-}
-function wait(scope, delay = 0) {
-  if (scope.closed)
-    return Promise.resolve(false);
-  return new Promise((resolve) => {
-    let completed = false;
-    let release = () => {
-    };
-    const timer = setTimeout(() => {
-      completed = true;
-      release();
-      resolve(true);
-    }, delay);
-    release = scope.add(() => {
-      clearTimeout(timer);
-      if (!completed)
-        resolve(false);
-    });
-  });
+  return focused;
 }
 function airplay$1(option) {
   return (art) => ({
@@ -1627,6 +1977,7 @@ function airplay$1(option) {
     mounted: ($control) => {
       const { proxy } = controlEvents(art, $control);
       const { icons } = art;
+      keyboardButton(entryScope($control), $control);
       appendElement($control, icons.airplay);
       proxy($control, "click", () => art.airplay());
     }
@@ -1639,6 +1990,7 @@ function fullscreen(option) {
     mounted: ($control) => {
       const { on, proxy } = controlEvents(art, $control);
       const { icons, i18n } = art;
+      keyboardButton(entryScope($control), $control);
       const $fullscreenOn = appendElement($control, icons.fullscreenOn);
       const $fullscreenOff = appendElement($control, icons.fullscreenOff);
       setStyle($fullscreenOff, "display", "none");
@@ -1666,6 +2018,7 @@ function fullscreenWeb(option) {
     mounted: ($control) => {
       const { on, proxy } = controlEvents(art, $control);
       const { icons, i18n } = art;
+      keyboardButton(entryScope($control), $control);
       const $fullscreenWebOn = appendElement($control, icons.fullscreenWebOn);
       const $fullscreenWebOff = appendElement($control, icons.fullscreenWebOff);
       setStyle($fullscreenWebOff, "display", "none");
@@ -1693,6 +2046,7 @@ function pip$1(option) {
     mounted: ($control) => {
       const { on, proxy } = controlEvents(art, $control);
       const { icons, i18n } = art;
+      keyboardButton(entryScope($control), $control);
       appendElement($control, icons.pip);
       proxy($control, "click", () => {
         art.pip = !art.pip;
@@ -1711,6 +2065,7 @@ function playAndPause(option) {
       const { icons, i18n } = art;
       const $play = appendElement($control, icons.play);
       const $pause = appendElement($control, icons.pause);
+      keyboardButton(entryScope($control), $control, () => (art.playing ? $pause : $play).click());
       tooltip($play, i18n.get("Play"));
       tooltip($pause, i18n.get("Pause"));
       proxy($play, "click", () => {
@@ -1720,10 +2075,12 @@ function playAndPause(option) {
         art.pause();
       });
       function showPlay() {
+        $control.setAttribute("aria-label", i18n.get("Play"));
         setStyle($play, "display", "flex");
         setStyle($pause, "display", "none");
       }
       function showPause() {
+        $control.setAttribute("aria-label", i18n.get("Pause"));
         setStyle($play, "display", "none");
         setStyle($pause, "display", "flex");
       }
@@ -1892,6 +2249,165 @@ function installProgressInteractions(art, $control) {
     });
   }
 }
+const directions = /* @__PURE__ */ new Map([["ArrowRight", 1], ["ArrowUp", 1], ["ArrowLeft", -1], ["ArrowDown", -1], ["PageUp", 10], ["PageDown", -10]]);
+function keyboardSlider(scope, element, label, read, write, orientation = "horizontal") {
+  const valid = (range) => [range.min, range.max, range.value, range.step].every(Number.isFinite) && range.max > range.min && range.step > 0;
+  const clamp2 = (value, range) => Math.min(range.max, Math.max(range.min, value));
+  const update = () => {
+    if (scope.closed)
+      return;
+    const range = read();
+    const enabled = valid(range);
+    const value = enabled ? clamp2(range.value, range) : 0;
+    element.setAttribute("aria-disabled", String(!enabled));
+    element.setAttribute("aria-valuemin", String(enabled ? range.min : 0));
+    element.setAttribute("aria-valuemax", String(enabled ? range.max : 0));
+    element.setAttribute("aria-valuenow", String(value));
+    element.setAttribute("aria-valuetext", range.text(value));
+  };
+  if (scope.closed)
+    return update;
+  element.setAttribute("role", "slider");
+  element.tabIndex = 0;
+  element.setAttribute("aria-label", label);
+  element.setAttribute("aria-orientation", orientation);
+  listen(scope, element, "keydown", (value) => {
+    const event = value;
+    if ((event.composedPath()[0] || event.target) !== element || !plainKey(event) || event.defaultPrevented)
+      return;
+    const direction = directions.get(event.key);
+    if (direction === void 0 && event.key !== "Home" && event.key !== "End")
+      return;
+    claimKey(event);
+    const range = read();
+    if (!valid(range)) {
+      update();
+      return;
+    }
+    const next = event.key === "Home" ? range.min : event.key === "End" ? range.max : clamp2(range.value, range) + direction * range.step;
+    write(clamp2(next, range));
+    update();
+  });
+  update();
+  return update;
+}
+const revisions = /* @__PURE__ */ new WeakMap();
+function positionRevision(art) {
+  return revisions.get(art) || 0;
+}
+function advancePosition(art) {
+  revisions.set(art, positionRevision(art) + 1);
+}
+const POSITION_TOLERANCE = 0.05;
+function positionRestoration(art, target, active2) {
+  let expected;
+  let observedSeek = false;
+  let corrected = false;
+  let manual = false;
+  let revision = positionRevision(art);
+  const manualPosition = () => manual || positionRevision(art) !== revision;
+  const seeking = () => !!art.template?.$video?.seeking;
+  return {
+    restore(write = () => {
+      art.currentTime = target;
+    }) {
+      if (!active2() || manualPosition())
+        return;
+      const previousRevision = positionRevision(art);
+      write();
+      revision = positionRevision(art);
+      if (revision > previousRevision + 1)
+        manual = true;
+      if (!active2())
+        return;
+      expected = art.currentTime;
+      if (!active2() || manualPosition())
+        return;
+      observedSeek = seeking();
+    },
+    manual() {
+      manual = true;
+    },
+    ready() {
+      if (!active2() || seeking())
+        return false;
+      const missed = expected !== void 0 && Math.abs(art.currentTime - expected) > POSITION_TOLERANCE;
+      if (!manualPosition() && observedSeek && !corrected && expected !== void 0 && missed) {
+        corrected = true;
+        if (!active2())
+          return false;
+        art.currentTime = expected;
+      }
+      return active2() && !seeking();
+    }
+  };
+}
+function installProgressKeyboard(art, element) {
+  const scope = entryScope(element);
+  const { on } = controlEvents(art, element);
+  let revision = 0;
+  let pending2;
+  const update = keyboardSlider(scope, element, art.i18n.get("Progress"), () => ({
+    min: 0,
+    max: art.duration,
+    value: art.currentTime,
+    step: art.constructor.SEEK_STEP,
+    text: (value) => `${secondToTime(value)} / ${secondToTime(Number.isFinite(art.duration) && art.duration > 0 ? art.duration : 0)}`
+  }), (value) => {
+    const action = ++revision;
+    pending2?.dispose();
+    const operation = scope.child();
+    pending2 = operation;
+    const releaseSource = getSourceScope(art).add(() => {
+      operation.dispose();
+    });
+    operation.add(() => {
+      releaseSource();
+    });
+    operation.add(() => {
+      if (pending2 === operation)
+        pending2 = void 0;
+    });
+    const sourceActive = captureSource(art);
+    const active2 = () => action === revision && !operation.closed && !isClosing(art) && sourceActive();
+    const position = positionRestoration(art, value, active2);
+    const settle = () => {
+      if (!active2()) {
+        operation.dispose();
+        return;
+      }
+      if (position.ready()) {
+        operation.dispose();
+        update();
+      }
+    };
+    for (const name of ["video:seeked", "video:ended"]) {
+      art.on(name, settle);
+      operation.add(() => {
+        art.off(name, settle);
+      });
+    }
+    try {
+      art.emit("setBar", "played", value / art.duration);
+      if (active2()) {
+        position.restore(() => {
+          art.seek = value;
+        });
+      }
+      settle();
+    } catch (error2) {
+      operation.dispose();
+      throw error2;
+    }
+  });
+  on("video:loadedmetadata", update);
+  on("video:durationchange", update);
+  on("video:emptied", update);
+  on("video:timeupdate", update);
+  on("video:seeking", update);
+  on("video:seeked", update);
+  on("video:ended", update);
+}
 function mountProgressView(art, $control) {
   const { icons, option } = art;
   const { $player } = art.template;
@@ -2016,6 +2532,7 @@ function progress(options) {
     mounted: ($control) => {
       mountProgressView(art, $control);
       installProgressInteractions(art, $control);
+      installProgressKeyboard(art, $control);
     }
   });
 }
@@ -2026,6 +2543,7 @@ function screenshot$1(option) {
     mounted: ($control) => {
       const { proxy } = controlEvents(art, $control);
       const { icons } = art;
+      keyboardButton(entryScope($control), $control);
       appendElement($control, icons.screenshot);
       proxy($control, "click", () => {
         silencePromise(art.screenshot());
@@ -2041,11 +2559,14 @@ function setting$1(option) {
       const { on, proxy } = controlEvents(art, $control);
       const { icons, i18n } = art;
       appendElement($control, icons.setting);
+      keyboardButton(entryScope($control), $control);
+      $control.setAttribute("aria-expanded", "false");
       proxy($control, "click", () => {
         art.setting.toggle();
         art.setting.resize();
       });
       on("setting", (value) => {
+        $control.setAttribute("aria-expanded", String(value));
         tooltip($control, i18n.get(value ? "Hide Setting" : "Show Setting"));
       });
     }
@@ -2082,9 +2603,13 @@ function volume$1(option) {
     ...option,
     mounted: ($control) => {
       const { on, proxy } = controlEvents(art, $control);
-      const { icons } = art;
+      const { icons, i18n } = art;
       const $volume = appendElement($control, icons.volume);
       const $close = appendElement($control, icons.volumeClose);
+      for (const element of [$volume, $close]) {
+        keyboardButton(entryScope($control), element);
+        element.setAttribute("aria-label", i18n.get("Mute"));
+      }
       const $panel = appendElement($control, '<div class="art-volume-panel"></div>');
       const $inner = appendElement($panel, '<div class="art-volume-inner"></div>');
       const $value = appendElement($inner, `<div class="art-volume-val"></div>`);
@@ -2092,12 +2617,32 @@ function volume$1(option) {
       const $handle = appendElement($slider, `<div class="art-volume-handle"></div>`);
       const $loaded = appendElement($handle, `<div class="art-volume-loaded"></div>`);
       const $indicator = appendElement($slider, `<div class="art-volume-indicator"></div>`);
+      const scope = entryScope($control);
+      let revision = 0;
+      const updateSlider = keyboardSlider(scope, $slider, i18n.get("Volume"), () => ({
+        min: 0,
+        max: 100,
+        value: art.muted ? 0 : art.volume * 100,
+        step: art.constructor.VOLUME_STEP * 100,
+        text: (value) => `${Math.round(value)}%`
+      }), (value) => {
+        const action = ++revision;
+        art.muted = false;
+        if (action === revision && !scope.closed && !isClosing(art))
+          art.volume = value / 100;
+      }, "vertical");
       function getVolumeFromEvent(event) {
         const { top, height } = getRect($slider);
         return 1 - (event.clientY - top) / height;
       }
       function update() {
-        if (art.muted || art.volume === 0) {
+        updateSlider();
+        const focused = $control.ownerDocument.activeElement;
+        const muted = art.muted || art.volume === 0;
+        const visible = muted ? $close : $volume;
+        $volume.setAttribute("aria-pressed", String(art.muted));
+        $close.setAttribute("aria-pressed", String(art.muted));
+        if (muted) {
           setStyle($volume, "display", "none");
           setStyle($close, "display", "flex");
           setStyle($indicator, "top", "100%");
@@ -2111,6 +2656,8 @@ function volume$1(option) {
           setStyle($loaded, "top", `${100 - percentage}%`);
           $value.textContent = String(Math.floor(percentage));
         }
+        if ((focused === $volume || focused === $close) && focused !== visible)
+          visible.focus({ preventScroll: true });
       }
       update();
       on("video:volumechange", update);
@@ -2287,6 +2834,189 @@ function trackSelection(event, active2) {
 function captureSelection(event) {
   return event && selections.get(event) || (() => true);
 }
+const interactive = "button,input,select,textarea,a[href],[tabindex],[contenteditable]";
+function selectorKeyboard(scope, owner, value, list, label) {
+  if (scope.closed)
+    return () => {
+    };
+  const items = Array.from(list.children);
+  const complex = items.some((item) => item.querySelector(interactive));
+  list.setAttribute("role", complex ? "group" : "listbox");
+  list.setAttribute("aria-label", label);
+  let hovered = false;
+  let opened = false;
+  let dismissed = false;
+  let prefix = "";
+  let typedAt = 0;
+  const expanded = () => items.length > 0 && (opened || hovered && !dismissed);
+  const trigger = () => value.querySelector('button,a[href],[role="button"]') || value;
+  const refresh = (restore = false) => {
+    if (scope.closed)
+      return;
+    const target = trigger();
+    if (value.querySelector(interactive)) {
+      value.removeAttribute("role");
+      value.removeAttribute("tabindex");
+    } else {
+      value.setAttribute("role", "button");
+      value.tabIndex = 0;
+    }
+    if (target !== value) {
+      value.removeAttribute("aria-haspopup");
+      value.removeAttribute("aria-expanded");
+      value.removeAttribute("aria-disabled");
+    }
+    if (complex)
+      target.removeAttribute("aria-haspopup");
+    else
+      target.setAttribute("aria-haspopup", "listbox");
+    target.setAttribute("aria-expanded", String(expanded()));
+    target.setAttribute("aria-disabled", String(items.length === 0));
+    if (restore && value.isConnected && value.ownerDocument.activeElement === value.ownerDocument.body)
+      target.focus({ preventScroll: true });
+  };
+  const visibility = (state2, hide = false) => {
+    opened = state2;
+    dismissed = hide;
+    owner.classList.toggle("art-selector-open", state2);
+    owner.classList.toggle("art-selector-dismissed", hide);
+    refresh();
+  };
+  const focus = (item) => {
+    if (!item || scope.closed)
+      return;
+    const target = item.querySelector(interactive) || item;
+    target.focus({ preventScroll: true });
+    if (!scope.closed)
+      item.scrollIntoView({ block: "nearest", inline: "nearest" });
+  };
+  const open = (last = false) => {
+    if (scope.closed || !items.length)
+      return;
+    visibility(true);
+    prefix = "";
+    focus(items.find((item) => item.classList.contains("art-current")) || items[last ? items.length - 1 : 0]);
+  };
+  const close2 = () => {
+    if (scope.closed)
+      return;
+    const restore = list.contains(owner.ownerDocument.activeElement);
+    visibility(false, true);
+    prefix = "";
+    if (restore && value.isConnected)
+      trigger().focus({ preventScroll: true });
+  };
+  keyboardButton(scope, value, () => {
+    value.click();
+    if (owner.ownerDocument.activeElement === value)
+      open();
+  });
+  refresh();
+  for (const item of items) {
+    const selected = item.classList.contains("art-current");
+    if (!complex) {
+      item.setAttribute("role", "option");
+      item.setAttribute("aria-selected", String(selected));
+    } else {
+      item.setAttribute("aria-current", String(selected));
+    }
+    if (!item.querySelector(interactive)) {
+      item.tabIndex = -1;
+      keyboardButton(scope, item, () => {
+        item.click();
+        close2();
+      });
+    }
+  }
+  listen(scope, value, "keydown", (input) => {
+    const event = input;
+    if (!plainKey(event) || event.defaultPrevented || event.target !== value && event.target !== trigger())
+      return;
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      claimKey(event);
+      open(event.key === "ArrowUp");
+    } else if (event.key === "Escape" && expanded()) {
+      claimKey(event);
+      close2();
+    }
+  });
+  listen(scope, value, "click", (event) => {
+    if (event.isTrusted && event.detail === 0 && trigger() !== value)
+      open();
+  });
+  listen(scope, list, "keydown", (input) => {
+    const event = input;
+    if (!plainKey(event) || event.defaultPrevented)
+      return;
+    if (event.key === "Escape") {
+      claimKey(event);
+      close2();
+      return;
+    }
+    const index = items.indexOf(event.target);
+    if (index < 0)
+      return;
+    if (event.key.length !== 1)
+      prefix = "";
+    let next;
+    switch (event.key) {
+      case "ArrowDown":
+        next = Math.min(index + 1, items.length - 1);
+        break;
+      case "ArrowUp":
+        next = Math.max(index - 1, 0);
+        break;
+      case "Home":
+        next = 0;
+        break;
+      case "End":
+        next = items.length - 1;
+        break;
+      case "ArrowLeft":
+      case "ArrowRight":
+        claimKey(event);
+        return;
+      default: {
+        if (event.key.length !== 1 || event.key === " ")
+          return;
+        const now = Date.now();
+        prefix = now - typedAt < 500 ? prefix + event.key.toLocaleLowerCase() : event.key.toLocaleLowerCase();
+        typedAt = now;
+        const query2 = [...prefix].every((char) => char === prefix[0]) ? prefix[0] : prefix;
+        for (let offset = 1; offset <= items.length; offset++) {
+          const candidate = (index + offset) % items.length;
+          if (items[candidate].textContent?.trim().toLocaleLowerCase().startsWith(query2)) {
+            next = candidate;
+            break;
+          }
+        }
+      }
+    }
+    claimKey(event);
+    if (next !== void 0)
+      focus(items[next]);
+  });
+  listen(scope, list, "click", (event) => {
+    if (event.isTrusted && event.detail === 0)
+      close2();
+  });
+  listen(scope, owner, "mouseenter", () => {
+    hovered = true;
+    visibility(opened);
+  });
+  listen(scope, owner, "mouseleave", () => {
+    hovered = false;
+    visibility(list.contains(owner.ownerDocument.activeElement));
+  });
+  listen(scope, owner, "focusout", (event) => {
+    if (!owner.contains(event.relatedTarget))
+      visibility(false, true);
+  });
+  scope.add(() => {
+    owner.classList.remove("art-selector-open", "art-selector-dismissed");
+  });
+  return refresh;
+}
 const bindings$1 = /* @__PURE__ */ new WeakMap();
 function bind(item, binding) {
   const previous = bindings$1.get(item);
@@ -2304,13 +3034,17 @@ function setHTML(element, value) {
 function checkSelector(target) {
   if (!target)
     return;
+  const restore = target.$control_value.contains(target.$control_value.ownerDocument.activeElement);
   setHTML(target.$control_value, target.html);
   for (let index = 0; index < target.$control_option.length; index++) {
     const item = target.$control_option[index];
     item.default = item === target;
+    const element = item.$control_item;
+    element.setAttribute(element.getAttribute("role") === "option" ? "aria-selected" : "aria-current", String(item.default));
     if (item.default)
       inverseClass(item.$control_item, "art-current");
   }
+  bindings$1.get(target)?.refresh?.(restore);
 }
 function renderSelector(art, check2, option, $ref, events) {
   const { proxy } = art.events;
@@ -2352,8 +3086,11 @@ function renderSelector(art, check2, option, $ref, events) {
         return;
       if (option.onSelect) {
         const value = await option.onSelect.call(art, item, item.$control_item, event2);
-        if (active2())
+        if (active2()) {
+          const restore = $value.contains($value.ownerDocument.activeElement);
           setHTML($value, value);
+          bindings$1.get(item)?.refresh?.(restore);
+        }
       }
     } catch (error2) {
       console.warn("ArtPlayer selector failed:", error2);
@@ -2362,6 +3099,9 @@ function renderSelector(art, check2, option, $ref, events) {
     }
   });
   events.push(event);
+  const refresh = selectorKeyboard(scope, $ref, $value, $list, String(option.tooltip || option.name || $value.textContent || art.i18n.get("Open")));
+  for (const item of selector)
+    bindings$1.get(item).refresh = refresh;
 }
 class Control extends Component {
   constructor(art) {
@@ -2371,8 +3111,21 @@ class Control extends Component {
     this.timer = Date.now();
     const { constructor } = art;
     const { $player, $bottom } = this.art.template;
-    ownEntry(art, $bottom);
-    const { on } = controlEvents(art, $bottom);
+    const scope = ownEntry(art, $bottom);
+    const keyboardFocused = focusVisibility(scope, $player, () => {
+      this.show = true;
+    });
+    const { on, proxy } = controlEvents(art, $bottom);
+    proxy($player, "focusin", (event) => {
+      art.isFocus = true;
+      art.isInput = event.target?.tagName === "INPUT";
+    });
+    proxy($player, "focusout", (event) => {
+      if (!$player.contains(event.relatedTarget)) {
+        art.isFocus = false;
+        art.isInput = false;
+      }
+    });
     on("mousemove", () => {
       if (!isMobile) {
         this.show = true;
@@ -2389,7 +3142,7 @@ class Control extends Component {
       this.isHover = includeFromEvent(event, $bottom);
     });
     on("video:timeupdate", () => {
-      if (!art.setting.show && !this.isHover && !art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) {
+      if (!art.setting.show && !this.isHover && !art.isInput && !keyboardFocused() && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) {
         this.show = false;
       }
     });
@@ -2966,7 +3719,7 @@ function editable(target) {
   return target.isContentEditable;
 }
 function acceptsHotkey(event, fallback) {
-  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing || event.keyCode === 229)
+  if (isClaimedKey(event) || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing || event.keyCode === 229)
     return false;
   const doc = eventDocument(event, fallback);
   let active2 = asElement(doc.activeElement);
@@ -2975,6 +3728,13 @@ function acceptsHotkey(event, fallback) {
   if (active2 && editable(active2))
     return false;
   const first = asElement(event.composedPath?.()[0]) || asElement(event.target);
+  const enter = event.key === "Enter" || event.code === "Enter" || event.code === "NumpadEnter";
+  const activation = enter || event.key === " " || event.code === "Space";
+  if (activation) {
+    const selector = `button,summary,[role="button"],[role="switch"]${enter ? ",a[href]" : ""}`;
+    if (first?.closest?.(selector) || active2?.closest?.(selector))
+      return false;
+  }
   return !first || !editable(first);
 }
 const states$4 = /* @__PURE__ */ new WeakMap();
@@ -3059,6 +3819,11 @@ function publishLanguage(name, value) {
   }
 }
 const zhCn = {
+  "Context Menu": "快捷菜单",
+  "Lock": "锁定",
+  "Back": "返回",
+  "Settings": "设置",
+  "Progress": "播放进度",
   "Video Info": "统计信息",
   "Close": "关闭",
   "Video Load Failed": "加载失败",
@@ -3182,6 +3947,61 @@ class Icons {
     }
   }
 }
+const origins = /* @__PURE__ */ new WeakMap();
+function infoKeyboard(art, scope, close2) {
+  const { $player, $info, $infoClose } = art.template;
+  if (!$info)
+    return;
+  const active2 = () => !scope.closed && !isClosing(art);
+  const visible = () => $player.classList.contains("art-info-show");
+  const closeLabel = art.i18n.get("Close");
+  if (!active2())
+    return;
+  const groupLabel = art.i18n.get("Video Info");
+  if (!active2())
+    return;
+  $infoClose.setAttribute("aria-label", closeLabel);
+  $info.setAttribute("role", "group");
+  $info.setAttribute("aria-label", groupLabel);
+  keyboardButton(scope, $infoClose, () => $infoClose.click(), visible);
+  listen(scope, $info, "keydown", (input) => {
+    const event = input;
+    if (active2() && visible() && plainKey(event) && !event.defaultPrevented && event.key === "Escape") {
+      claimKey(event);
+      close2();
+    }
+  });
+  const changed = (show) => {
+    if (!active2())
+      return;
+    const doc = $player.ownerDocument;
+    const focused = doc.activeElement;
+    if (show) {
+      if (!$info.contains(focused)) {
+        origins.delete(art);
+        if (focused && $player.contains(focused)) {
+          origins.set(art, resolveFocusOrigin(focused));
+          if ($player.classList.contains("art-keyboard-focus"))
+            $infoClose.focus({ preventScroll: true });
+        }
+      }
+    } else {
+      const origin = origins.get(art);
+      origins.delete(art);
+      if (!$info.contains(focused))
+        return;
+      const visibility = origin && doc.defaultView?.getComputedStyle(origin).visibility;
+      if (origin?.isConnected && $player.contains(origin) && origin.getClientRects().length && visibility !== "hidden" && visibility !== "collapse" && !origin.matches(":disabled") && !origin.closest("[inert]") && origin.getAttribute("aria-disabled") !== "true")
+        origin.focus({ preventScroll: true });
+      else
+        focusPlayer(art);
+    }
+  };
+  art.on("info", changed);
+  scope.add(() => {
+    art.off("info", changed);
+  });
+}
 function pollInfo(art, scope, close2) {
   const active2 = () => !scope.closed && !isClosing(art);
   const fail = (error2) => {
@@ -3207,6 +4027,7 @@ function pollInfo(art, scope, close2) {
     scope.add(() => {
       art.off("destroy", destroy);
     });
+    infoKeyboard(art, scope, close2);
     const loop = () => {
       try {
         for (const item of items) {
@@ -3484,7 +4305,7 @@ function airplayMix(art) {
     proxy,
     template: { $video }
   } = art;
-  let available = true;
+  let available2 = true;
   const supported = window.WebKitPlaybackTargetAvailabilityEvent;
   if (isClosing(art))
     return;
@@ -3497,15 +4318,15 @@ function airplayMix(art) {
         return;
       switch (event.availability) {
         case "available":
-          available = true;
+          available2 = true;
           break;
         case "not-available":
-          available = false;
+          available2 = false;
           break;
       }
     });
   } else {
-    available = false;
+    available2 = false;
   }
   if (isClosing(art))
     return;
@@ -3513,7 +4334,7 @@ function airplayMix(art) {
     value() {
       if (isClosing(art))
         return;
-      if (available) {
+      if (available2) {
         const picker2 = $video.webkitShowPlaybackTargetPicker;
         if (isClosing(art))
           return;
@@ -3641,13 +4462,6 @@ function cssVarMix(art) {
       }
     }
   });
-}
-const revisions = /* @__PURE__ */ new WeakMap();
-function positionRevision(art) {
-  return revisions.get(art) || 0;
-}
-function advancePosition(art) {
-  revisions.set(art, positionRevision(art) + 1);
 }
 function currentTimeMix(art) {
   const { $video } = art.template;
@@ -4363,6 +5177,14 @@ function fullscreenMix(art) {
     art.off("video:loadedmetadata", metadata);
   });
 }
+function captureMovedFocus(root) {
+  const focused = root.ownerDocument?.activeElement;
+  const inside = focused && root.contains(focused);
+  return () => {
+    if (inside && focused.isConnected && root.contains(focused) && focused.ownerDocument.activeElement === focused.ownerDocument.body)
+      focused.focus({ preventScroll: true });
+  };
+}
 function capturePlacement(node) {
   return { node, parent: node.parentNode, next: node.nextSibling };
 }
@@ -4415,6 +5237,7 @@ function webFullscreen(art) {
       return;
     const current2 = ++revision;
     const active2 = () => current2 === revision && !isClosing(art);
+    const restoreFocus = captureMovedFocus($player);
     if (value) {
       if (!saved)
         saved = { placement: capturePlacement($player), style: $player.getAttribute("style") };
@@ -4431,10 +5254,15 @@ function webFullscreen(art) {
         $player.style.height = "100%";
         $player.classList.add("art-fullscreen-web");
       } catch (error2) {
-        if (active2() && restore(snapshot, active2))
+        if (active2() && restore(snapshot, active2)) {
           saved = void 0;
+          restoreFocus();
+        }
         throw error2;
       }
+      if (!active2())
+        return;
+      restoreFocus();
       if (!active2())
         return;
       art.emit("fullscreenWeb", true);
@@ -4446,6 +5274,9 @@ function webFullscreen(art) {
       } else {
         $player.classList.remove("art-fullscreen-web");
       }
+      if (!active2())
+        return;
+      restoreFocus();
       if (!active2())
         return;
       art.emit("fullscreenWeb", false);
@@ -4470,6 +5301,37 @@ function loadedMix(art) {
   def(art, "loadedTime", {
     get: () => $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0
   });
+}
+function miniFocus(art) {
+  const player = art.template.$player;
+  let origin;
+  return {
+    entering() {
+      const doc = player.ownerDocument;
+      const focused = doc.activeElement;
+      const inside = focused && player.contains(focused);
+      if (!art.template.$mini?.contains(focused))
+        origin = inside ? resolveFocusOrigin(focused) : void 0;
+      const keyboard = inside && player.classList.contains("art-keyboard-focus");
+      return (focus) => {
+        if (keyboard && !isClosing(art) && (doc.activeElement === focused || doc.activeElement === doc.body))
+          focus?.();
+      };
+    },
+    leaving(popup) {
+      const doc = player.ownerDocument;
+      const inside = popup?.contains(doc.activeElement);
+      return () => {
+        if (!inside || isClosing(art) || doc.activeElement !== doc.body && !popup?.contains(doc.activeElement))
+          return;
+        const visible = origin && doc.defaultView?.getComputedStyle(origin).visibility;
+        if (origin?.isConnected && origin.getClientRects().length && visible !== "hidden" && visible !== "collapse" && origin.getAttribute("aria-disabled") !== "true" && !origin.matches(":disabled") && !origin.closest("[inert]"))
+          origin.focus({ preventScroll: true });
+        else
+          focusPlayer(art);
+      };
+    }
+  };
 }
 function clampMini(left, top, geometry) {
   const maxLeft = Math.max(0, geometry.viewportWidth - geometry.width);
@@ -4566,6 +5428,24 @@ function createMiniView(art, parent, active2, hide) {
       return;
     state2.append(play2, pause2);
     element.append(close2, state2);
+    keyboardButton(scope, close2, () => close2.click(), active2);
+    keyboardButton(scope, state2, () => (art.playing ? pause2 : play2).click(), active2);
+    const closeLabel = art.i18n.get("Close");
+    if (scope.closed || isClosing(art))
+      return;
+    close2.setAttribute("aria-label", closeLabel);
+    const groupLabel = art.i18n.get("Mini Player");
+    if (scope.closed || isClosing(art))
+      return;
+    element.setAttribute("role", "group");
+    element.setAttribute("aria-label", groupLabel);
+    listen(scope, element, "keydown", (input) => {
+      const event = input;
+      if (active2() && plainKey(event) && !event.defaultPrevented && event.key === "Escape") {
+        claimKey(event);
+        hide();
+      }
+    });
     listen(scope, close2, "click", hide);
     listen(scope, play2, "click", () => {
       silencePromise(art.play());
@@ -4576,6 +5456,10 @@ function createMiniView(art, parent, active2, hide) {
     const update = () => {
       if (scope.closed)
         return;
+      const label = art.i18n.get(art.playing ? "Pause" : "Play");
+      if (scope.closed || isClosing(art))
+        return;
+      state2.setAttribute("aria-label", label);
       play2.style.display = art.playing ? "none" : "flex";
       pause2.style.display = art.playing ? "flex" : "none";
     };
@@ -4592,7 +5476,7 @@ function createMiniView(art, parent, active2, hide) {
     art.template.$mini = element;
     document2.body.append(element);
     if (!scope.closed)
-      return { element, cancelDrag, fresh: true };
+      return { element, cancelDrag, fresh: true, focus: () => close2.focus({ preventScroll: true }) };
   } catch (error2) {
     scope.dispose();
     if (art.template.$mini === element)
@@ -4609,6 +5493,7 @@ function mini(art) {
   let creating = false;
   let queued = false;
   const active2 = () => !isClosing(art) && $player.classList.contains("art-mini");
+  const focus = miniFocus(art);
   function restore() {
     if (placement) {
       const saved = placement;
@@ -4628,6 +5513,7 @@ function mini(art) {
       return;
     const current2 = ++revision;
     queued = false;
+    const restoreFocus = focus.leaving(art.template.$mini);
     restore();
     if (isClosing(art) || current2 !== revision)
       return;
@@ -4635,7 +5521,9 @@ function mini(art) {
     $player.classList.remove("art-mini");
     if (art.template.$mini) {
       art.template.$mini.style.display = "none";
-      art.emit("mini", false);
+      restoreFocus();
+      if (!isClosing(art) && current2 === revision)
+        art.emit("mini", false);
     }
   }
   scope.add(() => {
@@ -4655,6 +5543,7 @@ function mini(art) {
       queued = true;
       return;
     }
+    const enterFocus = focus.entering();
     art.state = "mini";
     if (isClosing(art) || current2 !== revision)
       return;
@@ -4702,6 +5591,8 @@ function mini(art) {
           return;
         art.storage.set("left", position.left);
       }
+      if (!isClosing(art) && current2 === revision)
+        enterFocus(view.focus);
       if (!isClosing(art) && current2 === revision)
         art.emit("mini", true);
     } catch (error2) {
@@ -5309,48 +6200,6 @@ function listenSource(scope, art, name, callback, once = true) {
     art.off(name, guarded);
   });
   return guarded;
-}
-const POSITION_TOLERANCE = 0.05;
-function positionRestoration(art, target, active2) {
-  let expected;
-  let observedSeek = false;
-  let corrected = false;
-  let manual = false;
-  let revision = positionRevision(art);
-  const manualPosition = () => manual || positionRevision(art) !== revision;
-  const seeking = () => !!art.template?.$video?.seeking;
-  return {
-    restore() {
-      if (!active2() || manualPosition())
-        return;
-      const previousRevision = positionRevision(art);
-      art.currentTime = target;
-      revision = positionRevision(art);
-      if (revision > previousRevision + 1)
-        manual = true;
-      if (!active2())
-        return;
-      expected = art.currentTime;
-      if (!active2() || manualPosition())
-        return;
-      observedSeek = seeking();
-    },
-    manual() {
-      manual = true;
-    },
-    ready() {
-      if (!active2() || seeking())
-        return false;
-      const missed = expected !== void 0 && Math.abs(art.currentTime - expected) > POSITION_TOLERANCE;
-      if (!manualPosition() && observedSeek && !corrected && expected !== void 0 && missed) {
-        corrected = true;
-        if (!active2())
-          return false;
-        art.currentTime = expected;
-      }
-      return active2() && !seeking();
-    }
-  };
 }
 function switchSource(art, url, currentTime) {
   return new Promise((resolve, reject) => {
@@ -6160,6 +7009,97 @@ function fastForward(art) {
     }
   };
 }
+function suspendFocus(scope, root) {
+  const original = /* @__PURE__ */ new Map();
+  const inert = root.hasAttribute("inert");
+  const hidden = root.getAttribute("aria-hidden");
+  const restore = (element, value) => {
+    if (element.getAttribute("tabindex") !== "-1")
+      return;
+    if (value === null)
+      element.removeAttribute("tabindex");
+    else
+      element.setAttribute("tabindex", value);
+  };
+  scope.add(() => {
+    for (const [element, value] of original)
+      restore(element, value);
+    original.clear();
+    if (!inert && root.getAttribute("inert") === "")
+      root.removeAttribute("inert");
+    if (root.getAttribute("aria-hidden") === "true") {
+      if (hidden === null)
+        root.removeAttribute("aria-hidden");
+      else
+        root.setAttribute("aria-hidden", hidden);
+    }
+  });
+  if (scope.closed)
+    return;
+  if (!inert)
+    root.setAttribute("inert", "");
+  root.setAttribute("aria-hidden", "true");
+  const update = () => {
+    if (scope.closed)
+      return;
+    for (const [element, value] of original) {
+      if (!root.contains(element)) {
+        restore(element, value);
+        original.delete(element);
+      }
+    }
+    for (const element of root.querySelectorAll("[tabindex],button,input,select,textarea,a[href],[contenteditable]")) {
+      if (!original.has(element)) {
+        original.set(element, element.getAttribute("tabindex"));
+        element.setAttribute("tabindex", "-1");
+      }
+    }
+  };
+  update();
+  if (typeof MutationObserver !== "undefined") {
+    const observer = new MutationObserver(update);
+    observer.observe(root, { childList: true, subtree: true });
+    scope.add(() => {
+      observer.disconnect();
+    });
+  }
+}
+function lockKeyboard(art, element, scope, locked) {
+  let suspension;
+  const active2 = () => !scope.closed && !isClosing(art);
+  const label = art.i18n.get("Lock");
+  if (!active2())
+    return () => {
+    };
+  element.setAttribute("aria-label", label);
+  keyboardButton(scope, element);
+  listen(scope, element, "keydown", (input) => {
+    const event = input;
+    if (active2() && locked() && plainKey(event) && !event.defaultPrevented && event.key === "Escape") {
+      claimKey(event);
+      element.click();
+    }
+  });
+  const update = (state2) => {
+    if (!active2())
+      return;
+    element.setAttribute("aria-pressed", String(state2));
+    if (state2 && !suspension) {
+      const { $player, $bottom } = art.template;
+      const hiddenFocus = $bottom.contains($bottom.ownerDocument.activeElement) && $player.classList.contains("art-keyboard-focus");
+      suspension = scope.child();
+      suspendFocus(suspension, $bottom);
+      if (active2() && hiddenFocus)
+        element.focus({ preventScroll: true });
+    } else if (!state2 && suspension) {
+      const previous = suspension;
+      suspension = void 0;
+      previous.dispose();
+    }
+  };
+  update(locked());
+  return update;
+}
 function lock(art) {
   const {
     layers,
@@ -6201,13 +7141,24 @@ function lock(art) {
       const $unlock = appendElement($el, icons.unlock);
       if (scope.closed || isClosing(art))
         return;
-      setStyle($lock, "display", "none");
+      const updateKeyboard = lockKeyboard(art, $el, scope, getState);
+      if (scope.closed || isClosing(art))
+        return;
+      if (getState()) {
+        setStyle($lock, "display", "inline-flex");
+        if (!scope.closed && !isClosing(art))
+          setStyle($unlock, "display", "none");
+      } else {
+        setStyle($lock, "display", "none");
+      }
       subscribeEntry(art, $el, "lock", (state2) => {
         if (isClosing(art))
           return;
         setStyle($lock, "display", state2 ? "inline-flex" : "none");
         if (!scope.closed && !isClosing(art))
           setStyle($unlock, "display", state2 ? "none" : "inline-flex");
+        if (!scope.closed && !isClosing(art))
+          updateKeyboard(state2);
       });
     },
     click() {
@@ -6787,6 +7738,170 @@ function flip(art) {
     }
   };
 }
+function available(element) {
+  const visibility = element.ownerDocument.defaultView?.getComputedStyle(element).visibility;
+  return element.isConnected && !element.matches(":disabled") && !element.closest("[inert]") && element.getAttribute("aria-disabled") !== "true" && element.getClientRects().length > 0 && visibility !== "hidden" && visibility !== "collapse";
+}
+function settingFocusTargets(panel) {
+  return Array.from(panel.querySelectorAll('[tabindex="0"],button,input,select,textarea,a[href],[contenteditable]')).filter((element) => element.getAttribute("tabindex") !== "-1" && available(element));
+}
+function returnSettingFocus(setting2) {
+  const { art, $parent } = setting2;
+  const player = art.template.$player;
+  const doc = $parent.ownerDocument;
+  const button = art.controls.setting;
+  if (isClosing(art) || !$parent.contains(doc.activeElement))
+    return;
+  if (button && player.contains(button) && available(button))
+    button.focus({ preventScroll: true });
+  if (doc.activeElement === doc.body || $parent.contains(doc.activeElement))
+    focusPlayer(art);
+}
+function focusSettingPanel(setting2, preferred, last = false) {
+  if (!setting2.show || isClosing(setting2.art) || !setting2.active)
+    return;
+  const panel = setting2.cache.get(setting2.active);
+  if (!panel || !settingScopeActive(settingPanelScope(panel)))
+    return;
+  const targets = settingFocusTargets(panel);
+  const selected = panel.querySelector(".art-setting-item.art-current");
+  const target = targets.find((element) => preferred === element || preferred?.contains(element)) || (last ? targets[targets.length - 1] : targets.find((element) => selected?.contains(element)) || targets.find((element) => !element.classList.contains("art-setting-item-back")) || targets[0]);
+  target?.focus({ preventScroll: true });
+  if (!isClosing(setting2.art))
+    target?.scrollIntoView({ block: "nearest", inline: "nearest" });
+}
+function captureSettingFocus(setting2) {
+  const doc = setting2.$parent.ownerDocument;
+  const focused = doc.activeElement;
+  const inside = setting2.$parent.contains(focused);
+  return (preferred) => {
+    if (!inside || isClosing(setting2.art))
+      return;
+    if (doc.activeElement === doc.body || doc.activeElement === focused && !focused?.getClientRects().length)
+      focusSettingPanel(setting2, preferred);
+  };
+}
+function installSettingKeyboard(setting2) {
+  const { art } = setting2;
+  const scope = getScope(art).child();
+  if (scope.closed)
+    return;
+  const doc = () => setting2.$parent.ownerDocument;
+  let enterLast = false;
+  const close2 = () => {
+    setting2.show = false;
+    if (!scope.closed && !isClosing(art))
+      setting2.render();
+  };
+  const changed = (show) => {
+    if (scope.closed || isClosing(art))
+      return;
+    if (show) {
+      if (doc().activeElement === art.controls.setting && art.template.$player.classList.contains("art-keyboard-focus"))
+        focusSettingPanel(setting2, void 0, enterLast);
+    } else if (setting2.$parent.contains(doc().activeElement)) {
+      returnSettingFocus(setting2);
+    }
+  };
+  art.on("setting", changed);
+  scope.add(() => {
+    art.off("setting", changed);
+  });
+  listen(scope, art.template.$player, "keydown", (input) => {
+    const event = input;
+    if (!plainKey(event) || event.defaultPrevented || isClosing(art))
+      return;
+    const target = event.target;
+    if (target === art.controls.setting) {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        claimKey(event);
+        if (!setting2.show) {
+          enterLast = event.key === "ArrowUp";
+          try {
+            setting2.show = true;
+          } finally {
+            enterLast = false;
+          }
+        } else {
+          focusSettingPanel(setting2, void 0, event.key === "ArrowUp");
+        }
+      } else if (event.key === "Escape" && setting2.show) {
+        claimKey(event);
+        close2();
+      }
+      return;
+    }
+    if (!setting2.show || !setting2.$parent.contains(target))
+      return;
+    if (event.key === "Escape") {
+      claimKey(event);
+      close2();
+      return;
+    }
+    const row = target.closest(".art-setting-item");
+    if (!row || target !== row && !target.matches('button,a[href],[role="button"]'))
+      return;
+    const panel = setting2.active && setting2.cache.get(setting2.active);
+    if (!panel)
+      return;
+    const currentItem = setting2.active?.find((item) => item.$item === row);
+    if (!settingScopeActive(settingPanelScope(panel)) || currentItem && !settingScopeActive(settingScope(currentItem))) {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))
+        claimKey(event);
+      return;
+    }
+    const targets = settingFocusTargets(panel);
+    const index = targets.indexOf(target);
+    if (index < 0)
+      return;
+    let next;
+    switch (event.key) {
+      case "ArrowDown":
+        next = Math.min(index + 1, targets.length - 1);
+        break;
+      case "ArrowUp":
+        next = Math.max(index - 1, 0);
+        break;
+      case "Home":
+        next = 0;
+        break;
+      case "End":
+        next = targets.length - 1;
+        break;
+      case "ArrowLeft": {
+        const back = panel.querySelector(".art-setting-item-back");
+        claimKey(event);
+        back?.click();
+        return;
+      }
+      case "ArrowRight": {
+        claimKey(event);
+        if (currentItem?.selector?.length)
+          target.click();
+        return;
+      }
+      default:
+        return;
+    }
+    claimKey(event);
+    if (next !== void 0)
+      focusSettingPanel(setting2, targets[next]);
+  });
+  let pending2 = false;
+  listen(scope, setting2.$parent, "focusout", (event) => {
+    const next = event.relatedTarget;
+    if (next && (setting2.$parent.contains(next) || next === art.controls.setting))
+      return;
+    if (pending2)
+      return;
+    pending2 = true;
+    timeout(scope, () => {
+      pending2 = false;
+      if (!scope.closed && !isClosing(art) && setting2.show && !setting2.$parent.contains(doc().activeElement) && doc().activeElement !== art.controls.setting)
+        close2();
+    }, 0);
+  });
+}
 function calculateSettingLayout(input) {
   const { containerWidth, containerHeight, requestedWidth, rows, rowHeight, controlCenter, bottom, padding } = input;
   const inset = Math.min(Math.max(0, padding), Math.max(0, containerWidth / 2));
@@ -6913,6 +8028,27 @@ function captureSettingItem(item) {
     }
   };
 }
+function nameSettingRange(item) {
+  const input = item.$item?.querySelector(".art-setting-range");
+  if (input)
+    input.setAttribute("aria-label", item.$html?.textContent || "");
+}
+function settingItemKeyboard(setting2, item, element, kind, scope) {
+  if (kind === "range") {
+    nameSettingRange(item);
+    return;
+  }
+  if (element.querySelector("button,input,select,textarea,a[href],[tabindex],[contenteditable]"))
+    return;
+  if (kind === "switch") {
+    element.setAttribute("role", "switch");
+    element.setAttribute("aria-checked", String(Boolean(item.switch)));
+    element.setAttribute("aria-disabled", String(!item.onSwitch));
+  } else if (kind === "selector" && !item.selector?.length) {
+    element.setAttribute("aria-current", String(Boolean(item.default)));
+  }
+  keyboardButton(scope, element, () => element.click(), () => settingScopeActive(scope) && !isClosing(setting2.art));
+}
 const generations = /* @__PURE__ */ new WeakMap();
 function checkSetting(setting2, target) {
   if (!target?.$parent)
@@ -6920,6 +8056,8 @@ function checkSetting(setting2, target) {
   target.$parent.tooltip = target.html;
   setting2.traverse((item) => {
     item.default = item === target;
+    if (item.$item)
+      item.$item.setAttribute("aria-current", String(item.default));
     if (item.default && item.$item)
       inverseClass(item.$item, "art-current");
   }, target.$option);
@@ -7107,6 +8245,7 @@ function updateSetting(setting2, target) {
     return item || target;
   if (!item)
     return setting2.add(target);
+  const restoreFocus = captureSettingFocus(setting2);
   cancelSettingAdd(item);
   cancelSettingUpdate(item);
   const restoreItem = captureSettingItem(item);
@@ -7156,6 +8295,7 @@ function updateSetting(setting2, target) {
           }
         }
       ]);
+      restoreFocus(element);
     } catch (error2) {
       console.warn("ArtPlayer setting restore failed:", error2);
     }
@@ -7191,6 +8331,7 @@ function updateSetting(setting2, target) {
         pending.delete(affected);
     }
     tree.dispose();
+    restoreFocus(item.$item);
     return item;
   } catch (error2) {
     if (current2())
@@ -7209,6 +8350,8 @@ function bindContent(item, key, element) {
     set(value) {
       element.innerHTML = "";
       append(element, value);
+      if (key === "html")
+        nameSettingRange(item);
     }
   });
 }
@@ -7231,6 +8374,10 @@ function createSettingHeader(setting2, item) {
   append($left, $icon);
   append($left, item.$parent.html);
   proxySetting(setting2.art, item.$parent, $item, "click", () => setting2.render(item.$parents), settingPanelScope($panel));
+  const scope = settingPanelScope($panel);
+  if (!$item.querySelector("button,input,select,textarea,a[href],[tabindex],[contenteditable]"))
+    keyboardButton(scope, $item, () => $item.click(), () => settingScopeActive(scope) && !isClosing(setting2.art));
+  $item.setAttribute("aria-label", `${setting2.art.i18n.get("Back")}: ${$item.textContent?.trim() || ""}`);
   append($panel, $item);
 }
 function createSettingItem(setting2, item, isUpdate = false) {
@@ -7341,6 +8488,7 @@ function createSettingItem(setting2, item, isUpdate = false) {
           get: () => $switchValue,
           set(value) {
             $switchValue = value;
+            $item.setAttribute("aria-checked", String(Boolean(value)));
             if (value) {
               setStyle($switchOff, "display", "none");
               setStyle($switchOn, "display", null);
@@ -7417,6 +8565,7 @@ function createSettingItem(setting2, item, isUpdate = false) {
       configurable: true,
       get: () => $item
     });
+    settingItemKeyboard(setting2, item, $item, type, scope);
     if (isUpdate) {
       if (oldItem?.parentNode)
         oldItem.replaceWith($item);
@@ -7450,6 +8599,7 @@ function createSettingItem(setting2, item, isUpdate = false) {
 function renderSetting(setting2, option = setting2.option) {
   if (isClosing(setting2.art))
     return;
+  const restoreFocus = captureSettingFocus(setting2);
   const cached = setting2.cache.get(option);
   if (cached && !settingScopeActive(settingPanelScope(cached)))
     return;
@@ -7485,6 +8635,8 @@ function renderSetting(setting2, option = setting2.option) {
       if (!current2())
         return;
       addClass($panel, "art-setting-panel");
+      $panel.setAttribute("role", "group");
+      $panel.setAttribute("aria-label", option[0]?.$parent?.$html?.textContent || setting2.art.i18n.get("Settings"));
       append(setting2.$parent, $panel);
       inverseClass($panel, "art-current");
       if (option[0]?.$parent)
@@ -7521,6 +8673,8 @@ function renderSetting(setting2, option = setting2.option) {
       throw error2;
     }
   }
+  if (currentNavigation())
+    restoreFocus(previous?.[0]?.$parent?.$item);
 }
 function subtitleOffset(art) {
   const { i18n, icons, constructor } = art;
@@ -7567,6 +8721,7 @@ class Setting extends SettingBase {
       this.render();
       installSettingEvents(this);
     }
+    installSettingKeyboard(this);
   }
   get builtin() {
     const result = [];
@@ -7604,6 +8759,7 @@ class Setting extends SettingBase {
     releaseSettingTree(this, item);
   }
   remove(name) {
+    const restoreFocus = captureSettingFocus(this);
     const item = this.find(name);
     errorHandle(item, `Can't find [${name}] in the [setting]`);
     this.traverse((item2) => {
@@ -7626,6 +8782,7 @@ class Setting extends SettingBase {
     }
     if (failures.length)
       throw new ResourceCleanupError(failures);
+    restoreFocus();
   }
   update(target) {
     return updateSetting(this, target);
@@ -7715,7 +8872,7 @@ class Storage {
     }
   }
 }
-const css = ".art-video-player {\n  --art-theme: #f00;\n  --art-font-color: #fff;\n  --art-background-color: #000;\n  --art-text-shadow-color: rgba(0, 0, 0, 0.5);\n  --art-transition-duration: 0.2s;\n  --art-padding: 10px;\n  --art-border-radius: 3px;\n  --art-progress-height: 6px;\n  --art-progress-color: rgba(255, 255, 255, 0.25);\n  --art-progress-top-gap: 10px;\n  --art-hover-color: rgba(255, 255, 255, 0.25);\n  --art-loaded-color: rgba(255, 255, 255, 0.25);\n  --art-state-size: 80px;\n  --art-state-opacity: 0.8;\n  --art-bottom-height: 100px;\n  --art-bottom-offset: 20px;\n  --art-bottom-gap: 5px;\n  --art-highlight-width: 8px;\n  --art-highlight-color: rgba(255, 255, 255, 0.5);\n  --art-control-height: 46px;\n  --art-control-opacity: 0.75;\n  --art-control-icon-size: 36px;\n  --art-control-icon-scale: 1.1;\n  --art-volume-height: 120px;\n  --art-volume-handle-size: 14px;\n  --art-lock-size: 36px;\n  --art-indicator-scale: 0;\n  --art-indicator-size: 16px;\n  --art-fullscreen-web-index: 9999;\n  --art-settings-icon-size: 24px;\n  --art-settings-max-height: 300px;\n  --art-selector-max-height: 300px;\n  --art-contextmenus-min-width: 250px;\n  --art-subtitle-font-size: 20px;\n  --art-subtitle-gap: 5px;\n  --art-subtitle-bottom: 15px;\n  --art-subtitle-border: #000;\n  --art-widget-background: rgba(0, 0, 0, 0.85);\n  --art-tip-background: rgba(0, 0, 0, 0.7);\n  --art-scrollbar-size: 4px;\n  --art-scrollbar-background: rgba(255, 255, 255, 0.25);\n  --art-scrollbar-background-hover: rgba(255, 255, 255, 0.5);\n  --art-mini-progress-height: 2px;\n}\n.art-bg-cover {\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n.art-bottom-gradient {\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.art-video-player {\n  position: relative;\n  margin: 0 auto;\n  width: 100%;\n  height: 100%;\n  outline: 0;\n  zoom: 1;\n  padding: 0;\n  text-align: left;\n  direction: ltr;\n  font-size: 14px;\n  line-height: 1.3;\n  user-select: none;\n  box-sizing: border-box;\n  color: var(--art-font-color);\n  background-color: var(--art-background-color);\n  text-shadow: 0 0 2px var(--art-text-shadow-color);\n  font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, Roboto, Arial, sans-serif;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  -ms-touch-action: manipulation;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n}\n.art-video-player *,\n.art-video-player *::before,\n.art-video-player *::after {\n  box-sizing: border-box;\n}\n.art-video-player ::-webkit-scrollbar {\n  width: var(--art-scrollbar-size);\n  height: var(--art-scrollbar-size);\n}\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: var(--art-scrollbar-background);\n}\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: var(--art-scrollbar-background-hover);\n}\n.art-video-player img {\n  max-width: 100%;\n  vertical-align: top;\n}\n.art-video-player svg {\n  fill: var(--art-font-color);\n}\n.art-video-player a {\n  color: var(--art-font-color);\n  text-decoration: none;\n}\n.art-icon {\n  line-height: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.art-video-player.art-backdrop .art-contextmenus,\n.art-video-player.art-backdrop .art-info,\n.art-video-player.art-backdrop .art-settings,\n.art-video-player.art-backdrop .art-layer-auto-playback,\n.art-video-player.art-backdrop .art-selector-list,\n.art-video-player.art-backdrop .art-volume-inner {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-video {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n}\n.art-poster {\n  position: absolute;\n  inset: 0;\n  z-index: 11;\n  width: 100%;\n  height: 100%;\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  pointer-events: none;\n}\n.art-video-player .art-subtitle {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: absolute;\n  z-index: 20;\n  width: 100%;\n  padding: 0 5%;\n  text-align: center;\n  pointer-events: none;\n  gap: var(--art-subtitle-gap);\n  bottom: var(--art-subtitle-bottom);\n  font-size: var(--art-subtitle-font-size);\n  transition: bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n}\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: flex;\n}\n.art-video-player.art-control-show .art-subtitle {\n  bottom: calc(var(--art-controls-height, var(--art-control-height)) + var(--art-subtitle-bottom));\n}\n.art-danmuku {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  overflow: hidden;\n}\n.art-video-player .art-layers {\n  position: absolute;\n  inset: 0;\n  z-index: 40;\n  width: 100%;\n  height: 100%;\n  display: none;\n  pointer-events: none;\n}\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n.art-video-player.art-layer-show .art-layers {\n  display: flex;\n}\n.art-video-player .art-mask {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 50;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player .art-mask .art-state {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  transform: scale(2);\n  width: var(--art-state-size);\n  height: var(--art-state-size);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-video-player.art-mask-show .art-state {\n  pointer-events: auto;\n  opacity: var(--art-state-opacity);\n  transform: scale(1);\n}\n.art-video-player.art-loading-show .art-state {\n  display: none;\n}\n.art-video-player .art-loading {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 70;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n.art-video-player.art-loading-show .art-mask {\n  display: none;\n}\n.art-video-player .art-bottom {\n  position: absolute;\n  inset: 0;\n  z-index: 60;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  opacity: 0;\n  overflow: hidden;\n  pointer-events: none;\n  padding: 0 var(--art-padding);\n  transition: all var(--art-transition-duration) ease;\n  background-size: 100% var(--art-bottom-height);\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-video-player .art-bottom .art-controls,\n.art-video-player .art-bottom .art-progress {\n  transform: translateY(var(--art-bottom-offset));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player.art-control-show .art-bottom,\n.art-video-player.art-hover .art-bottom {\n  opacity: 1;\n}\n.art-video-player.art-control-show .art-bottom .art-controls,\n.art-video-player.art-hover .art-bottom .art-controls,\n.art-video-player.art-control-show .art-bottom .art-progress,\n.art-video-player.art-hover .art-bottom .art-progress {\n  transform: translateY(0);\n}\n.art-bottom .art-progress {\n  position: relative;\n  z-index: 0;\n  cursor: pointer;\n  pointer-events: auto;\n  padding-top: var(--art-progress-top-gap);\n  padding-bottom: var(--art-bottom-gap);\n}\n.art-bottom .art-progress .art-control-progress {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: var(--art-progress-height);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  display: flex;\n  align-items: center;\n  position: relative;\n  height: 50%;\n  width: 100%;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-hover-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-loaded-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  position: absolute;\n  inset: 0;\n  z-index: 20;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-theme);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  right: auto;\n  pointer-events: auto;\n  width: var(--art-highlight-width) !important;\n  transform: translateX(calc(var(--art-highlight-width) / -2));\n  background-color: var(--art-highlight-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  z-index: 40;\n  left: 0;\n  border-radius: 50%;\n  width: var(--art-indicator-size);\n  height: var(--art-indicator-size);\n  transform: scale(var(--art-indicator-scale));\n  margin-left: calc(var(--art-indicator-size) / -2);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover {\n  transform: scale(1.2) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active {\n  transform: scale(1) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  z-index: 50;\n  top: -25px;\n  left: 0;\n  padding: 3px 5px;\n  line-height: 1;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-thumbnails {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  bottom: calc(var(--art-bottom-gap) + 10px);\n  left: 0;\n  border-radius: var(--art-border-radius);\n  pointer-events: none;\n  background-color: var(--art-widget-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px -1px rgba(0, 0, 0, 0.2);\n}\n.art-bottom .art-progress:hover .art-control-progress .art-control-progress-inner {\n  height: 100%;\n}\n.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  transform: scale(1);\n}\n.art-progress-hover .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip,\n.art-progress-hover .art-bottom .art-progress .art-control-thumbnails {\n  transform: scale(1);\n  opacity: 1;\n}\n.art-video-player .art-controls {\n  position: relative;\n  z-index: 10;\n  pointer-events: auto;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  flex-shrink: 0;\n  height: auto;\n  min-height: var(--art-control-height);\n}\n.art-video-player .art-controls .art-controls-left,\n.art-video-player .art-controls .art-controls-right {\n  display: flex;\n  flex-wrap: wrap;\n  max-width: 100%;\n  min-height: var(--art-control-height);\n}\n.art-video-player .art-controls .art-controls-center {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex: 1;\n  height: 100%;\n  padding: 0 10px;\n}\n.art-video-player .art-controls .art-controls-right {\n  justify-content: flex-end;\n  margin-left: auto;\n}\n.art-video-player .art-controls .art-control {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  max-width: 100%;\n  cursor: pointer;\n  white-space: nowrap;\n  opacity: var(--art-control-opacity);\n  min-height: var(--art-control-height);\n  min-width: var(--art-control-height);\n  transition: opacity var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon {\n  height: var(--art-control-icon-size);\n  width: var(--art-control-icon-size);\n  transform: scale(var(--art-control-icon-scale));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon:active {\n  transform: scale(calc(var(--art-control-icon-scale) * 0.8));\n}\n.art-video-player .art-controls .art-control:hover {\n  opacity: 1;\n}\n.art-control-volume {\n  position: relative;\n}\n.art-control-volume .art-volume-panel {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  left: 0;\n  right: 0;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n  cursor: default;\n  opacity: 0;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  width: var(--art-control-height);\n  height: var(--art-volume-height);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 10px;\n  height: 100%;\n  width: 100%;\n  padding: 10px 0 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider {\n  flex: 1;\n  width: 100%;\n  display: flex;\n  cursor: pointer;\n  position: relative;\n  justify-content: center;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  width: 2px;\n  border-radius: var(--art-border-radius);\n  overflow: hidden;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  background-color: var(--art-theme);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator {\n  position: absolute;\n  width: var(--art-volume-handle-size);\n  height: var(--art-volume-handle-size);\n  margin-top: calc(var(--art-volume-handle-size) / -2);\n  flex-shrink: 0;\n  transform: scale(1);\n  border-radius: 100%;\n  background-color: var(--art-theme);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator {\n  transform: scale(0.9);\n}\n.art-control-volume:hover .art-volume-panel {\n  opacity: 1;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player .art-notice {\n  display: none;\n  position: absolute;\n  inset: 0;\n  z-index: 80;\n  width: 100%;\n  height: 100%;\n  height: auto;\n  bottom: auto;\n  padding: var(--art-padding);\n  pointer-events: none;\n}\n.art-video-player .art-notice .art-notice-inner {\n  display: inline-flex;\n  padding: 5px;\n  line-height: 1;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-tip-background);\n}\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n.art-video-player .art-contextmenus {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 120;\n  padding: 5px 0;\n  border-radius: var(--art-border-radius);\n  font-size: 12px;\n  background-color: var(--art-widget-background);\n  min-width: var(--art-contextmenus-min-width);\n}\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  display: flex;\n  padding: 10px 15px;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 8px;\n}\n.art-video-player .art-contextmenus .art-contextmenu span:hover,\n.art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n.art-video-player .art-settings {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 90;\n  left: auto;\n  overflow-y: auto;\n  overflow-x: hidden;\n  border-radius: var(--art-border-radius);\n  max-height: var(--art-settings-max-height);\n  right: var(--art-padding);\n  bottom: var(--art-controls-height, var(--art-control-height));\n  transition: all var(--art-transition-duration) ease;\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-settings .art-setting-panel {\n  display: none;\n  flex-direction: column;\n}\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: flex;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 5px;\n  padding: 0 5px;\n  cursor: pointer;\n  overflow: hidden;\n  transition: background-color var(--art-transition-duration) ease;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 1;\n  min-width: 0;\n  overflow: hidden;\n  gap: 5px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  height: var(--art-settings-icon-size);\n  width: var(--art-settings-icon-size);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-text {\n  min-width: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  min-width: 0;\n  max-width: 55%;\n  gap: 5px;\n  font-size: 12px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  min-width: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: rgba(255, 255, 255, 0.5);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  min-width: 32px;\n  height: 24px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  height: 3px;\n  width: 80px;\n  outline: none;\n  appearance: none;\n  background-color: rgba(255, 255, 255, 0.2);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player.art-setting-show .art-settings {\n  display: flex;\n}\n.art-video-player .art-info {\n  display: none;\n  position: absolute;\n  left: var(--art-padding);\n  top: var(--art-padding);\n  z-index: 100;\n  padding: 10px;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-info .art-info-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item {\n  display: flex;\n  align-items: center;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-title {\n  width: 100px;\n  text-align: right;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-content {\n  width: 250px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  user-select: all;\n}\n.art-video-player .art-info .art-info-close {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  cursor: pointer;\n}\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n.art-hide-cursor * {\n  cursor: none !important;\n}\n.art-video-player[data-aspect-ratio] {\n  overflow: hidden;\n}\n.art-video-player[data-aspect-ratio] .art-video {\n  object-fit: fill;\n  box-sizing: content-box;\n}\n.art-fullscreen {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n}\n.art-fullscreen-web {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n  position: fixed;\n  inset: 0;\n  z-index: var(--art-fullscreen-web-index);\n  width: 100%;\n  height: 100%;\n}\n.art-mini-popup {\n  position: fixed;\n  z-index: 9999;\n  width: 320px;\n  height: 180px;\n  max-width: 100vw;\n  max-height: 100vh;\n  background: #000;\n  border-radius: var(--art-border-radius);\n  cursor: move;\n  user-select: none;\n  overflow: hidden;\n  transition: opacity 0.2s ease;\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);\n}\n.art-mini-popup svg {\n  fill: #fff;\n}\n.art-mini-popup .art-video {\n  pointer-events: none;\n}\n.art-mini-popup .art-mini-close {\n  position: absolute;\n  z-index: 20;\n  right: 10px;\n  top: 10px;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n}\n.art-mini-popup .art-mini-state {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n  background-color: rgba(0, 0, 0, 0.25);\n}\n.art-mini-popup .art-mini-state .art-icon {\n  opacity: 0.75;\n  cursor: pointer;\n  transform: scale(3);\n  pointer-events: auto;\n  transition: transform 0.2s ease;\n}\n.art-mini-popup .art-mini-state .art-icon:active {\n  transform: scale(2.5);\n}\n.art-mini-popup.art-mini-dragging {\n  opacity: 0.9;\n}\n.art-mini-popup:hover .art-mini-close,\n.art-mini-popup:hover .art-mini-state {\n  opacity: 1;\n}\n.art-video-player[data-flip='horizontal'] .art-video {\n  transform: scaleX(-1);\n}\n.art-video-player[data-flip='vertical'] .art-video {\n  transform: scaleY(-1);\n}\n.art-video-player .art-layer-lock {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 50%;\n  border-radius: 50%;\n  transform: translateY(-50%);\n  height: var(--art-lock-size);\n  width: var(--art-lock-size);\n  left: var(--art-padding);\n  background-color: var(--art-tip-background);\n}\n.art-video-player .art-layer-auto-playback {\n  display: none;\n  gap: 10px;\n  align-items: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  padding: 10px;\n  line-height: 1;\n  left: var(--art-padding);\n  bottom: calc(var(--art-controls-height, var(--art-control-height)) + var(--art-bottom-gap) + 10px);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close svg {\n  width: 15px;\n  height: 15px;\n  fill: var(--art-theme);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-jump {\n  color: var(--art-theme);\n  cursor: pointer;\n}\n.art-video-player.art-lock .art-subtitle {\n  bottom: var(--art-subtitle-bottom) !important;\n}\n.art-video-player.art-mini-progress-bar .art-bottom,\n.art-video-player.art-lock .art-bottom {\n  opacity: 1;\n  padding: 0;\n  background-image: none;\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-controls,\n.art-video-player.art-lock .art-bottom .art-controls,\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress,\n.art-video-player.art-lock .art-bottom .art-progress {\n  transform: translateY(calc(var(--art-controls-height, var(--art-control-height)) + var(--art-bottom-gap) + var(--art-progress-height) / 4));\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress-indicator,\n.art-video-player.art-lock .art-bottom .art-progress-indicator {\n  display: none !important;\n}\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n.art-control-selector {\n  position: relative;\n  display: flex;\n  justify-content: center;\n}\n.art-control-selector .art-selector-list {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  overflow-y: auto;\n  overflow-x: hidden;\n  opacity: 0;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  max-height: var(--art-selector-max-height);\n  background-color: var(--art-widget-background);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-control-selector .art-selector-list .art-selector-item {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  padding: 10px 15px;\n  flex-shrink: 0;\n  line-height: 1;\n}\n.art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-control-selector .art-selector-list .art-selector-item:hover,\n.art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: var(--art-theme);\n}\n.art-control-selector:hover .art-selector-list {\n  opacity: 1;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player {\n  /*! Hint.css - v2.7.0 - 2021-10-01\n    * https://kushagra.dev/lab/hint/\n    * Copyright (c) 2021 Kushagra Gour */\n  /*-------------------------------------*\\\n        HINT.css - A CSS tooltip library\n    \\*-------------------------------------*/\n  /**\n    * HINT.css is a tooltip library made in pure CSS.\n    *\n    * Source: https://github.com/chinchang/hint.css\n    * Demo: http://kushagragour.in/lab/hint/\n    *\n    */\n  /**\n    * source: hint-core.scss\n    *\n    * Defines the basic styling for the tooltip.\n    * Each tooltip is made of 2 parts:\n    * 	1) body (:after)\n    * 	2) arrow (:before)\n    *\n    * Classes added:\n    * 	1) hint\n    */\n  /**\n    * source: hint-position.scss\n    *\n    * Defines the positoning logic for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--top\n    * 	2) hint--bottom\n    * 	3) hint--left\n    * 	4) hint--right\n    */\n  /**\n    * set default color for tooltip arrows\n    */\n  /**\n    * top tooltip\n    */\n  /**\n    * bottom tooltip\n    */\n  /**\n    * right tooltip\n    */\n  /**\n    * left tooltip\n    */\n  /**\n    * top-left tooltip\n    */\n  /**\n    * top-right tooltip\n    */\n  /**\n    * bottom-left tooltip\n    */\n  /**\n    * bottom-right tooltip\n    */\n  /**\n    * source: hint-sizes.scss\n    *\n    * Defines width restricted tooltips that can span\n    * across multiple lines.\n    *\n    * Classes added:\n    * 	1) hint--small\n    * 	2) hint--medium\n    * 	3) hint--large\n    *\n    */\n  /**\n    * source: hint-theme.scss\n    *\n    * Defines basic theme for tooltips.\n    *\n    */\n  /**\n    * source: hint-color-types.scss\n    *\n    * Contains tooltips of various types based on color differences.\n    *\n    * Classes added:\n    * 	1) hint--error\n    * 	2) hint--warning\n    * 	3) hint--info\n    * 	4) hint--success\n    *\n    */\n  /**\n    * Error\n    */\n  /**\n    * Warning\n    */\n  /**\n    * Info\n    */\n  /**\n    * Success\n    */\n  /**\n    * source: hint-always.scss\n    *\n    * Defines a persisted tooltip which shows always.\n    *\n    * Classes added:\n    * 	1) hint--always\n    *\n    */\n  /**\n    * source: hint-rounded.scss\n    *\n    * Defines rounded corner tooltips.\n    *\n    * Classes added:\n    * 	1) hint--rounded\n    *\n    */\n  /**\n    * source: hint-effects.scss\n    *\n    * Defines various transition effects for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--no-animate\n    * 	2) hint--bounce\n    *\n    */\n}\n.art-video-player [class*='hint--'] {\n  position: relative;\n  display: inline-block;\n  font-style: normal;\n  /**\n        * tooltip arrow\n        */\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:before,\n.art-video-player [class*='hint--']:after {\n  position: absolute;\n  -webkit-transform: translate3d(0, 0, 0);\n  -moz-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  -webkit-transition: 0.3s ease;\n  -moz-transition: 0.3s ease;\n  transition: 0.3s ease;\n  -webkit-transition-delay: 0ms;\n  -moz-transition-delay: 0ms;\n  transition-delay: 0ms;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  visibility: visible;\n  opacity: 1;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  -webkit-transition-delay: 100ms;\n  -moz-transition-delay: 100ms;\n  transition-delay: 100ms;\n}\n.art-video-player [class*='hint--']:before {\n  content: '';\n  position: absolute;\n  background: transparent;\n  border: 6px solid transparent;\n  z-index: 1000001;\n}\n.art-video-player [class*='hint--']:after {\n  background: #000000;\n  color: white;\n  padding: 8px 10px;\n  font-size: 12px;\n  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  line-height: 12px;\n  white-space: nowrap;\n}\n.art-video-player [class*='hint--'][aria-label]:after {\n  content: attr(aria-label);\n}\n.art-video-player [class*='hint--'][data-hint]:after {\n  content: attr(data-hint);\n}\n.art-video-player [aria-label='']:before,\n.art-video-player [aria-label='']:after,\n.art-video-player [data-hint='']:before,\n.art-video-player [data-hint='']:after {\n  display: none !important;\n}\n.art-video-player .hint--top-left:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top-right:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--bottom-left:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom-right:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--left:before {\n  border-left-color: #000000;\n}\n.art-video-player .hint--right:before {\n  border-right-color: #000000;\n}\n.art-video-player .hint--top:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top:before,\n.art-video-player .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--top:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top:hover:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--bottom:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom:before,\n.art-video-player .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--bottom:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom:hover:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--right:before {\n  margin-left: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--right:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--right:before,\n.art-video-player .hint--right:after {\n  left: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--right:hover:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--right:hover:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--left:before {\n  margin-right: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--left:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--left:before,\n.art-video-player .hint--left:after {\n  right: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--left:hover:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--left:hover:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--top-left:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-left:before,\n.art-video-player .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--top-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--top-left:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--top-right:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-right:before,\n.art-video-player .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--top-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--top-right:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-right:hover:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--bottom-left:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-left:before,\n.art-video-player .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--bottom-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--bottom-left:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--bottom-right:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-right:before,\n.art-video-player .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--bottom-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--bottom-right:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-right:hover:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--small:after,\n.art-video-player .hint--medium:after,\n.art-video-player .hint--large:after {\n  white-space: normal;\n  line-height: 1.4em;\n  word-wrap: break-word;\n}\n.art-video-player .hint--small:after {\n  width: 80px;\n}\n.art-video-player .hint--medium:after {\n  width: 150px;\n}\n.art-video-player .hint--large:after {\n  width: 300px;\n}\n.art-video-player [class*='hint--'] {\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:after {\n  text-shadow: 0 -1px 0px black;\n  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);\n}\n.art-video-player .hint--error:after {\n  background-color: #b34e4d;\n  text-shadow: 0 -1px 0px #592726;\n}\n.art-video-player .hint--error.hint--top-left:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top-right:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-left:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-right:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n.art-video-player .hint--warning:after {\n  background-color: #c09854;\n  text-shadow: 0 -1px 0px #6c5328;\n}\n.art-video-player .hint--warning.hint--top-left:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top-right:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-left:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-right:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n.art-video-player .hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n.art-video-player .hint--info:after {\n  background-color: #3986ac;\n  text-shadow: 0 -1px 0px #1a3c4d;\n}\n.art-video-player .hint--info.hint--top-left:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top-right:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-left:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-right:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n.art-video-player .hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n.art-video-player .hint--success:after {\n  background-color: #458746;\n  text-shadow: 0 -1px 0px #1a321a;\n}\n.art-video-player .hint--success.hint--top-left:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top-right:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-left:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-right:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n.art-video-player .hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n.art-video-player .hint--always:after,\n.art-video-player .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n.art-video-player .hint--always.hint--top:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--bottom:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--left:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--left:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--right:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--always.hint--right:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--rounded:after {\n  border-radius: 4px;\n}\n.art-video-player .hint--no-animate:before,\n.art-video-player .hint--no-animate:after {\n  -webkit-transition-duration: 0ms;\n  -moz-transition-duration: 0ms;\n  transition-duration: 0ms;\n}\n.art-video-player .hint--bounce:before,\n.art-video-player .hint--bounce:after {\n  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  -moz-transition: opacity 0.3s ease, visibility 0.3s ease, -moz-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n}\n.art-video-player .hint--no-shadow:before,\n.art-video-player .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n.art-video-player .hint--no-arrow:before {\n  display: none;\n}\n.art-video-player.art-mobile {\n  --art-bottom-gap: 10px;\n  --art-control-height: 38px;\n  --art-control-icon-scale: 1;\n  --art-state-size: 60px;\n  --art-settings-max-height: 180px;\n  --art-selector-max-height: 180px;\n  --art-indicator-scale: 1;\n  --art-control-opacity: 1;\n}\n.art-video-player.art-mobile .art-controls-left {\n  margin-left: calc(var(--art-padding) / -1);\n}\n.art-video-player.art-mobile .art-controls-right {\n  margin-right: calc(var(--art-padding) / -1);\n}\n";
+const css = ".art-video-player {\n  --art-theme: #f00;\n  --art-font-color: #fff;\n  --art-background-color: #000;\n  --art-text-shadow-color: rgba(0, 0, 0, 0.5);\n  --art-transition-duration: 0.2s;\n  --art-padding: 10px;\n  --art-border-radius: 3px;\n  --art-progress-height: 6px;\n  --art-progress-color: rgba(255, 255, 255, 0.25);\n  --art-progress-top-gap: 10px;\n  --art-hover-color: rgba(255, 255, 255, 0.25);\n  --art-loaded-color: rgba(255, 255, 255, 0.25);\n  --art-state-size: 80px;\n  --art-state-opacity: 0.8;\n  --art-bottom-height: 100px;\n  --art-bottom-offset: 20px;\n  --art-bottom-gap: 5px;\n  --art-highlight-width: 8px;\n  --art-highlight-color: rgba(255, 255, 255, 0.5);\n  --art-control-height: 46px;\n  --art-control-opacity: 0.75;\n  --art-control-icon-size: 36px;\n  --art-control-icon-scale: 1.1;\n  --art-volume-height: 120px;\n  --art-volume-handle-size: 14px;\n  --art-lock-size: 36px;\n  --art-indicator-scale: 0;\n  --art-indicator-size: 16px;\n  --art-fullscreen-web-index: 9999;\n  --art-settings-icon-size: 24px;\n  --art-settings-max-height: 300px;\n  --art-selector-max-height: 300px;\n  --art-contextmenus-min-width: 250px;\n  --art-subtitle-font-size: 20px;\n  --art-subtitle-gap: 5px;\n  --art-subtitle-bottom: 15px;\n  --art-subtitle-border: #000;\n  --art-widget-background: rgba(0, 0, 0, 0.85);\n  --art-tip-background: rgba(0, 0, 0, 0.7);\n  --art-scrollbar-size: 4px;\n  --art-scrollbar-background: rgba(255, 255, 255, 0.25);\n  --art-scrollbar-background-hover: rgba(255, 255, 255, 0.5);\n  --art-mini-progress-height: 2px;\n}\n.art-bg-cover {\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n.art-bottom-gradient {\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.art-video-player {\n  position: relative;\n  margin: 0 auto;\n  width: 100%;\n  height: 100%;\n  outline: 0;\n  zoom: 1;\n  padding: 0;\n  text-align: left;\n  direction: ltr;\n  font-size: 14px;\n  line-height: 1.3;\n  user-select: none;\n  box-sizing: border-box;\n  color: var(--art-font-color);\n  background-color: var(--art-background-color);\n  text-shadow: 0 0 2px var(--art-text-shadow-color);\n  font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, Roboto, Arial, sans-serif;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  -ms-touch-action: manipulation;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n}\n.art-video-player *,\n.art-video-player *::before,\n.art-video-player *::after {\n  box-sizing: border-box;\n}\n.art-video-player ::-webkit-scrollbar {\n  width: var(--art-scrollbar-size);\n  height: var(--art-scrollbar-size);\n}\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: var(--art-scrollbar-background);\n}\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: var(--art-scrollbar-background-hover);\n}\n.art-video-player img {\n  max-width: 100%;\n  vertical-align: top;\n}\n.art-video-player svg {\n  fill: var(--art-font-color);\n}\n.art-video-player a {\n  color: var(--art-font-color);\n  text-decoration: none;\n}\n.art-icon {\n  line-height: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.art-video-player.art-backdrop .art-contextmenus,\n.art-video-player.art-backdrop .art-info,\n.art-video-player.art-backdrop .art-settings,\n.art-video-player.art-backdrop .art-layer-auto-playback,\n.art-video-player.art-backdrop .art-selector-list,\n.art-video-player.art-backdrop .art-volume-inner {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: rgba(0, 0, 0, 0.75) !important;\n}\n.art-video {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n}\n.art-poster {\n  position: absolute;\n  inset: 0;\n  z-index: 11;\n  width: 100%;\n  height: 100%;\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  pointer-events: none;\n}\n.art-video-player .art-subtitle {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: absolute;\n  z-index: 20;\n  width: 100%;\n  padding: 0 5%;\n  text-align: center;\n  pointer-events: none;\n  gap: var(--art-subtitle-gap);\n  bottom: var(--art-subtitle-bottom);\n  font-size: var(--art-subtitle-font-size);\n  transition: bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n}\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: flex;\n}\n.art-video-player.art-control-show .art-subtitle {\n  bottom: calc(var(--art-controls-height, var(--art-control-height)) + var(--art-subtitle-bottom));\n}\n.art-danmuku {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  overflow: hidden;\n}\n.art-video-player .art-layers {\n  position: absolute;\n  inset: 0;\n  z-index: 40;\n  width: 100%;\n  height: 100%;\n  display: none;\n  pointer-events: none;\n}\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n.art-video-player.art-layer-show .art-layers {\n  display: flex;\n}\n.art-video-player .art-mask {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 50;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player .art-mask .art-state {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  transform: scale(2);\n  width: var(--art-state-size);\n  height: var(--art-state-size);\n  transition: all var(--art-transition-duration) ease;\n}\n.art-video-player.art-mask-show .art-state {\n  pointer-events: auto;\n  opacity: var(--art-state-opacity);\n  transform: scale(1);\n}\n.art-video-player.art-loading-show .art-state {\n  display: none;\n}\n.art-video-player .art-loading {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  inset: 0;\n  z-index: 70;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n.art-video-player.art-loading-show .art-mask {\n  display: none;\n}\n.art-video-player .art-bottom {\n  position: absolute;\n  inset: 0;\n  z-index: 60;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  opacity: 0;\n  overflow: hidden;\n  pointer-events: none;\n  padding: 0 var(--art-padding);\n  transition: all var(--art-transition-duration) ease;\n  background-size: 100% var(--art-bottom-height);\n  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.4), transparent);\n  background-repeat: repeat-x;\n  background-position: center bottom;\n}\n.art-video-player .art-bottom .art-controls,\n.art-video-player .art-bottom .art-progress {\n  transform: translateY(var(--art-bottom-offset));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player.art-control-show .art-bottom,\n.art-video-player.art-hover .art-bottom {\n  opacity: 1;\n}\n.art-video-player.art-control-show .art-bottom .art-controls,\n.art-video-player.art-hover .art-bottom .art-controls,\n.art-video-player.art-control-show .art-bottom .art-progress,\n.art-video-player.art-hover .art-bottom .art-progress {\n  transform: translateY(0);\n}\n.art-bottom .art-progress {\n  position: relative;\n  z-index: 0;\n  cursor: pointer;\n  pointer-events: auto;\n  padding-top: var(--art-progress-top-gap);\n  padding-bottom: var(--art-bottom-gap);\n}\n.art-bottom .art-progress .art-control-progress {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: var(--art-progress-height);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  display: flex;\n  align-items: center;\n  position: relative;\n  height: 50%;\n  width: 100%;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-hover-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-loaded-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  position: absolute;\n  inset: 0;\n  z-index: 20;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-theme);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  right: auto;\n  pointer-events: auto;\n  width: var(--art-highlight-width) !important;\n  transform: translateX(calc(var(--art-highlight-width) / -2));\n  background-color: var(--art-highlight-color);\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  z-index: 40;\n  left: 0;\n  border-radius: 50%;\n  width: var(--art-indicator-size);\n  height: var(--art-indicator-size);\n  transform: scale(var(--art-indicator-scale));\n  margin-left: calc(var(--art-indicator-size) / -2);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover {\n  transform: scale(1.2) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active {\n  transform: scale(1) !important;\n}\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  z-index: 50;\n  top: -25px;\n  left: 0;\n  padding: 3px 5px;\n  line-height: 1;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n}\n.art-bottom .art-progress .art-control-thumbnails {\n  transform-origin: bottom center;\n  transform: scale(0.5);\n  opacity: 0;\n  position: absolute;\n  bottom: calc(var(--art-bottom-gap) + 10px);\n  left: 0;\n  border-radius: var(--art-border-radius);\n  pointer-events: none;\n  background-color: var(--art-widget-background);\n  transition: transform var(--art-transition-duration) ease, opacity var(--art-transition-duration) ease;\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px -1px rgba(0, 0, 0, 0.2);\n}\n.art-bottom .art-progress:hover .art-control-progress .art-control-progress-inner {\n  height: 100%;\n}\n.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  transform: scale(1);\n}\n.art-progress-hover .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip,\n.art-progress-hover .art-bottom .art-progress .art-control-thumbnails {\n  transform: scale(1);\n  opacity: 1;\n}\n.art-video-player .art-controls {\n  position: relative;\n  z-index: 10;\n  pointer-events: auto;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  flex-shrink: 0;\n  height: auto;\n  min-height: var(--art-control-height);\n}\n.art-video-player .art-controls .art-controls-left,\n.art-video-player .art-controls .art-controls-right {\n  display: flex;\n  flex-wrap: wrap;\n  max-width: 100%;\n  min-height: var(--art-control-height);\n}\n.art-video-player .art-controls .art-controls-center {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  flex: 1;\n  height: 100%;\n  padding: 0 10px;\n}\n.art-video-player .art-controls .art-controls-right {\n  justify-content: flex-end;\n  margin-left: auto;\n}\n.art-video-player .art-controls .art-control {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  max-width: 100%;\n  cursor: pointer;\n  white-space: nowrap;\n  opacity: var(--art-control-opacity);\n  min-height: var(--art-control-height);\n  min-width: var(--art-control-height);\n  transition: opacity var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon {\n  height: var(--art-control-icon-size);\n  width: var(--art-control-icon-size);\n  transform: scale(var(--art-control-icon-scale));\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-video-player .art-controls .art-control .art-icon:active {\n  transform: scale(calc(var(--art-control-icon-scale) * 0.8));\n}\n.art-video-player .art-controls .art-control:hover {\n  opacity: 1;\n}\n.art-control-volume {\n  position: relative;\n}\n.art-control-volume .art-volume-panel {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  left: 0;\n  right: 0;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n  cursor: default;\n  opacity: 0;\n  visibility: hidden;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  width: var(--art-control-height);\n  height: var(--art-volume-height);\n  transition: opacity var(--art-transition-duration) ease, transform var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 10px;\n  height: 100%;\n  width: 100%;\n  padding: 10px 0 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider {\n  flex: 1;\n  width: 100%;\n  display: flex;\n  cursor: pointer;\n  position: relative;\n  justify-content: center;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  width: 2px;\n  border-radius: var(--art-border-radius);\n  overflow: hidden;\n  background-color: rgba(255, 255, 255, 0.25);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded {\n  position: absolute;\n  inset: 0;\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  background-color: var(--art-theme);\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator {\n  position: absolute;\n  width: var(--art-volume-handle-size);\n  height: var(--art-volume-handle-size);\n  margin-top: calc(var(--art-volume-handle-size) / -2);\n  flex-shrink: 0;\n  transform: scale(1);\n  border-radius: 100%;\n  background-color: var(--art-theme);\n  transition: transform var(--art-transition-duration) ease;\n}\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator {\n  transform: scale(0.9);\n}\n.art-control-volume:hover .art-volume-panel,\n.art-control-volume:focus-within .art-volume-panel {\n  opacity: 1;\n  visibility: visible;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player .art-notice {\n  display: none;\n  position: absolute;\n  inset: 0;\n  z-index: 80;\n  width: 100%;\n  height: 100%;\n  height: auto;\n  bottom: auto;\n  padding: var(--art-padding);\n  pointer-events: none;\n}\n.art-video-player .art-notice .art-notice-inner {\n  display: inline-flex;\n  padding: 5px;\n  line-height: 1;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-tip-background);\n}\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n.art-video-player .art-contextmenus {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 120;\n  padding: 5px 0;\n  border-radius: var(--art-border-radius);\n  font-size: 12px;\n  background-color: var(--art-widget-background);\n  min-width: var(--art-contextmenus-min-width);\n}\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  display: flex;\n  padding: 10px 15px;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 8px;\n}\n.art-video-player .art-contextmenus .art-contextmenu span:hover,\n.art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n.art-video-player .art-settings {\n  display: none;\n  flex-direction: column;\n  position: absolute;\n  z-index: 90;\n  left: auto;\n  overflow-y: auto;\n  overflow-x: hidden;\n  border-radius: var(--art-border-radius);\n  max-height: var(--art-settings-max-height);\n  right: var(--art-padding);\n  bottom: var(--art-controls-height, var(--art-control-height));\n  transition: all var(--art-transition-duration) ease;\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-settings .art-setting-panel {\n  display: none;\n  flex-direction: column;\n}\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: flex;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 5px;\n  padding: 0 5px;\n  cursor: pointer;\n  overflow: hidden;\n  transition: background-color var(--art-transition-duration) ease;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: var(--art-theme);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 1;\n  min-width: 0;\n  overflow: hidden;\n  gap: 5px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  height: var(--art-settings-icon-size);\n  width: var(--art-settings-icon-size);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-text {\n  min-width: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  min-width: 0;\n  max-width: 55%;\n  gap: 5px;\n  font-size: 12px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  min-width: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  color: rgba(255, 255, 255, 0.5);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-shrink: 0;\n  min-width: 32px;\n  height: 24px;\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  height: 3px;\n  width: 80px;\n  outline: none;\n  appearance: none;\n  background-color: rgba(255, 255, 255, 0.2);\n}\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid rgba(255, 255, 255, 0.1);\n}\n.art-video-player.art-setting-show .art-settings {\n  display: flex;\n}\n.art-video-player .art-info {\n  display: none;\n  position: absolute;\n  left: var(--art-padding);\n  top: var(--art-padding);\n  z-index: 100;\n  padding: 10px;\n  font-size: 12px;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-info .art-info-panel {\n  display: flex;\n  flex-direction: column;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item {\n  display: flex;\n  align-items: center;\n  gap: 5px;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-title {\n  width: 100px;\n  text-align: right;\n}\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-content {\n  width: 250px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  user-select: all;\n}\n.art-video-player .art-info .art-info-close {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  cursor: pointer;\n}\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n.art-hide-cursor * {\n  cursor: none !important;\n}\n.art-video-player[data-aspect-ratio] {\n  overflow: hidden;\n}\n.art-video-player[data-aspect-ratio] .art-video {\n  object-fit: fill;\n  box-sizing: content-box;\n}\n.art-fullscreen {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n}\n.art-fullscreen-web {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n  position: fixed;\n  inset: 0;\n  z-index: var(--art-fullscreen-web-index);\n  width: 100%;\n  height: 100%;\n}\n.art-mini-popup {\n  position: fixed;\n  z-index: 9999;\n  width: 320px;\n  height: 180px;\n  max-width: 100vw;\n  max-height: 100vh;\n  background: #000;\n  border-radius: var(--art-border-radius);\n  cursor: move;\n  user-select: none;\n  overflow: hidden;\n  transition: opacity 0.2s ease;\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);\n}\n.art-mini-popup svg {\n  fill: #fff;\n}\n.art-mini-popup .art-video {\n  pointer-events: none;\n}\n.art-mini-popup .art-mini-close {\n  position: absolute;\n  z-index: 20;\n  right: 10px;\n  top: 10px;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n}\n.art-mini-popup .art-mini-state {\n  position: absolute;\n  inset: 0;\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n  opacity: 0;\n  transition: opacity 0.2s ease;\n  background-color: rgba(0, 0, 0, 0.25);\n}\n.art-mini-popup .art-mini-state .art-icon {\n  opacity: 0.75;\n  cursor: pointer;\n  transform: scale(3);\n  pointer-events: auto;\n  transition: transform 0.2s ease;\n}\n.art-mini-popup .art-mini-state .art-icon:active {\n  transform: scale(2.5);\n}\n.art-mini-popup.art-mini-dragging {\n  opacity: 0.9;\n}\n.art-mini-popup:hover .art-mini-close,\n.art-mini-popup:focus-within .art-mini-close,\n.art-mini-popup:hover .art-mini-state,\n.art-mini-popup:focus-within .art-mini-state {\n  opacity: 1;\n}\n.art-mini-popup [role='button']:focus-visible {\n  outline: 2px solid #fff;\n  outline-offset: -2px;\n}\n.art-video-player[data-flip='horizontal'] .art-video {\n  transform: scaleX(-1);\n}\n.art-video-player[data-flip='vertical'] .art-video {\n  transform: scaleY(-1);\n}\n.art-video-player .art-layer-lock {\n  display: none;\n  justify-content: center;\n  align-items: center;\n  position: absolute;\n  top: 50%;\n  border-radius: 50%;\n  transform: translateY(-50%);\n  height: var(--art-lock-size);\n  width: var(--art-lock-size);\n  left: var(--art-padding);\n  background-color: var(--art-tip-background);\n}\n.art-video-player .art-layer-auto-playback {\n  display: none;\n  gap: 10px;\n  align-items: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  padding: 10px;\n  line-height: 1;\n  left: var(--art-padding);\n  bottom: calc(var(--art-controls-height, var(--art-control-height)) + var(--art-bottom-gap) + 10px);\n  background-color: var(--art-widget-background);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-close svg {\n  width: 15px;\n  height: 15px;\n  fill: var(--art-theme);\n}\n.art-video-player .art-layer-auto-playback .art-auto-playback-jump {\n  color: var(--art-theme);\n  cursor: pointer;\n}\n.art-video-player.art-lock .art-layer-lock {\n  display: flex;\n}\n.art-video-player.art-lock:not(.art-control-show) .art-layer-lock {\n  opacity: 0;\n  pointer-events: none;\n}\n.art-video-player.art-lock:not(.art-control-show) .art-layer-lock:focus-within {\n  opacity: 1;\n  pointer-events: auto;\n}\n.art-video-player.art-lock .art-subtitle {\n  bottom: var(--art-subtitle-bottom) !important;\n}\n.art-video-player.art-mini-progress-bar .art-bottom,\n.art-video-player.art-lock .art-bottom {\n  opacity: 1;\n  padding: 0;\n  background-image: none;\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-controls,\n.art-video-player.art-lock .art-bottom .art-controls,\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress,\n.art-video-player.art-lock .art-bottom .art-progress {\n  transform: translateY(calc(var(--art-controls-height, var(--art-control-height)) + var(--art-bottom-gap) + var(--art-progress-height) / 4));\n}\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress-indicator,\n.art-video-player.art-lock .art-bottom .art-progress-indicator {\n  display: none !important;\n}\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n.art-control-selector {\n  position: relative;\n  display: flex;\n  justify-content: center;\n}\n.art-control-selector .art-selector-list {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  position: absolute;\n  border-radius: var(--art-border-radius);\n  overflow-y: auto;\n  overflow-x: hidden;\n  opacity: 0;\n  visibility: hidden;\n  transform: translateY(10px);\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  max-height: var(--art-selector-max-height);\n  background-color: var(--art-widget-background);\n  transition: opacity var(--art-transition-duration) ease, transform var(--art-transition-duration) ease;\n}\n.art-control-selector .art-selector-list .art-selector-item {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  padding: 10px 15px;\n  flex-shrink: 0;\n  line-height: 1;\n}\n.art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: rgba(255, 255, 255, 0.1);\n}\n.art-control-selector .art-selector-list .art-selector-item:hover,\n.art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: var(--art-theme);\n}\n.art-control-selector:hover:not(.art-selector-dismissed) .art-selector-list,\n.art-control-selector.art-selector-open .art-selector-list {\n  opacity: 1;\n  visibility: visible;\n  transform: translateY(0);\n  pointer-events: auto;\n}\n.art-video-player {\n  /*! Hint.css - v2.7.0 - 2021-10-01\n    * https://kushagra.dev/lab/hint/\n    * Copyright (c) 2021 Kushagra Gour */\n  /*-------------------------------------*\\\n        HINT.css - A CSS tooltip library\n    \\*-------------------------------------*/\n  /**\n    * HINT.css is a tooltip library made in pure CSS.\n    *\n    * Source: https://github.com/chinchang/hint.css\n    * Demo: http://kushagragour.in/lab/hint/\n    *\n    */\n  /**\n    * source: hint-core.scss\n    *\n    * Defines the basic styling for the tooltip.\n    * Each tooltip is made of 2 parts:\n    * 	1) body (:after)\n    * 	2) arrow (:before)\n    *\n    * Classes added:\n    * 	1) hint\n    */\n  /**\n    * source: hint-position.scss\n    *\n    * Defines the positoning logic for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--top\n    * 	2) hint--bottom\n    * 	3) hint--left\n    * 	4) hint--right\n    */\n  /**\n    * set default color for tooltip arrows\n    */\n  /**\n    * top tooltip\n    */\n  /**\n    * bottom tooltip\n    */\n  /**\n    * right tooltip\n    */\n  /**\n    * left tooltip\n    */\n  /**\n    * top-left tooltip\n    */\n  /**\n    * top-right tooltip\n    */\n  /**\n    * bottom-left tooltip\n    */\n  /**\n    * bottom-right tooltip\n    */\n  /**\n    * source: hint-sizes.scss\n    *\n    * Defines width restricted tooltips that can span\n    * across multiple lines.\n    *\n    * Classes added:\n    * 	1) hint--small\n    * 	2) hint--medium\n    * 	3) hint--large\n    *\n    */\n  /**\n    * source: hint-theme.scss\n    *\n    * Defines basic theme for tooltips.\n    *\n    */\n  /**\n    * source: hint-color-types.scss\n    *\n    * Contains tooltips of various types based on color differences.\n    *\n    * Classes added:\n    * 	1) hint--error\n    * 	2) hint--warning\n    * 	3) hint--info\n    * 	4) hint--success\n    *\n    */\n  /**\n    * Error\n    */\n  /**\n    * Warning\n    */\n  /**\n    * Info\n    */\n  /**\n    * Success\n    */\n  /**\n    * source: hint-always.scss\n    *\n    * Defines a persisted tooltip which shows always.\n    *\n    * Classes added:\n    * 	1) hint--always\n    *\n    */\n  /**\n    * source: hint-rounded.scss\n    *\n    * Defines rounded corner tooltips.\n    *\n    * Classes added:\n    * 	1) hint--rounded\n    *\n    */\n  /**\n    * source: hint-effects.scss\n    *\n    * Defines various transition effects for the tooltips.\n    *\n    * Classes added:\n    * 	1) hint--no-animate\n    * 	2) hint--bounce\n    *\n    */\n}\n.art-video-player [class*='hint--'] {\n  position: relative;\n  display: inline-block;\n  font-style: normal;\n  /**\n        * tooltip arrow\n        */\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:before,\n.art-video-player [class*='hint--']:after {\n  position: absolute;\n  -webkit-transform: translate3d(0, 0, 0);\n  -moz-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  -webkit-transition: 0.3s ease;\n  -moz-transition: 0.3s ease;\n  transition: 0.3s ease;\n  -webkit-transition-delay: 0ms;\n  -moz-transition-delay: 0ms;\n  transition-delay: 0ms;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  visibility: visible;\n  opacity: 1;\n}\n.art-video-player [class*='hint--']:hover:before,\n.art-video-player [class*='hint--']:hover:after {\n  -webkit-transition-delay: 100ms;\n  -moz-transition-delay: 100ms;\n  transition-delay: 100ms;\n}\n.art-video-player [class*='hint--']:before {\n  content: '';\n  position: absolute;\n  background: transparent;\n  border: 6px solid transparent;\n  z-index: 1000001;\n}\n.art-video-player [class*='hint--']:after {\n  background: #000000;\n  color: white;\n  padding: 8px 10px;\n  font-size: 12px;\n  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  line-height: 12px;\n  white-space: nowrap;\n}\n.art-video-player [class*='hint--'][aria-label]:after {\n  content: attr(aria-label);\n}\n.art-video-player [class*='hint--'][data-hint]:after {\n  content: attr(data-hint);\n}\n.art-video-player [aria-label='']:before,\n.art-video-player [aria-label='']:after,\n.art-video-player [data-hint='']:before,\n.art-video-player [data-hint='']:after {\n  display: none !important;\n}\n.art-video-player .hint--top-left:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top-right:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--top:before {\n  border-top-color: #000000;\n}\n.art-video-player .hint--bottom-left:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom-right:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--bottom:before {\n  border-bottom-color: #000000;\n}\n.art-video-player .hint--left:before {\n  border-left-color: #000000;\n}\n.art-video-player .hint--right:before {\n  border-right-color: #000000;\n}\n.art-video-player .hint--top:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top:before,\n.art-video-player .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--top:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top:hover:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--bottom:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom:before,\n.art-video-player .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom:after {\n  -webkit-transform: translateX(-50%);\n  -moz-transform: translateX(-50%);\n  transform: translateX(-50%);\n}\n.art-video-player .hint--bottom:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom:hover:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--right:before {\n  margin-left: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--right:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--right:before,\n.art-video-player .hint--right:after {\n  left: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--right:hover:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--right:hover:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--left:before {\n  margin-right: -11px;\n  margin-bottom: -6px;\n}\n.art-video-player .hint--left:after {\n  margin-bottom: -14px;\n}\n.art-video-player .hint--left:before,\n.art-video-player .hint--left:after {\n  right: 100%;\n  bottom: 50%;\n}\n.art-video-player .hint--left:hover:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--left:hover:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--top-left:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-left:before,\n.art-video-player .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--top-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--top-left:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--top-right:before {\n  margin-bottom: -11px;\n}\n.art-video-player .hint--top-right:before,\n.art-video-player .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n.art-video-player .hint--top-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--top-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--top-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--top-right:hover:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--top-right:hover:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--bottom-left:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-left:before,\n.art-video-player .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-left:after {\n  -webkit-transform: translateX(-100%);\n  -moz-transform: translateX(-100%);\n  transform: translateX(-100%);\n}\n.art-video-player .hint--bottom-left:after {\n  margin-left: 12px;\n}\n.art-video-player .hint--bottom-left:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-left:hover:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--bottom-right:before {\n  margin-top: -11px;\n}\n.art-video-player .hint--bottom-right:before,\n.art-video-player .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n.art-video-player .hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n.art-video-player .hint--bottom-right:after {\n  -webkit-transform: translateX(0);\n  -moz-transform: translateX(0);\n  transform: translateX(0);\n}\n.art-video-player .hint--bottom-right:after {\n  margin-left: -12px;\n}\n.art-video-player .hint--bottom-right:hover:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--bottom-right:hover:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--small:after,\n.art-video-player .hint--medium:after,\n.art-video-player .hint--large:after {\n  white-space: normal;\n  line-height: 1.4em;\n  word-wrap: break-word;\n}\n.art-video-player .hint--small:after {\n  width: 80px;\n}\n.art-video-player .hint--medium:after {\n  width: 150px;\n}\n.art-video-player .hint--large:after {\n  width: 300px;\n}\n.art-video-player [class*='hint--'] {\n  /**\n        * tooltip body\n        */\n}\n.art-video-player [class*='hint--']:after {\n  text-shadow: 0 -1px 0px black;\n  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);\n}\n.art-video-player .hint--error:after {\n  background-color: #b34e4d;\n  text-shadow: 0 -1px 0px #592726;\n}\n.art-video-player .hint--error.hint--top-left:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top-right:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-left:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom-right:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n.art-video-player .hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n.art-video-player .hint--warning:after {\n  background-color: #c09854;\n  text-shadow: 0 -1px 0px #6c5328;\n}\n.art-video-player .hint--warning.hint--top-left:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top-right:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-left:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom-right:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n.art-video-player .hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n.art-video-player .hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n.art-video-player .hint--info:after {\n  background-color: #3986ac;\n  text-shadow: 0 -1px 0px #1a3c4d;\n}\n.art-video-player .hint--info.hint--top-left:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top-right:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-left:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom-right:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n.art-video-player .hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n.art-video-player .hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n.art-video-player .hint--success:after {\n  background-color: #458746;\n  text-shadow: 0 -1px 0px #1a321a;\n}\n.art-video-player .hint--success.hint--top-left:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top-right:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-left:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom-right:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n.art-video-player .hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n.art-video-player .hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n.art-video-player .hint--always:after,\n.art-video-player .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n.art-video-player .hint--always.hint--top:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top:after {\n  -webkit-transform: translateX(-50%) translateY(-8px);\n  -moz-transform: translateX(-50%) translateY(-8px);\n  transform: translateX(-50%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-left:after {\n  -webkit-transform: translateX(-100%) translateY(-8px);\n  -moz-transform: translateX(-100%) translateY(-8px);\n  transform: translateX(-100%) translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:before {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--top-right:after {\n  -webkit-transform: translateY(-8px);\n  -moz-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n.art-video-player .hint--always.hint--bottom:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom:after {\n  -webkit-transform: translateX(-50%) translateY(8px);\n  -moz-transform: translateX(-50%) translateY(8px);\n  transform: translateX(-50%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-left:after {\n  -webkit-transform: translateX(-100%) translateY(8px);\n  -moz-transform: translateX(-100%) translateY(8px);\n  transform: translateX(-100%) translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:before {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--bottom-right:after {\n  -webkit-transform: translateY(8px);\n  -moz-transform: translateY(8px);\n  transform: translateY(8px);\n}\n.art-video-player .hint--always.hint--left:before {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--left:after {\n  -webkit-transform: translateX(-8px);\n  -moz-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n.art-video-player .hint--always.hint--right:before {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--always.hint--right:after {\n  -webkit-transform: translateX(8px);\n  -moz-transform: translateX(8px);\n  transform: translateX(8px);\n}\n.art-video-player .hint--rounded:after {\n  border-radius: 4px;\n}\n.art-video-player .hint--no-animate:before,\n.art-video-player .hint--no-animate:after {\n  -webkit-transition-duration: 0ms;\n  -moz-transition-duration: 0ms;\n  transition-duration: 0ms;\n}\n.art-video-player .hint--bounce:before,\n.art-video-player .hint--bounce:after {\n  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  -moz-transition: opacity 0.3s ease, visibility 0.3s ease, -moz-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);\n}\n.art-video-player .hint--no-shadow:before,\n.art-video-player .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n.art-video-player .hint--no-arrow:before {\n  display: none;\n}\n.art-video-player.art-mobile {\n  --art-bottom-gap: 10px;\n  --art-control-height: 38px;\n  --art-control-icon-scale: 1;\n  --art-state-size: 60px;\n  --art-settings-max-height: 180px;\n  --art-selector-max-height: 180px;\n  --art-indicator-scale: 1;\n  --art-control-opacity: 1;\n}\n.art-video-player.art-mobile .art-controls-left {\n  margin-left: calc(var(--art-padding) / -1);\n}\n.art-video-player.art-mobile .art-controls-right {\n  margin-right: calc(var(--art-padding) / -1);\n}\n.art-video-player [tabindex]:focus-visible,\n.art-video-player input:focus-visible,\n.art-video-player button:focus-visible,\n.art-video-player a:focus-visible {\n  outline: 2px solid currentColor;\n  outline-offset: -2px;\n}\n.art-video-player.art-keyboard-focus :focus {\n  outline: 2px solid currentColor;\n  outline-offset: -2px;\n}\n.art-video-player.art-keyboard-focus:not(.art-lock) .art-bottom {\n  opacity: 1;\n}\n.art-video-player.art-keyboard-focus:not(.art-lock) .art-bottom .art-controls,\n.art-video-player.art-keyboard-focus:not(.art-lock) .art-bottom .art-progress {\n  transform: translateY(0);\n}\n";
 function parseSubtitle(buffer, option) {
   const text = new TextDecoder(option.encoding).decode(buffer);
   switch (option.type || getExt(option.url)) {

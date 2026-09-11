@@ -2,6 +2,11 @@ import type { Dictionary } from './publish'
 import { publishLanguage } from './publish'
 
 const zhCn = {
+  'Context Menu': '快捷菜单',
+  'Lock': '锁定',
+  'Back': '返回',
+  'Settings': '设置',
+  'Progress': '播放进度',
   'Video Info': '统计信息',
   'Close': '关闭',
   'Video Load Failed': '加载失败',

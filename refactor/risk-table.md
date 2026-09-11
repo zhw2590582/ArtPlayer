@@ -10,7 +10,7 @@
 | BASE-LIFE-03 | resolved / 已复现 | Async plugin registers its result after destroy | CORE-08 |
 | BASE-LIFE-04 | resolved / 已复现 | Destroying an instance twice unregisters a different live instance | CORE-04 |
 | BASE-LIFE-05 | resolved / 已复现 | Failed constructor leaves initialized markup/listeners until explicit probe cleanup | CORE-04 |
-| BASE-DOM-01 | open / 已复现 | 控件 Tab 不可达 | CORE-23, CORE-17 |
+| BASE-DOM-01 | resolved / 已复现 | 控件 Tab 不可达 | CORE-23, CORE-17 |
 | BASE-DOM-02 | resolved / 已复现 | 窄容器中控件裁切 | CORE-13, CORE-14 |
 | BASE-DEMO-01 | open / 源码/产物事实 | 旧 thumbnail 插件示例不对应当前 workspace 包 | SITE-01, EX-03 |
 | BASE-TYPE-01 | resolved / 已复现 | NodeNext ESM 默认导出与声明互操作失配 | ENG-04, CORE-07, PKG-CHAPTER-04 |

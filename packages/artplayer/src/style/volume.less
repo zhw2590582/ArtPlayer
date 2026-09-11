@@ -11,12 +11,13 @@
     text-align: center;
     cursor: default;
     opacity: 0;
+    visibility: hidden;
     transform: translateY(10px);
     pointer-events: none;
     bottom: var(--art-control-height);
     width: var(--art-control-height);
     height: var(--art-volume-height);
-    transition: all var(--art-transition-duration) ease;
+    transition: opacity var(--art-transition-duration) ease, transform var(--art-transition-duration) ease;
 
     .art-volume-inner {
       display: flex;
@@ -73,9 +74,11 @@
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     .art-volume-panel {
       opacity: 1;
+      visibility: visible;
       transform: translateY(0);
       pointer-events: auto;
     }

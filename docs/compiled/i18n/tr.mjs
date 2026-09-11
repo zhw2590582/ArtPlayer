@@ -4,7 +4,12 @@ function l(e, a) {
     i[e] = a;
   }
 }
-const n = {
+const t = {
+  "Context Menu": "Bağlam menüsü",
+  Lock: "Kilitle",
+  Back: "Geri",
+  Settings: "Ayarlar",
+  Progress: "Oynatma ilerlemesi",
   "Video Info": "Video Bilgisi",
   Close: "Kapat",
   "Video Load Failed": "Video Yüklenemedi",
@@ -42,7 +47,7 @@ const n = {
   AirPlay: "AirPlay",
   "AirPlay Not Available": "AirPlay Kullanılamıyor"
 };
-l("artplayer-i18n-tr", n);
+l("artplayer-i18n-tr", t);
 export {
-  n as default
+  t as default
 };

@@ -5,6 +5,11 @@ function h(n, t) {
   }
 }
 const i = {
+  "Context Menu": "Menu ngữ cảnh",
+  Lock: "Khóa",
+  Back: "Quay lại",
+  Settings: "Cài đặt",
+  Progress: "Tiến trình phát",
   "Video Info": "Thông tin video",
   Close: "Đóng",
   "Video Load Failed": "Tải video thất bại",

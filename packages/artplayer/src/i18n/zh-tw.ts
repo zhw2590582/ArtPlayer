@@ -2,6 +2,11 @@ import type { Dictionary } from './publish'
 import { publishLanguage } from './publish'
 
 const zhTw = {
+  'Context Menu': '快捷選單',
+  'Lock': '鎖定',
+  'Back': '返回',
+  'Settings': '設定',
+  'Progress': '播放進度',
   'Video Info': '統計訊息',
   'Close': '關閉',
   'Video Load Failed': '載入失敗',

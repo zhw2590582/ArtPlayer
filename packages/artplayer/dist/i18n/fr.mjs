@@ -1,10 +1,15 @@
-function l(e, i) {
+function i(e, t) {
   if (typeof window < "u") {
-    const t = window;
-    t[e] = i;
+    const r = window;
+    r[e] = t;
   }
 }
 const o = {
+  "Context Menu": "Menu contextuel",
+  Lock: "Verrouiller",
+  Back: "Retour",
+  Settings: "Paramètres",
+  Progress: "Progression de lecture",
   "Video Info": "Informations de la vidéo",
   Close: "Fermer",
   "Video Load Failed": "Téléchargement de la vidéo échoué",
@@ -42,7 +47,7 @@ const o = {
   AirPlay: "AirPlay",
   "AirPlay Not Available": "AirPlay non disponible"
 };
-l("artplayer-i18n-fr", o);
+i("artplayer-i18n-fr", o);
 export {
   o as default
 };

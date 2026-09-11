@@ -13,12 +13,13 @@
     overflow-y: auto;
     overflow-x: hidden;
     opacity: 0;
+    visibility: hidden;
     transform: translateY(10px);
     pointer-events: none;
     bottom: var(--art-control-height);
     max-height: var(--art-selector-max-height);
     background-color: var(--art-widget-background);
-    transition: all var(--art-transition-duration) ease;
+    transition: opacity var(--art-transition-duration) ease, transform var(--art-transition-duration) ease;
 
     .art-selector-item {
       .art-center();
@@ -38,9 +39,11 @@
     }
   }
 
-  &:hover {
+  &:hover:not(.art-selector-dismissed),
+  &.art-selector-open {
     .art-selector-list {
       opacity: 1;
+      visibility: visible;
       transform: translateY(0);
       pointer-events: auto;
     }

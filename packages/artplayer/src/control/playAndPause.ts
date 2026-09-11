@@ -1,5 +1,7 @@
 import type { ControlFactory, ControlOption } from './types'
+import { keyboardButton } from '../accessibility/button'
 import { appendElement } from '../component/dom'
+import { entryScope } from '../component/resources'
 import { setStyle, silencePromise, tooltip } from '../utils'
 import { controlEvents } from './resources'
 
@@ -12,6 +14,7 @@ export default function playAndPause(option: ControlOption): ControlFactory {
 
       const $play = appendElement($control, icons.play)
       const $pause = appendElement($control, icons.pause)
+      keyboardButton(entryScope($control), $control, () => (art.playing ? $pause : $play).click())
       tooltip($play, i18n.get('Play'))
       tooltip($pause, i18n.get('Pause'))
 
@@ -24,11 +27,13 @@ export default function playAndPause(option: ControlOption): ControlFactory {
       })
 
       function showPlay() {
+        $control.setAttribute('aria-label', i18n.get('Play'))
         setStyle($play, 'display', 'flex')
         setStyle($pause, 'display', 'none')
       }
 
       function showPause() {
+        $control.setAttribute('aria-label', i18n.get('Pause'))
         setStyle($play, 'display', 'none')
         setStyle($pause, 'display', 'flex')
       }

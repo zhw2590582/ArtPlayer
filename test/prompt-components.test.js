@@ -14,7 +14,14 @@ const { Info, Loading, Mask, Emitter, beginLifecycle, getScope, destroyInstance 
 })
 
 function fixture(t) {
-  class Element {
+  const document = { activeElement: null, body: null }
+  class Element extends EventTarget {
+    ownerDocument = document
+    attributes = new Map()
+    setAttribute(key, value) { this.attributes.set(key, String(value)) }
+    getAttribute(key) { return this.attributes.get(key) }
+    hasAttribute(key) { return this.attributes.has(key) }
+    contains(node) { return node === this || this.children.some(child => child.contains(node)) }
     style = {}
     children = []
     textContent = ''
@@ -51,7 +58,8 @@ function fixture(t) {
   const listeners = new Set()
   const art = Object.assign(new Emitter(), {
     constructor: { INFO_LOOP_TIME: 100 },
-    template: { $player: player, $infoPanel: panel, $infoClose: new Element(), $video: { currentTime: 1.234, src: 'first' }, $loading: new Element(), $state: new Element() },
+    template: { $player: player, $info: new Element(), $infoPanel: panel, $infoClose: new Element(), $video: { currentTime: 1.234, src: 'first' }, $loading: new Element(), $state: new Element() },
+    i18n: { get: key => key },
     icons: { loading: new Element(), state: new Element(), error: new Element() },
     play: () => Promise.resolve(),
   })

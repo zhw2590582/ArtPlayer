@@ -57,6 +57,7 @@ export interface MiniEvents {
 
 export interface MiniHost extends SubscriptionHost<MiniEvents> {
   template: { $player: HTMLElement, $video: HTMLElement, $mini?: HTMLElement }
+  i18n: { get: (key: string) => string }
   icons: { close: HTMLElement, play: HTMLElement, pause: HTMLElement }
   storage: { get: (key: string) => unknown, set: (key: string, value: number) => unknown }
   state: string

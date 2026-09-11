@@ -275,10 +275,15 @@ declare namespace ArtplayerDefinitions {
   }
   export type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | 'fr' | 'id' | 'ru' | 'tr' | 'ar' | 'vi' | (string & Record<never, never>)
   export interface I18nValue {
+    'Context Menu'?: string
+    'Lock'?: string
     'Video Info': string
     'Close': string
     'Video Load Failed': string
     'Volume': string
+    'Progress'?: string
+    'Back'?: string
+    'Settings'?: string
     'Play': string
     'Pause': string
     'Rate': string

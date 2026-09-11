@@ -1,6 +1,7 @@
 import type { ContextmenuFactory, ContextmenuOption } from './types'
 import { controlEvents } from '../control/resources'
 import { inverseClass, query } from '../utils'
+import { keyboardChoices, updateChoices } from './choices'
 
 export default function playbackRate(option: ContextmenuOption): ContextmenuFactory {
   return (art) => {
@@ -12,10 +13,11 @@ export default function playbackRate(option: ContextmenuOption): ContextmenuFact
     const html = PLAYBACK_RATE.map(
       item => `<span data-value="${item}">${item === 1 ? i18n.get('Normal') : item.toFixed(1)}</span>`,
     ).join('')
+    const label = i18n.get('Play Speed')
 
     return {
       ...option,
-      html: `${i18n.get('Play Speed')}: ${html}`,
+      html: `${label}: ${html}`,
       click: (contextmenu, event) => {
         const value = event.target instanceof HTMLElement ? event.target.dataset.value : undefined
         if (value) {
@@ -28,12 +30,14 @@ export default function playbackRate(option: ContextmenuOption): ContextmenuFact
         const $default = query('[data-value="1"]', $panel)
         if ($default)
           inverseClass($default, 'art-current')
+        keyboardChoices($panel, label)
         on('video:ratechange', () => {
           const $current = Array.from($panel.querySelectorAll('span')).find(
             item => Number(item.dataset.value) === art.playbackRate,
           )
           if ($current) {
             inverseClass($current, 'art-current')
+            updateChoices($panel)
           }
         })
       },

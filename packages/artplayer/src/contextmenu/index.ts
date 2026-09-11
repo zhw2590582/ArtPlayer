@@ -1,13 +1,16 @@
 import type { ContextmenuHost } from './types'
-import { ownEntry } from '../component/resources'
+import { ownEntry, releaseEntry } from '../component/resources'
 import { controlEvents } from '../control/resources'
-import { getRect, includeFromEvent, isMobile, setStyles } from '../utils'
+import { isClosing } from '../lifecycle/instance'
+import { includeFromEvent, isMobile } from '../utils'
 import Component from '../utils/component'
 import aspectRatio from './aspectRatio'
 import close from './close'
 import flip from './flip'
 import info from './info'
+import { contextmenuKeyboard } from './keyboard'
 import playbackRate from './playbackRate'
+import { positionContextmenu } from './position'
 import version from './version'
 
 export default class Contextmenu extends Component<ContextmenuHost> {
@@ -82,32 +85,22 @@ export default class Contextmenu extends Component<ContextmenuHost> {
       this.add(option.contextmenu[index]!)
     }
 
+    if (isClosing(this.art))
+      return
+    releaseEntry($contextmenu)
+    const scope = ownEntry(this.art, $contextmenu)
+    const open = (x: number, y: number) => {
+      this.show = true
+      if (!scope.closed && !isClosing(this.art) && this.show)
+        positionContextmenu(this.art, x, y)
+    }
+    const keyboard = contextmenuKeyboard(this, open)
+
     proxy($player, 'contextmenu', (event) => {
-      if (!this.art.constructor.CONTEXTMENU)
+      if (!keyboard.pointer(event))
         return
       event.preventDefault()
-
-      this.show = true
-
-      const mouseX = event.clientX
-      const mouseY = event.clientY
-      const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = getRect($player)
-      const { height: mHeight, width: mWidth } = getRect($contextmenu)
-      let menuLeft = mouseX - cLeft
-      let menuTop = mouseY - cTop
-
-      if (mouseX + mWidth > cLeft + cWidth) {
-        menuLeft = cWidth - mWidth
-      }
-
-      if (mouseY + mHeight > cTop + cHeight) {
-        menuTop = cHeight - mHeight
-      }
-
-      setStyles($contextmenu, {
-        top: `${menuTop}px`,
-        left: `${menuLeft}px`,
-      })
+      open(event.clientX, event.clientY)
     })
 
     proxy($player, 'click', (event) => {
