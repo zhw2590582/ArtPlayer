@@ -1,5 +1,20 @@
 # 进度与证据
 
+## 当前实施：Chapter-05 组合验证与长标题修复检查点
+
+正式 main/legacy 的章节基础及新旧核心/插件组合各 102 项通过，完整 CI 599 项通过。
+新增覆盖清晰度/缩略图、窄屏长标题、真实元素与网页全屏，以及 390px 可信触摸模拟。
+长标题超出进度条的显示缺陷已通过 CSS 修复，完整文本与公开接口不变；截图已查看。
+
+保留菜单交互前提修正的失败记录、旧核心 WebKit 位置归零观察。一个早期 WebKit
+quality restart 等待超时的确切原因尚未证明，CHAPTER-TIMING-01 保持 open；后续
+两种产物通过不能关闭它。触摸模拟没有替代手机真机。Chapter-05 仍 doing，尚未执行 06。
+
+当前 217 项：70 done、3 doing、144 todo。Audio-05、HLS-SDK-01 的风险仍保留。
+本批为本地 checkpoint，未推送或发布。后续优先推进独立包的源码/契约迁移，并在有效
+环境中接续开放的媒体/设备验证。详见 [本次变更](changes/2026-09-12-PKG-CHAPTER-05-combinations.md)
+和 [冻结证据](baselines/chapter-combinations-checkpoint.json)。
+
 ## 当前实施：Audio-05 恢复修复与真实缓冲检查点
 
 已修复旧核心时间零 seek 后候选音频漏恢复，严格 TS 与公开接口不变；三格式 Node 97 项、

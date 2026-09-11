@@ -133,3 +133,5 @@
 | CORE-SOURCE-01 | resolved / 已复现 | 候选核心连续切源丢失原播放意图 | CORE-24 |
 | AUDIO-RESUME-01 | resolved / 已复现 | WebKit 旧核心切源后候选音频保持暂停 | PKG-AUDIO-05 |
 | AUDIO-BUFFER-01 | open / 已复现 | Windows WebKit 原生媒体无法在受限响应下推进至真实缓冲 | PKG-AUDIO-05 |
+| CHAPTER-LAYOUT-01 | resolved / 已复现 | 长章节标题超出窄播放器进度条宽度 | PKG-CHAPTER-05 |
+| CHAPTER-TIMING-01 | open / 已复现 | Windows WebKit 清晰度切换曾在等待窗口内未见 restart，稍后状态恢复 | PKG-CHAPTER-05 |

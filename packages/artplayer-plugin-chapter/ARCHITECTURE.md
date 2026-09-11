@@ -36,6 +36,9 @@ attributes. A successful update adds the historical player class, then emits
 `setBar('loaded', art.loaded || 0)` synchronously. Progress events update the three
 bars; a shared boundary belongs to the later chapter for hover title selection,
 matching the old traversal order. Titles use textContent, never caller HTML.
+Title boxes are limited to the progress container width, including their padding,
+and display an ellipsis for long text. Full textContent and data-title remain intact.
+The renderer still clamps horizontal position; CSS owns text clipping, not normalization.
 
 `update({})` and non-array chapter input clear the view. Invalid types throw
 TypeError and invalid time ranges throw Error with the existing messages. NaN and
@@ -82,6 +85,17 @@ For time semantics, start at chapters.ts and run normalization plus browser test
 For UI, start at progress.ts/style.less and verify real mouse interaction. For event
 or cleanup changes, start at index.ts and rerun early destroy/multiple-instance tests.
 Any public declaration change also needs new/old compiler and tarball consumers.
+
+`test/browser/chapter-combinations.spec.js` adds old/new core and plugin combinations
+with quality selection, actual thumbnail hover, narrow titles, element fullscreen,
+web fullscreen reparenting and trusted taps. Quality menus must finish opening before
+selection and lose pointer/focus before progress hover. The published core hides its
+menu with opacity/pointer-events; it does not use the candidate visibility rule.
+The published core also has a recorded Windows WebKit quality-position reset; keep
+that historical observation separate from the candidate's position-restoration assertion.
+The touch cases use a 390px viewport, hasTouch and an iPhone user agent on the desktop
+engines. They validate the mobile branch and trusted input, not an actual iPhone.
+See refactor/changes/2026-09-12-PKG-CHAPTER-05-combinations.md for current evidence and gaps.
 
 The public declaration remains available to old compilers and exports Chapters,
 Option and Result as types. Modern import/require conditions select format-specific

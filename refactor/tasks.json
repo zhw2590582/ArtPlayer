@@ -1351,11 +1351,14 @@
         "PKG-CHAPTER-04",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "M",
       "deliverable": "chapter + quality/thumbnail、移动和全屏进度场景",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-CHAPTER-05-combinations.md",
+        "baselines/chapter-combinations-checkpoint.json"
+      ]
     },
     {
       "id": "PKG-CHAPTER-06",

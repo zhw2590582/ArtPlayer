@@ -2791,6 +2791,43 @@
       ],
       "compatibleResolution": "保留真实 waiting 断言；使用独立原生对照和其他实际支持环境/输入继续验证，不将没有播放推进的诊断当成缓冲通过，也不凭此改变插件 API 或否定真实 Safari 支持。",
       "closureCriteria": "受影响的缓冲/恢复得到真实媒体证据；与原生能力和测试夹具差异分开，发布环境的剩余范围经显式处理。"
+    },
+    {
+      "id": "CHAPTER-LAYOUT-01",
+      "title": "长章节标题超出窄播放器进度条宽度",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-CHAPTER-05"
+      ],
+      "evidence": [
+        "refactor/baselines/chapter-combinations-checkpoint.json",
+        "test/browser/chapter-combinations.spec.js"
+      ],
+      "compatibleResolution": "样式限制最大宽度并省略溢出显示，保留完整 textContent/data-title、DOM hooks 和原有章节数据语义。",
+      "closureCriteria": "两种核心三引擎窄屏候选标题不越界，历史溢出观察和完整文本保留断言通过。",
+      "resolutionEvidence": [
+        "refactor/baselines/chapter-combinations-checkpoint.json",
+        "packages/artplayer-plugin-chapter/src/style.less",
+        "packages/artplayer-plugin-chapter/ARCHITECTURE.md"
+      ],
+      "resolutionRationale": "先复现 6 个候选失败并保留截图，CSS 修复后正式 main/legacy 分别 12 个长标题用例通过（各含 6 历史溢出观察）。实际浏览器输入与产物指纹已冻结，API/类型未改变。"
+    },
+    {
+      "id": "CHAPTER-TIMING-01",
+      "title": "Windows WebKit 清晰度切换曾在等待窗口内未见 restart，稍后状态恢复",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-CHAPTER-05"
+      ],
+      "evidence": [
+        "refactor/baselines/chapter-combinations-checkpoint.json",
+        "test/browser/chapter-combinations.spec.js",
+        "refactor/changes/2026-09-12-PKG-CHAPTER-05-combinations.md"
+      ],
+      "compatibleResolution": "记录原生事件和绝对/相对时序，进一步区分媒体驱动耗时、夹具和核心源操作；未证明原因前不改核心、不扩大超时或重复到绿灯。",
+      "closureCriteria": "确认先前超时的来源并有对应可靠回归；后续单次通过不足以关闭。"
     }
   ]
 }
