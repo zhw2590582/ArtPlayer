@@ -151,8 +151,12 @@ devices and installed package acceptance remain separate release gates.
 `dash-sdk.spec.js` now separately loads hash-pinned npm dash.js 4.5.2/5.2.1 and local
 multi-quality/multi-audio DASH segments. It covers decoding, explicit update after
 external selection, source topology replacement, retained callbacks and SDK ownership.
-It also includes a native SDK control without an ArtPlayer instance. Early SDK 4.5.2
-paused-seek stalls remain open; later passes do not resolve them. Unsupported MSE is
+It also includes a native SDK control without an ArtPlayer instance. SDK 4.5.2
+paused-seek stalls reproduce independently: its empty buffer-clear path preserves
+stale buffer metrics and can prevent further scheduling. A diagnostic backport of
+the SDK 5 buffer-level refresh confirms the cause; no production workaround ships.
+See the [diagnosis](../../refactor/changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md).
+The compatibility risk remains open. Unsupported MSE is
 recorded as a playback capability gap, not acceptance. SDK event tests also cover
 external selections without explicit update, same-SDK source replacement, asynchronous
 formatter error/recovery, and actual setting clicks during SDK refresh.

@@ -1,5 +1,17 @@
 # 进度与证据
 
+## 当前实施：DASH-05 暂停 seek 根因已定位
+
+真实 SourceBuffer、SDK seekTime/缓冲事件和处理器状态表明，SDK 4.5.2 在空裁剪分支未更新
+暂停前缓冲量，调度器继续按旧值阻止下载。不创建 ArtPlayer 的稳定暂停用例在 Chromium/
+Firefox 都复现；失败后合成一次 timeupdate 能恢复，测试仍保留失败。SDK 5.2.1 原生用例
+两边通过；将其缓冲刷新移入 SDK 4 的单分支诊断补丁后，原生/新旧组合 10 项通过。
+
+本批只增加诊断测试和证据，没有向生产注入事件、修补 SDK、增加依赖或改变产物。
+DASH-SEEK-01 根因已知但兼容处置尚未完成，仍 open。DASH-05 仍 doing，217 项仍为
+74 done、4 doing、139 todo。详见 [根因记录](changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md)
+和 [执行证据](baselines/dash-seek-diagnosis.json)。其余包的独立源码迁移可继续，发布门槛不降低。
+
 ## 当前实施：DASH-05 SDK 事件刷新源码改造
 
 新增第六个严格 TS 模块 sdk-events：按 SDK 质量/音轨/流事件合并刷新菜单，保留同步

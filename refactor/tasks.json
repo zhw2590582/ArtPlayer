@@ -2070,7 +2070,9 @@
         "changes/2026-09-12-PKG-DASH-05-sdk-types.md",
         "baselines/dash-sdk-types-validation.json",
         "changes/2026-09-12-PKG-DASH-05-sdk-events.md",
-        "baselines/dash-sdk-events-validation.json"
+        "baselines/dash-sdk-events-validation.json",
+        "changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md",
+        "baselines/dash-seek-diagnosis.json"
       ]
     },
     {

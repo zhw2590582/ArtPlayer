@@ -1,0 +1,3705 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DASH-05",
+  "risk": "DASH-SEEK-01",
+  "sourceCommit": "a9cf50bc",
+  "status": "root cause identified; production mitigation and release acceptance remain open",
+  "inputs": [
+    {
+      "file": "test/browser/dash-sdk.spec.js",
+      "sha256LF": "51a11287230b7b8a2f392c939cda1c2f8da356208dc8de5966e8cb2c4c69999f"
+    },
+    {
+      "file": "test/browser/dash-buffer-observer.js",
+      "sha256LF": "37d8e8ab67155a99a233afa35a82da777fdfb3f691e47a4b0016a46b09b3daa0"
+    }
+  ],
+  "sources": [
+    {
+      "version": "4.5.2",
+      "archiveSHA256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+      "member": "package/dist/dash.all.debug.js",
+      "sha256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+      "methodLine": 41184,
+      "emptyBranchRefreshesLevel": false
+    },
+    {
+      "version": "5.2.1",
+      "archiveSHA256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+      "member": "package/dist/modern/umd/dash.all.debug.js",
+      "sha256": "94a3c83e8c78da6f4f29ecca2403d6c4114c7edca79349a092e7df87c5d9aa53",
+      "methodLine": 44777,
+      "emptyBranchRefreshesLevel": true
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.js",
+      "bytes": 7410,
+      "sha256": "a594009be5c17406844f817c5a79930c6ed60add4a5ef0578783f163a1bae012",
+      "unchangedFrom": "a9cf50bc"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.legacy.js",
+      "bytes": 7881,
+      "sha256": "b00a837a99f7a7cccd415af335cbf0c68f1e4267fa7cfd8d91e945e3dc634151",
+      "unchangedFrom": "a9cf50bc"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.mjs",
+      "bytes": 14070,
+      "sha256": "0c5a7e4d84e9641778e0a22ff9c78db9bd4ac2f08f51358519443046a528fb93",
+      "unchangedFrom": "a9cf50bc"
+    }
+  ],
+  "browser": [
+    {
+      "name": "buffers",
+      "scope": "Native SourceBuffer and SDK metric observations",
+      "stats": {
+        "startTime": "2026-09-11T22:36:15.479Z",
+        "duration": 30924.601,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "published core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.408181,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.765,
+              "audio": 3.603
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3567.4000000059605,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.434266,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.774,
+              "audio": 3.611
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3760.5,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "failed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6,
+            "paused": false,
+            "seeking": true,
+            "readyState": 1,
+            "video": [
+              [
+                1.984,
+                5.999999
+              ]
+            ],
+            "levels": {
+              "video": 2.975,
+              "audio": 4.975
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    5.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3534.5999999940395,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.437749,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.784,
+              "audio": 3.601
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4081.199999988079,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.359367,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.786,
+              "audio": 1.786
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3633.5,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.375507,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.75,
+              "audio": 3.713
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4006,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 7.166897,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                10
+              ]
+            ],
+            "levels": {
+              "video": 2.916,
+              "audio": 4.916
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    10
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    12
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4112,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.3752,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.748,
+              "audio": 3.714
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4128,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.333826,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.75,
+              "audio": 3.713
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4211,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 7.125407,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                10
+              ]
+            ],
+            "levels": {
+              "video": 3.208,
+              "audio": 5.208
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    10
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    12
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3218,
+              "time": 6
+            }
+          ],
+          "syntheticRecovery": null
+        }
+      ],
+      "evidence": [
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/failure-state.json",
+          "bytes": 31613,
+          "sha256": "ab0e30676cb639a000d315d41bde841ad2dd1141cdd9acaa06617c3c850a507a"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/report.json",
+          "bytes": 1388170,
+          "sha256": "da752ed6840627432c648f99289020bc8ae7345b60e960ea99292a079dd24e84"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/.last-run.json",
+          "bytes": 96,
+          "sha256": "588ae594105f2a249eccafe9a431e03cde8b797116851e13f027f3e68af66397"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 4024477,
+          "sha256": "de9a8de2c28b549fe24a588acf1b771948fadfe2c0f4e54b15953a0a58862d58"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3518902,
+          "sha256": "3c2711532beb0cdbaea9b0816c939ed8cbb5675a4932c273e48d9b7f6f8b5824"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/error-context.md",
+          "bytes": 2810,
+          "sha256": "1126e51a0f974d03562e46238bbff892a78f8ec33a1c2767ab25e12775ca06ee"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/test-failed-1.png",
+          "bytes": 81060,
+          "sha256": "c207eb4365f3ea45dc7c1ac4a06157098523ae8279e40e8988c2b80ceb9d715d"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 7378293,
+          "sha256": "13f1388223c475f50602c7541bb0250ea0439c69343bbe52671a6b532e92dec6"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3345774,
+          "sha256": "2906a604f98901f7b3a761081237e8b7560c3de8ed4ffc4ae15a41e6468dca71"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1571039,
+          "sha256": "c7d3fe9c5a6691d50902463c1fa17d35d166087711964b695434c8e7f96aa4a5"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 2000414,
+          "sha256": "7956fec614aba608b9e7344be3a4554620d365986f34dbc4e4fb28f22e5597bf"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3953322,
+          "sha256": "f55d85371a25cbee6a4524eb0073f32e0cd4ac7a7514c495ece1747317a236c5"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 4091893,
+          "sha256": "ce60f8ed99975a089eb48b212f580bb2a14f4f8ffe3dc341cfb3e4f2d62d2509"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3524426,
+          "sha256": "b21126f77ac701bdb9029f1455312191c983eeb56cbe8f1b1cdef270143d1815"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-buffers/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3316923,
+          "sha256": "66e5e751fdd5ae63924765f4ccf2c3cfe57bee917a0c70923ccb6de7f65dd48e"
+        }
+      ]
+    },
+    {
+      "name": "target",
+      "scope": "Added SDK seekTime and matched native pre-seek playback/track state",
+      "stats": {
+        "startTime": "2026-09-11T22:39:05.265Z",
+        "duration": 27174.761000000002,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "published core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.400397,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.776,
+              "audio": 3.639
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3582.600000023842,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.39478,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.78,
+              "audio": 3.616
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3981.7999999821186,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.440784,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.784,
+              "audio": 3.593
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3566.2999999821186,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.416456,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.786,
+              "audio": 3.593
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4014.199999988079,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.357378,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.78,
+              "audio": 1.78
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3668.5999999940395,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.417065,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.748,
+              "audio": 3.63
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4047,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.24906,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 2,
+              "audio": 3.839
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4159,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.417128,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.708,
+              "audio": 3.672
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4160,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.667146,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                10
+              ]
+            ],
+            "levels": {
+              "video": 3.46,
+              "audio": 5.375
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    10
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    12
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4013,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.337044,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.75,
+              "audio": 1.75
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4021,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        }
+      ],
+      "evidence": [
+        {
+          "file": "refactor/.cache/dash05-seek-target/report.json",
+          "bytes": 1491641,
+          "sha256": "e056e077996666dadb1f2c4448f71408891777b902d9637202f0cbd1d028f135"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3882084,
+          "sha256": "f8c36576dfeec14532840ef6f470792b12540bdfa37913bfcca9aa692434abfe"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3469509,
+          "sha256": "494af31e7bab29db4ed80a42d3cd7ca951cd506533e2dda96f5135a8e3ffafb6"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3610196,
+          "sha256": "9dfe2d751bcd9cac716db35c7e8b45427afd6b1402be3904520f90dea233cdd0"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3081639,
+          "sha256": "ddde7e467c1a6e259016ef003819d0054de416b0e447fe02b8bcafcc001b1d89"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1583495,
+          "sha256": "040ad28b2dff9edd80f267fac120c342e665a7b4793aa7dba8b3de0e3c98f1c1"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 1766986,
+          "sha256": "eae44077cc10a3fe8fe3ee8bda4996b6ebc2c4c815a862bd0990cbbabfbc9f96"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3662832,
+          "sha256": "1a1ee5683a2858974ecc69c60dc87d44d1d38890438d1ace4706771333d6e290"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3073013,
+          "sha256": "ddd75dda700a7ab15fbf742eed8b99c313bc3db61463f08db07e561e64433381"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3565548,
+          "sha256": "757621c79307557cf3e67f9a342421d07323e4b30cf0019c796267e9b672aad7"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-target/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3186597,
+          "sha256": "461c13e2f91c55c4188a66f40efa7a86566424d56a320667b2897d7beaf2a91a"
+        }
+      ]
+    },
+    {
+      "name": "processors",
+      "scope": "Added timeupdate, buffer-level events and processor state",
+      "stats": {
+        "startTime": "2026-09-11T22:41:56.779Z",
+        "duration": 35714.394,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "published core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "failed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6,
+            "paused": false,
+            "seeking": true,
+            "readyState": 1,
+            "video": [
+              [
+                1.984,
+                5.999999
+              ]
+            ],
+            "levels": {
+              "video": 2.956,
+              "audio": 4.956
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 2.956085,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": false
+              },
+              {
+                "type": "audio",
+                "level": 4.956085,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    5.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3541.300000011921,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.391721,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.787,
+              "audio": 3.618
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.7866429999999998,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.6181140000000003,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3906.5,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "failed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6,
+            "paused": false,
+            "seeking": true,
+            "readyState": 1,
+            "video": [
+              [
+                1.984,
+                5.999999
+              ]
+            ],
+            "levels": {
+              "video": 2.958,
+              "audio": 4.958
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 2.958488,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": false
+              },
+              {
+                "type": "audio",
+                "level": 4.958488,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    5.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3555.600000023842,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.433495,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.782,
+              "audio": 3.581
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.782311,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.5812170000000005,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4045.699999988079,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.358472,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.786,
+              "audio": 1.786
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.7855289999999995,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 1.7855289999999995,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3644.800000011921,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.37519,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.709,
+              "audio": 3.715
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.7092289999999997,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.714562,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4097,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 7.208875,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                10
+              ]
+            ],
+            "levels": {
+              "video": 2.916,
+              "audio": 4.916
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 2.9162229999999996,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 4.916223,
+                "complete": true,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    10
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    12
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4061,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.37546,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.75,
+              "audio": 3.672
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.7496039999999997,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.671734,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4107,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.625234,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                10
+              ]
+            ],
+            "levels": {
+              "video": 3.416,
+              "audio": 5.416
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 3.416221,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 5.416221,
+                "complete": true,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    10
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    12
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3992,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.375162,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.749,
+              "audio": 3.671
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.749383,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.6713890000000005,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3981,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        }
+      ],
+      "evidence": [
+        {
+          "file": "refactor/.cache/dash05-seek-processors/failure-1.json",
+          "bytes": 70510,
+          "sha256": "65ccd76c89af9d663601e1e0c1cc0ed9777de206e53358592a81af5d344d1cbe"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/failure-2.json",
+          "bytes": 70360,
+          "sha256": "e85212df420a9f7854340f004bbad1418b2f4c0c9669ace85fde679bc8fc4d25"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/report.json",
+          "bytes": 1599305,
+          "sha256": "2330111e353e5bb6f7c5fd532b79fbe717f9d48f56cdd526d744b266562537c0"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/.last-run.json",
+          "bytes": 145,
+          "sha256": "ed5339338a98f1795ffeec9a7fddb0d074bd7bc42eaf852630c3f68dd63bf4c9"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 4049494,
+          "sha256": "48ae0e430cc4797a6cc36ada570bef71aec5a756ed05acd41c677568ceb3ebe2"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3480144,
+          "sha256": "cc4c21ee0719d545f21a6a119966c84effe134c77345ed80bdb444574e61f1c2"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/error-context.md",
+          "bytes": 2810,
+          "sha256": "1126e51a0f974d03562e46238bbff892a78f8ec33a1c2767ab25e12775ca06ee"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/test-failed-1.png",
+          "bytes": 80172,
+          "sha256": "3a1ce97130c1f0da97b4cd79b30d6a097a6913177d90625537e51cfbdc2556e6"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 7456553,
+          "sha256": "0e881d099222a3e1c50ed9e9d3894a28658dfbc4f9c35cca5a5cd9b2272124b1"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3339032,
+          "sha256": "8da05cb5556ceba96c6b2a3b5dcd38aa5638727ad7fb47c09a2ad41d3ee3c0be"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1611817,
+          "sha256": "193803cdefba79ee92d6e4fca314d4d527fc0e6b4f28a4009539a9773ddf0417"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 1771648,
+          "sha256": "39e4ba95e5a7bd300b35df0967518da9c401b837cebd91048b0b7bbcd3a4cbb4"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3861308,
+          "sha256": "c33003d899615b0614388bba1ac8ef8a91c63512de4c04de071515aaae9ca948"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 4142555,
+          "sha256": "fcc414a06857f28b1ab8f6f2cc9554028a98cdefbf3756fa080b7d3cd217456d"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-chromium/error-context.md",
+          "bytes": 2810,
+          "sha256": "bd283e6a4cf0f4c0e12eb3462b326af07fae6b9055d212bd92eefb490eca3e5c"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-chromium/test-failed-1.png",
+          "bytes": 80394,
+          "sha256": "7767e9550f86ae687fb94b0edc2396c3a91b1a53bdbed0dc83a9da91da9ee21e"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 7669973,
+          "sha256": "d2a2d8d715b496564895223b01dacfe23f37c02cba943e0ac29447d3e3006e0c"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-processors/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3088463,
+          "sha256": "004b0c202833f4e5ef42135ff4b251709d88f9d7350956d34e32c22b4de4f984"
+        }
+      ]
+    },
+    {
+      "name": "native-held",
+      "scope": "Real SDK 4/5 without ArtPlayer, pause quiescence; failed cases receive diagnostic synthetic timeupdate after failure",
+      "stats": {
+        "startTime": "2026-09-11T22:43:58.712Z",
+        "duration": 18313.77,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "chromium",
+          "status": "failed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6,
+            "paused": false,
+            "seeking": true,
+            "readyState": 1,
+            "video": [
+              [
+                1.984,
+                5.999999
+              ]
+            ],
+            "levels": {
+              "video": 2.81,
+              "audio": 4.81
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 2.809717,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": false
+              },
+              {
+                "type": "audio",
+                "level": 4.809717,
+                "target": 3.81,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    5.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4161.9000000059605,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": {
+            "before": {
+              "video": 2.81,
+              "audio": 4.81
+            },
+            "after": {
+              "video": 0,
+              "audio": 2
+            },
+            "advanced": true,
+            "finalTime": 6.204735,
+            "finalSeeking": false
+          }
+        },
+        {
+          "title": "dash.js 5.2.1: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.347007,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                3.989333,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.781,
+              "audio": 3.786
+            },
+            "processors": {
+              "unavailable": "TypeError: dash?.getActiveStream(...)?.getProcessors is not a function"
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    3.989333,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 5711.199999988079,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "firefox",
+          "status": "failed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6,
+            "paused": false,
+            "seeking": true,
+            "readyState": 1,
+            "video": [
+              [
+                1.984,
+                6
+              ]
+            ],
+            "levels": {
+              "video": 2.748,
+              "audio": 4.748
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 2.74811,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 4.7481100000000005,
+                "target": 3.748,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    6
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4515,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": {
+            "before": {
+              "video": 2.748,
+              "audio": 4.748
+            },
+            "after": {
+              "video": 0,
+              "audio": 2
+            },
+            "advanced": true,
+            "finalTime": 6.207506,
+            "finalSeeking": false
+          }
+        },
+        {
+          "title": "dash.js 5.2.1: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": null,
+          "bufferState": {
+            "time": 6.374188,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.751,
+              "audio": 1.751
+            },
+            "processors": {
+              "unavailable": "TypeError: dash.getActiveStream().getProcessors is not a function"
+            },
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4562,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        }
+      ],
+      "evidence": [
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/recovery-chromium.json",
+          "bytes": 3579,
+          "sha256": "ac99577f92026a11358460ee08579c6bfd971558390e401d978a5c70851f7a61"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/recovery-firefox.json",
+          "bytes": 3475,
+          "sha256": "70a7d85ff70086f096db55d781563d3ced0328dd6b697dbe0b70859d15254563"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/report.json",
+          "bytes": 290452,
+          "sha256": "afe9dd35cab36d4a60cc8d18f5e1aec403baf0ec3ecbac70c360735053b71952"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/results/.last-run.json",
+          "bytes": 145,
+          "sha256": "e46e8801e09e4e803f44da9c71e6f8555a8094ebf5eb5e7e19c237b09bc53f0d"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/error-context.md",
+          "bytes": 15703,
+          "sha256": "e75d3e1a29ff0b31d023d1be067cbc512c679e0b4569df173f86ea96e72dc6ef"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/test-failed-1.png",
+          "bytes": 28232,
+          "sha256": "6e74653092b0a251d952ab4a7d595e2fa176ceeafe89fa928436c996cf4f7820"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1613180,
+          "sha256": "167515c4f2855f7298b6a66cd8339d8a8336fb57dc4e16c6bb2591ca88dcace6"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/error-context.md",
+          "bytes": 15703,
+          "sha256": "e75d3e1a29ff0b31d023d1be067cbc512c679e0b4569df173f86ea96e72dc6ef"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/test-failed-1.png",
+          "bytes": 35407,
+          "sha256": "ef5e17fcab4bc6125380efb2fb317eb929c75e3797871bdbf5d7e4c6034159f6"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 2738168,
+          "sha256": "fea46c67368c54437283738d07014fd5e43d3c569f1fc431bbb80e0dea5751e1"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1841985,
+          "sha256": "e574ee85bccad458e67defea4fd96de5752220373adadb5b44cc85ffb47a0cc7"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-native-held/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 1958502,
+          "sha256": "97e26dd3fd1b621996b1cf573ebe618a080f6b0024440430d820d6d159762725"
+        }
+      ]
+    },
+    {
+      "name": "debug-control",
+      "scope": "Unmodified SDK 4 debug member, native held pause",
+      "stats": {
+        "startTime": "2026-09-11T22:45:58.964Z",
+        "duration": 15415.101,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "chromium",
+          "status": "failed",
+          "diagnostic": {
+            "mode": "upstream4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6,
+            "paused": false,
+            "seeking": true,
+            "readyState": 1,
+            "video": [
+              [
+                1.984,
+                5.999999
+              ]
+            ],
+            "levels": {
+              "video": 2.811,
+              "audio": 4.811
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 2.81091,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": false
+              },
+              {
+                "type": "audio",
+                "level": 4.81091,
+                "target": 3.811,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    5.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4287.4000000059605,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "upstream4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.372414,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                3.989333,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.791,
+              "audio": 3.797
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.7912730000000003,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.7966060000000006,
+                "target": 2.791,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    3.989333,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 6045,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        }
+      ],
+      "evidence": [
+        {
+          "file": "refactor/.cache/dash05-seek-debug-control/report.json",
+          "bytes": 148796,
+          "sha256": "d91c2f412267282b56879e9c87dc9e9144d21d7b8e624cf917810e8e20577847"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-debug-control/results/.last-run.json",
+          "bytes": 96,
+          "sha256": "13a2fcfd48a5bf705ca36ffbf6b3b710ffff4b3035f77aa94be0812c98dc913b"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-debug-control/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/error-context.md",
+          "bytes": 15703,
+          "sha256": "eb1e0d68efb8e86073a8ca43177f9dacb973c6c0c6703db0f93a4d116c058d33"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-debug-control/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/test-failed-1.png",
+          "bytes": 28854,
+          "sha256": "fc59193858bbfaa3f6e66d63643c0491e462849e234e5af3e1d037ea8c48ad63"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-debug-control/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1657845,
+          "sha256": "67582bd6b258031dead280aad9c8278bba0f3fef2ee8a91a7d81bca1693ff50a"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-debug-control/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 2317206,
+          "sha256": "ac5ef4ae16ce13e72e1c4b612d9ba70fef3058c783594c20f4a3c4609a466646"
+        }
+      ]
+    },
+    {
+      "name": "patch-counterfactual",
+      "scope": "Diagnostic SDK 4 debug member with one empty-clear buffer-level update; NOT unmodified SDK acceptance",
+      "stats": {
+        "startTime": "2026-09-11T22:46:48.896Z",
+        "duration": 27637.845999999998,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "published core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.41513,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.76,
+              "audio": 3.627
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.7598479999999999,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.6266180000000006,
+                "target": 2.76,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3685.5999999940395,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.405209,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.711,
+              "audio": 3.646
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.7106810000000001,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.6458060000000003,
+                "target": 2.7110000000000003,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3996,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.406743,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.78,
+              "audio": 3.603
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.7795649999999998,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.6032160000000006,
+                "target": 2.7800000000000002,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3749.4000000059605,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.422353,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.789,
+              "audio": 3.648
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.7893289999999995,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.6478790000000005,
+                "target": 2.7889999999999997,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 3984.0999999940395,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "chromium",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.367564,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                7.999999
+              ]
+            ],
+            "levels": {
+              "video": 1.783,
+              "audio": 3.647
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.782794,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.64715,
+                "target": 2.783,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    7.999999
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4329.300000011921,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.376463,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.664,
+              "audio": 3.669
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.6640540000000001,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.6693870000000004,
+                "target": 2.6639999999999997,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4096,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "published core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.624618,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                10
+              ]
+            ],
+            "levels": {
+              "video": 3.501,
+              "audio": 5.458
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 3.5010060000000003,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 5.45801,
+                "target": 4.5009999999999994,
+                "complete": true,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    10
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    12
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4149,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.375405,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.625,
+              "audio": 3.63
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.6245950000000002,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 3.6299280000000005,
+                "target": 2.625,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    10.005333
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4202,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "candidate core / candidate DASH / 4.5.2: real MPD decoding and UI selection",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.625537,
+            "paused": false,
+            "seeking": false,
+            "readyState": 4,
+            "video": [
+              [
+                1.984,
+                10
+              ]
+            ],
+            "levels": {
+              "video": 3.5,
+              "audio": 5.416
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 3.499554,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 5.416118,
+                "target": 4.5,
+                "complete": true,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    10
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    12
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4047,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        },
+        {
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "engine": "firefox",
+          "status": "passed",
+          "diagnostic": {
+            "mode": "bufferlevel4",
+            "member": "package/dist/dash.all.debug.js",
+            "upstreamSHA256": "90bc26d2d3ba5a204a97d21bcfe246aab60f13f60ad75840c7f1fcc909986769",
+            "effectiveSHA256": "11fdf4dd33f63f4cd06036da59c13de0fe6e0db691eedb4feb488204e2643f95",
+            "acceptance": false
+          },
+          "bufferState": {
+            "time": 6.292211,
+            "paused": false,
+            "seeking": false,
+            "readyState": 3,
+            "video": [
+              [
+                1.984,
+                8
+              ]
+            ],
+            "levels": {
+              "video": 1.75,
+              "audio": 1.75
+            },
+            "processors": [
+              {
+                "type": "video",
+                "level": 1.74986,
+                "target": 2,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              },
+              {
+                "type": "audio",
+                "level": 1.74986,
+                "target": 2.75,
+                "complete": false,
+                "pruning": false,
+                "hasTarget": true
+              }
+            ],
+            "buffers": [
+              {
+                "mime": "video/mp4;codecs=\"avc1.42c01e\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    0,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              },
+              {
+                "mime": "audio/mp4;codecs=\"mp4a.40.2\"",
+                "sourceState": "open",
+                "updating": false,
+                "ranges": [
+                  [
+                    1.984,
+                    8
+                  ]
+                ],
+                "timestampOffset": 0
+              }
+            ]
+          },
+          "sdkSeek": [
+            {
+              "name": "PLAYBACK_SEEKING",
+              "at": 4678,
+              "time": 6,
+              "seekTime": 6
+            }
+          ],
+          "syntheticRecovery": null
+        }
+      ],
+      "evidence": [
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/report.json",
+          "bytes": 1844217,
+          "sha256": "0824af993097545140cf8c1c888ae09ce5ea591642ef4c359367e25979bcf798"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 4144006,
+          "sha256": "0de3763558a36a5e446771ce5c5059cab4790b86000f01673736061985739aef"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3886992,
+          "sha256": "3d9e9708f254c5c46991534bf5b12e628320d4dd7132bb6540a011e2dfe1458e"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3818123,
+          "sha256": "7e5f4b61d8b6ef66a329a8493ec7f3668d1af6081f597d36223e5bc0b93926dd"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3425251,
+          "sha256": "a42872a162ff88010ea835506b1ef82490e86189fbb52e43a927d1c33e4c8659"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1941033,
+          "sha256": "50ea9d110a166ff9b29d8e67a2f32724adbf59d4d5bba76bc064a02370197eee"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 2069679,
+          "sha256": "197c6a5584679582999387db497dc7883033d32dc9261d06cf8561fa3a2df3cb"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 4182679,
+          "sha256": "b932625b616c0779b99bc04fa867a39097113c452135b2fd4c69f7fd83330036"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3918287,
+          "sha256": "da515449a656d7d7be60ce729f575322b7d61f0af64161a57e250e144d94f193"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3913205,
+          "sha256": "b93434bac318bb274f3a5168ff7d6a3e42f334bdf4219a5e5868b6623b75c022"
+        },
+        {
+          "file": "refactor/.cache/dash05-seek-patch-counterfactual/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3265337,
+          "sha256": "c5a0a0d44940eb46dc4f7369009de460e44860911bdb2826d6dc12139c159b46"
+        }
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/dash05-seek-baseline-check.log",
+      "bytes": 354,
+      "sha256": "70f4bef48d69ec8ed94fd79bdc9f5adcc8712c10b9a53e83dbd7e90315ba0c66"
+    },
+    {
+      "file": "refactor/.cache/dash05-seek-buffers.log",
+      "bytes": 6973,
+      "sha256": "c5815de4855c37dd825302425ab53989cd2c4361f3dea40c340375fad347b885"
+    },
+    {
+      "file": "refactor/.cache/dash05-seek-debug-control.log",
+      "bytes": 4096,
+      "sha256": "421540f62ef24389fca054550dce3d7bd246f9a4160f7fe22a440df7c833b0e0"
+    },
+    {
+      "file": "refactor/.cache/dash05-seek-native-held.log",
+      "bytes": 7342,
+      "sha256": "15508383a33234f1f9c5eb5e263757d6c7559974bf91d7764f9b23307d92bbfc"
+    },
+    {
+      "file": "refactor/.cache/dash05-seek-patch-counterfactual.log",
+      "bytes": 3195,
+      "sha256": "ee6e4f18cc8e948c74b57dbff0a12af7b27456c3d82570486266816fae4d0dbc"
+    },
+    {
+      "file": "refactor/.cache/dash05-seek-processors.log",
+      "bytes": 10619,
+      "sha256": "4c9ff06f3a5156aedc08a6330396b5ae45c4bc979d7ddda688728d25657480b1"
+    },
+    {
+      "file": "refactor/.cache/dash05-seek-target-after.log",
+      "bytes": 3196,
+      "sha256": "5534ff0471bbbeb923d0216de947f4df5f499cae351784cb4adf47360a9526d6"
+    },
+    {
+      "file": "refactor/.cache/dash05-seek-target.log",
+      "bytes": 2496,
+      "sha256": "350a70c414bc35fc08cccac6841f349e40d28581d8e5de23b8f207be41b981f4"
+    }
+  ],
+  "conclusion": "SDK 4 empty buffer-clear branch preserves stale pre-seek metrics above scheduling target; with no later progress/timeupdate event, loading cannot resume. Native SDK 4 reproduces on both engines; synthetic metric refresh and one-line diagnostic backport restore playback. SDK 5 includes the refresh and passes the held-pause native cases.",
+  "exclusions": [
+    "No runtime, declaration, dependency or SDK upgrade shipped",
+    "No synthetic timeupdate in production or default validation",
+    "Diagnostic patched SDK is not official SDK acceptance",
+    "SDK 4 risk stays open until compatible mitigation or reviewed release disposition",
+    "One intermediate syntax error prevented test discovery; original log retained",
+    "No complete browser matrix or full CI claimed for this diagnostic-only change"
+  ]
+}

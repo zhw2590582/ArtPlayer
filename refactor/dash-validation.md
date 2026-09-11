@@ -79,3 +79,11 @@ UMD 测试 VM 显式注入宿主 console，以检查原始错误身份；没有�
 纯配置修改但没有 SDK 事件时，保留同步 update 为即时刷新入口；播放 tick 仅检查 Auto
 布尔值变化，没有新定时器。真实 SDK/媒体验证与剩余 seek/设备边界见
 [事件改造记录](changes/2026-09-12-PKG-DASH-05-sdk-events.md)。历史失败证据保留，后续通过不抹去它们。
+
+## 05 暂停 seek 诊断
+
+实际 SDK 4.5.2 在不创建 ArtPlayer 的稳定暂停用例中也会停滞，SDK 5.2.1 的对应用例通过。
+根因与空裁剪分支漏更新缓冲指标有关，DASH-SEEK-01 仍 open；没有发布兼容补丁。
+`dash-buffer-observer.js` 记录原生 SourceBuffer/SDK 指标，两个显式诊断环境变量只用于
+失败后的合成事件和内存 SDK 补丁对照，不能用于正式验收。命令、证据、限制和回退见
+[seek 根因记录](changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md)。

@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
 import { compilePackage } from '../helpers/load.js'
+import { observeDashBuffers } from './dash-buffer-observer.js'
 import { expect, test } from './fixtures.js'
 
 const sdks = new Map()
@@ -11,6 +12,8 @@ let candidate
 let published
 let mediaManifest
 let pluginRelease
+const diagnosticSDK = process.env.ARTPLAYER_DASH_DIAGNOSTIC_SDK || 'none'
+assert(['none', 'upstream4', 'bufferlevel4'].includes(diagnosticSDK), 'Unknown diagnostic SDK mode')
 
 test.beforeAll(async () => {
   const baseline = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/dash-sdk.json', import.meta.url)))
@@ -18,7 +21,20 @@ test.beforeAll(async () => {
     const archive = await ensureArchive(sdk.release)
     const bytes = readMember(archive, sdk.codeMember)
     assert.equal(hash(bytes), sdk.release.files[sdk.codeMember])
-    sdks.set(sdk.release.version, { ...sdk, code: bytes.toString() })
+    let code = bytes.toString()
+    let diagnostic
+    if (sdk.release.version === '4.5.2' && diagnosticSDK !== 'none') {
+      const member = 'package/dist/dash.all.debug.js'
+      code = readMember(archive, member).toString()
+      const upstreamSHA256 = hash(code)
+      if (diagnosticSDK === 'bufferlevel4') {
+        const before = 'function clearBuffers(ranges) {\n    return new Promise(function (resolve, reject) {\n      if (!ranges || !sourceBufferSink || ranges.length === 0) {\n        resolve();'
+        assert.equal(code.split(before).length, 2, 'Diagnostic patch must match exactly one upstream branch')
+        code = code.replace(before, before.replace('        resolve();', '        _updateBufferLevel();\n        resolve();'))
+      }
+      diagnostic = { mode: diagnosticSDK, member, upstreamSHA256, effectiveSHA256: hash(code), acceptance: false }
+    }
+    sdks.set(sdk.release.version, { ...sdk, code, diagnostic })
   }
   pluginRelease = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/dash-control-release.json', import.meta.url))).release
   const bytes = readMember(await ensureArchive(pluginRelease), 'package/dist/artplayer-plugin-dash-control.js')
@@ -50,9 +66,21 @@ test.afterEach(async ({ page }, testInfo) => {
     }
     const video = art?.video || window.nativeVideo
     const buffered = video ? Array.from({ length: video.buffered.length }, (_, index) => [video.buffered.start(index), video.buffered.end(index)]) : []
-    return { errors: window.sdkErrors, events: window.sdkEvents, mediaEvents: window.mediaEvents, nativePlay: window.nativePlay, tracks, levels, buffered, paused: video?.paused, seeking: video?.seeking, time: video?.currentTime, ready: art?.isReady, width: video?.videoWidth, height: video?.videoHeight, error: video?.error?.code, readyState: video?.readyState, destroyed: window.sdkDestroyed }
+    return { errors: window.sdkErrors, events: window.sdkEvents, mediaEvents: window.mediaEvents, nativePlay: window.nativePlay, tracks, levels, buffered, paused: video?.paused, seeking: video?.seeking, time: video?.currentTime, ready: art?.isReady, width: video?.videoWidth, height: video?.videoHeight, error: video?.error?.code, readyState: video?.readyState, destroyed: window.sdkDestroyed, bufferState: window.dashBuffers?.snapshot(), bufferEvents: window.dashBuffers?.events }
   }).catch(error => ({ error: error.message }))
   await testInfo.attach('dash-sdk-state', { contentType: 'application/json', body: JSON.stringify(state) })
+  // Opt-in counterfactual after a failed assertion; it never turns a failure green.
+  if (process.env.ARTPLAYER_DASH_DIAGNOSE_STALL === '1' && testInfo.status !== testInfo.expectedStatus && state.seeking && state.time === 6) {
+    const recovery = await page.evaluate(() => {
+      const before = window.dashBuffers.snapshot()
+      const video = window.art?.video || window.nativeVideo
+      video.dispatchEvent(new Event('timeupdate'))
+      return { before, afterDispatch: window.dashBuffers.snapshot() }
+    })
+    recovery.advanced = await page.waitForFunction(() => (window.art?.video || window.nativeVideo).currentTime > 6.2, null, { timeout: 3000 }).then(() => true, () => false)
+    recovery.final = await page.evaluate(() => window.dashBuffers.snapshot())
+    await testInfo.attach('diagnostic-synthetic-timeupdate', { contentType: 'application/json', body: JSON.stringify(recovery) })
+  }
   if (!page.isClosed()) {
     await page.evaluate(() => {
       if (window.art && !window.art.isDestroy)
@@ -65,9 +93,10 @@ test.afterEach(async ({ page }, testInfo) => {
 async function loadSDK(page, version, core, testInfo) {
   const sdk = sdks.get(version)
   await page.goto(`/test/player.html?core=${core}`)
+  await page.evaluate(observeDashBuffers)
   await page.addScriptTag({ content: sdk.code })
   const capability = await page.evaluate(() => ({ sdk: window.dashjs.supportsMediaSource(), mse: typeof window.MediaSource, managed: typeof window.ManagedMediaSource, avc: Boolean(window.MediaSource?.isTypeSupported('video/mp4; codecs="avc1.42c01e"')), aac: Boolean(window.MediaSource?.isTypeSupported('audio/mp4; codecs="mp4a.40.2"')) }))
-  await testInfo.attach('dash-sdk-inputs', { contentType: 'application/json', body: JSON.stringify({ sdk: sdk.release, codeMember: sdk.codeMember, pluginRelease, candidateSHA256: hash(candidate), candidate: process.env.ARTPLAYER_DASH_ARTIFACT || 'workspace source build', media: mediaManifest, capability }) })
+  await testInfo.attach('dash-sdk-inputs', { contentType: 'application/json', body: JSON.stringify({ sdk: sdk.release, codeMember: sdk.diagnostic?.member || sdk.codeMember, diagnostic: sdk.diagnostic, pluginRelease, candidateSHA256: hash(candidate), candidate: process.env.ARTPLAYER_DASH_ARTIFACT || 'workspace source build', media: mediaManifest, capability }) })
   return capability
 }
 
@@ -98,16 +127,19 @@ async function openDash(page, version, core, plugin, testInfo) {
         dash.updateSettings({ debug: { logLevel: 0 }, streaming: { abr: { initialBitrate: { video: 150 } }, buffer: { fastSwitchEnabled: true, bufferTimeDefault: 2, bufferTimeAtTopQuality: 2 } } })
         const events = window.dashjs.MediaPlayer.events
         dash.on(events.ERROR, event => window.sdkErrors.push({ code: event.error?.code, message: event.error?.message, event: event.type }))
-        for (const name of ['STREAM_INITIALIZED', 'QUALITY_CHANGE_REQUESTED', 'QUALITY_CHANGE_RENDERED', 'TRACK_CHANGE_RENDERED', 'STREAM_TEARDOWN_COMPLETE', 'BUFFER_LEVEL_STATE_CHANGED', 'FRAGMENT_LOADING_COMPLETED', 'PLAYBACK_SEEKING', 'PLAYBACK_SEEKED']) {
+        for (const name of ['STREAM_INITIALIZED', 'QUALITY_CHANGE_REQUESTED', 'QUALITY_CHANGE_RENDERED', 'TRACK_CHANGE_RENDERED', 'STREAM_TEARDOWN_COMPLETE', 'BUFFER_LEVEL_STATE_CHANGED', 'BUFFER_LEVEL_UPDATED', 'FRAGMENT_LOADING_COMPLETED', 'PLAYBACK_SEEKING', 'PLAYBACK_SEEKED']) {
           if (events[name])
-            dash.on(events[name], event => window.sdkEvents.push({ name, at: performance.now(), mediaType: event.mediaType, oldQuality: event.oldQuality, newQuality: event.newQuality, state: event.state, url: event.request?.url, time: video.currentTime }))
+            dash.on(events[name], event => window.sdkEvents.push({ name, at: performance.now(), mediaType: event.mediaType, oldQuality: event.oldQuality, newQuality: event.newQuality, state: event.state, bufferLevel: event.bufferLevel, url: event.request?.url, time: video.currentTime, seekTime: event.seekTime }))
         }
         dash.initialize(video, url, false)
       } },
     })
     const art = window.art
-    for (const name of ['play', 'playing', 'pause', 'seeking', 'seeked', 'waiting', 'emptied', 'loadedmetadata', 'loadeddata', 'canplay', 'error']) {
-      art.video.addEventListener(name, () => window.mediaEvents.push({ name, at: performance.now(), time: art.video.currentTime, paused: art.video.paused, readyState: art.video.readyState, buffered: Array.from({ length: art.video.buffered.length }, (_, index) => [art.video.buffered.start(index), art.video.buffered.end(index)]) }))
+    for (const name of ['play', 'playing', 'pause', 'seeking', 'seeked', 'waiting', 'timeupdate', 'emptied', 'loadedmetadata', 'loadeddata', 'canplay', 'error']) {
+      art.video.addEventListener(name, () => {
+        window.mediaEvents.push({ name, at: performance.now(), time: art.video.currentTime, paused: art.video.paused, readyState: art.video.readyState, buffered: Array.from({ length: art.video.buffered.length }, (_, index) => [art.video.buffered.start(index), art.video.buffered.end(index)]) })
+        window.dashBuffers.mark(`media:${name}`)
+      })
     }
     art.on('destroy', () => {
       art.dash.destroy()
@@ -164,7 +196,9 @@ for (const core of ['published', 'candidate']) {
       await page.locator('#pause').click()
       expect(await page.evaluate(() => window.art.video.paused)).toBe(true)
       await page.evaluate(() => {
+        window.dashBuffers.mark('before-seek')
         window.art.seek = 6
+        window.dashBuffers.mark('assigned-seek')
       })
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(6.2)
@@ -192,11 +226,14 @@ for (const version of ['4.5.2', '5.2.1']) {
       dash.updateSettings({ debug: { logLevel: 0 }, streaming: { abr: { initialBitrate: { video: 150 } }, buffer: { fastSwitchEnabled: true, bufferTimeDefault: 2, bufferTimeAtTopQuality: 2 } } })
       const events = window.dashjs.MediaPlayer.events
       dash.on(events.ERROR, event => window.sdkErrors.push({ code: event.error?.code, message: event.error?.message }))
-      for (const name of ['FRAGMENT_LOADING_COMPLETED', 'TRACK_CHANGE_RENDERED', 'QUALITY_CHANGE_RENDERED', 'BUFFER_LEVEL_STATE_CHANGED', 'PLAYBACK_SEEKING', 'PLAYBACK_SEEKED']) {
-        dash.on(events[name], event => window.sdkEvents.push({ name, at: performance.now(), mediaType: event.mediaType, state: event.state, url: event.request?.url, time: video.currentTime }))
+      for (const name of ['FRAGMENT_LOADING_COMPLETED', 'TRACK_CHANGE_RENDERED', 'QUALITY_CHANGE_RENDERED', 'BUFFER_LEVEL_STATE_CHANGED', 'BUFFER_LEVEL_UPDATED', 'PLAYBACK_SEEKING', 'PLAYBACK_SEEKED']) {
+        dash.on(events[name], event => window.sdkEvents.push({ name, at: performance.now(), mediaType: event.mediaType, state: event.state, bufferLevel: event.bufferLevel, url: event.request?.url, time: video.currentTime, seekTime: event.seekTime }))
       }
-      for (const name of ['play', 'playing', 'pause', 'seeking', 'seeked', 'waiting']) {
-        video.addEventListener(name, () => window.mediaEvents.push({ name, at: performance.now(), time: video.currentTime, paused: video.paused, readyState: video.readyState, buffered: Array.from({ length: video.buffered.length }, (_, index) => [video.buffered.start(index), video.buffered.end(index)]) }))
+      for (const name of ['play', 'playing', 'pause', 'seeking', 'seeked', 'waiting', 'timeupdate']) {
+        video.addEventListener(name, () => {
+          window.mediaEvents.push({ name, at: performance.now(), time: video.currentTime, paused: video.paused, readyState: video.readyState, buffered: Array.from({ length: video.buffered.length }, (_, index) => [video.buffered.start(index), video.buffered.end(index)]) })
+          window.dashBuffers.mark(`media:${name}`)
+        })
       }
       dash.initialize(video, '/dash-fixture/master.mpd', false)
       document.querySelector('#play').onclick = () => {
@@ -222,16 +259,27 @@ for (const version of ['4.5.2', '5.2.1']) {
     })
     await expect.poll(() => page.evaluate(() => window.nativeVideo.videoHeight)).toBe(180)
     // Match the failed integrated run: video data ends at the next seek target.
-    await expect.poll(() => page.evaluate(() => window.nativeVideo.buffered.end(window.nativeVideo.buffered.length - 1))).toBeCloseTo(6, 4)
+    await expect.poll(() => page.evaluate(() => {
+      const video = window.nativeVideo
+      return video.currentTime >= 2.8 && Math.abs(video.buffered.end(video.buffered.length - 1) - 6) < 0.0001
+    })).toBe(true)
     await page.evaluate(() => {
       const dash = window.nativeDash
       dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: true } } } })
       dash.setCurrentTrack(dash.getTracksFor('audio').find(track => track.lang === 'fr'))
     })
     await expect.poll(() => page.evaluate(() => window.nativeDash.getCurrentTrackFor('audio').lang)).toBe('fr')
+    // The recorded integrated stall happened after the audio switch was rendered.
+    await expect.poll(() => page.evaluate(() => window.sdkEvents.some(event => event.name === 'TRACK_CHANGE_RENDERED' && event.mediaType === 'audio'))).toBe(true)
     await page.locator('#pause').click()
+    // Observe a genuinely held pause: no clock/append events for half a second.
+    // This separates the seek from progress events still queued by the track switch.
+    await page.waitForFunction(() => window.nativeVideo.paused && performance.now() - window.dashBuffers.events.at(-1).at >= 500)
+    expect(await page.evaluate(() => window.nativeVideo.paused)).toBe(true)
     await page.evaluate(() => {
+      window.dashBuffers.mark('before-seek')
       window.nativeVideo.currentTime = 6
+      window.dashBuffers.mark('assigned-seek')
     })
     await page.locator('#play').click()
     await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(6.2)
