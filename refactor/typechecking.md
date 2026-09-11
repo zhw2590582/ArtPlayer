@@ -1,5 +1,15 @@
 # 已实现的类型检查与迁移入口
 
+PKG-HLS-04 增加 HLS 的 5 个严格 TS 源模块，公开声明保留历史 .d.ts 并增加 CJS/ESM 条件桥。
+test/types/hls-control.ts 覆盖配置省略、旧 Parameters 提取、默认字段和 SDK 泛型、同步返回，
+hls-source.ts 检查源码工厂与公开工厂可相互赋值。hls-types.test.mjs 对五组编译模式检查正反例，
+并消费实际 Hls.js 1.5.17 声明。TS 4.3 的两个 SDK 自有 DOM 缺失诊断有 SDK-only 对照，
+不作插件通过的豁免；独立插件消费者仍要求零错误。
+scripts/plugin-editor-types.mjs 与 build:ts 负责 HLS 全局声明生成和双编译器语义校验，
+真实 Monaco 用例为 test/browser/hls-editor-types.spec.js；它验证类型和编译后工厂执行，
+实际 HLS 播放由 hls-control.spec.js 验证。详见 changes/2026-09-12-PKG-HLS-04-types.md。
+下方按原任务保留历史计数；当前执行统计以本次冻结证据和 typecheck 输出为准。
+
 CORE-21 已完成声明与消费者验收。核心公开声明源已迁至 packages/artplayer/public/，
 使用 yarn build:types 生成历史 types/ 路径；yarn check:types 只读检查漂移、
 源错误和内部依赖，已接入 ci:check。public/ 与 src/ 分别纳入严格检查，

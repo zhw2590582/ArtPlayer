@@ -1,20 +1,47 @@
 # HLS control maintenance
 
-The public entry remains `src/index.js`: `artplayerPluginHlsControl(option = {})` returns a
+The source entry is `src/index.ts`: `artplayerPluginHlsControl(option = {})` returns a
 synchronous ArtPlayer plugin with `{ name: 'artplayerPluginHlsControl', update }`. `update()`
 returns undefined. The consumer creates, attaches and destroys `art.hls`; this plugin does not
-import Hls.js or own its media engine. Public declarations are still in `types/` pending the
-separate TypeScript migration (PKG-HLS-04).
+import Hls.js or own its media engine. Public declarations are authored in `types/`; implementation
+imports their configuration/result types so there is one public contract. All five self-owned
+modules are strict TypeScript, with unchecked indexed access enabled and no emitted compiler files.
 
 | Module | Responsibility |
 | --- | --- |
-| `src/index.js` | Core ready/restart/destroy hooks, current engine identity, refresh generation, selection event barrier |
-| `src/mapping.js` | Quality/audio labels, duplicate groups, selected item and Auto policy; no ArtPlayer/DOM dependencies |
-| `src/menu.js` | Existing controls/setting update/remove/check APIs, current callback ownership and stable menu reuse |
-| `src/sdk-events.js` | Optional SDK event capabilities, six subscriptions, setup rollback and listener release |
+| `src/index.ts` | Core ready/restart/destroy hooks, current engine identity, refresh generation, selection event barrier |
+| `src/mapping.ts` | Quality/audio labels, duplicate groups, selected item and Auto policy; no ArtPlayer/DOM dependencies |
+| `src/menu.ts` | Existing controls/setting update/remove/check APIs, current callback ownership and stable menu reuse |
+| `src/sdk-events.ts` | Optional SDK event capabilities, six subscriptions, setup rollback and listener release |
+| `src/types.ts` | Internal SDK capabilities, menu models and the narrow host surface; no runtime code |
 
 The entry depends on these three modules; they do not import the entry or each other.
 SVG icons remain local build inputs. There is no cross-instance cache, timer, worker or fetch.
+
+## Public types and editor generation
+
+`types/artplayer-plugin-hls-control.d.ts` retains the historical path and TS 4.3.5 syntax.
+Conditional `.d.cts`/`.d.mts` bridges preserve callable CommonJS/default ESM imports and named types;
+legacy keeps the same JavaScript file and adds a `typesVersions` fallback for older resolution.
+Do not change these runtime paths or add a runtime dependency on the Hls SDK to obtain its types.
+
+Default `QualityLevel`/`AudioTrack` fields provide useful formatter inference. `Option<Level, Track>`
+also accepts caller-supplied SDK types, including inference from an annotated callback. A formatter
+still accepts the original object and optional index, returns a string and runs as a plain callback.
+The optional factory overload permits omitted/undefined configuration. The required last overload
+deliberately preserves old `Parameters<typeof artplayerPluginHlsControl>[0]['quality']` consumers;
+do not remove it as redundant. `update()` stays synchronous and returns void.
+
+The single ArtPlayer-to-Host assertion represents the externally attached SDK surface. `update`
+still uses the historical errorHandle/media identity guard. The SDK subscription assertion follows
+actual on/off function checks; guarded selector indices follow an equal-length check. These limited
+boundaries are not proof that arbitrary external objects implement Hls. Keep runtime contract tests.
+
+`scripts/plugin-editor-types.mjs` generates the HLS Monaco declaration from the authored public file.
+It creates private definitions plus a callable global/named-type bridge, rejecting unsupported
+imports/exports. `yarn build:ts` semantically checks that output with both compilers before writing it;
+never hand-edit `docs/assets/ts/artplayer-plugin-hls-control.d.ts`. The generic defaults and both
+overloads must survive generation. Other unconverted plugins still use their existing generator path.
 
 ## Refresh and selection
 
@@ -65,8 +92,11 @@ Use the repository's pinned Node and Yarn:
 
 ```sh
 node --test test/hls-control.test.js
+node --test refactor/scripts/hls-types.test.mjs
 yarn test:browser hls-control.spec.js
+yarn test:browser hls-editor-types.spec.js
 yarn build artplayer-plugin-hls-control
+yarn build:ts
 yarn ci:check
 ```
 
@@ -79,3 +109,8 @@ Windows Playwright WebKit lacks MSE; explicit capability/error cleanup runs ther
 cases are marked skipped. Safari/native HLS, SDK workers, grouped track changes, SDK version range,
 updated example and isolated package verification remain PKG-HLS-05/06 work. See
 [refactor validation](../../refactor/hls-validation.md). Keep these gaps visible in release reviews.
+
+Actual Hls.js 1.5.17 declaration consumers pass TS 5.9.3. TS 4.3.5 reports two existing SDK DOM type
+errors (MediaDecodingConfiguration and MediaCapabilitiesDecodingInfo), reproduced with the SDK alone.
+The plugin introduces no additional errors; do not hide those SDK diagnostics with skipLibCheck or
+claim every SDK/compiler combination passes. Standalone plugin consumers pass both compilers.

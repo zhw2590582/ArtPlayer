@@ -1,25 +1,30 @@
+import type Artplayer from 'artplayer'
+import type { AudioTrack, Option, QualityLevel, Result } from '../types/artplayer-plugin-hls-control'
+import type { Cleanup, Hls, Host } from './types'
 import $audio from './audio.svg?raw'
 import { audioModel, qualityModel } from './mapping'
 import { createMenu } from './menu'
 import $quality from './quality.svg?raw'
 import { subscribeHls } from './sdk-events'
 
-export default function artplayerPluginHlsControl(option = {}) {
-  return (art) => {
+export default function artplayerPluginHlsControl<Level extends object = QualityLevel, Track extends object = AudioTrack>(option: Option<Level, Track> = {}) {
+  return (player: Artplayer): Result => {
+    // The consumer owns the optional SDK; update validates its media identity before use.
+    const art = player as unknown as Host<Level, Track>
     const { $video } = art.template
     const { errorHandle } = art.constructor.utils
     let closed = false
     let revision = 0
-    let engine
-    let unsubscribe = () => {}
+    let engine: Hls<Level, Track> | undefined
+    let unsubscribe: Cleanup = () => {}
     let selecting = 0
-    let pending
+    let pending: Hls<Level, Track> | undefined
     const retired = new WeakSet()
-    const active = hls => !closed && !retired.has(hls) && art.hls === hls && hls.media === $video
+    const active = (hls: Hls<Level, Track>) => !closed && !retired.has(hls) && art.hls === hls && hls.media === $video
     const quality = createMenu(art, 'hls-quality', 'currentLevel', $quality, active, select)
     const audio = createMenu(art, 'hls-audio', 'audioTrack', $audio, active, select)
 
-    function select(callback) {
+    function select<T>(callback: () => T): T {
       selecting++
       let succeeded = false
       try {
@@ -38,7 +43,7 @@ export default function artplayerPluginHlsControl(option = {}) {
       }
     }
 
-    function refresh(hls, force) {
+    function refresh(hls: Hls<Level, Track>, force: boolean): void {
       if (!active(hls))
         return
       const version = ++revision
@@ -55,10 +60,10 @@ export default function artplayerPluginHlsControl(option = {}) {
         audio.update(hls, audioConfig, audioView, force)
     }
 
-    function update() {
+    function update(): void {
       if (closed)
         return
-      const hls = art.hls
+      const hls = art.hls!
       errorHandle(hls?.media === $video, 'Cannot find instance of HLS from "art.hls"')
       if (retired.has(hls))
         return
@@ -91,7 +96,7 @@ export default function artplayerPluginHlsControl(option = {}) {
       refresh(hls, true)
     }
 
-    function destroy() {
+    function destroy(): void {
       if (closed)
         return
       closed = true

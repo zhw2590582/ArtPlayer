@@ -1,0 +1,4142 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-HLS-04",
+  "capturedAt": "2026-09-11T16:48:04.864Z",
+  "sourceHashesLF": {
+    "packages/artplayer-plugin-hls-control/src/index.ts": "c7ab89b964c481870f5b59fba0be4cd17b7a8ddf59b5bc8c03504f4983d64015",
+    "packages/artplayer-plugin-hls-control/src/mapping.ts": "f517854a7825ab7783375438040602bcfeab16df0218998208dd9a3b8fe443e3",
+    "packages/artplayer-plugin-hls-control/src/menu.ts": "774c43ebdc86555a3518b3f74d226ac03cdf41035d8cf5dd0ab519b7b144d78b",
+    "packages/artplayer-plugin-hls-control/src/sdk-events.ts": "4d9ee92d0720601a2c55b597bf99e7ecaf851d5fd2292adff153c539f33e460a",
+    "packages/artplayer-plugin-hls-control/src/types.ts": "2b9c8927e4c16ab4ce486d63d2ee3fb781a01be8a5423643cabd1ec76b17f98c",
+    "packages/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.cts": "ad4c3e7f7d2ba6b8371108bf08dfa13cccf78a1add846ba53cab8774c8fff0b6",
+    "packages/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.mts": "27a3a17a48f0bc92c3c50783be253730d87d01e9be627ab2726bdc552fecf1f3",
+    "packages/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.ts": "8c2b9eca1dbc396089dea7276787916f8029ee8a68d73c5d2f78991571de918a",
+    "packages/artplayer-plugin-hls-control/package.json": "084bb4aea8dfce9880b062f2cf5e89b1fc94a9b403e835505631aea0e1816014",
+    "packages/artplayer-plugin-hls-control/tsconfig.json": "583e4ac1afa99e3a29c7f899df9fdeefcbd14d3847d69143e3fa6a8facac6d99",
+    "scripts/plugin-editor-types.mjs": "a01e9b64df5ee5df00ab06e95f4e8483ae88194549456a75ec77ef934b9711b1",
+    "scripts/build-ts.js": "7bd574d7d6c98f416036b3de2c0342ce99fa3637b795102fc96719334b7798cb",
+    "scripts/typecheck.mjs": "d813da915edf5ce1d4e551779b3d1d32b440d3ff42e24d6114dcc79249dc825c",
+    "test/types/hls-control.ts": "3bbdeae926b6a5aad6e5b7c34a21babbc7784007c49d65acc44dac0962ba2b61",
+    "test/types/hls-source.ts": "4dfb36411352ecda0c857f5d24e5587f6d0c7723078ca3d6eb29aec687e9f4ae",
+    "refactor/scripts/hls-types.test.mjs": "0c046ab51841c2d3bbf63c45251668e639305bb559b166afbc578f98306bfe01",
+    "test/hls-control.test.js": "739fbccdf143ce11b07dc88cc313c9eba985e9ef6ac2991bc046f56c9f6644aa",
+    "test/helpers/hls-control.js": "72dcc20c9af6155a401d882716f91cffe598ebf357ccef2d4654476d3f71a87d",
+    "test/browser/hls-control.spec.js": "3e3f841b1b84ef0d2622be3389af570641a5ccc443fc4dff0995036867ec745a",
+    "test/browser/hls-editor-types.spec.js": "b5a993b04cbc531019ce216d7e12b898602c6b492e0b4855f4be1d66e64546f3",
+    "test/browser/editor-types.spec.js": "11303e272c1a5202ffc1c192ddc70ef3e988c9ec78b4d4dd4936c3c8a7b6636f",
+    "docs/assets/ts/artplayer-plugin-hls-control.d.ts": "6a623bb6ba4cc0598a3dd1aab5ef7ca4fbae11973a787885eccba10cc7aa2c7c"
+  },
+  "artifacts": {
+    "artplayer-plugin-hls-control.js": {
+      "sha256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+      "bytes": 5266,
+      "gzip9": 2539
+    },
+    "artplayer-plugin-hls-control.legacy.js": {
+      "sha256": "fd7be1c5bf8f994b61fc040ff96eb628fc442568d99f4b5fee4f611bac1d28c0",
+      "bytes": 5322,
+      "gzip9": 2564
+    },
+    "artplayer-plugin-hls-control.mjs": {
+      "sha256": "64286498c1e90c3927236318383db193698a9dcbf39f91e93fc2b4ea2239e786",
+      "bytes": 9649,
+      "gzip9": 3117
+    }
+  },
+  "unit": {
+    "passed": 56,
+    "failed": 0,
+    "note": "Source and published contracts; included in full CI."
+  },
+  "artifactUnit": {
+    "passed": 83,
+    "failed": 0,
+    "logSHA256": "54598a9e89e6c5189c1542c2e056947116f8fad27c6ea28956fb44114b43027f",
+    "note": "27 shared cases on three build outputs plus source/published cases. Candidate fixes additionally exercise source."
+  },
+  "types": {
+    "modes": [
+      "TS 5.9.3 Node10 CJS",
+      "TS 5.9.3 NodeNext CJS",
+      "TS 5.9.3 NodeNext ESM",
+      "TS 5.9.3 Bundler ESM",
+      "TS 4.3.5 Node10 CJS"
+    ],
+    "invalidCasesPerMode": 8,
+    "editorInvalidCasesPerCompiler": 3,
+    "actualSdk": "hls.js@1.5.17",
+    "sdkOnlyDiagnosticsTS43": [
+      "2304: MediaDecodingConfiguration",
+      "2304: MediaCapabilitiesDecodingInfo"
+    ],
+    "sdkPluginAdditionalDiagnosticsTS43": 0,
+    "sdkDiagnosticsTS59": 0,
+    "skipLibCheck": false
+  },
+  "ci": {
+    "file": "refactor/.cache/hls04-ci-first.log",
+    "sha256": "cb8488cbf7777fa9ff124a498b36e957d3427bd643a71e84135bbe0cd13454c6",
+    "passed": 536,
+    "unit": 496,
+    "engineering": 11,
+    "baseline": 29,
+    "productionTsFiles": 254
+  },
+  "modern": {
+    "file": "refactor/.cache/hls04-browser-main.json",
+    "sha256": "c7d1d2c1dced277c4c7b10882c8564c27d4a8dbc23558da593e2c08693d12e4e",
+    "stats": {
+      "startTime": "2026-09-11T16:44:14.931Z",
+      "duration": 32144.009,
+      "expected": 35,
+      "skipped": 16,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "SDK MSE availability is explicit; unavailable hosts report failure and clean up",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 634,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "SDK MSE availability is explicit; unavailable hosts report failure and clean up",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 2093,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "96e0ec1fa6d1118cbc977e2e1923cd5b2ba6fa38bf3c52519388e2825669e53e"
+          }
+        ]
+      },
+      {
+        "title": "SDK MSE availability is explicit; unavailable hosts report failure and clean up",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "duration": 831,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "ed52a1c05792a324fcfaae83cd2ab5c7fb259a33de32ef2f777a98f92532031a"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 6254,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: failed manifest and actual SDK teardown",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 815,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "59759c765474b3064d656177ff3c21d7789816bbe6ed605015415000b399be6f"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: source switch drops SDK audio topology",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 913,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 6184,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 891,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "59759c765474b3064d656177ff3c21d7789816bbe6ed605015415000b399be6f"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: source switch drops SDK audio topology",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1369,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real Auto playback loses Auto label on update",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 876,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1044,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 6222,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: failed manifest and actual SDK teardown",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 933,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "3939f1f1cc372ce680ac4a1cb8ce5be4e2b6cdb5511f854162d9dae3e7f4ae61"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: source switch drops SDK audio topology",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 947,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 6376,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 905,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "3939f1f1cc372ce680ac4a1cb8ce5be4e2b6cdb5511f854162d9dae3e7f4ae61"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: source switch drops SDK audio topology",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 906,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: real Auto playback loses Auto label on update",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 892,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1107,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 4637,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: failed manifest and actual SDK teardown",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1187,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: source switch drops SDK audio topology",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1317,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 4497,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1121,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: source switch drops SDK audio topology",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 2731,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real Auto playback loses Auto label on update",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1118,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1367,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 4771,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: failed manifest and actual SDK teardown",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1115,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: source switch drops SDK audio topology",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1199,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 5734,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1111,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: source switch drops SDK audio topology",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1243,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: real Auto playback loses Auto label on update",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1205,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1431,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / published HLS: failed manifest and actual SDK teardown",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / published HLS: source switch drops SDK audio topology",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / candidate HLS: source switch drops SDK audio topology",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / published HLS: real Auto playback loses Auto label on update",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / published HLS: failed manifest and actual SDK teardown",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / published HLS: source switch drops SDK audio topology",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / candidate HLS: source switch drops SDK audio topology",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / published HLS: real Auto playback loses Auto label on update",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      }
+    ]
+  },
+  "legacy": {
+    "file": "refactor/.cache/hls04-browser-legacy.json",
+    "sha256": "ac3409531db0efcf12ba3e400edc6939512d210cefcc43a14dc1427113890202",
+    "stats": {
+      "startTime": "2026-09-11T16:46:19.165Z",
+      "duration": 30268.66,
+      "expected": 35,
+      "skipped": 16,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "SDK MSE availability is explicit; unavailable hosts report failure and clean up",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 547,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "SDK MSE availability is explicit; unavailable hosts report failure and clean up",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1834,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "SDK MSE availability is explicit; unavailable hosts report failure and clean up",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "duration": 808,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "ed52a1c05792a324fcfaae83cd2ab5c7fb259a33de32ef2f777a98f92532031a"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 5984,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: failed manifest and actual SDK teardown",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 796,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "59759c765474b3064d656177ff3c21d7789816bbe6ed605015415000b399be6f"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: source switch drops SDK audio topology",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 883,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 6084,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 774,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "59759c765474b3064d656177ff3c21d7789816bbe6ed605015415000b399be6f"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: source switch drops SDK audio topology",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1278,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real Auto playback loses Auto label on update",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 853,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1010,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 6079,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: failed manifest and actual SDK teardown",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 825,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "3939f1f1cc372ce680ac4a1cb8ce5be4e2b6cdb5511f854162d9dae3e7f4ae61"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: source switch drops SDK audio topology",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 865,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 6543,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 796,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "3939f1f1cc372ce680ac4a1cb8ce5be4e2b6cdb5511f854162d9dae3e7f4ae61"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: source switch drops SDK audio topology",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 881,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: real Auto playback loses Auto label on update",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 859,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1053,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 4586,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: failed manifest and actual SDK teardown",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1041,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: source switch drops SDK audio topology",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1131,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 4454,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1025,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: source switch drops SDK audio topology",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 2145,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real Auto playback loses Auto label on update",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1104,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "published core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1345,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 4381,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: failed manifest and actual SDK teardown",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1006,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: source switch drops SDK audio topology",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1310,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 5456,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 966,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: source switch drops SDK audio topology",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1112,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / published HLS: real Auto playback loses Auto label on update",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1044,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "candidate core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1319,
+        "attachments": [
+          {
+            "name": "hls-inputs",
+            "input": "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093"
+          }
+        ]
+      },
+      {
+        "title": "published core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / published HLS: failed manifest and actual SDK teardown",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / published HLS: source switch drops SDK audio topology",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / candidate HLS: source switch drops SDK audio topology",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / published HLS: real Auto playback loses Auto label on update",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "published core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / published HLS: real decoding, manual quality, Auto and audio",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / published HLS: failed manifest and actual SDK teardown",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / published HLS: source switch drops SDK audio topology",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / candidate HLS: real decoding, manual quality, Auto and audio",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / candidate HLS: failed manifest and actual SDK teardown",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / candidate HLS: source switch drops SDK audio topology",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / published HLS: real Auto playback loses Auto label on update",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      },
+      {
+        "title": "candidate core / candidate HLS: SDK events synchronize Auto and audio without replacing menus",
+        "project": "webkit",
+        "status": "skipped",
+        "retry": 0,
+        "duration": 0,
+        "attachments": []
+      }
+    ]
+  },
+  "monaco": {
+    "file": "refactor/.cache/hls04-monaco-final.json",
+    "sha256": "157c47a54f18fb39ee96961b99af4a4b7b0f59999e5d182ce3fc6d7bce51197b",
+    "stats": {
+      "startTime": "2026-09-11T16:43:37.613Z",
+      "duration": 8328.449,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "docs Monaco worker consumes generated core types and runs a typed player example",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1039,
+        "attachments": [
+          {
+            "name": "browser-evidence",
+            "input": "4290e89254b177a31e1c085101d2459dffcd4384a201a6a1202bbc8bc5201200"
+          }
+        ]
+      },
+      {
+        "title": "docs Monaco worker consumes generated core types and runs a typed player example",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 2394,
+        "attachments": [
+          {
+            "name": "browser-evidence",
+            "input": "d9a3332c97cc3b82c36c2ffc494bd6499d2c06e9fd82912f2b1c460c5e51f251"
+          }
+        ]
+      },
+      {
+        "title": "docs Monaco worker consumes generated core types and runs a typed player example",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "duration": 2127,
+        "attachments": [
+          {
+            "name": "browser-evidence",
+            "input": "fe50cfbecf70e60baf0c3dda4759bca3830a253b35bc4cf6a45b406c6ed987a4"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes HLS global types and executes the emitted plugin factory",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1035,
+        "attachments": [
+          {
+            "name": "hls-editor-inputs",
+            "input": "a8d84b45095c17e8e1cda75049ccfdaa4fccf406dec37fbdc3a1f02765e7559f"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "2099348494e4b73b55967af9bbcbc963fef7469eae5946e2ba6a4b2eb7d34b89"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes HLS global types and executes the emitted plugin factory",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "duration": 2475,
+        "attachments": [
+          {
+            "name": "hls-editor-inputs",
+            "input": "a8d84b45095c17e8e1cda75049ccfdaa4fccf406dec37fbdc3a1f02765e7559f"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "d9a3332c97cc3b82c36c2ffc494bd6499d2c06e9fd82912f2b1c460c5e51f251"
+          }
+        ]
+      },
+      {
+        "title": "Monaco consumes HLS global types and executes the emitted plugin factory",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "duration": 1316,
+        "attachments": [
+          {
+            "name": "hls-editor-inputs",
+            "input": "a8d84b45095c17e8e1cda75049ccfdaa4fccf406dec37fbdc3a1f02765e7559f"
+          },
+          {
+            "name": "browser-evidence",
+            "input": "fe50cfbecf70e60baf0c3dda4759bca3830a253b35bc4cf6a45b406c6ed987a4"
+          }
+        ]
+      }
+    ]
+  },
+  "inputs": {
+    "201cb21d8a5e1a78a8f21d9c67bdfa354970e40a443d3989f37263f277b511ca": {
+      "sdk": {
+        "name": "hls.js",
+        "version": "1.5.17",
+        "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+        "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+        "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+        "files": {
+          "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+          "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+          "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+          "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+          "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+        }
+      },
+      "plugin": {
+        "name": "artplayer-plugin-hls-control",
+        "version": "1.1.0",
+        "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-hls-control/1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-hls-control/-/artplayer-plugin-hls-control-1.1.0.tgz",
+        "integrity": "sha512-lWN5oUOWDorWFHdzKcmy9Z8eHcf5f5EcUGDrxBsZBX7aEL5dGRlHPQ5+wqQEizr38D9PYPfTI/nCyun2yFopEw==",
+        "sha256": "598c354d78d3cb77965136fa61dfc0f94cdea6906a91a30781c1acef2b0c3e8b",
+        "archiveBytes": 3192,
+        "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+        "files": {
+          "package/README.md": "42bd00dca467b581f6b3e8399ad1a416d68edcc52d42e6cb51b66f1749694556",
+          "package/dist/artplayer-plugin-hls-control.js": "7a6ce18a0b16f61f6149e0ea77efbb6e0503f997d39afe84271b59e366759e6d",
+          "package/dist/artplayer-plugin-hls-control.legacy.js": "893a3de27f9ed02b4b61f03732aec03bfcaf50d02c9beb15cc8a5767ef9121a0",
+          "package/dist/artplayer-plugin-hls-control.mjs": "85c4de4940e031d835b4de3ccf68af449d10aec4f630c89ecaf62f5503348931",
+          "package/package.json": "710ec2a27dc71f7254e7a1d2eb7cff3f56a6e23811047ac97356f1b18c8ac8b5",
+          "package/types/artplayer-plugin-hls-control.d.ts": "7dd8fdf556932e9cf6140b7513c05155cad6d486e2484bf06c6d48f6e823832a"
+        },
+        "manifest": {
+          "name": "artplayer-plugin-hls-control",
+          "version": "1.1.0",
+          "description": "Hls control plugin for ArtPlayer",
+          "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+          "license": "MIT",
+          "homepage": "https://artplayer.org",
+          "repository": {
+            "type": "git",
+            "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+          },
+          "bugs": {
+            "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+          },
+          "keywords": [
+            "html5",
+            "video",
+            "player"
+          ],
+          "exports": {
+            ".": {
+              "types": "./types/artplayer-plugin-hls-control.d.ts",
+              "import": "./dist/artplayer-plugin-hls-control.mjs",
+              "require": "./dist/artplayer-plugin-hls-control.js"
+            },
+            "./legacy": {
+              "types": "./types/artplayer-plugin-hls-control.d.ts",
+              "import": "./dist/artplayer-plugin-hls-control.legacy.js",
+              "require": "./dist/artplayer-plugin-hls-control.legacy.js"
+            }
+          },
+          "main": "./dist/artplayer-plugin-hls-control.js",
+          "module": "./dist/artplayer-plugin-hls-control.mjs",
+          "types": "./types/artplayer-plugin-hls-control.d.ts",
+          "legacy": "./dist/artplayer-plugin-hls-control.legacy.js",
+          "browserslist": "last 1 Chrome version"
+        }
+      },
+      "sourceSHA256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+      "candidate": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-hls-control\\dist\\artplayer-plugin-hls-control.js",
+      "media": {
+        "kind": "generated-hls-media",
+        "version": "ffmpeg version 2025-11-12-git-6cdd2cbe32-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+        "duration": 12,
+        "commands": [
+          [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-n",
+            "-f",
+            "lavfi",
+            "-i",
+            "testsrc2=size=160x90:rate=24",
+            "-t",
+            "12",
+            "-an",
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            "-profile:v",
+            "baseline",
+            "-level:v",
+            "3.0",
+            "-g",
+            "48",
+            "-keyint_min",
+            "48",
+            "-sc_threshold",
+            "0",
+            "-crf",
+            "28",
+            "-f",
+            "hls",
+            "-hls_time",
+            "2",
+            "-hls_playlist_type",
+            "vod",
+            "-hls_segment_filename",
+            "low-%02d.mpegts",
+            "low.m3u8"
+          ],
+          [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-n",
+            "-f",
+            "lavfi",
+            "-i",
+            "testsrc2=size=320x180:rate=24",
+            "-t",
+            "12",
+            "-an",
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            "-profile:v",
+            "baseline",
+            "-level:v",
+            "3.0",
+            "-g",
+            "48",
+            "-keyint_min",
+            "48",
+            "-sc_threshold",
+            "0",
+            "-crf",
+            "28",
+            "-f",
+            "hls",
+            "-hls_time",
+            "2",
+            "-hls_playlist_type",
+            "vod",
+            "-hls_segment_filename",
+            "high-%02d.mpegts",
+            "high.m3u8"
+          ],
+          [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-n",
+            "-f",
+            "lavfi",
+            "-i",
+            "sine=frequency=440:sample_rate=48000",
+            "-t",
+            "12",
+            "-vn",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "48k",
+            "-ac",
+            "2",
+            "-f",
+            "hls",
+            "-hls_time",
+            "2",
+            "-hls_playlist_type",
+            "vod",
+            "-hls_segment_filename",
+            "english-%02d.mpegts",
+            "english.m3u8"
+          ],
+          [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-n",
+            "-f",
+            "lavfi",
+            "-i",
+            "sine=frequency=880:sample_rate=48000",
+            "-t",
+            "12",
+            "-vn",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "48k",
+            "-ac",
+            "2",
+            "-f",
+            "hls",
+            "-hls_time",
+            "2",
+            "-hls_playlist_type",
+            "vod",
+            "-hls_segment_filename",
+            "french-%02d.mpegts",
+            "french.m3u8"
+          ]
+        ],
+        "files": {
+          "english-00.mpegts": {
+            "sha256": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+            "bytes": 13912
+          },
+          "english-01.mpegts": {
+            "sha256": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+            "bytes": 14100
+          },
+          "english-02.mpegts": {
+            "sha256": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+            "bytes": 14100
+          },
+          "english-03.mpegts": {
+            "sha256": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+            "bytes": 13912
+          },
+          "english-04.mpegts": {
+            "sha256": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+            "bytes": 14100
+          },
+          "english-05.mpegts": {
+            "sha256": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+            "bytes": 14100
+          },
+          "english-06.mpegts": {
+            "sha256": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+            "bytes": 752
+          },
+          "english.m3u8": {
+            "sha256": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+            "bytes": 365
+          },
+          "french-00.mpegts": {
+            "sha256": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+            "bytes": 13912
+          },
+          "french-01.mpegts": {
+            "sha256": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+            "bytes": 14100
+          },
+          "french-02.mpegts": {
+            "sha256": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+            "bytes": 14100
+          },
+          "french-03.mpegts": {
+            "sha256": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+            "bytes": 13912
+          },
+          "french-04.mpegts": {
+            "sha256": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+            "bytes": 14100
+          },
+          "french-05.mpegts": {
+            "sha256": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+            "bytes": 14100
+          },
+          "french-06.mpegts": {
+            "sha256": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+            "bytes": 752
+          },
+          "french.m3u8": {
+            "sha256": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+            "bytes": 358
+          },
+          "high-00.mpegts": {
+            "sha256": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+            "bytes": 45308
+          },
+          "high-01.mpegts": {
+            "sha256": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+            "bytes": 52264
+          },
+          "high-02.mpegts": {
+            "sha256": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+            "bytes": 48128
+          },
+          "high-03.mpegts": {
+            "sha256": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+            "bytes": 54144
+          },
+          "high-04.mpegts": {
+            "sha256": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+            "bytes": 47376
+          },
+          "high-05.mpegts": {
+            "sha256": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+            "bytes": 48128
+          },
+          "high.m3u8": {
+            "sha256": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+            "bytes": 311
+          },
+          "low-00.mpegts": {
+            "sha256": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+            "bytes": 28952
+          },
+          "low-01.mpegts": {
+            "sha256": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+            "bytes": 32900
+          },
+          "low-02.mpegts": {
+            "sha256": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+            "bytes": 30268
+          },
+          "low-03.mpegts": {
+            "sha256": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+            "bytes": 32336
+          },
+          "low-04.mpegts": {
+            "sha256": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+            "bytes": 29704
+          },
+          "low-05.mpegts": {
+            "sha256": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+            "bytes": 29516
+          },
+          "low.m3u8": {
+            "sha256": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+            "bytes": 305
+          },
+          "master.m3u8": {
+            "sha256": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+            "bytes": 470
+          },
+          "video-only.m3u8": {
+            "sha256": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+            "bytes": 108
+          }
+        }
+      },
+      "limitations": [
+        "SDK worker disabled",
+        "local deterministic media",
+        "not an isolated installed package",
+        "no physical device certification"
+      ]
+    },
+    "2b340c9a3ff5bbe48f7408e1a3b3acd543e595923935285e9d9be7bb0b64002f": {
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=candidate",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "96e0ec1fa6d1118cbc977e2e1923cd5b2ba6fa38bf3c52519388e2825669e53e": {
+      "browser": "155.0",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=candidate",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:8084/hls-fixture/english-06.mpegts",
+          "resourceType": "xhr",
+          "failure": {
+            "errorText": "NS_BINDING_ABORTED"
+          }
+        }
+      ]
+    },
+    "ed52a1c05792a324fcfaae83cd2ab5c7fb259a33de32ef2f777a98f92532031a": {
+      "browser": "26.6",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=candidate",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "f470ec9452f6b0d34a5d6218653efda36d79165af0ddd80a6362058ad660e20e": {
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=published",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "59759c765474b3064d656177ff3c21d7789816bbe6ed605015415000b399be6f": {
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=published",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+      ],
+      "failedRequests": []
+    },
+    "3939f1f1cc372ce680ac4a1cb8ce5be4e2b6cdb5511f854162d9dae3e7f4ae61": {
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=candidate",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+      ],
+      "failedRequests": []
+    },
+    "32c5daa043d421f0ab0b12bf77e4c93e2f6e3af01dc6f24ee1cb8aba81a60539": {
+      "browser": "155.0",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=published",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "308bc2130df0010177ce72d1e9f115a17995597e2a206a4f5291bea0b7f33093": {
+      "browser": "155.0",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=candidate",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "7ac618fdfe9a835973a2f63aeaadf3fa5c3a5518f61cfbeae1e33bf67f2922b8": {
+      "sdk": {
+        "name": "hls.js",
+        "version": "1.5.17",
+        "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+        "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+        "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+        "files": {
+          "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+          "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+          "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+          "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+          "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+        }
+      },
+      "plugin": {
+        "name": "artplayer-plugin-hls-control",
+        "version": "1.1.0",
+        "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-hls-control/1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-hls-control/-/artplayer-plugin-hls-control-1.1.0.tgz",
+        "integrity": "sha512-lWN5oUOWDorWFHdzKcmy9Z8eHcf5f5EcUGDrxBsZBX7aEL5dGRlHPQ5+wqQEizr38D9PYPfTI/nCyun2yFopEw==",
+        "sha256": "598c354d78d3cb77965136fa61dfc0f94cdea6906a91a30781c1acef2b0c3e8b",
+        "archiveBytes": 3192,
+        "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+        "files": {
+          "package/README.md": "42bd00dca467b581f6b3e8399ad1a416d68edcc52d42e6cb51b66f1749694556",
+          "package/dist/artplayer-plugin-hls-control.js": "7a6ce18a0b16f61f6149e0ea77efbb6e0503f997d39afe84271b59e366759e6d",
+          "package/dist/artplayer-plugin-hls-control.legacy.js": "893a3de27f9ed02b4b61f03732aec03bfcaf50d02c9beb15cc8a5767ef9121a0",
+          "package/dist/artplayer-plugin-hls-control.mjs": "85c4de4940e031d835b4de3ccf68af449d10aec4f630c89ecaf62f5503348931",
+          "package/package.json": "710ec2a27dc71f7254e7a1d2eb7cff3f56a6e23811047ac97356f1b18c8ac8b5",
+          "package/types/artplayer-plugin-hls-control.d.ts": "7dd8fdf556932e9cf6140b7513c05155cad6d486e2484bf06c6d48f6e823832a"
+        },
+        "manifest": {
+          "name": "artplayer-plugin-hls-control",
+          "version": "1.1.0",
+          "description": "Hls control plugin for ArtPlayer",
+          "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+          "license": "MIT",
+          "homepage": "https://artplayer.org",
+          "repository": {
+            "type": "git",
+            "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+          },
+          "bugs": {
+            "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+          },
+          "keywords": [
+            "html5",
+            "video",
+            "player"
+          ],
+          "exports": {
+            ".": {
+              "types": "./types/artplayer-plugin-hls-control.d.ts",
+              "import": "./dist/artplayer-plugin-hls-control.mjs",
+              "require": "./dist/artplayer-plugin-hls-control.js"
+            },
+            "./legacy": {
+              "types": "./types/artplayer-plugin-hls-control.d.ts",
+              "import": "./dist/artplayer-plugin-hls-control.legacy.js",
+              "require": "./dist/artplayer-plugin-hls-control.legacy.js"
+            }
+          },
+          "main": "./dist/artplayer-plugin-hls-control.js",
+          "module": "./dist/artplayer-plugin-hls-control.mjs",
+          "types": "./types/artplayer-plugin-hls-control.d.ts",
+          "legacy": "./dist/artplayer-plugin-hls-control.legacy.js",
+          "browserslist": "last 1 Chrome version"
+        }
+      },
+      "sourceSHA256": "fd7be1c5bf8f994b61fc040ff96eb628fc442568d99f4b5fee4f611bac1d28c0",
+      "candidate": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-hls-control\\dist\\artplayer-plugin-hls-control.legacy.js",
+      "media": {
+        "kind": "generated-hls-media",
+        "version": "ffmpeg version 2025-11-12-git-6cdd2cbe32-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+        "duration": 12,
+        "commands": [
+          [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-n",
+            "-f",
+            "lavfi",
+            "-i",
+            "testsrc2=size=160x90:rate=24",
+            "-t",
+            "12",
+            "-an",
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            "-profile:v",
+            "baseline",
+            "-level:v",
+            "3.0",
+            "-g",
+            "48",
+            "-keyint_min",
+            "48",
+            "-sc_threshold",
+            "0",
+            "-crf",
+            "28",
+            "-f",
+            "hls",
+            "-hls_time",
+            "2",
+            "-hls_playlist_type",
+            "vod",
+            "-hls_segment_filename",
+            "low-%02d.mpegts",
+            "low.m3u8"
+          ],
+          [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-n",
+            "-f",
+            "lavfi",
+            "-i",
+            "testsrc2=size=320x180:rate=24",
+            "-t",
+            "12",
+            "-an",
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            "-profile:v",
+            "baseline",
+            "-level:v",
+            "3.0",
+            "-g",
+            "48",
+            "-keyint_min",
+            "48",
+            "-sc_threshold",
+            "0",
+            "-crf",
+            "28",
+            "-f",
+            "hls",
+            "-hls_time",
+            "2",
+            "-hls_playlist_type",
+            "vod",
+            "-hls_segment_filename",
+            "high-%02d.mpegts",
+            "high.m3u8"
+          ],
+          [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-n",
+            "-f",
+            "lavfi",
+            "-i",
+            "sine=frequency=440:sample_rate=48000",
+            "-t",
+            "12",
+            "-vn",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "48k",
+            "-ac",
+            "2",
+            "-f",
+            "hls",
+            "-hls_time",
+            "2",
+            "-hls_playlist_type",
+            "vod",
+            "-hls_segment_filename",
+            "english-%02d.mpegts",
+            "english.m3u8"
+          ],
+          [
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-n",
+            "-f",
+            "lavfi",
+            "-i",
+            "sine=frequency=880:sample_rate=48000",
+            "-t",
+            "12",
+            "-vn",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "48k",
+            "-ac",
+            "2",
+            "-f",
+            "hls",
+            "-hls_time",
+            "2",
+            "-hls_playlist_type",
+            "vod",
+            "-hls_segment_filename",
+            "french-%02d.mpegts",
+            "french.m3u8"
+          ]
+        ],
+        "files": {
+          "english-00.mpegts": {
+            "sha256": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+            "bytes": 13912
+          },
+          "english-01.mpegts": {
+            "sha256": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+            "bytes": 14100
+          },
+          "english-02.mpegts": {
+            "sha256": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+            "bytes": 14100
+          },
+          "english-03.mpegts": {
+            "sha256": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+            "bytes": 13912
+          },
+          "english-04.mpegts": {
+            "sha256": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+            "bytes": 14100
+          },
+          "english-05.mpegts": {
+            "sha256": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+            "bytes": 14100
+          },
+          "english-06.mpegts": {
+            "sha256": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+            "bytes": 752
+          },
+          "english.m3u8": {
+            "sha256": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+            "bytes": 365
+          },
+          "french-00.mpegts": {
+            "sha256": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+            "bytes": 13912
+          },
+          "french-01.mpegts": {
+            "sha256": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+            "bytes": 14100
+          },
+          "french-02.mpegts": {
+            "sha256": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+            "bytes": 14100
+          },
+          "french-03.mpegts": {
+            "sha256": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+            "bytes": 13912
+          },
+          "french-04.mpegts": {
+            "sha256": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+            "bytes": 14100
+          },
+          "french-05.mpegts": {
+            "sha256": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+            "bytes": 14100
+          },
+          "french-06.mpegts": {
+            "sha256": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+            "bytes": 752
+          },
+          "french.m3u8": {
+            "sha256": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+            "bytes": 358
+          },
+          "high-00.mpegts": {
+            "sha256": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+            "bytes": 45308
+          },
+          "high-01.mpegts": {
+            "sha256": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+            "bytes": 52264
+          },
+          "high-02.mpegts": {
+            "sha256": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+            "bytes": 48128
+          },
+          "high-03.mpegts": {
+            "sha256": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+            "bytes": 54144
+          },
+          "high-04.mpegts": {
+            "sha256": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+            "bytes": 47376
+          },
+          "high-05.mpegts": {
+            "sha256": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+            "bytes": 48128
+          },
+          "high.m3u8": {
+            "sha256": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+            "bytes": 311
+          },
+          "low-00.mpegts": {
+            "sha256": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+            "bytes": 28952
+          },
+          "low-01.mpegts": {
+            "sha256": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+            "bytes": 32900
+          },
+          "low-02.mpegts": {
+            "sha256": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+            "bytes": 30268
+          },
+          "low-03.mpegts": {
+            "sha256": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+            "bytes": 32336
+          },
+          "low-04.mpegts": {
+            "sha256": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+            "bytes": 29704
+          },
+          "low-05.mpegts": {
+            "sha256": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+            "bytes": 29516
+          },
+          "low.m3u8": {
+            "sha256": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+            "bytes": 305
+          },
+          "master.m3u8": {
+            "sha256": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+            "bytes": 470
+          },
+          "video-only.m3u8": {
+            "sha256": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+            "bytes": 108
+          }
+        }
+      },
+      "limitations": [
+        "SDK worker disabled",
+        "local deterministic media",
+        "not an isolated installed package",
+        "no physical device certification"
+      ]
+    },
+    "4290e89254b177a31e1c085101d2459dffcd4384a201a6a1202bbc8bc5201200": {
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=candidate&chapter=published",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:8084/test/pattern.mp4",
+          "resourceType": "media",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ]
+    },
+    "d9a3332c97cc3b82c36c2ffc494bd6499d2c06e9fd82912f2b1c460c5e51f251": {
+      "browser": "155.0",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=candidate&chapter=published",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "fe50cfbecf70e60baf0c3dda4759bca3830a253b35bc4cf6a45b406c6ed987a4": {
+      "browser": "26.6",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=candidate&chapter=published",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "a8d84b45095c17e8e1cda75049ccfdaa4fccf406dec37fbdc3a1f02765e7559f": {
+      "candidate": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-hls-control\\dist\\artplayer-plugin-hls-control.js",
+      "sha256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6",
+      "declarations": {
+        "artplayer": "652c0fdf605e87203526777a05851bd69c95c1660d5ff29eab19c00967c9a985",
+        "artplayer-plugin-hls-control": "6a623bb6ba4cc0598a3dd1aab5ef7ca4fbae11973a787885eccba10cc7aa2c7c"
+      }
+    },
+    "2099348494e4b73b55967af9bbcbc963fef7469eae5946e2ba6a4b2eb7d34b89": {
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "32f3dc22e296dcc569dc1227f0b0cad92bd0dd7e74d747e19759ac5997443e92",
+            "bytes": 376744,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+            "bytes": 8433,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      },
+      "state": {
+        "url": "http://127.0.0.1:8084/test/player.html?core=candidate&chapter=published",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "media": null
+      },
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    }
+  },
+  "scope": "Working-tree build artifacts; not isolated npm installation. Windows WebKit playback lacks MSE; its capability check and real Monaco tests pass. Monaco HLS test executes the factory, not HLS playback. SDK worker, broader SDK/device matrix and installed consumption remain HLS-05/06."
+}

@@ -1850,11 +1850,15 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "HLS 能力适配类型、回调上下文和旧 getName 参数",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-HLS-04-types.md",
+        "baselines/hls-types-validation.json",
+        "hls-validation.md"
+      ]
     },
     {
       "id": "PKG-HLS-05",

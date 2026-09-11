@@ -2,7 +2,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { ESLint } from 'eslint'
 import { glob } from 'glob'
+import compat from 'typescript-compat'
 import { generateCoreEditorDeclaration } from './editor-types.mjs'
+import { checkPluginEditorDeclaration, generatePluginEditorDeclaration } from './plugin-editor-types.mjs'
 
 function ensureDirExists(filePath) {
   const dir = path.dirname(filePath)
@@ -40,7 +42,16 @@ console.log(`✨ Built ${artplayerTSoutput}`);
   for (let index = 0; index < pluginsTS.length; index++) {
     const type = pluginsTS[index]
     const { name, file } = parsePluginInfo(type)
-    const code = `${String(fs.readFileSync(type)).replace(reg, '')}\nexport = ${name};\nexport as namespace ${name};\n`
+    const source = String(fs.readFileSync(type))
+    const code = name === 'artplayerPluginHlsControl'
+      ? generatePluginEditorDeclaration(source, name)
+      : `${source.replace(reg, '')}\nexport = ${name};\nexport as namespace ${name};\n`
+    if (name === 'artplayerPluginHlsControl') {
+      const core = fs.readFileSync(artplayerTSoutput, 'utf8')
+      const diagnostics = [...checkPluginEditorDeclaration(code, core), ...checkPluginEditorDeclaration(code, core, '', compat)]
+      if (diagnostics.length)
+        throw new Error(`Invalid ${name} editor declaration: ${JSON.stringify(diagnostics)}`)
+    }
     const output = path.join('docs/assets/ts', file)
     ensureDirExists(output)
     fs.writeFileSync(output, code.trim())

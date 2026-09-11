@@ -1027,10 +1027,10 @@
         "EX-03"
       ],
       "sourceFiles": [
-        "packages/artplayer-plugin-hls-control/src/index.js",
-        "packages/artplayer-plugin-hls-control/src/mapping.js",
-        "packages/artplayer-plugin-hls-control/src/menu.js",
-        "packages/artplayer-plugin-hls-control/src/sdk-events.js",
+        "packages/artplayer-plugin-hls-control/src/index.ts",
+        "packages/artplayer-plugin-hls-control/src/mapping.ts",
+        "packages/artplayer-plugin-hls-control/src/menu.ts",
+        "packages/artplayer-plugin-hls-control/src/sdk-events.ts",
         "docs/assets/example/hls.control.js"
       ],
       "contract": "Caller supplies art.hls; homepage demo loads hls.js 1.5.17. Preserve quality/audio selectors and old core integration.",

@@ -610,7 +610,7 @@
         "EX-03"
       ],
       "evidence": [
-        "packages/artplayer-plugin-hls-control/src/index.js",
+        "packages/artplayer-plugin-hls-control/src/index.ts",
         "docs/assets/example/hls.control.js",
         "refactor/hls-validation.md"
       ],

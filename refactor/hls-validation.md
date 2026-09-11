@@ -59,8 +59,20 @@ EX-03、REL-09/REVIEW-02 接续，SDK-01/HLS-ENV-01 保持 open。
 Safari/native fallback、更多 SDK 版本、安装包及示例页面全部组合不是本轮完成内容。
 显式安装产物映射暂不接受 HLS 源码回退；HLS-06 必须加入 HLS 包对应映射和隔离 tarball 消费。
 
-## 后续实施
+## PKG-HLS-03/04 后续验证
 
-PKG-HLS-03 拆出映射、UI 提交/删除、Hls 订阅与生命周期；把上述缺陷变成候选修复断言，
-保留发布版观察。PKG-HLS-04 迁移自有模块和公开类型，修正可选 option、getName 对象与可选 index，
-保持旧声明接受范围及分发路径。PKG-HLS-05/06 完成实际 SDK、浏览器、示例及安装包验收。
+PKG-HLS-03 已拆出映射、UI 提交/删除、Hls 订阅与生命周期；旧缺陷成为候选修复断言，
+保留发布版观察。该步最终 Node 专项 56 通过，三格式共享契约累计 83 通过，modern/legacy
+浏览器各 35 通过、16 跳过；以上早期 02 结果保持其原始范围，不冒充当前源码结果。
+
+PKG-HLS-04 把五个模块迁移为严格 TS，公开类型保留旧调用和类型提取习惯，补齐默认字段、
+SDK 泛型、可选 index 和 CJS/ESM/legacy 声明路径。在线编辑器声明从公开源生成，构建时用
+TS 4.3/5.9 严格校验；真实 Monaco 验证推断、错误提示及编译后的工厂执行。
+这些编辑器用例不声称执行 HLS 播放，实际播放仍由 hls-control.spec.js 负责。
+本步结果见 [类型迁移记录](changes/2026-09-12-PKG-HLS-04-types.md) 和
+[冻结证据](baselines/hls-types-validation.json)。
+
+实际 Hls.js 1.5.17 声明在 TS 4.3 缺少 MediaDecodingConfiguration 和
+MediaCapabilitiesDecodingInfo；仅 SDK 的消费者也出现相同两个诊断。插件无新增诊断，
+不注入虚假 DOM 定义或打开 skipLibCheck。独立插件五组类型模式均要求零诊断。
+PKG-HLS-05/06 继续完整 SDK、浏览器、示例及安装包验收，SDK-01/HLS-ENV-01 仍开放。

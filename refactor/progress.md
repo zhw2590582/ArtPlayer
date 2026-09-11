@@ -1,5 +1,20 @@
 # 进度与证据
 
+## 最新完成：PKG-HLS-04 严格 TS 与公开类型
+
+HLS 五个自有模块已迁移严格 TS；公开声明保留旧 object formatter、Parameters 配置提取、
+同步 update 及运行时入口，补齐默认字段、SDK 泛型、可选索引和 CJS/ESM/legacy 类型桥。
+在线编辑器由公开声明生成全局桥，并在 build:ts 内做双编译器严格语义检查。
+
+完整本地 CI 536 项、254 个生产 TS 文件通过；HLS Node 专项 56 项，三格式累计 83 项通过。
+modern/legacy 浏览器各 35 通过、16 跳过，核心+HLS Monaco 六项通过；无失败/重试。
+最终产物输入指纹一致。实际 SDK 在 TS 4.3 的两个 DOM 类型缺失诊断有 SDK-only 对照，
+不隐藏或称为全 SDK 支持；Windows WebKit 的 MSE/Safari 缺口依然开放。
+
+见 [交付记录](changes/2026-09-12-PKG-HLS-04-types.md)、[冻结证据](baselines/hls-types-validation.json)
+和包内 ARCHITECTURE.md。65 done、150 todo；本任务独立本地 commit，核实后进入 PKG-HLS-05。
+完整 SDK/组合/安装包、其余生态包、性能/CI/CD/版本/复盘继续执行原计划，没有公开发布。
+
 ## 最新完成：PKG-HLS-03 源码分层与生命周期修复
 
 HLS control 已拆为入口、选择映射、菜单管理、SDK 订阅四个 JS 模块，保持公开入口和同步调用；修复空轨道旧菜单、过期回调、Auto 标签、重复组丢失选中态，并补事件同步、销毁/订阅失败恢复及重入保护。公开类型和严格 TS 迁移属于下一步 04。

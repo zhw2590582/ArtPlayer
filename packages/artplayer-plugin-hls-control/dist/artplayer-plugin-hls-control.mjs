@@ -129,6 +129,7 @@ function subscribeHls(hls, refresh, destroyed) {
   if (!events || typeof hls.on !== "function" || typeof hls.off !== "function")
     return () => {
     };
+  const source = hls;
   const subscriptions = [];
   let active = true;
   function release() {
@@ -136,7 +137,7 @@ function subscribeHls(hls, refresh, destroyed) {
       return;
     active = false;
     for (const [event, callback] of subscriptions)
-      hls.off(event, callback);
+      source.off(event, callback);
     subscriptions.length = 0;
   }
   try {
@@ -153,7 +154,7 @@ function subscribeHls(hls, refresh, destroyed) {
           refresh();
       };
       subscriptions.push([event, callback]);
-      hls.on(event, callback);
+      source.on(event, callback);
     }
   } catch (error) {
     release();
@@ -162,7 +163,8 @@ function subscribeHls(hls, refresh, destroyed) {
   return release;
 }
 function artplayerPluginHlsControl(option = {}) {
-  return (art) => {
+  return (player) => {
+    const art = player;
     const { $video } = art.template;
     const { errorHandle } = art.constructor.utils;
     let closed = false;
