@@ -1350,6 +1350,309 @@
         "test/subtitle.test.js"
       ],
       "resolutionRationale": "Final installed UMD and legacy each pass 600 real-browser checks. Subtitle cancellation settles promptly and stale work cannot commit. Only generated URLs are owned; native fullscreen-kind rebuilds retain them and failure/reentry/destroy cleanup is verified. Runtime and type consumers pass against the exact packed source and artifacts."
+    },
+    {
+      "id": "BASE-DOM-09",
+      "title": "Web fullscreen loses style and placement across repeated entry or configuration changes",
+      "closureCriteria": "Final installed matrices prove original styles, parent and sibling restoration, resize integration, reentry and failure recovery.",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-web.spec.js",
+        "refactor/changes/2026-09-11-CORE-16-display.md"
+      ],
+      "compatibleResolution": "Capture the first entry layout, restore original ownership on exit/destroy, preserve ordinary events, and stop obsolete operations after reentry.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-web.spec.js"
+      ],
+      "resolutionRationale": "Session snapshots retain exact initial styles and parent/sibling positions through repeated entry, flag changes and reentry. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-LIFE-17",
+      "title": "Destroy in body web fullscreen leaves a connected orphan player",
+      "closureCriteria": "Final installed matrices prove ownership restoration for both removeHtml values and reentrant destroy without late events.",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-web.spec.js",
+        "refactor/changes/2026-09-11-CORE-16-display.md"
+      ],
+      "compatibleResolution": "Capture the first entry layout, restore original ownership on exit/destroy, preserve ordinary events, and stop obsolete operations after reentry.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-web.spec.js"
+      ],
+      "resolutionRationale": "Fullscreen body placement is restored before template destruction; a failed restore detaches only a still-displaced player while preserving the original error. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-DOM-10",
+      "title": "Native fullscreen state and exit affect unrelated player instances",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-native.spec.js",
+        "refactor/changes/2026-09-11-CORE-16-display.md"
+      ],
+      "compatibleResolution": "Derive fullscreen from the instance player/video ownership, ignore unrelated changes, preserve normal event-before-class ordering, and exit only the owned element.",
+      "closureCriteria": "Final installed UMD/legacy matrices cover real gesture entry, two live instances, fullscreen exit rejection/retry, subtitle integration and display mode composition.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-native.spec.js"
+      ],
+      "resolutionRationale": "Fullscreen ownership follows the actual instance player/video; real native tests cover two instances and mode transitions. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-LIFE-18",
+      "title": "Native fullscreen retains destroyed listeners and leaks rejected request listeners",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-native.spec.js",
+        "test/display-native.test.js",
+        "refactor/changes/2026-09-11-CORE-16-display.md"
+      ],
+      "compatibleResolution": "Scope per-instance and per-request listeners, preserve observable native rejection identity, settle cancelled requests promptly, and release late cancelled entry without retaining destroyed instances.",
+      "closureCriteria": "Final installed matrices cover assignment errors, descriptor rejection, request cancellation/destroy, late Promise and controlled void APIs; document the weak document-lifetime fallback guard and physical-device limitations.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-native.spec.js",
+        "test/display-native.test.js"
+      ],
+      "resolutionRationale": "Owned request listeners settle on success/failure/cancel, cancelled native entry is released, and void exit waits for both possible owned elements to leave. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-DOM-11",
+      "title": "Video-only fullscreen ignores native video state and begin/end transitions",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-video-fullscreen.spec.js",
+        "test/display-video-fullscreen.test.js"
+      ],
+      "compatibleResolution": "Read native video presentation/display state and listen to video begin/end plus the historical document bridge, deduplicating the same transition while retaining the synchronous setter.",
+      "closureCriteria": "Installed candidate regressions cover state, event order, reentry, PiP distinction and exit retry; record separately the physical iOS validation gate.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-video-fullscreen.spec.js",
+        "test/display-video-fullscreen.test.js"
+      ],
+      "resolutionRationale": "Controlled native video presentation events and state distinguish fullscreen from PiP and deduplicate transitions without changing synchronous setters. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-LIFE-19",
+      "title": "Video-only fullscreen survives player destruction and late entry",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-video-fullscreen.spec.js",
+        "test/display-video-fullscreen.test.js"
+      ],
+      "compatibleResolution": "Dispose instance listeners, exit owned video presentation, and leave only a static video-held cancellation guard for unabortable late entry without retaining the instance.",
+      "closureCriteria": "Installed regressions cover active and pending destruction, exit failure behavior, new entry after cancellation and video shims without state properties; physical-device evidence remains explicit.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-video-fullscreen.spec.js",
+        "test/display-video-fullscreen.test.js"
+      ],
+      "resolutionRationale": "Video-only instance listeners are removed at destruction; static video-held weak cancellation guards release late entry without holding the player scope. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-DOM-12",
+      "title": "PiP reports another video as active and WebKit ignores native presentation transitions",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-pip.spec.js",
+        "test/browser/display-pip-webkit.spec.js"
+      ],
+      "compatibleResolution": "Keep native element/null and WebKit boolean return shapes, restrict native ownership, observe WebKit transitions and preserve repeated synchronous setter events.",
+      "closureCriteria": "Installed matrices retain getter/setter contracts and prove native gestures/playback, transition deduplication, fullscreen composition and explicit unsupported capabilities.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-pip.spec.js",
+        "test/browser/display-pip-webkit.spec.js"
+      ],
+      "resolutionRationale": "PiP retains native Element/null and WebKit boolean getters, ignores unrelated ownership and stale leave events, and observes native UI transitions. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-LIFE-20",
+      "title": "PiP survives destruction or late entry and rejected assignments become unhandled",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-pip.spec.js",
+        "test/browser/display-pip-webkit.spec.js",
+        "test/display-pip.test.js"
+      ],
+      "compatibleResolution": "Scope native listeners, restrict exit to owned presentation, suppress obsolete failure notices, and release late cancelled entry without instance-retaining WebKit guards.",
+      "closureCriteria": "Installed matrices verify destroy/cancel, rejection notices, retry, reentry and cross-instance isolation; document that the historical void setter cannot expose a rejected Promise.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-pip.spec.js",
+        "test/browser/display-pip-webkit.spec.js",
+        "test/display-pip.test.js"
+      ],
+      "resolutionRationale": "PiP scope disposal exits owned presentation; late cancellation and rejected assignments are handled without stale notices or unhandled rejection. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-TYPE-10",
+      "title": "PiP getter is declared boolean but native runtime returns an element or null",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-16",
+        "CORE-21"
+      ],
+      "evidence": [
+        "test/browser/display-pip.spec.js",
+        "test/types/display-pip.ts",
+        "packages/artplayer/types/player.d.ts"
+      ],
+      "compatibleResolution": "Keep old legal JS return identities and historical public consumers; model the internal branch-dependent getter accurately and coordinate a compatible public declaration strategy in CORE-21.",
+      "closureCriteria": "Public declaration strategy and installed JS/TS consumers explicitly cover native element/null and fallback boolean without silently narrowing old legal consumption.",
+      "workspaceState": "CORE-16 preserves historical native Element/null and WebKit boolean runtime returns with precise internal PipProperty. The installed old public consumers still pass; public declaration coordination remains CORE-21."
+    },
+    {
+      "id": "BASE-DOM-13",
+      "title": "Mini exit loses the video's original parent and sibling position",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-mini.spec.js",
+        "test/display-mini.test.js"
+      ],
+      "compatibleResolution": "Capture original placement once per entry session, restore it on exit/destroy, preserve popup reuse and original DOM/display contracts, and retain the snapshot for failed-exit retry.",
+      "closureCriteria": "Installed matrices cover placement and playback, reentry, recovery, caller-owned popups, narrow viewports and other display modes.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-mini.spec.js",
+        "test/display-mini.test.js"
+      ],
+      "resolutionRationale": "Mini restores original parent/sibling snapshots and retains legacy first/reused DOM order, failure retry and caller-owned popup identity. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-LIFE-21",
+      "title": "Mini leaves a connected popup after player destruction",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-mini.spec.js"
+      ],
+      "compatibleResolution": "Own created popup and subscriptions in the instance scope, stop drag on hide/destroy, preserve caller-owned popup nodes, and serialize reentrant view creation.",
+      "closureCriteria": "Installed matrices prove owned popup removal for both destroy modes, no late drag writes, active playback/controls, construction failure/abort recovery and at most one popup during reentry.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-mini.spec.js"
+      ],
+      "resolutionRationale": "Owned mini popup and subscriptions are removed at destruction; hiding cancels drag and reentrant creation yields at most one popup. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-DOM-14",
+      "title": "Unready media sizing partially overwrites layout and emits NaN height",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-sizing.spec.js",
+        "test/display-sizing.test.js",
+        "refactor/baselines/display-sizing-validation.json"
+      ],
+      "compatibleResolution": "Defer unusable geometry without invalid CSS or measurement events; recover on the next valid call while preserving normal sizing, descriptors, ratio parsing and event contracts.",
+      "closureCriteria": "Installed matrices cover unready/hidden geometry, recovery, ratio/flip contracts, destruction and orientation composition.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-sizing.spec.js",
+        "test/display-sizing.test.js"
+      ],
+      "resolutionRationale": "Unusable media/container dimensions defer layout and invalid measurements; normal geometry, later recovery, ratio/flip and destruction contracts are verified. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-DOM-15",
+      "title": "Auto orientation exit clears caller-owned inline dimensions and transforms",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-orientation.spec.js",
+        "refactor/baselines/display-orientation-validation.json"
+      ],
+      "compatibleResolution": "Own rotation properties and coordinate restoration with fullscreenWeb; retain initial snapshots, repeated rotated dimensions and normal resize behavior.",
+      "closureCriteria": "Installed matrices cover exit/destroy, repeated entry, rotated playback and ratio/flip composition; document device rotation and safe-area evidence limitations.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-orientation.spec.js"
+      ],
+      "resolutionRationale": "Rotation and fullscreen restoration preserve caller-owned inline geometry; repeated entry, both destruction modes and real rotated playback/ratio/flip are verified. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-LIFE-22",
+      "title": "Orientation lock success after fullscreen exit reactivates a cancelled player",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-16"
+      ],
+      "evidence": [
+        "test/browser/display-orientation.spec.js",
+        "test/display-orientation.test.js",
+        "refactor/baselines/display-orientation-validation.json"
+      ],
+      "compatibleResolution": "Scope rotation timers and subscriptions, cancel locks on exit/destroy, release cancelled late success, and protect newer ArtPlayer requests with per-platform ownership tokens.",
+      "closureCriteria": "Installed matrices and unit tests cover timer cancellation, late success/rejection, repeated entry, retry, destruction and cross-instance ownership; physical orientation remains an explicit device gate.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-16-display.md",
+        "refactor/baselines/display-validation.json",
+        "test/browser/display-orientation.spec.js",
+        "test/display-orientation.test.js"
+      ],
+      "resolutionRationale": "Owned timers and subscriptions cancel cleanly; orientation request tokens prevent stale classes/notices and old-instance unlock of newer ArtPlayer locks. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
     }
   ]
 }

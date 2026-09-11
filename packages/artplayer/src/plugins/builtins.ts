@@ -1,4 +1,4 @@
-import type { BuiltinRegistry, PluginHost } from './types'
+import type { BuiltinRegistry, PluginFactory, PluginHost } from './types'
 import { isClosing } from '../lifecycle/instance'
 import { isMobile } from '../utils/compatibility'
 import autoOrientation from './autoOrientation'
@@ -15,8 +15,10 @@ export default function installBuiltins<Host extends PluginHost<Host>>(registry:
     registry.add(lock)
   if (!isClosing(registry.art) && option.autoPlayback && !option.isLive)
     registry.add(autoPlayback)
-  if (!isClosing(registry.art) && option.autoOrientation && isMobile)
-    registry.add(autoOrientation)
+  if (!isClosing(registry.art) && option.autoOrientation && isMobile) {
+    // The JS constructor supplies the complete host before builtin installation.
+    registry.add(autoOrientation as unknown as PluginFactory<Host>)
+  }
   if (!isClosing(registry.art) && option.fastForward && isMobile && !option.isLive)
     registry.add(fastForward)
 }

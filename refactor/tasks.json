@@ -1049,11 +1049,14 @@
         "CORE-11",
         "CORE-12"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "显示模式服务和原公开属性门面",
       "acceptance": "模式互斥/恢复位置、手势权限、移动方向和退出失败通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-16-display.md",
+        "baselines/display-validation.json"
+      ]
     },
     {
       "id": "CORE-17",

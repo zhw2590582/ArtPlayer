@@ -70,3 +70,17 @@
 | BASE-DOM-08 | resolved / 已复现 | Sharing a live setting object leaves a second published instance blank and can steal candidate bindings | CORE-14 |
 | BASE-LIFE-15 | resolved / 已复现 | Subtitle requests overwrite newer state and mutate tracks after destroy | CORE-15 |
 | BASE-LIFE-16 | resolved / 已复现 | Subtitle URLs revoke caller resources and leak the final generated resource | CORE-15 |
+| BASE-DOM-09 | resolved / 已复现 | Web fullscreen loses style and placement across repeated entry or configuration changes | CORE-16 |
+| BASE-LIFE-17 | resolved / 已复现 | Destroy in body web fullscreen leaves a connected orphan player | CORE-16 |
+| BASE-DOM-10 | resolved / 已复现 | Native fullscreen state and exit affect unrelated player instances | CORE-16 |
+| BASE-LIFE-18 | resolved / 已复现 | Native fullscreen retains destroyed listeners and leaks rejected request listeners | CORE-16 |
+| BASE-DOM-11 | resolved / 已复现 | Video-only fullscreen ignores native video state and begin/end transitions | CORE-16 |
+| BASE-LIFE-19 | resolved / 已复现 | Video-only fullscreen survives player destruction and late entry | CORE-16 |
+| BASE-DOM-12 | resolved / 已复现 | PiP reports another video as active and WebKit ignores native presentation transitions | CORE-16 |
+| BASE-LIFE-20 | resolved / 已复现 | PiP survives destruction or late entry and rejected assignments become unhandled | CORE-16 |
+| BASE-TYPE-10 | open / 已复现 | PiP getter is declared boolean but native runtime returns an element or null | CORE-16, CORE-21 |
+| BASE-DOM-13 | resolved / 已复现 | Mini exit loses the video's original parent and sibling position | CORE-16 |
+| BASE-LIFE-21 | resolved / 已复现 | Mini leaves a connected popup after player destruction | CORE-16 |
+| BASE-DOM-14 | resolved / 已复现 | Unready media sizing partially overwrites layout and emits NaN height | CORE-16 |
+| BASE-DOM-15 | resolved / 已复现 | Auto orientation exit clears caller-owned inline dimensions and transforms | CORE-16 |
+| BASE-LIFE-22 | resolved / 已复现 | Orientation lock success after fullscreen exit reactivates a cancelled player | CORE-16 |

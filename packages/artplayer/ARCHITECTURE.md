@@ -4,6 +4,181 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Display modes (CORE-16, in progress)
+
+player/autoSizeMix.ts, autoHeightMix.ts, aspectRatioMix.ts and flipMix.ts retain the
+own-property facades, detached method binding, synchronous returns and normal events.
+display/sizing.ts contains geometry only; sizing-types.ts describes the minimal hosts.
+Zero/unready/non-finite media or container dimensions defer auto sizing without layout
+writes or invalid height events; the next valid call measures and applies normally.
+Aspect ratios retain split/Number coercion, datasets, notices and repeated events.
+Malformed or unusable ratios do not partially overwrite existing video geometry.
+Flip keeps custom strings and falsy normalization. Closing instances ignore these writes.
+Run `node --test test/display-sizing.test.js` and
+`yarn test:browser test/browser/display-sizing.spec.js` for geometry invariants, old/new
+property contracts, hidden-container recovery, notices and destruction. Composition with
+screen rotation is tested below; final installed-artifact acceptance remains a CORE-16 gate.
+
+plugins/autoOrientation.ts composes the mobile-only builtin, retaining its name/state
+getter and mismatch rule. It rejects unready geometry and scopes the two ArtPlayer event
+subscriptions. orientation-types.ts models the minimal host and optional platform lock.
+The builtin registry currently bridges its generic JS host at this one assembly boundary;
+the complete constructor host remains for CORE-21, without widening the implementation.
+
+display/orientation-web.ts owns delayed rotation and its four inline style properties.
+Each new fullscreen session cancels the previous timer. Repeated entry reapplies dimensions
+without replacing the first snapshot. On ordinary exit fullscreenWeb has already restored
+the full entry style, so rotation only clears its flags; destroy restores rotation properties
+before fullscreenWeb performs its own final restoration. Resize may update control CSS
+variables independently. The scope cancels timers and removes subscriptions on destruction.
+
+display/orientation-native.ts owns lock requests, error notices and fullscreen rotation
+classes. It calls lock synchronously, marks success only while current, and cancels on exit
+or destroy. A weak per-platform-object token prevents cancelled or older instances from
+unlocking a newer ArtPlayer request. Late cancelled success is released; obsolete failures
+cannot overwrite current notices. Unlock is best effort, consistent with the prior API;
+arbitrary application calls outside ArtPlayer cannot be tracked as owned locks.
+
+Run `node --test test/display-orientation.test.js` and
+`yarn test:browser test/browser/display-orientation.spec.js` for cancellation, retry, shared
+screen ownership, repeated entry, styles, timers, real rotated playback and ratio/flip
+composition. The browser fixture uses a mobile UA with desktop engines and controlled
+orientation.lock; it does not establish physical screen rotation or safe-area device support.
+The [Screen Orientation specification](https://www.w3.org/TR/screen-orientation/) permits
+platform preconditions for lock and defines superseding requests; capability and device
+acceptance must stay distinct from controlled request-state tests.
+
+player/fullscreenWebMix.ts is the boolean property facade. display/web-fullscreen.ts
+owns a single entry-session snapshot, reentry generations and destroy restoration;
+display/placement.ts captures the original parent and next sibling. Repeated entry
+preserves the first snapshot while keeping the existing true events. Exit restores
+the captured position even if FULLSCREEN_WEB_IN_BODY changes while active. Destruction
+restores the player before template.destroy, so removeHtml still owns the same tree.
+Failed exit retains the snapshot for retry; reentrant event/DOM callbacks supersede
+the earlier setter. Normal fullscreenWeb/resize ordering remains synchronous.
+
+Destroy is terminal: if restoring the original position throws before reattachment,
+detach the displaced player so template cleanup cannot leave an orphan in body. The
+original error still propagates; if detachment also fails, the lifecycle collector
+retains both failures. A node already returned to its owner is left for normal
+removeHtml handling. This exceptional fallback can leave retained HTML detached.
+
+Restore the exact style attribute before the exit event; downstream resize handlers
+may update their own CSS variables. display-web.spec.js checks that distinction along
+with original placement, repeated entry, failure, reentry and destruction. The native
+fullscreen/PiP/mini/sizing/rotation paths have migrated source, while complete
+acceptance remain CORE-16; this section does not certify physical mobile devices.
+
+player/fullscreenMix.ts still installs the fullscreen descriptor once after metadata.
+display/fullscreen-adapter.ts reuses the unchanged screenfull vendor method mapping;
+display/native-fullscreen.ts owns instance state, native events, cancellation and notices.
+The getter and exit operation concern this player's container/video, not any document
+fullscreen element. Normal fullscreen events precede class changes and resize. Reentrant
+setters invalidate stale work while same-state reentry still updates the interface.
+
+display/fullscreen-request.ts invokes the native API on the caller stack, preserving
+transient user activation. Native Promise results remain authoritative for their errors;
+void prefixed APIs settle from change/error events. Void exit waits until neither the
+instance player nor video owns fullscreen, even
+when the request target was the player. Another element becoming fullscreen completes
+the old exit without giving this instance ownership of that new element. Cancelled calls
+settle promptly and lose their instance listeners. Descriptor callers can observe rejection identity;
+ordinary assignments report a notice without creating an unhandled rejection.
+
+Unabortable void entry has no Promise to observe after destruction. Only cancellation
+of that path creates display/fullscreen-abandoned.ts's document-lifetime change guard.
+It keeps weak element keys and native exit operations, never player instances/scopes;
+unrelated targets are ignored and a new entry clears the old cancellation. This shared
+guard intentionally outlives instances, unlike their ordinary change/error listeners.
+Post-destroy native exit is best effort: browser denial cannot be undone synchronously.
+
+Run `node --test test/display-native.test.js` for controlled async/reentry semantics.
+For native gesture, recovery and subtitle checks:
+
+```sh
+yarn test:browser test/browser/display-native.spec.js test/browser/display-web.spec.js test/browser/subtitle-lifecycle.spec.js
+```
+
+Void cancellation in desktop browsers uses controlled native methods; it does not certify
+old browser versions or iOS video-only fullscreen. Remaining failure boundaries and
+final installed distribution acceptance remain in CORE-16.
+
+display/video-fullscreen.ts owns the video-only WebKit fallback. It retains the
+synchronous property setter and native thrown error, and listens to video begin/end,
+presentation-mode changes and the existing document event bridge. The state helper in
+display/video-fullscreen-state.ts distinguishes fullscreen from PiP when a presentation
+mode exists, otherwise reads webkitDisplayingFullscreen or the video event fallback.
+Repeated signals emit one transition; an exit failure retains actual state for retry.
+
+Destroy releases all instance listeners and exits active video presentation. A pending
+unabortable entry leaves only a static listener on that video with a weak cancellation
+mark; this callback references no ArtPlayer/scope and exits late entry. New entry removes
+the cancellation. Synchronous exit failure during destroy propagates through the normal
+lifecycle cleanup collector; late cancellation cleanup is best effort. No document-wide
+listener is installed for this video-only path.
+
+Use `node --test test/display-video-fullscreen.test.js` and
+`yarn test:browser test/browser/display-video-fullscreen.spec.js` for controlled fallback
+checks, plus native/fullscreenWeb/subtitle tests for composition. The desktop fixture
+forces the fallback and emulates native video events; it does not prove physical iOS
+presentation or gesture behavior. Apple documents the distinct video events in
+[Controlling Media with JavaScript](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/ControllingMediaWithJavaScript/ControllingMediaWithJavaScript.html).
+
+player/pipMix.ts chooses callable native, WebKit or unsupported capabilities and installs
+the original property descriptor. display/native-pip.ts keeps the element/null getter,
+void setter, native entry/leave events and failure notices. It never exits another
+video's PiP; revisions suppress obsolete notices, cancellation rejects late entry, and
+destroy disposes listeners before exiting owned presentation. Request invocation remains
+synchronous for transient activation. Async rejection is handled internally because the
+historical void setter cannot expose a Promise; native synchronous errors still throw.
+An old queued leave event is ignored while this video still owns the current PiP session;
+actual ownership loss continues to emit the existing false notification.
+
+display/webkit-pip.ts keeps its boolean getter and initial inline setup. It observes both
+presentation-mode and PiP events, deduplicates native signals, and retains repeated
+synchronous setter notifications. Capability is checked at entry so later media readiness
+can allow retry. Cancelled pending entry leaves only a static video-held callback and weak
+mark, with no art/scope closure. Inline cleanup never exits a different fullscreen mode.
+Destruction's synchronous WebKit failure follows the normal lifecycle error collector;
+late cleanup is best effort. Platform UI remains the browser's responsibility.
+
+The internal PipProperty reflects the branch-dependent getter. Historical public boolean
+declarations remain unchanged pending BASE-TYPE-10 / CORE-21; this is an explicit legacy
+declaration discrepancy, not a reason to convert native JS consumers to boolean.
+Run `node --test test/display-pip.test.js` and
+`yarn test:browser test/browser/display-pip.spec.js test/browser/display-pip-webkit.spec.js`.
+The actual native test records capabilities and, when supported, a native window, media
+progress, exit and fullscreenWeb/native-fullscreen transitions. WebKit event injection
+is separate from physical Safari/iOS validation. See the
+[PiP specification](https://w3c.github.io/picture-in-picture/) and
+[Apple's presentation-mode API](https://developer.apple.com/documentation/webkitjs/adding_picture_in_picture_to_your_safari_media_controls).
+
+player/miniMix.ts keeps the boolean mini descriptor. display/mini.ts owns entry/exit
+generations and video placement; mini-view.ts owns popup creation, controls, playback
+subscriptions and node removal. mini-drag.ts owns document mouse subscriptions and drag
+state; mini-layout.ts calculates finite saved/default coordinates and viewport bounds.
+The first popup keeps video-first DOM order and its default display; reuse moves the video
+last and uses flex as before. Repeated true/false events and storage keys left/top remain.
+
+Capture the original video parent and next sibling once per mini session. Exit restores
+that location, with the snapshot retained on failure for retry. Detach the snapshot before
+restoring DOM so a reentrant entry can capture its own placement. Serialize entry during
+view creation to avoid duplicate popups from custom icon getters. Failed creation disposes
+its partial view; hide/destroy during construction never leaves visible stale UI.
+
+Created popups and playback/drag listeners belong to the instance scope; hide keeps a
+reusable hidden popup but cancels drag, and destroy removes owned nodes and restores the
+video. A caller-provided template.$mini stays caller-owned and regains its prior display
+on destroy. Drag uses client coordinates for fixed positioning, clamps its final position,
+and writes numeric left/top. Normal defaults retain a 50px inset; non-finite/offscreen
+storage resets, and CSS max-width/max-height keep the popup inside a smaller viewport.
+
+Run `node --test test/display-mini.test.js` and
+`yarn test:browser test/browser/display-mini.spec.js test/browser/display-pip.spec.js`.
+Browser checks include video placement, playback buttons, actual drag, failure/reentry,
+caller ownership, narrow screens and transitions from mini to web fullscreen/native PiP.
+Final installed display-mode acceptance is still pending with CORE-16.
+
 ## Subtitles (CORE-15)
 
 src/subtitle/index.ts keeps the Component prototype, bound update, public methods and
