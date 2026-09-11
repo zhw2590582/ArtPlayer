@@ -100,3 +100,14 @@
 | BASE-LIFE-33 | resolved / 已复现 | Auto-playback restarts retain obsolete resume clicks, subscriptions and timers | CORE-18 |
 | BASE-LIFE-34 | resolved / 已复现 | Lock icon and miniature progress subscriptions outlive their UI or player | CORE-18 |
 | BASE-LIFE-35 | resolved / 已复现 | Info repeated initialization retains polling and close callbacks; destroyed reads continue writing | CORE-18 |
+| BASE-LIFE-36 | resolved / 已复现 | Screenshot Blob callback failures escape and leave public promises pending | CORE-19 |
+| BASE-LIFE-37 | resolved / 已复现 | Screenshot completion can download or emit after destruction or source replacement | CORE-19 |
+| BASE-LIFE-38 | resolved / 已复现 | Screenshot toolbar leaves internal capture failures as unhandled rejections | CORE-19 |
+| BASE-LIFE-39 | resolved / 已复现 | Thumbnail image completions can overwrite newer configuration or hover state and outlive controls | CORE-19 |
+| BASE-LIFE-40 | resolved / 已复现 | Image load failures leave thumbnail loading frozen and canvas callback failures escape public loadImg promises | CORE-19 |
+| BASE-LIFE-41 | resolved / 已复现 | Scaled thumbnail Blob URLs survive replacement, control removal and destruction | CORE-19 |
+| BASE-DOM-19 | resolved / 已复现 | Thumbnail row boundaries and first-cell return do not match the generated zero-based sprite grid | CORE-19 |
+| BASE-LIFE-42 | resolved / 已复现 | Progress callbacks and active drags can seek an obsolete source or removed control | CORE-19 |
+| BASE-LIFE-43 | resolved / 已复现 | Replacing a media source revokes a caller-owned Blob URL still in use | CORE-19 |
+| BASE-LIFE-44 | resolved / 已复现 | Native quality restoration can settle at a different position after its first seek | CORE-19 |
+| BASE-ENV-01 | open / 已复现 | Windows WebKit native Blob video samples lack decoding support; Apple-device validation remains outstanding | REL-03, REVIEW-02 |

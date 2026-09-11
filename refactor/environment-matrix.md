@@ -55,6 +55,12 @@ Node10 是 TS 模块解析模式名，不代表支持 Node.js 10。现代 es2020
 | artplayer-tool-thumbnail / 4.4.0 | 视频抽帧、下载图片/VTT、seek/错误/取消；本地 MP4 | BASE-DIST-01 的入口/声明问题待核实；Canvas/下载/移动待 | PKG-TOOL-THUMB-01/02/04/05/06 |
 | artplayer-vitepress / 1.1.0 | ENV-SITE；Monaco/vConsole、示例 CDN/声明、构建静态资源 | 本地站点构建已验；编辑器实际执行/移动 HTML/旧链接待，npm 意图待核实 | SITE-01/02/03/04/05/06、EX-01/02/03 |
 
+## CORE-19 本机 Blob 媒体能力证据
+
+2026-09-11，Windows 上 Playwright WebKit 26.6 的独立原生 video 探针，对本地 MP4 和 WebM 转成 Blob URL 后均返回 MEDIA_ERR_SRC_NOT_SUPPORTED（code 4），videoWidth=0；探针不经过 ArtPlayer。相同检查在 Chromium 153.0.8010.12、Firefox 155.0 可解码。精确样本哈希与引擎版本由 browser-evidence manifest 和 native-blob-capabilities 附件记录。
+
+WebKit 仍验证真实 HTTP 播放、Blob URL 实际赋值、切源/销毁后的字节可读性，borrowed-url-evidence 明确 decodedBlob=false；这不能充当 Blob 视频解码通过。BASE-ENV-01 保留 open，REL-03/REVIEW-02 需在真实 Safari/Apple 设备复验样本、播放、seek、切源和资源归属，区分系统 codec 能力与候选回归。本机结论不外推全部 WebKit 或 Safari。
+
 ## 报告和发布判定
 
 已有报告位置见上文及 baselines/；新验证将命令、源码 SHA/候选 tarball integrity、包/核心/SDK/浏览器/OS/设备版本、样本哈希与 codec、能力检测、通过/失败/缺环境、trace 位置和限制写入对应 changes/任务记录，CI 大型 trace/录像留 artifact。缺环境报告写清获得何种设备/服务后执行哪个场景，不能虚构负责人姓名或设备版本。

@@ -1,5 +1,6 @@
 import type { ControlFactory, ControlOption } from './types'
 import { appendElement } from '../component/dom'
+import { silencePromise } from '../utils'
 import { controlEvents } from './resources'
 
 export default function screenshot(option: ControlOption): ControlFactory {
@@ -12,7 +13,7 @@ export default function screenshot(option: ControlOption): ControlFactory {
 
       appendElement($control, icons.screenshot)
       proxy($control, 'click', () => {
-        art.screenshot()
+        silencePromise(art.screenshot())
       })
     },
   })

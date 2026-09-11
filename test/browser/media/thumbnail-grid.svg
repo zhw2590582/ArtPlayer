@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600">
+  <rect x="0" y="0" width="100" height="60" fill="hsl(0 70% 45%)"/>
+  <text x="35" y="38" fill="white" font-size="25">0</text>
+  <rect x="100" y="0" width="100" height="60" fill="hsl(137.508 70% 45%)"/>
+  <text x="135" y="38" fill="white" font-size="25">1</text>
+  <rect x="200" y="0" width="100" height="60" fill="hsl(275.016 70% 45%)"/>
+  <text x="235" y="38" fill="white" font-size="25">2</text>
+  <rect x="300" y="0" width="100" height="60" fill="hsl(52.524 70% 45%)"/>
+  <text x="335" y="38" fill="white" font-size="25">3</text>
+  <rect x="400" y="0" width="100" height="60" fill="hsl(190.03200000000004 70% 45%)"/>
+  <text x="435" y="38" fill="white" font-size="25">4</text>
+  <rect x="500" y="0" width="100" height="60" fill="hsl(327.5400000000001 70% 45%)"/>
+  <text x="535" y="38" fill="white" font-size="25">5</text>
+  <rect x="600" y="0" width="100" height="60" fill="hsl(105.048 70% 45%)"/>
+  <text x="635" y="38" fill="white" font-size="25">6</text>
+  <rect x="700" y="0" width="100" height="60" fill="hsl(242.55600000000004 70% 45%)"/>
+  <text x="735" y="38" fill="white" font-size="25">7</text>
+  <rect x="800" y="0" width="100" height="60" fill="hsl(20.064000000000078 70% 45%)"/>
+  <text x="835" y="38" fill="white" font-size="25">8</text>
+  <rect x="900" y="0" width="100" height="60" fill="hsl(157.57200000000012 70% 45%)"/>
+  <text x="935" y="38" fill="white" font-size="25">9</text>
+  <rect x="0" y="60" width="100" height="60" fill="hsl(295.08000000000015 70% 45%)"/>
+  <text x="35" y="98" fill="white" font-size="25">10</text>
+  <rect x="100" y="60" width="100" height="60" fill="hsl(72.58800000000019 70% 45%)"/>
+  <text x="135" y="98" fill="white" font-size="25">11</text>
+  <rect x="200" y="60" width="100" height="60" fill="hsl(210.096 70% 45%)"/>
+  <text x="235" y="98" fill="white" font-size="25">12</text>
+  <rect x="300" y="60" width="100" height="60" fill="hsl(347.60400000000004 70% 45%)"/>
+  <text x="335" y="98" fill="white" font-size="25">13</text>
+  <rect x="400" y="60" width="100" height="60" fill="hsl(125.11200000000008 70% 45%)"/>
+  <text x="435" y="98" fill="white" font-size="25">14</text>
+  <rect x="500" y="60" width="100" height="60" fill="hsl(262.62000000000035 70% 45%)"/>
+  <text x="535" y="98" fill="white" font-size="25">15</text>
+  <rect x="600" y="60" width="100" height="60" fill="hsl(40.128000000000156 70% 45%)"/>
+  <text x="635" y="98" fill="white" font-size="25">16</text>
+  <rect x="700" y="60" width="100" height="60" fill="hsl(177.63599999999997 70% 45%)"/>
+  <text x="735" y="98" fill="white" font-size="25">17</text>
+  <rect x="800" y="60" width="100" height="60" fill="hsl(315.14400000000023 70% 45%)"/>
+  <text x="835" y="98" fill="white" font-size="25">18</text>
+  <rect x="900" y="60" width="100" height="60" fill="hsl(92.65200000000004 70% 45%)"/>
+  <text x="935" y="98" fill="white" font-size="25">19</text>
+  <rect x="0" y="120" width="100" height="60" fill="hsl(230.1600000000003 70% 45%)"/>
+  <text x="35" y="158" fill="white" font-size="25">20</text>
+  <rect x="100" y="120" width="100" height="60" fill="hsl(7.66800000000012 70% 45%)"/>
+  <text x="135" y="158" fill="white" font-size="25">21</text>
+  <rect x="200" y="120" width="100" height="60" fill="hsl(145.17600000000039 70% 45%)"/>
+  <text x="235" y="158" fill="white" font-size="25">22</text>
+  <rect x="300" y="120" width="100" height="60" fill="hsl(282.6840000000002 70% 45%)"/>
+  <text x="335" y="158" fill="white" font-size="25">23</text>
+  <rect x="400" y="120" width="100" height="60" fill="hsl(60.19200000000001 70% 45%)"/>
+  <text x="435" y="158" fill="white" font-size="25">24</text>
+  <rect x="500" y="120" width="100" height="60" fill="hsl(197.70000000000027 70% 45%)"/>
+  <text x="535" y="158" fill="white" font-size="25">25</text>
+  <rect x="600" y="120" width="100" height="60" fill="hsl(335.2080000000001 70% 45%)"/>
+  <text x="635" y="158" fill="white" font-size="25">26</text>
+  <rect x="700" y="120" width="100" height="60" fill="hsl(112.71600000000035 70% 45%)"/>
+  <text x="735" y="158" fill="white" font-size="25">27</text>
+  <rect x="800" y="120" width="100" height="60" fill="hsl(250.22400000000016 70% 45%)"/>
+  <text x="835" y="158" fill="white" font-size="25">28</text>
+  <rect x="900" y="120" width="100" height="60" fill="hsl(27.732000000000426 70% 45%)"/>
+  <text x="935" y="158" fill="white" font-size="25">29</text>
+  <rect x="0" y="180" width="100" height="60" fill="hsl(165.2400000000007 70% 45%)"/>
+  <text x="35" y="218" fill="white" font-size="25">30</text>
+  <rect x="100" y="180" width="100" height="60" fill="hsl(302.7480000000005 70% 45%)"/>
+  <text x="135" y="218" fill="white" font-size="25">31</text>
+  <rect x="200" y="180" width="100" height="60" fill="hsl(80.25600000000031 70% 45%)"/>
+  <text x="235" y="218" fill="white" font-size="25">32</text>
+  <rect x="300" y="180" width="100" height="60" fill="hsl(217.76400000000012 70% 45%)"/>
+  <text x="335" y="218" fill="white" font-size="25">33</text>
+  <rect x="400" y="180" width="100" height="60" fill="hsl(355.27199999999993 70% 45%)"/>
+  <text x="435" y="218" fill="white" font-size="25">34</text>
+  <rect x="500" y="180" width="100" height="60" fill="hsl(132.78000000000065 70% 45%)"/>
+  <text x="535" y="218" fill="white" font-size="25">35</text>
+  <rect x="600" y="180" width="100" height="60" fill="hsl(270.28800000000047 70% 45%)"/>
+  <text x="635" y="218" fill="white" font-size="25">36</text>
+  <rect x="700" y="180" width="100" height="60" fill="hsl(47.79600000000028 70% 45%)"/>
+  <text x="735" y="218" fill="white" font-size="25">37</text>
+  <rect x="800" y="180" width="100" height="60" fill="hsl(185.3040000000001 70% 45%)"/>
+  <text x="835" y="218" fill="white" font-size="25">38</text>
+  <rect x="900" y="180" width="100" height="60" fill="hsl(322.8120000000008 70% 45%)"/>
+  <text x="935" y="218" fill="white" font-size="25">39</text>
+  <rect x="0" y="240" width="100" height="60" fill="hsl(100.32000000000062 70% 45%)"/>
+  <text x="35" y="278" fill="white" font-size="25">40</text>
+  <rect x="100" y="240" width="100" height="60" fill="hsl(237.82800000000043 70% 45%)"/>
+  <text x="135" y="278" fill="white" font-size="25">41</text>
+  <rect x="200" y="240" width="100" height="60" fill="hsl(15.33600000000024 70% 45%)"/>
+  <text x="235" y="278" fill="white" font-size="25">42</text>
+  <rect x="300" y="240" width="100" height="60" fill="hsl(152.84400000000005 70% 45%)"/>
+  <text x="335" y="278" fill="white" font-size="25">43</text>
+  <rect x="400" y="240" width="100" height="60" fill="hsl(290.35200000000077 70% 45%)"/>
+  <text x="435" y="278" fill="white" font-size="25">44</text>
+  <rect x="500" y="240" width="100" height="60" fill="hsl(67.86000000000058 70% 45%)"/>
+  <text x="535" y="278" fill="white" font-size="25">45</text>
+  <rect x="600" y="240" width="100" height="60" fill="hsl(205.3680000000004 70% 45%)"/>
+  <text x="635" y="278" fill="white" font-size="25">46</text>
+  <rect x="700" y="240" width="100" height="60" fill="hsl(342.8760000000002 70% 45%)"/>
+  <text x="735" y="278" fill="white" font-size="25">47</text>
+  <rect x="800" y="240" width="100" height="60" fill="hsl(120.38400000000001 70% 45%)"/>
+  <text x="835" y="278" fill="white" font-size="25">48</text>
+  <rect x="900" y="240" width="100" height="60" fill="hsl(257.89200000000073 70% 45%)"/>
+  <text x="935" y="278" fill="white" font-size="25">49</text>
+  <rect x="0" y="300" width="100" height="60" fill="hsl(35.400000000000546 70% 45%)"/>
+  <text x="35" y="338" fill="white" font-size="25">50</text>
+  <rect x="100" y="300" width="100" height="60" fill="hsl(172.90800000000036 70% 45%)"/>
+  <text x="135" y="338" fill="white" font-size="25">51</text>
+  <rect x="200" y="300" width="100" height="60" fill="hsl(310.41600000000017 70% 45%)"/>
+  <text x="235" y="338" fill="white" font-size="25">52</text>
+  <rect x="300" y="300" width="100" height="60" fill="hsl(87.92400000000089 70% 45%)"/>
+  <text x="335" y="338" fill="white" font-size="25">53</text>
+  <rect x="400" y="300" width="100" height="60" fill="hsl(225.4320000000007 70% 45%)"/>
+  <text x="435" y="338" fill="white" font-size="25">54</text>
+  <rect x="500" y="300" width="100" height="60" fill="hsl(2.9400000000005093 70% 45%)"/>
+  <text x="535" y="338" fill="white" font-size="25">55</text>
+  <rect x="600" y="300" width="100" height="60" fill="hsl(140.44800000000032 70% 45%)"/>
+  <text x="635" y="338" fill="white" font-size="25">56</text>
+  <rect x="700" y="300" width="100" height="60" fill="hsl(277.95600000000013 70% 45%)"/>
+  <text x="735" y="338" fill="white" font-size="25">57</text>
+  <rect x="800" y="300" width="100" height="60" fill="hsl(55.46400000000085 70% 45%)"/>
+  <text x="835" y="338" fill="white" font-size="25">58</text>
+  <rect x="900" y="300" width="100" height="60" fill="hsl(192.97200000000066 70% 45%)"/>
+  <text x="935" y="338" fill="white" font-size="25">59</text>
+  <rect x="0" y="360" width="100" height="60" fill="hsl(330.4800000000014 70% 45%)"/>
+  <text x="35" y="398" fill="white" font-size="25">60</text>
+  <rect x="100" y="360" width="100" height="60" fill="hsl(107.9880000000012 70% 45%)"/>
+  <text x="135" y="398" fill="white" font-size="25">61</text>
+  <rect x="200" y="360" width="100" height="60" fill="hsl(245.496000000001 70% 45%)"/>
+  <text x="235" y="398" fill="white" font-size="25">62</text>
+  <rect x="300" y="360" width="100" height="60" fill="hsl(23.004000000000815 70% 45%)"/>
+  <text x="335" y="398" fill="white" font-size="25">63</text>
+  <rect x="400" y="360" width="100" height="60" fill="hsl(160.51200000000063 70% 45%)"/>
+  <text x="435" y="398" fill="white" font-size="25">64</text>
+  <rect x="500" y="360" width="100" height="60" fill="hsl(298.02000000000044 70% 45%)"/>
+  <text x="535" y="398" fill="white" font-size="25">65</text>
+  <rect x="600" y="360" width="100" height="60" fill="hsl(75.52800000000025 70% 45%)"/>
+  <text x="635" y="398" fill="white" font-size="25">66</text>
+  <rect x="700" y="360" width="100" height="60" fill="hsl(213.03600000000006 70% 45%)"/>
+  <text x="735" y="398" fill="white" font-size="25">67</text>
+  <rect x="800" y="360" width="100" height="60" fill="hsl(350.54399999999987 70% 45%)"/>
+  <text x="835" y="398" fill="white" font-size="25">68</text>
+  <rect x="900" y="360" width="100" height="60" fill="hsl(128.0520000000015 70% 45%)"/>
+  <text x="935" y="398" fill="white" font-size="25">69</text>
+  <rect x="0" y="420" width="100" height="60" fill="hsl(265.5600000000013 70% 45%)"/>
+  <text x="35" y="458" fill="white" font-size="25">70</text>
+  <rect x="100" y="420" width="100" height="60" fill="hsl(43.06800000000112 70% 45%)"/>
+  <text x="135" y="458" fill="white" font-size="25">71</text>
+  <rect x="200" y="420" width="100" height="60" fill="hsl(180.57600000000093 70% 45%)"/>
+  <text x="235" y="458" fill="white" font-size="25">72</text>
+  <rect x="300" y="420" width="100" height="60" fill="hsl(318.08400000000074 70% 45%)"/>
+  <text x="335" y="458" fill="white" font-size="25">73</text>
+  <rect x="400" y="420" width="100" height="60" fill="hsl(95.59200000000055 70% 45%)"/>
+  <text x="435" y="458" fill="white" font-size="25">74</text>
+  <rect x="500" y="420" width="100" height="60" fill="hsl(233.10000000000036 70% 45%)"/>
+  <text x="535" y="458" fill="white" font-size="25">75</text>
+  <rect x="600" y="420" width="100" height="60" fill="hsl(10.608000000000175 70% 45%)"/>
+  <text x="635" y="458" fill="white" font-size="25">76</text>
+  <rect x="700" y="420" width="100" height="60" fill="hsl(148.11599999999999 70% 45%)"/>
+  <text x="735" y="458" fill="white" font-size="25">77</text>
+  <rect x="800" y="420" width="100" height="60" fill="hsl(285.6240000000016 70% 45%)"/>
+  <text x="835" y="458" fill="white" font-size="25">78</text>
+  <rect x="900" y="420" width="100" height="60" fill="hsl(63.132000000001426 70% 45%)"/>
+  <text x="935" y="458" fill="white" font-size="25">79</text>
+  <rect x="0" y="480" width="100" height="60" fill="hsl(200.64000000000124 70% 45%)"/>
+  <text x="35" y="518" fill="white" font-size="25">80</text>
+  <rect x="100" y="480" width="100" height="60" fill="hsl(338.14800000000105 70% 45%)"/>
+  <text x="135" y="518" fill="white" font-size="25">81</text>
+  <rect x="200" y="480" width="100" height="60" fill="hsl(115.65600000000086 70% 45%)"/>
+  <text x="235" y="518" fill="white" font-size="25">82</text>
+  <rect x="300" y="480" width="100" height="60" fill="hsl(253.16400000000067 70% 45%)"/>
+  <text x="335" y="518" fill="white" font-size="25">83</text>
+  <rect x="400" y="480" width="100" height="60" fill="hsl(30.67200000000048 70% 45%)"/>
+  <text x="435" y="518" fill="white" font-size="25">84</text>
+  <rect x="500" y="480" width="100" height="60" fill="hsl(168.1800000000003 70% 45%)"/>
+  <text x="535" y="518" fill="white" font-size="25">85</text>
+  <rect x="600" y="480" width="100" height="60" fill="hsl(305.6880000000001 70% 45%)"/>
+  <text x="635" y="518" fill="white" font-size="25">86</text>
+  <rect x="700" y="480" width="100" height="60" fill="hsl(83.19600000000173 70% 45%)"/>
+  <text x="735" y="518" fill="white" font-size="25">87</text>
+  <rect x="800" y="480" width="100" height="60" fill="hsl(220.70400000000154 70% 45%)"/>
+  <text x="835" y="518" fill="white" font-size="25">88</text>
+  <rect x="900" y="480" width="100" height="60" fill="hsl(358.21200000000135 70% 45%)"/>
+  <text x="935" y="518" fill="white" font-size="25">89</text>
+  <rect x="0" y="540" width="100" height="60" fill="hsl(135.72000000000116 70% 45%)"/>
+  <text x="35" y="578" fill="white" font-size="25">90</text>
+  <rect x="100" y="540" width="100" height="60" fill="hsl(273.228000000001 70% 45%)"/>
+  <text x="135" y="578" fill="white" font-size="25">91</text>
+  <rect x="200" y="540" width="100" height="60" fill="hsl(50.736000000000786 70% 45%)"/>
+  <text x="235" y="578" fill="white" font-size="25">92</text>
+  <rect x="300" y="540" width="100" height="60" fill="hsl(188.2440000000006 70% 45%)"/>
+  <text x="335" y="578" fill="white" font-size="25">93</text>
+  <rect x="400" y="540" width="100" height="60" fill="hsl(325.7520000000004 70% 45%)"/>
+  <text x="435" y="578" fill="white" font-size="25">94</text>
+  <rect x="500" y="540" width="100" height="60" fill="hsl(103.26000000000022 70% 45%)"/>
+  <text x="535" y="578" fill="white" font-size="25">95</text>
+  <rect x="600" y="540" width="100" height="60" fill="hsl(240.76800000000003 70% 45%)"/>
+  <text x="635" y="578" fill="white" font-size="25">96</text>
+  <rect x="700" y="540" width="100" height="60" fill="hsl(18.27600000000166 70% 45%)"/>
+  <text x="735" y="578" fill="white" font-size="25">97</text>
+  <rect x="800" y="540" width="100" height="60" fill="hsl(155.78400000000147 70% 45%)"/>
+  <text x="835" y="578" fill="white" font-size="25">98</text>
+  <rect x="900" y="540" width="100" height="60" fill="hsl(293.2920000000013 70% 45%)"/>
+  <text x="935" y="578" fill="white" font-size="25">99</text>
+</svg>

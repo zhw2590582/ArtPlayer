@@ -1,4 +1,4 @@
-export type SourceEvent = 'video:error' | 'video:loadedmetadata' | 'video:canplay'
+export type SourceEvent = 'video:error' | 'video:loadedmetadata' | 'video:canplay' | 'video:seeked' | 'seek'
 export type SourceListener = (event?: unknown) => void
 
 export interface SourceEvents {
@@ -28,6 +28,7 @@ export interface UrlHost<Media extends SourceMedia, Host> extends UrlTarget, Sou
 }
 
 export interface SwitchHost extends UrlTarget, SourceEvents {
+  template?: { $video?: { readonly seeking?: boolean } }
   currentTime: number
   readonly playing: boolean
   aspectRatio: string

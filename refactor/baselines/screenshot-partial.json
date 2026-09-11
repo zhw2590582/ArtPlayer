@@ -1,0 +1,371 @@
+{
+  "task": "CORE-19",
+  "status": "partial",
+  "date": "2026-09-11",
+  "parentCommit": "98a18000321500f92f228be7b7edff4bda948a56",
+  "node": "v24.21.0",
+  "scope": "Screenshot source migration only. Thumbnail migration, progress/quality review, generated distribution and installed-package validation remain outstanding.",
+  "fingerprints": {
+    "packages/artplayer/src/player/screenshotMix.ts": "fb16737d3bb2735ef0d0aa1ebe536cc3418c27d92e1b66ad4b34e81c165773b2",
+    "packages/artplayer/src/capture/frame.ts": "eb25d81ec2d40a239103c63cfd80333705251291f2c2da77c740b4d413ea9cd9",
+    "packages/artplayer/src/control/screenshot.ts": "67be1306991861cb8bb0adec2b58a8468211459f9337895e611972dbb71a6ef5",
+    "test/screenshot.test.js": "740e879c9159c75e62240d37e3a327facb228f54b0b531e9da375c1f184abb24",
+    "test/types/screenshot.ts": "f329d9b897e9e9e4190ebc6ededfe55ccd0bebf796683615af103c19cf6b3947",
+    "test/browser/screenshot.spec.js": "a2b49fbd8616533fc351892c1f6687d588d2bc9350fda4be5475decb97d77a0e",
+    "package.json": "97a0860bb31a4ddae2db96854da1d5531e2d0c14c3b87e487336eb7edb64f2d5",
+    "yarn.lock": "80c78af925697e0ae55fae48a6a0761c60d231737a389324c82b6efef437f7c4",
+    "packages/artplayer/ARCHITECTURE.md": "00bcea6fa0424121f98d107448b7a1fd07bab32accbdd2f79cef8f60bafa48ae"
+  },
+  "before": {
+    "log": "refactor/.cache/core19-screenshot-before.log",
+    "sha256": "0e05e3a1abf0a4039eeaf243e89cfd0b094be41a862f269c823ae18af9bdde94",
+    "tests": 7,
+    "passed": 3,
+    "failed": 4,
+    "source": "HEAD screenshotMix.js before migration"
+  },
+  "ci": {
+    "tests": 383,
+    "unit": 354,
+    "engineering": 4,
+    "baseline": 25,
+    "productionTs": 202,
+    "screenshotTests": 11,
+    "publicTypesUnchanged": true,
+    "log": "refactor/.cache/core19-screenshot-ci.log",
+    "sha256": "84b2b0725cf85bedaebada67dba574af47a7d959a6dcc960183d789577bc9fa6"
+  },
+  "browser": {
+    "format": "source-built UMD, not installed tarball",
+    "tests": 39,
+    "retries": 0,
+    "skipped": 0,
+    "unexpectedPageErrors": 0,
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "knownRejections": [
+      {
+        "browser": "chromium",
+        "core": "published",
+        "rejections": [
+          "controlled screenshot draw failure"
+        ]
+      },
+      {
+        "browser": "chromium",
+        "core": "candidate",
+        "rejections": []
+      },
+      {
+        "browser": "firefox",
+        "core": "published",
+        "rejections": [
+          "controlled screenshot draw failure"
+        ]
+      },
+      {
+        "browser": "firefox",
+        "core": "candidate",
+        "rejections": []
+      },
+      {
+        "browser": "webkit",
+        "core": "published",
+        "rejections": [
+          "controlled screenshot draw failure"
+        ]
+      },
+      {
+        "browser": "webkit",
+        "core": "candidate",
+        "rejections": []
+      }
+    ],
+    "artifacts": {
+      "/candidate/artplayer.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer\\src\\index.js"
+        },
+        "sha256": "ef9fadfd897b2062d3f5661a0bb5640bf46ead4e3cae4ef6147114fe51250745",
+        "bytes": 319634
+      },
+      "/candidate/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+        },
+        "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+        "bytes": 8433
+      },
+      "/published/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "/published/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "1.1.0",
+          "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+          "member": "package/dist/artplayer-plugin-chapter.js"
+        },
+        "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "bytes": 4973
+      }
+    },
+    "cases": [
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-45f5a568a618398c2003",
+        "title": "published: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-df9c2bbb8d025d633416",
+        "title": "published: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-0a6dee5b9d177600d5a8",
+        "title": "published: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-8f64836f1c03f8d717e4",
+        "title": "published: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-b4214300e6ac634d4655",
+        "title": "published: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-792a2dbdf0f914f96ecd",
+        "title": "candidate: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-22a5ed94932418b4b372",
+        "title": "candidate: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-a632ad23423ba0506c16",
+        "title": "candidate: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-77348d8cffa16737f1dd",
+        "title": "candidate: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-623fad4c93a929006ed5",
+        "title": "candidate: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-9e300009a29a3180767b",
+        "title": "candidate: null toBlob callback rejects and reports without a page error",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-4bd04bd342c6bdf7a25b",
+        "title": "candidate: destroy during screenshot await suppresses the queued download and event",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-e0a456d9599734bf4dcf",
+        "title": "candidate: cross-origin screenshot toolbar handles its internal rejected Promise",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-103e07624403b62f7105",
+        "title": "published: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-d07a101b915332333405",
+        "title": "published: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-f9ac6b159f7b68e08d1f",
+        "title": "published: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-8f9455d971851037e69b",
+        "title": "published: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-2ee0a5945c50d9e45f02",
+        "title": "published: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-f19f61a7a1c98a24d88c",
+        "title": "candidate: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-65dd2ec52a2eb98f201a",
+        "title": "candidate: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-6b93df0891d1e9824971",
+        "title": "candidate: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-50103daef0af74cb00cc",
+        "title": "candidate: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-26c20a0c8613a9c27c04",
+        "title": "candidate: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-95ac367f79cfe12d6100",
+        "title": "candidate: null toBlob callback rejects and reports without a page error",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-0fa775711c5f64752304",
+        "title": "candidate: destroy during screenshot await suppresses the queued download and event",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-ee450bc7384fa2bf264f",
+        "title": "candidate: cross-origin screenshot toolbar handles its internal rejected Promise",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-c9c9cf5e121268cd3c46",
+        "title": "published: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-ca43428c5f3aaaeb4a6b",
+        "title": "published: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-9f3df52110132996acf1",
+        "title": "published: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-d6a14bd3846cace85be0",
+        "title": "published: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-f815992e0057af92552e",
+        "title": "published: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-c1936aa08e32e5571887",
+        "title": "candidate: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-e4a6e8d9ad57f6261d57",
+        "title": "candidate: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-64493da78eb55d39fce4",
+        "title": "candidate: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-0658f99f3c9a04fd2918",
+        "title": "candidate: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-43884fe589ffc5240a6c",
+        "title": "candidate: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-de63a41620e9a6fbb8a6",
+        "title": "candidate: null toBlob callback rejects and reports without a page error",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-9c57f1479f12611e3650",
+        "title": "candidate: destroy during screenshot await suppresses the queued download and event",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-db263e0db17b09f39961",
+        "title": "candidate: cross-origin screenshot toolbar handles its internal rejected Promise",
+        "status": "passed"
+      }
+    ],
+    "log": "refactor/.cache/core19-screenshot-browser-v2.json",
+    "sha256": "117aa85284e99d5fd5c2fc030e5ada2f68df4df321702ee7048a6f95badc283d"
+  },
+  "remaining": [
+    "Thumbnail generation, loading errors and internal Blob ownership",
+    "Quality/progress boundary regression",
+    "Full CORE-19 type/build/installed tarball browser validation",
+    "Close registered risks only with final evidence",
+    "Complete task documentation and separate local commit"
+  ]
+}

@@ -1,0 +1,597 @@
+{
+  "task": "CORE-19",
+  "status": "partial",
+  "date": "2026-09-11",
+  "node": "v24.21.0",
+  "parentCommit": "98a18000321500f92f228be7b7edff4bda948a56",
+  "scope": "Capture and thumbnails source migration. Progress/quality and borrowed media URL ownership review, final builds and installed-package exit remain outstanding.",
+  "fingerprints": {
+    "package.json": "a288e650a0a65e5c036b8504e8f01f4039e609798066741171045a1f1da4262f",
+    "yarn.lock": "80c78af925697e0ae55fae48a6a0761c60d231737a389324c82b6efef437f7c4",
+    "packages/artplayer/ARCHITECTURE.md": "f500068cbf7a6a3259887d4ae21e96da61753558841ab6510904148270b08d58",
+    "packages/artplayer/src/player/screenshotMix.ts": "fb16737d3bb2735ef0d0aa1ebe536cc3418c27d92e1b66ad4b34e81c165773b2",
+    "packages/artplayer/src/capture/frame.ts": "eb25d81ec2d40a239103c63cfd80333705251291f2c2da77c740b4d413ea9cd9",
+    "packages/artplayer/src/control/screenshot.ts": "67be1306991861cb8bb0adec2b58a8468211459f9337895e611972dbb71a6ef5",
+    "packages/artplayer/src/player/thumbnailsMix.ts": "6c097d7d00779a6d0d3d65cf9ffd126624a48c9bdb98396c84c39f4de4bdf712",
+    "packages/artplayer/src/thumbnails/layout.ts": "6630439242a880f53fcb374b7b15c7f486405aab8a0fad651b137f02971eeb59",
+    "packages/artplayer/src/image/load.ts": "b4f1517243249d5fb017b89f993660e8b148906bbf28d08fe5c9f6d3a41e1e88",
+    "packages/artplayer/src/utils/dom.js": "fd6148ff85ee97607de54652f0f1e4cb5158f628a2d0951f1946a21f2b4e0008",
+    "test/screenshot.test.js": "740e879c9159c75e62240d37e3a327facb228f54b0b531e9da375c1f184abb24",
+    "test/thumbnails.test.js": "367882200a3898cce718379f95bb80706d9d5ee06e8d8e3624acada118ccc41c",
+    "test/types/screenshot.ts": "f329d9b897e9e9e4190ebc6ededfe55ccd0bebf796683615af103c19cf6b3947",
+    "test/types/thumbnails.ts": "2b01c655ad30be3e9ef6732d13f85dbdf32cf71c734d63537bdb0f82ac69350c",
+    "test/browser/screenshot.spec.js": "a2b49fbd8616533fc351892c1f6687d588d2bc9350fda4be5475decb97d77a0e",
+    "test/browser/thumbnails.spec.js": "bc00e6fe6eb6987bd36193f26c69e2377249b53f41dfc1474dd44d6e833a2c09",
+    "test/browser/media/thumbnail-grid.svg": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+    "test/browser/server.mjs": "2b36e65ed9248f334b6dfb2d54a22cf5a26b3b531d7eb1f93392e38bb14d10cc"
+  },
+  "before": {
+    "file": "refactor/.cache/core19-thumbnails-before.log",
+    "sha256": "34f9d1cade73482bf90d05775db461a0dbf18b47dfba755127f52f6a873bf531",
+    "tests": 7,
+    "passed": 2,
+    "failed": 5,
+    "note": "Initial baseline used the old crop expectations; after generator review, final tests explicitly validate corrected zero-based grid cells."
+  },
+  "ci": {
+    "tests": 401,
+    "unit": 372,
+    "engineering": 4,
+    "baseline": 25,
+    "screenshotTests": 11,
+    "thumbnailTests": 18,
+    "productionTs": 205,
+    "publicTypesUnchanged": true,
+    "file": "refactor/.cache/core19-thumbnails-ci.log",
+    "sha256": "c47ada46288646b0a817504b353be4bd3620490af051e986329561f6fa523353"
+  },
+  "browser": {
+    "format": "Source-built UMD; not an installed tarball",
+    "tests": 63,
+    "screenshot": 39,
+    "thumbnail": 24,
+    "retries": 0,
+    "skipped": 0,
+    "unexpectedPageErrors": 0,
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "knownRejections": [
+      {
+        "browser": "chromium",
+        "core": "published",
+        "rejections": [
+          "controlled screenshot draw failure"
+        ]
+      },
+      {
+        "browser": "chromium",
+        "core": "candidate",
+        "rejections": []
+      },
+      {
+        "browser": "firefox",
+        "core": "published",
+        "rejections": [
+          "controlled screenshot draw failure"
+        ]
+      },
+      {
+        "browser": "firefox",
+        "core": "candidate",
+        "rejections": []
+      },
+      {
+        "browser": "webkit",
+        "core": "published",
+        "rejections": [
+          "controlled screenshot draw failure"
+        ]
+      },
+      {
+        "browser": "webkit",
+        "core": "candidate",
+        "rejections": []
+      }
+    ],
+    "artifacts": {
+      "/candidate/artplayer.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer\\src\\index.js"
+        },
+        "sha256": "a5a5f9283af11841dc5f6d234012a16738f68d4549c704ef9bb0da93fe2a8493",
+        "bytes": 323694
+      },
+      "/candidate/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+        },
+        "sha256": "3e8d0b7e7a90b5dbadf4cb108fd770d294f8a8a92ea089c41d0766c98bbc8230",
+        "bytes": 8433
+      },
+      "/published/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "/published/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "1.1.0",
+          "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+          "member": "package/dist/artplayer-plugin-chapter.js"
+        },
+        "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "bytes": 4973
+      }
+    },
+    "cases": [
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-45f5a568a618398c2003",
+        "file": "screenshot.spec.js",
+        "title": "published: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-df9c2bbb8d025d633416",
+        "file": "screenshot.spec.js",
+        "title": "published: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-0a6dee5b9d177600d5a8",
+        "file": "screenshot.spec.js",
+        "title": "published: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-8f64836f1c03f8d717e4",
+        "file": "screenshot.spec.js",
+        "title": "published: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-b4214300e6ac634d4655",
+        "file": "screenshot.spec.js",
+        "title": "published: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-792a2dbdf0f914f96ecd",
+        "file": "screenshot.spec.js",
+        "title": "candidate: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-22a5ed94932418b4b372",
+        "file": "screenshot.spec.js",
+        "title": "candidate: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-a632ad23423ba0506c16",
+        "file": "screenshot.spec.js",
+        "title": "candidate: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-77348d8cffa16737f1dd",
+        "file": "screenshot.spec.js",
+        "title": "candidate: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-623fad4c93a929006ed5",
+        "file": "screenshot.spec.js",
+        "title": "candidate: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-9e300009a29a3180767b",
+        "file": "screenshot.spec.js",
+        "title": "candidate: null toBlob callback rejects and reports without a page error",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-4bd04bd342c6bdf7a25b",
+        "file": "screenshot.spec.js",
+        "title": "candidate: destroy during screenshot await suppresses the queued download and event",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "b6aa675bc40ab83f8367-e0a456d9599734bf4dcf",
+        "file": "screenshot.spec.js",
+        "title": "candidate: cross-origin screenshot toolbar handles its internal rejected Promise",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-103e07624403b62f7105",
+        "file": "screenshot.spec.js",
+        "title": "published: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-d07a101b915332333405",
+        "file": "screenshot.spec.js",
+        "title": "published: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-f9ac6b159f7b68e08d1f",
+        "file": "screenshot.spec.js",
+        "title": "published: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-8f9455d971851037e69b",
+        "file": "screenshot.spec.js",
+        "title": "published: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-2ee0a5945c50d9e45f02",
+        "file": "screenshot.spec.js",
+        "title": "published: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-f19f61a7a1c98a24d88c",
+        "file": "screenshot.spec.js",
+        "title": "candidate: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-65dd2ec52a2eb98f201a",
+        "file": "screenshot.spec.js",
+        "title": "candidate: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-6b93df0891d1e9824971",
+        "file": "screenshot.spec.js",
+        "title": "candidate: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-50103daef0af74cb00cc",
+        "file": "screenshot.spec.js",
+        "title": "candidate: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-26c20a0c8613a9c27c04",
+        "file": "screenshot.spec.js",
+        "title": "candidate: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-95ac367f79cfe12d6100",
+        "file": "screenshot.spec.js",
+        "title": "candidate: null toBlob callback rejects and reports without a page error",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-0fa775711c5f64752304",
+        "file": "screenshot.spec.js",
+        "title": "candidate: destroy during screenshot await suppresses the queued download and event",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "b6aa675bc40ab83f8367-ee450bc7384fa2bf264f",
+        "file": "screenshot.spec.js",
+        "title": "candidate: cross-origin screenshot toolbar handles its internal rejected Promise",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-c9c9cf5e121268cd3c46",
+        "file": "screenshot.spec.js",
+        "title": "published: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-ca43428c5f3aaaeb4a6b",
+        "file": "screenshot.spec.js",
+        "title": "published: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-9f3df52110132996acf1",
+        "file": "screenshot.spec.js",
+        "title": "published: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-d6a14bd3846cace85be0",
+        "file": "screenshot.spec.js",
+        "title": "published: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-f815992e0057af92552e",
+        "file": "screenshot.spec.js",
+        "title": "published: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-c1936aa08e32e5571887",
+        "file": "screenshot.spec.js",
+        "title": "candidate: captures decoded PNG pixels and consumer-owned Blob URLs",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-e4a6e8d9ad57f6261d57",
+        "file": "screenshot.spec.js",
+        "title": "candidate: screenshot preserves download filename, event data and Promise result",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-64493da78eb55d39fce4",
+        "file": "screenshot.spec.js",
+        "title": "candidate: actual cross-origin video rejects capture with SecurityError and notice",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-0658f99f3c9a04fd2918",
+        "file": "screenshot.spec.js",
+        "title": "candidate: source replacement does not download a stale captured frame",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-43884fe589ffc5240a6c",
+        "file": "screenshot.spec.js",
+        "title": "candidate: screenshot toolbar rejection has exact historical error accounting",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-de63a41620e9a6fbb8a6",
+        "file": "screenshot.spec.js",
+        "title": "candidate: null toBlob callback rejects and reports without a page error",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-9c57f1479f12611e3650",
+        "file": "screenshot.spec.js",
+        "title": "candidate: destroy during screenshot await suppresses the queued download and event",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "b6aa675bc40ab83f8367-db263e0db17b09f39961",
+        "file": "screenshot.spec.js",
+        "title": "candidate: cross-origin screenshot toolbar handles its internal rejected Promise",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "c863e7942d336f9fc9b4-0b84034df4da7a0602cb",
+        "file": "thumbnails.spec.js",
+        "title": "published: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "c863e7942d336f9fc9b4-27b7b29e95483cbd0627",
+        "file": "thumbnails.spec.js",
+        "title": "published: scaled internal thumbnails and public image results have distinct Blob URL owners",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "c863e7942d336f9fc9b4-c501a3337d7f3459c0bd",
+        "file": "thumbnails.spec.js",
+        "title": "published: a delayed image follows the latest hover rather than the first request position",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "c863e7942d336f9fc9b4-7590e561a95171418094",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "c863e7942d336f9fc9b4-ef943cb95bbec2be8e9f",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: scaled internal thumbnails and public image results have distinct Blob URL owners",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "c863e7942d336f9fc9b4-35d168c9c28975e08fe1",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: a delayed image follows the latest hover rather than the first request position",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "c863e7942d336f9fc9b4-15f9f09a8e027b4f1453",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: removing thumbnails revokes the scaled image and a replacement control can reload",
+        "status": "passed"
+      },
+      {
+        "browser": "chromium",
+        "id": "c863e7942d336f9fc9b4-7ac5238b9dd76e5bd284",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: image failure permits a retry through the same thumbnail configuration",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "c863e7942d336f9fc9b4-cbdca6544e577990fbe6",
+        "file": "thumbnails.spec.js",
+        "title": "published: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "c863e7942d336f9fc9b4-ae0fe968cf56f04deadf",
+        "file": "thumbnails.spec.js",
+        "title": "published: scaled internal thumbnails and public image results have distinct Blob URL owners",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "c863e7942d336f9fc9b4-3ea053475afbb979f768",
+        "file": "thumbnails.spec.js",
+        "title": "published: a delayed image follows the latest hover rather than the first request position",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "c863e7942d336f9fc9b4-e717f553b51ae759828d",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "c863e7942d336f9fc9b4-36518c4875e5c6c5eb4d",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: scaled internal thumbnails and public image results have distinct Blob URL owners",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "c863e7942d336f9fc9b4-e4dbbda8c6e5556ff597",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: a delayed image follows the latest hover rather than the first request position",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "c863e7942d336f9fc9b4-3aa635296202313cceb6",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: removing thumbnails revokes the scaled image and a replacement control can reload",
+        "status": "passed"
+      },
+      {
+        "browser": "firefox",
+        "id": "c863e7942d336f9fc9b4-7889e72271358857e901",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: image failure permits a retry through the same thumbnail configuration",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "c863e7942d336f9fc9b4-80303351d5af14d7bcba",
+        "file": "thumbnails.spec.js",
+        "title": "published: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "c863e7942d336f9fc9b4-6303b616b2bb5f58f229",
+        "file": "thumbnails.spec.js",
+        "title": "published: scaled internal thumbnails and public image results have distinct Blob URL owners",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "c863e7942d336f9fc9b4-b18b5d8413c96e250a43",
+        "file": "thumbnails.spec.js",
+        "title": "published: a delayed image follows the latest hover rather than the first request position",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "c863e7942d336f9fc9b4-cdb048780d3502ba5f34",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: thumbnail cells follow the generated grid at row boundaries and on returning to the first cell",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "c863e7942d336f9fc9b4-3cd51c32262f07831a10",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: scaled internal thumbnails and public image results have distinct Blob URL owners",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "c863e7942d336f9fc9b4-bdd8944a779d3e0838d2",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: a delayed image follows the latest hover rather than the first request position",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "c863e7942d336f9fc9b4-3ea1350b66dcf3b9e182",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: removing thumbnails revokes the scaled image and a replacement control can reload",
+        "status": "passed"
+      },
+      {
+        "browser": "webkit",
+        "id": "c863e7942d336f9fc9b4-7e155f3c5195944a8163",
+        "file": "thumbnails.spec.js",
+        "title": "candidate: image failure permits a retry through the same thumbnail configuration",
+        "status": "passed"
+      }
+    ],
+    "file": "refactor/.cache/core19-capture-thumbnail-browser-final.json",
+    "sha256": "78fa8caf62f1acadeec505c96cea3d8b082f999f6cad99e2182938046525b1b5"
+  },
+  "earlierFailure": {
+    "file": "refactor/.cache/core19-thumbnails-browser.json",
+    "sha256": "4f7be130c6ed4bdd63f447769b18f777eb6e09f2b094d5a283d14093a35582e9",
+    "passed": 62,
+    "failed": 1,
+    "description": "Firefox retry case using a malformed successful response failed. Fixture now explicitly uses a no-store transient HTTP 503, with two network attempts verified. No timeout increase or broad error suppression."
+  },
+  "remaining": [
+    "Progress callback/drag source lifetime review",
+    "Quality boundaries",
+    "Borrowed media URL ownership review",
+    "Build, installed tarball and full UMD/legacy browser exit",
+    "Final risk closure, task status and independent local commit"
+  ]
+}

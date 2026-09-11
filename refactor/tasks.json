@@ -1111,11 +1111,14 @@
         "CORE-13",
         "CORE-16"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "相关 player/control 功能与纯计算分离",
       "acceptance": "截图跨域失败、缩略图布局、quality/进度边界保持",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-19-capture-thumbnails.md",
+        "baselines/capture-progress-validation.json"
+      ]
     },
     {
       "id": "CORE-20",

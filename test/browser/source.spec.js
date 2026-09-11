@@ -116,6 +116,57 @@ test('candidate: quality switch restores position/rate and preserves real custom
   expect(result.error).toBe(0)
 })
 
+test('candidate: direct currentTime during a native quality seek is not overwritten by automatic restoration', async ({ page }, testInfo) => {
+  await page.goto('/test/player.html?core=candidate&chapter=published')
+  await page.evaluate(() => window.createPlayer('/test/pattern.mp4?position=initial'))
+  await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
+  await page.locator('#play').click()
+  await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
+  await page.locator('#pause').click()
+  await expect.poll(() => page.evaluate(() => window.art.video.paused && !window.art.video.seeking)).toBe(true)
+  await page.evaluate(() => {
+    window.art.currentTime = 2
+  })
+  await expect.poll(() => page.evaluate(() => !window.art.video.seeking && Math.abs(window.art.currentTime - 2) < 0.05)).toBe(true)
+  const result = await page.evaluate(async () => {
+    const { art } = window
+    let overrides = 0
+    const seeks = []
+    const writes = []
+    for (const name of ['currentTime', 'playbackRate']) {
+      const descriptor = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, name)
+      Object.defineProperty(art.video, name, {
+        configurable: true,
+        get() { return descriptor.get.call(this) },
+        set(value) {
+          writes.push({ name, value, before: this.currentTime, seeking: this.seeking })
+          descriptor.set.call(this, value)
+          writes.push({ name: `${name}:after`, value: this.currentTime, seeking: this.seeking })
+        },
+      })
+    }
+    art.once('video:seeked', () => {
+      overrides++
+      art.currentTime = 4
+    })
+    art.on('video:seeked', () => seeks.push({ time: art.currentTime, seeking: art.video.seeking }))
+    await art.switchQuality('/test/pattern.mp4?position=consumer')
+    const result = { overrides, seeks, writes, time: art.currentTime, paused: art.video.paused, seeking: art.video.seeking }
+    art.destroy()
+    return result
+  })
+  await testInfo.attach('quality-direct-position', { contentType: 'application/json', body: JSON.stringify(result) })
+  expect(result.overrides).toBe(1)
+  // Assert the player write contract separately from native seek precision.
+  // WebKit may finish this reentrant native seek at a different media clock.
+  const positions = result.writes.filter(item => item.name === 'currentTime')
+  expect(positions).toHaveLength(2)
+  expect(positions[0].value).toBeCloseTo(2, 1)
+  expect(positions[1].value).toBe(4)
+  expect(result.paused).toBe(true)
+  expect(result.seeking).toBe(false)
+})
+
 test('candidate: real switch settles when the controlled native resume rejects', async ({ page }) => {
   await page.goto('/test/player.html?core=candidate&chapter=published')
   await page.evaluate(() => window.createPlayer('/test/pattern.mp4?resume=initial'))

@@ -4,13 +4,15 @@ import { mock, test } from 'node:test'
 import { setImmediate } from 'node:timers/promises'
 import { loadModules } from './helpers/load.js'
 
-const { Emitter, urlMix, switchMix, playMix, beginLifecycle, getScope } = await loadModules({
+const { Emitter, urlMix, switchMix, playMix, beginLifecycle, getScope, positionRestoration, currentTimeMix } = await loadModules({
   Emitter: 'packages/artplayer/src/utils/emitter',
   urlMix: 'packages/artplayer/src/player/urlMix',
   switchMix: 'packages/artplayer/src/player/switchMix',
   playMix: 'packages/artplayer/src/player/playMix',
   beginLifecycle: { file: 'packages/artplayer/src/lifecycle/instance', name: 'beginLifecycle' },
   getScope: { file: 'packages/artplayer/src/lifecycle/instance', name: 'getScope' },
+  positionRestoration: { file: 'packages/artplayer/src/source/restore-position', name: 'positionRestoration' },
+  currentTimeMix: 'packages/artplayer/src/player/currentTimeMix',
 })
 
 function createArt(customType) {
@@ -32,6 +34,212 @@ function createArt(customType) {
   switchMix(art)
   return art
 }
+
+test('source assignment does not revoke a caller-owned Blob URL still used elsewhere', async (t) => {
+  const art = createArt()
+  const blob = new Blob(['shared media'], { type: 'video/mp4' })
+  const url = URL.createObjectURL(blob)
+  t.after(() => URL.revokeObjectURL(url))
+  art.url = url
+  art.url = 'next.mp4'
+  assert.equal(await (await fetch(url)).text(), 'shared media')
+  getScope(art).dispose()
+  assert.equal(await (await fetch(url)).text(), 'shared media')
+})
+
+test('quality restoration waits for a pending native seek before restoring playback rate', async () => {
+  const art = createArt()
+  let settled = false
+  const switching = art.switchQuality('next.mp4').then(() => {
+    settled = true
+  })
+  art.playbackRate = 1
+  art.template.$video.seeking = true
+  art.emit('video:loadedmetadata')
+  art.emit('video:canplay')
+  await Promise.resolve()
+  assert.equal(settled, false)
+  assert.equal(art.playbackRate, 1)
+  assert.equal(art.currentTime, 37)
+  art.template.$video.seeking = false
+  art.emit('video:seeked')
+  await switching
+  assert.equal(settled, true)
+  assert.equal(art.playbackRate, 1.5)
+  assert.deepEqual(Object.keys(art.e), [])
+})
+
+test('a switch waiting for seeked settles on cancellation and ignores the late seek', async () => {
+  const art = createArt()
+  const switching = art.switchQuality('next.mp4')
+  art.playbackRate = 1
+  art.template.$video.seeking = true
+  art.emit('video:canplay')
+  getScope(art).dispose()
+  await switching
+  art.template.$video.seeking = false
+  art.emit('video:seeked')
+  assert.equal(art.playbackRate, 1)
+  assert.deepEqual(Object.keys(art.e), [])
+})
+
+test('a missed native quality seek is corrected once and settles after the second seeked', async () => {
+  const art = createArt()
+  let time = 37
+  const writes = []
+  Object.defineProperty(art, 'currentTime', {
+    get: () => time,
+    set(value) {
+      writes.push(value)
+      time = value
+      art.template.$video.seeking = true
+    },
+  })
+  let settled = false
+  const switching = art.switchQuality('next.mp4').then(() => {
+    settled = true
+  })
+  art.emit('video:loadedmetadata')
+  art.emit('video:canplay')
+  time = 0
+  art.template.$video.seeking = false
+  art.emit('video:seeked')
+  await Promise.resolve()
+  assert.equal(settled, false)
+  assert.deepEqual(writes, [37, 37])
+  assert.equal(art.playbackRate, 1.5)
+  // Even a second native miss must not start an unbounded correction loop.
+  time = 0
+  art.template.$video.seeking = false
+  art.emit('video:seeked')
+  await switching
+  assert.deepEqual(writes, [37, 37])
+  assert.deepEqual(Object.keys(art.e), [])
+})
+
+test('public seek during quality loading wins over metadata restoration and native correction', async () => {
+  for (const beforeMetadata of [false, true]) {
+    const art = createArt()
+    const switching = art.switchQuality('next.mp4')
+    art.template.$video.seeking = true
+    if (!beforeMetadata)
+      art.emit('video:loadedmetadata')
+    art.currentTime = 6
+    art.emit('seek', 6)
+    if (beforeMetadata)
+      art.emit('video:loadedmetadata')
+    art.template.$video.seeking = false
+    art.emit('video:canplay')
+    await switching
+    assert.equal(art.currentTime, 6)
+    assert.deepEqual(Object.keys(art.e), [])
+  }
+})
+
+test('direct public currentTime writes during quality loading supersede automatic restoration', async () => {
+  for (const beforeMetadata of [false, true]) {
+    const art = createArt()
+    art.duration = 100
+    art.template.$video.currentTime = 37
+    currentTimeMix(art)
+    const switching = art.switchQuality('next.mp4')
+    art.template.$video.seeking = true
+    if (!beforeMetadata)
+      art.emit('video:loadedmetadata')
+    art.currentTime = 6
+    if (beforeMetadata)
+      art.emit('video:loadedmetadata')
+    art.template.$video.seeking = false
+    art.emit('video:canplay')
+    await switching
+    assert.equal(art.currentTime, 6)
+    assert.deepEqual(Object.keys(art.e), [])
+  }
+})
+
+test('position restoration preserves clamping and native frame rounding', () => {
+  let time = 0
+  const video = { seeking: false }
+  const writes = []
+  const art = {
+    template: { $video: video },
+    get currentTime() { return time },
+    set currentTime(value) {
+      writes.push(value)
+      time = Math.min(10, value)
+      video.seeking = true
+    },
+  }
+  const restoration = positionRestoration(art, 37, () => true)
+  restoration.restore()
+  time = 9.99
+  video.seeking = false
+  assert.equal(restoration.ready(), true)
+  assert.deepEqual(writes, [37])
+  time = 0
+  assert.equal(restoration.ready(), false)
+  assert.deepEqual(writes, [37, 10])
+})
+
+test('a reentrant position read cannot correct a cancelled or manually superseded seek', () => {
+  for (const boundary of ['cancel', 'manual']) {
+    let active = true
+    let reenter = false
+    let time = 0
+    let restoration
+    const writes = []
+    const art = {
+      template: { $video: { seeking: true } },
+      get currentTime() {
+        if (reenter) {
+          if (boundary === 'cancel')
+            active = false
+          else
+            restoration.manual()
+        }
+        return time
+      },
+      set currentTime(value) {
+        writes.push(value)
+        time = value
+      },
+    }
+    restoration = positionRestoration(art, 37, () => active)
+    restoration.restore()
+    art.template.$video.seeking = false
+    time = 6
+    reenter = true
+    assert.equal(restoration.ready(), boundary === 'manual')
+    assert.deepEqual(writes, [37])
+  }
+})
+
+test('synchronous correction seeked reentry resumes a source only once', async () => {
+  const art = createArt()
+  art.playing = true
+  let time = 37
+  let correcting = false
+  Object.defineProperty(art, 'currentTime', {
+    get: () => time,
+    set(value) {
+      time = value
+      art.template.$video.seeking = !correcting
+      if (correcting)
+        art.emit('video:seeked')
+    },
+  })
+  const switching = art.switchQuality('next.mp4')
+  art.emit('video:loadedmetadata')
+  art.emit('video:canplay')
+  time = 0
+  correcting = true
+  art.template.$video.seeking = false
+  art.emit('video:seeked')
+  await switching
+  assert.equal(time, 37)
+  assert.equal(art.play.mock.callCount(), 1)
+  assert.deepEqual(Object.keys(art.e), [])
+})
 
 test('superseded switches settle before readiness and only the latest restores state/restarts', async () => {
   const art = createArt()

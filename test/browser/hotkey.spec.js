@@ -57,22 +57,26 @@ test('candidate: native keyboard play/pause, seek, volume and web-fullscreen Esc
   await page.evaluate(() => {
     window.art.isFocus = true
     window.nativeHotkeys = []
+    window.nativeHotkeySeeks = []
     window.art.on('hotkey', event => window.nativeHotkeys.push(event.code))
+    window.art.on('seek', (time, requested) => window.nativeHotkeySeeks.push(requested))
   })
   await page.keyboard.press('Space')
   await expect.poll(() => page.evaluate(() => window.art.playing && window.art.currentTime > 0.1)).toBe(true)
   await page.keyboard.press('Space')
   await expect.poll(() => page.evaluate(() => window.art.template.$video.paused && !window.art.template.$video.seeking)).toBe(true)
-  await page.evaluate(() => {
-    window.art.currentTime = 1
-  })
-  await expect.poll(() => page.evaluate(() => !window.art.template.$video.seeking && Math.abs(window.art.currentTime - 1) < 0.1)).toBe(true)
+  const start = await page.evaluate(() => ({ time: window.art.currentTime, step: window.Artplayer.SEEK_STEP }))
   await page.keyboard.press('ArrowRight')
   expect(await page.evaluate(() => window.nativeHotkeys.at(-1))).toBe('ArrowRight')
-  await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(5)
+  expect(await page.evaluate(() => window.nativeHotkeySeeks.at(-1))).toBeCloseTo(start.time + start.step, 1)
+  await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(start.time)
   await expect.poll(() => page.evaluate(() => window.art.template.$video.seeking)).toBe(false)
+  const forward = await page.evaluate(() => window.art.currentTime)
   await page.keyboard.press('ArrowLeft')
-  await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeLessThan(2)
+  expect(await page.evaluate(() => window.nativeHotkeySeeks.at(-1))).toBeCloseTo(forward - start.step, 1)
+  expect(await page.evaluate(() => window.nativeHotkeySeeks.length)).toBe(2)
+  await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeLessThan(forward)
+  await expect.poll(() => page.evaluate(() => window.art.template.$video.seeking)).toBe(false)
   const volume = await page.evaluate(() => {
     window.art.volume = 0.5
     return window.art.volume

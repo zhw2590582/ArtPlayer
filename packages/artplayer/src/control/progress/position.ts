@@ -23,15 +23,21 @@ export function getPosFromEvent(art: ProgressPositionHost, event: ProgressEvent)
 }
 
 export function setCurrentTime(art: ProgressPositionHost, event: ProgressEvent, active: () => boolean = () => true) {
+  if (!active())
+    return
   if (art.isRotate) {
     const percentage = ((event as TouchEvent).touches[0]!.clientY - art.top) / art.height
     const second = percentage * art.duration
+    if (!active())
+      return
     art.emit('setBar', 'played', percentage, event)
     if (active())
       art.seek = second
   }
   else {
     const { second, percentage } = getPosFromEvent(art, event)
+    if (!active())
+      return
     art.emit('setBar', 'played', percentage, event)
     if (active())
       art.seek = second

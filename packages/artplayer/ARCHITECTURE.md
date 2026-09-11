@@ -4,6 +4,101 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Screenshot capture (CORE-19)
+
+`src/player/screenshotMix.ts` installs the existing immutable getDataURL,
+getBlobUrl and screenshot methods. `src/capture/frame.ts` owns synchronous frame
+drawing and the asynchronous canvas Blob callback boundary. A capture still draws
+before returning its Promise; moving drawing behind await would select a later
+video frame. PNG format, extracted-method binding, default filename timing and
+download-before-event ordering remain unchanged for live operations.
+
+The public getBlobUrl caller owns URL.revokeObjectURL. Player destruction must not
+invalidate a returned URL that a consumer still uses. Asynchronous null Blob or
+URL allocation failure now rejects the capture Promise instead of escaping the
+callback and leaving it pending. Notice setter failures also reject. Destruction
+and source replacement suppress stale notices and screenshot download/event
+effects, while an already captured data string or Blob URL still settles normally.
+The toolbar consumes its internal rejection after the capture reports a notice;
+public calls continue to reject for callers to handle.
+
+Use test/screenshot.test.js, test/types/screenshot.ts and the browser screenshot
+spec for capture changes. Browser checks decode real video frames, inspect PNG
+pixels, and use a second hostname without CORS headers for native SecurityError.
+Installed-package acceptance is recorded in refactor/changes/ for this task.
+
+## Thumbnail previews and image loading (CORE-19)
+
+`src/player/thumbnailsMix.ts` preserves the thumbnails property, configuration
+object identity, live restrictions and control DOM. It owns one image cache scope
+per configuration, links it to the current thumbnail control and removes its setBar
+subscription on destruction. Replacement, control removal and destruction cancel
+loading; obsolete completions cannot render. Loading failures release the pending
+state so a later interaction may retry. Failures are reported with console.warn
+instead of escaping an internal event callback as an unhandled rejection.
+
+The latest hover position wins while an image is pending. A source change prevents
+rendering old hover coordinates but does not invalidate an unchanged sprite cache;
+a new interaction may use that image. Each style write checks the active control,
+configuration and source so reentrant DOM callbacks stop the remaining writes.
+
+`src/thumbnails/layout.ts` contains the sprite and preview geometry. Dimensions,
+scale fallback, edge placement and excluded progress endpoints remain unchanged.
+The old row/cell calculation was incorrect at exact column multiples and produced
+invalid CSS at cell zero. The corrected zero-based crop matches
+artplayer-tool-thumbnail's x/index-modulo-column and y/floor-index-over-column
+generation. Tests explicitly distinguish this display fix from published behavior.
+
+`src/image/load.ts` implements both image consumers without duplicating decoding:
+public utils.loadImg still returns Promise<HTMLImageElement>, and the caller owns
+the src Blob URL of a scaled result. The internal loadThumbnailImage receives a
+ResourceScope; cancellation fulfills with undefined, and its generated URLs remain
+owned until replacement/removal/destroy. No caller-supplied image URL is revoked.
+Every request clears load/error handlers; failed scaled decoding revokes its Blob.
+Null canvas encoding and asynchronous allocation errors reject public calls. The
+public helper is re-exported through utils/dom.js to keep the existing utils shape;
+loadThumbnailImage is not added to the public utils barrel.
+
+Use test/thumbnails.test.js and test/types/thumbnails.ts for state, cancellation,
+reentry and API types. The browser thumbnails spec uses the numbered
+test/browser/media/thumbnail-grid.svg for crop checks and actual image decoding.
+Transient retry uses a no-store 503 response; browser caching of malformed successful
+responses is not claimed to be controlled by the player. Source-built checks are
+intermediate evidence; use the task's final tarball/browser evidence for acceptance.
+
+## Progress and quality restoration (CORE-19)
+
+control/progress/interactions.ts captures the control entry, source and action for
+each click or drag. Geometry and setBar callbacks can synchronously remove the
+entry, destroy the player, start a new source or start a newer action. Check those
+boundaries before emitting or seeking. A source change ends the old drag; a new
+mousedown can start a new one. position.ts retains endpoint clamping and the live
+progress event before seek, with an optional internal activity predicate.
+
+source/restore-position.ts owns the paused quality position restoration. Native
+canplay may arrive while seeking; switch.ts waits for seek completion, restores
+rate once and checks the accepted, clamped position. A demonstrated native seek
+miss receives at most one correction, allowing 0.05 seconds for media clock
+rounding. It does not loop until success. The seeked listener remains until the
+correction finishes or the source operation is cancelled. Explicit public seek
+supersedes automatic position restoration; reentrant completion cannot resume
+twice. media/position-revision.ts also tracks legal public currentTime writes;
+a consumer assigning currentTime directly during loading supersedes the automatic
+restoration, including writes before metadata. Invalid NaN assignments remain no-ops.
+Source cancellation still settles pending work and removes all listeners.
+Use test/source.test.js, test/progress.test.js and the browser source and
+progress-quality specs. Keep native media events in evidence when changing this
+sequence; the original rate-interruption hypothesis was not sufficient to explain
+the observed first-seek miss.
+
+urlMix.ts receives media URLs from consumers/adapters and does not revoke them on
+replacement. Their creator owns release, including Blob media sources. Screenshot
+and public scaled-image URLs similarly belong to callers; internal thumbnail and
+subtitle URLs have explicit owned scopes. Real Blob-video decoding is separately
+capability-tested: this Windows WebKit runtime rejects the local MP4 and WebM Blob
+samples even without ArtPlayer. Do not turn URL readability checks into claims of
+native decoding or Apple-device support; see refactor/environment-matrix.md.
+
 ## Builtins and prompts (CORE-18)
 
 `src/notice.ts` owns the notice timer and DOM visibility. Its minimal host, private
@@ -1001,7 +1096,7 @@ continuations. Direct assignment failures are reported with console.warn; switch
 callers receive the original rejection. `playMix.ts` captures the current source:
 its native result/rejection is preserved, while obsolete notice/event/mutex effects
 are suppressed. CORE-10 migrates playback properties and CORE-11 owns reconnect
-generations; object URL ownership remains CORE-19 work.
+generations; CORE-19 removes revocation of caller-owned media URLs on replacement.
 
 `test/source.test.js` checks cancellation, reentry, synchronous events and cleanup;
 `test/browser/source.spec.js` compares published/candidate real-media switching and

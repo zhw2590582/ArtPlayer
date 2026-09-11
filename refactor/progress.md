@@ -1,5 +1,13 @@
 # 进度与证据
 
+## 当前实施：CORE-19 进度、质量、截图与缩略图完成
+
+截图和缩略图门面迁移 TS，拆清图像捕获、加载与布局。进度交互防止回调重入/跨源拖动继续 seek；质量切换对原生首次 seek 偏差最多修正一次，保持用户覆盖、取消与 Promise 结算。媒体/公开图片 URL 由调用方拥有，内部资源在配置、控件或实例结束时释放。保留公开 API、类型、正常事件顺序和 DOM/CSS；整列与首格缩略图裁剪是明确记录的显示修复。
+
+CI 421 项、207 个生产 TS 严格检查、真实 tarball 27 项运行时及五组类型通过；安装 UMD/legacy 各 1458 项三浏览器全量通过，各含 129 项本任务和关联源专项。源码、包文件、三个分发格式、语言、docs 副本和许可指纹一致。见 [实施记录](changes/2026-09-11-CORE-19-capture-thumbnails.md) 和 [最终证据](baselines/capture-progress-validation.json)。
+
+关闭十项已复现差异。BASE-ENV-01 保留 Windows WebKit 本机 Blob 解码限制，真实 Apple 设备仍交 REL-03/REVIEW-02；公共类型精确视图交 CORE-21。当前 214 项：55 完成、159 待办，下一项 CORE-20。本任务独立本地提交，无推送或发布。
+
 ## 当前实施：CORE-18 内置插件与提示模块完成
 
 notice、autoPlayback、fastForward、lock、miniProgressBar、info、loading、mask 已迁移 TS，拆清记录、提示、长按与轮询归属；autoOrientation 组合复验通过。修复重复响应、陈旧回调和清理，同时保持公开结果、存储格式、DOM 与 destroy 观察顺序。

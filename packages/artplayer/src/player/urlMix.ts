@@ -50,8 +50,7 @@ export default function urlMix<Media extends SourceMedia, Host extends UrlHost<M
             void Promise.resolve(result).catch(error => failSource(operation, error))
           }
           else {
-            if (oldUrl)
-              URL.revokeObjectURL(oldUrl)
+            // Media URLs are supplied by callers or adapters, which own revocation.
             if (!operation.active())
               return
             $video.src = newUrl

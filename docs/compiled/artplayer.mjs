@@ -496,6 +496,132 @@ const isIOS = /iPad|iPhone|iPod/i.test(userAgent) && !window.MSStream;
 const isIOS13 = isIOS || userAgent.includes("Macintosh") && navigator.maxTouchPoints >= 1;
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || isIOS13;
 const isBrowser = typeof window !== "undefined" && typeof document !== "undefined";
+function requestImage(url, scale, owner) {
+  return new Promise((resolve, reject) => {
+    const request = owner ? owner.child() : new ResourceScope();
+    let complete = false;
+    let releaseBlob = () => {
+    };
+    function fail(error2) {
+      if (complete)
+        return;
+      complete = true;
+      try {
+        request.dispose();
+      } catch (cleanupError) {
+        console.warn("Additional image cleanup failure:", cleanupError);
+      }
+      try {
+        releaseBlob();
+      } catch (cleanupError) {
+        console.warn("Additional image cleanup failure:", cleanupError);
+      }
+      reject(error2);
+    }
+    function finish2(image) {
+      if (complete || request.closed)
+        return;
+      complete = true;
+      try {
+        request.dispose();
+        resolve(image);
+      } catch (error2) {
+        try {
+          releaseBlob();
+        } finally {
+          reject(error2);
+        }
+      }
+    }
+    request.add(() => {
+      if (!complete) {
+        complete = true;
+        try {
+          releaseBlob();
+        } finally {
+          resolve(void 0);
+        }
+      }
+    });
+    if (request.closed)
+      return;
+    function watch(image, loaded) {
+      image.onload = () => {
+        if (!complete && !request.closed) {
+          try {
+            loaded();
+          } catch (error2) {
+            fail(error2);
+          }
+        }
+      };
+      image.onerror = () => fail(new Error(`Image load failed: ${url}`));
+      request.add(() => {
+        image.onload = null;
+        image.onerror = null;
+        if (!complete)
+          image.removeAttribute("src");
+      });
+    }
+    try {
+      const image = new Image();
+      watch(image, () => {
+        if (!scale || scale === 1) {
+          finish2(image);
+          return;
+        }
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        canvas.width = image.width * scale;
+        canvas.height = image.height * scale;
+        if (!context)
+          throw new TypeError("Canvas 2D context is unavailable");
+        if (complete || request.closed)
+          return;
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        if (complete || request.closed)
+          return;
+        canvas.toBlob((blob) => {
+          if (complete || request.closed)
+            return;
+          try {
+            if (!blob)
+              throw new Error("Unable to encode thumbnail image");
+            const blobUrl = URL.createObjectURL(blob);
+            let revoked = false;
+            const revoke = () => {
+              if (!revoked) {
+                revoked = true;
+                URL.revokeObjectURL(blobUrl);
+              }
+            };
+            releaseBlob = owner ? owner.add(revoke) : revoke;
+            if (complete || request.closed) {
+              releaseBlob();
+              return;
+            }
+            const scaled = new Image();
+            watch(scaled, () => finish2(scaled));
+            if (!request.closed)
+              scaled.src = blobUrl;
+          } catch (error2) {
+            fail(error2);
+          }
+        });
+      });
+      if (!request.closed)
+        image.src = url;
+    } catch (error2) {
+      fail(error2);
+    }
+  });
+}
+function loadImg(url, scale) {
+  return requestImage(url, scale, void 0);
+}
+function loadThumbnailImage(url, scale, owner) {
+  return requestImage(url, scale, owner);
+}
 function setStyleText(id2, style) {
   let $style = document.getElementById(id2);
   if (!$style) {
@@ -597,38 +723,6 @@ function supportsFlex() {
 }
 function getRect(el) {
   return el.getBoundingClientRect();
-}
-function loadImg(url, scale) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = function() {
-      if (!scale || scale === 1) {
-        resolve(img);
-      } else {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob((blob) => {
-          const blobUrl = URL.createObjectURL(blob);
-          const scaledImg = new Image();
-          scaledImg.onload = function() {
-            resolve(scaledImg);
-          };
-          scaledImg.onerror = function() {
-            URL.revokeObjectURL(blobUrl);
-            reject(new Error(`Image load failed: ${url}`));
-          };
-          scaledImg.src = blobUrl;
-        });
-      }
-    };
-    img.onerror = function() {
-      reject(new Error(`Image load failed: ${url}`));
-    };
-    img.src = url;
-  });
 }
 function getComposedPath(event) {
   if (event.composedPath)
@@ -1619,6 +1713,75 @@ function playAndPause(option) {
     }
   });
 }
+const current = /* @__PURE__ */ new WeakMap();
+const assignments = /* @__PURE__ */ new WeakMap();
+const sources = /* @__PURE__ */ new WeakMap();
+function getSourceScope(owner) {
+  return sources.get(owner) || getScope(owner);
+}
+function captureSource(owner) {
+  const operation = current.get(owner);
+  const source = sources.get(owner);
+  return () => current.get(owner) === operation && (!operation || operation.active()) && sources.get(owner) === source && (!source || !source.closed);
+}
+function beginSource(owner) {
+  const previous = sources.get(owner);
+  const source = getScope(owner).child();
+  const scope = source.child();
+  sources.set(owner, source);
+  source.add(() => {
+    if (sources.get(owner) === source)
+      sources.delete(owner);
+  });
+  const operation = {
+    scope,
+    assigned: false,
+    acceptingEvents: false,
+    active: () => !isClosing(owner) && !scope.closed && current.get(owner) === operation
+  };
+  current.set(owner, operation);
+  scope.add(() => {
+    if (current.get(owner) === operation)
+      current.delete(owner);
+    operation.onAssigned = void 0;
+    operation.onError = void 0;
+  });
+  previous?.dispose();
+  return operation;
+}
+function takeAssignment(owner) {
+  const operation = assignments.get(owner);
+  assignments.delete(owner);
+  return operation || beginSource(owner);
+}
+function finishAssignment(operation) {
+  operation.assigned = true;
+  const callback = operation.onAssigned;
+  operation.onAssigned = void 0;
+  if (operation.active())
+    callback?.();
+}
+function assignUrl(owner, operation, url) {
+  assignments.set(owner, operation);
+  operation.acceptingEvents = true;
+  try {
+    owner.url = url;
+  } finally {
+    if (assignments.get(owner) === operation) {
+      assignments.delete(owner);
+      finishAssignment(operation);
+    }
+  }
+}
+function failSource(operation, error2) {
+  if (!operation.active())
+    return;
+  if (operation.onError)
+    operation.onError(error2);
+  else
+    console.warn("Failed to initialize ArtPlayer source:", error2);
+  operation.scope.dispose();
+}
 function getPosFromEvent(art, event) {
   const { $progress } = art.template;
   const { left } = getRect($progress);
@@ -1630,14 +1793,20 @@ function getPosFromEvent(art, event) {
   return { second, time: time2, width, percentage };
 }
 function setCurrentTime(art, event, active2 = () => true) {
+  if (!active2())
+    return;
   if (art.isRotate) {
     const percentage = (event.touches[0].clientY - art.top) / art.height;
     const second = percentage * art.duration;
+    if (!active2())
+      return;
     art.emit("setBar", "played", percentage, event);
     if (active2())
       art.seek = second;
   } else {
     const { second, percentage } = getPosFromEvent(art, event);
+    if (!active2())
+      return;
     art.emit("setBar", "played", percentage, event);
     if (active2())
       art.seek = second;
@@ -1647,34 +1816,51 @@ function installProgressInteractions(art, $control) {
   const { $progress } = art.template;
   const $indicator = $control.querySelector(".art-progress-indicator");
   const { on, proxy } = controlEvents(art, $control);
+  const scope = entryScope($control);
+  let action = 0;
+  const capture = () => {
+    const sourceActive = captureSource(art);
+    return () => !scope.closed && !isClosing(art) && sourceActive();
+  };
+  const captureAction = () => {
+    const revision = ++action;
+    const active2 = capture();
+    return () => revision === action && active2();
+  };
   if (!isMobile) {
-    let isDragging = false;
+    let dragging;
     proxy($progress, "click", (event) => {
       if (event.target !== $indicator) {
-        setCurrentTime(art, event);
+        setCurrentTime(art, event, captureAction());
       }
     });
     proxy($progress, "mousemove", (event) => {
+      const active2 = capture();
       const { percentage } = getPosFromEvent(art, event);
-      art.emit("setBar", "hover", percentage, event);
+      if (active2())
+        art.emit("setBar", "hover", percentage, event);
     });
     proxy($progress, "mouseleave", (event) => {
       art.emit("setBar", "hover", 0, event);
     });
     proxy($progress, "mousedown", (event) => {
-      isDragging = event.button === 0;
+      dragging = event.button === 0 ? captureAction() : void 0;
     });
     on("document:mousemove", (event) => {
-      if (isDragging) {
+      const active2 = dragging;
+      if (active2?.()) {
         const { second, percentage } = getPosFromEvent(art, event);
+        if (!active2() || dragging !== active2)
+          return;
         art.emit("setBar", "played", percentage, event);
-        art.seek = second;
+        if (active2() && dragging === active2)
+          art.seek = second;
+      } else {
+        dragging = void 0;
       }
     });
     on("document:mouseup", () => {
-      if (isDragging) {
-        isDragging = false;
-      }
+      dragging = void 0;
     });
   }
 }
@@ -1814,7 +2000,7 @@ function screenshot$1(option) {
       const { icons } = art;
       appendElement($control, icons.screenshot);
       proxy($control, "click", () => {
-        art.screenshot();
+        silencePromise(art.screenshot());
       });
     }
   });
@@ -2277,75 +2463,6 @@ function clickInit(art, events) {
         clickTimes = [];
     }
   });
-}
-const current = /* @__PURE__ */ new WeakMap();
-const assignments = /* @__PURE__ */ new WeakMap();
-const sources = /* @__PURE__ */ new WeakMap();
-function getSourceScope(owner) {
-  return sources.get(owner) || getScope(owner);
-}
-function captureSource(owner) {
-  const operation = current.get(owner);
-  const source = sources.get(owner);
-  return () => current.get(owner) === operation && (!operation || operation.active()) && sources.get(owner) === source && (!source || !source.closed);
-}
-function beginSource(owner) {
-  const previous = sources.get(owner);
-  const source = getScope(owner).child();
-  const scope = source.child();
-  sources.set(owner, source);
-  source.add(() => {
-    if (sources.get(owner) === source)
-      sources.delete(owner);
-  });
-  const operation = {
-    scope,
-    assigned: false,
-    acceptingEvents: false,
-    active: () => !isClosing(owner) && !scope.closed && current.get(owner) === operation
-  };
-  current.set(owner, operation);
-  scope.add(() => {
-    if (current.get(owner) === operation)
-      current.delete(owner);
-    operation.onAssigned = void 0;
-    operation.onError = void 0;
-  });
-  previous?.dispose();
-  return operation;
-}
-function takeAssignment(owner) {
-  const operation = assignments.get(owner);
-  assignments.delete(owner);
-  return operation || beginSource(owner);
-}
-function finishAssignment(operation) {
-  operation.assigned = true;
-  const callback = operation.onAssigned;
-  operation.onAssigned = void 0;
-  if (operation.active())
-    callback?.();
-}
-function assignUrl(owner, operation, url) {
-  assignments.set(owner, operation);
-  operation.acceptingEvents = true;
-  try {
-    owner.url = url;
-  } finally {
-    if (assignments.get(owner) === operation) {
-      assignments.delete(owner);
-      finishAssignment(operation);
-    }
-  }
-}
-function failSource(operation, error2) {
-  if (!operation.active())
-    return;
-  if (operation.onError)
-    operation.onError(error2);
-  else
-    console.warn("Failed to initialize ArtPlayer source:", error2);
-  operation.scope.dispose();
 }
 function slideDirection(startX, startY, endX, endY) {
   const dy = startY - endY;
@@ -3473,6 +3590,13 @@ function cssVarMix(art) {
     }
   });
 }
+const revisions = /* @__PURE__ */ new WeakMap();
+function positionRevision(art) {
+  return revisions.get(art) || 0;
+}
+function advancePosition(art) {
+  revisions.set(art, positionRevision(art) + 1);
+}
 function currentTimeMix(art) {
   const { $video } = art.template;
   def(art, "currentTime", {
@@ -3481,6 +3605,7 @@ function currentTimeMix(art) {
       const parsed = Number.parseFloat(time2);
       if (Number.isNaN(parsed))
         return;
+      advancePosition(art);
       $video.currentTime = clamp(parsed, 0, art.duration);
     }
   });
@@ -4939,46 +5064,66 @@ function rectMix(art) {
     }
   });
 }
+function drawFrame(canvas, video) {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  const context = canvas.getContext("2d");
+  if (!context)
+    throw new TypeError("Canvas 2D context is unavailable");
+  context.drawImage(video, 0, 0);
+}
+function captureBlobUrl(canvas, resolve, reject) {
+  canvas.toBlob((blob) => {
+    try {
+      if (!blob)
+        throw new Error("Unable to encode screenshot blob");
+      resolve(URL.createObjectURL(blob));
+    } catch (error2) {
+      reject(error2);
+    }
+  });
+}
 function screenshotMix(art) {
-  const {
-    notice,
-    template: { $video }
-  } = art;
-  const $canvas = createElement("canvas");
-  def(art, "getDataURL", {
-    value: () => new Promise((resolve, reject) => {
+  const { notice, template: { $video } } = art;
+  const canvas = document.createElement("canvas");
+  function capture(blob) {
+    const active2 = captureSource(art);
+    return new Promise((resolve, reject) => {
+      const fail = (error2) => {
+        try {
+          if (!isClosing(art) && active2())
+            notice.show = error2;
+        } catch (noticeError) {
+          reject(noticeError);
+          return;
+        }
+        reject(error2);
+      };
       try {
-        $canvas.width = $video.videoWidth;
-        $canvas.height = $video.videoHeight;
-        $canvas.getContext("2d").drawImage($video, 0, 0);
-        resolve($canvas.toDataURL("image/png"));
-      } catch (err) {
-        notice.show = err;
-        reject(err);
+        drawFrame(canvas, $video);
+        if (blob) {
+          captureBlobUrl(canvas, resolve, fail);
+        } else {
+          resolve(canvas.toDataURL("image/png"));
+        }
+      } catch (error2) {
+        fail(error2);
       }
-    })
-  });
-  def(art, "getBlobUrl", {
-    value: () => new Promise((resolve, reject) => {
-      try {
-        $canvas.width = $video.videoWidth;
-        $canvas.height = $video.videoHeight;
-        $canvas.getContext("2d").drawImage($video, 0, 0);
-        $canvas.toBlob((blob) => {
-          resolve(URL.createObjectURL(blob));
-        });
-      } catch (err) {
-        notice.show = err;
-        reject(err);
-      }
-    })
-  });
+    });
+  }
+  def(art, "getDataURL", { value: () => capture(false) });
+  def(art, "getBlobUrl", { value: () => capture(true) });
   def(art, "screenshot", {
     value: async (name) => {
+      const active2 = captureSource(art);
       const dataUri = await art.getDataURL();
-      const fileName = name || `artplayer_${secondToTime($video.currentTime)}`;
-      download(dataUri, `${fileName}.png`);
-      art.emit("screenshot", dataUri);
+      if (!isClosing(art) && active2()) {
+        const fileName = name || `artplayer_${secondToTime($video.currentTime)}`;
+        if (!isClosing(art) && active2())
+          download(dataUri, `${fileName}.png`);
+        if (!isClosing(art) && active2())
+          art.emit("screenshot", dataUri);
+      }
       return dataUri;
     }
   });
@@ -5061,6 +5206,48 @@ function listenSource(scope, art, name, callback, once = true) {
   });
   return guarded;
 }
+const POSITION_TOLERANCE = 0.05;
+function positionRestoration(art, target, active2) {
+  let expected;
+  let observedSeek = false;
+  let corrected = false;
+  let manual = false;
+  let revision = positionRevision(art);
+  const manualPosition = () => manual || positionRevision(art) !== revision;
+  const seeking = () => !!art.template?.$video?.seeking;
+  return {
+    restore() {
+      if (!active2() || manualPosition())
+        return;
+      const previousRevision = positionRevision(art);
+      art.currentTime = target;
+      revision = positionRevision(art);
+      if (revision > previousRevision + 1)
+        manual = true;
+      if (!active2())
+        return;
+      expected = art.currentTime;
+      if (!active2() || manualPosition())
+        return;
+      observedSeek = seeking();
+    },
+    manual() {
+      manual = true;
+    },
+    ready() {
+      if (!active2() || seeking())
+        return false;
+      const missed = expected !== void 0 && Math.abs(art.currentTime - expected) > POSITION_TOLERANCE;
+      if (!manualPosition() && observedSeek && !corrected && expected !== void 0 && missed) {
+        corrected = true;
+        if (!active2())
+          return false;
+        art.currentTime = expected;
+      }
+      return active2() && !seeking();
+    }
+  };
+}
 function switchSource(art, url, currentTime) {
   return new Promise((resolve, reject) => {
     if (isClosing(art) || url === art.url) {
@@ -5096,41 +5283,63 @@ function switchSource(art, url, currentTime) {
       if (!active2())
         return;
       const readiness = scope.child();
+      let canPlay = false;
+      let resuming = false;
+      let rateRestored = false;
+      const position = positionRestoration(art, currentTime, active2);
+      const resume = async () => {
+        art.aspectRatio = aspectRatio2;
+        if (!active2())
+          return;
+        if (playing) {
+          try {
+            await art.play();
+          } catch {
+          }
+        }
+        if (!active2())
+          return;
+        art.notice.show = "";
+        settle();
+      };
+      const resumeWhenReady = () => {
+        if (!active2() || resuming || !canPlay)
+          return;
+        try {
+          if (art.template?.$video?.seeking)
+            return;
+          if (!active2())
+            return;
+          if (!rateRestored) {
+            rateRestored = true;
+            art.playbackRate = playbackRate2;
+          }
+          if (!position.ready() || !active2() || resuming)
+            return;
+          resuming = true;
+          readiness.dispose();
+          void resume().catch(fail);
+        } catch (error2) {
+          fail(error2);
+        }
+      };
       const handlers = {
         "video:error": fail,
         "video:loadedmetadata": () => {
           if (!active2())
             return;
           try {
-            art.currentTime = currentTime;
+            position.restore();
           } catch (error2) {
             fail(error2);
           }
         },
         "video:canplay": () => {
-          if (!active2())
-            return;
-          readiness.dispose();
-          const resume = async () => {
-            art.playbackRate = playbackRate2;
-            if (!active2())
-              return;
-            art.aspectRatio = aspectRatio2;
-            if (!active2())
-              return;
-            if (playing) {
-              try {
-                await art.play();
-              } catch {
-              }
-            }
-            if (!active2())
-              return;
-            art.notice.show = "";
-            settle();
-          };
-          void resume().catch(fail);
-        }
+          canPlay = true;
+          resumeWhenReady();
+        },
+        "video:seeked": resumeWhenReady,
+        "seek": position.manual
       };
       const capture = scope.child();
       const queued = [];
@@ -5155,7 +5364,7 @@ function switchSource(art, url, currentTime) {
         }
         const dispatch = {};
         for (const name of names)
-          dispatch[name] = listenSource(readiness, art, name, handlers[name]);
+          dispatch[name] = listenSource(readiness, art, name, handlers[name], name !== "video:seeked");
         for (const [name, event] of queued) {
           if (!active2() || readiness.closed)
             break;
@@ -5188,69 +5397,106 @@ function themeMix(art) {
     }
   });
 }
+function thumbnailLayout(option, geometry) {
+  const { number, column, width, height, scale } = option;
+  const { imageWidth, videoWidth, videoHeight, progressWidth, position } = geometry;
+  const columns = Number(column);
+  const previewWidth = Number(width) * Number(scale) || imageWidth / columns;
+  const previewHeight = Number(height) * Number(scale) || previewWidth / (videoWidth / videoHeight);
+  const index = Math.floor(position / (progressWidth / Number(number)));
+  const row = Math.floor(index / columns);
+  const cell = index % columns;
+  const left = position <= previewWidth / 2 ? 0 : position > progressWidth - previewWidth / 2 ? `${progressWidth - previewWidth}px` : `${position - previewWidth / 2}px`;
+  return {
+    height: `${previewHeight}px`,
+    width: `${previewWidth}px`,
+    backgroundPosition: `-${cell * previewWidth}px -${row * previewHeight}px`,
+    left
+  };
+}
 function thumbnailsMix(art) {
-  const {
-    option,
-    template: { $progress, $video }
-  } = art;
-  let timer = null;
-  let loding = false;
-  let image = null;
+  const { option, template: { $progress, $video } } = art;
+  let scope = getScope(art).child();
+  let image;
+  let loading2 = false;
+  let control;
+  let hover;
   function reset() {
-    clearTimeout(timer);
-    timer = null;
-    loding = false;
-    image = null;
+    const previous = scope;
+    scope = getScope(art).child();
+    image = void 0;
+    loading2 = false;
+    hover = void 0;
+    previous.dispose();
   }
-  function showThumbnails(posWidth) {
-    const $thumbnails = art.controls?.thumbnails;
-    if (!$thumbnails)
+  function render() {
+    const current2 = hover;
+    const currentScope = scope;
+    if (!current2 || !image)
       return;
-    const { number, column, width, height, scale } = option.thumbnails;
-    const width2 = width * scale || image.naturalWidth / column;
-    const height2 = height * scale || width2 / ($video.videoWidth / $video.videoHeight);
-    const perWidth = $progress.clientWidth / number;
-    const perIndex = Math.floor(posWidth / perWidth);
-    const yIndex = Math.ceil(perIndex / column) - 1;
-    const xIndex = perIndex % column || column - 1;
-    setStyle($thumbnails, "backgroundImage", `url(${image.src})`);
-    setStyle($thumbnails, "height", `${height2}px`);
-    setStyle($thumbnails, "width", `${width2}px`);
-    setStyle($thumbnails, "backgroundPosition", `-${xIndex * width2}px -${yIndex * height2}px`);
-    if (posWidth <= width2 / 2) {
-      setStyle($thumbnails, "left", 0);
-    } else if (posWidth > $progress.clientWidth - width2 / 2) {
-      setStyle($thumbnails, "left", `${$progress.clientWidth - width2}px`);
-    } else {
-      setStyle($thumbnails, "left", `${posWidth - width2 / 2}px`);
+    const active2 = () => !isClosing(art) && !currentScope.closed && scope === currentScope && hover === current2 && current2.sourceActive() && art.controls?.thumbnails === current2.element;
+    if (!active2())
+      return;
+    const position = $progress.clientWidth * current2.percentage;
+    if (!(position > 0 && position < $progress.clientWidth))
+      return;
+    const styles = {
+      backgroundImage: `url(${image.src})`,
+      ...thumbnailLayout(option.thumbnails, {
+        imageWidth: image.naturalWidth,
+        videoWidth: $video.videoWidth,
+        videoHeight: $video.videoHeight,
+        progressWidth: $progress.clientWidth,
+        position
+      })
+    };
+    for (const [key, value] of Object.entries(styles)) {
+      if (!active2())
+        return;
+      setStyle(current2.element, key, value);
     }
   }
-  art.on("setBar", async (type, percentage, event) => {
-    const $thumbnails = art.controls?.thumbnails;
+  eventSubscriptions(art)("setBar", (type, percentage, event) => {
+    const element = art.controls?.thumbnails;
     const { url, scale } = option.thumbnails;
-    if (!$thumbnails || !url)
+    if (isClosing(art) || !element || !url || !(type === "hover" || type === "played" && event && isMobile))
       return;
-    const isMobileDragging = type === "played" && event && isMobile;
-    if (type === "hover" || isMobileDragging) {
-      if (!image && !loding) {
-        loding = true;
-        image = await loadImg(url, scale);
-        loding = false;
-      }
-      if (!image)
+    if (control !== element) {
+      const elementScope = entryScope(element);
+      if (elementScope.closed)
         return;
-      const width = $progress.clientWidth * percentage;
-      if (width > 0 && width < $progress.clientWidth) {
-        showThumbnails(width);
-      }
+      control = element;
+      elementScope.add(() => {
+        if (control === element) {
+          control = void 0;
+          reset();
+        }
+      });
+    }
+    hover = { percentage, element, sourceActive: captureSource(art) };
+    if (image) {
+      render();
+    } else if (!loading2) {
+      const currentScope = scope;
+      loading2 = true;
+      loadThumbnailImage(url, scale, currentScope).then((loaded) => {
+        if (scope !== currentScope || currentScope.closed)
+          return;
+        loading2 = false;
+        image = loaded;
+        render();
+      }).catch((error2) => {
+        if (scope === currentScope && !currentScope.closed) {
+          loading2 = false;
+          console.warn("ArtPlayer thumbnail load failed:", error2);
+        }
+      });
     }
   });
   def(art, "thumbnails", {
-    get() {
-      return art.option.thumbnails;
-    },
-    set(thumbnails) {
-      if (thumbnails.url && !art.option.isLive) {
+    get: () => art.option.thumbnails,
+    set: (thumbnails) => {
+      if (!isClosing(art) && thumbnails.url && !art.option.isLive && !isClosing(art)) {
         art.option.thumbnails = thumbnails;
         reset();
       }
@@ -5319,8 +5565,6 @@ function urlMix(art) {
             const result = typeCallback.call(art, $video, newUrl, art);
             void Promise.resolve(result).catch((error2) => failSource(operation, error2));
           } else {
-            if (oldUrl)
-              URL.revokeObjectURL(oldUrl);
             if (!operation.active())
               return;
             $video.src = newUrl;

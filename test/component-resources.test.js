@@ -127,6 +127,27 @@ test('quality rejection identity and captured selection closure survive disposal
   assert.equal(art.notice.show, '')
 })
 
+test('quality setter retains the selected default, empty arrays, option identity and setter-only descriptor', () => {
+  const { art } = fixture()
+  const updates = []
+  art.controls = { update: option => updates.push(option) }
+  qualityMix(art)
+  const options = [{ html: 'first', url: 'a' }, { html: 'chosen', url: 'b', default: true }, { html: 'later', url: 'c', default: true }]
+  art.quality = options
+  assert.equal(updates[0].html, 'chosen')
+  assert.equal(updates[0].selector, options)
+  assert.deepEqual(updates[0].style, { marginRight: '10px' })
+  const empty = []
+  art.quality = empty
+  assert.equal(updates[1].html, '')
+  assert.equal(updates[1].selector, empty)
+  const descriptor = Object.getOwnPropertyDescriptor(art, 'quality')
+  assert.equal(descriptor.get, undefined)
+  assert.equal(descriptor.enumerable, false)
+  assert.equal(descriptor.configurable, false)
+  assert.equal(art.quality, undefined)
+})
+
 function fixture() {
   const art = new Emitter()
   const registered = new Set()

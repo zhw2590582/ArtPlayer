@@ -1998,6 +1998,246 @@
         "test/browser/prompt-components.spec.js"
       ],
       "resolutionRationale": "Owned prompt/input resources prevent stale callbacks and survive reentry/removal/destruction; normal public API and event ordering are retained. Final installed UMD and legacy each pass 1350 browser cases, including 207 CORE-18 cases, plus actual tarball runtime/type consumers. Physical mobile and release-review gates remain outstanding for the overall refactor."
+    },
+    {
+      "id": "BASE-LIFE-36",
+      "title": "Screenshot Blob callback failures escape and leave public promises pending",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/screenshot.test.js"
+      ],
+      "compatibleResolution": "Preserve legal capture results and error propagation, while fixing asynchronous failure and stale lifecycle effects.",
+      "closureCriteria": "Candidate unit, real-browser and installed-package regressions plus compatibility review pass.",
+      "workspaceState": "Before migration, null Blob and thrown createObjectURL escape the asynchronous callback. Candidate Node regression passes; final installed-package evidence remains outstanding. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-LIFE-37",
+      "title": "Screenshot completion can download or emit after destruction or source replacement",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/screenshot.test.js",
+        "test/browser/screenshot.spec.js"
+      ],
+      "compatibleResolution": "Preserve legal capture results and error propagation, while fixing asynchronous failure and stale lifecycle effects.",
+      "closureCriteria": "Candidate unit, real-browser and installed-package regressions plus compatibility review pass.",
+      "workspaceState": "Before migration, screenshot await resumes download and event effects after disposal or source replacement. Candidate guards preserve the captured string result while suppressing stale effects. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-LIFE-38",
+      "title": "Screenshot toolbar leaves internal capture failures as unhandled rejections",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/browser/screenshot.spec.js",
+        "refactor/baselines/screenshot-partial.json"
+      ],
+      "compatibleResolution": "Consume the internal toolbar Promise after the existing notice, while preserving rejection of every public capture method.",
+      "closureCriteria": "Exact historical Error identity is reproduced and candidate toolbar, cross-origin and installed-package regressions pass.",
+      "workspaceState": "Published toolbar produces one exactly identified rejection per engine; source candidate produces none. Real cross-origin toolbar validation passes. Installed-package exit remains outstanding. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-LIFE-39",
+      "title": "Thumbnail image completions can overwrite newer configuration or hover state and outlive controls",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/thumbnails.test.js",
+        "test/browser/thumbnails.spec.js",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "compatibleResolution": "Preserve public configuration identity, dimensions, layout positioning and public URL ownership; repair documented crop and lifecycle defects.",
+      "closureCriteria": "Candidate type, unit, actual image browser and installed-package validation pass with explicit historical differences.",
+      "workspaceState": "Five of seven initial Node cases fail before migration. Candidate generation/source/control ownership guards and latest-hover rendering now pass focused Node and real-image browser checks. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-LIFE-40",
+      "title": "Image load failures leave thumbnail loading frozen and canvas callback failures escape public loadImg promises",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/thumbnails.test.js",
+        "test/browser/thumbnails.spec.js",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "compatibleResolution": "Preserve public configuration identity, dimensions, layout positioning and public URL ownership; repair documented crop and lifecycle defects.",
+      "closureCriteria": "Candidate type, unit, actual image browser and installed-package validation pass with explicit historical differences.",
+      "workspaceState": "Owned image requests now settle on cancellation or failure and release handlers; the public utility retains HTMLImageElement results and callback errors reject. Transient no-store HTTP failure can retry in all three engines. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-LIFE-41",
+      "title": "Scaled thumbnail Blob URLs survive replacement, control removal and destruction",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/thumbnails.test.js",
+        "test/browser/thumbnails.spec.js",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "compatibleResolution": "Preserve public configuration identity, dimensions, layout positioning and public URL ownership; repair documented crop and lifecycle defects.",
+      "closureCriteria": "Candidate type, unit, actual image browser and installed-package validation pass with explicit historical differences.",
+      "workspaceState": "Candidate internal URLs belong to the thumbnail configuration/control. Public loadImg and screenshot Blob URL ownership stays with callers. Final installed-package evidence remains outstanding. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-DOM-19",
+      "title": "Thumbnail row boundaries and first-cell return do not match the generated zero-based sprite grid",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/thumbnails.test.js",
+        "test/browser/thumbnails.spec.js",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "compatibleResolution": "Preserve public configuration identity, dimensions, layout positioning and public URL ownership; repair documented crop and lifecycle defects.",
+      "closureCriteria": "Candidate type, unit, actual image browser and installed-package validation pass with explicit historical differences.",
+      "workspaceState": "artplayer-tool-thumbnail uses index modulo column and floor(index / column). Published renderer selects the previous row last cell at exact multiples and writes invalid double-negative CSS for the first cell. Corrected candidate crop is compared against a numbered real SVG grid. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-LIFE-42",
+      "title": "Progress callbacks and active drags can seek an obsolete source or removed control",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/source.test.js",
+        "test/progress.test.js",
+        "test/browser/progress-quality.spec.js",
+        "test/browser/source.spec.js",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "compatibleResolution": "Preserve legal progress and quality APIs, callback order, source results and caller ownership; stop obsolete work and bound native position correction.",
+      "closureCriteria": "Unit, strict types and installed-package browser matrices pass with explicit baseline differences and native evidence.",
+      "workspaceState": "Published real progress interactions continue seeking after setBar reentry; candidate guards entry, source and action identity and ends a drag on source replacement. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-LIFE-43",
+      "title": "Replacing a media source revokes a caller-owned Blob URL still in use",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/source.test.js",
+        "test/progress.test.js",
+        "test/browser/progress-quality.spec.js",
+        "test/browser/source.spec.js",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "compatibleResolution": "Preserve legal progress and quality APIs, callback order, source results and caller ownership; stop obsolete work and bound native position correction.",
+      "closureCriteria": "Unit, strict types and installed-package browser matrices pass with explicit baseline differences and native evidence.",
+      "workspaceState": "Published URL setter revokes the supplied old URL. Node fetch and three-browser byte ownership checks reproduce the consumer failure; candidate preserves caller ownership after switching and destruction. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-LIFE-44",
+      "title": "Native quality restoration can settle at a different position after its first seek",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-19"
+      ],
+      "evidence": [
+        "test/source.test.js",
+        "test/progress.test.js",
+        "test/browser/progress-quality.spec.js",
+        "test/browser/source.spec.js",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "compatibleResolution": "Preserve legal progress and quality APIs, callback order, source results and caller ownership; stop obsolete work and bound native position correction.",
+      "closureCriteria": "Unit, strict types and installed-package browser matrices pass with explicit baseline differences and native evidence.",
+      "workspaceState": "Windows WebKit native event traces show the first seek reporting the accepted target then completing near zero. Waiting or deferring alone is insufficient. Candidate waits for native completion and performs at most one correction; a persistent seeked listener prevents a pending Promise after that correction. Final CORE-19 CI and installed-package acceptance passed; see resolution evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/capture-progress-validation.json",
+        "refactor/changes/2026-09-11-CORE-19-capture-thumbnails.md"
+      ],
+      "resolutionRationale": "Core source, strict types, unit cases, real images/media, actual installed tarball and full UMD/legacy matrices pass. Explicit historical defect differences are documented; no API/type removal or environment waiver."
+    },
+    {
+      "id": "BASE-ENV-01",
+      "title": "Windows WebKit native Blob video samples lack decoding support; Apple-device validation remains outstanding",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "REL-03",
+        "REVIEW-02"
+      ],
+      "evidence": [
+        "test/browser/progress-quality.spec.js",
+        "refactor/environment-matrix.md"
+      ],
+      "compatibleResolution": "Keep byte ownership and real HTTP playback evidence distinct from native Blob decoding; do not infer Safari or Apple-device support from Windows WebKit.",
+      "closureCriteria": "Record actual Safari and Apple device versions and native sample capabilities, then compare published/candidate load, playback, seek, source replacement and Blob ownership.",
+      "workspaceState": "Independent video probes on Windows WebKit 26.6 return error 4 and width zero for both local MP4 and WebM Blob samples. Chromium and Firefox decode the tested Blob sample. WebKit ownership tests explicitly report decodedBlob=false.",
+      "resolutionEvidence": []
     }
   ]
 }

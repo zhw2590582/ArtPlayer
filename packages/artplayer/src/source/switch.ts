@@ -2,6 +2,7 @@ import type { SourceEvent, SourceListener, SwitchHost } from './types'
 import { isClosing } from '../lifecycle/instance'
 import { listenSource } from './listen'
 import { assignUrl, beginSource } from './operation'
+import { positionRestoration } from './restore-position'
 
 export function switchSource(art: SwitchHost, url: string, currentTime: number): Promise<void> {
   return new Promise<void>((resolve, reject) => {
@@ -39,44 +40,67 @@ export function switchSource(art: SwitchHost, url: string, currentTime: number):
         return
 
       const readiness = scope.child()
+      let canPlay = false
+      let resuming = false
+      let rateRestored = false
+      const position = positionRestoration(art, currentTime, active)
+      const resume = async () => {
+        art.aspectRatio = aspectRatio
+        if (!active())
+          return
+        if (playing) {
+          // The public play promise still rejects; this internal resume is best effort.
+          try {
+            await art.play()
+          }
+          catch {}
+        }
+        if (!active())
+          return
+        art.notice.show = ''
+        settle()
+      }
+      const resumeWhenReady = () => {
+        if (!active() || resuming || !canPlay)
+          return
+        try {
+          // canplay can arrive before the metadata restoration seek has settled.
+          if (art.template?.$video?.seeking)
+            return
+          if (!active())
+            return
+          if (!rateRestored) {
+            rateRestored = true
+            art.playbackRate = playbackRate
+          }
+          if (!position.ready() || !active() || resuming)
+            return
+          resuming = true
+          readiness.dispose()
+          void resume().catch(fail)
+        }
+        catch (error) {
+          fail(error)
+        }
+      }
       const handlers = {
         'video:error': fail,
         'video:loadedmetadata': () => {
           if (!active())
             return
           try {
-            art.currentTime = currentTime
+            position.restore()
           }
           catch (error) {
             fail(error)
           }
         },
         'video:canplay': () => {
-          if (!active())
-            return
-          // Detach readiness handlers before awaiting a possibly pending play.
-          readiness.dispose()
-          const resume = async () => {
-            art.playbackRate = playbackRate
-            if (!active())
-              return
-            art.aspectRatio = aspectRatio
-            if (!active())
-              return
-            if (playing) {
-              // The public play promise still rejects; this internal resume is best effort.
-              try {
-                await art.play()
-              }
-              catch {}
-            }
-            if (!active())
-              return
-            art.notice.show = ''
-            settle()
-          }
-          void resume().catch(fail)
+          canPlay = true
+          resumeWhenReady()
         },
+        'video:seeked': resumeWhenReady,
+        'seek': position.manual,
       }
       const capture = scope.child()
       const queued: [SourceEvent, unknown][] = []
@@ -101,7 +125,7 @@ export function switchSource(art: SwitchHost, url: string, currentTime: number):
         }
         const dispatch = {} as Record<SourceEvent, SourceListener>
         for (const name of names)
-          dispatch[name] = listenSource(readiness, art, name, handlers[name])
+          dispatch[name] = listenSource(readiness, art, name, handlers[name], name !== 'video:seeked')
         for (const [name, event] of queued) {
           if (!active() || readiness.closed)
             break
