@@ -2834,7 +2834,7 @@
     {
       "id": "DASH-SDK-01",
       "title": "npm 发布版 4.x 与工作区仅 5.x 的 SDK 接口不兼容",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-DASH-02",
@@ -2846,7 +2846,9 @@
         "refactor/baselines/dash-control-release.json",
         "packages/artplayer-plugin-dash-control/src/index.js",
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
-        "docs/assets/example/dash.control.js"
+        "docs/assets/example/dash.control.js",
+        "test/dash-contract.test.js",
+        "refactor/dash-validation.md"
       ],
       "compatibleResolution": "按方法能力适配两代已存在用法，保留 v5 稳定 ID，不能要求旧消费者改用新 SDK。",
       "closureCriteria": "归档旧用法、v4/v5 受控及实际媒体矩阵通过，清晰度键不混用。"
@@ -2854,7 +2856,7 @@
     {
       "id": "DASH-LIFE-01",
       "title": "DASH 空拓扑残留 UI，监听和旧选择回调缺乏关闭守卫",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-DASH-02",
@@ -2865,7 +2867,9 @@
         "refactor/baselines/dash-control-release.json",
         "packages/artplayer-plugin-dash-control/src/index.js",
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
-        "docs/assets/example/dash.control.js"
+        "docs/assets/example/dash.control.js",
+        "test/dash-contract.test.js",
+        "refactor/dash-validation.md"
       ],
       "compatibleResolution": "仅释放插件自有 ready/restart/destroy 订阅和 UI，SDK 仍由调用方拥有；替换后旧回调不写旧实例。",
       "closureCriteria": "空列表、换源/SDK、销毁后引用、安装异常有回归，其他实例与 SDK 不被误释放。"
@@ -2873,7 +2877,7 @@
     {
       "id": "DASH-STATE-01",
       "title": "DASH 当前项高亮使用真值 ID、音轨身份和标签去重，边界待核实",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-DASH-02",
@@ -2885,7 +2889,9 @@
         "refactor/baselines/dash-control-release.json",
         "packages/artplayer-plugin-dash-control/src/index.js",
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
-        "docs/assets/example/dash.control.js"
+        "docs/assets/example/dash.control.js",
+        "test/dash-contract.test.js",
+        "refactor/dash-validation.md"
       ],
       "compatibleResolution": "验证零 ID、重复标签和克隆音轨当前项，在保持原展示语义时按实际可选项定位高亮。",
       "closureCriteria": "有受控和真实 SDK 证据说明选中的 representation/track 与 UI 一致。"

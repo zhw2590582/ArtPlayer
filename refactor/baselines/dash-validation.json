@@ -1,0 +1,1846 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DASH-02",
+  "baseCommit": "3d4c6361",
+  "scope": "Controlled SDK contract tests, real core/plugin DOM and native MP4 playback. No actual dash.js instance, MPD, ABR, physical device or installed candidate package acceptance.",
+  "inputs": [
+    {
+      "file": "test/helpers/dash-control.js",
+      "sha256LF": "0aceb5a2f7c775ea05807fe8b76b77ce0ca7dd37637053a6383e1a8656edaba1"
+    },
+    {
+      "file": "test/dash-contract.test.js",
+      "sha256LF": "4477b48fc53224890a7eb22ed5f1554b57fd6265c864fb4039393978e63ceb31"
+    },
+    {
+      "file": "test/dash-control.test.js",
+      "sha256LF": "2a123bbd93659c053ab206f09ab489d04380b222885179203c0bfb401590b35d"
+    },
+    {
+      "file": "test/browser/dash-control.spec.js",
+      "sha256LF": "eebdd42357eb5084ae5cf84c04193dd8dfb5dcbdfdf227809876683036a304c3"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/index.js",
+      "sha256LF": "aaa7975115a6d2677f4c8d71182954edbf69a12f9ffe8bee86afa94f6b5615e8"
+    }
+  ],
+  "reports": [
+    {
+      "file": "refactor/.cache/dash02-first/report.json",
+      "sha256": "3b5237ecaa4a2eb653af8e0daf9ae0d079fe9a23661214250c34777d6305c129",
+      "bytes": 5671528,
+      "resultDir": "refactor/.cache/dash02-first/results",
+      "stats": {
+        "startTime": "2026-09-11T20:31:54.035Z",
+        "duration": 227299.818,
+        "expected": 24,
+        "skipped": 0,
+        "unexpected": 24,
+        "flaky": 0
+      },
+      "resultFiles": [
+        {
+          "file": "refactor/.cache/dash02-first/results/.last-run.json",
+          "sha256": "7d2379952fc78cef3d06336abb8f3bdf274c696eb3826ea572db35a718fdc539",
+          "bytes": 1223
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-02bec-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "d5f36833338ef79468736e4199533f8024e29f212d0dbdf3ea8743f7a19c95ef",
+          "bytes": 820526
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-02bec-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "33179828c23d5f3804415c64d3da04cac81216357717b12739334855a545f8b6",
+          "bytes": 835423
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-02bec-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "ac70929db771e60a346d00d634b65713c9c95d50a8da5af38fa13aef77d55641",
+          "bytes": 548071
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-chromium/error-context.md",
+          "sha256": "b6af89b4cbb0b439fc5965834d4c54c29f5cac915b9482d6729084a26dedab6e",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-chromium/test-failed-1.png",
+          "sha256": "54e61b1d1c78d9695c029b5fa221c143aa898a1c52dce6f9c1365dc723e568c9",
+          "bytes": 70983
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "878602a8b38d16d521a214464be223b15ab8afd457afbc11ac43d18d9460c46f",
+          "bytes": 592717
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-firefox/error-context.md",
+          "sha256": "b6af89b4cbb0b439fc5965834d4c54c29f5cac915b9482d6729084a26dedab6e",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-firefox/test-failed-1.png",
+          "sha256": "2638cc1f8f44caf219b3e59d5fb4ed0fe7b17fb531c0079587ca3c5db3dbf95a",
+          "bytes": 105250
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "5fd577fa95e61fc406bcc5f619b241282f4d152364969cd862a3648ddc9cbfad",
+          "bytes": 1970424
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-webkit/error-context.md",
+          "sha256": "b6af89b4cbb0b439fc5965834d4c54c29f5cac915b9482d6729084a26dedab6e",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-webkit/test-failed-1.png",
+          "sha256": "cf95efa44d8328a73a1d9e636ed3084dd06bf4adea0ddf9a8838fa49c1786b95",
+          "bytes": 268752
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "ac2ae066b26d9f1381171778933c4c61a8249ff81ac83391866773ef461d3842",
+          "bytes": 525890
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-3300d-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "948272af50cdb12b690ee4586778152d8b5b852bee40aa561ef6ba71a4811d3a",
+          "bytes": 825612
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-3300d-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "48e77be2d95db091d1dfcdc0e4303be5407c22c1fe4c994aa4f0d694f23324c6",
+          "bytes": 828719
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-3300d-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "5a5d35534008c16f0880ce210cb226a80b8d9dcd31a11cc4346caeb5fef0fb41",
+          "bytes": 568850
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-39df1-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "899421b48d3c7db8c99fb5bacb3ae6bd2645a895757cb44d183419d6a2d0464c",
+          "bytes": 803722
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-39df1-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "d316885f1c866423ddc74818bc90b876129fb35de453f4dcc4d1283cd4812df6",
+          "bytes": 888624
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-39df1-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "66ba09932878734f3304cf5771f204d018315b5303a0d94ee4295d2a1c922896",
+          "bytes": 475841
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-chromium/error-context.md",
+          "sha256": "de4e5bf11bc96ab4c0670e37e5d371732687f5696282010f8e7fbc2424ae8380",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-chromium/test-failed-1.png",
+          "sha256": "54e61b1d1c78d9695c029b5fa221c143aa898a1c52dce6f9c1365dc723e568c9",
+          "bytes": 70983
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "b712cb6a749edaec55ec6d2ac3123e4f1987d7ce687a77dff359529e9bad452d",
+          "bytes": 569286
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-firefox/error-context.md",
+          "sha256": "de4e5bf11bc96ab4c0670e37e5d371732687f5696282010f8e7fbc2424ae8380",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-firefox/test-failed-1.png",
+          "sha256": "9b2113757b61c27886d4aaa80275a1a6cb0ece8c7f7daaaac393f8d4603d0561",
+          "bytes": 105194
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "3d8eecd2655ec1739a850622462d663243806e32b0bfb98abd9c23a147df2611",
+          "bytes": 2238550
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-webkit/error-context.md",
+          "sha256": "de4e5bf11bc96ab4c0670e37e5d371732687f5696282010f8e7fbc2424ae8380",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-webkit/test-failed-1.png",
+          "sha256": "211749c5258be5e4a740926d0f1a283b34a84d59601a8cfdca82512eeb683310",
+          "bytes": 267746
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "c4315f48b50b80bcd711aa39f85adea7f6b83a8703178c9750ffa66e2872a447",
+          "bytes": 542364
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-chromium/error-context.md",
+          "sha256": "caf67f8eca905132bafbe730c671ad76d1e2a45065e081bead2dff9f8ccaa596",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-chromium/test-failed-1.png",
+          "sha256": "74c0e6214a99c99b0b215bf33ae6bdf3040f2aeed1b57817a84f7bcb2d9cbb2a",
+          "bytes": 74856
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "d8842697464b37f9e2b900cb5e3f02a1dd7e98352f0a5f25280295105923bb96",
+          "bytes": 480643
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-firefox/error-context.md",
+          "sha256": "caf67f8eca905132bafbe730c671ad76d1e2a45065e081bead2dff9f8ccaa596",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-firefox/test-failed-1.png",
+          "sha256": "9e31b23f94e98fa8424b086a9d09270a99b635b795976f904f612da9a6bf27aa",
+          "bytes": 106313
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "6399bc8d025ab7688c8cb62ba1d6b156af7dfc2303cdd644a6d4ac530da83328",
+          "bytes": 2380746
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-webkit/error-context.md",
+          "sha256": "caf67f8eca905132bafbe730c671ad76d1e2a45065e081bead2dff9f8ccaa596",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-webkit/test-failed-1.png",
+          "sha256": "e5dd307087f487a8c0937bb9b6254cecb6998aa9c4a8e3313a3e022661c84952",
+          "bytes": 266754
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "8507a97bbe73a7280f74ee0bc65bf474674f4835db48cca64875e3f7f10bc470",
+          "bytes": 507595
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-chromium/error-context.md",
+          "sha256": "d8491a61b50afce51cc8204b4d125f4b399a63bd95e49d326150b2ae12ab4528",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-chromium/test-failed-1.png",
+          "sha256": "74c0e6214a99c99b0b215bf33ae6bdf3040f2aeed1b57817a84f7bcb2d9cbb2a",
+          "bytes": 74856
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "bd28891c89f18f073369056120ec031566da3fd1b5ee1a50af078228c1313918",
+          "bytes": 480525
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-firefox/error-context.md",
+          "sha256": "d8491a61b50afce51cc8204b4d125f4b399a63bd95e49d326150b2ae12ab4528",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-firefox/test-failed-1.png",
+          "sha256": "9e31b23f94e98fa8424b086a9d09270a99b635b795976f904f612da9a6bf27aa",
+          "bytes": 106313
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "519b7825c1b4daf2cd3974eaabddcadefe50492645b1f99d748b082773a32419",
+          "bytes": 2346134
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-webkit/error-context.md",
+          "sha256": "d8491a61b50afce51cc8204b4d125f4b399a63bd95e49d326150b2ae12ab4528",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-webkit/test-failed-1.png",
+          "sha256": "e5dd307087f487a8c0937bb9b6254cecb6998aa9c4a8e3313a3e022661c84952",
+          "bytes": 266754
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "9f6b7ef5e1cc0830baa36562c2d69c1fd0da7fa5a51484658b7c0c67a7cf768c",
+          "bytes": 524874
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-945b5-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "50b27e9a1eae3ae14167626dec1562a2a00521ace81c08f10e568f5a604084a8",
+          "bytes": 838008
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-945b5-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "36236d0f06b04a7117a56638b27878b598f14a0c9367afa65e78523305d97996",
+          "bytes": 878236
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-candidate-cor-945b5-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "787e76457f33ffd96112dc5fe569fe5b86ca724cc32f6ab2f1399441096a9aeb",
+          "bytes": 548972
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3457b-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "f692e0d5581c863c370c647150e67b464ae9065ca4370b9b073b56396f0752db",
+          "bytes": 819573
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3457b-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "7254a93fcf9235c90346f18d0906f350e3f418beef96d39e8c946d4c497bc8df",
+          "bytes": 847930
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3457b-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "32417de357299ee57a0f6a704cde6bddb668b4bea9986a80dd4b4a0391cc09fe",
+          "bytes": 562223
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-chromium/error-context.md",
+          "sha256": "2d6b23f1d32cefe801b1bdd07de54a6f6b15fb767033e46443eae688cc1d7749",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-chromium/test-failed-1.png",
+          "sha256": "21d1e0d10cbba44fa5f850aebd192f8e84155637193fd8d62b14a81b9d62245a",
+          "bytes": 74918
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "0884a6c0cd3d4668132791dfc96783aa66c75a6ab44d4f9632bf509b4a60d83e",
+          "bytes": 613928
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-firefox/error-context.md",
+          "sha256": "2d6b23f1d32cefe801b1bdd07de54a6f6b15fb767033e46443eae688cc1d7749",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-firefox/test-failed-1.png",
+          "sha256": "f48e049531eec2efcd9619b061cded8e3397a9d7bef605a9d5e320b832086379",
+          "bytes": 106299
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "4f2ab2f3a7bbcf57b15cedcb82361b231596eddb03cd5edb82ba093b78c216d9",
+          "bytes": 2378428
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-webkit/error-context.md",
+          "sha256": "2d6b23f1d32cefe801b1bdd07de54a6f6b15fb767033e46443eae688cc1d7749",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-webkit/test-failed-1.png",
+          "sha256": "52d9aa537ec65038b45b0619c97eba0067c14393de6a40a60242bebbcf61a504",
+          "bytes": 266830
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "ba20154ee8ebc9ec8dab41189bbc81da738e0e02ee543592d6203b5b33d60a2b",
+          "bytes": 500365
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-chromium/error-context.md",
+          "sha256": "3b50564cf0dd21ffde6ccb18537a9459adf006ce6284d11e8f3109f44b18afee",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-chromium/test-failed-1.png",
+          "sha256": "be61d892603a9db8a3eb36db371c8c8ea066f6732081df5bb80923af54e03b1e",
+          "bytes": 71047
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "f66132d763789d51d955828c27deda27506ceb518ea5d0299a56b13e14327f35",
+          "bytes": 585021
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-firefox/error-context.md",
+          "sha256": "3b50564cf0dd21ffde6ccb18537a9459adf006ce6284d11e8f3109f44b18afee",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-firefox/test-failed-1.png",
+          "sha256": "4187f5a77408823299e0ff6cd1ba4152a0018769a60d889eaf2836a8ecbf9b2e",
+          "bytes": 105222
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "982880329df99f1141b0643503e07e06d27818bd332d4b5d8bb8a238b2128885",
+          "bytes": 2211971
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-webkit/error-context.md",
+          "sha256": "3b50564cf0dd21ffde6ccb18537a9459adf006ce6284d11e8f3109f44b18afee",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-webkit/test-failed-1.png",
+          "sha256": "73cb3bbf618ff3c96182198e57dd23f9a8c70257c8b1cebbb332bf891cae02d5",
+          "bytes": 267819
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "3dc371118e29a0ad35fd7804e398e3dea49235057b5ebe224c9ba7d9424cb0d8",
+          "bytes": 542129
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-chromium/error-context.md",
+          "sha256": "fb81aa74cb2adda651ee7272777204149f284694fb8c9a1272bb2c6f393dee40",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-chromium/test-failed-1.png",
+          "sha256": "21d1e0d10cbba44fa5f850aebd192f8e84155637193fd8d62b14a81b9d62245a",
+          "bytes": 74918
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "63eb7c2484f591c6aacf8a212702e37184cdfdb708b9e811f6308bef9fe06f73",
+          "bytes": 614033
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-firefox/error-context.md",
+          "sha256": "fb81aa74cb2adda651ee7272777204149f284694fb8c9a1272bb2c6f393dee40",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-firefox/test-failed-1.png",
+          "sha256": "f48e049531eec2efcd9619b061cded8e3397a9d7bef605a9d5e320b832086379",
+          "bytes": 106299
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "5cef8c8b8a9a39c00179ad07cdc7790ddcc1855b79b4742a6771d5541e9fd9cd",
+          "bytes": 2274507
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-webkit/error-context.md",
+          "sha256": "fb81aa74cb2adda651ee7272777204149f284694fb8c9a1272bb2c6f393dee40",
+          "bytes": 8492
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-webkit/test-failed-1.png",
+          "sha256": "52d9aa537ec65038b45b0619c97eba0067c14393de6a40a60242bebbcf61a504",
+          "bytes": 266830
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "782c28cdef64ddc38ddd215fe787cc078d14f396b9e8d387feff77c9b393d65e",
+          "bytes": 502493
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-7dd29-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "c03b924c82e14ede7677a1375a8d1a49e9303b4bcab248931d1a07f486f8702c",
+          "bytes": 785936
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-7dd29-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "6f24bbfb26d8248fb0c2c6eafe9ee1fd323721b802183d5b427d7c2735ce2021",
+          "bytes": 831061
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-7dd29-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "cf3e80fddd83fa34993529eda2a4e737024405d6d6be823d85fc1418eb4e5fb4",
+          "bytes": 552984
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-b39ba-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "6fa0feda8dfa6be78d66410012eb65bab2de513ebe127f01265a33dc15b8ba9f",
+          "bytes": 825595
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-b39ba-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "28381a37929154ad9bb30941a96bc104c67e29cfc17d99ad1ecbae9e6ee9d24b",
+          "bytes": 874412
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-b39ba-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "4149f0bf51ef5086574dd7ce76a26d970ee21502c5fa24384497fc5557594f57",
+          "bytes": 525777
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-ba411-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "6b9cc09ed82e6312147a083f3b60977e457db994572b333ba1528ede2b7aa17f",
+          "bytes": 857549
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-ba411-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "dca7084c411b270da3c26d0e955cfc766fc9c64d6eb57572fc99ad56fa3a8d8d",
+          "bytes": 812094
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-ba411-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "996e109cb35087174e920f77ff09bf4030d5f3fb37668853fde89bf8393bab6f",
+          "bytes": 532791
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-chromium/error-context.md",
+          "sha256": "7d7e482aaa8209be463607a09251ad497e98d16680d3f3c28476bd770f110da4",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-chromium/test-failed-1.png",
+          "sha256": "be61d892603a9db8a3eb36db371c8c8ea066f6732081df5bb80923af54e03b1e",
+          "bytes": 71047
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "1e680d223d703486b11b812fc52a720c65b21a36ddef256f31d22b821709f46d",
+          "bytes": 583975
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-firefox/error-context.md",
+          "sha256": "7d7e482aaa8209be463607a09251ad497e98d16680d3f3c28476bd770f110da4",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-firefox/test-failed-1.png",
+          "sha256": "4187f5a77408823299e0ff6cd1ba4152a0018769a60d889eaf2836a8ecbf9b2e",
+          "bytes": 105222
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "63c67bd382fd5d3bf2730828c9eefe4595ff2e9c88b55bbd8763da8b645bbfed",
+          "bytes": 2213990
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-webkit/error-context.md",
+          "sha256": "7d7e482aaa8209be463607a09251ad497e98d16680d3f3c28476bd770f110da4",
+          "bytes": 8488
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-webkit/test-failed-1.png",
+          "sha256": "73cb3bbf618ff3c96182198e57dd23f9a8c70257c8b1cebbb332bf891cae02d5",
+          "bytes": 267819
+        },
+        {
+          "file": "refactor/.cache/dash02-first/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "a4562dbe941c388e2f87bf8f602e9e8749fdc3b5e0874bd8e87d16737cd21b1a",
+          "bytes": 522735
+        }
+      ],
+      "inputs": {
+        "published": {
+          "name": "artplayer-plugin-dash-control",
+          "version": "1.1.0",
+          "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-dash-control/1.1.0",
+          "tarball": "https://registry.npmjs.org/artplayer-plugin-dash-control/-/artplayer-plugin-dash-control-1.1.0.tgz",
+          "integrity": "sha512-EssRkzYXWcln3a6nAzi4ESacBhzMih8s0bzdjXuvBBCh2UFmvK99ITD5E+0cuU8i5ZzIQGQSdce1/gANTrX0BQ==",
+          "sha256": "f4047a569d99b6a7de57b3719b7ad40109f2a1d360566a840f50ab32aacefcd9",
+          "archiveBytes": 3385,
+          "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+          "files": {
+            "package/README.md": "98982f1123ff9a11f5d3d9a52da6e8fea9cd0989f7465605c27b0f9a46f2dbcd",
+            "package/dist/artplayer-plugin-dash-control.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.legacy.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.mjs": "e32bf08c33a481781883067dcc639f0495c9dcb8a88b91be13736370f4932fc4",
+            "package/package.json": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+            "package/types/artplayer-plugin-dash-control.d.ts": "e15ef683e0c335d81531587828593325e037efe7ed29c022477cd14fe71aebba"
+          },
+          "manifest": {
+            "name": "artplayer-plugin-dash-control",
+            "version": "1.1.0",
+            "description": "Dash control plugin for ArtPlayer",
+            "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+            "license": "MIT",
+            "homepage": "https://artplayer.org",
+            "repository": {
+              "type": "git",
+              "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+            },
+            "bugs": {
+              "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+            },
+            "keywords": [
+              "html5",
+              "video",
+              "player"
+            ],
+            "exports": {
+              ".": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.mjs",
+                "require": "./dist/artplayer-plugin-dash-control.js"
+              },
+              "./legacy": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.legacy.js",
+                "require": "./dist/artplayer-plugin-dash-control.legacy.js"
+              }
+            },
+            "main": "./dist/artplayer-plugin-dash-control.js",
+            "module": "./dist/artplayer-plugin-dash-control.mjs",
+            "types": "./types/artplayer-plugin-dash-control.d.ts",
+            "legacy": "./dist/artplayer-plugin-dash-control.legacy.js",
+            "browserslist": "last 1 Chrome version"
+          }
+        },
+        "sourceSHA256": "e7a64a47310374888b3b0deab445a15df3875fe2b8307fce70277e094520047b",
+        "candidate": "workspace source build",
+        "scope": "Real ArtPlayer DOM and native MP4 with controlled SDK methods. No dash.js instance, MPD, ABR or adaptive media validation."
+      },
+      "browsers": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "manifest": {
+            "kind": "artplayer-browser-test",
+            "resources": {
+              "/candidate/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040
+              },
+              "/compiled/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/uncompiled/artplayer/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/candidate/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529
+              },
+              "/compiled/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/uncompiled/artplayer-plugin-chapter/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/published/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.4.0",
+                  "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                "bytes": 134037
+              },
+              "/published/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "1.1.0",
+                  "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                  "member": "package/dist/artplayer-plugin-chapter.js"
+                },
+                "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                "bytes": 4973
+              },
+              "/test/pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.mp4"
+                },
+                "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                "bytes": 251538
+              },
+              "/test/pattern.webm": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.webm"
+                },
+                "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                "bytes": 162073
+              },
+              "/test/audio-tone.m4a": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/audio-tone.m4a"
+                },
+                "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                "bytes": 132436
+              },
+              "/test/declaration-cues.vtt": {
+                "source": {
+                  "kind": "test-subtitles",
+                  "file": "test/browser/media/declaration-cues.vtt"
+                },
+                "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                "bytes": 54
+              },
+              "/test/thumbnail-grid.svg": {
+                "source": {
+                  "kind": "test-thumbnail-grid",
+                  "file": "test/browser/media/thumbnail-grid.svg"
+                },
+                "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                "bytes": 14969
+              },
+              "/test/legacy-safe-area.js": {
+                "source": {
+                  "kind": "frozen-own-source",
+                  "file": "test/helpers/legacy-safe-area.js",
+                  "commit": "ccf77c4e"
+                },
+                "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                "bytes": 795
+              },
+              "/assets/sample/video.mp4": {
+                "source": {
+                  "kind": "docs-media",
+                  "file": "docs/assets/sample/video.mp4"
+                },
+                "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                "bytes": 5818706
+              },
+              "/test/performance.js": {
+                "source": {
+                  "kind": "adapted-baseline-fixture",
+                  "file": "refactor/fixtures/performance.js"
+                },
+                "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+                "bytes": 8994
+              }
+            }
+          }
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "manifest": {
+            "kind": "artplayer-browser-test",
+            "resources": {
+              "/candidate/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040
+              },
+              "/compiled/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/uncompiled/artplayer/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/candidate/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529
+              },
+              "/compiled/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/uncompiled/artplayer-plugin-chapter/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/published/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.4.0",
+                  "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                "bytes": 134037
+              },
+              "/published/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "1.1.0",
+                  "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                  "member": "package/dist/artplayer-plugin-chapter.js"
+                },
+                "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                "bytes": 4973
+              },
+              "/test/pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.mp4"
+                },
+                "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                "bytes": 251538
+              },
+              "/test/pattern.webm": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.webm"
+                },
+                "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                "bytes": 162073
+              },
+              "/test/audio-tone.m4a": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/audio-tone.m4a"
+                },
+                "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                "bytes": 132436
+              },
+              "/test/declaration-cues.vtt": {
+                "source": {
+                  "kind": "test-subtitles",
+                  "file": "test/browser/media/declaration-cues.vtt"
+                },
+                "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                "bytes": 54
+              },
+              "/test/thumbnail-grid.svg": {
+                "source": {
+                  "kind": "test-thumbnail-grid",
+                  "file": "test/browser/media/thumbnail-grid.svg"
+                },
+                "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                "bytes": 14969
+              },
+              "/test/legacy-safe-area.js": {
+                "source": {
+                  "kind": "frozen-own-source",
+                  "file": "test/helpers/legacy-safe-area.js",
+                  "commit": "ccf77c4e"
+                },
+                "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                "bytes": 795
+              },
+              "/assets/sample/video.mp4": {
+                "source": {
+                  "kind": "docs-media",
+                  "file": "docs/assets/sample/video.mp4"
+                },
+                "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                "bytes": 5818706
+              },
+              "/test/performance.js": {
+                "source": {
+                  "kind": "adapted-baseline-fixture",
+                  "file": "refactor/fixtures/performance.js"
+                },
+                "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+                "bytes": 8994
+              }
+            }
+          }
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "manifest": {
+            "kind": "artplayer-browser-test",
+            "resources": {
+              "/candidate/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040
+              },
+              "/compiled/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/uncompiled/artplayer/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/candidate/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529
+              },
+              "/compiled/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/uncompiled/artplayer-plugin-chapter/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/published/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.4.0",
+                  "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                "bytes": 134037
+              },
+              "/published/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "1.1.0",
+                  "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                  "member": "package/dist/artplayer-plugin-chapter.js"
+                },
+                "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                "bytes": 4973
+              },
+              "/test/pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.mp4"
+                },
+                "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                "bytes": 251538
+              },
+              "/test/pattern.webm": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.webm"
+                },
+                "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                "bytes": 162073
+              },
+              "/test/audio-tone.m4a": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/audio-tone.m4a"
+                },
+                "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                "bytes": 132436
+              },
+              "/test/declaration-cues.vtt": {
+                "source": {
+                  "kind": "test-subtitles",
+                  "file": "test/browser/media/declaration-cues.vtt"
+                },
+                "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                "bytes": 54
+              },
+              "/test/thumbnail-grid.svg": {
+                "source": {
+                  "kind": "test-thumbnail-grid",
+                  "file": "test/browser/media/thumbnail-grid.svg"
+                },
+                "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                "bytes": 14969
+              },
+              "/test/legacy-safe-area.js": {
+                "source": {
+                  "kind": "frozen-own-source",
+                  "file": "test/helpers/legacy-safe-area.js",
+                  "commit": "ccf77c4e"
+                },
+                "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                "bytes": 795
+              },
+              "/assets/sample/video.mp4": {
+                "source": {
+                  "kind": "docs-media",
+                  "file": "docs/assets/sample/video.mp4"
+                },
+                "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                "bytes": 5818706
+              },
+              "/test/performance.js": {
+                "source": {
+                  "kind": "adapted-baseline-fixture",
+                  "file": "refactor/fixtures/performance.js"
+                },
+                "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+                "bytes": 8994
+              }
+            }
+          }
+        }
+      ],
+      "errors": [
+        "Test timeout of 20000ms exceeded.",
+        "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n  - waiting for locator('.art-setting-item').filter({ hasText: /^720p$/ })\n\n\n   97 |             await page.locator('.art-control-setting').click()\n   98 |             await page.locator(`[data-name=\"dash-${type}\"]`).click()\n>  99 |             await page.locator('.art-setting-item').filter({ hasText: new RegExp(`^${text}$`) }).click()\n      |                                                                                                  ^\n  100 |           }\n  101 |           const expected = type === 'quality'\n  102 |             ? [['auto', false], plugin === 'published' ? ['qualityIndex', 'video', 1] : ['representationId', 'video', 'high']]\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-control.spec.js:99:98",
+        "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n  - waiting for locator('.art-setting-item').filter({ hasText: /^fr$/ })\n\n\n   97 |             await page.locator('.art-control-setting').click()\n   98 |             await page.locator(`[data-name=\"dash-${type}\"]`).click()\n>  99 |             await page.locator('.art-setting-item').filter({ hasText: new RegExp(`^${text}$`) }).click()\n      |                                                                                                  ^\n  100 |           }\n  101 |           const expected = type === 'quality'\n  102 |             ? [['auto', false], plugin === 'published' ? ['qualityIndex', 'video', 1] : ['representationId', 'video', 'high']]\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-control.spec.js:99:98"
+      ]
+    },
+    {
+      "file": "refactor/.cache/dash02-final/report.json",
+      "sha256": "f58572c74e94cf3c7436288ac2b7b4452dac203e8636b5aaaf900644d6f5a810",
+      "bytes": 10450993,
+      "resultDir": "refactor/.cache/dash02-final/results",
+      "stats": {
+        "startTime": "2026-09-11T20:38:05.407Z",
+        "duration": 43695.555,
+        "expected": 48,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "resultFiles": [
+        {
+          "file": "refactor/.cache/dash02-final/results/.last-run.json",
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "bytes": 45
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-02bec-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "18444db8769ef6a8e7249ad953dd8662e5b85fce6fd1d90aaef2dfdcfd362384",
+          "bytes": 805248
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-02bec-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "be6593249dd5371a008e4425c9ee05d8a34a1a2105e99f28d267a1511f0d27a0",
+          "bytes": 855250
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-02bec-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "f3bb83673cf7ff033f6a09a1e91fb0062e113772a89a911414c02d3ffb229524",
+          "bytes": 498870
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "9ab27e2471f731c0ea373ea4ae62e6c32221eb461a9377da0e0cd2fb7bfc6014",
+          "bytes": 1042667
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "7e55c466317e4afc9da93b9691e590c16f5a21f7dab91f7e2a266be652b37568",
+          "bytes": 902778
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-1333a-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "2240eab8c15737a22ee055391048bdb747e791b10acded551728dbb825a3e1b2",
+          "bytes": 753246
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-3300d-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "9326228e7f6c4c27883f1f7685ced045f2ecdcf19a061900e444b3e23bb380cd",
+          "bytes": 845443
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-3300d-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "a74f12414b25688043483266237b45f6e7cebddcbb5289399cf8d3bd6b19865c",
+          "bytes": 900811
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-3300d-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "8651a100cdbd182b668e102afb5bd45c29799d5550f525f7c7358ee22f674c71",
+          "bytes": 516369
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-39df1-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "880cf50027ca5b52546ce7f6f08878ef5f41e2cb9e0500088187f6de09d82e2f",
+          "bytes": 803932
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-39df1-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "e2685476a800232822dcd98cf0840bbbb07a59a5462e69235fdccae9395899e8",
+          "bytes": 829579
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-39df1-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "d7a6ba24738cec0dc91b28ca2438841048b8dca2c8fcdce324e9aa3d4b4d4f85",
+          "bytes": 570691
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "4f9dfa13dce4863ca75549cf4164256ca00f3e2acaeeb427dab41d160e9a0698",
+          "bytes": 1063500
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "446fe423f92ebe3876f0f8dd0207e56f05214bf6727fa59eebab35bb1efa1378",
+          "bytes": 926027
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-5af40-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "6c337fc38e56f43712aa4c3dbc613103a01278a945dbb62bd349b7c6c15d21db",
+          "bytes": 731694
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "d17215fdafa3ccf8a780e8deb95c1890baa5bc63491513f94353439489d4283f",
+          "bytes": 979438
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "9aa3c23b69de83e0e4eae109c64d1420c60a3c1e8cc977bfdd6e2b9835b651ae",
+          "bytes": 869288
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-8e292-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "cef295b96dfab09abcabae384325e75fe1012226297eae9eff4c5dada7e8c136",
+          "bytes": 722407
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "06af38dc70a0eb2f5de3cd6e40ed39f2df5b8e80ce04314b4f86cde20400ff6d",
+          "bytes": 935910
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "9f3fcb1bd8fb270dffdc42fc5b8f7a2e2a232d8a31616eb154d26710a4be94d7",
+          "bytes": 908230
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-9124e-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "79951e185a1dd3fd796a59395601c82daa91d2ac363af221982c9f057c7cdf53",
+          "bytes": 760621
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-945b5-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "268bf06808ccfaacb9116d416a53669e7fb23c6b4d2461ac5a89c167b720bfa8",
+          "bytes": 800692
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-945b5-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "3524ead429acd988f17783fe2c0134741d85cab3e2a4826d77f3d5cc01896de0",
+          "bytes": 800871
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-candidate-cor-945b5-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "08268078c772e728d17aef9675b4347c473978cdf0cac61c7830b4c89a16701d",
+          "bytes": 531436
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-3457b-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "ff1f0f322a38d1fb6630e3752033b137d1f393c996eb4294e2835baa7e5404d6",
+          "bytes": 839699
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-3457b-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "4e219a43423a319b6c73f81b64d9b160957e692d4c79a1fcc2c4a2173c8260fc",
+          "bytes": 825265
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-3457b-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "d248226a971e68d87a9305af87c3a35a0932cee10eb30217d9506e5adf679d90",
+          "bytes": 549651
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "e104ee947b835da6ac02fb48b2970cf80fa77f91ea60fb23abdd1533d5fb2f52",
+          "bytes": 1048521
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "8c9d5b2d80bb0d7c5cc18e49d3b9a9e78710c4ec305bcb8f4a168e84aa37644c",
+          "bytes": 864264
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-3c6d1-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "318e8bca1d67f3e8e64755117e466aa36eec203f116208743bd80a9b832bfb64",
+          "bytes": 717480
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "4afa75914a400910edfb350d70a2795f900f4cc65b1e5c9f5087d9a20dc7aa9b",
+          "bytes": 1043432
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "f20708549e5991a8aeaf66428bd23a5255d0184c0f92ecb43f20a514f01e6410",
+          "bytes": 861620
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-4c264-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "0bc1e99b083193738036c6c7bc57afe31ee42dc9abf2ad63968cac524fc76a53",
+          "bytes": 714214
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "ff6e2151a35d34c74b22aee059ea2471b4efec59706ce5ae0ffd91f86eddea92",
+          "bytes": 1054795
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "0a53ce06a97902699083edee6ff4e7a12aa98577c1ba7640a468a3526b4b888a",
+          "bytes": 912997
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-541e9-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "e5a7480202aad0dd20aafeaf865788b2edcee86ef28abb695478c568fb313114",
+          "bytes": 736877
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-7dd29-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "7eeb94f6340e8ed17992f228081a25fa01419d6756a6eb174f5ed01b0d05e45b",
+          "bytes": 823746
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-7dd29-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "0427841cca8f45027c9b8a2881e8b68b27def769ea60fb87ab7a7b1296bbc74a",
+          "bytes": 936208
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-7dd29-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "7589b13cae1c2a7680f5f47763761c8af2b64cf151db1601baa4ebbb2146d608",
+          "bytes": 541092
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-b39ba-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "924894558503f61c186a63156468e45dc2210019e2d5500861c904e2d94086b9",
+          "bytes": 841167
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-b39ba-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "34f1ab0bc72927c3ae43ea2cbf01bdc09d43bf2f9a53d8d1cda95968778aeb6c",
+          "bytes": 1067532
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-b39ba-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "303977dcf3f95aff456d7e2cd91963f5675fd6fcac6b7c78aa3298eda256db2e",
+          "bytes": 495700
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-ba411-on-through-real-control-DOM-chromium/trace.zip",
+          "sha256": "e054b3be79701bbed0ba315382a270700e45ebd55403bc33758af185aa2e54ad",
+          "bytes": 799869
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-ba411-on-through-real-control-DOM-firefox/trace.zip",
+          "sha256": "78f08804bd12e59725da872e2a3a4c50b87dea1565bc455e5a3d42ea1d74bacc",
+          "bytes": 780849
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-ba411-on-through-real-control-DOM-webkit/trace.zip",
+          "sha256": "bbfb2d7b91a5a4af5644166b1d1d73e37b1490b5376faab482502dd7302dfb75",
+          "bytes": 550670
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-chromium/trace.zip",
+          "sha256": "c44fcf3105c6ede5bd6aa52eccae243a3262b27ea976f9738ec256f556c24fbe",
+          "bytes": 1042334
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-firefox/trace.zip",
+          "sha256": "5f3014a008a11eef716ccfd7d69dbb6c06168d56fc18eeada9a9562cef99f1b3",
+          "bytes": 881022
+        },
+        {
+          "file": "refactor/.cache/dash02-final/results/dash-control-published-cor-f0528-on-through-real-setting-DOM-webkit/trace.zip",
+          "sha256": "bf4af268ad2fc50739766f142581a93d274d848440457b37187a5e29ca37f978",
+          "bytes": 712287
+        }
+      ],
+      "inputs": {
+        "published": {
+          "name": "artplayer-plugin-dash-control",
+          "version": "1.1.0",
+          "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-dash-control/1.1.0",
+          "tarball": "https://registry.npmjs.org/artplayer-plugin-dash-control/-/artplayer-plugin-dash-control-1.1.0.tgz",
+          "integrity": "sha512-EssRkzYXWcln3a6nAzi4ESacBhzMih8s0bzdjXuvBBCh2UFmvK99ITD5E+0cuU8i5ZzIQGQSdce1/gANTrX0BQ==",
+          "sha256": "f4047a569d99b6a7de57b3719b7ad40109f2a1d360566a840f50ab32aacefcd9",
+          "archiveBytes": 3385,
+          "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+          "files": {
+            "package/README.md": "98982f1123ff9a11f5d3d9a52da6e8fea9cd0989f7465605c27b0f9a46f2dbcd",
+            "package/dist/artplayer-plugin-dash-control.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.legacy.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.mjs": "e32bf08c33a481781883067dcc639f0495c9dcb8a88b91be13736370f4932fc4",
+            "package/package.json": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+            "package/types/artplayer-plugin-dash-control.d.ts": "e15ef683e0c335d81531587828593325e037efe7ed29c022477cd14fe71aebba"
+          },
+          "manifest": {
+            "name": "artplayer-plugin-dash-control",
+            "version": "1.1.0",
+            "description": "Dash control plugin for ArtPlayer",
+            "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+            "license": "MIT",
+            "homepage": "https://artplayer.org",
+            "repository": {
+              "type": "git",
+              "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+            },
+            "bugs": {
+              "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+            },
+            "keywords": [
+              "html5",
+              "video",
+              "player"
+            ],
+            "exports": {
+              ".": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.mjs",
+                "require": "./dist/artplayer-plugin-dash-control.js"
+              },
+              "./legacy": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.legacy.js",
+                "require": "./dist/artplayer-plugin-dash-control.legacy.js"
+              }
+            },
+            "main": "./dist/artplayer-plugin-dash-control.js",
+            "module": "./dist/artplayer-plugin-dash-control.mjs",
+            "types": "./types/artplayer-plugin-dash-control.d.ts",
+            "legacy": "./dist/artplayer-plugin-dash-control.legacy.js",
+            "browserslist": "last 1 Chrome version"
+          }
+        },
+        "sourceSHA256": "e7a64a47310374888b3b0deab445a15df3875fe2b8307fce70277e094520047b",
+        "candidate": "workspace source build",
+        "scope": "Real ArtPlayer DOM and native MP4 with controlled SDK methods. No dash.js instance, MPD, ABR or adaptive media validation."
+      },
+      "browsers": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "manifest": {
+            "kind": "artplayer-browser-test",
+            "resources": {
+              "/candidate/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040
+              },
+              "/compiled/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/uncompiled/artplayer/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/candidate/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529
+              },
+              "/compiled/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/uncompiled/artplayer-plugin-chapter/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/published/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.4.0",
+                  "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                "bytes": 134037
+              },
+              "/published/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "1.1.0",
+                  "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                  "member": "package/dist/artplayer-plugin-chapter.js"
+                },
+                "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                "bytes": 4973
+              },
+              "/test/pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.mp4"
+                },
+                "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                "bytes": 251538
+              },
+              "/test/pattern.webm": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.webm"
+                },
+                "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                "bytes": 162073
+              },
+              "/test/audio-tone.m4a": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/audio-tone.m4a"
+                },
+                "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                "bytes": 132436
+              },
+              "/test/declaration-cues.vtt": {
+                "source": {
+                  "kind": "test-subtitles",
+                  "file": "test/browser/media/declaration-cues.vtt"
+                },
+                "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                "bytes": 54
+              },
+              "/test/thumbnail-grid.svg": {
+                "source": {
+                  "kind": "test-thumbnail-grid",
+                  "file": "test/browser/media/thumbnail-grid.svg"
+                },
+                "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                "bytes": 14969
+              },
+              "/test/legacy-safe-area.js": {
+                "source": {
+                  "kind": "frozen-own-source",
+                  "file": "test/helpers/legacy-safe-area.js",
+                  "commit": "ccf77c4e"
+                },
+                "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                "bytes": 795
+              },
+              "/assets/sample/video.mp4": {
+                "source": {
+                  "kind": "docs-media",
+                  "file": "docs/assets/sample/video.mp4"
+                },
+                "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                "bytes": 5818706
+              },
+              "/test/performance.js": {
+                "source": {
+                  "kind": "adapted-baseline-fixture",
+                  "file": "refactor/fixtures/performance.js"
+                },
+                "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+                "bytes": 8994
+              }
+            }
+          }
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "manifest": {
+            "kind": "artplayer-browser-test",
+            "resources": {
+              "/candidate/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040
+              },
+              "/compiled/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/uncompiled/artplayer/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/candidate/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529
+              },
+              "/compiled/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/uncompiled/artplayer-plugin-chapter/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/published/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.4.0",
+                  "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                "bytes": 134037
+              },
+              "/published/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "1.1.0",
+                  "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                  "member": "package/dist/artplayer-plugin-chapter.js"
+                },
+                "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                "bytes": 4973
+              },
+              "/test/pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.mp4"
+                },
+                "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                "bytes": 251538
+              },
+              "/test/pattern.webm": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.webm"
+                },
+                "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                "bytes": 162073
+              },
+              "/test/audio-tone.m4a": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/audio-tone.m4a"
+                },
+                "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                "bytes": 132436
+              },
+              "/test/declaration-cues.vtt": {
+                "source": {
+                  "kind": "test-subtitles",
+                  "file": "test/browser/media/declaration-cues.vtt"
+                },
+                "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                "bytes": 54
+              },
+              "/test/thumbnail-grid.svg": {
+                "source": {
+                  "kind": "test-thumbnail-grid",
+                  "file": "test/browser/media/thumbnail-grid.svg"
+                },
+                "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                "bytes": 14969
+              },
+              "/test/legacy-safe-area.js": {
+                "source": {
+                  "kind": "frozen-own-source",
+                  "file": "test/helpers/legacy-safe-area.js",
+                  "commit": "ccf77c4e"
+                },
+                "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                "bytes": 795
+              },
+              "/assets/sample/video.mp4": {
+                "source": {
+                  "kind": "docs-media",
+                  "file": "docs/assets/sample/video.mp4"
+                },
+                "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                "bytes": 5818706
+              },
+              "/test/performance.js": {
+                "source": {
+                  "kind": "adapted-baseline-fixture",
+                  "file": "refactor/fixtures/performance.js"
+                },
+                "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+                "bytes": 8994
+              }
+            }
+          }
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "manifest": {
+            "kind": "artplayer-browser-test",
+            "resources": {
+              "/candidate/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040
+              },
+              "/compiled/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/uncompiled/artplayer/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+                "bytes": 378040,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/candidate/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529
+              },
+              "/compiled/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/uncompiled/artplayer-plugin-chapter/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/published/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.4.0",
+                  "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                "bytes": 134037
+              },
+              "/published/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "1.1.0",
+                  "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                  "member": "package/dist/artplayer-plugin-chapter.js"
+                },
+                "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                "bytes": 4973
+              },
+              "/test/pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.mp4"
+                },
+                "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                "bytes": 251538
+              },
+              "/test/pattern.webm": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.webm"
+                },
+                "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                "bytes": 162073
+              },
+              "/test/audio-tone.m4a": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/audio-tone.m4a"
+                },
+                "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                "bytes": 132436
+              },
+              "/test/declaration-cues.vtt": {
+                "source": {
+                  "kind": "test-subtitles",
+                  "file": "test/browser/media/declaration-cues.vtt"
+                },
+                "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                "bytes": 54
+              },
+              "/test/thumbnail-grid.svg": {
+                "source": {
+                  "kind": "test-thumbnail-grid",
+                  "file": "test/browser/media/thumbnail-grid.svg"
+                },
+                "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                "bytes": 14969
+              },
+              "/test/legacy-safe-area.js": {
+                "source": {
+                  "kind": "frozen-own-source",
+                  "file": "test/helpers/legacy-safe-area.js",
+                  "commit": "ccf77c4e"
+                },
+                "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                "bytes": 795
+              },
+              "/assets/sample/video.mp4": {
+                "source": {
+                  "kind": "docs-media",
+                  "file": "docs/assets/sample/video.mp4"
+                },
+                "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                "bytes": 5818706
+              },
+              "/test/performance.js": {
+                "source": {
+                  "kind": "adapted-baseline-fixture",
+                  "file": "refactor/fixtures/performance.js"
+                },
+                "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+                "bytes": 8994
+              }
+            }
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/dash02-node-first.log",
+      "sha256": "b422bb3184fedccfde1e80513f8d32e8058e7763ca15217eba911c3276f96d2b",
+      "bytes": 7368
+    },
+    {
+      "file": "refactor/.cache/dash02-node-final.log",
+      "sha256": "5abea1ebfacd12ed6420e25a4f182da84ecd2ed54a7065537fba459771def596",
+      "bytes": 7367
+    },
+    {
+      "file": "refactor/.cache/dash02-browser-first.log",
+      "sha256": "3f225a798c1b24da4dd0aecc1fec6f24c926a3f8ded59bd3a410e60d19dc68ca",
+      "bytes": 78961
+    },
+    {
+      "file": "refactor/.cache/dash02-browser-final.log",
+      "sha256": "e66a1ada79b7129055191f39d324150f74fce0a14b3b42d6eeab4a85269c78c1",
+      "bytes": 9624
+    },
+    {
+      "file": "refactor/.cache/dash02-ci.log",
+      "sha256": "cc4e02ab21074455bfd184bd9bf6dd596a14494c8c8d19e5b71e9b5e2bb674b3",
+      "bytes": 70378
+    }
+  ],
+  "totals": {
+    "nodeFocused": 74,
+    "ciUnit": 619,
+    "ciEngineering": 14,
+    "ciBaseline": 37,
+    "browserFirst": {
+      "passed": 24,
+      "failed": 24
+    },
+    "browserFinal": {
+      "passed": 48,
+      "failed": 0
+    }
+  },
+  "limitation": "Raw reports/traces are local cache, not committed/uploaded. First failures preserve the whole-row text locator error; final assertions retain SDK selection, both UI surfaces and native playback checks."
+}

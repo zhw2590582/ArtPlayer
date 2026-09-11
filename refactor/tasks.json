@@ -1992,11 +1992,15 @@
         "ENG-03",
         "ENG-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "保留已有 5 项稳定 ID 回归，补发布版 SDK 4.x/当前 5.x、音轨/空列表/过滤/换源与关闭引用",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-DASH-02-tests.md",
+        "dash-validation.md",
+        "baselines/dash-validation.json"
+      ]
     },
     {
       "id": "PKG-DASH-03",
