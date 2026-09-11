@@ -7,6 +7,9 @@ Ads bundle against controlled clock/host contracts. It is included in `test:unit
 The helper uses the real option validator but does not simulate media decoding or layout.
 Historical defect assertions apply only to frozen implementations. See
 [Ads validation](../refactor/ads-validation.md) for artifact overrides and browser scope.
+`ads-lifecycle.test.js` adds candidate-only resource, reentry, early-method and Promise
+regressions. Async observations drain one event-loop turn, including VM Promise assimilation,
+rather than assuming a fixed number of microtasks. The published defect observations stay intact.
 
 | Command             | Scope                                                                                                    |
 | ------------------- | -------------------------------------------------------------------------------------------------------- |

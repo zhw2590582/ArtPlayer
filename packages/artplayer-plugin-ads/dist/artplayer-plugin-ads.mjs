@@ -4,247 +4,397 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-const style = ".artplayer-plugin-ads {\n  position: absolute;\n  z-index: 150;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n  font-size: 13px;\n  line-height: 1;\n  color: #fff;\n  background-color: #000;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-html {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-timer {\n  display: none;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-timer > div {\n  display: flex;\n  align-items: center;\n  background-color: rgba(0, 0, 0, 0.5);\n  border-radius: 15px;\n  margin-left: 5px;\n  padding: 5px 10px;\n  cursor: pointer;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-control {\n  display: none;\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-control > div {\n  display: flex;\n  align-items: center;\n  background-color: rgba(0, 0, 0, 0.5);\n  border-radius: 15px;\n  margin-left: 5px;\n  padding: 5px 10px;\n  cursor: pointer;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg {\n  width: 20px;\n  height: 20px;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-loading {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n}\n";
-function checkVersion(art) {
-  const {
-    version,
-    utils: { errorHandle }
-  } = art.constructor;
-  const arr = version.split(".").map(Number);
-  const major = arr[0];
-  const minor = arr[1] / 100;
-  errorHandle(
-    major + minor >= 5,
-    `Artplayer.js@${version} is not compatible the artplayerPluginAds@${artplayerPluginAds.version}. Please update it to version Artplayer.js@5.x.x`
-  );
+function normalizeOptions(input, validate) {
+  return validate({
+    html: "",
+    video: "",
+    url: "",
+    playDuration: 5,
+    totalDuration: 10,
+    muted: false,
+    i18n: {
+      close: "关闭广告",
+      countdown: "%s秒",
+      detail: "查看详情",
+      canBeClosed: "%s秒后可关闭广告"
+    },
+    ...input
+  }, {
+    html: "?string",
+    video: "?string",
+    url: "?string",
+    playDuration: "number",
+    totalDuration: "number",
+    muted: "?boolean",
+    i18n: { close: "string", countdown: "string", detail: "string", canBeClosed: "string" }
+  });
 }
-function artplayerPluginAds(option) {
-  return (art) => {
-    checkVersion(art);
-    const {
-      template: { $player },
-      icons: { volume, volumeClose, fullscreenOn, fullscreenOff, loading },
-      constructor: {
-        validator,
-        utils: { query, append, setStyle }
-      }
-    } = art;
-    option = validator(
-      {
-        html: "",
-        video: "",
-        url: "",
-        playDuration: 5,
-        totalDuration: 10,
-        muted: false,
-        i18n: {
-          close: "关闭广告",
-          countdown: "%s秒",
-          detail: "查看详情",
-          canBeClosed: "%s秒后可关闭广告"
-        },
-        ...option
-      },
-      {
-        html: "?string",
-        video: "?string",
-        url: "?string",
-        playDuration: "number",
-        totalDuration: "number",
-        muted: "?boolean",
-        i18n: {
-          close: "string",
-          countdown: "string",
-          detail: "string",
-          canBeClosed: "string"
-        }
-      }
-    );
-    let $ads = null;
-    let $timer = null;
-    let $close = null;
-    let $countdown = null;
-    let $control = null;
-    let $loading = null;
-    let time = 0;
-    let timer = null;
-    let isEnd = false;
-    let isInit = false;
-    let isCanClose = false;
-    function getI18n(val, str) {
-      return str.replace("%s", val);
-    }
-    function skip() {
-      isEnd = true;
-      art.play();
-      if (option.video)
-        $ads.pause();
-      setStyle(art.template.$ads, "display", "none");
-      art.emit("artplayerPluginAds:skip", option);
-    }
-    function play() {
-      if (isEnd)
+function createCountdown(total, render, complete) {
+  let elapsed = 0;
+  let ready = false;
+  let running = false;
+  let closed = false;
+  let timer;
+  function schedule() {
+    if (!ready || !running || closed || timer !== void 0)
+      return;
+    timer = setTimeout(() => {
+      timer = void 0;
+      if (closed || !running)
         return;
-      timer = setTimeout(() => {
-        time += 1;
-        const playDuration = option.playDuration - time;
-        if (playDuration >= 1) {
-          $close.innerHTML = getI18n(playDuration, option.i18n.canBeClosed);
-        } else {
-          $close.innerHTML = option.i18n.close;
-          if (!isCanClose) {
-            isCanClose = true;
-          }
-        }
-        $countdown.innerHTML = getI18n(option.totalDuration - time, option.i18n.countdown);
-        if (time >= option.totalDuration) {
-          skip();
-        } else {
-          play();
-        }
-      }, 1e3);
-    }
-    function pause() {
-      if (isEnd)
+      elapsed += 1;
+      render(elapsed);
+      if (closed)
         return;
+      if (elapsed >= total())
+        complete();
+      else
+        schedule();
+    }, 1e3);
+  }
+  function pause() {
+    running = false;
+    if (timer !== void 0)
       clearTimeout(timer);
-    }
-    function show() {
-      art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
-      $ads = append(
-        art.template.$ads,
-        option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop playsInline></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`
-      );
-      $loading = append(art.template.$ads, '<div class="artplayer-plugin-ads-loading"></div>');
-      append($loading, loading);
-      $timer = append(
-        art.template.$ads,
-        `<div class="artplayer-plugin-ads-timer">
-                    <div class="artplayer-plugin-ads-close">${option.playDuration <= 0 ? option.i18n.close : getI18n(option.playDuration, option.i18n.canBeClosed)}</div>
-                    <div class="artplayer-plugin-ads-countdown">${getI18n(
-          option.totalDuration,
-          option.i18n.countdown
-        )}</div>
-                </div>`
-      );
-      $close = query(".artplayer-plugin-ads-close", $timer);
-      $countdown = query(".artplayer-plugin-ads-countdown", $timer);
-      if (option.playDuration >= option.totalDuration) {
-        setStyle($close, "display", "none");
-      }
-      art.proxy($close, "click", () => {
-        if (isCanClose) {
-          skip();
-        }
-      });
-      $control = append(
-        art.template.$ads,
-        `<div class="artplayer-plugin-ads-control">
-                    <div class="artplayer-plugin-ads-detail">${option.i18n.detail}</div>
-                    <div class="artplayer-plugin-ads-muted"></div>
-                    <div class="artplayer-plugin-ads-fullscreen"></div>
-                </div>`
-      );
-      const $detail = query(".artplayer-plugin-ads-detail", $control);
-      const $muted = query(".artplayer-plugin-ads-muted", $control);
-      const $fullscreen = query(".artplayer-plugin-ads-fullscreen", $control);
-      if (option.url) {
-        art.proxy($detail, "click", () => {
-          window.open(option.url);
-          art.emit("artplayerPluginAds:click", option);
-        });
-      } else {
-        setStyle($detail, "display", "none");
-      }
-      if (option.video) {
-        const $volume = append($muted, volume);
-        const $volumeClose = append($muted, volumeClose);
-        setStyle($volumeClose, "display", "none");
-        if (option.muted) {
-          $ads.muted = true;
-          setStyle($volume, "display", "none");
-          setStyle($volumeClose, "display", "inline-flex");
-        }
-        art.proxy($muted, "click", () => {
-          $ads.muted = !$ads.muted;
-          if ($ads.muted) {
-            setStyle($volume, "display", "none");
-            setStyle($volumeClose, "display", "inline-flex");
-          } else {
-            setStyle($volume, "display", "inline-flex");
-            setStyle($volumeClose, "display", "none");
-          }
-        });
-      } else {
-        setStyle($muted, "display", "none");
-      }
-      const $fullscreenOn = append($fullscreen, fullscreenOn);
-      const $fullscreenOff = append($fullscreen, fullscreenOff);
-      setStyle($fullscreenOff, "display", "none");
-      art.proxy($fullscreen, "click", () => {
-        art.fullscreen = !art.fullscreen;
-        if (art.fullscreen) {
-          setStyle($fullscreenOn, "display", "inline-flex");
-          setStyle($fullscreenOff, "display", "none");
-        } else {
-          setStyle($fullscreenOn, "display", "none");
-          setStyle($fullscreenOff, "display", "inline-flex");
-        }
-      });
-      art.proxy($ads, "click", () => {
-        if (option.url)
-          window.open(option.url);
-        art.emit("artplayerPluginAds:click", option);
-      });
-    }
-    function init() {
-      if (isInit)
+    timer = void 0;
+  }
+  return {
+    start() {
+      if (ready || closed)
         return;
-      isInit = true;
-      show();
-      art.pause();
-      if (option.video) {
-        art.proxy($ads, "error", skip);
-        art.proxy($ads, "loadedmetadata", () => {
-          play();
-          $ads.play();
-          setStyle($timer, "display", "flex");
-          setStyle($control, "display", "flex");
-          setStyle($loading, "display", "none");
-        });
-      } else {
-        play();
-        setStyle($timer, "display", "flex");
-        setStyle($control, "display", "flex");
-        setStyle($loading, "display", "none");
-      }
-      art.on("document:visibilitychange", () => {
-        if (document.hidden) {
-          pause();
-        } else {
-          play();
-        }
-      });
+      ready = true;
+      running = true;
+      schedule();
+    },
+    play() {
+      if (!ready || closed)
+        return;
+      running = true;
+      schedule();
+    },
+    pause,
+    stop() {
+      closed = true;
+      pause();
     }
-    art.on("ready", () => {
-      art.once("play", init);
-      art.once("video:playing", init);
-    });
-    return {
-      name: "artplayerPluginAds",
-      skip,
-      pause,
-      play
-    };
   };
 }
-if (typeof document !== "undefined") {
-  if (!document.getElementById("artplayer-plugin-ads")) {
-    const $style = document.createElement("style");
-    $style.id = "artplayer-plugin-ads";
-    $style.textContent = style;
-    document.head.appendChild($style);
+function report(error) {
+  console.warn("Artplayer Ads:", error);
+}
+function createResources(host) {
+  const cleaners = [];
+  let closed = false;
+  function install(add, remove) {
+    if (closed)
+      return;
+    cleaners.push(remove);
+    try {
+      add();
+    } finally {
+      if (closed)
+        remove();
+    }
   }
+  return {
+    on(name, callback) {
+      const listener = () => {
+        if (!closed)
+          callback();
+      };
+      install(() => {
+        host.on(name, listener);
+      }, () => {
+        host.off(name, listener);
+      });
+    },
+    dom(target, name, callback) {
+      const listener = () => {
+        if (!closed)
+          callback();
+      };
+      install(() => target.addEventListener(name, listener), () => target.removeEventListener(name, listener));
+    },
+    dispose() {
+      if (closed)
+        return;
+      closed = true;
+      for (const clean of cleaners.splice(0).reverse()) {
+        try {
+          clean();
+        } catch (error) {
+          report(error);
+        }
+      }
+    }
+  };
+}
+const translate = (value, text) => text.replace("%s", String(value));
+function createView(parent, icons, option, utils, own) {
+  const { append, query, setStyle } = utils;
+  const root = append(parent, '<div class="artplayer-plugin-ads"></div>');
+  own(root);
+  const content = append(root, option.video ? '<video class="artplayer-plugin-ads-video" loop playsInline></video>' : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
+  const video = option.video ? content : null;
+  const loading = append(root, '<div class="artplayer-plugin-ads-loading"></div>');
+  append(loading, icons.loading);
+  const timer = append(root, `<div class="artplayer-plugin-ads-timer">
+    <div class="artplayer-plugin-ads-close"></div>
+    <div class="artplayer-plugin-ads-countdown"></div>
+  </div>`);
+  const close = query(".artplayer-plugin-ads-close", timer);
+  const countdown = query(".artplayer-plugin-ads-countdown", timer);
+  const control = append(root, `<div class="artplayer-plugin-ads-control">
+    <div class="artplayer-plugin-ads-detail">${option.i18n.detail}</div>
+    <div class="artplayer-plugin-ads-muted"></div>
+    <div class="artplayer-plugin-ads-fullscreen"></div>
+  </div>`);
+  const detail = query(".artplayer-plugin-ads-detail", control);
+  const muted = query(".artplayer-plugin-ads-muted", control);
+  const fullscreen = query(".artplayer-plugin-ads-fullscreen", control);
+  let canClose = option.playDuration <= 0;
+  if (option.playDuration >= option.totalDuration)
+    setStyle(close, "display", "none");
+  if (!option.url)
+    setStyle(detail, "display", "none");
+  if (video) {
+    append(muted, icons.volume);
+    append(muted, icons.volumeClose);
+    video.muted = Boolean(option.muted);
+    syncMuted();
+  } else {
+    setStyle(muted, "display", "none");
+  }
+  append(fullscreen, icons.fullscreenOn);
+  append(fullscreen, icons.fullscreenOff);
+  function syncMuted() {
+    setStyle(icons.volume, "display", video?.muted ? "none" : "inline-flex");
+    setStyle(icons.volumeClose, "display", video?.muted ? "inline-flex" : "none");
+  }
+  function render(elapsed) {
+    const remaining = option.playDuration - elapsed;
+    canClose = elapsed === 0 ? option.playDuration <= 0 : remaining < 1 || Number.isNaN(remaining);
+    close.innerHTML = canClose ? option.i18n.close : translate(remaining, option.i18n.canBeClosed);
+    countdown.innerHTML = translate(option.totalDuration - elapsed, option.i18n.countdown);
+  }
+  render(0);
+  return {
+    root,
+    video,
+    render,
+    ready() {
+      setStyle(timer, "display", "flex");
+      setStyle(control, "display", "flex");
+      setStyle(loading, "display", "none");
+    },
+    hide() {
+      setStyle(root, "display", "none");
+    },
+    fullscreen(active) {
+      setStyle(icons.fullscreenOn, "display", active ? "none" : "inline-flex");
+      setStyle(icons.fullscreenOff, "display", active ? "inline-flex" : "none");
+    },
+    bind(events, callbacks) {
+      events.dom(close, "click", () => {
+        if (canClose)
+          callbacks.skip();
+      });
+      events.dom(content, "click", callbacks.click);
+      if (option.url)
+        events.dom(detail, "click", callbacks.click);
+      if (video) {
+        events.dom(muted, "click", () => {
+          video.muted = !video.muted;
+          syncMuted();
+        });
+      }
+      events.dom(fullscreen, "click", callbacks.fullscreen);
+    }
+  };
+}
+function createSession(art, option, icons, utils) {
+  const events = createResources(art);
+  const lifetime = createResources(art);
+  const template = art.template;
+  let state = "waiting";
+  let initialized = false;
+  let armed = false;
+  let mediaReady = false;
+  let root;
+  let view;
+  const clock = createCountdown(() => option.totalDuration, (time) => view?.render(time), skip);
+  const active = () => state === "active" && !art.isDestroy;
+  const destroyed = () => state === "destroyed" || art.isDestroy;
+  function pauseVideo(video) {
+    try {
+      video?.pause();
+    } catch (error) {
+      report(error);
+    }
+  }
+  function requestPlay(start, rejected, late) {
+    try {
+      Promise.resolve(start()).then(() => {
+        if (!active())
+          late?.();
+      }, rejected).catch(report);
+    } catch (error) {
+      rejected(error);
+    }
+  }
+  function skip() {
+    if (state === "ended" || state === "destroyed" || art.isDestroy)
+      return;
+    state = "ended";
+    clock.stop();
+    events.dispose();
+    if (initialized) {
+      requestPlay(() => art.play(), (error) => {
+        if (state !== "destroyed")
+          report(error);
+      });
+      if (destroyed())
+        return;
+      pauseVideo(view?.video);
+      if (destroyed())
+        return;
+      view?.hide();
+    }
+    if (!destroyed())
+      art.emit("artplayerPluginAds:skip", option);
+  }
+  function disposeView() {
+    const video = view?.video;
+    pauseVideo(video);
+    if (video) {
+      try {
+        video.removeAttribute("src");
+        video.load();
+      } catch (error) {
+        report(error);
+      }
+    }
+    try {
+      root?.remove();
+    } catch (error) {
+      report(error);
+    } finally {
+      if (template.$ads === root)
+        delete template.$ads;
+    }
+  }
+  function destroy() {
+    if (state === "destroyed")
+      return;
+    state = "destroyed";
+    clock.stop();
+    events.dispose();
+    lifetime.dispose();
+    disposeView();
+  }
+  function init() {
+    if (state !== "waiting" || art.isDestroy)
+      return;
+    state = "active";
+    initialized = true;
+    try {
+      view = createView(template.$player, icons, option, utils, (node) => {
+        root = node;
+        template.$ads = node;
+      });
+      if (!active()) {
+        disposeView();
+        return;
+      }
+      art.pause();
+      if (!active())
+        return;
+      const current = view;
+      const document2 = root.ownerDocument;
+      current.fullscreen(art.fullscreen);
+      current.bind(events, {
+        skip,
+        click() {
+          if (option.url)
+            (document2.defaultView || window).open(option.url);
+          if (active())
+            art.emit("artplayerPluginAds:click", option);
+        },
+        fullscreen() {
+          art.fullscreen = !art.fullscreen;
+          if (active())
+            current.fullscreen(art.fullscreen);
+        }
+      });
+      events.on("fullscreen", () => current.fullscreen(art.fullscreen));
+      const visibility = () => document2.hidden ? clock.pause() : clock.play();
+      events.dom(document2, "visibilitychange", visibility);
+      events.on("document:visibilitychange", visibility);
+      const ready = () => {
+        if (!active() || mediaReady)
+          return;
+        mediaReady = true;
+        clock.start();
+        if (document2.hidden)
+          clock.pause();
+        if (current.video) {
+          const video = current.video;
+          requestPlay(() => video.play(), (error) => {
+            if (active()) {
+              report(error);
+              skip();
+            }
+          }, () => pauseVideo(video));
+        }
+        if (active())
+          current.ready();
+      };
+      if (current.video) {
+        events.dom(current.video, "error", skip);
+        events.dom(current.video, "loadedmetadata", ready);
+        current.video.src = option.video;
+      } else {
+        ready();
+      }
+    } catch (error) {
+      destroy();
+      throw error;
+    }
+  }
+  try {
+    lifetime.on("destroy", destroy);
+    events.on("ready", () => {
+      if (armed || state !== "waiting")
+        return;
+      armed = true;
+      events.on("play", init);
+      events.on("video:playing", init);
+    });
+    if (art.isDestroy)
+      destroy();
+  } catch (error) {
+    destroy();
+    throw error;
+  }
+  return { name: "artplayerPluginAds", skip, pause: clock.pause, play: clock.play };
+}
+const style = ".artplayer-plugin-ads {\n  position: absolute;\n  z-index: 150;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n  font-size: 13px;\n  line-height: 1;\n  color: #fff;\n  background-color: #000;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-html {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-timer {\n  display: none;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-timer > div {\n  display: flex;\n  align-items: center;\n  background-color: rgba(0, 0, 0, 0.5);\n  border-radius: 15px;\n  margin-left: 5px;\n  padding: 5px 10px;\n  cursor: pointer;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-control {\n  display: none;\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-control > div {\n  display: flex;\n  align-items: center;\n  background-color: rgba(0, 0, 0, 0.5);\n  border-radius: 15px;\n  margin-left: 5px;\n  padding: 5px 10px;\n  cursor: pointer;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg {\n  width: 20px;\n  height: 20px;\n}\n.artplayer-plugin-ads .artplayer-plugin-ads-loading {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n}\n";
+function artplayerPluginAds(input) {
+  return (art) => {
+    const constructor = art.constructor;
+    if (typeof constructor.validator !== "function" || !["append", "query", "setStyle"].every((name) => typeof Reflect.get(constructor.utils || {}, name) === "function")) {
+      throw new Error("Artplayer Ads requires the core validator and DOM utilities");
+    }
+    const option = normalizeOptions(input, constructor.validator);
+    const { volume, volumeClose, fullscreenOn, fullscreenOff, loading } = art.icons;
+    return createSession(art, option, { volume, volumeClose, fullscreenOn, fullscreenOff, loading }, constructor.utils);
+  };
+}
+if (typeof document !== "undefined" && !document.getElementById("artplayer-plugin-ads")) {
+  const element = document.createElement("style");
+  element.id = "artplayer-plugin-ads";
+  element.textContent = style;
+  document.head.appendChild(element);
 }
 export {
   artplayerPluginAds as default

@@ -252,6 +252,20 @@ for (const { name, factory } of implementations) {
     assert.equal(skips(host).length, 1)
     assert.equal(env.timers.size, 0)
   })
+
+  test(`${name}: normalized event options remain live for subsequent countdown ticks`, (t) => {
+    const env = adsEnvironment(t)
+    const host = env.host()
+    factory({ html: 'ad', totalDuration: 10 })(host.art)
+    host.art.on('artplayerPluginAds:click', (option) => {
+      option.totalDuration = 2
+    })
+    host.start()
+    host.fire('html', 'click')
+    env.tick(2000)
+    assert.equal(skips(host).length, 1)
+    assert.equal(host.node('countdown').innerHTML, '0秒')
+  })
 }
 
 // Freeze legacy defects separately; migrated candidates must not inherit these assertions.

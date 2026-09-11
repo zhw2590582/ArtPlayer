@@ -1,5 +1,20 @@
 # Ads 回归测试与维护入口
 
+## 03 源码改造补充
+
+当前源码已按 [包内架构](../packages/artplayer-plugin-ads/ARCHITECTURE.md) 拆为 7 个严格 TS
+模块。新增 test/ads-lifecycle.test.js，仅候选实现运行修复断言；test/ads.test.js 的旧
+行为与冻结缺陷观察保留，新增动态修改事件配置的兼容检查。三个正式格式也可通过
+ARTPLAYER_TEST_ADS 加入同一运行。02 的原始输入哈希/结果不覆盖更新。
+
+浏览器加入实际 4.5.5 核心映射；候选用例覆盖提前 skip、零阈值幂等、真实 destroy/src
+释放与两类内部播放拒绝。拒绝用例透明记录 console.warn 的实际参数，仍调用原方法，
+不依赖 Firefox 等引擎不同的 console 文本渲染。成功播放仍检查真实像素和时钟。
+结构/缺陷差异及验证过程见 [03 记录](changes/2026-09-12-PKG-ADS-03-lifecycle.md)。
+03 最终正式三格式 Node 186 项通过；main/legacy 三引擎各 144 项通过；完整 CI 830 项
+通过、269 生产 TS 严格检查。对应 [新执行证据](baselines/ads-lifecycle-validation.json)
+与以下 02 历史结果分别保留，不能把任何一轮当作全部包的发布证明。
+
 Ads 的实际发布行为以 [1.0.6 归档](baselines/ads-release.json) 为基线；工作区 2.1.0
 未发布，其旧 bundle 单独从冻结 Git 提交加载。不要将当前声明里的 source/type 当成
 发布 JS 支持的输入；正常广告仍使用 html/video/url，图片通过 HTML img 提供。

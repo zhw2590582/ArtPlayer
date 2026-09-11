@@ -109,11 +109,28 @@ export function adsEnvironment(t) {
         calls.push(['ad.pause'])
         this.paused = true
       }
+
+      remove() {
+        if (this.parentNode)
+          this.parentNode.children = this.parentNode.children.filter(child => child !== this)
+        this.parentNode = null
+        calls.push(['remove', this.className])
+      }
+
+      removeAttribute(name) {
+        calls.push(['removeAttribute', this.className, name])
+        delete this[name]
+      }
+
+      load() {
+        calls.push(['ad.load'])
+      }
     }
     const prefix = 'artplayer-plugin-ads'
     function append(parent, value) {
       if (typeof value !== 'string') {
         parent.children.push(value)
+        value.parentNode = parent
         return value
       }
       const match = value.match(/^<(\w+)\s[^>]*class="([^"]*)"[^>]*>([\s\S]*)<\/\w+>$/)
@@ -121,6 +138,7 @@ export function adsEnvironment(t) {
       const [, tag, className, inner] = match
       const node = new Node(tag, className, inner)
       parent.children.push(node)
+      node.parentNode = parent
       for (const child of inner.matchAll(/<div class="([^"]+)"[^>]*>([\s\S]*?)<\/div>/g))
         node.children.push(new Node('div', child[1], child[2]))
       return node

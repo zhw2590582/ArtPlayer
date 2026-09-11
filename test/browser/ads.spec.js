@@ -26,8 +26,9 @@ test.afterEach(async ({ page }, testInfo) => {
     return {
       events: window.adsEvents,
       rejected: window.adsRejected,
+      warnings: window.adsWarnings,
       ad: ad && { time: ad.currentTime, paused: ad.paused, width: ad.videoWidth, height: ad.videoHeight, error: ad.error?.code },
-      content: window.art && { time: window.art.currentTime, paused: window.art.video.paused, destroyed: window.art.isDestroy },
+      content: window.art && { time: window.art.currentTime, paused: window.art.template.$video.paused, destroyed: window.art.isDestroy },
     }
   })
   await testInfo.attach('ads-state', { contentType: 'application/json', body: JSON.stringify(state) })
@@ -40,7 +41,7 @@ test.afterEach(async ({ page }, testInfo) => {
   })
 })
 
-async function openAds(page, core, plugin, option, testInfo) {
+async function openAds(page, core, plugin, option, testInfo, start = true) {
   await page.goto(`/test/player.html?core=${core}`)
   const code = plugin === 'published' ? published : candidate
   await page.addScriptTag({ content: code })
@@ -59,10 +60,96 @@ async function openAds(page, core, plugin, option, testInfo) {
   }, option)
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
   await expect(page.locator('.artplayer-plugin-ads')).toHaveCount(0)
-  await page.locator('#play').click()
+  if (start)
+    await page.locator('#play').click()
 }
 
-for (const core of ['published', 'candidate']) {
+for (const core of ['published-4.5.5', 'published', 'candidate']) {
+  test(`${core} core / candidate Ads: skip before play suppresses preroll without autoplay`, async ({ page }, testInfo) => {
+    await openAds(page, core, 'candidate', { html: 'pending ad' }, testInfo, false)
+    await page.evaluate(() => window.art.plugins.artplayerPluginAds.skip())
+    expect(await page.evaluate(() => window.art.template.$video.paused)).toBe(true)
+    expect(await page.evaluate(() => window.adsEvents.filter(event => event.name === 'skip').length)).toBe(1)
+    await page.locator('#play').click()
+    await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.3)
+    await expect(page.locator('.artplayer-plugin-ads')).toHaveCount(0)
+  })
+
+  test(`${core} core / candidate Ads: immediate zero-threshold skip completes only once`, async ({ page }, testInfo) => {
+    await openAds(page, core, 'candidate', { html: 'ad', playDuration: 0, totalDuration: 1 }, testInfo)
+    await page.locator('.artplayer-plugin-ads-close').click()
+    await expect(page.locator('.artplayer-plugin-ads')).toBeHidden()
+    await page.evaluate(() => {
+      window.art.plugins.artplayerPluginAds.skip()
+      window.art.plugins.artplayerPluginAds.play()
+    })
+    await page.waitForTimeout(1200)
+    expect(await page.evaluate(() => window.adsEvents.filter(event => event.name === 'skip').length)).toBe(1)
+    await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.3)
+  })
+
+  test(`${core} core / candidate Ads: destroy releases actual ad media and prevents delayed playback`, async ({ page }, testInfo) => {
+    await page.addInitScript(() => {
+      window.adsPlayCalls = []
+      const play = HTMLMediaElement.prototype.play
+      HTMLMediaElement.prototype.play = function () {
+        window.adsPlayCalls.push(this.className)
+        return play.call(this)
+      }
+    })
+    await openAds(page, core, 'candidate', { video: '/test/pattern.mp4', muted: true, totalDuration: 2 }, testInfo)
+    await expect.poll(() => page.locator('.artplayer-plugin-ads-video').evaluate(video => video.currentTime)).toBeGreaterThan(0.2)
+    const before = await page.evaluate(() => {
+      window.retainedAd = document.querySelector('.artplayer-plugin-ads-video')
+      window.art.destroy(false)
+      window.retainedAd.dispatchEvent(new Event('loadedmetadata'))
+      window.retainedAd.dispatchEvent(new Event('error'))
+      return window.adsPlayCalls.length
+    })
+    await expect(page.locator('.artplayer-plugin-ads')).toHaveCount(0)
+    await page.waitForTimeout(2200)
+    expect(await page.evaluate(() => ({
+      paused: window.retainedAd.paused,
+      src: window.retainedAd.getAttribute('src'),
+      calls: window.adsPlayCalls.length,
+      skips: window.adsEvents.filter(event => event.name === 'skip').length,
+      hasTemplate: Boolean(window.art.template.$ads),
+    }))).toEqual({ paused: true, src: null, calls: before, skips: 0, hasTemplate: false })
+  })
+
+  for (const target of ['ad', 'content']) {
+    test(`${core} core / candidate Ads: observes ${target} play rejection without an unhandled error`, async ({ page }, testInfo) => {
+      await page.addInitScript((target) => {
+        window.adsWarnings = []
+        const warn = console.warn
+        console.warn = function (...args) {
+          window.adsWarnings.push(args.map(value => value?.message ? { name: value.name, message: value.message } : value))
+          return warn.apply(this, args)
+        }
+        const play = HTMLMediaElement.prototype.play
+        HTMLMediaElement.prototype.play = function () {
+          const selected = target === 'ad'
+            ? this.classList.contains('artplayer-plugin-ads-video')
+            : this === window.art?.template.$video && document.querySelector('.artplayer-plugin-ads')
+          if (selected)
+            return Promise.reject(new DOMException(`Ads candidate ${target} rejection`, 'NotAllowedError'))
+          return play.call(this)
+        }
+      }, target)
+      const option = target === 'ad' ? { video: '/test/pattern.mp4', muted: true, totalDuration: 10 } : { html: 'ad', totalDuration: 1 }
+      await openAds(page, core, 'candidate', option, testInfo)
+      await expect.poll(() => page.evaluate(() => window.adsEvents.filter(event => event.name === 'skip').length)).toBe(1)
+      await expect(page.locator('.artplayer-plugin-ads')).toBeHidden()
+      await expect.poll(() => page.evaluate(() => window.adsWarnings)).toEqual([
+        ['Artplayer Ads:', { name: 'NotAllowedError', message: `Ads candidate ${target} rejection` }],
+      ])
+      if (target === 'ad')
+        await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.3)
+      else
+        expect(await page.evaluate(() => window.art.template.$video.paused)).toBe(true)
+    })
+  }
+
   for (const plugin of ['published', 'candidate']) {
     const label = `${core} core / ${plugin} Ads`
 
@@ -71,7 +158,7 @@ for (const core of ['published', 'candidate']) {
       const root = page.locator('.artplayer-plugin-ads')
       await expect(root).toBeVisible()
       await expect.poll(() => page.locator('img[alt="Ad artwork"]').evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true)
-      expect(await page.evaluate(() => window.art.video.paused)).toBe(true)
+      expect(await page.evaluate(() => window.art.template.$video.paused)).toBe(true)
       await page.locator('.artplayer-plugin-ads-close').click()
       expect(await page.evaluate(() => window.adsEvents.filter(event => event.name === 'skip').length)).toBe(0)
       await expect(page.locator('.artplayer-plugin-ads-close')).toHaveText('关闭广告')
@@ -183,7 +270,7 @@ for (const core of ['published', 'candidate']) {
       })
       const play = HTMLMediaElement.prototype.play
       HTMLMediaElement.prototype.play = function () {
-        if (this === window.art?.video && document.querySelector('.artplayer-plugin-ads'))
+        if (this === window.art?.template.$video && document.querySelector('.artplayer-plugin-ads'))
           return Promise.reject(new DOMException('Ads test controlled content rejection', 'NotAllowedError'))
         return play.call(this)
       }
@@ -191,7 +278,7 @@ for (const core of ['published', 'candidate']) {
     await openAds(page, core, 'published', { html: 'ad', totalDuration: 1 }, testInfo)
     await expect.poll(() => page.evaluate(() => window.adsRejected)).toEqual([{ name: 'NotAllowedError', message: 'Ads test controlled content rejection' }])
     await expect(page.locator('.artplayer-plugin-ads')).toBeHidden()
-    expect(await page.evaluate(() => window.art.video.paused)).toBe(true)
+    expect(await page.evaluate(() => window.art.template.$video.paused)).toBe(true)
     expect(await page.evaluate(() => window.adsEvents.filter(event => event.name === 'skip').length)).toBe(1)
   })
 

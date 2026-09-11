@@ -2567,11 +2567,15 @@
         "CORE-10",
         "CORE-13"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "配置/广告状态/计时/视图/主视频恢复分离，保留产品规则；资源与版本检查改用经验证的旧核心能力边界",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-ADS-03-lifecycle.md",
+        "ads-validation.md",
+        "baselines/ads-lifecycle-validation.json"
+      ]
     },
     {
       "id": "PKG-ADS-04",

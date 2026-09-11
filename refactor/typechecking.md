@@ -80,6 +80,11 @@ allowJs=true、checkJs=false 允许渐进迁移时引用旧 JS；只将迁移的
 
 ## 后续接入
 
+Ads 的 7 个自有 TS 模块由 packages/artplayer-plugin-ads/tsconfig.json 严格检查，
+无生产 JS 遗留。03 的内部 Input/Options 与旧公开声明暂时分开；公开声明仍有已登记
+的历史输入/类型漂移，由 PKG-ADS-04 建立精确消费者后统一，不能把源码严格检查称为
+旧/新发布类型矩阵完成。
+
 Audio Track 的自有源码由 packages/artplayer-plugin-audio-track/tsconfig.json 严格检查。
 默认/legacy 类型保留历史 update 的完整 Option；新增 /runtime 复用同一运行文件，
 提供 UpdateOption/RuntimeResult。test/types/audio-track.ts 同时验证旧 Parameters、

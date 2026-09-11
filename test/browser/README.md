@@ -1,10 +1,13 @@
 # Browser regression entry
 
 `yarn test:browser test/browser/ads.spec.js` tests actual Ads 1.0.6 and candidate code
-with published 5.4.1 and candidate cores using local image/video media. It covers actual
+with published 4.5.5/5.4.1 and candidate cores using local image/video media. It covers actual
 decoded pixels, countdown, skipping, content restoration, 404 and source replacement.
 Published-only rejection cases inject an exact play failure; they do not certify device
 autoplay policies. See [Ads validation](../../refactor/ads-validation.md).
+Candidate lifecycle cases check early/duplicate skip, real media release after destroy and
+observed internal play rejections. The server exposes the verified 4.5.5 bundle separately
+and records its fingerprint; the fixture uses the shared template.$video surface.
 
 Audio Track tests use the source and frozen 1.1.0 plugin on both cores. The local AAC fixture
 has a pinned hash and generation command in media/audio-tone.json and uses the existing Range
