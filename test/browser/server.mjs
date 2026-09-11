@@ -8,6 +8,7 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { build } from 'vite'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
+import { performanceHtml, performanceScript } from '../../scripts/performance-fixture.mjs'
 import { getEntryFile } from '../../scripts/projects.js'
 import { getGlobalName, getViteBuildConfig } from '../../scripts/utils.js'
 
@@ -84,6 +85,7 @@ function send(req, res, bytes, filename) {
 }
 
 add('/assets/sample/video.mp4', fs.readFileSync(path.join(workspace, 'docs/assets/sample/video.mp4')), { kind: 'docs-media', file: 'docs/assets/sample/video.mp4' })
+add('/test/performance.js', Buffer.from(performanceScript()), { kind: 'adapted-baseline-fixture', file: 'refactor/fixtures/performance.js' })
 
 const server = http.createServer((req, res) => {
   try {
@@ -125,6 +127,10 @@ const server = http.createServer((req, res) => {
         .replace('__CORE__', core)
         .replace('__CHAPTER__', chapter)
       send(req, res, Buffer.from(html), 'player.html')
+      return
+    }
+    if (url.pathname === '/test/performance.html') {
+      send(req, res, Buffer.from(performanceHtml(url.searchParams.get('variant'))), 'performance.html')
       return
     }
     assert(!/^\/(?:test|candidate|published|compiled|uncompiled)\//.test(url.pathname), 'Unmapped test artifact')

@@ -12,14 +12,17 @@ export const timingThresholds = {
   destroyMs: { relative: 0.25, absoluteMs: 2 },
 }
 export function validatePerformance(report) {
-  assert.equal(report.kind, 'performance')
   validatePublishedCapture(report, 'performance')
+  assert.equal(report.capture.media['video.mp4'], hash(fs.readFileSync(path.resolve(refactorDir, '../docs/assets/sample/video.mp4'))))
+  validatePerformanceMeasurements(report)
+}
+export function validatePerformanceMeasurements(report) {
+  assert.equal(report.kind, 'performance')
   assert.deepEqual(report.errors, [])
   assert.deepEqual(report.unhandled, [])
   assert.equal(report.environment.visibility, 'visible')
   assert.deepEqual(report.visibilityChanges, [], 'Background timing is not comparable')
   assert.equal(report.remainingInstances, 0)
-  assert.equal(report.capture.media['video.mp4'], hash(fs.readFileSync(path.resolve(refactorDir, '../docs/assets/sample/video.mp4'))))
   assert.deepEqual(report.samples.map(({ configuration, round, warmup }) => ({ configuration, round, warmup })), Array.from({ length: 6 }, (_, round) => ['core', 'chapter'].map(configuration => ({ configuration, round, warmup: round === 0 }))).flat())
   for (const sample of report.samples) {
     for (const key of [...Object.keys(timingThresholds), 'playbackObservedMs']) assert(Number.isFinite(sample[key]) && sample[key] >= 0, `Invalid ${key}`)

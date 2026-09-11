@@ -594,11 +594,15 @@
         "ENG-05",
         "BASE-06"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "覆盖率基线、资源清理断言、性能报告与阈值",
       "acceptance": "关键生命周期分支有门槛，报告不靠无意义断言堆数量；将 BASE-06 的同环境多组配对、计时/压缩审查阈值与资源异常分开接入候选，不把历史现象冻结成正常要求",
-      "evidence": []
+      "evidence": [
+        "coverage-performance.md",
+        "baselines/quality-validation.json",
+        "changes/2026-09-11-ENG-08-quality-reports.md"
+      ]
     },
     {
       "id": "ENG-09",

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "packages": ["artplayer", "artplayer-plugin-chapter"],
+  "exclude": {
+    "packages/artplayer/src/libs/screenfull.js": "Vendored dependency with separate provenance and browser compatibility tests."
+  },
+  "minimum": {
+    "packages/artplayer/src/lifecycle/scope.ts": { "lines": 95, "branches": 90, "functions": 95 },
+    "packages/artplayer/src/lifecycle/resources.ts": { "lines": 95, "branches": 90, "functions": 95 },
+    "packages/artplayer/src/lifecycle/instance.ts": { "lines": 95, "branches": 90, "functions": 95 },
+    "packages/artplayer/src/source/operation.ts": { "lines": 90, "branches": 85, "functions": 90 }
+  }
+}

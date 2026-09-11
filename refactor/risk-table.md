@@ -4,6 +4,8 @@
 
 | ID | 状态 / 证据等级 | 条目 | 后续任务 |
 | --- | --- | --- | --- |
+| ENG-PERF-01 | open / 源码/产物事实 | Candidate core bundles exceed the BASE-06 size review threshold in all three formats | CORE-22, REVIEW-01 |
+| ENG-PERF-02 | open / 待取证 | Intermittent constructor timing signals require follow-up paired measurement | CORE-22, REVIEW-01 |
 | BASE-LIFE-06 | resolved / 已复现 | Published switch leaves an unhandled rejection and an unsettled promise when resume fails | CORE-09 |
 | BASE-LIFE-01 | resolved / 已复现 | Superseded switch resolves along with the latest source | CORE-09 |
 | BASE-LIFE-02 | resolved / 已复现 | Switch remains unsettled during the bounded observation after destroy | CORE-09 |

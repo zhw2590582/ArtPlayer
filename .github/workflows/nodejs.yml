@@ -20,10 +20,49 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' || github.event_name == 'push' }}
 
 jobs:
+  coverage:
+    name: TS coverage (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - name: Install the pinned toolchain and dependencies
+        run: |
+          npm install --global --force yarn@1.22.22
+          yarn install --frozen-lockfile --non-interactive
+          yarn check:toolchain --strict
+      - name: Verify source maps and critical lifecycle coverage
+        run: yarn test:coverage
+      - name: Upload coverage and source-map evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: coverage-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            refactor/.cache/coverage/latest.json
+            refactor/.cache/coverage/run-*/
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: warn
   browser-smoke:
     name: Browser playback smoke
     runs-on: macos-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       CI: true
     steps:
@@ -46,6 +85,8 @@ jobs:
           node --input-type=module -e 'import fs from "node:fs"; const { output } = JSON.parse(fs.readFileSync("refactor/.cache/packages/latest.json")); fs.appendFileSync(process.env.GITHUB_ENV, `ARTPLAYER_BROWSER_ARTIFACTS=${output}/browser-artifacts.json\n`);'
       - name: Run all three engines
         run: yarn test:browser
+      - name: Compare installed performance and verify resource cleanup
+        run: yarn test:performance
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -53,6 +94,7 @@ jobs:
           name: browser-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             refactor/.cache/browser/
+            refactor/.cache/performance/
             refactor/.cache/packages/latest.json
             refactor/.cache/packages/run-*/*.json
             refactor/.cache/packages/run-*/*.log

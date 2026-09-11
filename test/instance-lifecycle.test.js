@@ -4,9 +4,76 @@ import { test } from 'node:test'
 import { loadModules } from './helpers/load.js'
 
 const file = 'packages/artplayer/src/lifecycle/instance'
-const { beginLifecycle, destroyInstance, duringTemplateMount, finishLifecycle, getScope, urlMix } = await loadModules({
-  ...Object.fromEntries(['beginLifecycle', 'destroyInstance', 'duringTemplateMount', 'finishLifecycle', 'getScope'].map(name => [name, { file, name }])),
+const { beginLifecycle, destroyInstance, duringTemplateMount, finishLifecycle, getScope, getFinalizationScope, ownContainer, isClosing, urlMix } = await loadModules({
+  ...Object.fromEntries(['beginLifecycle', 'destroyInstance', 'duringTemplateMount', 'finishLifecycle', 'getScope', 'getFinalizationScope', 'ownContainer', 'isClosing'].map(name => [name, { file, name }])),
   urlMix: 'packages/artplayer/src/player/urlMix',
+})
+
+test('container reservations prevent concurrent mounts and release after failed rollback', () => {
+  const container = {}
+  const calls = []
+  const first = { isDestroy: false, reset() {}, emit() {
+    calls.push('destroy')
+  } }
+  const second = { isDestroy: false, reset() {}, emit() {} }
+  assert.throws(() => getScope(first), /has not been initialized/)
+  beginLifecycle(first)
+  beginLifecycle(second)
+  assert.equal(isClosing(first), false)
+  ownContainer(first, container, () => {
+    assert(isClosing(first))
+    assert.throws(() => ownContainer(second, container, () => {}), /multiple instances/)
+    calls.push('rollback')
+  })
+  assert.throws(() => ownContainer(second, container, () => {}), /multiple instances/)
+  destroyInstance(first, [], false, false, true)
+  assert.deepEqual(calls, ['destroy', 'rollback'])
+  ownContainer(second, container, () => {
+    throw new Error('Successful mounting must discard rollback')
+  })
+  assert(finishLifecycle(second))
+  destroyInstance(second, [], true, false)
+  assert.equal(finishLifecycle(second), false)
+})
+
+test('direct scope disposal finalizes retained resources once without a destroy phase', () => {
+  const owner = {}
+  const calls = []
+  beginLifecycle(owner)
+  getFinalizationScope(owner).add(() => {
+    calls.push('finalized')
+  })
+  getScope(owner).dispose()
+  assert(isClosing(owner))
+  assert(getFinalizationScope(owner).closed)
+  getScope(owner).dispose()
+  assert.deepEqual(calls, ['finalized'])
+})
+
+test('cleanup failures preserve the first value and still finalize, roll back and release reservations', (context) => {
+  const failures = [new Error('scope'), new Error('finalizer'), new Error('rollback')]
+  const warnings = []
+  context.mock.method(console, 'warn', (...args) => warnings.push(args))
+  const container = {}
+  const owner = { isDestroy: false, reset() {}, emit() {} }
+  beginLifecycle(owner)
+  getScope(owner).add(() => {
+    throw failures[0]
+  })
+  getFinalizationScope(owner).add(() => {
+    throw failures[1]
+  })
+  ownContainer(owner, container, () => {
+    throw failures[2]
+  })
+  assert.throws(() => destroyInstance(owner, [owner], true, false, true), error => error === failures[0])
+  assert.deepEqual(warnings, failures.slice(1).map(error => ['Additional ArtPlayer cleanup failure:', error]))
+  assert(owner.isDestroy && getScope(owner).closed && getFinalizationScope(owner).closed)
+  const replacement = { isDestroy: false, reset() {}, emit() {} }
+  beginLifecycle(replacement)
+  ownContainer(replacement, container, () => {})
+  finishLifecycle(replacement)
+  destroyInstance(replacement, [], true, false)
 })
 
 test('mounting template cleanup precedes destroy without exposing an early public property', () => {

@@ -1031,13 +1031,13 @@ const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   userAgent,
   vttToBlob
 }, Symbol.toStringTag, { value: "Module" }));
+function noop() {
+}
 function listen(scope, target, name, callback, options = {}) {
   const { capture = false, once = false, signal } = options;
   if (scope.closed || signal?.aborted)
-    return () => {
-    };
-  let release = () => {
-  };
+    return noop;
+  let release = noop;
   function listener(event) {
     if (once)
       release();
@@ -1061,11 +1061,9 @@ function listen(scope, target, name, callback, options = {}) {
 }
 function timeout(scope, callback, delay) {
   if (scope.closed)
-    return () => {
-    };
+    return noop;
   let pending2 = true;
-  let release = () => {
-  };
+  let release = noop;
   const timer = setTimeout(() => {
     if (!pending2)
       return;
@@ -1081,11 +1079,9 @@ function timeout(scope, callback, delay) {
 }
 function animationFrame(scope, callback) {
   if (scope.closed)
-    return () => {
-    };
+    return noop;
   let pending2 = true;
-  let release = () => {
-  };
+  let release = noop;
   const frame = requestAnimationFrame((time2) => {
     if (!pending2)
       return;
@@ -1113,8 +1109,7 @@ function wait(scope, delay = 0) {
     return Promise.resolve(false);
   return new Promise((resolve) => {
     let completed = false;
-    let release = () => {
-    };
+    let release = noop;
     const timer = setTimeout(() => {
       completed = true;
       release();

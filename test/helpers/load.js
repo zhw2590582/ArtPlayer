@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { Buffer } from 'node:buffer'
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import vm from 'node:vm'
 import { build as esbuild } from 'esbuild'
@@ -11,7 +12,25 @@ import { getEntryFile } from '../../scripts/projects.js'
 import { getGlobalName, getViteBuildConfig } from '../../scripts/utils.js'
 
 export const workspace = fileURLToPath(new URL('../../', import.meta.url))
-const importCode = code => import(`data:text/javascript;base64,${Buffer.from(code).toString('base64')}`)
+function coverageDirectory() {
+  const output = process.env.ARTPLAYER_COVERAGE_DIR
+  if (!output)
+    return undefined
+  const root = path.resolve(workspace, 'refactor/.cache/coverage')
+  const directory = path.resolve(output, String(process.pid))
+  assert(directory.startsWith(root + path.sep), 'Coverage modules must stay inside the workspace coverage cache')
+  fs.mkdirSync(directory, { recursive: true })
+  return directory
+}
+
+function importCode(code) {
+  const directory = coverageDirectory()
+  if (!directory)
+    return import(`data:text/javascript;base64,${Buffer.from(code).toString('base64')}`)
+  const filename = path.join(directory, `${hash(code)}.mjs`)
+  fs.writeFileSync(filename, code)
+  return import(pathToFileURL(filename))
+}
 
 export function resolveSource(name, root = workspace) {
   const files = ['.js', '.ts'].map(extension => path.resolve(root, name + extension)).filter(file => fs.existsSync(file))
@@ -25,7 +44,9 @@ export async function loadModules(exports, root = workspace) {
     assert(/^[\w$]+$/.test(alias) && /^[\w$]+$/.test(name), 'Invalid test export')
     return `export { ${name} as ${alias} } from ${JSON.stringify(resolveSource(file, root))};`
   }).join('\n')
-  const { outputFiles } = await esbuild({ stdin: { contents, resolveDir: root }, bundle: true, write: false, platform: 'node', format: 'esm' })
+  const directory = coverageDirectory()
+  const coverage = directory ? { outfile: path.join(directory, 'modules.mjs'), sourcemap: 'inline', treeShaking: false } : {}
+  const { outputFiles } = await esbuild({ stdin: { contents, resolveDir: root }, bundle: true, write: false, platform: 'node', format: 'esm', ...coverage })
   return importCode(outputFiles[0].contents)
 }
 
@@ -33,6 +54,12 @@ export async function compilePackage(name, format = 'es', root = workspace) {
   const project = path.join(root, 'packages', name)
   const config = getViteBuildConfig({ entry: getEntryFile(project), name: getGlobalName(name), format, fileName: 'index.js', minify: false })
   config.build.write = false
+  const directory = coverageDirectory()
+  if (directory) {
+    config.build.outDir = directory
+    config.build.sourcemap = 'inline'
+    config.build.rollupOptions.treeshake = false
+  }
   const result = await viteBuild({ root: project, ...config })
   const chunks = (Array.isArray(result) ? result : [result]).flatMap(item => item.output).filter(item => item.type === 'chunk')
   assert.equal(chunks.length, 1, 'Source fixture loader requires one self-contained JS chunk')

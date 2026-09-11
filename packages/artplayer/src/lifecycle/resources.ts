@@ -1,10 +1,12 @@
 import type ResourceScope from './scope'
 
+function noop() {}
+
 export function listen(scope: ResourceScope, target: EventTarget, name: string, callback: EventListenerOrEventListenerObject, options: AddEventListenerOptions = {}): () => void {
   const { capture = false, once = false, signal } = options
   if (scope.closed || signal?.aborted)
-    return () => {}
-  let release = () => {}
+    return noop
+  let release = noop
   function listener(this: EventTarget, event: Event) {
     if (once)
       release()
@@ -30,9 +32,9 @@ export function listen(scope: ResourceScope, target: EventTarget, name: string, 
 
 export function timeout(scope: ResourceScope, callback: () => void, delay: number): () => void {
   if (scope.closed)
-    return () => {}
+    return noop
   let pending = true
-  let release = () => {}
+  let release = noop
   const timer = setTimeout(() => {
     if (!pending)
       return
@@ -49,9 +51,9 @@ export function timeout(scope: ResourceScope, callback: () => void, delay: numbe
 
 export function animationFrame(scope: ResourceScope, callback: FrameRequestCallback): () => void {
   if (scope.closed)
-    return () => {}
+    return noop
   let pending = true
-  let release = () => {}
+  let release = noop
   const frame = requestAnimationFrame((time) => {
     if (!pending)
       return
@@ -89,7 +91,7 @@ export function wait(scope: ResourceScope, delay = 0): Promise<boolean> {
     return Promise.resolve(false)
   return new Promise((resolve) => {
     let completed = false
-    let release = () => {}
+    let release = noop
     const timer = setTimeout(() => {
       completed = true
       release()

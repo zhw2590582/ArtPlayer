@@ -1,5 +1,7 @@
 # 测试与验收
 
+核心/chapter 的 Node TS 覆盖率使用 `yarn test:coverage`。源映射防伪验证、关键生命周期门槛、报告位置及资源/性能实施状态见 [覆盖率与性能维护说明](coverage-performance.md)。
+
 ## 测试层次
 
 浏览器验收采用连接的 @Chrome 交互检查与仓库自动回归相结合；具体操作断言、证据范围和真机边界见 [多轮复盘与 npm 准入](release-reviews.md)。浏览器已连接不代表播放器用例已通过。

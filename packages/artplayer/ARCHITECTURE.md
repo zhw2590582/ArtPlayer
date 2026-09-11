@@ -4,6 +4,23 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is `src/index.ts`. All owned core production modules use
 TypeScript; libs/screenfull.js remains an audited third-party source file.
 
+## Coverage maintenance
+
+Run `yarn test:coverage` for the shared Node unit suite with TS source maps.
+`scripts/coverage-policy.json` enrolls core and chapter, with separate gates for
+scope disposal, resource adapters, instance teardown and source operations.
+The report includes never-imported runtime files; type-only and vendored
+exclusions are enumerated with source hashes. Browser-only paths may have low
+Node coverage and still require their real browser scenarios.
+`test/coverage.test.js` verifies both loaders against an unexecuted TS branch,
+an unimported file and missing/stale maps. Do not bypass it or replace missing
+function/branch counters with 100%. See `refactor/coverage-performance.md`.
+
+`lifecycle/resources.ts` shares one inert cleanup for closed registrations and
+pre-registration placeholders. Active releases still retain independent scope
+ownership. Closed listener/timer/frame handles are safe to invoke repeatedly;
+unit tests verify they cannot schedule work or call the original callbacks.
+
 ## Public declaration sources
 
 `public/` owns the TypeScript sources for the historical package declarations.

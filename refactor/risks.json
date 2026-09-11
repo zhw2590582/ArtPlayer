@@ -6,6 +6,42 @@
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
+      "id": "ENG-PERF-01",
+      "title": "Candidate core bundles exceed the BASE-06 size review threshold in all three formats",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "CORE-22",
+        "REVIEW-01"
+      ],
+      "evidence": [
+        "refactor/coverage-performance.md",
+        "refactor/baselines/quality-validation.json",
+        "refactor/changes/2026-09-11-ENG-08-quality-reports.md"
+      ],
+      "compatibleResolution": "Attribute the growth to actual modules and build output, remove avoidable overhead while preserving APIs, and document any justified remaining cost against matching published entries.",
+      "closureCriteria": "Fresh isolated artifacts have reproducible raw/gzip9/Brotli6 results and an explicit size review; do not raise or overwrite the historical threshold to pass.",
+      "workspaceState": "First ENG-08 modern core measurement: 134037 to 207875 raw bytes, 35486 to 58374 gzip9, 32533 to 53326 Brotli6. Chapter remains below the combined relative/absolute review threshold. This is a review requirement, not a release approval."
+    },
+    {
+      "id": "ENG-PERF-02",
+      "title": "Intermittent constructor timing signals require follow-up paired measurement",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "CORE-22",
+        "REVIEW-01"
+      ],
+      "evidence": [
+        "refactor/coverage-performance.md",
+        "refactor/baselines/quality-validation.json",
+        "refactor/changes/2026-09-11-ENG-08-quality-reports.md"
+      ],
+      "compatibleResolution": "Repeat paired measurements on the same environment, distinguish initialization work from host jitter, and optimize only after identifying a reproducible cost.",
+      "closureCriteria": "Explain repeat-group timing signals with retained samples and source fingerprints; do not infer a regression or improvement from a single group or expand timing allowances.",
+      "workspaceState": "First ENG-08 run: Firefox group 2 had core/chapter constructor delta 3/5 ms, WebKit group 3 chapter delta 3 ms, versus 2 ms absolute allowance. Other groups did not trigger. Candidate resource checks passed independently. Final run: Chromium/Firefox had no timing signals; WebKit group 1 core/chapter each increased 3 ms, with no signals in the other two groups. The intermittent review remains open."
+    },
+    {
       "id": "BASE-LIFE-06",
       "title": "Published switch leaves an unhandled rejection and an unsettled promise when resume fails",
       "confirmation": "reproduced",
