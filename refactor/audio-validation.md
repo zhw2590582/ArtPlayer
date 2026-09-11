@@ -70,3 +70,15 @@ Windows WebKit 也给出错误 4；AAC 矩阵通过不能覆盖该 WAV 或真实
 
 浏览器测试均共用端口 8084 和输出目录；不要同时执行多个 suite。开始下一次前复制报告
 和结果目录（包含 trace），并记录对应测试输入。Node CI 可独立并行执行。
+
+## PKG-AUDIO-04 类型与结束事件用例补强
+
+源文件已迁移为严格 TS。默认/legacy 保留旧 update 的必填 URL 推断；/runtime 与编辑器
+RuntimeFactory 提供准确的部分更新契约，实际运行函数不变。五组编译消费和 Monaco
+三引擎验证见 [类型交付](changes/2026-09-12-PKG-AUDIO-04-types.md) 及
+[冻结证据](baselines/audio-types-validation.json)，不要用早期 JS 状态覆盖当前状态。
+
+legacy 首次 WebKit 的“候选核心 + 已发布 audio”结束观察失败，原始证据保留。
+两种结束用例现统一先确认视频/音频 seek 完成且就绪，再确认音频实际恢复推进后才
+观测 video.ended，并记录宿主事件；避免原测试因音频早已暂停而误判。相关 WebKit
+12 次及最终 main/legacy 各 42 项通过。未证明首次暂停的确切来源，未改生产代码。

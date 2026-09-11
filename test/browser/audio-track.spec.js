@@ -46,7 +46,7 @@ test.afterEach(async ({ page }, testInfo) => {
     const audio = window.audioPlugin?.audio
     const video = window.art?.video
     const media = element => element && ({ src: element.currentSrc, attribute: element.getAttribute('src'), time: element.currentTime, paused: element.paused, readyState: element.readyState, networkState: element.networkState, error: element.error?.code, rate: element.playbackRate, seekable: Array.from({ length: element.seekable.length }, (_, index) => [element.seekable.start(index), element.seekable.end(index)]) })
-    return { audio: media(audio), video: media(video), events: window.audioEvents, warnings: window.audioWarnings }
+    return { audio: media(audio), video: media(video), events: window.audioEvents, hostEvents: window.audioHostEvents, warnings: window.audioWarnings }
   }).catch(error => ({ error: error.message }))
   await testInfo.attach('audio-state', { contentType: 'application/json', body: JSON.stringify(state) })
 })
@@ -57,6 +57,7 @@ async function openAudio(page, core, plugin, testInfo, url = '/test/audio-tone.m
   await page.addScriptTag({ content: plugin === 'published' ? publishedCode : sourceCode })
   await page.evaluate((url) => {
     window.audioEvents = []
+    window.audioHostEvents = []
     window.audioWarnings = []
     const warn = console.warn.bind(console)
     console.warn = (...args) => {
@@ -70,6 +71,8 @@ async function openAudio(page, core, plugin, testInfo, url = '/test/audio-tone.m
       plugins: [window.artplayerPluginAudioTrack({ url, sync: 0.1 })],
     })
     window.audioPlugin = window.art.plugins.artplayerPluginAudioTrack
+    for (const event of ['play', 'pause', 'seek', 'video:waiting', 'video:playing', 'video:seeking', 'video:seeked', 'video:pause', 'video:ended'])
+      window.art.on(event, () => window.audioHostEvents.push({ event, videoTime: window.art.currentTime, audioTime: window.audioPlugin.audio.currentTime, audioPaused: window.audioPlugin.audio.paused }))
     for (const event of ['loadedmetadata', 'playing', 'pause', 'seeked', 'error', 'emptied'])
       window.audioPlugin.audio.addEventListener(event, () => window.audioEvents.push({ event, time: window.audioPlugin.audio.currentTime, src: window.audioPlugin.audio.currentSrc }))
     document.querySelector('#play').onclick = () => window.art.play()
@@ -77,6 +80,17 @@ async function openAudio(page, core, plugin, testInfo, url = '/test/audio-tone.m
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
   if (url)
     await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.readyState)).toBeGreaterThanOrEqual(2)
+}
+
+async function playToEnd(page) {
+  await page.evaluate(() => {
+    window.art.pause()
+    window.art.seek = 7
+  })
+  await expect.poll(() => page.evaluate(() => !window.art.video.seeking && !window.audioPlugin.audio.seeking && window.art.video.readyState >= 3 && window.audioPlugin.audio.readyState >= 3)).toBe(true)
+  await page.locator('#play').click()
+  await expect.poll(() => page.evaluate(() => !window.audioPlugin.audio.paused && window.audioPlugin.audio.currentTime > 7.05)).toBe(true)
+  await expect.poll(() => page.evaluate(() => window.art.video.ended)).toBe(true)
 }
 
 test('native WAV diagnostic isolates sample decoding from ArtPlayer and plugin', async ({ page }, testInfo) => {
@@ -126,11 +140,7 @@ for (const core of ['published', 'candidate']) {
       window.art.video.currentTime = 4
     })
     await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.currentTime)).toBeCloseTo(4, 1)
-    await page.evaluate(() => {
-      window.art.seek = 7.8
-      window.art.play()
-    })
-    await expect.poll(() => page.evaluate(() => window.art.video.ended)).toBe(true)
+    await playToEnd(page)
     await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.paused)).toBe(true)
     await page.evaluate(() => window.art.destroy())
     await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.networkState)).toBe(0)
@@ -148,11 +158,7 @@ for (const core of ['published', 'candidate']) {
     await page.evaluate(() => window.art.video.pause())
     expect(await page.evaluate(() => window.art.video.paused)).toBe(true)
     expect(await page.evaluate(() => window.audioPlugin.audio.paused)).toBe(false)
-    await page.evaluate(() => {
-      window.art.seek = 7.8
-      window.art.play()
-    })
-    await expect.poll(() => page.evaluate(() => window.art.video.ended)).toBe(true)
+    await playToEnd(page)
     expect(await page.evaluate(() => window.audioPlugin.audio.paused)).toBe(false)
     await testInfo.attach('published-native-pause-end', { contentType: 'application/json', body: JSON.stringify(await page.evaluate(() => ({ videoEnded: window.art.video.ended, videoPaused: window.art.video.paused, audioPaused: window.audioPlugin.audio.paused, audioTime: window.audioPlugin.audio.currentTime }))) })
     await page.evaluate(() => window.art.destroy())

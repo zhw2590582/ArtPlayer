@@ -19,19 +19,49 @@
   ],
   "exports": {
     ".": {
-      "types": "./types/artplayer-plugin-audio-track.d.ts",
-      "import": "./dist/artplayer-plugin-audio-track.mjs",
-      "require": "./dist/artplayer-plugin-audio-track.js"
+      "import": {
+        "types": "./types/artplayer-plugin-audio-track.d.mts",
+        "default": "./dist/artplayer-plugin-audio-track.mjs"
+      },
+      "require": {
+        "types": "./types/artplayer-plugin-audio-track.d.cts",
+        "default": "./dist/artplayer-plugin-audio-track.js"
+      }
     },
     "./legacy": {
-      "types": "./types/artplayer-plugin-audio-track.d.ts",
-      "import": "./dist/artplayer-plugin-audio-track.legacy.js",
-      "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+      "import": {
+        "types": "./types/artplayer-plugin-audio-track.d.cts",
+        "default": "./dist/artplayer-plugin-audio-track.legacy.js"
+      },
+      "require": {
+        "types": "./types/artplayer-plugin-audio-track.d.cts",
+        "default": "./dist/artplayer-plugin-audio-track.legacy.js"
+      }
+    },
+    "./runtime": {
+      "import": {
+        "types": "./types/runtime/index.d.mts",
+        "default": "./dist/artplayer-plugin-audio-track.mjs"
+      },
+      "require": {
+        "types": "./types/runtime/index.d.cts",
+        "default": "./dist/artplayer-plugin-audio-track.js"
+      }
     }
   },
   "main": "dist/artplayer-plugin-audio-track.js",
   "module": "./dist/artplayer-plugin-audio-track.mjs",
   "types": "types/artplayer-plugin-audio-track.d.ts",
   "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
-  "browserslist": "last 1 Chrome version"
+  "browserslist": "last 1 Chrome version",
+  "typesVersions": {
+    "*": {
+      "legacy": [
+        "types/artplayer-plugin-audio-track.d.ts"
+      ],
+      "runtime": [
+        "types/runtime/index.d.ts"
+      ]
+    }
+  }
 }

@@ -1,5 +1,22 @@
 # 进度与证据
 
+## 最新完成：PKG-AUDIO-04 严格 TS 与兼容类型入口
+
+Audio 两个职责模块已迁移 TS，累计 256 个生产 TS。默认/legacy 保留原 update 类型
+推断；新增 /runtime 精确入口支持部分配置，复用同一 JS/mjs。直接拓宽类型会破坏旧
+上下文实现的证据及决定已写入 ADR-023，编辑器生成和 README 同步。
+
+完整 CI 586 项通过，五组 TS 消费各 12 个负例、专用类型 3 项、Monaco 三引擎 9 项
+通过；三格式 Node 89 项、最终 main/legacy 各 42 项通过，三种 JS 与 Audio-03 字节
+相同。结束用例首轮 WebKit 失败保留并补强 seek/恢复前提，未靠重试关闭问题。
+真实 Yarn pack 修正 tsconfig 泄漏后保留全部 6 份声明及历史文件；隔离安装仍待 Audio-06。
+
+当前 216 项、69 done、1 doing、146 todo。Audio-03 提交 9c07ea83 已核实，Audio-04
+独立提交核实后进入 05 的边界/缓冲/切源/多实例。AUDIO-TYPE-01 按兼容范围接受，
+AUDIO-SYNC-01/DEMO-01、HLS 两项 Firefox 风险和全局发布门槛仍开放。
+详见 [交付记录](changes/2026-09-12-PKG-AUDIO-04-types.md) 和
+[冻结证据](baselines/audio-types-validation.json)。无 push/tag/publish/merge。
+
 ## 最新完成：PKG-AUDIO-03 源码拆分与生命周期修复
 
 Audio Track 已拆为入口事件管理与独立媒体状态两个 JS 模块；修复原生暂停/结束后

@@ -73,7 +73,7 @@ export function runTypechecks() {
     console.log(`Strict project passed: ${relative(config)} (${result.files.length} root files)`)
   }
   for (const [compiler, mode] of [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'bundler-esm'], [ts, 'nodenext-esm'], [compat, 'node10-commonjs']]) {
-    for (const fixture of ['test/types/public.ts', 'test/types/declaration-inputs.ts', 'test/types/declaration-legacy.ts', 'test/types/plugins-public.ts', 'test/types/playback-public.ts', 'test/types/chapter-options.ts', 'test/types/chapter-exports.ts', 'test/types/hls-control.ts', 'test/types/language-value.ts', 'refactor/fixtures/consumers/language.ts', 'refactor/fixtures/consumers/legacy-plugin.ts']) {
+    for (const fixture of ['test/types/public.ts', 'test/types/declaration-inputs.ts', 'test/types/declaration-legacy.ts', 'test/types/plugins-public.ts', 'test/types/playback-public.ts', 'test/types/chapter-options.ts', 'test/types/chapter-exports.ts', 'test/types/hls-control.ts', 'test/types/audio-track.ts', 'test/types/language-value.ts', 'refactor/fixtures/consumers/language.ts', 'refactor/fixtures/consumers/legacy-plugin.ts']) {
       assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, fixture), 'utf8')), [], `Consumer failed: TS ${compiler.version} ${mode} ${fixture}`)
     }
     if (mode === 'nodenext-cjs')

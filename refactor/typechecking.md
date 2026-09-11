@@ -80,4 +80,10 @@ allowJs=true、checkJs=false 允许渐进迁移时引用旧 JS；只将迁移的
 
 ## 后续接入
 
+Audio Track 的自有源码由 packages/artplayer-plugin-audio-track/tsconfig.json 严格检查。
+默认/legacy 类型保留历史 update 的完整 Option；新增 /runtime 复用同一运行文件，
+提供 UpdateOption/RuntimeResult。test/types/audio-track.ts 同时验证旧 Parameters、
+有/无注解结构实现及精确部分调用；audio-track-source.ts 检查实现满足两种声明。
+详见包内 ARCHITECTURE.md；不能将部分参数直接覆盖默认签名而破坏旧推断。
+
 新迁移包复制分包配置并按实际运行环境调整，加入特有正反例；编译器入口自动发现包配置。TS 构建入口与声明生成由 ENG-06/07 和各包迁移处理；不能只增加一个空 config 就宣布包迁移完成。所有生产变更仍按每任务独立提交和包内架构文档规则交付。

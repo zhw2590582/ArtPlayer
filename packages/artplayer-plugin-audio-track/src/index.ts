@@ -1,10 +1,14 @@
+import type Artplayer from 'artplayer'
+import type { Option, RuntimeResult, UpdateOption } from '../types/artplayer-plugin-audio-track'
 import { createAudioTrack } from './track'
 
-export default function artplayerPluginAudioTrack(option) {
-  return (art) => {
+type AudioEvent = 'play' | 'pause' | 'seek' | 'destroy' | 'video:pause' | 'video:ended' | 'video:waiting' | 'video:emptied' | 'video:seeking' | 'video:seeked' | 'video:timeupdate' | 'video:ratechange' | 'video:volumechange' | 'video:playing'
+
+export default function artplayerPluginAudioTrack(option: Option) {
+  return (art: Artplayer): RuntimeResult => {
     const track = createAudioTrack(option)
     const { audio } = track
-    const subscriptions = []
+    const subscriptions: [AudioEvent, () => void][] = []
     let active = true
 
     function syncAudio() {
@@ -12,7 +16,7 @@ export default function artplayerPluginAudioTrack(option) {
         track.sync(art.currentTime)
     }
 
-    function listen(event, callback) {
+    function listen(event: AudioEvent, callback: () => void) {
       const listener = () => {
         if (active)
           callback()
@@ -25,7 +29,7 @@ export default function artplayerPluginAudioTrack(option) {
       if (!active)
         return
       active = false
-      const failures = []
+      const failures: unknown[] = []
       for (const [event, listener] of subscriptions.splice(0)) {
         try {
           art.off(event, listener)
@@ -45,7 +49,7 @@ export default function artplayerPluginAudioTrack(option) {
         syncAudio()
         track.play()
       })
-      for (const event of ['pause', 'video:pause', 'video:ended', 'video:waiting', 'video:emptied', 'video:seeking'])
+      for (const event of ['pause', 'video:pause', 'video:ended', 'video:waiting', 'video:emptied', 'video:seeking'] as const)
         listen(event, track.pause)
       listen('seek', syncAudio)
       listen('video:seeked', () => {
@@ -86,7 +90,7 @@ export default function artplayerPluginAudioTrack(option) {
     return {
       name: 'artplayerPluginAudioTrack',
       audio,
-      update(newOption) {
+      update(newOption: UpdateOption) {
         if (active)
           track.update(newOption, art.playing)
       },

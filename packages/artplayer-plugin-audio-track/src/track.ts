@@ -1,4 +1,6 @@
-export function createAudioTrack(option) {
+import type { Option, UpdateOption } from '../types/artplayer-plugin-audio-track'
+
+export function createAudioTrack(option: Option) {
   let { url, offset = 0, sync = 0.3 } = option
   const audio = new Audio()
   let closed = false
@@ -6,7 +8,7 @@ export function createAudioTrack(option) {
   function play() {
     if (closed || !url)
       return
-    audio.play().catch((error) => {
+    audio.play().catch((error: unknown) => {
       if (!closed)
         console.warn(error)
     })
@@ -21,7 +23,7 @@ export function createAudioTrack(option) {
     if (closed)
       return
     closed = true
-    const failures = []
+    const failures: unknown[] = []
     for (const release of [() => audio.pause(), () => audio.removeAttribute('src'), () => audio.load()]) {
       try {
         release()
@@ -50,14 +52,14 @@ export function createAudioTrack(option) {
     play,
     pause,
     destroy,
-    sync(time) {
+    sync(time: number) {
       if (closed || !url)
         return
       const target = time + offset
       if (Math.abs(audio.currentTime - target) > sync)
         audio.currentTime = target
     },
-    update(newOption, playing) {
+    update(newOption: UpdateOption, playing: boolean) {
       if (closed)
         return
       if (newOption.url && newOption.url !== url) {

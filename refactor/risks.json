@@ -2695,7 +2695,7 @@
       "id": "AUDIO-TYPE-01",
       "title": "Audio Track update 部分配置与公开/编辑器声明不一致",
       "confirmation": "source-observed",
-      "status": "open",
+      "status": "accepted-with-scope",
       "owners": [
         "PKG-AUDIO-04"
       ],
@@ -2703,8 +2703,14 @@
         "refactor/baselines/audio-track-contract.md",
         "refactor/baselines/audio-track-release.json"
       ],
-      "compatibleResolution": "拓宽已有 JS 合法部分 update，保留 url/offset/sync 字段精度和 Parameters/ReturnType 提取，生成语义正确编辑器声明。",
-      "closureCriteria": "当前与旧编译器的正反例、CJS/ESM/legacy 入口及实际编辑器通过。"
+      "compatibleResolution": "ADR-023：默认/legacy 保留旧必填 url 推断与上下文实现；新增 /runtime 复用同一 JS，精确支持部分 update，编辑器通过 RuntimeFactory 显式选择。",
+      "closureCriteria": "当前与旧编译器的正反例、CJS/ESM/legacy 入口及实际编辑器通过。",
+      "resolutionRationale": "直接拓宽或重载会使旧上下文实现的 url 成为 string | undefined，已用实际编译复现。五组 TS 正反例、README、CJS/ESM 同一函数、真实 Monaco 三引擎已通过。接受默认旧声明有意保持窄签名的范围，不声称所有入口默认支持部分 update；隔离安装和完整分发仍由 Audio-06 验证。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-AUDIO-04-types.md",
+        "refactor/baselines/audio-types-validation.json",
+        "refactor/decisions.md"
+      ]
     },
     {
       "id": "AUDIO-DEMO-01",
