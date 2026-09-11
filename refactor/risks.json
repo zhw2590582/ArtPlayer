@@ -2848,7 +2848,9 @@
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
         "docs/assets/example/dash.control.js",
         "test/dash-contract.test.js",
-        "refactor/dash-validation.md"
+        "refactor/dash-validation.md",
+        "test/dash-lifecycle.test.js",
+        "refactor/baselines/dash-runtime.json"
       ],
       "compatibleResolution": "按方法能力适配两代已存在用法，保留 v5 稳定 ID，不能要求旧消费者改用新 SDK。",
       "closureCriteria": "归档旧用法、v4/v5 受控及实际媒体矩阵通过，清晰度键不混用。"
@@ -2857,7 +2859,7 @@
       "id": "DASH-LIFE-01",
       "title": "DASH 空拓扑残留 UI，监听和旧选择回调缺乏关闭守卫",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DASH-02",
         "PKG-DASH-03"
@@ -2869,10 +2871,18 @@
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
         "docs/assets/example/dash.control.js",
         "test/dash-contract.test.js",
-        "refactor/dash-validation.md"
+        "refactor/dash-validation.md",
+        "test/dash-lifecycle.test.js",
+        "refactor/baselines/dash-runtime.json"
       ],
       "compatibleResolution": "仅释放插件自有 ready/restart/destroy 订阅和 UI，SDK 仍由调用方拥有；替换后旧回调不写旧实例。",
-      "closureCriteria": "空列表、换源/SDK、销毁后引用、安装异常有回归，其他实例与 SDK 不被误释放。"
+      "closureCriteria": "空列表、换源/SDK、销毁后引用、安装异常有回归，其他实例与 SDK 不被误释放。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-DASH-03-runtime.md",
+        "refactor/baselines/dash-runtime.json",
+        "packages/artplayer-plugin-dash-control/ARCHITECTURE.md"
+      ],
+      "resolutionRationale": "空拓扑/禁用/失败/销毁清理自有 UI 与订阅，旧 revision/SDK 引用无副作用；先红后绿、两代方法表及三格式 Node 生命周期、新旧核心 main/legacy 各 84 项真实 DOM 通过。只关闭插件所有权和引用缺陷，不替代实际 SDK/MPD、demo 或设备验证。"
     },
     {
       "id": "DASH-STATE-01",
@@ -2891,7 +2901,9 @@
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
         "docs/assets/example/dash.control.js",
         "test/dash-contract.test.js",
-        "refactor/dash-validation.md"
+        "refactor/dash-validation.md",
+        "test/dash-lifecycle.test.js",
+        "refactor/baselines/dash-runtime.json"
       ],
       "compatibleResolution": "验证零 ID、重复标签和克隆音轨当前项，在保持原展示语义时按实际可选项定位高亮。",
       "closureCriteria": "有受控和真实 SDK 证据说明选中的 representation/track 与 UI 一致。"

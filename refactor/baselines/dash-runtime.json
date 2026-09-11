@@ -1,0 +1,854 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DASH-03",
+  "baseCommit": "762cc634",
+  "scope": "Runtime structure and compatible SDK call surfaces. Real old/new core DOM with formal plugin main/legacy and native MP4. SDK is controlled; actual dash.js, MPD/ABR, physical devices and installed tarball acceptance remain outstanding.",
+  "inputs": [
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/index.js",
+      "sha256LF": "3d82930fa8da9f729235ed34e5b9ae732bde6a986124b0ca1016eabefae4fc70"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/sdk.js",
+      "sha256LF": "90f77e57fd9d8cae3c7876166b048285d18634a93eecfcf50a70f8d6c9da1050"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/mapping.js",
+      "sha256LF": "03c1b99e0869263778f05896b05d2fe4004cf657fd5168cb303926a90de35b34"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/menu.js",
+      "sha256LF": "e852cbdf07bd681594c95ee368834995d34c6d1314d06c1c6089a025b1d7b896"
+    },
+    {
+      "file": "test/helpers/dash-control.js",
+      "sha256LF": "a32852c960a25c27ae18a6910f2b6d9e4f5786c1339db91f414b70a1fec041db"
+    },
+    {
+      "file": "test/dash-contract.test.js",
+      "sha256LF": "4477b48fc53224890a7eb22ed5f1554b57fd6265c864fb4039393978e63ceb31"
+    },
+    {
+      "file": "test/dash-lifecycle.test.js",
+      "sha256LF": "1374d51d7952c44a63580a6b127bc53f626ba161a03982414299d807cfc1525c"
+    },
+    {
+      "file": "test/browser/dash-control.spec.js",
+      "sha256LF": "a770394af0f3291925734e116ab53f8c090349673aa14205bd9a1300c82ad154"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.js",
+      "sha256": "c1c63bd0ec787a6f9eb445b53341dd5eaeaccccd1589455234be311fcf6ce5e6",
+      "bytes": 5469
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.legacy.js",
+      "sha256": "1b6fba04c90ba19197213cf1868599dab13d430e8923d3081e37c43dc4d5d00e",
+      "bytes": 5924
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.mjs",
+      "sha256": "84b50383a8d6e75ad27dad6b550826b0d690aaaec9b2831a65111ec4f4c277b0",
+      "bytes": 9724
+    }
+  ],
+  "reports": [
+    {
+      "file": "refactor/.cache/dash03-main-first/report.json",
+      "sha256": "b17971ffd22f20acd68b64bb4ba7bff62b65c6fcc9ce10836b1f16f2d1bc9bd3",
+      "bytes": 15822733,
+      "stats": {
+        "startTime": "2026-09-11T20:51:00.164Z",
+        "duration": 64825.979,
+        "expected": 84,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "results": {
+        "directory": "refactor/.cache/dash03-main-first/results",
+        "files": 85,
+        "sha256": "a92c517dd7be719052b8766b3d19c00619469c0da792a9b2eead751048893594",
+        "algorithm": "SHA256 of JSON.stringify(sorted relative path and raw SHA256 pairs), UTF-8, slash paths"
+      },
+      "pluginInput": {
+        "published": {
+          "name": "artplayer-plugin-dash-control",
+          "version": "1.1.0",
+          "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-dash-control/1.1.0",
+          "tarball": "https://registry.npmjs.org/artplayer-plugin-dash-control/-/artplayer-plugin-dash-control-1.1.0.tgz",
+          "integrity": "sha512-EssRkzYXWcln3a6nAzi4ESacBhzMih8s0bzdjXuvBBCh2UFmvK99ITD5E+0cuU8i5ZzIQGQSdce1/gANTrX0BQ==",
+          "sha256": "f4047a569d99b6a7de57b3719b7ad40109f2a1d360566a840f50ab32aacefcd9",
+          "archiveBytes": 3385,
+          "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+          "files": {
+            "package/README.md": "98982f1123ff9a11f5d3d9a52da6e8fea9cd0989f7465605c27b0f9a46f2dbcd",
+            "package/dist/artplayer-plugin-dash-control.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.legacy.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.mjs": "e32bf08c33a481781883067dcc639f0495c9dcb8a88b91be13736370f4932fc4",
+            "package/package.json": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+            "package/types/artplayer-plugin-dash-control.d.ts": "e15ef683e0c335d81531587828593325e037efe7ed29c022477cd14fe71aebba"
+          },
+          "manifest": {
+            "name": "artplayer-plugin-dash-control",
+            "version": "1.1.0",
+            "description": "Dash control plugin for ArtPlayer",
+            "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+            "license": "MIT",
+            "homepage": "https://artplayer.org",
+            "repository": {
+              "type": "git",
+              "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+            },
+            "bugs": {
+              "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+            },
+            "keywords": [
+              "html5",
+              "video",
+              "player"
+            ],
+            "exports": {
+              ".": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.mjs",
+                "require": "./dist/artplayer-plugin-dash-control.js"
+              },
+              "./legacy": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.legacy.js",
+                "require": "./dist/artplayer-plugin-dash-control.legacy.js"
+              }
+            },
+            "main": "./dist/artplayer-plugin-dash-control.js",
+            "module": "./dist/artplayer-plugin-dash-control.mjs",
+            "types": "./types/artplayer-plugin-dash-control.d.ts",
+            "legacy": "./dist/artplayer-plugin-dash-control.legacy.js",
+            "browserslist": "last 1 Chrome version"
+          }
+        },
+        "sourceSHA256": "6c37d58c427aa688fe252127dbbc5bb131d0ef6e5141a3b22400f40e5fd177f9",
+        "candidate": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.js",
+        "scope": "Real ArtPlayer DOM and native MP4 with controlled SDK methods. No dash.js instance, MPD, ABR or adaptive media validation."
+      },
+      "engines": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32"
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32"
+        }
+      ],
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+            "bytes": 378040
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+            "bytes": 378040,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+            "bytes": 378040,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/audio-tone.m4a": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/audio-tone.m4a"
+            },
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      }
+    },
+    {
+      "file": "refactor/.cache/dash03-main-final/report.json",
+      "sha256": "c3175930e53b8d4771c5393de015520f0dbcfb56362cd8017c1263ac1eba8758",
+      "bytes": 15813200,
+      "stats": {
+        "startTime": "2026-09-11T20:53:02.032Z",
+        "duration": 64490.32,
+        "expected": 84,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "results": {
+        "directory": "refactor/.cache/dash03-main-final/results",
+        "files": 85,
+        "sha256": "d3efa538c4ba0e698aa95b40b112caabf8324b5f3beec05f6845e7f5675de857",
+        "algorithm": "SHA256 of JSON.stringify(sorted relative path and raw SHA256 pairs), UTF-8, slash paths"
+      },
+      "pluginInput": {
+        "published": {
+          "name": "artplayer-plugin-dash-control",
+          "version": "1.1.0",
+          "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-dash-control/1.1.0",
+          "tarball": "https://registry.npmjs.org/artplayer-plugin-dash-control/-/artplayer-plugin-dash-control-1.1.0.tgz",
+          "integrity": "sha512-EssRkzYXWcln3a6nAzi4ESacBhzMih8s0bzdjXuvBBCh2UFmvK99ITD5E+0cuU8i5ZzIQGQSdce1/gANTrX0BQ==",
+          "sha256": "f4047a569d99b6a7de57b3719b7ad40109f2a1d360566a840f50ab32aacefcd9",
+          "archiveBytes": 3385,
+          "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+          "files": {
+            "package/README.md": "98982f1123ff9a11f5d3d9a52da6e8fea9cd0989f7465605c27b0f9a46f2dbcd",
+            "package/dist/artplayer-plugin-dash-control.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.legacy.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.mjs": "e32bf08c33a481781883067dcc639f0495c9dcb8a88b91be13736370f4932fc4",
+            "package/package.json": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+            "package/types/artplayer-plugin-dash-control.d.ts": "e15ef683e0c335d81531587828593325e037efe7ed29c022477cd14fe71aebba"
+          },
+          "manifest": {
+            "name": "artplayer-plugin-dash-control",
+            "version": "1.1.0",
+            "description": "Dash control plugin for ArtPlayer",
+            "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+            "license": "MIT",
+            "homepage": "https://artplayer.org",
+            "repository": {
+              "type": "git",
+              "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+            },
+            "bugs": {
+              "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+            },
+            "keywords": [
+              "html5",
+              "video",
+              "player"
+            ],
+            "exports": {
+              ".": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.mjs",
+                "require": "./dist/artplayer-plugin-dash-control.js"
+              },
+              "./legacy": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.legacy.js",
+                "require": "./dist/artplayer-plugin-dash-control.legacy.js"
+              }
+            },
+            "main": "./dist/artplayer-plugin-dash-control.js",
+            "module": "./dist/artplayer-plugin-dash-control.mjs",
+            "types": "./types/artplayer-plugin-dash-control.d.ts",
+            "legacy": "./dist/artplayer-plugin-dash-control.legacy.js",
+            "browserslist": "last 1 Chrome version"
+          }
+        },
+        "sourceSHA256": "c1c63bd0ec787a6f9eb445b53341dd5eaeaccccd1589455234be311fcf6ce5e6",
+        "candidate": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.js",
+        "scope": "Real ArtPlayer DOM and native MP4 with controlled SDK methods. No dash.js instance, MPD, ABR or adaptive media validation."
+      },
+      "engines": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32"
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32"
+        }
+      ],
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+            "bytes": 378040
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+            "bytes": 378040,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+            "bytes": 378040,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/audio-tone.m4a": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/audio-tone.m4a"
+            },
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      }
+    },
+    {
+      "file": "refactor/.cache/dash03-legacy-final/report.json",
+      "sha256": "5eaa45267a3f0e6a5c5922f974d46737a7d3c559c9a8e2dab84e8262269e6d83",
+      "bytes": 15807757,
+      "stats": {
+        "startTime": "2026-09-11T20:55:36.976Z",
+        "duration": 69224.891,
+        "expected": 84,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "results": {
+        "directory": "refactor/.cache/dash03-legacy-final/results",
+        "files": 85,
+        "sha256": "a7016f915efb43c45b31f9d25b755fba95c649ec7008bb397130cc840e78b7fe",
+        "algorithm": "SHA256 of JSON.stringify(sorted relative path and raw SHA256 pairs), UTF-8, slash paths"
+      },
+      "pluginInput": {
+        "published": {
+          "name": "artplayer-plugin-dash-control",
+          "version": "1.1.0",
+          "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-dash-control/1.1.0",
+          "tarball": "https://registry.npmjs.org/artplayer-plugin-dash-control/-/artplayer-plugin-dash-control-1.1.0.tgz",
+          "integrity": "sha512-EssRkzYXWcln3a6nAzi4ESacBhzMih8s0bzdjXuvBBCh2UFmvK99ITD5E+0cuU8i5ZzIQGQSdce1/gANTrX0BQ==",
+          "sha256": "f4047a569d99b6a7de57b3719b7ad40109f2a1d360566a840f50ab32aacefcd9",
+          "archiveBytes": 3385,
+          "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+          "files": {
+            "package/README.md": "98982f1123ff9a11f5d3d9a52da6e8fea9cd0989f7465605c27b0f9a46f2dbcd",
+            "package/dist/artplayer-plugin-dash-control.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.legacy.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+            "package/dist/artplayer-plugin-dash-control.mjs": "e32bf08c33a481781883067dcc639f0495c9dcb8a88b91be13736370f4932fc4",
+            "package/package.json": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+            "package/types/artplayer-plugin-dash-control.d.ts": "e15ef683e0c335d81531587828593325e037efe7ed29c022477cd14fe71aebba"
+          },
+          "manifest": {
+            "name": "artplayer-plugin-dash-control",
+            "version": "1.1.0",
+            "description": "Dash control plugin for ArtPlayer",
+            "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+            "license": "MIT",
+            "homepage": "https://artplayer.org",
+            "repository": {
+              "type": "git",
+              "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+            },
+            "bugs": {
+              "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+            },
+            "keywords": [
+              "html5",
+              "video",
+              "player"
+            ],
+            "exports": {
+              ".": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.mjs",
+                "require": "./dist/artplayer-plugin-dash-control.js"
+              },
+              "./legacy": {
+                "types": "./types/artplayer-plugin-dash-control.d.ts",
+                "import": "./dist/artplayer-plugin-dash-control.legacy.js",
+                "require": "./dist/artplayer-plugin-dash-control.legacy.js"
+              }
+            },
+            "main": "./dist/artplayer-plugin-dash-control.js",
+            "module": "./dist/artplayer-plugin-dash-control.mjs",
+            "types": "./types/artplayer-plugin-dash-control.d.ts",
+            "legacy": "./dist/artplayer-plugin-dash-control.legacy.js",
+            "browserslist": "last 1 Chrome version"
+          }
+        },
+        "sourceSHA256": "1b6fba04c90ba19197213cf1868599dab13d430e8923d3081e37c43dc4d5d00e",
+        "candidate": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.legacy.js",
+        "scope": "Real ArtPlayer DOM and native MP4 with controlled SDK methods. No dash.js instance, MPD, ABR or adaptive media validation."
+      },
+      "engines": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32"
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32"
+        }
+      ],
+      "manifest": {
+        "kind": "artplayer-browser-test",
+        "resources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+            "bytes": 378040
+          },
+          "/compiled/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+            "bytes": 378040,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/uncompiled/artplayer/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+            "bytes": 378040,
+            "aliasOf": "/candidate/artplayer.js"
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/compiled/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/uncompiled/artplayer-plugin-chapter/index.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529,
+            "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          },
+          "/test/pattern.mp4": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "/test/pattern.webm": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.webm"
+            },
+            "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+            "bytes": 162073
+          },
+          "/test/audio-tone.m4a": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/audio-tone.m4a"
+            },
+            "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "bytes": 132436
+          },
+          "/test/declaration-cues.vtt": {
+            "source": {
+              "kind": "test-subtitles",
+              "file": "test/browser/media/declaration-cues.vtt"
+            },
+            "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+            "bytes": 54
+          },
+          "/test/thumbnail-grid.svg": {
+            "source": {
+              "kind": "test-thumbnail-grid",
+              "file": "test/browser/media/thumbnail-grid.svg"
+            },
+            "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+            "bytes": 14969
+          },
+          "/test/legacy-safe-area.js": {
+            "source": {
+              "kind": "frozen-own-source",
+              "file": "test/helpers/legacy-safe-area.js",
+              "commit": "ccf77c4e"
+            },
+            "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+            "bytes": 795
+          },
+          "/assets/sample/video.mp4": {
+            "source": {
+              "kind": "docs-media",
+              "file": "docs/assets/sample/video.mp4"
+            },
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+            "bytes": 5818706
+          },
+          "/test/performance.js": {
+            "source": {
+              "kind": "adapted-baseline-fixture",
+              "file": "refactor/fixtures/performance.js"
+            },
+            "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+            "bytes": 8994
+          }
+        }
+      }
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/dash03-before.log",
+      "sha256": "5a4e92a1bcf6a8117ba6745d1d54ade25d58643200ffc1d18d0f09e8e1ba8e28",
+      "bytes": 175508
+    },
+    {
+      "file": "refactor/.cache/dash03-reentry-before.log",
+      "sha256": "bc04fcd6b8518f74718bcc732a26f88fb919a79f63a1dc073fe724849ea0c99d",
+      "bytes": 4865
+    },
+    {
+      "file": "refactor/.cache/dash03-formatter-before.log",
+      "sha256": "0799ccc96096116e75e83db65289102bde825f57796bfb620579927d982084d0",
+      "bytes": 4840
+    },
+    {
+      "file": "refactor/.cache/dash03-node-final.log",
+      "sha256": "4455e88c907ea0f2f335b67c020bf819e47b124fc3e766c1bb220b6135934f6d",
+      "bytes": 11463
+    },
+    {
+      "file": "refactor/.cache/dash03-artifacts-realm-before.log",
+      "sha256": "0a09f96f3457128982aa93d3d5c9a93f84900ea1bf09add729c47d048714b7be",
+      "bytes": 36034
+    },
+    {
+      "file": "refactor/.cache/dash03-artifacts-final.log",
+      "sha256": "c68ec1c1ab54f7e389ce210bc95276ed6484f499e3d2d90cb023bf92a2dcb76b",
+      "bytes": 31662
+    },
+    {
+      "file": "refactor/.cache/dash03-build-final.log",
+      "sha256": "90a8251da20f5ebe7cf2759e87284ab0265bc9db4b7a12dc14304f14019883c1",
+      "bytes": 1472
+    },
+    {
+      "file": "refactor/.cache/dash03-main.log",
+      "sha256": "9c55a02c2bc12d2128779677d9a02a4be3e3c57a50a5ad46631bc703b9d58a99",
+      "bytes": 16163
+    },
+    {
+      "file": "refactor/.cache/dash03-main-final.log",
+      "sha256": "896e9acf28c7b66998dd25ad9c39304242180d8e273f27f16a52a8c3d02fe162",
+      "bytes": 16162
+    },
+    {
+      "file": "refactor/.cache/dash03-legacy-final.log",
+      "sha256": "837a8ad81b4306231d44f9ca38f328afef8a57c1f604196bc64319b772049167",
+      "bytes": 16160
+    },
+    {
+      "file": "refactor/.cache/dash03-ci.log",
+      "sha256": "4d88eba96b783e9e26ea2197c398160b2565e622a58ab5b80db44375bcd85722",
+      "bytes": 74484
+    }
+  ],
+  "results": {
+    "initialRegression": {
+      "passed": 1,
+      "failed": 21
+    },
+    "reentrantCleanupBefore": {
+      "passed": 29,
+      "failed": 2
+    },
+    "formatterShutdownBefore": {
+      "passed": 29,
+      "failed": 2
+    },
+    "nodeFinal": 116,
+    "nodeWithThreeArtifacts": 266,
+    "mainBrowser": 84,
+    "legacyBrowser": 84,
+    "ci": {
+      "unit": 661,
+      "engineering": 14,
+      "baseline": 37
+    }
+  },
+  "localEvidence": "Raw logs and browser reports/traces remain local cache. Committed hashes locate evidence but are not uploaded traces; rerun on a fresh machine."
+}

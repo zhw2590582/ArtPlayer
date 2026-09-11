@@ -22,6 +22,7 @@ export async function dashImplementations() {
   const { release } = baseline
   const archive = await ensureArchive(release)
   const implementations = [{ name: 'source', sdk: 5, factory: (await loadPackage(release.name)).default }]
+  implementations.push({ name: 'source-v4', sdk: 4, factory: implementations[0].factory })
   const historicalFile = `packages/${release.name}/dist/artplayer-plugin-dash-control.js`
   const historical = execFileSync('git', ['show', `${baseline.sourceCommit}:${historicalFile}`])
   assert.equal(hash(historical.toString().replace(/\r\n/g, '\n')), baseline.source[historicalFile])
@@ -34,7 +35,9 @@ export async function dashImplementations() {
   }
   for (const filename of (process.env.ARTPLAYER_TEST_DASH || '').split(path.delimiter).filter(Boolean)) {
     const bytes = fs.readFileSync(filename)
-    implementations.push({ name: `artifact-${path.basename(filename)}`, sdk: 5, factory: await factoryFromBytes(bytes, filename.endsWith('.mjs')) })
+    const factory = await factoryFromBytes(bytes, filename.endsWith('.mjs'))
+    for (const sdk of [4, 5])
+      implementations.push({ name: `artifact-${path.basename(filename)}-v${sdk}`, sdk, factory })
   }
   return implementations
 }

@@ -1,5 +1,20 @@
 # 进度与证据
 
+## 最新完成：DASH-03 SDK 适配与生命周期源码改造
+
+DASH 源码已拆为入口生命周期、SDK 适配、selector 模型、菜单所有权四个 JS 模块。
+恢复发布版 4.x 方法表，保留 5.x 稳定 ID；修复空菜单残留、过期引用、销毁/安装异常清理、
+重复标签/零 ID/唯一克隆轨道高亮，以及清理重入误删新 UI 和销毁后继续格式化的问题。
+
+源码 116 项、三格式两代 SDK Node 266 项通过；正式插件 main/legacy 三引擎、新旧核心
+DOM/原生 MP4 各 84 项通过。完整 CI 712 项通过，实际 SDK/MPD/ABR 与设备验证仍未完成。
+初始 21 项失败和两组重入/格式化失败、VM 数组比较修正证据均保留，未以重试跳过制造通过。
+DASH-LIFE-01 关闭；DASH-SDK-01/DASH-STATE-01 仍需 05 实际 SDK 验证。
+
+当前 217 项：73 done、3 doing、141 todo。下一步 DASH-04 迁移这四个模块和公开类型到严格 TS。
+详见 [源码变更](changes/2026-09-12-PKG-DASH-03-runtime.md)、[执行证据](baselines/dash-runtime.json)
+及 [包内架构](../packages/artplayer-plugin-dash-control/ARCHITECTURE.md)。独立本地提交，不推送/发布。
+
 ## 最新完成：DASH-02 行为测试与真实 DOM 交互
 
 保留原有 5 项稳定 ID 回归，新增发布三格式/冻结工作区/候选源码契约测试，定向 74 项通过。

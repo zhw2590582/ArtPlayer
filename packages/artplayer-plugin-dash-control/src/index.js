@@ -1,179 +1,107 @@
 import $audio from './audio.svg?raw'
+import { audioModel, qualityModel } from './mapping'
+import { createMenu } from './menu'
 import $quality from './quality.svg?raw'
-
-function uniqBy(array, property) {
-  const seen = new Map()
-  return array.filter((item) => {
-    const key = item[property]
-    if (key === undefined) {
-      return true
-    }
-    return !seen.has(key) && seen.set(key, 1)
-  })
-}
 
 export default function artplayerPluginDashControl(option = {}) {
   return (art) => {
     const { $video } = art.template
     const { errorHandle } = art.constructor.utils
+    let closed = false
+    let revision = 0
+    const quality = createMenu(art, 'dash-quality', $quality)
+    const audio = createMenu(art, 'dash-audio', $audio)
+    const subscriptions = []
 
-    function updateQuality(dash) {
-      const qualities = dash.getRepresentationsByType('video')
-      if (!qualities || !qualities.length)
-        return
-
-      const config = option.quality || {}
-      const auto = config.auto || 'Auto'
-      const title = config.title || 'Quality'
-      const getName = config.getName || (level => `${level.height}p`)
-      const currentRepresentation = dash.getCurrentRepresentationForType('video')
-      const currentId = currentRepresentation && currentRepresentation.id
-      const currentAuto = dash.getSettings().streaming.abr.autoSwitchBitrate.video
-      const defaultHtml = !currentAuto && currentRepresentation ? getName(currentRepresentation) : auto
-
-      const selector = uniqBy(
-        qualities.map((item, index) => {
-          return {
-            html: getName(item),
-            value: index,
-            id: item.id,
-            default: !currentAuto && !!currentId && item.id === currentId,
-          }
-        }),
-        'html',
-      ).sort((a, b) => b.value - a.value)
-
-      selector.push({
-        html: auto,
-        value: 'auto',
-        default: currentAuto,
-      })
-
-      const onSelect = (item) => {
-        if (item.value === 'auto') {
-          dash.updateSettings({
-            streaming: {
-              abr: {
-                autoSwitchBitrate: {
-                  video: true,
-                },
-              },
-            },
-          })
+    function clear(current = () => true) {
+      let failure
+      for (const cleanup of [quality.clear, audio.clear]) {
+        if (!current())
+          break
+        try {
+          cleanup()
         }
-        else {
-          dash.updateSettings({
-            streaming: {
-              abr: {
-                autoSwitchBitrate: {
-                  video: false,
-                },
-              },
-            },
-          })
-          dash.setRepresentationForTypeById('video', item.id)
+        catch (error) {
+          failure ||= error
         }
-        art.notice.show = `${title}: ${item.html}`
-        if (config.control)
-          art.controls.check(item)
-        if (config.setting)
-          art.setting.check(item)
-        return item.html
       }
-
-      if (config.control) {
-        art.controls.update({
-          name: 'dash-quality',
-          position: 'right',
-          html: defaultHtml,
-          style: { padding: '0 10px' },
-          selector,
-          onSelect,
-        })
-      }
-
-      if (config.setting) {
-        art.setting.update({
-          name: 'dash-quality',
-          tooltip: defaultHtml,
-          html: title,
-          icon: $quality,
-          width: 200,
-          selector,
-          onSelect,
-        })
-      }
-    }
-
-    function updateAudio(dash) {
-      const audioTracks = dash.getTracksFor('audio')
-      if (!audioTracks || !audioTracks.length)
-        return
-
-      const config = option.audio || {}
-      const auto = config.auto || 'Auto'
-      const title = config.title || 'Audio'
-      const getName = config.getName || (track => track.lang || track.id)
-      const currentTrack = dash.getCurrentTrackFor('audio') || audioTracks[0]
-      const defaultHtml = currentTrack ? getName(currentTrack) : auto
-
-      const selector = uniqBy(
-        audioTracks.map((item) => {
-          return {
-            html: getName(item),
-            value: item,
-            default: currentTrack === item,
-          }
-        }),
-        'html',
-      )
-
-      const onSelect = (item) => {
-        dash.setCurrentTrack(item.value)
-        art.notice.show = `${title}: ${item.html}`
-        if (config.control)
-          art.controls.check(item)
-        if (config.setting)
-          art.setting.check(item)
-        return item.html
-      }
-
-      if (config.control) {
-        art.controls.update({
-          name: 'dash-audio',
-          position: 'right',
-          html: defaultHtml,
-          style: { padding: '0 10px' },
-          selector,
-          onSelect,
-        })
-      }
-
-      if (config.setting) {
-        art.setting.update({
-          name: 'dash-audio',
-          tooltip: defaultHtml,
-          html: title,
-          icon: $audio,
-          width: 200,
-          selector,
-          onSelect,
-        })
-      }
+      if (failure)
+        throw failure
     }
 
     function update() {
-      errorHandle(art.dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"')
-      updateQuality(art.dash)
-      updateAudio(art.dash)
+      if (closed || art.isDestroy)
+        return
+      const version = ++revision
+      const dash = art.dash
+      const current = () => !closed && !art.isDestroy && version === revision && art.dash === dash
+      const valid = () => current() && dash.getVideoElement() === $video && current()
+      try {
+        errorHandle(dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"')
+        if (!current())
+          return
+        const qualityConfig = option.quality || {}
+        const qualities = qualityModel(dash, qualityConfig, valid)
+        if (!valid())
+          return
+        quality.update(qualityConfig, qualities, valid)
+        if (!valid())
+          return
+        const audioConfig = option.audio || {}
+        const tracks = audioModel(dash, audioConfig, valid)
+        if (valid())
+          audio.update(audioConfig, tracks, valid)
+      }
+      catch (error) {
+        if (current()) {
+          const cleanupVersion = ++revision
+          try {
+            clear(() => revision === cleanupVersion)
+          }
+          catch (cleanupError) {
+            console.warn('ArtPlayer DASH cleanup failed:', cleanupError)
+          }
+        }
+        throw error
+      }
     }
 
-    art.on('ready', update)
-    art.on('restart', update)
-
-    return {
-      name: 'artplayerPluginDashControl',
-      update,
+    function destroy() {
+      if (closed)
+        return
+      closed = true
+      revision++
+      let failure
+      const actions = [clear, ...subscriptions.splice(0).map(([name, callback]) => () => art.off(name, callback))]
+      for (const action of actions) {
+        try {
+          action()
+        }
+        catch (error) {
+          failure ||= error
+        }
+      }
+      if (failure)
+        throw failure
     }
+
+    try {
+      for (const entry of [['ready', update], ['restart', update], ['destroy', destroy]]) {
+        if (closed)
+          break
+        subscriptions.push(entry)
+        art.on(...entry)
+      }
+    }
+    catch (error) {
+      try {
+        destroy()
+      }
+      catch (cleanupError) {
+        console.warn('ArtPlayer DASH subscription cleanup failed:', cleanupError)
+      }
+      throw error
+    }
+    return { name: 'artplayerPluginDashControl', update }
   }
 }

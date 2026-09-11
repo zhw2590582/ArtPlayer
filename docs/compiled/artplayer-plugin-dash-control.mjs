@@ -5,163 +5,260 @@
  * Released under the MIT License.
  */
 const $audio = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg>';
-const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
-function uniqBy(array, property) {
-  const seen = /* @__PURE__ */ new Map();
-  return array.filter((item) => {
-    const key = item[property];
-    if (key === void 0) {
-      return true;
+function qualityAdapter(dash) {
+  const modern = typeof dash.getRepresentationsByType === "function";
+  return {
+    levels: () => modern ? dash.getRepresentationsByType("video") : dash.getBitrateInfoListFor("video"),
+    current(levels) {
+      if (modern)
+        return dash.getCurrentRepresentationForType("video");
+      const quality = dash.getQualityFor("video");
+      return levels.find((level) => level.qualityIndex === quality);
+    },
+    item(level, index, selected, automatic) {
+      return modern ? { value: index, id: level.id, default: !automatic && selected != null && level.id === selected.id } : { value: level.qualityIndex, default: !automatic && selected != null && level.qualityIndex === selected.qualityIndex };
+    },
+    select(item, valid) {
+      const automatic = item.value === "auto";
+      dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: automatic } } } });
+      if (!automatic && valid()) {
+        if (modern)
+          dash.setRepresentationForTypeById("video", item.id);
+        else
+          dash.setQualityFor("video", item.value);
+      }
     }
-    return !seen.has(key) && seen.set(key, 1);
+  };
+}
+function uniqueLabels(items) {
+  const seen = /* @__PURE__ */ new Map();
+  return items.filter((item) => {
+    if (item.html === void 0)
+      return true;
+    const first = seen.get(item.html);
+    if (first) {
+      if (item.default)
+        Object.assign(first, item);
+      return false;
+    }
+    seen.set(item.html, item);
+    return true;
   });
 }
+function qualityModel(dash, config, active) {
+  const adapter = qualityAdapter(dash);
+  const levels = adapter.levels();
+  if (!active() || !levels?.length)
+    return null;
+  const auto = config.auto || "Auto";
+  const getName = config.getName || ((level) => `${level.height}p`);
+  const selected = adapter.current(levels);
+  if (!active())
+    return null;
+  const automatic = dash.getSettings().streaming.abr.autoSwitchBitrate.video;
+  if (!active())
+    return null;
+  const html = !automatic && selected ? getName(selected) : auto;
+  if (!active())
+    return null;
+  const items = [];
+  for (const [index, level] of levels.entries()) {
+    const label = getName(level);
+    if (!active())
+      return null;
+    items.push({ html: label, ...adapter.item(level, index, selected, automatic) });
+  }
+  const selector = uniqueLabels(items).sort((left, right) => right.value - left.value);
+  selector.push({ html: auto, value: "auto", default: automatic });
+  return { html, title: config.title || "Quality", selector, select: adapter.select };
+}
+function selectedTrack(tracks, current) {
+  if (tracks.includes(current))
+    return current;
+  if (current.id == null && current.index == null)
+    return void 0;
+  const matching = tracks.filter((track) => ["id", "index", "lang"].every((key) => current[key] == null || track[key] === current[key]));
+  return matching.length === 1 ? matching[0] : void 0;
+}
+function audioModel(dash, config, active) {
+  const tracks = dash.getTracksFor("audio");
+  if (!active() || !tracks?.length)
+    return null;
+  const auto = config.auto || "Auto";
+  const getName = config.getName || ((track) => track.lang || track.id);
+  const current = dash.getCurrentTrackFor("audio") || tracks[0];
+  if (!active())
+    return null;
+  const html = current ? getName(current) : auto;
+  if (!active())
+    return null;
+  const selected = selectedTrack(tracks, current);
+  const items = [];
+  for (const track of tracks) {
+    const label = getName(track);
+    if (!active())
+      return null;
+    items.push({ html: label, value: track, default: track === selected });
+  }
+  const selector = uniqueLabels(items);
+  return { html, title: config.title || "Audio", selector, select: (item) => dash.setCurrentTrack(item.value) };
+}
+function createMenu(art, name, icon) {
+  let current;
+  const owned = /* @__PURE__ */ new Map();
+  function remove(surface, callback = owned.get(surface)) {
+    if (!callback || owned.get(surface) !== callback)
+      return;
+    owned.delete(surface);
+    const registry = art[surface];
+    if (surface === "controls" && registry.cache?.get && registry.cache.get(name)?.option?.onSelect !== callback)
+      return;
+    if (surface === "setting" && registry.find && registry.find(name)?.onSelect !== callback)
+      return;
+    registry.remove(name);
+  }
+  function clear() {
+    current = void 0;
+    let failure;
+    for (const [surface, callback] of [...owned]) {
+      try {
+        remove(surface, callback);
+      } catch (error) {
+        failure || (failure = error);
+      }
+    }
+    if (failure)
+      throw failure;
+  }
+  function update(config, model, active) {
+    if (!model) {
+      clear();
+      return;
+    }
+    const state = {};
+    current = state;
+    const valid = () => state === current && active();
+    const onSelect = (item) => {
+      if (!valid())
+        return item.html;
+      model.select(item, valid);
+      if (!valid())
+        return item.html;
+      art.notice.show = `${model.title}: ${item.html}`;
+      if (valid() && config.control)
+        art.controls.check(item);
+      if (valid() && config.setting)
+        art.setting.check(item);
+      return item.html;
+    };
+    if (config.control) {
+      owned.set("controls", onSelect);
+      art.controls.update({ name, position: "right", html: model.html, style: { padding: "0 10px" }, selector: model.selector, onSelect });
+    } else {
+      remove("controls");
+    }
+    if (!valid())
+      return;
+    if (config.setting) {
+      owned.set("setting", onSelect);
+      art.setting.update({ name, tooltip: model.html, html: model.title, icon, width: 200, selector: model.selector, onSelect });
+    } else {
+      remove("setting");
+    }
+  }
+  return { update, clear };
+}
+const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
 function artplayerPluginDashControl(option = {}) {
   return (art) => {
     const { $video } = art.template;
     const { errorHandle } = art.constructor.utils;
-    function updateQuality(dash) {
-      const qualities = dash.getRepresentationsByType("video");
-      if (!qualities || !qualities.length)
-        return;
-      const config = option.quality || {};
-      const auto = config.auto || "Auto";
-      const title = config.title || "Quality";
-      const getName = config.getName || ((level) => `${level.height}p`);
-      const currentRepresentation = dash.getCurrentRepresentationForType("video");
-      const currentId = currentRepresentation && currentRepresentation.id;
-      const currentAuto = dash.getSettings().streaming.abr.autoSwitchBitrate.video;
-      const defaultHtml = !currentAuto && currentRepresentation ? getName(currentRepresentation) : auto;
-      const selector = uniqBy(
-        qualities.map((item, index) => {
-          return {
-            html: getName(item),
-            value: index,
-            id: item.id,
-            default: !currentAuto && !!currentId && item.id === currentId
-          };
-        }),
-        "html"
-      ).sort((a, b) => b.value - a.value);
-      selector.push({
-        html: auto,
-        value: "auto",
-        default: currentAuto
-      });
-      const onSelect = (item) => {
-        if (item.value === "auto") {
-          dash.updateSettings({
-            streaming: {
-              abr: {
-                autoSwitchBitrate: {
-                  video: true
-                }
-              }
-            }
-          });
-        } else {
-          dash.updateSettings({
-            streaming: {
-              abr: {
-                autoSwitchBitrate: {
-                  video: false
-                }
-              }
-            }
-          });
-          dash.setRepresentationForTypeById("video", item.id);
+    let closed = false;
+    let revision = 0;
+    const quality = createMenu(art, "dash-quality", $quality);
+    const audio = createMenu(art, "dash-audio", $audio);
+    const subscriptions = [];
+    function clear(current = () => true) {
+      let failure;
+      for (const cleanup of [quality.clear, audio.clear]) {
+        if (!current())
+          break;
+        try {
+          cleanup();
+        } catch (error) {
+          failure || (failure = error);
         }
-        art.notice.show = `${title}: ${item.html}`;
-        if (config.control)
-          art.controls.check(item);
-        if (config.setting)
-          art.setting.check(item);
-        return item.html;
-      };
-      if (config.control) {
-        art.controls.update({
-          name: "dash-quality",
-          position: "right",
-          html: defaultHtml,
-          style: { padding: "0 10px" },
-          selector,
-          onSelect
-        });
       }
-      if (config.setting) {
-        art.setting.update({
-          name: "dash-quality",
-          tooltip: defaultHtml,
-          html: title,
-          icon: $quality,
-          width: 200,
-          selector,
-          onSelect
-        });
-      }
-    }
-    function updateAudio(dash) {
-      const audioTracks = dash.getTracksFor("audio");
-      if (!audioTracks || !audioTracks.length)
-        return;
-      const config = option.audio || {};
-      const auto = config.auto || "Auto";
-      const title = config.title || "Audio";
-      const getName = config.getName || ((track) => track.lang || track.id);
-      const currentTrack = dash.getCurrentTrackFor("audio") || audioTracks[0];
-      const defaultHtml = currentTrack ? getName(currentTrack) : auto;
-      const selector = uniqBy(
-        audioTracks.map((item) => {
-          return {
-            html: getName(item),
-            value: item,
-            default: currentTrack === item
-          };
-        }),
-        "html"
-      );
-      const onSelect = (item) => {
-        dash.setCurrentTrack(item.value);
-        art.notice.show = `${title}: ${item.html}`;
-        if (config.control)
-          art.controls.check(item);
-        if (config.setting)
-          art.setting.check(item);
-        return item.html;
-      };
-      if (config.control) {
-        art.controls.update({
-          name: "dash-audio",
-          position: "right",
-          html: defaultHtml,
-          style: { padding: "0 10px" },
-          selector,
-          onSelect
-        });
-      }
-      if (config.setting) {
-        art.setting.update({
-          name: "dash-audio",
-          tooltip: defaultHtml,
-          html: title,
-          icon: $audio,
-          width: 200,
-          selector,
-          onSelect
-        });
-      }
+      if (failure)
+        throw failure;
     }
     function update() {
-      errorHandle(art.dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"');
-      updateQuality(art.dash);
-      updateAudio(art.dash);
+      if (closed || art.isDestroy)
+        return;
+      const version = ++revision;
+      const dash = art.dash;
+      const current = () => !closed && !art.isDestroy && version === revision && art.dash === dash;
+      const valid = () => current() && dash.getVideoElement() === $video && current();
+      try {
+        errorHandle(dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"');
+        if (!current())
+          return;
+        const qualityConfig = option.quality || {};
+        const qualities = qualityModel(dash, qualityConfig, valid);
+        if (!valid())
+          return;
+        quality.update(qualityConfig, qualities, valid);
+        if (!valid())
+          return;
+        const audioConfig = option.audio || {};
+        const tracks = audioModel(dash, audioConfig, valid);
+        if (valid())
+          audio.update(audioConfig, tracks, valid);
+      } catch (error) {
+        if (current()) {
+          const cleanupVersion = ++revision;
+          try {
+            clear(() => revision === cleanupVersion);
+          } catch (cleanupError) {
+            console.warn("ArtPlayer DASH cleanup failed:", cleanupError);
+          }
+        }
+        throw error;
+      }
     }
-    art.on("ready", update);
-    art.on("restart", update);
-    return {
-      name: "artplayerPluginDashControl",
-      update
-    };
+    function destroy() {
+      if (closed)
+        return;
+      closed = true;
+      revision++;
+      let failure;
+      const actions = [clear, ...subscriptions.splice(0).map(([name, callback]) => () => art.off(name, callback))];
+      for (const action of actions) {
+        try {
+          action();
+        } catch (error) {
+          failure || (failure = error);
+        }
+      }
+      if (failure)
+        throw failure;
+    }
+    try {
+      for (const entry of [["ready", update], ["restart", update], ["destroy", destroy]]) {
+        if (closed)
+          break;
+        subscriptions.push(entry);
+        art.on(...entry);
+      }
+    } catch (error) {
+      try {
+        destroy();
+      } catch (cleanupError) {
+        console.warn("ArtPlayer DASH subscription cleanup failed:", cleanupError);
+      }
+      throw error;
+    }
+    return { name: "artplayerPluginDashControl", update };
   };
 }
 export {

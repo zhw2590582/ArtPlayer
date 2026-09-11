@@ -2014,11 +2014,15 @@
         "CORE-11",
         "CORE-14"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "能力适配保留 SDK 4.x 与 5.x，稳定 ID 映射、ABR 状态、UI 清理和生命周期职责分离",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-DASH-03-runtime.md",
+        "baselines/dash-runtime.json",
+        "dash-validation.md"
+      ]
     },
     {
       "id": "PKG-DASH-04",
