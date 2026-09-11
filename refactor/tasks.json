@@ -1575,13 +1575,15 @@
         "CORE-22",
         "CORE-24"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "主视频切源和缓冲恢复，多实例独立音频、旧核心",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-12-PKG-AUDIO-05-combinations.md",
-        "baselines/audio-combinations-first.json"
+        "baselines/audio-combinations-first.json",
+        "baselines/audio-combinations-checkpoint.json",
+        "audio-validation.md"
       ]
     },
     {

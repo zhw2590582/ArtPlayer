@@ -97,3 +97,25 @@ The docs `assets/sample/video.mp4` remains an existing sample with its original 
 tracked by BASE-MEDIA-01. The new synthetic fixtures do not resolve rights for existing media.
 Browser binaries/codec support vary by OS; these projects do not replace Safari/iOS/Android
 device checks. See the [official browser guidance](https://playwright.dev/docs/browsers).
+
+## Withheld media diagnostics
+
+`test/helpers/media-gate.js` binds a temporary HTTP server to loopback and withholds
+the tail of the pinned media until the test calls release(). Its default response
+keeps the full Content-Length and streams the prefix; the diagnostic completeRanges
+mode sends a bounded 206 response and holds the later range. Both preserve exact
+bytes and a strong ETag. Partial range semantics follow
+[RFC 9110 section 15.3.7](https://www.rfc-editor.org/rfc/rfc9110.html#name-partial-content).
+`node --test test/media-gate.test.js` verifies actual HTTP bytes, headers and release.
+
+`audio-buffering.spec.js` requires trusted waiting after actual clock progression,
+then release, resumed clocks and synchronization across old/new core/plugin pairs.
+It currently has unresolved Windows WebKit failures; do not skip them or count
+the native diagnostic below as equivalent acceptance. See refactor/audio-validation.md.
+
+`media-gate-native.spec.js` removes all ArtPlayer instances and uses a native element
+with preload=auto. It records whether playback and starvation were observed for
+both response modes. A passing diagnostic only proves observation plus successful
+playback after release; inspect its progressed/waiting flags before claiming buffering.
+These capability observation timeouts do not relax the integration assertions.
+Archive the report and results (including traces) before starting another browser suite.

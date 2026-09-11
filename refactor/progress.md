@@ -1,5 +1,21 @@
 # 进度与证据
 
+## 当前实施：Audio-05 恢复修复与真实缓冲检查点
+
+已修复旧核心时间零 seek 后候选音频漏恢复，严格 TS 与公开接口不变；三格式 Node 97 项、
+完整 CI 599 项、main/legacy 三引擎媒体和新旧组合各 78 项通过。首次 legacy 原生负 seek
+返回 0.01 导致的严格零断言失败已保留，补充边界对照后完整重跑。不是发布或全包验收。
+
+独立原生媒体 preload=auto 对照已确认 Chromium/Firefox 可推进后真实 waiting，Windows
+WebKit 在两种受限响应下未推进到缓冲，放行后可播放。AUDIO-RESUME-01 关闭，
+AUDIO-BUFFER-01 与 AUDIO-SYNC-01 保持 open；没有跳过集成失败或将原生诊断当作通过。
+
+当前 217 项：70 done、2 doing、145 todo。Audio-05 和 HLS-SDK-01 尚未完成。
+本批为本地 checkpoint，源码、测试、包内架构与证据一同提交。其余包继续按依赖推进；
+分发、设备、完整 CI/CD、各包大版本升级和三轮发布复盘仍待完成，未推送或发布。
+见 [本次变更](changes/2026-09-12-PKG-AUDIO-05-combinations.md) 和
+[冻结证据](baselines/audio-combinations-checkpoint.json)。以下是各阶段当时的历史状态。
+
 ## 最新完成：CORE-24 连续切源播放意图修复
 
 Audio-05 检查点已提交 b5e96664，原六项候选核心回归保持原断言重跑全部通过。

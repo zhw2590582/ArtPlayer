@@ -26,6 +26,13 @@ pause audio; seeked synchronizes and resumes only if the video is playing. Nativ
 synchronizes again before resume. Ordinary playing timeupdate retains the strict drift
 threshold and offset rule. Rate and volume/mute follow the existing core properties.
 
+The entry owns 15 subscriptions. Resume checks respect an explicit proxy video.playing
+boolean first. For native media they also accept an unpaused, non-ended video with
+readyState > 2 at currentTime zero: the historical art.playing getter requires time > 0,
+which can otherwise leave audio paused after the seek associated with a source switch.
+If seeked arrives before readiness, canplay synchronizes and resumes only paused audio
+whose host is playing. A paused host or proxy playing=false must never trigger recovery.
+
 Destroy marks the entry inactive before removing listeners. The track then closes before
 pausing, removing the src attribute and loading the empty element. Cleanup attempts all
 steps even when a consumer-overridden method throws, then propagates the first cleanup error.

@@ -72,8 +72,8 @@ export function useAudioFixture() {
         plugins: [window.artplayerPluginAudioTrack({ url, sync: 0.1 })],
       })
       window.audioPlugin = window.art.plugins.artplayerPluginAudioTrack
-      for (const event of ['play', 'pause', 'seek', 'video:waiting', 'video:playing', 'video:seeking', 'video:seeked', 'video:pause', 'video:ended'])
-        window.art.on(event, () => window.audioHostEvents.push({ event, videoTime: window.art.currentTime, audioTime: window.audioPlugin.audio.currentTime, audioPaused: window.audioPlugin.audio.paused }))
+      for (const event of ['play', 'pause', 'seek', 'video:waiting', 'video:playing', 'video:canplay', 'video:seeking', 'video:seeked', 'video:pause', 'video:ended'])
+        window.art.on(event, () => window.audioHostEvents.push({ event, videoTime: window.art.currentTime, videoPaused: window.art.video.paused, videoReadyState: window.art.video.readyState, playing: window.art.playing, audioTime: window.audioPlugin.audio.currentTime, audioPaused: window.audioPlugin.audio.paused }))
       for (const event of ['loadedmetadata', 'playing', 'pause', 'seeked', 'error', 'emptied'])
         window.audioPlugin.audio.addEventListener(event, () => window.audioEvents.push({ event, time: window.audioPlugin.audio.currentTime, src: window.audioPlugin.audio.currentSrc }))
       document.querySelector('#play').onclick = () => window.art.play()

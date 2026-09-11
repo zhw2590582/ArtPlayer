@@ -80,33 +80,64 @@ for (const core of ['published', 'candidate']) {
 
     test(`${core} core + ${plugin} audio: native offset bounds recover to an in-range seek`, async ({ page }, testInfo) => {
       await openAudio(page, core, plugin, testInfo)
+      await page.evaluate(() => {
+        window.boundaryAudio = new Audio('/test/audio-tone.m4a?boundary=native')
+        window.boundaryAudio.muted = true
+        document.querySelector('#play').onclick = () => Promise.all([window.art.play(), window.boundaryAudio.play()])
+      })
+      await expect.poll(() => page.evaluate(() => window.boundaryAudio.readyState)).toBeGreaterThanOrEqual(2)
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.currentTime)).toBeGreaterThan(0.2)
       await page.evaluate(() => {
         window.art.pause()
+        window.boundaryAudio.pause()
         window.audioPlugin.update({ offset: -2 })
         window.art.seek = 0.5
+        window.boundaryAudio.currentTime = -1.5
       })
-      await expect.poll(() => page.evaluate(() => !window.art.video.seeking && !window.audioPlugin.audio.seeking)).toBe(true)
-      const negative = await page.evaluate(() => ({ time: window.audioPlugin.audio.currentTime, error: window.audioPlugin.audio.error?.code || null }))
-      expect(negative).toEqual({ time: 0, error: null })
+      await expect.poll(() => page.evaluate(() => !window.art.video.seeking && !window.audioPlugin.audio.seeking && !window.boundaryAudio.seeking)).toBe(true)
+      const negative = await page.evaluate(() => {
+        const state = audio => ({ time: audio.currentTime, error: audio.error?.code || null })
+        return { audio: state(window.audioPlugin.audio), native: state(window.boundaryAudio) }
+      })
+      await testInfo.attach('negative-offset-native', { contentType: 'application/json', body: JSON.stringify(negative) })
+      expect(negative.native.time).toBeGreaterThanOrEqual(0)
+      expect(negative.native.time).toBeCloseTo(0, 1)
+      expect(negative.audio.time).toBeGreaterThanOrEqual(0)
+      expect(negative.audio.time).toBeCloseTo(negative.native.time, 1)
+      expect([negative.audio.error, negative.native.error]).toEqual([null, null])
       await page.evaluate(() => {
         window.audioPlugin.update({ offset: 20 })
         window.art.seek = 1
+        window.boundaryAudio.currentTime = 21
       })
-      await expect.poll(() => page.evaluate(() => !window.art.video.seeking && !window.audioPlugin.audio.seeking)).toBe(true)
-      await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.currentTime)).toBe(16)
+      await expect.poll(() => page.evaluate(() => !window.art.video.seeking && !window.audioPlugin.audio.seeking && !window.boundaryAudio.seeking)).toBe(true)
+      const overflow = await page.evaluate(() => {
+        const state = audio => ({ time: audio.currentTime, duration: audio.duration, error: audio.error?.code || null })
+        return { audio: state(window.audioPlugin.audio), native: state(window.boundaryAudio) }
+      })
+      await testInfo.attach('overflow-offset-native', { contentType: 'application/json', body: JSON.stringify(overflow) })
+      expect(overflow.native.duration).toBe(16)
+      expect(overflow.native.time).toBeCloseTo(overflow.native.duration, 1)
+      expect(overflow.audio.time).toBeCloseTo(overflow.native.time, 1)
+      expect([overflow.audio.error, overflow.native.error]).toEqual([null, null])
       expect(await page.evaluate(() => window.audioPlugin.audio.paused)).toBe(true)
       await page.evaluate(() => {
         window.audioPlugin.update({ offset: -0.5 })
         window.art.seek = 3
+        window.boundaryAudio.currentTime = 2.5
       })
       await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.currentTime)).toBeCloseTo(2.5, 1)
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.currentTime)).toBeGreaterThan(2.8)
       await expect.poll(() => page.evaluate(() => Math.abs(window.audioPlugin.audio.currentTime - window.art.currentTime + 0.5))).toBeLessThan(0.5)
-      await testInfo.attach('offset-boundary', { contentType: 'application/json', body: JSON.stringify({ negative, overflow: 16, recovered: true }) })
-      await page.evaluate(() => window.art.destroy())
+      await testInfo.attach('offset-boundary', { contentType: 'application/json', body: JSON.stringify({ negative, overflow, recovered: true }) })
+      await page.evaluate(() => {
+        window.art.destroy()
+        window.boundaryAudio.pause()
+        window.boundaryAudio.removeAttribute('src')
+        window.boundaryAudio.load()
+      })
     })
   }
 }

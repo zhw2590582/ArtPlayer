@@ -82,3 +82,45 @@ legacy 首次 WebKit 的“候选核心 + 已发布 audio”结束观察失败�
 两种结束用例现统一先确认视频/音频 seek 完成且就绪，再确认音频实际恢复推进后才
 观测 video.ended，并记录宿主事件；避免原测试因音频早已暂停而误判。相关 WebKit
 12 次及最终 main/legacy 各 42 项通过。未证明首次暂停的确切来源，未改生产代码。
+
+## PKG-AUDIO-05 恢复播放修复与缓冲检查点
+
+CORE-24 后，旧核心与候选 audio 的 WebKit 快速切源仍可复现音频暂停。补充宿主日志
+后确认 video:seeked 时 video.currentTime=0、paused=false、readyState=4，而 art.playing=false。
+原核心 playing 要求时间大于 0，候选的 seeking 暂停后错过恢复。先前猜测 readyState=2
+并非这次日志的根因。index.ts 现在优先尊重 proxy 的显式 playing 布尔值，原生媒体额外
+接受未暂停、未结束且 readyState>2 的时间零状态；canplay 为 seeked 早于就绪提供守卫恢复。
+公开类型、默认值、偏移算法、update 的同步/真值语义和 audio 元素身份均未改变。
+
+受控用例先红后绿，三种实际 JS 产物共 97 项通过；完整 CI 599 项（550+14+35）通过。
+快速切源 WebKit 修复前四次 3 通过/1 失败，修复后四次全部通过；完整媒体和组合测试
+还覆盖两种核心与两种插件。最终报告在本阶段冻结证据中登记，不能把四次专项当成全矩阵。
+
+偏移边界使用相同 AAC 的独立原生 Audio 对照。首轮 legacy 的唯一失败来自原生对照
+负 seek 后返回 0.01，而断言严格为 0；已保存报告。起点和时长边界现在都要求原生值
+接近边界、插件接近同场原生值（差值小于 0.05 秒）、非负起点、无媒体错误，并验证
+回到区间内 2.5 秒及实际恢复播放。不是只将候选结果与宽泛常量比较。
+
+### 真实缓冲与原生能力限制
+
+media-gate.js 用 loopback HTTP 提供固定媒体，先发前缀并扣住尾部，release 后发送原字节。
+三项真实 HTTP 测试覆盖流式正文、完成的部分 Range、HEAD/416/suffix 与强 ETag。
+该文件已加入 test:node，无新增依赖。集成测试要求实际推进后原生 isTrusted waiting，
+同时检查视频缓冲暂停外部音频、音频缓冲不暂停视频，以及恢复后的时钟和同步。
+
+初轮默认流式 24 项为 Chromium/Firefox 16 通过、Windows WebKit 8 失败；改为完整
+部分 Range 的 WebKit 8 项仍失败。保留两次失败，未提高超时、重试或跳过。失败时
+清理后的空 src/error=4 不能用来判断缓冲失败根因；请求附件现在在页面清理前写入。
+最终同一流式夹具与实际 main/legacy 在 Chromium/Firefox 各 16 项通过；这是限定引擎
+的补充证据，保留先前 Windows WebKit 失败，不代表三引擎完整缓冲验收。
+
+独立 media-gate-native.spec.js 确认没有 ArtPlayer 实例，测试两种响应模式。最初使用
+原生默认 preload，Firefox 也无法在放行前推进；与实际插件对齐为 preload=auto 后，
+Chromium/Firefox 的八种组合都观测到推进与可信 waiting，Windows WebKit 四种组合
+仍停在约 0、readyState=3/4、paused=false、无错误且没有可信 waiting。全部在放行后
+推进。12 个诊断通过只证明观察和放行后恢复，不等于 12 个真实缓冲验收通过。
+
+此证据限定当前 Windows WebKit、固定 MP4/AAC 和两种 HTTP 响应，不能推断真实 Safari
+不支持缓冲；更不能为候选忽略 failing 用例。AUDIO-BUFFER-01 保持 open，Audio-05
+仍 doing；需要其他可实际执行的原生环境/输入路径补齐。当前没有已安装 WSL 发行版或
+可用 Docker 命令。物理设备、声音输出、自动播放策略和 Audio-06 的安装/demo 仍未验收。

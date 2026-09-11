@@ -146,6 +146,44 @@ for (const { name, factory } of implementations) {
 
 const historical = implementations.find(item => item.name === 'published-main').factory
 for (const { name, factory: candidate } of implementations.filter(item => !item.name.startsWith('published'))) {
+  test(`${name}: native playback at zero resumes after seek without overriding proxy playing`, (t) => {
+    const { art } = audioHost(t)
+    Object.assign(art.video, { currentTime: 0, paused: false, ended: false, readyState: 4 })
+    const { audio } = candidate({ url: 'audio.aac' })(art)
+    audio.calls.length = 0
+    art.emit('video:seeking').emit('video:seeked')
+    assert.deepEqual(audio.calls, [['pause'], ['play']])
+    art.video.playing = false
+    audio.calls.length = 0
+    art.emit('video:seeked').emit('video:playing').emit('video:canplay')
+    assert.deepEqual(audio.calls, [], 'A proxy explicit false is authoritative')
+    art.video.playing = true
+    art.emit('video:seeked')
+    assert.deepEqual(audio.calls, [['play']])
+  })
+
+  test(`${name}: canplay recovers a paused audio after seeked preceded host readiness`, (t) => {
+    const { art } = audioHost(t)
+    const { audio } = candidate({ url: 'audio.aac' })(art)
+    art.currentTime = 3
+    art.emit('video:seeking').emit('video:seeked')
+    assert.equal(audio.currentTime, 3)
+    audio.calls.length = 0
+    art.emit('video:canplay')
+    assert.deepEqual(audio.calls, [], 'A paused host must not resume audio')
+    art.playing = true
+    art.emit('video:canplay')
+    assert.deepEqual(audio.calls, [['play']])
+    audio.paused = false
+    audio.calls.length = 0
+    art.emit('video:canplay')
+    assert.deepEqual(audio.calls, [], 'Already playing audio needs no additional play request')
+    art.emit('destroy')
+    audio.calls.length = 0
+    art.emit('video:canplay')
+    assert.deepEqual(audio.calls, [])
+  })
+
   test(`${name}: closed callbacks and retained update cannot revive resources`, (t) => {
     const { art, listeners } = audioHost(t)
     const plugin = candidate({ url: 'audio.aac' })(art)

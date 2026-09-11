@@ -2686,9 +2686,10 @@
         "test/audio-track.test.js",
         "test/browser/audio-track.spec.js",
         "refactor/baselines/audio-validation.json",
-        "refactor/baselines/audio-lifecycle-validation.json"
+        "refactor/baselines/audio-lifecycle-validation.json",
+        "refactor/baselines/audio-combinations-checkpoint.json"
       ],
-      "compatibleResolution": "PKG-AUDIO-03 已修复原生暂停/结束与直接 seek 同步；严格阈值、偏移正负、倍率/音量不变。PKG-AUDIO-05 继续负目标/超时长、真实缓冲和连续切源的完整验证，条目仍 open。",
+      "compatibleResolution": "03 已修复原生暂停/结束；05 的连续切源和偏移原生对照已验证，真实缓冲 Chromium/Firefox 初轮通过但 Windows WebKit 保留 AUDIO-BUFFER-01；策略/设备缺口继续 open。",
       "closureCriteria": "正常/边界/失败/缓冲恢复有媒体与受控断言，实际支持环境缺口明确处理。"
     },
     {
@@ -2753,15 +2754,43 @@
       "id": "AUDIO-RESUME-01",
       "title": "WebKit 旧核心切源后候选音频保持暂停",
       "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-AUDIO-05"
+      ],
+      "evidence": [
+        "refactor/baselines/audio-combinations-first.json",
+        "test/audio-track.test.js",
+        "test/browser/audio-combinations.spec.js",
+        "refactor/baselines/audio-combinations-checkpoint.json"
+      ],
+      "compatibleResolution": "原生时间零且未暂停、未结束、readyState>2 时允许恢复；显式 proxy playing 布尔值优先。canplay 仅恢复暂停且宿主可播放的 audio，保持公开接口与同步算法。",
+      "closureCriteria": "保留原始失败，精确事件复现并有旧核心/新核心三引擎回归；不可仅重复到绿灯。",
+      "resolutionEvidence": [
+        "refactor/baselines/audio-combinations-checkpoint.json",
+        "refactor/changes/2026-09-12-PKG-AUDIO-05-combinations.md",
+        "packages/artplayer-plugin-audio-track/ARCHITECTURE.md"
+      ],
+      "resolutionRationale": "失败日志确认 seeked 时间零、readyState=4、paused=false 而 art.playing=false。受控用例先红后绿，实际三格式 97 项通过；main/legacy 每组 78 项含三引擎旧/新核心组合通过。仅关闭此具体恢复缺陷，真实缓冲、策略与设备范围保持开放。"
+    },
+    {
+      "id": "AUDIO-BUFFER-01",
+      "title": "Windows WebKit 原生媒体无法在受限响应下推进至真实缓冲",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-AUDIO-05"
       ],
       "evidence": [
-        "refactor/baselines/audio-combinations-first.json"
+        "test/browser/audio-buffering.spec.js",
+        "test/browser/media-gate-native.spec.js",
+        "test/helpers/media-gate.js",
+        "test/media-gate.test.js",
+        "refactor/baselines/audio-combinations-checkpoint.json",
+        "refactor/audio-validation.md"
       ],
-      "compatibleResolution": "先核实 seeked/canplay 和宿主 playing 的事件顺序；修复真实可播放后音频缺少恢复入口，保持旧核心支持。",
-      "closureCriteria": "保留原始失败，精确事件复现并有旧核心/新核心三引擎回归；不可仅重复到绿灯。"
+      "compatibleResolution": "保留真实 waiting 断言；使用独立原生对照和其他实际支持环境/输入继续验证，不将没有播放推进的诊断当成缓冲通过，也不凭此改变插件 API 或否定真实 Safari 支持。",
+      "closureCriteria": "受影响的缓冲/恢复得到真实媒体证据；与原生能力和测试夹具差异分开，发布环境的剩余范围经显式处理。"
     }
   ]
 }

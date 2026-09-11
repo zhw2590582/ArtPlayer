@@ -2,7 +2,7 @@ import type Artplayer from 'artplayer'
 import type { Option, RuntimeResult, UpdateOption } from '../types/artplayer-plugin-audio-track'
 import { createAudioTrack } from './track'
 
-type AudioEvent = 'play' | 'pause' | 'seek' | 'destroy' | 'video:pause' | 'video:ended' | 'video:waiting' | 'video:emptied' | 'video:seeking' | 'video:seeked' | 'video:timeupdate' | 'video:ratechange' | 'video:volumechange' | 'video:playing'
+type AudioEvent = 'play' | 'pause' | 'seek' | 'destroy' | 'video:pause' | 'video:ended' | 'video:waiting' | 'video:emptied' | 'video:seeking' | 'video:seeked' | 'video:timeupdate' | 'video:ratechange' | 'video:volumechange' | 'video:playing' | 'video:canplay'
 
 export default function artplayerPluginAudioTrack(option: Option) {
   return (art: Artplayer): RuntimeResult => {
@@ -14,6 +14,15 @@ export default function artplayerPluginAudioTrack(option: Option) {
     function syncAudio() {
       if (art.video)
         track.sync(art.currentTime)
+    }
+
+    function canResumeAudio() {
+      const video = art.video
+      if (!video)
+        return false
+      if ('playing' in video && typeof video.playing === 'boolean')
+        return video.playing
+      return art.playing || (video.paused === false && !video.ended && video.readyState > 2)
     }
 
     function listen(event: AudioEvent, callback: () => void) {
@@ -54,7 +63,7 @@ export default function artplayerPluginAudioTrack(option: Option) {
       listen('seek', syncAudio)
       listen('video:seeked', () => {
         syncAudio()
-        if (art.playing)
+        if (canResumeAudio())
           track.play()
       })
       listen('video:timeupdate', () => {
@@ -69,7 +78,13 @@ export default function artplayerPluginAudioTrack(option: Option) {
         audio.muted = art.muted
       })
       listen('video:playing', () => {
-        if (art.playing) {
+        if (canResumeAudio()) {
+          syncAudio()
+          track.play()
+        }
+      })
+      listen('video:canplay', () => {
+        if (audio.paused && canResumeAudio()) {
           syncAudio()
           track.play()
         }

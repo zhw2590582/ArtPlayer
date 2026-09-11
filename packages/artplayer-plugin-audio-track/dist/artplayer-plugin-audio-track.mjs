@@ -84,6 +84,14 @@ function artplayerPluginAudioTrack(option) {
       if (art.video)
         track.sync(art.currentTime);
     }
+    function canResumeAudio() {
+      const video = art.video;
+      if (!video)
+        return false;
+      if ("playing" in video && typeof video.playing === "boolean")
+        return video.playing;
+      return art.playing || video.paused === false && !video.ended && video.readyState > 2;
+    }
     function listen(event, callback) {
       const listener = () => {
         if (active)
@@ -122,7 +130,7 @@ function artplayerPluginAudioTrack(option) {
       listen("seek", syncAudio);
       listen("video:seeked", () => {
         syncAudio();
-        if (art.playing)
+        if (canResumeAudio())
           track.play();
       });
       listen("video:timeupdate", () => {
@@ -137,7 +145,13 @@ function artplayerPluginAudioTrack(option) {
         audio.muted = art.muted;
       });
       listen("video:playing", () => {
-        if (art.playing) {
+        if (canResumeAudio()) {
+          syncAudio();
+          track.play();
+        }
+      });
+      listen("video:canplay", () => {
+        if (audio.paused && canResumeAudio()) {
           syncAudio();
           track.play();
         }
