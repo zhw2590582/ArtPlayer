@@ -1,0 +1,222 @@
+{
+  "kind": "generated-dash-media",
+  "version": "ffmpeg version 2025-11-12-git-6cdd2cbe32-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+  "duration": 12,
+  "videoHeights": [
+    90,
+    180
+  ],
+  "audio": [
+    {
+      "lang": "en",
+      "frequency": 440
+    },
+    {
+      "lang": "fr",
+      "frequency": 880
+    }
+  ],
+  "commands": [
+    [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-f",
+      "lavfi",
+      "-i",
+      "testsrc2=size=160x90:rate=24",
+      "-f",
+      "lavfi",
+      "-i",
+      "testsrc2=size=320x180:rate=24",
+      "-f",
+      "lavfi",
+      "-i",
+      "sine=frequency=440:sample_rate=48000",
+      "-f",
+      "lavfi",
+      "-i",
+      "sine=frequency=880:sample_rate=48000",
+      "-t",
+      "12",
+      "-map",
+      "0:v",
+      "-map",
+      "1:v",
+      "-map",
+      "2:a",
+      "-map",
+      "3:a",
+      "-c:v",
+      "libx264",
+      "-pix_fmt",
+      "yuv420p",
+      "-profile:v",
+      "baseline",
+      "-level:v",
+      "3.0",
+      "-b:v:0",
+      "150k",
+      "-b:v:1",
+      "350k",
+      "-g",
+      "48",
+      "-keyint_min",
+      "48",
+      "-sc_threshold",
+      "0",
+      "-c:a",
+      "aac",
+      "-b:a",
+      "48k",
+      "-ac",
+      "2",
+      "-metadata:s:a:0",
+      "language=en",
+      "-metadata:s:a:1",
+      "language=fr",
+      "-f",
+      "dash",
+      "-seg_duration",
+      "2",
+      "-use_template",
+      "1",
+      "-use_timeline",
+      "1",
+      "-adaptation_sets",
+      "id=0,streams=0,1 id=1,streams=2 id=2,streams=3",
+      "-init_seg_name",
+      "init-$RepresentationID$.m4s",
+      "-media_seg_name",
+      "chunk-$RepresentationID$-$Number%05d$.m4s",
+      "master.mpd"
+    ]
+  ],
+  "files": {
+    "chunk-0-00001.m4s": {
+      "sha256": "0bc9f5c9bfc50526dfdc0241ac5d2da2332097d738450a41887bceb8d0b1f305",
+      "bytes": 32029
+    },
+    "chunk-0-00002.m4s": {
+      "sha256": "a3baefa3f68381a844419beabdee422dc4298c102a7b45a9da16d89b74f461fc",
+      "bytes": 41742
+    },
+    "chunk-0-00003.m4s": {
+      "sha256": "f2540e0a1871967a910e25567aa19ce9aaef002bba84f8cdda8ca9bbc8abd40e",
+      "bytes": 36346
+    },
+    "chunk-0-00004.m4s": {
+      "sha256": "21905f15e90b22cd868d55924d44723b9a02a7b1132384a60b526e49646e9e07",
+      "bytes": 41226
+    },
+    "chunk-0-00005.m4s": {
+      "sha256": "9d0cb0486da40f3a4e6819a5964d4db945305d328cce6ce2c21a60a57c413f42",
+      "bytes": 35119
+    },
+    "chunk-0-00006.m4s": {
+      "sha256": "f52fd4ecf9d0276261b183c6e44096ad2f28267a5f2a0a15ac65cec8705b605f",
+      "bytes": 38357
+    },
+    "chunk-1-00001.m4s": {
+      "sha256": "389d6f02741679ed7ef43f529bbec746b5e1b62a97519ca80be16f114e76845c",
+      "bytes": 72180
+    },
+    "chunk-1-00002.m4s": {
+      "sha256": "5cc737843b84a064acb65d985b2ea7ff151c26937f5bf48cacdf0f39c9e60122",
+      "bytes": 94545
+    },
+    "chunk-1-00003.m4s": {
+      "sha256": "2a1b56d88858f3d9b6070ab8645d878b12f8baa29c567b038d190f89c2f863e6",
+      "bytes": 84303
+    },
+    "chunk-1-00004.m4s": {
+      "sha256": "be7198ae2b2d04e27748fcbe8669734a7ead3a51c25fb7f1c9d981740bf5f92d",
+      "bytes": 95672
+    },
+    "chunk-1-00005.m4s": {
+      "sha256": "502e3dd1ce6ca85c442ba849e605a1b0cb1ca23472af6fe6e0dacaea8a38d5dc",
+      "bytes": 82244
+    },
+    "chunk-1-00006.m4s": {
+      "sha256": "34d6e27576dc3c834d0aff9e5925581a899c354c4fdd34fc639cc63f9807c62f",
+      "bytes": 90139
+    },
+    "chunk-2-00001.m4s": {
+      "sha256": "23eaaffa433ed1808f57b95e14b85fba15b2d7e8eea6c51fd02ce409dbccf7de",
+      "bytes": 12437
+    },
+    "chunk-2-00002.m4s": {
+      "sha256": "f40e15cb8d377dcd4eeac508493694e4a131fd4a0d970ff2636b1b40fc728f0a",
+      "bytes": 12641
+    },
+    "chunk-2-00003.m4s": {
+      "sha256": "e1a1f49359d23f460f9b0a32df5f5da7ba6d234fe59cc4a9c0a5f7e201fed643",
+      "bytes": 12663
+    },
+    "chunk-2-00004.m4s": {
+      "sha256": "a5b0625a33a62cf2b73414c92b7c9f6ac945650d3ff6dadaff26705d10920bf6",
+      "bytes": 12657
+    },
+    "chunk-2-00005.m4s": {
+      "sha256": "ed446e2eb99474765e9b0eb40728bd5d79eba79e74b5fa688a0dbddfb3f4b82a",
+      "bytes": 12682
+    },
+    "chunk-2-00006.m4s": {
+      "sha256": "6b969d834a87836f84eac8769fba2962c8303aacbb832f4710e642a371c6e38e",
+      "bytes": 13008
+    },
+    "chunk-3-00001.m4s": {
+      "sha256": "9171ffc0421c4dc0f874eb8801c2df0b4bf312981a8841455b13081cca1b0feb",
+      "bytes": 12453
+    },
+    "chunk-3-00002.m4s": {
+      "sha256": "da7a827ad08e9b48647f2bc6c90d5db1b53ef15965575d38b7e9facbddd37fc1",
+      "bytes": 12644
+    },
+    "chunk-3-00003.m4s": {
+      "sha256": "3d5f9fd99a21ce3d59f11416936d79252a12bc95560988f1abe4ccf802733ebc",
+      "bytes": 12643
+    },
+    "chunk-3-00004.m4s": {
+      "sha256": "eeca9b9a3f91c8491ad663cb5d686b168c530dc771d46c35ff5919b3a8b4ee37",
+      "bytes": 12678
+    },
+    "chunk-3-00005.m4s": {
+      "sha256": "747526362131944d696b09059ba0a19c106e363a30fa07cf7ec86081c4e277e8",
+      "bytes": 12582
+    },
+    "chunk-3-00006.m4s": {
+      "sha256": "5234fd26fd201536c839a1740d3bd57a5fe8c86e3e180f7f1e4c70cc41f30072",
+      "bytes": 13077
+    },
+    "init-0.m4s": {
+      "sha256": "d0a16341c48647e27452db83de88f88209dbec7e539e159e5057469d28980881",
+      "bytes": 827
+    },
+    "init-1.m4s": {
+      "sha256": "3e814e958e68e98f947883a2b7511a36fb06db127ea074ccd569af0200839948",
+      "bytes": 828
+    },
+    "init-2.m4s": {
+      "sha256": "866460ae9e8465b1473c3dbbc63f38416815d75d906790109575cf1de8332423",
+      "bytes": 764
+    },
+    "init-3.m4s": {
+      "sha256": "866460ae9e8465b1473c3dbbc63f38416815d75d906790109575cf1de8332423",
+      "bytes": 764
+    },
+    "master.mpd": {
+      "sha256": "6a4cb0a956861dee9aff1c592525c41fb4cf660be86b4c3892a91a46aeec53ef",
+      "bytes": 2986
+    },
+    "single.mpd": {
+      "sha256": "bdbd8a027281cefec1d4021d7e5a2731875188eb331612bc35eef75f265a700b",
+      "bytes": 1227
+    },
+    "video-only.mpd": {
+      "sha256": "b7f8d37c023810ecc38a2564d4644eda4b5a0b0dd2d10dfd39f70a4b49be0566",
+      "bytes": 1622
+    }
+  }
+}

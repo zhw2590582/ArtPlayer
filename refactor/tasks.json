@@ -2058,11 +2058,16 @@
         "PKG-DASH-04",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "固定 dash.js 4.5.2/5.2.1 与本地 DASH 实际清晰度/音轨、高亮、Auto 和换源组合",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md",
+        "baselines/dash-sdk.json",
+        "baselines/dash-sdk-checkpoint.json",
+        "dash-validation.md"
+      ]
     },
     {
       "id": "PKG-DASH-06",

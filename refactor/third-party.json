@@ -1047,10 +1047,12 @@
       ],
       "sourceFiles": [
         "packages/artplayer-plugin-dash-control/src/index.ts",
-        "docs/assets/example/dash.control.js"
+        "docs/assets/example/dash.control.js",
+        "refactor/baselines/dash-sdk.json",
+        "test/browser/dash-sdk.spec.js"
       ],
       "contract": "Caller owns art.dash. Candidate adapts the released 4.x quality method surface and workspace 5.x stable representation ID surface. Controlled contracts and DOM validation pass; actual pinned 4.5.2/5.2.1 SDK media remains PKG-DASH-05.",
-      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "validationStatus": "Pinned real npm 4.5.2/5.2.1, generated MPD decoding, explicit update and source replacement now exercised. DASH-SEEK-01 remains open; Windows WebKit has no MSE. SDK declarations, automatic state refresh, full formats/devices/distribution remain incomplete.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

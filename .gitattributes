@@ -3,5 +3,8 @@
 test/browser/media/hls/*.m3u8 text eol=lf
 test/browser/fixtures/hls-grouped.m3u8 text eol=lf
 test/browser/media/hls/*.mpegts binary
+# Preserve generated XML whitespace and its frozen playback-input hashes.
+test/browser/media/dash/*.mpd text eol=lf whitespace=-blank-at-eol
+test/browser/media/dash/*.m4s binary
 test/browser/media/*.m4a binary
 refactor/baselines/core-vendor/*.txt text eol=lf

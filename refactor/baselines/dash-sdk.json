@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DASH-05",
+  "sdks": [
+    {
+      "metadataUrl": "https://registry.npmjs.org/dashjs/4.5.2",
+      "codeMember": "package/dist/dash.all.min.js",
+      "release": {
+        "name": "dashjs",
+        "version": "4.5.2",
+        "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-4.5.2.tgz",
+        "integrity": "sha512-WXPk0lPDSaHjiSVoVRh2jQPiMmB1alKUH8hV2CVmaI0vPUeT1wIY7madVE38SthfOmwS9IJViv1RrxrxdGjElg==",
+        "sha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+        "files": {
+          "package/package.json": "62b2295c4a92ec996ff066f7e5739893c46fce44d80c940c61ced9d5710226d1",
+          "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+          "package/index.d.ts": "13e6bd0a3c77e2db9378e355915929ed3dda5d8de9c48f446c9d3e9fb7154dbd",
+          "package/dist/dash.all.min.js": "17849c05872997095a63d74bde3fed6f79c14c6a48cdf904833d880b93a476da"
+        }
+      }
+    },
+    {
+      "metadataUrl": "https://registry.npmjs.org/dashjs/5.2.1",
+      "codeMember": "package/dist/modern/umd/dash.all.min.js",
+      "release": {
+        "name": "dashjs",
+        "version": "5.2.1",
+        "tarball": "https://registry.npmjs.org/dashjs/-/dashjs-5.2.1.tgz",
+        "integrity": "sha512-axcJmLeJCTJMLUfQRErUJB1KOiU5iHF+DMLBc3FKeox1HPYtGUQlC6Xm5Mm6vhBUR3CHHLIPOqw0JDIqMtP+Dw==",
+        "sha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+        "files": {
+          "package/package.json": "f89fa389855d2a21b380fa69c84735da25bd93e3b9d7c39bd0d634493425fd8c",
+          "package/LICENSE.md": "f7cc4ba24850cc564766c75923d07c3d22fa27f304285f4d25ecffeaec964e28",
+          "package/index.d.ts": "03b420509a480f893bf8253232cfd28428dc0be5f254fefe99a91e65847c010e",
+          "package/dist/modern/umd/dash.all.min.js": "3a22b1f4576ab294f41e56f156cec7972a5f83edda379416778293ff22d2eb49"
+        }
+      }
+    }
+  ],
+  "note": "Pinned SDK archives are test-only. Selected member hashes and whole-archive integrity; no production dependency or blanket SDK-version support claim."
+}

@@ -1,5 +1,24 @@
 # 进度与证据
 
+## 当前实施：DASH-05 真实 SDK 与 MPD 检查点
+
+已固定 npm dash.js 4.5.2/5.2.1 归档/成员/许可证指纹，新增本地双画质双音轨 DASH、
+纯视频和单画质拓扑，真实 Chromium/Firefox/WebKit 测试及不创建 ArtPlayer 的 SDK 对照。
+正式 main 共 54 项：36 通过、2 失败、16 因 Windows WebKit 无 MSE 跳过，不算播放验收。
+外部 SDK 选择后的同步 update、连续换源/菜单清理、旧回调及调用方 SDK 销毁所有权通过。
+
+两个 main 失败均为 SDK 4.5.2/发布插件的暂停 seek：新旧核心都可在 5.999999 秒缓冲
+终点 seek 到 6 秒后停滞。DASH-SEEK-01 保持 open；AbortError 是超时后销毁的结果，
+不能当作起因。原生对照通过不足以定位或关闭它，首次 Firefox/候选插件失败也仍保留。
+已修正能力探针错误销毁未初始化 SDK、以及换源测试误保留可变 option 对象两个测试问题。
+完整本地工程 CI 717 项通过、261 个生产 TS 严格检查通过；该 CI 不含上述失败的 SDK 浏览器套件。
+生成器在同一 FFmpeg/主机的新目录重建 31 个资源，全部字节一致，已查看实际播放截图。
+
+当前 217 项：74 done、4 doing、139 todo。DASH-05 尚未完成；实际 SDK 类型、自动状态
+刷新/错误、legacy SDK 矩阵、设备和完整分发继续推进。此次没有修改生产源码、依赖或版本。
+详见 [本批记录](changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md)、
+[执行证据](baselines/dash-sdk-checkpoint.json)。以下各节为对应阶段当时的历史状态。
+
 ## 最新完成：DASH-04 严格 TS、公开类型和编辑器迁移
 
 DASH 五个自有模块全部 TS 化，源码/公开工厂可互相赋值；默认字段和自定义 SDK 泛型准确，

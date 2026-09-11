@@ -114,10 +114,17 @@ tarballs offline outside the workspace, repeats a frozen install and checks all
 public type modes without resolving any workspace source. It also verifies that
 implementation files/config do not leak into the archive. This is type acceptance;
 the full installed runtime and SDK release matrix still belongs to PKG-DASH-06/05.
-Browser tests exercise real old/new core DOM, menu clicks, native MP4 and cleanup,
+`dash-control.spec.js` tests exercise real old/new core DOM, menu clicks, native MP4 and cleanup,
 with controlled SDK methods. They do not load dash.js or test MPD/ABR decoding.
 PKG-DASH-05 must verify pinned dash.js 4.5.2 and 5.2.1 with real adaptive media and
 review SDK-driven refresh/source events and the existing demo lifecycle. Physical
 devices and installed package acceptance remain separate release gates.
+`dash-sdk.spec.js` now separately loads hash-pinned npm dash.js 4.5.2/5.2.1 and local
+multi-quality/multi-audio DASH segments. It covers decoding, explicit update after
+external selection, source topology replacement, retained callbacks and SDK ownership.
+It also includes a native SDK control without an ArtPlayer instance. Early SDK 4.5.2
+paused-seek stalls remain open; later passes do not resolve them. Unsupported MSE is
+recorded as a playback capability gap, not acceptance. This plugin currently refreshes
+on ready/restart/explicit update, not automatically on external SDK events.
 See [refactor validation](../../refactor/dash-validation.md) for baseline failures
 and [task plan](../../refactor/plan.md) for remaining type and release work.

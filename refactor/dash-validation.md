@@ -19,6 +19,13 @@
   TS 4.3.5/5.9.3、五种模块模式、八条非法用法及实际 npm 旧声明的消费者对照。
 - `yarn test:dash-types-package`：Yarn 打包核心/DASH、工作区外离线安装与冻结锁重装，
   检查五种模式、CommonJS callable/命名空间、每模式八条非法调用，并拒绝解析回工作区。
+- `yarn test:browser test/browser/dash-sdk.spec.js --trace on`：真实 npm dash.js 4.5.2/5.2.1，
+  本地多画质/多音轨 MPD，新旧核心/插件、外部同步 update、连续换源和 SDK 原生对照。
+  `ARTPLAYER_DASH_ARTIFACT` 可选择正式 main/legacy；未指定则测试源码构建。
+  无 MSE 的引擎只通过能力探针，播放用例明确跳过，不计为该引擎 DASH 验收。
+- `node --test refactor/scripts/dash-sdk.test.mjs`：SDK 归档/成员/许可证来源、媒体指纹与拓扑。
+  如需重新合成诊断媒体，用 `node scripts/generate-dash-fixture.mjs refactor/.cache/new-dash-media`，
+  输出目录必须不存在；可通过 `ARTPLAYER_FFMPEG` 指定 FFmpeg，不覆盖已冻结输入。
 
 Node helper 分别加载当前源码、固定 Git 提交的旧工作区 UMD、实际 npm main/legacy/module。
 Git 内容以 LF 指纹核对，发布归档与成员以原始字节指纹核对。`ARTPLAYER_TEST_DASH` 可指定
@@ -29,10 +36,12 @@ Git 内容以 LF 指纹核对，发布归档与成员以原始字节指纹核对
 原始轨道身份、调用顺序、错误身份、ABR 配置保留、换 SDK、多实例和关闭后的引用。
 真实旧实现的缺陷观察保持冻结；候选生命周期新增正确行为断言，不把历史缺陷当作兼容要求。
 
-浏览器使用真实发布/候选 ArtPlayer DOM、真实发布/候选插件和本地原生 MP4。SDK 方法可控，
+`dash-control.spec.js` 使用真实发布/候选 ArtPlayer DOM、真实发布/候选插件和本地原生 MP4。SDK 方法可控，
 断言真实点击触发的参数及控制栏/设置同步，再通过真实播放按钮验证视频时钟推进、无媒体错误。
 **没有加载 dash.js，没有验证 MPD、ABR 自动切换或自适应流解码。** 这些仍是 05 必须完成的
-固定 dash.js 4.5.2 / 5.2.1 集成验证。`ARTPLAYER_DASH_ARTIFACT` 可替换插件脚本；02 未设置，
+固定 dash.js 4.5.2 / 5.2.1 集成验证。独立 `dash-sdk.spec.js` 已开始真实验证，状态以
+[05 检查点](changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md) 为准；不覆盖早期停滞失败。
+`ARTPLAYER_DASH_ARTIFACT` 可替换插件脚本；02 未设置，
 03 分别使用正式 main 与 legacy 文件。核心仍按服务端 manifest 加载发布/候选源码构建。
 
 ## 02 首次失败与证据

@@ -2850,7 +2850,8 @@
         "test/dash-contract.test.js",
         "refactor/dash-validation.md",
         "test/dash-lifecycle.test.js",
-        "refactor/baselines/dash-runtime.json"
+        "refactor/baselines/dash-runtime.json",
+        "refactor/baselines/dash-sdk-checkpoint.json"
       ],
       "compatibleResolution": "按方法能力适配两代已存在用法，保留 v5 稳定 ID，不能要求旧消费者改用新 SDK。",
       "closureCriteria": "归档旧用法、v4/v5 受控及实际媒体矩阵通过，清晰度键不混用。"
@@ -2903,7 +2904,8 @@
         "test/dash-contract.test.js",
         "refactor/dash-validation.md",
         "test/dash-lifecycle.test.js",
-        "refactor/baselines/dash-runtime.json"
+        "refactor/baselines/dash-runtime.json",
+        "refactor/baselines/dash-sdk-checkpoint.json"
       ],
       "compatibleResolution": "验证零 ID、重复标签和克隆音轨当前项，在保持原展示语义时按实际可选项定位高亮。",
       "closureCriteria": "有受控和真实 SDK 证据说明选中的 representation/track 与 UI 一致。"
@@ -2950,6 +2952,23 @@
       ],
       "compatibleResolution": "验证真实 SDK 销毁和示例重载路径，对齐 v4/v5 文档与示例，不让旧监听误操作新实例。",
       "closureCriteria": "真实 8082 demo、旧/新 SDK 路径与 tarball 产物一致，监听和 SDK 所有权可验证。"
+    },
+    {
+      "id": "DASH-SEEK-01",
+      "title": "真实 dash.js 4.5.2 暂停 seek 到缓冲片段边界后可能持续 waiting",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DASH-05",
+        "REVIEW-02"
+      ],
+      "evidence": [
+        "test/browser/dash-sdk.spec.js",
+        "refactor/baselines/dash-sdk-checkpoint.json",
+        "refactor/changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md"
+      ],
+      "compatibleResolution": "先比较实际 SDK、SourceBuffer/video 缓冲与暂停 seek 调度；不偏移公开 seek 目标，不吞异常或增加超时伪造通过。",
+      "closureCriteria": "原失败的新旧核心/插件组合有确定根因与对应修复/可验证环境边界；原生对照及原顺序、原目标回归成立，后续偶然通过不能关闭。"
     }
   ]
 }
