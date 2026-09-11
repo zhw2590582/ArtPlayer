@@ -84,3 +84,14 @@
 | BASE-DOM-14 | resolved / 已复现 | Unready media sizing partially overwrites layout and emits NaN height | CORE-16 |
 | BASE-DOM-15 | resolved / 已复现 | Auto orientation exit clears caller-owned inline dimensions and transforms | CORE-16 |
 | BASE-LIFE-22 | resolved / 已复现 | Orientation lock success after fullscreen exit reactivates a cancelled player | CORE-16 |
+| BASE-DOM-16 | resolved / 已复现 | Hotkeys intercept input in rebound documents and shadow roots | CORE-17 |
+| BASE-DOM-17 | resolved / 已复现 | Prototype-named hotkeys fail registration through inherited keys properties | CORE-17 |
+| BASE-LIFE-23 | resolved / 已复现 | Repeated Hotkey initialization accumulates keyboard subscriptions | CORE-17 |
+| BASE-LIFE-24 | resolved / 已复现 | Mutable capture options and partial native registration failures leave listeners behind | CORE-17 |
+| BASE-LIFE-25 | resolved / 已复现 | Failed global rebinding drops the old document and retains partial new listeners | CORE-17 |
+| BASE-LIFE-26 | resolved / 已复现 | Click callbacks that destroy the player still trigger subsequent default playback actions | CORE-17 |
+| BASE-LIFE-27 | resolved / 已复现 | Cancelled, locked or replaced touches continue a previous seek gesture | CORE-17 |
+| BASE-LIFE-28 | resolved / 已复现 | Gesture callbacks continue seeking or updating progress after destruction | CORE-17 |
+| BASE-LIFE-29 | resolved / 已复现 | Scroll throttle reset timers remain pending after player destruction | CORE-17 |
+| BASE-LIFE-30 | resolved / 已复现 | Screen orientation changes are ignored when onchange is initially null | CORE-17 |
+| BASE-DOM-18 | resolved / 已复现 | View visibility uses the original global viewport after container adoption into an iframe | CORE-17 |

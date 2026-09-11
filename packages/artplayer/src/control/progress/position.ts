@@ -1,8 +1,15 @@
-import type { ControlHost } from '../types'
 import { clamp, getRect, isMobile, secondToTime } from '../../utils'
 
 export type ProgressEvent = MouseEvent | TouchEvent
-type ProgressPositionHost = Pick<ControlHost, 'template' | 'duration' | 'isRotate' | 'top' | 'height' | 'emit' | 'seek'>
+export interface ProgressPositionHost {
+  template: { $progress: HTMLElement }
+  duration: number
+  isRotate: boolean
+  top: number
+  height: number
+  seek: number | string
+  emit: (name: 'setBar', kind: 'played', percentage: number, event: ProgressEvent) => unknown
+}
 
 export function getPosFromEvent(art: ProgressPositionHost, event: ProgressEvent) {
   const { $progress } = art.template
@@ -15,16 +22,18 @@ export function getPosFromEvent(art: ProgressPositionHost, event: ProgressEvent)
   return { second, time, width, percentage }
 }
 
-export function setCurrentTime(art: ProgressPositionHost, event: ProgressEvent) {
+export function setCurrentTime(art: ProgressPositionHost, event: ProgressEvent, active: () => boolean = () => true) {
   if (art.isRotate) {
     const percentage = ((event as TouchEvent).touches[0]!.clientY - art.top) / art.height
     const second = percentage * art.duration
     art.emit('setBar', 'played', percentage, event)
-    art.seek = second
+    if (active())
+      art.seek = second
   }
   else {
     const { second, percentage } = getPosFromEvent(art, event)
     art.emit('setBar', 'played', percentage, event)
-    art.seek = second
+    if (active())
+      art.seek = second
   }
 }

@@ -14,6 +14,7 @@ export interface Events {
   'document:mouseup': [event: Event]
   'document:keydown': [event: Event]
   'document:touchend': [event: Event]
+  'document:touchcancel': [event: Event]
   'document:touchmove': [event: Event]
   'document:mousemove': [event: Event]
   'document:pointerup': [event: Event]

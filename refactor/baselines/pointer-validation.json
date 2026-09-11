@@ -1,0 +1,1428 @@
+{
+  "task": "CORE-17",
+  "date": "2026-09-11",
+  "status": "partial",
+  "phase": "pointer-interaction",
+  "parentCommit": "88aef830dfb583294ce29088d0ba92d9cf522d05",
+  "source": {
+    "packages/artplayer/src/component/dom.ts": "740f63e6e5942c444b9f05605880f8d56a77b066dbe5c4791da74f78cb96c668",
+    "packages/artplayer/src/component/resources.ts": "ff158ef0db8ba13343ff6ba329713820cfe2f5c2c446a7873a6cfff782855edf",
+    "packages/artplayer/src/component/selection.ts": "1f0bd089415da28db862647ffd1a0b4af752576465fb616d4b97ae4f8dcae3a7",
+    "packages/artplayer/src/component/types.ts": "d7b0e7008b0f6c82e3e97ac43e0188598dca4f740a860e7a60b3b38a46f4565d",
+    "packages/artplayer/src/config/index.js": "d6d2bd612daaf6c5c6e982158acbdf724b16d3c35bb5f1a5c923284665a8de79",
+    "packages/artplayer/src/contextmenu/aspectRatio.ts": "a25464e14216b2be392fcb3fdda2439e6d6f98d1962f0acbba30e3bd53bcb2d4",
+    "packages/artplayer/src/contextmenu/close.ts": "84b7a96df910e6f38140df8b1e73519d209a7331e9be9f42d076ae791757024f",
+    "packages/artplayer/src/contextmenu/flip.ts": "42c192d23e347d74e0bb814697a4d59eac20afbec102a282d5aa15780cab5f72",
+    "packages/artplayer/src/contextmenu/index.ts": "4fd292a931b5bda9f16a1c2bedd50cd0d8c0b8fb6010ffc5faaad2c197d2d9e5",
+    "packages/artplayer/src/contextmenu/info.ts": "f37cf0104510c13a130d2f55114c8f7ff15cc1b51863f97e60825442bdb2bf01",
+    "packages/artplayer/src/contextmenu/playbackRate.ts": "e177f4017ea9291794fb4023715c81bfc01f927324ab9bd0e32c741e4a3b0ca7",
+    "packages/artplayer/src/contextmenu/types.ts": "a93fc90f4e17b731e8f6b486a507117810b61c1f1b0d9e775eba27dabeaeee1d",
+    "packages/artplayer/src/contextmenu/version.ts": "0553a716be0ba49f614059c41eef6dc694a9641fca79e6448b1b30382c6b582b",
+    "packages/artplayer/src/control/airplay.ts": "a02ab41654a963e06fb2eb206cfe606cebc27252ba00b3fc2116ea232c8d7d51",
+    "packages/artplayer/src/control/builtins.ts": "2a0e12a9741713c92938e1d2009149bbbde498284aa85c63f270d02b27dc22b1",
+    "packages/artplayer/src/control/fullscreen.ts": "6856d98530877b9458275d8e064a94a81b9e2a4de079cce1a83e7cbe71e5ab8b",
+    "packages/artplayer/src/control/fullscreenWeb.ts": "e20f8fe9788738adfccb21e7bf248e5e8068312e856bb2626d05fbb20cfdb65d",
+    "packages/artplayer/src/control/index.ts": "ce23b79a0a40f22bdd8ad5f461d6b0df9366c7e4ab78571e0c67649f6e6d38e7",
+    "packages/artplayer/src/control/layout.ts": "b5134a9d0cb5ad128b1fb229dce79a306b944f750d8620e224a99f5791e6cab5",
+    "packages/artplayer/src/control/pip.ts": "9299d785ce21b16dc9edbcb6a803f8748157ed16e1924f461bdbc4853adaa5ac",
+    "packages/artplayer/src/control/playAndPause.ts": "e65461f5bf29680f12b7e0efa7d44186f07bbe9936247a9a220f724c9d9774bb",
+    "packages/artplayer/src/control/progress/interactions.ts": "19d6f73c21f75daaef109247bee392d82b46fecffd04be0944386c307496b250",
+    "packages/artplayer/src/control/progress/position.ts": "1008c5129097cd2c51fefb56e88e9df6fa07f09ed5f4492505da9153d8284cd1",
+    "packages/artplayer/src/control/progress/view.ts": "60ee16d5170be81b8132bb56dd0bc0eaf23e50f5c268d0697c9187b38a14aba9",
+    "packages/artplayer/src/control/progress.ts": "f0876ddbdc01f812a5a776bdeefdff8dc52e557aff684f99b5ea7f6bfc8c0fb3",
+    "packages/artplayer/src/control/resources.ts": "16fd7c53ac8f47b333041c4f298313390dc102523d47767b8a16f39a2564ba74",
+    "packages/artplayer/src/control/screenshot.ts": "430dc1b0283bc8a5c5396539b291dce1197470611696b32fde4b2c56d2db6b1f",
+    "packages/artplayer/src/control/selector.ts": "5d946c36d0308f32e08dd0e189f0c959f738ed7ab521230833c76a5bf9ca6478",
+    "packages/artplayer/src/control/setting.ts": "63e9824ffee2221ba82be9f2bc430b9b3133a2186905fcce2a61b8aa946a3d8a",
+    "packages/artplayer/src/control/time.ts": "fa572092e0848878689367fb536e9658d13888d0a0d476babc5acd165af0f8d3",
+    "packages/artplayer/src/control/types.ts": "7fab47c7106efa51aae89026af335f74d9f3ea52ef9864ec2801d0ea2deffc4c",
+    "packages/artplayer/src/control/volume.ts": "b50d1a5d2697d6440ac0f3d82634b13f7c2fff00c185a1adf4451ed8ba810709",
+    "packages/artplayer/src/display/fullscreen-abandoned.ts": "1715b30d336976921b4957b444418702b7d93dbf1debce47429269638d15810f",
+    "packages/artplayer/src/display/fullscreen-adapter.ts": "71da10ec21c7706a8264badedac9022c74b865887931e9e369168fe3233c3b2f",
+    "packages/artplayer/src/display/fullscreen-request.ts": "c6292ded96aab0f2dbc978af251f6cd9f5fd074819529ca498077db8d14e1bfe",
+    "packages/artplayer/src/display/mini-drag.ts": "73d2f48f868c0ba4d8d5e5df40cbbdb4698c26540f3973b178d9cd374008f1cb",
+    "packages/artplayer/src/display/mini-layout.ts": "3835fe3d314da2fc624cbeb0e79fcdfa5393f08d87dfde730d2eac4e827f405b",
+    "packages/artplayer/src/display/mini-view.ts": "83a6e5c6d1923332973009b7ac1561f7a55fb72e5c60e5ebc88af1fa4b641d5e",
+    "packages/artplayer/src/display/mini.ts": "3ffae49b1407523da2dc5f2bc687018268f6c1d1d3c71911dd4aa96d1a66c1dc",
+    "packages/artplayer/src/display/native-fullscreen.ts": "323401f2b3ea5186da981a1215b1b9e7dcf4ef4261a8e885fe8ff0c090de6a7a",
+    "packages/artplayer/src/display/native-pip.ts": "647879ae027cc0ebe684daa31d75511dd882e123e4ca8da2942e659bae3719f2",
+    "packages/artplayer/src/display/orientation-native.ts": "909980ba837471d9b456545a18fb0ab19f0990e8788936f0580a4b332cd4baee",
+    "packages/artplayer/src/display/orientation-types.ts": "911207b0a3a9d4c2d0ef10b65ce7ace67e29e274fb922a8679fe818cf043d08c",
+    "packages/artplayer/src/display/orientation-web.ts": "aea55c3b9e8c708fe5559f07cf8f0afd7ad37ac5b1a43bf519245c3072ec4129",
+    "packages/artplayer/src/display/placement.ts": "dbe4491ebd0f46b4efe13ac567e476fcd9ca5b84da675f19025935b5e3f8d733",
+    "packages/artplayer/src/display/sizing-types.ts": "da9b3d957dafaca9331f7319257dd8156b3c3e7b6db11f33f11ded48512450ad",
+    "packages/artplayer/src/display/sizing.ts": "c19856976320f1f35ff5a1049d19a940768300e095270b336dd12861b200da2a",
+    "packages/artplayer/src/display/types.ts": "9dff7ee42c0cd1a9ab37a5acd9788b30ad01455bfd2f3abc2f4e1f157bf16c89",
+    "packages/artplayer/src/display/video-fullscreen-state.ts": "5fcb5e6b80ac45577664ef67e0460e0ceefd4022cafacdd7434c376a86d619be",
+    "packages/artplayer/src/display/video-fullscreen.ts": "b425bf0df462524b5d3accc9e3df383c6635676c152bf4bef09c477a90662728",
+    "packages/artplayer/src/display/web-fullscreen.ts": "dd2c5cf65cfe35d6b5a87d01acb28f48119b27fe6e5f0c6a8b9bab3db1a1923f",
+    "packages/artplayer/src/display/webkit-pip.ts": "3617927b4bb8fa46f651d0e584141f804ae438e2b4531cc2e9cf9f7eeb027550",
+    "packages/artplayer/src/events/clickInit.ts": "bd1ba29fe0af4332ceb19297797c4c942a3a74bfd901998d6b93293f1b309300",
+    "packages/artplayer/src/events/gestureInit.js": "a5dcdb4216c8e3544fc85a1b4d3ebd929ec6f7d51ab17f2cee713030ae7ad464",
+    "packages/artplayer/src/events/global-types.ts": "3f4672d7af959cfa34ba39aa84ce614f422901437686bba98b14f578df40021c",
+    "packages/artplayer/src/events/globalInit.ts": "1d57f919a8b9e35a935846f7243b8a84e636f0f5e255e27062b1084c36555c61",
+    "packages/artplayer/src/events/hoverInit.ts": "d1250e0dd35a8ba8067275986acbe6320c22adf1a977ec1009c0c012ed1563fe",
+    "packages/artplayer/src/events/index.js": "39ac053f68e13a333ab778a62ca46b45478937a56cf32f1caeefedb510fb1bee",
+    "packages/artplayer/src/events/listener-registry.ts": "fb062df5151c4e8e970de469f1c7d9af948f72214d32c293c81a5feeb8406124",
+    "packages/artplayer/src/events/moveInit.ts": "11342cb9c97c8ff728bbf6b47e58ce93a43062d4f69cf6cbbbc0a6f8d086c8fe",
+    "packages/artplayer/src/events/resizeInit.js": "26fc9628490e6c45ef741e7bc7c1353097b21da1dc83aae65dc80783226e36bc",
+    "packages/artplayer/src/events/updateInit.js": "1b4ef85c819ae68eb0de1791241b2c3d4e22bb108746518fa67f7c322591e55a",
+    "packages/artplayer/src/events/viewInit.js": "2b4ce508812b8f03cf5801a5e3a7eaa4a5a8b05d6be500d217aeb6231fb93a51",
+    "packages/artplayer/src/hotkey.ts": "d8e477bf451143e566e1f743a5f253dcf00beb23544709794779f275e11498e8",
+    "packages/artplayer/src/i18n/ar.ts": "c1e41787c700096ecbc91de6558353f43d8930929ee312b7aa2c7da14a07ec75",
+    "packages/artplayer/src/i18n/cs.ts": "62c5ffcf3ac24e0dc2d7222b7ebb2b4d3454e9c04b80930a50defb3867d645be",
+    "packages/artplayer/src/i18n/es.ts": "5d31184b41ef29c1544c91ff08e3bbf9fc5c5776f0af0aa0238f90a9d161b9b1",
+    "packages/artplayer/src/i18n/fa.ts": "1294b91178ebdc7bc26d14a6f407ba8598207ae0dc812f3b821b62b7bf0089e5",
+    "packages/artplayer/src/i18n/fr.ts": "7125c0011b90f507d5b5fe20afd875992b62af9cdd44f02bbabed051c4ebc107",
+    "packages/artplayer/src/i18n/id.ts": "0d2e79cc0118cff6be83786a3fc048461785a64bdffc6bc45ffb68cb595f6da4",
+    "packages/artplayer/src/i18n/index.ts": "09c6f5bce58e4118dde10e8b2a2d3808785b7fde913a54dd189e0b473e21266a",
+    "packages/artplayer/src/i18n/pl.ts": "f6fb58a0d3fa118e22cfa6df5edd74c7bf39dc9ff1d416fb2b01e1bb8708b06f",
+    "packages/artplayer/src/i18n/publish.ts": "5b216bbe313b3cda56a5da41fba4fb9d095eeec0dc903fcf284ddd8f94926e99",
+    "packages/artplayer/src/i18n/ru.ts": "473c43197acec10991b0f67814f79421dfe9ec4f534fb15413a32cf2a4d8ad38",
+    "packages/artplayer/src/i18n/tr.ts": "7b6afbbe452c4907c8bef36663bd218fd140bd1a4b3c776f31c53415e78e8f16",
+    "packages/artplayer/src/i18n/vi.ts": "29ea7f23d7400c847596632c86a4ca10c39cbafe1e6d723ed099b819aca7e764",
+    "packages/artplayer/src/i18n/zh-cn.ts": "22584521b0aa92da5278b01581e6e8e5bb3a23a2c3029e9df8642b7f0bded392",
+    "packages/artplayer/src/i18n/zh-tw.ts": "8da94a4fd508176bbb6b7ce2f4ba6ef6a56e7b1229bc67cc42d1a7bde70a7e9d",
+    "packages/artplayer/src/icons/airplay.svg": "8c75a40f1bfacee2be2a425e132ff51f3712eba60679010f7b1349d4a04374bc",
+    "packages/artplayer/src/icons/arrow-left.svg": "8b9d544b7bd728d01747005fc7a2d63f822eed3b605393e2435b6733861b585f",
+    "packages/artplayer/src/icons/arrow-right.svg": "68c63d6d5810173ec9192c9e96ee7b6aefdc3b79d3c1329fb4d6c750f859fe10",
+    "packages/artplayer/src/icons/aspect-ratio.svg": "987752a87701523057d8dfa7c45a6a139c4542b96fdcfaf8665722bbeb41f3b2",
+    "packages/artplayer/src/icons/check.svg": "963ce0aee2337fdee951aa6c917cc75ee0b4e75158887ccc16baebfd3925942b",
+    "packages/artplayer/src/icons/close.svg": "ebabfe8044f48d5df4d13f4f906a163fd55a4d6f1dedb3b5ba95601209bc8888",
+    "packages/artplayer/src/icons/config.svg": "e1884d5411296b5cd1bfec7803b558b0afa5ab64478393977b07a662e2e0f15c",
+    "packages/artplayer/src/icons/defaults.ts": "31df862d754922fe5d68b20911c477d7c22893a6a67b5dcb1a48d3b437a0b23a",
+    "packages/artplayer/src/icons/error.svg": "b40c01e511a599c9dd369aeb9a3b2a0d1a76ef3c5ede8124cbbc23f8e4e7248c",
+    "packages/artplayer/src/icons/fast-forward.svg": "abef6fe4d75ffa74d3a84683373b4702a4eda2a5b4045952f969ee62cc68b0be",
+    "packages/artplayer/src/icons/flip.svg": "474a9d53a97add71e3fb7bc6530a68580ce63a1d83f9b75d1c2908a7cf494152",
+    "packages/artplayer/src/icons/fullscreen-off.svg": "71125ac56586897e2c0e52035a4d65cff34cf52043a95b45d186e0d268671399",
+    "packages/artplayer/src/icons/fullscreen-on.svg": "d46cdf265cac729c9b7382722ebe7a4c76d71ad4e5a27c2d5ed8323fd595ebf5",
+    "packages/artplayer/src/icons/fullscreen-web-off.svg": "52a6862ecd7cba12ab7042de5064c498bc2e9f86b430358c912401fafe4f4a98",
+    "packages/artplayer/src/icons/fullscreen-web-on.svg": "5cfaae62b61456251e771bff01356fad8376ebedb10a4b8819740f60e6e5a073",
+    "packages/artplayer/src/icons/index.ts": "3ef720aee403e6b7baf1ab472dbdd16c671f2d691ecea48ff1c25ca1ffc66296",
+    "packages/artplayer/src/icons/loading.svg": "485472153890eff3ed49963f7bf7d841f66ca2f40894c01d6e8bcf1bf4ad1c58",
+    "packages/artplayer/src/icons/lock.svg": "431e9a25fae051016be0efa286387ec3e5f7651c3ecf569bf0ece9842f57156c",
+    "packages/artplayer/src/icons/pause.svg": "57405dba81dd3d9f329d957fdc704101cbb6f6654325eb0083c03324c4453a68",
+    "packages/artplayer/src/icons/pip.svg": "1e922140e0941e5b9ef53dc0b4776813e1c470ea229fe3ec786fd148148c3352",
+    "packages/artplayer/src/icons/play.svg": "41a961c629a55cb25a813e115a25204e492d4e935a0879177e65d6e1ddfd6796",
+    "packages/artplayer/src/icons/playback-rate.svg": "872deecac0365ab04aeb5ccb1cdd9a0c88589a1442709fdac7c0ed12a241ff2b",
+    "packages/artplayer/src/icons/screenshot.svg": "538b5cd0c6b20afb98bd850e15019072d652d191075c2869f2fc0f28b597b131",
+    "packages/artplayer/src/icons/setting.svg": "2976b00d1f03e78f28d0e55ebcb01d5a0746ec1a6ff8de97a5e8294bacdd1fad",
+    "packages/artplayer/src/icons/state.svg": "620a127f74bb5e249993bd7008c027373263eacb4a44af8adeaa0d7523346887",
+    "packages/artplayer/src/icons/switch-off.svg": "95a8d81a4a3bfcf7c016d5f71d46a72be73c5e94790c55fd1d31023416ef5deb",
+    "packages/artplayer/src/icons/switch-on.svg": "cccd0f9c1e54d9ac50c323360da944d8ff44633a82ff17889914b6bc8b1652ae",
+    "packages/artplayer/src/icons/unlock.svg": "fc058db3d99a475fb9ffbbbb6248978a95990a9c532b83d0955ac28eaa626c60",
+    "packages/artplayer/src/icons/volume-close.svg": "f7e100fd9e9f3f6e06afe5bc994d5d9305ee4d1ee23fae37e4108cf286dab379",
+    "packages/artplayer/src/icons/volume.svg": "3a78f40d8b48595e8f15d9189e4d767e0c7abbf0338d3f2db1ac810049dd3942",
+    "packages/artplayer/src/index.js": "cb874ac34fa650bd364b3fef7eed4830bf3bd47093097ae7ba0432e7e64b1a10",
+    "packages/artplayer/src/info.js": "6dcdb4457d63ddb74fb6268df64522722420d6c0eb7b1654d6fb7703466d3b8c",
+    "packages/artplayer/src/input/hotkey-defaults.ts": "c28e14821e5c7f7ac92a302e92439ab68fe77d5ef7d90a36b147b7c979ab96c6",
+    "packages/artplayer/src/input/hotkey-types.ts": "30a4354e89f96a10bd15e3b94ce03050286d5cb4641b8f951fd17c0724afc238",
+    "packages/artplayer/src/input/keyboard-focus.ts": "9f49538e93c23e07a448a8f9c9773cbc2e199c6d86e7e0adb59236ce97a07fb5",
+    "packages/artplayer/src/input/pointer-focus.ts": "802087098c786135eefa6727f13177ffe4a98e2abf48fad0e356b91e26960077",
+    "packages/artplayer/src/input/pointer-types.ts": "ad542779ae4030c7619b5874fb33466cbd45af5ddb72d3ce984c09f54b24dccf",
+    "packages/artplayer/src/layer.ts": "4014268eed043d5dd7b925cdeef6245e357cda67192a1301c5612ef98cdbec12",
+    "packages/artplayer/src/libs/screenfull.js": "2332b50c0c6364d5c99080be0f5739255e4b9e465d2cca40f761adce9a1908f8",
+    "packages/artplayer/src/lifecycle/instance.ts": "19a89de4ae22cb57eea7302265ce07422d12d1aea5acb99deb44fd0dba351a13",
+    "packages/artplayer/src/lifecycle/resources.ts": "399ea5e84545c973f8967e8ffd7326dad7b3168ca6f96f77286995a5b62ee389",
+    "packages/artplayer/src/lifecycle/scope.ts": "e2188e8544b27cf8c7ac149e7146af628a2d6166c82b719a247adef5d85be5db",
+    "packages/artplayer/src/lifecycle/template-rollback.ts": "7a83da6739bcec1587b02f8157934988910d7f9103fe489a0d6f4f65290c3d77",
+    "packages/artplayer/src/loading.js": "4b08a8f9fa69f71d054cdf1508bbb9e92c075c8df1eda0fa8a79efbf08eb8c40",
+    "packages/artplayer/src/mask.js": "094162e28ec76c81f73bb7bfe276bf5832080ffb7aa9d9dc9dc013479659c2e5",
+    "packages/artplayer/src/media/events/forward.ts": "6b1b7e80036bfb523b51843dc6ec6d83c2b949cefb9cef085b2d679a444e46d8",
+    "packages/artplayer/src/media/events/listen.ts": "4eb7e943c1ebca77da8025d83b7d408276187cd02860b7793284344378bd0fe0",
+    "packages/artplayer/src/media/events/playback.ts": "2c68e4f6274a0dc65e56d42c928e500fc1d63bf3e03bbdd8a83c3f3ed7ae8ee4",
+    "packages/artplayer/src/media/events/readiness.ts": "3ba74f26dd9ff0729967097c2cb6f329a9cea57745bfe8173f9173e0d134476a",
+    "packages/artplayer/src/media/events/reconnect.ts": "876027b5116d0d3628755705682b30630f4b713199ed8015541932d81d2944be",
+    "packages/artplayer/src/media/events/types.ts": "5532f57129032a9685305d0d319543146c3e8af134ac12c8aa521cca9e83a6c2",
+    "packages/artplayer/src/media/hosts.ts": "7129cb93290a250e932464b71a4e4abce8a98e83935d4fd6c36a59fc6357b6af",
+    "packages/artplayer/src/media/playback.ts": "b0e8ae22f2660249361bf05bb2333685e14f5a7ac3e9ba0c62ee7efd38338b93",
+    "packages/artplayer/src/media/types.ts": "96d4a7f066cbb6fb9138165dd736b4ca500cb19c827bd7702134d61c44cc0e87",
+    "packages/artplayer/src/notice.js": "72e97833e0499993d8d133111e32f32f031b911426117397be2003e824023664",
+    "packages/artplayer/src/option/defaults.ts": "f357ef80cf32085fcbc3409d92dfa27b31c13fbcf823f576052c0347911c0cca",
+    "packages/artplayer/src/option/resolve.ts": "53a73627cd540e3f21349c0a43beda35ea5195647a31e3f5b30ac292390b4b1b",
+    "packages/artplayer/src/option/types.ts": "f2ce01c01acf45fac6cbb34685b8e6c321bcad6b0da2526f3f189eb5962ea0e5",
+    "packages/artplayer/src/player/airplayMix.js": "b9ce49489e75045b6a1df4d8ed28f123c1b105ac4c04fefaabcffe4353ad004d",
+    "packages/artplayer/src/player/aspectRatioMix.ts": "9e5e7365d469aeaef65a6010cb92734702191f9086b2f21d98c9f0ad7f356898",
+    "packages/artplayer/src/player/attrMix.js": "c873d587ff71e024cfda5b5464d0c70a09a6a319da3f18fbaa7451a16c9ae055",
+    "packages/artplayer/src/player/autoHeightMix.ts": "5848e34cd826f5d4cc81d076c83fb3bcea0aed1228cd93a1edb6b8ca402ad175",
+    "packages/artplayer/src/player/autoSizeMix.ts": "6373a8ea7fff4cd875d17c5d3df6dc37764055ab77850a6c6348526969071cbb",
+    "packages/artplayer/src/player/cssVarMix.js": "93e641dd760e8f844a643a0b7d8af92b73a7f205e55087d9501934d218701bd2",
+    "packages/artplayer/src/player/currentTimeMix.ts": "78c749ec4dc94f4a3a0ce02a87156f07894401b64d12c6c7c3cb1192ff266902",
+    "packages/artplayer/src/player/durationMix.ts": "60a9d665cf302dcb6b3e37e2f057e31720935e5e588fd7709231f691f6014191",
+    "packages/artplayer/src/player/eventInit.ts": "a915c5a618e70b1ab10536b1273ba0fea4ec11d3a2ca629b538e90b5ad2b55f9",
+    "packages/artplayer/src/player/flipMix.ts": "a1519c83f8c9437a9b7e99a59e38a3d931032c579f4085226fc0955c7c9eab67",
+    "packages/artplayer/src/player/fullscreenMix.ts": "b339bebb4c87f7b75232d7e0d637ebe25bd09a0a0428ba87339a16af5daa71aa",
+    "packages/artplayer/src/player/fullscreenWebMix.ts": "75b83a6093c7887ca8725f63c55503d0bf3aafdbbf2347b579120cb257503555",
+    "packages/artplayer/src/player/index.js": "c3eaeab0aa5015a51dfeeb4de6f25b02b8cd66e1f8471940367d628b5fd0bdec",
+    "packages/artplayer/src/player/loadedMix.ts": "6a4c4a08ed74346dad3e138b1dda22c8c9c12f175fe6d00da41b89c78cbe2c18",
+    "packages/artplayer/src/player/miniMix.ts": "d68a0c4f6c6059d5831d2d1fd4823b8d3cbce95eefd6d36d38670d6d8720f44e",
+    "packages/artplayer/src/player/optionInit.js": "9d1d9d276da2403a580498c62f947373e000d9cd6e4bef5831d272c3055b5592",
+    "packages/artplayer/src/player/pauseMix.ts": "5bbb68eab7dcf2170c944cabb8d4b82be4e6d7623e37ad6ea464b81c1028bc0b",
+    "packages/artplayer/src/player/pipMix.ts": "63dfb29ffd66ce7d081b24f8e8bf697c041675b49ab8919e206d2df5132de236",
+    "packages/artplayer/src/player/playbackRateMix.ts": "e185c6ff52cd567f7fd7c30553bbd6c65517324d1d16c4948c3623ef457ef536",
+    "packages/artplayer/src/player/playedMix.ts": "5b6b89bf8dec1efb19cd51e46af1505bae006bdb3fb798e9dec7e3fb5cf0acaa",
+    "packages/artplayer/src/player/playingMix.ts": "968c9f6e6d23c233c77d62a593db64adcc6d1a2411f5f1c61a35c6996d6a54d9",
+    "packages/artplayer/src/player/playMix.ts": "60249fcacdc5b1bc6f33bcd806e8a4f5472cea21d40550b042794a75027fe34a",
+    "packages/artplayer/src/player/posterMix.js": "a96b0a9f5817919e373a5a55b43fe7ea94af357051c01ddd6ce9c68bc932ecba",
+    "packages/artplayer/src/player/qualityMix.ts": "8dfcb94f695cf983f313f00abe1aec183ceb2af4b398fbf62bf1d114257a8f43",
+    "packages/artplayer/src/player/rectMix.ts": "a741ee09fa3271df84363c5d73eac1b2e5adb39491f95f8112af81f1219ffed4",
+    "packages/artplayer/src/player/screenshotMix.js": "c64871270b224233ea67ff31c3fbc0c2e2eb35635da5e4d5a263b930fb96e6e7",
+    "packages/artplayer/src/player/seekMix.ts": "e6e1bf00e8441f1ce58d2a67a66f7e5e98c86d78620ff10a5e6268d54f13fadb",
+    "packages/artplayer/src/player/stateMix.ts": "e45b3209a93ab14665d19c5740d5c632187e9fe234b019a2a0263e26884ab3b2",
+    "packages/artplayer/src/player/subtitleOffsetMix.ts": "e7866cf3a6d9fe271a4c34973f7a961542a738e89a3647df85197cee5853ce8b",
+    "packages/artplayer/src/player/switchMix.ts": "b47e174ef0edb2b96ff29f2ddd3c9f2dd2a38713db2a81002b18c89ce71994e9",
+    "packages/artplayer/src/player/themeMix.js": "382acfaf113fbd1ee77c63dba72953d984ea715f2d99748a12b9eae70c081d49",
+    "packages/artplayer/src/player/thumbnailsMix.js": "43bdbd9b62a803f4966103c6718305a9ef665d25df26f735d3e34558ddf339bf",
+    "packages/artplayer/src/player/toggleMix.ts": "a3050136248e7d0b942387484c61286ac2b33a90724b1dc3460f5061be76f247",
+    "packages/artplayer/src/player/typeMix.js": "70920c8f785dca6d4bd66d82b996c37f1b69265190d7747ae8de298afae3604e",
+    "packages/artplayer/src/player/urlMix.ts": "23ee05577af66e3608f9c6d63f060bd3de68a99b1992e4e35e45f16a08a8c14f",
+    "packages/artplayer/src/player/volumeMix.ts": "d830bb27b984e0ab2f687943fb49abcbd0331d71fe96049fd81edbddaa64f07f",
+    "packages/artplayer/src/plugins/autoOrientation.ts": "4a13b0c010ea7a5002e66c422260ed24bb0d18b3ed41ce10974ac7ca2804cc09",
+    "packages/artplayer/src/plugins/autoPlayback.js": "26f4a21691a2b2f767304b7d2fe40a35c599575651b9ace0c55a709a2be279b8",
+    "packages/artplayer/src/plugins/builtins.ts": "f4716e8db58a987c682dcd4d329f70a4a38196ee57100255955760cec924070d",
+    "packages/artplayer/src/plugins/fastForward.js": "d1f396efb22a279f9450fd02f85dc2245d274dbf0d36c99e87a5e5f895cc0029",
+    "packages/artplayer/src/plugins/index.ts": "28d13abc95cbedafadae0fdb682bf86fda9b705191c51843943a5dadddbd0a53",
+    "packages/artplayer/src/plugins/lock.js": "843caf8c7981463e8dadf1510cd028e7e70049f5a10038bd66dfccbc63bb7886",
+    "packages/artplayer/src/plugins/miniProgressBar.js": "3bf48d30c209105a0144c17062d6ea4e2bdd351b1bc928df73ea1680b78462e2",
+    "packages/artplayer/src/plugins/registration.ts": "9891686c32aeaa33c48ca500cf30ab24ffbb0835c6248769b4c645a5ff20129b",
+    "packages/artplayer/src/plugins/types.ts": "6823098d5ec1bf053f60ddfdd36bfcd3f06f3b528cc5dd30fd676a1318dac590",
+    "packages/artplayer/src/scheme/index.ts": "dc4a3b5e08478cf72b46b0b59c023359ad5f79b891ea8a6a119ce24a5251821a",
+    "packages/artplayer/src/setting/activity.ts": "699ceed4bdeddb6d48eacf79c8dbf737f5d2d8c4983be70205322b14807a91b7",
+    "packages/artplayer/src/setting/aspectRatio.ts": "a16eb58fadf77f0a9009cf162d957ffd59d9b8fde83cc193d510fd642e3456cb",
+    "packages/artplayer/src/setting/checkpoint.ts": "9d3bff311f9b15c067ca49661af4f48de939f266b8077e7c2f0d66edef22dde6",
+    "packages/artplayer/src/setting/events.ts": "f7a3347ca146232caf2a8c9a5a18731cf7bc91dca4cd36370e0265c6eb70df53",
+    "packages/artplayer/src/setting/flip.ts": "e72a4ae33300d9e48880897a4f85a04fa6d9a5fff7b06ecaf9081cfb1bb14404",
+    "packages/artplayer/src/setting/index.ts": "f1e8a302077a8ccfa77c17ce344bdd6816943e77b5876c7f623314ff846742f7",
+    "packages/artplayer/src/setting/layout.ts": "584604e8fffaeaf1d633d1ed45e64d94595c2a56976e3a3f7ede01839b83a37d",
+    "packages/artplayer/src/setting/model.ts": "c47348f0f9494c4ce8ea5561bcde6eb698fb11e9197ccdc1ca1359a6d5e370dd",
+    "packages/artplayer/src/setting/panels.ts": "64d48720971763985a2a652a18c2ed2f32300c3553d56b52049ae40c4dfceae1",
+    "packages/artplayer/src/setting/playbackRate.ts": "2e70e0d2a33cb0ec9fcdd6d22424979fed7b2e01f87015d6be4e520d5cf4e88a",
+    "packages/artplayer/src/setting/registration.ts": "c29db62b5d90e0efa4a926c753015e65e96a47add3f5b8840ee51017052edf7c",
+    "packages/artplayer/src/setting/render.ts": "2bb29994c60d0c47517bdf7cacb6afac7d65075f0a67d895a3ce52250b668232",
+    "packages/artplayer/src/setting/resources.ts": "64c28cc2cb08cb87b0864ab957d7999bc94931be4788f282d6f190b8806a81fd",
+    "packages/artplayer/src/setting/selection.ts": "a1bc04b99bda45cc1a2afcf2dd0925c88ccb55e169b971105277883ae2ccba0c",
+    "packages/artplayer/src/setting/subtitleOffset.ts": "86513835d4e542ac39e9d551507473e3e14c71fd0d5ea725267008ecbff6ab83",
+    "packages/artplayer/src/setting/types.ts": "799e7adeac76c4a327201ec66f10d8f25f92387409f1e5e65f265df7711973e1",
+    "packages/artplayer/src/setting/update.ts": "3725fd69b369e4a345b1657ab559a915ab967c20088a093e288ffa7370cda264",
+    "packages/artplayer/src/source/listen.ts": "c0596b98258c1544c8e4b762509646428450e56588da36908cb8583b8b716c37",
+    "packages/artplayer/src/source/operation.ts": "a6cb65594a5b28247e3a6889fe0a2f47a34aeb08cdde5f0125800a87862cd559",
+    "packages/artplayer/src/source/switch.ts": "697ab56a765f957e3ce1da076c69cfc11dbf0901efecae0199cd94c729e0b236",
+    "packages/artplayer/src/source/types.ts": "9456d3d2f798188b730d99ef015e8a0a145598b0fe3ad1036b84f4a7cc1c5e6d",
+    "packages/artplayer/src/storage.js": "92067265b7f1104c4680e27e35726cf033811c6551e7c38d66028f2dd5300491",
+    "packages/artplayer/src/style/artplayer.less": "4e8513138d5d10c05b66986977d24ed17f1de3c0df3816dec6d90db7a97b5da3",
+    "packages/artplayer/src/style/aspectRatio.less": "091931a0cdc83e65a669332811ef3276b85bca9e55f7fff42aa46893d728c1ef",
+    "packages/artplayer/src/style/backdrop.less": "6c2cd0fa200d1f3525df98c3c56dbdc553445724aece3feb0386949245813343",
+    "packages/artplayer/src/style/bottom.less": "6fb307d8449fd04b804d5e72ea0f175f8aa9c9dd2bf1efbf756f800b39ac97ab",
+    "packages/artplayer/src/style/contextmenu.less": "70f6c7e26dc96652b659c7bf6fdad92737ed477dea69d253c57dc7266c76586d",
+    "packages/artplayer/src/style/controls.less": "eb6d4bf4e4ff903d724d45f3ff60f0cf10c02e622fba195555a8179100cdce87",
+    "packages/artplayer/src/style/danmuku.less": "e4215ee9fa2f1d0599e7311a2415cc975138265b7c6af0448d27d21b6c9e3511",
+    "packages/artplayer/src/style/flip.less": "5d3c7a81df9be455c2f683ebf48f39597d218dc2144addacb72ee1736bac3b7f",
+    "packages/artplayer/src/style/fullscreen.less": "dd350d3a0fc556d59b622a53c786b8c2a583e8fb28176e4b9e91baff90479496",
+    "packages/artplayer/src/style/fullscreenWeb.less": "d74e785c2fbbb2976e131620e751326f622f2916eceff9f2333059ca3296cdc9",
+    "packages/artplayer/src/style/hideCursor.less": "09a4607c8b0005dc199828172aa8dda395f861e407769b9696d793476c4a7823",
+    "packages/artplayer/src/style/hint.less": "ae9f3115dfdb1e2d7b8249497c080e6a25f9667f915f6e89820338d67bbc2d85",
+    "packages/artplayer/src/style/icon.less": "52d8f75c1d193e6160f57ca6997c3f9135adad8eb2338ed60c1eb8e5fe443be5",
+    "packages/artplayer/src/style/index.less": "ec67999b458d5545a4f17eeda922872823d655da012fa69113902629ad847548",
+    "packages/artplayer/src/style/index.ts": "856afc037ffcd4d18c4b54901ddbb30e310014553fe9d19560e34fb54b8378c1",
+    "packages/artplayer/src/style/info.less": "fa56d1b8c8936218e581b2426026e4ba85cd5fea20d045c4f69aca96be4059be",
+    "packages/artplayer/src/style/inject.ts": "9cddbe51b5de0da74f27c045ab982b509c3854cc6b81eeb02a6b974914760a4d",
+    "packages/artplayer/src/style/layers.less": "9653c581190bb22d60a706109819cd010908898740701c9526957b5682991c5f",
+    "packages/artplayer/src/style/loading.less": "185b0f05274196ba71fdb1d088b55af568f3342a495490c99c3f0e058a40659e",
+    "packages/artplayer/src/style/mask.less": "d1239a171b71ea6184cb4aee6660d74d6ffc0c48f7c47c3cf5fbe52d2e93ac92",
+    "packages/artplayer/src/style/mini.less": "c8537df19c1d615419a8396db5846b4de05f61e61df8c0ed89613f0051b81e38",
+    "packages/artplayer/src/style/mixins.less": "c6be95aa682f266749fe37cb89796fbec6488abc537174f817da79bdac6e00b5",
+    "packages/artplayer/src/style/mobile.less": "ff3f64fca5d2dd7ddd50385d88d9b2fa1a645909488ab7a0978ba4f1670b7c0e",
+    "packages/artplayer/src/style/notice.less": "72a935c0effc557a9d7ab3baccb2c3b77fc3a1783450b4e3178a40a5325fe369",
+    "packages/artplayer/src/style/plugins.less": "589d05e12a62e04fe848b36ba748433d23f0b909a04e861b1d6737f2799be183",
+    "packages/artplayer/src/style/poster.less": "36b38fe138f8c9537ff4e93f7ec4f2dbdba1ec41d243d741ddf1da7c6581e546",
+    "packages/artplayer/src/style/progress.less": "59b9d95d49dbcb1be40752d7086239b6de5925b0574da231199d999e22ff4990",
+    "packages/artplayer/src/style/selector.less": "295012ba379a7e957a24476616a0c3623d6a06e82ebbdaa45b916dd6412d7f4f",
+    "packages/artplayer/src/style/setting.less": "743837b3c84fc5fee40120598bd484c10bd4202b371002709c269a700919dda2",
+    "packages/artplayer/src/style/subtitle.less": "273cacb63ec0214ba434dcf19a4a455dbbdd408fb2d1749de4878804c1371e41",
+    "packages/artplayer/src/style/variables.less": "703739b2bdfc77bfde063d8788ef6b6a55b8730764baae8e7d755b7c54d8ecc7",
+    "packages/artplayer/src/style/video.less": "b89c6f6e27592d49825c68c9ab98d46e81cb1e5add855863f89d19637f98e35f",
+    "packages/artplayer/src/style/volume.less": "a3954794a9478d3872202b90d349c873cbb51639dcd7d1e3d73a55ce635fcd99",
+    "packages/artplayer/src/subtitle/index.ts": "b4ead680dc82fa47c53d1ec7e5fb8bf94abbf55730d5d1130ad8d544cb42adc8",
+    "packages/artplayer/src/subtitle/parse.ts": "7db540c5edb1d2312eed82757fd15a7ce6a28996ba20d0087e56730f21dede74",
+    "packages/artplayer/src/subtitle/render.ts": "96493fc35680af635a8db225a8bf002208df79ed48b1d4ee6cc73587543add5c",
+    "packages/artplayer/src/subtitle/request.ts": "543c964571bd5ab984bc1adc9f64a8917dd134ed2892ad10b30ed9c859f34119",
+    "packages/artplayer/src/subtitle/state.ts": "9f79b982d66747170bc39bdaf99b65676310965f23da62a4dec15547c756a56b",
+    "packages/artplayer/src/subtitle/track.ts": "707f4c43af4ebf4b87521f6f577168460e739274d0cec28b9efe5704d2540d18",
+    "packages/artplayer/src/subtitle/types.ts": "e56db829d7588f3a5dfafd6e8377f93f0892cfe442710be3740e1136812dd2bd",
+    "packages/artplayer/src/template/html.ts": "351c472bfd01fa5ba1a4e347ed31bd5faaf823d9b4c5cab1ce8c651e3b175021",
+    "packages/artplayer/src/template/nodes.ts": "1572746a636647e4d313cc8752d3a110ff81fddb390ad7b0feb6a0db0d42b9d4",
+    "packages/artplayer/src/template/types.ts": "23f67e78ee43f9ad9099c94f28e51c6113b167603ffbbcf2d6ca2b68cc40b803",
+    "packages/artplayer/src/template.ts": "05c1499adc5dce27addf5761bec58d803f526d9b5b62c367c631e4cf2991391d",
+    "packages/artplayer/src/utils/compatibility.js": "51290838ef62be8e4251f4db8ecdd45a626cecd8c732e4e53a1c55df8d454a13",
+    "packages/artplayer/src/utils/component.ts": "d04a66213406ae3223326c2d470363e197dd1540519caa632f9d06378af989cc",
+    "packages/artplayer/src/utils/dom.js": "a625a0d832f717fbdf186099d1ace1f0dd51f1ea871417ffa856a7186206fb91",
+    "packages/artplayer/src/utils/emitter.ts": "26a93d3ff35b53e71a5f3bb22c252a854559d8151ede50a66a28d9eefae6c008",
+    "packages/artplayer/src/utils/error.ts": "ba303c7d4e4228919088f9d608fa364596f5853ee646eda2008deee354866f38",
+    "packages/artplayer/src/utils/file.ts": "ea71d7fc0e818d473bf5a596211ba9d571e4febdf1878014eadefa8d0a98d4cc",
+    "packages/artplayer/src/utils/format.ts": "891df5b7542b713aef46bf2b93924f42e68eee574afd802db3e6c62ff2655ede",
+    "packages/artplayer/src/utils/index.ts": "5211af833dddb2937d25dcc772740d62f9d5c5039ce5505bffff0796d4afd756",
+    "packages/artplayer/src/utils/property.ts": "c737d4582a4382f4038d12dafdf8b43418e508c9b8b859b2f0cc17c20f370343",
+    "packages/artplayer/src/utils/subtitle.ts": "f058851d11a418e321a8a498472b67fa535fec2c7b5d3df739b6b4f263d00337",
+    "packages/artplayer/src/utils/time.ts": "b8ce3d50865f6c343e8e3ce9f5c87de565a87b4e9fbcbccbe7030e30e80b93fe"
+  },
+  "artifacts": {
+    "packages/artplayer/dist/artplayer.js": "9b66f868955e068acfd2c302a743387d7402c5af53c2c6908232d02bd6ca5696",
+    "packages/artplayer/dist/artplayer.legacy.js": "379d8310d4b5cdf7b0fa4b80b362953e3c490b9ee8688fa005cbc164bd199475",
+    "packages/artplayer/dist/artplayer.mjs": "be55c7dbd09bb41157f781d280dca7a046930d8bf61b48ceb7efb3f8f70e10fc"
+  },
+  "tests": {
+    "test/hotkey.test.js": "b647a4552ce43591f532d6295bf6d2034d7c301a2a9dae88cdb1b77e651ad5b5",
+    "test/types/hotkey.ts": "bc08aa59a8359a86e49cc95f880ae09d5c90a501d4d0ddae7d7467e90b042ef7",
+    "test/browser/hotkey.spec.js": "984e042d277da6ec092e5a16053bef0f2a144a83868dc30cee82a696c2adfeff",
+    "test/listener-registry.test.js": "07dcdb1945e530a3928b28a3758d22eca0db70bf4a00dd7e0527a56ef407c133",
+    "test/browser/listener-registry.spec.js": "54c40eebcd818342e92f875cb639d31d1fa0a0fc95897de2cbfbbd4df793ac94",
+    "test/global-events.test.js": "ab57213ce56ddf7139c3b045915a6d5c5e6e7aaf84075e656c02a0d8a61b3ffc",
+    "test/browser/global-events.spec.js": "67ef2bc32419f17bb10ff40f7d9e542c110f2202028e5a17d58780e2cc6cf5f3",
+    "test/browser/lifecycle.spec.js": "7726535769bdf01a57d15d562bad9b3bb2cce0d979b7b0def6cbcf77bd72f453",
+    "test/browser/pointer-events.spec.js": "fa789898942d6eeffcb1f8867af46abcdb1dc8a515470ffdb18e89e8fafc4985",
+    "test/pointer-events.test.js": "8eccc6b72f025183cb93f1bbc2c03e42a98e1a3bdf6c03e8609c1b2fc9c2ea2d",
+    "package.json": "f964aee310f22b26ad1d3cda4186a9b040b49b9845191689d8fc2b636f183dbc"
+  },
+  "ci": {
+    "passed": 300,
+    "unit": 271,
+    "engineering": 4,
+    "baseline": 25,
+    "strictSourceFiles": 176,
+    "logSha256": "7d5a3b498fd7a21214eacd0bea25a11fae943107cbd67f9ab51b22e5da62ccef"
+  },
+  "browser": {
+    "scope": "Hotkey, native listeners, global binding, lifecycle and pointer interaction only; workspace source, not final installed UMD/legacy acceptance",
+    "stats": {
+      "startTime": "2026-09-11T02:35:14.510Z",
+      "duration": 40503.72,
+      "expected": 165,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "candidateSha256": "8c02454d3468f3b9c7e86baa4778aef0d43f3e97dbb4a4a2a012202c5d46b70f",
+    "cases": [
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: rebind during native global registration cancels the interrupted binding",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: destroy during native global registration cancels the interrupted binding",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "published: global rebinding forwards original events once and releases the previous document",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "published: failed global rebinding keeps the previous document and removes partial new listeners",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: global rebinding forwards original events once and releases the previous document",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: failed global rebinding keeps the previous document and removes partial new listeners",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: rebind during native global registration cancels the interrupted binding",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: destroy during native global registration cancels the interrupted binding",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "published: global rebinding forwards original events once and releases the previous document",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "published: failed global rebinding keeps the previous document and removes partial new listeners",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: global rebinding forwards original events once and releases the previous document",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: failed global rebinding keeps the previous document and removes partial new listeners",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: rebind during native global registration cancels the interrupted binding",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: destroy during native global registration cancels the interrupted binding",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "published: global rebinding forwards original events once and releases the previous document",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "published: failed global rebinding keeps the previous document and removes partial new listeners",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: global rebinding forwards original events once and releases the previous document",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "global-events.spec.js",
+        "title": "candidate: failed global rebinding keeps the previous document and removes partial new listeners",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: native keyboard play/pause, seek, volume and web-fullscreen Escape retain their behavior",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: inherited editing and IME composition do not activate player shortcuts",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: plaintext editing and IME composition do not activate player shortcuts",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: select editing and IME composition do not activate player shortcuts",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: destroying during a key callback stops remaining keys and notifications",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: native keyboard play/pause, seek, volume and web-fullscreen Escape retain their behavior",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: inherited editing and IME composition do not activate player shortcuts",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: plaintext editing and IME composition do not activate player shortcuts",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: select editing and IME composition do not activate player shortcuts",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: destroying during a key callback stops remaining keys and notifications",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: mobile keeps keyboard initialization opt-in through the existing init method",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: prototype-named hotkeys do not crash or replace the keys prototype",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: native keyboard play/pause, seek, volume and web-fullscreen Escape retain their behavior",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: inherited editing and IME composition do not activate player shortcuts",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: plaintext editing and IME composition do not activate player shortcuts",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: select editing and IME composition do not activate player shortcuts",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: destroying during a key callback stops remaining keys and notifications",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "published: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: hotkey registration retains chain, array identity, receiver and event order",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: rebound document input retains typing instead of triggering a hotkey",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: shadow-root input retains typing instead of triggering a hotkey",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "hotkey.spec.js",
+        "title": "candidate: repeated hotkey init does not multiply the keyboard subscription",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "published: repeated destroy preserves other live instances",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: repeated destroy preserves other live instances",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor plugin failure restores original DOM and clears resources",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: early proxy failure restores SSR nodes, attributes and text",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: reentrant destroy keeps sequence and does not repeat callbacks",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: destroying cancels queued resize, notice, RAF, reconnect and mounted work",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: constructor can synchronously destroy without entering the registry",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: partial Events initialization releases listeners before its property is assigned",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: live resize still coalesces and destroy cancels the next burst",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "lifecycle.spec.js",
+        "title": "candidate: a container is reserved during reentrant initialization",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: null options preserve the native default and callbacks can be removed directly",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: once and abort use native event identity and permit subsequent registration",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: direct event disposer preserves native callback identity and releases bookkeeping",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: changing capture options after registration cannot prevent cleanup",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: partially failing array registration rolls back the listeners it created",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: registration throwing after native add does not leave an untracked listener",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: null options preserve the native default and callbacks can be removed directly",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: once and abort use native event identity and permit subsequent registration",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: direct event disposer preserves native callback identity and releases bookkeeping",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: changing capture options after registration cannot prevent cleanup",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: partially failing array registration rolls back the listeners it created",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: registration throwing after native add does not leave an untracked listener",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: null options preserve the native default and callbacks can be removed directly",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: once and abort use native event identity and permit subsequent registration",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: direct event disposer preserves native callback identity and releases bookkeeping",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: changing capture options after registration cannot prevent cleanup",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: partially failing array registration rolls back the listeners it created",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: registration throwing after native add does not leave an untracked listener",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: null options preserve the native default and callbacks can be removed directly",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: once and abort use native event identity and permit subsequent registration",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: direct event disposer preserves native callback identity and releases bookkeeping",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: changing capture options after registration cannot prevent cleanup",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: partially failing array registration rolls back the listeners it created",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: registration throwing after native add does not leave an untracked listener",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: null options preserve the native default and callbacks can be removed directly",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: once and abort use native event identity and permit subsequent registration",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: direct event disposer preserves native callback identity and releases bookkeeping",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: changing capture options after registration cannot prevent cleanup",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: partially failing array registration rolls back the listeners it created",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "published: registration throwing after native add does not leave an untracked listener",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: null options preserve the native default and callbacks can be removed directly",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: once and abort use native event identity and permit subsequent registration",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: direct event disposer preserves native callback identity and releases bookkeeping",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: changing capture options after registration cannot prevent cleanup",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: partially failing array registration rolls back the listeners it created",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "listener-registry.spec.js",
+        "title": "candidate: registration throwing after native add does not leave an untracked listener",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: real mouse input focuses the player, hovers and toggles actual playback",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: click pairs preserve callback identity and playback ordering",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: destruction in click stops its subsequent default action",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: destruction in dblclick stops its subsequent default action",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: focus, hover and move preserve flags, classes and original events",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: real mouse input focuses the player, hovers and toggles actual playback",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: click pairs preserve callback identity and playback ordering",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: destruction in click stops its subsequent default action",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: destruction in dblclick stops its subsequent default action",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: focus, hover and move preserve flags, classes and original events",
+        "engine": "chromium",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: real mouse input focuses the player, hovers and toggles actual playback",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: click pairs preserve callback identity and playback ordering",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: destruction in click stops its subsequent default action",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: destruction in dblclick stops its subsequent default action",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: focus, hover and move preserve flags, classes and original events",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: real mouse input focuses the player, hovers and toggles actual playback",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: click pairs preserve callback identity and playback ordering",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: destruction in click stops its subsequent default action",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: destruction in dblclick stops its subsequent default action",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: focus, hover and move preserve flags, classes and original events",
+        "engine": "firefox",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: real mouse input focuses the player, hovers and toggles actual playback",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: click pairs preserve callback identity and playback ordering",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: destruction in click stops its subsequent default action",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: destruction in dblclick stops its subsequent default action",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "published: focus, hover and move preserve flags, classes and original events",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: real mouse input focuses the player, hovers and toggles actual playback",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: click pairs preserve callback identity and playback ordering",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: destruction in click stops its subsequent default action",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: destruction in dblclick stops its subsequent default action",
+        "engine": "webkit",
+        "status": "passed"
+      },
+      {
+        "file": "pointer-events.spec.js",
+        "title": "candidate: focus, hover and move preserve flags, classes and original events",
+        "engine": "webkit",
+        "status": "passed"
+      }
+    ],
+    "reportSha256": "5ea42fc3e4cf8647a2695a95c0e6dd061f7e5e761767eed1bf07d87a047c9108"
+  },
+  "baselines": [
+    {
+      "file": "core17-listeners-baseline",
+      "stats": {
+        "startTime": "2026-09-11T02:01:57.051Z",
+        "duration": 13748.359,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 12,
+        "flaky": 0
+      },
+      "reportSha256": "881fece2745d286782d4af78efb80f464b10d37a5aa25225d01b986c7408b1d7"
+    },
+    {
+      "file": "core17-listeners-null-baseline",
+      "stats": {
+        "startTime": "2026-09-11T02:14:09.648Z",
+        "duration": 6851.293,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "reportSha256": "8511bca0e86c3d01e8e58e42466ca2fdb5f92756c9d3235ef13f24ff08d52d7c"
+    },
+    {
+      "file": "core17-global-baseline",
+      "stats": {
+        "startTime": "2026-09-11T02:15:57.255Z",
+        "duration": 9625.694000000001,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "reportSha256": "37c86104c804f611cd7cb293c0e8d809ca7af5bb3f73493bce7b3c3b8ed7b7e9"
+    },
+    {
+      "file": "core17-pointer-corrected-baseline",
+      "stats": {
+        "startTime": "2026-09-11T02:26:41.904Z",
+        "duration": 14571.454,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 12,
+        "flaky": 0
+      },
+      "reportSha256": "c7acda3fce1759797758b344ef1536a0b79edae02d84a5bc31f180b43f28fcce",
+      "failures": [
+        {
+          "title": "published: click pairs preserve callback identity and playback ordering",
+          "engine": "chromium"
+        },
+        {
+          "title": "candidate: click pairs preserve callback identity and playback ordering",
+          "engine": "chromium"
+        },
+        {
+          "title": "candidate: destruction in click stops its subsequent default action",
+          "engine": "chromium"
+        },
+        {
+          "title": "candidate: destruction in dblclick stops its subsequent default action",
+          "engine": "chromium"
+        },
+        {
+          "title": "published: click pairs preserve callback identity and playback ordering",
+          "engine": "firefox"
+        },
+        {
+          "title": "candidate: click pairs preserve callback identity and playback ordering",
+          "engine": "firefox"
+        },
+        {
+          "title": "candidate: destruction in click stops its subsequent default action",
+          "engine": "firefox"
+        },
+        {
+          "title": "candidate: destruction in dblclick stops its subsequent default action",
+          "engine": "firefox"
+        },
+        {
+          "title": "published: click pairs preserve callback identity and playback ordering",
+          "engine": "webkit"
+        },
+        {
+          "title": "candidate: click pairs preserve callback identity and playback ordering",
+          "engine": "webkit"
+        },
+        {
+          "title": "candidate: destruction in click stops its subsequent default action",
+          "engine": "webkit"
+        },
+        {
+          "title": "candidate: destruction in dblclick stops its subsequent default action",
+          "engine": "webkit"
+        }
+      ],
+      "note": "Six candidate destruction failures reproduce the product defect; six click-pair failures were an incorrect implicit-ctx fixture assumption, fixed with explicit ctx. Earlier non-configurable toggle replacement was also a fixture error."
+    },
+    {
+      "file": "core17-pointer-final",
+      "stats": {
+        "startTime": "2026-09-11T02:32:35.229Z",
+        "duration": 48286.415,
+        "expected": 164,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "reportSha256": "cdc3459e3242953af044428f82ad7fd2a87997f063c4af0e33ffaf670261c86e",
+      "note": "WebKit initial seek was not awaited before ArrowRight. The test now awaits paused/seek completion and checks actual hotkey delivery; this failed run remains preserved and is not counted as passing."
+    }
+  ],
+  "build": {
+    "logSha256": "d9bbaf6b06bee8d2782862b50b0638371464584aaee2eb4ba3d7477f66dcbef3",
+    "i18nLogSha256": "21645b3a7821ad17a7d94ff4a5b386ec24cce3ab976e2a8c7a4b9e68f72a9129"
+  },
+  "remaining": [
+    "Events facade and gesture migration",
+    "Resize/view/RAF scheduling and combined lifecycle checks",
+    "Full final installed UMD/legacy matrices and exact package consumers; CORE-17 remains doing",
+    "Physical-device certification remains a release gate; native once bookkeeping stays until explicit/owner cleanup"
+  ]
+}

@@ -1653,6 +1653,231 @@
         "test/display-orientation.test.js"
       ],
       "resolutionRationale": "Owned timers and subscriptions cancel cleanly; orientation request tokens prevent stale classes/notices and old-instance unlock of newer ArtPlayer locks. Final installed UMD/legacy each pass 900 browser cases and exact-package consumers pass. Controlled platform paths do not certify physical devices; REL-03/REVIEW-02 retains that release gate."
+    },
+    {
+      "id": "BASE-DOM-16",
+      "title": "Hotkeys intercept input in rebound documents and shadow roots",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/hotkey.spec.js",
+        "refactor/changes/2026-09-11-CORE-17-input.md"
+      ],
+      "compatibleResolution": "Resolve the keyboard event document and deep editable focus while retaining normal shortcuts, modifiers and generic keydown notifications.",
+      "closureCriteria": "Final installed matrices cover real typing and playback keys, iframe/global rebinding, shadow and inherited editing, composition and source ownership.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "Event-document and deep editable focus checks preserve actual iframe/shadow typing while retaining ordinary shortcuts. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-DOM-17",
+      "title": "Prototype-named hotkeys fail registration through inherited keys properties",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/hotkey.spec.js",
+        "test/hotkey.test.js"
+      ],
+      "compatibleResolution": "Use own-property registration without changing the public keys object prototype, callback arrays, chainable methods or receiver contract.",
+      "closureCriteria": "Installed and unit regressions retain normal registration/removal, prototype-name safety, array identity, callback mutation and original errors.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "Own-property registration supports prototype-named keys without changing the public keys prototype or arrays. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-LIFE-23",
+      "title": "Repeated Hotkey initialization accumulates keyboard subscriptions",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/hotkey.spec.js",
+        "test/hotkey.test.js"
+      ],
+      "compatibleResolution": "Own one subscription in the instance scope and reuse default callbacks, preserving explicit default restoration and stopping post-destroy dispatch.",
+      "closureCriteria": "Final installed matrices cover repeated init, default restoration, mobile manual initialization, real key operations and destruction during a callback.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "One scoped hotkey subscription and stable default callbacks retain opt-in initialization and restoration. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-LIFE-24",
+      "title": "Mutable capture options and partial native registration failures leave listeners behind",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/listener-registry.spec.js",
+        "test/listener-registry.test.js",
+        "refactor/changes/2026-09-11-CORE-17-input.md"
+      ],
+      "compatibleResolution": "Snapshot capture, roll back failed registration, release direct-disposer and aborted records, and preserve native callback identity, once and duplicate semantics.",
+      "closureCriteria": "Final installed matrices cover mutable/null options, registration failure, direct native removal, once/abort, retryable cleanup and destruction during registration.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "Capture snapshots, rollback and owned disposal retain native callback identity and handle abort/failure/destruction. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-LIFE-25",
+      "title": "Failed global rebinding drops the old document and retains partial new listeners",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/global-events.spec.js",
+        "test/global-events.test.js",
+        "refactor/changes/2026-09-11-CORE-17-input.md"
+      ],
+      "compatibleResolution": "Commit a new document/window binding only after registration succeeds, keep the previous binding on failure and cancel interrupted generations without changing event identities or target fallback rules.",
+      "closureCriteria": "Final installed matrices cover actual iframe rebinding, document/window failure rollback, nested rebinding, destruction and keyboard focus integration.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "Staged global bindings commit only on successful registration; cancelled/reentrant generations cannot overwrite newer targets. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-LIFE-26",
+      "title": "Click callbacks that destroy the player still trigger subsequent default playback actions",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/pointer-events.spec.js",
+        "test/pointer-events.test.js",
+        "refactor/changes/2026-09-11-CORE-17-input.md"
+      ],
+      "compatibleResolution": "Check instance closure before pointer handling and after click/double-click callbacks, own document focus subscriptions, and retain native events, click thresholds, nested dispatch and normal default actions.",
+      "closureCriteria": "Final installed matrices cover real mouse playback, desktop/mobile callback destruction, normal click pairs, focus/hover/move behavior and unit fullscreen/error/cleanup contracts.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "Pointer handlers check closure after user callbacks and no longer trigger playback/fullscreen after destruction. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-LIFE-27",
+      "title": "Cancelled, locked or replaced touches continue a previous seek gesture",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/gesture.spec.js",
+        "test/gesture.test.js",
+        "refactor/changes/2026-09-11-CORE-17-input.md"
+      ],
+      "compatibleResolution": "Track the active touch, source and orientation; cancel invalidated sessions, own touch-end/cancel subscriptions and preserve ordinary drag axes, thresholds and multipliers.",
+      "closureCriteria": "Final installed matrices retain normal video/progress touch behavior and verify cancel, lock, multitouch, identity changes, source/rotation changes and invalid geometry; physical touch remains a release gate.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "Touch/source/orientation identity and cancellation prevent invalid sessions from continuing; normal axes and multipliers remain. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-LIFE-28",
+      "title": "Gesture callbacks continue seeking or updating progress after destruction",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/gesture.spec.js",
+        "test/gesture.test.js",
+        "refactor/changes/2026-09-11-CORE-17-input.md"
+      ],
+      "compatibleResolution": "Check the current gesture after progress/seek callbacks and before subsequent writes; permit the shared position helper to check an optional caller lifetime without changing its ordinary call contract.",
+      "closureCriteria": "Final installed matrices and unit tests cover destruction/reentry/errors during absolute and relative seeking, with original event order and normal desktop progress behavior retained.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "Gesture lifetime checks stop post-callback seek/bar/notice writes and preserve nested gesture ownership. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-LIFE-29",
+      "title": "Scroll throttle reset timers remain pending after player destruction",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/event-scheduling.spec.js",
+        "test/event-scheduling.test.js"
+      ],
+      "compatibleResolution": "Own the view throttle timer and emitter subscriptions while retaining leading-only dispatch, captured delay, live gap and synchronous nested behavior.",
+      "closureCriteria": "Final installed matrices and unit tests cover pending timer removal, view callback destruction/errors, normal scroll/mini behavior and remaining scheduling ownership.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "Owned leading-throttle timers and subscriptions cancel at destruction with normal timing and synchronous errors retained. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-LIFE-30",
+      "title": "Screen orientation changes are ignored when onchange is initially null",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/event-scheduling.spec.js",
+        "test/event-scheduling.test.js"
+      ],
+      "compatibleResolution": "Detect addEventListener on the owner's orientation target and retain the existing coalesced resize flow and disposal.",
+      "closureCriteria": "Installed matrices cover controlled orientation events with a null onchange property and resize/cleanup regressions; physical orientation remains a release gate.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "Orientation listeners use event capability on the owner target rather than requiring an assigned onchange handler. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
+    },
+    {
+      "id": "BASE-DOM-18",
+      "title": "View visibility uses the original global viewport after container adoption into an iframe",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-17"
+      ],
+      "evidence": [
+        "test/browser/event-scheduling.spec.js",
+        "test/event-scheduling.test.js"
+      ],
+      "compatibleResolution": "Use the current container owner document's viewport while preserving the original edge and gap arithmetic.",
+      "closureCriteria": "Installed matrices cover actual iframe adoption/rebinding, normal visibility and exact gap boundaries without changing public viewport utilities.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/input-validation.json"
+      ],
+      "resolutionRationale": "View calculations use the current owner viewport after iframe adoption and preserve the original edge/gap boundaries. Final installed UMD/legacy each pass 1119 full-suite plus 24 supplemental cases on identical artifacts, and exact-package consumers pass. Controlled touch/IME/orientation paths do not waive physical-device release gates."
     }
   ]
 }

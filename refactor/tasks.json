@@ -1069,11 +1069,14 @@
         "CORE-13",
         "CORE-16"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "events/hotkey 的明确 document 与资源归属",
       "acceptance": "跨 document 重绑、触摸/键盘、快捷键及销毁无重复响应；修复 BASE-PERF-01 pending resize debounce 销毁后执行，并验证正常 resize 不变",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-17-input.md",
+        "baselines/input-validation.json"
+      ]
     },
     {
       "id": "CORE-18",

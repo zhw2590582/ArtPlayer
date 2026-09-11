@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 214 项，范围 22 个包及工作区/示例。
 
-状态：todo 162 / doing 0 / blocked 0 / done 52 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 161 / doing 0 / blocked 0 / done 53 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -120,7 +120,7 @@
 | CORE-14 | artplayer<br>拆分设置树、渲染和布局 | CORE-13 | setting model/selection/render/layout 的分批实现 | 不强行统一控件返回值，嵌套选择、默认高亮、更新清理通过；结合 BASE-DOM-02 验证窄容器设置定位；接续 BASE-TYPE-07 的 find null、add/update item、remove undefined 声明冲突 | H | done |
 | CORE-15 | artplayer<br>迁移字幕获取、解析和渲染 | CORE-11, CORE-13 | subtitle 请求/track/DOM/URL 生命周期与类型 | 过期结果、偏移、cue 数组、原生全屏及错误路径通过；接续 BASE-TYPE-07 的真实 cue 数组与旧隐式 scalar 回调声明兼容 | H | done |
 | CORE-16 | artplayer<br>迁移全屏、PiP、mini 与尺寸模式 | CORE-11, CORE-12 | 显示模式服务和原公开属性门面 | 模式互斥/恢复位置、手势权限、移动方向和退出失败通过 | H | done |
-| CORE-17 | artplayer<br>迁移键盘、手势、焦点和全局事件 | CORE-13, CORE-16 | events/hotkey 的明确 document 与资源归属 | 跨 document 重绑、触摸/键盘、快捷键及销毁无重复响应；修复 BASE-PERF-01 pending resize debounce 销毁后执行，并验证正常 resize 不变 | H | todo |
+| CORE-17 | artplayer<br>迁移键盘、手势、焦点和全局事件 | CORE-13, CORE-16 | events/hotkey 的明确 document 与资源归属 | 跨 document 重绑、触摸/键盘、快捷键及销毁无重复响应；修复 BASE-PERF-01 pending resize debounce 销毁后执行，并验证正常 resize 不变 | H | done |
 | CORE-18 | artplayer<br>迁移内置插件和提示模块 | CORE-14, CORE-16, CORE-17 | autoPlayback/autoOrientation/fastForward/lock/miniProgressBar 及 info/notice/loading/mask | 默认启用条件、storage 格式、定时器/动画清理通过；结合 BASE-PERF-01 防止销毁后重新安排 notice timer；接续 BASE-TYPE-07 的 notice.show boolean getter 与历史读类型冲突 | M | todo |
 | CORE-19 | artplayer<br>整理进度、质量、缩略图和截图 | CORE-10, CORE-13, CORE-16 | 相关 player/control 功能与纯计算分离 | 截图跨域失败、缩略图布局、quality/进度边界保持 | M | todo |
 | CORE-20 | artplayer<br>收敛核心入口与依赖方向 | CORE-14, CORE-15, CORE-18, CORE-19 | Artplayer 门面、初始化依赖与最终目录 | 所有核心自有源码迁移，公开描述符/静态接口/事件差分通过 | H | todo |
@@ -451,6 +451,7 @@
 - CORE-14: [记录](changes/2026-09-11-CORE-14-setting.md) [记录](baselines/setting-validation.json)
 - CORE-15: [记录](changes/2026-09-11-CORE-15-subtitle.md) [记录](baselines/subtitle-validation.json)
 - CORE-16: [记录](changes/2026-09-11-CORE-16-display.md) [记录](baselines/display-validation.json)
+- CORE-17: [记录](changes/2026-09-11-CORE-17-input.md) [记录](baselines/input-validation.json)
 - PKG-CHAPTER-01: [记录](changes/2026-09-10-PKG-CHAPTER-01-contract.md) [记录](baselines/chapter-contract.md)
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)

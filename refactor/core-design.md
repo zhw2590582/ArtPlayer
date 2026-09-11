@@ -6,7 +6,7 @@
 
 - [入口](../packages/artplayer/src/index.js)顺序构造所有子系统；[player](../packages/artplayer/src/player/index.js)通过 mixin 将属性安装到 art。
 - [Component](../packages/artplayer/src/utils/component.ts)负责控件缓存、DOM 和监听器；[Setting](../packages/artplayer/src/setting/index.ts)还有独立的树、渲染和更新语义。
-- [Events](../packages/artplayer/src/events/index.js)集中管理一部分 DOM 监听器，但定时器、异步请求和内部 Emitter 订阅仍由各模块管理。
+- [Events](../packages/artplayer/src/events/index.ts)已迁移为 TS，管理 DOM 监听器和全局重绑；输入调度、内部订阅与异步请求分别通过所属模块接入实例或操作作用域。
 - [声明](../packages/artplayer/types/artplayer.d.ts)与源码独立维护；[build-ts](../scripts/build-ts.js)进行文本拼接。
 
 ## 目标职责

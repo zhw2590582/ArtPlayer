@@ -4,6 +4,132 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is still `src/index.js`; this document marks actual migrated
 boundaries rather than describing the entire core as TypeScript.
 
+## Keyboard input (CORE-17)
+
+hotkey.ts retains the art/keys own fields, init/add/remove prototype methods, plain
+keys-object prototype, caller-visible callback arrays and chainable registration.
+input/hotkey-types.ts describes its minimal generic host and callback receiver;
+input/hotkey-defaults.ts creates stable default handlers so repeated init neither
+multiplies callbacks nor prevents explicitly restoring removed defaults. Public init
+still enables manual mobile keyboard handling; automatic construction stays desktop-only.
+
+input/keyboard-focus.ts resolves the event document, falls back to the player's current
+ownerDocument and follows open shadow focus/composed targets. Native input, textarea,
+select, inherited/plaintext editing and IME composition suppress hotkeys while preserving
+the generic keydown event. Existing modifier suppression remains. This fixes typing being
+intercepted after bindGlobalEvents or inside shadow roots. The global binding itself is
+owned by events/globalInit.ts, described below.
+
+The instance scope removes the one keyboard subscription and callbacks check destruction
+before continuing or emitting success. Ordinary synchronous errors still propagate with
+their identity. Callback dispatch intentionally retains historical live-array mutation
+and this=art semantics. Own-property registration makes prototype-named keys safe without
+changing the public keys prototype. Direct editing of those arrays remains observable.
+
+Run `node --test test/hotkey.test.js test/playback.test.js` and
+`yarn test:browser test/browser/hotkey.spec.js`. Browser tests exercise native typing and
+play/pause/seek/volume/Escape, iframe and shadow editors, controlled IME and mobile-UA
+initialization, and callback destruction. Controlled composition/mobile UA is not physical
+keyboard/IME/device certification. Input and scheduling share instance ownership;
+the refactor progress record tracks final installed UMD/legacy acceptance.
+
+## Native listeners and global targets (CORE-17)
+
+events/index.ts keeps the compatibility facade with the original bound proxy/hover
+methods and destroyEvents Set. events/listener-registry.ts owns native registration,
+capture snapshots, array rollback, abort and explicit cleanup. Native callback identity
+is preserved: direct removeEventListener with the original callback still works. Null
+options keep their historical native defaults. Duplicate callbacks retain native
+deduplication; disposal is not reference counted. Native once removes the listener itself,
+while its bookkeeping remains until explicit disposal or owner cleanup. Abort removes
+both the listener and its owned record. Failed removals warn and remain retryable;
+a target that permanently refuses removal cannot be forcibly cleaned up.
+
+events/global-types.ts defines the minimal host, registry and source interfaces.
+events/globalInit.ts stages document/window listeners, forwards only from the committed
+binding, and retains the old binding if registration fails. A generation counter stops
+an interrupted binding from overwriting a newer nested bind; owner destruction prevents
+late activation. The original event object, forwarding names, void return and independent
+document/window fallback rules remain. Manual Events.destroy still permits later reuse
+while the player is alive. events/types.ts composes the typed initializer hosts without
+adding runtime fields or changing initializer order.
+
+Run `node --test test/listener-registry.test.js test/global-events.test.js` and
+`yarn test:browser test/browser/listener-registry.spec.js test/browser/global-events.spec.js`.
+Tests cover actual iframe targets and native once/abort/callback identity; injected
+registration/removal failures exercise cleanup without asserting platform failure rates.
+
+## Pointer interaction (CORE-17)
+
+events/clickInit.ts retains synchronous click counting, the inclusive double-click
+threshold, live constructor settings and existing desktop/mobile actions. It checks
+instance closure after caller callbacks, preventing playback/fullscreen actions after
+destruction. input/pointer-focus.ts owns click/contextmenu emitter subscriptions while
+preserving isInput's historical INPUT-only meaning and composed-path focus checks.
+input/pointer-types.ts keeps host and native registry requirements explicit.
+
+events/hoverInit.ts and moveInit.ts retain original events and class-before-notification
+ordering, with guards against stale callbacks. Emitter listeners still use their explicit
+ctx argument; unlike hotkey callbacks, they do not acquire this=art automatically.
+Public player methods remain non-configurable and are not replaced by these changes.
+
+`test/pointer-events.test.js` verifies boundaries, nesting, callback failures, rejected
+playback, destruction and owned focus cleanup. `test/browser/pointer-events.spec.js`
+compares old/new events, controlled failure paths and actual trusted mouse input with
+real media playback. Android UA coverage exercises branch logic, not a physical device.
+
+## Touch gestures (CORE-17)
+
+events/gestureInit.ts installs the mobile-only listeners; gesture=false still retains
+progress touches and isLive skips gesture installation. input/gesture-controller.ts
+owns the active touch, source snapshot and orientation, plus end/cancel/lock subscriptions.
+input/gesture-direction.ts preserves the two-pixel threshold and diagonal boundaries;
+gesture-types.ts describes the minimal host and drag state. Normal video gestures keep
+TOUCH_MOVE_RATIO, progress gestures keep their full-width multiplier and rotated gestures
+use the vertical axis. Invalid geometry or a cancelled/replaced session cannot resume
+the previous drag. Callback errors retain identity; nested gestures supersede interrupted
+work, and destruction prevents subsequent seek/bar/notice writes.
+
+control/progress/position.ts now accepts a minimal position host and an optional lifetime
+predicate between its bar notification and seek. Existing two-argument desktop callers
+retain their default behavior. Global events add document:touchcancel with the original
+Event payload; its public declaration is additive. Direct local cancellation also works
+when document forwarding has been rebound. Source changes cancel through source identity
+rather than depending on delayed media events.
+
+`test/gesture.test.js` covers axes, absolute/relative ordering, reentry, invalid geometry,
+source/rotation/lock/finger changes and cleanup. Browser gestures use controlled touch
+payloads with actual media and DOM targets. They check requests before first play and
+actual seeking after playback initializes the decoder; they do not certify physical
+touch delivery, native scrolling arbitration or mobile OS cancellation behavior.
+
+## Input scheduling and Events facade (CORE-17)
+
+events/resizeInit.ts retains debounce coalescing, live RESIZE_TIME, normal auto-size,
+aspect-ratio restoration and notice cleanup. It guards later writes after caller reentry
+and listens to the owner's screen orientation by event capability rather than onchange
+being non-null. events/viewInit.ts owns a leading-only throttle, captures SCROLL_TIME at
+installation, reads SCROLL_GAP live and preserves synchronous nested dispatch. Its reset
+timer and internal subscriptions are released at destruction. Public throttle/debounce
+utilities retain their existing independent behavior.
+
+events/viewport.ts uses the container's current ownerDocument/defaultView, preserving
+existing edge and gap arithmetic after iframe adoption. events/updateInit.ts keeps RAF
+opt-in, the initial playing emission and one pending owned frame; paused players do not
+emit raf, and destruction inside a callback cannot schedule another frame. An explicit
+destroy notification still cancels the pending frame while the owner is alive.
+
+events/subscriptions.ts provides typed, guarded, owner-scoped emitter subscriptions;
+scheduling-types.ts describes the event maps and minimal scheduling hosts. The TS Events
+facade keeps its own destroyEvents/proxy/hover/bindGlobalEvents properties, prototype
+methods, bound proxy/hover behavior and scalar/array disposer returns. It declares the
+rebinding property without emitting an extra class field during construction.
+
+`test/event-scheduling.test.js` verifies debounce/throttle/RAF ownership and reentry.
+`test/browser/event-scheduling.spec.js` compares public facade shape, real animation
+frames/playback, orientation event capability, timer cleanup and adopted iframe visibility.
+Controlled orientation targets do not certify physical device orientation.
+
 ## Display modes (CORE-16, in progress)
 
 player/autoSizeMix.ts, autoHeightMix.ts, aspectRatioMix.ts and flipMix.ts retain the

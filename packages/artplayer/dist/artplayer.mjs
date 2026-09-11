@@ -361,29 +361,29 @@ class ResourceScope {
       throw new ResourceCleanupError(errors);
   }
 }
-const states$2 = /* @__PURE__ */ new WeakMap();
+const states$4 = /* @__PURE__ */ new WeakMap();
 const containers = /* @__PURE__ */ new WeakMap();
 function beginLifecycle(owner) {
-  states$2.set(owner, { scope: new ResourceScope(), destroying: false });
+  states$4.set(owner, { scope: new ResourceScope(), destroying: false });
 }
-function stateOf(owner) {
-  const state2 = states$2.get(owner);
+function stateOf$1(owner) {
+  const state2 = states$4.get(owner);
   if (!state2)
     throw new Error("ArtPlayer lifecycle has not been initialized");
   return state2;
 }
 function getScope(owner) {
-  return stateOf(owner).scope;
+  return stateOf$1(owner).scope;
 }
 function isClosing(owner) {
-  const state2 = stateOf(owner);
+  const state2 = stateOf$1(owner);
   return state2.destroying || state2.scope.closed;
 }
 function ownContainer(owner, container, rollback) {
   const current2 = containers.get(container);
   if (current2 && current2 !== owner)
     throw new Error("Cannot mount multiple instances on the same dom element");
-  const state2 = stateOf(owner);
+  const state2 = stateOf$1(owner);
   state2.rollback = rollback;
   containers.set(container, owner);
   state2.releaseContainer = () => {
@@ -392,12 +392,12 @@ function ownContainer(owner, container, rollback) {
   };
 }
 function finishLifecycle(owner) {
-  const state2 = stateOf(owner);
+  const state2 = stateOf$1(owner);
   state2.rollback = void 0;
   return !state2.scope.closed;
 }
 function destroyInstance(owner, instances2, removeHtml, removeSource, failed = false) {
-  const state2 = stateOf(owner);
+  const state2 = stateOf$1(owner);
   if (state2.destroying || state2.scope.closed)
     return;
   state2.destroying = true;
@@ -432,20 +432,20 @@ function destroyInstance(owner, instances2, removeHtml, removeSource, failed = f
   if (errors.length)
     throw errors[0];
 }
-const scopes$3 = /* @__PURE__ */ new WeakMap();
+const scopes$2 = /* @__PURE__ */ new WeakMap();
 function ownEntry(art, element) {
   const scope = getScope(art).child();
-  scopes$3.set(element, scope);
+  scopes$2.set(element, scope);
   return scope;
 }
 function entryScope(element) {
-  const scope = scopes$3.get(element);
+  const scope = scopes$2.get(element);
   if (!scope)
     throw new Error("ArtPlayer component has not been registered");
   return scope;
 }
 function releaseEntry(element) {
-  scopes$3.get(element)?.dispose();
+  scopes$2.get(element)?.dispose();
 }
 function proxyEntry(art, element, target, name, callback) {
   const scope = entryScope(element);
@@ -1620,16 +1620,18 @@ function getPosFromEvent(art, event) {
   const percentage = clamp(width / $progress.clientWidth, 0, 1);
   return { second, time: time2, width, percentage };
 }
-function setCurrentTime(art, event) {
+function setCurrentTime(art, event, active2 = () => true) {
   if (art.isRotate) {
     const percentage = (event.touches[0].clientY - art.top) / art.height;
     const second = percentage * art.duration;
     art.emit("setBar", "played", percentage, event);
-    art.seek = second;
+    if (active2())
+      art.seek = second;
   } else {
     const { second, percentage } = getPosFromEvent(art, event);
     art.emit("setBar", "played", percentage, event);
-    art.seek = second;
+    if (active2())
+      art.seek = second;
   }
 }
 function installProgressInteractions(art, $control) {
@@ -2213,26 +2215,30 @@ class Control extends Component {
     renderSelector(this.art, (target) => this.check(target), option, $ref, events);
   }
 }
-function clickInit(art, events) {
-  const {
-    constructor,
-    template: { $player, $video }
-  } = art;
-  function onDocumentClick(event) {
-    if (includeFromEvent(event, $player)) {
-      art.isInput = event.target.tagName === "INPUT";
-      art.isFocus = true;
-      art.emit("focus", event);
-    } else {
-      art.isInput = false;
-      art.isFocus = false;
-      art.emit("blur", event);
-    }
-  }
+function pointerFocus(art) {
+  const { $player } = art.template;
+  const onDocumentClick = (event) => {
+    if (isClosing(art))
+      return;
+    const inside = includeFromEvent(event, $player);
+    art.isInput = inside && event.target?.tagName === "INPUT";
+    art.isFocus = inside;
+    art.emit(inside ? "focus" : "blur", event);
+  };
   art.on("document:click", onDocumentClick);
   art.on("document:contextmenu", onDocumentClick);
+  getScope(art).add(() => {
+    art.off("document:click", onDocumentClick);
+    art.off("document:contextmenu", onDocumentClick);
+  });
+}
+function clickInit(art, events) {
+  const { constructor, template: { $video } } = art;
+  pointerFocus(art);
   let clickTimes = [];
   events.proxy($video, "click", (event) => {
+    if (isClosing(art))
+      return;
     const now = Date.now();
     clickTimes.push(now);
     const { MOBILE_CLICK_PLAY, DBCLICK_TIME, MOBILE_DBCLICK_PLAY, DBCLICK_FULLSCREEN } = constructor;
@@ -2240,25 +2246,21 @@ function clickInit(art, events) {
     switch (clicks.length) {
       case 1:
         art.emit("click", event);
-        if (isMobile) {
-          if (!art.isLock && MOBILE_CLICK_PLAY) {
-            silencePromise(art.toggle());
-          }
-        } else {
+        if (isClosing(art))
+          return;
+        if (!isMobile || !art.isLock && MOBILE_CLICK_PLAY)
           silencePromise(art.toggle());
-        }
         clickTimes = clicks;
         break;
       case 2:
         art.emit("dblclick", event);
+        if (isClosing(art))
+          return;
         if (isMobile) {
-          if (!art.isLock && MOBILE_DBCLICK_PLAY) {
+          if (!art.isLock && MOBILE_DBCLICK_PLAY)
             silencePromise(art.toggle());
-          }
-        } else {
-          if (DBCLICK_FULLSCREEN) {
-            art.fullscreen = !art.fullscreen;
-          }
+        } else if (DBCLICK_FULLSCREEN) {
+          art.fullscreen = !art.fullscreen;
         }
         clickTimes = [];
         break;
@@ -2267,131 +2269,251 @@ function clickInit(art, events) {
     }
   });
 }
-function GetSlideAngle(dx, dy) {
-  return Math.atan2(dy, dx) * 180 / Math.PI;
+const current = /* @__PURE__ */ new WeakMap();
+const assignments = /* @__PURE__ */ new WeakMap();
+const sources = /* @__PURE__ */ new WeakMap();
+function getSourceScope(owner) {
+  return sources.get(owner) || getScope(owner);
 }
-function GetSlideDirection(startX, startY, endX, endY) {
+function captureSource(owner) {
+  const operation = current.get(owner);
+  const source = sources.get(owner);
+  return () => current.get(owner) === operation && (!operation || operation.active()) && sources.get(owner) === source && (!source || !source.closed);
+}
+function beginSource(owner) {
+  const previous = sources.get(owner);
+  const source = getScope(owner).child();
+  const scope = source.child();
+  sources.set(owner, source);
+  source.add(() => {
+    if (sources.get(owner) === source)
+      sources.delete(owner);
+  });
+  const operation = {
+    scope,
+    assigned: false,
+    acceptingEvents: false,
+    active: () => !isClosing(owner) && !scope.closed && current.get(owner) === operation
+  };
+  current.set(owner, operation);
+  scope.add(() => {
+    if (current.get(owner) === operation)
+      current.delete(owner);
+    operation.onAssigned = void 0;
+    operation.onError = void 0;
+  });
+  previous?.dispose();
+  return operation;
+}
+function takeAssignment(owner) {
+  const operation = assignments.get(owner);
+  assignments.delete(owner);
+  return operation || beginSource(owner);
+}
+function finishAssignment(operation) {
+  operation.assigned = true;
+  const callback = operation.onAssigned;
+  operation.onAssigned = void 0;
+  if (operation.active())
+    callback?.();
+}
+function assignUrl(owner, operation, url) {
+  assignments.set(owner, operation);
+  operation.acceptingEvents = true;
+  try {
+    owner.url = url;
+  } finally {
+    if (assignments.get(owner) === operation) {
+      assignments.delete(owner);
+      finishAssignment(operation);
+    }
+  }
+}
+function failSource(operation, error2) {
+  if (!operation.active())
+    return;
+  if (operation.onError)
+    operation.onError(error2);
+  else
+    console.warn("Failed to initialize ArtPlayer source:", error2);
+  operation.scope.dispose();
+}
+function slideDirection(startX, startY, endX, endY) {
   const dy = startY - endY;
   const dx = endX - startX;
-  let result = 0;
-  if (Math.abs(dx) < 2 && Math.abs(dy) < 2) {
-    return result;
-  }
-  const angle = GetSlideAngle(dx, dy);
-  if (angle >= -45 && angle < 45) {
-    result = 4;
-  } else if (angle >= 45 && angle < 135) {
-    result = 1;
-  } else if (angle >= -135 && angle < -45) {
-    result = 2;
-  } else if (angle >= 135 && angle <= 180 || angle >= -180 && angle < -135) {
-    result = 3;
-  }
-  return result;
+  if (Math.abs(dx) < 2 && Math.abs(dy) < 2)
+    return 0;
+  const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+  if (angle >= -45 && angle < 45)
+    return 4;
+  if (angle >= 45 && angle < 135)
+    return 1;
+  if (angle >= -135 && angle < -45)
+    return 2;
+  if (angle >= 135 && angle <= 180 || angle >= -180 && angle < -135)
+    return 3;
+  return 0;
+}
+function gestureController(art) {
+  let drag;
+  const cancel = () => {
+    drag = void 0;
+  };
+  const active2 = (current2) => drag === current2 && !isClosing(art) && !art.isLock && !art.option.isLive && art.isRotate === current2.rotated && current2.sourceActive();
+  const onLock = (locked) => {
+    if (locked)
+      cancel();
+  };
+  art.on("document:touchend", cancel);
+  art.on("document:touchcancel", cancel);
+  art.on("lock", onLock);
+  getScope(art).add(() => {
+    cancel();
+    art.off("document:touchend", cancel);
+    art.off("document:touchcancel", cancel);
+    art.off("lock", onLock);
+  });
+  const start = (target, event) => {
+    cancel();
+    const touch = event.touches[0];
+    if (isClosing(art) || art.isLock || art.option.isLive || event.touches.length !== 1 || !touch)
+      return;
+    if (![touch.pageX, touch.pageY, touch.clientX, touch.clientY, art.currentTime].every(Number.isFinite))
+      return;
+    const current2 = {
+      target,
+      identifier: touch.identifier,
+      x: touch.pageX,
+      y: touch.pageY,
+      time: art.currentTime,
+      rotated: art.isRotate,
+      sourceActive: captureSource(art)
+    };
+    drag = current2;
+    if (target === art.template.$progress) {
+      const size = art.isRotate ? art.height : art.template.$progress.clientWidth;
+      if (!Number.isFinite(size) || size <= 0 || !Number.isFinite(art.duration) || art.duration <= 0) {
+        cancel();
+        return;
+      }
+      try {
+        setCurrentTime(art, event, () => active2(current2));
+      } catch (error2) {
+        if (drag === current2)
+          cancel();
+        throw error2;
+      }
+      if (active2(current2))
+        current2.time = art.currentTime;
+    }
+  };
+  const move = (event) => {
+    const current2 = drag;
+    const touch = event.touches[0];
+    if (!current2)
+      return;
+    if (!active2(current2) || event.touches.length !== 1 || !touch || touch.identifier !== current2.identifier) {
+      cancel();
+      return;
+    }
+    const size = current2.rotated ? art.height : art.width;
+    const multiplier = current2.target === art.template.$video ? art.constructor.TOUCH_MOVE_RATIO : 1;
+    if (![touch.pageX, touch.pageY, size, art.duration, multiplier].every(Number.isFinite) || size <= 0 || art.duration <= 0) {
+      cancel();
+      return;
+    }
+    const direction = slideDirection(current2.x, current2.y, touch.pageX, touch.pageY);
+    if (!(current2.rotated ? direction === 1 || direction === 2 : direction === 3 || direction === 4))
+      return;
+    const distance = current2.rotated ? touch.pageY - current2.y : touch.pageX - current2.x;
+    const ratio = clamp(distance / size, -1, 1);
+    const time2 = clamp(current2.time + art.duration * ratio * multiplier, 0, art.duration);
+    art.seek = time2;
+    if (!active2(current2))
+      return;
+    art.emit("setBar", "played", clamp(time2 / art.duration, 0, 1), event);
+    if (active2(current2))
+      art.notice.show = `${secondToTime(time2)} / ${secondToTime(art.duration)}`;
+  };
+  return { start, move, cancel };
 }
 function gestureInit(art, events) {
-  if (isMobile && !art.option.isLive) {
-    const { $video, $progress } = art.template;
-    let touchTarget = null;
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-    let startTime = 0;
-    const onTouchStart = (event) => {
-      if (event.touches.length === 1 && !art.isLock) {
-        if (touchTarget === $progress) {
-          setCurrentTime(art, event);
-        }
-        isDragging = true;
-        const { pageX, pageY } = event.touches[0];
-        startX = pageX;
-        startY = pageY;
-        startTime = art.currentTime;
-      }
-    };
-    const onTouchMove = (event) => {
-      if (event.touches.length === 1 && isDragging && art.duration) {
-        const { pageX, pageY } = event.touches[0];
-        const direction = GetSlideDirection(startX, startY, pageX, pageY);
-        const isHorizontal = [3, 4].includes(direction);
-        const isVertical = [1, 2].includes(direction);
-        const isLegal = isHorizontal && !art.isRotate || isVertical && art.isRotate;
-        if (isLegal) {
-          const ratioX = clamp((pageX - startX) / art.width, -1, 1);
-          const ratioY = clamp((pageY - startY) / art.height, -1, 1);
-          const ratio = art.isRotate ? ratioY : ratioX;
-          const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
-          const currentTime = clamp(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
-          art.seek = currentTime;
-          art.emit("setBar", "played", clamp(currentTime / art.duration, 0, 1), event);
-          art.notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
-        }
-      }
-    };
-    const onTouchEnd = () => {
-      if (isDragging) {
-        startX = 0;
-        startY = 0;
-        startTime = 0;
-        isDragging = false;
-        touchTarget = null;
-      }
-    };
-    if (art.option.gesture) {
-      events.proxy($video, "touchstart", (event) => {
-        touchTarget = $video;
-        onTouchStart(event);
-      });
-      events.proxy($video, "touchmove", onTouchMove);
-    }
-    events.proxy($progress, "touchstart", (event) => {
-      touchTarget = $progress;
-      onTouchStart(event);
-    });
-    events.proxy($progress, "touchmove", onTouchMove);
-    art.on("document:touchend", onTouchEnd);
-  }
+  if (!isMobile || art.option.isLive)
+    return;
+  const { $video, $progress } = art.template;
+  const gesture = gestureController(art);
+  const bind2 = (target) => {
+    events.proxy(target, "touchstart", (event) => gesture.start(target, event));
+    events.proxy(target, "touchmove", (event) => gesture.move(event));
+    events.proxy(target, "touchcancel", gesture.cancel);
+  };
+  if (art.option.gesture)
+    bind2($video);
+  bind2($progress);
 }
+const documentEvents = [
+  "click",
+  "mouseup",
+  "keydown",
+  "touchend",
+  "touchcancel",
+  "touchmove",
+  "mousemove",
+  "pointerup",
+  "contextmenu",
+  "pointermove",
+  "visibilitychange",
+  "webkitfullscreenchange"
+];
+const windowEvents = ["resize", "scroll", "orientationchange"];
 function globalInit(art, events) {
-  const documentEvents = [
-    "click",
-    "mouseup",
-    "keydown",
-    "touchend",
-    "touchmove",
-    "mousemove",
-    "pointerup",
-    "contextmenu",
-    "pointermove",
-    "visibilitychange",
-    "webkitfullscreenchange"
-  ];
-  const windowEvents = [
-    "resize",
-    "scroll",
-    "orientationchange"
-  ];
-  const destroyEvents = [];
-  function bindGlobalEvents(source = {}) {
-    for (let index = 0; index < destroyEvents.length; index++) {
-      events.remove(destroyEvents[index]);
+  let active2;
+  let generation = 0;
+  getScope(art).add(() => {
+    active2 = void 0;
+    generation++;
+    return void 0;
+  });
+  const release = (binding) => {
+    if (binding) {
+      for (const dispose of binding.disposers)
+        events.remove(dispose);
+      binding.disposers.length = 0;
     }
-    destroyEvents.length = 0;
-    const { $player } = art.template;
-    documentEvents.forEach((name) => {
+  };
+  function bindGlobalEvents(source = {}) {
+    if (isClosing(art))
+      return;
+    const current2 = ++generation;
+    const binding = { disposers: [] };
+    const cancelled = () => current2 !== generation || isClosing(art);
+    try {
+      const { $player } = art.template;
       const doc = source.document || $player.ownerDocument || document;
-      const destroy = events.proxy(doc, name, (event) => {
-        art.emit(`document:${name}`, event);
-      });
-      destroyEvents.push(destroy);
-    });
-    windowEvents.forEach((name) => {
       const win = source.window || $player.ownerDocument?.defaultView || window;
-      const destroy = events.proxy(win, name, (event) => {
-        art.emit(`window:${name}`, event);
-      });
-      destroyEvents.push(destroy);
-    });
+      const register = (target, names, prefix) => {
+        for (const name of names) {
+          if (cancelled())
+            return;
+          binding.disposers.push(events.proxy(target, name, (event) => {
+            if (active2 === binding && !isClosing(art))
+              art.emit(`${prefix}:${name}`, event);
+          }));
+        }
+      };
+      register(doc, documentEvents, "document");
+      register(win, windowEvents, "window");
+    } catch (error2) {
+      release(binding);
+      throw error2;
+    }
+    if (cancelled()) {
+      release(binding);
+      return;
+    }
+    const previous = active2;
+    active2 = binding;
+    release(previous);
   }
   bindGlobalEvents();
   events.bindGlobalEvents = bindGlobalEvents;
@@ -2401,85 +2523,229 @@ function hoverInit(art, events) {
   events.hover(
     $player,
     (event) => {
+      if (isClosing(art))
+        return;
       addClass($player, "art-hover");
       art.emit("hover", true, event);
     },
     (event) => {
+      if (isClosing(art))
+        return;
       removeClass($player, "art-hover");
       art.emit("hover", false, event);
     }
   );
 }
+const states$3 = /* @__PURE__ */ new WeakMap();
+function ownListeners(registry, art) {
+  states$3.set(registry, { scope: getScope(art), cleaning: false });
+}
+function stateOf(registry) {
+  const state2 = states$3.get(registry);
+  if (!state2)
+    throw new Error("ArtPlayer event registry has not been initialized");
+  return state2;
+}
+function proxyListener(registry, target, names, callback, option = {}) {
+  if (Array.isArray(names)) {
+    const created = [];
+    try {
+      return names.map((name2) => {
+        const dispose2 = proxyListener(registry, target, name2, callback, option);
+        created.push(dispose2);
+        return dispose2;
+      });
+    } catch (error2) {
+      for (const dispose2 of created.reverse()) {
+        try {
+          dispose2();
+        } catch (cleanupError) {
+          console.warn("Failed to roll back event listener:", cleanupError);
+        }
+      }
+      throw error2;
+    }
+  }
+  const name = names;
+  const state2 = stateOf(registry);
+  if (state2.scope.closed || state2.cleaning)
+    return () => {
+    };
+  const options = typeof option === "boolean" ? option : {
+    capture: Boolean(option?.capture),
+    once: Boolean(option?.once),
+    passive: option?.passive,
+    signal: option?.signal
+  };
+  const capture = typeof options === "boolean" ? options : options.capture;
+  const signal = typeof options === "boolean" ? void 0 : options.signal;
+  if (state2.scope.closed || state2.cleaning || signal?.aborted)
+    return () => {
+    };
+  let active2 = true;
+  function clean(force = false) {
+    if (!active2 && !force)
+      return;
+    target.removeEventListener(name, callback, capture);
+    signal?.removeEventListener("abort", dispose);
+    active2 = false;
+    registry.destroyEvents.delete(dispose);
+  }
+  function dispose() {
+    clean();
+  }
+  registry.destroyEvents.add(dispose);
+  try {
+    target.addEventListener(name, callback, options);
+    if (!active2 || state2.scope.closed || state2.cleaning)
+      clean(true);
+    else if (signal?.aborted)
+      dispose();
+    else
+      signal?.addEventListener("abort", dispose, { once: true });
+  } catch (error2) {
+    try {
+      clean(true);
+    } catch (cleanupError) {
+      console.warn("Failed to roll back event listener:", cleanupError);
+    }
+    throw error2;
+  }
+  return dispose;
+}
+function removeListener(registry, dispose) {
+  if (!registry.destroyEvents.has(dispose))
+    return;
+  try {
+    dispose();
+    registry.destroyEvents.delete(dispose);
+  } catch (error2) {
+    console.warn("Failed to remove event listener:", error2);
+  }
+}
+function destroyListeners(registry) {
+  const state2 = stateOf(registry);
+  if (state2.cleaning)
+    return;
+  state2.cleaning = true;
+  try {
+    for (const dispose of registry.destroyEvents) {
+      try {
+        dispose();
+        registry.destroyEvents.delete(dispose);
+      } catch (error2) {
+        console.warn("Failed to destroy event listener:", error2);
+      }
+    }
+  } finally {
+    state2.cleaning = false;
+  }
+}
 function moveInit(art, events) {
   const { $player } = art.template;
   events.proxy($player, "mousemove", (event) => {
-    art.emit("mousemove", event);
+    if (!isClosing(art))
+      art.emit("mousemove", event);
   });
+}
+function eventSubscriptions(art) {
+  return (name, callback) => {
+    if (isClosing(art))
+      return;
+    const listener = (...args) => {
+      if (!isClosing(art))
+        return callback(...args);
+    };
+    art.on(name, listener);
+    getScope(art).add(() => {
+      art.off(name, listener);
+    });
+  };
 }
 function resizeInit(art, events) {
   const { option, constructor } = art;
-  art.on("resize", () => {
+  const on = eventSubscriptions(art);
+  on("resize", () => {
     const { aspectRatio: aspectRatio2, notice } = art;
-    if (art.state === "standard" && option.autoSize) {
+    if (art.state === "standard" && option.autoSize)
       art.autoSize();
-    }
+    if (isClosing(art))
+      return;
     art.aspectRatio = aspectRatio2;
-    notice.show = "";
+    if (!isClosing(art))
+      notice.show = "";
   });
   const scope = getScope(art);
   let cancel = () => {
   };
-  const resizeFn = () => {
+  const resize = () => {
+    if (isClosing(art))
+      return;
     cancel();
     cancel = timeout(scope, () => art.emit("resize"), constructor.RESIZE_TIME);
   };
-  art.on("window:orientationchange", () => resizeFn());
-  art.on("window:resize", () => resizeFn());
-  if (screen && screen.orientation && screen.orientation.onchange) {
-    events.proxy(screen.orientation, "change", () => resizeFn());
-  }
+  on("window:orientationchange", resize);
+  on("window:resize", resize);
+  const orientation = art.template.$player.ownerDocument.defaultView?.screen?.orientation;
+  if (typeof orientation?.addEventListener === "function")
+    events.proxy(orientation, "change", resize);
 }
 function updateInit(art) {
-  if (art.constructor.USE_RAF) {
-    const scope = getScope(art);
-    let cancel = () => {
-    };
-    (function update() {
-      if (art.playing) {
-        art.emit("raf");
-      }
-      if (!art.isDestroy) {
-        cancel = animationFrame(scope, update);
-      }
-    })();
-    art.on("destroy", () => {
-      cancel();
-    });
-  }
+  if (!art.constructor.USE_RAF)
+    return;
+  const scope = getScope(art);
+  let cancel = () => {
+  };
+  const update = () => {
+    if (isClosing(art))
+      return;
+    if (art.playing)
+      art.emit("raf");
+    if (!isClosing(art))
+      cancel = animationFrame(scope, update);
+  };
+  update();
+  eventSubscriptions(art)("destroy", () => cancel());
+}
+function inViewport(element, offset) {
+  const rect = element.getBoundingClientRect();
+  const document2 = element.ownerDocument;
+  const window2 = document2.defaultView;
+  const height = window2?.innerHeight || document2.documentElement.clientHeight;
+  const width = window2?.innerWidth || document2.documentElement.clientWidth;
+  const vertical = rect.top - offset <= height && rect.top + rect.height + offset >= 0;
+  const horizontal = rect.left - offset <= width + offset && rect.left + rect.width + offset >= 0;
+  return vertical && horizontal;
 }
 function viewInit(art) {
-  const {
-    option,
-    constructor,
-    template: { $container }
-  } = art;
-  const scrollFn = throttle(() => {
-    art.emit("view", isInViewport($container, constructor.SCROLL_GAP));
-  }, constructor.SCROLL_TIME);
-  art.on("window:scroll", () => scrollFn());
-  art.on("view", (state2) => {
-    if (option.autoMini) {
-      art.mini = !state2;
-    }
+  const { option, constructor, template: { $container } } = art;
+  const delay = constructor.SCROLL_TIME;
+  const scope = getScope(art);
+  const on = eventSubscriptions(art);
+  let waiting = false;
+  on("window:scroll", () => {
+    if (waiting)
+      return;
+    art.emit("view", inViewport($container, constructor.SCROLL_GAP));
+    if (isClosing(art))
+      return;
+    waiting = true;
+    timeout(scope, () => {
+      waiting = false;
+    }, delay);
+  });
+  on("view", (visible) => {
+    if (option.autoMini)
+      art.mini = !visible;
   });
 }
-const scopes$2 = /* @__PURE__ */ new WeakMap();
 class Events {
   constructor(art) {
     this.destroyEvents = /* @__PURE__ */ new Set();
-    const scope = getScope(art);
-    scopes$2.set(this, scope);
-    scope.add(() => this.destroy());
+    ownListeners(this, art);
+    getScope(art).add(() => {
+      this.destroy();
+    });
     this.proxy = this.proxy.bind(this);
     this.hover = this.hover.bind(this);
     clickInit(art, this);
@@ -2492,116 +2758,142 @@ class Events {
     updateInit(art);
   }
   proxy(target, name, callback, option = {}) {
-    if (Array.isArray(name)) {
-      return name.map((item) => this.proxy(target, item, callback, option));
-    }
-    if (scopes$2.get(this).closed)
-      return () => {
-      };
-    target.addEventListener(name, callback, option);
-    const destroy = () => target.removeEventListener(name, callback, option);
-    this.destroyEvents.add(destroy);
-    return destroy;
+    return Array.isArray(name) ? proxyListener(this, target, name, callback, option) : proxyListener(this, target, name, callback, option);
   }
   hover(target, mouseenter, mouseleave) {
-    if (mouseenter) {
+    if (mouseenter)
       this.proxy(target, "mouseenter", mouseenter);
-    }
-    if (mouseleave) {
+    if (mouseleave)
       this.proxy(target, "mouseleave", mouseleave);
-    }
   }
-  remove(destroyEvent) {
-    if (this.destroyEvents.has(destroyEvent)) {
-      try {
-        destroyEvent();
-      } catch (error2) {
-        console.warn("Failed to remove event listener:", error2);
-      } finally {
-        this.destroyEvents.delete(destroyEvent);
-      }
-    }
+  remove(dispose) {
+    removeListener(this, dispose);
   }
   destroy() {
-    for (const destroyEvent of this.destroyEvents) {
-      try {
-        destroyEvent();
-      } catch (error2) {
-        console.warn("Failed to destroy event listener:", error2);
-      }
-    }
-    this.destroyEvents.clear();
+    destroyListeners(this);
   }
 }
+function defaultHotkeys(art) {
+  const { constructor } = art;
+  return {
+    Escape: () => {
+      if (art.fullscreenWeb)
+        art.fullscreenWeb = false;
+    },
+    Space: () => {
+      silencePromise(art.toggle());
+    },
+    ArrowLeft: () => {
+      art.backward = constructor.SEEK_STEP;
+    },
+    ArrowUp: () => {
+      art.volume += constructor.VOLUME_STEP;
+    },
+    ArrowRight: () => {
+      art.forward = constructor.SEEK_STEP;
+    },
+    ArrowDown: () => {
+      art.volume -= constructor.VOLUME_STEP;
+    }
+  };
+}
+function asElement(target) {
+  if (target && target.nodeType === 1)
+    return target;
+}
+function eventDocument(event, fallback) {
+  const target = event.target;
+  return target?.nodeType === 9 ? target : target?.ownerDocument || event.view?.document || fallback;
+}
+function editable(target) {
+  const tag = target.tagName.toUpperCase();
+  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT")
+    return true;
+  return target.isContentEditable;
+}
+function acceptsHotkey(event, fallback) {
+  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing || event.keyCode === 229)
+    return false;
+  const doc = eventDocument(event, fallback);
+  let active2 = asElement(doc.activeElement);
+  while (active2?.shadowRoot?.activeElement)
+    active2 = asElement(active2.shadowRoot.activeElement);
+  if (active2 && editable(active2))
+    return false;
+  const first = asElement(event.composedPath?.()[0]) || asElement(event.target);
+  return !first || !editable(first);
+}
+const states$2 = /* @__PURE__ */ new WeakMap();
 class Hotkey {
   constructor(art) {
     this.art = art;
     this.keys = {};
-    if (!isMobile) {
+    states$2.set(this, { subscribed: false });
+    if (!isMobile)
       this.init();
-    }
   }
   init() {
-    const { constructor } = this.art;
-    if (this.art.option.hotkey) {
-      this.add("Escape", () => {
-        if (this.art.fullscreenWeb) {
-          this.art.fullscreenWeb = false;
-        }
-      });
-      this.add("Space", () => {
-        silencePromise(this.art.toggle());
-      });
-      this.add("ArrowLeft", () => {
-        this.art.backward = constructor.SEEK_STEP;
-      });
-      this.add("ArrowUp", () => {
-        this.art.volume += constructor.VOLUME_STEP;
-      });
-      this.add("ArrowRight", () => {
-        this.art.forward = constructor.SEEK_STEP;
-      });
-      this.add("ArrowDown", () => {
-        this.art.volume -= constructor.VOLUME_STEP;
-      });
+    const art = this.art;
+    if (isClosing(art))
+      return;
+    const state2 = states$2.get(this);
+    if (art.option.hotkey) {
+      if (!state2.defaults) {
+        const callbacks = defaultHotkeys(art);
+        state2.defaults = () => {
+          for (const key of Object.keys(callbacks))
+            this.add(key, callbacks[key]);
+        };
+      }
+      state2.defaults();
     }
-    this.art.on("document:keydown", (event) => {
-      if (this.art.isFocus) {
-        const tag = document.activeElement.tagName.toUpperCase();
-        const editable = document.activeElement.getAttribute("contenteditable");
-        if (tag !== "INPUT" && tag !== "TEXTAREA" && editable !== "" && editable !== "true" && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
-          const events = this.keys[event.code];
-          if (events) {
-            event.preventDefault();
-            for (let index = 0; index < events.length; index++) {
-              events[index].call(this.art, event);
-            }
-            this.art.emit("hotkey", event);
+    if (state2.subscribed)
+      return;
+    state2.subscribed = true;
+    const onKeydown = (event) => {
+      if (isClosing(art))
+        return;
+      if (art.isFocus && acceptsHotkey(event, art.template.$player.ownerDocument)) {
+        const callbacks = Object.prototype.hasOwnProperty.call(this.keys, event.code) ? this.keys[event.code] : void 0;
+        if (callbacks) {
+          event.preventDefault();
+          for (let index = 0; index < callbacks.length; index++) {
+            if (isClosing(art))
+              return;
+            callbacks[index].call(art, event);
           }
+          if (isClosing(art))
+            return;
+          art.emit("hotkey", event);
         }
       }
-      this.art.emit("keydown", event);
+      if (!isClosing(art))
+        art.emit("keydown", event);
+    };
+    art.on("document:keydown", onKeydown);
+    getScope(art).add(() => {
+      state2.subscribed = false;
+      art.off("document:keydown", onKeydown);
     });
   }
-  add(key, event) {
-    if (this.keys[key]) {
-      if (!this.keys[key].includes(event)) {
-        this.keys[key].push(event);
-      }
+  add(key, callback) {
+    const existing = Object.prototype.hasOwnProperty.call(this.keys, key) ? this.keys[key] : void 0;
+    if (existing) {
+      if (!existing.includes(callback))
+        existing.push(callback);
     } else {
-      this.keys[key] = [event];
+      Object.defineProperty(this.keys, key, { value: [callback], enumerable: true, configurable: true, writable: true });
     }
     return this;
   }
-  remove(key, event) {
-    if (this.keys[key]) {
-      const index = this.keys[key].indexOf(event);
-      if (index !== -1) {
-        this.keys[key].splice(index, 1);
-      }
-      if (this.keys[key].length === 0) {
+  remove(key, callback) {
+    const existing = Object.prototype.hasOwnProperty.call(this.keys, key) ? this.keys[key] : void 0;
+    if (existing) {
+      const index = existing.indexOf(callback);
+      if (index !== -1)
+        existing.splice(index, 1);
+      if (existing.length === 0)
         delete this.keys[key];
-      }
     }
     return this;
   }
@@ -3113,75 +3405,6 @@ function showMediaUI(art, changes, active2) {
       return;
     art[name].show = value;
   }
-}
-const current = /* @__PURE__ */ new WeakMap();
-const assignments = /* @__PURE__ */ new WeakMap();
-const sources = /* @__PURE__ */ new WeakMap();
-function getSourceScope(owner) {
-  return sources.get(owner) || getScope(owner);
-}
-function captureSource(owner) {
-  const operation = current.get(owner);
-  const source = sources.get(owner);
-  return () => current.get(owner) === operation && (!operation || operation.active()) && sources.get(owner) === source && (!source || !source.closed);
-}
-function beginSource(owner) {
-  const previous = sources.get(owner);
-  const source = getScope(owner).child();
-  const scope = source.child();
-  sources.set(owner, source);
-  source.add(() => {
-    if (sources.get(owner) === source)
-      sources.delete(owner);
-  });
-  const operation = {
-    scope,
-    assigned: false,
-    acceptingEvents: false,
-    active: () => !isClosing(owner) && !scope.closed && current.get(owner) === operation
-  };
-  current.set(owner, operation);
-  scope.add(() => {
-    if (current.get(owner) === operation)
-      current.delete(owner);
-    operation.onAssigned = void 0;
-    operation.onError = void 0;
-  });
-  previous?.dispose();
-  return operation;
-}
-function takeAssignment(owner) {
-  const operation = assignments.get(owner);
-  assignments.delete(owner);
-  return operation || beginSource(owner);
-}
-function finishAssignment(operation) {
-  operation.assigned = true;
-  const callback = operation.onAssigned;
-  operation.onAssigned = void 0;
-  if (operation.active())
-    callback?.();
-}
-function assignUrl(owner, operation, url) {
-  assignments.set(owner, operation);
-  operation.acceptingEvents = true;
-  try {
-    owner.url = url;
-  } finally {
-    if (assignments.get(owner) === operation) {
-      assignments.delete(owner);
-      finishAssignment(operation);
-    }
-  }
-}
-function failSource(operation, error2) {
-  if (!operation.active())
-    return;
-  if (operation.onError)
-    operation.onError(error2);
-  else
-    console.warn("Failed to initialize ArtPlayer source:", error2);
-  operation.scope.dispose();
 }
 function installEnded(art) {
   const { option } = art;
