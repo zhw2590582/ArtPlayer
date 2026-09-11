@@ -3,6 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import cpy from 'cpy'
 import { build as viteBuild } from 'vite'
+import { buildAnalysisPlugin, createBuildAnalysis } from './build-analysis.mjs'
 import { getEntryFile, selectProjects } from './projects.js'
 import { getGlobalName, getProjects, getViteBuildConfig } from './utils.js'
 
@@ -27,7 +28,7 @@ const BUILD_FORMATS = {
   esm: { format: 'es', ext: '.mjs', target: 'es2020', minify: false },
 }
 
-async function build(name, targetName, clean = false) {
+async function build(name, targetName, clean = false, analysis) {
   const projectDir = projects[name]
   const { version } = JSON.parse(fs.readFileSync(path.join(projectDir, 'package.json'), 'utf-8'))
   const distDir = path.join(projectDir, 'dist')
@@ -67,6 +68,8 @@ async function build(name, targetName, clean = false) {
       max_line_len: false, // No line length limit
     },
   }
+  if (analysis)
+    config.build.rollupOptions.plugins.push(buildAnalysisPlugin(analysis, name, targetName))
 
   await viteBuild({ root: projectDir, ...config })
 
@@ -77,16 +80,19 @@ async function build(name, targetName, clean = false) {
   console.log(`✨ Built@${targetName} ${name}@${version} Time@${Date.now() - startTime}ms Size@${size}kb`)
 }
 
-async function buildProject(name) {
-  await build(name, 'main', true)
-  await build(name, 'legacy')
-  await build(name, 'esm')
+async function buildProject(name, analysis) {
+  await build(name, 'main', true, analysis)
+  await build(name, 'legacy', false, analysis)
+  await build(name, 'esm', false, analysis)
 }
 
 async function runBuild() {
-  const { names } = await selectProjects(projects, 'build')
+  const { names, analyze } = await selectProjects(projects, 'build')
+  const analysis = analyze ? createBuildAnalysis() : undefined
   for (const name of names)
-    await buildProject(name)
+    await buildProject(name, analysis)
+  if (analysis)
+    console.log(`Build analysis: ${analysis.directory}`)
   if (names.length)
     console.log(`✅ Finished building ${names.length} package(s)!`)
 }

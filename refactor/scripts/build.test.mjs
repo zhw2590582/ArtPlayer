@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url'
 import vm from 'node:vm'
 import { getEntryFile, parseProjects } from '../../scripts/projects.js'
 import { createRebuildQueue } from '../../scripts/rebuild.js'
-import { refactorDir } from './releases.mjs'
+import { hash, refactorDir } from './releases.mjs'
 
 const root = path.resolve(refactorDir, '..')
 test('Package CLI rejects ambiguous requests and never accepts inherited project names', () => {
@@ -15,6 +15,9 @@ test('Package CLI rejects ambiguous requests and never accepts inherited project
   assert.deepEqual(parseProjects(['all'], projects, 'build').names, Object.keys(projects))
   assert.deepEqual(parseProjects(['artplayer', 'artplayer'], projects, 'build').names, ['artplayer'])
   assert.equal(parseProjects(['artplayer', '--no-open'], projects, 'dev').open, false)
+  assert.equal(parseProjects(['artplayer', '--analyze'], projects, 'build').analyze, true)
+  assert.equal(parseProjects(['all', '--analyze'], projects, 'build').analyze, true)
+  assert.throws(() => parseProjects(['artplayer', '--analyze'], projects, 'dev'))
   for (const args of [['all', 'artplayer'], ['constructor'], ['../artplayer'], ['--unknown']])
     assert.throws(() => parseProjects(args, projects, 'build'))
   assert.throws(() => parseProjects(Object.keys(projects), projects, 'dev'))
@@ -99,6 +102,17 @@ test('Normal build CLI compiles TypeScript, JS, Less, SVG and inline worker into
       check(exported)
     }
     check((await import(pathToFileURL(path.join(dist, `${name}.mjs`)))).default)
+    const original = Object.fromEntries(fs.readdirSync(dist).map(file => [file, hash(fs.readFileSync(path.join(dist, file)))]))
+    const analyzed = run([name, '--analyze'])
+    assert.equal(analyzed.status, 0, analyzed.stderr)
+    assert.deepEqual(Object.fromEntries(fs.readdirSync(dist).map(file => [file, hash(fs.readFileSync(path.join(dist, file)))])), original, 'Analysis must not change published artifact bytes or add files to dist')
+    const { output } = JSON.parse(fs.readFileSync(path.join(directory, 'refactor/.cache/build-analysis/latest.json'), 'utf8'))
+    const reports = fs.readdirSync(path.join(directory, output)).map(file => JSON.parse(fs.readFileSync(path.join(directory, output, file), 'utf8')))
+    assert.equal(reports.length, 3)
+    for (const report of reports) {
+      assert.equal(report.artifact.sha256, original[report.file])
+      assert(report.modules.some(item => item.file.endsWith('/src/index.ts') && item.renderedBytes > 0))
+    }
   }
   finally {
     const relative = path.relative(parent, directory)

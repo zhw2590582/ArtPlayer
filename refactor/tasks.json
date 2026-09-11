@@ -645,6 +645,27 @@
       "acceptance": "不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见；以 risks.json 为统一差异索引；关闭必须有 resolutionEvidence/rationale，已复现、源码事实、未验证分开，登记不等于豁免"
     },
     {
+      "id": "ENG-11",
+      "phase": "2 工程保障",
+      "title": "增加不改变产物的模块构建分析",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-03",
+        "ENG-08"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "正式构建的可选模块归因报告及源码/产物指纹",
+      "acceptance": "相同构建开关前后三格式字节一致，报告不进入分发包；区分 Rollup 渲染字节与压缩体积，并保留真实工作区/发布来源",
+      "evidence": [
+        "build-analysis.md",
+        "baselines/bundle-attribution.json",
+        "changes/2026-09-11-ENG-11-build-analysis.md"
+      ]
+    },
+    {
       "id": "CI-01",
       "phase": "2.2 GitHub CI/CD",
       "title": "增强兼容矩阵、并发缓存与 CI 报告",
@@ -1203,13 +1224,17 @@
         "CORE-23",
         "PILOT-01",
         "ENG-08",
-        "ENG-10"
+        "ENG-10",
+        "ENG-11"
       ],
       "status": "todo",
       "risk": "H",
       "deliverable": "核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口",
       "acceptance": "核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-22-core-acceptance.md"
+      ],
+      "reason": "初步体积归因已执行；先独立交付新增前置 ENG-11 分析工具，再恢复核心完整验收。"
     },
     {
       "id": "PKG-CHAPTER-01",

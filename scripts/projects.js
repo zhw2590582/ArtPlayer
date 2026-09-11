@@ -20,9 +20,12 @@ export function getEntryFile(projectDir) {
 export function parseProjects(args, projects, command) {
   const names = []
   let open = true
+  let analyze = false
   for (const arg of args) {
     if (arg === '--no-open' && command === 'dev')
       open = false
+    else if (arg === '--analyze' && command === 'build')
+      analyze = true
     else if (arg === '--help')
       return { help: true, names: [], open }
     else if (arg !== '--')
@@ -31,7 +34,7 @@ export function parseProjects(args, projects, command) {
   if (names.includes('all')) {
     if (command !== 'build' || names.length !== 1)
       throw new Error('Use build all on its own; dev accepts one package')
-    return { names: Object.keys(projects), open }
+    return { names: Object.keys(projects), open, analyze }
   }
   for (const name of names) {
     if (!Object.hasOwn(projects, name))
@@ -39,13 +42,13 @@ export function parseProjects(args, projects, command) {
   }
   if (command === 'dev' && names.length > 1)
     throw new Error('dev accepts one package')
-  return { names: [...new Set(names)], open }
+  return { names: [...new Set(names)], open, analyze }
 }
 
 export async function selectProjects(projects, command) {
   const selection = parseProjects(process.argv.slice(2), projects, command)
   if (selection.help) {
-    console.log(command === 'build' ? 'Usage: yarn build [all | package ...]' : 'Usage: yarn dev [package] [--no-open]')
+    console.log(command === 'build' ? 'Usage: yarn build [all | package ...] [--analyze]' : 'Usage: yarn dev [package] [--no-open]')
     return selection
   }
   if (!selection.names.length) {

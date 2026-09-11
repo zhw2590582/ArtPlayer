@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 214 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 215 项，范围 22 个包及工作区/示例。
 
-状态：todo 155 / doing 0 / blocked 0 / done 59 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 155 / doing 0 / blocked 0 / done 60 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -84,6 +84,7 @@
 | ENG-08 | workspace<br>增加覆盖率、资源与性能报告 | ENG-03, ENG-05, BASE-06 | 覆盖率基线、资源清理断言、性能报告与阈值 | 关键生命周期分支有门槛，报告不靠无意义断言堆数量；将 BASE-06 的同环境多组配对、计时/压缩审查阈值与资源异常分开接入候选，不把历史现象冻结成正常要求 | M | done |
 | ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04 | 共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入；契约-支持版本-测试 ID-命令-候选/报告-任务的覆盖索引 | 核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit；计划/已执行/缺证据分开，识别缺少验证归属的公开契约 | M | todo |
 | ENG-10 | workspace<br>建立历史失败分级和测试可靠性规则 | ENG-03, ENG-04, ENG-05, ENG-07, BASE-07 | 历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则 | 不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见；以 risks.json 为统一差异索引；关闭必须有 resolutionEvidence/rationale，已复现、源码事实、未验证分开，登记不等于豁免 | M | done |
+| ENG-11 | workspace<br>增加不改变产物的模块构建分析 | ENG-03, ENG-08 | 正式构建的可选模块归因报告及源码/产物指纹 | 相同构建开关前后三格式字节一致，报告不进入分发包；区分 Rollup 渲染字节与压缩体积，并保留真实工作区/发布来源 | L | done |
 
 ## 2.2 GitHub CI/CD
 
@@ -126,7 +127,7 @@
 | CORE-20 | artplayer<br>收敛核心入口与依赖方向 | CORE-14, CORE-15, CORE-18, CORE-19 | Artplayer 门面、初始化依赖与最终目录 | 所有核心自有源码迁移，公开描述符/静态接口/事件差分通过 | H | done |
 | CORE-21 | artplayer<br>生成核心声明并校验包内容 | CORE-20, ENG-07 | 由 TS 生成的既有入口声明与三种发布产物 | 内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过；逐项完成 CORE-07 留下的 BASE-TYPE-04/05/07 声明方案，旧合法消费者与实际返回分别留证；不能以虚假的交叉返回类型或改变运行时来掩盖冲突，未决项阻止核心声明出口；处理 CORE-10 / BASE-TYPE-08 的 setter-only 属性虚构 getter 声明，并复核 PlaybackControls 精确视图与旧 toggle 声明共存策略 | H | done |
 | CORE-23 | artplayer<br>检查并补齐键盘、焦点与可访问名称 | CORE-13, CORE-14, CORE-17, ENG-05, BASE-04 | 主要控件/设置/模式退出的键盘与焦点回归、名称和字幕可用性检查及必要兼容修正 | 保持旧快捷键和 DOM/CSS 钩子；真实浏览器验证，不以静态属性检查代替交互；处理 BASE-DOM-01 的主要控件 Tab 不可达，保留既有名称与快捷键 | H | done |
-| CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, CORE-23, PILOT-01, ENG-08, ENG-10 | 核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口 | 核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布 | H | todo |
+| CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, CORE-23, PILOT-01, ENG-08, ENG-10, ENG-11 | 核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口 | 核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-chapter
 
@@ -435,6 +436,7 @@
 - ENG-07: [记录](changes/2026-09-10-ENG-07-package-consumers.md) [记录](baselines/package-validation.json)
 - ENG-08: [记录](coverage-performance.md) [记录](baselines/quality-validation.json) [记录](changes/2026-09-11-ENG-08-quality-reports.md)
 - ENG-10: [记录](changes/2026-09-10-ENG-10-test-reliability.md) [记录](test-reliability.md)
+- ENG-11: [记录](build-analysis.md) [记录](baselines/bundle-attribution.json) [记录](changes/2026-09-11-ENG-11-build-analysis.md)
 - PILOT-01: [记录](changes/2026-09-10-PILOT-01-chapter.md) [记录](baselines/pilot-validation.json)
 - CORE-01: [记录](changes/2026-09-10-CORE-01-typed-utils.md) [记录](baselines/core-utils-validation.json)
 - CORE-02: [记录](changes/2026-09-11-CORE-02-typed-emitter.md) [记录](baselines/emitter-validation.json)
@@ -458,6 +460,7 @@
 - CORE-20: [记录](changes/2026-09-11-CORE-20-entry.md) [记录](baselines/entry-validation.json)
 - CORE-21: [记录](changes/2026-09-11-CORE-21-public-declarations.md) [记录](baselines/core-declarations-validation.json) [记录](core-public-types.md) [记录](typechecking.md)
 - CORE-23: [记录](changes/2026-09-11-CORE-23-keyboard-focus.md) [记录](baselines/keyboard-validation.json)
+- CORE-22: [记录](changes/2026-09-11-CORE-22-core-acceptance.md) 初步体积归因已执行；先独立交付新增前置 ENG-11 分析工具，再恢复核心完整验收。
 - PKG-CHAPTER-01: [记录](changes/2026-09-10-PKG-CHAPTER-01-contract.md) [记录](baselines/chapter-contract.md)
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)
