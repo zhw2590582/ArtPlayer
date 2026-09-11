@@ -1,7 +1,9 @@
+import type { Config } from '../types/artplayer-plugin-dash-control'
+import type { AudioFields, AudioItem, Dash, Label, MenuModel, QualityFields, QualityItem, SelectorItem, Valid } from './types'
 import { qualityAdapter } from './sdk'
 
-function uniqueLabels(items) {
-  const seen = new Map()
+function uniqueLabels<Item extends SelectorItem>(items: Item[]): Item[] {
+  const seen = new Map<Label, Item>()
   return items.filter((item) => {
     if (item.html === undefined)
       return true
@@ -16,13 +18,13 @@ function uniqueLabels(items) {
   })
 }
 
-export function qualityModel(dash, config, active) {
+export function qualityModel<Level extends object, Track extends object>(dash: Dash<Level, Track>, config: Config<Level>, active: Valid): MenuModel<QualityItem> | null {
   const adapter = qualityAdapter(dash)
   const levels = adapter.levels()
   if (!active() || !levels?.length)
     return null
   const auto = config.auto || 'Auto'
-  const getName = config.getName || (level => `${level.height}p`)
+  const getName = config.getName || ((level: QualityFields) => `${level.height}p`)
   const selected = adapter.current(levels)
   if (!active())
     return null
@@ -32,7 +34,7 @@ export function qualityModel(dash, config, active) {
   const html = !automatic && selected ? getName(selected) : auto
   if (!active())
     return null
-  const items = []
+  const items: QualityItem[] = []
   for (const [index, level] of levels.entries()) {
     const label = getName(level)
     if (!active())
@@ -40,34 +42,37 @@ export function qualityModel(dash, config, active) {
     items.push({ html: label, ...adapter.item(level, index, selected, automatic) })
   }
   const selector = uniqueLabels(items)
-    .sort((left, right) => right.value - left.value)
+    // The synthetic Auto item is appended after sorting SDK numeric keys.
+    .sort((left, right) => (right.value as number) - (left.value as number))
   selector.push({ html: auto, value: 'auto', default: automatic })
   return { html, title: config.title || 'Quality', selector, select: adapter.select }
 }
 
-function selectedTrack(tracks, current) {
+function selectedTrack<Track extends AudioFields>(tracks: Track[], current: Track): Track | undefined {
   if (tracks.includes(current))
     return current
   if (current.id == null && current.index == null)
     return undefined
-  const matching = tracks.filter(track => ['id', 'index', 'lang'].every(key => current[key] == null || track[key] === current[key]))
+  const fields = ['id', 'index', 'lang'] as const
+  const matching = tracks.filter(track => fields.every(key => current[key] == null || track[key] === current[key]))
   return matching.length === 1 ? matching[0] : undefined
 }
 
-export function audioModel(dash, config, active) {
+export function audioModel<Level extends object, Track extends object>(dash: Dash<Level, Track>, config: Config<Track>, active: Valid): MenuModel<AudioItem<Track>> | null {
   const tracks = dash.getTracksFor('audio')
   if (!active() || !tracks?.length)
     return null
   const auto = config.auto || 'Auto'
-  const getName = config.getName || (track => track.lang || track.id)
-  const current = dash.getCurrentTrackFor('audio') || tracks[0]
+  const getName = config.getName || ((track: AudioFields) => track.lang || track.id)
+  // The non-empty list check above protects the fallback item.
+  const current = dash.getCurrentTrackFor('audio') || tracks[0]!
   if (!active())
     return null
   const html = current ? getName(current) : auto
   if (!active())
     return null
   const selected = selectedTrack(tracks, current)
-  const items = []
+  const items: AudioItem<Track>[] = []
   for (const track of tracks) {
     const label = getName(track)
     if (!active())

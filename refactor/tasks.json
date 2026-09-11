@@ -2037,11 +2037,15 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "dash.js adapter、selector 和回调类型",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-DASH-04-types.md",
+        "baselines/dash-types-validation.json",
+        "dash-validation.md"
+      ]
     },
     {
       "id": "PKG-DASH-05",

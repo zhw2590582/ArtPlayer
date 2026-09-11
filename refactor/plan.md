@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 217 项，范围 22 个包及工作区/示例。
 
-状态：todo 141 / doing 3 / blocked 0 / done 73 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 140 / doing 3 / blocked 0 / done 74 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -204,7 +204,7 @@
 | PKG-DASH-01 | artplayer-plugin-dash-control<br>核对包契约与历史用法 | BASE-05 | quality/audio、representation ID/Auto、getName 和 update | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
 | PKG-DASH-02 | artplayer-plugin-dash-control<br>建立特有行为与错误测试 | PKG-DASH-01, ENG-03, ENG-05 | 保留已有 5 项稳定 ID 回归，补发布版 SDK 4.x/当前 5.x、音轨/空列表/过滤/换源与关闭引用 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-DASH-03 | artplayer-plugin-dash-control<br>整理内部职责与资源 | PKG-DASH-02, CORE-11, CORE-14 | 能力适配保留 SDK 4.x 与 5.x，稳定 ID 映射、ABR 状态、UI 清理和生命周期职责分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
-| PKG-DASH-04 | artplayer-plugin-dash-control<br>迁移自有源码和公开类型 | PKG-DASH-03, ENG-04, ENG-06, CORE-07 | dash.js adapter、selector 和回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-DASH-04 | artplayer-plugin-dash-control<br>迁移自有源码和公开类型 | PKG-DASH-03, ENG-04, ENG-06, CORE-07 | dash.js adapter、selector 和回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
 | PKG-DASH-05 | artplayer-plugin-dash-control<br>验证新旧核心和组合 | PKG-DASH-04, CORE-22 | 固定 dash.js 4.5.2/5.2.1 与本地 DASH 实际清晰度/音轨、高亮、Auto 和换源组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-DASH-06 | artplayer-plugin-dash-control<br>验证分发并同步文档 | PKG-DASH-05, ENG-07 | dash.control.js、支持的 dash.js 版本与产物 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
@@ -482,3 +482,4 @@
 - PKG-DASH-01: [记录](changes/2026-09-12-PKG-DASH-01-contract.md) [记录](baselines/dash-control-contract.md) [记录](baselines/dash-control-release.json)
 - PKG-DASH-02: [记录](changes/2026-09-12-PKG-DASH-02-tests.md) [记录](dash-validation.md) [记录](baselines/dash-validation.json)
 - PKG-DASH-03: [记录](changes/2026-09-12-PKG-DASH-03-runtime.md) [记录](baselines/dash-runtime.json) [记录](dash-validation.md)
+- PKG-DASH-04: [记录](changes/2026-09-12-PKG-DASH-04-types.md) [记录](baselines/dash-types-validation.json) [记录](dash-validation.md)

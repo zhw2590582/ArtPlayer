@@ -628,7 +628,7 @@
         "PKG-DASH-05"
       ],
       "evidence": [
-        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/src/index.ts",
         "docs/assets/example/dash.control.js",
         "refactor/baselines/dash-control-contract.md"
       ],
@@ -2844,7 +2844,7 @@
       "evidence": [
         "refactor/baselines/dash-control-contract.md",
         "refactor/baselines/dash-control-release.json",
-        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/src/index.ts",
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
         "docs/assets/example/dash.control.js",
         "test/dash-contract.test.js",
@@ -2867,7 +2867,7 @@
       "evidence": [
         "refactor/baselines/dash-control-contract.md",
         "refactor/baselines/dash-control-release.json",
-        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/src/index.ts",
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
         "docs/assets/example/dash.control.js",
         "test/dash-contract.test.js",
@@ -2897,7 +2897,7 @@
       "evidence": [
         "refactor/baselines/dash-control-contract.md",
         "refactor/baselines/dash-control-release.json",
-        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/src/index.ts",
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
         "docs/assets/example/dash.control.js",
         "test/dash-contract.test.js",
@@ -2912,19 +2912,26 @@
       "id": "DASH-TYPE-01",
       "title": "DASH 类型未表达默认工厂参数、SDK 回调对象和现代模块入口",
       "confirmation": "source-observed",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DASH-04"
       ],
       "evidence": [
         "refactor/baselines/dash-control-contract.md",
         "refactor/baselines/dash-control-release.json",
-        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/src/index.ts",
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
         "docs/assets/example/dash.control.js"
       ],
       "compatibleResolution": "保留旧类型推断，提供准确的 SDK 适配/回调契约和兼容格式入口，不以 any 掩盖源码。",
-      "closureCriteria": "严格源码、旧/新编译器消费者与隔离产物类型验证通过。"
+      "closureCriteria": "严格源码、旧/新编译器消费者与隔离产物类型验证通过。",
+      "resolutionEvidence": [
+        "refactor/baselines/dash-types-validation.json",
+        "refactor/changes/2026-09-12-PKG-DASH-04-types.md",
+        "test/types/dash-control.ts",
+        "refactor/scripts/dash-package-types.mjs"
+      ],
+      "resolutionRationale": "五个自有 TS 模块严格检查通过，真实旧 npm 声明/候选消费者在 TS 4.3/5.9 兼容，五种模块模式及非法用法验证、真实 Monaco、工作区外 Yarn tarball 安装与类型检查通过。只关闭插件自身声明和格式解析问题，实际 SDK 类型/媒体矩阵仍由 05 接续。"
     },
     {
       "id": "DASH-DEMO-01",
@@ -2937,7 +2944,7 @@
       "evidence": [
         "refactor/baselines/dash-control-contract.md",
         "refactor/baselines/dash-control-release.json",
-        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/src/index.ts",
         "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
         "docs/assets/example/dash.control.js"
       ],

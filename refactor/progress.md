@@ -1,5 +1,21 @@
 # 进度与证据
 
+## 最新完成：DASH-04 严格 TS、公开类型和编辑器迁移
+
+DASH 五个自有模块全部 TS 化，源码/公开工厂可互相赋值；默认字段和自定义 SDK 泛型准确，
+旧 object 回调、Parameters 配置提取、同步 update 与所有 JS 分发路径保持。
+补齐 CJS/ESM/legacy 类型桥和 Monaco 生成声明；实际 npm 旧声明与候选消费者对照通过。
+
+全仓 261 个生产 TS 严格检查，完整 CI 715 项通过；源码 Node 116、三格式 Node 266 项通过。
+正式 main 三引擎 90 项（含核心/DASH Monaco 6 项）、legacy 84 项通过，无重试/跳过。
+工作区外 Yarn tarball 离线安装/冻结重装后五种类型模式通过，每模式拒绝八条非法用法。
+首次发现 tsconfig.json 泄露到包，已保留失败并修正 .npmignore，未手改生成产物。
+
+DASH-TYPE-01 关闭；真实 dash.js/MPD/ABR、SDK 类型与设备/完整分发仍待验证。
+当前 217 项：74 done、3 doing、140 todo。下一步 DASH-05 进入真实 SDK 与媒体组合。
+详见 [本次变更](changes/2026-09-12-PKG-DASH-04-types.md) 和
+[执行证据](baselines/dash-types-validation.json)。独立本地提交，不推送/发布，全项目目标未完成。
+
 ## 最新完成：DASH-03 SDK 适配与生命周期源码改造
 
 DASH 源码已拆为入口生命周期、SDK 适配、selector 模型、菜单所有权四个 JS 模块。

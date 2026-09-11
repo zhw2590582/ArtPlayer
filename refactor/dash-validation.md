@@ -1,7 +1,8 @@
 # DASH Control 验证与维护入口
 
 测试保护真实 npm 1.1.0 的既有调用契约，以及重构前工作区的 SDK 5.x 稳定 ID 修正。
-版本来源见 [发布契约](baselines/dash-control-contract.md)。02 建立基线，03 已改造生产实现；
+版本来源见 [发布契约](baselines/dash-control-contract.md)。02 建立基线，03 改造运行行为，
+04 已把五个自有模块迁移为严格 TS 并补齐公开类型与编辑器生成；
 实际模块地图与生命周期规则见 [包内架构](../packages/artplayer-plugin-dash-control/ARCHITECTURE.md)。
 
 ## 可重跑的测试
@@ -12,6 +13,12 @@
   候选插件 SDK 4/5、两类菜单、两种选择及候选清理、Chromium/Firefox/WebKit。
   浏览器套件串行运行，避免共享端口和报告覆盖。
 - `yarn ci:check`：工具链、计划、lint、声明漂移、严格类型和 Node/基线测试。
+- `yarn test:browser test/browser/dash-editor-types.spec.js --trace on`：三引擎 Monaco 实际
+  worker 编译全局声明、验证回调/旧类型提取及错误诊断，并执行发出的 JS 工厂。
+- `yarn build:ts`：重新生成编辑器声明；`refactor/scripts/dash-types.test.mjs` 校验可复现、
+  TS 4.3.5/5.9.3、五种模块模式、八条非法用法及实际 npm 旧声明的消费者对照。
+- `yarn test:dash-types-package`：Yarn 打包核心/DASH、工作区外离线安装与冻结锁重装，
+  检查五种模式、CommonJS callable/命名空间、每模式八条非法调用，并拒绝解析回工作区。
 
 Node helper 分别加载当前源码、固定 Git 提交的旧工作区 UMD、实际 npm main/legacy/module。
 Git 内容以 LF 指纹核对，发布归档与成员以原始字节指纹核对。`ARTPLAYER_TEST_DASH` 可指定
@@ -45,5 +52,5 @@ Git 内容以 LF 指纹核对，发布归档与成员以原始字节指纹核对
 - DASH-LIFE-01：空列表/禁用后 UI、旧回调、销毁后 update/订阅已修正，补充重入和错误回归。
 - DASH-STATE-01：唯一克隆当前轨道、重复标签、数字零 ID 已修正；实际 SDK 轨道身份仍由 05 核验。
 
-状态以 risks.json 为准；受控修复不替代真实 SDK 验收。04 完成严格 TS/公开类型兼容，05 完成
+状态以 risks.json 为准；受控修复不替代真实 SDK 验收。严格 TS/公开类型已有独立验证，05 完成
 真实 SDK/媒体/组合验证，06 完成包分发验收。物理设备和 npm 发布准入仍待完成。

@@ -60,7 +60,8 @@
     "test:package": "node scripts/package-check.mjs",
     "test:package:release": "node scripts/package-check.mjs --release",
     "build:types": "node scripts/build-types.mjs --write",
-    "check:types": "node scripts/build-types.mjs --check"
+    "check:types": "node scripts/build-types.mjs --check",
+    "test:dash-types-package": "node refactor/scripts/dash-package-types.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

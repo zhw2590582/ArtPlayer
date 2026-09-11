@@ -1,20 +1,25 @@
+import type Artplayer from 'artplayer'
+import type { AudioTrack, Option, QualityLevel, Result } from '../types/artplayer-plugin-dash-control'
+import type { AudioItem, Cleanup, EventName, Host, QualityItem, Valid } from './types'
 import $audio from './audio.svg?raw'
 import { audioModel, qualityModel } from './mapping'
 import { createMenu } from './menu'
 import $quality from './quality.svg?raw'
 
-export default function artplayerPluginDashControl(option = {}) {
-  return (art) => {
+export default function artplayerPluginDashControl<Level extends object = QualityLevel, Track extends object = AudioTrack>(option: Option<Level, Track> = {}) {
+  return (player: Artplayer): Result => {
+    // art.dash is caller-owned; update keeps the historical SDK/media validation boundary.
+    const art = player as unknown as Host<Level, Track>
     const { $video } = art.template
     const { errorHandle } = art.constructor.utils
     let closed = false
     let revision = 0
-    const quality = createMenu(art, 'dash-quality', $quality)
-    const audio = createMenu(art, 'dash-audio', $audio)
-    const subscriptions = []
+    const quality = createMenu<QualityItem>(art, 'dash-quality', $quality)
+    const audio = createMenu<AudioItem<Track>>(art, 'dash-audio', $audio)
+    const subscriptions: [EventName, Cleanup][] = []
 
-    function clear(current = () => true) {
-      let failure
+    function clear(current: Valid = () => true): void {
+      let failure: unknown
       for (const cleanup of [quality.clear, audio.clear]) {
         if (!current())
           break
@@ -29,11 +34,11 @@ export default function artplayerPluginDashControl(option = {}) {
         throw failure
     }
 
-    function update() {
+    function update(): void {
       if (closed || art.isDestroy)
         return
       const version = ++revision
-      const dash = art.dash
+      const dash = art.dash!
       const current = () => !closed && !art.isDestroy && version === revision && art.dash === dash
       const valid = () => current() && dash.getVideoElement() === $video && current()
       try {
@@ -66,12 +71,12 @@ export default function artplayerPluginDashControl(option = {}) {
       }
     }
 
-    function destroy() {
+    function destroy(): void {
       if (closed)
         return
       closed = true
       revision++
-      let failure
+      let failure: unknown
       const actions = [clear, ...subscriptions.splice(0).map(([name, callback]) => () => art.off(name, callback))]
       for (const action of actions) {
         try {
@@ -86,7 +91,8 @@ export default function artplayerPluginDashControl(option = {}) {
     }
 
     try {
-      for (const entry of [['ready', update], ['restart', update], ['destroy', destroy]]) {
+      const entries: [EventName, Cleanup][] = [['ready', update], ['restart', update], ['destroy', destroy]]
+      for (const entry of entries) {
         if (closed)
           break
         subscriptions.push(entry)

@@ -1,8 +1,10 @@
-export function createMenu(art, name, icon) {
-  let current
-  const owned = new Map()
+import type { DisplayConfig, Label, MenuHost, MenuModel, SelectorItem, Valid } from './types'
 
-  function remove(surface, callback = owned.get(surface)) {
+export function createMenu<Item extends SelectorItem>(art: MenuHost, name: string, icon: string) {
+  let current: object | undefined
+  const owned = new Map<'controls' | 'setting', (item: Item) => Label>()
+
+  function remove(surface: 'controls' | 'setting', callback = owned.get(surface)): void {
     if (!callback || owned.get(surface) !== callback)
       return
     owned.delete(surface)
@@ -14,9 +16,9 @@ export function createMenu(art, name, icon) {
     registry.remove(name)
   }
 
-  function clear() {
+  function clear(): void {
     current = undefined
-    let failure
+    let failure: unknown
     for (const [surface, callback] of [...owned]) {
       try {
         remove(surface, callback)
@@ -29,7 +31,7 @@ export function createMenu(art, name, icon) {
       throw failure
   }
 
-  function update(config, model, active) {
+  function update(config: DisplayConfig, model: MenuModel<Item> | null, active: Valid): void {
     if (!model) {
       clear()
       return
@@ -37,7 +39,7 @@ export function createMenu(art, name, icon) {
     const state = {}
     current = state
     const valid = () => state === current && active()
-    const onSelect = (item) => {
+    const onSelect = (item: Item): Label => {
       if (!valid())
         return item.html
       model.select(item, valid)

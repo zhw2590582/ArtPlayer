@@ -240,7 +240,8 @@ When editing proxy packages:
 
 The reference implementation for adaptive selector UI is:
 
-- `packages/artplayer-plugin-hls-control/src/index.js`
+- `packages/artplayer-plugin-hls-control/src/index.ts`
+- `packages/artplayer-plugin-dash-control/src/index.ts` (SDK 4.x/5.x capability adapter)
 
 If adding HLS-like quality/audio selection elsewhere:
 
