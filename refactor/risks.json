@@ -603,15 +603,17 @@
     {
       "id": "SDK-01",
       "title": "hls.js 实际集成验证范围",
-      "confirmation": "unverified",
+      "confirmation": "source-observed",
       "status": "open",
       "owners": [
-        "PKG-HLS-01",
+        "PKG-HLS-03",
+        "PKG-HLS-05",
         "EX-03"
       ],
       "evidence": [
         "packages/artplayer-plugin-hls-control/src/index.js",
-        "docs/assets/example/hls.control.js"
+        "docs/assets/example/hls.control.js",
+        "refactor/hls-validation.md"
       ],
       "compatibleResolution": "Caller supplies art.hls; homepage demo loads hls.js 1.5.17. Preserve quality/audio selectors and old core integration.",
       "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
@@ -2520,6 +2522,73 @@
         "test/initialization.test.js"
       ],
       "resolutionRationale": "Player installers and outer construction stop after reentrant closure without publishing later plugins or registering the dead instance. Installed normal descriptors/static/subclass behavior and getter/native-write destruction cases pass."
+    },
+    {
+      "id": "HLS-UI-01",
+      "title": "空轨道和关闭配置仍残留 HLS 菜单",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-HLS-03"
+      ],
+      "evidence": [
+        "refactor/hls-validation.md",
+        "test/hls-control.test.js",
+        "test/browser/hls-control.spec.js"
+      ],
+      "compatibleResolution": "使用既有 remove API 清理不再可用的 UI，保留菜单名称及选择语义。",
+      "closureCriteria": "候选空轨道、关闭开关及恢复测试通过。"
+    },
+    {
+      "id": "HLS-LIFE-01",
+      "title": "过期 HLS 选择回调与销毁后 update 仍工作",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-HLS-03"
+      ],
+      "evidence": [
+        "refactor/hls-validation.md",
+        "test/hls-control.test.js",
+        "test/browser/hls-control.spec.js"
+      ],
+      "compatibleResolution": "限制过期实例回调，整理监听器归属，Hls 仍由调用方销毁。",
+      "closureCriteria": "替换、销毁、重入及 SDK 订阅解绑的候选回归通过。"
+    },
+    {
+      "id": "HLS-AUTO-01",
+      "title": "真实 ABR 播放的 Auto 标签在 update 后丢失",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-HLS-03",
+        "PKG-HLS-05"
+      ],
+      "evidence": [
+        "refactor/hls-validation.md",
+        "test/hls-control.test.js",
+        "test/browser/hls-control.spec.js"
+      ],
+      "compatibleResolution": "区分自动策略与实际播放档位，保留手动及 Auto 选择值。",
+      "closureCriteria": "实际 SDK 自动/手动切换和事件同步通过。"
+    },
+    {
+      "id": "HLS-ENV-01",
+      "title": "Windows WebKit 缺失 MSE，HLS 播放矩阵尚缺 Safari 证据",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-HLS-05",
+        "REL-09",
+        "REVIEW-02"
+      ],
+      "evidence": [
+        "refactor/hls-validation.md",
+        "test/hls-control.test.js",
+        "test/browser/hls-control.spec.js"
+      ],
+      "compatibleResolution": "显式验证宿主不支持，保留 14 skipped，不作为播放通过；补有 MSE 的 Safari/macOS/iOS 环境。",
+      "closureCriteria": "实际 Safari/MSE/native 路径证据齐全，不能仅凭 Windows 能力检查关闭。"
     }
   ]
 }

@@ -33,7 +33,7 @@
 | VENDOR-06 | open / 待取证 | monaco-static-assets 来源、版本与许可闭环 | SITE-01, SITE-05 |
 | VENDOR-07 | open / 待取证 | vconsole 来源、版本与许可闭环 | SITE-01 |
 | VENDOR-08 | open / 待取证 | console-bundle 来源、版本与许可闭环 | SITE-01 |
-| SDK-01 | open / 待取证 | hls.js 实际集成验证范围 | PKG-HLS-01, EX-03 |
+| SDK-01 | open / 源码/产物事实 | hls.js 实际集成验证范围 | PKG-HLS-03, PKG-HLS-05, EX-03 |
 | SDK-02 | open / 待取证 | dash.js 实际集成验证范围 | PKG-DASH-01, EX-03 |
 | SDK-03 | open / 待取证 | flv.js 实际集成验证范围 | EX-03 |
 | SDK-04 | open / 待取证 | mpegts.js 实际集成验证范围 | EX-03 |
@@ -120,3 +120,7 @@
 | BASE-LIFE-47 | resolved / 已复现 | AirPlay methods can call a picker or publish events and notices after destruction | CORE-20 |
 | BASE-LIFE-48 | resolved / 已复现 | Proxy-time destruction cannot clean a template before its public assignment | CORE-20 |
 | BASE-LIFE-49 | resolved / 已复现 | Constructor and Player initialization continue after a callback destroys the instance | CORE-20 |
+| HLS-UI-01 | open / 已复现 | 空轨道和关闭配置仍残留 HLS 菜单 | PKG-HLS-03 |
+| HLS-LIFE-01 | open / 已复现 | 过期 HLS 选择回调与销毁后 update 仍工作 | PKG-HLS-03 |
+| HLS-AUTO-01 | open / 已复现 | 真实 ABR 播放的 Auto 标签在 update 后丢失 | PKG-HLS-03, PKG-HLS-05 |
+| HLS-ENV-01 | open / 已复现 | Windows WebKit 缺失 MSE，HLS 播放矩阵尚缺 Safari 证据 | PKG-HLS-05, REL-09, REVIEW-02 |

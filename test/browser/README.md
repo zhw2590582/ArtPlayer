@@ -15,6 +15,12 @@ no retries, a loopback server on 8084, and no existing dev server. Set `ARTPLAYE
 to use another free port. The server builds core and chapter from current JS/TS entries in memory;
 it does not modify dist or docs outputs. Restart the test command after source changes.
 
+`hls-control.spec.js` separately builds HLS control and verifies a pinned Hls.js 1.5.17 archive.
+Its local playlists/segments are generated fixtures with checked hashes. Windows WebKit lacks MSE:
+one explicit capability/error-cleanup test covers that limitation and its 14 playback cases are
+skipped with a reason. Chromium/Firefox run the full four-combination HLS matrix. This is not
+Safari playback approval; see [HLS validation](../../refactor/hls-validation.md) for evidence and open gates.
+
 `playback.spec.js` tests published/current core with current chapter, real decoded frame colors,
 media time advancing, pause, seek, source change to the existing docs video, destroy and real
 HTTP failure. These are initial smoke contracts, not full chapter or lifecycle coverage.

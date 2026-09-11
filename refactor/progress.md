@@ -1,5 +1,13 @@
 # 进度与证据
 
+## 最新完成：PKG-HLS-02 行为与 SDK 基线
+
+45 项 HLS Node 契约通过，覆盖源码及发布 main/legacy/ESM；完整 CI 522 项、249 个生产 TS 文件通过。真实 Hls.js 1.5.17 与本地双档位/双音轨流验证四组合的解码、实际选择、pause/seek、切源、失败恢复和销毁。
+
+浏览器结果为 31 passed、14 skipped；Windows WebKit 26.6 没有 MSE/ManagedMediaSource，能力/失败清理通过不能替代其播放矩阵。首轮 14 失败及定向诊断已保留，Safari/native/worker 等缺口仍 open。旧 Auto 标签与空音轨菜单残留有真实 SDK 复现，过期回调有受控证据；HLS-03 将修复这些问题。
+
+见 [测试说明](hls-validation.md)、[冻结证据](baselines/hls-validation.json) 与 [交付记录](changes/2026-09-11-PKG-HLS-02-tests.md)。63 done、152 todo；本任务独立本地 commit，核实后进入 HLS-03 职责拆分。HLS 生产源码尚未迁移 TS，类型和全发布矩阵继续按 04～06 执行，没有发布放行。
+
 ## 最新完成：PKG-HLS-01 发布契约
 
 HLS control 1.1.0 的六文件归档、历史源码、声明/README/manifest 与两段主逻辑对照通过。新增独立冻结记录及只读重验工具；保留 BASE-01。空轨道旧菜单、过期回调、Auto 状态、getName 类型及示例清理已映射到后续任务，没有把静态观察写成 SDK 或浏览器通过。

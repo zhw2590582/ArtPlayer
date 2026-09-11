@@ -44,7 +44,7 @@ Node10 是 TS 模块解析模式名，不代表支持 Node.js 10。现代 es2020
 | artplayer-plugin-danmuku-mask / 1.1.0 | MediaPipe/TensorFlow 模型、GPU/CPU/WASM、停止/销毁；人物短片 | Yarn 与 model URL 分开；默认 solutionPath 无固定版本，下载/推理/失败待 | PKG-MASK-01/02/05/06 |
 | artplayer-plugin-dash-control / 1.1.0 | dash.js 实际表示/音轨、自动/手动高亮、切换拓扑；固定 MPD/segments | 本地选择逻辑 Node 测试已有；真实 dash.js/浏览器流待，示例版本见 SDK-02 | PKG-DASH-01/02/05/06、EX-03 |
 | artplayer-plugin-document-pip / 1.1.0 | Document PiP、节点/样式迁移与退出恢复 | 支持浏览器/版本待确认，真实用户手势与 PiP 窗口待 | PKG-DPIP-01/02/05/06 |
-| artplayer-plugin-hls-control / 1.1.0 | hls.js 清晰度/音轨自动手动切换；主/子列表与拓扑变化 | 实际 SDK/流未运行，示例版本见 SDK-01；Safari 原生 HLS 与 hls.js 路径分开 | PKG-HLS-01/02/05/06、EX-03 |
+| artplayer-plugin-hls-control / 1.1.0 | hls.js 清晰度/音轨自动手动切换；主/子列表与拓扑变化 | 1.5.17 在 Chromium/Firefox 本地双档位/音轨基线通过；Windows WebKit 无 MSE，14 播放用例 skipped；Safari/native/worker 仍待验，见 hls-validation.md | PKG-HLS-01/02/05/06、EX-03 |
 | artplayer-plugin-jassub / 1.1.0 | ASS、worker/WASM/font 加载、切源/销毁；短 ASS+明确来源字体 | 内嵌资源哈希已有；版本对应、跨源/worker 限制、实际渲染待 | PKG-JASSUB-01/02/05/06 |
 | artplayer-plugin-multiple-subtitles / 1.2.0 | VTT 合并/排序/解析错误、URL 回收；双语言/空/坏 VTT | parser 来源头已观察；特有行为和浏览器字幕待 | PKG-MULTI-SUB-01/02/05/06 |
 | artplayer-plugin-vast / 1.2.0 | Glomex/Google IMA、广告错误/恢复、重复初始化；供应商测试广告标签 | 依赖版本已记录；实际 IMA 网络/广告流程待，PR 用受控 adapter | PKG-VAST-01/02/05/06 |

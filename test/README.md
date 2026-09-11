@@ -14,6 +14,13 @@ Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 
 `helpers/playback.js` creates the controlled media facade used by the original playback regressions. It models only the exercised methods and events. It is not HTMLMediaElement validation; actual playback remains in browser tests.
 
+`node --test test/hls-control.test.js` runs shared HLS control contracts against workspace source
+and integrity-checked published main/legacy/ESM. It is included in `yarn test:unit`.
+`helpers/hls-control.js` owns the controlled SDK/registry host; it does not simulate decoding or ABR.
+Published-only tests preserve historical bug observations without requiring candidate code to keep them.
+Real Hls.js 1.5.17 playback is in `test/browser/hls-control.spec.js`; see its environment limits in
+`refactor/hls-validation.md`. Test SDK download is pinned and verified, not an installed runtime dependency.
+
 `contracts/emitter.js` owns public assertions, independent of module layout. `public-behavior.test.js` runs them against the integrity-checked published core and current bundled source. The combined chain/context contract corresponds to BASE-03 EVENT.chain and EVENT.context-arguments; other EVENT IDs retain their baseline names. Exceptions, callback identity, mutation during dispatch and once reentry must not be weakened during migration.
 
 Set `ARTPLAYER_TEST_CORE` to a built `.js`, `.legacy.js` or `.mjs` core file to add a candidate to the same public-contract run, then execute `node --test test/public-behavior.test.js`. An invalid path/export fails the run. This is a narrow event contract check, not isolated package installation or complete API compatibility; ENG-07 owns tarball consumption.

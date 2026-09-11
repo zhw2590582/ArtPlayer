@@ -30,7 +30,7 @@ export function readMember(archive, member) {
 }
 
 export async function ensureArchive(release) {
-  assert(/^[a-z0-9-]+$/.test(release.name) && /^\d+\.\d+\.\d+$/.test(release.version), 'Invalid release identifier')
+  assert(/^[a-z0-9]+(?:[.-][a-z0-9]+)*$/.test(release.name) && /^\d+\.\d+\.\d+$/.test(release.version), 'Invalid release identifier')
   const archive = path.join(cacheDir, `${release.name}-${release.version}.tgz`)
   if (!fs.existsSync(archive)) {
     const url = new URL(release.tarball)

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-HLS-02",
+  "capturedAt": "2026-09-11T15:36:11.802Z",
+  "metadataUrl": "https://registry.npmjs.org/hls.js/1.5.17",
+  "release": {
+    "name": "hls.js",
+    "version": "1.5.17",
+    "tarball": "https://registry.npmjs.org/hls.js/-/hls.js-1.5.17.tgz",
+    "integrity": "sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==",
+    "sha256": "8f9e60001992f59dbfb1dbc397e145743c41bb6dde233ec8a7974013c8a031fe",
+    "files": {
+      "package/package.json": "f2172b9942a23ffb46edd4af815cf1ea161db088e7f63dc518d30e55c95d6ae9",
+      "package/LICENSE": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+      "package/dist/hls.min.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+      "package/src/hls.ts": "b3d3f797669e89bc8d05d2de2aae243ae110811d6738948f173d789cc1ac1f2d",
+      "package/src/controller/audio-track-controller.ts": "ff34f3cb29b66aa5fcba87758bb20d129b052a053808c150ce779e0ceb1e4626"
+    }
+  },
+  "note": "Test-only pinned integration baseline from the existing example; selected member hashes plus whole archive integrity. No runtime dependency or complete supported version claim."
+}

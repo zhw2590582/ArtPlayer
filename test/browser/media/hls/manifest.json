@@ -1,0 +1,269 @@
+{
+  "kind": "generated-hls-media",
+  "version": "ffmpeg version 2025-11-12-git-6cdd2cbe32-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+  "duration": 12,
+  "commands": [
+    [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-f",
+      "lavfi",
+      "-i",
+      "testsrc2=size=160x90:rate=24",
+      "-t",
+      "12",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-pix_fmt",
+      "yuv420p",
+      "-profile:v",
+      "baseline",
+      "-level:v",
+      "3.0",
+      "-g",
+      "48",
+      "-keyint_min",
+      "48",
+      "-sc_threshold",
+      "0",
+      "-crf",
+      "28",
+      "-f",
+      "hls",
+      "-hls_time",
+      "2",
+      "-hls_playlist_type",
+      "vod",
+      "-hls_segment_filename",
+      "low-%02d.mpegts",
+      "low.m3u8"
+    ],
+    [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-f",
+      "lavfi",
+      "-i",
+      "testsrc2=size=320x180:rate=24",
+      "-t",
+      "12",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-pix_fmt",
+      "yuv420p",
+      "-profile:v",
+      "baseline",
+      "-level:v",
+      "3.0",
+      "-g",
+      "48",
+      "-keyint_min",
+      "48",
+      "-sc_threshold",
+      "0",
+      "-crf",
+      "28",
+      "-f",
+      "hls",
+      "-hls_time",
+      "2",
+      "-hls_playlist_type",
+      "vod",
+      "-hls_segment_filename",
+      "high-%02d.mpegts",
+      "high.m3u8"
+    ],
+    [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-f",
+      "lavfi",
+      "-i",
+      "sine=frequency=440:sample_rate=48000",
+      "-t",
+      "12",
+      "-vn",
+      "-c:a",
+      "aac",
+      "-b:a",
+      "48k",
+      "-ac",
+      "2",
+      "-f",
+      "hls",
+      "-hls_time",
+      "2",
+      "-hls_playlist_type",
+      "vod",
+      "-hls_segment_filename",
+      "english-%02d.mpegts",
+      "english.m3u8"
+    ],
+    [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-f",
+      "lavfi",
+      "-i",
+      "sine=frequency=880:sample_rate=48000",
+      "-t",
+      "12",
+      "-vn",
+      "-c:a",
+      "aac",
+      "-b:a",
+      "48k",
+      "-ac",
+      "2",
+      "-f",
+      "hls",
+      "-hls_time",
+      "2",
+      "-hls_playlist_type",
+      "vod",
+      "-hls_segment_filename",
+      "french-%02d.mpegts",
+      "french.m3u8"
+    ]
+  ],
+  "files": {
+    "english-00.mpegts": {
+      "sha256": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+      "bytes": 13912
+    },
+    "english-01.mpegts": {
+      "sha256": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+      "bytes": 14100
+    },
+    "english-02.mpegts": {
+      "sha256": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+      "bytes": 14100
+    },
+    "english-03.mpegts": {
+      "sha256": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+      "bytes": 13912
+    },
+    "english-04.mpegts": {
+      "sha256": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+      "bytes": 14100
+    },
+    "english-05.mpegts": {
+      "sha256": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+      "bytes": 14100
+    },
+    "english-06.mpegts": {
+      "sha256": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+      "bytes": 752
+    },
+    "english.m3u8": {
+      "sha256": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+      "bytes": 365
+    },
+    "french-00.mpegts": {
+      "sha256": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+      "bytes": 13912
+    },
+    "french-01.mpegts": {
+      "sha256": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+      "bytes": 14100
+    },
+    "french-02.mpegts": {
+      "sha256": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+      "bytes": 14100
+    },
+    "french-03.mpegts": {
+      "sha256": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+      "bytes": 13912
+    },
+    "french-04.mpegts": {
+      "sha256": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+      "bytes": 14100
+    },
+    "french-05.mpegts": {
+      "sha256": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+      "bytes": 14100
+    },
+    "french-06.mpegts": {
+      "sha256": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+      "bytes": 752
+    },
+    "french.m3u8": {
+      "sha256": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+      "bytes": 358
+    },
+    "high-00.mpegts": {
+      "sha256": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+      "bytes": 45308
+    },
+    "high-01.mpegts": {
+      "sha256": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+      "bytes": 52264
+    },
+    "high-02.mpegts": {
+      "sha256": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+      "bytes": 48128
+    },
+    "high-03.mpegts": {
+      "sha256": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+      "bytes": 54144
+    },
+    "high-04.mpegts": {
+      "sha256": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+      "bytes": 47376
+    },
+    "high-05.mpegts": {
+      "sha256": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+      "bytes": 48128
+    },
+    "high.m3u8": {
+      "sha256": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+      "bytes": 311
+    },
+    "low-00.mpegts": {
+      "sha256": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+      "bytes": 28952
+    },
+    "low-01.mpegts": {
+      "sha256": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+      "bytes": 32900
+    },
+    "low-02.mpegts": {
+      "sha256": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+      "bytes": 30268
+    },
+    "low-03.mpegts": {
+      "sha256": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+      "bytes": 32336
+    },
+    "low-04.mpegts": {
+      "sha256": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+      "bytes": 29704
+    },
+    "low-05.mpegts": {
+      "sha256": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+      "bytes": 29516
+    },
+    "low.m3u8": {
+      "sha256": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+      "bytes": 305
+    },
+    "master.m3u8": {
+      "sha256": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+      "bytes": 470
+    },
+    "video-only.m3u8": {
+      "sha256": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+      "bytes": 108
+    }
+  }
+}
