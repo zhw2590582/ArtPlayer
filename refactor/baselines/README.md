@@ -35,6 +35,10 @@ BASE-01 于 2026-09-10 固定核心与 chapter 的 npm 发布内容，数据在 
 
 ## 公共 API 报告
 
+Audio Track 的后续包基线由 PKG-AUDIO-01 独立冻结，见
+[契约和重跑](audio-track-contract.md) 及 [1.1.0 归档来源](audio-track-release.json)。
+它不改写本目录初始 BASE 快照，媒体/类型/设备通过范围由后续任务提供。
+
 BASE-02 已在内置浏览器取得核心/chapter 的同步 API 和描述符快照，见 [覆盖与重跑](api-coverage.md) 和 [冻结报告](public-api.json)。事件/生命周期、DOM、类型、分发和其他包仍由各自任务补齐。
 
 ## 事件与生命周期报告

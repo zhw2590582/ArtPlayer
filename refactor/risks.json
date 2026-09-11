@@ -2643,6 +2643,70 @@
       ],
       "compatibleResolution": "区分 SDK、测试媒体/时序和宿主问题，保留真实档位/解码断言及 trace；不扩大等待或只验证菜单。",
       "closureCriteria": "直接 Hls 与新旧核心对照定位切换停滞，验证处置和正常/连续组切换，不能以重复通过关闭。"
+    },
+    {
+      "id": "AUDIO-LIFE-01",
+      "title": "Audio Track 销毁后 update 与媒体/订阅缺少终止守卫",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-AUDIO-02",
+        "PKG-AUDIO-03",
+        "PKG-AUDIO-05"
+      ],
+      "evidence": [
+        "refactor/baselines/audio-track-contract.md",
+        "refactor/baselines/audio-track-release.json"
+      ],
+      "compatibleResolution": "保留公开 audio 和同步 update，封闭销毁后的资源写入并管理插件订阅，验证待决播放拒绝。",
+      "closureCriteria": "受控复现和新旧核心真实媒体切源/销毁验证通过，不以源码观察代替泄漏证据。"
+    },
+    {
+      "id": "AUDIO-SYNC-01",
+      "title": "Audio Track 偏移边界和切源/缓冲恢复尚缺真实时序证据",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-AUDIO-02",
+        "PKG-AUDIO-03",
+        "PKG-AUDIO-05"
+      ],
+      "evidence": [
+        "refactor/baselines/audio-track-contract.md",
+        "refactor/baselines/audio-track-release.json"
+      ],
+      "compatibleResolution": "固定严格阈值、偏移正负、倍率和音量语义；实测负目标/超时长及连续切源，按证据修复。",
+      "closureCriteria": "正常/边界/失败/缓冲恢复有媒体与受控断言，实际支持环境缺口明确处理。"
+    },
+    {
+      "id": "AUDIO-TYPE-01",
+      "title": "Audio Track update 部分配置与公开/编辑器声明不一致",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-AUDIO-04"
+      ],
+      "evidence": [
+        "refactor/baselines/audio-track-contract.md",
+        "refactor/baselines/audio-track-release.json"
+      ],
+      "compatibleResolution": "拓宽已有 JS 合法部分 update，保留 url/offset/sync 字段精度和 Parameters/ReturnType 提取，生成语义正确编辑器声明。",
+      "closureCriteria": "当前与旧编译器的正反例、CJS/ESM/legacy 入口及实际编辑器通过。"
+    },
+    {
+      "id": "AUDIO-DEMO-01",
+      "title": "Audio Track README 示例链接名称不匹配且缺维护说明",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-AUDIO-06"
+      ],
+      "evidence": [
+        "refactor/baselines/audio-track-contract.md",
+        "refactor/baselines/audio-track-release.json"
+      ],
+      "compatibleResolution": "修正 audio.track 示例路径，补真实模块地图及 update/生命周期说明。",
+      "closureCriteria": "README、示例、公开声明一致，8082 正式 demo 和包分发验证通过。"
     }
   ]
 }

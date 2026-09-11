@@ -1,5 +1,17 @@
 # 进度与证据
 
+## 最新完成：PKG-AUDIO-01 外部音轨发布契约
+
+冻结 npm audio-track 1.1.0 六文件及完整性，manifest/README/声明和起点一致，
+发布工厂与源码规范化比较通过。两项可重跑检查通过；音频同步、update 部分配置、
+销毁后引用和示例链接差异已分别登记，实际行为与媒体测试由 02 接续。
+源码/声明/产物未改，本步不代表音频浏览器或类型验收通过。
+
+HLS 诊断检查点已提交 26b2983d，HLS-SDK-01 仍 doing，两项 Firefox 风险仍 open。
+当前 216 项、66 done、1 doing、149 todo。Audio-01 按任务独立本地提交后核实，
+继续 Audio-02，避免未归因的 HLS 平台问题阻塞无依赖的其他包。
+详见 [契约](baselines/audio-track-contract.md) 和 [记录](changes/2026-09-12-PKG-AUDIO-01-contract.md)。
+
 ## HLS 诊断 checkpoint：已缩小范围，尚未关闭风险
 
 独立诊断 runner 已加入直接 Hls、发布核心、候选核心对照，以及 HTTP/route、worker/观察器、

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AUDIO-01",
+  "capturedAt": "2026-09-11T17:44:31.880Z",
+  "sourceCommit": "26b2983daf9edf9c798ce6a1638deeb3c36ba778",
+  "registryObservation": {
+    "registryUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track",
+    "distTags": {
+      "latest": "1.1.0"
+    },
+    "versions": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "publishedAt": "2026-03-12T14:21:57.424Z",
+    "note": "Observed metadata; not a promise of future latest version or support for every older release."
+  },
+  "release": {
+    "name": "artplayer-plugin-audio-track",
+    "version": "1.1.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-audio-track/1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+    "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+    "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+    "archiveBytes": 2205,
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+      "package/dist/artplayer-plugin-audio-track.js": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683",
+      "package/dist/artplayer-plugin-audio-track.legacy.js": "d8dc74bce76112d7430c98e3165605e32fde5d3c603be4b496eac58f574576cb",
+      "package/dist/artplayer-plugin-audio-track.mjs": "4ac599bc5a1a6ecb0cb1942d4269528bfb2cd9d047f988de61fe671a77ad14cd",
+      "package/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+      "package/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-audio-track",
+      "version": "1.1.0",
+      "description": "audio-track plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-audio-track.d.ts",
+          "import": "./dist/artplayer-plugin-audio-track.mjs",
+          "require": "./dist/artplayer-plugin-audio-track.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-audio-track.d.ts",
+          "import": "./dist/artplayer-plugin-audio-track.legacy.js",
+          "require": "./dist/artplayer-plugin-audio-track.legacy.js"
+        }
+      },
+      "main": "dist/artplayer-plugin-audio-track.js",
+      "module": "./dist/artplayer-plugin-audio-track.mjs",
+      "types": "types/artplayer-plugin-audio-track.d.ts",
+      "legacy": "dist/artplayer-plugin-audio-track.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    }
+  },
+  "source": {
+    "packages/artplayer-plugin-audio-track/package.json": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+    "packages/artplayer-plugin-audio-track/README.md": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+    "packages/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.ts": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e",
+    "packages/artplayer-plugin-audio-track/src/index.js": "470237ebd62e8fb8537e809db03fd02871844d41c03d422a22956bd2756ac28e",
+    "docs/assets/example/audio.track.js": "9ed26b2ee006e1a430db68b2a1b308c4801dd3a4cc87c74e8a8f5ccf3456ac8d",
+    "docs/assets/ts/artplayer-plugin-audio-track.d.ts": "e0815cb05be2366957df77f0de81a46f863c4d8e0a0697fac1258c4f48da85ea"
+  },
+  "comparisons": [
+    {
+      "file": "package.json",
+      "publishedLF": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+      "workspaceLF": "c466ae55c40e8f6bdd97bec20fcf916c8c4f44eef3e47694638be005eb445df7",
+      "equal": true
+    },
+    {
+      "file": "README.md",
+      "publishedLF": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+      "workspaceLF": "9a03352433ae90cb9d3198e17571c9bb598334b84a77a3a1df2c4b000ce8347d",
+      "equal": true
+    },
+    {
+      "file": "types/artplayer-plugin-audio-track.d.ts",
+      "publishedLF": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e",
+      "workspaceLF": "27bc0dfedacb7e0188cb668ac8708874a86b00d489f1636037c2465d3344437e",
+      "equal": true
+    }
+  ],
+  "functionComparison": {
+    "sha256": "6a758f0a88567283ae44bc9d1fa0906161f6ce9d384803637d7124c2dc1b87da",
+    "typescript": "5.9.3",
+    "esbuild": "0.27.7",
+    "scope": [
+      "artplayerPluginAudioTrack"
+    ],
+    "excludes": [
+      "bundler wrappers"
+    ],
+    "note": "Historical source at sourceCommit; normalized factory comparison is not runtime acceptance."
+  }
+}

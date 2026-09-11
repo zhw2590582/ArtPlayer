@@ -36,7 +36,7 @@ Node10 是 TS 模块解析模式名，不代表支持 Node.js 10。现代 es2020
 | artplayer-plugin-ads / 2.1.0 | 广告图片/视频、本片恢复、跳过、错误/销毁；本地短广告和主片 | 发布范围及所有浏览器场景待；无需借 IMA 结果代替自有广告逻辑 | PKG-ADS-01/02/05/06 |
 | artplayer-plugin-ambilight / 1.1.0 | Canvas 采样、CORS、resize、后台/销毁；同源及受控跨源 MP4 | 待真实画布和资源测量 | PKG-AMBILIGHT-01/02/05/06 |
 | artplayer-plugin-asr / 2.1.0 | PCM 音频输出/暂停/销毁；AudioContext + 调用方服务 | 待音频环境与调用方 WebSocket 验证；示例服务版本未知，不在 PR 调线上服务 | PKG-ASR-01/02/05/06、EX-03 |
-| artplayer-plugin-audio-track / 1.1.0 | 音轨切换与同步；固定双音轨/单音轨/无音轨样本 | 待轨道来源和支持窗口确认、Safari/桌面实测 | PKG-AUDIO-01/02/05/06 |
+| artplayer-plugin-audio-track / 1.1.0 | 独立外部 Audio 与主视频时钟同步；本地 MP4+AAC，偏移/切源/缓冲/失败样本 | 1.1.0 发布及调用契约见 [包基线](baselines/audio-track-contract.md)；旧核心 5.4.0 为具体对照点，桌面/Safari 实测待完成 | PKG-AUDIO-01/02/05/06 |
 | artplayer-plugin-auto-thumbnail / 1.1.0 | 帧提取/跳转、CORS、回收；本地 MP4+跨源失败 | 待 Canvas/seek/移动内存行为 | PKG-AUTO-THUMB-01/02/05/06 |
 | artplayer-plugin-chapter / 1.1.0 | 区间、边界/重叠、hover/update、进度条组合；MP4+固定章节 | 发布 1.1.0 已冻结；最小注册/两段 DOM 已验，边界和新旧组合待 | PKG-CHAPTER-01/02/04/05/06、PILOT-01 |
 | artplayer-plugin-chromecast / 1.1.0 | Cast SDK、发送/接收会话、取消/断线、本机恢复；接收端可访问媒体 | SDK 动态地址已记录；真实接收设备和 sender 版本未知、待运行 | PKG-CAST-01/02/05/06 |
