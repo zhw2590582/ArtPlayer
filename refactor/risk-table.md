@@ -4,8 +4,8 @@
 
 | ID | 状态 / 证据等级 | 条目 | 后续任务 |
 | --- | --- | --- | --- |
-| ENG-PERF-01 | open / 源码/产物事实 | Candidate core bundles exceed the BASE-06 size review threshold in all three formats | CORE-22, REVIEW-01 |
-| ENG-PERF-02 | open / 待取证 | Intermittent constructor timing signals require follow-up paired measurement | CORE-22, REVIEW-01 |
+| ENG-PERF-01 | open / 源码/产物事实 | Candidate core bundles exceed the BASE-06 size review threshold in all three formats | CORE-22, MOD-03, REVIEW-01 |
+| ENG-PERF-02 | open / 待取证 | Intermittent constructor and destruction timing signals require follow-up paired measurement | CORE-22, MOD-03, REVIEW-01 |
 | BASE-LIFE-06 | resolved / 已复现 | Published switch leaves an unhandled rejection and an unsettled promise when resume fails | CORE-09 |
 | BASE-LIFE-01 | resolved / 已复现 | Superseded switch resolves along with the latest source | CORE-09 |
 | BASE-LIFE-02 | resolved / 已复现 | Switch remains unsettled during the bounded observation after destroy | CORE-09 |
@@ -44,7 +44,7 @@
 | SDK-09 | open / 待取证 | jassub-worker-wasm-fonts 实际集成验证范围 | PKG-JASSUB-01, PKG-JASSUB-05 |
 | SDK-10 | open / 待取证 | mediabunny 实际集成验证范围 | PKG-MB-01, PKG-MB-09 |
 | SDK-11 | open / 待取证 | asr-caller-service 实际集成验证范围 | PKG-ASR-01, PKG-ASR-05, EX-03 |
-| SDK-12 | open / 待取证 | option-validator 实际集成验证范围 | CORE-01, CORE-07 |
+| SDK-12 | resolved / 源码/产物事实 | option-validator 实际集成验证范围 | CORE-01, CORE-07, CORE-22 |
 | BUILD-AMD-01 | resolved / 已复现 | AMD 全局导出补丁误将固定参数 t 当作全局对象 | ENG-06 |
 | UTIL-MERGE-01 | resolved / 已复现 | mergeDeep lets a JSON __proto__ key replace the result prototype | CORE-01 |
 | UTIL-DOWNLOAD-01 | resolved / 源码/产物事实 | Temporary download anchor remains if click throws | CORE-01 |

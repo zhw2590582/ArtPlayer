@@ -84,6 +84,73 @@ test('candidate: setting navigation ignores hidden rows and inert descendants', 
   await expect(row(page, 'quality')).toBeFocused()
 })
 
+test('candidate: long setting panels observe live button availability on every navigation', async ({ page }, testInfo) => {
+  await setup(page)
+  await page.evaluate(() => {
+    const setting = window.art.setting
+    for (const name of ['quality', 'loop', 'offset', 'action'])
+      setting.remove(name)
+    for (let index = 0; index < 40; index++)
+      setting.add({ name: `row-${index}`, html: `<button id="setting-button-${index}">Action ${index}</button>` })
+  })
+  await page.keyboard.press('Enter')
+  await expect(page.locator('#setting-button-0')).toBeFocused()
+  const measurements = []
+  async function navigate(key, expected) {
+    await page.evaluate(() => {
+      const panel = window.art.setting.cache.get(window.art.setting.active)
+      const query = panel.querySelectorAll
+      const style = window.getComputedStyle
+      const counts = { queries: 0, styles: 0 }
+      panel.querySelectorAll = function (...args) {
+        counts.queries++
+        return query.apply(this, args)
+      }
+      window.getComputedStyle = function (element, ...args) {
+        if (panel.contains(element))
+          counts.styles++
+        return style.call(this, element, ...args)
+      }
+      window.finishSettingMeasurement = () => {
+        delete panel.querySelectorAll
+        window.getComputedStyle = style
+        delete window.finishSettingMeasurement
+        return counts
+      }
+    })
+    try {
+      await page.keyboard.press(key)
+    }
+    finally {
+      measurements.push({ key, expected, ...await page.evaluate(() => window.finishSettingMeasurement()) })
+    }
+    await expect(page.locator(`#setting-button-${expected}`)).toBeFocused()
+  }
+  await navigate('ArrowDown', 1)
+  await page.evaluate(() => {
+    document.querySelector('#setting-button-2').style.visibility = 'hidden'
+    document.querySelector('#setting-button-3').closest('.art-setting-item').setAttribute('inert', '')
+    document.querySelector('#setting-button-4').disabled = true
+    document.querySelector('#setting-button-5').tabIndex = -1
+  })
+  await navigate('ArrowDown', 6)
+  await navigate('a', 6)
+  await navigate('End', 39)
+  await page.evaluate(() => {
+    document.querySelector('#setting-button-2').style.visibility = ''
+    document.querySelector('#setting-button-3').closest('.art-setting-item').removeAttribute('inert')
+    document.querySelector('#setting-button-4').disabled = false
+    document.querySelector('#setting-button-5').removeAttribute('tabindex')
+    window.art.setting.remove('row-1')
+  })
+  await navigate('Home', 0)
+  await navigate('ArrowDown', 2)
+  await navigate('ArrowDown', 3)
+  await navigate('ArrowDown', 4)
+  await navigate('ArrowDown', 5)
+  await testInfo.attach('setting-navigation-work', { contentType: 'application/json', body: JSON.stringify(measurements, null, 2) })
+})
+
 test('candidate: setting keyboard enters nested panels and returns to the originating item', async ({ page }, testInfo) => {
   await setup(page)
   await page.evaluate(() => {

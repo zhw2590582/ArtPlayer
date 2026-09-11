@@ -21,6 +21,8 @@ export function observeControlLayout(art: ControlHost): void {
     scope.add(() => {
       observer.disconnect()
     })
+    // Its initial delivery measures after the remaining constructor DOM writes.
+    return
   }
   else if (typeof MutationObserver !== 'undefined') {
     const observer = new MutationObserver(update)

@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 215 项，范围 22 个包及工作区/示例。
 
-状态：todo 155 / doing 0 / blocked 0 / done 60 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 154 / doing 0 / blocked 0 / done 61 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -127,7 +127,7 @@
 | CORE-20 | artplayer<br>收敛核心入口与依赖方向 | CORE-14, CORE-15, CORE-18, CORE-19 | Artplayer 门面、初始化依赖与最终目录 | 所有核心自有源码迁移，公开描述符/静态接口/事件差分通过 | H | done |
 | CORE-21 | artplayer<br>生成核心声明并校验包内容 | CORE-20, ENG-07 | 由 TS 生成的既有入口声明与三种发布产物 | 内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过；逐项完成 CORE-07 留下的 BASE-TYPE-04/05/07 声明方案，旧合法消费者与实际返回分别留证；不能以虚假的交叉返回类型或改变运行时来掩盖冲突，未决项阻止核心声明出口；处理 CORE-10 / BASE-TYPE-08 的 setter-only 属性虚构 getter 声明，并复核 PlaybackControls 精确视图与旧 toggle 声明共存策略 | H | done |
 | CORE-23 | artplayer<br>检查并补齐键盘、焦点与可访问名称 | CORE-13, CORE-14, CORE-17, ENG-05, BASE-04 | 主要控件/设置/模式退出的键盘与焦点回归、名称和字幕可用性检查及必要兼容修正 | 保持旧快捷键和 DOM/CSS 钩子；真实浏览器验证，不以静态属性检查代替交互；处理 BASE-DOM-01 的主要控件 Tab 不可达，保留既有名称与快捷键 | H | done |
-| CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, CORE-23, PILOT-01, ENG-08, ENG-10, ENG-11 | 核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口 | 核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布 | H | todo |
+| CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, CORE-23, PILOT-01, ENG-08, ENG-10, ENG-11 | 核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口 | 核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布 | H | done |
 
 ## 5 包迁移：artplayer-plugin-chapter
 
@@ -460,7 +460,7 @@
 - CORE-20: [记录](changes/2026-09-11-CORE-20-entry.md) [记录](baselines/entry-validation.json)
 - CORE-21: [记录](changes/2026-09-11-CORE-21-public-declarations.md) [记录](baselines/core-declarations-validation.json) [记录](core-public-types.md) [记录](typechecking.md)
 - CORE-23: [记录](changes/2026-09-11-CORE-23-keyboard-focus.md) [记录](baselines/keyboard-validation.json)
-- CORE-22: [记录](changes/2026-09-11-CORE-22-core-acceptance.md) 初步体积归因已执行；先独立交付新增前置 ENG-11 分析工具，再恢复核心完整验收。
+- CORE-22: [记录](changes/2026-09-11-CORE-22-core-acceptance.md) [记录](baselines/core-setting-navigation-partial.json) [记录](core-acceptance.md) [记录](baselines/core-acceptance-validation.json)
 - PKG-CHAPTER-01: [记录](changes/2026-09-10-PKG-CHAPTER-01-contract.md) [记录](baselines/chapter-contract.md)
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)

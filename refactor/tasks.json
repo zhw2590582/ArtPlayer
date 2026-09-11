@@ -1227,14 +1227,16 @@
         "ENG-10",
         "ENG-11"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口",
       "acceptance": "核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布",
       "evidence": [
-        "changes/2026-09-11-CORE-22-core-acceptance.md"
-      ],
-      "reason": "初步体积归因已执行；先独立交付新增前置 ENG-11 分析工具，再恢复核心完整验收。"
+        "changes/2026-09-11-CORE-22-core-acceptance.md",
+        "baselines/core-setting-navigation-partial.json",
+        "core-acceptance.md",
+        "baselines/core-acceptance-validation.json"
+      ]
     },
     {
       "id": "PKG-CHAPTER-01",

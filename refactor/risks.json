@@ -12,34 +12,44 @@
       "status": "open",
       "owners": [
         "CORE-22",
+        "MOD-03",
         "REVIEW-01"
       ],
       "evidence": [
         "refactor/coverage-performance.md",
         "refactor/baselines/quality-validation.json",
-        "refactor/changes/2026-09-11-ENG-08-quality-reports.md"
+        "refactor/changes/2026-09-11-ENG-08-quality-reports.md",
+        "refactor/baselines/core-setting-navigation-partial.json",
+        "refactor/changes/2026-09-11-CORE-22-core-acceptance.md",
+        "refactor/core-acceptance.md",
+        "refactor/baselines/core-acceptance-validation.json"
       ],
       "compatibleResolution": "Attribute the growth to actual modules and build output, remove avoidable overhead while preserving APIs, and document any justified remaining cost against matching published entries.",
       "closureCriteria": "Fresh isolated artifacts have reproducible raw/gzip9/Brotli6 results and an explicit size review; do not raise or overwrite the historical threshold to pass.",
-      "workspaceState": "First ENG-08 modern core measurement: 134037 to 207875 raw bytes, 35486 to 58374 gzip9, 32533 to 53326 Brotli6. Chapter remains below the combined relative/absolute review threshold. This is a review requirement, not a release approval."
+      "workspaceState": "First ENG-08 modern core measurement: 134037 to 207875 raw bytes, 35486 to 58374 gzip9, 32533 to 53326 Brotli6. Chapter remains below the combined relative/absolute review threshold. This is a review requirement, not a release approval. CORE-22 navigation phase: 208030 raw / 58429 gzip9 / 53361 Brotli6 modern bytes. Preferred-target revalidation removes a second panel scan at a cost of 55 gzip bytes over ENG-08; it does not resolve total bundle growth. Final CORE-22: modern 208037 raw / 58434 gzip9 / 53372 Brotli6; legacy 212218 / 59686 / 54412; ESM 361496 / 77141 / 70030. Navigation and initial-layout work were reduced, but total size remains above the historical threshold. MOD-03 and REVIEW-01 must review this before release."
     },
     {
       "id": "ENG-PERF-02",
-      "title": "Intermittent constructor timing signals require follow-up paired measurement",
+      "title": "Intermittent constructor and destruction timing signals require follow-up paired measurement",
       "confirmation": "unverified",
       "status": "open",
       "owners": [
         "CORE-22",
+        "MOD-03",
         "REVIEW-01"
       ],
       "evidence": [
         "refactor/coverage-performance.md",
         "refactor/baselines/quality-validation.json",
-        "refactor/changes/2026-09-11-ENG-08-quality-reports.md"
+        "refactor/changes/2026-09-11-ENG-08-quality-reports.md",
+        "refactor/baselines/core-setting-navigation-partial.json",
+        "refactor/changes/2026-09-11-CORE-22-core-acceptance.md",
+        "refactor/core-acceptance.md",
+        "refactor/baselines/core-acceptance-validation.json"
       ],
-      "compatibleResolution": "Repeat paired measurements on the same environment, distinguish initialization work from host jitter, and optimize only after identifying a reproducible cost.",
+      "compatibleResolution": "Repeat paired measurements on the same environment, distinguish initialization and teardown work from host jitter, and optimize only after identifying a reproducible cost.",
       "closureCriteria": "Explain repeat-group timing signals with retained samples and source fingerprints; do not infer a regression or improvement from a single group or expand timing allowances.",
-      "workspaceState": "First ENG-08 run: Firefox group 2 had core/chapter constructor delta 3/5 ms, WebKit group 3 chapter delta 3 ms, versus 2 ms absolute allowance. Other groups did not trigger. Candidate resource checks passed independently. Final run: Chromium/Firefox had no timing signals; WebKit group 1 core/chapter each increased 3 ms, with no signals in the other two groups. The intermittent review remains open."
+      "workspaceState": "First ENG-08 run: Firefox group 2 had core/chapter constructor delta 3/5 ms, WebKit group 3 chapter delta 3 ms, versus 2 ms absolute allowance. Other groups did not trigger. Candidate resource checks passed independently. Final run: Chromium/Firefox had no timing signals; WebKit group 1 core/chapter each increased 3 ms, with no signals in the other two groups. The intermittent review remains open. CORE-22 navigation phase: Chromium group 1 core/chapter destroy deltas 3.1/2.5 ms and group 3 chapter constructor delta 2.8 ms; WebKit group 1 chapter destroy delta 27 ms (71 to 98 ms); Firefox has no timing signals. Other groups do not reproduce those destroy signals. All 54 candidate resource probes pass. The timed fixture uses default settings disabled, so these measurements do not establish any timing effect from setting navigation changes. Final CORE-22: no constructor timing signals in any of the three engines; Chromium/Firefox have no timing signals. WebKit group 1 chapter destruction delta 44 ms and group 2 core delta 30 ms remain, group 3 has no signal. All 54 candidate resource probes pass. Chromium sampling identifies native load/DOM teardown cost but does not establish the cause of WebKit signals. MOD-03/REVIEW-01 retain the open review without changing allowances."
     },
     {
       "id": "BASE-LIFE-06",
@@ -761,18 +771,29 @@
     {
       "id": "SDK-12",
       "title": "option-validator 实际集成验证范围",
-      "confirmation": "unverified",
-      "status": "open",
+      "confirmation": "source-observed",
+      "status": "resolved",
       "owners": [
         "CORE-01",
-        "CORE-07"
+        "CORE-07",
+        "CORE-22"
       ],
       "evidence": [
         "packages/artplayer/src/index.ts",
-        "packages/artplayer/src/option/resolve.ts"
+        "packages/artplayer/src/option/resolve.ts",
+        "test/options.test.js",
+        "test/browser/options.spec.js",
+        "test/browser/initialization.spec.js",
+        "refactor/baselines/core-acceptance-validation.json"
       ],
       "compatibleResolution": "Bundled validation dependency; preserve validation/default/merge behavior and failure cleanup when typing constructor boundaries.",
-      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。",
+      "resolutionEvidence": [
+        "refactor/baselines/core-acceptance-validation.json",
+        "refactor/core-acceptance.md",
+        "refactor/changes/2026-09-11-CORE-22-core-acceptance.md"
+      ],
+      "resolutionRationale": "option-validator 2.0.6 is a bundled synchronous dependency with recorded file hash and lock/version evidence. Current and published real-browser consumers retain default/merge identity, callback behavior, exact invalid-option errors before mounting, subsequent container reuse and destruction; modern/legacy full matrices and current unit tests passed. The dependency itself has no source-switch, network or physical-device lifecycle, so those external-SDK conditions do not apply; player media lifecycle is covered by the core matrix. This closes its integration scope, not an independent audit of the upstream project."
     },
     {
       "id": "BUILD-AMD-01",

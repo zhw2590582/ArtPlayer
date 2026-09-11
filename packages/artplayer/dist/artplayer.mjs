@@ -2809,6 +2809,7 @@ function observeControlLayout(art) {
     scope.add(() => {
       observer.disconnect();
     });
+    return;
   } else if (typeof MutationObserver !== "undefined") {
     const observer = new MutationObserver(update);
     observer.observe($controls, { childList: true, subtree: true, attributes: true, characterData: true });
@@ -7733,12 +7734,22 @@ function flip(art) {
     }
   };
 }
+const focusSelector = '[tabindex="0"],button,input,select,textarea,a[href],[contenteditable]';
 function available(element) {
+  if (!element.isConnected || element.matches(":disabled") || element.closest("[inert]") || element.getAttribute("aria-disabled") === "true" || !element.getClientRects().length)
+    return false;
   const visibility = element.ownerDocument.defaultView?.getComputedStyle(element).visibility;
-  return element.isConnected && !element.matches(":disabled") && !element.closest("[inert]") && element.getAttribute("aria-disabled") !== "true" && element.getClientRects().length > 0 && visibility !== "hidden" && visibility !== "collapse";
+  return visibility !== "hidden" && visibility !== "collapse";
 }
 function settingFocusTargets(panel) {
-  return Array.from(panel.querySelectorAll('[tabindex="0"],button,input,select,textarea,a[href],[contenteditable]')).filter((element) => element.getAttribute("tabindex") !== "-1" && available(element));
+  return Array.from(panel.querySelectorAll(focusSelector)).filter((element) => element.getAttribute("tabindex") !== "-1" && available(element));
+}
+function selectSettingTarget(panel, preferred, last = false) {
+  if (preferred && preferred !== panel && panel.contains(preferred) && preferred.matches(focusSelector) && preferred.getAttribute("tabindex") !== "-1" && available(preferred))
+    return preferred;
+  const targets = settingFocusTargets(panel);
+  const selected = panel.querySelector(".art-setting-item.art-current");
+  return targets.find((element) => preferred?.contains(element)) || (last ? targets[targets.length - 1] : targets.find((element) => selected?.contains(element)) || targets.find((element) => !element.classList.contains("art-setting-item-back")) || targets[0]);
 }
 function returnSettingFocus(setting2) {
   const { art, $parent } = setting2;
@@ -7758,9 +7769,7 @@ function focusSettingPanel(setting2, preferred, last = false) {
   const panel = setting2.cache.get(setting2.active);
   if (!panel || !settingScopeActive(settingPanelScope(panel)))
     return;
-  const targets = settingFocusTargets(panel);
-  const selected = panel.querySelector(".art-setting-item.art-current");
-  const target = targets.find((element) => preferred === element || preferred?.contains(element)) || (last ? targets[targets.length - 1] : targets.find((element) => selected?.contains(element)) || targets.find((element) => !element.classList.contains("art-setting-item-back")) || targets[0]);
+  const target = selectSettingTarget(panel, preferred, last);
   target?.focus({ preventScroll: true });
   if (!isClosing(setting2.art))
     target?.scrollIntoView({ block: "nearest", inline: "nearest" });
@@ -7833,6 +7842,8 @@ function installSettingKeyboard(setting2) {
       close2();
       return;
     }
+    if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))
+      return;
     const row = target.closest(".art-setting-item");
     if (!row || target !== row && !target.matches('button,a[href],[role="button"]'))
       return;
@@ -7841,8 +7852,7 @@ function installSettingKeyboard(setting2) {
       return;
     const currentItem = setting2.active?.find((item) => item.$item === row);
     if (!settingScopeActive(settingPanelScope(panel)) || currentItem && !settingScopeActive(settingScope(currentItem))) {
-      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))
-        claimKey(event);
+      claimKey(event);
       return;
     }
     const targets = settingFocusTargets(panel);

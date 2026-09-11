@@ -811,12 +811,18 @@ into HTML attributes; normal text and marker positions retain their behavior.
 controls.less allows groups to wrap inside narrow players. Individual control height
 continues to use --art-control-height; control/layout.ts observes total layout height
 through offsetHeight and records --art-controls-height for subtitle/panel offsets.
-ResizeObserver is preferred; the fallback combines core resize and MutationObserver.
+ResizeObserver is preferred; its initial notification measures after constructor
+DOM writes, so observing controls does not synchronously force layout during
+construction. The derived inline --art-controls-height is populated at that first
+layout notification, not promised synchronously to constructor/plugin callbacks.
+CSS retains its --art-control-height fallback until then. Explicit core resize
+events still update immediately. Without ResizeObserver, the initial measurement
+remains synchronous and subsequent updates combine core resize and MutationObserver.
 Both observers and subscriptions are owned by the bottom controls scope. Without
 ResizeObserver, unrelated parent CSS resizing is not independently detected until a
 core resize or control mutation occurs. The 640/320/240px tests include real 16:9
 heights and verify all buttons remain visible. This does not promise arbitrary custom
-minimum widths will fit. Narrow setting-tree/panel behavior remains CORE-14 work.
+minimum widths will fit. Setting panel bounds are handled by setting/layout.ts.
 
 Use test/component-resources.test.js for ownership, reentry and quality settlement,
 test/types/components.ts for source contracts, and test/browser/components.spec.js
@@ -1390,6 +1396,17 @@ their click behavior. Tab exit checks actual focus in a scope-owned zero-delay
 task, since a microtask can observe body during the browser's focus transition.
 Pointer opening does not move focus into the panel. Existing click callbacks and
 selection/update generations remain the mutation boundaries.
+
+Navigation reads a fresh target list for each relevant arrow/Home/End event; it
+does not cache availability across events. Focus restoration first checks whether
+the preferred element is still a focusable descendant of the active live panel.
+When it is, only that element is revalidated instead of scanning the panel again.
+An unavailable preferred element or a non-focusable wrapper still uses the normal
+descendant/selected-item fallback. Eligibility checks reject detached, disabled,
+inert and boxless elements before reading computed visibility. Unrelated keys
+never enumerate the panel. The long-panel browser case records query/style work
+and checks live hide/disable/restore/remove behavior; these operation counts are
+not constructor timings or evidence that the bundle-size risk is closed.
 
 `accessibility/moved-focus.ts` restores a connected focused node when moving the
 player for web fullscreen makes the browser focus body. It never overrides focus

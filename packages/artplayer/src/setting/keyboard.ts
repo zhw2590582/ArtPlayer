@@ -68,6 +68,8 @@ export function installSettingKeyboard(setting: SettingManager): void {
       close()
       return
     }
+    if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key))
+      return
     const row = target.closest<HTMLElement>('.art-setting-item')
     if (!row || (target !== row && !target.matches('button,a[href],[role="button"]')))
       return
@@ -76,8 +78,7 @@ export function installSettingKeyboard(setting: SettingManager): void {
       return
     const currentItem = setting.active?.find(item => item.$item === row)
     if (!settingScopeActive(settingPanelScope(panel)) || (currentItem && !settingScopeActive(settingScope(currentItem)))) {
-      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key))
-        claimKey(event)
+      claimKey(event)
       return
     }
     const targets = settingFocusTargets(panel)

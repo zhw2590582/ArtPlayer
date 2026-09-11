@@ -1,6 +1,58 @@
 import { expect, test } from './fixtures.js'
 
 for (const fallback of [false, true]) {
+  test(`candidate: initial control measurement uses the browser layout phase with fallback=${fallback}`, async ({ page }, testInfo) => {
+    if (fallback)
+      await page.addInitScript(() => { window.ResizeObserver = undefined })
+    await page.goto('/test/player.html?core=candidate&chapter=published')
+    const reads = await page.evaluate(() => {
+      document.querySelector('.player').style.width = '320px'
+      const descriptor = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetHeight')
+      let reads = 0
+      Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+        ...descriptor,
+        get() {
+          if (this.classList.contains('art-controls'))
+            reads++
+          return descriptor.get.call(this)
+        },
+      })
+      try {
+        window.art = new window.Artplayer({ container: '.player', url: '', setting: true, fullscreenWeb: true, controls: [{ name: 'probe', position: 'right', html: 'Probe control' }] })
+      }
+      finally {
+        Object.defineProperty(HTMLElement.prototype, 'offsetHeight', descriptor)
+      }
+      return reads
+    })
+    await testInfo.attach('constructor-control-layout-reads', { contentType: 'application/json', body: JSON.stringify({ fallback, reads }) })
+    expect(reads).toBe(fallback ? 1 : 0)
+    const measured = await page.evaluate(async () => {
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+      const { $controls, $player } = window.art.template
+      return { height: $controls.offsetHeight, recorded: Number.parseFloat($player.style.getPropertyValue('--art-controls-height')) }
+    })
+    expect(measured.height).toBe(92)
+    expect(measured.recorded).toBe(measured.height)
+    await expect.poll(() => page.evaluate(() => Number.parseFloat(getComputedStyle(window.art.template.$subtitle).bottom))).toBeGreaterThanOrEqual(measured.height)
+  })
+}
+
+test('candidate: destroying before initial control observation leaves no late layout write', async ({ page }) => {
+  await page.goto('/test/player.html?core=candidate&chapter=published')
+  const state = await page.evaluate(async () => {
+    const art = new window.Artplayer({ container: '.player', url: '' })
+    const player = art.template.$player
+    art.destroy(false)
+    const before = player.getAttribute('style')
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+    return { before, after: player.getAttribute('style'), instances: window.Artplayer.instances.length }
+  })
+  expect(state.after).toBe(state.before)
+  expect(state.instances).toBe(0)
+})
+
+for (const fallback of [false, true]) {
   test(`candidate: control layout follows resize and removal with observer fallback=${fallback}`, async ({ page }) => {
     if (fallback) {
       await page.addInitScript(() => {
