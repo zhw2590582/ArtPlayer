@@ -4,11 +4,12 @@ import { mock, test } from 'node:test'
 import { setImmediate } from 'node:timers/promises'
 import { loadModules } from './helpers/load.js'
 
-const { Emitter, urlMix, switchMix, playMix, beginLifecycle, getScope, positionRestoration, currentTimeMix } = await loadModules({
+const { Emitter, urlMix, switchMix, playMix, pauseMix, beginLifecycle, getScope, positionRestoration, currentTimeMix } = await loadModules({
   Emitter: 'packages/artplayer/src/utils/emitter',
   urlMix: 'packages/artplayer/src/player/urlMix',
   switchMix: 'packages/artplayer/src/player/switchMix',
   playMix: 'packages/artplayer/src/player/playMix',
+  pauseMix: 'packages/artplayer/src/player/pauseMix',
   beginLifecycle: { file: 'packages/artplayer/src/lifecycle/instance', name: 'beginLifecycle' },
   getScope: { file: 'packages/artplayer/src/lifecycle/instance', name: 'getScope' },
   positionRestoration: { file: 'packages/artplayer/src/source/restore-position', name: 'positionRestoration' },
@@ -26,14 +27,171 @@ function createArt(customType) {
     aspectRatio: '16:9',
     loading: { show: false },
     notice: { show: '' },
+    i18n: { get: key => key },
     pause: mock.fn(),
     play: mock.fn(() => Promise.resolve()),
   })
   beginLifecycle(art)
+  art.template.$video.pause = () => {
+    art.playing = false
+  }
+  pauseMix(art)
+  art.pause = mock.fn(art.pause)
   urlMix(art)
   switchMix(art)
   return art
 }
+
+function createPlayingArt() {
+  const art = createArt()
+  const video = art.template.$video
+  video.paused = false
+  Object.defineProperty(art, 'playing', { get: () => !video.paused })
+  video.pause = () => {
+    video.paused = true
+  }
+  video.play = async () => {
+    video.paused = false
+  }
+  art.constructor = { instances: [] }
+  playMix(art)
+  art.play = mock.fn(art.play)
+  return art
+}
+
+test('rapid switches inherit playback intent despite their own native pauses', async () => {
+  const art = createPlayingArt()
+  const first = art.switchUrl('first.mp4')
+  assert.equal(art.playing, false)
+  const second = art.switchUrl('second.mp4')
+  const third = art.switchUrl('last.mp4')
+  await Promise.all([first, second])
+  assert.equal(art.play.mock.callCount(), 0)
+  art.emit('video:canplay')
+  await third
+  assert.equal(art.url, 'last.mp4')
+  assert.equal(art.playing, true)
+  assert.equal(art.play.mock.callCount(), 1)
+  assert.deepEqual(Object.keys(art.e), [])
+})
+
+test('explicit pause during a switch cancels inherited playback for subsequent switches', async () => {
+  const art = createPlayingArt()
+  const first = art.switchUrl('first.mp4')
+  art.pause()
+  const second = art.switchUrl('last.mp4')
+  art.emit('video:canplay')
+  await Promise.all([first, second])
+  assert.equal(art.play.mock.callCount(), 0)
+  assert.equal(art.playing, false)
+  assert.deepEqual(Object.keys(art.e), [])
+})
+
+test('explicit pause before readiness prevents the current switch from resuming', async () => {
+  const art = createPlayingArt()
+  const pending = art.switchUrl('pending.mp4')
+  art.pause()
+  art.emit('video:canplay')
+  await pending
+  assert.equal(art.playing, false)
+  assert.equal(art.play.mock.callCount(), 0)
+})
+
+test('a reentrant explicit pause is not swallowed by the internal switch pause', async () => {
+  const art = createPlayingArt()
+  art.once('pause', () => art.pause())
+  const pending = art.switchUrl('pending.mp4')
+  art.emit('video:canplay')
+  await pending
+  assert.equal(art.playing, false)
+  assert.equal(art.play.mock.callCount(), 0)
+  assert.deepEqual(Object.keys(art.e), [])
+})
+
+test('a user pause updates intent before an existing pause listener starts another switch', async () => {
+  const art = createPlayingArt()
+  const first = art.switchUrl('first.mp4')
+  let second
+  art.once('pause', () => {
+    second = art.switchUrl('last.mp4')
+  })
+  art.pause()
+  art.emit('video:canplay')
+  await Promise.all([first, second])
+  assert.equal(art.url, 'last.mp4')
+  assert.equal(art.playing, false)
+  assert.equal(art.play.mock.callCount(), 0)
+  assert.deepEqual(Object.keys(art.e), [])
+})
+
+test('a pending explicit play command survives replacement even before native play fulfills', async () => {
+  const art = createPlayingArt()
+  const first = art.switchUrl('first.mp4')
+  art.pause()
+  let finish
+  let calls = 0
+  art.template.$video.play = () => {
+    if (++calls === 1)
+      return new Promise(resolve => finish = resolve)
+    art.template.$video.paused = false
+    return Promise.resolve()
+  }
+  const playing = art.play()
+  const second = art.switchUrl('last.mp4')
+  await first
+  art.emit('video:canplay')
+  await second
+  finish(42)
+  assert.equal(await playing, 42)
+  assert.equal(calls, 2)
+  assert.equal(art.playing, true)
+})
+
+test('a late native resume cannot publish play or clear notice after an explicit pause', async () => {
+  const art = createPlayingArt()
+  let finish
+  const events = []
+  art.on('play', () => events.push('play'))
+  art.template.$video.play = () => new Promise(resolve => finish = resolve)
+  const pending = art.switchUrl('pending.mp4')
+  art.emit('video:canplay')
+  art.pause()
+  finish(42)
+  await pending
+  assert.deepEqual(events, [])
+  assert.equal(art.notice.show, 'Pause')
+  assert.equal(art.playing, false)
+})
+
+test('cancelled, failed and completed switches never leak playback intent to a new source', async () => {
+  for (const boundary of ['direct-url', 'failure', 'completed', 'destroy']) {
+    const art = createPlayingArt()
+    const pending = art.switchUrl('first.mp4')
+    if (boundary === 'failure') {
+      const error = new Error('Controlled media failure')
+      const rejected = assert.rejects(pending, actual => actual === error)
+      art.emit('video:error', error)
+      await rejected
+    }
+    else {
+      if (boundary === 'direct-url')
+        art.url = 'direct.mp4'
+      if (boundary === 'completed')
+        art.emit('video:canplay')
+      if (boundary === 'destroy')
+        getScope(art).dispose()
+      await pending
+    }
+    art.pause()
+    const played = art.play.mock.callCount()
+    const next = art.switchUrl('next.mp4')
+    art.emit('video:canplay')
+    await next
+    assert.equal(art.play.mock.callCount(), played, boundary)
+    assert.equal(art.playing, false, boundary)
+    assert.deepEqual(Object.keys(art.e), [])
+  }
+})
 
 test('source assignment does not revoke a caller-owned Blob URL still used elsewhere', async (t) => {
   const art = createArt()
@@ -349,6 +507,8 @@ test('late resume fulfillment or rejection cannot clear a newer operation notice
     const first = art.switchUrl('first.mp4')
     art.emit('video:canplay')
     art.playing = false
+    // Model the explicit pause command, not only a read-only playback-state snapshot.
+    art.pause()
     const second = art.switchUrl('second.mp4')
     await first
     art.notice.show = 'new source notice'

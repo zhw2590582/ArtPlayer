@@ -130,5 +130,5 @@
 | AUDIO-SYNC-01 | open / 已复现 | Audio Track 未同步原生暂停/结束，偏移边界与切源/缓冲仍待完整验证 | PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-05 |
 | AUDIO-TYPE-01 | accepted-with-scope / 源码/产物事实 | Audio Track update 部分配置与公开/编辑器声明不一致 | PKG-AUDIO-04 |
 | AUDIO-DEMO-01 | open / 源码/产物事实 | Audio Track README 示例链接名称不匹配且缺维护说明 | PKG-AUDIO-06 |
-| CORE-SOURCE-01 | open / 已复现 | 候选核心连续切源丢失原播放意图 | CORE-24 |
+| CORE-SOURCE-01 | resolved / 已复现 | 候选核心连续切源丢失原播放意图 | CORE-24 |
 | AUDIO-RESUME-01 | open / 已复现 | WebKit 旧核心切源后候选音频保持暂停 | PKG-AUDIO-05 |

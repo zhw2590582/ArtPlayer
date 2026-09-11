@@ -1249,12 +1249,14 @@
         "CORE-22",
         "PKG-AUDIO-04"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "连续切源保留原播放意图，同时尊重显式暂停与最新来源，回归旧/新 audio",
       "acceptance": "真实暂停状态的受控测试、重入/取消/失败/销毁、三引擎和 main/legacy 产物验证通过；不恢复过期来源的公开副作用",
       "evidence": [
-        "baselines/audio-combinations-first.json"
+        "baselines/audio-combinations-first.json",
+        "changes/2026-09-12-CORE-24-source-intent.md",
+        "baselines/core-source-intent-validation.json"
       ]
     },
     {

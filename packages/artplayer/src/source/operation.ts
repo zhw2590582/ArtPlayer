@@ -6,6 +6,9 @@ export interface SourceOperation {
   scope: ResourceScope
   assigned: boolean
   acceptingEvents: boolean
+  pauseRevision: number
+  resumePlaying?: boolean
+  internalPause?: boolean
   onAssigned?: () => void
   onError?: (error: unknown) => void
   active: () => boolean
@@ -14,6 +17,25 @@ export interface SourceOperation {
 const current = new WeakMap<object, SourceOperation>()
 const assignments = new WeakMap<object, SourceOperation>()
 const sources = new WeakMap<object, ResourceScope>()
+
+export function sourcePlaybackIntent(owner: object): boolean | undefined {
+  const operation = current.get(owner)
+  return operation?.active() ? operation.resumePlaying : undefined
+}
+
+export function requestSourcePlayback(owner: object, playing: boolean): void {
+  const operation = current.get(owner)
+  if (!operation?.active() || operation.resumePlaying === undefined)
+    return
+  if (!playing && operation.internalPause) {
+    operation.internalPause = false
+  }
+  else {
+    operation.resumePlaying = playing
+    if (!playing)
+      operation.pauseRevision++
+  }
+}
 
 export function getSourceScope(owner: object): ResourceScope {
   return sources.get(owner) || getScope(owner)
@@ -24,6 +46,13 @@ export function captureSource(owner: object): () => boolean {
   const source = sources.get(owner)
   return () => current.get(owner) === operation && (!operation || operation.active())
     && sources.get(owner) === source && (!source || !source.closed)
+}
+
+export function captureSourcePlayback(owner: object): () => boolean {
+  const active = captureSource(owner)
+  const operation = current.get(owner)
+  const revision = operation?.pauseRevision
+  return () => active() && operation?.pauseRevision === revision
 }
 
 export function beginSource(owner: object): SourceOperation {
@@ -39,6 +68,7 @@ export function beginSource(owner: object): SourceOperation {
     scope,
     assigned: false,
     acceptingEvents: false,
+    pauseRevision: 0,
     active: () => !isClosing(owner) && !scope.closed && current.get(owner) === operation,
   }
   current.set(owner, operation)

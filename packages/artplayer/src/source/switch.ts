@@ -1,7 +1,7 @@
-import type { SourceEvent, SourceListener, SwitchHost } from './types'
+import type { SourceListener, SwitchHost } from './types'
 import { isClosing } from '../lifecycle/instance'
 import { listenSource } from './listen'
-import { assignUrl, beginSource } from './operation'
+import { assignUrl, beginSource, sourcePlaybackIntent } from './operation'
 import { positionRestoration } from './restore-position'
 
 export function switchSource(art: SwitchHost, url: string, currentTime: number): Promise<void> {
@@ -10,13 +10,16 @@ export function switchSource(art: SwitchHost, url: string, currentTime: number):
       resolve()
       return
     }
+    const playing = sourcePlaybackIntent(art) ?? art.playing
     const operation = beginSource(art)
+    operation.resumePlaying = playing
     const scope = operation.scope.child()
     let settled = false
     const settle = (failed = false, error?: unknown) => {
       if (settled)
         return
       settled = true
+      operation.resumePlaying = undefined
       operation.onError = undefined
       operation.onAssigned = undefined
       scope.dispose()
@@ -34,8 +37,14 @@ export function switchSource(art: SwitchHost, url: string, currentTime: number):
     const fail = (error: unknown) => settle(true, error)
     operation.onError = fail
     try {
-      const { playing, aspectRatio, playbackRate } = art
-      art.pause()
+      const { aspectRatio, playbackRate } = art
+      operation.internalPause = true
+      try {
+        art.pause()
+      }
+      finally {
+        operation.internalPause = false
+      }
       if (!active())
         return
 
@@ -45,10 +54,11 @@ export function switchSource(art: SwitchHost, url: string, currentTime: number):
       let rateRestored = false
       const position = positionRestoration(art, currentTime, active)
       const resume = async () => {
+        const pauseRevision = operation.pauseRevision
         art.aspectRatio = aspectRatio
         if (!active())
           return
-        if (playing) {
+        if (operation.resumePlaying) {
           // The public play promise still rejects; this internal resume is best effort.
           try {
             await art.play()
@@ -57,7 +67,8 @@ export function switchSource(art: SwitchHost, url: string, currentTime: number):
         }
         if (!active())
           return
-        art.notice.show = ''
+        if (operation.pauseRevision === pauseRevision)
+          art.notice.show = ''
         settle()
       }
       const resumeWhenReady = () => {
@@ -103,8 +114,8 @@ export function switchSource(art: SwitchHost, url: string, currentTime: number):
         'seek': position.manual,
       }
       const capture = scope.child()
-      const queued: [SourceEvent, unknown][] = []
-      const names = Object.keys(handlers) as SourceEvent[]
+      const queued: [keyof typeof handlers, unknown][] = []
+      const names = Object.keys(handlers) as (keyof typeof handlers)[]
       for (const name of names) {
         listenSource(capture, art, name, (event) => {
           if (operation.acceptingEvents)
@@ -123,7 +134,7 @@ export function switchSource(art: SwitchHost, url: string, currentTime: number):
           settle()
           return
         }
-        const dispatch = {} as Record<SourceEvent, SourceListener>
+        const dispatch = {} as Record<keyof typeof handlers, SourceListener>
         for (const name of names)
           dispatch[name] = listenSource(readiness, art, name, handlers[name], name !== 'video:seeked')
         for (const [name, event] of queued) {

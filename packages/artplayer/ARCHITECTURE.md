@@ -260,6 +260,17 @@ twice. media/position-revision.ts also tracks legal public currentTime writes;
 a consumer assigning currentTime directly during loading supersedes the automatic
 restoration, including writes before metadata. Invalid NaN assignments remain no-ops.
 Source cancellation still settles pending work and removes all listeners.
+CORE-24 keeps the desired playback state on the pending source operation. A new switch inherits
+that intent before disposing its predecessor; it must not infer the user's intent from the
+temporary native pause performed by the previous switch. playMix/pauseMix update intent at
+command entry, before native calls or public callbacks can reenter. The switch's internal pause
+consumes one marker; subsequent explicit pauses remain effective, including inside callbacks.
+The pause revision invalidates late play notifications and prevents an old resume from clearing
+a newer pause notice. It does not change the public play promise's original value or rejection.
+Completed, failed or cancelled operations cannot lend intent to a later independent source.
+Do not replace these command hooks with late event listeners: an earlier user pause listener
+may synchronously start another switch. See test/source.test.js, test/browser/source-intent.spec.js
+and refactor/changes/2026-09-12-CORE-24-source-intent.md for the regressions and validation scope.
 Use test/source.test.js, test/progress.test.js and the browser source and
 progress-quality specs. Keep native media events in evidence when changing this
 sequence; the original rate-interruption hypothesis was not sufficient to explain

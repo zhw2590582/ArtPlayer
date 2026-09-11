@@ -1,6 +1,6 @@
 import type { PlayHost } from '../media/hosts'
 import type { PlaybackMethods } from '../media/types'
-import { captureSource } from '../source/operation'
+import { captureSourcePlayback, requestSourcePlayback } from '../source/operation'
 import { def } from '../utils'
 
 export default function playMix<Media extends Pick<PlaybackMethods, 'play'>>(art: PlayHost<Media>): asserts art is PlayHost<Media> & { play: () => Promise<Awaited<ReturnType<Media['play']>>> } {
@@ -14,7 +14,8 @@ export default function playMix<Media extends Pick<PlaybackMethods, 'play'>>(art
 
   def(art, 'play', {
     async value() {
-      const active = captureSource(art)
+      requestSourcePlayback(art, true)
+      const active = captureSourcePlayback(art)
       const result = await $video.play()
       if (!active())
         return result

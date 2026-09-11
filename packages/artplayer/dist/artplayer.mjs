@@ -2096,6 +2096,22 @@ function playAndPause(option) {
 const current = /* @__PURE__ */ new WeakMap();
 const assignments = /* @__PURE__ */ new WeakMap();
 const sources = /* @__PURE__ */ new WeakMap();
+function sourcePlaybackIntent(owner) {
+  const operation = current.get(owner);
+  return operation?.active() ? operation.resumePlaying : void 0;
+}
+function requestSourcePlayback(owner, playing) {
+  const operation = current.get(owner);
+  if (!operation?.active() || operation.resumePlaying === void 0)
+    return;
+  if (!playing && operation.internalPause) {
+    operation.internalPause = false;
+  } else {
+    operation.resumePlaying = playing;
+    if (!playing)
+      operation.pauseRevision++;
+  }
+}
 function getSourceScope(owner) {
   return sources.get(owner) || getScope(owner);
 }
@@ -2103,6 +2119,12 @@ function captureSource(owner) {
   const operation = current.get(owner);
   const source = sources.get(owner);
   return () => current.get(owner) === operation && (!operation || operation.active()) && sources.get(owner) === source && (!source || !source.closed);
+}
+function captureSourcePlayback(owner) {
+  const active2 = captureSource(owner);
+  const operation = current.get(owner);
+  const revision = operation?.pauseRevision;
+  return () => active2() && operation?.pauseRevision === revision;
 }
 function beginSource(owner) {
   const previous = sources.get(owner);
@@ -2117,6 +2139,7 @@ function beginSource(owner) {
     scope,
     assigned: false,
     acceptingEvents: false,
+    pauseRevision: 0,
     active: () => !isClosing(owner) && !scope.closed && current.get(owner) === operation
   };
   current.set(owner, operation);
@@ -5713,6 +5736,7 @@ function pauseMix(art) {
   } = art;
   def(art, "pause", {
     value() {
+      requestSourcePlayback(art, false);
       const result = $video.pause();
       notice.show = i18n.get("Pause");
       art.emit("pause");
@@ -5960,7 +5984,8 @@ function playMix(art) {
   } = art;
   def(art, "play", {
     async value() {
-      const active2 = captureSource(art);
+      requestSourcePlayback(art, true);
+      const active2 = captureSourcePlayback(art);
       const result = await $video.play();
       if (!active2())
         return result;
@@ -6203,13 +6228,16 @@ function switchSource(art, url, currentTime) {
       resolve();
       return;
     }
+    const playing = sourcePlaybackIntent(art) ?? art.playing;
     const operation = beginSource(art);
+    operation.resumePlaying = playing;
     const scope = operation.scope.child();
     let settled = false;
     const settle = (failed = false, error2) => {
       if (settled)
         return;
       settled = true;
+      operation.resumePlaying = void 0;
       operation.onError = void 0;
       operation.onAssigned = void 0;
       scope.dispose();
@@ -6227,8 +6255,13 @@ function switchSource(art, url, currentTime) {
     const fail = (error2) => settle(true, error2);
     operation.onError = fail;
     try {
-      const { playing, aspectRatio: aspectRatio2, playbackRate: playbackRate2 } = art;
-      art.pause();
+      const { aspectRatio: aspectRatio2, playbackRate: playbackRate2 } = art;
+      operation.internalPause = true;
+      try {
+        art.pause();
+      } finally {
+        operation.internalPause = false;
+      }
       if (!active2())
         return;
       const readiness = scope.child();
@@ -6237,10 +6270,11 @@ function switchSource(art, url, currentTime) {
       let rateRestored = false;
       const position = positionRestoration(art, currentTime, active2);
       const resume = async () => {
+        const pauseRevision = operation.pauseRevision;
         art.aspectRatio = aspectRatio2;
         if (!active2())
           return;
-        if (playing) {
+        if (operation.resumePlaying) {
           try {
             await art.play();
           } catch {
@@ -6248,7 +6282,8 @@ function switchSource(art, url, currentTime) {
         }
         if (!active2())
           return;
-        art.notice.show = "";
+        if (operation.pauseRevision === pauseRevision)
+          art.notice.show = "";
         settle();
       };
       const resumeWhenReady = () => {

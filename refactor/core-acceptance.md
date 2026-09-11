@@ -5,8 +5,9 @@ CORE-22 汇总核心自有源码、公开声明、生成产物和当前固定消
 [交付记录](changes/2026-09-11-CORE-22-core-acceptance.md)；任务状态以 tasks.json 为准。
 
 后续 Audio-05 的新组合测试复现了候选核心连续切源丢失播放意图，见
-[首轮证据](baselines/audio-combinations-first.json)。CORE-SOURCE-01/CORE-24 作为新发现
-继续修复，当前不能据本文件历史阶段结果放行；原有通过记录保留其当时的测试范围。
+[首轮证据](baselines/audio-combinations-first.json)。CORE-24 已修复并通过针对性正式
+产物/隔离安装验收，见 [修复记录](changes/2026-09-12-CORE-24-source-intent.md)。
+原有通过记录保留其当时的测试范围，不能据历史阶段结果替代最终候选的全量发布验收。
 
 ## 契约与回归入口
 

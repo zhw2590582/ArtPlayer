@@ -2731,7 +2731,7 @@
       "id": "CORE-SOURCE-01",
       "title": "候选核心连续切源丢失原播放意图",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-24"
       ],
@@ -2740,7 +2740,14 @@
         "packages/artplayer/src/source/switch.ts"
       ],
       "compatibleResolution": "继承被替代切源操作的播放意图；显式暂停可以取消恢复，过期操作继续只结算不发布副作用。",
-      "closureCriteria": "新旧对照的连续切源、手动暂停、重入/取消/错误/销毁和正式产物三引擎验证通过。"
+      "closureCriteria": "新旧对照的连续切源、手动暂停、重入/取消/错误/销毁和正式产物三引擎验证通过。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-CORE-24-source-intent.md",
+        "refactor/baselines/core-source-intent-validation.json",
+        "test/source.test.js",
+        "test/browser/source-intent.spec.js"
+      ],
+      "resolutionRationale": "待完成切源操作继承播放意图，公开 play/pause 在原生调用及用户监听器之前更新；内部暂停标记仅消费一次，暂停修订号阻止晚到恢复副作用。34 项源测试、594 项 CI、正式 main/legacy 各 81 项三引擎和原六项 Audio 失败重跑通过，隔离 tarball 字节/运行时/类型验证通过。范围是公开命令及切源操作，不关闭独立 AUDIO-RESUME-01、真机或完整发布门槛。"
     },
     {
       "id": "AUDIO-RESUME-01",
