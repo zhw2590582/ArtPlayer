@@ -1,101 +1,95 @@
+import { createAudioTrack } from './track'
+
 export default function artplayerPluginAudioTrack(option) {
   return (art) => {
-    let { url, offset = 0, sync = 0.3 } = option
-
-    const audio = new Audio()
-    audio.preload = 'auto'
-    if (url) {
-      audio.src = url
-    }
+    const track = createAudioTrack(option)
+    const { audio } = track
+    const subscriptions = []
+    let active = true
 
     function syncAudio() {
-      if (!art.video || !url)
-        return
-
-      const videoTime = art.currentTime
-      const targetTime = videoTime + offset
-
-      if (Math.abs(audio.currentTime - targetTime) > sync) {
-        audio.currentTime = targetTime
-      }
+      if (art.video)
+        track.sync(art.currentTime)
     }
 
-    art.on('play', () => {
-      if (!url)
-        return
-      syncAudio()
-      audio.play().catch((err) => {
-        console.warn(err)
-      })
-    })
-
-    art.on('pause', () => {
-      audio.pause()
-    })
-
-    art.on('seek', () => {
-      syncAudio()
-    })
-
-    art.on('video:timeupdate', () => {
-      if (art.playing) {
-        syncAudio()
+    function listen(event, callback) {
+      const listener = () => {
+        if (active)
+          callback()
       }
-    })
+      subscriptions.push([event, listener])
+      art.on(event, listener)
+    }
 
-    art.on('video:ratechange', () => {
-      audio.playbackRate = art.video.playbackRate
-    })
+    function destroy() {
+      if (!active)
+        return
+      active = false
+      const failures = []
+      for (const [event, listener] of subscriptions.splice(0)) {
+        try {
+          art.off(event, listener)
+        }
+        catch (error) { failures.push(error) }
+      }
+      try {
+        track.destroy()
+      }
+      catch (error) { failures.push(error) }
+      if (failures.length)
+        throw failures[0]
+    }
 
-    art.on('video:volumechange', () => {
+    try {
+      listen('play', () => {
+        syncAudio()
+        track.play()
+      })
+      for (const event of ['pause', 'video:pause', 'video:ended', 'video:waiting', 'video:emptied', 'video:seeking'])
+        listen(event, track.pause)
+      listen('seek', syncAudio)
+      listen('video:seeked', () => {
+        syncAudio()
+        if (art.playing)
+          track.play()
+      })
+      listen('video:timeupdate', () => {
+        if (art.playing)
+          syncAudio()
+      })
+      listen('video:ratechange', () => {
+        audio.playbackRate = art.video.playbackRate
+      })
+      listen('video:volumechange', () => {
+        audio.volume = art.volume
+        audio.muted = art.muted
+      })
+      listen('video:playing', () => {
+        if (art.playing) {
+          syncAudio()
+          track.play()
+        }
+      })
+      listen('destroy', destroy)
       audio.volume = art.volume
       audio.muted = art.muted
-    })
-
-    art.on('video:waiting', () => {
-      audio.pause()
-    })
-
-    art.on('video:playing', () => {
-      if (url && art.playing) {
-        audio.play().catch((err) => {
-          console.warn(err)
-        })
-      }
-    })
-
-    art.on('destroy', () => {
-      audio.pause()
-      audio.src = ''
-      audio.load()
-    })
-
-    function update(newOption) {
-      if (newOption.url && newOption.url !== url) {
-        url = newOption.url
-        audio.src = url
-        if (art.playing) {
-          audio.play().catch(err => console.warn(err))
-        }
-      }
-
-      if (newOption.offset !== undefined) {
-        offset = newOption.offset
-      }
-
-      if (newOption.sync !== undefined) {
-        sync = newOption.sync
-      }
+      audio.playbackRate = art.video?.playbackRate || 1
     }
-
-    audio.volume = art.volume
-    audio.muted = art.muted
-    audio.playbackRate = art.video?.playbackRate || 1
+    catch (error) {
+      try {
+        destroy()
+      }
+      catch {}
+      throw error
+    }
 
     return {
       name: 'artplayerPluginAudioTrack',
       audio,
-      update,
+      update(newOption) {
+        if (active)
+          track.update(newOption, art.playing)
+      },
     }
   }
 }

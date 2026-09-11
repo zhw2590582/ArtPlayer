@@ -37,8 +37,8 @@ test.beforeAll(async () => {
   const bytes = readMember(await ensureArchive(release), member)
   assert.equal(hash(bytes), release.files[member])
   publishedCode = bytes.toString()
-  sourceCode = await compilePackage(release.name, 'umd')
-  evidence = { release, sourceSHA256: hash(sourceCode), audio: { sha256: hash(tone), bytes: tone.length, format: 'AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4' }, wav: { sha256: hash(wav), bytes: wav.length, format: 'PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz' }, scope: 'Source browser baseline; no physical device or installed package acceptance' }
+  sourceCode = process.env.ARTPLAYER_AUDIO_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_AUDIO_ARTIFACT, 'utf8') : await compilePackage(release.name, 'umd')
+  evidence = { release, sourceSHA256: hash(sourceCode), candidate: process.env.ARTPLAYER_AUDIO_ARTIFACT || 'workspace source build', audio: { sha256: hash(tone), bytes: tone.length, format: 'AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4' }, wav: { sha256: hash(wav), bytes: wav.length, format: 'PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz' }, scope: 'Source or explicit artifact browser checks; no physical device or installed package acceptance' }
 })
 
 test.afterEach(async ({ page }, testInfo) => {
@@ -116,6 +116,31 @@ test('published AUDIO-LIFE-01: empty src cleanup produces a native media error',
 })
 
 for (const core of ['published', 'candidate']) {
+  test(`${core} core + source audio: native pause/end stop audio and closed references stay inert`, async ({ page }, testInfo) => {
+    await openAudio(page, core, 'source', testInfo)
+    await page.locator('#play').click()
+    await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.currentTime)).toBeGreaterThan(0.2)
+    await page.evaluate(() => window.art.video.pause())
+    await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.paused)).toBe(true)
+    await page.evaluate(() => {
+      window.art.video.currentTime = 4
+    })
+    await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.currentTime)).toBeCloseTo(4, 1)
+    await page.evaluate(() => {
+      window.art.seek = 7.8
+      window.art.play()
+    })
+    await expect.poll(() => page.evaluate(() => window.art.video.ended)).toBe(true)
+    await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.paused)).toBe(true)
+    await page.evaluate(() => window.art.destroy())
+    await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.networkState)).toBe(0)
+    expect(await page.evaluate(() => window.audioPlugin.audio.readyState)).toBe(0)
+    expect(await page.evaluate(() => window.audioPlugin.audio.error)).toBeNull()
+    await page.evaluate(() => window.audioPlugin.update({ url: '/test/audio-tone.m4a?source=revived' }))
+    expect(await page.evaluate(() => window.audioPlugin.audio.getAttribute('src'))).toBeNull()
+    expect(await page.evaluate(() => window.audioPlugin.audio.networkState)).toBe(0)
+  })
+
   test(`${core} core + published audio: native pause and end leave external audio playing`, async ({ page }, testInfo) => {
     await openAudio(page, core, 'published', testInfo)
     await page.locator('#play').click()
@@ -181,7 +206,7 @@ for (const core of ['published', 'candidate']) {
         window.art.destroy()
       })
       await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.readyState)).toBe(0)
-      expect(await page.evaluate(() => window.audioPlugin.audio.getAttribute('src'))).toBe('')
+      expect(await page.evaluate(() => window.audioPlugin.audio.getAttribute('src'))).toBe(plugin === 'published' ? '' : null)
       expect(await page.evaluate(() => window.audioPlugin.audio.paused)).toBe(true)
       expect(await page.locator('.art-video-player').count()).toBe(0)
     })
@@ -200,7 +225,7 @@ for (const core of ['published', 'candidate']) {
       await page.evaluate(() => window.art.destroy())
       await expect.poll(() => page.evaluate(() => window.audioPlugin.audio.readyState)).toBe(0)
       expect(await page.evaluate(() => window.audioPlugin.audio.paused)).toBe(true)
-      expect(await page.evaluate(() => window.audioPlugin.audio.getAttribute('src'))).toBe('')
+      expect(await page.evaluate(() => window.audioPlugin.audio.getAttribute('src'))).toBe(plugin === 'published' ? '' : null)
     })
   }
 }

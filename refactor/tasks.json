@@ -1511,11 +1511,14 @@
         "PKG-AUDIO-02",
         "CORE-10"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "外部 audio 的同步策略、监听与源更新生命周期",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-AUDIO-03-lifecycle.md",
+        "baselines/audio-lifecycle-validation.json"
+      ]
     },
     {
       "id": "PKG-AUDIO-04",

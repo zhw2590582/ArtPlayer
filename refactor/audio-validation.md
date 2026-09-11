@@ -1,5 +1,16 @@
 # Audio Track 行为与媒体测试
 
+## PKG-AUDIO-03 候选修复
+
+音频状态已从核心事件接入拆出，源码 44 项、加入三种产物共 89 项 Node 通过。
+正式 main/legacy 各三引擎 42 项通过（均含原有 9 缺陷观察/3 原生诊断）；CI 583 项通过。
+原生暂停/结束/直接 seek、无错误媒体清理和销毁后 update 已有候选回归。
+source 标签可由 ARTPLAYER_AUDIO_ARTIFACT 显式选择实际 main/legacy 文件；未设置时仍编译源码。
+ARTPLAYER_TEST_AUDIO 接受平台分隔的三个 Node 产物路径，候选生命周期用例也逐格式执行。
+具体输入、初轮六个错误 currentSrc 断言及最终证据见
+[生命周期记录](baselines/audio-lifecycle-validation.json)。AUDIO-LIFE-01 按守卫/空 src 范围关闭，
+AUDIO-SYNC-01 的边界/完整缓冲及设备验证继续 open。下面保留 02 当时的基线结果与问题描述。
+
 PKG-AUDIO-02；公开来源见 [1.1.0 契约](baselines/audio-track-contract.md)，
 固定执行结果及失败保留见 [验证记录](baselines/audio-validation.json)。
 

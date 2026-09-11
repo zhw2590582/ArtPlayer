@@ -1,5 +1,18 @@
 # 进度与证据
 
+## 最新完成：PKG-AUDIO-03 源码拆分与生命周期修复
+
+Audio Track 已拆为入口事件管理与独立媒体状态两个 JS 模块；修复原生暂停/结束后
+外部音频继续播放、销毁空 src 错误和旧引用复活，补失败回滚与自有订阅清理。
+公开 audio、同步 update、旧 URL/偏移/阈值语义保持，包内架构文档已同步。
+
+44 项源码/89 项含三格式 Node 通过，CI 583 项；正式 main/legacy 三引擎各 42 项通过，
+其中保留 9 项旧缺陷观察和 3 项原生诊断。三份 docs/compiled 与包产物一致。
+首轮错误 currentSrc 断言及原始 trace 保留；main gzip 973（基线 676），不声称体积优化。
+当前 216 项、68 done、1 doing、147 todo。Audio-02 已提交 803e8725，03 独立提交核实后
+进入 04 严格 TS/公开类型；完整负偏移/缓冲、真机、分发门槛仍待后续，HLS 两风险仍 open。
+详见 [源码交付](changes/2026-09-12-PKG-AUDIO-03-lifecycle.md) 与 [冻结证据](baselines/audio-lifecycle-validation.json)。
+
 ## 最新完成：PKG-AUDIO-02 行为与真实媒体基线
 
 38 项 Node 契约覆盖源码和发布三格式，完整 CI 577 项、254 个生产 TS 通过。

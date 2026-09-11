@@ -2648,7 +2648,7 @@
       "id": "AUDIO-LIFE-01",
       "title": "Audio Track 销毁后 update 与媒体/订阅缺少终止守卫",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-AUDIO-02",
         "PKG-AUDIO-03",
@@ -2662,7 +2662,13 @@
         "refactor/baselines/audio-validation.json"
       ],
       "compatibleResolution": "保留公开 audio 和同步 update，封闭销毁后的资源写入并管理插件订阅，验证待决播放拒绝。",
-      "closureCriteria": "受控复现和新旧核心真实媒体切源/销毁验证通过，不以源码观察代替泄漏证据。"
+      "closureCriteria": "受控复现和新旧核心真实媒体切源/销毁验证通过，不以源码观察代替泄漏证据。",
+      "resolutionEvidence": [
+        "refactor/baselines/audio-lifecycle-validation.json",
+        "refactor/changes/2026-09-12-PKG-AUDIO-03-lifecycle.md",
+        "packages/artplayer-plugin-audio-track/ARCHITECTURE.md"
+      ],
+      "resolutionRationale": "候选源码/三格式受控回归及 main/legacy 三引擎验证：插件自己解绑，关闭后的 update/回调/拒绝无资源写入，移除 src 后无新增媒体错误；安装/解绑失败仍释放。此关闭只覆盖已登记守卫/空 src 问题，不称全设备无内存泄漏。"
     },
     {
       "id": "AUDIO-SYNC-01",
@@ -2679,9 +2685,10 @@
         "refactor/baselines/audio-track-release.json",
         "test/audio-track.test.js",
         "test/browser/audio-track.spec.js",
-        "refactor/baselines/audio-validation.json"
+        "refactor/baselines/audio-validation.json",
+        "refactor/baselines/audio-lifecycle-validation.json"
       ],
-      "compatibleResolution": "固定严格阈值、偏移正负、倍率和音量语义；实测负目标/超时长及连续切源，按证据修复。",
+      "compatibleResolution": "PKG-AUDIO-03 已修复原生暂停/结束与直接 seek 同步；严格阈值、偏移正负、倍率/音量不变。PKG-AUDIO-05 继续负目标/超时长、真实缓冲和连续切源的完整验证，条目仍 open。",
       "closureCriteria": "正常/边界/失败/缓冲恢复有媒体与受控断言，实际支持环境缺口明确处理。"
     },
     {

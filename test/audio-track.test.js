@@ -136,7 +136,7 @@ for (const { name, factory } of implementations) {
     left.audio.calls.length = 0
     right.audio.calls.length = 0
     first.art.emit('destroy')
-    assert.deepEqual(left.audio.calls, [['pause'], ['src', ''], ['load']])
+    assert.deepEqual(left.audio.calls, [['pause'], name.startsWith('published') ? ['src', ''] : ['removeAttribute', 'src'], ['load']])
     assert.deepEqual(right.audio.calls, [])
     second.art.currentTime = 2
     second.art.emit('seek')
@@ -145,6 +145,105 @@ for (const { name, factory } of implementations) {
 }
 
 const historical = implementations.find(item => item.name === 'published-main').factory
+for (const { name, factory: candidate } of implementations.filter(item => !item.name.startsWith('published'))) {
+  test(`${name}: closed callbacks and retained update cannot revive resources`, (t) => {
+    const { art, listeners } = audioHost(t)
+    const plugin = candidate({ url: 'audio.aac' })(art)
+    const retained = [...listeners.values()].flatMap(set => [...set])
+    art.emit('destroy')
+    assert.equal([...listeners.values()].reduce((count, set) => count + set.size, 0), 0)
+    plugin.audio.calls.length = 0
+    Object.defineProperty(art, 'playing', { get() {
+      throw new Error('Closed host read')
+    } })
+    assert.equal(plugin.update({ url: 'revived.aac' }), undefined)
+    for (const callback of retained)
+      callback()
+    assert.deepEqual(plugin.audio.calls, [])
+  })
+
+  test(`${name}: pending playback rejection becomes inert after destroy`, async (t) => {
+    const { art, setPlay, warnings } = audioHost(t)
+    let reject
+    const pending = new Promise((resolve, fail) => {
+      reject = fail
+    })
+    setPlay(() => pending)
+    candidate({ url: 'audio.aac' })(art)
+    art.emit('play').emit('destroy')
+    reject(new Error('Cancelled playback'))
+    await Promise.resolve()
+    assert.deepEqual(warnings, [])
+  })
+
+  test(`${name}: unsubscription failure does not prevent remaining cleanup`, (t) => {
+    const { art } = audioHost(t)
+    const plugin = candidate({ url: 'audio.aac' })(art)
+    const off = art.off
+    const failure = new Error('Controlled off failure')
+    t.mock.method(art, 'off', (event, callback) => {
+      if (event === 'play')
+        throw failure
+      return off(event, callback)
+    })
+    plugin.audio.calls.length = 0
+    assert.throws(() => art.emit('destroy'), error => error === failure)
+    assert.deepEqual(plugin.audio.calls, [['pause'], ['removeAttribute', 'src'], ['load']])
+    plugin.audio.calls.length = 0
+    art.emit('play')
+    plugin.update({ url: 'revived.aac' })
+    assert.deepEqual(plugin.audio.calls, [])
+  })
+
+  test(`${name}: partial subscription failure releases the media and original error`, (t) => {
+    const { art, instances, listeners } = audioHost(t)
+    const on = art.on
+    const failure = new Error('Controlled on failure')
+    t.mock.method(art, 'on', (event, callback) => {
+      on(event, callback)
+      if (event === 'pause')
+        throw failure
+      return art
+    })
+    assert.throws(() => candidate({ url: 'audio.aac' })(art), error => error === failure)
+    assert.deepEqual(instances[0].calls.slice(-3), [['pause'], ['removeAttribute', 'src'], ['load']])
+    assert.equal([...listeners.values()].reduce((count, set) => count + set.size, 0), 0)
+  })
+
+  test(`${name}: source initialization and pause failures still attempt media release`, (t) => {
+    const failure = new Error('Controlled src failure')
+    const { art, instances } = audioHost(t, (audio) => {
+      Object.defineProperty(audio, 'src', {
+        get: () => '',
+        set() {
+          throw failure
+        },
+      })
+      audio.pause = () => {
+        audio.calls.push(['pause'])
+        throw new Error('Secondary cleanup failure')
+      }
+    })
+    assert.throws(() => candidate({ url: 'audio.aac' })(art), error => error === failure)
+    assert.deepEqual(instances[0].calls.slice(-3), [['pause'], ['removeAttribute', 'src'], ['load']])
+  })
+
+  test(`${name}: native pause/end/seek synchronize audio without public pause calls`, (t) => {
+    const { art } = audioHost(t)
+    const { audio } = candidate({ url: 'audio.aac' })(art)
+    audio.calls.length = 0
+    art.emit('video:pause').emit('video:ended').emit('video:seeking')
+    assert.deepEqual(audio.calls, [['pause'], ['pause'], ['pause']])
+    art.currentTime = 3
+    art.emit('video:seeked')
+    assert.equal(audio.currentTime, 3)
+    art.playing = true
+    art.currentTime = 4
+    art.emit('video:playing')
+    assert.deepEqual(audio.calls.slice(-2), [['currentTime', 4], ['play']])
+  })
+}
+
 test('published defect AUDIO-LIFE-01: retained update reloads audio after destroy', (t) => {
   const { art, listeners } = audioHost(t)
   const plugin = historical({ url: 'audio.aac' })(art)
