@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-HLS-01",
+  "capturedAt": "2026-09-11T15:21:31.189Z",
+  "sourceCommit": "adec20213f00375b16231e616d1e249a12ffd345",
+  "registryObservation": {
+    "capturedAt": "2026-09-11T15:20:11.198Z",
+    "registryUrl": "https://registry.npmjs.org/artplayer-plugin-hls-control",
+    "distTags": {
+      "latest": "1.1.0"
+    },
+    "versions": [
+      "1.0.0",
+      "1.0.1",
+      "1.1.0"
+    ],
+    "publishedAt": "2026-03-12T14:20:47.883Z",
+    "note": "Observed metadata only; not a promise of future latest version or target-version availability."
+  },
+  "release": {
+    "name": "artplayer-plugin-hls-control",
+    "version": "1.1.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-hls-control/1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-hls-control/-/artplayer-plugin-hls-control-1.1.0.tgz",
+    "integrity": "sha512-lWN5oUOWDorWFHdzKcmy9Z8eHcf5f5EcUGDrxBsZBX7aEL5dGRlHPQ5+wqQEizr38D9PYPfTI/nCyun2yFopEw==",
+    "sha256": "598c354d78d3cb77965136fa61dfc0f94cdea6906a91a30781c1acef2b0c3e8b",
+    "archiveBytes": 3192,
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "42bd00dca467b581f6b3e8399ad1a416d68edcc52d42e6cb51b66f1749694556",
+      "package/dist/artplayer-plugin-hls-control.js": "7a6ce18a0b16f61f6149e0ea77efbb6e0503f997d39afe84271b59e366759e6d",
+      "package/dist/artplayer-plugin-hls-control.legacy.js": "893a3de27f9ed02b4b61f03732aec03bfcaf50d02c9beb15cc8a5767ef9121a0",
+      "package/dist/artplayer-plugin-hls-control.mjs": "85c4de4940e031d835b4de3ccf68af449d10aec4f630c89ecaf62f5503348931",
+      "package/package.json": "710ec2a27dc71f7254e7a1d2eb7cff3f56a6e23811047ac97356f1b18c8ac8b5",
+      "package/types/artplayer-plugin-hls-control.d.ts": "7dd8fdf556932e9cf6140b7513c05155cad6d486e2484bf06c6d48f6e823832a"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-hls-control",
+      "version": "1.1.0",
+      "description": "Hls control plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-hls-control.d.ts",
+          "import": "./dist/artplayer-plugin-hls-control.mjs",
+          "require": "./dist/artplayer-plugin-hls-control.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-hls-control.d.ts",
+          "import": "./dist/artplayer-plugin-hls-control.legacy.js",
+          "require": "./dist/artplayer-plugin-hls-control.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-hls-control.js",
+      "module": "./dist/artplayer-plugin-hls-control.mjs",
+      "types": "./types/artplayer-plugin-hls-control.d.ts",
+      "legacy": "./dist/artplayer-plugin-hls-control.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    }
+  },
+  "source": {
+    "packages/artplayer-plugin-hls-control/package.json": "710ec2a27dc71f7254e7a1d2eb7cff3f56a6e23811047ac97356f1b18c8ac8b5",
+    "packages/artplayer-plugin-hls-control/README.md": "42bd00dca467b581f6b3e8399ad1a416d68edcc52d42e6cb51b66f1749694556",
+    "packages/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.ts": "7dd8fdf556932e9cf6140b7513c05155cad6d486e2484bf06c6d48f6e823832a",
+    "packages/artplayer-plugin-hls-control/src/index.js": "aa477db8743be2953a23776421edb68566d504c3278269eb13f6e907a4d5f2db",
+    "packages/artplayer-plugin-hls-control/src/audio.svg": "dbee5ce7487c9f8ec927e5286188cf9439345bbe947b6c06c32c07193e01e0be",
+    "packages/artplayer-plugin-hls-control/src/quality.svg": "4666a4c01764422f9008e442f5a889ff9691bb0386083d673943a0718f4d680c",
+    "docs/assets/example/hls.control.js": "b02fd290d79999790501447fad95736642344b9b30af3ccdbe353f80c7d53a6e"
+  },
+  "comparisons": [
+    {
+      "file": "package.json",
+      "publishedLF": "710ec2a27dc71f7254e7a1d2eb7cff3f56a6e23811047ac97356f1b18c8ac8b5",
+      "workspaceLF": "710ec2a27dc71f7254e7a1d2eb7cff3f56a6e23811047ac97356f1b18c8ac8b5",
+      "equal": true
+    },
+    {
+      "file": "README.md",
+      "publishedLF": "42bd00dca467b581f6b3e8399ad1a416d68edcc52d42e6cb51b66f1749694556",
+      "workspaceLF": "42bd00dca467b581f6b3e8399ad1a416d68edcc52d42e6cb51b66f1749694556",
+      "equal": true
+    },
+    {
+      "file": "types/artplayer-plugin-hls-control.d.ts",
+      "publishedLF": "7dd8fdf556932e9cf6140b7513c05155cad6d486e2484bf06c6d48f6e823832a",
+      "workspaceLF": "7dd8fdf556932e9cf6140b7513c05155cad6d486e2484bf06c6d48f6e823832a",
+      "equal": true
+    }
+  ],
+  "functionComparison": {
+    "sha256": "b22a09f4de5b56005c5122014624d76a91410e9517889d3e7b1c70b8efb2b554",
+    "typescript": "5.9.3",
+    "esbuild": "0.27.7",
+    "scope": [
+      "uniqBy",
+      "artplayerPluginHlsControl"
+    ],
+    "excludes": [
+      "SVG strings",
+      "bundler wrappers"
+    ],
+    "note": "Historical source at sourceCommit, not live migration source."
+  },
+  "provenanceNote": "Registry gitHead daf133b22630b4a0eecfa3336bbddab0e9119d96 has package version 1.0.2; it does not prove tarball source provenance."
+}

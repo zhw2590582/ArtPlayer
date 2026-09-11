@@ -1,5 +1,9 @@
 # 已发布基线
 
+PKG-HLS-01 另行固定 HLS control 1.1.0，见 [契约](hls-control-contract.md) 与
+[归档指纹](hls-control-release.json)。重跑 `node refactor/scripts/hls-contract.mjs`；
+它验证独立冻结记录及历史源码，不改下方 BASE-01 数据，也不表示 HLS 真实播放已通过。
+
 BASE-01 于 2026-09-10 固定核心与 chapter 的 npm 发布内容，数据在 [releases.json](releases.json)。这不是全生态兼容通过报告。
 
 | 包 | 工作区版本 | 已固定发布基线 | 后续目标 |
