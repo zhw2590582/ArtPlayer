@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { ESLint } from 'eslint'
 import { glob } from 'glob'
+import { generateCoreEditorDeclaration } from './editor-types.mjs'
 
 function ensureDirExists(filePath) {
   const dir = path.dirname(filePath)
@@ -26,17 +27,8 @@ function parsePluginInfo(pluginPath) {
 }
 
 const reg = /^import.*$/gim
-const artplayerTS = glob.sync('packages/artplayer/types/*.d.ts')
 const artplayerTSoutput = path.join('docs/assets/ts/artplayer.d.ts')
-
-let code = ''
-for (let index = 0; index < artplayerTS.length; index++) {
-  const type = artplayerTS[index]
-  code += `${String(fs.readFileSync(type)).replace(reg, '')}\n`
-}
-
-code.replace('export default ', '')
-code += `export = Artplayer;\nexport as namespace Artplayer;\n`
+const code = generateCoreEditorDeclaration()
 ensureDirExists(artplayerTSoutput)
 fs.writeFileSync(artplayerTSoutput, code.trim())
 console.log(`✨ Built ${artplayerTSoutput}`);

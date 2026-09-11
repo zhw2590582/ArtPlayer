@@ -276,7 +276,7 @@
       "id": "BASE-TYPE-04",
       "title": "plugins.add / toggle 的旧声明返回值与运行时不同",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-07",
         "CORE-08",
@@ -293,8 +293,15 @@
       ],
       "compatibleResolution": "保留旧声明接受范围并协调精确重载/扩展，不静默把同步注册改成 async。",
       "closureCriteria": "返回值类型与运行时差异逐项说明，旧合法消费和拒绝传播回归通过。",
-      "scopeNote": "CORE-07 retains historical legal return assignments and records actual runtime separately; incompatible return tightening remains open through CORE-21. No release waiver.",
-      "playbackResolution": "CORE-10 adds assignable PlaybackControls with Promise<void> | void toggle; legacy root void remains accepted. All five installed type modes pass. The overall facade and plugins.add conflict stay open through CORE-21."
+      "scopeNote": "Historical root inaccuracies remain intentional compatibility behavior; the optional runtime entry provides the accurate alternative validated by CORE-21.",
+      "playbackResolution": "Both the existing PlaybackControls view and the new runtime entry expose accurate playback results; old root acceptance remains unchanged.",
+      "resolutionRationale": "The optional runtime entry models sync registration as the original registry, Promise registration as Promise<registry>, and toggle as the actual play/pause result. Old root returns remain accepted. Installed module/constructor identity, old factories, rejection tests and all five legacy/eight precise consumer modes pass without runtime wrappers.",
+      "resolutionEvidence": [
+        "refactor/baselines/core-declarations-validation.json",
+        "refactor/changes/2026-09-11-CORE-21-public-declarations.md",
+        "packages/artplayer/types/COMPATIBILITY.md",
+        "test/types/runtime-public.ts"
+      ]
     },
     {
       "id": "BASE-DIST-01",
@@ -791,7 +798,7 @@
       "id": "BASE-TYPE-05",
       "title": "Public Utils declarations omit exports and misstate timer/descriptor signatures",
       "confirmation": "source-observed",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-07",
         "CORE-21"
@@ -807,7 +814,14 @@
       ],
       "compatibleResolution": "Coordinate compatible public overloads/exports separately; use accurate strict types in migrated source.",
       "closureCriteria": "Cover missing unescape/ArtPlayerError, def identity/property keys, optional sleep, timer void returns and ignored debounce context; retain legal old consumers in new/old compilers.",
-      "scopeNote": "CORE-07 retains historical legal return assignments and records actual runtime separately; incompatible return tightening remains open through CORE-21. No release waiver."
+      "scopeNote": "Historical root inaccuracies remain intentional compatibility behavior; the optional runtime entry provides the accurate alternative validated by CORE-21.",
+      "resolutionRationale": "Generated runtime Utils covers actual exports, object/PropertyKey def target identity, optional sleep, timer void results and preserved receivers with ignored debounce context documented. Source correspondence, installed positive/negative consumers and real utility behavior pass; historical root signatures remain accepted.",
+      "resolutionEvidence": [
+        "refactor/baselines/core-declarations-validation.json",
+        "refactor/changes/2026-09-11-CORE-21-public-declarations.md",
+        "packages/artplayer/types/COMPATIBILITY.md",
+        "test/types/runtime-public.ts"
+      ]
     },
     {
       "id": "EVENT-NAME-01",
@@ -883,7 +897,7 @@
       "id": "BASE-TYPE-07",
       "title": "Setting returns, subtitle contextual payloads and notice getter conflict with historical declarations",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-07",
         "CORE-14",
@@ -900,14 +914,21 @@
       ],
       "compatibleResolution": "Keep legacy consumers; add explicit cue-array listener overloads, type internal implementations accurately, and resolve remaining generated/public facade contracts at CORE-21 without false intersections.",
       "closureCriteria": "Actual setting/null/void and notice boolean returns, cue array callbacks and old legal type consumers all have an explicit compatible declaration strategy and package tests.",
-      "scopeNote": "CORE-07 provides runtime evidence and explicit cue-array overloads; old inferred scalar event callbacks and return signatures are not claimed corrected.",
-      "workspaceState": "CORE-14 source models item/null/void setting returns; CORE-15 source models cue arrays and string/null/undefined subtitle results. Historical public consumers and explicit array listener overloads still compile; scalar inference and public return facade coordination remain CORE-18/21. CORE-18 notice.ts now models a boolean getter and string/Error/false writes; source and retained public consumer fixtures are in test/types/notice.ts. Public precise-view coordination remains CORE-21."
+      "scopeNote": "Historical root inaccuracies remain intentional compatibility behavior; the optional runtime entry provides the accurate alternative validated by CORE-21.",
+      "workspaceState": "Generated runtime Setting/Subtitle/Notice expose item/null/void, cue-array contextual payloads and boolean notice reads independently from message writes. Installed consumers and real browser callbacks/returns pass. The historical root retains its old inference/returns and explicit array overloads rather than using false intersections.",
+      "resolutionRationale": "Generated runtime Setting/Subtitle/Notice expose item/null/void, cue-array contextual payloads and boolean notice reads independently from message writes. Installed consumers and real browser callbacks/returns pass. The historical root retains its old inference/returns and explicit array overloads rather than using false intersections.",
+      "resolutionEvidence": [
+        "refactor/baselines/core-declarations-validation.json",
+        "refactor/changes/2026-09-11-CORE-21-public-declarations.md",
+        "packages/artplayer/types/COMPATIBILITY.md",
+        "test/types/runtime-public.ts"
+      ]
     },
     {
       "id": "BASE-TYPE-08",
       "title": "Write-only player commands have fictitious public getter declarations",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-21"
       ],
@@ -920,7 +941,14 @@
         "test/types/declaration-legacy.ts"
       ],
       "compatibleResolution": "Keep historical consumer acceptance, model source command reads as undefined, and provide an accurate public facade without inventing runtime getters.",
-      "closureCriteria": "seek/forward/backward/switch/quality reads and writes have an explicit accurate compatibility strategy validated against old TypeScript consumers and real package descriptors."
+      "closureCriteria": "seek/forward/backward/switch/quality reads and writes have an explicit accurate compatibility strategy validated against old TypeScript consumers and real package descriptors.",
+      "resolutionRationale": "The optional runtime entry exposes undefined reads and the actual write types for seek/forward/backward/switch/quality; TS 5.1.6/5.9.3 consumers verify independent accessors. Published/candidate descriptors and reads pass; historical TS 4.3.5 consumers and PlaybackControls remain accepted. No runtime getter was invented.",
+      "resolutionEvidence": [
+        "refactor/baselines/core-declarations-validation.json",
+        "refactor/changes/2026-09-11-CORE-21-public-declarations.md",
+        "packages/artplayer/types/COMPATIBILITY.md",
+        "test/types/runtime-public.ts"
+      ]
     },
     {
       "id": "BASE-LIFE-07",
@@ -995,7 +1023,7 @@
       "id": "BASE-TYPE-09",
       "title": "Template and icon declarations claim incompatible DOM and static shapes",
       "confirmation": "source-observed",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-21"
       ],
@@ -1006,7 +1034,14 @@
         "refactor/changes/2026-09-11-CORE-12-template-resources.md"
       ],
       "compatibleResolution": "Keep old legal declarations accepted, expose accurate template and icon views without inventing runtime properties.",
-      "closureCriteria": "Old consumers and accurate template/media/icon view consumers pass all supported type modes and runtime shape checks."
+      "closureCriteria": "Old consumers and accurate template/media/icon view consumers pass all supported type modes and runtime shape checks.",
+      "resolutionRationale": "Generated runtime Template/Icons/MediaSurface model nullable SSR/query nodes, real icon wrappers, div container validation and static html placement. Constructor-stage host consumers reject premature getters; installed type modes and published/candidate shape/browser checks pass while old imports remain compatible.",
+      "resolutionEvidence": [
+        "refactor/baselines/core-declarations-validation.json",
+        "refactor/changes/2026-09-11-CORE-21-public-declarations.md",
+        "packages/artplayer/types/COMPATIBILITY.md",
+        "test/types/runtime-public.ts"
+      ]
     },
     {
       "id": "BASE-LIFE-09",
@@ -1532,7 +1567,7 @@
       "id": "BASE-TYPE-10",
       "title": "PiP getter is declared boolean but native runtime returns an element or null",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-16",
         "CORE-21"
@@ -1544,7 +1579,14 @@
       ],
       "compatibleResolution": "Keep old legal JS return identities and historical public consumers; model the internal branch-dependent getter accurately and coordinate a compatible public declaration strategy in CORE-21.",
       "closureCriteria": "Public declaration strategy and installed JS/TS consumers explicitly cover native element/null and fallback boolean without silently narrowing old legal consumption.",
-      "workspaceState": "CORE-16 preserves historical native Element/null and WebKit boolean runtime returns with precise internal PipProperty. The installed old public consumers still pass; public declaration coordination remains CORE-21."
+      "workspaceState": "Generated runtime Player exposes native Element|null or WebKit boolean PiP reads and boolean writes. Installed positive/negative type consumers and native/fallback browser behavior pass, preserving original JS return identity and historical boolean declaration acceptance at the old root. Physical Apple/AirPlay certification remains a separate release gate.",
+      "resolutionRationale": "Generated runtime Player exposes native Element|null or WebKit boolean PiP reads and boolean writes. Installed positive/negative type consumers and native/fallback browser behavior pass, preserving original JS return identity and historical boolean declaration acceptance at the old root. Physical Apple/AirPlay certification remains a separate release gate.",
+      "resolutionEvidence": [
+        "refactor/baselines/core-declarations-validation.json",
+        "refactor/changes/2026-09-11-CORE-21-public-declarations.md",
+        "packages/artplayer/types/COMPATIBILITY.md",
+        "test/types/runtime-public.ts"
+      ]
     },
     {
       "id": "BASE-DOM-13",

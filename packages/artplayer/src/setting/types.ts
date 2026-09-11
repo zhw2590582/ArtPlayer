@@ -34,7 +34,7 @@ export interface SettingItem extends TreeItem {
 }
 
 export interface SettingEvents {
-  'blur': []
+  'blur': [Event]
   'focus': [event: Event]
   'resize': []
   'video:ratechange': [Event]

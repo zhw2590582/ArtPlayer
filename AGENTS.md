@@ -18,6 +18,9 @@ Include the task ID in the commit subject and include its implementation, tests,
 and status updates together. Verify the commit before starting the next task. Do not bundle
 multiple newly completed tasks or include unrelated work. This does not authorize pushing or publishing.
 Use Yarn Classic 1.22.22 as packageManager and maintain only the root yarn.lock.
+Core public declarations are authored in packages/artplayer/public/ and generated
+with yarn build:types into the existing types/ entrypoints. Do not hand-edit the
+generated core declarations; yarn check:types is read-only and rejects drift.
 Use Node from .node-version; frozen Yarn installs and strict toolchain checks are required.
 Bun remains an isolated evaluation and must not replace Yarn without a new user decision.
 The user also authorizes installing needed dependencies and adding or improving reasonable
@@ -137,7 +140,8 @@ For proxy/plugin work, prefer validating on the local demo page rather than reas
 - `packages/artplayer/src/contextmenu/`: context menu items
 - `packages/artplayer/src/plugins/`: built-in plugins
 - `packages/artplayer/src/utils/`: shared helpers, component base classes, DOM utilities
-- `packages/artplayer/types/`: public TS declarations
+- `packages/artplayer/public/`: public TypeScript declaration sources
+- `packages/artplayer/types/`: generated public declarations and compatibility documentation
 
 ### Ecosystem packages
 
@@ -246,7 +250,8 @@ If adding HLS-like quality/audio selection elsewhere:
 
 ## Build and Artifact Rules
 
-- Always edit `src/` and `types/` first.
+- Always edit source first: core runtime in `src/`, core declarations in `public/`;
+  other packages retain `types/` until their own declaration source migration.
 - Rebuild package artifacts after source changes that should ship.
 - Do not treat `dist/` as source of truth.
 - If a change affects demo behavior, also verify the matching file in `docs/assets/example/`.

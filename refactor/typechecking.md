@@ -1,5 +1,25 @@
 # 已实现的类型检查与迁移入口
 
+CORE-21 已完成声明与消费者验收。核心公开声明源已迁至 packages/artplayer/public/，
+使用 yarn build:types 生成历史 types/ 路径；yarn check:types 只读检查漂移、
+源错误和内部依赖，已接入 ci:check。public/ 与 src/ 分别纳入严格检查，
+public/ 不打入 npm 包。当前生成 37 个声明，精确构造器及阶段回调宿主已接入。
+核心编辑器从同一旧入口依赖图生成，并有独立 TS 4.3.5/5.9.3 语义检查和真实 Monaco 验证；
+CI 449 项、229 个生产 TS 文件及最终安装包五组旧/八组精确类型通过，
+UMD/legacy 各 1521 项三浏览器回归通过，见 core-public-types.md。
+
+精确模块额外使用根开发 alias typescript-runtime-compat（npm:typescript@5.1.6）
+验证当前/最低现代编译器的 Node10、NodeNext CJS/ESM 和 Bundler 四模式。
+它不替换生成编译器或旧入口 4.3.5 回归。runtime-leaf-consumer.ts 直接消费
+生成模块；runtime-public.ts/runtime-commonjs.cts 通过真实精确入口检查默认/CJS/legacy、
+回调、返回值和新旧模块扩展。安装包检查在仓库外重复五组旧类型及八组精确类型，
+并禁止解析逃回工作区。runtime-facade.ts 检查源成员覆盖和服务对应，
+其余 runtime 类型夹具逐项对照实现，不使用整实例双重断言来制造对应证明。
+runtime-construction.ts 同时在仓库和安装包检查 proxy/组件/插件的阶段宿主，
+保留独立访问器写入，并区分延迟执行的完整 customType/setting 宿主。
+scripts/editor-types.mjs 负责核心编辑器依赖打包、AST 全局桥和独立编译；
+test/editor-types.test.js 检查漂移及损坏输出，test/browser/editor-types.spec.js 验证实际 worker。
+
 PKG-CHAPTER-04 已修复核心/chapter 的条件类型入口、language 与 chapter legacy 回退。
 当前五组编译模式均要求零诊断，覆盖默认/命名类型、legacy、语言与 CJS require 形式；
 七条历史 NodeNext 诊断和打包额外四条诊断的候选豁免已移除，冻结发布基线不变。

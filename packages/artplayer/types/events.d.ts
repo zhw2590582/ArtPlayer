@@ -1,14 +1,13 @@
+// Generated from public/events.ts by yarn build:types. Do not edit.
 import type { AspectRatio, Flip } from './player'
 import type { Subtitle } from './subtitle'
 
 export type Bar = 'loaded' | 'played' | 'hover'
-
 /** Actual built-in subtitle update payloads; legacy Events keeps its scalar types. */
 export interface SubtitleUpdateEvents {
   subtitleBeforeUpdate: [cues: VTTCue[]]
   subtitleAfterUpdate: [cues: VTTCue[]]
 }
-
 export interface Events {
   'document:click': [event: Event]
   'document:mouseup': [event: Event]
@@ -22,11 +21,9 @@ export interface Events {
   'document:pointermove': [event: Event]
   'document:visibilitychange': [event: Event]
   'document:webkitfullscreenchange': [event: Event]
-
   'window:resize': [event: Event]
   'window:scroll': [event: Event]
   'window:orientationchange': [event: Event]
-
   'video:abort': [event: Event]
   'video:canplay': [event: Event]
   'video:canplaythrough': [event: Event]
@@ -51,7 +48,6 @@ export interface Events {
   'video:timeupdate': [event: Event]
   'video:volumechange': [event: Event]
   'video:waiting': [event: Event]
-
   'info': [state: boolean]
   'layer': [state: boolean]
   'loading': [state: boolean]
@@ -61,33 +57,31 @@ export interface Events {
   'control': [state: boolean]
   'setting': [state: boolean]
   'hotkey': [event: KeyboardEvent]
-
   'destroy': []
-
   'subtitleOffset': [offset: number]
   /** Legacy contextual type; annotate listeners with VTTCue[] for the runtime payload. */
   'subtitleBeforeUpdate': [cue: VTTCue]
   /** Legacy contextual type; annotate listeners with VTTCue[] for the runtime payload. */
   'subtitleAfterUpdate': [cue: VTTCue]
   'subtitleLoad': [cues: VTTCue[], option: Subtitle]
-
   'focus': [event: Event]
   'blur': [event: Event]
   'dblclick': [event: Event]
   'click': [event: Event]
   'hover': [state: boolean, event: Event]
   'mousemove': [event: Event]
-
   'resize': []
   'view': [state: boolean]
   'lock': [state: boolean]
   'aspectRatio': [aspectRatio: AspectRatio]
   'autoHeight': [height: number]
-  'autoSize': [size: { width: number, height: number }]
+  'autoSize': [size: {
+    width: number
+    height: number
+  }]
   'ready': []
   'airplay': []
   'raf': []
-
   'error': [error: Error, reconnectTime: number]
   'flip': [flip: Flip]
   'fullscreen': [state: boolean]

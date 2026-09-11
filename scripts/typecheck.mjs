@@ -5,6 +5,7 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
 import compat from 'typescript-compat'
+import runtimeCompat from 'typescript-runtime-compat'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const relative = name => path.relative(root, name).replaceAll('\\', '/')
@@ -48,6 +49,7 @@ export function runTypechecks() {
   const dependencies = read('package.json').devDependencies
   assert.equal(ts.version, dependencies.typescript)
   assert.equal(`npm:typescript@${compat.version}`, dependencies['typescript-compat'])
+  assert.equal(`npm:typescript@${runtimeCompat.version}`, dependencies['typescript-runtime-compat'])
   const configs = [path.join(root, 'tsconfig.json')]
   for (const name of fs.readdirSync(path.join(root, 'packages'))) {
     const config = path.join(root, 'packages', name, 'tsconfig.json')
@@ -77,6 +79,16 @@ export function runTypechecks() {
     if (mode === 'nodenext-cjs')
       assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, 'test/types/commonjs.cts'), 'utf8')), [], 'CommonJS export assignment consumer failed')
     console.log(`Consumers passed: TS ${compiler.version} ${mode}`)
+  }
+  const runtimeFixtures = ['test/types/runtime-leaf-consumer.ts', 'test/types/runtime-public.ts', 'test/types/runtime-construction.ts']
+  for (const compiler of [ts, runtimeCompat]) {
+    for (const mode of ['node10-commonjs', 'nodenext-cjs', 'bundler-esm', 'nodenext-esm']) {
+      for (const fixture of runtimeFixtures)
+        assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, fixture), 'utf8')), [], `Runtime declarations failed: TS ${compiler.version} ${mode} ${fixture}`)
+      if (mode === 'nodenext-cjs')
+        assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, 'test/types/runtime-commonjs.cts'), 'utf8')), [], `Runtime CJS export assignment failed: TS ${compiler.version}`)
+      console.log(`Runtime declaration consumers passed: TS ${compiler.version} ${mode}`)
+    }
   }
   console.log(`TypeScript production source files checked: ${sourceCount}; unmigrated JS is not counted`)
 }

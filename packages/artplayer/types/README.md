@@ -1,8 +1,36 @@
 # Declaration entrypoints
 
-`artplayer.d.ts` remains the shared API definition and old TypeScript entry. Its
-relative declarations describe the existing player; they are not a claim that the
-runtime has already migrated to TypeScript.
+The TypeScript files in `../public/` are the source for these declarations.
+`yarn build:types` uses the pinned TypeScript compiler to emit the existing `.d.ts`,
+`.d.mts` and `.d.cts` paths; `yarn check:types` verifies them without writing.
+Do not hand-edit generated declarations. The generator rejects dependencies on
+implementation files and emits no JavaScript. Public source files are excluded
+from the npm package.
+
+`artplayer.d.ts` remains the shared API definition and old TypeScript entry.
+This facade preserves historical consumer acceptance; COMPATIBILITY.md explains
+the retained inaccuracies and the optional precise view.
+
+CORE-21 generates precise modules in `runtime/` and assembles them in runtime.d.ts.
+Choose `import Artplayer from 'artplayer/runtime'` for the precise view, or
+`artplayer/runtime/legacy` for the existing legacy JS build with the same precise
+types. These views require the modern accessor syntax tested with TypeScript
+5.1.6 and 5.9.3. Their JS targets are identical to the corresponding existing
+entrypoints; no constructor or instance wrapper is created.
+
+Use the type-only `artplayer/runtime/types` entry to augment precise Plugins and
+Events. Legacy custom event/plugin result augmentation is also retained. Existing
+root entrypoints do not import the modern views, preserving TypeScript 4.3.5.
+Old typed plugin factories remain accepted by explicit input overloads; precise
+instances do not pretend to satisfy inaccurate legacy return declarations.
+PluginFactory uses PluginHost: its plugins field is optional because constructor
+factories execute before that registry is assigned. Inline plugins.add callbacks
+receive the completed player. New controls require a top/left/right position;
+updates may retain the existing position. ProxyHost exposes safe initial fields
+before Template returns. Layer/control/contextmenu hosts mark later components
+optional; customType and setting mounted run after a delay and receive the full
+instance. These hosts retain distinct Player getter/setter types. Container inputs
+and template.$container remain HTMLDivElement because only div is supported.
 
 Conditional exports select `artplayer.d.mts` for ESM and `artplayer.d.cts` for CJS
 and legacy. The CJS bridge uses `export =` for the real module.exports constructor
@@ -17,15 +45,18 @@ i18n.d.ts contains dictionary definitions without suppressed module augmentation
 The editor's global language module is generated separately as
 docs/assets/ts/artplayer-i18n.d.ts so it cannot contaminate npm consumers.
 
-Top-level types and historical .d.ts filenames remain available; runtime paths and
-exports do not change. See TypeScript's declaration module format and conditional
+Top-level types and historical .d.ts filenames remain available; existing runtime
+paths and exports do not change. See TypeScript's declaration module format and conditional
 resolution rules: https://www.typescriptlang.org/docs/handbook/modules/reference.html
 
 When changing types, run `yarn typecheck`, `yarn test:baseline` and
 `yarn test:package:release`. They cover default/named types, core/legacy constructors,
 chapter/legacy factories, language data, invalid inputs, NodeNext/Bundler and old
-TS 4.3.5 consumers. Run `yarn build:ts` to refresh editor declarations. Full editor
-behavior and other core declaration/runtime mismatches have CORE-07/SITE tasks.
+TS 4.3.5 consumers. Run `yarn build:ts` to refresh editor declarations. The core
+editor bundle comes from the public dependency graph and is checked standalone
+with both compilers. editor-types.test.js rejects stale or invalid output, and
+editor-types.spec.js exercises the real Monaco worker and typed example playback.
+Plugin/editor UI modernization remains in SITE tasks.
 
 ## Configuration migration boundary
 
@@ -42,8 +73,8 @@ test/types/options-source.ts and declaration-inputs.ts cover those forms positiv
 declaration-legacy.ts preserves old reads and historically legal return assumptions.
 Do not change runtime validation to match a narrower declaration. The additions,
 retained conflicts and follow-up owners are detailed in [COMPATIBILITY.md](./COMPATIBILITY.md).
-CORE-07 coordinates the differences; it does not close every conflicting old return
-signature. CORE-21 remains responsible for the generated/public declaration strategy.
+CORE-07 introduced compatible additions. CORE-21 supplies the generated precise
+runtime entry for remaining conflicts while preserving historical root signatures.
 
 ## Internal media migration
 
@@ -58,7 +89,7 @@ shims and minimal playback/layout dependencies. These types are not exported by
 the package. Public art.video keeps its historical declaration and runtime identity;
 do not cast an internal canvas to HTMLVideoElement merely to satisfy that public
 declaration. Optional capability checks belong to their consumers. Full constructor
-type integration is tracked by CORE-20; proxy package migration validates each real
+type integration was completed in CORE-20; proxy package migration validates each real
 adapter separately. Source type fixtures and real canvas integration live in
 test/types/media-hosts.ts and test/browser/media-hosts.spec.js.
 

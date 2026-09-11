@@ -31,6 +31,29 @@
     "./types": {
       "types": "./types/artplayer.d.ts"
     },
+    "./runtime": {
+      "import": {
+        "types": "./types/runtime.d.mts",
+        "default": "./dist/artplayer.mjs"
+      },
+      "require": {
+        "types": "./types/runtime.d.cts",
+        "default": "./dist/artplayer.js"
+      }
+    },
+    "./runtime/types": {
+      "types": "./types/runtime.d.ts"
+    },
+    "./runtime/legacy": {
+      "import": {
+        "types": "./types/runtime.d.cts",
+        "default": "./dist/artplayer.legacy.js"
+      },
+      "require": {
+        "types": "./types/runtime.d.cts",
+        "default": "./dist/artplayer.legacy.js"
+      }
+    },
     "./legacy": {
       "import": {
         "types": "./types/artplayer.d.cts",
@@ -59,6 +82,15 @@
     "*": {
       "types": [
         "types/artplayer.d.ts"
+      ],
+      "runtime": [
+        "types/runtime.d.ts"
+      ],
+      "runtime/types": [
+        "types/runtime.d.ts"
+      ],
+      "runtime/legacy": [
+        "types/runtime.d.ts"
       ],
       "i18n/*": [
         "types/legacy/language.d.ts"

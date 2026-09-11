@@ -1,3 +1,4 @@
+// Generated from public/icons.ts by yarn build:types. Do not edit.
 export interface Icons {
   readonly loading: HTMLDivElement
   readonly state: HTMLDivElement

@@ -7,6 +7,7 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
 import compat from 'typescript-compat'
+import runtimeCompat from 'typescript-runtime-compat'
 
 export const workspace = fileURLToPath(new URL('../', import.meta.url))
 export const names = ['artplayer', 'artplayer-plugin-chapter']
@@ -33,18 +34,21 @@ export function runtimeConsumer(dir, { baseline = false } = {}) {
   return JSON.parse(run(['runtime.cjs'], dir))
 }
 
-export function typeConsumers(dir) {
+export function typeConsumers(dir, { precise = false } = {}) {
   const results = []
-  for (const [compiler, mode] of [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'bundler-esm'], [compat, 'node10-commonjs'], [ts, 'nodenext-esm']]) {
+  const matrix = precise
+    ? [ts, runtimeCompat].flatMap(compiler => ['node10-commonjs', 'nodenext-cjs', 'bundler-esm', 'nodenext-esm'].map(mode => [compiler, mode]))
+    : [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'bundler-esm'], [compat, 'node10-commonjs'], [ts, 'nodenext-esm']]
+  for (const [compiler, mode] of matrix) {
     const next = mode.startsWith('nodenext')
     const extension = next ? (mode.endsWith('-cjs') ? 'cts' : 'mts') : 'ts'
-    const inputs = ['public', 'declaration-inputs', 'declaration-legacy', 'plugins-public', 'playback-public', 'chapter-options', 'chapter-exports', 'language-value', 'language', 'legacy-plugin']
+    const inputs = precise ? ['runtime-public', 'runtime-construction'] : ['public', 'declaration-inputs', 'declaration-legacy', 'plugins-public', 'playback-public', 'chapter-options', 'chapter-exports', 'language-value', 'language', 'legacy-plugin']
     if (mode === 'nodenext-cjs')
-      inputs.push('commonjs')
+      inputs.push(precise ? 'runtime-commonjs' : 'commonjs')
     const files = inputs.map((name) => {
       const file = path.join(dir, `${name}.${extension}`)
       const folder = ['language', 'legacy-plugin'].includes(name) ? 'refactor/fixtures/consumers' : 'test/types'
-      fs.copyFileSync(path.join(workspace, folder, `${name}.${name === 'commonjs' ? 'cts' : 'ts'}`), file)
+      fs.copyFileSync(path.join(workspace, folder, `${name}.${name.endsWith('commonjs') ? 'cts' : 'ts'}`), file)
       return file
     })
     const options = {
@@ -71,10 +75,10 @@ export function typeConsumers(dir) {
       line: d.file && d.start !== undefined ? d.file.getLineAndCharacterOfPosition(d.start).line + 1 : null,
       message: compiler.flattenDiagnosticMessageText(d.messageText, '\n').replaceAll(`${dir.replaceAll('\\', '/')}/node_modules/`, '<workspace>/packages/'),
     }))
-    const expected = mode === 'nodenext-esm' ? readJson(path.join(workspace, 'test/types/known-diagnostics.json')).diagnostics : []
+    const expected = !precise && mode === 'nodenext-esm' ? readJson(path.join(workspace, 'test/types/known-diagnostics.json')).diagnostics : []
     const historical = readJson(path.join(workspace, 'refactor/baselines/consumers.json')).types
     const known = readJson(path.join(workspace, 'test/package/known-types.json')).cases
-    for (const fixture of ['language.ts', 'legacy-plugin.ts']) {
+    for (const fixture of precise ? [] : ['language.ts', 'legacy-plugin.ts']) {
       if (!known.some(item => item.fixture === fixture && item.mode === mode))
         continue
       const original = historical.find(result => result.mode === mode && result.fixture === fixture)

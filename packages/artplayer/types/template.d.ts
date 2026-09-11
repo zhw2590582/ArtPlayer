@@ -1,3 +1,4 @@
+// Generated from public/template.ts by yarn build:types. Do not edit.
 export interface Template {
   readonly html: string
   readonly $container: HTMLDivElement

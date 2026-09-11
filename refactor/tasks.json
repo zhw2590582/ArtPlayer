@@ -1153,11 +1153,16 @@
         "CORE-20",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "由 TS 生成的既有入口声明与三种发布产物",
       "acceptance": "内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过；逐项完成 CORE-07 留下的 BASE-TYPE-04/05/07 声明方案，旧合法消费者与实际返回分别留证；不能以虚假的交叉返回类型或改变运行时来掩盖冲突，未决项阻止核心声明出口；处理 CORE-10 / BASE-TYPE-08 的 setter-only 属性虚构 getter 声明，并复核 PlaybackControls 精确视图与旧 toggle 声明共存策略",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-21-public-declarations.md",
+        "baselines/core-declarations-validation.json",
+        "core-public-types.md",
+        "typechecking.md"
+      ]
     },
     {
       "scope": [

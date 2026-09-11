@@ -25,7 +25,7 @@ export function checkFiles(manifest, files, historical = []) {
   visit(manifest.exports)
   for (const file of historical.filter(file => /^package\/(?:dist|types)\//.test(file)))
     assert(files.includes(file), `Historical distribution file removed: ${file}`)
-  assert(!files.some(file => /^package\/(?:src|node_modules)\//.test(file)), 'Source/dependencies leaked into package')
+  assert(!files.some(file => /^package\/(?:src|public|node_modules)\//.test(file)), 'Source/dependencies leaked into package')
   assert(!files.includes('package/tsconfig.json'), 'Implementation tsconfig leaked into package')
 }
 
@@ -75,7 +75,7 @@ export async function checkPackages({ release = false } = {}) {
   const output = fs.mkdtempSync(path.join(parent, 'run-'))
   const snapshot = path.join(output, 'build')
   fs.mkdirSync(snapshot)
-  for (const file of ['package.json', 'yarn.lock', 'tsconfig.json', 'tsconfig.base.json']) fs.copyFileSync(path.join(workspace, file), path.join(snapshot, file))
+  for (const file of ['package.json', 'yarn.lock', 'tsconfig.json', 'tsconfig.base.json', 'eslint.config.js']) fs.copyFileSync(path.join(workspace, file), path.join(snapshot, file))
   fs.cpSync(path.join(workspace, 'types'), path.join(snapshot, 'types'), { recursive: true })
   fs.cpSync(path.join(workspace, 'scripts'), path.join(snapshot, 'scripts'), { recursive: true })
   fs.symlinkSync(path.join(workspace, 'node_modules'), path.join(snapshot, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir')
@@ -83,7 +83,7 @@ export async function checkPackages({ release = false } = {}) {
     const source = path.join(workspace, 'packages', name)
     fs.cpSync(source, path.join(snapshot, 'packages', name), { recursive: true, filter: file => !['dist', 'node_modules'].includes(path.basename(file)) })
   }
-  fs.writeFileSync(path.join(output, 'build.log'), run(['scripts/build.js', ...names], snapshot) + run(['scripts/build-i18n.js'], snapshot))
+  fs.writeFileSync(path.join(output, 'build.log'), run(['scripts/build-types.mjs', '--write'], snapshot) + run(['scripts/build.js', ...names], snapshot) + run(['scripts/build-i18n.js'], snapshot))
   const baseline = await publishedConsumer()
   const installed = consumerDirectory()
   try {
@@ -118,11 +118,12 @@ export async function checkPackages({ release = false } = {}) {
     const runtime = runtimeConsumer(installed)
     assert.deepEqual(runtime.observations.api, oldRuntime.observations.api, 'Published API shape/defaults changed')
     const types = typeConsumers(installed)
-    const report = { task: 'ENG-07', capturedAt: new Date().toISOString(), node: process.versions.node, packages, runtime, publishedRuntime: oldRuntime, types, knownTypeBlockers: types.reduce((sum, result) => sum + result.diagnostics.length, 0) }
+    const preciseTypes = typeConsumers(installed, { precise: true })
+    const report = { task: 'ENG-07', capturedAt: new Date().toISOString(), node: process.versions.node, packages, runtime, publishedRuntime: oldRuntime, types, preciseTypes, knownTypeBlockers: [...types, ...preciseTypes].reduce((sum, result) => sum + result.diagnostics.length, 0) }
     writeJson(path.join(output, 'report.json'), report)
     writeJson(path.join(output, 'browser-artifacts.json'), artifacts)
     writeJson(path.join(parent, 'latest.json'), { output: path.relative(workspace, output).replaceAll('\\', '/') })
-    console.log(`Installed tarball contracts passed: ${runtime.checks.length} runtime checks; ${types.filter(t => !t.diagnostics.length).length}/${types.length} type modes. Report: ${output}`)
+    console.log(`Installed tarball contracts passed: ${runtime.checks.length} runtime checks; ${types.filter(t => !t.diagnostics.length).length}/${types.length} legacy type modes; ${preciseTypes.filter(t => !t.diagnostics.length).length}/${preciseTypes.length} precise type modes. Report: ${output}`)
     if (release)
       assert.equal(report.knownTypeBlockers, 0, 'Known type blockers remain; this candidate is not release-ready')
     return report

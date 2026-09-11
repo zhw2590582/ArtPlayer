@@ -24,7 +24,7 @@ export interface UIEvents {
   'setting': [boolean]
   'aspectRatio': [string]
   'flip': [string]
-  'blur': []
+  'blur': [Event]
   'resize': []
 }
 

@@ -4,6 +4,65 @@ ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hoo
 The production entry is `src/index.ts`. All owned core production modules use
 TypeScript; libs/screenfull.js remains an audited third-party source file.
 
+## Public declaration sources
+
+`public/` owns the TypeScript sources for the historical package declarations.
+They deliberately form a separate dependency graph from `src/`: implementation
+classes, resource ownership details and browser-only imports must not leak into
+consumer declarations. `scripts/build-types.mjs` emits only declarations into
+the existing `types/` paths, using the pinned compiler and preserving the shared
+default/CJS/ESM/legacy/i18n identities. `public/` is excluded from npm packages.
+
+Run `yarn build:types` after editing public sources and `yarn check:types` to verify
+generated files without writing. CI and isolated package builds use the same
+generator. Read `types/COMPATIBILITY.md` before changing a public return or callback:
+the historical facade retains old acceptance while the optional runtime facade
+describes actual results. Runtime and public source views are checked
+separately; generating a declaration does not prove runtime correspondence.
+
+`public/runtime/` contains the precise media/player, utility, plugin, template/icon,
+subtitle/notice, event and component/setting views introduced by CORE-21.
+Their generic host parameters let tests compare the public contracts with the
+corresponding minimal implementation hosts. `public/runtime.ts` assembles them;
+`artplayer/runtime` and `artplayer/runtime/legacy` select precise declarations
+while resolving to the same JS files as the existing matching entrypoints.
+`artplayer/runtime/types` is the shared type-only augmentation path.
+`src/events/core-types.ts` consumes the generated
+event view: custom legacy channels remain available while builtin cue/error/blur
+payloads are corrected. Declaration-only imports add no runtime dependency.
+
+`test/types/runtime-*.ts` separates source correspondence from generated declaration
+consumption. The latter runs with TypeScript 5.9.3 and the dev-only 5.1.6 alias in
+four module-resolution modes; the existing root consumers still run with 4.3.5.
+Keep old entry declarations independent of these modern accessor types.
+Old plugin factories have explicit input overloads, and declared legacy plugin
+results/custom events flow into the new view. No wrapper or runtime conversion
+is introduced. A returned precise instance must not be assigned to the legacy
+instance type: some legacy return assumptions intentionally remain inaccurate.
+Constructor PluginFactory uses PluginHost with an optional plugins registry;
+plugins.add callbacks receive the completed Artplayer view. ControlInput requires
+top/left/right because Control.add validates position before component registration.
+`runtime/construction.ts` describes early callback hosts. ProxyHost exposes safe
+initial fields and the event bus before Template returns; it does not expose the
+video/query/proxy getters. Layer/control/contextmenu hosts mark subsequent
+components optional. customType and setting mounted are deferred, so they receive
+the completed player. Pending views preserve Player directly because mapped types
+would otherwise collapse different getter/setter types. Browser tests compare
+the exact initialized fields against published and candidate construction.
+The container remains an HTMLDivElement; a general HTMLElement is rejected by
+the existing tag validation. TypeScript does not model arbitrary user mutations
+or guarantee every subsystem remains usable after explicit destroy.
+
+`scripts/editor-types.mjs` bundles the historical public dependency graph with
+the pinned dts-bundle-generator and TypeScript, then uses the TypeScript AST to
+give the existing UMD global its constructor and named types. Definitions have a
+private namespace to avoid circular aliases. Both old/current compilers validate
+the standalone result before build:ts writes it; a CI test rejects drift.
+The browser editor test uses the actual vendored Monaco worker and generated core
+declaration to compile and execute a player example. Plugin/editor UI generation
+modernization remains SITE-02; this core flow does not concatenate modern accessors
+into the legacy editor or publish an additional JS implementation.
+
 ## Entry and bootstrap (CORE-20)
 
 The typed entry checks subsystem composition. Seven leaf
@@ -52,7 +111,7 @@ still propagate. Its controlled tests do not certify an actual Apple receiver.
 test/initialization.test.js compares frozen CORE-19 functions with the new code;
 test/types/core-initialization.ts checks raw storage, mutable config and nullable DOM
 results. Internal PiP consumers accept the native element/null/boolean getter and
-boolean setter; the public declaration compatibility work remains in CORE-21.
+boolean setter; the optional runtime entry exposes the same precise contract.
 The auto-playback consumer owns the legacy unvalidated record assumption locally;
 Storage does not promise that arbitrary persisted values are PlaybackTimes.
 
@@ -87,8 +146,8 @@ as the legacy declaration class. template/types.ts names the PlayerTemplate cont
 canonical template nodes plus a native/media-like proxy. The entry makes one scoped
 assertion for caller-provided SSR/proxy inputs. This is a compatibility precondition,
 not runtime validation; no eager missing-node rejection or synthesized nodes are added.
-Template itself and query helpers keep nullable results. Complete public declaration
-generation and consumer views remain CORE-21 work.
+Template itself and query helpers keep nullable results. Generated runtime declarations
+retain these nullable views; the old root preserves historical consumer acceptance.
 
 events/core-types.ts names known core/native payloads while leaving extension event
 names open. CoreEmission narrows a module's emitted names against that shared map.
@@ -205,7 +264,7 @@ overwriting newer messages. Public art/timer fields and destroy/show methods rem
 False/empty assignment only hides the notice; the old pending expiry still clears
 its text. Manual notice.destroy cancels the timer without hiding or permanently
 disabling a live instance. The source getter is boolean; the legacy public message
-read type remains tracked by BASE-TYPE-07 for compatible coordination in CORE-21.
+read type is retained at the old root; the runtime entry exposes the boolean getter.
 
 `src/plugins/fastForward.ts` wires the unchanged plugin result and input events.
 `src/input/long-press.ts` owns one press at a time in the current source scope,
@@ -404,8 +463,9 @@ screen rotation is tested below; final installed-artifact acceptance remains a C
 plugins/autoOrientation.ts composes the mobile-only builtin, retaining its name/state
 getter and mismatch rule. It rejects unready geometry and scopes the two ArtPlayer event
 subscriptions. orientation-types.ts models the minimal host and optional platform lock.
-The builtin registry currently bridges its generic JS host at this one assembly boundary;
-the complete constructor host remains for CORE-21, without widening the implementation.
+The builtin registry bridges its host at this one assembly boundary. Public construction
+callbacks use the phase-specific hosts in public/runtime/construction.ts without widening
+the implementation's minimal orientation host.
 
 display/orientation-web.ts owns delayed rotation and its four inline style properties.
 Each new fullscreen session cancels the previous timer. Repeated entry reapplies dimensions
@@ -525,8 +585,8 @@ Destruction's synchronous WebKit failure follows the normal lifecycle error coll
 late cleanup is best effort. Platform UI remains the browser's responsibility.
 
 The internal PipProperty reflects the branch-dependent getter. Historical public boolean
-declarations remain unchanged pending BASE-TYPE-10 / CORE-21; this is an explicit legacy
-declaration discrepancy, not a reason to convert native JS consumers to boolean.
+declarations remain unchanged at the old root; the runtime entry exposes Element|null|boolean
+reads and boolean writes. Native JS return values retain their identity.
 Run `node --test test/display-pip.test.js` and
 `yarn test:browser test/browser/display-pip.spec.js test/browser/display-pip-webkit.spec.js`.
 The actual native test records capabilities and, when supported, a native window, media
@@ -590,7 +650,8 @@ Track load errors notify only while that node is current; all owned load/error/c
 callbacks are cleared on replacement or destroy. HTTP errors reject before conversion.
 Constructor and URL-setter calls report through notice and consume their otherwise
 unobservable rejected promises; explicit init/switch calls keep rejection semantics.
-Public cue event inference remains tracked by BASE-TYPE-07 / CORE-21. Browser-engine
+The runtime entry infers cue arrays; the old root retains scalar inference and its
+explicit array-listener overloads for compatibility. Browser-engine
 tests do not certify physical iOS/Safari fullscreen or every proxy implementation.
 
 ## Settings (CORE-14)
@@ -666,9 +727,9 @@ trusted keyboard input/change ordering, pointer switch callbacks, touch selectio
 and actual builtin autoOrientation transforms with a local video. Mobile UA/viewport
 and touch emulation are not certification on physical mobile devices.
 
-Public Setting return declaration discrepancies remain tracked by BASE-TYPE-07 for
-the compatible public facade at CORE-21. The source manager has precise item/null/void
-returns and does not change runtime behavior to match incorrect legacy declarations.
+The runtime entry and source manager expose precise item/null/void Setting returns.
+The old root retains historical return declarations for existing consumers; the manager
+does not change runtime behavior to match those declarations.
 
 Tests: setting-model.test.js, setting-layout.test.js, setting-resources.test.js,
 types/setting-model.ts, types/setting-manager.ts and
@@ -701,7 +762,7 @@ click/mounted/beforeUnmount use art as this; index 0 still follows the old index
 rule; equal indexes insert before their predecessor. update mutates the cached option
 before remove, so the newly supplied beforeUnmount runs on the old node. Component
 add/update may return a div; Control add/update still return undefined. Source types
-model that distinction; historical public declaration conflicts remain CORE-21 work.
+and the runtime entry model that distinction; historical root declarations are retained.
 A name of `__proto__` now creates a normal own DOM alias without replacing the registry
 prototype. Other historical aliases and shadowing behavior are not broadly renamed.
 
@@ -766,7 +827,7 @@ construction still fails with the original browser-only error.
 `icons/defaults.ts` owns SVG inputs; `icons/index.ts` creates the per-instance registry.
 Each read creates a fresh i.art-icon wrapper. Custom DOM nodes move into that wrapper;
 they are not cloned. Public declarations historically say HTMLDivElement, while source
-uses the actual HTMLElement shape. This mismatch remains tracked for CORE-21.
+and the runtime entry use the actual HTMLElement shape. Custom icon keys may be absent.
 
 `i18n/index.ts` owns selected language, deep updates and key fallback. Standalone
 language modules keep default exports and artplayer-i18n-* aliases through publish.ts.
@@ -833,7 +894,7 @@ Public PluginFactory and Plugins are type-only contracts. Augment `artplayer/typ
 for a common plugin-result/event interface across old TS, NodeNext CJS/ESM and Bundler;
 augmenting the CJS root alias directly is not equivalent. The new subpath has only
 a types condition and typesVersions fallback: runtime require/import must reject it.
-Public add's legacy return signature remains tracked by BASE-TYPE-04/CORE-21; internal
+The old root retains add's legacy return signature. Runtime-entry and internal
 registration types preserve known synchronous/Promise results and use a union for
 unknown results. The Promise distinction retains instanceof semantics: foreign
 Promises and ordinary thenables are stored synchronously, not assimilated.
@@ -1084,8 +1145,9 @@ reads template.$video on each access, as before.
 The typed construction facade checks these host requirements while retaining the
 original staged initialization. Do not assume these types validate every third-party proxy.
 Public art.video remains the original object and retains its existing declaration
-for consumer compatibility. A public proxy typing extension requires separate
-consumer checks; internal code must not use that old declaration to hide a canvas.
+at the old root for consumer compatibility. The runtime entry exposes MediaSurface
+and a construction-stage ProxyHost, checked in installed consumers; internal code
+must not use the old declaration to hide a canvas.
 
 `test/media-hosts.test.js` covers structural media methods, receiver/return values,
 event and mutex order, property descriptors and live getters. `test/types/media-hosts.ts`
@@ -1103,7 +1165,8 @@ compatibility surface; see [types/README.md](./types/README.md).
 Public return discrepancies remain after CORE-07. It adds unescape/ArtPlayerError,
 optional sleep and a symbol/PropertyKey def overload; old string def and debounce/throttle return declarations
 remain for source compatibility. The old debounce context argument is ignored at runtime.
-BASE-TYPE-05 remains open through CORE-21; use the actual source types internally.
+The runtime entry exposes the actual target identity and timer void returns;
+use the actual source types internally.
 Lifecycle-owned timer cancellation is part of CORE-04/17 and the existing BASE-PERF-01
 finding, not a claim that a standalone debounce can know when its owner is destroyed.
 
@@ -1214,5 +1277,5 @@ core files in docs/compiled when committing a shippable core change.
 For new utility behavior, extend the same old/new contract tests. Clearly separate
 intentional defect corrections from preserved behavior. For timers or Blob URLs,
 also identify the owner and verify cleanup in the consuming module. Remaining
-public declaration convergence, accessibility and release validation are recorded
+ecosystem declaration work, accessibility and release validation are recorded
 in refactor/tasks.json and should extend this map as they land.

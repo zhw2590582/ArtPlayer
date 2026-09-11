@@ -38,6 +38,16 @@ Remove a known case when its owning task fixes it; keep frozen release evidence 
 `yarn test:package:release` additionally rejects any remaining known type errors.
 Passing this command alone is not authorization or sufficient evidence to publish.
 
+The optional core `artplayer/runtime` entry has eight additional strict consumer
+groups: TS 5.1.6 and 5.9.3 each check Node10 CommonJS, NodeNext CJS/ESM and Bundler.
+These fixtures cover accurate returns and getter/setter types, construction-stage
+callback hosts, both old and new module augmentations, old chapter factories and
+the shared modern/legacy constructor. The old root remains isolated from modern
+accessor syntax and retains its five original consumer groups. Runtime checks
+verify the added entries reuse existing JS module and constructor identities;
+`runtime/types` remains type-only. All generated core declarations are packaged,
+while their authored `public/` source graph and internal implementation are excluded.
+
 Reports, archives, installed artifact copies and build/install logs are under
 `refactor/.cache/packages/run-*`; `latest.json` points to the last successful
 compatibility run (a strict release rejection still leaves its report). For browser

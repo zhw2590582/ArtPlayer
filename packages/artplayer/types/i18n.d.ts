@@ -1,19 +1,5 @@
-type I18nKeys
-  = | 'en'
-    | 'zh-cn'
-    | 'zh-tw'
-    | 'pl'
-    | 'cs'
-    | 'es'
-    | 'fa'
-    | 'fr'
-    | 'id'
-    | 'ru'
-    | 'tr'
-    | 'ar'
-    | 'vi'
-    | (string & Record<never, never>)
-
+// Generated from public/i18n.ts by yarn build:types. Do not edit.
+type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | 'fr' | 'id' | 'ru' | 'tr' | 'ar' | 'vi' | (string & Record<never, never>)
 interface I18nValue {
   'Video Info': string
   'Close': string
@@ -52,5 +38,5 @@ interface I18nValue {
   'AirPlay': string
   'AirPlay Not Available': string
 }
-
 export type I18n = Partial<Record<I18nKeys, Partial<I18nValue>>>
+export {}

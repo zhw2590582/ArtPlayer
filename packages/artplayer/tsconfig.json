@@ -9,6 +9,9 @@
     "types/**/*.d.mts",
     "types/**/*.d.cts",
     "../../types/assets.d.ts",
-    "../../types/option-validator.d.ts"
+    "../../types/option-validator.d.ts",
+    "public/**/*.ts",
+    "public/**/*.mts",
+    "public/**/*.cts"
   ]
 }

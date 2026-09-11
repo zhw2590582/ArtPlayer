@@ -1,3 +1,4 @@
+// Generated from public/cssVar.ts by yarn build:types. Do not edit.
 export interface CssVar {
   '--art-theme': string
   '--art-font-color': string

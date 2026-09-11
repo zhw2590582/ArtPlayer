@@ -1,3 +1,4 @@
+// Generated from public/artplayer.ts by yarn build:types. Do not edit.
 import type { Component } from './component'
 import type { Config } from './config'
 import type { Emitter } from './emitter'
@@ -13,30 +14,10 @@ import type { Subtitle } from './subtitle'
 import type { Template } from './template'
 import type { Utils } from './utils'
 
-export type {
-  Config,
-  Emitter,
-  Events,
-  I18n,
-  Icons,
-  Option,
-  OptionInput,
-  PlaybackControls,
-  Player,
-  PluginFactory,
-  Plugins,
-  Setting,
-  SettingOption,
-  Subtitle,
-  SubtitleUpdateEvents,
-  Template,
-  Utils,
-}
-
-export default class Artplayer extends Player {
+export type { Config, Emitter, Events, I18n, Icons, Option, OptionInput, PlaybackControls, Player, PluginFactory, Plugins, Setting, SettingOption, Subtitle, SubtitleUpdateEvents, Template, Utils }
+declare class Artplayer extends Player {
   constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
   constructor(option: OptionInput, readyCallback?: (this: Artplayer, art: Artplayer) => unknown)
-
   static readonly instances: Artplayer[]
   static readonly version: string
   static readonly env: 'development' | 'production'
@@ -44,12 +25,14 @@ export default class Artplayer extends Player {
   static readonly config: Config
   static readonly utils: Utils
   static readonly scheme: Record<keyof Option, unknown>
-  static readonly Emitter: new <Events extends { [Name in keyof Events]: readonly unknown[] } = Record<PropertyKey, unknown[]>>(...args: unknown[]) => Emitter<Events>
+  static readonly Emitter: new <Events extends {
+    [Name in keyof Events]: readonly unknown[];
+  } = Record<PropertyKey, unknown[]>>(...args: unknown[]) => Emitter<Events>
+
   static readonly validator: <T extends object>(option: T, scheme: object) => T
   static readonly kindOf: (item: unknown) => string
   static readonly html: Artplayer['template']['html']
   static readonly option: Option
-
   static STYLE: string
   static DEBUG: boolean
   static CONTEXTMENU: boolean
@@ -84,7 +67,6 @@ export default class Artplayer extends Player {
   static LOG_VERSION: boolean
   static USE_RAF: boolean
   static REMOVE_SRC_WHEN_DESTROY: boolean
-
   readonly id: number
   readonly option: Option
   readonly isLock: boolean
@@ -93,39 +75,36 @@ export default class Artplayer extends Player {
   readonly isInput: boolean
   readonly isRotate: boolean
   readonly isDestroy: boolean
-
   flv?: unknown
   m3u8?: unknown
   hls?: unknown
   ts?: unknown
   mpd?: unknown
   torrent?: unknown
-
   on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
   on<T extends keyof SubtitleUpdateEvents>(name: T, fn: (...args: SubtitleUpdateEvents[T]) => unknown, ctx?: object): this
   on(name: string, fn: (...args: unknown[]) => unknown, ctx?: object): this
-
   once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): this
   once<T extends keyof SubtitleUpdateEvents>(name: T, fn: (...args: SubtitleUpdateEvents[T]) => unknown, ctx?: object): this
   once(name: string, fn: (...args: unknown[]) => unknown, ctx?: object): this
-
   emit<T extends keyof Events>(name: T, ...args: Events[T]): this
   emit<T extends keyof SubtitleUpdateEvents>(name: T, ...args: SubtitleUpdateEvents[T]): this
   emit(name: string, ...args: unknown[]): this
-
   off<T extends keyof Events>(name: T, callback?: (...args: Events[T]) => unknown): this
   off<T extends keyof SubtitleUpdateEvents>(name: T, callback?: (...args: SubtitleUpdateEvents[T]) => unknown): this
   off(name: string, callback?: (...args: unknown[]) => unknown): this
-
   query: Artplayer['template']['query']
   proxy: Artplayer['events']['proxy']
   video: Artplayer['template']['$video']
-
-  e: { [K in keyof Events]?: { fn: (...args: Events[K]) => unknown, ctx: unknown }[] }
+  e: {
+    [K in keyof Events]?: {
+      fn: (...args: Events[K]) => unknown
+      ctx: unknown
+    }[];
+  }
 
   destroy(removeHtml?: boolean): void
   reset(): void
-
   readonly template: {
     get html(): string
     query: <T extends Element = Element>(selector: string) => T | null
@@ -139,7 +118,10 @@ export default class Artplayer extends Player {
     hover: (element: HTMLElement, mouseenter?: (event: Event) => any, mouseleave?: (event: Event) => any) => void
     remove: (destroyEvent: () => void) => void
     destroy: () => void
-    bindGlobalEvents: (source?: { window?: Window, document?: Document }) => void
+    bindGlobalEvents: (source?: {
+      window?: Window
+      document?: Document
+    }) => void
   }
 
   readonly storage: {
@@ -155,7 +137,6 @@ export default class Artplayer extends Player {
   }
 
   readonly icons: Icons
-
   readonly i18n: {
     languages: I18n
     language: Partial<Record<string, string>>
@@ -174,7 +155,6 @@ export default class Artplayer extends Player {
   readonly layers: Record<string, HTMLElement | undefined> & Component
   readonly controls: Record<string, HTMLElement | undefined> & Component
   readonly contextmenu: Record<string, HTMLElement | undefined> & Component
-
   readonly subtitle: {
     get url(): string
     set url(url: string)
@@ -188,7 +168,6 @@ export default class Artplayer extends Player {
 
   readonly info: Component
   readonly loading: Component
-
   readonly hotkey: {
     keys: Record<string, ((event: KeyboardEvent) => any)[]>
     add: (key: string, callback: (this: Artplayer, event: KeyboardEvent) => any) => Artplayer['hotkey']
@@ -196,7 +175,6 @@ export default class Artplayer extends Player {
   }
 
   readonly mask: Component
-
   readonly setting: {
     option: SettingOption[]
     updateStyle: (width?: number) => void
@@ -212,3 +190,4 @@ export default class Artplayer extends Player {
 
   readonly plugins: Plugins
 }
+export default Artplayer

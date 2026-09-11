@@ -1,5 +1,13 @@
 # 进度与证据
 
+## 当前实施：CORE-21 公开声明生成与兼容视图完成
+
+从 ee895a55 接续。公开声明源移至 packages/artplayer/public/，生成 37 个声明文件：22 个历史文件与精确模块/入口。新增 artplayer/runtime、runtime/legacy 和共享类型扩展入口，映射原有 JS 产物；build:types/check:types 已接入 CI 和隔离构建。旧入口继续支持 4.3.5，新精确入口验证 5.1.6/5.9.3 各四模式。核心自有源码 TS 迁移已在 CORE-20 完成，本任务完成公开类型出口与核心编辑器验收。
+
+CI 449 项、229 个生产 TS 检查、37 个生成声明无漂移通过。最终隔离安装 run-LYDR8W 通过 34 项运行时、五组旧类型和八组精确类型；CJS/ESM/legacy 入口身份相同。UMD 与 legacy 各 1521 项三浏览器检查通过，各含 18 项构造/返回/Monaco 专项。浏览器使用 run-y0PLWJ 的实际安装字节，最后打包仅修改三个 Markdown 文档，JS/声明逐文件一致；三个核心 JS 与 CORE-20 字节一致。见 [最终证据](baselines/core-declarations-validation.json)，先前阶段快照保持历史原样。
+
+已完成 proxy/组件/插件构造阶段宿主，并纠正 DIV 容器及 customType 延迟执行的假设。核心编辑器使用依赖图打包和 AST 全局桥，独立 TS 4.3.5/5.9.3 语义检查及真实 Monaco worker 运行通过；冻结 Yarn 安装与严格工具链通过。关闭 BASE-TYPE-04/05/07/08/09/10，保留旧入口历史类型接受范围。214 项：57 done、157 todo，下一步 CORE-23 键盘/焦点/名称，然后 CORE-22 核心完整验收。详见 [设计](core-public-types.md) 与 [实施记录](changes/2026-09-11-CORE-21-public-declarations.md)。本任务独立本地提交，无推送或发布；真机门槛、其余生态包和多轮复盘仍待完成。
+
 ## 当前实施：CORE-20 核心入口与依赖收敛完成
 
 核心全部 224 个自有源文件已迁移 TS，唯一 JS 为登记第三方 libs/screenfull.js。拆清入口、浏览器 bootstrap、DOM 叶层、实际属性/事件与初始化依赖；保持公开形状及顺序，修复构造/配置/AirPlay 销毁后继续安装和 proxy 挂载清理。

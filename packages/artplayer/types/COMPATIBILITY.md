@@ -46,10 +46,10 @@ if (pending)
 
 The original `art.toggle(): void` declaration remains accepted by historical
 consumers. The optional view exposes `Promise<void> | void`; play rejection and
-the original object identity remain unchanged. BASE-TYPE-04 stays open for the
-remaining plugins.add conflict and CORE-21's full facade review.
+the original object identity remain unchanged. CORE-21 also provides a complete
+optional precise entry for these differences, described below.
 
-| Surface                                    | Actual runtime                                                                | Retained historical declaration                         | Follow-up                |
+| Surface                                    | Actual runtime                                                                | Retained historical declaration                         | Owning task / finding    |
 | ------------------------------------------ | ----------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------ |
 | plugins.add                                | Registry for a synchronous factory; Promise of registry for a Promise factory | Always Promise                                          | CORE-08/21, BASE-TYPE-04 |
 | toggle                                     | Pause result or original play Promise, including rejection                    | void                                                    | CORE-10/21, BASE-TYPE-04 |
@@ -61,9 +61,9 @@ remaining plugins.add conflict and CORE-21's full facade review.
 | notice.show getter                         | Boolean visibility                                                            | Historical message/false union                          | CORE-18/21, BASE-TYPE-07 |
 | seek/forward/backward/switch/quality reads | Undefined: these descriptors only have setters                                | Numeric/string/quality-array getters                    | CORE-21, BASE-TYPE-08    |
 
-These remain open declaration work, not release waivers. CORE-21 must resolve the
-public/generated facade strategy against both actual returns and historical source
-consumers. Migrated implementation modules must use their accurate internal types.
+These historical declarations remain intentionally compatible. The runtime entry
+below provides their accurate counterparts; it does not change the implementation
+to make historical inaccuracies true. Migrated modules use accurate internal types.
 For existing application code, awaiting plugins.add or toggle works for synchronous
 and Promise results; ignore timer results, guard setting.find with a truthiness
 check, and explicitly annotate cue-array listeners. Do not rely on the inaccurate
@@ -73,6 +73,49 @@ CORE-10 records BASE-TYPE-08 from real published/candidate descriptors. Reading
 these command properties returns undefined; use currentTime, option and media
 state for observations. Source interfaces model undefined reads independently
 of setter inputs. Historical public getter declarations are not removed here.
+
+## Precise entry and compiler boundary
+
+Use `artplayer/runtime` for precise types on the existing modern JS constructor,
+or `artplayer/runtime/legacy` for the existing legacy JS constructor. Both share
+the `artplayer/runtime/types` augmentation entry and the same public TypeScript
+source graph. Existing root/legacy/types/i18n imports retain their old acceptance
+and TypeScript 4.3.5 support. The precise entry is tested with 5.1.6 and 5.9.3;
+unrelated getter/setter types require the TypeScript 5.1 language feature.
+
+```ts
+import Artplayer from 'artplayer/runtime'
+
+const art = new Artplayer({ container: '#player' })
+const registered = art.plugins.add(() => ({ name: 'example' })) // same registry
+art.seek = 12
+const seekRead: undefined = art.seek
+const visible: boolean = art.notice.show
+const item = art.setting.find('quality') // item or null
+```
+
+Precise timer wrappers return void, def requires object target/descriptor and
+returns the target, settings return their actual item/null/void values, and
+subtitle update callbacks infer cue arrays. Media/proxy method return types are
+kept distinct. Command reads are undefined; native PiP reads Element|null while
+fallbacks read boolean. Template nodes may be null, icons are HTMLElement wrappers,
+template.html is absent, and only the constructor exposes html. env/build are
+not fabricated. Containers must be div elements and new controls need a supported
+position. The old fields and wrong signatures remain available only in the legacy
+type view; precise instances are not asserted assignable to that inaccurate view.
+
+Constructor input overloads accept old typed plugins without wrapping factories.
+Named plugin result/custom event augmentation flows from the old shared types to
+the new view; new augmentation should target artplayer/runtime/types. Constructor
+plugin callbacks see plugins as optional until its registry is assigned. Other
+early construction hosts similarly expose only initialized components; customType,
+setting mounted and ready callbacks run after construction. The actual input
+factory, callback receiver and player identities are unchanged.
+
+The docs global keeps the legacy view for its bundled Monaco compiler. build:ts
+follows the public type graph and generates a standalone UMD declaration; modern
+runtime declarations are not merged into it. This is independent of the npm
+declaration generator and does not add runtime code.
 
 ## Evidence and maintenance
 

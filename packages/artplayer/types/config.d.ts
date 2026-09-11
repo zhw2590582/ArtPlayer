@@ -1,3 +1,4 @@
+// Generated from public/config.ts by yarn build:types. Do not edit.
 export interface Config {
   readonly properties: readonly [
     'audioTracks',

@@ -27,6 +27,19 @@ const vm = require('node:vm');
   const legacy = await import('artplayer/legacy')
   const pluginLegacy = await import('artplayer-plugin-chapter/legacy')
   check('DIST.esm-legacy', legacy.default.version === core.version && typeof pluginLegacy.default({}) === 'function')
+  if (!expected.baseline) {
+    const precise = require('artplayer/runtime')
+    const preciseEsm = await import('artplayer/runtime')
+    const preciseLegacy = require('artplayer/runtime/legacy')
+    const preciseLegacyEsm = await import('artplayer/runtime/legacy')
+    check('DIST.runtime-cjs-identity', precise === core && require.resolve('artplayer/runtime') === require.resolve('artplayer'))
+    check('DIST.runtime-esm-identity', preciseEsm === esm && preciseEsm.default === esm.default)
+    check('DIST.runtime-legacy-identity', preciseLegacy === require('artplayer/legacy') && preciseLegacyEsm === legacy)
+    check('DIST.runtime-shared-statics', precise.instances === core.instances && preciseEsm.default.instances === esm.default.instances && preciseLegacy.instances === legacy.default.instances)
+    assert.throws(() => require('artplayer/runtime/types'), error => error.code === 'ERR_PACKAGE_PATH_NOT_EXPORTED')
+    await assert.rejects(import('artplayer/runtime/types'), error => error.code === 'ERR_PACKAGE_PATH_NOT_EXPORTED')
+    check('DIST.runtime-types-only', true)
+  }
   for (const [name, filename, globalName] of [
     ['core', 'artplayer/dist/artplayer.js', 'Artplayer'],
     ['core-legacy', 'artplayer/dist/artplayer.legacy.js', 'Artplayer'],

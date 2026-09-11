@@ -16,7 +16,7 @@
 | BASE-TYPE-01 | resolved / 已复现 | NodeNext ESM 默认导出与声明互操作失配 | ENG-04, CORE-07, PKG-CHAPTER-04 |
 | BASE-TYPE-02 | resolved / 已复现 | chapter 可选运行时参数被声明为必填 | PKG-CHAPTER-02 |
 | BASE-TYPE-03 | resolved / 已复现 | chapter legacy 缺旧模块解析的声明回退 | ENG-04, PKG-CHAPTER-04 |
-| BASE-TYPE-04 | open / 已复现 | plugins.add / toggle 的旧声明返回值与运行时不同 | CORE-07, CORE-08, CORE-10, CORE-21 |
+| BASE-TYPE-04 | resolved / 已复现 | plugins.add / toggle 的旧声明返回值与运行时不同 | CORE-07, CORE-08, CORE-10, CORE-21 |
 | BASE-DIST-01 | open / 源码/产物事实 | thumbnail tool 分发入口与类型文件缺失 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-04 |
 | BASE-PERF-01 | resolved / 已复现 | 销毁后的 resize 防抖重新创建 notice timer | CORE-17, CORE-04, CORE-18 |
 | BASE-SOURCE-01 | open / 源码/产物事实 | 工作区 5.4.1 与采集时真实发布 5.4.0 不同 | BASE-08, REL-01 |
@@ -46,16 +46,16 @@
 | BUILD-AMD-01 | resolved / 已复现 | AMD 全局导出补丁误将固定参数 t 当作全局对象 | ENG-06 |
 | UTIL-MERGE-01 | resolved / 已复现 | mergeDeep lets a JSON __proto__ key replace the result prototype | CORE-01 |
 | UTIL-DOWNLOAD-01 | resolved / 源码/产物事实 | Temporary download anchor remains if click throws | CORE-01 |
-| BASE-TYPE-05 | open / 源码/产物事实 | Public Utils declarations omit exports and misstate timer/descriptor signatures | CORE-07, CORE-21 |
+| BASE-TYPE-05 | resolved / 源码/产物事实 | Public Utils declarations omit exports and misstate timer/descriptor signatures | CORE-07, CORE-21 |
 | EVENT-NAME-01 | resolved / 已复现 | Emitter event names collide with Object.prototype | CORE-02 |
 | EVENT-ONCE-01 | resolved / 已复现 | Nested dispatch snapshots invoke the same once registration twice | CORE-02 |
 | BASE-TYPE-06 | resolved / 已复现 | Public Option requires url and excludes numeric control HTML accepted by existing JS | CORE-07 |
-| BASE-TYPE-07 | open / 已复现 | Setting returns, subtitle contextual payloads and notice getter conflict with historical declarations | CORE-07, CORE-14, CORE-15, CORE-18, CORE-21 |
-| BASE-TYPE-08 | open / 已复现 | Write-only player commands have fictitious public getter declarations | CORE-21 |
+| BASE-TYPE-07 | resolved / 已复现 | Setting returns, subtitle contextual payloads and notice getter conflict with historical declarations | CORE-07, CORE-14, CORE-15, CORE-18, CORE-21 |
+| BASE-TYPE-08 | resolved / 已复现 | Write-only player commands have fictitious public getter declarations | CORE-21 |
 | BASE-LIFE-07 | resolved / 已复现 | Queued reconnect survives source replacement and reloads the new resource | CORE-11 |
 | BASE-LIFE-08 | resolved / 已复现 | Ready continues after a control callback destroys the instance | CORE-11 |
 | BASE-I18N-01 | resolved / 已复现 | Missing prototype-named translations return inherited functions | CORE-12 |
-| BASE-TYPE-09 | open / 源码/产物事实 | Template and icon declarations claim incompatible DOM and static shapes | CORE-21 |
+| BASE-TYPE-09 | resolved / 源码/产物事实 | Template and icon declarations claim incompatible DOM and static shapes | CORE-21 |
 | BASE-LIFE-09 | resolved / 已复现 | Removed builtin controls retain subscriptions and progress drag effects | CORE-13 |
 | BASE-LIFE-10 | resolved / 已复现 | Component mounting and removal failures leave partial entries or recurse | CORE-13 |
 | BASE-LIFE-11 | resolved / 已复现 | Selector failures are unhandled and obsolete completion overwrites current UI | CORE-13 |
@@ -78,7 +78,7 @@
 | BASE-LIFE-19 | resolved / 已复现 | Video-only fullscreen survives player destruction and late entry | CORE-16 |
 | BASE-DOM-12 | resolved / 已复现 | PiP reports another video as active and WebKit ignores native presentation transitions | CORE-16 |
 | BASE-LIFE-20 | resolved / 已复现 | PiP survives destruction or late entry and rejected assignments become unhandled | CORE-16 |
-| BASE-TYPE-10 | open / 已复现 | PiP getter is declared boolean but native runtime returns an element or null | CORE-16, CORE-21 |
+| BASE-TYPE-10 | resolved / 已复现 | PiP getter is declared boolean but native runtime returns an element or null | CORE-16, CORE-21 |
 | BASE-DOM-13 | resolved / 已复现 | Mini exit loses the video's original parent and sibling position | CORE-16 |
 | BASE-LIFE-21 | resolved / 已复现 | Mini leaves a connected popup after player destruction | CORE-16 |
 | BASE-DOM-14 | resolved / 已复现 | Unready media sizing partially overwrites layout and emits NaN height | CORE-16 |
