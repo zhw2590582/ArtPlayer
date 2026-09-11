@@ -5,6 +5,7 @@ import $audio from './audio.svg?raw'
 import { audioModel, qualityModel } from './mapping'
 import { createMenu } from './menu'
 import $quality from './quality.svg?raw'
+import { observeSDK } from './sdk-events'
 
 export default function artplayerPluginDashControl<Level extends object = QualityLevel, Track extends object = AudioTrack>(option: Option<Level, Track> = {}) {
   return (player: Artplayer): Result => {
@@ -17,6 +18,14 @@ export default function artplayerPluginDashControl<Level extends object = Qualit
     const quality = createMenu<QualityItem>(art, 'dash-quality', $quality)
     const audio = createMenu<AudioItem<Track>>(art, 'dash-audio', $audio)
     const subscriptions: [EventName, Cleanup][] = []
+    const observer = observeSDK<Level, Track>({
+      active: dash => !closed && !art.isDestroy && art.dash === dash,
+      refresh: update,
+      reset() {
+        const version = ++revision
+        clear(() => version === revision)
+      },
+    })
 
     function clear(current: Valid = () => true): void {
       let failure: unknown
@@ -45,6 +54,9 @@ export default function artplayerPluginDashControl<Level extends object = Qualit
         errorHandle(dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"')
         if (!current())
           return
+        observer.bind(dash)
+        if (!valid())
+          return
         const qualityConfig = option.quality || {}
         const qualities = qualityModel(dash, qualityConfig, valid)
         if (!valid())
@@ -60,11 +72,13 @@ export default function artplayerPluginDashControl<Level extends object = Qualit
       catch (error) {
         if (current()) {
           const cleanupVersion = ++revision
-          try {
-            clear(() => revision === cleanupVersion)
-          }
-          catch (cleanupError) {
-            console.warn('ArtPlayer DASH cleanup failed:', cleanupError)
+          for (const cleanup of [observer.release, () => clear(() => revision === cleanupVersion)]) {
+            try {
+              cleanup()
+            }
+            catch (cleanupError) {
+              console.warn('ArtPlayer DASH cleanup failed:', cleanupError)
+            }
           }
         }
         throw error
@@ -77,7 +91,7 @@ export default function artplayerPluginDashControl<Level extends object = Qualit
       closed = true
       revision++
       let failure: unknown
-      const actions = [clear, ...subscriptions.splice(0).map(([name, callback]) => () => art.off(name, callback))]
+      const actions = [observer.release, clear, ...subscriptions.splice(0).map(([name, callback]) => () => art.off(name, callback))]
       for (const action of actions) {
         try {
           action()

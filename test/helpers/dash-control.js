@@ -11,7 +11,8 @@ import { loadPackage } from './load.js'
 async function factoryFromBytes(bytes, module) {
   if (module)
     return (await import(`data:text/javascript;base64,${Buffer.from(bytes).toString('base64')}`)).default
-  const context = { module: { exports: {} } }
+  // VM's implicit console does not forward warnings to the test process.
+  const context = { module: { exports: {} }, console }
   context.exports = context.module.exports
   vm.runInNewContext(bytes.toString(), context, { timeout: 5000 })
   assert.equal(typeof context.module.exports, 'function')

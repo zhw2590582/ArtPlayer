@@ -1,0 +1,2917 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DASH-05",
+  "sourceCommit": "2ad00730",
+  "status": "doing",
+  "scope": "Owned SDK event refresh, synchronous selection compatibility, teardown and async error recovery. Seek/device/full distribution acceptance remains open.",
+  "inputs": [
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/index.ts",
+      "sha256LF": "d9604df222dcd3efdf602ae397973f8499fadf9ad4ebe30007e07e18c14c5191"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/mapping.ts",
+      "sha256LF": "d3a3c65f3879cb1322fac55d78e5e9527d1994f7b4052ba9743412cb08c1757e"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/menu.ts",
+      "sha256LF": "87e94b9a7a44a2211676eb088009725b48c4d714bc0ee88b1e3151fb770548f5"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/sdk-events.ts",
+      "sha256LF": "a576ebbe34b9705204c096bbbfefd39a330b74ae80830056125a121e5d713ec5"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/sdk.ts",
+      "sha256LF": "9afd4dbc949648d7f9bb00d57dba04c71505cdd23312813f60c83a5f5506dc69"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/types.ts",
+      "sha256LF": "2ddfc7065db8f65885fb69b54d746f3fed901c7a618863a7237431f8d4fc7bf0"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "6a89a9274b16aff2df7c7867841d32a8e550de6dc90e73796806a35baa581125"
+    },
+    {
+      "file": "test/dash-events.test.js",
+      "sha256LF": "5fd73376dd1581911c88d05ec80849751c5134e6424aa1527668e5c20262b0a6"
+    },
+    {
+      "file": "test/helpers/dash-control.js",
+      "sha256LF": "03695a8b4987459a20f1986bfa7e19ae55371314f403ec26035abec31661a734"
+    },
+    {
+      "file": "test/browser/dash-sdk.spec.js",
+      "sha256LF": "889449ef1ba52efe099ff6b6df294658899fe9b2ccc13d91e10c3d901098c738"
+    },
+    {
+      "file": "test/browser/dash-control.spec.js",
+      "sha256LF": "a770394af0f3291925734e116ab53f8c090349673aa14205bd9a1300c82ad154"
+    },
+    {
+      "file": "refactor/baselines/dash-sdk.json",
+      "sha256LF": "215f63e5b4fd0d4eee74517e155211676309dd92c0f6dda34a6351ca10d7bb99"
+    },
+    {
+      "file": "test/browser/media/dash/manifest.json",
+      "sha256LF": "72438762905eadca3c08e7e152c7895483743cb6264eba158fd7547d00dfa9b1"
+    }
+  ],
+  "outputs": [
+    {
+      "artifact": {
+        "file": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.js",
+        "bytes": 7410,
+        "sha256": "a594009be5c17406844f817c5a79930c6ed60add4a5ef0578783f163a1bae012"
+      },
+      "copied": {
+        "file": "docs/compiled/artplayer-plugin-dash-control.js",
+        "bytes": 7410,
+        "sha256": "a594009be5c17406844f817c5a79930c6ed60add4a5ef0578783f163a1bae012"
+      }
+    },
+    {
+      "artifact": {
+        "file": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.legacy.js",
+        "bytes": 7881,
+        "sha256": "b00a837a99f7a7cccd415af335cbf0c68f1e4267fa7cfd8d91e945e3dc634151"
+      },
+      "copied": {
+        "file": "docs/compiled/artplayer-plugin-dash-control.legacy.js",
+        "bytes": 7881,
+        "sha256": "b00a837a99f7a7cccd415af335cbf0c68f1e4267fa7cfd8d91e945e3dc634151"
+      }
+    },
+    {
+      "artifact": {
+        "file": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.mjs",
+        "bytes": 14070,
+        "sha256": "0c5a7e4d84e9641778e0a22ff9c78db9bd4ac2f08f51358519443046a528fb93"
+      },
+      "copied": {
+        "file": "docs/compiled/artplayer-plugin-dash-control.mjs",
+        "bytes": 14070,
+        "sha256": "0c5a7e4d84e9641778e0a22ff9c78db9bd4ac2f08f51358519443046a528fb93"
+      }
+    }
+  ],
+  "node": {
+    "source": 144,
+    "allThreeFormats": 378,
+    "initialEventFailures": 18,
+    "initialArtifactConsoleFailures": 8
+  },
+  "browser": [
+    {
+      "name": "before",
+      "scope": "Pre-fix external selection; base 2ad00730",
+      "stats": {
+        "startTime": "2026-09-11T22:10:07.144Z",
+        "duration": 56609.385,
+        "expected": 0,
+        "skipped": 4,
+        "unexpected": 8,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/dash05-events-before/report.json",
+        "bytes": 340630,
+        "sha256": "cab060c5ad3560611a2720810f9448a68ae9ce8272f12b10a2a53b0ec3044dff"
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/dash05-events-before/results/.last-run.json",
+          "bytes": 439,
+          "sha256": "6029bd1af54d1d88a1a1e07e832673c50c6c13d5050fd9b5c1ff1d5ce3244d9b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-chromium/error-context.md",
+          "bytes": 13452,
+          "sha256": "736d8fe7f2342b572549c13d5fce20051dfa90e3972fe324dac43cd0cd3ff38f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-chromium/test-failed-1.png",
+          "bytes": 71263,
+          "sha256": "843f01cba4a456287df93e83697fd21fbbaecc9852e77cac0a6e369762563911"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 5210065,
+          "sha256": "eca7de7691c2a26c3143d1c3c976695a748e12855f2cb603575e685c3795b17f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-firefox/error-context.md",
+          "bytes": 13452,
+          "sha256": "736d8fe7f2342b572549c13d5fce20051dfa90e3972fe324dac43cd0cd3ff38f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-firefox/test-failed-1.png",
+          "bytes": 98233,
+          "sha256": "1b92f052daeaa4b95ac6111de6ed1fb33f6248d5f2df7b446e56908c9f294bfb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 4673306,
+          "sha256": "26c9f344809bca1259daf3d8064d48e93d5b58ba02170c72862cecdd7d528e3f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 267093,
+          "sha256": "4bcc14f4aba6fef802d2b760dfe974af7b50f655f81287efe1f70aab553c4d33"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-chromium/error-context.md",
+          "bytes": 13452,
+          "sha256": "4c7b41c22db3ee2492237f23b34d4cda097ac2a4d0dcb3dac6a9301bf1316cf5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-chromium/test-failed-1.png",
+          "bytes": 76110,
+          "sha256": "39907e1dead1129d60afb5b086f283baee9ece6f6b9f0f73886bc083ea3a6f06"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 4031554,
+          "sha256": "0691f04df7e8ec5d808cc2332fcea65692a1c4c8028161b449f01bc654ab058a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-firefox/error-context.md",
+          "bytes": 13452,
+          "sha256": "4c7b41c22db3ee2492237f23b34d4cda097ac2a4d0dcb3dac6a9301bf1316cf5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-firefox/test-failed-1.png",
+          "bytes": 110707,
+          "sha256": "18ab7cead7f677c703655f7620a6aa2d60f3bdb86f216c57fdb0421a790c9fe4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 3869805,
+          "sha256": "2d78f9e9a0dc3341d20687010d621ff8a4f1af4e247e4e068c4eeadb8abb0192"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 253206,
+          "sha256": "d7e07fc7846f31dd70eb4bddb03b9ac781fd15f7b9a42c8bd10f84c1e05e9ba8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-chromium/error-context.md",
+          "bytes": 13354,
+          "sha256": "f2a6dea78d5534baabf70eecdfbe6be25ead62a47c4e8dfbc22e733b11d6ae76"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-chromium/test-failed-1.png",
+          "bytes": 71450,
+          "sha256": "d79cc3e0ef922f0f0d0ce5a483e315b336fab2e819412a96dfca3f506dec7d01"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 4618525,
+          "sha256": "a71c68f92b9ced10516ae765fcd3a399f7fb439bef7b2c3b857bad3828c10f31"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-firefox/error-context.md",
+          "bytes": 13354,
+          "sha256": "f2a6dea78d5534baabf70eecdfbe6be25ead62a47c4e8dfbc22e733b11d6ae76"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-firefox/test-failed-1.png",
+          "bytes": 98233,
+          "sha256": "1b92f052daeaa4b95ac6111de6ed1fb33f6248d5f2df7b446e56908c9f294bfb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 4546073,
+          "sha256": "d875e6323b115c7c0ee975ef8d7d130ebdbbc596c6e22d6c0ffd7bf154146229"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 266103,
+          "sha256": "1d0e334447f6bf98ca7d54ded766a8bab2d97e8685e1d456111a85c69ac5507c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-chromium/error-context.md",
+          "bytes": 13354,
+          "sha256": "8e7f69c0195cdf2a73ba2c31857930e0c01f7e1c7997f360b3fc96a1ee12b9e3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-chromium/test-failed-1.png",
+          "bytes": 76303,
+          "sha256": "3b5b44d86a72a37d8cf0c5da3d0771db5914ba3af9dd74feb4868c29a8e8adee"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 4002264,
+          "sha256": "4d02d2832c760ae6f55957a39b790fb2732635859b89ba7452d669d3fac6ef89"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-firefox/error-context.md",
+          "bytes": 13354,
+          "sha256": "8e7f69c0195cdf2a73ba2c31857930e0c01f7e1c7997f360b3fc96a1ee12b9e3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-firefox/test-failed-1.png",
+          "bytes": 109664,
+          "sha256": "6bd4f58b4259bfc92557162db0d1bceee316be0804a32ddfed8bba531de9015b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 4075261,
+          "sha256": "abe74585a58bec3331b9ce4cb7f698e958cf515fabc1d803f9dbbd6d8a3fa741"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-before/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 252222,
+          "sha256": "baa4f3fcda94a2141acf7fbb4f71d36937c095b3bc759edc6e640b4de44b8287"
+        }
+      ]
+    },
+    {
+      "name": "first",
+      "scope": "Initial automatic/explicit/source checks",
+      "stats": {
+        "startTime": "2026-09-11T22:14:56.559Z",
+        "duration": 38397.723,
+        "expected": 24,
+        "skipped": 12,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/dash05-events-first/report.json",
+        "bytes": 906944,
+        "sha256": "14063a91a4e2372a853b91d310e2ce4ca7acfaa7ae6c7f1c5ec51b971496b9ea"
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/dash05-events-first/results/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 3554362,
+          "sha256": "9085a8eac9f1c3a1429422c01e9ac14f8b88668443aeb06b09e437ebaae1deff"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2541540,
+          "sha256": "448814ce76f7b30a3fd58343772adae6f16f40b15c03f9270cf2805e7a919ead"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 267124,
+          "sha256": "b2876df1fbdd879a1c0da3a533b0607cb00dfac3d918298266cf3d9822a413bb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-7b5c3-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 1902395,
+          "sha256": "8995d2dfb53d791a1e4df5a62a8e6466ac5c11676828c33e0e346bb278b00f0a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-7b5c3-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 1905330,
+          "sha256": "a7e67fc8ce2f5b4ee8cd99b5eecbd69d6a1df480ecfd6905f738210a3a4efaa4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-7b5c3-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 252834,
+          "sha256": "c60be1829ca2925272afa5132dacbf6ee2d3b127253695571ee40c8cbd429876"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 2095436,
+          "sha256": "4d1033ddb705ff8f179c64600c1a4ef8435f8be739d46773ff55ec313297debb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2237544,
+          "sha256": "8c6dddc3f0348fe692622ab7c74bf47965d41cd22c45bce85ed9caeec4c3678c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 252878,
+          "sha256": "a869eeb890f127d4490094e8fa4ff2aa2164a1c456ab4a0e1664a28c7b58e492"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-8cadd-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1426683,
+          "sha256": "e2129d4b09b2ebbe42d21b72070b970865bbbabf097b00da41ae233513b1f6fe"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-8cadd-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1143665,
+          "sha256": "392f608ccac88c37afdfe69b320d958742652ce29b92ea5bd7f87747824d24ea"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-8cadd-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 267089,
+          "sha256": "78d6683e975d46057f1b91ea41594d2d029087d66acc9dcfdad01e09227a985a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-e80c4-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1713926,
+          "sha256": "c89dc650b1b864c534654fb56bb749a2403f042119d501f58425f20b588854b8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-e80c4-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1072472,
+          "sha256": "36590523bf4db4427d5e439b0a8d3d3f0b1918f837276f8871f1c44b701f2b15"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-e80c4-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 253209,
+          "sha256": "c419fc567c734e477bd87d439602a8949d185eedff115fefcca26d2f6110725b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-f02ba-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 2990264,
+          "sha256": "1070f3bcd783632c9ac75f7024b203c68ed878245d253a9d64cfb9b43d249570"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-f02ba-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 2512589,
+          "sha256": "47dc0215c49657af18f7e6b8a17cfcb5c2a6477ad63a71c071627b30793bd12e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-candidate-core-DA-f02ba-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 267088,
+          "sha256": "410d5b2866426173eb58e678769e4887e4165dc500422cc42fe148332b431815"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 3210416,
+          "sha256": "f7ebda582eb4abf673e8518a22be0e845d888b0f59bf15edd1a590cf7768da52"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2738731,
+          "sha256": "82990e73b424320698cfc3148da09e26bdc63f45278e5ee7d70b4fa07d742ad3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 266132,
+          "sha256": "0c105f7b53f8ae470aedf5ed4a9761828835eb551606ac79a63f1c5d8fb264a0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 2105189,
+          "sha256": "ffa884b71d6ed1efb861b5db29e737b5861ef2e401d517e072f047776c0e2dea"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 1960344,
+          "sha256": "63d8050dec24b97af404e6a36931e7a457211478dc91543beec0061d55a7f393"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 252206,
+          "sha256": "644a1b35197b07f04b1565637a48658f5fd7cdccfdca0d8165440af3db9644e0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-8dce6-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1419460,
+          "sha256": "afc2d1f39f0ac8ebb720c868081c32b18845750716fb25e09b8a65dabc64fe24"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-8dce6-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1166198,
+          "sha256": "a07144cfbe539854b0aa3bef222ae7e111ce387b7bf8b7d41895f12f83c248b2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-8dce6-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 266015,
+          "sha256": "680ac9e77ccda5e1d0e00f4b03c4da500abc537d276c445a02267ef5eaaff944"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-8fe62-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1376377,
+          "sha256": "9191f0e763ca1f25192da3b83619caf32f29699a4382513f9effbcad7af4e2e1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-8fe62-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1030638,
+          "sha256": "b864cf837c7d07baf95bf4591d01860ea428b5b8bf49c8d7623bbf3e7dd2f008"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-8fe62-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 251862,
+          "sha256": "4bb9c4b1198ca6da1f521459964728a620fe56eee65167b444cdaabc43672807"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-b68b8-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 2982014,
+          "sha256": "2850fd02f01278104b85a0713a27875728c6ffa0501f3a298454fa0adc0a30c0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-b68b8-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 2581401,
+          "sha256": "93cffd6741c665487b69ab62857d3cd1366b0ece13cb2f6306811365eafdb4c3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-b68b8-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 266398,
+          "sha256": "df05cbb2e6a193c46af38c85843291c776e194ca35a8f6776dfa26381bc34226"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-c4cfe-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 1875380,
+          "sha256": "91e7380dcd7df26aea9db27483e8bcc787e986585d7aaf39d35039ad08558904"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-c4cfe-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 1864241,
+          "sha256": "cda85ad4ed3601b28a93c1ed5a4eb690ebbabb6d71969258b5fb800cb63d006f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-first/results/dash-sdk-published-core-DA-c4cfe-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 251830,
+          "sha256": "57a42e52ff0533b832530c292c3cd39513a11535b6260faa671439f5bb3a3b7b"
+        }
+      ]
+    },
+    {
+      "name": "same-sdk",
+      "scope": "Firefox console text assertion failures before inspecting Error arguments",
+      "stats": {
+        "startTime": "2026-09-11T22:17:48.769Z",
+        "duration": 22344.476,
+        "expected": 12,
+        "skipped": 8,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/dash05-events-same-sdk/report.json",
+        "bytes": 588138,
+        "sha256": "f3e42501dfc270e16a8c9e273f3afd7628190e05747004e71876ebc056dc44ab"
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/.last-run.json",
+          "bytes": 243,
+          "sha256": "00100ab822d941eb05782cd1c5d44cd90995bcf1fa5d72c4d9b22fbaa4d4dc20"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-3da92-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1261954,
+          "sha256": "8a6dce276045b9886f042718f3ea50a431445e4fdce58b042696251272cbbeb1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-3da92-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1414342,
+          "sha256": "a4d0b829ed6c22263011a0d5baeef9b37a59c2c043b5188c36896b6bdcc96045"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-3da92-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 253181,
+          "sha256": "a499d0dc844766ef2292b96422b3aad6f3b8e55b7822977818f3463c75be7869"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1206847,
+          "sha256": "884be85c284e54af9e49a2da53f9cb7fd0bf311d92702aa7526af8a45909ad25"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-firefox/error-context.md",
+          "bytes": 15177,
+          "sha256": "52e614d553d694f224606d5a5333d9cfc39da84905de28235c050b3b94fb03e9"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-firefox/test-failed-1.png",
+          "bytes": 185548,
+          "sha256": "fbaaa5b4ae7824b2b6621f562dd8881fc025eb4eac45afd3b35ae2d2420cf0cd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 1197678,
+          "sha256": "bd258eaa700c0bf274ac9fb0bd988c2504d137482e16e7037f4e4a858cd004bb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 253175,
+          "sha256": "5bbe08be1ed64d70452fc367c2b5e46f3e7cac5478e9b84787dc4d9b775d0f81"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1114201,
+          "sha256": "d7d2438ed8ae0a5e094e04f9da039a4f1d9c87ecf6bfc12b07c46cc5d93ed07a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-firefox/error-context.md",
+          "bytes": 15177,
+          "sha256": "52d68ee56579614663334f5000cd218aa670246b2dec4c37d01c74ef7478ca0d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-firefox/test-failed-1.png",
+          "bytes": 186338,
+          "sha256": "40231936cb43d0b41916fe33159163e815ba2765b0d11255ce9a3d3f65577ab0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 1117883,
+          "sha256": "bf45a83c6e60e1c6d5ec9a2c657d2dbc48737c8411447cfb9b9b623b4a0ba912"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 267429,
+          "sha256": "4d4cf07142046b00e2f477958713939aa71bd74f83c472fc11080516fc099798"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-b8f3e-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1345871,
+          "sha256": "e9c6a3e8c55748a7716aa19e5797fffff7512fcf50eb9648d32e4e9409cdc253"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-b8f3e-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1182857,
+          "sha256": "b76320044ef1d1fb037e984fc314c3cd99f44fa771868a80bc5d1b9a275b1881"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-candidate-core-DA-b8f3e-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 267691,
+          "sha256": "6df7966c751e52bbea05420f94ff1f19ce20f622cd67f5f638c49468bad839ea"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1228966,
+          "sha256": "b8407e3715b21c46dcaeae9375f6be6dd495b2815308e55134fcf9987f95b7a8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-firefox/error-context.md",
+          "bytes": 15177,
+          "sha256": "fd8e72e905a485c748b45e8df098d92adfa577a88a99bce590a66700ea944884"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-firefox/test-failed-1.png",
+          "bytes": 185548,
+          "sha256": "fbaaa5b4ae7824b2b6621f562dd8881fc025eb4eac45afd3b35ae2d2420cf0cd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 1184225,
+          "sha256": "875c9b1ec4f627963c53ff9bc772ab168f340d3bdeb1f5a88f68b883fb14cf92"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 252190,
+          "sha256": "64c142c26bf14503b649828576f817a65f7664a0d996eb5c3ee41de7bf17682e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-50201-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1226339,
+          "sha256": "c855f02f8f48df90ec5af2f3f3531234d9435845efa098f66f663c1bcf008e66"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-50201-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1048354,
+          "sha256": "6b7a1de5d2973149be51a56547133f05aac66f018804597e73f875368ea9a58d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-50201-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 252540,
+          "sha256": "fa3756f5e945fa72d2ca7a6a0d56b24858b94da77c7246e6725d9e4e9ef2ef07"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1218773,
+          "sha256": "b8764d508a9ed5edc7163be5cfa52c57302b88f77b1ffebff31c53d8fb0bf10a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-firefox/error-context.md",
+          "bytes": 15177,
+          "sha256": "9124d754de0188fc09308a239dc975cc3c8121e9063143b519cfdbe9e292c6c8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-firefox/test-failed-1.png",
+          "bytes": 184016,
+          "sha256": "3b626611ad7479c6d288ea358be78a51e34be5139c4fe06249bb6b487057ae22"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 1140571,
+          "sha256": "82b042317856ee28bf90753d377ae9115a72d92848f0931996ae007680781c4e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 266766,
+          "sha256": "c501150dc4cf5ae4d6d723da7e6da7964cc8f7255c2a1f1170621ad2607a1ab5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-eed89-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1271924,
+          "sha256": "1cc161f59f896cd56261979ec665baa32bdc93d649a28d6caf658d9f472e0e45"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-eed89-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1258226,
+          "sha256": "013772349f2c92271d31709cacf634cd29c6f0a2de52fdc5e0e5189c507095fc"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-same-sdk/results/dash-sdk-published-core-DA-eed89-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 266431,
+          "sha256": "9948026a7872546861a11252c342848ada2566c3883c6790d0bd223b6a86035f"
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "scope": "90 cases before actual settings additions and native forceReplace parameter correction",
+      "stats": {
+        "startTime": "2026-09-11T22:19:22.015Z",
+        "duration": 79232.11899999999,
+        "expected": 62,
+        "skipped": 28,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/dash05-events-main/report.json",
+        "bytes": 3737717,
+        "sha256": "fe3f07a75f41e459245205283cb8a0b3b8b2df2824fbac40909362dcaf10f8ac"
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/dash05-events-main/results/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-ca-1ab78-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 4658854,
+          "sha256": "2b7a272509db77b3dc62ef7d3f674ebc8e367b0e53a212b7ad1b6d3c0d3522b0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-ca-1ab78-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3945741,
+          "sha256": "f25bb0c78c25590a9c219dbb306c5bfb03c2d75be2745317a3749dd84d016cf9"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-ca-1ab78-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 267502,
+          "sha256": "093ece6b4e3d698c164545a9c8415c4550aa48fb72f1fa26556dbbd80ae84cfd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3672092,
+          "sha256": "529eb4f367deeec7275972de3a4b69648c33aaf59f133a965557a7cc8ff6ffe8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3098269,
+          "sha256": "2ad333000695006e65b8c7d8bac48f93c6f87f0e7a200dbe156f62ea1f2beabb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 253274,
+          "sha256": "4d98fbc214e61f38288f40e7a05736826c86fe7667d6dc2e50bd1ca06aad02e9"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-3da92-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1459908,
+          "sha256": "5ebc61018279973ce52562d95045b6ca387b548da9a7956c6f19ca4e17f9ac45"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-3da92-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1350288,
+          "sha256": "e89a52cf8cc83d4fe463c7ea9f58b8e26983f053e73d5f7999b8e1791deebf25"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-3da92-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 253548,
+          "sha256": "d15c3f4e36dacb5cb90806ac00db4b4b2e822b3123cc408bca296e88d031b365"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 3534442,
+          "sha256": "975d8e2489fa3beeb2d5d6c0ffe8b9f301ddfc5bedb38203d778b8d119ad793a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2624964,
+          "sha256": "a443037036c9f3a118eb1e25170fc6cd328255b26eb9803180272ae693d4ccc8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 267566,
+          "sha256": "c1733861c0b848cffbdfb8bf69103fe2950e0bd144008359ecc381939fdfa58d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1221822,
+          "sha256": "429d81d0a994e2211d1520bcaf354657436c89460d5ca96f8560598ada358ccb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 1009678,
+          "sha256": "b7ce1fb17fb075abe9ada0efdf57417c4f942f67fae8f5dfa6f7e59cc370d101"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 253299,
+          "sha256": "70dd702efb0ed8ce7ecd0f5f2ac190b68f0a986d577a5a91aacab9af415f1402"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1110617,
+          "sha256": "d7ed354244cc0305be144c8b3353fe19f981155c1dcd9bbbd181cee64bc23612"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 897815,
+          "sha256": "7ef990a400e39b92081c19407c54068315e351e833292ff24f07f3780babbfb6"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 267557,
+          "sha256": "0c97f0be243db571e5b4fc176dba50dd12b2cc039895ebb8dd2e53621baa3b72"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-7b5c3-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 1902774,
+          "sha256": "a127a54d97e5e4c7317c9ff95e3331d3528b4db6c92cb12f2228fad053bc9ae7"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-7b5c3-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 1866740,
+          "sha256": "8fffc2f3d57bbe2690b198bb0df4a2a27455b3813d10f0f6204add3392183943"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-7b5c3-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 253247,
+          "sha256": "37d5866cabc864f137baec28d385fef19b5e235feeb235315946674d94d0ea29"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 2133475,
+          "sha256": "ff9616219a9c42752fdf1c73327993f182d99d1d86dadf9931b13ca1c2295be3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2195669,
+          "sha256": "da42f52098cdf33d29cfaa0e25c5962d297d2d007a63aa5abc38ada807745b11"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 253262,
+          "sha256": "de18d53926b55d9a242698c098dde63625540584767d97a23c592b3678e7d996"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-8cadd-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1475596,
+          "sha256": "f9d74432cc5e3bfdb18db1708f8a7f6510a4d6e36e80904ce35d72dd6876feca"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-8cadd-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1090881,
+          "sha256": "c13c1b8796a8b2385bf885f91bbfbe1d144e7487022e4b661a2351159411c1b8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-8cadd-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 267534,
+          "sha256": "2ca1c9df33f621e1ea2e26d3961234d8423563a4ddbf36ba9b8951d56d670390"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-b8f3e-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1244098,
+          "sha256": "9b57db7f2fd28583153f5575a8ddcd1c1a1935b4b6c014aabba03599081f6330"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-b8f3e-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1139463,
+          "sha256": "8dcbae55b52954f78e8773fc07602878e9b127c53c891d9394e3851f9cbac86e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-b8f3e-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 267583,
+          "sha256": "27aa371b298b8705504b08e730f26f2e0baf59b64cf65e5f443ce1c3f6c24165"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-e80c4-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1417760,
+          "sha256": "d89a4ca0fa542e635487f667b2922fafbf9f5c5cd194ff3fb693ba5f739e085a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-e80c4-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1110750,
+          "sha256": "c95decd5a125e84ca4029997060a1eb3dae238907c3e45022276f8362f84b590"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-e80c4-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 253292,
+          "sha256": "e3fef062cd6db0fae46b32913852ce46385be1622d44c70fa5143907680e2aff"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-f02ba-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 2991770,
+          "sha256": "b0a291f37884550056923cbec160d2c111c91078d622a59bbd3e997df1e9c88d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-f02ba-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 2894157,
+          "sha256": "9ed8857c0187ca74f990c326a9b070419ad62b1d62cfe1c331410a45f45eac49"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-DA-f02ba-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 267505,
+          "sha256": "03e75992d90043d1bd32160521715f2084a0caac2a6e6cd31dd4276df9b8a7d0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3344417,
+          "sha256": "4e15d0e584e6a13270cd0da86ed404a7d342789ad1a37f3a86d440d9d65cc7df"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3260942,
+          "sha256": "c85e294fc231561efffba9e90542a706d5405c83c8a758f956979ce84be0845b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 253275,
+          "sha256": "e317bf035d58d2e1de7b74618c5021991f53f5d973869c262d190825620a23cc"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-4-5-2-act-c6992-SE-capabilities-and-version-chromium/trace.zip",
+          "bytes": 253625,
+          "sha256": "2c33a2d63636d486a5de39f18ace94d1c0f83602101061ee4bb208e5c365bae6"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-4-5-2-act-c6992-SE-capabilities-and-version-firefox/trace.zip",
+          "bytes": 270370,
+          "sha256": "c8e9b211553b754fc415821d1a0b3a44ea2e2cc503c459fccc472263fabe84da"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-4-5-2-act-c6992-SE-capabilities-and-version-webkit/trace.zip",
+          "bytes": 253693,
+          "sha256": "7a63ba3b22508142e428834fd9c5a71c731300f369ea0e97496d4ba85f3bc6f6"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1569868,
+          "sha256": "cd2e8fe5c31bd333957f7376f104179acb9fcfc8b07f2fc434abc99b334ab591"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 1741171,
+          "sha256": "477931080e4aa6967c2a625c64fad3cb9a93f9a182a209640dbedcdfe4029e95"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-webkit/trace.zip",
+          "bytes": 253201,
+          "sha256": "37b63e2d740c23e13dec4779e76ee31dd6d0447bb924a8a6d03edf3d1c7d9cbe"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-5-2-1-act-883cc-SE-capabilities-and-version-chromium/trace.zip",
+          "bytes": 267955,
+          "sha256": "c87813a2be0cf2928ff71bcc2b08091fed56fa42a5e72fa97c1a08c4bb3a1786"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-5-2-1-act-883cc-SE-capabilities-and-version-firefox/trace.zip",
+          "bytes": 273960,
+          "sha256": "ca7368fca057b2e39ed7b7d5cba3be14d58e4489f679aae5f7a243a491c4faf4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-5-2-1-act-883cc-SE-capabilities-and-version-webkit/trace.zip",
+          "bytes": 267570,
+          "sha256": "e25a3d3146e30709b9015bd6dcfc4208b62da678928953b51e3ae84d175430ad"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1663612,
+          "sha256": "c465aeda8ac978d4e7f8b12bb83c79ac55909bfb7dbd8a77cccaef09b45a6d69"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 2038014,
+          "sha256": "233616ff8d9c7ab0da74d44754948b5f5365b01bc74ac77738f9937add8b2210"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-webkit/trace.zip",
+          "bytes": 267476,
+          "sha256": "7da1af381c6874e07c0c85b48605e8bf17517b1cbdb4752619e3925d731c2dbe"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-ca-3f438-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 4674326,
+          "sha256": "0568b81d03779c5df8b1ae705b03eb55269b8a861b07cdd0d09bfa33b79bd58f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-ca-3f438-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3897450,
+          "sha256": "d919d905357ae492c812f07f1cf4ae42efdc502426b524b01bbd74adefb42425"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-ca-3f438-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 266506,
+          "sha256": "410dcd2e40420173bc42ff87403befadf335900e83c3b324e19577f59cca27a2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 4080456,
+          "sha256": "50603fcdf95724454948624ccbc2e665d0edf88756c460e80b5849328e765d44"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3456879,
+          "sha256": "501c2ad4c98ba94efc6718dae714d24166698360f27a7556751357ca198ee6a3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 252239,
+          "sha256": "f7612db3d834e25c2ca2def401e24c87550f1f3e1e9018bde690ba5cd529adde"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1250910,
+          "sha256": "e6c09970f3468725cb3387ad55b7d7537b9528eeffc6ee7299692b996b920573"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 980853,
+          "sha256": "692aa5bf2785d4300cd67a73045fd017295c075390ab77b4fa21084c6ed8c92e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 252305,
+          "sha256": "c5053a4e02e623605fd965631f3e30c78f0824473441f540b57f583ea00f2481"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 3553672,
+          "sha256": "323d3a0366a17622eed9d34ef4bd8680fc79f3629931caa0c4bc76564aa10b74"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2659317,
+          "sha256": "69ebf482f18d8186c48b1c4859bc6f6b4251b56637f8067fa4ff20c734c3f3a0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 266507,
+          "sha256": "d2dbd097fe0ccdc91c807a67931f5bcf3a3c18adaaedc698e3eaf8d0c9eeeb64"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-50201-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1459326,
+          "sha256": "9b08ed137ca1aa51995ef47b9e6749b749b39702ec9527b72fe1166453bec20d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-50201-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1023427,
+          "sha256": "94bb1e0a0381f22f182a4f26b997801fbfb7de377872110cb988c6d401fee356"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-50201-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 252574,
+          "sha256": "a68b7a82339a1629f56042653ab8b905cf055e3637397cbe2252fab80d0e87e2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 2129702,
+          "sha256": "57398b1b967c42d848bc60ab65b4e215d48dc02e92fe8a19efe44511f46f63b7"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2194610,
+          "sha256": "474e2fa573d1b41c2cc06ba625839fc51f8a7125d00ff6b212055b55c5b87848"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 252292,
+          "sha256": "9b30b35fca72c7a65070434768f279687882acbf52b18b79a06eeb8b8f91d641"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-8dce6-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1407910,
+          "sha256": "45499cbf952d09e3733896aa3b6f3e78c8d53cab999d9293163b68ab47237a34"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-8dce6-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1029755,
+          "sha256": "35be792cacbaa01c682771bd4261be8e6f723172a24e8057e5928f57b4ba2764"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-8dce6-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 266494,
+          "sha256": "bb4abfdf107c15e5b2e72e7051a0a6aa60385914da29f42a77f9d67aae8da3b1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-8fe62-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1453653,
+          "sha256": "60c23165df89a3b03a46e65bf4f8e583f7baec7a4a7295d6e692b6ea84cd25ea"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-8fe62-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1238638,
+          "sha256": "5e31a0c17b95df6820db83dd0a656d2a4f70f2b65e21193bb3095809b0693d97"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-8fe62-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 252273,
+          "sha256": "9f86fa04935c1e975c08bcdbc8655abb3ef65de21dd4c60534203745380cafb2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-b68b8-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 2931631,
+          "sha256": "9746037546230417c1ea723595b422b9d6928901f672f76b56c409524b6debde"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-b68b8-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 2542118,
+          "sha256": "f4414707cceee5367e4b9cc9dcc46d7df16f8efdddc1e658a8cf20e356b2ebe1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-b68b8-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 266491,
+          "sha256": "26809cb219ca0b64100a5b1680ad3892a8506977c4a17545c9045f6c95ff21c7"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-c4cfe-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 1834324,
+          "sha256": "1b1b69200c13161be6c8601a5843e5d5eb4d4aa9bfbf0b21f8ebeafa3eb9040c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-c4cfe-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 1871060,
+          "sha256": "39ba083df77dbd9da580c2f5e3e7a29b6a93e6dfba19c4a962e77c94a1d7e375"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-c4cfe-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 252252,
+          "sha256": "7e1452225d4fbef2df29a72a89cf78abb5ce574a2a04a6b7c782e1ad1dc98c72"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1136933,
+          "sha256": "5f5406af32dac987444d444b7e35fd371d9179c0ed66bcdc4850b9390fba261d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 1224981,
+          "sha256": "095bd4e032938685191e162a4e35e2d8c7c05fb2e712561e17e564a26424645d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 266557,
+          "sha256": "9b07deeaa2f79abf1bcca8bf7e3cb6c2f44a6deeb3af64f49db6c535444f6abe"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-eed89-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1376506,
+          "sha256": "167349fa56a42f294875e981b9498eee7124060dd20fb25e65e84b858586c7b5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-eed89-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1147379,
+          "sha256": "fc0dc9ab85b77e9855d71caef0769b2157539d1a6b9bd945f3bab9bd08d15501"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-DA-eed89-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 266570,
+          "sha256": "292264f775942d527ab45855f982fd0c60ed0151ca30606b0c2199a370b5d86a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3342053,
+          "sha256": "0caee4c4ec4716bd0a7d0325bfebc2865f0bceab706a696e415307065e948c3b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3299108,
+          "sha256": "9cbe04c588e0d5316a2b7162618eedddc870194c04b3275db0c0b28192341a4b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-main/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 252251,
+          "sha256": "33ff6a2ffb8e1f554d81dd9a179e0707c930cfff17db442e43b06dcb4ed6df3c"
+        }
+      ]
+    },
+    {
+      "name": "legacy",
+      "scope": "90 cases before actual settings additions and native forceReplace parameter correction",
+      "stats": {
+        "startTime": "2026-09-11T22:21:12.120Z",
+        "duration": 80469.102,
+        "expected": 62,
+        "skipped": 28,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/dash05-events-legacy/report.json",
+        "bytes": 3757081,
+        "sha256": "68d8f3dc97f7dcfd8cbafb78196fb9222188e0c4c40b7712dc0bd3ba7f6697ac"
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-ca-1ab78-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 4696148,
+          "sha256": "96cea4d932416e354bde3e32c95b849174240e66db4dedb4d97afb03a95ad8ee"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-ca-1ab78-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3883853,
+          "sha256": "799b58b831eab64aa0172b91df2f34b3c6c87fffae9c780609b894388f7de16c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-ca-1ab78-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 267471,
+          "sha256": "8174b15619cc745d1afcde4b30c327948773af7f0c21b8a5ec75498f97ff18cf"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3593078,
+          "sha256": "361c7416df0b450370a1b9d3284ce0a767a1404163f545f349d6d5800b4a0393"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3459122,
+          "sha256": "ca81d18f368931b25c8ea6c0633436644ea2f4838614cef1a5b6cfc569ad0440"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-ca-69287-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 253279,
+          "sha256": "67a5e174e2dd0a7a9dbe2ee649174cb63f7874698b9b6e391de4e9aae44f4e2b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-3da92-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1400463,
+          "sha256": "bb40898503be4a0603b2f5ef8518289e4a31c7f74f2568facab6483172b70220"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-3da92-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1126872,
+          "sha256": "4b8c5a7a47e1f4e62c3498766b8ccd59e78624ff22541aad8c2f7ad54966a275"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-3da92-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 253533,
+          "sha256": "71de780a5b144954301f245557b170e7fee82cbf4bb49c2142e64a72e36262ce"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 3524461,
+          "sha256": "55b56003a11f95de095ca589df30dcd55c4f9ec4e002cde5b385bd87539908c2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2755190,
+          "sha256": "97c528baaabd86596038465500c09a2d3c8d39b3065f9042385f6c88e53869ee"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-3ee8a-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 267542,
+          "sha256": "978348e6e6d13cda849d2076f73c7e7237a92af70b0a2f5032d58b85892c5e72"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1223011,
+          "sha256": "3a4262f0680a8d218421cfddd03a311488f7ddd1bca2f39234c1e4cff5758c3e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 987979,
+          "sha256": "4af3d62a99998ade18fffed152ee4dd8a3e85c2cadcabb5a0ee5ea335367bb3b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-52fed-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 253311,
+          "sha256": "bf03453c4baf746b57964165a24a40f595b5760c123389f1d6a0b71a10dd4d8b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1129738,
+          "sha256": "13b95e02df985c1ce2782e7e1ccfac6af775ed1d77df9eef0357c27a0ba5640b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 1255455,
+          "sha256": "10229da49cb32e5a5b931ce94829075cfa0c1ac05440b78f604d2252cea31738"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-5474f-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 267553,
+          "sha256": "ecc8dab8192d7c2ba6e718acc47e1096949f2ffee371d492865a778b06bf1aed"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-7b5c3-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 1923916,
+          "sha256": "c68a36e14b36ae3b930b4b1ad5b149278574da634bf491cf2902de484cf0da57"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-7b5c3-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 1898178,
+          "sha256": "6c8952fafcda54c81fa5f335e70fa2c3f46cbcc60cd7ad992e3bc4584d140d26"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-7b5c3-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 253271,
+          "sha256": "981cd6a8299b5c433f12e848634ef4ff66874276b1ed074dd76990b0aa376e48"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 2133803,
+          "sha256": "a109cba8bc40f3beabf611727b9abafa7ba5bf73b0bc8e139244843ea7f871dd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 1888848,
+          "sha256": "f813d8425c52a4fa086036cafda963cb505bd8396c670401bd4c9d9c23e77647"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-89785-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 253299,
+          "sha256": "d546cdd89a0b5b7bd5fb54d3b66bfd4c72231339a7c5b355fc60f42451cc0ad4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-8cadd-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1417947,
+          "sha256": "a45942b41363992b651f58932301e495dde912fa4ff494ec2740b414a917d49a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-8cadd-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1092167,
+          "sha256": "f563c3a131f74a68e94726339467d726ea52962103c40097bda2de51429e937d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-8cadd-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 267527,
+          "sha256": "70c12e978559365bf580048dd116462b6fadf9c3ffaec365377e82665cc4a206"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-b8f3e-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1247920,
+          "sha256": "44becae4e4e0cd22c818f2ee9215ec84875cc37f2ea49765b589bb4083bdb81b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-b8f3e-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1156483,
+          "sha256": "08cfd07bfed15b65c8d17e95e5e4c092bc241a3348508e54a94a4296ea9fef70"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-b8f3e-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 267570,
+          "sha256": "955fd3efbdb20664273992e63492e71f6deef99627e9bdba34147d75cbe9d062"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-e80c4-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1394274,
+          "sha256": "561dc2bcfe29e427ddff62bd8299154c0ad870b49147523b99ead1588042d4fd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-e80c4-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1086139,
+          "sha256": "a2f6c0588905b7889c5afa5ef00c6b245868c321316464d112a601706fbe5233"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-e80c4-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 253295,
+          "sha256": "310c9dfd35357de21eea245992bed9fa2db352ee6316c78e939534facb2431d9"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-f02ba-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 3233947,
+          "sha256": "9393e1cb4e8147add61b253f826b343bda115db669a235ebc74b1876dc91e965"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-f02ba-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 2652846,
+          "sha256": "176f3c4334ac91c23e481c6c02764e76e7e3b51077a06bb86b5a0d87eb82a6c1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-DA-f02ba-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 267507,
+          "sha256": "159a6bba7bf215d10c813918fe8cc59c7b7d813c471b0904a1f064551c29bcbb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3344182,
+          "sha256": "727e0f1d3e263dd277790b6236a5dfdeb9edab56f3779de1eb8acc4d5abe7123"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3261716,
+          "sha256": "20853dee20214d82dc253a0da3daf042a44f2d59cffa0c9ea48a9a7a079cdf51"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-candidate-core-pu-83e89-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 253288,
+          "sha256": "bc0ceeb9463faabbd7e5d8b691a077f35f71bcf5d956c8af0ba11ea461936a7a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-4-5-2-act-c6992-SE-capabilities-and-version-chromium/trace.zip",
+          "bytes": 253617,
+          "sha256": "c547627e43781593a6cbed8d9977457b15876c42a7a3397c99a40e1818dcf569"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-4-5-2-act-c6992-SE-capabilities-and-version-firefox/trace.zip",
+          "bytes": 270348,
+          "sha256": "1318f44317cd10069758e2e7d314e00afa10ce653e72b0b5c4427244ce22d2b0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-4-5-2-act-c6992-SE-capabilities-and-version-webkit/trace.zip",
+          "bytes": 253673,
+          "sha256": "a827950793bb460fc423d757bc1ac21122b86fb5d5616bb2bcc83b91abdc94cb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1578724,
+          "sha256": "0c9d440bbdefc11e3b2d12621c38e33188edaf8294bc3921b42ddad119e36a87"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 1771209,
+          "sha256": "57d3532f7141c444bd4cbad95849a4eeab0e6dc7bc587adda44b6cc9012a1604"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-webkit/trace.zip",
+          "bytes": 253221,
+          "sha256": "b71d60492b43b5da6093191b752f3e05efe4192553599d4db101d2ffda109417"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-5-2-1-act-883cc-SE-capabilities-and-version-chromium/trace.zip",
+          "bytes": 267465,
+          "sha256": "cb37196127b97f0221d17bc85a85de96a2beb3d12b06b1a8ecd39ce0d482b282"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-5-2-1-act-883cc-SE-capabilities-and-version-firefox/trace.zip",
+          "bytes": 273949,
+          "sha256": "b1c962796dcf76216129278a9df0482e18dbff5ffbb3a4f079c9b68b51257fc5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-5-2-1-act-883cc-SE-capabilities-and-version-webkit/trace.zip",
+          "bytes": 267610,
+          "sha256": "51829175fb4cbae8e3c58bae64db0f4e7ecb04b2e462136408940a238057cb73"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1663587,
+          "sha256": "2da46d85830cb28ac6e40a0d72a23c04170b8bd19b231a5760cf401adcba044b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 2004906,
+          "sha256": "ac8f5f105c8deb263032bdfdd2c98a0ed86228dd74dac5d6472d34875bc85914"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-webkit/trace.zip",
+          "bytes": 267454,
+          "sha256": "958f280ec189a66d6268dca0a1034dbf9466bbdc5b63bb100613f408c2db00e4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-ca-3f438-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 4686853,
+          "sha256": "55bfc639a0375f5080f521e32f2942a493e09929e40979a0fcb1cd1256aadbc3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-ca-3f438-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3768326,
+          "sha256": "9261be615979afbacd7da790bf0d08e735b7dc3323b016020ff5bf766e1c5c79"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-ca-3f438-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 266488,
+          "sha256": "1dc34af368a775841d3e81b1cbc43ccdc6a59af0bf545a391eb7cd4d9231f908"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3703033,
+          "sha256": "ddeee8d22058b532cd593c44fe2a9ef4bc9d1aaed0e501ece0228098bb44d084"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 4070546,
+          "sha256": "69f78326b3e2d3a57ebf06a3f04794086d57bfd17e396a315bd6f1b438e8f394"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-ca-870f4-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 252251,
+          "sha256": "bfc618dbf573926fc75a3e5bcced94f57d2915919885deb21677a38e29a4166d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1179665,
+          "sha256": "1bb09d91d786ab5359fa7637ba44c18939795fa183a92555d891f925beb5bd63"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 1025189,
+          "sha256": "653abb2b47cbfeae001671f7a29c7873b9d91325009b5d98817321c3ebe171b4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-2b170-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 252320,
+          "sha256": "20f698e00cab6f2a999a0019a0cf64977d0cde131d658d80cca2347170fc12a0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 3529152,
+          "sha256": "a3c4444c7703fa029e6822a475967d784e777234a45277b5d9627e1ff65c672e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2631418,
+          "sha256": "756f0df5b9c30d9a9bfbc7da4d10f7e4234d949c1ff4acd14b1db1053d11b232"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-4ea21-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 266518,
+          "sha256": "9465a3ef29929a6c2b41934e78d106edf5967dff84cdeab2d9e225205208be81"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-50201-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1394180,
+          "sha256": "e1ef17da61083b669a64b6e79bbe99860b32bb7135bb51fcf8890672dd804056"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-50201-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1161424,
+          "sha256": "c2069350717bc49067b1f3706374a146422799f9c2d5b9eb169aae03d61a6dd3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-50201-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 252585,
+          "sha256": "ea9f7c8179510924ba067c6609f4e131883057c9e85e2eb79447893b1744fa7c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-chromium/trace.zip",
+          "bytes": 2105969,
+          "sha256": "2a61739378bfd357997a17c5924e63d634d65afef865268c394decc056148788"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-firefox/trace.zip",
+          "bytes": 2000989,
+          "sha256": "ed25126a64936d4d6c3e1d5370e4a09365e841c118b2f2e295fb696420162ab9"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-7a306-ons-without-explicit-update-webkit/trace.zip",
+          "bytes": 252292,
+          "sha256": "8134d67545ba618d9641d2947e50ae0edf474bcddbd8708323e256b665cba23c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-8dce6-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1389090,
+          "sha256": "0638928c398f17d7fe5d2bbeb19ff8ca1f8787505e1f40608ebff695cbbaf033"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-8dce6-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1079114,
+          "sha256": "01467ba1df79cce45b25a6d320ccae079794cdd284b0cd3db39c87dc4c4cb934"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-8dce6-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 266522,
+          "sha256": "148269311b04650a95c8fa03f8404c180d5767389b86d5cbdb10dad35621a0d2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-8fe62-placement-and-owned-cleanup-chromium/trace.zip",
+          "bytes": 1394853,
+          "sha256": "fc49dbbc41e0bf67a857957a3cfa6793babe9e9d3bf8a75defd0e82282af6015"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-8fe62-placement-and-owned-cleanup-firefox/trace.zip",
+          "bytes": 1251878,
+          "sha256": "5e9504a41a69bb7daa9494e94609e1cb31ef5303924bcfdbc8b4b027cac67dc5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-8fe62-placement-and-owned-cleanup-webkit/trace.zip",
+          "bytes": 252279,
+          "sha256": "f958b395c88e8730a8975e889b6aac1ab83fdf7242bd5901bf495353745a413d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-b68b8-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 3253337,
+          "sha256": "351f998c81d5cdd460d11bef8620fd75dd8c9e0e7269adf30ad123e1d2b210ce"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-b68b8-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 2465612,
+          "sha256": "fa292c5d367acfeb11f26883aa6bbf7f72e68e3d6cb28415deec996c3d493360"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-b68b8-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 266491,
+          "sha256": "b77020ae17d927ab070da44e5d182d73abac879ed0e483d273cd663ce099d508"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-c4cfe-ects-external-SDK-selection-chromium/trace.zip",
+          "bytes": 1837655,
+          "sha256": "4b9f98ba114a9fa83bf9d11fac7dc52a00a9fce3d177502c8cc91e532c56115b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-c4cfe-ects-external-SDK-selection-firefox/trace.zip",
+          "bytes": 1883797,
+          "sha256": "be7166757c06ae4f3a10b6fa4188d9eef08e6b572ba82c37db859754c61d69ed"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-c4cfe-ects-external-SDK-selection-webkit/trace.zip",
+          "bytes": 252298,
+          "sha256": "564c1e4d2649c5f316853546f0dbc648a8cd755a7a38880a207058bc48e22122"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-chromium/trace.zip",
+          "bytes": 1087045,
+          "sha256": "476a55c51a930e458abaaf4f4a295d76a287b8f5f8b7cee70fd3dde5847ae346"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-firefox/trace.zip",
+          "bytes": 1248311,
+          "sha256": "cfd0477209ead2d38fed8648bf4757fd5b2e288d1cf3cfd9ac1a9dee7acca539"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-c7fd3-nd-explicit-update-recovers-webkit/trace.zip",
+          "bytes": 266553,
+          "sha256": "37c977011c6fd0b04586654d90473ec66f64e53ac57766353a13a5e4853871e3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-eed89-ology-without-plugin-update-chromium/trace.zip",
+          "bytes": 1196480,
+          "sha256": "3fd95236fe5ce28d05bf9f80bb1d24ee50f40745b54b3123b20e5db6807fd497"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-eed89-ology-without-plugin-update-firefox/trace.zip",
+          "bytes": 1181358,
+          "sha256": "116e3bb9b709f21973bceeacca977c8ccb13e4bc31d56b4074a1a760c6d49f4e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-DA-eed89-ology-without-plugin-update-webkit/trace.zip",
+          "bytes": 266526,
+          "sha256": "5b7c54db098eb748162654dc42689cced057cd72f89bb92d5d1bcfcbcb11dfdc"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-chromium/trace.zip",
+          "bytes": 3391191,
+          "sha256": "9f07438f7ac602a3d60b18d64afc771aacc330141a30ec2fcb7285dcb6b1b324"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-firefox/trace.zip",
+          "bytes": 3259433,
+          "sha256": "06de3cc5fb2dba039ab66cac2d2b0237065129a082b3305b15d30869e47d883e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-legacy/results/dash-sdk-published-core-pu-c466c-D-decoding-and-UI-selection-webkit/trace.zip",
+          "bytes": 252258,
+          "sha256": "42b4fb30b5c88a1d6cd0e2d695ea24a4eb1daff8290756ed226e873b70626045"
+        }
+      ]
+    },
+    {
+      "name": "settings-main",
+      "scope": "Actual settings plus native SDK with corrected two-argument quality selection",
+      "stats": {
+        "startTime": "2026-09-11T22:23:39.687Z",
+        "duration": 34170.901999999995,
+        "expected": 20,
+        "skipped": 10,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/dash05-events-settings-main/report.json",
+        "bytes": 3445569,
+        "sha256": "afc6a7d6b980d54c0648435db3b2ac2d52bb57d38f7aded53dc4c472a4a9814c"
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-8e7d6-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 1689954,
+          "sha256": "19c3d3079472319a48bf28edaf83d98504f1400e611acbb5f2a6a17f8e669989"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-8e7d6-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 1294969,
+          "sha256": "5fa4e0579f5868d6602be695dfcd14d87e73274e8446af3efc4f1569e0f7e04f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-8e7d6-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 267785,
+          "sha256": "64681e4fbc667d9b178e1540ef57c665957ab87f797f503e50930d1643d9b771"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-99acb-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 4209879,
+          "sha256": "b62bca05c9b17e7e0b23a1e3bffd0995ffd96580ebe88e1672ae0cb81445b44a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-99acb-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 3058582,
+          "sha256": "57d1bb3bea47a36f31d072f768767f73c61430fb4bf6ba44c3eb6f066662eb85"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-99acb-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 268112,
+          "sha256": "5f50abaa2dfeca8d7df0b0c71d1d66a1add3adef7ab940051a3a77405d7949d5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-d2115-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 2763718,
+          "sha256": "b80be98aa766d9ba89776ddd29032e148d6d9feaac0e4f6c1dbbada498ab5357"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-d2115-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 2371906,
+          "sha256": "00f9392cb1d0c602bdb8a98403a50e126b160af93e9a28098a5c1e25ba31de3a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-d2115-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 253517,
+          "sha256": "4cd9eb85008b945dff8f8f98d0fa47afebe1ebffbd41d3ccb643132752e3de89"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-f412f-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 1755227,
+          "sha256": "c80039f3326e115b5080be0b6c23e9d81b78a0d1a00c07b8346e5e9cc2fd7f80"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-f412f-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 1389998,
+          "sha256": "4be5a6f6d73e044bd41d668a8ead0149f32a92e981be9127ed0aa48a1ad0d322"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-candidate-core-DA-f412f-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 253540,
+          "sha256": "edc5ff691a56c4e3d1e54ef0195121bdbfd034c3059a8ef9a5df9299507829ff"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1617254,
+          "sha256": "7b38b088dd39970819b1737d612fccf7fe0e08192a322aa45d2248079daa2fa2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 1995209,
+          "sha256": "247f93472bf79abccf4166b9979761b45117cebab12787b714b59c2798baa0e9"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-webkit/trace.zip",
+          "bytes": 253805,
+          "sha256": "448e7de4a2d7e8a4828b809d538d77a301334cdb4e5e7a5d68bd5f7501f36b68"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-chromium/trace.zip",
+          "bytes": 1719950,
+          "sha256": "b4b14516804e0abf14261d59469423ebfeea6b2c26cfa105d543ac337dcdbf5a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-firefox/trace.zip",
+          "bytes": 1833770,
+          "sha256": "497c6358d58a44969ce5b32fa4da4da47eb331a8fbe2f7000a50089f15777818"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-dash-js-5-2-1-nat-95d9f-used-seek-without-ArtPlayer-webkit/trace.zip",
+          "bytes": 267712,
+          "sha256": "4eeec2cebc38dacfe11eb1f91040a0040469fc27e7317fbd01a27a78c30302c8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-0b3df-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 1755459,
+          "sha256": "7ddd42a93ad2011aa74f464b121160fd34e58e507608cbba24a162b48ff50ffa"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-0b3df-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 1360932,
+          "sha256": "43bb17310115b86b22a64b7870ce0c1f19b513a65a190e91f858f38315fd717e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-0b3df-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 252444,
+          "sha256": "0821edbb9f78e6fdba24734cc7d8e651739ad600849c524acb468caefd3bdcc3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-45eea-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 2966091,
+          "sha256": "7956495c165110f7a0b1bc6e36b38e3ad82f85366a2765f0fe66a36030e35eed"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-45eea-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 2442180,
+          "sha256": "b71e69035235965e87b8336390e1a3d673c3c5b68808e9b210fb28a8e8bcaa4f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-45eea-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 252554,
+          "sha256": "39d4d160232ba66a0adf1f31338d8b54c95d6789b6d3df11f7b267d432b0617d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-63726-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 1749162,
+          "sha256": "cb656be6609d6d753e4299d5251e8e53b2864977aa16206fbbf5d065039a320f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-63726-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 1336488,
+          "sha256": "1a1fb494d9387d1123334d2879bea9c8536b65dd179a8d94c39362c9e8523cd1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-63726-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 266743,
+          "sha256": "664aee63c9ba80761d9c0e8e0129c6198c4d453e2ff3d56a5ac96689ca57ab94"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-81045-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 4209471,
+          "sha256": "1715318f5cb3c2066d73b12b0edad4db20d7e4f63d868861b5a527302fd701be"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-81045-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 3057391,
+          "sha256": "7bc5ca8a9f6ede80302e68cc457e69205d8af9e36d3b4b84261531483288545b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-main/results/dash-sdk-published-core-DA-81045-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 267112,
+          "sha256": "985372de072606a47799e94d8cbc6403c4c187c444e3486bc8833a156c4136dd"
+        }
+      ]
+    },
+    {
+      "name": "settings-legacy",
+      "scope": "Actual settings",
+      "stats": {
+        "startTime": "2026-09-11T22:27:31.970Z",
+        "duration": 26890.466,
+        "expected": 16,
+        "skipped": 8,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/dash05-events-settings-legacy/report.json",
+        "bytes": 3302038,
+        "sha256": "f14185f4137921ce0eb981c69c1c48d9f8e1ba3a99e8d928f1a0263811f63785"
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-8e7d6-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 1714948,
+          "sha256": "f5a6dedb9ae1fbe7036e0a4d1b17abf706632c914485926507fdab686901d45d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-8e7d6-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 1314234,
+          "sha256": "d20e59fa884233aacbbce2f33440d1de17272946c45d8802d3b48aec654050d2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-8e7d6-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 267790,
+          "sha256": "0186c401cd1d4d99674732cc4f6c77463be4975794081e8c4fe3ccf155ce9938"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-99acb-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 4206486,
+          "sha256": "5069c20c6366989bd64416af30fb73dd2732923e403d307d2ca17baa976d4fa7"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-99acb-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 3032034,
+          "sha256": "e6dac59c8e27346d3970bc83498b7fe6c4fec43599e8cf30aab6cbd9b51bcd12"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-99acb-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 268145,
+          "sha256": "eefeb95c229acf97b6544a323524ff028e3ef4ab050daea38d33c5b0e53a5af6"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-d2115-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 2765002,
+          "sha256": "8231815e9df17acc3efb1fd051fb26d2e6025f0fe936e3cccba091b66f0fbd43"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-d2115-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 2388828,
+          "sha256": "9ec3edadeff0ec4385628fcdd186e9d56486051e87fd7b144fbae2bf03c1ef3f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-d2115-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 253563,
+          "sha256": "c852bd2181b0e84cadc9dcc101aec487e520d13b22e2abd9d91b03f37f9bd514"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-f412f-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 1803583,
+          "sha256": "9efbb0ba37189deea3f00cf76406b60090dfa6e1fc515016dd95cbbe7a3d6269"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-f412f-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 1381105,
+          "sha256": "2a5dc5b75c3da047fc64881da0aa2e205d2daee16523e8e4db757bf2b68e3608"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-candidate-core-DA-f412f-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 253530,
+          "sha256": "d42262cb213655424d7d0d49fcd2fe606cec4436e0096b3e6ae6f47f35ca79e9"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-0b3df-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 1770389,
+          "sha256": "c017409391fdd801a3a88f55754c0467aafb8f3dbbb6b4085ee692da73d6e892"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-0b3df-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 1367699,
+          "sha256": "082e58b68e274a19a2b92874b47b13e27646f00bbc8794422f8f8101639ceb83"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-0b3df-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 252532,
+          "sha256": "12fd943a3432ddc9114bfcb401bca495aa72a00618efa5fdfe45fab68dce2eec"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-45eea-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 2845043,
+          "sha256": "e37965447362080b75d0d7dc890a1da69244f424cf77de44e77f3cc44c06bede"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-45eea-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 2482150,
+          "sha256": "65c33501b626919b25942882c276647ae26793422fd14c58ffceedd40bfe4ec3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-45eea-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 252873,
+          "sha256": "70c459c9a76280395e4a1290281274d1102d5366d5000fea3c250f94b642369c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-63726-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 1837105,
+          "sha256": "e44b924f0b922d51e3fffc99594a1abf64a76e66011ce59e6538180725d04377"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-63726-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 1332205,
+          "sha256": "2671c6cac3b6920b9f02c15cf39983697451cbc458d633e9c30a386c8423786d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-63726-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 267104,
+          "sha256": "2b34857be6de05c1abd8653a80f39589db5758ba58190ed7c0ba6a71a091bf04"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-81045-ection-survives-SDK-refresh-chromium/trace.zip",
+          "bytes": 4187167,
+          "sha256": "8cf64391d8738c225c00d5bcc416fc9af3f4b53ea3f2f8ca0602e7e637fe493d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-81045-ection-survives-SDK-refresh-firefox/trace.zip",
+          "bytes": 2964832,
+          "sha256": "5a42aacdb5940d562489a6c58858ab0987daa314ab7027d7f28c637853440029"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-settings-legacy/results/dash-sdk-published-core-DA-81045-ection-survives-SDK-refresh-webkit/trace.zip",
+          "bytes": 266789,
+          "sha256": "3a4ba424f3145080784fb20d7d9e14cc6285a60739a96fb95d85c9362b807219"
+        }
+      ]
+    },
+    {
+      "name": "dom-main",
+      "scope": "Controlled SDK contracts with real DOM and native MP4",
+      "stats": {
+        "startTime": "2026-09-11T22:29:01.570Z",
+        "duration": 63789.136,
+        "expected": 84,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/dash05-events-dom-main/report.json",
+        "bytes": 15820377,
+        "sha256": "0451585fb5a33aed420080c41bf7da3649e0118268ff507d1d8595d53b22b3a7"
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-08dd6-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 939027,
+          "sha256": "038e0324aaef89ed30d3ce00766c747c26ab9f7d9a607f31c69b88be8caa3942"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-08dd6-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 935332,
+          "sha256": "f18a76a7139f4f092b85f89ad0370d716c728efef852158bb506d5e053d92a66"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-08dd6-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 758245,
+          "sha256": "9a958c51cecd4339c8f1caf1e82b5c27592d4cd72ecbd5d0a2f4ad4ca09911f1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-13fa4-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 981740,
+          "sha256": "bdc0417b941b285b3824358b226e0dc8d5249d69b6633dcbe973f08c9f630ffa"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-13fa4-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 871211,
+          "sha256": "16243d0cb5b3bed961c5f72857d810a22175f55ced9faa3000ea442561f6c7be"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-13fa4-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 717382,
+          "sha256": "06efde5297aeab47b39bf5ca2d734d2509b7c04fbb1499a6c93cb811a7debca1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-2e629-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 838107,
+          "sha256": "1ddafd2b13e4b288f4b44306fd2f4aa6b525f45c5d100d585ae1ede34614a8b4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-2e629-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 802260,
+          "sha256": "fd574edc1582f416ffedb22e4b6af1feb4f09c7738e7d6eed9ffad5cc8e1a35b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-2e629-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 548360,
+          "sha256": "e71a66cd72797afec0d468bd1b90116f9acfdd71bdfa196d9cbd9b5302308ba5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-3048b-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1028292,
+          "sha256": "f9c13a52275bc62c38028dd67da1244bcd706205e7cc4d75aa2a7f1437b23919"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-3048b-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 905756,
+          "sha256": "5f57135bc8dd5c3ecf6d1c7b2d74176fa365a8cd4340d365cfd15db5e8eeb818"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-3048b-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 675901,
+          "sha256": "b43f67d0cb463f7721b92a6a1f54123b0b5f8f25ec1a4708c10b29bd89f48665"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-320bb-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 982583,
+          "sha256": "2a6818d168e0c275f64f8118db9c8f9e5ad13ac951736244abcaf18e671c1d79"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-320bb-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 851804,
+          "sha256": "06e4de5c6db774c0788489ca67910424f0d6ca5cb9ba4112b52369ae85951001"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-320bb-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 757784,
+          "sha256": "83687b88f762189eb39a43e04efee5887d9161721d70faac92b92490ecd0f694"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-4464e-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1050777,
+          "sha256": "0f8a44e34a3f67b5488d048fac6fce54c6debb4f123fcb622f4800add44602e8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-4464e-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 902440,
+          "sha256": "2e35f00a15ff985999c09a8995ae68f9bbe5d120bc8c0b760a55172d7df6b93e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-4464e-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 694369,
+          "sha256": "8def8ebf409b79fa18806a0703b0665fda84ee6b5ebebdee15a6b4ca07c6a36f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-5194c-enus-and-retained-callbacks-chromium/trace.zip",
+          "bytes": 103613,
+          "sha256": "d24dfc2944d9547c325329471fbc695fed8cfdc2fd83d79befd6d714525bde62"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-5194c-enus-and-retained-callbacks-firefox/trace.zip",
+          "bytes": 367726,
+          "sha256": "a28ead7dd1b05fb45388c1601aeddc1b1ec0a76260e47a6f24ba69165a697915"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-5194c-enus-and-retained-callbacks-webkit/trace.zip",
+          "bytes": 82583,
+          "sha256": "08c04621cdfdcff49e3b049afee722cae2bc5a0ba5a5953e4bac1f4bd2313a7a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-5ec6a-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 826332,
+          "sha256": "705d7b94a89a222d8bcb305501089113eec6c728f20b3cd5de194720be5bff38"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-5ec6a-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 863101,
+          "sha256": "75a08232f6a5cd06a6eb68698cd4594eea118d7ebf568ed316241a77f0e20e28"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-5ec6a-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 560159,
+          "sha256": "ef008b41baec0ebfdd541b26b2177ad7b7bd3b3e89a91dc3cd63b81dcd0245c8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-65174-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 822961,
+          "sha256": "e2d3330e8ec64020c46f85f5a9aec4342f2d60335ecbda909c7bfe99de271929"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-65174-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 809547,
+          "sha256": "0f837d2ff7cd52fd0b10057fdb48d957c3a63661bd98697fd07ed62db15285b6"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-65174-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 532982,
+          "sha256": "f760afcd5c08844d181271266fa2322d503bf199ef807e2add22949592355bf5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-6fd01-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1046969,
+          "sha256": "7c08e3851a97d863b7b20b83f114cb2573d2bf990062f5860bb03660ca5d9821"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-6fd01-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 911331,
+          "sha256": "3354c33eb54ea93c5943faa89f44ae1d0d6dd1640ffc4d9a03673af23185b483"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-6fd01-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 737458,
+          "sha256": "4ac469f00bbd1ecd8d6e00c029a0e60cf3043ce447f40173071552e0ba066182"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-8140b-enus-and-retained-callbacks-chromium/trace.zip",
+          "bytes": 84637,
+          "sha256": "3096c19ff9fc5b294fdf5fc113a08e35af815b7f8f886d3fc644779cea8233a3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-8140b-enus-and-retained-callbacks-firefox/trace.zip",
+          "bytes": 356633,
+          "sha256": "3b970a3938e186b3636eda789b9d86278ca009a0af11ddb1beeb251c380d44e4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-8140b-enus-and-retained-callbacks-webkit/trace.zip",
+          "bytes": 82499,
+          "sha256": "69304e7553ca12c086bf0c15decd156058e75bf837aca7a1979a9fe93d3789f4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-a6aa5-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 823135,
+          "sha256": "d5e022e5010460a493bdf8467eaa0c14c3f5db53140ba89c2f583eb4f11dfd67"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-a6aa5-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 885411,
+          "sha256": "5b7c2cb95f6e9f55bb3f583d2b82d98d923847ca1037667508e91c9697361892"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-a6aa5-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 533868,
+          "sha256": "b90d90c2c0e190cbe059c47caf6256d1d6a2142ff941d41b3857b4dbce79dec5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-c9a8b-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 810273,
+          "sha256": "1b2a05c5373569ee1889f9a7a4467ac83c8073c677a154d9a50029e79bf0bbd6"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-c9a8b-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 826597,
+          "sha256": "c262a3d7d87d54e5612664bc48f08744f8d74f40636b73bfd40f71e962b8215f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-c9a8b-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 563655,
+          "sha256": "f2092f9d509391801d005915ae57515568d7d4aa3457ad8b74a4d5013aa767d5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-eefa5-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 804736,
+          "sha256": "5fcf503756f58716d6c5a0bc45d299f40b8c399d907bf0ed5dc82e1fd96ce5ac"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-eefa5-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 831104,
+          "sha256": "9a4bc8655a5efd9bb1fed0a484146bbd773ab748a87d8688dda799842bb0d2e9"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-candidate-cor-eefa5-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 532623,
+          "sha256": "23624712f7cd7aee1c5203b74ce1cddd23bacc828b11ac008594ca3e21b30333"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-283a1-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1056175,
+          "sha256": "185acab6b2735fcefbe7cdbb74e7e2f859f7e0035e5f7f3462d04a1b33062557"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-283a1-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 951990,
+          "sha256": "9d03555ec584b46cbd714c84aa2835caa4e28061f64660a65ed328e4619f097a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-283a1-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 740155,
+          "sha256": "6a17cc2150c8cb5efceae0c7657525c31eef696290a03639f07f17e9d28bf986"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-3772d-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1061621,
+          "sha256": "0a2d9067ca40dbb4e1894ca0533393aae6384029df64c74310d6c66e8e23852a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-3772d-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 844475,
+          "sha256": "081f894545227d04f24690182798acd6c014b4a98a134b2afb9999831076a40b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-3772d-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 743850,
+          "sha256": "3099b96053cede3ef47ddf118a9c1d718c14ad4eaea43272473d7512e4ff439f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-3a231-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 783115,
+          "sha256": "fa62e21c5647bbd9470da42d625ee9a0f1ac77e9fcf9ce3843861ef65c26c9fb"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-3a231-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 812168,
+          "sha256": "4c45b3c31704acecd07d70cfe787eff51536755876aab0448e1d16ce109067fc"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-3a231-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 491905,
+          "sha256": "d93eddd88e1595ef9ba92b48c01f50aab74f19a16ed40837aa1af4fe23f3fabf"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-4dcf6-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 843645,
+          "sha256": "c51a84e49c0329584d48c984ba2f40732ed434120d7e75c9a4da0fba28a95eab"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-4dcf6-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 764782,
+          "sha256": "8fec5cbbed3e4c94c52278df1e77fb4b424711ed0b4c650617cd7591e95c9993"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-4dcf6-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 525784,
+          "sha256": "355c87327aa0b1f09dc9edb80f5c20fcafaa379ed775ce3ec1a7dd14bd4faa9e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-526ff-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1051761,
+          "sha256": "fb066b9a4c95b85ef549f424cc45778529ce77a951c5fa4ca7323168018a8cba"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-526ff-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 866080,
+          "sha256": "ee050f5cabc1ede210773616b75f5430482dbd1e47d2388406a43e09a25c344f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-526ff-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 734939,
+          "sha256": "f30d64e3f14bd367e64b6953e3205a6ced4be0654ebe076e40cc0a7c73580137"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-61aff-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 826158,
+          "sha256": "c082e96cacb018310e048fdd029bc25e4c00ba98e7337c64d22cb15b838d2918"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-61aff-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 786460,
+          "sha256": "50e6c72ee360bb071c44083663229ede5c2aca11f84e6f72516a2c378aa1e0fa"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-61aff-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 556766,
+          "sha256": "28c34d9108310c2f88ff36fc8afe76f5f7d1e381cba1e6ebaa289924eb656ab2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-6a49f-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1024328,
+          "sha256": "e383e04d4951a6ad48aa8afc69d94878d9f4f717ff6819f8e19396a0c7cac711"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-6a49f-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 867654,
+          "sha256": "1e99f117b9a971adb4614bf12d7aaf91942084335015857bba5a52a26157a81f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-6a49f-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 753800,
+          "sha256": "4b4e2d21174e45c5fdfff5323577a7e1e440afd08866b184336011de557b02e7"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-72faa-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 822583,
+          "sha256": "0652c92314320ede84c9c430cc7038b41d3c150a9e25e8555c809e8572db0c82"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-72faa-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 845924,
+          "sha256": "e8b773b71880ef08863a8d82eb7bf47bc19d709167c4c9094cad4528e418918e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-72faa-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 562654,
+          "sha256": "361fdd38c45760fb85fde550c81d921a29b6e2888c4fc204d086ec3bed53e8e4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-81eb4-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1057910,
+          "sha256": "81a8025fc12120195e101d7df987bafbf67150227a422a5885b26caf25f91ecd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-81eb4-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 855070,
+          "sha256": "aceb3a34eb0811fc59def549d2c08ba61177508081bae48993ff61583cc6d656"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-81eb4-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 736983,
+          "sha256": "088bbc15b72ab22d9ddfce919dcc03b2d1cef81bd68b43ab8840e9bdc2b2ba8e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-863d1-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 808168,
+          "sha256": "09fe94d1d9e628f09094d21855c48d3b338357c54d11b2a6afdd2b84bf662e1a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-863d1-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 855780,
+          "sha256": "b5f5a6c6b7a2d2dd484e6bc08415a87c4762402326ae739334e3e7f20cb95b0b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-863d1-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 475138,
+          "sha256": "6c10d50cb00dc713b2017e5a0846e31babcabb49381bd3b7e893872620866768"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-b98ad-enus-and-retained-callbacks-chromium/trace.zip",
+          "bytes": 86810,
+          "sha256": "49d984be46ab8551e5bcb9853cdee5f65cfe8f9d827aa94236574ef417400091"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-b98ad-enus-and-retained-callbacks-firefox/trace.zip",
+          "bytes": 315170,
+          "sha256": "1d197786e648892364bc8f5ac899f47c266839f2150aef844d26c85dfa67fcac"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-b98ad-enus-and-retained-callbacks-webkit/trace.zip",
+          "bytes": 81823,
+          "sha256": "268bb37158c705b7e8ef205020eb9d58fed5616b86419efa0ec5d51e692eca2e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-d4501-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1006716,
+          "sha256": "39b86de7b793231d489fefebcc668d11413e81deb0fd508da92857389dfa4a6b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-d4501-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 868396,
+          "sha256": "39b8f4b5473e776000cb735058293c40d47c338219fa2a307400d50a9360f0c7"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-d4501-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 714242,
+          "sha256": "6944582b5ee79051a621b3371cc29b173279881eb087dd449a2cb59704633c64"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-ec884-enus-and-retained-callbacks-chromium/trace.zip",
+          "bytes": 68323,
+          "sha256": "eb0b64fb237f45f71c78b6182f4e3d8335797de604869318a6cdd96bdad78f8e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-ec884-enus-and-retained-callbacks-firefox/trace.zip",
+          "bytes": 366190,
+          "sha256": "c2098d58d7dfe453dc73b69180fafb30f25476043d4014e3cff48b13e6105cf3"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-ec884-enus-and-retained-callbacks-webkit/trace.zip",
+          "bytes": 81002,
+          "sha256": "d363653b2cd1c1027e8c6a929934c7f81d6df80f0376c27a5d777208e33e7e3b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-f782a-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 804720,
+          "sha256": "0e122e80ad180e23856c94a99ba928ab509194f9af7249dff93e17402855ab3d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-f782a-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 838635,
+          "sha256": "39471d77a59814b72fff145919582670ddc4a3dd6faf0a139deb9b59cb752141"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-main/results/dash-control-published-cor-f782a-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 479668,
+          "sha256": "e6349c8eb6cecb35346bdb7ddc9df634773801113b3c891aae410b93007bec13"
+        }
+      ]
+    },
+    {
+      "name": "dom-legacy",
+      "scope": "Controlled SDK contracts with real DOM and native MP4",
+      "stats": {
+        "startTime": "2026-09-11T22:30:30.283Z",
+        "duration": 64267.74600000001,
+        "expected": 84,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/dash05-events-dom-legacy/report.json",
+        "bytes": 15807129,
+        "sha256": "beeacbff728a5292bc7d44863345c66f4ef33133ebdd3323974a090df32b841e"
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-08dd6-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 942907,
+          "sha256": "ba7dff2cb55541e924e8293057a1a1b6bd517b8e26027904ef1e58c501d76a6e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-08dd6-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 853771,
+          "sha256": "95e0e243d2e91f881815e916919c7c26966f8568c4b863a89f1a5a0a36e5a08c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-08dd6-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 752760,
+          "sha256": "09c3f557a7aae7cc19a077781fc3c0d20c54eec473b31ce7cd95c856ee77b906"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-13fa4-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 959239,
+          "sha256": "a85f591e97a200a01568e4b8b178c89274797579ac1ebcaae382014e7033649c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-13fa4-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 894066,
+          "sha256": "4d423f5181ffb522183c23b88c41a8bcf8be3012954dabdf0c06c694fd0e5dbd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-13fa4-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 696737,
+          "sha256": "66c649b2163cc92c3479acea7020774bc372f31510772798208b1b8eb67b4b5f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-2e629-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 806122,
+          "sha256": "166c27835bdfddb015ced7630f91c37efea3d6364dbb0d1706abd786a729a68d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-2e629-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 860908,
+          "sha256": "8e7bda49c499845e9585a311c28962f00f8aec5818e6c79f1e7dd21e32556400"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-2e629-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 532193,
+          "sha256": "cadbe9edc86da73975ea870eb3daf326d9a68eff3d46fba0ba115bd107be932c"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-3048b-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1050462,
+          "sha256": "b2cd653601c3e861810db238854459a8d7eb61380e8f1370791a82b69b1f5d05"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-3048b-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 926047,
+          "sha256": "204eac47fe2e9a5e54a2c93dfd09a530dd44874ed8e470cd0124720a2d17eb09"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-3048b-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 720875,
+          "sha256": "1fb0a06ccce9c27d0a1c439ceacae00e9f517c3373cd9bae15b00865d7d9caa2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-320bb-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1000874,
+          "sha256": "44e5bb71b1438cb4302421b5e4c4622fcec6d764ea13eff364a22ffc70a25a87"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-320bb-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 932450,
+          "sha256": "6783bdb906a6ab6bbea100274c131d87181d380e86444ddb16c0c10cc73423d8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-320bb-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 740424,
+          "sha256": "a5161ab423feebe6f4282220176dbf2370c04c6871f84076f3ee5dc5fa1db686"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-4464e-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1103309,
+          "sha256": "4bde9dcecfa384bb354cf056e51663a52288de72f6f67750eb1d9ed208f384da"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-4464e-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 882158,
+          "sha256": "a2f29654f815a3514eaa1d45b8240d98b6200d8eec954ab3c5a38d3b067e2835"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-4464e-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 768169,
+          "sha256": "8134dddd359a129341c8b8df29e7daa2ceaab1478d74de366535cf56d84af5ea"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-5194c-enus-and-retained-callbacks-chromium/trace.zip",
+          "bytes": 84888,
+          "sha256": "0891a249620cb518ada9c62e5582aa58aa3ccfee9280e7f140d0d3961abcf519"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-5194c-enus-and-retained-callbacks-firefox/trace.zip",
+          "bytes": 361209,
+          "sha256": "0671f0175aa941345ff4c57555131e7b69ac772aeb49f8f5f727a86d57cbeecf"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-5194c-enus-and-retained-callbacks-webkit/trace.zip",
+          "bytes": 78319,
+          "sha256": "4b9eba31b889d379f8ac11220f013bb0d4d64bf2b6440dd9e0272c5fa581b22f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-5ec6a-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 845798,
+          "sha256": "d2d309d354c5ab148b82f02a58eefb42655615188428c15c5b7fa527b2f9b942"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-5ec6a-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 845999,
+          "sha256": "1ad8bafb4a6844088ab017a4c9f779eefba456f9bbb7908d5e90614e4b8082e5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-5ec6a-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 478492,
+          "sha256": "1d705a23178c6d550c9d3466c8cb94ae0f3432d378e96ffff0e83edef59168a5"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-65174-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 822894,
+          "sha256": "5510ca79a98787397c687d5c5e513d7fb0178a8686b9138f1f1c01e19e2d5fc1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-65174-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 796860,
+          "sha256": "c912643b8a23df61b9104d45360ce5df693895160ece6637c09e5fe07ddca11a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-65174-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 513643,
+          "sha256": "80107ffd5bc07ea6a498f2ed6f3fa5f00948ca31bff1c5c13d4d4ca5ff7ea211"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-6fd01-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1047216,
+          "sha256": "2a3446c7d013ba103f833910e088cec4927115743c7847f09bfdb29a7850c98f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-6fd01-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 909408,
+          "sha256": "beaf55ff867ae596fb01bd4eb1716652f2d119f331d6c13d3e481c20b571c96b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-6fd01-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 706706,
+          "sha256": "cb74d19daecea615dbff4b9cd8e12a965c078af09895eaf5994e0c2f2d5fc6ef"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-8140b-enus-and-retained-callbacks-chromium/trace.zip",
+          "bytes": 84217,
+          "sha256": "db38de92160b1cea3607d228d0e389f58c11a43d82cf0261511ef2b513bba617"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-8140b-enus-and-retained-callbacks-firefox/trace.zip",
+          "bytes": 353020,
+          "sha256": "671abd8bfb5b0338b3fceaee265daa618e15080a456e86db64b4f23b1b674e6a"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-8140b-enus-and-retained-callbacks-webkit/trace.zip",
+          "bytes": 77694,
+          "sha256": "4fd584e3de6b5f3fad1df24a081c784d32d8c785502374bdce52eaae3062f97e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-a6aa5-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 826131,
+          "sha256": "af3f7397d7c44c1d57b2ed73540434879fc57fb7a70042398a47947c90383a29"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-a6aa5-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 833610,
+          "sha256": "c4c31c4455ba95e39b9d7cf899e5bf3db1722f3c23e7a10623b41ea810a6ef97"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-a6aa5-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 550182,
+          "sha256": "532e5c3e868e4defbbb9833719159fb8f1c63ba9019f98a448a944e32a78a3dd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-c9a8b-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 842786,
+          "sha256": "0e705494d54053fe01f504de794595293a6986a960e30b98d2444a8c0ba0aa3d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-c9a8b-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 855951,
+          "sha256": "b5b388fba0afa172449208bee599fbe490a9a84c48f53616521b31f7b6ea8c35"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-c9a8b-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 570756,
+          "sha256": "983b8bc36d12a2d09f161bd4b45004a34580275c54770da23e303e5d4bb77aac"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-eefa5-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 828097,
+          "sha256": "4546edf9fb032f94306bd9a9069321b9bd6772bf988ff2574189a23f2307cd2d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-eefa5-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 880963,
+          "sha256": "57b98d1449ce810519faedc6919e76a437f1ec46029148efbc8361ef5981f172"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-candidate-cor-eefa5-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 570111,
+          "sha256": "2a4142be9968ead3fd0877b6f14ab912ad8daef02773d8f11f850ece22a04b37"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-283a1-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1053128,
+          "sha256": "704ceea69de676da7b5d7ca7f4d9b1e05546df91446abf31961c8da33128a168"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-283a1-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 952593,
+          "sha256": "3e14cd949bb015364334351ad1db64e8d002ab255de31c0a68516a0c957b7e5b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-283a1-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 741731,
+          "sha256": "9bb3ae30988ba9325a16b5f6a2e3918581c0610a7e26b3b81ff65451d8ba34b7"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-3772d-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1024604,
+          "sha256": "b7666553d1205bf85551b12df0ca892aae24b2f13b240b1a2e774e58117195fe"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-3772d-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 934593,
+          "sha256": "a0e9e6b86ac5697142364c6a362e55950d20249bb77c82dc793dcbbe7c886b1d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-3772d-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 745394,
+          "sha256": "f7c1c1819dc3256768fa2331ba29c1bc08eb126cdd392915bad9f7a623df32ef"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-3a231-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 821490,
+          "sha256": "1963e6967e65c77699633547723e01f21140dc5a0ac0b39671a8729f032ab972"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-3a231-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 854577,
+          "sha256": "a8d77f60733fb4cb4a18adda2625f5af6681cc2cf100e92793c75b2ab25b25be"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-3a231-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 552304,
+          "sha256": "6890354e71d0d0bfd05ae8f91ef7b37b6896123e9dc5fbaa69c9cfaec0bf476f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-4dcf6-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 807156,
+          "sha256": "b97acd42f6775540e806838ee9ab6ab3d0696fc393f402125681ec7fbebe66c4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-4dcf6-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 840558,
+          "sha256": "2cdbf93ed9a43e74601144de398ebfabc503080869839d1470a8ca21965af732"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-4dcf6-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 551947,
+          "sha256": "278065b225c145891fd56dab149fdbecda5adab32abf354e4a54f92bcd56daf8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-526ff-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1037952,
+          "sha256": "7e3df97375cf2ae2c47ede8fe58ad152432ea90c0eae879fe00543ecfa5e627f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-526ff-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 868874,
+          "sha256": "f0e953d0ed8685cf5470941a92e4f1441c29a8737c9910f93b7ae33e599be7cd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-526ff-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 747008,
+          "sha256": "9c63927d9b02c5b51bddc1fecc0274083fd88ca8c0d24e153913702614ac0ffc"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-61aff-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 829917,
+          "sha256": "d2578169f9765932cf2bd61645dc5e95a0708a7e4f1c004ecae45b2ef8f622f2"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-61aff-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 813516,
+          "sha256": "1ec92b765ecab25564b5d3113f1f64c92ab75359dfe7126ebd04f121b8f2127f"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-61aff-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 550794,
+          "sha256": "eca54c84360c4b5c4b338552aa55b634caff2b25d7c3183a72576ba9339ae880"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-6a49f-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1062879,
+          "sha256": "b3125dffe53a44e7c89f8ccc9f61fb1f2a5941604c70a7142df09512a77ab8ed"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-6a49f-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 867948,
+          "sha256": "cc6a899ebd93c6a4a34576c5de24921db3dfbc56e6655ec726cd3a87dd443780"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-6a49f-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 748844,
+          "sha256": "443a39041ea9b4e979963e94567a67f75af0ca16712443679607b56a34156680"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-72faa-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 822786,
+          "sha256": "0ea66282c41e4a40ebb6a62a78afd5c4510d3e632e1a9a2935ab057fb6030af8"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-72faa-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 821561,
+          "sha256": "20ac64e5941e3de7c83525946a205cc0503bace41ecf65c35731d5b3319101e1"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-72faa-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 518932,
+          "sha256": "3b747a95b452703b9176bc71a912efb56d1eb6c6fdbadebd50de56979b00f7a0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-81eb4-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1038292,
+          "sha256": "c496a4b269dfc921a772ddd70120be5354520e9fa1700b8980eb9af1148a2185"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-81eb4-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 848001,
+          "sha256": "6a99d620bc40ba89765e37ea91126047f6dddd3e4b1d5d9027e715ac01ec7bd0"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-81eb4-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 734959,
+          "sha256": "587993d3bd6b1411870b2efc8afde23ab71ff79a6a6ec35a3ab40ddadb1f792d"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-863d1-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 845092,
+          "sha256": "8f757b1ab588d4e96e4da770dabe18bfbc1dd02ed1c145425639619dc42d890b"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-863d1-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 834038,
+          "sha256": "0ca9bdc505417665717e61ac8a57bbbdc57bb789beaaaf85bf4c3dc9319c2758"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-863d1-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 517107,
+          "sha256": "39bbb9d595a1950fb4284835b56540e371946ba608c7c80dfaa9a977ef08be21"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-b98ad-enus-and-retained-callbacks-chromium/trace.zip",
+          "bytes": 82698,
+          "sha256": "5a4b4a7f1bc89928bd2fb67fc40a32b1fa72e5e3720d4f282cf100830fdad6c7"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-b98ad-enus-and-retained-callbacks-firefox/trace.zip",
+          "bytes": 316298,
+          "sha256": "4ba455e1c069a44c536bad7f6ecc88e7c91307810d148adf3a18193b96a107fd"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-b98ad-enus-and-retained-callbacks-webkit/trace.zip",
+          "bytes": 80153,
+          "sha256": "1562587c0ca9ee466974b89e31120d9796333f6e21242ae5b137c4c73ae407dc"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-d4501-on-through-real-setting-DOM-chromium/trace.zip",
+          "bytes": 1026377,
+          "sha256": "770f68485c76f75bbc16e854e3f3ab02b0deafb8b7bc98ebd07675e7220744fc"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-d4501-on-through-real-setting-DOM-firefox/trace.zip",
+          "bytes": 908236,
+          "sha256": "2c83fbb1820f6a2bfe643a36e3050b725e6a265ce3c42b9a865a9e0faf89006e"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-d4501-on-through-real-setting-DOM-webkit/trace.zip",
+          "bytes": 636829,
+          "sha256": "1cfead52277d9c0ca29816d950dbe85496b89b93338ad501bd57aa7612323280"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-ec884-enus-and-retained-callbacks-chromium/trace.zip",
+          "bytes": 83133,
+          "sha256": "c02e4c29135117205e2a8a723573b700fd901c08c643dc3052b91882bd232065"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-ec884-enus-and-retained-callbacks-firefox/trace.zip",
+          "bytes": 372105,
+          "sha256": "d898486c5a48966eb1d78cb2e783dbf0d77831486cbe71ef25ef888bfdbfee46"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-ec884-enus-and-retained-callbacks-webkit/trace.zip",
+          "bytes": 76790,
+          "sha256": "30d2cb6daad8163b443e01a8e688788f5cd3d86f2cebac8181fc43fd7d8b33ae"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-f782a-on-through-real-control-DOM-chromium/trace.zip",
+          "bytes": 804921,
+          "sha256": "053cccd7b5d941e1abdf21eda529f372b961e6524453c5ff60dbf1457201d258"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-f782a-on-through-real-control-DOM-firefox/trace.zip",
+          "bytes": 866951,
+          "sha256": "264ae292d696bc440d0cd0cbf504391c421169181d588be100458884c66dfbf4"
+        },
+        {
+          "file": "refactor/.cache/dash05-events-dom-legacy/results/dash-control-published-cor-f782a-on-through-real-control-DOM-webkit/trace.zip",
+          "bytes": 571849,
+          "sha256": "c7ff9d0feb0cc86fcdb39b2b14db3e74c049bfce7414c4f9e6a28d58c62f12bd"
+        }
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/dash05-events-artifacts-after.log",
+      "bytes": 46890,
+      "sha256": "38ab8a782dca65037420c8ba997ea343ea0dff38bdd9213e9e19c625bc29830f"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-artifacts.log",
+      "bytes": 53122,
+      "sha256": "dfa3401f25059313733c30f52e18e3ac081f08729ddf5a541f668973359c9660"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-before.log",
+      "bytes": 30911,
+      "sha256": "a724c6bd364993e0deafbe330f3d9e83a206f8873aa51ca87279db1671358450"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-build.log",
+      "bytes": 1473,
+      "sha256": "45dc97f9c0603fd1993493848595f5e9787656458107bfa3da4d6fbba48bb809"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-ci.log",
+      "bytes": 78120,
+      "sha256": "025473cf3f25fb413da0bf6a4e334b8cb1469872d6586e45380636be2e67a901"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-dom-legacy.log",
+      "bytes": 16563,
+      "sha256": "e3d36a8f99846e5e3e188e063f76518142e4027c72c442b96c6cffcc405a7fec"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-dom-main.log",
+      "bytes": 16565,
+      "sha256": "38f2b74d4db9ed74a2ed349121e6d1fee7e9769b67077cb9b33ae682380e0853"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-first.log",
+      "bytes": 7667,
+      "sha256": "b1e5a7888fb79aaf47f06fc57816725d25ea21c8296e148000bfd259d6ad6fba"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-legacy.log",
+      "bytes": 15518,
+      "sha256": "4ec529a1520753235c1496d4bdb20e3d12c7c29336393db268116f109b1a9714"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-main.log",
+      "bytes": 15521,
+      "sha256": "f25c68434a39201788e01b8a8ef5a39bdd589522d9ae1591e8a3b65dcab90f14"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-node-before.log",
+      "bytes": 17142,
+      "sha256": "e1911e28c5751081c0afac57ace8c1e99dbc9ed521d2d56d787cc8eb11474a30"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-node-expanded.log",
+      "bytes": 14781,
+      "sha256": "2cb750e68f39aa1d801c57dc54b638e23194cec2ea5c2decc1c972bfac9234cb"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-node-first.log",
+      "bytes": 13512,
+      "sha256": "96862d53ea03ebc96c44caf826005b1e4d46f61cdc6e8a176b2a1e30a0d3bd84"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-same-sdk.log",
+      "bytes": 17528,
+      "sha256": "b513532cee2e90f6af576c27b4853406bd5f8665d3b3455ba81b599e86d52194"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-settings-legacy.log",
+      "bytes": 5808,
+      "sha256": "a9439e78e24ad722a5ee68aeb07854eaca3110f9aa38484123daefd9e5a7bde9"
+    },
+    {
+      "file": "refactor/.cache/dash05-events-settings-main.log",
+      "bytes": 6671,
+      "sha256": "924b0f4d2ed8d9f470679fda36f38f669763739ef3f5dc687f0a457325d8002e"
+    }
+  ],
+  "ci": {
+    "log": {
+      "file": "refactor/.cache/dash05-events-ci.log",
+      "bytes": 78120,
+      "sha256": "025473cf3f25fb413da0bf6a4e334b8cb1469872d6586e45380636be2e67a901"
+    },
+    "completed": true,
+    "testCounts": [
+      689,
+      14,
+      43
+    ],
+    "productionTS": 262
+  },
+  "boundaries": [
+    "Windows WebKit without MSE skips are not playback acceptance",
+    "DASH-SEEK-01 remains open despite later passes",
+    "Pure paused configuration changes without events require explicit update",
+    "90-case full reports predate added settings tests; later filtered reports cover these changes",
+    "Local cache traces are not committed; rerun suites on another host",
+    "No package publication, version bump or new dependency"
+  ]
+}

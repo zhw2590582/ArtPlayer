@@ -137,7 +137,7 @@
 | CHAPTER-TIMING-01 | open / 已复现 | Windows WebKit 清晰度切换曾在等待窗口内未见 restart，稍后状态恢复 | PKG-CHAPTER-05 |
 | DASH-SDK-01 | open / 已复现 | npm 发布版 4.x 与工作区仅 5.x 的 SDK 接口不兼容 | PKG-DASH-02, PKG-DASH-03, PKG-DASH-05 |
 | DASH-LIFE-01 | resolved / 已复现 | DASH 空拓扑残留 UI，监听和旧选择回调缺乏关闭守卫 | PKG-DASH-02, PKG-DASH-03 |
-| DASH-STATE-01 | open / 已复现 | DASH 当前项高亮使用真值 ID、音轨身份和标签去重，边界待核实 | PKG-DASH-02, PKG-DASH-03, PKG-DASH-05 |
+| DASH-STATE-01 | resolved / 已复现 | DASH 当前项高亮使用真值 ID、音轨身份和标签去重，边界待核实 | PKG-DASH-02, PKG-DASH-03, PKG-DASH-05 |
 | DASH-TYPE-01 | resolved / 源码/产物事实 | DASH 类型未表达默认工厂参数、SDK 回调对象和现代模块入口 | PKG-DASH-04 |
 | DASH-DEMO-01 | open / 源码/产物事实 | DASH 示例仅新 SDK 且重复安装会累积销毁回调 | PKG-DASH-06 |
 | DASH-SEEK-01 | open / 已复现 | 真实 dash.js 4.5.2 暂停 seek 到缓冲片段边界后可能持续 waiting | PKG-DASH-05, REVIEW-02 |

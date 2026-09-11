@@ -483,4 +483,4 @@
 - PKG-DASH-02: [记录](changes/2026-09-12-PKG-DASH-02-tests.md) [记录](dash-validation.md) [记录](baselines/dash-validation.json)
 - PKG-DASH-03: [记录](changes/2026-09-12-PKG-DASH-03-runtime.md) [记录](baselines/dash-runtime.json) [记录](dash-validation.md)
 - PKG-DASH-04: [记录](changes/2026-09-12-PKG-DASH-04-types.md) [记录](baselines/dash-types-validation.json) [记录](dash-validation.md)
-- PKG-DASH-05: [记录](changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md) [记录](baselines/dash-sdk.json) [记录](baselines/dash-sdk-checkpoint.json) [记录](dash-validation.md) [记录](changes/2026-09-12-PKG-DASH-05-sdk-types.md) [记录](baselines/dash-sdk-types-validation.json)
+- PKG-DASH-05: [记录](changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md) [记录](baselines/dash-sdk.json) [记录](baselines/dash-sdk-checkpoint.json) [记录](dash-validation.md) [记录](changes/2026-09-12-PKG-DASH-05-sdk-types.md) [记录](baselines/dash-sdk-types-validation.json) [记录](changes/2026-09-12-PKG-DASH-05-sdk-events.md) [记录](baselines/dash-sdk-events-validation.json)

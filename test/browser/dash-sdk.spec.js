@@ -81,12 +81,13 @@ async function openDash(page, version, core, plugin, testInfo) {
     window.sdkEvents = []
     window.mediaEvents = []
     window.sdkDestroyed = 0
+    window.dashOption = { quality: { control: true, setting: true }, audio: { control: true, setting: true } }
     window.art = new window.Artplayer({
       container: '.player',
       url: '/dash-fixture/master.mpd',
       muted: true,
       setting: true,
-      plugins: [window.artplayerPluginDashControl({ quality: { control: true, setting: true }, audio: { control: true, setting: true } })],
+      plugins: [window.artplayerPluginDashControl(window.dashOption)],
       customType: { mpd(video, url, art) {
         if (art.dash) {
           art.dash.destroy()
@@ -215,9 +216,9 @@ for (const version of ['4.5.2', '5.2.1']) {
       const dash = window.nativeDash
       dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: false } } } })
       if (dash.setQualityFor)
-        dash.setQualityFor('video', 1, true)
+        dash.setQualityFor('video', 1)
       else
-        dash.setRepresentationForTypeById('video', '1', true)
+        dash.setRepresentationForTypeById('video', '1')
     })
     await expect.poll(() => page.evaluate(() => window.nativeVideo.videoHeight)).toBe(180)
     // Match the failed integrated run: video data ends at the next seek target.
@@ -242,6 +243,101 @@ for (const version of ['4.5.2', '5.2.1']) {
 
 for (const core of ['published', 'candidate']) {
   for (const version of ['4.5.2', '5.2.1']) {
+    for (const type of ['quality', 'audio']) {
+      test(`${core} core / DASH ${version}: actual settings ${type} selection survives SDK refresh`, async ({ page }, testInfo) => {
+        await openDash(page, version, core, 'candidate', testInfo)
+        await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
+        await page.locator('#play').click()
+        await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.3)
+        const label = type === 'quality' ? '180p' : 'fr'
+        await page.locator('.art-control-setting').click()
+        await page.locator(`[data-name="dash-${type}"]`).click()
+        await page.locator('.art-setting-panel.art-current .art-setting-item-left-text').filter({ hasText: new RegExp(`^${label}$`) }).click()
+        if (type === 'quality') {
+          await expect.poll(() => page.evaluate(() => ({ height: window.art.video.videoHeight, auto: window.art.dash.getSettings().streaming.abr.autoSwitchBitrate.video }))).toEqual({ height: 180, auto: false })
+        }
+        else {
+          await expect.poll(() => page.evaluate(() => window.art.dash.getCurrentTrackFor('audio').lang)).toBe('fr')
+        }
+        await expect(page.locator(`.art-control-dash-${type} .art-selector-value`)).toHaveText(label)
+        expect(await page.evaluate(type => window.art.setting.find(`dash-${type}`).tooltip, type)).toBe(label)
+        expect(await page.evaluate(() => window.sdkErrors)).toEqual([])
+        await testInfo.attach('dash-sdk-settings', { contentType: 'image/png', body: await page.screenshot() })
+      })
+    }
+
+    test(`${core} core / DASH ${version}: same SDK source replacement refreshes topology without plugin update`, async ({ page }, testInfo) => {
+      await openDash(page, version, core, 'candidate', testInfo)
+      await expect(page.locator('.art-control-dash-audio .art-selector-value')).toHaveText('en')
+      await page.locator('#play').click()
+      await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.3)
+      await page.evaluate(() => window.art.dash.attachSource('/dash-fixture/single.mpd'))
+      await expect(page.locator('.art-control-dash-audio')).toHaveCount(0)
+      await expect(page.locator('.art-control-dash-quality .art-selector-item')).toHaveText(['90p', 'Auto'])
+      await expect.poll(() => page.evaluate(() => window.art.video.readyState)).toBeGreaterThanOrEqual(2)
+      await page.locator('#play').click()
+      await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.3)
+      await page.evaluate(() => window.art.dash.attachSource('/dash-fixture/master.mpd'))
+      await expect(page.locator('.art-control-dash-audio .art-selector-value')).toHaveText('en')
+      await expect(page.locator('.art-control-dash-quality .art-selector-item')).toHaveText(['180p', '90p', 'Auto'])
+      expect(await page.evaluate(() => window.sdkDestroyed)).toBe(0)
+      expect(await page.evaluate(() => window.sdkErrors)).toEqual([])
+    })
+
+    test(`${core} core / DASH ${version}: asynchronous formatter error clears menus and explicit update recovers`, async ({ page }, testInfo) => {
+      const warnings = []
+      page.on('console', (message) => {
+        if (message.type() === 'warning')
+          warnings.push({ text: message.text(), detail: message.text().includes('ArtPlayer DASH refresh failed:') ? message.args()[1].evaluate(error => ({ message: error.message, original: error === window.dashFormatterError })) : Promise.resolve(null) })
+      })
+      await openDash(page, version, core, 'candidate', testInfo)
+      await expect(page.locator('.art-control-dash-audio .art-selector-value')).toHaveText('en')
+      await page.locator('#play').click()
+      await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.3)
+      await page.evaluate(() => {
+        window.dashFormatterError = new Error('Intentional DASH formatter failure')
+        window.dashOption.audio.getName = () => {
+          throw window.dashFormatterError
+        }
+        const dash = window.art.dash
+        dash.setCurrentTrack(dash.getTracksFor('audio').find(track => track.lang === 'fr'))
+      })
+      await expect(page.locator('.art-control-dash-quality, .art-control-dash-audio')).toHaveCount(0)
+      const failures = warnings.filter(message => message.text.includes('ArtPlayer DASH refresh failed:'))
+      expect(failures).toHaveLength(1)
+      expect(await Promise.all(failures.map(message => message.detail))).toEqual([{ message: 'Intentional DASH formatter failure', original: true }])
+      await page.evaluate(() => {
+        window.dashOption.audio.getName = track => track.lang || String(track.id)
+        window.art.plugins.artplayerPluginDashControl.update()
+      })
+      await expect(page.locator('.art-control-dash-audio .art-selector-value')).toHaveText('fr')
+      await expect(page.locator('.art-control-dash-quality .art-selector-item')).toHaveCount(3)
+      expect(await page.evaluate(() => window.sdkErrors)).toEqual([])
+    })
+
+    test(`${core} core / DASH ${version}: SDK events refresh external selections without explicit update`, async ({ page }, testInfo) => {
+      await openDash(page, version, core, 'candidate', testInfo)
+      await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
+      await page.locator('#play').click()
+      await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.3)
+      await page.evaluate(() => {
+        const dash = window.art.dash
+        dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: false } } } })
+        if (dash.setQualityFor)
+          dash.setQualityFor('video', 1)
+        else
+          dash.setRepresentationForTypeById('video', '1')
+        dash.setCurrentTrack(dash.getTracksFor('audio').find(track => track.lang === 'fr'))
+      })
+      await expect.poll(() => page.evaluate(() => window.art.video.videoHeight)).toBe(180)
+      await expect(page.locator('.art-control-dash-quality .art-selector-value')).toHaveText('180p')
+      await expect(page.locator('.art-control-dash-audio .art-selector-value')).toHaveText('fr')
+      expect(await page.evaluate(() => ({ quality: window.art.setting.find('dash-quality').tooltip, audio: window.art.setting.find('dash-audio').tooltip }))).toEqual({ quality: '180p', audio: 'fr' })
+      await page.evaluate(() => window.art.dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: true } } } }))
+      await expect(page.locator('.art-control-dash-quality .art-selector-value')).toHaveText('Auto')
+      expect(await page.evaluate(() => window.sdkErrors)).toEqual([])
+    })
+
     test(`${core} core / DASH ${version}: explicit update reflects external SDK selection`, async ({ page }, testInfo) => {
       await openDash(page, version, core, 'candidate', testInfo)
       await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)

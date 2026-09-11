@@ -170,6 +170,133 @@ function createMenu(art, name, icon) {
   return { update, clear };
 }
 const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
+function observeSDK(options) {
+  let binding;
+  const active = (record) => binding === record && options.active(record.dash);
+  const automatic = (record) => record.dash.getSettings().streaming.abr.autoSwitchBitrate.video;
+  function release() {
+    const record = binding;
+    if (!record)
+      return;
+    binding = void 0;
+    record.epoch++;
+    let failure;
+    for (const [name, callback] of record.callbacks.splice(0)) {
+      try {
+        record.off.call(record.dash, name, callback);
+      } catch (error) {
+        failure || (failure = error);
+      }
+    }
+    if (failure)
+      throw failure;
+  }
+  function fail(record, error) {
+    if (binding === record) {
+      try {
+        release();
+      } catch (cleanupError) {
+        console.warn("ArtPlayer DASH subscription cleanup failed:", cleanupError);
+      }
+      if (!binding && options.active(record.dash)) {
+        try {
+          options.reset();
+        } catch (cleanupError) {
+          console.warn("ArtPlayer DASH cleanup failed:", cleanupError);
+        }
+      }
+    }
+    console.warn("ArtPlayer DASH refresh failed:", error);
+  }
+  function schedule(record) {
+    if (!active(record) || record.suspended || record.queued || record.running)
+      return;
+    record.queued = true;
+    const epoch = record.epoch;
+    void Promise.resolve().then(() => {
+      if (!active(record) || record.epoch !== epoch || record.suspended)
+        return;
+      record.queued = false;
+      record.running = true;
+      try {
+        record.automatic = automatic(record);
+        if (active(record))
+          options.refresh();
+      } catch (error) {
+        fail(record, error);
+      } finally {
+        record.running = false;
+      }
+    });
+  }
+  function bind(dash) {
+    const previous = binding;
+    if (previous?.dash === dash) {
+      const value = automatic(previous);
+      if (active(previous)) {
+        previous.automatic = value;
+        previous.suspended = false;
+      }
+      return;
+    }
+    release();
+    if (binding || !options.active(dash) || typeof dash.on !== "function" || typeof dash.off !== "function")
+      return;
+    const record = { dash, off: dash.off, callbacks: [], epoch: 0, queued: false, running: false, suspended: false, automatic: false };
+    binding = record;
+    const on = dash.on;
+    try {
+      record.automatic = automatic(record);
+      const changed = ["qualityChangeRequested", "qualityChangeRendered", "trackChangeRendered", "streamUpdated", "streamInitialized"];
+      const entries = changed.map((name) => [name, () => {
+        if (name === "streamUpdated" || name === "streamInitialized")
+          record.suspended = false;
+        schedule(record);
+      }]);
+      entries.push(["playbackTimeUpdated", () => {
+        if (!active(record) || record.suspended)
+          return;
+        try {
+          const value = automatic(record);
+          if (active(record) && value !== record.automatic) {
+            record.automatic = value;
+            schedule(record);
+          }
+        } catch (error) {
+          fail(record, error);
+        }
+      }]);
+      entries.push(["streamTeardownComplete", () => {
+        if (!active(record))
+          return;
+        record.epoch++;
+        record.queued = false;
+        record.suspended = true;
+        try {
+          options.reset();
+        } catch (error) {
+          fail(record, error);
+        }
+      }]);
+      for (const entry of entries) {
+        if (!active(record))
+          break;
+        record.callbacks.push(entry);
+        on.call(dash, ...entry);
+      }
+    } catch (error) {
+      if (binding === record) {
+        try {
+          release();
+        } catch (cleanupError) {
+          console.warn("ArtPlayer DASH subscription cleanup failed:", cleanupError);
+        }
+      }
+      throw error;
+    }
+  }
+  return { bind, release };
+}
 function artplayerPluginDashControl(option = {}) {
   return (player) => {
     const art = player;
@@ -180,6 +307,14 @@ function artplayerPluginDashControl(option = {}) {
     const quality = createMenu(art, "dash-quality", $quality);
     const audio = createMenu(art, "dash-audio", $audio);
     const subscriptions = [];
+    const observer = observeSDK({
+      active: (dash) => !closed && !art.isDestroy && art.dash === dash,
+      refresh: update,
+      reset() {
+        const version = ++revision;
+        clear(() => version === revision);
+      }
+    });
     function clear(current = () => true) {
       let failure;
       for (const cleanup of [quality.clear, audio.clear]) {
@@ -205,6 +340,9 @@ function artplayerPluginDashControl(option = {}) {
         errorHandle(dash.getVideoElement() === $video, 'Cannot find instance of DASH from "art.dash"');
         if (!current())
           return;
+        observer.bind(dash);
+        if (!valid())
+          return;
         const qualityConfig = option.quality || {};
         const qualities = qualityModel(dash, qualityConfig, valid);
         if (!valid())
@@ -219,10 +357,12 @@ function artplayerPluginDashControl(option = {}) {
       } catch (error) {
         if (current()) {
           const cleanupVersion = ++revision;
-          try {
-            clear(() => revision === cleanupVersion);
-          } catch (cleanupError) {
-            console.warn("ArtPlayer DASH cleanup failed:", cleanupError);
+          for (const cleanup of [observer.release, () => clear(() => revision === cleanupVersion)]) {
+            try {
+              cleanup();
+            } catch (cleanupError) {
+              console.warn("ArtPlayer DASH cleanup failed:", cleanupError);
+            }
           }
         }
         throw error;
@@ -234,7 +374,7 @@ function artplayerPluginDashControl(option = {}) {
       closed = true;
       revision++;
       let failure;
-      const actions = [clear, ...subscriptions.splice(0).map(([name, callback]) => () => art.off(name, callback))];
+      const actions = [observer.release, clear, ...subscriptions.splice(0).map(([name, callback]) => () => art.off(name, callback))];
       for (const action of actions) {
         try {
           action();

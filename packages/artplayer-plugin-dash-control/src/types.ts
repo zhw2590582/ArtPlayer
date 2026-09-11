@@ -5,6 +5,7 @@ export type Identifier = string | number
 export type Valid = () => boolean
 export type Cleanup = () => void
 export type EventName = 'ready' | 'restart' | 'destroy'
+export type SDKEventName = 'qualityChangeRequested' | 'qualityChangeRendered' | 'trackChangeRendered' | 'streamUpdated' | 'streamInitialized' | 'playbackTimeUpdated' | 'streamTeardownComplete'
 
 export interface QualityFields {
   height?: number
@@ -15,6 +16,8 @@ export interface QualityFields {
 export type AudioFields = AudioTrack
 
 export interface Dash<Level extends object = object, Track extends object = object> {
+  on?: (name: SDKEventName, callback: Cleanup) => unknown
+  off?: (name: SDKEventName, callback: Cleanup) => unknown
   getVideoElement: () => object | null
   getSettings: () => { streaming: { abr: { autoSwitchBitrate: { video: boolean } } } }
   updateSettings: (settings: { streaming: { abr: { autoSwitchBitrate: { video: boolean } } } }) => unknown

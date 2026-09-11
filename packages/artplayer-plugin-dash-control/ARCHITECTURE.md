@@ -12,6 +12,8 @@ destroys it, changes its source, or adds a runtime dependency on dash.js.
 | ------------------------------------------ | --------------------------------------------------------------------------------------- |
 | `src/index.ts`                             | Deferred installation, media identity, update revisions, event subscription and cleanup |
 | `src/sdk.ts`                               | 4.x qualityIndex vs 5.x representation ID access and manual/Auto selection              |
+| `src/sdk-events.ts`                        | Owned SDK subscriptions, coalesced refresh, teardown and asynchronous errors             |
+| `src/types.ts`                             | Narrow internal SDK, host, model and cleanup types                                        |
 | `src/mapping.ts`                           | Names, current item matching, duplicate labels and selector ordering                    |
 | `src/menu.ts`                              | Existing control/setting registries, menu ownership and guarded selection callbacks     |
 | `src/audio.svg`, `src/quality.svg`         | Existing setting icons                                                                  |
@@ -19,7 +21,8 @@ destroys it, changes its source, or adds a runtime dependency on dash.js.
 
 Dependencies flow from the entry into mapping/menu, and from mapping into the SDK
 adapter. Mapping has no DOM dependency. Menu receives a model and validity callback;
-it does not choose SDK versions. All five owned modules are checked with strict
+it does not choose SDK versions. The event observer receives active/refresh/reset
+callbacks and owns no DOM or ArtPlayer object. All six owned modules are checked with strict
 TypeScript, noUncheckedIndexedAccess, and skipLibCheck=false; there are no remaining
 owned JavaScript modules in this package.
 
@@ -55,6 +58,29 @@ host. The primary error is preserved; secondary cleanup errors are reported.
 Keep `dash-quality`/`dash-audio`, selector shape, right control placement/padding,
 setting width/icons, defaults and unbound getName calls compatible. Do not use a
 filtered representation array index or absoluteIndex as the SDK 5 selection key.
+
+## SDK-driven refresh
+
+After media identity validation, bind seven listeners only when both SDK `on` and
+`off` exist. Quality requested/rendered, track rendered and stream updated/initialized
+events coalesce into one Promise microtask. This keeps notice/check ordering within
+a synchronous menu selection intact. Events emitted by a formatter during refresh
+do not schedule recursive refreshes. Unchanged playback-time events only read the
+Auto boolean; they do not call formatters or redraw menus. Pure configuration writes
+with no subsequent SDK event still need explicit `update()`, especially while paused.
+No polling timer or SDK method interception is installed.
+
+Stream teardown invalidates queued work and clears menus without reading detached
+media. Stream initialized/updated can restore menus on the same caller-owned SDK.
+Replacing `art.dash` requires ready/restart or explicit update to bind the new SDK.
+Release invalidates the record before calling the captured `off` method and attempts
+every owned removal. Reentrant replacement wins; caller listeners remain installed.
+
+An asynchronous SDK getter/formatter failure stops observation, clears owned menus,
+and warns with the original error. Restore the offending formatter/SDK state and
+call explicit `update()` to recover. Explicit update and synchronous menu errors keep
+their original throwing behavior. Never convert the public update API to a Promise
+or destroy an SDK to handle a plugin rendering failure.
 
 ## Types and compatibility
 
@@ -127,8 +153,9 @@ multi-quality/multi-audio DASH segments. It covers decoding, explicit update aft
 external selection, source topology replacement, retained callbacks and SDK ownership.
 It also includes a native SDK control without an ArtPlayer instance. Early SDK 4.5.2
 paused-seek stalls remain open; later passes do not resolve them. Unsupported MSE is
-recorded as a playback capability gap, not acceptance. This plugin currently refreshes
-on ready/restart/explicit update, not automatically on external SDK events.
+recorded as a playback capability gap, not acceptance. SDK event tests also cover
+external selections without explicit update, same-SDK source replacement, asynchronous
+formatter error/recovery, and actual setting clicks during SDK refresh.
 `refactor/scripts/dash-sdk-types.test.mjs` compares actual SDK-only and plugin
 consumers across ten compiler/module configurations, retaining upstream-only
 Node10/old DOM diagnostics. The exact peer dependency closure is hash-pinned in

@@ -1054,7 +1054,7 @@
         "refactor/scripts/dash-sdk-types.test.mjs"
       ],
       "contract": "Caller owns art.dash. Candidate adapts the released 4.x quality method surface and workspace 5.x stable representation ID surface. Controlled contracts and DOM validation pass; actual pinned 4.5.2/5.2.1 SDK media remains PKG-DASH-05.",
-      "validationStatus": "Pinned real npm SDK 4.5.2/5.2.1 media exercised; DASH-SEEK-01 and Windows WebKit MSE gap remain. Actual SDK declarations and exact peer closure now tested across ten compiler/module configurations, with no added plugin errors and upstream-only Node10/old DOM limitations. Automatic state refresh, full formats/devices/distribution remain incomplete.",
+      "validationStatus": "Pinned npm SDK 4.5.2/5.2.1 main/legacy media, automatic state refresh, same-SDK source replacement, settings selection and formatter recovery exercised. DASH-SEEK-01 and Windows WebKit MSE gap remain. Actual SDK declarations and exact peer closure tested across ten compiler/module configurations, with no added plugin errors and upstream-only Node10/old DOM limitations. Devices and full distribution remain incomplete; see refactor/baselines/dash-sdk-events-validation.json.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

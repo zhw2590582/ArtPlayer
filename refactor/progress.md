@@ -1,5 +1,23 @@
 # 进度与证据
 
+## 当前实施：DASH-05 SDK 事件刷新源码改造
+
+新增第六个严格 TS 模块 sdk-events：按 SDK 质量/音轨/流事件合并刷新菜单，保留同步
+选择与 update，清理仅释放自有监听；覆盖 teardown/恢复、SDK 替换、异常和重入。
+播放 tick 只检查 Auto 变化；暂停时纯配置修改且无 SDK 事件仍由显式 update 即时刷新。
+
+源码 Node 144、三格式 378 项通过；正式 main/legacy 实际 SDK 各 62 通过/28 无 MSE
+跳过（当时完整 90 项）；新增实际设置及修正参数的原生对照 main 20 通过/10 跳过，
+legacy 设置 16 通过/8 跳过。main/legacy 受控 SDK 与真实 DOM 各 84 项全部通过。
+实际 SDK spec 目前定义 114 项，90 项报告与后续过滤运行的范围分别保留，未冒充整套重跑。
+完整本地 CI 746 项通过（689 单元、14 工程、43 基线），262 个生产 TS 严格检查通过。
+
+当前项同步风险 DASH-STATE-01 已关闭；DASH-SEEK-01 仍 open，后续通过不能证明历史
+边界停滞已解决。设备、Windows WebKit MSE、demo/完整分发继续推进。217 项仍为
+74 done、4 doing、139 todo；本批是待完成 DASH-05 的本地检查点，不推送发布。
+见 [本批说明](changes/2026-09-12-PKG-DASH-05-sdk-events.md) 和
+[执行指纹](baselines/dash-sdk-events-validation.json)。以下为历史检查点当时状态。
+
 ## 当前实施：DASH-05 实际 SDK 类型与 nullable 元数据
 
 实际 dash.js 4.5.2/5.2.1 类型消费者已接入，固定五个 @svta 类型依赖及原始 exports。

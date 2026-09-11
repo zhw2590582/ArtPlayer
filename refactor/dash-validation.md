@@ -2,12 +2,12 @@
 
 测试保护真实 npm 1.1.0 的既有调用契约，以及重构前工作区的 SDK 5.x 稳定 ID 修正。
 版本来源见 [发布契约](baselines/dash-control-contract.md)。02 建立基线，03 改造运行行为，
-04 已把五个自有模块迁移为严格 TS 并补齐公开类型与编辑器生成；
+04 已把五个自有模块迁移为严格 TS 并补齐公开类型与编辑器生成；05 新增第六个 SDK 事件模块。
 实际模块地图与生命周期规则见 [包内架构](../packages/artplayer-plugin-dash-control/ARCHITECTURE.md)。
 
 ## 可重跑的测试
 
-- `yarn test:dash-control`：原有 5 项过滤/稳定 ID 回归、80 项行为/历史观察、33 项候选生命周期，共 118 项。
+- `yarn test:dash-control`：原有 118 项与两代 SDK 各 13 项事件/清理/重入回归，共 144 项。
   该脚本和 `test:unit` 都保留旧测试，完整 CI 自动执行。
 - `yarn test:browser test/browser/dash-control.spec.js --trace on`：84 项，两个核心、发布插件 SDK 4/
   候选插件 SDK 4/5、两类菜单、两种选择及候选清理、Chromium/Firefox/WebKit。
@@ -20,7 +20,8 @@
 - `yarn test:dash-types-package`：Yarn 打包核心/DASH、工作区外离线安装与冻结锁重装，
   检查五种模式、CommonJS callable/命名空间、每模式八条非法调用，并拒绝解析回工作区。
 - `yarn test:browser test/browser/dash-sdk.spec.js --trace on`：真实 npm dash.js 4.5.2/5.2.1，
-  本地多画质/多音轨 MPD，新旧核心/插件、外部同步 update、连续换源和 SDK 原生对照。
+  本地多画质/多音轨 MPD，新旧核心/插件、外部同步 update、自动事件刷新、同 SDK 换源、
+  formatter 错误恢复、实际设置点击和 SDK 原生对照。目前完整定义 114 项。
   `ARTPLAYER_DASH_ARTIFACT` 可选择正式 main/legacy；未指定则测试源码构建。
   无 MSE 的引擎只通过能力探针，播放用例明确跳过，不计为该引擎 DASH 验收。
 - `node --test refactor/scripts/dash-sdk.test.mjs`：SDK 归档/成员/许可证来源、媒体指纹与拓扑。
@@ -33,8 +34,8 @@
 
 Node helper 分别加载当前源码、固定 Git 提交的旧工作区 UMD、实际 npm main/legacy/module。
 Git 内容以 LF 指纹核对，发布归档与成员以原始字节指纹核对。`ARTPLAYER_TEST_DASH` 可指定
-待测产物，以系统路径分隔符连接；同时指定 main/legacy/module 时共 274 项，包含两代 SDK 的
-行为与生命周期。未设置时不会把源码测试冒充三种候选产物验证。
+待测产物，以系统路径分隔符连接；同时指定 main/legacy/module 时共 378 项，包含两代 SDK 的
+行为、生命周期和事件。未设置时不会把源码测试冒充三种候选产物验证。
 
 `test/helpers/dash-control.js` 只提供可控 SDK 方法和组件注册表，检查 this、类型参数、
 原始轨道身份、调用顺序、错误身份、ABR 配置保留、换 SDK、多实例和关闭后的引用。
@@ -67,3 +68,14 @@ Git 内容以 LF 指纹核对，发布归档与成员以原始字节指纹核对
 
 状态以 risks.json 为准；受控修复不替代真实 SDK 验收。严格 TS/公开类型已有独立验证，05 完成
 真实 SDK/媒体/组合验证，06 完成包分发验收。物理设备和 npm 发布准入仍待完成。
+
+## 05 SDK 事件刷新维护
+
+`test/dash-events.test.js` 覆盖批量事件合并、同步选择顺序、无变化 tick 不渲染、SDK 替换、
+teardown/恢复、调用方监听所有权、部分安装/清理失败、formatter 异常、销毁和重入。
+UMD 测试 VM 显式注入宿主 console，以检查原始错误身份；没有修改产物的错误处理。
+实际浏览器错误身份通过 ConsoleMessage 参数验证，不依赖 Firefox 对 Error 的显示文本。
+
+纯配置修改但没有 SDK 事件时，保留同步 update 为即时刷新入口；播放 tick 仅检查 Auto
+布尔值变化，没有新定时器。真实 SDK/媒体验证与剩余 seek/设备边界见
+[事件改造记录](changes/2026-09-12-PKG-DASH-05-sdk-events.md)。历史失败证据保留，后续通过不抹去它们。

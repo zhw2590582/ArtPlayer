@@ -2889,7 +2889,7 @@
       "id": "DASH-STATE-01",
       "title": "DASH 当前项高亮使用真值 ID、音轨身份和标签去重，边界待核实",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DASH-02",
         "PKG-DASH-03",
@@ -2908,7 +2908,14 @@
         "refactor/baselines/dash-sdk-checkpoint.json"
       ],
       "compatibleResolution": "验证零 ID、重复标签和克隆音轨当前项，在保持原展示语义时按实际可选项定位高亮。",
-      "closureCriteria": "有受控和真实 SDK 证据说明选中的 representation/track 与 UI 一致。"
+      "closureCriteria": "有受控和真实 SDK 证据说明选中的 representation/track 与 UI 一致。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-DASH-05-sdk-events.md",
+        "refactor/baselines/dash-sdk-events-validation.json",
+        "test/dash-events.test.js",
+        "test/browser/dash-sdk.spec.js"
+      ],
+      "resolutionRationale": "受控两代 SDK 保留零 ID、重复标签和唯一克隆轨道匹配；实际固定 SDK 4.5.2/5.2.1、新旧核心、main/legacy 的控制栏/设置、外部选择和 Auto 刷新与实际 representation/track 一致。仅关闭当前项与菜单同步缺陷；暂停无事件的纯配置修改仍用显式 update，seek 停滞、无 MSE、设备与完整分发不在此关闭范围。"
     },
     {
       "id": "DASH-TYPE-01",

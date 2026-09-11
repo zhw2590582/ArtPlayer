@@ -6,6 +6,14 @@ Accepts a caller-owned dash.js instance at `art.dash`. Quality selection adapts 
 dash.js 4.x quality methods or 5.x representation methods. Version 5 selection uses
 representation IDs so bitrate filtering does not change the selected quality.
 
+Quality, track and stream events from the SDK refresh the control and setting menus.
+Refreshes are coalesced after the current synchronous selection finishes. During
+playback, the plugin also checks for changes to the SDK's Auto setting without
+redrawing menus on unchanged time updates. When changing only SDK configuration
+while paused (with no SDK event), call the existing synchronous
+`art.plugins.artplayerPluginDashControl.update()` to refresh immediately.
+The plugin removes only its own SDK listeners and never destroys your SDK instance.
+
 ## TypeScript
 
 The formatter receives the original SDK object. For dash.js 5.2.1 types:
