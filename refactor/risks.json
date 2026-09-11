@@ -717,7 +717,8 @@
         "CORE-07"
       ],
       "evidence": [
-        "packages/artplayer/src/index.js"
+        "packages/artplayer/src/index.ts",
+        "packages/artplayer/src/option/resolve.ts"
       ],
       "compatibleResolution": "Bundled validation dependency; preserve validation/default/merge behavior and failure cleanup when typing constructor boundaries.",
       "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
@@ -2238,6 +2239,180 @@
       "closureCriteria": "Record actual Safari and Apple device versions and native sample capabilities, then compare published/candidate load, playback, seek, source replacement and Blob ownership.",
       "workspaceState": "Independent video probes on Windows WebKit 26.6 return error 4 and width zero for both local MP4 and WebM Blob samples. Chromium and Firefox decode the tested Blob sample. WebKit ownership tests explicitly report decodedBlob=false.",
       "resolutionEvidence": []
+    },
+    {
+      "id": "BASE-ENV-02",
+      "title": "Custom iOS or Macintosh user agents dereference absent browser globals during SSR import",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-20"
+      ],
+      "evidence": [
+        "test/environment.test.js",
+        "refactor/changes/2026-09-11-CORE-20-entry.md"
+      ],
+      "compatibleResolution": "Keep UA matching, override priority and browser flags while guarding absent window and navigator globals.",
+      "closureCriteria": "Published failure, isolated environment flags and complete candidate entry/installed import regressions pass without new import side effects.",
+      "workspaceState": "Absent window/navigator are guarded without changing custom UA priority or lazy evaluation. Full UMD/legacy/ESM imports from the installed tarball pass the explicit no-browser-global profile, and published failures remain tested.",
+      "resolutionEvidence": [
+        "refactor/baselines/entry-validation.json",
+        "refactor/changes/2026-09-11-CORE-20-entry.md",
+        "test/environment.test.js"
+      ],
+      "resolutionRationale": "Absent window/navigator are guarded without changing custom UA priority or lazy evaluation. Full UMD/legacy/ESM imports from the installed tarball pass the explicit no-browser-global profile, and published failures remain tested."
+    },
+    {
+      "id": "BASE-LIFE-45",
+      "title": "Previous workspace safe-area measurement leaks its probe when native style access fails",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-20"
+      ],
+      "evidence": [
+        "test/dom-boundaries.test.js",
+        "test/browser/dom-boundaries.spec.js",
+        "test/helpers/legacy-safe-area.js",
+        "refactor/changes/2026-09-11-CORE-20-entry.md"
+      ],
+      "compatibleResolution": "Preserve public utility exports, tree/style semantics and primary errors while closing owned probe cleanup and absent-global failures.",
+      "closureCriteria": "Complete entry, source/consumer types and installed-package/browser exit pass with explicit source provenance.",
+      "workspaceState": "The CORE-19 own-source safe-area helper is frozen with provenance; candidate finally cleanup releases its probe on native append/style failures while preserving primary errors. Installed browser regressions pass. The npm baseline does not contain this helper.",
+      "resolutionEvidence": [
+        "refactor/baselines/entry-validation.json",
+        "refactor/changes/2026-09-11-CORE-20-entry.md",
+        "test/dom-boundaries.test.js",
+        "test/browser/dom-boundaries.spec.js",
+        "test/helpers/legacy-safe-area.js"
+      ],
+      "resolutionRationale": "The CORE-19 own-source safe-area helper is frozen with provenance; candidate finally cleanup releases its probe on native append/style failures while preserving primary errors. Installed browser regressions pass. The npm baseline does not contain this helper."
+    },
+    {
+      "id": "BASE-ENV-03",
+      "title": "Fallback event-path utilities dereference absent window in server environments",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-20"
+      ],
+      "evidence": [
+        "test/dom-boundaries.test.js",
+        "test/browser/dom-boundaries.spec.js",
+        "test/helpers/legacy-safe-area.js",
+        "refactor/changes/2026-09-11-CORE-20-entry.md"
+      ],
+      "compatibleResolution": "Preserve public utility exports, tree/style semantics and primary errors while closing owned probe cleanup and absent-global failures.",
+      "closureCriteria": "Complete entry, source/consumer types and installed-package/browser exit pass with explicit source provenance.",
+      "workspaceState": "Fallback event paths preserve native receiver, original array identity and DOM ancestry while supporting an absent window. Published failure and candidate source/browser regressions pass.",
+      "resolutionEvidence": [
+        "refactor/baselines/entry-validation.json",
+        "refactor/changes/2026-09-11-CORE-20-entry.md",
+        "test/dom-boundaries.test.js",
+        "test/browser/dom-boundaries.spec.js",
+        "test/helpers/legacy-safe-area.js"
+      ],
+      "resolutionRationale": "Fallback event paths preserve native receiver, original array identity and DOM ancestry while supporting an absent window. Published failure and candidate source/browser regressions pass."
+    },
+    {
+      "id": "BASE-LIFE-46",
+      "title": "Option initialization continues native, style and source writes after reentrant destruction",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-20"
+      ],
+      "evidence": [
+        "test/initialization.test.js",
+        "test/helpers/legacy-option-init.js",
+        "test/helpers/legacy-airplay.js",
+        "refactor/changes/2026-09-11-CORE-20-entry.md"
+      ],
+      "compatibleResolution": "Preserve initialization and AirPlay contracts while stopping effects after lifecycle cancellation; keep real device limits explicit.",
+      "closureCriteria": "Final constructor, strict source types, normal/error/teardown tests and installed-package/browser acceptance pass.",
+      "workspaceState": "Option initialization retains ordered native/storage/style/source writes, but checks lifecycle closure after callbacks, getters and conversion boundaries. Frozen old traces and complete installed construction tests cover the difference.",
+      "resolutionEvidence": [
+        "refactor/baselines/entry-validation.json",
+        "refactor/changes/2026-09-11-CORE-20-entry.md",
+        "test/initialization.test.js",
+        "test/helpers/legacy-option-init.js",
+        "test/helpers/legacy-airplay.js"
+      ],
+      "resolutionRationale": "Option initialization retains ordered native/storage/style/source writes, but checks lifecycle closure after callbacks, getters and conversion boundaries. Frozen old traces and complete installed construction tests cover the difference."
+    },
+    {
+      "id": "BASE-LIFE-47",
+      "title": "AirPlay methods can call a picker or publish events and notices after destruction",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-20"
+      ],
+      "evidence": [
+        "test/initialization.test.js",
+        "test/helpers/legacy-option-init.js",
+        "test/helpers/legacy-airplay.js",
+        "refactor/changes/2026-09-11-CORE-20-entry.md"
+      ],
+      "compatibleResolution": "Preserve initialization and AirPlay contracts while stopping effects after lifecycle cancellation; keep real device limits explicit.",
+      "closureCriteria": "Final constructor, strict source types, normal/error/teardown tests and installed-package/browser acceptance pass.",
+      "workspaceState": "AirPlay capability detection, picker getter/call completion, event and notice publication stop after closure. Controlled source and installed construction checks preserve normal receiver/error behavior; real AirPlay devices remain unverified release scope.",
+      "resolutionEvidence": [
+        "refactor/baselines/entry-validation.json",
+        "refactor/changes/2026-09-11-CORE-20-entry.md",
+        "test/initialization.test.js",
+        "test/helpers/legacy-option-init.js",
+        "test/helpers/legacy-airplay.js"
+      ],
+      "resolutionRationale": "AirPlay capability detection, picker getter/call completion, event and notice publication stop after closure. Controlled source and installed construction checks preserve normal receiver/error behavior; real AirPlay devices remain unverified release scope."
+    },
+    {
+      "id": "BASE-LIFE-48",
+      "title": "Proxy-time destruction cannot clean a template before its public assignment",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-20"
+      ],
+      "evidence": [
+        "test/instance-lifecycle.test.js",
+        "test/browser/initialization.spec.js",
+        "refactor/changes/2026-09-11-CORE-20-entry.md"
+      ],
+      "compatibleResolution": "Preserve normal constructor order, public property visibility and first-call teardown semantics while cancelling later installation and cleaning the mounting template.",
+      "closureCriteria": "Strict final entry, normal/failed/reentrant construction and installed package/browser acceptance pass.",
+      "workspaceState": "Private mounting ownership permits cleanup before public template assignment. Installed removeHtml true/false, proxy ownership, destroy-observer order, replacement construction and failed-constructor regressions pass.",
+      "resolutionEvidence": [
+        "refactor/baselines/entry-validation.json",
+        "refactor/changes/2026-09-11-CORE-20-entry.md",
+        "test/instance-lifecycle.test.js",
+        "test/browser/initialization.spec.js"
+      ],
+      "resolutionRationale": "Private mounting ownership permits cleanup before public template assignment. Installed removeHtml true/false, proxy ownership, destroy-observer order, replacement construction and failed-constructor regressions pass."
+    },
+    {
+      "id": "BASE-LIFE-49",
+      "title": "Constructor and Player initialization continue after a callback destroys the instance",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-20"
+      ],
+      "evidence": [
+        "test/browser/initialization.spec.js",
+        "test/initialization.test.js",
+        "refactor/changes/2026-09-11-CORE-20-entry.md"
+      ],
+      "compatibleResolution": "Preserve normal constructor order, public property visibility and first-call teardown semantics while cancelling later installation and cleaning the mounting template.",
+      "closureCriteria": "Strict final entry, normal/failed/reentrant construction and installed package/browser acceptance pass.",
+      "workspaceState": "Player installers and outer construction stop after reentrant closure without publishing later plugins or registering the dead instance. Installed normal descriptors/static/subclass behavior and getter/native-write destruction cases pass.",
+      "resolutionEvidence": [
+        "refactor/baselines/entry-validation.json",
+        "refactor/changes/2026-09-11-CORE-20-entry.md",
+        "test/browser/initialization.spec.js",
+        "test/initialization.test.js"
+      ],
+      "resolutionRationale": "Player installers and outer construction stop after reentrant closure without publishing later plugins or registering the dead instance. Installed normal descriptors/static/subclass behavior and getter/native-write destruction cases pass."
     }
   ]
 }

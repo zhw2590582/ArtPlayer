@@ -130,7 +130,7 @@ For proxy/plugin work, prefer validating on the local demo page rather than reas
 
 ### Core package
 
-- `packages/artplayer/src/index.js`: player entry
+- `packages/artplayer/src/index.ts`: player entry
 - `packages/artplayer/src/player/`: playback mixins and player-facing behavior
 - `packages/artplayer/src/control/`: bottom controls
 - `packages/artplayer/src/setting/`: settings panel

@@ -1184,7 +1184,8 @@
         "CORE-07"
       ],
       "sourceFiles": [
-        "packages/artplayer/src/index.js"
+        "packages/artplayer/src/index.ts",
+        "packages/artplayer/src/option/resolve.ts"
       ],
       "contract": "Bundled validation dependency; preserve validation/default/merge behavior and failure cleanup when typing constructor boundaries.",
       "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",

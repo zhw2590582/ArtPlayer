@@ -1,10 +1,15 @@
 import ResourceScope, { ResourceCleanupError } from './scope'
 
+interface LifecycleTemplate {
+  $video?: unknown
+  destroy: (removeHtml: boolean) => void
+}
+
 interface LifecycleOwner {
   isDestroy: boolean
   reset: () => void
   emit: (name: 'destroy') => unknown
-  template?: { $video?: unknown, destroy: (removeHtml: boolean) => void }
+  template?: LifecycleTemplate
 }
 
 interface State {
@@ -13,6 +18,7 @@ interface State {
   destroying: boolean
   rollback?: () => void
   releaseContainer?: () => void
+  mountingTemplate?: LifecycleTemplate
 }
 
 const states = new WeakMap<object, State>()
@@ -46,6 +52,20 @@ export function getFinalizationScope(owner: object): ResourceScope {
 export function isClosing(owner: object): boolean {
   const state = stateOf(owner)
   return state.destroying || state.scope.closed
+}
+
+// The proxy callback runs before the public art.template assignment. Keep its
+// in-progress template reachable by teardown without changing that public order.
+export function duringTemplateMount(owner: object, template: LifecycleTemplate, initialize: () => void): void {
+  const state = stateOf(owner)
+  const previous = state.mountingTemplate
+  state.mountingTemplate = template
+  try {
+    initialize()
+  }
+  finally {
+    state.mountingTemplate = previous
+  }
 }
 
 export function ownContainer(owner: object, container: Element, rollback: () => void): void {
@@ -84,7 +104,7 @@ export function destroyInstance(owner: LifecycleOwner, instances: LifecycleOwner
   if (removeSource && owner.template?.$video)
     attempt(() => owner.reset())
   attempt(() => state.scope.dispose())
-  attempt(() => owner.template?.destroy(removeHtml))
+  attempt(() => (owner.template || state.mountingTemplate)?.destroy(removeHtml))
   const index = instances.indexOf(owner)
   if (index !== -1)
     instances.splice(index, 1)

@@ -1,5 +1,6 @@
 import type { SubscriptionHost } from '../component/resources'
 import type { ProgressPositionHost } from '../control/progress/position'
+import type { NoticeSink } from '../notice'
 
 export interface GestureHost extends ProgressPositionHost, SubscriptionHost<{
   'document:touchend': [Event]
@@ -12,7 +13,7 @@ export interface GestureHost extends ProgressPositionHost, SubscriptionHost<{
   isLock: boolean
   width: number
   currentTime: number
-  notice: { show: string }
+  notice: NoticeSink
 }
 
 export interface Drag {

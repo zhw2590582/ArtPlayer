@@ -1,23 +1,23 @@
 import type { SubscriptionHost } from '../component/resources'
+import type { CoreEmission } from '../events/core-types'
 import type { OptionalMediaCapabilities } from '../media/types'
+import type { NoticeSink } from '../notice'
 
-export interface WebFullscreenHost {
+export interface WebFullscreenHost extends CoreEmission<'fullscreenWeb' | 'resize'> {
   constructor: { FULLSCREEN_WEB_IN_BODY: boolean }
   template: { $container: HTMLElement, $player: HTMLElement }
   state: string
-  emit: (name: 'fullscreenWeb' | 'resize', ...args: unknown[]) => unknown
 }
 
 export interface WebFullscreenProperty {
   fullscreenWeb: boolean
 }
 
-export interface FullscreenHost {
+export interface FullscreenHost extends CoreEmission<'fullscreen' | 'fullscreenError' | 'resize'> {
   template: { $player: HTMLElement, $video: HTMLElement & OptionalMediaCapabilities }
   state: string
-  notice: { set show(value: unknown) }
+  notice: NoticeSink
   i18n: { get: (key: string) => string }
-  emit: (name: 'fullscreen' | 'fullscreenError' | 'resize', ...args: unknown[]) => unknown
   once: (name: 'video:loadedmetadata', listener: () => void) => unknown
   on: (name: 'document:webkitfullscreenchange', listener: () => void) => unknown
   off: (name: 'video:loadedmetadata' | 'document:webkitfullscreenchange', listener: () => void) => unknown
@@ -37,7 +37,7 @@ export interface NativeFullscreenAdapter {
 export interface PipHost {
   template: { $video: HTMLElement & OptionalMediaCapabilities & { disablePictureInPicture?: boolean } }
   state: string
-  notice: { set show(value: unknown) }
+  notice: NoticeSink
   i18n: { get: (key: string) => string }
   emit: (name: 'pip', value: boolean) => unknown
 }
@@ -48,9 +48,9 @@ export interface PipProperty {
 }
 
 export interface MiniEvents {
-  'video:playing': []
-  'video:pause': []
-  'video:timeupdate': []
+  'video:playing': [Event]
+  'video:pause': [Event]
+  'video:timeupdate': [Event]
   'document:mousemove': [MouseEvent]
   'document:mouseup': [MouseEvent]
 }

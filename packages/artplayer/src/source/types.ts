@@ -1,5 +1,7 @@
+import type { NoticeSink } from '../notice'
+
 export type SourceEvent = 'video:error' | 'video:loadedmetadata' | 'video:canplay' | 'video:seeked' | 'seek'
-export type SourceListener = (event?: unknown) => void
+export type SourceListener = (event?: unknown, ...extra: unknown[]) => void
 
 export interface SourceEvents {
   on: (name: SourceEvent, callback: SourceListener) => unknown
@@ -35,7 +37,7 @@ export interface SwitchHost extends UrlTarget, SourceEvents {
   playbackRate: number
   pause: () => unknown
   play: () => unknown
-  notice: { set show(value: string) }
+  notice: NoticeSink
 }
 
 export interface SwitchMethods {

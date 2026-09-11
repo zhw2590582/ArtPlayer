@@ -1,12 +1,13 @@
-import type { ComponentHost, EntryOption } from '../component/types'
-import type { QualityItem } from '../control/types'
+import type { ComponentHost } from '../component/types'
+import type { ControlOption, QualityItem } from '../control/types'
+import type { NoticeSink } from '../notice'
 import { captureSelection } from '../component/selection'
 import { isClosing } from '../lifecycle/instance'
 import { def } from '../utils'
 
 export interface QualityHost extends ComponentHost {
-  controls: { update: (option: EntryOption<QualityHost>) => unknown }
-  notice: { set show(message: string) }
+  controls: { update: (option: ControlOption) => unknown }
+  notice: NoticeSink
   i18n: { get: (key: string) => string }
   switchQuality: (url: string) => Promise<unknown>
 }

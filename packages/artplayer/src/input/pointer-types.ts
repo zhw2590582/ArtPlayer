@@ -23,7 +23,7 @@ export interface ClickHost extends FocusHost {
 
   template: { $player: HTMLElement, $video: EventTarget }
   isLock: boolean
-  fullscreen: boolean
+  fullscreen?: boolean
   toggle: () => unknown
   emit: (name: 'focus' | 'blur' | 'click' | 'dblclick', event: Event) => unknown
 }
@@ -35,5 +35,5 @@ export interface HoverHost {
 
 export interface MoveHost {
   template: { $player: HTMLElement }
-  emit: (name: 'mousemove', event: Event) => unknown
+  emit: (name: 'mousemove', event: MouseEvent) => unknown
 }

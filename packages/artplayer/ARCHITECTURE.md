@@ -1,8 +1,106 @@
 # Core implementation and migration map
 
 ArtPlayer keeps its existing constructor, player mixins, plugins and DOM/CSS hooks.
-The production entry is still `src/index.js`; this document marks actual migrated
-boundaries rather than describing the entire core as TypeScript.
+The production entry is `src/index.ts`. All owned core production modules use
+TypeScript; libs/screenfull.js remains an audited third-party source file.
+
+## Entry and bootstrap (CORE-20)
+
+The typed entry checks subsystem composition. Seven leaf
+modules now have explicit source types: storage, environment flags and the attr,
+cssVar, type, theme and poster mixins. Attribute access remains a deliberately
+dynamic native/proxy property boundary; cssVar retains its truthy write condition
+and passes values directly to the native style setter. The poster getter keeps
+its historical quoted-value extraction and empty fallback. These small property
+adapters remain single files rather than acquiring redundant forwarding layers.
+
+storage.ts preserves the artplayer_settings JSON envelope and mutable name/settings
+fields. Raw reads return unknown, including historically accepted JSON primitives;
+this is not schema validation. Read errors use settings by reference, write errors
+update that fallback, and successful native reads do not merge it. Changing that
+failure policy requires an explicit compatibility decision rather than a type cast.
+
+utils/dom.ts is a compatibility export surface. dom/tree.ts owns node/query/class
+operations; dom/styles.ts owns native style conversion; dom/event-path.ts owns
+composed/fallback paths; dom/measure.ts owns geometry, flex and safe-area probes;
+dom/presentation.ts composes tree operations with environment flags for icons and
+tooltips. None imports the utils barrel. The public export names remain the same.
+Safe-area probes are removed even when append or style access fails. The frozen
+CORE-19 helper is test-only own-source provenance; npm 5.4.0 has no such helper.
+
+Typed callers distinguish optional nodes from known builtin markup. Setting
+renderers reuse component/dom.ts appendElement only where they append known element
+markup or icon wrappers. Cache assertions follow existing has checks; template
+assertions describe mounted required nodes and preserve historical failures if
+consumers remove those nodes. Public append still returns the actual final element,
+text node or null; detached remove is not silently changed to a no-op.
+
+Environment flags retain custom UA priority and lazy navigator reads. A custom
+iOS/Macintosh UA can now be evaluated without window/navigator during SSR; fallback
+event paths also work without window. Use environment, storage, facade-properties
+and dom-boundaries Node tests and the browser dom-boundaries spec. entry.test.js and
+the isolated package consumer also exercise these profiles through complete bundles.
+
+config/index.ts retains mutable public media-property/method/event/prototype arrays
+in their original order. player/optionInit.ts has a minimal initialization host and
+preserves attribute -> muted -> configured volume -> stored volume -> poster ->
+autoplay -> inline flags -> theme/CSS -> source order. External getter, storage and
+setter boundaries cannot continue writing once lifecycle teardown closes the owner.
+player/airplayMix.ts retains native picker receiver, availability and event order;
+closed instances do not invoke the picker or update a notice. Native AirPlay errors
+still propagate. Its controlled tests do not certify an actual Apple receiver.
+test/initialization.test.js compares frozen CORE-19 functions with the new code;
+test/types/core-initialization.ts checks raw storage, mutable config and nullable DOM
+results. Internal PiP consumers accept the native element/null/boolean getter and
+boolean setter; the public declaration compatibility work remains in CORE-21.
+The auto-playback consumer owns the legacy unvalidated record assumption locally;
+Storage does not promise that arbitrary persisted values are PlaybackTimes.
+
+player/index.ts installs URL handling first with the actual generic host, then runs
+the remaining 34 steps in one ordered table. Its PlayerHost is derived from the
+owning modules' required capabilities, including deferred property/callback needs;
+it is not proof that those properties already exist before Player construction.
+The constructor keeps its empty instance shape and stops before each later installer
+when the owner closes. src/index.ts similarly stops between subsystem constructors.
+Do not reorder the table or initialize public fields eagerly: descriptor insertion,
+callback access and the absence of not-yet-created subsystem properties are visible.
+
+lifecycle/instance.ts temporarily owns the mounting Template while its constructor
+runs. A proxy callback can destroy the instance before art.template is assigned;
+teardown still clears/marks the DOM before the destroy event, with the first
+removeHtml choice. The temporary reference is released in finally. Template.init
+does not adopt or restyle a returned proxy after that callback destroys its owner.
+The caller still owns a proxy it creates. test/browser/initialization.spec.js covers
+these boundaries plus normal descriptor/static order and early native setters.
+
+player/properties.ts describes the actual installed descriptors, separately from
+installer inputs. The entry and Icons merge declaration-only interfaces with their
+classes because emitted fields would shadow installed getters or change property
+order. All subsystem assignments and mutable static assignments keep their original
+order. bootstrap/browser.ts owns global publication, style injection and the deferred
+version log; server imports do none of those browser operations.
+
+option/runtime.ts is the compatibility boundary between old external callback
+declarations and internal module views. It keeps validated merge behavior, callback
+identity and runtime receivers; it does not wrap callbacks or assert the whole player
+as the legacy declaration class. template/types.ts names the PlayerTemplate contract:
+canonical template nodes plus a native/media-like proxy. The entry makes one scoped
+assertion for caller-provided SSR/proxy inputs. This is a compatibility precondition,
+not runtime validation; no eager missing-node rejection or synthesized nodes are added.
+Template itself and query helpers keep nullable results. Complete public declaration
+generation and consumer views remain CORE-21 work.
+
+events/core-types.ts names known core/native payloads while leaving extension event
+names open. CoreEmission narrows a module's emitted names against that shared map.
+NoticeSink describes writing arbitrary notice values without pretending its getter
+returns a message. Actual Notice visibility is boolean. Internal views also retain
+undefined reads for setter-only properties and pre-metadata fullscreen, optional
+subtitle icons, HTMLElement quality labels, and raw storage values.
+
+plugins/builtins.ts now checks all five builtin hosts against the real assembled
+Artplayer and no longer casts entire factories through unknown. The source entry
+fixture checks this composition, native event payloads and property reads; ordinary
+consumer fixtures still check the separate published declarations in five modes.
 
 ## Screenshot capture (CORE-19)
 
@@ -115,8 +213,8 @@ including its timer and previous playback rate. Touch move/end/cancel, lock, pau
 source disposal and player destruction release the press. The native media element
 still performs its own defaultPlaybackRate reset on load/source replacement.
 Resource cleanup must not create a second press or overwrite a newer reentrant one.
-The typed builtin factory cast is confined to the existing JS constructor boundary;
-CORE-20 must revisit it when the full constructor host becomes typed.
+The typed constructor checks the complete builtin host in CORE-20; the former
+factory casts through unknown have been removed.
 
 Run `test/notice.test.js` and `test/fast-forward.test.js` through the Node runner;
 their matching `test/types` fixtures check source inference and retained consumers.
@@ -588,7 +686,7 @@ queries; component/types.ts defines the minimal generic host and callback shapes
 component/resources.ts owns each entry's child ResourceScope, DOM proxies and guarded
 Emitter subscriptions. control/resources.ts specializes the shared subscriptions with
 UIEvents; it does not create a second event bus. Builtins depend on these capabilities,
-not the full player class. CORE-20 still has to integrate the constructor facade.
+not the full player class. The typed entry checks that it supplies these capabilities.
 
 Control index.ts preserves routing and visibility behavior. builtins.ts preserves
 installation order and option/platform conditions. selector.ts owns item binding,
@@ -704,8 +802,8 @@ minimal option hosts and internal sync/Promise return types. builtins.ts install
 five existing builtins in their original order and reads each condition at its turn.
 It keeps the mobile/live exclusions, including no fastForward for live media. The
 constructor captures option once before builtin installation, then traverses the
-same live user-plugin array. All five builtin implementations are now TypeScript;
-their minimum-host factory casts remain confined to this constructor boundary until CORE-20.
+same live user-plugin array. All five builtin implementations are TypeScript, and
+BuiltinHost checks their combined requirements against the actual constructor host.
 
 registration.ts owns result naming and non-enumerable/non-writable/non-configurable
 registry properties. Names still prefer result.name, then factory.name, then the
@@ -983,9 +1081,8 @@ descriptors, boolean shim playing precedence, duration normalization and live la
 reads are unchanged. play/pause/playing capture the original media object; duration
 reads template.$video on each access, as before.
 
-The JS construction facade still assembles these hosts dynamically. Its complete
-static integration belongs to CORE-20; capability consumers migrate in their own
-CORE tasks. Do not assume these types already validate every third-party proxy.
+The typed construction facade checks these host requirements while retaining the
+original staged initialization. Do not assume these types validate every third-party proxy.
 Public art.video remains the original object and retains its existing declaration
 for consumer compatibility. A public proxy typing extension requires separate
 consumer checks; internal code must not use that old declaration to hide a canvas.
@@ -1117,5 +1214,5 @@ core files in docs/compiled when committing a shippable core change.
 For new utility behavior, extend the same old/new contract tests. Clearly separate
 intentional defect corrections from preserved behavior. For timers or Blob URLs,
 also identify the owner and verify cleanup in the consuming module. Remaining
-constructor, playback, setting, input and capability migrations are recorded
+public declaration convergence, accessibility and release validation are recorded
 in refactor/tasks.json and should extend this map as they land.

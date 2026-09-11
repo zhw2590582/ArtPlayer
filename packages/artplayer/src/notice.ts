@@ -2,6 +2,11 @@ import type { SubscriptionHost } from './component/resources'
 import { getScope, isClosing } from './lifecycle/instance'
 import { addClass, removeClass } from './utils'
 
+export interface NoticeSink {
+  get show(): unknown
+  set show(value: unknown)
+}
+
 interface NoticeHost extends SubscriptionHost<{ destroy: [] }> {
   constructor: { NOTICE_TIME: number }
   template: { $player: HTMLElement, $noticeInner: HTMLElement }
@@ -24,7 +29,7 @@ function cancelNotice(notice: Notice): void {
   }
 }
 
-export default class Notice {
+export default class Notice implements NoticeSink {
   declare art: NoticeHost
   declare timer: ReturnType<typeof setTimeout> | null
 

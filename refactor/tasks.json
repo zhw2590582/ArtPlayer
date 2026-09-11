@@ -1133,11 +1133,14 @@
         "CORE-18",
         "CORE-19"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "Artplayer 门面、初始化依赖与最终目录",
       "acceptance": "所有核心自有源码迁移，公开描述符/静态接口/事件差分通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-11-CORE-20-entry.md",
+        "baselines/entry-validation.json"
+      ]
     },
     {
       "id": "CORE-21",

@@ -1,4 +1,7 @@
-import { clamp, setStyle } from '../utils'
+// Frozen own-source fixture: ccf77c4e packages/artplayer/src/player/optionInit.js
+// Original file SHA-256: 9d1d9d276da2403a580498c62f947373e000d9cd6e4bef5831d272c3055b5592
+// Only the relative utils import is relocated; the function body is unchanged.
+import { clamp, setStyle } from '../../packages/artplayer/src/utils'
 
 export default function optionInit(art) {
   const {

@@ -22,6 +22,12 @@ export restrictions and shared Emitter behavior. Public property descriptors and
 default configuration are compared against the fixed published core/chapter.
 This is a targeted compatibility check, not a complete behavioral API comparison.
 
+Custom-UA SSR profiles run actual UMD/legacy bytes and direct ESM imports with no
+window/document/navigator shim. The frozen baseline's iOS/Macintosh ReferenceErrors
+are asserted only in explicit baseline mode; candidates must import successfully.
+The checks retain callback-free server imports, no UMD timers, and the browser-only
+constructor error. A negative fixture verifies the old package fails candidate mode.
+
 Public, chapter-options, chapter-exports, language and legacy-plugin consumers run with
 TS 5.9.3 (Node10, NodeNext CJS/ESM and Bundler) and TS 4.3.5 (Node10). NodeNext CJS also
 checks import-equals/require and namespaced types. PKG-CHAPTER-04 resolved the initial

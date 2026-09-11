@@ -4,7 +4,7 @@
 
 ## 现状证据
 
-- [入口](../packages/artplayer/src/index.js)顺序构造所有子系统；[player](../packages/artplayer/src/player/index.js)通过 mixin 将属性安装到 art。
+- [入口](../packages/artplayer/src/index.ts)顺序构造所有子系统；[player](../packages/artplayer/src/player/index.ts)按保留的安装顺序通过 mixin 将属性安装到 art，并在销毁后停止后续步骤。
 - [Component](../packages/artplayer/src/utils/component.ts)负责控件缓存、DOM 和监听器；[Setting](../packages/artplayer/src/setting/index.ts)还有独立的树、渲染和更新语义。
 - [Events](../packages/artplayer/src/events/index.ts)已迁移为 TS，管理 DOM 监听器和全局重绑；输入调度、内部订阅与异步请求分别通过所属模块接入实例或操作作用域。
 - [声明](../packages/artplayer/types/artplayer.d.ts)与源码独立维护；[build-ts](../scripts/build-ts.js)进行文本拼接。
@@ -13,7 +13,7 @@
 
 | 领域     | 现有文件范围                                 | 目标与迁移方式                                                               |
 | -------- | -------------------------------------------- | ---------------------------------------------------------------------------- |
-| 公共门面 | src/index.js、player/*Mix.js                 | 保留原签名和属性描述符；委托内部服务，不一次性换继承结构                     |
+| 公共门面 | src/index.ts、player/index.ts、player/*Mix.ts | 保留原签名和属性描述符；委托内部服务，不一次性换继承结构                     |
 | 配置     | option、scheme、config、默认值               | 区分用户输入与归一化配置；保持默认值、合并语义和错误时机                     |
 | 生命周期 | constructor、destroy、Events、各模块清理     | 实例资源作用域与操作资源作用域，清理恰好一次、可重入、失败后继续释放         |
 | 内部事件 | utils/emitter.js                             | typed event map、未知事件兼容扩展、原调用顺序和 ctx                          |

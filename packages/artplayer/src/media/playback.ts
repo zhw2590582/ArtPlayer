@@ -1,3 +1,6 @@
+import type { PipProperty } from '../display/types'
+import type { NoticeSink } from '../notice'
+
 export interface Position {
   readonly duration: number
   get currentTime(): number
@@ -14,13 +17,13 @@ export interface SeekMethods {
 }
 
 export interface SeekHost extends Position {
-  notice: { set show(message: string) }
+  notice: NoticeSink
   emit: (name: 'seek', currentTime: number, requestedTime: number | string) => unknown
 }
 
 export interface PlaybackNotice {
   i18n: { get: (key: string) => string }
-  notice: { set show(message: string) }
+  notice: NoticeSink
 }
 
 export interface VolumeHost extends PlaybackNotice {
@@ -30,7 +33,7 @@ export interface VolumeHost extends PlaybackNotice {
 }
 
 export type DisplayState = 'mini' | 'pip' | 'fullscreen' | 'fullscreenWeb'
-export type DisplayStates = Record<DisplayState, boolean>
+export type DisplayStates = Record<'mini' | 'fullscreenWeb', boolean> & PipProperty & { fullscreen?: boolean }
 
 export interface StateProperty {
   get state(): DisplayState | 'standard'

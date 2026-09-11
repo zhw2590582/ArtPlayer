@@ -2,6 +2,7 @@
   "extends": "./tsconfig.base.json",
   "include": [
     "test/types/*.ts",
+    "types/assets.d.ts",
     "types/option-validator.d.ts"
   ]
 }

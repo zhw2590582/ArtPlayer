@@ -26,10 +26,10 @@ export function removeConsumer(dir) {
   fs.rmSync(dir, { recursive: true, force: true })
 }
 
-export function runtimeConsumer(dir) {
+export function runtimeConsumer(dir, { baseline = false } = {}) {
   fs.copyFileSync(path.join(workspace, 'test/package/runtime.cjs'), path.join(dir, 'runtime.cjs'))
   fs.copyFileSync(path.join(workspace, 'test/contracts/emitter.js'), path.join(dir, 'emitter.mjs'))
-  writeJson(path.join(dir, 'expected.json'), { version: readJson(path.join(dir, 'node_modules/artplayer/package.json')).version })
+  writeJson(path.join(dir, 'expected.json'), { version: readJson(path.join(dir, 'node_modules/artplayer/package.json')).version, baseline })
   return JSON.parse(run(['runtime.cjs'], dir))
 }
 

@@ -4,9 +4,51 @@ import { test } from 'node:test'
 import { loadModules } from './helpers/load.js'
 
 const file = 'packages/artplayer/src/lifecycle/instance'
-const { beginLifecycle, destroyInstance, finishLifecycle, getScope, urlMix } = await loadModules({
-  ...Object.fromEntries(['beginLifecycle', 'destroyInstance', 'finishLifecycle', 'getScope'].map(name => [name, { file, name }])),
+const { beginLifecycle, destroyInstance, duringTemplateMount, finishLifecycle, getScope, urlMix } = await loadModules({
+  ...Object.fromEntries(['beginLifecycle', 'destroyInstance', 'duringTemplateMount', 'finishLifecycle', 'getScope'].map(name => [name, { file, name }])),
   urlMix: 'packages/artplayer/src/player/urlMix',
+})
+
+test('mounting template cleanup precedes destroy without exposing an early public property', () => {
+  const calls = []
+  const owner = { isDestroy: false, reset() {
+    calls.push('reset')
+  }, emit() {
+    calls.push('destroy')
+  } }
+  beginLifecycle(owner)
+  const template = { $video: {}, destroy(removeHtml) {
+    calls.push(['template', removeHtml])
+  } }
+  duringTemplateMount(owner, template, () => {
+    assert.equal(Object.hasOwn(owner, 'template'), false)
+    destroyInstance(owner, [], false, true)
+  })
+  assert.deepEqual(calls, [['template', false], 'destroy'])
+  assert(owner.isDestroy)
+  assert.equal(Object.hasOwn(owner, 'template'), false)
+})
+
+test('temporary mounting ownership is cleared after failures and completed mounting', () => {
+  for (const fail of [false, true]) {
+    let cleanups = 0
+    const owner = { isDestroy: false, reset() {}, emit() {} }
+    beginLifecycle(owner)
+    const template = { destroy() {
+      cleanups++
+    } }
+    const failure = new Error('mount failed')
+    const mount = () => duringTemplateMount(owner, template, () => {
+      if (fail)
+        throw failure
+    })
+    if (fail)
+      assert.throws(mount, error => error === failure)
+    else
+      mount()
+    destroyInstance(owner, [], true, true)
+    assert.equal(cleanups, 0)
+  }
 })
 
 test('instance teardown preserves order, public state and first-call removeHtml across reentry', () => {

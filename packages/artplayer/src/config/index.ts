@@ -1,4 +1,12 @@
-export default {
+export interface MediaConfig {
+  properties: string[]
+  methods: string[]
+  events: string[]
+  prototypes: string[]
+}
+
+// Public arrays intentionally remain mutable and retain their historical order.
+const config: MediaConfig = {
   properties: [
     'audioTracks',
     'autoplay',
@@ -79,3 +87,5 @@ export default {
     'webkitExitFullscreen',
   ],
 }
+
+export default config

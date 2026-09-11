@@ -1,4 +1,5 @@
 import type { SubscriptionHost } from '../component/resources'
+import type { NoticeSink } from '../notice'
 
 export interface ResizeEvents {
   'resize': []
@@ -13,7 +14,7 @@ export interface ResizeHost extends SubscriptionHost<ResizeEvents> {
   aspectRatio: string
   state: string
   autoSize: () => unknown
-  notice: { show: string }
+  notice: NoticeSink
   emit: (name: 'resize') => unknown
 }
 

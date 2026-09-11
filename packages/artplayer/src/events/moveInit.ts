@@ -5,6 +5,6 @@ export default function moveInit(art: MoveHost, events: Pick<PointerRegistry, 'p
   const { $player } = art.template
   events.proxy($player, 'mousemove', (event) => {
     if (!isClosing(art))
-      art.emit('mousemove', event)
+      art.emit('mousemove', event as MouseEvent)
   })
 }

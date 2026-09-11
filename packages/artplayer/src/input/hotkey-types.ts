@@ -6,8 +6,10 @@ export interface HotkeyHost extends SubscriptionHost<{ 'document:keydown': [Keyb
   template: { $player: HTMLElement }
   isFocus: boolean
   fullscreenWeb: boolean
-  backward: number
-  forward: number
+  get backward(): undefined
+  set backward(value: number)
+  get forward(): undefined
+  set forward(value: number)
   volume: number
   toggle: () => unknown
   emit: (name: 'hotkey' | 'keydown', event: KeyboardEvent) => unknown

@@ -1,15 +1,13 @@
+import type { CoreEmission } from '../../events/core-types'
+import type { NoticeSink } from '../../notice'
+
 export type MediaEventName = `video:${string}`
 export type MediaListener = (event?: unknown) => void
 
-export interface MediaEvents {
+export interface MediaEvents extends CoreEmission<MediaEventName | 'ready' | 'resize' | 'error'> {
   on: (name: MediaEventName, callback: MediaListener) => unknown
   once: (name: MediaEventName, callback: MediaListener) => unknown
   off: (name: MediaEventName, callback: MediaListener) => unknown
-  emit: {
-    (name: MediaEventName, event: Event): unknown
-    (name: 'ready' | 'resize'): unknown
-    (name: 'error', error: unknown, attempt: number): unknown
-  }
 }
 
 export interface MediaUI {
@@ -28,11 +26,12 @@ export interface MediaEventHost extends MediaEvents, MediaUI {
   isReady: boolean
   readonly playing: boolean
   url: string | null
+  get seek(): undefined
   set seek(time: number)
   play: () => unknown
   option: { url: string, loop: boolean }
   i18n: { get: (key: string) => string }
-  notice: { set show(message: string) }
+  notice: NoticeSink
   constructor: { RECONNECT_TIME_MAX: number, RECONNECT_SLEEP_TIME: number }
 }
 

@@ -1,5 +1,11 @@
+import type { CoreEvents } from './events/core-types'
+import type { RuntimeOption } from './option/runtime'
+import type { OptionInput } from './option/types'
+import type { PlayerProperties } from './player/properties'
+import type { PlayerTemplate } from './template/types'
 import validator from 'option-validator'
 import { version } from '../package.json'
+import publishBrowserEntry from './bootstrap/browser'
 import config from './config'
 import Contextmenu from './contextmenu'
 import Control from './control'
@@ -14,7 +20,7 @@ import Loading from './loading'
 import Mask from './mask'
 import Notice from './notice'
 import createDefaults from './option/defaults'
-import resolveOption from './option/resolve'
+import resolveRuntimeOption from './option/runtime'
 import Player from './player'
 import Plugins from './plugins'
 import scheme from './scheme'
@@ -27,9 +33,76 @@ import * as utils from './utils'
 import Emitter from './utils/emitter'
 
 let id = 0
-const instances = []
-export default class Artplayer extends Emitter {
-  constructor(option, readyCallback) {
+const instances: Artplayer[] = []
+// eslint-disable-next-line ts/no-unsafe-declaration-merging -- Player installs these descriptors; emitting fields would shadow them.
+interface Artplayer extends PlayerProperties {
+  constructor: typeof Artplayer
+}
+
+// eslint-disable-next-line ts/no-unsafe-declaration-merging -- The merged interface describes installed descriptors and the inherited constructor.
+class Artplayer extends Emitter<CoreEvents> {
+  declare static STYLE: string
+  declare static DEBUG: boolean
+  declare static CONTEXTMENU: boolean
+  declare static NOTICE_TIME: number
+  declare static SETTING_WIDTH: number
+  declare static SETTING_ITEM_WIDTH: number
+  declare static SETTING_ITEM_HEIGHT: number
+  declare static RESIZE_TIME: number
+  declare static SCROLL_TIME: number
+  declare static SCROLL_GAP: number
+  declare static AUTO_PLAYBACK_MAX: number
+  declare static AUTO_PLAYBACK_MIN: number
+  declare static AUTO_PLAYBACK_TIMEOUT: number
+  declare static RECONNECT_TIME_MAX: number
+  declare static RECONNECT_SLEEP_TIME: number
+  declare static CONTROL_HIDE_TIME: number
+  declare static DBCLICK_TIME: number
+  declare static DBCLICK_FULLSCREEN: boolean
+  declare static MOBILE_DBCLICK_PLAY: boolean
+  declare static MOBILE_CLICK_PLAY: boolean
+  declare static AUTO_ORIENTATION_TIME: number
+  declare static INFO_LOOP_TIME: number
+  declare static FAST_FORWARD_VALUE: number
+  declare static FAST_FORWARD_TIME: number
+  declare static TOUCH_MOVE_RATIO: number
+  declare static VOLUME_STEP: number
+  declare static SEEK_STEP: number
+  declare static PLAYBACK_RATE: number[]
+  declare static ASPECT_RATIO: string[]
+  declare static FLIP: string[]
+  declare static FULLSCREEN_WEB_IN_BODY: boolean
+  declare static LOG_VERSION: boolean
+  declare static USE_RAF: boolean
+  declare static REMOVE_SRC_WHEN_DESTROY: boolean
+
+  declare id: number
+  declare option: RuntimeOption<Artplayer>
+  declare isLock: boolean
+  declare isReady: boolean
+  declare isFocus: boolean
+  declare isInput: boolean
+  declare isRotate: boolean
+  declare isDestroy: boolean
+  declare template: PlayerTemplate<Artplayer>
+  declare events: Events
+  declare storage: Storage
+  declare icons: Icons
+  declare i18n: I18n
+  declare notice: Notice
+  declare player: Player<Artplayer>
+  declare layers: Layer
+  declare controls: Control
+  declare contextmenu: Contextmenu
+  declare subtitle: Subtitle
+  declare info: Info
+  declare loading: Loading
+  declare hotkey: Hotkey<Artplayer>
+  declare mask: Mask
+  declare setting: Setting
+  declare plugins: Plugins<Artplayer>
+
+  constructor(option: OptionInput, readyCallback?: (this: Artplayer, art: Artplayer) => unknown) {
     super()
 
     if (!utils.isBrowser) {
@@ -38,7 +111,7 @@ export default class Artplayer extends Emitter {
 
     this.id = ++id
 
-    this.option = resolveOption(option, Artplayer.option)
+    this.option = resolveRuntimeOption<Artplayer>(option, Artplayer.option)
 
     this.isLock = false
     this.isReady = false
@@ -49,22 +122,54 @@ export default class Artplayer extends Emitter {
 
     beginLifecycle(this)
     try {
-      this.template = new Template(this)
+      this.template = new Template<Artplayer>(this) as PlayerTemplate<Artplayer>
+      if (getScope(this).closed)
+        return
       this.events = new Events(this)
-      this.storage = new Storage(this)
+      if (getScope(this).closed)
+        return
+      this.storage = new Storage()
+      if (getScope(this).closed)
+        return
       this.icons = new Icons(this)
+      if (getScope(this).closed)
+        return
       this.i18n = new I18n(this)
+      if (getScope(this).closed)
+        return
       this.notice = new Notice(this)
-      this.player = new Player(this)
+      if (getScope(this).closed)
+        return
+      this.player = new Player<Artplayer>(this)
+      if (getScope(this).closed)
+        return
       this.layers = new Layer(this)
+      if (getScope(this).closed)
+        return
       this.controls = new Control(this)
+      if (getScope(this).closed)
+        return
       this.contextmenu = new Contextmenu(this)
+      if (getScope(this).closed)
+        return
       this.subtitle = new Subtitle(this)
+      if (getScope(this).closed)
+        return
       this.info = new Info(this)
+      if (getScope(this).closed)
+        return
       this.loading = new Loading(this)
-      this.hotkey = new Hotkey(this)
+      if (getScope(this).closed)
+        return
+      this.hotkey = new Hotkey<Artplayer>(this)
+      if (getScope(this).closed)
+        return
       this.mask = new Mask(this)
+      if (getScope(this).closed)
+        return
       this.setting = new Setting(this)
+      if (getScope(this).closed)
+        return
       this.plugins = new Plugins(this)
 
       if (getScope(this).closed)
@@ -76,7 +181,7 @@ export default class Artplayer extends Emitter {
 
       if (Artplayer.DEBUG) {
       // eslint-disable-next-line no-console
-        const log = msg => console.log(`[ART.${this.id}] -> ${msg}`)
+        const log = (msg: string) => console.log(`[ART.${this.id}] -> ${msg}`)
         log(`Version@${Artplayer.version}`)
         for (let index = 0; index < config.events.length; index++) {
           this.on(`video:${config.events[index]}`, event => log(`Event@${event.type}`))
@@ -194,19 +299,6 @@ Artplayer.LOG_VERSION = true
 Artplayer.USE_RAF = false
 Artplayer.REMOVE_SRC_WHEN_DESTROY = true
 
-if (utils.isBrowser) {
-  window.Artplayer = Artplayer
-  utils.setStyleText('artplayer-style', style)
+publishBrowserEntry(Artplayer, style)
 
-  setTimeout(() => {
-    if (Artplayer.LOG_VERSION) {
-      // eslint-disable-next-line no-console
-      console.log(
-        `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
-        'color: #fff; background: #5f5f5f',
-        'color: #fff; background: #4bc729',
-        '',
-      )
-    }
-  }, 100)
-}
+export default Artplayer

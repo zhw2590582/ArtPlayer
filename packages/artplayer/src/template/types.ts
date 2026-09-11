@@ -1,3 +1,16 @@
+import type { MediaSurface } from '../media/types'
+import type Template from '../template'
+
+// Consumers of the canonical template require these nodes. SSR callers supply
+// the same structure and proxy callers supply a media-like element; neither
+// contract is proven by a DOM query. Keep this assertion at the entry boundary.
+// Template itself and all public query helpers retain nullable query results.
+type RequiredPlayerNode = Exclude<keyof TemplateNodes, '$danmuku' | '$controlsCenter' | '$notice' | '$mask' | '$info'>
+
+export type PlayerTemplate<Host extends TemplateHost<Host>> = Template<Host> & {
+  [Name in RequiredPlayerNode]: NonNullable<TemplateNodes[Name]>
+} & { $video: MediaSurface, $mini?: HTMLElement }
+
 export interface TemplateHost<Host> {
   id: number
   option: {

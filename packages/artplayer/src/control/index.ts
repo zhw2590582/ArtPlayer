@@ -18,6 +18,8 @@ import { checkSelector, renderSelector } from './selector'
 export default class Control extends Component<ControlHost> {
   declare isHover: boolean
   declare timer: number
+  declare setting?: HTMLDivElement
+  declare thumbnails?: HTMLDivElement
 
   constructor(art: ControlHost) {
     super(art)

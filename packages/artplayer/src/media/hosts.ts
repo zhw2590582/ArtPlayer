@@ -1,3 +1,4 @@
+import type { NoticeSink } from '../notice'
 import type { ResolvedOption } from '../option/types'
 import type { PlaybackMethods } from './types'
 
@@ -7,7 +8,7 @@ export interface MediaHost<Media> {
 
 interface NoticeHost {
   i18n: { get: (key: string) => string }
-  notice: { get show(): unknown, set show(value: string | Error) }
+  notice: NoticeSink
   emit: (name: 'play' | 'pause') => unknown
 }
 

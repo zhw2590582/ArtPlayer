@@ -37,7 +37,7 @@ export function checkSelector(target?: SelectorItem): void {
     const item = target.$control_option![index]!
     item.default = item === target
     if (item.default)
-      inverseClass(item.$control_item, 'art-current')
+      inverseClass(item.$control_item!, 'art-current')
   }
 }
 
@@ -69,7 +69,7 @@ export function renderSelector(art: ControlHost, check: (target?: SelectorItem) 
     if (scope.closed)
       return
     const path = getComposedPath(event)
-    const item = option.selector!.find(item => path.includes(item.$control_item))
+    const item = option.selector!.find(item => path.includes(item.$control_item!))
     if (!item)
       return
     const current = ++generation

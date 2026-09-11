@@ -62,6 +62,7 @@ for (const extension of ['mp4', 'webm']) {
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.mp4': 'video/mp4', '.webm': 'video/webm', '.vtt': 'text/vtt', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg' }
 add('/test/declaration-cues.vtt', fs.readFileSync(path.join(workspace, 'test/browser/media/declaration-cues.vtt')), { kind: 'test-subtitles', file: 'test/browser/media/declaration-cues.vtt' })
 add('/test/thumbnail-grid.svg', fs.readFileSync(path.join(workspace, 'test/browser/media/thumbnail-grid.svg')), { kind: 'test-thumbnail-grid', file: 'test/browser/media/thumbnail-grid.svg' })
+add('/test/legacy-safe-area.js', fs.readFileSync(path.join(workspace, 'test/helpers/legacy-safe-area.js')), { kind: 'frozen-own-source', file: 'test/helpers/legacy-safe-area.js', commit: 'ccf77c4e' })
 function send(req, res, bytes, filename) {
   res.setHeader('Content-Type', mime[path.extname(filename)] || 'application/octet-stream')
   res.setHeader('Cache-Control', 'no-store')

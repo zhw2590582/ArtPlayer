@@ -1,4 +1,7 @@
-import { def } from '../utils'
+// Frozen own-source fixture: ccf77c4e packages/artplayer/src/player/airplayMix.js
+// Original file SHA-256: b9ce49489e75045b6a1df4d8ed28f123c1b105ac4c04fefaabcffe4353ad004d
+// Only the relative utils import is relocated; the function body is unchanged.
+import { def } from '../../packages/artplayer/src/utils'
 
 export default function airplayMix(art) {
   const {

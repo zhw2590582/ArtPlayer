@@ -1,10 +1,8 @@
-import type { PluginFactory, PluginHost } from '../../packages/artplayer/src/plugins/types'
+import type Artplayer from '../../packages/artplayer/src'
+import type { PluginFactory } from '../../packages/artplayer/src/plugins/types'
 import Plugins from '../../packages/artplayer/src/plugins'
 
-interface Host extends PluginHost<Host> {
-  id: number
-}
-declare const host: Host
+declare const host: Artplayer
 const registry = new Plugins(host)
 const sync: typeof registry = registry.add(function (art) {
   const id: number = this.id + art.id
@@ -12,7 +10,7 @@ const sync: typeof registry = registry.add(function (art) {
 })
 const asyncResult: Promise<typeof registry> = registry.add(async () => ({ name: 'async' }))
 const mixed: typeof registry | Promise<typeof registry> = registry.add(() => Math.random() ? Promise.resolve(1) : 1)
-const untyped: PluginFactory<Host> = () => null
+const untyped: PluginFactory<Artplayer> = () => null
 const unknown: typeof registry | Promise<typeof registry> = registry.add(untyped)
 // @ts-expect-error Synchronous plugins do not always return a Promise.
 const bad: Promise<typeof registry> = registry.add(() => ({ name: 'sync' }))

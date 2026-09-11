@@ -1,10 +1,11 @@
+import type { BuiltinHost } from './builtins'
 import type { PluginFactory, PluginHost, PluginRegistration } from './types'
 import { isClosing } from '../lifecycle/instance'
 import { errorHandle } from '../utils/error'
 import installBuiltins from './builtins'
 import registerPlugin from './registration'
 
-export default class Plugins<Host extends PluginHost<Host>> {
+export default class Plugins<Host extends PluginHost<Host> & BuiltinHost> {
   declare art: Host
   declare id: number
 

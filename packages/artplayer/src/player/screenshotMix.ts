@@ -1,4 +1,5 @@
 import type { CaptureMedia } from '../capture/frame'
+import type { NoticeSink } from '../notice'
 import { captureBlobUrl, drawFrame } from '../capture/frame'
 import { isClosing } from '../lifecycle/instance'
 import { captureSource } from '../source/operation'
@@ -6,7 +7,7 @@ import { def, download, secondToTime } from '../utils'
 
 export interface ScreenshotHost {
   template: { $video: CaptureMedia }
-  notice: { set show(value: unknown) }
+  notice: NoticeSink
   getDataURL: () => Promise<string>
   emit: (name: 'screenshot', dataUri: string) => unknown
 }

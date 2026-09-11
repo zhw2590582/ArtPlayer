@@ -29,14 +29,18 @@ export async function loadModules(exports, root = workspace) {
   return importCode(outputFiles[0].contents)
 }
 
-export async function loadPackage(name, root = workspace) {
+export async function compilePackage(name, format = 'es', root = workspace) {
   const project = path.join(root, 'packages', name)
-  const config = getViteBuildConfig({ entry: getEntryFile(project), name: getGlobalName(name), format: 'es', fileName: 'index.js', minify: false })
+  const config = getViteBuildConfig({ entry: getEntryFile(project), name: getGlobalName(name), format, fileName: 'index.js', minify: false })
   config.build.write = false
   const result = await viteBuild({ root: project, ...config })
   const chunks = (Array.isArray(result) ? result : [result]).flatMap(item => item.output).filter(item => item.type === 'chunk')
   assert.equal(chunks.length, 1, 'Source fixture loader requires one self-contained JS chunk')
-  return importCode(chunks[0].code)
+  return chunks[0].code
+}
+
+export async function loadPackage(name, root = workspace) {
+  return importCode(await compilePackage(name, 'es', root))
 }
 
 function commonJs(code, globals = {}) {

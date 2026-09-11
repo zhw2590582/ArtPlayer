@@ -1,5 +1,6 @@
 import type { SettingKind } from './selection'
 import type { SettingItem, SettingManager, SettingRange } from './types'
+import { appendElement } from '../component/dom'
 import { isClosing } from '../lifecycle/instance'
 import { timeout } from '../lifecycle/resources'
 import { addClass, append, def, has, inverseClass, setStyle } from '../utils'
@@ -38,7 +39,7 @@ export function createSettingHeader(setting: SettingManager, item: SettingItem):
   setStyle($item, 'height', `${SETTING_ITEM_HEIGHT}px`)
   addClass($item, 'art-setting-item')
   addClass($item, 'art-setting-item-back')
-  const $left = append($item, '<div class="art-setting-item-left"></div>')
+  const $left = appendElement($item, '<div class="art-setting-item-left"></div>')
   const $icon = document.createElement('div')
   addClass($icon, 'art-setting-item-left-icon')
   append($icon, arrowLeft)
@@ -88,8 +89,8 @@ export function createSettingItem(setting: SettingManager, item: SettingItem, is
     if (!current())
       return
 
-    const $left = append($item, '<div class="art-setting-item-left"></div>')
-    const $right = append($item, '<div class="art-setting-item-right"></div>')
+    const $left = appendElement($item, '<div class="art-setting-item-left"></div>')
+    const $right = appendElement($item, '<div class="art-setting-item-right"></div>')
 
     const $icon = document.createElement('div')
     addClass($icon, 'art-setting-item-left-icon')
@@ -149,8 +150,8 @@ export function createSettingItem(setting: SettingManager, item: SettingItem, is
       case 'switch': {
         const $switch = document.createElement('div')
         addClass($switch, 'art-setting-item-right-icon')
-        const $switchOn = append($switch, icons.switchOn)
-        const $switchOff = append($switch, icons.switchOff)
+        const $switchOn = appendElement($switch, icons.switchOn)
+        const $switchOff = appendElement($switch, icons.switchOff)
         const initialSwitch = item.switch
         if (!current())
           return
@@ -308,7 +309,7 @@ export function renderSetting(setting: SettingManager, option = setting.option):
   const restoreNavigation = () => {
     setting.active = previous
     if (previous && setting.cache.has(previous))
-      inverseClass(setting.cache.get(previous), 'art-current')
+      inverseClass(setting.cache.get(previous)!, 'art-current')
     for (const [key, value, priority] of previousLayout)
       setting.$parent.style.setProperty(key, value, priority)
   }

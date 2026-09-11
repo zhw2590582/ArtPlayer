@@ -24,7 +24,8 @@ export interface ResumePromptHost extends ComponentHost, SubscriptionHost<Prompt
   i18n: { get: (key: string) => string }
   storage: PlaybackStorage
   option: { id?: string, url: string }
-  seek: number
+  get seek(): undefined
+  set seek(value: number)
   play: () => unknown
 }
 

@@ -1,6 +1,7 @@
 import type { Subtitle as SubtitleInput } from '../../types/subtitle'
 import type { ComponentHost } from '../component/types'
 import type { OptionalMediaCapabilities } from '../media/types'
+import type { NoticeSink } from '../notice'
 
 export type SubtitleOption = Required<SubtitleInput>
 
@@ -20,7 +21,7 @@ export interface SubtitleHost extends ComponentHost {
   proxy: ComponentHost['events']['proxy']
   on: (name: 'video:timeupdate', callback: () => void) => unknown
   off: (name: 'video:timeupdate', callback: () => void) => unknown
-  notice: { set show(value: unknown) }
+  notice: NoticeSink
   i18n: { get: (key: string) => string }
 }
 
@@ -38,7 +39,7 @@ export interface SubtitleOffsetHost {
   template: { $track?: SubtitleTrack | null }
   subtitle: { readonly cues: SubtitleCue[], update: () => void }
   readonly duration: number
-  notice: { set show(value: string) }
+  notice: NoticeSink
   i18n: { get: (key: string) => string }
   emit: (name: 'subtitleOffset', value: number) => unknown
 }

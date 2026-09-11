@@ -111,3 +111,10 @@
 | BASE-LIFE-43 | resolved / 已复现 | Replacing a media source revokes a caller-owned Blob URL still in use | CORE-19 |
 | BASE-LIFE-44 | resolved / 已复现 | Native quality restoration can settle at a different position after its first seek | CORE-19 |
 | BASE-ENV-01 | open / 已复现 | Windows WebKit native Blob video samples lack decoding support; Apple-device validation remains outstanding | REL-03, REVIEW-02 |
+| BASE-ENV-02 | resolved / 已复现 | Custom iOS or Macintosh user agents dereference absent browser globals during SSR import | CORE-20 |
+| BASE-LIFE-45 | resolved / 已复现 | Previous workspace safe-area measurement leaks its probe when native style access fails | CORE-20 |
+| BASE-ENV-03 | resolved / 已复现 | Fallback event-path utilities dereference absent window in server environments | CORE-20 |
+| BASE-LIFE-46 | resolved / 已复现 | Option initialization continues native, style and source writes after reentrant destruction | CORE-20 |
+| BASE-LIFE-47 | resolved / 已复现 | AirPlay methods can call a picker or publish events and notices after destruction | CORE-20 |
+| BASE-LIFE-48 | resolved / 已复现 | Proxy-time destruction cannot clean a template before its public assignment | CORE-20 |
+| BASE-LIFE-49 | resolved / 已复现 | Constructor and Player initialization continue after a callback destroys the instance | CORE-20 |

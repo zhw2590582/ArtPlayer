@@ -1,5 +1,5 @@
 import type { TemplateHost, TemplateNodes } from './template/types'
-import { ownContainer } from './lifecycle/instance'
+import { duringTemplateMount, isClosing, ownContainer } from './lifecycle/instance'
 import captureTemplate from './lifecycle/template-rollback'
 import html from './template/html'
 import bindNodes from './template/nodes'
@@ -56,8 +56,10 @@ export default class Template<Host extends TemplateHost<Host>> implements Templa
 
     this.query = this.query.bind(this)
     ownContainer(art, this.$container, captureTemplate(this.$container))
-    this.$container.dataset.artId = String(art.id)
-    this.init()
+    duringTemplateMount(art, this, () => {
+      this.$container.dataset.artId = String(art.id)
+      this.init()
+    })
   }
 
   static get html(): string {
@@ -79,18 +81,20 @@ export default class Template<Host extends TemplateHost<Host>> implements Templa
 
     if (option.proxy) {
       const video = option.proxy.call(this.art, this.art)
+      if (isClosing(this.art))
+        return
       assertProxy(video)
-      replaceElement(video, this.$video)
+      replaceElement(video, this.$video!)
       video.className = 'art-video'
       this.$video = video
     }
 
     if (option.backdrop) {
-      addClass(this.$player, 'art-backdrop')
+      addClass(this.$player!, 'art-backdrop')
     }
 
     if (isMobile) {
-      addClass(this.$player, 'art-mobile')
+      addClass(this.$player!, 'art-mobile')
     }
   }
 
@@ -99,7 +103,7 @@ export default class Template<Host extends TemplateHost<Host>> implements Templa
       this.$container.innerHTML = ''
     }
     else {
-      addClass(this.$player, 'art-destroy')
+      addClass(this.$player!, 'art-destroy')
     }
   }
 }

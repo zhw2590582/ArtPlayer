@@ -14,6 +14,7 @@ const vm = require('node:vm');
     checks.push(id)
   }
   const root = __dirname
+  const expected = JSON.parse(fs.readFileSync(path.join(root, 'expected.json')))
   const load = relative => fs.readFileSync(path.join(root, 'node_modules', relative), 'utf8')
   const core = require('artplayer')
   const chapter = require('artplayer-plugin-chapter')
@@ -61,6 +62,66 @@ const vm = require('node:vm');
     }
   }
   check('SSR.constructor-browser-only', observations.constructorErrors.length === 6)
+  observations.customUA = []
+  const userAgents = ['', 'Android Chrome', 'iPhone Safari', 'Macintosh Safari']
+  for (const filename of ['artplayer.js', 'artplayer.legacy.js']) {
+    for (const userAgent of userAgents) {
+      const module = { exports: {} }
+      let timers = 0
+      const context = { module, exports: module.exports, CUSTOM_USER_AGENT: userAgent, setTimeout() {
+        timers++
+      } }
+      const historicalFailure = expected.baseline && /^(?:iPhone|Macintosh)/.test(userAgent)
+      const evaluate = () => vm.runInNewContext(load(`artplayer/dist/${filename}`), context, { timeout: 2000 })
+      if (historicalFailure) {
+        assert.throws(evaluate, error => error.name === 'ReferenceError')
+      }
+      else {
+        evaluate()
+        assert.equal(module.exports.utils.userAgent, userAgent)
+        assert.equal(module.exports.utils.isBrowser, false)
+        assert.equal(module.exports.instances.length, 0)
+        assert.throws(() => Reflect.construct(module.exports, [{}]), error => error.message === 'Artplayer can only be used in the browser environment')
+      }
+      assert.equal(timers, 0)
+      observations.customUA.push({ filename, userAgent, historicalFailure: !!historicalFailure, timers })
+    }
+  }
+  check('SSR.custom-ua-umd-legacy', observations.customUA.length === 8)
+  const userAgentDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'CUSTOM_USER_AGENT')
+  const navigatorDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'navigator')
+  try {
+    // Node exposes navigator in newer versions; this profile intentionally checks
+    // server imports without either browser globals or a navigator shim.
+    assert(delete globalThis.navigator)
+    for (const userAgent of userAgents) {
+      globalThis.CUSTOM_USER_AGENT = userAgent
+      const url = pathToFileURL(path.join(root, 'node_modules/artplayer/dist/artplayer.mjs'))
+      url.searchParams.set('custom-user-agent', userAgent)
+      const historicalFailure = expected.baseline && /^(?:iPhone|Macintosh)/.test(userAgent)
+      if (historicalFailure) {
+        await assert.rejects(import(url.href), error => error.name === 'ReferenceError')
+      }
+      else {
+        const { default: Player } = await import(url.href)
+        assert.equal(Player.utils.userAgent, userAgent)
+        assert.equal(Player.utils.isBrowser, false)
+        assert.equal(Player.instances.length, 0)
+      }
+      observations.customUA.push({ filename: 'artplayer.mjs', userAgent, historicalFailure: !!historicalFailure })
+    }
+  }
+  finally {
+    if (userAgentDescriptor)
+      Object.defineProperty(globalThis, 'CUSTOM_USER_AGENT', userAgentDescriptor)
+    else
+      delete globalThis.CUSTOM_USER_AGENT
+    if (navigatorDescriptor)
+      Object.defineProperty(globalThis, 'navigator', navigatorDescriptor)
+    else
+      delete globalThis.navigator
+  }
+  check('SSR.custom-ua-esm', observations.customUA.length === 12)
   observations.languages = []
   const languages = fs.readdirSync(path.join(root, 'node_modules/artplayer/dist/i18n')).filter(file => file.endsWith('.mjs')).map(file => file.slice(0, -4)).sort()
   assert.deepEqual(languages, ['ar', 'cs', 'es', 'fa', 'fr', 'id', 'pl', 'ru', 'tr', 'vi', 'zh-tw'])

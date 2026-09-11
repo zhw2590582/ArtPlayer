@@ -7,7 +7,8 @@ export interface ProgressPositionHost {
   isRotate: boolean
   top: number
   height: number
-  seek: number | string
+  get seek(): undefined
+  set seek(value: number | string)
   emit: (name: 'setBar', kind: 'played', percentage: number, event: ProgressEvent) => unknown
 }
 

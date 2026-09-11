@@ -155,7 +155,7 @@ export function updateSetting(setting: SettingManager, target: SettingItem): Set
           if (rendered) {
             setting.active = previous
             if (previous && setting.cache.has(previous))
-              inverseClass(setting.cache.get(previous), 'art-current')
+              inverseClass(setting.cache.get(previous)!, 'art-current')
             for (const [key, value, priority] of layout)
               setting.$parent.style.setProperty(key, value, priority)
           }

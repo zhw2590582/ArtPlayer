@@ -37,7 +37,7 @@ export interface SettingEvents {
   'blur': []
   'focus': [event: Event]
   'resize': []
-  'video:ratechange': []
+  'video:ratechange': [Event]
   'aspectRatio': [value: string]
   'flip': [value: string]
   'subtitleOffset': [value: number]
@@ -48,7 +48,7 @@ export interface SettingHost extends ComponentHost, SubscriptionHost<SettingEven
   controls: { setting?: HTMLElement }
   option: { setting: boolean, settings: SettingItem[], playbackRate: boolean, aspectRatio: boolean, flip: boolean, subtitleOffset: boolean }
   constructor: { SETTING_WIDTH: number, SETTING_ITEM_HEIGHT: number, SETTING_ITEM_WIDTH: number, PLAYBACK_RATE: number[], ASPECT_RATIO: string[], FLIP: string[] }
-  icons: Record<'arrowLeft' | 'arrowRight' | 'config' | 'check' | 'switchOn' | 'switchOff' | 'playbackRate' | 'aspectRatio' | 'flip' | 'subtitle', HTMLElement>
+  icons: Record<'arrowLeft' | 'arrowRight' | 'config' | 'check' | 'switchOn' | 'switchOff' | 'playbackRate' | 'aspectRatio' | 'flip', HTMLElement> & { subtitle?: HTMLElement }
   proxy: ComponentHost['events']['proxy']
   i18n: { get: (key: string) => string }
   setting: SettingManager

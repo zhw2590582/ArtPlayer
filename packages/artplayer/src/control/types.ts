@@ -1,5 +1,6 @@
 import type { SubscriptionHost } from '../component/resources'
 import type { ComponentHost, EntryInput, EntryOption } from '../component/types'
+import type { PipProperty } from '../display/types'
 
 export interface UIEvents {
   'mousemove': [MouseEvent]
@@ -27,11 +28,11 @@ export interface UIEvents {
   'resize': []
 }
 
-export interface QualityItem { html: string, url: string, default?: boolean }
+export interface QualityItem { html: string | HTMLElement, url: string, default?: boolean }
 
 type IconName = 'play' | 'pause' | 'volume' | 'volumeClose' | 'fullscreenOn' | 'fullscreenOff' | 'fullscreenWebOn' | 'fullscreenWebOff' | 'pip' | 'setting' | 'screenshot' | 'airplay'
 
-export interface ControlHost extends ComponentHost, SubscriptionHost<UIEvents> {
+export interface ControlHost extends ComponentHost, SubscriptionHost<UIEvents>, PipProperty {
   template: {
     $player: HTMLDivElement
     $bottom: HTMLDivElement
@@ -67,10 +68,11 @@ export interface ControlHost extends ComponentHost, SubscriptionHost<UIEvents> {
   loaded: number
   top: number
   height: number
-  fullscreen: boolean
+  fullscreen?: boolean
   fullscreenWeb: boolean
-  pip: boolean
+  get seek(): undefined
   set seek(second: number)
+  get quality(): undefined
   set quality(value: QualityItem[])
   play: () => unknown
   pause: () => unknown

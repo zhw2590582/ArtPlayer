@@ -87,7 +87,7 @@ export async function checkPackages({ release = false } = {}) {
   const baseline = await publishedConsumer()
   const installed = consumerDirectory()
   try {
-    const oldRuntime = runtimeConsumer(baseline.dir)
+    const oldRuntime = runtimeConsumer(baseline.dir, { baseline: true })
     const packages = []
     for (const name of names) {
       const archive = path.join(output, `${name}.tgz`)

@@ -5,7 +5,7 @@ import { isClosing } from '../../lifecycle/instance'
 export type PlaybackTimes = Record<string, number>
 
 export interface PlaybackStorage {
-  get: (key: 'times') => PlaybackTimes | null | undefined
+  get: (key: 'times') => unknown
   set: (key: 'times', value: PlaybackTimes) => void
   del: (key: 'times') => void
 }
@@ -19,7 +19,9 @@ export interface PlaybackRecordHost extends SubscriptionHost<{ 'video:timeupdate
 }
 
 export function readTimes(storage: PlaybackStorage): PlaybackTimes {
-  return storage.get('times') || {}
+  // Historical storage is unvalidated JSON. Keep its truthy fallback and localize
+  // the legacy record assumption to this consumer, rather than all Storage reads.
+  return (storage.get('times') || {}) as PlaybackTimes
 }
 
 export function installPlaybackRecords(art: PlaybackRecordHost): void {

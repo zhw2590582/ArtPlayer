@@ -221,6 +221,44 @@ function requireOptionValidator() {
 var optionValidatorExports = requireOptionValidator();
 const validator = /* @__PURE__ */ getDefaultExportFromCjs(optionValidatorExports);
 const version$1 = "5.4.1";
+function setStyleText(id2, style) {
+  let $style = document.getElementById(id2);
+  if (!$style) {
+    $style = document.createElement("style");
+    $style.id = id2;
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.head.appendChild($style);
+      });
+    } else {
+      (document.head || document.documentElement).appendChild($style);
+    }
+  }
+  $style.textContent = style;
+}
+const customAgent = globalThis.CUSTOM_USER_AGENT;
+const userAgent = customAgent ?? (typeof navigator === "undefined" ? "" : navigator.userAgent);
+const isSafari = /^(?:(?!chrome|android).)*safari/i.test(userAgent);
+const isIOS = /iPad|iPhone|iPod/i.test(userAgent) && (typeof window === "undefined" || !window.MSStream);
+const isIOS13 = isIOS || userAgent.includes("Macintosh") && typeof navigator !== "undefined" && navigator.maxTouchPoints >= 1;
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || isIOS13;
+const isBrowser = typeof window !== "undefined" && typeof document !== "undefined";
+function publishBrowserEntry(Artplayer2, style) {
+  if (!isBrowser)
+    return;
+  window.Artplayer = Artplayer2;
+  setStyleText("artplayer-style", style);
+  setTimeout(() => {
+    if (Artplayer2.LOG_VERSION) {
+      console.log(
+        `%c ArtPlayer %c ${Artplayer2.version} %c https://artplayer.org`,
+        "color: #fff; background: #5f5f5f",
+        "color: #fff; background: #4bc729",
+        ""
+      );
+    }
+  }, 100);
+}
 const config$1 = {
   properties: [
     "audioTracks",
@@ -387,6 +425,16 @@ function isClosing(owner) {
   const state2 = stateOf$1(owner);
   return state2.destroying || state2.scope.closed;
 }
+function duringTemplateMount(owner, template, initialize) {
+  const state2 = stateOf$1(owner);
+  const previous = state2.mountingTemplate;
+  state2.mountingTemplate = template;
+  try {
+    initialize();
+  } finally {
+    state2.mountingTemplate = previous;
+  }
+}
 function ownContainer(owner, container, rollback) {
   const current2 = containers.get(container);
   if (current2 && current2 !== owner)
@@ -420,7 +468,7 @@ function destroyInstance(owner, instances2, removeHtml, removeSource, failed = f
   if (removeSource && owner.template?.$video)
     attempt(() => owner.reset());
   attempt(() => state2.scope.dispose());
-  attempt(() => owner.template?.destroy(removeHtml));
+  attempt(() => (owner.template || state2.mountingTemplate)?.destroy(removeHtml));
   const index = instances2.indexOf(owner);
   if (index !== -1)
     instances2.splice(index, 1);
@@ -490,12 +538,122 @@ function controlEvents(art, element) {
     proxy: (target, name, callback) => proxyEntry(art, element, target, name, callback)
   };
 }
-const userAgent = globalThis?.CUSTOM_USER_AGENT ?? (typeof navigator !== "undefined" ? navigator.userAgent : "");
-const isSafari = /^(?:(?!chrome|android).)*safari/i.test(userAgent);
-const isIOS = /iPad|iPhone|iPod/i.test(userAgent) && !window.MSStream;
-const isIOS13 = isIOS || userAgent.includes("Macintosh") && navigator.maxTouchPoints >= 1;
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || isIOS13;
-const isBrowser = typeof window !== "undefined" && typeof document !== "undefined";
+function getComposedPath(event) {
+  if (event.composedPath)
+    return event.composedPath();
+  const path = [];
+  let node = event.target;
+  while (node) {
+    path.push(node);
+    node = node.parentNode ?? null;
+  }
+  if (typeof window !== "undefined" && !path.includes(window))
+    path.push(window);
+  return path;
+}
+function includeFromEvent(event, target) {
+  return getComposedPath(event).includes(target);
+}
+function supportsFlex() {
+  const div = document.createElement("div");
+  div.style.display = "flex";
+  return div.style.display === "flex";
+}
+function getRect(el) {
+  return el.getBoundingClientRect();
+}
+function isInViewport(el, offset = 0) {
+  const rect = el.getBoundingClientRect();
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+  const vertInView = rect.top - offset <= windowHeight && rect.top + rect.height + offset >= 0;
+  const horInView = rect.left - offset <= windowWidth + offset && rect.left + rect.width + offset >= 0;
+  return vertInView && horInView;
+}
+function getSafeAreaInsets() {
+  const div = document.createElement("div");
+  div.style.cssText = "position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);pointer-events:none;visibility:hidden;";
+  try {
+    document.body.appendChild(div);
+    const style = getComputedStyle(div);
+    return {
+      top: Number.parseFloat(style.top) || 0,
+      right: Number.parseFloat(style.right) || 0,
+      bottom: Number.parseFloat(style.bottom) || 0,
+      left: Number.parseFloat(style.left) || 0
+    };
+  } finally {
+    div.remove();
+  }
+}
+function query(selector, parent = document) {
+  return parent.querySelector(selector);
+}
+function queryAll(selector, parent = document) {
+  return Array.from(parent.querySelectorAll(selector));
+}
+function addClass(target, className2) {
+  return target.classList.add(className2);
+}
+function removeClass(target, className2) {
+  return target.classList.remove(className2);
+}
+function hasClass(target, className2) {
+  return target.classList.contains(className2);
+}
+function append(parent, child) {
+  if (child instanceof Element) {
+    parent.appendChild(child);
+  } else {
+    parent.insertAdjacentHTML("beforeend", String(child));
+  }
+  return parent.lastElementChild || parent.lastChild;
+}
+function remove(child) {
+  return child.parentNode.removeChild(child);
+}
+function siblings(target) {
+  return Array.from(target.parentElement.children).filter((item) => item !== target);
+}
+function inverseClass(target, className2) {
+  siblings(target).forEach((item) => removeClass(item, className2));
+  addClass(target, className2);
+}
+function replaceElement(newChild, oldChild) {
+  oldChild.parentNode.replaceChild(newChild, oldChild);
+  return newChild;
+}
+function createElement(tag) {
+  return document.createElement(tag);
+}
+function tooltip(target, msg, pos = "top") {
+  if (isMobile)
+    return;
+  target.setAttribute("aria-label", msg);
+  addClass(target, "hint--rounded");
+  addClass(target, `hint--${pos}`);
+}
+function getIcon(key = "", html2 = "") {
+  const icon = createElement("i");
+  addClass(icon, "art-icon");
+  addClass(icon, `art-icon-${key}`);
+  append(icon, html2);
+  return icon;
+}
+function setStyle(element, key, value) {
+  const style = element.style;
+  style[key] = value;
+  return element;
+}
+function setStyles(element, styles) {
+  for (const key in styles)
+    setStyle(element, key, styles[key]);
+  return element;
+}
+function getStyle(element, key, numberType = true) {
+  const value = window.getComputedStyle(element, null).getPropertyValue(key);
+  return numberType ? Number.parseFloat(value) : value;
+}
 function requestImage(url, scale, owner) {
   return new Promise((resolve, reject) => {
     const request = owner ? owner.child() : new ResourceScope();
@@ -621,136 +779,6 @@ function loadImg(url, scale) {
 }
 function loadThumbnailImage(url, scale, owner) {
   return requestImage(url, scale, owner);
-}
-function setStyleText(id2, style) {
-  let $style = document.getElementById(id2);
-  if (!$style) {
-    $style = document.createElement("style");
-    $style.id = id2;
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", () => {
-        document.head.appendChild($style);
-      });
-    } else {
-      (document.head || document.documentElement).appendChild($style);
-    }
-  }
-  $style.textContent = style;
-}
-function query(selector, parent = document) {
-  return parent.querySelector(selector);
-}
-function queryAll(selector, parent = document) {
-  return Array.from(parent.querySelectorAll(selector));
-}
-function addClass(target, className2) {
-  return target.classList.add(className2);
-}
-function removeClass(target, className2) {
-  return target.classList.remove(className2);
-}
-function hasClass(target, className2) {
-  return target.classList.contains(className2);
-}
-function append(parent, child) {
-  if (child instanceof Element) {
-    parent.appendChild(child);
-  } else {
-    parent.insertAdjacentHTML("beforeend", String(child));
-  }
-  return parent.lastElementChild || parent.lastChild;
-}
-function remove(child) {
-  return child.parentNode.removeChild(child);
-}
-function setStyle(element, key, value) {
-  element.style[key] = value;
-  return element;
-}
-function setStyles(element, styles) {
-  for (const key in styles) {
-    setStyle(element, key, styles[key]);
-  }
-  return element;
-}
-function getStyle(element, key, numberType = true) {
-  const value = window.getComputedStyle(element, null).getPropertyValue(key);
-  return numberType ? Number.parseFloat(value) : value;
-}
-function siblings(target) {
-  return Array.from(target.parentElement.children).filter((item) => item !== target);
-}
-function inverseClass(target, className2) {
-  siblings(target).forEach((item) => removeClass(item, className2));
-  addClass(target, className2);
-}
-function tooltip(target, msg, pos = "top") {
-  if (isMobile)
-    return;
-  target.setAttribute("aria-label", msg);
-  addClass(target, "hint--rounded");
-  addClass(target, `hint--${pos}`);
-}
-function isInViewport(el, offset = 0) {
-  const rect = el.getBoundingClientRect();
-  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-  const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-  const vertInView = rect.top - offset <= windowHeight && rect.top + rect.height + offset >= 0;
-  const horInView = rect.left - offset <= windowWidth + offset && rect.left + rect.width + offset >= 0;
-  return vertInView && horInView;
-}
-function includeFromEvent(event, target) {
-  return getComposedPath(event).includes(target);
-}
-function replaceElement(newChild, oldChild) {
-  oldChild.parentNode.replaceChild(newChild, oldChild);
-  return newChild;
-}
-function createElement(tag) {
-  return document.createElement(tag);
-}
-function getIcon(key = "", html2 = "") {
-  const icon = createElement("i");
-  addClass(icon, "art-icon");
-  addClass(icon, `art-icon-${key}`);
-  append(icon, html2);
-  return icon;
-}
-function supportsFlex() {
-  const div = document.createElement("div");
-  div.style.display = "flex";
-  return div.style.display === "flex";
-}
-function getRect(el) {
-  return el.getBoundingClientRect();
-}
-function getComposedPath(event) {
-  if (event.composedPath)
-    return event.composedPath();
-  const path = [];
-  let node = event.target;
-  while (node) {
-    path.push(node);
-    node = node.parentNode;
-  }
-  if (!path.includes(window) && window !== void 0) {
-    path.push(window);
-  }
-  return path;
-}
-function getSafeAreaInsets() {
-  const div = document.createElement("div");
-  div.style.cssText = "position:fixed;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px);pointer-events:none;visibility:hidden;";
-  document.body.appendChild(div);
-  const style = getComputedStyle(div);
-  const insets = {
-    top: Number.parseFloat(style.top) || 0,
-    right: Number.parseFloat(style.right) || 0,
-    bottom: Number.parseFloat(style.bottom) || 0,
-    left: Number.parseFloat(style.left) || 0
-  };
-  div.remove();
-  return insets;
 }
 class ArtPlayerError extends Error {
   constructor(message, context) {
@@ -3444,7 +3472,12 @@ function resolveOption(input, defaults2) {
   merged.container = input.container;
   return validator(merged, scheme);
 }
+function resolveRuntimeOption(input, defaults2) {
+  return resolveOption(input, defaults2);
+}
 function airplayMix(art) {
+  if (isClosing(art))
+    return;
   const {
     i18n,
     notice,
@@ -3452,8 +3485,16 @@ function airplayMix(art) {
     template: { $video }
   } = art;
   let available = true;
-  if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) {
+  const supported = window.WebKitPlaybackTargetAvailabilityEvent;
+  if (isClosing(art))
+    return;
+  const picker = supported && $video.webkitShowPlaybackTargetPicker;
+  if (isClosing(art))
+    return;
+  if (picker) {
     proxy($video, "webkitplaybacktargetavailabilitychanged", (event) => {
+      if (isClosing(art))
+        return;
       switch (event.availability) {
         case "available":
           available = true;
@@ -3466,13 +3507,23 @@ function airplayMix(art) {
   } else {
     available = false;
   }
+  if (isClosing(art))
+    return;
   def(art, "airplay", {
     value() {
+      if (isClosing(art))
+        return;
       if (available) {
-        $video.webkitShowPlaybackTargetPicker();
-        art.emit("airplay");
+        const picker2 = $video.webkitShowPlaybackTargetPicker;
+        if (isClosing(art))
+          return;
+        Reflect.apply(picker2, $video, []);
+        if (!isClosing(art))
+          art.emit("airplay");
       } else {
-        notice.show = i18n.get("AirPlay Not Available");
+        const message = i18n.get("AirPlay Not Available");
+        if (!isClosing(art))
+          notice.show = message;
       }
     }
   });
@@ -3534,9 +3585,10 @@ function attrMix(art) {
   } = art;
   def(art, "attr", {
     value(key, value) {
+      const target = $video;
       if (value === void 0)
-        return $video[key];
-      $video[key] = value;
+        return target[key];
+      target[key] = value;
     }
   });
 }
@@ -4678,41 +4730,93 @@ function miniMix(art) {
   def(art, "mini", mini(art));
 }
 function optionInit(art) {
+  if (isClosing(art))
+    return;
   const {
     option,
     storage,
     template: { $video, $poster }
   } = art;
   for (const key in option.moreVideoAttr) {
-    art.attr(key, option.moreVideoAttr[key]);
+    if (isClosing(art))
+      return;
+    const value = option.moreVideoAttr[key];
+    if (isClosing(art))
+      return;
+    art.attr(key, value);
   }
+  if (isClosing(art))
+    return;
   if (option.muted) {
-    art.muted = option.muted;
+    const value = option.muted;
+    if (isClosing(art))
+      return;
+    art.muted = value;
   }
+  if (isClosing(art))
+    return;
   if (option.volume) {
-    $video.volume = clamp(option.volume, 0, 1);
+    const value = clamp(option.volume, 0, 1);
+    if (isClosing(art))
+      return;
+    $video.volume = value;
   }
+  if (isClosing(art))
+    return;
   const volumeStorage = storage.get("volume");
+  if (isClosing(art))
+    return;
   if (typeof volumeStorage === "number") {
     $video.volume = clamp(volumeStorage, 0, 1);
   }
+  if (isClosing(art))
+    return;
   if (option.poster) {
-    setStyle($poster, "backgroundImage", `url(${option.poster})`);
+    const value = `url(${option.poster})`;
+    if (isClosing(art))
+      return;
+    setStyle($poster, "backgroundImage", value);
   }
+  if (isClosing(art))
+    return;
   if (option.autoplay) {
-    $video.autoplay = option.autoplay;
+    const value = option.autoplay;
+    if (isClosing(art))
+      return;
+    $video.autoplay = value;
   }
+  if (isClosing(art))
+    return;
   if (option.playsInline) {
+    if (isClosing(art))
+      return;
     $video.playsInline = true;
+    if (isClosing(art))
+      return;
     $video["webkit-playsinline"] = true;
   }
+  if (isClosing(art))
+    return;
   if (option.theme) {
-    option.cssVar["--art-theme"] = option.theme;
+    const styles = option.cssVar;
+    const theme = option.theme;
+    if (isClosing(art))
+      return;
+    styles["--art-theme"] = theme;
   }
   for (const key in option.cssVar) {
-    art.cssVar(key, option.cssVar[key]);
+    if (isClosing(art))
+      return;
+    const value = option.cssVar[key];
+    if (isClosing(art))
+      return;
+    art.cssVar(key, value);
   }
-  art.url = option.url;
+  if (isClosing(art))
+    return;
+  const url = option.url;
+  if (!isClosing(art))
+    art.url = url;
 }
 function pauseMix(art) {
   const {
@@ -5614,43 +5718,52 @@ function volumeMix(art) {
     }
   });
 }
+const installers = [
+  attrMix,
+  playMix,
+  pauseMix,
+  toggleMix,
+  seekMix,
+  volumeMix,
+  currentTimeMix,
+  durationMix,
+  switchMix,
+  playbackRateMix,
+  aspectRatioMix,
+  screenshotMix,
+  fullscreenMix,
+  fullscreenWebMix,
+  pipMix,
+  loadedMix,
+  playedMix,
+  playingMix,
+  autoSizeMix,
+  rectMix,
+  flipMix,
+  miniMix,
+  posterMix,
+  autoHeightMix,
+  cssVarMix,
+  themeMix,
+  typeMix,
+  stateMix,
+  subtitleOffsetMix,
+  airplayMix,
+  qualityMix,
+  thumbnailsMix,
+  eventInit,
+  optionInit
+];
 class Player {
   constructor(art) {
+    if (isClosing(art))
+      return;
     urlMix(art);
-    attrMix(art);
-    playMix(art);
-    pauseMix(art);
-    toggleMix(art);
-    seekMix(art);
-    volumeMix(art);
-    currentTimeMix(art);
-    durationMix(art);
-    switchMix(art);
-    playbackRateMix(art);
-    aspectRatioMix(art);
-    screenshotMix(art);
-    fullscreenMix(art);
-    fullscreenWebMix(art);
-    pipMix(art);
-    loadedMix(art);
-    playedMix(art);
-    playingMix(art);
-    autoSizeMix(art);
-    rectMix(art);
-    flipMix(art);
-    miniMix(art);
-    posterMix(art);
-    autoHeightMix(art);
-    cssVarMix(art);
-    themeMix(art);
-    typeMix(art);
-    stateMix(art);
-    subtitleOffsetMix(art);
-    airplayMix(art);
-    qualityMix(art);
-    thumbnailsMix(art);
-    eventInit(art);
-    optionInit(art);
+    for (const install of installers) {
+      if (isClosing(art))
+        return;
+      install(art);
+    }
   }
 }
 const owners$2 = /* @__PURE__ */ new WeakMap();
@@ -6136,9 +6249,8 @@ function installBuiltins(registry, option) {
     registry.add(lock);
   if (!isClosing(registry.art) && option.autoPlayback && !option.isLive)
     registry.add(autoPlayback);
-  if (!isClosing(registry.art) && option.autoOrientation && isMobile) {
+  if (!isClosing(registry.art) && option.autoOrientation && isMobile)
     registry.add(autoOrientation);
-  }
   if (!isClosing(registry.art) && option.fastForward && isMobile && !option.isLive)
     registry.add(fastForward);
 }
@@ -7112,7 +7224,7 @@ function createSettingHeader(setting2, item) {
   setStyle($item, "height", `${SETTING_ITEM_HEIGHT}px`);
   addClass($item, "art-setting-item");
   addClass($item, "art-setting-item-back");
-  const $left = append($item, '<div class="art-setting-item-left"></div>');
+  const $left = appendElement($item, '<div class="art-setting-item-left"></div>');
   const $icon = document.createElement("div");
   addClass($icon, "art-setting-item-left-icon");
   append($icon, arrowLeft2);
@@ -7153,8 +7265,8 @@ function createSettingItem(setting2, item, isUpdate = false) {
     $item.dataset.value = String(item.value || "");
     if (!current2())
       return;
-    const $left = append($item, '<div class="art-setting-item-left"></div>');
-    const $right = append($item, '<div class="art-setting-item-right"></div>');
+    const $left = appendElement($item, '<div class="art-setting-item-left"></div>');
+    const $right = appendElement($item, '<div class="art-setting-item-right"></div>');
     const $icon = document.createElement("div");
     addClass($icon, "art-setting-item-left-icon");
     switch (type) {
@@ -7204,8 +7316,8 @@ function createSettingItem(setting2, item, isUpdate = false) {
       case "switch": {
         const $switch = document.createElement("div");
         addClass($switch, "art-setting-item-right-icon");
-        const $switchOn = append($switch, icons.switchOn);
-        const $switchOff = append($switch, icons.switchOff);
+        const $switchOn = appendElement($switch, icons.switchOn);
+        const $switchOff = appendElement($switch, icons.switchOff);
         const initialSwitch = item.switch;
         if (!current2())
           return;
@@ -7992,8 +8104,10 @@ class Template {
     );
     this.query = this.query.bind(this);
     ownContainer(art, this.$container, captureTemplate(this.$container));
-    this.$container.dataset.artId = String(art.id);
-    this.init();
+    duringTemplateMount(art, this, () => {
+      this.$container.dataset.artId = String(art.id);
+      this.init();
+    });
   }
   static get html() {
     return html;
@@ -8009,6 +8123,8 @@ class Template {
     bindNodes(this);
     if (option.proxy) {
       const video = option.proxy.call(this.art, this.art);
+      if (isClosing(this.art))
+        return;
       assertProxy(video);
       replaceElement(video, this.$video);
       video.className = "art-video";
@@ -8097,7 +8213,7 @@ class Artplayer extends Emitter {
       throw new Error("Artplayer can only be used in the browser environment");
     }
     this.id = ++id;
-    this.option = resolveOption(option, Artplayer.option);
+    this.option = resolveRuntimeOption(option, Artplayer.option);
     this.isLock = false;
     this.isReady = false;
     this.isFocus = false;
@@ -8107,21 +8223,53 @@ class Artplayer extends Emitter {
     beginLifecycle(this);
     try {
       this.template = new Template(this);
+      if (getScope(this).closed)
+        return;
       this.events = new Events(this);
-      this.storage = new Storage(this);
+      if (getScope(this).closed)
+        return;
+      this.storage = new Storage();
+      if (getScope(this).closed)
+        return;
       this.icons = new Icons(this);
+      if (getScope(this).closed)
+        return;
       this.i18n = new I18n(this);
+      if (getScope(this).closed)
+        return;
       this.notice = new Notice(this);
+      if (getScope(this).closed)
+        return;
       this.player = new Player(this);
+      if (getScope(this).closed)
+        return;
       this.layers = new Layer(this);
+      if (getScope(this).closed)
+        return;
       this.controls = new Control(this);
+      if (getScope(this).closed)
+        return;
       this.contextmenu = new Contextmenu(this);
+      if (getScope(this).closed)
+        return;
       this.subtitle = new Subtitle(this);
+      if (getScope(this).closed)
+        return;
       this.info = new Info(this);
+      if (getScope(this).closed)
+        return;
       this.loading = new Loading(this);
+      if (getScope(this).closed)
+        return;
       this.hotkey = new Hotkey(this);
+      if (getScope(this).closed)
+        return;
       this.mask = new Mask(this);
+      if (getScope(this).closed)
+        return;
       this.setting = new Setting(this);
+      if (getScope(this).closed)
+        return;
       this.plugins = new Plugins(this);
       if (getScope(this).closed)
         return;
@@ -8227,20 +8375,7 @@ Artplayer.FULLSCREEN_WEB_IN_BODY = true;
 Artplayer.LOG_VERSION = true;
 Artplayer.USE_RAF = false;
 Artplayer.REMOVE_SRC_WHEN_DESTROY = true;
-if (isBrowser) {
-  window.Artplayer = Artplayer;
-  setStyleText("artplayer-style", css);
-  setTimeout(() => {
-    if (Artplayer.LOG_VERSION) {
-      console.log(
-        `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
-        "color: #fff; background: #5f5f5f",
-        "color: #fff; background: #4bc729",
-        ""
-      );
-    }
-  }, 100);
-}
+publishBrowserEntry(Artplayer, css);
 export {
   Artplayer as default
 };
