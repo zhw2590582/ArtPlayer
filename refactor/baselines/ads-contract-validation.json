@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-ADS-01",
+  "sourceCommit": "bafbf2c8",
+  "inputs": [
+    {
+      "file": "refactor/baselines/ads-release.json",
+      "sha256LF": "e5b47f7d04fe043aaeb40390da4b4c19d80ff6f8889e8e0f5c806ffa44306b69"
+    },
+    {
+      "file": "refactor/scripts/ads-contract.mjs",
+      "sha256LF": "f3c23c5298c53d8ed5aff9bf4653771303394daea3475e42d3089d0c03952091"
+    },
+    {
+      "file": "refactor/scripts/ads-contract.test.mjs",
+      "sha256LF": "3c73bf0f6d34fb7078bf3e581238d46f596d8c3c9461ac073d3189a44349ecd5"
+    }
+  ],
+  "checks": [
+    {
+      "file": "refactor/.cache/ads01-contract-validation.log",
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "sha256": "4775f4eaab9656b23ac7e41f71f05824631c631dd8f1ddc25c2cc0d2a7c8290c",
+      "bytes": 567
+    },
+    {
+      "file": "refactor/.cache/ads01-baseline-validation.log",
+      "tests": 45,
+      "passed": 45,
+      "failed": 0,
+      "sha256": "e007f11bb871ca18a25ff695d4db3f811ba363733f049db1146184aec37328f4",
+      "bytes": 5520
+    }
+  ],
+  "unchanged": [
+    {
+      "file": "packages/artplayer-plugin-ads/src/index.js",
+      "sha256LF": "dcb19c5b294405cc08601c281b77ab44ff70f49b70f9332e18d1ee0873b91fea",
+      "unchangedFrom": "bafbf2c8"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/style.less",
+      "sha256LF": "0eeed3f29ccafc6836f5bc4338f58f784edd114d2b100fda7fc395329031a406",
+      "unchangedFrom": "bafbf2c8"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/package.json",
+      "sha256LF": "5b7a876d58b8e88c994c3a72754ce6d7dbea0100a35928a99d66641de7c82e0d",
+      "unchangedFrom": "bafbf2c8"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/types/artplayer-plugin-ads.d.ts",
+      "sha256LF": "1cc5c1fc04727fc81398e03e384fbbd3ac78a5a02d55da71279b07b0afb08d98",
+      "unchangedFrom": "bafbf2c8"
+    },
+    {
+      "file": "docs/assets/example/ads.js",
+      "sha256LF": "c84a97d2b1970c323a0c2538b846312bff38513e10de271fe5f239953da88cd3",
+      "unchangedFrom": "bafbf2c8"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.js",
+      "sha256LF": "ceb2d8a23a6735c161b31a4a427d8a757679aaf8a5a106ef40a6f047061f1df8",
+      "unchangedFrom": "bafbf2c8"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.legacy.js",
+      "sha256LF": "1e10c3a6b51de18e54cd02dd342ab4010fc466de6257659cf1d2e087642aa9a3",
+      "unchangedFrom": "bafbf2c8"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.mjs",
+      "sha256LF": "0919678423424047b28d9d803835d9ebc98f4477e04e58d497e8ed8c48b95008",
+      "unchangedFrom": "bafbf2c8"
+    }
+  ],
+  "boundaries": [
+    "45 baseline tests include the 2 Ads checks",
+    "No full engineering CI or browser media acceptance claimed",
+    "Five actual published archives; workspace 2.1.0 has no published baseline",
+    "Core 4.5.5 association is historical source evidence, not a tested runtime claim",
+    "No source migration, production dependency/version change, push or publication"
+  ]
+}

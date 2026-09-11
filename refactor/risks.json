@@ -2981,6 +2981,66 @@
       ],
       "compatibleResolution": "已用原生 SDK、SourceBuffer/调度指标和 SDK 5 空裁剪刷新的一行诊断回植确认根因。兼容处置尚未落地；不在核心伪造 timeupdate、不偏移 seek、不强制所有旧用户升级 SDK，也不将诊断补丁计为正式上游通过。",
       "closureCriteria": "原失败的新旧核心/插件组合有确定根因与对应修复/可验证环境边界；原生对照及原顺序、原目标回归成立，后续偶然通过不能关闭。"
+    },
+    {
+      "id": "ADS-TYPE-01",
+      "title": "Ads 声明丢失真实 html/video/url，旧 totalDuration 为 string，当前 source/type 未实现",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": ["PKG-ADS-02", "PKG-ADS-04"],
+      "evidence": ["refactor/baselines/ads-release.json", "refactor/baselines/ads-contract.md", "packages/artplayer-plugin-ads/types/artplayer-plugin-ads.d.ts", "packages/artplayer-plugin-ads/src/index.js"],
+      "compatibleResolution": "同时保护实际 npm 字段/旧声明消费者和当前类型接受面；真实数字时长、i18n 与 source/type 别名的行为差异单独登记，不伪称旧实现支持别名。",
+      "closureCriteria": "两套旧消费者、可选工厂、合法运行字段和错误参数有严格正反例，声明与真实方法一致。"
+    },
+    {
+      "id": "ADS-DIST-01",
+      "title": "Ads npm 1.0.6 default namespace 与未发布 2.1.0 callable/exports 分发不同",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": ["PKG-ADS-04", "PKG-ADS-06", "REL-01"],
+      "evidence": ["refactor/baselines/ads-release.json", "refactor/baselines/ads-contract.md", "refactor/scripts/ads-contract.test.mjs", "packages/artplayer-plugin-ads/package.json"],
+      "compatibleResolution": "保留旧 require(pkg).default、global 与有效 dist 路径，同时支持当前 callable/ESM/legacy。工作区 2.1.0 不冒充实际已发布版本，正式目标仍按计划 3.0.0。",
+      "closureCriteria": "工作区外真实 tarball 的旧/新导入、浏览器与声明入口全部验证，版本占用再次核实。"
+    },
+    {
+      "id": "ADS-CORE-01",
+      "title": "Ads 旧发布关联核心 4.5.5，当前源码新增 >=5 门槛和 document 事件桥依赖",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": ["PKG-ADS-02", "PKG-ADS-03", "PKG-ADS-05"],
+      "evidence": ["refactor/baselines/ads-release.json", "refactor/baselines/ads-contract.md", "packages/artplayer-plugin-ads/src/index.js"],
+      "compatibleResolution": "先核验实际核心归档和能力，通过本地 fallback 保留原用户调用；不能用未发布源码门槛强制全部旧消费者升级，也不泛称全部 4.x 通过。",
+      "closureCriteria": "4.5.5 关联来源和实际可用组合明确，5.4.1/候选核心与原生 visibility/事件桥路径有真实浏览器证据。"
+    },
+    {
+      "id": "ADS-LIFE-01",
+      "title": "Ads 计时链、重复/过早调用、工厂复用与销毁缺乏资源边界",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": ["PKG-ADS-02", "PKG-ADS-03", "PKG-ADS-05"],
+      "evidence": ["refactor/baselines/ads-contract.md", "packages/artplayer-plugin-ads/src/index.js"],
+      "compatibleResolution": "先复现重复 play 的计时链、skip 后计时、destroy 后恢复与复用工厂 options；以实例所有权和幂等清理修正，不更改广告时长/跳过规则。",
+      "closureCriteria": "时钟/订阅/DOM 与主片恢复的成功、异常、重入、销毁、复用和多实例回归通过。"
+    },
+    {
+      "id": "ADS-MEDIA-01",
+      "title": "Ads metadata 与 play 拒绝、隐藏页媒体状态和内容恢复仍缺真实验证",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": ["PKG-ADS-02", "PKG-ADS-03", "PKG-ADS-05"],
+      "evidence": ["refactor/baselines/ads-contract.md", "packages/artplayer-plugin-ads/src/index.js", "docs/assets/example/ads.js"],
+      "compatibleResolution": "用本地媒体验证事件安装顺序、加载失败与拒绝、倒计时和广告播放的独立语义，恢复主片时不吞公共拒绝或在销毁后播放。",
+      "closureCriteria": "实际广告/主片的加载、暂停/恢复、失败/换源/销毁和隐藏状态有新旧核心组合证据。"
+    },
+    {
+      "id": "ADS-UI-01",
+      "title": "Ads 零等待跳过与初始状态不符，全屏图标/外部状态需核验",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": ["PKG-ADS-02", "PKG-ADS-03", "PKG-ADS-05"],
+      "evidence": ["refactor/baselines/ads-contract.md", "packages/artplayer-plugin-ads/src/index.js", "docs/assets/example/ads.js"],
+      "compatibleResolution": "复现 playDuration<=0 文案可关闭但 isCanClose 尚为 false；按既有 demo 规则修复，验证全屏按钮和外部退出状态，保留 CSS/DOM 钩子。",
+      "closureCriteria": "零/正/不可跳阈值、真实点击、倒计时/详情/静音/全屏与外部状态组合均有回归。"
     }
   ]
 }

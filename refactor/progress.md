@@ -1,5 +1,18 @@
 # 进度与证据
 
+## 最新完成：Ads-01 实际发布契约核对
+
+工作区 Ads 2.1.0 未发布；实际 npm 五个 1.0.x 版本、30 个成员已校验冻结，主要行为基线
+为 1.0.6。五版均使用 html/video/url，当前 source/type 声明并非实际发布接口；旧声明的
+totalDuration:string、旧 CommonJS default namespace 与当前 callable 的差异分别记录。
+1.0.6 关联核心为 4.5.5，当前源码新增 >=5 门槛不能作为旧发布兼容证据；旧核心实际组合待测。
+
+六项类型/分发/旧核心/生命周期/媒体/UI 风险已指派，02～06 交付物已细化。局部 lint、
+两项 Ads 检查及完整 45 项基线检查通过，没有修改生产源码、依赖、版本或产物。
+当前 217 项：75 done、4 doing、138 todo，下一项 Ads-02 建立时钟/媒体/错误回归。
+见 [契约](baselines/ads-contract.md)、[本步说明](changes/2026-09-12-PKG-ADS-01-contract.md)
+及 [执行证据](baselines/ads-contract-validation.json)。DASH 等开放媒体/设备风险仍保留。
+
 ## 当前实施：DASH-05 暂停 seek 根因已定位
 
 真实 SourceBuffer、SDK seekTime/缓冲事件和处理器状态表明，SDK 4.5.2 在空裁剪分支未更新

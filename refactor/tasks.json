@@ -2521,11 +2521,17 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
-      "deliverable": "核对 html/video/url 与 source/type 声明差异，结果方法和倒计时",
+      "deliverable": "核对 npm 1.0.0～1.0.6 与未发布工作区 2.1.0 的真实参数、类型、结果、倒计时、分发和旧核心来源",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
-      "evidence": []
+      "evidence": [
+        "baselines/ads-release.json",
+        "baselines/ads-contract.md",
+        "baselines/ads-contract-validation.json",
+        "changes/2026-09-12-PKG-ADS-01-contract.md",
+        "scripts/ads-contract.test.mjs"
+      ]
     },
     {
       "id": "PKG-ADS-02",
@@ -2541,7 +2547,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "视频/HTML/图片实际支持路径、跳过阈值、暂停恢复、加载失败",
+      "deliverable": "固定 npm 1.0.6 与工作区契约；HTML/视频/图片 HTML、跳过阈值、计时链、工厂复用、多实例、过早/重复方法、播放拒绝与销毁",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
       "evidence": []
     },
@@ -2559,7 +2565,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "广告状态/计时/视图/主视频恢复分离，不改变广告产品规则",
+      "deliverable": "配置/广告状态/计时/视图/主视频恢复分离，保留产品规则；资源与版本检查改用经验证的旧核心能力边界",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
       "evidence": []
     },
@@ -2578,7 +2584,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "旧参数契约和真实返回方法的兼容类型；错误声明单独处理",
+      "deliverable": "兼容真实 html/video/url/i18n、旧 export= 与工作区 source/type 类型接受面；时长 string/number 漂移与未实现别名单独处置",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
       "evidence": []
     },
@@ -2595,7 +2601,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "本地广告 fixture、多实例、正常结束/跳过/销毁恢复内容",
+      "deliverable": "本地广告 fixture、多实例、正常结束/跳过/销毁；核验历史关联核心 4.5.5、发布 5.4.1 与候选核心的实际归档/能力/媒体组合",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": []
     },
@@ -2612,7 +2618,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "ads.js、README/类型一致性、旧参数保留与变更日志",
+      "deliverable": "ads.js/README/声明一致；旧 require(pkg).default、原 dist 路径、当前 callable/ESM/legacy 的隔离 tarball 及浏览器验收",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
       "evidence": []
     },

@@ -33,7 +33,7 @@ Node10 是 TS 模块解析模式名，不代表支持 Node.js 10。现代 es2020
 | 包 / 工作区版本 | 能力与固定样本/资源要求 | 当前状态、待补环境 | 负责验证任务 |
 | --- | --- | --- | --- |
 | artplayer / 5.4.1 | 原生媒体、字幕、切源、控件/设置、全屏/PiP、SSR；ENV-MEDIA + VTT/SRT | 发布 5.4.0 已冻结；桌面部分基线，移动/原生全屏/PiP/多引擎待测 | CORE-07/16/17/18/22/23、ENG-05 |
-| artplayer-plugin-ads / 2.1.0 | 广告图片/视频、本片恢复、跳过、错误/销毁；本地短广告和主片 | 发布范围及所有浏览器场景待；无需借 IMA 结果代替自有广告逻辑 | PKG-ADS-01/02/05/06 |
+| artplayer-plugin-ads / npm 1.0.6、工作区 2.1.0 未发布 | 五个 1.0.x 归档已冻结；HTML/视频、本片恢复、跳过、错误/销毁；本地短广告和主片 | 关联历史核心 4.5.5 尚待实际归档/浏览器验证；与 5.4.1/候选核心组合均待。无需借 IMA 结果替代自有逻辑 | PKG-ADS-01/02/05/06 |
 | artplayer-plugin-ambilight / 1.1.0 | Canvas 采样、CORS、resize、后台/销毁；同源及受控跨源 MP4 | 待真实画布和资源测量 | PKG-AMBILIGHT-01/02/05/06 |
 | artplayer-plugin-asr / 2.1.0 | PCM 音频输出/暂停/销毁；AudioContext + 调用方服务 | 待音频环境与调用方 WebSocket 验证；示例服务版本未知，不在 PR 调线上服务 | PKG-ASR-01/02/05/06、EX-03 |
 | artplayer-plugin-audio-track / 1.1.0 | 独立外部 Audio 与主视频时钟同步；本地 MP4+AAC，偏移/切源/缓冲/失败样本 | 1.1.0 发布及调用契约见 [包基线](baselines/audio-track-contract.md)；旧核心 5.4.0 为具体对照点，桌面/Safari 实测待完成 | PKG-AUDIO-01/02/05/06 |

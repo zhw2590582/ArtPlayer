@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-ADS-01",
+  "capturedAt": "2026-09-11T22:53:57.648Z",
+  "sourceCommit": "bafbf2c8b03c38e32f639eda8ce974bff4bb6935",
+  "registryObservation": {
+    "registryUrl": "https://registry.npmjs.org/artplayer-plugin-ads",
+    "distTags": {
+      "latest": "1.0.6"
+    },
+    "versions": [
+      "1.0.0",
+      "1.0.2",
+      "1.0.3",
+      "1.0.4",
+      "1.0.6"
+    ],
+    "publishedAt": "2022-09-19T02:02:50.472Z",
+    "workspaceVersion": "2.1.0",
+    "workspaceVersionPublished": false,
+    "note": "Observed metadata, not support for all historical releases or a future latest guarantee."
+  },
+  "release": {
+    "name": "artplayer-plugin-ads",
+    "version": "1.0.6",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-ads/1.0.6",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-ads/-/artplayer-plugin-ads-1.0.6.tgz",
+    "integrity": "sha512-KMGGf7lhgj6DQXHPOg28jWYkVmDfOZJ4Gr4iF28Wy2GXNPh2ZJtlsFQ2IuWqXCElRPvSLzYK5HugF0OUnVszaw==",
+    "sha256": "ff132ff8a7108d8b26421621e4aac1d7edf8c99099a5ab4fd2190bd79b8636cd",
+    "archiveBytes": 5423,
+    "registryGitHead": "0b0aad78a56c024f00924c95f259bd545c29f196",
+    "files": {
+      "package/README.md": "9ef828936612264232159ce5c34ae7de708872b5d2fd54b7b4ee1fdbd9f17e39",
+      "package/dist/artplayer-plugin-ads.js": "7b53d6813811173f2ece3a32f934cbee24493ac43594aac179f1307a764abaee",
+      "package/package.json": "3a068fed095fbc3a38e8c1dd26c20bc865399bd4fff4b80909007ec9adb507b4",
+      "package/src/index.js": "89bc886fc54c191154c55d228fbdbc18e8effe1e6c881ab6760302d71092423e",
+      "package/src/style.less": "ab9649182ed3df9ed4f8e2347696ca9da173d11204a70a016648d1d54aac5441",
+      "package/types/artplayer-plugin-ads.d.ts": "b0fff3c7f5ac0f3b1dede8e827aa00104f397a0f26f2aea4aa788077b91b05b1"
+    },
+    "manifest": {
+      "license": "MIT",
+      "version": "1.0.6",
+      "name": "artplayer-plugin-ads",
+      "types": "types/artplayer-plugin-ads.d.ts",
+      "description": "Ads plugin for ArtPlayer",
+      "main": "dist/artplayer-plugin-ads.js",
+      "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+      "browserslist": "> 0.5%, last 2 versions, not dead",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ]
+    }
+  },
+  "source": {
+    "packages/artplayer-plugin-ads/src/index.js": "dcb19c5b294405cc08601c281b77ab44ff70f49b70f9332e18d1ee0873b91fea",
+    "packages/artplayer-plugin-ads/src/style.less": "0eeed3f29ccafc6836f5bc4338f58f784edd114d2b100fda7fc395329031a406",
+    "packages/artplayer-plugin-ads/types/artplayer-plugin-ads.d.ts": "1cc5c1fc04727fc81398e03e384fbbd3ac78a5a02d55da71279b07b0afb08d98",
+    "packages/artplayer-plugin-ads/README.md": "b507ae8bc65ea0982aa209be59a8c194e815509979636c060e858ce599a16473",
+    "packages/artplayer-plugin-ads/package.json": "5b7a876d58b8e88c994c3a72754ce6d7dbea0100a35928a99d66641de7c82e0d",
+    "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.mjs": "0919678423424047b28d9d803835d9ebc98f4477e04e58d497e8ed8c48b95008",
+    "docs/assets/example/ads.js": "c84a97d2b1970c323a0c2538b846312bff38513e10de271fe5f239953da88cd3",
+    "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.js": "ceb2d8a23a6735c161b31a4a427d8a757679aaf8a5a106ef40a6f047061f1df8",
+    "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.legacy.js": "1e10c3a6b51de18e54cd02dd342ab4010fc466de6257659cf1d2e087642aa9a3"
+  },
+  "comparisons": [
+    {
+      "file": "package.json",
+      "publishedLF": "3a068fed095fbc3a38e8c1dd26c20bc865399bd4fff4b80909007ec9adb507b4",
+      "workspaceLF": "5b7a876d58b8e88c994c3a72754ce6d7dbea0100a35928a99d66641de7c82e0d",
+      "equal": false
+    },
+    {
+      "file": "README.md",
+      "publishedLF": "9ef828936612264232159ce5c34ae7de708872b5d2fd54b7b4ee1fdbd9f17e39",
+      "workspaceLF": "b507ae8bc65ea0982aa209be59a8c194e815509979636c060e858ce599a16473",
+      "equal": false
+    },
+    {
+      "file": "types/artplayer-plugin-ads.d.ts",
+      "publishedLF": "b0fff3c7f5ac0f3b1dede8e827aa00104f397a0f26f2aea4aa788077b91b05b1",
+      "workspaceLF": "1cc5c1fc04727fc81398e03e384fbbd3ac78a5a02d55da71279b07b0afb08d98",
+      "equal": false
+    },
+    {
+      "file": "src/index.js",
+      "publishedLF": "89bc886fc54c191154c55d228fbdbc18e8effe1e6c881ab6760302d71092423e",
+      "workspaceLF": "dcb19c5b294405cc08601c281b77ab44ff70f49b70f9332e18d1ee0873b91fea",
+      "equal": false
+    },
+    {
+      "file": "src/style.less",
+      "publishedLF": "ab9649182ed3df9ed4f8e2347696ca9da173d11204a70a016648d1d54aac5441",
+      "workspaceLF": "0eeed3f29ccafc6836f5bc4338f58f784edd114d2b100fda7fc395329031a406",
+      "equal": false
+    }
+  ],
+  "olderReleases": [
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "1.0.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-ads/1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-ads/-/artplayer-plugin-ads-1.0.0.tgz",
+      "integrity": "sha512-c+OE+c8sm10kkpVKZXd3nKLEKZ7JuQ9kGxzpCdDaBD+6cs+fEvtbwIq14OMtdthOKRomqh7DAHZDxlGNovACOA==",
+      "sha256": "8c45d55e516377bc099d5df558cdeab8d4c134b39200ad7f1c3969a3e3ec340a",
+      "archiveBytes": 5104,
+      "registryGitHead": "d1ead6c5436cad30149711d55e3819376dbf0c13",
+      "files": {
+        "package/README.md": "9ef828936612264232159ce5c34ae7de708872b5d2fd54b7b4ee1fdbd9f17e39",
+        "package/dist/artplayer-plugin-ads.js": "6763a4534940535bd615d68bc5442cc089407940e4c96f728273413984344538",
+        "package/package.json": "1a20a5a35061279678d7998dcd836a16b39eaf0072b5cbfac61c094084c91e03",
+        "package/src/index.js": "adc062c261d96ad52e07fb478c8dcaeb9b4b31b9a38321744a10716c2462d7ef",
+        "package/src/style.less": "e7f836cae68cb5d5500e995b5094cec033545e1eeadc40bcdbf1a5b4afa7cdba",
+        "package/types/artplayer-plugin-ads.d.ts": "c0e92e646840136e556388159c729f967568f96ccb42cab82250a891fd9490e0"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.0",
+        "name": "artplayer-plugin-ads",
+        "types": "types/artplayer-plugin-ads.d.ts",
+        "description": "Ads plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-ads.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "> 0.5%, last 2 versions, not dead",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      }
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "1.0.2",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-ads/1.0.2",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-ads/-/artplayer-plugin-ads-1.0.2.tgz",
+      "integrity": "sha512-MsjG41tmDRsjLCIYwNxekLFFKBR4ZhzvIO9NjT6Z+kcAslrLramSUNlPpaT+Y19gosSCvbn9rBPkQmYHclEWCg==",
+      "sha256": "d922a323dbdc3d67f2beb5e70c228ffeafabedec02fd37ff02cc990270e05b38",
+      "archiveBytes": 5196,
+      "registryGitHead": "d81f9d4f65d0701f24616650c1efeff505651562",
+      "files": {
+        "package/README.md": "9ef828936612264232159ce5c34ae7de708872b5d2fd54b7b4ee1fdbd9f17e39",
+        "package/dist/artplayer-plugin-ads.js": "1b5410db99249b5d23b979d507f7b5b0cf9796f7bfbd757d6789e1ea86a44dc6",
+        "package/package.json": "255bc4623c65d11537373b32c8cf99498b73cedbb30f454032c40996804f44ff",
+        "package/src/index.js": "6d99b31b9df39ce938439c5c4c7c69bccce2b928651b8e66b9c2c3dff76c42c4",
+        "package/src/style.less": "ab9649182ed3df9ed4f8e2347696ca9da173d11204a70a016648d1d54aac5441",
+        "package/types/artplayer-plugin-ads.d.ts": "c0e92e646840136e556388159c729f967568f96ccb42cab82250a891fd9490e0"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.2",
+        "name": "artplayer-plugin-ads",
+        "types": "types/artplayer-plugin-ads.d.ts",
+        "description": "Ads plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-ads.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "> 0.5%, last 2 versions, not dead",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      }
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "1.0.3",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-ads/1.0.3",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-ads/-/artplayer-plugin-ads-1.0.3.tgz",
+      "integrity": "sha512-kJYeX+WYia8qpOl1GAktIVZwaqMv1OYOUYyWQgGiXSJYOT1YZGIdk6XSs5DOjJJQ+zVwZfqDVVUPZRrnuXKuoA==",
+      "sha256": "9859f8804d0e24c5688670507e20ca2720cbb5b701d3a68f5b6b05b03978c258",
+      "archiveBytes": 5222,
+      "registryGitHead": "1d4b2d58acca0226ecfaf3a60a12691e76e31e02",
+      "files": {
+        "package/README.md": "9ef828936612264232159ce5c34ae7de708872b5d2fd54b7b4ee1fdbd9f17e39",
+        "package/dist/artplayer-plugin-ads.js": "d8921a872f05bb12a7f6011f20c2350b3509d6a121c90d4ddbe411bc33afc6a9",
+        "package/package.json": "b1d32fa4ec524fcde30e471eba85fa41d4ef431f27223353268ccf8dc9514e30",
+        "package/src/index.js": "94681f237ba3cff0d6e2e43b0c4794e4ca5200f1a1a88107963c79a28240155b",
+        "package/src/style.less": "ab9649182ed3df9ed4f8e2347696ca9da173d11204a70a016648d1d54aac5441",
+        "package/types/artplayer-plugin-ads.d.ts": "c0e92e646840136e556388159c729f967568f96ccb42cab82250a891fd9490e0"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.3",
+        "name": "artplayer-plugin-ads",
+        "types": "types/artplayer-plugin-ads.d.ts",
+        "description": "Ads plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-ads.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "> 0.5%, last 2 versions, not dead",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      }
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "1.0.4",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-ads/1.0.4",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-ads/-/artplayer-plugin-ads-1.0.4.tgz",
+      "integrity": "sha512-RsIF7dVjRrfdUmx0GkKsDznAgpFCN9XVFy3PL/zS1/LzJ8P1Un1QYSte8Y/AKVgH53J299kM4WNZzLUTiMZo3w==",
+      "sha256": "eece3d3e584574781bb2cf8850dd4fc2b8fece50e1a00568a59af3e4e9d05a5f",
+      "archiveBytes": 5292,
+      "registryGitHead": "1d4b2d58acca0226ecfaf3a60a12691e76e31e02",
+      "files": {
+        "package/README.md": "9ef828936612264232159ce5c34ae7de708872b5d2fd54b7b4ee1fdbd9f17e39",
+        "package/dist/artplayer-plugin-ads.js": "284413cb5bb20dfebdc19b8eb1424b34cc763ccc32132068711352375320b12c",
+        "package/package.json": "db678bc8101d3c7a7f8e767b78cdf4b6733c585b8a46a6cf64753e52dac9c49c",
+        "package/src/index.js": "277dd9d4e4e590bc23913ed17c3ebf8033588eea91a01478aedd0fdf89fb1a40",
+        "package/src/style.less": "ab9649182ed3df9ed4f8e2347696ca9da173d11204a70a016648d1d54aac5441",
+        "package/types/artplayer-plugin-ads.d.ts": "c0e92e646840136e556388159c729f967568f96ccb42cab82250a891fd9490e0"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.4",
+        "name": "artplayer-plugin-ads",
+        "types": "types/artplayer-plugin-ads.d.ts",
+        "description": "Ads plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-ads.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "> 0.5%, last 2 versions, not dead",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      }
+    }
+  ],
+  "historicalCore": {
+    "commit": "0b0aad78a56c024f00924c95f259bd545c29f196",
+    "file": "packages/artplayer/package.json",
+    "version": "4.5.5",
+    "sha256LF": "d559f1c2a6b308842517f025553b38b29e7948241458a93fc573533856224eeb",
+    "scope": "Source association only; actual 4.5.5 package and browser compatibility still require PKG-ADS-05 verification"
+  }
+}
