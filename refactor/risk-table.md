@@ -34,7 +34,7 @@
 | VENDOR-07 | open / 待取证 | vconsole 来源、版本与许可闭环 | SITE-01 |
 | VENDOR-08 | open / 待取证 | console-bundle 来源、版本与许可闭环 | SITE-01 |
 | SDK-01 | open / 源码/产物事实 | hls.js 实际集成验证范围 | PKG-HLS-05, EX-03 |
-| SDK-02 | open / 待取证 | dash.js 实际集成验证范围 | PKG-DASH-01, EX-03 |
+| SDK-02 | open / 待取证 | dash.js 实际集成验证范围 | PKG-DASH-01, EX-03, PKG-DASH-05 |
 | SDK-03 | open / 待取证 | flv.js 实际集成验证范围 | EX-03 |
 | SDK-04 | open / 待取证 | mpegts.js 实际集成验证范围 | EX-03 |
 | SDK-05 | open / 待取证 | webtorrent 实际集成验证范围 | EX-03 |
@@ -135,3 +135,8 @@
 | AUDIO-BUFFER-01 | open / 已复现 | Windows WebKit 原生媒体无法在受限响应下推进至真实缓冲 | PKG-AUDIO-05 |
 | CHAPTER-LAYOUT-01 | resolved / 已复现 | 长章节标题超出窄播放器进度条宽度 | PKG-CHAPTER-05 |
 | CHAPTER-TIMING-01 | open / 已复现 | Windows WebKit 清晰度切换曾在等待窗口内未见 restart，稍后状态恢复 | PKG-CHAPTER-05 |
+| DASH-SDK-01 | open / 源码/产物事实 | npm 发布版 4.x 与工作区仅 5.x 的 SDK 接口不兼容 | PKG-DASH-02, PKG-DASH-03, PKG-DASH-05 |
+| DASH-LIFE-01 | open / 源码/产物事实 | DASH 空拓扑残留 UI，监听和旧选择回调缺乏关闭守卫 | PKG-DASH-02, PKG-DASH-03 |
+| DASH-STATE-01 | open / 源码/产物事实 | DASH 当前项高亮使用真值 ID、音轨身份和标签去重，边界待核实 | PKG-DASH-02, PKG-DASH-03, PKG-DASH-05 |
+| DASH-TYPE-01 | open / 源码/产物事实 | DASH 类型未表达默认工厂参数、SDK 回调对象和现代模块入口 | PKG-DASH-04 |
+| DASH-DEMO-01 | open / 源码/产物事实 | DASH 示例仅新 SDK 且重复安装会累积销毁回调 | PKG-DASH-06 |

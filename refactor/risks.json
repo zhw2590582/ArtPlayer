@@ -624,13 +624,15 @@
       "status": "open",
       "owners": [
         "PKG-DASH-01",
-        "EX-03"
+        "EX-03",
+        "PKG-DASH-05"
       ],
       "evidence": [
         "packages/artplayer-plugin-dash-control/src/index.js",
-        "docs/assets/example/dash.control.js"
+        "docs/assets/example/dash.control.js",
+        "refactor/baselines/dash-control-contract.md"
       ],
-      "compatibleResolution": "Caller supplies art.dash; homepage demo loads dash.js 5.2.1. Preserve representation IDs, Auto/manual and audio topology.",
+      "compatibleResolution": "Caller supplies art.dash. Preserve published 4.x callers (demo 4.5.2) and workspace 5.x stable representation IDs (demo 5.2.1); verify actual media and SDK lifecycle in PKG-DASH-05.",
       "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
     },
     {
@@ -2828,6 +2830,101 @@
       ],
       "compatibleResolution": "记录原生事件和绝对/相对时序，进一步区分媒体驱动耗时、夹具和核心源操作；未证明原因前不改核心、不扩大超时或重复到绿灯。",
       "closureCriteria": "确认先前超时的来源并有对应可靠回归；后续单次通过不足以关闭。"
+    },
+    {
+      "id": "DASH-SDK-01",
+      "title": "npm 发布版 4.x 与工作区仅 5.x 的 SDK 接口不兼容",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-DASH-02",
+        "PKG-DASH-03",
+        "PKG-DASH-05"
+      ],
+      "evidence": [
+        "refactor/baselines/dash-control-contract.md",
+        "refactor/baselines/dash-control-release.json",
+        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
+        "docs/assets/example/dash.control.js"
+      ],
+      "compatibleResolution": "按方法能力适配两代已存在用法，保留 v5 稳定 ID，不能要求旧消费者改用新 SDK。",
+      "closureCriteria": "归档旧用法、v4/v5 受控及实际媒体矩阵通过，清晰度键不混用。"
+    },
+    {
+      "id": "DASH-LIFE-01",
+      "title": "DASH 空拓扑残留 UI，监听和旧选择回调缺乏关闭守卫",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-DASH-02",
+        "PKG-DASH-03"
+      ],
+      "evidence": [
+        "refactor/baselines/dash-control-contract.md",
+        "refactor/baselines/dash-control-release.json",
+        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
+        "docs/assets/example/dash.control.js"
+      ],
+      "compatibleResolution": "仅释放插件自有 ready/restart/destroy 订阅和 UI，SDK 仍由调用方拥有；替换后旧回调不写旧实例。",
+      "closureCriteria": "空列表、换源/SDK、销毁后引用、安装异常有回归，其他实例与 SDK 不被误释放。"
+    },
+    {
+      "id": "DASH-STATE-01",
+      "title": "DASH 当前项高亮使用真值 ID、音轨身份和标签去重，边界待核实",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-DASH-02",
+        "PKG-DASH-03",
+        "PKG-DASH-05"
+      ],
+      "evidence": [
+        "refactor/baselines/dash-control-contract.md",
+        "refactor/baselines/dash-control-release.json",
+        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
+        "docs/assets/example/dash.control.js"
+      ],
+      "compatibleResolution": "验证零 ID、重复标签和克隆音轨当前项，在保持原展示语义时按实际可选项定位高亮。",
+      "closureCriteria": "有受控和真实 SDK 证据说明选中的 representation/track 与 UI 一致。"
+    },
+    {
+      "id": "DASH-TYPE-01",
+      "title": "DASH 类型未表达默认工厂参数、SDK 回调对象和现代模块入口",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-DASH-04"
+      ],
+      "evidence": [
+        "refactor/baselines/dash-control-contract.md",
+        "refactor/baselines/dash-control-release.json",
+        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
+        "docs/assets/example/dash.control.js"
+      ],
+      "compatibleResolution": "保留旧类型推断，提供准确的 SDK 适配/回调契约和兼容格式入口，不以 any 掩盖源码。",
+      "closureCriteria": "严格源码、旧/新编译器消费者与隔离产物类型验证通过。"
+    },
+    {
+      "id": "DASH-DEMO-01",
+      "title": "DASH 示例仅新 SDK 且重复安装会累积销毁回调",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-DASH-06"
+      ],
+      "evidence": [
+        "refactor/baselines/dash-control-contract.md",
+        "refactor/baselines/dash-control-release.json",
+        "packages/artplayer-plugin-dash-control/src/index.js",
+        "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts",
+        "docs/assets/example/dash.control.js"
+      ],
+      "compatibleResolution": "验证真实 SDK 销毁和示例重载路径，对齐 v4/v5 文档与示例，不让旧监听误操作新实例。",
+      "closureCriteria": "真实 8082 demo、旧/新 SDK 路径与 tarball 产物一致，监听和 SDK 所有权可验证。"
     }
   ]
 }

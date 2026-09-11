@@ -1048,7 +1048,7 @@
         "packages/artplayer-plugin-dash-control/src/index.js",
         "docs/assets/example/dash.control.js"
       ],
-      "contract": "Caller supplies art.dash; homepage demo loads dash.js 5.2.1. Preserve representation IDs, Auto/manual and audio topology.",
+      "contract": "Caller owns art.dash. Published plugin 1.1.0 uses dash.js 4.x (demo 4.5.2); workspace uses 5.x (demo 5.2.1). Preserve both through capability adapters and v5 stable representation IDs; actual SDK playback remains PKG-DASH-05.",
       "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },

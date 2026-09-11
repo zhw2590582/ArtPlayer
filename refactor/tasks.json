@@ -1970,11 +1970,15 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "quality/audio、representation ID/Auto、getName 和 update",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-DASH-01-contract.md",
+        "baselines/dash-control-contract.md",
+        "baselines/dash-control-release.json"
+      ]
     },
     {
       "id": "PKG-DASH-02",
@@ -1990,7 +1994,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "保留已有 5 项回归，补音轨/空列表/过滤/换源",
+      "deliverable": "保留已有 5 项稳定 ID 回归，补发布版 SDK 4.x/当前 5.x、音轨/空列表/过滤/换源与关闭引用",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
       "evidence": []
     },
@@ -2008,7 +2012,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "稳定 ID 映射、ABR 状态与 UI 清理职责分离",
+      "deliverable": "能力适配保留 SDK 4.x 与 5.x，稳定 ID 映射、ABR 状态、UI 清理和生命周期职责分离",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
       "evidence": []
     },
@@ -2044,7 +2048,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "本地 DASH 实际 representation、高亮、恢复 Auto 和换源",
+      "deliverable": "固定 dash.js 4.5.2/5.2.1 与本地 DASH 实际清晰度/音轨、高亮、Auto 和换源组合",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": []
     },

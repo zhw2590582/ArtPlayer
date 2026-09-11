@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-09-11T20:20:05.888Z",
+  "sourceCommit": "e0d47ea74b25e8fc999d53d27605bf5ed551c106",
+  "release": {
+    "name": "artplayer-plugin-dash-control",
+    "version": "1.1.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-dash-control/1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-dash-control/-/artplayer-plugin-dash-control-1.1.0.tgz",
+    "integrity": "sha512-EssRkzYXWcln3a6nAzi4ESacBhzMih8s0bzdjXuvBBCh2UFmvK99ITD5E+0cuU8i5ZzIQGQSdce1/gANTrX0BQ==",
+    "sha256": "f4047a569d99b6a7de57b3719b7ad40109f2a1d360566a840f50ab32aacefcd9",
+    "archiveBytes": 3385,
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "98982f1123ff9a11f5d3d9a52da6e8fea9cd0989f7465605c27b0f9a46f2dbcd",
+      "package/dist/artplayer-plugin-dash-control.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+      "package/dist/artplayer-plugin-dash-control.legacy.js": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+      "package/dist/artplayer-plugin-dash-control.mjs": "e32bf08c33a481781883067dcc639f0495c9dcb8a88b91be13736370f4932fc4",
+      "package/package.json": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+      "package/types/artplayer-plugin-dash-control.d.ts": "e15ef683e0c335d81531587828593325e037efe7ed29c022477cd14fe71aebba"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-dash-control",
+      "version": "1.1.0",
+      "description": "Dash control plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-dash-control.d.ts",
+          "import": "./dist/artplayer-plugin-dash-control.mjs",
+          "require": "./dist/artplayer-plugin-dash-control.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-dash-control.d.ts",
+          "import": "./dist/artplayer-plugin-dash-control.legacy.js",
+          "require": "./dist/artplayer-plugin-dash-control.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-dash-control.js",
+      "module": "./dist/artplayer-plugin-dash-control.mjs",
+      "types": "./types/artplayer-plugin-dash-control.d.ts",
+      "legacy": "./dist/artplayer-plugin-dash-control.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    }
+  },
+  "source": {
+    "packages/artplayer-plugin-dash-control/src/index.js": "aaa7975115a6d2677f4c8d71182954edbf69a12f9ffe8bee86afa94f6b5615e8",
+    "packages/artplayer-plugin-dash-control/src/audio.svg": "dbee5ce7487c9f8ec927e5286188cf9439345bbe947b6c06c32c07193e01e0be",
+    "packages/artplayer-plugin-dash-control/src/quality.svg": "4666a4c01764422f9008e442f5a889ff9691bb0386083d673943a0718f4d680c",
+    "packages/artplayer-plugin-dash-control/types/artplayer-plugin-dash-control.d.ts": "e15ef683e0c335d81531587828593325e037efe7ed29c022477cd14fe71aebba",
+    "packages/artplayer-plugin-dash-control/package.json": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+    "packages/artplayer-plugin-dash-control/README.md": "4ef644a812059ece0afcb1cd0c8a8c64fa2532dc38a5ce87d4f1538de6a7788e",
+    "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.js": "248aa1162ffb2480965f8e12d766ba6b7d2abfc2d80e65e8a6e8db6bdfa750c5",
+    "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.legacy.js": "248aa1162ffb2480965f8e12d766ba6b7d2abfc2d80e65e8a6e8db6bdfa750c5",
+    "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.mjs": "2cc039698627a6baaa5da1cc50cc5db5230ae5d31152b1217dda62e38c67aa3e",
+    "docs/assets/example/dash.control.js": "edc4326f03262a222e06bb780aab05c903ee162829dec60970e738c1e260eef2",
+    "test/dash-control.test.js": "2a123bbd93659c053ab206f09ab489d04380b222885179203c0bfb401590b35d"
+  },
+  "comparisons": [
+    {
+      "file": "README.md",
+      "publishedLF": "98982f1123ff9a11f5d3d9a52da6e8fea9cd0989f7465605c27b0f9a46f2dbcd",
+      "workspaceLF": "4ef644a812059ece0afcb1cd0c8a8c64fa2532dc38a5ce87d4f1538de6a7788e",
+      "equal": false
+    },
+    {
+      "file": "dist/artplayer-plugin-dash-control.js",
+      "publishedLF": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+      "workspaceLF": "248aa1162ffb2480965f8e12d766ba6b7d2abfc2d80e65e8a6e8db6bdfa750c5",
+      "equal": false
+    },
+    {
+      "file": "dist/artplayer-plugin-dash-control.legacy.js",
+      "publishedLF": "f0cbbcf8badeaca13c05ae178932818cb52fbce37ed504ac0e62160b9c7e1145",
+      "workspaceLF": "248aa1162ffb2480965f8e12d766ba6b7d2abfc2d80e65e8a6e8db6bdfa750c5",
+      "equal": false
+    },
+    {
+      "file": "dist/artplayer-plugin-dash-control.mjs",
+      "publishedLF": "e32bf08c33a481781883067dcc639f0495c9dcb8a88b91be13736370f4932fc4",
+      "workspaceLF": "2cc039698627a6baaa5da1cc50cc5db5230ae5d31152b1217dda62e38c67aa3e",
+      "equal": false
+    },
+    {
+      "file": "package.json",
+      "publishedLF": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+      "workspaceLF": "556e2adc479bab36c5973de617c0b57c5d86aa8425643a1952ab04738e9ce927",
+      "equal": true
+    },
+    {
+      "file": "types/artplayer-plugin-dash-control.d.ts",
+      "publishedLF": "e15ef683e0c335d81531587828593325e037efe7ed29c022477cd14fe71aebba",
+      "workspaceLF": "e15ef683e0c335d81531587828593325e037efe7ed29c022477cd14fe71aebba",
+      "equal": true
+    }
+  ],
+  "functionComparison": {
+    "published": "1dbeb07766c8599076f232508ad1c50fc5b2a5ba9232e86bd715c368f01b4561",
+    "workspace": "497b27daf5c35d134e87905464a45a5681d9321ecf6b509ab3e0f225f2b57c58",
+    "equal": false
+  },
+  "sdkBoundary": {
+    "publishedDemo": "dashjs 4.5.2",
+    "workspaceDemo": "dashjs 5.2.1",
+    "publishedQuality": [
+      "getBitrateInfoListFor",
+      "getQualityFor",
+      "setQualityFor"
+    ],
+    "workspaceQuality": [
+      "getRepresentationsByType",
+      "getCurrentRepresentationForType",
+      "setRepresentationForTypeById"
+    ],
+    "required": "Preserve released v4 callers with a capability adapter while retaining the workspace v5 stable-ID correction. No claim that SDK playback has already been validated."
+  },
+  "sources": [
+    "https://dashif.org/dash.js/pages/developers/migration-guides/4-to-5.html",
+    "https://dashif.org/dash.js/pages/usage/abr/manual-quality-selection.html"
+  ]
+}
