@@ -1,5 +1,13 @@
 # 进度与证据
 
+## 最新完成：PKG-HLS-03 源码分层与生命周期修复
+
+HLS control 已拆为入口、选择映射、菜单管理、SDK 订阅四个 JS 模块，保持公开入口和同步调用；修复空轨道旧菜单、过期回调、Auto 标签、重复组丢失选中态，并补事件同步、销毁/订阅失败恢复及重入保护。公开类型和严格 TS 迁移属于下一步 04。
+
+56 项 Node 专项通过，加入三种构建格式后 83 项通过；完整 CI 533 项、249 个既有生产 TS 文件通过。modern/legacy 浏览器各 35 passed、16 skipped，无失败/重试；Windows WebKit 的 MSE 缺口未关闭。三份 package/dist 与 docs/compiled 一致，modern gzip 为 2536 字节（发布基线 1439），不声称体积优化。
+
+见 [交付记录](changes/2026-09-12-PKG-HLS-03-modules.md)、[冻结证据](baselines/hls-modules-validation.json) 与包内 ARCHITECTURE.md。HLS-UI-01/LIFE-01/AUTO-01 已按范围关闭，SDK-01/ENV-01 与其余发布门槛仍 open。64 done、151 todo；本任务独立本地 commit，核实后进入 PKG-HLS-04。没有 push/tag/publish/merge。
+
 ## 最新完成：PKG-HLS-02 行为与 SDK 基线
 
 45 项 HLS Node 契约通过，覆盖源码及发布 main/legacy/ESM；完整 CI 522 项、249 个生产 TS 文件通过。真实 Hls.js 1.5.17 与本地双档位/双音轨流验证四组合的解码、实际选择、pause/seek、切源、失败恢复和销毁。

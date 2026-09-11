@@ -1,5 +1,14 @@
 # HLS control 测试与环境边界
 
+PKG-HLS-03 已在入口、映射、菜单和 SDK 订阅四个模块实施修复，实际地图见
+[包内架构](../packages/artplayer-plugin-hls-control/ARCHITECTURE.md)，本轮证据见
+[模块验证](baselines/hls-modules-validation.json)。下方 02 的数量与缺陷观察属于冻结的迁移前基线。
+新版用例增加事件同步、菜单节点复用和候选生命周期断言，公开 TS 迁移仍是 04。
+
+新增构建文件入口：ARTPLAYER_TEST_HLS 以平台路径分隔符接受 main/legacy/ESM，用于同一 Node
+契约；ARTPLAYER_HLS_ARTIFACT 选择实际 main/legacy 浏览器文件。测试记录实际 hash，错误路径
+明确失败。这是工作区构建验证；隔离安装以及整套 ARTPLAYER_BROWSER_ARTIFACTS 映射仍由 06 完成。
+
 PKG-HLS-02 建立迁移前基线。源码目前仍为 src/index.js，不能把测试任务当作 TS 迁移已完成。
 来源见 [发布契约](baselines/hls-control-contract.md)、[SDK 固定记录](baselines/hls-sdk.json)、
 [本轮证据](baselines/hls-validation.json)。

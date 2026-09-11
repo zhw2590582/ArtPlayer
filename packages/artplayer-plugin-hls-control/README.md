@@ -1,5 +1,7 @@
 # artplayer-plugin-hls-control
 
+Implementation boundaries and regression commands are documented in [ARCHITECTURE.md](ARCHITECTURE.md).
+
 Hls control plugin for ArtPlayer
 
 ## Demo

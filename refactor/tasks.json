@@ -1827,11 +1827,15 @@
         "CORE-11",
         "CORE-14"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "映射计算与 selector 更新/删除、Hls 事件订阅分离",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-HLS-03-modules.md",
+        "baselines/hls-modules-validation.json",
+        "hls-validation.md"
+      ]
     },
     {
       "id": "PKG-HLS-04",

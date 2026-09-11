@@ -1,152 +1,113 @@
 import $audio from './audio.svg?raw'
+import { audioModel, qualityModel } from './mapping'
+import { createMenu } from './menu'
 import $quality from './quality.svg?raw'
-
-function uniqBy(array, property) {
-  const seen = new Map()
-  return array.filter((item) => {
-    const key = item[property]
-    if (key === undefined) {
-      return true
-    }
-    return !seen.has(key) && seen.set(key, 1)
-  })
-}
+import { subscribeHls } from './sdk-events'
 
 export default function artplayerPluginHlsControl(option = {}) {
   return (art) => {
     const { $video } = art.template
     const { errorHandle } = art.constructor.utils
+    let closed = false
+    let revision = 0
+    let engine
+    let unsubscribe = () => {}
+    let selecting = 0
+    let pending
+    const retired = new WeakSet()
+    const active = hls => !closed && !retired.has(hls) && art.hls === hls && hls.media === $video
+    const quality = createMenu(art, 'hls-quality', 'currentLevel', $quality, active, select)
+    const audio = createMenu(art, 'hls-audio', 'audioTrack', $audio, active, select)
 
-    function updateQuality(hls) {
-      if (!hls.levels.length)
-        return
-
-      const config = option.quality || {}
-      const auto = config.auto || 'Auto'
-      const title = config.title || 'Quality'
-      const getName = config.getName || (level => level.name || `${level.height}P`)
-      const defaultLevel = hls.levels[hls.currentLevel]
-      const defaultHtml = defaultLevel ? getName(defaultLevel) : auto
-
-      const selector = uniqBy(
-        hls.levels.map((item, index) => {
-          return {
-            html: getName(item, index),
-            value: index,
-            default: hls.currentLevel === index,
-          }
-        }),
-        'html',
-      ).sort((a, b) => b.value - a.value)
-
-      selector.push({
-        html: auto,
-        value: -1,
-        default: hls.currentLevel === -1,
-      })
-
-      const onSelect = (item) => {
-        hls.currentLevel = item.value
-        art.notice.show = `${title}: ${item.html}`
-        if (config.control)
-          art.controls.check(item)
-        if (config.setting)
-          art.setting.check(item)
-        return item.html
+    function select(callback) {
+      selecting++
+      let succeeded = false
+      try {
+        const result = callback()
+        succeeded = true
+        return result
       }
-
-      if (config.control) {
-        art.controls.update({
-          name: 'hls-quality',
-          position: 'right',
-          html: defaultHtml,
-          style: { padding: '0 10px' },
-          selector,
-          onSelect,
-        })
-      }
-
-      if (config.setting) {
-        art.setting.update({
-          name: 'hls-quality',
-          tooltip: defaultHtml,
-          html: title,
-          icon: $quality,
-          width: 200,
-          selector,
-          onSelect,
-        })
+      finally {
+        selecting--
+        if (!selecting) {
+          const hls = pending
+          pending = undefined
+          if (succeeded && hls)
+            refresh(hls, false)
+        }
       }
     }
 
-    function updateAudio(hls) {
-      if (!hls.audioTracks.length)
+    function refresh(hls, force) {
+      if (!active(hls))
         return
-
-      const config = option.audio || {}
-      const auto = config.auto || 'Auto'
-      const title = config.title || 'Audio'
-      const getName = config.getName || (track => track.name || track.lang || track.language)
-      const defaultTrack = hls.audioTracks[hls.audioTrack]
-      const defaultHtml = defaultTrack ? getName(defaultTrack) : auto
-
-      const selector = uniqBy(
-        hls.audioTracks.map((item, index) => {
-          return {
-            html: getName(item, index),
-            value: item.id,
-            default: hls.audioTrack === item.id,
-          }
-        }),
-        'html',
-      )
-
-      const onSelect = (item) => {
-        hls.audioTrack = item.value
-        art.notice.show = `${title}: ${item.html}`
-        if (config.control)
-          art.controls.check(item)
-        if (config.setting)
-          art.setting.check(item)
-        return item.html
-      }
-
-      if (config.control) {
-        art.controls.update({
-          name: 'hls-audio',
-          position: 'right',
-          html: defaultHtml,
-          style: { padding: '0 10px' },
-          selector,
-          onSelect,
-        })
-      }
-
-      if (config.setting) {
-        art.setting.update({
-          name: 'hls-audio',
-          tooltip: defaultHtml,
-          html: title,
-          icon: $audio,
-          width: 200,
-          selector,
-          onSelect,
-        })
-      }
+      const version = ++revision
+      const config = option.quality || {}
+      const model = qualityModel(hls, config)
+      if (!active(hls) || version !== revision)
+        return
+      quality.update(hls, config, model, force)
+      if (!active(hls) || version !== revision)
+        return
+      const audioConfig = option.audio || {}
+      const audioView = audioModel(hls, audioConfig)
+      if (active(hls) && version === revision)
+        audio.update(hls, audioConfig, audioView, force)
     }
 
     function update() {
-      errorHandle(art.hls?.media === $video, 'Cannot find instance of HLS from "art.hls"')
-      updateQuality(art.hls)
-      updateAudio(art.hls)
+      if (closed)
+        return
+      const hls = art.hls
+      errorHandle(hls?.media === $video, 'Cannot find instance of HLS from "art.hls"')
+      if (retired.has(hls))
+        return
+      if (engine !== hls) {
+        unsubscribe()
+        engine = hls
+        try {
+          unsubscribe = subscribeHls(hls, () => {
+            if (selecting)
+              pending = hls
+            else
+              refresh(hls, false)
+          }, () => {
+            retired.add(hls)
+            unsubscribe()
+            if (engine === hls) {
+              engine = undefined
+              if (!closed) {
+                quality.clear()
+                audio.clear()
+              }
+            }
+          })
+        }
+        catch (error) {
+          engine = undefined
+          throw error
+        }
+      }
+      refresh(hls, true)
+    }
+
+    function destroy() {
+      if (closed)
+        return
+      closed = true
+      revision++
+      pending = undefined
+      quality.invalidate()
+      audio.invalidate()
+      unsubscribe()
+      art.off('ready', update)
+      art.off('restart', update)
+      art.off('destroy', destroy)
     }
 
     art.on('ready', update)
     art.on('restart', update)
-
-    return {
-      name: 'artplayerPluginHlsControl',
-      update,
-    }
+    art.on('destroy', destroy)
+    return { name: 'artplayerPluginHlsControl', update }
   }
 }

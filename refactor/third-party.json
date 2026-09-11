@@ -1023,16 +1023,18 @@
       "id": "hls.js",
       "riskId": "SDK-01",
       "owners": [
-        "PKG-HLS-03",
         "PKG-HLS-05",
         "EX-03"
       ],
       "sourceFiles": [
         "packages/artplayer-plugin-hls-control/src/index.js",
+        "packages/artplayer-plugin-hls-control/src/mapping.js",
+        "packages/artplayer-plugin-hls-control/src/menu.js",
+        "packages/artplayer-plugin-hls-control/src/sdk-events.js",
         "docs/assets/example/hls.control.js"
       ],
       "contract": "Caller supplies art.hls; homepage demo loads hls.js 1.5.17. Preserve quality/audio selectors and old core integration.",
-      "validationStatus": "Hls.js 1.5.17 frozen in refactor/baselines/hls-sdk.json; Chromium/Firefox local playback baseline verified in PKG-HLS-02. Windows WebKit has no MSE; Safari/native/worker/version and installed-package matrices remain open. See refactor/hls-validation.md.",
+      "validationStatus": "PKG-HLS-03 verifies actual Hls.js 1.5.17 on Chromium/Firefox with source/published core and modern/legacy candidate builds. Auto/topology/lifecycle defects fixed; Windows WebKit has no MSE. Safari/native, detach/reattach, worker, grouped tracks, versions and isolated installation remain HLS-05/06 and EX-03.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

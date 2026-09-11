@@ -606,7 +606,6 @@
       "confirmation": "source-observed",
       "status": "open",
       "owners": [
-        "PKG-HLS-03",
         "PKG-HLS-05",
         "EX-03"
       ],
@@ -2527,7 +2526,7 @@
       "id": "HLS-UI-01",
       "title": "空轨道和关闭配置仍残留 HLS 菜单",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-HLS-03"
       ],
@@ -2537,13 +2536,19 @@
         "test/browser/hls-control.spec.js"
       ],
       "compatibleResolution": "使用既有 remove API 清理不再可用的 UI，保留菜单名称及选择语义。",
-      "closureCriteria": "候选空轨道、关闭开关及恢复测试通过。"
+      "closureCriteria": "候选空轨道、关闭开关及恢复测试通过。",
+      "resolutionEvidence": [
+        "refactor/baselines/hls-modules-validation.json",
+        "refactor/changes/2026-09-12-PKG-HLS-03-modules.md",
+        "packages/artplayer-plugin-hls-control/ARCHITECTURE.md"
+      ],
+      "resolutionRationale": "PKG-HLS-03 候选回归与新旧核心/实际 Hls.js 1.5.17 验证：空菜单、过期回调/订阅、Auto 及音轨同步。环境/SDK 扩展范围仍由 SDK-01 与 HLS-ENV-01 保持 open，不据此放行发布。"
     },
     {
       "id": "HLS-LIFE-01",
       "title": "过期 HLS 选择回调与销毁后 update 仍工作",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-HLS-03"
       ],
@@ -2553,13 +2558,19 @@
         "test/browser/hls-control.spec.js"
       ],
       "compatibleResolution": "限制过期实例回调，整理监听器归属，Hls 仍由调用方销毁。",
-      "closureCriteria": "替换、销毁、重入及 SDK 订阅解绑的候选回归通过。"
+      "closureCriteria": "替换、销毁、重入及 SDK 订阅解绑的候选回归通过。",
+      "resolutionEvidence": [
+        "refactor/baselines/hls-modules-validation.json",
+        "refactor/changes/2026-09-12-PKG-HLS-03-modules.md",
+        "packages/artplayer-plugin-hls-control/ARCHITECTURE.md"
+      ],
+      "resolutionRationale": "PKG-HLS-03 候选回归与新旧核心/实际 Hls.js 1.5.17 验证：空菜单、过期回调/订阅、Auto 及音轨同步。环境/SDK 扩展范围仍由 SDK-01 与 HLS-ENV-01 保持 open，不据此放行发布。"
     },
     {
       "id": "HLS-AUTO-01",
       "title": "真实 ABR 播放的 Auto 标签在 update 后丢失",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-HLS-03",
         "PKG-HLS-05"
@@ -2570,7 +2581,13 @@
         "test/browser/hls-control.spec.js"
       ],
       "compatibleResolution": "区分自动策略与实际播放档位，保留手动及 Auto 选择值。",
-      "closureCriteria": "实际 SDK 自动/手动切换和事件同步通过。"
+      "closureCriteria": "实际 SDK 自动/手动切换和事件同步通过。",
+      "resolutionEvidence": [
+        "refactor/baselines/hls-modules-validation.json",
+        "refactor/changes/2026-09-12-PKG-HLS-03-modules.md",
+        "packages/artplayer-plugin-hls-control/ARCHITECTURE.md"
+      ],
+      "resolutionRationale": "PKG-HLS-03 候选回归与新旧核心/实际 Hls.js 1.5.17 验证：空菜单、过期回调/订阅、Auto 及音轨同步。环境/SDK 扩展范围仍由 SDK-01 与 HLS-ENV-01 保持 open，不据此放行发布。"
     },
     {
       "id": "HLS-ENV-01",

@@ -40,7 +40,9 @@ test.beforeAll(async () => {
   publishedCode = await code(plugin.release, 'package/dist/artplayer-plugin-hls-control.js')
   // This task exercises source builds. Installed artifacts are a separate HLS-06 gate.
   assert(!process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'HLS source fixture cannot masquerade as an installed plugin')
-  sourceCode = await compilePackage('artplayer-plugin-hls-control', 'umd')
+  sourceCode = process.env.ARTPLAYER_HLS_ARTIFACT
+    ? fs.readFileSync(process.env.ARTPLAYER_HLS_ARTIFACT, 'utf8')
+    : await compilePackage('artplayer-plugin-hls-control', 'umd')
   const manifest = JSON.parse(fs.readFileSync(new URL('./media/hls/manifest.json', import.meta.url)))
   media = new Map()
   for (const [name, expected] of Object.entries(manifest.files)) {
@@ -50,7 +52,7 @@ test.beforeAll(async () => {
     assert.equal(bytes.length, expected.bytes)
     media.set(name, bytes)
   }
-  evidence = { sdk: sdk.release, plugin: plugin.release, sourceSHA256: hash(sourceCode), media: manifest, limitations: ['SDK worker disabled', 'local deterministic media', 'source candidate, not installed package', 'no physical device certification'] }
+  evidence = { sdk: sdk.release, plugin: plugin.release, sourceSHA256: hash(sourceCode), candidate: process.env.ARTPLAYER_HLS_ARTIFACT || 'workspace source build', media: manifest, limitations: ['SDK worker disabled', 'local deterministic media', 'not an isolated installed package', 'no physical device certification'] }
 })
 
 async function openHls(page, core, plugin, testInfo, manifest = 'master.m3u8') {
@@ -211,6 +213,9 @@ test.describe('MSE playback matrix', () => {
         // Real SDK corroboration of the frozen historical empty-topology defect.
           await expect(page.locator('.art-control-hls-audio')).toHaveCount(1)
         }
+        else {
+          await expect(page.locator('.art-control-hls-audio')).toHaveCount(0)
+        }
         expect(await page.evaluate(() => window.sdkErrors.filter(error => error.fatal))).toEqual([])
         await page.evaluate(() => window.art.destroy())
         expect(await page.evaluate(() => window.destroyedEngines)).toBe(2)
@@ -230,6 +235,35 @@ test.describe('MSE playback matrix', () => {
       })
       await expect(page.locator('.art-control-hls-quality .art-selector-value')).toHaveText(`${height}P`)
       expect(await page.evaluate(() => window.art.hls.autoLevelEnabled)).toBe(true)
+      await page.evaluate(() => window.art.destroy())
+    })
+
+    test(`${core} core / candidate HLS: SDK events synchronize Auto and audio without replacing menus`, async ({ page }, testInfo) => {
+      await openHls(page, core, 'candidate', testInfo)
+      await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
+      await page.click('#play')
+      await expect.poll(() => page.evaluate(() => window.art.video.currentTime)).toBeGreaterThan(0.3)
+      await expect(page.locator('.art-control-hls-quality .art-selector-value')).toHaveText('Auto')
+      await page.evaluate(() => {
+        window.qualityElement = document.querySelector('.art-control-hls-quality')
+        window.audioElement = document.querySelector('.art-control-hls-audio')
+        window.art.hls.currentLevel = 0
+      })
+      await expect.poll(() => page.evaluate(() => window.art.hls.currentLevel)).toBe(0)
+      await expect(page.locator('.art-control-hls-quality .art-selector-value')).toHaveText('90P')
+      await page.evaluate(() => {
+        window.art.hls.currentLevel = -1
+      })
+      await expect.poll(() => page.evaluate(() => window.art.hls.currentLevel)).toBeGreaterThanOrEqual(0)
+      await expect(page.locator('.art-control-hls-quality .art-selector-value')).toHaveText('Auto')
+      await page.evaluate(() => {
+        window.art.hls.audioTrack = 1
+      })
+      await expect(page.locator('.art-control-hls-audio .art-selector-value')).toHaveText('French')
+      expect(await page.evaluate(() => ({ quality: window.qualityElement === document.querySelector('.art-control-hls-quality'), audio: window.audioElement === document.querySelector('.art-control-hls-audio') }))).toEqual({ quality: true, audio: true })
+      await page.evaluate(() => window.art.plugins.artplayerPluginHlsControl.update())
+      await expect(page.locator('.art-control-hls-quality .art-selector-value')).toHaveText('Auto')
+      expect(await page.evaluate(() => window.sdkErrors.filter(error => error.fatal))).toEqual([])
       await page.evaluate(() => window.art.destroy())
     })
   }

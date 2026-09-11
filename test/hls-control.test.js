@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict'
 // eslint-disable-next-line test/no-import-node-test -- The repo uses Node's runner for controlled contracts.
 import { test } from 'node:test'
-import { bothMenus, hlsHost, hlsImplementations, selections } from './helpers/hls-control.js'
+import { attachHlsEvents, bothMenus, hlsHost, hlsImplementations, selections } from './helpers/hls-control.js'
 
 const implementations = await hlsImplementations()
+const candidate = implementations.find(item => item.name === 'source').factory
 for (const { name, factory } of implementations) {
   test(`${name}: optional factory, synchronous result and deferred core events`, () => {
     const { art, controls, calls, listeners } = hlsHost()
@@ -219,3 +220,210 @@ for (const { name, factory } of implementations.filter(item => item.name.startsW
     assert.equal(controls.get('hls-quality').selector.some(item => item.default), false)
   })
 }
+
+test('candidate removes empty and disabled menus, then restores them', () => {
+  const { art, hls, controls, settings } = hlsHost()
+  const option = bothMenus()
+  const plugin = candidate(option)(art)
+  plugin.update()
+  hls.levels = []
+  hls.audioTracks = []
+  plugin.update()
+  assert.equal(controls.size, 0)
+  assert.equal(settings.size, 0)
+  hls.levels = [{ height: 240 }]
+  hls.audioTracks = [{ id: 0, name: 'New' }]
+  plugin.update()
+  assert.equal(controls.size, 2)
+  option.quality.control = false
+  option.audio.setting = false
+  plugin.update()
+  assert.deepEqual([...controls.keys()], ['hls-audio'])
+  assert.deepEqual([...settings.keys()], ['hls-quality'])
+})
+
+test('candidate ignores superseded callbacks and retained update after destroy', () => {
+  const { art, hls, calls, controls, listeners } = hlsHost()
+  const events = attachHlsEvents(hls)
+  const plugin = candidate(bothMenus())(art)
+  plugin.update()
+  const old = controls.get('hls-quality')
+  const next = hlsHost().hls
+  next.media = art.template.$video
+  art.hls = next
+  calls.length = 0
+  old.onSelect(old.selector[0])
+  assert.equal(hls.currentLevel, -1)
+  assert.equal(calls.length, 0)
+  plugin.update()
+  assert.equal(events.count(), 0)
+  const current = controls.get('hls-quality')
+  art.emit('destroy')
+  calls.length = 0
+  assert.equal(plugin.update(), undefined)
+  current.onSelect(current.selector[0])
+  assert.equal(calls.length, 0)
+  assert.equal([...listeners.values()].every(set => !set.size), true)
+})
+
+test('candidate subscriptions update selection without replacing unchanged menus', () => {
+  const { art, hls, calls, controls } = hlsHost()
+  const events = attachHlsEvents(hls)
+  hls.autoLevelEnabled = true
+  hls.currentLevel = 1
+  const plugin = candidate(bothMenus())(art)
+  plugin.update()
+  assert.equal(events.count(), 6)
+  const menu = controls.get('hls-quality')
+  assert.equal(menu.html, 'Auto')
+  assert.equal(menu.selector.at(-1).default, true)
+  hls.currentLevel = 2
+  calls.length = 0
+  events.emit('LEVEL_SWITCHED')
+  assert.equal(controls.get('hls-quality'), menu)
+  assert.equal(calls.length, 0)
+  hls.autoLevelEnabled = false
+  events.emit('LEVEL_SWITCHED')
+  assert.equal(controls.get('hls-quality'), menu)
+  assert.equal(menu.selector[0].default, true)
+  assert.deepEqual(calls.map(call => call[0]), ['controls.check', 'setting.check'])
+  calls.length = 0
+  events.emit('LEVEL_SWITCHED')
+  assert.equal(calls.length, 0)
+  hls.audioTracks = []
+  events.emit('AUDIO_TRACKS_UPDATED')
+  assert.equal(controls.has('hls-audio'), false)
+  events.emit('DESTROYING')
+  assert.equal(events.count(), 0)
+  assert.equal(controls.size, 0)
+})
+
+test('candidate duplicate labels retain the actual selected representation', () => {
+  const { art, hls, controls } = hlsHost()
+  hls.levels = [{ height: 720 }, { height: 720 }]
+  hls.currentLevel = 1
+  candidate(bothMenus())(art).update()
+  assert.deepEqual(selections(controls.get('hls-quality')), [['720P', 1, true], ['Auto', -1, false]])
+})
+
+test('candidate rolls back failed subscription setup and retries on update', () => {
+  const { art, hls } = hlsHost()
+  const events = attachHlsEvents(hls)
+  const on = hls.on
+  hls.on = (name, callback) => {
+    on(name, callback)
+    if (name === 'LEVEL_SWITCHED')
+      throw new Error('subscription rejected')
+  }
+  const plugin = candidate(bothMenus())(art)
+  assert.throws(() => plugin.update(), /subscription rejected/)
+  assert.equal(events.count(), 0)
+  hls.on = on
+  plugin.update()
+  assert.equal(events.count(), 6)
+  plugin.update()
+  assert.equal(events.count(), 6)
+  art.emit('destroy')
+  assert.equal(events.count(), 0)
+})
+
+test('candidate synchronously emitted SDK events preserve selection order', () => {
+  const { art, hls, controls, calls } = hlsHost()
+  const events = attachHlsEvents(hls)
+  let selected = -1
+  Object.defineProperty(hls, 'currentLevel', {
+    get: () => selected,
+    set(value) {
+      calls.push(['currentLevel', value])
+      selected = value
+      events.emit('LEVEL_SWITCHED')
+    },
+  })
+  candidate(bothMenus())(art).update()
+  const menu = controls.get('hls-quality')
+  const item = menu.selector[0]
+  calls.length = 0
+  assert.equal(menu.onSelect(item), item.html)
+  assert.deepEqual(calls, [['currentLevel', 2], ['notice', 'Quality: 1080P'], ['controls.check', item], ['setting.check', item]])
+})
+
+test('candidate cancels UI publication when getName destroys or replaces the player engine', () => {
+  for (const action of ['destroy', 'replace']) {
+    const { art, calls } = hlsHost()
+    const option = bothMenus()
+    option.quality.getName = () => {
+      if (action === 'destroy')
+        art.emit('destroy')
+      else
+        art.hls = hlsHost().hls
+      return 'Label'
+    }
+    const plugin = candidate(option)(art)
+    plugin.update()
+    assert.equal(calls.length, 0)
+  }
+})
+
+test('candidate removes only its own SDK listeners and never revives a destroying engine', () => {
+  const { art, hls, calls } = hlsHost()
+  const events = attachHlsEvents(hls)
+  const foreign = () => {}
+  hls.on('LEVEL_SWITCHED', foreign)
+  const plugin = candidate(bothMenus())(art)
+  plugin.update()
+  assert.equal(events.count(), 7)
+  events.emit('DESTROYING')
+  assert.equal(events.count(), 1)
+  assert.equal(events.listeners.get('LEVEL_SWITCHED').has(foreign), true)
+  calls.length = 0
+  plugin.update()
+  assert.equal(events.count(), 1)
+  assert.equal(calls.length, 0)
+})
+
+test('candidate nested update wins over the outer formatter operation', () => {
+  const { art, controls } = hlsHost()
+  const option = bothMenus()
+  let nested = false
+  let plugin
+  option.quality.getName = () => {
+    if (!nested) {
+      nested = true
+      option.quality.getName = () => 'Latest'
+      plugin.update()
+    }
+    return 'Stale'
+  }
+  plugin = candidate(option)(art)
+  plugin.update()
+  assert.equal(controls.get('hls-quality').selector[0].html, 'Latest')
+})
+
+test('candidate clears selection and fallback label while an audio track is temporarily unknown', () => {
+  const { art, hls, controls } = hlsHost()
+  const events = attachHlsEvents(hls)
+  candidate(bothMenus())(art).update()
+  hls.audioTrack = -1
+  events.emit('AUDIO_TRACKS_UPDATED')
+  const menu = controls.get('hls-audio')
+  assert.equal(menu.html, 'Auto')
+  assert.equal(menu.selector.some(item => item.default), false)
+  events.emit('AUDIO_TRACKS_UPDATED')
+  assert.equal(controls.get('hls-audio'), menu)
+  hls.audioTrack = 1
+  events.emit('AUDIO_TRACK_SWITCHED')
+  assert.equal(menu.selector[1].default, true)
+})
+
+test('candidate does not repeat UI writes when getName has different current and list labels', () => {
+  const { art, hls, calls } = hlsHost()
+  const events = attachHlsEvents(hls)
+  const options = bothMenus()
+  options.quality.getName = (level, index) => index === undefined ? `Current ${level.height}` : `Choice ${index}`
+  candidate(options)(art).update()
+  hls.currentLevel = 1
+  events.emit('LEVEL_SWITCHED')
+  calls.length = 0
+  events.emit('LEVEL_SWITCHED')
+  assert.equal(calls.length, 0)
+})
