@@ -2726,6 +2726,35 @@
       ],
       "compatibleResolution": "修正 audio.track 示例路径，补真实模块地图及 update/生命周期说明。",
       "closureCriteria": "README、示例、公开声明一致，8082 正式 demo 和包分发验证通过。"
+    },
+    {
+      "id": "CORE-SOURCE-01",
+      "title": "候选核心连续切源丢失原播放意图",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "CORE-24"
+      ],
+      "evidence": [
+        "refactor/baselines/audio-combinations-first.json",
+        "packages/artplayer/src/source/switch.ts"
+      ],
+      "compatibleResolution": "继承被替代切源操作的播放意图；显式暂停可以取消恢复，过期操作继续只结算不发布副作用。",
+      "closureCriteria": "新旧对照的连续切源、手动暂停、重入/取消/错误/销毁和正式产物三引擎验证通过。"
+    },
+    {
+      "id": "AUDIO-RESUME-01",
+      "title": "WebKit 旧核心切源后候选音频保持暂停",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-AUDIO-05"
+      ],
+      "evidence": [
+        "refactor/baselines/audio-combinations-first.json"
+      ],
+      "compatibleResolution": "先核实 seeked/canplay 和宿主 playing 的事件顺序；修复真实可播放后音频缺少恢复入口，保持旧核心支持。",
+      "closureCriteria": "保留原始失败，精确事件复现并有旧核心/新核心三引擎回归；不可仅重复到绿灯。"
     }
   ]
 }

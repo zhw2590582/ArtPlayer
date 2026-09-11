@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 216 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 217 项，范围 22 个包及工作区/示例。
 
-状态：todo 146 / doing 1 / blocked 0 / done 69 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 147 / doing 1 / blocked 0 / done 69 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -14,7 +14,7 @@
 
 | 包 | 基线版本 | 任务 |
 | --- | --- | --- |
-| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22 |
+| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06 |
@@ -128,6 +128,7 @@
 | CORE-21 | artplayer<br>生成核心声明并校验包内容 | CORE-20, ENG-07 | 由 TS 生成的既有入口声明与三种发布产物 | 内部类型不泄漏，旧 JS/TS 消费者与 i18n 通过；逐项完成 CORE-07 留下的 BASE-TYPE-04/05/07 声明方案，旧合法消费者与实际返回分别留证；不能以虚假的交叉返回类型或改变运行时来掩盖冲突，未决项阻止核心声明出口；处理 CORE-10 / BASE-TYPE-08 的 setter-only 属性虚构 getter 声明，并复核 PlaybackControls 精确视图与旧 toggle 声明共存策略 | H | done |
 | CORE-23 | artplayer<br>检查并补齐键盘、焦点与可访问名称 | CORE-13, CORE-14, CORE-17, ENG-05, BASE-04 | 主要控件/设置/模式退出的键盘与焦点回归、名称和字幕可用性检查及必要兼容修正 | 保持旧快捷键和 DOM/CSS 钩子；真实浏览器验证，不以静态属性检查代替交互；处理 BASE-DOM-01 的主要控件 Tab 不可达，保留既有名称与快捷键 | H | done |
 | CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, CORE-23, PILOT-01, ENG-08, ENG-10, ENG-11 | 核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口 | 核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布 | H | done |
+| CORE-24 | artplayer<br>修复连续切源的播放意图继承 | CORE-22, PKG-AUDIO-04 | 连续切源保留原播放意图，同时尊重显式暂停与最新来源，回归旧/新 audio | 真实暂停状态的受控测试、重入/取消/失败/销毁、三引擎和 main/legacy 产物验证通过；不恢复过期来源的公开副作用 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-chapter
 
@@ -159,7 +160,7 @@
 | PKG-AUDIO-02 | artplayer-plugin-audio-track<br>建立特有行为与错误测试 | PKG-AUDIO-01, ENG-03, ENG-05 | 偏移、倍率、seek、waiting/playing、加载错误和 autoplay 拒绝 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-AUDIO-03 | artplayer-plugin-audio-track<br>整理内部职责与资源 | PKG-AUDIO-02, CORE-10 | 外部 audio 的同步策略、监听与源更新生命周期 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-AUDIO-04 | artplayer-plugin-audio-track<br>迁移自有源码和公开类型 | PKG-AUDIO-03, ENG-04, ENG-06, CORE-07 | Option/Result/audio、update 输入和事件类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-AUDIO-05 | artplayer-plugin-audio-track<br>验证新旧核心和组合 | PKG-AUDIO-04, CORE-22 | 主视频切源和缓冲恢复，多实例独立音频、旧核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-AUDIO-05 | artplayer-plugin-audio-track<br>验证新旧核心和组合 | PKG-AUDIO-04, CORE-22, CORE-24 | 主视频切源和缓冲恢复，多实例独立音频、旧核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-AUDIO-06 | artplayer-plugin-audio-track<br>验证分发并同步文档 | PKG-AUDIO-05, ENG-07 | audio.track.js 示例与运行返回值一致的声明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-auto-thumbnail
@@ -462,6 +463,7 @@
 - CORE-21: [记录](changes/2026-09-11-CORE-21-public-declarations.md) [记录](baselines/core-declarations-validation.json) [记录](core-public-types.md) [记录](typechecking.md)
 - CORE-23: [记录](changes/2026-09-11-CORE-23-keyboard-focus.md) [记录](baselines/keyboard-validation.json)
 - CORE-22: [记录](changes/2026-09-11-CORE-22-core-acceptance.md) [记录](baselines/core-setting-navigation-partial.json) [记录](core-acceptance.md) [记录](baselines/core-acceptance-validation.json)
+- CORE-24: [记录](baselines/audio-combinations-first.json)
 - PKG-CHAPTER-01: [记录](changes/2026-09-10-PKG-CHAPTER-01-contract.md) [记录](baselines/chapter-contract.md)
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)
@@ -470,6 +472,7 @@
 - PKG-AUDIO-02: [记录](changes/2026-09-12-PKG-AUDIO-02-tests.md) [记录](audio-validation.md) [记录](baselines/audio-validation.json)
 - PKG-AUDIO-03: [记录](changes/2026-09-12-PKG-AUDIO-03-lifecycle.md) [记录](baselines/audio-lifecycle-validation.json)
 - PKG-AUDIO-04: [记录](changes/2026-09-12-PKG-AUDIO-04-types.md) [记录](baselines/audio-types-validation.json)
+- PKG-AUDIO-05: [记录](changes/2026-09-12-PKG-AUDIO-05-combinations.md) [记录](baselines/audio-combinations-first.json)
 - PKG-HLS-01: [记录](baselines/hls-control-contract.md) [记录](baselines/hls-control-release.json) [记录](changes/2026-09-11-PKG-HLS-01-contract.md)
 - PKG-HLS-02: [记录](hls-validation.md) [记录](baselines/hls-sdk.json) [记录](baselines/hls-validation.json) [记录](changes/2026-09-11-PKG-HLS-02-tests.md)
 - PKG-HLS-03: [记录](changes/2026-09-12-PKG-HLS-03-modules.md) [记录](baselines/hls-modules-validation.json) [记录](hls-validation.md)
