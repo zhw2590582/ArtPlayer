@@ -2,6 +2,12 @@
 
 Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 
+`yarn test:ads` runs source, verified npm 1.0.6 and the frozen unpublished 2.1.0
+Ads bundle against controlled clock/host contracts. It is included in `test:unit`.
+The helper uses the real option validator but does not simulate media decoding or layout.
+Historical defect assertions apply only to frozen implementations. See
+[Ads validation](../refactor/ads-validation.md) for artifact overrides and browser scope.
+
 | Command             | Scope                                                                                                    |
 | ------------------- | -------------------------------------------------------------------------------------------------------- |
 | `yarn test:unit`    | Playback and DASH regressions, public contracts against released/current code, and JS/TS fixture loading |

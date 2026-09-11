@@ -1,0 +1,527 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-ADS-02",
+  "sourceCommit": "c6b82c33",
+  "inputs": [
+    {
+      "file": "test/helpers/ads.js",
+      "sha256LF": "2301a057612cd752863f1fea9b65860dbb65ba4b029303a784f8759fdadacf6c"
+    },
+    {
+      "file": "test/ads.test.js",
+      "sha256LF": "1aa325c9982aea2de61b68c9688a3640c628a1a47a672080655de729ccd37c64"
+    },
+    {
+      "file": "test/browser/ads.spec.js",
+      "sha256LF": "ab7541748ed89185429e6307bf5caf96221d91fbf29c067d62cd54f5b207f5bd"
+    },
+    {
+      "file": "refactor/baselines/ads-release.json",
+      "sha256LF": "e5b47f7d04fe043aaeb40390da4b4c19d80ff6f8889e8e0f5c806ffa44306b69"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "ef7248885ff7e6b7d798150ec22ace1c8dc3a4a10fed79fba653cdf09b4baebb"
+    }
+  ],
+  "productionChanged": false,
+  "node": {
+    "tests": 58,
+    "passed": 58,
+    "failed": 0,
+    "log": {
+      "file": "refactor/.cache/ads02-node.log",
+      "sha256": "1f8ab521d7c9856239f3bdc55e59ae089f8b4efa50e3319c858fb749d70ea81f",
+      "bytes": 6034
+    },
+    "scope": "14 shared contracts across source/npm1.0.6/frozen-workspace2.1.0 and 8 historical defects across two frozen implementations."
+  },
+  "browser": [
+    {
+      "name": "first",
+      "note": "Fixture error: accidental window prefix in event-name strings; original report retained.",
+      "stats": {
+        "startTime": "2026-09-11T23:17:11.938Z",
+        "duration": 43755.335,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 16,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/ads02-browser-first-report.json",
+        "sha256": "1f75f147f6d9547b024bd4dd567b1117f84e283ea07c8d5aad02680db12be9d5",
+        "bytes": 714132
+      },
+      "log": {
+        "file": "refactor/.cache/ads02-browser-first.log",
+        "sha256": "4a93233ec7bd568a34b4acee199afea67679e049ba5bc4f26c390f9c455b5fc0",
+        "bytes": 51425
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/.last-run.json",
+          "sha256": "277f7af5229ae3845c8f2eebca17747ecab246343884ac63d5e4f8a2224dde85",
+          "bytes": 831
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-4af82-completion-restores-content-chromium/error-context.md",
+          "sha256": "05447494c0ba235ab5126353f802175c8dd1b706d73fa782660f5e99f9443088",
+          "bytes": 11517
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-4af82-completion-restores-content-chromium/test-failed-1.png",
+          "sha256": "6d583742166e610c20655efe045bd91f370069c21570e92d6fd1a1a5309944e7",
+          "bytes": 85742
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-4af82-completion-restores-content-chromium/trace.zip",
+          "sha256": "2e7c69b1142fdf5657231880d3225f291dfb1c6fd0bf4048452ee7b570602364",
+          "bytes": 962815
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-a6f9a-reshold-and-resumed-content-chromium/error-context.md",
+          "sha256": "4242932aef9d82d2e49ae4b0282b67e7446f851e6f919e1f0efb45482f8c363e",
+          "bytes": 11494
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-a6f9a-reshold-and-resumed-content-chromium/test-failed-1.png",
+          "sha256": "67f6d29acf3b6d8a2ce4ff9960bd98438fa5111ef28b6594625e0710e1dd9baa",
+          "bytes": 85451
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-a6f9a-reshold-and-resumed-content-chromium/trace.zip",
+          "sha256": "99def7123d37fdd97922db1fae23c1274428322b39232636f3b11506bf20fa9e",
+          "bytes": 774428
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-bc3ff-ls-open-to-playable-content-chromium/error-context.md",
+          "sha256": "e66b8bee07a7bb6ca3ae0d40ba47e6196e8c040a81eb046e59e97cbd87686262",
+          "bytes": 11359
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-bc3ff-ls-open-to-playable-content-chromium/test-failed-1.png",
+          "sha256": "c7aeb49e2d94bdeca9e7cf96c36c930d8e82013124eac1b63825cbde79de9d51",
+          "bytes": 84845
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-bc3ff-ls-open-to-playable-content-chromium/trace.zip",
+          "sha256": "cfbf508a33445bad979ed0ce731de99ab7282cd5273860e9bc5a293e2297e843",
+          "bytes": 2500977
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-e65a0-acement-does-not-replay-ads-chromium/error-context.md",
+          "sha256": "d63140df98c0bd5a5c1382d6546dafebb2ddf425b99ff2a87f878c15d867663a",
+          "bytes": 11904
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-e65a0-acement-does-not-replay-ads-chromium/test-failed-1.png",
+          "sha256": "9670500dec0dbca163cc3abcf1a55933da5d05553b6495381467f4446c861c28",
+          "bytes": 83113
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-candida-e65a0-acement-does-not-replay-ads-chromium/trace.zip",
+          "sha256": "8218520fe7bd3addeec3483aa111014a7cea77e311444d8c8a952fdefbf9be67",
+          "bytes": 327973
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-1efa0-completion-restores-content-chromium/error-context.md",
+          "sha256": "a6e76cc8c411fa74f68b08354b3898ac6ea76a29dd9438891de59e62d05ee430",
+          "bytes": 11517
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-1efa0-completion-restores-content-chromium/test-failed-1.png",
+          "sha256": "8b2b93410bae5ccb75858fe9e7cee0b13b1c1c5f72ee24ee71887699ffe0911b",
+          "bytes": 85667
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-1efa0-completion-restores-content-chromium/trace.zip",
+          "sha256": "643bd9845f0115ed261e3806c7a1eb724d1baad2beb878f555cce5ab69509774",
+          "bytes": 981934
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-7ce1f-acement-does-not-replay-ads-chromium/error-context.md",
+          "sha256": "b06bd805a8c8592a5b0c10cdf1a20a21333926fad1edccd22c7fe0491d98cb06",
+          "bytes": 10063
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-7ce1f-acement-does-not-replay-ads-chromium/test-failed-1.png",
+          "sha256": "1bc111cc89a2f5182abca3991faac494e7bb08eb17f7e197cc99c360eb9bea2d",
+          "bytes": 85757
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-7ce1f-acement-does-not-replay-ads-chromium/trace.zip",
+          "sha256": "2b9a7b66770c1f8e0be41867c6395920a263fef345f39ab152c44be656b900bb",
+          "bytes": 827835
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-bd6d9-ls-open-to-playable-content-chromium/error-context.md",
+          "sha256": "116b870a3c9a632ea24cafa63c340a9433d32ebb52629cebb95a70d832c09c9c",
+          "bytes": 11359
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-bd6d9-ls-open-to-playable-content-chromium/test-failed-1.png",
+          "sha256": "c7aeb49e2d94bdeca9e7cf96c36c930d8e82013124eac1b63825cbde79de9d51",
+          "bytes": 84845
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-bd6d9-ls-open-to-playable-content-chromium/trace.zip",
+          "sha256": "51cc4158ec08dc7ffaf772650c0504128e7c5988d25590fccd6dca7c0a769cec",
+          "bytes": 2502705
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-d3f59-reshold-and-resumed-content-chromium/error-context.md",
+          "sha256": "849c351ca5e52c1f2d318ea0b52f66a0d545d3a5a83e82eb0227e1341ee11a62",
+          "bytes": 11494
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-d3f59-reshold-and-resumed-content-chromium/test-failed-1.png",
+          "sha256": "67f6d29acf3b6d8a2ce4ff9960bd98438fa5111ef28b6594625e0710e1dd9baa",
+          "bytes": 85451
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-candidate-core-publish-d3f59-reshold-and-resumed-content-chromium/trace.zip",
+          "sha256": "74fdffde8420424a92301d0f561e9257615c83d2d48c66810f8d835934220681",
+          "bytes": 753295
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-038a7-ls-open-to-playable-content-chromium/error-context.md",
+          "sha256": "0d8e511d5322d29807ac64113c1d722951d6651da5455d5602ae5aed8b4bf077",
+          "bytes": 11359
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-038a7-ls-open-to-playable-content-chromium/test-failed-1.png",
+          "sha256": "ce8bb9e88c0963c81b7b57527545e84d9ef28ade0443e521ccddf658439a7bc3",
+          "bytes": 86066
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-038a7-ls-open-to-playable-content-chromium/trace.zip",
+          "sha256": "256cd01936ac9c52f283d5261595c7da272acfc796f5b602cc80a5d599d0fd94",
+          "bytes": 2497213
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-408f9-reshold-and-resumed-content-chromium/error-context.md",
+          "sha256": "1a7d860ee698ae3025f15ce5af11766c1804b0b6bf32bb8e31ac99d2aae7b10d",
+          "bytes": 11494
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-408f9-reshold-and-resumed-content-chromium/test-failed-1.png",
+          "sha256": "190ef0f38dec3e15535cb24669a255da2be7972b2ae2d282255579952d598f1f",
+          "bytes": 85592
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-408f9-reshold-and-resumed-content-chromium/trace.zip",
+          "sha256": "87cfab2ead83790042514d679e81f31e31911f64bc359b1f25dee1f0da2eb26e",
+          "bytes": 786246
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-5a82d-acement-does-not-replay-ads-chromium/error-context.md",
+          "sha256": "346452cd39e825afdee8d912887d8c94c5cd31b6ae4eb474eb7406603c0ebb26",
+          "bytes": 11844
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-5a82d-acement-does-not-replay-ads-chromium/test-failed-1.png",
+          "sha256": "e89961b465d1cab2e2dadd889c1cd7ec2a4445fadc6e5b64a7a2be4d6d349c52",
+          "bytes": 82544
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-5a82d-acement-does-not-replay-ads-chromium/trace.zip",
+          "sha256": "62990cfdd6d6df611258e9f4f81436e08e5deb94715fd931ca97a87845f4eba9",
+          "bytes": 305094
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-e88cb-completion-restores-content-chromium/error-context.md",
+          "sha256": "53649990ecd022be23b799c762d919e2a2557d59082bd99fd3b3b2b4de54a2bc",
+          "bytes": 11517
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-e88cb-completion-restores-content-chromium/test-failed-1.png",
+          "sha256": "a8c4b0f780656c5c22fde95c33844dca73ce234e326c95b2d626f089d42fbab3",
+          "bytes": 85827
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-candida-e88cb-completion-restores-content-chromium/trace.zip",
+          "sha256": "93e4131d8b76e7434c2adff11fc6079d06094d60b6ecd40437ee1b2480d7cf19",
+          "bytes": 994224
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-4059c-ls-open-to-playable-content-chromium/error-context.md",
+          "sha256": "8bc40421d083bd4da4a732e42183d4362e71a3ddc9b9f0445a4e646241019a02",
+          "bytes": 11359
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-4059c-ls-open-to-playable-content-chromium/test-failed-1.png",
+          "sha256": "e84abc16fb03fadc2ff6c0b9014257309d693708983472cba24d56698cdb644d",
+          "bytes": 85019
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-4059c-ls-open-to-playable-content-chromium/trace.zip",
+          "sha256": "2455462a8e7ef451b512870487f31189d5743053701bed59ec108cfb39663002",
+          "bytes": 2517192
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-70f1d-reshold-and-resumed-content-chromium/error-context.md",
+          "sha256": "a3a3e05f78e8aa9387fffcd195e814b8b07d08633dab20ad17763718e796af22",
+          "bytes": 11494
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-70f1d-reshold-and-resumed-content-chromium/test-failed-1.png",
+          "sha256": "190ef0f38dec3e15535cb24669a255da2be7972b2ae2d282255579952d598f1f",
+          "bytes": 85592
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-70f1d-reshold-and-resumed-content-chromium/trace.zip",
+          "sha256": "d18960a99fa8126a57b28c96792c58b750340fbf66b4dba0d00f934103128dcf",
+          "bytes": 801155
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-b0ec8-completion-restores-content-chromium/error-context.md",
+          "sha256": "466a7503fc51d9d91452deea73a6cd260c4063f089ac29e1f0e5345117f68eed",
+          "bytes": 11517
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-b0ec8-completion-restores-content-chromium/test-failed-1.png",
+          "sha256": "8ca355ad820a8fe9eef893f8e902aa31c81cf154ed2493bbe042f6f8148e5122",
+          "bytes": 85885
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-b0ec8-completion-restores-content-chromium/trace.zip",
+          "sha256": "16898ce55027ffb1fe41803cad2e08d618ba46d7b39702032f045b06873867ed",
+          "bytes": 996878
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-cafa4-acement-does-not-replay-ads-chromium/error-context.md",
+          "sha256": "6aa961de1b9a539ac4ed0d198357a4c663dcc41b9642d718fa7355485e8f1036",
+          "bytes": 10063
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-cafa4-acement-does-not-replay-ads-chromium/test-failed-1.png",
+          "sha256": "a813c19361195cf8a21f10ed75c551d91f1b7ac6f2b28e85aaa591956db25103",
+          "bytes": 85938
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-first-results/ads-published-core-publish-cafa4-acement-does-not-replay-ads-chromium/trace.zip",
+          "sha256": "1040ec019bfb2a0596fbbd97d37ac104f5cc955496804925bd87b30e40e566bb",
+          "bytes": 1069405
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "note": "Fixture errors: pause before initialization and Windows WebKit layout-sized videoWidth; no production change.",
+      "stats": {
+        "startTime": "2026-09-11T23:18:17.690Z",
+        "duration": 87437.579,
+        "expected": 45,
+        "skipped": 0,
+        "unexpected": 9,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/ads02-browser-main-report.json",
+        "sha256": "c8367b7fe7816a43f240e2deeeab5678b2e621faa2d47f328658e81c5fa849fc",
+        "bytes": 4379446
+      },
+      "log": {
+        "file": "refactor/.cache/ads02-browser-main.log",
+        "sha256": "777c8c15c0de7276795b15a0f805645e82381c15b35d72cd7e2fc103072a0fc3",
+        "bytes": 42791
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/.last-run.json",
+          "sha256": "ddff586209b5e0d613af233bcdd6916c98eb6d1cd7d843677a03f501a265d863",
+          "bytes": 488
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-candida-4af82-completion-restores-content-webkit/error-context.md",
+          "sha256": "1ffa2343602c5ec45c07dd286ab36ddbd7c05d046e7023d0f74cb83203f295f6",
+          "bytes": 11609
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-candida-4af82-completion-restores-content-webkit/test-failed-1.png",
+          "sha256": "9661ab1955197d0d14d43e5886b1d915368b6108ebae7822e24f2ce5cc23126a",
+          "bytes": 284210
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-candida-4af82-completion-restores-content-webkit/trace.zip",
+          "sha256": "6fbbb702ec5dd582b083371722cdb36c4bb57ce019b83a133b52ee6ebb2c9678",
+          "bytes": 474156
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-candida-e65a0-acement-does-not-replay-ads-chromium/error-context.md",
+          "sha256": "b397553768ba42ddbcdc11dfb395f9efdd0d8f521d3f0235344befe19b8bbaac",
+          "bytes": 11890
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-candida-e65a0-acement-does-not-replay-ads-chromium/test-failed-1.png",
+          "sha256": "850afa86feea866de96bb79010972202cd50963a1a00d63993c2407f277fc55e",
+          "bytes": 82366
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-candida-e65a0-acement-does-not-replay-ads-chromium/trace.zip",
+          "sha256": "81a6d2908790b8e2b953fdd8fc20d7a444a9ae6fe80b467c9d7aa5f6105d6147",
+          "bytes": 309426
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-publish-1efa0-completion-restores-content-webkit/error-context.md",
+          "sha256": "8f283bdd5ed4524d757f9a6b341d9981c768fe99d3c958cd6124f17819b145d9",
+          "bytes": 11609
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-publish-1efa0-completion-restores-content-webkit/test-failed-1.png",
+          "sha256": "9661ab1955197d0d14d43e5886b1d915368b6108ebae7822e24f2ce5cc23126a",
+          "bytes": 284210
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-publish-1efa0-completion-restores-content-webkit/trace.zip",
+          "sha256": "8a763218a56f680a4153ec45e7a5fba1f09c0f69a504e5adea05eea2d7e4cfdb",
+          "bytes": 482775
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-publish-7ce1f-acement-does-not-replay-ads-chromium/error-context.md",
+          "sha256": "f7978d6f06677fc98a4cd3f2a65c398ea6a71ee6c516f1be5d54bf19144c1ac0",
+          "bytes": 11890
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-publish-7ce1f-acement-does-not-replay-ads-chromium/test-failed-1.png",
+          "sha256": "9670500dec0dbca163cc3abcf1a55933da5d05553b6495381467f4446c861c28",
+          "bytes": 83113
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-publish-7ce1f-acement-does-not-replay-ads-chromium/trace.zip",
+          "sha256": "e88f95d4949c8a742ead3abaeb12daad0907613fe132714aff2c98ee22ec6558",
+          "bytes": 292129
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-publish-7ce1f-acement-does-not-replay-ads-webkit/error-context.md",
+          "sha256": "7dd0f72e6174308fe6ff874a8d7c69c010bee358d4366cc6a999cc60d2109e64",
+          "bytes": 11879
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-publish-7ce1f-acement-does-not-replay-ads-webkit/test-failed-1.png",
+          "sha256": "7aea52a6492913db997af24e7e0549fbb687c6ff0f8eebc62dfe7663ed966686",
+          "bytes": 295773
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-candidate-core-publish-7ce1f-acement-does-not-replay-ads-webkit/trace.zip",
+          "sha256": "37df9e1bddd1332dd0256e84fccda9c48260ef2b70f7d13b01b8f8273c87fde9",
+          "bytes": 439288
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-candida-e88cb-completion-restores-content-webkit/error-context.md",
+          "sha256": "8ab533519aa8d4d6c34683e0d6ab5c18c462f6cff2c81fb0ccc6cda6bed3b0e8",
+          "bytes": 11609
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-candida-e88cb-completion-restores-content-webkit/test-failed-1.png",
+          "sha256": "deb11cedcc6e99a189368adb7884fbbf1fada92f20e546954dd93bfbe63d3f4a",
+          "bytes": 281691
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-candida-e88cb-completion-restores-content-webkit/trace.zip",
+          "sha256": "7e37ab7f87069b038e104b8d4da14801aaae66f44b24cf6195b257917d4f1061",
+          "bytes": 477790
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-publish-b0ec8-completion-restores-content-webkit/error-context.md",
+          "sha256": "a873017516be2c0ce81e3dc0464b557900c9ecbfa33b158b4df5d645d663deed",
+          "bytes": 11609
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-publish-b0ec8-completion-restores-content-webkit/test-failed-1.png",
+          "sha256": "deb11cedcc6e99a189368adb7884fbbf1fada92f20e546954dd93bfbe63d3f4a",
+          "bytes": 281691
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-publish-b0ec8-completion-restores-content-webkit/trace.zip",
+          "sha256": "6a3bc7bee58db58a56d6819b1773980c9ccd4d704f4461936400577c07ddb69d",
+          "bytes": 458980
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-publish-cafa4-acement-does-not-replay-ads-chromium/error-context.md",
+          "sha256": "349c384f17f8be457530f496b7dee004ac73fef1dd3f1f8f0389b26a4fc19479",
+          "bytes": 11830
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-publish-cafa4-acement-does-not-replay-ads-chromium/test-failed-1.png",
+          "sha256": "cc675a6a18ac7f88bc57c8b5465d3e0e50da713ec3bd93aab1af3808f391bfb0",
+          "bytes": 83287
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-publish-cafa4-acement-does-not-replay-ads-chromium/trace.zip",
+          "sha256": "0ed30c8369d6c321a881661a6d0cf5a5ed132bc60ece69522bb570fbdfa44e85",
+          "bytes": 306689
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-publish-cafa4-acement-does-not-replay-ads-webkit/error-context.md",
+          "sha256": "35119c774f59077c08d4fa8560fc659eede6d9385be920915072f00bda08801d",
+          "bytes": 11638
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-publish-cafa4-acement-does-not-replay-ads-webkit/test-failed-1.png",
+          "sha256": "c05abe618a1941b6f4ef394a23488d30b966e9ece26ffab1ab2fa0488e80e3e6",
+          "bytes": 292476
+        },
+        {
+          "file": "refactor/.cache/ads02-browser-main-results/ads-published-core-publish-cafa4-acement-does-not-replay-ads-webkit/trace.zip",
+          "sha256": "bae6016c038d23fc1161b8d6544148c2eb34ef52329328086264a7a1e8606314",
+          "bytes": 430948
+        }
+      ]
+    },
+    {
+      "name": "complete",
+      "note": "Four core/plugin combinations plus exact published rejection and zero-threshold observations; no skips or retries.",
+      "stats": {
+        "startTime": "2026-09-11T23:21:01.439Z",
+        "duration": 83617.205,
+        "expected": 66,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/ads02-browser-complete-report.json",
+        "sha256": "0136934ce8fe090edad7f5aed7111f0895e61ad12d072b5f6e71f5ae5584e76b",
+        "bytes": 5925060
+      },
+      "log": {
+        "file": "refactor/.cache/ads02-browser-complete.log",
+        "sha256": "1d5918f237c457e44227c24047ee2bed941a94a155bca922667290d18ee50413",
+        "bytes": 12396
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/ads02-browser-complete-results/.last-run.json",
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "bytes": 45
+        }
+      ]
+    }
+  ],
+  "ci": {
+    "file": "refactor/.cache/ads02-ci.log",
+    "sha256": "3a27de7214c4ecd8344b036f56290eaf89a09b75c3861268fab65e17a4a3c602",
+    "bytes": 84503,
+    "status": "passed",
+    "tests": 806,
+    "unit": 747,
+    "engineering": 14,
+    "baseline": 45,
+    "productionTypeScript": 262,
+    "coreDeclarationsUnchanged": 37,
+    "warning": "Existing generated docs/assets/ts/artplayer.d.ts unused eslint-disable; no errors."
+  },
+  "limits": [
+    "Injected Promise rejection is not device autoplay-policy acceptance.",
+    "Core 4.5.5 still pending.",
+    "Source-built candidate only; complete distribution validation belongs to 04-06.",
+    "Full screen, real hidden-page policy, rapid metadata and teardown media-resource acceptance remain open."
+  ],
+  "visualReview": {
+    "file": "refactor/.cache/ads02-video-review.png",
+    "source": "Complete report candidate core / candidate Ads Chromium ads-video-playing attachment",
+    "observed": "Decoded local pattern, countdown, muted icon and fullscreen button visible in ad overlay."
+  }
+}

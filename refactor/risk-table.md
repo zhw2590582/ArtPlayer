@@ -144,6 +144,6 @@
 | ADS-TYPE-01 | open / 源码/产物事实 | Ads 声明丢失真实 html/video/url，旧 totalDuration 为 string，当前 source/type 未实现 | PKG-ADS-02, PKG-ADS-04 |
 | ADS-DIST-01 | open / 已复现 | Ads npm 1.0.6 default namespace 与未发布 2.1.0 callable/exports 分发不同 | PKG-ADS-04, PKG-ADS-06, REL-01 |
 | ADS-CORE-01 | open / 源码/产物事实 | Ads 旧发布关联核心 4.5.5，当前源码新增 >=5 门槛和 document 事件桥依赖 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
-| ADS-LIFE-01 | open / 源码/产物事实 | Ads 计时链、重复/过早调用、工厂复用与销毁缺乏资源边界 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
-| ADS-MEDIA-01 | open / 源码/产物事实 | Ads metadata 与 play 拒绝、隐藏页媒体状态和内容恢复仍缺真实验证 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
-| ADS-UI-01 | open / 源码/产物事实 | Ads 零等待跳过与初始状态不符，全屏图标/外部状态需核验 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
+| ADS-LIFE-01 | open / 已复现 | Ads 计时链、重复/过早调用、工厂复用与销毁缺乏资源边界 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
+| ADS-MEDIA-01 | open / 已复现 | Ads metadata 与 play 拒绝、隐藏页媒体状态和内容恢复仍缺真实验证 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
+| ADS-UI-01 | open / 已复现 | Ads 零等待跳过与初始状态不符，全屏图标/外部状态需核验 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
