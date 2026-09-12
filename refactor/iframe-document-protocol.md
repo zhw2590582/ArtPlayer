@@ -47,6 +47,15 @@ WindowProxy在导航中保持身份。旧协议只用Date.now的请求ID，无�
 `The instance has been destroyed`。调用方需要处理commit/postMessage的拒绝。
 未确认离开前，原文档已完成的响应仍可结算原请求；这属于活文档的正常完成，不是假定所有导航意图都是换页。
 
+整页进入BFCache时父页也会冻结，子页的best-effort leave不一定送达。实际完整Chromium
+恢复证明父子文档及标记可以保持不变：未收到leave的原请求可以在恢复后继续完成；已收到
+leave的原请求保持拒绝。resume不伪造公开inject，也不会让已结算的请求复活。测试同时
+核对实际私有消息阶段和Promise结果，而不只检查history.back或Navigation Timing类型。
+
+停止加载、HTTP 204及截断响应不会授权把新请求发送给旧目标。旧文档仍活跃时可完成
+原请求，新队列继续等实际inject；设置后续有效iframe.src或destroy分别恢复或取消队列。
+没有新增隐式超时、自动旧源回退或覆盖window.stop。真实停止方法和网络响应见history测试记录。
+
 公开promises记录保留resove/reject和对象身份。普通响应仍尊重用户替换的公开回调；
 内部取消独立持有原Promise拒绝入口，不能因用户删除/替换记录而泄漏原Promise。
 
@@ -56,8 +65,9 @@ WindowProxy在导航中保持身份。旧协议只用Date.now的请求ID，无�
   不能通过未升级的一侧可靠证明。完整文档保护需双方使用新实现，旧正常协议继续兼容。
 - MutationObserver不可用时，只能在公开方法/轮询时检查可观察的源变化；语法legacy目标不等于补齐DOM能力。
 - 未标记的自定义原生消息仍按旧协议接受；其文档级归属由应用管理。SDK提供的消息在协商后携带标记。
-- 历史返回用例记录实际pageshow.persisted。普通重新加载不能计作原生BFCache验证；完整播放器、
-  原生BFCache/设备、外部中断导航与文档站实际组合仍在IFRAME-05及发布复盘核验，未由本轮自动豁免。
+- 历史返回必须核对实际pageshow.persisted与文档标识。IFRAME-05新增完整Chromium真实缓存恢复、
+  实际播放器及编辑器、停止/204/截断响应验收。Firefox/WebKit的重新加载对照不能计作缓存恢复；
+  原生设备、其余缓存引擎及最终分发仍待验收，不由桌面通过结果自动豁免。
 - 本协议不验证父页origin许可，也不把可执行commit变成代码沙箱；嵌入父页和选定子内容仍需可信。
 
 验证入口为test/iframe-navigation.test.js和test/browser/iframe-navigation.spec.js，记录见

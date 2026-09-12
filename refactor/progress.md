@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-IFRAME-05 原生缓存与中断导航检查点（doing）
+
+新增独立 `yarn test:iframe-history`：完整Chromium通道与可缓存HTTP页面，避免默认
+Playwright禁用BFCache产生的错误验收。源码/main/legacy各90项通过，共270项；其中
+36项实际Chromium缓存恢复、72项Firefox/WebKit重新加载对照、162项停止/204/截断响应
+后的恢复和销毁。核对父子文档标识、原生persisted、媒体状态、请求结算和后续通信。
+GitHub浏览器任务已增加运行及报告上传，actionlint通过；未推送或声称远端CI已执行。
+全仓CI1544、330生产TS检查和3导入测试通过；不把未重新运行的覆盖率标成本轮新结果。
+原生产源码/产物及公开接口未变；整页冻结可能保留未收到leave的原请求，已明确记录。
+见[变更](changes/2026-09-13-PKG-IFRAME-05-history.md)与
+[验证](baselines/iframe-history-validation.json)。物理设备、Firefox/WebKit实际缓存恢复、
+最终分发仍待验收。222项：109 done、10 doing、103 todo。
+
 ## PKG-IFRAME-05 播放器与真实编辑器检查点（doing）
 
 冻结原支持核心4.5.9的176个npm文件，与已冻结5.4.0、候选核心组成真实媒体矩阵。
@@ -9,8 +22,8 @@ Monaco页面Run流程。覆盖播放、seek/rate、网页全屏、切源、播�
 源码和运行产物字节未变，旧公开API保持；失败探针、trace及后续通过报告均留存。
 全仓CI1544、330生产TS检查、3导入测试通过，配置覆盖率门槛0违例（224运行文件）。
 见[变更](changes/2026-09-13-PKG-IFRAME-05-integration.md)和
-[验证](baselines/iframe-integration-validation.json)。实际BFCache、物理设备、外部
-中断导航及最终分发仍待验收，不因此关闭任务或风险。222项：109 done、10 doing、103 todo。
+[验证](baselines/iframe-integration-validation.json)。后续缓存/中断证据见上方；物理设备与
+最终分发仍待验收，不因此关闭任务或风险。222项：109 done、10 doing、103 todo。
 
 ## PKG-IFRAME-04 完成：公开类型、模块入口和编辑器
 

@@ -1,6 +1,6 @@
 # 复用 docs HTML 与在线编辑器进行真实测试
 
-2026-09-10 已核对下列页面及脚本源码，尚未实际运行页面。优先复用现有 HTML 和示例作为浏览器验收入口，保留旧 URL/参数和编辑器功能；另补可靠断言、状态隔离和报告，不把演示能打开当作兼容性通过。
+2026-09-10 首次清点时仅核对源码。后续实际运行以各任务证据为准：IFRAME-05 已验证真实iframe页面、Monaco Run和桌面历史导航，见[播放器/编辑器记录](changes/2026-09-13-PKG-IFRAME-05-integration.md)及[缓存/中断记录](changes/2026-09-13-PKG-IFRAME-05-history.md)。保留旧 URL/参数和编辑器功能，补可靠断言、状态隔离和报告，不把演示能打开当作兼容性通过。
 
 ## 入口与实际加载方式
 
@@ -37,6 +37,12 @@ chapter 试点可使用 `http://localhost:8082/?libs=./uncompiled/artplayer-plug
 ENG-05 已提供 `yarn test:browser`、8084 隔离服务和 `ARTPLAYER_BROWSER_ARTIFACTS` 文件映射，见 [浏览器入口](../test/browser/README.md)。当前支持 core/chapter 的 compiled/uncompiled 别名，未映射的构建资源明确失败；每次报告保存实际文件 SHA-256。ENG-07 继续负责生成及核验候选 tarball，不能只检查开发 bundle 就批准 npm 发布。
 
 ## 任务归属与验收
+
+IFRAME-05 的 `yarn test:iframe-history` 使用8085的独立缓存页面及完整Chromium通道，
+移除Playwright默认禁用BFCache的参数。原8084配置保持不变。只有父子文档标识连续且
+原生pageshow.persisted为true才记为缓存恢复；Firefox/WebKit的reload-control单独计数。
+该命令还验证真实停止加载、HTTP 204、截断文档响应和后续导航/销毁，GitHub浏览器任务
+运行并上传对应报告。它不替代8082实际分发、完整站点、物理设备或其他缓存引擎的验收。
 
 | 任务 | 负责交付 |
 | --- | --- |

@@ -181,6 +181,26 @@ its initial commit handles cancellation during cleanup. This is an editor
 convention, not automatic DOM-removal behavior or a new player API. Standalone
 integrations remain responsible for calling destroy themselves.
 
-Physical devices, actual BFCache restoration, interrupted navigation and final
-distribution remain separate gates. Passing desktop player/editor tests does not
-complete those gates or establish the old helper/package-name migration.
+`yarn test:iframe-history` runs the separate cacheable HTTP fixture and full
+Chromium channel, removing Playwright's BFCache-disabling default argument. It
+checks actual whole-page restoration through native persisted events, parent/child
+witnesses, media and the real commit protocol. Firefox/WebKit reload controls are
+reported separately and never counted as cached restoration. Do not replace this
+configuration with the default headless shell or simulated lifecycle events.
+
+An entire cached page also freezes the parent. If the private leave message did
+not reach it, the original request can remain pending and settle after restoration.
+If leave was delivered, that request remains rejected; a late result cannot change
+its outcome. Resume retains the same document ID and emits no duplicate public
+inject. The test checks actual delivered phases against settlement.
+
+The same command tests native stop, HTTP 204 and a truncated document response.
+After a failed navigation, new work still waits for actual injection into the
+target document; it is not sent to the unrelated old document. Navigate the frame
+to a valid source or destroy the tool to finish/cancel that work. There is no
+implicit timeout or automatic fallback to an old source.
+
+Physical devices, native Firefox/WebKit cached restoration and final distribution
+remain separate gates. Desktop evidence does not establish the old helper or
+package-name migration. See ADR-026 and the task 05 history checkpoint for the
+exact fixture, automation limitations and source/main/legacy evidence.

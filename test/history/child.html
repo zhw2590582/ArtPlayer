@@ -1,0 +1,20 @@
+<!doctype html>
+<title>Iframe media history child</title>
+<style>
+  html,
+  body,
+  .player {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+</style>
+<script src="/observe.js"></script>
+<script src="/core.js?core=__CORE__"></script>
+<script src="/tool.js"></script>
+<div class="player"></div>
+<script>
+  window.art = new Artplayer({ container: '.player', url: '/pattern.mp4', muted: true, fullscreenWeb: true })
+  ArtplayerToolIframe.inject()
+</script>

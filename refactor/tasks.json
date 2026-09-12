@@ -3710,7 +3710,9 @@
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-13-PKG-IFRAME-05-integration.md",
-        "baselines/iframe-integration-validation.json"
+        "baselines/iframe-integration-validation.json",
+        "changes/2026-09-13-PKG-IFRAME-05-history.md",
+        "baselines/iframe-history-validation.json"
       ]
     },
     {

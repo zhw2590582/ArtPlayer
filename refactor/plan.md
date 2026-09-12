@@ -534,5 +534,5 @@
 - PKG-IFRAME-02: [记录](changes/2026-09-12-PKG-IFRAME-02-behavior.md) [记录](baselines/iframe-behavior-validation.json)
 - PKG-IFRAME-03: [记录](changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md) [记录](baselines/iframe-requests-checkpoint.json) [记录](changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md) [记录](baselines/iframe-boundaries-checkpoint.json) [记录](iframe-message-boundary.md) [记录](changes/2026-09-13-PKG-IFRAME-03-navigation.md) [记录](baselines/iframe-navigation-validation.json) [记录](iframe-document-protocol.md)
 - PKG-IFRAME-04: [记录](changes/2026-09-13-PKG-IFRAME-04-types.md) [记录](baselines/iframe-types-validation.json)
-- PKG-IFRAME-05: [记录](changes/2026-09-13-PKG-IFRAME-05-integration.md) [记录](baselines/iframe-integration-validation.json)
+- PKG-IFRAME-05: [记录](changes/2026-09-13-PKG-IFRAME-05-integration.md) [记录](baselines/iframe-integration-validation.json) [记录](changes/2026-09-13-PKG-IFRAME-05-history.md) [记录](baselines/iframe-history-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

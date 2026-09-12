@@ -1,0 +1,26 @@
+<!doctype html>
+<title>Iframe document history</title>
+<script src="/observe.js"></script>
+<script src="/tool.js"></script>
+<iframe style="width: 640px; height: 360px" allowfullscreen></iframe>
+<script>
+  window.timeline = []
+  window.callbacks = []
+  window.states = {}
+  window.track = (name, promise) => {
+    states[name] = { status: 'pending' }
+    promise.then(
+      (value) => (states[name] = { status: 'resolved', value }),
+      (error) => (states[name] = { status: 'rejected', error: error.message }),
+    )
+  }
+  const target = new URL('/child.html', location.href)
+  target.search = location.search
+  if (target.searchParams.get('relation') === 'cross') target.hostname = 'localhost'
+  window.targetFrame = document.querySelector('iframe')
+  addEventListener('message', (event) => {
+    if (event.source === targetFrame.contentWindow) timeline.push(event.data)
+  })
+  window.tool = new ArtplayerToolIframe({ iframe: targetFrame, url: target.href })
+  tool.message((packet) => callbacks.push(packet))
+</script>

@@ -3776,7 +3776,7 @@
       ],
       "status": "open",
       "confirmation": "reproduced",
-      "compatibleResolution": "Owned requests and ADR-026 document cancellation are implemented. IFRAME-05 now verifies actual desktop players and Monaco Run on source/main/legacy, including pending-request and multiple-player cleanup. Keep open for actual BFCache/device and interrupted-navigation acceptance; unchanged legacy peers retain documented document-identity limits.",
+      "compatibleResolution": "Owned requests and ADR-026 document cancellation are implemented. Task 05 verifies actual desktop players/Monaco and source/main/legacy cached history plus stop/204/truncated-response recovery. Full Chromium proves native BFCache; Firefox/WebKit only prove reload controls. Keep open for physical devices, remaining cache engines and final release acceptance; legacy peers retain documented document-identity limits.",
       "closureCriteria": "Old behavior and candidate fixes have deterministic race/resource tests plus actual iframe integration.",
       "evidence": [
         "refactor/baselines/iframe-contract.md",
@@ -3792,7 +3792,9 @@
         "refactor/baselines/iframe-navigation-validation.json",
         "refactor/iframe-document-protocol.md",
         "refactor/changes/2026-09-13-PKG-IFRAME-05-integration.md",
-        "refactor/baselines/iframe-integration-validation.json"
+        "refactor/baselines/iframe-integration-validation.json",
+        "refactor/changes/2026-09-13-PKG-IFRAME-05-history.md",
+        "refactor/baselines/iframe-history-validation.json"
       ]
     },
     {
@@ -3819,7 +3821,9 @@
         "refactor/baselines/iframe-navigation-validation.json",
         "refactor/iframe-document-protocol.md",
         "refactor/changes/2026-09-13-PKG-IFRAME-05-integration.md",
-        "refactor/baselines/iframe-integration-validation.json"
+        "refactor/baselines/iframe-integration-validation.json",
+        "refactor/changes/2026-09-13-PKG-IFRAME-05-history.md",
+        "refactor/baselines/iframe-history-validation.json"
       ]
     },
     {

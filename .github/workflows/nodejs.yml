@@ -87,6 +87,8 @@ jobs:
           node --input-type=module -e 'import fs from "node:fs"; const { output } = JSON.parse(fs.readFileSync("refactor/.cache/packages/latest.json")); fs.appendFileSync(process.env.GITHUB_ENV, `ARTPLAYER_BROWSER_ARTIFACTS=${output}/browser-artifacts.json\n`);'
       - name: Run all three engines
         run: yarn test:browser
+      - name: Verify iframe cached history and interrupted navigation
+        run: yarn test:iframe-history
       - name: Compare installed performance and verify resource cleanup
         run: yarn test:performance
       - name: Upload browser evidence
@@ -96,6 +98,7 @@ jobs:
           name: browser-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             refactor/.cache/browser/
+            refactor/.cache/iframe-history/
             refactor/.cache/performance/
             refactor/.cache/packages/latest.json
             refactor/.cache/packages/run-*/*.json

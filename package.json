@@ -55,6 +55,7 @@
     "test:coverage": "node --test test/coverage.test.js && node scripts/coverage.mjs",
     "test": "yarn test:node && yarn test:baseline",
     "test:browser": "playwright test",
+    "test:iframe-history": "playwright test --config playwright.iframe-history.config.js",
     "test:performance": "playwright test --config playwright.performance.config.js",
     "test:browser:install": "playwright install chromium firefox webkit",
     "test:browser:report": "playwright show-report refactor/.cache/browser/html",
