@@ -165,6 +165,7 @@
     {
       "name": "artplayer-plugin-vast",
       "declaredRuntimeDependencies": {
+        "@alugha/ima": "2.1.0",
         "@glomex/vast-ima-player": "^1.21.2"
       },
       "resolvedRuntimeDependencies": [
@@ -175,6 +176,14 @@
           "installedVersion": "1.21.2",
           "manifestLicense": "Apache-2.0",
           "licenseEvidence": "Installed package manifest claim; bundled notice and transitive/license review remain with the owning package."
+        },
+        {
+          "name": "@alugha/ima",
+          "range": "2.1.0",
+          "lockedVersion": "2.1.0",
+          "installedVersion": "2.1.0",
+          "manifestLicense": "MIT",
+          "licenseEvidence": "Installed package manifest and LICENSE.md; direct dependency supplies the public declaration chain referenced by Glomex."
         }
       ],
       "developmentDependencies": {}
@@ -1118,7 +1127,9 @@
         "PKG-VAST-05"
       ],
       "sourceFiles": [
-        "packages/artplayer-plugin-vast/src/index.js"
+        "packages/artplayer-plugin-vast/src/index.ts",
+        "packages/artplayer-plugin-vast/src/sdk.ts",
+        "packages/artplayer-plugin-vast/src/session.ts"
       ],
       "contract": "@glomex/vast-ima-player loadImaSdk loads external IMA; preserve event/content/ad state and teardown, do not equate mocks with vendor service acceptance.",
       "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",

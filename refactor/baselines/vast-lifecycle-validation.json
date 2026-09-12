@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-VAST-03",
+  "status": "doing",
+  "sourceCommit": "d5e1fead",
+  "checks": [
+    {
+      "command": "node --test refactor/.cache/vast03-before.test.mjs",
+      "result": "15 expected failures on frozen workspace source; identical candidate assertions",
+      "tests": 15,
+      "failed": 15,
+      "passed": 0,
+      "log": {
+        "file": "refactor/.cache/vast03-before.log",
+        "sha256": "05bddd211578ae5086ce5b974d7598a1d0024bda69794026d730f8da02149058"
+      },
+      "fixture": {
+        "file": "refactor/.cache/vast03-before.test.mjs",
+        "sha256": "505d9a87e16138283ec2823b394eac6f0e640718a6cbf50af8a2dcfb3d611f49"
+      }
+    },
+    {
+      "command": "node --test test/vast.test.js test/vast-lifecycle.test.js",
+      "result": "pass",
+      "tests": 60,
+      "candidateLifecycle": 15,
+      "log": {
+        "file": "refactor/.cache/vast03-lifecycle-node-final.log",
+        "sha256": "b1a22029079b702954cce52fc63a57203baa38bcfefbb0b7d60c4a7dc4c43408"
+      }
+    },
+    {
+      "command": "yarn build artplayer-plugin-vast",
+      "result": "pass",
+      "formats": [
+        "main",
+        "legacy",
+        "esm"
+      ],
+      "log": {
+        "file": "refactor/.cache/vast03-build.log",
+        "sha256": "c32e975b99fdf2d88397ec528c2d4b954dab4cfdaedbf83c0f0f8f38672a9e65"
+      }
+    },
+    {
+      "command": "yarn test:browser vast.spec.js",
+      "result": "pass",
+      "tests": 117,
+      "stats": {
+        "startTime": "2026-09-12T01:27:19.631Z",
+        "duration": 49123.307,
+        "expected": 117,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "scope": "Actual core 5.1.7/5.4.1/candidate, actual DOM/main media, controlled Glomex boundary in wrapper source builds. Not final bundled SDK runtime acceptance.",
+      "log": {
+        "file": "refactor/.cache/vast03-browser.log",
+        "sha256": "848ea969ac9f30776817284eb488fdf9d660ae98bcd01d32dbaf8f70e04fdfb5"
+      },
+      "report": {
+        "file": "refactor/.cache/vast03-browser-report.json",
+        "sha256": "fd58f0b1ebcd1d2ec209bfd94e29f7387ef55d9ffdba8e145d7a22f72fbb079c"
+      },
+      "results": "refactor/.cache/vast03-browser-results"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 832,
+        "engineering": 14,
+        "baseline": 54,
+        "total": 900
+      },
+      "sourceTS": 274,
+      "coreDeclarations": 37,
+      "log": {
+        "file": "refactor/.cache/vast03-ci.log",
+        "sha256": "5e6bb801f578792debcd88ff0341922dd053f358b9f78f2d51839063132c0deb"
+      }
+    }
+  ],
+  "pending": [
+    "Published versus workspace initialization decision",
+    "Published id/$container aliases",
+    "Public declaration and CommonJS namespace reconciliation in04",
+    "Real IMA and package distribution validation in05/06"
+  ],
+  "inputs": [
+    {
+      "file": "package.json",
+      "sha256LF": "fce3d3a49ba5bb24fd1ae2191e4e13b679395cf50df5d26b355904dd9b31caf2"
+    },
+    {
+      "file": "yarn.lock",
+      "sha256LF": "9bd01cf6394ece742aecb0ecc2a2aa563012de2c16f28141ed03dd37e17f8717"
+    },
+    {
+      "file": "packages/artplayer-plugin-vast/package.json",
+      "sha256LF": "dd4c196a8c94b0037bc156e428300b030d40b6f015f3ad165ef48aa733149052"
+    },
+    {
+      "file": "packages/artplayer-plugin-vast/tsconfig.json",
+      "sha256LF": "712a3fa32ed57692d16bf854a0e77ffaecd04236efa0f557905aab7291e0aef6"
+    },
+    {
+      "file": "packages/artplayer-plugin-vast/src/index.ts",
+      "sha256LF": "c17455be188ecb23161729234faa1b4309a3b60f08465509e873fee2f1dd21d6"
+    },
+    {
+      "file": "packages/artplayer-plugin-vast/src/sdk.ts",
+      "sha256LF": "aaff7c1e4a31ff99261b045648663caa46f66b5a25ad129e5fc929facaf1ff89"
+    },
+    {
+      "file": "packages/artplayer-plugin-vast/src/session.ts",
+      "sha256LF": "472ad363276711dd79c375e5cdfe44cc42dd7f781a04974442f2599998c8cbc2"
+    },
+    {
+      "file": "packages/artplayer-plugin-vast/src/types.ts",
+      "sha256LF": "0042303fd4206467724a7c5abda633436ac30a3d1139b24609e1a7dd1e890b23"
+    },
+    {
+      "file": "packages/artplayer-plugin-vast/src/view.ts",
+      "sha256LF": "c36008cdf2e6b7818b166deb4842ce8d405272486e2c07b6226e8e2905640328"
+    },
+    {
+      "file": "test/helpers/vast-sdk.js",
+      "sha256LF": "f8bc792ef16da9396bafefaf89f1b53b6254bf263d0c3019b87ee188eac35bd1"
+    },
+    {
+      "file": "test/helpers/vast.js",
+      "sha256LF": "ea985ca97946645a8b6fc76c9d69ec4fc12f959ab175402cd34e93bc81c14ce9"
+    },
+    {
+      "file": "test/vast.test.js",
+      "sha256LF": "b02c12c0440540f4f13929bbdcb3607621a42fdc6f29debbc912189c3aa025a6"
+    },
+    {
+      "file": "test/vast-lifecycle.test.js",
+      "sha256LF": "5b6eb97ee038755046fdc31b4fa12e4a3e20903deafc208d6378f7e5de61dfbc"
+    },
+    {
+      "file": "test/browser/vast.spec.js",
+      "sha256LF": "7cef5364837e3e0b4818ecfa954c1e4214ac6627be78ee85bd32cdb479b37f62"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.js",
+      "sha256": "874803ec726f04649bb636c1376de9e038754310ab0016a22da44f189b7a5ce0"
+    },
+    {
+      "file": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.legacy.js",
+      "sha256": "7d4e0fdb95e6881f6b6379a7c36599fb5087cf9122253718a955931077c9f420"
+    },
+    {
+      "file": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.mjs",
+      "sha256": "7650fb0d42e8bb7049d201859187d28f69b1868ac7e25539a7575ee50ae1b2d7"
+    }
+  ],
+  "dependency": {
+    "package": "@alugha/ima",
+    "version": "2.1.0",
+    "license": "MIT",
+    "purpose": "Public Glomex SDK declaration dependency; runtime loader remains existing Glomex implementation",
+    "installation": {
+      "file": "refactor/.cache/vast03-dependency.log",
+      "sha256": "ad5ace8a5a596d521f65ab454793d3e3d2cce9b774310ce9082e232fd8d1bf95"
+    },
+    "consumerTypes": {
+      "source": "import vast from \"artplayer-plugin-vast\"; vast(({imaPlayer})=>{void imaPlayer});",
+      "results": [
+        {
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "diagnostics": []
+        },
+        {
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs",
+          "diagnostics": []
+        }
+      ]
+    }
+  }
+}

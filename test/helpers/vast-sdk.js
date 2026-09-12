@@ -24,6 +24,7 @@ export function createVastSdk(options = {}) {
         this.listeners = new Map()
         this.destroyCalls = 0
         state.players.push(this)
+        state.onConstruct?.(this)
       }
 
       addEventListener(name, callback) {
@@ -32,6 +33,7 @@ export function createVastSdk(options = {}) {
         if (!this.listeners.has(name))
           this.listeners.set(name, new Set())
         this.listeners.get(name).add(callback)
+        state.onListen?.(this)
       }
 
       removeEventListener(name, callback) {
@@ -52,6 +54,7 @@ export function createVastSdk(options = {}) {
         this.destroyCalls++
         if (state.destroyError)
           throw state.destroyError
+        state.onDestroy?.(this)
         this.listeners.clear()
       }
     },

@@ -165,5 +165,62 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
         }))).toEqual({ calls: 1, players: 1, destroys: 0, connected: false, url: '/late.xml' })
       })
     }
+    else {
+      test(`${label}: candidate suppresses late SDK initialization after real core destruction`, async ({ page }, testInfo) => {
+        await setup(page, core, implementation, testInfo, true)
+        const state = await page.evaluate(async () => {
+          let calls = 0
+          const registration = window.art.plugins.add(window.artplayerPluginVast(() => calls++))
+          window.art.destroy()
+          window.vastSdk.resolveLoad()
+          await registration
+          return { calls, players: window.vastSdk.state.players.length }
+        })
+        expect(state).toEqual({ calls: 0, players: 0 })
+      })
+
+      test(`${label}: candidate isolates stale events and terminates recreated ads on core destroy`, async ({ page }, testInfo) => {
+        await setup(page, core, implementation, testInfo)
+        await page.evaluate(async () => {
+          await window.art.plugins.add(window.artplayerPluginVast((context) => {
+            window.vastContext = context
+          }))
+          window.vastContext.playUrl('/one.xml')
+          const first = window.vastContext.imaPlayer
+          window.lateVastEvents = [...first.listeners.values()].flatMap(values => [...values])
+          first.emit('AdStarted')
+        })
+        const container = page.locator('[id^="art-vast-"]')
+        await expect(container).toBeVisible()
+        await page.evaluate(() => {
+          window.art.plugins.artplayerPluginVast.destroy()
+          window.vastContext.playUrl('/two.xml')
+          for (const callback of window.lateVastEvents) callback({ detail: 'late' })
+        })
+        await expect(container).toBeHidden()
+        expect(await page.evaluate(() => window.vastSdk.state.players.map(player => player.requests.length))).toEqual([1, 1])
+        await page.evaluate(() => {
+          window.art.destroy()
+          window.vastContext.playUrl('/after-core-destroy.xml')
+        })
+        expect(await page.evaluate(() => window.vastContext.init())).toBe(null)
+        expect(await page.evaluate(() => window.vastSdk.state.players.map(player => player.destroyCalls))).toEqual([1, 1])
+        await expect(container).toHaveCount(0)
+      })
+
+      test(`${label}: candidate callback rejection cleans allocated SDK and DOM without destroying the core`, async ({ page }, testInfo) => {
+        await setup(page, core, implementation, testInfo)
+        const result = await page.evaluate(async () => {
+          const failure = new Error('callback rejected')
+          const registration = window.art.plugins.add(window.artplayerPluginVast((context) => {
+            context.init()
+            return Promise.reject(failure)
+          }))
+          return { sameError: await registration.catch(error => error === failure), destroys: window.vastSdk.state.players[0].destroyCalls, coreDestroyed: window.art.isDestroy }
+        })
+        expect(result).toEqual({ sameError: true, destroys: 1, coreDestroyed: false })
+        await expect(page.locator('[id^="art-vast-"]')).toHaveCount(0)
+      })
+    }
   }
 }

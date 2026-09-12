@@ -4,6 +4,14 @@
 [实际契约](baselines/vast-contract.md)、[VAST/SDK归档](baselines/vast-release.json)
 和 [核心5.1.7归档](baselines/vast-core.json)。工作区1.2.0不是npm发布版本。
 
+03检查点：新增`test/vast-lifecycle.test.js`的15项候选修复断言，冻结工作区全部失败、
+当前5个TS模块全部通过；现有测试共60项Node、117项浏览器通过。覆盖终止/回调失败、
+初始化回滚、活动广告重建、旧事件、配置getter和SDK同步重入；完整CI900项通过。
+该文件已纳入`yarn test:vast`和`test:unit`。实际资源所有权见
+[包内架构](../packages/artplayer-plugin-vast/ARCHITECTURE.md)；
+[初始化冲突](vast-compatibility-decision.md)未决定，03仍doing。以下缺陷清单保留历史
+来源，不代表候选实现仍包含这些已获可控修复证据的问题；真实IMA验收仍待05。
+
 ## 文件与执行
 
 - `test/helpers/vast-sdk.js`：可在Node和浏览器使用的SDK记录器，控制加载、构造、

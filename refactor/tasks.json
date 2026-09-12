@@ -2692,11 +2692,15 @@
         "CORE-10",
         "CORE-13"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "SDK loader、IMA adapter、广告状态和 DOM 清理分离；保持发布 callback 别名，明确初始化冲突；核心终止与显式 destroy 后重建区分",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-VAST-03-lifecycle.md",
+        "baselines/vast-lifecycle-validation.json",
+        "vast-compatibility-decision.md"
+      ]
     },
     {
       "id": "PKG-VAST-04",
