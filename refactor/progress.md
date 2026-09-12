@@ -1,5 +1,16 @@
 # 进度与证据
 
+## 最新完成：Canvas-04 公开类型与两代导出
+
+公开namespace保留可选Parameters和精确HTMLCanvasElement返回，新增显式MediaCanvas
+视图；工厂.default自别名、ESM/CJS声明包装、旧TS legacy路径及语义编辑器生成同步。
+仓库外安装17场景：候选7个/历史9个零诊断，另1个历史NodeNext ESM保留五个精确
+诊断；候选每种模式拒绝11项非法用法。四组专项、18项真实浏览器及完整CI1052项
+通过，另44项重复契约观察，284个生产TS文件严格检查。类型/两代导出具体风险关闭，
+设备、Document PiP组合及完整demo/分发仍待05/06。当前221项：93 done、6 doing、
+122 todo。见 [本步记录](changes/2026-09-12-PKG-CANVAS-04-types.md) 和
+[验证证据](baselines/canvas-types-validation.json)。独立本地提交，无推送/发布。
+
 ## 最新完成：Canvas-03 严格TS职责与生命周期
 
 生产源码拆为入口/媒体转发/底层video所有权/尺寸/绘制/调度六个严格TS模块，修复

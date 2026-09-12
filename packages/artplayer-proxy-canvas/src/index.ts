@@ -6,7 +6,7 @@ import { ownMedia } from './media'
 import { createRenderer } from './renderer'
 import { createFrameScheduler } from './scheduler'
 
-export default function artplayerProxyCanvas(callback?: DrawCallback) {
+function artplayerProxyCanvas(callback?: DrawCallback) {
   return (art: Artplayer): HTMLCanvasElement => {
     const constructor = art.constructor as typeof Artplayer
     const canvas = constructor.utils.createElement('canvas')
@@ -130,3 +130,5 @@ export default function artplayerProxyCanvas(callback?: DrawCallback) {
     return canvas
   }
 }
+
+export default Object.assign(artplayerProxyCanvas, { default: artplayerProxyCanvas })

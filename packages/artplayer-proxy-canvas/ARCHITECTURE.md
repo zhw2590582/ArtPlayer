@@ -3,7 +3,10 @@
 Public entry: `src/index.ts`; public declarations remain in
 `types/artplayer-proxy-canvas.d.ts`. The factory accepts the optional drawing callback,
 then synchronously returns an actual HTMLCanvasElement when registered with ArtPlayer.
-Public declaration/export consumer work continues in PKG-CANVAS-04.
+The public namespace preserves the optional callback and exact Canvas return extraction.
+MediaCanvas is an explicit type view, not a narrowed factory result. CommonJS and browser
+factory.default are self aliases; .d.mts/.d.cts wrappers distinguish ESM and CommonJS
+resolution, and typesVersions keeps the legacy path available to older TypeScript.
 Historical JavaScript falsy callback arguments remain ignored at runtime; the typed public
 callback remains optional and function-valued.
 
@@ -68,6 +71,9 @@ uses the candidate source loader after module splitting; its palette test proves
 geometry and is separate from native media pixel acceptance. npm core 5.1.7 has no proxy
 option and is only a native-player capability control.
 
-Public type/import compatibility, full installed artifacts and 8082 demos remain 04/06.
+`yarn test:canvas-types-package` installs real archived and candidate packages outside the
+workspace, verifies installed bytes and checks old/current compiler modes. The public
+namespace also generates the local editor declaration through the semantic generator.
+Broader installed artifact contents/deep paths and 8082 demos remain 06.
 Real Safari/mobile/device scope remains 05; Windows Playwright WebKit is not a device claim.
 See `refactor/canvas-validation.md` and the task evidence for actual outcomes and limitations.

@@ -3314,11 +3314,15 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "canvas 与媒体能力的精确组合类型，保持 Result",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-CANVAS-04-types.md",
+        "baselines/canvas-types-validation.json",
+        "canvas-validation.md"
+      ]
     },
     {
       "id": "PKG-CANVAS-05",

@@ -56,3 +56,20 @@ WebKit须验证intrinsic尺寸，不能仅alpha255；1px挂载曾令videoWidth/v
 失败诊断与针对性回归见[03记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md)和
 [03证据](baselines/canvas-lifecycle-validation.json)。04公开类型/导出和05设备、06
 完整分发/demo仍需完成；本步的strict内部类型不替代安装消费者验收。
+
+## 04 公开类型和分发入口
+
+`node --test refactor/scripts/canvas-types.test.mjs`运行四组基线：两代真实声明、五种
+编译器模式、11项非法用法、生成编辑器全局及三格式导出身份。Parameters保持可选
+callback，Result精确保持HTMLCanvasElement；MediaCanvas只作显式类型视图，不能
+用于收窄旧返回值或假设所有浏览器具备全部媒体API。不要复制Ambilight的必填末重载。
+
+`yarn test:canvas-types-package`在仓库外安装两份实际发布及候选，校验文件字节和
+非workspace链接，离线安装与frozen reinstall均须通过。17个编译场景里，候选7个
+及历史9个应零诊断；另1个npm1.1.0 NodeNext ESM保留2349/2349/2322/2344/2344
+五个旧诊断。候选每种模式移除@ts-expect-error后须拒绝11项非法用法。
+
+公开namespace是编辑器声明源，不手改docs/assets/ts生成文件。.default与工厂
+自身同一引用；根ESM/CJS及legacy类型入口各自测试。完整路径/内容/demo仍留06，
+真实Safari/移动设备仍留05。见[04实施记录](changes/2026-09-12-PKG-CANVAS-04-types.md)
+和[04证据](baselines/canvas-types-validation.json)。

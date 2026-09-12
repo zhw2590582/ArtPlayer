@@ -322,6 +322,7 @@ function artplayerProxyCanvas(callback) {
     return canvas;
   };
 }
+const index = Object.assign(artplayerProxyCanvas, { default: artplayerProxyCanvas });
 export {
-  artplayerProxyCanvas as default
+  index as default
 };

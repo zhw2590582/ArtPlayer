@@ -3376,12 +3376,18 @@
       ],
       "compatibleResolution": "Keep optional current callback inference and actual canvas return while validating historical consumers and any additive media surface types.",
       "closureCriteria": "Strict old/current compiler consumers and installed callback/result/import variants verified without new inference narrowing.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/canvas-contract.md",
         "refactor/baselines/canvas-release.json",
         "refactor/changes/2026-09-12-PKG-CANVAS-01-contract.md"
-      ]
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-CANVAS-04-types.md",
+        "refactor/baselines/canvas-types-validation.json"
+      ],
+      "resolutionRationale": "Packed candidate compiles in seven old/current compiler configurations; Parameters stays optional and ReturnType stays exactly HTMLCanvasElement, including assigning an ordinary Canvas. Additive MediaCanvas is explicit opt-in. Eleven invalid uses are rejected in every candidate mode; exact archived declarations retain the pre-existing 1.0.0 required to 1.1.0 optional distinction. Candidate also corrects the recorded published 1.1.0 NodeNext ESM failure.",
+      "workspaceState": "Packed candidate compiles in seven old/current compiler configurations; Parameters stays optional and ReturnType stays exactly HTMLCanvasElement, including assigning an ordinary Canvas. Additive MediaCanvas is explicit opt-in. Eleven invalid uses are rejected in every candidate mode; exact archived declarations retain the pre-existing 1.0.0 required to 1.1.0 optional distinction. Candidate also corrects the recorded published 1.1.0 NodeNext ESM failure."
     },
     {
       "id": "CANVAS-DIST-01",
@@ -3393,12 +3399,18 @@
       ],
       "compatibleResolution": "Preserve both require.default and callable factory with actual global, legacy and ESM paths.",
       "closureCriteria": "Packed runtime/type and real local demo/editor consumers pass.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/canvas-contract.md",
         "refactor/baselines/canvas-release.json",
         "refactor/changes/2026-09-12-PKG-CANVAS-01-contract.md"
-      ]
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-CANVAS-04-types.md",
+        "refactor/baselines/canvas-types-validation.json"
+      ],
+      "resolutionRationale": "Production main/legacy/browser global and ESM plus real isolated installed root/legacy imports retain callable factory and self default identities. Seven installed type consumer modes validate the correct declaration wrapper including no-interop. Full deep paths/content/demo and device checks remain tasks 05/06.",
+      "workspaceState": "Production main/legacy/browser global and ESM plus real isolated installed root/legacy imports retain callable factory and self default identities. Seven installed type consumer modes validate the correct declaration wrapper including no-interop. Full deep paths/content/demo and device checks remain tasks 05/06."
     },
     {
       "id": "CANVAS-PIXEL-01",

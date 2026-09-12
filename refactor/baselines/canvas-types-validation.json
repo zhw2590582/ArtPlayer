@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-CANVAS-04",
+  "status": "done",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/canvas-types.test.mjs",
+      "result": "pass",
+      "tests": 4,
+      "scope": "Exact published declarations, optional Parameters and exact Canvas result, five compiler modes with eleven negative checks, semantic editor globals and actual production exports"
+    },
+    {
+      "command": "yarn test:canvas-types-package",
+      "result": "pass with explicit historical diagnostics",
+      "cases": 17,
+      "candidateZeroDiagnosticCases": 7,
+      "historicalZeroDiagnosticCases": 9,
+      "historicalKnownFailureCases": 1,
+      "expectedHistoricalCodes": [
+        2349,
+        2349,
+        2322,
+        2344,
+        2344
+      ],
+      "candidateInvalidUseRejectionsPerMode": 11,
+      "report": "refactor/.cache/canvas-package-types-NZAnqz/report.json",
+      "sha256": "05c8f0a0367e1478b59e839520e5c7572b3d5519df7323af21ead9e967524da8"
+    },
+    {
+      "command": "yarn build:ts && yarn build artplayer-proxy-canvas",
+      "result": "pass",
+      "scope": "Semantic editor declarations and real three-format outputs"
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "playwright test test/browser/canvas-lifecycle.spec.js",
+      "result": "pass",
+      "tests": 18,
+      "skipped": 0,
+      "browsers": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32"
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32"
+        }
+      ],
+      "scope": "Candidate source with default alias, actual npm core5.4.0/candidate, native pixels/dimensions/resize/source/paused seek and terminal media/frame ownership",
+      "report": "refactor/.cache/canvas04-final-results/report.json",
+      "sha256": "af893ebcd22fa6312db1e02b222849135ca89568ecf196c88ce2947436cda0ae",
+      "resultsDirectory": "refactor/.cache/canvas04-final-results/results"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 938,
+        "engineering": 14,
+        "baseline": 100,
+        "mainTotal": 1052,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 284
+    }
+  ],
+  "limitations": [
+    "Published 1.1.0 NodeNext ESM has five recorded diagnostics; expected historical failure is not zero-error compilation.",
+    "Full distribution/deep paths/demo and device gates remain tasks 05/06."
+  ],
+  "sourceCommit": "2b319109cd191439d49d2cb701632c95ed04cff4",
+  "inputs": [
+    {
+      "file": "packages/artplayer-proxy-canvas/src/index.ts",
+      "sha256LF": "2124bfe63da80f7d0b25a2d0e397e13ca002dd74a4293a0ae023c3c3702a69ec"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/package.json",
+      "sha256LF": "6c84b3b089dd341edaca26655289afcf834c5b4b67af8d56e0703155b004ae3a"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/types/artplayer-proxy-canvas.d.ts",
+      "sha256LF": "85cdcf86ed12b383785f5303b41458d5d39117b83e74d9f7e99545e59ab4687b"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/types/artplayer-proxy-canvas.d.mts",
+      "sha256LF": "fdff66b63ff24a93370e7f4e87ed6b19a1bd4a2305aa6db37da2c38af3415458"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/types/artplayer-proxy-canvas.d.cts",
+      "sha256LF": "812d9c09a027834e45619dceb04f8b49876623771ad7ce570ab5920383679fea"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-proxy-canvas.d.ts",
+      "sha256LF": "4f4163b4250bf001d7807c26e8e34e784eba70581997d43142febbd524a2a8f7"
+    },
+    {
+      "file": "test/types/canvas.ts",
+      "sha256LF": "ae59e12c59316c387bb41a443b65eae9ad747959e61e76c791356e8d68014d33"
+    },
+    {
+      "file": "refactor/fixtures/consumers/canvas-published.ts",
+      "sha256LF": "590578a232bd9b6716dc82e27d5b4d9ffd90943115a26ae6550f338daf40258d"
+    },
+    {
+      "file": "refactor/scripts/canvas-types.test.mjs",
+      "sha256LF": "df08de1af269201669dc93d5feb533f3c3cab1063bf94c98d1a3665e174e8fb1"
+    },
+    {
+      "file": "refactor/scripts/canvas-package-types.mjs",
+      "sha256LF": "71c4de28bc9595441ae2265fb4b45682acd637835315817310748aa4708885d7"
+    },
+    {
+      "file": "scripts/build-ts.js",
+      "sha256LF": "c9ece2c799cb81f7c35d4b5714c184c59a3a741379d3dcb970d8afbaaae98ad0"
+    },
+    {
+      "file": "scripts/typecheck.mjs",
+      "sha256LF": "583e4c855cb1541c7c2a9f812f91f32f5b5893c35db45cb457223c218250e2aa"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.js",
+      "sha256LF": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.legacy.js",
+      "sha256LF": "052263fdd7ab657a0183d874a706c2cf82527233c5e60b58158caa0677718b97"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.mjs",
+      "sha256LF": "66ca7271f52545a8796f563f2d5ca04581bed8d60d218463923325acf5b73ccf"
+    },
+    {
+      "file": "docs/compiled/artplayer-proxy-canvas.js",
+      "sha256LF": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73"
+    },
+    {
+      "file": "docs/compiled/artplayer-proxy-canvas.legacy.js",
+      "sha256LF": "052263fdd7ab657a0183d874a706c2cf82527233c5e60b58158caa0677718b97"
+    },
+    {
+      "file": "docs/compiled/artplayer-proxy-canvas.mjs",
+      "sha256LF": "66ca7271f52545a8796f563f2d5ca04581bed8d60d218463923325acf5b73ccf"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/canvas04-editor-build.log",
+      "sha256": "d6014f1ae611921f7d0fd47e1a27b5d5488f7ef6056731948edff8864b6653e9"
+    },
+    {
+      "file": "refactor/.cache/canvas04-build.log",
+      "sha256": "c9da09787163706b1f90adf55ff901b70963d7acc45df38e689789e0cea410b5"
+    },
+    {
+      "file": "refactor/.cache/canvas04-targeted.log",
+      "sha256": "a1d89c6c052c003d23d22b0b26a749eb34522b96191e49af31531052805b89ca"
+    },
+    {
+      "file": "refactor/.cache/canvas04-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/canvas04-installed-first.log",
+      "sha256": "589a52e4720ea68d6aeed8145ea0af8b88f7220a61dfd9909fc9cf1fb9ab4663"
+    },
+    {
+      "file": "refactor/.cache/canvas04-installed-verified.log",
+      "sha256": "e96728c91e3afe9431ab80addb09b2de45554720547c41a75ef6bbe402266e07"
+    },
+    {
+      "file": "refactor/.cache/canvas04-browser.log",
+      "sha256": "d4450a918655a45add2589c62326ce4b4f80373e3600b8cee8c10e9379e3df94"
+    },
+    {
+      "file": "refactor/.cache/canvas04-ci.log",
+      "sha256": "efc36adbaf3d23a8e90d66829afa01bf87fe8cc31eac927bbc5dc90f11093465"
+    }
+  ],
+  "firstHistoricalFailure": {
+    "file": "refactor/.cache/canvas-package-types-qQ0exQ/published-1.1.0-5.9.3-nodenext-esm-diagnostics.json",
+    "scope": "Preserved exact five diagnostics before updating the expected historical failure count for the Canvas ReturnType consumer"
+  }
+}
