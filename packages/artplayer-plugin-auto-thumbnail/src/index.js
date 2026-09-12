@@ -1,64 +1,44 @@
-function create({ url, width, number }, callback) {
-  const video = document.createElement('video')
-  video.crossOrigin = 'anonymous'
-  video.src = url
-
-  video.onloadedmetadata = () => {
-    const duration = video.duration
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    const height = Math.floor((width * video.videoHeight) / video.videoWidth)
-
-    canvas.width = width * 10
-    canvas.height = height * Math.ceil(number / 10)
-
-    let blobUrl = null
-
-    function seekAndDraw(index) {
-      canvas.toBlob((blob) => {
-        URL.revokeObjectURL(blobUrl)
-        blobUrl = URL.createObjectURL(blob)
-
-        callback({
-          url: blobUrl,
-          height,
-        })
-      }, 'image/jpeg')
-
-      if (index >= number)
-        return
-      video.currentTime = (duration * index) / number
-
-      video.onseeked = () => {
-        ctx.drawImage(video, (index % 10) * width, Math.floor(index / 10) * height, width, height)
-        seekAndDraw(index + 1)
-      }
-    }
-
-    seekAndDraw(0)
-  }
-}
+import extract from './extraction'
+import { readOptions } from './options'
+import createSession, { cleanupAll } from './session'
 
 export default function artplayerPluginAutoThumbnail(option) {
   return async (art) => {
-    art.on('video:loadedmetadata', () => {
-      const url = option.url || art.option.url
-      const width = option.width || 160
-      const number = option.number || 100
-      const scale = option.scale || 1
-      create({ url, width, number }, (config) => {
-        art.thumbnails = {
-          ...config,
-          column: 10,
-          number,
-          width,
-          scale,
-        }
-      })
-    })
-
-    return {
-      name: 'artplayerPluginAutoThumbnail',
+    const report = error => console.warn('ArtPlayer auto-thumbnail failed:', error)
+    const session = createSession((config) => {
+      art.thumbnails = config
+    }, report)
+    const subscriptions = []
+    const onMetadata = () => {
+      const job = session.start()
+      if (job) {
+        job.guard(() => {
+          const config = readOptions(option, () => art.option.url)
+          if (job.active())
+            extract(job, config)
+        })()
+      }
     }
+    const onDestroy = () => {
+      const actions = subscriptions.splice(0)
+      const result = cleanupAll([session.destroy, ...actions])
+      if (result.failed)
+        report(result.failure)
+    }
+    try {
+      for (const [name, callback] of [['destroy', onDestroy], ['restart', session.cancel], ['video:loadedmetadata', onMetadata]]) {
+        if (session.closed)
+          break
+        subscriptions.push(() => art.off(name, callback))
+        art.on(name, callback)
+        if (session.closed)
+          art.off(name, callback)
+      }
+    }
+    catch (error) {
+      onDestroy()
+      throw error
+    }
+    return { name: 'artplayerPluginAutoThumbnail' }
   }
 }

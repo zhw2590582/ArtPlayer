@@ -4064,11 +4064,14 @@
         "refactor/scripts/auto-thumbnail-contract.test.mjs",
         "test/auto-thumbnail.test.js",
         "refactor/baselines/auto-thumbnail-failures.md",
-        "refactor/baselines/auto-thumbnail-failures-validation.json"
+        "refactor/baselines/auto-thumbnail-failures-validation.json",
+        "test/auto-thumbnail-lifecycle.test.js",
+        "test/browser/auto-thumbnail-lifecycle.spec.js",
+        "refactor/baselines/auto-thumbnail-lifecycle-checkpoint.json"
       ],
       "compatibleResolution": "Cancel obsolete work and release owned resources while retaining live options and progressive usable sheet updates.",
       "closureCriteria": "Delayed callbacks, repeated metadata, switching, destroy, multiple instances and failure cleanup are reproduced then pass source/artifacts and native browser checks.",
-      "workspaceState": "Task02 reproduces old failures with 64 controlled tests and native delayed JPEG callbacks. Candidate fixes, numeric validation, reentrancy and complete cleanup boundaries remain task03; status stays open."
+      "workspaceState": "Task03 ownership checkpoint: 22 candidate lifecycle regressions fail on frozen source and pass on source/main/legacy; two further explicit-URL short-circuit and duration-snapshot cases preserve historical successes. Final candidate runs have 24 passing cases each; 27 native lifecycle cases verify destroy/restart/completion and URL/decoder cleanup. New index/options/session/extraction modules fix serial encoding, stale callbacks, failure cleanup and selected reentry paths. Pixel/frame correctness, resource budgets and additional boundaries remain for task03; old/final core acceptance remains task05. Risk stays open rather than claiming complete extraction repair."
     },
     {
       "id": "AUTO-THUMB-ENCODE-01",
@@ -4086,11 +4089,14 @@
         "refactor/scripts/auto-thumbnail-contract.test.mjs",
         "test/auto-thumbnail.test.js",
         "refactor/baselines/auto-thumbnail-failures.md",
-        "refactor/baselines/auto-thumbnail-failures-validation.json"
+        "refactor/baselines/auto-thumbnail-failures-validation.json",
+        "test/auto-thumbnail-lifecycle.test.js",
+        "test/browser/auto-thumbnail-lifecycle.spec.js",
+        "refactor/baselines/auto-thumbnail-lifecycle-checkpoint.json"
       ],
       "compatibleResolution": "Preserve JPEG grid/time/scale while bounding jobs, sequencing valid updates and handling null Blob, invalid media and thrown callbacks.",
       "closureCriteria": "Fault controls and native valid/corrupt media prove no stale sheet replacement, leaked URLs or unhandled async callbacks; capability limitations remain explicit.",
-      "workspaceState": "Task02 reproduces old failures with 64 controlled tests and native delayed JPEG callbacks. Candidate fixes, numeric validation, reentrancy and complete cleanup boundaries remain task03; status stays open."
+      "workspaceState": "Task03 ownership checkpoint: 22 candidate lifecycle regressions fail on frozen source and pass on source/main/legacy; two further explicit-URL short-circuit and duration-snapshot cases preserve historical successes. Final candidate runs have 24 passing cases each; 27 native lifecycle cases verify destroy/restart/completion and URL/decoder cleanup. New index/options/session/extraction modules fix serial encoding, stale callbacks, failure cleanup and selected reentry paths. Pixel/frame correctness, resource budgets and additional boundaries remain for task03; old/final core acceptance remains task05. Risk stays open rather than claiming complete extraction repair."
     },
     {
       "id": "AUTO-THUMB-PIXEL-01",

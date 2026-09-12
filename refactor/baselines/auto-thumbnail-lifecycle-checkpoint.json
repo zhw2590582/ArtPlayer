@@ -1,0 +1,1335 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AUTO-THUMB-03",
+  "status": "doing",
+  "parentCommit": "9cd6659ab4c856d853d67c71c0353fc49c70ef5e",
+  "checks": [
+    {
+      "command": "ARTPLAYER_AUTO_THUMBNAIL_BASELINE=1 node --test test/auto-thumbnail-lifecycle.test.js",
+      "result": "expected-failures",
+      "tests": 24,
+      "passed": 2,
+      "failed": 22,
+      "log": "refactor/.cache/auto-thumbnail03-lifecycle-verified-before.log",
+      "scope": "Twenty-two lifecycle fixes fail historically; explicit URL short-circuit and metadata duration snapshot compatibility cases pass historically."
+    },
+    {
+      "command": "node --test test/auto-thumbnail-lifecycle.test.js",
+      "variant": "source",
+      "result": "pass",
+      "tests": 24,
+      "log": "refactor/.cache/auto-thumbnail03-lifecycle-verified-source.log"
+    },
+    {
+      "command": "node --test test/auto-thumbnail-lifecycle.test.js",
+      "variant": "main",
+      "result": "pass",
+      "tests": 24,
+      "log": "refactor/.cache/auto-thumbnail03-lifecycle-verified-main.log"
+    },
+    {
+      "command": "node --test test/auto-thumbnail-lifecycle.test.js",
+      "variant": "legacy",
+      "result": "pass",
+      "tests": 24,
+      "log": "refactor/.cache/auto-thumbnail03-lifecycle-verified-legacy.log"
+    },
+    {
+      "command": "yarn build artplayer-plugin-auto-thumbnail",
+      "result": "pass",
+      "log": "refactor/.cache/auto-thumbnail03-build-verified.log"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1544,
+        "engineering": 14,
+        "baseline": 232,
+        "total": 1790
+      },
+      "strictProductionTypeScriptFiles": 339,
+      "log": "refactor/.cache/auto-thumbnail03-ci-verified.log",
+      "logSha256": "3e08a72766da5e3f4ddfcec3d39cf423bdde7b7810c6846e9cbf3d1a13bb254a",
+      "scope": "Auto-thumbnail remains JavaScript for this task03 checkpoint; its source is not counted as migrated TypeScript."
+    }
+  ],
+  "limitations": [
+    "Intermediate JavaScript ownership refactor; strict TypeScript and public declarations remain task04.",
+    "Native lifecycle results do not prove accurate or usable extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+    "Hidden rendering, frame timing, resource budget and additional reentry/cleanup boundaries remain task03.",
+    "Stub browser hosts are not old/final core integration, actual docs/editor or physical Safari evidence.",
+    "Existing CJS generation and public type differences remain explicit task04/06 work."
+  ],
+  "checkpointValidatedAt": "2026-09-12T22:54:01.794Z",
+  "initialChecks": [
+    {
+      "command": "ARTPLAYER_AUTO_THUMBNAIL_BASELINE=1 node --test test/auto-thumbnail-lifecycle.test.js",
+      "result": "expected-failures",
+      "tests": 22,
+      "passed": 0,
+      "failed": 22,
+      "log": "refactor/.cache/auto-thumbnail03-lifecycle-before.log"
+    },
+    {
+      "command": "node --test test/auto-thumbnail-lifecycle.test.js",
+      "variant": "source",
+      "result": "pass",
+      "tests": 22,
+      "log": "refactor/.cache/auto-thumbnail03-lifecycle-source.log"
+    },
+    {
+      "command": "node --test test/auto-thumbnail-lifecycle.test.js",
+      "variant": "main",
+      "result": "pass",
+      "tests": 22,
+      "log": "refactor/.cache/auto-thumbnail03-lifecycle-main.log"
+    },
+    {
+      "command": "node --test test/auto-thumbnail-lifecycle.test.js",
+      "variant": "legacy",
+      "result": "pass",
+      "tests": 22,
+      "log": "refactor/.cache/auto-thumbnail03-lifecycle-legacy.log"
+    },
+    {
+      "command": "yarn build artplayer-plugin-auto-thumbnail",
+      "result": "pass",
+      "log": "refactor/.cache/auto-thumbnail03-build.log"
+    }
+  ],
+  "caughtBeforeCommit": [
+    {
+      "issue": "An eager fallback URL argument read art.option even when explicit option.url was truthy.",
+      "preFixLog": "refactor/.cache/auto-thumbnail03-lazy-before.log",
+      "preFixPassed": 22,
+      "preFixFailed": 1,
+      "correction": "Use a lazy fallback callback; preserve original short-circuit order and the historical passing test."
+    },
+    {
+      "issue": "Reading mutable video.duration at every seek shifted the remaining frame times.",
+      "preFixLog": "refactor/.cache/auto-thumbnail03-duration-before.log",
+      "preFixPassed": 23,
+      "preFixFailed": 1,
+      "correction": "Capture the metadata duration and dimensions, retaining the historical frame-time snapshot."
+    }
+  ],
+  "actualEntryModes": [
+    {
+      "name": "main-require",
+      "entry": "./dist/artplayer-plugin-auto-thumbnail.js",
+      "result": "pass",
+      "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+      "scope": "Actual built entry and registration without DOM access; not an installed tarball test."
+    },
+    {
+      "name": "legacy-require",
+      "entry": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "result": "pass",
+      "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+      "scope": "Actual built entry and registration without DOM access; not an installed tarball test."
+    },
+    {
+      "name": "legacy-import",
+      "entry": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "result": "pass",
+      "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+      "scope": "Actual built entry and registration without DOM access; not an installed tarball test."
+    },
+    {
+      "name": "module-import",
+      "entry": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+      "result": "pass",
+      "sha256": "712d3e409280fb44171dfeb9ea53ed066895039b2650c3b2e4e682e39db12dde",
+      "scope": "Actual built entry and registration without DOM access; not an installed tarball test."
+    }
+  ],
+  "nativeLifecycle": [
+    {
+      "variant": "source",
+      "result": "pass",
+      "tests": 9,
+      "retries": 0,
+      "skipped": 0,
+      "report": "refactor/.cache/auto-thumbnail03-browser-verified-source.json",
+      "reportSha256": "8c631007a82a5af0910e1b169d4bd5806c4cf1617bdfc87c77469ac6bde96e18",
+      "results": "refactor/.cache/auto-thumbnail03-browser-verified-source-results",
+      "measurements": [
+        {
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "scenario": "destroy",
+          "sha256": "0580765fcacfb2bed731a7bea01a6e2cd06b9afb496e1ffcf0c4f099c609e8cb",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 2635
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "scenario": "restart",
+          "sha256": "0580765fcacfb2bed731a7bea01a6e2cd06b9afb496e1ffcf0c4f099c609e8cb",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 2635
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "scenario": "complete",
+          "sha256": "0580765fcacfb2bed731a7bea01a6e2cd06b9afb496e1ffcf0c4f099c609e8cb",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 1,
+            "updates": 2
+          },
+          "after": {
+            "urls": 1,
+            "updates": 2
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 2
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 2635
+            },
+            {
+              "type": "image/jpeg",
+              "bytes": 4226
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "scenario": "destroy",
+          "sha256": "0580765fcacfb2bed731a7bea01a6e2cd06b9afb496e1ffcf0c4f099c609e8cb",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 4076
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "scenario": "restart",
+          "sha256": "0580765fcacfb2bed731a7bea01a6e2cd06b9afb496e1ffcf0c4f099c609e8cb",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 4076
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "scenario": "complete",
+          "sha256": "0580765fcacfb2bed731a7bea01a6e2cd06b9afb496e1ffcf0c4f099c609e8cb",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 1,
+            "updates": 2
+          },
+          "after": {
+            "urls": 1,
+            "updates": 2
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 2
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 4076
+            },
+            {
+              "type": "image/jpeg",
+              "bytes": 6752
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "scenario": "destroy",
+          "sha256": "0580765fcacfb2bed731a7bea01a6e2cd06b9afb496e1ffcf0c4f099c609e8cb",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "scenario": "restart",
+          "sha256": "0580765fcacfb2bed731a7bea01a6e2cd06b9afb496e1ffcf0c4f099c609e8cb",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "scenario": "complete",
+          "sha256": "0580765fcacfb2bed731a7bea01a6e2cd06b9afb496e1ffcf0c4f099c609e8cb",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 1,
+            "updates": 2
+          },
+          "after": {
+            "urls": 1,
+            "updates": 2
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 2
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            },
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "main",
+      "result": "pass",
+      "tests": 9,
+      "retries": 0,
+      "skipped": 0,
+      "report": "refactor/.cache/auto-thumbnail03-browser-verified-main.json",
+      "reportSha256": "cf9c427bfbf0f11534f3385c8deb571aa1f69eecc6588b7d0365784dfd531766",
+      "results": "refactor/.cache/auto-thumbnail03-browser-verified-main-results",
+      "measurements": [
+        {
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "scenario": "destroy",
+          "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 2635
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "scenario": "restart",
+          "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 2635
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "scenario": "complete",
+          "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 1,
+            "updates": 2
+          },
+          "after": {
+            "urls": 1,
+            "updates": 2
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 2
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 2635
+            },
+            {
+              "type": "image/jpeg",
+              "bytes": 4226
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "scenario": "destroy",
+          "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 4076
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "scenario": "restart",
+          "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 4076
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "scenario": "complete",
+          "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 1,
+            "updates": 2
+          },
+          "after": {
+            "urls": 1,
+            "updates": 2
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 2
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 4076
+            },
+            {
+              "type": "image/jpeg",
+              "bytes": 6752
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "scenario": "destroy",
+          "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "scenario": "restart",
+          "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "scenario": "complete",
+          "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 1,
+            "updates": 2
+          },
+          "after": {
+            "urls": 1,
+            "updates": 2
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 2
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            },
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "legacy",
+      "result": "pass",
+      "tests": 9,
+      "retries": 0,
+      "skipped": 0,
+      "report": "refactor/.cache/auto-thumbnail03-browser-verified-legacy.json",
+      "reportSha256": "098d1f2044b1a55dfe63e0ff77f1e89a0028ec538780c9fc736e2168f8937306",
+      "results": "refactor/.cache/auto-thumbnail03-browser-verified-legacy-results",
+      "measurements": [
+        {
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "scenario": "destroy",
+          "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 2635
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "scenario": "restart",
+          "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 2635
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "scenario": "complete",
+          "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 1,
+            "updates": 2
+          },
+          "after": {
+            "urls": 1,
+            "updates": 2
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 2
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 2635
+            },
+            {
+              "type": "image/jpeg",
+              "bytes": 4226
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "scenario": "destroy",
+          "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 4076
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "scenario": "restart",
+          "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 4076
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "scenario": "complete",
+          "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 1,
+            "updates": 2
+          },
+          "after": {
+            "urls": 1,
+            "updates": 2
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 2
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 4076
+            },
+            {
+              "type": "image/jpeg",
+              "bytes": 6752
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "scenario": "destroy",
+          "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "scenario": "restart",
+          "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 0,
+            "updates": 0
+          },
+          "after": {
+            "urls": 0,
+            "updates": 0
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 0
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        },
+        {
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "scenario": "complete",
+          "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+          "scope": "Actual HTTP decoding/seek/JPEG lifecycle with a stub player host. This checkpoint does not establish accurate extracted pixels; AUTO-THUMB-PIXEL-01 remains open.",
+          "before": {
+            "urls": 1,
+            "updates": 2
+          },
+          "after": {
+            "urls": 1,
+            "updates": 2
+          },
+          "video": {
+            "src": null,
+            "readyState": 0,
+            "paused": true,
+            "handlers": [
+              true,
+              true,
+              true
+            ]
+          },
+          "final": {
+            "urls": 0,
+            "listeners": 0,
+            "updates": 2
+          },
+          "blobs": [
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            },
+            {
+              "type": "image/jpeg",
+              "bytes": 983
+            }
+          ],
+          "result": {
+            "name": "artplayerPluginAutoThumbnail"
+          }
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+      "copy": "docs/compiled/artplayer-plugin-auto-thumbnail.js",
+      "bytes": 4112,
+      "sha256": "deae7e5e06be58248783bea0e840f4c51bdc32e5a98e5dabc1ef203c00091373",
+      "copiedBytesEqual": true
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "copy": "docs/compiled/artplayer-plugin-auto-thumbnail.legacy.js",
+      "bytes": 4692,
+      "sha256": "bea5f27be7ef794cd47ea8d809e05be672849a24396b59b41242f41fb5f0be55",
+      "copiedBytesEqual": true
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.mjs",
+      "copy": "docs/compiled/artplayer-plugin-auto-thumbnail.mjs",
+      "bytes": 7572,
+      "sha256": "712d3e409280fb44171dfeb9ea53ed066895039b2650c3b2e4e682e39db12dde",
+      "copiedBytesEqual": true
+    }
+  ],
+  "inputs": [
+    {
+      "file": "package.json",
+      "sha256LF": "c4897904a6d279110ad03ef9442766c70963f14ff876a2d115d0aac7d87d4460"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/ARCHITECTURE.md",
+      "sha256LF": "3bec89a7713616f4118ee1cba1d9154c9d0f4ead3794c53e2b24d4777ae5aece"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/index.js",
+      "sha256LF": "6ecc757ac74d961fb0bda13d58582f0845e29b62f10e351a267b67adb7b684b8"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/options.js",
+      "sha256LF": "11c88fe9682d0736d28a128b352f34832a8ed2a7a82fb6e92e44fc85b7458056"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/session.js",
+      "sha256LF": "14b69480a829d15c9a74995fc398296ad10983bd3a177aa1ddc0205273afa6ec"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/extraction.js",
+      "sha256LF": "9c7707238f955387242241c45faa6ec6e8ef9f007641b98380f77903b30bc729"
+    },
+    {
+      "file": "test/helpers/auto-thumbnail.js",
+      "sha256LF": "52014dfddbe3677f43dc4bbaef88a6688b4520c559a192343ec91da961b6cc52"
+    },
+    {
+      "file": "test/auto-thumbnail-lifecycle.test.js",
+      "sha256LF": "2d2cca2072be2679c7e7068b183d9e563d62053776afdc58825263c0aad5ff45"
+    },
+    {
+      "file": "test/browser/auto-thumbnail-lifecycle.spec.js",
+      "sha256LF": "609141b9500b26034bf06b37b0e0597fc799e36b0cd3ab28f724d8450b866d36"
+    }
+  ]
+}

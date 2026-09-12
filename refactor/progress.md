@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-03 源码任务与资源所有权检查点（doing）
+
+生产源码拆为index/options/session/extraction，保持异步公开注册与原有效配置语义。
+串行有效帧编码、任务取消和URL归属取代无主回调；完成/切源/destroy均回收decoder，
+失败保留此前有效预览，修复重复回调、null Blob、原生错误及宿主setter/参数getter重入。
+24项回归旧版2通过/22失败；源码/main/legacy各24通过；三份原生生命周期各9共27通过。
+提交前抓住并修复fallback提前读取和duration快照两处新增偏差，重新验证最终实现。
+完整CI1790项、339生产TS通过；本包此时仍为JS，04才迁严格TS。正常构建再生三份产物及
+docs副本，包内维护地图同步。黑帧/准确帧时间/资源预算及更多边界仍需03继续，不能将
+生命周期通过当成像素或最终核心验收。相关风险保持open，提交仅为03检查点。
+见[变更](changes/2026-09-13-PKG-AUTO-THUMB-03-lifecycle-checkpoint.md)和
+[验证](baselines/auto-thumbnail-lifecycle-checkpoint.json)。222项：114 done、12 doing、96 todo。
+
+
 ## PKG-AUTO-THUMB-02 完成：失败回归和原生抽帧对照
 
 64项旧行为测试覆盖8份冻结夹具的销毁/切源/重复metadata/逆序Blob/null Blob/

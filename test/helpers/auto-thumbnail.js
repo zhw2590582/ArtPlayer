@@ -40,8 +40,9 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
   const urls = new Map()
   const listeners = new Map()
   const updates = []
+  const warnings = []
   let nextUrl = 0
-  const controls = { nullContext: false, drawError: null, encodeError: null, updateError: null }
+  const controls = { nullContext: false, drawError: null, encodeError: null, updateError: null, onUpdate: null }
   const document = {
     createElement(tag) {
       if (tag === 'video') {
@@ -111,7 +112,7 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
       urls.delete(url)
       operations.push({ name: 'revokeURL', url })
     },
-  }, window: {} }
+  }, window: {}, console: { warn: (...args) => warnings.push(args) } }
   if (!script)
     Object.assign(box, { module, exports: module.exports })
   vm.runInNewContext(implementation.code, box)
@@ -140,6 +141,7 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
       if (controls.updateError)
         throw controls.updateError
       updates.push(value)
+      controls.onUpdate?.(value)
     },
   })
   return {
@@ -154,6 +156,7 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
     urls,
     listeners,
     updates,
+    warnings,
     controls,
     metadata(video = videos.at(-1)) { video.onloadedmetadata?.() },
     seeked(video = videos.at(-1)) { video.onseeked?.() },

@@ -1777,11 +1777,14 @@
         "CORE-09",
         "CORE-19"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "隐藏 video、seek 队列、canvas 编码与 Blob URL 清理",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-AUTO-THUMB-03-lifecycle-checkpoint.md",
+        "baselines/auto-thumbnail-lifecycle-checkpoint.json"
+      ]
     },
     {
       "id": "PKG-AUTO-THUMB-04",
