@@ -205,8 +205,9 @@
   }
 
   function runCode() {
+    window.dispatchEvent(new Event('artplayer:example:cleanup'))
     // Destroy all existing instances
-    Artplayer.instances.forEach((art) => art.destroy(true))
+    Artplayer.instances.slice().forEach((art) => art.destroy(true))
     
     const value = editor.getValue()
     eval(value)

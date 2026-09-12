@@ -229,12 +229,17 @@
         <div class="popinner"></div>
     </div>
     <script src="./assets/js/console.js"></script>
-    <script src="./assets/js/vs/loader.js"></script>
     <script>
         var artplayer = document.createElement('script');
+        var monacoLoader = document.createElement('script');
         var common = document.createElement('script');
 
         artplayer.onload = function () {
+            monacoLoader.src = "./assets/js/vs/loader.js";
+            document.body.appendChild(monacoLoader);
+        }
+
+        monacoLoader.onload = function () {
             common.src = "./assets/js/common.js";
             document.body.appendChild(common);
         }

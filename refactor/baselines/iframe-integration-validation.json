@@ -1,0 +1,1734 @@
+{
+  "task": "PKG-IFRAME-05",
+  "status": "doing",
+  "checkpoint": "actual-player-and-Monaco-editor",
+  "sourceCommit": "047e2df945fffe5699def60f2cf0497c00264117",
+  "scope": "Each run: 72 media/player cases (3 cores x 2 origins x 4 old/new parent-child bridges x 3 engines), plus 3 actual docs Monaco Run cases. Old bridge global aliases and advertising stub are test-only. Desktop browser automation does not establish physical-device/BFCache or old helper/name distribution compatibility.",
+  "sourceSha256LF": {
+    "docs/index.html": "5285062f253dbf739050b00090b65296ffa1078594bd49255d315bd3ec3bdedc",
+    "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff",
+    "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+    "docs/iframe.html": "bc262262c66ad32459b7c91ae22a97217414dd5b18cbf68fe105c2269456f879",
+    "test/browser/iframe-player.spec.js": "8d3554d06861b1e34dda4cd1e2d925350a2ae1ee7f6c50f357d8aefdb7770d1f",
+    "test/browser/iframe-editor.spec.js": "2dca6afb0f828acda65e6dda193eb522acbc8e5f98c81088bd3532a3eb8b4243",
+    "test/browser/server.mjs": "a170c5c8373b8fc4a675d7ffa26df998b179b663ee23ffb6d20de1a0b790dde1",
+    "refactor/scripts/iframe-core.test.mjs": "284c457517f29b781879243da9a235778579ab744d8c8de5a484f68c8e56a71c",
+    "refactor/baselines/iframe-core.json": "0c74c015d203dd11bd7ee27a248d85f16a89b04fc9ef5b0b443f5a25d9ef4487"
+  },
+  "unchangedRuntimeSha256LF": {
+    "packages/artplayer-tool-iframe/src/index.ts": "64fd8f39b3d23e886ddecda38ae2b1e17b5b93c156825b1de23915c71f33991e",
+    "packages/artplayer-tool-iframe/src/requests.ts": "74bc15f2102eb45fa00d3b801b629aa1a280ea20af491949ad644e765cb3dbe9",
+    "packages/artplayer-tool-iframe/src/connection.ts": "a0b2f5a34f1c479f874d824429d1429804f2fabea53015a8e76b9548e8eb208d",
+    "packages/artplayer-tool-iframe/src/protocol.ts": "c1046b798d79b2765648a7b5e7caa0d8554d2b12f074e960c297429575fa841f",
+    "packages/artplayer-tool-iframe/src/navigation.ts": "f17f00448e6b337772bd2feb4183cf670e2560d8ab2c1bef63b494ce815c9a7d",
+    "packages/artplayer-tool-iframe/src/child-session.ts": "0078dd6c209c9f7608c165277b80be40696d90433848b9025e25fc15ec4bf3d5"
+  },
+  "unchangedArtifacts": {
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.js": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6",
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.legacy.js": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a",
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.mjs": "ac4c5efa670c0429fc95bdab7902df60f5b5540f0dad9c7e65c2bd660796dc83"
+  },
+  "fixed": [
+    "Docs UMD core must load before Monaco AMD loader",
+    "Run dispatches docs-only example cleanup, releasing iframe tool and pending work",
+    "Run destroys a snapshot of parent instances so multiple players are all removed"
+  ],
+  "reports": [
+    {
+      "kind": "source",
+      "file": "refactor/.cache/iframe05-integration-source.json",
+      "sha256": "6a430343acb8714d4b5346c05d0305c022302c7a68a82a58c1d857cd93db5a32",
+      "resultsDirectory": "refactor/.cache/iframe05-integration-source-results",
+      "stats": {
+        "startTime": "2026-09-12T18:03:45.744Z",
+        "duration": 104389.522,
+        "expected": 75,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cores": {
+        "published-4.5.9": {
+          "version": "4.5.9",
+          "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497"
+        },
+        "published": {
+          "version": "5.4.0",
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f"
+        },
+        "candidate": {
+          "version": "5.4.1",
+          "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946"
+        }
+      },
+      "bridges": {
+        "candidate-source": "3748a8b38801d858cb018ffb9d690146bd2d3ce6bca086212401e7baa4cbf2cf",
+        "published-artplayer-plugin-iframe.js": "df469c3e4582b127f35798494d0845f1fc4ca2d19bbaf01b918492e035479745"
+      },
+      "editor": [
+        {
+          "project": "chromium",
+          "candidateSha256": "3748a8b38801d858cb018ffb9d690146bd2d3ce6bca086212401e7baa4cbf2cf",
+          "files": {
+            "docs/index.html": "e183d56f4892cc51dbb8985716c4b53f1a992d6e98241587adcf73c31bce5d33",
+            "docs/iframe.html": "96b7e1d45fe99a364e33ffda0b142aa31bcea309a6813f3011258ed204287e39",
+            "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+            "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff"
+          }
+        },
+        {
+          "project": "firefox",
+          "candidateSha256": "3748a8b38801d858cb018ffb9d690146bd2d3ce6bca086212401e7baa4cbf2cf",
+          "files": {
+            "docs/index.html": "e183d56f4892cc51dbb8985716c4b53f1a992d6e98241587adcf73c31bce5d33",
+            "docs/iframe.html": "96b7e1d45fe99a364e33ffda0b142aa31bcea309a6813f3011258ed204287e39",
+            "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+            "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff"
+          }
+        },
+        {
+          "project": "webkit",
+          "candidateSha256": "3748a8b38801d858cb018ffb9d690146bd2d3ce6bca086212401e7baa4cbf2cf",
+          "files": {
+            "docs/index.html": "e183d56f4892cc51dbb8985716c4b53f1a992d6e98241587adcf73c31bce5d33",
+            "docs/iframe.html": "96b7e1d45fe99a364e33ffda0b142aa31bcea309a6813f3011258ed204287e39",
+            "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+            "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff"
+          }
+        }
+      ],
+      "assertions": {
+        "mediaRows": 72,
+        "editorRows": 3,
+        "initialInstances": [
+          1
+        ],
+        "initialSizes": [
+          "640x360",
+          "624x351",
+          "632x356"
+        ],
+        "seekTimes": [
+          1,
+          1.01
+        ],
+        "rates": [
+          1.25
+        ],
+        "destroyedInstances": [
+          0
+        ],
+        "destroyedPlayers": [
+          0
+        ]
+      },
+      "rows": [
+        {
+          "title": "Iframe docs editor Run releases the previous tool and its pending requests",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 3521
+        },
+        {
+          "title": "Iframe docs editor Run releases the previous tool and its pending requests",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 5561
+        },
+        {
+          "title": "Iframe docs editor Run releases the previous tool and its pending requests",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 8268
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-source/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1463
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1433
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1246
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1584
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-source/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1530
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1303
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1507
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1511
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-source/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1544
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1525
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1269
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1512
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-source/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1539
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1523
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1517
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1520
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-source/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1496
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1509
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1523
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1253
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-source/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1492
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1496
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1271
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1521
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-source/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 3027
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 3013
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1973
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1969
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-source/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1905
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1850
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1894
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1994
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-source/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1916
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1858
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1931
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1866
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-source/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1955
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1907
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1927
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1880
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-source/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 2027
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1956
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 2052
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1928
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-source/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 2007
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1941
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 2067
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1935
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-source/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5258
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4951
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5193
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5288
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-source/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9453
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9617
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9510
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9441
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-source/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5195
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5148
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5049
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5254
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-source/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9303
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9300
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9281
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9398
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-source/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5026
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4991
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5083
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5142
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-source/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9381
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/candidate-source",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9297
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-source/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9438
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9019
+        }
+      ]
+    },
+    {
+      "kind": "main",
+      "file": "refactor/.cache/iframe05-integration-main.json",
+      "sha256": "cb185bfef67cf0b5371e3d8851fd1b1f28ac86c3a12b480a9f3547b866016ae6",
+      "resultsDirectory": "refactor/.cache/iframe05-integration-main-results",
+      "stats": {
+        "startTime": "2026-09-12T18:05:44.735Z",
+        "duration": 102636.992,
+        "expected": 75,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cores": {
+        "published-4.5.9": {
+          "version": "4.5.9",
+          "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497"
+        },
+        "published": {
+          "version": "5.4.0",
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f"
+        },
+        "candidate": {
+          "version": "5.4.1",
+          "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9"
+        }
+      },
+      "bridges": {
+        "candidate-artifact": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6",
+        "published-artplayer-plugin-iframe.js": "df469c3e4582b127f35798494d0845f1fc4ca2d19bbaf01b918492e035479745"
+      },
+      "editor": [
+        {
+          "project": "chromium",
+          "candidateSha256": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6",
+          "files": {
+            "docs/index.html": "e183d56f4892cc51dbb8985716c4b53f1a992d6e98241587adcf73c31bce5d33",
+            "docs/iframe.html": "96b7e1d45fe99a364e33ffda0b142aa31bcea309a6813f3011258ed204287e39",
+            "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+            "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff"
+          }
+        },
+        {
+          "project": "firefox",
+          "candidateSha256": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6",
+          "files": {
+            "docs/index.html": "e183d56f4892cc51dbb8985716c4b53f1a992d6e98241587adcf73c31bce5d33",
+            "docs/iframe.html": "96b7e1d45fe99a364e33ffda0b142aa31bcea309a6813f3011258ed204287e39",
+            "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+            "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff"
+          }
+        },
+        {
+          "project": "webkit",
+          "candidateSha256": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6",
+          "files": {
+            "docs/index.html": "e183d56f4892cc51dbb8985716c4b53f1a992d6e98241587adcf73c31bce5d33",
+            "docs/iframe.html": "96b7e1d45fe99a364e33ffda0b142aa31bcea309a6813f3011258ed204287e39",
+            "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+            "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff"
+          }
+        }
+      ],
+      "assertions": {
+        "mediaRows": 72,
+        "editorRows": 3,
+        "initialInstances": [
+          1
+        ],
+        "initialSizes": [
+          "640x360",
+          "624x351",
+          "632x356"
+        ],
+        "seekTimes": [
+          1,
+          1.01
+        ],
+        "rates": [
+          1.25
+        ],
+        "destroyedInstances": [
+          0
+        ],
+        "destroyedPlayers": [
+          0
+        ]
+      },
+      "rows": [
+        {
+          "title": "Iframe docs editor Run releases the previous tool and its pending requests",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 3681
+        },
+        {
+          "title": "Iframe docs editor Run releases the previous tool and its pending requests",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 5097
+        },
+        {
+          "title": "Iframe docs editor Run releases the previous tool and its pending requests",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 8128
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1596
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1881
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1558
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1313
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1514
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1280
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1510
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1569
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1290
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1536
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1484
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1539
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1475
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1491
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1475
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1473
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1507
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1505
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1569
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1491
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1506
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1508
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1520
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1256
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 3056
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 3090
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1966
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1914
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1955
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1904
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1839
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1866
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1898
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1882
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1864
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1882
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1707
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1828
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1910
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1886
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1872
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1859
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1954
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1975
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1985
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 2002
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1914
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1915
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5217
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5023
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5209
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5094
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9466
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9365
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9478
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9379
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4871
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5081
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5008
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5022
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9274
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9284
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9426
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9480
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4959
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4872
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5106
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5279
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9430
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9352
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9529
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9216
+        }
+      ]
+    },
+    {
+      "kind": "legacy",
+      "file": "refactor/.cache/iframe05-integration-legacy.json",
+      "sha256": "d5fc2ad2a897c077dfd0375b2350c1ddd01a34a8c76f4d9fef83c6ad132983f4",
+      "resultsDirectory": "refactor/.cache/iframe05-integration-legacy-results",
+      "stats": {
+        "startTime": "2026-09-12T18:08:42.666Z",
+        "duration": 102291.047,
+        "expected": 75,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cores": {
+        "published-4.5.9": {
+          "version": "4.5.9",
+          "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497"
+        },
+        "published": {
+          "version": "5.4.0",
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f"
+        },
+        "candidate": {
+          "version": "5.4.1",
+          "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9"
+        }
+      },
+      "bridges": {
+        "candidate-artifact": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a",
+        "published-artplayer-plugin-iframe.js": "df469c3e4582b127f35798494d0845f1fc4ca2d19bbaf01b918492e035479745"
+      },
+      "editor": [
+        {
+          "project": "chromium",
+          "candidateSha256": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a",
+          "files": {
+            "docs/index.html": "e183d56f4892cc51dbb8985716c4b53f1a992d6e98241587adcf73c31bce5d33",
+            "docs/iframe.html": "96b7e1d45fe99a364e33ffda0b142aa31bcea309a6813f3011258ed204287e39",
+            "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+            "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff"
+          }
+        },
+        {
+          "project": "firefox",
+          "candidateSha256": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a",
+          "files": {
+            "docs/index.html": "e183d56f4892cc51dbb8985716c4b53f1a992d6e98241587adcf73c31bce5d33",
+            "docs/iframe.html": "96b7e1d45fe99a364e33ffda0b142aa31bcea309a6813f3011258ed204287e39",
+            "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+            "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff"
+          }
+        },
+        {
+          "project": "webkit",
+          "candidateSha256": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a",
+          "files": {
+            "docs/index.html": "e183d56f4892cc51dbb8985716c4b53f1a992d6e98241587adcf73c31bce5d33",
+            "docs/iframe.html": "96b7e1d45fe99a364e33ffda0b142aa31bcea309a6813f3011258ed204287e39",
+            "docs/assets/example/iframe.js": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a",
+            "docs/assets/js/common.js": "5bb8f702596595b4b2a2f48f37bc2a19993e3cadd8f2a92b2a79097443a585ff"
+          }
+        }
+      ],
+      "assertions": {
+        "mediaRows": 72,
+        "editorRows": 3,
+        "initialInstances": [
+          1
+        ],
+        "initialSizes": [
+          "640x360",
+          "624x351",
+          "632x356"
+        ],
+        "seekTimes": [
+          1,
+          1.01
+        ],
+        "rates": [
+          1.25
+        ],
+        "destroyedInstances": [
+          0
+        ],
+        "destroyedPlayers": [
+          0
+        ]
+      },
+      "rows": [
+        {
+          "title": "Iframe docs editor Run releases the previous tool and its pending requests",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 3609
+        },
+        {
+          "title": "Iframe docs editor Run releases the previous tool and its pending requests",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 5269
+        },
+        {
+          "title": "Iframe docs editor Run releases the previous tool and its pending requests",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 8188
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1681
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1373
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1255
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1332
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1326
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1393
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1563
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1527
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1502
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1534
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1503
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1485
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1259
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1471
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1257
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1486
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1525
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1505
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1541
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1554
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1258
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1506
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1506
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "durationMs": 1523
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 2989
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 3080
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1920
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1893
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1919
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1847
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1840
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1876
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1881
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1868
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1857
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1841
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1862
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1831
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1992
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1917
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1944
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1927
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1857
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1899
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1872
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1938
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1855
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "firefox",
+          "browser": "155.0",
+          "durationMs": 1976
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5345
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5462
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5326
+        },
+        {
+          "title": "Iframe player published-4.5.9/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4942
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9308
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9464
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9462
+        },
+        {
+          "title": "Iframe player published-4.5.9/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9342
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4704
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4986
+        },
+        {
+          "title": "Iframe player published/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5155
+        },
+        {
+          "title": "Iframe player published/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5190
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9368
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9360
+        },
+        {
+          "title": "Iframe player published/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9542
+        },
+        {
+          "title": "Iframe player published/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9493
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4990
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 4781
+        },
+        {
+          "title": "Iframe player candidate/same-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5046
+        },
+        {
+          "title": "Iframe player candidate/same-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 5121
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9226
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/candidate-artifact",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9347
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/candidate-artifact/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9282
+        },
+        {
+          "title": "Iframe player candidate/cross-origin/published-artplayer-plugin-iframe.js/published-artplayer-plugin-iframe.js",
+          "project": "webkit",
+          "browser": "26.6",
+          "durationMs": 9099
+        }
+      ]
+    }
+  ],
+  "failedProbes": [
+    {
+      "file": "refactor/.cache/iframe05-player-probe.json",
+      "reason": "Test URL typo, fixed; status checked before script injection",
+      "sha256": "2784b042654e9255abed65ab25a29b45562160f844ac54b77c4402b7bea60d33"
+    },
+    {
+      "file": "refactor/.cache/iframe05-player-probe2.json",
+      "reason": "Historical resolve regex cannot recognize emitted multiline object call; use local result variable and unchanged resolve(result) convention",
+      "sha256": "9800b30e0e8e21189115b161e52f684cef30ff6b1b8ce25511d8f2c5b70e01a6"
+    },
+    {
+      "file": "refactor/.cache/iframe05-player-source-before.json",
+      "reason": "68 passed, 4 WebKit old-core cross-origin controls were hidden; native hover before click reveals controls",
+      "sha256": "5ab402c43145ce4ed24acfe6e576f4bf5dfe27eb4bed366bea963f055bc5342b"
+    },
+    {
+      "file": "refactor/.cache/iframe05-editor-before.json",
+      "reason": "Actual AMD startup defect reproduced",
+      "sha256": "0bcb35d242b6d6789e124982da368ccccf56998b3bf61b42860b3ddcb3ab6091"
+    },
+    {
+      "file": "refactor/.cache/iframe05-editor-cleanup-before.json",
+      "reason": "Test Run button covered by fullscreen iframe; exit via real control first",
+      "sha256": "c22776a800de8894ef372a9c2dab6748be28a17ba4e0fcf42f73bdd9455e898b"
+    },
+    {
+      "file": "refactor/.cache/iframe05-editor-cleanup-probe.json",
+      "reason": "Actual old-tool cleanup defect reproduced",
+      "sha256": "1e58d2a92b0c96313661e7d4a517ba3f364f66ae3c9c615b6c515df417e7714c"
+    }
+  ],
+  "remaining": [
+    "Physical devices",
+    "Actual BFCache persisted restoration",
+    "Externally interrupted navigation acceptance",
+    "Final 8082 distribution acceptance and old helper/package-name migration in task 06"
+  ],
+  "verification": {
+    "ci": {
+      "file": "refactor/.cache/iframe05-ci.log",
+      "sha256": "cea36ada722953ec2e427938e83e914a15e57798b4d508de1d6a558873b1c83e",
+      "exitCode": 0,
+      "tests": 1544,
+      "unit": 1365,
+      "engineering": 14,
+      "baseline": 165,
+      "productionTypeScriptFiles": 330
+    },
+    "imports": {
+      "file": "refactor/.cache/iframe05-imports.log",
+      "sha256": "fd4194545a43888540bd5a895eba1baab4e8de2a0fde77b1bf5b8b6398d5c278",
+      "exitCode": 0,
+      "tests": 3
+    },
+    "coverage": {
+      "file": "refactor/.cache/coverage/run-5doJa1/report.json",
+      "sha256": "7d76a697b88b97dd2b12b69111ab26a2b72d417f61df29bad9ae37a41982989c",
+      "log": {
+        "file": "refactor/.cache/iframe05-coverage.log",
+        "sha256": "d03392f652a5085a7820b3df6796099ff17d4208ef5c6c21f9adf2cdd1d97ec0"
+      },
+      "exitCode": 0,
+      "runtimeFiles": 224,
+      "exclusions": 26,
+      "violations": [],
+      "linesPercent": 61.04,
+      "branchesPercent": 86.7,
+      "functionsPercent": 66.75,
+      "scope": "Existing configured coverage policy; this is not a claim that every package is fully covered."
+    },
+    "lintNote": "Pre-existing unused ts/no-namespace disable warning in generated docs/assets/ts/artplayer.d.ts also appears in iframe04-ci-final.log; no new lint errors."
+  }
+}

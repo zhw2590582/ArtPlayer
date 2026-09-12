@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-IFRAME-05 播放器与真实编辑器检查点（doing）
+
+冻结原支持核心4.5.9的176个npm文件，与已冻结5.4.0、候选核心组成真实媒体矩阵。
+源码/main/legacy各75项通过：每份72组同源/跨域、新旧父子端组合，加3个实际
+Monaco页面Run流程。覆盖播放、seek/rate、网页全屏、切源、播放器/工具独立销毁。
+实测修复docs的AMD加载顺序、重复Run遗留iframe工具和请求、多个父播放器清理。
+源码和运行产物字节未变，旧公开API保持；失败探针、trace及后续通过报告均留存。
+全仓CI1544、330生产TS检查、3导入测试通过，配置覆盖率门槛0违例（224运行文件）。
+见[变更](changes/2026-09-13-PKG-IFRAME-05-integration.md)和
+[验证](baselines/iframe-integration-validation.json)。实际BFCache、物理设备、外部
+中断导航及最终分发仍待验收，不因此关闭任务或风险。222项：109 done、10 doing、103 todo。
+
 ## PKG-IFRAME-04 完成：公开类型、模块入口和编辑器
 
 保留默认类的required data、void静态接收、readonly、resove及旧commit推导，增加

@@ -164,5 +164,23 @@ No version bump or publication is implied by declaration validation.
 
 The existing local demo remains at
 `http://localhost:8082/?libs=./uncompiled/artplayer-tool-iframe/index.js&example=iframe`.
-Full demo/player integration, native devices and final release checks are later
-gates; the controlled iframe fixture is not evidence that those have passed.
+`iframe-player.spec.js` runs the real parent example, child HTML and stylesheet
+with core 4.5.9, frozen 5.4.0 and the candidate, all four new/old bridge pairings,
+and same/cross-origin documents. Historical global-name aliases are test-only.
+It exercises actual media playback, seek/rate, source switch, fullscreenWeb
+controls and independent core/tool destruction. Hover the player before clicking
+controls, as a user does; old cores hide their controls during playback.
+
+`iframe-editor.spec.js` opens the actual docs index and local Monaco, clicks Run
+repeatedly, and switches from an iframe example to two parent players and then
+an empty example. The editor loads the core before Monaco's AMD loader so the
+UMD core exposes its script global. Before each Run it dispatches the docs-only
+`artplayer:example:cleanup` event, then destroys a snapshot of parent instances.
+The iframe example subscribes once to destroy its tool and remove its frame;
+its initial commit handles cancellation during cleanup. This is an editor
+convention, not automatic DOM-removal behavior or a new player API. Standalone
+integrations remain responsible for calling destroy themselves.
+
+Physical devices, actual BFCache restoration, interrupted navigation and final
+distribution remain separate gates. Passing desktop player/editor tests does not
+complete those gates or establish the old helper/package-name migration.

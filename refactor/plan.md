@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 104 / doing 9 / blocked 0 / done 109 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 103 / doing 10 / blocked 0 / done 109 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -348,7 +348,7 @@
 | PKG-IFRAME-02 | artplayer-tool-iframe<br>建立特有行为与错误测试 | PKG-IFRAME-01, ENG-03, ENG-05 | 跨窗口消息、ID 匹配、请求失败、重复 inject、销毁中请求 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-IFRAME-03 | artplayer-tool-iframe<br>整理内部职责与资源 | PKG-IFRAME-02, CORE-02, BASE-07 | 请求注册/响应匹配/监听清理分离；origin/source 安全边界独立决策 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-IFRAME-04 | artplayer-tool-iframe<br>迁移自有源码和公开类型 | PKG-IFRAME-03, ENG-04, ENG-06, CORE-07 | 消息联合类型、回调/Promise 推导、旧公开字段兼容；旧npm export=与实际namespace、额外helper协议分别核验 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-IFRAME-05 | artplayer-tool-iframe<br>验证新旧核心和组合 | PKG-IFRAME-04, CORE-22 | 真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论；新旧核心/demo、实际 BFCache/设备和外部中断导航验收，旧端无文档标记的限制明确 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-IFRAME-05 | artplayer-tool-iframe<br>验证新旧核心和组合 | PKG-IFRAME-04, CORE-22 | 真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论；新旧核心/demo、实际 BFCache/设备和外部中断导航验收，旧端无文档标记的限制明确 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
 | PKG-IFRAME-06 | artplayer-tool-iframe<br>验证分发并同步文档 | PKG-IFRAME-05, ENG-07 | iframe.js、示例集成和原 script/class 导出验证；旧包名/额外helper深入口与新工具名的迁移结论; 保留旧npm Function回调及namespace/helper与工具类的区别，核验实际编译后消费而非仅声明通过 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-tool-thumbnail
@@ -534,4 +534,5 @@
 - PKG-IFRAME-02: [记录](changes/2026-09-12-PKG-IFRAME-02-behavior.md) [记录](baselines/iframe-behavior-validation.json)
 - PKG-IFRAME-03: [记录](changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md) [记录](baselines/iframe-requests-checkpoint.json) [记录](changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md) [记录](baselines/iframe-boundaries-checkpoint.json) [记录](iframe-message-boundary.md) [记录](changes/2026-09-13-PKG-IFRAME-03-navigation.md) [记录](baselines/iframe-navigation-validation.json) [记录](iframe-document-protocol.md)
 - PKG-IFRAME-04: [记录](changes/2026-09-13-PKG-IFRAME-04-types.md) [记录](baselines/iframe-types-validation.json)
+- PKG-IFRAME-05: [记录](changes/2026-09-13-PKG-IFRAME-05-integration.md) [记录](baselines/iframe-integration-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

@@ -3704,11 +3704,14 @@
         "PKG-IFRAME-04",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论；新旧核心/demo、实际 BFCache/设备和外部中断导航验收，旧端无文档标记的限制明确",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-IFRAME-05-integration.md",
+        "baselines/iframe-integration-validation.json"
+      ]
     },
     {
       "id": "PKG-IFRAME-06",

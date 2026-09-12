@@ -15,6 +15,11 @@ const iframe = new ArtplayerToolIframe({
   url: '/iframe.html',
 })
 
+window.addEventListener('artplayer:example:cleanup', () => {
+  iframe.destroy()
+  $iframe.remove()
+}, { once: true })
+
 iframe.message(({ type, data }) => {
   switch (type) {
     case 'fullscreenWeb':
@@ -44,4 +49,7 @@ iframe.commit(() => {
       data: state,
     })
   })
+}).catch((error) => {
+  if (!iframe.destroyed)
+    console.error(error)
 })

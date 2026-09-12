@@ -3776,7 +3776,7 @@
       ],
       "status": "open",
       "confirmation": "reproduced",
-      "compatibleResolution": "Owned requests and cleanup cover terminal failures. ADR-026 adds document-scoped cancellation, provisional source changes, same-document fragment preservation and queued final navigation. Keep open for PKG-IFRAME-05 full player/demo, actual BFCache/device and interrupted-navigation acceptance; unchanged legacy peers have documented document-identity limits.",
+      "compatibleResolution": "Owned requests and ADR-026 document cancellation are implemented. IFRAME-05 now verifies actual desktop players and Monaco Run on source/main/legacy, including pending-request and multiple-player cleanup. Keep open for actual BFCache/device and interrupted-navigation acceptance; unchanged legacy peers retain documented document-identity limits.",
       "closureCriteria": "Old behavior and candidate fixes have deterministic race/resource tests plus actual iframe integration.",
       "evidence": [
         "refactor/baselines/iframe-contract.md",
@@ -3790,7 +3790,9 @@
         "refactor/baselines/iframe-boundaries-checkpoint.json",
         "refactor/changes/2026-09-13-PKG-IFRAME-03-navigation.md",
         "refactor/baselines/iframe-navigation-validation.json",
-        "refactor/iframe-document-protocol.md"
+        "refactor/iframe-document-protocol.md",
+        "refactor/changes/2026-09-13-PKG-IFRAME-05-integration.md",
+        "refactor/baselines/iframe-integration-validation.json"
       ]
     },
     {
@@ -3802,7 +3804,7 @@
       ],
       "status": "open",
       "confirmation": "reproduced",
-      "compatibleResolution": "ADR-025 binds actual native peers; ADR-026 correlates negotiated document messages without breaking normal legacy wire. This is not an origin allowlist or commit sandbox. Keep open for PKG-IFRAME-05 complete integration/release review and documented legacy/custom unmarked-message limits.",
+      "compatibleResolution": "ADR-025 binds actual native peers; ADR-026 correlates negotiated documents. IFRAME-05 adds actual same/cross-origin media and editor evidence on three core versions, four bridge pairings and three desktop engines. This is not an origin allowlist or commit sandbox. Keep final acceptance and legacy/custom unmarked-message limits open.",
       "closureCriteria": "Controlled and real same/cross-origin evidence plus an explicit documented compatibility decision and supported trust model.",
       "evidence": [
         "refactor/baselines/iframe-contract.md",
@@ -3815,7 +3817,9 @@
         "refactor/iframe-message-boundary.md",
         "refactor/changes/2026-09-13-PKG-IFRAME-03-navigation.md",
         "refactor/baselines/iframe-navigation-validation.json",
-        "refactor/iframe-document-protocol.md"
+        "refactor/iframe-document-protocol.md",
+        "refactor/changes/2026-09-13-PKG-IFRAME-05-integration.md",
+        "refactor/baselines/iframe-integration-validation.json"
       ]
     },
     {
