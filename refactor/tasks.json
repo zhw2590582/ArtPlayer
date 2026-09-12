@@ -3268,11 +3268,15 @@
         "ENG-03",
         "ENG-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "ready/loadeddata/canplay、play/seek、回调、resize 与销毁",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-CANVAS-02-tests.md",
+        "baselines/canvas-behavior-validation.json",
+        "canvas-validation.md"
+      ]
     },
     {
       "id": "PKG-CANVAS-03",

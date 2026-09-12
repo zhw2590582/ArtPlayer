@@ -155,6 +155,7 @@
 | AMBILIGHT-TYPE-01 | resolved / 已复现 | Ambilight declarations disagree with optional factory argument and differ across published generations | PKG-AMBILIGHT-04, PKG-AMBILIGHT-06 |
 | AMBILIGHT-DIST-01 | resolved / 已复现 | Ambilight 1.0.0 CommonJS default namespace differs from callable 1.1.0 | PKG-AMBILIGHT-04, PKG-AMBILIGHT-06 |
 | AMBILIGHT-PROXY-01 | resolved / 已复现 | Canvas proxy output pixels differ from forwarded video dimensions | PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05 |
-| CANVAS-LIFE-01 | open / 源码/产物事实 | Canvas proxy pending draw, bitmap and delayed subscriptions lack terminal ownership | PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-05 |
+| CANVAS-LIFE-01 | open / 已复现 | Canvas proxy pending draw, bitmap and delayed subscriptions lack terminal ownership | PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-05 |
 | CANVAS-TYPE-01 | open / 源码/产物事实 | Canvas proxy declarations change required callback across generations and omit forwarded media capabilities | PKG-CANVAS-04, PKG-CANVAS-06 |
 | CANVAS-DIST-01 | open / 已复现 | Canvas proxy published CommonJS namespace differs from current callable export | PKG-CANVAS-04, PKG-CANVAS-06 |
+| CANVAS-PIXEL-01 | open / 已复现 | Historical Canvas proxy produces transparent frames with detached native video in tested WebKit | PKG-CANVAS-03, PKG-CANVAS-05 |

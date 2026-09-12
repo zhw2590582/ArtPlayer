@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-CANVAS-02",
+  "status": "done",
+  "checks": [
+    {
+      "command": "node --test test/canvas.test.js",
+      "result": "pass",
+      "tests": 33,
+      "scope": "11 historical normal/error/ownership categories across three frozen implementations"
+    },
+    {
+      "command": "playwright test test/browser/canvas.spec.js",
+      "result": "pass",
+      "tests": 42,
+      "skipped": 0,
+      "browsers": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32"
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32"
+        }
+      ],
+      "scope": "36 archived/frozen proxy checks plus 6 independent native attached/detached controls; expected historical WebKit transparency and post-destroy RAF remain defects"
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 914,
+        "engineering": 14,
+        "baseline": 96,
+        "mainTotal": 1024,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 278
+    }
+  ],
+  "limitations": [
+    "Historical failure assertions are not candidate fixes or rendering acceptance.",
+    "WebKit detached-video transparency is scoped to recorded Windows Playwright browser and media inputs, not all Safari devices.",
+    "Controlled Node DOM and bitmap promises do not prove native pixel, codec or device behavior.",
+    "No VAST VPN exception or browser skip used."
+  ],
+  "sourceCommit": "5e26d2298d4fc7568b208962d2aa069b788a8a78",
+  "preservedBrowserAttempts": [
+    {
+      "file": "refactor/.cache/canvas02-first-results/report.json",
+      "sha256": "de5c0195c7de8a1551b064fd4213c089cfe20d6aecc5bdba4558938ac7b2758e",
+      "stats": {
+        "startTime": "2026-09-12T04:24:44.219Z",
+        "duration": 29128.137000000002,
+        "expected": 30,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas02-first-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas02-webkit-wait-results/report.json",
+      "sha256": "43a7b4497d89213244201ecfd052b0fa0dedabea71d88239756df12998e3039e",
+      "stats": {
+        "startTime": "2026-09-12T04:26:11.586Z",
+        "duration": 22140.993,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas02-webkit-wait-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas02-pixel-probe-results/report.json",
+      "sha256": "dd441cc8e223fdaeecdb39dac5297c5f5cb1008a2c396d3b9caac5fa3a43ed76",
+      "stats": {
+        "startTime": "2026-09-12T04:27:46.306Z",
+        "duration": 11620.739,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas02-pixel-probe-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas02-attach-probe-results/report.json",
+      "sha256": "5f12808970c4cb65ffed6cb265c3d3b595bdea0eb1ea79fa3e524a77a22070b7",
+      "stats": {
+        "startTime": "2026-09-12T04:29:43.968Z",
+        "duration": 11748.322,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas02-attach-probe-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas02-native-control-results/report.json",
+      "sha256": "655cd06111a6f9389bee5b7bd56b1f50b81482635bb69ad58462051a721235a5",
+      "stats": {
+        "startTime": "2026-09-12T04:34:13.618Z",
+        "duration": 6111.419,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas02-native-control-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas02-native-detached-results/report.json",
+      "sha256": "1db5932b7979980177dc0d158090cec3d967cce33c2e4f9a4d2f1c7d6ca94f95",
+      "stats": {
+        "startTime": "2026-09-12T04:35:12.367Z",
+        "duration": 11861.622,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas02-native-detached-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas02-pixel-boundary-results/report.json",
+      "sha256": "ac1768227986cb716d40231a856bab8ae9dcb35ee0161516a42cb47e5df1e687",
+      "stats": {
+        "startTime": "2026-09-12T04:36:16.598Z",
+        "duration": 30244.336,
+        "expected": 42,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas02-pixel-boundary-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas02-final-results/report.json",
+      "sha256": "28886ac131df9f5f871fb9c66b0985a73cd9e84dd5542d028db68e28f374b649",
+      "stats": {
+        "startTime": "2026-09-12T04:37:05.676Z",
+        "duration": 28495.888,
+        "expected": 42,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas02-final-results/results"
+    }
+  ],
+  "inputs": [
+    {
+      "file": "test/canvas.test.js",
+      "sha256LF": "df1b1aaee15f18b6b9808f48e759ef2ef22912e7a20a0b831e51bee4d84ee436"
+    },
+    {
+      "file": "test/browser/canvas.spec.js",
+      "sha256LF": "e34a4463574f09057af7f307e8564cbcd8f03415a270f362b6c83de69359f652"
+    },
+    {
+      "file": "test/helpers/canvas.js",
+      "sha256LF": "cc617b6d1053a9ed9caa5dad03088abaaff4344f078e23d007ee1a935f2a6c3c"
+    },
+    {
+      "file": "refactor/baselines/canvas-release.json",
+      "sha256LF": "7f7b229a5c0350a5d02be101d0095548c7ef1e76ce95c3b7152b415b0117398c"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/canvas02-node.log",
+      "sha256": "7558fb6922ba2e2490c586051081375f98069048d234f4cd7fda22b85b746bfd"
+    },
+    {
+      "file": "refactor/.cache/canvas02-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/canvas02-browser-readiness.log",
+      "sha256": "ba10158100c211a7f5ee5e05e917f7ffc20c8968e8372b7d99f668e16e4b7970"
+    },
+    {
+      "file": "refactor/.cache/canvas02-ci-before-risk-index.log",
+      "sha256": "0a0452a062448c3a2092c4d62ed84b5a255f9016cf4ef86c108825952d45a45e"
+    },
+    {
+      "file": "refactor/.cache/canvas02-ci.log",
+      "sha256": "e4137711c5902d943ddfdae260f895959223e9ef1040e464197f8f59209d403f"
+    }
+  ]
+}

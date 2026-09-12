@@ -3343,7 +3343,7 @@
     {
       "id": "CANVAS-LIFE-01",
       "title": "Canvas proxy pending draw, bitmap and delayed subscriptions lack terminal ownership",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "owners": [
         "PKG-CANVAS-02",
         "PKG-CANVAS-03",
@@ -3355,8 +3355,11 @@
       "evidence": [
         "refactor/baselines/canvas-contract.md",
         "refactor/baselines/canvas-release.json",
-        "refactor/changes/2026-09-12-PKG-CANVAS-01-contract.md"
-      ]
+        "refactor/changes/2026-09-12-PKG-CANVAS-01-contract.md",
+        "refactor/changes/2026-09-12-PKG-CANVAS-02-tests.md",
+        "refactor/baselines/canvas-behavior-validation.json"
+      ],
+      "workspaceState": "33 historical Node checks reproduce pending bitmap, concurrent RAF, close omission, reentrant destroy and delayed/partial registration leaks; 18 real browser core/proxy combinations observe RAF continuing after destroy inside callback. Candidate fixes pending task 03."
     },
     {
       "id": "CANVAS-TYPE-01",
@@ -3391,6 +3394,23 @@
         "refactor/baselines/canvas-release.json",
         "refactor/changes/2026-09-12-PKG-CANVAS-01-contract.md"
       ]
+    },
+    {
+      "id": "CANVAS-PIXEL-01",
+      "title": "Historical Canvas proxy produces transparent frames with detached native video in tested WebKit",
+      "status": "open",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-CANVAS-03",
+        "PKG-CANVAS-05"
+      ],
+      "compatibleResolution": "Verify actual pixel recovery with explicit backing media ownership and stable public canvas surface; do not infer that attaching after playback fixes it.",
+      "closureCriteria": "Candidate native proxy pixels, pause/seek/source switch and terminal cleanup pass all three engines; device limitations remain explicit.",
+      "evidence": [
+        "refactor/changes/2026-09-12-PKG-CANVAS-02-tests.md",
+        "refactor/baselines/canvas-behavior-validation.json"
+      ],
+      "workspaceState": "All six historical WebKit proxy combinations produce alpha0 while time advances. Separate native video mounted before play yields alpha255; detached native control alpha0. Chromium/Firefox both paths yield255. These historical observations do not prove candidate fix or all Safari device behavior."
     }
   ]
 }
