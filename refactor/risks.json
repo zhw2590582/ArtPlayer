@@ -4113,11 +4113,13 @@
         "refactor/baselines/auto-thumbnail-failures-validation.json",
         "test/browser/auto-thumbnail-pixels.spec.js",
         "refactor/baselines/auto-thumbnail-hidden-renderer.json",
-        "refactor/baselines/auto-thumbnail-timeline-media.json"
+        "refactor/baselines/auto-thumbnail-timeline-media.json",
+        "test/auto-thumbnail-frames.test.js",
+        "refactor/baselines/auto-thumbnail-frame-presentation.json"
       ],
       "compatibleResolution": "Establish actual decoded-frame readiness for the existing timeline/grid and preserve silent independent extraction; do not waive colored pixel checks as unsupported media.",
       "closureCriteria": "Candidate source and artifacts generate usable sampled pixels on native browser controls with lifecycle checks; supported Safari and core combinations remain explicit final gates.",
-      "workspaceState": "Hidden intrinsic-sized attached decoder mitigates detached WebKit black later frames. Source 45 repeated native cases plus main/legacy 15 each verify lifecycle and cells 2-4 only. Initial cells 0-1 remain diagnostic: transparent/stale draws and Windows WebKit first-frame timing remain unresolved. Bounded retries now reject wrong-time seeked events before drawing. Do not close this risk or task03 based on partial pixel acceptance."
+      "workspaceState": "The frames module now waits for native presentation and seek completion on capable browsers. Chromium/Firefox source/main/legacy assert all five cells including first purple frame, second red cell, legitimate black and presentation times. Callback-less Windows WebKit first two cells remain diagnostic, later cells asserted; physical Safari/core combinations remain open. 84 native lifecycle/pixel cases passed with explicit held native-frame vs Blob-fallback paths; 19 new Node cases fail 17 ways on prior checkpoint and all 52 current cases pass per candidate. Risk and task03 remain open."
     }
   ]
 }

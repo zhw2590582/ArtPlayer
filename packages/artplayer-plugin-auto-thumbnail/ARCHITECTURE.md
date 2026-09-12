@@ -31,6 +31,12 @@ for video processing.
   video sizing rules. It is silent, excluded from focus/accessibility, and never
   played by this implementation. Cleanup also removes the element if insertion,
   cancellation, pause or decoder reset fails.
+- `src/frames.js` owns one pending sample, its seek/data handlers, deadline and
+  native presentation callback. When request/cancel frame callbacks are both
+  available it waits for loaded data, then requires both seek completion and frame
+  presentation before drawing. Callback identities are invalidated on retry and
+  replacement; late/duplicate delivery cannot complete a newer sample. One job
+  cleanup handles every frame without accumulating per-frame cleanup closures.
 
 Only the entry module receives ArtPlayer. Extraction receives a guarded job and a
   configuration snapshot. These internal modules do not add public player fields,
@@ -52,6 +58,10 @@ sample; a mismatch retries that same target at most three times, then fails with
 cleanup and retains any previous preview. This prevents observed stale seek
 events from advancing the sheet, but does not prove frame presentation accuracy:
 the current time can match even when the drawable first frame is stale.
+Each pending data/seek/presentation wait has a 30-second deadline. Expiry cancels
+its callback and decoder, reports through the existing warning path, and retains
+the last usable preview. This is a per-sample readiness deadline, not a complete
+network, encoder, background-tab or aggregate resource policy.
 
 The previous empty first encode is removed. Encoding is serial, duplicate native
 callbacks are consumed once, and source replacement/destruction invalidates old
@@ -82,10 +92,12 @@ defects; their passing status does not mean those defects should remain.
 
 This is an intermediate `PKG-AUTO-THUMB-03` implementation. Native lifecycle
 validation does not prove correct pixels. The attached renderer now has native
-pixel checks for cells 2-4 (zero-based) on a five-frame sheet, including real black
-content, changing colors and spatial detail. Cells 0-1 remain diagnostic only:
-initial transparent/stale draws and WebKit frame-time offsets are unresolved
-(`AUTO-THUMB-PIXEL-01`). Merely waiting for `seeked`, adding two animation frames,
+pixel checks for all five cells when native frame callbacks are available,
+including the unique first frame, real black content, changing colors, spatial
+detail and presentation timestamps. The callback-less fallback still only has
+acceptance for cells 2-4 (zero-based); its cells 0-1 are diagnostic only. Initial
+transparent/stale draws and Windows WebKit frame-time offsets remain unresolved
+under `AUTO-THUMB-PIXEL-01`. Merely waiting for `seeked`, adding two animation frames,
 or seeking away and back did not consistently repair the first frame. Do not
 close this risk based on the later-cell assertions or replace it with a nonblack
 test; legitimate black frames have opaque pixels. Frame timing, additional

@@ -1786,7 +1786,9 @@
         "baselines/auto-thumbnail-lifecycle-checkpoint.json",
         "changes/2026-09-13-PKG-AUTO-THUMB-03-hidden-renderer.md",
         "baselines/auto-thumbnail-hidden-renderer.json",
-        "baselines/auto-thumbnail-timeline-media.json"
+        "baselines/auto-thumbnail-timeline-media.json",
+        "changes/2026-09-13-PKG-AUTO-THUMB-03-frame-presentation.md",
+        "baselines/auto-thumbnail-frame-presentation.json"
       ]
     },
     {

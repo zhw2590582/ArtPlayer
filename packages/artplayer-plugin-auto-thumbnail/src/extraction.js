@@ -1,3 +1,4 @@
+import createFrameReader from './frames'
 import { sheetSize } from './options'
 import createVideo from './video'
 
@@ -34,27 +35,14 @@ export default function extract(job, config) {
       throw new Error('Auto-thumbnail canvas context is unavailable')
     if (!job.active())
       return
+    const readFrame = createFrameReader(job, video)
     let index = 0
     const seek = job.guard(() => {
       if (index >= config.number) {
         job.dispose()
         return
       }
-      const target = duration * index / config.number
-      let retries = 0
-      video.onseeked = job.guard(() => {
-        if (video.seeking)
-          return
-        const time = video.currentTime
-        if (!job.active())
-          return
-        if (!Number.isFinite(time) || Math.abs(time - target) > 0.05) {
-          if (++retries > 3)
-            throw new Error('Auto-thumbnail seek did not reach the requested time')
-          video.currentTime = target
-          return
-        }
-        video.onseeked = null
+      readFrame(duration * index / config.number, job.guard(() => {
         ctx.drawImage(video, (index % 10) * config.width, Math.floor(index / 10) * height, config.width, height)
         if (!job.active())
           return
@@ -69,9 +57,7 @@ export default function extract(job, config) {
             seek()
           }
         }), 'image/jpeg')
-      })
-      if (job.active())
-        video.currentTime = target
+      }))
     })
     seek()
   })

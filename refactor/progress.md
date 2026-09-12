@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-03 原生帧就绪检查点（doing）
+
+新增frames模块，对支持的浏览器同时等待seek完成与原生帧呈现，补齐取消、超时、
+重复/迟到回调和重试身份。Chromium/Firefox五格像素全部验收，WebKit缺该API时前两格
+仍只诊断，像素风险继续open。19项新回归此前2通过/17失败；源码/main/legacy各52通过。
+最终原生源码两轮42项，main/legacy各21项，共84项通过；包含真实帧挂起时destroy/restart。
+完整CI1818项、339生产TS及4种bundle入口通过；见[验证](baselines/auto-thumbnail-frame-presentation.json)；
+[变更](changes/2026-09-13-PKG-AUTO-THUMB-03-frame-presentation.md)记录能力边界和后续要求。
+正常构建及文档同步，TS仍属04。222项：114 done、12 doing、96 todo；03未标完成。
+
+
 ## PKG-AUTO-THUMB-03 隐藏解码与错时seek重试检查点（doing）
 
 新增video模块，挂载隐藏且保持实际尺寸的解码元素，完善DOM回收及插入/清理重入。

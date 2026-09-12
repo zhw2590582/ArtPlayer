@@ -4,127 +4,6 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-function readOptions(option, getFallbackUrl) {
-  const config = {
-    url: option.url || getFallbackUrl(),
-    width: option.width || 160,
-    number: option.number || 100,
-    scale: option.scale || 1
-  };
-  if (!Number.isFinite(Number(config.width)) || config.width <= 0 || !Number.isFinite(Number(config.number)) || config.number <= 0)
-    throw new TypeError("Auto-thumbnail width and number must be finite positive numbers");
-  return config;
-}
-function sheetSize(config, video) {
-  if (!Number.isFinite(video.duration) || video.duration <= 0 || !Number.isFinite(video.videoWidth) || video.videoWidth <= 0 || !Number.isFinite(video.videoHeight) || video.videoHeight <= 0)
-    throw new TypeError("Auto-thumbnail requires finite media duration and dimensions");
-  const height = Math.floor(config.width * video.videoHeight / video.videoWidth);
-  const canvasWidth = Math.trunc(config.width * 10);
-  const canvasHeight = Math.trunc(height * Math.ceil(config.number / 10));
-  if (![height, canvasWidth, canvasHeight].every((value) => Number.isSafeInteger(value) && value > 0 && value <= 4294967295))
-    throw new RangeError("Auto-thumbnail canvas dimensions are invalid");
-  return { height, canvasWidth, canvasHeight };
-}
-function createVideo(job) {
-  const video = document.createElement("video");
-  job.own(() => video.remove());
-  job.own(() => video.load());
-  job.own(() => video.removeAttribute("src"));
-  job.own(() => video.pause());
-  for (const property of ["onloadedmetadata", "onseeked", "onerror"])
-    job.own(() => {
-      video[property] = null;
-    });
-  if (!job.active())
-    return video;
-  video.crossOrigin = "anonymous";
-  video.muted = true;
-  video.playsInline = true;
-  video.tabIndex = -1;
-  video.setAttribute("aria-hidden", "true");
-  video.style.cssText = "position:fixed;left:0;top:0;visibility:hidden;pointer-events:none;display:block;width:auto;height:auto;max-width:none;max-height:none";
-  document.documentElement.appendChild(video);
-  if (!job.active())
-    video.remove();
-  return video;
-}
-function extract(job, config) {
-  const video = createVideo(job);
-  if (!job.active())
-    return;
-  video.onerror = job.guard(() => {
-    throw video.error || new Error("Auto-thumbnail media failed to load");
-  });
-  video.onloadedmetadata = job.guard(() => {
-    video.onloadedmetadata = null;
-    const duration = video.duration;
-    const videoHeight = video.videoHeight;
-    const videoWidth = video.videoWidth;
-    const { height, canvasWidth, canvasHeight } = sheetSize(config, {
-      duration,
-      videoHeight,
-      videoWidth
-    });
-    if (!job.active())
-      return;
-    video.width = videoWidth;
-    video.height = videoHeight;
-    video.style.width = `${videoWidth}px`;
-    video.style.height = `${videoHeight}px`;
-    const canvas = document.createElement("canvas");
-    if (!job.active())
-      return;
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-    const ctx = canvas.getContext("2d");
-    if (!ctx)
-      throw new Error("Auto-thumbnail canvas context is unavailable");
-    if (!job.active())
-      return;
-    let index = 0;
-    const seek = job.guard(() => {
-      if (index >= config.number) {
-        job.dispose();
-        return;
-      }
-      const target = duration * index / config.number;
-      let retries = 0;
-      video.onseeked = job.guard(() => {
-        if (video.seeking)
-          return;
-        const time = video.currentTime;
-        if (!job.active())
-          return;
-        if (!Number.isFinite(time) || Math.abs(time - target) > 0.05) {
-          if (++retries > 3)
-            throw new Error("Auto-thumbnail seek did not reach the requested time");
-          video.currentTime = target;
-          return;
-        }
-        video.onseeked = null;
-        ctx.drawImage(video, index % 10 * config.width, Math.floor(index / 10) * height, config.width, height);
-        if (!job.active())
-          return;
-        let delivered = false;
-        canvas.toBlob(job.guard((blob) => {
-          if (delivered)
-            return;
-          delivered = true;
-          job.publish(blob, { height, column: 10, number: config.number, width: config.width, scale: config.scale });
-          if (job.active()) {
-            index += 1;
-            seek();
-          }
-        }), "image/jpeg");
-      });
-      if (job.active())
-        video.currentTime = target;
-    });
-    seek();
-  });
-  if (job.active())
-    video.src = config.url;
-}
 function cleanupAll(actions) {
   let failure;
   let failed = false;
@@ -245,6 +124,217 @@ function createSession(publish, report) {
       return closed;
     }
   };
+}
+function createFrameReader(job, video) {
+  const presentedFrames = typeof video.requestVideoFrameCallback === "function" && typeof video.cancelVideoFrameCallback === "function";
+  let pending;
+  function clear() {
+    const previous = pending;
+    pending = void 0;
+    video.onloadeddata = null;
+    video.onseeked = null;
+    if (!previous)
+      return;
+    const result = cleanupAll([
+      () => clearTimeout(previous.timer),
+      () => {
+        if (previous.frame !== null)
+          video.cancelVideoFrameCallback(previous.frame);
+      }
+    ]);
+    if (result.failed)
+      throw result.failure;
+  }
+  job.own(clear);
+  return (target, draw) => {
+    clear();
+    if (!job.active())
+      return;
+    const current = { frame: null, timer: null, sought: false, presented: !presentedFrames, retries: 0, sequence: 0, started: false };
+    pending = current;
+    const active = () => job.active() && pending === current;
+    const finish = job.guard(() => {
+      if (!active() || !current.sought || !current.presented)
+        return;
+      clear();
+      if (job.active())
+        draw();
+    });
+    const requestFrame = () => {
+      if (!presentedFrames)
+        return;
+      const sequence = ++current.sequence;
+      current.presented = false;
+      const previous = current.frame;
+      current.frame = null;
+      if (previous !== null)
+        video.cancelVideoFrameCallback(previous);
+      if (!active())
+        return;
+      let delivered = false;
+      const id = video.requestVideoFrameCallback(job.guard(() => {
+        if (!active() || sequence !== current.sequence || delivered)
+          return;
+        delivered = true;
+        current.frame = null;
+        current.presented = true;
+        finish();
+      }));
+      if (active() && sequence === current.sequence && !delivered)
+        current.frame = id;
+      else
+        video.cancelVideoFrameCallback(id);
+    };
+    const seek = () => {
+      current.sought = false;
+      requestFrame();
+      if (active())
+        video.currentTime = target;
+    };
+    const begin = job.guard(() => {
+      if (!active() || current.started)
+        return;
+      current.started = true;
+      video.onloadeddata = null;
+      video.onseeked = job.guard(() => {
+        if (!active() || video.seeking)
+          return;
+        const time = video.currentTime;
+        if (!active())
+          return;
+        if (!Number.isFinite(time) || Math.abs(time - target) > 0.05) {
+          if (++current.retries > 3)
+            throw new Error("Auto-thumbnail seek did not reach the requested time");
+          seek();
+          return;
+        }
+        current.sought = true;
+        finish();
+      });
+      seek();
+    });
+    current.timer = setTimeout(job.guard(() => {
+      if (active())
+        throw new Error("Auto-thumbnail frame readiness timed out");
+    }), 3e4);
+    if (!active()) {
+      clearTimeout(current.timer);
+      return;
+    }
+    const ready = !presentedFrames || video.readyState >= 2;
+    if (!active())
+      return;
+    if (!ready)
+      video.onloadeddata = begin;
+    else
+      begin();
+  };
+}
+function readOptions(option, getFallbackUrl) {
+  const config = {
+    url: option.url || getFallbackUrl(),
+    width: option.width || 160,
+    number: option.number || 100,
+    scale: option.scale || 1
+  };
+  if (!Number.isFinite(Number(config.width)) || config.width <= 0 || !Number.isFinite(Number(config.number)) || config.number <= 0)
+    throw new TypeError("Auto-thumbnail width and number must be finite positive numbers");
+  return config;
+}
+function sheetSize(config, video) {
+  if (!Number.isFinite(video.duration) || video.duration <= 0 || !Number.isFinite(video.videoWidth) || video.videoWidth <= 0 || !Number.isFinite(video.videoHeight) || video.videoHeight <= 0)
+    throw new TypeError("Auto-thumbnail requires finite media duration and dimensions");
+  const height = Math.floor(config.width * video.videoHeight / video.videoWidth);
+  const canvasWidth = Math.trunc(config.width * 10);
+  const canvasHeight = Math.trunc(height * Math.ceil(config.number / 10));
+  if (![height, canvasWidth, canvasHeight].every((value) => Number.isSafeInteger(value) && value > 0 && value <= 4294967295))
+    throw new RangeError("Auto-thumbnail canvas dimensions are invalid");
+  return { height, canvasWidth, canvasHeight };
+}
+function createVideo(job) {
+  const video = document.createElement("video");
+  job.own(() => video.remove());
+  job.own(() => video.load());
+  job.own(() => video.removeAttribute("src"));
+  job.own(() => video.pause());
+  for (const property of ["onloadedmetadata", "onloadeddata", "onseeked", "onerror"])
+    job.own(() => {
+      video[property] = null;
+    });
+  if (!job.active())
+    return video;
+  video.crossOrigin = "anonymous";
+  video.muted = true;
+  video.playsInline = true;
+  video.tabIndex = -1;
+  video.setAttribute("aria-hidden", "true");
+  video.style.cssText = "position:fixed;left:0;top:0;visibility:hidden;pointer-events:none;display:block;width:auto;height:auto;max-width:none;max-height:none";
+  document.documentElement.appendChild(video);
+  if (!job.active())
+    video.remove();
+  return video;
+}
+function extract(job, config) {
+  const video = createVideo(job);
+  if (!job.active())
+    return;
+  video.onerror = job.guard(() => {
+    throw video.error || new Error("Auto-thumbnail media failed to load");
+  });
+  video.onloadedmetadata = job.guard(() => {
+    video.onloadedmetadata = null;
+    const duration = video.duration;
+    const videoHeight = video.videoHeight;
+    const videoWidth = video.videoWidth;
+    const { height, canvasWidth, canvasHeight } = sheetSize(config, {
+      duration,
+      videoHeight,
+      videoWidth
+    });
+    if (!job.active())
+      return;
+    video.width = videoWidth;
+    video.height = videoHeight;
+    video.style.width = `${videoWidth}px`;
+    video.style.height = `${videoHeight}px`;
+    const canvas = document.createElement("canvas");
+    if (!job.active())
+      return;
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx)
+      throw new Error("Auto-thumbnail canvas context is unavailable");
+    if (!job.active())
+      return;
+    const readFrame = createFrameReader(job, video);
+    let index = 0;
+    const seek = job.guard(() => {
+      if (index >= config.number) {
+        job.dispose();
+        return;
+      }
+      readFrame(duration * index / config.number, job.guard(() => {
+        ctx.drawImage(video, index % 10 * config.width, Math.floor(index / 10) * height, config.width, height);
+        if (!job.active())
+          return;
+        let delivered = false;
+        canvas.toBlob(job.guard((blob) => {
+          if (delivered)
+            return;
+          delivered = true;
+          job.publish(blob, { height, column: 10, number: config.number, width: config.width, scale: config.scale });
+          if (job.active()) {
+            index += 1;
+            seek();
+          }
+        }), "image/jpeg");
+      }));
+    });
+    seek();
+  });
+  if (job.active())
+    video.src = config.url;
 }
 function artplayerPluginAutoThumbnail(option) {
   return async (art) => {

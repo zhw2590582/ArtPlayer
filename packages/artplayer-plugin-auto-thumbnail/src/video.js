@@ -4,7 +4,7 @@ export default function createVideo(job) {
   job.own(() => video.load())
   job.own(() => video.removeAttribute('src'))
   job.own(() => video.pause())
-  for (const property of ['onloadedmetadata', 'onseeked', 'onerror'])
+  for (const property of ['onloadedmetadata', 'onloadeddata', 'onseeked', 'onerror'])
     job.own(() => { video[property] = null })
   if (!job.active())
     return video

@@ -41,6 +41,8 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
   const listeners = new Map()
   const updates = []
   const warnings = []
+  const timers = new Map()
+  let nextTimer = 0
   let nextUrl = 0
   const controls = { nullContext: false, drawError: null, encodeError: null, updateError: null, onUpdate: null, beforeAppend: null, afterAppend: null }
   const attached = new Set()
@@ -68,6 +70,7 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
           videoWidth: 1920,
           videoHeight: 1080,
           onloadedmetadata: null,
+          onloadeddata: null,
           onseeked: null,
           onerror: null,
           pause() { operations.push({ name: 'pause', video }) },
@@ -116,7 +119,11 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
     },
   }
   const module = { exports: {} }
-  const box = { document, URL: {
+  const box = { document, setTimeout(callback, delay) {
+    const id = nextTimer++
+    timers.set(id, { callback, delay })
+    return id
+  }, clearTimeout(id) { timers.delete(id) }, URL: {
     createObjectURL(blob) {
       if (blob == null)
         throw new TypeError('Blob required')
@@ -174,6 +181,7 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
     listeners,
     updates,
     warnings,
+    timers,
     controls,
     attached,
     metadata(video = videos.at(-1)) { video.onloadedmetadata?.() },
