@@ -8,13 +8,15 @@ import { hash } from '../refactor/scripts/releases.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const output = path.resolve(root, process.argv[2] || 'test/browser/media/hls')
+const duration = Number(process.argv[3] || 12)
+assert(Number.isInteger(duration) && duration >= 12 && duration <= 3600, 'Duration must be 12..3600 whole seconds')
 assert(!fs.existsSync(output), 'Output must be a new directory; never overwrite frozen media')
 const ffmpeg = process.env.ARTPLAYER_FFMPEG || 'ffmpeg'
 const version = execFileSync(ffmpeg, ['-version'], { encoding: 'utf8' }).split(/\r?\n/)[0]
 fs.mkdirSync(output, { recursive: true })
 const commands = []
 function generate(name, input, encoding) {
-  const args = ['-hide_banner', '-loglevel', 'error', '-n', '-f', 'lavfi', '-i', input, '-t', '12', ...encoding, '-f', 'hls', '-hls_time', '2', '-hls_playlist_type', 'vod', '-hls_segment_filename', `${name}-%02d.mpegts`, `${name}.m3u8`]
+  const args = ['-hide_banner', '-loglevel', 'error', '-n', '-f', 'lavfi', '-i', input, '-t', String(duration), ...encoding, '-f', 'hls', '-hls_time', '2', '-hls_playlist_type', 'vod', '-hls_segment_filename', `${name}-%02d.mpegts`, `${name}.m3u8`]
   execFileSync(ffmpeg, args, { cwd: output, stdio: 'pipe' })
   commands.push(args)
 }
@@ -27,5 +29,5 @@ const variants = '#EXT-X-STREAM-INF:BANDWIDTH=200000,RESOLUTION=160x90,CODECS="a
 fs.writeFileSync(path.join(output, 'master.m3u8'), `#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio",NAME="English",LANGUAGE="en",DEFAULT=YES,AUTOSELECT=YES,URI="english.m3u8"\n#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio",NAME="French",LANGUAGE="fr",DEFAULT=NO,AUTOSELECT=YES,URI="french.m3u8"\n${variants}`)
 fs.writeFileSync(path.join(output, 'video-only.m3u8'), '#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-STREAM-INF:BANDWIDTH=200000,RESOLUTION=160x90,CODECS="avc1.42c01e"\nlow.m3u8\n')
 const files = Object.fromEntries(fs.readdirSync(output).sort().map(name => [name, { sha256: hash(fs.readFileSync(path.join(output, name))), bytes: fs.statSync(path.join(output, name)).size }]))
-fs.writeFileSync(path.join(output, 'manifest.json'), `${JSON.stringify({ kind: 'generated-hls-media', version, duration: 12, commands, files }, null, 2)}\n`)
+fs.writeFileSync(path.join(output, 'manifest.json'), `${JSON.stringify({ kind: 'generated-hls-media', version, duration, commands, files }, null, 2)}\n`)
 console.log(`Generated ${Object.keys(files).length} HLS files in ${output}`)

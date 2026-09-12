@@ -77,7 +77,9 @@
     "test:dpip": "node --test test/dpip.test.js test/dpip-lifecycle.test.js",
     "test:dpip-types-package": "node refactor/scripts/dpip-package-types.mjs",
     "test:mediabunny": "node --test test/mediabunny.test.js test/mediabunny-shim.test.js test/mediabunny-coordination.test.js test/mediabunny-video.test.js test/mediabunny-audio.test.js test/mediabunny-hls.test.js test/mediabunny-entry.test.js test/mediabunny-capability.test.js test/mediabunny-load.test.js test/mediabunny-input.test.js",
-    "test:mediabunny-types-package": "node refactor/scripts/mb-package-types.mjs"
+    "test:mediabunny-types-package": "node refactor/scripts/mb-package-types.mjs",
+    "test:mediabunny-soak": "playwright test --config playwright.soak.config.js",
+    "generate:media:hls": "node scripts/generate-hls-fixture.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

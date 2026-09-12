@@ -3576,7 +3576,10 @@
       "acceptance": "资源释放、事件顺序、AV sync 与支持范围满足基线",
       "evidence": [
         "changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md",
-        "baselines/mb-native-pip-checkpoint.json"
+        "baselines/mb-native-pip-checkpoint.json",
+        "changes/2026-09-12-PKG-MB-09-sustained-playback-checkpoint.md",
+        "baselines/mb-sustained-validation.json",
+        "baselines/mb-sustained-media.json"
       ]
     },
     {

@@ -528,5 +528,5 @@
 - PKG-MB-06: [记录](baselines/mb-audio-source.json) [记录](changes/2026-09-12-PKG-MB-06-audio.md) [记录](baselines/mb-audio-validation.json)
 - PKG-MB-07: [记录](baselines/mb-hls-source.json) [记录](changes/2026-09-12-PKG-MB-07-hls.md) [记录](baselines/mb-hls-validation.json)
 - PKG-MB-08: [记录](baselines/mb-entry-source.json) [记录](changes/2026-09-12-PKG-MB-08-entry-checkpoint.md) [记录](baselines/mb-entry-checkpoint.json) [记录](baselines/mb-capability-source.json) [记录](changes/2026-09-12-PKG-MB-08-capability.md) [记录](baselines/mb-capability-validation.json)
-- PKG-MB-09: [记录](changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md) [记录](baselines/mb-native-pip-checkpoint.json)
+- PKG-MB-09: [记录](changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md) [记录](baselines/mb-native-pip-checkpoint.json) [记录](changes/2026-09-12-PKG-MB-09-sustained-playback-checkpoint.md) [记录](baselines/mb-sustained-validation.json) [记录](baselines/mb-sustained-media.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

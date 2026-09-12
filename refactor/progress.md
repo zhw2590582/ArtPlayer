@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-MB-09 持续播放检查点（doing）
+
+独立yarn test:mediabunny-soak读取600秒固定HLS，四个Chromium/Firefox新旧核心场景
+各连续90秒1×/90秒2×，再seek/切质量/切音轨，共至少195秒实际墙钟。六项通过，
+两项WebKit为缺失API对照。最大AV时钟偏差51.34ms；每组创建约1.37万节点，
+同时在用峰值64，destroy后全部断开，迭代器/队列归零且无迟到绘制。
+完整CI1418与44重复契约通过，324生产TS；默认生成器保留原32文件哈希。
+见[变更](changes/2026-09-12-PKG-MB-09-sustained-playback-checkpoint.md)和
+[证据](baselines/mb-sustained-validation.json)。222项：105 done、8 doing、109 todo。
+MB-09仍doing；数小时/声学/物理设备/后台与完整插件组合未由本轮关闭，托管长测job待接续。
+
 ## PKG-MB-09 原生画中画检查点（doing）
 
 36个新旧核心/媒体/关闭方式/浏览器场景通过，24项实际原生窗口中Canvas解码播放，
