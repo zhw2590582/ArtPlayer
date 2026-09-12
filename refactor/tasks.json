@@ -605,6 +605,62 @@
       ]
     },
     {
+      "phase": "2 工程保障",
+      "scope": [
+        "workspace"
+      ],
+      "risk": "M",
+      "id": "ENG-AUDIT-01",
+      "title": "核对每任务完成提交的真实Git历史",
+      "status": "done",
+      "dependsOn": [
+        "ENG-07",
+        "DOC-04"
+      ],
+      "deliverable": "独立完成提交、初始DOC例外、父分支合并和证据共提交审计；CI完整历史与报告",
+      "acceptance": "真实仓库及隔离Git反例通过，done任务不允许缺独立commit，固定DOC-01～04例外可追溯；提交后验证自身",
+      "evidence": [
+        "commit-audit.md",
+        "changes/2026-09-12-ENG-AUDIT-01-commits.md",
+        "baselines/commit-audit-validation.json"
+      ]
+    },
+    {
+      "phase": "2 工程保障",
+      "scope": [
+        "workspace"
+      ],
+      "risk": "M",
+      "id": "ENG-IMPACT-01",
+      "title": "建立全包依赖与共享变更影响映射",
+      "status": "todo",
+      "dependsOn": [
+        "ENG-07",
+        "DOC-04"
+      ],
+      "deliverable": "核心/构建/类型/锁文件到受影响包和必需生态检查的映射及CI接入",
+      "acceptance": "核心变化触发必需生态检查；新增包、未知共享文件或失配依赖不能静默漏检；解释受影响路径和测试命令",
+      "evidence": []
+    },
+    {
+      "phase": "2 工程保障",
+      "scope": [
+        "workspace"
+      ],
+      "risk": "M",
+      "id": "ENG-COVERAGE-01",
+      "title": "建立公开契约与版本测试证据覆盖索引",
+      "status": "todo",
+      "dependsOn": [
+        "BASE-08",
+        "CORE-22",
+        "ENG-07"
+      ],
+      "deliverable": "契约-包-支持版本-固定测试ID-命令-候选/报告-责任任务索引和文档检查",
+      "acceptance": "计划、已执行和缺证据状态分开，所有公开契约都有验证归属；无效路径、版本依据或报告对应不明确会被识别",
+      "evidence": []
+    },
+    {
       "id": "ENG-09",
       "phase": "2 工程保障",
       "title": "建立全包依赖影响和文档检查",
@@ -613,7 +669,10 @@
       ],
       "dependsOn": [
         "ENG-07",
-        "DOC-04"
+        "DOC-04",
+        "ENG-AUDIT-01",
+        "ENG-IMPACT-01",
+        "ENG-COVERAGE-01"
       ],
       "status": "todo",
       "risk": "M",

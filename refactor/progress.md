@@ -1,5 +1,15 @@
 # 进度与证据
 
+## 最新完成：ENG-AUDIT-01 每任务提交审计
+
+新增实际Git历史审计并接入ci:check，核对状态迁移、独立提交、证据/plan共提交和合并分支。
+原80个done对应76个独立完成提交，另4项为固定DOC-05初始例外；保留真实历史标题格式。
+真实Git反例及完整本地CI904项通过，GitHub三个checkout改为完整历史，actionlint通过。
+提交后再审计本任务自身。ENG-09拆成Git审计、影响映射、契约覆盖三个子项，后二者
+和父任务仍未完成；没有远端运行或推送。当前220项：81 done、6 doing、133 todo。
+VAST初始化选择仍待确认；其余实施继续。见 [本步记录](changes/2026-09-12-ENG-AUDIT-01-commits.md)
+和 [验证证据](baselines/commit-audit-validation.json)。
+
 ## 当前实施：VAST-03 TS拆分与生命周期修复
 
 原入口拆成5个严格TS模块，处理核心终止、显式广告重建、SDK/DOM回滚与晚到/重入回调。

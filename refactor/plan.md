@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 217 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 220 项，范围 22 个包及工作区/示例。
 
-状态：todo 131 / doing 6 / blocked 0 / done 80 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 133 / doing 6 / blocked 0 / done 81 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -82,7 +82,10 @@
 | ENG-06 | workspace<br>支持按包非交互与 JS/TS 构建 | ENG-02, BASE-05 | build/dev 入口解析、指定包参数、原交互保留 | 三种产物、Less/SVG/worker 和本地 8082 demo 正常；保持 BASE-05 的 AMD 同时写入全局行为及 i18n/legacy 入口 | H | done |
 | ENG-07 | workspace<br>建立 tarball 消费与产物检查 | ENG-04, ENG-06 | 隔离 npm 消费 fixtures、API/声明/入口差分 | 不借 workspace 源码通过，能识别缺文件与默认导出变化 | H | done |
 | ENG-08 | workspace<br>增加覆盖率、资源与性能报告 | ENG-03, ENG-05, BASE-06 | 覆盖率基线、资源清理断言、性能报告与阈值 | 关键生命周期分支有门槛，报告不靠无意义断言堆数量；将 BASE-06 的同环境多组配对、计时/压缩审查阈值与资源异常分开接入候选，不把历史现象冻结成正常要求 | M | done |
-| ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04 | 共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入；契约-支持版本-测试 ID-命令-候选/报告-任务的覆盖索引 | 核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit；计划/已执行/缺证据分开，识别缺少验证归属的公开契约 | M | todo |
+| ENG-AUDIT-01 | workspace<br>核对每任务完成提交的真实Git历史 | ENG-07, DOC-04 | 独立完成提交、初始DOC例外、父分支合并和证据共提交审计；CI完整历史与报告 | 真实仓库及隔离Git反例通过，done任务不允许缺独立commit，固定DOC-01～04例外可追溯；提交后验证自身 | M | done |
+| ENG-IMPACT-01 | workspace<br>建立全包依赖与共享变更影响映射 | ENG-07, DOC-04 | 核心/构建/类型/锁文件到受影响包和必需生态检查的映射及CI接入 | 核心变化触发必需生态检查；新增包、未知共享文件或失配依赖不能静默漏检；解释受影响路径和测试命令 | M | todo |
+| ENG-COVERAGE-01 | workspace<br>建立公开契约与版本测试证据覆盖索引 | BASE-08, CORE-22, ENG-07 | 契约-包-支持版本-固定测试ID-命令-候选/报告-责任任务索引和文档检查 | 计划、已执行和缺证据状态分开，所有公开契约都有验证归属；无效路径、版本依据或报告对应不明确会被识别 | M | todo |
+| ENG-09 | workspace<br>建立全包依赖影响和文档检查 | ENG-07, DOC-04, ENG-AUDIT-01, ENG-IMPACT-01, ENG-COVERAGE-01 | 共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入；契约-支持版本-测试 ID-命令-候选/报告-任务的覆盖索引 | 核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit；计划/已执行/缺证据分开，识别缺少验证归属的公开契约 | M | todo |
 | ENG-10 | workspace<br>建立历史失败分级和测试可靠性规则 | ENG-03, ENG-04, ENG-05, ENG-07, BASE-07 | 历史失败 ID/环境/旧版复现/负责修复任务、逐模块门槛、受控等待与 trace/retry 规则 | 不靠全局忽略或无理由 skip 隐藏问题，新增回归阻止交付，设备缺口和偶发失败单独可见；以 risks.json 为统一差异索引；关闭必须有 resolutionEvidence/rationale，已复现、源码事实、未验证分开，登记不等于豁免 | M | done |
 | ENG-11 | workspace<br>增加不改变产物的模块构建分析 | ENG-03, ENG-08 | 正式构建的可选模块归因报告及源码/产物指纹 | 相同构建开关前后三格式字节一致，报告不进入分发包；区分 Rollup 渲染字节与压缩体积，并保留真实工作区/发布来源 | L | done |
 
@@ -437,6 +440,7 @@
 - ENG-06: [记录](changes/2026-09-10-ENG-06-build-development.md) [记录](build-development.md) [记录](baselines/build-validation.json)
 - ENG-07: [记录](changes/2026-09-10-ENG-07-package-consumers.md) [记录](baselines/package-validation.json)
 - ENG-08: [记录](coverage-performance.md) [记录](baselines/quality-validation.json) [记录](changes/2026-09-11-ENG-08-quality-reports.md)
+- ENG-AUDIT-01: [记录](commit-audit.md) [记录](changes/2026-09-12-ENG-AUDIT-01-commits.md) [记录](baselines/commit-audit-validation.json)
 - ENG-10: [记录](changes/2026-09-10-ENG-10-test-reliability.md) [记录](test-reliability.md)
 - ENG-11: [记录](build-analysis.md) [记录](baselines/bundle-attribution.json) [记录](changes/2026-09-11-ENG-11-build-analysis.md)
 - PILOT-01: [记录](changes/2026-09-10-PILOT-01-chapter.md) [记录](baselines/pilot-validation.json)

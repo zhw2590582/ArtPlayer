@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "task": "ENG-AUDIT-01",
+  "status": "done",
+  "sourceCommit": "4f324a84",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/commit-audit.test.mjs",
+      "result": "pass",
+      "tests": 4,
+      "scope": "Real isolated Git repositories, negative cases and a real merge",
+      "log": {
+        "file": "refactor/.cache/eng-audit-tests-first.log",
+        "sha256": "95a8c9fa5388f828a37a35c97667bb641107ddd027073ce027a6126e986c2761"
+      }
+    },
+    {
+      "command": "yarn check:commits --report",
+      "result": "pass before task completion",
+      "doneTasks": 80,
+      "dedicatedCommits": 76,
+      "bootstrapBundledTasks": 4,
+      "head": "4f324a84389186be7acd099ab074c4b21011ee81",
+      "report": {
+        "file": "refactor/.cache/eng-audit-before.json",
+        "sha256": "8dd298e4efd1b8ee21c06f245e3c73fe24d21fcfa77bbd83e2beea0d447c2a22"
+      }
+    },
+    {
+      "command": "actionlint 1.7.12",
+      "result": "pass",
+      "workflows": 2
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 832,
+        "engineering": 14,
+        "baseline": 58,
+        "total": 904
+      },
+      "log": {
+        "file": "refactor/.cache/eng-audit-ci.log",
+        "sha256": "73d92161c74c921a6755298efd18b49b1b68caf693c0c31f8aba040e050ebf92"
+      }
+    }
+  ],
+  "limitations": [
+    "Local Git and workflow static validation only; no remote GitHub run",
+    "Commit/evidence provenance is not semantic test or implementation acceptance",
+    "ENG-09 impact and coverage subtasks remain open"
+  ],
+  "inputs": [
+    {
+      "file": "refactor/scripts/commit-audit.mjs",
+      "sha256LF": "3b2076e428042017df2eb12b02c827a81059704f7435d86279e20f3e986f3d57"
+    },
+    {
+      "file": "refactor/scripts/commit-audit.test.mjs",
+      "sha256LF": "74d807947473ccafb783a9127a8fac480c3051b422a5e2edb9e1509ac02cd49c"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "94f3162e4ed876f5d4dcfbb4a93948a87b46314cf09d67ceaf9c3a8fd8960624"
+    },
+    {
+      "file": ".github/workflows/nodejs.yml",
+      "sha256LF": "a88eee053a57333c4234b88d93535ee8de1d805bf884ce2ad168e3617a1becc1"
+    }
+  ],
+  "postCommitVerification": "Run yarn check:commits --report immediately after this task commit; its actual HEAD and completion must appear in the generated report. The report is not embedded in its own commit."
+}
