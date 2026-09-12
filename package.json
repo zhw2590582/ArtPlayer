@@ -80,7 +80,8 @@
     "test:mediabunny-types-package": "node refactor/scripts/mb-package-types.mjs",
     "test:mediabunny-soak": "playwright test --config playwright.soak.config.js",
     "generate:media:hls": "node scripts/generate-hls-fixture.mjs",
-    "test:iframe": "node --test test/iframe-navigation.test.js test/iframe-boundaries.test.js test/iframe.test.js test/iframe-lifecycle.test.js refactor/scripts/iframe-contract.test.mjs"
+    "test:iframe": "node --test test/iframe-navigation.test.js test/iframe-boundaries.test.js test/iframe.test.js test/iframe-lifecycle.test.js refactor/scripts/iframe-contract.test.mjs refactor/scripts/iframe-types.test.mjs",
+    "test:iframe-types-package": "node refactor/scripts/iframe-package-types.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

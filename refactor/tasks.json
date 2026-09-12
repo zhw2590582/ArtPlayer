@@ -3598,7 +3598,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "mediabunny.js、README、依赖版本、三产物和许可",
+      "deliverable": "mediabunny.js、README、依赖版本、三产物和许可; 拆分media声明后的独立编辑器生成/辅助文件过滤与语义检查（IFRAME-04全量生成时暴露）",
       "acceptance": "tarball 可消费、无意外依赖升级、旧调用与回退可用",
       "evidence": []
     },
@@ -3684,11 +3684,14 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "消息联合类型、回调/Promise 推导、旧公开字段兼容；旧npm export=与实际namespace、额外helper协议分别核验",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-IFRAME-04-types.md",
+        "baselines/iframe-types-validation.json"
+      ]
     },
     {
       "id": "PKG-IFRAME-05",
@@ -3720,7 +3723,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "iframe.js、示例集成和原 script/class 导出验证；旧包名/额外helper深入口与新工具名的迁移结论",
+      "deliverable": "iframe.js、示例集成和原 script/class 导出验证；旧包名/额外helper深入口与新工具名的迁移结论; 保留旧npm Function回调及namespace/helper与工具类的区别，核验实际编译后消费而非仅声明通过",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
       "evidence": []
     },

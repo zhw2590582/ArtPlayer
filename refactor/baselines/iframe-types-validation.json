@@ -1,0 +1,723 @@
+{
+  "task": "PKG-IFRAME-04",
+  "status": "done",
+  "checkpoint": "verified-public-types-editor-and-installed-consumers",
+  "beforeCommit": "1342de94ef2e9dc3e06ddac12fcf1fc5229b648d",
+  "sourceSha256LF": {
+    "package.json": "1ca2df37409d1634abe58ce40f50bbee162033af4c57a9908697477e564a7909",
+    "packages/artplayer-tool-iframe/package.json": "91985c93522c98be5d2a6d02dc0a39df5eeededdd94077758511873fe2290cf4",
+    "packages/artplayer-tool-iframe/.npmignore": "145c5fa0341195e21cf13df3423a057282f8ea374e9a1b3065e2280e1ce1c5c1",
+    "packages/artplayer-tool-iframe/README.md": "6e0b3afbad28bf0160d744b89d1a4dad997fff77fb23c61d707389f08f49e219",
+    "packages/artplayer-tool-iframe/ARCHITECTURE.md": "b5754cfecc61728db0742739f488973f6d9330ebd2f2ec9b60505953fc746546",
+    "packages/artplayer-tool-iframe/types/artplayer-tool-iframe.d.ts": "e1efb4c7f22de24721923f02cf0488728a6ef381505c49187eba0bc2b90b1207",
+    "packages/artplayer-tool-iframe/types/artplayer-tool-iframe.d.cts": "66850135f45c81d4bd7a0de33b6a2f63a655de9000f2698f43660039727919f3",
+    "packages/artplayer-tool-iframe/types/artplayer-tool-iframe.d.mts": "cd394fd68e61fab3c4474daab29852a3f87dd0086b007e7937106871272676fb",
+    "docs/assets/ts/artplayer-tool-iframe.d.ts": "c06c6819146ba64bd6ee498871d9e19ab5a9e88c9cc7bed2c0c4968fa39dfed7",
+    "scripts/build-ts.js": "ce6e8da55d934c31f2291326b33a577c9b7dd15b84167f3c63142085d3dcb56d",
+    "scripts/plugin-editor-types.mjs": "c485550ed0f44d38c2c78faced58c2bec08d496f4bd5a66f4c3dd2ed4bc8b57e",
+    "scripts/typecheck.mjs": "02aa38836fc33b01f1e2de3def1443ed4d35f038a3595e11106a4dfbff12e86d",
+    "test/types/iframe.ts": "7ecdc1f7cafda5edb3dbe0908c1029ea7cf3308eb909db661f3cfec27f434b90",
+    "test/types/iframe-commonjs.cts": "16ac9bea7bb5fd1e5b79301d3f4e3d2761357fbe96a05211a941e26853866729",
+    "test/types/iframe-source.ts": "29d816c19301d16c81521e809245ac33783362a9023d8cd9ac26185fb3e85ad6",
+    "refactor/fixtures/consumers/iframe-workspace.ts": "c81fc54c919aabab57ead9efcffc9fe3e469be7fb3b57fbcafa5fd2653d83afb",
+    "refactor/scripts/iframe-types.test.mjs": "69931a4b0779f996c0af46929c92ce1c9ccc437067a42fa1e9fac9d39ab856a0",
+    "refactor/scripts/iframe-package-types.mjs": "8dd0006f605752ffdbf51c58bf5ee4cca503dc6c3c1793a8b03dc14fc62d27ea"
+  },
+  "artifacts": {
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.js": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6",
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.legacy.js": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a",
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.mjs": "ac4c5efa670c0429fc95bdab7902df60f5b5540f0dad9c7e65c2bd660796dc83"
+  },
+  "browserEvidenceReuse": {
+    "file": "refactor/baselines/iframe-navigation-validation.json",
+    "reason": "All six production source modules and three runtime build bytes are unchanged; this task changes declarations/editor generation and manifest type routing. Native frame matrices remain 351/351/207 from task 03; installed export routing is separately tested here."
+  },
+  "installed": {
+    "report": "refactor/.cache/iframe-package-types-AHSyi2/report.json",
+    "sha256": "1dadc173afa37655cd6c148cb34483f93e82fe82ae7897f6f4dfe89b8eb8b18b",
+    "task": "PKG-IFRAME-04",
+    "scope": "Actual npm archive, frozen Git workspace pack and candidate Yarn tarball installed outside workspace; byte verification, offline/frozen lock and strict positive/negative consumers. Old npm CJS namespace and distinct helper are preserved observations, not claims the candidate provides old package-name/helper aliases. Native player and distribution migration remain 05/06.",
+    "packages": [
+      {
+        "label": "published",
+        "name": "artplayer-plugin-iframe",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\releases\\artplayer-plugin-iframe-1.0.0.tgz",
+        "sha256": "16dc92aa84d93bd99bc0a34815dc49f1609fafc1ff255eb353ea893e70b5f91f",
+        "files": {
+          "package/README.md": "52c0a1199b6529d60ce8f4414984f9bd1bc3a8daa5bb6cfec8f0aae0c8338e46",
+          "package/dist/artplayer-helper-iframe.js": "47730ed608f0637594549b9762c01191686a4a55b3bd467132304a016d227f4a",
+          "package/dist/artplayer-helper-iframe.legacy.js": "f4c3b11806cad6d984f03a2d9de63deba78cbe538ffe4044a106b0dddc5d4197",
+          "package/dist/artplayer-plugin-iframe.js": "df469c3e4582b127f35798494d0845f1fc4ca2d19bbaf01b918492e035479745",
+          "package/dist/artplayer-plugin-iframe.legacy.js": "15299cb5c848cc61614f7573a802443d69b7c6d0a938a1867835c7cbb4884edd",
+          "package/package.json": "563a6c8407753b92b86319a5e6d9d567525146c32cb010b45b0d88ff481859f6",
+          "package/src/index.js": "2e0b9efeedef0d6c4f2d2b526db35f634cd02af044e4e28dd1a0b26a5b9a02bf",
+          "package/types/artplayer-plugin-iframe.d.ts": "d55d99a2488d60892a0ab82882dc96a0f373dab0c3d2a3cee978bc35aa7c2d0c"
+        }
+      },
+      {
+        "label": "workspace",
+        "name": "artplayer-tool-iframe",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\iframe-package-types-AHSyi2\\workspace.tgz",
+        "sha256": "6fc603122610b785aa3ecb43f2692fb92c39e96386ca1bcab5ee23253af92ae6",
+        "files": {
+          "package/README.md": "6910a44b767ff80c1d1edc3c90ca7ca77a9b45307fb61d4abd9d52526c7614b3",
+          "package/dist/artplayer-tool-iframe.js": "2ec257c8055a9448d12af3fecf1fae8ba58c06f47e85072d02c386cd258b0c86",
+          "package/dist/artplayer-tool-iframe.legacy.js": "c0755d79f316cda71f045da86749648f95faf47c09180d525fb04bb753576d5f",
+          "package/dist/artplayer-tool-iframe.mjs": "cbcdb0516dd5f17ca2572a6b3e363ea63b0cfd9733f3e47689c02088f23f29b9",
+          "package/package.json": "b28f5156f02a250539f0acaf302ec87fdd506f63b0e73dd308326ec78c691d03",
+          "package/types/artplayer-tool-iframe.d.ts": "4f02aa22a6b373393ead533ae3421ad5acf0de7116057f351021c72d3448bd1e"
+        }
+      },
+      {
+        "label": "candidate",
+        "name": "artplayer-tool-iframe",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\iframe-package-types-AHSyi2\\candidate.tgz",
+        "sha256": "25e88268584f67cb690048f8cb53312b6fcfe64d622a70bf954604a402be9471",
+        "files": {
+          "package/ARCHITECTURE.md": "b5754cfecc61728db0742739f488973f6d9330ebd2f2ec9b60505953fc746546",
+          "package/README.md": "ef5af60bcb831667a78cc3421f6e3c7b5d9a50b3d2e571c5cd02d46fc533e9ce",
+          "package/dist/artplayer-tool-iframe.js": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6",
+          "package/dist/artplayer-tool-iframe.legacy.js": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a",
+          "package/dist/artplayer-tool-iframe.mjs": "ac4c5efa670c0429fc95bdab7902df60f5b5540f0dad9c7e65c2bd660796dc83",
+          "package/package.json": "0de9c86eeb3f9a2fb46f9297105b5beddb8d6164163ffaa9874cf5cd68ba7a58",
+          "package/types/artplayer-tool-iframe.d.cts": "66850135f45c81d4bd7a0de33b6a2f63a655de9000f2698f43660039727919f3",
+          "package/types/artplayer-tool-iframe.d.mts": "cd394fd68e61fab3c4474daab29852a3f87dd0086b007e7937106871272676fb",
+          "package/types/artplayer-tool-iframe.d.ts": "e760de22559caf7ffff48d7c5713485bf9f0ddbe876a93080295fb6106535bfa"
+        }
+      }
+    ],
+    "matrix": [
+      {
+        "package": "published",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "negative": []
+      },
+      {
+        "package": "published",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "diagnostics": [],
+        "negative": []
+      },
+      {
+        "package": "published",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "diagnostics": [],
+        "negative": []
+      },
+      {
+        "package": "published",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "diagnostics": [],
+        "negative": []
+      },
+      {
+        "package": "published",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "negative": []
+      },
+      {
+        "package": "workspace",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "negative": []
+      },
+      {
+        "package": "workspace",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "diagnostics": [],
+        "negative": []
+      },
+      {
+        "package": "workspace",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "diagnostics": [
+          {
+            "code": 2344,
+            "message": "Type 'false' does not satisfy the constraint 'true'."
+          },
+          {
+            "code": 2344,
+            "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-tool-iframe/types/artplayer-tool-iframe\")' does not satisfy the constraint 'abstract new (...args: any) => any'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-tool-iframe/types/artplayer-tool-iframe\")' provides no match for the signature 'new (...args: any): any'."
+          },
+          {
+            "code": 2344,
+            "message": "Type 'false' does not satisfy the constraint 'true'."
+          },
+          {
+            "code": 2709,
+            "message": "Cannot use namespace 'Iframe' as a type."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'onMessage' does not exist on type 'typeof import(\"<consumer>/node_modules/artplayer-tool-iframe/types/artplayer-tool-iframe\")'."
+          },
+          {
+            "code": 2344,
+            "message": "Type 'false' does not satisfy the constraint 'true'."
+          },
+          {
+            "code": 2709,
+            "message": "Cannot use namespace 'Iframe' as a type."
+          },
+          {
+            "code": 2344,
+            "message": "Type 'false' does not satisfy the constraint 'true'."
+          },
+          {
+            "code": 2709,
+            "message": "Cannot use namespace 'Iframe' as a type."
+          },
+          {
+            "code": 2709,
+            "message": "Cannot use namespace 'Iframe' as a type."
+          },
+          {
+            "code": 2351,
+            "message": "This expression is not constructable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-tool-iframe/types/artplayer-tool-iframe\")' has no construct signatures."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'postMessage' does not exist on type 'typeof import(\"<consumer>/node_modules/artplayer-tool-iframe/types/artplayer-tool-iframe\")'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'inject' does not exist on type 'typeof import(\"<consumer>/node_modules/artplayer-tool-iframe/types/artplayer-tool-iframe\")'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'onMessage' does not exist on type 'typeof import(\"<consumer>/node_modules/artplayer-tool-iframe/types/artplayer-tool-iframe\")'."
+          },
+          {
+            "code": 7006,
+            "message": "Parameter 'value' implicitly has an 'any' type."
+          },
+          {
+            "code": 7006,
+            "message": "Parameter 'additional' implicitly has an 'any' type."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'onMessage' does not exist on type 'typeof import(\"<consumer>/node_modules/artplayer-tool-iframe/types/artplayer-tool-iframe\")'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'iframe' does not exist on type 'typeof import(\"<consumer>/node_modules/artplayer-tool-iframe/types/artplayer-tool-iframe\")'."
+          }
+        ],
+        "negative": []
+      },
+      {
+        "package": "workspace",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "diagnostics": [],
+        "negative": []
+      },
+      {
+        "package": "workspace",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "negative": []
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 0."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'HTMLIFrameElement'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: string; }' is not assignable to parameter of type 'Message<any>'.\n  Property 'data' is missing in type '{ type: string; }' but required in type 'Message<any>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'injected' because it is a read-only property."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolIframe'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'iframe' because it is a read-only property."
+          },
+          {
+            "code": 2353,
+            "message": "Object literal may only specify known properties, and 'id' does not exist in type 'Notification<unknown>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: \"response\"; data: string; id: number; }' is not assignable to parameter of type 'ProtocolMessage<number>'.\n  Types of property 'data' are incompatible.\n    Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'string' is not assignable to parameter of type 'number | PromiseLike<number>'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'resolve' does not exist on type 'Callbacks'. Did you mean 'resove'?"
+          },
+          {
+            "code": 18046,
+            "message": "'message.data' is of type 'unknown'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 0."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'HTMLIFrameElement'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: string; }' is not assignable to parameter of type 'Message<any>'.\n  Property 'data' is missing in type '{ type: string; }' but required in type 'Message<any>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'injected' because it is a read-only property."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolIframe'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'iframe' because it is a read-only property."
+          },
+          {
+            "code": 2353,
+            "message": "Object literal may only specify known properties, and 'id' does not exist in type 'Notification<unknown>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: \"response\"; data: string; id: number; }' is not assignable to parameter of type 'ProtocolMessage<number>'.\n  Types of property 'data' are incompatible.\n    Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'string' is not assignable to parameter of type 'number | PromiseLike<number>'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'resolve' does not exist on type 'Callbacks'. Did you mean 'resove'?"
+          },
+          {
+            "code": 18046,
+            "message": "'message.data' is of type 'unknown'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 0."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'HTMLIFrameElement'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: string; }' is not assignable to parameter of type 'Message<any>'.\n  Property 'data' is missing in type '{ type: string; }' but required in type 'Message<any>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'injected' because it is a read-only property."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolIframe'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'iframe' because it is a read-only property."
+          },
+          {
+            "code": 2353,
+            "message": "Object literal may only specify known properties, and 'id' does not exist in type 'Notification<unknown>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: \"response\"; data: string; id: number; }' is not assignable to parameter of type 'ProtocolMessage<number>'.\n  Types of property 'data' are incompatible.\n    Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'string' is not assignable to parameter of type 'number | PromiseLike<number>'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'resolve' does not exist on type 'Callbacks'. Did you mean 'resove'?"
+          },
+          {
+            "code": 18046,
+            "message": "'message.data' is of type 'unknown'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 0."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'HTMLIFrameElement'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: string; }' is not assignable to parameter of type 'Message<any>'.\n  Property 'data' is missing in type '{ type: string; }' but required in type 'Message<any>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'injected' because it is a read-only property."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolIframe'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'iframe' because it is a read-only property."
+          },
+          {
+            "code": 2353,
+            "message": "Object literal may only specify known properties, and 'id' does not exist in type 'Notification<unknown>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: \"response\"; data: string; id: number; }' is not assignable to parameter of type 'ProtocolMessage<number>'.\n  Types of property 'data' are incompatible.\n    Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'string' is not assignable to parameter of type 'number | PromiseLike<number>'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'resolve' does not exist on type 'Callbacks'. Did you mean 'resove'?"
+          },
+          {
+            "code": 18046,
+            "message": "'message.data' is of type 'unknown'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 0."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'HTMLIFrameElement'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: string; }' is not assignable to parameter of type 'Message<any>'.\n  Property 'data' is missing in type '{ type: string; }' but required in type 'Message<any>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number' is not assignable to type 'string'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number | undefined'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'injected' because it is a read-only property."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'void' is not assignable to type 'Promise<void>'."
+          },
+          {
+            "code": 2339,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolIframe'."
+          },
+          {
+            "code": 2540,
+            "message": "Cannot assign to 'iframe' because it is a read-only property."
+          },
+          {
+            "code": 2322,
+            "message": "Type '{ type: string; data: number; id: number; }' is not assignable to type 'Notification<unknown>'.\n  Object literal may only specify known properties, and 'id' does not exist in type 'Notification<unknown>'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number | undefined'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '{ type: \"response\"; data: string; id: number; }' is not assignable to parameter of type 'ProtocolMessage<number>'.\n  Type '{ type: \"response\"; data: string; id: number; }' is not assignable to type '{ type: \"response\"; data: number; id: number; }'.\n    Types of property 'data' are incompatible.\n      Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'string' is not assignable to parameter of type 'number | PromiseLike<number>'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'resolve' does not exist on type 'Callbacks'. Did you mean 'resove'?"
+          },
+          {
+            "code": 2571,
+            "message": "Object is of type 'unknown'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs-no-interop",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2339,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolIframe'."
+          }
+        ]
+      }
+    ],
+    "runtime": [
+      {
+        "package": "published",
+        "commonjs": "object",
+        "commonjsDefault": "function",
+        "esmDefault": "object",
+        "helperIsDistinct": true,
+        "ssrImport": true
+      },
+      {
+        "package": "workspace",
+        "commonjs": "function",
+        "commonjsDefault": "undefined",
+        "esmDefault": "function",
+        "helperIsDistinct": false,
+        "ssrImport": true
+      },
+      {
+        "package": "candidate",
+        "commonjs": "function",
+        "commonjsDefault": "undefined",
+        "esmDefault": "function",
+        "helperIsDistinct": false,
+        "ssrImport": true
+      }
+    ]
+  },
+  "diagnostics": {
+    "editorBefore": {
+      "file": "refactor/.cache/iframe04-editor-before.json",
+      "codes": [
+        2309,
+        2686,
+        2303
+      ],
+      "meaning": "Frozen default/export= combination and incorrect lowercase global; both compiler versions reproduce the same three codes, in compiler-specific ordering."
+    },
+    "workspaceNodeNextEsm": {
+      "report": "refactor/.cache/iframe-package-types-6qThuH/workspace-5.9.3-nodenext-esm.json",
+      "count": 18,
+      "meaning": "Frozen workspace declaration represents a namespace rather than a constructable native ESM default. Candidate paired d.mts/d.cts routes pass the unchanged workspace fixture."
+    },
+    "trials": [
+      "refactor/.cache/iframe04-types-first.log",
+      "refactor/.cache/iframe04-types-second.log",
+      "refactor/.cache/iframe04-editor-build.log",
+      "refactor/.cache/iframe04-lint-fix.log"
+    ],
+    "meaning": "Initial tests exposed historical diagnostic ordering/context differences and the known nullable-source callback mismatch; exact expectations are explicit. The editor build found method-signature lint errors, repaired in authored types before regeneration.",
+    "intermediateCi": {
+      "log": "refactor/.cache/iframe04-ci.log",
+      "tests": 1542,
+      "status": "pass-before-error-payload-review",
+      "scope": "Not final acceptance after ProtocolMessage error payload was corrected to unknown."
+    },
+    "nonStringErrors": {
+      "file": "refactor/.cache/iframe04-error-payload-probe.json",
+      "sha256": "e5d81d661be5fe555def11f4366443ce463e7b0b53fbd5cca4d11b0ac64a779e",
+      "observations": 10,
+      "scope": "Two non-Error throws across four immutable historical artifacts and candidate source produce numeric/undefined data. Permanent baseline regression repeats these checks."
+    }
+  },
+  "preservedDifferences": [
+    "Default Message.data remains required and static onMessage remains void; RuntimeConstructor exposes the actual optional-data/Promise<void> surface.",
+    "Default callback remains non-null while actual source allows null. The source satisfies RuntimeConstructor; exact historical mismatch 2419 is asserted separately, not hidden by skipLibCheck.",
+    "Default commit keeps Promise<ReturnType<T>>, including old nested-Promise inference. ResolverInstance provides an explicit result for the literal resolve(...) body protocol; neither view adds async-function-body or closure support.",
+    "Published Function callbacks versus callable workspace callbacks are an existing cross-package-name declaration difference, with both compiler diagnostics pinned. Old-name/helper distribution is still IFRAME-06.",
+    "Historical npm native ESM default is an object despite accepted old declaration usage; the candidate tool native ESM default is a class. No old package/helper alias has been delivered here.",
+    "No self-default is added. Old-style TypeScript CommonJS default imports require interop; modern direct import= is checked without interop.",
+    "Known error packets carry unknown data because thrown values need not be Error objects. New typed consumers narrow before treating the payload as text."
+  ],
+  "checks": [
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "exitCode": 0,
+      "tests": 1543,
+      "unit": 1365,
+      "engineering": 14,
+      "baseline": 164,
+      "repeatedContracts": 44,
+      "productionTypeScriptFiles": 330,
+      "log": "refactor/.cache/iframe04-ci-final.log",
+      "sha256": "7a0b080a0e6f708c0f8bdbd831d8e93b0970b5779f4c7ded42ea96be4fc0da64"
+    },
+    {
+      "command": "yarn test:imports",
+      "result": "pass",
+      "tests": 3,
+      "log": "refactor/.cache/iframe04-imports.log"
+    },
+    {
+      "command": "yarn build:ts artplayer-tool-iframe",
+      "result": "pass",
+      "log": "refactor/.cache/iframe04-editor-build-verified.log"
+    },
+    {
+      "command": "yarn build artplayer-tool-iframe",
+      "result": "pass",
+      "log": "refactor/.cache/iframe04-build.log",
+      "scope": "All three runtime outputs remain byte-identical to task 03."
+    },
+    {
+      "command": "yarn test:iframe-types-package",
+      "result": "pass",
+      "log": "refactor/.cache/iframe04-package-verified.log",
+      "compilerCases": 16,
+      "candidateCases": 6,
+      "candidateNegativeDiagnostics": 81
+    }
+  ],
+  "remaining": [
+    "PKG-IFRAME-05 full core/demo/BFCache/device/interrupted-navigation integration",
+    "PKG-IFRAME-06 old package name/helper paths, emitted consumer runtime and final distribution",
+    "PKG-MB-10 standalone editor treatment of split media declarations surfaced during an initial all-package generation; unrelated generated changes were restored and no completion is claimed"
+  ],
+  "verifiedAt": "2026-09-12T17:41:36.279Z"
+}

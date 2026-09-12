@@ -80,6 +80,10 @@ export function runTypechecks() {
       assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, fixture), 'utf8')), [], `Consumer failed: TS ${compiler.version} ${mode} ${fixture}`)
     if (mode === 'nodenext-cjs')
       assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, 'test/types/commonjs.cts'), 'utf8')), [], 'CommonJS export assignment consumer failed')
+    for (const fixture of ['test/types/iframe.ts', 'refactor/fixtures/consumers/iframe-workspace.ts'])
+      assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, fixture), 'utf8')), [], `Iframe consumer failed: TS ${compiler.version} ${mode}`)
+    if (mode === 'nodenext-cjs')
+      assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, 'test/types/iframe-commonjs.cts'), 'utf8')), [], 'Iframe CommonJS constructor consumer failed')
     console.log(`Consumers passed: TS ${compiler.version} ${mode}`)
   }
   const runtimeFixtures = ['test/types/runtime-leaf-consumer.ts', 'test/types/runtime-public.ts', 'test/types/runtime-construction.ts']

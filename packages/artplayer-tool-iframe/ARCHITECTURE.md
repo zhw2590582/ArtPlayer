@@ -110,18 +110,41 @@ history reload is BFCache: actual persisted restoration, full-player integration
 devices and externally interrupted navigation remain PKG-IFRAME-05/release gates.
 IFRAME-LIFE-01 and IFRAME-TRUST-01 remain open for those integration/review scopes.
 
-Public declarations remain in `types/artplayer-tool-iframe.d.ts`; source typing
-does not yet establish historical declaration/entry compatibility. PKG-IFRAME-04
-must reconcile the old npm plugin name, namespace/default and extra helper
-protocol separately. PKG-IFRAME-06 owns final distribution. No version bump or
-publication is implied by this source migration.
+Public declarations are maintained in `types/artplayer-tool-iframe.d.ts`.
+The `.d.cts` bridge describes the actual CommonJS constructor and its named types;
+`.d.mts` routes native ESM to the same class. Keep the root `types` field and
+legacy `typesVersions` entry for TS 4.3 consumers. The runtime has no self-default
+property. Ordinary default imports use interop in CommonJS consumers; modern
+TypeScript can use direct `import Iframe = require(...)` without interop.
+
+The default class intentionally retains required Message.data, void static
+onMessage, readonly instance fields, non-null callback and legacy commit inference.
+RuntimeConstructor/RuntimeInstance expose optional outgoing data, async static
+receiver, nullable callback and application-supplied response types. ResolverInstance
+offers an explicit result parameter for the old serialized resolve(...) protocol.
+These are erased type views, not new runtime methods or payload validators. The
+source class satisfies RuntimeConstructor; its nullable callback intentionally
+does not satisfy the old non-null class declaration, and tests pin that difference.
+
+Old npm plugin-iframe used Function callbacks and a CommonJS default namespace;
+those differ from the frozen workspace before this refactor. Installed tests
+preserve that evidence and the separate helper's static destroy protocol. They
+do not claim the renamed tool supplies the old package name or helper entrypoints.
+PKG-IFRAME-06 still owns those distribution decisions and compatibility facades.
+No version bump or publication is implied by declaration validation.
 
 ## Verification
 
 - `yarn test:iframe`: frozen historical contract/defect assertions and candidate
   lifecycle assertions. Historical failures are not candidate acceptance.
-- `yarn typecheck`: strict source and existing consumers; full package declaration
-  consumers are still a separate PKG-IFRAME-04 gate.
+- `yarn typecheck`: strict source and existing consumers, including old extraction
+  and new typed views in TS 5.9 and TS 4.3.
+- `yarn test:iframe-types-package`: install the real old npm archive, frozen
+  workspace pack and candidate outside the workspace with offline/frozen Yarn.
+  Check declaration resolution, exact bytes, exports and positive/negative uses.
+- `yarn build:ts artplayer-tool-iframe`: regenerate only this package's standalone
+  editor declaration (plus the shared core declaration). The generator uses the
+  actual uppercase class global and exports named types without external imports.
 - `yarn build artplayer-tool-iframe`: normal main/legacy/ESM production output and
   generated docs copies. Never hand-edit those files.
 - `yarn test:browser test/browser/iframe.spec.js`: real same/cross-origin windows

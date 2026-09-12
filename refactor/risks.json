@@ -3827,12 +3827,14 @@
       ],
       "status": "open",
       "confirmation": "reproduced",
-      "compatibleResolution": "Keep actual old plugin/helper exports distinct from workspace tool and document package-name/type/export migration; do not fabricate a tool release or use a renamed implementation as an old archive.",
+      "compatibleResolution": "IFRAME-04 adds paired CJS/ESM declarations and verifies three actual isolated installs, including old namespace/helper and existing Function callback differences. Keep old package-name/helper facade, emitted-consumer runtime and final distribution gates with IFRAME-06; the time-scoped tool registry observation is not a release claim.",
       "closureCriteria": "Actual installed entry/declaration tests and documented old-name/helper/new-tool distribution behavior; registry observation remains time scoped.",
       "evidence": [
         "refactor/baselines/iframe-contract.md",
         "refactor/baselines/iframe-release.json",
-        "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md"
+        "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md",
+        "refactor/changes/2026-09-13-PKG-IFRAME-04-types.md",
+        "refactor/baselines/iframe-types-validation.json"
       ]
     }
   ]

@@ -19,12 +19,17 @@
   ],
   "exports": {
     ".": {
-      "types": "./types/artplayer-tool-iframe.d.ts",
-      "import": "./dist/artplayer-tool-iframe.mjs",
-      "require": "./dist/artplayer-tool-iframe.js"
+      "import": {
+        "types": "./types/artplayer-tool-iframe.d.mts",
+        "default": "./dist/artplayer-tool-iframe.mjs"
+      },
+      "require": {
+        "types": "./types/artplayer-tool-iframe.d.cts",
+        "default": "./dist/artplayer-tool-iframe.js"
+      }
     },
     "./legacy": {
-      "types": "./types/artplayer-tool-iframe.d.ts",
+      "types": "./types/artplayer-tool-iframe.d.cts",
       "import": "./dist/artplayer-tool-iframe.legacy.js",
       "require": "./dist/artplayer-tool-iframe.legacy.js"
     }
@@ -33,5 +38,10 @@
   "module": "./dist/artplayer-tool-iframe.mjs",
   "types": "./types/artplayer-tool-iframe.d.ts",
   "legacy": "./dist/artplayer-tool-iframe.legacy.js",
-  "browserslist": "last 1 Chrome version"
+  "browserslist": "last 1 Chrome version",
+  "typesVersions": {
+    "*": {
+      "legacy": ["types/artplayer-tool-iframe.d.ts"]
+    }
+  }
 }

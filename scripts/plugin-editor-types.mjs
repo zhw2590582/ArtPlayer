@@ -16,6 +16,7 @@ export function generatePluginEditorDeclaration(code, name) {
   const internal = `${name}Definitions`
   let exported = false
   let callable = false
+  let classExport = false
   for (const node of source.statements) {
     if (ts.isImportDeclaration(node)) {
       assert(node.importClause?.isTypeOnly && !node.importClause.namedBindings && node.importClause.name?.text === 'Artplayer' && node.moduleSpecifier.text === 'artplayer', 'Unsupported plugin editor import')
@@ -26,12 +27,13 @@ export function generatePluginEditorDeclaration(code, name) {
       exported = true
       continue
     }
-    assert(ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node) || ts.isFunctionDeclaration(node), 'Unsupported plugin editor declaration')
+    assert(ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node) || ts.isFunctionDeclaration(node) || ts.isClassDeclaration(node), 'Unsupported plugin editor declaration')
     assert(node.name && node.name.text !== internal, 'Invalid plugin declaration name')
     definitions.push(factory.replaceModifiers(node, [factory.createModifier(ts.SyntaxKind.ExportKeyword)]))
-    if (ts.isFunctionDeclaration(node)) {
+    if (ts.isFunctionDeclaration(node) || ts.isClassDeclaration(node)) {
       assert.equal(node.name.text, name, 'Unexpected plugin callable')
       callable = true
+      classExport = ts.isClassDeclaration(node)
       continue
     }
     if (node.modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.ExportKeyword)) {
@@ -43,13 +45,14 @@ export function generatePluginEditorDeclaration(code, name) {
       ))
     }
   }
-  assert(exported && callable, 'Plugin editor requires a default function')
+  assert(exported && callable, 'Plugin editor requires a default function or class')
   const namespace = (identifier, statements) => factory.createModuleDeclaration([factory.createModifier(ts.SyntaxKind.DeclareKeyword)], factory.createIdentifier(identifier), factory.createModuleBlock(statements), ts.NodeFlags.Namespace)
   const statements = [
     namespace(internal, definitions),
     factory.createVariableStatement([factory.createModifier(ts.SyntaxKind.DeclareKeyword)], factory.createVariableDeclarationList([
       factory.createVariableDeclaration(name, undefined, factory.createTypeQueryNode(factory.createQualifiedName(factory.createIdentifier(internal), factory.createIdentifier(name)))),
     ], ts.NodeFlags.Const)),
+    ...(classExport ? [factory.createTypeAliasDeclaration(undefined, name, undefined, factory.createTypeReferenceNode(factory.createQualifiedName(factory.createIdentifier(internal), factory.createIdentifier(name))))] : []),
     namespace(name, aliases),
     factory.createExportAssignment(undefined, true, factory.createIdentifier(name)),
     factory.createNamespaceExportDeclaration(factory.createIdentifier(name)),

@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-IFRAME-04 完成：公开类型、模块入口和编辑器
+
+保留默认类的required data、void静态接收、readonly、resove及旧commit推导，增加
+可选Runtime/Resolver视图、消息联合与命名类型。CJS/ESM声明分别路由，旧TS通过
+types/legacy入口；无运行时self-default。编辑器使用实际大写类名并语义生成声明。
+旧工作区NodeNext ESM的18条错误已复现并修复；旧编辑器三条错误在两编译器复现。
+独立Yarn安装旧npm、冻结工作区和候选共16编译组合，候选6组/81非法使用被拒绝；
+历史Function字段、namespace/helper及nullable回调区别明确保留，05/06仍待验收。
+复查发现非Error抛出可产生非字符串error载荷，已用四历史产物与源码复现并修正类型。
+最终CI1543与44重复契约、3导入/SSR通过，330生产TS。三运行产物及源码字节未变，
+沿用03的真实浏览器证据，不冒称新跑浏览器。分包编辑器脚本避免改写迁移中的其他包。
+见[变更](changes/2026-09-13-PKG-IFRAME-04-types.md)和[验证](baselines/iframe-types-validation.json)。
+222项：109 done、9 doing、104 todo；本项独立本地提交，三个Iframe风险仍open。
+
 ## PKG-IFRAME-03 完成：按文档管理请求与六模块拆分
 
 入口、连接、请求、消息边界、父页导航和子页生命周期拆为六个严格TS模块。

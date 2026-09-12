@@ -1,5 +1,7 @@
+import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 import { ESLint } from 'eslint'
 import { glob } from 'glob'
 import compat from 'typescript-compat'
@@ -18,12 +20,14 @@ function parsePluginInfo(pluginPath) {
   const file = path.basename(pluginPath)
   const baseName = file.replace('.d.ts', '')
 
-  const name = baseName
-    .split('-')
-    .map((word, index) =>
-      index === 0 ? word : word[0].toUpperCase() + word.slice(1),
-    )
-    .join('')
+  const name = baseName === 'artplayer-tool-iframe'
+    ? 'ArtplayerToolIframe'
+    : baseName
+        .split('-')
+        .map((word, index) =>
+          index === 0 ? word : word[0].toUpperCase() + word.slice(1),
+        )
+        .join('')
 
   return { name, file }
 }
@@ -36,14 +40,19 @@ fs.writeFileSync(artplayerTSoutput, code.trim())
 console.log(`✨ Built ${artplayerTSoutput}`);
 
 (async function () {
-  const pluginsTS = glob.sync('packages/artplayer-*-*/types/*.d.ts')
+  const available = glob.sync('packages/artplayer-*-*/types/*.d.ts')
+  const selected = process.argv.slice(2)
+  const packageOf = file => path.basename(path.dirname(path.dirname(file)))
+  for (const name of selected)
+    assert(available.some(file => packageOf(file) === name), `Unknown declaration package: ${name}`)
+  const pluginsTS = selected.length ? available.filter(file => selected.includes(packageOf(file))) : available
   const pluginFiles = []
 
   for (let index = 0; index < pluginsTS.length; index++) {
     const type = pluginsTS[index]
     const { name, file } = parsePluginInfo(type)
     const source = String(fs.readFileSync(type))
-    const semanticPlugin = ['artplayerPluginHlsControl', 'artplayerPluginAudioTrack', 'artplayerPluginDashControl', 'artplayerPluginAds', 'artplayerPluginAmbilight', 'artplayerProxyCanvas', 'artplayerPluginDocumentPip'].includes(name)
+    const semanticPlugin = ['artplayerPluginHlsControl', 'artplayerPluginAudioTrack', 'artplayerPluginDashControl', 'artplayerPluginAds', 'artplayerPluginAmbilight', 'artplayerProxyCanvas', 'artplayerPluginDocumentPip', 'ArtplayerToolIframe'].includes(name)
     const code = semanticPlugin
       ? generatePluginEditorDeclaration(source, name)
       : `${source.replace(reg, '')}\nexport = ${name};\nexport as namespace ${name};\n`
@@ -71,6 +80,8 @@ console.log(`✨ Built ${artplayerTSoutput}`);
     const formatter = await eslint.loadFormatter('stylish')
     throw new Error(formatter.format(results))
   }
+  if (selected.length)
+    return
   const commonJsPath = path.join('docs/assets/js/common.js')
   const commonJsContent = fs.readFileSync(commonJsPath, 'utf-8')
   const newLibUris = allFiles.map(file => `'./assets/ts/${file}'`).join(',\n      ')
