@@ -24,9 +24,16 @@ for video processing.
   handlers, and the frame/encode sequence. Each valid draw is encoded before the
   next seek. The final decoder is paused, cleared and reset; the final sheet URL
   remains owned by the session until another usable sheet replaces it or destroy.
+- `src/video.js` creates and owns the hidden media element. It is attached to the
+  document root because detached media loses drawable pixels on Windows WebKit.
+  `visibility:hidden` preserves its rendered box; `display:none` and a 1px box do
+  not. Metadata locks the box to intrinsic dimensions, overriding ordinary global
+  video sizing rules. It is silent, excluded from focus/accessibility, and never
+  played by this implementation. Cleanup also removes the element if insertion,
+  cancellation, pause or decoder reset fails.
 
 Only the entry module receives ArtPlayer. Extraction receives a guarded job and a
-configuration snapshot. These internal modules do not add public player fields,
+  configuration snapshot. These internal modules do not add public player fields,
 plugin methods, or a dependency on a particular core implementation.
 
 ## Compatibility and intentional fixes
@@ -38,6 +45,13 @@ count 100, scale 1, ten columns, aspect-ratio height, and time formula
 Duration and sheet dimensions are captured at metadata time; later duration changes
 do not move the remaining samples within the current sheet.
 The old `height` option remains ignored at runtime.
+
+A `seeked` callback is ignored while another seek is pending. Before drawing,
+extraction checks that the media time is finite and within 50ms of the requested
+sample; a mismatch retries that same target at most three times, then fails with
+cleanup and retains any previous preview. This prevents observed stale seek
+events from advancing the sheet, but does not prove frame presentation accuracy:
+the current time can match even when the drawable first frame is stale.
 
 The previous empty first encode is removed. Encoding is serial, duplicate native
 callbacks are consumed once, and source replacement/destruction invalidates old
@@ -57,6 +71,7 @@ Use the root Yarn toolchain:
 ```sh
 yarn test:auto-thumbnail
 yarn test:browser test/browser/auto-thumbnail-lifecycle.spec.js
+yarn test:browser test/browser/auto-thumbnail-pixels.spec.js
 yarn build artplayer-plugin-auto-thumbnail
 ```
 
@@ -66,11 +81,21 @@ Historical contract/failure tests remain separate and continue to reproduce old
 defects; their passing status does not mean those defects should remain.
 
 This is an intermediate `PKG-AUTO-THUMB-03` implementation. Native lifecycle
-validation does not prove correct pixels: the detached decoder path still needs
-the recorded Windows WebKit frame/rendering fix (`AUTO-THUMB-PIXEL-01`). Hidden
-rendering must retain source detail; a 1x1 element producing an averaged pixel is
-not a correct fix. Frame timing, additional reentry/cleanup boundaries and resource
-budgets still need the remaining task03 work.
+validation does not prove correct pixels. The attached renderer now has native
+pixel checks for cells 2-4 (zero-based) on a five-frame sheet, including real black
+content, changing colors and spatial detail. Cells 0-1 remain diagnostic only:
+initial transparent/stale draws and WebKit frame-time offsets are unresolved
+(`AUTO-THUMB-PIXEL-01`). Merely waiting for `seeked`, adding two animation frames,
+or seeking away and back did not consistently repair the first frame. Do not
+close this risk based on the later-cell assertions or replace it with a nonblack
+test; legitimate black frames have opaque pixels. Frame timing, additional
+reentry/cleanup boundaries and resource budgets still need the remaining task03 work.
+
+The frozen eight-second timeline has one unique purple first frame followed by
+red, black, blue and yellow sections. Its command and fingerprint are in
+`refactor/baselines/auto-thumbnail-timeline-media.json`. Reproduce into a new
+directory with `ARTPLAYER_FFMPEG` and `node scripts/generate-auto-thumbnail-fixture.mjs
+<new-directory>`; never silently replace the committed fixture.
 
 Task04 converts these modules to strict TypeScript and resolves historical public
 declaration/CommonJS differences. Task05 verifies old/final cores and actual

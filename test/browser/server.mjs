@@ -76,6 +76,7 @@ assert.equal(hash(iframeCoreBytes), iframeCore.files[iframeCoreMember], 'Histori
 add('/published-4.5.9/artplayer.js', iframeCoreBytes, { kind: 'npm-release', version: iframeCore.version, integrity: iframeCore.integrity, member: iframeCoreMember })
 add('/test/audio-tone.m4a', fs.readFileSync(path.join(workspace, 'test/browser/media/audio-tone.m4a')), { kind: 'generated-media', file: 'test/browser/media/audio-tone.m4a' })
 add('/test/thumbnail-pattern.mp4', fs.readFileSync(path.join(workspace, 'test/browser/media/thumbnail-pattern.mp4')), { kind: 'generated-media', file: 'test/browser/media/thumbnail-pattern.mp4' })
+add('/test/auto-thumbnail-timeline.mp4', fs.readFileSync(path.join(workspace, 'test/browser/media/auto-thumbnail-timeline.mp4')), { kind: 'generated-media', file: 'test/browser/media/auto-thumbnail-timeline.mp4' })
 
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.mp4': 'video/mp4', '.m4a': 'audio/mp4', '.webm': 'video/webm', '.vtt': 'text/vtt', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg' }
 add('/test/declaration-cues.vtt', fs.readFileSync(path.join(workspace, 'test/browser/media/declaration-cues.vtt')), { kind: 'test-subtitles', file: 'test/browser/media/declaration-cues.vtt' })

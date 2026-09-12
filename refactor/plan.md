@@ -496,7 +496,7 @@
 - PKG-AUDIO-05: [记录](changes/2026-09-12-PKG-AUDIO-05-combinations.md) [记录](baselines/audio-combinations-first.json) [记录](baselines/audio-combinations-checkpoint.json) [记录](audio-validation.md)
 - PKG-AUTO-THUMB-01: [记录](baselines/auto-thumbnail-release.json) [记录](baselines/auto-thumbnail-contract.md) [记录](changes/2026-09-13-PKG-AUTO-THUMB-01-contract.md) [记录](baselines/auto-thumbnail-contract-validation.json)
 - PKG-AUTO-THUMB-02: [记录](baselines/auto-thumbnail-failures.md) [记录](baselines/auto-thumbnail-failures-validation.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-02-failures.md)
-- PKG-AUTO-THUMB-03: [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-lifecycle-checkpoint.md) [记录](baselines/auto-thumbnail-lifecycle-checkpoint.json)
+- PKG-AUTO-THUMB-03: [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-lifecycle-checkpoint.md) [记录](baselines/auto-thumbnail-lifecycle-checkpoint.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-hidden-renderer.md) [记录](baselines/auto-thumbnail-hidden-renderer.json) [记录](baselines/auto-thumbnail-timeline-media.json)
 - PKG-HLS-01: [记录](baselines/hls-control-contract.md) [记录](baselines/hls-control-release.json) [记录](changes/2026-09-11-PKG-HLS-01-contract.md)
 - PKG-HLS-02: [记录](hls-validation.md) [记录](baselines/hls-sdk.json) [记录](baselines/hls-validation.json) [记录](changes/2026-09-11-PKG-HLS-02-tests.md)
 - PKG-HLS-03: [记录](changes/2026-09-12-PKG-HLS-03-modules.md) [记录](baselines/hls-modules-validation.json) [记录](hls-validation.md)

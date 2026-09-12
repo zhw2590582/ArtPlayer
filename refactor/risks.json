@@ -4110,10 +4110,14 @@
       "evidence": [
         "test/browser/auto-thumbnail.spec.js",
         "refactor/baselines/auto-thumbnail-failures.md",
-        "refactor/baselines/auto-thumbnail-failures-validation.json"
+        "refactor/baselines/auto-thumbnail-failures-validation.json",
+        "test/browser/auto-thumbnail-pixels.spec.js",
+        "refactor/baselines/auto-thumbnail-hidden-renderer.json",
+        "refactor/baselines/auto-thumbnail-timeline-media.json"
       ],
       "compatibleResolution": "Establish actual decoded-frame readiness for the existing timeline/grid and preserve silent independent extraction; do not waive colored pixel checks as unsupported media.",
-      "closureCriteria": "Candidate source and artifacts generate usable sampled pixels on native browser controls with lifecycle checks; supported Safari and core combinations remain explicit final gates."
+      "closureCriteria": "Candidate source and artifacts generate usable sampled pixels on native browser controls with lifecycle checks; supported Safari and core combinations remain explicit final gates.",
+      "workspaceState": "Hidden intrinsic-sized attached decoder mitigates detached WebKit black later frames. Source 45 repeated native cases plus main/legacy 15 each verify lifecycle and cells 2-4 only. Initial cells 0-1 remain diagnostic: transparent/stale draws and Windows WebKit first-frame timing remain unresolved. Bounded retries now reject wrong-time seeked events before drawing. Do not close this risk or task03 based on partial pixel acceptance."
     }
   ]
 }

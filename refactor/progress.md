@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-03 隐藏解码与错时seek重试检查点（doing）
+
+新增video模块，挂载隐藏且保持实际尺寸的解码元素，完善DOM回收及插入/清理重入。
+真实产物测试发现seeked可能停留在前一格，已增加绘制前时间核对及最多3次原目标重试。
+33项候选单元在此前检查点25通过/8失败，新源码/main/legacy各33通过。
+最终原生源码连续三轮45项、main/legacy各15项通过，共75项；其中仅第2-4格有像素
+验收，前两格及首帧精度保持open。保留先前真实失败，不把重复通过当作全流程完成。
+新增可再生时间颜色夹具及脚本，严格TS仍属于04，无依赖或版本改动。
+完整CI1799项、339生产TS通过，4种实际bundle入口通过；见[验证](baselines/auto-thumbnail-hidden-renderer.json)，
+[变更](changes/2026-09-13-PKG-AUTO-THUMB-03-hidden-renderer.md)解释修复和剩余边界。
+222项：114 done、12 doing、96 todo；本次是03检查点，任务完成数未增加。
+
+
 ## PKG-AUTO-THUMB-03 源码任务与资源所有权检查点（doing）
 
 生产源码拆为index/options/session/extraction，保持异步公开注册与原有效配置语义。

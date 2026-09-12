@@ -13,6 +13,7 @@ async function setup(option = { width: 80, number: 2 }) {
   return env
 }
 function assertClosed(env, video = env.videos[0]) {
+  assert.equal(env.attached.has(video), false)
   assert.equal(video.src, undefined)
   for (const key of ['onloadedmetadata', 'onseeked', 'onerror']) assert.equal(video[key], null)
   assert(env.operations.some(item => item.name === 'pause' && item.video === video))
@@ -328,4 +329,120 @@ test('Auto-thumbnail candidate keeps the metadata duration snapshot for frame ti
   env.finish()
   assert.deepEqual(env.operations.filter(item => item.name === 'seek').map(item => item.value), [0, 60])
   env.art.emit('destroy')
+})
+
+test('Auto-thumbnail candidate hides an attached decoder at intrinsic dimensions without playback', async () => {
+  const env = await setup()
+  const video = env.videos[0]
+  assert.equal(env.attached.has(video), true)
+  assert.equal(video['aria-hidden'], 'true')
+  assert.equal(video.tabIndex, -1)
+  assert.equal(video.muted, true)
+  assert.match(video.style.cssText, /visibility:hidden/)
+  assert.doesNotMatch(video.style.cssText, /display:none|width:1px|height:1px/)
+  env.metadata()
+  assert.equal(video.width, 1920)
+  assert.equal(video.height, 1080)
+  assert.equal(video.style.width, '1920px')
+  assert.equal(video.style.height, '1080px')
+  env.art.emit('destroy')
+  assertClosed(env)
+})
+
+for (const phase of ['beforeAppend', 'afterAppend']) {
+  test(`Auto-thumbnail candidate ${phase} reentry cannot leave an attached decoder`, async () => {
+    const env = autoThumbnailEnvironment(implementation)
+    await env.factory({})(env.art)
+    env.controls[phase] = () => env.art.emit('destroy')
+    env.art.emit('video:loadedmetadata')
+    assert.equal(env.attached.size, 0)
+    assert.equal(env.videos[0].src, undefined)
+    assertClosed(env)
+    assert.equal(env.warnings.length, 0)
+  })
+}
+
+test('Auto-thumbnail candidate failed insertion removes a partially attached decoder', async () => {
+  const env = autoThumbnailEnvironment(implementation)
+  const failure = new Error('Insertion observer failed')
+  env.controls.afterAppend = () => {
+    throw failure
+  }
+  await env.factory({})(env.art)
+  env.art.emit('video:loadedmetadata')
+  assert.equal(env.attached.size, 0)
+  assert.equal(env.videos[0].src, undefined)
+  assert.equal(env.warnings[0][1], failure)
+  assertClosed(env)
+  env.art.emit('destroy')
+})
+
+test('Auto-thumbnail candidate decoder removal still runs after load throws', async () => {
+  const env = await setup()
+  const failure = new Error('Decoder reset failed')
+  env.videos[0].load = () => {
+    throw failure
+  }
+  env.art.emit('destroy')
+  assert.equal(env.attached.size, 0)
+  assert.equal(env.videos[0].src, undefined)
+  assert.equal(env.warnings[0][1], failure)
+  assert([...env.listeners.values()].every(set => set.size === 0))
+})
+
+test('Auto-thumbnail candidate ignores a stale seeked event while a new seek is in progress', async () => {
+  const env = await setup()
+  env.metadata()
+  env.videos[0].seeking = true
+  env.seeked()
+  assert.equal(env.blobs.length, 0)
+  env.videos[0].seeking = false
+  env.seeked()
+  assert.equal(env.blobs.length, 1)
+  env.art.emit('destroy')
+  assertClosed(env)
+})
+
+test('Auto-thumbnail candidate retries a completed seek at the wrong time before drawing', async () => {
+  const env = await setup()
+  env.metadata()
+  env.videos[0].timeOffset = 1
+  env.seeked()
+  assert.equal(env.blobs.length, 0)
+  assert.deepEqual(env.operations.filter(item => item.name === 'seek').map(item => item.value), [0, 0])
+  env.videos[0].timeOffset = 0
+  env.seeked()
+  assert.equal(env.blobs.length, 1)
+  env.art.emit('destroy')
+  assertClosed(env)
+})
+
+test('Auto-thumbnail candidate bounds incorrect seek retries and preserves its last usable preview', async () => {
+  const env = await setup()
+  env.metadata()
+  env.seeked()
+  env.finish()
+  const previous = env.art.thumbnails
+  env.videos[0].timeOffset = -60
+  for (let index = 0; index < 5; index++) env.seeked()
+  assert.equal(env.blobs.length, 1)
+  assert.equal(env.art.thumbnails, previous)
+  assert.equal(env.urls.size, 1)
+  assert.equal(env.operations.filter(item => item.name === 'seek').length, 5)
+  assert.equal(env.warnings.length, 1)
+  assertClosed(env)
+  env.art.emit('destroy')
+  assert.equal(env.urls.size, 0)
+})
+
+test('Auto-thumbnail candidate seek-time getters cannot draw after synchronous destruction', async () => {
+  const env = await setup()
+  env.metadata()
+  Object.defineProperty(env.videos[0], 'timeOffset', { get() {
+    env.art.emit('destroy')
+    return 0
+  } })
+  env.seeked()
+  assert.equal(env.blobs.length, 0)
+  assertClosed(env)
 })

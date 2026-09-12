@@ -1783,7 +1783,10 @@
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
       "evidence": [
         "changes/2026-09-13-PKG-AUTO-THUMB-03-lifecycle-checkpoint.md",
-        "baselines/auto-thumbnail-lifecycle-checkpoint.json"
+        "baselines/auto-thumbnail-lifecycle-checkpoint.json",
+        "changes/2026-09-13-PKG-AUTO-THUMB-03-hidden-renderer.md",
+        "baselines/auto-thumbnail-hidden-renderer.json",
+        "baselines/auto-thumbnail-timeline-media.json"
       ]
     },
     {

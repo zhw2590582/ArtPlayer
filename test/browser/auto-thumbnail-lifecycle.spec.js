@@ -75,7 +75,7 @@ for (const scenario of ['destroy', 'restart', 'complete']) {
       }
       const after = { urls: probe.urls.size, updates: probe.updates.length }
       const decoder = probe.videos[0]
-      const video = { src: decoder.getAttribute('src'), readyState: decoder.readyState, paused: decoder.paused, handlers: ['onloadedmetadata', 'onseeked', 'onerror'].map(key => decoder[key] === null) }
+      const video = { connected: decoder.isConnected, src: decoder.getAttribute('src'), readyState: decoder.readyState, paused: decoder.paused, handlers: ['onloadedmetadata', 'onseeked', 'onerror'].map(key => decoder[key] === null) }
       probe.art.emit('destroy')
       probe.art.emit('destroy')
       const final = { urls: probe.urls.size, listeners: [...probe.listeners.values()].reduce((sum, set) => sum + set.size, 0), updates: probe.updates.length }
@@ -87,7 +87,7 @@ for (const scenario of ['destroy', 'restart', 'complete']) {
     expect(state.result).toEqual({ name: 'artplayerPluginAutoThumbnail' })
     expect(state.before).toEqual(scenario === 'complete' ? { urls: 1, updates: 2 } : { urls: 0, updates: 0 })
     expect(state.after).toEqual(state.before)
-    expect(state.video).toEqual({ src: null, readyState: 0, paused: true, handlers: [true, true, true] })
+    expect(state.video).toEqual({ connected: false, src: null, readyState: 0, paused: true, handlers: [true, true, true] })
     expect(state.final).toEqual({ urls: 0, listeners: 0, updates: scenario === 'complete' ? 2 : 0 })
     expect(state.blobs.every(blob => blob.type === 'image/jpeg' && blob.bytes > 0)).toBe(true)
   })

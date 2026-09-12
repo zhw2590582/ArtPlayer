@@ -42,12 +42,29 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
   const updates = []
   const warnings = []
   let nextUrl = 0
-  const controls = { nullContext: false, drawError: null, encodeError: null, updateError: null, onUpdate: null }
+  const controls = { nullContext: false, drawError: null, encodeError: null, updateError: null, onUpdate: null, beforeAppend: null, afterAppend: null }
+  const attached = new Set()
   const document = {
+    documentElement: {
+      appendChild(video) {
+        controls.beforeAppend?.(video)
+        attached.add(video)
+        controls.afterAppend?.(video)
+        return video
+      },
+    },
     createElement(tag) {
       if (tag === 'video') {
         const video = {
+          style: {},
+          setAttribute(name, value) { this[name] = value },
+          remove() {
+            attached.delete(this)
+            operations.push({ name: 'remove', video: this })
+          },
           duration: 120,
+          timeOffset: 0,
+          seeking: false,
           videoWidth: 1920,
           videoHeight: 1080,
           onloadedmetadata: null,
@@ -62,7 +79,7 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
         }
         let time = 0
         Object.defineProperty(video, 'currentTime', {
-          get: () => time,
+          get: () => time + video.timeOffset,
           set(value) {
             time = value
             operations.push({ name: 'seek', value, handlerInstalled: typeof video.onseeked === 'function', video })
@@ -158,6 +175,7 @@ export function autoThumbnailEnvironment(implementation, { script = false } = {}
     updates,
     warnings,
     controls,
+    attached,
     metadata(video = videos.at(-1)) { video.onloadedmetadata?.() },
     seeked(video = videos.at(-1)) { video.onseeked?.() },
     finish(index = 0, blob = { type: 'image/jpeg' }) { blobs[index].callback(blob) },

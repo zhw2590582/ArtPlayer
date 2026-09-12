@@ -1,0 +1,75 @@
+{
+  "kind": "generated-auto-thumbnail-timeline",
+  "version": "ffmpeg version 2025-11-12-git-6cdd2cbe32-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+  "args": [
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-n",
+    "-f",
+    "lavfi",
+    "-i",
+    "color=c=purple:s=320x180:r=30:d=0.033333333",
+    "-f",
+    "lavfi",
+    "-i",
+    "color=c=red:s=320x180:r=30:d=1.966666667",
+    "-f",
+    "lavfi",
+    "-i",
+    "color=c=black:s=320x180:r=30:d=2",
+    "-f",
+    "lavfi",
+    "-i",
+    "color=c=blue:s=320x180:r=30:d=2",
+    "-f",
+    "lavfi",
+    "-i",
+    "color=c=yellow:s=320x180:r=30:d=2",
+    "-filter_complex",
+    "[0:v][1:v][2:v][3:v][4:v]concat=n=5:v=1:a=0[v]",
+    "-map",
+    "[v]",
+    "-c:v",
+    "libx264",
+    "-pix_fmt",
+    "yuv420p",
+    "-g",
+    "30",
+    "-movflags",
+    "+faststart",
+    "auto-thumbnail-timeline.mp4"
+  ],
+  "width": 320,
+  "height": 180,
+  "fps": 30,
+  "duration": 8,
+  "segments": [
+    [
+      "purple",
+      "0.033333333"
+    ],
+    [
+      "red",
+      "1.966666667"
+    ],
+    [
+      "black",
+      "2"
+    ],
+    [
+      "blue",
+      "2"
+    ],
+    [
+      "yellow",
+      "2"
+    ]
+  ],
+  "purpose": "Unique purple first frame, then red/black/blue/yellow timeline; distinguish missing transparent pixels, legitimate black frames and stale first frames.",
+  "file": {
+    "name": "auto-thumbnail-timeline.mp4",
+    "bytes": 8602,
+    "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994"
+  }
+}

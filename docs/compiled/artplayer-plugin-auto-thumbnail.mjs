@@ -25,8 +25,9 @@ function sheetSize(config, video) {
     throw new RangeError("Auto-thumbnail canvas dimensions are invalid");
   return { height, canvasWidth, canvasHeight };
 }
-function extract(job, config) {
+function createVideo(job) {
   const video = document.createElement("video");
+  job.own(() => video.remove());
   job.own(() => video.load());
   job.own(() => video.removeAttribute("src"));
   job.own(() => video.pause());
@@ -35,21 +36,41 @@ function extract(job, config) {
       video[property] = null;
     });
   if (!job.active())
-    return;
+    return video;
   video.crossOrigin = "anonymous";
+  video.muted = true;
+  video.playsInline = true;
+  video.tabIndex = -1;
+  video.setAttribute("aria-hidden", "true");
+  video.style.cssText = "position:fixed;left:0;top:0;visibility:hidden;pointer-events:none;display:block;width:auto;height:auto;max-width:none;max-height:none";
+  document.documentElement.appendChild(video);
+  if (!job.active())
+    video.remove();
+  return video;
+}
+function extract(job, config) {
+  const video = createVideo(job);
+  if (!job.active())
+    return;
   video.onerror = job.guard(() => {
     throw video.error || new Error("Auto-thumbnail media failed to load");
   });
   video.onloadedmetadata = job.guard(() => {
     video.onloadedmetadata = null;
     const duration = video.duration;
+    const videoHeight = video.videoHeight;
+    const videoWidth = video.videoWidth;
     const { height, canvasWidth, canvasHeight } = sheetSize(config, {
       duration,
-      videoHeight: video.videoHeight,
-      videoWidth: video.videoWidth
+      videoHeight,
+      videoWidth
     });
     if (!job.active())
       return;
+    video.width = videoWidth;
+    video.height = videoHeight;
+    video.style.width = `${videoWidth}px`;
+    video.style.height = `${videoHeight}px`;
     const canvas = document.createElement("canvas");
     if (!job.active())
       return;
@@ -66,7 +87,20 @@ function extract(job, config) {
         job.dispose();
         return;
       }
+      const target = duration * index / config.number;
+      let retries = 0;
       video.onseeked = job.guard(() => {
+        if (video.seeking)
+          return;
+        const time = video.currentTime;
+        if (!job.active())
+          return;
+        if (!Number.isFinite(time) || Math.abs(time - target) > 0.05) {
+          if (++retries > 3)
+            throw new Error("Auto-thumbnail seek did not reach the requested time");
+          video.currentTime = target;
+          return;
+        }
         video.onseeked = null;
         ctx.drawImage(video, index % 10 * config.width, Math.floor(index / 10) * height, config.width, height);
         if (!job.active())
@@ -84,7 +118,7 @@ function extract(job, config) {
         }), "image/jpeg");
       });
       if (job.active())
-        video.currentTime = duration * index / config.number;
+        video.currentTime = target;
     });
     seek();
   });
