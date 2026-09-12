@@ -17,6 +17,7 @@
 | `yarn test:baseline` | 固定发布包完整性及本地 HTTP 基线测试；首次可能下载已固定归档到缓存 |
 | `yarn ci:check` | 严格 Node/Yarn/锁检查、计划、只读 lint、类型、Node 和基线测试；允许写忽略缓存，不修改源码 |
 | `yarn ci:build` | 21 库包、i18n、编辑器声明和文档站构建，以及构建后包导入 smoke；会生成 dist 和 docs 内容 |
+| `yarn check:impact --report` | 读取实际依赖/验证关系和Git变更，核对workflow必需命令，写CI影响报告；已接入ci:check，见[影响映射](impact-analysis.md) |
 | `yarn build:all` | 保留旧入口，执行 ci:build 后只读 lint |
 
 scripts/build-docs.js 保留原 npm run build 子命令兼容入口，现在传播失败退出码；包管理/锁维护继续使用 Yarn。MOD-02 可再统一旧内部脚本。build-ts.js 仅对刚生成的声明执行 ESLint layout 格式修正，使只读 lint 在构建后仍能通过；不是对生产源码执行自动修复。

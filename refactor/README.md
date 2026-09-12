@@ -34,6 +34,7 @@
 | [GitHub CI/CD](github-ci-cd.md) | PR/兼容矩阵、构建报告、Pages、npm 发布及远端准入验证 |
 | [AI 协作流程](ai-workflow.md) | AI 接续工作、任务边界、验证、记录和交接模板 |
 | [每任务提交审计](commit-audit.md) | 实际Git状态迁移、独立提交、初始例外、分支合并和CI报告 |
+| [全包影响映射](impact-analysis.md) | 变更范围、依赖/验证关系、必需CI命令及尚缺的包验证 |
 | [架构决策](decisions.md) | 已选方向、待验证方案及被拒绝方案 |
 | [进度与证据](progress.md) | 本次会话结果、阻塞、下一步；不重复维护每个任务状态 |
 | [变更记录模板](changes/TEMPLATE.md) | 每次行为/类型/结构变化的详细记录 |

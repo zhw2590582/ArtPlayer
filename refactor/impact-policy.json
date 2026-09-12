@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "name": "artplayer",
+      "kind": "core"
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "kind": "plugin"
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "kind": "proxy"
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "kind": "proxy"
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "kind": "tool"
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "kind": "tool"
+    },
+    {
+      "name": "artplayer-vitepress",
+      "kind": "docs"
+    }
+  ],
+  "core": "artplayer",
+  "site": "artplayer-vitepress",
+  "coreValidationConsumers": [
+    "artplayer-plugin-ads",
+    "artplayer-plugin-ambilight",
+    "artplayer-plugin-asr",
+    "artplayer-plugin-audio-track",
+    "artplayer-plugin-auto-thumbnail",
+    "artplayer-plugin-chapter",
+    "artplayer-plugin-chromecast",
+    "artplayer-plugin-danmuku",
+    "artplayer-plugin-danmuku-mask",
+    "artplayer-plugin-dash-control",
+    "artplayer-plugin-document-pip",
+    "artplayer-plugin-hls-control",
+    "artplayer-plugin-jassub",
+    "artplayer-plugin-multiple-subtitles",
+    "artplayer-plugin-vast",
+    "artplayer-plugin-vtt-thumbnail",
+    "artplayer-proxy-canvas",
+    "artplayer-proxy-mediabunny",
+    "artplayer-tool-iframe",
+    "artplayer-tool-thumbnail",
+    "artplayer-vitepress"
+  ],
+  "coreEvidence": "refactor/compatibility.md",
+  "siteEvidence": "scripts/build-ts.js",
+  "edges": [
+    {
+      "dependency": "artplayer-plugin-danmuku",
+      "consumer": "artplayer-plugin-danmuku-mask",
+      "reason": "Mask renders into the $danmuku element supplied by the danmuku plugin",
+      "evidence": [
+        "packages/artplayer-plugin-danmuku-mask/src/index.js",
+        "docs/assets/example/danmuku.mask.js"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "file": "docs/assets/example/index.js",
+      "owner": "artplayer"
+    },
+    {
+      "file": "docs/assets/example/mobile.js",
+      "owner": "artplayer"
+    },
+    {
+      "file": "docs/assets/example/setting.test.js",
+      "owner": "artplayer"
+    },
+    {
+      "file": "docs/assets/example/hls.js",
+      "owner": "artplayer"
+    },
+    {
+      "file": "docs/assets/example/dash.js",
+      "owner": "artplayer"
+    },
+    {
+      "file": "docs/assets/example/flv.js",
+      "owner": "artplayer"
+    },
+    {
+      "file": "docs/assets/example/mpegts.js",
+      "owner": "artplayer"
+    },
+    {
+      "file": "docs/assets/example/webtorrent.js",
+      "owner": "artplayer"
+    },
+    {
+      "file": "docs/assets/example/thumbnail.js",
+      "owner": "artplayer"
+    },
+    {
+      "file": "docs/assets/example/ads.js",
+      "owner": "artplayer-plugin-ads"
+    },
+    {
+      "file": "docs/assets/example/ambilight.js",
+      "owner": "artplayer-plugin-ambilight"
+    },
+    {
+      "file": "docs/assets/example/asr.js",
+      "owner": "artplayer-plugin-asr"
+    },
+    {
+      "file": "docs/assets/example/audio.track.js",
+      "owner": "artplayer-plugin-audio-track"
+    },
+    {
+      "file": "docs/assets/example/auto.thumbnail.js",
+      "owner": "artplayer-plugin-auto-thumbnail"
+    },
+    {
+      "file": "docs/assets/example/chapter.js",
+      "owner": "artplayer-plugin-chapter"
+    },
+    {
+      "file": "docs/assets/example/chromecast.js",
+      "owner": "artplayer-plugin-chromecast"
+    },
+    {
+      "file": "docs/assets/example/danmuku.js",
+      "owner": "artplayer-plugin-danmuku"
+    },
+    {
+      "file": "docs/assets/example/danmuku.mask.js",
+      "owner": "artplayer-plugin-danmuku-mask"
+    },
+    {
+      "file": "docs/assets/example/dash.control.js",
+      "owner": "artplayer-plugin-dash-control"
+    },
+    {
+      "file": "docs/assets/example/document.pip.js",
+      "owner": "artplayer-plugin-document-pip"
+    },
+    {
+      "file": "docs/assets/example/hls.control.js",
+      "owner": "artplayer-plugin-hls-control"
+    },
+    {
+      "file": "docs/assets/example/jassub.js",
+      "owner": "artplayer-plugin-jassub"
+    },
+    {
+      "file": "docs/assets/example/multiple.subtitles.js",
+      "owner": "artplayer-plugin-multiple-subtitles"
+    },
+    {
+      "file": "docs/assets/example/vast.js",
+      "owner": "artplayer-plugin-vast"
+    },
+    {
+      "file": "docs/assets/example/vtt.thumbnail.js",
+      "owner": "artplayer-plugin-vtt-thumbnail"
+    },
+    {
+      "file": "docs/assets/example/canvas.js",
+      "owner": "artplayer-proxy-canvas"
+    },
+    {
+      "file": "docs/assets/example/mediabunny.js",
+      "owner": "artplayer-proxy-mediabunny"
+    },
+    {
+      "file": "docs/assets/example/iframe.js",
+      "owner": "artplayer-tool-iframe"
+    },
+    {
+      "file": "docs/assets/example/tool.thumbnail.js",
+      "owner": "artplayer-tool-thumbnail"
+    }
+  ],
+  "sharedPrefixes": [
+    "scripts/",
+    "types/",
+    "test/",
+    ".github/",
+    "refactor/scripts/",
+    "refactor/fixtures/",
+    "refactor/baselines/"
+  ],
+  "sharedFiles": [
+    "package.json",
+    "yarn.lock",
+    ".node-version",
+    ".yarnrc",
+    ".yarnrc.yml",
+    "tsconfig.json",
+    "tsconfig.base.json",
+    "eslint.config.js",
+    "playwright.config.js",
+    "playwright.performance.config.js",
+    "svgo.config.json",
+    ".editorconfig",
+    "refactor/impact-policy.json"
+  ],
+  "gates": [
+    {
+      "job": "checks",
+      "command": "yarn ci:check",
+      "scope": "Toolchain, task/commit/impact contracts, lint, current strict projects and existing Node/baseline suites"
+    },
+    {
+      "job": "checks",
+      "command": "yarn ci:build",
+      "scope": "All library builds, i18n, editor declarations, docs site and existing import suites"
+    },
+    {
+      "job": "browser-smoke",
+      "command": "yarn test:package",
+      "scope": "Installed core/chapter consumers only; other package installation acceptance remains pending"
+    },
+    {
+      "job": "browser-smoke",
+      "command": "yarn test:browser",
+      "scope": "All existing three-engine browser suites; does not imply every package/device has a suite"
+    },
+    {
+      "job": "browser-smoke",
+      "command": "yarn test:performance",
+      "scope": "Existing installed performance and resource-cleanup scenarios"
+    },
+    {
+      "job": "coverage",
+      "command": "yarn test:coverage",
+      "scope": "Current coverage-policy packages and critical module thresholds only"
+    }
+  ],
+  "installedConsumerPackages": [
+    "artplayer",
+    "artplayer-plugin-chapter"
+  ]
+}

@@ -47,7 +47,7 @@
     "check:plan": "node refactor/scripts/plan.mjs --check",
     "test:node": "yarn test:unit && node --test test/toolchain.test.js test/build-docs.test.js test/package-check.test.js test/declarations.test.js test/editor-types.test.js test/coverage.test.js test/performance-report.test.js test/media-gate.test.js",
     "test:baseline": "node --test refactor/scripts/*.test.mjs",
-    "ci:check": "yarn check:toolchain --strict && yarn check:commits --report && yarn check:plan && yarn lint && yarn check:types && yarn typecheck && yarn test",
+    "ci:check": "yarn check:toolchain --strict && yarn check:commits --report && yarn check:impact --report && yarn check:plan && yarn lint && yarn check:types && yarn typecheck && yarn test",
     "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:docs && yarn test:imports",
     "test:imports": "node --test test/esm.test.js test/i18n.test.js test/ssr.test.js",
     "typecheck": "node scripts/typecheck.mjs",
@@ -66,7 +66,8 @@
     "test:ads-types-package": "node refactor/scripts/ads-package-types.mjs",
     "test:ads-native-visibility": "node refactor/scripts/ads-native-visibility.mjs",
     "test:vast": "node --test test/vast.test.js test/vast-lifecycle.test.js",
-    "check:commits": "node refactor/scripts/commit-audit.mjs"
+    "check:commits": "node refactor/scripts/commit-audit.mjs",
+    "check:impact": "node refactor/scripts/impact.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
@@ -87,13 +88,15 @@
     "lerna": "8.2.4",
     "less": "4.5.1",
     "prompts": "2.4.2",
+    "semver": "7.7.4",
     "servor": "4.0.2",
     "svgo": "4.1.0",
     "terser": "5.51.2",
     "typescript": "5.9.3",
     "typescript-compat": "npm:typescript@4.3.5",
     "typescript-runtime-compat": "npm:typescript@5.1.6",
-    "vite": "7.3.6"
+    "vite": "7.3.6",
+    "yaml": "2.8.2"
   },
   "resolutions": {
     "dts-bundle-generator/typescript": "5.9.3"

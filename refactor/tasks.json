@@ -633,14 +633,18 @@
       "risk": "M",
       "id": "ENG-IMPACT-01",
       "title": "建立全包依赖与共享变更影响映射",
-      "status": "todo",
+      "status": "done",
       "dependsOn": [
         "ENG-07",
         "DOC-04"
       ],
       "deliverable": "核心/构建/类型/锁文件到受影响包和必需生态检查的映射及CI接入",
       "acceptance": "核心变化触发必需生态检查；新增包、未知共享文件或失配依赖不能静默漏检；解释受影响路径和测试命令",
-      "evidence": []
+      "evidence": [
+        "impact-analysis.md",
+        "changes/2026-09-12-ENG-IMPACT-01-mapping.md",
+        "baselines/impact-validation.json"
+      ]
     },
     {
       "phase": "2 工程保障",

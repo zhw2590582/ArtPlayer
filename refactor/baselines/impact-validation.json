@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "task": "ENG-IMPACT-01",
+  "status": "done",
+  "sourceCommit": "e0aacc5d6a75097a50fab2e8fdee46a2277455e6",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/impact.test.mjs",
+      "result": "expected regression reproduced before fix",
+      "scope": "Shell conditional wrapper bypassed the original workflow matcher",
+      "log": {
+        "file": "refactor/.cache/eng-impact-shell-before.log",
+        "sha256": "5851b82f25d8f5161cdb5a92ca18e30202afb6c7cbe83827228d6caf0f6789f9"
+      }
+    },
+    {
+      "command": "node --test refactor/scripts/impact.test.mjs",
+      "result": "pass after fix",
+      "tests": 7,
+      "scope": "Actual 22-package model, isolated dependency/policy negative cases, real Git ranges and workflow shell/condition negatives",
+      "log": {
+        "file": "refactor/.cache/eng-impact-shell-after.log",
+        "sha256": "48dcf18eb1b0d696165d862f2acf4ecc5bdd0c4421972436f5c871c059446a45"
+      }
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js refactor/scripts/impact-model.mjs refactor/scripts/impact.mjs refactor/scripts/impact.test.mjs --no-fix",
+      "result": "pass",
+      "log": {
+        "file": "refactor/.cache/eng-impact-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "actionlint 1.7.12",
+      "result": "pass",
+      "workflows": 2,
+      "log": {
+        "file": "refactor/.cache/eng-impact-actionlint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 832,
+        "engineering": 14,
+        "baseline": 65,
+        "total": 911
+      },
+      "log": {
+        "file": "refactor/.cache/eng-impact-ci-final.log",
+        "sha256": "04a7f49a111ed565e38e6b6e5e1ebd55487506231f88c9f5db221e62f253cd3b"
+      }
+    },
+    {
+      "command": "yarn check:impact --report (inside final ci:check)",
+      "result": "pass",
+      "packages": 22,
+      "affectedPackages": 22,
+      "installedConsumerGaps": 19,
+      "unresolvedDynamicImports": 0,
+      "report": {
+        "file": "refactor/.cache/eng-impact-candidate-report.json",
+        "sha256": "7db3db5f7d6642066d17e9eefa506787b00c74fce7b0e2118ad94a829adcde53"
+      },
+      "provenance": "Pre-completion candidate report; metadata/docs changed afterward, implementation inputs recorded below"
+    }
+  ],
+  "inputs": [
+    {
+      "file": "refactor/scripts/impact-model.mjs",
+      "sha256LF": "d2dc168d2d358694be7e203ab3970deb1f42bff275e89ede88adbe870a962e4c"
+    },
+    {
+      "file": "refactor/scripts/impact.mjs",
+      "sha256LF": "26cb7432fad82f3e9f1e454c911e15692610b6ae3052d9e2e2ec4cbc86957c36"
+    },
+    {
+      "file": "refactor/scripts/impact.test.mjs",
+      "sha256LF": "3a7c82c0b8d47fba7c39b83e12ceba8b3c02c648689def89d73be44c57b31855"
+    },
+    {
+      "file": "refactor/impact-policy.json",
+      "sha256LF": "9e3c0ac40f26d19b9c37783df28ea3adf1ada8ae084401c028867ec45ed47f97"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "367015c0d3caa704eb8e6be179c517d7c1f529e5a956338145e366cff43b1955"
+    },
+    {
+      "file": "yarn.lock",
+      "sha256LF": "1a6642a9728e77faf26dce43a849b56ba24573b44f08096a07fa36593eecc8de"
+    },
+    {
+      "file": ".github/workflows/nodejs.yml",
+      "sha256LF": "a88eee053a57333c4234b88d93535ee8de1d805bf884ce2ad168e3617a1becc1"
+    },
+    {
+      "file": "scripts/package-consumer.mjs",
+      "sha256LF": "3c85b3d664d5cf20e593a938cc756017f55fff5a2df5304054dbaa2f65131044"
+    },
+    {
+      "file": "scripts/coverage-policy.json",
+      "sha256LF": "db3f2eacc44d61465031af6e618c8863ac4e9f23ef889865a9202919246ca403"
+    }
+  ],
+  "limitations": [
+    "Local validation only; remote GitHub execution remains CI-04",
+    "Workflow validation accepts a restricted shell structure, not arbitrary shell semantics",
+    "Impact analysis does not prove package/device/vendor acceptance; 19 library packages lack the unified installed consumer suite",
+    "Existing generated docs eslint unused-disable warning and Yarn url.parse deprecation remain; no production files changed by this task",
+    "ENG-COVERAGE-01 and parent ENG-09 remain incomplete"
+  ]
+}

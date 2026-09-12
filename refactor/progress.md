@@ -1,5 +1,16 @@
 # 进度与证据
 
+## 最新完成：ENG-IMPACT-01 全包影响与必需检查映射
+
+实际22包依赖/验证关系、共享构建/类型/锁文件及示例映射已接入ci:check；Git变更包含
+改名两端及所有本地状态，未知路径保守扩大到全包。六项必需CI命令继续执行，并校验
+真实workflow的条件、失败传播和完整历史；shell漏检已用反例复现并修复。
+7组专项测试和完整CI911项通过，专项lint及actionlint通过。报告明确统一安装消费者
+当前只有core/chapter，其余19个库包不能据此算验收完成。ENG-COVERAGE-01和父任务
+ENG-09继续，VAST初始化选择仍待确认。当前220项：82 done、6 doing、132 todo。
+本任务独立本地提交后审计自身；未推送或发布。见 [实施记录](changes/2026-09-12-ENG-IMPACT-01-mapping.md)
+和 [验证证据](baselines/impact-validation.json)。
+
 ## 最新完成：ENG-AUDIT-01 每任务提交审计
 
 新增实际Git历史审计并接入ci:check，核对状态迁移、独立提交、证据/plan共提交和合并分支。
