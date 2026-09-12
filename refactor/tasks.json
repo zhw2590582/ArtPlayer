@@ -3809,11 +3809,14 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "补齐真实 API 声明，自有 emitter/utils TS 化",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；为 BASE-DIST-01 提供兼容入口/声明及消费者验证",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md",
+        "baselines/thumbnail-runtime-types-validation.json"
+      ]
     },
     {
       "id": "PKG-TOOL-THUMB-05",

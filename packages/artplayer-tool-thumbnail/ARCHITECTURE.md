@@ -1,23 +1,25 @@
 # Thumbnail tool maintenance map
 
-The runtime responsibilities are separated under PKG-TOOL-THUMB-03. Strict TS and
-published declaration work belongs to PKG-TOOL-THUMB-04. Runtime restructuring
-does not imply complete migration or release readiness.
+The runtime responsibilities were separated under PKG-TOOL-THUMB-03 and are now
+strict TypeScript under PKG-TOOL-THUMB-04. Published declarations and installed
+entrypoint checks are still in progress; runtime migration is not release readiness.
 
 | File | Responsibility |
 | --- | --- |
-| src/index.js | Public class, historical method names, construction and destruction entry |
-| src/lifecycle.js | Private state, source/input generations, cancellation and resource release |
-| src/source.js | File loading, native metadata/error listeners and source/thumbnail Blob URLs |
-| src/extraction.js | Owned metadata wait and serial frame job, callback/error completion and cancellation |
-| src/input.js | Option validation/clamps, file-input wrapper creation, listener registration/replacement and release |
-| src/sheet.js | Midpoint grid, canvas/footer geometry, temporary download anchor |
-| src/emitter.js | Existing on/once/emit/off semantics; provenance review remains in 04 |
-| src/utils.js | Existing clamp, filename, sleep and serial-promise helpers |
+| src/index.ts | Public class, historical method names, construction and destruction entry |
+| src/lifecycle.ts | Private state, source/input generations, cancellation and resource release |
+| src/source.ts | File loading, native metadata/error listeners and source/thumbnail Blob URLs |
+| src/extraction.ts | Owned metadata wait and serial frame job, callback/error completion and cancellation |
+| src/input.ts | Option validation/clamps, file-input wrapper creation, listener registration/replacement and release |
+| src/sheet.ts | Midpoint grid, canvas/footer geometry, temporary download anchor |
+| src/emitter.ts | Typed local adaptation of tiny-emitter; preserves on/once/emit/off behavior |
+| src/utils.ts | Pure clamp and filename helpers; unused sleep/serial helpers removed |
+| src/types.ts | Internal option, frame, event tuple, job and lifecycle contracts; no runtime output |
 
-The entry delegates to input/source/extraction/sheet; none imports the entry.
+The entry delegates to input/source/extraction/sheet. Helpers import its type only;
+the imports are erased and do not create a runtime dependency on the entry.
 Input/source use lifecycle state, extraction uses lifecycle/source, and sheet uses
-only filename calculation. There is no dependency back from helpers to the class.
+only filename calculation. types.ts contains no imports or executable state.
 Input records live in a private WeakMap, so callers replacing `option` cannot
 lose ownership of generated inputs/listeners. Normal construction preserves the
 existing instance-field order and bound inputChange/ondrop methods. DEFAULTS,
@@ -76,6 +78,7 @@ Use Yarn and the repository scripts:
 
 ```sh
 yarn test:thumbnail
+yarn typecheck
 yarn build artplayer-tool-thumbnail
 yarn test:browser test/browser/thumbnail-tool.spec.js test/browser/thumbnail-native.spec.js test/browser/thumbnail-input.spec.js
 ```
@@ -96,7 +99,42 @@ Safari/WebKit evidence in 05. The independent tool example is
 `test/thumbnail-lifecycle.test.js` covers jobs, source cancellation, native errors,
 callback failures, reentrancy and private resources. Browser tests hold real PNG
 callbacks and replace a selected file during encoding; only the latest job may
-complete. Continue strict TS and installed declarations in 04; preserve old tests
-and the default delay/height boundary. The old sleep/serial helpers in utils.js are
-no longer used by extraction and can be removed during that migration.
+complete. Continue published declarations and installed consumers in 04; preserve
+old tests and the default delay/height boundary.
 See [task plan](../../refactor/plan.md) and [risk ledger](../../refactor/risks.json).
+
+## Type and provenance boundaries
+
+All eight executable source modules and the shared type module are checked with
+strict, noUncheckedIndexedAccess, noImplicitOverride, skipLibCheck=false and no
+ambient Node/test globals. Public fields use declare so TypeScript does not add
+early undefined properties or change constructor property order. File/URL/density
+fields retain their absence until the corresponding operation publishes them.
+Unknown option fields remain unknown, and custom string/number/symbol events keep
+an open payload boundary; built-in events have precise tuples. This source typing
+is not yet the missing public npm declaration entrypoint.
+
+Assertions are limited to existing runtime boundaries: a temporary empty option
+object before setup validation; the input/wrapper conversion; event target and
+dataTransfer/files supplied by native input/drop events; private records inserted
+before lookup; nonempty/dense frame arrays; a successful 2D canvas context; and
+the old property read of message on arbitrary thrown values. These assertions
+preserve existing runtime validation/errors rather than adding new coercions.
+The constructor and destroy rollback paths also intentionally tolerate fields
+that have not yet been assigned. DOM listener casts connect known event names to
+the matching bound callbacks. Keep new assertions equally local and documented.
+
+The emitter structurally corresponds to tiny-emitter 2.1.0, which the recovered
+3.5.31 manifest declared as ^2.1.0. The exact original copied revision is unknown.
+The pinned [reference files](../../refactor/baselines/thumbnail-vendor/sources.json)
+and [MIT notice](THIRD_PARTY_NOTICES) retain upstream attribution. The repository
+build includes the complete notice in main, legacy and ESM bundle headers.
+Final packed contents remain a distribution gate. Do not replace this local
+emitter with the core emitter as part of a type-only change: dispatch semantics
+and historical prototype-key handling need their own behavior review.
+
+`test/thumbnail-runtime.test.js` compares upstream, recovered/historical bundles
+and the selected candidate for dispatch behavior, and checks candidate public
+descriptors and validation. `test/thumbnail-vendor.test.js` verifies fixed source
+bytes, complete notices and dist/docs equality. `test/types/thumbnail-runtime.ts`
+checks source consumers with positive cases and six rejected invalid uses.

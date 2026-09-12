@@ -3,6 +3,33 @@
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
+ *
+ * ArtPlayer thumbnail tool bundled third-party notices
+ *
+ * tiny-emitter - reference 2.1.0, locally adapted to a TypeScript class
+ * https://github.com/scottcorgan/tiny-emitter/tree/2.1.0
+ *
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Scott Corgan
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 class Emitter {
   on(name, fn, ctx) {
@@ -12,15 +39,17 @@ class Emitter {
   }
   once(name, fn, ctx) {
     const self = this;
+    const callback = fn;
     function listener(...args) {
       self.off(name, listener);
-      fn.apply(ctx, args);
+      callback.apply(ctx, args);
     }
     listener._ = fn;
     return this.on(name, listener, ctx);
   }
   emit(name, ...data) {
-    const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+    const e = this.e || (this.e = {});
+    const evtArr = (e[name] || []).slice();
     for (let i = 0; i < evtArr.length; i += 1) {
       evtArr[i].fn.apply(evtArr[i].ctx, data);
     }

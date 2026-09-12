@@ -1,10 +1,21 @@
+import type ArtplayerToolThumbnail from './index'
+import type { InputOptions } from './types'
 import { cancellation, stateFor } from './lifecycle'
 import { clamp } from './utils'
 
-const inputs = new WeakMap()
+type Registration = readonly [name: string, callback: EventListener]
+interface InputRecord {
+  input: HTMLInputElement
+  wrapper: HTMLElement | null
+  position: string
+  listeners: Registration[]
+  callbacks: Registration[] | null
+}
 
-function release(record) {
-  let failure
+const inputs = new WeakMap<ArtplayerToolThumbnail, InputRecord>()
+
+function release(record: InputRecord) {
+  let failure: unknown
   for (const [name, callback] of record.listeners.splice(0)) {
     try {
       record.input.removeEventListener(name, callback)
@@ -28,7 +39,7 @@ function release(record) {
     throw failure
 }
 
-function connect(record, callbacks) {
+function connect(record: InputRecord, callbacks: Registration[]) {
   try {
     for (const [name, callback] of callbacks) {
       record.listeners.push([name, callback])
@@ -44,12 +55,12 @@ function connect(record, callbacks) {
   }
 }
 
-export function setupInput(tool, patch) {
+export function setupInput(tool: ArtplayerToolThumbnail, patch: InputOptions) {
   const state = stateFor(tool)
   const epoch = ++state.inputEpoch
   const current = () => !state.closed && state.inputEpoch === epoch
   const option = Object.assign({}, tool.option, patch)
-  const target = option.fileInput
+  const target = option.fileInput!
   tool.errorHandle(target instanceof Element, 'The \'fileInput\' is not a Element')
   for (const name of ['number', 'width', 'column', 'begin', 'end'])
     tool.errorHandle(typeof option[name] === 'number', `The '${name}' is not a number`)
@@ -65,9 +76,10 @@ export function setupInput(tool, patch) {
     tool.option = option
     return option
   }
-  const record = { input: target, wrapper: null, position: '', listeners: [], callbacks: previous?.callbacks || null }
+  // A wrapper is replaced by its owned file input before the record is committed.
+  const record: InputRecord = { input: target as HTMLInputElement, wrapper: null, position: '', listeners: [], callbacks: previous?.callbacks || null }
   try {
-    if (!(target.tagName === 'INPUT' && target.type === 'file')) {
+    if (!(target.tagName === 'INPUT' && (target as HTMLInputElement).type === 'file')) {
       record.wrapper = target
       record.position = target.style.position
       record.input = document.createElement('input')
@@ -98,13 +110,14 @@ export function setupInput(tool, patch) {
   return option
 }
 
-export function connectInput(tool, dragover) {
-  const record = inputs.get(tool)
-  record.callbacks = [['change', tool.inputChange], ['dragover', dragover], ['drop', tool.ondrop]]
+export function connectInput(tool: ArtplayerToolThumbnail, dragover: (event: DragEvent) => void) {
+  const record = inputs.get(tool)!
+  // These callbacks are registered only for their matching DOM event names.
+  record.callbacks = [['change', tool.inputChange], ['dragover', dragover as EventListener], ['drop', tool.ondrop as EventListener]]
   connect(record, record.callbacks)
 }
 
-export function releaseInput(tool) {
+export function releaseInput(tool: ArtplayerToolThumbnail) {
   const record = inputs.get(tool)
   if (!record)
     return

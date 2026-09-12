@@ -8,3 +8,4 @@ test/browser/media/dash/*.mpd text eol=lf whitespace=-blank-at-eol
 test/browser/media/dash/*.m4s binary
 test/browser/media/*.m4a binary
 refactor/baselines/core-vendor/*.txt text eol=lf
+refactor/baselines/thumbnail-vendor/* text eol=lf whitespace=-blank-at-eof

@@ -1,12 +1,14 @@
+import type ArtplayerToolThumbnail from './index'
+import type { Cleanup, ExtractionJob, LifecycleState } from './types'
 import { cancellation, cleanupAll, stateFor } from './lifecycle'
 import { replaceThumbnail } from './source'
 import { clamp } from './utils'
 
-function prepare(tool, job) {
+function prepare(tool: ArtplayerToolThumbnail, job: ExtractionJob) {
   const { video } = job
   const { width, number, begin, end } = tool.option
   const height = (video.videoHeight / video.videoWidth) * width
-  const guard = (condition, message) => {
+  const guard = (condition: unknown, message: string) => {
     try {
       tool.errorHandle(condition, message)
     }
@@ -28,23 +30,23 @@ function prepare(tool, job) {
   guard(tool.density <= 1, `The preview density cannot be greater than 1, but got ${tool.density}`)
   const points = tool.creatScreenshotDate()
   const canvas = tool.creatCanvas()
-  const context = canvas.getContext('2d')
+  const context = canvas.getContext('2d')!
   tool.emit('canvas', canvas)
   return { width, height, number, points, canvas, context }
 }
 
-function createJob(tool, state) {
+function createJob(tool: ArtplayerToolThumbnail, state: LifecycleState) {
   let epoch = state.epoch
   const video = tool.video
-  let resolve
-  let reject
-  let timer
+  let resolve!: () => void
+  let reject!: (error: unknown) => void
+  let timer: ReturnType<typeof setTimeout> | undefined
   let settled = false
   let running = false
-  let job
+  let job: ExtractionJob
   let frameCleanup = () => {}
-  const listeners = []
-  const promise = new Promise((yes, no) => {
+  const listeners: Cleanup[] = []
+  const promise = new Promise<void>((yes, no) => {
     resolve = yes
     reject = no
   })
@@ -62,7 +64,7 @@ function createJob(tool, state) {
     cleanupAll([() => clearTimeout(timer), frameCleanup, ...listeners.splice(0)])
     return true
   }
-  function fail(error, report = true) {
+  function fail(error: unknown, report = true) {
     if (settled)
       return
     try {
@@ -73,7 +75,7 @@ function createJob(tool, state) {
     }
     if (report) {
       try {
-        tool.emit('error', error?.message)
+        tool.emit('error', (error as { message?: string } | null | undefined)?.message)
       }
       catch (listenerError) {
         error = listenerError
@@ -92,7 +94,7 @@ function createJob(tool, state) {
     catch (error) {
       let failure = error
       try {
-        tool.emit('error', error?.message)
+        tool.emit('error', (error as { message?: string } | null | undefined)?.message)
       }
       catch (listenerError) {
         failure = listenerError
@@ -100,7 +102,7 @@ function createJob(tool, state) {
       reject(failure)
     }
   }
-  function extract(plan) {
+  function extract(plan: ReturnType<typeof prepare>) {
     if (!live())
       return
     running = true
@@ -113,7 +115,7 @@ function createJob(tool, state) {
         complete()
         return
       }
-      const point = plan.points[index]
+      const point = plan.points[index]!
       let drawing = false
       let encoded = false
       const previous = video.oncanplay
@@ -211,7 +213,7 @@ function createJob(tool, state) {
       }],
       ['loadedmetadata', () => ready()],
       ['durationchange', () => ready()],
-    ]) {
+    ] as const) {
       listeners.push(() => video.removeEventListener(name, callback))
       video.addEventListener(name, callback)
       if (!live()) {
@@ -231,7 +233,7 @@ function createJob(tool, state) {
   return promise
 }
 
-export function startExtraction(tool) {
+export function startExtraction(tool: ArtplayerToolThumbnail): Promise<void> {
   const state = stateFor(tool)
   if (state.closed) {
     const promise = Promise.reject(cancellation('destroyed'))

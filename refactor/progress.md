@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-04 运行时 TS 与 emitter 来源检查点（doing）
+
+8个运行时模块已迁为严格TS，新增类型模块明确option/事件/帧/job/资源状态；declare保留
+旧实例字段顺序和按需出现的字段。移除未使用的sleep/serial助手。生成ESM除许可和两个
+等价emitter局部变量外与03运行时相同，默认值和同步/异步行为保持。固定tiny-emitter
+2.1.0上游比较文件及完整MIT通知，登记VENDOR-09；不声称确定原始复制revision。
+新增6项门面/emitter兼容与2项来源/通知检查，源码/main/legacy各110项通过。
+三份浏览器各57通过（34真实工具、3输入、17Blob不可用、3原生媒体对照）。
+完整CI1654通过，339生产TS和3导入通过；保留既有编辑器声明lint警告及Yarn警告记录。
+公开声明/旧编译器/实际安装入口和默认历史差异仍待04继续，05/06保留真实设备/分发门槛。
+见[变更](changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md)和
+[验证](baselines/thumbnail-runtime-types-validation.json)。222项：112 done、11 doing、99 todo。
+
+
 ## PKG-TOOL-THUMB-03 完成：抽帧任务与媒体资源所有权
 
 增加lifecycle/source/extraction模块，保留公开类形状与工作区默认行为。元数据等待、

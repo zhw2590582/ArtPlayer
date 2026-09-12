@@ -1,0 +1,22 @@
+{
+  "reviewedAt": "2026-09-12T20:36:43.265Z",
+  "referenceVersion": "2.1.0",
+  "sources": [
+    {
+      "file": "refactor/baselines/thumbnail-vendor/tiny-emitter-2.1.0.txt",
+      "url": "https://raw.githubusercontent.com/scottcorgan/tiny-emitter/2.1.0/index.js",
+      "sha256": "3e3679233f20177d63d253e7c2645024fef51731d05df15621c62a48ba98e0d3"
+    },
+    {
+      "file": "refactor/baselines/thumbnail-vendor/tiny-emitter-license.txt",
+      "url": "https://raw.githubusercontent.com/scottcorgan/tiny-emitter/2.1.0/LICENSE",
+      "sha256": "aada4c7da6a5be46beadf9d4f40d7dba9e222e57180d46289b2bb9112e65daae"
+    },
+    {
+      "file": "refactor/baselines/thumbnail-vendor/tiny-emitter-package.json",
+      "url": "https://raw.githubusercontent.com/scottcorgan/tiny-emitter/2.1.0/package.json",
+      "sha256": "f5328afd1e742ba9b107e316e5fc4c74ec81201bafad8eb8e6dc456ef6d628de"
+    }
+  ],
+  "limitation": "Pinned upstream comparison reference. Structural correspondence and the recovered 3.5.31 dependency establish attribution, not the exact original copy revision or complete npm archive."
+}

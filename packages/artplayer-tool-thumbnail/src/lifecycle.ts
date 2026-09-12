@@ -1,6 +1,9 @@
-const states = new WeakMap()
+import type ArtplayerToolThumbnail from './index'
+import type { Cleanup, LifecycleState } from './types'
 
-export function stateFor(tool) {
+const states = new WeakMap<ArtplayerToolThumbnail, LifecycleState>()
+
+export function stateFor(tool: ArtplayerToolThumbnail): LifecycleState {
   if (!states.has(tool)) {
     states.set(tool, {
       closed: false,
@@ -16,24 +19,24 @@ export function stateFor(tool) {
       loading: false,
     })
   }
-  return states.get(tool)
+  return states.get(tool)!
 }
 
-export function cancellation(reason) {
+export function cancellation(reason: string) {
   const error = new Error(`Thumbnail task cancelled: ${reason}`)
   error.name = 'AbortError'
   return error
 }
 
-export function revoke(urls, url) {
+export function revoke(urls: Set<string>, url: string | undefined) {
   if (!url)
     return
   urls.delete(url)
   URL.revokeObjectURL(url)
 }
 
-export function cleanupAll(callbacks) {
-  let failure
+export function cleanupAll(callbacks: Cleanup[]) {
+  let failure: unknown
   for (const callback of callbacks) {
     try {
       callback()
@@ -46,7 +49,7 @@ export function cleanupAll(callbacks) {
     throw failure
 }
 
-export function closeState(tool, reason = 'destroyed') {
+export function closeState(tool: ArtplayerToolThumbnail, reason = 'destroyed') {
   const state = stateFor(tool)
   if (state.closed)
     return false
@@ -56,11 +59,11 @@ export function closeState(tool, reason = 'destroyed') {
   return true
 }
 
-export function releaseMedia(tool) {
+export function releaseMedia(tool: ArtplayerToolThumbnail) {
   const state = stateFor(tool)
   const sources = new Set([...state.sourceUrls, tool.videoUrl])
   const thumbnails = new Set([...state.thumbnailUrls, tool.thumbnailUrl])
-  const media = []
+  const media: Cleanup[] = []
   for (const video of new Set([state.video, tool.video])) {
     if (video) {
       media.push(

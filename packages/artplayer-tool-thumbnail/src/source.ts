@@ -1,6 +1,8 @@
+import type ArtplayerToolThumbnail from './index'
+import type { Cleanup } from './types'
 import { cleanupAll, revoke, stateFor } from './lifecycle'
 
-export function loadSource(tool, file) {
+export function loadSource(tool: ArtplayerToolThumbnail, file?: File | null) {
   const state = stateFor(tool)
   if (!file || state.closed)
     return
@@ -23,7 +25,7 @@ export function loadSource(tool, file) {
   state.loading = true
   const current = () => !state.closed && state.epoch === epoch
   const previousListeners = state.sourceListeners
-  const listeners = []
+  const listeners: Cleanup[] = []
   state.sourceListeners = listeners
   let pendingCleanup = () => {}
   let reported = false
@@ -50,7 +52,7 @@ export function loadSource(tool, file) {
       revoke(state.sourceUrls, url)
       return
     }
-    for (const [name, callback] of [['error', error], ['loadedmetadata', ready]]) {
+    for (const [name, callback] of [['error', error], ['loadedmetadata', ready]] as const) {
       pendingCleanup = () => video.removeEventListener(name, callback)
       listeners.push(pendingCleanup)
       video.addEventListener(name, callback)
@@ -94,7 +96,7 @@ export function loadSource(tool, file) {
   }
 }
 
-export function replaceThumbnail(tool, blob, live) {
+export function replaceThumbnail(tool: ArtplayerToolThumbnail, blob: Blob, live: () => boolean) {
   const state = stateFor(tool)
   const url = URL.createObjectURL(blob)
   state.thumbnailUrls.add(url)

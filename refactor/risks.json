@@ -3934,6 +3934,25 @@
       ],
       "compatibleResolution": "Preserve independent HTTP/Blob capability controls; obtain actual supported WebKit/Safari file extraction evidence before release acceptance. Do not count the 12 unavailable controls as successful thumbnail generation or silently replace local files with HTTP media.",
       "closureCriteria": "Actual generated PNG/extraction and lifecycle proof in supported Safari/WebKit environments, or explicit supported-environment decision with migration documentation; Windows limitation stays identifiable."
+    },
+    {
+      "id": "VENDOR-09",
+      "title": "Thumbnail tiny-emitter 改写来源与最终分发许可",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-TOOL-THUMB-04",
+        "PKG-TOOL-THUMB-06"
+      ],
+      "evidence": [
+        "refactor/baselines/thumbnail-vendor/sources.json",
+        "packages/artplayer-tool-thumbnail/src/emitter.ts",
+        "packages/artplayer-tool-thumbnail/THIRD_PARTY_NOTICES",
+        "test/thumbnail-vendor.test.js"
+      ],
+      "compatibleResolution": "Preserve original attribution, typed local dispatch compatibility and complete MIT notice in source/package/standalone bundles.",
+      "closureCriteria": "Pinned upstream reference and local adaptation reviewed; all bundle and actual packed distribution notices verified. Do not claim the exact original copied revision or a recovered complete historical archive.",
+      "workspaceState": "TS adaptation and pinned 2.1.0 source/license references recorded; normal build includes package notices. Final installed/packed distribution evidence remains with 04/06."
     }
   ]
 }

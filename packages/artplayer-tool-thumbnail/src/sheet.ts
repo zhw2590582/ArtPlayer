@@ -1,11 +1,12 @@
+import type { ScreenshotPoint, SheetOptions } from './types'
 import { getFileName } from './utils'
 
-export function screenshotPoints(option, duration) {
+export function screenshotPoints(option: SheetOptions, duration: number): ScreenshotPoint[] {
   const { number, width, height, column, begin } = option
   const timeGap = duration / number
   const timePoints = [begin + timeGap]
   while (timePoints.length < number) {
-    const last = timePoints[timePoints.length - 1]
+    const last = timePoints[timePoints.length - 1]!
     timePoints.push(last + timeGap)
   }
   return timePoints.map((item, index) => ({
@@ -15,10 +16,10 @@ export function screenshotPoints(option, duration) {
   }))
 }
 
-export function createSheet(option) {
+export function createSheet(option: SheetOptions) {
   const { number, width, height, column } = option
   const canvas = document.createElement('canvas')
-  const context = canvas.getContext('2d')
+  const context = canvas.getContext('2d')!
   canvas.width = width * column
   canvas.height = Math.ceil(number / column) * height + 30
   context.fillStyle = 'black'
@@ -33,7 +34,7 @@ export function createSheet(option) {
   return canvas
 }
 
-export function downloadSheet(file, url) {
+export function downloadSheet(file: File, url: string) {
   const link = document.createElement('a')
   const name = `${getFileName(file.name)}.png`
   link.download = name
