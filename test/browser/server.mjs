@@ -64,6 +64,11 @@ const adsCoreMember = `package/${adsCore.manifest.main}`
 const adsCoreBytes = readMember(await ensureArchive(adsCore), adsCoreMember)
 assert.equal(hash(adsCoreBytes), adsCore.files[adsCoreMember], 'Historical Ads core differs from frozen release')
 add('/published-4.5.5/artplayer.js', adsCoreBytes, { kind: 'npm-release', version: adsCore.version, integrity: adsCore.integrity, member: adsCoreMember })
+const vastCore = JSON.parse(fs.readFileSync(path.join(workspace, 'refactor/baselines/vast-core.json'), 'utf8')).release
+const vastCoreMember = `package/${vastCore.manifest.main}`
+const vastCoreBytes = readMember(await ensureArchive(vastCore), vastCoreMember)
+assert.equal(hash(vastCoreBytes), vastCore.files[vastCoreMember], 'Historical VAST core differs from frozen release')
+add('/published-5.1.7/artplayer.js', vastCoreBytes, { kind: 'npm-release', version: vastCore.version, integrity: vastCore.integrity, member: vastCoreMember })
 add('/test/audio-tone.m4a', fs.readFileSync(path.join(workspace, 'test/browser/media/audio-tone.m4a')), { kind: 'generated-media', file: 'test/browser/media/audio-tone.m4a' })
 
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.mp4': 'video/mp4', '.m4a': 'audio/mp4', '.webm': 'video/webm', '.vtt': 'text/vtt', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg' }
@@ -128,7 +133,7 @@ const server = http.createServer((req, res) => {
     if (url.pathname === '/test/player.html') {
       const core = url.searchParams.get('core') || 'candidate'
       const chapter = url.searchParams.get('chapter') || 'candidate'
-      assert(['candidate', 'published', 'published-4.5.5'].includes(core) && ['candidate', 'published'].includes(chapter), 'Invalid test combination')
+      assert(['candidate', 'published', 'published-4.5.5', 'published-5.1.7'].includes(core) && ['candidate', 'published'].includes(chapter), 'Invalid test combination')
       const html = fs.readFileSync(path.join(workspace, 'test/browser/player.html'), 'utf8')
         .replace('__CORE__', core)
         .replace('__CHAPTER__', chapter)

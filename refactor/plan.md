@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 217 项，范围 22 个包及工作区/示例。
 
-状态：todo 133 / doing 5 / blocked 0 / done 79 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 132 / doing 5 / blocked 0 / done 80 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -268,7 +268,7 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-VAST-01 | artplayer-plugin-vast<br>核对包契约与历史用法 | BASE-05 | 异步工厂、callback context、playUrl/playRes/init 与 SDK 版本；实际 npm 1.0.0 与未发布 1.2.0、SDK 1.21.0/1.21.2 的60成员归档和发布关联核心5.1.7 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
-| PKG-VAST-02 | artplayer-plugin-vast<br>建立特有行为与错误测试 | PKG-VAST-01, ENG-03, ENG-05 | SDK 失败、重复初始化、广告事件、内容恢复和销毁竞态；发布 id/$container/eager 与工作区 lazy/config 覆盖、callback拒绝、加载中销毁、同毫秒多实例与晚到事件 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-VAST-02 | artplayer-plugin-vast<br>建立特有行为与错误测试 | PKG-VAST-01, ENG-03, ENG-05 | SDK 失败、重复初始化、广告事件、内容恢复和销毁竞态；发布 id/$container/eager 与工作区 lazy/config 覆盖、callback拒绝、加载中销毁、同毫秒多实例与晚到事件 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-VAST-03 | artplayer-plugin-vast<br>整理内部职责与资源 | PKG-VAST-02, CORE-10, CORE-13 | SDK loader、IMA adapter、广告状态和 DOM 清理分离；保持发布 callback 别名，明确初始化冲突；核心终止与显式 destroy 后重建区分 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-VAST-04 | artplayer-plugin-vast<br>迁移自有源码和公开类型 | PKG-VAST-03, ENG-04, ENG-06, CORE-07 | IMA/context/Promise 真实类型，外部 SDK 动态对象限定边界；修复 @alugha/ima 声明依赖链，保留 export= 和 require.default 消费；同步错误声明的兼容决策单列 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
 | PKG-VAST-05 | artplayer-plugin-vast<br>验证新旧核心和组合 | PKG-VAST-04, CORE-22 | 官方测试广告或受控 SDK 环境，错误后主视频状态恢复；核验真实5.1.7/5.4.1/候选核心，VAST VPN外部脚本例外逐项记录，不将受控SDK当作实际IMA验收 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
@@ -490,3 +490,4 @@
 - PKG-ADS-04: [记录](changes/2026-09-12-PKG-ADS-04-types.md) [记录](baselines/ads-types-validation.json)
 - PKG-ADS-05: [记录](changes/2026-09-12-PKG-ADS-05-browser.md) [记录](baselines/ads-ui-visibility-validation.json)
 - PKG-VAST-01: [记录](baselines/vast-contract.md) [记录](baselines/vast-release.json) [记录](changes/2026-09-12-PKG-VAST-01-contract.md) [记录](baselines/vast-contract-validation.json)
+- PKG-VAST-02: [记录](changes/2026-09-12-PKG-VAST-02-tests.md) [记录](baselines/vast-behavior-validation.json) [记录](baselines/vast-core.json) [记录](vast-validation.md)

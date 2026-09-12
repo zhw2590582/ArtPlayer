@@ -149,5 +149,5 @@
 | ADS-UI-01 | resolved / 已复现 | Ads 零等待跳过与初始状态不符，全屏图标/外部状态需核验 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
 | VAST-CONTEXT-01 | open / 已复现 | Published VAST callback aliases and eager Player differ from the unpublished lazy workspace | PKG-VAST-02, PKG-VAST-03, PKG-VAST-04 |
 | VAST-TYPE-01 | open / 已复现 | VAST declares an async factory as synchronous and imports an unavailable SDK type dependency | PKG-VAST-04, PKG-VAST-06 |
-| VAST-LIFE-01 | open / 源码/产物事实 | VAST SDK and container lack core destruction ownership and pending work cancellation | PKG-VAST-02, PKG-VAST-03, PKG-VAST-05 |
+| VAST-LIFE-01 | open / 已复现 | VAST SDK and container lack core destruction ownership and pending work cancellation | PKG-VAST-02, PKG-VAST-03, PKG-VAST-05 |
 | VAST-DIST-01 | open / 已复现 | Published VAST CommonJS default namespace differs from the current callable distribution | PKG-VAST-04, PKG-VAST-06 |

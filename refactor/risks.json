@@ -706,7 +706,9 @@
         "refactor/baselines/vast-contract.md",
         "refactor/baselines/vast-release.json",
         "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
-        "refactor/baselines/vast-contract-validation.json"
+        "refactor/baselines/vast-contract-validation.json",
+        "refactor/vast-validation.md",
+        "refactor/baselines/vast-behavior-validation.json"
       ],
       "compatibleResolution": "@glomex/vast-ima-player loadImaSdk loads external IMA; preserve event/content/ad state and teardown, do not equate mocks with vendor service acceptance.",
       "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。",
@@ -3205,7 +3207,7 @@
     {
       "id": "VAST-LIFE-01",
       "title": "VAST SDK and container lack core destruction ownership and pending work cancellation",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-VAST-02",
@@ -3216,10 +3218,15 @@
         "refactor/baselines/vast-contract.md",
         "refactor/baselines/vast-release.json",
         "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
-        "refactor/baselines/vast-contract-validation.json"
+        "refactor/baselines/vast-contract-validation.json",
+        "refactor/changes/2026-09-12-PKG-VAST-02-tests.md",
+        "refactor/baselines/vast-behavior-validation.json",
+        "refactor/baselines/vast-core.json",
+        "refactor/vast-validation.md"
       ],
       "compatibleResolution": "Reproduce pending SDK/callback destruction, errors, duplicate IDs and stale ad events before adding compatible cleanup and state ownership.",
-      "closureCriteria": "Tests prove cleanup during load/callback rejection/core destruction and distinguish explicit plugin recreation from terminal core destruction; vendor media restoration is separately verified."
+      "closureCriteria": "Tests prove cleanup during load/callback rejection/core destruction and distinguish explicit plugin recreation from terminal core destruction; vendor media restoration is separately verified.",
+      "workspaceState": "45 Node tests include 16 frozen historical observations across 10 lifecycle/error categories. Real browser core destruction plus late SDK resolution leaves a newly allocated recorder in the detached player across 5.1.7/5.4.1/candidate. Google IMA allocation itself is not simulated as evidence; exact wrapper SDK boundary is controlled. All production fixes remain PKG-VAST-03 work."
     },
     {
       "id": "VAST-DIST-01",

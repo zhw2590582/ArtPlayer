@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-VAST-02",
+  "status": "done",
+  "sourceCommit": "4f39d6f2",
+  "checks": [
+    {
+      "command": "node --test test/vast.test.js",
+      "result": "pass",
+      "tests": 45,
+      "log": {
+        "file": "refactor/.cache/vast02-node-first.log",
+        "sha256": "b1c09921f58ce666c1821d27c62d1f47efedd909effa0b7d85a13a2cc7ad17f5"
+      }
+    },
+    {
+      "command": "node --test refactor/scripts/vast-core.test.mjs",
+      "result": "pass",
+      "tests": 1,
+      "archiveMembers": 197,
+      "log": {
+        "file": "refactor/.cache/vast02-core-final.log",
+        "sha256": "ca1f47472f291b1398486296a45c0a9a64fa28cf89a8a0d93d72c71fc4bebec7"
+      }
+    },
+    {
+      "command": "yarn test:browser vast.spec.js",
+      "result": "pass",
+      "tests": 90,
+      "engines": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "cores": [
+        "5.1.7",
+        "5.4.1",
+        "candidate"
+      ],
+      "sdk": "controlled wrapper recorder",
+      "stats": {
+        "startTime": "2026-09-12T01:14:19.958Z",
+        "duration": 46382.678,
+        "expected": 90,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "log": {
+        "file": "refactor/.cache/vast02-browser-final.log",
+        "sha256": "75fb8c623a8f4b8fc35a8cfc46b896acf689c5e5065482c5d7419f278cf59ae3"
+      },
+      "report": {
+        "file": "refactor/.cache/vast02-browser-final-report.json",
+        "sha256": "2cc94fa3417b9395363159187ea84cb56735ec6c500b6b1dca981d1b388a43c0"
+      },
+      "results": "refactor/.cache/vast02-browser-final-results"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 817,
+        "engineering": 14,
+        "baseline": 54,
+        "total": 885
+      },
+      "log": {
+        "file": "refactor/.cache/vast02-ci.log",
+        "sha256": "7849c7f9a1f38fdc23185713fd8a048a8cafb596cc86ca4276a326c01b2db02d"
+      }
+    }
+  ],
+  "limitations": [
+    "External SDK is a controlled recorder, not Google IMA",
+    "Production VAST sources/types/distribution unchanged",
+    "VPN exception has not been used",
+    "Historical defect observations are not candidate acceptance assertions"
+  ],
+  "inputs": [
+    {
+      "file": "package.json",
+      "sha256LF": "1439c59c47faa2ea18ef1fbc041377766706f9bcd1a6fb342106d5abb65195fe"
+    },
+    {
+      "file": "test/helpers/vast-sdk.js",
+      "sha256LF": "877936c0255c4cff3bcd4688f69b1e4bfe58476f9e7ac6a2d87803af673233af"
+    },
+    {
+      "file": "test/helpers/vast.js",
+      "sha256LF": "ea985ca97946645a8b6fc76c9d69ec4fc12f959ab175402cd34e93bc81c14ce9"
+    },
+    {
+      "file": "test/vast.test.js",
+      "sha256LF": "b02c12c0440540f4f13929bbdcb3607621a42fdc6f29debbc912189c3aa025a6"
+    },
+    {
+      "file": "test/browser/vast.spec.js",
+      "sha256LF": "0f849e361faef9e49dbcaec3c0c692f94946cde98654cab329a1c4b1e056aaea"
+    },
+    {
+      "file": "test/browser/server.mjs",
+      "sha256LF": "af513e1e64f875668b6a7cbd060276d85d930e0cc1715577e97907cc26c3b58d"
+    },
+    {
+      "file": "refactor/scripts/vast-core.test.mjs",
+      "sha256LF": "74233f2ba5d87314cd3cb6ae8b3bdf8569faf538bd87ee9422e45f461a21cc4a"
+    },
+    {
+      "file": "refactor/baselines/vast-core.json",
+      "sha256LF": "bb703cf37591211f78719665aed0e0cb2524ec5618dad48e6b8e2dbfef132b8e"
+    },
+    {
+      "file": "refactor/baselines/vast-release.json",
+      "sha256LF": "493e15fa8d3cd1a9215a409dd78db61ecaef5f82f9629dfdc3f6090e7fad8453"
+    }
+  ],
+  "previousRuns": [
+    {
+      "result": "90 passed before adding content source-switch assertions",
+      "log": {
+        "file": "refactor/.cache/vast02-browser-first.log",
+        "sha256": "6cd71f04c25e14a316918fedc5008b1802fc602493f2507529a9bcfb358200ed"
+      },
+      "report": {
+        "file": "refactor/.cache/vast02-browser-first-report.json",
+        "sha256": "e320f1f99cdc2fbfe7c04755fc86d85d2d7aef88116c3b5e5bb5f860ac76789b"
+      },
+      "results": "refactor/.cache/vast02-browser-first-results"
+    },
+    {
+      "result": "test runner import incorrectly autofixed to absent vitest; restored node:test without dependency changes",
+      "log": {
+        "file": "refactor/.cache/vast02-core.log",
+        "sha256": "531007deca9c236348ae77f988cff21f437171260e9de0688b89360d14427d90"
+      }
+    }
+  ]
+}
