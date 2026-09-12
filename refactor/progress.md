@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-01 完成：历史契约与发布证据
+
+冻结11条HTTP观察、12个工作区及8个历史Git输入；恢复3.5.31 CDN主文件并逐字节
+匹配Git，不冒称找回完整npm包。区分旧版delay/固定高度与4.4.0同步事件/比例高度，
+保留公开拼写、导出和事件的26项可重跑契约。复现拖放绑定、重复销毁等既有问题；
+默认语义、资源治理和分发风险保持open，由02–06继续。实际工具demo与外部插件区分。
+完整CI1570项通过，330生产TS；本轮无生产源码/产物变化，无新浏览器/覆盖率结论。
+见[契约](baselines/thumbnail-contract.md)、[验证](baselines/thumbnail-contract-validation.json)
+和[变更](changes/2026-09-13-PKG-TOOL-THUMB-01-contract.md)。下一项为抽帧与失败测试。
+222项：110 done、10 doing、102 todo；单项本地提交，不推送或发布。
+
+
 ## PKG-IFRAME-05 原生缓存与中断导航检查点（doing）
 
 新增独立 `yarn test:iframe-history`：完整Chromium通道与可缓存HTTP页面，避免默认

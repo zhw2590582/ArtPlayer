@@ -19,7 +19,7 @@
 | BASE-TYPE-02 | resolved / 已复现 | chapter 可选运行时参数被声明为必填 | PKG-CHAPTER-02 |
 | BASE-TYPE-03 | resolved / 已复现 | chapter legacy 缺旧模块解析的声明回退 | ENG-04, PKG-CHAPTER-04 |
 | BASE-TYPE-04 | resolved / 已复现 | plugins.add / toggle 的旧声明返回值与运行时不同 | CORE-07, CORE-08, CORE-10, CORE-21 |
-| BASE-DIST-01 | open / 源码/产物事实 | thumbnail tool 分发入口与类型文件缺失 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-04 |
+| BASE-DIST-01 | open / 已复现 | thumbnail tool 分发入口与类型文件缺失 | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-06 |
 | BASE-PERF-01 | resolved / 已复现 | 销毁后的 resize 防抖重新创建 notice timer | CORE-17, CORE-04, CORE-18 |
 | BASE-SOURCE-01 | open / 源码/产物事实 | 工作区 5.4.1 与采集时真实发布 5.4.0 不同 | BASE-08, REL-01 |
 | BASE-SOURCE-02 | open / 源码/产物事实 | registry gitHead 与发布包版本对应不可靠 | ENG-07, REL-01 |
@@ -177,3 +177,6 @@
 | IFRAME-LIFE-01 | open / 已复现 | Iframe timestamp IDs and unowned pending requests/timers lack terminal cleanup | PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-05 |
 | IFRAME-TRUST-01 | open / 已复现 | Iframe executable commit protocol accepts messages without source/origin validation | PKG-IFRAME-03, PKG-IFRAME-05 |
 | IFRAME-DIST-01 | open / 已复现 | Iframe tool name is unavailable at registry observation and old archive includes distinct helper exports | PKG-IFRAME-04, PKG-IFRAME-06 |
+| THUMB-COMPAT-01 | open / 已复现 | Thumbnail recovered 3.5.31 and workspace 4.4.0 have conflicting height and event timing defaults | PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04 |
+| THUMB-LIFE-01 | open / 已复现 | Thumbnail drop binding and repeated destroy fail; pending work and replacement resource ownership need repair | PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-05 |
+| THUMB-PROVENANCE-01 | open / 源码/产物事实 | Thumbnail local emitter attribution and historical distribution completeness remain unverified | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-06 |

@@ -360,16 +360,19 @@
     {
       "id": "BASE-DIST-01",
       "title": "thumbnail tool 分发入口与类型文件缺失",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
-        "PKG-TOOL-THUMB-01",
-        "PKG-TOOL-THUMB-04"
+        "PKG-TOOL-THUMB-04",
+        "PKG-TOOL-THUMB-06"
       ],
       "evidence": [
-        "refactor/baselines/distribution.json"
+        "refactor/baselines/distribution.json",
+        "refactor/baselines/thumbnail-contract.md",
+        "refactor/baselines/thumbnail-release.json",
+        "refactor/scripts/thumbnail-contract.test.mjs"
       ],
-      "compatibleResolution": "核实真实旧 npm 后保留 .esm.js 等历史路径的兼容入口并补声明。",
+      "compatibleResolution": "Recovered 3.5.31 has main and a CSS entry; baseline workspace lacks main and points to missing .esm.js/types. Recoverable CDN main is verified against Git, not an original tarball. Preserve supported paths, decide historical CSS disposition, add real declarations and verify isolated installs in 04/06.",
       "closureCriteria": "隔离打包消费者能加载所有原承诺路径，dist 不作为源码直接手改。"
     },
     {
@@ -3843,6 +3846,59 @@
         "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md",
         "refactor/changes/2026-09-13-PKG-IFRAME-04-types.md",
         "refactor/baselines/iframe-types-validation.json"
+      ]
+    },
+    {
+      "id": "THUMB-COMPAT-01",
+      "title": "Thumbnail recovered 3.5.31 and workspace 4.4.0 have conflicting height and event timing defaults",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-TOOL-THUMB-02",
+        "PKG-TOOL-THUMB-03",
+        "PKG-TOOL-THUMB-04"
+      ],
+      "compatibleResolution": "Freeze both implementations and derive a concrete compatibility policy before changing defaults; no silent claim that identical calls have identical historical semantics.",
+      "closureCriteria": "Explicit documented compatibility decision, old/candidate tests and migration examples covering delay, height, input reset and readiness.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/thumbnail-contract.md",
+        "refactor/baselines/thumbnail-release.json",
+        "refactor/scripts/thumbnail-contract.test.mjs"
+      ]
+    },
+    {
+      "id": "THUMB-LIFE-01",
+      "title": "Thumbnail drop binding and repeated destroy fail; pending work and replacement resource ownership need repair",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-TOOL-THUMB-02",
+        "PKG-TOOL-THUMB-03",
+        "PKG-TOOL-THUMB-05"
+      ],
+      "compatibleResolution": "Drop and duplicate-destroy defects are reproduced; reproduce source-observed extraction/timer/blob/input ownership gaps before fixes, then introduce owned cleanup without changing public shape.",
+      "closureCriteria": "Deterministic old failure/candidate success for replacement, error and destruction plus real media/browser resource validation.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/thumbnail-contract.md",
+        "refactor/baselines/thumbnail-release.json",
+        "refactor/scripts/thumbnail-contract.test.mjs"
+      ]
+    },
+    {
+      "id": "THUMB-PROVENANCE-01",
+      "title": "Thumbnail local emitter attribution and historical distribution completeness remain unverified",
+      "confirmation": "source-observed",
+      "owners": [
+        "PKG-TOOL-THUMB-04",
+        "PKG-TOOL-THUMB-06"
+      ],
+      "compatibleResolution": "Historical release declares tiny-emitter; review local emitter provenance/license before TS migration. Keep recovered individual CDN files distinct from full npm archive evidence.",
+      "closureCriteria": "Reviewed emitter attribution and license ledger plus explicit historical artifact recovery limits and complete candidate tarball evidence.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/thumbnail-contract.md",
+        "refactor/baselines/thumbnail-release.json",
+        "refactor/scripts/thumbnail-contract.test.mjs"
       ]
     }
   ]

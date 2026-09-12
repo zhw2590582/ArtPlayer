@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-TOOL-THUMB-01",
+  "verifiedAt": "2026-09-12T19:16:08.007Z",
+  "startedFrom": "cb6c7677319f22074ae2ec09989022ddf0f8ea87",
+  "runtime": {
+    "node": "v24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32"
+  },
+  "checks": {
+    "contract": {
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0
+    },
+    "focusedLint": {
+      "exitCode": 0
+    },
+    "ci": {
+      "exitCode": 0,
+      "unit": 1365,
+      "engineering": 14,
+      "baseline": 191,
+      "total": 1570,
+      "productionTs": 330
+    }
+  },
+  "inputs": [
+    {
+      "file": "refactor/baselines/thumbnail-release.json",
+      "sha256": "ad02af2abdb3185598b76a0c617eb5a5ffc89f89a7ef6f01ba8f3db0a87012be",
+      "algorithm": "sha256-lf"
+    },
+    {
+      "file": "refactor/baselines/thumbnail-contract.md",
+      "sha256": "7048d504335f4e39c39d833bae36e7a3c6fccc6ad29d475781ca84158ff23278",
+      "algorithm": "sha256-lf"
+    },
+    {
+      "file": "refactor/scripts/thumbnail-contract.mjs",
+      "sha256": "14ab6157f14bac00ecc4974f67e7afbe98001e7f6490e94da7839bf4556837fb",
+      "algorithm": "sha256-lf"
+    },
+    {
+      "file": "refactor/scripts/thumbnail-contract.test.mjs",
+      "sha256": "77786d54a20a485203812be9145c13f1a9cbca62d3180993e6cc6ee296cb7437",
+      "algorithm": "sha256-lf"
+    },
+    {
+      "file": "test/helpers/thumbnail.js",
+      "sha256": "18d3ab1a73867399ec32e99ba2c60a0427289fe9773e8cee6284e1d699520ed8",
+      "algorithm": "sha256-lf"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/thumbnail01-contract.log",
+      "sha256": "c4b44783bffb1a997614d0ff5677d253a536302a1ef05c4d9fd975fd8effd75b",
+      "algorithm": "sha256-lf"
+    },
+    {
+      "file": "refactor/.cache/thumbnail01-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "algorithm": "sha256-lf"
+    },
+    {
+      "file": "refactor/.cache/thumbnail01-ci.log",
+      "sha256": "fb0c351f0697efc3059f86f5efb7deb4a2ad25810e4733fc1a3054368c61d76c",
+      "algorithm": "sha256-lf"
+    }
+  ],
+  "limitations": [
+    "Controlled DOM/media only; no new browser or coverage run.",
+    "Original npm archive unavailable; recovered CDN main verified byte-for-byte against frozen Git.",
+    "No production source/build/manifest/type changes; default compatibility decision and resource fixes remain open.",
+    "Existing generated core editor lint warning and Yarn url.parse deprecation remain; no new focused lint warnings."
+  ]
+}

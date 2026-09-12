@@ -3742,11 +3742,16 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "构造/defaults/事件/方法/历史拼写、.esm.js 入口和缺失 types",
-      "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；核实 BASE-DIST-01 的 .esm.js 旧入口、缺失声明及无 main 的历史发布事实",
-      "evidence": []
+      "acceptance": "源码/声明/README/demo/可恢复发布内容差异已登记；公开形状和版本范围冻结；区分旧 npm 的 main/CSS 与当前工作区无 main、.esm.js/类型缺失，不把工作区状态冒称旧 npm 发布事实",
+      "evidence": [
+        "baselines/thumbnail-release.json",
+        "baselines/thumbnail-contract.md",
+        "changes/2026-09-13-PKG-TOOL-THUMB-01-contract.md",
+        "baselines/thumbnail-contract-validation.json"
+      ]
     },
     {
       "id": "PKG-TOOL-THUMB-02",

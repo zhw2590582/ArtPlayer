@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 103 / doing 10 / blocked 0 / done 109 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 102 / doing 10 / blocked 0 / done 110 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -355,7 +355,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-TOOL-THUMB-01 | artplayer-tool-thumbnail<br>核对包契约与历史用法 | BASE-05 | 构造/defaults/事件/方法/历史拼写、.esm.js 入口和缺失 types | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；核实 BASE-DIST-01 的 .esm.js 旧入口、缺失声明及无 main 的历史发布事实 | H | todo |
+| PKG-TOOL-THUMB-01 | artplayer-tool-thumbnail<br>核对包契约与历史用法 | BASE-05 | 构造/defaults/事件/方法/历史拼写、.esm.js 入口和缺失 types | 源码/声明/README/demo/可恢复发布内容差异已登记；公开形状和版本范围冻结；区分旧 npm 的 main/CSS 与当前工作区无 main、.esm.js/类型缺失，不把工作区状态冒称旧 npm 发布事实 | H | done |
 | PKG-TOOL-THUMB-02 | artplayer-tool-thumbnail<br>建立特有行为与错误测试 | PKG-TOOL-THUMB-01, ENG-03, ENG-05 | 文件输入/拖放、抽帧网格、begin/end、进度/失败/重复任务 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
 | PKG-TOOL-THUMB-03 | artplayer-tool-thumbnail<br>整理内部职责与资源 | PKG-TOOL-THUMB-02, CORE-01 | 输入、抽帧队列、网格导出、URL/监听清理分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-TOOL-THUMB-04 | artplayer-tool-thumbnail<br>迁移自有源码和公开类型 | PKG-TOOL-THUMB-03, ENG-04, ENG-06, CORE-07 | 补齐真实 API 声明，自有 emitter/utils TS 化 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；为 BASE-DIST-01 提供兼容入口/声明及消费者验证 | H | todo |
@@ -535,4 +535,5 @@
 - PKG-IFRAME-03: [记录](changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md) [记录](baselines/iframe-requests-checkpoint.json) [记录](changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md) [记录](baselines/iframe-boundaries-checkpoint.json) [记录](iframe-message-boundary.md) [记录](changes/2026-09-13-PKG-IFRAME-03-navigation.md) [记录](baselines/iframe-navigation-validation.json) [记录](iframe-document-protocol.md)
 - PKG-IFRAME-04: [记录](changes/2026-09-13-PKG-IFRAME-04-types.md) [记录](baselines/iframe-types-validation.json)
 - PKG-IFRAME-05: [记录](changes/2026-09-13-PKG-IFRAME-05-integration.md) [记录](baselines/iframe-integration-validation.json) [记录](changes/2026-09-13-PKG-IFRAME-05-history.md) [记录](baselines/iframe-history-validation.json)
+- PKG-TOOL-THUMB-01: [记录](baselines/thumbnail-release.json) [记录](baselines/thumbnail-contract.md) [记录](changes/2026-09-13-PKG-TOOL-THUMB-01-contract.md) [记录](baselines/thumbnail-contract-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

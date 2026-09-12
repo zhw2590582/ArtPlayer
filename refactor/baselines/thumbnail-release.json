@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-TOOL-THUMB-01",
+  "capturedAt": "2026-09-12T19:02:10.350Z",
+  "sourceCommit": "40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f",
+  "observations": [
+    {
+      "url": "https://registry.npmjs.org/artplayer-tool-thumbnail",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "1a5bbf4d14852e0dba2ed51351818bddf742a1278b46ef60366a6a544d443bcf",
+      "bytes": 2552,
+      "text": "{\"_id\":\"artplayer-tool-thumbnail\",\"name\":\"artplayer-tool-thumbnail\",\"time\":{\"created\":\"2018-12-17T07:19:51.643Z\",\"1.0.6\":\"2018-12-17T07:19:51.763Z\",\"modified\":\"2024-05-26T01:46:10.518Z\",\"1.0.7\":\"2019-04-15T12:31:02.044Z\",\"1.0.8\":\"2019-04-15T12:37:58.551Z\",\"1.0.9\":\"2019-04-16T02:15:59.423Z\",\"3.1.5\":\"2019-04-16T03:47:41.590Z\",\"3.1.6\":\"2019-04-19T09:01:49.496Z\",\"3.1.7\":\"2019-04-22T22:56:08.033Z\",\"3.1.8\":\"2019-05-03T14:22:48.767Z\",\"3.1.9\":\"2019-05-12T22:09:41.935Z\",\"3.1.10\":\"2019-07-19T09:55:45.112Z\",\"3.1.12\":\"2019-07-19T10:25:47.480Z\",\"3.1.13\":\"2019-08-15T00:37:21.970Z\",\"3.1.14\":\"2019-08-21T03:16:24.138Z\",\"3.1.15\":\"2019-09-15T08:17:18.441Z\",\"3.1.16\":\"2019-09-25T04:44:37.557Z\",\"3.1.17\":\"2019-11-10T07:53:32.969Z\",\"3.1.18\":\"2019-11-11T01:22:47.207Z\",\"3.1.19\":\"2019-11-20T01:50:06.770Z\",\"3.2.3\":\"2019-11-22T13:38:56.548Z\",\"3.2.4\":\"2019-11-22T13:42:09.267Z\",\"3.2.5\":\"2019-11-28T03:55:29.655Z\",\"3.2.6\":\"2019-12-02T00:40:50.888Z\",\"3.3.1\":\"2019-12-09T09:38:40.061Z\",\"3.3.2\":\"2019-12-11T09:11:27.149Z\",\"3.3.3\":\"2020-02-24T03:20:49.402Z\",\"3.4.1\":\"2020-02-27T09:05:21.228Z\",\"3.4.2\":\"2020-02-28T01:17:51.271Z\",\"3.5.1\":\"2020-03-21T23:37:20.360Z\",\"3.5.2\":\"2020-04-14T05:00:02.544Z\",\"3.5.4\":\"2020-04-27T03:45:46.217Z\",\"3.5.5\":\"2020-05-20T09:16:01.958Z\",\"3.5.8\":\"2020-05-21T02:21:53.746Z\",\"3.5.9\":\"2020-05-29T14:06:45.737Z\",\"3.5.10\":\"2020-08-27T08:28:59.925Z\",\"3.5.11\":\"2020-09-02T14:10:51.585Z\",\"3.5.12\":\"2020-09-04T00:57:36.451Z\",\"3.5.13\":\"2020-09-04T01:05:29.301Z\",\"3.5.14\":\"2020-09-04T14:41:02.505Z\",\"3.5.15\":\"2020-09-23T07:02:37.076Z\",\"3.5.17\":\"2020-10-18T06:50:21.989Z\",\"3.5.18\":\"2020-11-07T14:19:34.420Z\",\"3.5.19\":\"2020-11-09T13:32:20.716Z\",\"3.5.20\":\"2020-11-21T00:43:09.744Z\",\"3.5.21\":\"2020-11-22T13:22:03.785Z\",\"3.5.22\":\"2020-11-23T12:28:59.918Z\",\"3.5.23\":\"2020-11-24T00:03:18.563Z\",\"3.5.24\":\"2020-11-24T06:11:25.292Z\",\"3.5.26\":\"2020-12-01T04:01:24.276Z\",\"3.5.27\":\"2020-12-17T07:35:02.960Z\",\"3.5.28\":\"2021-05-06T05:10:54.117Z\",\"3.5.29\":\"2021-05-11T02:37:37.309Z\",\"3.5.30\":\"2021-05-20T01:39:24.688Z\",\"3.5.31\":\"2021-11-01T01:38:03.589Z\",\"unpublished\":{\"time\":\"2024-05-26T01:46:10.518Z\",\"versions\":[\"1.0.6\",\"1.0.7\",\"1.0.8\",\"1.0.9\",\"3.1.10\",\"3.1.12\",\"3.1.13\",\"3.1.14\",\"3.1.15\",\"3.1.16\",\"3.1.17\",\"3.1.18\",\"3.1.19\",\"3.1.5\",\"3.1.6\",\"3.1.7\",\"3.1.8\",\"3.1.9\",\"3.2.3\",\"3.2.4\",\"3.2.5\",\"3.2.6\",\"3.3.1\",\"3.3.2\",\"3.3.3\",\"3.4.1\",\"3.4.2\",\"3.5.1\",\"3.5.10\",\"3.5.11\",\"3.5.12\",\"3.5.13\",\"3.5.14\",\"3.5.15\",\"3.5.17\",\"3.5.18\",\"3.5.19\",\"3.5.2\",\"3.5.20\",\"3.5.21\",\"3.5.22\",\"3.5.23\",\"3.5.24\",\"3.5.26\",\"3.5.27\",\"3.5.28\",\"3.5.29\",\"3.5.30\",\"3.5.31\",\"3.5.4\",\"3.5.5\",\"3.5.8\",\"3.5.9\"]}}}"
+    },
+    {
+      "url": "https://registry.npmjs.org/artplayer-tool-thumbnail/4.4.0",
+      "status": 404,
+      "contentType": "application/json",
+      "sha256": "a29f419cca9cebf83537c6e6f756310c63d1452c02a1e49b1a6869b33ef0f982",
+      "bytes": 26,
+      "text": "\"version not found: 4.4.0\""
+    },
+    {
+      "url": "https://registry.npmjs.org/artplayer-tool-thumbnail/3.5.31",
+      "status": 404,
+      "contentType": "application/json",
+      "sha256": "7b65582bd77080c46c5a306ef6108709b5b8919a678498b2d9dda8c6fcf9e49e",
+      "bytes": 27,
+      "text": "\"version not found: 3.5.31\""
+    },
+    {
+      "url": "https://registry.npmjs.org/artplayer-tool-thumbnail/-/artplayer-tool-thumbnail-3.5.31.tgz",
+      "status": 404,
+      "contentType": "application/json",
+      "sha256": "c8d3eae160a892e32837db3dcae515e843e5383fef52b8141940c8bcf8b6d59f",
+      "bytes": 21,
+      "text": "{\"error\":\"Not found\"}"
+    },
+    {
+      "url": "https://registry.npmjs.org/artplayer-tool-thumbnail/-/artplayer-tool-thumbnail-4.4.0.tgz",
+      "status": 404,
+      "contentType": "application/json",
+      "sha256": "c8d3eae160a892e32837db3dcae515e843e5383fef52b8141940c8bcf8b6d59f",
+      "bytes": 21,
+      "text": "{\"error\":\"Not found\"}"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/artplayer-tool-thumbnail@3.5.31/package.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "f9607cb3c5d6edfbfc417b71abdf88148da1ed8ed5d23b03017ba851b2b6c9de",
+      "bytes": 799,
+      "text": "{\n  \"name\": \"artplayer-tool-thumbnail\",\n  \"version\": \"3.5.31\",\n  \"expose\": \"ArtplayerToolThumbnail\",\n  \"description\": \"thumbnail tool for ArtPlayer\",\n  \"main\": \"dist/artplayer-tool-thumbnail.js\",\n  \"style\": \"dist/artplayer-tool-thumbnail.css\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/zhw2590582/ArtPlayer.git\"\n  },\n  \"keywords\": [\n    \"video\",\n    \"player\"\n  ],\n  \"author\": \"Harvey Zack <laozhaochaguan@gmail.com>\",\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/zhw2590582/ArtPlayer/issues\"\n  },\n  \"homepage\": \"https://github.com/zhw2590582/ArtPlayer#readme\",\n  \"dependencies\": {\n    \"tiny-emitter\": \"^2.1.0\"\n  },\n  \"gitHead\": \"af1a116a31b088efdd77afa81c4b6565d12bd162\"\n}\n"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/artplayer-tool-thumbnail@3.5.31/dist/artplayer-tool-thumbnail.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+      "bytes": 8716,
+      "identicalGit": {
+        "commit": "af1a116a31b088efdd77afa81c4b6565d12bd162",
+        "file": "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js"
+      }
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/artplayer-tool-thumbnail@3.5.31/dist/artplayer-tool-thumbnail.css",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "sha256": "525a0f43f5b5fa874ba9306afade56063dcf874a59a2769af9efbc9cbf7a32b0",
+      "bytes": 58,
+      "text": "Failed to fetch version info for artplayer-tool-thumbnail."
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/artplayer-tool-thumbnail@3.5.31/src/index.js",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "sha256": "525a0f43f5b5fa874ba9306afade56063dcf874a59a2769af9efbc9cbf7a32b0",
+      "bytes": 58,
+      "text": "Failed to fetch version info for artplayer-tool-thumbnail."
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/artplayer-tool-thumbnail@4.4.0/package.json",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "sha256": "525a0f43f5b5fa874ba9306afade56063dcf874a59a2769af9efbc9cbf7a32b0",
+      "bytes": 58,
+      "text": "Failed to fetch version info for artplayer-tool-thumbnail."
+    },
+    {
+      "url": "https://data.jsdelivr.com/v1/package/npm/artplayer-tool-thumbnail@3.5.31",
+      "status": 404,
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "ca673be59ba098d94b6734968b8e9b6f8c57c3a1b0f03d2a80e97ec0cc599255",
+      "bytes": 176,
+      "text": "{\n\t\"status\": 404,\n\t\"message\": \"Couldn't find version 3.5.31 for artplayer-tool-thumbnail. Make sure you use a specific version number, and not a version range or an npm tag.\"\n}"
+    }
+  ],
+  "recovered": {
+    "name": "artplayer-tool-thumbnail",
+    "version": "3.5.31",
+    "manifest": {
+      "name": "artplayer-tool-thumbnail",
+      "version": "3.5.31",
+      "expose": "ArtplayerToolThumbnail",
+      "description": "thumbnail tool for ArtPlayer",
+      "main": "dist/artplayer-tool-thumbnail.js",
+      "style": "dist/artplayer-tool-thumbnail.css",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "keywords": [
+        "video",
+        "player"
+      ],
+      "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
+      "dependencies": {
+        "tiny-emitter": "^2.1.0"
+      },
+      "gitHead": "af1a116a31b088efdd77afa81c4b6565d12bd162"
+    },
+    "historicalCommit": "af1a116a31b088efdd77afa81c4b6565d12bd162",
+    "originalTarballAvailable": false,
+    "completeArchiveAvailable": false,
+    "scope": "CDN manifest and main runtime recovered; runtime is byte-identical to the matching Git build. Registry manifests/tarballs are unavailable. Missing CSS is an observed unavailable target, not proof it never existed."
+  },
+  "source": {
+    "packages/artplayer-tool-thumbnail/src/index.js": "67bc1b6a58faf11b14c8d410ae829edd64b84dc9e7b4b388b2e2dd60788bcbe4",
+    "packages/artplayer-tool-thumbnail/src/emitter.js": "5aa71e4317037c06b94e259beed2e964bbbb7117edbe78d29cc941c4916fd2ff",
+    "packages/artplayer-tool-thumbnail/src/utils.js": "dc19fe2f338df7058084eb2301d37db59ec4c914a85ba819a856d270c1267105",
+    "packages/artplayer-tool-thumbnail/package.json": "9f4f9c6628ee48068f380bc52f4058c1f6aac31c20de6ed069a2c96ba635e23f",
+    "packages/artplayer-tool-thumbnail/README.md": "91477fe542a44713089e384308ae6f311f887cfe63aafe1483b778a37acfa458",
+    "packages/artplayer-tool-thumbnail/.npmignore": "6b340a1f9a1f36dbd84cc1fff61de20f4ab2041d767a996da9f9d8de1a582ae8",
+    "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+    "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.legacy.js": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+    "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.mjs": "4d46df8cccdc92d18efc6f12abedf85e8881737023f4ead28697c8b1e85eead1",
+    "docs/assets/example/tool.thumbnail.js": "ef830a5f499e14c09d51aa31aaa0a194ea1f910b27f14ef97c0ca8f67d529a54",
+    "docs/assets/example/thumbnail.js": "e166845905f131dea0979eb77471f5531a59b93ab2dc28fef1b6791adb42fc30",
+    "packages/artplayer/package.json": "06cbc0de3f944dfc215ea1c4e7c3376e6352ee5d6f1f459828f45025c62f57f0"
+  },
+  "historicalSource": {
+    "packages/artplayer-tool-thumbnail/src/index.js": "cfd4487f508378fd90f5252c9ae92954b93d04e263ce0927146ff9c3160700e0",
+    "packages/artplayer-tool-thumbnail/src/utils.js": "c70c6752565aff6aa74232dfcda706b98976d466bad799945b6501579cd7c05c",
+    "packages/artplayer-tool-thumbnail/package.json": "a06b12475ede33cf24af18896e76af52908fab2e5fe3b4c9395164cbe9a22573",
+    "packages/artplayer-tool-thumbnail/README.md": "d56adcd606f98b8a9be526954d9874831d89e5ae0e1d8dc070a8afe13a3f0547",
+    "packages/artplayer-tool-thumbnail/.npmignore": "6b340a1f9a1f36dbd84cc1fff61de20f4ab2041d767a996da9f9d8de1a582ae8",
+    "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+    "docs/assets/example/thumbnail.js": "ad807af57b1c006acf9cb5476f934aed0a77487c82be050b908d3d7743bac8b6",
+    "packages/artplayer/package.json": "8b67bd5fcd17a5e481dd477cc0e2b8327160a7b5699dab7b22c884c109a494eb"
+  },
+  "coreAssociations": {
+    "historical": {
+      "commit": "af1a116a31b088efdd77afa81c4b6565d12bd162",
+      "file": "packages/artplayer/package.json",
+      "version": "3.5.31"
+    },
+    "workspace": {
+      "commit": "40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f",
+      "file": "packages/artplayer/package.json",
+      "version": "5.4.1"
+    }
+  }
+}
