@@ -5,7 +5,7 @@
 import {
   CanvasSink,
 } from 'mediabunny'
-import { isHlsSource } from './input.js'
+import { preflightRange } from './preflight'
 
 export default class VideoEngine {
   constructor({
@@ -51,23 +51,8 @@ export default class VideoEngine {
     this.isFetching = false
   }
 
-  async preflight(url) {
-    if (!this.preflightRange || typeof url !== 'string' || isHlsSource(url))
-      return true
-
-    try {
-      const res = await fetch(url, { method: 'HEAD' })
-      const acceptRanges = res.headers.get('accept-ranges')
-      if (!acceptRanges || acceptRanges === 'none') {
-        this.events.emit('error', new Event('RangeNotSupported'))
-        return false
-      }
-      return true
-    }
-    catch (e) {
-      console.warn('Preflight check failed:', e)
-      return true
-    }
+  async preflight(url, signal, isCurrent) {
+    return preflightRange(url, this.preflightRange, this.events, signal, isCurrent)
   }
 
   drawPoster() {

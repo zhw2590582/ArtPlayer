@@ -1,0 +1,1277 @@
+{
+  "task": "PKG-MB-03",
+  "status": "done",
+  "parentCommit": "03451c029b8c10ca3e56fe54475b9031abe7e91c",
+  "sourceSha256LF": {
+    "packages/artplayer-proxy-mediabunny/src/AudioEngine.js": "910d6831372e4895d55dec78010f281a199bc88f99735630a5a3b621f192ac35",
+    "packages/artplayer-proxy-mediabunny/src/EventTarget.js": "c1854510af5a37301b4bd3b1fbcc28f7e0f105f50cb67324c5c05a76f2d054fb",
+    "packages/artplayer-proxy-mediabunny/src/hls-state.ts": "ff9ffd742f9763349df1f50eac6b6bd488a80d05aaab8ca198f387f0d17d5e25",
+    "packages/artplayer-proxy-mediabunny/src/index.js": "4e1be8937908ff6e6ef8a4e863e22b4468312cf31d66ac299322e475757773bb",
+    "packages/artplayer-proxy-mediabunny/src/input.ts": "d25b1c4ee4aee358c86fd8c554b8b36bfc23fdbd3c27fa21d2cd7e812c98bf9c",
+    "packages/artplayer-proxy-mediabunny/src/load-session.ts": "560fbd5935fc787bde5f413fcaa41b8829506179c5328ce3cb51e734bbba8cec",
+    "packages/artplayer-proxy-mediabunny/src/m3u8.js": "4639f09e0c743dc2b24078f48ca1e58eaaedaa3f5e6b863583cbd4bc4a7d3142",
+    "packages/artplayer-proxy-mediabunny/src/media.ts": "e745cd8e750e05d0fcfa4bc588f7eb5a5576f3be20f5e67b65b704f57d539ae9",
+    "packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.js": "5ce3bc85572121ec9068fbc051ac4845d3a3991e670e10dafcaede1c1609f1fb",
+    "packages/artplayer-proxy-mediabunny/src/preflight.ts": "d296234312f23b97a1e0a054f1d7dbbc988d5240c5fd5089c36df1677c7b7348",
+    "packages/artplayer-proxy-mediabunny/src/tracks.ts": "6da68530c1fc7105ab17ed742d87d93e84447e822e84386591f9c3e6d0bec733",
+    "packages/artplayer-proxy-mediabunny/src/VideoEngine.js": "5ac862b0fd9c196dc6656f8908a214c1b3a0a53a7e85ff845d9068888831986b",
+    "packages/artplayer-proxy-mediabunny/src/VideoShim.js": "f01c954e8a98fb70138dded78b99eb2765f5cd1e8a98dafbb35ffbf8f7741dbb",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.legacy.js": "3fa2deff62a9269e1a2fd833590b2b23c9899b59af5474009162504c9c76a070",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.mjs": "08c72004a797b1601e949a7f8902d06d8b57cac92ea757cc6c370817c62fbcb5",
+    "packages/artplayer-proxy-mediabunny/tsconfig.json": "f287a0e014faa10c0da2aabd0341b4d74359be4135f4d07480b4f7a3108c8128",
+    "packages/artplayer-proxy-mediabunny/ARCHITECTURE.md": "5b8d97bcd08dba5666bed1fe6eb54d871c954aa52a3a7659446a8337566db710",
+    "packages/artplayer-proxy-mediabunny/types/artplayer-proxy-mediabunny.d.ts": "af2083224d0760752d83eb2ac86b1dea5586455b81d47e4ba70f9f6a874a75d8",
+    "package.json": "495a03ea54bc05746f94ed2138118036b263a41459acd3e7beb8dc522ba47a4e",
+    "yarn.lock": "6dfb6c5b0154bcd3adc279e12c4393db66a6ec52274002adf2d5ab93caa05d4b",
+    "test/mediabunny-load.test.js": "fee16a64293a7ec1d820e0047f9447df86380c4f1e07923f5657d49fcedc5e3f",
+    "test/mediabunny-input.test.js": "2d2b6a22ce009c2bf89534d07359563e4d761c60c457e9668488922c108102e0",
+    "test/helpers/mediabunny.js": "1bc506fee52a199e0b50363e68af0639484b1f8c1164fe7998089f6ef0b09a7e",
+    "test/browser/mediabunny-inputs.spec.js": "3f42d8fa7ea7a170495ca25af34ce99a789016d280ebcebdb3883fc91f426a73",
+    "test/browser/mediabunny.spec.js": "d250f75509b0eb9b8a5e048cf34669415cf163e22dbaf52da0760bece4f71cf5",
+    "test/browser/mediabunny-load.spec.js": "4822b8561a193c307b5b9724be6b80f6a62813909fa6c3fefece25f8c0a144cd",
+    "refactor/third-party.json": "54ecc99c3edb59e872b3118ecbffe09f05ae7634d0a39cc63f85dd07c3de6540",
+    "packages/artplayer-proxy-mediabunny/README.md": "90e15d4f66488de3bc386f8aa000d6e0c31ee78afdcce593ef830525ef5cd029"
+  },
+  "modules": {
+    "strictTypeScript": 6,
+    "remainingJavaScript": 7
+  },
+  "node": {
+    "historical": 24,
+    "candidateInput": 12,
+    "candidateLoad": 20,
+    "total": 56,
+    "sameLoadAssertionsOnFrozenMain": {
+      "passed": 6,
+      "failed": 14
+    },
+    "main": 20,
+    "legacy": 20
+  },
+  "browser": {
+    "total": 72,
+    "candidate": 30,
+    "historical": 42,
+    "groups": {
+      "historical": {
+        "native-input-playback-and-seek": 16,
+        "historical-trackless-readiness-control": 4,
+        "historical-stream-lock-control": 3,
+        "historical-unsupported-hls-control": 3,
+        "unsupported-capability-control": 10,
+        "native-mp4-playback-observed": 4,
+        "verified-unsupported-capability-control": 2
+      },
+      "candidate": {
+        "native-input-playback-and-seek": 10,
+        "candidate-trackless-readiness-gap": 2,
+        "unsupported-capability-control": 6,
+        "native-pending-stream-cancellation": 9,
+        "native-mp4-playback-observed": 2,
+        "verified-unsupported-capability-control": 1
+      }
+    },
+    "records": [
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "stream",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": true
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "hls",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "trackless",
+        "outcome": "historical-trackless-readiness-control",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "stream",
+        "outcome": "historical-stream-lock-control",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "hls",
+        "outcome": "historical-unsupported-hls-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "trackless",
+        "outcome": "historical-trackless-readiness-control",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "stream",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": true
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "hls",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "trackless",
+        "outcome": "candidate-trackless-readiness-gap",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "stream",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": true
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "hls",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "trackless",
+        "outcome": "historical-trackless-readiness-control",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "stream",
+        "outcome": "historical-stream-lock-control",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "hls",
+        "outcome": "historical-unsupported-hls-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "trackless",
+        "outcome": "historical-trackless-readiness-control",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "stream",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": true
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "hls",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "trackless",
+        "outcome": "candidate-trackless-readiness-gap",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "webm",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "blob",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "stream",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": true
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "audio",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "hls",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "input": "trackless",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "webm",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "blob",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "stream",
+        "outcome": "historical-stream-lock-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "audio",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "hls",
+        "outcome": "historical-unsupported-hls-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "input": "trackless",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "webm",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "blob",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "stream",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": true
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "audio",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "hls",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "input": "trackless",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "ending": "destroy",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "state": {
+          "error": null,
+          "readyState": 0,
+          "events": [
+            "video:waiting",
+            "video:loadstart",
+            "destroy"
+          ],
+          "input": true
+        },
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "ending": "source",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old",
+          "new"
+        ],
+        "state": {
+          "error": null,
+          "readyState": 0,
+          "events": [
+            "video:waiting",
+            "video:loadstart",
+            "video:waiting",
+            "video:loadstart"
+          ],
+          "input": true
+        },
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "ending": "timeout",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "state": {
+          "error": {
+            "code": 4,
+            "message": "Load timeout"
+          },
+          "readyState": 0,
+          "events": [
+            "video:waiting",
+            "video:loadstart",
+            "video:error"
+          ],
+          "input": true
+        },
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "ending": "destroy",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "state": {
+          "error": null,
+          "readyState": 0,
+          "events": [
+            "video:waiting",
+            "video:loadstart",
+            "destroy"
+          ],
+          "input": true
+        },
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "ending": "source",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old",
+          "new"
+        ],
+        "state": {
+          "error": null,
+          "readyState": 0,
+          "events": [
+            "video:waiting",
+            "video:loadstart",
+            "video:waiting",
+            "video:loadstart"
+          ],
+          "input": true
+        },
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "ending": "timeout",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "state": {
+          "error": {
+            "code": 4,
+            "message": "Load timeout"
+          },
+          "readyState": 0,
+          "events": [
+            "video:waiting",
+            "video:loadstart",
+            "video:error"
+          ],
+          "input": true
+        },
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "ending": "destroy",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "state": {
+          "error": null,
+          "readyState": 0,
+          "events": [
+            "video:waiting",
+            "video:loadstart",
+            "destroy"
+          ],
+          "input": true
+        },
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "ending": "source",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old",
+          "new"
+        ],
+        "state": {
+          "error": null,
+          "readyState": 0,
+          "events": [
+            "video:waiting",
+            "video:loadstart",
+            "video:waiting",
+            "video:loadstart"
+          ],
+          "input": true
+        },
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "ending": "timeout",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "state": {
+          "error": {
+            "code": 4,
+            "message": "Load timeout"
+          },
+          "readyState": 0,
+          "events": [
+            "video:waiting",
+            "video:loadstart",
+            "video:error"
+          ],
+          "input": true
+        },
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "outcome": "verified-unsupported-capability-control",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "outcome": "verified-unsupported-capability-control",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b",
+        "outcome": "verified-unsupported-capability-control",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      }
+    ],
+    "report": "refactor/.cache/mb03-built-results/report.json",
+    "reportSha256": "f069c4f171e738e922b8b0b5a3f2376525f8782b71781bfac9cbbd89fed3ffc4",
+    "results": "refactor/.cache/mb03-built-results/results"
+  },
+  "dependency": {
+    "runtime": "mediabunny@1.56.1 unchanged",
+    "declarationResolution": "@types/dom-webcodecs@0.1.19",
+    "minimumInternalTypeScript": "5.8",
+    "reason": "Replace incompatible 0.1.13 supplement for TypeScript5.9 DOM; add ESNext.Disposable lib for checked SDK declarations",
+    "publicTypesChanged": false
+  },
+  "checks": [
+    {
+      "command": "yarn test:mediabunny",
+      "result": "pass",
+      "tests": 56,
+      "log": "refactor/.cache/mb03-tests-final.log"
+    },
+    {
+      "command": "ARTPLAYER_MB_BASELINE=1 node --test test/mediabunny-load.test.js",
+      "result": "expected historical failures",
+      "pass": 6,
+      "fail": 14,
+      "log": "refactor/.cache/mb03-frozen-expanded.log"
+    },
+    {
+      "command": "package strict typecheck and focused eslint --no-fix",
+      "result": "pass",
+      "strictProductionModules": 6
+    },
+    {
+      "command": "yarn install --frozen-lockfile --ignore-scripts --non-interactive",
+      "result": "pass; already up-to-date",
+      "log": "refactor/.cache/mb03-frozen-install.log"
+    },
+    {
+      "command": "yarn build artplayer-proxy-mediabunny",
+      "result": "pass",
+      "formats": [
+        "main",
+        "legacy",
+        "esm"
+      ],
+      "log": "refactor/.cache/mb03-build.log"
+    },
+    {
+      "command": "built main/legacy load regressions and main/legacy/ESM export checks",
+      "result": "pass",
+      "main": 20,
+      "legacy": 20,
+      "scope": "Local artifacts, not installed package consumers"
+    },
+    {
+      "command": "yarn test:browser test/browser/mediabunny-inputs.spec.js test/browser/mediabunny.spec.js test/browser/mediabunny-load.spec.js with built main",
+      "result": "pass",
+      "tests": 72,
+      "candidate": 30,
+      "historical": 42,
+      "log": "refactor/.cache/mb03-browser-built.log"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1062,
+        "engineering": 14,
+        "baseline": 141,
+        "mainTotal": 1217,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 296,
+      "log": "refactor/.cache/mb03-ci-final.log"
+    }
+  ],
+  "limitations": [
+    "Partial package migration: seven JavaScript modules remain.",
+    "Two candidate trackless readiness cases expose MB-READY-01, not release acceptance.",
+    "Seven Windows WebKit candidate capability controls are not successful playback.",
+    "Stream cancellation occurs before media bytes; pending decoder frames/audio callbacks remain MB-04/05/06.",
+    "Long-run AV sync, native combinations, demo/installed package/license and release reviews remain open."
+  ],
+  "failedAttempts": [
+    {
+      "log": "refactor/.cache/mb03-ci.log",
+      "resolution": "Updated stale input.js evidence in third-party integration inventory; kept validation enabled and reran its tests and full CI."
+    }
+  ]
+}

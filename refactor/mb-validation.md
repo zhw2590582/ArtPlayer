@@ -25,6 +25,14 @@ play/load/seek转发测试刻意截获engine方法；不得宣传为真实播放
 
 ## 后续顺序
 
+MB-03实施将input分离为六个strict TS模块，接入加载session、Range取消和SDK Input释放。
+实际文件地图见包内ARCHITECTURE.md，过程见[输入迁移](changes/2026-09-12-PKG-MB-03-input.md)。
+`yarn test:mediabunny`现在包括24历史、20候选加载及12输入/轨道检查；20加载断言可通过
+`ARTPLAYER_MB_BASELINE=1`重跑冻结main，正常控制6通过、缺陷回归14失败。
+浏览器默认包含两个发布版与候选，并增加mediabunny-load.spec.js的三种真实Stream取消；
+`ARTPLAYER_MB_ARTIFACT`指定构建的UMD文件，`ARTPLAYER_MB_BROWSER_CANDIDATE=1`可仅跑候选。
+每轮须读取报告确认具体数量和结果；配置了用例不等于该轮已运行。
+
 1. MB-02的输入、seek、HLS轨道、无轨道和失败样本见行为基线。42项浏览器检查须区分
    20次实际播放、12次能力对照、6次历史输入失败及4次无轨道就绪行为；24项生命周期测试含18个历史缺陷。
    后续修改须复跑对应正常和负例，不把全部负例变为候选豁免；并发选轨、晚帧和音频回调的完整修复分别在04/05/06/07。

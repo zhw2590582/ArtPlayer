@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "ESNext.Disposable"]
+  },
+  "include": ["src/**/*.ts", "types/**/*.d.ts"]
+}

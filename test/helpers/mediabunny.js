@@ -1,6 +1,24 @@
+import fs from 'node:fs'
+import process from 'node:process'
 import vm from 'node:vm'
 import { verifyMbContract } from '../../refactor/scripts/mb-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
+import { compilePackage } from './load.js'
+
+export async function mbCandidate() {
+  if (process.env.ARTPLAYER_MB_BASELINE === '1')
+    return (await mbHistorical()).find(item => item.name === 'frozen-workspace')
+  if (process.env.ARTPLAYER_MB_ARTIFACT)
+    return { name: 'candidate-artifact', code: fs.readFileSync(process.env.ARTPLAYER_MB_ARTIFACT, 'utf8') }
+  return { name: 'candidate-source', code: await compilePackage('artplayer-proxy-mediabunny', 'umd') }
+}
+
+export async function mbBrowserImplementations() {
+  const candidate = await mbCandidate()
+  return process.env.ARTPLAYER_MB_BROWSER_CANDIDATE === '1'
+    ? [candidate]
+    : [...(await mbHistorical()).filter(item => item.name.startsWith('published')), candidate]
+}
 
 export async function mbHistorical() {
   const { baseline, archives, sources } = await verifyMbContract()
@@ -63,6 +81,8 @@ export function mbEnvironment({ code }, option = {}) {
     Blob,
     Event,
     URL,
+    AbortController,
+    queueMicrotask,
     console,
     performance,
     setTimeout: option.setTimeout || setTimeout,

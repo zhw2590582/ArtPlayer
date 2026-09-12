@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 116 / doing 7 / blocked 0 / done 99 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 115 / doing 7 / blocked 0 / done 100 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -331,7 +331,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-MB-01 | artplayer-proxy-mediabunny<br>核对 shim 与媒体契约 | BASE-05 | 全部 option、art.mediabunny、canvas/shim 属性及事件表 | 公开暴露成员和实际发布依赖/资源范围明确；核实 third-party.json 所记录依赖 MPL-2.0 元数据与实际 bundle 的许可/通知范围，不从根 MIT 推断 | H | done |
 | PKG-MB-02 | artplayer-proxy-mediabunny<br>建立真实媒体与事件基线 | PKG-MB-01, ENG-05, ENG-08 | MP4/WebM/HLS/Blob/Stream、seek/错误/轨道切换样本 | ready 事件顺序、音画同步、超时和释放可重跑 | H | done |
-| PKG-MB-03 | artplayer-proxy-mediabunny<br>整理 input 与加载取消 | PKG-MB-02, CORE-09 | input.js 源检测、输入资源、Range 与取消 | HLS 检测在 input 边界，旧来源类型和超时保持 | H | todo |
+| PKG-MB-03 | artplayer-proxy-mediabunny<br>整理 input 与加载取消 | PKG-MB-02, CORE-09 | input.js 源检测、输入资源、Range 与取消 | HLS 检测在 input 边界，旧来源类型和超时保持 | H | done |
 | PKG-MB-04 | artplayer-proxy-mediabunny<br>整理 VideoShim/EventTarget/Engine 协调 | PKG-MB-03, CORE-06, CORE-11 | shim 描述符、事件桥、加载状态和操作隔离 | 公开属性/同步异步返回与事件重入顺序保持 | H | todo |
 | PKG-MB-05 | artplayer-proxy-mediabunny<br>整理视频解码、seek 和帧释放 | PKG-MB-04 | VideoEngine 调度、队列、晚帧处理和资源释放 | 暂停/seek/切源无旧帧覆盖，默认丢帧策略不变 | H | todo |
 | PKG-MB-06 | artplayer-proxy-mediabunny<br>整理音频解码、时钟与同步 | PKG-MB-04 | AudioEngine 时钟、缓冲和 AudioContext 归属 | AV sync、倍速、无音轨、静音/音量和暂停恢复通过 | H | todo |
@@ -522,4 +522,5 @@
 - PKG-CANVAS-04: [记录](changes/2026-09-12-PKG-CANVAS-04-types.md) [记录](baselines/canvas-types-validation.json) [记录](canvas-validation.md)
 - PKG-MB-01: [记录](baselines/mb-release.json) [记录](baselines/mb-surface.json) [记录](baselines/mb-contract.md) [记录](baselines/mb-contract-validation.json) [记录](mb-validation.md) [记录](changes/2026-09-12-PKG-MB-01-contract.md)
 - PKG-MB-02: [记录](changes/2026-09-12-PKG-MB-02-checkpoint.md) [记录](baselines/mb-media-checkpoint.json) [记录](mb-validation.md) [记录](changes/2026-09-12-PKG-MB-02-baseline.md) [记录](baselines/mb-behavior-validation.json)
+- PKG-MB-03: [记录](changes/2026-09-12-PKG-MB-03-input.md) [记录](baselines/mb-input-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

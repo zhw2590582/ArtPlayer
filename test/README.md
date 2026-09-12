@@ -2,6 +2,12 @@
 
 Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 
+`yarn test:mediabunny` runs historical lifecycle observations, candidate load cancellation,
+and real SDK input parsing/track contracts; all are in `test:unit`. Candidate failures
+can be reproduced against the frozen main with `ARTPLAYER_MB_BASELINE=1`. This does not
+replace native playback or installed consumers. See `refactor/mb-validation.md` and the
+proxy package's `ARCHITECTURE.md` for browser and artifact selection.
+
 `yarn test:ads` runs source, verified npm 1.0.6 and the frozen unpublished 2.1.0
 Ads bundle against controlled clock/host contracts. It is included in `test:unit`.
 The helper uses the real option validator but does not simulate media decoding or layout.

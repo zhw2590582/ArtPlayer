@@ -1172,11 +1172,16 @@
         "PKG-MB-09"
       ],
       "sourceFiles": [
-        "packages/artplayer-proxy-mediabunny/src/input.js",
+        "packages/artplayer-proxy-mediabunny/src/input.ts",
+        "packages/artplayer-proxy-mediabunny/src/media.ts",
+        "packages/artplayer-proxy-mediabunny/src/tracks.ts",
+        "packages/artplayer-proxy-mediabunny/src/hls-state.ts",
+        "packages/artplayer-proxy-mediabunny/src/preflight.ts",
+        "packages/artplayer-proxy-mediabunny/src/load-session.ts",
         "packages/artplayer-proxy-mediabunny/package.json"
       ],
       "contract": "Preserve native-video-like events, HLS input and topology, codec capability failures and AV sync; actual library/codec environment still requires verification.",
-      "validationStatus": "PKG-MB-01 verifies actual 1.0.0/1.2.0 archives and installed 1.56.1 MPL-2.0 provenance, recorded in mb-release.json and mb-contract.md. Historical embedded SDK version is unknown; notices are MB-LICENSE-01/MB-10. Native codec, SDK media and AV sync remain MB-02/09.",
+      "validationStatus": "PKG-MB-01 verifies actual 1.0.0/1.2.0 archives and installed 1.56.1 MPL-2.0 provenance, recorded in mb-release.json and mb-contract.md. Historical embedded SDK version is unknown; notices are MB-LICENSE-01/MB-10. Native codec, SDK media and AV sync remain MB-02/09. MB-02 freezes actual native input behavior; MB-03 candidate has 72 browser checks including 12 candidate plays and nine native pending-stream cancellations, six strict TS modules and a build-only WebCodecs 0.1.19 resolution. Full AV sync/decoder cleanup and release notices remain MB-04/05/06/09/10.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

@@ -1,8 +1,8 @@
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { mbHistorical } from '../helpers/mediabunny.js'
+import { mbBrowserImplementations } from '../helpers/mediabunny.js'
 import { expect, test } from './fixtures.js'
 
-const implementations = (await mbHistorical()).filter(item => item.name.startsWith('published'))
+const implementations = await mbBrowserImplementations()
 
 for (const implementation of implementations) {
   test(`MediaBunny ${implementation.name}: native MP4 playback or exact Windows WebKit capability failure`, async ({ page, browserName }, testInfo) => {

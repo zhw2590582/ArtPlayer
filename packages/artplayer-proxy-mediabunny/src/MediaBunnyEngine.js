@@ -3,7 +3,10 @@
  * Coordinates audio and video playback
  */
 import AudioEngine from './AudioEngine.js'
-import { createInput, getHlsState, resolveDuration, selectPlaybackTracks } from './input.js'
+import { getHlsState } from './hls-state'
+import { createInput } from './input'
+import LoadSession from './load-session'
+import { resolveDuration, selectPlaybackTracks } from './tracks'
 import VideoEngine from './VideoEngine.js'
 
 export default class MediaBunnyEngine {
@@ -34,6 +37,8 @@ export default class MediaBunnyEngine {
     this.loadSeq = 0
     this.input = null
     this.media = null
+    this.loadSession = null
+    this.destroyed = false
 
     // Listen to ended event
     events.addEventListener?.('ended', () => {
@@ -43,41 +48,50 @@ export default class MediaBunnyEngine {
   }
 
   async load(src) {
+    if (this.destroyed)
+      return
     const id = ++this.loadSeq
-
+    this.loadSession?.cancel()
+    if (id !== this.loadSeq || this.destroyed)
+      return
     this.pause()
+    if (id !== this.loadSeq || this.destroyed)
+      return
     this.disposeInput()
+    const session = new LoadSession()
+    this.loadSession = session
     this.ended = false
     this.error = null
     this.networkState = 2 // NETWORK_LOADING
     this.readyState = 0 // HAVE_NOTHING
 
-    setTimeout(() => this.events.emit('waiting'), 0)
-    setTimeout(() => this.events.emit('loadstart'), 0)
+    session.defer(() => this.events.emit('waiting'))
+    session.defer(() => this.events.emit('loadstart'))
 
     const loadTimeout = Number.isFinite(this.option.loadTimeout)
       ? this.option.loadTimeout
       : 0
 
     try {
-      await Promise.race([
-        this.performLoad(src, id),
-        loadTimeout > 0 ? this.createTimeout(loadTimeout) : new Promise(() => {}),
-      ])
+      await session.wait(this.performLoad(src, id, session), loadTimeout)
     }
     catch (err) {
       if (id !== this.loadSeq)
         return
 
-      this.loadSeq++
+      const failed = ++this.loadSeq
+      session.cancel()
+      if (failed !== this.loadSeq || this.destroyed)
+        return
+      this.disposeInput()
       this.error = { code: 4, message: err.message }
       this.networkState = 3 // NETWORK_NO_SOURCE
       this.events.emit('error')
     }
   }
 
-  async performLoad(src, id) {
-    if (!(await this.video.preflight(src)))
+  async performLoad(src, id, session = this.loadSession) {
+    if (!(await this.video.preflight(src, session?.signal, () => id === this.loadSeq)) || id !== this.loadSeq)
       return
 
     const input = createInput(src)
@@ -86,14 +100,10 @@ export default class MediaBunnyEngine {
       this.audio.handleNoAudioTrack()
       return
     }
-
+    session.own(input)
     const media = await selectPlaybackTracks(input, src)
-    if (id !== this.loadSeq) {
-      input.dispose()
+    if (id !== this.loadSeq)
       return
-    }
-
-    this.disposeInput()
     this.input = input
     this.media = media
 
@@ -139,10 +149,8 @@ export default class MediaBunnyEngine {
       if (id !== this.loadSeq)
         return
 
-      this.error = { code: 4, message: err.message }
-      this.networkState = 3
-      this.events.emit('error')
       console.error('MediaBunny load error:', err)
+      throw err
     }
   }
 
@@ -153,7 +161,7 @@ export default class MediaBunnyEngine {
   }
 
   disposeInput() {
-    this.input?.dispose()
+    this.loadSession?.disposeInput()
     this.input = null
     this.media = null
   }
@@ -334,6 +342,11 @@ export default class MediaBunnyEngine {
   }
 
   destroy() {
+    if (this.destroyed)
+      return
+    this.destroyed = true
+    this.loadSeq++
+    this.loadSession?.cancel()
     this.pause()
     this.disposeInput()
     this.audio.destroy()

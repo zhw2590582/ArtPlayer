@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { mbHistorical } from '../helpers/mediabunny.js'
+import { mbBrowserImplementations } from '../helpers/mediabunny.js'
 import { tracklessMp4 } from '../helpers/trackless-mp4.js'
 import { expect, test } from './fixtures.js'
 
-const implementations = (await mbHistorical()).filter(item => item.name.startsWith('published'))
+const implementations = await mbBrowserImplementations()
 const manifest = JSON.parse(fs.readFileSync(new URL('./media/hls/manifest.json', import.meta.url)))
 const hls = new Map(Object.entries(manifest.files).map(([name, expected]) => {
   const bytes = fs.readFileSync(new URL(`./media/hls/${name}`, import.meta.url))
@@ -98,7 +98,13 @@ for (const implementation of implementations) {
         else if (capabilities.AudioContext === 'undefined' && capabilities.webkitAudioContext === 'undefined') {
           expect(browserName).toBe('webkit')
           expect(capabilities).toEqual({ VideoDecoder: 'undefined', AudioDecoder: 'undefined', AudioContext: 'undefined', webkitAudioContext: 'undefined' })
-          expect(loaded.error).toEqual({ code: 4, message: 'undefined is not a constructor (evaluating \'new t\')' })
+          if (implementation.name.startsWith('candidate')) {
+            expect(loaded.error.code).toBe(4)
+            expect(loaded.error.message).toMatch(/^undefined is not a constructor \(evaluating 'new [\w$]+(?:\(\))?'\)$/)
+          }
+          else {
+            expect(loaded.error).toEqual({ code: 4, message: 'undefined is not a constructor (evaluating \'new t\')' })
+          }
           expect(loaded.readyState).toBeLessThan(4)
           outcome = 'unsupported-capability-control'
         }
@@ -107,9 +113,9 @@ for (const implementation of implementations) {
           expect(loaded.readyState).toBe(4)
           if (input === 'trackless') {
             expect(loaded.dimensions).toEqual([0, 0])
-            expect(await page.evaluate(() => window.mbEvents.filter(item => item.name === 'video:loadedmetadata').length)).toBe(implementation.name === 'published-1.2.0' ? 2 : 1)
+            expect(await page.evaluate(() => window.mbEvents.filter(item => item.name === 'video:loadedmetadata').length)).toBe(implementation.name === 'published-1.0.0' ? 1 : 2)
             expect(await page.evaluate(() => window.mbEvents.filter(item => item.name === 'video:canplay').length)).toBe(1)
-            outcome = 'historical-trackless-readiness-control'
+            outcome = implementation.name.startsWith('candidate') ? 'candidate-trackless-readiness-gap' : 'historical-trackless-readiness-control'
             return
           }
           const readiness = await page.evaluate(() => window.mbEvents.map(item => item.name).filter(name => ['video:loadedmetadata', 'video:loadeddata', 'video:canplay', 'video:canplaythrough'].includes(name)))
@@ -208,7 +214,7 @@ for (const implementation of implementations) {
         await expect.poll(() => page.evaluate(() => window.mbContext?.state || 'not-created')).toMatch(/^(?:closed|not-created)$/)
         expect(await page.evaluate(() => window.mbPendingFrames.size)).toBe(0)
         const cleanup = await page.evaluate(() => ({ audioContext: window.mbContext?.state || 'not-created', pendingFrames: window.mbPendingFrames.size, streamCancelled: window.mbStreamCancelled || false }))
-        await testInfo.attach('mediabunny-native-input', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), input, capabilities, outcome, state, cleanup, hlsManifest: input === 'hls' ? manifest : null, tracklessFixture: input === 'trackless' ? { parentSha256: hash(pattern), sha256: hash(trackless) } : null, scope: 'Actual published proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races.' }) })
+        await testInfo.attach('mediabunny-native-input', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), input, capabilities, outcome, state, cleanup, hlsManifest: input === 'hls' ? manifest : null, tracklessFixture: input === 'trackless' ? { parentSha256: hash(pattern), sha256: hash(trackless) } : null, scope: 'Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance.' }) })
       }
     })
   }

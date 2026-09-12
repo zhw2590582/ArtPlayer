@@ -755,7 +755,7 @@
         "PKG-MB-09"
       ],
       "evidence": [
-        "packages/artplayer-proxy-mediabunny/src/input.js",
+        "packages/artplayer-proxy-mediabunny/src/input.ts",
         "packages/artplayer-proxy-mediabunny/package.json"
       ],
       "compatibleResolution": "Preserve native-video-like events, HLS input and topology, codec capability failures and AV sync; actual library/codec environment still requires verification.",
@@ -3648,7 +3648,7 @@
         "PKG-MB-07",
         "PKG-MB-09"
       ],
-      "compatibleResolution": "Reproduce pending operations and destroy/source-switch races before migrating each owner; preserve public event and promise behavior while preventing stale resource use. MB-02 now reproduces late load rejection and uncancelled waiting/loadstart timers after destroy in all three historical implementations using a controlled host. Other interleavings and full-core native behavior are not yet verified. Expanded MB-02 baseline reproduces play-after-pause/destroy, rejected-play false state, seek-after-destroy and retained successful-load timeout timers in all three actual historical implementations; Range and active-timeout normal controls remain separate.",
+      "compatibleResolution": "Reproduce pending operations and destroy/source-switch races before migrating each owner; preserve public event and promise behavior while preventing stale resource use. MB-02 now reproduces late load rejection and uncancelled waiting/loadstart timers after destroy in all three historical implementations using a controlled host. Other interleavings and full-core native behavior are not yet verified. Expanded MB-02 baseline reproduces play-after-pause/destroy, rejected-play false state, seek-after-destroy and retained successful-load timeout timers in all three actual historical implementations; Range and active-timeout normal controls remain separate. MB-03 candidate owns pending Input before track selection and cancels load/HEAD/timers on source replacement, timeout and destroy; source/main/legacy regressions pass. Pending play/seek, late decoder work and full readiness coordination remain MB-04/05/06, so this risk stays open.",
       "closureCriteria": "Historical failing interleavings and candidate cancellation/cleanup pass with real media and event evidence, including long playback and track topology.",
       "status": "open",
       "evidence": [
@@ -3658,7 +3658,8 @@
         "refactor/changes/2026-09-12-PKG-MB-02-checkpoint.md",
         "refactor/baselines/mb-media-checkpoint.json",
         "refactor/changes/2026-09-12-PKG-MB-02-baseline.md",
-        "refactor/baselines/mb-behavior-validation.json"
+        "refactor/baselines/mb-behavior-validation.json",
+        "refactor/changes/2026-09-12-PKG-MB-03-input.md"
       ]
     },
     {

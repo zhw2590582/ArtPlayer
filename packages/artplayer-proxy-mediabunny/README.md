@@ -9,3 +9,7 @@ mediabunny proxy for ArtPlayer, including `m3u8` playback through Mediabunny's H
 ## License
 
 MIT © Harvey Zhao
+
+## Maintenance
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for current modules, resource ownership, compatibility boundaries and validation commands.
