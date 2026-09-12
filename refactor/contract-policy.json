@@ -317,7 +317,11 @@
         "API-12": "PKG-DPIP-02"
       },
       "versionIds": [
-        "WS-artplayer-plugin-document-pip"
+        "WS-artplayer-plugin-document-pip",
+        "PUB-artplayer-plugin-document-pip-1.1.0",
+        "PUB-artplayer-plugin-document-pip-1.0.2",
+        "PUB-artplayer-plugin-document-pip-1.0.1",
+        "PUB-artplayer-plugin-document-pip-1.0.0"
       ],
       "supportWindow": "not-inferred-from-baseline",
       "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
@@ -822,6 +826,42 @@
       "file": "refactor/baselines/canvas-release.json",
       "pointer": "/previous/0",
       "archiveSha256": "728ba39534b3b8139bdc404ef15fe1ac5f76a95562a14e78c6973db2dcfa6f4f"
+    },
+    {
+      "id": "PUB-artplayer-plugin-document-pip-1.1.0",
+      "package": "artplayer-plugin-document-pip",
+      "kind": "published-baseline",
+      "version": "1.1.0",
+      "file": "refactor/baselines/dpip-release.json",
+      "pointer": "/release",
+      "archiveSha256": "b864befea9aff84b3352782a9670ebe72ff073606fec7cdc31d31e92a5ad6d8a"
+    },
+    {
+      "id": "PUB-artplayer-plugin-document-pip-1.0.2",
+      "package": "artplayer-plugin-document-pip",
+      "kind": "published-baseline",
+      "version": "1.0.2",
+      "file": "refactor/baselines/dpip-release.json",
+      "pointer": "/previous/0",
+      "archiveSha256": "0657a1b2e3e82ccfd29dea824baca7f93748d0107942d4befd360be7bf4efd68"
+    },
+    {
+      "id": "PUB-artplayer-plugin-document-pip-1.0.1",
+      "package": "artplayer-plugin-document-pip",
+      "kind": "published-baseline",
+      "version": "1.0.1",
+      "file": "refactor/baselines/dpip-release.json",
+      "pointer": "/previous/1",
+      "archiveSha256": "dcf611aa5c4247858cb61e197f073db719a4806dc97da2d927394169d428316f"
+    },
+    {
+      "id": "PUB-artplayer-plugin-document-pip-1.0.0",
+      "package": "artplayer-plugin-document-pip",
+      "kind": "published-baseline",
+      "version": "1.0.0",
+      "file": "refactor/baselines/dpip-release.json",
+      "pointer": "/previous/2",
+      "archiveSha256": "3b0164391171c817ab511f740205732e65db0e8f1d65d63f0d24d8eef4251573"
     }
   ],
   "cases": [

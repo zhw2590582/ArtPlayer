@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 221 项，范围 22 个包及工作区/示例。
 
-状态：todo 122 / doing 6 / blocked 0 / done 93 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 121 / doing 6 / blocked 0 / done 94 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -293,11 +293,11 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-DPIP-01 | artplayer-plugin-document-pip<br>核对包契约与历史用法 | BASE-05 | width/height/placeholder/fallbackToVideoPiP、open/close/toggle 返回 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-DPIP-01 | artplayer-plugin-document-pip<br>核对包契约与历史用法 | BASE-05 | width/height/placeholder/fallbackToVideoPiP、open/close/toggle 返回 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
 | PKG-DPIP-02 | artplayer-plugin-document-pip<br>建立特有行为与错误测试 | PKG-DPIP-01, ENG-03, ENG-05 | 不支持/拒绝、重复打开、pagehide、核心销毁和视频 PiP fallback | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
 | PKG-DPIP-03 | artplayer-plugin-document-pip<br>整理内部职责与资源 | PKG-DPIP-02, CORE-16, CORE-17 | 窗口生命周期、DOM 迁移、样式与事件 document 重绑分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-DPIP-04 | artplayer-plugin-document-pip<br>迁移自有源码和公开类型 | PKG-DPIP-03, ENG-04, ENG-06, CORE-07 | Document PiP 可选能力和真实状态/返回类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
-| PKG-DPIP-05 | artplayer-plugin-document-pip<br>验证新旧核心和组合 | PKG-DPIP-04, CORE-22 | 原生视频及两个 proxy、键盘/焦点/全屏与关闭还原 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-DPIP-05 | artplayer-plugin-document-pip<br>验证新旧核心和组合 | PKG-DPIP-04, CORE-22, PKG-CANVAS-04, PKG-MB-04 | 原生视频及两个 proxy、键盘/焦点/全屏与关闭还原 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-DPIP-06 | artplayer-plugin-document-pip<br>验证分发并同步文档 | PKG-DPIP-05, ENG-07 | document.pip.js、浏览器能力矩阵、旧接口与恢复证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-danmuku
@@ -322,7 +322,7 @@
 | PKG-CANVAS-02 | artplayer-proxy-canvas<br>建立特有行为与错误测试 | PKG-CANVAS-01, ENG-03, ENG-05 | ready/loadeddata/canplay、play/seek、回调、resize 与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-CANVAS-03 | artplayer-proxy-canvas<br>整理内部职责与资源 | PKG-CANVAS-02, CORE-06, CORE-11, CORE-16 | video adapter/原 canvas 方法/RAF 绘制/事件订阅分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-CANVAS-04 | artplayer-proxy-canvas<br>迁移自有源码和公开类型 | PKG-CANVAS-03, ENG-04, ENG-06, CORE-07 | canvas 与媒体能力的精确组合类型，保持 Result | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-CANVAS-05 | artplayer-proxy-canvas<br>验证新旧核心和组合 | PKG-CANVAS-04, CORE-22 | 真实 video/canvas 绘制、字幕和 document PiP 恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-CANVAS-05 | artplayer-proxy-canvas<br>验证新旧核心和组合 | PKG-CANVAS-04, CORE-22, PKG-DPIP-04 | 真实 video/canvas 绘制、字幕和 document PiP 恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-CANVAS-06 | artplayer-proxy-canvas<br>验证分发并同步文档 | PKG-CANVAS-05, ENG-07 | canvas.js、三种产物、调用兼容与资源证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-proxy-mediabunny
@@ -506,6 +506,7 @@
 - PKG-VAST-01: [记录](baselines/vast-contract.md) [记录](baselines/vast-release.json) [记录](changes/2026-09-12-PKG-VAST-01-contract.md) [记录](baselines/vast-contract-validation.json)
 - PKG-VAST-02: [记录](changes/2026-09-12-PKG-VAST-02-tests.md) [记录](baselines/vast-behavior-validation.json) [记录](baselines/vast-core.json) [记录](vast-validation.md)
 - PKG-VAST-03: [记录](changes/2026-09-12-PKG-VAST-03-lifecycle.md) [记录](baselines/vast-lifecycle-validation.json) [记录](vast-compatibility-decision.md)
+- PKG-DPIP-01: [记录](changes/2026-09-12-PKG-DPIP-01-contract.md) [记录](baselines/dpip-release.json) [记录](baselines/dpip-contract.md) [记录](baselines/dpip-contract-validation.json) [记录](dpip-validation.md)
 - PKG-CANVAS-01: [记录](changes/2026-09-12-PKG-CANVAS-01-contract.md) [记录](baselines/canvas-contract.md) [记录](baselines/canvas-release.json) [记录](canvas-validation.md) [记录](baselines/canvas-contract-validation.json)
 - PKG-CANVAS-02: [记录](changes/2026-09-12-PKG-CANVAS-02-tests.md) [记录](baselines/canvas-behavior-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-03: [记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md) [记录](baselines/canvas-lifecycle-validation.json) [记录](canvas-validation.md)

@@ -3433,6 +3433,91 @@
         "refactor/baselines/canvas-lifecycle-validation.json"
       ],
       "resolutionRationale": "Final native pixel cases verify original 320x180 media dimensions, multiple colors, alpha255, resize and source replacement across two cores and three engines. Backing video is mounted before play at intrinsic CSS size. Diagnostic zero-count and 1px regressions are preserved; this resolves the recorded Windows Playwright defect, not all Safari/mobile device validation."
+    },
+    {
+      "id": "DPIP-PACK-01",
+      "title": "Published Document PiP 1.0.0 tarball omits every declared runtime entry",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-DPIP-06"
+      ],
+      "compatibleResolution": "Keep the immutable broken archive as a negative case; verify complete candidate tarball and document the historical version boundary.",
+      "closureCriteria": "Candidate archive and real runtime entries verified; missing 1.0.0 runtime is documented rather than replaced or claimed fixed in place.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/dpip-release.json",
+        "refactor/baselines/dpip-contract.md",
+        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md"
+      ]
+    },
+    {
+      "id": "DPIP-DIST-01",
+      "title": "Document PiP namespace.default in 1.0.1/1.0.2 differs from callable 1.1.0 export",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-DPIP-04",
+        "PKG-DPIP-06"
+      ],
+      "compatibleResolution": "Support old default namespace access and new callable factory without changing runtime names or entrypoints.",
+      "closureCriteria": "Actual candidate root/legacy/global/ESM and installed consumers verify both access shapes.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/dpip-release.json",
+        "refactor/baselines/dpip-contract.md",
+        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md"
+      ]
+    },
+    {
+      "id": "DPIP-TYPE-01",
+      "title": "Document PiP requires options and declares void actions and writable flags that differ from runtime",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-DPIP-04"
+      ],
+      "compatibleResolution": "Verify historical legal callers and extraction before providing precise async and readonly capabilities; do not reuse unrelated Ads approval.",
+      "closureCriteria": "Old/current consumer matrix and runtime/type distinctions are verified and documented without silently narrowing historical consumers.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/dpip-release.json",
+        "refactor/baselines/dpip-contract.md",
+        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md"
+      ]
+    },
+    {
+      "id": "DPIP-LIFE-01",
+      "title": "Document PiP has no separate ownership for pending window requests and delayed post-transition callbacks",
+      "confirmation": "source-observed",
+      "owners": [
+        "PKG-DPIP-02",
+        "PKG-DPIP-03",
+        "PKG-DPIP-05"
+      ],
+      "compatibleResolution": "Reproduce overlapping open/close/destroy and retained controls/listeners before implementing terminal state and resource ownership.",
+      "closureCriteria": "Historical races reproduced; candidate late windows and delayed effects cannot revive disposed players, with native lifecycle validation.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/dpip-release.json",
+        "refactor/baselines/dpip-contract.md",
+        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md"
+      ]
+    },
+    {
+      "id": "DPIP-DOM-01",
+      "title": "Document PiP copies global-document styles and retains original parent without transactional rollback",
+      "confirmation": "source-observed",
+      "owners": [
+        "PKG-DPIP-02",
+        "PKG-DPIP-03",
+        "PKG-DPIP-05"
+      ],
+      "compatibleResolution": "Reproduce adoption/style/restore errors and foreign ownerDocument cases, then implement explicit document and rollback ownership.",
+      "closureCriteria": "Candidate failures restore node identity, order, document bindings and styles with native window/proxy evidence.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/dpip-release.json",
+        "refactor/baselines/dpip-contract.md",
+        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md"
+      ]
     }
   ]
 }

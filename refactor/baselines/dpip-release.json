@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DPIP-01",
+  "capturedAt": "2026-09-12T05:31:41.167Z",
+  "sourceCommit": "224572032a418a82e9fdfb931f2b8cbba4295c27",
+  "registryObservation": {
+    "versions": [
+      "1.0.0",
+      "1.0.1",
+      "1.0.2",
+      "1.1.0"
+    ],
+    "latest": "1.1.0",
+    "workspaceVersion": "1.1.0"
+  },
+  "release": {
+    "name": "artplayer-plugin-document-pip",
+    "version": "1.1.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-document-pip/1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-document-pip/-/artplayer-plugin-document-pip-1.1.0.tgz",
+    "integrity": "sha512-+HCrlO+bQwBrig1bI/IIxgGvbcG7i+aNHAnR5vLqB+RdyIY+FKCHyEe0o9yZREnbYOe0XJVqjv2buEVrouzdoQ==",
+    "sha256": "b864befea9aff84b3352782a9670ebe72ff073606fec7cdc31d31e92a5ad6d8a",
+    "archiveBytes": 4575,
+    "publishedAt": "2026-03-12T14:20:57.572Z",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "e66acb1026ced7b058327814a8b7d31433c029c292991cdba747302c6b663d10",
+      "package/dist/artplayer-plugin-document-pip.js": "261d4ae84579c569ade1b1e7e91d51e3bd00c6efbea8c51a48b8283e0f4f3496",
+      "package/dist/artplayer-plugin-document-pip.legacy.js": "8e36b658196dece391add21c249b735f3abfe4082fc968d3dbbbb1ae58a77b31",
+      "package/dist/artplayer-plugin-document-pip.mjs": "22b432b5fc958f6f838b83fdfcc7e5ab7144137111b1f8cf081eb2e21afd8382",
+      "package/package.json": "cd0c0c17fde404f93fc6bd64f6317d29ce54908e15b956c465124dd9fe2c77f6",
+      "package/types/artplayer-plugin-document-pip.d.ts": "e5bf38dd4829a075bd6d1a2e356a9ee56434b65f622fb623ac57e9fe46151077"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-document-pip",
+      "version": "1.1.0",
+      "description": "Document PIP plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-document-pip.d.ts",
+          "import": "./dist/artplayer-plugin-document-pip.mjs",
+          "require": "./dist/artplayer-plugin-document-pip.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-document-pip.d.ts",
+          "import": "./dist/artplayer-plugin-document-pip.legacy.js",
+          "require": "./dist/artplayer-plugin-document-pip.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-document-pip.js",
+      "module": "./dist/artplayer-plugin-document-pip.mjs",
+      "types": "./types/artplayer-plugin-document-pip.d.ts",
+      "legacy": "./dist/artplayer-plugin-document-pip.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "missingEntrypoints": {},
+    "historicalCore": {
+      "version": "5.3.1",
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "scope": "Git association only, not actual npm compatibility verification"
+    }
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-document-pip",
+      "version": "1.0.2",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-document-pip/1.0.2",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-document-pip/-/artplayer-plugin-document-pip-1.0.2.tgz",
+      "integrity": "sha512-/vUpB3GsvOabRoBAZWkXXk6QZ3Ja2XbNZr3i933HSKhzpUc6zfvh3VajTkCb3CfDz37/pjR3cPbKBWnWwx+8pA==",
+      "sha256": "0657a1b2e3e82ccfd29dea824baca7f93748d0107942d4befd360be7bf4efd68",
+      "archiveBytes": 9233,
+      "publishedAt": "2025-09-06T05:18:19.436Z",
+      "registryGitHead": "fd9aeddbedffe9fd00f827a271672bc2510fb503",
+      "files": {
+        "package/README.md": "6802bbd78f851115f27cd856d8604c4ab898b788568e1a3eae62d12c7acb5e07",
+        "package/dist/artplayer-plugin-document-pip.js": "514c047594dbb887b68f3d6aa841af4105a537c804cbb4eb11ecbeda692280f8",
+        "package/dist/artplayer-plugin-document-pip.legacy.js": "07cff703943c34832fdd1b828a72fabd2093b45cd5bc37e4c9de16d1dbe4e6d3",
+        "package/dist/artplayer-plugin-document-pip.mjs": "21571df888278f21d46f28355bdf2f70c531b5fa8286eb45366a34de18266f08",
+        "package/package.json": "5c93563a3d0b6b1fdd8f0b89eca83bb2685d6748397fc4a5fd20403aa743201f",
+        "package/types/artplayer-plugin-document-pip.d.ts": "e5bf38dd4829a075bd6d1a2e356a9ee56434b65f622fb623ac57e9fe46151077"
+      },
+      "manifest": {
+        "name": "artplayer-plugin-document-pip",
+        "version": "1.0.2",
+        "description": "Document PIP plugin for ArtPlayer",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "import": "./dist/artplayer-plugin-document-pip.mjs",
+            "require": "./dist/artplayer-plugin-document-pip.js",
+            "types": "./types/artplayer-plugin-document-pip.d.ts"
+          }
+        },
+        "main": "./dist/artplayer-plugin-document-pip.js",
+        "module": "./dist/artplayer-plugin-document-pip.mjs",
+        "types": "./types/artplayer-plugin-document-pip.d.ts",
+        "legacy": "./dist/artplayer-plugin-document-pip.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "version": "5.3.0-beta.3",
+        "commit": "fd9aeddbedffe9fd00f827a271672bc2510fb503",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "fbadd47595d282efdfddfb3fe0b8470c2fe12319a7737a6abd77fd7155ba4f7a",
+        "scope": "Git association only, not actual npm compatibility verification"
+      }
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "version": "1.0.1",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-document-pip/1.0.1",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-document-pip/-/artplayer-plugin-document-pip-1.0.1.tgz",
+      "integrity": "sha512-u/lCjgeanxZcMpcFZMojUF9KppzP+f1ALUt2u2MCa73CXhmb0hn/vI99hR7qALck6XamfSpDbjDw6i0p6HrScA==",
+      "sha256": "dcf611aa5c4247858cb61e197f073db719a4806dc97da2d927394169d428316f",
+      "archiveBytes": 9233,
+      "publishedAt": "2025-09-03T10:31:57.113Z",
+      "registryGitHead": "9bfd535e57ddd489da3b7875f965fee81abbac51",
+      "files": {
+        "package/README.md": "6802bbd78f851115f27cd856d8604c4ab898b788568e1a3eae62d12c7acb5e07",
+        "package/dist/artplayer-plugin-document-pip.js": "d3878387d6110f7080dcf0f253b4c99391e7213c17c4b224c00b856e9a82a9ee",
+        "package/dist/artplayer-plugin-document-pip.legacy.js": "134112d64aa571d40c65dd89b218409c62d7c87713b6cb2885cac281b55f1028",
+        "package/dist/artplayer-plugin-document-pip.mjs": "8731b8ba47d65427e2804549a2912577bc9a7ad666880c9ff4fe71d13b1ccc1f",
+        "package/package.json": "30167428c3e2058f48de0a5209ae9dba9ce30556a2d78e7bdf4e8d1b0c104004",
+        "package/types/artplayer-plugin-document-pip.d.ts": "e5bf38dd4829a075bd6d1a2e356a9ee56434b65f622fb623ac57e9fe46151077"
+      },
+      "manifest": {
+        "name": "artplayer-plugin-document-pip",
+        "version": "1.0.1",
+        "description": "Document PIP plugin for ArtPlayer",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "import": "./dist/artplayer-plugin-document-pip.mjs",
+            "require": "./dist/artplayer-plugin-document-pip.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-document-pip.js",
+        "module": "./dist/artplayer-plugin-document-pip.mjs",
+        "types": "./types/artplayer-plugin-document-pip.d.ts",
+        "legacy": "./dist/artplayer-plugin-document-pip.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "version": "5.3.0",
+        "commit": "9bfd535e57ddd489da3b7875f965fee81abbac51",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "9f8756b84dcf3f5edf811e835859b13e5c64e75c154348d31178de43183954d9",
+        "scope": "Git association only, not actual npm compatibility verification"
+      }
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "version": "1.0.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-document-pip/1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-document-pip/-/artplayer-plugin-document-pip-1.0.0.tgz",
+      "integrity": "sha512-mm1OYSE7M9brzODk/VdGfk7LjfPD5FKY7iUXESsQYMsQ5T4vr1VaacprnWRk5G75E0ON4RNRNjAIwGvJ1qETDg==",
+      "sha256": "3b0164391171c817ab511f740205732e65db0e8f1d65d63f0d24d8eef4251573",
+      "archiveBytes": 818,
+      "publishedAt": "2025-09-03T10:28:27.976Z",
+      "registryGitHead": "9bfd535e57ddd489da3b7875f965fee81abbac51",
+      "files": {
+        "package/README.md": "6802bbd78f851115f27cd856d8604c4ab898b788568e1a3eae62d12c7acb5e07",
+        "package/package.json": "259a13eee4128cac7eeb2586b237c01a098151f5411700be96b3bc603703acbd",
+        "package/types/artplayer-plugin-document-pip.d.ts": "e5bf38dd4829a075bd6d1a2e356a9ee56434b65f622fb623ac57e9fe46151077"
+      },
+      "manifest": {
+        "name": "artplayer-plugin-document-pip",
+        "version": "1.0.0",
+        "description": "Document PIP plugin for ArtPlayer",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "import": "./dist/artplayer-plugin-document-pip.mjs",
+            "require": "./dist/artplayer-plugin-document-pip.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-document-pip.js",
+        "module": "./dist/artplayer-plugin-document-pip.mjs",
+        "types": "./types/artplayer-plugin-document-pip.d.ts",
+        "legacy": "./dist/artplayer-plugin-document-pip.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "missingEntrypoints": {
+        "main": "./dist/artplayer-plugin-document-pip.js",
+        "module": "./dist/artplayer-plugin-document-pip.mjs",
+        "legacy": "./dist/artplayer-plugin-document-pip.legacy.js"
+      },
+      "historicalCore": {
+        "version": "5.3.0",
+        "commit": "9bfd535e57ddd489da3b7875f965fee81abbac51",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "9f8756b84dcf3f5edf811e835859b13e5c64e75c154348d31178de43183954d9",
+        "scope": "Git association only, not actual npm compatibility verification"
+      }
+    }
+  ],
+  "source": {
+    "packages/artplayer-plugin-document-pip/src/index.js": "655818d30d82e43443e9a7ea185f91fc951eb72ad11edaaed0264182e62f32ba",
+    "packages/artplayer-plugin-document-pip/src/style.less": "a75ae94a569c8fd6ce925dcc7ab6b22cfa39a4d81decb30cc447dd7108a84a22",
+    "packages/artplayer-plugin-document-pip/types/artplayer-plugin-document-pip.d.ts": "e5bf38dd4829a075bd6d1a2e356a9ee56434b65f622fb623ac57e9fe46151077",
+    "packages/artplayer-plugin-document-pip/package.json": "cd0c0c17fde404f93fc6bd64f6317d29ce54908e15b956c465124dd9fe2c77f6",
+    "packages/artplayer-plugin-document-pip/README.md": "e66acb1026ced7b058327814a8b7d31433c029c292991cdba747302c6b663d10",
+    "packages/artplayer-plugin-document-pip/.npmignore": "46063058e98be55dba5cf5f33d379e73eca048f4126e7af75f8011bab7f09145",
+    "docs/assets/example/document.pip.js": "2600948ff0128e2e77fe08fbefa9be96543d8fcd81421534dfbfe9cb84e91fde"
+  },
+  "limitation": "Git core association is not a verified npm support range; native window/device, race and installed consumers remain later tasks."
+}

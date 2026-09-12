@@ -2985,11 +2985,17 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "width/height/placeholder/fallbackToVideoPiP、open/close/toggle 返回",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-DPIP-01-contract.md",
+        "baselines/dpip-release.json",
+        "baselines/dpip-contract.md",
+        "baselines/dpip-contract-validation.json",
+        "dpip-validation.md"
+      ]
     },
     {
       "id": "PKG-DPIP-02",
@@ -3055,7 +3061,9 @@
       ],
       "dependsOn": [
         "PKG-DPIP-04",
-        "CORE-22"
+        "CORE-22",
+        "PKG-CANVAS-04",
+        "PKG-MB-04"
       ],
       "status": "todo",
       "risk": "H",
@@ -3333,7 +3341,8 @@
       ],
       "dependsOn": [
         "PKG-CANVAS-04",
-        "CORE-22"
+        "CORE-22",
+        "PKG-DPIP-04"
       ],
       "status": "todo",
       "risk": "H",

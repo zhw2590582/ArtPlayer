@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DPIP-01",
+  "status": "done",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/dpip-contract.test.mjs refactor/scripts/contracts.test.mjs",
+      "result": "pass",
+      "tests": 23,
+      "dpip": 16,
+      "indexValidation": 7
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 938,
+        "engineering": 14,
+        "baseline": 116,
+        "mainTotal": 1068,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 284
+    }
+  ],
+  "limitations": [
+    "npm1.0.0 lacks all declared runtime files and is not a runnable fixture.",
+    "Controlled DOM/window tests are not native Document PiP or device acceptance.",
+    "Pending-window, delayed callback and rollback concerns remain source-observed for task02 reproduction."
+  ],
+  "parentCommit": "224572032a418a82e9fdfb931f2b8cbba4295c27",
+  "archiveScope": {
+    "publishedVersions": [
+      "1.1.0",
+      "1.0.2",
+      "1.0.1",
+      "1.0.0"
+    ],
+    "members": 21,
+    "workspaceFiles": 7,
+    "runnableVersions": [
+      "1.1.0",
+      "1.0.2",
+      "1.0.1"
+    ],
+    "missingRuntime": "1.0.0",
+    "supportedCoreRange": "not inferred from Git associations"
+  },
+  "inputs": [
+    {
+      "file": "refactor/baselines/dpip-release.json",
+      "sha256LF": "afcf54f22fb3f57186e19bdf384a130c6388e972164774ee56eeca23fc814c23"
+    },
+    {
+      "file": "refactor/scripts/dpip-contract.mjs",
+      "sha256LF": "7801c893e8c4c8f158d484a4bafd4db88a12ca6f7ec219453e2ba176a186710f"
+    },
+    {
+      "file": "refactor/scripts/dpip-contract.test.mjs",
+      "sha256LF": "b5c46dc9f918635e8b6001bb660edc31759e084ff4f419e2328341d77463aede"
+    },
+    {
+      "file": "test/helpers/dpip.js",
+      "sha256LF": "727a0a2ab9d6552198d16779739dbabed2d86691f8e6695c5bde0ed2d27b8016"
+    },
+    {
+      "file": "refactor/contract-policy.json",
+      "sha256LF": "a7654b53b8436d70d1c697f2fc70e65221bd83a5ec51bbff822958d8b1a4df53"
+    },
+    {
+      "file": "refactor/scripts/contracts.test.mjs",
+      "sha256LF": "e52835b7f59a71108f62e786a787a67748da4cbe682b08860cd8773f3255aa80"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/dpip01-missing-entry-observation.log",
+      "sha256": "ec76d068fc579ffbdd03913db632553ca1fc4c0bab408444107aad830e6f1420"
+    },
+    {
+      "file": "refactor/.cache/dpip01-capture-final.log",
+      "sha256": "670debdc562d8f2e32cf9a316afef92ed2b5fd5c76a967bedcd2eb4359d701da"
+    },
+    {
+      "file": "refactor/.cache/dpip01-targeted.log",
+      "sha256": "60e3ddd5ef0457a9e3278a883ce62ca8a0efb214b895088b2373f0f47ad65f83"
+    },
+    {
+      "file": "refactor/.cache/dpip01-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/dpip01-ci.log",
+      "sha256": "e9a75c3d72ccce0f180e88f88394e6ab8df86a350353a13575f27d0677fb539d"
+    }
+  ]
+}

@@ -320,3 +320,7 @@
 - PUB-artplayer-plugin-ambilight-1.0.0: artplayer-plugin-ambilight@1.0.0 (published-baseline)；[来源](../refactor/baselines/ambilight-release.json) JSON pointer `/previous/0`。
 - PUB-artplayer-proxy-canvas-1.1.0: artplayer-proxy-canvas@1.1.0 (published-baseline)；[来源](../refactor/baselines/canvas-release.json) JSON pointer `/release`。
 - PUB-artplayer-proxy-canvas-1.0.0: artplayer-proxy-canvas@1.0.0 (published-baseline)；[来源](../refactor/baselines/canvas-release.json) JSON pointer `/previous/0`。
+- PUB-artplayer-plugin-document-pip-1.1.0: artplayer-plugin-document-pip@1.1.0 (published-baseline)；[来源](../refactor/baselines/dpip-release.json) JSON pointer `/release`。
+- PUB-artplayer-plugin-document-pip-1.0.2: artplayer-plugin-document-pip@1.0.2 (published-baseline)；[来源](../refactor/baselines/dpip-release.json) JSON pointer `/previous/0`。
+- PUB-artplayer-plugin-document-pip-1.0.1: artplayer-plugin-document-pip@1.0.1 (published-baseline)；[来源](../refactor/baselines/dpip-release.json) JSON pointer `/previous/1`。
+- PUB-artplayer-plugin-document-pip-1.0.0: artplayer-plugin-document-pip@1.0.0 (published-baseline)；[来源](../refactor/baselines/dpip-release.json) JSON pointer `/previous/2`。

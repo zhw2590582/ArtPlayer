@@ -1,5 +1,15 @@
 # 进度与证据
 
+## 最新完成：Document PiP-01 实际发布契约
+
+冻结四个npm归档/21成员及7个Git工作区输入。实际1.0.0缺少三个运行时入口，
+作为分发负例和类型基线，不能冒充可执行版本。三份可运行发布与冻结工作区的正常
+窗口/DOM/控件/返回值契约已覆盖；16项专项和7项索引检查通过，完整CI1068项通过，
+另44项重复契约观察，284个生产TS文件严格检查。尚未修改Document PiP生产源码；
+02继续复现窗口竞争/销毁/错误回滚，03处理实现，05保留真实窗口与设备验收。
+当前221项：94 done、6 doing、121 todo。见[本步记录](changes/2026-09-12-PKG-DPIP-01-contract.md)
+和[验证证据](baselines/dpip-contract-validation.json)。独立本地提交，不推送/发布。
+
 ## 最新完成：Canvas-04 公开类型与两代导出
 
 公开namespace保留可选Parameters和精确HTMLCanvasElement返回，新增显式MediaCanvas
