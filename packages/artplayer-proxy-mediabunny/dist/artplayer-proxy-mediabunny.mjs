@@ -4,6 +4,14 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
+var __typeError = (msg) => {
+  throw TypeError(msg);
+};
+var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
+var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
+var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
+var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
+var _closed;
 const $audio = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg>';
 const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
 function uniqBy(array, property) {
@@ -40,34 +48,34 @@ function setupM3u8Controls({ art, shim, option }) {
   function canRender(config = {}) {
     return config.control || config.setting;
   }
-  async function updateQuality(state) {
+  async function updateQuality(state2) {
     const config = option.m3u8?.quality || {};
-    if (!canRender(config) || !state?.levels.length) {
+    if (!canRender(config) || !state2?.levels.length) {
       clearQuality();
       return;
     }
     const auto = config.auto || "Auto";
     const title = config.title || "Quality";
     const getName = config.getName || ((level) => level.name || `${level.height}P`);
-    const defaultHtml = state.currentLevel ? getName(state.currentLevel) : auto;
+    const defaultHtml = state2.currentLevel ? getName(state2.currentLevel) : auto;
     const selector = uniqBy(
-      state.levels.map((item) => {
+      state2.levels.map((item) => {
         return {
           html: getName(item),
           value: item.id,
-          default: state.currentLevel?.id === item.id
+          default: state2.currentLevel?.id === item.id
         };
       }),
       "html"
     ).sort((a, b) => {
-      const left = state.levels.find((item) => item.id === a.value);
-      const right = state.levels.find((item) => item.id === b.value);
+      const left = state2.levels.find((item) => item.id === a.value);
+      const right = state2.levels.find((item) => item.id === b.value);
       return (right?.height || 0) - (left?.height || 0);
     });
     selector.push({
       html: auto,
       value: "auto",
-      default: !state.currentLevel
+      default: !state2.currentLevel
     });
     const onSelect = async (item) => {
       await shim.switchM3u8Quality(item.value);
@@ -97,22 +105,22 @@ function setupM3u8Controls({ art, shim, option }) {
       });
     }
   }
-  async function updateAudio(state) {
+  async function updateAudio(state2) {
     const config = option.m3u8?.audio || {};
-    if (!canRender(config) || !state?.audios.length || state.audios.length < 2) {
+    if (!canRender(config) || !state2?.audios.length || state2.audios.length < 2) {
       clearAudio();
       return;
     }
     const auto = config.auto || "Auto";
     const title = config.title || "Audio";
     const getName = config.getName || ((track) => track.name || track.lang || track.language);
-    const defaultHtml = state.currentAudio ? getName(state.currentAudio) : auto;
+    const defaultHtml = state2.currentAudio ? getName(state2.currentAudio) : auto;
     const selector = uniqBy(
-      state.audios.map((item) => {
+      state2.audios.map((item) => {
         return {
           html: getName(item),
           value: item.id,
-          default: state.currentAudio?.id === item.id
+          default: state2.currentAudio?.id === item.id
         };
       }),
       "html"
@@ -120,7 +128,7 @@ function setupM3u8Controls({ art, shim, option }) {
     selector.push({
       html: auto,
       value: "auto",
-      default: !state.currentAudio
+      default: !state2.currentAudio
     });
     const onSelect = async (item) => {
       await shim.switchM3u8Audio(item.value);
@@ -151,15 +159,15 @@ function setupM3u8Controls({ art, shim, option }) {
     }
   }
   async function update() {
-    const state = await shim.getM3u8State();
-    if (!state) {
+    const state2 = await shim.getM3u8State();
+    if (!state2) {
       clearQuality();
       clearAudio();
       return;
     }
     await Promise.all([
-      updateQuality(state),
-      updateAudio(state)
+      updateQuality(state2),
+      updateAudio(state2)
     ]);
   }
   art.on("video:loadedmetadata", update);
@@ -168,32 +176,39 @@ function setupM3u8Controls({ art, shim, option }) {
 }
 class EventTarget {
   constructor() {
+    __privateAdd(this, _closed, false);
     this.listeners = /* @__PURE__ */ new Map();
   }
   addEventListener(type, fn) {
-    if (!this.listeners.has(type)) {
+    if (__privateGet(this, _closed))
+      return;
+    if (!this.listeners.has(type))
       this.listeners.set(type, []);
-    }
-    this.listeners.get(type).push(fn);
+    this.listeners.get(type)?.push(fn);
   }
   removeEventListener(type, fn) {
     const list = this.listeners.get(type);
     if (!list)
       return;
     const index = list.indexOf(fn);
-    if (index >= 0) {
+    if (index >= 0)
       list.splice(index, 1);
-    }
   }
   emit(type, detail) {
-    const evt = new Event(type);
-    evt.detail = detail;
-    const list = this.listeners.get(type);
-    if (list) {
-      list.forEach((fn) => fn(evt));
-    }
+    if (__privateGet(this, _closed))
+      return;
+    const event = Object.assign(new Event(type), { detail });
+    this.listeners.get(type)?.forEach((fn) => {
+      if (!__privateGet(this, _closed))
+        fn(event);
+    });
+  }
+  destroy() {
+    __privateSet(this, _closed, true);
+    this.listeners.clear();
   }
 }
+_closed = new WeakMap();
 function assert(x) {
   if (!x) {
     throw new Error("Assertion failed.");
@@ -479,7 +494,7 @@ const mapAsyncGenerator = (generator, map) => {
     }
   };
 };
-const clamp$1 = (value, min, max) => {
+const clamp = (value, min, max) => {
   return Math.max(min, Math.min(max, value));
 };
 const UNDETERMINED_LANGUAGE = "und";
@@ -15172,7 +15187,7 @@ class UrlSource extends PathedSource {
     if (baseSize === null) {
       return this._length !== null ? this._length : null;
     }
-    return clamp$1(baseSize - this._offset, 0, this._length ?? Infinity);
+    return clamp(baseSize - this._offset, 0, this._length ?? Infinity);
   }
   /** @internal */
   _read(start, end, minReadPosition, maxReadPosition) {
@@ -16113,7 +16128,7 @@ class RangedSource extends Source {
         return null;
       }
     }
-    return clamp$1(baseSize - this._offset, 0, this._length ?? Infinity);
+    return clamp(baseSize - this._offset, 0, this._length ?? Infinity);
   }
   /** @internal */
   _read(start, end, minReadPosition, maxReadPosition) {
@@ -19826,13 +19841,13 @@ const getWriteFunction = (format) => {
   switch (format) {
     case "u8":
     case "u8-planar":
-      return (view, offset, value) => view.setUint8(offset, clamp$1((value + 1) * 127.5, 0, 255));
+      return (view, offset, value) => view.setUint8(offset, clamp((value + 1) * 127.5, 0, 255));
     case "s16":
     case "s16-planar":
-      return (view, offset, value) => view.setInt16(offset, clamp$1(Math.round(value * 32767), -32768, 32767), true);
+      return (view, offset, value) => view.setInt16(offset, clamp(Math.round(value * 32767), -32768, 32767), true);
     case "s32":
     case "s32-planar":
-      return (view, offset, value) => view.setInt32(offset, clamp$1(Math.round(value * 2147483647), -2147483648, 2147483647), true);
+      return (view, offset, value) => view.setInt32(offset, clamp(Math.round(value * 2147483647), -2147483648, 2147483647), true);
     case "f32":
     case "f32-planar":
       return (view, offset, value) => view.setFloat32(offset, value, true);
@@ -20901,7 +20916,7 @@ class ColorAlphaMerger {
         const blob = new Blob([`(${colorAlphaMergerWorkerCode.toString()})()`], { type: "application/javascript" });
         mergerWorkerUrl = URL.createObjectURL(blob);
       }
-      const poolSize = clamp$1(navigator.hardwareConcurrency, 1, 4);
+      const poolSize = clamp(navigator.hardwareConcurrency, 1, 4);
       for (let i = 0; i < poolSize; i++) {
         const worker2 = new Worker(mergerWorkerUrl);
         worker2.addEventListener("message", (event) => {
@@ -23165,7 +23180,7 @@ class Reader {
       return null;
     }
     if (this.fileSizeNonStrict !== null) {
-      return this.requestSlice(start, clamp$1(this.fileSizeNonStrict - start, minLength, maxLength));
+      return this.requestSlice(start, clamp(this.fileSizeNonStrict - start, minLength, maxLength));
     } else {
       const promisedAttempt = this.requestSlice(start, maxLength);
       const handleAttempt = (attempt) => {
@@ -23173,7 +23188,7 @@ class Reader {
           return attempt;
         }
         assert(this.fileSizeNonStrict !== null);
-        return this.requestSlice(start, clamp$1(this.fileSizeNonStrict - start, minLength, maxLength));
+        return this.requestSlice(start, clamp(this.fileSizeNonStrict - start, minLength, maxLength));
       };
       if (isThenable(promisedAttempt)) {
         return promisedAttempt.then(handleAttempt);
@@ -24929,8 +24944,59 @@ class MediaBunnyEngine {
     return this.video.height;
   }
 }
-function clamp(v, min, max) {
-  return Math.max(min, Math.min(max, Number(v) || 0));
+const states = /* @__PURE__ */ new WeakMap();
+function state(owner) {
+  let value = states.get(owner);
+  if (!value) {
+    value = { closed: false, frames: /* @__PURE__ */ new Set() };
+    states.set(owner, value);
+  }
+  return value;
+}
+function requestFrame(owner, callback) {
+  const resource = state(owner);
+  if (resource.closed)
+    return 0;
+  const id = requestAnimationFrame((time) => {
+    resource.frames.delete(id);
+    if (resource.closed)
+      return;
+    callback(time, {
+      presentationTime: owner.engine.currentTime,
+      expectedDisplayTime: time + 16.6,
+      width: owner.engine.videoWidth,
+      height: owner.engine.videoHeight,
+      mediaTime: owner.engine.currentTime,
+      presentedFrames: 0,
+      processingDuration: 0,
+      captureTime: time,
+      receiveTime: time,
+      rtpTimestamp: 0
+    });
+  });
+  resource.frames.add(id);
+  return id;
+}
+function cancelFrame(owner, id) {
+  state(owner).frames.delete(id);
+  cancelAnimationFrame(id);
+}
+function closeFrames(owner) {
+  const resource = state(owner);
+  if (resource.closed)
+    return false;
+  resource.closed = true;
+  for (const id of resource.frames) cancelAnimationFrame(id);
+  resource.frames.clear();
+  return true;
+}
+function clampVolume(value) {
+  return Math.max(0, Math.min(1, Number(value) || 0));
+}
+function timeRanges(duration, start, end) {
+  if (!duration || Number.isNaN(duration) || end <= 0)
+    return { length: 0, start: () => 0, end: () => 0 };
+  return { length: 1, start: () => start, end: () => end };
 }
 class VideoShim {
   constructor({ art, canvas, ctx, option }) {
@@ -24999,15 +25065,7 @@ class VideoShim {
     return this.createTimeRanges(0, this.engine.duration);
   }
   createTimeRanges(start, end) {
-    const duration = this.engine.duration;
-    if (!duration || Number.isNaN(duration) || end <= 0) {
-      return { length: 0, start: () => 0, end: () => 0 };
-    }
-    return {
-      length: 1,
-      start: () => start,
-      end: () => end
-    };
+    return timeRanges(this.engine.duration, start, end);
   }
   // Playback state
   get paused() {
@@ -25049,7 +25107,7 @@ class VideoShim {
     return this._volume;
   }
   set volume(v) {
-    this._volume = clamp(v, 0, 1);
+    this._volume = clampVolume(v);
     this._muted = false;
     this.engine.setVolume(this._volume, this._muted);
     this.events.emit("volumechange");
@@ -25144,24 +25202,10 @@ class VideoShim {
     return this.canvas.getBoundingClientRect();
   }
   requestVideoFrameCallback(callback) {
-    const id = requestAnimationFrame((time) => {
-      callback(time, {
-        presentationTime: this.engine.currentTime,
-        expectedDisplayTime: time + 16.6,
-        width: this.engine.videoWidth,
-        height: this.engine.videoHeight,
-        mediaTime: this.engine.currentTime,
-        presentedFrames: 0,
-        processingDuration: 0,
-        captureTime: time,
-        receiveTime: time,
-        rtpTimestamp: 0
-      });
-    });
-    return id;
+    return requestFrame(this, callback);
   }
   cancelVideoFrameCallback(id) {
-    cancelAnimationFrame(id);
+    cancelFrame(this, id);
   }
   setAttribute(name, value) {
     if (name === "src") {
@@ -25173,11 +25217,17 @@ class VideoShim {
     } else if (name === "muted") {
       this.muted = true;
     } else {
-      this.canvas.setAttribute(name, value);
+      Reflect.apply(this.canvas.setAttribute, this.canvas, [name, value]);
     }
   }
   destroy() {
-    this.engine.destroy();
+    if (!closeFrames(this))
+      return;
+    try {
+      this.engine.destroy();
+    } finally {
+      this.events.destroy();
+    }
   }
 }
 function artplayerProxyMediabunny(option = {}) {

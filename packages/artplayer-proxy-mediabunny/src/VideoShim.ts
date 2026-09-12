@@ -1,16 +1,22 @@
-import EventTarget from './EventTarget.js'
-/**
- * Video Element Shim
- * Simulates HTMLVideoElement interface for MediaBunny
- */
+import type { EngineOptions, EnginePort, ProxyOptions, ShimHost } from './engine-types'
+import type { MediaListener } from './EventTarget'
+import EventTarget from './EventTarget'
 import MediaBunnyEngine from './MediaBunnyEngine.js'
-
-function clamp(v, min, max) {
-  return Math.max(min, Math.min(max, Number(v) || 0))
-}
+import { cancelFrame, closeFrames, requestFrame } from './shim-frames'
+import { clampVolume, timeRanges } from './shim-values'
 
 export default class VideoShim {
-  constructor({ art, canvas, ctx, option }) {
+  declare art: ShimHost
+  declare canvas: HTMLCanvasElement
+  declare option: ProxyOptions
+  declare events: EventTarget
+  declare engine: EnginePort
+  declare _src: unknown
+  declare _volume: number
+  declare _muted: boolean
+  declare _playbackRate: number
+
+  constructor({ art, canvas, ctx, option }: Omit<EngineOptions, 'events' | 'option'> & { art: ShimHost, option: ProxyOptions }) {
     this.art = art
     this.canvas = canvas
     this.option = option
@@ -52,11 +58,11 @@ export default class VideoShim {
   }
 
   // Event methods
-  addEventListener(type, fn) {
+  addEventListener(type: string, fn: MediaListener) {
     this.events.addEventListener(type, fn)
   }
 
-  removeEventListener(type, fn) {
+  removeEventListener(type: string, fn: MediaListener) {
     this.events.removeEventListener(type, fn)
   }
 
@@ -65,7 +71,7 @@ export default class VideoShim {
     return this._src
   }
 
-  set src(v) {
+  set src(v: unknown) {
     this._src = v
     if (v)
       this.engine.load(v)
@@ -80,7 +86,7 @@ export default class VideoShim {
     return this.engine.currentTime
   }
 
-  set currentTime(t) {
+  set currentTime(t: unknown) {
     this.engine.seek(Number(t) || 0)
   }
 
@@ -101,16 +107,8 @@ export default class VideoShim {
     return this.createTimeRanges(0, this.engine.duration)
   }
 
-  createTimeRanges(start, end) {
-    const duration = this.engine.duration
-    if (!duration || Number.isNaN(duration) || end <= 0) {
-      return { length: 0, start: () => 0, end: () => 0 }
-    }
-    return {
-      length: 1,
-      start: () => start,
-      end: () => end,
-    }
+  createTimeRanges(start: number, end: number): TimeRanges {
+    return timeRanges(this.engine.duration, start, end)
   }
 
   // Playback state
@@ -148,7 +146,7 @@ export default class VideoShim {
     return this._playbackRate
   }
 
-  set playbackRate(v) {
+  set playbackRate(v: unknown) {
     const rate = Number(v)
     if (Number.isNaN(rate) || rate <= 0)
       return
@@ -163,8 +161,8 @@ export default class VideoShim {
     return this._volume
   }
 
-  set volume(v) {
-    this._volume = clamp(v, 0, 1)
+  set volume(v: unknown) {
+    this._volume = clampVolume(v)
     this._muted = false
     this.engine.setVolume(this._volume, this._muted)
     this.events.emit('volumechange')
@@ -174,7 +172,7 @@ export default class VideoShim {
     return this._muted
   }
 
-  set muted(v) {
+  set muted(v: unknown) {
     this._muted = !!v
     this.engine.setVolume(this._volume, this._muted)
     this.events.emit('volumechange')
@@ -198,11 +196,11 @@ export default class VideoShim {
     return this.engine.getHlsState()
   }
 
-  switchM3u8Quality(value) {
+  switchM3u8Quality(value: unknown) {
     return this.engine.selectHlsQuality(value)
   }
 
-  switchM3u8Audio(value) {
+  switchM3u8Audio(value: unknown) {
     return this.engine.selectHlsAudio(value)
   }
 
@@ -220,7 +218,7 @@ export default class VideoShim {
     return this.option.poster || ''
   }
 
-  set poster(v) {
+  set poster(v: string) {
     this.option.poster = v
   }
 
@@ -228,52 +226,52 @@ export default class VideoShim {
     return this.option.autoplay || false
   }
 
-  set autoplay(v) {}
+  set autoplay(v: unknown) {}
 
   get loop() {
     return this.option.loop || false
   }
 
-  set loop(v) {}
+  set loop(v: unknown) {}
 
   get controls() {
     return false
   }
 
-  set controls(v) {}
+  set controls(v: unknown) {}
 
   get playsInline() {
     return true
   }
 
-  set playsInline(v) {}
+  set playsInline(v: unknown) {}
 
   get crossOrigin() {
     return this.option.crossOrigin || ''
   }
 
-  set crossOrigin(v) {}
+  set crossOrigin(v: unknown) {}
 
   get preload() {
     return 'auto'
   }
 
-  set preload(v) {}
+  set preload(v: unknown) {}
 
   get defaultMuted() {
     return false
   }
 
-  set defaultMuted(v) {}
+  set defaultMuted(v: unknown) {}
 
   get defaultPlaybackRate() {
     return 1
   }
 
-  set defaultPlaybackRate(v) {}
+  set defaultPlaybackRate(v: unknown) {}
 
   // Methods
-  canPlayType(_type) {
+  canPlayType(_type: string) {
     return 'maybe'
   }
 
@@ -281,29 +279,15 @@ export default class VideoShim {
     return this.canvas.getBoundingClientRect()
   }
 
-  requestVideoFrameCallback(callback) {
-    const id = requestAnimationFrame((time) => {
-      callback(time, {
-        presentationTime: this.engine.currentTime,
-        expectedDisplayTime: time + 16.6,
-        width: this.engine.videoWidth,
-        height: this.engine.videoHeight,
-        mediaTime: this.engine.currentTime,
-        presentedFrames: 0,
-        processingDuration: 0,
-        captureTime: time,
-        receiveTime: time,
-        rtpTimestamp: 0,
-      })
-    })
-    return id
+  requestVideoFrameCallback(callback: VideoFrameRequestCallback): number {
+    return requestFrame(this, callback)
   }
 
-  cancelVideoFrameCallback(id) {
-    cancelAnimationFrame(id)
+  cancelVideoFrameCallback(id: number): void {
+    cancelFrame(this, id)
   }
 
-  setAttribute(name, value) {
+  setAttribute(name: string, value: unknown) {
     if (name === 'src') {
       this.src = value
     }
@@ -317,11 +301,18 @@ export default class VideoShim {
       this.muted = true
     }
     else {
-      this.canvas.setAttribute(name, value)
+      Reflect.apply(this.canvas.setAttribute, this.canvas, [name, value])
     }
   }
 
-  destroy() {
-    this.engine.destroy()
+  destroy(): void {
+    if (!closeFrames(this))
+      return
+    try {
+      this.engine.destroy()
+    }
+    finally {
+      this.events.destroy()
+    }
   }
 }

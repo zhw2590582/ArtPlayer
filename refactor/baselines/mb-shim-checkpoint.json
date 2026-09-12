@@ -1,0 +1,708 @@
+{
+  "task": "PKG-MB-04",
+  "status": "doing",
+  "checkpoint": "Shim/event/RAF lifecycle only; coordinator remains incomplete",
+  "parentCommit": "adba8a3d127472ad7ae146e64dcb67568639520e",
+  "sourceSha256LF": {
+    "packages/artplayer-proxy-mediabunny/src/AudioEngine.js": "910d6831372e4895d55dec78010f281a199bc88f99735630a5a3b621f192ac35",
+    "packages/artplayer-proxy-mediabunny/src/engine-types.ts": "815e99c75c63abe126dceddbde6d79f6cd5fc435ce2de76d508d5ea407419ffa",
+    "packages/artplayer-proxy-mediabunny/src/EventTarget.ts": "4cea57e59b0a1118744a55b0a87c1df28cb0d69c26c50f9275039fe7540c9720",
+    "packages/artplayer-proxy-mediabunny/src/hls-state.ts": "ff9ffd742f9763349df1f50eac6b6bd488a80d05aaab8ca198f387f0d17d5e25",
+    "packages/artplayer-proxy-mediabunny/src/index.js": "4e1be8937908ff6e6ef8a4e863e22b4468312cf31d66ac299322e475757773bb",
+    "packages/artplayer-proxy-mediabunny/src/input.ts": "d25b1c4ee4aee358c86fd8c554b8b36bfc23fdbd3c27fa21d2cd7e812c98bf9c",
+    "packages/artplayer-proxy-mediabunny/src/load-session.ts": "560fbd5935fc787bde5f413fcaa41b8829506179c5328ce3cb51e734bbba8cec",
+    "packages/artplayer-proxy-mediabunny/src/m3u8.js": "4639f09e0c743dc2b24078f48ca1e58eaaedaa3f5e6b863583cbd4bc4a7d3142",
+    "packages/artplayer-proxy-mediabunny/src/media.ts": "e745cd8e750e05d0fcfa4bc588f7eb5a5576f3be20f5e67b65b704f57d539ae9",
+    "packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.d.ts": "9c1e2b3cf9ffe5aa1c50a0e6bc13c1e986b8178440393efbaa22d6013b850bca",
+    "packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.js": "5ce3bc85572121ec9068fbc051ac4845d3a3991e670e10dafcaede1c1609f1fb",
+    "packages/artplayer-proxy-mediabunny/src/preflight.ts": "d296234312f23b97a1e0a054f1d7dbbc988d5240c5fd5089c36df1677c7b7348",
+    "packages/artplayer-proxy-mediabunny/src/shim-frames.ts": "172b222f997a711c2cc7741f189f05127a4ac5099c1cbe2729e903b36b4ce24a",
+    "packages/artplayer-proxy-mediabunny/src/shim-values.ts": "a93ee17e87cc7db24f4b02d866af8af206d3007d01def446906fb769c20de17d",
+    "packages/artplayer-proxy-mediabunny/src/tracks.ts": "6da68530c1fc7105ab17ed742d87d93e84447e822e84386591f9c3e6d0bec733",
+    "packages/artplayer-proxy-mediabunny/src/VideoEngine.js": "5ac862b0fd9c196dc6656f8908a214c1b3a0a53a7e85ff845d9068888831986b",
+    "packages/artplayer-proxy-mediabunny/src/VideoShim.ts": "c3dab22ac6fe89a19b6f1d7f786a4e087bc8be69888836f2b136d04734b5f9df",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.legacy.js": "4e284e02970cf2f42b809ade1210ebe69d40c329597a0d01e0d25ad0e2a326a3",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.mjs": "a2e60ecdf57b7dfd4403674ae9ed704c91b181fc197611e213b053ff3c949003",
+    "packages/artplayer-proxy-mediabunny/ARCHITECTURE.md": "af6520c10d7ba23110eb42d44b3b023d1e1c5a0fc659d51f720bd8903a18b98d",
+    "package.json": "32ed93187014731cf8a28ac4b759260486fa058a02dce397d08a65964ae9de20",
+    "test/mediabunny-shim.test.js": "2675b3b6575c26505d1a3646e96a7abffe909db07416a046dc105ca30635484e",
+    "test/browser/mediabunny-shim.spec.js": "92b10cc955b0ab397eede78a1af386ae02ef92a1c0631ccddc4f539f4e4532cd"
+  },
+  "node": {
+    "total": 68,
+    "shim": 12,
+    "sameShimAssertionsOnPreviousMain": {
+      "passed": 9,
+      "failed": 3
+    },
+    "mainShimAndLoad": 32,
+    "legacyShimAndLoad": 32,
+    "artifactScope": "Each 32-case main/legacy command contains 28 candidate artifact assertions and four frozen normal-event controls."
+  },
+  "browser": {
+    "total": 39,
+    "outcomes": {
+      "native-input-playback-and-seek": 10,
+      "candidate-trackless-readiness-gap": 2,
+      "unsupported-capability-control": 6,
+      "native-pending-stream-cancellation": 9,
+      "native-synthetic-raf": 9,
+      "native-mp4-playback-observed": 2,
+      "verified-unsupported-capability-control": 1
+    },
+    "records": [
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "stream",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": true
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "hls",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "trackless",
+        "outcome": "candidate-trackless-readiness-gap",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "stream",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": true
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "hls",
+        "outcome": "native-input-playback-and-seek",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "trackless",
+        "outcome": "candidate-trackless-readiness-gap",
+        "cleanup": {
+          "audioContext": "closed",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "webm",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "blob",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "stream",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": true
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "audio",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "hls",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "input": "trackless",
+        "outcome": "unsupported-capability-control",
+        "cleanup": {
+          "audioContext": "not-created",
+          "pendingFrames": 0,
+          "streamCancelled": false
+        },
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "ending": "destroy",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "ending": "source",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old",
+          "new"
+        ],
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "ending": "timeout",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "ending": "destroy",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "ending": "source",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old",
+          "new"
+        ],
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "ending": "timeout",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "ending": "destroy",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "ending": "source",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old",
+          "new"
+        ],
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "ending": "timeout",
+        "outcome": "native-pending-stream-cancellation",
+        "cancellations": [
+          "old"
+        ],
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "scenario": "callback",
+        "outcome": "native-synthetic-raf",
+        "result": {
+          "idType": "number",
+          "calls": [
+            {
+              "owner": "first",
+              "time": "number",
+              "mediaTime": 0,
+              "presentedFrames": 0
+            }
+          ],
+          "listeners": 0
+        },
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "scenario": "destroy",
+        "outcome": "native-synthetic-raf",
+        "result": {
+          "idType": "number",
+          "calls": [],
+          "listeners": 0
+        },
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "scenario": "independent",
+        "outcome": "native-synthetic-raf",
+        "result": {
+          "idType": "number",
+          "calls": [
+            {
+              "owner": "second"
+            }
+          ],
+          "listeners": 0
+        },
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "scenario": "callback",
+        "outcome": "native-synthetic-raf",
+        "result": {
+          "idType": "number",
+          "calls": [
+            {
+              "owner": "first",
+              "time": "number",
+              "mediaTime": 0,
+              "presentedFrames": 0
+            }
+          ],
+          "listeners": 0
+        },
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "scenario": "destroy",
+        "outcome": "native-synthetic-raf",
+        "result": {
+          "idType": "number",
+          "calls": [],
+          "listeners": 0
+        },
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "scenario": "independent",
+        "outcome": "native-synthetic-raf",
+        "result": {
+          "idType": "number",
+          "calls": [
+            {
+              "owner": "second"
+            }
+          ],
+          "listeners": 0
+        },
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "scenario": "callback",
+        "outcome": "native-synthetic-raf",
+        "result": {
+          "idType": "number",
+          "calls": [
+            {
+              "owner": "first",
+              "time": "number",
+              "mediaTime": 0,
+              "presentedFrames": 0
+            }
+          ],
+          "listeners": 0
+        },
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "scenario": "destroy",
+        "outcome": "native-synthetic-raf",
+        "result": {
+          "idType": "number",
+          "calls": [],
+          "listeners": 0
+        },
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "scenario": "independent",
+        "outcome": "native-synthetic-raf",
+        "result": {
+          "idType": "number",
+          "calls": [
+            {
+              "owner": "second"
+            }
+          ],
+          "listeners": 0
+        },
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "8ac3fb3531f109475adeb0230f155113e6a0210e32c0be08527be4b2772e63a3",
+        "outcome": "verified-unsupported-capability-control",
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      }
+    ],
+    "report": "refactor/.cache/mb04-shim-results/report.json",
+    "reportSha256": "07856e69bad4f4c33f6a06506a3ca21caa23c5fc0e915a166825e8596a56865f",
+    "results": "refactor/.cache/mb04-shim-results/results"
+  },
+  "checks": [
+    {
+      "command": "yarn test:mediabunny",
+      "result": "pass",
+      "tests": 68,
+      "log": "refactor/.cache/mb04-shim-tests-final.log"
+    },
+    {
+      "command": "node --test test/mediabunny-shim.test.js with adba8a3d main",
+      "result": "expected historical failures",
+      "passed": 9,
+      "failed": 3,
+      "log": "refactor/.cache/mb04-shim-frozen.log"
+    },
+    {
+      "command": "package strict typecheck and focused eslint --no-fix",
+      "result": "pass",
+      "packageStrictProductionModules": 11,
+      "scope": "Coordinator JS remains behind an explicit declaration boundary"
+    },
+    {
+      "command": "yarn build artplayer-proxy-mediabunny",
+      "result": "pass",
+      "formats": [
+        "main",
+        "legacy",
+        "esm"
+      ],
+      "log": "refactor/.cache/mb04-shim-build.log"
+    },
+    {
+      "command": "main/legacy shim and load regressions",
+      "result": "pass",
+      "eachRun": 32,
+      "candidateArtifactCasesPerRun": 28,
+      "frozenControlsPerRun": 4
+    },
+    {
+      "command": "four MediaBunny browser specs with built main and ARTPLAYER_MB_BROWSER_CANDIDATE=1",
+      "result": "pass",
+      "tests": 39,
+      "log": "refactor/.cache/mb04-shim-browser.log"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1074,
+        "engineering": 14,
+        "baseline": 141,
+        "mainTotal": 1229,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 301,
+      "log": "refactor/.cache/mb04-shim-ci.log"
+    }
+  ],
+  "limitations": [
+    "PKG-MB-04 is still doing. Readiness/play/seek coordination remains; event silence alone is not evidence that pending engine operations stopped.",
+    "Coordinator .d.ts is a temporary bridge, not typechecking of its JS implementation.",
+    "Synthetic RAF is not decoded video frame evidence.",
+    "Trackless and Windows WebKit capability cases keep their unresolved scope; no release acceptance."
+  ]
+}

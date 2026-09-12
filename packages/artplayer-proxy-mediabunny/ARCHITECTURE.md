@@ -17,12 +17,30 @@ declarations, the factory signature, canvas forwarding, or package entrypoints.
 | `load-session.ts` | Ownership of the pending/active SDK Input, HEAD AbortController, deferred load events and deadline |
 | `MediaBunnyEngine.js` | Current coordinator; connects session cancellation to load, source replacement, errors and destroy |
 | `VideoEngine.js` / `AudioEngine.js` | Current native decoding, rendering, seeking, Web Audio clock and scheduling |
-| `VideoShim.js` / `EventTarget.js` | Current video-like descriptors and event forwarding |
+| `VideoShim.ts` / `EventTarget.ts` | Video-like descriptors, synchronous/Promise forwarding and owned event lifecycle |
+| `shim-values.ts` | Existing volume coercion and synthetic TimeRanges values |
+| `shim-frames.ts` | Synthetic frame callbacks, per-instance RAF ownership and terminal cleanup |
+| `engine-types.ts` / `MediaBunnyEngine.d.ts` | Explicit temporary coordinator boundary while its JavaScript implementation is migrated in MB-04 |
 | `m3u8.js` | Current ArtPlayer control/setting integration |
 
-The six TypeScript modules use strict checking with `skipLibCheck: false` and no
-ambient Node types. Remaining JavaScript is explicitly scheduled in PKG-MB-04/05/06/07/08.
+The eleven TypeScript modules use strict checking with `skipLibCheck: false` and no
+ambient Node types. The adjacent coordinator declaration is a transitional boundary,
+not proof that the JavaScript coordinator has been checked. Replace it with the actual
+strict implementation before completing MB-04. Remaining JavaScript is explicitly
+scheduled in PKG-MB-04/05/06/07/08.
 Do not describe the whole package as migrated yet.
+
+The shim keeps its existing own-property order and direct prototype surface because
+the entry copies those descriptors onto the canvas. Resource bookkeeping lives in a
+WeakMap rather than adding accidental canvas properties. Frame callback IDs include
+zero; destruction cancels pending callbacks and closes scheduling. The callback metadata
+remains synthetic (`presentedFrames: 0`), not a claim of decoded frame accuracy.
+
+EventTarget retains duplicate listeners, first-match removal, live-array `forEach`
+mutation semantics, detail identity and listener exceptions during normal dispatch.
+Its terminal state stops callbacks later in a dispatch when a listener destroys the
+shim. Shim teardown closes events in `finally`, even if engine cleanup throws, and
+subsequent teardown is inert. Engine playback/readiness race fixes remain in progress.
 
 ## Input and cancellation flow
 
@@ -69,6 +87,7 @@ yarn test:mediabunny
 node node_modules/typescript/bin/tsc -p packages/artplayer-proxy-mediabunny/tsconfig.json
 yarn build artplayer-proxy-mediabunny
 yarn test:browser test/browser/mediabunny-inputs.spec.js test/browser/mediabunny.spec.js test/browser/mediabunny-load.spec.js
+yarn test:browser test/browser/mediabunny-shim.spec.js
 ```
 
 Node tests use actual SDK parsing and controlled lifecycle interleavings. Browser tests

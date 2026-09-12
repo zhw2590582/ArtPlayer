@@ -1,0 +1,10 @@
+{
+  "sourceCommit": "adba8a3d127472ad7ae146e64dcb67568639520e",
+  "sourceSha256LF": {
+    "packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.js": "5ce3bc85572121ec9068fbc051ac4845d3a3991e670e10dafcaede1c1609f1fb",
+    "packages/artplayer-proxy-mediabunny/src/VideoShim.js": "f01c954e8a98fb70138dded78b99eb2765f5cd1e8a98dafbb35ffbf8f7741dbb",
+    "packages/artplayer-proxy-mediabunny/src/EventTarget.js": "c1854510af5a37301b4bd3b1fbcc28f7e0f105f50cb67324c5c05a76f2d054fb",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "f9d5571f75f47ee1714d04c951836c1a6c903f4e465fab2a267dcb4948c0de7b"
+  },
+  "scope": "MB-03 completion before MB-04 coordination edits; not a published release"
+}

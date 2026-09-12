@@ -1,5 +1,17 @@
 # 进度与证据
 
+## 当前检查点：PKG-MB-04 VideoShim、事件与RAF资源
+
+新增五个生产TS模块，保持shim/canvas布局和正常事件/Promise/属性契约；修复销毁后的RAF、
+事件监听器和清理异常残留。同一12项shim断言在adba8a3d main上9通过/3失败，候选全通过。
+包专项68项通过；main/legacy各32项（28候选+4冻结正常对照），三格式构建通过。
+39项候选浏览器检查通过：12播放、9原生Stream取消、9synthetic RAF、7能力失败对照、
+2待修复无轨道就绪。完整CI1229项通过，另44重复契约，301生产TS，声明桥未计为JS实现迁移。
+见[检查点](changes/2026-09-12-PKG-MB-04-shim-checkpoint.md)及[证据](baselines/mb-shim-checkpoint.json)。
+MB-04保持doing；立即继续MediaBunnyEngine实际TS与readiness/play/seek协调。事件出口已关闭
+不代表底层晚操作已停止，MB-LIFE-01/MB-READY-01仍open。222项：100 done、8 doing、114 todo。
+本地checkpoint，不推送/发布；Canvas/Ambilight类型决定仍待确认。
+
 ## 最新完成：PKG-MB-03 输入、Range与加载取消
 
 六个strict TS模块已接入生产，修复切源/销毁/超时后的待加载Input、HEAD及timer资源与陈旧回调。

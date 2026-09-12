@@ -3648,7 +3648,7 @@
         "PKG-MB-07",
         "PKG-MB-09"
       ],
-      "compatibleResolution": "Reproduce pending operations and destroy/source-switch races before migrating each owner; preserve public event and promise behavior while preventing stale resource use. MB-02 now reproduces late load rejection and uncancelled waiting/loadstart timers after destroy in all three historical implementations using a controlled host. Other interleavings and full-core native behavior are not yet verified. Expanded MB-02 baseline reproduces play-after-pause/destroy, rejected-play false state, seek-after-destroy and retained successful-load timeout timers in all three actual historical implementations; Range and active-timeout normal controls remain separate. MB-03 candidate owns pending Input before track selection and cancels load/HEAD/timers on source replacement, timeout and destroy; source/main/legacy regressions pass. Pending play/seek, late decoder work and full readiness coordination remain MB-04/05/06, so this risk stays open.",
+      "compatibleResolution": "Reproduce pending operations and destroy/source-switch races before migrating each owner; preserve public event and promise behavior while preventing stale resource use. MB-02 now reproduces late load rejection and uncancelled waiting/loadstart timers after destroy in all three historical implementations using a controlled host. Other interleavings and full-core native behavior are not yet verified. Expanded MB-02 baseline reproduces play-after-pause/destroy, rejected-play false state, seek-after-destroy and retained successful-load timeout timers in all three actual historical implementations; Range and active-timeout normal controls remain separate. MB-03 candidate owns pending Input before track selection and cancels load/HEAD/timers on source replacement, timeout and destroy; source/main/legacy regressions pass. Pending play/seek, late decoder work and full readiness coordination remain MB-04/05/06, so this risk stays open. MB-04 shim checkpoint fixes synthetic RAF retention and terminal event-listener cleanup, including engine cleanup exceptions. Closing the event bridge does not prove pending engine operations stopped; coordination remains in progress.",
       "closureCriteria": "Historical failing interleavings and candidate cancellation/cleanup pass with real media and event evidence, including long playback and track topology.",
       "status": "open",
       "evidence": [
@@ -3659,7 +3659,8 @@
         "refactor/baselines/mb-media-checkpoint.json",
         "refactor/changes/2026-09-12-PKG-MB-02-baseline.md",
         "refactor/baselines/mb-behavior-validation.json",
-        "refactor/changes/2026-09-12-PKG-MB-03-input.md"
+        "refactor/changes/2026-09-12-PKG-MB-03-input.md",
+        "refactor/changes/2026-09-12-PKG-MB-04-shim-checkpoint.md"
       ]
     },
     {
