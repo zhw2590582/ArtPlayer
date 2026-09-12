@@ -1526,11 +1526,15 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "canvas 上下文、参数及 start/stop 的明确类型",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-AMBILIGHT-04-types.md",
+        "ambilight-validation.md",
+        "baselines/ambilight-types-validation.json"
+      ]
     },
     {
       "id": "PKG-AMBILIGHT-05",

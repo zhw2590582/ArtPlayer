@@ -70,7 +70,8 @@
     "check:impact": "node refactor/scripts/impact.mjs",
     "check:contracts": "node refactor/scripts/contracts.mjs",
     "test:contracts": "node refactor/scripts/run-contracts.mjs",
-    "test:ambilight": "node --test test/ambilight.test.js test/ambilight-lifecycle.test.js"
+    "test:ambilight": "node --test test/ambilight.test.js test/ambilight-lifecycle.test.js",
+    "test:ambilight-types-package": "node refactor/scripts/ambilight-package-types.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

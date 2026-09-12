@@ -167,11 +167,11 @@ function createAmbilightView(utils) {
     }
   }
   function render(colors, active) {
-    for (let index = 0; index < colors.length; index++) {
+    for (let index2 = 0; index2 < colors.length; index2++) {
       if (!active())
         return;
-      const item = items[index];
-      const color = colors[index];
+      const item = items[index2];
+      const color = colors[index2];
       if (item && color !== void 0)
         item.style.backgroundColor = color;
     }
@@ -299,6 +299,7 @@ function artplayerPluginAmbilight(option = {}) {
     return result;
   };
 }
+const index = Object.assign(artplayerPluginAmbilight, { default: artplayerPluginAmbilight });
 export {
-  artplayerPluginAmbilight as default
+  index as default
 };

@@ -152,5 +152,5 @@
 | VAST-LIFE-01 | open / 已复现 | VAST SDK and container lack core destruction ownership and pending work cancellation | PKG-VAST-02, PKG-VAST-03, PKG-VAST-05 |
 | VAST-DIST-01 | open / 已复现 | Published VAST CommonJS default namespace differs from the current callable distribution | PKG-VAST-04, PKG-VAST-06 |
 | AMBILIGHT-LIFE-01 | open / 已复现 | Ambilight sampling and RAF/DOM ownership lack terminal/error handling | PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-05 |
-| AMBILIGHT-TYPE-01 | open / 源码/产物事实 | Ambilight declarations disagree with optional factory argument and differ across published generations | PKG-AMBILIGHT-04, PKG-AMBILIGHT-06 |
-| AMBILIGHT-DIST-01 | open / 已复现 | Ambilight 1.0.0 CommonJS default namespace differs from callable 1.1.0 | PKG-AMBILIGHT-04, PKG-AMBILIGHT-06 |
+| AMBILIGHT-TYPE-01 | resolved / 已复现 | Ambilight declarations disagree with optional factory argument and differ across published generations | PKG-AMBILIGHT-04, PKG-AMBILIGHT-06 |
+| AMBILIGHT-DIST-01 | resolved / 已复现 | Ambilight 1.0.0 CommonJS default namespace differs from callable 1.1.0 | PKG-AMBILIGHT-04, PKG-AMBILIGHT-06 |

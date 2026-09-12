@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AMBILIGHT-04",
+  "status": "done",
+  "parentCommit": "6caee44dbf23073b5b307fe083633172679a4e07",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/ambilight-types.test.mjs",
+      "result": "pass in final ci:check",
+      "tests": 4,
+      "scope": "five compiler modes, ten invalid uses, two frozen declarations, editor globals, actual production CJS/global/ESM"
+    },
+    {
+      "command": "yarn test:ambilight-types-package",
+      "result": "pass with exact historical failure observation",
+      "cases": 17,
+      "candidateZeroDiagnosticCases": 7,
+      "historicalZeroDiagnosticCases": 9,
+      "historicalExpectedFailureCases": 1,
+      "invalidUsesRejectedPerCandidateCase": 10,
+      "report": "refactor/.cache/ambilight-package-types-NRiHcI/report.json",
+      "sha256": "77d85ca46927b85e801747cfbd3e905604c31f21414b54ee8b7eda6849f74300",
+      "packages": [
+        {
+          "name": "artplayer",
+          "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\ambilight-package-types-NRiHcI\\artplayer.tgz",
+          "sha256": "2139af017670a4f30f667bf5fdc1aa680f3e03b9c8d3cb767fc92d6345aedff5"
+        },
+        {
+          "name": "artplayer-plugin-ambilight",
+          "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\ambilight-package-types-NRiHcI\\artplayer-plugin-ambilight.tgz",
+          "sha256": "f79ad847970a8e4e46ab254d6654ce500ceed799eb8a4004bea5fa4ff7ff243a"
+        }
+      ],
+      "published": [
+        {
+          "label": "published-1.0.0",
+          "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\releases\\artplayer-plugin-ambilight-1.0.0.tgz",
+          "sha256": "a95aa8c232ab48493e6b4d46b36edc8091230cbde5d18d7ec41912a4fa2b8956"
+        },
+        {
+          "label": "published-1.1.0",
+          "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\releases\\artplayer-plugin-ambilight-1.1.0.tgz",
+          "sha256": "e95bd60fd7bce52142cf0041bad811452305029cbe1129c7d89246eb260c5c86"
+        }
+      ],
+      "matrix": [
+        {
+          "plugin": "published-1.0.0",
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "published-1.0.0",
+          "compiler": "5.9.3",
+          "mode": "nodenext-cjs",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "published-1.0.0",
+          "compiler": "5.9.3",
+          "mode": "nodenext-esm",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "published-1.0.0",
+          "compiler": "5.9.3",
+          "mode": "bundler-esm",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "published-1.0.0",
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "published-1.1.0",
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "published-1.1.0",
+          "compiler": "5.9.3",
+          "mode": "nodenext-cjs",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "published-1.1.0",
+          "compiler": "5.9.3",
+          "mode": "nodenext-esm",
+          "historicalFailure": true,
+          "diagnosticCodes": [
+            2349,
+            2349,
+            2322,
+            2344
+          ],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "published-1.1.0",
+          "compiler": "5.9.3",
+          "mode": "bundler-esm",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "published-1.1.0",
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 0
+        },
+        {
+          "plugin": "candidate",
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 10
+        },
+        {
+          "plugin": "candidate",
+          "compiler": "5.9.3",
+          "mode": "nodenext-cjs",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 10
+        },
+        {
+          "plugin": "candidate",
+          "compiler": "5.9.3",
+          "mode": "nodenext-esm",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 10
+        },
+        {
+          "plugin": "candidate",
+          "compiler": "5.9.3",
+          "mode": "bundler-esm",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 10
+        },
+        {
+          "plugin": "candidate",
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 10
+        },
+        {
+          "plugin": "candidate",
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs-no-interop",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 10
+        },
+        {
+          "plugin": "candidate",
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs-no-interop",
+          "historicalFailure": false,
+          "diagnosticCodes": [],
+          "invalidCount": 10
+        }
+      ]
+    },
+    {
+      "command": "yarn build artplayer-plugin-ambilight && yarn build:ts",
+      "result": "pass",
+      "scope": "main/legacy/ESM, docs/compiled copies and generated editor declarations"
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 878,
+        "engineering": 14,
+        "baseline": 83,
+        "mainTotal": 975,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 278
+    },
+    {
+      "command": "playwright test test/browser/ambilight-lifecycle.spec.js",
+      "result": "pass",
+      "tests": 18,
+      "stats": {
+        "startTime": "2026-09-12T03:46:06.215Z",
+        "duration": 29911.739,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": "refactor/.cache/ambilight04-final-results/report.json",
+      "archivedResults": "refactor/.cache/ambilight04-final-results/results",
+      "originalResultsPrefix": "refactor/.cache/browser/results",
+      "scope": "same native canvas/media candidate suite, npm cores 5.1.7/5.4.0 and candidate, Chromium/Firefox/WebKit"
+    }
+  ],
+  "reproducedThenFixed": [
+    "New tests on task 03 state: three failures, one historical-call test passes.",
+    "Old Node10 resolver could not find /legacy declarations: added typesVersions.",
+    "Real pack included implementation tsconfig: excluded it via package .npmignore.",
+    "Actual npm 1.1.0 NodeNext ESM declaration errors 2349,2349,2322,2344 retained as historical evidence; candidate proper declaration entry modes pass."
+  ],
+  "inferenceBoundary": "Candidate preserves published 1.1.0 optional fields and required final Parameters input. Required fields in 1.0.0 had already become optional in 1.1.0; no new widening or borrowed Ads approval.",
+  "inputs": [
+    {
+      "file": "packages/artplayer-plugin-ambilight/src/index.ts",
+      "sha256LF": "9db25144798ee667bc420b3e1f0b00ef6855185d26cefca45e05271354bf8591"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/types/artplayer-plugin-ambilight.d.cts",
+      "sha256LF": "4e3e0ed19f41bf27afa1a8abc9fad55169080c0c0f514171446881e87d36941d"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/types/artplayer-plugin-ambilight.d.mts",
+      "sha256LF": "0454444c80bedb1b32df54642256440329f78a748a811296420e05f6ae1d6563"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/types/artplayer-plugin-ambilight.d.ts",
+      "sha256LF": "c4a42edb8e30ad851febd15d1e61012019dd9aeb774c3b5d9bf5c59cbec9a671"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.js",
+      "sha256LF": "e0487dabba876392c76e91864857fd3fe7d62f50d227f3ca0b4cc1361b34d9ea"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.legacy.js",
+      "sha256LF": "f8f2909dbb63a6b8fa8297295f8084528c336fed10dbad3d6a676fd1c629a909"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.mjs",
+      "sha256LF": "b40ed26e30d8215b4bad7eb209fd89201b4e87baca291b899cb60598ad9e38d3"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/package.json",
+      "sha256LF": "f7d9c4d7e22d5b72db159342f954cf3becda33376d12130fbd15526da40296cb"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/.npmignore",
+      "sha256LF": "145c5fa0341195e21cf13df3423a057282f8ea374e9a1b3065e2280e1ce1c5c1"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/README.md",
+      "sha256LF": "d7933f5d5d4ef7815d14d39878968680a6a623417140a7cb8c8bc864d0e69e76"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/ARCHITECTURE.md",
+      "sha256LF": "2a0ef231cfe5d87888a4fc6f6c38ae038e1e049189ca0d8bbfae5bb62f109a50"
+    },
+    {
+      "file": "scripts/build-ts.js",
+      "sha256LF": "1cb6badbce9b974cca0ad7d307aae7bf0008369de78f429590dea4e0323d69e6"
+    },
+    {
+      "file": "scripts/typecheck.mjs",
+      "sha256LF": "0bef8f8c6a1cdf5082fdcc3f4bfdd54f0d8bc30954a0e798db3f27b069ba9295"
+    },
+    {
+      "file": "refactor/scripts/ambilight-types.test.mjs",
+      "sha256LF": "7abfe50e32b899fd15ee248ac07878211533c569afe85ae26a6555bca19d0665"
+    },
+    {
+      "file": "refactor/scripts/ambilight-package-types.mjs",
+      "sha256LF": "8df883909fb4db92e59043265a92e4c7d01c2408b91c2a5da6e8abdccd963e3f"
+    },
+    {
+      "file": "refactor/fixtures/consumers/ambilight-published.ts",
+      "sha256LF": "fb440616e3eec4b3bfd0f6063b63fc9590a46ca471c5f1ffefacf97cff3c547a"
+    },
+    {
+      "file": "test/types/ambilight.ts",
+      "sha256LF": "aa2e4ebf4eb54a3713acf0c7a89be5eca88f7b54f75615435bd9cac664a0574a"
+    },
+    {
+      "file": "test/browser/ambilight-lifecycle.spec.js",
+      "sha256LF": "321693a24d33f0c7aee02fd4137b55175386562a645ba138e15c3a51d6348d2c"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-ambilight.d.ts",
+      "sha256LF": "162bf7139e8c1e453b0aaf7290eb08ff698d3db19fae8594e9787b07efa40612"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "1c0a6f5b206cb4ecdaec8025369099b4ae8df9d7b18d987e03f91164ed96fcae"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/ambilight04-before.log",
+      "sha256": "c2d01f5ac9fbfd9be61187b0eaf5d27fc61e0b5019828df621bad745ce5d17f0"
+    },
+    {
+      "file": "refactor/.cache/ambilight04-types.log",
+      "sha256": "cf385247c78a3e95acb5738356fbdb456f993c16c0e963fd5b532573efaf00ab"
+    },
+    {
+      "file": "refactor/.cache/ambilight04-package.log",
+      "sha256": "68abe529928ae4138be893c1a5b3ef5ffa24c70a404f99d833b405b2246733bd"
+    },
+    {
+      "file": "refactor/.cache/ambilight04-package-second.log",
+      "sha256": "b29dca1e79f9549f3fa7ef05700f246ee7a6e006476f1b5e02f6b28897b2ffd0"
+    },
+    {
+      "file": "refactor/.cache/ambilight04-package-final.log",
+      "sha256": "ef927b871eb509e9c62b305539dfca8b35035a504fe6a3cf0073e61a7f542093"
+    },
+    {
+      "file": "refactor/.cache/ambilight04-build.log",
+      "sha256": "2c8fa2a92b824975142d6506c13ef626d8b1fa2b97571a924e0b4e2c8658c2ff"
+    },
+    {
+      "file": "refactor/.cache/ambilight04-editor-build.log",
+      "sha256": "f3304ba150de716716b67d4ca7d9995826b48ae2eee15169e79c764d7942de05"
+    },
+    {
+      "file": "refactor/.cache/ambilight04-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/ambilight04-ci.log",
+      "sha256": "6b2bbfe06464a281b83c9d877b486f02a5520f9b99a89352e400d766b86d6a90"
+    },
+    {
+      "file": "refactor/.cache/ambilight04-browser.log",
+      "sha256": "e7688c4721ba67d0fb1b99350571b3679c04b4f85f823d730b314d1f4ff47147"
+    }
+  ],
+  "limitations": [
+    "Installed matrix uses the same packed candidate core for all plugin declaration versions; it does not establish a historical runtime core support range.",
+    "Proxy and device validation is task 05. Complete distribution, actual installed-browser and 8082 demo/editor interaction remain task 06.",
+    "The generic test:package still covers core/chapter; the dedicated Ambilight installation script does not imply whole-ecosystem acceptance.",
+    "No push, publish, release version change or remote workflow run."
+  ]
+}

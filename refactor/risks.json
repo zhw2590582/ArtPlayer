@@ -3279,19 +3279,24 @@
     {
       "id": "AMBILIGHT-TYPE-01",
       "title": "Ambilight declarations disagree with optional factory argument and differ across published generations",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "owners": [
         "PKG-AMBILIGHT-04",
         "PKG-AMBILIGHT-06"
       ],
       "compatibleResolution": "Preserve legal old/new calls and ignored zIndex, validate export= and default consumers without narrowing inferred options.",
       "closureCriteria": "Installed old/current compiler consumers and documented historical limitations verified.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/ambilight-contract.md",
         "refactor/baselines/ambilight-release.json",
         "refactor/changes/2026-09-12-PKG-AMBILIGHT-01-contract.md"
-      ]
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-04-types.md",
+        "refactor/baselines/ambilight-types-validation.json"
+      ],
+      "resolutionRationale": "Packed candidate passes seven old/current compiler configurations, including no-interop default imports; optional factory overload preserves published 1.1.0 Parameters input. Both exact published declarations and prior 1.0.0-to-1.1.0 field optionality difference are verified. Candidate corrects the actual 1.1.0 NodeNext ESM failure; this is not full device or distribution acceptance."
     },
     {
       "id": "AMBILIGHT-DIST-01",
@@ -3303,12 +3308,17 @@
       ],
       "compatibleResolution": "Keep callable factory with compatible self default alias.",
       "closureCriteria": "Packed root/legacy/global/ESM and old namespace consumers pass.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/ambilight-contract.md",
         "refactor/baselines/ambilight-release.json",
         "refactor/changes/2026-09-12-PKG-AMBILIGHT-01-contract.md"
-      ]
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-04-types.md",
+        "refactor/baselines/ambilight-types-validation.json"
+      ],
+      "resolutionRationale": "Actual production and installed root/legacy callable factories have self default identity, native ESM default is callable and script globals match. Public default/import= consumers pass. Broader deep-import/demo/package-browser review remains task 06."
     }
   ]
 }

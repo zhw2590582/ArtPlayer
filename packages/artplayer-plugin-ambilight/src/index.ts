@@ -7,7 +7,7 @@ import { createAmbilightView } from './view'
 type Option = Parameters<typeof PublicPlugin>[0]
 type Subscription = ['ready' | 'destroy', () => void]
 
-export default function artplayerPluginAmbilight(option: Option = {}) {
+function artplayerPluginAmbilight(option: Option = {}) {
   return (art: Artplayer) => {
     let host: Artplayer | null = art
     let closed = art.isDestroy
@@ -123,3 +123,5 @@ export default function artplayerPluginAmbilight(option: Option = {}) {
     return result
   }
 }
+
+export default Object.assign(artplayerPluginAmbilight, { default: artplayerPluginAmbilight })
