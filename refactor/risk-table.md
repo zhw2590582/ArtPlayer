@@ -174,6 +174,6 @@
 | MB-CAP-01 | open / 已复现 | Current Windows WebKit lacks WebCodecs and Web Audio constructors needed by historical MediaBunny proxies | PKG-MB-02, PKG-MB-09 |
 | MB-READY-01 | resolved / 已复现 | MediaBunny historical readiness can repeat for trackless input and occur after capability errors | PKG-MB-04, PKG-MB-09 |
 | DPIP-DISPLAY-01 | resolved / 已复现 | Web fullscreen body placement reclaims a player adopted into another document | CORE-22, PKG-DPIP-05 |
-| IFRAME-LIFE-01 | open / 已复现 | Iframe timestamp IDs and unowned pending requests/timers lack terminal cleanup | PKG-IFRAME-02, PKG-IFRAME-03 |
+| IFRAME-LIFE-01 | open / 已复现 | Iframe timestamp IDs and unowned pending requests/timers lack terminal cleanup | PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-05 |
 | IFRAME-TRUST-01 | open / 已复现 | Iframe executable commit protocol accepts messages without source/origin validation | PKG-IFRAME-03, PKG-IFRAME-05 |
 | IFRAME-DIST-01 | open / 已复现 | Iframe tool name is unavailable at registry observation and old archive includes distinct helper exports | PKG-IFRAME-04, PKG-IFRAME-06 |

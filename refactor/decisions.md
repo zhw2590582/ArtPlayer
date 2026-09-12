@@ -32,6 +32,10 @@
 
 ## 开始实现前需补齐的决定
 
+ADR-026：Iframe采用可选文档标记与两阶段导航归属，保留旧端wire和公开回调；
+原生片段跳转不取消同文档请求。协议、拒绝时机和未升级端/真实BFCache的边界见
+[文档协议](iframe-document-protocol.md)。
+
 ADR-025：Iframe绑定实际父子窗口，保留跨源/重定向/opaque-origin与公开local receiver，
 同时拒绝无关窗口和无效消息。独立依据、兼容影响与剩余信任限制见
 [Iframe消息边界](iframe-message-boundary.md)；本轮不将来源绑定视为导航或全包发布验收。

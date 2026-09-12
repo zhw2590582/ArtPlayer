@@ -3656,7 +3656,7 @@
         "CORE-02",
         "BASE-07"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "请求注册/响应匹配/监听清理分离；origin/source 安全边界独立决策",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
@@ -3665,7 +3665,10 @@
         "baselines/iframe-requests-checkpoint.json",
         "changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md",
         "baselines/iframe-boundaries-checkpoint.json",
-        "iframe-message-boundary.md"
+        "iframe-message-boundary.md",
+        "changes/2026-09-13-PKG-IFRAME-03-navigation.md",
+        "baselines/iframe-navigation-validation.json",
+        "iframe-document-protocol.md"
       ]
     },
     {
@@ -3700,7 +3703,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论",
+      "deliverable": "真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论；新旧核心/demo、实际 BFCache/设备和外部中断导航验收，旧端无文档标记的限制明确",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": []
     },

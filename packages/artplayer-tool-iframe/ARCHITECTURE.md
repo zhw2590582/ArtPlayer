@@ -8,6 +8,11 @@ two lifecycle flags; it does not depend on ArtPlayer or import the entry class.
 `src/connection.ts` owns listener acquisition/release and ensures request
 cancellation runs even if listener removal throws. `src/protocol.ts` checks the
 selected window peer and packet shape before either public receiver processes it.
+`src/navigation.ts` owns parent document state, source observation and suspended
+request snapshots. `src/child-session.ts` owns the child document marker and its
+acknowledged pagehide/pageshow/hashchange notifications. Requests accept an
+internal boundary hook rather than importing the connection or navigation modules;
+there is no runtime dependency cycle or dependency on a particular core version.
 
 The entry initializes the same seven enumerable, writable fields in the same
 order. Internal request ownership lives in a module WeakMap, keeping instance
@@ -44,6 +49,36 @@ The public ID is a correlation number, and is no longer always equal to Date.now
 Public callback invocation now removes its completed registry entry immediately.
 The own-property guard prevents inherited names such as `toString` being treated
 as requests. These differences are recorded under PKG-IFRAME-03.
+Internal cancellation holds the native rejection separately from public callback
+properties. Replacing/deleting a public entry does not make its owned Promise
+unreachable during destroy or document departure; ordinary response dispatch
+continues to respect the public callbacks.
+
+## Document ownership
+
+New inject packets advertise optional `__artplayerIframe` metadata. A cooperating
+parent acknowledges it through tagged `artplayer-tool-iframe:session` traffic;
+the public message callback still receives only its original type/data packet.
+Ordinary child messages stay unmarked when the parent has not acknowledged the
+extension. The document ID correlates work and is not an authentication token.
+See [ADR-026](../../refactor/iframe-document-protocol.md) for the complete wire boundary.
+
+Parent source attribute changes begin a provisional navigation: capture the old
+pending set and pause new sends. Confirmed pagehide or a different document's
+inject cancels the captured set, preserving work queued for the new document.
+A hashchange report matching the actual target src completes a same-document
+transition without cancellation. This also handles relative/absolute src spelling
+and setting an old fragment after the child changed its own hash. Raw attribute
+tracking prevents a changed base URL resolution alone from inventing navigation.
+
+Repeated inject for the active document keeps requests; an old inject cannot
+reactivate a document while its replacement is pending. Marked replies and
+notifications from other documents are discarded; marked old commands are not
+executed by a new child. No load-event reset is used, so inject-before-load works.
+Connection cleanup disposes the observer and request hook, then cancels all owned
+requests. Child listeners belong to the child document, are installed once, and
+are rolled back on partial acquisition failure. A destroyed parent ignores late
+private notifications. The existing API adds no static child destroy method.
 
 ## Compatibility still under review
 
@@ -68,9 +103,12 @@ sandbox or a parent-origin allowlist. Upgrading one side does not secure the
 unchanged historical receiver on the other side. See the independent decision in
 [iframe-message-boundary.md](../../refactor/iframe-message-boundary.md).
 
-Navigation/reinjection remains unfinished. A child can inject before iframe load;
-blindly resetting state on load would lose a valid handshake. IFRAME-LIFE-01 and
-IFRAME-TRUST-01 remain open for complete lifecycle/integration and release review.
+Legacy peers keep the ordinary envelope and support observed changes to different
+source addresses; their same-address reloads/internal navigation cannot provide
+document identity without upgrading the child. No claim is made that a normal
+history reload is BFCache: actual persisted restoration, full-player integration,
+devices and externally interrupted navigation remain PKG-IFRAME-05/release gates.
+IFRAME-LIFE-01 and IFRAME-TRUST-01 remain open for those integration/review scopes.
 
 Public declarations remain in `types/artplayer-tool-iframe.d.ts`; source typing
 does not yet establish historical declaration/entry compatibility. PKG-IFRAME-04
@@ -92,6 +130,10 @@ publication is implied by this source migration.
   malformed packets, actual HTTP redirects, opaque sandbox and normal new/old
   parent-child wire combinations. `ARTPLAYER_IFRAME_BOUNDARIES_ONLY=1` omits the
   mixed-version controls when reproducing a candidate boundary failure.
+- `yarn test:browser test/browser/iframe-navigation.spec.js`: source/srcdoc, rapid
+  navigation, self-navigation, load ordering, fragment identity, stale packets,
+  legacy children and history with actual persisted-state reporting. There is no
+  implicit request timeout. Handle rejection when a document leaves or is destroyed.
 - Set `ARTPLAYER_IFRAME_LIFECYCLE_ONLY=1` for candidate lifecycle browser rows;
   `ARTPLAYER_IFRAME_ARTIFACT` selects an actual built file. For an unchanged
   candidate test against the old workspace, set `ARTPLAYER_IFRAME_BASELINE=1`.

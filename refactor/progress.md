@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-IFRAME-03 完成：按文档管理请求与六模块拆分
+
+入口、连接、请求、消息边界、父页导航和子页生命周期拆为六个严格TS模块。
+保留公开字段/回调/resove和旧协议；协商文档标记用于换页取消、迟到消息过滤，
+连续切源只取消旧文档请求，未发送队列等待最终注入。实际片段导航回归和重复捕获
+请求问题均先复现后修复，失败报告保留。ADR-026说明两阶段导航及旧端能力限制。
+源码/main/legacy各50项Node通过；真实三引擎分别351/351/207通过，无跳过。
+每份含117导航/旧子页、60边界/互通和30生命周期，source/main另含144历史断言。
+完整CI1539与44重复契约、3导入/SSR通过，330生产TS；产物/docs/报告哈希核对。
+见[决策](iframe-document-protocol.md)、[变更](changes/2026-09-13-PKG-IFRAME-03-navigation.md)
+和[验证](baselines/iframe-navigation-validation.json)。222项：108 done、9 doing、105 todo。
+IFRAME三个风险仍open：04公开声明/旧消费，05完整播放器/demo、实际BFCache/设备和
+外部中断导航，06分发仍需完成。本项专用本地提交，不推送或发布。
+
 ## PKG-IFRAME-03 构造清理与窗口来源检查点（doing）
 
 增加connection/protocol两个严格TS模块；构造失败清理监听和重入请求，destroy即使

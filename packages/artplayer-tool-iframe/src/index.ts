@@ -1,5 +1,7 @@
 import type { Callbacks, Packet } from './requests'
+import { childEnvelope, connectChildSession, consumeChildSession, prepareChildSession } from './child-session'
 import { connect, releaseConnection } from './connection'
+import { consumeNavigation, prepareNavigation } from './navigation'
 import { acceptsMessage } from './protocol'
 import { postRequest } from './requests'
 
@@ -21,11 +23,11 @@ export default class ArtplayerToolIframe {
     }
 
     window.parent.postMessage(
-      {
+      childEnvelope({
         type,
         data,
         id,
-      },
+      }),
       '*',
     )
   }
@@ -35,7 +37,7 @@ export default class ArtplayerToolIframe {
       throw new Error('The "ArtplayerToolIframe.onMessage" method can only be used in iframe')
     }
 
-    if (!acceptsMessage(event, window.parent))
+    if (!acceptsMessage(event, window.parent) || consumeChildSession(event.data))
       return
 
     const { type, data, id } = event.data
@@ -69,8 +71,9 @@ export default class ArtplayerToolIframe {
       throw new Error('The "ArtplayerToolIframe.inject" method can only be used in iframe')
     }
 
+    prepareChildSession()
     ArtplayerToolIframe.postMessage({ type: 'inject' })
-    window.addEventListener('message', ArtplayerToolIframe.onMessage)
+    connectChildSession(ArtplayerToolIframe.onMessage)
   }
 
   constructor({ iframe, url }: { iframe: HTMLIFrameElement, url: string }) {
@@ -105,7 +108,7 @@ export default class ArtplayerToolIframe {
   }
 
   onMessage(event: MessageEvent<Packet>) {
-    if (this.destroyed || !acceptsMessage(event, this.$iframe.contentWindow))
+    if (this.destroyed || !acceptsMessage(event, this.$iframe.contentWindow) || consumeNavigation(this, event.data))
       return
 
     const { type, data, id } = event.data
@@ -134,6 +137,7 @@ export default class ArtplayerToolIframe {
   }
 
   postMessage(message: Packet): Promise<any> {
+    prepareNavigation(this)
     return postRequest(this, message)
   }
 

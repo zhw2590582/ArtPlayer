@@ -116,7 +116,7 @@ for (const item of cases) {
           for (const payload of [null, false, 3, 'packet', {}, { type: 3 }])
             window.targetFrame.contentWindow.postMessage(payload, '*')
         })
-        await expect.poll(() => child.evaluate(() => window.received.length)).toBe(6)
+        await expect.poll(() => child.evaluate(() => window.received.filter(packet => !packet.internal).length)).toBe(6)
         const value = await page.evaluate(() => window.tool.commit(() => {
           return 12
         }))

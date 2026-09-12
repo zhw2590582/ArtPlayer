@@ -5,11 +5,22 @@
   window.Tool = window[parameters.get('global')];
   window.received = [];
   window.executions = 0;
+  window.documentWitness = Math.random().toString(36);
+  addEventListener('pagehide', event => parent.postMessage({ type: 'fixture-pagehide', data: { epoch: parameters.get('epoch'), persisted: event.persisted } }, '*'));
+  addEventListener('pageshow', event => parent.postMessage({ type: 'fixture-pageshow', data: { epoch: parameters.get('epoch'), persisted: event.persisted, witness: window.documentWitness } }, '*'));
   addEventListener('message', event => {
-    received.push({ type: event.data?.type, id: event.data?.id, fromParent: event.source === parent, origin: event.origin });
+    received.push({ type: event.data?.type, id: event.data?.id, fromParent: event.source === parent, origin: event.origin, internal: event.data?.type === 'artplayer-tool-iframe:session' && event.data?.__artplayerIframe?.version === 1 });
     if (event.data?.type === 'hold') window.held = event.data;
     parent.postMessage({ type: 'fixture-observed', data: { count: received.length, type: event.data?.type, id: event.data?.id } }, '*');
   });
   if (parameters.get('auto') !== '0') Tool.inject();
   parent.postMessage({ type: 'fixture-ready' }, '*');
+</script>
+<body>
+<script>
+  if (parameters.get('barrier') === '1') {
+    const image = document.createElement('img');
+    image.src = '/iframe-load-barrier.svg';
+    document.body.append(image);
+  }
 </script>

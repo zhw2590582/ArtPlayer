@@ -3771,11 +3771,12 @@
       "title": "Iframe timestamp IDs and unowned pending requests/timers lack terminal cleanup",
       "owners": [
         "PKG-IFRAME-02",
-        "PKG-IFRAME-03"
+        "PKG-IFRAME-03",
+        "PKG-IFRAME-05"
       ],
       "status": "open",
       "confirmation": "reproduced",
-      "compatibleResolution": "Owned requests fix collision/polling/send/destroy failures; connection cleanup now releases partial construction and cancels requests even if listener removal fails. Navigation/reinjection and document-generation handling remain for PKG-IFRAME-03; keep open until complete actual iframe lifecycle acceptance.",
+      "compatibleResolution": "Owned requests and cleanup cover terminal failures. ADR-026 adds document-scoped cancellation, provisional source changes, same-document fragment preservation and queued final navigation. Keep open for PKG-IFRAME-05 full player/demo, actual BFCache/device and interrupted-navigation acceptance; unchanged legacy peers have documented document-identity limits.",
       "closureCriteria": "Old behavior and candidate fixes have deterministic race/resource tests plus actual iframe integration.",
       "evidence": [
         "refactor/baselines/iframe-contract.md",
@@ -3786,7 +3787,10 @@
         "refactor/changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md",
         "refactor/baselines/iframe-requests-checkpoint.json",
         "refactor/changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md",
-        "refactor/baselines/iframe-boundaries-checkpoint.json"
+        "refactor/baselines/iframe-boundaries-checkpoint.json",
+        "refactor/changes/2026-09-13-PKG-IFRAME-03-navigation.md",
+        "refactor/baselines/iframe-navigation-validation.json",
+        "refactor/iframe-document-protocol.md"
       ]
     },
     {
@@ -3798,7 +3802,7 @@
       ],
       "status": "open",
       "confirmation": "reproduced",
-      "compatibleResolution": "ADR-025 binds native messages to the selected iframe/parent and rejects malformed envelopes while preserving local receiver calls and same/cross/redirect/opaque origins. Executable commit still trusts the embedding parent and selected content; navigation/document generation and complete integration/release review remain open.",
+      "compatibleResolution": "ADR-025 binds actual native peers; ADR-026 correlates negotiated document messages without breaking normal legacy wire. This is not an origin allowlist or commit sandbox. Keep open for PKG-IFRAME-05 complete integration/release review and documented legacy/custom unmarked-message limits.",
       "closureCriteria": "Controlled and real same/cross-origin evidence plus an explicit documented compatibility decision and supported trust model.",
       "evidence": [
         "refactor/baselines/iframe-contract.md",
@@ -3808,7 +3812,10 @@
         "refactor/changes/2026-09-12-PKG-IFRAME-02-behavior.md",
         "refactor/changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md",
         "refactor/baselines/iframe-boundaries-checkpoint.json",
-        "refactor/iframe-message-boundary.md"
+        "refactor/iframe-message-boundary.md",
+        "refactor/changes/2026-09-13-PKG-IFRAME-03-navigation.md",
+        "refactor/baselines/iframe-navigation-validation.json",
+        "refactor/iframe-document-protocol.md"
       ]
     },
     {
