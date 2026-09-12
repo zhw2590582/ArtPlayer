@@ -3765,6 +3765,57 @@
         "refactor/changes/2026-09-12-PKG-DPIP-05-native-checkpoint.md"
       ],
       "resolutionRationale": "Original candidate native video reproduction moves the player into the wrong document and fails. Current ownerDocument body placement passes source 84, built main 219 and built legacy 84 related cases, including real native PiP video/Canvas/MediaBunny and iframe placement/focus. Reentry/failure/teardown and keyboard regressions retain their assertions. Full CI and import/SSR checks pass. Native Fullscreen API, background and device gates are separate and not waived."
+    },
+    {
+      "id": "IFRAME-LIFE-01",
+      "title": "Iframe timestamp IDs and unowned pending requests/timers lack terminal cleanup",
+      "owners": [
+        "PKG-IFRAME-02",
+        "PKG-IFRAME-03"
+      ],
+      "status": "open",
+      "confirmation": "source-observed",
+      "compatibleResolution": "Reproduce same-tick request collision, pending injection, response errors and destroy behavior before changing internal ownership; preserve public promises[id].resove.",
+      "closureCriteria": "Old behavior and candidate fixes have deterministic race/resource tests plus actual iframe integration.",
+      "evidence": [
+        "refactor/baselines/iframe-contract.md",
+        "refactor/baselines/iframe-release.json",
+        "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md"
+      ]
+    },
+    {
+      "id": "IFRAME-TRUST-01",
+      "title": "Iframe executable commit protocol accepts messages without source/origin validation",
+      "owners": [
+        "PKG-IFRAME-03",
+        "PKG-IFRAME-05"
+      ],
+      "status": "open",
+      "confirmation": "source-observed",
+      "compatibleResolution": "Treat message origin/source and executable commit as an explicit compatibility and trust-boundary decision; do not silently replace the protocol during TS conversion.",
+      "closureCriteria": "Controlled and real same/cross-origin evidence plus an explicit documented compatibility decision and supported trust model.",
+      "evidence": [
+        "refactor/baselines/iframe-contract.md",
+        "refactor/baselines/iframe-release.json",
+        "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md"
+      ]
+    },
+    {
+      "id": "IFRAME-DIST-01",
+      "title": "Iframe tool name is unavailable at registry observation and old archive includes distinct helper exports",
+      "owners": [
+        "PKG-IFRAME-04",
+        "PKG-IFRAME-06"
+      ],
+      "status": "open",
+      "confirmation": "reproduced",
+      "compatibleResolution": "Keep actual old plugin/helper exports distinct from workspace tool and document package-name/type/export migration; do not fabricate a tool release or use a renamed implementation as an old archive.",
+      "closureCriteria": "Actual installed entry/declaration tests and documented old-name/helper/new-tool distribution behavior; registry observation remains time scoped.",
+      "evidence": [
+        "refactor/baselines/iframe-contract.md",
+        "refactor/baselines/iframe-release.json",
+        "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md"
+      ]
     }
   ]
 }

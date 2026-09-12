@@ -1,0 +1,37 @@
+{
+  "task": "PKG-IFRAME-01",
+  "status": "done",
+  "sourcesSha256LF": {
+    "refactor/scripts/iframe-contract.mjs": "a709828ac0f3d35eb8f94ff915d8243e42903adb4e75f32a4907829e4fdf38b1",
+    "refactor/scripts/iframe-contract.test.mjs": "c1ab0bfbb88d0604c6b9e5467f5e581f0fdae75c5da4fea55b00ebcf2a3bb69f",
+    "test/helpers/iframe.js": "fd05f4fc10e97f1a0b8961ea8f82976ea9d58d0ea75bb652af2ee13b8a89c9a0",
+    "refactor/baselines/iframe-release.json": "c58a952a4a5a2f0c02e7c76521537898874eb6d7955b9daa6b427c51aeadece7",
+    "refactor/baselines/iframe-contract.md": "ac1c2ed68c02f0981ecff21edeeafde260dbf739caa763ca1b28c91831dba087"
+  },
+  "frozenArchiveMembers": 8,
+  "frozenWorkspaceInputs": 11,
+  "contractTests": 19,
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/iframe-contract.test.mjs",
+      "result": "pass",
+      "log": "refactor/.cache/iframe01-contract-final.log"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": 1437,
+      "unit": 1263,
+      "engineering": 14,
+      "baseline": 160,
+      "repeatedContracts": 44,
+      "strictProductionTypeScriptFiles": 324,
+      "log": "refactor/.cache/iframe01-ci.log"
+    }
+  ],
+  "limitations": [
+    "Registry 404 is time scoped; tool-name publication history is not inferred.",
+    "No lifecycle fixes, production migration, origin policy change, actual iframe browser or installed-type acceptance in this contract task.",
+    "Auxiliary helper is a distinct historical protocol, not an alias for the main class."
+  ]
+}

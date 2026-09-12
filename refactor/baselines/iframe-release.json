@@ -1,0 +1,76 @@
+{
+  "packageName": "artplayer-tool-iframe",
+  "registryObservation": {
+    "url": "https://registry.npmjs.org/artplayer-tool-iframe",
+    "status": 404,
+    "observedAt": "2026-09-12T14:45:37.698Z",
+    "body": {
+      "error": "Not found"
+    },
+    "meaning": "Registry returned 404 at observation; this is not proof the name was never published."
+  },
+  "release": {
+    "name": "artplayer-plugin-iframe",
+    "version": "1.0.0",
+    "publishedAt": "2022-11-05T01:42:14.095Z",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-iframe/-/artplayer-plugin-iframe-1.0.0.tgz",
+    "integrity": "sha512-9eh5NVjZ8/Vxl0ojZxnMY6IlYxCVVfyGH2Rzl7uYDJnGc8NQ4y9vMN/gVh1h8R2m5qaYm7/XDo/45O9a7hDiKg==",
+    "sha256": "16dc92aa84d93bd99bc0a34815dc49f1609fafc1ff255eb353ea893e70b5f91f",
+    "gitHead": "824baca8b408d9f3e0eb2f3d7e0eb2bdee2ff3a8",
+    "manifest": {
+      "license": "MIT",
+      "version": "1.0.0",
+      "name": "artplayer-plugin-iframe",
+      "types": "types/artplayer-plugin-iframe.d.ts",
+      "description": "Iframe plugin for ArtPlayer",
+      "main": "dist/artplayer-plugin-iframe.js",
+      "legacy": "dist/artplayer-plugin-iframe.legacy.js",
+      "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+      "browserslist": "> 0.5%, last 2 versions, not dead",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ]
+    },
+    "files": {
+      "package/README.md": "52c0a1199b6529d60ce8f4414984f9bd1bc3a8daa5bb6cfec8f0aae0c8338e46",
+      "package/dist/artplayer-helper-iframe.js": "47730ed608f0637594549b9762c01191686a4a55b3bd467132304a016d227f4a",
+      "package/dist/artplayer-helper-iframe.legacy.js": "f4c3b11806cad6d984f03a2d9de63deba78cbe538ffe4044a106b0dddc5d4197",
+      "package/dist/artplayer-plugin-iframe.js": "df469c3e4582b127f35798494d0845f1fc4ca2d19bbaf01b918492e035479745",
+      "package/dist/artplayer-plugin-iframe.legacy.js": "15299cb5c848cc61614f7573a802443d69b7c6d0a938a1867835c7cbb4884edd",
+      "package/package.json": "563a6c8407753b92b86319a5e6d9d567525146c32cb010b45b0d88ff481859f6",
+      "package/src/index.js": "2e0b9efeedef0d6c4f2d2b526db35f634cd02af044e4e28dd1a0b26a5b9a02bf",
+      "package/types/artplayer-plugin-iframe.d.ts": "d55d99a2488d60892a0ab82882dc96a0f373dab0c3d2a3cee978bc35aa7c2d0c"
+    },
+    "historicalCore": {
+      "commit": "824baca8b408d9f3e0eb2f3d7e0eb2bdee2ff3a8",
+      "file": "packages/artplayer/package.json",
+      "version": "4.5.9",
+      "sha256LF": "7fe8f4a728c4895d2323a4214f024239f03b985f530529a5d257fa010252c195"
+    }
+  },
+  "sourceCommit": "40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f",
+  "source": {
+    "packages/artplayer-tool-iframe/src/index.js": "5fd5452640ff57fa35cd0f3378505ffc1318e9c114d9a2a6e2f1adbeaec6fd28",
+    "packages/artplayer-tool-iframe/types/artplayer-tool-iframe.d.ts": "4f02aa22a6b373393ead533ae3421ad5acf0de7116057f351021c72d3448bd1e",
+    "packages/artplayer-tool-iframe/README.md": "6910a44b767ff80c1d1edc3c90ca7ca77a9b45307fb61d4abd9d52526c7614b3",
+    "packages/artplayer-tool-iframe/package.json": "b28f5156f02a250539f0acaf302ec87fdd506f63b0e73dd308326ec78c691d03",
+    "packages/artplayer-tool-iframe/.npmignore": "46063058e98be55dba5cf5f33d379e73eca048f4126e7af75f8011bab7f09145",
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.js": "2ec257c8055a9448d12af3fecf1fae8ba58c06f47e85072d02c386cd258b0c86",
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.legacy.js": "c0755d79f316cda71f045da86749648f95faf47c09180d525fb04bb753576d5f",
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.mjs": "cbcdb0516dd5f17ca2572a6b3e363ea63b0cfd9733f3e47689c02088f23f29b9",
+    "docs/assets/example/iframe.js": "00a8441d2a9873f7be342a98b58acab1cf6aca2359414f126ffb63f6ee20c218",
+    "docs/iframe.html": "bc262262c66ad32459b7c91ae22a97217414dd5b18cbf68fe105c2269456f879",
+    "docs/assets/ts/artplayer-tool-iframe.d.ts": "fe261fd8fb6a8f8838290a3eef3d624cf7587cec30edaa2644bcf0fb7b44bb5d"
+  },
+  "renameCommit": "1c75731ca9cf2edb7a2f1f26b1bac1de9847b9c3"
+}

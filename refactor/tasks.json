@@ -3612,11 +3612,16 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "constructor/commit/message/inject、postMessage 协议与历史公开拼写",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-IFRAME-01-contract.md",
+        "baselines/iframe-release.json",
+        "baselines/iframe-contract.md",
+        "baselines/iframe-contract-validation.json"
+      ]
     },
     {
       "id": "PKG-IFRAME-02",
@@ -3669,7 +3674,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "消息联合类型、回调/Promise 推导、旧公开字段兼容",
+      "deliverable": "消息联合类型、回调/Promise 推导、旧公开字段兼容；旧npm export=与实际namespace、额外helper协议分别核验",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
       "evidence": []
     },
@@ -3703,7 +3708,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "iframe.js、示例集成和原 script/class 导出验证",
+      "deliverable": "iframe.js、示例集成和原 script/class 导出验证；旧包名/额外helper深入口与新工具名的迁移结论",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
       "evidence": []
     },

@@ -1,5 +1,15 @@
 # 进度与证据
 
+## PKG-IFRAME-01 完成：发布名、辅助类与消息契约
+
+实际旧包plugin-iframe@1.0.0的8个成员和工作区11个输入已冻结；新tool名本次npm查询404，
+不将工作区1.1.0冒充发布版本。额外helper有不同destroy协议，主类两代CJS/default、
+script/ESM、resove、callback receiver和commit序列化由19项实际产物检查保护。
+完整CI1437与44重复契约通过，324现有生产TS；本包尚未迁移TS。
+见[契约](baselines/iframe-contract.md)、[变更](changes/2026-09-12-PKG-IFRAME-01-contract.md)
+与[验证](baselines/iframe-contract-validation.json)。生命周期、消息信任与分发风险保持open。
+222项：106 done、9 doing、107 todo；立即专用本地提交，下一项IFRAME-02建立并发/销毁/跨窗口回归。
+
 ## PKG-DPIP-05 原生组合检查点与核心文档归属修复（doing）
 
 真实popup键盘、两轮开关与节点还原覆盖原生video/Canvas/MediaBunny及新旧核心。
