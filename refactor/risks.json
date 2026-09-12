@@ -3339,6 +3339,58 @@
         "refactor/baselines/ambilight-proxy-validation.json"
       ],
       "resolutionRationale": "Node output resize/zero-size and normal video tests pass; actual 5.4.0/candidate canvas proxy nine-color regions pass across three engines. Actual 5.1.7 lacks proxy option and is recorded as a native capability observation, not a canvas pass. Proxy-owned lifecycle and final device acceptance remain tasks CANVAS and AMBILIGHT-05."
+    },
+    {
+      "id": "CANVAS-LIFE-01",
+      "title": "Canvas proxy pending draw, bitmap and delayed subscriptions lack terminal ownership",
+      "confirmation": "source-observed",
+      "owners": [
+        "PKG-CANVAS-02",
+        "PKG-CANVAS-03",
+        "PKG-CANVAS-05"
+      ],
+      "compatibleResolution": "Reproduce pending bitmap completion and rollback/late subscription before adding explicit draw scheduling and resource ownership.",
+      "closureCriteria": "Historical failures reproduced and candidate terminal/error/bitmap/real media lifecycle verified.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/canvas-contract.md",
+        "refactor/baselines/canvas-release.json",
+        "refactor/changes/2026-09-12-PKG-CANVAS-01-contract.md"
+      ]
+    },
+    {
+      "id": "CANVAS-TYPE-01",
+      "title": "Canvas proxy declarations change required callback across generations and omit forwarded media capabilities",
+      "confirmation": "source-observed",
+      "owners": [
+        "PKG-CANVAS-04",
+        "PKG-CANVAS-06"
+      ],
+      "compatibleResolution": "Keep optional current callback inference and actual canvas return while validating historical consumers and any additive media surface types.",
+      "closureCriteria": "Strict old/current compiler consumers and installed callback/result/import variants verified without new inference narrowing.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/canvas-contract.md",
+        "refactor/baselines/canvas-release.json",
+        "refactor/changes/2026-09-12-PKG-CANVAS-01-contract.md"
+      ]
+    },
+    {
+      "id": "CANVAS-DIST-01",
+      "title": "Canvas proxy published CommonJS namespace differs from current callable export",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-CANVAS-04",
+        "PKG-CANVAS-06"
+      ],
+      "compatibleResolution": "Preserve both require.default and callable factory with actual global, legacy and ESM paths.",
+      "closureCriteria": "Packed runtime/type and real local demo/editor consumers pass.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/canvas-contract.md",
+        "refactor/baselines/canvas-release.json",
+        "refactor/changes/2026-09-12-PKG-CANVAS-01-contract.md"
+      ]
     }
   ]
 }

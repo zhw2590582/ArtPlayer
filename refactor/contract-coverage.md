@@ -10,7 +10,7 @@ ENG-COVERAGE-01建立可校验的归属和证据索引，不把索引建成当�
 
 `contract-policy.json`维护逐包逐类责任、版本依据及稳定测试ID。版本用JSON pointer
 指向冻结清单，核对包名、版本和发布archive integrity；工作区单独标识。当前22个
-工作区、9个发布对照点（Ambilight新增两个），不由单个版本推断连续支持区间。
+工作区、11个发布对照点（Canvas代理新增两个），不由单个版本推断连续支持区间。
 
 `contract-runs.json`引用归档报告及LF规范化SHA-256。报告保存当时定义、实际事件、
 输入指纹、命令、HEAD和Node/OS。其他tasks.json历史JSON证据列为recorded-not-normalized，

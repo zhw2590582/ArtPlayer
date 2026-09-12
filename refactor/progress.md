@@ -1,5 +1,16 @@
 # 进度与证据
 
+## 最新完成：Canvas-01 发布契约与正常基线
+
+冻结npm1.0.0/1.1.0共12成员及工作区6个Git输入，运行三实现的同步返回、媒体属性/
+方法转发、延迟事件、bitmap关闭、回调顺序和resize。明确同版本Git核心5.1.7已有
+proxy而实际npm5.1.7没有，不能混为支持范围。13项Canvas专项、7项索引检查与991项
+完整CI通过，另44项重复观察；新增两个发布对照点，索引现为22工作区+11发布。
+生命周期/类型/分发风险已登记，生产代理源码尚未修改。当前221项：90 done、6 doing、
+125 todo。下一步Canvas-02复现异步资源和终止问题，Canvas-03开始源码TS拆分。
+见 [实施记录](changes/2026-09-12-PKG-CANVAS-01-contract.md) 和
+[验证证据](baselines/canvas-contract-validation.json)。独立本地提交，无推送/发布。
+
 ## 最新完成：Ambilight-PROXY-01 Canvas输出区域修复
 
 组合测试复现Canvas缩放后仍按底层视频尺寸截取而取错九格颜色；内部明确video/canvas

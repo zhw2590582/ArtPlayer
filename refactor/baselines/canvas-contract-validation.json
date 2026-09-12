@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-CANVAS-01",
+  "status": "done",
+  "parentCommit": "20f062bc901d525d0659807dceebd1e41535ca7d",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/canvas-contract.test.mjs refactor/scripts/contracts.test.mjs",
+      "result": "pass",
+      "tests": 20,
+      "canvas": 13,
+      "indexValidation": 7,
+      "scope": "two actual npm archives and frozen workspace; normal property forwarding, bitmap/fallback/callback/event/resize contracts, public export/declaration shapes and exact Git versus npm core distinction"
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 881,
+        "engineering": 14,
+        "baseline": 96,
+        "mainTotal": 991,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 278
+    }
+  ],
+  "archiveScope": {
+    "plugins": [
+      "npm 1.0.0",
+      "npm 1.1.0",
+      "workspace frozen at parentCommit"
+    ],
+    "members": 12,
+    "workspaceFiles": 6,
+    "gitAssociatedCoreVersions": [
+      "5.1.7",
+      "5.3.1"
+    ],
+    "supportedCoreRange": "not inferred from Git associations"
+  },
+  "contractIndex": {
+    "packages": 22,
+    "assignedFamilies": 264,
+    "workspaceVersionPoints": 22,
+    "publishedVersionPoints": 11,
+    "exactIndexedCases": 10,
+    "unindexedFamilyRows": 255
+  },
+  "inputs": [
+    {
+      "file": "refactor/baselines/canvas-release.json",
+      "sha256LF": "7f7b229a5c0350a5d02be101d0095548c7ef1e76ce95c3b7152b415b0117398c"
+    },
+    {
+      "file": "refactor/scripts/canvas-contract.mjs",
+      "sha256LF": "eb545d0ccb3438413980d292fd2e511342b680e03c5985e58006a1407c8f53aa"
+    },
+    {
+      "file": "refactor/scripts/canvas-contract.test.mjs",
+      "sha256LF": "65e5ea0c9a12f47bc7939840d6e4c25b2820e7fd5e6f32fe3bd9f35e7f3e6da6"
+    },
+    {
+      "file": "test/helpers/canvas.js",
+      "sha256LF": "cc617b6d1053a9ed9caa5dad03088abaaff4344f078e23d007ee1a935f2a6c3c"
+    },
+    {
+      "file": "refactor/contract-policy.json",
+      "sha256LF": "f450c792465b67ebdc92e6d7339fb6be4f6fb19ffbded6c512244d73a57eafd2"
+    },
+    {
+      "file": "refactor/scripts/contracts.test.mjs",
+      "sha256LF": "7cb6cfa5fe2cdfe3fd6f8dc5377ff21db2aa748bc7788f4660f61abb98bbf647"
+    },
+    {
+      "file": "refactor/baselines/vast-core.json",
+      "sha256LF": "bb703cf37591211f78719665aed0e0cb2524ec5618dad48e6b8e2dbfef132b8e"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/canvas01-capture.log",
+      "sha256": "a8dd65ebf981668b0fb1f44a58cd044879ecce10847797622f6bf56ef5189ed4"
+    },
+    {
+      "file": "refactor/.cache/canvas01-targeted.log",
+      "sha256": "9ad62bd4c20fd501c197ec77eb19e7c66090fce356e7c26fadb972e5524e0c2c"
+    },
+    {
+      "file": "refactor/.cache/canvas01-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/canvas01-ci.log",
+      "sha256": "ca15ff3aaa561911ed0809b6833c3ad47013d683fab4bfbac258b6cdb3be3243"
+    }
+  ],
+  "limitations": [
+    "Controlled DOM/RAF/microtasks prove normal adapter contracts, not native browser pixels, video codecs or all enumerable browser properties.",
+    "Pending bitmap, cleanup, error and delayed subscription concerns remain source-observed; reproduce them in task 02 and fix in task 03.",
+    "Declaration shape checks are not full installed type consumer validation; optional inference/export/result checks remain task 04.",
+    "Git commit labeled core 5.1.7 contains proxy support while actual npm 5.1.7 does not; do not merge these identities into a support range.",
+    "No production source or artifacts modified; no new browser/media claims, push, version bump or publication."
+  ]
+}

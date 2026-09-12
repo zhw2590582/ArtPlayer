@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-CANVAS-01",
+  "capturedAt": "2026-09-12T04:06:47.519Z",
+  "sourceCommit": "20f062bc901d525d0659807dceebd1e41535ca7d",
+  "registryObservation": {
+    "versions": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "latest": "1.1.0",
+    "workspaceVersion": "1.1.0"
+  },
+  "release": {
+    "name": "artplayer-proxy-canvas",
+    "version": "1.1.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-proxy-canvas/1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-proxy-canvas/-/artplayer-proxy-canvas-1.1.0.tgz",
+    "integrity": "sha512-lOq22z+xX2DcpokDSMQrDTk4VGDwUaQm9SovQ0GlhgmvMBdxRBDlvv6QrVxFUFsiGUjXEdx9TmtzdiW38dlxiQ==",
+    "sha256": "348c1d6671f79d0e0dbf2bb15875a1e6d60d00b73cde833c018bec7e4be96c8e",
+    "archiveBytes": 2960,
+    "publishedAt": "2026-03-12T14:20:13.012Z",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "eb063f1381b4eea2e3f2bf6f7ae76d2979e807119ae53708bb3b2014c38a30d2",
+      "package/dist/artplayer-proxy-canvas.js": "ef489570e13f402f1a60eb256ce3900a0021a3d05699c2ba15adfaaeff184d4c",
+      "package/dist/artplayer-proxy-canvas.legacy.js": "7d25f21170c06d067aeaa1c8e79b15f2c0130a27cff1b410532d6c4ef4d2d45f",
+      "package/dist/artplayer-proxy-canvas.mjs": "4bb4a881787770093652a3262fc214a2529a1c514ef49affaf152b8abf0f4dc6",
+      "package/package.json": "4df3a0098730cfc12232fc57066fd1f7159bbd41dce87904fa51f39b82252eed",
+      "package/types/artplayer-proxy-canvas.d.ts": "2d7f4517ab9954ce8925739c2473c553977268bfa120b6420218470952567b47"
+    },
+    "manifest": {
+      "name": "artplayer-proxy-canvas",
+      "version": "1.1.0",
+      "description": "canvas proxy for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-proxy-canvas.d.ts",
+          "import": "./dist/artplayer-proxy-canvas.mjs",
+          "require": "./dist/artplayer-proxy-canvas.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-proxy-canvas.d.ts",
+          "import": "./dist/artplayer-proxy-canvas.legacy.js",
+          "require": "./dist/artplayer-proxy-canvas.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-proxy-canvas.js",
+      "module": "./dist/artplayer-proxy-canvas.mjs",
+      "types": "./types/artplayer-proxy-canvas.d.ts",
+      "legacy": "./dist/artplayer-proxy-canvas.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "historicalCore": {
+      "version": "5.3.1",
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "scope": "Git association only, not a tested support range"
+    }
+  },
+  "previous": [
+    {
+      "name": "artplayer-proxy-canvas",
+      "version": "1.0.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-proxy-canvas/1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-proxy-canvas/-/artplayer-proxy-canvas-1.0.0.tgz",
+      "integrity": "sha512-Wp/vbobzVfGXWkFWhhyi07TTsO7mtOhJ0BEEh/DWCBbJU1S4ghWyUhB0T9PFMVopbJfY7X51ytrrDeC2vpT1Jg==",
+      "sha256": "728ba39534b3b8139bdc404ef15fe1ac5f76a95562a14e78c6973db2dcfa6f4f",
+      "archiveBytes": 8534,
+      "publishedAt": "2024-09-19T02:48:29.419Z",
+      "registryGitHead": "1605df29431abfe1fc77683e609a2c3c0fba428a",
+      "files": {
+        "package/README.md": "2d2c6283a028e1f3882e855d0abef28a15f67525b1268b5f21c00eeea6244e80",
+        "package/dist/artplayer-proxy-canvas.js": "b87a0032711457b4c364d628cac3ae41fe071de08ed530ec2bd4cebf24941ec5",
+        "package/dist/artplayer-proxy-canvas.legacy.js": "21a2509bc01be721bda037fb6cf24461c52326865362e21873c4c32bfbb162dd",
+        "package/package.json": "600274235ba6d20cd9fe2c34b18acc72eeb6fd3ff262d19bc72a9a4e24bb5d42",
+        "package/src/index.js": "24add6af4f030e94fe1bdc66ca684e21d8baed7055e1ed44e85437bbff787c39",
+        "package/types/artplayer-proxy-canvas.d.ts": "aaa5f7886ecdfe1f6948d296fa3436811c466ac6e4da7fcd2d43faaab6bebc4d"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.0",
+        "name": "artplayer-proxy-canvas",
+        "types": "types/artplayer-proxy-canvas.d.ts",
+        "description": "canvas proxy for ArtPlayer",
+        "main": "dist/artplayer-proxy-canvas.js",
+        "legacy": "dist/artplayer-proxy-canvas.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "historicalCore": {
+        "version": "5.1.7",
+        "commit": "1605df29431abfe1fc77683e609a2c3c0fba428a",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "8bd532103099c367fb2c289e0d410f144fdeb00b1b62cf850762a24b61e63c8a",
+        "scope": "Git association only, not a tested support range",
+        "proxySources": {
+          "packages/artplayer/src/index.js": "8c29c0d1c46461bf8ce0bb16f927637055fcdb9b76f979d4bf691c956b1bc8c0",
+          "packages/artplayer/src/template.js": "9f7e8708e79ce2f3a36c767b93721d40027fa85730eebbdd4dc807efea88f9e8"
+        }
+      }
+    }
+  ],
+  "source": {
+    "packages/artplayer-proxy-canvas/src/index.js": "4b5922b05b46adf0d54ae92025b5c70456a5b8c87819c797ef91eb50e0c8f4d4",
+    "packages/artplayer-proxy-canvas/types/artplayer-proxy-canvas.d.ts": "2d7f4517ab9954ce8925739c2473c553977268bfa120b6420218470952567b47",
+    "packages/artplayer-proxy-canvas/package.json": "4df3a0098730cfc12232fc57066fd1f7159bbd41dce87904fa51f39b82252eed",
+    "packages/artplayer-proxy-canvas/README.md": "eb063f1381b4eea2e3f2bf6f7ae76d2979e807119ae53708bb3b2014c38a30d2",
+    "packages/artplayer-proxy-canvas/.npmignore": "46063058e98be55dba5cf5f33d379e73eca048f4126e7af75f8011bab7f09145",
+    "docs/assets/example/canvas.js": "95a971773e93cfb340a07eebcd49e333825f49ce0d167514ad98a188cd027799"
+  },
+  "limitation": "Historical core Git association is not compatibility verification; media/proxy/browser and candidate consumer checks remain later tasks."
+}

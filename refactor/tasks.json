@@ -3244,11 +3244,17 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "callback、canvas 原方法、转发 media 属性/方法/事件",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-CANVAS-01-contract.md",
+        "baselines/canvas-contract.md",
+        "baselines/canvas-release.json",
+        "canvas-validation.md",
+        "baselines/canvas-contract-validation.json"
+      ]
     },
     {
       "id": "PKG-CANVAS-02",

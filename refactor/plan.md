@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 221 项，范围 22 个包及工作区/示例。
 
-状态：todo 126 / doing 6 / blocked 0 / done 89 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 125 / doing 6 / blocked 0 / done 90 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -318,7 +318,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-CANVAS-01 | artplayer-proxy-canvas<br>核对包契约与历史用法 | BASE-05 | callback、canvas 原方法、转发 media 属性/方法/事件 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-CANVAS-01 | artplayer-proxy-canvas<br>核对包契约与历史用法 | BASE-05 | callback、canvas 原方法、转发 media 属性/方法/事件 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
 | PKG-CANVAS-02 | artplayer-proxy-canvas<br>建立特有行为与错误测试 | PKG-CANVAS-01, ENG-03, ENG-05 | ready/loadeddata/canplay、play/seek、回调、resize 与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
 | PKG-CANVAS-03 | artplayer-proxy-canvas<br>整理内部职责与资源 | PKG-CANVAS-02, CORE-06, CORE-11, CORE-16 | video adapter/原 canvas 方法/RAF 绘制/事件订阅分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-CANVAS-04 | artplayer-proxy-canvas<br>迁移自有源码和公开类型 | PKG-CANVAS-03, ENG-04, ENG-06, CORE-07 | canvas 与媒体能力的精确组合类型，保持 Result | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
@@ -506,3 +506,4 @@
 - PKG-VAST-01: [记录](baselines/vast-contract.md) [记录](baselines/vast-release.json) [记录](changes/2026-09-12-PKG-VAST-01-contract.md) [记录](baselines/vast-contract-validation.json)
 - PKG-VAST-02: [记录](changes/2026-09-12-PKG-VAST-02-tests.md) [记录](baselines/vast-behavior-validation.json) [记录](baselines/vast-core.json) [记录](vast-validation.md)
 - PKG-VAST-03: [记录](changes/2026-09-12-PKG-VAST-03-lifecycle.md) [记录](baselines/vast-lifecycle-validation.json) [记录](vast-compatibility-decision.md)
+- PKG-CANVAS-01: [记录](changes/2026-09-12-PKG-CANVAS-01-contract.md) [记录](baselines/canvas-contract.md) [记录](baselines/canvas-release.json) [记录](canvas-validation.md) [记录](baselines/canvas-contract-validation.json)

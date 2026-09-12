@@ -44,7 +44,7 @@ function fixture(t) {
 test('Actual contract model assigns all 264 family rows and separates exact published versions from workspace snapshots', () => {
   assert.equal(actual.policy.packages.length, 22)
   assert.equal(actual.families.length, 12)
-  assert.equal(actual.policy.versions.filter(version => version.kind === 'published-baseline').length, 9)
+  assert.equal(actual.policy.versions.filter(version => version.kind === 'published-baseline').length, 11)
   assert.equal(actual.policy.versions.filter(version => version.kind === 'workspace-baseline').length, 22)
   assert.equal(actual.policy.cases.length, 10)
   const markdown = renderContracts(actual)

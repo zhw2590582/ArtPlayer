@@ -318,3 +318,5 @@
 - PUB-artplayer-plugin-vast-1.0.0: artplayer-plugin-vast@1.0.0 (published-baseline)；[来源](../refactor/baselines/vast-release.json) JSON pointer `/release`。
 - PUB-artplayer-plugin-ambilight-1.1.0: artplayer-plugin-ambilight@1.1.0 (published-baseline)；[来源](../refactor/baselines/ambilight-release.json) JSON pointer `/release`。
 - PUB-artplayer-plugin-ambilight-1.0.0: artplayer-plugin-ambilight@1.0.0 (published-baseline)；[来源](../refactor/baselines/ambilight-release.json) JSON pointer `/previous/0`。
+- PUB-artplayer-proxy-canvas-1.1.0: artplayer-proxy-canvas@1.1.0 (published-baseline)；[来源](../refactor/baselines/canvas-release.json) JSON pointer `/release`。
+- PUB-artplayer-proxy-canvas-1.0.0: artplayer-proxy-canvas@1.0.0 (published-baseline)；[来源](../refactor/baselines/canvas-release.json) JSON pointer `/previous/0`。

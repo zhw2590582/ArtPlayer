@@ -451,7 +451,9 @@
         "API-12": "PKG-CANVAS-02"
       },
       "versionIds": [
-        "WS-artplayer-proxy-canvas"
+        "WS-artplayer-proxy-canvas",
+        "PUB-artplayer-proxy-canvas-1.1.0",
+        "PUB-artplayer-proxy-canvas-1.0.0"
       ],
       "supportWindow": "not-inferred-from-baseline",
       "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
@@ -802,6 +804,24 @@
       "file": "refactor/baselines/ambilight-release.json",
       "pointer": "/previous/0",
       "archiveSha256": "a95aa8c232ab48493e6b4d46b36edc8091230cbde5d18d7ec41912a4fa2b8956"
+    },
+    {
+      "id": "PUB-artplayer-proxy-canvas-1.1.0",
+      "package": "artplayer-proxy-canvas",
+      "kind": "published-baseline",
+      "version": "1.1.0",
+      "file": "refactor/baselines/canvas-release.json",
+      "pointer": "/release",
+      "archiveSha256": "348c1d6671f79d0e0dbf2bb15875a1e6d60d00b73cde833c018bec7e4be96c8e"
+    },
+    {
+      "id": "PUB-artplayer-proxy-canvas-1.0.0",
+      "package": "artplayer-proxy-canvas",
+      "kind": "published-baseline",
+      "version": "1.0.0",
+      "file": "refactor/baselines/canvas-release.json",
+      "pointer": "/previous/0",
+      "archiveSha256": "728ba39534b3b8139bdc404ef15fe1ac5f76a95562a14e78c6973db2dcfa6f4f"
     }
   ],
   "cases": [
