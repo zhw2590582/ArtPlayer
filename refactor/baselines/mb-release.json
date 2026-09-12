@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-MB-01",
+  "capturedAt": "2026-09-12T08:48:19.282Z",
+  "registry": {
+    "url": "https://registry.npmjs.org/artplayer-proxy-mediabunny",
+    "versions": [
+      "1.0.0",
+      "1.2.0"
+    ],
+    "distTags": {
+      "latest": "1.2.0"
+    }
+  },
+  "release": {
+    "name": "artplayer-proxy-mediabunny",
+    "version": "1.2.0",
+    "tarball": "https://registry.npmjs.org/artplayer-proxy-mediabunny/-/artplayer-proxy-mediabunny-1.2.0.tgz",
+    "integrity": "sha512-uSKkJFvd5Y2XxPPhwtPM5k9qq3xScbWnO/9fOfC8S+Liz8f8nT/iyA2eynU3maVcHZbJgA3PHZm0r6RRmSkefg==",
+    "sha256": "acb016166059183917a6de2e03a65ad77b09997fc9fb62513d751a24467ca76c",
+    "manifest": {
+      "name": "artplayer-proxy-mediabunny",
+      "version": "1.2.0",
+      "description": "mediabunny proxy for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-proxy-mediabunny.d.ts",
+          "import": "./dist/artplayer-proxy-mediabunny.mjs",
+          "require": "./dist/artplayer-proxy-mediabunny.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-proxy-mediabunny.d.ts",
+          "import": "./dist/artplayer-proxy-mediabunny.legacy.js",
+          "require": "./dist/artplayer-proxy-mediabunny.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-proxy-mediabunny.js",
+      "module": "./dist/artplayer-proxy-mediabunny.mjs",
+      "types": "./types/artplayer-proxy-mediabunny.d.ts",
+      "legacy": "./dist/artplayer-proxy-mediabunny.legacy.js",
+      "browserslist": "last 1 Chrome version",
+      "dependencies": {
+        "mediabunny": "^1.43.1"
+      }
+    },
+    "files": {
+      "package/README.md": "32377da36a37d7ddc2b85031645b3b2ee49fea7185c3cef1d0b674b52367d58f",
+      "package/dist/artplayer-proxy-mediabunny.js": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+      "package/dist/artplayer-proxy-mediabunny.legacy.js": "327da5f1be221af6887efb4175c1b92e4e0c28838cae8107acca652a76bddccb",
+      "package/dist/artplayer-proxy-mediabunny.mjs": "42f85d84456d1710a8b71640b1cb4f51203052692b84da9f401077f331dc057b",
+      "package/package.json": "96b09ce19ea7914485aa9780329a0cfc43b18e38232ea1dd92d2e6dc27310055",
+      "package/types/artplayer-proxy-mediabunny.d.ts": "af2083224d0760752d83eb2ac86b1dea5586455b81d47e4ba70f9f6a874a75d8"
+    },
+    "gitHead": "fc90d4a0df8fe4efaf2172ca7b04dd059eed8144",
+    "publishedAt": "2026-05-04T05:27:32.743Z",
+    "historicalCore": {
+      "commit": "fc90d4a0df8fe4efaf2172ca7b04dd059eed8144",
+      "file": "packages/artplayer/package.json",
+      "version": "5.4.1",
+      "sha256LF": "06cbc0de3f944dfc215ea1c4e7c3376e6352ee5d6f1f459828f45025c62f57f0",
+      "scope": "Git association only, not a published core support range or proof of proxy capability"
+    },
+    "bundledDependencyVersion": null,
+    "bundledDependencyVersionEvidence": "Published tarball does not provide dependency build provenance; Git tree contains no lockfile. The manifest range does not identify the embedded SDK version."
+  },
+  "previous": [
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "version": "1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-proxy-mediabunny/-/artplayer-proxy-mediabunny-1.0.0.tgz",
+      "integrity": "sha512-i9ot2ZbGqviO+BdcJJS0BqgfBmXBOCt2EuRJJBrp0QArCbXkjzOxRutSn4kIUfTWnLcazgego4on1HPkt5ZE9w==",
+      "sha256": "d62f3ad75d07abbc8ca597846e213f34abd15b3742f7e87f294800fdef2e8962",
+      "manifest": {
+        "name": "artplayer-proxy-mediabunny",
+        "version": "1.0.0",
+        "description": "mediabunny proxy for ArtPlayer",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-proxy-mediabunny.d.ts",
+            "import": "./dist/artplayer-proxy-mediabunny.mjs",
+            "require": "./dist/artplayer-proxy-mediabunny.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-proxy-mediabunny.d.ts",
+            "import": "./dist/artplayer-proxy-mediabunny.legacy.js",
+            "require": "./dist/artplayer-proxy-mediabunny.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-proxy-mediabunny.js",
+        "module": "./dist/artplayer-proxy-mediabunny.mjs",
+        "types": "./types/artplayer-proxy-mediabunny.d.ts",
+        "legacy": "./dist/artplayer-proxy-mediabunny.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "mediabunny": "^1.27.3"
+        }
+      },
+      "files": {
+        "package/README.md": "5cab1501e0a724fa43bd54ce4aa61eb6c43b01411484c370a6a2054accdd5145",
+        "package/dist/artplayer-proxy-mediabunny.js": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "package/dist/artplayer-proxy-mediabunny.legacy.js": "370b3340c2bc14912ea1f64de9e9d34aa917e6620f027733dd23e7dc0b6d4d05",
+        "package/dist/artplayer-proxy-mediabunny.mjs": "548adec34185ec1619bbc602c06cc8a8e0ed3c4752494f1f623aa0ec1cf2c2d7",
+        "package/package.json": "7a05c5110ee7468406ca2bdcff676f8c8c9837629310e008a746ab29523745b3",
+        "package/types/artplayer-proxy-mediabunny.d.ts": "d88bb80cd47603e35ca12bbf3311a7cd678b906d9cd977b73e89d7cb5a7d3075"
+      },
+      "gitHead": "4a0fbda3c4cd2a1b223f3172697ac98a14ddb7b6",
+      "publishedAt": "2026-01-01T11:49:03.448Z",
+      "historicalCore": {
+        "commit": "4a0fbda3c4cd2a1b223f3172697ac98a14ddb7b6",
+        "file": "packages/artplayer/package.json",
+        "version": "5.3.1-beta.1",
+        "sha256LF": "e1a0a390ec10cd8c1c12006ac6515414ae98a964300dd3e9c288377def948497",
+        "scope": "Git association only, not a published core support range or proof of proxy capability"
+      },
+      "bundledDependencyVersion": null,
+      "bundledDependencyVersionEvidence": "Published tarball does not provide dependency build provenance; Git tree contains no lockfile. The manifest range does not identify the embedded SDK version."
+    }
+  ],
+  "sourceCommit": "1f93bb9ba1f7329a348c1b0538473615e5278d7c",
+  "source": {
+    "packages/artplayer-proxy-mediabunny/src/AudioEngine.js": "910d6831372e4895d55dec78010f281a199bc88f99735630a5a3b621f192ac35",
+    "packages/artplayer-proxy-mediabunny/src/EventTarget.js": "c1854510af5a37301b4bd3b1fbcc28f7e0f105f50cb67324c5c05a76f2d054fb",
+    "packages/artplayer-proxy-mediabunny/src/index.js": "4e1be8937908ff6e6ef8a4e863e22b4468312cf31d66ac299322e475757773bb",
+    "packages/artplayer-proxy-mediabunny/src/input.js": "4341c27a8d8ebc77334ac96fc8cec11fc28e369e115eb690c6aeb0a352863d81",
+    "packages/artplayer-proxy-mediabunny/src/m3u8.js": "4639f09e0c743dc2b24078f48ca1e58eaaedaa3f5e6b863583cbd4bc4a7d3142",
+    "packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.js": "3f847bd1e8dfe5334e55def87862af7412af0204691c275293758cff95950189",
+    "packages/artplayer-proxy-mediabunny/src/VideoEngine.js": "6b73dd5867a5640b68f801b397ace36bb6289e50cca176bfc9288d71f67e6e0b",
+    "packages/artplayer-proxy-mediabunny/src/VideoShim.js": "f01c954e8a98fb70138dded78b99eb2765f5cd1e8a98dafbb35ffbf8f7741dbb",
+    "packages/artplayer-proxy-mediabunny/types/artplayer-proxy-mediabunny.d.ts": "af2083224d0760752d83eb2ac86b1dea5586455b81d47e4ba70f9f6a874a75d8",
+    "packages/artplayer-proxy-mediabunny/package.json": "96b09ce19ea7914485aa9780329a0cfc43b18e38232ea1dd92d2e6dc27310055",
+    "packages/artplayer-proxy-mediabunny/README.md": "32377da36a37d7ddc2b85031645b3b2ee49fea7185c3cef1d0b674b52367d58f",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.legacy.js": "327da5f1be221af6887efb4175c1b92e4e0c28838cae8107acca652a76bddccb",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.mjs": "42f85d84456d1710a8b71640b1cb4f51203052692b84da9f401077f331dc057b",
+    "docs/assets/example/mediabunny.js": "dad4cecb76b2e5ce9164a4da715793911123e8fd2bc4b93f4bcc86a7053bad7d",
+    "packages/artplayer-plugin-hls-control/src/audio.svg": "dbee5ce7487c9f8ec927e5286188cf9439345bbe947b6c06c32c07193e01e0be",
+    "packages/artplayer-plugin-hls-control/src/quality.svg": "4666a4c01764422f9008e442f5a889ff9691bb0386083d673943a0718f4d680c"
+  },
+  "dependency": {
+    "name": "mediabunny",
+    "version": "1.56.1",
+    "declaredRange": "^1.43.1",
+    "manifestLicense": "MPL-2.0",
+    "dependencies": {
+      "@types/dom-mediacapture-transform": "^0.1.11",
+      "@types/dom-webcodecs": "0.1.13"
+    },
+    "files": {
+      "package.json": "809d14362055f6db3c17dd6dd43d7b913fc4daf4ac4f4179f29128eec866d868",
+      "LICENSE": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04",
+      "src/index.ts": "ba7672de9670183cd7c9965b844cbc4e134b9daa7aded6e0cf1efa0a5d736d78",
+      "dist/modules/src/index.js": "9236aa229772332a4f5ed04e453d8794a84311468012a9dd0de78e35301d39c0"
+    },
+    "scope": "Installed and Yarn-locked dependency provenance for the upcoming candidate build only, never claimed as the SDK version embedded in historical bundles"
+  }
+}

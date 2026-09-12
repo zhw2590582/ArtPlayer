@@ -324,3 +324,5 @@
 - PUB-artplayer-plugin-document-pip-1.0.2: artplayer-plugin-document-pip@1.0.2 (published-baseline)；[来源](../refactor/baselines/dpip-release.json) JSON pointer `/previous/0`。
 - PUB-artplayer-plugin-document-pip-1.0.1: artplayer-plugin-document-pip@1.0.1 (published-baseline)；[来源](../refactor/baselines/dpip-release.json) JSON pointer `/previous/1`。
 - PUB-artplayer-plugin-document-pip-1.0.0: artplayer-plugin-document-pip@1.0.0 (published-baseline)；[来源](../refactor/baselines/dpip-release.json) JSON pointer `/previous/2`。
+- PUB-artplayer-proxy-mediabunny-1.2.0: artplayer-proxy-mediabunny@1.2.0 (published-baseline)；[来源](../refactor/baselines/mb-release.json) JSON pointer `/release`。
+- PUB-artplayer-proxy-mediabunny-1.0.0: artplayer-proxy-mediabunny@1.0.0 (published-baseline)；[来源](../refactor/baselines/mb-release.json) JSON pointer `/previous/0`。

@@ -479,7 +479,9 @@
         "API-12": "PKG-MB-02"
       },
       "versionIds": [
-        "WS-artplayer-proxy-mediabunny"
+        "WS-artplayer-proxy-mediabunny",
+        "PUB-artplayer-proxy-mediabunny-1.2.0",
+        "PUB-artplayer-proxy-mediabunny-1.0.0"
       ],
       "supportWindow": "not-inferred-from-baseline",
       "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
@@ -862,6 +864,24 @@
       "file": "refactor/baselines/dpip-release.json",
       "pointer": "/previous/2",
       "archiveSha256": "3b0164391171c817ab511f740205732e65db0e8f1d65d63f0d24d8eef4251573"
+    },
+    {
+      "id": "PUB-artplayer-proxy-mediabunny-1.2.0",
+      "package": "artplayer-proxy-mediabunny",
+      "kind": "published-baseline",
+      "version": "1.2.0",
+      "file": "refactor/baselines/mb-release.json",
+      "pointer": "/release",
+      "archiveSha256": "acb016166059183917a6de2e03a65ad77b09997fc9fb62513d751a24467ca76c"
+    },
+    {
+      "id": "PUB-artplayer-proxy-mediabunny-1.0.0",
+      "package": "artplayer-proxy-mediabunny",
+      "kind": "published-baseline",
+      "version": "1.0.0",
+      "file": "refactor/baselines/mb-release.json",
+      "pointer": "/previous/0",
+      "archiveSha256": "d62f3ad75d07abbc8ca597846e213f34abd15b3742f7e87f294800fdef2e8962"
     }
   ],
   "cases": [

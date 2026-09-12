@@ -1,0 +1,65 @@
+{
+  "task": "PKG-MB-01",
+  "status": "done",
+  "scope": "Historical source/package/interface and dependency provenance, not real media or release acceptance",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/mb-contract.test.mjs",
+      "result": "pass",
+      "tests": 19,
+      "historicalArchiveMembers": 12,
+      "frozenGitInputs": 17,
+      "declaredOptionPaths": 25,
+      "scope": "Historical package/interface, actual exports, type consumers and controlled media-method forwarding; not native media playback"
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass",
+      "files": [
+        "refactor/scripts/mb-contract.mjs",
+        "refactor/scripts/mb-contract.test.mjs",
+        "refactor/scripts/contracts.test.mjs",
+        "test/helpers/mediabunny.js"
+      ]
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1006,
+        "engineering": 14,
+        "baseline": 141,
+        "mainTotal": 1161,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 290,
+      "log": "refactor/.cache/mb01-ci-verified.log"
+    },
+    {
+      "command": "production/demo/artifact hashes compared with frozen source",
+      "result": "unchanged",
+      "files": 17
+    }
+  ],
+  "limitations": [
+    "Native MP4/WebM/HLS/Blob/Stream and AV synchronization remain MB-02/09.",
+    "Historical bundled SDK exact version unknown; current installed SDK is recorded separately.",
+    "License/source-notice packaging remains MB-10; no legal compliance claim.",
+    "Canvas/Ambilight factory decision remains pending and is not decided by this task."
+  ],
+  "parentCommit": "1f93bb9ba1f7329a348c1b0538473615e5278d7c",
+  "failedAttempts": [
+    {
+      "log": "refactor/.cache/mb01-tests-first.log",
+      "resolution": "Exact historical readonly-write behavior and TypeScript-version diagnostic codes retained; VM exception checked by name."
+    },
+    {
+      "log": "refactor/.cache/mb01-ci.log",
+      "resolution": "Generated contract-index.md was stale after adding two published versions; regenerated using contracts.mjs --write before the passing full CI."
+    },
+    {
+      "log": "refactor/.cache/mb01-ci-final.log",
+      "resolution": "Contract model assertion still expected fifteen published versions; updated to seventeen and explicitly asserted the two MediaBunny release identities before the final passing CI."
+    }
+  ]
+}

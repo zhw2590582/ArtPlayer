@@ -1,0 +1,35 @@
+# MediaBunny proxy 验证入口
+
+开始改动前读取[冻结契约](baselines/mb-contract.md)、[接口快照](baselines/mb-surface.json)、
+[归档/源码哈希](baselines/mb-release.json)。当前阶段为PKG-MB-01；不得把接口基线称为真实媒体验收。
+
+## 可重复命令
+
+使用仓库固定Node 24.21.0、Yarn 1.22.22：
+
+```sh
+node refactor/scripts/mb-contract.mjs
+node --test refactor/scripts/mb-contract.test.mjs
+yarn ci:check
+```
+
+归档缺失时仅从固定npm URL下载，并验证SHA-512/SHA-256及逐文件哈希。冻结工作区从明确Git
+提交读取，后续迁移不能修改冻结来源。已安装SDK校验来自Yarn锁及原始文件，仅描述候选工具链。
+
+历史测试使用实际main/legacy/ESM；受控Canvas与ArtPlayer事件宿主只测公开接口、方法绑定、
+属性写入、默认值和事件桥。空媒体源不会构造真实AudioContext或解码，SDK存在不等于SDK播放已验收。
+play/load/seek转发测试刻意截获engine方法；不得宣传为真实播放测试。
+
+## 后续顺序
+
+1. MB-02建立真实MP4/WebM/HLS/Blob/Stream和失败样本；三浏览器能力分别记录。
+   复现pending load/destroy、超时后释放、无轨道、并发seek/选轨、metadata重复与晚帧/音频回调。
+2. MB-03输入/取消，MB-04事件/状态协调，MB-05帧调度，MB-06音频时钟，MB-07配对轨道/控件。
+   按已批准计划分步迁移，不等到MB-08才一次性堆积全部源码修改。
+3. MB-08完成严格TS和公开声明兼容矩阵；保留HTMLCanvasElement精确Result、可选工厂和全工厂
+   替换用例，避免重演FACTORY-TYPE-01。1.0.0 namespace.default与1.2.0直接导出分别验证。
+4. MB-09新旧核心、AV sync、长播放、原生DPiP和浏览器组合；MB-10实际打包安装、许可来源/通知和8082示例。
+
+Chrome连接不可用时可使用内置浏览器；CLI自动化也按现有Playwright三引擎流程执行。
+保留report.json及整个results目录。受控输入不能替代真实解码，iframe不能替代原生Document PiP。
+VAST脚本VPN豁免不适用于本包。

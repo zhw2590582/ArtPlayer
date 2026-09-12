@@ -1,5 +1,15 @@
 # 进度与证据
 
+## 最新完成：PKG-MB-01 MediaBunny proxy 契约基线
+
+冻结实际npm1.0.0/1.2.0共12成员、17个Git输入、3份产物接口表面与25条配置路径；
+19项专项通过。完整CI1161项（1006单元+14工程+141基线）通过，另44重复契约，
+290生产TS文件保持严格检查；生产/demo/产物哈希均未改变。
+见[步骤记录](changes/2026-09-12-PKG-MB-01-contract.md)、[完整契约](baselines/mb-contract.md)
+和[验证证据](baselines/mb-contract-validation.json)。历史内嵌SDK版本未知，与当前锁定1.56.1
+分开记录；MPL通知/来源缺口由MB-LICENSE-01跟进。真实媒体、取消、音画同步等仍待02以后。
+当前222项：98 done、7 doing、117 todo；Canvas/Ambilight类型取舍仍待确认。
+
 ## 当前检查点：PKG-FACTORY-01 类型兼容决策
 
 Canvas/Ambilight 的工厂替换问题已增加72场景编译对照，以及可选重载的独立反例。

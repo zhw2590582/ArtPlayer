@@ -3618,6 +3618,61 @@
         "refactor/baselines/factory-compatibility-proposals.json",
         "refactor/factory-compatibility-decision.md"
       ]
+    },
+    {
+      "id": "MB-LICENSE-01",
+      "title": "Historical MediaBunny proxy bundles embed SDK code without MPL notice markers or separate license/source provenance",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-MB-10"
+      ],
+      "compatibleResolution": "Inventory the actual candidate bundle modules, preserve relevant license/notice text and corresponding source availability; never infer embedded historical SDK version from the current lock.",
+      "closureCriteria": "Final candidate archive includes verified dependency license/notice and source provenance, with historical unknowns documented; no root-MIT substitution.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/mb-release.json",
+        "refactor/baselines/mb-contract.md",
+        "refactor/changes/2026-09-12-PKG-MB-01-contract.md"
+      ]
+    },
+    {
+      "id": "MB-LIFE-01",
+      "title": "MediaBunny load, track replacement, timeout, RAF and audio callbacks lack one shared terminal owner",
+      "confirmation": "source-observed",
+      "owners": [
+        "PKG-MB-02",
+        "PKG-MB-03",
+        "PKG-MB-04",
+        "PKG-MB-05",
+        "PKG-MB-06",
+        "PKG-MB-07",
+        "PKG-MB-09"
+      ],
+      "compatibleResolution": "Reproduce pending operations and destroy/source-switch races before migrating each owner; preserve public event and promise behavior while preventing stale resource use.",
+      "closureCriteria": "Historical failing interleavings and candidate cancellation/cleanup pass with real media and event evidence, including long playback and track topology.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/mb-release.json",
+        "refactor/baselines/mb-contract.md",
+        "refactor/changes/2026-09-12-PKG-MB-01-contract.md"
+      ]
+    },
+    {
+      "id": "MB-TYPE-01",
+      "title": "MediaBunny proxy declares only Canvas while exposing a shim and changes CommonJS export generation between releases",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-MB-08",
+        "PKG-MB-10"
+      ],
+      "compatibleResolution": "Preserve optional whole-factory and exact Canvas assignment, model explicit shim capabilities separately and verify historical default namespace and callable consumers.",
+      "closureCriteria": "Actual installed old/candidate compiler and runtime export matrices pass with negative controls; any incompatible declaration generation requires an explicit decision.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/mb-release.json",
+        "refactor/baselines/mb-contract.md",
+        "refactor/changes/2026-09-12-PKG-MB-01-contract.md"
+      ]
     }
   ]
 }

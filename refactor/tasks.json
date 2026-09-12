@@ -3391,11 +3391,18 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "全部 option、art.mediabunny、canvas/shim 属性及事件表",
       "acceptance": "公开暴露成员和实际发布依赖/资源范围明确；核实 third-party.json 所记录依赖 MPL-2.0 元数据与实际 bundle 的许可/通知范围，不从根 MIT 推断",
-      "evidence": []
+      "evidence": [
+        "baselines/mb-release.json",
+        "baselines/mb-surface.json",
+        "baselines/mb-contract.md",
+        "baselines/mb-contract-validation.json",
+        "mb-validation.md",
+        "changes/2026-09-12-PKG-MB-01-contract.md"
+      ]
     },
     {
       "id": "PKG-MB-02",

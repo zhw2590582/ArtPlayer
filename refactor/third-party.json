@@ -1176,7 +1176,7 @@
         "packages/artplayer-proxy-mediabunny/package.json"
       ],
       "contract": "Preserve native-video-like events, HLS input and topology, codec capability failures and AV sync; actual library/codec environment still requires verification.",
-      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "validationStatus": "PKG-MB-01 verifies actual 1.0.0/1.2.0 archives and installed 1.56.1 MPL-2.0 provenance, recorded in mb-release.json and mb-contract.md. Historical embedded SDK version is unknown; notices are MB-LICENSE-01/MB-10. Native codec, SDK media and AV sync remain MB-02/09.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

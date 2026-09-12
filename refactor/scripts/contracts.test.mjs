@@ -44,7 +44,8 @@ function fixture(t) {
 test('Actual contract model assigns all 264 family rows and separates exact published versions from workspace snapshots', () => {
   assert.equal(actual.policy.packages.length, 22)
   assert.equal(actual.families.length, 12)
-  assert.equal(actual.policy.versions.filter(version => version.kind === 'published-baseline').length, 15)
+  assert.equal(actual.policy.versions.filter(version => version.kind === 'published-baseline').length, 17)
+  assert.deepEqual(actual.policy.versions.filter(version => version.kind === 'published-baseline' && version.package === 'artplayer-proxy-mediabunny').map(version => version.version).sort(), ['1.0.0', '1.2.0'])
   assert.equal(actual.policy.versions.filter(version => version.kind === 'workspace-baseline').length, 22)
   assert.equal(actual.policy.cases.length, 10)
   const markdown = renderContracts(actual)
