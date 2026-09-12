@@ -3486,7 +3486,7 @@
     {
       "id": "DPIP-LIFE-01",
       "title": "Document PiP has no separate ownership for pending window requests and delayed post-transition callbacks",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "owners": [
         "PKG-DPIP-02",
         "PKG-DPIP-03",
@@ -3498,13 +3498,15 @@
       "evidence": [
         "refactor/baselines/dpip-release.json",
         "refactor/baselines/dpip-contract.md",
-        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md"
+        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md",
+        "refactor/changes/2026-09-12-PKG-DPIP-02-tests.md",
+        "refactor/baselines/dpip-behavior-validation.json"
       ]
     },
     {
       "id": "DPIP-DOM-01",
       "title": "Document PiP copies global-document styles and retains original parent without transactional rollback",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "owners": [
         "PKG-DPIP-02",
         "PKG-DPIP-03",
@@ -3516,7 +3518,39 @@
       "evidence": [
         "refactor/baselines/dpip-release.json",
         "refactor/baselines/dpip-contract.md",
-        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md"
+        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md",
+        "refactor/changes/2026-09-12-PKG-DPIP-02-tests.md",
+        "refactor/baselines/dpip-behavior-validation.json"
+      ]
+    },
+    {
+      "id": "DPIP-STYLE-01",
+      "title": "Document PiP 1.1.0 and frozen source duplicate style IDs when evaluated before DOMContentLoaded",
+      "owners": [
+        "PKG-DPIP-03"
+      ],
+      "compatibleResolution": "Preserve the style id and injection timing while deduplicating at insertion and releasing loading listeners.",
+      "closureCriteria": "Historical two-node versus Parcel cached one-node difference stays explicit; candidate has one final style node under duplicate evaluation.",
+      "confirmation": "reproduced",
+      "status": "open",
+      "evidence": [
+        "refactor/changes/2026-09-12-PKG-DPIP-02-tests.md",
+        "refactor/baselines/dpip-behavior-validation.json"
+      ]
+    },
+    {
+      "id": "DPIP-MEDIA-01",
+      "title": "WebKit reports styled width640 for width320 media in the controlled Document PiP iframe matrix",
+      "owners": [
+        "PKG-DPIP-05"
+      ],
+      "compatibleResolution": "Use independent native media controls to determine the dimension behavior and verify real Document PiP playback and proxy dimensions.",
+      "closureCriteria": "Exact browser/version evidence distinguishes layout-driven reports from intrinsic pixels and validates native media continuity; do not treat controlled iframe success as native PiP acceptance.",
+      "confirmation": "reproduced",
+      "status": "open",
+      "evidence": [
+        "refactor/changes/2026-09-12-PKG-DPIP-02-tests.md",
+        "refactor/baselines/dpip-behavior-validation.json"
       ]
     }
   ]

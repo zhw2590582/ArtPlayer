@@ -188,7 +188,7 @@ export function dpipEnvironment(implementation, settings = {}) {
   }
   const context = vm.createContext({ window, document, console: { warn: (...args) => warnings.push(args) }, module: { exports: {} } })
   context.exports = context.module.exports
-  const evaluate = () => vm.runInContext(implementation.code, context, { timeout: 5000 })
+  const evaluate = () => vm.runInContext(`(() => { ${implementation.code}\n })()`, context, { timeout: 5000 })
   evaluate()
   return {
     factory: context.module.exports.default || context.module.exports,

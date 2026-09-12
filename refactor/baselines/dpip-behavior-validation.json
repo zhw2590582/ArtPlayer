@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DPIP-02",
+  "status": "done",
+  "checks": [
+    {
+      "command": "node --test test/dpip.test.js refactor/scripts/dpip-contract.test.mjs",
+      "result": "pass",
+      "tests": 64,
+      "historicalLifecycle": 48,
+      "contract": 16
+    },
+    {
+      "command": "playwright test test/browser/dpip.spec.js",
+      "result": "pass",
+      "tests": 48,
+      "skipped": 0,
+      "browsers": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32"
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32"
+        }
+      ],
+      "scope": "four frozen implementations x two actual cores x three engines x two real DOM iframe scenarios; explicit historical failures, not fixes or native Document PiP"
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 986,
+        "engineering": 14,
+        "baseline": 116,
+        "mainTotal": 1116,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 284
+    }
+  ],
+  "limitations": [
+    "Historical failure assertions are reproductions, not candidate fixes.",
+    "Controlled Node host destroy does not model all core cleanup.",
+    "Real browser iframe DOM and events are used; requestWindow and close are controlled, not native Document PiP.",
+    "WebKit reports width640 for the 320-wide fixture in the styled player; preserved as a historical observation, not intrinsic-size acceptance.",
+    "Native window/user activation, media continuity, focus, proxies and devices remain task05."
+  ],
+  "parentCommit": "efbbdb4782be75d80c2f51e62e0eb8c5e98b83eb",
+  "inputs": [
+    {
+      "file": "test/dpip.test.js",
+      "sha256LF": "0f73444b07821642b6291bd24c10087708867b1fcac5e23b9c4a1d901904163c"
+    },
+    {
+      "file": "test/helpers/dpip.js",
+      "sha256LF": "93941787e7fd34a332eb46f47becb8a306f25871a511d9c83b792c04f8035131"
+    },
+    {
+      "file": "test/browser/dpip.spec.js",
+      "sha256LF": "0626ddd9ef96aab5d68f47496266708c5f4be8cd9c9f3984db371b1612b6921e"
+    },
+    {
+      "file": "refactor/baselines/dpip-release.json",
+      "sha256LF": "afcf54f22fb3f57186e19bdf384a130c6388e972164774ee56eeca23fc814c23"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/src/index.js",
+      "sha256LF": "655818d30d82e43443e9a7ea185f91fc951eb72ad11edaaed0264182e62f32ba"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "d7ee39161397f3e9121975b79592c84c65200ccf043d4449ac5b9a9fbb1a93f0"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/dpip02-node-first.log",
+      "sha256": "866a8985af2db6953dcb35cc8dc0405d99c3944075c264424ccd2703b09194d9"
+    },
+    {
+      "file": "refactor/.cache/dpip02-node-final.log",
+      "sha256": "946cce2d8663e4d06b969d6ba3f5463d074c6cb593d4fca0de1d0eca3402e5a9"
+    },
+    {
+      "file": "refactor/.cache/dpip02-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/dpip02-browser-first.log",
+      "sha256": "dd4af0c08a2a33250f7b712074e3e13ae4775ab613972dc7f35ab35632bde20f"
+    },
+    {
+      "file": "refactor/.cache/dpip02-browser-final.log",
+      "sha256": "10556a704038d1e0052c59769443b14348a9e8d81cd8e72f0009ad807050df9b"
+    },
+    {
+      "file": "refactor/.cache/dpip02-browser-third.log",
+      "sha256": "cb5e301223d6b7ddb2b5dd4222e1e1cd45ee0f8403d66814f174de963a118e9b"
+    },
+    {
+      "file": "refactor/.cache/dpip02-ci.log",
+      "sha256": "0fe1f724a072ed13b802346e213a2ed638330f4a8bd55154d44b82b90008da26"
+    },
+    {
+      "file": "refactor/.cache/dpip02-first-results/report.json",
+      "sha256": "e1dca0e28bbdf0b537e15a71b846da64303d75b14084082f58db971b3c652f2a"
+    },
+    {
+      "file": "refactor/.cache/dpip02-second-results/report.json",
+      "sha256": "029b99b64c0463376c6dfd3a622d92e31c2de6608b3689d9b185864dca6e91ef"
+    },
+    {
+      "file": "refactor/.cache/dpip02-final-results/report.json",
+      "sha256": "7175394fe821285107950c846aad33acf01062d40036708d7d181742cdf20e00"
+    }
+  ],
+  "browserArtifacts": [
+    {
+      "file": "refactor/.cache/dpip02-final-results/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    }
+  ]
+}

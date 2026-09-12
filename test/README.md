@@ -54,3 +54,5 @@ These tests are separate from the fast Node suite and run in the Browser playbac
 formats with a controlled Audio object: timing intent, offsets, source updates, rejection,
 volume/rate, independent instances and cleanup. Published-only tests retain defect evidence.
 See [audio validation](../refactor/audio-validation.md) for actual media tests and limitations.
+
+Document PiP: `yarn test:dpip` runs 48 historical window/DOM/lifecycle cases. Native DOM iframe checks use `yarn test:browser test/browser/dpip.spec.js`; controlled window APIs do not establish native Document PiP support. See [validation notes](../refactor/dpip-validation.md).

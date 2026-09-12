@@ -21,3 +21,13 @@ test/helpers/dpip.js是受控DOM/window边界：验证ownerDocument、节点身�
 
 证据入口：[01记录](changes/2026-09-12-PKG-DPIP-01-contract.md)、
 [01验证](baselines/dpip-contract-validation.json)。正常契约测试通过不关闭源码观察风险。
+
+## 生命周期历史复现（02）
+
+`yarn test:dpip`：48项（四实现×12组），覆盖拒绝/fallback、重复/迟到打开、close/destroy、
+延迟resize、激活重入、adoption失败、占位移动、跨文档样式、source节点身份及重复样式。
+`yarn test:browser test/browser/dpip.spec.js`：48项，四实现×两实际核心×三引擎×两场景。
+真实DOM用于迁移、还原与错误验证；窗口API受控，不能作为原生Document PiP验收。
+当前WebKit的640宽读数与320宽fixture不同，精确保留为历史观察，待05查清尺寸和媒体
+连续性；测试不会宽泛允许任意尺寸。初次错误与修正原因见[02记录](changes/2026-09-12-PKG-DPIP-02-tests.md)，
+验收状态见[02证据](baselines/dpip-behavior-validation.json)。03必须新增候选修复断言。
